@@ -30,6 +30,11 @@ export const copy = {
   layout: {
     backToCommand: 'Volver al Centro de Comando',
   },
+  forms: {
+    needsPatient: 'Selecciona un paciente demo antes de continuar.',
+    saveDraft: 'Guardar borrador',
+    searchPatients: 'Cargar pacientes demo',
+  },
   errors: {
     genericTitle: 'Algo salió mal',
     genericMessage: 'No pudimos completar la acción. Intenta de nuevo.',

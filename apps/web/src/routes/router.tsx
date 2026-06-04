@@ -5,11 +5,11 @@ import {
   redirect,
   Outlet,
 } from '@tanstack/react-router';
-import { EPIS2_COMMAND_DEFINITIONS } from '@epis2/command-registry';
+import { EPIS2_FORM_BLUEPRINTS } from '@epis2/clinical-forms';
 import { loadSessionForRouter } from '../auth/AuthContext.js';
 import { ClinicalShellLayout } from '../layouts/ClinicalShellLayout.js';
 import { CommandCenterPage } from '../pages/CommandCenterPage.js';
-import { ClinicalWorkspacePage } from '../pages/ClinicalWorkspacePage.js';
+import { GeneratedClinicalFormPage } from '../pages/GeneratedClinicalFormPage.js';
 import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
 
@@ -51,13 +51,14 @@ const clinicalLayoutRoute = createRoute({
   component: ClinicalShellLayout,
 });
 
-const clinicalWorkspaceRoutes = EPIS2_COMMAND_DEFINITIONS.map((def) =>
+const clinicalFormRoutes = EPIS2_FORM_BLUEPRINTS.map((blueprint) =>
   createRoute({
     getParentRoute: () => clinicalLayoutRoute,
-    path: def.routePath,
-    component: () => (
-      <ClinicalWorkspacePage title={def.labelEs} intentLabel={def.labelEs} />
-    ),
+    path: blueprint.routePath,
+    validateSearch: (search: Record<string, unknown>) => ({
+      patientId: typeof search.patientId === 'string' ? search.patientId : undefined,
+    }),
+    component: () => <GeneratedClinicalFormPage blueprint={blueprint} />,
   }),
 );
 
@@ -77,7 +78,7 @@ export const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
   commandCenterRoute,
-  clinicalLayoutRoute.addChildren(clinicalWorkspaceRoutes),
+  clinicalLayoutRoute.addChildren(clinicalFormRoutes),
 ]);
 
 export const router = createRouter({

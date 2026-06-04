@@ -58,11 +58,11 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 ---
 
-## EPIS2-06 — Formularios generados
+## EPIS2-06 — Formularios generados ✓
 
 **Entregables:** 6 páginas desde blueprints declarativos; registry unificado.
 
-**Gate:** Sin duplicados; cada formulario funciona sin IA.
+**Gate:** Sin duplicados; cada formulario funciona sin IA. — `reports/epis2-06-generated-forms.md`
 
 ---
 

@@ -29,7 +29,11 @@ describe('Golden Clinical Journey', () => {
     });
 
     it('3. comando evolución → página blueprint', async () => {
-      expect(JOURNEY_STEPS[3]).toBe('comando-evolucion');
+      const { getBlueprintById, assertRegistryInvariants } = await import(
+        '@epis2/clinical-forms'
+      );
+      expect(assertRegistryInvariants()).toEqual([]);
+      expect(getBlueprintById('evolution_note')?.routePath).toBe('/espacio/evolucion');
     });
 
     it('4. guardar borrador sin promover a nota final', async () => {

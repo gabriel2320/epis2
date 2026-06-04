@@ -61,7 +61,7 @@ export async function buildApp(config: AppConfig) {
   app.get('/api/meta', async () => ({
     product: 'EPIS2',
     phase: EPIS2_PHASE,
-    message: 'Command Registry y router — EPIS2-05',
+    message: 'Formularios generados desde blueprints — EPIS2-06',
     database: Boolean(config.DATABASE_URL && db),
   }));
 
