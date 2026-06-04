@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { buildApp } from '../app.js';
-import { clearAuditEvents } from './auditLog.js';
+import { clearMemoryAudit } from '../audit/store.js';
 
 const config = {
   NODE_ENV: 'test' as const,
@@ -12,7 +12,7 @@ const config = {
 };
 
 afterEach(() => {
-  clearAuditEvents();
+  clearMemoryAudit();
 });
 
 describe('auth routes', () => {

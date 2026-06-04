@@ -18,6 +18,7 @@
     "quality:golden-journey": "vitest run tests/golden-clinical-journey.spec.ts",
     "check": "npm run lint && npm run typecheck && npm run architecture:validate",
     "db:validate": "node scripts/db-validate.mjs",
+    "db:migrate": "node scripts/db-migrate.mjs",
     "dev:api": "npm run dev -w @epis2/api",
     "dev:web": "npm run dev -w @epis2/web",
     "dev:ai": "npm run dev -w @epis2/local-ai"
@@ -26,6 +27,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@eslint/js": "^9.28.0",
     "@types/node": "^22.15.21",
+    "postgres": "^3.4.5",
     "eslint": "^9.28.0",
     "globals": "^16.2.0",
     "typescript": "^5.8.3",

@@ -40,11 +40,11 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 ---
 
-## EPIS2-04 — Núcleo PostgreSQL
+## EPIS2-04 — Núcleo PostgreSQL ✓
 
 **Entregables:** pacientes, encuentros, problemas, observaciones, notas, borradores, versiones, aprobaciones, auditoría.
 
-**Gate:** Autor + timestamp en escrituras. Borradores ≠ notas finales.
+**Gate:** Autor + timestamp en escrituras. Borradores ≠ notas finales. — `reports/epis2-04-postgres-core.md`
 
 ---
 
