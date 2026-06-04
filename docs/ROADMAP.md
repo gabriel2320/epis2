@@ -66,11 +66,11 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 ---
 
-## EPIS2-07 — IA local segura
+## EPIS2-07 — IA local segura ✓
 
 **Entregables:** `services/local-ai`, schemas, proxy en API, `ai_runs`.
 
-**Gate:** App funciona sin Ollama; salida siempre validada.
+**Gate:** App funciona sin Ollama; salida siempre validada. — `reports/epis2-07-local-ai.md`
 
 ---
 

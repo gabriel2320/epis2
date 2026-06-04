@@ -1,15 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { buildApp } from '../app.js';
 import { getDatabase } from '../db/client.js';
+import { testApiConfig } from '../testConfig.js';
 import { listApprovedNotes } from './service.js';
 
 const config = {
-  NODE_ENV: 'test' as const,
-  API_HOST: '127.0.0.1',
-  API_PORT: 3001,
-  SESSION_SECRET: 'test-secret-min-16-chars',
-  SESSION_COOKIE_NAME: 'epis2_session',
-  WEB_ORIGIN: 'http://127.0.0.1:5173',
+  ...testApiConfig,
   DATABASE_URL: process.env.DATABASE_URL,
 };
 

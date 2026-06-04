@@ -8,6 +8,8 @@ const envSchema = z.object({
   SESSION_SECRET: z.string().min(16).default('epis2-dev-session-secret-change-me'),
   SESSION_COOKIE_NAME: z.string().default('epis2_session'),
   WEB_ORIGIN: z.string().url().default('http://127.0.0.1:5173'),
+  LOCAL_AI_BASE_URL: z.string().url().default('http://127.0.0.1:3002'),
+  OLLAMA_BASE_URL: z.string().url().default('http://127.0.0.1:11434'),
 });
 
 export type AppConfig = z.infer<typeof envSchema>;

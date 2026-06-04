@@ -138,3 +138,18 @@ export const auditEvents = pgTable('audit_events', {
   message: text('message'),
   payload: jsonb('payload'),
 });
+
+export const aiRuns = pgTable('ai_runs', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  actorId: text('actor_id').references(() => appUsers.id),
+  blueprintId: text('blueprint_id').notNull(),
+  patientId: uuid('patient_id').references(() => patients.id, { onDelete: 'set null' }),
+  promptHash: text('prompt_hash').notNull(),
+  model: text('model').notNull(),
+  latencyMs: integer('latency_ms').notNull(),
+  status: text('status').notNull(),
+  inputPayload: jsonb('input_payload'),
+  outputPayload: jsonb('output_payload'),
+  errorMessage: text('error_message'),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});

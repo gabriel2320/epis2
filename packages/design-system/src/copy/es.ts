@@ -34,6 +34,11 @@ export const copy = {
     needsPatient: 'Selecciona un paciente demo antes de continuar.',
     saveDraft: 'Guardar borrador',
     searchPatients: 'Cargar pacientes demo',
+    suggestAi: 'Sugerir con IA (demo)',
+    suggestingAi: 'Generando sugerencia…',
+    aiUnavailable: 'IA no disponible. Puedes completar el formulario manualmente.',
+    aiRejected: 'La sugerencia IA no fue válida. Revisa y escribe manualmente.',
+    aiApplied: 'Sugerencia aplicada. Debes revisar y aprobar como humano.',
   },
   errors: {
     genericTitle: 'Algo salió mal',

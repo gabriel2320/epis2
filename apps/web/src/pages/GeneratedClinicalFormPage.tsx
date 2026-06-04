@@ -5,10 +5,10 @@ import {
   validateFormValues,
   type ClinicalFormBlueprint,
 } from '@epis2/clinical-forms';
+import { requestDraftAssist } from '../api/aiApi.js';
 import { roleHasPermission, type ClinicalRole } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
 import Alert from '@mui/material/Alert';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
@@ -49,6 +49,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [patients, setPatients] = useState<PatientRow[]>([]);
   const [loadError, setLoadError] = useState<string | undefined>();
+  const [isSuggesting, setIsSuggesting] = useState(false);
+  const canUseAiAssist = blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES;
 
   const role = session?.user.role as ClinicalRole | undefined;
   const needsDraftWrite =
@@ -83,6 +85,46 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       to: blueprint.routePath,
       search: { patientId: id },
     });
+  };
+
+  const suggestWithAi = async () => {
+    setIsSuggesting(true);
+    setStatusMessage(undefined);
+    try {
+      const assistBody: Parameters<typeof requestDraftAssist>[0] = {
+        blueprintId: blueprint.blueprintId,
+        currentFields: values,
+        context: { demo: copy.demoBadge },
+      };
+      if (patientId !== undefined) assistBody.patientId = patientId;
+      const result = await requestDraftAssist(assistBody);
+      if (result.status === 'success') {
+        setValues((prev) => {
+          const next = { ...prev };
+          for (const [key, value] of Object.entries(result.suggestedFields)) {
+            if (!next[key]?.trim()) {
+              next[key] = value;
+            }
+          }
+          return next;
+        });
+        setStatusMessage(copy.forms.aiApplied);
+        return;
+      }
+      if (result.status === 'rejected') {
+        setStatusMessage(result.message || copy.forms.aiRejected);
+        return;
+      }
+      setStatusMessage(result.message || copy.forms.aiUnavailable);
+    } catch (e) {
+      if (e instanceof ApiError && (e.status === 503 || e.status === 422)) {
+        setStatusMessage(e.message || copy.forms.aiUnavailable);
+      } else {
+        setStatusMessage(copy.forms.aiUnavailable);
+      }
+    } finally {
+      setIsSuggesting(false);
+    }
   };
 
   const saveDraft = async () => {
@@ -192,11 +234,21 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
             />
             {blueprint.outputKind !== 'READ_ONLY_SUMMARY' &&
             blueprint.outputKind !== 'SEARCH' ? (
-              <Box>
+              <Stack direction="row" spacing={1} flexWrap="wrap">
+                {canUseAiAssist ? (
+                  <Button
+                    variant="outlined"
+                    disabled={isSuggesting}
+                    onClick={() => void suggestWithAi()}
+                    data-testid="epis2-ai-suggest"
+                  >
+                    {isSuggesting ? copy.forms.suggestingAi : copy.forms.suggestAi}
+                  </Button>
+                ) : null}
                 <Button variant="contained" onClick={() => void saveDraft()}>
                   {copy.forms.saveDraft}
                 </Button>
-              </Box>
+              </Stack>
             ) : null}
           </>
         )}

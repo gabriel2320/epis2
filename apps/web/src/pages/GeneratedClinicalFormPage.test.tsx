@@ -54,6 +54,7 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
     );
 
     expect(screen.getByTestId('epis2-form-evolution_note')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-ai-suggest')).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: copy.forms.saveDraft }));
 

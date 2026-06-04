@@ -1,16 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { buildApp } from './app.js';
+import { testApiConfig } from './testConfig.js';
 
 describe('epis2-api health', () => {
   it('GET /health responde ok', async () => {
-    const app = await buildApp({
-      NODE_ENV: 'test',
-      API_HOST: '127.0.0.1',
-      API_PORT: 3001,
-      SESSION_SECRET: 'test-secret-min-16-chars',
-      SESSION_COOKIE_NAME: 'epis2_session',
-      WEB_ORIGIN: 'http://127.0.0.1:5173',
-    });
+    const app = await buildApp(testApiConfig);
     const res = await app.inject({ method: 'GET', url: '/health' });
     expect(res.statusCode).toBe(200);
     const body = res.json() as { status: string; service: string };
@@ -20,14 +14,7 @@ describe('epis2-api health', () => {
   });
 
   it('GET /ready sin DATABASE_URL omite DB', async () => {
-    const app = await buildApp({
-      NODE_ENV: 'test',
-      API_HOST: '127.0.0.1',
-      API_PORT: 3001,
-      SESSION_SECRET: 'test-secret-min-16-chars',
-      SESSION_COOKIE_NAME: 'epis2_session',
-      WEB_ORIGIN: 'http://127.0.0.1:5173',
-    });
+    const app = await buildApp(testApiConfig);
     const res = await app.inject({ method: 'GET', url: '/ready' });
     expect(res.statusCode).toBe(200);
     await app.close();

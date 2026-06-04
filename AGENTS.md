@@ -29,8 +29,8 @@ Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.
 ## Fases
 
 ```text
-EPIS2-00 ✓ … EPIS2-06 ✓
-EPIS2-07     (IA local segura)
+EPIS2-00 ✓ … EPIS2-07 ✓
+EPIS2-08     (borradores y aprobación UI)
 ```
 
 ## Memoria legacy

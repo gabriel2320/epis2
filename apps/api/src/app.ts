@@ -3,6 +3,7 @@ import cors from '@fastify/cors';
 import { EPIS2_PHASE, healthResponseSchema } from '@epis2/contracts';
 import Fastify from 'fastify';
 import { registerAuthRoutes } from './auth/routes.js';
+import { registerAiRoutes } from './ai/routes.js';
 import { registerCommandRoutes } from './commands/routes.js';
 import { registerClinicalRoutes } from './clinical/routes.js';
 import type { AppConfig } from './config.js';
@@ -61,12 +62,13 @@ export async function buildApp(config: AppConfig) {
   app.get('/api/meta', async () => ({
     product: 'EPIS2',
     phase: EPIS2_PHASE,
-    message: 'Formularios generados desde blueprints — EPIS2-06',
+    message: 'IA local segura con proxy y ai_runs — EPIS2-07',
     database: Boolean(config.DATABASE_URL && db),
   }));
 
   await registerAuthRoutes(app, config, db);
   await registerCommandRoutes(app, config);
+  await registerAiRoutes(app, config, db);
   await registerClinicalRoutes(app, config, db);
 
   return app;
