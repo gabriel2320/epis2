@@ -62,6 +62,27 @@ export function ServiceDashboardTab({ data, onOpenPatient, onReload }: ServiceDa
         </List>
       </Paper>
 
+      {data.activeOrders.length > 0 ? (
+        <Paper variant="outlined" sx={{ p: 2 }}>
+          <Typography variant="subtitle2" gutterBottom>
+            {copy.inpatient.activeOrders}
+          </Typography>
+          <List dense disablePadding>
+            {data.activeOrders.map((o) => (
+              <ListItem key={o.id} disablePadding>
+                <ListItemText
+                  primary={`${o.patientDisplayName} — ${o.title}`}
+                  secondary={`${o.orderType} · ${o.priority}`}
+                />
+                <Button size="small" onClick={() => onOpenPatient(o.patientId)}>
+                  {copy.inpatient.openPatient}
+                </Button>
+              </ListItem>
+            ))}
+          </List>
+        </Paper>
+      ) : null}
+
       <Paper variant="outlined" sx={{ p: 2 }}>
         <Typography variant="subtitle2" gutterBottom>
           {copy.inpatient.criticalUnacked}

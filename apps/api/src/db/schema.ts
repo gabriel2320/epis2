@@ -289,6 +289,41 @@ export const clinicalCriticalResults = pgTable('clinical_critical_results', {
     .references(() => appUsers.id),
 });
 
+export const clinicalOrders = pgTable('clinical_orders', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  patientId: uuid('patient_id')
+    .notNull()
+    .references(() => patients.id, { onDelete: 'cascade' }),
+  encounterId: uuid('encounter_id').references(() => encounters.id, { onDelete: 'set null' }),
+  orderType: text('order_type').notNull(),
+  title: text('title').notNull(),
+  detail: text('detail'),
+  status: text('status').notNull().default('active'),
+  priority: text('priority').notNull().default('routine'),
+  orderedAt: timestamp('ordered_at', { withTimezone: true }).notNull().defaultNow(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
+export const marAdministrationRecords = pgTable('mar_administration_records', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  patientId: uuid('patient_id')
+    .notNull()
+    .references(() => patients.id, { onDelete: 'cascade' }),
+  draftId: uuid('draft_id').references(() => clinicalDrafts.id, { onDelete: 'set null' }),
+  medication: text('medication').notNull(),
+  doseText: text('dose_text').notNull(),
+  route: text('route').notNull(),
+  doubleCheck: boolean('double_check').notNull().default(false),
+  administeredAt: timestamp('administered_at', { withTimezone: true }).notNull().defaultNow(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
 export const aiRuns = pgTable('ai_runs', {
   id: uuid('id').primaryKey().defaultRandom(),
   actorId: text('actor_id').references(() => appUsers.id),

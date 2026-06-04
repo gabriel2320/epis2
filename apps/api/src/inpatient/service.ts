@@ -3,6 +3,7 @@ import type { Database } from '../db/client.js';
 import {
   beds,
   clinicalCriticalResults,
+  clinicalOrders,
   clinicalUnits,
   inpatientAdmissions,
   patientIdentifiers,
@@ -30,6 +31,7 @@ export async function getServiceDashboardSummary(
       census: [],
       unacknowledgedCriticals: [],
       probableDischarges: [],
+      activeOrders: [],
       pendingWorkItems: [],
     };
   }
@@ -104,6 +106,33 @@ export async function getServiceDashboardSummary(
       observedAt: c.observedAt.toISOString(),
     }));
 
+  const orderRows =
+    admittedPatientIds.size > 0
+      ? await db
+          .select({
+            id: clinicalOrders.id,
+            patientId: clinicalOrders.patientId,
+            orderType: clinicalOrders.orderType,
+            title: clinicalOrders.title,
+            priority: clinicalOrders.priority,
+            displayName: patients.displayName,
+          })
+          .from(clinicalOrders)
+          .innerJoin(patients, eq(clinicalOrders.patientId, patients.id))
+          .where(eq(clinicalOrders.status, 'active'))
+      : [];
+
+  const activeOrders = orderRows
+    .filter((o) => admittedPatientIds.has(o.patientId))
+    .map((o) => ({
+      id: o.id,
+      patientId: o.patientId,
+      patientDisplayName: o.displayName,
+      orderType: o.orderType,
+      title: o.title,
+      priority: o.priority,
+    }));
+
   const probableDischarges = activeAdmissions
     .filter((a) => a.expectedDischargeAt != null)
     .map((a) => {
@@ -132,6 +161,7 @@ export async function getServiceDashboardSummary(
     unitCode: unit.code,
     unitName: unit.name,
     census,
+    activeOrders,
     unacknowledgedCriticals,
     probableDischarges,
     pendingWorkItems,

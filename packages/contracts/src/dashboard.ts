@@ -52,11 +52,21 @@ export const probableDischargeRowSchema = z.object({
   reason: z.string(),
 });
 
+export const clinicalOrderRowSchema = z.object({
+  id: z.string().uuid(),
+  patientId: z.string().uuid(),
+  patientDisplayName: z.string(),
+  orderType: z.string(),
+  title: z.string(),
+  priority: z.string(),
+});
+
 export const serviceDashboardResponseSchema = z.object({
   readOnly: z.literal(true),
   unitCode: z.string(),
   unitName: z.string(),
   census: z.array(censusBedRowSchema),
+  activeOrders: z.array(clinicalOrderRowSchema),
   unacknowledgedCriticals: z.array(criticalResultRowSchema),
   probableDischarges: z.array(probableDischargeRowSchema),
   pendingWorkItems: z.array(
@@ -69,6 +79,7 @@ export const serviceDashboardResponseSchema = z.object({
   ),
 });
 
+export type ClinicalOrderRow = z.infer<typeof clinicalOrderRowSchema>;
 export type CensusBedRow = z.infer<typeof censusBedRowSchema>;
 export type CriticalResultRow = z.infer<typeof criticalResultRowSchema>;
 export type ProbableDischargeRow = z.infer<typeof probableDischargeRowSchema>;
