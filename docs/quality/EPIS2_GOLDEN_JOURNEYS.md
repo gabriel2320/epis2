@@ -57,17 +57,18 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 ## 3. Journey V1 — Longitudinal (slice demo)
 
 **Nombre:** `golden-v1-longitudinal-review`  
-**Estado:** parcial — sin RAG/OCR/PDF masivo.
+**Estado:** slice cerrado — gate completo pendiente RAG/OCR/PDF.
 
 | # | Paso | Criterio |
 |---|------|----------|
 | 1 | Fijar paciente DEMO | Contexto activo |
-| 2 | Abrir ficha | Panel longitudinal: problemas, alergias, meds, timeline |
-| 3 | DEMO-005 receta Ceftriaxona | Alertas CDR beta-lactámico (journey V0 seguridad) |
-| 4 | Tablero paciente | `/epis2/dashboard?tab=patient&patientId=` |
-| 5 | Export FHIR | Journey API existente |
+| 2 | Abrir ficha | Panel longitudinal: alergias, meds, timeline |
+| 3 | Buscar documentos | `documents/search?q=` devuelve hits |
+| 4 | Interconsulta / imagenología | Comandos → `/espacio/interconsulta`, `/espacio/imagenologia` |
+| 5 | Tablero paciente | `/epis2/dashboard?tab=patient&patientId=` |
+| 6 | DEMO-005 + FHIR | Alergia en bundle (V4) |
 
-**Slice adicional:** blueprints interconsulta/imagenología; búsqueda documentos por título (sin RAG).
+**Tests:** `clinical.integration.test.ts`
 
 **Pendiente gate V1 completo:** RAG pgvector, OCR, impresión PDF.
 
@@ -76,51 +77,44 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 ## 4. Journey V2 — Hospitalización (slice demo)
 
 **Nombre:** `golden-v2-admission-discharge`  
-**Estado:** parcial — censo + críticos con acuse.
+**Estado:** slice cerrado — gate completo pendiente traslados/alta operativa.
 
 | # | Paso | Criterio |
 |---|------|----------|
 | 1 | Comando «ver el servicio» | Tab servicio en Modo tablero |
 | 2 | Censo | Camas 101A/101B ocupadas (DEMO-004, DEMO-005) |
-| 3 | Crítico INR DEMO-005 | Visible sin acuse |
-| 4 | Acusar recibo | POST acknowledge + auditoría |
-| 5 | Alta probable | DEMO-004 en lista |
-
-**Slice adicional:** `clinical_orders` en tablero servicio; alias evolución diaria.
-
-**Pendiente gate V2 completo:** traslados, epicrisis alta end-to-end operativa.
+| 3 | Órdenes activas | Lista en tablero servicio |
+| 4 | Crítico INR DEMO-005 | Visible sin acuse → acuse |
+| 5 | Evolución diaria | Comando alias → evolución |
 
 **Tests:** `inpatient.integration.test.ts`
+
+**Pendiente gate V2 completo:** traslados, epicrisis alta end-to-end operativa.
 
 ---
 
 ## 5. Journey V3 — Enfermería / farmacia (slice demo)
 
-**Nombre:** `golden-v3-mar-nursing`
+**Nombre:** `golden-v3-mar-nursing`  
+**Estado:** slice cerrado — gate completo pendiente tableros rol y conciliación.
 
 | # | Paso | Criterio |
 |---|------|----------|
 | 1 | `nota de enfermeria` | Formulario `/espacio/enfermeria` |
-| 2 | `registrar mar warfarina` | Formulario MAR + alertas alto riesgo |
-| 3 | Aprobar MAR con doble chequeo | Fila en `mar_administration_records` |
+| 2 | `registrar mar` | Formulario MAR + doble chequeo |
+| 3 | Aprobar MAR | Fila en `mar_administration_records` |
 | 4 | `validacion farmaceutica` | `/espacio/farmacia` |
 
----
+**Tests:** `v3-mar.integration.test.ts`
 
-## 5. Journey V3 — Multidisciplinario (plan)
-
-**Nombre:** `golden-v3-mar-nursing`
-
-```text
-Nota enfermería → signos → medicamento alto riesgo
-→ doble chequeo CDR → MAR documentado → borrador → aprobación enfermería/médico según rol
-```
+**Pendiente gate V3 completo:** signos estructurados, balance hídrico, MAR programado.
 
 ---
 
-## 6. Journey V4 — Interop read-only
+## 6. Journey V4 — Interop read-only (slice demo)
 
 **Nombre:** `golden-v4-interop-ops`  
+**Estado:** slice cerrado (`a02689d`)  
 **Rol:** `auditor.demo`
 
 | Paso | Acción | Criterio |

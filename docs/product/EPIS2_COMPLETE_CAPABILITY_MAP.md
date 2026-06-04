@@ -56,7 +56,7 @@ Leyenda de madurez:
 | Resolución intent → ruta | ✓ | ✓ | ✓ API `/api/commands/resolve` |
 | Sinónimos es-CL | ✓ | ✓ | ✓ adaptado EPIS |
 | MAU / ranking NL | ✓ | ✓ | ✓ `rank.ts` concepto EPIONE |
-| Modo tablero opcional | ○ | ✓ | ○ **EPIS2-12 planificado** |
+| Modo tablero opcional | ○ | ✓ | ✓ EPIS2-12 |
 | Power bar / una acción principal | ✓ | ✓ | ✓ |
 
 ### 2.3 Pacientes e identidad clínica
@@ -68,7 +68,7 @@ Leyenda de madurez:
 | RUT sintético / validación Chile | ✓ | ✓ | ✓ | ✓ `clinical-domain/chile` |
 | Contactos y antecedentes | — | ✓ | ✓ | ○ |
 | Encuentros ambulatorios / hospitalarios | — | ✓ | ✓ | ○ |
-| Ficha longitudinal (resumen) | ✓ | ✓ | ✓ | ◐ resumen + contexto demo |
+| Ficha longitudinal (resumen) | ✓ | ✓ | ✓ | ✓ slice demo + timeline |
 
 ### 2.4 Historia clínica longitudinal
 
@@ -94,9 +94,9 @@ Leyenda de madurez:
 | Receta | `prescription` | ✓ | ✓ | ✓ |
 | Solicitud laboratorio | `lab_request` | ✓ | ✓ | ✓ |
 | Ingreso | — | — | ✓ | ○ |
-| Interconsulta | — | — | ✓ | ○ |
-| Indicaciones / órdenes | — | — | ✓ | ○ |
-| Imagenología | — | — | ✓ | ○ |
+| Interconsulta | — | — | ✓ | ✓ blueprint demo |
+| Indicaciones / órdenes | — | — | ✓ | ◐ `clinical_orders` demo |
+| Imagenología | — | — | ✓ | ✓ blueprint demo |
 | Procedimientos | — | — | ✓ | ○ |
 | Traslado / alta | — | — | ✓ | ○ CDR alta parcial |
 
@@ -104,23 +104,23 @@ Leyenda de madurez:
 
 | Capacidad | Versión objetivo | Estado |
 |-----------|------------------|--------|
-| Censo y camas | V2 | ◐ demo CIRUGIA-DEMO |
+| Censo y camas | V2 | ✓ demo CIRUGIA-DEMO |
 | Ingreso hospitalario | V2 | ○ |
-| Evolución diaria | V2 | ○ (reutiliza evolución) |
-| Órdenes activas | V2 | ○ |
-| Resultados y críticos con acuse | V2 | ◐ acuse API demo |
-| Pendientes / worklist servicio | V2 | ◐ tablero servicio |
+| Evolución diaria | V2 | ✓ alias evolución |
+| Órdenes activas | V2 | ✓ tablero servicio |
+| Resultados y críticos con acuse | V2 | ✓ acuse API demo |
+| Pendientes / worklist servicio | V2 | ✓ tablero servicio |
 | Preparación de alta | V2 | ○ |
 
 ### 2.7 Enfermería
 
 | Capacidad | Versión | Estado |
 |-----------|---------|--------|
-| Nota de enfermería | V3 | ○ |
+| Nota de enfermería | V3 | ✓ blueprint demo |
 | Signos vitales | V3 | ○ |
 | Balance hídrico | V3 | ○ |
 | Plan de cuidados | V3 | ○ |
-| MAR (administración) | V3 | ◐ reglas CDR MAR |
+| MAR (administración) | V3 | ✓ CDR + `mar_administration_records` |
 | Eventos y alertas | V3 | ○ |
 | Cambio de turno | V3 | ○ |
 
@@ -131,7 +131,7 @@ Leyenda de madurez:
 | Conciliación | V3 | ○ |
 | Duplicidades / interacciones | V3 | ◐ CDS + CDR demo |
 | Ajuste renal/hepático | V3 | ◐ regla renal demo |
-| Validación farmacéutica | V3 | ○ |
+| Validación farmacéutica | V3 | ✓ blueprint demo |
 | Intervenciones | V3 | ○ |
 
 ### 2.9 Documentos e interoperabilidad
@@ -179,10 +179,10 @@ Leyenda de madurez:
 
 | Vista | Versión | Estado |
 |-------|---------|--------|
-| Mi trabajo | V0 | ○ EPIS2-12 |
+| Mi trabajo | V0 | ✓ EPIS2-12 |
 | Tablero del paciente | V1 | ✓ slice demo |
-| Tablero del servicio | V2 | ○ |
-| Calidad / administración | V4 | ◐ staging HL7/FHIR read-only, tablero calidad, ops |
+| Tablero del servicio | V2 | ✓ |
+| Calidad / administración | V4 | ✓ slice read-only demo |
 
 ---
 

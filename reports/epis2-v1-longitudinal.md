@@ -1,34 +1,33 @@
 # EPIS2 V1 — Ficha longitudinal (slice demo)
 
-**Estado:** implementado en código local (migraciones 008/009, API, UI ficha + tablero paciente).  
-**Gate:** sin RAG, OCR, PDF ni blueprints hospitalarios nuevos.
+**Estado:** cerrado (slice demo) — commits `117cbeb`, `7ac8007`  
+**Gate completo V1:** pendiente RAG, OCR, PDF (EPIS2-11+).
 
 ## Entregables
 
 | Área | Detalle |
 |------|---------|
-| **BD** | `patient_allergies`, `patient_medications`, `clinical_documents` + seed 5 casos (penicilina DEMO-005) |
-| **API** | `GET /api/patients/:id/longitudinal`, `GET /api/dashboard/patient/:id` |
-| **UI** | `PatientLongitudinalPanel` en ficha; tab Paciente en tablero con `PatientDashboardTab` |
-| **CDR** | Alergias DB fusionadas en alertas demo (`getDemoClinicalAlertsForPatient`) |
-| **Navegación** | `patientId` en search de `/epis2/dashboard`; comando/tablero con paciente activo |
+| **BD** | `patient_allergies`, `patient_medications`, `clinical_documents` + seed (penicilina DEMO-005) |
+| **API** | `GET /api/patients/:id/longitudinal`, `GET /api/dashboard/patient/:id`, `GET .../documents/search` |
+| **UI** | `PatientLongitudinalPanel`, tab Paciente en tablero, `DocumentSearchPanel` |
+| **Blueprints** | Interconsulta, imagenología (`7ac8007`) |
+| **CDR** | Alergias DB en alertas demo |
+| **FHIR** | Bundle con alergias/meds (`V4`) |
 
 ## Verificación
 
 ```bash
 npm run db:migrate
 npm test
-# Con PostgreSQL:
-DATABASE_URL=... npm test  # incluye integración longitudinal DEMO-005
 ```
 
-## Fuera de alcance (V1 posterior / V2+)
+Integración: `clinical.integration.test.ts` (longitudinal DEMO-005, búsqueda docs, comandos interconsulta/imagenología).
 
-- Interconsulta / imagenología blueprints
-- RAG pgvector, impresión PDF, FHIR ampliado
+## Fuera de alcance (gate V1 completo)
+
+- RAG pgvector, OCR, impresión PDF masiva
 - Tablero de servicio (V2)
 
-## Siguiente
+## Journey
 
-- Commit `feat(v1): ficha longitudinal demo`
-- Cerrar checklist gate V1 en [EPIS2_RELEASE_ROADMAP.md](../docs/product/EPIS2_RELEASE_ROADMAP.md) tras piloto humano
+`golden-v1-longitudinal-review` en [EPIS2_GOLDEN_JOURNEYS.md](../docs/quality/EPIS2_GOLDEN_JOURNEYS.md)

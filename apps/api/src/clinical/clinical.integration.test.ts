@@ -198,6 +198,15 @@ describe.skipIf(!hasDb)('clinical API (integration)', () => {
       '/espacio/interconsulta',
     );
 
+    const imagingCmd = await app.inject({
+      method: 'POST',
+      url: '/api/commands/resolve',
+      headers: { cookie },
+      payload: { text: 'pedir radiografia de torax', role: 'physician', patientId },
+    });
+    expect(imagingCmd.statusCode).toBe(200);
+    expect((imagingCmd.json() as { routePath: string }).routePath).toBe('/espacio/imagenologia');
+
     await app.close();
   });
 });

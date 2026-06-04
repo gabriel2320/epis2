@@ -16,6 +16,26 @@ export const DEMO_WORK_TASKS = [
     label: 'Ver resumen clínico',
     commandSample: 'resume al paciente',
   },
+  {
+    id: 'demo-task-referral',
+    label: 'Solicitar interconsulta (V1)',
+    commandSample: 'solicitar interconsulta',
+  },
+  {
+    id: 'demo-task-service',
+    label: 'Ver censo del servicio (V2)',
+    commandSample: 'ver el servicio',
+  },
+  {
+    id: 'demo-task-mar',
+    label: 'Registrar administración MAR (V3)',
+    commandSample: 'registrar mar',
+  },
+  {
+    id: 'demo-task-pharmacy',
+    label: 'Validación farmacéutica (V3)',
+    commandSample: 'validacion farmaceutica',
+  },
 ] as const;
 
 export async function getDashboardWorkSummary(db: Database, actorId: string) {
