@@ -6,6 +6,8 @@ import {
   EpisButton,
   EpisCard,
   EpisChip,
+  EpisCommandBar,
+  EpisCommandSuggestions,
   EpisDialog,
   EpisEmptyState,
   EpisLoadingState,
@@ -169,6 +171,28 @@ export function UiCatalogPage() {
               </Stack>
             </Box>
           </EpisDialog>
+        </CatalogSection>
+
+        <CatalogSection title="Command-first (MUI-03)">
+          <Stack spacing={2}>
+            <EpisCommandBar
+              label="Instrucción clínica"
+              placeholder="Ej.: evoluciona al paciente"
+              submitLabel="Continuar"
+              value=""
+              onChange={() => {}}
+              onSubmit={() => {}}
+              roleLabel="Médico demo"
+              aiAvailable={true}
+              aiHint="IA local activa — asistencia en borrador."
+            />
+            <EpisCommandSuggestions
+              role="physician"
+              permissions={['command.execute', 'ai.read', 'dashboard.read']}
+              aiAvailable
+              onSelect={() => {}}
+            />
+          </Stack>
         </CatalogSection>
 
         <CatalogSection title="Estados">

@@ -17,6 +17,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@epis2/command-registry": "*",
+    "@epis2/design-system": "*",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.11",
@@ -27,6 +29,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^16.3.0",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
     "react": "^19.1.0",

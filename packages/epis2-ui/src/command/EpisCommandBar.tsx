@@ -1,15 +1,14 @@
-import {
-  AutoAwesomeIcon,
-  Box,
-  EpisButton,
-  EpisChip,
-  EpisTextField,
-  InputAdornment,
-  SearchIcon,
-  Stack,
-  Typography,
-} from '@epis2/epis2-ui';
-export type PowerBarProps = {
+import { copy } from '@epis2/design-system';
+import { AutoAwesomeIcon, SearchIcon } from '../mui/index.js';
+import { EpisButton } from '../primitives/EpisButton.js';
+import { EpisChip } from '../primitives/EpisChip.js';
+import { EpisTextField } from '../primitives/EpisTextField.js';
+import Box from '@mui/material/Box';
+import InputAdornment from '@mui/material/InputAdornment';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+
+export type EpisCommandBarProps = {
   label: string;
   placeholder: string;
   submitLabel: string;
@@ -20,10 +19,11 @@ export type PowerBarProps = {
   aiAvailable?: boolean | null;
   aiHint?: string;
   roleLabel?: string;
+  disabled?: boolean;
 };
 
-/** Barra de comando dominante — entrada principal del Centro de Comando. */
-export function PowerBar({
+/** Barra de comando dominante — Centro de Comando EPIS2. */
+export function EpisCommandBar({
   label,
   placeholder,
   submitLabel,
@@ -34,7 +34,8 @@ export function PowerBar({
   aiAvailable = null,
   aiHint,
   roleLabel,
-}: PowerBarProps) {
+  disabled = false,
+}: EpisCommandBarProps) {
   return (
     <Box
       component="form"
@@ -47,13 +48,18 @@ export function PowerBar({
     >
       <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap" sx={{ mb: 1 }}>
         {roleLabel ? (
-          <EpisChip size="small" label={roleLabel} variant="outlined" data-testid="epis2-command-role-chip" />
+          <EpisChip
+            size="small"
+            label={roleLabel}
+            variant="outlined"
+            data-testid="epis2-command-role-chip"
+          />
         ) : null}
         {aiAvailable !== null ? (
           <EpisChip
             size="small"
             icon={<AutoAwesomeIcon />}
-            label={aiAvailable ? 'IA local' : 'Sin IA'}
+            label={aiAvailable ? copy.commandCenter.aiStatusOn : copy.commandCenter.aiStatusOff}
             color={aiAvailable ? 'success' : 'default'}
             variant={aiAvailable ? 'filled' : 'outlined'}
             data-testid="epis2-command-ai-status"
@@ -68,6 +74,7 @@ export function PowerBar({
         onChange={(e) => onChange(e.target.value)}
         error={Boolean(error)}
         helperText={error ?? aiHint}
+        disabled={disabled}
         slotProps={{
           input: {
             startAdornment: (
@@ -100,6 +107,7 @@ export function PowerBar({
         variant="contained"
         size="large"
         fullWidth
+        disabled={disabled}
         sx={{ mt: 2, minHeight: 48 }}
       >
         {submitLabel}

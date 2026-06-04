@@ -1,21 +1,20 @@
 import { SYNTHETIC_USERS } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
-import { useNavigate } from '@tanstack/react-router';
-import { useState } from 'react';
-import { ApiError } from '../api/client.js';
-import { useAuth } from '../auth/AuthContext.js';
-
 import {
-  Box,
   EpisAlert,
+  EpisAuthScreen,
   EpisButton,
-  EpisCard,
   EpisChip,
   EpisTextField,
   MenuItem,
   Stack,
   Typography,
 } from '@epis2/epis2-ui';
+import { useNavigate } from '@tanstack/react-router';
+import { useState } from 'react';
+import { ApiError } from '../api/client.js';
+import { useAuth } from '../auth/AuthContext.js';
+
 export function LoginPage() {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -38,64 +37,51 @@ export function LoginPage() {
   };
 
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        bgcolor: 'background.default',
-        px: 2,
-      }}
-    >
-      <EpisCard elevation={0} sx={{ p: 4, maxWidth: 440, width: '100%', border: 1, borderColor: 'divider' }}>
-        <Stack spacing={3} data-testid="epis2-login-page">
-          <Stack spacing={1} alignItems="center">
-            <Typography variant="h4" color="primary" fontWeight={700}>
-              {copy.appName}
-            </Typography>
-            <EpisChip label={copy.demoBadge} size="small" color="warning" variant="outlined" />
-            <Typography variant="h6">{copy.login.title}</Typography>
-            <Typography variant="body2" color="text.secondary" textAlign="center">
-              {copy.login.subtitle}
-            </Typography>
-          </Stack>
+    <EpisAuthScreen>
+      <Stack spacing={1} alignItems="center">
+        <Typography variant="h4" color="primary" fontWeight={700}>
+          {copy.appName}
+        </Typography>
+        <EpisChip label={copy.demoBadge} size="small" color="warning" variant="outlined" />
+        <Typography variant="h6">{copy.login.title}</Typography>
+        <Typography variant="body2" color="text.secondary" textAlign="center">
+          {copy.login.subtitle}
+        </Typography>
+      </Stack>
 
-          <EpisTextField
-            select
-            label={copy.login.usernameLabel}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            fullWidth
-          >
-            {SYNTHETIC_USERS.map((u) => (
-              <MenuItem key={u.id} value={u.username}>
-                {u.displayName} ({copy.roles[u.role]})
-              </MenuItem>
-            ))}
-          </EpisTextField>
+      <EpisTextField
+        select
+        label={copy.login.usernameLabel}
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        fullWidth
+      >
+        {SYNTHETIC_USERS.map((u) => (
+          <MenuItem key={u.id} value={u.username}>
+            {u.displayName} ({copy.roles[u.role]})
+          </MenuItem>
+        ))}
+      </EpisTextField>
 
-          <EpisTextField
-            label={copy.login.demoKeyLabel}
-            value={demoAuthKey}
-            onChange={(e) => setDemoAuthKey(e.target.value)}
-            placeholder={copy.login.demoKeyPlaceholder}
-            fullWidth
-            type="password"
-            autoComplete="off"
-          />
+      <EpisTextField
+        label={copy.login.demoKeyLabel}
+        value={demoAuthKey}
+        onChange={(e) => setDemoAuthKey(e.target.value)}
+        placeholder={copy.login.demoKeyPlaceholder}
+        fullWidth
+        type="password"
+        autoComplete="off"
+      />
 
-          {error ? <EpisAlert severity="error">{error}</EpisAlert> : null}
+      {error ? <EpisAlert severity="error">{error}</EpisAlert> : null}
 
-          <EpisButton variant="contained" size="large" onClick={() => void handleSubmit()} disabled={loading}>
-            {loading ? copy.login.submitting : copy.login.submit}
-          </EpisButton>
+      <EpisButton variant="contained" size="large" onClick={() => void handleSubmit()} disabled={loading}>
+        {loading ? copy.login.submitting : copy.login.submit}
+      </EpisButton>
 
-          <EpisAlert severity="info" variant="outlined">
-            {copy.login.hint}
-          </EpisAlert>
-        </Stack>
-      </EpisCard>
-    </Box>
+      <EpisAlert severity="info" variant="outlined">
+        {copy.login.hint}
+      </EpisAlert>
+    </EpisAuthScreen>
   );
 }

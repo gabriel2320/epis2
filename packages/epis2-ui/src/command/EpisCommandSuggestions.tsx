@@ -1,25 +1,23 @@
 import { getCommandChipsForRole } from '@epis2/command-registry';
 import { copy } from '@epis2/design-system';
+import { AutoAwesomeIcon } from '../mui/index.js';
+import { EpisChip } from '../primitives/EpisChip.js';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
-import {
-  AutoAwesomeIcon,
-  Chip,
-  Stack,
-  Typography,
-} from '@epis2/epis2-ui';
-export type CommandSuggestionChipsProps = {
+export type EpisCommandSuggestionsProps = {
   role: string;
   permissions: readonly string[];
   aiAvailable?: boolean;
   onSelect: (command: string) => void;
 };
 
-export function CommandSuggestionChips({
+export function EpisCommandSuggestions({
   role,
   permissions,
   aiAvailable = false,
   onSelect,
-}: CommandSuggestionChipsProps) {
+}: EpisCommandSuggestionsProps) {
   const chips = getCommandChipsForRole(role, permissions, { aiAvailable });
   const aiChips = chips.filter((c) => c.aiAssisted);
   const roleChips = chips.filter((c) => !c.aiAssisted);
@@ -33,7 +31,7 @@ export function CommandSuggestionChips({
           </Typography>
           <Stack direction="row" flexWrap="wrap" gap={1} justifyContent="center">
             {aiChips.map((chip) => (
-              <Chip
+              <EpisChip
                 key={chip.id}
                 icon={<AutoAwesomeIcon />}
                 label={chip.sampleEs}
@@ -53,7 +51,7 @@ export function CommandSuggestionChips({
         </Typography>
         <Stack direction="row" flexWrap="wrap" gap={1} justifyContent="center">
           {roleChips.map((chip) => (
-            <Chip
+            <EpisChip
               key={chip.id}
               label={chip.sampleEs}
               title={chip.labelEs}

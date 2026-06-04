@@ -3,4 +3,6 @@ export { epis2Palette } from './theme/palette.js';
 export { useTheme } from '@mui/material/styles';
 export { Epis2ThemeProvider, type Epis2ThemeProviderProps } from './providers/Epis2ThemeProvider.js';
 export * from './primitives/index.js';
+export * from './command/index.js';
+export * from './clinical/index.js';
 export * from './mui/index.js';
