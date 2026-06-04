@@ -27,6 +27,27 @@ vi.mock('../api/commandApi.js', () => ({
   resolveCommand: vi.fn(),
 }));
 
+const { fetchPatientClinicalAlerts } = vi.hoisted(() => ({
+  fetchPatientClinicalAlerts: vi.fn(),
+}));
+
+vi.mock('../api/clinicalApi.js', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../api/clinicalApi.js')>();
+  return {
+    ...actual,
+    listPatients: vi.fn().mockResolvedValue({
+      patients: [
+        {
+          id: '00000000-0000-4000-8000-000000000005',
+          displayName: 'Paciente Demo — Penicilina',
+          demoCaseCode: 'DEMO-005',
+        },
+      ],
+    }),
+    fetchPatientClinicalAlerts,
+  };
+});
+
 vi.mock('../auth/AuthContext.js', () => ({
   useAuth: () => ({
     session: {
@@ -48,7 +69,10 @@ vi.mock('../auth/AuthContext.js', () => ({
   }),
 }));
 
-afterEach(() => cleanup());
+afterEach(() => {
+  cleanup();
+  fetchPatientClinicalAlerts.mockReset();
+});
 
 describe('CommandCenterPage', () => {
   it('muestra la pregunta principal en español', () => {
@@ -67,5 +91,35 @@ describe('CommandCenterPage', () => {
       within(powerBar).getByRole('button', { name: copy.commandCenter.submit }),
     );
     expect(screen.getByText(copy.commandCenter.emptyCommand)).toBeInTheDocument();
+  });
+
+  it('muestra alertas CDS/CDR cuando hay paciente activo', async () => {
+    const patientId = '00000000-0000-4000-8000-000000000005';
+    fetchPatientClinicalAlerts.mockResolvedValue({
+      patientId,
+      readOnly: true,
+      evaluatedAt: new Date().toISOString(),
+      alerts: [
+        {
+          ruleId: 'beta-lactam-cross-reactivity',
+          severity: 'critical',
+          message: 'Cruce beta-lactámicos',
+          detail: 'Detalle demo',
+          source: 'cds',
+        },
+      ],
+    });
+
+    const user = userEvent.setup();
+    renderCommandCenter();
+    await user.click(screen.getByRole('button', { name: copy.activePatient.pickPatient }));
+    await user.click(screen.getByRole('button', { name: 'DEMO-005' }));
+
+    expect(await screen.findByTestId('epis2-clinical-alerts')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-clinical-alert-beta-lactam-cross-reactivity')).toBeInTheDocument();
+    expect(fetchPatientClinicalAlerts).toHaveBeenCalledWith(
+      patientId,
+      expect.objectContaining({}),
+    );
   });
 });

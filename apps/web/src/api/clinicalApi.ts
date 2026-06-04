@@ -1,3 +1,4 @@
+import type { PatientClinicalAlertsResponse } from '@epis2/contracts';
 import { apiFetch } from './client.js';
 
 export type PatientListRow = {
@@ -33,6 +34,26 @@ export function listPatients(query?: string) {
 
 export function fetchPatientDetail(patientId: string) {
   return apiFetch<PatientDetailResponse>(`/api/patients/${patientId}`);
+}
+
+/** Blueprint EPIS2 alineado a intent del command-registry (para CDR contextual). */
+export const INTENT_TO_ASSIST_BLUEPRINT: Record<string, string> = {
+  create_evolution_draft: 'evolution_note',
+  prepare_discharge_draft: 'discharge_summary',
+  prepare_prescription: 'prescription',
+  request_laboratory: 'lab_request',
+};
+
+export function fetchPatientClinicalAlerts(
+  patientId: string,
+  options?: { blueprintId?: string },
+) {
+  const q = options?.blueprintId
+    ? `?blueprintId=${encodeURIComponent(options.blueprintId)}`
+    : '';
+  return apiFetch<PatientClinicalAlertsResponse>(
+    `/api/patients/${patientId}/clinical-alerts${q}`,
+  );
 }
 
 export type ClinicalDraftSummary = {

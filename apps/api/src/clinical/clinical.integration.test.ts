@@ -49,6 +49,21 @@ describe.skipIf(!hasDb)('clinical API (integration)', () => {
     };
     expect(Object.keys(detailJson.clinicalContext.summaryFields).length).toBeGreaterThan(0);
 
+    const alerts = await app.inject({
+      method: 'GET',
+      url: `/api/patients/${patientId}/clinical-alerts`,
+      headers: { cookie },
+    });
+    expect(alerts.statusCode).toBe(200);
+    const alertsJson = alerts.json() as {
+      readOnly: boolean;
+      alerts: { source: string; severity: string }[];
+    };
+    expect(alertsJson.readOnly).toBe(true);
+    if (list.find((p) => p.id === patientId)?.demoCaseCode === 'DEMO-005') {
+      expect(alertsJson.alerts.some((a) => a.source === 'cds')).toBe(true);
+    }
+
     const created = await app.inject({
       method: 'POST',
       url: '/api/drafts',

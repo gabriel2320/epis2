@@ -26,6 +26,13 @@ export const copy = {
     needsClarification: 'El comando es ambiguo. Prueba una frase más específica.',
     forbidden: 'Tu rol no puede ejecutar este comando.',
     unknownCommand: 'No reconocimos el comando.',
+    clinicalAlertsTitle: 'Alertas clínicas (demo)',
+    clinicalAlertsHint:
+      'CDS y reglas CDR en modo informativo — no bloquean comandos ni aprobación.',
+    clinicalAlertsEmpty: 'Sin alertas para este paciente en el contexto actual.',
+    clinicalAlertsLoading: 'Evaluando alertas…',
+    alertSourceCds: 'CDS',
+    alertSourceCdr: 'CDR',
   },
   layout: {
     backToCommand: 'Volver al Centro de Comando',

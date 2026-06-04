@@ -9,15 +9,22 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
-import { useCallback, useState } from 'react';
+import type { ClinicalAlert } from '@epis2/contracts';
+import { useCallback, useEffect, useState } from 'react';
 import { ApiError } from '../api/client.js';
 import { resolveCommand as resolveCommandApi } from '../api/commandApi.js';
 import { CommandSuggestionChips } from '../components/CommandSuggestionChips.js';
 import { PowerBar } from '../components/PowerBar.js';
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
-import { listPatients, type PatientListRow } from '../api/clinicalApi.js';
+import {
+  fetchPatientClinicalAlerts,
+  INTENT_TO_ASSIST_BLUEPRINT,
+  listPatients,
+  type PatientListRow,
+} from '../api/clinicalApi.js';
 import { ActivePatientBanner } from '../components/ActivePatientBanner.js';
+import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
 
 export function CommandCenterPage() {
   const { session, logout } = useAuth();
@@ -28,6 +35,41 @@ export function CommandCenterPage() {
   const [isResolving, setIsResolving] = useState(false);
   const [lastResult, setLastResult] = useState<CommandResolveResponse | null>(null);
   const [patients, setPatients] = useState<PatientListRow[]>([]);
+  const [clinicalAlerts, setClinicalAlerts] = useState<ClinicalAlert[]>([]);
+  const [alertsLoading, setAlertsLoading] = useState(false);
+  const [alertContextLabel, setAlertContextLabel] = useState<string | undefined>();
+
+  const loadClinicalAlerts = useCallback(
+    async (patientId: string, blueprintId?: string, labelEs?: string) => {
+      setAlertsLoading(true);
+      try {
+        const res = await fetchPatientClinicalAlerts(patientId, { blueprintId });
+        setClinicalAlerts(res.alerts);
+        setAlertContextLabel(labelEs);
+      } catch {
+        setClinicalAlerts([]);
+        setAlertContextLabel(undefined);
+      } finally {
+        setAlertsLoading(false);
+      }
+    },
+    [],
+  );
+
+  useEffect(() => {
+    if (!activePatient?.id) {
+      setClinicalAlerts([]);
+      setAlertContextLabel(undefined);
+      return;
+    }
+    const blueprintId =
+      lastResult?.status === 'resolved'
+        ? INTENT_TO_ASSIST_BLUEPRINT[lastResult.intent]
+        : undefined;
+    const label =
+      lastResult?.status === 'resolved' ? lastResult.labelEs : undefined;
+    void loadClinicalAlerts(activePatient.id, blueprintId, label);
+  }, [activePatient?.id, lastResult, loadClinicalAlerts]);
 
   const loadPatients = useCallback(async () => {
     try {
@@ -178,6 +220,7 @@ export function CommandCenterPage() {
                   clickable
                   onClick={() => {
                     setPatient(p);
+                    setLastResult(null);
                     void navigate({ to: '/espacio/ficha', search: { patientId: p.id } });
                   }}
                 />
@@ -185,6 +228,14 @@ export function CommandCenterPage() {
             </Stack>
           ) : null}
         </Paper>
+
+        {activePatient ? (
+          <ClinicalAlertsPanel
+            alerts={clinicalAlerts}
+            loading={alertsLoading}
+            hintBlueprintLabel={alertContextLabel}
+          />
+        ) : null}
 
         <CommandSuggestionChips
           onSelect={(cmd) => {

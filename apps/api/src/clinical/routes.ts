@@ -1,3 +1,4 @@
+import { patientClinicalAlertsResponseSchema } from '@epis2/contracts';
 import { roleHasPermission } from '@epis2/clinical-domain';
 import { z } from 'zod';
 import type { FastifyInstance } from 'fastify';
@@ -12,6 +13,7 @@ import {
   createDraft,
   getDraftDetail,
   getPatientById,
+  getDemoClinicalAlertsForPatient,
   getPatientClinicalContext,
   getPatientDemoCaseCode,
   listDrafts,
@@ -74,6 +76,27 @@ export async function registerClinicalRoutes(
         }),
       );
       return { patients };
+    },
+  );
+
+  app.get(
+    '/api/patients/:patientId/clinical-alerts',
+    { preHandler: requirePatientRead },
+    async (request, reply) => {
+      const { patientId } = request.params as { patientId: string };
+      const query = request.query as { blueprintId?: string };
+      const alertOpts: Parameters<typeof getDemoClinicalAlertsForPatient>[2] = {};
+      if (query.blueprintId !== undefined) alertOpts.blueprintId = query.blueprintId;
+      const evaluated = await getDemoClinicalAlertsForPatient(db, patientId, alertOpts);
+      if (!evaluated) {
+        return reply.status(404).send({ error: 'Paciente no encontrado' });
+      }
+      return patientClinicalAlertsResponseSchema.parse({
+        patientId,
+        readOnly: true,
+        evaluatedAt: evaluated.evaluatedAt,
+        alerts: evaluated.alerts,
+      });
     },
   );
 

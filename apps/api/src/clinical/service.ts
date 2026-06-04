@@ -3,7 +3,6 @@ import {
   buildClinicalSafetyInputFromSummary,
   CHILE_RUT_IDENTIFIER_SYSTEM,
   evaluateDemoClinicalAlerts,
-  formatSafetyWarningsForAssist,
   normalizeRut,
 } from '@epis2/clinical-domain';
 import {
@@ -148,17 +147,25 @@ export async function searchPatients(db: Database, query?: string) {
     .limit(20);
 }
 
-/** Alertas CDS demo (read-only) para asistencia IA y UI. */
-export async function getDemoSafetyNotesForPatient(
+export type DemoClinicalAlert = {
+  ruleId: string;
+  severity: 'warning' | 'critical';
+  message: string;
+  detail: string;
+  source: 'cds' | 'cdr';
+};
+
+/** Alertas CDS + CDR (read-only) para UI y asistencia IA. */
+export async function getDemoClinicalAlertsForPatient(
   db: Database,
   patientId: string,
   options?: {
     blueprintId?: string;
     currentFields?: Record<string, string>;
   },
-): Promise<string[]> {
+): Promise<{ evaluatedAt: string; alerts: DemoClinicalAlert[] } | null> {
   const patient = await getPatientById(db, patientId);
-  if (!patient) return [];
+  if (!patient) return null;
   const ctx = await getPatientClinicalContext(db, patientId);
   const safetyOpts: { sex?: string; problems: { description: string }[] } = {
     problems: ctx.problems,
@@ -169,9 +176,32 @@ export async function getDemoSafetyNotesForPatient(
   if (options?.blueprintId !== undefined) alertOpts.blueprintId = options.blueprintId;
   if (options?.currentFields !== undefined) alertOpts.currentFields = options.currentFields;
   const evaluated = evaluateDemoClinicalAlerts(input, alertOpts);
-  if (!evaluated.warnings.length) return [];
-  const block = formatSafetyWarningsForAssist(evaluated);
-  return block.split('\n').filter((line) => line.startsWith('- '));
+  return {
+    evaluatedAt: evaluated.evaluatedAt,
+    alerts: evaluated.warnings.map((w) => ({
+      ruleId: w.ruleId,
+      severity: w.severity,
+      message: w.message,
+      detail: w.detail,
+      source: w.ruleId.startsWith('cdr.') ? 'cdr' : 'cds',
+    })),
+  };
+}
+
+/** Líneas breves para safetyNotes de IA (compatibilidad). */
+export async function getDemoSafetyNotesForPatient(
+  db: Database,
+  patientId: string,
+  options?: {
+    blueprintId?: string;
+    currentFields?: Record<string, string>;
+  },
+): Promise<string[]> {
+  const result = await getDemoClinicalAlertsForPatient(db, patientId, options);
+  if (!result?.alerts.length) return [];
+  return result.alerts.map(
+    (a) => `- [${a.severity}] ${a.message}: ${a.detail}`,
+  );
 }
 
 export async function getPatientById(db: Database, patientId: string) {

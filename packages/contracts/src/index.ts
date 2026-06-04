@@ -24,4 +24,10 @@ export {
   type AiStatusResponse,
   type LocalAiDraftAssistOutput,
 } from './ai.js';
+export {
+  clinicalAlertSchema,
+  patientClinicalAlertsResponseSchema,
+  type ClinicalAlert,
+  type PatientClinicalAlertsResponse,
+} from './clinicalAlerts.js';
 export { EPIS2_PRODUCT_NAME, EPIS2_PHASE } from './meta.js';
