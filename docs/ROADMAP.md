@@ -98,11 +98,11 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 ---
 
-## EPIS2-11 — QA humano y piloto demo
+## EPIS2-11 — QA humano y piloto demo ✓
 
 **Flujo:** login → buscar → resumen → evolución → borrador → aprobar → comando.
 
-**Resultado:** GO DEMO | PASS WITH FIXES | BLOCKED | NO GO
+**Resultado:** GO DEMO | PASS WITH FIXES | BLOCKED | NO GO — `reports/epis2-11-pilot-demo.md`, `docs/quality/PILOT_DEMO_CHECKLIST.md`
 
 ---
 

@@ -1,10 +1,10 @@
 /**
- * Journey clínico dorado — gate de producto.
+ * Journey clínico dorado — contratos y UI (sin Postgres).
+ * Flujo API completo: tests/golden-clinical-journey.api.spec.ts
  * @see docs/quality/GOLDEN_CLINICAL_JOURNEY.md
- *
- * Esqueleto: habilitar implementación en EPIS2-08 … EPIS2-11.
  */
 import { describe, expect, it } from 'vitest';
+import { resolveCommand } from '@epis2/command-registry';
 
 const JOURNEY_STEPS = [
   'login',
@@ -19,32 +19,38 @@ const JOURNEY_STEPS = [
 ] as const;
 
 describe('Golden Clinical Journey', () => {
-  describe.skip('E2E completo (EPIS2-11)', () => {
-    it('1. login → sesión y Centro de Comando', async () => {
-      expect(JOURNEY_STEPS[0]).toBe('login');
+  describe('Capa comando y formularios (EPIS2-11)', () => {
+    it('3. comando evolución resuelve ruta sin paciente → needs_patient', () => {
+      const withoutPatient = resolveCommand({
+        text: 'evolucionar nota de hoy',
+        role: 'physician',
+      });
+      expect(withoutPatient.status).toBe('needs_patient');
+
+      const withPatient = resolveCommand({
+        text: 'evolucionar nota de hoy',
+        role: 'physician',
+        patientId: 'a0000001-0000-4000-8000-000000000001',
+      });
+      expect(withPatient.status).toBe('resolved');
+      if (withPatient.status === 'resolved') {
+        expect(withPatient.routePath).toBe('/espacio/evolucion');
+      }
     });
 
-    it('2. buscar paciente DEMO/SINTÉTICO', async () => {
-      expect(JOURNEY_STEPS[2]).toBe('buscar-paciente-sintetico');
-    });
-
-    it('3. comando evolución → página blueprint', async () => {
+    it('5. página evolución desde blueprint único', async () => {
       const { getBlueprintById, assertRegistryInvariants } = await import(
         '@epis2/clinical-forms'
       );
       expect(assertRegistryInvariants()).toEqual([]);
-      expect(getBlueprintById('evolution_note')?.routePath).toBe('/espacio/evolucion');
+      const bp = getBlueprintById('evolution_note');
+      expect(bp?.routePath).toBe('/espacio/evolucion');
+      expect(bp?.outputKind).toBe('CLINICAL_NOTE_DRAFT');
     });
 
-    it('4. guardar borrador sin promover a nota final', async () => {
-      expect(JOURNEY_STEPS[5]).toBe('guardar-borrador');
-    });
-
-    it('5. aprobación humana auditada', async () => {
-      expect(JOURNEY_STEPS[6]).toBe('aprobacion-humana');
-    });
-
-    it('6. volver al Centro de Comando', async () => {
+    it('9. home del producto es Centro de Comando', async () => {
+      const { EPIS2_COMMAND_CENTER_HOME } = await import('../apps/web/src/routes/router.js');
+      expect(EPIS2_COMMAND_CENTER_HOME).toBe('/comando');
       expect(JOURNEY_STEPS[8]).toBe('volver-command-center');
     });
   });

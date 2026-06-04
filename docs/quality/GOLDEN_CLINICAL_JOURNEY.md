@@ -1,7 +1,8 @@
 # EPIS2 — Journey clínico dorado
 
-**Estado:** Especificación obligatoria · **Implementación:** progresiva (gate final EPIS2-11)  
-**Prueba:** `tests/golden-clinical-journey.spec.ts`
+**Estado:** Implementado (EPIS2-11)  
+**Pruebas:** `tests/golden-clinical-journey.spec.ts` · `tests/golden-clinical-journey.api.spec.ts`  
+**Checklist humano:** `docs/quality/PILOT_DEMO_CHECKLIST.md`
 
 ---
 
@@ -64,7 +65,11 @@ Login
 
 ## Automatización
 
-- **Hoy:** esqueleto con pasos documentados (`describe.skip` hasta EPIS2-08+).
-- **EPIS2-11:** habilitar E2E/playwright o integración API+UI.
+| Capa | Archivo | Requisito |
+|------|---------|-----------|
+| Contratos / comando / home | `golden-clinical-journey.spec.ts` | Siempre (CI) |
+| API clínica completa | `golden-clinical-journey.api.spec.ts` | `DATABASE_URL` + migraciones |
 
 Ejecutar: `npm run quality:golden-journey`
+
+Playwright E2E UI queda **opcional** post-MVP; el gate EPIS2-11 se cierra con API + checklist humano.

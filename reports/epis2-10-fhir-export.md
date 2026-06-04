@@ -41,7 +41,7 @@ curl -H "Cookie: epis2_session=..." \
 
 ## Próximo paso
 
-**EPIS2-11** — QA humano y piloto demo (journey dorado E2E).
+**EPIS2-11** — QA humano y piloto demo. Ver `epis2-11-pilot-demo.md`.
 
 ---
 

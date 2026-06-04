@@ -17,7 +17,7 @@ Aplicación clínica **command-first**, independiente del proyecto EPIS (legacy)
 | **EPIS2-08** | Completada — borradores, versiones, aprobación humana UI |
 | **EPIS2-09** | Completada — 5 casos demo sintéticos, badge DEMO |
 | **EPIS2-10** | Completada — export FHIR R4 (frontera API) |
-| EPIS2-11 | Piloto demo humano |
+| **EPIS2-11** | Completada — journey dorado API + checklist piloto humano |
 
 ## Documentación esencial
 
@@ -51,7 +51,7 @@ npm run dev:ai         # puerto 3002
 
 ## Próximo paso
 
-Ejecutar **EPIS2-11 — QA humano y piloto demo** (journey dorado).
+**MVP v1 (fases 00–11) cerrado en código.** Piloto humano: `docs/quality/PILOT_DEMO_CHECKLIST.md` · `npm run quality:golden-journey`
 
 Servicio IA: `npm run dev:ai` (opcional; la app funciona sin Ollama).
 

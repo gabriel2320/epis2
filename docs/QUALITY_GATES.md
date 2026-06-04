@@ -121,7 +121,7 @@ npm run db:validate
 | BLOCKED | Falla crítica de flujo o seguridad |
 | NO GO | Repetir fase(s) anteriores |
 
-Checklist obligatorio: ver `ROADMAP.md` EPIS2-11.
+Checklist obligatorio: `docs/quality/PILOT_DEMO_CHECKLIST.md`. Automatización: `npm run quality:golden-journey`.
 
 ---
 

@@ -63,7 +63,7 @@ export async function buildApp(config: AppConfig) {
   app.get('/api/meta', async () => ({
     product: 'EPIS2',
     phase: EPIS2_PHASE,
-    message: 'Frontera FHIR export — EPIS2-10 (import diferido)',
+    message: 'MVP v1 — piloto demo y journey dorado (EPIS2-11)',
     database: Boolean(config.DATABASE_URL && db),
   }));
 

@@ -29,8 +29,7 @@ Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.
 ## Fases
 
 ```text
-EPIS2-00 ✓ … EPIS2-10 ✓
-EPIS2-11     (QA humano / piloto demo)
+EPIS2-00 ✓ … EPIS2-11 ✓ (MVP v1)
 ```
 
 ## Memoria legacy
