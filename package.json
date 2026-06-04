@@ -1,0 +1,35 @@
+{
+  "name": "epis2",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "EPIS2 — aplicación clínica command-first",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "services/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w @epis2/contracts && npm run build -w @epis2/clinical-domain && npm run build -w @epis2/command-registry && npm run build -w @epis2/clinical-forms && npm run build -w @epis2/design-system && npm run build -w @epis2/test-fixtures && npm run build -w @epis2/local-ai && npm run build -w @epis2/api && npm run build -w @epis2/web",
+    "lint": "eslint .",
+    "typecheck": "npm run build -w @epis2/contracts && npm run typecheck -w @epis2/contracts && npm run typecheck -w @epis2/clinical-domain && npm run typecheck -w @epis2/command-registry && npm run typecheck -w @epis2/clinical-forms && npm run typecheck -w @epis2/design-system && npm run typecheck -w @epis2/test-fixtures && npm run typecheck -w @epis2/local-ai && npm run typecheck -w @epis2/api && npm run typecheck -w @epis2/web",
+    "test": "vitest run",
+    "check": "npm run lint && npm run typecheck",
+    "db:validate": "node scripts/db-validate.mjs",
+    "dev:api": "npm run dev -w @epis2/api",
+    "dev:web": "npm run dev -w @epis2/web",
+    "dev:ai": "npm run dev -w @epis2/local-ai"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "@types/node": "^22.15.21",
+    "eslint": "^9.28.0",
+    "globals": "^16.2.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.33.0",
+    "vitest": "^3.2.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

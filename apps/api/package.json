@@ -1,0 +1,23 @@
+{
+  "name": "@epis2/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@epis2/contracts": "*",
+    "drizzle-orm": "^0.43.1",
+    "fastify": "^5.3.3",
+    "postgres": "^3.4.5",
+    "zod": "^3.25.42"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}

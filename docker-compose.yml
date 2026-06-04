@@ -1,0 +1,35 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: epis2-postgres
+    environment:
+      POSTGRES_USER: epis2
+      POSTGRES_PASSWORD: epis2
+      POSTGRES_DB: epis2
+    ports:
+      - '5432:5432'
+    volumes:
+      - epis2_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U epis2 -d epis2']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: epis2-ollama
+    ports:
+      - '11434:11434'
+    volumes:
+      - epis2_ollama_data:/root/.ollama
+    healthcheck:
+      test: ['CMD', 'ollama', 'list']
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+volumes:
+  epis2_pg_data:
+  epis2_ollama_data:
