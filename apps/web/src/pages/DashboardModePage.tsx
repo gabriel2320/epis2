@@ -15,13 +15,22 @@ import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 import { useSearch } from '@tanstack/react-router';
 import { useCallback, useEffect, useState } from 'react';
-import { fetchDashboardWork, fetchPatientDashboard } from '../api/dashboardApi.js';
-import type { DashboardWorkResponse, PatientDashboardResponse } from '@epis2/contracts';
+import {
+  fetchDashboardWork,
+  fetchPatientDashboard,
+  fetchServiceDashboard,
+} from '../api/dashboardApi.js';
+import type {
+  DashboardWorkResponse,
+  PatientDashboardResponse,
+  ServiceDashboardResponse,
+} from '@epis2/contracts';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { readRecentPatients } from '../clinical/recentPatients.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { DraftStatusChip } from '../components/DraftStatusChip.js';
 import { PatientDashboardTab } from '../components/PatientDashboardTab.js';
+import { ServiceDashboardTab } from '../components/ServiceDashboardTab.js';
 
 type DashboardTab = 'work' | 'patient' | 'service';
 
@@ -34,6 +43,7 @@ export function DashboardModePage() {
 
   const [work, setWork] = useState<DashboardWorkResponse | null>(null);
   const [patientBoard, setPatientBoard] = useState<PatientDashboardResponse | null>(null);
+  const [serviceBoard, setServiceBoard] = useState<ServiceDashboardResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | undefined>();
   const [recentPatients, setRecentPatients] = useState(readRecentPatients());
@@ -45,6 +55,19 @@ export function DashboardModePage() {
       const res = await fetchDashboardWork();
       setWork(res);
       setRecentPatients(readRecentPatients());
+    } catch {
+      setError(copy.errors.genericMessage);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const loadService = useCallback(async () => {
+    setLoading(true);
+    setError(undefined);
+    try {
+      const res = await fetchServiceDashboard();
+      setServiceBoard(res);
     } catch {
       setError(copy.errors.genericMessage);
     } finally {
@@ -67,12 +90,13 @@ export function DashboardModePage() {
 
   useEffect(() => {
     if (tab === 'work') void load();
+    if (tab === 'service') void loadService();
     if (tab === 'patient' && dashboardPatientId) void loadPatient(dashboardPatientId);
     if (tab === 'patient' && !dashboardPatientId) {
       setLoading(false);
       setPatientBoard(null);
     }
-  }, [tab, load, loadPatient, dashboardPatientId]);
+  }, [tab, load, loadService, loadPatient, dashboardPatientId]);
 
   const setTab = (next: DashboardTab) => {
     void navigate({
@@ -137,7 +161,29 @@ export function DashboardModePage() {
           </>
         ) : null}
 
-        {tab === 'service' ? <Alert severity="info">{copy.dashboard.tabServiceSoon}</Alert> : null}
+        {tab === 'service' ? (
+          <>
+            {error ? <Alert severity="error">{error}</Alert> : null}
+            {loading ? (
+              <Typography color="text.secondary">{copy.dashboard.loading}</Typography>
+            ) : serviceBoard ? (
+              <ServiceDashboardTab
+                data={serviceBoard}
+                onReload={() => void loadService()}
+                onOpenPatient={(pid) => {
+                  const p = recentPatients.find((r) => r.id === pid);
+                  if (p) setPatient(p);
+                  void navigate({
+                    to: '/espacio/ficha',
+                    search: { patientId: pid },
+                  });
+                }}
+              />
+            ) : (
+              <Alert severity="info">{copy.dashboard.tabServiceSoon}</Alert>
+            )}
+          </>
+        ) : null}
 
         {tab === 'work' ? (
           <>

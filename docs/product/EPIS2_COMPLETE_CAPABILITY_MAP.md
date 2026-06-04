@@ -76,7 +76,7 @@ Leyenda de madurez:
 |-----------|----|----|-----|---------------|
 | Problemas activos | ◐ | ✓ | ✓ | ◐ campos resumen demo |
 | Diagnósticos estructurados | — | ✓ | ✓ | ○ |
-| Alergias | ◐ | ✓ | ✓ | ◐ CDS demo |
+| Alergias | ◐ | ✓ | ✓ | ◐ CDS + tabla demo |
 | Medicamentos activos | ◐ | ✓ | ✓ | ◐ contexto demo |
 | Observaciones / signos vitales | — | ✓ | ✓ | ○ |
 | Línea de tiempo | — | ✓ | ✓ | ○ |
@@ -104,12 +104,12 @@ Leyenda de madurez:
 
 | Capacidad | Versión objetivo | Estado |
 |-----------|------------------|--------|
-| Censo y camas | V2 | ○ |
+| Censo y camas | V2 | ◐ demo CIRUGIA-DEMO |
 | Ingreso hospitalario | V2 | ○ |
 | Evolución diaria | V2 | ○ (reutiliza evolución) |
 | Órdenes activas | V2 | ○ |
-| Resultados y críticos con acuse | V2 | ◐ alertas demo |
-| Pendientes / worklist servicio | V2 | ○ tablero servicio |
+| Resultados y críticos con acuse | V2 | ◐ acuse API demo |
+| Pendientes / worklist servicio | V2 | ◐ tablero servicio |
 | Preparación de alta | V2 | ○ |
 
 ### 2.7 Enfermería
@@ -180,7 +180,7 @@ Leyenda de madurez:
 | Vista | Versión | Estado |
 |-------|---------|--------|
 | Mi trabajo | V0 | ○ EPIS2-12 |
-| Tablero del paciente | V1 | ○ |
+| Tablero del paciente | V1 | ✓ slice demo |
 | Tablero del servicio | V2 | ○ |
 | Calidad / administración | V4 | ○ |
 

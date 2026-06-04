@@ -58,6 +58,18 @@ export const copy = {
     openBoard: 'Modo tablero',
     patientRequiresSelection: 'Selecciona un paciente en el Centro de Comando para ver su tablero.',
     viewFullRecord: 'Ver ficha completa',
+    tabServiceActive: 'Tablero del servicio (demo)',
+  },
+  inpatient: {
+    census: 'Censo de camas',
+    occupied: 'Ocupada',
+    available: 'Disponible',
+    criticalUnacked: 'Críticos sin acuse',
+    noCriticals: 'Sin críticos pendientes en el servicio.',
+    acknowledge: 'Acusar recibo',
+    probableDischarge: 'Altas probables',
+    pendingTeam: 'Pendientes del equipo',
+    openPatient: 'Ver ficha',
   },
   longitudinal: {
     title: 'Historia clínica (demo)',

@@ -1,4 +1,8 @@
-import { dashboardWorkResponseSchema, patientDashboardResponseSchema } from '@epis2/contracts';
+import {
+  dashboardWorkResponseSchema,
+  patientDashboardResponseSchema,
+  serviceDashboardResponseSchema,
+} from '@epis2/contracts';
 import type { FastifyInstance } from 'fastify';
 import { appendAudit } from '../audit/store.js';
 import type { AppConfig } from '../config.js';
@@ -9,6 +13,7 @@ import {
 } from '../auth/authenticate.js';
 import { getPatientById } from '../clinical/service.js';
 import { getPatientDashboardSummary } from '../clinical/longitudinal.js';
+import { getServiceDashboardSummary } from '../inpatient/service.js';
 import { DEMO_WORK_TASKS, getDashboardWorkSummary } from './service.js';
 
 export async function registerDashboardRoutes(
@@ -76,6 +81,32 @@ export async function registerDashboardRoutes(
 
       const summary = await getPatientDashboardSummary(db, patientId, patient.displayName);
       return patientDashboardResponseSchema.parse(summary);
+    },
+  );
+
+  app.get(
+    '/api/dashboard/service',
+    { preHandler: requireDashboardRead },
+    async (request, reply) => {
+      const session = (request as AuthenticatedRequest).session;
+      const unitCode = (request.query as { unit?: string }).unit;
+
+      await appendAudit(db, {
+        eventType: 'dashboard.opened',
+        actorId: session.sub,
+        username: session.username,
+        entityType: 'dashboard',
+        entityId: 'service',
+        message: 'Modo tablero — servicio',
+        payload: { tab: 'service', unit: unitCode },
+      });
+
+      if (!db) {
+        return reply.status(503).send({ error: 'Base de datos no disponible' });
+      }
+
+      const summary = await getServiceDashboardSummary(db, unitCode);
+      return serviceDashboardResponseSchema.parse(summary);
     },
   );
 }

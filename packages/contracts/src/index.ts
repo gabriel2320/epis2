@@ -31,8 +31,16 @@ export {
   type PatientClinicalAlertsResponse,
 } from './clinicalAlerts.js';
 export {
+  censusBedRowSchema,
+  criticalResultRowSchema,
   dashboardWorkResponseSchema,
+  probableDischargeRowSchema,
+  serviceDashboardResponseSchema,
+  type CensusBedRow,
+  type CriticalResultRow,
   type DashboardWorkResponse,
+  type ProbableDischargeRow,
+  type ServiceDashboardResponse,
 } from './dashboard.js';
 export {
   patientLongitudinalResponseSchema,

@@ -83,9 +83,11 @@ Todos los intents deben:
 
 Navegación: cada ítem abre **página clínica** (no modal de edición masiva).
 
-### 3.3 Tablero del servicio (V2)
+### 3.3 Tablero del servicio (V2 — slice demo)
 
-**Condición:** permiso `dashboard.service` + unidad asignada (demo).
+**Condición:** permiso `dashboard.read` + unidad demo `CIRUGIA-DEMO`.
+
+**Estado:** implementado (censo, críticos con acuse, altas probables).
 
 | Widget | Contenido |
 |--------|-----------|

@@ -231,6 +231,64 @@ export const clinicalDocuments = pgTable('clinical_documents', {
     .references(() => appUsers.id),
 });
 
+export const clinicalUnits = pgTable('clinical_units', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  code: text('code').notNull().unique(),
+  name: text('name').notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const beds = pgTable('beds', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  unitId: uuid('unit_id')
+    .notNull()
+    .references(() => clinicalUnits.id, { onDelete: 'cascade' }),
+  bedLabel: text('bed_label').notNull(),
+  status: text('status').notNull().default('available'),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const inpatientAdmissions = pgTable('inpatient_admissions', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  patientId: uuid('patient_id')
+    .notNull()
+    .references(() => patients.id, { onDelete: 'cascade' }),
+  encounterId: uuid('encounter_id')
+    .notNull()
+    .references(() => encounters.id, { onDelete: 'cascade' }),
+  unitId: uuid('unit_id')
+    .notNull()
+    .references(() => clinicalUnits.id),
+  bedId: uuid('bed_id')
+    .notNull()
+    .references(() => beds.id),
+  status: text('status').notNull().default('active'),
+  admittedAt: timestamp('admitted_at', { withTimezone: true }).notNull().defaultNow(),
+  expectedDischargeAt: timestamp('expected_discharge_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
+export const clinicalCriticalResults = pgTable('clinical_critical_results', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  patientId: uuid('patient_id')
+    .notNull()
+    .references(() => patients.id, { onDelete: 'cascade' }),
+  encounterId: uuid('encounter_id').references(() => encounters.id, { onDelete: 'set null' }),
+  label: text('label').notNull(),
+  valueText: text('value_text').notNull(),
+  severity: text('severity').notNull().default('critical'),
+  observedAt: timestamp('observed_at', { withTimezone: true }).notNull().defaultNow(),
+  acknowledgedAt: timestamp('acknowledged_at', { withTimezone: true }),
+  acknowledgedBy: text('acknowledged_by').references(() => appUsers.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
 export const aiRuns = pgTable('ai_runs', {
   id: uuid('id').primaryKey().defaultRandom(),
   actorId: text('actor_id').references(() => appUsers.id),

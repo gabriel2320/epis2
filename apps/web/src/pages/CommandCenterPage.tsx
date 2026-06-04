@@ -79,7 +79,7 @@ export function CommandCenterPage() {
             to: '/epis2/dashboard',
             search: {
               tab: tab as 'work' | 'patient' | 'service',
-              patientId: activePatient?.id,
+              patientId: tab === 'patient' ? activePatient?.id : undefined,
             },
           });
           return;

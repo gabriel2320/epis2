@@ -117,6 +117,8 @@ Revisión longitudinal demo: problema → encuentro → nota → documento → e
 
 EPIS2-11 (docs/OCR/RAG), extensiones post-12 en modelo + blueprints.
 
+**Slice entregado (commit V1):** alergias/meds/documentos, timeline API, tablero paciente, panel en ficha. Ver [epis2-v1-longitudinal.md](../reports/epis2-v1-longitudinal.md).
+
 ---
 
 ## V2 — Hospitalización operativa
@@ -144,6 +146,8 @@ Flujo sintético: ingreso → órdenes → crítico → acuse → epicrisis → 
 ### Fase
 
 EPIS2-13 Hospitalización.
+
+**Slice entregado:** censo demo, críticos con acuse, tablero servicio. Ver [epis2-v2-inpatient.md](../reports/epis2-v2-inpatient.md).
 
 ---
 

@@ -54,28 +54,39 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 
 ---
 
-## 3. Journey V1 — Longitudinal (plan)
+## 3. Journey V1 — Longitudinal (slice demo)
 
-**Nombre:** `golden-v1-longitudinal-review`
+**Nombre:** `golden-v1-longitudinal-review`  
+**Estado:** parcial — sin RAG/OCR/PDF masivo.
 
-```text
-Login → paciente → problema activo → encuentro → evolución aprobada
-→ documento importado → búsqueda semántica con fuente
-→ timeline → export FHIR → tablero paciente
-```
+| # | Paso | Criterio |
+|---|------|----------|
+| 1 | Fijar paciente DEMO | Contexto activo |
+| 2 | Abrir ficha | Panel longitudinal: problemas, alergias, meds, timeline |
+| 3 | DEMO-005 receta Ceftriaxona | Alertas CDR beta-lactámico (journey V0 seguridad) |
+| 4 | Tablero paciente | `/epis2/dashboard?tab=patient&patientId=` |
+| 5 | Export FHIR | Journey API existente |
 
-**Gate V1:** cada dato nuevo pasa por borrador → aprobación.
+**Pendiente gate V1 completo:** documento importado, búsqueda semántica, impresión PDF.
 
 ---
 
-## 4. Journey V2 — Hospitalización (plan)
+## 4. Journey V2 — Hospitalización (slice demo)
 
-**Nombre:** `golden-v2-admission-discharge`
+**Nombre:** `golden-v2-admission-discharge`  
+**Estado:** parcial — censo + críticos con acuse.
 
-```text
-Ingreso → censo → órdenes → resultado crítico → acuse
-→ evolución diaria → epicrisis → alta → tablero servicio
-```
+| # | Paso | Criterio |
+|---|------|----------|
+| 1 | Comando «ver el servicio» | Tab servicio en Modo tablero |
+| 2 | Censo | Camas 101A/101B ocupadas (DEMO-004, DEMO-005) |
+| 3 | Crítico INR DEMO-005 | Visible sin acuse |
+| 4 | Acusar recibo | POST acknowledge + auditoría |
+| 5 | Alta probable | DEMO-004 en lista |
+
+**Pendiente gate V2 completo:** órdenes, evolución diaria operativa, epicrisis alta end-to-end.
+
+**Tests:** `inpatient.integration.test.ts`
 
 ---
 
