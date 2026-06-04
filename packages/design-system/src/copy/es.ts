@@ -52,6 +52,13 @@ export const copy = {
     searchForm: 'Buscar con formulario dedicado',
     commandPanelTitle: 'Paciente activo',
     pickPatient: 'Elegir paciente demo',
+    clinicalContextTitle: 'Contexto clínico (demo)',
+    summaryActiveProblems: 'Problemas activos',
+    summaryRecentEvents: 'Últimas 24 h',
+    summaryLabs: 'Laboratorio / estudios',
+    summaryMedications: 'Medicación activa',
+    summaryPending: 'Pendientes',
+    summaryAlerts: 'Alertas documentadas',
   },
   drafts: {
     reviewTitle: 'Revisión de borrador',

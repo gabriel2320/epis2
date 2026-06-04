@@ -6,6 +6,7 @@ import {
   evaluateDischargeWithOpenCriticalOrders,
   evaluateDuplicateMedicationOrder,
   evaluateHighRiskMedWithoutDoubleCheck,
+  evaluatePrescriptionAllergyConflict,
 } from './rules.js';
 import type { CdrContext } from './types.js';
 
@@ -54,6 +55,28 @@ describe('clinicalDecisionRules (EPIONE CDR)', () => {
       }),
     );
     expect(check?.ruleId).toBe('discharge_with_open_critical_orders');
+  });
+
+  it('prescription_allergy_conflict en receta', () => {
+    const check = evaluatePrescriptionAllergyConflict(
+      baseContext({
+        actionId: 'prescription',
+        formData: { medication: 'Amoxicilina 500 mg' },
+        allergies: ['Penicilina'],
+      }),
+    );
+    expect(check?.id).toBe('cdr.prescription_allergy_conflict');
+  });
+
+  it('prescription_allergy_conflict con ceftriaxona y alergia penicilina', () => {
+    const check = evaluatePrescriptionAllergyConflict(
+      baseContext({
+        actionId: 'prescription',
+        formData: { medication: 'Ceftriaxona 1 g IV' },
+        allergies: ['Penicilina'],
+      }),
+    );
+    expect(check?.ruleId).toBe('allergy_medication_conflict');
   });
 
   it('duplicate_medication_order en prescripción', () => {

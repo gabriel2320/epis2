@@ -38,7 +38,7 @@ vi.mock('../api/clinicalApi.js', async (importOriginal) => {
     listPatients: vi.fn().mockResolvedValue({
       patients: [
         {
-          id: '00000000-0000-4000-8000-000000000005',
+          id: 'a0000001-0000-4000-8000-000000000005',
           displayName: 'Paciente Demo — Penicilina',
           demoCaseCode: 'DEMO-005',
         },
@@ -94,7 +94,7 @@ describe('CommandCenterPage', () => {
   });
 
   it('muestra alertas CDS/CDR cuando hay paciente activo', async () => {
-    const patientId = '00000000-0000-4000-8000-000000000005';
+    const patientId = 'a0000001-0000-4000-8000-000000000005';
     fetchPatientClinicalAlerts.mockResolvedValue({
       patientId,
       readOnly: true,

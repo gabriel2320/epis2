@@ -1,4 +1,3 @@
-import type { ClinicalAlert } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
@@ -16,8 +15,9 @@ import { Link, useSearch } from '@tanstack/react-router';
 import { useClinicalNavigate, type ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
 import { useCallback, useEffect, useState } from 'react';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
+import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 import {
-  fetchPatientClinicalAlerts,
+  BLUEPRINT_BY_ROUTE,
   fetchPatientDetail,
   listDrafts,
   listPatients,
@@ -25,13 +25,7 @@ import {
   type PatientListRow,
 } from '../api/clinicalApi.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
-
-const ROUTE_TO_BLUEPRINT: Partial<Record<ClinicalFormRoutePath, string>> = {
-  '/espacio/evolucion': 'evolution_note',
-  '/espacio/epicrisis': 'discharge_summary',
-  '/espacio/receta': 'prescription',
-  '/espacio/laboratorio': 'lab_request',
-};
+import { PatientClinicalSummaryPanel } from '../components/PatientClinicalSummaryPanel.js';
 
 const QUICK_ROUTES: { path: ClinicalFormRoutePath; label: string }[] = [
   { path: '/espacio/resumen', label: 'Resumen clínico' },
@@ -49,28 +43,17 @@ export function PatientWorkspacePage() {
   const [drafts, setDrafts] = useState<Awaited<ReturnType<typeof listDrafts>>['drafts']>([]);
   const [patients, setPatients] = useState<PatientListRow[]>([]);
   const [error, setError] = useState<string | undefined>();
-  const [clinicalAlerts, setClinicalAlerts] = useState<ClinicalAlert[]>([]);
-  const [alertsLoading, setAlertsLoading] = useState(false);
-  const [alertContextLabel, setAlertContextLabel] = useState<string | undefined>();
+  const [alertBlueprintId, setAlertBlueprintId] = useState<string | undefined>();
+  const [alertLabel, setAlertLabel] = useState<string | undefined>();
 
   const patientId = search.patientId ?? active?.id;
 
-  const loadClinicalAlerts = useCallback(
-    async (id: string, blueprintId?: string, labelEs?: string) => {
-      setAlertsLoading(true);
-      try {
-        const res = await fetchPatientClinicalAlerts(id, { blueprintId });
-        setClinicalAlerts(res.alerts);
-        setAlertContextLabel(labelEs);
-      } catch {
-        setClinicalAlerts([]);
-        setAlertContextLabel(undefined);
-      } finally {
-        setAlertsLoading(false);
-      }
-    },
-    [],
-  );
+  const { alerts: clinicalAlerts, loading: alertsLoading, contextLabel } =
+    usePatientClinicalAlerts({
+      patientId,
+      blueprintId: alertBlueprintId,
+      contextLabel: alertLabel,
+    });
 
   const loadDetail = useCallback(async (id: string) => {
     setError(undefined);
@@ -82,11 +65,12 @@ export function PatientWorkspacePage() {
       setDetail(res);
       setPatient(res.patient);
       setDrafts(draftRes.drafts);
-      void loadClinicalAlerts(id);
+      setAlertBlueprintId(undefined);
+      setAlertLabel(undefined);
     } catch {
       setError(copy.errors.genericMessage);
     }
-  }, [setPatient, loadClinicalAlerts]);
+  }, [setPatient]);
 
   useEffect(() => {
     if (patientId) {
@@ -162,10 +146,12 @@ export function PatientWorkspacePage() {
           </Typography>
         </Stack>
 
+        <PatientClinicalSummaryPanel summaryFields={detail.clinicalContext.summaryFields} />
+
         <ClinicalAlertsPanel
           alerts={clinicalAlerts}
           loading={alertsLoading}
-          hintBlueprintLabel={alertContextLabel}
+          hintBlueprintLabel={contextLabel}
         />
 
         <Box>
@@ -179,10 +165,9 @@ export function PatientWorkspacePage() {
                 variant="outlined"
                 size="small"
                 onClick={() => {
-                  const blueprintId = ROUTE_TO_BLUEPRINT[action.path];
-                  if (patientId) {
-                    void loadClinicalAlerts(patientId, blueprintId, action.label);
-                  }
+                  const blueprintId = BLUEPRINT_BY_ROUTE[action.path];
+                  setAlertBlueprintId(blueprintId);
+                  setAlertLabel(action.label);
                   navigate({
                     to: action.path,
                     search: { patientId },

@@ -84,9 +84,21 @@ export async function registerClinicalRoutes(
     { preHandler: requirePatientRead },
     async (request, reply) => {
       const { patientId } = request.params as { patientId: string };
-      const query = request.query as { blueprintId?: string };
+      const query = request.query as { blueprintId?: string; fields?: string };
       const alertOpts: Parameters<typeof getDemoClinicalAlertsForPatient>[2] = {};
       if (query.blueprintId !== undefined) alertOpts.blueprintId = query.blueprintId;
+      if (query.fields) {
+        try {
+          const parsed = JSON.parse(query.fields) as Record<string, unknown>;
+          const fields: Record<string, string> = {};
+          for (const [key, value] of Object.entries(parsed)) {
+            if (typeof value === 'string' && value.trim()) fields[key] = value.trim();
+          }
+          if (Object.keys(fields).length > 0) alertOpts.currentFields = fields;
+        } catch {
+          /* ignore malformed fields query */
+        }
+      }
       const evaluated = await getDemoClinicalAlertsForPatient(db, patientId, alertOpts);
       if (!evaluated) {
         return reply.status(404).send({ error: 'Paciente no encontrado' });

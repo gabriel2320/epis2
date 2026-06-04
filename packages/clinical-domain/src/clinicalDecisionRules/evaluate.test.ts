@@ -2,6 +2,28 @@ import { describe, expect, it } from 'vitest';
 import { evaluateDemoClinicalAlerts } from './evaluate.js';
 
 describe('evaluateDemoClinicalAlerts', () => {
+  it('fusiona CDS y CDR para ceftriaxona con alergia a penicilina', () => {
+    const result = evaluateDemoClinicalAlerts(
+      {
+        allergies: [{ substance: 'Penicilina', severity: 'moderate' }],
+        medications: [
+          { name: 'Warfarina 5 mg', status: 'active' },
+          { name: 'Ceftriaxona 1 g IV', status: 'active' },
+        ],
+      },
+      {
+        blueprintId: 'prescription',
+        currentFields: { medication: 'Ceftriaxona 1 g IV' },
+      },
+    );
+    expect(result.warnings.some((w) => w.ruleId.includes('beta-lactam'))).toBe(true);
+    expect(
+      result.warnings.some(
+        (w) => w.ruleId.includes('duplicate') || w.ruleId.includes('allergy'),
+      ),
+    ).toBe(true);
+  });
+
   it('fusiona CDS y CDR para receta duplicada', () => {
     const result = evaluateDemoClinicalAlerts(
       {

@@ -60,8 +60,23 @@ describe.skipIf(!hasDb)('clinical API (integration)', () => {
       alerts: { source: string; severity: string }[];
     };
     expect(alertsJson.readOnly).toBe(true);
-    if (list.find((p) => p.id === patientId)?.demoCaseCode === 'DEMO-005') {
+    const demo005 = list.find((p) => p.demoCaseCode === 'DEMO-005');
+    if (demo005) {
       expect(alertsJson.alerts.some((a) => a.source === 'cds')).toBe(true);
+      const alertsRx = await app.inject({
+        method: 'GET',
+        url: `/api/patients/${demo005.id}/clinical-alerts?blueprintId=prescription&fields=${encodeURIComponent(
+          JSON.stringify({ medication: 'Ceftriaxona 1 g IV' }),
+        )}`,
+        headers: { cookie },
+      });
+      expect(alertsRx.statusCode).toBe(200);
+      const rxJson = alertsRx.json() as { alerts: { ruleId: string }[] };
+      expect(
+        rxJson.alerts.some(
+          (a) => a.ruleId.includes('beta-lactam') || a.ruleId.includes('allergy'),
+        ),
+      ).toBe(true);
     }
 
     const created = await app.inject({

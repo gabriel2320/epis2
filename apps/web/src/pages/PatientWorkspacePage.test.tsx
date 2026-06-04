@@ -8,7 +8,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
 import { PatientWorkspacePage } from './PatientWorkspacePage.js';
 
-const patientId = '00000000-0000-4000-8000-000000000005';
+const patientId = 'a0000001-0000-4000-8000-000000000005';
 
 const { fetchPatientDetail, fetchPatientClinicalAlerts, listDrafts } = vi.hoisted(() => ({
   fetchPatientDetail: vi.fn(),
@@ -46,7 +46,14 @@ describe('PatientWorkspacePage', () => {
         displayName: 'Paciente Demo — Penicilina',
         demoCaseCode: 'DEMO-005',
       },
-      clinicalContext: { summaryFields: {}, problems: [], observations: [] },
+      clinicalContext: {
+        summaryFields: {
+          activeMedications: 'Ceftriaxona 1 g IV (demo)',
+          clinicalAlerts: 'Alergia a penicilina (demo sintético)',
+        },
+        problems: [],
+        observations: [],
+      },
       notes: [],
     });
     listDrafts.mockResolvedValue({ drafts: [] });
@@ -81,5 +88,6 @@ describe('PatientWorkspacePage', () => {
       screen.getByText(copy.commandCenter.clinicalAlertsTitle),
     ).toBeInTheDocument();
     expect(fetchPatientClinicalAlerts).toHaveBeenCalledWith(patientId, expect.any(Object));
+    expect(screen.getByTestId('epis2-clinical-summary')).toBeInTheDocument();
   });
 });

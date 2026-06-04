@@ -18,6 +18,10 @@ export const HIGH_RISK_DRUG_PATTERNS = [
 
 const CRITICAL_ORDER_PATTERNS = ['vasoactiv', 'transfusion', 'heparina', 'insulina'];
 
+const BETA_LACTAM_ALLERGY = /penicilina|beta\s*-?\s*lact|amoxicilina/i;
+const BETA_LACTAM_DRUG =
+  /cef(triaxona|alexin|uroxima|epime|azidima)|amoxicilina|ampicilina|piperacilina|penicilina/i;
+
 function trimField(value: unknown): string {
   return typeof value === 'string' ? value.trim() : '';
 }
@@ -42,6 +46,8 @@ function matchesAllergy(drugName: string, allergies: string[]): string | null {
     if (!token) continue;
     if (drug.includes(token) || token.includes(drug)) return allergy;
   }
+  const betaAllergy = allergies.find((a) => BETA_LACTAM_ALLERGY.test(a));
+  if (betaAllergy && BETA_LACTAM_DRUG.test(drugName)) return betaAllergy;
   return null;
 }
 
@@ -67,23 +73,38 @@ function isBlockedMedicationStatus(status: string): boolean {
   return normalized === 'hold' || normalized === 'discontinued' || normalized === 'cancelled';
 }
 
-export function evaluateAllergyMedicationConflict(ctx: CdrContext): CdrCheckResult | null {
+function buildAllergyMedicationConflict(
+  ctx: CdrContext,
+  scope: 'mar' | 'prescription',
+): CdrCheckResult | null {
   const drugName = extractDrugName(ctx.formData);
   if (!drugName) return null;
-  if (!isMarAction(ctx.actionId)) return null;
+  if (scope === 'mar' && !isMarAction(ctx.actionId)) return null;
+  if (scope === 'prescription' && ctx.actionId !== 'prescription') return null;
 
   const allergy = matchesAllergy(drugName, ctx.allergies);
   if (!allergy) return null;
 
   return {
     ruleId: 'allergy_medication_conflict',
-    id: 'cdr.allergy_medication_conflict',
+    id:
+      scope === 'prescription'
+        ? 'cdr.prescription_allergy_conflict'
+        : 'cdr.allergy_medication_conflict',
     severity: 'block',
     message: `Conflicto alergia–medicamento: ${drugName} coincide con alergia (${allergy}).`,
     clinicalRationale:
       'Administrar o prescribir un fármaco relacionado con alergia documentada puede provocar reacción adversa grave.',
     field: 'medication',
   };
+}
+
+export function evaluateAllergyMedicationConflict(ctx: CdrContext): CdrCheckResult | null {
+  return buildAllergyMedicationConflict(ctx, 'mar');
+}
+
+export function evaluatePrescriptionAllergyConflict(ctx: CdrContext): CdrCheckResult | null {
+  return buildAllergyMedicationConflict(ctx, 'prescription');
 }
 
 export function evaluateCriticalLabWithoutAck(ctx: CdrContext): CdrCheckResult | null {
@@ -182,6 +203,7 @@ export function evaluateHighRiskMedWithoutDoubleCheck(ctx: CdrContext): CdrCheck
 export function evaluateClinicalDecisionRules(ctx: CdrContext): CdrCheckResult[] {
   const checks = [
     evaluateAllergyMedicationConflict(ctx),
+    evaluatePrescriptionAllergyConflict(ctx),
     evaluateCriticalLabWithoutAck(ctx),
     evaluateDischargeWithOpenCriticalOrders(ctx),
     evaluateDuplicateMedicationOrder(ctx),

@@ -68,6 +68,21 @@ describe.skipIf(!hasDb)('Golden Clinical Journey — API', () => {
     expect(resolved.routePath).toBe('/espacio/evolucion');
     expect(resolved.intent).toBe('create_evolution_draft');
 
+    const demo005 = DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-005');
+    if (demo005) {
+      const alerts005 = await app.inject({
+        method: 'GET',
+        url: `/api/patients/${demo005.patientId}/clinical-alerts?blueprintId=prescription&fields=${encodeURIComponent(
+          JSON.stringify({ medication: 'Ceftriaxona 1 g IV' }),
+        )}`,
+        headers: { cookie },
+      });
+      expect(alerts005.statusCode).toBe(200);
+      const aJson = alerts005.json() as { readOnly: boolean; alerts: unknown[] };
+      expect(aJson.readOnly).toBe(true);
+      expect(aJson.alerts.length).toBeGreaterThan(0);
+    }
+
     const journeyTitle = `Journey dorado API ${Date.now()}`;
     const draftRes = await app.inject({
       method: 'POST',

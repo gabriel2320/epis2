@@ -39,6 +39,7 @@ export {
 export { evaluateDemoClinicalAlerts } from './clinicalDecisionRules/evaluate.js';
 export {
   evaluateClinicalDecisionRules,
+  evaluatePrescriptionAllergyConflict,
   evaluateDuplicateMedicationOrder,
   HIGH_RISK_DRUG_PATTERNS,
 } from './clinicalDecisionRules/rules.js';

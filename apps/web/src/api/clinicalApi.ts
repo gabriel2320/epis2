@@ -44,15 +44,53 @@ export const INTENT_TO_ASSIST_BLUEPRINT: Record<string, string> = {
   request_laboratory: 'lab_request',
 };
 
+export const BLUEPRINT_BY_ROUTE: Record<string, string> = {
+  '/espacio/evolucion': 'evolution_note',
+  '/espacio/epicrisis': 'discharge_summary',
+  '/espacio/receta': 'prescription',
+  '/espacio/laboratorio': 'lab_request',
+};
+
+export const DRAFT_TYPE_TO_BLUEPRINT: Record<string, string> = {
+  evolution_note: 'evolution_note',
+  discharge_summary: 'discharge_summary',
+  prescription: 'prescription',
+  lab_request: 'lab_request',
+};
+
+const SUMMARY_CONTEXT_KEYS = [
+  'activeProblems',
+  'recentEvents',
+  'relevantLabs',
+  'activeMedications',
+  'pendingItems',
+  'clinicalAlerts',
+] as const;
+
+/** Subconjunto de resumen demo para contexto de asistencia IA. */
+export function pickAssistContextFromSummary(
+  summaryFields: Record<string, string>,
+): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const key of SUMMARY_CONTEXT_KEYS) {
+    const value = summaryFields[key]?.trim();
+    if (value) out[key] = value;
+  }
+  return out;
+}
+
 export function fetchPatientClinicalAlerts(
   patientId: string,
-  options?: { blueprintId?: string },
+  options?: { blueprintId?: string; currentFields?: Record<string, string> },
 ) {
-  const q = options?.blueprintId
-    ? `?blueprintId=${encodeURIComponent(options.blueprintId)}`
-    : '';
+  const params = new URLSearchParams();
+  if (options?.blueprintId) params.set('blueprintId', options.blueprintId);
+  if (options?.currentFields && Object.keys(options.currentFields).length > 0) {
+    params.set('fields', JSON.stringify(options.currentFields));
+  }
+  const q = params.toString();
   return apiFetch<PatientClinicalAlertsResponse>(
-    `/api/patients/${patientId}/clinical-alerts${q}`,
+    `/api/patients/${patientId}/clinical-alerts${q ? `?${q}` : ''}`,
   );
 }
 

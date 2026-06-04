@@ -23,11 +23,14 @@ import { apiFetch } from '../api/client.js';
 import {
   fetchPatientDetail,
   listPatients,
+  pickAssistContextFromSummary,
   type PatientListRow,
 } from '../api/clinicalApi.js';
+import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
 import { ClinicalFormRenderer } from '../components/ClinicalFormRenderer.js';
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
+import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 
 export type GeneratedClinicalFormPageProps = {
   blueprint: ClinicalFormBlueprint;
@@ -53,7 +56,27 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const [patients, setPatients] = useState<PatientListRow[]>([]);
   const [loadError, setLoadError] = useState<string | undefined>();
   const [isSuggesting, setIsSuggesting] = useState(false);
+  const [assistContext, setAssistContext] = useState<Record<string, string>>({});
   const canUseAiAssist = blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES;
+
+  const draftFieldValues = useMemo(() => {
+    if (blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES) {
+      return values;
+    }
+    return undefined;
+  }, [blueprint.blueprintId, values]);
+
+  const { alerts: clinicalAlerts, loading: alertsLoading } = usePatientClinicalAlerts({
+    patientId,
+    blueprintId:
+      blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES
+        ? blueprint.blueprintId
+        : undefined,
+    currentFields: draftFieldValues,
+    contextLabel: blueprint.label,
+    debounceMs: 450,
+    enabled: Boolean(patientId && blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES),
+  });
 
   const role = session?.user.role as ClinicalRole | undefined;
   const needsDraftWrite =
@@ -89,6 +112,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     void fetchPatientDetail(patientId)
       .then((res) => {
         pinPatient(res.patient);
+        setAssistContext(pickAssistContextFromSummary(res.clinicalContext.summaryFields));
         if (blueprint.blueprintId === 'patient_summary') {
           setValues((prev) => ({ ...prev, ...res.clinicalContext.summaryFields }));
         }
@@ -116,7 +140,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       const assistBody: Parameters<typeof requestDraftAssist>[0] = {
         blueprintId: blueprint.blueprintId,
         currentFields: values,
-        context: { demo: copy.demoBadge },
+        context: { demo: copy.demoBadge, ...assistContext },
       };
       if (patientId !== undefined) assistBody.patientId = patientId;
       const result = await requestDraftAssist(assistBody);
@@ -239,6 +263,14 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
             </>
           ) : null}
         </Stack>
+
+        {patientId && blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES ? (
+          <ClinicalAlertsPanel
+            alerts={clinicalAlerts}
+            loading={alertsLoading}
+            hintBlueprintLabel={blueprint.label}
+          />
+        ) : null}
 
         {blueprint.blueprintId === 'patient_search' ? (
           <Stack spacing={2}>

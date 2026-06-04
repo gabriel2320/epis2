@@ -13,13 +13,16 @@ import { Link, useParams } from '@tanstack/react-router';
 import { useCallback, useEffect, useState } from 'react';
 import {
   approveDraft,
+  DRAFT_TYPE_TO_BLUEPRINT,
   fetchDraftDetail,
   updateDraft,
   type ClinicalDraftDetail,
   type DraftVersionRow,
 } from '../api/clinicalApi.js';
+import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
 import { DraftStatusChip } from '../components/DraftStatusChip.js';
 import { useAuth } from '../auth/AuthContext.js';
+import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 
 export function DraftReviewPage() {
   const { draftId } = useParams({ strict: false }) as { draftId: string };
@@ -36,6 +39,22 @@ export function DraftReviewPage() {
     roleHasPermission(role, 'draft.write') &&
     draft !== null &&
     !['approved', 'cancelled'].includes(draft.status);
+
+  const draftBodyFields = draft
+    ? Object.fromEntries(
+        Object.entries(draft.body).filter(
+          (entry): entry is [string, string] => typeof entry[1] === 'string',
+        ),
+      )
+    : undefined;
+
+  const { alerts: clinicalAlerts, loading: alertsLoading } = usePatientClinicalAlerts({
+    patientId: draft?.patientId,
+    blueprintId: draft ? DRAFT_TYPE_TO_BLUEPRINT[draft.draftType] : undefined,
+    currentFields: draftBodyFields,
+    contextLabel: draft?.title,
+    enabled: Boolean(draft?.patientId),
+  });
 
   const load = useCallback(async () => {
     setError(undefined);
@@ -102,6 +121,12 @@ export function DraftReviewPage() {
         <Typography variant="caption" color="text.secondary">
           {copy.demoBadge} · {draft.draftType}
         </Typography>
+
+        <ClinicalAlertsPanel
+          alerts={clinicalAlerts}
+          loading={alertsLoading}
+          hintBlueprintLabel={draft.title}
+        />
 
         <Box>
           <Typography variant="subtitle2" gutterBottom>
