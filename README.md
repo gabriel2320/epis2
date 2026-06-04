@@ -11,7 +11,8 @@ Aplicación clínica **command-first**, independiente del proyecto EPIS (legacy)
 | **EPIS2-02** | Completada — MUI, Centro de Comando `/comando` |
 | **EPIS2-03** | Completada — auth API, RBAC, sesión cookie, auditoría login |
 | **EPIS2-04** | Completada — núcleo PostgreSQL, borradores, aprobaciones |
-| EPIS2-05+ | No iniciadas |
+| **EPIS2-05** | Completada — Command Registry, router, API resolve |
+| EPIS2-06+ | No iniciadas |
 
 ## Documentación esencial
 
@@ -45,6 +46,6 @@ npm run dev:ai         # puerto 3002
 
 ## Próximo paso
 
-Ejecutar **EPIS2-05 — Command Registry**.
+Ejecutar **EPIS2-06 — Formularios generados**.
 
 Usuarios demo: `docs/auth/DEMO_USERS.md`. Migraciones: `npm run db:migrate`.

@@ -5,10 +5,11 @@ import {
   redirect,
   Outlet,
 } from '@tanstack/react-router';
+import { EPIS2_COMMAND_DEFINITIONS } from '@epis2/command-registry';
 import { loadSessionForRouter } from '../auth/AuthContext.js';
 import { ClinicalShellLayout } from '../layouts/ClinicalShellLayout.js';
 import { CommandCenterPage } from '../pages/CommandCenterPage.js';
-import { ClinicalPlaceholderPage } from '../pages/ClinicalPlaceholderPage.js';
+import { ClinicalWorkspacePage } from '../pages/ClinicalWorkspacePage.js';
 import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
 
@@ -50,11 +51,15 @@ const clinicalLayoutRoute = createRoute({
   component: ClinicalShellLayout,
 });
 
-const clinicalPlaceholderRoute = createRoute({
-  getParentRoute: () => clinicalLayoutRoute,
-  path: '/espacio',
-  component: ClinicalPlaceholderPage,
-});
+const clinicalWorkspaceRoutes = EPIS2_COMMAND_DEFINITIONS.map((def) =>
+  createRoute({
+    getParentRoute: () => clinicalLayoutRoute,
+    path: def.routePath,
+    component: () => (
+      <ClinicalWorkspacePage title={def.labelEs} intentLabel={def.labelEs} />
+    ),
+  }),
+);
 
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -72,7 +77,7 @@ export const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
   commandCenterRoute,
-  clinicalLayoutRoute.addChildren([clinicalPlaceholderRoute]),
+  clinicalLayoutRoute.addChildren(clinicalWorkspaceRoutes),
 ]);
 
 export const router = createRouter({

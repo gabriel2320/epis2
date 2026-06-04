@@ -1,19 +1,14 @@
+import { getMvpCommandChips } from '@epis2/command-registry';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
-
-const SUGGESTIONS = [
-  'buscar paciente',
-  'resume al paciente',
-  'evoluciona al paciente',
-  'prepara receta',
-  'solicita laboratorio',
-] as const;
 
 export type CommandSuggestionChipsProps = {
   onSelect: (command: string) => void;
 };
 
 export function CommandSuggestionChips({ onSelect }: CommandSuggestionChipsProps) {
+  const chips = getMvpCommandChips();
+
   return (
     <Stack
       direction="row"
@@ -22,13 +17,13 @@ export function CommandSuggestionChips({ onSelect }: CommandSuggestionChipsProps
       justifyContent="center"
       data-testid="epis2-command-chips"
     >
-      {SUGGESTIONS.map((cmd) => (
+      {chips.map((chip) => (
         <Chip
-          key={cmd}
-          label={cmd}
+          key={chip.id}
+          label={chip.sampleEs}
           variant="outlined"
           clickable
-          onClick={() => onSelect(cmd)}
+          onClick={() => onSelect(chip.sampleEs)}
           sx={{ borderRadius: 999 }}
         />
       ))}

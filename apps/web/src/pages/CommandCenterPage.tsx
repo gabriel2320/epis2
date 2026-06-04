@@ -1,3 +1,4 @@
+import type { CommandResolveResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
@@ -6,26 +7,67 @@ import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { useState } from 'react';
+import { useNavigate } from '@tanstack/react-router';
+import { useCallback, useState } from 'react';
+import { ApiError } from '../api/client.js';
+import { resolveCommand as resolveCommandApi } from '../api/commandApi.js';
 import { CommandSuggestionChips } from '../components/CommandSuggestionChips.js';
 import { PowerBar } from '../components/PowerBar.js';
 import { useAuth } from '../auth/AuthContext.js';
 
 export function CommandCenterPage() {
   const { session, logout } = useAuth();
+  const navigate = useNavigate();
   const [query, setQuery] = useState('');
-  const [lastCommand, setLastCommand] = useState<string | null>(null);
   const [error, setError] = useState<string | undefined>();
+  const [isResolving, setIsResolving] = useState(false);
+  const [lastResult, setLastResult] = useState<CommandResolveResponse | null>(null);
 
-  const submit = () => {
+  const submit = useCallback(async () => {
     const trimmed = query.trim();
     if (!trimmed) {
       setError(copy.commandCenter.emptyCommand);
+      setLastResult(null);
       return;
     }
     setError(undefined);
-    setLastCommand(trimmed);
-  };
+    setIsResolving(true);
+    setLastResult(null);
+    try {
+      const result = await resolveCommandApi({ text: trimmed });
+      setLastResult(result);
+      if (result.status === 'resolved') {
+        void navigate({
+          to: result.routePath,
+          search: {},
+        });
+        return;
+      }
+      if (result.status === 'needs_patient') {
+        setError(copy.commandCenter.needsPatient);
+        return;
+      }
+      if (result.status === 'needs_clarification') {
+        setError(result.message || copy.commandCenter.needsClarification);
+        return;
+      }
+      if (result.status === 'forbidden') {
+        setError(result.message || copy.commandCenter.forbidden);
+        return;
+      }
+      if (result.status === 'empty') {
+        setError(result.message);
+      }
+    } catch (e) {
+      if (e instanceof ApiError && e.status === 403) {
+        setError(e.message || copy.commandCenter.forbidden);
+      } else {
+        setError(copy.errors.genericMessage);
+      }
+    } finally {
+      setIsResolving(false);
+    }
+  }, [query, navigate]);
 
   return (
     <Box
@@ -73,10 +115,10 @@ export function CommandCenterPage() {
           <PowerBar
             label={copy.commandCenter.powerBarLabel}
             placeholder={copy.commandCenter.powerBarPlaceholder}
-            submitLabel={copy.commandCenter.submit}
+            submitLabel={isResolving ? copy.commandCenter.resolving : copy.commandCenter.submit}
             value={query}
             onChange={setQuery}
-            onSubmit={submit}
+            onSubmit={() => void submit()}
             error={error}
           />
         </Box>
@@ -88,17 +130,30 @@ export function CommandCenterPage() {
           }}
         />
 
-        {lastCommand ? (
+        {lastResult && lastResult.status === 'resolved' ? (
           <Paper variant="outlined" sx={{ p: 2, width: '100%' }}>
             <Typography variant="subtitle2" gutterBottom>
               {copy.commandCenter.previewTitle}
             </Typography>
-            <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
-              {lastCommand}
+            <Typography variant="body2">
+              {lastResult.labelEs} → {lastResult.routePath}
             </Typography>
-            <Alert severity="info" sx={{ mt: 2 }}>
-              {copy.commandCenter.previewPending}
+            <Alert severity="success" sx={{ mt: 2 }}>
+              {copy.commandCenter.resolvedNavigate}
             </Alert>
+          </Paper>
+        ) : null}
+
+        {lastResult?.status === 'needs_clarification' && lastResult.candidates.length > 0 ? (
+          <Paper variant="outlined" sx={{ p: 2, width: '100%' }}>
+            <Typography variant="subtitle2" gutterBottom>
+              Opciones posibles
+            </Typography>
+            <Stack direction="row" flexWrap="wrap" gap={1}>
+              {lastResult.candidates.map((c) => (
+                <Chip key={c.intent} label={c.labelEs} size="small" variant="outlined" />
+              ))}
+            </Stack>
           </Paper>
         ) : null}
       </Stack>

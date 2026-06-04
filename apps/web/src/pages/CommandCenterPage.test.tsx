@@ -8,6 +8,14 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { CommandCenterPage } from './CommandCenterPage.js';
 
+vi.mock('@tanstack/react-router', () => ({
+  useNavigate: () => vi.fn(),
+}));
+
+vi.mock('../api/commandApi.js', () => ({
+  resolveCommand: vi.fn(),
+}));
+
 vi.mock('../auth/AuthContext.js', () => ({
   useAuth: () => ({
     session: {

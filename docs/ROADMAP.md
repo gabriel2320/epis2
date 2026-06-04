@@ -48,13 +48,13 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 ---
 
-## EPIS2-05 — Command Registry y router
+## EPIS2-05 — Command Registry y router ✓
 
 **Entregables:** normalización → intent → slots → validación → permiso → ruta.
 
 **Comandos:** buscar, resumir, evolucionar, epicrisis, receta, laboratorio.
 
-**Gate:** Suite ≥100 comandos; ambiguos bloqueados; no autorizados bloqueados.
+**Gate:** Suite ≥100 comandos; ambiguos bloqueados; no autorizados bloqueados. — `reports/epis2-05-command-registry.md`
 
 ---
 

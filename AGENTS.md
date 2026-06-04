@@ -29,8 +29,8 @@ Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.
 ## Fases
 
 ```text
-EPIS2-00 ✓ … EPIS2-04 ✓
-EPIS2-05     (command registry)
+EPIS2-00 ✓ … EPIS2-05 ✓
+EPIS2-06     (formularios generados)
 ```
 
 ## Memoria legacy
