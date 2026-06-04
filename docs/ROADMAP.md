@@ -90,11 +90,11 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 ---
 
-## EPIS2-10 — Interoperabilidad FHIR
+## EPIS2-10 — Interoperabilidad FHIR ✓
 
 **Entregables:** export Patient, Encounter, DocumentReference, ServiceRequest.
 
-**Gate:** FHIR no es modelo de UI; import diferido.
+**Gate:** FHIR no es modelo de UI; import diferido. — `reports/epis2-10-fhir-export.md`
 
 ---
 

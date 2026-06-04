@@ -16,7 +16,8 @@ Aplicación clínica **command-first**, independiente del proyecto EPIS (legacy)
 | **EPIS2-07** | Completada — IA local Ollama, proxy API, `ai_runs` |
 | **EPIS2-08** | Completada — borradores, versiones, aprobación humana UI |
 | **EPIS2-09** | Completada — 5 casos demo sintéticos, badge DEMO |
-| EPIS2-10+ | No iniciadas |
+| **EPIS2-10** | Completada — export FHIR R4 (frontera API) |
+| EPIS2-11 | Piloto demo humano |
 
 ## Documentación esencial
 
@@ -50,7 +51,7 @@ npm run dev:ai         # puerto 3002
 
 ## Próximo paso
 
-Ejecutar **EPIS2-10 — Interoperabilidad FHIR** (export mínimo).
+Ejecutar **EPIS2-11 — QA humano y piloto demo** (journey dorado).
 
 Servicio IA: `npm run dev:ai` (opcional; la app funciona sin Ollama).
 

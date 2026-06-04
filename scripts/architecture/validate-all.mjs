@@ -7,6 +7,7 @@ import { validate as spanishCopy } from './spanish-visible-copy.mjs';
 import { validate as explicitPerms } from './explicit-permissions.mjs';
 import { validate as aiBoundary } from './ai-write-boundary.mjs';
 import { validate as humanApproval } from './human-approval-required.mjs';
+import { validate as fhirBoundary } from './fhir-export-boundary.mjs';
 import { validate as invariants } from './main-product-invariants.mjs';
 
 const VALIDATORS = [
@@ -19,6 +20,7 @@ const VALIDATORS = [
   ['explicit-permissions', explicitPerms],
   ['ai-write-boundary', aiBoundary],
   ['human-approval-required', humanApproval],
+  ['fhir-export-boundary', fhirBoundary],
 ];
 
 async function main() {

@@ -12,6 +12,7 @@ export const ROLE_PERMISSIONS: Record<ClinicalRole, readonly Permission[]> = {
     'draft.write',
     'draft.read',
     'draft.approve',
+    'fhir.export',
   ],
   nurse: [
     'session.read',
@@ -20,6 +21,7 @@ export const ROLE_PERMISSIONS: Record<ClinicalRole, readonly Permission[]> = {
     'command.execute',
     'draft.write',
     'draft.read',
+    'fhir.export',
   ],
   pharmacist: [
     'session.read',
@@ -28,6 +30,7 @@ export const ROLE_PERMISSIONS: Record<ClinicalRole, readonly Permission[]> = {
     'draft.write',
     'draft.read',
     'draft.approve',
+    'fhir.export',
   ],
   admin: [
     'session.read',
@@ -37,8 +40,9 @@ export const ROLE_PERMISSIONS: Record<ClinicalRole, readonly Permission[]> = {
     'draft.read',
     'audit.read',
     'admin.users.read',
+    'fhir.export',
   ],
-  auditor: ['session.read', 'patient.read', 'draft.read', 'audit.read'],
+  auditor: ['session.read', 'patient.read', 'draft.read', 'audit.read', 'fhir.export'],
 };
 
 export function permissionsForRole(role: ClinicalRole): readonly Permission[] {

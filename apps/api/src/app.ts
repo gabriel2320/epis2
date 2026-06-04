@@ -6,6 +6,7 @@ import { registerAuthRoutes } from './auth/routes.js';
 import { registerAiRoutes } from './ai/routes.js';
 import { registerCommandRoutes } from './commands/routes.js';
 import { registerClinicalRoutes } from './clinical/routes.js';
+import { registerFhirRoutes } from './fhir/routes.js';
 import type { AppConfig } from './config.js';
 import { getDatabase, pingDatabase } from './db/client.js';
 
@@ -62,7 +63,7 @@ export async function buildApp(config: AppConfig) {
   app.get('/api/meta', async () => ({
     product: 'EPIS2',
     phase: EPIS2_PHASE,
-    message: 'Borradores, versionado y aprobación humana — EPIS2-08',
+    message: 'Frontera FHIR export — EPIS2-10 (import diferido)',
     database: Boolean(config.DATABASE_URL && db),
   }));
 
@@ -70,6 +71,7 @@ export async function buildApp(config: AppConfig) {
   await registerCommandRoutes(app, config);
   await registerAiRoutes(app, config, db);
   await registerClinicalRoutes(app, config, db);
+  await registerFhirRoutes(app, config, db);
 
   return app;
 }

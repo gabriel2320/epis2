@@ -12,6 +12,7 @@ export const PERMISSIONS = [
   'draft.approve',
   'audit.read',
   'admin.users.read',
+  'fhir.export',
 ] as const;
 
 export type Permission = (typeof PERMISSIONS)[number];

@@ -18,6 +18,10 @@ describe('RBAC', () => {
     expect(roleHasPermission('nurse', 'draft.approve')).toBe(false);
   });
 
+  it('auditor puede exportar FHIR', () => {
+    expect(roleHasPermission('auditor', 'fhir.export')).toBe(true);
+  });
+
   it('cada rol tiene al menos session.read', () => {
     for (const role of Object.keys(ROLE_PERMISSIONS)) {
       expect(roleHasPermission(role as keyof typeof ROLE_PERMISSIONS, 'session.read')).toBe(
