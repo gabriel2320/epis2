@@ -15,6 +15,8 @@ import { GeneratedClinicalFormPage } from '../pages/GeneratedClinicalFormPage.js
 import { PatientWorkspacePage } from '../pages/PatientWorkspacePage.js';
 import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
+import { isUiCatalogEnabled } from '../dev/uiCatalogEnv.js';
+import { UiCatalogPage } from '../pages/dev/UiCatalogPage.js';
 
 async function requireSession() {
   const session = await loadSessionForRouter();
@@ -184,9 +186,23 @@ const indexRoute = createRoute({
   },
 });
 
+/** Catálogo interno MUI (solo dev o VITE_ENABLE_UI_CATALOG=true). */
+const uiCatalogRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/dev/ui-catalog',
+  component: UiCatalogPage,
+  beforeLoad: async () => {
+    if (!isUiCatalogEnabled()) {
+      throw redirect({ to: '/comando' });
+    }
+    await requireSession();
+  },
+});
+
 export const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
+  uiCatalogRoute,
   commandCenterRoute,
   dashboardModeRoute,
   clinicalLayoutRoute.addChildren([
