@@ -1,3 +1,4 @@
+import type { ClinicalAlert } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
@@ -16,12 +17,21 @@ import { useClinicalNavigate, type ClinicalFormRoutePath } from '../routes/clini
 import { useCallback, useEffect, useState } from 'react';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import {
+  fetchPatientClinicalAlerts,
   fetchPatientDetail,
   listDrafts,
   listPatients,
   type PatientDetailResponse,
   type PatientListRow,
 } from '../api/clinicalApi.js';
+import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
+
+const ROUTE_TO_BLUEPRINT: Partial<Record<ClinicalFormRoutePath, string>> = {
+  '/espacio/evolucion': 'evolution_note',
+  '/espacio/epicrisis': 'discharge_summary',
+  '/espacio/receta': 'prescription',
+  '/espacio/laboratorio': 'lab_request',
+};
 
 const QUICK_ROUTES: { path: ClinicalFormRoutePath; label: string }[] = [
   { path: '/espacio/resumen', label: 'Resumen clínico' },
@@ -39,21 +49,44 @@ export function PatientWorkspacePage() {
   const [drafts, setDrafts] = useState<Awaited<ReturnType<typeof listDrafts>>['drafts']>([]);
   const [patients, setPatients] = useState<PatientListRow[]>([]);
   const [error, setError] = useState<string | undefined>();
+  const [clinicalAlerts, setClinicalAlerts] = useState<ClinicalAlert[]>([]);
+  const [alertsLoading, setAlertsLoading] = useState(false);
+  const [alertContextLabel, setAlertContextLabel] = useState<string | undefined>();
 
   const patientId = search.patientId ?? active?.id;
+
+  const loadClinicalAlerts = useCallback(
+    async (id: string, blueprintId?: string, labelEs?: string) => {
+      setAlertsLoading(true);
+      try {
+        const res = await fetchPatientClinicalAlerts(id, { blueprintId });
+        setClinicalAlerts(res.alerts);
+        setAlertContextLabel(labelEs);
+      } catch {
+        setClinicalAlerts([]);
+        setAlertContextLabel(undefined);
+      } finally {
+        setAlertsLoading(false);
+      }
+    },
+    [],
+  );
 
   const loadDetail = useCallback(async (id: string) => {
     setError(undefined);
     try {
-      const res = await fetchPatientDetail(id);
+      const [res, draftRes] = await Promise.all([
+        fetchPatientDetail(id),
+        listDrafts({ patientId: id }),
+      ]);
       setDetail(res);
       setPatient(res.patient);
-      const draftRes = await listDrafts({ patientId: id });
       setDrafts(draftRes.drafts);
+      void loadClinicalAlerts(id);
     } catch {
       setError(copy.errors.genericMessage);
     }
-  }, [setPatient]);
+  }, [setPatient, loadClinicalAlerts]);
 
   useEffect(() => {
     if (patientId) {
@@ -129,6 +162,12 @@ export function PatientWorkspacePage() {
           </Typography>
         </Stack>
 
+        <ClinicalAlertsPanel
+          alerts={clinicalAlerts}
+          loading={alertsLoading}
+          hintBlueprintLabel={alertContextLabel}
+        />
+
         <Box>
           <Typography variant="subtitle2" gutterBottom>
             {copy.activePatient.quickActions}
@@ -139,12 +178,16 @@ export function PatientWorkspacePage() {
                 key={action.path}
                 variant="outlined"
                 size="small"
-                onClick={() =>
+                onClick={() => {
+                  const blueprintId = ROUTE_TO_BLUEPRINT[action.path];
+                  if (patientId) {
+                    void loadClinicalAlerts(patientId, blueprintId, action.label);
+                  }
                   navigate({
                     to: action.path,
                     search: { patientId },
-                  })
-                }
+                  });
+                }}
               >
                 {action.label}
               </Button>
