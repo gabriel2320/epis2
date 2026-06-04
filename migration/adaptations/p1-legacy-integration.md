@@ -14,6 +14,10 @@
 |-----------|---------|
 | `epione-mau-resolver-reference` | `packages/command-registry/src/rank.ts` |
 | `epis-command-synonyms-es-cl` (tabla + disambiguation) | `epis-intent-map.ts`, `epis-disambiguation.ts`, aliases |
+| `epione-clinical-decision-rules` | `packages/clinical-domain/src/clinicalDecisionRules/` (advisory) |
+| `epis-ai-prompts` | `services/local-ai/src/clinicalPromptPolicy.ts`, `draftPromptCatalog.ts` |
+| `epidos-fhir-golden-bundles` | `packages/fhir-export/src/validateExportBundle.ts` |
+| `epidos-ai-gateway` | `services/local-ai/src/assistSchemas.ts`, `gatewayCapabilities.ts` |
 
 ## Pendiente
 

@@ -138,7 +138,26 @@
       "legacyDependencies": ["backend clinical-safety engine"],
       "requiredAdaptations": ["Fusionar con epis-clinical-safety-rules"],
       "requiredTests": ["Nuevos casos CDR"],
-      "status": "REVIEW_REQUIRED"
+      "status": "ADAPTED",
+      "quarantinePath": "migration/candidates/epione/epione-clinical-decision-rules",
+      "integratedPath": "packages/clinical-domain/src/clinicalDecisionRules/",
+      "adaptationNotes": "migration/adaptations/epione-cdr-advisory-merge.md"
+    },
+    {
+      "id": "epis-ai-prompts",
+      "sourceProject": "EPIS",
+      "sourcePath": "packages/epis-ai-prompts/src/",
+      "sourceCommit": "a3b0ffe1caa8b141b9f08e4824c71ec214090cde",
+      "classification": "MIGRATE_WITH_ADAPTATION",
+      "targetArea": "services/local-ai",
+      "reason": "Política de prompts clínica y tareas por blueprint sin RAG",
+      "legacyDependencies": ["OpenMRS context en catalog completo"],
+      "requiredAdaptations": ["Solo 4 blueprints MVP", "JSON assist EPIS2"],
+      "requiredTests": ["prompt.test.ts", "assist.test.ts"],
+      "status": "ADAPTED",
+      "quarantinePath": "migration/candidates/epis/epis-ai-prompts",
+      "integratedPath": "services/local-ai/src/clinicalPromptPolicy.ts",
+      "adaptationNotes": "migration/adaptations/epis-ai-prompts-local-ai.md"
     },
     {
       "id": "epis-openmrs-distro",

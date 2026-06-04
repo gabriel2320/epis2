@@ -73,7 +73,17 @@ export async function registerAiRoutes(
       if (body.status === 'success') {
         let safetyNotes = [...body.safetyNotes];
         if (db && parsed.data.patientId) {
-          const cdsNotes = await getDemoSafetyNotesForPatient(db, parsed.data.patientId);
+          const safetyOpts: Parameters<typeof getDemoSafetyNotesForPatient>[2] = {
+            blueprintId: parsed.data.blueprintId,
+          };
+          if (parsed.data.currentFields !== undefined) {
+            safetyOpts.currentFields = parsed.data.currentFields;
+          }
+          const cdsNotes = await getDemoSafetyNotesForPatient(
+            db,
+            parsed.data.patientId,
+            safetyOpts,
+          );
           safetyNotes = [...new Set([...cdsNotes, ...safetyNotes])];
         }
 

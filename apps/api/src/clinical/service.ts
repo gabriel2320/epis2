@@ -2,7 +2,7 @@ import {
   assertPatchDraftStatus,
   buildClinicalSafetyInputFromSummary,
   CHILE_RUT_IDENTIFIER_SYSTEM,
-  evaluateClinicalSafety,
+  evaluateDemoClinicalAlerts,
   formatSafetyWarningsForAssist,
   normalizeRut,
 } from '@epis2/clinical-domain';
@@ -149,7 +149,14 @@ export async function searchPatients(db: Database, query?: string) {
 }
 
 /** Alertas CDS demo (read-only) para asistencia IA y UI. */
-export async function getDemoSafetyNotesForPatient(db: Database, patientId: string): Promise<string[]> {
+export async function getDemoSafetyNotesForPatient(
+  db: Database,
+  patientId: string,
+  options?: {
+    blueprintId?: string;
+    currentFields?: Record<string, string>;
+  },
+): Promise<string[]> {
   const patient = await getPatientById(db, patientId);
   if (!patient) return [];
   const ctx = await getPatientClinicalContext(db, patientId);
@@ -158,7 +165,10 @@ export async function getDemoSafetyNotesForPatient(db: Database, patientId: stri
   };
   if (patient.sex) safetyOpts.sex = patient.sex;
   const input = buildClinicalSafetyInputFromSummary(ctx.summaryFields, safetyOpts);
-  const evaluated = evaluateClinicalSafety(input);
+  const alertOpts: Parameters<typeof evaluateDemoClinicalAlerts>[1] = {};
+  if (options?.blueprintId !== undefined) alertOpts.blueprintId = options.blueprintId;
+  if (options?.currentFields !== undefined) alertOpts.currentFields = options.currentFields;
+  const evaluated = evaluateDemoClinicalAlerts(input, alertOpts);
   if (!evaluated.warnings.length) return [];
   const block = formatSafetyWarningsForAssist(evaluated);
   return block.split('\n').filter((line) => line.startsWith('- '));

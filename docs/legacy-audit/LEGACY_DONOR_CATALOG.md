@@ -15,7 +15,7 @@ Estado por defecto en manifiesto: `REVIEW_REQUIRED`. Extracciones: ver `legacy-i
 | epis-command-registry-concept | commandRegistry.ts | REFERENCE_ONLY | REVIEW | REVIEW |
 | epis-chile-package | @epis/chile RUT | REWRITE_FROM_CONCEPT | REVIEW | GO (usar cuarentena EPIDOS rut) |
 | epis-demo-patients | Pacientes sintéticos | REWRITE_FROM_CONCEPT | REVIEW | REVIEW |
-| epis-ai-prompts | Plantillas IA | MIGRATE_WITH_ADAPTATION | REVIEW | REVIEW |
+| epis-ai-prompts | Plantillas IA | MIGRATE_WITH_ADAPTATION | ADAPTED | local-ai prompts |
 | epis-openmrs-distro | openmrs/ | REJECT | REJECTED | REJECT |
 | epis-carbon-shell | Carbon ESM | REJECT | REJECTED | REJECT |
 | epis-openmrs-write-adapter | Writeback | REJECT | REJECTED | REJECT |
@@ -39,7 +39,7 @@ Estado por defecto en manifiesto: `REVIEW_REQUIRED`. Extracciones: ver `legacy-i
 | ID | Elemento | Clasificación | Estado | GO/REVIEW/REJECT |
 |----|----------|---------------|--------|------------------|
 | epione-mau-resolver-reference | MAU resolver | REWRITE_FROM_CONCEPT | ADAPTED | rank.ts |
-| epione-clinical-decision-rules | CDR | MIGRATE_WITH_ADAPTATION | REVIEW | REVIEW |
+| epione-clinical-decision-rules | CDR | MIGRATE_WITH_ADAPTATION | ADAPTED | clinicalDecisionRules |
 | epione-clinical-actions-executor | Executors | REWRITE_FROM_CONCEPT | REVIEW | REVIEW |
 | epione-dashboard-home | Inicio/jornada | REJECT | REJECTED | REJECT |
 | epione-localstorage-sot | localStorage | REJECT | REJECTED | REJECT |
