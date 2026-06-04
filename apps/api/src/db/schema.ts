@@ -30,6 +30,19 @@ export const patients = pgTable('patients', {
     .references(() => appUsers.id),
 });
 
+export const patientIdentifiers = pgTable('patient_identifiers', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  patientId: uuid('patient_id')
+    .notNull()
+    .references(() => patients.id, { onDelete: 'cascade' }),
+  system: text('system').notNull(),
+  value: text('value').notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
 export const encounters = pgTable('encounters', {
   id: uuid('id').primaryKey().defaultRandom(),
   patientId: uuid('patient_id')
@@ -38,6 +51,36 @@ export const encounters = pgTable('encounters', {
   status: text('status').notNull().default('open'),
   startedAt: timestamp('started_at', { withTimezone: true }).notNull().defaultNow(),
   endedAt: timestamp('ended_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
+export const problems = pgTable('problems', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  patientId: uuid('patient_id')
+    .notNull()
+    .references(() => patients.id, { onDelete: 'cascade' }),
+  encounterId: uuid('encounter_id').references(() => encounters.id, { onDelete: 'set null' }),
+  description: text('description').notNull(),
+  status: text('status').notNull().default('active'),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
+export const observations = pgTable('observations', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  patientId: uuid('patient_id')
+    .notNull()
+    .references(() => patients.id, { onDelete: 'cascade' }),
+  encounterId: uuid('encounter_id').references(() => encounters.id, { onDelete: 'set null' }),
+  code: text('code'),
+  label: text('label').notNull(),
+  valueText: text('value_text').notNull(),
+  observedAt: timestamp('observed_at', { withTimezone: true }).notNull().defaultNow(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   createdBy: text('created_by')
     .notNull()

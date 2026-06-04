@@ -53,4 +53,14 @@ describe('Golden Clinical Journey', () => {
     expect(JOURNEY_STEPS).toHaveLength(9);
     expect(JOURNEY_STEPS[1]).toBe('command-center');
   });
+
+  it('5 casos demo sintéticos listos (EPIS2-09)', async () => {
+    const { DEMO_CLINICAL_CASES, SYNTHETIC_LABEL, assertDemoCasesInvariants } = await import(
+      '@epis2/test-fixtures'
+    );
+    expect(DEMO_CLINICAL_CASES).toHaveLength(5);
+    expect(assertDemoCasesInvariants()).toEqual([]);
+    expect(SYNTHETIC_LABEL).toBe('DEMO/SINTÉTICO');
+    expect(JOURNEY_STEPS[2]).toBe('buscar-paciente-sintetico');
+  });
 });

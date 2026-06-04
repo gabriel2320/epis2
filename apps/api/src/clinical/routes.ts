@@ -12,7 +12,10 @@ import {
   createDraft,
   getDraftDetail,
   getPatientById,
+  getPatientClinicalContext,
+  getPatientDemoCaseCode,
   listDrafts,
+  patientDemoPresentation,
   listApprovedNotes,
   searchPatients,
   updateDraft,
@@ -59,14 +62,18 @@ export async function registerClinicalRoutes(
     async (request) => {
       const q = (request.query as { q?: string }).q;
       const rows = await searchPatients(db, q);
-      return {
-        patients: rows.map((p) => ({
-          id: p.id,
-          displayName: p.displayName,
-          isSynthetic: p.isSynthetic,
-          demoLabel: p.isSynthetic ? 'DEMO/SINTÉTICO' : undefined,
-        })),
-      };
+      const patients = await Promise.all(
+        rows.map(async (p) => {
+          const demoCaseCode = await getPatientDemoCaseCode(db, p.id);
+          return {
+            id: p.id,
+            displayName: p.displayName,
+            ...patientDemoPresentation(p),
+            demoCaseCode,
+          };
+        }),
+      );
+      return { patients };
     },
   );
 
@@ -80,13 +87,16 @@ export async function registerClinicalRoutes(
         return reply.status(404).send({ error: 'Paciente no encontrado' });
       }
       const notes = await listApprovedNotes(db, patientId);
+      const clinicalContext = await getPatientClinicalContext(db, patientId);
+      const demoCaseCode = await getPatientDemoCaseCode(db, patientId);
       return {
         patient: {
           id: patient.id,
           displayName: patient.displayName,
-          isSynthetic: patient.isSynthetic,
-          demoLabel: patient.isSynthetic ? 'DEMO/SINTÉTICO' : undefined,
+          ...patientDemoPresentation(patient),
+          demoCaseCode,
         },
+        clinicalContext,
         notes: notes.map((n) => ({
           id: n.id,
           noteType: n.noteType,

@@ -1,5 +1,40 @@
 import { apiFetch } from './client.js';
 
+export type PatientListRow = {
+  id: string;
+  displayName: string;
+  isSynthetic?: boolean;
+  demoLabel?: string;
+  demoCaseCode?: string;
+};
+
+export type PatientDetailResponse = {
+  patient: PatientListRow;
+  clinicalContext: {
+    demoCaseCode?: string;
+    openEncounterId?: string;
+    problems: { description: string }[];
+    observations: { label: string; valueText: string }[];
+    summaryFields: Record<string, string>;
+  };
+  notes: {
+    id: string;
+    noteType: string;
+    title: string;
+    createdAt: string;
+    createdBy: string;
+  }[];
+};
+
+export function listPatients(query?: string) {
+  const q = query?.trim() ? `?q=${encodeURIComponent(query.trim())}` : '';
+  return apiFetch<{ patients: PatientListRow[] }>(`/api/patients${q}`);
+}
+
+export function fetchPatientDetail(patientId: string) {
+  return apiFetch<PatientDetailResponse>(`/api/patients/${patientId}`);
+}
+
 export type ClinicalDraftSummary = {
   id: string;
   patientId: string;

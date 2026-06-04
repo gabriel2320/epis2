@@ -29,8 +29,8 @@ Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.
 ## Fases
 
 ```text
-EPIS2-00 ✓ … EPIS2-08 ✓
-EPIS2-09     (datos demo sintéticos)
+EPIS2-00 ✓ … EPIS2-09 ✓
+EPIS2-10     (interoperabilidad FHIR)
 ```
 
 ## Memoria legacy

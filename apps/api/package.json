@@ -13,6 +13,7 @@
     "@epis2/clinical-domain": "*",
     "@epis2/command-registry": "*",
     "@epis2/contracts": "*",
+    "@epis2/test-fixtures": "*",
     "@fastify/cookie": "^11.0.2",
     "@fastify/cors": "^11.0.1",
     "drizzle-orm": "^0.43.1",

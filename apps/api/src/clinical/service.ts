@@ -1,4 +1,9 @@
 import { assertPatchDraftStatus } from '@epis2/clinical-domain';
+import {
+  DEMO_IDENTIFIER_SYSTEM,
+  SYNTHETIC_LABEL,
+  getDemoCaseByPatientId,
+} from '@epis2/test-fixtures';
 import { asc, eq, ilike, and } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import {
@@ -8,11 +13,80 @@ import {
   clinicalNotes,
   draftVersions,
   encounters,
+  observations,
+  patientIdentifiers,
   patients,
+  problems,
 } from '../db/schema.js';
 import { appendAudit } from '../audit/store.js';
 
 export type Actor = { id: string; username: string };
+
+export function patientDemoPresentation(patient: { isSynthetic: boolean }) {
+  if (!patient.isSynthetic) {
+    return {};
+  }
+  return {
+    isSynthetic: true as const,
+    demoLabel: SYNTHETIC_LABEL,
+  };
+}
+
+export async function getPatientDemoCaseCode(db: Database, patientId: string) {
+  const [row] = await db
+    .select({ value: patientIdentifiers.value })
+    .from(patientIdentifiers)
+    .where(
+      and(
+        eq(patientIdentifiers.patientId, patientId),
+        eq(patientIdentifiers.system, DEMO_IDENTIFIER_SYSTEM),
+      ),
+    )
+    .limit(1);
+  return row?.value;
+}
+
+export async function getPatientClinicalContext(db: Database, patientId: string) {
+  const demoCase = getDemoCaseByPatientId(patientId);
+  const demoCaseCode = (await getPatientDemoCaseCode(db, patientId)) ?? demoCase?.demoCaseCode;
+  const problemRows = await db
+    .select({ description: problems.description })
+    .from(problems)
+    .where(eq(problems.patientId, patientId));
+  const observationRows = await db
+    .select({ label: observations.label, valueText: observations.valueText })
+    .from(observations)
+    .where(eq(observations.patientId, patientId));
+  const openEncounter = await getOpenEncounter(db, patientId);
+
+  const summaryFields =
+    demoCase?.summaryFields ??
+    buildSummaryFromClinicalRows(problemRows, observationRows);
+
+  return {
+    demoCaseCode,
+    openEncounterId: openEncounter?.id,
+    problems: problemRows,
+    observations: observationRows,
+    summaryFields,
+  };
+}
+
+function buildSummaryFromClinicalRows(
+  problemRows: { description: string }[],
+  observationRows: { label: string; valueText: string }[],
+): Record<string, string> {
+  return {
+    activeProblems: problemRows.map((p) => p.description).join('\n') || 'Sin problemas (demo)',
+    recentEvents: 'Últimas 24 h: sin eventos agudos registrados (sintético)',
+    relevantLabs:
+      observationRows.map((o) => `${o.label} ${o.valueText}`).join(' · ') ||
+      'Sin laboratorio (demo)',
+    activeMedications: 'Sin medicación registrada (demo)',
+    pendingItems: 'Sin pendientes (demo)',
+    clinicalAlerts: SYNTHETIC_LABEL,
+  };
+}
 
 export async function searchPatients(db: Database, query?: string) {
   if (query?.trim()) {

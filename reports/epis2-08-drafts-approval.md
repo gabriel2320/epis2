@@ -38,7 +38,7 @@
 
 ## Próximo paso
 
-**EPIS2-09** — Datos demo sintéticos (5 casos completos).
+**EPIS2-09** — Datos demo sintéticos (5 casos completos). Ver `epis2-09-demo-data.md`.
 
 ---
 

@@ -15,17 +15,16 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { Link, useNavigate, useSearch } from '@tanstack/react-router';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ApiError } from '../api/client.js';
 import { apiFetch } from '../api/client.js';
+import {
+  fetchPatientDetail,
+  listPatients,
+  type PatientListRow,
+} from '../api/clinicalApi.js';
 import { ClinicalFormRenderer } from '../components/ClinicalFormRenderer.js';
 import { useAuth } from '../auth/AuthContext.js';
-
-type PatientRow = {
-  id: string;
-  displayName: string;
-  demoLabel?: string;
-};
 
 export type GeneratedClinicalFormPageProps = {
   blueprint: ClinicalFormBlueprint;
@@ -47,7 +46,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const [values, setValues] = useState(() => initialFormValues(blueprint, seed));
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
-  const [patients, setPatients] = useState<PatientRow[]>([]);
+  const [patients, setPatients] = useState<PatientListRow[]>([]);
+  const [activePatient, setActivePatient] = useState<PatientListRow | null>(null);
   const [loadError, setLoadError] = useState<string | undefined>();
   const [isSuggesting, setIsSuggesting] = useState(false);
   const canUseAiAssist = blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES;
@@ -72,13 +72,28 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const loadPatients = useCallback(async () => {
     setLoadError(undefined);
     try {
-      const res = await apiFetch<{ patients: PatientRow[] }>('/api/patients');
+      const res = await listPatients();
       setPatients(res.patients);
     } catch {
       setPatients([]);
       setLoadError('No hay pacientes demo disponibles (¿API y base de datos activos?)');
     }
   }, []);
+
+  useEffect(() => {
+    if (!patientId) {
+      setActivePatient(null);
+      return;
+    }
+    void fetchPatientDetail(patientId)
+      .then((res) => {
+        setActivePatient(res.patient);
+        if (blueprint.blueprintId === 'patient_summary') {
+          setValues((prev) => ({ ...prev, ...res.clinicalContext.summaryFields }));
+        }
+      })
+      .catch(() => setActivePatient(null));
+  }, [patientId, blueprint.blueprintId]);
 
   const selectPatient = (id: string) => {
     void navigate({
@@ -198,8 +213,23 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
             {blueprint.label}
           </Typography>
           <Chip label={copy.demoBadge} size="small" color="warning" variant="outlined" />
-          {patientId ? (
-            <Chip label={`Paciente: ${patientId.slice(0, 8)}…`} size="small" variant="outlined" />
+          {activePatient ? (
+            <>
+              <Chip
+                label={activePatient.displayName}
+                size="small"
+                variant="outlined"
+                data-testid="epis2-active-patient"
+              />
+              {activePatient.demoCaseCode ? (
+                <Chip
+                  label={activePatient.demoCaseCode}
+                  size="small"
+                  color="warning"
+                  variant="outlined"
+                />
+              ) : null}
+            </>
           ) : null}
         </Stack>
 

@@ -15,7 +15,8 @@ Aplicación clínica **command-first**, independiente del proyecto EPIS (legacy)
 | **EPIS2-06** | Completada — 6 formularios desde blueprints (sin IA) |
 | **EPIS2-07** | Completada — IA local Ollama, proxy API, `ai_runs` |
 | **EPIS2-08** | Completada — borradores, versiones, aprobación humana UI |
-| EPIS2-09+ | No iniciadas |
+| **EPIS2-09** | Completada — 5 casos demo sintéticos, badge DEMO |
+| EPIS2-10+ | No iniciadas |
 
 ## Documentación esencial
 
@@ -49,7 +50,7 @@ npm run dev:ai         # puerto 3002
 
 ## Próximo paso
 
-Ejecutar **EPIS2-09 — Datos demo sintéticos**.
+Ejecutar **EPIS2-10 — Interoperabilidad FHIR** (export mínimo).
 
 Servicio IA: `npm run dev:ai` (opcional; la app funciona sin Ollama).
 

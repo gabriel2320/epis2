@@ -82,11 +82,11 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 ---
 
-## EPIS2-09 — Datos demo sintéticos
+## EPIS2-09 — Datos demo sintéticos ✓
 
 **Entregables:** 5 casos clínicos ficticios completos.
 
-**Gate:** UI muestra DEMO/SINTÉTICO; sin IDs reales.
+**Gate:** UI muestra DEMO/SINTÉTICO; sin IDs reales. — `reports/epis2-09-demo-data.md`
 
 ---
 

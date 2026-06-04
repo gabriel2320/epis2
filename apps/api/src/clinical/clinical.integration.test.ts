@@ -28,8 +28,26 @@ describe.skipIf(!hasDb)('clinical API (integration)', () => {
       url: '/api/patients',
       headers: { cookie },
     });
-    const patientId = (patients.json() as { patients: { id: string }[] }).patients[0]?.id;
+    const list = (patients.json() as {
+      patients: { id: string; isSynthetic?: boolean; demoLabel?: string; demoCaseCode?: string }[];
+    }).patients;
+    expect(list.length).toBeGreaterThanOrEqual(5);
+    expect(list.every((p) => p.isSynthetic && p.demoLabel === 'DEMO/SINTÉTICO')).toBe(true);
+    expect(list.some((p) => p.demoCaseCode === 'DEMO-005')).toBe(true);
+
+    const patientId = list[0]?.id;
     if (!patientId) throw new Error('Sin pacientes de demo en la base');
+
+    const detail = await app.inject({
+      method: 'GET',
+      url: `/api/patients/${patientId}`,
+      headers: { cookie },
+    });
+    expect(detail.statusCode).toBe(200);
+    const detailJson = detail.json() as {
+      clinicalContext: { summaryFields: Record<string, string> };
+    };
+    expect(Object.keys(detailJson.clinicalContext.summaryFields).length).toBeGreaterThan(0);
 
     const created = await app.inject({
       method: 'POST',

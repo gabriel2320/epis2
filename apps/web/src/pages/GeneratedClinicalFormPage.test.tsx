@@ -22,6 +22,21 @@ vi.mock('../api/client.js', () => ({
   },
 }));
 
+vi.mock('../api/clinicalApi.js', () => ({
+  listPatients: vi.fn().mockResolvedValue({ patients: [] }),
+  fetchPatientDetail: vi.fn().mockResolvedValue({
+    patient: {
+      id: '00000000-0000-4000-8000-000000000099',
+      displayName: 'Paciente Demo — Test',
+      isSynthetic: true,
+      demoLabel: 'DEMO/SINTÉTICO',
+      demoCaseCode: 'DEMO-099',
+    },
+    clinicalContext: { summaryFields: {} },
+    notes: [],
+  }),
+}));
+
 vi.mock('../auth/AuthContext.js', () => ({
   useAuth: () => ({
     session: {

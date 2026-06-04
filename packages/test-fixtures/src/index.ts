@@ -1,2 +1,9 @@
-/** Placeholder EPIS2-09 — datos sintéticos DEMO. */
-export const SYNTHETIC_LABEL = 'DEMO/SINTÉTICO' as const;
+export {
+  DEMO_CLINICAL_CASES,
+  DEMO_IDENTIFIER_SYSTEM,
+  SYNTHETIC_LABEL,
+  assertDemoCasesInvariants,
+  getDemoCaseByCode,
+  getDemoCaseByPatientId,
+  type DemoClinicalCase,
+} from './demoCases.js';
