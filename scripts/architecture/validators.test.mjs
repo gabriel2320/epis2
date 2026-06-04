@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { validate as noLegacy } from './no-legacy-dependencies.mjs';
 import { validate as invariants } from './main-product-invariants.mjs';
 import { validate as singleCommand } from './single-command-registry.mjs';
+import { validate as noDirectMui } from './no-direct-mui-imports.mjs';
 
 describe('architecture validators (smoke)', () => {
   it('main-product-invariants pasa en repo limpio', async () => {
@@ -16,6 +17,11 @@ describe('architecture validators (smoke)', () => {
 
   it('single-command-registry pasa en repo limpio', async () => {
     const result = await singleCommand();
+    expect(result.ok, result.details?.join('\n')).toBe(true);
+  });
+
+  it('no-direct-mui-imports pasa en repo limpio', async () => {
+    const result = await noDirectMui();
     expect(result.ok, result.details?.join('\n')).toBe(true);
   });
 });

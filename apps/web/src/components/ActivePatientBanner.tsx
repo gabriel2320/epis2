@@ -1,10 +1,12 @@
 import { copy } from '@epis2/design-system';
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 
+import {
+  Chip,
+  Stack,
+  Typography,
+} from '@epis2/epis2-ui';
 export function ActivePatientBanner() {
   const navigate = useClinicalNavigate();
   const { patient } = useActivePatient();

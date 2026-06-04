@@ -1,12 +1,5 @@
 import type { CommandResolveResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import Alert from '@mui/material/Alert';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
 import { useCallback, useEffect, useState } from 'react';
@@ -24,6 +17,15 @@ import { ActivePatientBanner } from '../components/ActivePatientBanner.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 
+import {
+  Alert,
+  Box,
+  Button,
+  Chip,
+  Paper,
+  Stack,
+  Typography,
+} from '@epis2/epis2-ui';
 export function CommandCenterPage() {
   const { session, logout, hasPermission } = useAuth();
   const { patient: activePatient, setPatient } = useActivePatient();

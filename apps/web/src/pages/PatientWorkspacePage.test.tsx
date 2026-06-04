@@ -2,7 +2,7 @@
  * @vitest-environment jsdom
  */
 import { copy } from '@epis2/design-system';
-import { Epis2ThemeProvider } from '../Epis2ThemeProvider.js';
+import { Epis2ThemeProvider } from '@epis2/epis2-ui';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';

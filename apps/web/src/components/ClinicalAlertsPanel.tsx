@@ -1,12 +1,14 @@
 import type { ClinicalAlert } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import Chip from '@mui/material/Chip';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 
+import {
+  Alert,
+  AlertTitle,
+  Chip,
+  Paper,
+  Stack,
+  Typography,
+} from '@epis2/epis2-ui';
 export type ClinicalAlertsPanelProps = {
   alerts: ClinicalAlert[];
   loading?: boolean;

@@ -1,8 +1,10 @@
 import { copy } from '@epis2/design-system';
-import Box from '@mui/material/Box';
 import { useNavigate } from '@tanstack/react-router';
 import { ErrorState } from '../components/ErrorState.js';
 
+import {
+  Box,
+} from '@epis2/epis2-ui';
 export function NotFoundPage() {
   const navigate = useNavigate();
 

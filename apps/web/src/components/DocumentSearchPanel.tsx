@@ -1,14 +1,16 @@
 import { copy } from '@epis2/design-system';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { searchPatientDocuments } from '../api/clinicalApi.js';
 
+import {
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  Stack,
+  TextField,
+  Typography,
+} from '@epis2/epis2-ui';
 export type DocumentSearchPanelProps = {
   patientId: string;
 };

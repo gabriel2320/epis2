@@ -1,16 +1,18 @@
 import type { ReactNode } from 'react';
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import { DocumentSearchPanel } from './DocumentSearchPanel.js';
 import { PatientClinicalAiPanel } from './PatientClinicalAiPanel.js';
 
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  Stack,
+  Typography,
+} from '@epis2/epis2-ui';
 export type PatientLongitudinalPanelProps = {
   data: PatientLongitudinalResponse;
   onOpenDraft?: (draftId: string) => void;

@@ -1,15 +1,17 @@
 import type { QualityDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import Alert from '@mui/material/Alert';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { validateHl7Message } from '../api/opsApi.js';
 
+import {
+  Alert,
+  Box,
+  Button,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from '@epis2/epis2-ui';
 export type QualityDashboardTabProps = {
   data: QualityDashboardResponse;
 };

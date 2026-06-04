@@ -1,4 +1,4 @@
-import { Epis2ThemeProvider } from './Epis2ThemeProvider.js';
+import { Epis2ThemeProvider } from '@epis2/epis2-ui';
 import { RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';

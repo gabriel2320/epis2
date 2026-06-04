@@ -1,4 +1,12 @@
 import {
+  Alert,
+  Button,
+  Chip,
+  Paper,
+  Stack,
+  Typography,
+} from '@epis2/epis2-ui';
+import {
   BLUEPRINT_DRAFT_TYPES,
   defaultSummaryValues,
   initialFormValues,
@@ -8,12 +16,6 @@ import {
 import { requestDraftAssist } from '../api/aiApi.js';
 import { roleHasPermission, sanitizeAiSuggestedFields, type ClinicalRole } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
-import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import { Link, useSearch } from '@tanstack/react-router';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';

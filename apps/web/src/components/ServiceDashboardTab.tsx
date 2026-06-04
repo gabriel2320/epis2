@@ -1,18 +1,20 @@
 import type { ServiceDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import Alert from '@mui/material/Alert';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { acknowledgeCriticalResult } from '../api/dashboardApi.js';
 
+import {
+  Alert,
+  Box,
+  Button,
+  Chip,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  Stack,
+  Typography,
+} from '@epis2/epis2-ui';
 export type ServiceDashboardTabProps = {
   data: ServiceDashboardResponse;
   onOpenPatient: (patientId: string) => void;

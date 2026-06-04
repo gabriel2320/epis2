@@ -1,16 +1,18 @@
 import { roleHasPermission, type ClinicalRole } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
-import Alert from '@mui/material/Alert';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import { Link, useParams } from '@tanstack/react-router';
 import { useCallback, useEffect, useState } from 'react';
+import {
+  Alert,
+  Box,
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  Stack,
+  Typography,
+} from '@epis2/epis2-ui';
 import {
   approveDraft,
   DRAFT_TYPE_TO_BLUEPRINT,

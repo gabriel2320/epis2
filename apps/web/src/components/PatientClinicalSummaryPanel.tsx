@@ -1,9 +1,11 @@
 import { copy } from '@epis2/design-system';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 
+import {
+  Box,
+  Paper,
+  Stack,
+  Typography,
+} from '@epis2/epis2-ui';
 const FIELD_LABELS: Record<string, string> = {
   activeProblems: copy.activePatient.summaryActiveProblems,
   recentEvents: copy.activePatient.summaryRecentEvents,

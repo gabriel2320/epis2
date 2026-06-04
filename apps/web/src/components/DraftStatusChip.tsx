@@ -1,6 +1,8 @@
-import Chip from '@mui/material/Chip';
 import { copy } from '@epis2/design-system';
 
+import {
+  Chip,
+} from '@epis2/epis2-ui';
 const STATUS_COLOR: Record<string, 'default' | 'warning' | 'info' | 'success' | 'error'> = {
   draft: 'default',
   editing: 'info',

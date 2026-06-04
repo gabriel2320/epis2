@@ -1,10 +1,12 @@
 import { getCommandChipsForRole } from '@epis2/command-registry';
 import { copy } from '@epis2/design-system';
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 
+import {
+  AutoAwesomeIcon,
+  Chip,
+  Stack,
+  Typography,
+} from '@epis2/epis2-ui';
 export type CommandSuggestionChipsProps = {
   role: string;
   permissions: readonly string[];

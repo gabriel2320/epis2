@@ -1,13 +1,14 @@
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-import SearchIcon from '@mui/icons-material/Search';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
-import InputAdornment from '@mui/material/InputAdornment';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-
+import {
+  AutoAwesomeIcon,
+  Box,
+  EpisButton,
+  EpisChip,
+  EpisTextField,
+  InputAdornment,
+  SearchIcon,
+  Stack,
+  Typography,
+} from '@epis2/epis2-ui';
 export type PowerBarProps = {
   label: string;
   placeholder: string;
@@ -46,10 +47,10 @@ export function PowerBar({
     >
       <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap" sx={{ mb: 1 }}>
         {roleLabel ? (
-          <Chip size="small" label={roleLabel} variant="outlined" data-testid="epis2-command-role-chip" />
+          <EpisChip size="small" label={roleLabel} variant="outlined" data-testid="epis2-command-role-chip" />
         ) : null}
         {aiAvailable !== null ? (
-          <Chip
+          <EpisChip
             size="small"
             icon={<AutoAwesomeIcon />}
             label={aiAvailable ? 'IA local' : 'Sin IA'}
@@ -59,7 +60,7 @@ export function PowerBar({
           />
         ) : null}
       </Stack>
-      <TextField
+      <EpisTextField
         fullWidth
         label={label}
         placeholder={placeholder}
@@ -94,7 +95,7 @@ export function PowerBar({
           {aiHint}
         </Typography>
       ) : null}
-      <Button
+      <EpisButton
         type="submit"
         variant="contained"
         size="large"
@@ -102,7 +103,7 @@ export function PowerBar({
         sx={{ mt: 2, minHeight: 48 }}
       >
         {submitLabel}
-      </Button>
+      </EpisButton>
     </Box>
   );
 }

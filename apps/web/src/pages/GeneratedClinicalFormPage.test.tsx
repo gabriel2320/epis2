@@ -3,7 +3,7 @@
  */
 import { getBlueprintById } from '@epis2/clinical-forms';
 import { copy } from '@epis2/design-system';
-import { Epis2ThemeProvider } from '../Epis2ThemeProvider.js';
+import { Epis2ThemeProvider } from '@epis2/epis2-ui';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';

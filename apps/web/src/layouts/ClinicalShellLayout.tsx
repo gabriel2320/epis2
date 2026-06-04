@@ -1,15 +1,17 @@
 import { copy } from '@epis2/design-system';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
-import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import { Link, Outlet } from '@tanstack/react-router';
 import { useAuth } from '../auth/AuthContext.js';
 import { ActivePatientBanner } from '../components/ActivePatientBanner.js';
 
+import {
+  AppBar,
+  Box,
+  Button,
+  Chip,
+  Container,
+  Toolbar,
+  Typography,
+} from '@epis2/epis2-ui';
 export function ClinicalShellLayout() {
   const { session, logout } = useAuth();
 

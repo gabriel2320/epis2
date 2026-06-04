@@ -15,9 +15,6 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
-  "dependencies": {
-    "@mui/material": "^6.4.11"
-  },
   "devDependencies": {
     "typescript": "^5.8.3"
   }

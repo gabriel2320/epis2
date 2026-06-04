@@ -1,14 +1,16 @@
 import type { AiRunRow, RagQueryResponse, AiSummarySuggestResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import Alert from '@mui/material/Alert';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import { useCallback, useEffect, useState } from 'react';
+import {
+  Alert,
+  Box,
+  Button,
+  Chip,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from '@epis2/epis2-ui';
 import {
   fetchAiRuns,
   fetchAiStatus,
