@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: epis2
       POSTGRES_DB: epis2
     ports:
-      - '5432:5432'
+      - '5433:5432'
     volumes:
       - epis2_pg_data:/var/lib/postgresql/data
     healthcheck:

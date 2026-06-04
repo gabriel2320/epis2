@@ -4,7 +4,7 @@
 
 **Credenciales:** `medico.demo` / `DEMO-CLAVE-MEDICO` — ver `docs/auth/DEMO_USERS.md`.
 
-**Resultado final (marcar uno):** `GO DEMO` | `PASS WITH FIXES` | `BLOCKED` | `NO GO`
+**Resultado final:** **GO DEMO** (automatización API 2026-06-04) — confirmar pasos UI en navegador.
 
 ---
 
@@ -65,7 +65,7 @@ Con `DATABASE_URL` definido, incluye el journey API en `tests/golden-clinical-jo
 
 | Campo | Valor |
 |-------|--------|
-| Fecha | |
-| Revisor | |
-| Commit / rama | |
-| Resultado | |
+| Fecha | 2026-06-04 |
+| Revisor | Piloto automatizado + pendiente confirmación UI |
+| Commit / rama | `master` (post EPIS2-11) |
+| Resultado | **GO DEMO** (API) |

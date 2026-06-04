@@ -34,9 +34,11 @@
 
 | Resultado | Fecha | Notas |
 |-----------|-------|-------|
-| _Pendiente revisión humana_ | | |
+| **GO DEMO** | 2026-06-04 | Journey API completo en verde (`quality:golden-journey` + Postgres en puerto **5433**). UI: validar checklist humano en navegador. |
 
-**Automatización (CI/local con DB):** journey API verde = precondición técnica para **GO DEMO**; no sustituye la pasada humana de UI.
+**Automatización:** 6/6 tests `quality:golden-journey` (incl. flujo login → comando → borrador → aprobación → auditoría → FHIR).
+
+**Incidencia resuelta en piloto:** Postgres del host en `:5432` colisionaba con Docker; Compose expone **5433** y migración `006` usa UUID válido para nota demo (`c000…`).
 
 ---
 
@@ -44,9 +46,8 @@
 
 ```bash
 docker compose up -d
-# .env: DATABASE_URL=postgresql://epis2:epis2@127.0.0.1:5432/epis2
+# .env: DATABASE_URL=postgresql://epis2:epis2@127.0.0.1:5433/epis2  (puerto host 5433)
 npm run db:migrate
-set DATABASE_URL=postgresql://epis2:epis2@127.0.0.1:5432/epis2   # Windows
 npm run quality:golden-journey
 npm run dev:api
 npm run dev:web

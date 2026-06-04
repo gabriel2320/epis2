@@ -45,7 +45,7 @@ VALUES
 -- Nota aprobada de referencia (caso 1)
 INSERT INTO clinical_notes (id, patient_id, encounter_id, note_type, title, body, created_by, updated_by)
 VALUES (
-  'n0000001-0000-4000-8000-000000000001',
+  'c0000001-0000-4000-8000-000000000001',
   'a0000001-0000-4000-8000-000000000001',
   'b0000001-0000-4000-8000-000000000001',
   'evolution_note',
@@ -58,7 +58,7 @@ ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO clinical_note_versions (note_id, version_no, title, body, created_by)
 VALUES (
-  'n0000001-0000-4000-8000-000000000001',
+  'c0000001-0000-4000-8000-000000000001',
   1,
   'Evolución previa aprobada (demo)',
   '{"subjective":"Sin cefalea (sintético)","objective":"PA 128/82","assessment":"HTA controlada (demo)","plan":"Continuar losartán"}',

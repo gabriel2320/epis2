@@ -43,7 +43,7 @@ npm run check
 npm run test
 npm run db:validate
 npm run db:migrate   # requiere DATABASE_URL + Postgres
-docker compose up -d   # PostgreSQL + Ollama
+docker compose up -d   # PostgreSQL (host **5433**) + Ollama
 npm run dev:api        # puerto 3001
 npm run dev:web        # puerto 5173
 npm run dev:ai         # puerto 3002
