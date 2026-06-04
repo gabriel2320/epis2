@@ -1,5 +1,7 @@
 import { isClinicalRole, roleHasPermission } from '@epis2/clinical-domain';
 import { AMBIGUOUS_PHRASES } from './definitions.js';
+import { EPIS_DISAMBIGUATION_RULES } from './epis-disambiguation.js';
+import { isEpisOutOfScopePhrase } from './epis-out-of-scope.js';
 import { normalizeCommandText } from './normalize.js';
 import {
   pickBestFromRanked,
@@ -27,7 +29,32 @@ export function resolveCommand(input: CommandResolveInput): CommandResolveResult
   }
 
   const normalized = normalizeCommandText(text);
+
+  if (isEpisOutOfScopePhrase(normalized)) {
+    return {
+      status: 'needs_clarification',
+      message:
+        'Esa acción no está disponible en el MVP. Prueba buscar, resumir, evolucionar, epicrisis, receta o laboratorio.',
+      candidates: [],
+    };
+  }
+
   const ranked = rankCommandDefinitions(text);
+
+  for (const rule of EPIS_DISAMBIGUATION_RULES) {
+    if (rule.matches(normalized)) {
+      const hinted = ranked.filter((r) =>
+        rule.intentHints.includes(r.def.intent),
+      );
+      return {
+        status: 'needs_clarification',
+        message: rule.message,
+        candidates: topClarificationCandidates(
+          hinted.length > 0 ? hinted : ranked,
+        ),
+      };
+    }
+  }
 
   if (AMBIGUOUS_PHRASES.some((p) => normalizeCommandText(p) === normalized)) {
     return {

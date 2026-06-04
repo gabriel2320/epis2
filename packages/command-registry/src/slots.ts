@@ -2,7 +2,7 @@ import { normalizeCommandText } from './normalize.js';
 import type { CommandSlots } from './types.js';
 
 const MEDICATIONS =
-  /\b(amoxicilina|paracetamol|ibuprofeno|metformina|enalapril|losartan|omeprazol|atorvastatina)\b/i;
+  /\b(amoxicilina|amoxi|paracetamol|ibuprofeno|metformina|enalapril|losartan|omeprazol|atorvastatina)\b/i;
 
 export function extractSlots(raw: string): CommandSlots {
   const normalized = normalizeCommandText(raw);
@@ -21,7 +21,7 @@ export function extractSlots(raw: string): CommandSlots {
   }
 
   const studyMatch = normalized.match(
-    /(?:hemograma|glucosa|creatinina|perfil\s+hepatico|torax|radiografia)/,
+    /(?:hemograma|glucosa|creatinina|perfil\s+hepatico|torax|radiografia|rx\s+torax|placa)/,
   );
   if (studyMatch?.[0]) {
     slots.studyHint = studyMatch[0];

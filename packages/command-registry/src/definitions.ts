@@ -33,6 +33,7 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
     aliasesEs: [
       'resume al paciente',
       'resumen clinico',
+      'resumen del paciente',
       'resumir paciente',
       'sintesis clinica',
       'ultimas 24 horas',
@@ -98,6 +99,7 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
     labelEs: 'Receta médica',
     aliasesEs: [
       'prepara receta',
+      'receta',
       'reseta',
       'receta medica',
       'prescribe',
@@ -127,6 +129,7 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       'estudios de laboratorio',
       'hemograma completo',
       'hemograma',
+      'hb ht',
       'solicitar lab',
     ],
     routePath: INTENT_ROUTE_PATHS.request_laboratory,
@@ -135,6 +138,8 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
     priority: 75,
     match: (q) =>
       /laboratorio|analitica|hemograma|bioquimica|bioquímica|ordena\s+lab|solicita\s+lab/.test(q) ||
+      (/\b(pide|pedir|solicitar)\b/.test(q) &&
+        /hemograma|analitica|laboratorio|lab\b|hb\s+ht/.test(q)) ||
       (/lab\b/.test(q) && !/laboral/.test(q)),
   },
 ];

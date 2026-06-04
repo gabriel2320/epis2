@@ -51,8 +51,9 @@
       "requiredTests": ["router.test.ts extensiones español"],
       "status": "ADAPTED",
       "quarantinePath": "migration/candidates/epis/epis-command-synonyms-es-cl",
-      "integratedPath": "packages/command-registry/src/definitions.ts",
-      "notes": "Aliases EPIS mapeados a intents EPIS2 existentes (sin catálogo P8)"
+      "integratedPath": "packages/command-registry/src/epis-intent-map.ts",
+      "adaptationNotes": "migration/adaptations/p1-legacy-integration.md",
+      "notes": "Aliases + disambiguation rx; intents deferidos documentados en epis-intent-map.ts"
     },
     {
       "id": "epis-clinical-safety-rules-demo",
@@ -122,7 +123,9 @@
       "legacyDependencies": ["Proveedores cloud en packages/ai"],
       "requiredAdaptations": ["Solo Ollama", "Alinear con contratos EPIS2"],
       "requiredTests": ["assist.test.ts extensiones"],
-      "status": "REVIEW_REQUIRED"
+      "status": "ADAPTED",
+      "integratedPath": "services/local-ai/src/assistSchemas.ts",
+      "adaptationNotes": "migration/adaptations/epidos-ai-gateway-capabilities.md"
     },
     {
       "id": "epione-clinical-decision-rules",
@@ -252,7 +255,9 @@
       "legacyDependencies": [],
       "requiredAdaptations": ["Alinear perfiles con EPIS2 FHIR boundary"],
       "requiredTests": ["mappers.test.ts"],
-      "status": "REVIEW_REQUIRED"
+      "status": "ADAPTED",
+      "integratedPath": "packages/fhir-export/src/validateExportBundle.ts",
+      "adaptationNotes": "migration/adaptations/epidos-fhir-golden-validation.md"
     },
     {
       "id": "epione-dashboard-home",

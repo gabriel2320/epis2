@@ -1,0 +1,19 @@
+import { describe, expect, it } from 'vitest';
+import { listAssistBlueprints } from './assistSchemas.js';
+import { buildLocalAiCapabilities } from './gatewayCapabilities.js';
+
+describe('local-ai gateway capabilities (EPIDOS pattern)', () => {
+  it('expone blueprints MVP como structuredSchemas', () => {
+    const ids = listAssistBlueprints().map((b) => b.id);
+    expect(ids).toContain('evolution_note');
+    expect(ids).toContain('lab_request');
+    expect(ids.length).toBe(4);
+  });
+
+  it('marca chat y tools deshabilitados', () => {
+    const caps = buildLocalAiCapabilities(false);
+    expect(caps.capabilities.chat).toBe(false);
+    expect(caps.capabilities.toolCalling).toBe(false);
+    expect(caps.operational).toBe(false);
+  });
+});

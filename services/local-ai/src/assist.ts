@@ -1,21 +1,9 @@
 import type { AiAssistDraftRequest } from '@epis2/contracts';
+import { getAssistBlueprintFields } from './assistSchemas.js';
 import { hashPrompt } from './hash.js';
 import { generateOllamaJson, pingOllama } from './ollama.js';
 import { buildDraftAssistPrompt } from './prompt.js';
 import { parseAndValidateAssistJson } from './validateOutput.js';
-
-const BLUEPRINT_FIELDS: Record<string, string[]> = {
-  evolution_note: ['subjective', 'objective', 'assessment', 'plan'],
-  discharge_summary: [
-    'diagnoses',
-    'hospitalizationSummary',
-    'evolution',
-    'dischargeMedications',
-    'instructions',
-  ],
-  prescription: ['medication', 'dose', 'route', 'frequency', 'duration'],
-  lab_request: ['labTests', 'clinicalReason', 'priority'],
-};
 
 export type AssistSuccess = {
   status: 'success';
@@ -40,7 +28,7 @@ export async function runDraftAssist(
   model: string,
   request: AiAssistDraftRequest,
 ): Promise<AssistSuccess | AssistFailure> {
-  const fieldIds = BLUEPRINT_FIELDS[request.blueprintId];
+  const fieldIds = getAssistBlueprintFields(request.blueprintId);
   if (!fieldIds) {
     return {
       status: 'rejected',
@@ -58,7 +46,7 @@ export async function runDraftAssist(
 
   const promptInput: Parameters<typeof buildDraftAssistPrompt>[0] = {
     blueprintId: request.blueprintId,
-    fieldIds,
+    fieldIds: [...fieldIds],
   };
   if (request.context !== undefined) promptInput.context = request.context;
   if (request.currentFields !== undefined) promptInput.currentFields = request.currentFields;

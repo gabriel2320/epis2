@@ -3,7 +3,7 @@ export function normalizeCommandText(raw: string): string {
   const trimmed = raw
     .trim()
     .replace(/\breseta\b/gi, 'receta')
-    .replace(/\brx\b/gi, 'radiografia')
+    .replace(/\bamoxi\b/gi, 'amoxicilina')
     .replace(/\btorax\b/gi, 'torax')
     .replace(/\s+/g, ' ');
 

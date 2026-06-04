@@ -1,7 +1,7 @@
 # Revisión — epis-command-synonyms-es-cl
 
-**Estado:** EXTRACTED_TO_QUARANTINE  
-**Recomendación:** REVIEW (mapear intents antes de fusionar a `definitions.ts`).
+**Estado:** ADAPTED  
+**Recomendación:** Cerrado — `epis-intent-map.ts`, `epis-disambiguation.ts` y aliases en `definitions.ts`.
 
 ## Adaptaciones
 

@@ -5,6 +5,7 @@ import {
 import Fastify from 'fastify';
 import { runDraftAssist } from './assist.js';
 import type { AiConfig } from './config.js';
+import { buildLocalAiCapabilities } from './gatewayCapabilities.js';
 import { pingOllama } from './ollama.js';
 
 const VERSION = '0.1.0';
@@ -21,6 +22,11 @@ export async function buildAiApp(config: AiConfig) {
       timestamp: new Date().toISOString(),
     }),
   );
+
+  app.get('/capabilities', async () => {
+    const ollamaUp = await pingOllama(config.OLLAMA_BASE_URL);
+    return buildLocalAiCapabilities(ollamaUp);
+  });
 
   app.get('/ready', async (_req, reply) => {
     const ollamaUp = await pingOllama(config.OLLAMA_BASE_URL);

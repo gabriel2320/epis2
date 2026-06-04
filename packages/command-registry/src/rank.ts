@@ -67,7 +67,9 @@ function entityBoost(
   const lower = raw.toLowerCase();
   if (
     def.intent === 'request_laboratory' &&
-    /\b(hemograma|glucosa|creatinina|analitica|bioquimica)\b/.test(normalized)
+    (/\b(hemograma|glucosa|creatinina|analitica|bioquimica|hb\s+ht)\b/.test(normalized) ||
+      (/\b(pide|pedir|solicitar)\b/.test(normalized) &&
+        /\b(hemograma|analitica|laboratorio)\b/.test(normalized)))
   ) {
     return 84;
   }
@@ -146,7 +148,7 @@ export function pickBestFromRanked(
 export function topClarificationCandidates(
   ranked: RankedCommandMatch[],
   limit = 3,
-): Array<{ intent: string; labelEs: string }> {
+): Array<{ intent: CommandDefinition['intent']; labelEs: string }> {
   return ranked.slice(0, limit).map((r) => ({
     intent: r.def.intent,
     labelEs: r.def.labelEs,
