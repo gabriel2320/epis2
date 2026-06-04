@@ -1,7 +1,11 @@
 import { isClinicalRole, roleHasPermission } from '@epis2/clinical-domain';
 import { AMBIGUOUS_PHRASES } from './definitions.js';
-import { matchCommandDefinitions, pickBestMatch } from './matcher.js';
 import { normalizeCommandText } from './normalize.js';
+import {
+  pickBestFromRanked,
+  rankCommandDefinitions,
+  topClarificationCandidates,
+} from './rank.js';
 import { extractSlots } from './slots.js';
 import type { CommandResolveInput, CommandResolveResult } from './types.js';
 
@@ -23,31 +27,30 @@ export function resolveCommand(input: CommandResolveInput): CommandResolveResult
   }
 
   const normalized = normalizeCommandText(text);
+  const ranked = rankCommandDefinitions(text);
+
   if (AMBIGUOUS_PHRASES.some((p) => normalizeCommandText(p) === normalized)) {
-    const matches = matchCommandDefinitions(text);
     return {
       status: 'needs_clarification',
       message: 'El comando es ambiguo. Elige una acción más específica.',
-      candidates: matches.map((m) => ({ intent: m.intent, labelEs: m.labelEs })),
+      candidates: topClarificationCandidates(ranked),
     };
   }
 
-  const matches = matchCommandDefinitions(text);
-  const best = pickBestMatch(matches);
+  const best = pickBestFromRanked(ranked);
 
   if (!best) {
-    if (matches.length > 1) {
-      const topPriority = Math.min(...matches.map((m) => m.priority));
-      const tier = matches.filter((m) => m.priority === topPriority);
+    if (ranked.length > 1) {
       return {
         status: 'needs_clarification',
         message: 'El comando es ambiguo. Elige una acción más específica.',
-        candidates: tier.map((m) => ({ intent: m.intent, labelEs: m.labelEs })),
+        candidates: topClarificationCandidates(ranked),
       };
     }
     return {
       status: 'needs_clarification',
-      message: 'No reconocimos el comando. Prueba con buscar, resumir, evolucionar, epicrisis, receta o laboratorio.',
+      message:
+        'No reconocimos el comando. Prueba con buscar, resumir, evolucionar, epicrisis, receta o laboratorio.',
       candidates: [],
     };
   }

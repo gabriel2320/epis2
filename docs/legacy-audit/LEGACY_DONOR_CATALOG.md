@@ -38,7 +38,7 @@ Estado por defecto en manifiesto: `REVIEW_REQUIRED`. Extracciones: ver `legacy-i
 
 | ID | Elemento | Clasificación | Estado | GO/REVIEW/REJECT |
 |----|----------|---------------|--------|------------------|
-| epione-mau-resolver-reference | MAU resolver | REWRITE_FROM_CONCEPT | EXTRACTED | REVIEW |
+| epione-mau-resolver-reference | MAU resolver | REWRITE_FROM_CONCEPT | ADAPTED | rank.ts |
 | epione-clinical-decision-rules | CDR | MIGRATE_WITH_ADAPTATION | REVIEW | REVIEW |
 | epione-clinical-actions-executor | Executors | REWRITE_FROM_CONCEPT | REVIEW | REVIEW |
 | epione-dashboard-home | Inicio/jornada | REJECT | REJECTED | REJECT |

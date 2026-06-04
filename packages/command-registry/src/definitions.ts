@@ -106,6 +106,7 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       'ordenar medicamento',
       'recetar paracetamol',
       'prescribe amoxicilina',
+      'preparar prescripcion',
     ],
     routePath: INTENT_ROUTE_PATHS.prepare_prescription,
     requiredPermission: 'command.execute',

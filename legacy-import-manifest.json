@@ -80,8 +80,10 @@
       "legacyDependencies": ["data/catalogs/epione"],
       "requiredAdaptations": ["Reescribir sin actionIds EPIONE", "Un solo resolver"],
       "requiredTests": ["Golden frases clínicas chilenas"],
-      "status": "EXTRACTED_TO_QUARANTINE",
-      "quarantinePath": "migration/candidates/epione/epione-mau-resolver-reference"
+      "status": "ADAPTED",
+      "quarantinePath": "migration/candidates/epione/epione-mau-resolver-reference",
+      "integratedPath": "packages/command-registry/src/rank.ts",
+      "adaptationNotes": "migration/adaptations/epione-mau-v2-command-ranking.md"
     },
     {
       "id": "epis-command-registry-concept",

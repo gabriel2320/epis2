@@ -5,6 +5,15 @@ export {
 export { INTENT_ROUTE_PATHS } from './routes.js';
 export { normalizeCommandText } from './normalize.js';
 export { matchCommandDefinitions, pickBestMatch } from './matcher.js';
+export {
+  MIN_MATCH_SCORE,
+  SCORE_GAP_FOR_UNIQUE,
+  pickBestFromRanked,
+  rankCommandDefinitions,
+  scoreCommandDefinition,
+  topClarificationCandidates,
+  type RankedCommandMatch,
+} from './rank.js';
 export { extractSlots } from './slots.js';
 export { resolveCommand } from './router.js';
 export { getMvpCommandChips, type CommandChip } from './chips.js';

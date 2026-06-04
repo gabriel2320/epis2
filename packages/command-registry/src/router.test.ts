@@ -35,6 +35,19 @@ describe('resolveCommand', () => {
     }
   });
 
+  it('ambigüedad devuelve hasta 3 candidatos ordenados por score', () => {
+    const result = resolveCommand({
+      text: 'evolucion y epicrisis',
+      role: 'physician',
+      patientId: DEMO_PATIENT_ID,
+    });
+    expect(result.status).toBe('needs_clarification');
+    if (result.status === 'needs_clarification') {
+      expect(result.candidates.length).toBeGreaterThan(1);
+      expect(result.candidates.length).toBeLessThanOrEqual(3);
+    }
+  });
+
   it('rol sin command.execute queda forbidden', () => {
     const result = resolveCommand({
       text: 'buscar paciente',

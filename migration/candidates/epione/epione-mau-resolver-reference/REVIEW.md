@@ -1,7 +1,7 @@
 # Revisión — epione-mau-resolver-reference
 
-**Estado:** EXTRACTED_TO_QUARANTINE  
-**Recomendación:** REVIEW (reescribir; no integrar archivo tal cual).
+**Estado:** ADAPTED  
+**Recomendación:** Cerrado — reescritura en `packages/command-registry/src/rank.ts` (ver `migration/adaptations/epione-mau-v2-command-ranking.md`).
 
 ## Adaptaciones
 
