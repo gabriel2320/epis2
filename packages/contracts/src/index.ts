@@ -32,10 +32,12 @@ export {
 } from './clinicalAlerts.js';
 export {
   censusBedRowSchema,
+  clinicalOrderRowSchema,
   criticalResultRowSchema,
   dashboardWorkResponseSchema,
   probableDischargeRowSchema,
   serviceDashboardResponseSchema,
+  type ClinicalOrderRow,
   type CensusBedRow,
   type CriticalResultRow,
   type DashboardWorkResponse,
@@ -48,4 +50,8 @@ export {
   type PatientLongitudinalResponse,
   type PatientDashboardResponse,
 } from './longitudinal.js';
+export {
+  documentSearchResponseSchema,
+  type DocumentSearchResponse,
+} from './documents.js';
 export { EPIS2_PRODUCT_NAME, EPIS2_PHASE } from './meta.js';

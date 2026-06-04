@@ -8,6 +8,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { DocumentSearchPanel } from './DocumentSearchPanel.js';
 
 export type PatientLongitudinalPanelProps = {
   data: PatientLongitudinalResponse;
@@ -112,6 +113,9 @@ export function PatientLongitudinalPanel({
             </ListItem>
           ))}
         </List>
+        <Box sx={{ mt: 2 }}>
+          <DocumentSearchPanel patientId={data.patientId} />
+        </Box>
       </Section>
     </Stack>
   );

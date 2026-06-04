@@ -7,7 +7,12 @@ export type ClinicalFormRoutePath =
   | '/espacio/evolucion'
   | '/espacio/epicrisis'
   | '/espacio/receta'
-  | '/espacio/laboratorio';
+  | '/espacio/laboratorio'
+  | '/espacio/interconsulta'
+  | '/espacio/imagenologia'
+  | '/espacio/enfermeria'
+  | '/espacio/mar'
+  | '/espacio/farmacia';
 
 export type ClinicalPatientSearch = { patientId?: string };
 

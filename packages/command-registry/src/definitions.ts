@@ -71,7 +71,8 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
     requiredPermission: 'command.execute',
     requiresPatient: true,
     priority: 50,
-    match: (q) => /evolucion|evoluciona|evolucionar|nota\s+de\s+evolucion/.test(q),
+    match: (q) =>
+      /evolucion|evoluciona|evolucionar|nota\s+de\s+evolucion|evolucion\s+diaria/.test(q),
   },
   {
     intent: 'prepare_discharge_draft',
@@ -141,6 +142,94 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       (/\b(pide|pedir|solicitar)\b/.test(q) &&
         /hemograma|analitica|laboratorio|lab\b|hb\s+ht/.test(q)) ||
       (/lab\b/.test(q) && !/laboral/.test(q)),
+  },
+  {
+    intent: 'request_referral',
+    labelEs: 'Interconsulta',
+    aliasesEs: [
+      'solicitar interconsulta',
+      'interconsulta',
+      'derivar a especialidad',
+      'pedir interconsulta',
+    ],
+    routePath: INTENT_ROUTE_PATHS.request_referral,
+    requiredPermission: 'command.execute',
+    requiresPatient: true,
+    priority: 76,
+    match: (q) => /interconsulta|derivar\s+a\s+especialidad/.test(q),
+  },
+  {
+    intent: 'request_imaging',
+    labelEs: 'Imagenología',
+    aliasesEs: [
+      'solicitar imagen',
+      'solicitar imagenologia',
+      'pedir tac',
+      'pedir radiografia',
+      'estudio de imagen',
+      'orden de imagen',
+    ],
+    routePath: INTENT_ROUTE_PATHS.request_imaging,
+    requiredPermission: 'command.execute',
+    requiresPatient: true,
+    priority: 77,
+    match: (q) =>
+      /imagenologia|imagenología|radiografia|radiografía|\btac\b|\brm\b|tomografia|ecografia/.test(
+        q,
+      ),
+  },
+  {
+    intent: 'create_nursing_note',
+    labelEs: 'Nota de enfermería',
+    aliasesEs: [
+      'nota de enfermeria',
+      'nota enfermeria',
+      'registrar cuidados',
+      'signos vitales',
+    ],
+    routePath: INTENT_ROUTE_PATHS.create_nursing_note,
+    requiredPermission: 'command.execute',
+    requiresPatient: true,
+    priority: 55,
+    match: (q) => /nota\s+de\s+enfermer|enfermeria|signos\s+vitales|registrar\s+cuidados/.test(q),
+  },
+  {
+    intent: 'record_medication_administration',
+    labelEs: 'Administración MAR',
+    aliasesEs: [
+      'administrar medicamento',
+      'registrar mar',
+      'mar',
+      'dar medicamento',
+      'administracion medicamento',
+    ],
+    routePath: INTENT_ROUTE_PATHS.record_medication_administration,
+    requiredPermission: 'command.execute',
+    requiresPatient: true,
+    priority: 72,
+    match: (q) =>
+      /\bmar\b/.test(q) ||
+      /administrar\s+medicamento|administracion\s+medicamento|dar\s+medicamento|registrar\s+mar/.test(
+        q,
+      ),
+  },
+  {
+    intent: 'prepare_pharmacy_review',
+    labelEs: 'Validación farmacéutica',
+    aliasesEs: [
+      'validacion farmaceutica',
+      'revisar prescripcion',
+      'intervencion farmacia',
+      'farmacia clinica',
+    ],
+    routePath: INTENT_ROUTE_PATHS.prepare_pharmacy_review,
+    requiredPermission: 'command.execute',
+    requiresPatient: true,
+    priority: 68,
+    match: (q) =>
+      /validacion\s+farmaceutica|farmacia\s+clinica|intervencion\s+farmacia|revisar\s+prescripcion/.test(
+        q,
+      ),
   },
   {
     intent: 'open_dashboard_work',

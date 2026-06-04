@@ -1,4 +1,5 @@
 import {
+  documentSearchResponseSchema,
   patientClinicalAlertsResponseSchema,
   patientLongitudinalResponseSchema,
 } from '@epis2/contracts';
@@ -25,12 +26,24 @@ import {
   searchPatients,
   updateDraft,
 } from './service.js';
+import { searchPatientDocuments } from './documents.js';
 import { getPatientLongitudinal } from './longitudinal.js';
 
 const createDraftSchema = z.object({
   patientId: z.string().uuid(),
   encounterId: z.string().uuid().optional(),
-  draftType: z.enum(['evolution_note', 'discharge_summary', 'prescription', 'lab_request', 'other']),
+  draftType: z.enum([
+    'evolution_note',
+    'discharge_summary',
+    'prescription',
+    'lab_request',
+    'referral',
+    'imaging_request',
+    'nursing_note',
+    'medication_administration',
+    'pharmacy_validation',
+    'other',
+  ]),
   title: z.string().min(1),
   body: z.record(z.unknown()).default({}),
 });
@@ -144,6 +157,21 @@ export async function registerClinicalRoutes(
           createdBy: n.createdBy,
         })),
       };
+    },
+  );
+
+  app.get(
+    '/api/patients/:patientId/documents/search',
+    { preHandler: requirePatientRead },
+    async (request, reply) => {
+      const { patientId } = request.params as { patientId: string };
+      const q = (request.query as { q?: string }).q ?? '';
+      const patient = await getPatientById(db, patientId);
+      if (!patient) {
+        return reply.status(404).send({ error: 'Paciente no encontrado' });
+      }
+      const data = await searchPatientDocuments(db, patientId, q);
+      return documentSearchResponseSchema.parse({ readOnly: true as const, ...data });
     },
   );
 

@@ -67,7 +67,9 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 | 4 | Tablero paciente | `/epis2/dashboard?tab=patient&patientId=` |
 | 5 | Export FHIR | Journey API existente |
 
-**Pendiente gate V1 completo:** documento importado, búsqueda semántica, impresión PDF.
+**Slice adicional:** blueprints interconsulta/imagenología; búsqueda documentos por título (sin RAG).
+
+**Pendiente gate V1 completo:** RAG pgvector, OCR, impresión PDF.
 
 ---
 
@@ -84,9 +86,24 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 | 4 | Acusar recibo | POST acknowledge + auditoría |
 | 5 | Alta probable | DEMO-004 en lista |
 
-**Pendiente gate V2 completo:** órdenes, evolución diaria operativa, epicrisis alta end-to-end.
+**Slice adicional:** `clinical_orders` en tablero servicio; alias evolución diaria.
+
+**Pendiente gate V2 completo:** traslados, epicrisis alta end-to-end operativa.
 
 **Tests:** `inpatient.integration.test.ts`
+
+---
+
+## 5. Journey V3 — Enfermería / farmacia (slice demo)
+
+**Nombre:** `golden-v3-mar-nursing`
+
+| # | Paso | Criterio |
+|---|------|----------|
+| 1 | `nota de enfermeria` | Formulario `/espacio/enfermeria` |
+| 2 | `registrar mar warfarina` | Formulario MAR + alertas alto riesgo |
+| 3 | Aprobar MAR con doble chequeo | Fila en `mar_administration_records` |
+| 4 | `validacion farmaceutica` | `/espacio/farmacia` |
 
 ---
 

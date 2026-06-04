@@ -40,4 +40,9 @@ export const BLUEPRINT_DRAFT_TYPES: Record<string, string> = {
   discharge_summary: 'discharge_summary',
   prescription: 'prescription',
   lab_request: 'lab_request',
+  referral: 'referral',
+  imaging_request: 'imaging_request',
+  nursing_note: 'nursing_note',
+  medication_administration: 'medication_administration',
+  pharmacy_validation: 'pharmacy_validation',
 };

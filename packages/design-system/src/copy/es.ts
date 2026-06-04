@@ -70,6 +70,7 @@ export const copy = {
     probableDischarge: 'Altas probables',
     pendingTeam: 'Pendientes del equipo',
     openPatient: 'Ver ficha',
+    activeOrders: 'Órdenes activas del servicio',
   },
   longitudinal: {
     title: 'Historia clínica (demo)',
@@ -82,6 +83,9 @@ export const copy = {
     encounters: 'Encuentros',
     emptySection: 'Sin registros en esta sección.',
     documentRef: 'Referencia demo',
+    searchDocuments: 'Buscar en documentos',
+    searchPlaceholder: 'Título o referencia…',
+    searchNoHits: 'Sin coincidencias en documentos indexados.',
   },
   activePatient: {
     none: 'Sin paciente activo — fija uno para encadenar comandos',

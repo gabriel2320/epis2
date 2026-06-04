@@ -35,6 +35,24 @@ describe('resolveCommand', () => {
     }
   });
 
+  it('interconsulta e imagenología resuelven con paciente', () => {
+    const ref = resolveCommand({
+      text: 'solicitar interconsulta',
+      role: 'physician',
+      patientId: DEMO_PATIENT_ID,
+    });
+    expect(ref.status).toBe('resolved');
+    if (ref.status === 'resolved') expect(ref.intent).toBe('request_referral');
+
+    const img = resolveCommand({
+      text: 'pedir tac',
+      role: 'physician',
+      patientId: DEMO_PATIENT_ID,
+    });
+    expect(img.status).toBe('resolved');
+    if (img.status === 'resolved') expect(img.intent).toBe('request_imaging');
+  });
+
   it('ambigüedad devuelve hasta 3 candidatos ordenados por score', () => {
     const result = resolveCommand({
       text: 'evolucion y epicrisis',

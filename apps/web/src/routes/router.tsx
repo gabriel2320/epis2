@@ -134,6 +134,41 @@ const labFormRoute = createRoute({
   component: clinicalFormPage('/espacio/laboratorio'),
 });
 
+const referralFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/interconsulta',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/interconsulta'),
+});
+
+const imagingFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/imagenologia',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/imagenologia'),
+});
+
+const nursingFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/enfermeria',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/enfermeria'),
+});
+
+const marFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/mar',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/mar'),
+});
+
+const pharmacyFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/farmacia',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/farmacia'),
+});
+
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
@@ -160,6 +195,11 @@ export const routeTree = rootRoute.addChildren([
     dischargeFormRoute,
     prescriptionFormRoute,
     labFormRoute,
+    referralFormRoute,
+    imagingFormRoute,
+    nursingFormRoute,
+    marFormRoute,
+    pharmacyFormRoute,
   ]),
 ]);
 

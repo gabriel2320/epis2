@@ -4,3 +4,8 @@ export { evolutionNoteBlueprint } from './evolution-note.js';
 export { dischargeSummaryBlueprint } from './discharge-summary.js';
 export { prescriptionBlueprint } from './prescription.js';
 export { labRequestBlueprint } from './lab-request.js';
+export { referralBlueprint } from './referral.js';
+export { imagingRequestBlueprint } from './imaging-request.js';
+export { nursingNoteBlueprint } from './nursing-note.js';
+export { medicationAdministrationBlueprint } from './medication-administration.js';
+export { pharmacyValidationBlueprint } from './pharmacy-validation.js';

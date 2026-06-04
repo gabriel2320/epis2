@@ -14,11 +14,7 @@ describe('EPIS P8 synonym map', () => {
   });
 
   it('frases EPIS deferidas no resuelven a formulario MVP', () => {
-    for (const phrase of [
-      'haz ingreso',
-      'prepara interconsulta',
-      'contexto clinico del paciente',
-    ]) {
+    for (const phrase of ['haz ingreso', 'contexto clinico del paciente']) {
       const result = resolveCommand({
         text: phrase,
         role: 'physician',

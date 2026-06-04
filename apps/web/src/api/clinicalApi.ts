@@ -1,4 +1,8 @@
-import type { PatientClinicalAlertsResponse, PatientLongitudinalResponse } from '@epis2/contracts';
+import type {
+  DocumentSearchResponse,
+  PatientClinicalAlertsResponse,
+  PatientLongitudinalResponse,
+} from '@epis2/contracts';
 import { apiFetch } from './client.js';
 
 export type PatientListRow = {
@@ -40,12 +44,24 @@ export function fetchPatientLongitudinal(patientId: string) {
   return apiFetch<PatientLongitudinalResponse>(`/api/patients/${patientId}/longitudinal`);
 }
 
+export function searchPatientDocuments(patientId: string, query: string) {
+  const q = encodeURIComponent(query.trim());
+  return apiFetch<DocumentSearchResponse>(
+    `/api/patients/${patientId}/documents/search?q=${q}`,
+  );
+}
+
 /** Blueprint EPIS2 alineado a intent del command-registry (para CDR contextual). */
 export const INTENT_TO_ASSIST_BLUEPRINT: Record<string, string> = {
   create_evolution_draft: 'evolution_note',
   prepare_discharge_draft: 'discharge_summary',
   prepare_prescription: 'prescription',
   request_laboratory: 'lab_request',
+  request_referral: 'referral',
+  request_imaging: 'imaging_request',
+  create_nursing_note: 'nursing_note',
+  record_medication_administration: 'medication_administration',
+  prepare_pharmacy_review: 'pharmacy_validation',
 };
 
 export const BLUEPRINT_BY_ROUTE: Record<string, string> = {
@@ -53,6 +69,11 @@ export const BLUEPRINT_BY_ROUTE: Record<string, string> = {
   '/espacio/epicrisis': 'discharge_summary',
   '/espacio/receta': 'prescription',
   '/espacio/laboratorio': 'lab_request',
+  '/espacio/interconsulta': 'referral',
+  '/espacio/imagenologia': 'imaging_request',
+  '/espacio/enfermeria': 'nursing_note',
+  '/espacio/mar': 'medication_administration',
+  '/espacio/farmacia': 'pharmacy_validation',
 };
 
 export const DRAFT_TYPE_TO_BLUEPRINT: Record<string, string> = {
@@ -60,6 +81,11 @@ export const DRAFT_TYPE_TO_BLUEPRINT: Record<string, string> = {
   discharge_summary: 'discharge_summary',
   prescription: 'prescription',
   lab_request: 'lab_request',
+  referral: 'referral',
+  imaging_request: 'imaging_request',
+  nursing_note: 'nursing_note',
+  medication_administration: 'medication_administration',
+  pharmacy_validation: 'pharmacy_validation',
 };
 
 const SUMMARY_CONTEXT_KEYS = [
