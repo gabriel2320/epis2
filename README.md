@@ -47,16 +47,21 @@ npm run check
 npm run test
 npm run db:validate
 npm run db:migrate   # requiere DATABASE_URL + Postgres
-docker compose up -d   # PostgreSQL (host **5433**) + Ollama
+docker compose up -d   # PostgreSQL (host **5433**); Ollama opcional si usas la app nativa
+npm run ai:enable      # Ollama nativo (Windows/macOS) o Docker; pull del modelo en .env
+npm run dev:ai         # puerto 3002 (dejar en terminal aparte)
 npm run dev:api        # puerto 3001
 npm run dev:web        # puerto 5173
-npm run dev:ai         # puerto 3002
 ```
+
+Copia `.env.example` → `.env` y confirma `LOCAL_AI_BASE_URL=http://127.0.0.1:3002` y `OLLAMA_BASE_URL=http://127.0.0.1:11434`.
+
+En el Centro de Comando verás el chip **IA local** en verde cuando Ollama y `dev:ai` estén activos.
 
 ## Próximo paso
 
 **MVP v1 (fases 00–11) cerrado en código.** Piloto humano: `docs/quality/PILOT_DEMO_CHECKLIST.md` · `npm run quality:golden-journey`
 
-Servicio IA: `npm run dev:ai` (opcional; la app funciona sin Ollama).
+Servicio IA: `npm run ai:enable` + `npm run dev:ai` (opcional; la app funciona sin Ollama).
 
 Usuarios demo: `docs/auth/DEMO_USERS.md`. Migraciones: `npm run db:migrate`.

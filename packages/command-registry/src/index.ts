@@ -17,7 +17,18 @@ export {
 } from './rank.js';
 export { extractSlots } from './slots.js';
 export { resolveCommand } from './router.js';
-export { getMvpCommandChips, type CommandChip } from './chips.js';
+export {
+  getMvpCommandChips,
+  getCommandChipsForRole,
+  getCommandBarAiHint,
+  type CommandChip,
+} from './chips.js';
+export {
+  ROLE_COMMAND_INTENTS,
+  ROLE_AI_COMMAND_HINTS,
+  getRoleAiCommandHints,
+  type RoleAiCommandHint,
+} from './roleSuggestions.js';
 export {
   buildCommandPhraseSuite,
   COMMAND_PHRASE_SUITE,

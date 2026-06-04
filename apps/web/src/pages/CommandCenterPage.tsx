@@ -9,22 +9,23 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ApiError } from '../api/client.js';
 import { resolveCommand as resolveCommandApi } from '../api/commandApi.js';
 import { CommandSuggestionChips } from '../components/CommandSuggestionChips.js';
 import { PowerBar } from '../components/PowerBar.js';
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
-import { DASHBOARD_TAB_BY_INTENT } from '@epis2/command-registry';
+import { DASHBOARD_TAB_BY_INTENT, getCommandBarAiHint } from '@epis2/command-registry';
 import type { ClinicalIntent } from '@epis2/command-registry';
+import { fetchAiStatus } from '../api/aiApi.js';
 import { INTENT_TO_ASSIST_BLUEPRINT, listPatients, type PatientListRow } from '../api/clinicalApi.js';
 import { ActivePatientBanner } from '../components/ActivePatientBanner.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 
 export function CommandCenterPage() {
-  const { session, logout } = useAuth();
+  const { session, logout, hasPermission } = useAuth();
   const { patient: activePatient, setPatient } = useActivePatient();
   const navigate = useClinicalNavigate();
   const [query, setQuery] = useState('');
@@ -32,6 +33,18 @@ export function CommandCenterPage() {
   const [isResolving, setIsResolving] = useState(false);
   const [lastResult, setLastResult] = useState<CommandResolveResponse | null>(null);
   const [patients, setPatients] = useState<PatientListRow[]>([]);
+  const [aiAvailable, setAiAvailable] = useState<boolean | null>(null);
+
+  const role = session?.user.role ?? 'physician';
+  const permissions = session?.permissions ?? [];
+  const roleDisplay = copy.roles[role as keyof typeof copy.roles] ?? role;
+  const aiHint = getCommandBarAiHint(role, aiAvailable === true);
+
+  useEffect(() => {
+    void fetchAiStatus()
+      .then((s) => setAiAvailable(s.available))
+      .catch(() => setAiAvailable(false));
+  }, []);
 
   const alertBlueprintId =
     lastResult?.status === 'resolved'
@@ -78,8 +91,9 @@ export function CommandCenterPage() {
           navigate({
             to: '/epis2/dashboard',
             search: {
-              tab: tab as 'work' | 'patient' | 'service',
-              patientId: tab === 'patient' ? activePatient?.id : undefined,
+              tab: tab as 'work' | 'patient' | 'service' | 'quality',
+              patientId:
+                tab === 'patient' ? activePatient?.id : undefined,
             },
           });
           return;
@@ -168,6 +182,9 @@ export function CommandCenterPage() {
             onChange={setQuery}
             onSubmit={() => void submit()}
             error={error}
+            aiAvailable={aiAvailable}
+            aiHint={error ? undefined : aiHint}
+            roleLabel={roleDisplay}
           />
         </Box>
 
@@ -245,6 +262,9 @@ export function CommandCenterPage() {
         </Stack>
 
         <CommandSuggestionChips
+          role={role}
+          permissions={permissions}
+          aiAvailable={aiAvailable === true && hasPermission('ai.read')}
           onSelect={(cmd) => {
             setQuery(cmd);
             setError(undefined);

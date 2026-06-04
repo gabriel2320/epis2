@@ -48,6 +48,10 @@ vi.mock('../api/clinicalApi.js', async (importOriginal) => {
   };
 });
 
+vi.mock('../api/aiApi.js', () => ({
+  fetchAiStatus: vi.fn().mockResolvedValue({ available: false, ollama: 'down', localAi: 'down', message: '' }),
+}));
+
 vi.mock('../auth/AuthContext.js', () => ({
   useAuth: () => ({
     session: {
@@ -57,7 +61,7 @@ vi.mock('../auth/AuthContext.js', () => ({
         displayName: 'Dra. Ana Demo',
         role: 'physician',
       },
-      permissions: ['command.execute', 'draft.approve'],
+      permissions: ['command.execute', 'draft.approve', 'ai.read', 'dashboard.read'],
       expiresAt: new Date().toISOString(),
     },
     logout: vi.fn(),
@@ -65,7 +69,8 @@ vi.mock('../auth/AuthContext.js', () => ({
     isLoading: false,
     login: vi.fn(),
     refreshSession: vi.fn(),
-    hasPermission: (p: string) => p === 'command.execute',
+    hasPermission: (p: string) =>
+      ['command.execute', 'draft.approve', 'ai.read', 'dashboard.read'].includes(p),
   }),
 }));
 
@@ -91,6 +96,19 @@ describe('CommandCenterPage', () => {
       within(powerBar).getByRole('button', { name: copy.commandCenter.submit }),
     );
     expect(screen.getByText(copy.commandCenter.emptyCommand)).toBeInTheDocument();
+  });
+
+  it('muestra chips de sugerencias según rol médico', () => {
+    renderCommandCenter();
+    expect(screen.getByTestId('epis2-command-chips')).toBeInTheDocument();
+    expect(screen.getByText(copy.commandCenter.suggestionsRoleTitle)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /evoluciona al paciente/i })).toBeInTheDocument();
+  });
+
+  it('integra estado IA en la barra de comando', async () => {
+    renderCommandCenter();
+    expect(await screen.findByTestId('epis2-command-ai-status')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-command-role-chip')).toBeInTheDocument();
   });
 
   it('muestra alertas CDS/CDR cuando hay paciente activo', async () => {
