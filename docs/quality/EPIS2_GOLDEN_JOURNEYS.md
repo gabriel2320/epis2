@@ -1,0 +1,141 @@
+# EPIS2 — Journeys dorados
+
+**Versión:** 1.0  
+Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implementación EPIS2-11) con journeys por versión de producto y gate V0 ampliado (Modo tablero).
+
+---
+
+## 1. Journey principal V0 (obligatorio)
+
+**Nombre:** `golden-v0-command-evolution`  
+**Tests:** `tests/golden-clinical-journey.spec.ts`, `tests/golden-clinical-journey.api.spec.ts`  
+**Checklist humano:** [PILOT_DEMO_CHECKLIST.md](./PILOT_DEMO_CHECKLIST.md)
+
+### Pasos
+
+| # | Paso | Criterio |
+|---|------|----------|
+| 1 | Login médico demo | Sesión cookie; redirect Centro de Comando |
+| 2 | Centro de Comando | Power bar; home ≠ tablero |
+| 3 | Buscar / fijar paciente DEMO | Contexto activo visible |
+| 4 | Comando «evoluciona al paciente» | Intent resuelto; ruta evolución |
+| 5 | Formulario evolución | Blueprint único `evolution_note` |
+| 6 | Guardar borrador | Estado draft; no nota final |
+| 7 | (Opcional) Asistencia IA | Si Ollama up: sugerencias; si down: flujo igual |
+| 8 | Aprobar como médico | RBAC; transición approved |
+| 9 | Auditoría | Evento persistido |
+| 10 | Volver al Centro de Comando | Contexto coherente |
+| 11 | **Abrir Modo tablero** | Comando o chip «Modo tablero» |
+| 12 | **Verificar tarea completada** | Borrador aprobado / paciente reciente |
+| 13 | **Volver al Centro de Comando** | Sin pérdida de sesión |
+
+### Gate
+
+- `npm run check` verde.
+- `npm run quality:golden-journey` cuando DB disponible.
+- Ollama apagado: pasos 1–10 obligatorios; 11–13 tras EPIS2-12.
+
+---
+
+## 2. Journey seguridad medicamentosa (V0 demo)
+
+**Nombre:** `golden-v0-demo005-allergy-rx`  
+**Paciente:** DEMO-005 (alergia penicilina)
+
+| # | Paso | Criterio |
+|---|------|----------|
+| 1 | Abrir ficha DEMO-005 | Alertas CDS visibles |
+| 2 | Ir a receta | Panel alertas con debounce |
+| 3 | Escribir Ceftriaxona | API `clinical-alerts?fields=` devuelve beta-lactam y/o allergy |
+| 4 | Guardar borrador | Aprobación **no** bloqueada por alertas |
+| 5 | Aprobar con revisión humana | Nota versionada + auditoría |
+
+**Tests:** `clinical.integration.test.ts`, `rules.test.ts`, `PatientWorkspacePage.test.tsx`
+
+---
+
+## 3. Journey V1 — Longitudinal (plan)
+
+**Nombre:** `golden-v1-longitudinal-review`
+
+```text
+Login → paciente → problema activo → encuentro → evolución aprobada
+→ documento importado → búsqueda semántica con fuente
+→ timeline → export FHIR → tablero paciente
+```
+
+**Gate V1:** cada dato nuevo pasa por borrador → aprobación.
+
+---
+
+## 4. Journey V2 — Hospitalización (plan)
+
+**Nombre:** `golden-v2-admission-discharge`
+
+```text
+Ingreso → censo → órdenes → resultado crítico → acuse
+→ evolución diaria → epicrisis → alta → tablero servicio
+```
+
+---
+
+## 5. Journey V3 — Multidisciplinario (plan)
+
+**Nombre:** `golden-v3-mar-nursing`
+
+```text
+Nota enfermería → signos → medicamento alto riesgo
+→ doble chequeo CDR → MAR documentado → borrador → aprobación enfermería/médico según rol
+```
+
+---
+
+## 6. Journey V4 — Interop read-only (plan)
+
+**Nombre:** `golden-v4-fhir-roundtrip`
+
+```text
+Export bundle validado → staging import sintético → lectura sin writeback automático
+```
+
+---
+
+## 7. Journey V5 — IA avanzada (plan)
+
+**Nombre:** `golden-v5-ai-traceable`
+
+| Escenario | Criterio |
+|-----------|----------|
+| Ollama ON | `ai_runs` + borrador sugerido |
+| Ollama OFF | Resumen manual posible |
+| RAG | Respuesta incluye fuentes documentales |
+| Sin auto-approve | Ningún endpoint IA crea nota final |
+
+---
+
+## 8. Anti-patrones (falla automática del journey)
+
+- Redirección post-login a `/dashboard` o equivalente.
+- Nota clínica creada sin registro en `approvals`.
+- Sugerencia IA persistida como nota final.
+- Segundo registry de comandos en runtime.
+- Copy clínico visible en inglés.
+
+---
+
+## 9. Comandos de verificación
+
+```bash
+npm run test
+npm run check
+npm run architecture:validate
+npm run quality:golden-journey   # requiere DATABASE_URL
+```
+
+---
+
+## Referencias
+
+- [ANTI_DRIFT_GATES.md](./ANTI_DRIFT_GATES.md)
+- [../product/EPIS2_DASHBOARD_MODE.md](../product/EPIS2_DASHBOARD_MODE.md)
+- [../product/EPIS2_RELEASE_ROADMAP.md](../product/EPIS2_RELEASE_ROADMAP.md)

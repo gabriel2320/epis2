@@ -29,6 +29,9 @@ Aplicación clínica **command-first**, independiente del proyecto EPIS (legacy)
 | [docs/ARCHITECTURE_TARGET.md](docs/ARCHITECTURE_TARGET.md) | Arquitectura objetivo |
 | [docs/LEGACY_DONOR_MAP.md](docs/LEGACY_DONOR_MAP.md) | Migración selectiva desde EPIS |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Fases EPIS2-00 … EPIS2-11 |
+| [docs/product/EPIS2_RELEASE_ROADMAP.md](docs/product/EPIS2_RELEASE_ROADMAP.md) | Roadmap producto V0–V5 |
+| [docs/product/EPIS2_COMPLETE_CAPABILITY_MAP.md](docs/product/EPIS2_COMPLETE_CAPABILITY_MAP.md) | Mapa de capacidades |
+| [reports/epis2-complete-emr-product-plan.md](reports/epis2-complete-emr-product-plan.md) | Plan maestro EMR (2026-06) |
 | [reports/epis2-00-foundation-and-migration-plan.md](reports/epis2-00-foundation-and-migration-plan.md) | Informe de esta fase |
 
 ## Repositorio donante
