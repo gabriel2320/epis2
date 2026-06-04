@@ -324,6 +324,19 @@ export const marAdministrationRecords = pgTable('mar_administration_records', {
     .references(() => appUsers.id),
 });
 
+export const interopStagingBatches = pgTable('interop_staging_batches', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  sourceSystem: text('source_system').notNull(),
+  batchLabel: text('batch_label').notNull(),
+  status: text('status').notNull().default('staged'),
+  recordCount: integer('record_count').notNull().default(0),
+  stagedAt: timestamp('staged_at', { withTimezone: true }).notNull().defaultNow(),
+  notes: text('notes'),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
 export const aiRuns = pgTable('ai_runs', {
   id: uuid('id').primaryKey().defaultRandom(),
   actorId: text('actor_id').references(() => appUsers.id),

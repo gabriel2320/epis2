@@ -118,13 +118,17 @@ Nota enfermería → signos → medicamento alto riesgo
 
 ---
 
-## 6. Journey V4 — Interop read-only (plan)
+## 6. Journey V4 — Interop read-only
 
-**Nombre:** `golden-v4-fhir-roundtrip`
+**Nombre:** `golden-v4-interop-ops`  
+**Rol:** `auditor.demo`
 
-```text
-Export bundle validado → staging import sintético → lectura sin writeback automático
-```
+| Paso | Acción | Criterio |
+|------|--------|----------|
+| 1 | `tablero de calidad` | Tab `quality` con staging y auditoría |
+| 2 | Validar HL7 demo | `POST /api/interop/hl7/validate` → `valid: true` |
+| 3 | Export bundle DEMO-005 (médico) | `AllergyIntolerance` penicilina en bundle |
+| 4 | Confirmar sin writeback | Lotes staging `validated`/`staged`, SoT EPIS2 intacto |
 
 ---
 

@@ -54,4 +54,16 @@ export {
   documentSearchResponseSchema,
   type DocumentSearchResponse,
 } from './documents.js';
+export {
+  auditEventsResponseSchema,
+  hl7ValidateResponseSchema,
+  interopStagingResponseSchema,
+  opsStatusResponseSchema,
+  qualityDashboardResponseSchema,
+  type AuditEventsResponse,
+  type Hl7ValidateResponse,
+  type InteropStagingResponse,
+  type OpsStatusResponse,
+  type QualityDashboardResponse,
+} from './ops.js';
 export { EPIS2_PRODUCT_NAME, EPIS2_PHASE } from './meta.js';

@@ -20,30 +20,43 @@ import {
   fetchPatientDashboard,
   fetchServiceDashboard,
 } from '../api/dashboardApi.js';
+import { fetchQualityDashboard } from '../api/opsApi.js';
 import type {
   DashboardWorkResponse,
   PatientDashboardResponse,
+  QualityDashboardResponse,
   ServiceDashboardResponse,
 } from '@epis2/contracts';
+import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { readRecentPatients } from '../clinical/recentPatients.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { DraftStatusChip } from '../components/DraftStatusChip.js';
 import { PatientDashboardTab } from '../components/PatientDashboardTab.js';
+import { QualityDashboardTab } from '../components/QualityDashboardTab.js';
 import { ServiceDashboardTab } from '../components/ServiceDashboardTab.js';
 
-type DashboardTab = 'work' | 'patient' | 'service';
+type DashboardTab = 'work' | 'patient' | 'service' | 'quality';
 
 export function DashboardModePage() {
   const search = useSearch({ strict: false }) as { tab?: string; patientId?: string };
   const navigate = useClinicalNavigate();
+  const { hasPermission } = useAuth();
+  const canQuality = hasPermission('audit.read');
   const { patient: activePatient, setPatient } = useActivePatient();
-  const tab = (search.tab === 'patient' || search.tab === 'service' ? search.tab : 'work') as DashboardTab;
+  const tab = (
+    search.tab === 'patient' ||
+    search.tab === 'service' ||
+    (search.tab === 'quality' && canQuality)
+      ? search.tab
+      : 'work'
+  ) as DashboardTab;
   const dashboardPatientId = search.patientId ?? activePatient?.id;
 
   const [work, setWork] = useState<DashboardWorkResponse | null>(null);
   const [patientBoard, setPatientBoard] = useState<PatientDashboardResponse | null>(null);
   const [serviceBoard, setServiceBoard] = useState<ServiceDashboardResponse | null>(null);
+  const [qualityBoard, setQualityBoard] = useState<QualityDashboardResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | undefined>();
   const [recentPatients, setRecentPatients] = useState(readRecentPatients());
@@ -75,6 +88,19 @@ export function DashboardModePage() {
     }
   }, []);
 
+  const loadQuality = useCallback(async () => {
+    setLoading(true);
+    setError(undefined);
+    try {
+      const res = await fetchQualityDashboard();
+      setQualityBoard(res);
+    } catch {
+      setError(copy.errors.genericMessage);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   const loadPatient = useCallback(async (patientId: string) => {
     setLoading(true);
     setError(undefined);
@@ -91,12 +117,13 @@ export function DashboardModePage() {
   useEffect(() => {
     if (tab === 'work') void load();
     if (tab === 'service') void loadService();
+    if (tab === 'quality' && canQuality) void loadQuality();
     if (tab === 'patient' && dashboardPatientId) void loadPatient(dashboardPatientId);
     if (tab === 'patient' && !dashboardPatientId) {
       setLoading(false);
       setPatientBoard(null);
     }
-  }, [tab, load, loadService, loadPatient, dashboardPatientId]);
+  }, [tab, load, loadService, loadQuality, loadPatient, dashboardPatientId, canQuality]);
 
   const setTab = (next: DashboardTab) => {
     void navigate({
@@ -132,6 +159,9 @@ export function DashboardModePage() {
           <Tab label={copy.dashboard.tabWork} value="work" data-testid="epis2-dashboard-tab-work" />
           <Tab label={copy.dashboard.tabPatient} value="patient" data-testid="epis2-dashboard-tab-patient" />
           <Tab label={copy.dashboard.tabService} value="service" data-testid="epis2-dashboard-tab-service" />
+          {canQuality ? (
+            <Tab label={copy.dashboard.tabQuality} value="quality" data-testid="epis2-dashboard-tab-quality" />
+          ) : null}
         </Tabs>
 
         {tab === 'patient' ? (
@@ -181,6 +211,19 @@ export function DashboardModePage() {
               />
             ) : (
               <Alert severity="info">{copy.dashboard.tabServiceSoon}</Alert>
+            )}
+          </>
+        ) : null}
+
+        {tab === 'quality' ? (
+          <>
+            {error ? <Alert severity="error">{error}</Alert> : null}
+            {loading ? (
+              <Typography color="text.secondary">{copy.dashboard.loading}</Typography>
+            ) : qualityBoard ? (
+              <QualityDashboardTab data={qualityBoard} />
+            ) : (
+              <Alert severity="info">{copy.dashboard.tabQualityRestricted}</Alert>
             )}
           </>
         ) : null}

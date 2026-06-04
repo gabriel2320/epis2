@@ -182,7 +182,7 @@ Leyenda de madurez:
 | Mi trabajo | V0 | ○ EPIS2-12 |
 | Tablero del paciente | V1 | ✓ slice demo |
 | Tablero del servicio | V2 | ○ |
-| Calidad / administración | V4 | ○ |
+| Calidad / administración | V4 | ◐ staging HL7/FHIR read-only, tablero calidad, ops |
 
 ---
 

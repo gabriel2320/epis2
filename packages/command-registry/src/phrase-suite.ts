@@ -13,6 +13,7 @@ const DASHBOARD_INTENTS = new Set<ClinicalIntent>([
   'open_dashboard',
   'open_dashboard_work',
   'open_dashboard_service',
+  'open_dashboard_quality',
 ]);
 
 function expandPhrase(base: string, intent: ClinicalIntent): PhraseSuiteEntry[] {

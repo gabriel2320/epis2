@@ -52,7 +52,10 @@ const dashboardModeRoute = createRoute({
   path: '/epis2/dashboard',
   validateSearch: (search: Record<string, unknown>) => ({
     tab:
-      search.tab === 'patient' || search.tab === 'service' || search.tab === 'work'
+      search.tab === 'patient' ||
+      search.tab === 'service' ||
+      search.tab === 'quality' ||
+      search.tab === 'work'
         ? search.tab
         : 'work',
     patientId: typeof search.patientId === 'string' ? search.patientId : undefined,

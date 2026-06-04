@@ -12,10 +12,12 @@ describe('resolveCommand', () => {
 
   it('cada frase de la suite resuelve al intent esperado (con paciente)', () => {
     for (const { phrase, intent } of COMMAND_PHRASE_SUITE) {
+      const role =
+        intent === 'open_dashboard_quality' ? ('auditor' as const) : ('physician' as const);
       const input =
         intent === 'search_patient'
-          ? { text: phrase, role: 'physician' as const }
-          : { text: phrase, role: 'physician' as const, patientId: DEMO_PATIENT_ID };
+          ? { text: phrase, role }
+          : { text: phrase, role, patientId: DEMO_PATIENT_ID };
       const result = resolveCommand(input);
       expect(result.status, `frase: ${phrase}`).toBe('resolved');
       if (result.status === 'resolved') {

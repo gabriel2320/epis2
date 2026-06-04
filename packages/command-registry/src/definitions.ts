@@ -232,6 +232,25 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       ),
   },
   {
+    intent: 'open_dashboard_quality',
+    labelEs: 'Tablero calidad',
+    aliasesEs: [
+      'tablero calidad',
+      'tablero de calidad',
+      'auditoria del sistema',
+      'ver auditoria',
+      'panel de calidad',
+    ],
+    routePath: INTENT_ROUTE_PATHS.open_dashboard_quality,
+    requiredPermission: 'audit.read',
+    requiresPatient: false,
+    priority: 81,
+    match: (q) =>
+      /tablero\s+(de\s+)?calidad|panel\s+de\s+calidad|auditoria\s+del\s+sistema|ver\s+auditoria/.test(
+        q,
+      ),
+  },
+  {
     intent: 'open_dashboard_work',
     labelEs: 'Mi trabajo',
     aliasesEs: ['ver mi trabajo', 'mi trabajo', 'mis tareas', 'mi bandeja'],

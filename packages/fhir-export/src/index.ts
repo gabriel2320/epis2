@@ -29,9 +29,13 @@ export {
   toFhirEncounter,
   toFhirPatient,
   toFhirServiceRequest,
+  toFhirAllergyIntolerance,
+  toFhirMedicationStatement,
   type PatientSource,
   type EncounterSource,
   type ClinicalNoteSource,
   type LabDraftSource,
+  type AllergySource,
+  type MedicationSource,
 } from './mappers.js';
 export { assertExportClean, type ExportValidationResult } from './validateExport.js';

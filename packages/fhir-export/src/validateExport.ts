@@ -38,6 +38,14 @@ export function assertExportClean(resource: unknown): ExportValidationResult {
       if (!v.ok) return { ok: false, profileErrors: v.errors };
       break;
     }
+    case 'AllergyIntolerance':
+    case 'MedicationStatement': {
+      const r = resource as { resourceType?: string; id?: string; patient?: unknown; subject?: unknown };
+      if (!r.id || (!r.patient && !r.subject)) {
+        return { ok: false, profileErrors: 'recurso longitudinal incompleto' };
+      }
+      break;
+    }
     case 'Bundle': {
       const bundle = resource as { entry?: { resource: unknown }[] };
       for (const entry of bundle.entry ?? []) {

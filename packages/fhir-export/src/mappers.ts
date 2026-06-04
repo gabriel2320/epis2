@@ -197,11 +197,57 @@ export function toFhirServiceRequest(
   return resource;
 }
 
+export type AllergySource = {
+  id: string;
+  patientId: string;
+  substance: string;
+  severity: string;
+};
+
+export type MedicationSource = {
+  id: string;
+  patientId: string;
+  name: string;
+  doseText?: string | null;
+  status: string;
+};
+
+export function toFhirAllergyIntolerance(source: AllergySource, isSynthetic: boolean) {
+  const criticality =
+    source.severity === 'severe' ? 'high' : source.severity === 'mild' ? 'low' : 'low';
+  return {
+    resourceType: 'AllergyIntolerance' as const,
+    id: source.id,
+    meta: syntheticTagMeta(EPIS2_PROFILES.allergyIntolerance, isSynthetic),
+    clinicalStatus: {
+      coding: [{ system: 'http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical', code: 'active' }],
+    },
+    code: { text: source.substance },
+    patient: patientReference(source.patientId),
+    criticality,
+  };
+}
+
+export function toFhirMedicationStatement(source: MedicationSource, isSynthetic: boolean) {
+  return {
+    resourceType: 'MedicationStatement' as const,
+    id: source.id,
+    meta: syntheticTagMeta(EPIS2_PROFILES.medicationStatement, isSynthetic),
+    status: source.status === 'active' ? 'active' : 'stopped',
+    medicationCodeableConcept: { text: source.name },
+    subject: patientReference(source.patientId),
+    dosage: source.doseText
+      ? [{ text: source.doseText }]
+      : undefined,
+  };
+}
+
 export function buildPatientExportBundle(
   patient: Epis2PatientResource,
   encounters: Epis2EncounterResource[],
   documents: Epis2DocumentReferenceResource[],
   serviceRequests: Epis2ServiceRequestResource[],
+  extras: Record<string, unknown>[] = [],
 ) {
   const entries: { fullUrl: string; resource: Record<string, unknown> }[] = [
     {
@@ -225,6 +271,14 @@ export function buildPatientExportBundle(
     entries.push({
       fullUrl: `${EPIS2_FHIR_BASE}/ServiceRequest/${sr.id}`,
       resource: sr as unknown as Record<string, unknown>,
+    });
+  }
+  for (const extra of extras) {
+    const rt = extra.resourceType as string;
+    const id = extra.id as string;
+    entries.push({
+      fullUrl: `${EPIS2_FHIR_BASE}/${rt}/${id}`,
+      resource: extra,
     });
   }
   return {

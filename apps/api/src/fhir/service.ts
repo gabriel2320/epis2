@@ -1,15 +1,23 @@
 import {
   assertExportClean,
   buildPatientExportBundle,
+  toFhirAllergyIntolerance,
   toFhirDocumentReference,
   toFhirEncounter,
+  toFhirMedicationStatement,
   toFhirPatient,
   toFhirServiceRequest,
 } from '@epis2/fhir-export';
 import { DEMO_IDENTIFIER_SYSTEM } from '@epis2/test-fixtures';
 import { and, eq } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
-import { clinicalDrafts, clinicalNotes, encounters } from '../db/schema.js';
+import {
+  clinicalDrafts,
+  clinicalNotes,
+  encounters,
+  patientAllergies,
+  patientMedications,
+} from '../db/schema.js';
 import { getPatientById, getPatientDemoCaseCode, listApprovedNotes } from '../clinical/service.js';
 
 export class FhirExportError extends Error {
@@ -172,11 +180,47 @@ export async function exportFhirPatientBundle(db: Database, patientId: string) {
     )
     .filter((r): r is NonNullable<typeof r> => r !== null);
 
+  const allergyRows = await db
+    .select()
+    .from(patientAllergies)
+    .where(eq(patientAllergies.patientId, patientId));
+  const medRows = await db
+    .select()
+    .from(patientMedications)
+    .where(eq(patientMedications.patientId, patientId));
+
+  const longitudinalExtras = [
+    ...allergyRows.map((a) =>
+      toFhirAllergyIntolerance(
+        {
+          id: a.id,
+          patientId: a.patientId,
+          substance: a.substance,
+          severity: a.severity,
+        },
+        patient.isSynthetic,
+      ),
+    ),
+    ...medRows.map((m) =>
+      toFhirMedicationStatement(
+        {
+          id: m.id,
+          patientId: m.patientId,
+          name: m.name,
+          doseText: m.doseText,
+          status: m.status,
+        },
+        patient.isSynthetic,
+      ),
+    ),
+  ] as Record<string, unknown>[];
+
   const bundle = buildPatientExportBundle(
     patientResource,
     encounterResources,
     documentResources,
     serviceRequests,
+    longitudinalExtras,
   );
   ensureValid(bundle);
   return bundle;

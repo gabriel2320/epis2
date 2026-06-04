@@ -71,6 +71,27 @@ export async function listAuthAuditEvents(db: Database | null, limit = 200) {
     .slice(-limit);
 }
 
+export async function listRecentAuditEvents(db: Database | null, limit = 100) {
+  if (db) {
+    const rows = await db
+      .select()
+      .from(auditEvents)
+      .orderBy(desc(auditEvents.at))
+      .limit(limit);
+    return rows.map((r) => ({
+      id: r.id,
+      eventType: r.eventType,
+      at: r.at.toISOString(),
+      actorId: r.actorId,
+      username: r.username,
+      entityType: r.entityType,
+      entityId: r.entityId,
+      message: r.message,
+    }));
+  }
+  return memoryEvents.slice(-limit).map((e) => ({ ...e }));
+}
+
 export function clearMemoryAudit(): void {
   memoryEvents.length = 0;
 }

@@ -46,7 +46,15 @@ export async function registerFhirRoutes(
   app.get('/api/fhir/status', async () => ({
     enabled: true,
     ...FHIR_BOUNDARY,
-    resources: ['Patient', 'Encounter', 'DocumentReference', 'ServiceRequest', 'Bundle'],
+    resources: [
+      'Patient',
+      'Encounter',
+      'DocumentReference',
+      'ServiceRequest',
+      'AllergyIntolerance',
+      'MedicationStatement',
+      'Bundle',
+    ],
     profileDoc: 'docs/fhir/EPIS2_MINIMAL_EXPORT_PROFILE.md',
   }));
 

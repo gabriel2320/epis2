@@ -5,6 +5,7 @@ import { findUiOnlyKeys } from './uiForbidden.js';
 import {
   bodyToNarrative,
   buildPatientExportBundle,
+  toFhirAllergyIntolerance,
   toFhirDocumentReference,
   toFhirEncounter,
   toFhirPatient,
@@ -78,6 +79,38 @@ describe('FHIR export mappers (EPIS2-10)', () => {
       true,
     );
     expect(skip).toBeNull();
+  });
+
+  it('AllergyIntolerance DEMO-005 valida perfil', () => {
+    const demo005 = getDemoCaseByPatientId('a0000001-0000-4000-8000-000000000005')!;
+    const allergy = toFhirAllergyIntolerance(
+      {
+        id: 'al-demo-penicillin',
+        patientId: demo005.patientId,
+        substance: 'Penicilina',
+        severity: 'high',
+      },
+      true,
+    );
+    expect(assertExportClean(allergy).ok).toBe(true);
+    const bundle = buildPatientExportBundle(
+      toFhirPatient({
+        id: demo005.patientId,
+        displayName: demo005.displayName,
+        birthDate: demo005.birthDate,
+        sex: demo005.sex,
+        isSynthetic: true,
+        demoIdentifier: demo005.demoCaseCode,
+      }),
+      [],
+      [],
+      [],
+      [allergy],
+    );
+    const hasAllergy = (bundle.entry ?? []).some(
+      (e) => (e.resource as { resourceType?: string }).resourceType === 'AllergyIntolerance',
+    );
+    expect(hasAllergy).toBe(true);
   });
 
   it('bundle de paciente valida y no contiene UI-only', () => {

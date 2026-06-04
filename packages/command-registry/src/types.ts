@@ -16,7 +16,8 @@ export type ClinicalIntent =
   | 'open_dashboard'
   | 'open_dashboard_work'
   | 'open_dashboard_patient'
-  | 'open_dashboard_service';
+  | 'open_dashboard_service'
+  | 'open_dashboard_quality';
 
 export type CommandResolveStatus =
   | 'resolved'

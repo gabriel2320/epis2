@@ -24,6 +24,17 @@ vi.mock('../api/dashboardApi.js', () => ({
   fetchDashboardWork,
 }));
 
+vi.mock('../auth/AuthContext.js', () => ({
+  useAuth: () => ({
+    session: null,
+    isLoading: false,
+    login: vi.fn(),
+    logout: vi.fn(),
+    refreshSession: vi.fn(),
+    hasPermission: () => false,
+  }),
+}));
+
 afterEach(() => cleanup());
 
 describe('DashboardModePage', () => {

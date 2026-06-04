@@ -1,6 +1,7 @@
 import {
   dashboardWorkResponseSchema,
   patientDashboardResponseSchema,
+  qualityDashboardResponseSchema,
   serviceDashboardResponseSchema,
 } from '@epis2/contracts';
 import type { FastifyInstance } from 'fastify';
@@ -14,6 +15,7 @@ import {
 import { getPatientById } from '../clinical/service.js';
 import { getPatientDashboardSummary } from '../clinical/longitudinal.js';
 import { getServiceDashboardSummary } from '../inpatient/service.js';
+import { getQualityDashboardSummary } from './quality.js';
 import { DEMO_WORK_TASKS, getDashboardWorkSummary } from './service.js';
 
 export async function registerDashboardRoutes(
@@ -22,6 +24,7 @@ export async function registerDashboardRoutes(
   db: Database | null,
 ) {
   const requireDashboardRead = createRequirePermission(config, 'dashboard.read');
+  const requireAuditRead = createRequirePermission(config, 'audit.read');
 
   app.get(
     '/api/dashboard/work',
@@ -107,6 +110,31 @@ export async function registerDashboardRoutes(
 
       const summary = await getServiceDashboardSummary(db, unitCode);
       return serviceDashboardResponseSchema.parse(summary);
+    },
+  );
+
+  app.get(
+    '/api/dashboard/quality',
+    { preHandler: requireAuditRead },
+    async (request, reply) => {
+      const session = (request as AuthenticatedRequest).session;
+
+      await appendAudit(db, {
+        eventType: 'dashboard.opened',
+        actorId: session.sub,
+        username: session.username,
+        entityType: 'dashboard',
+        entityId: 'quality',
+        message: 'Modo tablero — calidad',
+        payload: { tab: 'quality' },
+      });
+
+      if (!db) {
+        return reply.status(503).send({ error: 'Base de datos no disponible' });
+      }
+
+      const summary = await getQualityDashboardSummary(db);
+      return qualityDashboardResponseSchema.parse(summary);
     },
   );
 }

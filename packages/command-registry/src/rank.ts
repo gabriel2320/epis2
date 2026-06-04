@@ -104,7 +104,8 @@ export function scoreCommandDefinition(
     const clinicalTopic = /sintesis|resumen|evolucion|epicrisis|receta|laboratorio|hemograma/.test(
       normalized,
     );
-    const dashboardTopic = /\b(tablero|dashboard|mi\s+trabajo|mis\s+tareas)\b/.test(normalized);
+    const dashboardTopic =
+      /\b(tablero|dashboard|mi\s+trabajo|mis\s+tareas|calidad|auditoria)\b/.test(normalized);
     if (clinicalTopic && !dashboardTopic) {
       return 0;
     }

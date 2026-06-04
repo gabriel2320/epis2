@@ -8,7 +8,10 @@ import { registerCommandRoutes } from './commands/routes.js';
 import { registerClinicalRoutes } from './clinical/routes.js';
 import { registerFhirRoutes } from './fhir/routes.js';
 import { registerDashboardRoutes } from './dashboard/routes.js';
+import { registerAuditRoutes } from './audit/routes.js';
+import { registerInteropRoutes } from './interop/routes.js';
 import { registerInpatientRoutes } from './inpatient/routes.js';
+import { registerOpsRoutes } from './ops/routes.js';
 import type { AppConfig } from './config.js';
 import { getDatabase, pingDatabase } from './db/client.js';
 
@@ -76,6 +79,9 @@ export async function buildApp(config: AppConfig) {
   await registerFhirRoutes(app, config, db);
   await registerDashboardRoutes(app, config, db);
   await registerInpatientRoutes(app, config, db);
+  await registerAuditRoutes(app, config, db);
+  await registerOpsRoutes(app, config, db);
+  await registerInteropRoutes(app, config, db);
 
   return app;
 }
