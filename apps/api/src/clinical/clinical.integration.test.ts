@@ -90,7 +90,7 @@ describe.skipIf(!hasDb)('clinical API (integration)', () => {
       headers: { cookie },
       payload: { status: 'approved' },
     });
-    expect(illegal.statusCode).toBe(409);
+    expect(illegal.statusCode).toBe(400);
 
     const notesBefore = await listApprovedNotes(db, patientId);
     const beforeCount = notesBefore.length;

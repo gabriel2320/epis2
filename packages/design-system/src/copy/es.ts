@@ -30,6 +30,22 @@ export const copy = {
   layout: {
     backToCommand: 'Volver al Centro de Comando',
   },
+  activePatient: {
+    none: 'Sin paciente activo — fija uno para encadenar comandos',
+    pinHint: 'Elige un paciente demo para abrir su ficha y acciones clínicas.',
+    change: 'Cambiar paciente',
+    workspace: 'Ficha',
+    workspaceSubtitle: 'Contexto longitudinal demo — datos sintéticos',
+    quickActions: 'Acciones rápidas',
+    approvedNotes: 'Notas aprobadas',
+    pendingDrafts: 'Borradores del paciente',
+    noNotes: 'Sin notas aprobadas aún.',
+    noDrafts: 'Sin borradores abiertos.',
+    openDraft: 'Revisar',
+    searchForm: 'Buscar con formulario dedicado',
+    commandPanelTitle: 'Paciente activo',
+    pickPatient: 'Elegir paciente demo',
+  },
   drafts: {
     reviewTitle: 'Revisión de borrador',
     contentTitle: 'Contenido',

@@ -6,7 +6,18 @@ import { Epis2ThemeProvider } from '../Epis2ThemeProvider.js';
 import { cleanup, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
 import { CommandCenterPage } from './CommandCenterPage.js';
+
+function renderCommandCenter() {
+  return render(
+    <Epis2ThemeProvider>
+      <ActivePatientProvider>
+        <CommandCenterPage />
+      </ActivePatientProvider>
+    </Epis2ThemeProvider>,
+  );
+}
 
 vi.mock('@tanstack/react-router', () => ({
   useNavigate: () => vi.fn(),
@@ -41,11 +52,7 @@ afterEach(() => cleanup());
 
 describe('CommandCenterPage', () => {
   it('muestra la pregunta principal en español', () => {
-    render(
-      <Epis2ThemeProvider>
-        <CommandCenterPage />
-      </Epis2ThemeProvider>,
-    );
+    renderCommandCenter();
     expect(screen.getByTestId('epis2-command-prompt')).toHaveTextContent(
       copy.commandCenter.title,
     );
@@ -54,11 +61,7 @@ describe('CommandCenterPage', () => {
 
   it('exige instrucción antes de continuar', async () => {
     const user = userEvent.setup();
-    render(
-      <Epis2ThemeProvider>
-        <CommandCenterPage />
-      </Epis2ThemeProvider>,
-    );
+    renderCommandCenter();
     const powerBar = screen.getByTestId('epis2-power-bar');
     await user.click(
       within(powerBar).getByRole('button', { name: copy.commandCenter.submit }),

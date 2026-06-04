@@ -8,6 +8,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link, Outlet } from '@tanstack/react-router';
 import { useAuth } from '../auth/AuthContext.js';
+import { ActivePatientBanner } from '../components/ActivePatientBanner.js';
 
 export function ClinicalShellLayout() {
   const { session, logout } = useAuth();
@@ -20,7 +21,9 @@ export function ClinicalShellLayout() {
             {copy.appName}
           </Typography>
           <Chip label={copy.demoBadge} size="small" color="warning" variant="outlined" />
-          <Box sx={{ flex: 1 }} />
+          <Box sx={{ flex: 1, minWidth: 0 }}>
+            <ActivePatientBanner />
+          </Box>
           {session ? (
             <Typography variant="body2" color="text.secondary">
               {session.user.displayName}

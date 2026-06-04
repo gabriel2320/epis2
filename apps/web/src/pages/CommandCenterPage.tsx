@@ -7,21 +7,36 @@ import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { useNavigate } from '@tanstack/react-router';
+import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
+import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
 import { useCallback, useState } from 'react';
 import { ApiError } from '../api/client.js';
 import { resolveCommand as resolveCommandApi } from '../api/commandApi.js';
 import { CommandSuggestionChips } from '../components/CommandSuggestionChips.js';
 import { PowerBar } from '../components/PowerBar.js';
 import { useAuth } from '../auth/AuthContext.js';
+import { useActivePatient } from '../clinical/ActivePatientContext.js';
+import { listPatients, type PatientListRow } from '../api/clinicalApi.js';
+import { ActivePatientBanner } from '../components/ActivePatientBanner.js';
 
 export function CommandCenterPage() {
   const { session, logout } = useAuth();
-  const navigate = useNavigate();
+  const { patient: activePatient, setPatient } = useActivePatient();
+  const navigate = useClinicalNavigate();
   const [query, setQuery] = useState('');
   const [error, setError] = useState<string | undefined>();
   const [isResolving, setIsResolving] = useState(false);
   const [lastResult, setLastResult] = useState<CommandResolveResponse | null>(null);
+  const [patients, setPatients] = useState<PatientListRow[]>([]);
+
+  const loadPatients = useCallback(async () => {
+    try {
+      const res = await listPatients();
+      setPatients(res.patients);
+    } catch {
+      setPatients([]);
+    }
+  }, []);
 
   const submit = useCallback(async () => {
     const trimmed = query.trim();
@@ -34,12 +49,15 @@ export function CommandCenterPage() {
     setIsResolving(true);
     setLastResult(null);
     try {
-      const result = await resolveCommandApi({ text: trimmed });
+      const resolveBody: Parameters<typeof resolveCommandApi>[0] = { text: trimmed };
+      if (activePatient?.id) resolveBody.patientId = activePatient.id;
+      const result = await resolveCommandApi(resolveBody);
       setLastResult(result);
       if (result.status === 'resolved') {
-        void navigate({
-          to: result.routePath,
-          search: {},
+        const search = activePatient?.id ? { patientId: activePatient.id } : {};
+        navigate({
+          to: result.routePath as ClinicalFormRoutePath,
+          search,
         });
         return;
       }
@@ -67,7 +85,7 @@ export function CommandCenterPage() {
     } finally {
       setIsResolving(false);
     }
-  }, [query, navigate]);
+  }, [query, navigate, activePatient?.id]);
 
   return (
     <Box
@@ -122,6 +140,51 @@ export function CommandCenterPage() {
             error={error}
           />
         </Box>
+
+        <Paper variant="outlined" sx={{ p: 2, width: '100%' }} data-testid="epis2-active-patient-panel">
+          <Typography variant="subtitle2" gutterBottom>
+            {copy.activePatient.commandPanelTitle}
+          </Typography>
+          <Box sx={{ mb: 2 }}>
+            <ActivePatientBanner />
+          </Box>
+          <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mb: patients.length ? 1 : 0 }}>
+            <Button size="small" variant="outlined" onClick={() => void loadPatients()}>
+              {copy.activePatient.pickPatient}
+            </Button>
+            {activePatient ? (
+              <Button
+                size="small"
+                onClick={() =>
+                  void navigate({
+                    to: '/espacio/ficha',
+                    search: { patientId: activePatient.id },
+                  })
+                }
+              >
+                {copy.activePatient.workspace}
+              </Button>
+            ) : null}
+          </Stack>
+          {patients.length > 0 ? (
+            <Stack direction="row" flexWrap="wrap" gap={0.5}>
+              {patients.slice(0, 5).map((p) => (
+                <Chip
+                  key={p.id}
+                  label={p.demoCaseCode ?? p.displayName.slice(0, 20)}
+                  size="small"
+                  variant={activePatient?.id === p.id ? 'filled' : 'outlined'}
+                  color={activePatient?.id === p.id ? 'primary' : 'default'}
+                  clickable
+                  onClick={() => {
+                    setPatient(p);
+                    void navigate({ to: '/espacio/ficha', search: { patientId: p.id } });
+                  }}
+                />
+              ))}
+            </Stack>
+          ) : null}
+        </Paper>
 
         <CommandSuggestionChips
           onSelect={(cmd) => {

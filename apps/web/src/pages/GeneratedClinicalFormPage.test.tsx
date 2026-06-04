@@ -7,6 +7,7 @@ import { Epis2ThemeProvider } from '../Epis2ThemeProvider.js';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
 import { GeneratedClinicalFormPage } from './GeneratedClinicalFormPage.js';
 
 vi.mock('@tanstack/react-router', () => ({
@@ -64,7 +65,9 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
     const user = userEvent.setup();
     render(
       <Epis2ThemeProvider>
-        <GeneratedClinicalFormPage blueprint={evolutionBlueprint} />
+        <ActivePatientProvider>
+          <GeneratedClinicalFormPage blueprint={evolutionBlueprint} />
+        </ActivePatientProvider>
       </Epis2ThemeProvider>,
     );
 
@@ -83,7 +86,9 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
 
     render(
       <Epis2ThemeProvider>
-        <GeneratedClinicalFormPage blueprint={evolutionBlueprint} />
+        <ActivePatientProvider>
+          <GeneratedClinicalFormPage blueprint={evolutionBlueprint} />
+        </ActivePatientProvider>
       </Epis2ThemeProvider>,
     );
 

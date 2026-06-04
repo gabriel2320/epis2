@@ -14,7 +14,9 @@ import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { Link, useNavigate, useSearch } from '@tanstack/react-router';
+import { Link, useSearch } from '@tanstack/react-router';
+import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
+import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ApiError } from '../api/client.js';
 import { apiFetch } from '../api/client.js';
@@ -25,6 +27,7 @@ import {
 } from '../api/clinicalApi.js';
 import { ClinicalFormRenderer } from '../components/ClinicalFormRenderer.js';
 import { useAuth } from '../auth/AuthContext.js';
+import { useActivePatient } from '../clinical/ActivePatientContext.js';
 
 export type GeneratedClinicalFormPageProps = {
   blueprint: ClinicalFormBlueprint;
@@ -32,7 +35,8 @@ export type GeneratedClinicalFormPageProps = {
 
 export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPageProps) {
   const { session } = useAuth();
-  const navigate = useNavigate();
+  const { patient: activePatient, setPatient: pinPatient } = useActivePatient();
+  const navigate = useClinicalNavigate();
   const search = useSearch({ strict: false }) as { patientId?: string };
   const patientId = search.patientId;
 
@@ -47,7 +51,6 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [patients, setPatients] = useState<PatientListRow[]>([]);
-  const [activePatient, setActivePatient] = useState<PatientListRow | null>(null);
   const [loadError, setLoadError] = useState<string | undefined>();
   const [isSuggesting, setIsSuggesting] = useState(false);
   const canUseAiAssist = blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES;
@@ -81,23 +84,26 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   }, []);
 
   useEffect(() => {
-    if (!patientId) {
-      setActivePatient(null);
-      return;
-    }
+    if (!patientId) return;
     void fetchPatientDetail(patientId)
       .then((res) => {
-        setActivePatient(res.patient);
+        pinPatient(res.patient);
         if (blueprint.blueprintId === 'patient_summary') {
           setValues((prev) => ({ ...prev, ...res.clinicalContext.summaryFields }));
         }
       })
-      .catch(() => setActivePatient(null));
-  }, [patientId, blueprint.blueprintId]);
+      .catch(() => undefined);
+  }, [patientId, blueprint.blueprintId, pinPatient]);
 
   const selectPatient = (id: string) => {
-    void navigate({
-      to: blueprint.routePath,
+    const row = patients.find((p) => p.id === id);
+    if (row) pinPatient(row);
+    if (blueprint.blueprintId === 'patient_search') {
+      navigate({ to: '/espacio/ficha', search: { patientId: id } });
+      return;
+    }
+    navigate({
+      to: blueprint.routePath as ClinicalFormRoutePath,
       search: { patientId: id },
     });
   };
@@ -173,7 +179,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
           body: values,
         }),
       });
-      void navigate({
+      navigate({
         to: '/espacio/borrador/$draftId',
         params: { draftId: created.draft.id },
       });

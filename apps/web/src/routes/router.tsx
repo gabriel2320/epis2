@@ -5,12 +5,13 @@ import {
   redirect,
   Outlet,
 } from '@tanstack/react-router';
-import { EPIS2_FORM_BLUEPRINTS } from '@epis2/clinical-forms';
+import { getBlueprintByRoutePath } from '@epis2/clinical-forms';
 import { loadSessionForRouter } from '../auth/AuthContext.js';
 import { ClinicalShellLayout } from '../layouts/ClinicalShellLayout.js';
 import { CommandCenterPage } from '../pages/CommandCenterPage.js';
 import { DraftReviewPage } from '../pages/DraftReviewPage.js';
 import { GeneratedClinicalFormPage } from '../pages/GeneratedClinicalFormPage.js';
+import { PatientWorkspacePage } from '../pages/PatientWorkspacePage.js';
 import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
 
@@ -58,16 +59,65 @@ const draftReviewRoute = createRoute({
   component: DraftReviewPage,
 });
 
-const clinicalFormRoutes = EPIS2_FORM_BLUEPRINTS.map((blueprint) =>
-  createRoute({
-    getParentRoute: () => clinicalLayoutRoute,
-    path: blueprint.routePath,
-    validateSearch: (search: Record<string, unknown>) => ({
-      patientId: typeof search.patientId === 'string' ? search.patientId : undefined,
-    }),
-    component: () => <GeneratedClinicalFormPage blueprint={blueprint} />,
+const patientWorkspaceRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/ficha',
+  validateSearch: (search: Record<string, unknown>) => ({
+    patientId: typeof search.patientId === 'string' ? search.patientId : undefined,
   }),
-);
+  component: PatientWorkspacePage,
+});
+
+const validatePatientSearch = (search: Record<string, unknown>) => ({
+  patientId: typeof search.patientId === 'string' ? search.patientId : undefined,
+});
+
+function clinicalFormPage(path: Parameters<typeof getBlueprintByRoutePath>[0]) {
+  const blueprint = getBlueprintByRoutePath(path)!;
+  return () => <GeneratedClinicalFormPage blueprint={blueprint} />;
+}
+
+const patientSearchFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/buscar-paciente',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/buscar-paciente'),
+});
+
+const patientSummaryFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/resumen',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/resumen'),
+});
+
+const evolutionFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/evolucion',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/evolucion'),
+});
+
+const dischargeFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/epicrisis',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/epicrisis'),
+});
+
+const prescriptionFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/receta',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/receta'),
+});
+
+const labFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/laboratorio',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/laboratorio'),
+});
 
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -85,7 +135,16 @@ export const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
   commandCenterRoute,
-  clinicalLayoutRoute.addChildren([draftReviewRoute, ...clinicalFormRoutes]),
+  clinicalLayoutRoute.addChildren([
+    draftReviewRoute,
+    patientWorkspaceRoute,
+    patientSearchFormRoute,
+    patientSummaryFormRoute,
+    evolutionFormRoute,
+    dischargeFormRoute,
+    prescriptionFormRoute,
+    labFormRoute,
+  ]),
 ]);
 
 export const router = createRouter({
