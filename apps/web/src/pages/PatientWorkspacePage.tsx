@@ -36,6 +36,11 @@ const QUICK_ROUTES: { path: ClinicalFormRoutePath; label: string }[] = [
   { path: '/espacio/epicrisis', label: 'Epicrisis' },
   { path: '/espacio/receta', label: 'Receta' },
   { path: '/espacio/laboratorio', label: 'Laboratorio' },
+  { path: '/espacio/interconsulta', label: 'Interconsulta' },
+  { path: '/espacio/imagenologia', label: 'Imagenología' },
+  { path: '/espacio/enfermeria', label: 'Enfermería' },
+  { path: '/espacio/mar', label: 'MAR' },
+  { path: '/espacio/farmacia', label: 'Farmacia' },
 ];
 
 export function PatientWorkspacePage() {

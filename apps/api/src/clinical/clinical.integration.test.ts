@@ -176,6 +176,28 @@ describe.skipIf(!hasDb)('clinical API (integration)', () => {
       expect(boardJson.timelinePreview.length).toBeGreaterThan(0);
     }
 
+    const docPatientId =
+      list.find((p) => p.demoCaseCode === 'DEMO-001')?.id ?? patientId;
+    const docSearch = await app.inject({
+      method: 'GET',
+      url: `/api/patients/${docPatientId}/documents/search?q=laboratorio`,
+      headers: { cookie },
+    });
+    expect(docSearch.statusCode).toBe(200);
+    const docJson = docSearch.json() as { hits: unknown[] };
+    expect(docJson.hits.length).toBeGreaterThan(0);
+
+    const referralCmd = await app.inject({
+      method: 'POST',
+      url: '/api/commands/resolve',
+      headers: { cookie },
+      payload: { text: 'solicitar interconsulta', role: 'physician', patientId },
+    });
+    expect(referralCmd.statusCode).toBe(200);
+    expect((referralCmd.json() as { routePath: string }).routePath).toBe(
+      '/espacio/interconsulta',
+    );
+
     await app.close();
   });
 });

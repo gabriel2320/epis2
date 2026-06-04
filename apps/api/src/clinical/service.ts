@@ -19,6 +19,7 @@ import {
   clinicalNotes,
   draftVersions,
   encounters,
+  marAdministrationRecords,
   observations,
   patientAllergies,
   patientIdentifiers,
@@ -410,6 +411,24 @@ export async function approveDraft(db: Database, actor: Actor, draftId: string) 
     .set({ status: 'approved', updatedAt: now, updatedBy: actor.id })
     .where(eq(clinicalDrafts.id, draftId))
     .returning();
+
+  if (draft.draftType === 'medication_administration') {
+    const body = draft.body as Record<string, unknown>;
+    const medication = typeof body.medication === 'string' ? body.medication : draft.title;
+    const doseText = typeof body.dose === 'string' ? body.dose : '—';
+    const route = typeof body.route === 'string' ? body.route : '—';
+    const doubleCheck =
+      body.doubleCheckConfirmed === true || body.doubleCheckConfirmed === 'true';
+    await db.insert(marAdministrationRecords).values({
+      patientId: draft.patientId,
+      draftId: draft.id,
+      medication,
+      doseText,
+      route,
+      doubleCheck,
+      createdBy: actor.id,
+    });
+  }
 
   await appendAudit(db, {
     eventType: 'clinical.draft.approved',

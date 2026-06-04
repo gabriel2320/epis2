@@ -4,8 +4,9 @@ import { validateFormValues } from './validate.js';
 import { evolutionNoteBlueprint } from './blueprints/evolution-note.js';
 
 describe('EPIS2_FORM_BLUEPRINTS', () => {
-  it('expone exactamente 6 blueprints MVP', () => {
-    expect(EPIS2_FORM_BLUEPRINTS).toHaveLength(6);
+  it('expone blueprints clínicos registrados sin duplicados', () => {
+    expect(EPIS2_FORM_BLUEPRINTS.length).toBeGreaterThanOrEqual(11);
+    expect(assertRegistryInvariants()).toEqual([]);
   });
 
   it('sin blueprintId ni routePath duplicados; intents ⊆ registry', () => {

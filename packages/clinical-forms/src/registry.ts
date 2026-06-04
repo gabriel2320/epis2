@@ -2,14 +2,19 @@ import { EPIS2_COMMAND_DEFINITIONS } from '@epis2/command-registry';
 import {
   dischargeSummaryBlueprint,
   evolutionNoteBlueprint,
+  imagingRequestBlueprint,
   labRequestBlueprint,
+  medicationAdministrationBlueprint,
+  nursingNoteBlueprint,
   patientSearchBlueprint,
   patientSummaryBlueprint,
+  pharmacyValidationBlueprint,
   prescriptionBlueprint,
+  referralBlueprint,
 } from './blueprints/index.js';
 import type { ClinicalFormBlueprint } from './types.js';
 
-/** Registry único de formularios clínicos MVP (6 blueprints). */
+/** Registry único de formularios clínicos EPIS2. */
 export const EPIS2_FORM_BLUEPRINTS: readonly ClinicalFormBlueprint[] = [
   patientSearchBlueprint,
   patientSummaryBlueprint,
@@ -17,6 +22,11 @@ export const EPIS2_FORM_BLUEPRINTS: readonly ClinicalFormBlueprint[] = [
   dischargeSummaryBlueprint,
   prescriptionBlueprint,
   labRequestBlueprint,
+  referralBlueprint,
+  imagingRequestBlueprint,
+  nursingNoteBlueprint,
+  medicationAdministrationBlueprint,
+  pharmacyValidationBlueprint,
 ];
 
 const byId = new Map(EPIS2_FORM_BLUEPRINTS.map((b) => [b.blueprintId, b]));
