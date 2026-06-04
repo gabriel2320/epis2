@@ -1,0 +1,13 @@
+---
+description: Documentación y reportes por microfase
+globs: "{docs/**,reports/**,*.md}"
+alwaysApply: false
+---
+
+# Documentación
+
+- Canon en `docs/PRODUCT_CANON.md` — no contradecir en PRs.
+- Al cerrar fase: reporte `reports/epis2-NN-*.md` usando `docs/MICROPHASE_TEMPLATE.md`.
+- Decisiones arquitectónicas → `docs/DECISIONS.md` (ADR).
+- Migración desde EPIS: etiquetar MIGRATE/REWRITE/REJECT en PR; actualizar `LEGACY_DONOR_MAP` si cambia.
+- No crear docs masivos de microfases históricas EPIS en EPIS2.

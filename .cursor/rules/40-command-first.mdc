@@ -1,0 +1,17 @@
+---
+description: Command-first — registry, intents, routing
+globs: "{packages/command-registry/**,apps/web/**/command/**,apps/api/**/commands/**}"
+alwaysApply: false
+---
+
+# Command-first
+
+Pipeline: texto → normalización → intent → slots → validación contexto → permiso → blueprint/ruta → borrador.
+
+- Registry e intents en `packages/command-registry` — fuente única con blueprints.
+- Comandos MVP: buscar, resumir, evolucionar, epicrisis, receta, laboratorio.
+- Portar desde EPIS solo archivos listados en `LEGACY_DONOR_MAP` (MIGRATE), sin imports OpenMRS.
+- Suite estática ≥100 comandos (EPIS2-05).
+- UI: power bar dominante; ocultar información no solicitada.
+
+Ver `docs/LEGACY_DONOR_MAP.md` sección command registry.

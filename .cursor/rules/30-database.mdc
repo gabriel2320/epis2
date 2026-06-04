@@ -1,0 +1,16 @@
+---
+description: PostgreSQL — migraciones, SoT, auditoría
+globs: "{database/**,apps/api/**/db/**,apps/api/**/*.sql}"
+alwaysApply: false
+---
+
+# Base de datos
+
+- UUID primary keys; FK y constraints explícitos.
+- Migraciones SQL versionadas en `database/migrations/` — sin DDL ad hoc en prod.
+- Separar tablas clínicas aprobadas vs `clinical_drafts` vs `ai_runs`.
+- Toda tabla clínica mutable: `created_at`, `created_by`; versionado donde aplique.
+- RLS como defensa adicional (ADR pendiente); **RBAC en API es primario**.
+- Seeds solo sintéticos; `is_synthetic = true`; sin contraseñas reales en git.
+
+No copiar esquema OpenMRS.

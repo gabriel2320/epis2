@@ -1,0 +1,17 @@
+---
+description: Arquitectura EPIS2 — monorepo, capas, fronteras
+globs: "{apps/**,packages/**,services/**,database/**}"
+alwaysApply: false
+---
+
+# Arquitectura
+
+Stack: `apps/web` (React+Vite+MUI+TanStack), `apps/api` (Fastify+Drizzle), `services/local-ai`, `packages/*` compartidos.
+
+- PostgreSQL = única fuente de verdad clínica.
+- Validación compartida en `packages/contracts` (Zod).
+- FHIR = frontera de interoperabilidad (EPIS2-10+), no modelo de UI.
+- Docker Compose solo Postgres + Ollama en dev.
+- Prohibido: `@openmrs/*`, adapters EPIS, Carbon, overlays ESM.
+
+Ver `docs/ARCHITECTURE_TARGET.md`.

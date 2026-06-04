@@ -1,0 +1,14 @@
+---
+description: Material UI — tema EPIS2, español, sin dashboard
+globs: "{apps/web/**,packages/design-system/**}"
+alwaysApply: false
+---
+
+# Material UI
+
+- Tema centralizado en `packages/design-system` (palette, typography, overrides).
+- Microcopy clínico en **español** — no strings EN en UI visible.
+- Home = Command Center; **no** layouts tipo dashboard ni sidebars hospitalarios extensos.
+- Una acción principal por vista; densidad clínica controlada.
+- Formularios desde blueprints (`packages/clinical-forms`), no páginas duplicadas ad hoc.
+- Rechazar estilos Carbon/Soft Carbon aunque existan en EPIS donor.

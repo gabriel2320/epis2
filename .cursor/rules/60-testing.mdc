@@ -1,0 +1,16 @@
+---
+description: Testing — gates, comandos, degradación IA
+globs: "{**/*.test.ts,**/*.test.tsx,**/*.spec.ts,packages/test-fixtures/**}"
+alwaysApply: false
+---
+
+# Testing
+
+- Cada fase añade tests que demuestran su gate (`docs/QUALITY_GATES.md`).
+- Command registry: ≥100 frases estáticas; casos ambiguos y sin permiso.
+- Borradores: test que IA no puede aprobar; versiones incrementan.
+- IA caída: integration test sin Ollama.
+- Fixtures en `packages/test-fixtures`; marcar sintéticos; sin datos reales.
+- No tests que solo mockean éxito sin assert de reglas clínicas.
+
+`npm run check` debe pasar antes de cerrar fase EPIS2-01+.
