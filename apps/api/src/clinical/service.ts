@@ -1,10 +1,17 @@
-import { assertPatchDraftStatus } from '@epis2/clinical-domain';
+import {
+  assertPatchDraftStatus,
+  buildClinicalSafetyInputFromSummary,
+  CHILE_RUT_IDENTIFIER_SYSTEM,
+  evaluateClinicalSafety,
+  formatSafetyWarningsForAssist,
+  normalizeRut,
+} from '@epis2/clinical-domain';
 import {
   DEMO_IDENTIFIER_SYSTEM,
   SYNTHETIC_LABEL,
   getDemoCaseByPatientId,
 } from '@epis2/test-fixtures';
-import { asc, eq, ilike, and } from 'drizzle-orm';
+import { asc, eq, ilike, and, inArray } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import {
   approvals,
@@ -89,16 +96,72 @@ function buildSummaryFromClinicalRows(
 }
 
 export async function searchPatients(db: Database, query?: string) {
-  if (query?.trim()) {
+  const term = query?.trim();
+  if (!term) {
+    return db.select().from(patients).where(eq(patients.isSynthetic, true)).limit(50);
+  }
+
+  const rutNorm = normalizeRut(term);
+  if (rutNorm) {
+    const idRows = await db
+      .select({ patientId: patientIdentifiers.patientId })
+      .from(patientIdentifiers)
+      .where(
+        and(
+          eq(patientIdentifiers.system, CHILE_RUT_IDENTIFIER_SYSTEM),
+          eq(patientIdentifiers.value, rutNorm),
+        ),
+      );
+    const ids = idRows.map((r) => r.patientId);
+    if (ids.length === 0) return [];
     return db
       .select()
       .from(patients)
-      .where(
-        and(eq(patients.isSynthetic, true), ilike(patients.displayName, `%${query.trim()}%`)),
-      )
+      .where(and(eq(patients.isSynthetic, true), inArray(patients.id, ids)))
       .limit(20);
   }
-  return db.select().from(patients).where(eq(patients.isSynthetic, true)).limit(50);
+
+  const demoCode = term.toUpperCase();
+  if (/^DEMO-\d{3}$/.test(demoCode)) {
+    const idRows = await db
+      .select({ patientId: patientIdentifiers.patientId })
+      .from(patientIdentifiers)
+      .where(
+        and(
+          eq(patientIdentifiers.system, DEMO_IDENTIFIER_SYSTEM),
+          eq(patientIdentifiers.value, demoCode),
+        ),
+      );
+    const ids = idRows.map((r) => r.patientId);
+    if (ids.length === 0) return [];
+    return db
+      .select()
+      .from(patients)
+      .where(and(eq(patients.isSynthetic, true), inArray(patients.id, ids)))
+      .limit(20);
+  }
+
+  return db
+    .select()
+    .from(patients)
+    .where(and(eq(patients.isSynthetic, true), ilike(patients.displayName, `%${term}%`)))
+    .limit(20);
+}
+
+/** Alertas CDS demo (read-only) para asistencia IA y UI. */
+export async function getDemoSafetyNotesForPatient(db: Database, patientId: string): Promise<string[]> {
+  const patient = await getPatientById(db, patientId);
+  if (!patient) return [];
+  const ctx = await getPatientClinicalContext(db, patientId);
+  const safetyOpts: { sex?: string; problems: { description: string }[] } = {
+    problems: ctx.problems,
+  };
+  if (patient.sex) safetyOpts.sex = patient.sex;
+  const input = buildClinicalSafetyInputFromSummary(ctx.summaryFields, safetyOpts);
+  const evaluated = evaluateClinicalSafety(input);
+  if (!evaluated.warnings.length) return [];
+  const block = formatSafetyWarningsForAssist(evaluated);
+  return block.split('\n').filter((line) => line.startsWith('- '));
 }
 
 export async function getPatientById(db: Database, patientId: string) {

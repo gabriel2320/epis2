@@ -21,3 +21,33 @@ export {
   sanitizeAiSuggestedFields,
   type DraftStatus,
 } from './draftStates.js';
+export { CHILE_RUT_IDENTIFIER_SYSTEM } from './chile/constants.js';
+export {
+  cleanRutInput,
+  computeRutVerifier,
+  formatRut,
+  normalizeRut,
+  validateRut,
+  isValidRut,
+  rutMatchesPattern,
+  type RutValidationResult,
+} from './chile/rut.js';
+export {
+  evaluateClinicalSafety,
+  formatSafetyWarningsForAssist,
+} from './clinicalSafety/evaluate.js';
+export { buildClinicalSafetyInputFromSummary } from './clinicalSafety/fromDemoContext.js';
+export {
+  checkBetaLactamAllergy,
+  checkAceInhibitorInPregnancy,
+  checkRenalDoseAdjustment,
+  SAFETY_RULE_IDS,
+} from './clinicalSafety/rules.js';
+export type {
+  ClinicalSafetyInput,
+  ClinicalSafetyResult,
+  SafetyWarning,
+  SafetyMedication,
+  SafetyAllergy,
+  SafetyLab,
+} from './clinicalSafety/types.js';

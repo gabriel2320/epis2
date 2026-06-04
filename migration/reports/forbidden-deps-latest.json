@@ -1,0 +1,173 @@
+{
+  "scannedAt": "2026-06-04T22:35:16.862Z",
+  "findings": [
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\_archive\\legacy-command-palette\\package.json",
+      "type": "openmrs-dep",
+      "severity": "critical",
+      "label": "Dependencia @openmrs"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\_archive\\legacy-command-palette\\package.json",
+      "type": "carbon-dep",
+      "severity": "critical",
+      "label": "Dependencia Carbon"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\package.json",
+      "type": "carbon-dep",
+      "severity": "critical",
+      "label": "Dependencia Carbon"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-design-system\\package.json",
+      "type": "carbon-dep",
+      "severity": "critical",
+      "label": "Dependencia Carbon"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-theme-app\\package.json",
+      "type": "openmrs-dep",
+      "severity": "critical",
+      "label": "Dependencia @openmrs"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-shell-app\\package.json",
+      "type": "openmrs-dep",
+      "severity": "critical",
+      "label": "Dependencia @openmrs"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-shell-app\\package.json",
+      "type": "carbon-dep",
+      "severity": "critical",
+      "label": "Dependencia Carbon"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-patient-summary-app\\package.json",
+      "type": "openmrs-dep",
+      "severity": "critical",
+      "label": "Dependencia @openmrs"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-patient-summary-app\\package.json",
+      "type": "carbon-dep",
+      "severity": "critical",
+      "label": "Dependencia Carbon"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-material-app\\package.json",
+      "type": "openmrs-dep",
+      "severity": "critical",
+      "label": "Dependencia @openmrs"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-importer-app\\package.json",
+      "type": "openmrs-dep",
+      "severity": "critical",
+      "label": "Dependencia @openmrs"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-importer-app\\package.json",
+      "type": "carbon-dep",
+      "severity": "critical",
+      "label": "Dependencia Carbon"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-command-center-app\\package.json",
+      "type": "openmrs-dep",
+      "severity": "critical",
+      "label": "Dependencia @openmrs"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-command-center-app\\package.json",
+      "type": "carbon-dep",
+      "severity": "critical",
+      "label": "Dependencia Carbon"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-clinical-console-app\\package.json",
+      "type": "openmrs-dep",
+      "severity": "critical",
+      "label": "Dependencia @openmrs"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-clinical-console-app\\package.json",
+      "type": "carbon-dep",
+      "severity": "critical",
+      "label": "Dependencia Carbon"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-clinical-actions-app\\package.json",
+      "type": "openmrs-dep",
+      "severity": "critical",
+      "label": "Dependencia @openmrs"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-clinical-actions-app\\package.json",
+      "type": "carbon-dep",
+      "severity": "critical",
+      "label": "Dependencia Carbon"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-carbon-shell\\package.json",
+      "type": "openmrs-dep",
+      "severity": "critical",
+      "label": "Dependencia @openmrs"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-carbon-shell\\package.json",
+      "type": "carbon-dep",
+      "severity": "critical",
+      "label": "Dependencia Carbon"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-audit-app\\package.json",
+      "type": "openmrs-dep",
+      "severity": "critical",
+      "label": "Dependencia @openmrs"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-audit-app\\package.json",
+      "type": "carbon-dep",
+      "severity": "critical",
+      "label": "Dependencia Carbon"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-ai-assistant-app\\package.json",
+      "type": "openmrs-dep",
+      "severity": "critical",
+      "label": "Dependencia @openmrs"
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-ai-assistant-app\\package.json",
+      "type": "carbon-dep",
+      "severity": "critical",
+      "label": "Dependencia Carbon"
+    }
+  ]
+}

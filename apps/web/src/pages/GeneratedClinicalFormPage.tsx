@@ -74,14 +74,15 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
   const loadPatients = useCallback(async () => {
     setLoadError(undefined);
+    const term = values.identifier?.trim() || values.patientName?.trim();
     try {
-      const res = await listPatients();
+      const res = await listPatients(term || undefined);
       setPatients(res.patients);
     } catch {
       setPatients([]);
       setLoadError('No hay pacientes demo disponibles (¿API y base de datos activos?)');
     }
-  }, []);
+  }, [values.identifier, values.patientName]);
 
   useEffect(() => {
     if (!patientId) return;

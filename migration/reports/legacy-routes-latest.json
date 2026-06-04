@@ -1,0 +1,2784 @@
+{
+  "scannedAt": "2026-06-04T22:35:18.598Z",
+  "findings": [
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\test\\draft-commit.test.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\test\\encounter-writer.test.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\test\\openmrs-session.test.ts",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\security\\hooks.ts",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\security\\types.ts",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\routes\\ai.ts",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\routes\\audit.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\routes\\clinical-actions.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\routes\\documents.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\routes\\drafts.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\routes\\interop.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\routes\\patients.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\routes\\pilot.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\routes\\rag.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\pilot\\writeback-status.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\openmrs\\auth.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\context\\builder.ts",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\context\\mappers.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\clinical-actions\\executor.ts",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\ai\\draft-commit.ts",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\ai\\draft-note.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\services\\epis-ai-sidecar\\src\\ai\\patient-summary.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-audit.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 19,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-branding-verify.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-command-canvas-smoke.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-dashboard-verify.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-db-backup-validate.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-demo-api.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-distro-validate.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-doctor-csm.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-doctor.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-document-intake-validate.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-eval-validate.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-fhir-validate.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-local-env.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-logical-bridge-smoke.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-lote-b-verify.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-lote-f-verify.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-lote-l-verify.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-o3-browser-smoke.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/OpenMRS/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-o3-runtime-diagnose.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-o3-spa-patch.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-o3-verify.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-openmrs-bootstrap.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-openmrs-metadata-import.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-openmrs-status.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-pilot-check.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-pilot-pack-validate.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-rag-validate.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-runbooks-validate.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-runtime-product-verify.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-security-validate.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-shell-verify.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/OpenMRS/",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-ui-validate.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-ux-validate.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\tmp-verify-mui-login.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\test\\epis-eval-release-gate.test.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\test\\epis-home-redirect.test.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 10,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\material\\mat-002-login-scaffold.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\material\\mat-011-route-takeover.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 5,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\material\\mat-015-openmrs-strings.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/",
+        "/OpenMRS/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\material\\mat-016-e2e-isolation.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\lib\\epis-o3-modules.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\lib\\epis-openclaw.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\lib\\epis-openmrs-bootstrap.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\lib\\epis-openmrs-metadata.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\lib\\epis-openmrs-outcomes.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\lib\\epis-openmrs-tag.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\lib\\epis-pilot-pack.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\lib\\epis-pilot-status.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\lib\\epis-ssl-compose.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\agentic-visual-loop\\collect-context.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\agentic-dev-loop\\collect-context.mjs",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\reports\\epis-material-pc-casa-manifest.json",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\public\\vendor\\epis-premium-v2\\epis-openmrs-snippet.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\public\\vendor\\epis-premium-v2\\epis-premium-carbon.v2.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\public\\vendor\\epis-premium-v2\\epis-premium-loader.js",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\public\\vendor\\epis-premium\\epis-dev-snippet.js",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\public\\vendor\\epis-premium\\epis-premium-carbon.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\public\\vendor\\epis-logical-bridge\\epis-logical-bridge-loader.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\public\\vendor\\epis-logical-bridge\\epis-no-build-smoke-test.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\public\\vendor\\epis-logical-bridge\\epis-openmrs-adapter.js",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\public\\vendor\\epis-logical-bridge\\epis-runtime.config.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\public\\vendor\\epis-logical-bridge\\manifest.json",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\public\\vendor\\epis\\epis-dev-snippet.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\public\\vendor\\epis\\epis-visual-overlay.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\test\\episSpaNavigate.test.ts",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\navigation\\episSpaNavigate.ts",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\epis\\EpisLoginPage.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\epis\\episRoutes.ts",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\components\\EpisClinicalSidebar.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\components\\EpisClinicalTopHeader.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\command\\CommandFirstHeader.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\clinical\\episClinicalNav.ts",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\branding\\episBrand.ts",
+      "severity": "expected-legacy",
+      "matchCount": 5,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-material-shell\\src\\components\\EpisLoginCard.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-design-system\\src\\tokens\\brand.ts",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-design-system\\src\\components\\EpisTopHeader.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\openmrs-distro-referenceapplication\\frontend\\config-epis.json",
+      "severity": "expected-legacy",
+      "matchCount": 16,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\baseline-importmap.json",
+      "severity": "expected-legacy",
+      "matchCount": 8,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\config-epis.json",
+      "severity": "expected-legacy",
+      "matchCount": 16,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\importmap.json",
+      "severity": "expected-legacy",
+      "matchCount": 11,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\vendor\\epis-premium-v2\\epis-openmrs-snippet.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\vendor\\epis-premium-v2\\epis-premium-carbon.v2.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\vendor\\epis-premium-v2\\epis-premium-loader.js",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\vendor\\epis-premium\\epis-dev-snippet.js",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\vendor\\epis-premium\\epis-premium-carbon.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\vendor\\epis-logical-bridge\\epis-logical-bridge-loader.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\vendor\\epis-logical-bridge\\epis-no-build-smoke-test.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\vendor\\epis-logical-bridge\\epis-openmrs-adapter.js",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\vendor\\epis-logical-bridge\\epis-runtime.config.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\vendor\\epis-logical-bridge\\manifest.json",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\vendor\\epis\\epis-dev-snippet.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\vendor\\epis\\epis-visual-overlay.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\theme\\218.js",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\theme\\401.js",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\theme\\51.js",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\theme\\922.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\theme\\943.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\theme\\main.js",
+      "severity": "expected-legacy",
+      "matchCount": 5,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\shell\\133.js",
+      "severity": "expected-legacy",
+      "matchCount": 7,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\shell\\179.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\shell\\322.js",
+      "severity": "expected-legacy",
+      "matchCount": 8,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\shell\\355.js",
+      "severity": "expected-legacy",
+      "matchCount": 7,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\shell\\461.js",
+      "severity": "expected-legacy",
+      "matchCount": 8,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\shell\\70.js",
+      "severity": "expected-legacy",
+      "matchCount": 8,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\shell\\773.js",
+      "severity": "expected-legacy",
+      "matchCount": 8,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\shell\\775.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\shell\\83.js",
+      "severity": "expected-legacy",
+      "matchCount": 7,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\shell\\879.js",
+      "severity": "expected-legacy",
+      "matchCount": 7,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\shell\\937.js",
+      "severity": "expected-legacy",
+      "matchCount": 8,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\shell\\948.js",
+      "severity": "expected-legacy",
+      "matchCount": 8,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\shell\\949.js",
+      "severity": "expected-legacy",
+      "matchCount": 8,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\shell\\main.js",
+      "severity": "expected-legacy",
+      "matchCount": 9,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\12.js",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\126.js",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\272.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\388.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\398.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\560.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\588.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\590.js",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\602.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\662.js",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\664.js",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\684.js",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\745.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\843.js",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\854.js",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\866.js",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\870.js",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\999.js",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\patient-summary\\main.js",
+      "severity": "expected-legacy",
+      "matchCount": 10,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\material-app\\437.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\material-app\\783.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\material-app\\main.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\importer\\312.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\importer\\391.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\importer\\401.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\importer\\502.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\importer\\562.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\importer\\6.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\importer\\604.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\importer\\636.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\importer\\708.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\importer\\761.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\importer\\846.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\importer\\855.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\importer\\main.js",
+      "severity": "expected-legacy",
+      "matchCount": 5,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\128.js",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\289.js",
+      "severity": "expected-legacy",
+      "matchCount": 12,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\331.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\423.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\428.js",
+      "severity": "expected-legacy",
+      "matchCount": 5,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\535.js",
+      "severity": "expected-legacy",
+      "matchCount": 12,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\537.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\548.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\649.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\672.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\673.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\697.js",
+      "severity": "expected-legacy",
+      "matchCount": 12,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\762.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\949.js",
+      "severity": "expected-legacy",
+      "matchCount": 5,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\952.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\990.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\command-center\\main.js",
+      "severity": "expected-legacy",
+      "matchCount": 16,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\280.js",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\337.js",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\338.js",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\59.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\636.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\639.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\765.js",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\769.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\779.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\821.js",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\823.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\837.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\846.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\877.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\980.js",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\985.js",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-console\\main.js",
+      "severity": "expected-legacy",
+      "matchCount": 10,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-actions\\286.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-actions\\472.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-actions\\646.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-actions\\693.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-actions\\705.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-actions\\86.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-actions\\873.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\clinical-actions\\main.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\carbon-shell\\188.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\carbon-shell\\30.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\carbon-shell\\389.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\carbon-shell\\390.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\carbon-shell\\485.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\carbon-shell\\565.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\carbon-shell\\768.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\carbon-shell\\798.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\carbon-shell\\872.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\carbon-shell\\930.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\carbon-shell\\993.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\carbon-shell\\main.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\audit\\124.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\audit\\177.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\audit\\28.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\audit\\57.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\audit\\985.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\audit\\main.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\ai-assistant\\173.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\ai-assistant\\24.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\ai-assistant\\257.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\ai-assistant\\291.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\ai-assistant\\343.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\ai-assistant\\348.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\ai-assistant\\415.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\ai-assistant\\510.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\ai-assistant\\549.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\ai-assistant\\64.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\ai-assistant\\697.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\ai-assistant\\808.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\ai-assistant\\882.js",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\lab\\epis-spa-overlay\\epis\\ai-assistant\\main.js",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\distro\\manifests\\candidate.json",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\distro\\manifests\\legacy-v0.1.0.json",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\distro\\manifests\\stable.json",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\distribution\\manifest.epis.json",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\openmrs\\distribution\\overlay\\frontend\\config-epis.json",
+      "severity": "expected-legacy",
+      "matchCount": 16,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\infra\\docker\\frontend-epis\\epis-route-chrome-bootstrap.js",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\config-epis.json",
+      "severity": "expected-legacy",
+      "matchCount": 16,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-theme-app\\src\\epis-route-chrome.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-theme-app\\src\\index.ts",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-shell-app\\src\\epis-shell-home.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-shell-app\\src\\epis-shell-nav.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-shell-app\\src\\epis-shell-sidebar.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-shell-app\\src\\epis-shell.component.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-shell-app\\src\\shell-status.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-patient-summary-app\\src\\epis-clinical-tabs.component.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-patient-summary-app\\src\\workspace-status.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-material-app\\test\\epis-login.test.ts",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-importer-app\\src\\epis-importer-header.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-command-center-app\\src\\clinical-commands.ts",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-command-center-app\\src\\command-center.component.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-command-center-app\\src\\epis-command-routes.ts",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-command-center-app\\src\\epis-command-secondary-pages.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-command-center-app\\src\\epis-mui-preview.component.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-clinical-console-app\\src\\dashboard-status.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-clinical-console-app\\src\\epis-quick-nav.component.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-clinical-console-app\\src\\epis-sidebar-nav.component.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-clinical-console-app\\src\\dashboard\\epis-emr-dashboard.component.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\frontend\\esm-epis-clinical-console-app\\src\\dashboard\\epis-emr-sidebar.tsx",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\evals\\reports\\audit-latest.json",
+      "severity": "expected-legacy",
+      "matchCount": 19,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\evals\\reports\\audit-run-latest.json",
+      "severity": "expected-legacy",
+      "matchCount": 17,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\evals\\reports\\doctor-run-latest.json",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\evals\\reports\\pilot-pack-latest.json",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\evals\\reports\\pilot-prepare-latest.json",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\evals\\reports\\product-verify-latest.json",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\evals\\reports\\runtime-product-verify-latest.json",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\evals\\reports\\shell-verify-latest.json",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\e2e\\epis-dashboard.spec.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\e2e\\epis-material-shell.spec.ts",
+      "severity": "expected-legacy",
+      "matchCount": 4,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\e2e\\epis-only-experience.spec.ts",
+      "severity": "expected-legacy",
+      "matchCount": 6,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\e2e\\epis-soft-carbon.spec.ts",
+      "severity": "expected-legacy",
+      "matchCount": 11,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\e2e\\epis-v2-shell.spec.ts",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\e2e\\epis-visual-shell.spec.ts",
+      "severity": "expected-legacy",
+      "matchCount": 3,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\e2e\\mf131-visual.spec.ts",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\e2e\\playwright.config.ts",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\e2e\\helpers\\logical-bridge.ts",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\docs\\ecosystem\\ecosystem-manifest.json",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\data\\material-migration\\epis-visual-isolation-spec.json",
+      "severity": "expected-legacy",
+      "matchCount": 13,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\data\\material-migration\\mat-002-003-pc-casa-bundle.json",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\data\\material-migration\\mat-011-config-epis-patch.json",
+      "severity": "expected-legacy",
+      "matchCount": 16,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\data\\material-migration\\mat-011-route-takeover-plan.json",
+      "severity": "expected-legacy",
+      "matchCount": 18,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\data\\demo\\hospital-workflow-catalog.json",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "Dashboard\": true"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\brand\\tokens\\epis-tokens.json",
+      "severity": "expected-legacy",
+      "matchCount": 8,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\artifacts\\o3-browser-smoke\\epis-command-smoke.json",
+      "severity": "expected-legacy",
+      "matchCount": 2,
+      "samples": [
+        "/openmrs/",
+        "/home/epis-"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\artifacts\\o3-browser-smoke\\report.json",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\.agent-runs\\openclaw\\safe-run-1780358920404.json",
+      "severity": "expected-legacy",
+      "matchCount": 1,
+      "samples": [
+        "/openmrs/"
+      ]
+    },
+    {
+      "project": "EPIS",
+      "file": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\.agent-runs\\MF-67B\\context.json",
+      "severity": "expected-legacy",
+      "matchCount": 8,
+      "samples": [
+        "/home/epis-",
+        "/openmrs/"
+      ]
+    }
+  ]
+}

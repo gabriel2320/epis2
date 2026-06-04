@@ -1,0 +1,167 @@
+{
+  "scannedAt": "2026-06-04T22:35:18.048Z",
+  "epis2Canonical": {
+    "commandRegistry": true,
+    "clinicalForms": true
+  },
+  "donors": {
+    "EPIS": {
+      "command-registry": {
+        "count": 9,
+        "sample": [
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-mf-cmd-030-validate.mjs",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\test\\commandRegistry.test.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\index.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\command\\clinicalIntentResolver.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\command\\commandFirstChips.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\command\\commandRegistry.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\command\\intentRouter.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-material-shell\\src\\demo\\demoConstants.ts"
+        ]
+      },
+      "form-registry": {
+        "count": 17,
+        "sample": [
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-material-backlog-validate.mjs",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-material-esm-validate.mjs",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-material-forms-validate.mjs",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-material-plan-validate.mjs",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-p7-home-quick-actions-validate.mjs",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\material\\mat-002-003-pc-casa-bundle.mjs",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\material\\mat-003-home-command.mjs",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\material\\mat-005-forms-generate.mjs"
+        ]
+      },
+      "action-registry": {
+        "count": 2,
+        "sample": [
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\index.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\epis\\EpisGeneratedClinicalPage.tsx"
+        ]
+      },
+      "intent-resolver": {
+        "count": 7,
+        "sample": [
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-mf-cmd-013-validate.mjs",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-mf-cmd-026-validate.mjs",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\scripts\\epis-mf-cmd-030-validate.mjs",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\test\\clinicalIntentResolver.test.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-ui\\src\\index.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-clinical-forms\\src\\intent-router.test.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS\\packages\\epis-clinical-forms\\src\\intent-router.ts"
+        ]
+      },
+      "medical-action-universe": {
+        "count": 0,
+        "sample": []
+      }
+    },
+    "EPIDOS": {
+      "command-registry": {
+        "count": 0,
+        "sample": []
+      },
+      "form-registry": {
+        "count": 0,
+        "sample": []
+      },
+      "action-registry": {
+        "count": 0,
+        "sample": []
+      },
+      "intent-resolver": {
+        "count": 0,
+        "sample": []
+      },
+      "medical-action-universe": {
+        "count": 0,
+        "sample": []
+      }
+    },
+    "EPIONE": {
+      "command-registry": {
+        "count": 0,
+        "sample": []
+      },
+      "form-registry": {
+        "count": 11,
+        "sample": [
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\services\\form-action-handlers.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\screens\\actions\\DynamicActionScreen.tsx",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\lib\\clinical-action-catalog.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\intelligence\\clinical-autocomplete.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\intelligence\\next-best-action.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\hooks\\use-clinical-workspace.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\forms\\form-definitions.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\forms\\form-registry.ts"
+        ]
+      },
+      "action-registry": {
+        "count": 12,
+        "sample": [
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\types\\actions.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\screens\\actions\\DynamicActionScreen.tsx",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\medical-action-universe\\local-fallback.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\lib\\action-access-guard.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\lib\\clinical-action-catalog.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\intelligence\\clinical-autocomplete.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\intelligence\\context-scorer.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\intelligence\\dashboard-command-resolver.ts"
+        ]
+      },
+      "intent-resolver": {
+        "count": 9,
+        "sample": [
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\tools\\tool-intent-resolver.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\tools\\tool-registry.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\intelligence\\clinical-autocomplete.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\intelligence\\dashboard-command-resolver.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\intelligence\\dashboard-intent-resolver.test.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\intelligence\\lab-intent-resolver.test.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\intelligence\\text-search-intent-resolver.test.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\actions\\intent-resolver.test.ts"
+        ]
+      },
+      "medical-action-universe": {
+        "count": 11,
+        "sample": [
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\medical-action-universe\\api-resolver.test.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\medical-action-universe\\api-resolver.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\medical-action-universe\\client.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\medical-action-universe\\local-fallback.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\intelligence\\clinical-autocomplete.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\src\\intelligence\\dashboard-command-resolver.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\scripts\\generate-medical-catalogs.ts",
+          "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved\\scripts\\reference\\lib\\lyra-import.ts"
+        ]
+      }
+    }
+  },
+  "warnings": [
+    {
+      "project": "EPIS",
+      "issue": "Múltiples archivos con command-registry",
+      "count": 9
+    },
+    {
+      "project": "EPIS",
+      "issue": "Múltiples form registries",
+      "count": 17
+    },
+    {
+      "project": "EPIS",
+      "issue": "Resolvers de intent dispersos",
+      "count": 7
+    },
+    {
+      "project": "EPIONE",
+      "issue": "Múltiples form registries",
+      "count": 11
+    },
+    {
+      "project": "EPIONE",
+      "issue": "Resolvers de intent dispersos",
+      "count": 9
+    }
+  ]
+}

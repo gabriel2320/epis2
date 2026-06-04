@@ -12,6 +12,7 @@ import {
 import type { AppConfig } from '../config.js';
 import type { Database } from '../db/client.js';
 import { fetchLocalAiStatus, pingOllama, requestDraftAssist } from './client.js';
+import { getDemoSafetyNotesForPatient } from '../clinical/service.js';
 import { recordAiRun, type AiRunRecord } from './store.js';
 
 export async function registerAiRoutes(
@@ -70,6 +71,12 @@ export async function registerAiRoutes(
       }
 
       if (body.status === 'success') {
+        let safetyNotes = [...body.safetyNotes];
+        if (db && parsed.data.patientId) {
+          const cdsNotes = await getDemoSafetyNotesForPatient(db, parsed.data.patientId);
+          safetyNotes = [...new Set([...cdsNotes, ...safetyNotes])];
+        }
+
         const row = await recordAiRun(db, {
           ...baseRun,
           promptHash: body.promptHash,
@@ -78,14 +85,14 @@ export async function registerAiRoutes(
           status: 'success',
           outputPayload: {
             suggestedFields: body.suggestedFields,
-            safetyNotes: body.safetyNotes,
+            safetyNotes,
           },
         });
 
         const response = aiAssistDraftResponseSchema.parse({
           status: 'success',
           suggestedFields: body.suggestedFields,
-          safetyNotes: body.safetyNotes,
+          safetyNotes,
           requiresHumanReview: true,
           runId: row?.id,
           model: body.model,

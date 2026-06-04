@@ -98,9 +98,11 @@ export const DEMO_CLINICAL_CASES: DemoClinicalCase[] = [
       activeProblems: 'Fibrilación auricular (sintético)\nPolifarmacia en revisión (demo)',
       recentEvents: 'Últimas 24 h: sin sangrados; INR en rango (sintético)',
       relevantLabs: 'INR 2.4 · Creatinina 1.1 mg/dL (demo)',
-      activeMedications: 'Warfarina 5 mg/día · Omeprazol 20 mg/día (demo)',
+      activeMedications:
+        'Warfarina 5 mg/día · Omeprazol 20 mg/día · Ceftriaxona 1 g IV (demo — conflicto alergia)',
       pendingItems: 'Revisión de interacciones farmacológicas',
-      clinicalAlerts: 'DEMO / SINTÉTICO — riesgo de caídas documentado (ficticio)',
+      clinicalAlerts:
+        'DEMO / SINTÉTICO — alergia a penicilina (ficticio) · riesgo de caídas documentado',
     },
   },
 ];

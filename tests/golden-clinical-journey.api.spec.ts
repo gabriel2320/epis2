@@ -8,6 +8,7 @@ import { buildApp } from '../apps/api/src/app.js';
 import { getDatabase } from '../apps/api/src/db/client.js';
 import { approvals, auditEvents } from '../apps/api/src/db/schema.js';
 import { testApiConfig } from '../apps/api/src/testConfig.js';
+import { DEMO_CLINICAL_CASES } from '@epis2/test-fixtures';
 
 const hasDb = Boolean(process.env.DATABASE_URL);
 
@@ -41,7 +42,10 @@ describe.skipIf(!hasDb)('Golden Clinical Journey — API', () => {
     const patients = (patientsRes.json() as {
       patients: { id: string; demoLabel?: string; isSynthetic?: boolean }[];
     }).patients;
-    const patient = patients.find((p) => p.isSynthetic && p.demoLabel === 'DEMO/SINTÉTICO');
+    const demo001 = DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-001');
+    const patient =
+      patients.find((p) => p.id === demo001?.patientId) ??
+      patients.find((p) => p.isSynthetic && p.demoLabel === 'DEMO/SINTÉTICO');
     expect(patient?.id).toBeTruthy();
     const patientId = patient!.id;
 

@@ -35,7 +35,7 @@ describe.skipIf(!hasDb)('clinical API (integration)', () => {
     expect(list.every((p) => p.isSynthetic && p.demoLabel === 'DEMO/SINTÉTICO')).toBe(true);
     expect(list.some((p) => p.demoCaseCode === 'DEMO-005')).toBe(true);
 
-    const patientId = list[0]?.id;
+    const patientId = list.find((p) => p.demoCaseCode === 'DEMO-005')?.id ?? list[0]?.id;
     if (!patientId) throw new Error('Sin pacientes de demo en la base');
 
     const detail = await app.inject({

@@ -1,0 +1,291 @@
+{
+  "scannedAt": "2026-06-04T22:35:16.293Z",
+  "destination": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS2",
+  "repositories": {
+    "EPIS": {
+      "status": "FOUND",
+      "path": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS",
+      "topLevel": [
+        ".agent-runs",
+        ".cursor",
+        ".github",
+        ".openclaw",
+        "_archive",
+        "_labs",
+        "apps",
+        "artifacts",
+        "assets",
+        "brand",
+        "contracts",
+        "data",
+        "datasets",
+        "db",
+        "demo",
+        "docs",
+        "e2e",
+        "evals",
+        "frontend",
+        "infra",
+        "openmrs",
+        "packages",
+        "playwright-report",
+        "public",
+        "reports",
+        "schemas",
+        "scripts",
+        "services"
+      ],
+      "packageManager": "npm",
+      "fileCountApprox": 3858,
+      "fileScanTruncated": false,
+      "extensionsTop": [
+        {
+          "ext": ".md",
+          "count": 1077
+        },
+        {
+          "ext": ".ts",
+          "count": 530
+        },
+        {
+          "ext": ".mjs",
+          "count": 396
+        },
+        {
+          "ext": ".js",
+          "count": 366
+        },
+        {
+          "ext": ".json",
+          "count": 327
+        },
+        {
+          "ext": ".map",
+          "count": 321
+        },
+        {
+          "ext": ".tsx",
+          "count": 215
+        },
+        {
+          "ext": ".txt",
+          "count": 128
+        },
+        {
+          "ext": ".jsonl",
+          "count": 121
+        },
+        {
+          "ext": "(sin ext)",
+          "count": 50
+        },
+        {
+          "ext": ".scss",
+          "count": 40
+        },
+        {
+          "ext": ".png",
+          "count": 38
+        },
+        {
+          "ext": ".svg",
+          "count": 36
+        },
+        {
+          "ext": ".template",
+          "count": 33
+        },
+        {
+          "ext": ".yml",
+          "count": 30
+        }
+      ],
+      "git": {
+        "git": true,
+        "branch": "mui-clinical-shell",
+        "head": "a3b0ffe1caa8b141b9f08e4824c71ec214090cde",
+        "oneline": "a3b0ffe Fixes Material visual wiring and Spanish UI gates",
+        "dirtyFileCount": 51,
+        "statusFirstLine": "## mui-clinical-shell...origin/mui-clinical-shell"
+      }
+    },
+    "EPIDOS": {
+      "status": "FOUND",
+      "path": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\Epidos",
+      "topLevel": [
+        ".cursor",
+        ".github",
+        "apps",
+        "docs",
+        "packages",
+        "scripts",
+        "tools"
+      ],
+      "packageManager": "npm",
+      "fileCountApprox": 513,
+      "fileScanTruncated": false,
+      "extensionsTop": [
+        {
+          "ext": ".ts",
+          "count": 214
+        },
+        {
+          "ext": ".md",
+          "count": 82
+        },
+        {
+          "ext": ".tsx",
+          "count": 77
+        },
+        {
+          "ext": ".png",
+          "count": 49
+        },
+        {
+          "ext": ".json",
+          "count": 30
+        },
+        {
+          "ext": ".css",
+          "count": 17
+        },
+        {
+          "ext": ".sql",
+          "count": 9
+        },
+        {
+          "ext": ".mdc",
+          "count": 8
+        },
+        {
+          "ext": "(sin ext)",
+          "count": 5
+        },
+        {
+          "ext": ".mjs",
+          "count": 5
+        },
+        {
+          "ext": ".rs",
+          "count": 3
+        },
+        {
+          "ext": ".yml",
+          "count": 2
+        },
+        {
+          "ext": ".jsonl",
+          "count": 2
+        },
+        {
+          "ext": ".xml",
+          "count": 2
+        },
+        {
+          "ext": ".example",
+          "count": 1
+        }
+      ],
+      "git": {
+        "git": true,
+        "branch": "main",
+        "head": "38d59bee27c44e32f5df53e2eac54260eab8d263",
+        "oneline": "38d59be feat(UI-007/PR2): primitivos shadcn + wrappers clínicos",
+        "dirtyFileCount": 0,
+        "statusFirstLine": "## main...origin/main"
+      }
+    },
+    "EPIONE": {
+      "status": "FOUND",
+      "path": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\clinical-ai-canvas-improved",
+      "topLevel": [
+        ".cursor",
+        ".github",
+        ".lovable",
+        ".wrangler",
+        "backend",
+        "data",
+        "docs",
+        "e2e",
+        "external-repos",
+        "models",
+        "packages",
+        "scripts",
+        "src"
+      ],
+      "packageManager": "npm",
+      "fileCountApprox": 832,
+      "fileScanTruncated": false,
+      "extensionsTop": [
+        {
+          "ext": ".ts",
+          "count": 513
+        },
+        {
+          "ext": ".tsx",
+          "count": 132
+        },
+        {
+          "ext": ".json",
+          "count": 68
+        },
+        {
+          "ext": ".md",
+          "count": 49
+        },
+        {
+          "ext": "(sin ext)",
+          "count": 27
+        },
+        {
+          "ext": ".sql",
+          "count": 22
+        },
+        {
+          "ext": ".csv",
+          "count": 7
+        },
+        {
+          "ext": ".example",
+          "count": 3
+        },
+        {
+          "ext": ".yml",
+          "count": 3
+        },
+        {
+          "ext": ".local",
+          "count": 1
+        },
+        {
+          "ext": ".disabled",
+          "count": 1
+        },
+        {
+          "ext": ".lock",
+          "count": 1
+        },
+        {
+          "ext": ".toml",
+          "count": 1
+        },
+        {
+          "ext": ".js",
+          "count": 1
+        },
+        {
+          "ext": ".jsonc",
+          "count": 1
+        }
+      ],
+      "git": {
+        "git": true,
+        "branch": "feat/clinical-depth-sprints-5-9",
+        "head": "72851ab06450e4d9f7f1a5e51d36fb9ad5cce822",
+        "oneline": "72851ab Add master Inicio screen and unify census command bar.",
+        "dirtyFileCount": 0,
+        "statusFirstLine": "## feat/clinical-depth-sprints-5-9"
+      }
+    }
+  }
+}
