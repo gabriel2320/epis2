@@ -1,7 +1,12 @@
 import {
   aiAssistDraftRequestSchema,
   aiAssistDraftResponseSchema,
+  aiRunsListResponseSchema,
   aiStatusResponseSchema,
+  aiSummarySuggestRequestSchema,
+  aiSummarySuggestResponseSchema,
+  ragQueryRequestSchema,
+  ragQueryResponseSchema,
 } from '@epis2/contracts';
 import type { FastifyInstance } from 'fastify';
 import {
@@ -13,7 +18,9 @@ import type { AppConfig } from '../config.js';
 import type { Database } from '../db/client.js';
 import { fetchLocalAiStatus, pingOllama, requestDraftAssist } from './client.js';
 import { getDemoSafetyNotesForPatient } from '../clinical/service.js';
-import { recordAiRun, type AiRunRecord } from './store.js';
+import { queryPatientRag } from './rag.js';
+import { suggestPatientSummary24h } from './summary.js';
+import { listRecentAiRuns, recordAiRun, type AiRunRecord } from './store.js';
 
 export async function registerAiRoutes(
   app: FastifyInstance,
@@ -22,6 +29,7 @@ export async function registerAiRoutes(
 ) {
   const authenticate = createAuthenticate(config);
   const requireDraftWrite = createRequirePermission(config, 'draft.write');
+  const requireAiRead = createRequirePermission(config, 'ai.read');
 
   app.get('/api/ai/status', { preHandler: authenticate }, async () => {
     const localAiUp = await fetchLocalAiStatus(config.LOCAL_AI_BASE_URL);
@@ -144,6 +152,68 @@ export async function registerAiRoutes(
         requiresHumanReview: true,
       });
       return reply.status(httpStatus === 503 ? 503 : 503).send(response);
+    },
+  );
+
+  app.get(
+    '/api/ai/runs',
+    { preHandler: requireAiRead },
+    async (request, reply) => {
+      const q = request.query as { patientId?: string; limit?: string };
+      if (!db) {
+        return reply.status(503).send({ error: 'Base de datos no disponible' });
+      }
+      const limit = q.limit ? Math.min(Number(q.limit), 100) : 30;
+      const runs = await listRecentAiRuns(db, {
+        patientId: q.patientId,
+        limit: Number.isFinite(limit) ? limit : 30,
+      });
+      return aiRunsListResponseSchema.parse({ readOnly: true, runs });
+    },
+  );
+
+  app.post(
+    '/api/ai/rag/query',
+    { preHandler: requireAiRead },
+    async (request, reply) => {
+      const parsed = ragQueryRequestSchema.safeParse(request.body);
+      if (!parsed.success) {
+        return reply.status(400).send({ error: 'Consulta RAG inválida' });
+      }
+      if (!db) {
+        return reply.status(503).send({ error: 'Base de datos no disponible' });
+      }
+      const session = (request as AuthenticatedRequest).session;
+      const result = await queryPatientRag(
+        db,
+        config,
+        session.sub,
+        parsed.data.patientId,
+        parsed.data.question,
+      );
+      return ragQueryResponseSchema.parse(result);
+    },
+  );
+
+  app.post(
+    '/api/ai/suggest/summary',
+    { preHandler: requireAiRead },
+    async (request, reply) => {
+      const parsed = aiSummarySuggestRequestSchema.safeParse(request.body);
+      if (!parsed.success) {
+        return reply.status(400).send({ error: 'Solicitud de resumen inválida' });
+      }
+      if (!db) {
+        return reply.status(503).send({ error: 'Base de datos no disponible' });
+      }
+      const session = (request as AuthenticatedRequest).session;
+      const result = await suggestPatientSummary24h(
+        db,
+        config,
+        session.sub,
+        parsed.data.patientId,
+      );
+      return aiSummarySuggestResponseSchema.parse(result);
     },
   );
 }

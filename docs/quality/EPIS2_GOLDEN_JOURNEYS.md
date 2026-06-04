@@ -126,16 +126,20 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 
 ---
 
-## 7. Journey V5 — IA avanzada (plan)
+## 7. Journey V5 — IA trazable (slice demo)
 
-**Nombre:** `golden-v5-ai-traceable`
+**Nombre:** `golden-v5-ai-traceable`  
+**Estado:** slice cerrado — gate completo pendiente NL intent y evals.
 
-| Escenario | Criterio |
-|-----------|----------|
-| Ollama ON | `ai_runs` + borrador sugerido |
-| Ollama OFF | Resumen manual posible |
-| RAG | Respuesta incluye fuentes documentales |
-| Sin auto-approve | Ningún endpoint IA crea nota final |
+| # | Paso | Criterio |
+|---|------|----------|
+| 1 | Ficha paciente DEMO | Panel IA visible |
+| 2 | Consulta RAG «laboratorio» | Citas documentales + `ai_runs` |
+| 3 | Resumen 24 h | Texto orientativo; `requiresHumanReview` |
+| 4 | Ollama OFF | RAG/resumen en modo retrieval |
+| 5 | Sin auto-approve | No se crea nota clínica final |
+
+**Tests:** `v5.integration.test.ts`, `ai/routes.test.ts`
 
 ---
 

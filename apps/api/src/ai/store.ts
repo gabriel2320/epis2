@@ -1,3 +1,4 @@
+import { desc, eq } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import { aiRuns } from '../db/schema.js';
 
@@ -38,6 +39,42 @@ export async function recordAiRun(db: Database | null, input: AiRunRecord) {
   const id = crypto.randomUUID();
   memoryRuns.push({ id, ...input });
   return { id };
+}
+
+export async function listRecentAiRuns(
+  db: Database | null,
+  opts: { patientId?: string; limit?: number } = {},
+) {
+  const limit = opts.limit ?? 30;
+  if (db) {
+    const base = db.select().from(aiRuns);
+    const rows = opts.patientId
+      ? await base
+          .where(eq(aiRuns.patientId, opts.patientId))
+          .orderBy(desc(aiRuns.createdAt))
+          .limit(limit)
+      : await base.orderBy(desc(aiRuns.createdAt)).limit(limit);
+    return rows.map((r) => ({
+      id: r.id,
+      blueprintId: r.blueprintId,
+      patientId: r.patientId,
+      model: r.model,
+      status: r.status,
+      latencyMs: r.latencyMs,
+      createdAt: r.createdAt.toISOString(),
+      errorMessage: r.errorMessage,
+    }));
+  }
+  return memoryRuns.slice(-limit).map((r) => ({
+    id: r.id,
+    blueprintId: r.blueprintId,
+    patientId: r.patientId,
+    model: r.model,
+    status: r.status,
+    latencyMs: r.latencyMs,
+    createdAt: new Date().toISOString(),
+    errorMessage: r.errorMessage,
+  }));
 }
 
 export function clearMemoryAiRuns(): void {

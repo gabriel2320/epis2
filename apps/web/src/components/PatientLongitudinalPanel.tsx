@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { DocumentSearchPanel } from './DocumentSearchPanel.js';
+import { PatientClinicalAiPanel } from './PatientClinicalAiPanel.js';
 
 export type PatientLongitudinalPanelProps = {
   data: PatientLongitudinalResponse;
@@ -115,6 +116,9 @@ export function PatientLongitudinalPanel({
         </List>
         <Box sx={{ mt: 2 }}>
           <DocumentSearchPanel patientId={data.patientId} />
+        </Box>
+        <Box sx={{ mt: 2 }}>
+          <PatientClinicalAiPanel patientId={data.patientId} />
         </Box>
       </Section>
     </Stack>

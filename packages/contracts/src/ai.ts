@@ -49,3 +49,63 @@ export const localAiDraftAssistOutputSchema = z.object({
 });
 
 export type LocalAiDraftAssistOutput = z.infer<typeof localAiDraftAssistOutputSchema>;
+
+export const aiRunRowSchema = z.object({
+  id: z.string().uuid(),
+  blueprintId: z.string(),
+  patientId: z.string().uuid().nullable().optional(),
+  model: z.string(),
+  status: z.string(),
+  latencyMs: z.number().int(),
+  createdAt: z.string(),
+  errorMessage: z.string().nullable().optional(),
+});
+
+export const aiRunsListResponseSchema = z.object({
+  readOnly: z.literal(true),
+  runs: z.array(aiRunRowSchema),
+});
+
+export const ragCitationSchema = z.object({
+  documentId: z.string().uuid(),
+  title: z.string(),
+  excerpt: z.string(),
+  storageRef: z.string().optional(),
+});
+
+export const ragQueryRequestSchema = z.object({
+  patientId: z.string().uuid(),
+  question: z.string().min(2).max(500),
+});
+
+export const ragQueryResponseSchema = z.object({
+  readOnly: z.literal(true),
+  requiresHumanReview: z.literal(true),
+  mode: z.enum(['retrieval', 'synthesis']),
+  question: z.string(),
+  answer: z.string(),
+  citations: z.array(ragCitationSchema),
+  runId: z.string().uuid().optional(),
+  aiAvailable: z.boolean(),
+});
+
+export const aiSummarySuggestRequestSchema = z.object({
+  patientId: z.string().uuid(),
+});
+
+export const aiSummarySuggestResponseSchema = z.object({
+  readOnly: z.literal(true),
+  requiresHumanReview: z.literal(true),
+  summaryText: z.string(),
+  source: z.enum(['longitudinal_retrieval', 'ollama_synthesis']),
+  eventCount: z.number().int().nonnegative(),
+  runId: z.string().uuid().optional(),
+  aiAvailable: z.boolean(),
+});
+
+export type AiRunRow = z.infer<typeof aiRunRowSchema>;
+export type AiRunsListResponse = z.infer<typeof aiRunsListResponseSchema>;
+export type RagQueryRequest = z.infer<typeof ragQueryRequestSchema>;
+export type RagQueryResponse = z.infer<typeof ragQueryResponseSchema>;
+export type AiSummarySuggestRequest = z.infer<typeof aiSummarySuggestRequestSchema>;
+export type AiSummarySuggestResponse = z.infer<typeof aiSummarySuggestResponseSchema>;

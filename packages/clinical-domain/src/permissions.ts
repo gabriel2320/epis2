@@ -14,6 +14,7 @@ export const PERMISSIONS = [
   'admin.users.read',
   'fhir.export',
   'dashboard.read',
+  'ai.read',
 ] as const;
 
 export type Permission = (typeof PERMISSIONS)[number];

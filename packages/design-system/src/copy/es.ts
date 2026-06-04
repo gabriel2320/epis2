@@ -62,6 +62,19 @@ export const copy = {
     tabQuality: 'Calidad',
     tabQualityRestricted: 'Tablero de calidad — requiere rol auditor o administrador.',
   },
+  ai: {
+    panelTitle: 'Asistencia clínica (IA local)',
+    statusOn: 'Ollama disponible',
+    statusOff: 'Modo manual (sin Ollama)',
+    humanReviewRequired:
+      'Las respuestas de IA son orientativas. Deben revisarse y, si aplica, guardarse como borrador con aprobación humana.',
+    ragTitle: 'Consulta documental con fuentes',
+    ragPlaceholder: 'Ej. laboratorio, epicrisis…',
+    ragSubmit: 'Consultar con citas',
+    citations: 'Fuentes',
+    summary24h: 'Resumen 24 h (demo)',
+    recentRuns: 'Ejecuciones IA recientes',
+  },
   interop: {
     stagingTitle: 'Lotes en staging (solo lectura)',
     hl7Validate: 'Validar HL7 v2',

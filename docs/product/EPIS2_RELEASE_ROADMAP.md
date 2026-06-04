@@ -206,6 +206,8 @@ EPIS2-15, EPIS2-16 hardening.
 
 IA desconectada = producto usable; con IA = trazabilidad `ai_runs` + fuentes citadas.
 
+**Slice entregado:** RAG con citas, resumen 24 h, listado `ai_runs`, panel en ficha. Ver [epis2-v5-ai-traceable.md](../reports/epis2-v5-ai-traceable.md).
+
 ---
 
 ## Tabla de fases de implementación (Cursor)

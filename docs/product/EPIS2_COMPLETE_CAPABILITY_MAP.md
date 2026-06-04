@@ -44,7 +44,7 @@ Leyenda de madurez:
 | RBAC explícito | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ roles demo |
 | Auditoría append-only | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ login + aprobaciones |
 | Permisos sin wildcards | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ gates |
-| Registro de acceso IA | ◐ | ✓ | ✓ | ✓ | ✓ | ✓ | ◐ `ai_runs` |
+| Registro de acceso IA | ◐ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ `ai_runs` + listado API |
 | Cifrado / backups operativos | — | ○ | ○ | ○ | ✓ | ✓ | ○ |
 
 ### 2.2 Command-first y navegación
@@ -140,7 +140,7 @@ Leyenda de madurez:
 |-----------|---------|---------------|
 | Importación PDF/TXT/imagen | V1 | ○ EPIS2-11 plan |
 | OCR | V1 | ○ |
-| Búsqueda semántica (RAG) | V1 | ○ contratos; sin SoT paralelo |
+| Búsqueda semántica (RAG) | V1/V5 | ◐ RAG con citas demo (sin pgvector) |
 | Export PDF / impresión | V1 | ○ |
 | FHIR R4 export | V1 | ✓ frontera `packages/fhir-export` |
 | HL7 v2 | V4 | — |
@@ -171,8 +171,8 @@ Leyenda de madurez:
 |-----------|----|-----|--------|
 | Intent / slots (futuro) | ◐ | ✓ | ◐ assist borrador |
 | Borrador asistido por blueprint | ✓ | ✓ | ✓ |
-| Resumen 24 h / hospitalización | — | V5 | ○ |
-| RAG con fuentes | — | V1/V5 | ○ |
+| Resumen 24 h / hospitalización | — | V5 | ✓ slice suggest/summary |
+| RAG con fuentes | — | V1/V5 | ✓ slice `/api/ai/rag/query` |
 | Sin escritura clínica final | ✓ | ✓ | ✓ gates |
 
 ### 2.13 Modo tablero

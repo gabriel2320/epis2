@@ -14,6 +14,22 @@ describe('AI routes', () => {
     vi.restoreAllMocks();
   });
 
+  it('GET /api/ai/runs requiere sesión', async () => {
+    const app = await buildApp(testApiConfig);
+    const res = await app.inject({ method: 'GET', url: '/api/ai/runs' });
+    expect(res.statusCode).toBe(401);
+  });
+
+  it('POST /api/ai/rag/query requiere sesión', async () => {
+    const app = await buildApp(testApiConfig);
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/ai/rag/query',
+      payload: { patientId: '00000000-0000-4000-8000-000000000001', question: 'lab' },
+    });
+    expect(res.statusCode).toBe(401);
+  });
+
   it('status indica IA no disponible sin Ollama', async () => {
     vi.spyOn(aiClient, 'fetchLocalAiStatus').mockResolvedValue(false);
     vi.spyOn(aiClient, 'pingOllama').mockResolvedValue(false);
