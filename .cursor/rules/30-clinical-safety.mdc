@@ -1,0 +1,15 @@
+---
+description: Seguridad clínica — borradores, aprobación humana, auditoría
+globs: "{packages/clinical-domain/**,apps/api/**,database/**}"
+alwaysApply: false
+---
+
+# Seguridad clínica
+
+- Estados borrador: `draft` → `editing` → `ready_for_review` → `approved|rejected`.
+- **Sin** `autoApprove`, `skipHumanReview`, `bypassApproval`.
+- Aprobación solo por rol autorizado; evento en auditoría.
+- `clinical_drafts` ≠ `clinical_notes` aprobadas.
+- Solo datos sintéticos DEMO hasta autorización explícita.
+
+Validadores: `human-approval-required`, `ai-write-boundary`.

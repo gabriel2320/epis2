@@ -1,0 +1,18 @@
+---
+description: Una sola fuente de verdad — registry, forms, PostgreSQL
+globs: "{packages/**,apps/**,database/**}"
+alwaysApply: false
+---
+
+# Single source of truth
+
+| Dominio | Canónico |
+|---------|----------|
+| Comandos / intents | `packages/command-registry` |
+| Formularios / blueprints | `packages/clinical-forms` |
+| Datos clínicos aprobados | PostgreSQL (`apps/api` + Drizzle) |
+| Contratos validación | `packages/contracts` |
+
+No segundo registry temporal. No blueprints duplicados en `apps/web`.
+
+Si documentación y código difieren, **corregir o detener** — no avanzar de fase.

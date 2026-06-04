@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EPIS2 Legacy Import Manifest",
+  "description": "Ausencia de un archivo aquí implica migración prohibida desde EPIS.",
+  "version": 1,
+  "donorRepository": "../Epis",
+  "donorStatus": "LEGACY_REFERENCE",
+  "imports": []
+}

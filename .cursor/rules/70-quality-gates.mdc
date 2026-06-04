@@ -1,0 +1,22 @@
+---
+description: Gates obligatorios — architecture validate, journey dorado, reporte
+alwaysApply: true
+---
+
+# Quality gates
+
+Antes de terminar una sesión:
+
+```bash
+npm run check          # lint + typecheck + architecture:validate
+npm run test
+npm run db:validate
+```
+
+Si la fase lo exige: `npm run quality:golden-journey`.
+
+Entregar reporte `reports/*.md` con: alcance, gates, riesgos, próximo paso.
+
+**Detenerse** si `architecture:validate` falla o si la tarea contradice `docs/product/PRODUCT_INVARIANTS.md`.
+
+Journey obligatorio del producto: `docs/quality/GOLDEN_CLINICAL_JOURNEY.md`.

@@ -1,0 +1,18 @@
+---
+description: Frontera EPIS donante — allowlist, manifiesto, patrones rechazados
+alwaysApply: true
+---
+
+# Frontera legacy
+
+Antes de portar código desde EPIS:
+
+1. Verificar `docs/legacy/EPIS_DONOR_ALLOWLIST.md`.
+2. Añadir entrada a `legacy-import-manifest.json` (ruta, SHA, modo, tests).
+3. Registrar en `docs/legacy/LEGACY_IMPORT_LEDGER.md`.
+
+**Prohibido:** OpenMRS, O3, Carbon, Soft Carbon, overlays, copia masiva, import sin manifiesto.
+
+Ejecutar `npm run architecture:validate` tras cualquier import.
+
+Memoria: `docs/legacy/EPIS_POSTMORTEM.md`, `EPIS_REJECTED_PATTERNS.md`.

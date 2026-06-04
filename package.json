@@ -10,17 +10,20 @@
     "services/*"
   ],
   "scripts": {
-    "build": "npm run build -w @epis2/contracts && npm run build -w @epis2/clinical-domain && npm run build -w @epis2/command-registry && npm run build -w @epis2/clinical-forms && npm run build -w @epis2/design-system && npm run build -w @epis2/test-fixtures && npm run build -w @epis2/local-ai && npm run build -w @epis2/api && npm run build -w @epis2/web",
+    "build": "npm run build -w @epis2/contracts && npm run build -w @epis2/design-system && npm run build -w @epis2/clinical-domain && npm run build -w @epis2/command-registry && npm run build -w @epis2/clinical-forms && npm run build -w @epis2/test-fixtures && npm run build -w @epis2/local-ai && npm run build -w @epis2/api && npm run build -w @epis2/web",
     "lint": "eslint .",
-    "typecheck": "npm run build -w @epis2/contracts && npm run typecheck -w @epis2/contracts && npm run typecheck -w @epis2/clinical-domain && npm run typecheck -w @epis2/command-registry && npm run typecheck -w @epis2/clinical-forms && npm run typecheck -w @epis2/design-system && npm run typecheck -w @epis2/test-fixtures && npm run typecheck -w @epis2/local-ai && npm run typecheck -w @epis2/api && npm run typecheck -w @epis2/web",
+    "typecheck": "npm run build -w @epis2/contracts && npm run build -w @epis2/design-system && npm run typecheck -w @epis2/contracts && npm run typecheck -w @epis2/design-system && npm run typecheck -w @epis2/clinical-domain && npm run typecheck -w @epis2/command-registry && npm run typecheck -w @epis2/clinical-forms && npm run typecheck -w @epis2/test-fixtures && npm run typecheck -w @epis2/local-ai && npm run typecheck -w @epis2/api && npm run typecheck -w @epis2/web",
     "test": "vitest run",
-    "check": "npm run lint && npm run typecheck",
+    "architecture:validate": "node scripts/architecture/validate-all.mjs",
+    "quality:golden-journey": "vitest run tests/golden-clinical-journey.spec.ts",
+    "check": "npm run lint && npm run typecheck && npm run architecture:validate",
     "db:validate": "node scripts/db-validate.mjs",
     "dev:api": "npm run dev -w @epis2/api",
     "dev:web": "npm run dev -w @epis2/web",
     "dev:ai": "npm run dev -w @epis2/local-ai"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
     "@eslint/js": "^9.28.0",
     "@types/node": "^22.15.21",
     "eslint": "^9.28.0",

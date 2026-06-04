@@ -1,39 +1,47 @@
 # EPIS2 — Guía para agentes (Cursor)
 
-## Modo de operación
+> Los errores de EPIS no son recuerdos: son gates de EPIS2.
 
-1. **Una microfase por sesión** — p. ej. `Ejecuta solo EPIS2-03. No avances a EPIS2-04.`
-2. **EPIS2 First** — PostgreSQL es fuente de verdad; la home es el Centro de Comando.
-3. **EPIS es donante, no base** — nunca copiar carpetas completas desde `../Epis`.
-4. **Sin pacientes reales** — solo datos sintéticos marcados DEMO hasta piloto autorizado.
-5. **IA local asiste; no decide** — Ollama nunca aprueba, firma ni escribe en tablas clínicas finales.
+## Antes de modificar código
 
-## Fase actual
+1. Leer `docs/PRODUCT_CANON.md` y `docs/product/PRODUCT_INVARIANTS.md`.
+2. Leer `docs/legacy/EPIS_POSTMORTEM.md` si tocas integración o migración.
+3. **Declarar alcance** (fase, archivos permitidos/prohibidos).
+4. No importar desde `../Epis` sin entrada en `legacy-import-manifest.json`.
 
-```text
-EPIS2-00 ✓  (documentación y reglas)
-EPIS2-01 ✓  (monorepo bootstrap)
-EPIS2-02     (pendiente — shell MUI + Command Center)
+## Gates obligatorios al cerrar
+
+```bash
+npm run check
+npm run test
+npm run db:validate
 ```
 
-## Antes de escribir código
+Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.
 
-Leer:
+## Detenerse si
 
-- `docs/PRODUCT_CANON.md`
-- `docs/SCOPE_V1.md`
-- `docs/QUALITY_GATES.md`
-- La sección de la fase en `docs/ROADMAP.md`
+- `architecture:validate` falla.
+- La tarea contradice invariantes o allowlist.
+- Se pide segundo Command/Form Registry «temporal».
+- Aparece OpenMRS, Carbon o dashboard como home.
 
-## Entregables por fase
+## Fases
 
-Cada fase debe terminar con:
+```text
+EPIS2-00 ✓  EPIS2-01 ✓  gobierno EPIS ✓  EPIS2-02 ✓
+EPIS2-03     (auth + RBAC API)
+```
 
-- cambios acotados a archivos permitidos;
-- tests/gates de la fase;
-- reporte en `reports/epis2-NN-*.md`;
-- commit sugerido (no ejecutar salvo petición explícita).
+## Memoria legacy
 
-## Prohibido en EPIS2
+| Documento | Uso |
+|-----------|-----|
+| `docs/legacy/EPIS_POSTMORTEM.md` | Errores → gates |
+| `docs/legacy/EPIS_REJECTED_PATTERNS.md` | Patrones prohibidos |
+| `docs/legacy/EPIS_DONOR_ALLOWLIST.md` | Qué puede portarse |
+| `docs/quality/GOLDEN_CLINICAL_JOURNEY.md` | Gate producto final |
 
-OpenMRS, O3, Carbon, overlays EPIS, dashboards como home, writeback automático, firma automática, migración masiva de legacy.
+## Prohibido
+
+OpenMRS, O3, Carbon, overlays EPIS, dashboard home, auto-aprobación, PHI real, carpetas completas desde EPIS.

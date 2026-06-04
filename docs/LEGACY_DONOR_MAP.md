@@ -3,6 +3,8 @@
 **Donante:** `../Epis` · **Estado donante:** `LEGACY_REFERENCE`  
 **Regla:** selección explícita — nunca copia masiva de carpetas.
 
+> Gobierno ejecutable: `docs/legacy/`, `legacy-import-manifest.json`, `npm run architecture:validate`
+
 ---
 
 ## Leyenda

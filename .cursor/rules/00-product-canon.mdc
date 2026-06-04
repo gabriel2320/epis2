@@ -1,16 +1,15 @@
 ---
-description: Canon de producto EPIS2 — command-first, MVP acotado
+description: Canon EPIS2 — invariantes, command-first, sin legacy visible
 alwaysApply: true
 ---
 
-# EPIS2 Product Canon
+# EPIS2 — Canon (obligatorio antes de modificar)
 
-- Home = **Centro de Comando**. Pregunta central: «¿Qué necesitas hacer?»
-- No dashboards, no ficha hospitalaria completa en v1, no OpenMRS/O3/Carbon.
-- Flujo: comando → intent → formulario mínimo → borrador → **aprobación humana** → PostgreSQL.
-- IA asiste; **nunca** aprueba, firma ni escribe en datos clínicos finales.
-- Solo datos **sintéticos DEMO** hasta autorización explícita.
-- **Una microfase por sesión** — no avanzar sin gate (`docs/QUALITY_GATES.md`).
-- EPIS (`../Epis`) = donante; **no copiar carpetas completas**.
+1. Leer `docs/PRODUCT_CANON.md` y `docs/product/PRODUCT_INVARIANTS.md`.
+2. Declarar alcance de la sesión (fase, archivos permitidos).
+3. Home = **Centro de Comando** — nunca dashboard.
+4. PostgreSQL = SoT; borradores ≠ datos aprobados; IA no aprueba ni firma.
+5. EPIS (`../Epis`) = donante; **prohibido** copiar carpetas o importar sin `legacy-import-manifest.json`.
+6. Al cerrar: `npm run check`, reporte en `reports/`, detenerse si hay contradicción con invariantes.
 
-Referencia: `docs/PRODUCT_CANON.md`, `docs/SCOPE_V1.md`, `docs/NON_GOALS.md`.
+Frase guía: *Los errores de EPIS no son recuerdos: son gates de EPIS2.*
