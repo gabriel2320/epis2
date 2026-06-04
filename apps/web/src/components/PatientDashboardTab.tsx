@@ -1,0 +1,102 @@
+import type { PatientDashboardResponse } from '@epis2/contracts';
+import { copy } from '@epis2/design-system';
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import { DraftStatusChip } from './DraftStatusChip.js';
+
+export type PatientDashboardTabProps = {
+  data: PatientDashboardResponse;
+  onOpenFicha: () => void;
+  onOpenDraft: (draftId: string) => void;
+};
+
+export function PatientDashboardTab({ data, onOpenFicha, onOpenDraft }: PatientDashboardTabProps) {
+  return (
+    <Stack spacing={2} data-testid="epis2-dashboard-patient">
+      <Stack direction="row" justifyContent="space-between" alignItems="center" flexWrap="wrap" gap={1}>
+        <Box>
+          <Typography variant="h6">{data.displayName}</Typography>
+          {data.demoCaseCode ? (
+            <Typography variant="caption" color="text.secondary">
+              {data.demoCaseCode} · {copy.demoBadge}
+            </Typography>
+          ) : null}
+        </Box>
+        <Button size="small" variant="outlined" onClick={onOpenFicha}>
+          {copy.dashboard.viewFullRecord}
+        </Button>
+      </Stack>
+
+      {data.allergies.length > 0 ? (
+        <Alert severity="warning">
+          {copy.longitudinal.allergies}: {data.allergies.map((a) => a.substance).join(', ')}
+        </Alert>
+      ) : null}
+
+      <Paper variant="outlined" sx={{ p: 2 }}>
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.longitudinal.problems}
+        </Typography>
+        {data.activeProblems.length > 0 ? (
+          <List dense disablePadding>
+            {data.activeProblems.map((p) => (
+              <ListItem key={p} disablePadding>
+                <ListItemText primary={p} />
+              </ListItem>
+            ))}
+          </List>
+        ) : (
+          <Typography variant="body2" color="text.secondary">
+            {copy.longitudinal.emptySection}
+          </Typography>
+        )}
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }}>
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.dashboard.pendingReview}
+        </Typography>
+        {data.pendingDrafts.length > 0 ? (
+          <List dense disablePadding>
+            {data.pendingDrafts.map((d) => (
+              <ListItem key={d.id} disablePadding>
+                <ListItemButton onClick={() => onOpenDraft(d.id)}>
+                  <ListItemText primary={d.title} secondary={d.draftType} />
+                  <DraftStatusChip status={d.status} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        ) : (
+          <Typography variant="body2" color="text.secondary">
+            {copy.dashboard.emptyDrafts}
+          </Typography>
+        )}
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }}>
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.longitudinal.timeline}
+        </Typography>
+        <List dense disablePadding>
+          {data.timelinePreview.map((ev) => (
+            <ListItem key={ev.id} disablePadding>
+              <ListItemText
+                primary={ev.title}
+                secondary={new Date(ev.at).toLocaleString('es-CL')}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+    </Stack>
+  );
+}

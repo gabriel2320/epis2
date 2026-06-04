@@ -34,4 +34,10 @@ export {
   dashboardWorkResponseSchema,
   type DashboardWorkResponse,
 } from './dashboard.js';
+export {
+  patientLongitudinalResponseSchema,
+  patientDashboardResponseSchema,
+  type PatientLongitudinalResponse,
+  type PatientDashboardResponse,
+} from './longitudinal.js';
 export { EPIS2_PRODUCT_NAME, EPIS2_PHASE } from './meta.js';

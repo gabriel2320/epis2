@@ -10,6 +10,15 @@ describe('dashboard API', () => {
     expect(res.statusCode).toBe(401);
   });
 
+  it('GET /api/dashboard/patient/:id requiere sesión', async () => {
+    const app = await buildApp(testApiConfig);
+    const res = await app.inject({
+      method: 'GET',
+      url: '/api/dashboard/patient/a0000001-0000-4000-8000-000000000001',
+    });
+    expect(res.statusCode).toBe(401);
+  });
+
   it('GET /api/dashboard/work responde agregado demo con sesión', async () => {
     const app = await buildApp(testApiConfig);
     const login = await app.inject({

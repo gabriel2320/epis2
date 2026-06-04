@@ -77,7 +77,10 @@ export function CommandCenterPage() {
             DASHBOARD_TAB_BY_INTENT[result.intent as ClinicalIntent] ?? 'work';
           navigate({
             to: '/epis2/dashboard',
-            search: { tab: tab as 'work' | 'patient' | 'service' },
+            search: {
+              tab: tab as 'work' | 'patient' | 'service',
+              patientId: activePatient?.id,
+            },
           });
           return;
         }
@@ -228,7 +231,13 @@ export function CommandCenterPage() {
             variant="outlined"
             data-testid="epis2-open-dashboard"
             onClick={() =>
-              void navigate({ to: '/epis2/dashboard', search: { tab: 'work' } })
+              void navigate({
+                to: '/epis2/dashboard',
+                search: {
+                  tab: activePatient ? 'patient' : 'work',
+                  patientId: activePatient?.id,
+                },
+              })
             }
           >
             {copy.dashboard.openBoard}

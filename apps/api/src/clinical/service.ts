@@ -20,6 +20,7 @@ import {
   draftVersions,
   encounters,
   observations,
+  patientAllergies,
   patientIdentifiers,
   patients,
   problems,
@@ -167,11 +168,24 @@ export async function getDemoClinicalAlertsForPatient(
   const patient = await getPatientById(db, patientId);
   if (!patient) return null;
   const ctx = await getPatientClinicalContext(db, patientId);
+  const allergyRows = await db
+    .select({ substance: patientAllergies.substance, severity: patientAllergies.severity })
+    .from(patientAllergies)
+    .where(eq(patientAllergies.patientId, patientId));
   const safetyOpts: { sex?: string; problems: { description: string }[] } = {
     problems: ctx.problems,
   };
   if (patient.sex) safetyOpts.sex = patient.sex;
   const input = buildClinicalSafetyInputFromSummary(ctx.summaryFields, safetyOpts);
+  for (const a of allergyRows) {
+    if (!input.allergies.some((x) => x.substance === a.substance)) {
+      input.allergies.push({
+        substance: a.substance,
+        severity:
+          a.severity === 'severe' || a.severity === 'mild' ? a.severity : 'moderate',
+      });
+    }
+  }
   const alertOpts: Parameters<typeof evaluateDemoClinicalAlerts>[1] = {};
   if (options?.blueprintId !== undefined) alertOpts.blueprintId = options.blueprintId;
   if (options?.currentFields !== undefined) alertOpts.currentFields = options.currentFields;

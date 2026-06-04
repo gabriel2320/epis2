@@ -1,4 +1,4 @@
-import type { PatientClinicalAlertsResponse } from '@epis2/contracts';
+import type { PatientClinicalAlertsResponse, PatientLongitudinalResponse } from '@epis2/contracts';
 import { apiFetch } from './client.js';
 
 export type PatientListRow = {
@@ -34,6 +34,10 @@ export function listPatients(query?: string) {
 
 export function fetchPatientDetail(patientId: string) {
   return apiFetch<PatientDetailResponse>(`/api/patients/${patientId}`);
+}
+
+export function fetchPatientLongitudinal(patientId: string) {
+  return apiFetch<PatientLongitudinalResponse>(`/api/patients/${patientId}/longitudinal`);
 }
 
 /** Blueprint EPIS2 alineado a intent del command-registry (para CDR contextual). */

@@ -136,6 +136,46 @@ describe.skipIf(!hasDb)('clinical API (integration)', () => {
     expect(notesAfter.length).toBe(beforeCount + 1);
     expect(notesAfter.some((n) => n.title === 'Evolución test')).toBe(true);
 
+    const longitudinal = await app.inject({
+      method: 'GET',
+      url: `/api/patients/${patientId}/longitudinal`,
+      headers: { cookie },
+    });
+    expect(longitudinal.statusCode).toBe(200);
+    const longJson = longitudinal.json() as {
+      readOnly: boolean;
+      allergies: { substance: string }[];
+      medications: { name: string }[];
+      timeline: unknown[];
+    };
+    expect(longJson.readOnly).toBe(true);
+    expect(longJson.timeline.length).toBeGreaterThan(0);
+
+    if (demo005) {
+      const long005 = await app.inject({
+        method: 'GET',
+        url: `/api/patients/${demo005.id}/longitudinal`,
+        headers: { cookie },
+      });
+      const long005Json = long005.json() as { allergies: { substance: string }[] };
+      expect(long005Json.allergies.some((a) => /penicilina/i.test(a.substance))).toBe(true);
+
+      const board = await app.inject({
+        method: 'GET',
+        url: `/api/dashboard/patient/${demo005.id}`,
+        headers: { cookie },
+      });
+      expect(board.statusCode).toBe(200);
+      const boardJson = board.json() as {
+        displayName: string;
+        allergies: { substance: string }[];
+        timelinePreview: unknown[];
+      };
+      expect(boardJson.displayName.length).toBeGreaterThan(0);
+      expect(boardJson.allergies.some((a) => /penicilina/i.test(a.substance))).toBe(true);
+      expect(boardJson.timelinePreview.length).toBeGreaterThan(0);
+    }
+
     await app.close();
   });
 });

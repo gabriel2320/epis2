@@ -13,7 +13,7 @@ export type ClinicalPatientSearch = { patientId?: string };
 
 export type DashboardTab = 'work' | 'patient' | 'service';
 
-export type DashboardSearch = { tab?: DashboardTab };
+export type DashboardSearch = { tab?: DashboardTab; patientId?: string };
 
 export type ClinicalNavigateTarget =
   | ClinicalFormRoutePath

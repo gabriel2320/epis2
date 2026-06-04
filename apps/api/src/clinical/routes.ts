@@ -1,4 +1,7 @@
-import { patientClinicalAlertsResponseSchema } from '@epis2/contracts';
+import {
+  patientClinicalAlertsResponseSchema,
+  patientLongitudinalResponseSchema,
+} from '@epis2/contracts';
 import { roleHasPermission } from '@epis2/clinical-domain';
 import { z } from 'zod';
 import type { FastifyInstance } from 'fastify';
@@ -22,6 +25,7 @@ import {
   searchPatients,
   updateDraft,
 } from './service.js';
+import { getPatientLongitudinal } from './longitudinal.js';
 
 const createDraftSchema = z.object({
   patientId: z.string().uuid(),
@@ -140,6 +144,20 @@ export async function registerClinicalRoutes(
           createdBy: n.createdBy,
         })),
       };
+    },
+  );
+
+  app.get(
+    '/api/patients/:patientId/longitudinal',
+    { preHandler: requirePatientRead },
+    async (request, reply) => {
+      const { patientId } = request.params as { patientId: string };
+      const patient = await getPatientById(db, patientId);
+      if (!patient) {
+        return reply.status(404).send({ error: 'Paciente no encontrado' });
+      }
+      const data = await getPatientLongitudinal(db, patientId);
+      return patientLongitudinalResponseSchema.parse(data);
     },
   );
 

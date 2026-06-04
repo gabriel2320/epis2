@@ -19,6 +19,7 @@ import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.j
 import {
   BLUEPRINT_BY_ROUTE,
   fetchPatientDetail,
+  fetchPatientLongitudinal,
   listDrafts,
   listPatients,
   type PatientDetailResponse,
@@ -26,6 +27,8 @@ import {
 } from '../api/clinicalApi.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
 import { PatientClinicalSummaryPanel } from '../components/PatientClinicalSummaryPanel.js';
+import { PatientLongitudinalPanel } from '../components/PatientLongitudinalPanel.js';
+import type { PatientLongitudinalResponse } from '@epis2/contracts';
 
 const QUICK_ROUTES: { path: ClinicalFormRoutePath; label: string }[] = [
   { path: '/espacio/resumen', label: 'Resumen clínico' },
@@ -45,6 +48,7 @@ export function PatientWorkspacePage() {
   const [error, setError] = useState<string | undefined>();
   const [alertBlueprintId, setAlertBlueprintId] = useState<string | undefined>();
   const [alertLabel, setAlertLabel] = useState<string | undefined>();
+  const [longitudinal, setLongitudinal] = useState<PatientLongitudinalResponse | null>(null);
 
   const patientId = search.patientId ?? active?.id;
 
@@ -58,13 +62,15 @@ export function PatientWorkspacePage() {
   const loadDetail = useCallback(async (id: string) => {
     setError(undefined);
     try {
-      const [res, draftRes] = await Promise.all([
+      const [res, draftRes, longRes] = await Promise.all([
         fetchPatientDetail(id),
         listDrafts({ patientId: id }),
+        fetchPatientLongitudinal(id),
       ]);
       setDetail(res);
       setPatient(res.patient);
       setDrafts(draftRes.drafts);
+      setLongitudinal(longRes);
       setAlertBlueprintId(undefined);
       setAlertLabel(undefined);
     } catch {
@@ -154,6 +160,18 @@ export function PatientWorkspacePage() {
           hintBlueprintLabel={contextLabel}
         />
 
+        {longitudinal ? (
+          <PatientLongitudinalPanel
+            data={longitudinal}
+            onOpenDraft={(draftId) =>
+              void navigate({
+                to: '/espacio/borrador/$draftId',
+                params: { draftId },
+              })
+            }
+          />
+        ) : null}
+
         <Box>
           <Typography variant="subtitle2" gutterBottom>
             {copy.activePatient.quickActions}
@@ -177,6 +195,18 @@ export function PatientWorkspacePage() {
                 {action.label}
               </Button>
             ))}
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() =>
+                void navigate({
+                  to: '/epis2/dashboard',
+                  search: { tab: 'patient', patientId },
+                })
+              }
+            >
+              {copy.dashboard.openBoard}
+            </Button>
           </Stack>
         </Box>
 

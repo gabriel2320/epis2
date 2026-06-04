@@ -182,6 +182,55 @@ export const auditEvents = pgTable('audit_events', {
   payload: jsonb('payload'),
 });
 
+export const patientAllergies = pgTable('patient_allergies', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  patientId: uuid('patient_id')
+    .notNull()
+    .references(() => patients.id, { onDelete: 'cascade' }),
+  substance: text('substance').notNull(),
+  severity: text('severity').notNull().default('moderate'),
+  status: text('status').notNull().default('active'),
+  recordedAt: timestamp('recorded_at', { withTimezone: true }).notNull().defaultNow(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
+export const patientMedications = pgTable('patient_medications', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  patientId: uuid('patient_id')
+    .notNull()
+    .references(() => patients.id, { onDelete: 'cascade' }),
+  name: text('name').notNull(),
+  doseText: text('dose_text'),
+  route: text('route'),
+  status: text('status').notNull().default('active'),
+  startedAt: timestamp('started_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
+export const clinicalDocuments = pgTable('clinical_documents', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  patientId: uuid('patient_id')
+    .notNull()
+    .references(() => patients.id, { onDelete: 'cascade' }),
+  encounterId: uuid('encounter_id').references(() => encounters.id, { onDelete: 'set null' }),
+  title: text('title').notNull(),
+  documentType: text('document_type').notNull().default('other'),
+  mimeType: text('mime_type'),
+  storageRef: text('storage_ref').notNull(),
+  status: text('status').notNull().default('indexed'),
+  indexedAt: timestamp('indexed_at', { withTimezone: true }).notNull().defaultNow(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
 export const aiRuns = pgTable('ai_runs', {
   id: uuid('id').primaryKey().defaultRandom(),
   actorId: text('actor_id').references(() => appUsers.id),

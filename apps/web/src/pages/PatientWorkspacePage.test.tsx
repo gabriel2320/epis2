@@ -10,11 +10,13 @@ import { PatientWorkspacePage } from './PatientWorkspacePage.js';
 
 const patientId = 'a0000001-0000-4000-8000-000000000005';
 
-const { fetchPatientDetail, fetchPatientClinicalAlerts, listDrafts } = vi.hoisted(() => ({
-  fetchPatientDetail: vi.fn(),
-  fetchPatientClinicalAlerts: vi.fn(),
-  listDrafts: vi.fn(),
-}));
+const { fetchPatientDetail, fetchPatientClinicalAlerts, fetchPatientLongitudinal, listDrafts } =
+  vi.hoisted(() => ({
+    fetchPatientDetail: vi.fn(),
+    fetchPatientClinicalAlerts: vi.fn(),
+    fetchPatientLongitudinal: vi.fn(),
+    listDrafts: vi.fn(),
+  }));
 
 vi.mock('@tanstack/react-router', () => ({
   useSearch: () => ({ patientId }),
@@ -31,6 +33,7 @@ vi.mock('../api/clinicalApi.js', async (importOriginal) => {
     ...actual,
     fetchPatientDetail,
     fetchPatientClinicalAlerts,
+    fetchPatientLongitudinal,
     listDrafts,
     listPatients: vi.fn(),
   };
@@ -57,6 +60,18 @@ describe('PatientWorkspacePage', () => {
       notes: [],
     });
     listDrafts.mockResolvedValue({ drafts: [] });
+    fetchPatientLongitudinal.mockResolvedValue({
+      patientId,
+      readOnly: true,
+      demoCaseCode: 'DEMO-005',
+      problems: [{ id: 'p1', description: 'Infección (demo)', status: 'active' }],
+      allergies: [{ id: 'a1', substance: 'Penicilina', severity: 'moderate', status: 'active' }],
+      medications: [{ id: 'm1', name: 'Warfarina', status: 'active' }],
+      observations: [],
+      documents: [],
+      encounters: [],
+      timeline: [{ id: 't1', kind: 'encounter', at: new Date().toISOString(), title: 'Consulta demo' }],
+    });
     fetchPatientClinicalAlerts.mockResolvedValue({
       patientId,
       readOnly: true,

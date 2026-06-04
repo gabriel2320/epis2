@@ -55,6 +55,7 @@ const dashboardModeRoute = createRoute({
       search.tab === 'patient' || search.tab === 'service' || search.tab === 'work'
         ? search.tab
         : 'work',
+    patientId: typeof search.patientId === 'string' ? search.patientId : undefined,
   }),
   component: DashboardModePage,
   beforeLoad: requireSession,

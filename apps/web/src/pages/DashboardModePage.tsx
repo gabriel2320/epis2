@@ -15,22 +15,25 @@ import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 import { useSearch } from '@tanstack/react-router';
 import { useCallback, useEffect, useState } from 'react';
-import { fetchDashboardWork } from '../api/dashboardApi.js';
-import type { DashboardWorkResponse } from '@epis2/contracts';
+import { fetchDashboardWork, fetchPatientDashboard } from '../api/dashboardApi.js';
+import type { DashboardWorkResponse, PatientDashboardResponse } from '@epis2/contracts';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { readRecentPatients } from '../clinical/recentPatients.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { DraftStatusChip } from '../components/DraftStatusChip.js';
+import { PatientDashboardTab } from '../components/PatientDashboardTab.js';
 
 type DashboardTab = 'work' | 'patient' | 'service';
 
 export function DashboardModePage() {
-  const search = useSearch({ strict: false }) as { tab?: string };
+  const search = useSearch({ strict: false }) as { tab?: string; patientId?: string };
   const navigate = useClinicalNavigate();
   const { patient: activePatient, setPatient } = useActivePatient();
   const tab = (search.tab === 'patient' || search.tab === 'service' ? search.tab : 'work') as DashboardTab;
+  const dashboardPatientId = search.patientId ?? activePatient?.id;
 
   const [work, setWork] = useState<DashboardWorkResponse | null>(null);
+  const [patientBoard, setPatientBoard] = useState<PatientDashboardResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | undefined>();
   const [recentPatients, setRecentPatients] = useState(readRecentPatients());
@@ -49,12 +52,33 @@ export function DashboardModePage() {
     }
   }, []);
 
+  const loadPatient = useCallback(async (patientId: string) => {
+    setLoading(true);
+    setError(undefined);
+    try {
+      const res = await fetchPatientDashboard(patientId);
+      setPatientBoard(res);
+    } catch {
+      setError(copy.errors.genericMessage);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
     if (tab === 'work') void load();
-  }, [tab, load]);
+    if (tab === 'patient' && dashboardPatientId) void loadPatient(dashboardPatientId);
+    if (tab === 'patient' && !dashboardPatientId) {
+      setLoading(false);
+      setPatientBoard(null);
+    }
+  }, [tab, load, loadPatient, dashboardPatientId]);
 
   const setTab = (next: DashboardTab) => {
-    void navigate({ to: '/epis2/dashboard', search: { tab: next } });
+    void navigate({
+      to: '/epis2/dashboard',
+      search: { tab: next, patientId: dashboardPatientId },
+    });
   };
 
   return (
@@ -87,11 +111,30 @@ export function DashboardModePage() {
         </Tabs>
 
         {tab === 'patient' ? (
-          <Alert severity="info">
-            {activePatient
-              ? `${copy.dashboard.tabPatient}: ${activePatient.displayName}`
-              : copy.dashboard.tabPatientSoon}
-          </Alert>
+          <>
+            {error ? <Alert severity="error">{error}</Alert> : null}
+            {loading ? (
+              <Typography color="text.secondary">{copy.dashboard.loading}</Typography>
+            ) : dashboardPatientId && patientBoard ? (
+              <PatientDashboardTab
+                data={patientBoard}
+                onOpenFicha={() =>
+                  void navigate({
+                    to: '/espacio/ficha',
+                    search: { patientId: dashboardPatientId },
+                  })
+                }
+                onOpenDraft={(draftId) =>
+                  void navigate({
+                    to: '/espacio/borrador/$draftId',
+                    params: { draftId },
+                  })
+                }
+              />
+            ) : (
+              <Alert severity="info">{copy.dashboard.patientRequiresSelection}</Alert>
+            )}
+          </>
         ) : null}
 
         {tab === 'service' ? <Alert severity="info">{copy.dashboard.tabServiceSoon}</Alert> : null}
