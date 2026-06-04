@@ -16,11 +16,11 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 ---
 
-## EPIS2-01 — Bootstrap monorepo
+## EPIS2-01 — Bootstrap monorepo ✓
 
 **Entregables:** estructura `apps/`, `packages/`, `services/`, TS strict, lint, test, Docker Compose (Postgres + Ollama), CI, `.env.example`, health checks.
 
-**Gate:** `npm run check` · `npm run test` · `npm run db:validate`
+**Gate:** `npm run check` · `npm run test` · `npm run db:validate` — ver `reports/epis2-01-monorepo-bootstrap.md`
 
 ---
 
