@@ -2,7 +2,7 @@
 
 **Nombre visible en UI:** **Modo tablero** (no «Dashboard» como home)  
 **Ruta objetivo:** `/epis2/dashboard` (alias de producto; implementación puede mapear bajo router EPIS2 existente)  
-**Estado:** Diseño aprobado · **Implementación:** EPIS2-12 (pendiente)
+**Estado:** Implementado (EPIS2-12)
 
 ---
 

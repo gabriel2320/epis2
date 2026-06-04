@@ -16,6 +16,8 @@ import { CommandSuggestionChips } from '../components/CommandSuggestionChips.js'
 import { PowerBar } from '../components/PowerBar.js';
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
+import { DASHBOARD_TAB_BY_INTENT } from '@epis2/command-registry';
+import type { ClinicalIntent } from '@epis2/command-registry';
 import { INTENT_TO_ASSIST_BLUEPRINT, listPatients, type PatientListRow } from '../api/clinicalApi.js';
 import { ActivePatientBanner } from '../components/ActivePatientBanner.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
@@ -70,6 +72,15 @@ export function CommandCenterPage() {
       const result = await resolveCommandApi(resolveBody);
       setLastResult(result);
       if (result.status === 'resolved') {
+        if (result.routePath === '/epis2/dashboard') {
+          const tab =
+            DASHBOARD_TAB_BY_INTENT[result.intent as ClinicalIntent] ?? 'work';
+          navigate({
+            to: '/epis2/dashboard',
+            search: { tab: tab as 'work' | 'patient' | 'service' },
+          });
+          return;
+        }
         const search = activePatient?.id ? { patientId: activePatient.id } : {};
         navigate({
           to: result.routePath as ClinicalFormRoutePath,
@@ -210,6 +221,19 @@ export function CommandCenterPage() {
             hintBlueprintLabel={contextLabel}
           />
         ) : null}
+
+        <Stack direction="row" flexWrap="wrap" gap={1} justifyContent="center" sx={{ width: '100%' }}>
+          <Button
+            size="small"
+            variant="outlined"
+            data-testid="epis2-open-dashboard"
+            onClick={() =>
+              void navigate({ to: '/epis2/dashboard', search: { tab: 'work' } })
+            }
+          >
+            {copy.dashboard.openBoard}
+          </Button>
+        </Stack>
 
         <CommandSuggestionChips
           onSelect={(cmd) => {

@@ -87,6 +87,11 @@ function entityBoost(
   ) {
     return 82;
   }
+  if (def.intent.startsWith('open_dashboard')) {
+    if (/\b(tablero|dashboard|mi\s+trabajo|mis\s+tareas|indicadores)\b/.test(normalized)) {
+      return 88;
+    }
+  }
   return 0;
 }
 
@@ -95,6 +100,16 @@ export function scoreCommandDefinition(
   normalized: string,
   raw: string,
 ): number {
+  if (def.intent.startsWith('open_dashboard')) {
+    const clinicalTopic = /sintesis|resumen|evolucion|epicrisis|receta|laboratorio|hemograma/.test(
+      normalized,
+    );
+    const dashboardTopic = /\b(tablero|dashboard|mi\s+trabajo|mis\s+tareas)\b/.test(normalized);
+    if (clinicalTopic && !dashboardTopic) {
+      return 0;
+    }
+  }
+
   const tokens = tokenize(normalized);
   let score = 0;
 

@@ -7,6 +7,7 @@ import {
   type ReactNode,
 } from 'react';
 import type { PatientListRow } from '../api/clinicalApi.js';
+import { pushRecentPatient } from './recentPatients.js';
 
 const STORAGE_KEY = 'epis2_active_patient';
 
@@ -42,6 +43,7 @@ export function ActivePatientProvider({ children }: { children: ReactNode }) {
   const setPatient = useCallback((next: PatientListRow | null) => {
     setPatientState(next);
     writeStored(next);
+    if (next) pushRecentPatient(next);
   }, []);
 
   const clearPatient = useCallback(() => setPatient(null), [setPatient]);

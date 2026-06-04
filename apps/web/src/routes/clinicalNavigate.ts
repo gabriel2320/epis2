@@ -11,16 +11,26 @@ export type ClinicalFormRoutePath =
 
 export type ClinicalPatientSearch = { patientId?: string };
 
+export type DashboardTab = 'work' | 'patient' | 'service';
+
+export type DashboardSearch = { tab?: DashboardTab };
+
 export type ClinicalNavigateTarget =
   | ClinicalFormRoutePath
   | '/espacio/ficha'
   | '/espacio/borrador/$draftId'
+  | '/epis2/dashboard'
   | '/comando'
   | '/login';
 
 export type ClinicalNavigateOptions =
   | { to: '/espacio/borrador/$draftId'; params: { draftId: string }; search?: ClinicalPatientSearch }
-  | { to: Exclude<ClinicalNavigateTarget, '/espacio/borrador/$draftId'>; search?: ClinicalPatientSearch; params?: never };
+  | { to: '/epis2/dashboard'; search?: DashboardSearch; params?: never }
+  | {
+      to: Exclude<ClinicalNavigateTarget, '/espacio/borrador/$draftId' | '/epis2/dashboard'>;
+      search?: ClinicalPatientSearch;
+      params?: never;
+    };
 
 /**
  * Navegación tipada al shell clínico. TanStack pierde literales cuando las rutas

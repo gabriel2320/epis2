@@ -7,6 +7,7 @@ import { registerAiRoutes } from './ai/routes.js';
 import { registerCommandRoutes } from './commands/routes.js';
 import { registerClinicalRoutes } from './clinical/routes.js';
 import { registerFhirRoutes } from './fhir/routes.js';
+import { registerDashboardRoutes } from './dashboard/routes.js';
 import type { AppConfig } from './config.js';
 import { getDatabase, pingDatabase } from './db/client.js';
 
@@ -72,6 +73,7 @@ export async function buildApp(config: AppConfig) {
   await registerAiRoutes(app, config, db);
   await registerClinicalRoutes(app, config, db);
   await registerFhirRoutes(app, config, db);
+  await registerDashboardRoutes(app, config, db);
 
   return app;
 }

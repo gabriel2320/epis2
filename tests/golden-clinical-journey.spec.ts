@@ -16,6 +16,8 @@ const JOURNEY_STEPS = [
   'aprobacion-humana',
   'auditoria',
   'volver-command-center',
+  'modo-tablero',
+  'verificar-mi-trabajo',
 ] as const;
 
 describe('Golden Clinical Journey', () => {
@@ -53,10 +55,22 @@ describe('Golden Clinical Journey', () => {
       expect(EPIS2_COMMAND_CENTER_HOME).toBe('/comando');
       expect(JOURNEY_STEPS[8]).toBe('volver-command-center');
     });
+
+    it('10. comando abre Modo tablero (EPIS2-12)', () => {
+      const result = resolveCommand({
+        text: 'abre el tablero',
+        role: 'physician',
+      });
+      expect(result.status).toBe('resolved');
+      if (result.status === 'resolved') {
+        expect(result.routePath).toBe('/epis2/dashboard');
+      }
+      expect(JOURNEY_STEPS[9]).toBe('modo-tablero');
+    });
   });
 
-  it('especificación: define los 9 pasos del journey dorado', () => {
-    expect(JOURNEY_STEPS).toHaveLength(9);
+  it('especificación: define los 11 pasos del journey dorado', () => {
+    expect(JOURNEY_STEPS).toHaveLength(11);
     expect(JOURNEY_STEPS[1]).toBe('command-center');
   });
 

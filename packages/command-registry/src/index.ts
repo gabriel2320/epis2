@@ -2,7 +2,8 @@ export {
   EPIS2_COMMAND_DEFINITIONS,
   AMBIGUOUS_PHRASES,
 } from './definitions.js';
-export { INTENT_ROUTE_PATHS } from './routes.js';
+export { INTENT_ROUTE_PATHS, DASHBOARD_TAB_BY_INTENT } from './routes.js';
+export { DASHBOARD_COMMAND_SAMPLE } from './chips.js';
 export { normalizeCommandText } from './normalize.js';
 export { matchCommandDefinitions, pickBestMatch } from './matcher.js';
 export {

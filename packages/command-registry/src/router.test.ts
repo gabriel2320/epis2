@@ -70,4 +70,27 @@ describe('resolveCommand', () => {
   it('entrada vacía devuelve empty', () => {
     expect(resolveCommand({ text: '   ', role: 'physician' }).status).toBe('empty');
   });
+
+  it('abre el tablero resuelve Modo tablero', () => {
+    const result = resolveCommand({
+      text: 'abre el tablero',
+      role: 'physician',
+    });
+    expect(result.status).toBe('resolved');
+    if (result.status === 'resolved') {
+      expect(result.intent).toBe('open_dashboard');
+      expect(result.routePath).toBe('/epis2/dashboard');
+    }
+  });
+
+  it('auditor con dashboard.read puede abrir tablero sin command.execute', () => {
+    const result = resolveCommand({
+      text: 'modo tablero',
+      role: 'auditor',
+    });
+    expect(result.status).toBe('resolved');
+    if (result.status === 'resolved') {
+      expect(result.routePath).toBe('/epis2/dashboard');
+    }
+  });
 });

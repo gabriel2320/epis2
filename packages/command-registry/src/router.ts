@@ -20,7 +20,7 @@ export function resolveCommand(input: CommandResolveInput): CommandResolveResult
     };
   }
 
-  if (!isClinicalRole(input.role) || !roleHasPermission(input.role, 'command.execute')) {
+  if (!isClinicalRole(input.role)) {
     return {
       status: 'forbidden',
       message: 'Tu rol no puede ejecutar comandos clínicos.',

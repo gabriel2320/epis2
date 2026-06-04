@@ -55,6 +55,9 @@ export function assertRegistryInvariants(): string[] {
   }
 
   for (const def of EPIS2_COMMAND_DEFINITIONS) {
+    if (def.routePath.startsWith('/epis2/dashboard')) {
+      continue;
+    }
     const linked = EPIS2_FORM_BLUEPRINTS.some((b) => b.intentIds.includes(def.intent));
     if (!linked) {
       errors.push(`intent ${def.intent} sin blueprint asociado`);

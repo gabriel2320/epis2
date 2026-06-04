@@ -9,6 +9,12 @@ export type PhraseSuiteEntry = {
 const PREFIXES = ['', 'por favor ', 'necesito ', 'quiero '];
 const PATIENT_SUFFIXES = ['', ' al paciente', ' del paciente demo', ' paciente'];
 
+const DASHBOARD_INTENTS = new Set<ClinicalIntent>([
+  'open_dashboard',
+  'open_dashboard_work',
+  'open_dashboard_service',
+]);
+
 function expandPhrase(base: string, intent: ClinicalIntent): PhraseSuiteEntry[] {
   const entries: PhraseSuiteEntry[] = [{ phrase: base, intent }];
   if (intent !== 'search_patient') {
@@ -18,7 +24,9 @@ function expandPhrase(base: string, intent: ClinicalIntent): PhraseSuiteEntry[] 
   }
   if (
     intent !== 'search_patient' &&
-    !base.includes('paciente')
+    !base.includes('paciente') &&
+    !DASHBOARD_INTENTS.has(intent) &&
+    intent !== 'open_dashboard_patient'
   ) {
     for (const suffix of PATIENT_SUFFIXES) {
       if (suffix) entries.push({ phrase: `${base}${suffix}`, intent });

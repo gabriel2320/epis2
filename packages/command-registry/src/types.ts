@@ -7,7 +7,11 @@ export type ClinicalIntent =
   | 'create_evolution_draft'
   | 'prepare_discharge_draft'
   | 'prepare_prescription'
-  | 'request_laboratory';
+  | 'request_laboratory'
+  | 'open_dashboard'
+  | 'open_dashboard_work'
+  | 'open_dashboard_patient'
+  | 'open_dashboard_service';
 
 export type CommandResolveStatus =
   | 'resolved'

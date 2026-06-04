@@ -9,6 +9,7 @@ import { getBlueprintByRoutePath } from '@epis2/clinical-forms';
 import { loadSessionForRouter } from '../auth/AuthContext.js';
 import { ClinicalShellLayout } from '../layouts/ClinicalShellLayout.js';
 import { CommandCenterPage } from '../pages/CommandCenterPage.js';
+import { DashboardModePage } from '../pages/DashboardModePage.js';
 import { DraftReviewPage } from '../pages/DraftReviewPage.js';
 import { GeneratedClinicalFormPage } from '../pages/GeneratedClinicalFormPage.js';
 import { PatientWorkspacePage } from '../pages/PatientWorkspacePage.js';
@@ -43,6 +44,19 @@ const commandCenterRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/comando',
   component: CommandCenterPage,
+  beforeLoad: requireSession,
+});
+
+const dashboardModeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/epis2/dashboard',
+  validateSearch: (search: Record<string, unknown>) => ({
+    tab:
+      search.tab === 'patient' || search.tab === 'service' || search.tab === 'work'
+        ? search.tab
+        : 'work',
+  }),
+  component: DashboardModePage,
   beforeLoad: requireSession,
 });
 
@@ -135,6 +149,7 @@ export const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
   commandCenterRoute,
+  dashboardModeRoute,
   clinicalLayoutRoute.addChildren([
     draftReviewRoute,
     patientWorkspaceRoute,

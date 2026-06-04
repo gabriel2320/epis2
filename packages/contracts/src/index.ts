@@ -30,4 +30,8 @@ export {
   type ClinicalAlert,
   type PatientClinicalAlertsResponse,
 } from './clinicalAlerts.js';
+export {
+  dashboardWorkResponseSchema,
+  type DashboardWorkResponse,
+} from './dashboard.js';
 export { EPIS2_PRODUCT_NAME, EPIS2_PHASE } from './meta.js';

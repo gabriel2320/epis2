@@ -16,7 +16,7 @@
 | **V4** | Interoperabilidad y operación | Piloto interno read-only |
 | **V5** | IA clínica avanzada segura | IA trazable y desconectable |
 
-**Estado repo (2026-06):** EPIS2-00 … EPIS2-11 completadas ≈ **núcleo V0 casi cerrado**; falta **Modo tablero** (EPIS2-12) para gate V0 formal.
+**Estado repo (2026-06):** EPIS2-00 … EPIS2-12 completadas ≈ **núcleo V0** (validar gate humano piloto).
 
 ---
 

@@ -18,6 +18,7 @@ Aplicación clínica **command-first**, independiente del proyecto EPIS (legacy)
 | **EPIS2-09** | Completada — 5 casos demo sintéticos, badge DEMO |
 | **EPIS2-10** | Completada — export FHIR R4 (frontera API) |
 | **EPIS2-11** | Completada — journey dorado API + checklist piloto humano |
+| **EPIS2-12** | Completada — Modo tablero «Mi trabajo» (`/epis2/dashboard`) |
 
 ## Documentación esencial
 
