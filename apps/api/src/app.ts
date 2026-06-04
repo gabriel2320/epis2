@@ -62,7 +62,7 @@ export async function buildApp(config: AppConfig) {
   app.get('/api/meta', async () => ({
     product: 'EPIS2',
     phase: EPIS2_PHASE,
-    message: 'IA local segura con proxy y ai_runs — EPIS2-07',
+    message: 'Borradores, versionado y aprobación humana — EPIS2-08',
     database: Boolean(config.DATABASE_URL && db),
   }));
 

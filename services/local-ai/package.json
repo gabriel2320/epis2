@@ -10,6 +10,7 @@
     "start": "node dist/server.js"
   },
   "dependencies": {
+    "@epis2/clinical-domain": "*",
     "@epis2/contracts": "*",
     "fastify": "^5.3.3",
     "zod": "^3.25.42"

@@ -10,8 +10,9 @@ import {
 import {
   approveDraft,
   createDraft,
-  getDraftById,
+  getDraftDetail,
   getPatientById,
+  listDrafts,
   listApprovedNotes,
   searchPatients,
   updateDraft,
@@ -127,15 +128,46 @@ export async function registerClinicalRoutes(
   );
 
   app.get(
+    '/api/drafts',
+    { preHandler: createRequirePermission(config, 'draft.read') },
+    async (request) => {
+      const query = request.query as { patientId?: string; status?: string };
+      const filter: { patientId?: string; status?: string } = {};
+      if (query.patientId !== undefined) filter.patientId = query.patientId;
+      if (query.status !== undefined) filter.status = query.status;
+      const drafts = await listDrafts(db, filter);
+      return {
+        drafts: drafts.map((d) => ({
+          id: d.id,
+          patientId: d.patientId,
+          draftType: d.draftType,
+          status: d.status,
+          title: d.title,
+          updatedAt: d.updatedAt,
+        })),
+      };
+    },
+  );
+
+  app.get(
     '/api/drafts/:draftId',
     { preHandler: createRequirePermission(config, 'draft.read') },
     async (request, reply) => {
       const { draftId } = request.params as { draftId: string };
-      const draft = await getDraftById(db, draftId);
-      if (!draft) {
+      const detail = await getDraftDetail(db, draftId);
+      if (!detail) {
         return reply.status(404).send({ error: 'Borrador no encontrado' });
       }
-      return { draft };
+      return {
+        draft: detail.draft,
+        versions: detail.versions.map((v) => ({
+          versionNo: v.versionNo,
+          status: v.status,
+          title: v.title,
+          createdAt: v.createdAt,
+          createdBy: v.createdBy,
+        })),
+      };
     },
   );
 

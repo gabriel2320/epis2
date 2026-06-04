@@ -74,11 +74,11 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 ---
 
-## EPIS2-08 — Borradores y aprobación
+## EPIS2-08 — Borradores y aprobación ✓
 
 **Entregables:** máquina de estados, versionado, `approvals`, UI revisión.
 
-**Gate:** Sin auto-aprobación; versiones previas conservadas.
+**Gate:** Sin auto-aprobación; versiones previas conservadas. — `reports/epis2-08-drafts-approval.md`
 
 ---
 

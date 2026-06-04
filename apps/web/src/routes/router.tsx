@@ -9,6 +9,7 @@ import { EPIS2_FORM_BLUEPRINTS } from '@epis2/clinical-forms';
 import { loadSessionForRouter } from '../auth/AuthContext.js';
 import { ClinicalShellLayout } from '../layouts/ClinicalShellLayout.js';
 import { CommandCenterPage } from '../pages/CommandCenterPage.js';
+import { DraftReviewPage } from '../pages/DraftReviewPage.js';
 import { GeneratedClinicalFormPage } from '../pages/GeneratedClinicalFormPage.js';
 import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
@@ -51,6 +52,12 @@ const clinicalLayoutRoute = createRoute({
   component: ClinicalShellLayout,
 });
 
+const draftReviewRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/borrador/$draftId',
+  component: DraftReviewPage,
+});
+
 const clinicalFormRoutes = EPIS2_FORM_BLUEPRINTS.map((blueprint) =>
   createRoute({
     getParentRoute: () => clinicalLayoutRoute,
@@ -78,7 +85,7 @@ export const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
   commandCenterRoute,
-  clinicalLayoutRoute.addChildren(clinicalFormRoutes),
+  clinicalLayoutRoute.addChildren([draftReviewRoute, ...clinicalFormRoutes]),
 ]);
 
 export const router = createRouter({

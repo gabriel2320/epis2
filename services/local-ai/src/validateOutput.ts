@@ -1,3 +1,4 @@
+import { sanitizeAiSuggestedFields } from '@epis2/clinical-domain';
 import { localAiDraftAssistOutputSchema } from '@epis2/contracts';
 
 const FORBIDDEN_AUTO_APPROVAL = [
@@ -32,5 +33,12 @@ export function parseAndValidateAssistJson(raw: string): ValidateResult {
     return { ok: false, reason: 'Respuesta IA no cumple el schema de asistencia' };
   }
 
-  return { ok: true, data: zod.data };
+  const sanitized = sanitizeAiSuggestedFields(zod.data.suggestedFields);
+  return {
+    ok: true,
+    data: {
+      ...zod.data,
+      suggestedFields: sanitized,
+    },
+  };
 }

@@ -12,3 +12,12 @@ export {
   verifyDemoAuthKey,
   type SyntheticUser,
 } from './demoUsers.js';
+export {
+  DRAFT_STATUSES,
+  DRAFT_PATCH_TRANSITIONS,
+  assertPatchDraftStatus,
+  canPatchDraftStatus,
+  isDraftStatus,
+  sanitizeAiSuggestedFields,
+  type DraftStatus,
+} from './draftStates.js';

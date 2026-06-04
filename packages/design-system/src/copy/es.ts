@@ -30,6 +30,27 @@ export const copy = {
   layout: {
     backToCommand: 'Volver al Centro de Comando',
   },
+  drafts: {
+    reviewTitle: 'Revisión de borrador',
+    contentTitle: 'Contenido',
+    versionsTitle: 'Historial de versiones',
+    loading: 'Cargando borrador…',
+    sendToReview: 'Enviar a revisión',
+    sentToReview: 'Borrador enviado a revisión.',
+    approveHuman: 'Aprobar (humano)',
+    approvedSuccess: 'Aprobación registrada. Nota clínica creada.',
+    approveError: 'No se pudo aprobar. Verifica permisos y estado.',
+    transitionError: 'Transición de estado no permitida.',
+    openReview: 'Ir a revisión',
+    statusLabels: {
+      draft: 'Borrador',
+      editing: 'En edición',
+      ready_for_review: 'Listo para revisión',
+      rejected: 'Rechazado',
+      cancelled: 'Cancelado',
+      approved: 'Aprobado',
+    },
+  },
   forms: {
     needsPatient: 'Selecciona un paciente demo antes de continuar.',
     saveDraft: 'Guardar borrador',

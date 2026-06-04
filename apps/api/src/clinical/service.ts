@@ -1,4 +1,5 @@
-import { eq, ilike, and } from 'drizzle-orm';
+import { assertPatchDraftStatus } from '@epis2/clinical-domain';
+import { asc, eq, ilike, and } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import {
   approvals,
@@ -33,6 +34,33 @@ export async function getPatientById(db: Database, patientId: string) {
 
 export async function listApprovedNotes(db: Database, patientId: string) {
   return db.select().from(clinicalNotes).where(eq(clinicalNotes.patientId, patientId));
+}
+
+export async function listDrafts(
+  db: Database,
+  filter: { patientId?: string; status?: string } = {},
+) {
+  const rows = await db.select().from(clinicalDrafts);
+  return rows.filter((row) => {
+    if (filter.patientId && row.patientId !== filter.patientId) return false;
+    if (filter.status && row.status !== filter.status) return false;
+    return true;
+  });
+}
+
+export async function listDraftVersions(db: Database, draftId: string) {
+  return db
+    .select()
+    .from(draftVersions)
+    .where(eq(draftVersions.draftId, draftId))
+    .orderBy(asc(draftVersions.versionNo));
+}
+
+export async function getDraftDetail(db: Database, draftId: string) {
+  const draft = await getDraftById(db, draftId);
+  if (!draft) return null;
+  const versions = await listDraftVersions(db, draftId);
+  return { draft, versions };
 }
 
 export async function getDraftById(db: Database, draftId: string) {
@@ -109,6 +137,9 @@ export async function updateDraft(
   const nextTitle = input.title ?? existing.title;
   const nextBody = input.body ?? (existing.body as Record<string, unknown>);
   const nextStatus = input.status ?? existing.status;
+  if (input.status !== undefined && input.status !== existing.status) {
+    assertPatchDraftStatus(existing.status, input.status);
+  }
   const now = new Date();
 
   const [updated] = await db

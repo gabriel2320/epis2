@@ -45,6 +45,35 @@ describe.skipIf(!hasDb)('clinical API (integration)', () => {
     expect(created.statusCode).toBe(201);
     const draftId = (created.json() as { draft: { id: string } }).draft.id;
 
+    const detailBefore = await app.inject({
+      method: 'GET',
+      url: `/api/drafts/${draftId}`,
+      headers: { cookie },
+    });
+    expect((detailBefore.json() as { versions: unknown[] }).versions).toHaveLength(1);
+
+    await app.inject({
+      method: 'PATCH',
+      url: `/api/drafts/${draftId}`,
+      headers: { cookie },
+      payload: { body: { texto: 'actualización v2' } },
+    });
+
+    const detailAfter = await app.inject({
+      method: 'GET',
+      url: `/api/drafts/${draftId}`,
+      headers: { cookie },
+    });
+    expect((detailAfter.json() as { versions: unknown[] }).versions).toHaveLength(2);
+
+    const illegal = await app.inject({
+      method: 'PATCH',
+      url: `/api/drafts/${draftId}`,
+      headers: { cookie },
+      payload: { status: 'approved' },
+    });
+    expect(illegal.statusCode).toBe(409);
+
     const notesBefore = await listApprovedNotes(db, patientId);
     const beforeCount = notesBefore.length;
 

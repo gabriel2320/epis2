@@ -6,7 +6,7 @@ import {
   type ClinicalFormBlueprint,
 } from '@epis2/clinical-forms';
 import { requestDraftAssist } from '../api/aiApi.js';
-import { roleHasPermission, type ClinicalRole } from '@epis2/clinical-domain';
+import { roleHasPermission, sanitizeAiSuggestedFields, type ClinicalRole } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
@@ -101,7 +101,9 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       if (result.status === 'success') {
         setValues((prev) => {
           const next = { ...prev };
-          for (const [key, value] of Object.entries(result.suggestedFields)) {
+          for (const [key, value] of Object.entries(
+            sanitizeAiSuggestedFields(result.suggestedFields),
+          )) {
             if (!next[key]?.trim()) {
               next[key] = value;
             }
@@ -147,7 +149,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     }
 
     try {
-      await apiFetch('/api/drafts', {
+      const created = await apiFetch<{ draft: { id: string } }>('/api/drafts', {
         method: 'POST',
         body: JSON.stringify({
           patientId,
@@ -156,7 +158,10 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
           body: values,
         }),
       });
-      setStatusMessage('Borrador guardado correctamente.');
+      void navigate({
+        to: '/espacio/borrador/$draftId',
+        params: { draftId: created.draft.id },
+      });
     } catch (e) {
       setStatusMessage(
         e instanceof ApiError ? e.message : 'No se pudo guardar el borrador.',
