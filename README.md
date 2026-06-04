@@ -8,7 +8,8 @@ Aplicación clínica **command-first**, independiente del proyecto EPIS (legacy)
 |-------------|--------|
 | **EPIS2-00** | Completada — canon, alcance, migración, reglas Cursor |
 | **EPIS2-01** | Completada — monorepo, tooling, health checks, Docker |
-| EPIS2-02+ | No iniciadas |
+| **EPIS2-02** | Completada — MUI, login demo, Centro de Comando `/comando` |
+| EPIS2-03+ | No iniciadas |
 
 ## Documentación esencial
 
@@ -41,4 +42,4 @@ npm run dev:ai         # puerto 3002
 
 ## Próximo paso
 
-Ejecutar **EPIS2-02 — Sistema visual y shell** (Material UI, login, Centro de Comando).
+Ejecutar **EPIS2-03 — Autenticación, roles y seguridad**.

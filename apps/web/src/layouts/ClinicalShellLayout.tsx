@@ -1,0 +1,42 @@
+import { copy } from '@epis2/design-system';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
+import Container from '@mui/material/Container';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import { Link, Outlet } from '@tanstack/react-router';
+import { useDemoSession } from '../session/DemoSessionContext.js';
+
+export function ClinicalShellLayout() {
+  const { session, logout } = useDemoSession();
+
+  return (
+    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
+      <AppBar position="static" color="transparent" elevation={0} sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Toolbar sx={{ gap: 2 }}>
+          <Typography variant="h6" component={Link} to="/comando" color="primary" sx={{ textDecoration: 'none', fontWeight: 700 }}>
+            {copy.appName}
+          </Typography>
+          <Chip label={copy.demoBadge} size="small" color="warning" variant="outlined" />
+          <Box sx={{ flex: 1 }} />
+          {session ? (
+            <Typography variant="body2" color="text.secondary">
+              {session.userName}
+            </Typography>
+          ) : null}
+          <Button component={Link} to="/comando" size="small">
+            {copy.layout.backToCommand}
+          </Button>
+          <Button size="small" color="inherit" onClick={logout}>
+            Cerrar sesión
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <Container maxWidth="md" sx={{ py: 4 }}>
+        <Outlet />
+      </Container>
+    </Box>
+  );
+}

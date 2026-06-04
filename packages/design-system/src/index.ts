@@ -1,2 +1,2 @@
-/** Placeholder EPIS2-02 — tema Material UI EPIS2. */
-export const DESIGN_SYSTEM_PACKAGE = '@epis2/design-system' as const;
+export { epis2Theme } from './theme/epis2Theme.js';
+export { copy, type DemoRole } from './copy/es.js';

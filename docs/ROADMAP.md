@@ -24,11 +24,11 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 ---
 
-## EPIS2-02 — Sistema visual y shell
+## EPIS2-02 — Sistema visual y shell ✓
 
 **Entregables:** tema MUI EPIS2, login, Command Center vacío, power bar, layout clínico, errores, microcopy ES.
 
-**Gate humano:** ¿Se entiende en 3 s? ¿Una acción principal? ¿No parece dashboard?
+**Gate humano:** ¿Se entiende en 3 s? ¿Una acción principal? ¿No parece dashboard? — ver `reports/epis2-02-visual-shell.md`
 
 ---
 
