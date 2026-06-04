@@ -29,8 +29,8 @@ Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.
 ## Fases
 
 ```text
-EPIS2-00 ✓  EPIS2-01 ✓  gobierno EPIS ✓  EPIS2-02 ✓
-EPIS2-03     (auth + RBAC API)
+EPIS2-00 ✓ … EPIS2-03 ✓
+EPIS2-04     (núcleo PostgreSQL)
 ```
 
 ## Memoria legacy

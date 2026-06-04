@@ -32,11 +32,11 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 ---
 
-## EPIS2-03 — Autenticación, roles y seguridad
+## EPIS2-03 — Autenticación, roles y seguridad ✓
 
 **Entregables:** usuarios sintéticos, RBAC, sesión, rutas protegidas, audit login.
 
-**Gate:** Permiso por acción. Sin contraseñas reales en repo.
+**Gate:** Permiso por acción. Sin contraseñas reales en repo. — ver `reports/epis2-03-auth-security.md`
 
 ---
 

@@ -7,6 +7,9 @@ describe('epis2-api health', () => {
       NODE_ENV: 'test',
       API_HOST: '127.0.0.1',
       API_PORT: 3001,
+      SESSION_SECRET: 'test-secret-min-16-chars',
+      SESSION_COOKIE_NAME: 'epis2_session',
+      WEB_ORIGIN: 'http://127.0.0.1:5173',
     });
     const res = await app.inject({ method: 'GET', url: '/health' });
     expect(res.statusCode).toBe(200);
@@ -21,6 +24,9 @@ describe('epis2-api health', () => {
       NODE_ENV: 'test',
       API_HOST: '127.0.0.1',
       API_PORT: 3001,
+      SESSION_SECRET: 'test-secret-min-16-chars',
+      SESSION_COOKIE_NAME: 'epis2_session',
+      WEB_ORIGIN: 'http://127.0.0.1:5173',
     });
     const res = await app.inject({ method: 'GET', url: '/ready' });
     expect(res.statusCode).toBe(200);

@@ -1,2 +1,14 @@
-/** Placeholder EPIS2-04 — dominio clínico y reglas de seguridad. */
-export const CLINICAL_DOMAIN_PACKAGE = '@epis2/clinical-domain' as const;
+export { CLINICAL_ROLES, isClinicalRole, type ClinicalRole } from './roles.js';
+export { PERMISSIONS, isPermission, type Permission } from './permissions.js';
+export {
+  ROLE_PERMISSIONS,
+  permissionsForRole,
+  roleHasPermission,
+  assertPermission,
+} from './rbac.js';
+export {
+  SYNTHETIC_USERS,
+  findSyntheticUser,
+  verifyDemoAuthKey,
+  type SyntheticUser,
+} from './demoUsers.js';

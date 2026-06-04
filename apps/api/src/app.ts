@@ -1,5 +1,8 @@
+import cookie from '@fastify/cookie';
+import cors from '@fastify/cors';
 import { EPIS2_PHASE, healthResponseSchema } from '@epis2/contracts';
 import Fastify from 'fastify';
+import { registerAuthRoutes } from './auth/routes.js';
 import type { AppConfig } from './config.js';
 import { pingDatabase } from './db.js';
 
@@ -7,6 +10,12 @@ const VERSION = '0.1.0';
 
 export async function buildApp(config: AppConfig) {
   const app = Fastify({ logger: config.NODE_ENV !== 'test' });
+
+  await app.register(cors, {
+    origin: config.WEB_ORIGIN,
+    credentials: true,
+  });
+  await app.register(cookie);
 
   app.get('/health', async () => {
     const body = healthResponseSchema.parse({
@@ -49,8 +58,10 @@ export async function buildApp(config: AppConfig) {
   app.get('/api/meta', async () => ({
     product: 'EPIS2',
     phase: EPIS2_PHASE,
-    message: 'Bootstrap API — sin lógica clínica aún',
+    message: 'Autenticación demo y RBAC activos — datos clínicos en EPIS2-04',
   }));
+
+  await registerAuthRoutes(app, config);
 
   return app;
 }

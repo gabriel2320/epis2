@@ -8,8 +8,9 @@ Aplicación clínica **command-first**, independiente del proyecto EPIS (legacy)
 |-------------|--------|
 | **EPIS2-00** | Completada — canon, alcance, migración, reglas Cursor |
 | **EPIS2-01** | Completada — monorepo, tooling, health checks, Docker |
-| **EPIS2-02** | Completada — MUI, login demo, Centro de Comando `/comando` |
-| EPIS2-03+ | No iniciadas |
+| **EPIS2-02** | Completada — MUI, Centro de Comando `/comando` |
+| **EPIS2-03** | Completada — auth API, RBAC, sesión cookie, auditoría login |
+| EPIS2-04+ | No iniciadas |
 
 ## Documentación esencial
 
@@ -42,4 +43,6 @@ npm run dev:ai         # puerto 3002
 
 ## Próximo paso
 
-Ejecutar **EPIS2-03 — Autenticación, roles y seguridad**.
+Ejecutar **EPIS2-04 — Núcleo PostgreSQL**.
+
+Usuarios demo: ver `docs/auth/DEMO_USERS.md` (requiere `npm run dev:api` + `npm run dev:web`).

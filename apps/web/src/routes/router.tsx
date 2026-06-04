@@ -5,15 +5,16 @@ import {
   redirect,
   Outlet,
 } from '@tanstack/react-router';
+import { loadSessionForRouter } from '../auth/AuthContext.js';
 import { ClinicalShellLayout } from '../layouts/ClinicalShellLayout.js';
 import { CommandCenterPage } from '../pages/CommandCenterPage.js';
 import { ClinicalPlaceholderPage } from '../pages/ClinicalPlaceholderPage.js';
 import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
-import { loadDemoSession } from '../session/demoSession.js';
 
-function requireSession() {
-  if (!loadDemoSession()) {
+async function requireSession() {
+  const session = await loadSessionForRouter();
+  if (!session) {
     throw redirect({ to: '/login' });
   }
 }
@@ -26,8 +27,9 @@ const loginRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/login',
   component: LoginPage,
-  beforeLoad: () => {
-    if (loadDemoSession()) {
+  beforeLoad: async () => {
+    const session = await loadSessionForRouter();
+    if (session) {
       throw redirect({ to: '/comando' });
     }
   },
@@ -57,8 +59,9 @@ const clinicalPlaceholderRoute = createRoute({
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
-  beforeLoad: () => {
-    if (loadDemoSession()) {
+  beforeLoad: async () => {
+    const session = await loadSessionForRouter();
+    if (session) {
       throw redirect({ to: '/comando' });
     }
     throw redirect({ to: '/login' });
@@ -77,7 +80,6 @@ export const router = createRouter({
   defaultNotFoundComponent: NotFoundPage,
 });
 
-/** Ruta home canónica — usada por validadores arquitectónicos. */
 export const EPIS2_COMMAND_CENTER_HOME = '/comando' as const;
 
 declare module '@tanstack/react-router' {

@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@epis2/clinical-domain": "*",
+    "@epis2/contracts": "*",
     "@epis2/design-system": "*",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",

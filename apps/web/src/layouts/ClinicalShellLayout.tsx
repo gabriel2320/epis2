@@ -7,10 +7,10 @@ import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link, Outlet } from '@tanstack/react-router';
-import { useDemoSession } from '../session/DemoSessionContext.js';
+import { useAuth } from '../auth/AuthContext.js';
 
 export function ClinicalShellLayout() {
-  const { session, logout } = useDemoSession();
+  const { session, logout } = useAuth();
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
@@ -23,7 +23,7 @@ export function ClinicalShellLayout() {
           <Box sx={{ flex: 1 }} />
           {session ? (
             <Typography variant="body2" color="text.secondary">
-              {session.userName}
+              {session.user.displayName}
             </Typography>
           ) : null}
           <Button component={Link} to="/comando" size="small">

@@ -9,10 +9,10 @@ import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { CommandSuggestionChips } from '../components/CommandSuggestionChips.js';
 import { PowerBar } from '../components/PowerBar.js';
-import { useDemoSession } from '../session/DemoSessionContext.js';
+import { useAuth } from '../auth/AuthContext.js';
 
 export function CommandCenterPage() {
-  const { session, logout } = useDemoSession();
+  const { session, logout } = useAuth();
   const [query, setQuery] = useState('');
   const [lastCommand, setLastCommand] = useState<string | null>(null);
   const [error, setError] = useState<string | undefined>();
@@ -55,7 +55,7 @@ export function CommandCenterPage() {
           </Typography>
           {session ? (
             <Typography variant="body2" color="text.secondary">
-              {session.userName}
+              {session.user.displayName}
             </Typography>
           ) : null}
         </Stack>

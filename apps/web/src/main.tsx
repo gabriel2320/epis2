@@ -3,14 +3,14 @@ import { RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { router } from './routes/router.js';
-import { DemoSessionProvider } from './session/DemoSessionContext.js';
+import { AuthProvider } from './auth/AuthContext.js';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Epis2ThemeProvider>
-      <DemoSessionProvider>
+      <AuthProvider>
         <RouterProvider router={router} />
-      </DemoSessionProvider>
+      </AuthProvider>
     </Epis2ThemeProvider>
   </StrictMode>,
 );

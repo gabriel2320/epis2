@@ -1,4 +1,5 @@
-import { copy, type DemoRole } from '@epis2/design-system';
+import { SYNTHETIC_USERS } from '@epis2/clinical-domain';
+import { copy } from '@epis2/design-system';
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -10,18 +11,28 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
-import { useDemoSession } from '../session/DemoSessionContext.js';
-
-const ROLES = Object.keys(copy.roles) as DemoRole[];
+import { ApiError } from '../api/client.js';
+import { useAuth } from '../auth/AuthContext.js';
 
 export function LoginPage() {
   const navigate = useNavigate();
-  const { login } = useDemoSession();
-  const [role, setRole] = useState<DemoRole>('physician');
+  const { login } = useAuth();
+  const [username, setUsername] = useState('medico.demo');
+  const [demoAuthKey, setDemoAuthKey] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
-    login(role);
-    void navigate({ to: '/comando' });
+  const handleSubmit = async () => {
+    setError(null);
+    setLoading(true);
+    try {
+      await login(username, demoAuthKey);
+      void navigate({ to: '/comando' });
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : copy.errors.genericMessage);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -35,7 +46,7 @@ export function LoginPage() {
         px: 2,
       }}
     >
-      <Paper elevation={0} sx={{ p: 4, maxWidth: 420, width: '100%', border: 1, borderColor: 'divider' }}>
+      <Paper elevation={0} sx={{ p: 4, maxWidth: 440, width: '100%', border: 1, borderColor: 'divider' }}>
         <Stack spacing={3} data-testid="epis2-login-page">
           <Stack spacing={1} alignItems="center">
             <Typography variant="h4" color="primary" fontWeight={700}>
@@ -50,20 +61,32 @@ export function LoginPage() {
 
           <TextField
             select
-            label={copy.login.roleLabel}
-            value={role}
-            onChange={(e) => setRole(e.target.value as DemoRole)}
+            label={copy.login.usernameLabel}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             fullWidth
           >
-            {ROLES.map((r) => (
-              <MenuItem key={r} value={r}>
-                {copy.roles[r]}
+            {SYNTHETIC_USERS.map((u) => (
+              <MenuItem key={u.id} value={u.username}>
+                {u.displayName} ({copy.roles[u.role]})
               </MenuItem>
             ))}
           </TextField>
 
-          <Button variant="contained" size="large" onClick={handleSubmit}>
-            {copy.login.submit}
+          <TextField
+            label={copy.login.demoKeyLabel}
+            value={demoAuthKey}
+            onChange={(e) => setDemoAuthKey(e.target.value)}
+            placeholder={copy.login.demoKeyPlaceholder}
+            fullWidth
+            type="password"
+            autoComplete="off"
+          />
+
+          {error ? <Alert severity="error">{error}</Alert> : null}
+
+          <Button variant="contained" size="large" onClick={() => void handleSubmit()} disabled={loading}>
+            {loading ? copy.login.submitting : copy.login.submit}
           </Button>
 
           <Alert severity="info" variant="outlined">

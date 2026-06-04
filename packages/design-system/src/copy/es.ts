@@ -6,8 +6,11 @@ export const copy = {
     title: 'Iniciar sesión',
     subtitle: 'Entorno de demostración — sin datos reales',
     submit: 'Entrar al Centro de Comando',
-    roleLabel: 'Rol de demostración',
-    hint: 'La autenticación real se implementa en EPIS2-03.',
+    submitting: 'Entrando…',
+    usernameLabel: 'Usuario demo',
+    demoKeyLabel: 'Clave demo sintética',
+    demoKeyPlaceholder: 'Ej.: DEMO-CLAVE-MEDICO',
+    hint: 'Claves demo públicas de laboratorio. No usar credenciales reales.',
   },
   commandCenter: {
     title: '¿Qué necesitas hacer?',

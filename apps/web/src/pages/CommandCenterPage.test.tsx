@@ -8,10 +8,24 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { CommandCenterPage } from './CommandCenterPage.js';
 
-vi.mock('../session/DemoSessionContext.js', () => ({
-  useDemoSession: () => ({
-    session: { userName: 'Usuario Médico (demo)', role: 'physician' as const },
+vi.mock('../auth/AuthContext.js', () => ({
+  useAuth: () => ({
+    session: {
+      user: {
+        id: 'usr-physician-01',
+        username: 'medico.demo',
+        displayName: 'Dra. Ana Demo',
+        role: 'physician',
+      },
+      permissions: ['command.execute', 'draft.approve'],
+      expiresAt: new Date().toISOString(),
+    },
     logout: vi.fn(),
+    isAuthenticated: true,
+    isLoading: false,
+    login: vi.fn(),
+    refreshSession: vi.fn(),
+    hasPermission: (p: string) => p === 'command.execute',
   }),
 }));
 
