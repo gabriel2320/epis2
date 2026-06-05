@@ -15,7 +15,8 @@ describe('createEpis2Theme', () => {
     const theme = createEpis2Theme();
     expect(theme.epis2.surfaces.surface).toBeTruthy();
     expect(theme.epis2.visual.brandGradient).toBe('none');
-    expect(theme.palette.background.default).toBe('#F5F5F7');
+    expect(theme.epis2.themeId).toBe('clinical-blue');
+    expect(theme.palette.background?.default).toBe('#ECEEF5');
     expect(theme.epis2.shape.extraLarge).toBe(10);
     expect(theme.epis2.shape.island).toBe(8);
   });

@@ -18,7 +18,7 @@ export type Epis2ThemePreferences = {
 
 const defaultPreferences: Epis2ThemePreferences = {
   mode: 'light',
-  accent: 'neutral',
+  accent: 'clinicalBlue',
   density: 'comfortable',
   motion: 'standard',
 };

@@ -1,9 +1,12 @@
 import type { ClinicalRoleKey } from './clinical-roles.js';
 import { clinicalRoles } from './clinical-roles.js';
+import type { Epis2ApprovedThemeId } from './contracts/material-color-scheme.js';
 import type { Epis2Accent, M3SurfaceRoles } from './color-roles.js';
 import { buildM3PaletteOptions, darkSurfaces, lightSurfaces } from './color-roles.js';
 import { buildEpis2Components } from './components.js';
 import type { Epis2MotionScheme } from './motion.js';
+import { getMaterialScheme, resolveMaterialThemeId } from './material-theme-registry.js';
+import { paletteFromMaterialScheme, surfacesFromScheme } from './m3-palette-from-scheme.js';
 import { epis2Shape, epis2ShapeBorderRadius } from './shape.js';
 import { epis2Typography, epis2TypographyRoles } from './typography.js';
 import { buildEpis2Shadows, buildVisualIdentity, type Epis2VisualIdentity } from './visual-identity.js';
@@ -16,6 +19,9 @@ export type Epis2ThemeContrast = 'standard' | 'high';
 
 export type CreateEpis2ThemeOptions = {
   mode?: Epis2ThemeMode;
+  /** Tema MTB aprobado (THEME-02+). */
+  themeId?: Epis2ApprovedThemeId;
+  /** Acento legacy; clinicalBlue/tealBlue resuelven a MTB. */
   accent?: Epis2Accent;
   density?: Epis2ThemeDensity;
   contrast?: Epis2ThemeContrast;
@@ -25,6 +31,7 @@ export type CreateEpis2ThemeOptions = {
 declare module '@mui/material/styles' {
   interface Theme {
     epis2: {
+      themeId: Epis2ApprovedThemeId | 'legacy';
       accent: Epis2Accent;
       surfaces: M3SurfaceRoles;
       clinical: typeof clinicalRoles;
@@ -37,18 +44,34 @@ declare module '@mui/material/styles' {
   }
 }
 
-function resolveSurfaces(mode: Epis2ThemeMode): M3SurfaceRoles {
+function resolveLegacySurfaces(mode: Epis2ThemeMode): M3SurfaceRoles {
   return mode === 'light' ? lightSurfaces : darkSurfaces;
 }
 
 /** Único generador de tema EPIS2 (M3-G01). */
 export function createEpis2Theme(options: CreateEpis2ThemeOptions = {}): Theme {
   const mode = options.mode ?? 'light';
-  const accent = options.accent ?? 'neutral';
+  const accent = options.accent ?? 'clinicalBlue';
   const motion = options.motion ?? 'standard';
   const density = options.density ?? 'comfortable';
-  const surfaces = resolveSurfaces(mode);
-  const visual = buildVisualIdentity(mode, accent);
+  const mappedThemeId = resolveMaterialThemeId(options.themeId, accent);
+
+  let surfaces: M3SurfaceRoles;
+  let palette;
+  let epis2ThemeId: Epis2ApprovedThemeId | 'legacy';
+
+  if (mappedThemeId !== null) {
+    epis2ThemeId = mappedThemeId;
+    const scheme = getMaterialScheme(mappedThemeId, mode);
+    surfaces = surfacesFromScheme(scheme);
+    palette = paletteFromMaterialScheme(mode, scheme);
+  } else {
+    epis2ThemeId = 'legacy';
+    surfaces = resolveLegacySurfaces(mode);
+    palette = buildM3PaletteOptions(mode, accent);
+  }
+
+  const visual = buildVisualIdentity(mode, accent, surfaces);
 
   const typography =
     options.contrast === 'high'
@@ -61,14 +84,17 @@ export function createEpis2Theme(options: CreateEpis2ThemeOptions = {}): Theme {
 
   return createTheme(
     {
-      cssVariables: true,
-      palette: buildM3PaletteOptions(mode, accent),
+      cssVariables: {
+        cssVarPrefix: 'epis2',
+      },
+      palette,
       shadows: buildEpis2Shadows(mode) as Theme['shadows'],
       shape: { borderRadius: epis2ShapeBorderRadius },
       typography,
       spacing: density === 'compact' ? 7 : 8,
       components: buildEpis2Components(motion),
       epis2: {
+        themeId: epis2ThemeId,
         accent,
         surfaces,
         clinical: clinicalRoles,
@@ -80,4 +106,4 @@ export function createEpis2Theme(options: CreateEpis2ThemeOptions = {}): Theme {
   );
 }
 
-export type { Epis2Accent, ClinicalRoleKey, Epis2VisualIdentity };
+export type { Epis2Accent, ClinicalRoleKey, Epis2VisualIdentity, Epis2ApprovedThemeId };

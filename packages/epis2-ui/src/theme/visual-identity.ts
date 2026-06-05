@@ -1,4 +1,4 @@
-import type { Epis2Accent } from './color-roles.js';
+import type { Epis2Accent, M3SurfaceRoles } from './color-roles.js';
 
 export type Epis2ThemeMode = 'light' | 'dark';
 
@@ -16,15 +16,19 @@ export type Epis2VisualIdentity = {
   brandGradient: string;
 };
 
-export function buildVisualIdentity(mode: Epis2ThemeMode, _accent: Epis2Accent): Epis2VisualIdentity {
+export function buildVisualIdentity(
+  mode: Epis2ThemeMode,
+  _accent: Epis2Accent,
+  surfaces?: M3SurfaceRoles,
+): Epis2VisualIdentity {
   if (mode === 'light') {
     return {
-      canvasGradient: '#F5F5F7',
+      canvasGradient: surfaces?.surfaceContainer ?? '#F5F5F7',
       heroRadial: '',
       cardElevation: 'none',
       cardBorder: 'rgba(0, 0, 0, 0.06)',
       focusRing: 'rgba(24, 24, 27, 0.14)',
-      powerBarBg: '#EBEBED',
+      powerBarBg: surfaces?.surfaceContainerHigh ?? '#EBEBED',
       powerBarBorder: 'rgba(0, 0, 0, 0.08)',
       powerBarFocusShadow: '0 0 0 2px rgba(24, 24, 27, 0.12)',
       topBarBg: 'transparent',
@@ -33,12 +37,12 @@ export function buildVisualIdentity(mode: Epis2ThemeMode, _accent: Epis2Accent):
   }
 
   return {
-    canvasGradient: '#141416',
+    canvasGradient: surfaces?.surfaceContainer ?? '#141416',
     heroRadial: '',
     cardElevation: 'none',
     cardBorder: 'rgba(255, 255, 255, 0.08)',
     focusRing: 'rgba(250, 250, 250, 0.16)',
-    powerBarBg: '#2C2C2E',
+    powerBarBg: surfaces?.surfaceContainerHigh ?? '#2C2C2E',
     powerBarBorder: 'rgba(255, 255, 255, 0.1)',
     powerBarFocusShadow: '0 0 0 2px rgba(250, 250, 250, 0.14)',
     topBarBg: 'transparent',

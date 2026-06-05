@@ -54,6 +54,13 @@ const lightSurfaces: M3SurfaceRoles = {
   outlineVariant: '#F0F0F2',
 };
 
+/** warning/success/info — fijos; no provienen de MTB. */
+export const epis2SemanticPalette = {
+  warning: { main: '#D97706', light: '#FEF3C7', dark: '#92400E', contrastText: '#FFFFFF' },
+  success: { main: '#059669', light: '#D1FAE5', dark: '#047857', contrastText: '#FFFFFF' },
+  info: { main: '#0891B2', light: '#CFFAFE', dark: '#0E7490', contrastText: '#FFFFFF' },
+} as const;
+
 const darkSurfaces: M3SurfaceRoles = {
   surface: '#1C1C1E',
   surfaceContainer: '#141416',
@@ -85,9 +92,9 @@ export function buildM3PaletteOptions(
     },
     divider: surfaces.outlineVariant,
     error: { main: '#B42318', light: '#FDECEC', dark: '#7A1C16', contrastText: '#FFFFFF' },
-    warning: { main: '#D97706', light: '#FEF3C7', dark: '#92400E', contrastText: '#FFFFFF' },
-    success: { main: '#059669', light: '#D1FAE5', dark: '#047857', contrastText: '#FFFFFF' },
-    info: { main: '#0891B2', light: '#CFFAFE', dark: '#0E7490', contrastText: '#FFFFFF' },
+    warning: epis2SemanticPalette.warning,
+    success: epis2SemanticPalette.success,
+    info: epis2SemanticPalette.info,
   };
 }
 
