@@ -19,10 +19,17 @@ import { SessionExpiredPage } from '../pages/SessionExpiredPage.js';
 import { ForbiddenPage } from '../pages/ForbiddenPage.js';
 import { AppearancePreferencesPage } from '../pages/AppearancePreferencesPage.js';
 import { isUiCatalogEnabled } from '../dev/uiCatalogEnv.js';
+import { isVisualThemeCatalogEnabled } from '../dev/visualThemeCatalogEnv.js';
 import { isSchedulerSpikeEnabled } from '../dev/schedulerSpikeEnv.js';
 
 const LazyUiCatalogPage = lazy(() =>
   import('../pages/dev/UiCatalogPage.js').then((m) => ({ default: m.UiCatalogPage })),
+);
+
+const LazyVisualThemeCatalogPage = lazy(() =>
+  import('../pages/dev/VisualThemeCatalogPage.js').then((m) => ({
+    default: m.VisualThemeCatalogPage,
+  })),
 );
 
 const DashboardModePage = lazy(() =>
@@ -241,6 +248,19 @@ const indexRoute = createRoute({
   },
 });
 
+/** Catálogo visual M3 (THEME-07 — solo dev o VITE_ENABLE_VISUAL_THEME_CATALOG=true). */
+const visualThemeCatalogRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/desarrollo/catalogo-visual',
+  component: LazyVisualThemeCatalogPage,
+  beforeLoad: async () => {
+    if (!isVisualThemeCatalogEnabled()) {
+      throw redirect({ to: '/comando' });
+    }
+    await requireSession();
+  },
+});
+
 /** Catálogo interno MUI (solo dev o VITE_ENABLE_UI_CATALOG=true). */
 const uiCatalogRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -273,6 +293,7 @@ export const routeTree = rootRoute.addChildren([
   sessionExpiredRoute,
   forbiddenRoute,
   appearancePreferencesRoute,
+  visualThemeCatalogRoute,
   uiCatalogRoute,
   schedulerSpikeRoute,
   commandCenterRoute,

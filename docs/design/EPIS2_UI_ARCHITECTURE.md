@@ -162,6 +162,7 @@ Validador futuro sugerido: `scripts/architecture/no-direct-mui-imports.mjs` (MUI
 
 ```text
 /dev/ui-catalog   # Solo desarrollo; no enlazar desde UI clínica
+/desarrollo/catalogo-visual   # THEME-07 — tokens M3; gated dev
 ```
 
 Muestra primitivos, clínico, command y dashboard sin datos PHI. Protección: variable `VITE_ENABLE_UI_CATALOG=true` o rol `admin` en dev.

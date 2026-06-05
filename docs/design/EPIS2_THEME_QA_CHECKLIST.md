@@ -16,6 +16,12 @@ Ver `EPIS2_TYPOGRAPHY_AND_AESTHETICS_RULES.md` — checklist de las 20 reglas al
 
 Ver `EPIS2_MATERIAL_DESIGN_ANTI_PATTERNS.md` — 20 prácticas prohibidas; revisar en cada PR de UI.
 
+## THEME-07 (catálogo visual)
+
+- [ ] `/desarrollo/catalogo-visual` — preferencias, paleta MTB, roles clínicos
+- [ ] No enlazado desde shell clínico de producción
+- [ ] PILOT_DEMO_CHECKLIST pasos 10–13 documentados
+
 ## THEME-06 (elevación tonal + journey tema)
 
 - [ ] Sin `boxShadow` decorativo en BrandMark, charts, grids, dialogs

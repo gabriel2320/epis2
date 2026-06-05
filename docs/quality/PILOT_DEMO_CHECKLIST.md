@@ -32,6 +32,17 @@
 
 ---
 
+## Verificación tema (THEME-07) — recomendado en piloto visual
+
+| # | Paso | Hecho | Notas |
+|---|------|-------|-------|
+| 10 | **`/preferencias-apariencia`** — Azul clínico y Verde azulado calmado aplican al instante | [ ] | |
+| 11 | **Modo oscuro** y **Seguir sistema** — texto legible en Comando y evolución | [ ] | |
+| 12 | **Alto contraste** — cuerpo reforzado; roles crítico / aprobado / borrador intactos | [ ] | |
+| 13 | **`/desarrollo/catalogo-visual`** (dev) — paleta, roles clínicos, elevación tonal | [ ] | Solo con sesión demo |
+
+---
+
 ## Criterios de resultado
 
 | Resultado | Cuándo usarlo |

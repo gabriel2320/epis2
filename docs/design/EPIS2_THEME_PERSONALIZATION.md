@@ -1,6 +1,6 @@
 # EPIS2 — Personalización visual (plan)
 
-**Estado THEME-06:** Elevación tonal (sin sombras MUI); golden journey tema; tokens `epis2TonalContainerSx`. Catálogo visual dedicado: rama futura.
+**Estado THEME-07:** Catálogo visual `/desarrollo/catalogo-visual` (gated dev); checklist piloto ampliado con preferencias sistema.
 
 ## Permitido (futuro)
 

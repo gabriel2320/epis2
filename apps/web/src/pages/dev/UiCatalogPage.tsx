@@ -117,6 +117,9 @@ export function UiCatalogPage() {
             Uso interno — primitivos @epis2/epis2-ui y tokens del tema (
             {theme.shape?.borderRadius ?? 16}px radius, locale esES).
           </Typography>
+          <EpisButton href="/desarrollo/catalogo-visual" component="a" variant="text" size="small">
+            Catálogo visual M3
+          </EpisButton>
           <EpisButton href="/comando" component="a" variant="text" size="small">
             Volver al Centro de Comando
           </EpisButton>

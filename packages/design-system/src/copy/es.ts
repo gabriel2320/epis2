@@ -327,6 +327,24 @@ export const copy = {
     contrastHigh: 'Alto',
     safetyNote: 'Los colores de borrador, aprobación y alertas críticas no se personalizan.',
   },
+  visualThemeCatalog: {
+    title: 'Catálogo visual M3',
+    subtitle:
+      'Referencia de tema, tipografía, elevación tonal y roles clínicos. Uso interno — no enlazar desde flujos clínicos.',
+    backToCommand: 'Volver al Centro de Comando',
+    openPreferences: 'Abrir preferencias de apariencia',
+    paletteSection: 'Paleta activa (MTB)',
+    clinicalRolesSection: 'Roles clínicos protegidos',
+    typographySection: 'Roles tipográficos',
+    elevationSection: 'Elevación tonal (sin sombra)',
+    proseSection: 'Prosa clínica (65ch)',
+    proseSample:
+      'La evolución clínica prioriza lectura prolongada con líneas cortas y alineación izquierda. Este bloque demuestra el ancho máximo de prosa.',
+    numericSection: 'Números tabulares',
+    docsSection: 'Canon de diseño',
+    docsRules: '20 reglas — EPIS2_TYPOGRAPHY_AND_AESTHETICS_RULES.md',
+    docsAntiPatterns: '20 prohibidos — EPIS2_MATERIAL_DESIGN_ANTI_PATTERNS.md',
+  },
 } as const;
 
 export type DemoRole = keyof typeof copy.roles;
