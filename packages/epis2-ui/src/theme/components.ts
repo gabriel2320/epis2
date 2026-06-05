@@ -184,8 +184,9 @@ export function buildEpis2Components(motionScheme: 'standard' | 'reduced' = 'sta
       styleOverrides: {
         paper: ({ theme }) => ({
           borderRadius: epis2Shape.extraLarge,
-          border: 'none',
-          boxShadow: theme.epis2?.visual?.cardElevation ?? 'none',
+          border: `1px solid ${theme.epis2?.visual?.cardBorder ?? theme.palette.divider}`,
+          boxShadow: 'none',
+          bgcolor: theme.palette.background.paper,
         }),
       },
     },

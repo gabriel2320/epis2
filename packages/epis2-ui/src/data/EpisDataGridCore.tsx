@@ -10,6 +10,7 @@ import {
 } from '@mui/x-data-grid';
 import { esES as dataGridEsES } from '@mui/x-data-grid/locales';
 import { useMemo } from 'react';
+import { epis2TonalContainerSx } from '../theme/epis2-elevation.js';
 import { enhanceEpisDataGridColumns, episDataGridNumericCellClass } from './epis-data-grid-columns.js';
 
 export type { GridColDef, GridRowParams };
@@ -71,13 +72,11 @@ export function EpisDataGrid({
     <Box
       data-testid={testId}
       sx={{
+        ...epis2TonalContainerSx,
         width: '100%',
         minHeight: rows.length === 0 && !loading ? height : undefined,
         borderRadius: 2,
         overflow: 'hidden',
-        border: 1,
-        borderColor: 'divider',
-        bgcolor: 'background.paper',
       }}
     >
       <DataGrid

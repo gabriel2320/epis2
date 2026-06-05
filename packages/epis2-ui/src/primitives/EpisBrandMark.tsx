@@ -22,7 +22,7 @@ export function EpisBrandMark({ size = 56, 'data-testid': testId = 'epis2-brand-
         bgcolor: 'background.paper',
         display: 'grid',
         placeItems: 'center',
-        boxShadow: theme.shadows[2],
+        boxShadow: 'none',
         border: `1px solid ${theme.epis2?.visual?.cardBorder ?? theme.palette.divider}`,
       }}
     >

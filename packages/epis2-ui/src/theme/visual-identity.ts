@@ -50,12 +50,7 @@ export function buildVisualIdentity(
   };
 }
 
-/** Escala de sombras — plana; separación por tono, no elevación. */
-export function buildEpis2Shadows(mode: Epis2ThemeMode): string[] {
-  const shadows = Array.from({ length: 25 }, () => 'none');
-  shadows[0] = 'none';
-  if (mode === 'dark') {
-    shadows[8] = '0 1px 3px rgba(0, 0, 0, 0.24)';
-  }
-  return shadows;
+/** Escala de sombras — plana (THEME-06); separación solo por tono y borde. */
+export function buildEpis2Shadows(_mode: Epis2ThemeMode): string[] {
+  return Array.from({ length: 25 }, () => 'none');
 }

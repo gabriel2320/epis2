@@ -3,6 +3,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { LineChart } from '@mui/x-charts/LineChart';
+import { epis2TonalContainerSx } from '../theme/epis2-elevation.js';
 
 export type EpisTrendSeries = {
   label: string;
@@ -28,13 +29,12 @@ function EmptyChart({ message, height, testId }: { message: string; height: numb
     <Box
       data-testid={testId}
       sx={{
+        ...epis2TonalContainerSx,
         minHeight: height,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 2,
-        bgcolor: 'background.paper',
-        boxShadow: 1,
       }}
     >
       <Typography variant="body2" color="text.secondary">

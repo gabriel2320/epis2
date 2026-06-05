@@ -32,6 +32,7 @@ export {
   epis2PillBarSx,
 } from './island-layout.js';
 export { epis2DisplayFontFamily, epis2BodyFontFamily } from './typography.js';
+export { epis2TonalContainerSx, epis2TonalOverlaySx } from './epis2-elevation.js';
 
 /** @deprecated Usar buildM3PaletteOptions / theme.palette */
 export { epis2Palette } from './palette-legacy.js';

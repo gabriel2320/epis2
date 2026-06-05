@@ -1,6 +1,6 @@
 # EPIS2 — Personalización visual (plan)
 
-**Estado THEME-05:** Grid numérico con tabular-nums; gates dark/alto contraste; anti-patrones M3 documentados. Catálogo visual dedicado: rama futura.
+**Estado THEME-06:** Elevación tonal (sin sombras MUI); golden journey tema; tokens `epis2TonalContainerSx`. Catálogo visual dedicado: rama futura.
 
 ## Permitido (futuro)
 

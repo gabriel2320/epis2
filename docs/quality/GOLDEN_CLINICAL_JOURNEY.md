@@ -1,7 +1,7 @@
 # EPIS2 — Journey clínico dorado
 
 **Estado:** Implementado (EPIS2-11)  
-**Pruebas:** `tests/golden-clinical-journey.spec.ts` · `tests/golden-clinical-journey.api.spec.ts`  
+**Pruebas:** `tests/golden-clinical-journey.spec.ts` · `tests/golden-clinical-journey-theme.spec.ts` · `tests/golden-clinical-journey.api.spec.ts`  
 **Checklist humano:** `docs/quality/PILOT_DEMO_CHECKLIST.md`
 
 ---
