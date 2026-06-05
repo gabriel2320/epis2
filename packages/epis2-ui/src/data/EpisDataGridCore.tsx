@@ -9,6 +9,8 @@ import {
   type GridRowParams,
 } from '@mui/x-data-grid';
 import { esES as dataGridEsES } from '@mui/x-data-grid/locales';
+import { useMemo } from 'react';
+import { enhanceEpisDataGridColumns, episDataGridNumericCellClass } from './epis-data-grid-columns.js';
 
 export type { GridColDef, GridRowParams };
 
@@ -59,6 +61,7 @@ export function EpisDataGrid({
   }
 
   const showFooter = hideFooter !== undefined ? !hideFooter : rows.length > 10;
+  const gridColumns = useMemo(() => enhanceEpisDataGridColumns(columns), [columns]);
 
   const rowClickHandler = onRowClick
     ? (params: GridRowParams) => onRowClick(params.row as EpisDataGridRow)
@@ -72,13 +75,14 @@ export function EpisDataGrid({
         minHeight: rows.length === 0 && !loading ? height : undefined,
         borderRadius: 2,
         overflow: 'hidden',
-        boxShadow: 1,
+        border: 1,
+        borderColor: 'divider',
         bgcolor: 'background.paper',
       }}
     >
       <DataGrid
         rows={rows}
-        columns={columns}
+        columns={gridColumns}
         loading={loading}
         {...(getRowId ? { getRowId } : {})}
         localeText={dataGridEsES.components.MuiDataGrid.defaultProps.localeText}
@@ -95,6 +99,10 @@ export function EpisDataGrid({
           border: 0,
           '--DataGrid-containerBackground': 'transparent',
           '& .MuiDataGrid-row': { cursor: onRowClick ? 'pointer' : 'default' },
+          [`& .${episDataGridNumericCellClass}`]: {
+            fontVariantNumeric: 'tabular-nums',
+            fontFeatureSettings: '"tnum"',
+          },
         }}
         slots={{
           noRowsOverlay: () => <NoRowsOverlay message={emptyMessage} />,

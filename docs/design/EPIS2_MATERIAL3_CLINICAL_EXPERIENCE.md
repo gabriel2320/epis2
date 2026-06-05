@@ -135,6 +135,8 @@ Reglas: Display solo Login y Comando; formularios usan title/body/label; sin MAY
 
 **Canon extendido (20 reglas):** `EPIS2_TYPOGRAPHY_AND_AESTHETICS_RULES.md` — escala modular, prosa `65ch`, tabular-nums, grid 8pt, 60-30-10, estados y movimiento. Tokens en `typography-rules.ts`.
 
+**Anti-patrones (20 prohibidos):** `EPIS2_MATERIAL_DESIGN_ANTI_PATTERNS.md` — sombras pesadas, duplas rotas, cards anidadas, FAB abusivo, animaciones >300ms, etc.
+
 ### Movimiento
 
 ```text

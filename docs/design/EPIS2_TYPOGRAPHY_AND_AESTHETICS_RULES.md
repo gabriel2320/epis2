@@ -269,6 +269,7 @@ epis2Motion.duration = { instant: 80, short: 120, medium: 180, long: 260 }
 
 ## Referencias
 
+- `EPIS2_MATERIAL_DESIGN_ANTI_PATTERNS.md` — 20 prácticas prohibidas (complemento negativo)
 - `EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md` — expresividad por contexto
 - `EPIS2_THEME_SPEC.md` — tokens y preferencias
 - `EPIS2_THEME_QA_CHECKLIST.md` — gates de tema

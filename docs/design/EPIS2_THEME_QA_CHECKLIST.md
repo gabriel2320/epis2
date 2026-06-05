@@ -12,6 +12,17 @@ npm run test
 
 Ver `EPIS2_TYPOGRAPHY_AND_AESTHETICS_RULES.md` — checklist de las 20 reglas al final del documento.
 
+## Anti-patrones M3
+
+Ver `EPIS2_MATERIAL_DESIGN_ANTI_PATTERNS.md` — 20 prácticas prohibidas; revisar en cada PR de UI.
+
+## THEME-05 (dark + alto contraste + grid)
+
+- [ ] Modo oscuro — texto legible en Comando y formulario
+- [ ] Alto contraste — cuerpo reforzado, roles clínicos intactos
+- [ ] `EpisDataGrid` — columnas `type: number` alineadas a la derecha con tabular-nums
+- [ ] Grid sin sombra pesada (borde tonal)
+
 ## Manual (15 min)
 
 - [ ] Login — Clinical Blue claro, acción principal visible
