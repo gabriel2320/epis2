@@ -25,4 +25,4 @@ Vista lista de citas + `EpisDatePicker` (ver `MUI_LICENSING_DECISION_LOG.md`).
 
 ## Próximo paso
 
-**MUI-11:** bundle audit, ESLint `no-restricted-imports`, lazy routes consolidado, CI licencias.
+**M3-00:** auditoría visual baseline — ver `reports/epis2-m3-plan-rebaseline.md` y `docs/design/M3_ADOPTION_PLAN.md`.

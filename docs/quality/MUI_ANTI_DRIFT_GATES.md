@@ -85,5 +85,6 @@ Detener merge de UI si aparece:
 ## Referencias
 
 - `docs/quality/ANTI_DRIFT_GATES.md`
+- `docs/quality/M3_ANTI_DRIFT_GATES.md`
 - `docs/design/MUI_CAPABILITY_MAP.md`
 - `docs/product/PRODUCT_INVARIANTS.md`

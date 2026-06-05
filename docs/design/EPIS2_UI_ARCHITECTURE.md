@@ -1,17 +1,18 @@
-# EPIS2 — Arquitectura de UI (Material UI)
+# EPIS2 — Arquitectura de UI (Material UI + Material 3 Clinical)
 
-**Fase:** EPIS2-MUI-00 · **Alcance:** diseño; sin código productivo nuevo
+**Fase:** EPIS2-MUI-01+ implementado · **Experiencia:** M3-00 rebaseline · **Alcance diseño M3:** `EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md`
 
 ---
 
 ## Principios
 
 1. **Command-first:** home = Centro de Comando (`/comando`); modo tablero opcional.
-2. **Un solo sistema visual:** Material UI (+ MUI X bajo demanda).
-3. **Un solo tema:** `epis2Theme` con localización española.
-4. **Capa de abstracción:** `packages/epis2-ui` es la única puerta de entrada a componentes MUI en apps.
-5. **Copy clínico:** `@epis2/design-system` mantiene `copy/es.ts`; la UI visible no define strings en inglés.
-6. **IA y seguridad:** wrappers clínicos incluyen disclosure, borrador y gates de aprobación.
+2. **Un solo sistema visual:** Material UI (+ MUI X bajo demanda), interpretado como **Material 3 Clinical** vía `@epis2/epis2-ui`.
+3. **Un solo tema:** `createEpis2Theme` (objetivo M3-02); hoy `epis2Theme` con localización española.
+4. **M3 Standard vs Expressive:** formularios, aprobación y seguridad = Standard; Login, Comando y empty states = Expressive controlado.
+5. **Capa de abstracción:** `packages/epis2-ui` es la única puerta de entrada a componentes MUI en apps.
+6. **Copy clínico:** `@epis2/design-system` mantiene `copy/es.ts`; la UI visible no define strings en inglés.
+7. **IA y seguridad:** wrappers clínicos incluyen disclosure, borrador y gates de aprobación.
 
 ---
 
@@ -46,15 +47,15 @@ packages/epis2-ui/
 ├─ src/
 │  ├─ index.ts                 # API pública
 │  ├─ theme/
-│  │  ├─ palette.ts
-│  │  ├─ typography.ts
-│  │  ├─ shapes.ts
-│  │  ├─ shadows.ts
-│  │  ├─ spacing.ts
-│  │  ├─ motion.ts
-│  │  ├─ components.ts         # overrides Mui*
-│  │  ├─ locales.ts            # esES material + adapters X
-│  │  └─ theme.ts              # createTheme + cssVariables
+│  │  ├─ palette.ts              # → color-roles.ts (M3-01)
+│  │  ├─ clinical-roles.ts       # M3-01
+│  │  ├─ typography.ts           # roles M3 display…label
+│  │  ├─ shape.ts                # M3-01
+│  │  ├─ motion.ts               # M3-01
+│  │  ├─ breakpoints.ts
+│  │  ├─ components.ts           # overrides Mui*
+│  │  ├─ create-epis2-theme.ts    # M3-02
+│  │  └─ theme.ts                # export epis2Theme (transitorio)
 │  ├─ providers/
 │  │  └─ Epis2ThemeProvider.tsx
 │  ├─ primitives/
@@ -190,6 +191,8 @@ Muestra primitivos, clínico, command y dashboard sin datos PHI. Protección: va
 
 ## Referencias
 
+- `docs/design/EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md`
+- `docs/design/M3_ADOPTION_PLAN.md`
 - `docs/design/EPIS2_THEME_SPEC.md`
 - `docs/design/MUI_X_ADOPTION_PLAN.md`
 - `docs/product/PRODUCT_INVARIANTS.md`

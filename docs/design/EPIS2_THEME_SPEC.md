@@ -1,8 +1,11 @@
 # EPIS2 — Especificación de tema Material UI
 
-**Fase:** EPIS2-MUI-00 · **Implementación:** EPIS2-MUI-01 en `packages/epis2-ui/src/theme/`
+**Fase:** EPIS2-MUI-01 (implementado) · **Evolución:** M3-01…M3-02 → roles Material 3  
+**Referencia M3:** `docs/design/EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md`
 
 Un solo tema para toda la aplicación. Modo oscuro preparado en tokens; **lanzamiento inicial solo `light`.**
+
+> **Nota M3:** esta especificación describe el baseline MUI actual (`epis2Theme`). La migración a roles M3 (`primaryContainer`, `surfaceContainer`, roles clínicos protegidos) se ejecuta en **M3-01** sin duplicar generadores de tema.
 
 ---
 
@@ -221,5 +224,7 @@ export const epis2Theme = createTheme(
 
 ## Referencias
 
+- `docs/design/EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md`
+- `docs/design/M3_ADOPTION_PLAN.md`
 - `docs/design/EPIS2_UI_ARCHITECTURE.md`
 - MUI: Theme, CSS theme variables, Localization, Minimizing bundle size

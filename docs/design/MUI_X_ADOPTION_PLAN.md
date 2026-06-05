@@ -1,10 +1,12 @@
 # EPIS2 — Plan de adopción MUI X (progresivo)
 
-**Fase:** EPIS2-MUI-00 · Cada fila requiere caso clínico implementable antes de `npm install`.
+**Fase:** EPIS2-MUI-00 · **Estado capacidades:** MUI-01…MUI-10 completados · **Experiencia visual:** ver `M3_ADOPTION_PLAN.md`
+
+> **Rebaseline M3 (2026-06-04):** MUI X cubre la **capa técnica** (grids, charts, pickers, tree, scheduler eval). La **experiencia Material 3 Clinical** (color roles, forma, movimiento, adaptación) se gobierna en `EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md`. **MUI-11** (bundle/CI) pasa a **M3-09**.
 
 ---
 
-## Secuencia de microfases
+## Secuencia de microfases (MUI X — completada salvo mantenimiento)
 
 ```text
 MUI-00  Capability map + arquitectura          ← actual (solo docs)
@@ -179,11 +181,15 @@ npm install @mui/x-tree-view
 
 ## MUI-11 — Rendimiento y CI
 
+**Estado:** reencuadrado en **M3-09** (QA, bundle, ESLint licencias).
+
 - Auditoría bundle (`vite build --analyze` o `rollup-plugin-visualizer`).
 - Regla ESLint: `no-restricted-imports` para `@mui/material` fuera de `epis2-ui`.
-- Lazy routes: dashboard, charts, grid, scheduler.
+- Lazy routes: dashboard, charts, grid, scheduler subpath.
 - Imports de iconos: path por icono (`@mui/icons-material/Search`).
 - Documentar tamaño máximo aceptable por chunk (objetivo: grid < 150KB gzip incremental en ruta tablero).
+
+Ver `docs/design/M3_ADOPTION_PLAN.md` § M3-09.
 
 ---
 
@@ -203,6 +209,8 @@ npm install @mui/x-tree-view
 
 ## Referencias
 
+- `docs/design/EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md`
+- `docs/design/M3_ADOPTION_PLAN.md`
 - `docs/design/MUI_CAPABILITY_MAP.md`
 - `docs/design/MUI_LICENSING_DECISION_LOG.md`
 - `docs/quality/MUI_ANTI_DRIFT_GATES.md`
