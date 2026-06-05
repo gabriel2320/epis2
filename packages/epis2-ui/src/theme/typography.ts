@@ -12,7 +12,7 @@ export const epis2TypographyRoles = {
 
     fontSize: '1.25rem',
 
-    lineHeight: 1.3,
+    lineHeight: 1.2,
 
     fontWeight: 600,
 
@@ -24,7 +24,7 @@ export const epis2TypographyRoles = {
 
     fontSize: '1.25rem',
 
-    lineHeight: 1.3,
+    lineHeight: 1.2,
 
     fontWeight: 600,
 
@@ -36,7 +36,7 @@ export const epis2TypographyRoles = {
 
     fontSize: '1.0625rem',
 
-    lineHeight: 1.35,
+    lineHeight: 1.2,
 
     fontWeight: 600,
 
@@ -78,7 +78,7 @@ export const epis2TypographyRoles = {
 
     fontSize: '0.875rem',
 
-    lineHeight: 1.55,
+    lineHeight: 1.5,
 
     fontWeight: 400,
 
@@ -90,7 +90,7 @@ export const epis2TypographyRoles = {
 
     fontSize: '0.875rem',
 
-    lineHeight: 1.55,
+    lineHeight: 1.5,
 
     fontWeight: 400,
 
@@ -118,6 +118,8 @@ export const epis2TypographyRoles = {
 
     fontWeight: 500,
 
+    letterSpacing: '0.02em',
+
   },
 
 } as const;
@@ -143,6 +145,10 @@ export const epis2BodyFontFamily = '"Roboto", "Helvetica Neue", Arial, sans-seri
 
 
 export const epis2FontFamily = epis2BodyFontFamily;
+
+/** Regla 1 — monoespaciada para código, logs y datos técnicos. */
+export const epis2MonoFontFamily =
+  '"Roboto Mono", "Consolas", "Cascadia Mono", ui-monospace, monospace';
 
 
 

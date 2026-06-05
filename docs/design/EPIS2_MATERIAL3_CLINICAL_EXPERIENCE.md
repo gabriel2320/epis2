@@ -133,6 +133,8 @@ Reglas: formas grandes = espacios de trabajo; formas pequeñas = datos densos; s
 
 Reglas: Display solo Login y Comando; formularios usan title/body/label; sin MAYÚSCULAS completas; documentos clínicos priorizan lectura prolongada; copy visible en español.
 
+**Canon extendido (20 reglas):** `EPIS2_TYPOGRAPHY_AND_AESTHETICS_RULES.md` — escala modular, prosa `65ch`, tabular-nums, grid 8pt, 60-30-10, estados y movimiento. Tokens en `typography-rules.ts`.
+
 ### Movimiento
 
 ```text

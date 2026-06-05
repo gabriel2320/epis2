@@ -1,5 +1,5 @@
 import type { Components, Theme } from '@mui/material/styles';
-import { epis2DisplayFontFamily } from './typography.js';
+import { epis2DisplayFontFamily, epis2MonoFontFamily } from './typography.js';
 import { epis2Shape } from './shape.js';
 import { epis2Motion } from './motion.js';
 
@@ -22,6 +22,10 @@ export function buildEpis2Components(motionScheme: 'standard' | 'reduced' = 'sta
         '::selection': {
           backgroundColor: theme.palette.action.selected,
           color: theme.palette.text.primary,
+        },
+        'pre, code, kbd, samp': {
+          fontFamily: epis2MonoFontFamily,
+          fontVariantNumeric: 'tabular-nums',
         },
       }),
     },

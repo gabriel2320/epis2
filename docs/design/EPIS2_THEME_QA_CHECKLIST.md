@@ -8,6 +8,10 @@ npm run check
 npm run test
 ```
 
+## Tipografía y estética
+
+Ver `EPIS2_TYPOGRAPHY_AND_AESTHETICS_RULES.md` — checklist de las 20 reglas al final del documento.
+
 ## Manual (15 min)
 
 - [ ] Login — Clinical Blue claro, acción principal visible
