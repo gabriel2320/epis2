@@ -1,6 +1,6 @@
 import type { ServiceDashboardResponse } from '@epis2/contracts';
+import { lazy, Suspense, useState } from 'react';
 import { copy } from '@epis2/design-system';
-import { useState } from 'react';
 import { acknowledgeCriticalResult } from '../api/dashboardApi.js';
 
 import {
@@ -8,6 +8,7 @@ import {
   Box,
   Button,
   Chip,
+  EpisLoadingState,
   List,
   ListItem,
   ListItemText,
@@ -15,6 +16,13 @@ import {
   Stack,
   Typography,
 } from '@epis2/epis2-ui';
+
+const LazyServiceDashboardCharts = lazy(() =>
+  import('./ServiceDashboardCharts.js').then((m) => ({
+    default: m.ServiceDashboardCharts,
+  })),
+);
+
 export type ServiceDashboardTabProps = {
   data: ServiceDashboardResponse;
   onOpenPatient: (patientId: string) => void;
@@ -42,6 +50,10 @@ export function ServiceDashboardTab({ data, onOpenPatient, onReload }: ServiceDa
           {data.unitCode} · {copy.demoBadge}
         </Typography>
       </Box>
+
+      <Suspense fallback={<EpisLoadingState label={copy.charts.loading} />}>
+        <LazyServiceDashboardCharts data={data} />
+      </Suspense>
 
       <Paper variant="outlined" sx={{ p: 2 }}>
         <Typography variant="subtitle2" gutterBottom>

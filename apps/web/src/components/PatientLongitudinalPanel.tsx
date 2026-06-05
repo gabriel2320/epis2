@@ -3,6 +3,7 @@ import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import { DocumentSearchPanel } from './DocumentSearchPanel.js';
 import { LabObservationsGrid } from './LabObservationsGrid.js';
+import { PatientClinicalCharts } from './PatientClinicalCharts.js';
 import { PatientClinicalAiPanel } from './PatientClinicalAiPanel.js';
 
 import {
@@ -52,6 +53,8 @@ export function PatientLongitudinalPanel({
   return (
     <Stack spacing={2} data-testid="epis2-longitudinal-panel">
       <Typography variant="subtitle2">{copy.longitudinal.title}</Typography>
+
+      <PatientClinicalCharts data={data} />
 
       <Section title={copy.longitudinal.problems} empty={data.problems.length === 0}>
         <List dense disablePadding>

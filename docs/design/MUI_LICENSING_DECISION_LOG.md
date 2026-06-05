@@ -23,7 +23,7 @@ MUI X Community es gratuito (MIT). Data Grid, Charts y otras familias incluyen c
 | LIC-002 | 2026-06-04 | Data Grid | Row grouping (Pro) | `REJECTED` | — | — | Sin necesidad V1–V5 |
 | LIC-003 | 2026-06-04 | Data Grid | Excel export (Premium) | `REJECTED` | — | — | Export vía API/FHIR, no grid |
 | LIC-004 | 2026-06-04 | Date Pickers | Community | `APPROVED` | Encuentro, órdenes lab/imagen | EPIS2-MUI-06 | `EpisDatePicker` + dayjs `es` |
-| LIC-005 | 2026-06-04 | Charts | Community | `PLANNED` | Tendencias demo | — | MUI-07 |
+| LIC-005 | 2026-06-04 | Charts | Community | `APPROVED` | INR DEMO-005, FC, KPI servicio | EPIS2-MUI-07 | `EpisTrendChart` Community |
 | LIC-006 | 2026-06-04 | Tree View | Community | `PLANNED` | Documentos | — | MUI-08 |
 | LIC-007 | 2026-06-04 | Scheduler | TBD | `EVALUATE` | Agenda hospitalaria | — | No instalar en MUI-00–09 |
 | LIC-008 | 2026-06-04 | Material UI Core | MIT (open) | `APPROVED` | Todo el frontend | Arquitectura | Ya en uso |

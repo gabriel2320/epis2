@@ -16,6 +16,7 @@ import {
   EpisDataGrid,
   EpisDatePicker,
   EpisDraftStatus,
+  EpisTrendChart,
   EpisEmptyState,
   EpisLoadingState,
   EpisTextField,
@@ -179,6 +180,15 @@ export function UiCatalogPage() {
               </Stack>
             </Box>
           </EpisDialog>
+        </CatalogSection>
+
+        <CatalogSection title="Charts (MUI-07)">
+          <EpisTrendChart
+            title="Tendencia demo"
+            xAxisLabels={['Lun', 'Mar', 'Mié']}
+            series={[{ label: 'INR', data: [1.9, 2.1, 2.3] }]}
+            data-testid="epis2-ui-catalog-chart"
+          />
         </CatalogSection>
 
         <CatalogSection title="Date Picker (MUI-06)">

@@ -181,6 +181,14 @@ export const copy = {
       approved: 'Aprobado',
     },
   },
+  charts: {
+    loading: 'Cargando gráfico…',
+    labTrendTitle: 'Tendencia INR (demo)',
+    vitalsTrendTitle: 'Frecuencia cardiaca (demo)',
+    heartRateSeries: 'FC (lpm)',
+    serviceKpiTitle: 'Indicadores del servicio',
+    emptyTrend: 'Sin datos para graficar.',
+  },
   forms: {
     encounterDate: 'Fecha del encuentro',
     scheduledDate: 'Fecha programada',

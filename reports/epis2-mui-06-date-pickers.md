@@ -27,4 +27,4 @@ Valores iniciales de fecha: día actual (ISO) en `initialFormValues`.
 
 ## Próximo paso
 
-**MUI-07:** `@mui/x-charts` + tendencias demo.
+**MUI-07:** completado — ver `reports/epis2-mui-07-charts.md`.
