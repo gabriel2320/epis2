@@ -30,7 +30,7 @@ Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.
 
 ```text
 EPIS2-00 ✓ … EPIS2-12 ✓ · MUI-01…10 ✓ · M3-00…09 ✓ · GO DEMO ✓ · Plan A ✓ · WIDGET-01 ✓ · Plan C ✓ · Plan D slice ✓
-Siguiente: Plan E (V3 enfermería/farmacia) — reports/epis2-audit-and-dev-plans-2026-06-05.md
+Siguiente: Plan F (V4/V5 + hardening) — reports/epis2-audit-and-dev-plans-2026-06-05.md. V3: reports/epis2-v3-plan-e-slice.md
 ```
 
 ## Memoria legacy

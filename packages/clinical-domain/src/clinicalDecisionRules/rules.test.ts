@@ -6,6 +6,7 @@ import {
   evaluateDischargeWithOpenCriticalOrders,
   evaluateDuplicateMedicationOrder,
   evaluateHighRiskMedWithoutDoubleCheck,
+  evaluateMedicationReconciliationGap,
   evaluatePrescriptionAllergyConflict,
 } from './rules.js';
 import type { CdrContext } from './types.js';
@@ -88,6 +89,20 @@ describe('clinicalDecisionRules (EPIONE CDR)', () => {
       }),
     );
     expect(check?.ruleId).toBe('duplicate_medication_order');
+  });
+
+  it('medication_reconciliation_gap en validación farmacéutica', () => {
+    const check = evaluateMedicationReconciliationGap(
+      baseContext({
+        actionId: 'pharmacy_validation',
+        formData: { intervention: 'sin_intervencion' },
+        medicationOrders: [
+          { drugName: 'Warfarina', status: 'active' },
+          { drugName: 'Aspirina', status: 'active' },
+        ],
+      }),
+    );
+    expect(check?.ruleId).toBe('medication_reconciliation_gap');
   });
 
   it('high_risk_med_without_double_check', () => {

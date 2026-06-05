@@ -7,6 +7,7 @@ export const CDR_RULE_IDS = [
   'discharge_with_open_critical_orders',
   'duplicate_medication_order',
   'high_risk_med_without_double_check',
+  'medication_reconciliation_gap',
 ] as const;
 
 export type CdrRuleId = (typeof CDR_RULE_IDS)[number];

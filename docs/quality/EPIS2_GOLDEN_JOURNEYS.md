@@ -93,21 +93,25 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 
 ---
 
-## 5. Journey V3 — Enfermería / farmacia (slice demo)
+## 5. Journey V3 — Enfermería / farmacia
 
 **Nombre:** `golden-v3-mar-nursing`  
-**Estado:** slice cerrado — gate completo pendiente tableros rol y conciliación.
+**Estado:** cerrado (Plan E)
 
 | # | Paso | Criterio |
 |---|------|----------|
 | 1 | `nota de enfermeria` | Formulario `/espacio/enfermeria` |
 | 2 | `registrar mar` | Formulario MAR + doble chequeo |
-| 3 | Aprobar MAR | Fila en `mar_administration_records` |
-| 4 | `validacion farmaceutica` | `/espacio/farmacia` |
+| 3 | Tablero enfermería | `GET /api/dashboard/nursing` — MAR en ventana activa |
+| 4 | Aprobar MAR (médico) | Fila en `mar_administration_records` |
+| 5 | `validacion farmaceutica` | `/espacio/farmacia` |
+| 6 | Tablero farmacia | Conciliación candidatos en `GET /api/dashboard/pharmacy` |
 
-**Tests:** `v3-mar.integration.test.ts`
+**Tests:** `v3-mar.integration.test.ts`, `dashboard.test.ts`
 
-**Pendiente gate V3 completo:** signos estructurados, balance hídrico, MAR programado.
+**Automatización:** `golden-clinical-journey.api.spec.ts` (V3).
+
+**Fuera de V3 demo:** signos estructurados, balance hídrico completo.
 
 ---
 

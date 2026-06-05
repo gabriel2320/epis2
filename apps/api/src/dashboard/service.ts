@@ -27,6 +27,11 @@ export const DEMO_WORK_TASKS = [
     commandSample: 'ver el servicio',
   },
   {
+    id: 'demo-task-nursing',
+    label: 'Nota de enfermería (V3)',
+    commandSample: 'nota de enfermeria',
+  },
+  {
     id: 'demo-task-mar',
     label: 'Registrar administración MAR (V3)',
     commandSample: 'registrar mar',
@@ -38,7 +43,32 @@ export const DEMO_WORK_TASKS = [
   },
 ] as const;
 
-export async function getDashboardWorkSummary(db: Database, actorId: string) {
+const NURSE_TASK_IDS = new Set(['demo-task-mar', 'demo-task-nursing']);
+const NURSE_DRAFT_TYPES = new Set(['nursing_note', 'medication_administration']);
+const PHARMACY_TASK_IDS = new Set(['demo-task-pharmacy']);
+const PHARMACY_DRAFT_TYPES = new Set(['pharmacy_validation']);
+
+function filterTasksForRole(role: string) {
+  if (role === 'nurse') {
+    return DEMO_WORK_TASKS.filter((t) => NURSE_TASK_IDS.has(t.id));
+  }
+  if (role === 'pharmacist') {
+    return DEMO_WORK_TASKS.filter((t) => PHARMACY_TASK_IDS.has(t.id));
+  }
+  return [...DEMO_WORK_TASKS];
+}
+
+function draftVisibleForRole(draftType: string, role: string): boolean {
+  if (role === 'nurse') return NURSE_DRAFT_TYPES.has(draftType);
+  if (role === 'pharmacist') return PHARMACY_DRAFT_TYPES.has(draftType);
+  return true;
+}
+
+export async function getDashboardWorkSummary(
+  db: Database,
+  actorId: string,
+  role = 'physician',
+) {
   const drafts = await listDrafts(db);
   const patientRows = await db.select({ id: patients.id, displayName: patients.displayName }).from(patients);
   const nameById = new Map(patientRows.map((p) => [p.id, p.displayName]));
@@ -54,20 +84,29 @@ export async function getDashboardWorkSummary(db: Database, actorId: string) {
   });
 
   const myOpenDrafts = drafts
-    .filter((d) => d.createdBy === actorId && OPEN_DRAFT_STATUSES.has(d.status))
+    .filter(
+      (d) =>
+        d.createdBy === actorId &&
+        OPEN_DRAFT_STATUSES.has(d.status) &&
+        draftVisibleForRole(d.draftType, role),
+    )
     .sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
     .map(toRow);
 
   const pendingReview = drafts
-    .filter((d) => d.status === 'ready_for_review')
+    .filter(
+      (d) =>
+        d.status === 'ready_for_review' && draftVisibleForRole(d.draftType, role),
+    )
     .sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
     .map(toRow);
 
   return {
     readOnly: true as const,
+    roleView: role as 'physician' | 'nurse' | 'pharmacist' | 'admin' | 'auditor',
     myOpenDrafts,
     pendingReview,
-    demoTasks: [...DEMO_WORK_TASKS],
+    demoTasks: filterTasksForRole(role),
   };
 }
 

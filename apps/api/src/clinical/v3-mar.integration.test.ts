@@ -58,4 +58,30 @@ describe.skipIf(!hasDb)('V3 MAR (integration)', () => {
 
     await app.close();
   });
+
+  it('GET /api/dashboard/nursing expone dosis en ventana activa', async () => {
+    const config = { ...testApiConfig, DATABASE_URL: process.env.DATABASE_URL };
+    const app = await buildApp(config);
+
+    const login = await app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      payload: { username: 'enfermeria.demo', demoAuthKey: 'DEMO-CLAVE-ENFERMERIA' },
+    });
+    const cookie = String(login.headers['set-cookie']).split(';')[0];
+
+    const board = await app.inject({
+      method: 'GET',
+      url: '/api/dashboard/nursing',
+      headers: { cookie },
+    });
+    expect(board.statusCode).toBe(200);
+    const json = board.json() as {
+      scheduledMar: { medication: string; requiresDoubleCheck: boolean }[];
+    };
+    expect(json.scheduledMar.length).toBeGreaterThan(0);
+    expect(json.scheduledMar.some((d) => d.requiresDoubleCheck)).toBe(true);
+
+    await app.close();
+  });
 });

@@ -37,6 +37,28 @@ export const DRAFT_PROMPT_CATALOG: DraftPromptSpec[] = [
     taskDetail: 'Propón estudios de laboratorio y razón clínica acorde al contexto.',
     fieldHints: 'Prioridad rutina salvo urgencia explícita en contexto.',
   },
+  {
+    blueprintId: 'nursing_note',
+    taskTitle: 'Nota de enfermería',
+    taskDetail:
+      'Registra signos vitales, cuidados prestados, respuesta del paciente y observaciones relevantes.',
+    fieldHints: 'Usa valores plausibles demo; no inventes diagnósticos médicos.',
+  },
+  {
+    blueprintId: 'medication_administration',
+    taskTitle: 'Administración medicamentosa (MAR)',
+    taskDetail:
+      'Documenta medicamento, dosis, vía, horario programado y hora de administración con notas de doble chequeo si aplica.',
+    fieldHints: 'Marca doubleCheckConfirmed solo si el contexto indica medicamento de alto riesgo.',
+  },
+  {
+    blueprintId: 'pharmacy_validation',
+    taskTitle: 'Validación farmacéutica',
+    taskDetail:
+      'Propón intervención farmacéutica o conciliación para la medicación activa del paciente.',
+    fieldHints:
+      'Si hay polifarmacia, sugiere intervención documentada; nunca indiques dispensar sin revisión humana.',
+  },
 ];
 
 const catalogById = new Map(DRAFT_PROMPT_CATALOG.map((spec) => [spec.blueprintId, spec]));

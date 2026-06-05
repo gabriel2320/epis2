@@ -19,12 +19,63 @@ export const dashboardDemoTaskSchema = z.object({
 
 export const dashboardWorkResponseSchema = z.object({
   readOnly: z.literal(true),
+  roleView: z.enum(['physician', 'nurse', 'pharmacist', 'admin', 'auditor']).optional(),
   myOpenDrafts: z.array(dashboardDraftRowSchema),
   pendingReview: z.array(dashboardDraftRowSchema),
   demoTasks: z.array(dashboardDemoTaskSchema),
 });
 
 export type DashboardWorkResponse = z.infer<typeof dashboardWorkResponseSchema>;
+
+export const marScheduledDoseRowSchema = z.object({
+  id: z.string().uuid(),
+  patientId: z.string().uuid(),
+  patientDisplayName: z.string(),
+  medication: z.string(),
+  doseText: z.string(),
+  route: z.string(),
+  scheduledAt: z.string(),
+  windowStart: z.string(),
+  windowEnd: z.string(),
+  requiresDoubleCheck: z.boolean(),
+  status: z.enum(['scheduled', 'administered', 'missed', 'held']),
+});
+
+export const nursingDashboardResponseSchema = z.object({
+  readOnly: z.literal(true),
+  roleView: z.literal('nurse'),
+  scheduledMar: z.array(marScheduledDoseRowSchema),
+  nursingDrafts: z.array(dashboardDraftRowSchema),
+  demoTasks: z.array(dashboardDemoTaskSchema),
+});
+
+export const pharmacyDashboardResponseSchema = z.object({
+  readOnly: z.literal(true),
+  roleView: z.literal('pharmacist'),
+  pendingValidations: z.array(
+    z.object({
+      id: z.string().uuid(),
+      patientId: z.string().uuid(),
+      patientDisplayName: z.string(),
+      title: z.string(),
+      status: z.string(),
+      updatedAt: z.string(),
+    }),
+  ),
+  reconciliationCandidates: z.array(
+    z.object({
+      patientId: z.string().uuid(),
+      patientDisplayName: z.string(),
+      activeMedicationCount: z.number().int().positive(),
+      medications: z.array(z.string()),
+      reason: z.string(),
+    }),
+  ),
+  demoTasks: z.array(dashboardDemoTaskSchema),
+});
+
+export type NursingDashboardResponse = z.infer<typeof nursingDashboardResponseSchema>;
+export type PharmacyDashboardResponse = z.infer<typeof pharmacyDashboardResponseSchema>;
 
 export const censusBedRowSchema = z.object({
   bedId: z.string().uuid(),

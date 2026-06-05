@@ -11,12 +11,15 @@ describe('EPIS prompt policy (local-ai)', () => {
     expect(preamble).toContain('prescribo');
   });
 
-  it('catálogo cubre los 4 blueprints MVP', () => {
+  it('catálogo cubre blueprints MVP y V3', () => {
     expect(listDraftPromptSpecs().map((s) => s.blueprintId)).toEqual([
       'evolution_note',
       'discharge_summary',
       'prescription',
       'lab_request',
+      'nursing_note',
+      'medication_administration',
+      'pharmacy_validation',
     ]);
   });
 

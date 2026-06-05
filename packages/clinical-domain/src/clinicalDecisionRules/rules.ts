@@ -177,6 +177,32 @@ export function evaluateDuplicateMedicationOrder(ctx: CdrContext): CdrCheckResul
   };
 }
 
+function isPharmacyValidation(actionId: string): boolean {
+  return actionId === 'pharmacy_validation';
+}
+
+export function evaluateMedicationReconciliationGap(ctx: CdrContext): CdrCheckResult | null {
+  if (!isPharmacyValidation(ctx.actionId)) return null;
+
+  const activeMeds = ctx.medicationOrders.filter(
+    (o) => !isBlockedMedicationStatus(o.status),
+  );
+  if (activeMeds.length < 2) return null;
+
+  const intervention = trimField(ctx.formData.intervention);
+  if (intervention && intervention !== 'sin_intervencion') return null;
+
+  return {
+    ruleId: 'medication_reconciliation_gap',
+    id: 'cdr.medication_reconciliation_gap',
+    severity: 'warn',
+    message: `Conciliación pendiente: ${activeMeds.length} medicamentos activos sin intervención documentada.`,
+    clinicalRationale:
+      'Pacientes con polifarmacia requieren conciliación medicamentosa antes de validar sin cambios.',
+    field: 'intervention',
+  };
+}
+
 export function evaluateHighRiskMedWithoutDoubleCheck(ctx: CdrContext): CdrCheckResult | null {
   if (!isMarAction(ctx.actionId)) return null;
 
@@ -208,6 +234,7 @@ export function evaluateClinicalDecisionRules(ctx: CdrContext): CdrCheckResult[]
     evaluateDischargeWithOpenCriticalOrders(ctx),
     evaluateDuplicateMedicationOrder(ctx),
     evaluateHighRiskMedWithoutDoubleCheck(ctx),
+    evaluateMedicationReconciliationGap(ctx),
   ];
   return checks.filter((check): check is CdrCheckResult => check !== null);
 }

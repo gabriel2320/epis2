@@ -1,6 +1,8 @@
 import {
   dashboardWorkResponseSchema,
+  nursingDashboardResponseSchema,
   patientDashboardResponseSchema,
+  pharmacyDashboardResponseSchema,
   qualityDashboardResponseSchema,
   serviceDashboardResponseSchema,
 } from '@epis2/contracts';
@@ -16,6 +18,8 @@ import { getPatientById } from '../clinical/service.js';
 import { getPatientDashboardSummary } from '../clinical/longitudinal.js';
 import { getServiceDashboardSummary } from '../inpatient/service.js';
 import { getQualityDashboardSummary } from './quality.js';
+import { getNursingDashboardSummary } from './nursing.js';
+import { getPharmacyDashboardSummary } from './pharmacy.js';
 import { DEMO_WORK_TASKS, getDashboardWorkSummary } from './service.js';
 
 export async function registerDashboardRoutes(
@@ -51,8 +55,44 @@ export async function registerDashboardRoutes(
         });
       }
 
-      const summary = await getDashboardWorkSummary(db, session.sub);
+      const summary = await getDashboardWorkSummary(db, session.sub, session.role);
       return dashboardWorkResponseSchema.parse(summary);
+    },
+  );
+
+  app.get(
+    '/api/dashboard/nursing',
+    { preHandler: requireDashboardRead },
+    async (request, reply) => {
+      const session = (request as AuthenticatedRequest).session;
+      if (session.role !== 'nurse' && session.role !== 'physician' && session.role !== 'admin') {
+        return reply.status(403).send({ error: 'Tablero de enfermería no disponible para este rol' });
+      }
+      if (!db) {
+        return reply.status(503).send({ error: 'Base de datos no disponible' });
+      }
+      const summary = await getNursingDashboardSummary(db, session.sub);
+      return nursingDashboardResponseSchema.parse(summary);
+    },
+  );
+
+  app.get(
+    '/api/dashboard/pharmacy',
+    { preHandler: requireDashboardRead },
+    async (request, reply) => {
+      const session = (request as AuthenticatedRequest).session;
+      if (
+        session.role !== 'pharmacist' &&
+        session.role !== 'physician' &&
+        session.role !== 'admin'
+      ) {
+        return reply.status(403).send({ error: 'Tablero de farmacia no disponible para este rol' });
+      }
+      if (!db) {
+        return reply.status(503).send({ error: 'Base de datos no disponible' });
+      }
+      const summary = await getPharmacyDashboardSummary(db);
+      return pharmacyDashboardResponseSchema.parse(summary);
     },
   );
 

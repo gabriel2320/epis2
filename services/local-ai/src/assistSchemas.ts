@@ -23,6 +23,31 @@ export const ASSIST_BLUEPRINT_FIELDS: Record<string, readonly string[]> = {
     'clinicalNotes',
   ],
   lab_request: ['labTests', 'clinicalReason', 'priority'],
+  nursing_note: [
+    'bloodPressure',
+    'heartRate',
+    'oxygenSaturation',
+    'temperature',
+    'careProvided',
+    'patientResponse',
+    'observations',
+  ],
+  medication_administration: [
+    'medication',
+    'dose',
+    'route',
+    'scheduledTime',
+    'administeredAt',
+    'doubleCheckConfirmed',
+    'administrationNotes',
+  ],
+  pharmacy_validation: [
+    'medicationReviewed',
+    'prescribedDose',
+    'intervention',
+    'recommendation',
+    'communicationToPrescriber',
+  ],
 };
 
 export type AssistBlueprintSpec = {

@@ -290,4 +290,106 @@ describe.skipIf(!hasDb)('Golden Clinical Journey — API', () => {
 
     await app.close();
   });
+
+  it('golden-v3-mar-nursing: tableros rol, MAR y conciliación', async () => {
+    const app = await buildApp(config);
+    const demo005 = DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-005')!;
+
+    const nurseLogin = await app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      payload: { username: 'enfermeria.demo', demoAuthKey: 'DEMO-CLAVE-ENFERMERIA' },
+    });
+    const nurseCookie = String(nurseLogin.headers['set-cookie']).split(';')[0];
+
+    const nursingNote = await app.inject({
+      method: 'POST',
+      url: '/api/commands/resolve',
+      headers: { cookie: nurseCookie },
+      payload: { text: 'nota de enfermeria', patientId: demo005.patientId },
+    });
+    expect(nursingNote.statusCode).toBe(200);
+    expect((nursingNote.json() as { routePath: string }).routePath).toBe('/espacio/enfermeria');
+
+    const marCmd = await app.inject({
+      method: 'POST',
+      url: '/api/commands/resolve',
+      headers: { cookie: nurseCookie },
+      payload: { text: 'registrar mar', patientId: demo005.patientId },
+    });
+    expect(marCmd.statusCode).toBe(200);
+    expect((marCmd.json() as { routePath: string }).routePath).toBe('/espacio/mar');
+
+    const nursingBoard = await app.inject({
+      method: 'GET',
+      url: '/api/dashboard/nursing',
+      headers: { cookie: nurseCookie },
+    });
+    expect(nursingBoard.statusCode).toBe(200);
+    const nursingJson = nursingBoard.json() as {
+      scheduledMar: { medication: string }[];
+      roleView: string;
+    };
+    expect(nursingJson.roleView).toBe('nurse');
+    expect(nursingJson.scheduledMar.length).toBeGreaterThan(0);
+
+    const marDraft = await app.inject({
+      method: 'POST',
+      url: '/api/drafts',
+      headers: { cookie: nurseCookie },
+      payload: {
+        patientId: demo005.patientId,
+        encounterId: 'b0000001-0000-4000-8000-000000000005',
+        draftType: 'medication_administration',
+        title: 'MAR journey V3',
+        body: {
+          medication: 'Warfarina',
+          dose: '5 mg',
+          route: 'VO',
+          doubleCheckConfirmed: true,
+        },
+      },
+    });
+    expect(marDraft.statusCode).toBe(201);
+    const marDraftId = (marDraft.json() as { draft: { id: string } }).draft.id;
+
+    const physicianCookie = await loginCookie(app);
+    const marApproved = await app.inject({
+      method: 'POST',
+      url: `/api/drafts/${marDraftId}/approve`,
+      headers: { cookie: physicianCookie },
+    });
+    expect(marApproved.statusCode).toBe(200);
+
+    const pharmLogin = await app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      payload: { username: 'farmacia.demo', demoAuthKey: 'DEMO-CLAVE-FARMACIA' },
+    });
+    const pharmCookie = String(pharmLogin.headers['set-cookie']).split(';')[0];
+
+    const pharmCmd = await app.inject({
+      method: 'POST',
+      url: '/api/commands/resolve',
+      headers: { cookie: pharmCookie },
+      payload: { text: 'validacion farmaceutica', patientId: demo005.patientId },
+    });
+    expect(pharmCmd.statusCode).toBe(200);
+    expect((pharmCmd.json() as { routePath: string }).routePath).toBe('/espacio/farmacia');
+
+    const pharmBoard = await app.inject({
+      method: 'GET',
+      url: '/api/dashboard/pharmacy',
+      headers: { cookie: pharmCookie },
+    });
+    expect(pharmBoard.statusCode).toBe(200);
+    const pharmJson = pharmBoard.json() as {
+      roleView: string;
+      reconciliationCandidates: unknown[];
+    };
+    expect(pharmJson.roleView).toBe('pharmacist');
+    expect(pharmJson.reconciliationCandidates.length).toBeGreaterThan(0);
+
+    await app.close();
+  });
 });

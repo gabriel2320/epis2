@@ -1,6 +1,8 @@
 import type {
   DashboardWorkResponse,
+  NursingDashboardResponse,
   PatientDashboardResponse,
+  PharmacyDashboardResponse,
   ServiceDashboardResponse,
 } from '@epis2/contracts';
 import { apiFetch } from './client.js';
@@ -16,6 +18,14 @@ export function fetchPatientDashboard(patientId: string) {
 export function fetchServiceDashboard(unitCode?: string) {
   const q = unitCode ? `?unit=${encodeURIComponent(unitCode)}` : '';
   return apiFetch<ServiceDashboardResponse>(`/api/dashboard/service${q}`);
+}
+
+export function fetchNursingDashboard() {
+  return apiFetch<NursingDashboardResponse>('/api/dashboard/nursing');
+}
+
+export function fetchPharmacyDashboard() {
+  return apiFetch<PharmacyDashboardResponse>('/api/dashboard/pharmacy');
 }
 
 export function acknowledgeCriticalResult(criticalId: string) {

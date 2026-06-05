@@ -12,6 +12,12 @@ export function mapBlueprintToCdrActionId(blueprintId: string | undefined): stri
       return 'prescription';
     case 'lab_request':
       return 'lab_request';
+    case 'pharmacy_validation':
+      return 'pharmacy_validation';
+    case 'medication_administration':
+      return 'medication_administration';
+    case 'nursing_note':
+      return 'nursing_note';
     default:
       return 'clinical_draft';
   }

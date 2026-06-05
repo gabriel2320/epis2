@@ -309,6 +309,25 @@ export const clinicalOrders = pgTable('clinical_orders', {
     .references(() => appUsers.id),
 });
 
+export const marScheduledDoses = pgTable('mar_scheduled_doses', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  patientId: uuid('patient_id')
+    .notNull()
+    .references(() => patients.id, { onDelete: 'cascade' }),
+  medication: text('medication').notNull(),
+  doseText: text('dose_text').notNull(),
+  route: text('route').notNull(),
+  scheduledAt: timestamp('scheduled_at', { withTimezone: true }).notNull(),
+  windowStart: timestamp('window_start', { withTimezone: true }).notNull(),
+  windowEnd: timestamp('window_end', { withTimezone: true }).notNull(),
+  status: text('status').notNull().default('scheduled'),
+  requiresDoubleCheck: boolean('requires_double_check').notNull().default(false),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
 export const marAdministrationRecords = pgTable('mar_administration_records', {
   id: uuid('id').primaryKey().defaultRandom(),
   patientId: uuid('patient_id')
