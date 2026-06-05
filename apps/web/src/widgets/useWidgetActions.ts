@@ -29,7 +29,7 @@ export function useWidgetActions(patientId?: string) {
         void navigate({
           to: action.route as Exclude<
             ClinicalNavigateTarget,
-            '/espacio/borrador/$draftId' | '/epis2/dashboard'
+            '/espacio/borrador/$draftId' | '/epis2/dashboard' | '/sin-acceso'
           >,
           ...(needsPatient && patientId ? { search: { patientId } } : {}),
         });

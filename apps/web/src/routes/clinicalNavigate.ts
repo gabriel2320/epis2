@@ -20,19 +20,26 @@ export type DashboardTab = 'work' | 'patient' | 'service' | 'nursing' | 'pharmac
 
 export type DashboardSearch = { tab?: DashboardTab; patientId?: string };
 
+export type ForbiddenSearch = { detail?: string };
+
 export type ClinicalNavigateTarget =
   | ClinicalFormRoutePath
   | '/espacio/ficha'
   | '/espacio/borrador/$draftId'
   | '/epis2/dashboard'
   | '/comando'
-  | '/login';
+  | '/login'
+  | '/sin-acceso';
 
 export type ClinicalNavigateOptions =
   | { to: '/espacio/borrador/$draftId'; params: { draftId: string }; search?: ClinicalPatientSearch }
   | { to: '/epis2/dashboard'; search?: DashboardSearch; params?: never }
+  | { to: '/sin-acceso'; search?: ForbiddenSearch; params?: never }
   | {
-      to: Exclude<ClinicalNavigateTarget, '/espacio/borrador/$draftId' | '/epis2/dashboard'>;
+      to: Exclude<
+        ClinicalNavigateTarget,
+        '/espacio/borrador/$draftId' | '/epis2/dashboard' | '/sin-acceso'
+      >;
       search?: ClinicalPatientSearch;
       params?: never;
     };

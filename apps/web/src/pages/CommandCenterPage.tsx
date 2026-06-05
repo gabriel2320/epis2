@@ -131,7 +131,10 @@ export function CommandCenterPage() {
         return;
       }
       if (result.status === 'forbidden') {
-        setError(result.message || copy.commandCenter.forbidden);
+        void navigate({
+          to: '/sin-acceso',
+          search: { detail: result.message || copy.commandCenter.forbidden },
+        });
         return;
       }
       if (result.status === 'empty') {
@@ -139,7 +142,10 @@ export function CommandCenterPage() {
       }
     } catch (e) {
       if (e instanceof ApiError && e.status === 403) {
-        setError(e.message || copy.commandCenter.forbidden);
+        void navigate({
+          to: '/sin-acceso',
+          search: { detail: e.message || copy.commandCenter.forbidden },
+        });
       } else {
         setError(copy.errors.genericMessage);
       }

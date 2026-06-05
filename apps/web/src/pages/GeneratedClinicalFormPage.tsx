@@ -440,20 +440,17 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
 
 
+  useEffect(() => {
+    if (!allowed) {
+      void navigate({
+        to: '/sin-acceso',
+        search: { detail: copy.forms.forbidden },
+      });
+    }
+  }, [allowed, navigate]);
+
   if (!allowed) {
-
-    return (
-
-      <Stack spacing={2}>
-
-        <EpisAlert severity="warning">{copy.forms.forbidden}</EpisAlert>
-
-        <ClinicalPageNav patientId={effectivePatientId} showFicha={Boolean(effectivePatientId)} />
-
-      </Stack>
-
-    );
-
+    return null;
   }
 
 

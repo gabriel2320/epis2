@@ -72,10 +72,10 @@ export function getCommandBarAiHint(role: string, aiAvailable: boolean): string 
   if (!aiAvailable) {
     const off: Record<string, string> = {
       physician: 'IA local apagada — comandos y formularios manuales disponibles.',
-      nurse: 'Sin Ollama — notas y MAR se completan manualmente.',
-      pharmacist: 'Sin Ollama — validación farmacéutica manual.',
-      admin: 'Sin Ollama — tableros y auditoría operativos.',
-      auditor: 'Sin Ollama — tablero de calidad disponible.',
+      nurse: 'Sin asistencia de IA — notas y MAR se completan manualmente.',
+      pharmacist: 'Sin asistencia de IA — validación farmacéutica manual.',
+      admin: 'Sin asistencia de IA — tableros y auditoría operativos.',
+      auditor: 'Sin asistencia de IA — tablero de calidad disponible.',
     };
     return off[role];
   }

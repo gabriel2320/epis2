@@ -15,6 +15,8 @@ import { GeneratedClinicalFormPage } from '../pages/GeneratedClinicalFormPage.js
 import { PatientWorkspacePage } from '../pages/PatientWorkspacePage.js';
 import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
+import { SessionExpiredPage } from '../pages/SessionExpiredPage.js';
+import { ForbiddenPage } from '../pages/ForbiddenPage.js';
 import { isUiCatalogEnabled } from '../dev/uiCatalogEnv.js';
 import { isSchedulerSpikeEnabled } from '../dev/schedulerSpikeEnv.js';
 
@@ -53,6 +55,33 @@ const loginRoute = createRoute({
   },
 });
 
+const sessionExpiredRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/sesion-expirada',
+  component: SessionExpiredPage,
+  beforeLoad: async () => {
+    const session = await loadSessionForRouter();
+    if (session) {
+      throw redirect({ to: '/comando' });
+    }
+  },
+});
+
+const forbiddenRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/sin-acceso',
+  validateSearch: (search: Record<string, unknown>) => ({
+    detail: typeof search.detail === 'string' ? search.detail : undefined,
+  }),
+  component: ForbiddenRoutePage,
+  beforeLoad: requireSession,
+});
+
+function ForbiddenRoutePage() {
+  const { detail } = forbiddenRoute.useSearch();
+  return <ForbiddenPage detail={detail} />;
+}
+
 /** Home canónica = Centro de Comando (sin dashboard). */
 const commandCenterRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -64,16 +93,22 @@ const commandCenterRoute = createRoute({
 const dashboardModeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/epis2/dashboard',
-  validateSearch: (search: Record<string, unknown>) => ({
-    tab:
-      search.tab === 'patient' ||
-      search.tab === 'service' ||
-      search.tab === 'quality' ||
-      search.tab === 'work'
-        ? search.tab
-        : 'work',
-    patientId: typeof search.patientId === 'string' ? search.patientId : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>) => {
+    const tab = search.tab;
+    const validTab =
+      tab === 'patient' ||
+      tab === 'service' ||
+      tab === 'quality' ||
+      tab === 'work' ||
+      tab === 'nursing' ||
+      tab === 'pharmacy'
+        ? tab
+        : 'work';
+    return {
+      tab: validTab,
+      patientId: typeof search.patientId === 'string' ? search.patientId : undefined,
+    };
+  },
   component: DashboardModePage,
   beforeLoad: requireSession,
 });
@@ -227,6 +262,8 @@ const schedulerSpikeRoute = createRoute({
 export const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
+  sessionExpiredRoute,
+  forbiddenRoute,
   uiCatalogRoute,
   schedulerSpikeRoute,
   commandCenterRoute,

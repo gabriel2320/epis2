@@ -105,8 +105,8 @@ export const copy = {
   },
   ai: {
     panelTitle: 'Asistencia clínica (IA local)',
-    statusOn: 'Ollama disponible',
-    statusOff: 'Modo manual (sin Ollama)',
+    statusOn: 'Asistencia de IA disponible',
+    statusOff: 'Modo manual (sin asistencia de IA)',
     humanReviewRequired:
       'Las respuestas de IA son orientativas. Deben revisarse y, si aplica, guardarse como borrador con aprobación humana.',
     ragTitle: 'Consulta documental con fuentes',
@@ -283,6 +283,14 @@ export const copy = {
     genericMessage: 'No pudimos completar la acción. Intenta de nuevo.',
     notFoundTitle: 'Página no encontrada',
     notFoundMessage: 'La ruta solicitada no existe en EPIS2.',
+    sessionExpiredTitle: 'Sesión expirada',
+    sessionExpiredMessage:
+      'Tu sesión ya no es válida. Vuelve a iniciar sesión para continuar en el Centro de Comando.',
+    sessionExpiredAction: 'Iniciar sesión',
+    forbiddenTitle: 'Acceso no permitido',
+    forbiddenMessage:
+      'Tu rol o permisos actuales no permiten esta acción. Si crees que es un error, contacta al administrador del entorno demo.',
+    forbiddenAction: 'Volver al Centro de Comando',
     retry: 'Reintentar',
   },
   roles: {

@@ -1,3 +1,5 @@
+import { redirectToSessionExpired } from '../auth/sessionRedirect.js';
+
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? '';
 
 export class ApiError extends Error {
@@ -30,6 +32,9 @@ export async function apiFetch<T>(
       if (body.error) message = body.error;
     } catch {
       /* ignore */
+    }
+    if (res.status === 401) {
+      redirectToSessionExpired();
     }
     throw new ApiError(message, res.status);
   }

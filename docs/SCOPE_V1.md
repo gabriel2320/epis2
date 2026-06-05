@@ -109,3 +109,5 @@ Fuera del límite estricto de v1, el repositorio incluye **blueprints y rutas ad
 **Reglas:** mismos gates (borrador → aprobación humana); datos sintéticos; no sustituyen el gate V1/V3 completo documentado en `EPIS2_RELEASE_ROADMAP.md`.
 
 Modo tablero (`/epis2/dashboard`), widgets (WIDGET-00) y slices V2/V4/V5 API siguen el mismo criterio: **demo reversible**, home = Centro de Comando.
+
+**WIDGET-01 (montaje web):** `ClinicalWidgetPanel` en Centro de Comando (con paciente activo: `patient-context`, `pending-drafts`) y ficha paciente (`patient-summary`, `active-problems`). Visibilidad vía `resolveWidgetVisibility` — máximo widgets explícitos por superficie.
