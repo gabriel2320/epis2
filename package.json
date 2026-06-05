@@ -29,7 +29,12 @@
     "ai:pull-model": "ollama pull llama3.2",
     "legacy:audit": "node scripts/legacy-audit/scan-donor-repositories.mjs && node scripts/legacy-audit/detect-forbidden-dependencies.mjs && node scripts/legacy-audit/detect-secrets-and-sensitive-data.mjs && node scripts/legacy-audit/detect-duplicate-registries.mjs && node scripts/legacy-audit/detect-legacy-routes.mjs",
     "legacy:validate-manifest": "node scripts/legacy-audit/validate-import-manifest.mjs",
-    "legacy:validate-quarantine": "node scripts/legacy-audit/validate-quarantine.mjs"
+    "legacy:validate-quarantine": "node scripts/legacy-audit/validate-quarantine.mjs",
+    "theme:import": "node scripts/theme/import-material-theme.mjs",
+    "theme:generate": "node scripts/theme/generate-epis2-theme.mjs",
+    "theme:validate": "node scripts/theme/validate-theme-all.mjs",
+    "theme:report": "node scripts/theme/generate-theme-report.mjs",
+    "theme:snapshot": "node scripts/theme/compare-theme-snapshots.mjs"
   },
   "overrides": {
     "react": "^19.1.0",

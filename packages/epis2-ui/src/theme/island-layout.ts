@@ -3,7 +3,7 @@ import type { SystemStyleObject } from '@mui/system';
 import { epis2BarLayout } from './breakpoints.js';
 import { epis2Shape } from './shape.js';
 
-/** Fondo de aplicación — canvas neutro (#F5F5F7). */
+/** Fondo de aplicación — canvas neutro (background.default). */
 export const epis2CanvasSx: SystemStyleObject<Theme> = {
   minHeight: '100vh',
   bgcolor: 'background.default',

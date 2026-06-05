@@ -176,7 +176,7 @@ export const copy = {
     searchDocuments: 'Buscar en documentos',
     searchPlaceholder: 'Título o referencia…',
     searchNoHits: 'Sin coincidencias en documentos indexados.',
-    searchSemanticHint: 'Búsqueda semántica (pgvector demo)',
+    searchSemanticHint: 'Búsqueda semántica con fuentes (demo)',
     intakeTitle: 'Cargar documento (demo)',
     intakePlaceholder: 'Texto del documento o nota clínica…',
     intakeSubmit: 'Indexar borrador',

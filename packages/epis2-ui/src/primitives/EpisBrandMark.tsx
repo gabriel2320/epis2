@@ -19,7 +19,7 @@ export function EpisBrandMark({ size = 56, 'data-testid': testId = 'epis2-brand-
         width: size,
         height: size,
         borderRadius: 0,
-        bgcolor: '#FFFFFF',
+        bgcolor: 'background.paper',
         display: 'grid',
         placeItems: 'center',
         boxShadow: theme.shadows[2],
