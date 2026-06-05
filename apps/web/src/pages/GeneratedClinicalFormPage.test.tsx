@@ -23,6 +23,16 @@ vi.mock('../api/client.js', () => ({
   },
 }));
 
+vi.mock('../api/aiApi.js', () => ({
+  fetchAiStatus: vi.fn().mockResolvedValue({
+    available: true,
+    ollama: 'up',
+    localAi: 'up',
+    message: '',
+  }),
+  requestDraftAssist: vi.fn(),
+}));
+
 const { fetchPatientLongitudinal } = vi.hoisted(() => ({
   fetchPatientLongitudinal: vi.fn(),
 }));
@@ -151,5 +161,20 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
       expect(screen.getByTestId('epis2-context-timeline-list')).toBeInTheDocument();
     });
     expect(screen.getByText('Nota previa demo')).toBeInTheDocument();
+  });
+
+  it('muestra chips SOAP cuando IA está disponible y faltan campos', async () => {
+    render(
+      <Epis2ThemeProvider>
+        <ActivePatientProvider>
+          <GeneratedClinicalFormPage blueprint={evolutionBlueprint} />
+        </ActivePatientProvider>
+      </Epis2ThemeProvider>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('epis2-soap-gap-hints')).toBeInTheDocument();
+    });
+    expect(screen.getByTestId('epis2-soap-hint-subjective')).toBeInTheDocument();
   });
 });

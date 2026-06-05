@@ -4,7 +4,8 @@ import { fetchLocalAiStatus, pingOllama } from './client.js';
 import { recordAiRun } from './store.js';
 import type { AppConfig } from '../config.js';
 
-const HOURS_24_MS = 24 * 60 * 60 * 1000;
+const PERIOD_DAYS = 90;
+const PERIOD_MS = PERIOD_DAYS * 24 * 60 * 60 * 1000;
 
 export async function suggestPatientSummary24h(
   db: Database,
@@ -13,7 +14,7 @@ export async function suggestPatientSummary24h(
   patientId: string,
 ) {
   const longitudinal = await getPatientLongitudinal(db, patientId);
-  const since = Date.now() - HOURS_24_MS;
+  const since = Date.now() - PERIOD_MS;
   const recent = longitudinal.timeline.filter((e) => new Date(e.at).getTime() >= since);
 
   const activeProblems = longitudinal.problems
@@ -24,22 +25,18 @@ export async function suggestPatientSummary24h(
   const allergies = longitudinal.allergies.map((a) => a.substance).join('; ');
 
   const lines = [
-    `Resumen sintético 24 h (demo, requiere revisión humana):`,
+    `Resumen sintético ${PERIOD_DAYS} días (demo, requiere revisión humana):`,
     `Problemas activos: ${activeProblems || '—'}`,
     `Medicamentos: ${meds || '—'}`,
     `Alergias: ${allergies || '—'}`,
     recent.length > 0
       ? `Eventos recientes (${recent.length}): ${recent.map((e) => e.title).join(' · ')}`
-      : 'Sin eventos en las últimas 24 h en timeline demo.',
+      : `Sin eventos en los últimos ${PERIOD_DAYS} días en timeline demo.`,
   ];
 
   const localAiUp = await fetchLocalAiStatus(config.LOCAL_AI_BASE_URL);
   const ollamaUp = localAiUp && (await pingOllama(config.OLLAMA_BASE_URL));
   const source = ollamaUp ? ('ollama_synthesis' as const) : ('longitudinal_retrieval' as const);
-
-  if (ollamaUp) {
-    lines.push('(Ollama disponible — texto base generado desde SoT; no sustituye juicio clínico.)');
-  }
 
   const summaryText = lines.join('\n');
 

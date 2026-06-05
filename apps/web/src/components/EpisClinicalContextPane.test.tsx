@@ -10,14 +10,19 @@ import { EpisClinicalContextPane } from './EpisClinicalContextPane.js';
 
 const patientId = '00000000-0000-4000-8000-000000000099';
 
-const { fetchPatientLongitudinal } = vi.hoisted(() => ({
+const { fetchPatientLongitudinal, suggestPatientSummary } = vi.hoisted(() => ({
   fetchPatientLongitudinal: vi.fn(),
+  suggestPatientSummary: vi.fn(),
 }));
 
 vi.mock('../api/clinicalApi.js', async (importOriginal) => {
   const actual = await importOriginal<typeof import('../api/clinicalApi.js')>();
   return { ...actual, fetchPatientLongitudinal };
 });
+
+vi.mock('../api/aiApi.js', () => ({
+  suggestPatientSummary,
+}));
 
 afterEach(() => cleanup());
 
@@ -77,5 +82,45 @@ describe('EpisClinicalContextPane', () => {
         text: expect.stringContaining('Meropenem'),
       }),
     );
+  });
+
+  it('genera resumen de periodo bajo demanda', async () => {
+    const user = userEvent.setup();
+    fetchPatientLongitudinal.mockResolvedValue({
+      patientId,
+      readOnly: true,
+      problems: [],
+      allergies: [],
+      medications: [],
+      observations: [],
+      documents: [],
+      encounters: [],
+      timeline: [],
+    });
+    suggestPatientSummary.mockResolvedValue({
+      readOnly: true,
+      requiresHumanReview: true,
+      summaryText: 'Síntesis demo del periodo',
+      source: 'longitudinal_retrieval',
+      eventCount: 0,
+      aiAvailable: false,
+    });
+
+    render(
+      <Epis2ThemeProvider>
+        <EpisClinicalContextPane patientId={patientId} />
+      </Epis2ThemeProvider>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('epis2-period-summary-action')).toBeInTheDocument();
+    });
+
+    await user.click(screen.getByTestId('epis2-period-summary-action'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Síntesis demo del periodo')).toBeInTheDocument();
+    });
+    expect(screen.getByTestId('epis2-ai-disclosure')).toBeInTheDocument();
   });
 });

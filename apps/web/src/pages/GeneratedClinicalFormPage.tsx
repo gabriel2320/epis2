@@ -56,7 +56,7 @@ import { ApiError } from '../api/client.js';
 
 import { apiFetch } from '../api/client.js';
 
-import { requestDraftAssist } from '../api/aiApi.js';
+import { fetchAiStatus, requestDraftAssist } from '../api/aiApi.js';
 
 import {
 
@@ -76,6 +76,8 @@ import {
   EpisClinicalContextPane,
   type ClinicalContextInsertPayload,
 } from '../components/EpisClinicalContextPane.js';
+
+import { EpisClinicalSoapHints } from '../components/EpisClinicalSoapHints.js';
 
 import { ClinicalPageNav } from '../components/ClinicalPageNav.js';
 
@@ -142,6 +144,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const [loadError, setLoadError] = useState<string | undefined>();
 
   const [isSuggesting, setIsSuggesting] = useState(false);
+  const [aiAvailable, setAiAvailable] = useState(false);
 
   const [assistContext, setAssistContext] = useState<Record<string, string>>({});
 
@@ -187,6 +190,13 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     (!needsDraftWrite || roleHasPermission(role, 'draft.write'));
 
 
+
+  useEffect(() => {
+    if (!supportsClinicalContext) return;
+    void fetchAiStatus()
+      .then((res) => setAiAvailable(res.available))
+      .catch(() => setAiAvailable(false));
+  }, [supportsClinicalContext]);
 
   useEffect(() => {
 
@@ -660,6 +670,16 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
               </EpisM3Text>
 
               {canUseAiAssist ? <EpisAiDisclosure /> : null}
+
+              <EpisClinicalSoapHints
+
+                blueprintId={blueprint.blueprintId}
+
+                values={values}
+
+                aiAvailable={aiAvailable}
+
+              />
 
               <EpisClinicalForm
 

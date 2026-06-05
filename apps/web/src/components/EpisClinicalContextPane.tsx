@@ -14,6 +14,7 @@ import {
 } from '@epis2/epis2-ui';
 import { useEffect, useMemo, useState } from 'react';
 import { fetchPatientLongitudinal } from '../api/clinicalApi.js';
+import { EpisClinicalPeriodSummary } from './EpisClinicalPeriodSummary.js';
 import { ErrorState } from './ErrorState.js';
 
 export type ClinicalContextInsertPayload = {
@@ -159,6 +160,7 @@ export function EpisClinicalContextPane({
       <Typography variant="subtitle2" component="h2">
         {copy.clinicalLayout.contextPaneTitle}
       </Typography>
+      <EpisClinicalPeriodSummary patientId={patientId} />
       <TextField
         size="small"
         fullWidth

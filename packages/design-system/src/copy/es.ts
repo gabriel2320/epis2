@@ -292,6 +292,11 @@ export const copy = {
     contextBackToList: 'Volver al historial',
     insertIntoPlan: 'Añadir al plan actual',
     insertSuccess: 'Fragmento añadido al plan — revisa antes de guardar.',
+    periodSummaryAction: 'Resumir periodo relevante',
+    periodSummaryLoading: 'Generando síntesis…',
+    periodSummaryTitle: 'Síntesis del historial (borrador)',
+    periodSummaryError: 'No se pudo generar la síntesis. Intenta de nuevo.',
+    soapHintsTitle: 'Sugerencias de completitud',
   },
   errors: {
     genericTitle: 'Algo salió mal',
