@@ -29,6 +29,7 @@ import {
 } from '../api/clinicalApi.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
 import { ClinicalPageNav } from '../components/ClinicalPageNav.js';
+import { ClinicalWidgetPanel } from '../widgets/ClinicalWidgetPanel.js';
 import { ErrorState } from '../components/ErrorState.js';
 import { PatientListGrid } from '../components/PatientListGrid.js';
 import { PatientClinicalSummaryPanel } from '../components/PatientClinicalSummaryPanel.js';
@@ -171,6 +172,13 @@ export function PatientWorkspacePage() {
         </Stack>
 
         <PatientClinicalSummaryPanel summaryFields={detail.clinicalContext.summaryFields} />
+
+        <ClinicalWidgetPanel
+          surface="patient-workspace"
+          patientId={patientId}
+          explicitlyShownWidgetIds={['patient-summary', 'active-problems']}
+          data-testid="epis2-ficha-widget-panel"
+        />
 
         <ClinicalAlertsPanel
           alerts={clinicalAlerts}

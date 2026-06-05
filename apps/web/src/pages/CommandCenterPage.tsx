@@ -36,6 +36,7 @@ import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.j
 import { useClinicalNavigate, type ClinicalFormRoutePath, type DashboardTab } from '../routes/clinicalNavigate.js';
 import { ActivePatientBanner } from '../components/ActivePatientBanner.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
+import { ClinicalWidgetPanel } from '../widgets/ClinicalWidgetPanel.js';
 
 export function CommandCenterPage() {
   const { session, logout, hasPermission } = useAuth();
@@ -308,6 +309,15 @@ export function CommandCenterPage() {
           alerts={clinicalAlerts}
           loading={alertsLoading}
           hintBlueprintLabel={contextLabel}
+        />
+      ) : null}
+
+      {activePatient ? (
+        <ClinicalWidgetPanel
+          surface="command-center"
+          patientId={activePatient.id}
+          explicitlyShownWidgetIds={['pending-drafts']}
+          data-testid="epis2-command-widget-panel"
         />
       ) : null}
 

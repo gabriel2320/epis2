@@ -35,16 +35,25 @@ export async function validate() {
     }
   }
 
-  // Verificar que apps/web no importe MUI para widgets (gate de frontera UI)
+  // WIDGET-01: host en apps/web permitido; sin MUI directo ni segundo registry
   const webWidgets = path.join(ROOT, 'apps/web/src/widgets');
   try {
-    const { readdir } = await import('node:fs/promises');
-    const entries = await readdir(webWidgets, { recursive: true }).catch(() => []);
-    if (entries.length > 0) {
-      details.push('apps/web/src/widgets no debe existir en WIDGET-00 (usar epis2-ui)');
+    const { readdir, readFile: readWidgetHost } = await import('node:fs/promises');
+    const entries = await readdir(webWidgets, { withFileTypes: true }).catch(() => []);
+    const hostFiles = entries
+      .filter((e) => e.isFile() && /\.(ts|tsx)$/.test(e.name))
+      .map((e) => path.join(webWidgets, e.name));
+    for (const hostFile of hostFiles) {
+      const hostContent = await readWidgetHost(hostFile, 'utf8');
+      if (/from\s+['"]@mui\//.test(hostContent)) {
+        details.push(`${path.relative(ROOT, hostFile)}: host widget no debe importar @mui/*`);
+      }
+      if (/EPIS2_WIDGET_REGISTRY\s*=/.test(hostContent)) {
+        details.push(`${path.relative(ROOT, hostFile)}: prohibido segundo widget registry en web`);
+      }
     }
   } catch {
-    // carpeta inexistente — OK
+    // carpeta inexistente — OK en WIDGET-00
   }
 
   return {

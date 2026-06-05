@@ -27,6 +27,22 @@ vi.mock('../routes/clinicalNavigate.js', () => ({
   useClinicalNavigate: () => vi.fn(),
 }));
 
+vi.mock('../auth/AuthContext.js', () => ({
+  useAuth: () => ({
+    session: {
+      user: {
+        id: 'usr-physician-01',
+        username: 'medico.demo',
+        displayName: 'Dra. Ana Demo',
+        role: 'physician',
+      },
+      permissions: ['command.execute', 'draft.approve'],
+      expiresAt: new Date().toISOString(),
+    },
+    hasPermission: () => true,
+  }),
+}));
+
 vi.mock('../api/clinicalApi.js', async (importOriginal) => {
   const actual = await importOriginal<typeof import('../api/clinicalApi.js')>();
   return {
@@ -98,6 +114,8 @@ describe('PatientWorkspacePage', () => {
     await waitFor(() => {
       expect(screen.getByTestId('epis2-patient-workspace')).toBeInTheDocument();
     });
+    expect(screen.getByTestId('epis2-ficha-widget-panel')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-widget-patient-summary')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-clinical-alerts')).toBeInTheDocument();
     expect(
       screen.getByText(copy.commandCenter.clinicalAlertsTitle),

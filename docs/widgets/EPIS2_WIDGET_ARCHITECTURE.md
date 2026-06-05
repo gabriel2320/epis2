@@ -1,6 +1,6 @@
 # EPIS2 — Arquitectura de widgets clínicos contextuales
 
-**Fase:** WIDGET-00 · **Estado:** Fundación  
+**Fase:** WIDGET-01 · **Estado:** Montaje contextual en web (Comando + ficha)  
 **Frase guía:** *Los widgets muestran lo necesario, cuando es necesario, y siempre conducen al trabajo clínico.*
 
 ---
@@ -47,11 +47,20 @@ flowchart TD
   R --> UI[Epis2WidgetSurface + estados]
 ```
 
-## Fuera de alcance (WIDGET-00)
+## Montaje WIDGET-01
 
-- Integración API clínica real
-- Montaje en `apps/web`
-- WIDGET-01 y posteriores
+| Superficie | Host | Widgets demo |
+|------------|------|--------------|
+| `command-center` | `CommandCenterPage` | `patient-context`, `pending-drafts` |
+| `patient-workspace` | `PatientWorkspacePage` | `patient-summary`, `active-problems` |
+
+Código host: `apps/web/src/widgets/` — usa `@epis2/epis2-widgets` + superficies `Epis2Widget*` en `@epis2/epis2-ui`.
+
+## Fuera de alcance (WIDGET-01)
+
+- Widgets en formularios `/espacio/*` (superficie `clinical-form`)
+- Fetch masivo / IA obligatoria
+- Segundo registry
 
 ## Referencias
 

@@ -77,8 +77,9 @@ En el Centro de Comando verás el chip **IA local** en verde cuando Ollama y `de
 
 ## Próximo paso
 
-**Plan A (estabilización UX + docs)** ✓ — ver `reports/epis2-ux-stabilization.md`.  
-**Siguiente:** **Plan B — WIDGET-01** (montaje contextual en Comando y ficha) o **Plan C** (V1 completo: OCR/RAG/PDF).
+**Plan A (estabilización UX + docs)** ✓ — `reports/epis2-ux-stabilization.md`.  
+**Plan B (WIDGET-01)** ✓ — widgets en Comando y ficha — `reports/epis2-widget-01-mount.md`.  
+**Siguiente:** **Plan C** (V1 completo: OCR/RAG/PDF) o ampliar widgets a `clinical-form`.
 
 Demo en vivo:
 

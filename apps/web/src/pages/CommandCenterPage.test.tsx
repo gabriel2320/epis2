@@ -45,6 +45,7 @@ vi.mock('../api/clinicalApi.js', async (importOriginal) => {
       ],
     }),
     fetchPatientClinicalAlerts,
+    listDrafts: vi.fn().mockResolvedValue({ drafts: [] }),
   };
 });
 
@@ -150,5 +151,7 @@ describe('CommandCenterPage', () => {
       patientId,
       expect.objectContaining({}),
     );
+    expect(await screen.findByTestId('epis2-command-widget-panel')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-widget-patient-context')).toBeInTheDocument();
   });
 });
