@@ -67,8 +67,9 @@ export function intakePatientDocument(
   );
 }
 
-export function exportPatientSummaryUrl(patientId: string) {
-  return `/api/patients/${patientId}/export/summary`;
+export function exportPatientSummaryUrl(patientId: string, format: 'txt' | 'pdf' = 'txt') {
+  const q = format === 'pdf' ? '?format=pdf' : '';
+  return `/api/patients/${patientId}/export/summary${q}`;
 }
 
 /** Blueprint EPIS2 alineado a intent del command-registry (para CDR contextual). */

@@ -57,7 +57,7 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 ## 3. Journey V1 — Longitudinal (slice demo)
 
 **Nombre:** `golden-v1-longitudinal-review`  
-**Estado:** slice cerrado — gate completo pendiente RAG/OCR/PDF.
+**Estado:** gate V1 demo cerrado (RAG pgvector, OCR demo, export PDF/TXT).
 
 | # | Paso | Criterio |
 |---|------|----------|
@@ -70,14 +70,14 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 
 **Tests:** `clinical.integration.test.ts`
 
-**Pendiente gate V1 completo:** RAG pgvector, OCR, impresión PDF.
+**Automatización:** `golden-clinical-journey.api.spec.ts` (V1 + PDF).
 
 ---
 
 ## 4. Journey V2 — Hospitalización (slice demo)
 
 **Nombre:** `golden-v2-admission-discharge`  
-**Estado:** slice cerrado — gate completo pendiente traslados/alta operativa.
+**Estado:** gate V2 demo cerrado (ingreso, traslado, alta operativa).
 
 | # | Paso | Criterio |
 |---|------|----------|
@@ -89,7 +89,7 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 
 **Tests:** `inpatient.integration.test.ts`
 
-**Pendiente gate V2 completo:** traslados, epicrisis alta end-to-end operativa.
+**Automatización:** `golden-clinical-journey.api.spec.ts` (V2) + `inpatient.integration.test.ts`.
 
 ---
 

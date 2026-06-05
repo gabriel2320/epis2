@@ -1,14 +1,15 @@
 import type { Database } from '../db/client.js';
 import { getPatientLongitudinal } from './longitudinal.js';
 import { getPatientById } from './service.js';
+import { buildMinimalPdf } from './minimalPdf.js';
 
-export async function buildPatientSummaryExport(db: Database, patientId: string) {
+async function buildSummaryLines(db: Database, patientId: string) {
   const patient = await getPatientById(db, patientId);
   if (!patient) return null;
 
   const longitudinal = await getPatientLongitudinal(db, patientId);
   const lines: string[] = [
-    'EPIS2 — Resumen clínico (demo, no firmado)',
+    'EPIS2 — Resumen clinico (demo, no firmado)',
     `Paciente: ${patient.displayName}`,
     `ID: ${patientId}`,
     `Generado: ${new Date().toISOString()}`,
@@ -21,7 +22,7 @@ export async function buildPatientSummaryExport(db: Database, patientId: string)
     '== Alergias ==',
     ...longitudinal.allergies.map((a) => `- ${a.substance} (${a.severity})`),
     '',
-    '== Medicación activa ==',
+    '== Medicacion activa ==',
     ...longitudinal.medications
       .filter((m) => m.status === 'active')
       .map((m) => `- ${m.name}${m.doseText ? ` — ${m.doseText}` : ''}`),
@@ -32,13 +33,34 @@ export async function buildPatientSummaryExport(db: Database, patientId: string)
     '== Documentos recientes ==',
     ...longitudinal.documents.slice(0, 5).map((d) => `- ${d.title} (${d.documentType})`),
     '',
-    '— Requiere revisión humana antes de uso clínico —',
+    '— Requiere revision humana antes de uso clinico —',
   ];
 
+  return { patient, lines };
+}
+
+export async function buildPatientSummaryExport(
+  db: Database,
+  patientId: string,
+  format: 'txt' | 'pdf' = 'txt',
+) {
+  const built = await buildSummaryLines(db, patientId);
+  if (!built) return null;
+
+  const slug = built.patient.displayName.replace(/\s+/g, '-').toLowerCase();
+  if (format === 'pdf') {
+    return {
+      filename: `resumen-${slug}.pdf`,
+      contentType: 'application/pdf',
+      body: buildMinimalPdf(built.lines),
+      requiresHumanReview: true as const,
+    };
+  }
+
   return {
-    filename: `resumen-${patient.displayName.replace(/\s+/g, '-').toLowerCase()}.txt`,
+    filename: `resumen-${slug}.txt`,
     contentType: 'text/plain; charset=utf-8',
-    body: lines.join('\n'),
+    body: built.lines.join('\n'),
     requiresHumanReview: true as const,
   };
 }

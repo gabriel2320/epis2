@@ -71,6 +71,16 @@ export {
   type DocumentSearchResponse,
 } from './documents.js';
 export {
+  documentOcrResponseSchema,
+  inpatientAdmissionCreateResponseSchema,
+  inpatientAdmissionCreateSchema,
+  inpatientDischargeResponseSchema,
+  inpatientTransferResponseSchema,
+  inpatientTransferSchema,
+  type InpatientAdmissionCreate,
+  type InpatientTransfer,
+} from './inpatient.js';
+export {
   auditEventsResponseSchema,
   hl7ValidateResponseSchema,
   interopStagingResponseSchema,

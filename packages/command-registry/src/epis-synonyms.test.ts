@@ -25,6 +25,19 @@ describe('EPIS P8 synonym map', () => {
     expect(EPIS_DEFERRED_OR_REJECTED_INTENTS.length).toBeGreaterThan(0);
   });
 
+  it('ingreso hospitalario resuelve a tablero servicio', () => {
+    const result = resolveCommand({
+      text: 'ingreso hospitalario',
+      role: 'physician',
+      patientId: DEMO_PATIENT_ID,
+    });
+    expect(result.status).toBe('resolved');
+    if (result.status === 'resolved') {
+      expect(result.intent).toBe('admit_patient_hospital');
+      expect(result.routePath).toBe('/epis2/dashboard');
+    }
+  });
+
   it('rx dispara aclaración EPIS', () => {
     const result = resolveCommand({
       text: 'rx',

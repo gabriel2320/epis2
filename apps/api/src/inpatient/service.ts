@@ -47,6 +47,7 @@ export async function getServiceDashboardSummary(
 
   const activeAdmissions = await db
     .select({
+      id: inpatientAdmissions.id,
       bedId: inpatientAdmissions.bedId,
       patientId: inpatientAdmissions.patientId,
       expectedDischargeAt: inpatientAdmissions.expectedDischargeAt,
@@ -73,6 +74,7 @@ export async function getServiceDashboardSummary(
       bedId: b.bedId,
       bedLabel: b.bedLabel,
       status: b.status as 'available' | 'occupied' | 'blocked',
+      admissionId: adm?.id,
       patientId: adm?.patientId,
       patientDisplayName: adm?.displayName,
       demoCaseCode: adm ? demoByPatient.get(adm.patientId) : undefined,

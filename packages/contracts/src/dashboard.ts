@@ -30,6 +30,7 @@ export const censusBedRowSchema = z.object({
   bedId: z.string().uuid(),
   bedLabel: z.string(),
   status: z.enum(['available', 'occupied', 'blocked']),
+  admissionId: z.string().uuid().optional(),
   patientId: z.string().uuid().optional(),
   patientDisplayName: z.string().optional(),
   demoCaseCode: z.string().optional(),

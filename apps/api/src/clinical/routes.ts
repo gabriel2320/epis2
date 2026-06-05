@@ -1,6 +1,7 @@
 import {
   documentIntakeRequestSchema,
   documentIntakeResponseSchema,
+  documentOcrResponseSchema,
   documentSearchResponseSchema,
   patientClinicalAlertsResponseSchema,
   patientLongitudinalResponseSchema,
@@ -10,7 +11,6 @@ import { z } from 'zod';
 import type { FastifyInstance } from 'fastify';
 import type { Database } from '../db/client.js';
 import {
-  createAuthenticate,
   createRequirePermission,
   type AuthenticatedRequest,
 } from '../auth/authenticate.js';
@@ -28,6 +28,8 @@ import {
   searchPatients,
   updateDraft,
 } from './service.js';
+import type { AppConfig } from '../config.js';
+import { processDocumentOcr } from './documentOcr.js';
 import { intakePatientDocument } from './documentIntake.js';
 import { searchPatientDocuments } from './documents.js';
 import { getPatientLongitudinal } from './longitudinal.js';
@@ -62,7 +64,7 @@ const updateDraftSchema = z.object({
 
 export async function registerClinicalRoutes(
   app: FastifyInstance,
-  config: Parameters<typeof createAuthenticate>[0],
+  config: AppConfig,
   db: Database | null,
 ) {
   if (!db) {
@@ -198,8 +200,25 @@ export async function registerClinicalRoutes(
         patientId,
         session.sub,
         parsed.data,
+        config.OLLAMA_BASE_URL,
       );
       return reply.status(201).send(documentIntakeResponseSchema.parse(result));
+    },
+  );
+
+  app.post(
+    '/api/patients/:patientId/documents/:documentId/ocr',
+    { preHandler: requireDraftWrite },
+    async (request, reply) => {
+      const { documentId } = request.params as { documentId: string };
+      const result = await processDocumentOcr(db, documentId, config.OLLAMA_BASE_URL);
+      if (!result) {
+        return reply.status(404).send({ error: 'Documento no encontrado' });
+      }
+      return documentOcrResponseSchema.parse({
+        ...result,
+        requiresHumanReview: true as const,
+      });
     },
   );
 
@@ -208,7 +227,8 @@ export async function registerClinicalRoutes(
     { preHandler: requirePatientRead },
     async (request, reply) => {
       const { patientId } = request.params as { patientId: string };
-      const exported = await buildPatientSummaryExport(db, patientId);
+      const format = (request.query as { format?: string }).format === 'pdf' ? 'pdf' : 'txt';
+      const exported = await buildPatientSummaryExport(db, patientId, format);
       if (!exported) {
         return reply.status(404).send({ error: 'Paciente no encontrado' });
       }

@@ -24,3 +24,28 @@ export function acknowledgeCriticalResult(criticalId: string) {
     { method: 'POST' },
   );
 }
+
+export function createInpatientAdmission(body: {
+  patientId: string;
+  bedId: string;
+  unitCode?: string;
+}) {
+  return apiFetch<{ admission: { id: string; bedLabel: string } }>(
+    '/api/inpatient/admissions',
+    { method: 'POST', body: JSON.stringify(body) },
+  );
+}
+
+export function transferInpatientAdmission(admissionId: string, targetBedId: string) {
+  return apiFetch<{ toBedLabel: string }>(
+    `/api/inpatient/admissions/${admissionId}/transfer`,
+    { method: 'POST', body: JSON.stringify({ targetBedId }) },
+  );
+}
+
+export function dischargeInpatientAdmission(admissionId: string) {
+  return apiFetch<{ patientId: string; epicrisisRoute: string }>(
+    `/api/inpatient/admissions/${admissionId}/discharge`,
+    { method: 'POST' },
+  );
+}

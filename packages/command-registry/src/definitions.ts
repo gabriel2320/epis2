@@ -288,6 +288,24 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
     match: (q) => /tablero\s+(del\s+)?servicio|ver\s+el\s+servicio/.test(q),
   },
   {
+    intent: 'admit_patient_hospital',
+    labelEs: 'Ingreso hospitalario',
+    aliasesEs: [
+      'ingreso hospitalario',
+      'hospitalizar paciente',
+      'admitir paciente',
+      'ingreso a hospitalizacion',
+    ],
+    routePath: INTENT_ROUTE_PATHS.admit_patient_hospital,
+    requiredPermission: 'dashboard.read',
+    requiresPatient: true,
+    priority: 77,
+    match: (q) =>
+      /ingreso\s+hospitalario|hospitalizar\s+paciente|admitir\s+paciente|ingreso\s+a\s+hospitalizacion/.test(
+        q,
+      ),
+  },
+  {
     intent: 'open_dashboard',
     labelEs: 'Modo tablero',
     aliasesEs: [

@@ -3,8 +3,8 @@ import type { Database } from '../db/client.js';
 import { clinicalDocuments } from '../db/schema.js';
 import {
   chunkText,
-  demoEmbedText,
   demoEmbedToPgVectorLiteral,
+  resolveEmbedding,
 } from './embeddings.js';
 
 export type DocumentIntakeInput = {
@@ -20,6 +20,7 @@ export async function intakePatientDocument(
   patientId: string,
   actorId: string,
   input: DocumentIntakeInput,
+  ollamaBaseUrl?: string,
 ) {
   const rawText = input.textContent?.trim() ?? '';
   const needsOcr =
@@ -54,7 +55,9 @@ export async function intakePatientDocument(
   const chunks = chunkText(textContent);
   for (let i = 0; i < chunks.length; i++) {
     const chunk = chunks[i]!;
-    const embedding = demoEmbedToPgVectorLiteral(demoEmbedText(chunk));
+    const embedding = demoEmbedToPgVectorLiteral(
+      await resolveEmbedding(chunk, ollamaBaseUrl),
+    );
     await db.execute(sql`
       INSERT INTO clinical_document_chunks (document_id, patient_id, chunk_index, chunk_text, embedding)
       VALUES (

@@ -219,12 +219,21 @@ export function DashboardModeContent() {
         ) : serviceBoard ? (
           <ServiceDashboardTab
             data={serviceBoard}
+            activePatientId={activePatient?.id}
             onReload={() => void loadService()}
             onOpenPatient={(pid) => {
               const p = recentPatients.find((r) => r.id === pid);
               if (p) setPatient(p);
               void navigate({
                 to: '/espacio/ficha',
+                search: { patientId: pid },
+              });
+            }}
+            onOpenEpicrisis={(pid) => {
+              const p = recentPatients.find((r) => r.id === pid);
+              if (p) setPatient(p);
+              void navigate({
+                to: '/espacio/epicrisis',
                 search: { patientId: pid },
               });
             }}

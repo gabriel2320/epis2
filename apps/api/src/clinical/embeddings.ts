@@ -1,5 +1,53 @@
+import { pingOllama } from '../ai/client.js';
+
 /** Embedding determinístico demo (128d) — sin sidecar; apto para pgvector sintético. */
 export const DEMO_EMBED_DIM = 128;
+
+export function poolEmbedding(values: number[], targetDim: number): number[] {
+  if (values.length === targetDim) return normalizeVector(values);
+  const out = new Array<number>(targetDim).fill(0);
+  for (let i = 0; i < values.length; i++) {
+    out[i % targetDim]! += values[i]!;
+  }
+  return normalizeVector(out);
+}
+
+function normalizeVector(vec: number[]): number[] {
+  const norm = Math.sqrt(vec.reduce((s, v) => s + v * v, 0)) || 1;
+  return vec.map((v) => Number((v / norm).toFixed(6)));
+}
+
+export async function fetchOllamaEmbedding(
+  baseUrl: string,
+  text: string,
+): Promise<number[] | null> {
+  try {
+    const up = await pingOllama(baseUrl);
+    if (!up) return null;
+    const res = await fetch(`${baseUrl.replace(/\/$/, '')}/api/embeddings`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: AbortSignal.timeout(8000),
+      body: JSON.stringify({ model: 'nomic-embed-text', prompt: text }),
+    });
+    if (!res.ok) return null;
+    const body = (await res.json()) as { embedding?: number[] };
+    return Array.isArray(body.embedding) ? body.embedding : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function resolveEmbedding(
+  text: string,
+  ollamaBaseUrl?: string,
+): Promise<number[]> {
+  if (ollamaBaseUrl) {
+    const remote = await fetchOllamaEmbedding(ollamaBaseUrl, text);
+    if (remote) return poolEmbedding(remote, DEMO_EMBED_DIM);
+  }
+  return demoEmbedText(text);
+}
 
 export function demoEmbedText(text: string): number[] {
   const vec = new Array<number>(DEMO_EMBED_DIM).fill(0);
@@ -18,8 +66,7 @@ export function demoEmbedText(text: string): number[] {
     vec[h % DEMO_EMBED_DIM]! += 1;
   }
 
-  const norm = Math.sqrt(vec.reduce((s, v) => s + v * v, 0)) || 1;
-  return vec.map((v) => Number((v / norm).toFixed(6)));
+  return normalizeVector(vec);
 }
 
 export function demoEmbedToPgVectorLiteral(values: number[]): string {

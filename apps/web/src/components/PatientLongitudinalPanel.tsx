@@ -60,16 +60,28 @@ export function PatientLongitudinalPanel({
     <Stack spacing={2} data-testid="epis2-longitudinal-panel">
       <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
         <Typography variant="subtitle2">{copy.longitudinal.title}</Typography>
-        <Button
-          size="small"
-          variant="outlined"
-          component="a"
-          href={exportPatientSummaryUrl(data.patientId)}
-          download
-          data-testid="epis2-export-summary"
-        >
-          {copy.longitudinal.exportSummary}
-        </Button>
+        <Stack direction="row" spacing={0.5}>
+          <Button
+            size="small"
+            variant="outlined"
+            component="a"
+            href={exportPatientSummaryUrl(data.patientId, 'txt')}
+            download
+            data-testid="epis2-export-summary"
+          >
+            {copy.longitudinal.exportSummary}
+          </Button>
+          <Button
+            size="small"
+            variant="outlined"
+            component="a"
+            href={exportPatientSummaryUrl(data.patientId, 'pdf')}
+            download
+            data-testid="epis2-export-summary-pdf"
+          >
+            {copy.longitudinal.exportSummaryPdf}
+          </Button>
+        </Stack>
       </Stack>
 
       <PatientClinicalCharts data={data} />

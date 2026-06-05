@@ -220,6 +220,74 @@ describe.skipIf(!hasDb)('Golden Clinical Journey — API', () => {
     expect(exportRes.statusCode).toBe(200);
     expect(exportRes.body).toContain('EPIS2');
 
+    const pdfExport = await app.inject({
+      method: 'GET',
+      url: `/api/patients/${patientId}/export/summary?format=pdf`,
+      headers: { cookie },
+    });
+    expect(pdfExport.statusCode).toBe(200);
+    expect(String(pdfExport.headers['content-type'])).toContain('application/pdf');
+
+    await app.close();
+  });
+
+  it('golden-v2-admission-discharge: censo, traslado, ingreso y alta', async () => {
+    const app = await buildApp(config);
+    const cookie = await loginCookie(app);
+
+    const service = await app.inject({
+      method: 'GET',
+      url: '/api/dashboard/service',
+      headers: { cookie },
+    });
+    expect(service.statusCode).toBe(200);
+    const serviceJson = service.json() as {
+      census: { bedLabel: string; admissionId?: string }[];
+      activeOrders: unknown[];
+    };
+    expect(serviceJson.census.length).toBeGreaterThanOrEqual(3);
+    expect(serviceJson.activeOrders.length).toBeGreaterThan(0);
+
+    const demo004Admission = 'f0000003-0000-4000-8000-000000000001';
+    const bed102A = 'f0000002-0000-4000-8000-000000000003';
+    const transfer = await app.inject({
+      method: 'POST',
+      url: `/api/inpatient/admissions/${demo004Admission}/transfer`,
+      headers: { cookie },
+      payload: { targetBedId: bed102A },
+    });
+    expect(transfer.statusCode).toBe(200);
+
+    const demo001 = DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-001')!;
+    const bed101A = 'f0000002-0000-4000-8000-000000000001';
+    const admit = await app.inject({
+      method: 'POST',
+      url: '/api/inpatient/admissions',
+      headers: { cookie },
+      payload: { patientId: demo001.patientId, bedId: bed101A },
+    });
+    expect(admit.statusCode).toBe(201);
+    const admissionId = (admit.json() as { admission: { id: string } }).admission.id;
+
+    const discharge = await app.inject({
+      method: 'POST',
+      url: `/api/inpatient/admissions/${admissionId}/discharge`,
+      headers: { cookie },
+    });
+    expect(discharge.statusCode).toBe(200);
+
+    const evoCmd = await app.inject({
+      method: 'POST',
+      url: '/api/commands/resolve',
+      headers: { cookie },
+      payload: {
+        text: 'evolucion diaria',
+        patientId: DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-005')!.patientId,
+      },
+    });
+    expect(evoCmd.statusCode).toBe(200);
+    expect((evoCmd.json() as { routePath: string }).routePath).toBe('/espacio/evolucion');
+
     await app.close();
   });
 });
