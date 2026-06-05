@@ -24,5 +24,6 @@ export {
 export {
   CLINICAL_CONTEXT_BLUEPRINT_IDS,
   blueprintSupportsClinicalContext,
+  defaultClinicalContextInsertField,
   type ClinicalContextBlueprintId,
 } from './clinical-context-blueprints.js';

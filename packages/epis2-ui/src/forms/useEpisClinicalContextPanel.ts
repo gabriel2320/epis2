@@ -8,9 +8,33 @@ type FocusSnapshot = {
   end: number;
 };
 
+export type UseEpisClinicalContextPanelOptions = {
+  /** Clave sessionStorage para persistir apertura del split (p. ej. patientId+blueprintId). */
+  storageKey?: string;
+};
+
+function readStoredContextOpen(storageKey?: string): boolean {
+  if (!storageKey || typeof sessionStorage === 'undefined') return false;
+  try {
+    return sessionStorage.getItem(storageKey) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function writeStoredContextOpen(storageKey: string | undefined, open: boolean): void {
+  if (!storageKey || typeof sessionStorage === 'undefined') return;
+  try {
+    sessionStorage.setItem(storageKey, open ? '1' : '0');
+  } catch {
+    // sessionStorage puede fallar en modo privado estricto
+  }
+}
+
 /** Estado del panel de contexto clínico con preservación de foco en el formulario. */
-export function useEpisClinicalContextPanel(initialOpen = false) {
-  const [contextOpen, setContextOpenState] = useState(initialOpen);
+export function useEpisClinicalContextPanel(options?: UseEpisClinicalContextPanelOptions) {
+  const storageKey = options?.storageKey;
+  const [contextOpen, setContextOpenState] = useState(() => readStoredContextOpen(storageKey));
   const focusSnapshot = useRef<FocusSnapshot | null>(null);
   const { preferences } = useEpis2ThemePreferences();
   const reducedMotion = preferences.motion === 'reduced' || prefersReducedMotion();
@@ -43,8 +67,9 @@ export function useEpisClinicalContextPanel(initialOpen = false) {
     (open: boolean) => {
       if (open) captureFocus();
       setContextOpenState(open);
+      writeStoredContextOpen(storageKey, open);
     },
-    [captureFocus],
+    [captureFocus, storageKey],
   );
 
   useEffect(() => {

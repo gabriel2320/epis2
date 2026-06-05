@@ -6,6 +6,8 @@ import {
 
   blueprintUsesClinicalProse,
 
+  defaultClinicalContextInsertField,
+
   defaultSummaryValues,
 
   initialFormValues,
@@ -151,7 +153,18 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const canUseAiAssist = blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES;
   const clinicalProse = blueprintUsesClinicalProse(blueprint.blueprintId);
   const supportsClinicalContext = blueprintSupportsClinicalContext(blueprint.blueprintId);
-  const { contextOpen, setContextOpen } = useEpisClinicalContextPanel();
+  const contextStorageKey = useMemo(
+    () =>
+      effectivePatientId && supportsClinicalContext
+        ? `epis2-clinical-context:${effectivePatientId}:${blueprint.blueprintId}`
+        : undefined,
+    [effectivePatientId, supportsClinicalContext, blueprint.blueprintId],
+  );
+  const { contextOpen, setContextOpen } = useEpisClinicalContextPanel({ storageKey: contextStorageKey });
+  const defaultContextInsertFieldId =
+    blueprintSupportsClinicalContext(blueprint.blueprintId)
+      ? defaultClinicalContextInsertField(blueprint.blueprintId)
+      : 'plan';
 
 
 
@@ -232,31 +245,29 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
 
 
-  const insertContextFragment = useCallback((payload: ClinicalContextInsertPayload) => {
+  const insertContextFragment = useCallback(
+    (payload: ClinicalContextInsertPayload) => {
+      const fieldId = payload.fieldId ?? defaultContextInsertFieldId;
+      const line = payload.text.trim();
+      if (!line) return;
+      setValues((prev) => {
+        const current = prev[fieldId]?.trim();
+        return {
+          ...prev,
+          [fieldId]: current ? `${current}\n${line}` : line,
+        };
+      });
+      setStatusMessage(copy.clinicalLayout.insertSuccess);
+    },
+    [defaultContextInsertFieldId],
+  );
 
-    const fieldId = payload.fieldId ?? 'plan';
-
-    const line = payload.text.trim();
-
-    if (!line) return;
-
-    setValues((prev) => {
-
-      const current = prev[fieldId]?.trim();
-
-      return {
-
-        ...prev,
-
-        [fieldId]: current ? `${current}\n${line}` : line,
-
-      };
-
-    });
-
-    setStatusMessage(copy.clinicalLayout.insertSuccess);
-
-  }, []);
+  const onClinicalDrop = useCallback(
+    (fieldId: string, payload: { text: string; sourceEventId: string }) => {
+      insertContextFragment({ ...payload, fieldId });
+    },
+    [insertContextFragment],
+  );
 
 
 
@@ -691,6 +702,10 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
                 clinicalProse={clinicalProse}
 
+                clinicalDropEnabled
+
+                onClinicalDrop={onClinicalDrop}
+
                 onChange={onChange}
 
               />
@@ -756,6 +771,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
               <EpisClinicalContextPane
 
                 patientId={effectivePatientId}
+
+                defaultInsertFieldId={defaultContextInsertFieldId}
 
                 onInsertFragment={insertContextFragment}
 

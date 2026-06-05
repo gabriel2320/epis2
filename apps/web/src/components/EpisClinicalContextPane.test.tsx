@@ -24,6 +24,11 @@ vi.mock('../api/aiApi.js', () => ({
   suggestPatientSummary,
 }));
 
+vi.mock('@epis2/epis2-ui', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@epis2/epis2-ui')>();
+  return { ...actual, useEpisClinicalContextDragEnabled: () => true };
+});
+
 afterEach(() => cleanup());
 
 describe('EpisClinicalContextPane', () => {
@@ -82,6 +87,41 @@ describe('EpisClinicalContextPane', () => {
         text: expect.stringContaining('Meropenem'),
       }),
     );
+  });
+
+  it('marca filas de timeline como draggable en desktop', async () => {
+    fetchPatientLongitudinal.mockResolvedValue({
+      patientId,
+      readOnly: true,
+      problems: [],
+      allergies: [],
+      medications: [],
+      observations: [],
+      documents: [],
+      encounters: [],
+      timeline: [
+        {
+          id: 'ev-drag',
+          kind: 'note',
+          at: '2026-05-10T10:00:00.000Z',
+          title: 'Nota arrastrable',
+          detail: 'Detalle',
+        },
+      ],
+    });
+
+    render(
+      <Epis2ThemeProvider>
+        <EpisClinicalContextPane patientId={patientId} onInsertFragment={vi.fn()} />
+      </Epis2ThemeProvider>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('epis2-context-timeline-item-ev-drag')).toBeInTheDocument();
+    });
+
+    const row = screen.getByTestId('epis2-context-timeline-item-ev-drag');
+    expect(row).toHaveAttribute('draggable', 'true');
   });
 
   it('genera resumen de periodo bajo demanda', async () => {

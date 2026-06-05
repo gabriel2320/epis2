@@ -6,6 +6,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Stack from '@mui/material/Stack';
 import { epis2BarLayout } from '../theme/breakpoints.js';
+import type { ClinicalContextDragPayload } from './clinical-context-dnd.js';
 import { EpisClinicalField } from './EpisClinicalField.js';
 
 const clinicalSectionPadding = epis2BarLayout.clinicalPaddingX;
@@ -16,6 +17,9 @@ export type EpisClinicalFormProps = {
   errors?: Record<string, string>;
   /** Textareas con prosa clínica (65ch, line-height 1.5). */
   clinicalProse?: boolean;
+  /** Drop de fragmentos del panel de contexto en textareas (LAYOUT-04). */
+  clinicalDropEnabled?: boolean;
+  onClinicalDrop?: (fieldId: string, payload: ClinicalContextDragPayload) => void;
   onChange: (fieldId: string, value: string) => void;
 };
 
@@ -25,6 +29,8 @@ export function EpisClinicalForm({
   values,
   errors = {},
   clinicalProse = false,
+  clinicalDropEnabled = false,
+  onClinicalDrop,
   onChange,
 }: EpisClinicalFormProps) {
   const fieldMap = new Map(blueprint.fields.map((f) => [f.id, f]));
@@ -49,6 +55,8 @@ export function EpisClinicalForm({
                   field={f}
                   value={values[f.id] ?? ''}
                   clinicalProse={clinicalProse}
+                  clinicalDropEnabled={clinicalDropEnabled}
+                  {...(onClinicalDrop ? { onClinicalDrop } : {})}
                   {...(err ? { error: err } : {})}
                   onChange={onChange}
                 />

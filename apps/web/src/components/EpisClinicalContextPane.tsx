@@ -3,6 +3,7 @@ import type { PatientLongitudinalResponse } from '@epis2/contracts';
 type TimelineEvent = PatientLongitudinalResponse['timeline'][number];
 import { copy } from '@epis2/design-system';
 import {
+  CLINICAL_CONTEXT_DRAG_MIME,
   EpisButton,
   EpisChip,
   List,
@@ -11,6 +12,8 @@ import {
   Stack,
   TextField,
   Typography,
+  serializeClinicalContextDrag,
+  useEpisClinicalContextDragEnabled,
 } from '@epis2/epis2-ui';
 import { useEffect, useMemo, useState } from 'react';
 import { fetchPatientLongitudinal } from '../api/clinicalApi.js';
@@ -25,6 +28,8 @@ export type ClinicalContextInsertPayload = {
 
 export type EpisClinicalContextPaneProps = {
   patientId: string;
+  /** Campo destino por defecto para el chip de inserción. */
+  defaultInsertFieldId?: string;
   onInsertFragment?: (payload: ClinicalContextInsertPayload) => void;
 };
 
@@ -41,9 +46,10 @@ function matchesTimelineQuery(ev: TimelineEvent, query: string): boolean {
   return hay.includes(needle);
 }
 
-/** Panel de consulta clínica — timeline, búsqueda local e inserción (LAYOUT-02). */
+/** Panel de consulta clínica — timeline, búsqueda local e inserción (LAYOUT-02+). */
 export function EpisClinicalContextPane({
   patientId,
+  defaultInsertFieldId = 'plan',
   onInsertFragment,
 }: EpisClinicalContextPaneProps) {
   const [loading, setLoading] = useState(true);
@@ -51,6 +57,8 @@ export function EpisClinicalContextPane({
   const [timeline, setTimeline] = useState<TimelineEvent[]>([]);
   const [search, setSearch] = useState('');
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [draggingId, setDraggingId] = useState<string | null>(null);
+  const dragEnabled = useEpisClinicalContextDragEnabled();
 
   useEffect(() => {
     let cancelled = false;
@@ -145,7 +153,7 @@ export function EpisClinicalContextPane({
               onInsertFragment({
                 text: formatTimelineInsertText(selected),
                 sourceEventId: selected.id,
-                fieldId: 'plan',
+                fieldId: defaultInsertFieldId,
               })
             }
             data-testid="epis2-context-insert-chip"
@@ -176,7 +184,25 @@ export function EpisClinicalContextPane({
       ) : (
         <List dense disablePadding data-testid="epis2-context-timeline-list">
           {filtered.map((ev) => (
-            <ListItemButton key={ev.id} onClick={() => setSelectedId(ev.id)} sx={{ borderRadius: 1 }}>
+            <ListItemButton
+              key={ev.id}
+              draggable={dragEnabled && Boolean(onInsertFragment)}
+              aria-grabbed={draggingId === ev.id ? true : undefined}
+              onDragStart={(e) => {
+                if (!onInsertFragment) return;
+                const text = formatTimelineInsertText(ev);
+                e.dataTransfer.setData(
+                  CLINICAL_CONTEXT_DRAG_MIME,
+                  serializeClinicalContextDrag({ text, sourceEventId: ev.id }),
+                );
+                e.dataTransfer.effectAllowed = 'copy';
+                setDraggingId(ev.id);
+              }}
+              onDragEnd={() => setDraggingId(null)}
+              onClick={() => setSelectedId(ev.id)}
+              sx={{ borderRadius: 1 }}
+              data-testid={`epis2-context-timeline-item-${ev.id}`}
+            >
               <ListItemText
                 primary={ev.title}
                 secondary={`${new Date(ev.at).toLocaleDateString('es-CL')} · ${ev.kind}${ev.detail ? ` — ${ev.detail}` : ''}`}
