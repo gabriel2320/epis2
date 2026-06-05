@@ -104,7 +104,7 @@ export function EpisCommandBar({
       ) : null}
       <EpisButton
         type="submit"
-        variant="contained"
+        appearance="filled"
         size="large"
         fullWidth
         disabled={disabled}

@@ -11,7 +11,7 @@ import { CommandCenterPage } from './CommandCenterPage.js';
 
 function renderCommandCenter() {
   return render(
-    <Epis2ThemeProvider>
+    <Epis2ThemeProvider disablePreferences>
       <ActivePatientProvider>
         <CommandCenterPage />
       </ActivePatientProvider>
@@ -130,6 +130,7 @@ describe('CommandCenterPage', () => {
 
     const user = userEvent.setup();
     renderCommandCenter();
+    await user.click(screen.getByRole('button', { name: copy.commandCenter.showPatientContext }));
     await user.click(screen.getByRole('button', { name: copy.activePatient.pickPatient }));
     await user.click(screen.getByRole('button', { name: 'DEMO-005' }));
 

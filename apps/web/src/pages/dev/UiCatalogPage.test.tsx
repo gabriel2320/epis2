@@ -16,7 +16,7 @@ describe('UiCatalogPage', () => {
     expect(screen.getByTestId('epis2-ui-catalog')).toBeInTheDocument();
     expect(screen.getByText('Catálogo UI EPIS2')).toBeInTheDocument();
     expect(screen.getByText('Paleta')).toBeInTheDocument();
-    expect(screen.getByText('Botones (EpisButton)')).toBeInTheDocument();
+    expect(screen.getByText('Botones M3 (EpisButton)')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /volver al centro de comando/i })).toHaveAttribute(
       'href',
       '/comando',

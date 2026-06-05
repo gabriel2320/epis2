@@ -1,7 +1,6 @@
-export { epis2Theme } from './theme/theme.js';
-export { epis2Palette } from './theme/palette.js';
+export { epis2Theme, createEpis2Theme, epis2Palette, clinicalRoles, epis2Shape, epis2TypographyRoles } from './theme/theme.js';
 export { useTheme } from '@mui/material/styles';
-export { Epis2ThemeProvider, type Epis2ThemeProviderProps } from './providers/Epis2ThemeProvider.js';
+export { Epis2ThemeProvider, type Epis2ThemeProviderProps, useEpis2ThemePreferences } from './providers/Epis2ThemeProvider.js';
 export * from './primitives/index.js';
 export * from './command/index.js';
 export * from './forms/index.js';
@@ -11,4 +10,5 @@ export * from './pickers/index.js';
 export * from './charts/index.js';
 export * from './tree/index.js';
 export * from './dashboard/index.js';
+export * from './feedback/index.js';
 export * from './mui/index.js';

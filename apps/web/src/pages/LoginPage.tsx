@@ -5,10 +5,10 @@ import {
   EpisAuthScreen,
   EpisButton,
   EpisChip,
+  EpisM3Text,
   EpisTextField,
   MenuItem,
   Stack,
-  Typography,
 } from '@epis2/epis2-ui';
 import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
@@ -38,15 +38,14 @@ export function LoginPage() {
 
   return (
     <EpisAuthScreen>
-      <Stack spacing={1} alignItems="center">
-        <Typography variant="h4" color="primary" fontWeight={700}>
+      <Stack spacing={1} alignItems="center" textAlign="center">
+        <EpisM3Text role="displayMedium" color="primary.main" component="p">
           {copy.appName}
-        </Typography>
+        </EpisM3Text>
+        <EpisM3Text role="titleMedium" color="text.secondary">
+          {copy.login.tagline}
+        </EpisM3Text>
         <EpisChip label={copy.demoBadge} size="small" color="warning" variant="outlined" />
-        <Typography variant="h6">{copy.login.title}</Typography>
-        <Typography variant="body2" color="text.secondary" textAlign="center">
-          {copy.login.subtitle}
-        </Typography>
       </Stack>
 
       <EpisTextField
@@ -75,13 +74,13 @@ export function LoginPage() {
 
       {error ? <EpisAlert severity="error">{error}</EpisAlert> : null}
 
-      <EpisButton variant="contained" size="large" onClick={() => void handleSubmit()} disabled={loading}>
+      <EpisButton appearance="filled" size="large" onClick={() => void handleSubmit()} disabled={loading}>
         {loading ? copy.login.submitting : copy.login.submit}
       </EpisButton>
 
-      <EpisAlert severity="info" variant="outlined">
+      <EpisM3Text role="labelMedium" color="text.secondary" textAlign="center" component="p">
         {copy.login.hint}
-      </EpisAlert>
+      </EpisM3Text>
     </EpisAuthScreen>
   );
 }

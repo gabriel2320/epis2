@@ -10,10 +10,12 @@ import { validate as humanApproval } from './human-approval-required.mjs';
 import { validate as fhirBoundary } from './fhir-export-boundary.mjs';
 import { validate as invariants } from './main-product-invariants.mjs';
 import { validate as noDirectMui } from './no-direct-mui-imports.mjs';
+import { validate as singleEpis2Theme } from './single-epis2-theme.mjs';
 
 const VALIDATORS = [
   ['main-product-invariants', invariants],
   ['no-direct-mui-imports', noDirectMui],
+  ['single-epis2-theme', singleEpis2Theme],
   ['no-legacy-dependencies', noLegacy],
   ['single-command-registry', singleCommand],
   ['single-form-registry', singleForm],

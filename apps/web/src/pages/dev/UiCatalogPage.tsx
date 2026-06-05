@@ -1,11 +1,13 @@
-import { epis2Palette, epis2Theme } from '@epis2/epis2-ui';
-import { getBlueprintById, initialFormValues } from '@epis2/clinical-forms';
+import { copy } from '@epis2/design-system';
 import {
+  epis2Palette,
+  epis2Theme,
   Box,
   Divider,
   EpisAiDisclosure,
   EpisAlert,
   EpisApprovalGate,
+  EpisAssistChip,
   EpisButton,
   EpisCard,
   EpisChip,
@@ -16,17 +18,26 @@ import {
   EpisDataGrid,
   EpisDatePicker,
   EpisDraftStatus,
+  EpisEmptyState,
+  EpisFilterChip,
+  EpisLoadingState,
+  EpisM3Text,
+  EpisMetric,
+  EpisSnackbar,
+  EpisTextField,
+  EpisTopAppBar,
   EpisTrendChart,
   EpisTreeView,
   EpisDashboardShell,
-  EpisMetric,
-  EpisEmptyState,
-  EpisLoadingState,
-  EpisTextField,
+  clinicalRoles,
+  epis2Shape,
+  epis2TypographyRoles,
+  useEpis2ThemePreferences,
   type GridColDef,
   Stack,
   Typography,
 } from '@epis2/epis2-ui';
+import { getBlueprintById, initialFormValues } from '@epis2/clinical-forms';
 import { useState, type ReactNode } from 'react';
 
 function CatalogSection({
@@ -70,6 +81,48 @@ function ColorSwatch({ name, hex }: { name: string; hex: string }) {
   );
 }
 
+function ThemePreferencesDemo() {
+  const { preferences, setPreferences } = useEpis2ThemePreferences();
+  return (
+    <Stack spacing={1} data-testid="epis2-catalog-theme-prefs">
+      <EpisM3Text role="titleMedium">{copy.themePreferences.title}</EpisM3Text>
+      <Stack direction="row" flexWrap="wrap" gap={1}>
+        {(
+          [
+            ['clinicalBlue', copy.themePreferences.accentClinicalBlue],
+            ['tealBlue', copy.themePreferences.accentTeal],
+            ['calmGreen', copy.themePreferences.accentGreen],
+            ['soberViolet', copy.themePreferences.accentViolet],
+            ['neutral', copy.themePreferences.accentNeutral],
+          ] as const
+        ).map(([accent, label]) => (
+          <EpisFilterChip
+            key={accent}
+            label={label}
+            active={preferences.accent === accent}
+            clickable
+            onClick={() => setPreferences({ accent })}
+          />
+        ))}
+      </Stack>
+      <Stack direction="row" gap={1}>
+        <EpisFilterChip
+          label={copy.themePreferences.densityComfortable}
+          active={preferences.density === 'comfortable'}
+          clickable
+          onClick={() => setPreferences({ density: 'comfortable' })}
+        />
+        <EpisFilterChip
+          label={copy.themePreferences.densityCompact}
+          active={preferences.density === 'compact'}
+          clickable
+          onClick={() => setPreferences({ density: 'compact' })}
+        />
+      </Stack>
+    </Stack>
+  );
+}
+
 export function UiCatalogPage() {
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -104,6 +157,33 @@ export function UiCatalogPage() {
           </EpisButton>
         </Stack>
 
+        <CatalogSection title="Material 3 Clinical (M3-01…03)">
+          <Stack spacing={2}>
+            <EpisM3Text role="titleMedium">Roles clínicos protegidos</EpisM3Text>
+            <Stack direction="row" flexWrap="wrap" gap={1}>
+              {Object.entries(clinicalRoles).map(([key, role]) => (
+                <EpisChip
+                  key={key}
+                  label={key}
+                  sx={{ bgcolor: role.container, color: role.onContainer, fontWeight: 600 }}
+                />
+              ))}
+            </Stack>
+            <EpisM3Text role="titleMedium">Forma ({epis2Shape.large}px base)</EpisM3Text>
+            <Stack direction="row" flexWrap="wrap" gap={1}>
+              <EpisChip label={`medium ${epis2Shape.medium}px`} />
+              <EpisChip label={`extraLarge ${epis2Shape.extraLarge}px`} />
+              <EpisAssistChip label="assist chip" />
+              <EpisFilterChip label="filter" active />
+            </Stack>
+            <EpisTopAppBar
+              title="Top app bar mínima"
+              endActions={<EpisButton appearance="text">Acción</EpisButton>}
+            />
+            <ThemePreferencesDemo />
+          </Stack>
+        </CatalogSection>
+
         <CatalogSection title="Paleta">
           <Stack direction="row" flexWrap="wrap" gap={2}>
             {colorRows.map((c) => (
@@ -112,28 +192,24 @@ export function UiCatalogPage() {
           </Stack>
         </CatalogSection>
 
-        <CatalogSection title="Tipografía">
+        <CatalogSection title="Tipografía M3">
           <Stack spacing={1}>
-            <Typography variant="h4">h4 — Título comando</Typography>
-            <Typography variant="h5">h5 — Sección clínica</Typography>
-            <Typography variant="h6">h6 — Subsección</Typography>
-            <Typography variant="body1">body1 — Texto clínico principal</Typography>
-            <Typography variant="body2">body2 — Metadatos y ayudas</Typography>
-            <Typography variant="caption">caption — Hints y chips</Typography>
-            <Typography variant="button">button — Etiqueta de acción</Typography>
+            <EpisM3Text role="displayMedium">displayMedium — Centro de Comando</EpisM3Text>
+            <EpisM3Text role="headlineMedium">headlineMedium — Página clínica</EpisM3Text>
+            <EpisM3Text role="titleLarge">titleLarge — Sección</EpisM3Text>
+            <EpisM3Text role="bodyLarge">bodyLarge — Contenido clínico</EpisM3Text>
+            <EpisM3Text role="labelLarge">labelLarge — Campos y botones</EpisM3Text>
           </Stack>
         </CatalogSection>
 
-        <CatalogSection title="Botones (EpisButton)">
+        <CatalogSection title="Botones M3 (EpisButton)">
           <Stack direction="row" flexWrap="wrap" gap={1}>
-            <EpisButton variant="contained">Primario</EpisButton>
-            <EpisButton variant="outlined">Secundario</EpisButton>
-            <EpisButton variant="text">Texto</EpisButton>
-            <EpisButton variant="contained" disabled>
+            <EpisButton appearance="filled">Filled</EpisButton>
+            <EpisButton appearance="tonal">Tonal</EpisButton>
+            <EpisButton appearance="outlined">Outlined</EpisButton>
+            <EpisButton appearance="text">Text</EpisButton>
+            <EpisButton appearance="filled" disabled>
               Deshabilitado
-            </EpisButton>
-            <EpisButton variant="contained" color="error">
-              Error
             </EpisButton>
           </Stack>
         </CatalogSection>

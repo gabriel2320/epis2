@@ -1,6 +1,6 @@
 # EPIS2 — Plan de adopción Material 3 Clinical
 
-**Fase activa:** M3-00 · **Precedente:** MUI-01…MUI-10 completados · **Supersede parcial:** MUI-11
+**Fase activa:** M3-09 (QA signoff humano pendiente) · **Implementación código:** M3-00…M3-08 completadas
 
 ---
 

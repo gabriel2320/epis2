@@ -1,4 +1,7 @@
-export { EpisButton, type EpisButtonProps } from './EpisButton.js';
+export { EpisButton, type EpisButtonProps, type EpisButtonAppearance } from './EpisButton.js';
+export { EpisM3Text, type EpisM3TextProps } from './EpisM3Text.js';
+export { EpisTopAppBar, type EpisTopAppBarProps } from './EpisTopAppBar.js';
+export { EpisAssistChip, EpisFilterChip, type EpisAssistChipProps, type EpisFilterChipProps } from './EpisM3Chips.js';
 export { EpisIconButton, type EpisIconButtonProps } from './EpisIconButton.js';
 export { EpisTextField, type EpisTextFieldProps } from './EpisTextField.js';
 export { EpisSelect, type EpisSelectProps } from './EpisSelect.js';

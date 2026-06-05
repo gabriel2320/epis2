@@ -4,6 +4,7 @@ export const copy = {
   demoBadge: 'DEMO / SINTÉTICO',
   login: {
     title: 'Iniciar sesión',
+    tagline: 'Inteligencia clínica local',
     subtitle: 'Entorno de demostración — sin datos reales',
     submit: 'Entrar al Centro de Comando',
     submitting: 'Entrando…',
@@ -37,6 +38,8 @@ export const copy = {
     clinicalAlertsLoading: 'Evaluando alertas…',
     alertSourceCds: 'CDS',
     alertSourceCdr: 'CDR',
+    showPatientContext: 'Mostrar contexto de paciente',
+    hidePatientContext: 'Ocultar contexto de paciente',
   },
   layout: {
     backToCommand: 'Volver al Centro de Comando',
@@ -246,6 +249,21 @@ export const copy = {
     pharmacist: 'Farmacia',
     admin: 'Administración',
     auditor: 'Auditoría',
+  },
+  themePreferences: {
+    title: 'Personalización M3 (demo)',
+    accent: 'Acento',
+    density: 'Densidad',
+    motion: 'Movimiento',
+    accentClinicalBlue: 'Azul clínico',
+    accentTeal: 'Azul petróleo',
+    accentGreen: 'Verde calmado',
+    accentViolet: 'Violeta sobrio',
+    accentNeutral: 'Neutro',
+    densityComfortable: 'Cómoda',
+    densityCompact: 'Compacta',
+    motionStandard: 'Estándar',
+    motionReduced: 'Reducido',
   },
 } as const;
 

@@ -1,7 +1,7 @@
 import { getCommandChipsForRole } from '@epis2/command-registry';
 import { copy } from '@epis2/design-system';
 import { AutoAwesomeIcon } from '../mui/index.js';
-import { EpisChip } from '../primitives/EpisChip.js';
+import { EpisAssistChip } from '../primitives/EpisM3Chips.js';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
@@ -31,15 +31,13 @@ export function EpisCommandSuggestions({
           </Typography>
           <Stack direction="row" flexWrap="wrap" gap={1} justifyContent="center">
             {aiChips.map((chip) => (
-              <EpisChip
+              <EpisAssistChip
                 key={chip.id}
                 icon={<AutoAwesomeIcon />}
                 label={chip.sampleEs}
-                variant="outlined"
                 color="success"
                 clickable
                 onClick={() => onSelect(chip.sampleEs)}
-                sx={{ borderRadius: 999 }}
               />
             ))}
           </Stack>
@@ -51,14 +49,12 @@ export function EpisCommandSuggestions({
         </Typography>
         <Stack direction="row" flexWrap="wrap" gap={1} justifyContent="center">
           {roleChips.map((chip) => (
-            <EpisChip
+            <EpisAssistChip
               key={chip.id}
               label={chip.sampleEs}
               title={chip.labelEs}
-              variant="outlined"
               clickable
               onClick={() => onSelect(chip.sampleEs)}
-              sx={{ borderRadius: 999 }}
             />
           ))}
         </Stack>

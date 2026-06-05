@@ -1,12 +1,14 @@
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material/styles';
 import type { ReactNode } from 'react';
+import { EpisButton } from '../primitives/EpisButton.js';
+import { EpisChip } from '../primitives/EpisChip.js';
+import { EpisM3Text } from '../primitives/EpisM3Text.js';
+import { epis2Shape } from '../theme/shape.js';
 
 export type EpisDashboardTab = {
   value: string;
@@ -43,27 +45,50 @@ export function EpisDashboardShell({
   maxWidth = 960,
   'data-testid': testId,
 }: EpisDashboardShellProps) {
+  const theme = useTheme();
+  const surfaces = theme.epis2?.surfaces;
+
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default', px: 2, py: 3 }}>
-      <Stack spacing={3} sx={{ maxWidth, mx: 'auto' }} data-testid={testId}>
+    <Box
+      sx={{
+        minHeight: '100vh',
+        bgcolor: surfaces?.surfaceContainer ?? 'background.default',
+        px: { xs: 2, md: 3 },
+        py: 3,
+      }}
+    >
+      <Stack
+        spacing={3}
+        sx={{
+          maxWidth,
+          mx: 'auto',
+          p: { xs: 0, md: 2 },
+          borderRadius: epis2Shape.large,
+        }}
+        data-testid={testId}
+      >
         <Stack direction="row" justifyContent="space-between" alignItems="flex-start" flexWrap="wrap" gap={1}>
           <Box>
-            <Typography variant="h5" component="h1">
+            <EpisM3Text role="titleLarge" component="h1">
               {title}
-            </Typography>
+            </EpisM3Text>
             {subtitle ? (
-              <Typography variant="body2" color="text.secondary">
+              <EpisM3Text role="bodyMedium" color="text.secondary">
                 {subtitle}
-              </Typography>
+              </EpisM3Text>
             ) : null}
           </Box>
-          <Button variant="outlined" data-testid="epis2-back-to-command" onClick={onBackToCommand}>
+          <EpisButton
+            appearance="outlined"
+            data-testid="epis2-back-to-command"
+            onClick={onBackToCommand}
+          >
             {backLabel}
-          </Button>
+          </EpisButton>
         </Stack>
 
         {demoBadge ? (
-          <Chip
+          <EpisChip
             label={demoBadge}
             size="small"
             color="warning"
@@ -72,25 +97,44 @@ export function EpisDashboardShell({
           />
         ) : null}
 
-        <Tabs value={activeTab} onChange={(_, v) => onTabChange(String(v))} variant="scrollable">
-          {tabs.map((t) => (
-            <Tab
-              key={t.value}
-              label={t.label}
-              value={t.value}
-              {...(t['data-testid'] ? { 'data-testid': t['data-testid'] } : {})}
-            />
-          ))}
-        </Tabs>
+        <Box
+          sx={{
+            bgcolor: surfaces?.surface ?? 'background.paper',
+            borderRadius: epis2Shape.medium,
+            border: 1,
+            borderColor: surfaces?.outlineVariant ?? 'divider',
+          }}
+        >
+          <Tabs value={activeTab} onChange={(_, v) => onTabChange(String(v))} variant="scrollable">
+            {tabs.map((t) => (
+              <Tab
+                key={t.value}
+                label={t.label}
+                value={t.value}
+                {...(t['data-testid'] ? { 'data-testid': t['data-testid'] } : {})}
+              />
+            ))}
+          </Tabs>
+        </Box>
 
-        {children}
+        <Box
+          sx={{
+            bgcolor: surfaces?.surface ?? 'background.paper',
+            borderRadius: epis2Shape.large,
+            p: { xs: 1, md: 2 },
+            border: 1,
+            borderColor: surfaces?.outlineVariant ?? 'divider',
+          }}
+        >
+          {children}
+        </Box>
 
         {showFooterBack ? (
           <>
             <Divider />
-            <Button variant="text" onClick={onBackToCommand}>
+            <EpisButton appearance="text" onClick={onBackToCommand}>
               {backLabel}
-            </Button>
+            </EpisButton>
           </>
         ) : null}
       </Stack>
