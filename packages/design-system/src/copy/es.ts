@@ -76,6 +76,22 @@ export const copy = {
     metricPendingReview: 'Pendientes de revisión',
     metricDemoTasks: 'Sugerencias demo',
   },
+  schedulerSpike: {
+    title: 'Spike Scheduler (MUI-10)',
+    subtitle: 'Evaluación aislada — datos sintéticos, sin API de citas',
+    evalBanner:
+      'LIC-007 en estado EVALUATE: no usar en flujos clínicos ni menú principal hasta aprobación de producto y modelo Appointment.',
+    calendarTitle: 'Event Calendar (Community, alpha v9)',
+    calendarHint: 'Vista semanal con recursos demo (boxes). Solo lectura en este spike.',
+    loading: 'Cargando calendario…',
+    findingsTitle: 'Hallazgos del spike',
+    findings: [
+      '@mui/x-scheduler 9.0.0-alpha.4 (MIT Community) instalado con peer deps MUI 7+; stack EPIS2 usa MUI 6 — requiere alineación antes de producción.',
+      'API alpha: posibles breaking changes hasta release estable (julio 2026 estimado por MUI).',
+      'Premium aporta recurrencia, timeline denso y lazy loading — no incluido en este spike.',
+      'Sin modelo API Appointment/recursos en EPIS2: alternativa Community = lista + DatePicker (LIC-007).',
+    ],
+  },
   ai: {
     panelTitle: 'Asistencia clínica (IA local)',
     statusOn: 'Ollama disponible',

@@ -10,6 +10,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./scheduler": {
+      "types": "./dist/scheduler/index.d.ts",
+      "import": "./dist/scheduler/index.js"
     }
   },
   "scripts": {
@@ -27,6 +31,7 @@
     "@mui/x-charts": "^7.29.1",
     "@mui/x-data-grid": "^7.29.13",
     "@mui/x-date-pickers": "^7.29.4",
+    "@mui/x-scheduler": "^9.0.0-alpha.4",
     "@mui/x-tree-view": "^7.29.10",
     "dayjs": "^1.11.21"
   },

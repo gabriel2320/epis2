@@ -16,10 +16,16 @@ import { PatientWorkspacePage } from '../pages/PatientWorkspacePage.js';
 import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
 import { isUiCatalogEnabled } from '../dev/uiCatalogEnv.js';
+import { isSchedulerSpikeEnabled } from '../dev/schedulerSpikeEnv.js';
 import { UiCatalogPage } from '../pages/dev/UiCatalogPage.js';
+import { SchedulerSpikePage } from '../pages/dev/SchedulerSpikePage.js';
 
 const DashboardModePage = lazy(() =>
   import('../pages/DashboardModePage.js').then((m) => ({ default: m.DashboardModePage })),
+);
+
+const LazySchedulerSpikePage = lazy(() =>
+  import('../pages/dev/SchedulerSpikePage.js').then((m) => ({ default: m.SchedulerSpikePage })),
 );
 
 async function requireSession() {
@@ -203,10 +209,24 @@ const uiCatalogRoute = createRoute({
   },
 });
 
+/** Spike Scheduler MUI-10 (LIC-007 EVALUATE): solo dev o VITE_ENABLE_SCHEDULER_SPIKE=true. */
+const schedulerSpikeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/dev/scheduler-spike',
+  component: LazySchedulerSpikePage,
+  beforeLoad: async () => {
+    if (!isSchedulerSpikeEnabled()) {
+      throw redirect({ to: '/comando' });
+    }
+    await requireSession();
+  },
+});
+
 export const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
   uiCatalogRoute,
+  schedulerSpikeRoute,
   commandCenterRoute,
   dashboardModeRoute,
   clinicalLayoutRoute.addChildren([

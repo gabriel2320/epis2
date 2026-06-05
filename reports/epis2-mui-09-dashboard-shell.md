@@ -20,4 +20,4 @@
 
 ## Próximo paso
 
-**MUI-10:** evaluación Scheduler (spike aislado, sin merge sin licencia).
+**MUI-11:** rendimiento, bundle y gates CI de licencias.
