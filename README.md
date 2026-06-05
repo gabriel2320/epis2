@@ -81,7 +81,9 @@ En el Centro de Comando verás el chip **IA local** en verde cuando Ollama y `de
 **Plan B (WIDGET-01)** ✓ — `reports/epis2-widget-01-mount.md`.  
 **Plan C (V1 completo)** ✓ — `reports/epis2-v1-plan-c-complete.md`.  
 **Plan D (V2 slice)** ✓ — ingreso/traslado/alta — `reports/epis2-v2-plan-d-slice.md`.  
-**Siguiente:** Plan G (CI bundle) o signoff piloto — `reports/epis2-plan-f-slice-3.md`. V3: `reports/epis2-v3-plan-e-slice.md`.
+**Plan E (V3)** ✓ — `reports/epis2-v3-plan-e-slice.md`.  
+**Plan F (V4/V5 + hardening)** ✓ — `reports/epis2-plan-f-complete.md`.  
+**Plan G (CI calidad)** ✓ — `reports/epis2-plan-g-complete.md`.
 
 Demo en vivo:
 

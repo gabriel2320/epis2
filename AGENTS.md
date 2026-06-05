@@ -29,8 +29,8 @@ Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.
 ## Fases
 
 ```text
-EPIS2-00 ✓ … EPIS2-12 ✓ · MUI-01…10 ✓ · M3-00…09 ✓ · GO DEMO ✓ · Plan A ✓ · WIDGET-01 ✓ · Plan C ✓ · Plan D slice ✓
-Siguiente: Plan G o signoff piloto — reports/epis2-plan-f-slice-3.md. V3: reports/epis2-v3-plan-e-slice.md
+EPIS2-00 ✓ … EPIS2-12 ✓ · MUI-01…10 ✓ · M3-00…09 ✓ · GO DEMO ✓ · Plan A–G ✓
+Planes F+G cerrados: reports/epis2-plan-f-complete.md · reports/epis2-plan-g-complete.md
 ```
 
 ## Memoria legacy

@@ -40,6 +40,6 @@ npm run check && npm run test && npm run db:validate && npm run ai:evals
 
 Slice 3: `reports/epis2-plan-f-slice-3.md` (RLS transacciones + auth híbrida).
 
-## Próximo
+## Cierre
 
-**Plan G** (CI bundle) o signoff piloto Plan F.
+Plan F+G: `reports/epis2-plan-f-complete.md` · `reports/epis2-plan-g-complete.md`

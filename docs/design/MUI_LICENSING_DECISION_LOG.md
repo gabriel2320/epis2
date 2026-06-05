@@ -25,7 +25,7 @@ MUI X Community es gratuito (MIT). Data Grid, Charts y otras familias incluyen c
 | LIC-004 | 2026-06-04 | Date Pickers | Community | `APPROVED` | Encuentro, órdenes lab/imagen | EPIS2-MUI-06 | `EpisDatePicker` + dayjs `es` |
 | LIC-005 | 2026-06-04 | Charts | Community | `APPROVED` | INR DEMO-005, FC, KPI servicio | EPIS2-MUI-07 | `EpisTrendChart` Community |
 | LIC-006 | 2026-06-04 | Tree View | Community | `APPROVED` | Documentos, navegación longitudinal | EPIS2-MUI-08 | `EpisTreeView` Community |
-| LIC-007 | 2026-06-04 | Scheduler | Community alpha v9 (`EventCalendar`) | `EVALUATE` | Agenda hospitalaria | EPIS2-MUI-10 | Spike `/dev/scheduler-spike`; peer MUI 7+ vs stack MUI 6; sin API Appointment; Premium = recurrencia/timeline |
+| LIC-007 | 2026-06-04 | Scheduler | Community lista + `EpisDatePicker` (MVP) | `APPROVED` | Agenda hospitalaria demo | EPIS2-MUI-10 | **Plan G:** sin Scheduler Pro/Premium en V1–V5; spike `EventCalendar` solo `/dev/scheduler-spike`; producción = worklist + DatePicker hasta modelo Appointment |
 | LIC-008 | 2026-06-04 | Material UI Core | MIT (open) | `APPROVED` | Todo el frontend | Arquitectura | Ya en uso |
 
 ---

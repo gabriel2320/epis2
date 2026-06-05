@@ -35,6 +35,6 @@ npm run quality:golden-journey   # DATABASE_URL
 
 Slice 2: `reports/epis2-plan-f-slice-2.md` (RLS piloto, evals, rate limits ampliados).
 
-## Próximo
+## Cierre
 
-Plan F slice 3: cablear RLS en transacciones + auth real, o **Plan G** (CI bundle analyze).
+Plan F completo: `reports/epis2-plan-f-complete.md`

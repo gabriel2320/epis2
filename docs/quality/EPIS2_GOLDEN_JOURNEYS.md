@@ -32,7 +32,7 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 ### Gate
 
 - `npm run check` verde.
-- `npm run quality:golden-journey` cuando DB disponible.
+- `npm run quality:golden-journey` cuando DB disponible (V0–V5 API + spec; CI en cada push).
 - Ollama apagado: pasos 1–10 obligatorios; 11–13 tras EPIS2-12.
 
 ---

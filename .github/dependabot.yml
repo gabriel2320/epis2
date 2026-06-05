@@ -1,0 +1,16 @@
+# Plan G — actualizaciones de dependencias npm (raíz del monorepo)
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      epis2-production:
+        patterns:
+          - '*'
+        update-types:
+          - minor
+          - patch

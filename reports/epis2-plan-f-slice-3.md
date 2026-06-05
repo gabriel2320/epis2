@@ -35,6 +35,6 @@ npm run check && npm run test && npm run db:validate && npm run ai:evals
 - OIDC producción (ADR-006 completo)
 - Observabilidad métricas/tracing
 
-## Próximo
+## Cierre
 
-**Plan G** (CI bundle analyze) o cierre Plan F con signoff piloto.
+Plan F signoff: `reports/epis2-plan-f-complete.md`
