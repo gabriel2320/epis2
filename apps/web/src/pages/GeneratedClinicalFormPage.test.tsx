@@ -4,9 +4,9 @@
 import { getBlueprintById } from '@epis2/clinical-forms';
 import { copy } from '@epis2/design-system';
 import { Epis2ThemeProvider } from '@epis2/epis2-ui';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
 import { GeneratedClinicalFormPage } from './GeneratedClinicalFormPage.js';
 
@@ -23,6 +23,10 @@ vi.mock('../api/client.js', () => ({
   },
 }));
 
+const { fetchPatientLongitudinal } = vi.hoisted(() => ({
+  fetchPatientLongitudinal: vi.fn(),
+}));
+
 vi.mock('../api/clinicalApi.js', () => ({
   listPatients: vi.fn().mockResolvedValue({ patients: [] }),
   fetchPatientDetail: vi.fn().mockResolvedValue({
@@ -36,6 +40,7 @@ vi.mock('../api/clinicalApi.js', () => ({
     clinicalContext: { summaryFields: {} },
     notes: [],
   }),
+  fetchPatientLongitudinal,
 }));
 
 vi.mock('@mui/material/useMediaQuery', () => ({
@@ -58,6 +63,28 @@ vi.mock('../auth/AuthContext.js', () => ({
 }));
 
 afterEach(() => cleanup());
+
+beforeEach(() => {
+  fetchPatientLongitudinal.mockResolvedValue({
+    patientId: '00000000-0000-4000-8000-000000000099',
+    readOnly: true,
+    problems: [],
+    allergies: [],
+    medications: [],
+    observations: [],
+    documents: [],
+    encounters: [],
+    timeline: [
+      {
+        id: 'tl-1',
+        kind: 'note',
+        at: '2026-05-01T12:00:00.000Z',
+        title: 'Nota previa demo',
+        detail: 'Continuar antibiótico',
+      },
+    ],
+  });
+});
 
 const evolutionBlueprint = getBlueprintById('evolution_note');
 if (!evolutionBlueprint) {
@@ -120,6 +147,9 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
 
     await user.click(screen.getByTestId('epis2-clinical-context-toggle'));
 
-    expect(screen.getByTestId('epis2-clinical-context-pane')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByTestId('epis2-context-timeline-list')).toBeInTheDocument();
+    });
+    expect(screen.getByText('Nota previa demo')).toBeInTheDocument();
   });
 });

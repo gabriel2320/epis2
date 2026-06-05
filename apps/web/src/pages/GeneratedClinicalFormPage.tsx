@@ -72,7 +72,10 @@ import {
 
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
 
-import { EpisClinicalContextPanePlaceholder } from '../components/EpisClinicalContextPanePlaceholder.js';
+import {
+  EpisClinicalContextPane,
+  type ClinicalContextInsertPayload,
+} from '../components/EpisClinicalContextPane.js';
 
 import { ClinicalPageNav } from '../components/ClinicalPageNav.js';
 
@@ -214,6 +217,34 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       return next;
 
     });
+
+  }, []);
+
+
+
+  const insertContextFragment = useCallback((payload: ClinicalContextInsertPayload) => {
+
+    const fieldId = payload.fieldId ?? 'plan';
+
+    const line = payload.text.trim();
+
+    if (!line) return;
+
+    setValues((prev) => {
+
+      const current = prev[fieldId]?.trim();
+
+      return {
+
+        ...prev,
+
+        [fieldId]: current ? `${current}\n${line}` : line,
+
+      };
+
+    });
+
+    setStatusMessage(copy.clinicalLayout.insertSuccess);
 
   }, []);
 
@@ -698,7 +729,21 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
           }
 
-          contextPane={<EpisClinicalContextPanePlaceholder />}
+          contextPane={
+
+            effectivePatientId ? (
+
+              <EpisClinicalContextPane
+
+                patientId={effectivePatientId}
+
+                onInsertFragment={insertContextFragment}
+
+              />
+
+            ) : null
+
+          }
 
           contextOpen={contextOpen}
 

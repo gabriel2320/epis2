@@ -25,8 +25,8 @@ Post-M3: lazy barrels MUI X, modo oscuro piloto, `qa:bundle-analyze` — ver `re
 **Siguiente frontera layout clínico:**
 
 ```text
-LAYOUT-01  Two-pane Enfoque ↔ Contexto (evolución, epicrisis)   ← diseño en EPIS2_CLINICAL_TWO_PANE_LAYOUT.md
-LAYOUT-02  Panel consulta + inserción chip
+LAYOUT-01  Two-pane Enfoque ↔ Contexto (evolución, epicrisis)   ← completado
+LAYOUT-02  Panel consulta + inserción chip                      ← completado
 LAYOUT-03  IA invisible + resumen periodo bajo demanda
 LAYOUT-04  Drag & drop + blueprints adicionales
 ```

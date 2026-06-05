@@ -1,7 +1,7 @@
 # EPIS2 — Diseño clínico two-pane (Enfoque ↔ Contexto)
 
 **Versión:** 1.0 · **Fase:** LAYOUT-01 (diseño) · **Fecha:** 2026-06-05  
-**Estado:** LAYOUT-01 implementado (shell); LAYOUT-02 pendiente (timeline real)  
+**Estado:** LAYOUT-01–02 implementados; LAYOUT-03 pendiente (IA resumen periodo)  
 **Patrón M3:** [Canonical Layout — Two-pane](https://m3.material.io/foundations/layout/canonical-layouts/two-pane)
 
 ---

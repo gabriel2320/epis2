@@ -288,6 +288,10 @@ export const copy = {
     contextPanePlaceholder:
       'Aquí verás consultas previas, laboratorios y medicación. Disponible en la siguiente fase del layout clínico.',
     contextSearchPlaceholder: 'Buscar en historial del paciente…',
+    contextSearchNoResults: 'Sin coincidencias en el historial del paciente.',
+    contextBackToList: 'Volver al historial',
+    insertIntoPlan: 'Añadir al plan actual',
+    insertSuccess: 'Fragmento añadido al plan — revisa antes de guardar.',
   },
   errors: {
     genericTitle: 'Algo salió mal',
