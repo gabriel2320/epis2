@@ -29,7 +29,7 @@ Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.
 ## Fases
 
 ```text
-EPIS2-00 ✓ … EPIS2-11 ✓ (MVP v1)
+EPIS2-00 ✓ … EPIS2-12 ✓ · MUI-01…10 ✓ · M3-00…09 ✓
 ```
 
 ## Memoria legacy

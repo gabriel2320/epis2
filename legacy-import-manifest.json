@@ -1,13 +1,14 @@
 {
   "version": 1,
   "destination": "EPIS2",
-  "auditedAt": "2026-06-04",
+  "auditedAt": "2026-06-05",
   "productPlan": {
     "document": "reports/epis2-complete-emr-product-plan.md",
     "roadmap": "docs/product/EPIS2_RELEASE_ROADMAP.md",
     "reuseMatrix": "docs/legacy/EPIS_EPIDOS_EPIONE_CAPABILITY_REUSE_MATRIX.md",
     "activeProductVersion": "V0",
-    "nextImplementationPhase": "EPIS2-12"
+    "activeExperienceTrack": "M3-09",
+    "nextImplementationPhase": "PILOT-HUMAN"
   },
   "donorRepositories": {
     "EPIS": {

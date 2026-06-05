@@ -106,6 +106,22 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 ---
 
+## EPIS2-12 — Modo tablero secundario ✓
+
+**Entregables:** `/epis2/dashboard` (Mi trabajo / Paciente / Servicio / Calidad), lazy MUI X, «Volver al Centro de Comando».
+
+**Gate:** Tablero no es home; una vía de retorno al Comando. — `reports/epis2-12-dashboard-mode.md`
+
+**Experiencia M3:** track M3-00…09 completado en paralelo — `docs/design/M3_ADOPTION_PLAN.md`
+
+---
+
+## Frontera actual (post-MVP v1 + M3)
+
+**PILOT-HUMAN:** ejecutar checklist de piloto demo y registrar GO DEMO | PASS WITH FIXES en `reports/`.
+
+---
+
 ## Spike opcional (paralelo, no bloqueante)
 
 **ADR-001:** Comparar backend propio vs Medplum — ver `DECISIONS.md`. No sustituye EPIS2-04 sin decisión explícita.

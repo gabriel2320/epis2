@@ -1,6 +1,6 @@
 # EPIS2 — Auditoría de proyecto
 
-**Fecha:** 2026-06-05 · **Commit:** `da61d4c` · **Remote:** https://github.com/gabriel2320/epis2 (privado)
+**Fecha:** 2026-06-05 (actualizado post-P0) · **Commit:** `0caa0f6` · **Remote:** https://github.com/gabriel2320/epis2 (privado)
 
 ---
 
@@ -9,149 +9,97 @@
 | Área | Veredicto |
 |------|-----------|
 | Canon de producto / invariantes | **OK** — 12 gates arquitectónicos verdes |
-| Calidad técnica local | **OK** — check, test, db:validate |
-| Seguridad dependencias | **OK** — `drizzle-orm` ≥ 0.45.2 (2026-06-05) |
-| CI GitHub | **OK** — Postgres + migrate + golden journey en pipeline |
-| Documentación vs código | **Deriva menor** — README y manifiesto legacy desactualizados |
-| Piloto clínico humano | **Pendiente** — checklist en `PILOT_DEMO_CHECKLIST.md` |
+| Calidad técnica | **OK** — check, test (182/182 con DB), db:validate |
+| Seguridad dependencias | **OK** — `drizzle-orm` 0.45.2; `npm audit --omit=dev` = 0 CVE |
+| CI GitHub | **OK** — Postgres 16 + migrate + golden journey (`0caa0f6`) |
+| Documentación vs código | **OK** — README, ROADMAP, manifiesto, M3 plan, AGENTS (2026-06-05) |
+| Piloto clínico humano | **Pendiente** — `PILOT_DEMO_CHECKLIST.md` |
 
-**Veredicto global:** repositorio **apto para demo técnica y piloto controlado**, no para producción clínica real sin cerrar seguridad DB, CI completo y signoff humano del journey dorado.
+**Veredicto global:** repositorio **apto para demo técnica y piloto controlado**. Producción clínica real requiere signoff humano del journey y hardening operativo (P1/P2).
 
 ---
 
-## Gates ejecutados (2026-06-05)
+## Cambios desde auditoría inicial (misma fecha)
+
+| Ítem | Antes (`da61d4c`) | Ahora (`0caa0f6`) |
+|------|-------------------|-------------------|
+| CVE `drizzle-orm` | 1 high | **Cerrado** — ^0.45.2 |
+| Tests skipped | 10 (sin DB) | **0** con `DATABASE_URL` |
+| CI Postgres | No | **Sí** — servicio + `db:migrate` |
+| `quality:golden-journey` en CI | No | **Sí** |
+| `qa:bundle-analyze` en CI | No | Sigue pendiente (P2) |
+
+---
+
+## Gates (2026-06-05, con Postgres local)
 
 | Gate | Resultado |
 |------|-----------|
-| `npm run check` | OK (lint + typecheck + `architecture:validate`) |
-| `npm test` | 172 passed · 10 skipped (182 total) |
+| `npm run check` | OK |
+| `npm test` | **182 passed**, 0 skipped |
 | `npm run db:validate` | OK — 18 migraciones |
-| `npm run qa:bundle-analyze` | OK (última sesión M3-09) |
+| `npm run quality:golden-journey` | 7 passed (spec + API) |
+| `npm audit --omit=dev` | 0 vulnerabilities |
+| `npm run qa:bundle-analyze` | OK (sesión M3-09) |
 
-### Validadores arquitectónicos (12/12)
-
-`main-product-invariants`, `no-direct-mui-imports`, `single-epis2-theme`, `no-legacy-dependencies`, `single-command-registry`, `single-form-registry`, `command-center-home`, `spanish-visible-copy`, `explicit-permissions`, `ai-write-boundary`, `human-approval-required`, `fhir-export-boundary`.
-
----
-
-## Cumplimiento de producto
-
-| Invariante clave | Evidencia |
-|------------------|-----------|
-| Home = Centro de Comando | `/` → redirect; `/comando` canónico; validator `command-center-home` |
-| No dashboard como home | Tablero en `/epis2/dashboard` secundario con «Volver al Comando» |
-| Un Command Registry | `packages/command-registry` único |
-| Un Form Registry | `packages/clinical-forms` único |
-| IA no aprueba | `ai-write-boundary`; borrador → aprobación humana |
-| PostgreSQL SoT | Drizzle + 18 migraciones; sin OpenMRS en deps |
-| UI español | `packages/design-system/src/copy/es.ts` + validator |
-| Sin legacy UI | Sin OpenMRS/Carbon en `package.json` ni imports |
-
-**Material 3 Clinical:** M3-00…M3-09 implementados; signoff en `reports/epis2-m3-09-qa-signoff.md`.
+CI push `0caa0f6`: https://github.com/gabriel2320/epis2/actions/runs/26989138493
 
 ---
 
-## Estructura del monorepo
+## Producto e invariantes
 
-| Capa | Paquetes / apps |
-|------|-----------------|
-| UI | `apps/web`, `@epis2/epis2-ui`, `@epis2/design-system` |
-| Dominio | `@epis2/clinical-domain`, `@epis2/command-registry`, `@epis2/clinical-forms` |
-| API | `apps/api` (Fastify) |
-| IA local | `services/local-ai` (Ollama) |
-| Datos | `database/` (SQL migrations) |
-| Interop | `@epis2/fhir-export` (frontera API) |
-
-Fases EPIS2-00…12 completadas según README y reportes en `reports/`.
+Cumple canon EPIS2: home = `/comando`, command-first, IA no aprueba, PostgreSQL SoT, UI español, sin OpenMRS/Carbon, M3-00…M3-09 con signoff QA.
 
 ---
 
-## Tests — cobertura y huecos
+## Fortalezas
 
-| Tipo | Estado |
-|------|--------|
-| Unit / component | 69 archivos activos |
-| Golden journey (spec) | 6 tests — **pasa** |
-| Golden journey (API) | **skipped** sin `DATABASE_URL` |
-| Integración API (7 suites) | **skipped** sin Postgres en CI local |
-
-**Riesgo:** CI en GitHub no levanta Postgres → integraciones y journey API no se ejecutan en remoto. Solo smoke unitario + arquitectura.
+- Monorepo EPIS2-00…12 + MUI + Material 3 Clinical
+- 12 validadores arquitectónicos automatizados
+- Golden journey spec **y API** verdes con Postgres
+- 7 suites de integración API activas con DB
+- Lazy barrels MUI X; presupuestos dentro de límites
+- Modo oscuro piloto; contraste WCAG en roles críticos
 
 ---
 
-## Bundle frontend (M3-09)
+## Riesgos restantes (priorizados)
+
+### P1 — Piloto humano
+Ejecutar `docs/quality/PILOT_DEMO_CHECKLIST.md` y registrar GO DEMO / PASS WITH FIXES.
+
+### P1 — UX modo oscuro
+Toggle en Comando; falta revisión en formularios y tablero.
+
+### ~~P2 — Documentación~~ ✓ 2026-06-05
+README, `legacy-import-manifest.json`, `M3_ADOPTION_PLAN.md`, `ROADMAP.md`, `AGENTS.md`.
+
+### P2 — CI bundle budget
+Añadir `qa:bundle-analyze` al pipeline con fallo si excede presupuesto.
+
+### P3 — Deuda
+- Scheduler MUI X 9 alpha (MUI 7+ peer) — solo `/dev/scheduler-spike`
+- `mui-core` ~164 KB gzip (date pickers en entry)
+
+---
+
+## Bundle (M3-09)
 
 | Chunk | gzip | Límite |
 |-------|------|--------|
-| App entry | ~110.6 KB | — |
-| mui-core (+ date pickers) | ~163.9 KB | monitorear |
-| mui-x-grid | 98.3 KB | 150 KB ✓ |
-| mui-x-charts | 60.7 KB | 120 KB ✓ |
-| mui-x-other | 11.9 KB | 100 KB ✓ |
-| mui-x-scheduler | 77.7 KB | 200 KB ✓ (solo dev spike) |
-
-Lazy barrels MUI X: OK, sin warnings static+dynamic.
+| Entry app | ~111 KB | — |
+| mui-x-grid | 98 KB | 150 KB ✓ |
+| mui-x-charts | 61 KB | 120 KB ✓ |
+| mui-core | 164 KB | monitorear |
 
 ---
 
-## Seguridad y secretos
+## Próximo paso recomendado
 
-| Ítem | Estado |
-|------|--------|
-| `.env` en repo | No — solo `.env.example` |
-| PHI real | Prohibido por canon; datos demo sintéticos |
-| `npm audit` (prod) | **1 high** — `drizzle-orm` < 0.45.2 (SQL identifier injection GHSA-gpj5-g38j-94v9) |
-
-**Acción recomendada:** planificar upgrade `drizzle-orm` → ≥0.45.2 con prueba de regresión en queries Drizzle.
-
----
-
-## Legacy / frontera EPIS
-
-- `legacy-import-manifest.json` presente con entradas trazadas.
-- Donantes referenciados: EPIS, EPIDOS, EPIONE (paths locales).
-- **Deriva:** `nextImplementationPhase: "EPIS2-12"` en manifiesto — debería reflejar post-M3 o V-next del roadmap producto.
-
----
-
-## Deuda técnica conocida
-
-1. **Scheduler MUI X 9 alpha** — peer deps MUI 7+; stack en MUI 6; solo `/dev/scheduler-spike` (EVALUATE).
-2. **Modo oscuro** — activo en Comando; falta revisión UX/contraste en formularios y tablero completo.
-3. **mui-core inflado** — date pickers siempre en entry vía `Epis2ThemeProvider`.
-4. **README** — no menciona fases MUI-01…10 ni M3; roadmap header dice EPIS2-11 max.
-5. **CI** — no incluye `qa:bundle-analyze` ni `quality:golden-journey`; sin servicio Postgres.
-
----
-
-## CI GitHub
-
-Workflow: `.github/workflows/ci.yml` — `npm ci`, `check`, `test`, `db:validate`.
-
-Push `da61d4c` — **CI verde** (check + test + db:validate). Ampliar pipeline recomendado:
-
-```yaml
-- run: npm run qa:bundle-analyze
-- services: postgres …
-- run: npm run quality:golden-journey
-```
-
----
-
-## Próximos pasos (priorizados)
-
-1. ~~**P0** — Actualizar `drizzle-orm` (CVE alta).~~ ✓ 2026-06-05
-2. ~~**P0** — Postgres en CI + `quality:golden-journey` en pipeline.~~ ✓ 2026-06-05
-3. **P1** — Piloto humano (`docs/quality/PILOT_DEMO_CHECKLIST.md`) → GO DEMO / PASS WITH FIXES.
-4. **P1** — Revisión modo oscuro en shell clínico y tablero.
-5. **P2** — Sincronizar README, manifiesto legacy y `M3_ADOPTION_PLAN.md` (fase activa post-M3-09).
-6. **P2** — Añadir `qa:bundle-analyze` a CI con fallo si excede presupuesto.
-7. **P3** — Decisión Scheduler: alinear MUI 7 o retirar spike.
+**Piloto humano** con checklist — es la frontera producto actual.
 
 ---
 
 ## Frase guía
 
 > Los errores de EPIS no son recuerdos: son gates de EPIS2.
-
-Estado actual: **gates técnicos cumplidos**; siguiente frontera = **piloto humano + hardening CI/seguridad**.

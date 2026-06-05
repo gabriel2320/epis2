@@ -1,6 +1,6 @@
 # EPIS2 — Plan de adopción Material 3 Clinical
 
-**Fase activa:** M3-09 signoff completado · **Implementación:** M3-00…M3-08 en producción demo
+**Estado:** M3-00…M3-09 **completado** (signoff 2026-06-05) · **Siguiente frontera producto:** piloto humano (`PILOT-HUMAN`)
 
 ---
 
@@ -8,19 +8,19 @@
 
 ```text
 MUI-01…10  Capacidades React + MUI X + wrappers clínicos     ← completado
-M3-00      Auditoría y baseline visual                        ← actual
-M3-01      Tokens y roles M3
-M3-02      Generador createEpis2Theme + CSS variables
-M3-03      Primitivos M3 (filled / tonal / chips / feedback)
-M3-04      Login y Centro de Comando (Expressive controlado)
-M3-05      Workspaces clínicos (Standard documento)
-M3-06      Layout adaptativo
-M3-07      Modo tablero adaptativo
-M3-08      Personalización controlada
-M3-09      QA humano, accesibilidad y CI anti-deriva M3
+M3-00      Auditoría y baseline visual                        ← completado
+M3-01      Tokens y roles M3                                  ← completado
+M3-02      Generador createEpis2Theme + CSS variables         ← completado
+M3-03      Primitivos M3 (filled / tonal / chips / feedback)    ← completado
+M3-04      Login y Centro de Comando (Expressive controlado)    ← completado
+M3-05      Workspaces clínicos (Standard documento)           ← completado
+M3-06      Layout adaptativo                                  ← completado
+M3-07      Modo tablero adaptativo                            ← completado
+M3-08      Personalización controlada                         ← completado
+M3-09      QA humano, accesibilidad y CI anti-deriva M3       ← completado
 ```
 
-**No iniciar M3-01 hasta cerrar gates de M3-00** (baseline documentado + inventario).
+Post-M3: lazy barrels MUI X, modo oscuro piloto, `qa:bundle-analyze` — ver `reports/epis2-m3-09-qa-signoff.md`.
 
 ---
 
@@ -68,7 +68,7 @@ M3-09      QA humano, accesibilidad y CI anti-deriva M3
 - `create-epis2-theme.ts` — único generador (reemplaza `createTheme` directo en `theme.ts`)
 - Opciones: `mode`, `accent`, `density`, `contrast`, `motion`
 - CSS variables para acento dinámico sin tocar roles clínicos
-- Modo oscuro preparado; activación tras QA M3-09
+- Modo oscuro activo (piloto); roles clínicos inmutables en ambos modos
 - `Epis2ThemeProvider` acepta preferencias de usuario (stub M3-08)
 
 **Gate M3-G01:** un solo generador de tema en monorepo.
