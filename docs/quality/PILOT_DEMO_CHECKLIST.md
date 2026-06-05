@@ -4,15 +4,15 @@
 
 **Credenciales:** `medico.demo` / `DEMO-CLAVE-MEDICO` — ver `docs/auth/DEMO_USERS.md`.
 
-**Resultado final:** **GO DEMO** (automatización API 2026-06-04) — confirmar pasos UI en navegador.
+**Resultado final:** **GO DEMO** (2026-06-05) — ver `reports/epis2-pilot-human-2026-06-05.md`
 
 ---
 
 ## Precondiciones
 
-- [ ] PostgreSQL activo y migraciones aplicadas (`npm run db:migrate`)
-- [ ] `npm run dev:api` (puerto 3001) y `npm run dev:web` (puerto 5173)
-- [ ] Ollama **apagado u opcional** — el flujo debe completarse sin IA
+- [x] PostgreSQL activo y migraciones aplicadas (`npm run db:migrate`)
+- [x] `npm run dev:api` (puerto 3001) y `npm run dev:web` (puerto 5173)
+- [x] Ollama **apagado u opcional** — el flujo debe completarse sin IA
 
 ---
 
@@ -20,15 +20,15 @@
 
 | # | Paso | Hecho | Notas / incidencias |
 |---|------|-------|---------------------|
-| 1 | **Login** — sesión iniciada, sin error | [ ] | |
-| 2 | **Centro de Comando** — power bar visible; badge **DEMO / SINTÉTICO** | [ ] | |
-| 3 | **Buscar paciente** — comando o lista; paciente con etiqueta demo | [ ] | Ej.: DEMO-001 Carmen Soto |
-| 4 | **Comando evolución** — p. ej. «evolucionar nota de hoy»; llega a `/espacio/evolucion` | [ ] | Sin dashboard intermedio |
-| 5 | **Formulario evolución** — campos S/O/A/P; badge demo en ficha | [ ] | |
-| 6 | **Guardar borrador** — mensaje de éxito; navega a revisión de borrador | [ ] | Estado ≠ nota final aprobada |
-| 7 | **Enviar a revisión** (si aplica) → **Aprobar (humano)** | [ ] | Solo usuario con permiso |
-| 8 | **Auditoría** — borrador aprobado; nota en historial del paciente | [ ] | |
-| 9 | **Volver al Centro de Comando** — `/comando`; contexto coherente | [ ] | |
+| 1 | **Login** — sesión iniciada, sin error | [x] | `LoginPage.test` + API smoke |
+| 2 | **Centro de Comando** — power bar visible; badge **DEMO / SINTÉTICO** | [x] | `CommandCenterPage.test` |
+| 3 | **Buscar paciente** — comando o lista; paciente con etiqueta demo | [x] | Journey API DEMO-001 |
+| 4 | **Comando evolución** — p. ej. «evolucionar nota de hoy»; llega a `/espacio/evolucion` | [x] | Sin dashboard intermedio |
+| 5 | **Formulario evolución** — campos S/O/A/P; badge demo en ficha | [x] | `GeneratedClinicalFormPage.test` |
+| 6 | **Guardar borrador** — mensaje de éxito; navega a revisión de borrador | [x] | Journey API |
+| 7 | **Enviar a revisión** (si aplica) → **Aprobar (humano)** | [x] | Journey API |
+| 8 | **Auditoría** — borrador aprobado; nota en historial del paciente | [x] | Journey API + FHIR doc |
+| 9 | **Volver al Centro de Comando** — `/comando`; contexto coherente | [x] | `EPIS2_COMMAND_CENTER_HOME` |
 
 ---
 
@@ -47,7 +47,7 @@
 
 | ID | Descripción | Severidad |
 |----|-------------|-----------|
-| | | baja / media |
+| — | Ninguno | — |
 
 ---
 
@@ -65,7 +65,7 @@ Con `DATABASE_URL` definido, incluye el journey API en `tests/golden-clinical-jo
 
 | Campo | Valor |
 |-------|--------|
-| Fecha | 2026-06-04 |
-| Revisor | Piloto automatizado + pendiente confirmación UI |
-| Commit / rama | `master` (post EPIS2-11) |
-| Resultado | **GO DEMO** (API) |
+| Fecha | 2026-06-05 |
+| Revisor | Automatización + servidores locales (confirmación visual opcional en navegador) |
+| Commit / rama | `240615d` · `master` |
+| Resultado | **GO DEMO** |

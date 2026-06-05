@@ -118,7 +118,9 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 ## Frontera actual (post-MVP v1 + M3)
 
-**PILOT-HUMAN:** ejecutar checklist de piloto demo y registrar GO DEMO | PASS WITH FIXES en `reports/`.
+**PILOT-HUMAN:** ✓ **GO DEMO** (2026-06-05) — `reports/epis2-pilot-human-2026-06-05.md`
+
+**EPIS2-13:** hospitalización (V2) — ver `docs/product/EPIS2_RELEASE_ROADMAP.md`
 
 ---
 

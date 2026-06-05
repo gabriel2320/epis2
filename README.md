@@ -75,8 +75,16 @@ En el Centro de Comando verás el chip **IA local** en verde cuando Ollama y `de
 
 ## Próximo paso
 
-**MVP v1 (EPIS2-00…12) y M3-09 cerrados en código.** Frontera actual: **piloto humano** con `docs/quality/PILOT_DEMO_CHECKLIST.md` · `npm run quality:golden-journey` (CI en GitHub incluye Postgres + migrate).
+**Piloto humano GO DEMO (2026-06-05)** — ver `reports/epis2-pilot-human-2026-06-05.md`. Siguiente fase producto: **EPIS2-13** (V2 hospitalización, roadmap).
 
-Servicio IA: `npm run ai:enable` + `npm run dev:ai` (opcional; la app funciona sin Ollama).
+Demo en vivo:
 
-Usuarios demo: `docs/auth/DEMO_USERS.md`. Migraciones: `npm run db:migrate`.
+```bash
+docker compose up -d
+npm run db:migrate
+npm run dev:api    # :3001
+npm run dev:web    # :5173
+# http://127.0.0.1:5173 — medico.demo / DEMO-CLAVE-MEDICO
+```
+
+Servicio IA opcional: `npm run ai:enable` + `npm run dev:ai`.

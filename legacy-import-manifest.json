@@ -8,7 +8,9 @@
     "reuseMatrix": "docs/legacy/EPIS_EPIDOS_EPIONE_CAPABILITY_REUSE_MATRIX.md",
     "activeProductVersion": "V0",
     "activeExperienceTrack": "M3-09",
-    "nextImplementationPhase": "PILOT-HUMAN"
+    "pilotHumanCompleted": "2026-06-05",
+    "pilotHumanResult": "GO DEMO",
+    "nextImplementationPhase": "EPIS2-13"
   },
   "donorRepositories": {
     "EPIS": {
