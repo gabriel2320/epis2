@@ -10,9 +10,13 @@ import { buildDocumentTreeByType } from '../tree/documentTree.js';
 import { exportPatientSummaryUrl } from '../api/clinicalApi.js';
 
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Box,
   Button,
   EpisTreeViewSuspense,
+  ExpandMoreIcon,
   List,
   ListItem,
   ListItemText,
@@ -159,9 +163,27 @@ export function PatientLongitudinalPanel({
         <Box sx={{ mt: 2 }}>
           <DocumentSearchPanel patientId={data.patientId} />
         </Box>
-        <Box sx={{ mt: 2 }}>
-          <PatientClinicalAiPanel patientId={data.patientId} />
-        </Box>
+        <Accordion
+          disableGutters
+          elevation={0}
+          defaultExpanded={false}
+          sx={{
+            mt: 2,
+            border: 1,
+            borderColor: 'divider',
+            borderRadius: 1,
+            bgcolor: 'transparent',
+            '&:before': { display: 'none' },
+          }}
+          data-testid="epis2-patient-ai-panel-accordion"
+        >
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography variant="subtitle2">{copy.ai.panelTitle}</Typography>
+          </AccordionSummary>
+          <AccordionDetails sx={{ pt: 0 }}>
+            <PatientClinicalAiPanel patientId={data.patientId} />
+          </AccordionDetails>
+        </Accordion>
       </Section>
     </Stack>
   );

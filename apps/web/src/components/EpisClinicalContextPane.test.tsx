@@ -10,14 +10,15 @@ import { EpisClinicalContextPane } from './EpisClinicalContextPane.js';
 
 const patientId = '00000000-0000-4000-8000-000000000099';
 
-const { fetchPatientLongitudinal, suggestPatientSummary } = vi.hoisted(() => ({
+const { fetchPatientLongitudinal, searchPatientDocuments, suggestPatientSummary } = vi.hoisted(() => ({
   fetchPatientLongitudinal: vi.fn(),
+  searchPatientDocuments: vi.fn(),
   suggestPatientSummary: vi.fn(),
 }));
 
 vi.mock('../api/clinicalApi.js', async (importOriginal) => {
   const actual = await importOriginal<typeof import('../api/clinicalApi.js')>();
-  return { ...actual, fetchPatientLongitudinal };
+  return { ...actual, fetchPatientLongitudinal, searchPatientDocuments };
 });
 
 vi.mock('../api/aiApi.js', () => ({
@@ -122,6 +123,53 @@ describe('EpisClinicalContextPane', () => {
 
     const row = screen.getByTestId('epis2-context-timeline-item-ev-drag');
     expect(row).toHaveAttribute('draggable', 'true');
+  });
+
+  it('muestra pestaña de documentos con búsqueda acotada al paciente', async () => {
+    const user = userEvent.setup();
+    fetchPatientLongitudinal.mockResolvedValue({
+      patientId,
+      readOnly: true,
+      problems: [],
+      allergies: [],
+      medications: [],
+      observations: [],
+      documents: [],
+      encounters: [],
+      timeline: [],
+    });
+    searchPatientDocuments.mockResolvedValue({
+      readOnly: true,
+      patientId,
+      query: 'laboratorio',
+      hits: [
+        {
+          id: 'doc-tab',
+          title: 'Informe lab',
+          documentType: 'lab_report',
+          storageRef: 'ref',
+          snippet: 'Resultado',
+        },
+      ],
+    });
+
+    render(
+      <Epis2ThemeProvider>
+        <EpisClinicalContextPane patientId={patientId} />
+      </Epis2ThemeProvider>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('epis2-context-tabs')).toBeInTheDocument();
+    });
+
+    await user.click(screen.getByTestId('epis2-context-tab-documents'));
+    await user.type(screen.getByTestId('epis2-context-documents-search'), 'laboratorio');
+
+    await waitFor(() => {
+      expect(searchPatientDocuments).toHaveBeenCalledWith(patientId, 'laboratorio');
+      expect(screen.getByText('Informe lab')).toBeInTheDocument();
+    });
   });
 
   it('genera resumen de periodo bajo demanda', async () => {

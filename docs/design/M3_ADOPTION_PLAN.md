@@ -28,7 +28,8 @@ Post-M3: lazy barrels MUI X, modo oscuro piloto, `qa:bundle-analyze` — ver `re
 LAYOUT-01  Two-pane Enfoque ↔ Contexto (evolución, epicrisis)   ← completado
 LAYOUT-02  Panel consulta + inserción chip                      ← completado
 LAYOUT-03  IA invisible + resumen periodo bajo demanda          ← completado
-LAYOUT-04  Drag & drop + blueprints adicionales
+LAYOUT-04  Drag & drop + blueprints adicionales                  ← completado
+LAYOUT-05  Búsqueda documental + cierre fase layout              ← completado
 ```
 
 ---

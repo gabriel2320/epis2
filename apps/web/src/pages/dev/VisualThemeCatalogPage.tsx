@@ -189,6 +189,10 @@ export function VisualThemeCatalogPage() {
           </EpisM3Text>
         </CatalogSection>
 
+        <CatalogSection title={copy.visualThemeCatalog.layoutsSection}>
+          <EpisM3Text role="bodyMedium">{copy.visualThemeCatalog.layoutsDescription}</EpisM3Text>
+        </CatalogSection>
+
         <CatalogSection title={copy.visualThemeCatalog.docsSection}>
           <Stack spacing={0.5}>
             <EpisM3Text role="bodyMedium">{copy.visualThemeCatalog.docsRules}</EpisM3Text>

@@ -20,5 +20,6 @@ describe('VisualThemeCatalogPage', () => {
     expect(screen.getByTestId('epis2-appearance-preferences')).toBeInTheDocument();
     expect(screen.getByText(copy.visualThemeCatalog.clinicalRolesSection)).toBeInTheDocument();
     expect(screen.getByText(copy.visualThemeCatalog.proseSample)).toBeInTheDocument();
+    expect(screen.getByText(copy.visualThemeCatalog.layoutsSection)).toBeInTheDocument();
   });
 });

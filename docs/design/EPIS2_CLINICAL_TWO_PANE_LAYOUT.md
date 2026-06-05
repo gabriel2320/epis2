@@ -1,7 +1,7 @@
 # EPIS2 — Diseño clínico two-pane (Enfoque ↔ Contexto)
 
 **Versión:** 1.0 · **Fase:** LAYOUT-01 (diseño) · **Fecha:** 2026-06-05  
-**Estado:** LAYOUT-01–03 implementados; LAYOUT-04 pendiente (drag & drop)  
+**Estado:** LAYOUT-01–05 implementados (signoff layout clínico 2026-06-05)  
 **Patrón M3:** [Canonical Layout — Two-pane](https://m3.material.io/foundations/layout/canonical-layouts/two-pane)
 
 ---
@@ -455,6 +455,9 @@ LAYOUT-03  Resumen periodo bajo demanda (IA local, borrador)
 
 LAYOUT-04  Drag & drop desktop + sessionStorage preferencia split
            Prescription / interconsulta si piloto OK
+
+LAYOUT-05  Búsqueda documental en context pane (tabs Eventos | Documentos)
+           Colapsar PatientClinicalAiPanel en ficha + catálogo visual layouts
 ```
 
 ### 14.1 Criterios de aceptación LAYOUT-01

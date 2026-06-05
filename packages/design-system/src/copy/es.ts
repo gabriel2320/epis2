@@ -297,6 +297,11 @@ export const copy = {
     periodSummaryTitle: 'Síntesis del historial (borrador)',
     periodSummaryError: 'No se pudo generar la síntesis. Intenta de nuevo.',
     soapHintsTitle: 'Sugerencias de completitud',
+    contextTabTimeline: 'Eventos',
+    contextTabDocuments: 'Documentos',
+    contextDocumentsPlaceholder: 'Buscar documentos del paciente…',
+    contextDocumentsNoHits: 'Sin documentos coincidentes.',
+    contextDocumentsSearching: 'Buscando documentos…',
   },
   errors: {
     genericTitle: 'Algo salió mal',
@@ -364,6 +369,9 @@ export const copy = {
     docsSection: 'Canon de diseño',
     docsRules: '20 reglas — EPIS2_TYPOGRAPHY_AND_AESTHETICS_RULES.md',
     docsAntiPatterns: '20 prohibidos — EPIS2_MATERIAL_DESIGN_ANTI_PATTERNS.md',
+    layoutsSection: 'Layouts clínicos',
+    layoutsDescription:
+      'Two-pane Enfoque ↔ Contexto: formulario centrado 65ch y panel de historial bajo demanda (timeline, documentos, inserción). Canon: EPIS2_CLINICAL_TWO_PANE_LAYOUT.md.',
   },
 } as const;
 
