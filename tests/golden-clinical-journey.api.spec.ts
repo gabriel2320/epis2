@@ -413,6 +413,18 @@ describe.skipIf(!hasDb)('Golden Clinical Journey — API', () => {
     expect(qualityCmd.statusCode).toBe(200);
     expect((qualityCmd.json() as { routePath: string }).routePath).toBe('/epis2/dashboard');
 
+    const ops = await app.inject({
+      method: 'GET',
+      url: '/api/ops/status',
+      headers: { cookie: auditorCookie },
+    });
+    expect(ops.statusCode).toBe(200);
+    const opsBody = ops.json() as {
+      hardening?: { rlsMode: string; backupCommand: string };
+    };
+    expect(opsBody.hardening?.rlsMode).toBe('off');
+    expect(opsBody.hardening?.backupCommand).toContain('db:backup');
+
     const quality = await app.inject({
       method: 'GET',
       url: '/api/dashboard/quality',

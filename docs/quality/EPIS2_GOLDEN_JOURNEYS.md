@@ -135,7 +135,7 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 ## 7. Journey V5 — IA trazable
 
 **Nombre:** `golden-v5-ai-traceable`  
-**Estado:** cerrado (Plan F slice) — evals sintéticas pendientes.
+**Estado:** cerrado (Plan F) — evals sintéticas en `npm run ai:evals`.
 
 | # | Paso | Criterio |
 |---|------|----------|

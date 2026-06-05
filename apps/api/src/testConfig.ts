@@ -10,4 +10,5 @@ export const testApiConfig = {
   WEB_ORIGIN: 'http://127.0.0.1:5173',
   LOCAL_AI_BASE_URL: 'http://127.0.0.1:3002',
   OLLAMA_BASE_URL: 'http://127.0.0.1:11434',
+  RLS_MODE: 'off',
 } satisfies AppConfig;

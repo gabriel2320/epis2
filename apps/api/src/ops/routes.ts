@@ -19,7 +19,7 @@ export async function registerOpsRoutes(
       if (!db) {
         return reply.status(503).send({ error: 'Base de datos no disponible' });
       }
-      const status = await getOpsStatus(db);
+      const status = await getOpsStatus(db, config);
       const { aiRunsTotal, ...body } = status;
       void aiRunsTotal;
       return opsStatusResponseSchema.parse(body);

@@ -34,3 +34,30 @@ export function checkRateLimit({ key, max, windowMs }: RateLimitOptions): {
 export function resetRateLimitsForTests() {
   buckets.clear();
 }
+
+export function createRateLimitPreHandler(options: {
+  keyPrefix: string;
+  max: number;
+  windowMs: number;
+  skipInTest?: boolean;
+  nodeEnv: string;
+}) {
+  const { keyPrefix, max, windowMs, skipInTest = true, nodeEnv } = options;
+  return async function rateLimitPreHandler(
+    request: { ip: string },
+    reply: { status: (code: number) => { send: (body: unknown) => unknown } },
+  ) {
+    if (skipInTest && nodeEnv === 'test') return;
+    const limit = checkRateLimit({
+      key: `${keyPrefix}:${request.ip || 'unknown'}`,
+      max,
+      windowMs,
+    });
+    if (!limit.allowed) {
+      return reply.status(429).send({
+        error: 'Demasiadas solicitudes. Intente más tarde.',
+        retryAfterSec: limit.retryAfterSec,
+      });
+    }
+  };
+}

@@ -29,6 +29,17 @@ export const opsStatusResponseSchema = z.object({
     exportEnabled: z.boolean(),
     importEnabled: z.boolean(),
   }),
+  hardening: z
+    .object({
+      rlsMode: z.enum(['off', 'enforce']),
+      rlsProtectedTables: z.array(z.string()),
+      rateLimitLogin: z.boolean(),
+      rateLimitAi: z.boolean(),
+      rateLimitCommands: z.boolean(),
+      promptCatalogVersion: z.string().optional(),
+      backupCommand: z.string(),
+    })
+    .optional(),
 });
 
 export const stagingBatchRowSchema = z.object({

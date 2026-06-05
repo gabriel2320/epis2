@@ -21,6 +21,7 @@ import { getDemoSafetyNotesForPatient } from '../clinical/service.js';
 import { queryPatientRag } from './rag.js';
 import { suggestPatientSummary24h } from './summary.js';
 import { listRecentAiRuns, recordAiRun, type AiRunRecord } from './store.js';
+import { createRateLimitPreHandler } from '../security/rateLimit.js';
 
 export async function registerAiRoutes(
   app: FastifyInstance,
@@ -30,6 +31,12 @@ export async function registerAiRoutes(
   const authenticate = createAuthenticate(config);
   const requireDraftWrite = createRequirePermission(config, 'draft.write');
   const requireAiRead = createRequirePermission(config, 'ai.read');
+  const limitAi = createRateLimitPreHandler({
+    keyPrefix: 'ai',
+    max: 30,
+    windowMs: 60_000,
+    nodeEnv: config.NODE_ENV,
+  });
 
   app.get('/api/ai/status', { preHandler: authenticate }, async () => {
     const localAiUp = await fetchLocalAiStatus(config.LOCAL_AI_BASE_URL);
@@ -54,7 +61,7 @@ export async function registerAiRoutes(
 
   app.post(
     '/api/ai/assist/draft',
-    { preHandler: requireDraftWrite },
+    { preHandler: [limitAi, requireDraftWrite] },
     async (request, reply) => {
       const parsed = aiAssistDraftRequestSchema.safeParse(request.body);
       if (!parsed.success) {
@@ -174,7 +181,7 @@ export async function registerAiRoutes(
 
   app.post(
     '/api/ai/rag/query',
-    { preHandler: requireAiRead },
+    { preHandler: [limitAi, requireAiRead] },
     async (request, reply) => {
       const parsed = ragQueryRequestSchema.safeParse(request.body);
       if (!parsed.success) {
@@ -197,7 +204,7 @@ export async function registerAiRoutes(
 
   app.post(
     '/api/ai/suggest/summary',
-    { preHandler: requireAiRead },
+    { preHandler: [limitAi, requireAiRead] },
     async (request, reply) => {
       const parsed = aiSummarySuggestRequestSchema.safeParse(request.body);
       if (!parsed.success) {

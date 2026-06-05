@@ -11,11 +11,21 @@ import {
   type AuthenticatedRequest,
 } from '../auth/authenticate.js';
 import type { AppConfig } from '../config.js';
+import { createRateLimitPreHandler } from '../security/rateLimit.js';
 
 export async function registerCommandRoutes(app: FastifyInstance, config: AppConfig) {
   const authenticate = createAuthenticate(config);
+  const limitCommands = createRateLimitPreHandler({
+    keyPrefix: 'commands',
+    max: 60,
+    windowMs: 60_000,
+    nodeEnv: config.NODE_ENV,
+  });
 
-  app.post('/api/commands/resolve', { preHandler: authenticate }, async (request, reply) => {
+  app.post(
+    '/api/commands/resolve',
+    { preHandler: [limitCommands, authenticate] },
+    async (request, reply) => {
     const parsed = commandResolveRequestSchema.safeParse(request.body);
     if (!parsed.success) {
       return reply.status(400).send({ error: 'Comando inválido' });
@@ -43,7 +53,10 @@ export async function registerCommandRoutes(app: FastifyInstance, config: AppCon
     return reply.send(body);
   });
 
-  app.post('/api/commands/suggest', { preHandler: authenticate }, async (request, reply) => {
+  app.post(
+    '/api/commands/suggest',
+    { preHandler: [limitCommands, authenticate] },
+    async (request, reply) => {
     const parsed = commandSuggestRequestSchema.safeParse(request.body);
     if (!parsed.success) {
       return reply.status(400).send({ error: 'Texto inválido para sugerencias' });
