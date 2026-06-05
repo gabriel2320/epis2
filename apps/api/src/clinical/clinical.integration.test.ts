@@ -184,8 +184,46 @@ describe.skipIf(!hasDb)('clinical API (integration)', () => {
       headers: { cookie },
     });
     expect(docSearch.statusCode).toBe(200);
-    const docJson = docSearch.json() as { hits: unknown[] };
+    const docJson = docSearch.json() as { hits: unknown[]; searchMode?: string };
     expect(docJson.hits.length).toBeGreaterThan(0);
+    expect(['semantic', 'keyword']).toContain(docJson.searchMode);
+
+    const intake = await app.inject({
+      method: 'POST',
+      url: `/api/patients/${docPatientId}/documents/intake`,
+      headers: { cookie },
+      payload: {
+        title: 'Nota intake test',
+        documentType: 'txt',
+        textContent: 'Control laboratorio creatinina hemoglobina intake demo',
+      },
+    });
+    expect(intake.statusCode).toBe(201);
+    const intakeJson = intake.json() as {
+      document: { requiresHumanReview: boolean; chunkCount: number };
+    };
+    expect(intakeJson.document.requiresHumanReview).toBe(true);
+    expect(intakeJson.document.chunkCount).toBeGreaterThan(0);
+
+    const exportRes = await app.inject({
+      method: 'GET',
+      url: `/api/patients/${docPatientId}/export/summary`,
+      headers: { cookie },
+    });
+    expect(exportRes.statusCode).toBe(200);
+    expect(String(exportRes.headers['content-type'])).toContain('text/plain');
+    expect(exportRes.body).toContain('Resumen clínico');
+
+    const ragRes = await app.inject({
+      method: 'POST',
+      url: '/api/ai/rag/query',
+      headers: { cookie },
+      payload: { patientId: docPatientId, question: 'resultados de laboratorio' },
+    });
+    expect(ragRes.statusCode).toBe(200);
+    const ragJson = ragRes.json() as { citations: unknown[]; requiresHumanReview: boolean };
+    expect(ragJson.requiresHumanReview).toBe(true);
+    expect(ragJson.citations.length).toBeGreaterThan(0);
 
     const referralCmd = await app.inject({
       method: 'POST',

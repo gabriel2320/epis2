@@ -1,4 +1,6 @@
 import {
+  documentIntakeRequestSchema,
+  documentIntakeResponseSchema,
   documentSearchResponseSchema,
   patientClinicalAlertsResponseSchema,
   patientLongitudinalResponseSchema,
@@ -26,8 +28,10 @@ import {
   searchPatients,
   updateDraft,
 } from './service.js';
+import { intakePatientDocument } from './documentIntake.js';
 import { searchPatientDocuments } from './documents.js';
 import { getPatientLongitudinal } from './longitudinal.js';
+import { buildPatientSummaryExport } from './summaryExport.js';
 
 const createDraftSchema = z.object({
   patientId: z.string().uuid(),
@@ -172,6 +176,46 @@ export async function registerClinicalRoutes(
       }
       const data = await searchPatientDocuments(db, patientId, q);
       return documentSearchResponseSchema.parse({ readOnly: true as const, ...data });
+    },
+  );
+
+  app.post(
+    '/api/patients/:patientId/documents/intake',
+    { preHandler: requireDraftWrite },
+    async (request, reply) => {
+      const { patientId } = request.params as { patientId: string };
+      const parsed = documentIntakeRequestSchema.safeParse(request.body);
+      if (!parsed.success) {
+        return reply.status(400).send({ error: 'Intake de documento inválido' });
+      }
+      const patient = await getPatientById(db, patientId);
+      if (!patient) {
+        return reply.status(404).send({ error: 'Paciente no encontrado' });
+      }
+      const session = (request as AuthenticatedRequest).session;
+      const result = await intakePatientDocument(
+        db,
+        patientId,
+        session.sub,
+        parsed.data,
+      );
+      return reply.status(201).send(documentIntakeResponseSchema.parse(result));
+    },
+  );
+
+  app.get(
+    '/api/patients/:patientId/export/summary',
+    { preHandler: requirePatientRead },
+    async (request, reply) => {
+      const { patientId } = request.params as { patientId: string };
+      const exported = await buildPatientSummaryExport(db, patientId);
+      if (!exported) {
+        return reply.status(404).send({ error: 'Paciente no encontrado' });
+      }
+      return reply
+        .header('Content-Type', exported.contentType)
+        .header('Content-Disposition', `attachment; filename="${exported.filename}"`)
+        .send(exported.body);
     },
   );
 

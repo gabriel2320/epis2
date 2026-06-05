@@ -223,6 +223,8 @@ export const clinicalDocuments = pgTable('clinical_documents', {
   documentType: text('document_type').notNull().default('other'),
   mimeType: text('mime_type'),
   storageRef: text('storage_ref').notNull(),
+  textContent: text('text_content'),
+  intakeStatus: text('intake_status').notNull().default('indexed'),
   status: text('status').notNull().default('indexed'),
   indexedAt: timestamp('indexed_at', { withTimezone: true }).notNull().defaultNow(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),

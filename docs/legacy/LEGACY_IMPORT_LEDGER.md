@@ -23,7 +23,8 @@ Registro humano de cada extracción desde EPIS. Fuente de verdad estructurada: `
 
 | ID | Fuente | Destino | Modo | Fecha | Tests | Estado |
 |----|--------|---------|------|-------|-------|--------|
-| — | — | — | — | — | — | *Sin importaciones aún* |
+| IMP-20260605-001 | EPIS `epis-document-intake-ocr` (concepto) | `apps/api/src/clinical/documentIntake.ts` | rewrite | 2026-06-05 | `clinical.integration.test.ts` | hecho |
+| IMP-20260605-002 | EPIDOS `epidos-rag-pgvector` (concepto) | `apps/api/src/clinical/documents.ts`, `embeddings.ts`, migración 019 | rewrite | 2026-06-05 | `embeddings.test.ts`, `golden-clinical-journey.api.spec.ts` | hecho |
 
 ---
 

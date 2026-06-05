@@ -51,6 +51,26 @@ export function searchPatientDocuments(patientId: string, query: string) {
   );
 }
 
+export function intakePatientDocument(
+  patientId: string,
+  body: {
+    title: string;
+    documentType: 'pdf' | 'txt' | 'image' | 'referral' | 'lab_report' | 'other';
+    textContent?: string;
+    mimeType?: string;
+    filename?: string;
+  },
+) {
+  return apiFetch<{ document: { id: string; title: string; ocrPending: boolean } }>(
+    `/api/patients/${patientId}/documents/intake`,
+    { method: 'POST', body: JSON.stringify(body) },
+  );
+}
+
+export function exportPatientSummaryUrl(patientId: string) {
+  return `/api/patients/${patientId}/export/summary`;
+}
+
 /** Blueprint EPIS2 alineado a intent del command-registry (para CDR contextual). */
 export const INTENT_TO_ASSIST_BLUEPRINT: Record<string, string> = {
   create_evolution_draft: 'evolution_note',

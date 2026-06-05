@@ -12,6 +12,7 @@ export async function queryPatientRag(
   question: string,
 ) {
   const search = await searchPatientDocuments(db, patientId, question);
+  const retrievalMode = search.searchMode;
   const citations = search.hits.map((h) => ({
     documentId: h.id,
     title: h.title,
@@ -45,7 +46,7 @@ export async function queryPatientRag(
     latencyMs: 0,
     status: 'success',
     inputPayload: { question },
-    outputPayload: { answer, citationCount: citations.length, mode },
+    outputPayload: { answer, citationCount: citations.length, mode, retrievalMode },
   });
 
   return {

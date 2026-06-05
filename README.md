@@ -78,8 +78,9 @@ En el Centro de Comando verás el chip **IA local** en verde cuando Ollama y `de
 ## Próximo paso
 
 **Plan A (estabilización UX + docs)** ✓ — `reports/epis2-ux-stabilization.md`.  
-**Plan B (WIDGET-01)** ✓ — widgets en Comando y ficha — `reports/epis2-widget-01-mount.md`.  
-**Siguiente:** **Plan C** (V1 completo: OCR/RAG/PDF) o ampliar widgets a `clinical-form`.
+**Plan B (WIDGET-01)** ✓ — `reports/epis2-widget-01-mount.md`.  
+**Plan C (slice V1)** ✓ — intake docs, RAG pgvector, export resumen — `reports/epis2-v1-plan-c-slice.md`.  
+**Siguiente:** **Plan D** (V2 hospitalización) o cerrar PDF/OCR productivo en Plan C fase 2.
 
 Demo en vivo:
 

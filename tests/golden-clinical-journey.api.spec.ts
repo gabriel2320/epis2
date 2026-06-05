@@ -157,4 +157,69 @@ describe.skipIf(!hasDb)('Golden Clinical Journey — API', () => {
 
     await app.close();
   });
+
+  it('golden-v1-longitudinal-review: documentos, intake, RAG y export', async () => {
+    const app = await buildApp(config);
+    const cookie = await loginCookie(app);
+
+    const demo001 = DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-001');
+    expect(demo001?.patientId).toBeTruthy();
+    const patientId = demo001!.patientId;
+
+    const longitudinal = await app.inject({
+      method: 'GET',
+      url: `/api/patients/${patientId}/longitudinal`,
+      headers: { cookie },
+    });
+    expect(longitudinal.statusCode).toBe(200);
+    const longJson = longitudinal.json() as {
+      readOnly: boolean;
+      documents: unknown[];
+      timeline: unknown[];
+    };
+    expect(longJson.readOnly).toBe(true);
+    expect(longJson.documents.length).toBeGreaterThan(0);
+    expect(longJson.timeline.length).toBeGreaterThan(0);
+
+    const docSearch = await app.inject({
+      method: 'GET',
+      url: `/api/patients/${patientId}/documents/search?q=hemoglobina`,
+      headers: { cookie },
+    });
+    expect(docSearch.statusCode).toBe(200);
+    expect((docSearch.json() as { hits: unknown[] }).hits.length).toBeGreaterThan(0);
+
+    const intake = await app.inject({
+      method: 'POST',
+      url: `/api/patients/${patientId}/documents/intake`,
+      headers: { cookie },
+      payload: {
+        title: 'Journey V1 intake',
+        documentType: 'txt',
+        textContent: 'Seguimiento laboratorio journey dorado demo',
+      },
+    });
+    expect(intake.statusCode).toBe(201);
+
+    const rag = await app.inject({
+      method: 'POST',
+      url: '/api/ai/rag/query',
+      headers: { cookie },
+      payload: { patientId, question: 'laboratorio creatinina' },
+    });
+    expect(rag.statusCode).toBe(200);
+    const ragJson = rag.json() as { citations: unknown[]; readOnly: boolean };
+    expect(ragJson.readOnly).toBe(true);
+    expect(ragJson.citations.length).toBeGreaterThan(0);
+
+    const exportRes = await app.inject({
+      method: 'GET',
+      url: `/api/patients/${patientId}/export/summary`,
+      headers: { cookie },
+    });
+    expect(exportRes.statusCode).toBe(200);
+    expect(exportRes.body).toContain('EPIS2');
+
+    await app.close();
+  });
 });

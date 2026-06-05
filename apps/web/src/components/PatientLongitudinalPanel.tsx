@@ -7,9 +7,11 @@ import { PatientClinicalCharts } from './PatientClinicalCharts.js';
 import { LongitudinalNavTree } from './LongitudinalNavTree.js';
 import { PatientClinicalAiPanel } from './PatientClinicalAiPanel.js';
 import { buildDocumentTreeByType } from '../tree/documentTree.js';
+import { exportPatientSummaryUrl } from '../api/clinicalApi.js';
 
 import {
   Box,
+  Button,
   EpisTreeViewSuspense,
   List,
   ListItem,
@@ -56,7 +58,19 @@ export function PatientLongitudinalPanel({
 }: PatientLongitudinalPanelProps) {
   return (
     <Stack spacing={2} data-testid="epis2-longitudinal-panel">
-      <Typography variant="subtitle2">{copy.longitudinal.title}</Typography>
+      <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
+        <Typography variant="subtitle2">{copy.longitudinal.title}</Typography>
+        <Button
+          size="small"
+          variant="outlined"
+          component="a"
+          href={exportPatientSummaryUrl(data.patientId)}
+          download
+          data-testid="epis2-export-summary"
+        >
+          {copy.longitudinal.exportSummary}
+        </Button>
+      </Stack>
 
       <PatientClinicalCharts data={data} />
 
