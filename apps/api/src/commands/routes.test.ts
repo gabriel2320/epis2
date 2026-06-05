@@ -46,6 +46,32 @@ describe('POST /api/commands/resolve', () => {
     await app.close();
   });
 
+  it('suggest devuelve candidatos sin ejecutar', async () => {
+    const app = await buildApp(config);
+    const login = await app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      payload: { username: 'medico.demo', demoAuthKey: 'DEMO-CLAVE-MEDICO' },
+    });
+    const cookie = String(login.headers['set-cookie']).split(';')[0];
+
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/commands/suggest',
+      headers: { cookie },
+      payload: { text: 'evolucion' },
+    });
+    expect(res.statusCode).toBe(200);
+    const body = res.json() as {
+      readOnly: boolean;
+      suggestions: { intent: string; labelEs: string }[];
+    };
+    expect(body.readOnly).toBe(true);
+    expect(body.suggestions.length).toBeGreaterThan(0);
+    expect(body.suggestions[0]?.intent).toBeTruthy();
+    await app.close();
+  });
+
   it('resume sin paciente devuelve needs_patient', async () => {
     const app = await buildApp(config);
     const login = await app.inject({

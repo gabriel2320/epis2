@@ -1,5 +1,5 @@
 import { listAssistBlueprints } from './assistSchemas.js';
-import { listDraftPromptSpecs } from './draftPromptCatalog.js';
+import { listDraftPromptSpecs, PROMPT_CATALOG_VERSION } from './draftPromptCatalog.js';
 
 const AI_DISCLAIMER =
   'Asistencia IA local — borrador sugerido; requiere revisión humana antes de aprobar.';
@@ -9,6 +9,7 @@ export type LocalAiCapabilities = {
   provider: 'ollama';
   structuredSchemas: string[];
   clinicalPromptIds: string[];
+  promptCatalogVersion: string;
   capabilities: {
     draftAssist: boolean;
     chat: false;
@@ -24,6 +25,7 @@ export function buildLocalAiCapabilities(ollamaUp: boolean): LocalAiCapabilities
     provider: 'ollama',
     structuredSchemas: listAssistBlueprints().map((b) => b.id),
     clinicalPromptIds: listDraftPromptSpecs().map((p) => p.blueprintId),
+    promptCatalogVersion: PROMPT_CATALOG_VERSION,
     capabilities: {
       draftAssist: ollamaUp,
       chat: false,

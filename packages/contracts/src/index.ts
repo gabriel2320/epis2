@@ -11,8 +11,12 @@ export {
 export {
   commandResolveRequestSchema,
   commandResolveResponseSchema,
+  commandSuggestRequestSchema,
+  commandSuggestResponseSchema,
   type CommandResolveRequest,
   type CommandResolveResponse,
+  type CommandSuggestRequest,
+  type CommandSuggestResponse,
 } from './commands.js';
 export {
   aiAssistDraftRequestSchema,

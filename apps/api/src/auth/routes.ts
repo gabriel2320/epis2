@@ -17,6 +17,7 @@ import {
   type AuthenticatedRequest,
 } from './authenticate.js';
 import { signSessionToken } from './sessionToken.js';
+import { checkRateLimit } from '../security/rateLimit.js';
 
 export async function registerAuthRoutes(
   app: FastifyInstance,
@@ -27,6 +28,21 @@ export async function registerAuthRoutes(
   const requireAuditRead = createRequirePermission(config, 'audit.read');
 
   app.post('/api/auth/login', async (request, reply) => {
+    if (config.NODE_ENV !== 'test') {
+      const clientIp = request.ip || 'unknown';
+      const limit = checkRateLimit({
+        key: `login:${clientIp}`,
+        max: 20,
+        windowMs: 15 * 60 * 1000,
+      });
+      if (!limit.allowed) {
+        return reply.status(429).send({
+          error: 'Demasiados intentos de inicio de sesión. Intente más tarde.',
+          retryAfterSec: limit.retryAfterSec,
+        });
+      }
+    }
+
     const body = loginRequestSchema.safeParse(request.body);
     if (!body.success) {
       return reply.status(400).send({ error: 'Datos de inicio de sesión inválidos' });

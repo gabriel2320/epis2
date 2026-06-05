@@ -7,6 +7,9 @@ export type DraftPromptSpec = {
   fieldHints: string;
 };
 
+/** Versión del catálogo de prompts (trazabilidad V5). */
+export const PROMPT_CATALOG_VERSION = 'epis2-prompts-v1.1';
+
 /** Tareas EPIS adaptadas a blueprints EPIS2 (sin RAG ni catálogo OpenMRS). */
 export const DRAFT_PROMPT_CATALOG: DraftPromptSpec[] = [
   {

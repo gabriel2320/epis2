@@ -115,10 +115,10 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 
 ---
 
-## 6. Journey V4 — Interop read-only (slice demo)
+## 6. Journey V4 — Interop read-only
 
 **Nombre:** `golden-v4-interop-ops`  
-**Estado:** slice cerrado (`a02689d`)  
+**Estado:** cerrado (Plan F)  
 **Rol:** `auditor.demo`
 
 | Paso | Acción | Criterio |
@@ -128,12 +128,14 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 | 3 | Export bundle DEMO-005 (médico) | `AllergyIntolerance` penicilina en bundle |
 | 4 | Confirmar sin writeback | Lotes staging `validated`/`staged`, SoT EPIS2 intacto |
 
+**Automatización:** `golden-clinical-journey.api.spec.ts` (V4).
+
 ---
 
-## 7. Journey V5 — IA trazable (slice demo)
+## 7. Journey V5 — IA trazable
 
 **Nombre:** `golden-v5-ai-traceable`  
-**Estado:** slice cerrado — gate completo pendiente NL intent y evals.
+**Estado:** cerrado (Plan F slice) — evals sintéticas pendientes.
 
 | # | Paso | Criterio |
 |---|------|----------|
@@ -142,8 +144,11 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 | 3 | Resumen 24 h | Texto orientativo; `requiresHumanReview` |
 | 4 | Ollama OFF | RAG/resumen en modo retrieval |
 | 5 | Sin auto-approve | No se crea nota clínica final |
+| 6 | `POST /api/commands/suggest` | Sugerencias NL sin ejecutar |
 
 **Tests:** `v5.integration.test.ts`, `ai/routes.test.ts`
+
+**Automatización:** `golden-clinical-journey.api.spec.ts` (V5).
 
 ---
 

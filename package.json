@@ -20,6 +20,7 @@
     "check": "npm run lint && npm run typecheck && npm run architecture:validate",
     "db:validate": "node scripts/db-validate.mjs",
     "db:migrate": "node scripts/db-migrate.mjs",
+    "db:backup": "node scripts/epis-db-backup.mjs",
     "dev:api": "npm run dev -w @epis2/api",
     "dev:web": "npm run dev -w @epis2/web",
     "dev:ai": "npm run dev -w @epis2/local-ai",

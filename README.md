@@ -81,7 +81,7 @@ En el Centro de Comando verás el chip **IA local** en verde cuando Ollama y `de
 **Plan B (WIDGET-01)** ✓ — `reports/epis2-widget-01-mount.md`.  
 **Plan C (V1 completo)** ✓ — `reports/epis2-v1-plan-c-complete.md`.  
 **Plan D (V2 slice)** ✓ — ingreso/traslado/alta — `reports/epis2-v2-plan-d-slice.md`.  
-**Siguiente:** **Plan F** (V4/V5 + hardening piloto). V3 enfermería/farmacia cerrado — `reports/epis2-v3-plan-e-slice.md`.
+**Siguiente:** Plan F continúa (RLS, evals, auth real) — slice en `reports/epis2-plan-f-slice.md`. V3: `reports/epis2-v3-plan-e-slice.md`.
 
 Demo en vivo:
 

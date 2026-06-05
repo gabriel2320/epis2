@@ -46,3 +46,22 @@ export const commandResolveResponseSchema = z.discriminatedUnion('status', [
 
 export type CommandResolveRequest = z.infer<typeof commandResolveRequestSchema>;
 export type CommandResolveResponse = z.infer<typeof commandResolveResponseSchema>;
+
+export const commandSuggestRequestSchema = z.object({
+  text: z.string().max(2000),
+});
+
+export const commandSuggestResponseSchema = z.object({
+  readOnly: z.literal(true),
+  suggestions: z.array(
+    z.object({
+      intent: z.string(),
+      labelEs: z.string(),
+      score: z.number(),
+      sampleEs: z.string().optional(),
+    }),
+  ),
+});
+
+export type CommandSuggestRequest = z.infer<typeof commandSuggestRequestSchema>;
+export type CommandSuggestResponse = z.infer<typeof commandSuggestResponseSchema>;

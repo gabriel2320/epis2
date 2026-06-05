@@ -392,4 +392,134 @@ describe.skipIf(!hasDb)('Golden Clinical Journey — API', () => {
 
     await app.close();
   });
+
+  it('golden-v4-interop-ops: auditor read-only, HL7 y bundle', async () => {
+    const app = await buildApp(config);
+    const demo005 = DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-005')!;
+
+    const auditorLogin = await app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      payload: { username: 'auditor.demo', demoAuthKey: 'DEMO-CLAVE-AUDITOR' },
+    });
+    const auditorCookie = String(auditorLogin.headers['set-cookie']).split(';')[0];
+
+    const qualityCmd = await app.inject({
+      method: 'POST',
+      url: '/api/commands/resolve',
+      headers: { cookie: auditorCookie },
+      payload: { text: 'tablero de calidad' },
+    });
+    expect(qualityCmd.statusCode).toBe(200);
+    expect((qualityCmd.json() as { routePath: string }).routePath).toBe('/epis2/dashboard');
+
+    const quality = await app.inject({
+      method: 'GET',
+      url: '/api/dashboard/quality',
+      headers: { cookie: auditorCookie },
+    });
+    expect(quality.statusCode).toBe(200);
+    const qBody = quality.json() as {
+      readOnly: boolean;
+      stagingBatches: { sourceSystem: string; status: string }[];
+    };
+    expect(qBody.readOnly).toBe(true);
+    expect(qBody.stagingBatches.some((b) => b.sourceSystem === 'HL7v2-ADT')).toBe(true);
+
+    const hl7 = await app.inject({
+      method: 'POST',
+      url: '/api/interop/hl7/validate',
+      headers: { cookie: auditorCookie, 'content-type': 'application/json' },
+      payload: {
+        message: 'MSH|^~\\&|EPIS2|LAB|20260101120000||ADT^A01|1|P|2.5',
+      },
+    });
+    expect(hl7.statusCode).toBe(200);
+    expect((hl7.json() as { valid: boolean }).valid).toBe(true);
+
+    const physicianCookie = await loginCookie(app);
+    const bundle = await app.inject({
+      method: 'GET',
+      url: `/api/fhir/patients/${demo005.patientId}/bundle`,
+      headers: { cookie: physicianCookie },
+    });
+    expect(bundle.statusCode).toBe(200);
+    const allergies = (
+      bundle.json() as { entry: { resource: { resourceType: string } }[] }
+    ).entry.filter((e) => e.resource.resourceType === 'AllergyIntolerance');
+    expect(allergies.length).toBeGreaterThan(0);
+
+    const medLogin = await app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      payload: { username: 'medico.demo', demoAuthKey: 'DEMO-CLAVE-MEDICO' },
+    });
+    const medCookie = String(medLogin.headers['set-cookie']).split(';')[0];
+    const medAudit = await app.inject({
+      method: 'GET',
+      url: '/api/audit/events',
+      headers: { cookie: medCookie },
+    });
+    expect(medAudit.statusCode).toBe(403);
+
+    await app.close();
+  });
+
+  it('golden-v5-ai-traceable: RAG, resumen y ai_runs sin escritura SoT', async () => {
+    const app = await buildApp(config);
+    const demo001 = DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-001')!;
+    const cookie = await loginCookie(app);
+
+    const suggest = await app.inject({
+      method: 'POST',
+      url: '/api/commands/suggest',
+      headers: { cookie },
+      payload: { text: 'laboratorio hemograma' },
+    });
+    expect(suggest.statusCode).toBe(200);
+    expect((suggest.json() as { readOnly: boolean }).readOnly).toBe(true);
+
+    const rag = await app.inject({
+      method: 'POST',
+      url: '/api/ai/rag/query',
+      headers: { cookie, 'content-type': 'application/json' },
+      payload: { patientId: demo001.patientId, question: 'laboratorio' },
+    });
+    expect(rag.statusCode).toBe(200);
+    const ragBody = rag.json() as {
+      readOnly: boolean;
+      requiresHumanReview: boolean;
+      citations: unknown[];
+      runId?: string;
+    };
+    expect(ragBody.readOnly).toBe(true);
+    expect(ragBody.requiresHumanReview).toBe(true);
+    expect(ragBody.citations.length).toBeGreaterThan(0);
+    expect(ragBody.runId).toBeTruthy();
+
+    const summary = await app.inject({
+      method: 'POST',
+      url: '/api/ai/suggest/summary',
+      headers: { cookie, 'content-type': 'application/json' },
+      payload: { patientId: demo001.patientId },
+    });
+    expect(summary.statusCode).toBe(200);
+    const sumBody = summary.json() as { requiresHumanReview: boolean; summaryText: string };
+    expect(sumBody.requiresHumanReview).toBe(true);
+    expect(sumBody.summaryText.length).toBeGreaterThan(20);
+
+    const runs = await app.inject({
+      method: 'GET',
+      url: `/api/ai/runs?patientId=${demo001.patientId}`,
+      headers: { cookie },
+    });
+    expect(runs.statusCode).toBe(200);
+    expect(
+      (runs.json() as { runs: { blueprintId: string }[] }).runs.some(
+        (r) => r.blueprintId === 'rag_query',
+      ),
+    ).toBe(true);
+
+    await app.close();
+  });
 });
