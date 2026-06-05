@@ -68,3 +68,11 @@ export function Epis2ThemeProvider({
 
 export { useEpis2ThemePreferences } from './EpisThemePreferences.js';
 export { EpisThemeModeToggle, type EpisThemeModeToggleProps } from './EpisThemeModeToggle.js';
+export {
+  EpisAppearancePreferencesPanel,
+  type EpisAppearancePreferencesPanelProps,
+} from './EpisAppearancePreferencesPanel.js';
+export {
+  EpisAppearancePreferencesLink,
+  type EpisAppearancePreferencesLinkProps,
+} from './EpisAppearancePreferencesLink.js';

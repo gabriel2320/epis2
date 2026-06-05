@@ -14,6 +14,7 @@ import {
   EpisM3Text,
   EpisTopAppBar,
   EpisBrandMark,
+  EpisAppearancePreferencesLink,
   EpisThemeModeToggle,
   DashboardIcon,
   GroupsIcon,
@@ -168,6 +169,7 @@ export function CommandCenterPage() {
       }
       endActions={
         <Stack direction="row" alignItems="center" spacing={0.5}>
+          <EpisAppearancePreferencesLink />
           <EpisThemeModeToggle />
           <EpisButton appearance="text" size="small" startIcon={<LogoutIcon />} onClick={logout}>
             {copy.layout.logout}

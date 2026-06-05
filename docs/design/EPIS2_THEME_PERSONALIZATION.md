@@ -1,6 +1,6 @@
 # EPIS2 — Personalización visual (plan)
 
-**Estado THEME-01:** pipeline + roles; UI de preferencias completa en THEME-07.
+**Estado THEME-03:** UI de preferencias en `/preferencias-apariencia` + panel reutilizable. Modo «sistema» y catálogo visual dedicado: ramas futuras.
 
 ## Permitido (futuro)
 

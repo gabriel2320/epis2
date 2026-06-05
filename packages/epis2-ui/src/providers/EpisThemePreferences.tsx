@@ -5,7 +5,11 @@ import {
   type Epis2Accent,
 } from '../theme/create-epis2-theme.js';
 import type { Epis2MotionScheme } from '../theme/motion.js';
-import type { Epis2ThemeDensity, Epis2ThemeMode } from '../theme/create-epis2-theme.js';
+import type {
+  Epis2ThemeContrast,
+  Epis2ThemeDensity,
+  Epis2ThemeMode,
+} from '../theme/create-epis2-theme.js';
 
 const STORAGE_KEY = 'epis2-theme-preferences-v2';
 
@@ -13,6 +17,7 @@ export type Epis2ThemePreferences = {
   mode: Epis2ThemeMode;
   accent: Epis2Accent;
   density: Epis2ThemeDensity;
+  contrast: Epis2ThemeContrast;
   motion: Epis2MotionScheme;
 };
 
@@ -20,6 +25,7 @@ const defaultPreferences: Epis2ThemePreferences = {
   mode: 'light',
   accent: 'clinicalBlue',
   density: 'comfortable',
+  contrast: 'standard',
   motion: 'standard',
 };
 
@@ -61,6 +67,7 @@ export function Epis2ThemePreferencesProvider({ children }: { children: ReactNod
       mode: preferences.mode,
       accent: preferences.accent,
       density: preferences.density,
+      contrast: preferences.contrast,
       motion: preferences.motion,
     }),
     [preferences],

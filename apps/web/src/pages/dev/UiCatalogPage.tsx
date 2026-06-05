@@ -18,6 +18,7 @@ import {
   EpisDatePicker,
   EpisDialog,
   EpisDraftStatus,
+  EpisAppearancePreferencesPanel,
   EpisEmptyState,
   EpisFilterChip,
   EpisLoadingState,
@@ -30,7 +31,6 @@ import {
   epis2Shape,
   Stack,
   Typography,
-  useEpis2ThemePreferences,
   useTheme,
   type GridColDef,
 } from '@epis2/epis2-ui';
@@ -79,57 +79,10 @@ function ColorSwatch({ name, hex }: { name: string; hex: string }) {
 }
 
 function ThemePreferencesDemo() {
-  const { preferences, setPreferences } = useEpis2ThemePreferences();
   return (
     <Stack spacing={1} data-testid="epis2-catalog-theme-prefs">
       <EpisM3Text role="titleMedium">{copy.themePreferences.title}</EpisM3Text>
-      <Stack direction="row" flexWrap="wrap" gap={1}>
-        {(
-          [
-            ['clinicalBlue', copy.themePreferences.accentClinicalBlue],
-            ['tealBlue', copy.themePreferences.accentTeal],
-            ['calmGreen', copy.themePreferences.accentGreen],
-            ['soberViolet', copy.themePreferences.accentViolet],
-            ['neutral', copy.themePreferences.accentNeutral],
-          ] as const
-        ).map(([accent, label]) => (
-          <EpisFilterChip
-            key={accent}
-            label={label}
-            active={preferences.accent === accent}
-            clickable
-            onClick={() => setPreferences({ accent })}
-          />
-        ))}
-      </Stack>
-      <Stack direction="row" gap={1}>
-        <EpisFilterChip
-          label={copy.themePreferences.modeLight}
-          active={preferences.mode === 'light'}
-          clickable
-          onClick={() => setPreferences({ mode: 'light' })}
-        />
-        <EpisFilterChip
-          label={copy.themePreferences.modeDark}
-          active={preferences.mode === 'dark'}
-          clickable
-          onClick={() => setPreferences({ mode: 'dark' })}
-        />
-      </Stack>
-      <Stack direction="row" gap={1}>
-        <EpisFilterChip
-          label={copy.themePreferences.densityComfortable}
-          active={preferences.density === 'comfortable'}
-          clickable
-          onClick={() => setPreferences({ density: 'comfortable' })}
-        />
-        <EpisFilterChip
-          label={copy.themePreferences.densityCompact}
-          active={preferences.density === 'compact'}
-          clickable
-          onClick={() => setPreferences({ density: 'compact' })}
-        />
-      </Stack>
+      <EpisAppearancePreferencesPanel showLegacyAccents />
     </Stack>
   );
 }

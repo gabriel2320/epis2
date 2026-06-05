@@ -18,6 +18,14 @@ export {
 export { useTheme } from '@mui/material/styles';
 export { Epis2ThemeProvider, type Epis2ThemeProviderProps, useEpis2ThemePreferences } from './providers/Epis2ThemeProvider.js';
 export { EpisThemeModeToggle, type EpisThemeModeToggleProps } from './providers/EpisThemeModeToggle.js';
+export {
+  EpisAppearancePreferencesPanel,
+  type EpisAppearancePreferencesPanelProps,
+} from './providers/EpisAppearancePreferencesPanel.js';
+export {
+  EpisAppearancePreferencesLink,
+  type EpisAppearancePreferencesLinkProps,
+} from './providers/EpisAppearancePreferencesLink.js';
 export * from './primitives/index.js';
 export * from './command/index.js';
 export * from './forms/index.js';

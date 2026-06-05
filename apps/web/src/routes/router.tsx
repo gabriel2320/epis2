@@ -17,6 +17,7 @@ import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
 import { SessionExpiredPage } from '../pages/SessionExpiredPage.js';
 import { ForbiddenPage } from '../pages/ForbiddenPage.js';
+import { AppearancePreferencesPage } from '../pages/AppearancePreferencesPage.js';
 import { isUiCatalogEnabled } from '../dev/uiCatalogEnv.js';
 import { isSchedulerSpikeEnabled } from '../dev/schedulerSpikeEnv.js';
 
@@ -83,6 +84,13 @@ function ForbiddenRoutePage() {
 }
 
 /** Home canónica = Centro de Comando (sin dashboard). */
+const appearancePreferencesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/preferencias-apariencia',
+  component: AppearancePreferencesPage,
+  beforeLoad: requireSession,
+});
+
 const commandCenterRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/comando',
@@ -264,6 +272,7 @@ export const routeTree = rootRoute.addChildren([
   loginRoute,
   sessionExpiredRoute,
   forbiddenRoute,
+  appearancePreferencesRoute,
   uiCatalogRoute,
   schedulerSpikeRoute,
   commandCenterRoute,

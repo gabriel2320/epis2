@@ -20,6 +20,7 @@ import {
 
   EpisBrandMark,
 
+  EpisAppearancePreferencesLink,
   EpisThemeModeToggle,
 
   LogoutIcon,
@@ -150,6 +151,7 @@ export function ClinicalShellLayout() {
 
               </Button>
 
+              <EpisAppearancePreferencesLink data-testid="epis2-clinical-appearance-link" />
               <EpisThemeModeToggle data-testid="epis2-clinical-theme-toggle" />
 
               <Button
