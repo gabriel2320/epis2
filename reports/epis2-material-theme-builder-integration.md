@@ -16,7 +16,7 @@
 | 5 | Roles clínicos semánticos | ✓ `clinical/clinical-semantic-roles.ts` |
 | 6 | Generated TS | ✓ `generated/clinical-blue.ts`, `calm-teal.ts` |
 | 7 | Foundations barrel | ✓ `foundations/*` |
-| 8 | Gates `theme:validate` | ✓ 7 validadores |
+| 8 | Gates `theme:validate` | ✓ 8 validadores (incl. snapshot) |
 | 9 | Tests generated | ✓ `theme-generated.test.ts` |
 | 10 | Documentación diseño | ✓ 5 docs en `docs/design/` |
 | 11 | Fix microcopy pgvector | ✓ |

@@ -13,10 +13,12 @@ import { validate as noDirectMui } from './no-direct-mui-imports.mjs';
 import { validate as singleEpis2Theme } from './single-epis2-theme.mjs';
 import { validate as singleWidget } from './single-widget-registry.mjs';
 import { validate as widgetGates } from './widget-registry-gates.mjs';
+import { validate as devCatalogGates } from './dev-catalog-gates.mjs';
 
 const VALIDATORS = [
   ['main-product-invariants', invariants],
   ['no-direct-mui-imports', noDirectMui],
+  ['dev-catalog-gates', devCatalogGates],
   ['single-epis2-theme', singleEpis2Theme],
   ['no-legacy-dependencies', noLegacy],
   ['single-command-registry', singleCommand],

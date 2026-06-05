@@ -13,6 +13,7 @@ const STEPS = [
   'validate-theme-contrast.mjs',
   'validate-theme-copy-spanish.mjs',
   'validate-no-hardcoded-colors.mjs',
+  'compare-theme-snapshots.mjs',
 ];
 
 function run(script) {

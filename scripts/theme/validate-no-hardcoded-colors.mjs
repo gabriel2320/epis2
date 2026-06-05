@@ -18,6 +18,7 @@ const ALLOWLIST_DIRS = [
   'theme/visual-identity.ts',
   'theme/chip-tones.ts',
   'theme/palette-legacy.ts',
+  'theme/typography-rules.ts',
   'pages/dev',
 ];
 

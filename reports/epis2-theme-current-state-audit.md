@@ -89,7 +89,7 @@
 | Ruta | Estado |
 |------|--------|
 | `/dev/ui-catalog` | Existe (gated) |
-| `/desarrollo/catalogo-visual` | Pendiente THEME-08 |
+| `/desarrollo/catalogo-visual` | Existe (gated, MUI-G15) |
 
 ---
 

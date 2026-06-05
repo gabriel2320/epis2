@@ -24,7 +24,7 @@ Estos gates son **permanentes** una vez activa la capa `epis2-ui` (desde MUI-01)
 | MUI-G12 | Modo tablero opcional | Tablero sin enlace «Volver al Centro de Comando» | Test E2E / golden journey |
 | MUI-G13 | Bundle disciplinado | Import barrel `@mui/material` o iconos masivos | ESLint + MUI-11 analyze |
 | MUI-G14 | IA disclosure | Salida IA sin `EpisAiDisclosure` / borrador | Revisión componentes IA |
-| MUI-G15 | Catálogo no en producción | `/dev/ui-catalog` en build piloto | Env + router guard |
+| MUI-G15 | Catálogo no en producción | `/dev/ui-catalog` o `/desarrollo/catalogo-visual` en build piloto sin flag | `dev-catalog-gates.mjs` + router guard |
 
 ---
 
@@ -47,6 +47,7 @@ Detener merge de UI si aparece:
 |------|----------------|
 | MUI-00 | Gates manuales en checklist PR |
 | MUI-01 | `no-direct-mui-imports.mjs` en `architecture:validate` |
+| THEME-08 | `dev-catalog-gates.mjs` (MUI-G15) + `theme:snapshot` en `theme:validate` / CI |
 | MUI-05+ | Detectar `@mui/x-*` vs `MUI_X_ADOPTION_PLAN.md` |
 | MUI-11 | `vite build` size budget opcional |
 
