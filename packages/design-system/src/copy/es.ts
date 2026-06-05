@@ -278,6 +278,17 @@ export const copy = {
     aiRejected: 'La sugerencia IA no fue válida. Revisa y escribe manualmente.',
     aiApplied: 'Sugerencia aplicada. Debes revisar y aprobar como humano.',
   },
+  clinicalLayout: {
+    splitOpen: 'Consultar historial',
+    splitClose: 'Cerrar historial',
+    splitOpenAria: 'Abrir panel de historial del paciente',
+    splitCloseAria: 'Cerrar panel de historial',
+    draftStatus: 'Borrador',
+    contextPaneTitle: 'Historial del paciente',
+    contextPanePlaceholder:
+      'Aquí verás consultas previas, laboratorios y medicación. Disponible en la siguiente fase del layout clínico.',
+    contextSearchPlaceholder: 'Buscar en historial del paciente…',
+  },
   errors: {
     genericTitle: 'Algo salió mal',
     genericMessage: 'No pudimos completar la acción. Intenta de nuevo.',

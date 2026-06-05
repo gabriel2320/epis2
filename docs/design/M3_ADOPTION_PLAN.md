@@ -22,6 +22,15 @@ M3-09      QA humano, accesibilidad y CI anti-deriva M3       ← completado
 
 Post-M3: lazy barrels MUI X, modo oscuro piloto, `qa:bundle-analyze` — ver `reports/epis2-m3-09-qa-signoff.md`.
 
+**Siguiente frontera layout clínico:**
+
+```text
+LAYOUT-01  Two-pane Enfoque ↔ Contexto (evolución, epicrisis)   ← diseño en EPIS2_CLINICAL_TWO_PANE_LAYOUT.md
+LAYOUT-02  Panel consulta + inserción chip
+LAYOUT-03  IA invisible + resumen periodo bajo demanda
+LAYOUT-04  Drag & drop + blueprints adicionales
+```
+
 ---
 
 ## M3-00 — Auditoría y baseline

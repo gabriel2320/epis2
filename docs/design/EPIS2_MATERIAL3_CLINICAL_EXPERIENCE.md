@@ -181,6 +181,8 @@ Canvas clínico principal + panel secundario solicitado
 
 Ejemplos de panel: fuentes, medicamentos, resultados recientes, datos faltantes. Nunca los cuatro a la vez sin solicitud explícita.
 
+**Two-pane (LAYOUT-01+):** En evolución y epicrisis, el patrón canónico M3 *Two-pane* separa **consulta** (izquierda, `surfaceContainerLow`) de **acción** (derecha, `surfaceContainerLowest`). Por defecto solo el lienzo de escritura; el historial se invoca con «Consultar historial». Especificación completa: `EPIS2_CLINICAL_TWO_PANE_LAYOUT.md`.
+
 ---
 
 ## 3. Experiencia por área

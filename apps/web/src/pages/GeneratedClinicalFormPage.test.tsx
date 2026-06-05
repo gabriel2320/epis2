@@ -38,6 +38,10 @@ vi.mock('../api/clinicalApi.js', () => ({
   }),
 }));
 
+vi.mock('@mui/material/useMediaQuery', () => ({
+  default: () => true,
+}));
+
 vi.mock('../auth/AuthContext.js', () => ({
   useAuth: () => ({
     session: {
@@ -99,5 +103,23 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
     await user.click(screen.getByRole('button', { name: copy.forms.saveDraft }));
 
     expect(screen.getByTestId('epis2-form-status')).toBeInTheDocument();
+  });
+
+  it('abre panel de historial en layout two-pane', async () => {
+    const user = userEvent.setup();
+    render(
+      <Epis2ThemeProvider>
+        <ActivePatientProvider>
+          <GeneratedClinicalFormPage blueprint={evolutionBlueprint} />
+        </ActivePatientProvider>
+      </Epis2ThemeProvider>,
+    );
+
+    expect(screen.getByTestId('epis2-clinical-two-pane')).toBeInTheDocument();
+    expect(screen.queryByTestId('epis2-clinical-context-pane')).not.toBeInTheDocument();
+
+    await user.click(screen.getByTestId('epis2-clinical-context-toggle'));
+
+    expect(screen.getByTestId('epis2-clinical-context-pane')).toBeInTheDocument();
   });
 });

@@ -45,6 +45,7 @@
 | Acción primaria | ✓ | Guardar borrador |
 | Acciones secundarias discretas | ✓ | IA outlined, cancelar |
 | Contexto mínimo | ✓ | Sin dashboard embebido |
+| Historial bajo demanda | ✓ | **LAYOUT-01** — two-pane Enfoque/Contexto (placeholder contexto) |
 | Paneles colapsados | ◐ | `EpisAiDisclosure` visible si draft |
 | Retorno comando | ✓ | `ClinicalPageNav` |
 | Paciente actual | ✓ | `ActivePatientBanner` |

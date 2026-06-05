@@ -2,6 +2,8 @@ import {
 
   BLUEPRINT_DRAFT_TYPES,
 
+  blueprintSupportsClinicalContext,
+
   blueprintUsesClinicalProse,
 
   defaultSummaryValues,
@@ -28,11 +30,21 @@ import {
 
   EpisChip,
 
+  Box,
+
+  EpisClinicalFocusAppBar,
+
   EpisClinicalForm,
 
   EpisClinicalFormPage,
 
+  EpisClinicalTwoPaneLayout,
+
+  EpisM3Text,
+
   Stack,
+
+  useEpisClinicalContextPanel,
 
 } from '@epis2/epis2-ui';
 
@@ -59,6 +71,8 @@ import {
 } from '../api/clinicalApi.js';
 
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
+
+import { EpisClinicalContextPanePlaceholder } from '../components/EpisClinicalContextPanePlaceholder.js';
 
 import { ClinicalPageNav } from '../components/ClinicalPageNav.js';
 
@@ -130,6 +144,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
   const canUseAiAssist = blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES;
   const clinicalProse = blueprintUsesClinicalProse(blueprint.blueprintId);
+  const supportsClinicalContext = blueprintSupportsClinicalContext(blueprint.blueprintId);
+  const { contextOpen, setContextOpen } = useEpisClinicalContextPanel();
 
 
 
@@ -537,6 +553,180 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     </>
 
   );
+
+
+
+  if (supportsClinicalContext) {
+
+    return (
+
+      <Box data-testid="epis2-generated-clinical-page" sx={{ width: '100%' }}>
+
+        <EpisClinicalTwoPaneLayout
+
+          appBar={
+
+            <EpisClinicalFocusAppBar
+
+              patientName={activePatient?.displayName}
+
+              patientMeta={headerExtra}
+
+              contextOpen={contextOpen}
+
+              onContextOpenChange={setContextOpen}
+
+              contextOpenLabel={copy.clinicalLayout.splitOpen}
+
+              contextCloseLabel={copy.clinicalLayout.splitClose}
+
+              contextOpenAria={copy.clinicalLayout.splitOpenAria}
+
+              contextCloseAria={copy.clinicalLayout.splitCloseAria}
+
+              trailing={
+
+                <EpisChip
+
+                  label={copy.clinicalLayout.draftStatus}
+
+                  size="small"
+
+                  variant="outlined"
+
+                  data-testid="epis2-draft-status-chip"
+
+                />
+
+              }
+
+            />
+
+          }
+
+          actionPane={
+
+            <Stack
+
+              spacing={3}
+
+              sx={{
+
+                maxWidth: contextOpen ? '100%' : 640,
+
+                mx: 'auto',
+
+                width: '100%',
+
+              }}
+
+            >
+
+              <EpisM3Text role="titleLarge" component="h1">
+
+                {blueprint.label}
+
+              </EpisM3Text>
+
+              {canUseAiAssist ? <EpisAiDisclosure /> : null}
+
+              <EpisClinicalForm
+
+                blueprint={blueprint}
+
+                values={values}
+
+                errors={fieldErrors}
+
+                clinicalProse={clinicalProse}
+
+                onChange={onChange}
+
+              />
+
+              {canUseAiAssist ? (
+
+                <EpisButton
+
+                  variant="outlined"
+
+                  disabled={isSuggesting}
+
+                  onClick={() => void suggestWithAi()}
+
+                  data-testid="epis2-ai-suggest"
+
+                >
+
+                  {isSuggesting ? copy.forms.suggestingAi : copy.forms.suggestAi}
+
+                </EpisButton>
+
+              ) : null}
+
+              {effectivePatientId && blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES ? (
+
+                <ClinicalAlertsPanel
+
+                  alerts={clinicalAlerts}
+
+                  loading={alertsLoading}
+
+                  hintBlueprintLabel={blueprint.label}
+
+                />
+
+              ) : null}
+
+              {statusMessage ? (
+
+                <EpisAlert
+
+                  severity={statusMessage.includes('guardado') ? 'success' : 'info'}
+
+                  data-testid="epis2-form-status"
+
+                >
+
+                  {statusMessage}
+
+                </EpisAlert>
+
+              ) : null}
+
+            </Stack>
+
+          }
+
+          contextPane={<EpisClinicalContextPanePlaceholder />}
+
+          contextOpen={contextOpen}
+
+          onContextOpenChange={setContextOpen}
+
+          footer={
+
+            <Stack spacing={2}>
+
+              <EpisButton variant="contained" onClick={() => void saveDraft()}>
+
+                {copy.forms.saveDraft}
+
+              </EpisButton>
+
+              <ClinicalPageNav patientId={effectivePatientId} />
+
+            </Stack>
+
+          }
+
+        />
+
+      </Box>
+
+    );
+
+  }
 
 
 

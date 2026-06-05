@@ -21,3 +21,8 @@ export {
   blueprintUsesClinicalProse,
   type ClinicalProseBlueprintId,
 } from './clinical-prose-blueprints.js';
+export {
+  CLINICAL_CONTEXT_BLUEPRINT_IDS,
+  blueprintSupportsClinicalContext,
+  type ClinicalContextBlueprintId,
+} from './clinical-context-blueprints.js';
