@@ -17,6 +17,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@epis2/clinical-forms": "*",
     "@epis2/command-registry": "*",
     "@epis2/design-system": "*",
     "@emotion/react": "^11.14.0",

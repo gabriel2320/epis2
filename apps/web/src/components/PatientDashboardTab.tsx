@@ -1,6 +1,6 @@
 import type { PatientDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import { DraftStatusChip } from './DraftStatusChip.js';
+import { EpisDraftStatus } from '@epis2/epis2-ui';
 
 import {
   Alert,
@@ -72,7 +72,7 @@ export function PatientDashboardTab({ data, onOpenFicha, onOpenDraft }: PatientD
               <ListItem key={d.id} disablePadding>
                 <ListItemButton onClick={() => onOpenDraft(d.id)}>
                   <ListItemText primary={d.title} secondary={d.draftType} />
-                  <DraftStatusChip status={d.status} />
+                  <EpisDraftStatus status={d.status} />
                 </ListItemButton>
               </ListItem>
             ))}

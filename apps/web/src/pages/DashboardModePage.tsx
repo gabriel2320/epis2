@@ -33,7 +33,7 @@ import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { readRecentPatients } from '../clinical/recentPatients.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
-import { DraftStatusChip } from '../components/DraftStatusChip.js';
+import { EpisDraftStatus } from '@epis2/epis2-ui';
 import { PatientDashboardTab } from '../components/PatientDashboardTab.js';
 import { QualityDashboardTab } from '../components/QualityDashboardTab.js';
 import { ServiceDashboardTab } from '../components/ServiceDashboardTab.js';
@@ -257,7 +257,7 @@ export function DashboardModePage() {
                               primary={d.title}
                               secondary={`${d.patientDisplayName} · ${d.draftType}`}
                             />
-                            <DraftStatusChip status={d.status} />
+                            <EpisDraftStatus status={d.status} />
                           </ListItemButton>
                         </ListItem>
                       ))}
@@ -289,7 +289,7 @@ export function DashboardModePage() {
                               primary={d.title}
                               secondary={d.patientDisplayName}
                             />
-                            <DraftStatusChip status={d.status} />
+                            <EpisDraftStatus status={d.status} />
                           </ListItemButton>
                         </ListItem>
                       ))}

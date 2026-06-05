@@ -1,14 +1,19 @@
 import { epis2Palette, epis2Theme } from '@epis2/epis2-ui';
+import { getBlueprintById, initialFormValues } from '@epis2/clinical-forms';
 import {
   Box,
   Divider,
+  EpisAiDisclosure,
   EpisAlert,
+  EpisApprovalGate,
   EpisButton,
   EpisCard,
   EpisChip,
+  EpisClinicalForm,
   EpisCommandBar,
   EpisCommandSuggestions,
   EpisDialog,
+  EpisDraftStatus,
   EpisEmptyState,
   EpisLoadingState,
   EpisTextField,
@@ -171,6 +176,25 @@ export function UiCatalogPage() {
               </Stack>
             </Box>
           </EpisDialog>
+        </CatalogSection>
+
+        <CatalogSection title="Formularios clínicos (MUI-04)">
+          <Stack spacing={2}>
+            <EpisDraftStatus status="ready_for_review" />
+            <EpisAiDisclosure />
+            <EpisClinicalForm
+              blueprint={getBlueprintById('evolution_note')!}
+              values={initialFormValues(getBlueprintById('evolution_note')!)}
+              onChange={() => {}}
+            />
+            <EpisApprovalGate
+              status="ready_for_review"
+              canEdit
+              canApprove
+              showSendToReview={false}
+              onApprove={() => {}}
+            />
+          </Stack>
         </CatalogSection>
 
         <CatalogSection title="Command-first (MUI-03)">

@@ -1,8 +1,6 @@
 import { copy } from '@epis2/design-system';
+import { EpisChip } from '../primitives/EpisChip.js';
 
-import {
-  Chip,
-} from '@epis2/epis2-ui';
 const STATUS_COLOR: Record<string, 'default' | 'warning' | 'info' | 'success' | 'error'> = {
   draft: 'default',
   editing: 'info',
@@ -12,11 +10,15 @@ const STATUS_COLOR: Record<string, 'default' | 'warning' | 'info' | 'success' | 
   approved: 'success',
 };
 
-export function DraftStatusChip({ status }: { status: string }) {
+export type EpisDraftStatusProps = {
+  status: string;
+};
+
+export function EpisDraftStatus({ status }: EpisDraftStatusProps) {
   const label =
     copy.drafts.statusLabels[status as keyof typeof copy.drafts.statusLabels] ?? status;
   return (
-    <Chip
+    <EpisChip
       label={label}
       size="small"
       color={STATUS_COLOR[status] ?? 'default'}

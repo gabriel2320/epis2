@@ -1,18 +1,20 @@
 import { roleHasPermission, type ClinicalRole } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
-import { Link, useParams } from '@tanstack/react-router';
-import { useCallback, useEffect, useState } from 'react';
 import {
-  Alert,
   Box,
-  Button,
+  EpisAlert,
+  EpisApprovalGate,
+  EpisButton,
+  EpisCard,
+  EpisDraftStatus,
   List,
   ListItem,
   ListItemText,
-  Paper,
   Stack,
   Typography,
 } from '@epis2/epis2-ui';
+import { Link, useParams } from '@tanstack/react-router';
+import { useCallback, useEffect, useState } from 'react';
 import {
   approveDraft,
   DRAFT_TYPE_TO_BLUEPRINT,
@@ -22,7 +24,6 @@ import {
   type DraftVersionRow,
 } from '../api/clinicalApi.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
-import { DraftStatusChip } from '../components/DraftStatusChip.js';
 import { useAuth } from '../auth/AuthContext.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 
@@ -98,7 +99,7 @@ export function DraftReviewPage() {
   };
 
   if (error) {
-    return <Alert severity="error">{error}</Alert>;
+    return <EpisAlert severity="error">{error}</EpisAlert>;
   }
 
   if (!draft) {
@@ -110,13 +111,13 @@ export function DraftReviewPage() {
     .slice(0, 12);
 
   return (
-    <Paper variant="outlined" sx={{ p: 3 }} data-testid="epis2-draft-review">
+    <EpisCard variant="outlined" sx={{ p: 3 }} data-testid="epis2-draft-review">
       <Stack spacing={2}>
         <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
           <Typography variant="h6" component="h1">
             {copy.drafts.reviewTitle}
           </Typography>
-          <DraftStatusChip status={draft.status} />
+          <EpisDraftStatus status={draft.status} />
         </Stack>
 
         <Typography variant="subtitle1">{draft.title}</Typography>
@@ -159,37 +160,20 @@ export function DraftReviewPage() {
           </List>
         </Box>
 
-        {canEdit ? (
-          <Stack direction="row" spacing={1} flexWrap="wrap">
-            {draft.status !== 'ready_for_review' ? (
-              <Button variant="outlined" onClick={() => void sendToReview()}>
-                {copy.drafts.sendToReview}
-              </Button>
-            ) : null}
-          </Stack>
-        ) : null}
+        <EpisApprovalGate
+          status={draft.status}
+          canEdit={canEdit}
+          canApprove={canApprove}
+          showSendToReview={draft.status !== 'ready_for_review'}
+          onSendToReview={() => void sendToReview()}
+          onApprove={() => void approve()}
+          message={message}
+        />
 
-        {canApprove && ['draft', 'editing', 'ready_for_review'].includes(draft.status) ? (
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => void approve()}
-            data-testid="epis2-draft-approve"
-          >
-            {copy.drafts.approveHuman}
-          </Button>
-        ) : null}
-
-        {message ? (
-          <Alert severity="success" data-testid="epis2-draft-review-message">
-            {message}
-          </Alert>
-        ) : null}
-
-        <Button component={Link} to="/comando" size="small">
+        <EpisButton component={Link} to="/comando" size="small">
           {copy.layout.backToCommand}
-        </Button>
+        </EpisButton>
       </Stack>
-    </Paper>
+    </EpisCard>
   );
 }

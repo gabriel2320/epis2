@@ -148,6 +148,8 @@ export const copy = {
     sendToReview: 'Enviar a revisión',
     sentToReview: 'Borrador enviado a revisión.',
     approveHuman: 'Aprobar (humano)',
+    approvalDisclaimer:
+      'La aprobación humana es obligatoria antes de registrar la nota clínica final.',
     approvedSuccess: 'Aprobación registrada. Nota clínica creada.',
     approveError: 'No se pudo aprobar. Verifica permisos y estado.',
     transitionError: 'Transición de estado no permitida.',

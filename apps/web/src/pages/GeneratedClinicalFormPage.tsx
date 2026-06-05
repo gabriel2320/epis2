@@ -1,27 +1,26 @@
 import {
-  Alert,
-  Button,
-  Chip,
-  Paper,
-  Stack,
-  Typography,
-} from '@epis2/epis2-ui';
-import {
   BLUEPRINT_DRAFT_TYPES,
   defaultSummaryValues,
   initialFormValues,
   validateFormValues,
   type ClinicalFormBlueprint,
 } from '@epis2/clinical-forms';
-import { requestDraftAssist } from '../api/aiApi.js';
 import { roleHasPermission, sanitizeAiSuggestedFields, type ClinicalRole } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
+import {
+  EpisAiDisclosure,
+  EpisAlert,
+  EpisButton,
+  EpisChip,
+  EpisClinicalForm,
+  EpisClinicalFormPage,
+  Stack,
+} from '@epis2/epis2-ui';
 import { Link, useSearch } from '@tanstack/react-router';
-import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
-import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ApiError } from '../api/client.js';
 import { apiFetch } from '../api/client.js';
+import { requestDraftAssist } from '../api/aiApi.js';
 import {
   fetchPatientDetail,
   listPatients,
@@ -29,10 +28,11 @@ import {
   type PatientListRow,
 } from '../api/clinicalApi.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
-import { ClinicalFormRenderer } from '../components/ClinicalFormRenderer.js';
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
+import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
+import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
 
 export type GeneratedClinicalFormPageProps = {
   blueprint: ClinicalFormBlueprint;
@@ -218,126 +218,121 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   };
 
   if (!allowed) {
-    return (
-      <Alert severity="warning">
-        Tu rol no puede usar este formulario.
-      </Alert>
-    );
+    return <EpisAlert severity="warning">Tu rol no puede usar este formulario.</EpisAlert>;
   }
 
   if (blueprint.requiresPatient && !patientId) {
     return (
       <Stack spacing={2}>
-        <Alert severity="info">{copy.forms.needsPatient}</Alert>
+        <EpisAlert severity="info">{copy.forms.needsPatient}</EpisAlert>
         {blueprint.blueprintId === 'patient_search' ? null : (
-          <Button component={Link} to="/espacio/buscar-paciente" variant="contained">
+          <EpisButton component={Link} to="/espacio/buscar-paciente" variant="contained">
             Buscar paciente
-          </Button>
+          </EpisButton>
         )}
       </Stack>
     );
   }
 
-  return (
-    <Paper variant="outlined" sx={{ p: 3 }} data-testid="epis2-generated-clinical-page">
-      <Stack spacing={2}>
-        <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
-          <Typography variant="h6" component="h1">
-            {blueprint.label}
-          </Typography>
-          <Chip label={copy.demoBadge} size="small" color="warning" variant="outlined" />
-          {activePatient ? (
-            <>
-              <Chip
-                label={activePatient.displayName}
-                size="small"
-                variant="outlined"
-                data-testid="epis2-active-patient"
-              />
-              {activePatient.demoCaseCode ? (
-                <Chip
-                  label={activePatient.demoCaseCode}
-                  size="small"
-                  color="warning"
-                  variant="outlined"
-                />
-              ) : null}
-            </>
-          ) : null}
-        </Stack>
-
-        {patientId && blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES ? (
-          <ClinicalAlertsPanel
-            alerts={clinicalAlerts}
-            loading={alertsLoading}
-            hintBlueprintLabel={blueprint.label}
+  const headerExtra = (
+    <>
+      <EpisChip label={copy.demoBadge} size="small" color="warning" variant="outlined" />
+      {activePatient ? (
+        <>
+          <EpisChip
+            label={activePatient.displayName}
+            size="small"
+            variant="outlined"
+            data-testid="epis2-active-patient"
           />
-        ) : null}
-
-        {blueprint.blueprintId === 'patient_search' ? (
-          <Stack spacing={2}>
-            <ClinicalFormRenderer
-              blueprint={blueprint}
-              values={values}
-              errors={fieldErrors}
-              onChange={onChange}
+          {activePatient.demoCaseCode ? (
+            <EpisChip
+              label={activePatient.demoCaseCode}
+              size="small"
+              color="warning"
+              variant="outlined"
             />
-            <Button variant="outlined" onClick={() => void loadPatients()}>
-              {copy.forms.searchPatients}
-            </Button>
-            {loadError ? <Alert severity="warning">{loadError}</Alert> : null}
-            <Stack spacing={1}>
-              {patients.map((p) => (
-                <Button
-                  key={p.id}
-                  variant="text"
-                  onClick={() => selectPatient(p.id)}
-                  sx={{ justifyContent: 'flex-start' }}
-                >
-                  {p.displayName}
-                  {p.demoLabel ? ` · ${p.demoLabel}` : ''}
-                </Button>
-              ))}
-            </Stack>
+          ) : null}
+        </>
+      ) : null}
+    </>
+  );
+
+  return (
+    <EpisClinicalFormPage title={blueprint.label} headerExtra={headerExtra}>
+      {patientId && blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES ? (
+        <ClinicalAlertsPanel
+          alerts={clinicalAlerts}
+          loading={alertsLoading}
+          hintBlueprintLabel={blueprint.label}
+        />
+      ) : null}
+
+      {canUseAiAssist ? <EpisAiDisclosure /> : null}
+
+      {blueprint.blueprintId === 'patient_search' ? (
+        <Stack spacing={2}>
+          <EpisClinicalForm
+            blueprint={blueprint}
+            values={values}
+            errors={fieldErrors}
+            onChange={onChange}
+          />
+          <EpisButton variant="outlined" onClick={() => void loadPatients()}>
+            {copy.forms.searchPatients}
+          </EpisButton>
+          {loadError ? <EpisAlert severity="warning">{loadError}</EpisAlert> : null}
+          <Stack spacing={1}>
+            {patients.map((p) => (
+              <EpisButton
+                key={p.id}
+                variant="text"
+                onClick={() => selectPatient(p.id)}
+                sx={{ justifyContent: 'flex-start' }}
+              >
+                {p.displayName}
+                {p.demoLabel ? ` · ${p.demoLabel}` : ''}
+              </EpisButton>
+            ))}
           </Stack>
-        ) : (
-          <>
-            <ClinicalFormRenderer
-              blueprint={blueprint}
-              values={values}
-              errors={fieldErrors}
-              onChange={onChange}
-            />
-            {blueprint.outputKind !== 'READ_ONLY_SUMMARY' &&
-            blueprint.outputKind !== 'SEARCH' ? (
-              <Stack direction="row" spacing={1} flexWrap="wrap">
-                {canUseAiAssist ? (
-                  <Button
-                    variant="outlined"
-                    disabled={isSuggesting}
-                    onClick={() => void suggestWithAi()}
-                    data-testid="epis2-ai-suggest"
-                  >
-                    {isSuggesting ? copy.forms.suggestingAi : copy.forms.suggestAi}
-                  </Button>
-                ) : null}
-                <Button variant="contained" onClick={() => void saveDraft()}>
-                  {copy.forms.saveDraft}
-                </Button>
-              </Stack>
-            ) : null}
-          </>
-        )}
+        </Stack>
+      ) : (
+        <>
+          <EpisClinicalForm
+            blueprint={blueprint}
+            values={values}
+            errors={fieldErrors}
+            onChange={onChange}
+          />
+          {blueprint.outputKind !== 'READ_ONLY_SUMMARY' &&
+          blueprint.outputKind !== 'SEARCH' ? (
+            <Stack direction="row" spacing={1} flexWrap="wrap">
+              {canUseAiAssist ? (
+                <EpisButton
+                  variant="outlined"
+                  disabled={isSuggesting}
+                  onClick={() => void suggestWithAi()}
+                  data-testid="epis2-ai-suggest"
+                >
+                  {isSuggesting ? copy.forms.suggestingAi : copy.forms.suggestAi}
+                </EpisButton>
+              ) : null}
+              <EpisButton variant="contained" onClick={() => void saveDraft()}>
+                {copy.forms.saveDraft}
+              </EpisButton>
+            </Stack>
+          ) : null}
+        </>
+      )}
 
-        {statusMessage ? (
-          <Alert
-            severity={statusMessage.includes('guardado') ? 'success' : 'info'}
-            data-testid="epis2-form-status"
-          >
-            {statusMessage}
-          </Alert>
-        ) : null}
-      </Stack>
-    </Paper>
+      {statusMessage ? (
+        <EpisAlert
+          severity={statusMessage.includes('guardado') ? 'success' : 'info'}
+          data-testid="epis2-form-status"
+        >
+          {statusMessage}
+        </EpisAlert>
+      ) : null}
+    </EpisClinicalFormPage>
   );
 }
