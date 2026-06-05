@@ -2,10 +2,10 @@ import type { QualityDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import { useState } from 'react';
 import { validateHl7Message } from '../api/opsApi.js';
+import { QualityDashboardGrids } from './QualityDashboardGrids.js';
 
 import {
   Alert,
-  Box,
   Button,
   Paper,
   Stack,
@@ -55,42 +55,7 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
         </Typography>
       </Paper>
 
-      <Paper variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.interop.stagingTitle}
-        </Typography>
-        {data.stagingBatches.length === 0 ? (
-          <Typography variant="body2" color="text.secondary">
-            {copy.longitudinal.emptySection}
-          </Typography>
-        ) : (
-          data.stagingBatches.map((b) => (
-            <Box key={b.id} sx={{ mb: 1 }}>
-              <Typography variant="body2">
-                <strong>{b.batchLabel}</strong> ({b.sourceSystem}) — {b.status} · {b.recordCount}{' '}
-                registros
-              </Typography>
-              {b.notes ? (
-                <Typography variant="caption" color="text.secondary">
-                  {b.notes}
-                </Typography>
-              ) : null}
-            </Box>
-          ))
-        )}
-      </Paper>
-
-      <Paper variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.interop.auditTitle}
-        </Typography>
-        {data.recentAudit.slice(0, 8).map((e) => (
-          <Typography key={e.id} variant="body2" sx={{ fontFamily: 'monospace', fontSize: '0.8rem' }}>
-            {new Date(e.at).toLocaleString('es-CL')} · {e.eventType}
-            {e.username ? ` · ${e.username}` : ''}
-          </Typography>
-        ))}
-      </Paper>
+      <QualityDashboardGrids data={data} />
 
       <Paper variant="outlined" sx={{ p: 2 }}>
         <Typography variant="subtitle2" gutterBottom>

@@ -70,6 +70,7 @@ export const copy = {
     gridColumnType: 'Tipo',
     gridColumnStatus: 'Estado',
     gridColumnUpdated: 'Actualizado',
+    gridColumnDemoCase: 'Caso demo',
     gridLoading: 'Cargando tabla…',
   },
   ai: {
@@ -95,6 +96,14 @@ export const copy = {
     schemaVersion: 'Versión de esquema',
     metricsTitle: 'Indicadores operativos',
     auditTitle: 'Auditoría reciente',
+    gridColumnEvent: 'Evento',
+    gridColumnUser: 'Usuario',
+    gridColumnEntity: 'Entidad',
+    gridColumnBatch: 'Lote',
+    gridColumnSource: 'Origen',
+    gridColumnRecords: 'Registros',
+    gridColumnStagedAt: 'Ingreso staging',
+    gridColumnAt: 'Fecha y hora',
   },
   inpatient: {
     census: 'Censo de camas',
@@ -122,6 +131,9 @@ export const copy = {
     searchDocuments: 'Buscar en documentos',
     searchPlaceholder: 'Título o referencia…',
     searchNoHits: 'Sin coincidencias en documentos indexados.',
+    gridColumnLabTest: 'Examen',
+    gridColumnLabValue: 'Resultado',
+    gridColumnLabDate: 'Fecha',
   },
   activePatient: {
     none: 'Sin paciente activo — fija uno para encadenar comandos',
@@ -170,6 +182,8 @@ export const copy = {
     },
   },
   forms: {
+    encounterDate: 'Fecha del encuentro',
+    scheduledDate: 'Fecha programada',
     needsPatient: 'Selecciona un paciente demo antes de continuar.',
     saveDraft: 'Guardar borrador',
     searchPatients: 'Cargar pacientes demo',

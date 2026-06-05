@@ -11,6 +11,7 @@ import {
   Stack,
   Typography,
 } from '@epis2/epis2-ui';
+import { LabObservationsGrid } from './LabObservationsGrid.js';
 import { WorklistDraftGrid } from './WorklistDraftGrid.js';
 export type PatientDashboardTabProps = {
   data: PatientDashboardResponse;
@@ -71,6 +72,16 @@ export function PatientDashboardTab({ data, onOpenFicha, onOpenDraft }: PatientD
           emptyMessage={copy.dashboard.emptyDrafts}
           onOpenDraft={onOpenDraft}
           data-testid="epis2-dashboard-patient-drafts-grid"
+        />
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }}>
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.longitudinal.observations}
+        </Typography>
+        <LabObservationsGrid
+          rows={data.recentObservations}
+          data-testid="epis2-dashboard-patient-labs-grid"
         />
       </Paper>
 

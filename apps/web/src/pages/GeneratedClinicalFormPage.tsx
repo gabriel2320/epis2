@@ -28,6 +28,7 @@ import {
   type PatientListRow,
 } from '../api/clinicalApi.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
+import { PatientListGrid } from '../components/PatientListGrid.js';
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
@@ -282,19 +283,12 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
             {copy.forms.searchPatients}
           </EpisButton>
           {loadError ? <EpisAlert severity="warning">{loadError}</EpisAlert> : null}
-          <Stack spacing={1}>
-            {patients.map((p) => (
-              <EpisButton
-                key={p.id}
-                variant="text"
-                onClick={() => selectPatient(p.id)}
-                sx={{ justifyContent: 'flex-start' }}
-              >
-                {p.displayName}
-                {p.demoLabel ? ` · ${p.demoLabel}` : ''}
-              </EpisButton>
-            ))}
-          </Stack>
+          <PatientListGrid
+            rows={patients}
+            emptyMessage={copy.longitudinal.emptySection}
+            onSelectPatient={selectPatient}
+            data-testid="epis2-patient-search-grid"
+          />
         </Stack>
       ) : (
         <>

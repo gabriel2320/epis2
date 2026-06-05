@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import { DocumentSearchPanel } from './DocumentSearchPanel.js';
+import { LabObservationsGrid } from './LabObservationsGrid.js';
 import { PatientClinicalAiPanel } from './PatientClinicalAiPanel.js';
 
 import {
@@ -70,6 +71,13 @@ export function PatientLongitudinalPanel({
             </ListItem>
           ))}
         </List>
+      </Section>
+
+      <Section title={copy.longitudinal.observations} empty={data.observations.length === 0}>
+        <LabObservationsGrid
+          rows={data.observations}
+          data-testid="epis2-lab-observations-grid"
+        />
       </Section>
 
       <Section title={copy.longitudinal.medications} empty={data.medications.length === 0}>

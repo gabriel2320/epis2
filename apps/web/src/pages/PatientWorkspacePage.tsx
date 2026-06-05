@@ -12,7 +12,6 @@ import {
   Divider,
   List,
   ListItem,
-  ListItemButton,
   ListItemText,
   Paper,
   Stack,
@@ -28,6 +27,7 @@ import {
   type PatientListRow,
 } from '../api/clinicalApi.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
+import { PatientListGrid } from '../components/PatientListGrid.js';
 import { PatientClinicalSummaryPanel } from '../components/PatientClinicalSummaryPanel.js';
 import { PatientLongitudinalPanel } from '../components/PatientLongitudinalPanel.js';
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
@@ -107,25 +107,17 @@ export function PatientWorkspacePage() {
         <Button variant="outlined" onClick={() => void loadPatientList()}>
           {copy.forms.searchPatients}
         </Button>
-        <List dense>
-          {patients.map((p) => (
-            <ListItem key={p.id} disablePadding>
-              <ListItemButton
-                onClick={() =>
-                  void navigate({
-                    to: '/espacio/ficha',
-                    search: { patientId: p.id },
-                  })
-                }
-              >
-                <ListItemText
-                  primary={p.displayName}
-                  secondary={p.demoCaseCode ? `${p.demoCaseCode} · ${copy.demoBadge}` : copy.demoBadge}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        <PatientListGrid
+          rows={patients}
+          emptyMessage={copy.longitudinal.emptySection}
+          onSelectPatient={(id) =>
+            void navigate({
+              to: '/espacio/ficha',
+              search: { patientId: id },
+            })
+          }
+          data-testid="epis2-workspace-patient-grid"
+        />
         <Button component={Link} to="/espacio/buscar-paciente" variant="text">
           {copy.activePatient.searchForm}
         </Button>
