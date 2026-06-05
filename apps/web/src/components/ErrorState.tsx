@@ -1,3 +1,4 @@
+import { copy } from '@epis2/design-system';
 import { AlertTitle, EpisAlert, EpisButton, Stack } from '@epis2/epis2-ui';
 
 export type ErrorStateProps = {
@@ -7,7 +8,12 @@ export type ErrorStateProps = {
   retryLabel?: string;
 };
 
-export function ErrorState({ title, message, onRetry, retryLabel = 'Reintentar' }: ErrorStateProps) {
+export function ErrorState({
+  title,
+  message,
+  onRetry,
+  retryLabel = copy.errors.retry,
+}: ErrorStateProps) {
   return (
     <EpisAlert severity="error" sx={{ maxWidth: 480, mx: 'auto' }}>
       <AlertTitle>{title}</AlertTitle>

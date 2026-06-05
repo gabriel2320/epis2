@@ -26,7 +26,7 @@ export function PatientDashboardTab({ data, onOpenFicha, onOpenDraft }: PatientD
         <Box>
           <Typography variant="h6">{data.displayName}</Typography>
           {data.demoCaseCode ? (
-            <Typography variant="caption" color="text.secondary">
+            <Typography variant="body2" color="text.secondary">
               {data.demoCaseCode} · {copy.demoBadge}
             </Typography>
           ) : null}

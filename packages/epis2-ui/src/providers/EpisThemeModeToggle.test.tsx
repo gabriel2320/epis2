@@ -25,7 +25,7 @@ describe('EpisThemeModeToggle', () => {
     await user.click(toggle);
     expect(toggle).toHaveAttribute('aria-label', copy.themePreferences.modeLight);
 
-    const stored = JSON.parse(window.localStorage.getItem('epis2-theme-preferences-v1') ?? '{}') as {
+    const stored = JSON.parse(window.localStorage.getItem('epis2-theme-preferences-v2') ?? '{}') as {
       mode?: string;
     };
     expect(stored.mode).toBe('dark');

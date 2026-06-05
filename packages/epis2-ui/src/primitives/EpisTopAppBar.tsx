@@ -2,6 +2,8 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import type { ReactNode } from 'react';
+import { useTheme } from '@mui/material/styles';
+import { epis2BarLayout } from '../theme/breakpoints.js';
 import { epis2Shape } from '../theme/shape.js';
 
 export type EpisTopAppBarProps = {
@@ -20,6 +22,9 @@ export function EpisTopAppBar({
   elevation = 0,
   'data-testid': testId,
 }: EpisTopAppBarProps) {
+  const theme = useTheme();
+  const visual = theme.epis2?.visual;
+
   return (
     <AppBar
       position="static"
@@ -27,12 +32,24 @@ export function EpisTopAppBar({
       elevation={elevation}
       data-testid={testId}
       sx={{
-        bgcolor: 'transparent',
-        borderRadius: epis2Shape.medium,
+        width: '100%',
+        bgcolor: visual?.topBarBg ?? 'transparent',
+        borderRadius: epis2Shape.large,
         mb: 2,
+        ...(visual ? { border: `1px solid ${visual.cardBorder}` } : {}),
+        backdropFilter: 'blur(12px)',
       }}
     >
-      <Toolbar disableGutters sx={{ minHeight: 48, px: 0, gap: 1 }}>
+      <Toolbar
+        disableGutters
+        sx={{
+          minHeight: epis2BarLayout.inputMinHeight,
+          px: epis2BarLayout.toolbarPx,
+          py: 1,
+          gap: 1.5,
+          width: '100%',
+        }}
+      >
         {startAction ? <Box sx={{ flexShrink: 0 }}>{startAction}</Box> : null}
         {title ? (
           <Box sx={{ flex: 1, minWidth: 0, typography: 'subtitle2', color: 'text.secondary' }}>

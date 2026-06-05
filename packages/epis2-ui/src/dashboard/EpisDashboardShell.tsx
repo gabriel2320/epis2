@@ -3,11 +3,11 @@ import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import { useTheme } from '@mui/material/styles';
 import type { ReactNode } from 'react';
 import { EpisButton } from '../primitives/EpisButton.js';
 import { EpisChip } from '../primitives/EpisChip.js';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
+import { epis2CanvasSx, epis2IslandPaddingSx, epis2IslandSx } from '../theme/island-layout.js';
 import { epis2Shape } from '../theme/shape.js';
 
 export type EpisDashboardTab = {
@@ -45,25 +45,15 @@ export function EpisDashboardShell({
   maxWidth = 960,
   'data-testid': testId,
 }: EpisDashboardShellProps) {
-  const theme = useTheme();
-  const surfaces = theme.epis2?.surfaces;
-
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-        bgcolor: surfaces?.surfaceContainer ?? 'background.default',
-        px: { xs: 2, md: 3 },
-        py: 3,
-      }}
-    >
+    <Box sx={{ ...epis2CanvasSx, px: { xs: 3, sm: 4, md: 5 }, py: { xs: 4, md: 5 } }}>
       <Stack
-        spacing={3}
+        spacing={4}
         sx={{
+          ...epis2IslandSx,
+          ...epis2IslandPaddingSx,
           maxWidth,
           mx: 'auto',
-          p: { xs: 0, md: 2 },
-          borderRadius: epis2Shape.large,
         }}
         data-testid={testId}
       >
@@ -99,10 +89,10 @@ export function EpisDashboardShell({
 
         <Box
           sx={{
-            bgcolor: surfaces?.surface ?? 'background.paper',
-            borderRadius: epis2Shape.medium,
+            borderRadius: epis2Shape.large,
             border: 1,
-            borderColor: surfaces?.outlineVariant ?? 'divider',
+            borderColor: 'divider',
+            bgcolor: 'background.default',
           }}
         >
           <Tabs value={activeTab} onChange={(_, v) => onTabChange(String(v))} variant="scrollable">
@@ -119,11 +109,11 @@ export function EpisDashboardShell({
 
         <Box
           sx={{
-            bgcolor: surfaces?.surface ?? 'background.paper',
             borderRadius: epis2Shape.large,
             p: { xs: 1, md: 2 },
             border: 1,
-            borderColor: surfaces?.outlineVariant ?? 'divider',
+            borderColor: 'divider',
+            bgcolor: 'background.default',
           }}
         >
           {children}

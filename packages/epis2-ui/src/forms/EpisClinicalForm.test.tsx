@@ -21,8 +21,8 @@ describe('EpisClinicalForm', () => {
       </Epis2ThemeProvider>,
     );
     expect(screen.getByTestId('epis2-form-evolution_note')).toBeInTheDocument();
-    expect(screen.getByText('Fecha del encuentro')).toBeInTheDocument();
-    expect(screen.getByText('Subjetivo')).toBeInTheDocument();
-    expect(screen.getByText('Plan')).toBeInTheDocument();
+    expect(screen.getByText(/Fecha del encuentro/)).toBeInTheDocument();
+    expect(screen.getByLabelText('Subjetivo')).toBeInTheDocument();
+    expect(screen.getByLabelText('Plan')).toBeInTheDocument();
   });
 });

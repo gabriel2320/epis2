@@ -2,9 +2,7 @@ import type { ReactNode } from 'react';
 import { EpisCard } from '../primitives/EpisCard.js';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
-import { epis2Shape } from '../theme/shape.js';
-import { motionTransition } from '../theme/motion.js';
+import { epis2IslandPaddingSx, epis2IslandSx, epis2CanvasSx } from '../theme/island-layout.js';
 
 export type EpisAuthScreenProps = {
   children: ReactNode;
@@ -13,34 +11,27 @@ export type EpisAuthScreenProps = {
 
 /** Pantalla de autenticación M3 Expressive — layout acogedor centrado. */
 export function EpisAuthScreen({ children, testId = 'epis2-login-page' }: EpisAuthScreenProps) {
-  const theme = useTheme();
-  const surfaces = theme.epis2?.surfaces;
-
   return (
     <Box
       sx={{
-        minHeight: '100vh',
+        ...epis2CanvasSx,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        bgcolor: surfaces?.surfaceContainer ?? 'background.default',
-        px: 2,
+        px: { xs: 3, sm: 4, md: 5 },
+        py: { xs: 4, sm: 5 },
       }}
     >
       <EpisCard
         elevation={0}
         sx={{
-          p: { xs: 3, sm: 4 },
-          maxWidth: 440,
+          ...epis2IslandSx,
+          ...epis2IslandPaddingSx,
+          maxWidth: 420,
           width: '100%',
-          borderRadius: epis2Shape.extraLarge,
-          border: 1,
-          borderColor: 'divider',
-          bgcolor: surfaces?.surface ?? 'background.paper',
-          transition: motionTransition(['box-shadow', 'transform']),
         }}
       >
-        <Stack spacing={3} data-testid={testId}>
+        <Stack spacing={3.5} data-testid={testId}>
           {children}
         </Stack>
       </EpisCard>

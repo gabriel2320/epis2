@@ -17,6 +17,7 @@ const REQUIRED_DOCS = [
 const REQUIRED_PACKAGES = [
   'packages/command-registry',
   'packages/clinical-forms',
+  'packages/epis2-widgets',
   'packages/epis2-ui',
 ];
 

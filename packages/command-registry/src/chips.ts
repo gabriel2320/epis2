@@ -1,3 +1,4 @@
+import { pickChipSampleEs } from './chip-samples.js';
 import { filterDefinitionsForRole, getRoleAiCommandHints, isClinicalRole } from './roleSuggestions.js';
 import type { ClinicalIntent } from './types.js';
 
@@ -33,7 +34,7 @@ export function getCommandChipsForRole(
     .map((def) => ({
       id: def.intent,
       labelEs: def.labelEs,
-      sampleEs: def.aliasesEs[0] ?? def.labelEs,
+      sampleEs: pickChipSampleEs(def.aliasesEs, def.labelEs),
       intent: def.intent,
     }));
 
@@ -43,7 +44,7 @@ export function getCommandChipsForRole(
     .map((def) => ({
       id: def.intent,
       labelEs: def.labelEs,
-      sampleEs: def.aliasesEs[0] ?? def.labelEs,
+      sampleEs: pickChipSampleEs(def.aliasesEs, def.labelEs),
       intent: def.intent,
     }));
 

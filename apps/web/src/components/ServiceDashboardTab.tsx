@@ -46,7 +46,7 @@ export function ServiceDashboardTab({ data, onOpenPatient, onReload }: ServiceDa
     <Stack spacing={2} data-testid="epis2-dashboard-service">
       <Box>
         <Typography variant="h6">{data.unitName}</Typography>
-        <Typography variant="caption" color="text.secondary">
+        <Typography variant="body2" color="text.secondary">
           {data.unitCode} · {copy.demoBadge}
         </Typography>
       </Box>

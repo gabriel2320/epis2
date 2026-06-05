@@ -61,8 +61,8 @@ export const ROLE_AI_COMMAND_HINTS: Record<ClinicalRole, readonly RoleAiCommandH
     { sampleEs: 'registrar mar', captionEs: 'MAR + doble chequeo' },
   ],
   pharmacist: [
-    { sampleEs: 'validacion farmaceutica', captionEs: 'Revisión farmacéutica' },
-    { sampleEs: 'revisar prescripcion', captionEs: 'CDS en receta' },
+    { sampleEs: 'validacion farmaceutica', captionEs: 'Validación farmacéutica' },
+    { sampleEs: 'preparar receta médica', captionEs: 'Revisión de receta (CDS)' },
   ],
   admin: [
     { sampleEs: 'tablero de calidad', captionEs: 'Auditoría y ops' },

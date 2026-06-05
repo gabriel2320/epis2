@@ -10,14 +10,23 @@ export const referralBlueprint = defineBlueprint({
   outputKind: 'ORDER_DRAFT',
   requiresPatient: true,
   requiresEncounter: true,
-  sections: [section('referral', 'Interconsulta', ['specialty', 'clinicalQuestion', 'urgency'])],
+  sections: [
+    section('referral', 'Interconsulta', [
+      'specialty',
+      'clinicalSummary',
+      'clinicalQuestion',
+      'urgency',
+    ]),
+  ],
   fields: [
     field('specialty', 'Especialidad', 'text', true),
+    field('clinicalSummary', 'Resumen clínico breve', 'textarea', true),
     field('clinicalQuestion', 'Pregunta clínica', 'textarea', true),
     field('urgency', 'Urgencia', 'select', false, ['rutina', 'preferente', 'urgente']),
   ],
   validations: [
     { fieldId: 'specialty', message: 'Indique la especialidad' },
+    { fieldId: 'clinicalSummary', message: 'Resumen clínico requerido' },
     { fieldId: 'clinicalQuestion', message: 'Pregunta clínica requerida' },
   ],
 });

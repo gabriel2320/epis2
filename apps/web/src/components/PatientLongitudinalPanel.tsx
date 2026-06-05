@@ -52,6 +52,7 @@ function Section({
 export function PatientLongitudinalPanel({
   data,
   onOpenDraft,
+  onOpenNote,
 }: PatientLongitudinalPanelProps) {
   return (
     <Stack spacing={2} data-testid="epis2-longitudinal-panel">
@@ -107,9 +108,15 @@ export function PatientLongitudinalPanel({
             <ListItem
               key={ev.id}
               disablePadding
-              sx={{ cursor: ev.kind === 'draft' && onOpenDraft ? 'pointer' : 'default' }}
+              sx={{
+                cursor:
+                  (ev.kind === 'draft' && onOpenDraft) || (ev.kind === 'note' && onOpenNote)
+                    ? 'pointer'
+                    : 'default',
+              }}
               onClick={() => {
                 if (ev.kind === 'draft' && ev.entityId && onOpenDraft) onOpenDraft(ev.entityId);
+                if (ev.kind === 'note' && onOpenNote) onOpenNote(ev.entityId ?? '');
               }}
             >
               <ListItemText

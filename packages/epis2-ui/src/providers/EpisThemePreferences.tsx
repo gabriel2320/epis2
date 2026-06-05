@@ -7,7 +7,7 @@ import {
 import type { Epis2MotionScheme } from '../theme/motion.js';
 import type { Epis2ThemeDensity, Epis2ThemeMode } from '../theme/create-epis2-theme.js';
 
-const STORAGE_KEY = 'epis2-theme-preferences-v1';
+const STORAGE_KEY = 'epis2-theme-preferences-v2';
 
 export type Epis2ThemePreferences = {
   mode: Epis2ThemeMode;
@@ -18,7 +18,7 @@ export type Epis2ThemePreferences = {
 
 const defaultPreferences: Epis2ThemePreferences = {
   mode: 'light',
-  accent: 'clinicalBlue',
+  accent: 'neutral',
   density: 'comfortable',
   motion: 'standard',
 };

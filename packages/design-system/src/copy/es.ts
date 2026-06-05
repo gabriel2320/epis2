@@ -28,9 +28,11 @@ export const copy = {
     resolving: 'Interpretando instrucción…',
     resolvedNavigate: 'Abriendo espacio clínico…',
     needsPatient: 'Selecciona o busca un paciente antes de continuar.',
-    needsClarification: 'El comando es ambiguo. Prueba una frase más específica.',
+    needsClarification: 'El comando es ambiguo. Elige una opción o escribe una frase más específica.',
+    clarificationTitle: 'Opciones posibles',
     forbidden: 'Tu rol no puede ejecutar este comando.',
     unknownCommand: 'No reconocimos el comando.',
+    pickPatientToContinue: 'Buscar o fijar paciente',
     clinicalAlertsTitle: 'Alertas clínicas (demo)',
     clinicalAlertsHint:
       'CDS y reglas CDR en modo informativo — no bloquean comandos ni aprobación.',
@@ -43,6 +45,7 @@ export const copy = {
   },
   layout: {
     backToCommand: 'Volver al Centro de Comando',
+    logout: 'Cerrar sesión',
   },
   dashboard: {
     title: 'Modo tablero',
@@ -63,7 +66,10 @@ export const copy = {
     openDraft: 'Revisar borrador',
     useCommand: 'Usar en comando',
     openBoard: 'Modo tablero',
-    patientRequiresSelection: 'Selecciona un paciente en el Centro de Comando para ver su tablero.',
+    patientRequiresSelection:
+      'Selecciona un paciente para ver su tablero. Puedes fijarlo desde la ficha o el buscador.',
+    pickPatientAction: 'Elegir paciente',
+    searchPatientAction: 'Buscar paciente',
     viewFullRecord: 'Ver ficha completa',
     tabServiceActive: 'Tablero del servicio (demo)',
     tabQuality: 'Calidad',
@@ -158,7 +164,7 @@ export const copy = {
     gridColumnLabDate: 'Fecha',
   },
   activePatient: {
-    none: 'Sin paciente activo — fija uno para encadenar comandos',
+    none: 'Sin paciente activo — fija uno para encadenar comandos y formularios.',
     pinHint: 'Elige un paciente demo para abrir su ficha y acciones clínicas.',
     change: 'Cambiar paciente',
     workspace: 'Ficha',
@@ -194,6 +200,9 @@ export const copy = {
     approveError: 'No se pudo aprobar. Verifica permisos y estado.',
     transitionError: 'Transición de estado no permitida.',
     openReview: 'Ir a revisión',
+    backToFicha: 'Volver a la ficha',
+    continueEditing: 'Continuar edición',
+    previewTruncated: 'Vista previa — campos con contenido (máx. 12).',
     statusLabels: {
       draft: 'Borrador',
       editing: 'En edición',
@@ -227,7 +236,16 @@ export const copy = {
   forms: {
     encounterDate: 'Fecha del encuentro',
     scheduledDate: 'Fecha programada',
-    needsPatient: 'Selecciona un paciente demo antes de continuar.',
+    needsPatient:
+      'Este formulario requiere un paciente. Búscalo o elige uno desde la ficha clínica.',
+    searchPatient: 'Buscar paciente',
+    backToFicha: 'Volver a la ficha',
+    forbidden: 'Tu rol no puede usar este formulario.',
+    validationRequired: 'Revisa los campos obligatorios antes de guardar.',
+    demoValidLocal:
+      'Formulario válido en demo local. Conecta un paciente y la API para guardar el borrador.',
+    loadPatientsError: 'No hay pacientes demo disponibles. Verifica que la API y la base estén activas.',
+    saveDraftError: 'No se pudo guardar el borrador.',
     saveDraft: 'Guardar borrador',
     searchPatients: 'Cargar pacientes demo',
     suggestAi: 'Sugerir con IA (demo)',

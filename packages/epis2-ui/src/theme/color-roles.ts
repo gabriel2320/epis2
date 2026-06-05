@@ -8,9 +8,9 @@ export const accentPresets: Record<
   Pick<PaletteOptions, 'primary' | 'secondary'> & { surfaceTint?: string }
 > = {
   clinicalBlue: {
-    primary: { main: '#1E6FD6', light: '#E8F1FF', dark: '#0F4FB0', contrastText: '#FFFFFF' },
-    secondary: { main: '#475569', light: '#F1F5F9', dark: '#334155', contrastText: '#FFFFFF' },
-    surfaceTint: '#E8F1FF',
+    primary: { main: '#1873DC', light: '#E3F0FF', dark: '#0D5BB5', contrastText: '#FFFFFF' },
+    secondary: { main: '#3D5166', light: '#EEF2F7', dark: '#243041', contrastText: '#FFFFFF' },
+    surfaceTint: '#E3F0FF',
   },
   tealBlue: {
     primary: { main: '#0D7377', light: '#E0F4F5', dark: '#095456', contrastText: '#FFFFFF' },
@@ -28,9 +28,9 @@ export const accentPresets: Record<
     surfaceTint: '#F0EDF8',
   },
   neutral: {
-    primary: { main: '#334155', light: '#F1F5F9', dark: '#1E293B', contrastText: '#FFFFFF' },
-    secondary: { main: '#64748B', light: '#F8FAFC', dark: '#475569', contrastText: '#FFFFFF' },
-    surfaceTint: '#F1F5F9',
+    primary: { main: '#27272A', light: '#F4F4F5', dark: '#18181B', contrastText: '#FFFFFF' },
+    secondary: { main: '#52525B', light: '#F4F4F5', dark: '#3F3F46', contrastText: '#FFFFFF' },
+    surfaceTint: '#F4F4F5',
   },
 };
 
@@ -46,22 +46,22 @@ export type M3SurfaceRoles = {
 
 const lightSurfaces: M3SurfaceRoles = {
   surface: '#FFFFFF',
-  surfaceContainer: '#F8FAFC',
-  surfaceContainerHigh: '#F1F5F9',
-  onSurface: '#0F172A',
-  onSurfaceVariant: '#64748B',
-  outline: '#CBD5E1',
-  outlineVariant: '#E2E8F0',
+  surfaceContainer: '#F5F5F7',
+  surfaceContainerHigh: '#EBEBED',
+  onSurface: '#18181B',
+  onSurfaceVariant: '#71717A',
+  outline: '#E4E4E7',
+  outlineVariant: '#F0F0F2',
 };
 
 const darkSurfaces: M3SurfaceRoles = {
-  surface: '#1E293B',
-  surfaceContainer: '#0F172A',
-  surfaceContainerHigh: '#334155',
-  onSurface: '#F8FAFC',
-  onSurfaceVariant: '#94A3B8',
-  outline: '#475569',
-  outlineVariant: '#334155',
+  surface: '#1C1C1E',
+  surfaceContainer: '#141416',
+  surfaceContainerHigh: '#2C2C2E',
+  onSurface: '#FAFAFA',
+  onSurfaceVariant: '#A1A1AA',
+  outline: '#3F3F46',
+  outlineVariant: '#27272A',
 };
 
 export function buildM3PaletteOptions(
@@ -84,10 +84,10 @@ export function buildM3PaletteOptions(
       secondary: surfaces.onSurfaceVariant,
     },
     divider: surfaces.outlineVariant,
-    error: { main: '#B42318', contrastText: '#FFFFFF' },
-    warning: { main: '#9A6700', contrastText: '#FFFFFF' },
-    success: { main: '#18794E', contrastText: '#FFFFFF' },
-    info: { main: '#0288D1', contrastText: '#FFFFFF' },
+    error: { main: '#B42318', light: '#FDECEC', dark: '#7A1C16', contrastText: '#FFFFFF' },
+    warning: { main: '#D97706', light: '#FEF3C7', dark: '#92400E', contrastText: '#FFFFFF' },
+    success: { main: '#059669', light: '#D1FAE5', dark: '#047857', contrastText: '#FFFFFF' },
+    info: { main: '#0891B2', light: '#CFFAFE', dark: '#0E7490', contrastText: '#FFFFFF' },
   };
 }
 

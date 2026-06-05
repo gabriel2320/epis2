@@ -1,9 +1,8 @@
 import type { ReactNode } from 'react';
-import { EpisCard } from '../primitives/EpisCard.js';
+import Box from '@mui/material/Box';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
 import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
-import { epis2Shape } from '../theme/shape.js';
+import { epis2ClinicalFormCanvasSx } from './clinical-field-layout.js';
 
 export type EpisClinicalFormPageProps = {
   title: string;
@@ -19,29 +18,23 @@ export function EpisClinicalFormPage({
   headerExtra,
   testId = 'epis2-generated-clinical-page',
 }: EpisClinicalFormPageProps) {
-  const theme = useTheme();
-  const surfaces = theme.epis2?.surfaces;
-
   return (
-    <EpisCard
-      variant="outlined"
-      sx={{
-        p: { xs: 2, md: 3 },
-        borderRadius: epis2Shape.extraLarge,
-        bgcolor: surfaces?.surface ?? 'background.paper',
-        borderColor: surfaces?.outlineVariant ?? 'divider',
-      }}
-      data-testid={testId}
-    >
-      <Stack spacing={2}>
-        <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
-          <EpisM3Text role="headlineMedium" component="h1">
+    <Box sx={epis2ClinicalFormCanvasSx} data-testid={testId}>
+      <Stack spacing={3.5}>
+        <Stack
+          direction="row"
+          spacing={1.5}
+          alignItems="center"
+          flexWrap="wrap"
+          sx={{ minHeight: 32 }}
+        >
+          <EpisM3Text role="titleLarge" component="h1">
             {title}
           </EpisM3Text>
           {headerExtra}
         </Stack>
         {children}
       </Stack>
-    </EpisCard>
+    </Box>
   );
 }

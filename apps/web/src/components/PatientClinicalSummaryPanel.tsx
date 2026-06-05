@@ -37,7 +37,7 @@ export function PatientClinicalSummaryPanel({
       <Stack spacing={1.5}>
         {entries.map(([key, value]) => (
           <Box key={key}>
-            <Typography variant="caption" color="text.secondary" display="block">
+            <Typography variant="body2" color="text.secondary" display="block" sx={{ lineHeight: 1.55 }}>
               {FIELD_LABELS[key] ?? key}
             </Typography>
             <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap' }}>

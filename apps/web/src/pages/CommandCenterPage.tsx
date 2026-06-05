@@ -4,7 +4,6 @@ import { DASHBOARD_TAB_BY_INTENT, getCommandBarAiHint } from '@epis2/command-reg
 import type { ClinicalIntent } from '@epis2/command-registry';
 import {
   Box,
-  EpisAlert,
   EpisButton,
   EpisCard,
   EpisChip,
@@ -14,8 +13,17 @@ import {
   EpisCommandSuggestions,
   EpisM3Text,
   EpisTopAppBar,
+  EpisBrandMark,
   EpisThemeModeToggle,
+  DashboardIcon,
+  GroupsIcon,
+  LogoutIcon,
+  PersonIcon,
+  PersonOutlineIcon,
+  ScienceIcon,
   Stack,
+  VisibilityIcon,
+  VisibilityOffIcon,
 } from '@epis2/epis2-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { ApiError } from '../api/client.js';
@@ -75,8 +83,8 @@ export function CommandCenterPage() {
     }
   }, []);
 
-  const submit = useCallback(async () => {
-    const trimmed = query.trim();
+  const submit = useCallback(async (overrideText?: string) => {
+    const trimmed = (overrideText ?? query).trim();
     if (!trimmed) {
       setError(copy.commandCenter.emptyCommand);
       setLastResult(null);
@@ -114,6 +122,7 @@ export function CommandCenterPage() {
       }
       if (result.status === 'needs_patient') {
         setError(copy.commandCenter.needsPatient);
+        setPatientPanelOpen(true);
         return;
       }
       if (result.status === 'needs_clarification') {
@@ -141,12 +150,20 @@ export function CommandCenterPage() {
   const header = (
     <EpisTopAppBar
       data-testid="epis2-command-top-bar"
-      startAction={<EpisChip label={copy.demoBadge} size="small" color="warning" variant="outlined" />}
+      startAction={
+        <EpisChip
+          icon={<ScienceIcon />}
+          label={copy.demoBadge}
+          size="small"
+          variant="outlined"
+          sx={{ fontWeight: 600, borderColor: 'warning.main', color: 'warning.dark', bgcolor: 'warning.light' }}
+        />
+      }
       endActions={
         <Stack direction="row" alignItems="center" spacing={0.5}>
           <EpisThemeModeToggle />
-          <EpisButton appearance="text" size="small" onClick={logout}>
-            Cerrar sesión
+          <EpisButton appearance="text" size="small" startIcon={<LogoutIcon />} onClick={logout}>
+            {copy.layout.logout}
           </EpisButton>
         </Stack>
       }
@@ -156,16 +173,28 @@ export function CommandCenterPage() {
   return (
     <EpisCommandCenterLayout header={header}>
       {session ? (
-        <EpisM3Text role="labelLarge" color="text.secondary" textAlign="center">
-          {session.user.displayName}
-        </EpisM3Text>
+        <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
+          <PersonIcon color="primary" fontSize="small" />
+          <EpisM3Text role="labelLarge" color="primary.main" textAlign="center">
+            {session.user.displayName}
+          </EpisM3Text>
+        </Stack>
       ) : null}
 
       <Box sx={{ width: '100%', textAlign: 'center' }}>
-        <EpisM3Text role="displayMedium" component="h1" data-testid="epis2-command-prompt">
-          {copy.commandCenter.title}
-        </EpisM3Text>
-        <EpisM3Text role="bodyMedium" color="text.secondary" sx={{ mt: 1 }}>
+        <Stack
+          direction="row"
+          spacing={1.5}
+          alignItems="center"
+          justifyContent="center"
+          sx={{ flexWrap: 'wrap', rowGap: 1 }}
+        >
+          <EpisBrandMark size={44} />
+          <EpisM3Text role="displayMedium" component="h1" data-testid="epis2-command-prompt">
+            {copy.commandCenter.title}
+          </EpisM3Text>
+        </Stack>
+        <EpisM3Text role="bodyMedium" color="text.secondary" sx={{ mt: 1.5, px: 1, lineHeight: 1.55 }}>
           {copy.commandCenter.subtitle}
         </EpisM3Text>
       </Box>
@@ -182,6 +211,7 @@ export function CommandCenterPage() {
           aiAvailable={aiAvailable}
           aiHint={error ? undefined : aiHint}
           roleLabel={roleDisplay}
+          role={role}
           disabled={isResolving}
         />
       </Box>
@@ -190,6 +220,7 @@ export function CommandCenterPage() {
         <EpisButton
           appearance="text"
           size="small"
+          startIcon={patientPanelOpen ? <VisibilityOffIcon /> : <VisibilityIcon />}
           onClick={() => setPatientPanelOpen((open) => !open)}
           data-testid="epis2-toggle-patient-panel"
         >
@@ -198,6 +229,8 @@ export function CommandCenterPage() {
         <EpisButton
           size="small"
           appearance="outlined"
+          color="info"
+          startIcon={<DashboardIcon />}
           data-testid="epis2-open-dashboard"
           onClick={() =>
             void navigate({
@@ -222,13 +255,19 @@ export function CommandCenterPage() {
             <ActivePatientBanner />
           </Box>
           <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mb: patients.length ? 1 : 0 }}>
-            <EpisButton size="small" appearance="outlined" onClick={() => void loadPatients()}>
-              {copy.activePatient.pickPatient}
+            <EpisButton
+              size="small"
+              appearance="outlined"
+              startIcon={<GroupsIcon />}
+              onClick={() => void loadPatients()}
+            >
+              {copy.forms.searchPatients}
             </EpisButton>
             {activePatient ? (
               <EpisButton
                 size="small"
                 appearance="tonal"
+                startIcon={<PersonOutlineIcon />}
                 onClick={() =>
                   void navigate({
                     to: '/espacio/ficha',
@@ -245,10 +284,12 @@ export function CommandCenterPage() {
               {patients.slice(0, 5).map((p) => (
                 <EpisChip
                   key={p.id}
-                  label={p.demoCaseCode ?? p.displayName.slice(0, 20)}
+                  icon={<PersonOutlineIcon />}
+                  label={p.demoCaseCode ?? p.displayName}
+                  title={p.displayName}
                   size="small"
                   variant={activePatient?.id === p.id ? 'filled' : 'outlined'}
-                  color={activePatient?.id === p.id ? 'primary' : 'default'}
+                  color={activePatient?.id === p.id ? 'primary' : 'info'}
                   clickable
                   onClick={() => {
                     setPatient(p);
@@ -280,22 +321,40 @@ export function CommandCenterPage() {
         }}
       />
 
-      {lastResult && lastResult.status === 'resolved' ? (
-        <EpisCommandResult title={copy.commandCenter.previewTitle}>
-          <EpisM3Text role="bodyMedium">
-            {lastResult.labelEs} → {lastResult.routePath}
-          </EpisM3Text>
-          <EpisAlert severity="success" sx={{ mt: 2 }}>
-            {copy.commandCenter.resolvedNavigate}
-          </EpisAlert>
-        </EpisCommandResult>
+      {error === copy.commandCenter.needsPatient ? (
+        <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ width: '100%' }}>
+          <EpisButton
+            size="small"
+            appearance="outlined"
+            onClick={() => void navigate({ to: '/espacio/buscar-paciente' })}
+          >
+            {copy.commandCenter.pickPatientToContinue}
+          </EpisButton>
+          <EpisButton
+            size="small"
+            appearance="tonal"
+            onClick={() => {
+              setPatientPanelOpen(true);
+              void loadPatients();
+            }}
+          >
+            {copy.activePatient.pickPatient}
+          </EpisButton>
+        </Stack>
       ) : null}
 
       {lastResult?.status === 'needs_clarification' && lastResult.candidates.length > 0 ? (
-        <EpisCommandResult title="Opciones posibles">
+        <EpisCommandResult title={copy.commandCenter.clarificationTitle}>
           <Stack direction="row" flexWrap="wrap" gap={1}>
             {lastResult.candidates.map((c) => (
-              <EpisChip key={c.intent} label={c.labelEs} size="small" variant="outlined" />
+              <EpisChip
+                key={c.intent}
+                label={c.labelEs}
+                size="small"
+                variant="outlined"
+                clickable
+                onClick={() => void submit(c.labelEs)}
+              />
             ))}
           </Stack>
         </EpisCommandResult>

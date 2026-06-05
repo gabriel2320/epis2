@@ -5,12 +5,23 @@ export const ASSIST_BLUEPRINT_FIELDS: Record<string, readonly string[]> = {
   evolution_note: ['subjective', 'objective', 'assessment', 'plan'],
   discharge_summary: [
     'diagnoses',
+    'dischargeDate',
     'hospitalizationSummary',
     'evolution',
     'dischargeMedications',
     'instructions',
+    'followUpPlan',
   ],
-  prescription: ['medication', 'dose', 'route', 'frequency', 'duration'],
+  prescription: [
+    'medication',
+    'dose',
+    'quantity',
+    'route',
+    'frequency',
+    'duration',
+    'patientInstructions',
+    'clinicalNotes',
+  ],
   lab_request: ['labTests', 'clinicalReason', 'priority'],
 };
 

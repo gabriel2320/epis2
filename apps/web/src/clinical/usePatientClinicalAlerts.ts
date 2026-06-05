@@ -1,5 +1,5 @@
 import type { ClinicalAlert } from '@epis2/contracts';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { fetchPatientClinicalAlerts } from '../api/clinicalApi.js';
 
 export type UsePatientClinicalAlertsOptions = {
@@ -15,6 +15,11 @@ export function usePatientClinicalAlerts(options: UsePatientClinicalAlertsOption
   const [alerts, setAlerts] = useState<ClinicalAlert[]>([]);
   const [loading, setLoading] = useState(false);
   const [contextLabel, setContextLabel] = useState(options.contextLabel);
+  const hasAlertsRef = useRef(false);
+
+  useEffect(() => {
+    hasAlertsRef.current = alerts.length > 0;
+  }, [alerts]);
 
   const reload = useCallback(async () => {
     if (!options.patientId) {
@@ -22,7 +27,9 @@ export function usePatientClinicalAlerts(options: UsePatientClinicalAlertsOption
       setContextLabel(undefined);
       return;
     }
-    setLoading(true);
+    if (!hasAlertsRef.current) {
+      setLoading(true);
+    }
     try {
       const fetchOpts: Parameters<typeof fetchPatientClinicalAlerts>[1] = {};
       if (options.blueprintId !== undefined) fetchOpts.blueprintId = options.blueprintId;
@@ -59,4 +66,4 @@ export function usePatientClinicalAlerts(options: UsePatientClinicalAlertsOption
   ]);
 
   return { alerts, loading, contextLabel, reload };
-}
+};

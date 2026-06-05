@@ -8,8 +8,11 @@ describe('getCommandChipsForRole', () => {
       'dashboard.read',
     ]);
     const samples = chips.map((c) => c.sampleEs);
+    const rx = chips.find((c) => c.intent === 'prepare_prescription');
     expect(samples.some((s) => /evoluciona/.test(s))).toBe(true);
     expect(samples.some((s) => /\bmar\b/i.test(s))).toBe(false);
+    expect(rx?.labelEs).toBe('Receta médica');
+    expect(rx?.sampleEs).toBe('preparar receta médica');
   });
 
   it('enfermería ve MAR y nota enfermería, no epicrisis', () => {

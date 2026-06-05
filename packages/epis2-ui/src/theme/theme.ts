@@ -8,13 +8,30 @@ export { buildM3PaletteOptions, accentPresets, type Epis2Accent } from './color-
 export { clinicalRoles, type ClinicalRoleKey } from './clinical-roles.js';
 export { epis2Shape, epis2ShapeBorderRadius } from './shape.js';
 export { epis2Motion, motionTransition, prefersReducedMotion, type Epis2MotionScheme } from './motion.js';
-export { epis2Breakpoints, epis2MediaQueries, type Epis2BreakpointKey } from './breakpoints.js';
+export {
+  epis2BarLayout,
+  epis2Breakpoints,
+  epis2MediaQueries,
+  type Epis2BreakpointKey,
+} from './breakpoints.js';
 export {
   epis2Typography,
   epis2TypographyRoles,
   epis2M3TypographyVariants,
+  epis2FontFamily,
   type Epis2M3TypographyRole,
 } from './typography.js';
+export { buildVisualIdentity, buildEpis2Shadows, type Epis2VisualIdentity } from './visual-identity.js';
+export {
+  epis2CanvasSx,
+  epis2IslandSx,
+  epis2IslandPaddingSx,
+  epis2IslandMarginSx,
+  epis2ShellContentIslandSx,
+  epis2PageIslandSx,
+  epis2PillBarSx,
+} from './island-layout.js';
+export { epis2DisplayFontFamily, epis2BodyFontFamily } from './typography.js';
 
 /** @deprecated Usar buildM3PaletteOptions / theme.palette */
 export { epis2Palette } from './palette-legacy.js';

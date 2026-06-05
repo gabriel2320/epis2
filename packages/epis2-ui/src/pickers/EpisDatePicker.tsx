@@ -1,5 +1,9 @@
 import Box from '@mui/material/Box';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import {
+  clinicalFieldShellSx,
+  clinicalOutlinedInputSlotProps,
+} from '../forms/clinical-field-layout.js';
 import { dayjs } from './configureDayjs.js';
 
 export type EpisDatePickerProps = {
@@ -28,7 +32,7 @@ export function EpisDatePicker({
   'data-testid': testId,
 }: EpisDatePickerProps) {
   return (
-    <Box data-testid={testId} sx={{ width: '100%' }}>
+    <Box data-testid={testId} sx={{ width: '100%', ...clinicalFieldShellSx() }}>
       <DatePicker
         label={label}
         value={parseValue(value)}
@@ -37,9 +41,12 @@ export function EpisDatePicker({
         slotProps={{
           textField: {
             fullWidth: true,
+            margin: 'dense',
+            hiddenLabel: true,
             error: Boolean(error),
+            helperText: error ?? ' ',
             ...(required ? { required: true } : {}),
-            ...(error ? { helperText: error } : {}),
+            slotProps: clinicalOutlinedInputSlotProps,
           },
         }}
       />

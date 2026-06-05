@@ -6,6 +6,7 @@ import { buildEpis2Components } from './components.js';
 import type { Epis2MotionScheme } from './motion.js';
 import { epis2Shape, epis2ShapeBorderRadius } from './shape.js';
 import { epis2Typography, epis2TypographyRoles } from './typography.js';
+import { buildEpis2Shadows, buildVisualIdentity, type Epis2VisualIdentity } from './visual-identity.js';
 import { createTheme, type Theme } from '@mui/material/styles';
 import { esES } from '@mui/material/locale';
 
@@ -28,6 +29,7 @@ declare module '@mui/material/styles' {
       surfaces: M3SurfaceRoles;
       clinical: typeof clinicalRoles;
       shape: typeof epis2Shape;
+      visual: Epis2VisualIdentity;
     };
   }
   interface ThemeOptions {
@@ -42,10 +44,11 @@ function resolveSurfaces(mode: Epis2ThemeMode): M3SurfaceRoles {
 /** Único generador de tema EPIS2 (M3-G01). */
 export function createEpis2Theme(options: CreateEpis2ThemeOptions = {}): Theme {
   const mode = options.mode ?? 'light';
-  const accent = options.accent ?? 'clinicalBlue';
+  const accent = options.accent ?? 'neutral';
   const motion = options.motion ?? 'standard';
   const density = options.density ?? 'comfortable';
   const surfaces = resolveSurfaces(mode);
+  const visual = buildVisualIdentity(mode, accent);
 
   const typography =
     options.contrast === 'high'
@@ -60,6 +63,7 @@ export function createEpis2Theme(options: CreateEpis2ThemeOptions = {}): Theme {
     {
       cssVariables: true,
       palette: buildM3PaletteOptions(mode, accent),
+      shadows: buildEpis2Shadows(mode) as Theme['shadows'],
       shape: { borderRadius: epis2ShapeBorderRadius },
       typography,
       spacing: density === 'compact' ? 7 : 8,
@@ -69,10 +73,11 @@ export function createEpis2Theme(options: CreateEpis2ThemeOptions = {}): Theme {
         surfaces,
         clinical: clinicalRoles,
         shape: epis2Shape,
+        visual,
       },
     },
     esES,
   );
 }
 
-export type { Epis2Accent, ClinicalRoleKey };
+export type { Epis2Accent, ClinicalRoleKey, Epis2VisualIdentity };

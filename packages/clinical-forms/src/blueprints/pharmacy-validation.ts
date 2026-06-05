@@ -10,19 +10,30 @@ export const pharmacyValidationBlueprint = defineBlueprint({
   outputKind: 'CLINICAL_NOTE_DRAFT',
   requiresPatient: true,
   requiresEncounter: false,
-  sections: [section('pharm', 'Farmacia', ['medicationReviewed', 'intervention', 'recommendation'])],
+  sections: [
+    section('pharm', 'Farmacia', [
+      'medicationReviewed',
+      'prescribedDose',
+      'intervention',
+      'recommendation',
+      'communicationToPrescriber',
+    ]),
+  ],
   fields: [
     field('medicationReviewed', 'Medicamento revisado', 'text', true),
+    field('prescribedDose', 'Dosis prescrita', 'text', true),
     field('intervention', 'Tipo de intervención', 'select', true, [
       'sin_intervencion',
       'ajuste_dosis',
       'sustitucion',
       'alerta_clinica',
     ]),
-    field('recommendation', 'Recomendación', 'textarea', true),
+    field('recommendation', 'Recomendación farmacéutica', 'textarea', true),
+    field('communicationToPrescriber', 'Comunicación al prescriptor', 'textarea', false),
   ],
   validations: [
     { fieldId: 'medicationReviewed', message: 'Indique el medicamento' },
+    { fieldId: 'prescribedDose', message: 'Indique la dosis prescrita' },
     { fieldId: 'recommendation', message: 'Recomendación requerida' },
   ],
 });

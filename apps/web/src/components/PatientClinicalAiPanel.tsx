@@ -110,7 +110,7 @@ export function PatientClinicalAiPanel({ patientId }: PatientClinicalAiPanelProp
                 {ragResult.answer}
               </Typography>
               {ragResult.citations.length > 0 ? (
-                <Typography variant="caption" color="text.secondary" display="block" sx={{ mt: 1 }}>
+                <Typography variant="body2" color="text.secondary" display="block" sx={{ mt: 1, lineHeight: 1.55 }}>
                   {copy.ai.citations}:{' '}
                   {ragResult.citations.map((c) => c.title).join(' · ')}
                 </Typography>
@@ -132,7 +132,7 @@ export function PatientClinicalAiPanel({ patientId }: PatientClinicalAiPanelProp
 
         {runs.length > 0 ? (
           <Box>
-            <Typography variant="caption" color="text.secondary">
+            <Typography variant="body2" color="text.secondary">
               {copy.ai.recentRuns}
             </Typography>
             {runs.map((r) => (

@@ -15,14 +15,14 @@ export function EpisMetric({ label, value, hint, 'data-testid': testId }: EpisMe
       sx={{ p: 2, minWidth: 140, flex: '1 1 140px' }}
       data-testid={testId}
     >
-      <Typography variant="caption" color="text.secondary" display="block">
+      <Typography variant="body2" color="text.secondary" display="block">
         {label}
       </Typography>
       <Typography variant="h5" component="p" sx={{ mt: 0.5 }}>
         {value}
       </Typography>
       {hint ? (
-        <Typography variant="caption" color="text.secondary" display="block" sx={{ mt: 0.5 }}>
+        <Typography variant="body2" color="text.secondary" display="block" sx={{ mt: 0.5 }}>
           {hint}
         </Typography>
       ) : null}

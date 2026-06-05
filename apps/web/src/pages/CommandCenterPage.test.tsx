@@ -141,7 +141,7 @@ describe('CommandCenterPage', () => {
     const user = userEvent.setup();
     renderCommandCenter();
     await user.click(screen.getByRole('button', { name: copy.commandCenter.showPatientContext }));
-    await user.click(screen.getByRole('button', { name: copy.activePatient.pickPatient }));
+    await user.click(screen.getByRole('button', { name: copy.forms.searchPatients }));
     await user.click(screen.getByRole('button', { name: 'DEMO-005' }));
 
     expect(await screen.findByTestId('epis2-clinical-alerts')).toBeInTheDocument();

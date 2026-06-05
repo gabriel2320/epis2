@@ -11,6 +11,8 @@ import { validate as fhirBoundary } from './fhir-export-boundary.mjs';
 import { validate as invariants } from './main-product-invariants.mjs';
 import { validate as noDirectMui } from './no-direct-mui-imports.mjs';
 import { validate as singleEpis2Theme } from './single-epis2-theme.mjs';
+import { validate as singleWidget } from './single-widget-registry.mjs';
+import { validate as widgetGates } from './widget-registry-gates.mjs';
 
 const VALIDATORS = [
   ['main-product-invariants', invariants],
@@ -19,6 +21,8 @@ const VALIDATORS = [
   ['no-legacy-dependencies', noLegacy],
   ['single-command-registry', singleCommand],
   ['single-form-registry', singleForm],
+  ['single-widget-registry', singleWidget],
+  ['widget-registry-gates', widgetGates],
   ['command-center-home', commandHome],
   ['spanish-visible-copy', spanishCopy],
   ['explicit-permissions', explicitPerms],

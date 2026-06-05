@@ -27,8 +27,9 @@ export const DRAFT_PROMPT_CATALOG: DraftPromptSpec[] = [
     blueprintId: 'prescription',
     taskTitle: 'Receta médica',
     taskDetail:
-      'Sugiere medicamento, dosis, vía, frecuencia y duración solo si hay contexto suficiente.',
-    fieldHints: 'Nunca indiques dispensar o firmar; es borrador para revisión.',
+      'Sugiere medicamento, dosis, cantidad, vía, frecuencia, duración e indicaciones al paciente solo si hay contexto suficiente.',
+    fieldHints:
+      'Incluye patientInstructions en lenguaje claro para el paciente. Nunca indiques dispensar o firmar; es borrador para revisión.',
   },
   {
     blueprintId: 'lab_request',

@@ -28,4 +28,23 @@ describe('EpisCommandBar', () => {
     fireEvent.submit(screen.getByTestId('epis2-power-bar'));
     expect(onSubmit).toHaveBeenCalled();
   });
+
+  it('muestra el hint de IA una sola vez bajo el campo', () => {
+    const hint = 'IA local apagada — comandos y formularios manuales disponibles.';
+    render(
+      <Epis2ThemeProvider>
+        <EpisCommandBar
+          label="Instrucción"
+          placeholder="Escribe…"
+          submitLabel="Continuar"
+          value=""
+          onChange={() => {}}
+          onSubmit={() => {}}
+          aiAvailable={false}
+          aiHint={hint}
+        />
+      </Epis2ThemeProvider>,
+    );
+    expect(screen.getAllByText(hint)).toHaveLength(1);
+  });
 });

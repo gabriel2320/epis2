@@ -190,7 +190,23 @@ export function DashboardModeContent() {
             }
           />
         ) : (
-          <Alert severity="info">{copy.dashboard.patientRequiresSelection}</Alert>
+          <Stack spacing={2}>
+            <Alert severity="info">{copy.dashboard.patientRequiresSelection}</Alert>
+            <Stack direction="row" spacing={1} flexWrap="wrap">
+              <Chip
+                label={copy.dashboard.pickPatientAction}
+                clickable
+                variant="outlined"
+                onClick={() => void navigate({ to: '/espacio/ficha' })}
+              />
+              <Chip
+                label={copy.dashboard.searchPatientAction}
+                clickable
+                color="primary"
+                onClick={() => void navigate({ to: '/espacio/buscar-paciente' })}
+              />
+            </Stack>
+          </Stack>
         )}
       </>
     );
@@ -281,7 +297,10 @@ export function DashboardModeContent() {
                           variant={activePatient?.id === p.id ? 'filled' : 'outlined'}
                           onClick={() => {
                             setPatient(p);
-                            goCommand();
+                            void navigate({
+                              to: '/espacio/ficha',
+                              search: { patientId: p.id },
+                            });
                           }}
                         />
                       ))}

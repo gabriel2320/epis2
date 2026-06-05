@@ -1,3 +1,4 @@
+import { getBlueprintByRoutePath } from '@epis2/clinical-forms';
 import { copy } from '@epis2/design-system';
 import { Link, useSearch } from '@tanstack/react-router';
 import { useClinicalNavigate, type ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
@@ -13,9 +14,9 @@ import {
   List,
   ListItem,
   ListItemText,
-  Paper,
   Stack,
   Typography,
+  epis2ShellContentIslandSx,
 } from '@epis2/epis2-ui';
 import {
   BLUEPRINT_BY_ROUTE,
@@ -27,22 +28,24 @@ import {
   type PatientListRow,
 } from '../api/clinicalApi.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
+import { ClinicalPageNav } from '../components/ClinicalPageNav.js';
+import { ErrorState } from '../components/ErrorState.js';
 import { PatientListGrid } from '../components/PatientListGrid.js';
 import { PatientClinicalSummaryPanel } from '../components/PatientClinicalSummaryPanel.js';
 import { PatientLongitudinalPanel } from '../components/PatientLongitudinalPanel.js';
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 
-const QUICK_ROUTES: { path: ClinicalFormRoutePath; label: string }[] = [
-  { path: '/espacio/resumen', label: 'Resumen clínico' },
-  { path: '/espacio/evolucion', label: 'Evolución' },
-  { path: '/espacio/epicrisis', label: 'Epicrisis' },
-  { path: '/espacio/receta', label: 'Receta' },
-  { path: '/espacio/laboratorio', label: 'Laboratorio' },
-  { path: '/espacio/interconsulta', label: 'Interconsulta' },
-  { path: '/espacio/imagenologia', label: 'Imagenología' },
-  { path: '/espacio/enfermeria', label: 'Enfermería' },
-  { path: '/espacio/mar', label: 'MAR' },
-  { path: '/espacio/farmacia', label: 'Farmacia' },
+const QUICK_ROUTE_PATHS: ClinicalFormRoutePath[] = [
+  '/espacio/resumen',
+  '/espacio/evolucion',
+  '/espacio/epicrisis',
+  '/espacio/receta',
+  '/espacio/laboratorio',
+  '/espacio/interconsulta',
+  '/espacio/imagenologia',
+  '/espacio/enfermeria',
+  '/espacio/mar',
+  '/espacio/farmacia',
 ];
 
 export function PatientWorkspacePage() {
@@ -102,7 +105,7 @@ export function PatientWorkspacePage() {
 
   if (!patientId) {
     return (
-      <Stack spacing={2} data-testid="epis2-patient-workspace-pick">
+      <Stack spacing={2} sx={epis2ShellContentIslandSx} data-testid="epis2-patient-workspace-pick">
         <Alert severity="info">{copy.activePatient.pinHint}</Alert>
         <Button variant="outlined" onClick={() => void loadPatientList()}>
           {copy.forms.searchPatients}
@@ -121,20 +124,36 @@ export function PatientWorkspacePage() {
         <Button component={Link} to="/espacio/buscar-paciente" variant="text">
           {copy.activePatient.searchForm}
         </Button>
+        <ClinicalPageNav />
       </Stack>
     );
   }
 
   if (error) {
-    return <Alert severity="error">{error}</Alert>;
+    return (
+      <Stack spacing={2} sx={epis2ShellContentIslandSx}>
+        <ErrorState
+          title={copy.errors.genericTitle}
+          message={error}
+          onRetry={() => patientId && void loadDetail(patientId)}
+          retryLabel={copy.errors.retry}
+        />
+        <ClinicalPageNav patientId={patientId} />
+      </Stack>
+    );
   }
 
   if (!detail) {
-    return <Typography color="text.secondary">{copy.drafts.loading}</Typography>;
+    return (
+      <Stack spacing={2} sx={epis2ShellContentIslandSx}>
+        <Typography color="text.secondary">{copy.drafts.loading}</Typography>
+        <ClinicalPageNav patientId={patientId} />
+      </Stack>
+    );
   }
 
   return (
-    <Paper variant="outlined" sx={{ p: 3 }} data-testid="epis2-patient-workspace">
+    <Stack sx={epis2ShellContentIslandSx} data-testid="epis2-patient-workspace">
       <Stack spacing={3}>
         <Stack spacing={1}>
           <Stack direction="row" spacing={1} flexWrap="wrap" alignItems="center">
@@ -146,7 +165,7 @@ export function PatientWorkspacePage() {
               <Chip label={detail.patient.demoCaseCode} size="small" />
             ) : null}
           </Stack>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.55 }}>
             {copy.activePatient.workspaceSubtitle}
           </Typography>
         </Stack>
@@ -168,35 +187,47 @@ export function PatientWorkspacePage() {
                 params: { draftId },
               })
             }
+            onOpenNote={() =>
+              void navigate({
+                to: '/espacio/resumen',
+                search: { patientId },
+              })
+            }
           />
         ) : null}
 
         <Box>
-          <Typography variant="subtitle2" gutterBottom>
+          <Typography variant="subtitle1" gutterBottom sx={{ lineHeight: 1.45 }}>
             {copy.activePatient.quickActions}
           </Typography>
           <Stack direction="row" flexWrap="wrap" gap={1}>
-            {QUICK_ROUTES.map((action) => (
-              <Button
-                key={action.path}
-                variant="outlined"
-                size="small"
-                onClick={() => {
-                  const blueprintId = BLUEPRINT_BY_ROUTE[action.path];
-                  setAlertBlueprintId(blueprintId);
-                  setAlertLabel(action.label);
-                  navigate({
-                    to: action.path,
-                    search: { patientId },
-                  });
-                }}
-              >
-                {action.label}
-              </Button>
-            ))}
+            {QUICK_ROUTE_PATHS.map((path) => {
+              const blueprint = getBlueprintByRoutePath(path);
+              const label = blueprint?.label ?? path;
+              return (
+                <Button
+                  key={path}
+                  variant="outlined"
+                  size="small"
+                  sx={{ whiteSpace: 'normal', textAlign: 'center', lineHeight: 1.45 }}
+                  onClick={() => {
+                    const blueprintId = BLUEPRINT_BY_ROUTE[path];
+                    setAlertBlueprintId(blueprintId);
+                    setAlertLabel(label);
+                    navigate({
+                      to: path,
+                      search: { patientId },
+                    });
+                  }}
+                >
+                  {label}
+                </Button>
+              );
+            })}
             <Button
               variant="outlined"
               size="small"
+              sx={{ whiteSpace: 'normal', textAlign: 'center', lineHeight: 1.45 }}
               onClick={() =>
                 void navigate({
                   to: '/epis2/dashboard',
@@ -212,11 +243,11 @@ export function PatientWorkspacePage() {
         <Divider />
 
         <Box>
-          <Typography variant="subtitle2" gutterBottom>
+          <Typography variant="subtitle1" gutterBottom sx={{ lineHeight: 1.45 }}>
             {copy.activePatient.approvedNotes}
           </Typography>
           {detail.notes.length === 0 ? (
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.55 }}>
               {copy.activePatient.noNotes}
             </Typography>
           ) : (
@@ -231,11 +262,11 @@ export function PatientWorkspacePage() {
         </Box>
 
         <Box>
-          <Typography variant="subtitle2" gutterBottom>
+          <Typography variant="subtitle1" gutterBottom sx={{ lineHeight: 1.45 }}>
             {copy.activePatient.pendingDrafts}
           </Typography>
           {drafts.length === 0 ? (
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.55 }}>
               {copy.activePatient.noDrafts}
             </Typography>
           ) : (
@@ -289,6 +320,6 @@ export function PatientWorkspacePage() {
           </Button>
         </Stack>
       </Stack>
-    </Paper>
+    </Stack>
   );
 }

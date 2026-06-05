@@ -1,3 +1,4 @@
+export { EpisBrandMark, type EpisBrandMarkProps } from './EpisBrandMark.js';
 export { EpisButton, type EpisButtonProps, type EpisButtonAppearance } from './EpisButton.js';
 export { EpisM3Text, type EpisM3TextProps } from './EpisM3Text.js';
 export { EpisTopAppBar, type EpisTopAppBarProps } from './EpisTopAppBar.js';

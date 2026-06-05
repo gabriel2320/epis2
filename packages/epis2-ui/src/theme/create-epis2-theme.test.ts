@@ -11,9 +11,12 @@ describe('createEpis2Theme', () => {
     }
   });
 
-  it('incluye superficies M3 y escala de forma', () => {
+  it('incluye superficies M3, identidad visual y escala de forma', () => {
     const theme = createEpis2Theme();
     expect(theme.epis2.surfaces.surface).toBeTruthy();
-    expect(theme.epis2.shape.extraLarge).toBe(24);
+    expect(theme.epis2.visual.brandGradient).toBe('none');
+    expect(theme.palette.background.default).toBe('#F5F5F7');
+    expect(theme.epis2.shape.extraLarge).toBe(10);
+    expect(theme.epis2.shape.island).toBe(8);
   });
 });
