@@ -20,6 +20,8 @@ import {
 
   EpisBrandMark,
 
+  EpisThemeModeToggle,
+
   LogoutIcon,
 
   Stack,
@@ -147,6 +149,8 @@ export function ClinicalShellLayout() {
                 {copy.layout.backToCommand}
 
               </Button>
+
+              <EpisThemeModeToggle data-testid="epis2-clinical-theme-toggle" />
 
               <Button
 

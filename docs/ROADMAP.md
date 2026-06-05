@@ -118,9 +118,15 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 ## Frontera actual (post-MVP v1 + M3)
 
-**PILOT-HUMAN:** ✓ **GO DEMO** (2026-06-05) — `reports/epis2-pilot-human-2026-06-05.md`
+| Hito | Estado |
+|------|--------|
+| **PILOT-HUMAN** GO DEMO | ✓ `reports/epis2-pilot-human-2026-06-05.md` |
+| **UI plana + formularios** | ✓ `reports/epis2-chips-forms-completion.md` |
+| **Plan A** estabilización UX/docs | ✓ `reports/epis2-ux-stabilization.md` |
+| **WIDGET-00** fundación | ✓ `reports/epis2-widget-foundation.md` |
+| **Slices V1–V5** | ◐ demo; gates completos abiertos — `reports/epis2-audit-and-dev-plans-2026-06-05.md` |
 
-**EPIS2-13:** hospitalización (V2) — ver `docs/product/EPIS2_RELEASE_ROADMAP.md`
+**Siguiente recomendado:** **WIDGET-01** o **V1 completo** (OCR/RAG/PDF) — ver `docs/product/EPIS2_RELEASE_ROADMAP.md`
 
 ---
 

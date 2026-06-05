@@ -56,7 +56,9 @@ Leyenda de madurez:
 | Resolución intent → ruta | ✓ | ✓ | ✓ API `/api/commands/resolve` |
 | Sinónimos es-CL | ✓ | ✓ | ✓ adaptado EPIS |
 | MAU / ranking NL | ✓ | ✓ | ✓ `rank.ts` concepto EPIONE |
-| Modo tablero opcional | ○ | ✓ | ✓ EPIS2-12 |
+| Modo tablero opcional | ✓ | ✓ | ✓ EPIS2-12 |
+| Chips de comando sin truncar | ✓ | ✓ | ✓ `pickChipSampleEs` + M3 chips |
+| Navegación clínica (volver ficha/comando) | ✓ | ✓ | ✓ `ClinicalPageNav` |
 | Power bar / una acción principal | ✓ | ✓ | ✓ |
 
 ### 2.3 Pacientes e identidad clínica
@@ -76,11 +78,11 @@ Leyenda de madurez:
 |-----------|----|----|-----|---------------|
 | Problemas activos | ◐ | ✓ | ✓ | ◐ campos resumen demo |
 | Diagnósticos estructurados | — | ✓ | ✓ | ○ |
-| Alergias | ◐ | ✓ | ✓ | ◐ CDS + tabla demo |
-| Medicamentos activos | ◐ | ✓ | ✓ | ◐ contexto demo |
-| Observaciones / signos vitales | — | ✓ | ✓ | ○ |
-| Línea de tiempo | — | ✓ | ✓ | ○ |
-| Documentos versionados | — | ✓ | ✓ | ○ EPIS2-11 docs plan |
+| Alergias | ◐ | ✓ | ✓ | ✓ tabla demo + CDS (slice V1) |
+| Medicamentos activos | ◐ | ✓ | ✓ | ✓ contexto + tabla demo |
+| Observaciones / signos vitales | — | ✓ | ✓ | ◐ blueprint enfermería |
+| Línea de tiempo | — | ✓ | ✓ | ◐ API longitudinal + panel UI |
+| Documentos versionados | — | ✓ | ✓ | ◐ `clinical_documents` + búsqueda |
 | Notas clínicas versionadas | ✓ | ✓ | ✓ | ✓ borrador → aprobación |
 | Historial de cambios | ✓ | ✓ | ✓ | ✓ versiones borrador |
 
@@ -117,7 +119,7 @@ Leyenda de madurez:
 | Capacidad | Versión | Estado |
 |-----------|---------|--------|
 | Nota de enfermería | V3 | ✓ blueprint demo |
-| Signos vitales | V3 | ○ |
+| Signos vitales | V3 | ◐ blueprint enfermería (demo) |
 | Balance hídrico | V3 | ○ |
 | Plan de cuidados | V3 | ○ |
 | MAR (administración) | V3 | ✓ CDR + `mar_administration_records` |
@@ -143,8 +145,8 @@ Leyenda de madurez:
 | Búsqueda semántica (RAG) | V1/V5 | ◐ RAG con citas demo (sin pgvector) |
 | Export PDF / impresión | V1 | ○ |
 | FHIR R4 export | V1 | ✓ frontera `packages/fhir-export` |
-| HL7 v2 | V4 | — |
-| Staging importación externa | V4 | — |
+| HL7 v2 | V4 | ◐ validador demo (tablero calidad) |
+| Staging importación externa | V4 | ◐ lectura staging demo |
 
 ### 2.10 Localización chilena
 
@@ -191,7 +193,8 @@ Leyenda de madurez:
 | Dominio | Paquete / área | Rol |
 |---------|----------------|-----|
 | Comandos | `packages/command-registry` | Intents, aliases, routing |
-| Formularios | `packages/clinical-forms` | Blueprints y validación |
+| Formularios | `packages/clinical-forms` | Blueprints y validación (11 en registry) |
+| Widgets | `packages/epis2-widgets` | Registry contextual (WIDGET-00) |
 | Permisos | `packages/clinical-domain` (RBAC) | Matriz rol → permiso |
 | Acciones clínicas | `packages/clinical-actions` *(futuro)* | Catálogo declarativo EPIONE |
 | Contratos | `packages/contracts` | API + UI + IA |
@@ -207,9 +210,10 @@ Leyenda de madurez:
 
 | Fase repo | Entregable principal |
 |-----------|----------------------|
-| EPIS2-00 … 11 | MVP command-first + journey dorado (≈ núcleo V0) |
-| EPIS2-12 | Modo tablero básico — **siguiente recomendada** |
-| EPIS2-13+ | Hospitalización, enfermería, etc. (ver roadmap versiones) |
+| EPIS2-00 … 12 | MVP command-first + Modo tablero (V0 ✓) |
+| WIDGET-00 | Fundación widgets contextuales |
+| Plan A | Estabilización UX + sync docs |
+| WIDGET-01 / V1+ | **Siguiente** — ver `reports/epis2-audit-and-dev-plans-2026-06-05.md` |
 
 ---
 

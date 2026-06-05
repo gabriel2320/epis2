@@ -29,7 +29,8 @@ Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.
 ## Fases
 
 ```text
-EPIS2-00 ✓ … EPIS2-12 ✓ · MUI-01…10 ✓ · M3-00…09 ✓
+EPIS2-00 ✓ … EPIS2-12 ✓ · MUI-01…10 ✓ · M3-00…09 ✓ · GO DEMO ✓ · Plan A UX ✓
+Siguiente: WIDGET-01 o V1 completo — reports/epis2-audit-and-dev-plans-2026-06-05.md
 ```
 
 ## Memoria legacy

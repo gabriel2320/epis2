@@ -63,10 +63,7 @@ export function buildEpis2Components(motionScheme: 'standard' | 'reduced' = 'sta
           borderRadius: epis2Shape.large,
           transition: 'none',
           minHeight: 48,
-          backgroundColor:
-            theme.palette.mode === 'light'
-              ? theme.palette.background.paper
-              : 'rgba(26, 35, 50, 0.72)',
+          backgroundColor: theme.palette.background.paper,
           '&.Mui-focused': {
             boxShadow: 'none',
           },

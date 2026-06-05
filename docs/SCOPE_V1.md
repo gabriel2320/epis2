@@ -1,6 +1,6 @@
 # EPIS2 — Alcance MVP v1
 
-**Fase:** EPIS2-00 · **Estado:** Aprobado para implementación futura
+**Fase:** EPIS2-00 · **Estado:** MVP v1 cerrado (GO DEMO) + slices demo documentados abajo
 
 El MVP v1 demuestra el **flujo command-first completo** con actividades clínicas acotadas. No pretende ser una ficha hospitalaria ni un HIS.
 
@@ -88,6 +88,24 @@ Resultado humano: `GO DEMO` | `PASS WITH FIXES` | `BLOCKED` | `NO GO`.
 
 ---
 
-## Límite explícito
+## Límite explícito (MVP original)
 
-Máximo **8 actividades clínicas** en el MVP (las 6 páginas + búsqueda + comando/resumen cuentan dentro del límite operativo del canon). No añadir módulos hospitalarios sin revisión de alcance.
+Máximo **8 actividades clínicas** en el MVP (las 6 páginas + búsqueda + comando/resumen cuentan dentro del límite operativo del canon).
+
+---
+
+## Addendum — Slices demo post-MVP (2026-06)
+
+Fuera del límite estricto de v1, el repositorio incluye **blueprints y rutas adicionales** para demostrar slices V1–V3 sin segundo registry:
+
+| Blueprint | Ruta | Versión objetivo |
+|-----------|------|------------------|
+| `referral` | `/espacio/interconsulta` | V1 |
+| `imaging_request` | `/espacio/imagenologia` | V1 |
+| `nursing_note` | `/espacio/enfermeria` | V3 |
+| `medication_administration` | `/espacio/mar` | V3 |
+| `pharmacy_validation` | `/espacio/farmacia` | V3 |
+
+**Reglas:** mismos gates (borrador → aprobación humana); datos sintéticos; no sustituyen el gate V1/V3 completo documentado en `EPIS2_RELEASE_ROADMAP.md`.
+
+Modo tablero (`/epis2/dashboard`), widgets (WIDGET-00) y slices V2/V4/V5 API siguen el mismo criterio: **demo reversible**, home = Centro de Comando.

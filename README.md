@@ -26,8 +26,9 @@ Aplicación clínica **command-first**, independiente del proyecto EPIS (legacy)
 |-------|--------|
 | **MUI-01…10** | Completado — tema, catálogo, formularios, Data Grid, Date Pickers, Charts, Tree, Dashboard shell, Scheduler spike |
 | **M3-00…09** | Completado — tokens M3, `createEpis2Theme`, primitivos, reskin Login/Comando/clínico/tablero, preferencias, QA signoff |
+| **UI plana + slices** | Completado — tema monocromático, chips sin truncar, 11 blueprints, WIDGET-00 |
 
-Reportes: `reports/epis2-m3-09-qa-signoff.md` · `reports/epis2-m3-09-bundle-budget.md`
+Reportes: `reports/epis2-m3-09-qa-signoff.md` · `reports/epis2-ux-stabilization.md` · `reports/epis2-audit-and-dev-plans-2026-06-05.md`
 
 ## Documentación esencial
 
@@ -38,7 +39,8 @@ Reportes: `reports/epis2-m3-09-qa-signoff.md` · `reports/epis2-m3-09-bundle-bud
 | [docs/NON_GOALS.md](docs/NON_GOALS.md) | Lo que EPIS2 no hará en v1 |
 | [docs/ARCHITECTURE_TARGET.md](docs/ARCHITECTURE_TARGET.md) | Arquitectura objetivo |
 | [docs/LEGACY_DONOR_MAP.md](docs/LEGACY_DONOR_MAP.md) | Migración selectiva desde EPIS |
-| [docs/ROADMAP.md](docs/ROADMAP.md) | Fases EPIS2-00 … EPIS2-12 |
+| [docs/ROADMAP.md](docs/ROADMAP.md) | Fases EPIS2-00 … EPIS2-12 + frontera producto |
+| [docs/SCOPE_V1.md](docs/SCOPE_V1.md) | MVP v1 + addendum slices demo |
 | [docs/design/M3_ADOPTION_PLAN.md](docs/design/M3_ADOPTION_PLAN.md) | Plan Material 3 Clinical (M3-00…09) |
 | [docs/design/EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md](docs/design/EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md) | Especificación M3 |
 | [docs/quality/M3_ANTI_DRIFT_GATES.md](docs/quality/M3_ANTI_DRIFT_GATES.md) | Gates anti-deriva M3 |
@@ -57,7 +59,7 @@ EPIS (`../Epis`) queda en estado **`LEGACY_REFERENCE`**. No copiar su arquitectu
 ```bash
 npm install
 npm run check
-npm run test              # con DATABASE_URL: 182 tests (integración + golden API)
+npm run test              # con DATABASE_URL: 210+ tests (integración + golden API)
 npm run db:validate
 npm run quality:golden-journey   # journey spec + API (requiere DATABASE_URL)
 npm run qa:bundle-analyze        # presupuestos MUI X (opcional)
@@ -75,7 +77,8 @@ En el Centro de Comando verás el chip **IA local** en verde cuando Ollama y `de
 
 ## Próximo paso
 
-**Piloto humano GO DEMO (2026-06-05)** — ver `reports/epis2-pilot-human-2026-06-05.md`. Siguiente fase producto: **EPIS2-13** (V2 hospitalización, roadmap).
+**Plan A (estabilización UX + docs)** ✓ — ver `reports/epis2-ux-stabilization.md`.  
+**Siguiente:** **Plan B — WIDGET-01** (montaje contextual en Comando y ficha) o **Plan C** (V1 completo: OCR/RAG/PDF).
 
 Demo en vivo:
 

@@ -7,6 +7,7 @@ import type { ReactNode } from 'react';
 import { EpisButton } from '../primitives/EpisButton.js';
 import { EpisChip } from '../primitives/EpisChip.js';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
+import { EpisThemeModeToggle } from '../providers/EpisThemeModeToggle.js';
 import { epis2CanvasSx, epis2IslandPaddingSx, epis2IslandSx } from '../theme/island-layout.js';
 import { epis2Shape } from '../theme/shape.js';
 
@@ -68,13 +69,16 @@ export function EpisDashboardShell({
               </EpisM3Text>
             ) : null}
           </Box>
-          <EpisButton
-            appearance="outlined"
-            data-testid="epis2-back-to-command"
-            onClick={onBackToCommand}
-          >
-            {backLabel}
-          </EpisButton>
+          <Stack direction="row" spacing={0.5} alignItems="center" flexShrink={0}>
+            <EpisThemeModeToggle data-testid="epis2-dashboard-theme-toggle" />
+            <EpisButton
+              appearance="outlined"
+              data-testid="epis2-back-to-command"
+              onClick={onBackToCommand}
+            >
+              {backLabel}
+            </EpisButton>
+          </Stack>
         </Stack>
 
         {demoBadge ? (

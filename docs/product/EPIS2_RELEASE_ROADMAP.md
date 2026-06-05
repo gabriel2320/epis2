@@ -16,7 +16,7 @@
 | **V4** | Interoperabilidad y operación | Piloto interno read-only |
 | **V5** | IA clínica avanzada segura | IA trazable y desconectable |
 
-**Estado repo (2026-06):** EPIS2-00 … EPIS2-12 completadas ≈ **núcleo V0** (validar gate humano piloto).
+**Estado repo (2026-06-05):** EPIS2-00 … EPIS2-12 ✓ · M3-00…09 ✓ · **GO DEMO** ✓ · slices V1–V5 demo · WIDGET-00 ✓ · Plan A UX ✓.
 
 ---
 
@@ -236,15 +236,14 @@ IA desconectada = producto usable; con IA = trazabilidad `ai_runs` + fuentes cit
 
 ## Siguiente fase recomendada
 
-**EPIS2-12 — Modo tablero básico («Mi trabajo»)**
+| Prioridad | Plan | Objetivo |
+|-----------|------|----------|
+| **P1** | **WIDGET-01** | Montar widgets contextuales en Comando y ficha (fundación WIDGET-00 lista) |
+| **P1** | **V1 completo** | OCR, RAG pgvector, PDF — cerrar gate longitudinal |
+| **P2** | **V2 completo (EPIS2-13)** | Ingreso, traslados, alta operativa E2E |
+| **P2** | **CI bundle** | `qa:bundle-analyze` en pipeline |
 
-Motivo: es el único hueco explícito del gate V0 respecto al código ya entregado en EPIS2-00…11.
-
-No iniciar V1 longitudinal masivo hasta:
-
-1. Journey dorado estable con y sin Ollama.
-2. Modo tablero navegable y reversible.
-3. `npm run check` verde.
+V0 cerrado (GO DEMO + Modo tablero). Ver `reports/epis2-audit-and-dev-plans-2026-06-05.md`.
 
 ---
 
