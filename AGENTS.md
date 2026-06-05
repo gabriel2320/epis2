@@ -30,7 +30,7 @@ Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.
 
 ```text
 EPIS2-00 ✓ … EPIS2-12 ✓ · MUI-01…10 ✓ · M3-00…09 ✓ · GO DEMO ✓ · Plan A ✓ · WIDGET-01 ✓ · Plan C ✓ · Plan D slice ✓
-Siguiente: Plan F slice 3 — reports/epis2-plan-f-slice-2.md. V3: reports/epis2-v3-plan-e-slice.md
+Siguiente: Plan G o signoff piloto — reports/epis2-plan-f-slice-3.md. V3: reports/epis2-v3-plan-e-slice.md
 ```
 
 ## Memoria legacy

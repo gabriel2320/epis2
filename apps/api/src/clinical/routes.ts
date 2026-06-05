@@ -10,6 +10,7 @@ import { roleHasPermission } from '@epis2/clinical-domain';
 import { z } from 'zod';
 import type { FastifyInstance } from 'fastify';
 import type { Database } from '../db/client.js';
+import { runWithRlsContext } from '../db/rlsContext.js';
 import {
   createRequirePermission,
   type AuthenticatedRequest,
@@ -85,8 +86,9 @@ export async function registerClinicalRoutes(
     '/api/patients',
     { preHandler: requirePatientRead },
     async (request) => {
+      const session = (request as AuthenticatedRequest).session;
       const q = (request.query as { q?: string }).q;
-      const rows = await searchPatients(db, q);
+      const rows = await runWithRlsContext(db, config, session, (tx) => searchPatients(tx, q));
       const patients = await Promise.all(
         rows.map(async (p) => {
           const demoCaseCode = await getPatientDemoCaseCode(db, p.id);
@@ -140,11 +142,16 @@ export async function registerClinicalRoutes(
     { preHandler: requirePatientRead },
     async (request, reply) => {
       const { patientId } = request.params as { patientId: string };
-      const patient = await getPatientById(db, patientId);
+      const session = (request as AuthenticatedRequest).session;
+      const patient = await runWithRlsContext(db, config, session, (tx) =>
+        getPatientById(tx, patientId),
+      );
       if (!patient) {
         return reply.status(404).send({ error: 'Paciente no encontrado' });
       }
-      const notes = await listApprovedNotes(db, patientId);
+      const notes = await runWithRlsContext(db, config, session, (tx) =>
+        listApprovedNotes(tx, patientId),
+      );
       const clinicalContext = await getPatientClinicalContext(db, patientId);
       const demoCaseCode = await getPatientDemoCaseCode(db, patientId);
       return {
@@ -273,10 +280,8 @@ export async function registerClinicalRoutes(
         body,
       };
       if (encounterId !== undefined) draftInput.encounterId = encounterId;
-      const draft = await createDraft(
-        db,
-        { id: session.sub, username: session.username },
-        draftInput,
+      const draft = await runWithRlsContext(db, config, session, (tx) =>
+        createDraft(tx, { id: session.sub, username: session.username }, draftInput),
       );
       return reply.status(201).send({ draft });
     },
@@ -286,11 +291,12 @@ export async function registerClinicalRoutes(
     '/api/drafts',
     { preHandler: createRequirePermission(config, 'draft.read') },
     async (request) => {
+      const session = (request as AuthenticatedRequest).session;
       const query = request.query as { patientId?: string; status?: string };
       const filter: { patientId?: string; status?: string } = {};
       if (query.patientId !== undefined) filter.patientId = query.patientId;
       if (query.status !== undefined) filter.status = query.status;
-      const drafts = await listDrafts(db, filter);
+      const drafts = await runWithRlsContext(db, config, session, (tx) => listDrafts(tx, filter));
       return {
         drafts: drafts.map((d) => ({
           id: d.id,
@@ -309,7 +315,10 @@ export async function registerClinicalRoutes(
     { preHandler: createRequirePermission(config, 'draft.read') },
     async (request, reply) => {
       const { draftId } = request.params as { draftId: string };
-      const detail = await getDraftDetail(db, draftId);
+      const session = (request as AuthenticatedRequest).session;
+      const detail = await runWithRlsContext(db, config, session, (tx) =>
+        getDraftDetail(tx, draftId),
+      );
       if (!detail) {
         return reply.status(404).send({ error: 'Borrador no encontrado' });
       }
@@ -341,11 +350,8 @@ export async function registerClinicalRoutes(
         if (parsed.data.title !== undefined) patch.title = parsed.data.title;
         if (parsed.data.body !== undefined) patch.body = parsed.data.body;
         if (parsed.data.status !== undefined) patch.status = parsed.data.status;
-        const draft = await updateDraft(
-          db,
-          { id: session.sub, username: session.username },
-          draftId,
-          patch,
+        const draft = await runWithRlsContext(db, config, session, (tx) =>
+          updateDraft(tx, { id: session.sub, username: session.username }, draftId, patch),
         );
         if (!draft) {
           return reply.status(404).send({ error: 'Borrador no encontrado' });
@@ -366,10 +372,8 @@ export async function registerClinicalRoutes(
       const { draftId } = request.params as { draftId: string };
       const session = (request as AuthenticatedRequest).session;
       try {
-        const result = await approveDraft(
-          db,
-          { id: session.sub, username: session.username },
-          draftId,
+        const result = await runWithRlsContext(db, config, session, (tx) =>
+          approveDraft(tx, { id: session.sub, username: session.username }, draftId),
         );
         if (!result) {
           return reply.status(404).send({ error: 'Borrador no encontrado' });

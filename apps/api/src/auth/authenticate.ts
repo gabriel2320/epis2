@@ -3,6 +3,10 @@ import type { Permission } from '@epis2/clinical-domain';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import type { AppConfig } from '../config.js';
 import { verifySessionToken, type SessionClaims } from './sessionToken.js';
+import {
+  PILOT_SERVICE_AUDITOR_SESSION,
+  SERVICE_API_KEY_HEADER,
+} from './serviceAccount.js';
 
 export type AuthenticatedRequest = FastifyRequest & {
   session: SessionClaims;
@@ -18,11 +22,26 @@ function readToken(request: FastifyRequest, cookieName: string): string | undefi
   return undefined;
 }
 
+function readServiceApiKey(request: FastifyRequest): string | undefined {
+  const raw = request.headers[SERVICE_API_KEY_HEADER];
+  if (typeof raw === 'string' && raw.length > 0) return raw;
+  return undefined;
+}
+
 export function createAuthenticate(config: AppConfig) {
   return async function authenticate(
     request: FastifyRequest,
     reply: FastifyReply,
   ): Promise<void> {
+    if (
+      config.AUTH_MODE === 'hybrid' &&
+      config.SERVICE_API_KEY &&
+      readServiceApiKey(request) === config.SERVICE_API_KEY
+    ) {
+      (request as AuthenticatedRequest).session = PILOT_SERVICE_AUDITOR_SESSION;
+      return;
+    }
+
     const token = readToken(request, config.SESSION_COOKIE_NAME);
     if (!token) {
       return reply.status(401).send({ error: 'No autenticado' });

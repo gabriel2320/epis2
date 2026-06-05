@@ -16,7 +16,10 @@ const PROMPT_CATALOG_VERSION = 'epis2-prompts-v1.1';
 
 const OPEN_DRAFT = new Set(['draft', 'editing', 'ready_for_review']);
 
-export async function getOpsStatus(db: Database, config?: Pick<AppConfig, 'RLS_MODE' | 'NODE_ENV'>) {
+export async function getOpsStatus(
+  db: Database,
+  config?: Pick<AppConfig, 'RLS_MODE' | 'NODE_ENV' | 'AUTH_MODE'>,
+) {
   const schemaRows = await db.execute(sql`SELECT version FROM epis2_schema_meta WHERE id = 1`);
   const schemaVersion = (schemaRows as unknown as { version: string }[])[0]?.version;
 
@@ -57,6 +60,8 @@ export async function getOpsStatus(db: Database, config?: Pick<AppConfig, 'RLS_M
       rateLimitCommands: config?.NODE_ENV !== 'test',
       promptCatalogVersion: PROMPT_CATALOG_VERSION,
       backupCommand: 'npm run db:backup',
+      authMode: config?.AUTH_MODE ?? 'demo',
+      rlsTransactions: parseRlsMode(config?.RLS_MODE) === 'enforce',
     },
   };
 }

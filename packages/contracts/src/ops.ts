@@ -38,6 +38,8 @@ export const opsStatusResponseSchema = z.object({
       rateLimitCommands: z.boolean(),
       promptCatalogVersion: z.string().optional(),
       backupCommand: z.string(),
+      authMode: z.enum(['demo', 'hybrid']).optional(),
+      rlsTransactions: z.boolean().optional(),
     })
     .optional(),
 });

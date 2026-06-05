@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { buildApp } from '../app.js';
 import { clearMemoryAudit } from '../audit/store.js';
 import { testApiConfig } from '../testConfig.js';
+import { SERVICE_API_KEY_HEADER } from './serviceAccount.js';
 
 const config = testApiConfig;
 
@@ -82,6 +83,38 @@ describe('auth routes', () => {
       headers: { cookie: auditorCookie },
     });
     expect(allowed.statusCode).toBe(200);
+    await app.close();
+  });
+
+  it('hybrid: service API key autentica como auditor read-only', async () => {
+    const hybridConfig = {
+      ...config,
+      AUTH_MODE: 'hybrid' as const,
+      SERVICE_API_KEY: 'test-service-key-min-32-chars-long',
+    };
+    const app = await buildApp(hybridConfig);
+    const res = await app.inject({
+      method: 'GET',
+      url: '/api/audit/events',
+      headers: { [SERVICE_API_KEY_HEADER]: hybridConfig.SERVICE_API_KEY },
+    });
+    expect(res.statusCode).toBe(200);
+    await app.close();
+  });
+
+  it('hybrid: rechaza service key inválida', async () => {
+    const hybridConfig = {
+      ...config,
+      AUTH_MODE: 'hybrid' as const,
+      SERVICE_API_KEY: 'test-service-key-min-32-chars-long',
+    };
+    const app = await buildApp(hybridConfig);
+    const res = await app.inject({
+      method: 'GET',
+      url: '/api/audit/events',
+      headers: { [SERVICE_API_KEY_HEADER]: 'clave-invalida' },
+    });
+    expect(res.statusCode).toBe(401);
     await app.close();
   });
 });

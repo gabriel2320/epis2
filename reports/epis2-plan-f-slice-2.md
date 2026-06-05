@@ -36,6 +36,10 @@ RLS_MODE=enforce npm run dev:api
 npm run check && npm run test && npm run db:validate && npm run ai:evals
 ```
 
+## Continuación
+
+Slice 3: `reports/epis2-plan-f-slice-3.md` (RLS transacciones + auth híbrida).
+
 ## Próximo
 
-Plan F slice 3: transacciones RLS + auth real diseño, o **Plan G** (CI bundle).
+**Plan G** (CI bundle) o signoff piloto Plan F.

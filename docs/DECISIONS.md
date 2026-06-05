@@ -61,5 +61,5 @@ Toda superficie clínica visible al usuario en **español**. Código y APIs pued
 | ID | Tema | Cuándo |
 |----|------|--------|
 | ADR-005 | Row-Level Security PostgreSQL — piloto migración 022 (`off`/`enforce`) | Piloto Plan F |
-| ADR-006 | Proveedor auth producción (OIDC, etc.) | Pre PHI real |
+| ADR-006 | Auth híbrida piloto (`AUTH_MODE=hybrid` + `SERVICE_API_KEY`) | Plan F slice 3 |
 | ADR-007 | Modelo Ollama por entorno | EPIS2-07 |

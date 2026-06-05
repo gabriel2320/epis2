@@ -11,4 +11,5 @@ export const testApiConfig = {
   LOCAL_AI_BASE_URL: 'http://127.0.0.1:3002',
   OLLAMA_BASE_URL: 'http://127.0.0.1:11434',
   RLS_MODE: 'off',
+  AUTH_MODE: 'demo',
 } satisfies AppConfig;
