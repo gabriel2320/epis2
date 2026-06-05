@@ -8,8 +8,8 @@ import {
 import { getBlueprintByRoutePath } from '@epis2/clinical-forms';
 import { loadSessionForRouter } from '../auth/AuthContext.js';
 import { ClinicalShellLayout } from '../layouts/ClinicalShellLayout.js';
+import { lazy } from 'react';
 import { CommandCenterPage } from '../pages/CommandCenterPage.js';
-import { DashboardModePage } from '../pages/DashboardModePage.js';
 import { DraftReviewPage } from '../pages/DraftReviewPage.js';
 import { GeneratedClinicalFormPage } from '../pages/GeneratedClinicalFormPage.js';
 import { PatientWorkspacePage } from '../pages/PatientWorkspacePage.js';
@@ -17,6 +17,10 @@ import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
 import { isUiCatalogEnabled } from '../dev/uiCatalogEnv.js';
 import { UiCatalogPage } from '../pages/dev/UiCatalogPage.js';
+
+const DashboardModePage = lazy(() =>
+  import('../pages/DashboardModePage.js').then((m) => ({ default: m.DashboardModePage })),
+);
 
 async function requireSession() {
   const session = await loadSessionForRouter();

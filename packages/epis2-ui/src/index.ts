@@ -10,4 +10,5 @@ export * from './data/index.js';
 export * from './pickers/index.js';
 export * from './charts/index.js';
 export * from './tree/index.js';
+export * from './dashboard/index.js';
 export * from './mui/index.js';

@@ -72,6 +72,9 @@ export const copy = {
     gridColumnUpdated: 'Actualizado',
     gridColumnDemoCase: 'Caso demo',
     gridLoading: 'Cargando tabla…',
+    metricOpenDrafts: 'Borradores abiertos',
+    metricPendingReview: 'Pendientes de revisión',
+    metricDemoTasks: 'Sugerencias demo',
   },
   ai: {
     panelTitle: 'Asistencia clínica (IA local)',

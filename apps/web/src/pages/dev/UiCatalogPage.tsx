@@ -18,6 +18,8 @@ import {
   EpisDraftStatus,
   EpisTrendChart,
   EpisTreeView,
+  EpisDashboardShell,
+  EpisMetric,
   EpisEmptyState,
   EpisLoadingState,
   EpisTextField,
@@ -181,6 +183,26 @@ export function UiCatalogPage() {
               </Stack>
             </Box>
           </EpisDialog>
+        </CatalogSection>
+
+        <CatalogSection title="Modo tablero (MUI-09)">
+          <EpisDashboardShell
+            title="Modo tablero"
+            subtitle="Catálogo UI"
+            demoBadge="DEMO"
+            tabs={[{ value: 'work', label: 'Mi trabajo' }]}
+            activeTab="work"
+            onTabChange={() => {}}
+            onBackToCommand={() => {}}
+            backLabel="Volver al Centro de Comando"
+            showFooterBack={false}
+            data-testid="epis2-ui-catalog-dashboard"
+          >
+            <Stack direction="row" gap={2} flexWrap="wrap">
+              <EpisMetric label="Borradores" value={2} />
+              <EpisMetric label="Revisión" value={1} />
+            </Stack>
+          </EpisDashboardShell>
         </CatalogSection>
 
         <CatalogSection title="Tree View (MUI-08)">

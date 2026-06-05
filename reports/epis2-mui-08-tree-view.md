@@ -26,4 +26,4 @@
 
 ## Próximo paso
 
-**MUI-09:** `EpisDashboardShell` y composición del modo tablero.
+**MUI-09:** completado — ver `reports/epis2-mui-09-dashboard-shell.md`.
