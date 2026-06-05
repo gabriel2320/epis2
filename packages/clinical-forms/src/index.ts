@@ -16,3 +16,8 @@ export {
   BLUEPRINT_DRAFT_TYPES,
 } from './validate.js';
 export { defaultSummaryValues } from './blueprints/patient-summary.js';
+export {
+  CLINICAL_PROSE_BLUEPRINT_IDS,
+  blueprintUsesClinicalProse,
+  type ClinicalProseBlueprintId,
+} from './clinical-prose-blueprints.js';

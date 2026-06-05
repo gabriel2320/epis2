@@ -1,20 +1,21 @@
-import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
   createEpis2Theme,
   type CreateEpis2ThemeOptions,
   type Epis2Accent,
 } from '../theme/create-epis2-theme.js';
 import type { Epis2MotionScheme } from '../theme/motion.js';
-import type {
-  Epis2ThemeContrast,
-  Epis2ThemeDensity,
-  Epis2ThemeMode,
-} from '../theme/create-epis2-theme.js';
+import type { Epis2ThemeContrast, Epis2ThemeDensity } from '../theme/create-epis2-theme.js';
+import {
+  resolveEffectiveThemeMode,
+  subscribeColorScheme,
+  type Epis2ThemeModePreference,
+} from '../theme/theme-mode.js';
 
 const STORAGE_KEY = 'epis2-theme-preferences-v2';
 
 export type Epis2ThemePreferences = {
-  mode: Epis2ThemeMode;
+  mode: Epis2ThemeModePreference;
   accent: Epis2Accent;
   density: Epis2ThemeDensity;
   contrast: Epis2ThemeContrast;
@@ -51,6 +52,12 @@ const Epis2ThemePreferencesContext = createContext<Epis2ThemePreferencesContextV
 
 export function Epis2ThemePreferencesProvider({ children }: { children: ReactNode }) {
   const [preferences, setPreferencesState] = useState<Epis2ThemePreferences>(() => loadPreferences());
+  const [systemRevision, setSystemRevision] = useState(0);
+
+  useEffect(() => {
+    if (preferences.mode !== 'system') return;
+    return subscribeColorScheme(() => setSystemRevision((n) => n + 1));
+  }, [preferences.mode]);
 
   const setPreferences = (next: Partial<Epis2ThemePreferences>) => {
     setPreferencesState((prev) => {
@@ -64,13 +71,13 @@ export function Epis2ThemePreferencesProvider({ children }: { children: ReactNod
 
   const themeOptions = useMemo<CreateEpis2ThemeOptions>(
     () => ({
-      mode: preferences.mode,
+      mode: resolveEffectiveThemeMode(preferences.mode),
       accent: preferences.accent,
       density: preferences.density,
       contrast: preferences.contrast,
       motion: preferences.motion,
     }),
-    [preferences],
+    [preferences, systemRevision],
   );
 
   return (

@@ -5,6 +5,7 @@ import { EpisM3Text } from '../primitives/EpisM3Text.js';
 import Stack from '@mui/material/Stack';
 import { epis2BarLayout } from '../theme/breakpoints.js';
 import { epis2IslandPaddingSx, epis2IslandSx } from '../theme/island-layout.js';
+import { epis2LineHeight, epis2ProseMaxWidth } from '../theme/typography-rules.js';
 
 export const CLINICAL_TEXTAREA_ROWS = 4;
 
@@ -119,16 +120,30 @@ export function ClinicalFieldStack({
   htmlFor,
   required,
   multiline,
+  clinicalProse,
   children,
 }: {
   label: string;
   htmlFor?: string;
   required?: boolean;
   multiline?: boolean;
+  clinicalProse?: boolean;
   children: ReactNode;
 }) {
   return (
-    <Stack spacing={1.25} sx={clinicalFieldShellSx(multiline)}>
+    <Stack
+      spacing={1.25}
+      sx={{
+        ...clinicalFieldShellSx(multiline),
+        ...(clinicalProse && multiline
+          ? {
+              maxWidth: epis2ProseMaxWidth,
+              lineHeight: epis2LineHeight.body,
+              textAlign: 'left',
+            }
+          : {}),
+      }}
+    >
       <EpisClinicalFieldLabel
         {...(htmlFor ? { htmlFor } : {})}
         {...(required ? { required: true } : {})}

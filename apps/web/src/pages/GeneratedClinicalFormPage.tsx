@@ -2,6 +2,8 @@ import {
 
   BLUEPRINT_DRAFT_TYPES,
 
+  blueprintUsesClinicalProse,
+
   defaultSummaryValues,
 
   initialFormValues,
@@ -127,6 +129,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const [assistContext, setAssistContext] = useState<Record<string, string>>({});
 
   const canUseAiAssist = blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES;
+  const clinicalProse = blueprintUsesClinicalProse(blueprint.blueprintId);
 
 
 
@@ -557,6 +560,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
             errors={fieldErrors}
 
+            clinicalProse={clinicalProse}
+
             onChange={onChange}
 
           />
@@ -594,6 +599,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
             values={values}
 
             errors={fieldErrors}
+
+            clinicalProse={clinicalProse}
 
             onChange={onChange}
 

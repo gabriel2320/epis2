@@ -2,6 +2,7 @@ import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import { copy } from '@epis2/design-system';
 import { EpisIconButton } from '../primitives/EpisIconButton.js';
+import { resolveEffectiveThemeMode } from '../theme/theme-mode.js';
 import { useEpis2ThemePreferences } from './EpisThemePreferences.js';
 
 export type EpisThemeModeToggleProps = {
@@ -13,7 +14,7 @@ export function EpisThemeModeToggle({
   'data-testid': testId = 'epis2-theme-mode-toggle',
 }: EpisThemeModeToggleProps) {
   const { preferences, setPreferences } = useEpis2ThemePreferences();
-  const isDark = preferences.mode === 'dark';
+  const isDark = resolveEffectiveThemeMode(preferences.mode) === 'dark';
   const nextMode = isDark ? 'light' : 'dark';
   const label = isDark ? copy.themePreferences.modeLight : copy.themePreferences.modeDark;
 

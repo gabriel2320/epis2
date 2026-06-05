@@ -85,6 +85,13 @@ export function EpisAppearancePreferencesPanel({
           onClick={() => setPreferences({ mode: 'dark' })}
           data-testid="epis2-mode-dark"
         />
+        <EpisFilterChip
+          label={copy.themePreferences.modeSystem}
+          active={preferences.mode === 'system'}
+          clickable
+          onClick={() => setPreferences({ mode: 'system' })}
+          data-testid="epis2-mode-system"
+        />
       </PreferenceRow>
 
       <PreferenceRow label={copy.themePreferences.density}>

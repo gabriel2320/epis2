@@ -1,6 +1,6 @@
 # EPIS2 — Personalización visual (plan)
 
-**Estado THEME-03:** UI de preferencias en `/preferencias-apariencia` + panel reutilizable. Modo «sistema» y catálogo visual dedicado: ramas futuras.
+**Estado THEME-04:** UI en `/preferencias-apariencia`; modo «Seguir sistema» activo; prosa `65ch` en evolución y epicrisis. Catálogo visual dedicado: rama futura.
 
 ## Permitido (futuro)
 

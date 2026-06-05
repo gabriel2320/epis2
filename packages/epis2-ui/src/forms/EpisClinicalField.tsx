@@ -21,6 +21,7 @@ export type EpisClinicalFieldProps = {
   field: FormField;
   value: string;
   error?: string;
+  clinicalProse?: boolean;
   onChange: (fieldId: string, value: string) => void;
 };
 
@@ -31,7 +32,7 @@ const fieldInputSx = {
   },
 };
 
-function EpisClinicalFieldInner({ field, value, error, onChange }: EpisClinicalFieldProps) {
+function EpisClinicalFieldInner({ field, value, error, clinicalProse, onChange }: EpisClinicalFieldProps) {
   const fieldId = `epis2-field-input-${field.id}`;
 
   if (field.type === 'checkbox') {
@@ -114,9 +115,11 @@ function EpisClinicalFieldInner({ field, value, error, onChange }: EpisClinicalF
       htmlFor={fieldId}
       required={Boolean(field.required)}
       multiline={multiline}
+      {...(clinicalProse && multiline ? { clinicalProse: true } : {})}
     >
       <EpisTextField
         id={fieldId}
+        data-testid={`epis2-field-${field.id}`}
         variant="outlined"
         hiddenLabel
         value={value}

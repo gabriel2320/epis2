@@ -14,6 +14,8 @@ export type EpisClinicalFormProps = {
   blueprint: ClinicalFormBlueprint;
   values: Record<string, string>;
   errors?: Record<string, string>;
+  /** Textareas con prosa clínica (65ch, line-height 1.5). */
+  clinicalProse?: boolean;
   onChange: (fieldId: string, value: string) => void;
 };
 
@@ -22,6 +24,7 @@ export function EpisClinicalForm({
   blueprint,
   values,
   errors = {},
+  clinicalProse = false,
   onChange,
 }: EpisClinicalFormProps) {
   const fieldMap = new Map(blueprint.fields.map((f) => [f.id, f]));
@@ -45,6 +48,7 @@ export function EpisClinicalForm({
                   key={f.id}
                   field={f}
                   value={values[f.id] ?? ''}
+                  clinicalProse={clinicalProse}
                   {...(err ? { error: err } : {})}
                   onChange={onChange}
                 />

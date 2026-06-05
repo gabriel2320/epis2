@@ -313,6 +313,7 @@ export const copy = {
     contrast: 'Contraste',
     modeLight: 'Modo claro',
     modeDark: 'Modo oscuro',
+    modeSystem: 'Seguir sistema',
     accentClinicalBlue: 'Azul clínico',
     accentTeal: 'Verde azulado calmado',
     accentGreen: 'Verde calmado',

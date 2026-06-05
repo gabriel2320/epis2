@@ -25,4 +25,21 @@ describe('EpisClinicalForm', () => {
     expect(screen.getByLabelText('Subjetivo')).toBeInTheDocument();
     expect(screen.getByLabelText('Plan')).toBeInTheDocument();
   });
+
+  it('aplica prosa clínica 65ch en textareas', () => {
+    const { container } = render(
+      <Epis2ThemeProvider>
+        <EpisClinicalForm
+          blueprint={evolutionNoteBlueprint}
+          values={initialFormValues(evolutionNoteBlueprint)}
+          clinicalProse
+          onChange={vi.fn()}
+        />
+      </Epis2ThemeProvider>,
+    );
+    const subjective = container.querySelector('[data-testid="epis2-field-subjective"]');
+    expect(subjective).toBeTruthy();
+    const proseStack = subjective?.closest('.MuiStack-root');
+    expect(proseStack).toHaveStyle({ maxWidth: '65ch' });
+  });
 });
