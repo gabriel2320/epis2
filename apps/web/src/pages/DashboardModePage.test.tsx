@@ -69,6 +69,11 @@ describe('DashboardModePage', () => {
     });
     expect(screen.getByText(copy.dashboard.title)).toBeInTheDocument();
     expect(screen.getByTestId('epis2-back-to-command')).toBeInTheDocument();
-    expect(screen.getByText('Evolución journey')).toBeInTheDocument();
+    await waitFor(
+      () => {
+        expect(screen.getByText('Evolución journey')).toBeInTheDocument();
+      },
+      { timeout: 8000 },
+    );
   });
 });

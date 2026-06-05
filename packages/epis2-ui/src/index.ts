@@ -6,4 +6,5 @@ export * from './primitives/index.js';
 export * from './command/index.js';
 export * from './forms/index.js';
 export * from './clinical/index.js';
+export * from './data/index.js';
 export * from './mui/index.js';

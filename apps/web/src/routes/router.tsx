@@ -227,7 +227,7 @@ export const router = createRouter({
   defaultNotFoundComponent: NotFoundPage,
 });
 
-export const EPIS2_COMMAND_CENTER_HOME = '/comando' as const;
+export { EPIS2_COMMAND_CENTER_HOME } from './home.js';
 
 declare module '@tanstack/react-router' {
   interface Register {

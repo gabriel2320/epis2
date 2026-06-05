@@ -1,16 +1,13 @@
 import { copy } from '@epis2/design-system';
 import { useSearch } from '@tanstack/react-router';
-import { useCallback, useEffect, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import {
   Alert,
   Box,
   Button,
   Chip,
   Divider,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
+  EpisLoadingState,
   Paper,
   Stack,
   Tab,
@@ -33,10 +30,15 @@ import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { readRecentPatients } from '../clinical/recentPatients.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
-import { EpisDraftStatus } from '@epis2/epis2-ui';
 import { PatientDashboardTab } from '../components/PatientDashboardTab.js';
 import { QualityDashboardTab } from '../components/QualityDashboardTab.js';
 import { ServiceDashboardTab } from '../components/ServiceDashboardTab.js';
+
+const LazyDashboardWorklists = lazy(() =>
+  import('../components/DashboardWorklists.js').then((m) => ({
+    default: m.DashboardWorklists,
+  })),
+);
 
 type DashboardTab = 'work' | 'patient' | 'service' | 'quality';
 
@@ -237,69 +239,21 @@ export function DashboardModePage() {
               <Typography color="text.secondary">{copy.dashboard.loading}</Typography>
             ) : (
               <Stack spacing={3}>
-                <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-dashboard-my-drafts">
-                  <Typography variant="subtitle2" gutterBottom>
-                    {copy.dashboard.myOpenDrafts}
-                  </Typography>
-                  {work && work.myOpenDrafts.length > 0 ? (
-                    <List dense disablePadding>
-                      {work.myOpenDrafts.map((d) => (
-                        <ListItem key={d.id} disablePadding>
-                          <ListItemButton
-                            onClick={() =>
-                              void navigate({
-                                to: '/espacio/borrador/$draftId',
-                                params: { draftId: d.id },
-                              })
-                            }
-                          >
-                            <ListItemText
-                              primary={d.title}
-                              secondary={`${d.patientDisplayName} · ${d.draftType}`}
-                            />
-                            <EpisDraftStatus status={d.status} />
-                          </ListItemButton>
-                        </ListItem>
-                      ))}
-                    </List>
-                  ) : (
-                    <Typography variant="body2" color="text.secondary">
-                      {copy.dashboard.emptyDrafts}
-                    </Typography>
-                  )}
-                </Paper>
-
-                <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-dashboard-pending-review">
-                  <Typography variant="subtitle2" gutterBottom>
-                    {copy.dashboard.pendingReview}
-                  </Typography>
-                  {work && work.pendingReview.length > 0 ? (
-                    <List dense disablePadding>
-                      {work.pendingReview.map((d) => (
-                        <ListItem key={d.id} disablePadding>
-                          <ListItemButton
-                            onClick={() =>
-                              void navigate({
-                                to: '/espacio/borrador/$draftId',
-                                params: { draftId: d.id },
-                              })
-                            }
-                          >
-                            <ListItemText
-                              primary={d.title}
-                              secondary={d.patientDisplayName}
-                            />
-                            <EpisDraftStatus status={d.status} />
-                          </ListItemButton>
-                        </ListItem>
-                      ))}
-                    </List>
-                  ) : (
-                    <Typography variant="body2" color="text.secondary">
-                      {copy.dashboard.emptyReview}
-                    </Typography>
-                  )}
-                </Paper>
+                {work ? (
+                  <Suspense
+                    fallback={<EpisLoadingState label={copy.dashboard.gridLoading} />}
+                  >
+                    <LazyDashboardWorklists
+                      work={work}
+                      onOpenDraft={(draftId) =>
+                        void navigate({
+                          to: '/espacio/borrador/$draftId',
+                          params: { draftId },
+                        })
+                      }
+                    />
+                  </Suspense>
+                ) : null}
 
                 <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-dashboard-recent-patients">
                   <Typography variant="subtitle2" gutterBottom>

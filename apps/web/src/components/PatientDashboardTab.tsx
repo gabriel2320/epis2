@@ -1,19 +1,17 @@
 import type { PatientDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import { EpisDraftStatus } from '@epis2/epis2-ui';
-
 import {
   Alert,
   Box,
   Button,
   List,
   ListItem,
-  ListItemButton,
   ListItemText,
   Paper,
   Stack,
   Typography,
 } from '@epis2/epis2-ui';
+import { WorklistDraftGrid } from './WorklistDraftGrid.js';
 export type PatientDashboardTabProps = {
   data: PatientDashboardResponse;
   onOpenFicha: () => void;
@@ -66,22 +64,14 @@ export function PatientDashboardTab({ data, onOpenFicha, onOpenDraft }: PatientD
         <Typography variant="subtitle2" gutterBottom>
           {copy.dashboard.pendingReview}
         </Typography>
-        {data.pendingDrafts.length > 0 ? (
-          <List dense disablePadding>
-            {data.pendingDrafts.map((d) => (
-              <ListItem key={d.id} disablePadding>
-                <ListItemButton onClick={() => onOpenDraft(d.id)}>
-                  <ListItemText primary={d.title} secondary={d.draftType} />
-                  <EpisDraftStatus status={d.status} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        ) : (
-          <Typography variant="body2" color="text.secondary">
-            {copy.dashboard.emptyDrafts}
-          </Typography>
-        )}
+        <WorklistDraftGrid
+          rows={data.pendingDrafts}
+          showPatientColumn={false}
+          showUpdatedColumn={false}
+          emptyMessage={copy.dashboard.emptyDrafts}
+          onOpenDraft={onOpenDraft}
+          data-testid="epis2-dashboard-patient-drafts-grid"
+        />
       </Paper>
 
       <Paper variant="outlined" sx={{ p: 2 }}>

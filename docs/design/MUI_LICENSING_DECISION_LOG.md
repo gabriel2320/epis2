@@ -19,7 +19,7 @@ MUI X Community es gratuito (MIT). Data Grid, Charts y otras familias incluyen c
 
 | ID | Fecha | Producto MUI X | Feature / tier | Estado | Caso EPIS2 | Responsable | Notas |
 |----|-------|----------------|----------------|--------|------------|-------------|-------|
-| LIC-001 | 2026-06-04 | Data Grid | Community (base) | `PLANNED` | Worklists, listas paciente | — | Adoptar en MUI-05 |
+| LIC-001 | 2026-06-04 | Data Grid | Community (base) | `APPROVED` | Worklists modo tablero, borradores paciente | EPIS2-MUI-05 | `EpisDataGrid` Community; lazy en tab work |
 | LIC-002 | 2026-06-04 | Data Grid | Row grouping (Pro) | `REJECTED` | — | — | Sin necesidad V1–V5 |
 | LIC-003 | 2026-06-04 | Data Grid | Excel export (Premium) | `REJECTED` | — | — | Export vía API/FHIR, no grid |
 | LIC-004 | 2026-06-04 | Date Pickers | Community | `PLANNED` | Fechas clínicas | — | MUI-06 |

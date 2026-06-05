@@ -65,6 +65,12 @@ export const copy = {
     tabServiceActive: 'Tablero del servicio (demo)',
     tabQuality: 'Calidad',
     tabQualityRestricted: 'Tablero de calidad — requiere rol auditor o administrador.',
+    gridColumnTitle: 'Título',
+    gridColumnPatient: 'Paciente',
+    gridColumnType: 'Tipo',
+    gridColumnStatus: 'Estado',
+    gridColumnUpdated: 'Actualizado',
+    gridLoading: 'Cargando tabla…',
   },
   ai: {
     panelTitle: 'Asistencia clínica (IA local)',

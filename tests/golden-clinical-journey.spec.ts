@@ -51,7 +51,7 @@ describe('Golden Clinical Journey', () => {
     });
 
     it('9. home del producto es Centro de Comando', async () => {
-      const { EPIS2_COMMAND_CENTER_HOME } = await import('../apps/web/src/routes/router.js');
+      const { EPIS2_COMMAND_CENTER_HOME } = await import('../apps/web/src/routes/home.js');
       expect(EPIS2_COMMAND_CENTER_HOME).toBe('/comando');
       expect(JOURNEY_STEPS[8]).toBe('volver-command-center');
     });

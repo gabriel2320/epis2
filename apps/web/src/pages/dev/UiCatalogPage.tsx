@@ -13,10 +13,12 @@ import {
   EpisCommandBar,
   EpisCommandSuggestions,
   EpisDialog,
+  EpisDataGrid,
   EpisDraftStatus,
   EpisEmptyState,
   EpisLoadingState,
   EpisTextField,
+  type GridColDef,
   Stack,
   Typography,
 } from '@epis2/epis2-ui';
@@ -176,6 +178,38 @@ export function UiCatalogPage() {
               </Stack>
             </Box>
           </EpisDialog>
+        </CatalogSection>
+
+        <CatalogSection title="Data Grid (MUI-05)">
+          <EpisDataGrid
+            rows={[
+              {
+                id: 'demo-1',
+                title: 'Evolución catálogo',
+                patientDisplayName: 'Paciente Demo',
+                draftType: 'evolution_note',
+                status: 'draft',
+                updatedAt: new Date().toISOString(),
+              },
+            ]}
+            columns={
+              [
+                { field: 'title', headerName: 'Título', flex: 1, minWidth: 120 },
+                { field: 'patientDisplayName', headerName: 'Paciente', flex: 1 },
+                { field: 'draftType', headerName: 'Tipo', width: 120 },
+                {
+                  field: 'status',
+                  headerName: 'Estado',
+                  width: 140,
+                  renderCell: ({ value }) => (
+                    <EpisDraftStatus status={String(value ?? '')} />
+                  ),
+                },
+              ] satisfies GridColDef[]
+            }
+            hideFooter
+            data-testid="epis2-ui-catalog-grid"
+          />
         </CatalogSection>
 
         <CatalogSection title="Formularios clínicos (MUI-04)">
