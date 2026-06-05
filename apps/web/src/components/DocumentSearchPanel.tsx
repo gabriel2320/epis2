@@ -1,16 +1,9 @@
 import { copy } from '@epis2/design-system';
-import { useState } from 'react';
+import { EpisTreeView, Stack, TextField, Typography, Button } from '@epis2/epis2-ui';
+import { useMemo, useState } from 'react';
 import { searchPatientDocuments } from '../api/clinicalApi.js';
+import { buildDocumentTreeByType } from '../tree/documentTree.js';
 
-import {
-  Button,
-  List,
-  ListItem,
-  ListItemText,
-  Stack,
-  TextField,
-  Typography,
-} from '@epis2/epis2-ui';
 export type DocumentSearchPanelProps = {
   patientId: string;
 };
@@ -34,6 +27,26 @@ export function DocumentSearchPanel({ patientId }: DocumentSearchPanelProps) {
     }
   };
 
+  const treeItems = useMemo(
+    () =>
+      hits
+        ? buildDocumentTreeByType(
+            hits.map((h) => ({
+              id: h.id,
+              title: h.title,
+              documentType: h.documentType,
+              snippet: h.snippet,
+            })),
+          )
+        : [],
+    [hits],
+  );
+
+  const defaultExpanded = useMemo(
+    () => treeItems.map((n) => n.id),
+    [treeItems],
+  );
+
   return (
     <Stack spacing={1} data-testid="epis2-document-search">
       <Typography variant="subtitle2">{copy.longitudinal.searchDocuments}</Typography>
@@ -50,19 +63,12 @@ export function DocumentSearchPanel({ patientId }: DocumentSearchPanelProps) {
         </Button>
       </Stack>
       {hits ? (
-        hits.length > 0 ? (
-          <List dense disablePadding>
-            {hits.map((h) => (
-              <ListItem key={h.id} disablePadding>
-                <ListItemText primary={h.title} secondary={h.snippet} />
-              </ListItem>
-            ))}
-          </List>
-        ) : (
-          <Typography variant="body2" color="text.secondary">
-            {copy.longitudinal.searchNoHits}
-          </Typography>
-        )
+        <EpisTreeView
+          items={treeItems}
+          defaultExpandedItems={defaultExpanded}
+          emptyMessage={copy.longitudinal.searchNoHits}
+          data-testid="epis2-document-search-tree"
+        />
       ) : null}
     </Stack>
   );

@@ -25,4 +25,4 @@
 
 ## Próximo paso
 
-**MUI-08:** `@mui/x-tree-view` + jerarquía documental.
+**MUI-08:** completado — ver `reports/epis2-mui-08-tree-view.md`.

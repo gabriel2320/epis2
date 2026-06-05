@@ -181,6 +181,19 @@ export const copy = {
       approved: 'Aprobado',
     },
   },
+  tree: {
+    loading: 'Cargando árbol…',
+    empty: 'Sin nodos para mostrar.',
+    navTitle: 'Navegación clínica',
+    documentTypes: {
+      pdf: 'PDF',
+      txt: 'Texto',
+      image: 'Imagen',
+      referral: 'Interconsulta',
+      lab_report: 'Informe de laboratorio',
+      other: 'Otros',
+    },
+  },
   charts: {
     loading: 'Cargando gráfico…',
     labTrendTitle: 'Tendencia INR (demo)',

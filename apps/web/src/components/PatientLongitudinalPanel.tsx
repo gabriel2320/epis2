@@ -1,13 +1,16 @@
-import type { ReactNode } from 'react';
+import { useMemo, type ReactNode } from 'react';
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import { DocumentSearchPanel } from './DocumentSearchPanel.js';
 import { LabObservationsGrid } from './LabObservationsGrid.js';
 import { PatientClinicalCharts } from './PatientClinicalCharts.js';
+import { LongitudinalNavTree } from './LongitudinalNavTree.js';
 import { PatientClinicalAiPanel } from './PatientClinicalAiPanel.js';
+import { buildDocumentTreeByType } from '../tree/documentTree.js';
 
 import {
   Box,
+  EpisTreeView,
   List,
   ListItem,
   ListItemText,
@@ -55,6 +58,8 @@ export function PatientLongitudinalPanel({
       <Typography variant="subtitle2">{copy.longitudinal.title}</Typography>
 
       <PatientClinicalCharts data={data} />
+
+      <LongitudinalNavTree data={data} onOpenDraft={onOpenDraft} />
 
       <Section title={copy.longitudinal.problems} empty={data.problems.length === 0}>
         <List dense disablePadding>
@@ -117,16 +122,7 @@ export function PatientLongitudinalPanel({
       </Section>
 
       <Section title={copy.longitudinal.documents} empty={data.documents.length === 0}>
-        <List dense disablePadding>
-          {data.documents.map((d) => (
-            <ListItem key={d.id} disablePadding>
-              <ListItemText
-                primary={d.title}
-                secondary={`${copy.longitudinal.documentRef}: ${d.storageRef}`}
-              />
-            </ListItem>
-          ))}
-        </List>
+        <DocumentIndexTree documents={data.documents} />
         <Box sx={{ mt: 2 }}>
           <DocumentSearchPanel patientId={data.patientId} />
         </Box>
@@ -135,5 +131,34 @@ export function PatientLongitudinalPanel({
         </Box>
       </Section>
     </Stack>
+  );
+}
+
+function DocumentIndexTree({
+  documents,
+}: {
+  documents: PatientLongitudinalResponse['documents'];
+}) {
+  const items = useMemo(
+    () =>
+      buildDocumentTreeByType(
+        documents.map((d) => ({
+          id: d.id,
+          title: d.title,
+          documentType: d.documentType,
+          snippet: `${copy.longitudinal.documentRef}: ${d.storageRef}`,
+        })),
+      ),
+    [documents],
+  );
+  const defaultExpanded = useMemo(() => items.map((n) => n.id), [items]);
+
+  return (
+    <EpisTreeView
+      items={items}
+      defaultExpandedItems={defaultExpanded}
+      emptyMessage={copy.tree.empty}
+      data-testid="epis2-longitudinal-documents-tree"
+    />
   );
 }

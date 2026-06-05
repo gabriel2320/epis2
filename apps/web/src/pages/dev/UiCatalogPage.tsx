@@ -17,6 +17,7 @@ import {
   EpisDatePicker,
   EpisDraftStatus,
   EpisTrendChart,
+  EpisTreeView,
   EpisEmptyState,
   EpisLoadingState,
   EpisTextField,
@@ -180,6 +181,20 @@ export function UiCatalogPage() {
               </Stack>
             </Box>
           </EpisDialog>
+        </CatalogSection>
+
+        <CatalogSection title="Tree View (MUI-08)">
+          <EpisTreeView
+            items={[
+              {
+                id: 'type-lab',
+                label: 'Informe de laboratorio (1)',
+                children: [{ id: 'doc-1', label: 'Hemograma catálogo' }],
+              },
+            ]}
+            defaultExpandedItems={['type-lab']}
+            data-testid="epis2-ui-catalog-tree"
+          />
         </CatalogSection>
 
         <CatalogSection title="Charts (MUI-07)">
