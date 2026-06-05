@@ -7,7 +7,13 @@ export function initialFormValues(
   const values: Record<string, string> = { ...seed };
   for (const f of blueprint.fields) {
     if (values[f.id] === undefined) {
-      values[f.id] = f.type === 'checkbox' ? 'false' : '';
+      if (f.type === 'checkbox') {
+        values[f.id] = 'false';
+      } else if (f.type === 'date') {
+        values[f.id] = new Date().toISOString().slice(0, 10);
+      } else {
+        values[f.id] = '';
+      }
     }
   }
   return values;

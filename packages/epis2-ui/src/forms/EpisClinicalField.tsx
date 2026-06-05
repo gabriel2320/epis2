@@ -6,7 +6,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import { EpisDatePicker } from '../pickers/EpisDatePicker.js';
 import { EpisSelect } from '../primitives/EpisSelect.js';
+import { copy } from '@epis2/design-system';
 
 export type EpisClinicalFieldProps = {
   field: FormField;
@@ -31,6 +33,26 @@ export function EpisClinicalField({ field, value, error, onChange }: EpisClinica
         />
         {error ? <FormHelperText>{error}</FormHelperText> : null}
       </FormControl>
+    );
+  }
+
+  if (field.type === 'date') {
+    const dateLabel =
+      field.id === 'encounterDate'
+        ? copy.forms.encounterDate
+        : field.id === 'scheduledDate'
+          ? copy.forms.scheduledDate
+          : field.label;
+    return (
+      <EpisDatePicker
+        label={dateLabel}
+        value={value}
+        required={Boolean(field.required)}
+        {...(error ? { error } : {})}
+        {...(field.readOnly ? { disabled: true } : {})}
+        onChange={(iso) => onChange(field.id, iso)}
+        data-testid={`epis2-field-${field.id}`}
+      />
     );
   }
 
@@ -62,12 +84,11 @@ export function EpisClinicalField({ field, value, error, onChange }: EpisClinica
       value={value}
       multiline={field.type === 'textarea'}
       {...(field.type === 'textarea' ? { minRows: 3 } : {})}
-      type={field.type === 'date' ? 'date' : 'text'}
+      type="text"
       required={Boolean(field.required)}
       error={Boolean(error)}
       {...(error ? { helperText: error } : {})}
       {...(field.readOnly ? { disabled: true } : {})}
-      {...(field.type === 'date' ? { InputLabelProps: { shrink: true } } : {})}
       onChange={(e) => onChange(field.id, e.target.value)}
     />
   );

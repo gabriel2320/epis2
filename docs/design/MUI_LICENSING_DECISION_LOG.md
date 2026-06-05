@@ -19,10 +19,10 @@ MUI X Community es gratuito (MIT). Data Grid, Charts y otras familias incluyen c
 
 | ID | Fecha | Producto MUI X | Feature / tier | Estado | Caso EPIS2 | Responsable | Notas |
 |----|-------|----------------|----------------|--------|------------|-------------|-------|
-| LIC-001 | 2026-06-04 | Data Grid | Community (base) | `APPROVED` | Worklists modo tablero, borradores paciente | EPIS2-MUI-05 | `EpisDataGrid` Community; lazy en tab work |
+| LIC-001 | 2026-06-04 | Data Grid | Community (base) | `APPROVED` | Worklists, pacientes, lab, calidad | EPIS2-MUI-05 | `EpisDataGrid` Community |
 | LIC-002 | 2026-06-04 | Data Grid | Row grouping (Pro) | `REJECTED` | — | — | Sin necesidad V1–V5 |
 | LIC-003 | 2026-06-04 | Data Grid | Excel export (Premium) | `REJECTED` | — | — | Export vía API/FHIR, no grid |
-| LIC-004 | 2026-06-04 | Date Pickers | Community | `PLANNED` | Fechas clínicas | — | MUI-06 |
+| LIC-004 | 2026-06-04 | Date Pickers | Community | `APPROVED` | Encuentro, órdenes lab/imagen | EPIS2-MUI-06 | `EpisDatePicker` + dayjs `es` |
 | LIC-005 | 2026-06-04 | Charts | Community | `PLANNED` | Tendencias demo | — | MUI-07 |
 | LIC-006 | 2026-06-04 | Tree View | Community | `PLANNED` | Documentos | — | MUI-08 |
 | LIC-007 | 2026-06-04 | Scheduler | TBD | `EVALUATE` | Agenda hospitalaria | — | No instalar en MUI-00–09 |

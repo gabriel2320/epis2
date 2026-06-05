@@ -14,6 +14,7 @@ import {
   EpisCommandSuggestions,
   EpisDialog,
   EpisDataGrid,
+  EpisDatePicker,
   EpisDraftStatus,
   EpisEmptyState,
   EpisLoadingState,
@@ -178,6 +179,15 @@ export function UiCatalogPage() {
               </Stack>
             </Box>
           </EpisDialog>
+        </CatalogSection>
+
+        <CatalogSection title="Date Picker (MUI-06)">
+          <EpisDatePicker
+            label="Fecha del encuentro"
+            value="2026-06-04"
+            onChange={() => {}}
+            data-testid="epis2-ui-catalog-date"
+          />
         </CatalogSection>
 
         <CatalogSection title="Data Grid (MUI-05)">

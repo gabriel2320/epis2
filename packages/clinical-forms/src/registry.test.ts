@@ -21,6 +21,7 @@ describe('EPIS2_FORM_BLUEPRINTS', () => {
 
   it('validación manual de evolución sin llamadas externas', () => {
     const invalid = validateFormValues(evolutionNoteBlueprint, {
+      encounterDate: '',
       subjective: '',
       objective: '',
       assessment: '',
@@ -29,6 +30,7 @@ describe('EPIS2_FORM_BLUEPRINTS', () => {
     expect(invalid.valid).toBe(false);
 
     const valid = validateFormValues(evolutionNoteBlueprint, {
+      encounterDate: '2026-06-04',
       subjective: 'Paciente refiere mejoría (demo)',
       objective: 'Hemodinámicamente estable',
       assessment: 'Evolución favorable',
