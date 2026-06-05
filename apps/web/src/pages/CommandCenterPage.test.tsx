@@ -86,6 +86,16 @@ describe('CommandCenterPage', () => {
       copy.commandCenter.title,
     );
     expect(screen.getByTestId('epis2-power-bar')).toBeInTheDocument();
+    expect(screen.queryByTestId('epis2-active-patient-panel')).not.toBeInTheDocument();
+  });
+
+  it('prueba 3s: Power Bar visible antes que contexto paciente', () => {
+    renderCommandCenter();
+    const prompt = screen.getByTestId('epis2-command-prompt');
+    const powerBar = screen.getByTestId('epis2-power-bar');
+    const toggle = screen.getByTestId('epis2-toggle-patient-panel');
+    expect(prompt.compareDocumentPosition(powerBar) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(powerBar.compareDocumentPosition(toggle) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it('exige instrucción antes de continuar', async () => {

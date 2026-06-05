@@ -6,7 +6,7 @@ export type ObservationPoint = {
 
 export function parseNumericObservation(valueText: string): number | null {
   const match = valueText.match(/([\d]+(?:[.,]\d+)?)/);
-  if (!match) return null;
+  if (!match?.[1]) return null;
   const normalized = match[1].replace(',', '.');
   const n = Number.parseFloat(normalized);
   return Number.isFinite(n) ? n : null;

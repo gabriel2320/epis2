@@ -1,6 +1,6 @@
 import type { QualityDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import { EpisDataGrid, Paper, Stack, Typography, type GridColDef } from '@epis2/epis2-ui';
+import { EpisDataGridSuspense, Paper, Stack, Typography, type GridColDef } from '@epis2/epis2-ui';
 import { useMemo } from 'react';
 
 export type QualityDashboardGridsProps = {
@@ -59,11 +59,12 @@ export function QualityDashboardGrids({ data }: QualityDashboardGridsProps) {
         <Typography variant="subtitle2" gutterBottom>
           {copy.interop.stagingTitle}
         </Typography>
-        <EpisDataGrid
+        <EpisDataGridSuspense
           rows={data.stagingBatches}
           columns={stagingColumns}
           emptyMessage={copy.longitudinal.emptySection}
           hideFooter={data.stagingBatches.length <= 10}
+          loadingLabel={copy.dashboard.gridLoading}
           data-testid="epis2-quality-staging-grid"
         />
       </Paper>
@@ -72,11 +73,12 @@ export function QualityDashboardGrids({ data }: QualityDashboardGridsProps) {
         <Typography variant="subtitle2" gutterBottom>
           {copy.interop.auditTitle}
         </Typography>
-        <EpisDataGrid
+        <EpisDataGridSuspense
           rows={data.recentAudit}
           columns={auditColumns}
           emptyMessage={copy.longitudinal.emptySection}
           hideFooter={data.recentAudit.length <= 10}
+          loadingLabel={copy.dashboard.gridLoading}
           data-testid="epis2-quality-audit-grid"
         />
       </Paper>

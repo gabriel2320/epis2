@@ -1,6 +1,7 @@
 export { epis2Theme, createEpis2Theme, epis2Palette, clinicalRoles, epis2Shape, epis2TypographyRoles } from './theme/theme.js';
 export { useTheme } from '@mui/material/styles';
 export { Epis2ThemeProvider, type Epis2ThemeProviderProps, useEpis2ThemePreferences } from './providers/Epis2ThemeProvider.js';
+export { EpisThemeModeToggle, type EpisThemeModeToggleProps } from './providers/EpisThemeModeToggle.js';
 export * from './primitives/index.js';
 export * from './command/index.js';
 export * from './forms/index.js';

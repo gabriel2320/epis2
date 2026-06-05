@@ -3,6 +3,7 @@ import {
   Alert,
   Chip,
   EpisDashboardShell,
+  type EpisDashboardTab,
   EpisLoadingState,
   EpisMetric,
   EpisTaskList,
@@ -26,7 +27,7 @@ import type {
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { readRecentPatients } from '../clinical/recentPatients.js';
-import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
+import { useClinicalNavigate, type DashboardTab } from '../routes/clinicalNavigate.js';
 import { PatientDashboardTab } from '../components/PatientDashboardTab.js';
 import { QualityDashboardTab } from '../components/QualityDashboardTab.js';
 import { ServiceDashboardTab } from '../components/ServiceDashboardTab.js';
@@ -36,8 +37,6 @@ const LazyDashboardWorklists = lazy(() =>
     default: m.DashboardWorklists,
   })),
 );
-
-type DashboardTab = 'work' | 'patient' | 'service' | 'quality';
 
 export function DashboardModeContent() {
   const search = useSearch({ strict: false }) as { tab?: string; patientId?: string };
@@ -129,12 +128,15 @@ export function DashboardModeContent() {
   const setTab = (next: DashboardTab) => {
     void navigate({
       to: '/epis2/dashboard',
-      search: { tab: next, patientId: dashboardPatientId },
+      search: {
+        tab: next,
+        ...(dashboardPatientId ? { patientId: dashboardPatientId } : {}),
+      },
     });
   };
 
-  const tabs = useMemo(() => {
-    const items = [
+  const tabs = useMemo((): EpisDashboardTab[] => {
+    const items: EpisDashboardTab[] = [
       {
         value: 'work',
         label: copy.dashboard.tabWork,

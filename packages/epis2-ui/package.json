@@ -14,6 +14,18 @@
     "./scheduler": {
       "types": "./dist/scheduler/index.d.ts",
       "import": "./dist/scheduler/index.js"
+    },
+    "./data": {
+      "types": "./dist/data/public-core.d.ts",
+      "import": "./dist/data/public-core.js"
+    },
+    "./charts": {
+      "types": "./dist/charts/public-core.d.ts",
+      "import": "./dist/charts/public-core.js"
+    },
+    "./tree": {
+      "types": "./dist/tree/public-core.d.ts",
+      "import": "./dist/tree/public-core.js"
     }
   },
   "scripts": {

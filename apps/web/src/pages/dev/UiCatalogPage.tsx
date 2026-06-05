@@ -1,8 +1,7 @@
 import { copy } from '@epis2/design-system';
 import {
-  epis2Palette,
-  epis2Theme,
   Box,
+  clinicalRoles,
   Divider,
   EpisAiDisclosure,
   EpisAlert,
@@ -14,28 +13,26 @@ import {
   EpisClinicalForm,
   EpisCommandBar,
   EpisCommandSuggestions,
-  EpisDialog,
-  EpisDataGrid,
+  EpisDashboardShell,
+  EpisDataGridSuspense,
   EpisDatePicker,
+  EpisDialog,
   EpisDraftStatus,
   EpisEmptyState,
   EpisFilterChip,
   EpisLoadingState,
   EpisM3Text,
   EpisMetric,
-  EpisSnackbar,
   EpisTextField,
   EpisTopAppBar,
-  EpisTrendChart,
-  EpisTreeView,
-  EpisDashboardShell,
-  clinicalRoles,
+  EpisTrendChartSuspense,
+  EpisTreeViewSuspense,
   epis2Shape,
-  epis2TypographyRoles,
-  useEpis2ThemePreferences,
-  type GridColDef,
   Stack,
   Typography,
+  useEpis2ThemePreferences,
+  useTheme,
+  type GridColDef,
 } from '@epis2/epis2-ui';
 import { getBlueprintById, initialFormValues } from '@epis2/clinical-forms';
 import { useState, type ReactNode } from 'react';
@@ -107,6 +104,20 @@ function ThemePreferencesDemo() {
       </Stack>
       <Stack direction="row" gap={1}>
         <EpisFilterChip
+          label={copy.themePreferences.modeLight}
+          active={preferences.mode === 'light'}
+          clickable
+          onClick={() => setPreferences({ mode: 'light' })}
+        />
+        <EpisFilterChip
+          label={copy.themePreferences.modeDark}
+          active={preferences.mode === 'dark'}
+          clickable
+          onClick={() => setPreferences({ mode: 'dark' })}
+        />
+      </Stack>
+      <Stack direction="row" gap={1}>
+        <EpisFilterChip
           label={copy.themePreferences.densityComfortable}
           active={preferences.density === 'comfortable'}
           clickable
@@ -125,8 +136,9 @@ function ThemePreferencesDemo() {
 
 export function UiCatalogPage() {
   const [dialogOpen, setDialogOpen] = useState(false);
+  const theme = useTheme();
 
-  const palette = epis2Palette;
+  const palette = theme.palette;
   const colorRows: { name: string; hex: string }[] = [
     { name: 'primary.main', hex: palette.primary?.main ?? '' },
     { name: 'primary.light', hex: palette.primary?.light ?? '' },
@@ -150,7 +162,7 @@ export function UiCatalogPage() {
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Uso interno — primitivos @epis2/epis2-ui y tokens del tema (
-            {epis2Theme.shape?.borderRadius ?? 16}px radius, locale esES).
+            {theme.shape?.borderRadius ?? 16}px radius, locale esES).
           </Typography>
           <EpisButton href="/comando" component="a" variant="text" size="small">
             Volver al Centro de Comando
@@ -282,7 +294,7 @@ export function UiCatalogPage() {
         </CatalogSection>
 
         <CatalogSection title="Tree View (MUI-08)">
-          <EpisTreeView
+          <EpisTreeViewSuspense
             items={[
               {
                 id: 'type-lab',
@@ -296,7 +308,7 @@ export function UiCatalogPage() {
         </CatalogSection>
 
         <CatalogSection title="Charts (MUI-07)">
-          <EpisTrendChart
+          <EpisTrendChartSuspense
             title="Tendencia demo"
             xAxisLabels={['Lun', 'Mar', 'Mié']}
             series={[{ label: 'INR', data: [1.9, 2.1, 2.3] }]}
@@ -314,7 +326,7 @@ export function UiCatalogPage() {
         </CatalogSection>
 
         <CatalogSection title="Data Grid (MUI-05)">
-          <EpisDataGrid
+          <EpisDataGridSuspense
             rows={[
               {
                 id: 'demo-1',

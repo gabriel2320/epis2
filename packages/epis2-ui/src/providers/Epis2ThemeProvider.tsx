@@ -9,7 +9,6 @@ import { epis2Theme } from '../theme/theme.js';
 import {
   Epis2ThemePreferencesProvider,
   useEpis2ThemeFromPreferences,
-  useEpis2ThemePreferences,
 } from './EpisThemePreferences.js';
 
 export type Epis2ThemeProviderProps = {
@@ -68,3 +67,4 @@ export function Epis2ThemeProvider({
 }
 
 export { useEpis2ThemePreferences } from './EpisThemePreferences.js';
+export { EpisThemeModeToggle, type EpisThemeModeToggleProps } from './EpisThemeModeToggle.js';

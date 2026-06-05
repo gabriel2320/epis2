@@ -29,13 +29,12 @@ describe.skipIf(!hasDb)('inpatient API (integration)', () => {
       unitCode: string;
       census: { bedLabel: string; patientDisplayName?: string }[];
       unacknowledgedCriticals: { id: string; label: string }[];
+      activeOrders: { title: string }[];
     };
     expect(body.unitCode).toBe('CIRUGIA-DEMO');
     expect(body.census.length).toBeGreaterThanOrEqual(3);
     expect(body.census.some((b) => b.bedLabel === '101A' && b.patientDisplayName)).toBe(true);
-    expect(
-      (body as { activeOrders: { title: string }[] }).activeOrders.length,
-    ).toBeGreaterThan(0);
+    expect(body.activeOrders.length).toBeGreaterThan(0);
 
     const inr = body.unacknowledgedCriticals.find((c) => c.label === 'INR');
     if (inr) {

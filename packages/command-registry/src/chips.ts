@@ -1,4 +1,3 @@
-import type { Permission } from '@epis2/clinical-domain';
 import { filterDefinitionsForRole, getRoleAiCommandHints, isClinicalRole } from './roleSuggestions.js';
 import type { ClinicalIntent } from './types.js';
 

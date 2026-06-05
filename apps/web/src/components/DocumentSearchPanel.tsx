@@ -1,5 +1,5 @@
 import { copy } from '@epis2/design-system';
-import { EpisTreeView, Stack, TextField, Typography, Button } from '@epis2/epis2-ui';
+import { EpisTreeViewSuspense, Stack, TextField, Typography, Button } from '@epis2/epis2-ui';
 import { useMemo, useState } from 'react';
 import { searchPatientDocuments } from '../api/clinicalApi.js';
 import { buildDocumentTreeByType } from '../tree/documentTree.js';
@@ -63,10 +63,11 @@ export function DocumentSearchPanel({ patientId }: DocumentSearchPanelProps) {
         </Button>
       </Stack>
       {hits ? (
-        <EpisTreeView
+        <EpisTreeViewSuspense
           items={treeItems}
           defaultExpandedItems={defaultExpanded}
           emptyMessage={copy.longitudinal.searchNoHits}
+          loadingLabel={copy.dashboard.gridLoading}
           data-testid="epis2-document-search-tree"
         />
       ) : null}

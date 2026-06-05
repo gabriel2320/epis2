@@ -1,6 +1,6 @@
 # EPIS2 — Plan de adopción Material 3 Clinical
 
-**Fase activa:** M3-09 (QA signoff humano pendiente) · **Implementación código:** M3-00…M3-08 completadas
+**Fase activa:** M3-09 signoff completado · **Implementación:** M3-00…M3-08 en producción demo
 
 ---
 

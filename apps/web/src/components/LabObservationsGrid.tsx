@@ -1,6 +1,6 @@
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import { EpisDataGrid, type GridColDef } from '@epis2/epis2-ui';
+import { EpisDataGridSuspense, type GridColDef } from '@epis2/epis2-ui';
 import { useMemo } from 'react';
 
 export type LabObservationRow = PatientLongitudinalResponse['observations'][number];
@@ -32,7 +32,7 @@ export function LabObservationsGrid({
   );
 
   return (
-    <EpisDataGrid
+    <EpisDataGridSuspense
       rows={rows}
       columns={columns}
       emptyMessage={emptyMessage}

@@ -1,9 +1,13 @@
 import MuiButton, { type ButtonProps } from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
+import type { ElementType } from 'react';
 
 export type EpisButtonAppearance = 'filled' | 'tonal' | 'text' | 'outlined';
 
-export type EpisButtonProps = ButtonProps & {
+export type EpisButtonProps<C extends ElementType = 'button'> = ButtonProps<
+  C,
+  { component?: C }
+> & {
   /** Apariencia M3 — prioridad sobre `variant` legacy si no se pasa variant. */
   appearance?: EpisButtonAppearance;
 };
@@ -22,7 +26,13 @@ function resolveAppearance(appearance: EpisButtonAppearance): Pick<ButtonProps, 
 }
 
 /** Botón EPIS2 — patrones M3 filled / tonal / text / outlined. */
-export function EpisButton({ appearance, variant, color, sx, ...rest }: EpisButtonProps) {
+export function EpisButton<C extends ElementType = 'button'>({
+  appearance,
+  variant,
+  color,
+  sx,
+  ...rest
+}: EpisButtonProps<C>) {
   const theme = useTheme();
   const mapped = appearance ? resolveAppearance(appearance) : null;
   const resolvedVariant = variant ?? mapped?.variant ?? 'contained';

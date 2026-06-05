@@ -13,9 +13,6 @@ async function* walk(dir) {
   }
 }
 
-const MUI_IMPORT =
-  /^import\s+(?:(\w+)\s+from\s+|\{([^}]+)\}\s+from\s+)?['"]@mui\/(?:material|icons-material)\/([^'"]+)['"];?\s*$/gm;
-
 function parseLine(line) {
   const def = /^import\s+(\w+)\s+from\s+['"]@mui\//.exec(line);
   if (def) return [def[1]];

@@ -17,8 +17,10 @@ import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
 import { isUiCatalogEnabled } from '../dev/uiCatalogEnv.js';
 import { isSchedulerSpikeEnabled } from '../dev/schedulerSpikeEnv.js';
-import { UiCatalogPage } from '../pages/dev/UiCatalogPage.js';
-import { SchedulerSpikePage } from '../pages/dev/SchedulerSpikePage.js';
+
+const LazyUiCatalogPage = lazy(() =>
+  import('../pages/dev/UiCatalogPage.js').then((m) => ({ default: m.UiCatalogPage })),
+);
 
 const DashboardModePage = lazy(() =>
   import('../pages/DashboardModePage.js').then((m) => ({ default: m.DashboardModePage })),
@@ -200,7 +202,7 @@ const indexRoute = createRoute({
 const uiCatalogRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/dev/ui-catalog',
-  component: UiCatalogPage,
+  component: LazyUiCatalogPage,
   beforeLoad: async () => {
     if (!isUiCatalogEnabled()) {
       throw redirect({ to: '/comando' });

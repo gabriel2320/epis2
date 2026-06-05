@@ -15,6 +15,7 @@
     "typecheck": "npm run build -w @epis2/contracts && npm run build -w @epis2/clinical-domain && npm run build -w @epis2/design-system && npm run build -w @epis2/command-registry && npm run build -w @epis2/clinical-forms && npm run build -w @epis2/epis2-ui && npm run build -w @epis2/test-fixtures && npm run build -w @epis2/fhir-export && npm run build -w @epis2/local-ai && npm run typecheck -w @epis2/contracts && npm run typecheck -w @epis2/clinical-domain && npm run typecheck -w @epis2/design-system && npm run typecheck -w @epis2/command-registry && npm run typecheck -w @epis2/clinical-forms && npm run typecheck -w @epis2/epis2-ui && npm run typecheck -w @epis2/test-fixtures && npm run typecheck -w @epis2/fhir-export && npm run typecheck -w @epis2/local-ai && npm run typecheck -w @epis2/api && npm run typecheck -w @epis2/web",
     "test": "npm run build -w @epis2/contracts && npm run build -w @epis2/clinical-domain && npm run build -w @epis2/design-system && npm run build -w @epis2/command-registry && npm run build -w @epis2/clinical-forms && npm run build -w @epis2/epis2-ui && npm run build -w @epis2/test-fixtures && npm run build -w @epis2/fhir-export && vitest run",
     "architecture:validate": "node scripts/architecture/validate-all.mjs",
+    "qa:bundle-analyze": "node scripts/qa/bundle-analyze.mjs",
     "quality:golden-journey": "npm run build -w @epis2/command-registry && npm run build -w @epis2/clinical-forms && npm run build -w @epis2/test-fixtures && vitest run tests/golden-clinical-journey.spec.ts tests/golden-clinical-journey.api.spec.ts",
     "check": "npm run lint && npm run typecheck && npm run architecture:validate",
     "db:validate": "node scripts/db-validate.mjs",
@@ -33,14 +34,15 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "@testing-library/jest-dom": "^6.6.3",
     "@eslint/js": "^9.28.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.6.3",
     "@types/node": "^22.15.21",
-    "postgres": "^3.4.5",
     "eslint": "^9.28.0",
     "globals": "^16.2.0",
+    "postgres": "^3.4.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.33.0",
     "vitest": "^3.2.1"

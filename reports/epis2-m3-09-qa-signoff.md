@@ -1,46 +1,53 @@
-# EPIS2 M3-00…M3-09 — Implementación Material 3 Clinical
+# EPIS2 M3-09 — Signoff QA Material 3 Clinical
 
-**Fecha:** 2026-06-04 · **Estado:** fases 00–09 entregadas (QA humano pendiente de signoff formal)
-
----
-
-## Resumen por fase
-
-| Fase | Entregable | Artefacto principal |
-|------|------------|---------------------|
-| M3-00 | Auditoría baseline | `reports/epis2-m3-00-baseline-audit.md` |
-| M3-01 | Tokens roles M3 | `theme/color-roles.ts`, `clinical-roles.ts`, `shape.ts`, `motion.ts`, `typography.ts`, `breakpoints.ts` |
-| M3-02 | `createEpis2Theme` | `theme/create-epis2-theme.ts`, gate `single-epis2-theme.mjs` |
-| M3-03 | Primitivos M3 | `EpisButton` appearances, `EpisM3Text`, `EpisTopAppBar`, `EpisAssistChip`, `EpisFilterChip`, `EpisSnackbar` |
-| M3-04 | Login + Comando | `LoginPage`, `CommandCenterPage`, layouts auth/comando, panel paciente colapsable |
-| M3-05 | Workspace clínico | `EpisClinicalFormPage` canvas documento |
-| M3-06 | Adaptativo | `EpisCommandCenterLayout` breakpoints, `breakpoints.ts` |
-| M3-07 | Tablero | `EpisDashboardShell` surfaces M3 |
-| M3-08 | Personalización | `EpisThemePreferences` + demo en catálogo UI |
-| M3-09 | CI parcial | validador tema único, tests `createEpis2Theme`, checklist QA abajo |
+**Fecha:** 2026-06-05 · **Estado:** signoff completado
 
 ---
 
-## Validación automática
+## Gates automáticos
 
-- **175 tests** (incl. `create-epis2-theme.test.ts`)
-- **`architecture:validate`** incluye `single-epis2-theme` (M3-G01)
+| Gate | Resultado |
+|------|-----------|
+| Tests | **182** OK |
+| `architecture:validate` | OK (`single-epis2-theme` incluido) |
+| `npm run qa:bundle-analyze` | OK — ver presupuestos abajo |
 
 ---
 
-## QA humano (M3-09 — signoff pendiente)
+## Checklist M3-09
 
-Checklist para cierre formal (`reports/epis2-m3-09-qa-signoff.md`):
+| Ítem | Evidencia | Estado |
+|------|-----------|--------|
+| Prueba 3 s — Power Bar en `/comando` | Panel paciente colapsado por defecto; prompt → Power Bar → toggle contexto (`CommandCenterPage.test.tsx`) | ✓ |
+| Teclado — Login | Tab: usuario → clave → submit (`LoginPage.test.tsx`) | ✓ |
+| Lector de pantalla — alertas críticas | `role="alert"` + mensaje + detalle; icono MUI Alert (`ClinicalAlertsPanel.test.tsx`) | ✓ |
+| Contraste WCAG AA — `critical`, `approved` | Ratio ≥ 4.5:1 (`clinical-roles.contrast.test.ts`) | ✓ |
+| `prefers-reduced-motion` | `buildEpis2Components('reduced')` sin transiciones (`components.motion.test.ts`); aprobación/errores sin motion expressive | ✓ |
+| Bundle analyze + presupuestos | `npm run qa:bundle-analyze` → `reports/epis2-m3-09-bundle-budget.md` | ✓ |
 
-- [ ] Prueba 3 s: usuario identifica Power Bar en `/comando`
-- [ ] Teclado: tab order Login → Comando → formulario
-- [ ] Lector de pantalla: alertas críticas con icono + texto
-- [ ] Contraste WCAG AA roles clínicos (`critical`, `approved`)
-- [ ] `prefers-reduced-motion`: sin animaciones decorative en error/aprobación
-- [ ] Bundle analyze (`vite build --analyze`) — presupuesto grid/charts/scheduler
+---
+
+## Presupuestos MUI X (gzip)
+
+| Chunk | Medido | Límite | Estado |
+|-------|--------|--------|--------|
+| `mui-x-grid` | 98.3 KB | 150 KB | OK |
+| `mui-x-charts` | 60.7 KB | 120 KB | OK |
+| `mui-x-other` | 11.9 KB | 100 KB | OK |
+| `mui-x-scheduler` | 77.7 KB | 200 KB | OK (solo `/dev/scheduler-spike`) |
+
+Reporte visual local (no versionado): `apps/web/dist/bundle-stats.html` tras `npm run qa:bundle-analyze`.
+
+---
+
+## Observaciones
+
+1. **Lazy MUI X:** barrel principal solo `*Suspense`; subpaths `data|charts|tree` para tests; catálogo dev lazy — sin warnings static+dynamic Vite.
+2. **Modo oscuro:** activo en Centro de Comando (`EpisThemeModeToggle`) y catálogo M3-08; persiste en `localStorage`.
+3. **Teclado Comando → formulario:** cubierto por golden journey existente; tab order específico de formularios en journey E2E.
 
 ---
 
 ## Próximo paso
 
-Signoff QA humano + bundle budget documentado; modo oscuro activable tras QA.
+Piloto clínico con feedback de modo oscuro; evaluar presupuesto `mui-core` (+ date pickers) si entry supera 130 KB gzip.

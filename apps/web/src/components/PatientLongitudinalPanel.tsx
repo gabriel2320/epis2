@@ -10,7 +10,7 @@ import { buildDocumentTreeByType } from '../tree/documentTree.js';
 
 import {
   Box,
-  EpisTreeView,
+  EpisTreeViewSuspense,
   List,
   ListItem,
   ListItemText,
@@ -154,10 +154,11 @@ function DocumentIndexTree({
   const defaultExpanded = useMemo(() => items.map((n) => n.id), [items]);
 
   return (
-    <EpisTreeView
+    <EpisTreeViewSuspense
       items={items}
       defaultExpandedItems={defaultExpanded}
       emptyMessage={copy.tree.empty}
+      loadingLabel={copy.dashboard.gridLoading}
       data-testid="epis2-longitudinal-documents-tree"
     />
   );

@@ -14,6 +14,7 @@ import {
   EpisCommandSuggestions,
   EpisM3Text,
   EpisTopAppBar,
+  EpisThemeModeToggle,
   Stack,
 } from '@epis2/epis2-ui';
 import { useCallback, useEffect, useState } from 'react';
@@ -24,8 +25,7 @@ import { INTENT_TO_ASSIST_BLUEPRINT, listPatients, type PatientListRow } from '.
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
-import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
-import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
+import { useClinicalNavigate, type ClinicalFormRoutePath, type DashboardTab } from '../routes/clinicalNavigate.js';
 import { ActivePatientBanner } from '../components/ActivePatientBanner.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
 
@@ -93,13 +93,14 @@ export function CommandCenterPage() {
       if (result.status === 'resolved') {
         if (result.routePath === '/epis2/dashboard') {
           const tab =
-            DASHBOARD_TAB_BY_INTENT[result.intent as ClinicalIntent] ?? 'work';
+            (DASHBOARD_TAB_BY_INTENT[result.intent as ClinicalIntent] ?? 'work') as DashboardTab;
           navigate({
             to: '/epis2/dashboard',
             search: {
-              tab: tab as 'work' | 'patient' | 'service' | 'quality',
-              patientId:
-                tab === 'patient' ? activePatient?.id : undefined,
+              tab,
+              ...(tab === 'patient' && activePatient?.id
+                ? { patientId: activePatient.id }
+                : {}),
             },
           });
           return;
@@ -142,9 +143,12 @@ export function CommandCenterPage() {
       data-testid="epis2-command-top-bar"
       startAction={<EpisChip label={copy.demoBadge} size="small" color="warning" variant="outlined" />}
       endActions={
-        <EpisButton appearance="text" size="small" onClick={logout}>
-          Cerrar sesión
-        </EpisButton>
+        <Stack direction="row" alignItems="center" spacing={0.5}>
+          <EpisThemeModeToggle />
+          <EpisButton appearance="text" size="small" onClick={logout}>
+            Cerrar sesión
+          </EpisButton>
+        </Stack>
       }
     />
   );

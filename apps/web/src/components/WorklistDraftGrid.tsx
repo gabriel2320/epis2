@@ -1,7 +1,7 @@
 import type { DashboardWorkResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import {
-  EpisDataGrid,
+  EpisDataGridSuspense,
   EpisDraftStatus,
   type GridColDef,
 } from '@epis2/epis2-ui';
@@ -83,7 +83,7 @@ export function WorklistDraftGrid({
   }, [showPatientColumn, showUpdatedColumn]);
 
   return (
-    <EpisDataGrid
+    <EpisDataGridSuspense
       rows={rows}
       columns={columns}
       loading={loading}

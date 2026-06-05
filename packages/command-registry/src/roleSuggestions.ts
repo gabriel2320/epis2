@@ -1,4 +1,4 @@
-import { roleHasPermission, type ClinicalRole, type Permission } from '@epis2/clinical-domain';
+import { roleHasPermission, type ClinicalRole } from '@epis2/clinical-domain';
 import { EPIS2_COMMAND_DEFINITIONS } from './definitions.js';
 import type { ClinicalIntent } from './types.js';
 

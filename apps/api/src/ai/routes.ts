@@ -165,7 +165,7 @@ export async function registerAiRoutes(
       }
       const limit = q.limit ? Math.min(Number(q.limit), 100) : 30;
       const runs = await listRecentAiRuns(db, {
-        patientId: q.patientId,
+        ...(q.patientId !== undefined ? { patientId: q.patientId } : {}),
         limit: Number.isFinite(limit) ? limit : 30,
       });
       return aiRunsListResponseSchema.parse({ readOnly: true, runs });
