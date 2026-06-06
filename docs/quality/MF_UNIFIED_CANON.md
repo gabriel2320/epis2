@@ -107,6 +107,9 @@ Ejecutados durante fundación / post-MVP; evidencia en `reports/` y `docs/design
 
 ## Próximo paso operativo
 
+**Plan maestro detallado (MF-1…51 + M3):** `reports/epis2-master-plan-mf1-51-m3.md`  
+**Norma impresión clínica Chile (Carta/A5):** `docs/design/EPIS2_PRINTABLE_CLINICAL_DOCUMENTS_NORM.md`
+
 ```bash
 npm run quality:microphase-next   # → MF-166 ≡ MF-35 Conciliación medicamentos
 ```

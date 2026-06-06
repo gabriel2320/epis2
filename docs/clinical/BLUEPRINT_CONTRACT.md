@@ -29,6 +29,7 @@
 5. Mapear `draftType` en `clinicalApi` si aplica.
 6. Ejecutar `assertRegistryInvariants()` — tests en `registry.test.ts`.
 7. Si requiere IA: seguir `docs/clinical/IA_BLUEPRINT_PATTERN.md` (MF-188).
+8. Si es imprimible: declarar familia y formato (Carta/A5) según `docs/design/EPIS2_PRINTABLE_CLINICAL_DOCUMENTS_NORM.md` §29; vista `Print*` separada de la pantalla M3.
 
 ---
 

@@ -11,6 +11,7 @@
 - Agentes y CI: `npm run quality:microphases`
 - Próxima tarea: `npm run quality:microphase-next`
 - Programa completo: `docs/quality/MICROPHASE_PROGRAM.md`
+- Plan maestro MF-1…51 + Material Design: `reports/epis2-master-plan-mf1-51-m3.md`
 
 ## Historial EPIS (donante)
 

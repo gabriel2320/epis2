@@ -342,8 +342,17 @@ inteligente sin quitar control humano
 
 ---
 
+## Impresión clínica (frontera M3)
+
+M3 gobierna **pantalla**. Los documentos imprimibles y PDF siguen una norma aparte: transformación a documento plano, formatos Carta/A5, sin captura de UI interactiva.
+
+**Norma canónica:** `docs/design/EPIS2_PRINTABLE_CLINICAL_DOCUMENTS_NORM.md`
+
+---
+
 ## Referencias
 
+- `docs/design/EPIS2_PRINTABLE_CLINICAL_DOCUMENTS_NORM.md` — norma gráfica y técnica impresión/PDF Chile
 - `docs/design/M3_ADOPTION_PLAN.md` — roadmap ejecutable M3-00…M3-09
 - `docs/design/EPIS2_THEME_SPEC.md` — tokens actuales (evolución → M3)
 - `docs/quality/M3_ANTI_DRIFT_GATES.md` — gates permanentes

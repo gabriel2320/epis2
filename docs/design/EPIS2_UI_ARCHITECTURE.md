@@ -13,6 +13,7 @@
 5. **Capa de abstracción:** `packages/epis2-ui` es la única puerta de entrada a componentes MUI en apps.
 6. **Copy clínico:** `@epis2/design-system` mantiene `copy/es.ts`; la UI visible no define strings en inglés.
 7. **IA y seguridad:** wrappers clínicos incluyen disclosure, borrador y gates de aprobación.
+8. **Impresión:** vista documental independiente de la UI interactiva; primitivas `Print*` en `epis2-ui` — ver `EPIS2_PRINTABLE_CLINICAL_DOCUMENTS_NORM.md`.
 
 ---
 
