@@ -180,11 +180,11 @@
 
 | Aspecto | Estado |
 |---------|--------|
-| `@mui/material` + icons | Instalados en `apps/web`; tema en `@epis2/design-system` |
+| `@mui/material` + icons | Instalados en `apps/web`; tema en `@epis2/epis2-ui` |
 | Imports directos `@mui/*` en `apps/web` | **Deuda técnica** — prohibidos tras MUI-01 salvo excepciones documentadas |
 | MUI X | No instalado |
-| `packages/epis2-ui` | No existe; definido en `EPIS2_UI_ARCHITECTURE.md` |
-| Localización `esES` | Pendiente en tema (MUI-01) |
+| `packages/epis2-ui` | ✓ Tema M3 + localización |
+| Localización `esES` | ✓ `createEpis2Theme` (`packages/epis2-ui/src/theme/create-epis2-theme.ts`) |
 
 ---
 

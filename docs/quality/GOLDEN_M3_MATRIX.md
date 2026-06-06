@@ -39,9 +39,13 @@
 | Dominio | Slice API | Blueprint / ruta | Estado MF |
 |---------|-----------|------------------|-----------|
 | Documentos / export | golden-v1 | `patient_summary` | Baseline |
-| Censo / ingreso | golden-v2 | inpatient API | MF-183 estabilizar |
+| Censo / ingreso | golden-v2 | `admission_note` → `/espacio/ingreso` | MF-157…158 DONE |
+| Alergias / problemas | golden-v2 | `allergy_entry`, `clinical_problem_entry` | MF-159…160 DONE |
+| Resultados | golden-v2 | `/espacio/resultados`, acuse, tendencias | MF-161…165 DONE |
+| Conciliación / traslado / ambulatorio | golden-v2/v3 | `medication_reconciliation`, `transfer_note`, `outpatient_visit` | MF-166…168 DONE |
+| Interconsulta respuesta | golden-v2 | `referral_report` | MF-169 DONE |
 | MAR / enfermería | golden-v3 | `medication_administration` | Baseline |
-| Interop HL7 | golden-v4 | validate only | Baseline |
+| Interop HL7 | golden-v4 | cuarentena + mapping + writeback borrador | MF-180…182 DONE |
 | IA trazable | golden-v5 | assist + RAG demo | MF-187 stack |
 
 ---
@@ -58,11 +62,18 @@ Toda entrega de pantalla nueva debe verificar:
 
 ---
 
-## Próxima ampliación (MF-157+)
+## Entregas MF-157…182 (DONE)
 
-| Microfase | Paso journey | M3 |
-|-----------|--------------|-----|
-| MF-157 admission_note | 5–6 | M3-05 form nuevo |
-| MF-158 cadena ingreso | 4–8 | Comando + API admit |
-| MF-159 alergias | 6–8 | Form CRUD |
-| MF-160 problemas | 6–8 | Form CRUD |
+| Microfase | Paso journey | M3 | Blueprint / ruta |
+|-----------|--------------|-----|------------------|
+| MF-157 admission_note | 5–6 | M3-05 | `/espacio/ingreso` |
+| MF-158 cadena ingreso | 4–8 | Comando + API admit | `admit_patient_hospital` |
+| MF-159 alergias | 6–8 | Form CRUD | `/espacio/alergia` |
+| MF-160 problemas | 6–8 | Form CRUD | `/espacio/problema` |
+| MF-161…165 resultados | 3–4 lectura | M3-10 lista | `/espacio/resultados` |
+| MF-166 conciliación | 5–7 | M3-05 | `/espacio/conciliacion` |
+| MF-167 traslado | 5–7 | M3-05 | `/espacio/traslado` |
+| MF-168 ambulatorio | 5–7 | M3-05 | `/espacio/ambulatorio` |
+| MF-169 informe interconsulta | 5–7 | M3-05 | `/espacio/informe-interconsulta` |
+| MF-178 signoff M3 | G4 humano | V1–V6 | `M3_VISUAL_SIGNOFF_STEPS.md` |
+| MF-180…182 HL7 | G4 interop | Tablero calidad | cuarentena → writeback borrador |

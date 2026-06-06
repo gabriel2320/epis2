@@ -11,17 +11,16 @@
 | Métrica | Valor |
 |---------|-------|
 | MF unificadas totales | **51** |
-| DONE | **34** (MF-1…34) |
-| READY | **1** (MF-35 ≡ MF-166) |
-| BLOCKED | **16** (MF-36…51) |
-| Blueprints en registry (código) | **14** |
-| Blueprints en catálogo doc | **11** (deriva — ver §5) |
+| DONE | **51** (MF-1…51) |
+| READY / BLOCKED | **0** |
+| Blueprints en registry (código) | **18** |
+| Blueprints en catálogo doc | **18** (Ciclo A 2026-06-07) |
 | M3 técnico (M3-00…09) | **Completado** 2026-06-05 |
-| M3 signoff humano piloto | **Pendiente** (MF-47 ≡ MF-178) |
+| M3 signoff humano piloto | **Automatizado** MF-178; pasos V1–V6 en `M3_VISUAL_SIGNOFF_STEPS.md` |
 
-**Próxima ejecución operativa:** MF-35 — Conciliación medicamentos (`npm run quality:microphase-next`).
+**Estado operativo:** Programa post-MVP **cerrado** (`MF-151…182` DONE). Próximo trabajo: Ciclo A doc sync ✓, piloto humano, o propuesta MF-2xx.
 
-**Frase guía:** *El gap principal es cobertura de catálogo y sincronización documental, no deriva arquitectónica.*
+**Frase guía:** *El gap principal pasa de cobertura MVP a producción institucional e impresión clínica — no deriva arquitectónica.*
 
 ---
 
@@ -105,48 +104,48 @@
 
 ---
 
-### 3.5 Ola 3 — Formularios prioritarios — MF-35…39
+### 3.5 Ola 3 — Formularios prioritarios — MF-35…39 (DONE)
 
 | MF | ID legado | Nombre | Estado |
 |----|-----------|--------|--------|
-| MF-35 | MF-166 | Conciliación medicamentos | **READY** |
-| MF-36 | MF-167 | Nota de traslado | BLOCKED |
-| MF-37 | MF-168 | Consulta ambulatoria | BLOCKED |
-| MF-38 | MF-169 | Solicitud e informe interconsulta | BLOCKED |
-| MF-39 | MF-170 | Cola priorizada formularios restantes | BLOCKED |
+| MF-35 | MF-166 | Conciliación medicamentos | DONE |
+| MF-36 | MF-167 | Nota de traslado | DONE |
+| MF-37 | MF-168 | Consulta ambulatoria | DONE |
+| MF-38 | MF-169 | Solicitud e informe interconsulta | DONE |
+| MF-39 | MF-170 | Cola priorizada formularios restantes | DONE |
 
 ---
 
-### 3.6 Ola 4 — Administración — MF-40…43 (BLOCKED)
+### 3.6 Ola 4 — Administración — MF-40…43 (DONE)
 
-| MF | ID legado | Nombre |
-|----|-----------|--------|
-| MF-40 | MF-171 | Usuarios y roles (UI read-only demo) |
-| MF-41 | MF-172 | Catálogos clínicos |
-| MF-42 | MF-173 | Consola de auditoría ampliada |
-| MF-43 | MF-174 | Consola operacional |
-
----
-
-### 3.7 Ola 5 — Candidato piloto — MF-44…48 (BLOCKED)
-
-| MF | ID legado | Nombre |
-|----|-----------|--------|
-| MF-44 | MF-175 | OIDC en staging |
-| MF-45 | MF-176 | Rate limits y controles de abuso |
-| MF-46 | MF-177 | Backup y restauración |
-| MF-47 | MF-178 | **Signoff humano M3, modo oscuro y offline** |
-| MF-48 | MF-179 | Ensayo formal de piloto |
+| MF | ID legado | Nombre | Estado |
+|----|-----------|--------|--------|
+| MF-40 | MF-171 | Usuarios y roles (UI read-only demo) | DONE |
+| MF-41 | MF-172 | Catálogos clínicos | DONE |
+| MF-42 | MF-173 | Consola de auditoría ampliada | DONE |
+| MF-43 | MF-174 | Consola operacional | DONE |
 
 ---
 
-### 3.8 Ola 6 — HL7 post-piloto — MF-49…51 (BLOCKED)
+### 3.7 Ola 5 — Candidato piloto — MF-44…48 (DONE)
 
-| MF | ID legado | Nombre |
-|----|-----------|--------|
-| MF-49 | MF-180 | HL7 inbound cuarentena sin writeback |
-| MF-50 | MF-181 | Mapeo y reconciliación HL7 |
-| MF-51 | MF-182 | Writeback HL7 controlado auditado reversible |
+| MF | ID legado | Nombre | Estado |
+|----|-----------|--------|--------|
+| MF-44 | MF-175 | OIDC en staging | DONE |
+| MF-45 | MF-176 | Rate limits y controles de abuso | DONE |
+| MF-46 | MF-177 | Backup y restauración | DONE |
+| MF-47 | MF-178 | **Signoff humano M3, modo oscuro y offline** | DONE |
+| MF-48 | MF-179 | Ensayo formal de piloto | DONE |
+
+---
+
+### 3.8 Ola 6 — HL7 post-piloto — MF-49…51 (DONE)
+
+| MF | ID legado | Nombre | Estado |
+|----|-----------|--------|--------|
+| MF-49 | MF-180 | HL7 inbound cuarentena sin writeback | DONE |
+| MF-50 | MF-181 | Mapeo y reconciliación HL7 | DONE |
+| MF-51 | MF-182 | Writeback HL7 controlado auditado reversible | DONE |
 
 **Invariante:** IA prohibida en writeback HL7. Sin writeback antes de MF-180.
 

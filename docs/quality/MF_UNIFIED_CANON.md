@@ -51,33 +51,33 @@
 | **MF-32** | MF-163 | Trazabilidad orden → resultado | 2 | DONE |
 | **MF-33** | MF-164 | Tendencias clínicas | 2 | DONE |
 | **MF-34** | MF-165 | Comandos de resultados | 2 | DONE |
-| **MF-35** | MF-166 | Conciliación medicamentos | 3 | **DONE** |
-| **MF-36** | MF-167 | Nota de traslado | 3 | **READY** |
-| **MF-37** | MF-168 | Consulta ambulatoria | 3 | BLOCKED |
-| **MF-38** | MF-169 | Solicitud e informe interconsulta | 3 | BLOCKED |
-| **MF-39** | MF-170 | Cola priorizada formularios restantes | 3 | BLOCKED |
-| **MF-40** | MF-171 | Usuarios y roles | 4 | BLOCKED |
-| **MF-41** | MF-172 | Catálogos clínicos | 4 | BLOCKED |
-| **MF-42** | MF-173 | Consola de auditoría | 4 | BLOCKED |
-| **MF-43** | MF-174 | Consola operacional | 4 | BLOCKED |
-| **MF-44** | MF-175 | OIDC en staging | 5 | BLOCKED |
-| **MF-45** | MF-176 | Rate limits y controles de abuso | 5 | BLOCKED |
-| **MF-46** | MF-177 | Backup y restauración | 5 | BLOCKED |
-| **MF-47** | MF-178 | Signoff humano M3, modo oscuro y offline | 5 | BLOCKED |
-| **MF-48** | MF-179 | Ensayo formal de piloto | 5 | BLOCKED |
-| **MF-49** | MF-180 | HL7 inbound en cuarentena sin writeback | 6 | BLOCKED |
-| **MF-50** | MF-181 | Mapeo y reconciliación HL7 | 6 | BLOCKED |
-| **MF-51** | MF-182 | Writeback HL7 controlado auditado reversible | 6 | BLOCKED |
+| **MF-35** | MF-166 | Conciliación medicamentos | 3 | DONE |
+| **MF-36** | MF-167 | Nota de traslado | 3 | DONE |
+| **MF-37** | MF-168 | Consulta ambulatoria | 3 | DONE |
+| **MF-38** | MF-169 | Solicitud e informe interconsulta | 3 | DONE |
+| **MF-39** | MF-170 | Cola priorizada formularios restantes | 3 | DONE |
+| **MF-40** | MF-171 | Usuarios y roles | 4 | DONE |
+| **MF-41** | MF-172 | Catálogos clínicos | 4 | DONE |
+| **MF-42** | MF-173 | Consola de auditoría | 4 | DONE |
+| **MF-43** | MF-174 | Consola operacional | 4 | DONE |
+| **MF-44** | MF-175 | OIDC en staging | 5 | DONE |
+| **MF-45** | MF-176 | Rate limits y controles de abuso | 5 | DONE |
+| **MF-46** | MF-177 | Backup y restauración | 5 | DONE |
+| **MF-47** | MF-178 | Signoff humano M3, modo oscuro y offline | 5 | DONE |
+| **MF-48** | MF-179 | Ensayo formal de piloto | 5 | DONE |
+| **MF-49** | MF-180 | HL7 inbound en cuarentena sin writeback | 6 | DONE |
+| **MF-50** | MF-181 | Mapeo y reconciliación HL7 | 6 | DONE |
+| **MF-51** | MF-182 | Writeback HL7 controlado auditado reversible | 6 | DONE |
 
 ## Resumen
 
 | Métrica | Valor |
 |---------|-------|
 | Total MF unificadas | **51** |
-| DONE | **35** (MF-1…35) |
-| READY | **1** (MF-36) |
-| BLOCKED | **15** (MF-37…51) |
-| Próxima ejecución | **MF-36** ≡ `MF-167` |
+| DONE | **51** (MF-1…51) |
+| READY | **0** |
+| BLOCKED | **0** |
+| Programa post-MVP | **Cerrado** (ledger `MF-151…182` DONE) |
 
 ## Conciliación con propuesta arquitecto v2 (MF-2xx)
 
@@ -107,9 +107,15 @@ Ejecutados durante fundación / post-MVP; evidencia en `reports/` y `docs/design
 
 ## Próximo paso operativo
 
-**Plan maestro detallado (MF-1…51 + M3):** `reports/epis2-master-plan-mf1-51-m3.md`  
-**Norma impresión clínica Chile (Carta/A5):** `docs/design/EPIS2_PRINTABLE_CLINICAL_DOCUMENTS_NORM.md`
+Programa MF-1…51 **cerrado**. Siguiente trabajo fuera de este canon hasta decisión explícita sobre `reports/epis2-master-architect-program-v2.md` (MF-2xx).
+
+| Prioridad | Entrega |
+|-----------|---------|
+| Ciclo A | Sincronización catálogos — `reports/epis2-ciclo-a-doc-sync.md` |
+| Piloto humano | `docs/quality/M3_VISUAL_SIGNOFF_STEPS.md` + `PILOT_DEMO_CHECKLIST.md` |
+| Post-programa | Impresión clínica Chile — `docs/design/EPIS2_PRINTABLE_CLINICAL_DOCUMENTS_NORM.md` |
 
 ```bash
-npm run quality:microphase-next   # → MF-167 ≡ MF-36 Nota de traslado
+npm run quality:microphases   # → "Programa post-MVP completo"
+npm run quality:m3-signoff    # gates M3 automatizados
 ```

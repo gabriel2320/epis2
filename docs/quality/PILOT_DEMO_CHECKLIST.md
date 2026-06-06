@@ -32,14 +32,18 @@
 
 ---
 
-## Verificación tema (THEME-07) — recomendado en piloto visual
+## Verificación tema M3 (THEME-07) — norma visual
 
-| # | Paso | Hecho | Notas |
-|---|------|-------|-------|
-| 10 | **`/preferencias-apariencia`** — Azul clínico y Verde azulado calmado aplican al instante | [ ] | |
-| 11 | **Modo oscuro** y **Seguir sistema** — texto legible en Comando y evolución | [ ] | |
-| 12 | **Alto contraste** — cuerpo reforzado; roles crítico / aprobado / borrador intactos | [ ] | |
-| 13 | **`/desarrollo/catalogo-visual`** (dev) — paleta, roles clínicos, elevación tonal | [ ] | Solo con sesión demo |
+**Canon:** [`docs/quality/M3_VISUAL_SIGNOFF_STEPS.md`](../quality/M3_VISUAL_SIGNOFF_STEPS.md) · Gates previos: `npm run quality:m3-signoff`
+
+| # | Paso | Norma M3 | Hecho | Notas |
+|---|------|----------|-------|-------|
+| 10 | **V1** `/preferencias-apariencia` — Clinical Blue y Calm Teal al instante; roles clínicos inmutables | M3-G02, G14; anti-patrón §9 | [ ] | |
+| 11 | **V2** Modo oscuro + Seguir sistema — Comando (Display/Power Bar) y evolución (Standard, Outlined) legibles | THEME-05; MTB dark; M3-G08 | [ ] | |
+| 12 | **V3** Alto contraste — cuerpo reforzado; draft/aprobado/crítico/advertencia intactos; una acción primaria | M3-G03, G13; tipografía §AA | [ ] | |
+| 13 | **V4** `/desarrollo/catalogo-visual` — paleta MTB, roles clínicos, elevación tonal (sin sombra decorativa) | THEME-06; M3-G12; solo dev | [ ] | |
+
+Pasos **V5–V6** (recorrido clínico 15 min + offline): ver `M3_VISUAL_SIGNOFF_STEPS.md`.
 
 ---
 

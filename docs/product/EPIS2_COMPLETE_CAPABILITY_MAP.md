@@ -95,22 +95,22 @@ Leyenda de madurez:
 | Epicrisis | `discharge_summary` | ✓ | ✓ | ✓ |
 | Receta | `prescription` | ✓ | ✓ | ✓ |
 | Solicitud laboratorio | `lab_request` | ✓ | ✓ | ✓ |
-| Ingreso | — | — | ✓ | ○ |
-| Interconsulta | — | — | ✓ | ✓ blueprint demo |
+| Ingreso | `admission_note` | ✓ | ✓ | ✓ blueprint demo |
+| Interconsulta | `referral`, `referral_report` | ✓ | ✓ | ✓ blueprint demo |
 | Indicaciones / órdenes | — | — | ✓ | ◐ `clinical_orders` demo |
 | Imagenología | — | — | ✓ | ✓ blueprint demo |
 | Procedimientos | — | — | ✓ | ○ |
-| Traslado / alta | — | — | ✓ | ○ CDR alta parcial |
+| Traslado / alta | `transfer_note`, epicrisis | ✓ | ✓ | ◐ traslado form; alta parcial |
 
 ### 2.6 Hospitalización
 
 | Capacidad | Versión objetivo | Estado |
 |-----------|------------------|--------|
 | Censo y camas | V2 | ✓ demo CIRUGIA-DEMO |
-| Ingreso hospitalario | V2 | ○ |
+| Ingreso hospitalario | V2 | ✓ `admission_note` |
 | Evolución diaria | V2 | ✓ alias evolución |
 | Órdenes activas | V2 | ✓ tablero servicio |
-| Resultados y críticos con acuse | V2 | ✓ acuse API demo |
+| Resultados y críticos con acuse | V2 | ✓ bandeja + acuse + tendencias |
 | Pendientes / worklist servicio | V2 | ✓ tablero servicio |
 | Preparación de alta | V2 | ○ |
 
@@ -130,7 +130,7 @@ Leyenda de madurez:
 
 | Capacidad | Versión | Estado |
 |-----------|---------|--------|
-| Conciliación | V3 | ○ |
+| Conciliación | V3 | ✓ `medication_reconciliation` |
 | Duplicidades / interacciones | V3 | ◐ CDS + CDR demo |
 | Ajuste renal/hepático | V3 | ◐ regla renal demo |
 | Validación farmacéutica | V3 | ✓ blueprint demo |
@@ -145,7 +145,7 @@ Leyenda de madurez:
 | Búsqueda semántica (RAG) | V1/V5 | ◐ RAG con citas demo (sin pgvector) |
 | Export PDF / impresión | V1 | ○ |
 | FHIR R4 export | V1 | ✓ frontera `packages/fhir-export` |
-| HL7 v2 | V4 | ◐ validador demo (tablero calidad) |
+| HL7 v2 | V4 | ✓ cuarentena + mapping + writeback borrador (MF-180…182) |
 | Staging importación externa | V4 | ◐ lectura staging demo |
 
 ### 2.10 Localización chilena
@@ -184,7 +184,7 @@ Leyenda de madurez:
 | Mi trabajo | V0 | ✓ EPIS2-12 |
 | Tablero del paciente | V1 | ✓ slice demo |
 | Tablero del servicio | V2 | ✓ |
-| Calidad / administración | V4 | ✓ slice read-only demo |
+| Calidad / administración | V4 | ✓ tablero calidad + consola admin demo |
 
 ---
 
@@ -193,7 +193,7 @@ Leyenda de madurez:
 | Dominio | Paquete / área | Rol |
 |---------|----------------|-----|
 | Comandos | `packages/command-registry` | Intents, aliases, routing |
-| Formularios | `packages/clinical-forms` | Blueprints y validación (11 en registry) |
+| Formularios | `packages/clinical-forms` | Blueprints y validación (**18** en registry) |
 | Widgets | `packages/epis2-widgets` | Registry contextual (WIDGET-00) |
 | Permisos | `packages/clinical-domain` (RBAC) | Matriz rol → permiso |
 | Acciones clínicas | `packages/clinical-actions` *(futuro)* | Catálogo declarativo EPIONE |

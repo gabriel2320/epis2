@@ -1,7 +1,7 @@
 # EPIS2 — Mapa de conexiones pantalla ↔ sistema
 
-**Versión:** 1.0 · **Fecha:** 2026-06-05  
-**Cadena obligatoria:**
+**Versión:** 1.1 · **Fecha:** 2026-06-07  
+**Actualización:** Ciclo A — MF-157…182 reflejados en cadenas
 
 ```text
 comando → intent → permiso → blueprint → página → API → persistencia → borrador → aprobación → auditoría
@@ -41,6 +41,37 @@ comando → intent → permiso → blueprint → página → API → persistenci
 
 Cadenas análogas — **COMPLETE** con profundidad demo.
 
+### Ingreso hospitalario (MF-157…158)
+
+```text
+comando admit_patient_hospital → intent → admission_note → /espacio/ingreso
+  → borrador → aprobación → POST /api/inpatient/admissions (SoT)
+  → retorno comando con contexto paciente
+```
+
+### Traslado (MF-167)
+
+```text
+comando transfer_patient → transfer_note → /espacio/traslado
+  → borrador → aprobación → POST /api/inpatient/transfer
+```
+
+### Conciliación, ambulatorio, informe interconsulta (MF-166…169)
+
+Cadenas blueprint → borrador → aprobación — **COMPLETE** (`/espacio/conciliacion`, `/espacio/ambulatorio`, `/espacio/informe-interconsulta`).
+
+### Alergias y problemas (MF-159…160)
+
+Rutas `/espacio/alergia` y `/espacio/problema` — **COMPLETE** (acceso vía ficha/resumen; borrador → aprobación → SoT).
+
+### Resultados (MF-161…165)
+
+```text
+comando open_results_inbox → /espacio/resultados
+  → GET /api/patients/:id/results-inbox
+  → acuse crítico, tendencias, trazabilidad orden → resultado
+```
+
 ---
 
 ## 2. Conexiones PARTIAL (cadena incompleta)
@@ -67,23 +98,16 @@ comando → blueprint orden → borrador → aprobación
   ✓ comando `open_results_inbox` → `/espacio/resultados`
 ```
 
-### Ingreso hospitalario
+### Ingreso hospitalario (legacy tablero)
 
-```text
-comando admit_patient_hospital → tablero servicio (sin blueprint)
-  → POST /api/inpatient/admissions
-  ✗ formulario ingreso
-  ✗ página dedicada
-  ✗ retorno comando con contexto encuentro
-```
+Alta operativa rápida sigue disponible en `ServiceDashboardTab` + API; la cadena canónica command-first es `admission_note` (§1).
 
 ### Traslado / alta inpatient
 
 ```text
-API POST transfer / discharge
-  ✗ comandos con blueprint
-  ✗ formularios clínicos
-  ✗ actualización automática timeline UI
+Alta: API POST discharge + epicrisis blueprint (COMPLETE demo)
+Traslado: transfer_note (COMPLETE — §1)
+  ✗ timeline UI automática post-traslado
 ```
 
 ### MAR programado
@@ -113,7 +137,7 @@ POST intake / OCR / search (API)
 | `open_dashboard_patient` | patient tab | — | ✓ |
 | `open_dashboard_service` | service tab | — | ✓ |
 | `open_dashboard_quality` | quality tab | — | ✓ |
-| `admit_patient_hospital` | service tab | — | **PARTIAL** |
+| `admit_patient_hospital` | `/espacio/ingreso` | `admission_note` | **COMPLETE** |
 
 **Diseño intencional:** dashboard intents sin blueprint (`registry.ts`).
 
@@ -123,15 +147,12 @@ POST intake / OCR / search (API)
 
 | Capacidad | Eslabón roto |
 |-----------|--------------|
-| Resultados bandeja | Acuse crítico en bandeja (MF-162); tendencias (MF-164) |
-| Conciliación farmacéutica | blueprint + comando + API write |
-| Consulta ambulatoria | blueprint + comando |
-| Admin usuarios/roles | UI + API CRUD |
+| Alta clínica dedicada | Sin blueprint `discharge` separado de epicrisis |
+| Admin usuarios/roles | UI read-only demo; CRUD productivo pendiente |
 | FHIR import | Solo export implementado |
-| Comando «revisa medicamentos» | Sin intent |
 | Comando «ver pendientes» | Sin intent dedicado |
-| Comando «traslada al paciente» | Sin intent (solo API) |
-| Comando «haz ingreso» | Parcial → dashboard, no formulario |
+| Timeline post-traslado | UI no refresca automáticamente |
+| HL7 writeback productivo | Borrador humano demo (MF-182); sin interfaz HIS real |
 
 ---
 
@@ -175,19 +196,24 @@ flowchart TD
 | nota enfermería | `create_nursing_note` | `nursing_note` | `/espacio/enfermeria` |
 | mar / administrar | `record_medication_administration` | `medication_administration` | `/espacio/mar` |
 | validación farmacia | `prepare_pharmacy_review` | `pharmacy_validation` | `/espacio/farmacia` |
+| ingreso hospitalario | `admit_patient_hospital` | `admission_note` | `/espacio/ingreso` |
+| abre resultados | `open_results_inbox` | — | `/espacio/resultados` |
+| concilia medicamentos | `reconcile_medications` | `medication_reconciliation` | `/espacio/conciliacion` |
+| traslada paciente | `transfer_patient` | `transfer_note` | `/espacio/traslado` |
+| consulta ambulatoria | `create_outpatient_visit` | `outpatient_visit` | `/espacio/ambulatorio` |
+| informe interconsulta | `respond_referral` | `referral_report` | `/espacio/informe-interconsulta` |
 | abre el tablero | `open_dashboard` | — | `/epis2/dashboard` |
-| ingreso hospitalario | `admit_patient_hospital` | — | `/epis2/dashboard?tab=service` |
 
-**Total comandos:** 17 (`packages/command-registry/src/definitions.ts`)
+**Total comandos:** 22 (`packages/command-registry/src/definitions.ts`)
 
 ### Comandos catálogo producto sin intent
 
 | Comando propuesto | Estado |
 |-------------------|--------|
 | resume últimas 24 horas | **PARTIAL** — alias de resumen + IA panel |
-| haz ingreso | **PARTIAL** — `admit_patient_hospital` |
-| traslada al paciente | **MISSING** |
-| revisa medicamentos | **MISSING** |
+| haz ingreso | ✓ `admit_patient_hospital` → `/espacio/ingreso` |
+| traslada al paciente | ✓ `transfer_patient` |
+| revisa medicamentos | ✓ `reconcile_medications` |
 | ver pendientes | **MISSING** |
 | pide imagenología | ✓ `request_imaging` |
 
@@ -206,6 +232,8 @@ flowchart TD
 | MAR schedule | dashboard nursing | `021_v3_mar_schedule` |
 | IA | assist, rag, summary, runs | `ai_runs` |
 | Dashboard | work, patient, service, nursing, pharmacy, quality | agregaciones demo |
+| HL7 | validate, quarantine, mapping, writeback borrador | `interop_hl7_quarantine` (031) |
+| Admin | users, catalogs (read demo) | `/espacio/admin`, migración 029 |
 | FHIR | export bundle | read-only |
 | Auth | login, session, audit | sessions demo |
 
@@ -213,16 +241,16 @@ flowchart TD
 
 ## 7. Cadenas incompletas priorizadas
 
-> **Actualización MF-152 (2026-06-05):** C3, C5 y C6 **resueltos** en demo V0–V5. C4 **parcial** (alta operativa en `ServiceDashboardTab` + API; traslado/formulario blueprint pendiente).
+> **Actualización Ciclo A (2026-06-07):** C1, C2 y C4 **resueltos** (MF-157…167). C3, C5, C6 siguen resueltos.
 
 | ID | Cadena | Severidad | Estado |
 |----|--------|-----------|--------|
-| C1 | Ingreso: comando → sin blueprint → sin formulario | P1 | ABIERTO |
-| C2 | Resultados: sin UI ni comando | P1 | ABIERTO |
-| C3 | Documentos: API → pantalla → comando | P2 | **RESUELTO** — `DocumentSearchPanel`, LAYOUT-05, comandos docs |
-| C4 | Traslado/alta: API → comando/formulario | P2 | **PARCIAL** — alta en `ServiceDashboardTab`; traslado sin blueprint |
-| C5 | Widgets: registry → montaje Comando/ficha | P2 | **RESUELTO** — WIDGET-01 (`reports/epis2-widget-01-mount.md`) |
-| C6 | Dashboard nursing/pharmacy: router validateSearch | P3 | **RESUELTO** — `router.tsx` `validateSearch` nursing/pharmacy |
+| C1 | Ingreso: comando → blueprint → formulario | P1 | **RESUELTO** — MF-157…158 |
+| C2 | Resultados: UI + comando | P1 | **RESUELTO** — MF-161…165 |
+| C3 | Documentos: API → pantalla → comando | P2 | **RESUELTO** — `DocumentSearchPanel`, LAYOUT-05 |
+| C4 | Traslado: API → comando/formulario | P2 | **RESUELTO** — MF-167 `transfer_note` |
+| C5 | Widgets: registry → montaje Comando/ficha | P2 | **RESUELTO** — WIDGET-01 |
+| C6 | Dashboard nursing/pharmacy: router validateSearch | P3 | **RESUELTO** — `router.tsx` |
 | C7 | Rutas canónicas `/trabajo` `/pacientes` vs `/espacio` | P3 (DEFERRED) | DEFERRED |
 
 ---

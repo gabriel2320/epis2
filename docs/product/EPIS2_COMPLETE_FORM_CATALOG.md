@@ -1,7 +1,7 @@
 # EPIS2 — Catálogo completo de formularios
 
-**Versión:** 1.0 · **Fecha:** 2026-06-05  
-**Estado:** Auditoría de brechas  
+**Versión:** 1.1 · **Fecha:** 2026-06-07  
+**Estado:** Sincronizado con registry (Ciclo A post MF-182)  
 **Registry único:** `packages/clinical-forms/src/registry.ts`
 
 ---
@@ -10,7 +10,7 @@
 
 | Regla | Estado |
 |-------|--------|
-| Un blueprint por formulario clínico | ✓ 11 blueprints |
+| Un blueprint por formulario clínico | ✓ **18 blueprints** |
 | Cada blueprint con `routePath` | ✓ |
 | Sin Form Registry paralelo | ✓ gate arquitectónico |
 | Toda acción draft con aprobación humana | ✓ `POST /api/drafts/:id/approve` |
@@ -19,7 +19,7 @@
 
 ---
 
-## 2. Formularios implementados (11)
+## 2. Formularios implementados (18)
 
 | Formulario | Blueprint | Ruta | Roles | Validaciones | IA | Aprobación | Estado |
 |------------|-----------|------|-------|--------------|-----|------------|--------|
@@ -34,6 +34,13 @@
 | Nota enfermería | `nursing_note` | `/espacio/enfermeria` | nurse, physician | careProvided* | Sí | Sí | **COMPLETE** |
 | Administración MAR | `medication_administration` | `/espacio/mar` | nurse, physician | medication*, dose*, route* | Sí | Sí | **PARTIAL** |
 | Validación farmacéutica | `pharmacy_validation` | `/espacio/farmacia` | pharmacist, physician | medicationReviewed*, intervention* | Sí | Sí | **PARTIAL** |
+| Ingreso hospitalario | `admission_note` | `/espacio/ingreso` | physician, nurse | motivo*, servicio* | Sí | Sí | **COMPLETE** |
+| Registro alergia | `allergy_entry` | `/espacio/alergia` | physician, nurse | substance*, severity* | No | Sí | **COMPLETE** |
+| Problema clínico | `clinical_problem_entry` | `/espacio/problema` | physician, nurse | problem*, status* | No | Sí | **COMPLETE** |
+| Conciliación medicamentosa | `medication_reconciliation` | `/espacio/conciliacion` | pharmacist, physician | home*, inpatient*, discrepancies* | No | Sí | **COMPLETE** |
+| Nota de traslado | `transfer_note` | `/espacio/traslado` | physician, nurse | destino*, motivo* | Sí | Sí | **COMPLETE** |
+| Consulta ambulatoria | `outpatient_visit` | `/espacio/ambulatorio` | physician, nurse | chiefComplaint*, assessment*, plan* | No | Sí | **COMPLETE** |
+| Informe interconsulta | `referral_report` | `/espacio/informe-interconsulta` | physician | context*, assessment*, recommendations* | No | Sí | **COMPLETE** |
 
 **Archivos blueprint:** `packages/clinical-forms/src/blueprints/*.ts`
 
@@ -52,6 +59,13 @@
 | `nursing_note` | nursing_note | ✓ | **COMPLETE** |
 | `medication_administration` | medication_administration | ✓ | **COMPLETE** |
 | `pharmacy_validation` | pharmacy_validation | ✓ | **COMPLETE** |
+| `admission_note` | admission_note | ✓ | **COMPLETE** |
+| `allergy_entry` | allergy_entry | ✓ | **COMPLETE** |
+| `clinical_problem_entry` | clinical_problem_entry | ✓ | **COMPLETE** |
+| `medication_reconciliation` | medication_reconciliation | ✓ | **COMPLETE** |
+| `transfer_note` | transfer_note | ✓ | **COMPLETE** |
+| `outpatient_visit` | outpatient_visit | ✓ | **COMPLETE** |
+| `referral_report` | referral_report | ✓ | **COMPLETE** |
 
 ---
 
@@ -76,8 +90,8 @@
 | Contactos | **MISSING** |
 | Cobertura/seguro | **MISSING** |
 | Consentimientos | **MISSING** |
-| Alergia / reacción adversa | **MISSING** |
-| Problema / diagnóstico | **MISSING** |
+| Alergia / reacción adversa | `allergy_entry` | **COMPLETE** |
+| Problema / diagnóstico | `clinical_problem_entry` | **COMPLETE** |
 | Alerta clínica | **MISSING** |
 | Equipo tratante | **MISSING** |
 
@@ -85,7 +99,7 @@
 
 | Formulario | Estado |
 |------------|--------|
-| Consulta ambulatoria | **MISSING** |
+| Consulta ambulatoria | `outpatient_visit` | **COMPLETE** |
 | Evolución libre estructurada | **MISSING** (SOAP ✓) |
 | Plan terapéutico | **MISSING** |
 | Certificado | **MISSING** |
@@ -97,9 +111,9 @@
 
 | Formulario | Estado |
 |------------|--------|
-| Ingreso hospitalario | **MISSING** |
+| Ingreso hospitalario | `admission_note` | **COMPLETE** |
 | Nota procedimiento | **MISSING** |
-| Nota traslado | **MISSING** |
+| Nota traslado | `transfer_note` | **COMPLETE** |
 | Alta (formulario) | **MISSING** |
 | Nota fallecimiento | **DEFERRED** |
 
@@ -198,12 +212,12 @@ Validación rol por blueprint: `blueprint.allowedRoles` en `GeneratedClinicalFor
 
 | Métrica | Valor |
 |---------|-------|
-| Blueprints implementados | 11 |
+| Blueprints implementados | **18** |
 | Formularios catálogo producto (estimado) | ~95 |
-| Cobertura formularios | **~12 %** |
-| Formularios COMPLETE en MVP | 5 |
-| Formularios PARTIAL | 6 |
-| Cadenas blueprint→ruta→permiso completas | 11/11 |
+| Cobertura formularios | **~19 %** |
+| Formularios COMPLETE en MVP+olas | 13 |
+| Formularios PARTIAL | 5 |
+| Cadenas blueprint→ruta→permiso completas | 18/18 |
 
 ---
 

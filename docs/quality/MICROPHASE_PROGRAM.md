@@ -61,7 +61,10 @@ MF-161…182  → Resultados, formularios, admin, piloto, HL7
 
 ## Estado actual
 
-Ejecutar `npm run quality:microphases` para la **próxima microfase READY** (no editar manualmente sin actualizar el ledger).
+**Programa cerrado:** las 38 microfases del ledger (`MF-151…182` + inserciones) están **DONE**.  
+`npm run quality:microphases` → *Programa post-MVP completo*.
+
+Próximo trabajo fuera del ledger hasta decisión sobre MF-2xx: Ciclo A doc sync, piloto humano M3, impresión clínica.
 
 ## Plantilla de cierre
 

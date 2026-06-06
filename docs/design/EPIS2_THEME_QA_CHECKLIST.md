@@ -18,9 +18,10 @@ Ver `EPIS2_MATERIAL_DESIGN_ANTI_PATTERNS.md` — 20 prácticas prohibidas; revis
 
 ## THEME-07 (catálogo visual)
 
+- [ ] Pasos V1–V4 en `docs/quality/M3_VISUAL_SIGNOFF_STEPS.md`
 - [ ] `/desarrollo/catalogo-visual` — preferencias, paleta MTB, roles clínicos
 - [ ] No enlazado desde shell clínico de producción
-- [ ] PILOT_DEMO_CHECKLIST pasos 10–13 documentados
+- [ ] PILOT_DEMO_CHECKLIST pasos 10–13 alineados a norma M3
 
 ## THEME-06 (elevación tonal + journey tema)
 
