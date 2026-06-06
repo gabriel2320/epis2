@@ -39,6 +39,7 @@ Reportes: `epis2-mf-ola3-003-alerts-ficha.md`, `epis2-mf-ola6a-001-print-a5.md`
 | db:validate | ✅ 32 migraciones |
 | quality:ola3-alerts-gate | ✅ |
 | quality:ola6a-print-gate | ✅ |
+| quality:doc-screen-catalog-gate | ✅ |
 | test:e2e:ola3 | ✅ **4** tests (incl. DEMO-005 alertas) |
 
 **IDC Done:** **13** (+ IDC **22** banner alertas ficha)
@@ -58,9 +59,10 @@ Reportes: `epis2-mf-ola3-003-alerts-ficha.md`, `epis2-mf-ola6a-001-print-a5.md`
 
 ## Próximo paso (Tramo A)
 
-1. **MF-DOC-002** — sincronizar screen catalog §5–19 con matriz IDC
-2. **MF-OLA1C-003** — imaging IDC 56
-3. Signoff **IDC 40** tras revisión impresión A5
+1. **MF-OLA1C-003** — imaging IDC 56 signoff
+2. Signoff **IDC 40** tras revisión impresión A5
+3. Promover IDC **27–29** tras E2E ficha estable en CI
+4. **MF-TRAMO-B-001** — inventario recepción
 
 ---
 
