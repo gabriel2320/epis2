@@ -22,7 +22,7 @@ export function validateHl7Message(raw: string) {
     if (fields.length < 9) {
       errors.push('MSH incompleto (se esperan al menos 9 campos)');
     } else {
-      messageType = fields[8];
+      messageType = fields.find((p) => /^[A-Z0-9]{3}\^/.test(p)) ?? fields[6] ?? fields[8];
     }
   }
 

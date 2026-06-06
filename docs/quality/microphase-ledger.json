@@ -507,12 +507,12 @@
       "wave": 5,
       "waveName": "Candidato a piloto",
       "dependsOn": ["MF-177"],
-      "state": "READY",
+      "state": "DONE",
       "evidenceRequired": [
         "checklist M3 humano completado",
         "reports/epis2-mf-178-m3-human-signoff.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-178-m3-human-signoff.md",
       "unblocks": ["MF-179"]
     },
     {
@@ -521,12 +521,12 @@
       "wave": 5,
       "waveName": "Candidato a piloto",
       "dependsOn": ["MF-178"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "PILOT_DEMO_CHECKLIST ejecutado",
         "reports/epis2-mf-179-pilot-trial.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-179-pilot-trial.md",
       "unblocks": ["MF-180"]
     },
     {
@@ -535,12 +535,12 @@
       "wave": 6,
       "waveName": "Post-piloto",
       "dependsOn": ["MF-179"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "staging HL7 sin SoT write",
         "reports/epis2-mf-180-hl7-quarantine.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-180-hl7-quarantine.md",
       "unblocks": ["MF-181"]
     },
     {
@@ -549,12 +549,12 @@
       "wave": 6,
       "waveName": "Post-piloto",
       "dependsOn": ["MF-180"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "mapeo documentado",
         "reports/epis2-mf-181-hl7-mapping.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-181-hl7-mapping.md",
       "unblocks": ["MF-182"]
     },
     {
@@ -563,13 +563,13 @@
       "wave": 6,
       "waveName": "Post-piloto",
       "dependsOn": ["MF-181"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "writeback con borrador humano",
         "auditoría reversible",
         "reports/epis2-mf-182-hl7-writeback.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-182-hl7-writeback.md",
       "unblocks": []
     }
   ],

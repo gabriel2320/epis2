@@ -15,3 +15,14 @@ export function validateHl7Message(message: string) {
     body: JSON.stringify({ message }),
   });
 }
+
+export function quarantineHl7Message(message: string) {
+  return apiFetch<{ readOnly: true; quarantineId: string; messageType?: string; status: 'quarantine' }>(
+    '/api/interop/hl7/quarantine',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message }),
+    },
+  );
+}

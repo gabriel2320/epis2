@@ -359,6 +359,23 @@ export const clinicalCatalogStaging = pgTable('clinical_catalog_staging', {
     .references(() => appUsers.id),
 });
 
+export const interopHl7Quarantine = pgTable('interop_hl7_quarantine', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  messageType: text('message_type'),
+  rawMessage: text('raw_message').notNull(),
+  status: text('status').notNull().default('quarantine'),
+  mappedPreview: jsonb('mapped_preview'),
+  proposedDraftId: uuid('proposed_draft_id').references(() => clinicalDrafts.id, {
+    onDelete: 'set null',
+  }),
+  stagedAt: timestamp('staged_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+  revertedAt: timestamp('reverted_at', { withTimezone: true }),
+  revertedBy: text('reverted_by').references(() => appUsers.id),
+});
+
 export const interopStagingBatches = pgTable('interop_staging_batches', {
   id: uuid('id').primaryKey().defaultRandom(),
   sourceSystem: text('source_system').notNull(),

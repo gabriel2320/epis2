@@ -5,6 +5,7 @@ import { Link, Outlet } from '@tanstack/react-router';
 import { useAuth } from '../auth/AuthContext.js';
 
 import { ActivePatientBanner } from '../components/ActivePatientBanner.js';
+import { OfflineStatusBanner } from '../components/OfflineStatusBanner.js';
 
 
 
@@ -46,7 +47,7 @@ export function ClinicalShellLayout() {
   return (
 
     <Box sx={epis2CanvasSx}>
-
+      <OfflineStatusBanner />
       <AppBar
 
         position="static"

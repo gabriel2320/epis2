@@ -74,7 +74,12 @@ export function validateLedger(ledger) {
 
   const ready = items.filter((i) => i.state === 'READY');
   const inProgress = items.filter((i) => i.state === 'IN_PROGRESS');
-  if (ready.length !== 1) {
+  const allDone = items.length > 0 && items.every((i) => i.state === 'DONE');
+  if (allDone) {
+    if (ready.length > 0) {
+      errors.push('Programa completo: no debe haber microfases READY');
+    }
+  } else if (ready.length !== 1) {
     errors.push(`Debe haber exactamente 1 microfase READY; hay ${ready.length}: ${ready.map((i) => i.id).join(', ') || 'ninguna'}`);
   }
   if (inProgress.length > 1) {

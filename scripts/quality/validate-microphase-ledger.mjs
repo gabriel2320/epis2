@@ -19,7 +19,10 @@ if (!result.ok) {
   process.exit(1);
 }
 
-const ready = result.ready;
 console.log(`[OK] Ledger válido — ${ledger.microphases.length} microfases`);
-console.log(`[OK] Próxima READY: ${ready.id} — ${ready.name}`);
+if (result.ready) {
+  console.log(`[OK] Próxima READY: ${result.ready.id} — ${result.ready.name}`);
+} else {
+  console.log('[OK] Programa post-MVP completo — sin microfases READY pendientes');
+}
 console.log('\nquality:microphases OK');

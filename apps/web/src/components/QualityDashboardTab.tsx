@@ -1,7 +1,7 @@
 import type { QualityDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import { useState } from 'react';
-import { validateHl7Message } from '../api/opsApi.js';
+import { validateHl7Message, quarantineHl7Message } from '../api/opsApi.js';
 import { QualityDashboardGrids } from './QualityDashboardGrids.js';
 
 import {
@@ -19,6 +19,7 @@ export type QualityDashboardTabProps = {
 export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
   const [hl7, setHl7] = useState('MSH|^~\\&|EPIS2|LAB|20260101120000||ADT^A01|1|P|2.5');
   const [hl7Result, setHl7Result] = useState<string | null>(null);
+  const [quarantineResult, setQuarantineResult] = useState<string | null>(null);
 
   const runHl7 = async () => {
     try {
@@ -30,6 +31,15 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
       );
     } catch {
       setHl7Result(copy.errors.genericMessage);
+    }
+  };
+
+  const runQuarantine = async () => {
+    try {
+      const res = await quarantineHl7Message(hl7);
+      setQuarantineResult(`Cuarentena ${res.quarantineId.slice(0, 8)}… (${res.messageType ?? 'HL7'})`);
+    } catch {
+      setQuarantineResult(copy.errors.genericMessage);
     }
   };
 
@@ -79,9 +89,23 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
         >
           {copy.interop.hl7Validate}
         </Button>
+        <Button
+          size="small"
+          sx={{ mt: 1, ml: 1 }}
+          variant="contained"
+          onClick={() => void runQuarantine()}
+          data-testid="epis2-hl7-quarantine-run"
+        >
+          Cuarentena HL7
+        </Button>
         {hl7Result ? (
           <Typography variant="body2" sx={{ mt: 1 }}>
             {hl7Result}
+          </Typography>
+        ) : null}
+        {quarantineResult ? (
+          <Typography variant="body2" sx={{ mt: 0.5 }}>
+            {quarantineResult}
           </Typography>
         ) : null}
       </Paper>
