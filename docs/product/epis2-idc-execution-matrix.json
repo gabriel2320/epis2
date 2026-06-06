@@ -6,9 +6,9 @@
     "totals": {
       "estado": {
         "Planned": 142,
-        "Active": 38,
+        "Active": 34,
         "Blocked": 1,
-        "Done": 19
+        "Done": 23
       },
       "prioridad": {
         "Critical": 9,
@@ -299,48 +299,48 @@
       "nombre": "Línea de tiempo",
       "ola": "3",
       "workspace": "patient-record",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "High",
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": ""
+      "nota": "timeline ficha + E2E DEMO-001 MF-OLA3-005"
     },
     {
       "idc": 24,
       "nombre": "Medicamentos continuos",
       "ola": "3",
       "workspace": "patient-record",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "High",
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": ""
+      "nota": "medicamentos activos ficha MF-OLA3-005"
     },
     {
       "idc": 25,
       "nombre": "Visor últimos exámenes",
       "ola": "3",
       "workspace": "patient-record",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "High",
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": ""
+      "nota": "LabObservationsGrid + CTA resultados MF-OLA3-005"
     },
     {
       "idc": 26,
       "nombre": "Curvas signos vitales",
       "ola": "3",
       "workspace": "patient-record",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "Medium",
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": ""
+      "nota": "PatientClinicalCharts DEMO-005 MF-OLA3-005"
     },
     {
       "idc": 27,

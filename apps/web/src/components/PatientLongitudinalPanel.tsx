@@ -37,13 +37,15 @@ function Section({
   title,
   empty,
   children,
+  testId,
 }: {
   title: string;
   empty: boolean;
   children: ReactNode;
+  testId?: string;
 }) {
   return (
-    <Paper variant="outlined" sx={{ p: 2 }}>
+    <Paper variant="outlined" sx={{ p: 2 }} data-testid={testId}>
       <Typography variant="subtitle2" gutterBottom>
         {title}
       </Typography>
@@ -151,7 +153,11 @@ export function PatientLongitudinalPanel({
         </List>
       </Section>
 
-      <Section title={copy.longitudinal.observations} empty={data.observations.length === 0}>
+      <Section
+        title={copy.longitudinal.observations}
+        empty={data.observations.length === 0}
+        testId="epis2-longitudinal-observations"
+      >
         {onOpenResults ? (
           <Button
             size="small"
@@ -169,7 +175,11 @@ export function PatientLongitudinalPanel({
         />
       </Section>
 
-      <Section title={copy.longitudinal.medications} empty={data.medications.length === 0}>
+      <Section
+        title={copy.longitudinal.medications}
+        empty={data.medications.length === 0}
+        testId="epis2-longitudinal-medications"
+      >
         <List dense disablePadding>
           {data.medications.map((m) => (
             <ListItem key={m.id} disablePadding>
@@ -182,12 +192,17 @@ export function PatientLongitudinalPanel({
         </List>
       </Section>
 
-      <Section title={copy.longitudinal.timeline} empty={data.timeline.length === 0}>
+      <Section
+        title={copy.longitudinal.timeline}
+        empty={data.timeline.length === 0}
+        testId="epis2-longitudinal-timeline"
+      >
         <List dense disablePadding>
           {data.timeline.map((ev) => (
             <ListItem
               key={ev.id}
               disablePadding
+              data-testid={`epis2-longitudinal-timeline-item-${ev.id}`}
               sx={{
                 cursor:
                   (ev.kind === 'draft' && onOpenDraft) || (ev.kind === 'note' && onOpenNote)

@@ -86,20 +86,21 @@
 | 4 | Creación de paciente | — | **MISSING** | Ola 3 |
 | 5 | Verificación de identidad | — | **MISSING** | Ola 3 |
 | 6 | Resumen longitudinal | `/espacio/resumen` | **PARTIAL** | Campos demo estáticos |
-| 7 | Línea de tiempo | Panel en `PatientWorkspacePage` | **PARTIAL** | No ruta dedicada |
-| 8 | Encuentros previos | API longitudinal | **PARTIAL** | Sin pantalla |
-| 9 | Problemas activos | `/espacio/problema` + contexto ficha | **PARTIAL** | Formulario Ola 3; IDC 29 Done |
+| 7 | Línea de tiempo | `PatientLongitudinalPanel` | **COMPLETE** | IDC 23 Done; E2E DEMO-001 |
+| 8 | Encuentros previos | API longitudinal | **PARTIAL** | En timeline, sin pantalla dedicada |
+| 9 | Problemas activos | `/espacio/problema` + contexto ficha | **PARTIAL** | IDC 29 Done |
 | 10 | Diagnósticos históricos | — | **MISSING** | Ola 3 |
-| 11 | Alergias | `/espacio/alergia` + CDS ficha | **PARTIAL** | Formulario Ola 3; IDC 27–28 Done |
-| 12 | Medicamentos activos | Contexto demo | **PARTIAL** | Sin pantalla dedicada |
-| 13 | Observaciones / signos | Blueprint enfermería | **PARTIAL** | — |
-| 14 | Laboratorios recientes | — | **MISSING** | Ola 3 |
+| 11 | Alergias | `/espacio/alergia` + CDS ficha | **PARTIAL** | IDC 27–28 Done |
+| 12 | Medicamentos activos | Ficha longitudinal | **COMPLETE** | IDC 24 Done |
+| 13 | Observaciones / signos | `LabObservationsGrid` ficha | **COMPLETE** | IDC 25 Done |
+| 14 | Laboratorios recientes | CTA bandeja resultados | **PARTIAL** | Enlazado desde ficha |
 | 15 | Imagenología reciente | — | **MISSING** | Ola 3 |
-| 16 | Documentos | API search/intake | **PARTIAL** | Sin UI documentos |
+| 16 | Documentos | Árbol + búsqueda RAG | **PARTIAL** | Sin UI ingest |
 | 17 | Equipo tratante | — | **MISSING** | Ola 3 |
-| 18 | Alertas y banderas | `ClinicalAlertsPanel` en ficha | **COMPLETE** | IDC 22 Done; E2E DEMO-005 |
+| 18 | Alertas y banderas | `ClinicalAlertsPanel` en ficha | **COMPLETE** | IDC 22 Done |
 | 19 | Consentimientos | — | **MISSING** | Ola 6 |
 | 20 | Contactos y responsables | — | **MISSING** | Ola 3 |
+| — | Curvas signos vitales | `PatientClinicalCharts` | **COMPLETE** | IDC 26 Done; DEMO-005 |
 
 **Hub paciente:** `/espacio/ficha` → `PatientWorkspacePage` — **PARTIAL** (ficha mínima, no auto-abre todo el expediente ✓).
 

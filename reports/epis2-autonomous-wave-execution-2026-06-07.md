@@ -1,29 +1,25 @@
-# Ejecución autónoma EPIS2 — cierre pendientes Tramo A
+# Ejecución autónoma EPIS2 — MF-OLA3-005 ficha profundidad
 
 **Fecha:** 2026-06-07  
-**Agente:** Cursor · cierre pendientes olas
+**Agente:** Cursor · continuación Tramo A Ola 3
 
 ---
 
-## Pendientes cerrados
+## Microfase cerrada
 
-| MF | Estado | IDC / alcance |
-|----|--------|----------------|
-| MF-OLA3-004 | ✅ | 27, 28, 29 → Done |
-| MF-OLA1C-003 | ✅ | 56 → Done |
-| MF-OLA6A-002 | ✅ | 40 → Done (E2E print A5) |
-| MF-TRAMO-B-001 | ✅ | Inventario recepción 2–20 |
-| Workspace emergency | ✅ doc | IDC 101–102 + `EPIS2_PLANNED_SURFACES` Ola 10 |
+| MF | Estado | IDC |
+|----|--------|-----|
+| MF-OLA3-005 | ✅ | 23, 24, 25, 26 → Done |
 
 ---
 
-## Pendientes restantes (post-core)
+## Pendientes restantes
 
 | Ítem | Nota |
 |------|------|
-| IDC 30 timeline | Active — formulario problema sin promover |
-| IDC 23–26 ficha | Active — timeline, medicamentos, exámenes |
-| Tramo B implementación | Solo inventario; UI recepción Planned |
+| IDC 21 ficha hub | Active — promover tras journey completo |
+| IDC 30 antecedentes quirúrgicos | Active |
+| Tramo B UI recepción | Planned (inventario ✅) |
 | lint Windows | Validar en CI/Linux |
 
 ---
@@ -33,25 +29,18 @@
 | Gate | Resultado |
 |------|-----------|
 | check | ✅ |
-| test | ✅ 418 |
+| test | ✅ 419 |
 | db:validate | ✅ |
-| quality:golden-journey | ✅ 17 |
-| quality:ola3-longitudinal-gate | ✅ |
-| quality:ola1c-imaging-gate | ✅ |
-| quality:tramo-b-reception-gate | ✅ |
-| quality:ola6a-print-gate | ✅ |
-| test:e2e:ola3 / ola1c / ola6a | ✅ |
+| ola3-ficha-depth-gate | ✅ |
+| test:e2e:ola3 | ✅ **6** tests |
 
-**IDC Done:** **19**
+**IDC Done:** **23**
 
 ---
 
-## Reportes MF
+## Reporte MF
 
-- `epis2-mf-ola3-004-longitudinal-idc.md`
-- `epis2-mf-ola1c-003-imaging-idc56.md`
-- `epis2-mf-ola6a-002-print-e2e-idc40.md`
-- `epis2-mf-tramo-b-001-reception-inventory.md`
+`epis2-mf-ola3-005-ficha-depth-idc23-26.md`
 
 ---
 

@@ -43,4 +43,23 @@ test.describe('Ola 3 — ficha longitudinal CTAs', () => {
     await expect(page.getByTestId('epis2-clinical-alerts')).toBeVisible({ timeout: 15_000 });
     await expect(page.getByText(copy.commandCenter.clinicalAlertsTitle)).toBeVisible();
   });
+
+  test('ficha DEMO-001 muestra timeline y medicamentos activos', async ({ page }) => {
+    await loginAsPhysician(page);
+    await pinDemoCase(page, 'DEMO-001');
+    await expect(page.getByTestId('epis2-longitudinal-panel')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-longitudinal-timeline')).toBeVisible();
+    await expect(page.getByTestId('epis2-longitudinal-medications')).toBeVisible();
+    await expect(page.getByTestId('epis2-longitudinal-medications')).toContainText('Losartán');
+    await expect(page.getByTestId('epis2-longitudinal-observations')).toBeVisible();
+    await expect(page.getByTestId('epis2-lab-observations-grid')).toBeVisible();
+  });
+
+  test('ficha DEMO-005 muestra curvas clínicas de signos vitales', async ({ page }) => {
+    await loginAsPhysician(page);
+    await pinDemoCase(page, 'DEMO-005');
+    await expect(page.getByTestId('epis2-patient-clinical-charts')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-chart-inr-trend')).toBeVisible();
+    await expect(page.getByTestId('epis2-chart-vitals-trend')).toBeVisible();
+  });
 });

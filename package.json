@@ -32,6 +32,7 @@
     "quality:ola6a-print-gate": "node scripts/quality/validate-ola6a-print-gate.mjs",
     "quality:doc-screen-catalog-gate": "node scripts/quality/validate-doc-screen-catalog-gate.mjs",
     "quality:ola3-longitudinal-gate": "node scripts/quality/validate-ola3-longitudinal-gate.mjs",
+    "quality:ola3-ficha-depth-gate": "node scripts/quality/validate-ola3-ficha-depth-gate.mjs",
     "quality:ola1c-imaging-gate": "node scripts/quality/validate-ola1c-imaging-gate.mjs",
     "quality:tramo-b-reception-gate": "node scripts/quality/validate-tramo-b-reception-gate.mjs",
     "test:e2e:ola6a": "playwright test e2e/ola6a-print-certificate.spec.ts",

@@ -49,4 +49,42 @@ describe('PatientLongitudinalPanel — Ola 3 CTAs', () => {
     expect(onResults).toHaveBeenCalledOnce();
     expect(screen.getAllByText(copy.longitudinal.emptySection).length).toBeGreaterThan(0);
   });
+
+  it('renderiza timeline, medicamentos y observaciones con datos demo', () => {
+    render(
+      <Epis2ThemeProvider>
+        <PatientLongitudinalPanel
+          data={{
+            ...emptyLongitudinal,
+            medications: [
+              { id: 'm1', name: 'Losartán', doseText: '50 mg/día', route: 'oral', status: 'active' },
+            ],
+            observations: [
+              {
+                id: 'o1',
+                label: 'Creatinina',
+                valueText: '0.9 mg/dL',
+                observedAt: '2026-06-01T10:00:00.000Z',
+              },
+            ],
+            timeline: [
+              {
+                id: 't1',
+                kind: 'encounter',
+                at: '2026-06-01T10:00:00.000Z',
+                title: 'Consulta ambulatoria',
+              },
+            ],
+          }}
+        />
+      </Epis2ThemeProvider>,
+    );
+
+    expect(screen.getByTestId('epis2-longitudinal-timeline')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-longitudinal-timeline-item-t1')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-longitudinal-medications')).toBeInTheDocument();
+    expect(screen.getByText('Losartán')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-longitudinal-observations')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-lab-observations-grid')).toBeInTheDocument();
+  });
 });
