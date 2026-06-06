@@ -238,10 +238,10 @@ IA desconectada = producto usable; con IA = trazabilidad `ai_runs` + fuentes cit
 
 | Prioridad | Plan | Objetivo |
 |-----------|------|----------|
-| **P1** | **WIDGET-01** | Montar widgets contextuales en Comando y ficha (fundación WIDGET-00 lista) |
-| **P1** | **V1 completo** | ✓ API Plan C + UI export/OCR — `reports/epis2-v1-ui-signoff.md` |
-| **P2** | **V2 completo (EPIS2-13)** | Ingreso, traslados, alta operativa E2E |
+| **P1** | **EPIS2-14 / Plan E** | Tableros enfermería/farmacia por rol, MAR programado UI |
 | **P2** | **CI bundle** | `qa:bundle-analyze` en pipeline |
+| — | V1 completo | ✓ `reports/epis2-v1-ui-signoff.md` |
+| — | V2 completo (EPIS2-13) | ✓ `reports/epis2-v2-ui-signoff.md` |
 
 V0 cerrado (GO DEMO + Modo tablero). Ver `reports/epis2-audit-and-dev-plans-2026-06-05.md`.
 

@@ -77,7 +77,7 @@ export function ServiceDashboardTab({
       setStatusMsg(copy.inpatient.admitSuccess);
       onReload();
     } catch {
-      setStatusMsg('No se pudo registrar el ingreso.');
+      setStatusMsg(copy.errors.genericMessage);
     }
   };
 
@@ -90,7 +90,7 @@ export function ServiceDashboardTab({
       setStatusMsg(copy.inpatient.transferSuccess);
       onReload();
     } catch {
-      setStatusMsg('No se pudo trasladar al paciente.');
+      setStatusMsg(copy.errors.genericMessage);
     }
   };
 
@@ -103,7 +103,7 @@ export function ServiceDashboardTab({
       if (patientId && onOpenEpicrisis) onOpenEpicrisis(patientId);
       void res;
     } catch {
-      setStatusMsg('No se pudo registrar la alta.');
+      setStatusMsg(copy.errors.genericMessage);
     }
   };
 
@@ -138,7 +138,12 @@ export function ServiceDashboardTab({
                 </MenuItem>
               ))}
             </Select>
-            <Button size="small" variant="outlined" onClick={() => void handleAdmit()}>
+            <Button
+              size="small"
+              variant="outlined"
+              onClick={() => void handleAdmit()}
+              data-testid="epis2-inpatient-admit-submit"
+            >
               {copy.inpatient.admitSubmit}
             </Button>
           </Stack>
@@ -178,6 +183,7 @@ export function ServiceDashboardTab({
                       }))
                     }
                     sx={{ minWidth: 120 }}
+                    data-testid={`epis2-inpatient-transfer-select-${bed.admissionId}`}
                   >
                     <MenuItem value="">{copy.inpatient.selectBed}</MenuItem>
                     {availableBeds.map((b) => (
@@ -190,6 +196,7 @@ export function ServiceDashboardTab({
                     size="small"
                     variant="outlined"
                     onClick={() => void handleTransfer(bed.admissionId!)}
+                    data-testid={`epis2-inpatient-transfer-${bed.admissionId}`}
                   >
                     {copy.inpatient.transferBed}
                   </Button>

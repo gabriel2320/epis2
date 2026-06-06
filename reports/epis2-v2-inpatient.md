@@ -1,8 +1,8 @@
 # EPIS2 V2 — Hospitalización operativa (slice demo)
 
-**Ticket:** EPIS2-13 (slice cerrado)  
-**Commits:** `aaa6e7d`, `8470f38`  
-**Gate completo V2:** pendiente traslados, alta operativa end-to-end.
+**Ticket:** EPIS2-13 (gate V2 demo cerrado)  
+**Commits:** `aaa6e7d`, `8470f38`, `bfbe52c` (Plan D API), signoff UI 2026-06-05  
+**Ver también:** `reports/epis2-v2-plan-d-slice.md`, `reports/epis2-v2-ui-signoff.md`
 
 ## Entregables
 
