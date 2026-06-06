@@ -30,8 +30,12 @@ export function PharmacyDashboardTab({
                 <Typography variant="body2">
                   {v.patientDisplayName} — {v.title} ({v.status})
                 </Typography>
-                <Button size="small" onClick={() => onOpenDraft(v.id)}>
-                  Revisar
+                <Button
+                  size="small"
+                  onClick={() => onOpenDraft(v.id)}
+                  data-testid={`epis2-pharmacy-review-${v.id}`}
+                >
+                  {copy.inpatient.reviewValidation}
                 </Button>
                 <Button size="small" variant="outlined" onClick={() => onOpenPatient(v.patientId)}>
                   {copy.inpatient.openPatient}
@@ -51,8 +55,13 @@ export function PharmacyDashboardTab({
             <Alert key={r.patientId} severity="warning" sx={{ mb: 1 }}>
               <strong>{r.patientDisplayName}</strong> — {r.reason} ({r.activeMedicationCount} meds:{' '}
               {r.medications.join(', ')})
-              <Button size="small" sx={{ ml: 1 }} onClick={() => onOpenPatient(r.patientId)}>
-                Validar
+              <Button
+                size="small"
+                sx={{ ml: 1 }}
+                onClick={() => onOpenPatient(r.patientId)}
+                data-testid={`epis2-pharmacy-reconcile-${r.patientId}`}
+              >
+                {copy.inpatient.validateReconciliation}
               </Button>
             </Alert>
           ))}

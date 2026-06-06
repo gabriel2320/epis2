@@ -161,6 +161,8 @@ export const copy = {
     pharmacyValidations: 'Validaciones farmacéuticas pendientes',
     reconciliation: 'Conciliación medicamentosa',
     noPharmacyPending: 'Sin validaciones pendientes.',
+    reviewValidation: 'Revisar',
+    validateReconciliation: 'Validar',
   },
   longitudinal: {
     title: 'Historia clínica (demo)',

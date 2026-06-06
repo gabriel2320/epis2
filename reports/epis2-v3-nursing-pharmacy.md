@@ -1,7 +1,8 @@
 # EPIS2 V3 — Enfermería y farmacia (slice demo)
 
-**Ticket:** EPIS2-14 (slice cerrado)  
-**Commit:** `be5eb59`
+**Ticket:** EPIS2-14 (gate V3 demo cerrado)  
+**Commits:** `be5eb59`, `7fb6795` (Plan E API), signoff UI 2026-06-05  
+**Ver también:** `reports/epis2-v3-plan-e-slice.md`, `reports/epis2-v3-ui-signoff.md`
 
 ## Entregables
 
@@ -19,10 +20,10 @@ Aprobar borrador MAR con doble chequeo → fila en `mar_administration_records` 
 
 Integración: `v3-mar.integration.test.ts`
 
-## Fuera de alcance (gate V3 completo)
+## Fuera de alcance (producto real)
 
-- Tableros dedicados enfermería/farmacia por rol
-- Conciliación completa, MAR programado, balance hídrico
+- Balance hídrico y signos vitales estructurados
+- Conciliación CDS completa fuera del slice demo
 
 ## Journey
 

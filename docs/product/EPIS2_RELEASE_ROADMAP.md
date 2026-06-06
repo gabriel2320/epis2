@@ -238,10 +238,11 @@ IA desconectada = producto usable; con IA = trazabilidad `ai_runs` + fuentes cit
 
 | Prioridad | Plan | Objetivo |
 |-----------|------|----------|
-| **P1** | **EPIS2-14 / Plan E** | Tableros enfermería/farmacia por rol, MAR programado UI |
-| **P2** | **CI bundle** | `qa:bundle-analyze` en pipeline |
+| **P1** | **Plan F / CI bundle** | `qa:bundle-analyze` en pipeline + hardening piloto |
+| **P2** | **V4 interop** | Piloto read-only HL7/FHIR staging |
 | — | V1 completo | ✓ `reports/epis2-v1-ui-signoff.md` |
 | — | V2 completo (EPIS2-13) | ✓ `reports/epis2-v2-ui-signoff.md` |
+| — | V3 completo (EPIS2-14) | ✓ `reports/epis2-v3-ui-signoff.md` |
 
 V0 cerrado (GO DEMO + Modo tablero). Ver `reports/epis2-audit-and-dev-plans-2026-06-05.md`.
 

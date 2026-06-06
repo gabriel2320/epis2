@@ -33,6 +33,7 @@ export function NursingDashboardTab({
                 spacing={1}
                 alignItems="center"
                 flexWrap="wrap"
+                data-testid={`epis2-nursing-mar-${dose.id}`}
               >
                 <Typography variant="body2">
                   <strong>{dose.patientDisplayName}</strong> — {dose.medication} {dose.doseText}{' '}
@@ -62,6 +63,7 @@ export function NursingDashboardTab({
           rows={data.nursingDrafts}
           emptyMessage={copy.dashboard.emptyDrafts}
           onOpenDraft={onOpenDraft}
+          data-testid="epis2-nursing-drafts"
         />
       </Paper>
 
