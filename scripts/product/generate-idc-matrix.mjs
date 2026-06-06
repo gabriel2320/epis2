@@ -286,7 +286,7 @@ ws(199, 200, 'admin_system');
 const OVERRIDES = {
   1: { estado: 'Done', prioridad: 'Critical', horizonte: 'Core', decision: 'Build', legacy: 'COMPLETE', nota: '/login' },
   21: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'Ficha M3 Ola 3' },
-  22: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'ClinicalAlertsPanel' },
+  22: { estado: 'Done', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'ClinicalAlertsPanel ficha + E2E DEMO-005 MF-OLA3-003' },
   23: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL' },
   24: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL' },
   25: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL' },
@@ -304,7 +304,7 @@ const OVERRIDES = {
   37: { estado: 'Done', prioridad: 'Critical', horizonte: 'Core', decision: 'Build', legacy: 'COMPLETE', nota: 'evolution_note' },
   38: { estado: 'Active', prioridad: 'Medium', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL' },
   39: { estado: 'Done', prioridad: 'Critical', horizonte: 'Core', decision: 'Build', legacy: 'COMPLETE', nota: 'closeEncounter + FAB cierre Ola 2' },
-  40: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'medical_certificate — print A5 pendiente signoff' },
+  40: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'PrintA5 vista certificado MF-OLA6A-001 — signoff humano pendiente' },
   51: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL' },
   52: { estado: 'Done', prioridad: 'Critical', horizonte: 'Core', decision: 'Build', legacy: 'COMPLETE', nota: 'prescription' },
   54: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL' },

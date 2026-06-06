@@ -28,6 +28,8 @@
     "quality:ola2-m3-ui-gate": "node scripts/quality/validate-ola2-m3-ui-gate.mjs",
     "quality:ola1c-journey-gate": "node scripts/quality/validate-ola1c-journey-gate.mjs",
     "quality:ola3-ficha-gate": "node scripts/quality/validate-ola3-ficha-gate.mjs",
+    "quality:ola3-alerts-gate": "node scripts/quality/validate-ola3-alerts-gate.mjs",
+    "quality:ola6a-print-gate": "node scripts/quality/validate-ola6a-print-gate.mjs",
     "test:e2e:ola2": "playwright test e2e/ola2-ambulatory-m3-ui.spec.ts",
     "test:e2e:ola1c": "playwright test e2e/ola1c-results-journey.spec.ts",
     "test:e2e:ola3": "playwright test e2e/ola3-ficha-journey.spec.ts",

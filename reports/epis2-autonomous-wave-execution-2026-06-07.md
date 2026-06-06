@@ -1,22 +1,7 @@
-# Ejecución autónoma EPIS2 — olas Tramo A (cierre commit)
+# Ejecución autónoma EPIS2 — olas Tramo A (MF-OLA3-003 + MF-OLA6A-001)
 
 **Fecha:** 2026-06-07  
 **Agente:** Cursor · ejecución autónoma olas / microfases
-
----
-
-## Pendientes (post-commit)
-
-| Prioridad | MF / ítem | IDC | Nota |
-|-----------|-----------|-----|------|
-| 1 | MF-OLA6A-PRINT | 40 Active | Print A5 certificado productivo |
-| 2 | MF-OLA3-003 | 22 Active | Banner alertas en ficha + E2E |
-| 3 | Promover IDC 27–29 | 27–29 | Tras journey E2E estable en CI |
-| 4 | MF-OLA1C-003 | 56 Active | Imaging signoff M3 |
-| 5 | MF-DOC-002 | — | Screen catalog §5–19 vs matriz |
-| 6 | MF-TRAMO-B-001 | 2–20 | Recepción Defer/Exclude |
-| 7 | Workspace `emergency` | Ola 10 | Rail planificado |
-| 8 | lint Windows | — | Validar en CI/Linux |
 
 ---
 
@@ -24,10 +9,24 @@
 
 | MF | Ola | Estado | Evidencia |
 |----|-----|--------|-----------|
-| MF-OLA1C-002 | 1C | ✅ | imaging journey + ack crítico DEMO-004 |
-| MF-OLA3-002 | 3 | ✅ | E2E ficha CTAs (3 tests) |
-| MF-OLA2-002 | 2 | ✅ | snapshots visuales + journey borrador |
-| MF-DOC-001 | — | ✅ parcial | screen catalog §20 sincronizado |
+| MF-OLA3-003 | 3 | ✅ | Banner alertas ficha DEMO-005 + gate + E2E (4 tests) |
+| MF-OLA6A-001 | 6A | ✅ impl. | Print A5 certificado; IDC 40 **Active** (signoff humano) |
+
+Reportes: `epis2-mf-ola3-003-alerts-ficha.md`, `epis2-mf-ola6a-001-print-a5.md`
+
+---
+
+## Pendientes (post-commit)
+
+| Prioridad | MF / ítem | IDC | Nota |
+|-----------|-----------|-----|------|
+| 1 | MF-OLA6A-PRINT signoff | 40 Active | Revisión humana impresión A5 → Done |
+| 2 | Promover IDC 27–29 | 27–29 | Tras E2E ficha estable en CI |
+| 3 | MF-OLA1C-003 | 56 Active | Imaging signoff M3 |
+| 4 | MF-DOC-002 | — | Screen catalog §5–19 vs matriz |
+| 5 | MF-TRAMO-B-001 | 2–20 | Recepción Defer/Exclude |
+| 6 | Workspace `emergency` | Ola 10 | Rail planificado |
+| 7 | lint Windows | — | Validar en CI/Linux |
 
 ---
 
@@ -35,40 +34,33 @@
 
 | Gate | Resultado |
 |------|-----------|
-| test | ✅ **416** |
-| architecture:validate | ✅ 15/15 |
+| check | ✅ lint + typecheck + architecture 15/15 |
+| test | ✅ **418** |
 | db:validate | ✅ 32 migraciones |
-| quality:golden-journey | ✅ **17** tests |
-| quality:ola1c-journey-gate | ✅ |
-| quality:ola3-ficha-gate | ✅ |
-| quality:ola2-m3-ui-gate | ✅ |
-| test:e2e:ola1c | ✅ 3 tests |
-| test:e2e:ola3 | ✅ 3 tests |
-| test:e2e:ola2 | ✅ 4 tests + snapshots |
+| quality:ola3-alerts-gate | ✅ |
+| quality:ola6a-print-gate | ✅ |
+| test:e2e:ola3 | ✅ **4** tests (incl. DEMO-005 alertas) |
 
-**IDC Done:** 12 (sin cambio — 56/27–29 siguen Active)
+**IDC Done:** **13** (+ IDC **22** banner alertas ficha)
 
 ---
 
-## Archivos clave
+## Archivos clave (esta sesión)
 
-- `e2e/helpers/demoPatient.ts`
-- `e2e/ola1c-results-journey.spec.ts`
-- `e2e/ola3-ficha-journey.spec.ts`
-- `e2e/ola2-ambulatory-m3-ui.spec.ts` + snapshots
-- `scripts/quality/validate-ola1c-journey-gate.mjs`
-- `scripts/quality/validate-ola3-ficha-gate.mjs`
-- `apps/api/src/auth/routes.ts` — rate-limit login solo producción
-- `docs/product/EPIS2_COMPLETE_SCREEN_CATALOG.md` §20
+- `e2e/ola3-ficha-journey.spec.ts` — test alertas DEMO-005
+- `packages/epis2-ui/src/print/PrintA5Document.tsx`
+- `apps/web/src/pages/MedicalCertificatePrintPage.tsx`
+- `apps/web/src/clinical/printPreviewStorage.ts`
+- `scripts/quality/validate-ola3-alerts-gate.mjs`
+- `scripts/quality/validate-ola6a-print-gate.mjs`
 
 ---
 
-## Próximo paso (Tramo A → B)
+## Próximo paso (Tramo A)
 
-1. **MF-OLA6A-PRINT** — print A5 certificado → promover IDC 40
-2. **MF-OLA3-003** — banner alertas IDC 22 + tests
-3. **MF-TRAMO-B-001** — inventario recepción (IDC 2–20 Defer)
-4. Sincronizar §5–19 screen catalog con matriz IDC
+1. **MF-DOC-002** — sincronizar screen catalog §5–19 con matriz IDC
+2. **MF-OLA1C-003** — imaging IDC 56
+3. Signoff **IDC 40** tras revisión impresión A5
 
 ---
 

@@ -37,4 +37,5 @@ export * from './tree/index.js';
 export * from './dashboard/index.js';
 export * from './feedback/index.js';
 export * from './widgets/index.js';
+export * from './print/index.js';
 export * from './mui/index.js';

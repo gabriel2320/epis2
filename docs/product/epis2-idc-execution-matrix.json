@@ -6,9 +6,9 @@
     "totals": {
       "estado": {
         "Planned": 142,
-        "Active": 45,
+        "Active": 44,
         "Blocked": 1,
-        "Done": 12
+        "Done": 13
       },
       "prioridad": {
         "Critical": 7,
@@ -287,12 +287,12 @@
       "nombre": "Banner alertas clínicas",
       "ola": "3",
       "workspace": "patient-record",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "High",
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": "ClinicalAlertsPanel"
+      "nota": "ClinicalAlertsPanel ficha + E2E DEMO-005 MF-OLA3-003"
     },
     {
       "idc": 23,
@@ -508,7 +508,7 @@
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": "medical_certificate — print A5 pendiente signoff"
+      "nota": "PrintA5 vista certificado MF-OLA6A-001 — signoff humano pendiente"
     },
     {
       "idc": 41,

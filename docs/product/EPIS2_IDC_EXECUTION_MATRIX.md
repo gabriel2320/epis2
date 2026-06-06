@@ -13,7 +13,7 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 142 · Active: 45 · Blocked: 1 · Done: 12 |
+| **Estado** | Planned: 142 · Active: 44 · Blocked: 1 · Done: 13 |
 | **Prioridad** | Critical: 7 · High: 47 · Medium: 95 · Low: 51 |
 | **Horizonte** | Core: 41 · Post-core: 88 · Future: 71 |
 | **Decisión** | Build: 127 · Integrate: 5 · Defer: 66 · Exclude: 2 |
@@ -66,7 +66,7 @@
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
 | 21 | Dashboard del paciente | 3 | patient-record | Active | High | Core | Build | PARTIAL | Ficha M3 Ola 3 |
-| 22 | Banner alertas clínicas | 3 | patient-record | Active | High | Core | Build | PARTIAL | ClinicalAlertsPanel |
+| 22 | Banner alertas clínicas | 3 | patient-record | Done | High | Core | Build | PARTIAL | ClinicalAlertsPanel ficha + E2E DEMO-005 MF-OLA3-003 |
 | 23 | Línea de tiempo | 3 | patient-record | Active | High | Core | Build | PARTIAL |  |
 | 24 | Medicamentos continuos | 3 | patient-record | Active | High | Core | Build | PARTIAL |  |
 | 25 | Visor últimos exámenes | 3 | patient-record | Active | High | Core | Build | PARTIAL |  |
@@ -89,7 +89,7 @@
 | 37 | Evolución SOAP | 2 | ambulatory | Done | Critical | Core | Build | COMPLETE | evolution_note |
 | 38 | Gestor macros / plantillas | 2 | ambulatory | Active | Medium | Core | Build | PARTIAL |  |
 | 39 | Cierre de episodio | 2 | ambulatory | Done | Critical | Core | Build | COMPLETE | closeEncounter + FAB cierre Ola 2 |
-| 40 | Resumen para paciente | 2 | ambulatory | Active | High | Core | Build | PARTIAL | medical_certificate — print A5 pendiente signoff |
+| 40 | Resumen para paciente | 2 | ambulatory | Active | High | Core | Build | PARTIAL | PrintA5 vista certificado MF-OLA6A-001 — signoff humano pendiente |
 
 ## UCI (bloque 41–50) (41–50)
 

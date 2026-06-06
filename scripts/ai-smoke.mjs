@@ -26,7 +26,7 @@ async function probe(label, url, path = '') {
   }
 }
 
-console.log('EPIS2 ai:smoke — Ollama + local-ai\n');
+console.log(`EPIS2 ai:smoke — Ollama (${OLLAMA_MODEL}) + local-ai\n`);
 
 const ollamaOk = await probe('Ollama', OLLAMA_URL, '/api/tags');
 const localAiOk = await probe('local-ai health', LOCAL_AI_URL, '/health');

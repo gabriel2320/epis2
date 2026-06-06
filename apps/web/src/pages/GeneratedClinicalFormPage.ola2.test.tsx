@@ -138,6 +138,7 @@ describe('GeneratedClinicalFormPage — Ola 2 M3-UI', () => {
     );
 
     expect(screen.getByTestId('epis2-form-medical_certificate')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-print-preview-medical_certificate')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: copy.forms.saveDraft })).toBeInTheDocument();
   });
 });

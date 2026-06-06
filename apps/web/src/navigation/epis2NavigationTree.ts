@@ -103,7 +103,7 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
   },
 ];
 
-const BLUEPRINT_IDC_MAP: Record<string, { idc: readonly number[]; status: EpisNavigationSurfaceStatus; workspace: EpisClinicalWorkspaceId; tab?: PatientChartTabId; ola?: string }> = {
+const BLUEPRINT_IDC_MAP: Record<string, { idc: readonly number[]; status: EpisNavigationSurfaceStatus; workspace: EpisClinicalWorkspaceId; tab?: PatientChartTabId; ola?: string; notes?: string }> = {
   patient_search: { idc: [21], status: 'complete', workspace: 'ambulatory', tab: 'summary', ola: '0' },
   patient_summary: { idc: [21, 26], status: 'partial', workspace: 'ambulatory', tab: 'summary', ola: '1' },
   evolution_note: { idc: [37], status: 'complete', workspace: 'ambulatory', tab: 'encounter', ola: '0' },

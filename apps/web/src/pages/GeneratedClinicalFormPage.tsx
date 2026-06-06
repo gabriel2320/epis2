@@ -107,6 +107,8 @@ import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 
 import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
 
+import { writePrintPreview } from '../clinical/printPreviewStorage.js';
+
 
 
 export type GeneratedClinicalFormPageProps = {
@@ -904,6 +906,21 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
                       data-testid="epis2-ai-suggest"
                     >
                       {isSuggesting ? copy.forms.suggestingAi : copy.forms.suggestAi}
+                    </EpisButton>
+                  ) : null}
+                  {blueprint.blueprintId === 'medical_certificate' && effectivePatientId ? (
+                    <EpisButton
+                      appearance="outlined"
+                      data-testid="epis2-print-preview-medical_certificate"
+                      onClick={() => {
+                        writePrintPreview('medical_certificate', values);
+                        void navigate({
+                          to: '/espacio/certificado/imprimir',
+                          search: { patientId: effectivePatientId },
+                        });
+                      }}
+                    >
+                      {copy.print.previewA5}
                     </EpisButton>
                   ) : null}
                   <EpisButton appearance="filled" onClick={() => void saveDraft()}>

@@ -36,4 +36,11 @@ test.describe('Ola 3 — ficha longitudinal CTAs', () => {
     await expect(page.getByTestId('epis2-results-inbox')).toBeVisible({ timeout: 15_000 });
     await expect(page.getByText(copy.results.inboxTitle)).toBeVisible();
   });
+
+  test('ficha DEMO-005 muestra banner de alertas clínicas', async ({ page }) => {
+    await loginAsPhysician(page);
+    await pinDemoCase(page, 'DEMO-005');
+    await expect(page.getByTestId('epis2-clinical-alerts')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByText(copy.commandCenter.clinicalAlertsTitle)).toBeVisible();
+  });
 });

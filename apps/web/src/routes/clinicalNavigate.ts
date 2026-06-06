@@ -15,6 +15,7 @@ export type ClinicalFormRoutePath =
   | '/espacio/farmacia'
   | '/espacio/conciliacion'
   | '/espacio/certificado'
+  | '/espacio/certificado/imprimir'
   | '/espacio/ambulatorio'
   | '/espacio/alergia'
   | '/espacio/problema'

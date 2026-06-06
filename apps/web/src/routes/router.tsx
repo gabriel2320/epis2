@@ -14,6 +14,7 @@ import { DraftReviewPage } from '../pages/DraftReviewPage.js';
 import { GeneratedClinicalFormPage } from '../pages/GeneratedClinicalFormPage.js';
 import { PatientWorkspacePage } from '../pages/PatientWorkspacePage.js';
 import { ResultsInboxPage } from '../pages/ResultsInboxPage.js';
+import { MedicalCertificatePrintPage } from '../pages/MedicalCertificatePrintPage.js';
 import { AdminConsolePage } from '../pages/AdminConsolePage.js';
 import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
@@ -287,6 +288,13 @@ const medicalCertificateFormRoute = createRoute({
   component: clinicalFormPage('/espacio/certificado'),
 });
 
+const medicalCertificatePrintRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/certificado/imprimir',
+  validateSearch: validatePatientSearch,
+  component: MedicalCertificatePrintPage,
+});
+
 const referralReportFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/informe-interconsulta',
@@ -399,6 +407,7 @@ export const routeTree = rootRoute.addChildren([
     transferFormRoute,
     outpatientFormRoute,
     medicalCertificateFormRoute,
+    medicalCertificatePrintRoute,
     referralReportFormRoute,
     resultsInboxRoute,
     adminConsoleRoute,
