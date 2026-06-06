@@ -7,7 +7,7 @@ export const LEDGER_PATH = join(ROOT, 'docs/quality/microphase-ledger.json');
 
 const ID_PATTERN = /^MF-\d{3}$/;
 const EXPECTED_FIRST = 151;
-const EXPECTED_LAST = 182;
+const EXPECTED_LAST = 188;
 
 export function loadLedger(path = LEDGER_PATH) {
   const raw = readFileSync(path, 'utf8');

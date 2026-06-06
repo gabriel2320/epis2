@@ -3,6 +3,19 @@ import { getPatientLongitudinal } from './longitudinal.js';
 import { getPatientById } from './service.js';
 import { buildMinimalPdf } from './minimalPdf.js';
 
+/** Slug ASCII seguro para cabeceras HTTP (evita ERR_INVALID_CHAR en nombres con tildes). */
+export function safePatientExportSlug(displayName: string): string {
+  return (
+    displayName
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-zA-Z0-9._-]+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+      .toLowerCase() || 'paciente'
+  );
+}
+
 async function buildSummaryLines(db: Database, patientId: string) {
   const patient = await getPatientById(db, patientId);
   if (!patient) return null;
@@ -47,7 +60,7 @@ export async function buildPatientSummaryExport(
   const built = await buildSummaryLines(db, patientId);
   if (!built) return null;
 
-  const slug = built.patient.displayName.replace(/\s+/g, '-').toLowerCase();
+  const slug = safePatientExportSlug(built.patient.displayName);
   if (format === 'pdf') {
     return {
       filename: `resumen-${slug}.pdf`,

@@ -11,9 +11,11 @@ Paridad local ↔ CI: GitHub Actions ejecuta **todos** los tests de integración
 | `DATABASE_URL` | Sí (integración) | Conexión Postgres para API + journey API |
 | Migraciones | Sí | `npm run db:migrate` antes de tests |
 
-**CI:** `postgresql://epis2:epis2@localhost:5432/epis2` (servicio en workflow).
+**CI / tests API:** `postgresql://epis2_app:epis2@localhost:5432/epis2` — rol `NOBYPASSRLS` (MF-155).
 
-**Local (docker compose):** `postgresql://epis2:epis2@127.0.0.1:5433/epis2` — ver `.env.example`.
+**Local (docker compose):** `postgresql://epis2_app:epis2@127.0.0.1:5433/epis2` — ver `.env.example`.
+
+**Migraciones (solo si falla permiso):** `postgresql://epis2:epis2@HOST:PORT/epis2` (superuser local Docker).
 
 ---
 

@@ -27,12 +27,32 @@ npm run quality:microphase-next # JSON de la microfase READY
 6. UI solo vía `@epis2/epis2-ui`; sin `@mui/*` en `apps/web`.
 7. HL7 inbound sin writeback antes de MF-180; RLS enforce obligatorio en staging (MF-155).
 
+## Orden canónico (decisión arquitecto 2026-06-05)
+
+Una microfase por sesión, en esta secuencia. Fuente: `canonicalExecutionOrder` en el ledger v1.1.
+
+```text
+MF-151…154  ✓ gobernanza, copy, CI, Playwright
+MF-155      → RLS staging (READY)
+MF-183      → API integración estable (gates verdad)
+MF-184      → Matriz Golden × M3
+MF-185      → Auth /login sin redirect 401
+MF-186      → E2E journey pasos 6–9
+MF-187      → Ollama + local-ai en stack
+MF-156      → Scaffolder blueprints
+MF-188      → Patrón IA Ollama por blueprint
+MF-157…160  → Ingreso vertical → alergias → problemas
+MF-161…182  → Resultados, formularios, admin, piloto, HL7
+```
+
+**Rationale:** cerrar verdad operativa y espina Golden **antes** de ampliar catálogo clínico; patrón IA **antes** de `admission_note` con assist.
+
 ## Olas
 
 | Ola | MF | Tema |
 |-----|-----|------|
-| 0 | 151–155 | Verdad operativa, copy, CI parity, Playwright, RLS staging |
-| 1 | 156–160 | Blueprints, ingreso, alergias, problemas |
+| 0 | 151–155, **183–187** | Verdad operativa + espina Golden/Ollama |
+| 1 | 156–160, **188** | Blueprints, IA, ingreso, alergias, problemas |
 | 2 | 161–165 | Resultados clínicos |
 | 3 | 166–170 | Formularios prioritarios |
 | 4 | 171–174 | Administración y operación |

@@ -38,4 +38,5 @@ console.log(`
   npm run dev:web   # terminal 3
 
   npm run test:e2e  # journey UI con Playwright
+  npm run ai:smoke  # verificar Ollama + local-ai (MF-187)
 `);

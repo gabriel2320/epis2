@@ -56,10 +56,38 @@ Toda superficie clínica visible al usuario en **español**. Código y APIs pued
 
 ---
 
+## ADR-005 — Row-Level Security PostgreSQL (piloto)
+
+**Estado:** Aceptado (MF-155)  
+**Fecha:** 2026-06-05
+
+### Contexto
+
+RBAC en API es la primera línea de defensa. Migración `022_epis2_rls_pilot.sql` añade RLS en `clinical_drafts`, `clinical_notes` y `patients` como defensa en profundidad ante fugas de contexto de sesión.
+
+### Decisión
+
+- `RLS_MODE=off` en **development** y **test** (Vitest, demos locales).
+- `RLS_MODE=enforce` **obligatorio** en **staging y producción** (`NODE_ENV=production`); arranque fail-closed si no cumple.
+- Contexto de sesión vía `SET LOCAL epis2.rls_mode`, `epis2.actor_id`, `epis2.actor_role` dentro de transacciones (`runWithRlsContext`).
+- Rutas clínicas de borradores/pacientes envueltas; dashboard/IA/export pendientes de ampliación.
+
+### Consecuencias
+
+- Perfil `.env.staging.example` y runbook `docs/ops/RLS_STAGING_RUNBOOK.md`.
+- Tests de integración negativos cross-actor en `rls.integration.test.ts`.
+- MF-183 puede estabilizar API con RLS documentado.
+
+### Alternativas rechazadas
+
+- RLS siempre activo en dev — fricción demo y tests unitarios.
+- Multi-tenant por `organization_id` en v1 — fuera de alcance MVP.
+
+---
+
 ## Pendientes
 
 | ID | Tema | Cuándo |
 |----|------|--------|
-| ADR-005 | Row-Level Security PostgreSQL — piloto migración 022 (`off`/`enforce`) | Piloto Plan F |
 | ADR-006 | Auth híbrida piloto (`AUTH_MODE=hybrid` + `SERVICE_API_KEY`) | Plan F slice 3 |
 | ADR-007 | Modelo Ollama por entorno | EPIS2-07 |

@@ -3,6 +3,7 @@ import { describeIntegration } from '@epis2/test-fixtures/integration';
 import { expect, it } from 'vitest';
 import { buildApp } from '../app.js';
 import { testApiConfig } from '../testConfig.js';
+import { resetInpatientDemoCensus } from './integrationReset.js';
 
 const config = {
   ...testApiConfig,
@@ -15,6 +16,7 @@ const BED_101A = 'f0000002-0000-4000-8000-000000000001';
 
 describeIntegration('inpatient API (integration)', () => {
   it('tablero servicio, traslado, ingreso, alta y comando ingreso', async () => {
+    await resetInpatientDemoCensus(config.DATABASE_URL!);
     const app = await buildApp(config);
     const login = await app.inject({
       method: 'POST',

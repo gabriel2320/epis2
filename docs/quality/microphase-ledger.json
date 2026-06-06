@@ -1,5 +1,6 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "executionOrderNote": "Orden canónico post-MF-155: MF-183→184→185→186→187→156→188→157→158→159→160→161… Ver MICROPHASE_PROGRAM.md §Orden canónico",
   "program": "EPIS2 post-MVP microfases",
   "auditBaseline": "reports/epis2-comprehensive-audit-2026-06-05.md",
   "mvpBaseline": "V0-V5 demo cerrado; arquitectura sana",
@@ -77,14 +78,89 @@
       "wave": 0,
       "waveName": "Verdad operativa y gates",
       "dependsOn": ["MF-154"],
-      "state": "READY",
+      "state": "DONE",
       "evidenceRequired": [
         "RLS_MODE=enforce en staging",
         "tests negativos cross-tenant",
         "ADR o runbook staging",
         "reports/epis2-mf-155-rls-staging.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-155-rls-staging.md",
+      "unblocks": ["MF-183"]
+    },
+    {
+      "id": "MF-183",
+      "name": "Integración API estable (golden + RLS + censo)",
+      "wave": 0,
+      "waveName": "Espina Golden y verdad operativa",
+      "dependsOn": ["MF-155"],
+      "state": "DONE",
+      "evidenceRequired": [
+        "0 fallos en suites integración con DATABASE_URL",
+        "quality:ci-parity verde",
+        "reports/epis2-mf-183-api-integration-stable.md"
+      ],
+      "closureReport": "reports/epis2-mf-183-api-integration-stable.md",
+      "unblocks": ["MF-184"]
+    },
+    {
+      "id": "MF-184",
+      "name": "Matriz Golden Journey × M3 × dominio",
+      "wave": 0,
+      "waveName": "Espina Golden y verdad operativa",
+      "dependsOn": ["MF-183"],
+      "state": "DONE",
+      "evidenceRequired": [
+        "docs/quality/GOLDEN_M3_MATRIX.md",
+        "GOLDEN_CLINICAL_JOURNEY.md actualizado",
+        "reports/epis2-mf-184-golden-m3-matrix.md"
+      ],
+      "closureReport": "reports/epis2-mf-184-golden-m3-matrix.md",
+      "unblocks": ["MF-185"]
+    },
+    {
+      "id": "MF-185",
+      "name": "Auth UI — /login sin redirect 401",
+      "wave": 0,
+      "waveName": "Espina Golden y verdad operativa",
+      "dependsOn": ["MF-184"],
+      "state": "DONE",
+      "evidenceRequired": [
+        "fetchSession sin redirect en ruta login",
+        "E2E login UI o documentado workaround",
+        "reports/epis2-mf-185-auth-login-ui.md"
+      ],
+      "closureReport": "reports/epis2-mf-185-auth-login-ui.md",
+      "unblocks": ["MF-186"]
+    },
+    {
+      "id": "MF-186",
+      "name": "Golden E2E G3 — borrador aprobación auditoría",
+      "wave": 0,
+      "waveName": "Espina Golden y verdad operativa",
+      "dependsOn": ["MF-185"],
+      "state": "DONE",
+      "evidenceRequired": [
+        "e2e pasos 6-9 journey",
+        "playwright en CI",
+        "reports/epis2-mf-186-golden-e2e-full.md"
+      ],
+      "closureReport": "reports/epis2-mf-186-golden-e2e-full.md",
+      "unblocks": ["MF-187"]
+    },
+    {
+      "id": "MF-187",
+      "name": "Ollama stack docker + smoke local-ai",
+      "wave": 0,
+      "waveName": "Espina Golden y verdad operativa",
+      "dependsOn": ["MF-186"],
+      "state": "DONE",
+      "evidenceRequired": [
+        "local-ai en docker-compose o script stack",
+        "ai:enable documentado",
+        "reports/epis2-mf-187-ollama-stack.md"
+      ],
+      "closureReport": "reports/epis2-mf-187-ollama-stack.md",
       "unblocks": ["MF-156"]
     },
     {
@@ -92,24 +168,39 @@
       "name": "Contrato y scaffolder de blueprints",
       "wave": 1,
       "waveName": "Ingreso y datos longitudinales",
-      "dependsOn": ["MF-155"],
-      "state": "BLOCKED",
+      "dependsOn": ["MF-187"],
+      "state": "DONE",
       "evidenceRequired": [
         "contrato blueprint documentado",
         "scaffolder o plantilla en clinical-forms",
         "tests registry",
         "reports/epis2-mf-156-blueprint-scaffold.md"
       ],
-      "closureReport": null,
-      "unblocks": ["MF-157", "MF-159", "MF-160"]
+      "closureReport": "reports/epis2-mf-156-blueprint-scaffold.md",
+      "unblocks": ["MF-188"]
+    },
+    {
+      "id": "MF-188",
+      "name": "Patrón IA Ollama por blueprint",
+      "wave": 1,
+      "waveName": "Ingreso y datos longitudinales",
+      "dependsOn": ["MF-156"],
+      "state": "DONE",
+      "evidenceRequired": [
+        "assistSchemas + draftPromptCatalog por blueprint nuevo",
+        "ai:evals ampliado o documentado N/A",
+        "reports/epis2-mf-188-ia-blueprint-pattern.md"
+      ],
+      "closureReport": "reports/epis2-mf-188-ia-blueprint-pattern.md",
+      "unblocks": ["MF-157"]
     },
     {
       "id": "MF-157",
       "name": "Blueprint admission_note",
       "wave": 1,
       "waveName": "Ingreso y datos longitudinales",
-      "dependsOn": ["MF-156"],
-      "state": "BLOCKED",
+      "dependsOn": ["MF-188"],
+      "state": "READY",
       "evidenceRequired": [
         "blueprint admission_note en registry",
         "ruta /espacio/*",
@@ -139,7 +230,7 @@
       "name": "CRUD alergias",
       "wave": 1,
       "waveName": "Ingreso y datos longitudinales",
-      "dependsOn": ["MF-156"],
+      "dependsOn": ["MF-158"],
       "state": "BLOCKED",
       "evidenceRequired": [
         "formulario alergia",
@@ -154,7 +245,7 @@
       "name": "CRUD problemas clínicos",
       "wave": 1,
       "waveName": "Ingreso y datos longitudinales",
-      "dependsOn": ["MF-156"],
+      "dependsOn": ["MF-159"],
       "state": "BLOCKED",
       "evidenceRequired": [
         "formulario problema activo",
@@ -481,5 +572,45 @@
       "closureReport": null,
       "unblocks": []
     }
+  ],
+  "canonicalExecutionOrder": [
+    "MF-151",
+    "MF-152",
+    "MF-153",
+    "MF-154",
+    "MF-155",
+    "MF-183",
+    "MF-184",
+    "MF-185",
+    "MF-186",
+    "MF-187",
+    "MF-156",
+    "MF-188",
+    "MF-157",
+    "MF-158",
+    "MF-159",
+    "MF-160",
+    "MF-161",
+    "MF-162",
+    "MF-163",
+    "MF-164",
+    "MF-165",
+    "MF-166",
+    "MF-167",
+    "MF-168",
+    "MF-169",
+    "MF-170",
+    "MF-171",
+    "MF-172",
+    "MF-173",
+    "MF-174",
+    "MF-175",
+    "MF-176",
+    "MF-177",
+    "MF-178",
+    "MF-179",
+    "MF-180",
+    "MF-181",
+    "MF-182"
   ]
 }

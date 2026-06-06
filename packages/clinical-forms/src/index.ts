@@ -27,3 +27,7 @@ export {
   defaultClinicalContextInsertField,
   type ClinicalContextBlueprintId,
 } from './clinical-context-blueprints.js';
+export {
+  scaffoldBlueprintModule,
+  type ScaffoldBlueprintInput,
+} from './scaffoldBlueprint.js';

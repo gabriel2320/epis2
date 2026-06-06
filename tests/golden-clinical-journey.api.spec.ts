@@ -9,6 +9,7 @@ import { expect, it } from 'vitest';
 import { buildApp } from '../apps/api/src/app.js';
 import { getDatabase } from '../apps/api/src/db/client.js';
 import { approvals, auditEvents } from '../apps/api/src/db/schema.js';
+import { resetInpatientDemoCensus } from '../apps/api/src/inpatient/integrationReset.js';
 import { testApiConfig } from '../apps/api/src/testConfig.js';
 
 const config = {
@@ -231,6 +232,7 @@ describeIntegration('Golden Clinical Journey — API', () => {
   });
 
   it('golden-v2-admission-discharge: censo, traslado, ingreso y alta', async () => {
+    await resetInpatientDemoCensus(config.DATABASE_URL!);
     const app = await buildApp(config);
     const cookie = await loginCookie(app);
 

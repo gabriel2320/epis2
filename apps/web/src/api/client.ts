@@ -2,6 +2,15 @@ import { redirectToSessionExpired } from '../auth/sessionRedirect.js';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? '';
 
+/** Rutas públicas donde 401 es esperado y no debe redirigir a sesión expirada (MF-185). */
+const AUTH_PUBLIC_PATHS = ['/login', '/sesion-expirada'];
+
+function shouldRedirectOn401(): boolean {
+  if (typeof globalThis.location === 'undefined') return true;
+  const path = globalThis.location.pathname;
+  return !AUTH_PUBLIC_PATHS.some((p) => path === p || path.startsWith(`${p}/`));
+}
+
 export class ApiError extends Error {
   constructor(
     message: string,
@@ -33,7 +42,7 @@ export async function apiFetch<T>(
     } catch {
       /* ignore */
     }
-    if (res.status === 401) {
+    if (res.status === 401 && shouldRedirectOn401()) {
       redirectToSessionExpired();
     }
     throw new ApiError(message, res.status);

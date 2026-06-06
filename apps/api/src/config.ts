@@ -18,5 +18,16 @@ const envSchema = z.object({
 export type AppConfig = z.infer<typeof envSchema>;
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
-  return envSchema.parse(env);
+  const config = envSchema.parse(env);
+  assertProductionRlsEnforced(config);
+  return config;
+}
+
+/** Fail-closed: staging/producción exigen RLS_MODE=enforce (MF-155). */
+export function assertProductionRlsEnforced(config: AppConfig): void {
+  if (config.NODE_ENV === 'production' && config.RLS_MODE !== 'enforce') {
+    throw new Error(
+      'Fail-closed: NODE_ENV=production requiere RLS_MODE=enforce. Ver docs/ops/RLS_STAGING_RUNBOOK.md',
+    );
+  }
 }

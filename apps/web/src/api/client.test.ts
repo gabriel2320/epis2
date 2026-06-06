@@ -28,4 +28,22 @@ describe('apiFetch', () => {
     await expect(apiFetch('/api/test')).rejects.toBeInstanceOf(ApiError);
     expect(assign).toHaveBeenCalledWith('/sesion-expirada');
   });
+
+  it('no redirige ante 401 en /login (MF-185)', async () => {
+    const assign = vi.fn();
+    vi.stubGlobal('location', { pathname: '/login', search: '', assign });
+
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: false,
+        status: 401,
+        statusText: 'Unauthorized',
+        json: async () => ({ error: 'Sin sesión' }),
+      }),
+    );
+
+    await expect(apiFetch('/api/auth/session')).rejects.toBeInstanceOf(ApiError);
+    expect(assign).not.toHaveBeenCalled();
+  });
 });

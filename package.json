@@ -32,6 +32,7 @@
     "dev:web": "npm run dev -w @epis2/web",
     "dev:ai": "npm run dev -w @epis2/local-ai",
     "ai:enable": "node scripts/ai-local-enable.mjs",
+    "ai:smoke": "node scripts/ai-smoke.mjs",
     "ai:evals": "npm run build -w @epis2/local-ai && node scripts/ai-synthetic-evals.mjs",
     "ai:pull-model": "ollama pull llama3.2",
     "legacy:audit": "node scripts/legacy-audit/scan-donor-repositories.mjs && node scripts/legacy-audit/detect-forbidden-dependencies.mjs && node scripts/legacy-audit/detect-secrets-and-sensitive-data.mjs && node scripts/legacy-audit/detect-duplicate-registries.mjs && node scripts/legacy-audit/detect-legacy-routes.mjs",

@@ -72,4 +72,11 @@ Login
 
 Ejecutar: `npm run quality:golden-journey`
 
-Playwright E2E UI: `e2e/golden-command-evolution.spec.ts` — obligatorio en CI (MF-154).
+Playwright E2E UI:
+
+| Archivo | Pasos |
+|---------|-------|
+| `e2e/golden-command-evolution.spec.ts` | 1–5 (MF-154) |
+| `e2e/golden-draft-approval.spec.ts` | 6–9 borrador→aprobación→comando (MF-186) |
+
+Matriz Golden × M3: `docs/quality/GOLDEN_M3_MATRIX.md` (MF-184).
