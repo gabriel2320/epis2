@@ -52,7 +52,13 @@ export interface MaterialThemeSourceMetadata {
   version: string;
 }
 
-export type Epis2ApprovedThemeId = 'clinical-blue' | 'calm-teal';
+export type Epis2ApprovedThemeId =
+  | 'clinical-blue'
+  | 'calm-teal'
+  | 'slate-professional'
+  | 'sage-clinical'
+  | 'ocean-depth'
+  | 'warm-linen';
 
 export interface Epis2ThemeOptions {
   themeId: Epis2ApprovedThemeId;

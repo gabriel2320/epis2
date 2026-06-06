@@ -25,6 +25,17 @@ describe('createEpis2Theme — Material Theme Builder', () => {
     expect(theme.palette.primary?.main).toBe(calmTealLightScheme.primary);
   });
 
+  it('resuelve sageClinical a Sage Clinical MTB', () => {
+    const theme = createEpis2Theme({ accent: 'sageClinical' });
+    expect(theme.epis2.themeId).toBe('sage-clinical');
+    expect(theme.palette.primary?.main).toBe('#28644A');
+  });
+
+  it('resuelve warmLinen a Warm Linen MTB', () => {
+    const theme = createEpis2Theme({ accent: 'warmLinen' });
+    expect(theme.epis2.themeId).toBe('warm-linen');
+  });
+
   it('acentos sin MTB usan palette legacy', () => {
     const theme = createEpis2Theme({ accent: 'neutral' });
     expect(theme.epis2.themeId).toBe('legacy');

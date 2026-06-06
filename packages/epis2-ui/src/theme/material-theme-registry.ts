@@ -1,10 +1,19 @@
 import type { Epis2ApprovedThemeId, Epis2MaterialColorScheme } from './contracts/material-color-scheme.js';
 import type { Epis2Accent } from './color-roles.js';
 import {
+  calmTealDarkScheme,
+  calmTealLightScheme,
   clinicalBlueDarkScheme,
   clinicalBlueLightScheme,
-} from './generated/clinical-blue.js';
-import { calmTealDarkScheme, calmTealLightScheme } from './generated/calm-teal.js';
+  oceanDepthDarkScheme,
+  oceanDepthLightScheme,
+  sageClinicalDarkScheme,
+  sageClinicalLightScheme,
+  slateProfessionalDarkScheme,
+  slateProfessionalLightScheme,
+  warmLinenDarkScheme,
+  warmLinenLightScheme,
+} from './generated/index.js';
 
 export const MATERIAL_THEME_SCHEMES: Record<
   Epis2ApprovedThemeId,
@@ -18,13 +27,35 @@ export const MATERIAL_THEME_SCHEMES: Record<
     light: calmTealLightScheme,
     dark: calmTealDarkScheme,
   },
+  'slate-professional': {
+    light: slateProfessionalLightScheme,
+    dark: slateProfessionalDarkScheme,
+  },
+  'sage-clinical': {
+    light: sageClinicalLightScheme,
+    dark: sageClinicalDarkScheme,
+  },
+  'ocean-depth': {
+    light: oceanDepthLightScheme,
+    dark: oceanDepthDarkScheme,
+  },
+  'warm-linen': {
+    light: warmLinenLightScheme,
+    dark: warmLinenDarkScheme,
+  },
 };
 
-/** Acentos legacy mapeados a temas MTB aprobados. */
+/** Acentos MTB aprobados — no alteran roles clínicos (M3-G02). */
 export const ACCENT_TO_THEME_ID: Partial<Record<Epis2Accent, Epis2ApprovedThemeId>> = {
   clinicalBlue: 'clinical-blue',
   tealBlue: 'calm-teal',
+  slateProfessional: 'slate-professional',
+  sageClinical: 'sage-clinical',
+  oceanDepth: 'ocean-depth',
+  warmLinen: 'warm-linen',
 };
+
+export const MTB_ACCENT_IDS = Object.keys(ACCENT_TO_THEME_ID) as Epis2Accent[];
 
 export const DEFAULT_THEME_ID: Epis2ApprovedThemeId = 'clinical-blue';
 

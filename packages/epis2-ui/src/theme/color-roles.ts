@@ -1,6 +1,15 @@
 import type { PaletteOptions } from '@mui/material/styles';
 
-export type Epis2Accent = 'clinicalBlue' | 'tealBlue' | 'calmGreen' | 'soberViolet' | 'neutral';
+export type Epis2Accent =
+  | 'clinicalBlue'
+  | 'tealBlue'
+  | 'slateProfessional'
+  | 'sageClinical'
+  | 'oceanDepth'
+  | 'warmLinen'
+  | 'calmGreen'
+  | 'soberViolet'
+  | 'neutral';
 
 /** Presets de acento dinámico (solo primary/surface decorativa — no roles clínicos). */
 export const accentPresets: Record<
@@ -16,6 +25,26 @@ export const accentPresets: Record<
     primary: { main: '#0D7377', light: '#E0F4F5', dark: '#095456', contrastText: '#FFFFFF' },
     secondary: { main: '#546E7A', light: '#ECEFF1', dark: '#37474F', contrastText: '#FFFFFF' },
     surfaceTint: '#E0F4F5',
+  },
+  slateProfessional: {
+    primary: { main: '#475569', light: '#DCE3ED', dark: '#334155', contrastText: '#FFFFFF' },
+    secondary: { main: '#5C6470', light: '#E0E4EA', dark: '#444B57', contrastText: '#FFFFFF' },
+    surfaceTint: '#ECEEF2',
+  },
+  sageClinical: {
+    primary: { main: '#28644A', light: '#B8EAD0', dark: '#1B4D38', contrastText: '#FFFFFF' },
+    secondary: { main: '#4F6358', light: '#D2E8DA', dark: '#374B41', contrastText: '#FFFFFF' },
+    surfaceTint: '#E9EFEB',
+  },
+  oceanDepth: {
+    primary: { main: '#0C4A6E', light: '#C8E6FF', dark: '#083550', contrastText: '#FFFFFF' },
+    secondary: { main: '#4F6070', light: '#D2E4F4', dark: '#374858', contrastText: '#FFFFFF' },
+    surfaceTint: '#E9EEF5',
+  },
+  warmLinen: {
+    primary: { main: '#78716C', light: '#F0EAE4', dark: '#57534E', contrastText: '#FFFFFF' },
+    secondary: { main: '#635F5B', light: '#EAE4DE', dark: '#4B4743', contrastText: '#FFFFFF' },
+    surfaceTint: '#F4EFEB',
   },
   calmGreen: {
     primary: { main: '#2E7D52', light: '#E8F5EE', dark: '#1B5E3A', contrastText: '#FFFFFF' },

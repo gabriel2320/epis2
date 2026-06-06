@@ -3,11 +3,10 @@ import { copy } from '@epis2/design-system';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { Epis2Accent } from '../theme/create-epis2-theme.js';
+import { MTB_ACCENT_IDS } from '../theme/material-theme-registry.js';
 import { EpisFilterChip } from '../primitives/EpisM3Chips.js';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
 import { useEpis2ThemePreferences } from './EpisThemePreferences.js';
-
-const MTB_ACCENTS = ['clinicalBlue', 'tealBlue'] as const satisfies readonly Epis2Accent[];
 
 const LEGACY_ACCENTS = ['calmGreen', 'soberViolet', 'neutral'] as const satisfies readonly Epis2Accent[];
 
@@ -46,14 +45,18 @@ export function EpisAppearancePreferencesPanel({
   const accentLabels: Record<Epis2Accent, string> = {
     clinicalBlue: copy.themePreferences.accentClinicalBlue,
     tealBlue: copy.themePreferences.accentTeal,
+    slateProfessional: copy.themePreferences.accentSlate,
+    sageClinical: copy.themePreferences.accentSage,
+    oceanDepth: copy.themePreferences.accentOcean,
+    warmLinen: copy.themePreferences.accentLinen,
     calmGreen: copy.themePreferences.accentGreen,
     soberViolet: copy.themePreferences.accentViolet,
     neutral: copy.themePreferences.accentNeutral,
   };
 
   const accentOptions: Epis2Accent[] = showLegacyAccents
-    ? [...MTB_ACCENTS, ...LEGACY_ACCENTS]
-    : [...MTB_ACCENTS];
+    ? [...MTB_ACCENT_IDS, ...LEGACY_ACCENTS]
+    : [...MTB_ACCENT_IDS];
 
   return (
     <Stack spacing={2.5} data-testid={testId}>

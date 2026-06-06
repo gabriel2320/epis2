@@ -12,6 +12,8 @@ Material UI       → base React (MUI 6 + MUI X bajo demanda)
 @epis2/epis2-ui   → implementación clínica EPIS2
 ```
 
+**Perfiles de color (6 gamas MTB):** `docs/design/EPIS2_CLINICAL_DESIGN_SYSTEM_M3.md`
+
 ### Principio rector
 
 ```text

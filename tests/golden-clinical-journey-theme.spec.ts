@@ -52,7 +52,9 @@ describe('Golden Clinical Journey — tema (THEME-06)', () => {
   it('modo tablero accesible con cualquier preferencia de acento MTB', () => {
     for (const accent of ['clinicalBlue', 'tealBlue'] as const) {
       const theme = createEpis2Theme({ mode: 'light', accent });
-      expect(theme.epis2.themeId).toMatch(/clinical-blue|calm-teal/);
+      expect(theme.epis2.themeId).toMatch(
+        /clinical-blue|calm-teal|slate-professional|sage-clinical|ocean-depth|warm-linen/,
+      );
       const tablero = resolveCommand({ text: 'abre el tablero', role: 'physician' });
       expect(tablero.status).toBe('resolved');
     }

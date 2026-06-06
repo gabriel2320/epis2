@@ -1,28 +1,14 @@
-# Material Theme Builder — fuentes EPIS2
+# EPIS2 — Perfiles MTB en `source/`
 
-Exportaciones originales de [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/).
+Exportaciones Material Theme Builder (JSON). **No editar** archivos en `generated/` — regenerar con `npm run theme:generate`.
 
-## Reglas
+| Archivo | themeId | Seed | Gama |
+|---------|---------|------|------|
+| `clinical-blue.material-theme.json` | `clinical-blue` | `#1E6FD6` | Azul confianza (default) |
+| `calm-teal.material-theme.json` | `calm-teal` | `#006A6A` | Verde azulado calma |
+| `slate-professional.material-theme.json` | `slate-professional` | `#475569` | Gris pizarra institucional |
+| `sage-clinical.material-theme.json` | `sage-clinical` | `#28644A` | Verde salvia higiene |
+| `ocean-depth.material-theme.json` | `ocean-depth` | `#0C4A6E` | Azul océano profundo |
+| `warm-linen.material-theme.json` | `warm-linen` | `#78716C` | Neutro cálido lectura |
 
-1. **No editar manualmente** los archivos `*.material-theme.json` tras importación.
-2. Reimportar desde MTB y ejecutar `npm run theme:generate`.
-3. Conservar `metadata` (color fuente, fecha, versión).
-4. Cada archivo debe incluir esquemas **light** y **dark** con todos los roles M3 obligatorios.
-
-## Temas aprobados (THEME-01)
-
-| Archivo | ID | Color fuente |
-|---------|-----|--------------|
-| `clinical-blue.material-theme.json` | `clinical-blue` | `#1E6FD6` |
-| `calm-teal.material-theme.json` | `calm-teal` | `#006A6A` |
-
-## Pipeline
-
-```text
-source/*.material-theme.json
-  → npm run theme:validate
-  → npm run theme:generate
-  → generated/*.ts
-```
-
-Frase guía: *Material Theme Builder define el lenguaje cromático; EPIS2 protege el significado clínico.*
+Canon de diseño: `docs/design/EPIS2_CLINICAL_DESIGN_SYSTEM_M3.md`
