@@ -1,7 +1,7 @@
 # EPIS2 V1 — Ficha longitudinal (slice demo)
 
-**Estado:** cerrado (slice demo) — commits `117cbeb`, `7ac8007`  
-**Gate completo V1:** pendiente RAG, OCR, PDF (EPIS2-11+).
+**Estado:** gate V1 demo cerrado — API Plan C + UI export/OCR (2026-06-05)  
+**Ver también:** `reports/epis2-v1-plan-c-complete.md`, `reports/epis2-v1-ui-signoff.md`
 
 ## Entregables
 
@@ -23,10 +23,10 @@ npm test
 
 Integración: `clinical.integration.test.ts` (longitudinal DEMO-005, búsqueda docs, comandos interconsulta/imagenología).
 
-## Fuera de alcance (gate V1 completo)
+## Fuera de alcance (producto real)
 
-- RAG pgvector, OCR, impresión PDF masiva
-- Tablero de servicio (V2)
+- OCR productivo (Tesseract/sidecar), PDF con librería externa
+- Tablero de servicio completo (V2 gate)
 
 ## Journey
 

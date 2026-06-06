@@ -3,7 +3,9 @@ import type {
   PatientClinicalAlertsResponse,
   PatientLongitudinalResponse,
 } from '@epis2/contracts';
-import { apiFetch } from './client.js';
+import { ApiError, apiFetch } from './client.js';
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? '';
 
 export type PatientListRow = {
   id: string;
@@ -70,6 +72,39 @@ export function intakePatientDocument(
 export function exportPatientSummaryUrl(patientId: string, format: 'txt' | 'pdf' = 'txt') {
   const q = format === 'pdf' ? '?format=pdf' : '';
   return `/api/patients/${patientId}/export/summary${q}`;
+}
+
+/** Descarga resumen con sesión (evita enlaces directos sin cookie). */
+export async function downloadPatientSummaryExport(
+  patientId: string,
+  format: 'txt' | 'pdf' = 'txt',
+): Promise<void> {
+  const res = await fetch(`${API_BASE}${exportPatientSummaryUrl(patientId, format)}`, {
+    credentials: 'include',
+  });
+  if (!res.ok) {
+    throw new ApiError(res.statusText || 'Error al exportar', res.status);
+  }
+  const blob = await res.blob();
+  const disposition = res.headers.get('Content-Disposition');
+  const filename =
+    disposition?.match(/filename="([^"]+)"/)?.[1] ??
+    (format === 'pdf' ? 'resumen-clinico.pdf' : 'resumen-clinico.txt');
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement('a');
+  anchor.href = url;
+  anchor.download = filename;
+  anchor.click();
+  URL.revokeObjectURL(url);
+}
+
+export function runDocumentOcr(patientId: string, documentId: string) {
+  return apiFetch<{
+    documentId: string;
+    ocrMode?: string;
+    chunkCount?: number;
+    requiresHumanReview?: true;
+  }>(`/api/patients/${patientId}/documents/${documentId}/ocr`, { method: 'POST' });
 }
 
 /** Blueprint EPIS2 alineado a intent del command-registry (para CDR contextual). */

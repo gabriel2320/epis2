@@ -1,12 +1,29 @@
 import { copy } from '@epis2/design-system';
-import { EpisTreeViewSuspense, Stack, TextField, Typography, Button, Alert } from '@epis2/epis2-ui';
+import {
+  Alert,
+  EpisButton,
+  EpisSelect,
+  EpisTreeViewSuspense,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Stack,
+  TextField,
+  Typography,
+} from '@epis2/epis2-ui';
 import { useMemo, useState } from 'react';
-import { intakePatientDocument, searchPatientDocuments } from '../api/clinicalApi.js';
+import {
+  intakePatientDocument,
+  runDocumentOcr,
+  searchPatientDocuments,
+} from '../api/clinicalApi.js';
 import { buildDocumentTreeByType } from '../tree/documentTree.js';
 
 export type DocumentSearchPanelProps = {
   patientId: string;
 };
+
+type IntakeType = 'txt' | 'image';
 
 export function DocumentSearchPanel({ patientId }: DocumentSearchPanelProps) {
   const [query, setQuery] = useState('laboratorio');
@@ -17,7 +34,10 @@ export function DocumentSearchPanel({ patientId }: DocumentSearchPanelProps) {
   const [loading, setLoading] = useState(false);
   const [intakeTitle, setIntakeTitle] = useState('Nota clínica demo');
   const [intakeText, setIntakeText] = useState('');
+  const [intakeType, setIntakeType] = useState<IntakeType>('txt');
   const [intakeMsg, setIntakeMsg] = useState<string | null>(null);
+  const [pendingOcrDocId, setPendingOcrDocId] = useState<string | null>(null);
+  const [ocrLoading, setOcrLoading] = useState(false);
 
   const runSearch = async () => {
     setLoading(true);
@@ -35,17 +55,45 @@ export function DocumentSearchPanel({ patientId }: DocumentSearchPanelProps) {
 
   const runIntake = async () => {
     setIntakeMsg(null);
+    setPendingOcrDocId(null);
     try {
-      await intakePatientDocument(patientId, {
+      const res = await intakePatientDocument(patientId, {
         title: intakeTitle.trim() || 'Documento demo',
-        documentType: 'txt',
-        textContent: intakeText.trim() || intakeTitle.trim(),
+        documentType: intakeType,
+        ...(intakeType === 'txt'
+          ? { textContent: intakeText.trim() || intakeTitle.trim() }
+          : { mimeType: 'image/png' }),
       });
-      setIntakeMsg(copy.longitudinal.intakeSuccess);
+      setIntakeMsg(
+        res.document.ocrPending
+          ? copy.longitudinal.ocrPendingHint
+          : copy.longitudinal.intakeSuccess,
+      );
+      if (res.document.ocrPending) {
+        setPendingOcrDocId(res.document.id);
+      } else {
+        setIntakeText('');
+        await runSearch();
+      }
+    } catch {
+      setIntakeMsg(copy.errors.genericMessage);
+    }
+  };
+
+  const runOcr = async () => {
+    if (!pendingOcrDocId) return;
+    setOcrLoading(true);
+    setIntakeMsg(null);
+    try {
+      await runDocumentOcr(patientId, pendingOcrDocId);
+      setPendingOcrDocId(null);
+      setIntakeMsg(copy.longitudinal.ocrSuccess);
       setIntakeText('');
       await runSearch();
     } catch {
-      setIntakeMsg('No se pudo indexar el documento.');
+      setIntakeMsg(copy.errors.genericMessage);
+    } finally {
+      setOcrLoading(false);
     }
   };
 
@@ -80,9 +128,14 @@ export function DocumentSearchPanel({ patientId }: DocumentSearchPanelProps) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <Button variant="outlined" size="small" disabled={loading} onClick={() => void runSearch()}>
+        <EpisButton
+          variant="outlined"
+          size="small"
+          disabled={loading}
+          onClick={() => void runSearch()}
+        >
           {copy.longitudinal.searchDocuments}
-        </Button>
+        </EpisButton>
       </Stack>
       {searchMode === 'semantic' ? (
         <Typography variant="caption" color="text.secondary">
@@ -102,6 +155,19 @@ export function DocumentSearchPanel({ patientId }: DocumentSearchPanelProps) {
       <Typography variant="subtitle2" sx={{ mt: 1 }}>
         {copy.longitudinal.intakeTitle}
       </Typography>
+      <FormControl size="small" fullWidth>
+        <InputLabel id="epis2-intake-type-label">Tipo</InputLabel>
+        <EpisSelect
+          labelId="epis2-intake-type-label"
+          label="Tipo"
+          value={intakeType}
+          onChange={(e) => setIntakeType(e.target.value as IntakeType)}
+          data-testid="epis2-intake-type"
+        >
+          <MenuItem value="txt">{copy.longitudinal.intakeTypeTxt}</MenuItem>
+          <MenuItem value="image">{copy.longitudinal.intakeTypeImage}</MenuItem>
+        </EpisSelect>
+      </FormControl>
       <TextField
         size="small"
         fullWidth
@@ -109,18 +175,33 @@ export function DocumentSearchPanel({ patientId }: DocumentSearchPanelProps) {
         value={intakeTitle}
         onChange={(e) => setIntakeTitle(e.target.value)}
       />
-      <TextField
-        size="small"
-        fullWidth
-        multiline
-        minRows={2}
-        placeholder={copy.longitudinal.intakePlaceholder}
-        value={intakeText}
-        onChange={(e) => setIntakeText(e.target.value)}
-      />
-      <Button variant="outlined" size="small" onClick={() => void runIntake()}>
-        {copy.longitudinal.intakeSubmit}
-      </Button>
+      {intakeType === 'txt' ? (
+        <TextField
+          size="small"
+          fullWidth
+          multiline
+          minRows={2}
+          placeholder={copy.longitudinal.intakePlaceholder}
+          value={intakeText}
+          onChange={(e) => setIntakeText(e.target.value)}
+        />
+      ) : null}
+      <Stack direction="row" spacing={1} flexWrap="wrap">
+        <EpisButton variant="outlined" size="small" onClick={() => void runIntake()}>
+          {copy.longitudinal.intakeSubmit}
+        </EpisButton>
+        {pendingOcrDocId ? (
+          <EpisButton
+            appearance="tonal"
+            size="small"
+            disabled={ocrLoading}
+            onClick={() => void runOcr()}
+            data-testid="epis2-document-ocr-run"
+          >
+            {ocrLoading ? copy.longitudinal.exportDownloading : copy.longitudinal.ocrRun}
+          </EpisButton>
+        ) : null}
+      </Stack>
       {intakeMsg ? <Alert severity="info">{intakeMsg}</Alert> : null}
     </Stack>
   );

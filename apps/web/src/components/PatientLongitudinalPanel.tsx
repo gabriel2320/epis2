@@ -1,4 +1,4 @@
-import { useMemo, type ReactNode } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import { DocumentSearchPanel } from './DocumentSearchPanel.js';
@@ -7,7 +7,7 @@ import { PatientClinicalCharts } from './PatientClinicalCharts.js';
 import { LongitudinalNavTree } from './LongitudinalNavTree.js';
 import { PatientClinicalAiPanel } from './PatientClinicalAiPanel.js';
 import { buildDocumentTreeByType } from '../tree/documentTree.js';
-import { exportPatientSummaryUrl } from '../api/clinicalApi.js';
+import { downloadPatientSummaryExport } from '../api/clinicalApi.js';
 
 import {
   Accordion,
@@ -60,6 +60,8 @@ export function PatientLongitudinalPanel({
   onOpenDraft,
   onOpenNote,
 }: PatientLongitudinalPanelProps) {
+  const [exporting, setExporting] = useState<'txt' | 'pdf' | null>(null);
+
   return (
     <Stack spacing={2} data-testid="epis2-longitudinal-panel">
       <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
@@ -68,22 +70,32 @@ export function PatientLongitudinalPanel({
           <Button
             size="small"
             variant="outlined"
-            component="a"
-            href={exportPatientSummaryUrl(data.patientId, 'txt')}
-            download
+            disabled={exporting !== null}
             data-testid="epis2-export-summary"
+            onClick={() => {
+              setExporting('txt');
+              void downloadPatientSummaryExport(data.patientId, 'txt').finally(() =>
+                setExporting(null),
+              );
+            }}
           >
-            {copy.longitudinal.exportSummary}
+            {exporting === 'txt' ? copy.longitudinal.exportDownloading : copy.longitudinal.exportSummary}
           </Button>
           <Button
             size="small"
             variant="outlined"
-            component="a"
-            href={exportPatientSummaryUrl(data.patientId, 'pdf')}
-            download
+            disabled={exporting !== null}
             data-testid="epis2-export-summary-pdf"
+            onClick={() => {
+              setExporting('pdf');
+              void downloadPatientSummaryExport(data.patientId, 'pdf').finally(() =>
+                setExporting(null),
+              );
+            }}
           >
-            {copy.longitudinal.exportSummaryPdf}
+            {exporting === 'pdf'
+              ? copy.longitudinal.exportDownloading
+              : copy.longitudinal.exportSummaryPdf}
           </Button>
         </Stack>
       </Stack>
