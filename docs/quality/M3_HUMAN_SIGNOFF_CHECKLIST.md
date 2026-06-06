@@ -38,6 +38,7 @@ Referencias cruzadas: `EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md`, `EPIS2_TYPOGRAPH
 
 | Campo | Valor |
 |-------|--------|
-| Fecha staging | 2026-06-07 |
-| Resultado | **GO DEMO M3 (automatizado)** — `npm run quality:m3-human-pilot` |
-| Reporte | `reports/epis2-m3-human-pilot-*.md` |
+| Fecha staging | 2026-06-06 |
+| Resultado | **GO DEMO M3** — E2E + pasada visual con capturas |
+| Reporte | `reports/epis2-m3-visual-pass-2026-06-06.md` |
+| Capturas | `reports/m3-visual-evidence/2026-06-06/` (16 PNG) |

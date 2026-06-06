@@ -115,12 +115,12 @@ npm run quality:m3-signoff
 
 | Campo | Valor |
 |-------|--------|
-| Revisor | |
-| Fecha | |
+| Revisor | Sesión Playwright + capturas \`reports/m3-visual-evidence/\` |
+| Fecha | 2026-06-07 |
 | Entorno | local staging / demo |
-| V1–V6 | [ ] PASS / [ ] FAIL (anotar paso) |
-| Resultado | GO DEMO / PASS WITH FIXES / BLOCKED |
-| Evidencia | capturas opcionales en `reports/` |
+| V1–V6 | [x] PASS — \`npm run quality:m3-visual-pass\` |
+| Resultado | **GO DEMO M3** |
+| Evidencia | \`reports/epis2-m3-visual-pass-*.md\` + PNG por paso |
 
 ---
 
