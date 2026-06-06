@@ -3,10 +3,13 @@ import { loadEnvFile } from './scripts/load-env.mjs';
 
 loadEnvFile();
 
-const integrationTimeout = process.env.DATABASE_URL?.trim() ? 30_000 : 5_000;
+const hasIntegrationDb = Boolean(process.env.DATABASE_URL?.trim());
+const integrationTimeout = hasIntegrationDb ? 30_000 : 5_000;
 
 export default defineConfig({
   test: {
+    // Una sola Postgres: evita carreras entre suites de integración.
+    fileParallelism: hasIntegrationDb ? false : undefined,
     testTimeout: integrationTimeout,
     hookTimeout: integrationTimeout,
     globalSetup: ['./vitest.global-setup.ts'],

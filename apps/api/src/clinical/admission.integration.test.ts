@@ -1,7 +1,7 @@
 import { DEMO_CLINICAL_CASES } from '@epis2/test-fixtures';
 import { describeIntegration } from '@epis2/test-fixtures/integration';
 import { and, eq } from 'drizzle-orm';
-import { beforeAll, expect, it } from 'vitest';
+import { beforeEach, expect, it } from 'vitest';
 import { resolveCommand } from '@epis2/command-registry';
 import { buildApp } from '../app.js';
 import { getDatabase } from '../db/client.js';
@@ -18,7 +18,7 @@ const BED_102A = 'f0000002-0000-4000-8000-000000000003';
 const demo002 = DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-002')!;
 
 describeIntegration('cadena ingreso hospitalario (MF-158)', () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     await resetInpatientDemoCensus(config.DATABASE_URL!);
   });
 
