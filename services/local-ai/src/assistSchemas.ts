@@ -63,6 +63,9 @@ export const ASSIST_BLUEPRINT_FIELDS: Record<string, readonly string[]> = {
     'resolutionPlan',
     'communicationNotes',
   ],
+  transfer_note: ['transferReason', 'clinicalSummary', 'handoffPlan', 'targetBedId'],
+  outpatient_visit: ['chiefComplaint', 'history', 'physicalExam', 'assessment', 'plan'],
+  referral_report: ['referralContext', 'specialistAssessment', 'recommendations', 'followUpPlan'],
 };
 
 export type AssistBlueprintSpec = {

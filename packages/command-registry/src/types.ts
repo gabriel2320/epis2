@@ -20,7 +20,10 @@ export type ClinicalIntent =
   | 'open_dashboard_quality'
   | 'admit_patient_hospital'
   | 'open_results_inbox'
-  | 'reconcile_medications';
+  | 'reconcile_medications'
+  | 'transfer_patient'
+  | 'create_outpatient_visit'
+  | 'respond_referral';
 
 export type CommandResolveStatus =
   | 'resolved'

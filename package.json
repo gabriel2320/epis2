@@ -28,6 +28,8 @@
     "db:validate": "node scripts/db-validate.mjs",
     "db:migrate": "node scripts/db-migrate.mjs",
     "db:backup": "node scripts/epis-db-backup.mjs",
+    "db:restore": "node scripts/epis-db-restore.mjs",
+    "db:apply-latest": "node scripts/quality/apply-latest-migration.mjs",
     "dev:api": "npm run dev -w @epis2/api",
     "dev:web": "npm run dev -w @epis2/web",
     "dev:ai": "npm run dev -w @epis2/local-ai",

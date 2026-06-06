@@ -347,6 +347,18 @@ export const marAdministrationRecords = pgTable('mar_administration_records', {
     .references(() => appUsers.id),
 });
 
+export const clinicalCatalogStaging = pgTable('clinical_catalog_staging', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  catalogCode: text('catalog_code').notNull(),
+  entryCode: text('entry_code').notNull(),
+  label: text('label').notNull(),
+  status: text('status').notNull().default('active'),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
 export const interopStagingBatches = pgTable('interop_staging_batches', {
   id: uuid('id').primaryKey().defaultRandom(),
   sourceSystem: text('source_system').notNull(),

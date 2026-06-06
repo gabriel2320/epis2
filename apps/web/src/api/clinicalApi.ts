@@ -124,6 +124,9 @@ export const INTENT_TO_ASSIST_BLUEPRINT: Record<string, string> = {
   record_medication_administration: 'medication_administration',
   prepare_pharmacy_review: 'pharmacy_validation',
   reconcile_medications: 'medication_reconciliation',
+  transfer_patient: 'transfer_note',
+  create_outpatient_visit: 'outpatient_visit',
+  respond_referral: 'referral_report',
 };
 
 export const BLUEPRINT_BY_ROUTE: Record<string, string> = {
@@ -140,6 +143,9 @@ export const BLUEPRINT_BY_ROUTE: Record<string, string> = {
   '/espacio/alergia': 'allergy_entry',
   '/espacio/problema': 'clinical_problem_entry',
   '/espacio/conciliacion': 'medication_reconciliation',
+  '/espacio/traslado': 'transfer_note',
+  '/espacio/ambulatorio': 'outpatient_visit',
+  '/espacio/informe-interconsulta': 'referral_report',
 };
 
 export const DRAFT_TYPE_TO_BLUEPRINT: Record<string, string> = {
@@ -156,6 +162,9 @@ export const DRAFT_TYPE_TO_BLUEPRINT: Record<string, string> = {
   allergy_entry: 'allergy_entry',
   clinical_problem_entry: 'clinical_problem_entry',
   medication_reconciliation: 'medication_reconciliation',
+  transfer_note: 'transfer_note',
+  outpatient_visit: 'outpatient_visit',
+  referral_report: 'referral_report',
 };
 
 const SUMMARY_CONTEXT_KEYS = [

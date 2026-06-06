@@ -14,6 +14,7 @@ import { DraftReviewPage } from '../pages/DraftReviewPage.js';
 import { GeneratedClinicalFormPage } from '../pages/GeneratedClinicalFormPage.js';
 import { PatientWorkspacePage } from '../pages/PatientWorkspacePage.js';
 import { ResultsInboxPage } from '../pages/ResultsInboxPage.js';
+import { AdminConsolePage } from '../pages/AdminConsolePage.js';
 import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
 import { SessionExpiredPage } from '../pages/SessionExpiredPage.js';
@@ -265,11 +266,47 @@ const reconciliationFormRoute = createRoute({
   component: clinicalFormPage('/espacio/conciliacion'),
 });
 
+const transferFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/traslado',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/traslado'),
+});
+
+const outpatientFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/ambulatorio',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/ambulatorio'),
+});
+
+const referralReportFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/informe-interconsulta',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/informe-interconsulta'),
+});
+
 const resultsInboxRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/resultados',
   validateSearch: validatePatientSearch,
   component: ResultsInboxPage,
+});
+
+const adminConsoleRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/admin',
+  validateSearch: (search: Record<string, unknown>) => {
+    const tab = search.tab;
+    const validTab =
+      tab === 'catalogs' || tab === 'audit' || tab === 'ops' ? tab : ('users' as const);
+    return { tab: validTab };
+  },
+  component: function AdminConsoleRoute() {
+    const { tab } = adminConsoleRoute.useSearch();
+    return <AdminConsolePage initialTab={tab} />;
+  },
 });
 
 const indexRoute = createRoute({
@@ -352,7 +389,11 @@ export const routeTree = rootRoute.addChildren([
     allergyFormRoute,
     problemFormRoute,
     reconciliationFormRoute,
+    transferFormRoute,
+    outpatientFormRoute,
+    referralReportFormRoute,
     resultsInboxRoute,
+    adminConsoleRoute,
   ]),
 ]);
 

@@ -224,4 +224,84 @@ describeIntegration('cadena ingreso hospitalario (MF-158)', () => {
 
     await app.close();
   });
+
+  it('comando traslado → borrador → aprobación → cambio de cama (MF-167)', async () => {
+    const app = await buildApp(config);
+    const db = getDatabase(config.DATABASE_URL)!;
+    const demo004 = DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-004')!;
+
+    const resolved = resolveCommand({
+      text: 'nota de traslado',
+      role: 'physician',
+      patientId: demo004.patientId,
+    });
+    expect(resolved.status).toBe('resolved');
+    if (resolved.status === 'resolved') {
+      expect(resolved.routePath).toBe('/espacio/traslado');
+    }
+
+    const login = await app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      payload: { username: 'medico.demo', demoAuthKey: 'DEMO-CLAVE-MEDICO' },
+    });
+    const cookie = String(login.headers['set-cookie']).split(';')[0];
+
+    const [before] = await db
+      .select()
+      .from(inpatientAdmissions)
+      .where(
+        and(
+          eq(inpatientAdmissions.patientId, demo004.patientId),
+          eq(inpatientAdmissions.status, 'active'),
+        ),
+      );
+    expect(before?.bedId).toBe('f0000002-0000-4000-8000-000000000001');
+
+    const created = await app.inject({
+      method: 'POST',
+      url: '/api/drafts',
+      headers: { cookie },
+      payload: {
+        patientId: demo004.patientId,
+        draftType: 'transfer_note',
+        title: 'Traslado DEMO-004',
+        body: {
+          transferReason: 'Mejor monitorización',
+          clinicalSummary: 'Postoperatorio estable',
+          handoffPlan: 'Continuar analgesia y deambulación',
+          targetBedId: `${BED_102A}|102A — disponible`,
+        },
+      },
+    });
+    expect(created.statusCode).toBe(201);
+    const draftId = (created.json() as { draft: { id: string } }).draft.id;
+
+    const approved = await app.inject({
+      method: 'POST',
+      url: `/api/drafts/${draftId}/approve`,
+      headers: { cookie },
+    });
+    expect(approved.statusCode).toBe(200);
+
+    const [after] = await db
+      .select()
+      .from(inpatientAdmissions)
+      .where(
+        and(
+          eq(inpatientAdmissions.patientId, demo004.patientId),
+          eq(inpatientAdmissions.status, 'active'),
+        ),
+      );
+    expect(after?.bedId).toBe(BED_102A);
+
+    await db
+      .update(inpatientAdmissions)
+      .set({ bedId: before!.bedId })
+      .where(eq(inpatientAdmissions.id, after!.id));
+    await db.update(beds).set({ status: 'occupied' }).where(eq(beds.id, before!.bedId));
+    await db.update(beds).set({ status: 'available' }).where(eq(beds.id, BED_102A));
+
+    await app.close();
+  });
 });

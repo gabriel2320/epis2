@@ -27,7 +27,7 @@ async function ensureOpenEncounter(db: Database, patientId: string, actorId: str
   return enc!;
 }
 
-async function getActiveAdmission(db: Database, patientId: string) {
+export async function getActiveAdmission(db: Database, patientId: string) {
   const [row] = await db
     .select()
     .from(inpatientAdmissions)

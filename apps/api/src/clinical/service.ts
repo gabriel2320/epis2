@@ -27,7 +27,7 @@ import {
   problems,
 } from '../db/schema.js';
 import { appendAudit } from '../audit/store.js';
-import { createInpatientAdmission } from '../inpatient/admissions.js';
+import { createInpatientAdmission, getActiveAdmission, transferInpatientAdmission } from '../inpatient/admissions.js';
 
 export type Actor = { id: string; username: string };
 
@@ -473,6 +473,21 @@ export async function approveDraft(db: Database, actor: Actor, draftId: string) 
       doubleCheck,
       createdBy: actor.id,
     });
+  }
+
+  if (draft.draftType === 'transfer_note') {
+    const body = draft.body as Record<string, unknown>;
+    const rawBed = typeof body.targetBedId === 'string' ? body.targetBedId : '';
+    const bedId = rawBed.split('|')[0]?.trim();
+    if (bedId) {
+      const admission = await getActiveAdmission(db, draft.patientId);
+      if (admission) {
+        await transferInpatientAdmission(db, admission.id, bedId, {
+          id: actor.id,
+          username: actor.username,
+        });
+      }
+    }
   }
 
   await appendAudit(db, {

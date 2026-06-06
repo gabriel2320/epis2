@@ -13,3 +13,6 @@ export { admissionNoteBlueprint } from './admission-note.js';
 export { allergyEntryBlueprint } from './allergy-entry.js';
 export { clinicalProblemEntryBlueprint } from './clinical-problem-entry.js';
 export { medicationReconciliationBlueprint } from './medication-reconciliation.js';
+export { transferNoteBlueprint } from './transfer-note.js';
+export { outpatientVisitBlueprint } from './outpatient-visit.js';
+export { referralReportBlueprint } from './referral-report.js';

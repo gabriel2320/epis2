@@ -260,6 +260,61 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       ),
   },
   {
+    intent: 'transfer_patient',
+    labelEs: 'Nota de traslado',
+    aliasesEs: [
+      'traslado de paciente',
+      'nota de traslado',
+      'trasladar paciente',
+      'cambio de cama',
+      'mover de cama',
+    ],
+    routePath: INTENT_ROUTE_PATHS.transfer_patient,
+    requiredPermission: 'command.execute',
+    requiresPatient: true,
+    priority: 66,
+    match: (q) =>
+      /nota\s+de\s+traslado|traslad(o|ar)\s+(de\s+)?paciente|cambio\s+de\s+cama|mover\s+de\s+cama/.test(
+        q,
+      ),
+  },
+  {
+    intent: 'create_outpatient_visit',
+    labelEs: 'Consulta ambulatoria',
+    aliasesEs: [
+      'consulta ambulatoria',
+      'atencion ambulatoria',
+      'control ambulatorio',
+      'visita ambulatoria',
+    ],
+    routePath: INTENT_ROUTE_PATHS.create_outpatient_visit,
+    requiredPermission: 'command.execute',
+    requiresPatient: true,
+    priority: 64,
+    match: (q) =>
+      /consulta\s+ambulatoria|atencion\s+ambulatoria|control\s+ambulatorio|visita\s+ambulatoria/.test(
+        q,
+      ),
+  },
+  {
+    intent: 'respond_referral',
+    labelEs: 'Informe de interconsulta',
+    aliasesEs: [
+      'informe de interconsulta',
+      'respuesta interconsulta',
+      'informe especialista',
+      'contestar interconsulta',
+    ],
+    routePath: INTENT_ROUTE_PATHS.respond_referral,
+    requiredPermission: 'command.execute',
+    requiresPatient: true,
+    priority: 63,
+    match: (q) =>
+      /informe\s+(de\s+)?interconsulta|respuesta\s+interconsulta|contestar\s+interconsulta|informe\s+especialista/.test(
+        q,
+      ),
+  },
+  {
     intent: 'prepare_pharmacy_review',
     labelEs: 'Validación farmacéutica',
     aliasesEs: [

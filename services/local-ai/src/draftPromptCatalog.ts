@@ -89,6 +89,25 @@ export const DRAFT_PROMPT_CATALOG: DraftPromptSpec[] = [
     fieldHints:
       'Usa medicación activa del contexto; no elimines medicamentos sin justificación clínica en el plan.',
   },
+  {
+    blueprintId: 'transfer_note',
+    taskTitle: 'Nota de traslado',
+    taskDetail:
+      'Documenta motivo, resumen clínico y plan de continuidad para traslado de cama con aprobación humana.',
+    fieldHints: 'Selecciona cama destino disponible; no traslades sin revisión del equipo.',
+  },
+  {
+    blueprintId: 'outpatient_visit',
+    taskTitle: 'Consulta ambulatoria',
+    taskDetail: 'Redacta motivo, evaluación y plan de atención ambulatoria.',
+    fieldHints: 'Enfócate en el encuentro ambulatorio actual.',
+  },
+  {
+    blueprintId: 'referral_report',
+    taskTitle: 'Informe de interconsulta',
+    taskDetail: 'Responde formalmente a una solicitud de interconsulta con recomendaciones.',
+    fieldHints: 'No cierres el caso sin plan de seguimiento explícito si aplica.',
+  },
 ];
 
 const catalogById = new Map(DRAFT_PROMPT_CATALOG.map((spec) => [spec.blueprintId, spec]));

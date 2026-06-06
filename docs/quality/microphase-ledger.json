@@ -349,13 +349,13 @@
       "wave": 3,
       "waveName": "Formularios prioritarios",
       "dependsOn": ["MF-166"],
-      "state": "READY",
+      "state": "DONE",
       "evidenceRequired": [
         "blueprint transfer_note",
         "comando+form",
         "reports/epis2-mf-167-transfer-note.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-167-transfer-note.md",
       "unblocks": ["MF-168"]
     },
     {
@@ -364,12 +364,12 @@
       "wave": 3,
       "waveName": "Formularios prioritarios",
       "dependsOn": ["MF-167"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "blueprint outpatient_visit",
         "reports/epis2-mf-168-outpatient.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-168-outpatient.md",
       "unblocks": ["MF-169"]
     },
     {
@@ -378,12 +378,12 @@
       "wave": 3,
       "waveName": "Formularios prioritarios",
       "dependsOn": ["MF-168"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "ampliar referral + informe",
         "reports/epis2-mf-169-referral-report.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-169-referral-report.md",
       "unblocks": ["MF-170"]
     },
     {
@@ -392,13 +392,13 @@
       "wave": 3,
       "waveName": "Formularios prioritarios",
       "dependsOn": ["MF-169"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "cola en ledger o catálogo",
         "un formulario por microfase futura",
         "reports/epis2-mf-170-form-queue.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-170-form-queue.md",
       "unblocks": ["MF-171"]
     },
     {
@@ -407,12 +407,12 @@
       "wave": 4,
       "waveName": "Administración y operación",
       "dependsOn": ["MF-170"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "UI admin usuarios read-only demo",
         "reports/epis2-mf-171-users-roles.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-171-users-roles.md",
       "unblocks": ["MF-172"]
     },
     {
@@ -421,12 +421,12 @@
       "wave": 4,
       "waveName": "Administración y operación",
       "dependsOn": ["MF-171"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "CRUD catálogos staging",
         "reports/epis2-mf-172-clinical-catalogs.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-172-clinical-catalogs.md",
       "unblocks": ["MF-173"]
     },
     {
@@ -435,12 +435,12 @@
       "wave": 4,
       "waveName": "Administración y operación",
       "dependsOn": ["MF-172"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "UI auditoría ampliada",
         "reports/epis2-mf-173-audit-console.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-173-audit-console.md",
       "unblocks": ["MF-174"]
     },
     {
@@ -449,12 +449,12 @@
       "wave": 4,
       "waveName": "Administración y operación",
       "dependsOn": ["MF-173"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "ops status UI",
         "reports/epis2-mf-174-ops-console.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-174-ops-console.md",
       "unblocks": ["MF-175"]
     },
     {
@@ -463,13 +463,13 @@
       "wave": 5,
       "waveName": "Candidato a piloto",
       "dependsOn": ["MF-174"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "AUTH_MODE hybrid/OIDC staging",
         "ADR-006 actualizado",
         "reports/epis2-mf-175-oidc-staging.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-175-oidc-staging.md",
       "unblocks": ["MF-176"]
     },
     {
@@ -478,13 +478,13 @@
       "wave": 5,
       "waveName": "Candidato a piloto",
       "dependsOn": ["MF-175"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "rate limits productivos documentados",
         "tests negativos",
         "reports/epis2-mf-176-rate-limits.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-176-rate-limits.md",
       "unblocks": ["MF-177"]
     },
     {
@@ -493,12 +493,12 @@
       "wave": 5,
       "waveName": "Candidato a piloto",
       "dependsOn": ["MF-176"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "runbook db:backup restore",
         "reports/epis2-mf-177-backup-restore.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-177-backup-restore.md",
       "unblocks": ["MF-178"]
     },
     {
@@ -507,7 +507,7 @@
       "wave": 5,
       "waveName": "Candidato a piloto",
       "dependsOn": ["MF-177"],
-      "state": "BLOCKED",
+      "state": "READY",
       "evidenceRequired": [
         "checklist M3 humano completado",
         "reports/epis2-mf-178-m3-human-signoff.md"

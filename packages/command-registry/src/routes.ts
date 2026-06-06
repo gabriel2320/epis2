@@ -21,6 +21,9 @@ export const INTENT_ROUTE_PATHS: Record<ClinicalIntent, string> = {
   admit_patient_hospital: '/espacio/ingreso',
   open_results_inbox: '/espacio/resultados',
   reconcile_medications: '/espacio/conciliacion',
+  transfer_patient: '/espacio/traslado',
+  create_outpatient_visit: '/espacio/ambulatorio',
+  respond_referral: '/espacio/informe-interconsulta',
 };
 
 export const DASHBOARD_TAB_BY_INTENT: Partial<Record<ClinicalIntent, string>> = {
