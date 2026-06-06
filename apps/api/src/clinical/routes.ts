@@ -5,6 +5,7 @@ import {
   documentSearchResponseSchema,
   patientClinicalAlertsResponseSchema,
   patientLongitudinalResponseSchema,
+  patientResultsInboxResponseSchema,
 } from '@epis2/contracts';
 import { roleHasPermission } from '@epis2/clinical-domain';
 import { z } from 'zod';
@@ -34,6 +35,7 @@ import { processDocumentOcr } from './documentOcr.js';
 import { intakePatientDocument } from './documentIntake.js';
 import { searchPatientDocuments } from './documents.js';
 import { getPatientLongitudinal } from './longitudinal.js';
+import { getPatientResultsInbox } from './resultsInbox.js';
 import { buildPatientSummaryExport } from './summaryExport.js';
 
 const createDraftSchema = z.object({
@@ -260,6 +262,20 @@ export async function registerClinicalRoutes(
       }
       const data = await getPatientLongitudinal(db, patientId);
       return patientLongitudinalResponseSchema.parse(data);
+    },
+  );
+
+  app.get(
+    '/api/patients/:patientId/results-inbox',
+    { preHandler: requirePatientRead },
+    async (request, reply) => {
+      const { patientId } = request.params as { patientId: string };
+      const patient = await getPatientById(db, patientId);
+      if (!patient) {
+        return reply.status(404).send({ error: 'Paciente no encontrado' });
+      }
+      const data = await getPatientResultsInbox(db, patientId);
+      return patientResultsInboxResponseSchema.parse(data);
     },
   );
 

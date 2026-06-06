@@ -13,6 +13,7 @@ import { CommandCenterPage } from '../pages/CommandCenterPage.js';
 import { DraftReviewPage } from '../pages/DraftReviewPage.js';
 import { GeneratedClinicalFormPage } from '../pages/GeneratedClinicalFormPage.js';
 import { PatientWorkspacePage } from '../pages/PatientWorkspacePage.js';
+import { ResultsInboxPage } from '../pages/ResultsInboxPage.js';
 import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
 import { SessionExpiredPage } from '../pages/SessionExpiredPage.js';
@@ -257,6 +258,13 @@ const problemFormRoute = createRoute({
   component: clinicalFormPage('/espacio/problema'),
 });
 
+const resultsInboxRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/resultados',
+  validateSearch: validatePatientSearch,
+  component: ResultsInboxPage,
+});
+
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
@@ -336,6 +344,7 @@ export const routeTree = rootRoute.addChildren([
     admissionFormRoute,
     allergyFormRoute,
     problemFormRoute,
+    resultsInboxRoute,
   ]),
 ]);
 

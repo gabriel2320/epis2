@@ -8,6 +8,7 @@ export const INTEGRATION_SKIP_REASON =
 export const INTEGRATION_TEST_SUITES = [
   'apps/api/src/clinical/clinical.integration.test.ts',
   'apps/api/src/clinical/admission.integration.test.ts',
+  'apps/api/src/clinical/resultsInbox.integration.test.ts',
   'apps/api/src/clinical/search.integration.test.ts',
   'apps/api/src/clinical/v3-mar.integration.test.ts',
   'apps/api/src/dashboard/dashboard.test.ts',

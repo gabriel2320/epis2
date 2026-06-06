@@ -2,6 +2,7 @@ import type {
   DocumentSearchResponse,
   PatientClinicalAlertsResponse,
   PatientLongitudinalResponse,
+  PatientResultsInboxResponse,
 } from '@epis2/contracts';
 import { ApiError, apiFetch } from './client.js';
 
@@ -44,6 +45,10 @@ export function fetchPatientDetail(patientId: string) {
 
 export function fetchPatientLongitudinal(patientId: string) {
   return apiFetch<PatientLongitudinalResponse>(`/api/patients/${patientId}/longitudinal`);
+}
+
+export function fetchPatientResultsInbox(patientId: string) {
+  return apiFetch<PatientResultsInboxResponse>(`/api/patients/${patientId}/results-inbox`);
 }
 
 export function searchPatientDocuments(patientId: string, query: string) {

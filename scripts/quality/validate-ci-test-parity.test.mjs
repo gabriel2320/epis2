@@ -19,7 +19,7 @@ describe('CI test parity (MF-153)', () => {
   });
 
   it('enumera las suites de integración', () => {
-    expect(INTEGRATION_TEST_SUITES).toHaveLength(11);
+    expect(INTEGRATION_TEST_SUITES).toHaveLength(12);
     for (const rel of INTEGRATION_TEST_SUITES) {
       expect(existsSync(join(ROOT, rel))).toBe(true);
     }

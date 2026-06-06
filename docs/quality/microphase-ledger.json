@@ -261,13 +261,13 @@
       "wave": 2,
       "waveName": "Resultados",
       "dependsOn": ["MF-158", "MF-159", "MF-160"],
-      "state": "READY",
+      "state": "DONE",
       "evidenceRequired": [
         "UI lectura resultados",
         "API agregado",
         "reports/epis2-mf-161-results-inbox.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-161-results-inbox.md",
       "unblocks": ["MF-162"]
     },
     {
@@ -276,13 +276,13 @@
       "wave": 2,
       "waveName": "Resultados",
       "dependsOn": ["MF-161"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "acuse UI fuera solo servicio",
         "auditoría",
         "reports/epis2-mf-162-critical-ack.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-162-critical-ack.md",
       "unblocks": ["MF-163"]
     },
     {
@@ -291,7 +291,7 @@
       "wave": 2,
       "waveName": "Resultados",
       "dependsOn": ["MF-162"],
-      "state": "BLOCKED",
+      "state": "READY",
       "evidenceRequired": [
         "enlace orden-resultado en API/UI",
         "reports/epis2-mf-163-order-result-trace.md"

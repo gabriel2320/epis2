@@ -34,13 +34,15 @@ Vitest y `quality:ci-parity` leen `.env` si existe (sin sobrescribir variables d
 
 ---
 
-## Suites de integración (11)
+## Suites de integración (12)
 
 Definidas en `@epis2/test-fixtures` → `INTEGRATION_TEST_SUITES`:
 
 | Archivo | Dominio |
 |---------|---------|
 | `clinical.integration.test.ts` | Borradores / aprobación |
+| `admission.integration.test.ts` | Ingreso hospitalario |
+| `resultsInbox.integration.test.ts` | Bandeja resultados |
 | `search.integration.test.ts` | Búsqueda pacientes |
 | `v3-mar.integration.test.ts` | MAR enfermería |
 | `dashboard.test.ts` | Tableros por rol |

@@ -25,6 +25,7 @@ export type ForbiddenSearch = { detail?: string };
 export type ClinicalNavigateTarget =
   | ClinicalFormRoutePath
   | '/espacio/ficha'
+  | '/espacio/resultados'
   | '/espacio/borrador/$draftId'
   | '/epis2/dashboard'
   | '/comando'

@@ -72,6 +72,12 @@ export {
   type PatientDashboardResponse,
 } from './longitudinal.js';
 export {
+  patientResultsInboxResponseSchema,
+  resultsInboxCriticalSchema,
+  resultsInboxPendingOrderSchema,
+  type PatientResultsInboxResponse,
+} from './results.js';
+export {
   documentIntakeRequestSchema,
   documentIntakeResponseSchema,
   documentSearchResponseSchema,

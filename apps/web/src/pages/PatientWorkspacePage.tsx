@@ -238,6 +238,19 @@ export function PatientWorkspacePage() {
               sx={{ whiteSpace: 'normal', textAlign: 'center', lineHeight: 1.45 }}
               onClick={() =>
                 void navigate({
+                  to: '/espacio/resultados',
+                  search: { patientId },
+                })
+              }
+            >
+              {copy.results.openInbox}
+            </Button>
+            <Button
+              variant="outlined"
+              size="small"
+              sx={{ whiteSpace: 'normal', textAlign: 'center', lineHeight: 1.45 }}
+              onClick={() =>
+                void navigate({
                   to: '/epis2/dashboard',
                   search: { tab: 'patient', patientId },
                 })

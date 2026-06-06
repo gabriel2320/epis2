@@ -59,9 +59,10 @@ comando summarize_patient → patient_summary → /espacio/resumen
 
 ```text
 comando → blueprint orden → borrador → aprobación
-  ✗ bandeja resultados
+  ✓ bandeja lectura → GET /api/patients/:id/results-inbox → /espacio/resultados
   ✗ ejecución CPOE
-  ✗ notificación crítico UI
+  ✓ acuse crítico en bandeja → POST /api/inpatient/critical-results/:id/acknowledge
+  ✗ trazabilidad orden → resultado (MF-163)
 ```
 
 ### Ingreso hospitalario
@@ -120,7 +121,7 @@ POST intake / OCR / search (API)
 
 | Capacidad | Eslabón roto |
 |-----------|--------------|
-| Resultados bandeja | Todo el pipeline UI |
+| Resultados bandeja | Acuse crítico en bandeja (MF-162); tendencias (MF-164) |
 | Conciliación farmacéutica | blueprint + comando + API write |
 | Consulta ambulatoria | blueprint + comando |
 | Admin usuarios/roles | UI + API CRUD |
