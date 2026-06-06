@@ -32,7 +32,7 @@
 | Dashboards / KPI home | cualquier home tipo tablero |
 | Scripts overlay MF | `scripts/epis-mf-*.mjs` específicos OpenMRS |
 | Fixtures REST OpenMRS | `packages/epis-openmrs-adapter/fixtures/` |
-| Gobierno microfases EPIS | `docs/MICROPHASE_LEDGER_CANONICAL.md` como proceso — solo REFERENCE |
+| Gobierno microfases EPIS | `docs/quality/MICROPHASE_LEDGER_CANONICAL.md` — EPIS2 usa `docs/quality/microphase-ledger.json` |
 | node_modules / builds | siempre excluidos |
 
 ---

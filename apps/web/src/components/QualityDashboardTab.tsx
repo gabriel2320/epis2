@@ -46,12 +46,12 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
           {copy.interop.schemaVersion}: {data.ops.schemaVersion ?? '—'}
         </Typography>
         <Typography variant="body2">
-          Pacientes: {data.ops.counts.patients} · Borradores abiertos: {data.metrics.openDrafts} · Notas
-          aprobadas: {data.metrics.approvedNotes}
+          {copy.interop.metricPatients}: {data.ops.counts.patients} · {copy.interop.metricOpenDrafts}:{' '}
+          {data.metrics.openDrafts} · {copy.interop.metricApprovedNotes}: {data.metrics.approvedNotes}
         </Typography>
         <Typography variant="body2">
-          Auditoría 24 h: {data.ops.counts.auditEvents24h} · IA runs: {data.metrics.aiRuns} · Críticos
-          sin acuse: {data.metrics.criticalUnacked}
+          {copy.interop.metricAudit24h}: {data.ops.counts.auditEvents24h} · {copy.interop.metricAiRuns}:{' '}
+          {data.metrics.aiRuns} · {copy.interop.metricCriticalUnacked}: {data.metrics.criticalUnacked}
         </Typography>
       </Paper>
 

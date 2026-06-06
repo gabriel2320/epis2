@@ -1,5 +1,7 @@
 # EPIS2 — Auditoría de proyecto
 
+> **Nota MF-152:** Piloto humano superseded por GO DEMO (`docs/quality/GOLDEN_CLINICAL_JOURNEY.md`). Mantener solo como histórico pre-V5.
+
 **Fecha:** 2026-06-05 (actualizado post-P0) · **Commit:** `0caa0f6` · **Remote:** https://github.com/gabriel2320/epis2 (privado)
 
 ---

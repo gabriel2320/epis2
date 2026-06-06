@@ -32,7 +32,7 @@ export function DocumentSearchPanel({ patientId }: DocumentSearchPanelProps) {
   >(null);
   const [searchMode, setSearchMode] = useState<'semantic' | 'keyword' | null>(null);
   const [loading, setLoading] = useState(false);
-  const [intakeTitle, setIntakeTitle] = useState('Nota clínica demo');
+  const [intakeTitle, setIntakeTitle] = useState<string>(copy.longitudinal.intakeTitleDefault);
   const [intakeText, setIntakeText] = useState('');
   const [intakeType, setIntakeType] = useState<IntakeType>('txt');
   const [intakeMsg, setIntakeMsg] = useState<string | null>(null);
@@ -58,7 +58,7 @@ export function DocumentSearchPanel({ patientId }: DocumentSearchPanelProps) {
     setPendingOcrDocId(null);
     try {
       const res = await intakePatientDocument(patientId, {
-        title: intakeTitle.trim() || 'Documento demo',
+        title: intakeTitle.trim() || copy.longitudinal.intakeDocumentFallback,
         documentType: intakeType,
         ...(intakeType === 'txt'
           ? { textContent: intakeText.trim() || intakeTitle.trim() }
@@ -156,10 +156,10 @@ export function DocumentSearchPanel({ patientId }: DocumentSearchPanelProps) {
         {copy.longitudinal.intakeTitle}
       </Typography>
       <FormControl size="small" fullWidth>
-        <InputLabel id="epis2-intake-type-label">Tipo</InputLabel>
+        <InputLabel id="epis2-intake-type-label">{copy.longitudinal.intakeTypeLabel}</InputLabel>
         <EpisSelect
           labelId="epis2-intake-type-label"
-          label="Tipo"
+          label={copy.longitudinal.intakeTypeLabel}
           value={intakeType}
           onChange={(e) => setIntakeType(e.target.value as IntakeType)}
           data-testid="epis2-intake-type"
@@ -171,7 +171,7 @@ export function DocumentSearchPanel({ patientId }: DocumentSearchPanelProps) {
       <TextField
         size="small"
         fullWidth
-        label="Título"
+        label={copy.longitudinal.intakeTitleLabel}
         value={intakeTitle}
         onChange={(e) => setIntakeTitle(e.target.value)}
       />

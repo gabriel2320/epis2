@@ -210,15 +210,17 @@ flowchart TD
 
 ## 7. Cadenas incompletas priorizadas
 
-| ID | Cadena | Severidad |
-|----|--------|-----------|
-| C1 | Ingreso: comando → sin blueprint → sin formulario | P1 |
-| C2 | Resultados: sin UI ni comando | P1 |
-| C3 | Documentos: API → sin pantalla → sin comando | P2 |
-| C4 | Traslado/alta: API → sin comando/formulario | P2 |
-| C5 | Widgets: registry → sin montaje Comando/ficha | P2 |
-| C6 | Dashboard nursing/pharmacy: router validateSearch | P3 |
-| C7 | Rutas canónicas `/trabajo` `/pacientes` vs `/espacio` | P3 (DEFERRED) |
+> **Actualización MF-152 (2026-06-05):** C3, C5 y C6 **resueltos** en demo V0–V5. C4 **parcial** (alta operativa en `ServiceDashboardTab` + API; traslado/formulario blueprint pendiente).
+
+| ID | Cadena | Severidad | Estado |
+|----|--------|-----------|--------|
+| C1 | Ingreso: comando → sin blueprint → sin formulario | P1 | ABIERTO |
+| C2 | Resultados: sin UI ni comando | P1 | ABIERTO |
+| C3 | Documentos: API → pantalla → comando | P2 | **RESUELTO** — `DocumentSearchPanel`, LAYOUT-05, comandos docs |
+| C4 | Traslado/alta: API → comando/formulario | P2 | **PARCIAL** — alta en `ServiceDashboardTab`; traslado sin blueprint |
+| C5 | Widgets: registry → montaje Comando/ficha | P2 | **RESUELTO** — WIDGET-01 (`reports/epis2-widget-01-mount.md`) |
+| C6 | Dashboard nursing/pharmacy: router validateSearch | P3 | **RESUELTO** — `router.tsx` `validateSearch` nursing/pharmacy |
+| C7 | Rutas canónicas `/trabajo` `/pacientes` vs `/espacio` | P3 (DEFERRED) | DEFERRED |
 
 ---
 

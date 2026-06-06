@@ -1,17 +1,19 @@
 # EPIS2 — Plantilla de microfase
 
-Copiar esta plantilla a `reports/epis2-NN-<nombre>.md` al cerrar cada fase.
+Copiar esta plantilla a `reports/epis2-mf-XXX-<nombre>.md` al cerrar cada microfase del programa post-MVP.
+
+Ledger: `docs/quality/microphase-ledger.json` · Comando: `npm run quality:microphase-next`
 
 ---
 
 ## Metadatos
 
 ```yaml
-id: EPIS2-NN
+id: MF-XXX
 title: <título corto>
-status: in_progress | completed | blocked
-depends_on: EPIS2-<N-1>
-blocks: EPIS2-<N+1>
+state: DONE | BLOCKED | READY | IN_PROGRESS
+depends_on: [MF-YYY]
+ledger: docs/quality/microphase-ledger.json
 ```
 
 ---

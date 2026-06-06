@@ -16,6 +16,8 @@
     "test": "npm run build -w @epis2/contracts && npm run build -w @epis2/clinical-domain && npm run build -w @epis2/design-system && npm run build -w @epis2/command-registry && npm run build -w @epis2/clinical-forms && npm run build -w @epis2/epis2-widgets && npm run build -w @epis2/epis2-ui && npm run build -w @epis2/test-fixtures && npm run build -w @epis2/fhir-export && vitest run",
     "architecture:validate": "node scripts/architecture/validate-all.mjs",
     "qa:bundle-analyze": "node scripts/qa/bundle-analyze.mjs",
+    "quality:microphases": "node scripts/quality/validate-microphase-ledger.mjs",
+    "quality:microphase-next": "node scripts/quality/microphase-next.mjs",
     "quality:golden-journey": "npm run build -w @epis2/command-registry && npm run build -w @epis2/clinical-forms && npm run build -w @epis2/test-fixtures && vitest run tests/golden-clinical-journey.spec.ts tests/golden-clinical-journey.api.spec.ts",
     "check": "npm run lint && npm run typecheck && npm run architecture:validate",
     "db:validate": "node scripts/db-validate.mjs",

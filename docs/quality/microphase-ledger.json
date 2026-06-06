@@ -1,0 +1,485 @@
+{
+  "version": "1.0.0",
+  "program": "EPIS2 post-MVP microfases",
+  "auditBaseline": "reports/epis2-comprehensive-audit-2026-06-05.md",
+  "mvpBaseline": "V0-V5 demo cerrado; arquitectura sana",
+  "states": ["BLOCKED", "READY", "IN_PROGRESS", "DONE"],
+  "rules": {
+    "oneReadyAtMost": true,
+    "oneInProgressAtMost": true,
+    "stopAfterEachMicrophase": true,
+    "noCommitUnlessExplicit": true
+  },
+  "microphases": [
+    {
+      "id": "MF-151",
+      "name": "Gobernanza del programa de microfases",
+      "wave": 0,
+      "waveName": "Verdad operativa y gates",
+      "dependsOn": [],
+      "state": "DONE",
+      "evidenceRequired": [
+        "docs/quality/microphase-ledger.json",
+        "npm run quality:microphases",
+        "reports/epis2-mf-151-governance.md"
+      ],
+      "closureReport": "reports/epis2-mf-151-governance.md",
+      "unblocks": ["MF-152"]
+    },
+    {
+      "id": "MF-152",
+      "name": "Corrección copy español y deriva documental",
+      "wave": 0,
+      "waveName": "Verdad operativa y gates",
+      "dependsOn": ["MF-151"],
+      "state": "DONE",
+      "evidenceRequired": [
+        "copy en copy/es.ts sin hardcode clínico",
+        "SCREEN_CONNECTION_MAP actualizado",
+        "reports/epis2-mf-152-copy-doc-sync.md"
+      ],
+      "closureReport": "reports/epis2-mf-152-copy-doc-sync.md",
+      "unblocks": ["MF-153"]
+    },
+    {
+      "id": "MF-153",
+      "name": "Paridad local con CI y PostgreSQL",
+      "wave": 0,
+      "waveName": "Verdad operativa y gates",
+      "dependsOn": ["MF-152"],
+      "state": "READY",
+      "evidenceRequired": [
+        "DATABASE_URL documentado para tests integración",
+        "0 skips silenciosos en CI con Postgres",
+        "reports/epis2-mf-153-ci-parity.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-154"]
+    },
+    {
+      "id": "MF-154",
+      "name": "Playwright E2E crítico obligatorio en CI",
+      "wave": 0,
+      "waveName": "Verdad operativa y gates",
+      "dependsOn": ["MF-153"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "playwright en .github/workflows/ci.yml",
+        "journey E2E comando→evolución mínimo",
+        "reports/epis2-mf-154-playwright-ci.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-155"]
+    },
+    {
+      "id": "MF-155",
+      "name": "RLS staging fail-closed",
+      "wave": 0,
+      "waveName": "Verdad operativa y gates",
+      "dependsOn": ["MF-154"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "RLS_MODE=enforce en staging",
+        "tests negativos cross-tenant",
+        "ADR o runbook staging",
+        "reports/epis2-mf-155-rls-staging.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-156"]
+    },
+    {
+      "id": "MF-156",
+      "name": "Contrato y scaffolder de blueprints",
+      "wave": 1,
+      "waveName": "Ingreso y datos longitudinales",
+      "dependsOn": ["MF-155"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "contrato blueprint documentado",
+        "scaffolder o plantilla en clinical-forms",
+        "tests registry",
+        "reports/epis2-mf-156-blueprint-scaffold.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-157", "MF-159", "MF-160"]
+    },
+    {
+      "id": "MF-157",
+      "name": "Blueprint admission_note",
+      "wave": 1,
+      "waveName": "Ingreso y datos longitudinales",
+      "dependsOn": ["MF-156"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "blueprint admission_note en registry",
+        "ruta /espacio/*",
+        "tests formulario",
+        "reports/epis2-mf-157-admission-blueprint.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-158"]
+    },
+    {
+      "id": "MF-158",
+      "name": "Cadena vertical ingreso hospitalario",
+      "wave": 1,
+      "waveName": "Ingreso y datos longitudinales",
+      "dependsOn": ["MF-157"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "comando→form→borrador→API admit",
+        "golden journey ampliado",
+        "reports/epis2-mf-158-admission-chain.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-161"]
+    },
+    {
+      "id": "MF-159",
+      "name": "CRUD alergias",
+      "wave": 1,
+      "waveName": "Ingreso y datos longitudinales",
+      "dependsOn": ["MF-156"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "formulario alergia",
+        "borrador→aprobación→SoT",
+        "reports/epis2-mf-159-allergies-crud.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-161"]
+    },
+    {
+      "id": "MF-160",
+      "name": "CRUD problemas clínicos",
+      "wave": 1,
+      "waveName": "Ingreso y datos longitudinales",
+      "dependsOn": ["MF-156"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "formulario problema activo",
+        "borrador→aprobación→SoT",
+        "reports/epis2-mf-160-problems-crud.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-161"]
+    },
+    {
+      "id": "MF-161",
+      "name": "Bandeja mínima de resultados",
+      "wave": 2,
+      "waveName": "Resultados",
+      "dependsOn": ["MF-158", "MF-159", "MF-160"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "UI lectura resultados",
+        "API agregado",
+        "reports/epis2-mf-161-results-inbox.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-162"]
+    },
+    {
+      "id": "MF-162",
+      "name": "Resultados críticos y acuse",
+      "wave": 2,
+      "waveName": "Resultados",
+      "dependsOn": ["MF-161"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "acuse UI fuera solo servicio",
+        "auditoría",
+        "reports/epis2-mf-162-critical-ack.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-163"]
+    },
+    {
+      "id": "MF-163",
+      "name": "Trazabilidad orden → resultado",
+      "wave": 2,
+      "waveName": "Resultados",
+      "dependsOn": ["MF-162"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "enlace orden-resultado en API/UI",
+        "reports/epis2-mf-163-order-result-trace.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-164"]
+    },
+    {
+      "id": "MF-164",
+      "name": "Tendencias clínicas",
+      "wave": 2,
+      "waveName": "Resultados",
+      "dependsOn": ["MF-163"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "EpisTrendChart en contexto resultados",
+        "reports/epis2-mf-164-trends.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-165"]
+    },
+    {
+      "id": "MF-165",
+      "name": "Comandos de resultados",
+      "wave": 2,
+      "waveName": "Resultados",
+      "dependsOn": ["MF-164"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "intents command-registry",
+        "tests router",
+        "reports/epis2-mf-165-results-commands.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-166"]
+    },
+    {
+      "id": "MF-166",
+      "name": "Conciliación medicamentos",
+      "wave": 3,
+      "waveName": "Formularios prioritarios",
+      "dependsOn": ["MF-165"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "blueprint conciliación",
+        "formulario farmacia",
+        "reports/epis2-mf-166-reconciliation.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-167"]
+    },
+    {
+      "id": "MF-167",
+      "name": "Nota de traslado",
+      "wave": 3,
+      "waveName": "Formularios prioritarios",
+      "dependsOn": ["MF-166"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "blueprint transfer_note",
+        "comando+form",
+        "reports/epis2-mf-167-transfer-note.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-168"]
+    },
+    {
+      "id": "MF-168",
+      "name": "Consulta ambulatoria",
+      "wave": 3,
+      "waveName": "Formularios prioritarios",
+      "dependsOn": ["MF-167"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "blueprint outpatient_visit",
+        "reports/epis2-mf-168-outpatient.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-169"]
+    },
+    {
+      "id": "MF-169",
+      "name": "Solicitud e informe interconsulta",
+      "wave": 3,
+      "waveName": "Formularios prioritarios",
+      "dependsOn": ["MF-168"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "ampliar referral + informe",
+        "reports/epis2-mf-169-referral-report.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-170"]
+    },
+    {
+      "id": "MF-170",
+      "name": "Cola priorizada formularios restantes",
+      "wave": 3,
+      "waveName": "Formularios prioritarios",
+      "dependsOn": ["MF-169"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "cola en ledger o catálogo",
+        "un formulario por microfase futura",
+        "reports/epis2-mf-170-form-queue.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-171"]
+    },
+    {
+      "id": "MF-171",
+      "name": "Usuarios y roles",
+      "wave": 4,
+      "waveName": "Administración y operación",
+      "dependsOn": ["MF-170"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "UI admin usuarios read-only demo",
+        "reports/epis2-mf-171-users-roles.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-172"]
+    },
+    {
+      "id": "MF-172",
+      "name": "Catálogos clínicos",
+      "wave": 4,
+      "waveName": "Administración y operación",
+      "dependsOn": ["MF-171"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "CRUD catálogos staging",
+        "reports/epis2-mf-172-clinical-catalogs.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-173"]
+    },
+    {
+      "id": "MF-173",
+      "name": "Consola de auditoría",
+      "wave": 4,
+      "waveName": "Administración y operación",
+      "dependsOn": ["MF-172"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "UI auditoría ampliada",
+        "reports/epis2-mf-173-audit-console.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-174"]
+    },
+    {
+      "id": "MF-174",
+      "name": "Consola operacional",
+      "wave": 4,
+      "waveName": "Administración y operación",
+      "dependsOn": ["MF-173"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "ops status UI",
+        "reports/epis2-mf-174-ops-console.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-175"]
+    },
+    {
+      "id": "MF-175",
+      "name": "OIDC en staging",
+      "wave": 5,
+      "waveName": "Candidato a piloto",
+      "dependsOn": ["MF-174"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "AUTH_MODE hybrid/OIDC staging",
+        "ADR-006 actualizado",
+        "reports/epis2-mf-175-oidc-staging.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-176"]
+    },
+    {
+      "id": "MF-176",
+      "name": "Rate limits y controles de abuso",
+      "wave": 5,
+      "waveName": "Candidato a piloto",
+      "dependsOn": ["MF-175"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "rate limits productivos documentados",
+        "tests negativos",
+        "reports/epis2-mf-176-rate-limits.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-177"]
+    },
+    {
+      "id": "MF-177",
+      "name": "Backup y restauración",
+      "wave": 5,
+      "waveName": "Candidato a piloto",
+      "dependsOn": ["MF-176"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "runbook db:backup restore",
+        "reports/epis2-mf-177-backup-restore.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-178"]
+    },
+    {
+      "id": "MF-178",
+      "name": "Signoff humano M3, modo oscuro y offline",
+      "wave": 5,
+      "waveName": "Candidato a piloto",
+      "dependsOn": ["MF-177"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "checklist M3 humano completado",
+        "reports/epis2-mf-178-m3-human-signoff.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-179"]
+    },
+    {
+      "id": "MF-179",
+      "name": "Ensayo formal de piloto",
+      "wave": 5,
+      "waveName": "Candidato a piloto",
+      "dependsOn": ["MF-178"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "PILOT_DEMO_CHECKLIST ejecutado",
+        "reports/epis2-mf-179-pilot-trial.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-180"]
+    },
+    {
+      "id": "MF-180",
+      "name": "HL7 inbound en cuarentena sin writeback",
+      "wave": 6,
+      "waveName": "Post-piloto",
+      "dependsOn": ["MF-179"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "staging HL7 sin SoT write",
+        "reports/epis2-mf-180-hl7-quarantine.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-181"]
+    },
+    {
+      "id": "MF-181",
+      "name": "Mapeo y reconciliación HL7",
+      "wave": 6,
+      "waveName": "Post-piloto",
+      "dependsOn": ["MF-180"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "mapeo documentado",
+        "reports/epis2-mf-181-hl7-mapping.md"
+      ],
+      "closureReport": null,
+      "unblocks": ["MF-182"]
+    },
+    {
+      "id": "MF-182",
+      "name": "Writeback HL7 controlado auditado reversible",
+      "wave": 6,
+      "waveName": "Post-piloto",
+      "dependsOn": ["MF-181"],
+      "state": "BLOCKED",
+      "evidenceRequired": [
+        "writeback con borrador humano",
+        "auditoría reversible",
+        "reports/epis2-mf-182-hl7-writeback.md"
+      ],
+      "closureReport": null,
+      "unblocks": []
+    }
+  ]
+}

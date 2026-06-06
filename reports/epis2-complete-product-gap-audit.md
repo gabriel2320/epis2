@@ -1,5 +1,7 @@
 # EPIS2 — Auditoría de brechas catálogo producto completo
 
+> **Nota MF-152:** WIDGET-01 y documentos UI ya implementados (V0–V5). Ver `docs/product/EPIS2_SCREEN_CONNECTION_MAP.md` §7 y `reports/epis2-comprehensive-audit-2026-06-05.md`.
+
 **Fecha:** 2026-06-05  
 **Alcance:** Auditoría frente al catálogo command-first (pantallas A–Q); **sin implementación masiva**.  
 **Commit de referencia:** `origin/master` post Planes A–G  

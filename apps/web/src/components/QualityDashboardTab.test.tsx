@@ -85,8 +85,16 @@ describe('QualityDashboardTab', () => {
 
     expect(screen.getByTestId('epis2-dashboard-quality')).toBeInTheDocument();
     expect(screen.getByText(copy.dashboard.tabQuality)).toBeInTheDocument();
-    expect(screen.getByText(/Pacientes: 5/)).toBeInTheDocument();
-    expect(screen.getByText(/IA runs: 2/)).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        new RegExp(`${copy.interop.metricPatients}: 5`),
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        new RegExp(`${copy.interop.metricAiRuns}: 2`),
+      ),
+    ).toBeInTheDocument();
     expect(screen.getByTestId('epis2-quality-grids-mock')).toBeInTheDocument();
   });
 
