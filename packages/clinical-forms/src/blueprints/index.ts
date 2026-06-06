@@ -9,3 +9,6 @@ export { imagingRequestBlueprint } from './imaging-request.js';
 export { nursingNoteBlueprint } from './nursing-note.js';
 export { medicationAdministrationBlueprint } from './medication-administration.js';
 export { pharmacyValidationBlueprint } from './pharmacy-validation.js';
+export { admissionNoteBlueprint } from './admission-note.js';
+export { allergyEntryBlueprint } from './allergy-entry.js';
+export { clinicalProblemEntryBlueprint } from './clinical-problem-entry.js';

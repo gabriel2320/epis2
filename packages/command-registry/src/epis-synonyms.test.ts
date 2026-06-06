@@ -25,7 +25,7 @@ describe('EPIS P8 synonym map', () => {
     expect(EPIS_DEFERRED_OR_REJECTED_INTENTS.length).toBeGreaterThan(0);
   });
 
-  it('ingreso hospitalario resuelve a tablero servicio', () => {
+  it('ingreso hospitalario resuelve a formulario de ingreso', () => {
     const result = resolveCommand({
       text: 'ingreso hospitalario',
       role: 'physician',
@@ -34,7 +34,7 @@ describe('EPIS P8 synonym map', () => {
     expect(result.status).toBe('resolved');
     if (result.status === 'resolved') {
       expect(result.intent).toBe('admit_patient_hospital');
-      expect(result.routePath).toBe('/epis2/dashboard');
+      expect(result.routePath).toBe('/espacio/ingreso');
     }
   });
 

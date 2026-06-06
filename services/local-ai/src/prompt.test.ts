@@ -19,6 +19,9 @@ describe('EPIS prompt policy (local-ai)', () => {
       'lab_request',
       'nursing_note',
       'medication_administration',
+      'admission_note',
+      'allergy_entry',
+      'clinical_problem_entry',
       'pharmacy_validation',
     ]);
   });

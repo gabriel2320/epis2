@@ -130,6 +130,9 @@ export const BLUEPRINT_BY_ROUTE: Record<string, string> = {
   '/espacio/enfermeria': 'nursing_note',
   '/espacio/mar': 'medication_administration',
   '/espacio/farmacia': 'pharmacy_validation',
+  '/espacio/ingreso': 'admission_note',
+  '/espacio/alergia': 'allergy_entry',
+  '/espacio/problema': 'clinical_problem_entry',
 };
 
 export const DRAFT_TYPE_TO_BLUEPRINT: Record<string, string> = {
@@ -142,6 +145,9 @@ export const DRAFT_TYPE_TO_BLUEPRINT: Record<string, string> = {
   nursing_note: 'nursing_note',
   medication_administration: 'medication_administration',
   pharmacy_validation: 'pharmacy_validation',
+  admission_note: 'admission_note',
+  allergy_entry: 'allergy_entry',
+  clinical_problem_entry: 'clinical_problem_entry',
 };
 
 const SUMMARY_CONTEXT_KEYS = [

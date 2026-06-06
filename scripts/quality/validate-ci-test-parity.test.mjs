@@ -18,8 +18,8 @@ describe('CI test parity (MF-153)', () => {
     expect(doc).toContain('quality:ci-parity');
   });
 
-  it('enumera las 10 suites de integración', () => {
-    expect(INTEGRATION_TEST_SUITES).toHaveLength(10);
+  it('enumera las suites de integración', () => {
+    expect(INTEGRATION_TEST_SUITES).toHaveLength(11);
     for (const rel of INTEGRATION_TEST_SUITES) {
       expect(existsSync(join(ROOT, rel))).toBe(true);
     }

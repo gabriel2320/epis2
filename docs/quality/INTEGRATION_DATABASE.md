@@ -34,7 +34,7 @@ Vitest y `quality:ci-parity` leen `.env` si existe (sin sobrescribir variables d
 
 ---
 
-## Suites de integración (10)
+## Suites de integración (11)
 
 Definidas en `@epis2/test-fixtures` → `INTEGRATION_TEST_SUITES`:
 

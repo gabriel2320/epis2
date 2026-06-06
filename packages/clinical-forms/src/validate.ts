@@ -51,4 +51,7 @@ export const BLUEPRINT_DRAFT_TYPES: Record<string, string> = {
   nursing_note: 'nursing_note',
   medication_administration: 'medication_administration',
   pharmacy_validation: 'pharmacy_validation',
+  admission_note: 'admission_note',
+  allergy_entry: 'allergy_entry',
+  clinical_problem_entry: 'clinical_problem_entry',
 };

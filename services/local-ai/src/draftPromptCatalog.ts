@@ -55,6 +55,25 @@ export const DRAFT_PROMPT_CATALOG: DraftPromptSpec[] = [
     fieldHints: 'Marca doubleCheckConfirmed solo si el contexto indica medicamento de alto riesgo.',
   },
   {
+    blueprintId: 'admission_note',
+    taskTitle: 'Nota de ingreso hospitalario',
+    taskDetail:
+      'Redacta motivo de ingreso, resumen clínico y plan inicial para hospitalización demo.',
+    fieldHints: 'No indiques cama ocupada; usa 102A si está disponible en contexto.',
+  },
+  {
+    blueprintId: 'allergy_entry',
+    taskTitle: 'Registro de alergia',
+    taskDetail: 'Propón sustancia, severidad y notas de reacción según contexto del paciente.',
+    fieldHints: 'No inventes alergias sin evidencia en contexto longitudinal.',
+  },
+  {
+    blueprintId: 'clinical_problem_entry',
+    taskTitle: 'Problema clínico activo',
+    taskDetail: 'Describe problema activo en lenguaje clínico breve.',
+    fieldHints: 'Estado active salvo resolución explícita en contexto.',
+  },
+  {
     blueprintId: 'pharmacy_validation',
     taskTitle: 'Validación farmacéutica',
     taskDetail:

@@ -30,6 +30,21 @@ export async function resetInpatientDemoCensus(databaseUrl: string): Promise<voi
       UPDATE beds SET status = 'occupied' WHERE id IN (${BED_101A}, ${BED_101B})
     `;
     await sql`UPDATE beds SET status = 'available' WHERE id = ${BED_102A}`;
+    // Limpia ingresos de tests (p. ej. DEMO-003 en cadena ingreso MF-158)
+    await sql`
+      UPDATE inpatient_admissions
+      SET status = 'discharged'
+      WHERE status = 'active'
+        AND id NOT IN (${ADM_DEMO004}, ${ADM_DEMO005})
+    `;
+    await sql`
+      UPDATE beds SET status = 'available'
+      WHERE id = ${BED_102A}
+        AND NOT EXISTS (
+          SELECT 1 FROM inpatient_admissions
+          WHERE bed_id = ${BED_102A} AND status = 'active'
+        )
+    `;
   } finally {
     await sql.end({ timeout: 5 });
   }

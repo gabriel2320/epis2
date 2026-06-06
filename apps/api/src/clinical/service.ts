@@ -27,6 +27,7 @@ import {
   problems,
 } from '../db/schema.js';
 import { appendAudit } from '../audit/store.js';
+import { createInpatientAdmission } from '../inpatient/admissions.js';
 
 export type Actor = { id: string; username: string };
 
@@ -411,6 +412,50 @@ export async function approveDraft(db: Database, actor: Actor, draftId: string) 
     .set({ status: 'approved', updatedAt: now, updatedBy: actor.id })
     .where(eq(clinicalDrafts.id, draftId))
     .returning();
+
+  if (draft.draftType === 'admission_note') {
+    const body = draft.body as Record<string, unknown>;
+    const rawBed = typeof body.targetBedId === 'string' ? body.targetBedId : '';
+    const bedId = rawBed.split('|')[0]?.trim();
+    if (bedId) {
+      await createInpatientAdmission(db, {
+        patientId: draft.patientId,
+        bedId,
+        actorId: actor.id,
+        username: actor.username,
+      });
+    }
+  }
+
+  if (draft.draftType === 'allergy_entry') {
+    const body = draft.body as Record<string, unknown>;
+    const substance = typeof body.substance === 'string' ? body.substance.trim() : '';
+    const severity = typeof body.severity === 'string' ? body.severity : 'moderate';
+    if (substance) {
+      await db.insert(patientAllergies).values({
+        patientId: draft.patientId,
+        substance,
+        severity,
+        createdBy: actor.id,
+      });
+    }
+  }
+
+  if (draft.draftType === 'clinical_problem_entry') {
+    const body = draft.body as Record<string, unknown>;
+    const description =
+      typeof body.description === 'string' ? body.description.trim() : draft.title;
+    const status = typeof body.status === 'string' ? body.status : 'active';
+    if (description) {
+      await db.insert(problems).values({
+        patientId: draft.patientId,
+        encounterId: draft.encounterId,
+        description,
+        status,
+        createdBy: actor.id,
+      });
+    }
+  }
 
   if (draft.draftType === 'medication_administration') {
     const body = draft.body as Record<string, unknown>;

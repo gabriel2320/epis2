@@ -200,14 +200,14 @@
       "wave": 1,
       "waveName": "Ingreso y datos longitudinales",
       "dependsOn": ["MF-188"],
-      "state": "READY",
+      "state": "DONE",
       "evidenceRequired": [
         "blueprint admission_note en registry",
         "ruta /espacio/*",
         "tests formulario",
         "reports/epis2-mf-157-admission-blueprint.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-157-admission-blueprint.md",
       "unblocks": ["MF-158"]
     },
     {
@@ -216,13 +216,13 @@
       "wave": 1,
       "waveName": "Ingreso y datos longitudinales",
       "dependsOn": ["MF-157"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "comando→form→borrador→API admit",
         "golden journey ampliado",
         "reports/epis2-mf-158-admission-chain.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-158-admission-chain.md",
       "unblocks": ["MF-161"]
     },
     {
@@ -231,13 +231,13 @@
       "wave": 1,
       "waveName": "Ingreso y datos longitudinales",
       "dependsOn": ["MF-158"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "formulario alergia",
         "borrador→aprobación→SoT",
         "reports/epis2-mf-159-allergies-crud.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-159-allergies-crud.md",
       "unblocks": ["MF-161"]
     },
     {
@@ -246,13 +246,13 @@
       "wave": 1,
       "waveName": "Ingreso y datos longitudinales",
       "dependsOn": ["MF-159"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "formulario problema activo",
         "borrador→aprobación→SoT",
         "reports/epis2-mf-160-problems-crud.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-160-problems-crud.md",
       "unblocks": ["MF-161"]
     },
     {
@@ -261,7 +261,7 @@
       "wave": 2,
       "waveName": "Resultados",
       "dependsOn": ["MF-158", "MF-159", "MF-160"],
-      "state": "BLOCKED",
+      "state": "READY",
       "evidenceRequired": [
         "UI lectura resultados",
         "API agregado",

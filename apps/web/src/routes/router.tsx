@@ -236,6 +236,27 @@ const pharmacyFormRoute = createRoute({
   component: clinicalFormPage('/espacio/farmacia'),
 });
 
+const admissionFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/ingreso',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/ingreso'),
+});
+
+const allergyFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/alergia',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/alergia'),
+});
+
+const problemFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/problema',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/problema'),
+});
+
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
@@ -312,6 +333,9 @@ export const routeTree = rootRoute.addChildren([
     nursingFormRoute,
     marFormRoute,
     pharmacyFormRoute,
+    admissionFormRoute,
+    allergyFormRoute,
+    problemFormRoute,
   ]),
 ]);
 

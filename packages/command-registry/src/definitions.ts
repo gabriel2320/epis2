@@ -297,7 +297,7 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       'ingreso a hospitalizacion',
     ],
     routePath: INTENT_ROUTE_PATHS.admit_patient_hospital,
-    requiredPermission: 'dashboard.read',
+    requiredPermission: 'draft.write',
     requiresPatient: true,
     priority: 77,
     match: (q) =>
