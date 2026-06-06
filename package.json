@@ -19,6 +19,10 @@
     "quality:microphases": "node scripts/quality/validate-microphase-ledger.mjs",
     "quality:microphase-next": "node scripts/quality/microphase-next.mjs",
     "quality:ci-parity": "node scripts/quality/validate-ci-test-parity.mjs",
+    "quality:local-ci": "node scripts/quality/run-local-ci.mjs",
+    "stack:up": "node scripts/stack-up.mjs",
+    "test:e2e": "playwright test",
+    "test:e2e:install": "playwright install chromium",
     "quality:golden-journey": "npm run build -w @epis2/command-registry && npm run build -w @epis2/clinical-forms && npm run build -w @epis2/test-fixtures && vitest run tests/golden-clinical-journey.spec.ts tests/golden-clinical-journey.api.spec.ts",
     "check": "npm run lint && npm run typecheck && npm run architecture:validate",
     "db:validate": "node scripts/db-validate.mjs",
@@ -45,6 +49,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.28.0",
+    "@playwright/test": "^1.60.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@types/node": "^22.15.21",

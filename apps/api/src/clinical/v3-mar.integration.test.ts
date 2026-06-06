@@ -1,5 +1,5 @@
 import { eq } from 'drizzle-orm';
-import { describeIntegration } from '@epis2/test-fixtures';
+import { describeIntegration } from '@epis2/test-fixtures/integration';
 import { expect, it } from 'vitest';
 import { buildApp } from '../app.js';
 import { getDatabase } from '../db/client.js';

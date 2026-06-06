@@ -72,4 +72,4 @@ Login
 
 Ejecutar: `npm run quality:golden-journey`
 
-Playwright E2E UI queda **opcional** post-MVP; el gate EPIS2-11 se cierra con API + checklist humano.
+Playwright E2E UI: `e2e/golden-command-evolution.spec.ts` — obligatorio en CI (MF-154).

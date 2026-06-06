@@ -1,4 +1,9 @@
-node_modules/
+node_modules
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+reports/.vitest-ci-parity-temp.json/
 dist/
 build/
 coverage/

@@ -1,5 +1,3 @@
-import { describe as vitestDescribe } from 'vitest';
-
 /** Ruta canónica — documentar aquí cualquier cambio de contrato DATABASE_URL. */
 export const INTEGRATION_DATABASE_DOC = 'docs/quality/INTEGRATION_DATABASE.md';
 
@@ -22,16 +20,4 @@ export const INTEGRATION_TEST_SUITES = [
 
 export function hasIntegrationDatabase(): boolean {
   return Boolean(process.env.DATABASE_URL?.trim());
-}
-
-/**
- * describe() con skip explícito (no silencioso) cuando falta DATABASE_URL.
- * Con DATABASE_URL definida, la suite debe ejecutarse — CI falla si queda skipped.
- */
-export function describeIntegration(title: string, factory: () => void): void {
-  if (hasIntegrationDatabase()) {
-    vitestDescribe(title, factory);
-    return;
-  }
-  vitestDescribe.skip(`${title} [${INTEGRATION_SKIP_REASON}]`, factory);
 }

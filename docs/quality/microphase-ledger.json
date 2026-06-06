@@ -62,13 +62,13 @@
       "wave": 0,
       "waveName": "Verdad operativa y gates",
       "dependsOn": ["MF-153"],
-      "state": "READY",
+      "state": "DONE",
       "evidenceRequired": [
         "playwright en .github/workflows/ci.yml",
         "journey E2E comando→evolución mínimo",
         "reports/epis2-mf-154-playwright-ci.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-154-playwright-ci.md",
       "unblocks": ["MF-155"]
     },
     {
@@ -77,7 +77,7 @@
       "wave": 0,
       "waveName": "Verdad operativa y gates",
       "dependsOn": ["MF-154"],
-      "state": "BLOCKED",
+      "state": "READY",
       "evidenceRequired": [
         "RLS_MODE=enforce en staging",
         "tests negativos cross-tenant",

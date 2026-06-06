@@ -65,8 +65,11 @@ npm run db:validate
 npm run quality:golden-journey   # journey spec + API (requiere DATABASE_URL)
 npm run qa:bundle-analyze        # presupuestos MUI X (opcional)
 npm run db:migrate   # requiere DATABASE_URL + Postgres
-docker compose up -d   # PostgreSQL (host **5433**); Ollama opcional si usas la app nativa
-npm run ai:enable      # Ollama nativo (Windows/macOS) o Docker; pull del modelo en .env
+npm run stack:up       # Postgres + Ollama (Docker) + migrate + ai:enable
+docker compose up -d   # solo infra si prefieres manual
+npm run ai:enable      # Ollama nativo o Docker; pull del modelo en .env
+npm run quality:local-ci   # replica gates CI local (Postgres + migrate)
+npm run test:e2e:install && npm run test:e2e   # journey UI Playwright
 npm run dev:ai         # puerto 3002 (dejar en terminal aparte)
 npm run dev:api        # puerto 3001
 npm run dev:web        # puerto 5173

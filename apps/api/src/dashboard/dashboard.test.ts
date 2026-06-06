@@ -1,4 +1,4 @@
-import { describeIntegration } from '@epis2/test-fixtures';
+import { describeIntegration } from '@epis2/test-fixtures/integration';
 import { describe, expect, it } from 'vitest';
 import { resolveCommand } from '@epis2/command-registry';
 import { buildApp } from '../app.js';

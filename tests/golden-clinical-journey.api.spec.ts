@@ -3,7 +3,8 @@
  * Requiere Postgres: DATABASE_URL + npm run db:migrate
  */
 import { and, desc, eq } from 'drizzle-orm';
-import { DEMO_CLINICAL_CASES, describeIntegration } from '@epis2/test-fixtures';
+import { DEMO_CLINICAL_CASES } from '@epis2/test-fixtures';
+import { describeIntegration } from '@epis2/test-fixtures/integration';
 import { expect, it } from 'vitest';
 import { buildApp } from '../apps/api/src/app.js';
 import { getDatabase } from '../apps/api/src/db/client.js';

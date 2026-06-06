@@ -2,7 +2,6 @@ export {
   INTEGRATION_DATABASE_DOC,
   INTEGRATION_SKIP_REASON,
   INTEGRATION_TEST_SUITES,
-  describeIntegration,
   hasIntegrationDatabase,
 } from './integrationDatabase.js';
 export {

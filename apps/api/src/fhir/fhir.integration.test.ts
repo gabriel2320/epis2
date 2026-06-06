@@ -1,4 +1,4 @@
-import { describeIntegration } from '@epis2/test-fixtures';
+import { describeIntegration } from '@epis2/test-fixtures/integration';
 import { expect, it } from 'vitest';
 import { assertExportClean } from '@epis2/fhir-export';
 import { buildApp } from '../app.js';

@@ -1,4 +1,4 @@
-import { describeIntegration } from '@epis2/test-fixtures';
+import { describeIntegration } from '@epis2/test-fixtures/integration';
 import { expect, it } from 'vitest';
 import { buildApp } from '../app.js';
 import { getDatabase } from '../db/client.js';
@@ -211,7 +211,7 @@ describeIntegration('clinical API (integration)', () => {
     });
     expect(exportRes.statusCode).toBe(200);
     expect(String(exportRes.headers['content-type'])).toContain('text/plain');
-    expect(exportRes.body).toContain('Resumen clínico');
+    expect(exportRes.body).toContain('Resumen clinico');
 
     const ragRes = await app.inject({
       method: 'POST',

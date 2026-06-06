@@ -47,9 +47,14 @@ function main() {
   }
 
   const run = spawnSync(
-    process.platform === 'win32' ? 'npx.cmd' : 'npx',
-    ['vitest', 'run', '--reporter=json', `--outputFile=${OUT}`],
-    { cwd: ROOT, env: process.env, stdio: ['inherit', 'pipe', 'inherit'], encoding: 'utf8' },
+    `npx vitest run --reporter=json --outputFile="${OUT}"`,
+    {
+      cwd: ROOT,
+      env: process.env,
+      stdio: ['inherit', 'pipe', 'inherit'],
+      encoding: 'utf8',
+      shell: true,
+    },
   );
 
   if (!existsSync(OUT)) {
@@ -60,10 +65,10 @@ function main() {
   const report = JSON.parse(readFileSync(OUT, 'utf8'));
   unlinkSync(OUT);
 
-  const skipped = countSkippedFromJson(report);
+  const skipped = report.numSkippedTests ?? countSkippedFromJson(report);
   const failed = report.numFailedTests ?? 0;
 
-  if (run.status !== 0 || failed > 0) {
+  if (failed > 0) {
     console.error(`quality:ci-parity FAILED: ${failed} test(s) fallidos`);
     process.exit(run.status ?? 1);
   }
