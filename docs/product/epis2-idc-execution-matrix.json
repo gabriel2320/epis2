@@ -6,13 +6,13 @@
     "totals": {
       "estado": {
         "Planned": 142,
-        "Active": 44,
+        "Active": 38,
         "Blocked": 1,
-        "Done": 13
+        "Done": 19
       },
       "prioridad": {
-        "Critical": 7,
-        "High": 47,
+        "Critical": 9,
+        "High": 45,
         "Medium": 95,
         "Low": 51
       },
@@ -52,7 +52,7 @@
       "horizonte": "Post-core",
       "decision": "Build",
       "legacyEstado": "MISSING",
-      "nota": ""
+      "nota": "MF-TRAMO-B-001 — tablero recepción Tramo B; never home"
     },
     {
       "idc": 3,
@@ -64,7 +64,7 @@
       "horizonte": "Post-core",
       "decision": "Build",
       "legacyEstado": "MISSING",
-      "nota": ""
+      "nota": "MF-TRAMO-B-001 recepción — agenda profesional"
     },
     {
       "idc": 4,
@@ -88,7 +88,7 @@
       "horizonte": "Post-core",
       "decision": "Build",
       "legacyEstado": "MISSING",
-      "nota": ""
+      "nota": "MF-TRAMO-B-001 — admisión administrativa (≠ admission_note clínico)"
     },
     {
       "idc": 6,
@@ -160,7 +160,7 @@
       "horizonte": "Future",
       "decision": "Defer",
       "legacyEstado": "DEFERRED",
-      "nota": ""
+      "nota": "MF-TRAMO-B-001 facturación Defer Tramo B"
     },
     {
       "idc": 12,
@@ -172,7 +172,7 @@
       "horizonte": "Future",
       "decision": "Defer",
       "legacyEstado": "DEFERRED",
-      "nota": ""
+      "nota": "MF-TRAMO-B-001 facturación Defer Tramo B"
     },
     {
       "idc": 13,
@@ -184,7 +184,7 @@
       "horizonte": "Future",
       "decision": "Defer",
       "legacyEstado": "DEFERRED",
-      "nota": ""
+      "nota": "MF-TRAMO-B-001 facturación Defer Tramo B"
     },
     {
       "idc": 14,
@@ -196,7 +196,7 @@
       "horizonte": "Future",
       "decision": "Integrate",
       "legacyEstado": "DEFERRED",
-      "nota": "Isapre/Fonasa"
+      "nota": "MF-TRAMO-B-001 Isapre/Fonasa Integrate Future"
     },
     {
       "idc": 15,
@@ -208,7 +208,7 @@
       "horizonte": "Future",
       "decision": "Defer",
       "legacyEstado": "DEFERRED",
-      "nota": ""
+      "nota": "MF-TRAMO-B-001 facturación Defer Tramo B"
     },
     {
       "idc": 16,
@@ -220,7 +220,7 @@
       "horizonte": "Future",
       "decision": "Defer",
       "legacyEstado": "DEFERRED",
-      "nota": ""
+      "nota": "MF-TRAMO-B-001 facturación Defer Tramo B"
     },
     {
       "idc": 17,
@@ -232,7 +232,7 @@
       "horizonte": "Future",
       "decision": "Defer",
       "legacyEstado": "DEFERRED",
-      "nota": ""
+      "nota": "MF-TRAMO-B-001 facturación Defer Tramo B"
     },
     {
       "idc": 18,
@@ -244,7 +244,7 @@
       "horizonte": "Future",
       "decision": "Defer",
       "legacyEstado": "DEFERRED",
-      "nota": ""
+      "nota": "MF-TRAMO-B-001 facturación Defer Tramo B"
     },
     {
       "idc": 19,
@@ -256,7 +256,7 @@
       "horizonte": "Future",
       "decision": "Defer",
       "legacyEstado": "DEFERRED",
-      "nota": ""
+      "nota": "MF-TRAMO-B-001 facturación Defer Tramo B"
     },
     {
       "idc": 20,
@@ -268,7 +268,7 @@
       "horizonte": "Future",
       "decision": "Defer",
       "legacyEstado": "DEFERRED",
-      "nota": ""
+      "nota": "MF-TRAMO-B-001 facturación Defer Tramo B"
     },
     {
       "idc": 21,
@@ -347,36 +347,36 @@
       "nombre": "Antecedentes mórbidos",
       "ola": "3",
       "workspace": "patient-record",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "High",
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": "allergy_entry + CTA ficha MF-OLA3-001"
+      "nota": "allergy_entry + E2E ficha MF-OLA3-004"
     },
     {
       "idc": 28,
       "nombre": "Antecedentes familiares",
       "ola": "3",
       "workspace": "patient-record",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "High",
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": "allergy_entry + CTA ficha MF-OLA3-001"
+      "nota": "allergy_entry + E2E ficha MF-OLA3-004"
     },
     {
       "idc": 29,
       "nombre": "Registro hábitos",
       "ola": "3",
       "workspace": "patient-record",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "Medium",
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": "clinical_problem_entry + CTA ficha"
+      "nota": "clinical_problem_entry + E2E ficha MF-OLA3-004"
     },
     {
       "idc": 30,
@@ -503,12 +503,12 @@
       "nombre": "Resumen para paciente",
       "ola": "2",
       "workspace": "ambulatory",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "High",
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": "PrintA5 vista certificado MF-OLA6A-001 — signoff humano pendiente"
+      "nota": "PrintA5 + E2E MF-OLA6A-002 — vista documental (no firma auto)"
     },
     {
       "idc": 41,
@@ -695,12 +695,12 @@
       "nombre": "Solicitud imagenología",
       "ola": "1C",
       "workspace": "ambulatory",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "High",
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": "imaging_request + journey MF-OLA1C-002"
+      "nota": "imaging_request + journey MF-OLA1C-003"
     },
     {
       "idc": 57,
@@ -767,12 +767,12 @@
       "nombre": "Certificado asistencia",
       "ola": "6",
       "workspace": "ambulatory",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "Medium",
       "horizonte": "Core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": "medical_certificate Ola 2"
+      "legacyEstado": "COMPLETE",
+      "nota": "medical_certificate Ola 2 + print A5"
     },
     {
       "idc": 63,
@@ -1236,11 +1236,11 @@
       "ola": "10",
       "workspace": "emergency",
       "estado": "Planned",
-      "prioridad": "High",
+      "prioridad": "Critical",
       "horizonte": "Post-core",
       "decision": "Build",
       "legacyEstado": "MISSING",
-      "nota": "Workspace emergency Tramo C"
+      "nota": "Workspace emergency Ola 10 — triaje planificado"
     },
     {
       "idc": 102,
@@ -1248,11 +1248,11 @@
       "ola": "10",
       "workspace": "emergency",
       "estado": "Planned",
-      "prioridad": "High",
+      "prioridad": "Critical",
       "horizonte": "Post-core",
       "decision": "Build",
       "legacyEstado": "MISSING",
-      "nota": "Workspace emergency Tramo C"
+      "nota": "Workspace emergency Ola 10"
     },
     {
       "idc": 103,

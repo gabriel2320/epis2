@@ -11,7 +11,7 @@ for (const rel of [
   'packages/epis2-ui/src/print/PrintA5Document.tsx',
   'apps/web/src/pages/MedicalCertificatePrintPage.tsx',
   'apps/web/src/clinical/printPreviewStorage.ts',
-  'apps/web/src/pages/MedicalCertificatePrintPage.test.tsx',
+  'e2e/ola6a-print-certificate.spec.ts',
 ]) {
   if (!existsSync(join(root, rel))) errors.push(`falta: ${rel}`);
 }
@@ -27,6 +27,11 @@ if (!form.includes('epis2-print-preview-medical_certificate')) {
 const router = readFileSync(join(root, 'apps/web/src/routes/router.tsx'), 'utf8');
 if (!router.includes('/espacio/certificado/imprimir')) {
   errors.push('router sin ruta imprimir certificado');
+}
+
+const e2e = readFileSync(join(root, 'e2e/ola6a-print-certificate.spec.ts'), 'utf8');
+if (!e2e.includes('epis2-print-a5-document')) {
+  errors.push('e2e ola6a sin vista impresión A5');
 }
 
 if (errors.length) {

@@ -285,15 +285,22 @@ ws(199, 200, 'admin_system');
 /** @type {Record<number, RowFields>} */
 const OVERRIDES = {
   1: { estado: 'Done', prioridad: 'Critical', horizonte: 'Core', decision: 'Build', legacy: 'COMPLETE', nota: '/login' },
+  2: { nota: 'MF-TRAMO-B-001 — tablero recepción Tramo B; never home' },
+  3: { nota: 'MF-TRAMO-B-001 recepción — agenda profesional' },
+  5: { nota: 'MF-TRAMO-B-001 — admisión administrativa (≠ admission_note clínico)' },
+  11: { nota: 'MF-TRAMO-B-001 facturación Defer Tramo B' },
+  20: { nota: 'MF-TRAMO-B-001 facturación Defer Tramo B' },
+  102: { estado: 'Planned', prioridad: 'Critical', horizonte: 'Post-core', decision: 'Build', legacy: 'MISSING', nota: 'Workspace emergency Ola 10' },
+  101: { estado: 'Planned', prioridad: 'Critical', horizonte: 'Post-core', decision: 'Build', legacy: 'MISSING', nota: 'Workspace emergency Ola 10 — triaje planificado' },
   21: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'Ficha M3 Ola 3' },
   22: { estado: 'Done', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'ClinicalAlertsPanel ficha + E2E DEMO-005 MF-OLA3-003' },
   23: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL' },
   24: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL' },
   25: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL' },
   26: { estado: 'Active', prioridad: 'Medium', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL' },
-  27: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'allergy_entry + CTA ficha MF-OLA3-001' },
-  28: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'allergy_entry + CTA ficha MF-OLA3-001' },
-  29: { estado: 'Active', prioridad: 'Medium', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'clinical_problem_entry + CTA ficha' },
+  27: { estado: 'Done', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'allergy_entry + E2E ficha MF-OLA3-004' },
+  28: { estado: 'Done', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'allergy_entry + E2E ficha MF-OLA3-004' },
+  29: { estado: 'Done', prioridad: 'Medium', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'clinical_problem_entry + E2E ficha MF-OLA3-004' },
   30: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'clinical_problem_entry' },
   31: { estado: 'Done', prioridad: 'Critical', horizonte: 'Core', decision: 'Build', legacy: 'COMPLETE', nota: 'outpatient_visit anamnesis — MF-OLA2-001' },
   32: { estado: 'Done', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'COMPLETE', nota: 'vitals section scrollspy' },
@@ -304,16 +311,16 @@ const OVERRIDES = {
   37: { estado: 'Done', prioridad: 'Critical', horizonte: 'Core', decision: 'Build', legacy: 'COMPLETE', nota: 'evolution_note' },
   38: { estado: 'Active', prioridad: 'Medium', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL' },
   39: { estado: 'Done', prioridad: 'Critical', horizonte: 'Core', decision: 'Build', legacy: 'COMPLETE', nota: 'closeEncounter + FAB cierre Ola 2' },
-  40: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'PrintA5 vista certificado MF-OLA6A-001 — signoff humano pendiente' },
+  40: { estado: 'Done', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'PrintA5 + E2E MF-OLA6A-002 — vista documental (no firma auto)' },
   51: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL' },
   52: { estado: 'Done', prioridad: 'Critical', horizonte: 'Core', decision: 'Build', legacy: 'COMPLETE', nota: 'prescription' },
   54: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL' },
   55: { estado: 'Done', prioridad: 'Critical', horizonte: 'Core', decision: 'Build', legacy: 'COMPLETE', nota: 'lab_request' },
-  56: { estado: 'Active', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'imaging_request + journey MF-OLA1C-002' },
+  56: { estado: 'Done', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL', nota: 'imaging_request + journey MF-OLA1C-003' },
   58: { estado: 'Done', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'COMPLETE', nota: 'ResultsInboxPage + comando + journey MF-OLA1C-001' },
   59: { estado: 'Planned', prioridad: 'Medium', horizonte: 'Post-core', decision: 'Integrate', legacy: 'MISSING', nota: 'PACS externo' },
   64: { estado: 'Done', prioridad: 'High', horizonte: 'Core', decision: 'Build', legacy: 'COMPLETE', nota: 'referral' },
-  62: { estado: 'Active', prioridad: 'Medium', horizonte: 'Core', decision: 'Build', legacy: 'MISSING', nota: 'medical_certificate Ola 2' },
+  62: { estado: 'Done', prioridad: 'Medium', horizonte: 'Core', decision: 'Build', legacy: 'COMPLETE', nota: 'medical_certificate Ola 2 + print A5' },
   69: { estado: 'Active', prioridad: 'Medium', horizonte: 'Core', decision: 'Build', legacy: 'PARTIAL' },
   71: { estado: 'Active', prioridad: 'High', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL' },
   74: { estado: 'Active', prioridad: 'Medium', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL' },
@@ -351,6 +358,28 @@ const OVERRIDES = {
   61: { estado: 'Planned', prioridad: 'Low', horizonte: 'Future', decision: 'Defer', legacy: 'MISSING', nota: 'LME Chile' },
   68: { estado: 'Planned', prioridad: 'Low', horizonte: 'Future', decision: 'Defer', legacy: 'DEFERRED' },
   98: { estado: 'Planned', prioridad: 'Low', horizonte: 'Future', decision: 'Exclude', legacy: 'MISSING', nota: 'Fuera alcance clínico MVP' },
+};
+
+/** MF-TRAMO-B-001 — facturación IDC 11–20 (Defer; 14 Integrate). */
+for (let id = 11; id <= 20; id++) {
+  if (id === 14) continue;
+  const nota = OVERRIDES[id]?.nota ?? 'MF-TRAMO-B-001 facturación Defer Tramo B';
+  OVERRIDES[id] = {
+    estado: 'Planned',
+    prioridad: 'Low',
+    horizonte: 'Future',
+    decision: 'Defer',
+    legacy: 'DEFERRED',
+    nota,
+  };
+}
+OVERRIDES[14] = {
+  estado: 'Planned',
+  prioridad: 'Low',
+  horizonte: 'Future',
+  decision: 'Integrate',
+  legacy: 'DEFERRED',
+  nota: 'MF-TRAMO-B-001 Isapre/Fonasa Integrate Future',
 };
 
 /** @type {Array<{ from: number, to: number, fields: RowFields }>} */

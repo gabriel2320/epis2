@@ -13,8 +13,8 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 142 · Active: 44 · Blocked: 1 · Done: 13 |
-| **Prioridad** | Critical: 7 · High: 47 · Medium: 95 · Low: 51 |
+| **Estado** | Planned: 142 · Active: 38 · Blocked: 1 · Done: 19 |
+| **Prioridad** | Critical: 9 · High: 45 · Medium: 95 · Low: 51 |
 | **Horizonte** | Core: 41 · Post-core: 88 · Future: 71 |
 | **Decisión** | Build: 127 · Integrate: 5 · Defer: 66 · Exclude: 2 |
 
@@ -36,10 +36,10 @@
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
 | 1 | Login de sistema | 0-1A | command | Done | Critical | Core | Build | COMPLETE | /login |
-| 2 | Dashboard recepción | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
-| 3 | Agenda diaria profesional | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
+| 2 | Dashboard recepción | 4 | reception | Planned | Medium | Post-core | Build | MISSING | MF-TRAMO-B-001 — tablero recepción Tramo B; never home |
+| 3 | Agenda diaria profesional | 4 | reception | Planned | Medium | Post-core | Build | MISSING | MF-TRAMO-B-001 recepción — agenda profesional |
 | 4 | Calendario mensual centro | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
-| 5 | Formulario admisión | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
+| 5 | Formulario admisión | 4 | reception | Planned | Medium | Post-core | Build | MISSING | MF-TRAMO-B-001 — admisión administrativa (≠ admission_note clínico) |
 | 6 | Biometría / firma | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
 | 7 | Sala de espera virtual | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
 | 8 | Gestión sobrecupos | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
@@ -50,16 +50,16 @@
 
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
-| 11 | Presupuesto médico | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
-| 12 | Cobro consulta | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
-| 13 | Boleta / factura | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
-| 14 | Integración aseguradoras | 5 | billing | Planned | Low | Future | Integrate | DEFERRED | Isapre/Fonasa |
-| 15 | Conciliación diaria caja | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
-| 16 | Cuentas por cobrar | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
-| 17 | Reembolsos / anulaciones | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
-| 18 | Honorarios médicos | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
-| 19 | Liquidación profesionales | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
-| 20 | Reporte ingresos mensuales | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
+| 11 | Presupuesto médico | 5 | billing | Planned | Low | Future | Defer | DEFERRED | MF-TRAMO-B-001 facturación Defer Tramo B |
+| 12 | Cobro consulta | 5 | billing | Planned | Low | Future | Defer | DEFERRED | MF-TRAMO-B-001 facturación Defer Tramo B |
+| 13 | Boleta / factura | 5 | billing | Planned | Low | Future | Defer | DEFERRED | MF-TRAMO-B-001 facturación Defer Tramo B |
+| 14 | Integración aseguradoras | 5 | billing | Planned | Low | Future | Integrate | DEFERRED | MF-TRAMO-B-001 Isapre/Fonasa Integrate Future |
+| 15 | Conciliación diaria caja | 5 | billing | Planned | Low | Future | Defer | DEFERRED | MF-TRAMO-B-001 facturación Defer Tramo B |
+| 16 | Cuentas por cobrar | 5 | billing | Planned | Low | Future | Defer | DEFERRED | MF-TRAMO-B-001 facturación Defer Tramo B |
+| 17 | Reembolsos / anulaciones | 5 | billing | Planned | Low | Future | Defer | DEFERRED | MF-TRAMO-B-001 facturación Defer Tramo B |
+| 18 | Honorarios médicos | 5 | billing | Planned | Low | Future | Defer | DEFERRED | MF-TRAMO-B-001 facturación Defer Tramo B |
+| 19 | Liquidación profesionales | 5 | billing | Planned | Low | Future | Defer | DEFERRED | MF-TRAMO-B-001 facturación Defer Tramo B |
+| 20 | Reporte ingresos mensuales | 5 | billing | Planned | Low | Future | Defer | DEFERRED | MF-TRAMO-B-001 facturación Defer Tramo B |
 
 ## Resumen clínico (ficha) (21–30)
 
@@ -71,9 +71,9 @@
 | 24 | Medicamentos continuos | 3 | patient-record | Active | High | Core | Build | PARTIAL |  |
 | 25 | Visor últimos exámenes | 3 | patient-record | Active | High | Core | Build | PARTIAL |  |
 | 26 | Curvas signos vitales | 3 | patient-record | Active | Medium | Core | Build | PARTIAL |  |
-| 27 | Antecedentes mórbidos | 3 | patient-record | Active | High | Core | Build | PARTIAL | allergy_entry + CTA ficha MF-OLA3-001 |
-| 28 | Antecedentes familiares | 3 | patient-record | Active | High | Core | Build | PARTIAL | allergy_entry + CTA ficha MF-OLA3-001 |
-| 29 | Registro hábitos | 3 | patient-record | Active | Medium | Core | Build | PARTIAL | clinical_problem_entry + CTA ficha |
+| 27 | Antecedentes mórbidos | 3 | patient-record | Done | High | Core | Build | PARTIAL | allergy_entry + E2E ficha MF-OLA3-004 |
+| 28 | Antecedentes familiares | 3 | patient-record | Done | High | Core | Build | PARTIAL | allergy_entry + E2E ficha MF-OLA3-004 |
+| 29 | Registro hábitos | 3 | patient-record | Done | Medium | Core | Build | PARTIAL | clinical_problem_entry + E2E ficha MF-OLA3-004 |
 | 30 | Antecedentes quirúrgicos | 3 | patient-record | Active | High | Core | Build | PARTIAL | clinical_problem_entry |
 
 ## Consulta ambulatoria (31–40)
@@ -89,7 +89,7 @@
 | 37 | Evolución SOAP | 2 | ambulatory | Done | Critical | Core | Build | COMPLETE | evolution_note |
 | 38 | Gestor macros / plantillas | 2 | ambulatory | Active | Medium | Core | Build | PARTIAL |  |
 | 39 | Cierre de episodio | 2 | ambulatory | Done | Critical | Core | Build | COMPLETE | closeEncounter + FAB cierre Ola 2 |
-| 40 | Resumen para paciente | 2 | ambulatory | Active | High | Core | Build | PARTIAL | PrintA5 vista certificado MF-OLA6A-001 — signoff humano pendiente |
+| 40 | Resumen para paciente | 2 | ambulatory | Done | High | Core | Build | PARTIAL | PrintA5 + E2E MF-OLA6A-002 — vista documental (no firma auto) |
 
 ## UCI (bloque 41–50) (41–50)
 
@@ -115,7 +115,7 @@
 | 53 | Receta retenida / cheque | 1C | ambulatory | Planned | Medium | Core | Build | MISSING |  |
 | 54 | Panel interacciones | 1C | ambulatory | Active | High | Core | Build | PARTIAL |  |
 | 55 | Solicitud laboratorio | 1C | ambulatory | Done | Critical | Core | Build | COMPLETE | lab_request |
-| 56 | Solicitud imagenología | 1C | ambulatory | Active | High | Core | Build | PARTIAL | imaging_request + journey MF-OLA1C-002 |
+| 56 | Solicitud imagenología | 1C | ambulatory | Done | High | Core | Build | PARTIAL | imaging_request + journey MF-OLA1C-003 |
 | 57 | Solicitud procedimientos | 1C | ambulatory | Planned | Medium | Core | Build | MISSING |  |
 | 58 | Bandeja resultados lab | 1C | ambulatory | Done | High | Core | Build | COMPLETE | ResultsInboxPage + comando + journey MF-OLA1C-001 |
 | 59 | Visor DICOM (PACS) | 1C | ambulatory | Planned | Medium | Post-core | Integrate | MISSING | PACS externo |
@@ -126,7 +126,7 @@
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
 | 61 | Licencia médica | 6 | ambulatory | Planned | Low | Future | Defer | MISSING | LME Chile |
-| 62 | Certificado asistencia | 6 | ambulatory | Active | Medium | Core | Build | MISSING | medical_certificate Ola 2 |
+| 62 | Certificado asistencia | 6 | ambulatory | Done | Medium | Core | Build | COMPLETE | medical_certificate Ola 2 + print A5 |
 | 63 | Certificado aptitud / alta | 6 | ambulatory | Planned | Medium | Core | Build | MISSING |  |
 | 64 | Derivación / interconsulta | 6 | ambulatory | Done | High | Core | Build | COMPLETE | referral |
 | 65 | Consentimiento informado | 6 | ambulatory | Planned | Medium | Post-core | Build | MISSING |  |
@@ -185,8 +185,8 @@
 
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
-| 101 | Dashboard de Urgencias | 10 | emergency | Planned | High | Post-core | Build | MISSING | Workspace emergency Tramo C |
-| 102 | Categorización ESI | 10 | emergency | Planned | High | Post-core | Build | MISSING | Workspace emergency Tramo C |
+| 101 | Dashboard de Urgencias | 10 | emergency | Planned | Critical | Post-core | Build | MISSING | Workspace emergency Ola 10 — triaje planificado |
+| 102 | Categorización ESI | 10 | emergency | Planned | Critical | Post-core | Build | MISSING | Workspace emergency Ola 10 |
 | 103 | Reanimación (Clave Azul) | 10 | emergency | Planned | High | Post-core | Build | MISSING | Workspace emergency Tramo C |
 | 104 | Trauma / FAST | 10 | emergency | Planned | High | Post-core | Build | MISSING | Workspace emergency Tramo C |
 | 105 | Hoja observación corta | 10 | emergency | Planned | High | Post-core | Build | MISSING | Workspace emergency Tramo C |

@@ -620,6 +620,23 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
       ) : null}
 
+      {blueprint.blueprintId === 'medical_certificate' && effectivePatientId ? (
+        <EpisButton
+          appearance="outlined"
+          size="small"
+          data-testid="epis2-print-preview-medical_certificate"
+          onClick={() => {
+            writePrintPreview('medical_certificate', values);
+            void navigate({
+              to: '/espacio/certificado/imprimir',
+              search: { patientId: effectivePatientId },
+            });
+          }}
+        >
+          {copy.print.previewA5}
+        </EpisButton>
+      ) : null}
+
     </>
 
   );
@@ -906,21 +923,6 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
                       data-testid="epis2-ai-suggest"
                     >
                       {isSuggesting ? copy.forms.suggestingAi : copy.forms.suggestAi}
-                    </EpisButton>
-                  ) : null}
-                  {blueprint.blueprintId === 'medical_certificate' && effectivePatientId ? (
-                    <EpisButton
-                      appearance="outlined"
-                      data-testid="epis2-print-preview-medical_certificate"
-                      onClick={() => {
-                        writePrintPreview('medical_certificate', values);
-                        void navigate({
-                          to: '/espacio/certificado/imprimir',
-                          search: { patientId: effectivePatientId },
-                        });
-                      }}
-                    >
-                      {copy.print.previewA5}
                     </EpisButton>
                   ) : null}
                   <EpisButton appearance="filled" onClick={() => void saveDraft()}>

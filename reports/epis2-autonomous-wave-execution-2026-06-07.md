@@ -1,32 +1,30 @@
-# Ejecución autónoma EPIS2 — olas Tramo A (MF-OLA3-003 + MF-OLA6A-001)
+# Ejecución autónoma EPIS2 — cierre pendientes Tramo A
 
 **Fecha:** 2026-06-07  
-**Agente:** Cursor · ejecución autónoma olas / microfases
+**Agente:** Cursor · cierre pendientes olas
 
 ---
 
-## Microfases cerradas esta sesión
+## Pendientes cerrados
 
-| MF | Ola | Estado | Evidencia |
-|----|-----|--------|-----------|
-| MF-OLA3-003 | 3 | ✅ | Banner alertas ficha DEMO-005 + gate + E2E (4 tests) |
-| MF-OLA6A-001 | 6A | ✅ impl. | Print A5 certificado; IDC 40 **Active** (signoff humano) |
-| MF-DOC-002 | — | ✅ | Screen catalog §5–19 reconciliado con matriz IDC |
-
-Reportes: `epis2-mf-ola3-003-alerts-ficha.md`, `epis2-mf-ola6a-001-print-a5.md`
+| MF | Estado | IDC / alcance |
+|----|--------|----------------|
+| MF-OLA3-004 | ✅ | 27, 28, 29 → Done |
+| MF-OLA1C-003 | ✅ | 56 → Done |
+| MF-OLA6A-002 | ✅ | 40 → Done (E2E print A5) |
+| MF-TRAMO-B-001 | ✅ | Inventario recepción 2–20 |
+| Workspace emergency | ✅ doc | IDC 101–102 + `EPIS2_PLANNED_SURFACES` Ola 10 |
 
 ---
 
-## Pendientes (post-commit)
+## Pendientes restantes (post-core)
 
-| Prioridad | MF / ítem | IDC | Nota |
-|-----------|-----------|-----|------|
-| 1 | MF-OLA6A-PRINT signoff | 40 Active | Revisión humana impresión A5 → Done |
-| 2 | Promover IDC 27–29 | 27–29 | Tras E2E ficha estable en CI |
-| 3 | MF-OLA1C-003 | 56 Active | Imaging signoff M3 |
-| 4 | MF-TRAMO-B-001 | 2–20 | Recepción Defer/Exclude |
-| 6 | Workspace `emergency` | Ola 10 | Rail planificado |
-| 7 | lint Windows | — | Validar en CI/Linux |
+| Ítem | Nota |
+|------|------|
+| IDC 30 timeline | Active — formulario problema sin promover |
+| IDC 23–26 ficha | Active — timeline, medicamentos, exámenes |
+| Tramo B implementación | Solo inventario; UI recepción Planned |
+| lint Windows | Validar en CI/Linux |
 
 ---
 
@@ -34,35 +32,26 @@ Reportes: `epis2-mf-ola3-003-alerts-ficha.md`, `epis2-mf-ola6a-001-print-a5.md`
 
 | Gate | Resultado |
 |------|-----------|
-| check | ✅ lint + typecheck + architecture 15/15 |
-| test | ✅ **418** |
-| db:validate | ✅ 32 migraciones |
-| quality:ola3-alerts-gate | ✅ |
+| check | ✅ |
+| test | ✅ 418 |
+| db:validate | ✅ |
+| quality:golden-journey | ✅ 17 |
+| quality:ola3-longitudinal-gate | ✅ |
+| quality:ola1c-imaging-gate | ✅ |
+| quality:tramo-b-reception-gate | ✅ |
 | quality:ola6a-print-gate | ✅ |
-| quality:doc-screen-catalog-gate | ✅ |
-| test:e2e:ola3 | ✅ **4** tests (incl. DEMO-005 alertas) |
+| test:e2e:ola3 / ola1c / ola6a | ✅ |
 
-**IDC Done:** **13** (+ IDC **22** banner alertas ficha)
-
----
-
-## Archivos clave (esta sesión)
-
-- `e2e/ola3-ficha-journey.spec.ts` — test alertas DEMO-005
-- `packages/epis2-ui/src/print/PrintA5Document.tsx`
-- `apps/web/src/pages/MedicalCertificatePrintPage.tsx`
-- `apps/web/src/clinical/printPreviewStorage.ts`
-- `scripts/quality/validate-ola3-alerts-gate.mjs`
-- `scripts/quality/validate-ola6a-print-gate.mjs`
+**IDC Done:** **19**
 
 ---
 
-## Próximo paso (Tramo A)
+## Reportes MF
 
-1. **MF-OLA1C-003** — imaging IDC 56 signoff
-2. Signoff **IDC 40** tras revisión impresión A5
-3. Promover IDC **27–29** tras E2E ficha estable en CI
-4. **MF-TRAMO-B-001** — inventario recepción
+- `epis2-mf-ola3-004-longitudinal-idc.md`
+- `epis2-mf-ola1c-003-imaging-idc56.md`
+- `epis2-mf-ola6a-002-print-e2e-idc40.md`
+- `epis2-mf-tramo-b-001-reception-inventory.md`
 
 ---
 

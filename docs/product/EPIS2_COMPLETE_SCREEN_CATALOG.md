@@ -88,9 +88,9 @@
 | 6 | Resumen longitudinal | `/espacio/resumen` | **PARTIAL** | Campos demo estáticos |
 | 7 | Línea de tiempo | Panel en `PatientWorkspacePage` | **PARTIAL** | No ruta dedicada |
 | 8 | Encuentros previos | API longitudinal | **PARTIAL** | Sin pantalla |
-| 9 | Problemas activos | `/espacio/problema` + contexto ficha | **PARTIAL** | Formulario Ola 3; IDC 29 Active |
+| 9 | Problemas activos | `/espacio/problema` + contexto ficha | **PARTIAL** | Formulario Ola 3; IDC 29 Done |
 | 10 | Diagnósticos históricos | — | **MISSING** | Ola 3 |
-| 11 | Alergias | `/espacio/alergia` + CDS ficha | **PARTIAL** | Formulario Ola 3; IDC 27–28 Active |
+| 11 | Alergias | `/espacio/alergia` + CDS ficha | **PARTIAL** | Formulario Ola 3; IDC 27–28 Done |
 | 12 | Medicamentos activos | Contexto demo | **PARTIAL** | Sin pantalla dedicada |
 | 13 | Observaciones / signos | Blueprint enfermería | **PARTIAL** | — |
 | 14 | Laboratorios recientes | — | **MISSING** | Ola 3 |
@@ -112,7 +112,7 @@
 | 1 | Consulta ambulatoria M3 | `outpatient_visit` `/espacio/ambulatorio` | **COMPLETE** | Scrollspy Ola 2 (IDC 31–36) |
 | 2–16 | Flujo consulta extendido | Secciones scrollspy | **PARTIAL** | Sub-secciones según matriz |
 | — | Certificado médico | `medical_certificate` `/espacio/certificado` | **COMPLETE** | Ola 2 |
-| — | Vista impresión A5 | `/espacio/certificado/imprimir` | **PARTIAL** | MF-OLA6A-001; IDC 40 Active |
+| — | Vista impresión A5 | `/espacio/certificado/imprimir` | **COMPLETE** | MF-OLA6A-002; IDC 40 Done |
 | — | Evolución SOAP | `evolution_note` `/espacio/evolucion` | **COMPLETE** | Golden V0 |
 | — | Receta | `prescription` `/espacio/receta` | **COMPLETE** | — |
 | — | Laboratorio (orden) | `lab_request` `/espacio/laboratorio` | **PARTIAL** | Solo orden |
@@ -133,7 +133,7 @@
 | 6 | Nota traslado | API inpatient | **MISSING** | Ola 4 |
 | 7 | Epicrisis | `/espacio/epicrisis` | **COMPLETE** | — |
 | 8 | Certificado médico | `/espacio/certificado` | **COMPLETE** | Ola 2 |
-| 9 | Impresión certificado A5 | `/espacio/certificado/imprimir` | **PARTIAL** | Vista documental; IDC 40 Active |
+| 9 | Impresión certificado A5 | `/espacio/certificado/imprimir` | **COMPLETE** | E2E MF-OLA6A-002; IDC 40 Done |
 | 10 | Alta | API discharge | **PARTIAL** | Sin formulario |
 | 11 | Nota fallecimiento | — | **DEFERRED** | — |
 | 12 | Revisión y aprobación | `/espacio/borrador/$draftId` | **COMPLETE** | — |
@@ -161,7 +161,7 @@
 |----------|------------|--------|-------|
 | Bandeja resultados | `/espacio/resultados` | **COMPLETE** | IDC 58 Done; MF-OLA1C-001 |
 | Orden laboratorio | `/espacio/laboratorio` | **COMPLETE** | IDC 55 Done |
-| Orden imagenología | `/espacio/imagenologia` | **PARTIAL** | IDC 56 Active |
+| Orden imagenología | `/espacio/imagenologia` | **COMPLETE** | IDC 56 Done |
 | Acuse resultado crítico | Bandeja + API ack | **PARTIAL** | DEMO-004 E2E MF-OLA1C-002 |
 | Tendencia, microbiología, adjuntos… | — | **MISSING** | Ola 4+ |
 

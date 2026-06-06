@@ -242,6 +242,22 @@ export const EPIS2_NAVIGATION_TREE: readonly EpisNavigationSurface[] = [
   ...blueprintSurfaces(),
 ];
 
+/** Superficies planificadas — no en router aún (Ola 10+). */
+export const EPIS2_PLANNED_SURFACES: readonly EpisNavigationSurface[] = [
+  {
+    id: 'emergency-triage-planned',
+    labelEs: 'Triaje urgencias (planificado)',
+    route: '/espacio/urgencias/triaje',
+    kind: 'clinical_form',
+    workspace: 'global',
+    md3Level: 3,
+    status: 'deferred',
+    idcRefs: [101, 102],
+    ola: '10',
+    notes: 'Workspace emergency Ola 10 — rail planificado',
+  },
+];
+
 export const EPIS2_NAVIGATION_TREE_BY_ROUTE = new Map(
   EPIS2_NAVIGATION_TREE.map((node) => [node.route.split('?')[0], node]),
 );
