@@ -1,6 +1,6 @@
 # EPIS2 — Arquitectura de widgets clínicos contextuales
 
-**Fase:** WIDGET-01 · **Estado:** Montaje contextual en web (Comando + ficha)  
+**Fase:** WIDGET-01 · **Estado:** Montaje M3 en web (Comando + ficha) — signoff 2026-06-05  
 **Frase guía:** *Los widgets muestran lo necesario, cuando es necesario, y siempre conducen al trabajo clínico.*
 
 ---

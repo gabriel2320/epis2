@@ -372,6 +372,9 @@ export const copy = {
     layoutsSection: 'Layouts clínicos',
     layoutsDescription:
       'Two-pane Enfoque ↔ Contexto: formulario centrado 65ch y panel de historial bajo demanda (timeline, documentos, inserción). Canon: EPIS2_CLINICAL_TWO_PANE_LAYOUT.md.',
+    widgetsSection: 'Widgets contextuales M3',
+    widgetsDescription:
+      'Rejilla 12 columnas adaptativa, superficies outlined sin sombra y acciones que conducen al trabajo clínico. Canon: EPIS2_WIDGET_MATERIAL3_PATTERN.md.',
   },
 } as const;
 

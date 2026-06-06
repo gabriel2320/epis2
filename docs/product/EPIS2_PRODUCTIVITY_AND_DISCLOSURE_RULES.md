@@ -35,7 +35,7 @@
 | Responsive | ✓ | M3 layout |
 | Accesibilidad | ◐ | Chips multilínea revisados post-M3 |
 
-**Problemas:** historial comandos ausente; WIDGET-01 no montado (riesgo sobrecarga futura si se montan todos a la vez).
+**Problemas:** historial comandos ausente. **WIDGET-01** montado con visibilidad reglada (máx. 2 widgets revelados por superficie).
 
 ### 2.2 Espacio clínico (`GeneratedClinicalFormPage`)
 

@@ -7,6 +7,8 @@ export type Epis2WidgetSurfaceProps = {
   columnSpan?: number;
   minHeight?: number;
   testId?: string;
+  /** Transición de rejilla (p. ej. desde `resolveWidgetPlacement`). */
+  gridTransition?: string;
 };
 
 /** Contenedor M3 de un widget contextual — no sustituye el Centro de Comando. */
@@ -15,19 +17,21 @@ export function Epis2WidgetSurface({
   columnSpan = 12,
   minHeight = 140,
   testId,
+  gridTransition,
 }: Epis2WidgetSurfaceProps) {
   return (
     <EpisCard
       variant="outlined"
       data-testid={testId ?? 'epis2-widget-surface'}
       sx={{
-        gridColumn: `span ${columnSpan}`,
+        gridColumn: { xs: '1 / -1', md: `span ${columnSpan}` },
         minHeight,
         ...epis2IslandSx,
         ...epis2IslandPaddingSx,
         display: 'flex',
         flexDirection: 'column',
         gap: 1.5,
+        ...(gridTransition ? { transition: gridTransition } : {}),
       }}
     >
       {children}

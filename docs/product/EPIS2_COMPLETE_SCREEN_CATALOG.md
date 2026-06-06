@@ -70,7 +70,7 @@
 | 9 | Historial de comandos | — | **MISSING** | Ola 1 |
 | 10 | Ayuda de comandos | Chips sugeridos + `suggest` API | **PARTIAL** | Panel ayuda persistente |
 
-**Elementos visibles auditados:** Power Bar ✓ · paciente actual ✓ · rol ✓ · sugerencias ✓ · acceso tablero ✓ · widgets **PARTIAL** (registry sin WIDGET-01 montado).
+**Elementos visibles auditados:** Power Bar ✓ · paciente actual ✓ · rol ✓ · sugerencias ✓ · acceso tablero ✓ · widgets **✓** (`ClinicalWidgetPanel` M3 en Comando y ficha).
 
 ---
 

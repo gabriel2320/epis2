@@ -6,7 +6,8 @@ Usar **únicamente** el tema existente (`createEpis2Theme` / `Epis2ThemeProvider
 
 | Componente | Uso |
 |------------|-----|
-| `Epis2WidgetSurface` | Contenedor outlined, fondo transparente, rejilla 12 columnas |
+| `Epis2WidgetGrid` | Rejilla 12 columnas adaptativa (compact/medium/expanded) |
+| `Epis2WidgetSurface` | Contenedor outlined, fondo transparente, span en rejilla |
 | `Epis2WidgetHeader` | Título, descripción, chip demo |
 | `Epis2WidgetBody` | Contenido clínico legible |
 | `Epis2WidgetActions` | Botones que navegan o disparan comando |

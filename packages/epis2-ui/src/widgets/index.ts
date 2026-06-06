@@ -1,3 +1,8 @@
+export { Epis2WidgetGrid, type Epis2WidgetGridProps } from './Epis2WidgetGrid.js';
+export {
+  useEpis2WidgetLayoutBreakpoint,
+  type Epis2WidgetLayoutBreakpoint,
+} from './useEpis2WidgetLayoutBreakpoint.js';
 export { Epis2WidgetSurface, type Epis2WidgetSurfaceProps } from './Epis2WidgetSurface.js';
 export { Epis2WidgetHeader, type Epis2WidgetHeaderProps } from './Epis2WidgetHeader.js';
 export { Epis2WidgetBody, type Epis2WidgetBodyProps } from './Epis2WidgetBody.js';

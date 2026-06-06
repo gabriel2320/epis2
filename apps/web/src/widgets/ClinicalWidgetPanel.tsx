@@ -1,9 +1,5 @@
-import { Box } from '@epis2/epis2-ui';
-import {
-  resolveVisibleWidgets,
-  WIDGET_GRID_COLUMNS,
-  type WidgetSurface,
-} from '@epis2/epis2-widgets';
+import { Epis2WidgetGrid } from '@epis2/epis2-ui';
+import { resolveVisibleWidgets, type WidgetSurface } from '@epis2/epis2-widgets';
 import { useMemo } from 'react';
 import { useAuth } from '../auth/AuthContext.js';
 import { buildWidgetContext } from './buildWidgetContext.js';
@@ -45,15 +41,7 @@ export function ClinicalWidgetPanel({
   if (visibleWidgets.length === 0) return null;
 
   return (
-    <Box
-      data-testid={testId}
-      sx={{
-        display: 'grid',
-        gridTemplateColumns: `repeat(${WIDGET_GRID_COLUMNS}, minmax(0, 1fr))`,
-        gap: 2,
-        width: '100%',
-      }}
-    >
+    <Epis2WidgetGrid data-testid={testId}>
       {visibleWidgets.map(({ definition, visibility }) => (
         <ClinicalWidgetCard
           key={definition.id}
@@ -62,6 +50,6 @@ export function ClinicalWidgetPanel({
           patientId={patientId}
         />
       ))}
-    </Box>
+    </Epis2WidgetGrid>
   );
 }

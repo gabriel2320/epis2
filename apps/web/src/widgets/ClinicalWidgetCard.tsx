@@ -7,12 +7,15 @@ import {
   Epis2WidgetError,
   Epis2WidgetHeader,
   Epis2WidgetLoading,
+  Epis2WidgetOffline,
   Epis2WidgetSurface,
   EpisM3Text,
   List,
-  ListItem,
+  ListItemButton,
   ListItemText,
   Stack,
+  useEpis2WidgetLayoutBreakpoint,
+  useEpis2ThemePreferences,
 } from '@epis2/epis2-ui';
 import {
   DEMO_ACTIVE_PROBLEMS,
@@ -36,8 +39,14 @@ type WidgetLoadState = 'idle' | 'loading' | 'ready' | 'error';
 
 export function ClinicalWidgetCard({ definition, visibility, patientId }: ClinicalWidgetCardProps) {
   const { patient: activePatient } = useActivePatient();
+  const { preferences } = useEpis2ThemePreferences();
+  const layoutBreakpoint = useEpis2WidgetLayoutBreakpoint();
   const runAction = useWidgetActions(patientId);
-  const placement = resolveWidgetPlacement(definition.defaultSize);
+  const placement = resolveWidgetPlacement(
+    definition.defaultSize,
+    layoutBreakpoint,
+    preferences.motion === 'reduced',
+  );
   const [loadState, setLoadState] = useState<WidgetLoadState>('idle');
   const [draftRows, setDraftRows] = useState<
     { id: string; title: string; status: string }[]
@@ -115,6 +124,9 @@ export function ClinicalWidgetCard({ definition, visibility, patientId }: Clinic
   }));
 
   const body = (() => {
+    if (visibility.presentation === 'offline') {
+      return <Epis2WidgetOffline message={definition.copy.offline} />;
+    }
     if (loadState === 'loading') {
       return <Epis2WidgetLoading message={definition.copy.loading} />;
     }
@@ -151,27 +163,18 @@ export function ClinicalWidgetCard({ definition, visibility, patientId }: Clinic
         return (
           <List dense disablePadding>
             {draftRows.slice(0, 4).map((row) => (
-              <ListItem
+              <ListItemButton
                 key={row.id}
-                disablePadding
-                secondaryAction={
-                  <Epis2WidgetActions
-                    actions={[
-                      {
-                        id: `review-${row.id}`,
-                        label: copy.drafts.openReview,
-                        onClick: () =>
-                          runAction(
-                            { kind: 'navigate', label: '', route: '/espacio/borrador/$draftId' },
-                            row.id,
-                          ),
-                      },
-                    ]}
-                  />
+                sx={{ borderRadius: 1, mb: 0.5 }}
+                onClick={() =>
+                  runAction(
+                    { kind: 'navigate', label: '', route: '/espacio/borrador/$draftId' },
+                    row.id,
+                  )
                 }
               >
                 <ListItemText primary={row.title} secondary={row.status} />
-              </ListItem>
+              </ListItemButton>
             ))}
           </List>
         );
@@ -183,9 +186,9 @@ export function ClinicalWidgetCard({ definition, visibility, patientId }: Clinic
         return (
           <List dense disablePadding>
             {summaryLines.map((line) => (
-              <ListItem key={line} disablePadding>
+              <ListItemButton key={line} disableRipple sx={{ borderRadius: 1 }}>
                 <ListItemText primary={line} />
-              </ListItem>
+              </ListItemButton>
             ))}
           </List>
         );
@@ -197,9 +200,9 @@ export function ClinicalWidgetCard({ definition, visibility, patientId }: Clinic
         return (
           <List dense disablePadding>
             {problemLines.map((line) => (
-              <ListItem key={line} disablePadding>
+              <ListItemButton key={line} disableRipple sx={{ borderRadius: 1 }}>
                 <ListItemText primary={line} />
-              </ListItem>
+              </ListItemButton>
             ))}
           </List>
         );
@@ -213,6 +216,7 @@ export function ClinicalWidgetCard({ definition, visibility, patientId }: Clinic
     <Epis2WidgetSurface
       columnSpan={placement.columnSpan}
       minHeight={placement.minHeight}
+      gridTransition={placement.transition}
       testId={`epis2-widget-${definition.id}`}
     >
       <Epis2WidgetHeader

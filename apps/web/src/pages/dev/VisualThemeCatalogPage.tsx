@@ -5,6 +5,11 @@ import {
   clinicalRoles,
   Divider,
   EpisAppearancePreferencesPanel,
+  Epis2WidgetActions,
+  Epis2WidgetBody,
+  Epis2WidgetGrid,
+  Epis2WidgetHeader,
+  Epis2WidgetSurface,
   EpisButton,
   EpisCard,
   EpisM3Text,
@@ -191,6 +196,21 @@ export function VisualThemeCatalogPage() {
 
         <CatalogSection title={copy.visualThemeCatalog.layoutsSection}>
           <EpisM3Text role="bodyMedium">{copy.visualThemeCatalog.layoutsDescription}</EpisM3Text>
+        </CatalogSection>
+
+        <CatalogSection title={copy.visualThemeCatalog.widgetsSection}>
+          <Stack spacing={2}>
+            <EpisM3Text role="bodyMedium">{copy.visualThemeCatalog.widgetsDescription}</EpisM3Text>
+            <Epis2WidgetGrid data-testid="epis2-visual-widget-grid-demo">
+              <Epis2WidgetSurface testId="epis2-visual-widget-demo" columnSpan={6}>
+                <Epis2WidgetHeader title="Contexto del paciente" badge={copy.demoBadge} />
+                <Epis2WidgetBody>
+                  <EpisM3Text role="bodyMedium">Paciente demo — lectura contextual</EpisM3Text>
+                </Epis2WidgetBody>
+                <Epis2WidgetActions actions={[{ id: 'ficha', label: 'Abrir ficha', href: '/espacio/ficha' }]} />
+              </Epis2WidgetSurface>
+            </Epis2WidgetGrid>
+          </Stack>
         </CatalogSection>
 
         <CatalogSection title={copy.visualThemeCatalog.docsSection}>

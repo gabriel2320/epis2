@@ -30,6 +30,7 @@ LAYOUT-02  Panel consulta + inserción chip                      ← completado
 LAYOUT-03  IA invisible + resumen periodo bajo demanda          ← completado
 LAYOUT-04  Drag & drop + blueprints adicionales                  ← completado
 LAYOUT-05  Búsqueda documental + cierre fase layout              ← completado
+WIDGET-01  Montaje M3 widgets en Comando y ficha                 ← completado
 ```
 
 ---

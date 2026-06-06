@@ -21,5 +21,7 @@ describe('VisualThemeCatalogPage', () => {
     expect(screen.getByText(copy.visualThemeCatalog.clinicalRolesSection)).toBeInTheDocument();
     expect(screen.getByText(copy.visualThemeCatalog.proseSample)).toBeInTheDocument();
     expect(screen.getByText(copy.visualThemeCatalog.layoutsSection)).toBeInTheDocument();
+    expect(screen.getByText(copy.visualThemeCatalog.widgetsSection)).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-visual-widget-grid-demo')).toBeInTheDocument();
   });
 });
