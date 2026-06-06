@@ -70,7 +70,13 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
           onChange={(e) => setHl7(e.target.value)}
           placeholder={copy.interop.hl7Placeholder}
         />
-        <Button size="small" sx={{ mt: 1 }} variant="outlined" onClick={() => void runHl7()}>
+        <Button
+          size="small"
+          sx={{ mt: 1 }}
+          variant="outlined"
+          onClick={() => void runHl7()}
+          data-testid="epis2-hl7-validate-run"
+        >
           {copy.interop.hl7Validate}
         </Button>
         {hl7Result ? (

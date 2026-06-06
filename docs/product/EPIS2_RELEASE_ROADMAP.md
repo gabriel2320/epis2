@@ -238,11 +238,10 @@ IA desconectada = producto usable; con IA = trazabilidad `ai_runs` + fuentes cit
 
 | Prioridad | Plan | Objetivo |
 |-----------|------|----------|
-| **P1** | **Plan F / CI bundle** | `qa:bundle-analyze` en pipeline + hardening piloto |
-| **P2** | **V4 interop** | Piloto read-only HL7/FHIR staging |
-| — | V1 completo | ✓ `reports/epis2-v1-ui-signoff.md` |
-| — | V2 completo (EPIS2-13) | ✓ `reports/epis2-v2-ui-signoff.md` |
-| — | V3 completo (EPIS2-14) | ✓ `reports/epis2-v3-ui-signoff.md` |
+| **P1** | **Piloto humano** | `PILOT_DEMO_CHECKLIST.md` — journey V0–V5 con usuarios demo |
+| **P2** | **Post-MVP** | OIDC (ADR-006), RLS enforce, HL7 inbound productivo |
+| — | V1–V3 UI | ✓ signoffs v1/v2/v3 |
+| — | Plan F+G | ✓ `reports/epis2-plan-f-complete.md`, `epis2-plan-g-complete.md`, `epis2-plan-f-g-ui-signoff.md` |
 
 V0 cerrado (GO DEMO + Modo tablero). Ver `reports/epis2-audit-and-dev-plans-2026-06-05.md`.
 
