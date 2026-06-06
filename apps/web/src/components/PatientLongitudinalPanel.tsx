@@ -1,5 +1,6 @@
 import { useMemo, useState, type ReactNode } from 'react';
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
+import { isSurgicalHistoryDescription, stripSurgicalHistoryPrefix } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
 import { DocumentSearchPanel } from './DocumentSearchPanel.js';
 import { LabObservationsGrid } from './LabObservationsGrid.js';
@@ -30,6 +31,7 @@ export type PatientLongitudinalPanelProps = {
   onOpenNote?: (noteId: string) => void;
   onRegisterAllergy?: () => void;
   onRegisterProblem?: () => void;
+  onRegisterSurgicalHistory?: () => void;
   onOpenResults?: () => void;
 };
 
@@ -65,9 +67,18 @@ export function PatientLongitudinalPanel({
   onOpenNote,
   onRegisterAllergy,
   onRegisterProblem,
+  onRegisterSurgicalHistory,
   onOpenResults,
 }: PatientLongitudinalPanelProps) {
   const [exporting, setExporting] = useState<'txt' | 'pdf' | null>(null);
+  const clinicalProblems = useMemo(
+    () => data.problems.filter((p) => !isSurgicalHistoryDescription(p.description)),
+    [data.problems],
+  );
+  const surgicalHistory = useMemo(
+    () => data.problems.filter((p) => isSurgicalHistoryDescription(p.description)),
+    [data.problems],
+  );
 
   return (
     <Stack spacing={2} data-testid="epis2-longitudinal-panel">
@@ -111,8 +122,8 @@ export function PatientLongitudinalPanel({
 
       <LongitudinalNavTree data={data} onOpenDraft={onOpenDraft} />
 
-      <Section title={copy.longitudinal.problems} empty={data.problems.length === 0}>
-        {data.problems.length === 0 && onRegisterProblem ? (
+      <Section title={copy.longitudinal.problems} empty={clinicalProblems.length === 0}>
+        {clinicalProblems.length === 0 && onRegisterProblem ? (
           <Button
             size="small"
             variant="outlined"
@@ -124,9 +135,37 @@ export function PatientLongitudinalPanel({
           </Button>
         ) : null}
         <List dense disablePadding>
-          {data.problems.map((p) => (
+          {clinicalProblems.map((p) => (
             <ListItem key={p.id} disablePadding>
               <ListItemText primary={p.description} secondary={p.status} />
+            </ListItem>
+          ))}
+        </List>
+      </Section>
+
+      <Section
+        title={copy.longitudinal.surgicalHistory}
+        empty={surgicalHistory.length === 0}
+        testId="epis2-longitudinal-surgical-history"
+      >
+        {surgicalHistory.length === 0 && onRegisterSurgicalHistory ? (
+          <Button
+            size="small"
+            variant="outlined"
+            onClick={onRegisterSurgicalHistory}
+            data-testid="epis2-longitudinal-register-surgical-history"
+            sx={{ mb: 1 }}
+          >
+            {copy.longitudinal.registerSurgicalHistory}
+          </Button>
+        ) : null}
+        <List dense disablePadding>
+          {surgicalHistory.map((p) => (
+            <ListItem key={p.id} disablePadding>
+              <ListItemText
+                primary={stripSurgicalHistoryPrefix(p.description)}
+                secondary={p.status}
+              />
             </ListItem>
           ))}
         </List>

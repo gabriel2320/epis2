@@ -204,6 +204,8 @@ export const copy = {
     emptySection: 'Sin registros en esta sección.',
     registerAllergy: 'Registrar alergia',
     registerProblem: 'Registrar problema clínico',
+    registerSurgicalHistory: 'Registrar antecedente quirúrgico',
+    surgicalHistory: 'Antecedentes quirúrgicos',
     viewResults: 'Ver bandeja de resultados',
     documentRef: 'Referencia demo',
     searchDocuments: 'Buscar en documentos',

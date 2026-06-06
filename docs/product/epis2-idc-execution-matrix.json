@@ -6,9 +6,9 @@
     "totals": {
       "estado": {
         "Planned": 142,
-        "Active": 34,
+        "Active": 32,
         "Blocked": 1,
-        "Done": 23
+        "Done": 25
       },
       "prioridad": {
         "Critical": 9,
@@ -275,12 +275,12 @@
       "nombre": "Dashboard del paciente",
       "ola": "3",
       "workspace": "patient-record",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "High",
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": "Ficha M3 Ola 3"
+      "nota": "PatientWorkspacePage hub M3 + E2E MF-OLA3-006"
     },
     {
       "idc": 22,
@@ -383,12 +383,12 @@
       "nombre": "Antecedentes quirúrgicos",
       "ola": "3",
       "workspace": "patient-record",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "High",
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": "clinical_problem_entry"
+      "nota": "problemCategory + sección Ant.Qx MF-OLA3-007"
     },
     {
       "idc": 31,

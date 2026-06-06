@@ -13,7 +13,7 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 142 · Active: 34 · Blocked: 1 · Done: 23 |
+| **Estado** | Planned: 142 · Active: 32 · Blocked: 1 · Done: 25 |
 | **Prioridad** | Critical: 9 · High: 45 · Medium: 95 · Low: 51 |
 | **Horizonte** | Core: 41 · Post-core: 88 · Future: 71 |
 | **Decisión** | Build: 127 · Integrate: 5 · Defer: 66 · Exclude: 2 |
@@ -65,7 +65,7 @@
 
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
-| 21 | Dashboard del paciente | 3 | patient-record | Active | High | Core | Build | PARTIAL | Ficha M3 Ola 3 |
+| 21 | Dashboard del paciente | 3 | patient-record | Done | High | Core | Build | PARTIAL | PatientWorkspacePage hub M3 + E2E MF-OLA3-006 |
 | 22 | Banner alertas clínicas | 3 | patient-record | Done | High | Core | Build | PARTIAL | ClinicalAlertsPanel ficha + E2E DEMO-005 MF-OLA3-003 |
 | 23 | Línea de tiempo | 3 | patient-record | Done | High | Core | Build | PARTIAL | timeline ficha + E2E DEMO-001 MF-OLA3-005 |
 | 24 | Medicamentos continuos | 3 | patient-record | Done | High | Core | Build | PARTIAL | medicamentos activos ficha MF-OLA3-005 |
@@ -74,7 +74,7 @@
 | 27 | Antecedentes mórbidos | 3 | patient-record | Done | High | Core | Build | PARTIAL | allergy_entry + E2E ficha MF-OLA3-004 |
 | 28 | Antecedentes familiares | 3 | patient-record | Done | High | Core | Build | PARTIAL | allergy_entry + E2E ficha MF-OLA3-004 |
 | 29 | Registro hábitos | 3 | patient-record | Done | Medium | Core | Build | PARTIAL | clinical_problem_entry + E2E ficha MF-OLA3-004 |
-| 30 | Antecedentes quirúrgicos | 3 | patient-record | Active | High | Core | Build | PARTIAL | clinical_problem_entry |
+| 30 | Antecedentes quirúrgicos | 3 | patient-record | Done | High | Core | Build | PARTIAL | problemCategory + sección Ant.Qx MF-OLA3-007 |
 
 ## Consulta ambulatoria (31–40)
 

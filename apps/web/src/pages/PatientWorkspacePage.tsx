@@ -206,6 +206,12 @@ export function PatientWorkspacePage() {
                 search: { patientId },
               })
             }
+            onRegisterSurgicalHistory={() =>
+              void navigate({
+                to: '/espacio/problema',
+                search: { patientId },
+              })
+            }
             onOpenResults={() =>
               void navigate({
                 to: '/espacio/resultados',

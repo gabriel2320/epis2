@@ -1,3 +1,9 @@
+export {
+  formatSurgicalHistoryDescription,
+  isSurgicalHistoryDescription,
+  stripSurgicalHistoryPrefix,
+  SURGICAL_HISTORY_DESCRIPTION_PREFIX,
+} from './surgicalHistory.js';
 export { CLINICAL_ROLES, isClinicalRole, type ClinicalRole } from './roles.js';
 export { PERMISSIONS, isPermission, type Permission } from './permissions.js';
 export {

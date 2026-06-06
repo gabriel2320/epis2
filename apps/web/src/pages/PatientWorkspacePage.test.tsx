@@ -122,5 +122,6 @@ describe('PatientWorkspacePage', () => {
     ).toBeInTheDocument();
     expect(fetchPatientClinicalAlerts).toHaveBeenCalledWith(patientId, expect.any(Object));
     expect(screen.getByTestId('epis2-clinical-summary')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-longitudinal-panel')).toBeInTheDocument();
   });
 });

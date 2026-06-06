@@ -62,4 +62,23 @@ test.describe('Ola 3 — ficha longitudinal CTAs', () => {
     await expect(page.getByTestId('epis2-chart-inr-trend')).toBeVisible();
     await expect(page.getByTestId('epis2-chart-vitals-trend')).toBeVisible();
   });
+
+  test('ficha hub M3 carga workspace y panel longitudinal', async ({ page }) => {
+    await loginAsPhysician(page);
+    await pinDemoCase(page, 'DEMO-001');
+    await expect(page.getByTestId('epis2-patient-workspace')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-ficha-widget-panel')).toBeVisible();
+    await expect(page.getByTestId('epis2-longitudinal-panel')).toBeVisible();
+  });
+
+  test('ficha ofrece registrar antecedente quirúrgico', async ({ page }) => {
+    await loginAsPhysician(page);
+    await pinDemoCase(page, 'DEMO-001');
+    const register = page.getByTestId('epis2-longitudinal-register-surgical-history');
+    if (await register.isVisible()) {
+      await register.click();
+      await expect(page).toHaveURL(/\/espacio\/problema/);
+      await expect(page.getByTestId('epis2-form-clinical_problem_entry')).toBeVisible();
+    }
+  });
 });

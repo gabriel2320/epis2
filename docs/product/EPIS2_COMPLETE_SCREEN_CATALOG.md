@@ -90,6 +90,7 @@
 | 8 | Encuentros previos | API longitudinal | **PARTIAL** | En timeline, sin pantalla dedicada |
 | 9 | Problemas activos | `/espacio/problema` + contexto ficha | **PARTIAL** | IDC 29 Done |
 | 10 | Diagnósticos históricos | — | **MISSING** | Ola 3 |
+| — | Antecedentes quirúrgicos | `/espacio/problema` + sección ficha | **PARTIAL** | IDC 30 Done; prefijo `[Ant.Qx]` |
 | 11 | Alergias | `/espacio/alergia` + CDS ficha | **PARTIAL** | IDC 27–28 Done |
 | 12 | Medicamentos activos | Ficha longitudinal | **COMPLETE** | IDC 24 Done |
 | 13 | Observaciones / signos | `LabObservationsGrid` ficha | **COMPLETE** | IDC 25 Done |
@@ -102,7 +103,7 @@
 | 20 | Contactos y responsables | — | **MISSING** | Ola 3 |
 | — | Curvas signos vitales | `PatientClinicalCharts` | **COMPLETE** | IDC 26 Done; DEMO-005 |
 
-**Hub paciente:** `/espacio/ficha` → `PatientWorkspacePage` — **PARTIAL** (ficha mínima, no auto-abre todo el expediente ✓).
+**Hub paciente:** `/espacio/ficha` → `PatientWorkspacePage` — **COMPLETE** (IDC 21 Done; E2E hub M3).
 
 ---
 

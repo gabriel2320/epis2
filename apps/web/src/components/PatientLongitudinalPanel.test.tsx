@@ -87,4 +87,29 @@ describe('PatientLongitudinalPanel — Ola 3 CTAs', () => {
     expect(screen.getByTestId('epis2-longitudinal-observations')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-lab-observations-grid')).toBeInTheDocument();
   });
+
+  it('separa antecedentes quirúrgicos de problemas activos', () => {
+    render(
+      <Epis2ThemeProvider>
+        <PatientLongitudinalPanel
+          data={{
+            ...emptyLongitudinal,
+            problems: [
+              { id: 'p1', description: 'HTA', status: 'active' },
+              {
+                id: 'p2',
+                description: '[Ant.Qx] Apendicectomía 2018',
+                status: 'resolved',
+              },
+            ],
+          }}
+          onRegisterSurgicalHistory={vi.fn()}
+        />
+      </Epis2ThemeProvider>,
+    );
+
+    expect(screen.getByTestId('epis2-longitudinal-surgical-history')).toBeInTheDocument();
+    expect(screen.getByText('Apendicectomía 2018')).toBeInTheDocument();
+    expect(screen.getByText('HTA')).toBeInTheDocument();
+  });
 });

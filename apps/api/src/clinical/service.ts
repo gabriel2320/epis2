@@ -3,6 +3,7 @@ import {
   buildClinicalSafetyInputFromSummary,
   CHILE_RUT_IDENTIFIER_SYSTEM,
   evaluateDemoClinicalAlerts,
+  formatSurgicalHistoryDescription,
   normalizeRut,
 } from '@epis2/clinical-domain';
 import {
@@ -443,9 +444,14 @@ export async function approveDraft(db: Database, actor: Actor, draftId: string) 
 
   if (draft.draftType === 'clinical_problem_entry') {
     const body = draft.body as Record<string, unknown>;
-    const description =
+    let description =
       typeof body.description === 'string' ? body.description.trim() : draft.title;
     const status = typeof body.status === 'string' ? body.status : 'active';
+    const category =
+      typeof body.problemCategory === 'string' ? body.problemCategory.split('|')[0] : 'active_problem';
+    if (category === 'surgical_history' && description) {
+      description = formatSurgicalHistoryDescription(description);
+    }
     if (description) {
       await db.insert(problems).values({
         patientId: draft.patientId,
