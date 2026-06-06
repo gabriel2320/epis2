@@ -12,8 +12,10 @@ import {
   type CatalogEntryRow,
 } from '../api/adminApi.js';
 
+export type AdminConsoleTab = 'users' | 'catalogs' | 'audit' | 'ops';
+
 export type AdminConsolePageProps = {
-  initialTab?: 'users' | 'catalogs' | 'audit' | 'ops';
+  initialTab?: AdminConsoleTab;
 };
 
 export function AdminConsolePage({ initialTab = 'users' }: AdminConsolePageProps) {
@@ -52,10 +54,9 @@ export function AdminConsolePage({ initialTab = 'users' }: AdminConsolePageProps
     }
   }, [tab]);
 
-  const onTabChange = (_: unknown, value: string) => {
-    const next = value as AdminConsolePageProps['initialTab'];
-    setTab(next ?? 'users');
-    void navigate({ to: '/espacio/admin', search: { tab: next } });
+  const onTabChange = (_: unknown, value: AdminConsoleTab) => {
+    setTab(value);
+    void navigate({ to: '/espacio/admin', search: { tab: value } });
   };
 
   const addCatalogEntry = async () => {

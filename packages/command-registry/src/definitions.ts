@@ -183,7 +183,9 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
     requiredPermission: 'command.execute',
     requiresPatient: true,
     priority: 76,
-    match: (q) => /interconsulta|derivar\s+a\s+especialidad/.test(q),
+    match: (q) =>
+      /solicitar\s+interconsulta|pedir\s+interconsulta|derivar\s+a\s+especialidad/.test(q) ||
+      (/interconsulta/.test(q) && !/informe|respuesta|contestar|especialista/.test(q)),
   },
   {
     intent: 'request_imaging',
@@ -308,7 +310,7 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
     routePath: INTENT_ROUTE_PATHS.respond_referral,
     requiredPermission: 'command.execute',
     requiresPatient: true,
-    priority: 63,
+    priority: 78,
     match: (q) =>
       /informe\s+(de\s+)?interconsulta|respuesta\s+interconsulta|contestar\s+interconsulta|informe\s+especialista/.test(
         q,

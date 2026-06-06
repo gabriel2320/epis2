@@ -299,8 +299,8 @@ const adminConsoleRoute = createRoute({
   path: '/espacio/admin',
   validateSearch: (search: Record<string, unknown>) => {
     const tab = search.tab;
-    const validTab =
-      tab === 'catalogs' || tab === 'audit' || tab === 'ops' ? tab : ('users' as const);
+    const validTab: 'users' | 'catalogs' | 'audit' | 'ops' =
+      tab === 'catalogs' || tab === 'audit' || tab === 'ops' ? tab : 'users';
     return { tab: validTab };
   },
   component: function AdminConsoleRoute() {

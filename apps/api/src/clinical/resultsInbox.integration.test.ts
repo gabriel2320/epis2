@@ -72,7 +72,9 @@ describeIntegration('bandeja resultados (MF-161)', () => {
       headers: { cookie },
     });
     const inbox = patientResultsInboxResponseSchema.parse(res.json());
-    const leucocitos = inbox.observations.find((o) => o.label === 'Leucocitos');
+    const leucocitos = inbox.observations.find(
+      (o) => o.label === 'Leucocitos' && o.orderTitle,
+    );
     expect(leucocitos?.orderTitle).toBe('Hemograma control mañana');
     expect(inbox.pendingOrders.some((o) => o.title === 'Hemograma control mañana')).toBe(false);
 

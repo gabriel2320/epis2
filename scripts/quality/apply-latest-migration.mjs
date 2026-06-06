@@ -23,18 +23,20 @@ async function main() {
   const files = (await readdir(migrationsDir))
     .filter((f) => f.endsWith('.sql'))
     .sort();
-  const latest = files.at(-1);
-  if (!latest) {
+  const toApply = files.slice(-2);
+  if (toApply.length === 0) {
     console.error('apply-latest-migration FAILED: sin migraciones');
     process.exit(1);
   }
 
-  const content = await readFile(join(migrationsDir, latest), 'utf8');
   const sql = postgres(url, { max: 1 });
   try {
-    console.log(`Aplicando ${latest}…`);
-    await sql.unsafe(content);
-    console.log(`apply-latest-migration OK — ${latest}`);
+    for (const file of toApply) {
+      const content = await readFile(join(migrationsDir, file), 'utf8');
+      console.log(`Aplicando ${file}…`);
+      await sql.unsafe(content);
+    }
+    console.log(`apply-latest-migration OK — ${toApply.join(', ')}`);
   } finally {
     await sql.end({ timeout: 5 });
   }

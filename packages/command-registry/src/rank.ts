@@ -87,6 +87,18 @@ function entityBoost(
   ) {
     return 82;
   }
+  if (
+    def.intent === 'respond_referral' &&
+    /informe|respuesta|contestar|especialista/.test(normalized)
+  ) {
+    return 96;
+  }
+  if (
+    def.intent === 'request_referral' &&
+    /informe|respuesta|contestar|especialista/.test(normalized)
+  ) {
+    return 0;
+  }
   if (def.intent.startsWith('open_dashboard')) {
     if (/\b(tablero|dashboard|mi\s+trabajo|mis\s+tareas|indicadores)\b/.test(normalized)) {
       return 88;

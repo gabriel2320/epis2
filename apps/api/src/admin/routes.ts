@@ -85,19 +85,19 @@ export async function registerAdminRoutes(
       if (!parsed.success) {
         return reply.status(400).send({ error: 'Cuerpo inválido' });
       }
-      const actor = (request as AuthenticatedRequest).user!;
+      const actor = (request as AuthenticatedRequest).session;
       const [row] = await db
         .insert(clinicalCatalogStaging)
         .values({
           catalogCode: parsed.data.catalogCode,
           entryCode: parsed.data.entryCode,
           label: parsed.data.label,
-          createdBy: actor.id,
+          createdBy: actor.sub,
         })
         .returning();
       await appendAudit(db, {
         eventType: 'admin.catalog.created',
-        actorId: actor.id,
+        actorId: actor.sub,
         username: actor.username,
         entityType: 'clinical_catalog_staging',
         entityId: row!.id,

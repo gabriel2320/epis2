@@ -24,6 +24,9 @@ describe('EPIS prompt policy (local-ai)', () => {
       'clinical_problem_entry',
       'pharmacy_validation',
       'medication_reconciliation',
+      'transfer_note',
+      'outpatient_visit',
+      'referral_report',
     ]);
   });
 
