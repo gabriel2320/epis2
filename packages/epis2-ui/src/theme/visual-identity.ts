@@ -1,8 +1,16 @@
-import type { Epis2Accent, M3SurfaceRoles } from './color-roles.js';
+import type { Epis2MaterialColorScheme } from './contracts/material-color-scheme.js';
+import type { M3SurfaceRoles } from './color-roles.js';
+import { hexWithAlpha } from './color-alpha.js';
 
 export type Epis2ThemeMode = 'light' | 'dark';
 
-/** Tokens decorativos EPIS2 — no sustituyen roles clínicos ni palette semántica. */
+export type Epis2StatusChipColors = {
+  borderColor: string;
+  color: string;
+  bgcolor: string;
+};
+
+/** Tokens decorativos EPIS2 — derivados del esquema MTB activo. */
 export type Epis2VisualIdentity = {
   canvasGradient: string;
   heroRadial: string;
@@ -14,39 +22,63 @@ export type Epis2VisualIdentity = {
   powerBarFocusShadow: string;
   topBarBg: string;
   brandGradient: string;
+  demoBadgeChip: Epis2StatusChipColors;
 };
+
+function resolveSurfaces(
+  mode: Epis2ThemeMode,
+  scheme?: Epis2MaterialColorScheme,
+  surfaces?: M3SurfaceRoles,
+): M3SurfaceRoles {
+  if (scheme) {
+    return {
+      surface: scheme.surface,
+      surfaceContainer: scheme.surfaceContainer,
+      surfaceContainerHigh: scheme.surfaceContainerHigh,
+      onSurface: scheme.onSurface,
+      onSurfaceVariant: scheme.onSurfaceVariant,
+      outline: scheme.outline,
+      outlineVariant: scheme.outlineVariant,
+    };
+  }
+  return (
+    surfaces ?? {
+      surface: mode === 'light' ? '#FFFFFF' : '#1C1C1E',
+      surfaceContainer: mode === 'light' ? '#F5F5F7' : '#141416',
+      surfaceContainerHigh: mode === 'light' ? '#EBEBED' : '#2C2C2E',
+      onSurface: mode === 'light' ? '#18181B' : '#FAFAFA',
+      onSurfaceVariant: mode === 'light' ? '#71717A' : '#A1A1AA',
+      outline: mode === 'light' ? '#E4E4E7' : '#3F3F46',
+      outlineVariant: mode === 'light' ? '#F0F0F2' : '#27272A',
+    }
+  );
+}
 
 export function buildVisualIdentity(
   mode: Epis2ThemeMode,
-  _accent: Epis2Accent,
+  scheme?: Epis2MaterialColorScheme,
   surfaces?: M3SurfaceRoles,
 ): Epis2VisualIdentity {
-  if (mode === 'light') {
-    return {
-      canvasGradient: surfaces?.surfaceContainer ?? '#F5F5F7',
-      heroRadial: '',
-      cardElevation: 'none',
-      cardBorder: 'rgba(0, 0, 0, 0.06)',
-      focusRing: 'rgba(24, 24, 27, 0.14)',
-      powerBarBg: surfaces?.surfaceContainerHigh ?? '#EBEBED',
-      powerBarBorder: 'rgba(0, 0, 0, 0.08)',
-      powerBarFocusShadow: '0 0 0 2px rgba(24, 24, 27, 0.12)',
-      topBarBg: 'transparent',
-      brandGradient: 'none',
-    };
-  }
+  const resolved = resolveSurfaces(mode, scheme, surfaces);
+  const focusBase = scheme?.primary ?? resolved.onSurface;
+  const borderBase = scheme?.outline ?? resolved.outline;
 
   return {
-    canvasGradient: surfaces?.surfaceContainer ?? '#141416',
+    canvasGradient: resolved.surfaceContainer,
     heroRadial: '',
     cardElevation: 'none',
-    cardBorder: 'rgba(255, 255, 255, 0.08)',
-    focusRing: 'rgba(250, 250, 250, 0.16)',
-    powerBarBg: surfaces?.surfaceContainerHigh ?? '#2C2C2E',
-    powerBarBorder: 'rgba(255, 255, 255, 0.1)',
-    powerBarFocusShadow: '0 0 0 2px rgba(250, 250, 250, 0.14)',
+    cardBorder: hexWithAlpha(resolved.onSurface, mode === 'light' ? 0.08 : 0.12),
+    focusRing: hexWithAlpha(resolved.onSurface, mode === 'light' ? 0.14 : 0.16),
+    powerBarBg: resolved.surfaceContainerHigh,
+    powerBarBorder: hexWithAlpha(borderBase, 0.45),
+    powerBarFocusShadow: `0 0 0 2px ${hexWithAlpha(focusBase, 0.22)}`,
     topBarBg: 'transparent',
-    brandGradient: 'none',
+    brandGradient: scheme ? scheme.primary : 'none',
+    demoBadgeChip: {
+      borderColor: borderBase,
+      color: resolved.onSurfaceVariant,
+      bgcolor: resolved.surfaceContainerHigh,
+    },
   };
 }
 

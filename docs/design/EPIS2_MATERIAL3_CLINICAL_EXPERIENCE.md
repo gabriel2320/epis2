@@ -14,6 +14,8 @@ Material UI       → base React (MUI 6 + MUI X bajo demanda)
 
 **Perfiles de color (6 gamas MTB):** `docs/design/EPIS2_CLINICAL_DESIGN_SYSTEM_M3.md`
 
+**Conciliación olas × M3 adaptativo:** [`EPIS2_CLINICAL_MATERIAL3_CONCILIATION.md`](./EPIS2_CLINICAL_MATERIAL3_CONCILIATION.md) — sistema **ECM3**, navegación 6 áreas ↔ 5 workspaces, gate M3-UI por ola.
+
 ### Principio rector
 
 ```text

@@ -2,6 +2,7 @@ import { copy } from '@epis2/design-system';
 import {
   Alert,
   Chip,
+  EpisAppShellLayout,
   EpisDashboardShell,
   type EpisDashboardTab,
   EpisLoadingState,
@@ -32,6 +33,10 @@ import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { readRecentPatients } from '../clinical/recentPatients.js';
 import { useClinicalNavigate, type DashboardTab } from '../routes/clinicalNavigate.js';
+import {
+  Epis2NavigationRailFooter,
+  useEpis2NavigationRailItems,
+} from '../navigation/epis2NavigationRail.js';
 import { PatientDashboardTab } from '../components/PatientDashboardTab.js';
 import { QualityDashboardTab } from '../components/QualityDashboardTab.js';
 import { NursingDashboardTab } from '../components/NursingDashboardTab.js';
@@ -47,6 +52,7 @@ const LazyDashboardWorklists = lazy(() =>
 export function DashboardModeContent() {
   const search = useSearch({ strict: false }) as { tab?: string; patientId?: string };
   const navigate = useClinicalNavigate();
+  const railItems = useEpis2NavigationRailItems();
   const { session, hasPermission } = useAuth();
   const role = session?.user.role;
   const canQuality = hasPermission('audit.read');
@@ -469,18 +475,24 @@ export function DashboardModeContent() {
   }
 
   return (
-    <EpisDashboardShell
-      title={copy.dashboard.title}
-      subtitle={copy.dashboard.subtitle}
-      demoBadge={copy.demoBadge}
-      tabs={tabs}
-      activeTab={tab}
-      onTabChange={(v) => setTab(v as DashboardTab)}
-      onBackToCommand={goCommand}
-      backLabel={copy.layout.backToCommand}
-      data-testid="epis2-dashboard-mode"
+    <EpisAppShellLayout
+      railItems={railItems}
+      railFooter={<Epis2NavigationRailFooter />}
+      testId="epis2-dashboard-shell"
     >
-      {panel}
-    </EpisDashboardShell>
+      <EpisDashboardShell
+        title={copy.dashboard.title}
+        subtitle={copy.dashboard.subtitle}
+        demoBadge={copy.demoBadge}
+        tabs={tabs}
+        activeTab={tab}
+        onTabChange={(v) => setTab(v as DashboardTab)}
+        onBackToCommand={goCommand}
+        backLabel={copy.layout.backToCommand}
+        data-testid="epis2-dashboard-mode"
+      >
+        {panel}
+      </EpisDashboardShell>
+    </EpisAppShellLayout>
   );
 }

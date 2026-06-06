@@ -126,6 +126,7 @@ export const INTENT_TO_ASSIST_BLUEPRINT: Record<string, string> = {
   reconcile_medications: 'medication_reconciliation',
   transfer_patient: 'transfer_note',
   create_outpatient_visit: 'outpatient_visit',
+  create_medical_certificate: 'medical_certificate',
   respond_referral: 'referral_report',
 };
 
@@ -145,6 +146,7 @@ export const BLUEPRINT_BY_ROUTE: Record<string, string> = {
   '/espacio/conciliacion': 'medication_reconciliation',
   '/espacio/traslado': 'transfer_note',
   '/espacio/ambulatorio': 'outpatient_visit',
+  '/espacio/certificado': 'medical_certificate',
   '/espacio/informe-interconsulta': 'referral_report',
 };
 
@@ -165,6 +167,7 @@ export const DRAFT_TYPE_TO_BLUEPRINT: Record<string, string> = {
   transfer_note: 'transfer_note',
   outpatient_visit: 'outpatient_visit',
   referral_report: 'referral_report',
+  medical_certificate: 'medical_certificate',
 };
 
 const SUMMARY_CONTEXT_KEYS = [

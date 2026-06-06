@@ -4,6 +4,7 @@
 import { getBlueprintById, initialFormValues } from '@epis2/clinical-forms';
 
 const evolutionNoteBlueprint = getBlueprintById('evolution_note')!;
+const nursingNoteBlueprint = getBlueprintById('nursing_note')!;
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { Epis2ThemeProvider } from '../providers/Epis2ThemeProvider.js';
@@ -41,5 +42,22 @@ describe('EpisClinicalForm', () => {
     expect(subjective).toBeTruthy();
     const proseStack = subjective?.closest('.MuiStack-root');
     expect(proseStack).toHaveStyle({ maxWidth: '65ch' });
+  });
+
+  it('renderiza grid M3 con celdas proporcionales en signos vitales', () => {
+    render(
+      <Epis2ThemeProvider>
+        <EpisClinicalForm
+          blueprint={nursingNoteBlueprint}
+          values={initialFormValues(nursingNoteBlueprint)}
+          onChange={vi.fn()}
+        />
+      </Epis2ThemeProvider>,
+    );
+
+    expect(screen.getByTestId('epis2-form-section-grid-vitals')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-form-field-cell-bloodPressure')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-form-field-cell-heartRate')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-form-field-cell-temperature')).toBeInTheDocument();
   });
 });

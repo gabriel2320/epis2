@@ -64,7 +64,15 @@ export const ASSIST_BLUEPRINT_FIELDS: Record<string, readonly string[]> = {
     'communicationNotes',
   ],
   transfer_note: ['transferReason', 'clinicalSummary', 'handoffPlan', 'targetBedId'],
-  outpatient_visit: ['chiefComplaint', 'history', 'physicalExam', 'assessment', 'plan'],
+  outpatient_visit: [
+    'chiefComplaint',
+    'history',
+    'physicalExamGeneral',
+    'physicalExamSegment',
+    'assessment',
+    'plan',
+    'generalIndications',
+  ],
   referral_report: ['referralContext', 'specialistAssessment', 'recommendations', 'followUpPlan'],
 };
 

@@ -49,6 +49,7 @@ export function EpisAppearancePreferencesPanel({
     sageClinical: copy.themePreferences.accentSage,
     oceanDepth: copy.themePreferences.accentOcean,
     warmLinen: copy.themePreferences.accentLinen,
+    monochrome: copy.themePreferences.accentMonochrome,
     calmGreen: copy.themePreferences.accentGreen,
     soberViolet: copy.themePreferences.accentViolet,
     neutral: copy.themePreferences.accentNeutral,
@@ -145,6 +146,23 @@ export function EpisAppearancePreferencesPanel({
           clickable
           onClick={() => setPreferences({ motion: 'reduced' })}
           data-testid="epis2-motion-reduced"
+        />
+      </PreferenceRow>
+
+      <PreferenceRow label={copy.themePreferences.clinicalSplitScreen}>
+        <EpisFilterChip
+          label={copy.themePreferences.splitScreenFocus}
+          active={preferences.clinicalSplitScreen === 'focus'}
+          clickable
+          onClick={() => setPreferences({ clinicalSplitScreen: 'focus' })}
+          data-testid="epis2-split-focus"
+        />
+        <EpisFilterChip
+          label={copy.themePreferences.splitScreenSplit}
+          active={preferences.clinicalSplitScreen === 'split'}
+          clickable
+          onClick={() => setPreferences({ clinicalSplitScreen: 'split' })}
+          data-testid="epis2-split-screen"
         />
       </PreferenceRow>
 

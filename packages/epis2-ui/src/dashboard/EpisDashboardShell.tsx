@@ -5,7 +5,7 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import type { ReactNode } from 'react';
 import { EpisButton } from '../primitives/EpisButton.js';
-import { EpisChip } from '../primitives/EpisChip.js';
+import { EpisDemoBadgeChip } from '../primitives/EpisDemoBadgeChip.js';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
 import { EpisAppearancePreferencesLink } from '../providers/EpisAppearancePreferencesLink.js';
 import { EpisThemeModeToggle } from '../providers/EpisThemeModeToggle.js';
@@ -84,13 +84,7 @@ export function EpisDashboardShell({
         </Stack>
 
         {demoBadge ? (
-          <EpisChip
-            label={demoBadge}
-            size="small"
-            color="warning"
-            variant="outlined"
-            sx={{ alignSelf: 'flex-start' }}
-          />
+          <EpisDemoBadgeChip label={demoBadge} sx={{ alignSelf: 'flex-start' }} />
         ) : null}
 
         <Box

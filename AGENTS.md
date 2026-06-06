@@ -5,7 +5,8 @@
 ## Antes de modificar código
 
 1. Leer `docs/PRODUCT_CANON.md` y `docs/product/PRODUCT_INVARIANTS.md`.
-2. Ejecutar `npm run quality:microphase-next` — trabajar **solo** la microfase `READY`.
+2. Leer `docs/product/EPIS2_WAVE_EXECUTION_CANON.md` — tramo, ola, dependencias, gates (no cola lineal automática).
+3. Ejecutar `npm run quality:microphase-next` — trabajar **solo** la microfase `READY`.
 3. Leer `docs/quality/MICROPHASE_PROGRAM.md` y `docs/quality/microphase-ledger.json`.
 4. Leer `docs/legacy/EPIS_POSTMORTEM.md` si tocas integración o migración.
 5. **Declarar alcance** (microfase MF-XXX, archivos permitidos/prohibidos).

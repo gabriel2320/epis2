@@ -13,13 +13,17 @@ export type UseEpisClinicalContextPanelOptions = {
   storageKey?: string;
 };
 
-function readStoredContextOpen(storageKey?: string): boolean {
-  if (!storageKey || typeof sessionStorage === 'undefined') return false;
-  try {
-    return sessionStorage.getItem(storageKey) === '1';
-  } catch {
-    return false;
+function readStoredContextOpen(storageKey: string | undefined, splitScreenDefault: boolean): boolean {
+  if (storageKey && typeof sessionStorage !== 'undefined') {
+    try {
+      const stored = sessionStorage.getItem(storageKey);
+      if (stored === '1') return true;
+      if (stored === '0') return false;
+    } catch {
+      // sessionStorage puede fallar en modo privado estricto
+    }
   }
+  return splitScreenDefault;
 }
 
 function writeStoredContextOpen(storageKey: string | undefined, open: boolean): void {
@@ -34,10 +38,23 @@ function writeStoredContextOpen(storageKey: string | undefined, open: boolean): 
 /** Estado del panel de contexto clínico con preservación de foco en el formulario. */
 export function useEpisClinicalContextPanel(options?: UseEpisClinicalContextPanelOptions) {
   const storageKey = options?.storageKey;
-  const [contextOpen, setContextOpenState] = useState(() => readStoredContextOpen(storageKey));
-  const focusSnapshot = useRef<FocusSnapshot | null>(null);
   const { preferences } = useEpis2ThemePreferences();
+  const splitDefault = preferences.clinicalSplitScreen === 'split';
+  const [contextOpen, setContextOpenState] = useState(() =>
+    readStoredContextOpen(storageKey, splitDefault),
+  );
+  const focusSnapshot = useRef<FocusSnapshot | null>(null);
   const reducedMotion = preferences.motion === 'reduced' || prefersReducedMotion();
+
+  useEffect(() => {
+    if (!storageKey) return;
+    const stored =
+      typeof sessionStorage !== 'undefined' ? sessionStorage.getItem(storageKey) : null;
+    if (stored === null && splitDefault) {
+      setContextOpenState(true);
+      writeStoredContextOpen(storageKey, true);
+    }
+  }, [splitDefault, storageKey]);
 
   const captureFocus = useCallback(() => {
     const el = document.activeElement;

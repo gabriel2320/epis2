@@ -204,6 +204,7 @@ Regenerar TS tras editar JSON: `npm run theme:generate` · validar: `npm run the
 
 - `EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md` — Standard vs Expressive
 - `EPIS2_TYPOGRAPHY_AND_AESTHETICS_RULES.md` — 20 reglas
+- `EPIS2_M3_SYMMETRY_AND_FRAMING.md` — cuadrícula 8dp, formularios, botones, encuadre
 - `EPIS2_MATERIAL_DESIGN_ANTI_PATTERNS.md` — 20 prohibidos
 - `M3_ANTI_DRIFT_GATES.md` — M3-G01…G15
 - `M3_VISUAL_SIGNOFF_STEPS.md` — pasos V1–V6

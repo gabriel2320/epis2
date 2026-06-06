@@ -21,6 +21,8 @@ function renderCommandCenter() {
 
 vi.mock('@tanstack/react-router', () => ({
   useNavigate: () => vi.fn(),
+  useRouterState: ({ select }: { select: (s: { location: { pathname: string } }) => unknown }) =>
+    select({ location: { pathname: '/comando' } }),
 }));
 
 vi.mock('../api/commandApi.js', () => ({

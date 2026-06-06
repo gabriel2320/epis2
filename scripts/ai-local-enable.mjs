@@ -26,7 +26,7 @@ loadDotEnv();
 
 const OLLAMA_URL = process.env.OLLAMA_BASE_URL ?? 'http://127.0.0.1:11434';
 const LOCAL_AI_URL = process.env.LOCAL_AI_BASE_URL ?? 'http://127.0.0.1:3002';
-const MODEL = process.env.OLLAMA_MODEL ?? 'llama3.2';
+const MODEL = process.env.OLLAMA_MODEL ?? 'qwen3:8b';
 const COMPOSE_SERVICE = 'ollama';
 const CONTAINER = 'epis2-ollama';
 
@@ -88,14 +88,21 @@ async function ensureOllama() {
     return 'native';
   }
 
-  console.log('1) Ollama no responde — levantando contenedor Docker…');
+  if (OLLAMA_URL.includes('host.docker.internal')) {
+    throw new Error(
+      `Ollama no responde en ${OLLAMA_URL}. Instala Ollama en el host (https://ollama.com), ` +
+        `ejecuta "ollama pull ${MODEL}" y deja el servicio en segundo plano.`,
+    );
+  }
+
+  console.log('1) Ollama no responde — levantando contenedor Docker (perfil bundled-ollama)…');
   try {
-    await run('docker', ['compose', 'up', '-d', COMPOSE_SERVICE]);
+    await run('docker', ['compose', '--profile', 'bundled-ollama', 'up', '-d', COMPOSE_SERVICE]);
   } catch (e) {
     console.error(
       '\nNo se pudo levantar Ollama por Docker.',
-      'En Windows instala Ollama desde https://ollama.com y deja la app en segundo plano,',
-      'o reintenta cuando la red no falle (TLS al pull de imagen).\n',
+      'Preferido: Ollama nativo en el host con OLLAMA_BASE_URL=http://127.0.0.1:11434',
+      'Opcional: docker compose --profile bundled-ollama up -d ollama\n',
     );
     throw e;
   }

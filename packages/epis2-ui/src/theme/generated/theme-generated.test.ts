@@ -13,6 +13,8 @@ import {
   slateProfessionalLightScheme,
   warmLinenDarkScheme,
   warmLinenLightScheme,
+  monochromeGrayDarkScheme,
+  monochromeGrayLightScheme,
 } from './index.js';
 import { clinicalSemanticRoles } from '../clinical/clinical-semantic-roles.js';
 
@@ -39,11 +41,13 @@ const ALL_SCHEMES: [string, (typeof clinicalBlueLightScheme)][] = [
   ['ocean-depth dark', oceanDepthDarkScheme],
   ['warm-linen light', warmLinenLightScheme],
   ['warm-linen dark', warmLinenDarkScheme],
+  ['monochrome-gray light', monochromeGrayLightScheme],
+  ['monochrome-gray dark', monochromeGrayDarkScheme],
 ];
 
 describe('generated Material Theme Builder schemes', () => {
-  it('metadata lista 6 perfiles MTB aprobados', () => {
-    expect(MATERIAL_THEME_METADATA).toHaveLength(6);
+  it('metadata lista 7 perfiles MTB aprobados', () => {
+    expect(MATERIAL_THEME_METADATA).toHaveLength(7);
     const ids = MATERIAL_THEME_METADATA.map((m) => m.id);
     expect(ids).toEqual(
       expect.arrayContaining([
@@ -53,6 +57,7 @@ describe('generated Material Theme Builder schemes', () => {
         'sage-clinical',
         'ocean-depth',
         'warm-linen',
+        'monochrome-gray',
       ]),
     );
   });

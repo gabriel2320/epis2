@@ -10,6 +10,13 @@ type BlueprintInput = Omit<ClinicalFormBlueprint, 'aiAssistMode' | 'approvalRequ
   approvalRequired?: boolean;
 };
 
+export type FieldDefinition = {
+  required?: boolean;
+  options?: readonly string[];
+  columnSpan?: number;
+  readOnly?: boolean;
+};
+
 export function defineBlueprint(input: BlueprintInput): ClinicalFormBlueprint {
   return {
     ...input,
@@ -31,12 +38,26 @@ export function field(
   id: string,
   label: string,
   type: FormFieldType,
-  required = false,
+  requiredOrDef?: boolean | FieldDefinition,
   options?: readonly string[],
 ): FormField {
-  const base: FormField = { id, label, type, required };
-  if (options !== undefined) {
-    return { ...base, options };
+  let required = false;
+  let opts: readonly string[] | undefined;
+  let columnSpan: number | undefined;
+  let readOnly: boolean | undefined;
+
+  if (typeof requiredOrDef === 'boolean') {
+    required = requiredOrDef;
+    opts = options;
+  } else if (requiredOrDef !== undefined) {
+    required = requiredOrDef.required ?? false;
+    opts = requiredOrDef.options ?? options;
+    columnSpan = requiredOrDef.columnSpan;
+    readOnly = requiredOrDef.readOnly;
   }
-  return base;
+
+  const base: FormField = { id, label, type, required };
+  const withOpts = opts !== undefined ? { ...base, options: opts } : base;
+  const withSpan = columnSpan !== undefined ? { ...withOpts, columnSpan } : withOpts;
+  return readOnly !== undefined ? { ...withSpan, readOnly } : withSpan;
 }

@@ -1,3 +1,13 @@
+# EPIS2 — infraestructura Docker
+#
+# Ollama por defecto: instalación nativa en el host (Windows/macOS/Linux).
+# Los servicios en contenedor alcanzan el host vía host.docker.internal:11434.
+# Contenedor Ollama opcional: docker compose --profile bundled-ollama up -d ollama
+
+x-ollama-env: &ollama-env
+  OLLAMA_BASE_URL: http://host.docker.internal:11434
+  OLLAMA_MODEL: qwen3:8b
+
 services:
   postgres:
     image: pgvector/pgvector:pg16
@@ -17,6 +27,8 @@ services:
       retries: 5
 
   ollama:
+    profiles:
+      - bundled-ollama
     image: ollama/ollama:latest
     container_name: epis2-ollama
     ports:

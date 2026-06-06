@@ -28,7 +28,11 @@ export const admissionNoteBlueprint = defineBlueprint({
     field('admissionReason', 'Motivo de ingreso', 'textarea', true),
     field('clinicalSummary', 'Resumen clínico', 'textarea', true),
     field('initialPlan', 'Plan inicial', 'textarea', true),
-    field('targetBedId', 'Cama destino', 'select', true, DEMO_BED_OPTIONS),
+    field('targetBedId', 'Cama destino', 'select', {
+      required: true,
+      options: DEMO_BED_OPTIONS,
+      columnSpan: 6,
+    }),
   ],
   validations: [
     { fieldId: 'admissionReason', message: 'Motivo de ingreso requerido' },

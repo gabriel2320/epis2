@@ -4,9 +4,11 @@ import { DASHBOARD_TAB_BY_INTENT, getCommandBarAiHint } from '@epis2/command-reg
 import type { ClinicalIntent } from '@epis2/command-registry';
 import {
   Box,
+  EpisAppShellLayout,
   EpisButton,
   EpisCard,
   EpisChip,
+  EpisDemoBadgeChip,
   EpisCommandBar,
   EpisCommandCenterLayout,
   EpisCommandResult,
@@ -33,6 +35,10 @@ import { fetchAiStatus } from '../api/aiApi.js';
 import { INTENT_TO_ASSIST_BLUEPRINT, listPatients, type PatientListRow } from '../api/clinicalApi.js';
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
+import {
+  Epis2NavigationRailFooter,
+  useEpis2NavigationRailItems,
+} from '../navigation/epis2NavigationRail.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 import { useClinicalNavigate, type ClinicalFormRoutePath, type DashboardTab } from '../routes/clinicalNavigate.js';
 import { ActivePatientBanner } from '../components/ActivePatientBanner.js';
@@ -43,6 +49,7 @@ export function CommandCenterPage() {
   const { session, logout, hasPermission } = useAuth();
   const { patient: activePatient, setPatient } = useActivePatient();
   const navigate = useClinicalNavigate();
+  const railItems = useEpis2NavigationRailItems();
   const [query, setQuery] = useState('');
   const [error, setError] = useState<string | undefined>();
   const [isResolving, setIsResolving] = useState(false);
@@ -159,12 +166,10 @@ export function CommandCenterPage() {
     <EpisTopAppBar
       data-testid="epis2-command-top-bar"
       startAction={
-        <EpisChip
+        <EpisDemoBadgeChip
           icon={<ScienceIcon />}
           label={copy.demoBadge}
-          size="small"
-          variant="outlined"
-          sx={{ fontWeight: 600, borderColor: 'warning.main', color: 'warning.dark', bgcolor: 'warning.light' }}
+          data-testid="epis2-demo-badge"
         />
       }
       endActions={
@@ -180,7 +185,12 @@ export function CommandCenterPage() {
   );
 
   return (
-    <EpisCommandCenterLayout header={header}>
+    <EpisAppShellLayout
+      railItems={railItems}
+      railFooter={<Epis2NavigationRailFooter />}
+      testId="epis2-command-shell"
+    >
+      <EpisCommandCenterLayout header={header}>
       {session ? (
         <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
           <PersonIcon color="primary" fontSize="small" />
@@ -377,6 +387,7 @@ export function CommandCenterPage() {
           </Stack>
         </EpisCommandResult>
       ) : null}
-    </EpisCommandCenterLayout>
+      </EpisCommandCenterLayout>
+    </EpisAppShellLayout>
   );
 }

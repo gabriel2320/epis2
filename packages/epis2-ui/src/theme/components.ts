@@ -1,4 +1,5 @@
 import type { Components, Theme } from '@mui/material/styles';
+import { epis2M3TouchTargetMinPx } from './m3-layout-tokens.js';
 import { epis2DisplayFontFamily, epis2MonoFontFamily } from './typography.js';
 import { epis2Shape } from './shape.js';
 import { epis2Motion } from './motion.js';
@@ -32,29 +33,71 @@ export function buildEpis2Components(motionScheme: 'standard' | 'reduced' = 'sta
     MuiButton: {
       defaultProps: { disableElevation: true },
       styleOverrides: {
+        root: ({ theme }) => {
+          const containedColors = ['primary', 'secondary', 'error', 'warning', 'info', 'success'] as const;
+          const containedContrastRules = Object.fromEntries(
+            containedColors
+              .filter((color) => theme.palette[color]?.main && theme.palette[color]?.contrastText)
+              .map((color) => [
+                `&.MuiButton-contained${color.charAt(0).toUpperCase()}${color.slice(1)}`,
+                {
+                  backgroundImage: 'none',
+                  backgroundColor: theme.palette[color].main,
+                  color: theme.palette[color].contrastText,
+                  boxShadow: 'none',
+                  '&:hover': {
+                    backgroundColor: theme.palette[color].dark,
+                    color: theme.palette[color].contrastText,
+                    boxShadow: 'none',
+                  },
+                },
+              ]),
+          );
+
+          return {
+            textTransform: 'none',
+            fontWeight: 500,
+            fontFamily: epis2DisplayFontFamily,
+            borderRadius: epis2Shape.squircle,
+            minHeight: epis2M3TouchTargetMinPx,
+            transition,
+            ...containedContrastRules,
+            '&.MuiButton-sizeLarge': {
+              minHeight: 48,
+              px: 3,
+            },
+            whiteSpace: 'normal',
+            textAlign: 'center',
+            lineHeight: 1.45,
+          };
+        },
+      },
+    },
+    MuiFab: {
+      styleOverrides: {
         root: ({ theme }) => ({
-          textTransform: 'none',
-          fontWeight: 500,
-          fontFamily: epis2DisplayFontFamily,
-          borderRadius: epis2Shape.squircle,
-          minHeight: 40,
-          transition,
-          '&.MuiButton-containedPrimary': {
-            backgroundImage: 'none',
-            backgroundColor: theme.palette.primary.main,
-            boxShadow: 'none',
+          color: theme.palette.primary.contrastText,
+          backgroundColor: theme.palette.primary.main,
+          '&:hover': {
+            backgroundColor: theme.palette.primary.dark,
+            color: theme.palette.primary.contrastText,
+          },
+          '&.MuiFab-secondary': {
+            color: theme.palette.secondary.contrastText,
+            backgroundColor: theme.palette.secondary.main,
             '&:hover': {
-              backgroundColor: theme.palette.primary.dark,
-              boxShadow: 'none',
+              backgroundColor: theme.palette.secondary.dark,
+              color: theme.palette.secondary.contrastText,
             },
           },
-          '&.MuiButton-sizeLarge': {
-            minHeight: 48,
-            px: 3,
+          '&.MuiFab-error': {
+            color: theme.palette.error.contrastText,
+            backgroundColor: theme.palette.error.main,
+            '&:hover': {
+              backgroundColor: theme.palette.error.dark,
+              color: theme.palette.error.contrastText,
+            },
           },
-          whiteSpace: 'normal',
-          textAlign: 'center',
-          lineHeight: 1.45,
         }),
       },
     },
@@ -211,6 +254,30 @@ export function buildEpis2Components(motionScheme: 'standard' | 'reduced' = 'sta
           '&.MuiChip-filled': {
             bgcolor: theme.palette.action.hover,
             color: theme.palette.text.primary,
+          },
+          '&.MuiChip-filledPrimary': {
+            bgcolor: theme.palette.primary.main,
+            color: theme.palette.primary.contrastText,
+          },
+          '&.MuiChip-filledSecondary': {
+            bgcolor: theme.palette.secondary.main,
+            color: theme.palette.secondary.contrastText,
+          },
+          '&.MuiChip-filledError': {
+            bgcolor: theme.palette.error.main,
+            color: theme.palette.error.contrastText,
+          },
+          '&.MuiChip-filledWarning': {
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText,
+          },
+          '&.MuiChip-filledInfo': {
+            bgcolor: theme.palette.info.main,
+            color: theme.palette.info.contrastText,
+          },
+          '&.MuiChip-filledSuccess': {
+            bgcolor: theme.palette.success.main,
+            color: theme.palette.success.contrastText,
           },
         }),
       },

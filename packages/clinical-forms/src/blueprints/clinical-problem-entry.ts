@@ -13,7 +13,11 @@ export const clinicalProblemEntryBlueprint = defineBlueprint({
   sections: [section('problem', 'Problema', ['description', 'status'])],
   fields: [
     field('description', 'Descripción del problema', 'textarea', true),
-    field('status', 'Estado', 'select', true, ['active', 'resolved'] as const),
+    field('status', 'Estado', 'select', {
+      required: true,
+      options: ['active', 'resolved'] as const,
+      columnSpan: 4,
+    }),
   ],
   validations: [{ fieldId: 'description', message: 'Descripción requerida' }],
 });

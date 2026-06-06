@@ -1,6 +1,6 @@
 # EPIS2 — Catálogo completo de pantallas
 
-**Versión:** 1.0 · **Fecha:** 2026-06-05  
+**Versión:** 1.1 · **Fecha:** 2026-06-04  
 **Estado:** Auditoría de brechas (sin implementación masiva)  
 **Frase guía:** *EPIS2 debe mostrar únicamente la herramienta necesaria para completar la actividad clínica actual.*
 
@@ -46,7 +46,7 @@
 | 4 | Perfil sin acceso | Error 403 en comando/formulario | **PARTIAL** | Pantalla `forbidden` unificada |
 | 5 | Selección de rol activo | Rol fijo en sesión demo | **MISSING** | Ola 9 (OIDC multi-rol) |
 | 6 | Preferencias personales | — | **MISSING** | Ola 9 |
-| 7 | Preferencias de apariencia | `EpisThemeModeToggle` en shell | **PARTIAL** | Sin página dedicada |
+| 7 | Preferencias de apariencia | `/preferencias-apariencia` | **COMPLETE** | M3 + split screen |
 | 8 | Ayuda contextual | — | **MISSING** | Ola 1 (ayuda comandos) |
 | 9 | Centro de notificaciones | — | **MISSING** | Ola 4+ |
 | 10 | Estado sin conexión | Errores locales en formularios | **PARTIAL** | Estado global offline |
@@ -283,11 +283,69 @@ Excepciones: tablero calidad (lectura), `/dev/*` (gated), `GET /api/ops/status`.
 | `/espacio/enfermeria` | Enfermería |
 | `/espacio/mar` | MAR |
 | `/espacio/farmacia` | Farmacia |
+| `/espacio/ingreso` | Ingreso |
+| `/espacio/alergia` | Alergia |
+| `/espacio/problema` | Problema clínico |
+| `/espacio/conciliacion` | Conciliación |
+| `/espacio/traslado` | Traslado |
+| `/espacio/ambulatorio` | Ambulatorio |
+| `/espacio/certificado` | Certificado médico (Ola 2) |
+| `/espacio/informe-interconsulta` | Informe interconsulta |
+| `/espacio/resultados` | Bandeja resultados |
+| `/espacio/admin` | Admin |
+| `/sin-acceso` | Sin permiso (403) |
+| `/sesion-expirada` | Sesión expirada |
+| `/preferencias-apariencia` | Preferencias M3 |
+| `/desarrollo/catalogo-visual` | Catálogo visual M3 (gated) |
 | `/dev/ui-catalog` | Dev (gated) |
 | `/dev/scheduler-spike` | Dev (gated) |
 | `*` | NotFound |
 
-**Total rutas productivas:** 18 + fallback. **No hay** `/administracion`, `/auditoria` como SPA.
+**Total rutas productivas:** 27 + fallback + dev/gated. Admin y preferencias fuera de shell clínico estricto.
+
+---
+
+## 23. Inventario extendido — Ficha médica (IDC 1–200)
+
+**Índice maestro:** [`EPIS2_ARCHITECTURE_INVENTORY_MEDICAL_RECORD.md`](./EPIS2_ARCHITECTURE_INVENTORY_MEDICAL_RECORD.md)
+
+| Bloque | Documento | Ítems | Cobertura |
+|--------|-----------|-------|-----------|
+| **1–100** | [`EPIS2_ARCHITECTURE_INVENTORY_001_100.md`](./EPIS2_ARCHITECTURE_INVENTORY_001_100.md) | Recepción, resumen, ambulatorio, órdenes, legales, IA | **~22 %** |
+| **101–200** | [`EPIS2_ARCHITECTURE_INVENTORY_101_200.md`](./EPIS2_ARCHITECTURE_INVENTORY_101_200.md) | Urgencias, enfermería, APS, UCI, IAAS, pabellón… | **~6 %** |
+| **Total** | — | **200** | **~14 %** |
+
+### Resumen por módulo (IDC 1–100)
+
+| IDC | Módulo | COMPLETE | PARTIAL | MISSING | DEFERRED |
+|-----|--------|----------|---------|---------|----------|
+| 1–10 | Recepción y flujo | 1 | 0 | 9 | 0 |
+| 11–20 | Facturación | 0 | 0 | 0 | 10 |
+| 21–30 | Resumen clínico | 0 | 6 | 4 | 0 |
+| 31–40 | Consulta ambulatoria | 1 | 4 | 5 | 0 |
+| 41–50 | UCI (duplica 131–140) | 0 | 0 | 0 | 10 |
+| 51–60 | Prescripción y órdenes | 2 | 5 | 3 | 0 |
+| 61–70 | Documentos legales | 1 | 1 | 6 | 2 |
+| 71–80 | Epidemiología / IAAS | 0 | 2 | 8 | 0 |
+| 81–90 | Jefatura / admin | 0 | 5 | 5 | 0 |
+| 91–100 | IA y herramientas | 1 | 4 | 3 | 2 |
+
+### Resumen por módulo (IDC 101–200)
+|------------|--------|-------|-----------------|---------------|
+| 101–110 | Urgencias y triage | 10 | 0 COMPLETE · 2 PARTIAL | Ola 10 |
+| 111–120 | Enfermería ampliada | 10 | 0 · 3 PARTIAL | Ola 11 |
+| 121–130 | Medicina general / APS | 10 | 0 · 1 PARTIAL | Ola 12 |
+| 131–140 | UCI | 10 | DEFERRED | Ola 13 |
+| 141–150 | IAAS avanzada | 10 | 0 · 1 PARTIAL | Ola 14 |
+| 151–160 | Pabellón / anestesia | 10 | MISSING | Ola 15 |
+| 161–170 | Farmacia clínica | 10 | 1 COMPLETE · 1 PARTIAL | Ola 16 |
+| 171–180 | Calidad y auditoría | 10 | 0 · 2 PARTIAL | Ola 17 |
+| 181–190 | Especialidades | 10 | DEFERRED | Ola 18 |
+| 191–196 | IA / hardware local | 6 | 0 · 3 PARTIAL | Ola 19 |
+| 197–198 | IoT | 2 | DEFERRED | — |
+| 199–200 | Interoperabilidad | 2 | 0 · 2 PARTIAL | Ola 20 |
+
+**Regla:** ningún ítem 101–200 compite con Centro de Comando como home; tableros clínicos usan Modo tablero o widgets M3.
 
 ---
 
@@ -298,7 +356,7 @@ Excepciones: tablero calidad (lectura), `/dev/*` (gated), `GET /api/ops/status`.
 | Ningún segundo Command/Form Registry | ✓ OK |
 | Dashboard no compite con Comando | ✓ OK |
 | Resumen paciente: comando + ficha + blueprint | **PARTIAL** — misma función, rutas coherentes |
-| Ingreso: comando dashboard + API sin formulario | **PARTIAL** — cadena incompleta |
+| Ingreso: blueprint + API + comando | **COMPLETE** (MF-157) |
 
 ---
 
@@ -323,7 +381,9 @@ Excepciones: tablero calidad (lectura), `/dev/*` (gated), `GET /api/ops/status`.
 | Administración | 5 % |
 | Interoperabilidad / Chile | 30 % |
 
-**Cobertura global catálogo (ponderada): ~28 %** — coherente con MVP demo + slices V0–V5, no EHR completo.
+**Cobertura global catálogo IDC 1–100 (ponderada): ~28 %** — MVP demo + slices V0–V5.
+
+**Cobertura IDC 101–200:** ~6 % — ver [`EPIS2_ARCHITECTURE_INVENTORY_101_200.md`](./EPIS2_ARCHITECTURE_INVENTORY_101_200.md).
 
 ---
 
@@ -331,5 +391,6 @@ Excepciones: tablero calidad (lectura), `/dev/*` (gated), `GET /api/ops/status`.
 
 - Router: `apps/web/src/routes/router.tsx`
 - Layout clínico: `apps/web/src/layouts/ClinicalShellLayout.tsx`
+- Inventario 101–200: `docs/product/EPIS2_ARCHITECTURE_INVENTORY_101_200.md`
 - Canon: `docs/PRODUCT_CANON.md`
 - Capability map previo: `docs/product/EPIS2_COMPLETE_CAPABILITY_MAP.md`

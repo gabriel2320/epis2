@@ -7,6 +7,7 @@ import { loadEnvFile } from './load-env.mjs';
 loadEnvFile();
 
 const OLLAMA_URL = process.env.OLLAMA_BASE_URL ?? 'http://127.0.0.1:11434';
+const OLLAMA_MODEL = process.env.OLLAMA_MODEL ?? 'qwen3:8b';
 const LOCAL_AI_URL = process.env.LOCAL_AI_BASE_URL ?? 'http://127.0.0.1:3002';
 
 async function probe(label, url, path = '') {

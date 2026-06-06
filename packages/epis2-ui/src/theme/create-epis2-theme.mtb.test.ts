@@ -36,6 +36,14 @@ describe('createEpis2Theme — Material Theme Builder', () => {
     expect(theme.epis2.themeId).toBe('warm-linen');
   });
 
+  it('resuelve monochrome a Monochrome Gray MTB', () => {
+    const theme = createEpis2Theme({ accent: 'monochrome' });
+    expect(theme.epis2.themeId).toBe('monochrome-gray');
+    expect(theme.palette.primary?.main).toBe('#171717');
+    expect(theme.palette.warning?.main).toBe('#A3A3A3');
+    expect(theme.epis2.visual.demoBadgeChip.borderColor).toBe('#A3A3A3');
+  });
+
   it('acentos sin MTB usan palette legacy', () => {
     const theme = createEpis2Theme({ accent: 'neutral' });
     expect(theme.epis2.themeId).toBe('legacy');

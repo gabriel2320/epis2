@@ -1,3 +1,5 @@
+import { epis2M3FormLayout } from './m3-layout-tokens.js';
+
 /** Breakpoints EPIS2 para diseño adaptativo M3 (M3-06). */
 export const epis2Breakpoints = {
   compact: 0,
@@ -26,5 +28,5 @@ export const epis2BarLayout = {
   clinicalPaddingX: { xs: 0.5, sm: 1, md: 1.5 },
   clinicalPaddingY: { xs: 2, sm: 2.5 },
   clinicalFormMaxWidth: 640,
-  fieldStackGap: 3,
+  fieldStackGap: epis2M3FormLayout.fieldRowGap,
 } as const;

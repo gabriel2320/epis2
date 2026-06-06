@@ -23,6 +23,7 @@ export const INTENT_ROUTE_PATHS: Record<ClinicalIntent, string> = {
   reconcile_medications: '/espacio/conciliacion',
   transfer_patient: '/espacio/traslado',
   create_outpatient_visit: '/espacio/ambulatorio',
+  create_medical_certificate: '/espacio/certificado',
   respond_referral: '/espacio/informe-interconsulta',
 };
 

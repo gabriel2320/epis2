@@ -1,5 +1,6 @@
 export { calmTealLightScheme, calmTealDarkScheme } from './calm-teal.js';
 export { clinicalBlueLightScheme, clinicalBlueDarkScheme } from './clinical-blue.js';
+export { monochromeGrayLightScheme, monochromeGrayDarkScheme } from './monochrome-gray.js';
 export { oceanDepthLightScheme, oceanDepthDarkScheme } from './ocean-depth.js';
 export { sageClinicalLightScheme, sageClinicalDarkScheme } from './sage-clinical.js';
 export { slateProfessionalLightScheme, slateProfessionalDarkScheme } from './slate-professional.js';

@@ -28,6 +28,9 @@ export type PatientLongitudinalPanelProps = {
   data: PatientLongitudinalResponse;
   onOpenDraft?: (draftId: string) => void;
   onOpenNote?: (noteId: string) => void;
+  onRegisterAllergy?: () => void;
+  onRegisterProblem?: () => void;
+  onOpenResults?: () => void;
 };
 
 function Section({
@@ -45,12 +48,11 @@ function Section({
         {title}
       </Typography>
       {empty ? (
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" sx={{ mb: children ? 1 : 0 }}>
           {copy.longitudinal.emptySection}
         </Typography>
-      ) : (
-        children
-      )}
+      ) : null}
+      {children}
     </Paper>
   );
 }
@@ -59,6 +61,9 @@ export function PatientLongitudinalPanel({
   data,
   onOpenDraft,
   onOpenNote,
+  onRegisterAllergy,
+  onRegisterProblem,
+  onOpenResults,
 }: PatientLongitudinalPanelProps) {
   const [exporting, setExporting] = useState<'txt' | 'pdf' | null>(null);
 
@@ -105,6 +110,17 @@ export function PatientLongitudinalPanel({
       <LongitudinalNavTree data={data} onOpenDraft={onOpenDraft} />
 
       <Section title={copy.longitudinal.problems} empty={data.problems.length === 0}>
+        {data.problems.length === 0 && onRegisterProblem ? (
+          <Button
+            size="small"
+            variant="outlined"
+            onClick={onRegisterProblem}
+            data-testid="epis2-longitudinal-register-problem"
+            sx={{ mb: 1 }}
+          >
+            {copy.longitudinal.registerProblem}
+          </Button>
+        ) : null}
         <List dense disablePadding>
           {data.problems.map((p) => (
             <ListItem key={p.id} disablePadding>
@@ -115,6 +131,17 @@ export function PatientLongitudinalPanel({
       </Section>
 
       <Section title={copy.longitudinal.allergies} empty={data.allergies.length === 0}>
+        {data.allergies.length === 0 && onRegisterAllergy ? (
+          <Button
+            size="small"
+            variant="outlined"
+            onClick={onRegisterAllergy}
+            data-testid="epis2-longitudinal-register-allergy"
+            sx={{ mb: 1 }}
+          >
+            {copy.longitudinal.registerAllergy}
+          </Button>
+        ) : null}
         <List dense disablePadding>
           {data.allergies.map((a) => (
             <ListItem key={a.id} disablePadding>
@@ -125,6 +152,17 @@ export function PatientLongitudinalPanel({
       </Section>
 
       <Section title={copy.longitudinal.observations} empty={data.observations.length === 0}>
+        {onOpenResults ? (
+          <Button
+            size="small"
+            variant="text"
+            onClick={onOpenResults}
+            data-testid="epis2-longitudinal-open-results"
+            sx={{ mb: 1 }}
+          >
+            {copy.longitudinal.viewResults}
+          </Button>
+        ) : null}
         <LabObservationsGrid
           rows={data.observations}
           data-testid="epis2-lab-observations-grid"

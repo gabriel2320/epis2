@@ -7,6 +7,7 @@ export { EpisIconButton, type EpisIconButtonProps } from './EpisIconButton.js';
 export { EpisTextField, type EpisTextFieldProps } from './EpisTextField.js';
 export { EpisSelect, type EpisSelectProps } from './EpisSelect.js';
 export { EpisChip, type EpisChipProps } from './EpisChip.js';
+export { EpisDemoBadgeChip, epis2DemoBadgeChipSx, type EpisDemoBadgeChipProps } from './EpisDemoBadgeChip.js';
 export { EpisCard, type EpisCardProps } from './EpisCard.js';
 export { EpisDialog, type EpisDialogProps } from './EpisDialog.js';
 export { EpisAlert, type EpisAlertProps } from './EpisAlert.js';

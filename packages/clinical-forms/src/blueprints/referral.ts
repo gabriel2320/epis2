@@ -19,10 +19,13 @@ export const referralBlueprint = defineBlueprint({
     ]),
   ],
   fields: [
-    field('specialty', 'Especialidad', 'text', true),
+    field('specialty', 'Especialidad', 'text', { required: true, columnSpan: 8 }),
     field('clinicalSummary', 'Resumen clínico breve', 'textarea', true),
     field('clinicalQuestion', 'Pregunta clínica', 'textarea', true),
-    field('urgency', 'Urgencia', 'select', false, ['rutina', 'preferente', 'urgente']),
+    field('urgency', 'Urgencia', 'select', {
+      options: ['rutina', 'preferente', 'urgente'],
+      columnSpan: 4,
+    }),
   ],
   validations: [
     { fieldId: 'specialty', message: 'Indique la especialidad' },

@@ -58,6 +58,7 @@ const createDraftSchema = z.object({
     'transfer_note',
     'outpatient_visit',
     'referral_report',
+    'medical_certificate',
     'other',
   ]),
   title: z.string().min(1),

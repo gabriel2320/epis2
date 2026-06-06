@@ -1,12 +1,14 @@
 import type { ClinicalFormBlueprint } from '@epis2/clinical-forms';
+import { resolveFieldColumnSpan } from '@epis2/clinical-forms';
 import { ExpandMoreIcon } from '../mui/index.js';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
+import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { epis2BarLayout } from '../theme/breakpoints.js';
-import type { ClinicalContextDragPayload } from './clinical-context-dnd.js';
+import { epis2M3ColumnSpanSx, epis2M3FormGridSx, epis2M3FormLayout } from '../theme/m3-layout-tokens.js';import type { ClinicalContextDragPayload } from './clinical-context-dnd.js';
 import { EpisClinicalField } from './EpisClinicalField.js';
 
 const clinicalSectionPadding = epis2BarLayout.clinicalPaddingX;
@@ -36,7 +38,7 @@ export function EpisClinicalForm({
   const fieldMap = new Map(blueprint.fields.map((f) => [f.id, f]));
 
   return (
-    <Stack spacing={3.5} data-testid={`epis2-form-${blueprint.blueprintId}`}>
+    <Stack spacing={epis2M3FormLayout.sectionGap} data-testid={`epis2-form-${blueprint.blueprintId}`}>
       <EpisM3Text role="bodyLarge" color="text.secondary" sx={{ px: 1 }}>
         {blueprint.purpose}
       </EpisM3Text>
@@ -46,29 +48,34 @@ export function EpisClinicalForm({
           .filter((f): f is NonNullable<typeof f> => Boolean(f));
 
         const body = (
-          <Stack spacing={epis2BarLayout.fieldStackGap}>
+          <Box sx={epis2M3FormGridSx} data-testid={`epis2-form-section-grid-${sec.id}`}>
             {fields.map((f) => {
               const err = errors[f.id];
               return (
-                <EpisClinicalField
+                <Box
                   key={f.id}
-                  field={f}
-                  value={values[f.id] ?? ''}
-                  clinicalProse={clinicalProse}
-                  clinicalDropEnabled={clinicalDropEnabled}
-                  {...(onClinicalDrop ? { onClinicalDrop } : {})}
-                  {...(err ? { error: err } : {})}
-                  onChange={onChange}
-                />
+                  sx={epis2M3ColumnSpanSx(resolveFieldColumnSpan(f))}
+                  data-testid={`epis2-form-field-cell-${f.id}`}
+                >
+                  <EpisClinicalField
+                    field={f}
+                    value={values[f.id] ?? ''}
+                    clinicalProse={clinicalProse}
+                    clinicalDropEnabled={clinicalDropEnabled}
+                    {...(onClinicalDrop ? { onClinicalDrop } : {})}
+                    {...(err ? { error: err } : {})}
+                    onChange={onChange}
+                  />
+                </Box>
               );
             })}
-          </Stack>
+          </Box>
         );
-
         if (sec.initialVisibility === 'collapsed') {
           return (
             <Accordion
               key={sec.id}
+              id={`epis2-section-${sec.id}`}
               defaultExpanded={false}
               disableGutters
               elevation={0}
@@ -91,7 +98,12 @@ export function EpisClinicalForm({
         }
 
         return (
-          <Stack key={sec.id} spacing={2.5} data-testid={`epis2-form-section-${sec.id}`}>
+          <Stack
+            key={sec.id}
+            id={`epis2-section-${sec.id}`}
+            spacing={epis2M3FormLayout.sectionLabelGap}
+            data-testid={`epis2-form-section-${sec.id}`}
+          >
             <EpisM3Text role="labelLarge" color="text.primary" sx={{ px: 1 }}>
               {sec.label}
             </EpisM3Text>

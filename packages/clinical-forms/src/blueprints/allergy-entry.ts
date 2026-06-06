@@ -15,8 +15,12 @@ export const allergyEntryBlueprint = defineBlueprint({
   requiresEncounter: false,
   sections: [section('allergy', 'Alergia', ['substance', 'severity', 'reactionNotes'])],
   fields: [
-    field('substance', 'Sustancia / fármaco', 'text', true),
-    field('severity', 'Severidad', 'select', true, SEVERITY_OPTIONS),
+    field('substance', 'Sustancia / fármaco', 'text', { required: true, columnSpan: 8 }),
+    field('severity', 'Severidad', 'select', {
+      required: true,
+      options: SEVERITY_OPTIONS,
+      columnSpan: 4,
+    }),
     field('reactionNotes', 'Reacción y notas', 'textarea'),
   ],
   validations: [

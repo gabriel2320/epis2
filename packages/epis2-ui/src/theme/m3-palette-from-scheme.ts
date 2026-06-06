@@ -1,6 +1,8 @@
 import type { PaletteOptions } from '@mui/material/styles';
+import type { Epis2ApprovedThemeId } from './contracts/material-color-scheme.js';
 import type { Epis2MaterialColorScheme } from './contracts/material-color-scheme.js';
-import { epis2SemanticPalette, type M3SurfaceRoles } from './color-roles.js';
+import { type M3SurfaceRoles } from './color-roles.js';
+import { resolveEpis2SemanticPalette } from './semantic-palette.js';
 
 /** Extrae superficies M3 usadas por epis2.surfaces y layout. */
 export function surfacesFromScheme(scheme: Epis2MaterialColorScheme): M3SurfaceRoles {
@@ -19,7 +21,10 @@ export function surfacesFromScheme(scheme: Epis2MaterialColorScheme): M3SurfaceR
 export function paletteFromMaterialScheme(
   mode: 'light' | 'dark',
   scheme: Epis2MaterialColorScheme,
+  themeId: Epis2ApprovedThemeId,
 ): PaletteOptions {
+  const semantics = resolveEpis2SemanticPalette(themeId, scheme);
+
   return {
     mode,
     primary: {
@@ -49,8 +54,8 @@ export function paletteFromMaterialScheme(
       dark: scheme.onErrorContainer,
       contrastText: scheme.onError,
     },
-    warning: epis2SemanticPalette.warning,
-    success: epis2SemanticPalette.success,
-    info: epis2SemanticPalette.info,
+    warning: semantics.warning,
+    success: semantics.success,
+    info: semantics.info,
   };
 }

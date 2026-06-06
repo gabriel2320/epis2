@@ -13,7 +13,14 @@ export type ClinicalFormRoutePath =
   | '/espacio/enfermeria'
   | '/espacio/mar'
   | '/espacio/farmacia'
-  | '/espacio/conciliacion';
+  | '/espacio/conciliacion'
+  | '/espacio/certificado'
+  | '/espacio/ambulatorio'
+  | '/espacio/alergia'
+  | '/espacio/problema'
+  | '/espacio/ingreso'
+  | '/espacio/traslado'
+  | '/espacio/informe-interconsulta';
 
 export type ClinicalPatientSearch = { patientId?: string };
 
@@ -23,24 +30,31 @@ export type DashboardSearch = { tab?: DashboardTab; patientId?: string };
 
 export type ForbiddenSearch = { detail?: string };
 
+export type AdminTab = 'users' | 'catalogs' | 'audit' | 'ops' | 'forms';
+
+export type AdminSearch = { tab?: AdminTab };
+
 export type ClinicalNavigateTarget =
   | ClinicalFormRoutePath
   | '/espacio/ficha'
   | '/espacio/resultados'
   | '/espacio/borrador/$draftId'
+  | '/espacio/admin'
   | '/epis2/dashboard'
   | '/comando'
+  | '/preferencias-apariencia'
   | '/login'
   | '/sin-acceso';
 
 export type ClinicalNavigateOptions =
   | { to: '/espacio/borrador/$draftId'; params: { draftId: string }; search?: ClinicalPatientSearch }
   | { to: '/epis2/dashboard'; search?: DashboardSearch; params?: never }
+  | { to: '/espacio/admin'; search?: AdminSearch; params?: never }
   | { to: '/sin-acceso'; search?: ForbiddenSearch; params?: never }
   | {
       to: Exclude<
         ClinicalNavigateTarget,
-        '/espacio/borrador/$draftId' | '/epis2/dashboard' | '/sin-acceso'
+        '/espacio/borrador/$draftId' | '/epis2/dashboard' | '/espacio/admin' | '/sin-acceso'
       >;
       search?: ClinicalPatientSearch;
       params?: never;

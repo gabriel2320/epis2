@@ -14,7 +14,8 @@ describe('createEpis2Theme', () => {
   it('incluye superficies M3, identidad visual y escala de forma', () => {
     const theme = createEpis2Theme();
     expect(theme.epis2.surfaces.surface).toBeTruthy();
-    expect(theme.epis2.visual.brandGradient).toBe('none');
+    expect(theme.epis2.visual.brandGradient).toBe(theme.palette.primary?.main);
+    expect(theme.epis2.visual.demoBadgeChip.borderColor).toBeTruthy();
     expect(theme.epis2.themeId).toBe('clinical-blue');
     expect(theme.palette.background?.default).toBe('#ECEEF5');
     expect(theme.epis2.shape.extraLarge).toBe(10);

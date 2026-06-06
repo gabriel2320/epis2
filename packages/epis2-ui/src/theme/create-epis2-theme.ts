@@ -5,6 +5,7 @@ import type { Epis2Accent, M3SurfaceRoles } from './color-roles.js';
 import { buildM3PaletteOptions, darkSurfaces, lightSurfaces } from './color-roles.js';
 import { buildEpis2Components } from './components.js';
 import type { Epis2MotionScheme } from './motion.js';
+import type { Epis2MaterialColorScheme } from './contracts/material-color-scheme.js';
 import { getMaterialScheme, resolveMaterialThemeId } from './material-theme-registry.js';
 import { paletteFromMaterialScheme, surfacesFromScheme } from './m3-palette-from-scheme.js';
 import { epis2Shape, epis2ShapeBorderRadius } from './shape.js';
@@ -59,19 +60,20 @@ export function createEpis2Theme(options: CreateEpis2ThemeOptions = {}): Theme {
   let surfaces: M3SurfaceRoles;
   let palette;
   let epis2ThemeId: Epis2ApprovedThemeId | 'legacy';
+  let activeScheme: Epis2MaterialColorScheme | undefined;
 
   if (mappedThemeId !== null) {
     epis2ThemeId = mappedThemeId;
-    const scheme = getMaterialScheme(mappedThemeId, mode);
-    surfaces = surfacesFromScheme(scheme);
-    palette = paletteFromMaterialScheme(mode, scheme);
+    activeScheme = getMaterialScheme(mappedThemeId, mode);
+    surfaces = surfacesFromScheme(activeScheme);
+    palette = paletteFromMaterialScheme(mode, activeScheme, mappedThemeId);
   } else {
     epis2ThemeId = 'legacy';
     surfaces = resolveLegacySurfaces(mode);
     palette = buildM3PaletteOptions(mode, accent);
   }
 
-  const visual = buildVisualIdentity(mode, accent, surfaces);
+  const visual = buildVisualIdentity(mode, activeScheme, surfaces);
 
   const typography =
     options.contrast === 'high'

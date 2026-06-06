@@ -1,0 +1,143 @@
+/**
+ * @vitest-environment jsdom
+ * MF-OLA2-001 — Gate M3-UI consulta ambulatoria (IDC 31–40).
+ */
+import { getBlueprintById } from '@epis2/clinical-forms';
+import { copy } from '@epis2/design-system';
+import { Epis2ThemeProvider } from '@epis2/epis2-ui';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
+import { GeneratedClinicalFormPage } from './GeneratedClinicalFormPage.js';
+
+vi.mock('@tanstack/react-router', () => ({
+  useNavigate: () => vi.fn(),
+  useSearch: () => ({ patientId: '00000000-0000-4000-8000-000000000099' }),
+  Link: ({ children }: { children: React.ReactNode }) => <a href="/">{children}</a>,
+}));
+
+vi.mock('../api/client.js', () => ({
+  apiFetch: vi.fn(),
+  ApiError: class ApiError extends Error {
+    status = 500;
+  },
+}));
+
+vi.mock('../api/aiApi.js', () => ({
+  fetchAiStatus: vi.fn().mockResolvedValue({
+    available: false,
+    ollama: 'down',
+    localAi: 'down',
+    message: '',
+  }),
+  requestDraftAssist: vi.fn(),
+}));
+
+vi.mock('../api/clinicalApi.js', () => ({
+  listPatients: vi.fn().mockResolvedValue({ patients: [] }),
+  fetchPatientDetail: vi.fn().mockResolvedValue({
+    patient: {
+      id: '00000000-0000-4000-8000-000000000099',
+      displayName: 'Paciente Demo — Ambulatorio',
+      isSynthetic: true,
+      demoLabel: 'DEMO/SINTÉTICO',
+      demoCaseCode: 'DEMO-099',
+    },
+    clinicalContext: { summaryFields: {} },
+    notes: [],
+  }),
+  fetchPatientLongitudinal: vi.fn().mockResolvedValue({
+    patientId: '00000000-0000-4000-8000-000000000099',
+    readOnly: false,
+    problems: [],
+    allergies: [],
+    medications: [],
+    observations: [],
+    documents: [],
+    encounters: [],
+    timeline: [],
+  }),
+}));
+
+vi.mock('@mui/material/useMediaQuery', () => ({
+  default: () => true,
+}));
+
+vi.mock('../auth/AuthContext.js', () => ({
+  useAuth: () => ({
+    session: {
+      user: {
+        id: 'usr-physician-01',
+        username: 'medico.demo',
+        displayName: 'Dra. Ana Demo',
+        role: 'physician',
+      },
+      permissions: ['draft.write', 'command.execute'],
+      expiresAt: new Date().toISOString(),
+    },
+  }),
+}));
+
+afterEach(() => cleanup());
+
+const outpatientBlueprint = getBlueprintById('outpatient_visit');
+const certificateBlueprint = getBlueprintById('medical_certificate');
+
+if (!outpatientBlueprint || !certificateBlueprint) {
+  throw new Error('Ola 2 blueprints missing');
+}
+
+describe('GeneratedClinicalFormPage — Ola 2 M3-UI', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('consulta ambulatoria usa scrollspy, app bar y FAB de cierre', async () => {
+    render(
+      <Epis2ThemeProvider>
+        <ActivePatientProvider>
+          <GeneratedClinicalFormPage blueprint={outpatientBlueprint} />
+        </ActivePatientProvider>
+      </Epis2ThemeProvider>,
+    );
+
+    expect(screen.getByTestId('epis2-generated-clinical-page')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-form-outpatient_visit')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-clinical-scrollspy-layout')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-scrollspy-anamnesis')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-scrollspy-closure')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-draft-status-chip')).toBeInTheDocument();
+    expect(screen.queryByTestId('epis2-clinical-context-toggle')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: copy.workspaces.ambulatory.fab })).toBeInTheDocument();
+  });
+
+  it('valida campos obligatorios de consulta ambulatoria', async () => {
+    const user = userEvent.setup();
+    render(
+      <Epis2ThemeProvider>
+        <ActivePatientProvider>
+          <GeneratedClinicalFormPage blueprint={outpatientBlueprint} />
+        </ActivePatientProvider>
+      </Epis2ThemeProvider>,
+    );
+
+    await user.click(screen.getByRole('button', { name: copy.workspaces.ambulatory.fab }));
+    await waitFor(() => {
+      expect(screen.getByTestId('epis2-form-status')).toBeInTheDocument();
+    });
+  });
+
+  it('certificado médico renderiza formulario y guardar borrador', async () => {
+    render(
+      <Epis2ThemeProvider>
+        <ActivePatientProvider>
+          <GeneratedClinicalFormPage blueprint={certificateBlueprint} />
+        </ActivePatientProvider>
+      </Epis2ThemeProvider>,
+    );
+
+    expect(screen.getByTestId('epis2-form-medical_certificate')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: copy.forms.saveDraft })).toBeInTheDocument();
+  });
+});

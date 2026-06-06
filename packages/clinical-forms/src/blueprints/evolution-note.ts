@@ -15,7 +15,7 @@ export const evolutionNoteBlueprint = defineBlueprint({
     section('soap', 'Evolución', ['subjective', 'objective', 'assessment', 'plan']),
   ],
   fields: [
-    field('encounterDate', 'Fecha del encuentro', 'date', true),
+    field('encounterDate', 'Fecha del encuentro', 'date', { required: true, columnSpan: 4 }),
     field('subjective', 'Subjetivo', 'textarea', true),
     field('objective', 'Objetivo', 'textarea'),
     field('assessment', 'Análisis', 'textarea', true),

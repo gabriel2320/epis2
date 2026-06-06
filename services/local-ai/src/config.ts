@@ -4,7 +4,7 @@ const envSchema = z.object({
   AI_HOST: z.string().default('0.0.0.0'),
   AI_PORT: z.coerce.number().int().positive().default(3002),
   OLLAMA_BASE_URL: z.string().url().default('http://127.0.0.1:11434'),
-  OLLAMA_MODEL: z.string().default('llama3.2'),
+  OLLAMA_MODEL: z.string().default('qwen3:8b'),
 });
 
 export type AiConfig = z.infer<typeof envSchema>;

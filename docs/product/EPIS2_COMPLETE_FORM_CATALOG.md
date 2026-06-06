@@ -10,7 +10,7 @@
 
 | Regla | Estado |
 |-------|--------|
-| Un blueprint por formulario clínico | ✓ **18 blueprints** |
+| Un blueprint por formulario clínico | ✓ **19 blueprints** |
 | Cada blueprint con `routePath` | ✓ |
 | Sin Form Registry paralelo | ✓ gate arquitectónico |
 | Toda acción draft con aprobación humana | ✓ `POST /api/drafts/:id/approve` |
@@ -19,7 +19,7 @@
 
 ---
 
-## 2. Formularios implementados (18)
+## 2. Formularios implementados (19)
 
 | Formulario | Blueprint | Ruta | Roles | Validaciones | IA | Aprobación | Estado |
 |------------|-----------|------|-------|--------------|-----|------------|--------|
@@ -41,6 +41,7 @@
 | Nota de traslado | `transfer_note` | `/espacio/traslado` | physician, nurse | destino*, motivo* | Sí | Sí | **COMPLETE** |
 | Consulta ambulatoria | `outpatient_visit` | `/espacio/ambulatorio` | physician, nurse | chiefComplaint*, assessment*, plan* | No | Sí | **COMPLETE** |
 | Informe interconsulta | `referral_report` | `/espacio/informe-interconsulta` | physician | context*, assessment*, recommendations* | No | Sí | **COMPLETE** |
+| Certificado médico | `medical_certificate` | `/espacio/certificado` | physician | certificateType*, reason* | No | Sí | **COMPLETE** |
 
 **Archivos blueprint:** `packages/clinical-forms/src/blueprints/*.ts`
 
@@ -66,6 +67,7 @@
 | `transfer_note` | transfer_note | ✓ | **COMPLETE** |
 | `outpatient_visit` | outpatient_visit | ✓ | **COMPLETE** |
 | `referral_report` | referral_report | ✓ | **COMPLETE** |
+| `medical_certificate` | medical_certificate | ✓ | **COMPLETE** |
 
 ---
 
@@ -77,7 +79,7 @@
 |------------|-----------|--------|
 | Inicio de sesión | — (UI `LoginPage`) | **COMPLETE** |
 | Cambio contraseña | — | **MISSING** |
-| Preferencias apariencia | — | **MISSING** |
+| Preferencias apariencia | — (`AppearancePreferencesPage`) | **COMPLETE** |
 | Preferencias notificación | — | **MISSING** |
 | Selección rol / unidad | — | **MISSING** |
 
@@ -137,7 +139,7 @@
 
 | Formulario | Estado |
 |------------|--------|
-| Conciliación | **MISSING** |
+| Conciliación | `medication_reconciliation` | **COMPLETE** |
 | Suspensión medicamento | **MISSING** |
 | Reacción adversa | **MISSING** |
 | Administración futura (programación) | **PARTIAL** (MAR schedule DB) |
@@ -146,12 +148,12 @@
 
 | Formulario | Estado |
 |------------|--------|
-| Ingreso hospitalario | **MISSING** |
-| Evolución diaria (hosp.) | **MISSING** |
-| Entrega turno | **MISSING** |
-| Evaluación inicial enfermería | **MISSING** |
-| Balance hídrico, heridas, riesgos | **MISSING** |
-| Conciliación farmacéutica (form) | **MISSING** |
+| Ingreso hospitalario | `admission_note` | **COMPLETE** |
+| Evolución diaria (hosp.) | **MISSING** | IDC 105 / Ola 10 |
+| Entrega turno | **PARTIAL** | IDC 111 · `nursing_note` |
+| Evaluación inicial enfermería | **PARTIAL** | IDC 112–113 · Ola 11 |
+| Balance hídrico, heridas, riesgos | **MISSING** | IDC 114–115 · Ola 11 |
+| Conciliación farmacéutica (form) | `medication_reconciliation` | **COMPLETE** |
 
 ### M. Documentos
 
@@ -212,12 +214,28 @@ Validación rol por blueprint: `blueprint.allowedRoles` en `GeneratedClinicalFor
 
 | Métrica | Valor |
 |---------|-------|
-| Blueprints implementados | **18** |
+| Blueprints implementados | **19** |
 | Formularios catálogo producto (estimado) | ~95 |
 | Cobertura formularios | **~19 %** |
 | Formularios COMPLETE en MVP+olas | 13 |
 | Formularios PARTIAL | 5 |
-| Cadenas blueprint→ruta→permiso completas | 18/18 |
+| Cadenas blueprint→ruta→permiso completas | 19/19 |
+
+---
+
+## 9. Inventario extendido (IDC 1–200)
+
+**Índice maestro:** [`EPIS2_ARCHITECTURE_INVENTORY_MEDICAL_RECORD.md`](./EPIS2_ARCHITECTURE_INVENTORY_MEDICAL_RECORD.md)
+
+| Bloque | Documento | COMPLETE | PARTIAL |
+|--------|-----------|----------|---------|
+| 1–100 | [`EPIS2_ARCHITECTURE_INVENTORY_001_100.md`](./EPIS2_ARCHITECTURE_INVENTORY_001_100.md) | 6 (login, SOAP, receta, lab, interconsulta + epicrisis*) | 38 |
+| 101–200 | [`EPIS2_ARCHITECTURE_INVENTORY_101_200.md`](./EPIS2_ARCHITECTURE_INVENTORY_101_200.md) | 1 (conciliación 165) | 14 |
+
+\*Epicrisis es blueprint MVP adicional (`discharge_summary`), no IDC numerado en 1–100.
+
+**Próxima ola sugerida (1–100):** Ola 2 — consulta ambulatoria IDC **31–40**.  
+**Próxima ola sugerida (101–200):** Ola 10 — triage ESI **102** + tablero urgencias **101**.
 
 ---
 

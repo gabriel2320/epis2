@@ -1,5 +1,19 @@
 export { Epis2WidgetGrid, type Epis2WidgetGridProps } from './Epis2WidgetGrid.js';
 export {
+  EpisDraggableWidgetGrid,
+  type EpisDraggableWidgetGridProps,
+  type EpisDraggableWidgetItem,
+} from './EpisDraggableWidgetGrid.js';
+export { useWidgetLayoutOrder } from './useWidgetLayoutOrder.js';
+export {
+  WIDGET_LAYOUT_SCHEMA_VERSION,
+  serializeWidgetLayoutToJson,
+  parseWidgetLayoutImport,
+  applyWidgetLayoutOrder,
+  type WidgetLayoutExportDocument,
+  type WidgetLayoutImportResult,
+} from './widget-layout-io.js';
+export {
   useEpis2WidgetLayoutBreakpoint,
   type Epis2WidgetLayoutBreakpoint,
 } from './useEpis2WidgetLayoutBreakpoint.js';

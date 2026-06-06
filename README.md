@@ -65,9 +65,9 @@ npm run db:validate
 npm run quality:golden-journey   # journey spec + API (requiere DATABASE_URL)
 npm run qa:bundle-analyze        # presupuestos MUI X (opcional)
 npm run db:migrate   # requiere DATABASE_URL + Postgres
-npm run stack:up       # Postgres + Ollama (Docker) + migrate + ai:enable
-docker compose up -d   # solo infra si prefieres manual
-npm run ai:enable      # Ollama nativo o Docker; pull del modelo en .env
+npm run stack:up       # Postgres + migrate + ai:enable (Ollama nativo en host)
+docker compose up -d   # solo Postgres por defecto
+npm run ai:enable      # verifica Ollama + pull qwen3:8b
 npm run quality:local-ci   # replica gates CI local (Postgres + migrate)
 npm run test:e2e:install && npm run test:e2e   # journey UI Playwright
 npm run dev:ai         # puerto 3002 (dejar en terminal aparte)
@@ -75,7 +75,7 @@ npm run dev:api        # puerto 3001
 npm run dev:web        # puerto 5173
 ```
 
-Copia `.env.example` → `.env` y confirma `LOCAL_AI_BASE_URL=http://127.0.0.1:3002` y `OLLAMA_BASE_URL=http://127.0.0.1:11434`.
+Copia `.env.example` → `.env`. Por defecto: `OLLAMA_BASE_URL=http://127.0.0.1:11434`, `OLLAMA_MODEL=qwen3:8b`. En `docker-compose.yml`, los servicios en contenedor usan `http://host.docker.internal:11434`. Contenedor Ollama opcional: `docker compose --profile bundled-ollama up -d ollama`.
 
 En el Centro de Comando verás el chip **IA local** en verde cuando Ollama y `dev:ai` estén activos.
 

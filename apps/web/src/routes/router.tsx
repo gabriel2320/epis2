@@ -280,6 +280,13 @@ const outpatientFormRoute = createRoute({
   component: clinicalFormPage('/espacio/ambulatorio'),
 });
 
+const medicalCertificateFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/certificado',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/certificado'),
+});
+
 const referralReportFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/informe-interconsulta',
@@ -299,8 +306,8 @@ const adminConsoleRoute = createRoute({
   path: '/espacio/admin',
   validateSearch: (search: Record<string, unknown>) => {
     const tab = search.tab;
-    const validTab: 'users' | 'catalogs' | 'audit' | 'ops' =
-      tab === 'catalogs' || tab === 'audit' || tab === 'ops' ? tab : 'users';
+    const validTab: 'users' | 'catalogs' | 'audit' | 'ops' | 'forms' =
+      tab === 'catalogs' || tab === 'audit' || tab === 'ops' || tab === 'forms' ? tab : 'users';
     return { tab: validTab };
   },
   component: function AdminConsoleRoute() {
@@ -391,6 +398,7 @@ export const routeTree = rootRoute.addChildren([
     reconciliationFormRoute,
     transferFormRoute,
     outpatientFormRoute,
+    medicalCertificateFormRoute,
     referralReportFormRoute,
     resultsInboxRoute,
     adminConsoleRoute,

@@ -6,6 +6,7 @@ import Stack from '@mui/material/Stack';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useEpis2ThemePreferences } from '../providers/EpisThemePreferences.js';
 import { prefersReducedMotion } from '../theme/motion.js';
+import { epis2ClinicalTwoPaneFooterSx } from '../theme/m3-layout-tokens.js';
 import {
   EPIS2_CLINICAL_SPLIT_MIN_PX,
   epis2ClinicalActionPaneSx,
@@ -112,17 +113,7 @@ export function EpisClinicalTwoPaneLayout({
           </Drawer>
         ) : null}
       </Box>
-      <Box
-        component="footer"
-        sx={{
-          borderTop: 1,
-          borderColor: 'divider',
-          bgcolor: 'background.paper',
-          px: { xs: 2, sm: 3 },
-          py: 2,
-        }}
-        data-testid="epis2-clinical-two-pane-footer"
-      >
+      <Box component="footer" sx={epis2ClinicalTwoPaneFooterSx} data-testid="epis2-clinical-two-pane-footer">
         {footer}
       </Box>
     </Stack>

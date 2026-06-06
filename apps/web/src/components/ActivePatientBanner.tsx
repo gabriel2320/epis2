@@ -9,7 +9,7 @@ import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import {
 
   Chip,
-
+  EpisDemoBadgeChip,
   ScienceIcon,
 
   Stack,
@@ -110,24 +110,7 @@ export function ActivePatientBanner() {
 
     >
 
-      <Chip
-
-        icon={<ScienceIcon />}
-
-        label={copy.demoBadge}
-
-        size="small"
-
-        variant="outlined"
-
-        sx={(theme) => ({
-          flexShrink: 0,
-          borderColor: 'warning.main',
-          color: theme.palette.mode === 'light' ? 'warning.dark' : 'warning.light',
-          bgcolor: theme.palette.mode === 'light' ? 'warning.light' : 'action.hover',
-        })}
-
-      />
+      <EpisDemoBadgeChip icon={<ScienceIcon />} label={copy.demoBadge} sx={{ flexShrink: 0 }} />
 
       <Typography
 

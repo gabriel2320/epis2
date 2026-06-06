@@ -2,6 +2,7 @@ import { copy } from '@epis2/design-system';
 import { Alert, Button, Paper, Stack, Tab, Tabs, TextField, Typography } from '@epis2/epis2-ui';
 import { useNavigate } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
+import { BlueprintStudioPanel } from '../admin/BlueprintStudioPanel.js';
 import {
   createAdminCatalogEntry,
   fetchAdminCatalogs,
@@ -12,7 +13,7 @@ import {
   type CatalogEntryRow,
 } from '../api/adminApi.js';
 
-export type AdminConsoleTab = 'users' | 'catalogs' | 'audit' | 'ops';
+export type AdminConsoleTab = 'users' | 'catalogs' | 'audit' | 'ops' | 'forms';
 
 export type AdminConsolePageProps = {
   initialTab?: AdminConsoleTab;
@@ -86,6 +87,7 @@ export function AdminConsolePage({ initialTab = 'users' }: AdminConsolePageProps
         <Tab label="Catálogos" value="catalogs" data-testid="epis2-admin-tab-catalogs" />
         <Tab label="Auditoría" value="audit" data-testid="epis2-admin-tab-audit" />
         <Tab label="Operaciones" value="ops" data-testid="epis2-admin-tab-ops" />
+        <Tab label="Formularios" value="forms" data-testid="epis2-admin-tab-forms" />
       </Tabs>
 
       {tab === 'users' ? (
@@ -152,6 +154,8 @@ export function AdminConsolePage({ initialTab = 'users' }: AdminConsolePageProps
           </Typography>
         </Paper>
       ) : null}
+
+      {tab === 'forms' ? <BlueprintStudioPanel /> : null}
     </Stack>
   );
 }

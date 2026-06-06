@@ -14,6 +14,8 @@ const { fetchDashboardWork } = vi.hoisted(() => ({
 
 vi.mock('@tanstack/react-router', () => ({
   useSearch: () => ({ tab: 'work' }),
+  useRouterState: ({ select }: { select: (s: { location: { pathname: string } }) => unknown }) =>
+    select({ location: { pathname: '/epis2/dashboard' } }),
 }));
 
 vi.mock('../routes/clinicalNavigate.js', () => ({

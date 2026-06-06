@@ -288,13 +288,33 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       'atencion ambulatoria',
       'control ambulatorio',
       'visita ambulatoria',
+      'nueva consulta',
     ],
     routePath: INTENT_ROUTE_PATHS.create_outpatient_visit,
     requiredPermission: 'command.execute',
     requiresPatient: true,
     priority: 64,
     match: (q) =>
-      /consulta\s+ambulatoria|atencion\s+ambulatoria|control\s+ambulatorio|visita\s+ambulatoria/.test(
+      /consulta\s+ambulatoria|atencion\s+ambulatoria|control\s+ambulatorio|visita\s+ambulatoria|nueva\s+consulta/.test(
+        q,
+      ),
+  },
+  {
+    intent: 'create_medical_certificate',
+    labelEs: 'Certificado médico',
+    aliasesEs: [
+      'certificado medico',
+      'certificado de reposo',
+      'emitir certificado',
+      'licencia medica',
+      'certificado de salud',
+    ],
+    routePath: INTENT_ROUTE_PATHS.create_medical_certificate,
+    requiredPermission: 'command.execute',
+    requiresPatient: true,
+    priority: 63,
+    match: (q) =>
+      /certificado\s+(medico|de\s+reposo|de\s+salud)|emitir\s+certificado|licencia\s+medica/.test(
         q,
       ),
   },

@@ -7,6 +7,7 @@ export type Epis2Accent =
   | 'sageClinical'
   | 'oceanDepth'
   | 'warmLinen'
+  | 'monochrome'
   | 'calmGreen'
   | 'soberViolet'
   | 'neutral';
@@ -45,6 +46,11 @@ export const accentPresets: Record<
     primary: { main: '#78716C', light: '#F0EAE4', dark: '#57534E', contrastText: '#FFFFFF' },
     secondary: { main: '#635F5B', light: '#EAE4DE', dark: '#4B4743', contrastText: '#FFFFFF' },
     surfaceTint: '#F4EFEB',
+  },
+  monochrome: {
+    primary: { main: '#171717', light: '#E5E5E5', dark: '#0A0A0A', contrastText: '#FFFFFF' },
+    secondary: { main: '#525252', light: '#F0F0F0', dark: '#404040', contrastText: '#FFFFFF' },
+    surfaceTint: '#F2F2F2',
   },
   calmGreen: {
     primary: { main: '#2E7D52', light: '#E8F5EE', dark: '#1B5E3A', contrastText: '#FFFFFF' },

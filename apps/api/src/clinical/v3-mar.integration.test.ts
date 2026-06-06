@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 import { describeIntegration } from '@epis2/test-fixtures/integration';
 import { expect, it } from 'vitest';
 import { buildApp } from '../app.js';
@@ -62,6 +62,18 @@ describeIntegration('V3 MAR (integration)', () => {
   it('GET /api/dashboard/nursing expone dosis en ventana activa', async () => {
     const config = { ...testApiConfig, DATABASE_URL: process.env.DATABASE_URL };
     const app = await buildApp(config);
+    const db = getDatabase(config.DATABASE_URL)!;
+
+    await db.execute(sql`
+      UPDATE mar_scheduled_doses
+      SET
+        scheduled_at = NOW() + INTERVAL '30 minutes',
+        window_start = NOW() - INTERVAL '1 hour',
+        window_end = NOW() + INTERVAL '2 hours',
+        status = 'scheduled',
+        requires_double_check = TRUE
+      WHERE id = 'f1000001-0000-4000-8000-000000000001'
+    `);
 
     const login = await app.inject({
       method: 'POST',

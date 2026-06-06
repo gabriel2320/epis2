@@ -1,5 +1,9 @@
 /** Blueprints con campos de lectura prolongada (regla prosa 65ch). */
-export const CLINICAL_PROSE_BLUEPRINT_IDS = ['evolution_note', 'discharge_summary'] as const;
+export const CLINICAL_PROSE_BLUEPRINT_IDS = [
+  'evolution_note',
+  'discharge_summary',
+  'outpatient_visit',
+] as const;
 
 export type ClinicalProseBlueprintId = (typeof CLINICAL_PROSE_BLUEPRINT_IDS)[number];
 

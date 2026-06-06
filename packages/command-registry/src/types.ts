@@ -23,6 +23,7 @@ export type ClinicalIntent =
   | 'reconcile_medications'
   | 'transfer_patient'
   | 'create_outpatient_visit'
+  | 'create_medical_certificate'
   | 'respond_referral';
 
 export type CommandResolveStatus =

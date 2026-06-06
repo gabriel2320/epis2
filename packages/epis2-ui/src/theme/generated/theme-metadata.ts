@@ -19,6 +19,14 @@ export const MATERIAL_THEME_METADATA: readonly MaterialThemeSourceMetadata[] = [
     version: '1.0',
   },
   {
+    id: 'monochrome-gray',
+    label: 'Monochrome Gray',
+    sourceColor: '#171717',
+    importedAt: '2026-06-04',
+    source: 'material-theme-builder',
+    version: '1.0',
+  },
+  {
     id: 'ocean-depth',
     label: 'Ocean Depth',
     sourceColor: '#0C4A6E',

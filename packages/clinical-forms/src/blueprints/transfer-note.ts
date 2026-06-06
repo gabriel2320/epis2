@@ -26,7 +26,11 @@ export const transferNoteBlueprint = defineBlueprint({
     field('transferReason', 'Motivo del traslado', 'textarea', true),
     field('clinicalSummary', 'Resumen clínico', 'textarea', true),
     field('handoffPlan', 'Plan de traslado / continuidad', 'textarea', true),
-    field('targetBedId', 'Cama destino', 'select', true, DEMO_TRANSFER_BEDS),
+    field('targetBedId', 'Cama destino', 'select', {
+      required: true,
+      options: DEMO_TRANSFER_BEDS,
+      columnSpan: 6,
+    }),
   ],
   validations: [
     { fieldId: 'transferReason', message: 'Motivo del traslado requerido' },

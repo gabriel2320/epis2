@@ -1,0 +1,350 @@
+# EPIS2 — Matriz de ejecución IDC 1–200
+
+**Versión:** 1.0 · **Generado:** 2026-06-06  
+**Canon:** [`EPIS2_WAVE_EXECUTION_CANON.md`](./EPIS2_WAVE_EXECUTION_CANON.md)  
+**Fuente machine-readable:** [`epis2-idc-execution-matrix.json`](./epis2-idc-execution-matrix.json)
+
+> Cuatro campos obligatorios por ítem: **Estado** · **Prioridad** · **Horizonte** · **Decisión**  
+> Regenerar: `node scripts/product/generate-idc-matrix.mjs`
+
+---
+
+## Resumen cuadruple
+
+| Campo | Distribución |
+|-------|--------------|
+| **Estado** | Planned: 142 · Active: 45 · Blocked: 1 · Done: 12 |
+| **Prioridad** | Critical: 7 · High: 47 · Medium: 95 · Low: 51 |
+| **Horizonte** | Core: 41 · Post-core: 88 · Future: 71 |
+| **Decisión** | Build: 127 · Integrate: 5 · Defer: 66 · Exclude: 2 |
+
+### Leyenda
+
+| Campo | Valores |
+|-------|---------|
+| Estado | `Planned` · `Active` · `Blocked` · `Done` |
+| Prioridad | `Critical` · `High` · `Medium` · `Low` |
+| Horizonte | `Core` · `Post-core` · `Future` |
+| Decisión | `Build` · `Integrate` · `Defer` · `Exclude` |
+
+**Done (Core):** IDC 1, 37, 52, 55, 64, 91, 165 — más parciales en **Active** (Olas 2–3, 1C).
+
+---
+
+## Recepción y flujo (1–10)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 1 | Login de sistema | 0-1A | command | Done | Critical | Core | Build | COMPLETE | /login |
+| 2 | Dashboard recepción | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
+| 3 | Agenda diaria profesional | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
+| 4 | Calendario mensual centro | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
+| 5 | Formulario admisión | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
+| 6 | Biometría / firma | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
+| 7 | Sala de espera virtual | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
+| 8 | Gestión sobrecupos | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
+| 9 | Registro acompañantes | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
+| 10 | Panel llamado (tótem) | 4 | reception | Planned | Medium | Post-core | Integrate | MISSING | Display externo IoT |
+
+## Facturación y caja (11–20)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 11 | Presupuesto médico | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
+| 12 | Cobro consulta | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
+| 13 | Boleta / factura | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
+| 14 | Integración aseguradoras | 5 | billing | Planned | Low | Future | Integrate | DEFERRED | Isapre/Fonasa |
+| 15 | Conciliación diaria caja | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
+| 16 | Cuentas por cobrar | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
+| 17 | Reembolsos / anulaciones | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
+| 18 | Honorarios médicos | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
+| 19 | Liquidación profesionales | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
+| 20 | Reporte ingresos mensuales | 5 | billing | Planned | Low | Future | Defer | DEFERRED |  |
+
+## Resumen clínico (ficha) (21–30)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 21 | Dashboard del paciente | 3 | patient-record | Active | High | Core | Build | PARTIAL | Ficha M3 Ola 3 |
+| 22 | Banner alertas clínicas | 3 | patient-record | Active | High | Core | Build | PARTIAL | ClinicalAlertsPanel |
+| 23 | Línea de tiempo | 3 | patient-record | Active | High | Core | Build | PARTIAL |  |
+| 24 | Medicamentos continuos | 3 | patient-record | Active | High | Core | Build | PARTIAL |  |
+| 25 | Visor últimos exámenes | 3 | patient-record | Active | High | Core | Build | PARTIAL |  |
+| 26 | Curvas signos vitales | 3 | patient-record | Active | Medium | Core | Build | PARTIAL |  |
+| 27 | Antecedentes mórbidos | 3 | patient-record | Active | High | Core | Build | PARTIAL | allergy_entry + CTA ficha MF-OLA3-001 |
+| 28 | Antecedentes familiares | 3 | patient-record | Active | High | Core | Build | PARTIAL | allergy_entry + CTA ficha MF-OLA3-001 |
+| 29 | Registro hábitos | 3 | patient-record | Active | Medium | Core | Build | PARTIAL | clinical_problem_entry + CTA ficha |
+| 30 | Antecedentes quirúrgicos | 3 | patient-record | Active | High | Core | Build | PARTIAL | clinical_problem_entry |
+
+## Consulta ambulatoria (31–40)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 31 | Anamnesis próxima | 2 | ambulatory | Done | Critical | Core | Build | COMPLETE | outpatient_visit anamnesis — MF-OLA2-001 |
+| 32 | Signos vitales / antropometría | 2 | ambulatory | Done | High | Core | Build | COMPLETE | vitals section scrollspy |
+| 33 | Examen físico general | 2 | ambulatory | Active | High | Core | Build | PARTIAL | examen general accordion — plantillas pendientes |
+| 34 | Examen físico segmentario | 2 | ambulatory | Active | Medium | Core | Build | PARTIAL | examen segmentario accordion |
+| 35 | Buscador diagnósticos CIE-10 | 2 | ambulatory | Active | High | Core | Build | PARTIAL | CIE-10 demo staging |
+| 36 | Indicaciones generales | 2 | ambulatory | Done | High | Core | Build | COMPLETE | plan + indicaciones generales |
+| 37 | Evolución SOAP | 2 | ambulatory | Done | Critical | Core | Build | COMPLETE | evolution_note |
+| 38 | Gestor macros / plantillas | 2 | ambulatory | Active | Medium | Core | Build | PARTIAL |  |
+| 39 | Cierre de episodio | 2 | ambulatory | Done | Critical | Core | Build | COMPLETE | closeEncounter + FAB cierre Ola 2 |
+| 40 | Resumen para paciente | 2 | ambulatory | Active | High | Core | Build | PARTIAL | medical_certificate — print A5 pendiente signoff |
+
+## UCI (bloque 41–50) (41–50)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 41 | Dashboard monitorización UCI | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
+| 42 | Sábana clínica (flujograma) | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
+| 43 | Balance hídrico estricto | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
+| 44 | Parámetros ventilación | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
+| 45 | Vías venosas e invasivos | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
+| 46 | Valoración neurológica | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
+| 47 | Escalas severidad | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
+| 48 | Titulación vasoactivos | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
+| 49 | Sedoanalgesia | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
+| 50 | Epicrisis traslado UCI | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
+
+## Prescripción y órdenes (51–60)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 51 | Buscador fármacos | 1C | ambulatory | Active | High | Core | Build | PARTIAL |  |
+| 52 | Receta médica | 1C | ambulatory | Done | Critical | Core | Build | COMPLETE | prescription |
+| 53 | Receta retenida / cheque | 1C | ambulatory | Planned | Medium | Core | Build | MISSING |  |
+| 54 | Panel interacciones | 1C | ambulatory | Active | High | Core | Build | PARTIAL |  |
+| 55 | Solicitud laboratorio | 1C | ambulatory | Done | Critical | Core | Build | COMPLETE | lab_request |
+| 56 | Solicitud imagenología | 1C | ambulatory | Active | High | Core | Build | PARTIAL | imaging_request + journey MF-OLA1C-002 |
+| 57 | Solicitud procedimientos | 1C | ambulatory | Planned | Medium | Core | Build | MISSING |  |
+| 58 | Bandeja resultados lab | 1C | ambulatory | Done | High | Core | Build | COMPLETE | ResultsInboxPage + comando + journey MF-OLA1C-001 |
+| 59 | Visor DICOM (PACS) | 1C | ambulatory | Planned | Medium | Post-core | Integrate | MISSING | PACS externo |
+| 60 | Historial acumulativo exámenes | 1C | ambulatory | Planned | Medium | Core | Build | MISSING |  |
+
+## Documentos legales (61–70)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 61 | Licencia médica | 6 | ambulatory | Planned | Low | Future | Defer | MISSING | LME Chile |
+| 62 | Certificado asistencia | 6 | ambulatory | Active | Medium | Core | Build | MISSING | medical_certificate Ola 2 |
+| 63 | Certificado aptitud / alta | 6 | ambulatory | Planned | Medium | Core | Build | MISSING |  |
+| 64 | Derivación / interconsulta | 6 | ambulatory | Done | High | Core | Build | COMPLETE | referral |
+| 65 | Consentimiento informado | 6 | ambulatory | Planned | Medium | Post-core | Build | MISSING |  |
+| 66 | Notificación GES | 6 | ambulatory | Planned | Low | Future | Defer | DEFERRED | GES Chile |
+| 67 | Constatación lesiones | 6 | ambulatory | Planned | Medium | Post-core | Build | MISSING |  |
+| 68 | Certificado defunción | 6 | ambulatory | Planned | Low | Future | Defer | DEFERRED |  |
+| 69 | Gestor archivos adjuntos | 6 | ambulatory | Active | Medium | Core | Build | PARTIAL |  |
+| 70 | Visor fotografías clínicas | 6 | ambulatory | Planned | Low | Post-core | Build | MISSING |  |
+
+## Epidemiología e IAAS (71–80)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 71 | Vigilancia epidemiológica | 7 | quality_iaas | Active | High | Post-core | Build | PARTIAL |  |
+| 72 | Notificación ENO | 7 | quality_iaas | Planned | High | Post-core | Build | MISSING |  |
+| 73 | Sospecha IAAS | 7 | quality_iaas | Planned | High | Post-core | Build | MISSING |  |
+| 74 | Resistencia antimicrobiana | 7 | quality_iaas | Active | Medium | Post-core | Build | PARTIAL |  |
+| 75 | Registro antibiogramas | 7 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
+| 76 | Receta antimicrobianos | 7 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
+| 77 | Precauciones aislamiento | 7 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
+| 78 | Tasa infección dispositivos | 7 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
+| 79 | Exposiciones laborales | 7 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
+| 80 | Reportes autoridad sanitaria | 7 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
+
+## Jefatura y administración (81–90)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 81 | Dashboard producción | 8 | admin_system | Active | High | Post-core | Build | PARTIAL |  |
+| 82 | Ocupación y rendimiento | 8 | admin_system | Planned | Medium | Post-core | Build | MISSING |  |
+| 83 | Fichas abiertas | 8 | admin_system | Active | Medium | Post-core | Build | PARTIAL |  |
+| 84 | Auditoría trazabilidad | 8 | admin_system | Active | High | Post-core | Build | PARTIAL |  |
+| 85 | Gestión roles | 8 | admin_system | Active | High | Post-core | Build | PARTIAL |  |
+| 86 | Configuración vademécum | 8 | admin_system | Planned | Low | Post-core | Build | MISSING |  |
+| 87 | Agenda global | 8 | admin_system | Planned | Low | Post-core | Build | MISSING |  |
+| 88 | Tiempos de espera | 8 | admin_system | Planned | Low | Post-core | Build | MISSING |  |
+| 89 | Encuestas satisfacción | 8 | admin_system | Planned | Low | Post-core | Build | MISSING |  |
+| 90 | Exportación datos | 8 | admin_system | Active | High | Core | Build | PARTIAL | FHIR export |
+
+## IA y herramientas (91–100)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 91 | Asistente redacción local | 9 | command | Done | High | Core | Build | COMPLETE | Assist draft API |
+| 92 | Transcripción voz a texto | 9 | command | Planned | Medium | Post-core | Build | MISSING |  |
+| 93 | Panel hardware IA local | 9 | command | Active | Low | Core | Build | PARTIAL |  |
+| 94 | Resumen automático clínico | 9 | command | Active | High | Core | Build | PARTIAL |  |
+| 95 | Sugerencia diagnóstica | 9 | command | Blocked | Low | Future | Exclude | MISSING | No auto-diagnóstico (invariante) |
+| 96 | Análisis reingreso | 9 | command | Planned | Low | Future | Build | MISSING |  |
+| 97 | Extracción PDF (OCR IA) | 9 | command | Active | Medium | Post-core | Build | PARTIAL |  |
+| 98 | Chatbot soporte EMR | 9 | command | Planned | Low | Future | Exclude | MISSING | Fuera alcance clínico MVP |
+| 99 | Sala telemedicina | 9 | command | Planned | Low | Future | Defer | DEFERRED |  |
+| 100 | Portal paciente (vista admin) | 9 | command | Planned | Low | Future | Integrate | DEFERRED | Portal externo |
+
+## Urgencias y triage (101–110)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 101 | Dashboard de Urgencias | 10 | emergency | Planned | High | Post-core | Build | MISSING | Workspace emergency Tramo C |
+| 102 | Categorización ESI | 10 | emergency | Planned | High | Post-core | Build | MISSING | Workspace emergency Tramo C |
+| 103 | Reanimación (Clave Azul) | 10 | emergency | Planned | High | Post-core | Build | MISSING | Workspace emergency Tramo C |
+| 104 | Trauma / FAST | 10 | emergency | Planned | High | Post-core | Build | MISSING | Workspace emergency Tramo C |
+| 105 | Hoja observación corta | 10 | emergency | Planned | High | Post-core | Build | MISSING | Workspace emergency Tramo C |
+| 106 | Traslado SAMU | 10 | emergency | Active | Medium | Post-core | Build | PARTIAL | transfer_note |
+| 107 | Protocolo ACV (Stroke) | 10 | emergency | Planned | High | Post-core | Build | MISSING |  |
+| 108 | Protocolo IAM | 10 | emergency | Planned | High | Post-core | Build | MISSING |  |
+| 109 | Ingreso toxicológico | 10 | emergency | Planned | High | Post-core | Build | MISSING |  |
+| 110 | Alta urgencia + APS | 10 | emergency | Active | High | Post-core | Build | PARTIAL |  |
+
+## Enfermería y cuidados (111–120)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 111 | Entrega de turno (SBAR) | 11 | icu | Active | High | Post-core | Build | PARTIAL | nursing_note blueprint |
+| 112 | Riesgo de caídas | 11 | icu | Planned | High | Post-core | Build | MISSING |  |
+| 113 | Riesgo UPP (Braden/Norton) | 11 | icu | Planned | High | Post-core | Build | MISSING |  |
+| 114 | Curaciones / heridas | 11 | icu | Planned | High | Post-core | Build | MISSING |  |
+| 115 | Diuresis / deposiciones | 11 | icu | Planned | High | Post-core | Build | MISSING |  |
+| 116 | Tarjetón (5 correctos) | 11 | icu | Active | Critical | Post-core | Build | PARTIAL | medication_administration |
+| 117 | Sujeción mecánica | 11 | icu | Planned | Medium | Post-core | Build | MISSING |  |
+| 118 | Valoración dolor EVA/FLACC | 11 | icu | Planned | Medium | Post-core | Build | MISSING |  |
+| 119 | Seguimiento dispositivos | 11 | icu | Planned | Medium | Post-core | Build | MISSING |  |
+| 120 | Plan cuidados enfermería | 11 | icu | Active | Medium | Post-core | Build | PARTIAL |  |
+
+## Medicina general y APS (121–130)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 121 | Control salud cardiovascular | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
+| 122 | Calculadora Framingham | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
+| 123 | Examen medicina preventiva (EMP) | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
+| 124 | Pie diabético | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
+| 125 | Tamizaje salud mental | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
+| 126 | Control niño sano | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
+| 127 | Calendario inmunizaciones | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
+| 128 | Control prenatal | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
+| 129 | Derivación programas ministeriales | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
+| 130 | Visita domiciliaria integral | 12 | ambulatory | Active | Medium | Post-core | Build | PARTIAL |  |
+
+## UCI avanzada (131–140)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 131 | Prueba ventilación espontánea | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
+| 132 | Terapias renales continuas | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
+| 133 | Nutrición parenteral total | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
+| 134 | Nutrición enteral | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
+| 135 | Monitorización hemodinámica | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
+| 136 | Muerte encefálica | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
+| 137 | Procuramiento órganos | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
+| 138 | Diario UCI (humanización) | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
+| 139 | Seguimiento delirium | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
+| 140 | Protocolo decúbito prono | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
+
+## IAAS avanzada (141–150)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 141 | Matriz vigilancia activa | 14 | quality_iaas | Planned | High | Post-core | Build | MISSING |  |
+| 142 | Alerta MDRO | 14 | quality_iaas | Planned | High | Post-core | Build | MISSING |  |
+| 143 | Monitor consumo antimicrobianos | 14 | quality_iaas | Active | Medium | Post-core | Build | PARTIAL |  |
+| 144 | PROA | 14 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
+| 145 | Checklist inserción CVC | 14 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
+| 146 | Checklist prevención NAV | 14 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
+| 147 | Adherencia higiene de manos | 14 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
+| 148 | Estudio brote | 14 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
+| 149 | Mapa aislamientos | 14 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
+| 150 | Curvas endémicas | 14 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
+
+## Pabellón y anestesia (151–160)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 151 | Tabla quirúrgica | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
+| 152 | Checklist cirugía segura OMS | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
+| 153 | Evaluación preanestésica | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
+| 154 | Hoja anestesia intraoperatoria | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
+| 155 | Protocolo operatorio | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
+| 156 | Recuento compresas / insumos | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
+| 157 | Biopsia intraoperatoria | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
+| 158 | Recuperación URPA | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
+| 159 | Banco de sangre | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
+| 160 | Esterilización / trazabilidad | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
+
+## Farmacia clínica (161–170)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 161 | Compatibilidad Y-Site | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
+| 162 | Ajuste dosis renal | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
+| 163 | Monitorización TDM | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
+| 164 | RAM | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
+| 165 | Conciliación medicamentos | 16 | pharmacy | Done | High | Core | Build | COMPLETE |  |
+| 166 | Dispensación recetas | 16 | pharmacy | Active | Medium | Post-core | Build | PARTIAL |  |
+| 167 | Carro de paro | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
+| 168 | Estupefacientes | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
+| 169 | Devolución fármacos | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
+| 170 | Quiebre de stock | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
+
+## Calidad y auditoría (171–180)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 171 | Eventos adversos / centinela | 17 | admin_system | Active | Medium | Post-core | Build | PARTIAL |  |
+| 172 | Análisis causa raíz (ACR) | 17 | admin_system | Planned | Medium | Post-core | Build | MISSING |  |
+| 173 | Comité mortalidad | 17 | admin_system | Planned | Medium | Post-core | Build | MISSING |  |
+| 174 | Auditoría registros médicos | 17 | admin_system | Planned | Medium | Post-core | Build | MISSING |  |
+| 175 | Reclamos OIRS | 17 | admin_system | Planned | Medium | Post-core | Build | MISSING |  |
+| 176 | Clima laboral clínico | 17 | admin_system | Planned | Medium | Post-core | Build | MISSING |  |
+| 177 | Trazabilidad consentimientos | 17 | admin_system | Planned | Medium | Post-core | Build | MISSING |  |
+| 178 | Indicadores acreditación | 17 | admin_system | Active | Medium | Post-core | Build | PARTIAL |  |
+| 179 | Documentos institucionales | 17 | admin_system | Planned | Low | Post-core | Build | MISSING |  |
+| 180 | Suspensión quirúrgica | 17 | admin_system | Planned | Low | Post-core | Build | MISSING |  |
+
+## Especialidades (181–190)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 181 | Partograma (obstetricia) | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
+| 182 | Comité oncológico | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
+| 183 | Odontograma | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
+| 184 | Informe endoscópico | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
+| 185 | Evaluación oftalmológica | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
+| 186 | Hemodiálisis ambulatoria | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
+| 187 | Ficha kinesiológica | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
+| 188 | Ficha nutricional | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
+| 189 | Protocolos quimioterapia | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
+| 190 | Seguimiento psiquiátrico | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
+
+## IA y hardware local (191–196)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 191 | Panel optimización VRAM | 19 | command | Active | Low | Post-core | Build | PARTIAL |  |
+| 192 | Gestor agentes autónomos | 19 | command | Planned | Low | Future | Defer | MISSING |  |
+| 193 | Vibe coding clínico | 19 | command | Active | Medium | Post-core | Build | PARTIAL | BlueprintStudioPanel |
+| 194 | Biblioteca prompts LLM | 19 | command | Planned | Medium | Post-core | Build | MISSING |  |
+| 195 | Auditoría decisiones IA | 19 | command | Active | High | Core | Build | PARTIAL | ai_runs |
+| 196 | Traducción médica local | 19 | command | Planned | Low | Future | Defer | MISSING |  |
+
+## Integración IoT (197–198)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 197 | Sincronización wearables | IoT | iot | Planned | Low | Future | Defer | DEFERRED |  |
+| 198 | Telemetría hospitalaria | IoT | iot | Planned | Low | Future | Defer | DEFERRED |  |
+
+## Interoperabilidad (199–200)
+
+| IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
+|-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
+| 199 | Visor HL7 / FHIR | 20 | admin_system | Active | High | Core | Integrate | PARTIAL | API + quarantine |
+| 200 | Backup y continuidad | 20 | admin_system | Active | High | Post-core | Build | PARTIAL |  |
+
+---
+
+## Referencias
+
+- Inventario 1–100: `EPIS2_ARCHITECTURE_INVENTORY_001_100.md`
+- Inventario 101–200: `EPIS2_ARCHITECTURE_INVENTORY_101_200.md`
+- Workspaces: `EPIS2_INVENTORY_WORKSPACE_MATRIX.md`

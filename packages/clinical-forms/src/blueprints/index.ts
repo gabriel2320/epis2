@@ -15,4 +15,5 @@ export { clinicalProblemEntryBlueprint } from './clinical-problem-entry.js';
 export { medicationReconciliationBlueprint } from './medication-reconciliation.js';
 export { transferNoteBlueprint } from './transfer-note.js';
 export { outpatientVisitBlueprint } from './outpatient-visit.js';
+export { medicalCertificateBlueprint } from './medical-certificate.js';
 export { referralReportBlueprint } from './referral-report.js';

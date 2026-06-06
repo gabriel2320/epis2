@@ -9,7 +9,6 @@ import {
   Alert,
   Box,
   Button,
-  Chip,
   Divider,
   List,
   ListItem,
@@ -38,12 +37,17 @@ import type { PatientLongitudinalResponse } from '@epis2/contracts';
 
 const QUICK_ROUTE_PATHS: ClinicalFormRoutePath[] = [
   '/espacio/resumen',
+  '/espacio/ambulatorio',
   '/espacio/evolucion',
   '/espacio/epicrisis',
   '/espacio/receta',
   '/espacio/laboratorio',
-  '/espacio/interconsulta',
   '/espacio/imagenologia',
+  '/espacio/interconsulta',
+  '/espacio/certificado',
+  '/espacio/alergia',
+  '/espacio/problema',
+  '/espacio/conciliacion',
   '/espacio/enfermeria',
   '/espacio/mar',
   '/espacio/farmacia',
@@ -156,20 +160,9 @@ export function PatientWorkspacePage() {
   return (
     <Stack sx={epis2ShellContentIslandSx} data-testid="epis2-patient-workspace">
       <Stack spacing={3}>
-        <Stack spacing={1}>
-          <Stack direction="row" spacing={1} flexWrap="wrap" alignItems="center">
-            <Typography variant="h5" component="h1">
-              {detail.patient.displayName}
-            </Typography>
-            <Chip label={copy.demoBadge} size="small" color="warning" variant="outlined" />
-            {detail.patient.demoCaseCode ? (
-              <Chip label={detail.patient.demoCaseCode} size="small" />
-            ) : null}
-          </Stack>
-          <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.55 }}>
-            {copy.activePatient.workspaceSubtitle}
-          </Typography>
-        </Stack>
+        <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.55 }}>
+          {copy.activePatient.workspaceSubtitle}
+        </Typography>
 
         <PatientClinicalSummaryPanel summaryFields={detail.clinicalContext.summaryFields} />
 
@@ -198,6 +191,24 @@ export function PatientWorkspacePage() {
             onOpenNote={() =>
               void navigate({
                 to: '/espacio/resumen',
+                search: { patientId },
+              })
+            }
+            onRegisterAllergy={() =>
+              void navigate({
+                to: '/espacio/alergia',
+                search: { patientId },
+              })
+            }
+            onRegisterProblem={() =>
+              void navigate({
+                to: '/espacio/problema',
+                search: { patientId },
+              })
+            }
+            onOpenResults={() =>
+              void navigate({
+                to: '/espacio/resultados',
                 search: { patientId },
               })
             }

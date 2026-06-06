@@ -13,6 +13,8 @@ import {
   slateProfessionalLightScheme,
   warmLinenDarkScheme,
   warmLinenLightScheme,
+  monochromeGrayDarkScheme,
+  monochromeGrayLightScheme,
 } from './generated/index.js';
 
 export const MATERIAL_THEME_SCHEMES: Record<
@@ -43,6 +45,10 @@ export const MATERIAL_THEME_SCHEMES: Record<
     light: warmLinenLightScheme,
     dark: warmLinenDarkScheme,
   },
+  'monochrome-gray': {
+    light: monochromeGrayLightScheme,
+    dark: monochromeGrayDarkScheme,
+  },
 };
 
 /** Acentos MTB aprobados — no alteran roles clínicos (M3-G02). */
@@ -53,6 +59,7 @@ export const ACCENT_TO_THEME_ID: Partial<Record<Epis2Accent, Epis2ApprovedThemeI
   sageClinical: 'sage-clinical',
   oceanDepth: 'ocean-depth',
   warmLinen: 'warm-linen',
+  monochrome: 'monochrome-gray',
 };
 
 export const MTB_ACCENT_IDS = Object.keys(ACCENT_TO_THEME_ID) as Epis2Accent[];

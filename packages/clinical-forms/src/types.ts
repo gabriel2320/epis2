@@ -28,6 +28,8 @@ export type FormField = {
   required?: boolean;
   options?: readonly string[];
   readOnly?: boolean;
+  /** Ancho en grid M3 de 12 columnas (escritorio). Por defecto 12. */
+  columnSpan?: number;
 };
 
 export type FormValidationRule = {

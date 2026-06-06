@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
 import Stack from '@mui/material/Stack';
 import { epis2ClinicalFormCanvasSx } from './clinical-field-layout.js';
+import { epis2M3FormLayout } from '../theme/m3-layout-tokens.js';
 
 export type EpisClinicalFormPageProps = {
   title: string;
@@ -20,7 +21,7 @@ export function EpisClinicalFormPage({
 }: EpisClinicalFormPageProps) {
   return (
     <Box sx={epis2ClinicalFormCanvasSx} data-testid={testId}>
-      <Stack spacing={3.5}>
+      <Stack spacing={epis2M3FormLayout.sectionGap}>
         <Stack
           direction="row"
           spacing={1.5}

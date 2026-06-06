@@ -35,4 +35,14 @@ describe('useEpisClinicalContextPanel', () => {
     });
     expect(sessionStorage.getItem(storageKey)).toBe('0');
   });
+
+  it('modo pantalla dividida abre contexto por defecto sin override en storage', () => {
+    localStorage.setItem(
+      'epis2-theme-preferences-v2',
+      JSON.stringify({ clinicalSplitScreen: 'split' }),
+    );
+    const { result } = renderHook(() => useEpisClinicalContextPanel({ storageKey }), { wrapper });
+    expect(result.current.contextOpen).toBe(true);
+    localStorage.removeItem('epis2-theme-preferences-v2');
+  });
 });

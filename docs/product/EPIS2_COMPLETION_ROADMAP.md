@@ -1,9 +1,11 @@
 # EPIS2 — Roadmap de completitud (post-auditoría)
 
-**Versión:** 1.0 · **Fecha:** 2026-06-05  
-**Alcance:** Secuencial; una rama funcional activa; sin implementación masiva en esta sesión.
+**Versión:** 1.1 · **Fecha:** 2026-06-04  
+**Canon de ejecución:** [`EPIS2_WAVE_EXECUTION_CANON.md`](./EPIS2_WAVE_EXECUTION_CANON.md) — **fuente primaria** para agentes (precedencia, gates, tramos A–D, milestones 1A–1D).
 
-**Estado base:** Planes A–G cerrados; 228 tests; 22 migraciones; golden V0–V5 en CI; GO DEMO signoff.
+> Las olas agrupan capacidades; **no** implican cola lineal estricta. Ver definición **EPIS2 Core completado** en el canon.
+
+**Estado base:** Ola 0 cerrada · Ola 1 shell cerrada (1A Done; 1C–1D Partial) · Ola 2 activa · 405 tests · 32 migraciones
 
 ---
 
@@ -21,11 +23,20 @@
 
 **Gate:** `npm run check` · `test` · `db:validate` · `quality:golden-journey`
 
-**Criterio cierre Ola 0:** audit prod deps verde + Drizzle actualizado si aplica.
+**Criterio cierre Ola 0:** baseline plataforma cerrada — **seguridad continúa transversalmente** (canon §6).
 
 ---
 
-## Ola 1 — Núcleo productivo
+## Ola 1 — Milestones 1A–1D (núcleo productivo)
+
+| Milestone | Contenido | Estado |
+|-----------|-----------|--------|
+| **1A** Shell clínico | Login, comando, rail, contexto, sesión | **Done** |
+| **1B** Consulta mínima | SOAP, borrador/firma | **Done** |
+| **1C** Indicaciones/resultados | Receta, lab, imagen, bandeja | **Partial** |
+| **1D** IA asistida segura | Assist, RAG, sin firma IA | **Partial** |
+
+Detalle histórico v1.0:
 
 | Capacidad | Estado | Archivos afectados |
 |-----------|--------|-------------------|
@@ -163,6 +174,46 @@
 ## Ola 9 — Producción clínica (fuera de alcance actual)
 
 No declarar EPIS2 listo para producción clínica real hasta cerrar Ola 8 + signoff institucional.
+
+---
+
+## Olas 1–9 — Inventario núcleo (IDC 1–100)
+
+**Detalle:** [`EPIS2_ARCHITECTURE_INVENTORY_001_100.md`](./EPIS2_ARCHITECTURE_INVENTORY_001_100.md)
+
+| Ola | IDC | Dominio | Entregable mínimo |
+|-----|-----|---------|-------------------|
+| 0–1 | 1, 21–26, 37, 52, 55–58, 91, 94 | Núcleo clínico | ✓ MVP actual |
+| 2 | 31–40 | Consulta ambulatoria | Extender `outpatient_visit` + cierre 39 |
+| 3 | 27–30 | Antecedentes | Blueprints mórbidos/familiares/hábitos |
+| 4 | 2–10 | Recepción | Demografía IDC 5 + agenda |
+| 5 | 11–20 | Facturación | **DEFERRED** Chile |
+| 6 | 61–70 | Documentos legales | Consentimiento 65, licencia 61 |
+| 7 | 71–80 | Epidemiología | ENO 72, IAAS 73 |
+| 8 | 81–90 | Jefatura | KPIs + auditoría UI |
+| 9 | 92–100 | IA + telemedicina | Voz 92, tele 99 **DEFERRED** |
+
+---
+
+## Olas 10–20 — Inventario extendido (IDC 101–200)
+
+**Planificación completa:** [`EPIS2_ARCHITECTURE_INVENTORY_101_200.md`](./EPIS2_ARCHITECTURE_INVENTORY_101_200.md)
+
+| Ola | IDC | Dominio | Entregable mínimo |
+|-----|-----|---------|-------------------|
+| 10 | 101–110 | Urgencias | Tab `urgencias` + blueprint `esi_triage` |
+| 11 | 111–120 | Enfermería | `nursing_handover`, escalas caídas/UPP |
+| 12 | 121–130 | APS | EMP, PHQ-9, PNI |
+| 13 | 131–140 | UCI | **DEFERRED** programa UCI |
+| 14 | 141–150 | IAAS | PROA, mapa aislamientos |
+| 15 | 151–160 | Pabellón | Checklist OMS |
+| 16 | 161–170 | Farmacia | TDM, RAM, Y-Site |
+| 17 | 171–180 | Calidad | Centinela + ACR |
+| 18 | 181–190 | Especialidades | **DEFERRED** |
+| 19 | 191–196 | IA ops | Prompts UI + auditoría IA |
+| 20 | 197–200 | IoT / interop | Consola HL7/FHIR unificada |
+
+**Secuencia post-MVP:** 10 → 11 → 16 → 17 → 12 → 14 → 19 → 20.
 
 ---
 

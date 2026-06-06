@@ -142,7 +142,7 @@ export function EpisCommandBar({
             px: 0.5,
             boxShadow: 'none',
             '&.Mui-focused': {
-              boxShadow: visual?.powerBarFocusShadow ?? `0 0 0 3px ${theme.palette.primary.light}`,
+              boxShadow: visual?.powerBarFocusShadow ?? 'none',
             },
           },
           '& .MuiOutlinedInput-input': {

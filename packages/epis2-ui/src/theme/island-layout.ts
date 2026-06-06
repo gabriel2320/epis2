@@ -1,6 +1,7 @@
 import type { SxProps, Theme } from '@mui/material/styles';
 import type { SystemStyleObject } from '@mui/system';
 import { epis2BarLayout } from './breakpoints.js';
+import { epis2M3IslandPadding } from './m3-layout-tokens.js';
 import { epis2Shape } from './shape.js';
 
 /** Fondo de aplicación — canvas neutro (background.default). */
@@ -19,10 +20,8 @@ export const epis2IslandSx: SystemStyleObject<Theme> = {
   width: '100%',
 };
 
-/** Padding interior de isla (grid 8px: 24–40px). */
-export const epis2IslandPaddingSx: SystemStyleObject<Theme> = {
-  p: { xs: 3, sm: 3.5, md: 4 },
-};
+/** Padding interior de isla (grid 8dp: 24–32px). */
+export const epis2IslandPaddingSx: SystemStyleObject<Theme> = epis2M3IslandPadding;
 
 /** Margen exterior de isla respecto al canvas — encuadre con aire. */
 export const epis2IslandMarginSx: SystemStyleObject<Theme> = {

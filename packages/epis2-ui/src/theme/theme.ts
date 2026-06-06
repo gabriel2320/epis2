@@ -33,6 +33,18 @@ export {
 } from './island-layout.js';
 export { epis2DisplayFontFamily, epis2BodyFontFamily } from './typography.js';
 export { epis2TonalContainerSx, epis2TonalOverlaySx } from './epis2-elevation.js';
+export {
+  epis2M3GridUnitPx,
+  epis2M3Spacing,
+  epis2M3FormColumns,
+  epis2M3FormLayout,
+  epis2M3TouchTargetMinPx,
+  epis2M3IslandPadding,
+  epis2ClinicalFormFooterSx,
+  epis2ClinicalTwoPaneFooterSx,
+  epis2M3FormGridSx,
+  epis2M3ColumnSpanSx,
+} from './m3-layout-tokens.js';
 
 /** @deprecated Usar buildM3PaletteOptions / theme.palette */
 export { epis2Palette } from './palette-legacy.js';

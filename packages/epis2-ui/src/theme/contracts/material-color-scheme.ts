@@ -58,7 +58,8 @@ export type Epis2ApprovedThemeId =
   | 'slate-professional'
   | 'sage-clinical'
   | 'ocean-depth'
-  | 'warm-linen';
+  | 'warm-linen'
+  | 'monochrome-gray';
 
 export interface Epis2ThemeOptions {
   themeId: Epis2ApprovedThemeId;

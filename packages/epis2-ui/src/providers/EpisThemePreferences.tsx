@@ -6,6 +6,7 @@ import {
 } from '../theme/create-epis2-theme.js';
 import type { Epis2MotionScheme } from '../theme/motion.js';
 import type { Epis2ThemeContrast, Epis2ThemeDensity } from '../theme/create-epis2-theme.js';
+import type { EpisClinicalWorkspaceId } from '../clinical/clinical-workspace.types.js';
 import {
   resolveEffectiveThemeMode,
   subscribeColorScheme,
@@ -20,6 +21,12 @@ export type Epis2ThemePreferences = {
   density: Epis2ThemeDensity;
   contrast: Epis2ThemeContrast;
   motion: Epis2MotionScheme;
+  /** Modo pantalla dividida clínica — historial visible por defecto en formularios two-pane. */
+  clinicalSplitScreen: 'focus' | 'split';
+  /** Espacio de trabajo activo — conmutador N0 MD3 (ver EPIS2_ROLE_WORKSPACES_M3.md). */
+  clinicalWorkspace: EpisClinicalWorkspaceId;
+  /** Orden personalizado de widgets por superficie (command-center, patient-chart, …). */
+  widgetLayoutOrder?: Record<string, readonly string[]>;
 };
 
 const defaultPreferences: Epis2ThemePreferences = {
@@ -28,6 +35,8 @@ const defaultPreferences: Epis2ThemePreferences = {
   density: 'comfortable',
   contrast: 'standard',
   motion: 'standard',
+  clinicalSplitScreen: 'focus',
+  clinicalWorkspace: 'command',
 };
 
 function loadPreferences(): Epis2ThemePreferences {

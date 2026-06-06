@@ -4,6 +4,7 @@ import type { SystemStyleObject } from '@mui/system';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
 import Stack from '@mui/material/Stack';
 import { epis2BarLayout } from '../theme/breakpoints.js';
+import { epis2M3Spacing, epis2M3TouchTargetMinPx } from '../theme/m3-layout-tokens.js';
 import { epis2IslandPaddingSx, epis2IslandSx } from '../theme/island-layout.js';
 import { epis2LineHeight, epis2ProseMaxWidth } from '../theme/typography-rules.js';
 
@@ -109,7 +110,7 @@ export function clinicalFieldShellSx(multiline?: boolean): SxProps<Theme> {
         }
       : {
           '& .MuiInputBase-root': {
-            minHeight: 40,
+            minHeight: epis2M3TouchTargetMinPx,
           },
         }),
   };
@@ -132,7 +133,7 @@ export function ClinicalFieldStack({
 }) {
   return (
     <Stack
-      spacing={1.25}
+      spacing={epis2M3Spacing.tight}
       sx={{
         ...clinicalFieldShellSx(multiline),
         ...(clinicalProse && multiline

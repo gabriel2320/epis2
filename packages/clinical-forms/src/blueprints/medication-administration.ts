@@ -22,11 +22,11 @@ export const medicationAdministrationBlueprint = defineBlueprint({
     ]),
   ],
   fields: [
-    field('medication', 'Medicamento', 'text', true),
-    field('dose', 'Dosis', 'text', true),
-    field('route', 'Vía', 'text', true),
-    field('scheduledTime', 'Hora programada', 'text', false),
-    field('administeredAt', 'Hora de administración', 'text', false),
+    field('medication', 'Medicamento', 'text', { required: true, columnSpan: 6 }),
+    field('dose', 'Dosis', 'text', { required: true, columnSpan: 3 }),
+    field('route', 'Vía', 'text', { required: true, columnSpan: 3 }),
+    field('scheduledTime', 'Hora programada', 'text', { columnSpan: 3 }),
+    field('administeredAt', 'Hora de administración', 'text', { columnSpan: 3 }),
     field(
       'doubleCheckConfirmed',
       'Doble chequeo confirmado (alto riesgo)',

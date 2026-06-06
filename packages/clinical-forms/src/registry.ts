@@ -18,8 +18,10 @@ import {
   transferNoteBlueprint,
   outpatientVisitBlueprint,
   referralReportBlueprint,
+  medicalCertificateBlueprint,
 } from './blueprints/index.js';
 import type { ClinicalFormBlueprint } from './types.js';
+import { validateBlueprintLayout } from './layout.js';
 
 /** Registry único de formularios clínicos EPIS2. */
 export const EPIS2_FORM_BLUEPRINTS: readonly ClinicalFormBlueprint[] = [
@@ -41,6 +43,7 @@ export const EPIS2_FORM_BLUEPRINTS: readonly ClinicalFormBlueprint[] = [
   transferNoteBlueprint,
   outpatientVisitBlueprint,
   referralReportBlueprint,
+  medicalCertificateBlueprint,
 ];
 
 const byId = new Map(EPIS2_FORM_BLUEPRINTS.map((b) => [b.blueprintId, b]));
@@ -76,6 +79,8 @@ export function assertRegistryInvariants(): string[] {
         errors.push(`${bp.blueprintId}: intent ${intentId} no está en command-registry`);
       }
     }
+
+    errors.push(...validateBlueprintLayout(bp));
   }
 
   for (const def of EPIS2_COMMAND_DEFINITIONS) {

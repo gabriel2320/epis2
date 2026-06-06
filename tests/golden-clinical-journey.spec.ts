@@ -40,6 +40,67 @@ describe('Golden Clinical Journey', () => {
       }
     });
 
+    it('consulta ambulatoria resuelve ruta con paciente', () => {
+      const result = resolveCommand({
+        text: 'consulta ambulatoria de control',
+        role: 'physician',
+        patientId: 'a0000001-0000-4000-8000-000000000001',
+      });
+      expect(result.status).toBe('resolved');
+      if (result.status === 'resolved') {
+        expect(result.routePath).toBe('/espacio/ambulatorio');
+      }
+    });
+
+    it('certificado médico resuelve ruta con paciente', () => {
+      const result = resolveCommand({
+        text: 'emitir certificado médico',
+        role: 'physician',
+        patientId: 'a0000001-0000-4000-8000-000000000001',
+      });
+      expect(result.status).toBe('resolved');
+      if (result.status === 'resolved') {
+        expect(result.routePath).toBe('/espacio/certificado');
+      }
+    });
+
+    it('bandeja de resultados resuelve ruta con paciente', () => {
+      const result = resolveCommand({
+        text: 'ver bandeja de resultados',
+        role: 'physician',
+        patientId: 'a0000001-0000-4000-8000-000000000001',
+      });
+      expect(result.status).toBe('resolved');
+      if (result.status === 'resolved') {
+        expect(result.routePath).toBe('/espacio/resultados');
+      }
+    });
+
+    it('solicitud laboratorio resuelve ruta con paciente', () => {
+      const result = resolveCommand({
+        text: 'solicitar hemograma completo',
+        role: 'physician',
+        patientId: 'a0000001-0000-4000-8000-000000000001',
+      });
+      expect(result.status).toBe('resolved');
+      if (result.status === 'resolved') {
+        expect(result.routePath).toBe('/espacio/laboratorio');
+      }
+    });
+
+    it('solicitud imagenología resuelve ruta con paciente', () => {
+      const result = resolveCommand({
+        text: 'solicitar radiografía de tórax',
+        role: 'physician',
+        patientId: 'a0000001-0000-4000-8000-000000000001',
+      });
+      expect(result.status).toBe('resolved');
+      if (result.status === 'resolved') {
+        expect(result.intent).toBe('request_imaging');
+        expect(result.routePath).toBe('/espacio/imagenologia');
+      }
+    });
+
     it('5. página evolución desde blueprint único', async () => {
       const { getBlueprintById, assertRegistryInvariants } = await import(
         '@epis2/clinical-forms'

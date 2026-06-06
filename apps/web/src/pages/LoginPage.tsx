@@ -12,8 +12,7 @@ import {
 
   EpisButton,
 
-  EpisChip,
-
+  EpisDemoBadgeChip,
   EpisM3Text,
 
   EpisTextField,
@@ -112,19 +111,7 @@ export function LoginPage() {
 
         </EpisM3Text>
 
-        <EpisChip
-
-          icon={<ScienceIcon />}
-
-          label={copy.demoBadge}
-
-          size="small"
-
-          variant="outlined"
-
-          sx={{ fontWeight: 600, borderColor: 'warning.main', color: 'warning.dark', bgcolor: 'warning.light' }}
-
-        />
+        <EpisDemoBadgeChip icon={<ScienceIcon />} label={copy.demoBadge} />
 
       </Stack>
 

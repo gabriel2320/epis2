@@ -20,11 +20,15 @@ export const imagingRequestBlueprint = defineBlueprint({
     ]),
   ],
   fields: [
-    field('scheduledDate', 'Fecha programada', 'date', true),
-    field('modality', 'Modalidad', 'select', true, ['RX', 'TC', 'RM', 'US', 'OTRO']),
+    field('scheduledDate', 'Fecha programada', 'date', { required: true, columnSpan: 4 }),
+    field('modality', 'Modalidad', 'select', {
+      required: true,
+      options: ['RX', 'TC', 'RM', 'US', 'OTRO'],
+      columnSpan: 4,
+    }),
     field('studyDescription', 'Estudio solicitado', 'textarea', true),
     field('clinicalIndication', 'Indicación clínica', 'textarea', true),
-    field('priority', 'Prioridad', 'select', false, ['rutina', 'urgente']),
+    field('priority', 'Prioridad', 'select', { options: ['rutina', 'urgente'], columnSpan: 4 }),
   ],
   validations: [
     { fieldId: 'scheduledDate', message: 'Indique fecha programada' },

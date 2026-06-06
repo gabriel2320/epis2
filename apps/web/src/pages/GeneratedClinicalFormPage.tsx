@@ -6,11 +6,15 @@ import {
 
   blueprintUsesClinicalProse,
 
+  blueprintUsesScrollspyLayout,
+
   defaultClinicalContextInsertField,
 
   defaultSummaryValues,
 
   initialFormValues,
+
+  scrollspySectionLabels,
 
   validateFormValues,
 
@@ -32,13 +36,21 @@ import {
 
   EpisChip,
 
+  EpisDemoBadgeChip,
+
   Box,
+
+  EpisClinicalActionDock,
 
   EpisClinicalFocusAppBar,
 
   EpisClinicalForm,
 
+  EpisClinicalFormFooter,
+
   EpisClinicalFormPage,
+
+  EpisClinicalScrollspyLayout,
 
   EpisClinicalTwoPaneLayout,
 
@@ -153,6 +165,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const canUseAiAssist = blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES;
   const clinicalProse = blueprintUsesClinicalProse(blueprint.blueprintId);
   const supportsClinicalContext = blueprintSupportsClinicalContext(blueprint.blueprintId);
+  const usesScrollspyShell =
+    supportsClinicalContext || blueprintUsesScrollspyLayout(blueprint.blueprintId);
   const contextStorageKey = useMemo(
     () =>
       effectivePatientId && supportsClinicalContext
@@ -165,6 +179,11 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     blueprintSupportsClinicalContext(blueprint.blueprintId)
       ? defaultClinicalContextInsertField(blueprint.blueprintId)
       : 'plan';
+
+  const scrollspySections = useMemo(
+    () => scrollspySectionLabels(blueprint, blueprint.blueprintId),
+    [blueprint],
+  );
 
 
 
@@ -534,21 +553,18 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
         <EpisAlert severity="info">{copy.forms.needsPatient}</EpisAlert>
 
-        <Stack direction="row" spacing={1} flexWrap="wrap">
-
-          <EpisButton component={Link} to="/espacio/buscar-paciente" variant="contained">
-
-            {copy.forms.searchPatient}
-
-          </EpisButton>
-
-          <EpisButton component={Link} to="/espacio/ficha" variant="outlined">
-
-            {copy.activePatient.pickPatient}
-
-          </EpisButton>
-
-        </Stack>
+        <EpisClinicalFormFooter
+          actions={
+            <>
+              <EpisButton component={Link} to="/espacio/buscar-paciente" appearance="filled">
+                {copy.forms.searchPatient}
+              </EpisButton>
+              <EpisButton component={Link} to="/espacio/ficha" appearance="outlined">
+                {copy.activePatient.pickPatient}
+              </EpisButton>
+            </>
+          }
+        />
 
         <ClinicalPageNav />
 
@@ -564,7 +580,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
     <>
 
-      <EpisChip label={copy.demoBadge} size="small" color="warning" variant="outlined" />
+      <EpisDemoBadgeChip label={copy.demoBadge} />
 
       {activePatient ? (
 
@@ -590,7 +606,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
               size="small"
 
-              color="warning"
+              color="secondary"
 
               variant="outlined"
 
@@ -608,7 +624,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
 
 
-  if (supportsClinicalContext) {
+  if (usesScrollspyShell) {
 
     return (
 
@@ -627,6 +643,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
               contextOpen={contextOpen}
 
               onContextOpenChange={setContextOpen}
+
+              showContextToggle={supportsClinicalContext}
 
               contextOpenLabel={copy.clinicalLayout.splitOpen}
 
@@ -692,23 +710,17 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
               />
 
-              <EpisClinicalForm
-
-                blueprint={blueprint}
-
-                values={values}
-
-                errors={fieldErrors}
-
-                clinicalProse={clinicalProse}
-
-                clinicalDropEnabled
-
-                onClinicalDrop={onClinicalDrop}
-
-                onChange={onChange}
-
-              />
+              <EpisClinicalScrollspyLayout sections={scrollspySections}>
+                <EpisClinicalForm
+                  blueprint={blueprint}
+                  values={values}
+                  errors={fieldErrors}
+                  clinicalProse={clinicalProse}
+                  clinicalDropEnabled
+                  onClinicalDrop={onClinicalDrop}
+                  onChange={onChange}
+                />
+              </EpisClinicalScrollspyLayout>
 
               {canUseAiAssist ? (
 
@@ -787,21 +799,20 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
           onContextOpenChange={setContextOpen}
 
           footer={
-
-            <Stack spacing={2}>
-
-              <EpisButton variant="contained" onClick={() => void saveDraft()}>
-
-                {copy.forms.saveDraft}
-
-              </EpisButton>
-
-              <ClinicalPageNav patientId={effectivePatientId} />
-
-            </Stack>
-
+            <EpisClinicalFormFooter
+              trailing={<ClinicalPageNav patientId={effectivePatientId} />}
+            />
           }
 
+        />
+
+        <EpisClinicalActionDock
+          primaryLabel={
+            blueprintUsesScrollspyLayout(blueprint.blueprintId)
+              ? copy.workspaces.ambulatory.fab
+              : copy.patientChart.dockSave
+          }
+          onPrimary={() => void saveDraft()}
         />
 
       </Box>
@@ -882,35 +893,25 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
           blueprint.outputKind !== 'SEARCH' ? (
 
-            <Stack direction="row" spacing={1} flexWrap="wrap">
-
-              {canUseAiAssist ? (
-
-                <EpisButton
-
-                  variant="outlined"
-
-                  disabled={isSuggesting}
-
-                  onClick={() => void suggestWithAi()}
-
-                  data-testid="epis2-ai-suggest"
-
-                >
-
-                  {isSuggesting ? copy.forms.suggestingAi : copy.forms.suggestAi}
-
-                </EpisButton>
-
-              ) : null}
-
-              <EpisButton variant="contained" onClick={() => void saveDraft()}>
-
-                {copy.forms.saveDraft}
-
-              </EpisButton>
-
-            </Stack>
+            <EpisClinicalFormFooter
+              actions={
+                <>
+                  {canUseAiAssist ? (
+                    <EpisButton
+                      appearance="outlined"
+                      disabled={isSuggesting}
+                      onClick={() => void suggestWithAi()}
+                      data-testid="epis2-ai-suggest"
+                    >
+                      {isSuggesting ? copy.forms.suggestingAi : copy.forms.suggestAi}
+                    </EpisButton>
+                  ) : null}
+                  <EpisButton appearance="filled" onClick={() => void saveDraft()}>
+                    {copy.forms.saveDraft}
+                  </EpisButton>
+                </>
+              }
+            />
 
           ) : null}
 

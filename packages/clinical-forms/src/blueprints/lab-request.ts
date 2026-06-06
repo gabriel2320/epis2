@@ -12,10 +12,10 @@ export const labRequestBlueprint = defineBlueprint({
   requiresEncounter: true,
   sections: [section('order', 'Solicitud', ['scheduledDate', 'labTests', 'clinicalReason', 'priority'])],
   fields: [
-    field('scheduledDate', 'Fecha programada', 'date', true),
+    field('scheduledDate', 'Fecha programada', 'date', { required: true, columnSpan: 4 }),
     field('labTests', 'Exámenes', 'textarea', true),
     field('clinicalReason', 'Motivo clínico', 'textarea', true),
-    field('priority', 'Prioridad', 'select', false, ['rutina', 'urgente']),
+    field('priority', 'Prioridad', 'select', { options: ['rutina', 'urgente'], columnSpan: 4 }),
   ],
   validations: [
     { fieldId: 'scheduledDate', message: 'Indique fecha programada' },

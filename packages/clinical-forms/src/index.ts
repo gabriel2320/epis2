@@ -31,3 +31,23 @@ export {
   scaffoldBlueprintModule,
   type ScaffoldBlueprintInput,
 } from './scaffoldBlueprint.js';
+export {
+  BLUEPRINT_EXPORT_SCHEMA_VERSION,
+  blueprintExportFilename,
+  parseBlueprintImport,
+  serializeBlueprintToJson,
+  type BlueprintExportDocument,
+  type BlueprintImportResult,
+} from './blueprint-io.js';
+export {
+  EPIS2_M3_FORM_COLUMNS,
+  clampColumnSpan,
+  resolveFieldColumnSpan,
+  validateBlueprintLayout,
+} from './layout.js';
+export {
+  SCROLLSPY_LAYOUT_BLUEPRINT_IDS,
+  blueprintUsesScrollspyLayout,
+  scrollspySectionLabels,
+  type ScrollspyLayoutBlueprintId,
+} from './scrollspy-blueprints.js';

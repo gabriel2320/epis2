@@ -17,7 +17,7 @@ export const dischargeSummaryBlueprint = defineBlueprint({
   ],
   fields: [
     field('diagnoses', 'Diagnósticos', 'textarea', true),
-    field('dischargeDate', 'Fecha de alta', 'date', true),
+    field('dischargeDate', 'Fecha de alta', 'date', { required: true, columnSpan: 4 }),
     field('hospitalizationSummary', 'Resumen de hospitalización', 'textarea', true),
     field('evolution', 'Evolución', 'textarea'),
     field('dischargeMedications', 'Medicamentos al alta', 'textarea', true),

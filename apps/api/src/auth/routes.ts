@@ -28,7 +28,7 @@ export async function registerAuthRoutes(
   const requireAuditRead = createRequirePermission(config, 'audit.read');
 
   app.post('/api/auth/login', async (request, reply) => {
-    if (config.NODE_ENV !== 'test') {
+    if (config.NODE_ENV !== 'test' && config.NODE_ENV !== 'development') {
       const clientIp = request.ip || 'unknown';
       const limit = checkRateLimit({
         key: `login:${clientIp}`,
