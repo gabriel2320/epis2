@@ -18,10 +18,11 @@ Cierre staging del checklist M3 con gates automatizados y recorrido visual segú
 
 ## Gates
 - `npm run quality:m3-signoff` ✓
-- Pasos visuales V1–V6: checklist humano con criterios M3 en `M3_VISUAL_SIGNOFF_STEPS.md`
+- `npm run quality:m3-human-pilot` ✓ — E2E V1–V6 (`e2e/m3-visual-signoff.spec.ts`)
+- Pasos visuales V1–V6: automatizados; confirmación humana opcional en `M3_VISUAL_SIGNOFF_STEPS.md`
 
 ## Riesgos
-V1–V4 requieren confirmación en navegador; criterios de fallo explícitos en norma visual.
+Confirmación OS «Seguir sistema» requiere revisión manual en navegador si se desea evidencia capturada.
 
 ## Próximo paso
-MF-179 — `npm run quality:pilot-trial` incluye golden journey + signoff M3.
+Impresión clínica — `docs/design/EPIS2_PRINTABLE_CLINICAL_DOCUMENTS_NORM.md`

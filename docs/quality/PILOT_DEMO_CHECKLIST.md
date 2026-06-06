@@ -34,14 +34,14 @@
 
 ## Verificación tema M3 (THEME-07) — norma visual
 
-**Canon:** [`docs/quality/M3_VISUAL_SIGNOFF_STEPS.md`](../quality/M3_VISUAL_SIGNOFF_STEPS.md) · Gates previos: `npm run quality:m3-signoff`
+**Canon:** [`docs/quality/M3_VISUAL_SIGNOFF_STEPS.md`](../quality/M3_VISUAL_SIGNOFF_STEPS.md) · Gates previos: `npm run quality:m3-human-pilot`
 
 | # | Paso | Norma M3 | Hecho | Notas |
 |---|------|----------|-------|-------|
-| 10 | **V1** `/preferencias-apariencia` — Clinical Blue y Calm Teal al instante; roles clínicos inmutables | M3-G02, G14; anti-patrón §9 | [ ] | |
-| 11 | **V2** Modo oscuro + Seguir sistema — Comando (Display/Power Bar) y evolución (Standard, Outlined) legibles | THEME-05; MTB dark; M3-G08 | [ ] | |
-| 12 | **V3** Alto contraste — cuerpo reforzado; draft/aprobado/crítico/advertencia intactos; una acción primaria | M3-G03, G13; tipografía §AA | [ ] | |
-| 13 | **V4** `/desarrollo/catalogo-visual` — paleta MTB, roles clínicos, elevación tonal (sin sombra decorativa) | THEME-06; M3-G12; solo dev | [ ] | |
+| 10 | **V1** `/preferencias-apariencia` — Clinical Blue y Calm Teal al instante; roles clínicos inmutables | M3-G02, G14; anti-patrón §9 | [x] | E2E `m3-visual-signoff` |
+| 11 | **V2** Modo oscuro + Seguir sistema — Comando (Display/Power Bar) y evolución (Standard, Outlined) legibles | THEME-05; MTB dark; M3-G08 | [x] | E2E |
+| 12 | **V3** Alto contraste — cuerpo reforzado; draft/aprobado/crítico/advertencia intactos; una acción primaria | M3-G03, G13; tipografía §AA | [x] | E2E |
+| 13 | **V4** `/desarrollo/catalogo-visual` — paleta MTB, roles clínicos, elevación tonal (sin sombra decorativa) | THEME-06; M3-G12; solo dev | [x] | E2E |
 
 Pasos **V5–V6** (recorrido clínico 15 min + offline): ver `M3_VISUAL_SIGNOFF_STEPS.md`.
 
@@ -70,6 +70,7 @@ Pasos **V5–V6** (recorrido clínico 15 min + offline): ver `M3_VISUAL_SIGNOFF_
 
 ```bash
 npm run quality:golden-journey
+npm run quality:m3-human-pilot   # V1–V6 Playwright + gates M3
 ```
 
 Con `DATABASE_URL` definido, incluye el journey API en `tests/golden-clinical-journey.api.spec.ts`.

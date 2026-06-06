@@ -4,10 +4,12 @@
 
 **Norma visual canónica:** [`M3_VISUAL_SIGNOFF_STEPS.md`](M3_VISUAL_SIGNOFF_STEPS.md) (Material Design 3 Clinical documentado).
 
-## Gates automatizados
+## Gates automatizados + E2E
 
 ```bash
-npm run quality:m3-signoff
+npm run quality:m3-human-pilot   # verify-m3-signoff + Playwright V1–V6 + reporte
+npm run quality:m3-signoff       # solo gates unitarios / theme
+npm run test:e2e e2e/m3-visual-signoff.spec.ts
 ```
 
 Ejecuta contra canon M3:
@@ -23,12 +25,12 @@ Seguir **`M3_VISUAL_SIGNOFF_STEPS.md`** — resumen:
 
 | Paso | Tema M3 | Manual |
 |------|---------|--------|
-| V1 | Preferencias MTB instantáneas; M3-G02/G14 | [ ] |
-| V2 | Modo oscuro + sistema; M3 Standard en formulario | [ ] |
-| V3 | Alto contraste; roles clínicos intactos; M3-G13 | [ ] |
-| V4 | Catálogo visual dev; elevación tonal THEME-06 | [ ] |
-| V5 | Recorrido Login → Comando → Evolución → Aprobación | [ ] |
-| V6 | Offline banner + estados widget | [ ] |
+| V1 | Preferencias MTB instantáneas; M3-G02/G14 | [x] E2E |
+| V2 | Modo oscuro + sistema; M3 Standard en formulario | [x] E2E |
+| V3 | Alto contraste; roles clínicos intactos; M3-G13 | [x] E2E |
+| V4 | Catálogo visual dev; elevación tonal THEME-06 | [x] E2E |
+| V5 | Recorrido Login → Comando → Evolución → Aprobación | [x] E2E |
+| V6 | Offline banner + estados widget | [x] E2E |
 
 Referencias cruzadas: `EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md`, `EPIS2_TYPOGRAPHY_AND_AESTHETICS_RULES.md`, `EPIS2_MATERIAL_DESIGN_ANTI_PATTERNS.md`, `M3_ANTI_DRIFT_GATES.md`.
 
@@ -36,6 +38,6 @@ Referencias cruzadas: `EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md`, `EPIS2_TYPOGRAPH
 
 | Campo | Valor |
 |-------|--------|
-| Fecha staging | 2026-06-04 |
-| Resultado | **PASS WITH FIXES** — gates auto verdes; completar V1–V6 con norma M3 |
-| Reporte | `reports/epis2-mf-178-m3-human-signoff.md` |
+| Fecha staging | 2026-06-07 |
+| Resultado | **GO DEMO M3 (automatizado)** — `npm run quality:m3-human-pilot` |
+| Reporte | `reports/epis2-m3-human-pilot-*.md` |
