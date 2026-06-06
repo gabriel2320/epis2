@@ -1,3 +1,4 @@
+import { describeIntegration } from '@epis2/test-fixtures';
 import { describe, expect, it } from 'vitest';
 import { resolveCommand } from '@epis2/command-registry';
 import { buildApp } from '../app.js';
@@ -68,9 +69,7 @@ describe('dashboard API', () => {
   });
 });
 
-const hasDb = Boolean(process.env.DATABASE_URL);
-
-describe.skipIf(!hasDb)('dashboard role boards', () => {
+describeIntegration('dashboard role boards', () => {
   const config = { ...testApiConfig, DATABASE_URL: process.env.DATABASE_URL };
 
   it('GET /api/dashboard/nursing con enfermería devuelve MAR programado', async () => {

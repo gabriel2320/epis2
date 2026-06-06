@@ -1,20 +1,18 @@
-import { describe, expect, it } from 'vitest';
+import { DEMO_CLINICAL_CASES, describeIntegration } from '@epis2/test-fixtures';
+import { expect, it } from 'vitest';
 import { buildApp } from '../app.js';
 import { testApiConfig } from '../testConfig.js';
-import { DEMO_CLINICAL_CASES } from '@epis2/test-fixtures';
 
 const config = {
   ...testApiConfig,
   DATABASE_URL: process.env.DATABASE_URL,
 };
 
-const hasDb = Boolean(process.env.DATABASE_URL);
-
 const DEMO004_ADMISSION = 'f0000003-0000-4000-8000-000000000001';
 const BED_102A = 'f0000002-0000-4000-8000-000000000003';
 const BED_101A = 'f0000002-0000-4000-8000-000000000001';
 
-describe.skipIf(!hasDb)('inpatient API (integration)', () => {
+describeIntegration('inpatient API (integration)', () => {
   it('tablero servicio, traslado, ingreso, alta y comando ingreso', async () => {
     const app = await buildApp(config);
     const login = await app.inject({

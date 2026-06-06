@@ -1,14 +1,14 @@
 import { eq } from 'drizzle-orm';
-import { describe, expect, it } from 'vitest';
+import { describeIntegration } from '@epis2/test-fixtures';
+import { expect, it } from 'vitest';
 import { buildApp } from '../app.js';
 import { getDatabase } from '../db/client.js';
 import { marAdministrationRecords } from '../db/schema.js';
 import { testApiConfig } from '../testConfig.js';
 
-const hasDb = Boolean(process.env.DATABASE_URL);
 const DEMO005 = 'a0000001-0000-4000-8000-000000000005';
 
-describe.skipIf(!hasDb)('V3 MAR (integration)', () => {
+describeIntegration('V3 MAR (integration)', () => {
   it('aprobar borrador MAR crea mar_administration_records', async () => {
     const config = { ...testApiConfig, DATABASE_URL: process.env.DATABASE_URL };
     const app = await buildApp(config);

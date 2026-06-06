@@ -6,12 +6,12 @@ describe('microphase ledger', () => {
     const ledger = loadLedger();
     const result = validateLedger(ledger);
     expect(result.ok, result.errors.join('\n')).toBe(true);
-    expect(result.ready?.id).toBe('MF-153');
+    expect(result.ready?.id).toBe('MF-154');
   });
 
-  it('findNextReady devuelve MF-153 tras MF-152 DONE', () => {
+  it('findNextReady devuelve MF-154 tras MF-153 DONE', () => {
     const result = findNextReady(loadLedger());
-    expect(result.next?.id).toBe('MF-153');
-    expect(result.next?.name).toContain('PostgreSQL');
+    expect(result.next?.id).toBe('MF-154');
+    expect(result.next?.name).toContain('Playwright');
   });
 });

@@ -1,11 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { describeIntegration } from '@epis2/test-fixtures';
+import { expect, it } from 'vitest';
 import { buildApp } from '../app.js';
 import { testApiConfig } from '../testConfig.js';
 
-const hasDb = Boolean(process.env.DATABASE_URL);
 const DEMO001 = 'a0000001-0000-4000-8000-000000000001';
 
-describe.skipIf(!hasDb)('V5 IA trazable (integration)', () => {
+describeIntegration('V5 IA trazable (integration)', () => {
   it('RAG devuelve citas y registra ai_run; resumen 24h sin nota final', async () => {
     const app = await buildApp({ ...testApiConfig, DATABASE_URL: process.env.DATABASE_URL });
     const login = await app.inject({

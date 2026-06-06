@@ -3,14 +3,12 @@
  * Requiere Postgres: DATABASE_URL + npm run db:migrate
  */
 import { and, desc, eq } from 'drizzle-orm';
-import { describe, expect, it } from 'vitest';
+import { DEMO_CLINICAL_CASES, describeIntegration } from '@epis2/test-fixtures';
+import { expect, it } from 'vitest';
 import { buildApp } from '../apps/api/src/app.js';
 import { getDatabase } from '../apps/api/src/db/client.js';
 import { approvals, auditEvents } from '../apps/api/src/db/schema.js';
 import { testApiConfig } from '../apps/api/src/testConfig.js';
-import { DEMO_CLINICAL_CASES } from '@epis2/test-fixtures';
-
-const hasDb = Boolean(process.env.DATABASE_URL);
 
 const config = {
   ...testApiConfig,
@@ -27,7 +25,7 @@ async function loginCookie(app: Awaited<ReturnType<typeof buildApp>>) {
   return String(login.headers['set-cookie']).split(';')[0];
 }
 
-describe.skipIf(!hasDb)('Golden Clinical Journey — API', () => {
+describeIntegration('Golden Clinical Journey — API', () => {
   it('flujo completo: login → paciente demo → comando → borrador → aprobación → auditoría', async () => {
     const app = await buildApp(config);
     const db = getDatabase(config.DATABASE_URL)!;

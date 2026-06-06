@@ -1,4 +1,11 @@
 export {
+  INTEGRATION_DATABASE_DOC,
+  INTEGRATION_SKIP_REASON,
+  INTEGRATION_TEST_SUITES,
+  describeIntegration,
+  hasIntegrationDatabase,
+} from './integrationDatabase.js';
+export {
   DEMO_CLINICAL_CASES,
   DEMO_IDENTIFIER_SYSTEM,
   SYNTHETIC_LABEL,

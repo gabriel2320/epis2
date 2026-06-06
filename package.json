@@ -18,6 +18,7 @@
     "qa:bundle-analyze": "node scripts/qa/bundle-analyze.mjs",
     "quality:microphases": "node scripts/quality/validate-microphase-ledger.mjs",
     "quality:microphase-next": "node scripts/quality/microphase-next.mjs",
+    "quality:ci-parity": "node scripts/quality/validate-ci-test-parity.mjs",
     "quality:golden-journey": "npm run build -w @epis2/command-registry && npm run build -w @epis2/clinical-forms && npm run build -w @epis2/test-fixtures && vitest run tests/golden-clinical-journey.spec.ts tests/golden-clinical-journey.api.spec.ts",
     "check": "npm run lint && npm run typecheck && npm run architecture:validate",
     "db:validate": "node scripts/db-validate.mjs",

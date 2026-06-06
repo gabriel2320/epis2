@@ -47,13 +47,13 @@
       "wave": 0,
       "waveName": "Verdad operativa y gates",
       "dependsOn": ["MF-152"],
-      "state": "READY",
+      "state": "DONE",
       "evidenceRequired": [
         "DATABASE_URL documentado para tests integración",
         "0 skips silenciosos en CI con Postgres",
         "reports/epis2-mf-153-ci-parity.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-153-ci-parity.md",
       "unblocks": ["MF-154"]
     },
     {
@@ -62,7 +62,7 @@
       "wave": 0,
       "waveName": "Verdad operativa y gates",
       "dependsOn": ["MF-153"],
-      "state": "BLOCKED",
+      "state": "READY",
       "evidenceRequired": [
         "playwright en .github/workflows/ci.yml",
         "journey E2E comando→evolución mínimo",

@@ -1,11 +1,10 @@
-import { describe, expect, it } from 'vitest';
+import { describeIntegration } from '@epis2/test-fixtures';
+import { expect, it } from 'vitest';
 import { assertExportClean } from '@epis2/fhir-export';
 import { buildApp } from '../app.js';
 import { testApiConfig } from '../testConfig.js';
 
-const hasDb = Boolean(process.env.DATABASE_URL);
-
-describe.skipIf(!hasDb)('FHIR export API (integration)', () => {
+describeIntegration('FHIR export API (integration)', () => {
   it('exporta Patient y Bundle validados para caso demo', async () => {
     const app = await buildApp({ ...testApiConfig, DATABASE_URL: process.env.DATABASE_URL });
 

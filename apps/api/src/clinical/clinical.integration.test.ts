@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describeIntegration } from '@epis2/test-fixtures';
+import { expect, it } from 'vitest';
 import { buildApp } from '../app.js';
 import { getDatabase } from '../db/client.js';
 import { testApiConfig } from '../testConfig.js';
@@ -9,9 +10,7 @@ const config = {
   DATABASE_URL: process.env.DATABASE_URL,
 };
 
-const hasDb = Boolean(process.env.DATABASE_URL);
-
-describe.skipIf(!hasDb)('clinical API (integration)', () => {
+describeIntegration('clinical API (integration)', () => {
   it('borrador aprobado aparece en notas; borrador pendiente no', async () => {
     const app = await buildApp(config);
     const db = getDatabase(config.DATABASE_URL)!;

@@ -59,7 +59,8 @@ EPIS (`../Epis`) queda en estado **`LEGACY_REFERENCE`**. No copiar su arquitectu
 ```bash
 npm install
 npm run check
-npm run test              # con DATABASE_URL: 210+ tests (integración + golden API)
+npm run test              # sin DATABASE_URL: ~299 unit; con migrate: ~319 (0 skipped)
+npm run quality:ci-parity # exige DATABASE_URL; falla si queda algún skip (paridad CI)
 npm run db:validate
 npm run quality:golden-journey   # journey spec + API (requiere DATABASE_URL)
 npm run qa:bundle-analyze        # presupuestos MUI X (opcional)

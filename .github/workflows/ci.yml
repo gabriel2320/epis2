@@ -37,6 +37,7 @@ jobs:
       - run: npm run check
       - run: npm run theme:validate
       - run: npm run test
+      - run: npm run quality:ci-parity
       - run: npm run db:validate
       - run: npm run ai:evals
       - run: npm run quality:golden-journey

@@ -1,9 +1,9 @@
+import { describeIntegration } from '@epis2/test-fixtures';
 import { describe, expect, it } from 'vitest';
 import { resolveCommand, DASHBOARD_TAB_BY_INTENT } from '@epis2/command-registry';
 import { buildApp } from '../app.js';
 import { testApiConfig } from '../testConfig.js';
 
-const hasDb = Boolean(process.env.DATABASE_URL);
 const DEMO005 = 'a0000001-0000-4000-8000-000000000005';
 
 async function loginAuditor(app: Awaited<ReturnType<typeof buildApp>>) {
@@ -27,7 +27,7 @@ describe('V4 command registry', () => {
   });
 });
 
-describe.skipIf(!hasDb)('V4 interoperabilidad API (integration)', () => {
+describeIntegration('V4 interoperabilidad API (integration)', () => {
   it('auditor accede a quality, staging, ops y audit; médico no a audit', async () => {
     const app = await buildApp({ ...testApiConfig, DATABASE_URL: process.env.DATABASE_URL });
     const auditorCookie = await loginAuditor(app);

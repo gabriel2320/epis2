@@ -1,12 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { DEMO_CLINICAL_CASES, describeIntegration } from '@epis2/test-fixtures';
+import { expect, it } from 'vitest';
 import { buildApp } from '../app.js';
 import { testApiConfig } from '../testConfig.js';
-import { DEMO_CLINICAL_CASES } from '@epis2/test-fixtures';
 
-const hasDb = Boolean(process.env.DATABASE_URL);
 const demo001 = DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-001')!;
 
-describe.skipIf(!hasDb)('RLS enforce — transacciones API', () => {
+describeIntegration('RLS enforce — transacciones API', () => {
   it('enfermería no lista borradores creados por el médico', async () => {
     const config = {
       ...testApiConfig,

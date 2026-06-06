@@ -1,11 +1,9 @@
-import { describe, expect, it } from 'vitest';
-import { DEMO_CLINICAL_CASES } from '@epis2/test-fixtures';
+import { DEMO_CLINICAL_CASES, describeIntegration } from '@epis2/test-fixtures';
+import { expect, it } from 'vitest';
 import { buildApp } from '../app.js';
 import { testApiConfig } from '../testConfig.js';
 
-const hasDb = Boolean(process.env.DATABASE_URL);
-
-describe.skipIf(!hasDb)('searchPatients (integration)', () => {
+describeIntegration('searchPatients (integration)', () => {
   it('encuentra paciente por código DEMO y por RUT sintético', async () => {
     const app = await buildApp({ ...testApiConfig, DATABASE_URL: process.env.DATABASE_URL });
     const login = await app.inject({
