@@ -62,7 +62,7 @@ export function buildCommandPhraseSuite(): PhraseSuiteEntry[] {
     { phrase: 'busca paciente lopez', intent: 'search_patient' },
     { phrase: 'resume ultimas 24 horas del paciente', intent: 'summarize_patient' },
     { phrase: 'resumir historia clinica', intent: 'summarize_patient' },
-    { phrase: 'ver sintesis', intent: 'summarize_patient' },
+    { phrase: 'ver sintesis clinica', intent: 'summarize_patient' },
     { phrase: 'evolucionar nota de hoy', intent: 'create_evolution_draft' },
     { phrase: 'escribir evolucion diaria', intent: 'create_evolution_draft' },
     { phrase: 'nota evolucion medica', intent: 'create_evolution_draft' },

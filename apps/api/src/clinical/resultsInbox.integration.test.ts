@@ -51,7 +51,33 @@ describeIntegration('bandeja resultados (MF-161)', () => {
       headers: { cookie },
     });
     const inbox004 = patientResultsInboxResponseSchema.parse(res004.json());
-    expect(inbox004.pendingOrders.some((o) => o.orderType === 'lab')).toBe(true);
+    expect(inbox004.observations.length).toBeGreaterThan(0);
+
+    await app.close();
+  });
+
+  it('vincula orden y resultado en bandeja (MF-163)', async () => {
+    const app = await buildApp({ ...testApiConfig, DATABASE_URL: process.env.DATABASE_URL });
+    const login = await app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      payload: { username: 'medico.demo', demoAuthKey: 'DEMO-CLAVE-MEDICO' },
+    });
+    const cookie = String(login.headers['set-cookie']).split(';')[0];
+
+    const demo004 = DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-004')!;
+    const res = await app.inject({
+      method: 'GET',
+      url: `/api/patients/${demo004.patientId}/results-inbox`,
+      headers: { cookie },
+    });
+    const inbox = patientResultsInboxResponseSchema.parse(res.json());
+    const leucocitos = inbox.observations.find((o) => o.label === 'Leucocitos');
+    expect(leucocitos?.orderTitle).toBe('Hemograma control mañana');
+    expect(inbox.pendingOrders.some((o) => o.title === 'Hemograma control mañana')).toBe(false);
+
+    const pcrCritical = inbox.criticalResults.find((c) => c.label === 'PCR');
+    expect(pcrCritical?.orderTitle).toBe('Hemograma control mañana');
 
     await app.close();
   });

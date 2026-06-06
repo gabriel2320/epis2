@@ -291,12 +291,12 @@
       "wave": 2,
       "waveName": "Resultados",
       "dependsOn": ["MF-162"],
-      "state": "READY",
+      "state": "DONE",
       "evidenceRequired": [
         "enlace orden-resultado en API/UI",
         "reports/epis2-mf-163-order-result-trace.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-163-order-result-trace.md",
       "unblocks": ["MF-164"]
     },
     {
@@ -305,12 +305,12 @@
       "wave": 2,
       "waveName": "Resultados",
       "dependsOn": ["MF-163"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "EpisTrendChart en contexto resultados",
         "reports/epis2-mf-164-trends.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-164-trends.md",
       "unblocks": ["MF-165"]
     },
     {
@@ -319,13 +319,13 @@
       "wave": 2,
       "waveName": "Resultados",
       "dependsOn": ["MF-164"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "evidenceRequired": [
         "intents command-registry",
         "tests router",
         "reports/epis2-mf-165-results-commands.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-165-results-commands.md",
       "unblocks": ["MF-166"]
     },
     {
@@ -334,7 +334,7 @@
       "wave": 3,
       "waveName": "Formularios prioritarios",
       "dependsOn": ["MF-165"],
-      "state": "BLOCKED",
+      "state": "READY",
       "evidenceRequired": [
         "blueprint conciliación",
         "formulario farmacia",

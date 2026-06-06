@@ -91,6 +91,19 @@ describe('resolveCommand', () => {
     expect(resolveCommand({ text: '   ', role: 'physician' }).status).toBe('empty');
   });
 
+  it('bandeja de resultados abre espacio resultados', () => {
+    const result = resolveCommand({
+      text: 'bandeja de resultados',
+      role: 'physician',
+      patientId: DEMO_PATIENT_ID,
+    });
+    expect(result.status).toBe('resolved');
+    if (result.status === 'resolved') {
+      expect(result.intent).toBe('open_results_inbox');
+      expect(result.routePath).toBe('/espacio/resultados');
+    }
+  });
+
   it('abre el tablero resuelve Modo tablero', () => {
     const result = resolveCommand({
       text: 'abre el tablero',

@@ -21,6 +21,7 @@ import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { ClinicalPageNav } from '../components/ClinicalPageNav.js';
 import { ErrorState } from '../components/ErrorState.js';
 import { LabObservationsGrid } from '../components/LabObservationsGrid.js';
+import { ResultsInboxTrends } from '../components/ResultsInboxTrends.js';
 
 function orderTypeLabel(orderType: string) {
   if (orderType === 'lab') return copy.results.orderTypeLab;
@@ -114,12 +115,15 @@ export function ResultsInboxPage() {
         ) : null}
       </Stack>
 
+      <ResultsInboxTrends inbox={inbox} />
+
       <Paper variant="outlined" sx={{ p: 2 }}>
         <Typography variant="subtitle2" gutterBottom>
           {copy.longitudinal.observations}
         </Typography>
         <LabObservationsGrid
           rows={inbox.observations}
+          showOrderTrace
           emptyMessage={copy.longitudinal.emptySection}
           data-testid="epis2-results-observations-grid"
         />
@@ -156,7 +160,11 @@ export function ResultsInboxPage() {
               >
                 <ListItemText
                   primary={`${row.label}: ${row.valueText}`}
-                  secondary={new Date(row.observedAt).toLocaleString('es-CL')}
+                  secondary={
+                    row.orderTitle
+                      ? `${copy.results.orderTrace}: ${row.orderTitle} · ${new Date(row.observedAt).toLocaleString('es-CL')}`
+                      : new Date(row.observedAt).toLocaleString('es-CL')
+                  }
                 />
                 <Stack direction="row" spacing={0.5} sx={{ ml: 1, flexShrink: 0 }}>
                   <Chip
@@ -190,7 +198,7 @@ export function ResultsInboxPage() {
               <ListItem key={order.id} disablePadding>
                 <ListItemText
                   primary={order.title}
-                  secondary={`${orderTypeLabel(order.orderType)} · ${order.priority} · ${new Date(order.orderedAt).toLocaleString('es-CL')}`}
+                  secondary={`${orderTypeLabel(order.orderType)} · ${order.priority} · ${copy.results.pendingOrderHint} · ${new Date(order.orderedAt).toLocaleString('es-CL')}`}
                 />
               </ListItem>
             ))}

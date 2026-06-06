@@ -184,6 +184,12 @@ export const copy = {
     orderTypeImaging: 'Imagenología',
     acknowledgeCritical: 'Acusar recibo',
     acknowledgeSuccess: 'Acuse registrado — queda en auditoría.',
+    orderTrace: 'Orden origen',
+    orderTraceMissing: 'Sin orden vinculada',
+    pendingOrderHint: 'Pendiente de resultado',
+    trendInrTitle: 'Tendencia INR en resultados (demo)',
+    trendPcrTitle: 'Tendencia PCR en resultados (demo)',
+    trendsSection: 'Tendencias clínicas',
   },
   longitudinal: {
     title: 'Historia clínica (demo)',

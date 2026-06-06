@@ -81,6 +81,7 @@ export const observations = pgTable('observations', {
   label: text('label').notNull(),
   valueText: text('value_text').notNull(),
   observedAt: timestamp('observed_at', { withTimezone: true }).notNull().defaultNow(),
+  clinicalOrderId: uuid('clinical_order_id'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   createdBy: text('created_by')
     .notNull()
@@ -283,6 +284,7 @@ export const clinicalCriticalResults = pgTable('clinical_critical_results', {
   valueText: text('value_text').notNull(),
   severity: text('severity').notNull().default('critical'),
   observedAt: timestamp('observed_at', { withTimezone: true }).notNull().defaultNow(),
+  clinicalOrderId: uuid('clinical_order_id'),
   acknowledgedAt: timestamp('acknowledged_at', { withTimezone: true }),
   acknowledgedBy: text('acknowledged_by').references(() => appUsers.id),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),

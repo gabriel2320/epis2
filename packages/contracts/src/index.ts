@@ -74,8 +74,10 @@ export {
 export {
   patientResultsInboxResponseSchema,
   resultsInboxCriticalSchema,
+  resultsInboxObservationSchema,
   resultsInboxPendingOrderSchema,
   type PatientResultsInboxResponse,
+  type ResultsInboxObservation,
 } from './results.js';
 export {
   documentIntakeRequestSchema,

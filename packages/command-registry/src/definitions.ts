@@ -47,10 +47,11 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
     priority: 45,
     match: (q) =>
       (/resumen|resumir|resume|sintesis|historia/.test(q) &&
-        !/laboratorio|lab\b|analitica|epicrisis|evolucion|receta|prescripcion|alta|egreso|nota\s+de\s+egreso/.test(
+        !/laboratorio|lab\b|analitica|resultados|bandeja|epicrisis|evolucion|receta|prescripcion|alta|egreso|nota\s+de\s+egreso/.test(
           q,
         )) ||
-      /ultimas\s*24/.test(q),
+      /ultimas\s*24/.test(q) ||
+      /ver\s+sintesis/.test(q),
   },
   {
     intent: 'create_evolution_draft',
@@ -121,6 +122,27 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       /receta|prescripcion|prescripción|prescribe|recetar|medicamento|preparar\s+receta|preparar\s+prescripcion/.test(
         q,
       ),
+  },
+  {
+    intent: 'open_results_inbox',
+    labelEs: 'Bandeja de resultados',
+    aliasesEs: [
+      'bandeja de resultados',
+      'ver resultados',
+      'ver bandeja de resultados',
+      'abrir resultados',
+      'resultados criticos',
+      'ver resultados criticos',
+      'mostrar resultados',
+    ],
+    routePath: INTENT_ROUTE_PATHS.open_results_inbox,
+    requiredPermission: 'command.execute',
+    requiresPatient: true,
+    priority: 73,
+    match: (q) =>
+      /(bandeja\s+de\s+resultados|ver\s+bandeja|ver\s+resultados|abrir\s+resultados|resultados\s+criticos|mostrar\s+resultados)/.test(
+        q,
+      ) && !/\b(solicitar|solicita|pedir|pide|orden)\b/.test(q),
   },
   {
     intent: 'request_laboratory',

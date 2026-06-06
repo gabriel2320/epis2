@@ -62,7 +62,9 @@ comando → blueprint orden → borrador → aprobación
   ✓ bandeja lectura → GET /api/patients/:id/results-inbox → /espacio/resultados
   ✗ ejecución CPOE
   ✓ acuse crítico en bandeja → POST /api/inpatient/critical-results/:id/acknowledge
-  ✗ trazabilidad orden → resultado (MF-163)
+  ✓ trazabilidad orden → resultado (`clinical_order_id` en bandeja)
+  ✓ tendencias (`EpisTrendChart` en `/espacio/resultados`)
+  ✓ comando `open_results_inbox` → `/espacio/resultados`
 ```
 
 ### Ingreso hospitalario

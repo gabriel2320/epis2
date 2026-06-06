@@ -36,6 +36,10 @@ vi.mock('../api/dashboardApi.js', () => ({
   acknowledgeCriticalResult,
 }));
 
+vi.mock('../components/ResultsInboxTrends.js', () => ({
+  ResultsInboxTrends: () => null,
+}));
+
 vi.mock('../components/LabObservationsGrid.js', () => ({
   LabObservationsGrid: ({
     rows,

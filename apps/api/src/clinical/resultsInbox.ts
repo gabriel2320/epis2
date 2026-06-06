@@ -1,4 +1,4 @@
-import { and, desc, eq, inArray } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import {
   clinicalCriticalResults,
@@ -6,6 +6,12 @@ import {
   observations,
 } from '../db/schema.js';
 import { getPatientDemoCaseCode } from './service.js';
+
+function orderTitleById(
+  orders: { id: string; title: string }[],
+): Map<string, string> {
+  return new Map(orders.map((o) => [o.id, o.title]));
+}
 
 export async function getPatientResultsInbox(db: Database, patientId: string) {
   const demoCaseCode = await getPatientDemoCaseCode(db, patientId);
@@ -24,15 +30,25 @@ export async function getPatientResultsInbox(db: Database, patientId: string) {
     db
       .select()
       .from(clinicalOrders)
-      .where(
-        and(
-          eq(clinicalOrders.patientId, patientId),
-          eq(clinicalOrders.status, 'active'),
-          inArray(clinicalOrders.orderType, ['lab', 'imaging']),
-        ),
-      )
+      .where(eq(clinicalOrders.patientId, patientId))
       .orderBy(desc(clinicalOrders.orderedAt)),
   ]);
+
+  const orderTitles = orderTitleById(orderRows);
+  const fulfilledOrderIds = new Set<string>();
+  for (const o of obsRows) {
+    if (o.clinicalOrderId) fulfilledOrderIds.add(o.clinicalOrderId);
+  }
+  for (const c of criticalRows) {
+    if (c.clinicalOrderId) fulfilledOrderIds.add(c.clinicalOrderId);
+  }
+
+  const pendingOrders = orderRows.filter(
+    (o) =>
+      o.status === 'active' &&
+      ['lab', 'imaging'].includes(o.orderType) &&
+      !fulfilledOrderIds.has(o.id),
+  );
 
   return {
     patientId,
@@ -43,6 +59,8 @@ export async function getPatientResultsInbox(db: Database, patientId: string) {
       label: o.label,
       valueText: o.valueText,
       observedAt: o.observedAt.toISOString(),
+      orderId: o.clinicalOrderId ?? undefined,
+      orderTitle: o.clinicalOrderId ? orderTitles.get(o.clinicalOrderId) : undefined,
     })),
     criticalResults: criticalRows.map((c) => ({
       id: c.id,
@@ -52,8 +70,10 @@ export async function getPatientResultsInbox(db: Database, patientId: string) {
       observedAt: c.observedAt.toISOString(),
       acknowledged: c.acknowledgedAt != null,
       acknowledgedAt: c.acknowledgedAt?.toISOString() ?? null,
+      orderId: c.clinicalOrderId ?? undefined,
+      orderTitle: c.clinicalOrderId ? orderTitles.get(c.clinicalOrderId) : undefined,
     })),
-    pendingOrders: orderRows.map((o) => ({
+    pendingOrders: pendingOrders.map((o) => ({
       id: o.id,
       orderType: o.orderType,
       title: o.title,
