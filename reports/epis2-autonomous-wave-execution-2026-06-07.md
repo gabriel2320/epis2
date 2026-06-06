@@ -11,6 +11,7 @@
 |----|-----|--------|-----------|
 | MF-OLA3-003 | 3 | ✅ | Banner alertas ficha DEMO-005 + gate + E2E (4 tests) |
 | MF-OLA6A-001 | 6A | ✅ impl. | Print A5 certificado; IDC 40 **Active** (signoff humano) |
+| MF-DOC-002 | — | ✅ | Screen catalog §5–19 reconciliado con matriz IDC |
 
 Reportes: `epis2-mf-ola3-003-alerts-ficha.md`, `epis2-mf-ola6a-001-print-a5.md`
 
@@ -23,8 +24,7 @@ Reportes: `epis2-mf-ola3-003-alerts-ficha.md`, `epis2-mf-ola6a-001-print-a5.md`
 | 1 | MF-OLA6A-PRINT signoff | 40 Active | Revisión humana impresión A5 → Done |
 | 2 | Promover IDC 27–29 | 27–29 | Tras E2E ficha estable en CI |
 | 3 | MF-OLA1C-003 | 56 Active | Imaging signoff M3 |
-| 4 | MF-DOC-002 | — | Screen catalog §5–19 vs matriz |
-| 5 | MF-TRAMO-B-001 | 2–20 | Recepción Defer/Exclude |
+| 4 | MF-TRAMO-B-001 | 2–20 | Recepción Defer/Exclude |
 | 6 | Workspace `emergency` | Ola 10 | Rail planificado |
 | 7 | lint Windows | — | Validar en CI/Linux |
 

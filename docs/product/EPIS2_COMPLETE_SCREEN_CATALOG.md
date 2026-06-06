@@ -74,6 +74,8 @@
 
 ---
 
+> **Reconciliación MF-DOC-002 (2026-06-07):** secciones §5–§19 alineadas con matriz IDC (`EPIS2_IDC_EXECUTION_MATRIX.md`) y rutas en `router.tsx`.
+
 ## 5. C. Identidad y contexto del paciente
 
 | # | Pantalla | Ruta actual | Estado | Acción |
@@ -86,16 +88,16 @@
 | 6 | Resumen longitudinal | `/espacio/resumen` | **PARTIAL** | Campos demo estáticos |
 | 7 | Línea de tiempo | Panel en `PatientWorkspacePage` | **PARTIAL** | No ruta dedicada |
 | 8 | Encuentros previos | API longitudinal | **PARTIAL** | Sin pantalla |
-| 9 | Problemas activos | Contexto + resumen | **PARTIAL** | Sin CRUD |
+| 9 | Problemas activos | `/espacio/problema` + contexto ficha | **PARTIAL** | Formulario Ola 3; IDC 29 Active |
 | 10 | Diagnósticos históricos | — | **MISSING** | Ola 3 |
-| 11 | Alergias | Tabla demo + CDS | **PARTIAL** | Sin formulario |
+| 11 | Alergias | `/espacio/alergia` + CDS ficha | **PARTIAL** | Formulario Ola 3; IDC 27–28 Active |
 | 12 | Medicamentos activos | Contexto demo | **PARTIAL** | Sin pantalla dedicada |
 | 13 | Observaciones / signos | Blueprint enfermería | **PARTIAL** | — |
 | 14 | Laboratorios recientes | — | **MISSING** | Ola 3 |
 | 15 | Imagenología reciente | — | **MISSING** | Ola 3 |
 | 16 | Documentos | API search/intake | **PARTIAL** | Sin UI documentos |
 | 17 | Equipo tratante | — | **MISSING** | Ola 3 |
-| 18 | Alertas y banderas | `ClinicalAlertsPanel` | **PARTIAL** | — |
+| 18 | Alertas y banderas | `ClinicalAlertsPanel` en ficha | **COMPLETE** | IDC 22 Done; E2E DEMO-005 |
 | 19 | Consentimientos | — | **MISSING** | Ola 6 |
 | 20 | Contactos y responsables | — | **MISSING** | Ola 3 |
 
@@ -107,8 +109,10 @@
 
 | # | Pantalla | Blueprint / ruta | Estado | Acción |
 |---|----------|------------------|--------|--------|
-| 1 | Nueva consulta | — | **MISSING** | Ola 2 |
-| 2–16 | Flujo consulta completo | — | **MISSING** | Ola 2 |
+| 1 | Consulta ambulatoria M3 | `outpatient_visit` `/espacio/ambulatorio` | **COMPLETE** | Scrollspy Ola 2 (IDC 31–36) |
+| 2–16 | Flujo consulta extendido | Secciones scrollspy | **PARTIAL** | Sub-secciones según matriz |
+| — | Certificado médico | `medical_certificate` `/espacio/certificado` | **COMPLETE** | Ola 2 |
+| — | Vista impresión A5 | `/espacio/certificado/imprimir` | **PARTIAL** | MF-OLA6A-001; IDC 40 Active |
 | — | Evolución SOAP | `evolution_note` `/espacio/evolucion` | **COMPLETE** | Golden V0 |
 | — | Receta | `prescription` `/espacio/receta` | **COMPLETE** | — |
 | — | Laboratorio (orden) | `lab_request` `/espacio/laboratorio` | **PARTIAL** | Solo orden |
@@ -128,11 +132,13 @@
 | 5 | Nota interconsulta | `/espacio/interconsulta` | **PARTIAL** | Orden, no nota |
 | 6 | Nota traslado | API inpatient | **MISSING** | Ola 4 |
 | 7 | Epicrisis | `/espacio/epicrisis` | **COMPLETE** | — |
-| 8 | Alta | API discharge | **PARTIAL** | Sin formulario |
-| 9 | Nota fallecimiento | — | **DEFERRED** | — |
-| 10 | Revisión y aprobación | `/espacio/borrador/$draftId` | **COMPLETE** | — |
-| 11 | Versiones anteriores | En `DraftReviewPage` | **PARTIAL** | — |
-| 12 | Comparación versiones | — | **MISSING** | Ola 1 |
+| 8 | Certificado médico | `/espacio/certificado` | **COMPLETE** | Ola 2 |
+| 9 | Impresión certificado A5 | `/espacio/certificado/imprimir` | **PARTIAL** | Vista documental; IDC 40 Active |
+| 10 | Alta | API discharge | **PARTIAL** | Sin formulario |
+| 11 | Nota fallecimiento | — | **DEFERRED** | — |
+| 12 | Revisión y aprobación | `/espacio/borrador/$draftId` | **COMPLETE** | — |
+| 13 | Versiones anteriores | En `DraftReviewPage` | **PARTIAL** | — |
+| 14 | Comparación versiones | — | **MISSING** | Ola 1 |
 
 ---
 
@@ -151,8 +157,15 @@
 
 ## 9. G. Resultados clínicos
 
-Todas las pantallas del catálogo (bandeja, tendencia, crítico, microbiología, etc.): **MISSING** en web.  
-Excepción API: `POST /api/inpatient/critical-results/:id/acknowledge` — **PARTIAL**.
+| Pantalla | Ruta / API | Estado | Notas |
+|----------|------------|--------|-------|
+| Bandeja resultados | `/espacio/resultados` | **COMPLETE** | IDC 58 Done; MF-OLA1C-001 |
+| Orden laboratorio | `/espacio/laboratorio` | **COMPLETE** | IDC 55 Done |
+| Orden imagenología | `/espacio/imagenologia` | **PARTIAL** | IDC 56 Active |
+| Acuse resultado crítico | Bandeja + API ack | **PARTIAL** | DEMO-004 E2E MF-OLA1C-002 |
+| Tendencia, microbiología, adjuntos… | — | **MISSING** | Ola 4+ |
+
+Excepción API legacy: `POST /api/inpatient/critical-results/:id/acknowledge` — **PARTIAL**.
 
 ---
 
@@ -211,7 +224,7 @@ Comando `admit_patient_hospital` → tablero servicio (sin blueprint): **PARTIAL
 | UI documentos paciente | **MISSING** |
 | Importar / OCR / clasificar | **PARTIAL** (API) |
 | Búsqueda clínica UI | **PARTIAL** (`PatientClinicalAiPanel` RAG) |
-| Impresión / exportación | **PARTIAL** (PDF resumen API) |
+| Impresión / exportación | **PARTIAL** | Print A5 certificado (`/espacio/certificado/imprimir`); PDF resumen API |
 
 ---
 
@@ -290,6 +303,7 @@ Excepciones: tablero calidad (lectura), `/dev/*` (gated), `GET /api/ops/status`.
 | `/espacio/traslado` | Traslado |
 | `/espacio/ambulatorio` | Ambulatorio |
 | `/espacio/certificado` | Certificado médico (Ola 2) |
+| `/espacio/certificado/imprimir` | Vista impresión A5 certificado (Ola 6A) |
 | `/espacio/informe-interconsulta` | Informe interconsulta |
 | `/espacio/resultados` | Bandeja resultados |
 | `/espacio/admin` | Admin |
@@ -301,7 +315,7 @@ Excepciones: tablero calidad (lectura), `/dev/*` (gated), `GET /api/ops/status`.
 | `/dev/scheduler-spike` | Dev (gated) |
 | `*` | NotFound |
 
-**Total rutas productivas:** 27 + fallback + dev/gated. Admin y preferencias fuera de shell clínico estricto.
+**Total rutas productivas:** 28 + fallback + dev/gated. Admin y preferencias fuera de shell clínico estricto.
 
 ---
 
