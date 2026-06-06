@@ -106,7 +106,11 @@ describe('GeneratedClinicalFormPage — Ola 2 M3-UI', () => {
     expect(screen.getByTestId('epis2-form-outpatient_visit')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-clinical-scrollspy-layout')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-scrollspy-anamnesis')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-scrollspy-physical-general')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-scrollspy-physical-segment')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-scrollspy-diagnosis')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-scrollspy-closure')).toBeInTheDocument();
+    expect(screen.getByText(/Diagnóstico CIE-10/i)).toBeInTheDocument();
     expect(screen.getByTestId('epis2-draft-status-chip')).toBeInTheDocument();
     expect(screen.queryByTestId('epis2-clinical-context-toggle')).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: copy.workspaces.ambulatory.fab })).toBeInTheDocument();

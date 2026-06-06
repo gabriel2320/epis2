@@ -26,6 +26,7 @@
     "quality:local-ci": "node scripts/quality/run-local-ci.mjs",
     "stack:up": "node scripts/stack-up.mjs",
     "quality:ola2-m3-ui-gate": "node scripts/quality/validate-ola2-m3-ui-gate.mjs",
+    "quality:ola2-physical-exam-gate": "node scripts/quality/validate-ola2-physical-exam-gate.mjs",
     "quality:ola1c-journey-gate": "node scripts/quality/validate-ola1c-journey-gate.mjs",
     "quality:ola3-ficha-gate": "node scripts/quality/validate-ola3-ficha-gate.mjs",
     "quality:ola3-alerts-gate": "node scripts/quality/validate-ola3-alerts-gate.mjs",

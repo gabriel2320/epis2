@@ -111,8 +111,8 @@
 
 | # | Pantalla | Blueprint / ruta | Estado | Acción |
 |---|----------|------------------|--------|--------|
-| 1 | Consulta ambulatoria M3 | `outpatient_visit` `/espacio/ambulatorio` | **COMPLETE** | Scrollspy Ola 2 (IDC 31–36) |
-| 2–16 | Flujo consulta extendido | Secciones scrollspy | **PARTIAL** | Sub-secciones según matriz |
+| 1 | Consulta ambulatoria M3 | `outpatient_visit` `/espacio/ambulatorio` | **COMPLETE** | Scrollspy Ola 2 (IDC 31–36); examen físico + CIE-10 IDC 33–35 Done MF-OLA2-003 |
+| 2–16 | Flujo consulta extendido | Secciones scrollspy | **PARTIAL** | Sub-secciones según matriz (33–35 Done) |
 | — | Certificado médico | `medical_certificate` `/espacio/certificado` | **COMPLETE** | Ola 2 |
 | — | Vista impresión A5 | `/espacio/certificado/imprimir` | **COMPLETE** | MF-OLA6A-002; IDC 40 Done |
 | — | Evolución SOAP | `evolution_note` `/espacio/evolucion` | **COMPLETE** | Golden V0 |

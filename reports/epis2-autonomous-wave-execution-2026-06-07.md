@@ -1,4 +1,4 @@
-# Ejecución autónoma EPIS2 — Ola 3 hub + antecedentes quirúrgicos
+# Ejecución autónoma EPIS2 — Ola 2 examen físico + Ola 3 hub
 
 **Fecha:** 2026-06-07  
 **Agente:** Cursor · continuación Tramo A
@@ -9,8 +9,11 @@
 
 | MF | IDC |
 |----|-----|
+| MF-OLA2-003 | **33–35** → Done (examen físico + CIE-10 ambulatorio) |
 | MF-OLA3-006 | **21** → Done (hub ficha M3) |
 | MF-OLA3-007 | **30** → Done (antecedentes quirúrgicos) |
+
+**IDC Done (Core):** 28
 
 ---
 
@@ -19,7 +22,7 @@
 | Ítem | Nota |
 |------|------|
 | Tramo B UI recepción | Planned (inventario ✅) |
-| Ola 3 restante | IDC 33–35 examen físico ambulatorio |
+| IDC 38 ambulatorio | Active en matriz |
 | lint Windows | CI Linux (`ci.yml` ya corre en ubuntu) |
 
 ---
@@ -29,19 +32,19 @@
 | Gate | Resultado |
 |------|-----------|
 | check | ✅ |
-| test | ✅ **421** |
-| ola3-ficha-hub-gate | ✅ |
-| ola3-surgical-gate | ✅ |
-| test:e2e:ola3 | ✅ **8** tests |
-
-**IDC Done:** **25**
+| test | ✅ 421 |
+| db:validate | ✅ |
+| ola2-physical-exam | ✅ |
+| ola3-ficha-hub / surgical / depth | ✅ |
+| test:e2e:ola3 | ✅ 8 tests |
 
 ---
 
 ## Reportes
 
-- `epis2-mf-ola3-006-ficha-hub-idc21.md`
-- `epis2-mf-ola3-007-surgical-history-idc30.md`
+- `reports/epis2-mf-ola2-003-physical-exam-idc33-35.md`
+- `reports/epis2-mf-ola3-006-ficha-hub-idc21.md`
+- `reports/epis2-mf-ola3-007-surgical-history-idc30.md`
 
 ---
 

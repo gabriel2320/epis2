@@ -6,9 +6,9 @@
     "totals": {
       "estado": {
         "Planned": 142,
-        "Active": 32,
+        "Active": 29,
         "Blocked": 1,
-        "Done": 25
+        "Done": 28
       },
       "prioridad": {
         "Critical": 9,
@@ -419,36 +419,36 @@
       "nombre": "Examen físico general",
       "ola": "2",
       "workspace": "ambulatory",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "High",
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": "examen general accordion — plantillas pendientes"
+      "nota": "physical-general accordion + E2E MF-OLA2-003"
     },
     {
       "idc": 34,
       "nombre": "Examen físico segmentario",
       "ola": "2",
       "workspace": "ambulatory",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "Medium",
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": "examen segmentario accordion"
+      "nota": "physical-segment accordion MF-OLA2-003"
     },
     {
       "idc": 35,
       "nombre": "Buscador diagnósticos CIE-10",
       "ola": "2",
       "workspace": "ambulatory",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "High",
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": "CIE-10 demo staging"
+      "nota": "icd10Code diagnosis section MF-OLA2-003"
     },
     {
       "idc": 36,

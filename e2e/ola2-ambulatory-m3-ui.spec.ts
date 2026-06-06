@@ -37,6 +37,23 @@ test.describe('Ola 2 — M3-UI visual regression', () => {
     await expect(page).toHaveScreenshot('ola2-outpatient-visit.png', { maxDiffPixelRatio: 0.03 });
   });
 
+  test('consulta ambulatoria — examen físico y CIE-10 (IDC 33–35)', async ({ page }) => {
+    await selectDemoPatient(page);
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await openAmbulatoryFromCommand(page);
+    await expect(page.getByTestId('epis2-scrollspy-physical-general')).toBeVisible();
+    await expect(page.getByTestId('epis2-scrollspy-physical-segment')).toBeVisible();
+    await expect(page.getByTestId('epis2-scrollspy-diagnosis')).toBeVisible();
+    await expect(page.getByLabel(/Diagnóstico CIE-10/i)).toBeVisible();
+    await page.getByTestId('epis2-scrollspy-physical-general').click();
+    await page.getByRole('button', { name: /Examen físico general/i }).click();
+    await page.getByLabel(/Examen físico general/i).fill('Normoactivo, sin signos de alarma.');
+    await page.getByTestId('epis2-scrollspy-physical-segment').click();
+    await page.getByRole('button', { name: /Examen físico segmentario/i }).click();
+    await page.getByLabel(/Examen por aparatos/i).fill('Cardiopulmonar sin hallazgos relevantes.');
+    await page.getByLabel(/Diagnóstico CIE-10/i).fill('I10');
+  });
+
   test('certificado médico — formulario A5 pendiente impresión', async ({ page }) => {
     await selectDemoPatient(page);
     await page.setViewportSize({ width: 1440, height: 900 });

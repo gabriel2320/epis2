@@ -13,7 +13,7 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 142 · Active: 32 · Blocked: 1 · Done: 25 |
+| **Estado** | Planned: 142 · Active: 29 · Blocked: 1 · Done: 28 |
 | **Prioridad** | Critical: 9 · High: 45 · Medium: 95 · Low: 51 |
 | **Horizonte** | Core: 41 · Post-core: 88 · Future: 71 |
 | **Decisión** | Build: 127 · Integrate: 5 · Defer: 66 · Exclude: 2 |
@@ -82,9 +82,9 @@
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
 | 31 | Anamnesis próxima | 2 | ambulatory | Done | Critical | Core | Build | COMPLETE | outpatient_visit anamnesis — MF-OLA2-001 |
 | 32 | Signos vitales / antropometría | 2 | ambulatory | Done | High | Core | Build | COMPLETE | vitals section scrollspy |
-| 33 | Examen físico general | 2 | ambulatory | Active | High | Core | Build | PARTIAL | examen general accordion — plantillas pendientes |
-| 34 | Examen físico segmentario | 2 | ambulatory | Active | Medium | Core | Build | PARTIAL | examen segmentario accordion |
-| 35 | Buscador diagnósticos CIE-10 | 2 | ambulatory | Active | High | Core | Build | PARTIAL | CIE-10 demo staging |
+| 33 | Examen físico general | 2 | ambulatory | Done | High | Core | Build | PARTIAL | physical-general accordion + E2E MF-OLA2-003 |
+| 34 | Examen físico segmentario | 2 | ambulatory | Done | Medium | Core | Build | PARTIAL | physical-segment accordion MF-OLA2-003 |
+| 35 | Buscador diagnósticos CIE-10 | 2 | ambulatory | Done | High | Core | Build | PARTIAL | icd10Code diagnosis section MF-OLA2-003 |
 | 36 | Indicaciones generales | 2 | ambulatory | Done | High | Core | Build | COMPLETE | plan + indicaciones generales |
 | 37 | Evolución SOAP | 2 | ambulatory | Done | Critical | Core | Build | COMPLETE | evolution_note |
 | 38 | Gestor macros / plantillas | 2 | ambulatory | Active | Medium | Core | Build | PARTIAL |  |
