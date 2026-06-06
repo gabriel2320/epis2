@@ -54,6 +54,11 @@ export async function getPharmacyDashboardSummary(db: Database) {
         label: 'Validación farmacéutica',
         commandSample: 'validacion farmaceutica',
       },
+      {
+        id: 'pharm-task-reconciliation',
+        label: 'Conciliación medicamentosa',
+        commandSample: 'conciliacion medicamentosa',
+      },
     ],
   };
 }

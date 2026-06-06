@@ -6,12 +6,12 @@ describe('microphase ledger', () => {
     const ledger = loadLedger();
     const result = validateLedger(ledger);
     expect(result.ok, result.errors.join('\n')).toBe(true);
-    expect(result.ready?.id).toBe('MF-166');
+    expect(result.ready?.id).toBe('MF-167');
   });
 
-  it('findNextReady devuelve MF-166 tras ola resultados cerrada', () => {
+  it('findNextReady devuelve MF-167 tras conciliación cerrada', () => {
     const result = findNextReady(loadLedger());
-    expect(result.next?.id).toBe('MF-166');
-    expect(result.next?.name).toContain('Conciliación');
+    expect(result.next?.id).toBe('MF-167');
+    expect(result.next?.name).toContain('traslado');
   });
 });

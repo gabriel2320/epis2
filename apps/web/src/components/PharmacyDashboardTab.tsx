@@ -6,12 +6,14 @@ export type PharmacyDashboardTabProps = {
   data: PharmacyDashboardResponse;
   onOpenPatient: (patientId: string) => void;
   onOpenDraft: (draftId: string) => void;
+  onOpenReconciliation: (patientId: string) => void;
 };
 
 export function PharmacyDashboardTab({
   data,
   onOpenPatient,
   onOpenDraft,
+  onOpenReconciliation,
 }: PharmacyDashboardTabProps) {
   return (
     <Stack spacing={2} data-testid="epis2-dashboard-pharmacy">
@@ -58,10 +60,19 @@ export function PharmacyDashboardTab({
               <Button
                 size="small"
                 sx={{ ml: 1 }}
-                onClick={() => onOpenPatient(r.patientId)}
+                onClick={() => onOpenReconciliation(r.patientId)}
                 data-testid={`epis2-pharmacy-reconcile-${r.patientId}`}
               >
-                {copy.inpatient.validateReconciliation}
+                {copy.inpatient.openReconciliationForm}
+              </Button>
+              <Button
+                size="small"
+                variant="outlined"
+                sx={{ ml: 1 }}
+                onClick={() => onOpenPatient(r.patientId)}
+                data-testid={`epis2-pharmacy-patient-${r.patientId}`}
+              >
+                {copy.inpatient.openPatient}
               </Button>
             </Alert>
           ))}

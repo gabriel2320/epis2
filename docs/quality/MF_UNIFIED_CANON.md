@@ -51,8 +51,8 @@
 | **MF-32** | MF-163 | Trazabilidad orden → resultado | 2 | DONE |
 | **MF-33** | MF-164 | Tendencias clínicas | 2 | DONE |
 | **MF-34** | MF-165 | Comandos de resultados | 2 | DONE |
-| **MF-35** | MF-166 | Conciliación medicamentos | 3 | **READY** |
-| **MF-36** | MF-167 | Nota de traslado | 3 | BLOCKED |
+| **MF-35** | MF-166 | Conciliación medicamentos | 3 | **DONE** |
+| **MF-36** | MF-167 | Nota de traslado | 3 | **READY** |
 | **MF-37** | MF-168 | Consulta ambulatoria | 3 | BLOCKED |
 | **MF-38** | MF-169 | Solicitud e informe interconsulta | 3 | BLOCKED |
 | **MF-39** | MF-170 | Cola priorizada formularios restantes | 3 | BLOCKED |
@@ -74,10 +74,10 @@
 | Métrica | Valor |
 |---------|-------|
 | Total MF unificadas | **51** |
-| DONE | **34** (MF-1…34) |
-| READY | **1** (MF-35) |
-| BLOCKED | **16** (MF-36…51) |
-| Próxima ejecución | **MF-35** ≡ `MF-166` |
+| DONE | **35** (MF-1…35) |
+| READY | **1** (MF-36) |
+| BLOCKED | **15** (MF-37…51) |
+| Próxima ejecución | **MF-36** ≡ `MF-167` |
 
 ## Conciliación con propuesta arquitecto v2 (MF-2xx)
 
@@ -111,5 +111,5 @@ Ejecutados durante fundación / post-MVP; evidencia en `reports/` y `docs/design
 **Norma impresión clínica Chile (Carta/A5):** `docs/design/EPIS2_PRINTABLE_CLINICAL_DOCUMENTS_NORM.md`
 
 ```bash
-npm run quality:microphase-next   # → MF-166 ≡ MF-35 Conciliación medicamentos
+npm run quality:microphase-next   # → MF-167 ≡ MF-36 Nota de traslado
 ```

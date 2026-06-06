@@ -5,7 +5,7 @@ import { beforeEach, expect, it } from 'vitest';
 import { resolveCommand } from '@epis2/command-registry';
 import { buildApp } from '../app.js';
 import { getDatabase } from '../db/client.js';
-import { beds, inpatientAdmissions, patientAllergies, problems } from '../db/schema.js';
+import { beds, clinicalNotes, inpatientAdmissions, patientAllergies, problems } from '../db/schema.js';
 import { resetInpatientDemoCensus } from '../inpatient/integrationReset.js';
 import { testApiConfig } from '../testConfig.js';
 
@@ -157,6 +157,70 @@ describeIntegration('cadena ingreso hospitalario (MF-158)', () => {
       .from(problems)
       .where(eq(problems.patientId, demo001.patientId));
     expect(problemRows.some((p) => p.description.includes('MF-160'))).toBe(true);
+
+    await app.close();
+  });
+
+  it('comando conciliación → borrador → aprobación → nota clínica (MF-166)', async () => {
+    const app = await buildApp(config);
+    const db = getDatabase(config.DATABASE_URL)!;
+    const demo005 = DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-005')!;
+
+    const resolved = resolveCommand({
+      text: 'conciliacion medicamentosa',
+      role: 'pharmacist',
+      patientId: demo005.patientId,
+    });
+    expect(resolved.status).toBe('resolved');
+    if (resolved.status === 'resolved') {
+      expect(resolved.routePath).toBe('/espacio/conciliacion');
+    }
+
+    const login = await app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      payload: { username: 'farmacia.demo', demoAuthKey: 'DEMO-CLAVE-FARMACIA' },
+    });
+    expect(login.statusCode).toBe(200);
+    const cookie = String(login.headers['set-cookie']).split(';')[0];
+
+    const created = await app.inject({
+      method: 'POST',
+      url: '/api/drafts',
+      headers: { cookie },
+      payload: {
+        patientId: demo005.patientId,
+        draftType: 'medication_reconciliation',
+        title: 'Conciliación DEMO-005',
+        body: {
+          homeMedications: 'Warfarina 5 mg, Omeprazol 20 mg',
+          inpatientMedications: 'Warfarina 5 mg, Paracetamol 500 mg',
+          discrepancies: 'Omeprazol domiciliario no continuado en hospital',
+          resolutionPlan: 'Reiniciar omeprazol si indicación clínica persiste',
+          communicationNotes: 'Informado a médico tratante',
+        },
+      },
+    });
+    expect(created.statusCode).toBe(201);
+    const draftId = (created.json() as { draft: { id: string } }).draft.id;
+
+    const approved = await app.inject({
+      method: 'POST',
+      url: `/api/drafts/${draftId}/approve`,
+      headers: { cookie },
+    });
+    expect(approved.statusCode).toBe(200);
+
+    const notes = await db
+      .select()
+      .from(clinicalNotes)
+      .where(
+        and(
+          eq(clinicalNotes.patientId, demo005.patientId),
+          eq(clinicalNotes.noteType, 'medication_reconciliation'),
+        ),
+      );
+    expect(notes.length).toBeGreaterThan(0);
 
     await app.close();
   });

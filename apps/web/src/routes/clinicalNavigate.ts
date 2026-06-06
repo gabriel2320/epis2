@@ -12,7 +12,8 @@ export type ClinicalFormRoutePath =
   | '/espacio/imagenologia'
   | '/espacio/enfermeria'
   | '/espacio/mar'
-  | '/espacio/farmacia';
+  | '/espacio/farmacia'
+  | '/espacio/conciliacion';
 
 export type ClinicalPatientSearch = { patientId?: string };
 

@@ -14,6 +14,7 @@ import {
   admissionNoteBlueprint,
   allergyEntryBlueprint,
   clinicalProblemEntryBlueprint,
+  medicationReconciliationBlueprint,
 } from './blueprints/index.js';
 import type { ClinicalFormBlueprint } from './types.js';
 
@@ -33,6 +34,7 @@ export const EPIS2_FORM_BLUEPRINTS: readonly ClinicalFormBlueprint[] = [
   admissionNoteBlueprint,
   allergyEntryBlueprint,
   clinicalProblemEntryBlueprint,
+  medicationReconciliationBlueprint,
 ];
 
 const byId = new Map(EPIS2_FORM_BLUEPRINTS.map((b) => [b.blueprintId, b]));

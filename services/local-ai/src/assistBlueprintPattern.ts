@@ -33,6 +33,7 @@ export const ASSIST_ENABLED_BLUEPRINT_IDS = [
   'admission_note',
   'allergy_entry',
   'clinical_problem_entry',
+  'medication_reconciliation',
 ] as const;
 
 export function listAssistPatternGaps(): AssistPatternResult[] {

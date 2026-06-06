@@ -104,6 +104,19 @@ describe('resolveCommand', () => {
     }
   });
 
+  it('conciliacion medicamentosa abre formulario conciliacion', () => {
+    const result = resolveCommand({
+      text: 'conciliacion medicamentosa',
+      role: 'pharmacist',
+      patientId: DEMO_PATIENT_ID,
+    });
+    expect(result.status).toBe('resolved');
+    if (result.status === 'resolved') {
+      expect(result.intent).toBe('reconcile_medications');
+      expect(result.routePath).toBe('/espacio/conciliacion');
+    }
+  });
+
   it('abre el tablero resuelve Modo tablero', () => {
     const result = resolveCommand({
       text: 'abre el tablero',

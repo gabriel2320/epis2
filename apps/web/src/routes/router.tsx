@@ -258,6 +258,13 @@ const problemFormRoute = createRoute({
   component: clinicalFormPage('/espacio/problema'),
 });
 
+const reconciliationFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/conciliacion',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/conciliacion'),
+});
+
 const resultsInboxRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/resultados',
@@ -344,6 +351,7 @@ export const routeTree = rootRoute.addChildren([
     admissionFormRoute,
     allergyFormRoute,
     problemFormRoute,
+    reconciliationFormRoute,
     resultsInboxRoute,
   ]),
 ]);

@@ -20,6 +20,7 @@ export const INTENT_ROUTE_PATHS: Record<ClinicalIntent, string> = {
   open_dashboard_quality: '/epis2/dashboard',
   admit_patient_hospital: '/espacio/ingreso',
   open_results_inbox: '/espacio/resultados',
+  reconcile_medications: '/espacio/conciliacion',
 };
 
 export const DASHBOARD_TAB_BY_INTENT: Partial<Record<ClinicalIntent, string>> = {

@@ -169,6 +169,7 @@ export const copy = {
     noPharmacyPending: 'Sin validaciones pendientes.',
     reviewValidation: 'Revisar',
     validateReconciliation: 'Validar',
+    openReconciliationForm: 'Conciliar medicamentos',
   },
   results: {
     inboxTitle: 'Bandeja de resultados',

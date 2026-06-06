@@ -23,6 +23,7 @@ describe('EPIS prompt policy (local-ai)', () => {
       'allergy_entry',
       'clinical_problem_entry',
       'pharmacy_validation',
+      'medication_reconciliation',
     ]);
   });
 

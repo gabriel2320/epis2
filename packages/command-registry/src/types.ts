@@ -19,7 +19,8 @@ export type ClinicalIntent =
   | 'open_dashboard_service'
   | 'open_dashboard_quality'
   | 'admit_patient_hospital'
-  | 'open_results_inbox';
+  | 'open_results_inbox'
+  | 'reconcile_medications';
 
 export type CommandResolveStatus =
   | 'resolved'

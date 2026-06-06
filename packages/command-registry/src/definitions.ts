@@ -241,6 +241,25 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       ),
   },
   {
+    intent: 'reconcile_medications',
+    labelEs: 'Conciliación medicamentosa',
+    aliasesEs: [
+      'conciliacion medicamentosa',
+      'conciliacion de medicamentos',
+      'revisa medicamentos',
+      'revisar medicamentos',
+      'validar conciliacion',
+    ],
+    routePath: INTENT_ROUTE_PATHS.reconcile_medications,
+    requiredPermission: 'command.execute',
+    requiresPatient: true,
+    priority: 67,
+    match: (q) =>
+      /conciliacion\s+(de\s+)?medicamentos|revis(a|ar)\s+medicamentos|validar\s+conciliacion/.test(
+        q,
+      ),
+  },
+  {
     intent: 'prepare_pharmacy_review',
     labelEs: 'Validación farmacéutica',
     aliasesEs: [

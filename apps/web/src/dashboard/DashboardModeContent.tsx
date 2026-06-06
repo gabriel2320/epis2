@@ -241,6 +241,15 @@ export function DashboardModeContent() {
     });
   };
 
+  const openReconciliation = (pid: string) => {
+    const p = recentPatients.find((r) => r.id === pid);
+    if (p) setPatient(p);
+    void navigate({
+      to: '/espacio/conciliacion',
+      search: { patientId: pid },
+    });
+  };
+
   const openDraft = (draftId: string) => {
     void navigate({
       to: '/espacio/borrador/$draftId',
@@ -323,6 +332,7 @@ export function DashboardModeContent() {
             data={pharmacyBoard}
             onOpenPatient={openPatient}
             onOpenDraft={openDraft}
+            onOpenReconciliation={openReconciliation}
           />
         ) : (
           <Alert severity="info">{copy.dashboard.loading}</Alert>

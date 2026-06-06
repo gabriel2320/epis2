@@ -123,6 +123,7 @@ export const INTENT_TO_ASSIST_BLUEPRINT: Record<string, string> = {
   create_nursing_note: 'nursing_note',
   record_medication_administration: 'medication_administration',
   prepare_pharmacy_review: 'pharmacy_validation',
+  reconcile_medications: 'medication_reconciliation',
 };
 
 export const BLUEPRINT_BY_ROUTE: Record<string, string> = {
@@ -138,6 +139,7 @@ export const BLUEPRINT_BY_ROUTE: Record<string, string> = {
   '/espacio/ingreso': 'admission_note',
   '/espacio/alergia': 'allergy_entry',
   '/espacio/problema': 'clinical_problem_entry',
+  '/espacio/conciliacion': 'medication_reconciliation',
 };
 
 export const DRAFT_TYPE_TO_BLUEPRINT: Record<string, string> = {
@@ -153,6 +155,7 @@ export const DRAFT_TYPE_TO_BLUEPRINT: Record<string, string> = {
   admission_note: 'admission_note',
   allergy_entry: 'allergy_entry',
   clinical_problem_entry: 'clinical_problem_entry',
+  medication_reconciliation: 'medication_reconciliation',
 };
 
 const SUMMARY_CONTEXT_KEYS = [

@@ -12,3 +12,4 @@ export { pharmacyValidationBlueprint } from './pharmacy-validation.js';
 export { admissionNoteBlueprint } from './admission-note.js';
 export { allergyEntryBlueprint } from './allergy-entry.js';
 export { clinicalProblemEntryBlueprint } from './clinical-problem-entry.js';
+export { medicationReconciliationBlueprint } from './medication-reconciliation.js';

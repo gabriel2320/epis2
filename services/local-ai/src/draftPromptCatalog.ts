@@ -81,6 +81,14 @@ export const DRAFT_PROMPT_CATALOG: DraftPromptSpec[] = [
     fieldHints:
       'Si hay polifarmacia, sugiere intervención documentada; nunca indiques dispensar sin revisión humana.',
   },
+  {
+    blueprintId: 'medication_reconciliation',
+    taskTitle: 'Conciliación medicamentosa',
+    taskDetail:
+      'Compara medicamentos domiciliarios e hospitalarios, documenta discrepancias y plan de conciliación.',
+    fieldHints:
+      'Usa medicación activa del contexto; no elimines medicamentos sin justificación clínica en el plan.',
+  },
 ];
 
 const catalogById = new Map(DRAFT_PROMPT_CATALOG.map((spec) => [spec.blueprintId, spec]));

@@ -334,13 +334,13 @@
       "wave": 3,
       "waveName": "Formularios prioritarios",
       "dependsOn": ["MF-165"],
-      "state": "READY",
+      "state": "DONE",
       "evidenceRequired": [
         "blueprint conciliación",
         "formulario farmacia",
         "reports/epis2-mf-166-reconciliation.md"
       ],
-      "closureReport": null,
+      "closureReport": "reports/epis2-mf-166-reconciliation.md",
       "unblocks": ["MF-167"]
     },
     {
@@ -349,7 +349,7 @@
       "wave": 3,
       "waveName": "Formularios prioritarios",
       "dependsOn": ["MF-166"],
-      "state": "BLOCKED",
+      "state": "READY",
       "evidenceRequired": [
         "blueprint transfer_note",
         "comando+form",

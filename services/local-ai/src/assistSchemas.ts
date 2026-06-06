@@ -56,6 +56,13 @@ export const ASSIST_BLUEPRINT_FIELDS: Record<string, readonly string[]> = {
     'recommendation',
     'communicationToPrescriber',
   ],
+  medication_reconciliation: [
+    'homeMedications',
+    'inpatientMedications',
+    'discrepancies',
+    'resolutionPlan',
+    'communicationNotes',
+  ],
 };
 
 export type AssistBlueprintSpec = {

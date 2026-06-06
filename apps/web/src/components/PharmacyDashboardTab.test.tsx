@@ -52,6 +52,7 @@ describe('PharmacyDashboardTab', () => {
           data={pharmacyBoard}
           onOpenPatient={vi.fn()}
           onOpenDraft={onOpenDraft}
+          onOpenReconciliation={vi.fn()}
         />
       </Epis2ThemeProvider>,
     );
@@ -63,16 +64,17 @@ describe('PharmacyDashboardTab', () => {
     expect(onOpenDraft).toHaveBeenCalledWith(VALIDATION_ID);
   });
 
-  it('muestra conciliación y navega al paciente', async () => {
+  it('muestra conciliación y abre formulario', async () => {
     const user = userEvent.setup();
-    const onOpenPatient = vi.fn();
+    const onOpenReconciliation = vi.fn();
 
     render(
       <Epis2ThemeProvider>
         <PharmacyDashboardTab
           data={pharmacyBoard}
-          onOpenPatient={onOpenPatient}
+          onOpenPatient={vi.fn()}
           onOpenDraft={vi.fn()}
+          onOpenReconciliation={onOpenReconciliation}
         />
       </Epis2ThemeProvider>,
     );
@@ -81,6 +83,6 @@ describe('PharmacyDashboardTab', () => {
     expect(screen.getByText(/Warfarina/)).toBeInTheDocument();
 
     await user.click(screen.getByTestId(`epis2-pharmacy-reconcile-${PATIENT_ID}`));
-    expect(onOpenPatient).toHaveBeenCalledWith(PATIENT_ID);
+    expect(onOpenReconciliation).toHaveBeenCalledWith(PATIENT_ID);
   });
 });
