@@ -12,6 +12,7 @@ export const TRAMO_ASSIST_BLUEPRINTS = {
   H: ['nursing_note', 'evolution_note'],
   I: ['outpatient_visit', 'referral_report', 'evolution_note'],
   J: ['pharmacy_validation', 'medication_reconciliation', 'prescription'],
+  K: ['evolution_note', 'nursing_note', 'discharge_summary'],
 };
 
 /**

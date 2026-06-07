@@ -4,6 +4,8 @@ node_modules
 /blob-report/
 /playwright/.cache/
 reports/.vitest-ci-parity-temp.json/
+reports/ai-evals-live-latest.json
+reports/dev-agent-prompt-tramo-*.md
 dist/
 build/
 coverage/

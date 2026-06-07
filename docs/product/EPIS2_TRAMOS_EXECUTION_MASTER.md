@@ -43,9 +43,9 @@
 
 ## Próximo paso global
 
-1. Signoff clínico institucional Tramos A–J
+1. Signoff clínico institucional Tramos A–J — [`EPIS2_TRAMOS_CLINICAL_SIGNOFF_CHECKLIST.md`](./EPIS2_TRAMOS_CLINICAL_SIGNOFF_CHECKLIST.md)
 2. `quality:golden-journey` antes de piloto hospitalario
-3. Piloto institucional · calidad/auditoría 171–180
+3. **Tramo K** calidad/auditoría 171–180 — [`EPIS2_TRAMO_K_PLAN.md`](./EPIS2_TRAMO_K_PLAN.md) (inventario Semana 4)
 
 ---
 

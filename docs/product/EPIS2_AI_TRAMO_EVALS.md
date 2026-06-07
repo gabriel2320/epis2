@@ -40,4 +40,13 @@ Tras `ai:evals:live` → `reports/ai-evals-live-latest.json`:
 - Smoke: `npm run ai:catalog-assist-smoke`
 - E2E: `npm run test:e2e:week3`
 
+---
+
+## Cierre de tramo (Semana 4)
+
+```bash
+npm run ai:evals:tramo-j   # tramo activo
+npm run ai:evals:closure   # EPIS2_AI_EVALS_LIVE=all
+```
+
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*
