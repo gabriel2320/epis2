@@ -358,6 +358,60 @@ export const orPreanesthesiaRowSchema = z.object({
   evaluationStatus: z.enum(['pending', 'complete']),
 });
 
+export const orIntraopAnesthesiaRowSchema = z.object({
+  caseId: z.string(),
+  timeLabel: z.string(),
+  heartRate: z.number().int(),
+  map: z.number().int(),
+  spo2: z.number().int(),
+  agent: z.string(),
+});
+
+export const orOperativeProtocolRowSchema = z.object({
+  caseId: z.string(),
+  patientDisplayName: z.string(),
+  operatingRoom: z.string(),
+  procedureSummary: z.string(),
+  documentedBy: z.string(),
+});
+
+export const orSpongeCountRowSchema = z.object({
+  caseId: z.string(),
+  operatingRoom: z.string(),
+  initialCount: z.number().int(),
+  finalCount: z.number().int(),
+  verifiedBy: z.string(),
+  status: z.enum(['pending', 'balanced']),
+});
+
+export const orIntraopBiopsyRowSchema = z.object({
+  caseId: z.string(),
+  specimenLabel: z.string(),
+  urgency: z.string(),
+  status: z.enum(['requested', 'sent']),
+});
+
+export const orUrpaRecoveryRowSchema = z.object({
+  caseId: z.string(),
+  patientDisplayName: z.string(),
+  aldreteScore: z.number().int(),
+  disposition: z.string(),
+});
+
+export const orBloodBankRowSchema = z.object({
+  caseId: z.string(),
+  product: z.string(),
+  units: z.number().int(),
+  status: z.enum(['reserved', 'transfused']),
+});
+
+export const orSterilizationRowSchema = z.object({
+  instrumentSet: z.string(),
+  lotNumber: z.string(),
+  expiryDate: z.string(),
+  operatingRoom: z.string(),
+});
+
 export const orDashboardResponseSchema = z.object({
   readOnly: z.literal(true),
   roleView: z.enum(['physician', 'nurse', 'admin']),
@@ -365,6 +419,13 @@ export const orDashboardResponseSchema = z.object({
   surgicalSchedule: z.array(orSurgicalScheduleRowSchema),
   whoSafetyChecklist: z.array(orWhoChecklistRowSchema),
   preanesthesiaEvaluations: z.array(orPreanesthesiaRowSchema),
+  intraopAnesthesia: z.array(orIntraopAnesthesiaRowSchema),
+  operativeProtocols: z.array(orOperativeProtocolRowSchema),
+  spongeCounts: z.array(orSpongeCountRowSchema),
+  intraopBiopsies: z.array(orIntraopBiopsyRowSchema),
+  urpaRecovery: z.array(orUrpaRecoveryRowSchema),
+  bloodBankOrders: z.array(orBloodBankRowSchema),
+  sterilizationLots: z.array(orSterilizationRowSchema),
   metrics: z.object({
     operatingRoomsInUse: z.number().int(),
     scheduledToday: z.number().int(),

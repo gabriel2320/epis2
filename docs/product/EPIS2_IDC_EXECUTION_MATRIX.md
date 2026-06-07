@@ -13,10 +13,10 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 115 · Active: 47 · Blocked: 1 · Done: 37 |
-| **Prioridad** | Critical: 9 · High: 59 · Medium: 84 · Low: 48 |
-| **Horizonte** | Core: 40 · Post-core: 103 · Future: 57 |
-| **Decisión** | Build: 140 · Integrate: 5 · Defer: 53 · Exclude: 2 |
+| **Estado** | Planned: 108 · Active: 54 · Blocked: 1 · Done: 37 |
+| **Prioridad** | Critical: 9 · High: 66 · Medium: 84 · Low: 41 |
+| **Horizonte** | Core: 40 · Post-core: 110 · Future: 50 |
+| **Decisión** | Build: 147 · Integrate: 5 · Defer: 46 · Exclude: 2 |
 
 ### Leyenda
 
@@ -263,13 +263,13 @@
 | 151 | Tabla quirúrgica | 15 | or | Active | High | Post-core | Build | PARTIAL | OrDashboardTab MF-TRAMO-E-002 |
 | 152 | Checklist cirugía segura OMS | 15 | or | Active | High | Post-core | Build | PARTIAL | Checklist OMS demo MF-TRAMO-E-003 |
 | 153 | Evaluación preanestésica | 15 | or | Active | High | Post-core | Build | PARTIAL | Preanestesia demo MF-TRAMO-E-004 |
-| 154 | Hoja anestesia intraoperatoria | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
-| 155 | Protocolo operatorio | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
-| 156 | Recuento compresas / insumos | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
-| 157 | Biopsia intraoperatoria | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
-| 158 | Recuperación URPA | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
-| 159 | Banco de sangre | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
-| 160 | Esterilización / trazabilidad | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
+| 154 | Hoja anestesia intraoperatoria | 15 | or | Active | High | Post-core | Build | PARTIAL | Anestesia intraop demo MF-TRAMO-E-005 |
+| 155 | Protocolo operatorio | 15 | or | Active | High | Post-core | Build | PARTIAL | Protocolo operatorio demo MF-TRAMO-E-006 |
+| 156 | Recuento compresas / insumos | 15 | or | Active | High | Post-core | Build | PARTIAL | Recuento compresas demo MF-TRAMO-E-007 |
+| 157 | Biopsia intraoperatoria | 15 | or | Active | High | Post-core | Build | PARTIAL | Biopsia intraop demo MF-TRAMO-E-008 |
+| 158 | Recuperación URPA | 15 | or | Active | High | Post-core | Build | PARTIAL | URPA Aldrete demo MF-TRAMO-E-009 |
+| 159 | Banco de sangre | 15 | or | Active | High | Post-core | Build | PARTIAL | Banco sangre demo MF-TRAMO-E-010 |
+| 160 | Esterilización / trazabilidad | 15 | or | Active | High | Post-core | Build | PARTIAL | Esterilización demo MF-TRAMO-E-011 |
 
 ## Farmacia clínica (161–170)
 

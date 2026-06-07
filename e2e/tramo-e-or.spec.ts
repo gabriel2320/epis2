@@ -29,4 +29,18 @@ test.describe('Tramo E — Pabellón', () => {
     await expect(page.getByTestId('epis2-or-preanesthesia-rows')).toBeVisible();
     await expect(page.getByTestId('epis2-or-idc-153')).toBeVisible();
   });
+
+  test('tablero pabellón — scaffold IDC 154–160', async ({ page }) => {
+    await loginAsPhysician(page);
+    await page.goto('/epis2/dashboard?tab=or');
+    await expect(page.getByTestId('epis2-or-intraop-anesthesia')).toBeVisible();
+    await expect(page.getByTestId('epis2-or-idc-154')).toBeVisible();
+    await expect(page.getByTestId('epis2-or-operative-protocol')).toBeVisible();
+    await expect(page.getByTestId('epis2-or-sponge-count')).toBeVisible();
+    await expect(page.getByTestId('epis2-or-intraop-biopsy')).toBeVisible();
+    await expect(page.getByTestId('epis2-or-urpa-recovery')).toBeVisible();
+    await expect(page.getByTestId('epis2-or-blood-bank')).toBeVisible();
+    await expect(page.getByTestId('epis2-or-sterilization')).toBeVisible();
+    await expect(page.getByTestId('epis2-or-idc-160')).toBeVisible();
+  });
 });

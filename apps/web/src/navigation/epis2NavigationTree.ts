@@ -145,7 +145,7 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'or',
     md3Level: 0,
     status: 'partial',
-    idcRefs: [151, 152, 153],
+    idcRefs: [151, 152, 153, 154, 155, 156, 157, 158, 159, 160],
     ola: '15',
     notes: 'MF-TRAMO-E-002 workspace or',
   },

@@ -5,26 +5,26 @@
     "canon": "EPIS2_WAVE_EXECUTION_CANON.md",
     "totals": {
       "estado": {
-        "Planned": 115,
-        "Active": 47,
+        "Planned": 108,
+        "Active": 54,
         "Blocked": 1,
         "Done": 37
       },
       "prioridad": {
         "Critical": 9,
-        "High": 59,
+        "High": 66,
         "Medium": 84,
-        "Low": 48
+        "Low": 41
       },
       "horizonte": {
         "Core": 40,
-        "Post-core": 103,
-        "Future": 57
+        "Post-core": 110,
+        "Future": 50
       },
       "decision": {
-        "Build": 140,
+        "Build": 147,
         "Integrate": 5,
-        "Defer": 53,
+        "Defer": 46,
         "Exclude": 2
       }
     }
@@ -1871,84 +1871,84 @@
       "nombre": "Hoja anestesia intraoperatoria",
       "ola": "15",
       "workspace": "or",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "MISSING",
-      "nota": "Pabellón Ola 15"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Anestesia intraop demo MF-TRAMO-E-005"
     },
     {
       "idc": 155,
       "nombre": "Protocolo operatorio",
       "ola": "15",
       "workspace": "or",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "MISSING",
-      "nota": "Pabellón Ola 15"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Protocolo operatorio demo MF-TRAMO-E-006"
     },
     {
       "idc": 156,
       "nombre": "Recuento compresas / insumos",
       "ola": "15",
       "workspace": "or",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "MISSING",
-      "nota": "Pabellón Ola 15"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Recuento compresas demo MF-TRAMO-E-007"
     },
     {
       "idc": 157,
       "nombre": "Biopsia intraoperatoria",
       "ola": "15",
       "workspace": "or",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "MISSING",
-      "nota": "Pabellón Ola 15"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Biopsia intraop demo MF-TRAMO-E-008"
     },
     {
       "idc": 158,
       "nombre": "Recuperación URPA",
       "ola": "15",
       "workspace": "or",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "MISSING",
-      "nota": "Pabellón Ola 15"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "URPA Aldrete demo MF-TRAMO-E-009"
     },
     {
       "idc": 159,
       "nombre": "Banco de sangre",
       "ola": "15",
       "workspace": "or",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "MISSING",
-      "nota": "Pabellón Ola 15"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Banco sangre demo MF-TRAMO-E-010"
     },
     {
       "idc": 160,
       "nombre": "Esterilización / trazabilidad",
       "ola": "15",
       "workspace": "or",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "MISSING",
-      "nota": "Pabellón Ola 15"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Esterilización demo MF-TRAMO-E-011"
     },
     {
       "idc": 161,

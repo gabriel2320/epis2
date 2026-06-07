@@ -24,7 +24,7 @@ const orMatch = tree.match(/id: 'dashboard-or'[\s\S]*?idcRefs: \[([^\]]+)\]/);
 if (!orMatch) {
   errors.push('navigation tree sin dashboard-or idcRefs');
 } else {
-  for (const id of [151, 152, 153]) {
+  for (const id of [151, 152, 153, 154, 155, 156, 157, 158, 159, 160]) {
     if (!orMatch[1].includes(String(id))) {
       errors.push(`dashboard-or idcRefs sin IDC ${id}`);
     }
@@ -32,7 +32,7 @@ if (!orMatch) {
 }
 
 const plan = readFileSync(join(root, 'docs/product/EPIS2_TRAMO_E_PLAN.md'), 'utf8');
-if (!plan.includes('MF-TRAMO-E-003')) errors.push('plan Tramo E sin MF-TRAMO-E-003');
+if (!plan.includes('MF-TRAMO-E-CLOSURE')) errors.push('plan Tramo E sin MF-TRAMO-E-CLOSURE');
 
 if (errors.length) {
   console.error('tramo-e-audit-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));

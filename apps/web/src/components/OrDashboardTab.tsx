@@ -148,6 +148,147 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
           ))}
         </List>
       </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-intraop-anesthesia">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.or.intraopAnesthesiaTitle}
+        </Typography>
+        {data.intraopAnesthesia.length === 0 ? (
+          <Typography variant="body2" color="text.secondary">
+            {copy.longitudinal.emptySection}
+          </Typography>
+        ) : (
+          <List dense data-testid="epis2-or-intraop-anesthesia-rows">
+            {data.intraopAnesthesia.map((row) => (
+              <ListItem key={`${row.caseId}-${row.timeLabel}`} disablePadding sx={{ py: 0.25 }}>
+                <ListItemText
+                  primary={`${row.timeLabel} — FC ${row.heartRate} · PAM ${row.map}`}
+                  secondary={`SpO₂ ${row.spo2}% · ${row.agent}`}
+                />
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-operative-protocol">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.or.operativeProtocolTitle}
+        </Typography>
+        {data.operativeProtocols.length === 0 ? (
+          <Typography variant="body2" color="text.secondary">
+            {copy.longitudinal.emptySection}
+          </Typography>
+        ) : (
+          <List dense data-testid="epis2-or-operative-protocol-rows">
+            {data.operativeProtocols.map((row) => (
+              <ListItem key={row.caseId} disablePadding sx={{ py: 0.25 }}>
+                <ListItemText
+                  primary={`${row.operatingRoom} — ${row.patientDisplayName}`}
+                  secondary={`${row.procedureSummary} · ${row.documentedBy}`}
+                />
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-sponge-count">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.or.spongeCountTitle}
+        </Typography>
+        {data.spongeCounts.length === 0 ? (
+          <Typography variant="body2" color="text.secondary">
+            {copy.longitudinal.emptySection}
+          </Typography>
+        ) : (
+          <List dense data-testid="epis2-or-sponge-count-rows">
+            {data.spongeCounts.map((row) => (
+              <ListItem key={row.caseId} disablePadding sx={{ py: 0.25 }}>
+                <ListItemText
+                  primary={`${row.operatingRoom} — ${row.initialCount}/${row.finalCount}`}
+                  secondary={`${row.verifiedBy} · ${row.status === 'balanced' ? copy.or.spongeCountBalanced : copy.or.spongeCountPending}`}
+                />
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-intraop-biopsy">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.or.intraopBiopsyTitle}
+        </Typography>
+        {data.intraopBiopsies.length === 0 ? (
+          <Typography variant="body2" color="text.secondary">
+            {copy.longitudinal.emptySection}
+          </Typography>
+        ) : (
+          <List dense data-testid="epis2-or-intraop-biopsy-rows">
+            {data.intraopBiopsies.map((row, index) => (
+              <ListItem key={`${row.caseId}-${index}`} disablePadding sx={{ py: 0.25 }}>
+                <ListItemText
+                  primary={row.specimenLabel}
+                  secondary={`${row.urgency} · ${row.status}`}
+                />
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-urpa-recovery">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.or.urpaRecoveryTitle}
+        </Typography>
+        {data.urpaRecovery.length === 0 ? (
+          <Typography variant="body2" color="text.secondary">
+            {copy.longitudinal.emptySection}
+          </Typography>
+        ) : (
+          <List dense data-testid="epis2-or-urpa-recovery-rows">
+            {data.urpaRecovery.map((row) => (
+              <ListItem key={row.caseId} disablePadding sx={{ py: 0.25 }}>
+                <ListItemText
+                  primary={row.patientDisplayName}
+                  secondary={`${copy.or.urpaAldrete} ${row.aldreteScore} · ${row.disposition}`}
+                />
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-blood-bank">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.or.bloodBankTitle}
+        </Typography>
+        {data.bloodBankOrders.length === 0 ? (
+          <Typography variant="body2" color="text.secondary">
+            {copy.longitudinal.emptySection}
+          </Typography>
+        ) : (
+          <List dense data-testid="epis2-or-blood-bank-rows">
+            {data.bloodBankOrders.map((row) => (
+              <ListItem key={row.caseId} disablePadding sx={{ py: 0.25 }}>
+                <ListItemText
+                  primary={`${row.product} — ${row.units} U`}
+                  secondary={row.status}
+                />
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-sterilization">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.or.sterilizationTitle}
+        </Typography>
+        <List dense data-testid="epis2-or-sterilization-rows">
+          {data.sterilizationLots.map((row) => (
+            <ListItem key={row.lotNumber} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={`${row.instrumentSet} — ${row.operatingRoom}`}
+                secondary={`Lote ${row.lotNumber} · vence ${row.expiryDate}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
     </Stack>
   );
 }

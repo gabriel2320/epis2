@@ -1,6 +1,6 @@
 # EPIS2 — Plan Tramo E (pabellón y anestesia)
 
-**Versión:** 1.0 · **Fecha:** 2026-06-07
+**Versión:** 1.1 · **Fecha:** 2026-06-07
 
 ---
 
@@ -8,7 +8,7 @@
 
 Pabellón · anestesia · obstetricia · odontología · telemedicina · IoT · interop avanzada · facturación.
 
-**Horizonte:** Post-core — scaffold pabellón demo (Ola 15 IDC 151–160).
+**Horizonte:** Post-core — scaffold pabellón demo cerrado técnicamente (MF-TRAMO-E-CLOSURE).
 
 ---
 
@@ -19,13 +19,13 @@ Pabellón · anestesia · obstetricia · odontología · telemedicina · IoT · 
 | Tabla quirúrgica | 151 | ✅ **MF-TRAMO-E-002** |
 | Checklist OMS | 152 | ✅ **MF-TRAMO-E-003** |
 | Preanestesia | 153 | ✅ **MF-TRAMO-E-004** |
-| Anestesia intraop | 154 | Defer |
-| Protocolo operatorio | 155 | Defer |
-| Recuento compresas | 156 | Defer |
-| Biopsia intraop | 157 | Defer |
-| URPA | 158 | Defer |
-| Banco sangre | 159 | Defer |
-| Esterilización | 160 | Defer |
+| Anestesia intraop | 154 | ✅ **MF-TRAMO-E-005** |
+| Protocolo operatorio | 155 | ✅ **MF-TRAMO-E-006** |
+| Recuento compresas | 156 | ✅ **MF-TRAMO-E-007** |
+| Biopsia intraop | 157 | ✅ **MF-TRAMO-E-008** |
+| URPA | 158 | ✅ **MF-TRAMO-E-009** |
+| Banco sangre | 159 | ✅ **MF-TRAMO-E-010** |
+| Esterilización | 160 | ✅ **MF-TRAMO-E-011** |
 
 ---
 
@@ -34,22 +34,14 @@ Pabellón · anestesia · obstetricia · odontología · telemedicina · IoT · 
 | MF | Alcance | Estado |
 |----|---------|--------|
 | MF-TRAMO-E-001 | Inventario pabellón | ✅ |
-| MF-TRAMO-E-002 | Rail + tablero OR (IDC 151) | ✅ |
-| MF-TRAMO-E-003 | Checklist OMS (IDC 152) | ✅ |
-| MF-TRAMO-E-004 | Preanestesia (IDC 153) | ✅ |
-| MF-TRAMO-E-005+ | Anestesia intraop, protocolo… | 📋 Planificado |
+| MF-TRAMO-E-002 … E-011 | Scaffold tablero OR | ✅ |
+| MF-TRAMO-E-CLOSURE | Cierre técnico Tramo E | ✅ |
 
 ---
 
 ## Gates
 
-| Gate | Evidencia |
-|------|-----------|
-| `quality:tramo-e-inventory-gate` | Inventario + plan |
-| `quality:tramo-e-or-gate` | Workspace + API + IDC 151 |
-| `quality:tramo-e-who-checklist-gate` | IDC 152 checklist OMS |
-| `quality:tramo-e-preanesthesia-gate` | IDC 153 preanestesia |
-| `quality:tramo-e-audit-gate` | Conciliación navigation tree |
+Ver [`EPIS2_TRAMO_E_CLOSURE.md`](./EPIS2_TRAMO_E_CLOSURE.md).
 
 ---
 
