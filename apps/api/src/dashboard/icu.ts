@@ -4,8 +4,8 @@ import { patients } from '../db/schema.js';
 const ICU_IDC_PANELS = [
   { idc: 41, label: 'Dashboard monitorización UCI', status: 'active' as const },
   { idc: 42, label: 'Sábana clínica (flujograma)', status: 'active' as const },
-  { idc: 43, label: 'Balance hídrico estricto', status: 'planned' as const },
-  { idc: 44, label: 'Parámetros ventilación', status: 'planned' as const },
+  { idc: 43, label: 'Balance hídrico estricto', status: 'active' as const },
+  { idc: 44, label: 'Parámetros ventilación', status: 'active' as const },
   { idc: 45, label: 'Vías venosas e invasivos', status: 'planned' as const },
   { idc: 46, label: 'Valoración neurológica', status: 'planned' as const },
   { idc: 47, label: 'Escalas severidad', status: 'planned' as const },
@@ -58,6 +58,24 @@ export async function getIcuDashboardSummary(db: Database, role: string) {
       lactate: 1.2 + index * 0.3,
     }));
 
+  const fluidBalance = [
+    { shiftLabel: 'Turno noche', intakeMl: 820, outputMl: 760, balanceMl: 60 },
+    { shiftLabel: 'Turno día', intakeMl: 1450, outputMl: 1320, balanceMl: 130 },
+    { shiftLabel: 'Turno tarde', intakeMl: 980, outputMl: 1010, balanceMl: -30 },
+  ];
+
+  const ventilation = criticalBeds
+    .filter((b) => b.onVentilator && b.patientDisplayName)
+    .map((b) => ({
+      patientDisplayName: b.patientDisplayName!,
+      mode: 'VCV',
+      fio2Percent: 40,
+      peep: 8,
+      pip: 22,
+    }));
+
+  const netFluidBalanceMl = fluidBalance.reduce((sum, row) => sum + row.balanceMl, 0);
+
   return {
     readOnly: true as const,
     roleView: (role === 'admin' || role === 'nurse' ? role : 'physician') as
@@ -69,10 +87,13 @@ export async function getIcuDashboardSummary(db: Database, role: string) {
     criticalBeds,
     flowsheetHours,
     hemodynamics,
+    fluidBalance,
+    ventilation,
     metrics: {
       occupied: criticalBeds.length,
       available: 1,
       onVentilator: criticalBeds.filter((b) => b.onVentilator).length,
+      netFluidBalanceMl,
     },
   };
 }

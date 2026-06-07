@@ -32,6 +32,11 @@ export function IcuDashboardTab({ data, onOpenPatient, onOpenHandover }: IcuDash
           label={copy.icu.metrics.onVentilator}
           value={String(data.metrics.onVentilator)}
         />
+        <EpisMetric
+          label={copy.icu.metrics.netFluidBalance}
+          value={`${data.metrics.netFluidBalanceMl} mL`}
+          data-testid="epis2-icu-net-fluid-balance"
+        />
       </Stack>
       <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-idc-panels">
         <Typography variant="subtitle2" gutterBottom>
@@ -119,6 +124,42 @@ export function IcuDashboardTab({ data, onOpenPatient, onOpenHandover }: IcuDash
             </ListItem>
           ))}
         </List>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-fluid-balance">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.fluidBalanceTitle}
+        </Typography>
+        <List dense data-testid="epis2-icu-fluid-balance-rows">
+          {data.fluidBalance.map((row) => (
+            <ListItem key={row.shiftLabel} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.shiftLabel}
+                secondary={`${copy.icu.fluidIntake} ${row.intakeMl} mL · ${copy.icu.fluidOutput} ${row.outputMl} mL · ${row.balanceMl >= 0 ? '+' : ''}${row.balanceMl} mL`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-ventilation">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.ventilationTitle}
+        </Typography>
+        {data.ventilation.length === 0 ? (
+          <Typography variant="body2" color="text.secondary">
+            {copy.longitudinal.emptySection}
+          </Typography>
+        ) : (
+          <List dense data-testid="epis2-icu-ventilation-rows">
+            {data.ventilation.map((row) => (
+              <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
+                <ListItemText
+                  primary={`${row.patientDisplayName} — ${row.mode}`}
+                  secondary={`FiO₂ ${row.fio2Percent}% · PEEP ${row.peep} · PIP ${row.pip}`}
+                />
+              </ListItem>
+            ))}
+          </List>
+        )}
       </Paper>
       {primaryBed?.patientId && onOpenHandover ? (
         <Button

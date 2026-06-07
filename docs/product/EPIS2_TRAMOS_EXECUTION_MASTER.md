@@ -11,7 +11,7 @@
 | **A** Clínico demostrable | ✅ Cerrado | 21–40 (38 Defer) | `quality:tramo-a-closure-gate` |
 | **B** Piloto ambulatorio | ✅ UI demo | 2–10 (6,10 Active) | `quality:tramo-b-ui-gate` |
 | **C** Hospitalización + urgencias | ✅ Cerrado técnico | 111·116·58 Done; 110 Active | `quality:tramo-c-closure-gate` |
-| **D** Programas especializados | ◐ Scaffold UCI | 41·42·135 Active | `quality:tramo-d-icu-gate` |
+| **D** Programas especializados | ◐ Scaffold UCI | 41–44·135 Active | `quality:tramo-d-ventilation-gate` |
 
 ---
 
@@ -34,7 +34,7 @@
 
 ## Próximo paso global
 
-1. MF-TRAMO-D-005+ — profundizar UCI (IDC 43–50) o pabellón 121–130
+1. MF-TRAMO-D-007+ — vías invasivas IDC 45, epicrisis traslado UCI IDC 50
 2. Signoff clínico institucional Tramo C
 3. `quality:golden-journey` antes de piloto hospitalario
 

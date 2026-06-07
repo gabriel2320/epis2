@@ -5,26 +5,26 @@
     "canon": "EPIS2_WAVE_EXECUTION_CANON.md",
     "totals": {
       "estado": {
-        "Planned": 126,
-        "Active": 36,
+        "Planned": 124,
+        "Active": 38,
         "Blocked": 1,
         "Done": 37
       },
       "prioridad": {
         "Critical": 9,
-        "High": 48,
-        "Medium": 92,
+        "High": 50,
+        "Medium": 90,
         "Low": 51
       },
       "horizonte": {
         "Core": 40,
-        "Post-core": 92,
-        "Future": 68
+        "Post-core": 94,
+        "Future": 66
       },
       "decision": {
-        "Build": 129,
+        "Build": 131,
         "Integrate": 5,
-        "Defer": 64,
+        "Defer": 62,
         "Exclude": 2
       }
     }
@@ -539,24 +539,24 @@
       "nombre": "Balance hídrico estricto",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI Tramo D; duplica 131–140"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Balance hídrico demo MF-TRAMO-D-005"
     },
     {
       "idc": 44,
       "nombre": "Parámetros ventilación",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI Tramo D; duplica 131–140"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Ventilación demo MF-TRAMO-D-006"
     },
     {
       "idc": 45,

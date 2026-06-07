@@ -27,4 +27,21 @@ test.describe('Tramo D — UCI', () => {
     await expect(page.getByTestId('epis2-icu-hemodynamics')).toBeVisible();
     await expect(page.getByTestId('epis2-icu-idc-135')).toBeVisible();
   });
+
+  test('tablero UCI — balance hídrico IDC 43', async ({ page }) => {
+    await loginAsPhysician(page);
+    await page.goto('/epis2/dashboard?tab=icu');
+    await expect(page.getByTestId('epis2-icu-fluid-balance')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-fluid-balance-rows')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-idc-43')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-net-fluid-balance')).toBeVisible();
+  });
+
+  test('tablero UCI — ventilación IDC 44', async ({ page }) => {
+    await loginAsPhysician(page);
+    await page.goto('/epis2/dashboard?tab=icu');
+    await expect(page.getByTestId('epis2-icu-ventilation')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-ventilation-rows')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-idc-44')).toBeVisible();
+  });
 });

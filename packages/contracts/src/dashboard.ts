@@ -241,6 +241,21 @@ export const icuHemodynamicsRowSchema = z.object({
   lactate: z.number(),
 });
 
+export const icuFluidBalanceRowSchema = z.object({
+  shiftLabel: z.string(),
+  intakeMl: z.number().int(),
+  outputMl: z.number().int(),
+  balanceMl: z.number().int(),
+});
+
+export const icuVentilationRowSchema = z.object({
+  patientDisplayName: z.string(),
+  mode: z.string(),
+  fio2Percent: z.number().int(),
+  peep: z.number().int(),
+  pip: z.number().int(),
+});
+
 export const icuDashboardResponseSchema = z.object({
   readOnly: z.literal(true),
   roleView: z.enum(['physician', 'nurse', 'admin']),
@@ -249,10 +264,13 @@ export const icuDashboardResponseSchema = z.object({
   criticalBeds: z.array(icuCriticalBedRowSchema),
   flowsheetHours: z.array(icuFlowsheetHourRowSchema),
   hemodynamics: z.array(icuHemodynamicsRowSchema),
+  fluidBalance: z.array(icuFluidBalanceRowSchema),
+  ventilation: z.array(icuVentilationRowSchema),
   metrics: z.object({
     occupied: z.number().int(),
     available: z.number().int(),
     onVentilator: z.number().int(),
+    netFluidBalanceMl: z.number().int(),
   }),
 });
 

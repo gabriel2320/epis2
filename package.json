@@ -55,6 +55,8 @@
     "quality:tramo-d-icu-gate": "node scripts/quality/validate-tramo-d-icu-gate.mjs",
     "quality:tramo-d-flowsheet-gate": "node scripts/quality/validate-tramo-d-flowsheet-gate.mjs",
     "quality:tramo-d-hemodynamics-gate": "node scripts/quality/validate-tramo-d-hemodynamics-gate.mjs",
+    "quality:tramo-d-fluid-balance-gate": "node scripts/quality/validate-tramo-d-fluid-balance-gate.mjs",
+    "quality:tramo-d-ventilation-gate": "node scripts/quality/validate-tramo-d-ventilation-gate.mjs",
     "test:e2e:tramo-d": "playwright test e2e/tramo-d-icu.spec.ts",
     "test:e2e:tramo-b": "playwright test e2e/tramo-b-reception.spec.ts",
     "test:e2e:tramo-c": "playwright test e2e/tramo-c-emergency.spec.ts",

@@ -179,12 +179,18 @@ export const copy = {
     bedMapTitle: 'Mapa de camas críticas (demo)',
     flowsheetTitle: 'Sábana clínica 24h (IDC 42)',
     hemodynamicsTitle: 'Monitorización hemodinámica (IDC 135)',
+    fluidBalanceTitle: 'Balance hídrico estricto (IDC 43)',
+    ventilationTitle: 'Parámetros ventilación (IDC 44)',
+    fluidIntake: 'Ingresos',
+    fluidOutput: 'Egresos',
+    fluidBalanceNet: 'Balance neto 24h',
     onVentilator: 'Ventilación mecánica',
     openPatientChart: 'Ver ficha',
     metrics: {
       occupied: 'Camas ocupadas',
       available: 'Camas disponibles',
       onVentilator: 'En ventilación',
+      netFluidBalance: 'Balance hídrico neto',
     },
   },
   inpatient: {

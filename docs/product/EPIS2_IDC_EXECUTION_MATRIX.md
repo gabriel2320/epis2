@@ -13,10 +13,10 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 126 · Active: 36 · Blocked: 1 · Done: 37 |
-| **Prioridad** | Critical: 9 · High: 48 · Medium: 92 · Low: 51 |
-| **Horizonte** | Core: 40 · Post-core: 92 · Future: 68 |
-| **Decisión** | Build: 129 · Integrate: 5 · Defer: 64 · Exclude: 2 |
+| **Estado** | Planned: 124 · Active: 38 · Blocked: 1 · Done: 37 |
+| **Prioridad** | Critical: 9 · High: 50 · Medium: 90 · Low: 51 |
+| **Horizonte** | Core: 40 · Post-core: 94 · Future: 66 |
+| **Decisión** | Build: 131 · Integrate: 5 · Defer: 62 · Exclude: 2 |
 
 ### Leyenda
 
@@ -97,8 +97,8 @@
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
 | 41 | Dashboard monitorización UCI | 13 | icu | Active | High | Post-core | Build | PARTIAL | IcuDashboardTab MF-TRAMO-D-002 |
 | 42 | Sábana clínica (flujograma) | 13 | icu | Active | High | Post-core | Build | PARTIAL | Sábana clínica demo MF-TRAMO-D-003 |
-| 43 | Balance hídrico estricto | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
-| 44 | Parámetros ventilación | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
+| 43 | Balance hídrico estricto | 13 | icu | Active | High | Post-core | Build | PARTIAL | Balance hídrico demo MF-TRAMO-D-005 |
+| 44 | Parámetros ventilación | 13 | icu | Active | High | Post-core | Build | PARTIAL | Ventilación demo MF-TRAMO-D-006 |
 | 45 | Vías venosas e invasivos | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
 | 46 | Valoración neurológica | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
 | 47 | Escalas severidad | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
