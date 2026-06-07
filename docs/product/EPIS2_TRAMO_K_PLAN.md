@@ -1,6 +1,6 @@
 # EPIS2 — Plan Tramo K (calidad y auditoría)
 
-**Versión:** 1.0 · **Fecha:** 2026-06-07
+**Versión:** 1.1 · **Fecha:** 2026-06-07
 
 ---
 
@@ -8,7 +8,7 @@
 
 Ola 17 — calidad/auditoría IDC 171–180 bajo tab calidad (`?tab=quality`).
 
-**Horizonte:** Post signoff A–J — inventario Semana 4 → scaffold MF-TRAMO-K-002…011.
+**Horizonte:** Post signoff A–J — scaffold demo → cierre técnico ✅
 
 ---
 
@@ -16,16 +16,16 @@ Ola 17 — calidad/auditoría IDC 171–180 bajo tab calidad (`?tab=quality`).
 
 | Programa | IDC | EPIS2 hoy |
 |----------|-----|-----------|
-| Centinela | 171 | ◐ **MF-TRAMO-K-002** (pendiente) |
-| ACR | 172 | ○ Planned |
-| Comité mortalidad | 173 | ○ Planned |
-| Auditoría registros | 174 | ○ Planned |
-| OIRS | 175 | ○ Planned |
-| Clima laboral | 176 | ○ Planned |
-| Consentimientos | 177 | ○ Planned |
-| Acreditación | 178 | ◐ **MF-TRAMO-K-009** (pendiente) |
-| Docs institucionales | 179 | ○ Planned |
-| Suspensión Qx | 180 | ○ Planned |
+| Centinela | 171 | ✅ **MF-TRAMO-K-002** |
+| ACR | 172 | ✅ **MF-TRAMO-K-003** |
+| Comité mortalidad | 173 | ✅ **MF-TRAMO-K-004** |
+| Auditoría registros | 174 | ✅ **MF-TRAMO-K-005** |
+| OIRS | 175 | ✅ **MF-TRAMO-K-006** |
+| Clima laboral | 176 | ✅ **MF-TRAMO-K-007** |
+| Consentimientos | 177 | ✅ **MF-TRAMO-K-008** |
+| Acreditación | 178 | ✅ **MF-TRAMO-K-009** |
+| Docs institucionales | 179 | ✅ **MF-TRAMO-K-010** |
+| Suspensión Qx | 180 | ✅ **MF-TRAMO-K-011** |
 
 ---
 
@@ -33,16 +33,12 @@ Ola 17 — calidad/auditoría IDC 171–180 bajo tab calidad (`?tab=quality`).
 
 | MF | Alcance | Estado |
 |----|---------|--------|
-| MF-TRAMO-K-001 | Inventario calidad/auditoría | ✅ Semana 4 |
-| MF-TRAMO-K-002 … K-011 | Scaffold paneles 171–180 | ○ |
-| MF-TRAMO-K-CLOSURE | Cierre técnico Tramo K | ○ |
+| MF-TRAMO-K-001 | Inventario calidad/auditoría | ✅ |
+| MF-TRAMO-K-002 … K-011 | Scaffold paneles 171–180 | ✅ |
+| MF-TRAMO-K-CLOSURE | Cierre técnico Tramo K | ✅ |
 
 ---
 
-## Prompt agente
+## Gates
 
-```bash
-npm run dev:agent:tramo-k
-```
-
-Ver [`EPIS2_DEV_AGENT_ORCHESTRATION.md`](./EPIS2_DEV_AGENT_ORCHESTRATION.md).
+Ver [`EPIS2_TRAMO_K_CLOSURE.md`](./EPIS2_TRAMO_K_CLOSURE.md).

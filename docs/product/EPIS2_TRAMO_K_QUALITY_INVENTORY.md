@@ -26,7 +26,7 @@ Profundización calidad/auditoría sobre tablero calidad existente.
 
 ## Evidencia
 
-Gates: `quality:tramo-k-inventory-gate` (Semana 4) · scaffold/closure pendientes.
+Gates: `quality:tramo-k-inventory-gate` · `quality:tramo-k-quality-gate` · `quality:tramo-k-scaffold-gate` · `quality:tramo-k-closure-gate`
 
 Plan: [`EPIS2_TRAMO_K_PLAN.md`](./EPIS2_TRAMO_K_PLAN.md)
 

@@ -1,6 +1,6 @@
 # EPIS2 — IA producto en el loop (Semana 3)
 
-**Versión:** 1.0 · **Tramo activo:** J (farmacia 161–170)
+**Versión:** 1.1 · **Tramo activo:** K (calidad 171–180)
 
 ---
 
@@ -8,13 +8,14 @@
 
 | Tramo | Blueprints assist |
 |-------|---------------------|
+| K | `evolution_note`, `nursing_note`, `discharge_summary` |
 | J | `pharmacy_validation`, `medication_reconciliation`, `prescription` |
 | I | `outpatient_visit`, `referral_report`, `evolution_note` |
 | … | ver `scripts/ai-tramo-blueprints.mjs` |
 
 ```bash
 npm run dev:ai
-npm run ai:evals:tramo-j
+npm run ai:evals:tramo-k
 npm run ai:catalog-assist-smoke
 ```
 
@@ -45,7 +46,7 @@ Tras `ai:evals:live` → `reports/ai-evals-live-latest.json`:
 ## Cierre de tramo (Semana 4)
 
 ```bash
-npm run ai:evals:tramo-j   # tramo activo
+npm run ai:evals:tramo-k   # tramo activo
 npm run ai:evals:closure   # EPIS2_AI_EVALS_LIVE=all
 ```
 

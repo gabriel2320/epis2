@@ -115,6 +115,83 @@ export const hl7RevertResponseSchema = z.object({
   reverted: z.literal(true),
 });
 
+export const qualityAuditIdcPanelSchema = z.object({
+  idc: z.number().int(),
+  label: z.string(),
+  status: z.enum(['active', 'planned']),
+});
+
+export const qualitySentinelEventRowSchema = z.object({
+  eventCode: z.string(),
+  unit: z.string(),
+  severity: z.enum(['minor', 'moderate', 'severe']),
+  reportedAt: z.string(),
+  status: z.enum(['open', 'under_review', 'closed']),
+});
+
+export const qualityRootCauseRowSchema = z.object({
+  caseCode: z.string(),
+  eventSummary: z.string(),
+  leadInvestigator: z.string(),
+  status: z.enum(['draft', 'in_progress', 'closed']),
+});
+
+export const qualityMortalityBoardRowSchema = z.object({
+  caseCode: z.string(),
+  patientInitials: z.string(),
+  reviewDate: z.string(),
+  recommendation: z.string(),
+});
+
+export const qualityRecordAuditRowSchema = z.object({
+  recordType: z.string(),
+  sampleSize: z.number().int(),
+  compliancePercent: z.number().int(),
+  auditor: z.string(),
+});
+
+export const qualityOirsClaimRowSchema = z.object({
+  claimId: z.string(),
+  category: z.string(),
+  daysOpen: z.number().int(),
+  status: z.enum(['received', 'investigating', 'resolved']),
+});
+
+export const qualityWorkClimateRowSchema = z.object({
+  unit: z.string(),
+  responseRatePercent: z.number().int(),
+  engagementScore: z.number().int(),
+  surveyPeriod: z.string(),
+});
+
+export const qualityConsentTraceRowSchema = z.object({
+  patientDisplayName: z.string(),
+  consentType: z.string(),
+  signedAt: z.string(),
+  traceStatus: z.enum(['complete', 'pending', 'expired']),
+});
+
+export const qualityAccreditationRowSchema = z.object({
+  indicatorCode: z.string(),
+  indicatorName: z.string(),
+  targetPercent: z.number().int(),
+  observedPercent: z.number().int(),
+});
+
+export const qualityInstitutionalDocRowSchema = z.object({
+  documentCode: z.string(),
+  title: z.string(),
+  version: z.string(),
+  reviewDue: z.string(),
+});
+
+export const qualitySurgicalSuspensionRowSchema = z.object({
+  caseCode: z.string(),
+  operatingRoom: z.string(),
+  reason: z.string(),
+  suspendedAt: z.string(),
+});
+
 export const qualityDashboardResponseSchema = z.object({
   readOnly: z.literal(true),
   recentAudit: z.array(auditEventRowSchema),
@@ -126,6 +203,23 @@ export const qualityDashboardResponseSchema = z.object({
     criticalUnacked: z.number().int(),
   }),
   ops: opsStatusResponseSchema.omit({ readOnly: true }),
+  /** MF-TRAMO-K-002 … K-011 — Calidad y auditoría (IDC 171–180). */
+  qualityAuditPanels: z.array(qualityAuditIdcPanelSchema),
+  sentinelEvents: z.array(qualitySentinelEventRowSchema),
+  rootCauseAnalyses: z.array(qualityRootCauseRowSchema),
+  mortalityBoardCases: z.array(qualityMortalityBoardRowSchema),
+  recordAudits: z.array(qualityRecordAuditRowSchema),
+  oirsClaims: z.array(qualityOirsClaimRowSchema),
+  workClimateSurveys: z.array(qualityWorkClimateRowSchema),
+  consentTraces: z.array(qualityConsentTraceRowSchema),
+  accreditationIndicators: z.array(qualityAccreditationRowSchema),
+  institutionalDocuments: z.array(qualityInstitutionalDocRowSchema),
+  surgicalSuspensions: z.array(qualitySurgicalSuspensionRowSchema),
+  qualityAuditMetrics: z.object({
+    activeQualityModules: z.number().int(),
+    openSentinelEvents: z.number().int(),
+    pendingAccreditationReviews: z.number().int(),
+  }),
   /** MF-TRAMO-H-002 … H-011 — IAAS avanzada (IDC 141–150). */
   iaasAdvancedPanels: z.array(
     z.object({

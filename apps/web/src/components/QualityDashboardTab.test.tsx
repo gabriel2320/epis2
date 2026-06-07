@@ -76,6 +76,33 @@ const qualityBoard: QualityDashboardResponse = {
   outbreakStudies: [],
   isolationMap: [],
   endemicCurves: [],
+  qualityAuditPanels: [
+    { idc: 171, label: 'Eventos adversos / centinela', status: 'active' as const },
+    { idc: 180, label: 'Suspensión quirúrgica', status: 'active' as const },
+  ],
+  sentinelEvents: [
+    {
+      eventCode: 'SENT-DEMO-01',
+      unit: 'UCI',
+      severity: 'moderate' as const,
+      reportedAt: new Date().toISOString(),
+      status: 'open' as const,
+    },
+  ],
+  rootCauseAnalyses: [],
+  mortalityBoardCases: [],
+  recordAudits: [],
+  oirsClaims: [],
+  workClimateSurveys: [],
+  consentTraces: [],
+  accreditationIndicators: [],
+  institutionalDocuments: [],
+  surgicalSuspensions: [],
+  qualityAuditMetrics: {
+    activeQualityModules: 10,
+    openSentinelEvents: 1,
+    pendingAccreditationReviews: 0,
+  },
 };
 
 const { validateHl7Message } = vi.hoisted(() => ({

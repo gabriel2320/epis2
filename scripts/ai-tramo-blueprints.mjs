@@ -1,5 +1,5 @@
 /** Mapa tramo cerrado → blueprints assist Ollama (Semana 3). */
-export const ACTIVE_TRAMO = 'J';
+export const ACTIVE_TRAMO = 'K';
 
 /** @type {Record<string, readonly string[]>} */
 export const TRAMO_ASSIST_BLUEPRINTS = {

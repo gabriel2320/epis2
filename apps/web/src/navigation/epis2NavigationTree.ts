@@ -99,9 +99,9 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'quality_iaas',
     md3Level: 2,
     status: 'partial',
-    idcRefs: [71, 72, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150],
-    ola: '14',
-    notes: 'MF-TRAMO-H-002 IAAS avanzada 141–150',
+    idcRefs: [71, 72, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180],
+    ola: '17',
+    notes: 'MF-TRAMO-H-002 IAAS 141–150 · MF-TRAMO-K-002 calidad 171–180',
   },
   {
     id: 'dashboard-reception',

@@ -17,6 +17,7 @@ const registry = [
   ['H', 'e2e/tramo-h-iaas.spec.ts', 'test:e2e:tramo-h'],
   ['I', 'e2e/tramo-i-specialty.spec.ts', 'test:e2e:tramo-i'],
   ['J', 'e2e/tramo-j-pharmacy.spec.ts', 'test:e2e:tramo-j'],
+  ['K', 'e2e/tramo-k-quality.spec.ts', 'test:e2e:tramo-k'],
 ];
 
 const pkg = readFileSync(join(root, 'package.json'), 'utf8');
@@ -35,4 +36,4 @@ if (errors.length) {
   console.error('tramo-e2e-registry-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
-console.log('tramo-e2e-registry-gate OK — E2E B–J registrados');
+console.log('tramo-e2e-registry-gate OK — E2E B–K registrados');

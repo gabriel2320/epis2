@@ -6,8 +6,14 @@ import { computeEvalMetrics, percentile } from '../../scripts/ai-evals-metrics.m
 import { ACTIVE_TRAMO, blueprintsForTramo } from '../../scripts/ai-tramo-blueprints.mjs';
 
 describe('ai-tramo-blueprints', () => {
-  it('tramo activo J incluye farmacia', () => {
-    expect(ACTIVE_TRAMO).toBe('J');
+  it('tramo activo K incluye calidad/auditoría', () => {
+    expect(ACTIVE_TRAMO).toBe('K');
+    const ids = blueprintsForTramo('K');
+    expect(ids).toContain('evolution_note');
+    expect(ids).toContain('discharge_summary');
+  });
+
+  it('tramo J farmacia sigue mapeado', () => {
     const ids = blueprintsForTramo('J');
     expect(ids).toContain('pharmacy_validation');
     expect(ids).toContain('medication_reconciliation');

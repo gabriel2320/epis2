@@ -4,6 +4,19 @@ import { listInteropStagingBatches } from '../interop/staging.js';
 import { countUnackedCriticals, getOpsStatus } from '../ops/service.js';
 import { patients } from '../db/schema.js';
 
+const QUALITY_AUDIT_IDC_PANELS = [
+  { idc: 171, label: 'Eventos adversos / centinela', status: 'active' as const },
+  { idc: 172, label: 'Análisis causa raíz (ACR)', status: 'active' as const },
+  { idc: 173, label: 'Comité mortalidad', status: 'active' as const },
+  { idc: 174, label: 'Auditoría registros médicos', status: 'active' as const },
+  { idc: 175, label: 'Reclamos OIRS', status: 'active' as const },
+  { idc: 176, label: 'Clima laboral clínico', status: 'active' as const },
+  { idc: 177, label: 'Trazabilidad consentimientos', status: 'active' as const },
+  { idc: 178, label: 'Indicadores acreditación', status: 'active' as const },
+  { idc: 179, label: 'Documentos institucionales', status: 'active' as const },
+  { idc: 180, label: 'Suspensión quirúrgica', status: 'active' as const },
+];
+
 const IAAS_ADVANCED_PANELS = [
   { idc: 141, label: 'Matriz vigilancia activa', status: 'active' as const },
   { idc: 142, label: 'Alerta MDRO', status: 'active' as const },
@@ -87,6 +100,100 @@ export async function getQualityDashboardSummary(db: Database) {
     { indicator: 'Neumonía asociada a VM', endemicRate: 5.4, observedRate: 6.2, periodLabel: 'Q2 2026' },
   ];
 
+  const sentinelEvents = [
+    {
+      eventCode: 'SENT-2026-014',
+      unit: 'UCI',
+      severity: 'severe' as const,
+      reportedAt: '2026-06-07T07:15:00',
+      status: 'under_review' as const,
+    },
+    {
+      eventCode: 'SENT-2026-015',
+      unit: 'Urgencias',
+      severity: 'moderate' as const,
+      reportedAt: '2026-06-06T22:40:00',
+      status: 'open' as const,
+    },
+  ];
+
+  const rootCauseAnalyses = names.slice(0, 2).map((_name, index) => ({
+    caseCode: `ACR-2026-0${index + 3}`,
+    eventSummary: index === 0 ? 'Caída en baño UCI' : 'Error identificación paciente',
+    leadInvestigator: index === 0 ? 'Enfermería jefe UCI' : 'Calidad clínica',
+    status: (index === 0 ? 'in_progress' : 'draft') as 'draft' | 'in_progress' | 'closed',
+  }));
+
+  const mortalityBoardCases = [
+    {
+      caseCode: 'MORT-2026-02',
+      patientInitials: 'A.R.',
+      reviewDate: '2026-06-10',
+      recommendation: 'Revisar protocolo anticoagulación',
+    },
+  ];
+
+  const recordAudits = [
+    { recordType: 'Evoluciones médicas', sampleSize: 40, compliancePercent: 92, auditor: 'Auditoría interna' },
+    { recordType: 'Consentimientos informados', sampleSize: 25, compliancePercent: 88, auditor: 'Calidad clínica' },
+  ];
+
+  const oirsClaims = [
+    { claimId: 'OIRS-8842', category: 'Atención', daysOpen: 5, status: 'investigating' as const },
+    { claimId: 'OIRS-8845', category: 'Tiempos de espera', daysOpen: 2, status: 'received' as const },
+  ];
+
+  const workClimateSurveys = [
+    { unit: 'UCI', responseRatePercent: 78, engagementScore: 68, surveyPeriod: 'Q2 2026' },
+    { unit: 'Medicina', responseRatePercent: 65, engagementScore: 72, surveyPeriod: 'Q2 2026' },
+  ];
+
+  const consentTraces = names.slice(0, 2).map((name, index) => ({
+    patientDisplayName: name,
+    consentType: index === 0 ? 'Procedimiento invasivo' : 'Transfusión sanguínea',
+    signedAt: '2026-06-05T14:00:00',
+    traceStatus: (index === 0 ? 'complete' : 'pending') as 'complete' | 'pending' | 'expired',
+  }));
+
+  const accreditationIndicators = [
+    {
+      indicatorCode: 'ACR-01',
+      indicatorName: 'Higiene de manos',
+      targetPercent: 85,
+      observedPercent: 82,
+    },
+    {
+      indicatorCode: 'ACR-07',
+      indicatorName: 'Conciliación medicamentosa al ingreso',
+      targetPercent: 90,
+      observedPercent: 91,
+    },
+  ];
+
+  const institutionalDocuments = [
+    {
+      documentCode: 'POL-SEG-012',
+      title: 'Política eventos adversos',
+      version: 'v3.2',
+      reviewDue: '2026-09-01',
+    },
+    {
+      documentCode: 'MAN-CAL-004',
+      title: 'Manual acreditación',
+      version: 'v1.8',
+      reviewDue: '2026-12-15',
+    },
+  ];
+
+  const surgicalSuspensions = [
+    {
+      caseCode: 'QX-SUSP-03',
+      operatingRoom: 'Pabellón 2',
+      reason: 'Material estéril incompleto',
+      suspendedAt: '2026-06-07T09:20:00',
+    },
+  ];
+
   return {
     readOnly: true as const,
     recentAudit,
@@ -98,6 +205,25 @@ export async function getQualityDashboardSummary(db: Database) {
       criticalUnacked,
     },
     ops: opsBody,
+    qualityAuditPanels: QUALITY_AUDIT_IDC_PANELS,
+    sentinelEvents,
+    rootCauseAnalyses,
+    mortalityBoardCases,
+    recordAudits,
+    oirsClaims,
+    workClimateSurveys,
+    consentTraces,
+    accreditationIndicators,
+    institutionalDocuments,
+    surgicalSuspensions,
+    qualityAuditMetrics: {
+      activeQualityModules: QUALITY_AUDIT_IDC_PANELS.length,
+      openSentinelEvents: sentinelEvents.filter(
+        (e) => e.status === 'open' || e.status === 'under_review',
+      ).length,
+      pendingAccreditationReviews: accreditationIndicators.filter((i) => i.observedPercent < i.targetPercent)
+        .length,
+    },
     iaasAdvancedPanels: IAAS_ADVANCED_PANELS,
     surveillanceMatrix,
     mdroAlerts,

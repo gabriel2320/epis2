@@ -8,6 +8,7 @@ import {
   Alert,
   Button,
   Chip,
+  EpisMetric,
   List,
   ListItem,
   ListItemText,
@@ -67,6 +68,200 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
           {copy.interop.metricAudit24h}: {data.ops.counts.auditEvents24h} · {copy.interop.metricAiRuns}:{' '}
           {data.metrics.aiRuns} · {copy.interop.metricCriticalUnacked}: {data.metrics.criticalUnacked}
         </Typography>
+      </Paper>
+
+      <Alert severity="info">{copy.qualityAudit.disclosure}</Alert>
+      <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+        <EpisMetric
+          label={copy.qualityAudit.metrics.activeModules}
+          value={String(data.qualityAuditMetrics.activeQualityModules)}
+        />
+        <EpisMetric
+          label={copy.qualityAudit.metrics.openSentinel}
+          value={String(data.qualityAuditMetrics.openSentinelEvents)}
+        />
+        <EpisMetric
+          label={copy.qualityAudit.metrics.pendingAccreditation}
+          value={String(data.qualityAuditMetrics.pendingAccreditationReviews)}
+        />
+      </Stack>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-idc-panels">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.qualityAudit.idcPanelsTitle}
+        </Typography>
+        <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+          {data.qualityAuditPanels.map((panel) => (
+            <Chip
+              key={panel.idc}
+              label={`IDC ${panel.idc}: ${panel.label}`}
+              size="small"
+              color={panel.status === 'active' ? 'primary' : 'default'}
+              variant={panel.status === 'active' ? 'filled' : 'outlined'}
+              data-testid={`epis2-quality-idc-${panel.idc}`}
+            />
+          ))}
+        </Stack>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-sentinel">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.qualityAudit.sentinelTitle}
+        </Typography>
+        <List dense data-testid="epis2-quality-sentinel-rows">
+          {data.sentinelEvents.map((row) => (
+            <ListItem key={row.eventCode} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={`${row.eventCode} — ${row.unit}`}
+                secondary={`${row.severity} · ${row.status} · ${row.reportedAt}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-rca">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.qualityAudit.rcaTitle}
+        </Typography>
+        <List dense>
+          {data.rootCauseAnalyses.map((row) => (
+            <ListItem key={row.caseCode} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={`${row.caseCode} — ${row.eventSummary}`}
+                secondary={`${row.leadInvestigator} · ${row.status}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-mortality-board">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.qualityAudit.mortalityBoardTitle}
+        </Typography>
+        <List dense>
+          {data.mortalityBoardCases.map((row) => (
+            <ListItem key={row.caseCode} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={`${row.caseCode} — ${row.patientInitials}`}
+                secondary={`${row.reviewDate} · ${row.recommendation}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-record-audit">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.qualityAudit.recordAuditTitle}
+        </Typography>
+        <List dense>
+          {data.recordAudits.map((row) => (
+            <ListItem key={row.recordType} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.recordType}
+                secondary={`n=${row.sampleSize} · ${row.compliancePercent}% · ${row.auditor}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-oirs">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.qualityAudit.oirsTitle}
+        </Typography>
+        <List dense>
+          {data.oirsClaims.map((row) => (
+            <ListItem key={row.claimId} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={`${row.claimId} — ${row.category}`}
+                secondary={`${row.daysOpen} días · ${row.status}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-work-climate">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.qualityAudit.workClimateTitle}
+        </Typography>
+        <List dense>
+          {data.workClimateSurveys.map((row) => (
+            <ListItem key={row.unit} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.unit}
+                secondary={`respuesta ${row.responseRatePercent}% · engagement ${row.engagementScore} · ${row.surveyPeriod}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-consent-trace">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.qualityAudit.consentTraceTitle}
+        </Typography>
+        <List dense>
+          {data.consentTraces.map((row) => (
+            <ListItem key={`${row.patientDisplayName}-${row.consentType}`} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={`${row.patientDisplayName} — ${row.consentType}`}
+                secondary={`${row.signedAt} · ${row.traceStatus}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-accreditation">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.qualityAudit.accreditationTitle}
+        </Typography>
+        <List dense data-testid="epis2-quality-accreditation-rows">
+          {data.accreditationIndicators.map((row) => (
+            <ListItem key={row.indicatorCode} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={`${row.indicatorCode} — ${row.indicatorName}`}
+                secondary={`meta ${row.targetPercent}% · observado ${row.observedPercent}%`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-institutional-docs">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.qualityAudit.institutionalDocsTitle}
+        </Typography>
+        <List dense>
+          {data.institutionalDocuments.map((row) => (
+            <ListItem key={row.documentCode} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={`${row.documentCode} — ${row.title}`}
+                secondary={`${row.version} · revisión ${row.reviewDue}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-surgical-suspension">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.qualityAudit.surgicalSuspensionTitle}
+        </Typography>
+        <List dense data-testid="epis2-quality-surgical-suspension-rows">
+          {data.surgicalSuspensions.map((row) => (
+            <ListItem key={row.caseCode} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={`${row.caseCode} — ${row.operatingRoom}`}
+                secondary={`${row.reason} · ${row.suspendedAt}`}
+              />
+            </ListItem>
+          ))}
+        </List>
       </Paper>
 
       <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-advanced-idc-panels">

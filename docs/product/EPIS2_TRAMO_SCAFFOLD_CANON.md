@@ -36,6 +36,7 @@
 | H | `e2e/tramo-h-iaas.spec.ts` | `test:e2e:tramo-h` |
 | I | `e2e/tramo-i-specialty.spec.ts` | `test:e2e:tramo-i` |
 | J | `e2e/tramo-j-pharmacy.spec.ts` | `test:e2e:tramo-j` |
+| K | `e2e/tramo-k-quality.spec.ts` | `test:e2e:tramo-k` |
 
 Tramo C adicional: `tramo-c-admission`, `tramo-c-mar`, `tramo-c-trends`.
 

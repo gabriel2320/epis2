@@ -19,8 +19,9 @@
 | **H** IAAS avanzada | ✅ Cerrado técnico (IAAS 141–150 demo) | 141–150 Active | `quality:tramo-h-closure-gate` |
 | **I** Especialidades gráficas | ✅ Cerrado técnico (181–190 demo) | 181–190 Active | `quality:tramo-i-closure-gate` |
 | **J** Farmacia clínica | ✅ Cerrado técnico (161–170 demo) | 161–170 Active (165 Done core) | `quality:tramo-j-closure-gate` |
+| **K** Calidad y auditoría | ✅ Cerrado técnico (171–180 demo) | 171–180 Active | `quality:tramo-k-closure-gate` |
 
-**Cadena A–J:** cerrada técnicamente. Signoff clínico institucional pendiente.
+**Cadena A–K:** cerrada técnicamente. Signoff clínico institucional pendiente.
 
 ---
 
@@ -38,14 +39,15 @@
 | H | `EPIS2_TRAMO_H_CLOSURE.md` | `EPIS2_TRAMO_H_PLAN.md` · IAAS avanzada |
 | I | `EPIS2_TRAMO_I_CLOSURE.md` | `EPIS2_TRAMO_I_PLAN.md` · especialidades gráficas |
 | J | `EPIS2_TRAMO_J_CLOSURE.md` | `EPIS2_TRAMO_J_PLAN.md` · farmacia clínica |
+| K | `EPIS2_TRAMO_K_CLOSURE.md` | `EPIS2_TRAMO_K_PLAN.md` · calidad/auditoría |
 
 ---
 
 ## Próximo paso global
 
-1. Signoff clínico institucional Tramos A–J — [`EPIS2_TRAMOS_CLINICAL_SIGNOFF_CHECKLIST.md`](./EPIS2_TRAMOS_CLINICAL_SIGNOFF_CHECKLIST.md)
+1. Signoff clínico institucional Tramos A–K — [`EPIS2_TRAMOS_CLINICAL_SIGNOFF_CHECKLIST.md`](./EPIS2_TRAMOS_CLINICAL_SIGNOFF_CHECKLIST.md)
 2. `quality:golden-journey` antes de piloto hospitalario
-3. **Tramo K** calidad/auditoría 171–180 — [`EPIS2_TRAMO_K_PLAN.md`](./EPIS2_TRAMO_K_PLAN.md) (inventario Semana 4)
+3. Piloto institucional post signoff
 
 ---
 
@@ -55,5 +57,6 @@
 |---------|---------|
 | `reports/epis2-tramo-i-closure-2026-06-07.md` | Cierre Tramo I especialidades |
 | `reports/epis2-tramo-j-closure-2026-06-07.md` | Cierre Tramo J farmacia clínica |
+| `reports/epis2-tramo-k-closure-2026-06-07.md` | Cierre Tramo K calidad/auditoría |
 
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*

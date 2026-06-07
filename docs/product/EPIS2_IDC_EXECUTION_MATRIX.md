@@ -13,8 +13,8 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 63 · Active: 99 · Blocked: 1 · Done: 37 |
-| **Prioridad** | Critical: 9 · High: 78 · Medium: 82 · Low: 31 |
+| **Estado** | Planned: 55 · Active: 107 · Blocked: 1 · Done: 37 |
+| **Prioridad** | Critical: 9 · High: 78 · Medium: 84 · Low: 29 |
 | **Horizonte** | Core: 40 · Post-core: 138 · Future: 22 |
 | **Decisión** | Build: 175 · Integrate: 5 · Defer: 18 · Exclude: 2 |
 
@@ -290,16 +290,16 @@
 
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
-| 171 | Eventos adversos / centinela | 17 | admin_system | Active | Medium | Post-core | Build | PARTIAL |  |
-| 172 | Análisis causa raíz (ACR) | 17 | admin_system | Planned | Medium | Post-core | Build | MISSING |  |
-| 173 | Comité mortalidad | 17 | admin_system | Planned | Medium | Post-core | Build | MISSING |  |
-| 174 | Auditoría registros médicos | 17 | admin_system | Planned | Medium | Post-core | Build | MISSING |  |
-| 175 | Reclamos OIRS | 17 | admin_system | Planned | Medium | Post-core | Build | MISSING |  |
-| 176 | Clima laboral clínico | 17 | admin_system | Planned | Medium | Post-core | Build | MISSING |  |
-| 177 | Trazabilidad consentimientos | 17 | admin_system | Planned | Medium | Post-core | Build | MISSING |  |
-| 178 | Indicadores acreditación | 17 | admin_system | Active | Medium | Post-core | Build | PARTIAL |  |
-| 179 | Documentos institucionales | 17 | admin_system | Planned | Low | Post-core | Build | MISSING |  |
-| 180 | Suspensión quirúrgica | 17 | admin_system | Planned | Low | Post-core | Build | MISSING |  |
+| 171 | Eventos adversos / centinela | 17 | admin_system | Active | Medium | Post-core | Build | PARTIAL | Centinela demo MF-TRAMO-K-002 |
+| 172 | Análisis causa raíz (ACR) | 17 | admin_system | Active | Medium | Post-core | Build | PARTIAL | ACR demo MF-TRAMO-K-003 |
+| 173 | Comité mortalidad | 17 | admin_system | Active | Medium | Post-core | Build | PARTIAL | Comité mortalidad demo MF-TRAMO-K-004 |
+| 174 | Auditoría registros médicos | 17 | admin_system | Active | Medium | Post-core | Build | PARTIAL | Auditoría registros demo MF-TRAMO-K-005 |
+| 175 | Reclamos OIRS | 17 | admin_system | Active | Medium | Post-core | Build | PARTIAL | OIRS demo MF-TRAMO-K-006 |
+| 176 | Clima laboral clínico | 17 | admin_system | Active | Medium | Post-core | Build | PARTIAL | Clima laboral demo MF-TRAMO-K-007 |
+| 177 | Trazabilidad consentimientos | 17 | admin_system | Active | Medium | Post-core | Build | PARTIAL | Consentimientos demo MF-TRAMO-K-008 |
+| 178 | Indicadores acreditación | 17 | admin_system | Active | Medium | Post-core | Build | PARTIAL | Acreditación demo MF-TRAMO-K-009 |
+| 179 | Documentos institucionales | 17 | admin_system | Active | Medium | Post-core | Build | PARTIAL | Docs institucionales demo MF-TRAMO-K-010 |
+| 180 | Suspensión quirúrgica | 17 | admin_system | Active | Medium | Post-core | Build | PARTIAL | Suspensión Qx demo MF-TRAMO-K-011 |
 
 ## Especialidades (181–190)
 

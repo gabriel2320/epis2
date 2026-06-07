@@ -275,6 +275,26 @@ export const copy = {
       homeVisitsToday: 'Visitas domiciliarias hoy',
     },
   },
+  qualityAudit: {
+    disclosure:
+      'Calidad y auditoría demo — eventos sintéticos. Home sigue siendo Centro de Comando.',
+    idcPanelsTitle: 'Calidad y auditoría (IDC 171–180)',
+    sentinelTitle: 'Eventos adversos / centinela (IDC 171)',
+    rcaTitle: 'Análisis causa raíz ACR (IDC 172)',
+    mortalityBoardTitle: 'Comité mortalidad (IDC 173)',
+    recordAuditTitle: 'Auditoría registros médicos (IDC 174)',
+    oirsTitle: 'Reclamos OIRS (IDC 175)',
+    workClimateTitle: 'Clima laboral clínico (IDC 176)',
+    consentTraceTitle: 'Trazabilidad consentimientos (IDC 177)',
+    accreditationTitle: 'Indicadores acreditación (IDC 178)',
+    institutionalDocsTitle: 'Documentos institucionales (IDC 179)',
+    surgicalSuspensionTitle: 'Suspensión quirúrgica (IDC 180)',
+    metrics: {
+      activeModules: 'Módulos calidad activos',
+      openSentinel: 'Eventos centinela abiertos',
+      pendingAccreditation: 'Indicadores bajo meta',
+    },
+  },
   iaas: {
     disclosure:
       'IAAS avanzada demo — vigilancia sintética. Home sigue siendo Centro de Comando.',
