@@ -96,5 +96,5 @@ Con `DATABASE_URL` definido, incluye el journey API en `tests/golden-clinical-jo
 |-------|--------|
 | Fecha | 2026-06-04 |
 | Revisor | Gates automatizados UX/CE + golden journey (confirmación visual humana opcional) |
-| Commit / rama | ver tag `UX-COMMAND-FIRST-2026-06` · `master` |
+| Commit / rama | `cf9b9cf` · tag `UX-COMMAND-FIRST-2026-06` · `master` |
 | Resultado | **GO DEMO UX/CE** |

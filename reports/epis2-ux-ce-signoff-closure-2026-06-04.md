@@ -1,6 +1,6 @@
 # EPIS2 — Cierre signoff arco UX + Command Engine
 
-**Fecha:** 2026-06-04 · **Tag:** `UX-COMMAND-FIRST-2026-06`  
+**Tag:** `UX-COMMAND-FIRST-2026-06` · **Commit:** `cf9b9cf`  
 **Alcance:** CE-0→CE-5 · wire híbrido Comando · Vista 1–3 · UX-A/B/C/D · E2E UX-G02
 
 ---
