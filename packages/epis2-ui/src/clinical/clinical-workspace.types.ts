@@ -1,7 +1,9 @@
 /** Espacio de trabajo clínico — Nivel 0 MD3 (conmutador del Navigation Rail). */
 export type EpisClinicalWorkspaceId =
   | 'command'
+  | 'reception'
   | 'ambulatory'
+  | 'emergency'
   | 'icu'
   | 'quality_iaas'
   | 'admin_system';

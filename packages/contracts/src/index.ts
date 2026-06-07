@@ -64,6 +64,10 @@ export {
   type DashboardWorkResponse,
   type ProbableDischargeRow,
   type ServiceDashboardResponse,
+  receptionDashboardResponseSchema,
+  emergencyDashboardResponseSchema,
+  type ReceptionDashboardResponse,
+  type EmergencyDashboardResponse,
 } from './dashboard.js';
 export {
   patientLongitudinalResponseSchema,

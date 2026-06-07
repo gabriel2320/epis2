@@ -1,14 +1,14 @@
 {
   "meta": {
-    "generatedAt": "2026-06-06",
+    "generatedAt": "2026-06-07",
     "version": "1.0",
     "canon": "EPIS2_WAVE_EXECUTION_CANON.md",
     "totals": {
       "estado": {
-        "Planned": 142,
-        "Active": 29,
+        "Planned": 129,
+        "Active": 35,
         "Blocked": 1,
-        "Done": 28
+        "Done": 35
       },
       "prioridad": {
         "Critical": 9,
@@ -17,14 +17,14 @@
         "Low": 51
       },
       "horizonte": {
-        "Core": 41,
-        "Post-core": 88,
+        "Core": 40,
+        "Post-core": 89,
         "Future": 71
       },
       "decision": {
-        "Build": 127,
+        "Build": 126,
         "Integrate": 5,
-        "Defer": 66,
+        "Defer": 67,
         "Exclude": 2
       }
     }
@@ -47,108 +47,108 @@
       "nombre": "Dashboard recepción",
       "ola": "4",
       "workspace": "reception",
-      "estado": "Planned",
+      "estado": "Done",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": "MF-TRAMO-B-001 — tablero recepción Tramo B; never home"
+      "legacyEstado": "PARTIAL",
+      "nota": "MF-TRAMO-B-002 ReceptionDashboardTab + E2E"
     },
     {
       "idc": 3,
       "nombre": "Agenda diaria profesional",
       "ola": "4",
       "workspace": "reception",
-      "estado": "Planned",
+      "estado": "Done",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": "MF-TRAMO-B-001 recepción — agenda profesional"
+      "legacyEstado": "PARTIAL",
+      "nota": "MF-TRAMO-B-002 agenda en tablero recepción"
     },
     {
       "idc": 4,
       "nombre": "Calendario mensual centro",
       "ola": "4",
       "workspace": "reception",
-      "estado": "Planned",
+      "estado": "Done",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "MF-TRAMO-B-002 calendario demo recepción"
     },
     {
       "idc": 5,
       "nombre": "Formulario admisión",
       "ola": "4",
       "workspace": "reception",
-      "estado": "Planned",
+      "estado": "Done",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": "MF-TRAMO-B-001 — admisión administrativa (≠ admission_note clínico)"
+      "legacyEstado": "PARTIAL",
+      "nota": "MF-TRAMO-B-002 admisión admin panel (≠ admission_note)"
     },
     {
       "idc": 6,
       "nombre": "Biometría / firma",
       "ola": "4",
       "workspace": "reception",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
       "legacyEstado": "MISSING",
-      "nota": ""
+      "nota": "MF-TRAMO-B-002 biometría Tramo B+"
     },
     {
       "idc": 7,
       "nombre": "Sala de espera virtual",
       "ola": "4",
       "workspace": "reception",
-      "estado": "Planned",
+      "estado": "Done",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "MF-TRAMO-B-002 sala espera virtual demo"
     },
     {
       "idc": 8,
       "nombre": "Gestión sobrecupos",
       "ola": "4",
       "workspace": "reception",
-      "estado": "Planned",
+      "estado": "Done",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "MF-TRAMO-B-002 sobrecupos métrica demo"
     },
     {
       "idc": 9,
       "nombre": "Registro acompañantes",
       "ola": "4",
       "workspace": "reception",
-      "estado": "Planned",
+      "estado": "Done",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "MF-TRAMO-B-002 acompañantes métrica demo"
     },
     {
       "idc": 10,
       "nombre": "Panel llamado (tótem)",
       "ola": "4",
       "workspace": "reception",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Integrate",
       "legacyEstado": "MISSING",
-      "nota": "Display externo IoT"
+      "nota": "MF-TRAMO-B-002 panel llamado demo; IoT Future"
     },
     {
       "idc": 11,
@@ -479,12 +479,12 @@
       "nombre": "Gestor macros / plantillas",
       "ola": "2",
       "workspace": "ambulatory",
-      "estado": "Active",
+      "estado": "Planned",
       "prioridad": "Medium",
-      "horizonte": "Core",
-      "decision": "Build",
+      "horizonte": "Post-core",
+      "decision": "Defer",
       "legacyEstado": "PARTIAL",
-      "nota": ""
+      "nota": "MF-TRAMO-A-CLOSURE — macros EPIS diferidas; consulta usa textarea libre"
     },
     {
       "idc": 39,
@@ -1235,60 +1235,60 @@
       "nombre": "Dashboard de Urgencias",
       "ola": "10",
       "workspace": "emergency",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Critical",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": "Workspace emergency Ola 10 — triaje planificado"
+      "legacyEstado": "PARTIAL",
+      "nota": "MF-TRAMO-C-002 EmergencyDashboardTab triaje demo"
     },
     {
       "idc": 102,
       "nombre": "Categorización ESI",
       "ola": "10",
       "workspace": "emergency",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Critical",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": "Workspace emergency Ola 10"
+      "legacyEstado": "PARTIAL",
+      "nota": "MF-TRAMO-C-002 workspace emergency"
     },
     {
       "idc": 103,
       "nombre": "Reanimación (Clave Azul)",
       "ola": "10",
       "workspace": "emergency",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "High",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": "Workspace emergency Tramo C"
+      "legacyEstado": "PARTIAL",
+      "nota": "MF-TRAMO-C-002 panel reanimación demo"
     },
     {
       "idc": 104,
       "nombre": "Trauma / FAST",
       "ola": "10",
       "workspace": "emergency",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "High",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": "Workspace emergency Tramo C"
+      "legacyEstado": "PARTIAL",
+      "nota": "MF-TRAMO-C-002 trauma FAST demo"
     },
     {
       "idc": 105,
       "nombre": "Hoja observación corta",
       "ola": "10",
       "workspace": "emergency",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "High",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": "Workspace emergency Tramo C"
+      "legacyEstado": "PARTIAL",
+      "nota": "MF-TRAMO-C-002 observación corta demo"
     },
     {
       "idc": 106,

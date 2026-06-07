@@ -15,18 +15,22 @@ import { useSearch } from '@tanstack/react-router';
 import { lazy, Suspense, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
   fetchDashboardWork,
+  fetchEmergencyDashboard,
   fetchNursingDashboard,
   fetchPatientDashboard,
   fetchPharmacyDashboard,
+  fetchReceptionDashboard,
   fetchServiceDashboard,
 } from '../api/dashboardApi.js';
 import { fetchQualityDashboard } from '../api/opsApi.js';
 import type {
   DashboardWorkResponse,
+  EmergencyDashboardResponse,
   NursingDashboardResponse,
   PatientDashboardResponse,
   PharmacyDashboardResponse,
   QualityDashboardResponse,
+  ReceptionDashboardResponse,
   ServiceDashboardResponse,
 } from '@epis2/contracts';
 import { useAuth } from '../auth/AuthContext.js';
@@ -42,6 +46,8 @@ import { QualityDashboardTab } from '../components/QualityDashboardTab.js';
 import { NursingDashboardTab } from '../components/NursingDashboardTab.js';
 import { PharmacyDashboardTab } from '../components/PharmacyDashboardTab.js';
 import { ServiceDashboardTab } from '../components/ServiceDashboardTab.js';
+import { ReceptionDashboardTab } from '../components/ReceptionDashboardTab.js';
+import { EmergencyDashboardTab } from '../components/EmergencyDashboardTab.js';
 
 const LazyDashboardWorklists = lazy(() =>
   import('../components/DashboardWorklists.js').then((m) => ({
@@ -60,10 +66,14 @@ export function DashboardModeContent() {
     role === 'nurse' || role === 'physician' || role === 'admin';
   const canPharmacy =
     role === 'pharmacist' || role === 'physician' || role === 'admin';
+  const canReception = role === 'admin' || role === 'nurse' || role === 'physician';
+  const canEmergency = role === 'admin' || role === 'nurse' || role === 'physician';
   const { patient: activePatient, setPatient } = useActivePatient();
   const tab = (
     search.tab === 'patient' ||
     search.tab === 'service' ||
+    (search.tab === 'reception' && canReception) ||
+    (search.tab === 'emergency' && canEmergency) ||
     (search.tab === 'nursing' && canNursing) ||
     (search.tab === 'pharmacy' && canPharmacy) ||
     (search.tab === 'quality' && canQuality)
@@ -78,6 +88,8 @@ export function DashboardModeContent() {
   const [nursingBoard, setNursingBoard] = useState<NursingDashboardResponse | null>(null);
   const [pharmacyBoard, setPharmacyBoard] = useState<PharmacyDashboardResponse | null>(null);
   const [qualityBoard, setQualityBoard] = useState<QualityDashboardResponse | null>(null);
+  const [receptionBoard, setReceptionBoard] = useState<ReceptionDashboardResponse | null>(null);
+  const [emergencyBoard, setEmergencyBoard] = useState<EmergencyDashboardResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | undefined>();
   const [recentPatients, setRecentPatients] = useState(readRecentPatients());
@@ -148,6 +160,32 @@ export function DashboardModeContent() {
     }
   }, []);
 
+  const loadReception = useCallback(async () => {
+    setLoading(true);
+    setError(undefined);
+    try {
+      const res = await fetchReceptionDashboard();
+      setReceptionBoard(res);
+    } catch {
+      setError(copy.errors.genericMessage);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const loadEmergency = useCallback(async () => {
+    setLoading(true);
+    setError(undefined);
+    try {
+      const res = await fetchEmergencyDashboard();
+      setEmergencyBoard(res);
+    } catch {
+      setError(copy.errors.genericMessage);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   const loadPatient = useCallback(async (patientId: string) => {
     setLoading(true);
     setError(undefined);
@@ -167,6 +205,8 @@ export function DashboardModeContent() {
     if (tab === 'nursing' && canNursing) void loadNursing();
     if (tab === 'pharmacy' && canPharmacy) void loadPharmacy();
     if (tab === 'quality' && canQuality) void loadQuality();
+    if (tab === 'reception' && canReception) void loadReception();
+    if (tab === 'emergency' && canEmergency) void loadEmergency();
     if (tab === 'patient' && dashboardPatientId) void loadPatient(dashboardPatientId);
     if (tab === 'patient' && !dashboardPatientId) {
       setLoading(false);
@@ -179,9 +219,13 @@ export function DashboardModeContent() {
     loadNursing,
     loadPharmacy,
     loadQuality,
+    loadReception,
+    loadEmergency,
     loadPatient,
     dashboardPatientId,
     canQuality,
+    canReception,
+    canEmergency,
     canNursing,
     canPharmacy,
   ]);
@@ -235,8 +279,22 @@ export function DashboardModeContent() {
         'data-testid': 'epis2-dashboard-tab-quality',
       });
     }
+    if (canReception) {
+      items.push({
+        value: 'reception',
+        label: copy.dashboard.tabReception,
+        'data-testid': 'epis2-dashboard-tab-reception',
+      });
+    }
+    if (canEmergency) {
+      items.push({
+        value: 'emergency',
+        label: copy.dashboard.tabEmergency,
+        'data-testid': 'epis2-dashboard-tab-emergency',
+      });
+    }
     return items;
-  }, [canQuality, canNursing, canPharmacy]);
+  }, [canQuality, canNursing, canPharmacy, canReception, canEmergency]);
 
   const openPatient = (pid: string) => {
     const p = recentPatients.find((r) => r.id === pid);
@@ -389,6 +447,31 @@ export function DashboardModeContent() {
         ) : (
           <Alert severity="info">{copy.dashboard.tabQualityRestricted}</Alert>
         )}
+      </>
+    );
+  } else if (tab === 'reception') {
+    panel = (
+      <>
+        {error ? <Alert severity="error">{error}</Alert> : null}
+        {loading ? (
+          <Typography color="text.secondary">{copy.dashboard.loading}</Typography>
+        ) : receptionBoard ? (
+          <ReceptionDashboardTab
+            data={receptionBoard}
+            onOpenPatientSearch={() => void navigate({ to: '/espacio/buscar-paciente' })}
+          />
+        ) : null}
+      </>
+    );
+  } else if (tab === 'emergency') {
+    panel = (
+      <>
+        {error ? <Alert severity="error">{error}</Alert> : null}
+        {loading ? (
+          <Typography color="text.secondary">{copy.dashboard.loading}</Typography>
+        ) : emergencyBoard ? (
+          <EmergencyDashboardTab data={emergencyBoard} />
+        ) : null}
       </>
     );
   } else {

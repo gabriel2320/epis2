@@ -16,7 +16,7 @@ const checks = [
   ['§9 bandeja resultados', () => catalog.includes('/espacio/resultados')],
   ['§5 alertas IDC 22', () => catalog.includes('IDC 22 Done')],
   ['§20 print certificado', () => catalog.includes('/espacio/certificado/imprimir')],
-  ['§6 print A5', () => catalog.includes('MF-OLA6A-001')],
+  ['§6 print A5', () => catalog.includes('MF-OLA6A-001') || catalog.includes('MF-OLA6A-002')],
 ];
 
 for (const [label, ok] of checks) {

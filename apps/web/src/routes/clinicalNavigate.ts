@@ -25,7 +25,15 @@ export type ClinicalFormRoutePath =
 
 export type ClinicalPatientSearch = { patientId?: string };
 
-export type DashboardTab = 'work' | 'patient' | 'service' | 'nursing' | 'pharmacy' | 'quality';
+export type DashboardTab =
+  | 'work'
+  | 'patient'
+  | 'service'
+  | 'nursing'
+  | 'pharmacy'
+  | 'quality'
+  | 'reception'
+  | 'emergency';
 
 export type DashboardSearch = { tab?: DashboardTab; patientId?: string };
 

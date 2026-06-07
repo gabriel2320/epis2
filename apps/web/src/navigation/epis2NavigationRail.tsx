@@ -35,7 +35,9 @@ function toNavigateOptions(target: WorkspaceRouteTarget): ClinicalNavigateOption
 
 const WORKSPACE_ICONS: Record<EpisClinicalWorkspaceId, ReactNode> = {
   command: <TerminalIcon />,
+  reception: <ForumIcon />,
   ambulatory: <LocalHospitalIcon />,
+  emergency: <HealthAndSafetyIcon />,
   icu: <MonitorHeartIcon />,
   quality_iaas: <HealthAndSafetyIcon />,
   admin_system: <AdminPanelSettingsIcon />,

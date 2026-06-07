@@ -15,6 +15,18 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
     railItems: [],
     primaryFabKey: 'workspaces.command.fab',
   },
+  reception: {
+    id: 'reception',
+    labelKey: 'workspaces.reception.label',
+    descriptionKey: 'workspaces.reception.description',
+    railItems: [
+      { id: 'reception-board', labelKey: 'workspaces.reception.rail.board', route: '/epis2/dashboard?tab=reception' },
+      { id: 'reception-agenda', labelKey: 'workspaces.reception.rail.agenda', route: '/epis2/dashboard?tab=reception' },
+      { id: 'reception-call', labelKey: 'workspaces.reception.rail.callPanel', route: '/epis2/dashboard?tab=reception' },
+    ],
+    primaryFabKey: 'workspaces.reception.fab',
+    allowedRoles: ['admin', 'nurse', 'physician'],
+  },
   ambulatory: {
     id: 'ambulatory',
     labelKey: 'workspaces.ambulatory.label',
@@ -27,6 +39,17 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
     ],
     patientTabIds: ['summary', 'encounter', 'orders', 'results', 'certificates'],
     primaryFabKey: 'workspaces.ambulatory.fab',
+    allowedRoles: ['physician', 'nurse', 'admin'],
+  },
+  emergency: {
+    id: 'emergency',
+    labelKey: 'workspaces.emergency.label',
+    descriptionKey: 'workspaces.emergency.description',
+    railItems: [
+      { id: 'emergency-triage', labelKey: 'workspaces.emergency.rail.triage', route: '/epis2/dashboard?tab=emergency' },
+      { id: 'emergency-observation', labelKey: 'workspaces.emergency.rail.observation', route: '/epis2/dashboard?tab=emergency' },
+    ],
+    primaryFabKey: 'workspaces.emergency.fab',
     allowedRoles: ['physician', 'nurse', 'admin'],
   },
   icu: {
@@ -74,7 +97,9 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
 
 export const CLINICAL_WORKSPACE_ORDER: readonly EpisClinicalWorkspaceId[] = [
   'command',
+  'reception',
   'ambulatory',
+  'emergency',
   'icu',
   'quality_iaas',
   'admin_system',
@@ -110,6 +135,8 @@ export function parseClinicalRoute(route: string): WorkspaceRouteTarget {
 
 export function getWorkspaceDefaultRoute(id: EpisClinicalWorkspaceId): WorkspaceRouteTarget {
   if (id === 'command') return { to: '/comando' };
+  if (id === 'reception') return { to: '/epis2/dashboard', search: { tab: 'reception' } };
+  if (id === 'emergency') return { to: '/epis2/dashboard', search: { tab: 'emergency' } };
   const def = CLINICAL_WORKSPACE_DEFINITIONS[id];
   const firstEnabled = def.railItems.find((item) => !item.disabled) ?? def.railItems[0];
   if (!firstEnabled) return { to: '/comando' };

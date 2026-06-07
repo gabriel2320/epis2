@@ -101,6 +101,30 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     idcRefs: [71, 72],
     ola: '7',
   },
+  {
+    id: 'dashboard-reception',
+    labelEs: 'Recepción',
+    route: '/epis2/dashboard?tab=reception',
+    kind: 'dashboard_tab',
+    workspace: 'reception',
+    md3Level: 0,
+    status: 'complete',
+    idcRefs: [2, 3, 4, 5, 7, 8, 9, 10],
+    ola: '4',
+    notes: 'MF-TRAMO-B-002 — never home',
+  },
+  {
+    id: 'dashboard-emergency',
+    labelEs: 'Urgencias',
+    route: '/epis2/dashboard?tab=emergency',
+    kind: 'dashboard_tab',
+    workspace: 'emergency',
+    md3Level: 0,
+    status: 'partial',
+    idcRefs: [101, 102, 103, 105],
+    ola: '10',
+    notes: 'MF-TRAMO-C-002 workspace emergency',
+  },
 ];
 
 const BLUEPRINT_IDC_MAP: Record<string, { idc: readonly number[]; status: EpisNavigationSurfaceStatus; workspace: EpisClinicalWorkspaceId; tab?: PatientChartTabId; ola?: string; notes?: string }> = {

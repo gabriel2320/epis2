@@ -1,6 +1,6 @@
 # EPIS2 — Matriz de ejecución IDC 1–200
 
-**Versión:** 1.0 · **Generado:** 2026-06-06  
+**Versión:** 1.0 · **Generado:** 2026-06-07  
 **Canon:** [`EPIS2_WAVE_EXECUTION_CANON.md`](./EPIS2_WAVE_EXECUTION_CANON.md)  
 **Fuente machine-readable:** [`epis2-idc-execution-matrix.json`](./epis2-idc-execution-matrix.json)
 
@@ -13,10 +13,10 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 142 · Active: 29 · Blocked: 1 · Done: 28 |
+| **Estado** | Planned: 129 · Active: 35 · Blocked: 1 · Done: 35 |
 | **Prioridad** | Critical: 9 · High: 45 · Medium: 95 · Low: 51 |
-| **Horizonte** | Core: 41 · Post-core: 88 · Future: 71 |
-| **Decisión** | Build: 127 · Integrate: 5 · Defer: 66 · Exclude: 2 |
+| **Horizonte** | Core: 40 · Post-core: 89 · Future: 71 |
+| **Decisión** | Build: 126 · Integrate: 5 · Defer: 67 · Exclude: 2 |
 
 ### Leyenda
 
@@ -36,15 +36,15 @@
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
 | 1 | Login de sistema | 0-1A | command | Done | Critical | Core | Build | COMPLETE | /login |
-| 2 | Dashboard recepción | 4 | reception | Planned | Medium | Post-core | Build | MISSING | MF-TRAMO-B-001 — tablero recepción Tramo B; never home |
-| 3 | Agenda diaria profesional | 4 | reception | Planned | Medium | Post-core | Build | MISSING | MF-TRAMO-B-001 recepción — agenda profesional |
-| 4 | Calendario mensual centro | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
-| 5 | Formulario admisión | 4 | reception | Planned | Medium | Post-core | Build | MISSING | MF-TRAMO-B-001 — admisión administrativa (≠ admission_note clínico) |
-| 6 | Biometría / firma | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
-| 7 | Sala de espera virtual | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
-| 8 | Gestión sobrecupos | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
-| 9 | Registro acompañantes | 4 | reception | Planned | Medium | Post-core | Build | MISSING |  |
-| 10 | Panel llamado (tótem) | 4 | reception | Planned | Medium | Post-core | Integrate | MISSING | Display externo IoT |
+| 2 | Dashboard recepción | 4 | reception | Done | Medium | Post-core | Build | PARTIAL | MF-TRAMO-B-002 ReceptionDashboardTab + E2E |
+| 3 | Agenda diaria profesional | 4 | reception | Done | Medium | Post-core | Build | PARTIAL | MF-TRAMO-B-002 agenda en tablero recepción |
+| 4 | Calendario mensual centro | 4 | reception | Done | Medium | Post-core | Build | PARTIAL | MF-TRAMO-B-002 calendario demo recepción |
+| 5 | Formulario admisión | 4 | reception | Done | Medium | Post-core | Build | PARTIAL | MF-TRAMO-B-002 admisión admin panel (≠ admission_note) |
+| 6 | Biometría / firma | 4 | reception | Active | Medium | Post-core | Build | MISSING | MF-TRAMO-B-002 biometría Tramo B+ |
+| 7 | Sala de espera virtual | 4 | reception | Done | Medium | Post-core | Build | PARTIAL | MF-TRAMO-B-002 sala espera virtual demo |
+| 8 | Gestión sobrecupos | 4 | reception | Done | Medium | Post-core | Build | PARTIAL | MF-TRAMO-B-002 sobrecupos métrica demo |
+| 9 | Registro acompañantes | 4 | reception | Done | Medium | Post-core | Build | PARTIAL | MF-TRAMO-B-002 acompañantes métrica demo |
+| 10 | Panel llamado (tótem) | 4 | reception | Active | Medium | Post-core | Integrate | MISSING | MF-TRAMO-B-002 panel llamado demo; IoT Future |
 
 ## Facturación y caja (11–20)
 
@@ -87,7 +87,7 @@
 | 35 | Buscador diagnósticos CIE-10 | 2 | ambulatory | Done | High | Core | Build | PARTIAL | icd10Code diagnosis section MF-OLA2-003 |
 | 36 | Indicaciones generales | 2 | ambulatory | Done | High | Core | Build | COMPLETE | plan + indicaciones generales |
 | 37 | Evolución SOAP | 2 | ambulatory | Done | Critical | Core | Build | COMPLETE | evolution_note |
-| 38 | Gestor macros / plantillas | 2 | ambulatory | Active | Medium | Core | Build | PARTIAL |  |
+| 38 | Gestor macros / plantillas | 2 | ambulatory | Planned | Medium | Post-core | Defer | PARTIAL | MF-TRAMO-A-CLOSURE — macros EPIS diferidas; consulta usa textarea libre |
 | 39 | Cierre de episodio | 2 | ambulatory | Done | Critical | Core | Build | COMPLETE | closeEncounter + FAB cierre Ola 2 |
 | 40 | Resumen para paciente | 2 | ambulatory | Done | High | Core | Build | PARTIAL | PrintA5 + E2E MF-OLA6A-002 — vista documental (no firma auto) |
 
@@ -185,11 +185,11 @@
 
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
-| 101 | Dashboard de Urgencias | 10 | emergency | Planned | Critical | Post-core | Build | MISSING | Workspace emergency Ola 10 — triaje planificado |
-| 102 | Categorización ESI | 10 | emergency | Planned | Critical | Post-core | Build | MISSING | Workspace emergency Ola 10 |
-| 103 | Reanimación (Clave Azul) | 10 | emergency | Planned | High | Post-core | Build | MISSING | Workspace emergency Tramo C |
-| 104 | Trauma / FAST | 10 | emergency | Planned | High | Post-core | Build | MISSING | Workspace emergency Tramo C |
-| 105 | Hoja observación corta | 10 | emergency | Planned | High | Post-core | Build | MISSING | Workspace emergency Tramo C |
+| 101 | Dashboard de Urgencias | 10 | emergency | Active | Critical | Post-core | Build | PARTIAL | MF-TRAMO-C-002 EmergencyDashboardTab triaje demo |
+| 102 | Categorización ESI | 10 | emergency | Active | Critical | Post-core | Build | PARTIAL | MF-TRAMO-C-002 workspace emergency |
+| 103 | Reanimación (Clave Azul) | 10 | emergency | Active | High | Post-core | Build | PARTIAL | MF-TRAMO-C-002 panel reanimación demo |
+| 104 | Trauma / FAST | 10 | emergency | Active | High | Post-core | Build | PARTIAL | MF-TRAMO-C-002 trauma FAST demo |
+| 105 | Hoja observación corta | 10 | emergency | Active | High | Post-core | Build | PARTIAL | MF-TRAMO-C-002 observación corta demo |
 | 106 | Traslado SAMU | 10 | emergency | Active | Medium | Post-core | Build | PARTIAL | transfer_note |
 | 107 | Protocolo ACV (Stroke) | 10 | emergency | Planned | High | Post-core | Build | MISSING |  |
 | 108 | Protocolo IAM | 10 | emergency | Planned | High | Post-core | Build | MISSING |  |

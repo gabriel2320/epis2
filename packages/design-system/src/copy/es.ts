@@ -76,6 +76,8 @@ export const copy = {
     tabServiceActive: 'Tablero del servicio (demo)',
     tabQuality: 'Calidad',
     tabQualityRestricted: 'Tablero de calidad — requiere rol auditor o administrador.',
+    tabReception: 'Recepción',
+    tabEmergency: 'Urgencias',
     gridColumnTitle: 'Título',
     gridColumnPatient: 'Paciente',
     gridColumnType: 'Tipo',
@@ -140,6 +142,32 @@ export const copy = {
     gridColumnRecords: 'Registros',
     gridColumnStagedAt: 'Ingreso staging',
     gridColumnAt: 'Fecha y hora',
+  },
+  reception: {
+    disclosure: 'Recepción demo — datos sintéticos. Home sigue siendo Centro de Comando.',
+    idcPanelsTitle: 'Capacidades recepción (IDC 2–10)',
+    callPanelTitle: 'Panel de llamado (IDC 10)',
+    agendaTitle: 'Agenda del día (IDC 3–4)',
+    waitingTitle: 'Sala de espera (IDC 7)',
+    noCallYet: 'Sin llamados activos.',
+    searchPatientCta: 'Buscar paciente para admisión',
+    metrics: {
+      checkedIn: 'Ingresados hoy',
+      waiting: 'En espera',
+      companions: 'Acompañantes',
+      overbooking: 'Alertas sobrecupo',
+    },
+  },
+  emergency: {
+    disclosure: 'Urgencias demo — workspace propio. No sustituye consulta ambulatoria.',
+    idcPanelsTitle: 'Capacidades urgencias (IDC 101–110)',
+    triageTitle: 'Cola de triaje (IDC 101–102)',
+    metrics: {
+      waiting: 'En espera',
+      observation: 'En observación',
+      discharged: 'Altas hoy',
+      observationBeds: 'Camas observación',
+    },
   },
   inpatient: {
     census: 'Censo de camas',
@@ -476,6 +504,16 @@ export const copy = {
       description: 'Centro de Comando — instrucción clínica y acceso rápido.',
       fab: 'Continuar comando',
     },
+    reception: {
+      label: 'Recepción',
+      description: 'Agenda, sala de espera y admisión administrativa — nunca home.',
+      fab: 'Registrar llegada',
+      rail: {
+        board: 'Tablero recepción',
+        agenda: 'Agenda del día',
+        callPanel: 'Panel de llamado',
+      },
+    },
     ambulatory: {
       label: 'Ambulatorio',
       description: 'Consulta general, agenda y episodios discretos.',
@@ -492,6 +530,15 @@ export const copy = {
         orders: 'Recetas',
         results: 'Exámenes',
         certificates: 'Certificados',
+      },
+    },
+    emergency: {
+      label: 'Urgencias',
+      description: 'Triaje, observación corta y reanimación — workspace propio (≠ ambulatorio).',
+      fab: 'Registrar triaje',
+      rail: {
+        triage: 'Cola de triaje',
+        observation: 'Observación corta',
       },
     },
     icu: {

@@ -136,3 +136,76 @@ export type CensusBedRow = z.infer<typeof censusBedRowSchema>;
 export type CriticalResultRow = z.infer<typeof criticalResultRowSchema>;
 export type ProbableDischargeRow = z.infer<typeof probableDischargeRowSchema>;
 export type ServiceDashboardResponse = z.infer<typeof serviceDashboardResponseSchema>;
+
+/** MF-TRAMO-B-002 — Tablero recepción (IDC 2–10). */
+export const receptionAppointmentRowSchema = z.object({
+  id: z.string(),
+  patientDisplayName: z.string(),
+  professionalName: z.string(),
+  scheduledAt: z.string(),
+  status: z.enum(['scheduled', 'checked_in', 'in_consultation', 'completed', 'no_show']),
+  demoCaseCode: z.string().optional(),
+});
+
+export const receptionIdcPanelSchema = z.object({
+  idc: z.number().int(),
+  label: z.string(),
+  status: z.enum(['active', 'planned']),
+});
+
+export const receptionDashboardResponseSchema = z.object({
+  readOnly: z.literal(true),
+  roleView: z.enum(['physician', 'nurse', 'admin']),
+  idcPanels: z.array(receptionIdcPanelSchema),
+  todayAppointments: z.array(receptionAppointmentRowSchema),
+  waitingQueue: z.array(
+    z.object({
+      ticket: z.string(),
+      patientDisplayName: z.string(),
+      waitMinutes: z.number().int(),
+    }),
+  ),
+  callPanel: z.object({
+    lastCalled: z.string().optional(),
+    ticketNumber: z.string().optional(),
+  }),
+  metrics: z.object({
+    checkedIn: z.number().int(),
+    waiting: z.number().int(),
+    companions: z.number().int(),
+    overbookingAlerts: z.number().int(),
+  }),
+});
+
+export type ReceptionDashboardResponse = z.infer<typeof receptionDashboardResponseSchema>;
+
+/** MF-TRAMO-C-002 — Tablero urgencias (IDC 101–110). */
+export const emergencyTriageRowSchema = z.object({
+  id: z.string(),
+  patientDisplayName: z.string(),
+  chiefComplaint: z.string(),
+  triageLevel: z.enum(['1', '2', '3', '4', '5']),
+  arrivedAt: z.string(),
+  status: z.enum(['waiting', 'observation', 'discharged', 'admitted']),
+});
+
+export const emergencyIdcPanelSchema = z.object({
+  idc: z.number().int(),
+  label: z.string(),
+  status: z.enum(['active', 'planned']),
+});
+
+export const emergencyDashboardResponseSchema = z.object({
+  readOnly: z.literal(true),
+  roleView: z.enum(['physician', 'nurse', 'admin']),
+  idcPanels: z.array(emergencyIdcPanelSchema),
+  triageQueue: z.array(emergencyTriageRowSchema),
+  observationBeds: z.number().int(),
+  metrics: z.object({
+    waiting: z.number().int(),
+    inObservation: z.number().int(),
+    dischargedToday: z.number().int(),
+  }),
+});
+
+export type EmergencyDashboardResponse = z.infer<typeof emergencyDashboardResponseSchema>;

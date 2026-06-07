@@ -1,8 +1,10 @@
 import type {
   DashboardWorkResponse,
+  EmergencyDashboardResponse,
   NursingDashboardResponse,
   PatientDashboardResponse,
   PharmacyDashboardResponse,
+  ReceptionDashboardResponse,
   ServiceDashboardResponse,
 } from '@epis2/contracts';
 import { apiFetch } from './client.js';
@@ -26,6 +28,14 @@ export function fetchNursingDashboard() {
 
 export function fetchPharmacyDashboard() {
   return apiFetch<PharmacyDashboardResponse>('/api/dashboard/pharmacy');
+}
+
+export function fetchReceptionDashboard() {
+  return apiFetch<ReceptionDashboardResponse>('/api/dashboard/reception');
+}
+
+export function fetchEmergencyDashboard() {
+  return apiFetch<EmergencyDashboardResponse>('/api/dashboard/emergency');
 }
 
 export function acknowledgeCriticalResult(criticalId: string) {
