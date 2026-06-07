@@ -29,6 +29,9 @@ export {
   aiSummarySuggestRequestSchema,
   aiSummarySuggestResponseSchema,
   localAiDraftAssistOutputSchema,
+  aiAssistCommandRouteRequestSchema,
+  aiAssistCommandRouteResponseSchema,
+  localAiCommandRouteOutputSchema,
   type AiAssistDraftRequest,
   type AiAssistDraftResponse,
   type AiRunsListResponse,
@@ -39,6 +42,9 @@ export {
   type AiRunRow,
   type AiStatusResponse,
   type LocalAiDraftAssistOutput,
+  type AiAssistCommandRouteRequest,
+  type AiAssistCommandRouteResponse,
+  type LocalAiCommandRouteOutput,
 } from './ai.js';
 export {
   clinicalAlertSchema,

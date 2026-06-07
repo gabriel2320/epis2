@@ -8,11 +8,17 @@ import {
 
   blueprintUsesScrollspyLayout,
 
+  buildCommandSlotPrefill,
+
+  buildContextClinicalPrefill,
+
   defaultClinicalContextInsertField,
 
   defaultSummaryValues,
 
   initialFormValues,
+
+  mergePrefillOnlyEmpty,
 
   scrollspySectionLabels,
 
@@ -40,11 +46,11 @@ import {
 
   Box,
 
-  EpisClinicalActionDock,
-
   EpisClinicalFocusAppBar,
 
   EpisClinicalForm,
+
+  EpisClinicalFormActionBar,
 
   EpisClinicalFormFooter,
 
@@ -66,7 +72,9 @@ import { Link, useSearch } from '@tanstack/react-router';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { commandSlotsFromFormSearch, hasCommandSlotSearchParams, stripCommandSlotsFromFormSearch } from '../clinical/commandFormSearch.js';
 import { ApiError } from '../api/client.js';
+import type { ClinicalFormSearch } from '../routes/clinicalNavigate.js';
 
 import { requestDraftAssist } from '../api/aiApi.js';
 
@@ -123,7 +131,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
   const navigate = useClinicalNavigate();
 
-  const search = useSearch({ strict: false }) as { patientId?: string };
+  const search = useSearch({ strict: false }) as ClinicalFormSearch;
 
   const urlPatientId = search.patientId;
 
@@ -132,20 +140,32 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
 
   const seed = useMemo(() => {
-
+    const slotPrefill = buildCommandSlotPrefill(
+      blueprint.blueprintId,
+      commandSlotsFromFormSearch(search),
+    );
     if (blueprint.blueprintId === 'patient_summary') {
-
-      return defaultSummaryValues();
-
+      return { ...defaultSummaryValues(), ...slotPrefill };
     }
-
-    return undefined;
-
-  }, [blueprint.blueprintId]);
+    if (Object.keys(slotPrefill).length === 0) return undefined;
+    return slotPrefill;
+  }, [
+    blueprint.blueprintId,
+    search.patientHint,
+    search.medicationHint,
+    search.studyHint,
+    search.specialtyHint,
+    search.bodySiteHint,
+    search.urgencyHint,
+    search.clinicalReasonHint,
+    search.noteHint,
+  ]);
 
 
 
   const [values, setValues] = useState(() => initialFormValues(blueprint, seed));
+
+  const [showCommandPrefillBadge] = useState(() => hasCommandSlotSearchParams(search));
 
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
@@ -314,14 +334,28 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     setAssistContext(pickAssistContextFromSummary(res.clinicalContext.summaryFields));
 
     if (blueprint.blueprintId === 'patient_summary') {
-
       setValues((prev) => ({ ...prev, ...res.clinicalContext.summaryFields }));
+      return;
+    }
 
+    const contextPrefill = buildContextClinicalPrefill(
+      blueprint.blueprintId,
+      res.clinicalContext.summaryFields,
+    );
+    if (Object.keys(contextPrefill).length > 0) {
+      setValues((prev) => mergePrefillOnlyEmpty(prev, contextPrefill));
     }
 
   }, [patientDetailQuery.data, blueprint.blueprintId, pinPatient]);
 
-
+  useEffect(() => {
+    if (!hasCommandSlotSearchParams(search)) return;
+    navigate({
+      to: blueprint.routePath as ClinicalFormRoutePath,
+      search: stripCommandSlotsFromFormSearch(search),
+      replace: true,
+    });
+  }, [blueprint.routePath, navigate, search]);
 
   const selectPatient = (id: string) => {
 
@@ -433,7 +467,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
 
 
-  const saveDraft = () => {
+  const saveDraft = (intent: 'save' | 'sign' = 'save') => {
 
     setStatusMessage(undefined);
 
@@ -489,13 +523,21 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
         onSuccess: (created) => {
 
-          navigate({
+          if (intent === 'sign') {
 
-            to: '/espacio/borrador/$draftId',
+            void navigate({
 
-            params: { draftId: created.draft.id },
+              to: '/espacio/borrador/$draftId',
 
-          });
+              params: { draftId: created.draft.id },
+
+            });
+
+            return;
+
+          }
+
+          setStatusMessage(copy.forms.draftSaved);
 
         },
 
@@ -514,6 +556,64 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     );
 
   };
+
+
+
+  const canPersistDraft = Boolean(
+
+    BLUEPRINT_DRAFT_TYPES[blueprint.blueprintId] && effectivePatientId,
+
+  );
+
+  const showDraftActions =
+
+    blueprint.outputKind !== 'READ_ONLY_SUMMARY' && blueprint.outputKind !== 'SEARCH';
+
+  const formActionOverflow = canUseAiAssist
+
+    ? [
+
+        {
+
+          id: 'ai-suggest',
+
+          label: isSuggesting ? copy.forms.suggestingAi : copy.forms.suggestAi,
+
+          onClick: () => void suggestWithAi(),
+
+          disabled: isSuggesting,
+
+          testId: 'epis2-ai-suggest',
+
+        },
+
+      ]
+
+    : [];
+
+  const formActionBar = showDraftActions ? (
+
+    <EpisClinicalFormActionBar
+
+      saveLabel={copy.forms.save}
+
+      onSave={() => saveDraft('save')}
+
+      saveDisabled={createDraftMutation.isPending}
+
+      signLabel={canPersistDraft ? copy.forms.sign : undefined}
+
+      onSign={canPersistDraft ? () => saveDraft('sign') : undefined}
+
+      signDisabled={createDraftMutation.isPending}
+
+      overflow={formActionOverflow}
+
+      overflowAriaLabel={copy.forms.moreActions}
+
+    />
+
+  ) : null;
 
 
 
@@ -568,6 +668,16 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     <>
 
       <EpisDemoBadgeChip label={copy.demoBadge} />
+
+      {showCommandPrefillBadge ? (
+        <EpisChip
+          label={copy.forms.commandPrefillBadge}
+          size="small"
+          color="info"
+          variant="outlined"
+          data-testid="epis2-command-prefill-badge"
+        />
+      ) : null}
 
       {activePatient ? (
 
@@ -726,26 +836,6 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
                 />
               </EpisClinicalScrollspyLayout>
 
-              {canUseAiAssist ? (
-
-                <EpisButton
-
-                  variant="outlined"
-
-                  disabled={isSuggesting}
-
-                  onClick={() => void suggestWithAi()}
-
-                  data-testid="epis2-ai-suggest"
-
-                >
-
-                  {isSuggesting ? copy.forms.suggestingAi : copy.forms.suggestAi}
-
-                </EpisButton>
-
-              ) : null}
-
               {effectivePatientId && blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES ? (
 
                 <ClinicalAlertsPanel
@@ -804,19 +894,11 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
           footer={
             <EpisClinicalFormFooter
+              actions={formActionBar}
               trailing={<ClinicalPageNav patientId={effectivePatientId} />}
             />
           }
 
-        />
-
-        <EpisClinicalActionDock
-          primaryLabel={
-            blueprintUsesScrollspyLayout(blueprint.blueprintId)
-              ? copy.workspaces.ambulatory.fab
-              : copy.patientChart.dockSave
-          }
-          onPrimary={() => void saveDraft()}
         />
 
       </Box>
@@ -897,25 +979,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
           blueprint.outputKind !== 'SEARCH' ? (
 
-            <EpisClinicalFormFooter
-              actions={
-                <>
-                  {canUseAiAssist ? (
-                    <EpisButton
-                      appearance="outlined"
-                      disabled={isSuggesting}
-                      onClick={() => void suggestWithAi()}
-                      data-testid="epis2-ai-suggest"
-                    >
-                      {isSuggesting ? copy.forms.suggestingAi : copy.forms.suggestAi}
-                    </EpisButton>
-                  ) : null}
-                  <EpisButton appearance="filled" onClick={() => void saveDraft()}>
-                    {copy.forms.saveDraft}
-                  </EpisButton>
-                </>
-              }
-            />
+            <EpisClinicalFormFooter actions={formActionBar} />
 
           ) : null}
 

@@ -72,6 +72,29 @@ describe('POST /api/commands/resolve', () => {
     await app.close();
   });
 
+  it('registrar mar pide confirmación sin flag confirmed', async () => {
+    const app = await buildApp(config);
+    const login = await app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      payload: { username: 'medico.demo', demoAuthKey: 'DEMO-CLAVE-MEDICO' },
+    });
+    const cookie = String(login.headers['set-cookie']).split(';')[0];
+
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/commands/resolve',
+      headers: { cookie },
+      payload: {
+        text: 'registrar mar',
+        patientId: '00000000-0000-4000-8000-000000000001',
+      },
+    });
+    expect(res.statusCode).toBe(200);
+    expect((res.json() as { status: string }).status).toBe('needs_confirmation');
+    await app.close();
+  });
+
   it('resume sin paciente devuelve needs_patient', async () => {
     const app = await buildApp(config);
     const login = await app.inject({

@@ -1,6 +1,7 @@
 import type { IcuDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import {
+  EpisWorkspaceSection,
   Alert,
   Button,
   Chip,
@@ -8,7 +9,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  Paper,
   Stack,
   Typography,
 } from '@epis2/epis2-ui';
@@ -44,10 +44,7 @@ export function IcuDashboardTab({
           data-testid="epis2-icu-net-fluid-balance"
         />
       </Stack>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-idc-panels">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.idcPanelsTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.icu.idcPanelsTitle} testId="epis2-icu-idc-panels">
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
           {data.idcPanels.map((panel) => (
             <Chip
@@ -60,11 +57,8 @@ export function IcuDashboardTab({
             />
           ))}
         </Stack>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-specialized-idc-panels">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.specializedPanelsTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.specializedPanelsTitle} testId="epis2-icu-specialized-idc-panels">
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
           {data.specializedPanels.map((panel) => (
             <Chip
@@ -77,11 +71,8 @@ export function IcuDashboardTab({
             />
           ))}
         </Stack>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-bed-map">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.bedMapTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.bedMapTitle} testId="epis2-icu-bed-map">
         <List dense>
           {data.criticalBeds.map((bed) => (
             <ListItem key={bed.bedId} disablePadding sx={{ py: 0.5, flexWrap: 'wrap', gap: 0.5 }}>
@@ -105,11 +96,8 @@ export function IcuDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-flowsheet">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.flowsheetTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.flowsheetTitle} testId="epis2-icu-flowsheet">
         <List dense data-testid="epis2-icu-flowsheet-hours">
           {data.flowsheetHours.map((row) => (
             <ListItem key={row.hourLabel} disablePadding sx={{ py: 0.25 }}>
@@ -119,11 +107,8 @@ export function IcuDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-hemodynamics">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.hemodynamicsTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.hemodynamicsTitle} testId="epis2-icu-hemodynamics">
         <List dense>
           {data.hemodynamics.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -134,11 +119,8 @@ export function IcuDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-fluid-balance">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.fluidBalanceTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.fluidBalanceTitle} testId="epis2-icu-fluid-balance">
         <List dense data-testid="epis2-icu-fluid-balance-rows">
           {data.fluidBalance.map((row) => (
             <ListItem key={row.shiftLabel} disablePadding sx={{ py: 0.25 }}>
@@ -149,11 +131,8 @@ export function IcuDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-ventilation">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.ventilationTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.ventilationTitle} testId="epis2-icu-ventilation">
         {data.ventilation.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.longitudinal.emptySection}
@@ -170,11 +149,8 @@ export function IcuDashboardTab({
             ))}
           </List>
         )}
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-invasive-lines">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.invasiveLinesTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.invasiveLinesTitle} testId="epis2-icu-invasive-lines">
         <List dense data-testid="epis2-icu-invasive-lines-rows">
           {data.invasiveLines.map((row, index) => (
             <ListItem
@@ -199,11 +175,8 @@ export function IcuDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-neurological">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.neurologicalTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.neurologicalTitle} testId="epis2-icu-neurological">
         <List dense data-testid="epis2-icu-neurological-rows">
           {data.neurological.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -214,11 +187,8 @@ export function IcuDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-severity-scales">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.severityScalesTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.severityScalesTitle} testId="epis2-icu-severity-scales">
         <List dense data-testid="epis2-icu-severity-scales-rows">
           {data.severityScales.map((row, index) => (
             <ListItem
@@ -233,11 +203,8 @@ export function IcuDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-vasoactive">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.vasoactiveTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.vasoactiveTitle} testId="epis2-icu-vasoactive">
         <List dense data-testid="epis2-icu-vasoactive-rows">
           {data.vasoactive.map((row) => (
             <ListItem key={`${row.patientDisplayName}-${row.agent}`} disablePadding sx={{ py: 0.25 }}>
@@ -248,11 +215,8 @@ export function IcuDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-sedoanalgesia">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.sedoanalgesiaTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.sedoanalgesiaTitle} testId="epis2-icu-sedoanalgesia">
         {data.sedoanalgesia.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.longitudinal.emptySection}
@@ -269,11 +233,8 @@ export function IcuDashboardTab({
             ))}
           </List>
         )}
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-spontaneous-vent">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.spontaneousVentTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.spontaneousVentTitle} testId="epis2-icu-spontaneous-vent">
         <List dense data-testid="epis2-icu-spontaneous-vent-rows">
           {data.spontaneousVentTrials.length === 0 ? (
             <ListItem disablePadding>
@@ -290,11 +251,8 @@ export function IcuDashboardTab({
             ))
           )}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-renal-therapy">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.renalTherapyTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.renalTherapyTitle} testId="epis2-icu-renal-therapy">
         <List dense>
           {data.renalTherapies.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -305,11 +263,8 @@ export function IcuDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-parenteral-nutrition">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.parenteralNutritionTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.parenteralNutritionTitle} testId="epis2-icu-parenteral-nutrition">
         <List dense>
           {data.parenteralNutrition.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -320,11 +275,8 @@ export function IcuDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-enteral-nutrition">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.enteralNutritionTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.enteralNutritionTitle} testId="epis2-icu-enteral-nutrition">
         <List dense>
           {data.enteralNutrition.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -335,29 +287,20 @@ export function IcuDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-brain-death">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.brainDeathTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.brainDeathTitle} testId="epis2-icu-brain-death">
         <Typography variant="body2" color="text.secondary">
           {data.brainDeathChecklists.length === 0
             ? copy.icu.noSpecializedCases
             : data.brainDeathChecklists.map((r) => r.patientDisplayName).join(', ')}
         </Typography>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-organ-procurement">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.organProcurementTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.organProcurementTitle} testId="epis2-icu-organ-procurement">
         <Typography variant="body2" color="text.secondary">
           {copy.icu.noSpecializedCases}
         </Typography>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-diary">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.icuDiaryTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.icuDiaryTitle} testId="epis2-icu-diary">
         <List dense data-testid="epis2-icu-diary-rows">
           {data.icuDiaryEntries.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -368,11 +311,8 @@ export function IcuDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-delirium">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.deliriumTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.deliriumTitle} testId="epis2-icu-delirium">
         <List dense data-testid="epis2-icu-delirium-rows">
           {data.deliriumScreenings.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -383,11 +323,8 @@ export function IcuDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-prone-protocol">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.proneProtocolTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.proneProtocolTitle} testId="epis2-icu-prone-protocol">
         <List dense data-testid="epis2-icu-prone-protocol-rows">
           {data.proneProtocols.length === 0 ? (
             <ListItem disablePadding>
@@ -404,11 +341,8 @@ export function IcuDashboardTab({
             ))
           )}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-discharge-actions">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.icu.dischargeActionsTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.icu.dischargeActionsTitle} testId="epis2-icu-discharge-actions">
         <Stack spacing={1}>
           {data.criticalBeds
             .filter((bed) => bed.patientId)
@@ -438,7 +372,7 @@ export function IcuDashboardTab({
               </Stack>
             ))}
         </Stack>
-      </Paper>
+      </EpisWorkspaceSection>
       {primaryBed?.patientId && onOpenHandover ? (
         <Button
           size="small"

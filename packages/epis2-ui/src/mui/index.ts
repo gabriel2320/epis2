@@ -45,6 +45,7 @@ export { default as ImageSearchIcon } from '@mui/icons-material/ImageSearch';
 export { default as KeyIcon } from '@mui/icons-material/Key';
 export { default as LocalHospitalIcon } from '@mui/icons-material/LocalHospital';
 export { default as LoginIcon } from '@mui/icons-material/Login';
+export { default as LockOutlinedIcon } from '@mui/icons-material/LockOutlined';
 export { default as LogoutIcon } from '@mui/icons-material/Logout';
 export { default as MedicationIcon } from '@mui/icons-material/Medication';
 export { default as PersonIcon } from '@mui/icons-material/Person';
@@ -58,6 +59,7 @@ export { default as TipsAndUpdatesIcon } from '@mui/icons-material/TipsAndUpdate
 export { default as VisibilityIcon } from '@mui/icons-material/Visibility';
 export { default as VisibilityOffIcon } from '@mui/icons-material/VisibilityOff';
 export { default as CalendarMonthIcon } from '@mui/icons-material/CalendarMonth';
+export { default as ChevronRightIcon } from '@mui/icons-material/ChevronRight';
 export { default as ForumIcon } from '@mui/icons-material/Forum';
 export { default as SettingsIcon } from '@mui/icons-material/Settings';
 export { default as TerminalIcon } from '@mui/icons-material/Terminal';

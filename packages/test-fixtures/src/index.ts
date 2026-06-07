@@ -5,6 +5,13 @@ export {
   hasIntegrationDatabase,
 } from './integrationDatabase.js';
 export {
+  DEMO_NARRATIVE_EPISODES,
+  assertDemoNarrativesInvariants,
+  getDemoNarrativeById,
+  getPrimaryNarrativeForDemoCode,
+  type DemoNarrativeEpisode,
+} from './demoNarratives.js';
+export {
   DEMO_CLINICAL_CASES,
   DEMO_IDENTIFIER_SYSTEM,
   SYNTHETIC_LABEL,

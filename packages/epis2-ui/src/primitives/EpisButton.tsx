@@ -41,11 +41,12 @@ export function EpisButton<C extends ElementType = 'button'>({
   const tonalSx =
     appearance === 'tonal'
       ? {
-          bgcolor: theme.palette.primary.main,
-          color: theme.palette.primary.contrastText,
+          bgcolor: theme.palette.primary.light,
+          color: theme.palette.primary.dark,
           '&:hover': {
-            bgcolor: theme.palette.primary.dark,
-            color: theme.palette.primary.contrastText,
+            bgcolor: theme.palette.primary.light,
+            filter: 'brightness(0.96)',
+            color: theme.palette.primary.dark,
           },
         }
       : undefined;

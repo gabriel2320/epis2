@@ -1,54 +1,30 @@
-import { getBlueprintByRoutePath } from '@epis2/clinical-forms';
 import { copy } from '@epis2/design-system';
 import { Link, useSearch } from '@tanstack/react-router';
-import { useClinicalNavigate, type ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
+import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { useEffect, useState } from 'react';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 import {
   Alert,
-  Box,
-  Button,
-  Divider,
-  List,
-  ListItem,
-  ListItemText,
+  EpisButton,
+  EpisDockReserveLayout,
+  EpisSplitPane,
   Stack,
   Typography,
   epis2ShellContentIslandSx,
 } from '@epis2/epis2-ui';
-import { BLUEPRINT_BY_ROUTE } from '../api/clinicalApi.js';
-import { useDraftsQuery } from '../query/hooks/useDraftsQuery.js';
+import { INTENT_TO_ASSIST_BLUEPRINT } from '../api/clinicalApi.js';
 import { usePatientDetailQuery } from '../query/hooks/usePatientDetailQuery.js';
 import { usePatientLongitudinalQuery } from '../query/hooks/usePatientLongitudinalQuery.js';
 import { usePatientsQuery } from '../query/hooks/usePatientsQuery.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
 import { ClinicalPageNav } from '../components/ClinicalPageNav.js';
-import { ClinicalWidgetPanel } from '../widgets/ClinicalWidgetPanel.js';
 import { ErrorState } from '../components/ErrorState.js';
 import { PatientListGrid } from '../components/PatientListGrid.js';
 import { PatientClinicalSummaryPanel } from '../components/PatientClinicalSummaryPanel.js';
 import { PatientLongitudinalPanel } from '../components/PatientLongitudinalPanel.js';
-
-const QUICK_ROUTE_PATHS: ClinicalFormRoutePath[] = [
-  '/espacio/resumen',
-  '/espacio/ambulatorio',
-  '/espacio/evolucion',
-  '/espacio/epicrisis',
-  '/espacio/receta',
-  '/espacio/laboratorio',
-  '/espacio/imagenologia',
-  '/espacio/interconsulta',
-  '/espacio/certificado',
-  '/espacio/alergia',
-  '/espacio/problema',
-  '/espacio/conciliacion',
-  '/espacio/enfermeria',
-  '/espacio/mar',
-  '/espacio/farmacia',
-  '/espacio/ingreso',
-  '/espacio/traslado',
-];
+import { PatientRecentActivityBlock } from '../components/PatientRecentActivityBlock.js';
+import { PatientWorkspaceCommandPanel } from '../components/PatientWorkspaceCommandPanel.js';
 
 export function PatientWorkspacePage() {
   const search = useSearch({ strict: false }) as { patientId?: string };
@@ -57,11 +33,11 @@ export function PatientWorkspacePage() {
   const [alertBlueprintId, setAlertBlueprintId] = useState<string | undefined>();
   const [alertLabel, setAlertLabel] = useState<string | undefined>();
   const [patientsFetchEnabled, setPatientsFetchEnabled] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
 
   const patientId = search.patientId ?? active?.id;
 
   const detailQuery = usePatientDetailQuery(patientId);
-  const draftsQuery = useDraftsQuery({ patientId }, Boolean(patientId));
   const longitudinalQuery = usePatientLongitudinalQuery(patientId, Boolean(patientId));
   const { patients, refetch: refetchPatients } = usePatientsQuery({
     enabled: patientsFetchEnabled,
@@ -88,17 +64,49 @@ export function PatientWorkspacePage() {
   };
 
   const detail = detailQuery.data ?? null;
-  const drafts = draftsQuery.data ?? [];
   const longitudinal = longitudinalQuery.data ?? null;
   const error = detailQuery.isError ? copy.errors.genericMessage : undefined;
+
+  const openDraft = (draftId: string) => {
+    void navigate({
+      to: '/espacio/borrador/$draftId',
+      params: { draftId },
+    });
+  };
+
+  const longitudinalNav = {
+    onOpenDraft: openDraft,
+    onOpenNote: () =>
+      void navigate({ to: '/espacio/resumen', search: { patientId: patientId! } }),
+    onRegisterAllergy: () =>
+      void navigate({ to: '/espacio/alergia', search: { patientId: patientId! } }),
+    onRegisterProblem: () =>
+      void navigate({ to: '/espacio/problema', search: { patientId: patientId! } }),
+    onRegisterSurgicalHistory: () =>
+      void navigate({ to: '/espacio/problema', search: { patientId: patientId! } }),
+    onOpenResults: () =>
+      void navigate({ to: '/espacio/resultados', search: { patientId: patientId! } }),
+    onAdmitHospital: () =>
+      void navigate({ to: '/espacio/ingreso', search: { patientId: patientId! } }),
+    onTransferNote: () =>
+      void navigate({ to: '/espacio/traslado', search: { patientId: patientId! } }),
+    onNursingNote: () =>
+      void navigate({ to: '/espacio/enfermeria', search: { patientId: patientId! } }),
+    onOpenServiceOrders: () =>
+      void navigate({ to: '/epis2/dashboard', search: { tab: 'service', patientId: patientId! } }),
+    onOpenServiceCensus: () =>
+      void navigate({ to: '/epis2/dashboard', search: { tab: 'service', patientId: patientId! } }),
+    onOpenNursingMar: () =>
+      void navigate({ to: '/epis2/dashboard', search: { tab: 'nursing', patientId: patientId! } }),
+  };
 
   if (!patientId) {
     return (
       <Stack spacing={2} sx={epis2ShellContentIslandSx} data-testid="epis2-patient-workspace-pick">
         <Alert severity="info">{copy.activePatient.pinHint}</Alert>
-        <Button variant="outlined" onClick={() => void loadPatientList()}>
+        <EpisButton appearance="outlined" onClick={() => void loadPatientList()}>
           {copy.forms.searchPatients}
-        </Button>
+        </EpisButton>
         <PatientListGrid
           rows={patients}
           emptyMessage={copy.longitudinal.emptySection}
@@ -110,9 +118,9 @@ export function PatientWorkspacePage() {
           }
           data-testid="epis2-workspace-patient-grid"
         />
-        <Button component={Link} to="/espacio/buscar-paciente" variant="text">
+        <EpisButton component={Link} to="/espacio/buscar-paciente" appearance="text">
           {copy.activePatient.searchForm}
-        </Button>
+        </EpisButton>
         <ClinicalPageNav />
       </Stack>
     );
@@ -136,248 +144,72 @@ export function PatientWorkspacePage() {
     return (
       <Stack spacing={2} sx={epis2ShellContentIslandSx}>
         <Typography color="text.secondary">{copy.drafts.loading}</Typography>
-        <ClinicalPageNav patientId={patientId} />
       </Stack>
     );
   }
 
-  return (
-    <Stack sx={epis2ShellContentIslandSx} data-testid="epis2-patient-workspace">
-      <Stack spacing={3}>
-        <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.55 }}>
-          {copy.activePatient.workspaceSubtitle}
-        </Typography>
+  const showAlerts = alertsLoading || clinicalAlerts.length > 0;
 
-        <PatientClinicalSummaryPanel summaryFields={detail.clinicalContext.summaryFields} />
+  const primaryColumn = (
+    <Stack spacing={2}>
+      <PatientClinicalSummaryPanel summaryFields={detail.clinicalContext.summaryFields} />
 
-        <ClinicalWidgetPanel
-          surface="patient-workspace"
-          patientId={patientId}
-          explicitlyShownWidgetIds={['patient-summary', 'active-problems']}
-          data-testid="epis2-ficha-widget-panel"
-        />
-
+      {showAlerts ? (
         <ClinicalAlertsPanel
           alerts={clinicalAlerts}
           loading={alertsLoading}
           hintBlueprintLabel={contextLabel}
         />
+      ) : null}
 
-        {longitudinal ? (
-          <PatientLongitudinalPanel
-            data={longitudinal}
-            onOpenDraft={(draftId) =>
-              void navigate({
-                to: '/espacio/borrador/$draftId',
-                params: { draftId },
-              })
-            }
-            onOpenNote={() =>
-              void navigate({
-                to: '/espacio/resumen',
-                search: { patientId },
-              })
-            }
-            onRegisterAllergy={() =>
-              void navigate({
-                to: '/espacio/alergia',
-                search: { patientId },
-              })
-            }
-            onRegisterProblem={() =>
-              void navigate({
-                to: '/espacio/problema',
-                search: { patientId },
-              })
-            }
-            onRegisterSurgicalHistory={() =>
-              void navigate({
-                to: '/espacio/problema',
-                search: { patientId },
-              })
-            }
-            onOpenResults={() =>
-              void navigate({
-                to: '/espacio/resultados',
-                search: { patientId },
-              })
-            }
-            onAdmitHospital={() =>
-              void navigate({
-                to: '/espacio/ingreso',
-                search: { patientId },
-              })
-            }
-            onTransferNote={() =>
-              void navigate({
-                to: '/espacio/traslado',
-                search: { patientId },
-              })
-            }
-            onNursingNote={() =>
-              void navigate({
-                to: '/espacio/enfermeria',
-                search: { patientId },
-              })
-            }
-            onOpenServiceOrders={() =>
-              void navigate({
-                to: '/epis2/dashboard',
-                search: { tab: 'service', patientId },
-              })
-            }
-            onOpenServiceCensus={() =>
-              void navigate({
-                to: '/epis2/dashboard',
-                search: { tab: 'service', patientId },
-              })
-            }
-            onOpenNursingMar={() =>
-              void navigate({
-                to: '/epis2/dashboard',
-                search: { tab: 'nursing', patientId },
-              })
-            }
-          />
+      <PatientRecentActivityBlock
+        events={longitudinal?.timeline ?? []}
+        onOpenDraft={openDraft}
+      />
+
+      <Stack direction="row" spacing={1} alignItems="center">
+        <EpisButton
+          appearance="text"
+          size="small"
+          data-testid="epis2-ficha-history"
+          onClick={() => setHistoryOpen((open) => !open)}
+        >
+          {historyOpen ? copy.activePatient.hideFullHistory : copy.activePatient.viewFullHistory}
+        </EpisButton>
+        {historyOpen ? (
+          <Typography variant="body2" color="text.secondary">
+            {copy.activePatient.viewFullHistoryHint}
+          </Typography>
         ) : null}
-
-        <Box>
-          <Typography variant="subtitle1" gutterBottom sx={{ lineHeight: 1.45 }}>
-            {copy.activePatient.quickActions}
-          </Typography>
-          <Stack direction="row" flexWrap="wrap" gap={1}>
-            {QUICK_ROUTE_PATHS.map((path) => {
-              const blueprint = getBlueprintByRoutePath(path);
-              const label = blueprint?.label ?? path;
-              return (
-                <Button
-                  key={path}
-                  variant="outlined"
-                  size="small"
-                  sx={{ whiteSpace: 'normal', textAlign: 'center', lineHeight: 1.45 }}
-                  onClick={() => {
-                    const blueprintId = BLUEPRINT_BY_ROUTE[path];
-                    setAlertBlueprintId(blueprintId);
-                    setAlertLabel(label);
-                    navigate({
-                      to: path,
-                      search: { patientId },
-                    });
-                  }}
-                >
-                  {label}
-                </Button>
-              );
-            })}
-            <Button
-              variant="outlined"
-              size="small"
-              sx={{ whiteSpace: 'normal', textAlign: 'center', lineHeight: 1.45 }}
-              onClick={() =>
-                void navigate({
-                  to: '/espacio/resultados',
-                  search: { patientId },
-                })
-              }
-            >
-              {copy.results.openInbox}
-            </Button>
-            <Button
-              variant="outlined"
-              size="small"
-              sx={{ whiteSpace: 'normal', textAlign: 'center', lineHeight: 1.45 }}
-              onClick={() =>
-                void navigate({
-                  to: '/epis2/dashboard',
-                  search: { tab: 'patient', patientId },
-                })
-              }
-            >
-              {copy.dashboard.openBoard}
-            </Button>
-          </Stack>
-        </Box>
-
-        <Divider />
-
-        <Box>
-          <Typography variant="subtitle1" gutterBottom sx={{ lineHeight: 1.45 }}>
-            {copy.activePatient.approvedNotes}
-          </Typography>
-          {detail.notes.length === 0 ? (
-            <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.55 }}>
-              {copy.activePatient.noNotes}
-            </Typography>
-          ) : (
-            <List dense>
-              {detail.notes.map((note) => (
-                <ListItem key={note.id} disablePadding>
-                  <ListItemText primary={note.title} secondary={note.noteType} />
-                </ListItem>
-              ))}
-            </List>
-          )}
-        </Box>
-
-        <Box>
-          <Typography variant="subtitle1" gutterBottom sx={{ lineHeight: 1.45 }}>
-            {copy.activePatient.pendingDrafts}
-          </Typography>
-          {drafts.length === 0 ? (
-            <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.55 }}>
-              {copy.activePatient.noDrafts}
-            </Typography>
-          ) : (
-            <List dense>
-              {drafts.map((d) => (
-                <ListItem
-                  key={d.id}
-                  disablePadding
-                  secondaryAction={
-                    <Button
-                      size="small"
-                      onClick={() =>
-                        void navigate({
-                          to: '/espacio/borrador/$draftId',
-                          params: { draftId: d.id },
-                        })
-                      }
-                    >
-                      {copy.activePatient.openDraft}
-                    </Button>
-                  }
-                >
-                  <ListItemText
-                    primary={d.title}
-                    secondary={`${d.draftType} · ${
-                      d.status in copy.drafts.statusLabels
-                        ? copy.drafts.statusLabels[
-                            d.status as keyof typeof copy.drafts.statusLabels
-                          ]
-                        : d.status
-                    }`}
-                  />
-                </ListItem>
-              ))}
-            </List>
-          )}
-        </Box>
-
-        <Stack direction="row" spacing={1} flexWrap="wrap">
-          <Button component={Link} to="/comando" variant="contained">
-            {copy.layout.backToCommand}
-          </Button>
-          <Button
-            variant="text"
-            onClick={() => {
-              setPatient(null);
-              void navigate({ to: '/espacio/ficha', search: { patientId: undefined } });
-            }}
-          >
-            {copy.activePatient.change}
-          </Button>
-        </Stack>
       </Stack>
     </Stack>
+  );
+
+  const secondaryColumn =
+    historyOpen && longitudinal ? (
+      <PatientLongitudinalPanel data={longitudinal} {...longitudinalNav} />
+    ) : historyOpen ? (
+      <Typography color="text.secondary">{copy.drafts.loading}</Typography>
+    ) : null;
+
+  return (
+    <>
+      <EpisDockReserveLayout testId="epis2-patient-workspace">
+        <EpisSplitPane
+          primary={primaryColumn}
+          secondary={secondaryColumn}
+          secondaryOpen={historyOpen}
+          testId="epis2-ficha-split"
+        />
+      </EpisDockReserveLayout>
+
+      <PatientWorkspaceCommandPanel
+        patientId={patientId}
+        onResolved={(intent, labelEs) => {
+          setAlertBlueprintId(INTENT_TO_ASSIST_BLUEPRINT[intent]);
+          setAlertLabel(labelEs);
+        }}
+      />
+    </>
   );
 }

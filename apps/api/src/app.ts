@@ -74,7 +74,7 @@ export async function buildApp(config: AppConfig) {
   }));
 
   await registerAuthRoutes(app, config, db);
-  await registerCommandRoutes(app, config);
+  await registerCommandRoutes(app, config, db);
   await registerAiRoutes(app, config, db);
   await registerClinicalRoutes(app, config, db);
   await registerFhirRoutes(app, config, db);

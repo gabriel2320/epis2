@@ -1,6 +1,6 @@
 import type { NursingDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import { Paper, Stack, Typography, Button, Chip } from '@epis2/epis2-ui';
+import { EpisWorkspaceSection, Stack, Typography, Button, Chip } from '@epis2/epis2-ui';
 import { WorklistDraftGrid } from './WorklistDraftGrid.js';
 
 export type NursingDashboardTabProps = {
@@ -18,10 +18,7 @@ export function NursingDashboardTab({
 }: NursingDashboardTabProps) {
   return (
     <Stack spacing={2} data-testid="epis2-dashboard-nursing">
-      <Paper variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.inpatient.scheduledMar}
-        </Typography>
+      <EpisWorkspaceSection title={copy.inpatient.scheduledMar}>
         {data.scheduledMar.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.inpatient.noScheduledMar}
@@ -65,19 +62,16 @@ export function NursingDashboardTab({
             ))}
           </Stack>
         )}
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.dashboard.myOpenDrafts}
-        </Typography>
+      <EpisWorkspaceSection title={copy.dashboard.myOpenDrafts}>
         <WorklistDraftGrid
           rows={data.nursingDrafts}
           emptyMessage={copy.dashboard.emptyDrafts}
           onOpenDraft={onOpenDraft}
           data-testid="epis2-nursing-drafts"
         />
-      </Paper>
+      </EpisWorkspaceSection>
 
       <Stack direction="row" spacing={1} flexWrap="wrap">
         {data.demoTasks.map((task) => (

@@ -4,7 +4,7 @@
 
 **Credenciales:** `medico.demo` / `DEMO-CLAVE-MEDICO` — ver `docs/auth/DEMO_USERS.md`.
 
-**Resultado final:** **GO DEMO** (2026-06-05) — ver `reports/epis2-pilot-human-2026-06-05.md`
+**Resultado final:** **GO DEMO UX/CE** (2026-06-04) — ver `reports/epis2-ux-ce-signoff-closure-2026-06-04.md` · previo 2026-06-05 `reports/epis2-pilot-human-2026-06-05.md`
 
 ---
 
@@ -21,7 +21,7 @@
 | # | Paso | Hecho | Notas / incidencias |
 |---|------|-------|---------------------|
 | 1 | **Login** — sesión iniciada, sin error | [x] | `LoginPage.test` + API smoke |
-| 2 | **Centro de Comando** — power bar visible; badge **DEMO / SINTÉTICO** | [x] | `CommandCenterPage.test` |
+| 2 | **Centro de Comando** — hero híbrido + dock; power bar; badge **DEMO / SINTÉTICO** | [x] | E2E UX-G02 + `CommandCenterPage.test` |
 | 3 | **Buscar paciente** — comando o lista; paciente con etiqueta demo | [x] | Journey API DEMO-001 |
 | 4 | **Comando evolución** — p. ej. «evolucionar nota de hoy»; llega a `/espacio/evolucion` | [x] | Sin dashboard intermedio |
 | 5 | **Formulario evolución** — campos S/O/A/P; badge demo en ficha | [x] | `GeneratedClinicalFormPage.test` |
@@ -44,6 +44,17 @@
 | 13 | **V4** `/desarrollo/catalogo-visual` — paleta MTB, roles clínicos, elevación tonal (sin sombra decorativa) | THEME-06; M3-G12; solo dev | [x] | E2E |
 
 Pasos **V5–V6** (recorrido clínico 15 min + offline): ver `M3_VISUAL_SIGNOFF_STEPS.md`.
+
+---
+
+## Command Engine + UX-G02 (2026-06-04)
+
+| # | Paso | Gate | Hecho | Notas |
+|---|------|------|-------|-------|
+| 14 | **CE-0→CE-5** — TAC confirmación → prefill → badge → URL limpia | `quality:ux-g02` | [x] | API 9/9 + E2E 3/3 |
+| 15 | **Ficha compacta** → evolución paciente activo | E2E UX-G02 B | [x] | |
+| 16 | **Login gateway** — login + sesión expirada M3 | `test:e2e:login-gateway` | [x] | 2/2 |
+| 17 | **Golden journey** V0–V5 | `quality:golden-journey` | [x] | 17/17 tests |
 
 ---
 
@@ -70,6 +81,8 @@ Pasos **V5–V6** (recorrido clínico 15 min + offline): ver `M3_VISUAL_SIGNOFF_
 
 ```bash
 npm run quality:golden-journey
+npm run quality:ux-pilot          # UX-G02 API + E2E command-first + login gateway
+npm run quality:ux-pilot-gate     # evidencia estática arco UX
 npm run quality:m3-human-pilot   # V1–V6 Playwright + gates M3
 ```
 
@@ -81,7 +94,7 @@ Con `DATABASE_URL` definido, incluye el journey API en `tests/golden-clinical-jo
 
 | Campo | Valor |
 |-------|--------|
-| Fecha | 2026-06-05 |
-| Revisor | Automatización + servidores locales (confirmación visual opcional en navegador) |
-| Commit / rama | `240615d` · `master` |
-| Resultado | **GO DEMO** |
+| Fecha | 2026-06-04 |
+| Revisor | Gates automatizados UX/CE + golden journey (confirmación visual humana opcional) |
+| Commit / rama | ver tag `UX-COMMAND-FIRST-2026-06` · `master` |
+| Resultado | **GO DEMO UX/CE** |

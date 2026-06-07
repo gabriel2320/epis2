@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { validateHl7Message, quarantineHl7Message } from '../api/opsApi.js';
 import { QualityDashboardGrids } from './QualityDashboardGrids.js';
 
-import {
+import { EpisWorkspaceSection,
   Alert,
   Button,
   Chip,
@@ -12,7 +12,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  Paper,
   Stack,
   TextField,
   Typography,
@@ -53,10 +52,7 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
       <Typography variant="h6">{copy.dashboard.tabQuality}</Typography>
       <Alert severity="info">{copy.interop.fhirExportHint}</Alert>
 
-      <Paper variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.interop.metricsTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.interop.metricsTitle}>
         <Typography variant="body2" color="text.secondary">
           {copy.interop.schemaVersion}: {data.ops.schemaVersion ?? '—'}
         </Typography>
@@ -68,7 +64,7 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
           {copy.interop.metricAudit24h}: {data.ops.counts.auditEvents24h} · {copy.interop.metricAiRuns}:{' '}
           {data.metrics.aiRuns} · {copy.interop.metricCriticalUnacked}: {data.metrics.criticalUnacked}
         </Typography>
-      </Paper>
+      </EpisWorkspaceSection>
 
       <Alert severity="info">{copy.qualityAudit.disclosure}</Alert>
       <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
@@ -86,10 +82,7 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
         />
       </Stack>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-idc-panels">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.qualityAudit.idcPanelsTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.qualityAudit.idcPanelsTitle} testId="epis2-quality-idc-panels">
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
           {data.qualityAuditPanels.map((panel) => (
             <Chip
@@ -102,12 +95,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             />
           ))}
         </Stack>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-sentinel">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.qualityAudit.sentinelTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.qualityAudit.sentinelTitle} testId="epis2-quality-sentinel">
         <List dense data-testid="epis2-quality-sentinel-rows">
           {data.sentinelEvents.map((row) => (
             <ListItem key={row.eventCode} disablePadding sx={{ py: 0.25 }}>
@@ -118,12 +108,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-rca">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.qualityAudit.rcaTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.qualityAudit.rcaTitle} testId="epis2-quality-rca">
         <List dense>
           {data.rootCauseAnalyses.map((row) => (
             <ListItem key={row.caseCode} disablePadding sx={{ py: 0.25 }}>
@@ -134,12 +121,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-mortality-board">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.qualityAudit.mortalityBoardTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.qualityAudit.mortalityBoardTitle} testId="epis2-quality-mortality-board">
         <List dense>
           {data.mortalityBoardCases.map((row) => (
             <ListItem key={row.caseCode} disablePadding sx={{ py: 0.25 }}>
@@ -150,12 +134,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-record-audit">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.qualityAudit.recordAuditTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.qualityAudit.recordAuditTitle} testId="epis2-quality-record-audit">
         <List dense>
           {data.recordAudits.map((row) => (
             <ListItem key={row.recordType} disablePadding sx={{ py: 0.25 }}>
@@ -166,12 +147,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-oirs">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.qualityAudit.oirsTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.qualityAudit.oirsTitle} testId="epis2-quality-oirs">
         <List dense>
           {data.oirsClaims.map((row) => (
             <ListItem key={row.claimId} disablePadding sx={{ py: 0.25 }}>
@@ -182,12 +160,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-work-climate">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.qualityAudit.workClimateTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.qualityAudit.workClimateTitle} testId="epis2-quality-work-climate">
         <List dense>
           {data.workClimateSurveys.map((row) => (
             <ListItem key={row.unit} disablePadding sx={{ py: 0.25 }}>
@@ -198,12 +173,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-consent-trace">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.qualityAudit.consentTraceTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.qualityAudit.consentTraceTitle} testId="epis2-quality-consent-trace">
         <List dense>
           {data.consentTraces.map((row) => (
             <ListItem key={`${row.patientDisplayName}-${row.consentType}`} disablePadding sx={{ py: 0.25 }}>
@@ -214,12 +186,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-accreditation">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.qualityAudit.accreditationTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.qualityAudit.accreditationTitle} testId="epis2-quality-accreditation">
         <List dense data-testid="epis2-quality-accreditation-rows">
           {data.accreditationIndicators.map((row) => (
             <ListItem key={row.indicatorCode} disablePadding sx={{ py: 0.25 }}>
@@ -230,12 +199,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-institutional-docs">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.qualityAudit.institutionalDocsTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.qualityAudit.institutionalDocsTitle} testId="epis2-quality-institutional-docs">
         <List dense>
           {data.institutionalDocuments.map((row) => (
             <ListItem key={row.documentCode} disablePadding sx={{ py: 0.25 }}>
@@ -246,12 +212,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-quality-surgical-suspension">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.qualityAudit.surgicalSuspensionTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.qualityAudit.surgicalSuspensionTitle} testId="epis2-quality-surgical-suspension">
         <List dense data-testid="epis2-quality-surgical-suspension-rows">
           {data.surgicalSuspensions.map((row) => (
             <ListItem key={row.caseCode} disablePadding sx={{ py: 0.25 }}>
@@ -262,12 +225,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-advanced-idc-panels">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.iaas.advancedPanelsTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.iaas.advancedPanelsTitle} testId="epis2-iaas-advanced-idc-panels">
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
           {data.iaasAdvancedPanels.map((panel) => (
             <Chip
@@ -280,12 +240,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             />
           ))}
         </Stack>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-surveillance-matrix">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.iaas.surveillanceMatrixTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.iaas.surveillanceMatrixTitle} testId="epis2-iaas-surveillance-matrix">
         <List dense data-testid="epis2-iaas-surveillance-matrix-rows">
           {data.surveillanceMatrix.map((row) => (
             <ListItem key={`${row.organism}-${row.unit}`} disablePadding sx={{ py: 0.25 }}>
@@ -296,12 +253,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-mdro-alert">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.iaas.mdroAlertTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.iaas.mdroAlertTitle} testId="epis2-iaas-mdro-alert">
         <List dense>
           {data.mdroAlerts.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -312,12 +266,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-antimicrobial-monitor">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.iaas.antimicrobialMonitorTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.iaas.antimicrobialMonitorTitle} testId="epis2-iaas-antimicrobial-monitor">
         <List dense>
           {data.antimicrobialConsumption.map((row) => (
             <ListItem key={row.antibiotic} disablePadding sx={{ py: 0.25 }}>
@@ -328,12 +279,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-proa">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.iaas.proaTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.iaas.proaTitle} testId="epis2-iaas-proa">
         <List dense>
           {data.proaRecommendations.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -344,12 +292,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-cvc-checklist">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.iaas.cvcChecklistTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.iaas.cvcChecklistTitle} testId="epis2-iaas-cvc-checklist">
         <List dense>
           {data.cvcInsertionChecklists.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -360,12 +305,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-nav-prevention">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.iaas.navPreventionTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.iaas.navPreventionTitle} testId="epis2-iaas-nav-prevention">
         <List dense>
           {data.navPreventionChecklists.map((row) => (
             <ListItem key={row.unit} disablePadding sx={{ py: 0.25 }}>
@@ -376,12 +318,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-hand-hygiene">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.iaas.handHygieneTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.iaas.handHygieneTitle} testId="epis2-iaas-hand-hygiene">
         <List dense>
           {data.handHygieneAudits.map((row) => (
             <ListItem key={row.unit} disablePadding sx={{ py: 0.25 }}>
@@ -392,12 +331,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-outbreak-study">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.iaas.outbreakStudyTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.iaas.outbreakStudyTitle} testId="epis2-iaas-outbreak-study">
         <List dense>
           {data.outbreakStudies.map((row) => (
             <ListItem key={row.outbreakCode} disablePadding sx={{ py: 0.25 }}>
@@ -408,12 +344,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-isolation-map">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.iaas.isolationMapTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.iaas.isolationMapTitle} testId="epis2-iaas-isolation-map">
         <List dense data-testid="epis2-iaas-isolation-map-rows">
           {data.isolationMap.map((row) => (
             <ListItem key={`${row.bedLabel}-${row.patientDisplayName}`} disablePadding sx={{ py: 0.25 }}>
@@ -424,12 +357,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-endemic-curves">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.iaas.endemicCurvesTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.iaas.endemicCurvesTitle} testId="epis2-iaas-endemic-curves">
         <List dense data-testid="epis2-iaas-endemic-curves-rows">
           {data.endemicCurves.map((row) => (
             <ListItem key={row.indicator} disablePadding sx={{ py: 0.25 }}>
@@ -440,14 +370,11 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
       <QualityDashboardGrids data={data} />
 
-      <Paper variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.interop.hl7Validate}
-        </Typography>
+      <EpisWorkspaceSection title={copy.interop.hl7Validate}>
         <TextField
           fullWidth
           multiline
@@ -485,7 +412,7 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             {quarantineResult}
           </Typography>
         ) : null}
-      </Paper>
+      </EpisWorkspaceSection>
     </Stack>
   );
 }

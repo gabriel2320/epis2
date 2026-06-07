@@ -1,16 +1,13 @@
 import type { PatientDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import {
-  Alert,
+import { EpisWorkspaceSection, Alert,
   Box,
   Button,
   List,
   ListItem,
   ListItemText,
-  Paper,
   Stack,
-  Typography,
-} from '@epis2/epis2-ui';
+  Typography, } from '@epis2/epis2-ui';
 import { LabObservationsGrid } from './LabObservationsGrid.js';
 import { WorklistDraftGrid } from './WorklistDraftGrid.js';
 export type PatientDashboardTabProps = {
@@ -42,10 +39,7 @@ export function PatientDashboardTab({ data, onOpenFicha, onOpenDraft }: PatientD
         </Alert>
       ) : null}
 
-      <Paper variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.longitudinal.problems}
-        </Typography>
+      <EpisWorkspaceSection title={copy.longitudinal.problems}>
         {data.activeProblems.length > 0 ? (
           <List dense disablePadding>
             {data.activeProblems.map((p) => (
@@ -59,12 +53,9 @@ export function PatientDashboardTab({ data, onOpenFicha, onOpenDraft }: PatientD
             {copy.longitudinal.emptySection}
           </Typography>
         )}
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.dashboard.pendingReview}
-        </Typography>
+      <EpisWorkspaceSection title={copy.dashboard.pendingReview}>
         <WorklistDraftGrid
           rows={data.pendingDrafts}
           showPatientColumn={false}
@@ -73,22 +64,16 @@ export function PatientDashboardTab({ data, onOpenFicha, onOpenDraft }: PatientD
           onOpenDraft={onOpenDraft}
           data-testid="epis2-dashboard-patient-drafts-grid"
         />
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.longitudinal.observations}
-        </Typography>
+      <EpisWorkspaceSection title={copy.longitudinal.observations}>
         <LabObservationsGrid
           rows={data.recentObservations}
           data-testid="epis2-dashboard-patient-labs-grid"
         />
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.longitudinal.timeline}
-        </Typography>
+      <EpisWorkspaceSection title={copy.longitudinal.timeline}>
         <List dense disablePadding>
           {data.timelinePreview.map((ev) => (
             <ListItem key={ev.id} disablePadding>
@@ -99,7 +84,7 @@ export function PatientDashboardTab({ data, onOpenFicha, onOpenDraft }: PatientD
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
     </Stack>
   );
 }

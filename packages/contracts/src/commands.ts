@@ -1,8 +1,27 @@
 import { z } from 'zod';
 
+export const commandActiveContextSchema = z.object({
+  pendingDraftCount: z.number().int().min(0).optional(),
+  activeAlertCount: z.number().int().min(0).optional(),
+  workspace: z.enum(['command_center', 'patient_chart', 'clinical_form']).optional(),
+});
+
+export const commandSlotsSchema = z.object({
+  patientHint: z.string().optional(),
+  medicationHint: z.string().optional(),
+  studyHint: z.string().optional(),
+  specialtyHint: z.string().optional(),
+  bodySiteHint: z.string().optional(),
+  urgencyHint: z.enum(['routine', 'urgent', 'stat']).optional(),
+  clinicalReasonHint: z.string().optional(),
+  noteHint: z.string().optional(),
+});
+
 export const commandResolveRequestSchema = z.object({
   text: z.string().max(2000),
   patientId: z.string().uuid().optional(),
+  context: commandActiveContextSchema.optional(),
+  confirmed: z.boolean().optional(),
 });
 
 export const commandResolveResponseSchema = z.discriminatedUnion('status', [
@@ -11,11 +30,7 @@ export const commandResolveResponseSchema = z.discriminatedUnion('status', [
     intent: z.string(),
     labelEs: z.string(),
     routePath: z.string(),
-    slots: z.object({
-      patientHint: z.string().optional(),
-      medicationHint: z.string().optional(),
-      studyHint: z.string().optional(),
-    }),
+    slots: commandSlotsSchema,
   }),
   z.object({
     status: z.literal('needs_clarification'),
@@ -32,6 +47,15 @@ export const commandResolveResponseSchema = z.discriminatedUnion('status', [
     message: z.string(),
     intent: z.string(),
     labelEs: z.string(),
+  }),
+  z.object({
+    status: z.literal('needs_confirmation'),
+    message: z.string(),
+    intent: z.string(),
+    labelEs: z.string(),
+    routePath: z.string(),
+    safetyLevel: z.string(),
+    slots: commandSlotsSchema,
   }),
   z.object({
     status: z.literal('forbidden'),

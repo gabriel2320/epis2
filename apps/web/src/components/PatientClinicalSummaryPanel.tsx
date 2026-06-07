@@ -1,11 +1,6 @@
 import { copy } from '@epis2/design-system';
+import { Box, EpisWorkspaceSection, Stack, Typography } from '@epis2/epis2-ui';
 
-import {
-  Box,
-  Paper,
-  Stack,
-  Typography,
-} from '@epis2/epis2-ui';
 const FIELD_LABELS: Record<string, string> = {
   activeProblems: copy.activePatient.summaryActiveProblems,
   recentEvents: copy.activePatient.summaryRecentEvents,
@@ -26,14 +21,7 @@ export function PatientClinicalSummaryPanel({
   if (entries.length === 0) return null;
 
   return (
-    <Paper
-      variant="outlined"
-      sx={{ p: 2, width: '100%' }}
-      data-testid="epis2-clinical-summary"
-    >
-      <Typography variant="subtitle2" gutterBottom>
-        {copy.activePatient.clinicalContextTitle}
-      </Typography>
+    <EpisWorkspaceSection title={copy.activePatient.clinicalContextTitle} testId="epis2-clinical-summary">
       <Stack spacing={1.5}>
         {entries.map(([key, value]) => (
           <Box key={key}>
@@ -46,6 +34,6 @@ export function PatientClinicalSummaryPanel({
           </Box>
         ))}
       </Stack>
-    </Paper>
+    </EpisWorkspaceSection>
   );
 }

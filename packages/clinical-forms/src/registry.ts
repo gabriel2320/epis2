@@ -84,7 +84,11 @@ export function assertRegistryInvariants(): string[] {
   }
 
   for (const def of EPIS2_COMMAND_DEFINITIONS) {
-    if (def.routePath.startsWith('/epis2/dashboard') || def.intent === 'open_results_inbox') {
+    if (
+      def.routePath.startsWith('/epis2/dashboard') ||
+      def.intent === 'open_results_inbox' ||
+      def.intent === 'open_patient_chart'
+    ) {
       continue;
     }
     const linked = EPIS2_FORM_BLUEPRINTS.some((b) => b.intentIds.includes(def.intent));

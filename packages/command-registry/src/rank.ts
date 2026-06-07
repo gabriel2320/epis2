@@ -1,6 +1,11 @@
+import {
+  applyAssistScoreBoost,
+  ASSIST_ROUTE_RESOLVE_CONFIDENCE,
+} from './assist-route.js';
+import { applyContextScoreBoost } from './context-rank.js';
 import { EPIS2_COMMAND_DEFINITIONS } from './definitions.js';
 import { normalizeCommandText } from './normalize.js';
-import type { CommandDefinition } from './types.js';
+import type { CommandActiveContext, CommandAssistHint, CommandDefinition } from './types.js';
 
 /** Umbral mínimo para considerar un intent (inspirado en MAU EPIONE, sin catálogo Lyra). */
 export const MIN_MATCH_SCORE = 52;
@@ -66,7 +71,18 @@ function entityBoost(
 ): number {
   const lower = raw.toLowerCase();
   if (
+    def.intent === 'open_results_inbox' &&
+    (/\b(examenes\s+de\s+hoy|como\s+esta\s+el\s+laboratorio|revisar\s+hemograma|revisar\s+imagenes)\b/.test(
+      normalized,
+    ) ||
+      (/\b(revisar|ver|mostrar)\b/.test(normalized) &&
+        /\b(hemograma|laboratorio|imagenes|resultados)\b/.test(normalized)))
+  ) {
+    return 90;
+  }
+  if (
     def.intent === 'request_laboratory' &&
+    !/\b(revisar|ver|mostrar|bandeja|resultados)\b/.test(normalized) &&
     (/\b(hemograma|glucosa|creatinina|analitica|bioquimica|hb\s+ht)\b/.test(normalized) ||
       (/\b(pide|pedir|solicitar)\b/.test(normalized) &&
         /\b(hemograma|analitica|laboratorio)\b/.test(normalized)))
@@ -104,6 +120,13 @@ function entityBoost(
       return 88;
     }
   }
+  if (
+    def.intent === 'open_patient_chart' &&
+    /\b(abrir|ver|ir\s+a|mostrar)\s+(la\s+)?ficha\b/.test(normalized) &&
+    !/\bficha\s+(de|del)\s+\w/.test(normalized)
+  ) {
+    return 92;
+  }
   return 0;
 }
 
@@ -111,6 +134,9 @@ export function scoreCommandDefinition(
   def: CommandDefinition,
   normalized: string,
   raw: string,
+  context?: CommandActiveContext,
+  hasPatient = false,
+  assistHint?: CommandAssistHint,
 ): number {
   if (def.intent.startsWith('open_dashboard')) {
     const clinicalTopic = /sintesis|resumen|evolucion|epicrisis|receta|laboratorio|hemograma/.test(
@@ -135,16 +161,45 @@ export function scoreCommandDefinition(
   }
 
   score = Math.max(score, entityBoost(def, normalized, raw));
+
+  if (
+    def.intent === 'request_laboratory' &&
+    /\b(revisar|ver|mostrar|bandeja|resultados)\b/.test(normalized) &&
+    !/\b(solicitar|pedir|pide|orden)\b/.test(normalized)
+  ) {
+    score = Math.min(score, 45);
+  }
+
+  score += applyContextScoreBoost(def, context, hasPatient);
+  score += applyAssistScoreBoost(def, assistHint);
+  if (
+    assistHint?.intent === def.intent &&
+    assistHint.confidence >= ASSIST_ROUTE_RESOLVE_CONFIDENCE
+  ) {
+    score = Math.max(score, MIN_MATCH_SCORE + 20);
+  }
+
   return score;
 }
 
-export function rankCommandDefinitions(raw: string): RankedCommandMatch[] {
+export function rankCommandDefinitions(
+  raw: string,
+  options?: {
+    context?: CommandActiveContext;
+    hasPatient?: boolean;
+    assistHint?: CommandAssistHint;
+  },
+): RankedCommandMatch[] {
   const normalized = normalizeCommandText(raw);
   if (!normalized) return [];
 
+  const context = options?.context;
+  const hasPatient = options?.hasPatient ?? false;
+  const assistHint = options?.assistHint;
+
   return EPIS2_COMMAND_DEFINITIONS.map((def) => ({
     def,
-    score: scoreCommandDefinition(def, normalized, raw),
+    score: scoreCommandDefinition(def, normalized, raw, context, hasPatient, assistHint),
   }))
     .filter((r) => r.score >= MIN_MATCH_SCORE)
     .sort((a, b) => {

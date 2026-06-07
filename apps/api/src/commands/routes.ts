@@ -1,4 +1,8 @@
-import { rankCommandDefinitions, resolveCommand } from '@epis2/command-registry';
+import {
+  rankCommandDefinitions,
+  type CommandResolveInput,
+} from '@epis2/command-registry';
+import { buildCommandTelemetryEvent } from '@epis2/command-registry/telemetry';
 import {
   commandResolveRequestSchema,
   commandResolveResponseSchema,
@@ -11,9 +15,16 @@ import {
   type AuthenticatedRequest,
 } from '../auth/authenticate.js';
 import type { AppConfig } from '../config.js';
+import type { Database } from '../db/client.js';
 import { createRateLimitPreHandler } from '../security/rateLimit.js';
+import { appendAudit } from '../audit/store.js';
+import { resolveCommandWithOptionalAssist } from './resolveWithAssist.js';
 
-export async function registerCommandRoutes(app: FastifyInstance, config: AppConfig) {
+export async function registerCommandRoutes(
+  app: FastifyInstance,
+  config: AppConfig,
+  db: Database | null,
+) {
   const authenticate = createAuthenticate(config);
   const limitCommands = createRateLimitPreHandler({
     keyPrefix: 'commands',
@@ -32,15 +43,51 @@ export async function registerCommandRoutes(app: FastifyInstance, config: AppCon
     }
 
     const session = (request as AuthenticatedRequest).session;
-    const resolveInput: Parameters<typeof resolveCommand>[0] = {
+    const started = Date.now();
+    const resolveInput: CommandResolveInput = {
       text: parsed.data.text,
       role: session.role,
     };
     if (parsed.data.patientId !== undefined) {
       resolveInput.patientId = parsed.data.patientId;
     }
+    if (parsed.data.context !== undefined) {
+      const ctx = parsed.data.context;
+      resolveInput.context = {
+        ...(ctx.workspace !== undefined ? { workspace: ctx.workspace } : {}),
+        ...(ctx.pendingDraftCount !== undefined
+          ? { pendingDraftCount: ctx.pendingDraftCount }
+          : {}),
+        ...(ctx.activeAlertCount !== undefined
+          ? { activeAlertCount: ctx.activeAlertCount }
+          : {}),
+      };
+    }
+    if (parsed.data.confirmed === true) {
+      resolveInput.confirmed = true;
+    }
 
-    const result = resolveCommand(resolveInput);
+    const { result, assistRouteUsed } = await resolveCommandWithOptionalAssist(
+      config,
+      resolveInput,
+    );
+    const telemetry = buildCommandTelemetryEvent({
+      text: parsed.data.text,
+      role: session.role,
+      result,
+      latencyMs: Date.now() - started,
+      ...(parsed.data.patientId ? { patientId: parsed.data.patientId } : {}),
+      ...(assistRouteUsed ? { assistRouteUsed: true } : {}),
+    });
+
+    void appendAudit(db, {
+      eventType: 'command.resolve',
+      actorId: session.sub,
+      username: session.username,
+      entityType: 'command',
+      message: telemetry.outcome,
+      payload: telemetry,
+    });
 
     if (result.status === 'forbidden') {
       return reply.status(403).send({

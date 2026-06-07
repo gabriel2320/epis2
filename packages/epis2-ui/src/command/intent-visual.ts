@@ -17,6 +17,7 @@ export function getIntentChipTone(intent: ClinicalIntent, aiAssisted?: boolean):
   if (intent.startsWith('open_dashboard')) return 'dashboard';
   switch (intent) {
     case 'search_patient':
+    case 'open_patient_chart':
       return 'search';
     case 'summarize_patient':
       return 'ai';

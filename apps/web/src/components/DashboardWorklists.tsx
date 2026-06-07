@@ -1,6 +1,6 @@
 import type { DashboardWorkResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import { Paper, Stack, Typography } from '@epis2/epis2-ui';
+import { EpisWorkspaceSection, Stack } from '@epis2/epis2-ui';
 import { WorklistDraftGrid } from './WorklistDraftGrid.js';
 
 export type DashboardWorklistsProps = {
@@ -11,29 +11,23 @@ export type DashboardWorklistsProps = {
 export function DashboardWorklists({ work, onOpenDraft }: DashboardWorklistsProps) {
   return (
     <Stack spacing={3}>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-dashboard-my-drafts">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.dashboard.myOpenDrafts}
-        </Typography>
+      <EpisWorkspaceSection title={copy.dashboard.myOpenDrafts} testId="epis2-dashboard-my-drafts">
         <WorklistDraftGrid
           rows={work.myOpenDrafts}
           emptyMessage={copy.dashboard.emptyDrafts}
           onOpenDraft={onOpenDraft}
           data-testid="epis2-dashboard-my-drafts-grid"
         />
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-dashboard-pending-review">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.dashboard.pendingReview}
-        </Typography>
+      <EpisWorkspaceSection title={copy.dashboard.pendingReview} testId="epis2-dashboard-pending-review">
         <WorklistDraftGrid
           rows={work.pendingReview}
           emptyMessage={copy.dashboard.emptyReview}
           onOpenDraft={onOpenDraft}
           data-testid="epis2-dashboard-pending-review-grid"
         />
-      </Paper>
+      </EpisWorkspaceSection>
     </Stack>
   );
 }

@@ -2,6 +2,7 @@ import { copy } from '@epis2/design-system';
 import { EpisAppShellLayout, EpisButton, LogoutIcon, Stack } from '@epis2/epis2-ui';
 import { Outlet } from '@tanstack/react-router';
 import { useAuth } from '../auth/AuthContext.js';
+import { ClinicalGlobalTopBar } from './ClinicalGlobalTopBar.js';
 import { ClinicalPatientChartChrome } from './ClinicalPatientChartChrome.js';
 import { OfflineStatusBanner } from '../components/OfflineStatusBanner.js';
 import {
@@ -26,6 +27,7 @@ export function ClinicalShellLayout() {
           ) : null}
         </Stack>
       }
+      appBar={<ClinicalGlobalTopBar active="clinical" />}
       patientChrome={
         <>
           <OfflineStatusBanner />

@@ -5,10 +5,10 @@ import {
   Button,
   Chip,
   EpisM3Text,
+  EpisWorkspaceSection,
   List,
   ListItem,
   ListItemText,
-  Paper,
   Stack,
   Typography,
   epis2ShellContentIslandSx,
@@ -117,22 +117,16 @@ export function ResultsInboxPage() {
 
       <ResultsInboxTrends inbox={inbox} />
 
-      <Paper variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.longitudinal.observations}
-        </Typography>
+      <EpisWorkspaceSection title={copy.longitudinal.observations}>
         <LabObservationsGrid
           rows={inbox.observations}
           showOrderTrace
           emptyMessage={copy.longitudinal.emptySection}
           data-testid="epis2-results-observations-grid"
         />
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.results.criticalSection}
-        </Typography>
+      <EpisWorkspaceSection title={copy.results.criticalSection}>
         {inbox.criticalResults.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.results.emptyCritical}
@@ -182,12 +176,9 @@ export function ResultsInboxPage() {
             ))}
           </List>
         )}
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.results.pendingOrdersSection}
-        </Typography>
+      <EpisWorkspaceSection title={copy.results.pendingOrdersSection}>
         {inbox.pendingOrders.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.results.emptyPendingOrders}
@@ -204,7 +195,7 @@ export function ResultsInboxPage() {
             ))}
           </List>
         )}
-      </Paper>
+      </EpisWorkspaceSection>
 
       {ackMessage ? (
         <Alert

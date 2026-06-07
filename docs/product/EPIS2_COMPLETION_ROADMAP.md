@@ -1,11 +1,11 @@
 # EPIS2 — Roadmap de completitud (post-auditoría)
 
-**Versión:** 1.1 · **Fecha:** 2026-06-04  
+**Versión:** 1.2 · **Fecha:** 2026-06-04 (sync gates UX/CE)  
 **Canon de ejecución:** [`EPIS2_WAVE_EXECUTION_CANON.md`](./EPIS2_WAVE_EXECUTION_CANON.md) — **fuente primaria** para agentes (precedencia, gates, tramos A–D, milestones 1A–1D).
 
 > Las olas agrupan capacidades; **no** implican cola lineal estricta. Ver definición **EPIS2 Core completado** en el canon.
 
-**Estado base:** Ola 0 cerrada · Ola 1 shell cerrada (1A Done; 1C–1D Partial) · Ola 2 activa · 405 tests · 32 migraciones
+**Estado base:** Ola 0 cerrada · Ola 1 shell + **Command Engine CE-0→CE-5** + arco UX command-first · Ola 2 activa · **511 tests** · 32 migraciones · gates `quality:golden-journey` + `quality:ux-pilot` verdes (2026-06-04)
 
 ---
 
@@ -31,10 +31,11 @@
 
 | Milestone | Contenido | Estado |
 |-----------|-----------|--------|
-| **1A** Shell clínico | Login, comando, rail, contexto, sesión | **Done** |
-| **1B** Consulta mínima | SOAP, borrador/firma | **Done** |
-| **1C** Indicaciones/resultados | Receta, lab, imagen, bandeja | **Partial** |
-| **1D** IA asistida segura | Assist, RAG, sin firma IA | **Partial** |
+| **1A** Shell clínico | Login, comando, rail, contexto, sesión, **wire híbrido + dock** | **Done** |
+| **1B** Consulta mínima | SOAP, borrador/firma, **EpisClinicalFormActionBar** | **Done** |
+| **1C** Indicaciones/resultados | Receta, lab, imagen, bandeja plana | **Partial** |
+| **1D** IA asistida segura | Assist route CE-1/CE-3, sin firma IA | **Partial** |
+| **CE** Command Engine | CE-0→CE-5 (registry, confirmación, prefill, badge) | **Done** |
 
 Detalle histórico v1.0:
 
@@ -48,11 +49,13 @@ Detalle histórico v1.0:
 | Evolución | ✓ | golden V0 |
 | Borradores + aprobación | ✓ | `DraftReviewPage`, API drafts |
 | Auditoría lectura | ◐ | quality tab |
-| WIDGET-01 en Comando/ficha | ○ | `ClinicalWidgetPanel`, widgets pkg |
-| Sesión expirada / sin acceso | ○ | router, auth |
-| Microcopy IA sin «Ollama» | ○ | `copy/es.ts` |
+| WIDGET-01 en Comando/ficha | ◐ | bento ≤4; widgets bajo demanda |
+| Sesión expirada / sin acceso | ✓ | `SessionExpiredPage`, `ForbiddenPage`, E2E login-gateway |
+| Microcopy IA sin «Ollama» | ✓ | `copy/es.ts` |
 | Historial comandos | ○ | API + UI |
 | Comparación versiones borrador | ○ | `DraftReviewPage` |
+| UX-G02 command-first E2E | ✓ | `e2e/ux-g02-command-first.spec.ts` |
+| Wire híbrido Comando | ✓ | hero registry + dock compact |
 
 **Journey:** `golden-v0-command-evolution` (obligatorio)
 

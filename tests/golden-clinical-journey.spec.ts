@@ -76,11 +76,19 @@ describe('Golden Clinical Journey', () => {
       }
     });
 
-    it('solicitud laboratorio resuelve ruta con paciente', () => {
+    it('solicitud laboratorio requiere confirmación y luego resuelve ruta', () => {
+      const pending = resolveCommand({
+        text: 'solicitar hemograma completo',
+        role: 'physician',
+        patientId: 'a0000001-0000-4000-8000-000000000001',
+      });
+      expect(pending.status).toBe('needs_confirmation');
+
       const result = resolveCommand({
         text: 'solicitar hemograma completo',
         role: 'physician',
         patientId: 'a0000001-0000-4000-8000-000000000001',
+        confirmed: true,
       });
       expect(result.status).toBe('resolved');
       if (result.status === 'resolved') {
@@ -88,11 +96,19 @@ describe('Golden Clinical Journey', () => {
       }
     });
 
-    it('solicitud imagenología resuelve ruta con paciente', () => {
+    it('solicitud imagenología requiere confirmación y luego resuelve ruta', () => {
+      const pending = resolveCommand({
+        text: 'solicitar radiografía de tórax',
+        role: 'physician',
+        patientId: 'a0000001-0000-4000-8000-000000000001',
+      });
+      expect(pending.status).toBe('needs_confirmation');
+
       const result = resolveCommand({
         text: 'solicitar radiografía de tórax',
         role: 'physician',
         patientId: 'a0000001-0000-4000-8000-000000000001',
+        confirmed: true,
       });
       expect(result.status).toBe('resolved');
       if (result.status === 'resolved') {
@@ -136,11 +152,17 @@ describe('Golden Clinical Journey', () => {
   });
 
   it('5 casos demo sintéticos listos (EPIS2-09)', async () => {
-    const { DEMO_CLINICAL_CASES, SYNTHETIC_LABEL, assertDemoCasesInvariants } = await import(
-      '@epis2/test-fixtures'
-    );
+    const {
+      DEMO_CLINICAL_CASES,
+      SYNTHETIC_LABEL,
+      assertDemoCasesInvariants,
+      assertDemoNarrativesInvariants,
+      DEMO_NARRATIVE_EPISODES,
+    } = await import('@epis2/test-fixtures');
     expect(DEMO_CLINICAL_CASES).toHaveLength(5);
     expect(assertDemoCasesInvariants()).toEqual([]);
+    expect(assertDemoNarrativesInvariants()).toEqual([]);
+    expect(DEMO_NARRATIVE_EPISODES).toHaveLength(5);
     expect(SYNTHETIC_LABEL).toBe('DEMO/SINTÉTICO');
     expect(JOURNEY_STEPS[2]).toBe('buscar-paciente-sintetico');
   });

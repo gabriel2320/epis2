@@ -1,16 +1,13 @@
 import type { ReceptionDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import {
-  Alert,
+import { EpisWorkspaceSection, Alert,
   Chip,
   EpisMetric,
   List,
   ListItem,
   ListItemText,
-  Paper,
   Stack,
-  Typography,
-} from '@epis2/epis2-ui';
+  Typography, } from '@epis2/epis2-ui';
 
 export type ReceptionDashboardTabProps = {
   data: ReceptionDashboardResponse;
@@ -30,10 +27,7 @@ export function ReceptionDashboardTab({ data, onOpenPatientSearch }: ReceptionDa
           value={String(data.metrics.overbookingAlerts)}
         />
       </Stack>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-reception-idc-panels">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.reception.idcPanelsTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.reception.idcPanelsTitle} testId="epis2-reception-idc-panels">
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
           {data.idcPanels.map((panel) => (
             <Chip
@@ -46,21 +40,15 @@ export function ReceptionDashboardTab({ data, onOpenPatientSearch }: ReceptionDa
             />
           ))}
         </Stack>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-reception-call-panel">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.reception.callPanelTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.reception.callPanelTitle} testId="epis2-reception-call-panel">
         <Typography variant="body2">
           {data.callPanel.ticketNumber
             ? `${data.callPanel.ticketNumber} — ${data.callPanel.lastCalled ?? ''}`
             : copy.reception.noCallYet}
         </Typography>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-reception-agenda">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.reception.agendaTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.reception.agendaTitle} testId="epis2-reception-agenda">
         <List dense>
           {data.todayAppointments.map((row) => (
             <ListItem key={row.id} disablePadding sx={{ py: 0.5 }}>
@@ -71,11 +59,8 @@ export function ReceptionDashboardTab({ data, onOpenPatientSearch }: ReceptionDa
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-reception-waiting-queue">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.reception.waitingTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.reception.waitingTitle} testId="epis2-reception-waiting-queue">
         <List dense>
           {data.waitingQueue.map((row) => (
             <ListItem key={row.ticket} disablePadding sx={{ py: 0.5 }}>
@@ -86,7 +71,7 @@ export function ReceptionDashboardTab({ data, onOpenPatientSearch }: ReceptionDa
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
       <Chip
         label={copy.reception.searchPatientCta}
         clickable

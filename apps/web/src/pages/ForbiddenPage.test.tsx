@@ -27,7 +27,7 @@ describe('ForbiddenPage', () => {
     expect(screen.getByText(copy.errors.forbiddenTitle)).toBeInTheDocument();
     expect(screen.getByText(copy.errors.forbiddenMessage)).toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: copy.errors.forbiddenAction }));
+    await user.click(screen.getByTestId('epis2-forbidden-action'));
     expect(navigate).toHaveBeenCalledWith({ to: '/comando' });
   });
 

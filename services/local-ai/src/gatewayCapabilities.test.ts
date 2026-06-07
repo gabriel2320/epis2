@@ -19,6 +19,7 @@ describe('local-ai gateway capabilities (EPIDOS pattern)', () => {
     expect(caps.capabilities.chat).toBe(false);
     expect(caps.capabilities.toolCalling).toBe(false);
     expect(caps.capabilities.rag).toBe(false);
+    expect(caps.capabilities.commandRouteAssist).toBe(false);
     expect(caps.clinicalPromptIds.length).toBe(14);
     expect(caps.promptCatalogVersion).toBe('epis2-prompts-v1.1');
     expect(caps.operational).toBe(false);

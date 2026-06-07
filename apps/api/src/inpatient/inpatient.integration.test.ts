@@ -81,6 +81,7 @@ describeIntegration('inpatient API (integration)', () => {
       payload: {
         text: 'ingreso hospitalario',
         patientId: DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-003')!.patientId,
+        confirmed: true,
       },
     });
     expect(cmd.statusCode).toBe(200);

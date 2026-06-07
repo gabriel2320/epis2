@@ -7,7 +7,7 @@ export const allergyEntryBlueprint = defineBlueprint({
   blueprintId: 'allergy_entry',
   label: 'Registro de alergia',
   purpose: 'Alta de alergia con aprobación humana antes de SoT',
-  intentIds: ['summarize_patient'],
+  intentIds: ['register_allergy'],
   allowedRoles: ['physician', 'nurse'],
   routePath: '/espacio/alergia',
   outputKind: 'CLINICAL_NOTE_DRAFT',

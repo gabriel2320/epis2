@@ -5,6 +5,7 @@ import {
   CalendarMonthIcon,
   EpisAppearancePreferencesLink,
   EpisThemeModeToggle,
+  DashboardIcon,
   ForumIcon,
   HealthAndSafetyIcon,
   LocalHospitalIcon,
@@ -75,22 +76,35 @@ export function useEpis2NavigationRailItems(): EpisNavigationRailItem[] {
     pathname.startsWith('/espacio/buscar-paciente') || pathname.startsWith('/espacio/ficha');
   const isSettings = pathname.startsWith('/preferencias-apariencia');
 
-  const switcherItems: EpisNavigationRailItem[] = CLINICAL_WORKSPACE_ORDER.map((workspaceId) => {
-    const def = getClinicalWorkspaceDefinition(workspaceId);
-    return {
-      id: `workspace-${workspaceId}`,
-      label: resolveWorkspaceCopyKey(def.labelKey),
-      icon: WORKSPACE_ICONS[workspaceId],
-      active: activeWorkspace === workspaceId,
-      disabled: !canUseWorkspace(workspaceId),
-      onClick: () => {
-        setWorkspace(workspaceId);
-        const target = getWorkspaceDefaultRoute(workspaceId);
-        void navigate(toNavigateOptions(target));
-      },
-      'data-testid': `epis2-nav-workspace-${workspaceId}`,
-    };
-  });
+  const isCommandHome = pathname === '/comando';
+
+  const switcherItems: EpisNavigationRailItem[] = isCommandHome
+    ? [
+        {
+          id: 'workspace-spaces',
+          label: copy.patientChart.rail.workspaces,
+          icon: <DashboardIcon />,
+          active: false,
+          onClick: () => void navigate({ to: '/epis2/dashboard', search: { tab: 'work' } }),
+          'data-testid': 'epis2-nav-workspaces',
+        },
+      ]
+    : CLINICAL_WORKSPACE_ORDER.map((workspaceId) => {
+        const def = getClinicalWorkspaceDefinition(workspaceId);
+        return {
+          id: `workspace-${workspaceId}`,
+          label: resolveWorkspaceCopyKey(def.labelKey),
+          icon: WORKSPACE_ICONS[workspaceId],
+          active: activeWorkspace === workspaceId,
+          disabled: !canUseWorkspace(workspaceId),
+          onClick: () => {
+            setWorkspace(workspaceId);
+            const target = getWorkspaceDefaultRoute(workspaceId);
+            void navigate(toNavigateOptions(target));
+          },
+          'data-testid': `epis2-nav-workspace-${workspaceId}`,
+        };
+      });
 
   const contextualItems: EpisNavigationRailItem[] =
     activeWorkspace === 'command'

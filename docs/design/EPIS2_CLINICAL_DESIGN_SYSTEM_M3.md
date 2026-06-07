@@ -73,8 +73,8 @@ Los roles **MD3 error** vienen del esquema MTB. Los roles **clínicos EPIS2** so
 
 | Prioridad | Familia | Google Fonts | Motivo |
 |-----------|---------|--------------|--------|
-| **1 (implementada)** | **Inter** | `Inter` | Legibilidad UI, números tabulares, amplio soporte |
-| Alternativa | **Source Sans 3** | `Source Sans 3` | Estilo institucional, cuerpo denso |
+| **1 (implementada)** | **Google Sans Text + Roboto** | Google Fonts | Par UI/cuerpo al estilo Workspace; legibilidad clínica |
+| Alternativa | **Inter** | `Inter` | Legibilidad UI, números tabulares |
 | Alternativa | **DM Sans** | `DM Sans` | Geometría moderna, buena en tablet |
 
 Base EPIS2: **14px** cuerpo · mínimo **13px** meta · prosa clínica ≤ **65ch**.

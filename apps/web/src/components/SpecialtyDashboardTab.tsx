@@ -1,16 +1,12 @@
 import type { SpecialtyDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import {
-  Alert,
+import { EpisWorkspaceSection, Alert,
   Chip,
   EpisMetric,
   List,
   ListItem,
   ListItemText,
-  Paper,
-  Stack,
-  Typography,
-} from '@epis2/epis2-ui';
+  Stack, } from '@epis2/epis2-ui';
 
 export type SpecialtyDashboardTabProps = {
   data: SpecialtyDashboardResponse;
@@ -34,10 +30,7 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
           value={String(data.metrics.scheduledBoards)}
         />
       </Stack>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-specialty-idc-panels">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.specialty.idcPanelsTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.specialty.idcPanelsTitle} testId="epis2-specialty-idc-panels">
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
           {data.idcPanels.map((panel) => (
             <Chip
@@ -50,11 +43,8 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
             />
           ))}
         </Stack>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-specialty-partogram">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.specialty.partogramTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.specialty.partogramTitle} testId="epis2-specialty-partogram">
         <List dense data-testid="epis2-specialty-partogram-rows">
           {data.partograms.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -65,11 +55,8 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-specialty-oncology-board">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.specialty.oncologyBoardTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.specialty.oncologyBoardTitle} testId="epis2-specialty-oncology-board">
         <List dense>
           {data.oncologyBoardCases.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -80,11 +67,8 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-specialty-odontogram">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.specialty.odontogramTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.specialty.odontogramTitle} testId="epis2-specialty-odontogram">
         <List dense>
           {data.odontograms.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -95,11 +79,8 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-specialty-endoscopy">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.specialty.endoscopyTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.specialty.endoscopyTitle} testId="epis2-specialty-endoscopy">
         <List dense>
           {data.endoscopyReports.map((row) => (
             <ListItem key={`${row.patientDisplayName}-${row.procedure}`} disablePadding sx={{ py: 0.25 }}>
@@ -110,11 +91,8 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-specialty-ophthalmology">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.specialty.ophthalmologyTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.specialty.ophthalmologyTitle} testId="epis2-specialty-ophthalmology">
         <List dense>
           {data.ophthalmologyEvaluations.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -125,11 +103,8 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-specialty-hemodialysis">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.specialty.hemodialysisTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.specialty.hemodialysisTitle} testId="epis2-specialty-hemodialysis">
         <List dense>
           {data.hemodialysisSessions.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -140,11 +115,8 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-specialty-kinesiology">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.specialty.kinesiologyTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.specialty.kinesiologyTitle} testId="epis2-specialty-kinesiology">
         <List dense>
           {data.kinesiologyRecords.map((row) => (
             <ListItem key={`${row.patientDisplayName}-${row.joint}`} disablePadding sx={{ py: 0.25 }}>
@@ -155,11 +127,8 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-specialty-nutrition">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.specialty.nutritionTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.specialty.nutritionTitle} testId="epis2-specialty-nutrition">
         <List dense>
           {data.nutritionRecords.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -170,11 +139,8 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-specialty-chemotherapy">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.specialty.chemotherapyTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.specialty.chemotherapyTitle} testId="epis2-specialty-chemotherapy">
         <List dense>
           {data.chemotherapyProtocols.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -185,11 +151,8 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-specialty-psychiatry">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.specialty.psychiatryTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.specialty.psychiatryTitle} testId="epis2-specialty-psychiatry">
         <List dense data-testid="epis2-specialty-psychiatry-rows">
           {data.psychiatryFollowups.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -200,7 +163,7 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
     </Stack>
   );
 }

@@ -2,7 +2,7 @@ import { DEMO_CLINICAL_CASES } from '@epis2/test-fixtures';
 import { describeIntegration } from '@epis2/test-fixtures/integration';
 import { and, eq } from 'drizzle-orm';
 import { beforeEach, expect, it } from 'vitest';
-import { resolveCommand } from '@epis2/command-registry';
+import { resolveCommand, resolveCommandWithAutoConfirm } from '@epis2/command-registry';
 import { buildApp } from '../app.js';
 import { getDatabase } from '../db/client.js';
 import { beds, clinicalNotes, inpatientAdmissions, patientAllergies, problems } from '../db/schema.js';
@@ -26,7 +26,7 @@ describeIntegration('cadena ingreso hospitalario (MF-158)', () => {
     const app = await buildApp(config);
     const db = getDatabase(config.DATABASE_URL)!;
 
-    const resolved = resolveCommand({
+    const resolved = resolveCommandWithAutoConfirm({
       text: 'ingreso hospitalario',
       role: 'physician',
       patientId: demo002.patientId,

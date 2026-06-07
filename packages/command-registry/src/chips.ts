@@ -67,6 +67,25 @@ export function getCommandChipsForRole(
   return merged.slice(0, max + (options?.aiAvailable ? 2 : 0));
 }
 
+/** Wire híbrido Centro de Comando — chips rápidos + tarjetas (registry, sin dashboard). */
+export function getCommandCenterWireSuggestions(
+  role: string,
+  permissions: readonly string[],
+  options?: { aiAvailable?: boolean },
+): { quickChips: CommandChip[]; cardChips: CommandChip[] } {
+  const all = getCommandChipsForRole(role, permissions, {
+    ...(options?.aiAvailable !== undefined ? { aiAvailable: options.aiAvailable } : {}),
+    maxChips: 12,
+  });
+  const actionable = all.filter(
+    (chip) => !chip.aiAssisted && !chip.intent.startsWith('open_dashboard'),
+  );
+  return {
+    quickChips: actionable.slice(0, 5),
+    cardChips: actionable.slice(0, 4),
+  };
+}
+
 export function getCommandBarAiHint(role: string, aiAvailable: boolean): string | undefined {
   if (!isClinicalRole(role)) return undefined;
   if (!aiAvailable) {

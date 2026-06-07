@@ -4,7 +4,6 @@ import Toolbar from '@mui/material/Toolbar';
 import type { ReactNode } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { epis2BarLayout } from '../theme/breakpoints.js';
-import { epis2Shape } from '../theme/shape.js';
 
 export type EpisTopAppBarProps = {
   title?: ReactNode;
@@ -33,10 +32,10 @@ export function EpisTopAppBar({
       data-testid={testId}
       sx={{
         width: '100%',
-        bgcolor: visual?.topBarBg ?? 'transparent',
-        borderRadius: epis2Shape.large,
-        mb: 2,
-        ...(visual ? { border: `1px solid ${visual.cardBorder}` } : {}),
+        bgcolor: visual?.topBarBg ?? 'background.paper',
+        borderRadius: 0,
+        borderBottom: 1,
+        borderColor: 'divider',
         backdropFilter: 'blur(12px)',
       }}
     >

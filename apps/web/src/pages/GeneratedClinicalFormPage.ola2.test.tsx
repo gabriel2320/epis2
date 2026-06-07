@@ -125,14 +125,16 @@ describe('GeneratedClinicalFormPage — Ola 2 M3-UI', () => {
     expect(screen.getByText(/Diagnóstico CIE-10/i)).toBeInTheDocument();
     expect(screen.getByTestId('epis2-draft-status-chip')).toBeInTheDocument();
     expect(screen.queryByTestId('epis2-clinical-context-toggle')).not.toBeInTheDocument();
-    expect(screen.getByRole('button', { name: copy.workspaces.ambulatory.fab })).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-clinical-form-action-bar')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: copy.forms.save })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: copy.forms.sign })).toBeInTheDocument();
   });
 
   it('valida campos obligatorios de consulta ambulatoria', async () => {
     const user = userEvent.setup();
     renderForm(outpatientBlueprint);
 
-    await user.click(screen.getByRole('button', { name: copy.workspaces.ambulatory.fab }));
+    await user.click(screen.getByRole('button', { name: copy.forms.save }));
     await waitFor(() => {
       expect(screen.getByTestId('epis2-form-status')).toBeInTheDocument();
     });
@@ -143,6 +145,6 @@ describe('GeneratedClinicalFormPage — Ola 2 M3-UI', () => {
 
     expect(screen.getByTestId('epis2-form-medical_certificate')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-print-preview-medical_certificate')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: copy.forms.saveDraft })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: copy.forms.save })).toBeInTheDocument();
   });
 });

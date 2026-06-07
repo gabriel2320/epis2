@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { EPIS_DEFERRED_OR_REJECTED_INTENTS, EPIS_P8_TO_EPIS2_INTENT } from './epis-intent-map.js';
 import { EPIS2_COMMAND_DEFINITIONS } from './definitions.js';
+import { resolveCommandWithAutoConfirm } from './resolve-command-test.js';
 import { resolveCommand } from './router.js';
 
 const DEMO_PATIENT_ID = '00000000-0000-4000-8000-000000000001';
@@ -26,7 +27,7 @@ describe('EPIS P8 synonym map', () => {
   });
 
   it('ingreso hospitalario resuelve a formulario de ingreso', () => {
-    const result = resolveCommand({
+    const result = resolveCommandWithAutoConfirm({
       text: 'ingreso hospitalario',
       role: 'physician',
       patientId: DEMO_PATIENT_ID,
@@ -51,7 +52,7 @@ describe('EPIS P8 synonym map', () => {
   });
 
   it('pide hemograma resuelve laboratorio', () => {
-    const result = resolveCommand({
+    const result = resolveCommandWithAutoConfirm({
       text: 'pide hemograma',
       role: 'physician',
       patientId: DEMO_PATIENT_ID,

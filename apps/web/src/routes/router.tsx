@@ -24,6 +24,7 @@ import { AppearancePreferencesPage } from '../pages/AppearancePreferencesPage.js
 import { isUiCatalogEnabled } from '../dev/uiCatalogEnv.js';
 import { isVisualThemeCatalogEnabled } from '../dev/visualThemeCatalogEnv.js';
 import { isSchedulerSpikeEnabled } from '../dev/schedulerSpikeEnv.js';
+import { parseDashboardSearch, parseClinicalFormSearch } from './clinicalNavigate.js';
 
 const LazyUiCatalogPage = lazy(() =>
   import('../pages/dev/UiCatalogPage.js').then((m) => ({ default: m.UiCatalogPage })),
@@ -111,22 +112,7 @@ const commandCenterRoute = createRoute({
 const dashboardModeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/epis2/dashboard',
-  validateSearch: (search: Record<string, unknown>) => {
-    const tab = search.tab;
-    const validTab =
-      tab === 'patient' ||
-      tab === 'service' ||
-      tab === 'quality' ||
-      tab === 'work' ||
-      tab === 'nursing' ||
-      tab === 'pharmacy'
-        ? tab
-        : 'work';
-    return {
-      tab: validTab,
-      patientId: typeof search.patientId === 'string' ? search.patientId : undefined,
-    };
-  },
+  validateSearch: (search: Record<string, unknown>) => parseDashboardSearch(search),
   component: DashboardModePage,
   beforeLoad: requireSession,
 });
@@ -153,9 +139,7 @@ const patientWorkspaceRoute = createRoute({
   component: PatientWorkspacePage,
 });
 
-const validatePatientSearch = (search: Record<string, unknown>) => ({
-  patientId: typeof search.patientId === 'string' ? search.patientId : undefined,
-});
+const validatePatientSearch = parseClinicalFormSearch;
 
 function clinicalFormPage(path: Parameters<typeof getBlueprintByRoutePath>[0]) {
   const blueprint = getBlueprintByRoutePath(path)!;

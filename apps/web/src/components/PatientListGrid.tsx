@@ -2,6 +2,7 @@ import type { PatientListRow } from '../api/clinicalApi.js';
 import { copy } from '@epis2/design-system';
 import { EpisDataGridSuspense, type GridColDef } from '@epis2/epis2-ui';
 import { useMemo } from 'react';
+import { getPrimaryNarrativeForDemoCode } from '../clinical/demoNarrativePresentation.js';
 
 export type PatientListGridProps = {
   rows: PatientListRow[];
@@ -25,9 +26,20 @@ export function PatientListGrid({
         minWidth: 180,
       },
       {
+        field: 'demoEpisode',
+        headerName: copy.dashboard.gridColumnDemoEpisode,
+        flex: 1,
+        minWidth: 200,
+        valueGetter: (_value, row) => {
+          const code = row.demoCaseCode ?? row.demoLabel;
+          if (!code) return '—';
+          return getPrimaryNarrativeForDemoCode(code)?.titleEs ?? code;
+        },
+      },
+      {
         field: 'demoCaseCode',
         headerName: copy.dashboard.gridColumnDemoCase,
-        width: 120,
+        width: 110,
         valueGetter: (_value, row) => row.demoCaseCode ?? row.demoLabel ?? '—',
       },
     ],

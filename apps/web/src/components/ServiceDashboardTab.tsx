@@ -15,11 +15,11 @@ import {
   Chip,
   EpisLoadingState,
   EpisMetric,
+  EpisWorkspaceSection,
   List,
   ListItem,
   ListItemText,
   MenuItem,
-  Paper,
   Select,
   Stack,
   Typography,
@@ -124,10 +124,7 @@ export function ServiceDashboardTab({
       {statusMsg ? <Alert severity="info">{statusMsg}</Alert> : null}
 
       {activePatientId && availableBeds.length > 0 ? (
-        <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-inpatient-admit">
-          <Typography variant="subtitle2" gutterBottom>
-            {copy.inpatient.admitTitle}
-          </Typography>
+        <EpisWorkspaceSection title={copy.inpatient.admitTitle} testId="epis2-inpatient-admit">
           <Stack direction="row" spacing={1} alignItems="center">
             <Select
               size="small"
@@ -152,17 +149,14 @@ export function ServiceDashboardTab({
               {copy.inpatient.admitSubmit}
             </Button>
           </Stack>
-        </Paper>
+        </EpisWorkspaceSection>
       ) : null}
 
       <Suspense fallback={<EpisLoadingState label={copy.charts.loading} />}>
         <LazyServiceDashboardCharts data={data} />
       </Suspense>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-service-census">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.inpatient.census}
-        </Typography>
+      <EpisWorkspaceSection title={copy.inpatient.census} testId="epis2-service-census">
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ mb: 1.5 }}>
           <EpisMetric
             label={copy.inpatient.censusOccupied}
@@ -241,13 +235,10 @@ export function ServiceDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
       {data.activeOrders.length > 0 ? (
-        <Paper variant="outlined" sx={{ p: 2 }}>
-          <Typography variant="subtitle2" gutterBottom>
-            {copy.inpatient.activeOrders}
-          </Typography>
+        <EpisWorkspaceSection title={copy.inpatient.activeOrders}>
           <List dense disablePadding>
             {data.activeOrders.map((o) => (
               <ListItem key={o.id} disablePadding>
@@ -261,13 +252,10 @@ export function ServiceDashboardTab({
               </ListItem>
             ))}
           </List>
-        </Paper>
+        </EpisWorkspaceSection>
       ) : null}
 
-      <Paper variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.inpatient.criticalUnacked}
-        </Typography>
+      <EpisWorkspaceSection title={copy.inpatient.criticalUnacked}>
         {data.unacknowledgedCriticals.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.inpatient.noCriticals}
@@ -295,13 +283,10 @@ export function ServiceDashboardTab({
             ))}
           </Stack>
         )}
-      </Paper>
+      </EpisWorkspaceSection>
 
       {data.probableDischarges.length > 0 ? (
-        <Paper variant="outlined" sx={{ p: 2 }}>
-          <Typography variant="subtitle2" gutterBottom>
-            {copy.inpatient.probableDischarge}
-          </Typography>
+        <EpisWorkspaceSection title={copy.inpatient.probableDischarge}>
           <List dense disablePadding>
             {data.probableDischarges.map((d) => (
               <ListItem key={d.patientId} disablePadding>
@@ -318,14 +303,11 @@ export function ServiceDashboardTab({
               </ListItem>
             ))}
           </List>
-        </Paper>
+        </EpisWorkspaceSection>
       ) : null}
 
       {data.pendingWorkItems.length > 0 ? (
-        <Paper variant="outlined" sx={{ p: 2 }}>
-          <Typography variant="subtitle2" gutterBottom>
-            {copy.inpatient.pendingTeam}
-          </Typography>
+        <EpisWorkspaceSection title={copy.inpatient.pendingTeam}>
           {data.pendingWorkItems.map((w) => (
             <Chip
               key={w.id}
@@ -335,7 +317,7 @@ export function ServiceDashboardTab({
               onClick={w.patientId ? () => onOpenPatient(w.patientId!) : undefined}
             />
           ))}
-        </Paper>
+        </EpisWorkspaceSection>
       ) : null}
     </Stack>
   );

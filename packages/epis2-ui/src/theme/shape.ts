@@ -24,6 +24,10 @@ export const epis2Shape = {
 
   pill: 8,
 
+  /** Dock flotante / overlays MD3 (16px — extraLarge M3). */
+
+  floating: 16,
+
   /** @deprecated Usar pill. */
 
   bar: 8,

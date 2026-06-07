@@ -2,7 +2,6 @@
  * @vitest-environment jsdom
  */
 import { getBlueprintById } from '@epis2/clinical-forms';
-import { copy } from '@epis2/design-system';
 import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -125,9 +124,11 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
     renderForm();
 
     expect(screen.getByTestId('epis2-form-evolution_note')).toBeInTheDocument();
+    await user.click(screen.getByTestId('epis2-form-more-actions'));
     expect(screen.getByTestId('epis2-ai-suggest')).toBeInTheDocument();
+    await user.keyboard('{Escape}');
 
-    await user.click(screen.getByRole('button', { name: copy.forms.saveDraft }));
+    await user.click(screen.getByTestId('epis2-form-save'));
 
     expect(screen.getByTestId('epis2-form-status')).toHaveTextContent(/obligatorios|válido/i);
   });
@@ -143,7 +144,7 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
     await user.type(screen.getByRole('textbox', { name: /análisis/i }), 'Evolución favorable');
     await user.type(screen.getByRole('textbox', { name: /^plan/i }), 'Continuar tratamiento');
 
-    await user.click(screen.getByRole('button', { name: copy.forms.saveDraft }));
+    await user.click(screen.getByTestId('epis2-form-save'));
 
     expect(screen.getByTestId('epis2-form-status')).toBeInTheDocument();
   });

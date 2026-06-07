@@ -6,7 +6,6 @@ import {
   Box,
   Button,
   Chip,
-  Paper,
   Stack,
   TextField,
   Typography,
@@ -76,21 +75,19 @@ export function PatientClinicalAiPanel({ patientId }: PatientClinicalAiPanelProp
   };
 
   return (
-    <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-patient-ai-panel">
-      <Stack spacing={2}>
-        <Stack direction="row" alignItems="center" spacing={1} flexWrap="wrap">
-          <Typography variant="subtitle2">{copy.ai.panelTitle}</Typography>
-          <Chip
-            size="small"
-            label={aiUp === null ? '…' : aiUp ? copy.ai.statusOn : copy.ai.statusOff}
-            color={aiUp ? 'success' : 'default'}
-            variant="outlined"
-          />
-        </Stack>
-        <Alert severity="info">{copy.ai.humanReviewRequired}</Alert>
-        {error ? <Alert severity="error">{error}</Alert> : null}
+    <Stack spacing={2} data-testid="epis2-patient-ai-panel">
+      <Stack direction="row" alignItems="center" spacing={1} flexWrap="wrap">
+        <Chip
+          size="small"
+          label={aiUp === null ? '…' : aiUp ? copy.ai.statusOn : copy.ai.statusOff}
+          color={aiUp ? 'success' : 'default'}
+          variant="outlined"
+        />
+      </Stack>
+      <Alert severity="info">{copy.ai.humanReviewRequired}</Alert>
+      {error ? <Alert severity="error">{error}</Alert> : null}
 
-        <Box>
+      <Box>
           <Typography variant="body2" gutterBottom>
             {copy.ai.ragTitle}
           </Typography>
@@ -117,32 +114,31 @@ export function PatientClinicalAiPanel({ patientId }: PatientClinicalAiPanelProp
               ) : null}
             </Box>
           ) : null}
-        </Box>
+      </Box>
 
-        <Box>
-          <Button size="small" variant="outlined" disabled={loading} onClick={() => void runSummary()}>
-            {copy.ai.summary24h}
-          </Button>
-          {summaryResult ? (
-            <Typography variant="body2" sx={{ mt: 1, whiteSpace: 'pre-wrap' }}>
-              {summaryResult.summaryText}
-            </Typography>
-          ) : null}
-        </Box>
-
-        {runs.length > 0 ? (
-          <Box>
-            <Typography variant="body2" color="text.secondary">
-              {copy.ai.recentRuns}
-            </Typography>
-            {runs.map((r) => (
-              <Typography key={r.id} variant="caption" display="block" sx={{ fontFamily: 'monospace' }}>
-                {new Date(r.createdAt).toLocaleString('es-CL')} · {r.blueprintId} · {r.status}
-              </Typography>
-            ))}
-          </Box>
+      <Box>
+        <Button size="small" variant="outlined" disabled={loading} onClick={() => void runSummary()}>
+          {copy.ai.summary24h}
+        </Button>
+        {summaryResult ? (
+          <Typography variant="body2" sx={{ mt: 1, whiteSpace: 'pre-wrap' }}>
+            {summaryResult.summaryText}
+          </Typography>
         ) : null}
-      </Stack>
-    </Paper>
+      </Box>
+
+      {runs.length > 0 ? (
+        <Box>
+          <Typography variant="body2" color="text.secondary">
+            {copy.ai.recentRuns}
+          </Typography>
+          {runs.map((r) => (
+            <Typography key={r.id} variant="caption" display="block" sx={{ fontFamily: 'monospace' }}>
+              {new Date(r.createdAt).toLocaleString('es-CL')} · {r.blueprintId} · {r.status}
+            </Typography>
+          ))}
+        </Box>
+      ) : null}
+    </Stack>
   );
 }

@@ -12,6 +12,7 @@ export type LocalAiCapabilities = {
   promptCatalogVersion: string;
   capabilities: {
     draftAssist: boolean;
+    commandRouteAssist: boolean;
     chat: false;
     toolCalling: false;
     rag: false;
@@ -28,6 +29,7 @@ export function buildLocalAiCapabilities(ollamaUp: boolean): LocalAiCapabilities
     promptCatalogVersion: PROMPT_CATALOG_VERSION,
     capabilities: {
       draftAssist: ollamaUp,
+      commandRouteAssist: ollamaUp,
       chat: false,
       toolCalling: false,
       rag: false,

@@ -4,6 +4,11 @@ export {
   EpisClinicalFormFooter,
   type EpisClinicalFormFooterProps,
 } from './EpisClinicalFormFooter.js';
+export {
+  EpisClinicalFormActionBar,
+  type EpisClinicalFormActionBarOverflowItem,
+  type EpisClinicalFormActionBarProps,
+} from './EpisClinicalFormActionBar.js';
 export { EpisClinicalFormPage, type EpisClinicalFormPageProps } from './EpisClinicalFormPage.js';
 export {
   EpisClinicalFocusAppBar,

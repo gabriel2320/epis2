@@ -1,6 +1,6 @@
+import { EpisWorkspaceSection, EpisTreeViewSuspense } from '@epis2/epis2-ui';
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import { EpisTreeViewSuspense, Paper, Typography } from '@epis2/epis2-ui';
 import { buildLongitudinalSectionTree, resolveTimelineDraftId } from '../tree/longitudinalTree.js';
 
 export type LongitudinalNavTreeProps = {
@@ -15,10 +15,7 @@ export function LongitudinalNavTree({ data, onOpenDraft }: LongitudinalNavTreePr
   const defaultExpanded = items.slice(0, 2).map((n) => n.id);
 
   return (
-    <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-longitudinal-nav-tree">
-      <Typography variant="subtitle2" gutterBottom>
-        {copy.tree.navTitle}
-      </Typography>
+    <EpisWorkspaceSection title={copy.tree.navTitle} testId="epis2-longitudinal-nav-tree">
       <EpisTreeViewSuspense
         items={items}
         defaultExpandedItems={defaultExpanded}
@@ -30,6 +27,6 @@ export function LongitudinalNavTree({ data, onOpenDraft }: LongitudinalNavTreePr
         }}
         data-testid="epis2-longitudinal-tree"
       />
-    </Paper>
+    </EpisWorkspaceSection>
   );
 }

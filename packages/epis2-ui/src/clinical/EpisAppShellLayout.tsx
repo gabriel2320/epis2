@@ -6,9 +6,12 @@ import { EpisNavigationRail, type EpisNavigationRailItem } from './EpisNavigatio
 export type EpisAppShellLayoutProps = {
   railItems: EpisNavigationRailItem[];
   railFooter?: ReactNode;
+  /** Barra superior global fija — centro operativo (UX-A). */
+  appBar?: ReactNode;
   /** Barra contextual paciente + tabs (Nivel 1–2). */
   patientChrome?: ReactNode;
-  children: ReactNode;
+      railHidden?: boolean;
+      children: ReactNode;
   testId?: string;
 };
 
@@ -16,13 +19,17 @@ export type EpisAppShellLayoutProps = {
 export function EpisAppShellLayout({
   railItems,
   railFooter,
+  appBar,
   patientChrome,
+  railHidden = false,
   children,
   testId = 'epis2-app-shell',
 }: EpisAppShellLayoutProps) {
   return (
     <Box sx={{ ...epis2CanvasSx, display: 'flex', minHeight: '100vh' }} data-testid={testId}>
-      <EpisNavigationRail items={railItems} {...(railFooter ? { footer: railFooter } : {})} />
+      {railHidden ? null : (
+        <EpisNavigationRail items={railItems} {...(railFooter ? { footer: railFooter } : {})} />
+      )}
       <Box
         component="main"
         sx={{
@@ -30,10 +37,41 @@ export function EpisAppShellLayout({
           minWidth: 0,
           display: 'flex',
           flexDirection: 'column',
+          minHeight: '100vh',
         }}
       >
-        {patientChrome}
-        <Box sx={{ flex: 1, overflow: 'auto', px: { xs: 2, sm: 3, md: 4 }, py: { xs: 2, sm: 3 } }}>
+        {appBar ? (
+          <Box
+            sx={{
+              position: 'sticky',
+              top: 0,
+              zIndex: (theme) => theme.zIndex.appBar,
+              flexShrink: 0,
+            }}
+          >
+            {appBar}
+          </Box>
+        ) : null}
+        {patientChrome ? (
+          <Box
+            sx={{
+              position: 'sticky',
+              top: appBar ? 56 : 0,
+              zIndex: (theme) => theme.zIndex.appBar - 1,
+              flexShrink: 0,
+            }}
+          >
+            {patientChrome}
+          </Box>
+        ) : null}
+        <Box
+          sx={{
+            flex: 1,
+            overflow: 'auto',
+            px: { xs: 2, sm: 3 },
+            py: { xs: 2, sm: 2.5 },
+          }}
+        >
           {children}
         </Box>
       </Box>

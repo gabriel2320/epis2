@@ -2,6 +2,7 @@ import { copy } from '@epis2/design-system';
 import { EpisDemoBadgeChip, EpisPatientChartShell, ScienceIcon, Stack } from '@epis2/epis2-ui';
 import { useRouterState } from '@tanstack/react-router';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
+import { getPrimaryNarrativeForDemoCode } from '../clinical/demoNarrativePresentation.js';
 import {
   PATIENT_CHART_TABS,
   patientChartTabTarget,
@@ -20,9 +21,14 @@ export function ClinicalPatientChartChrome() {
   }
 
   const activeTabId = resolvePatientChartTabId(pathname);
-  const metaParts = [patient.demoCaseCode ? `Demo ${patient.demoCaseCode}` : null].filter(
-    Boolean,
-  );
+  const narrative = patient.demoCaseCode
+    ? getPrimaryNarrativeForDemoCode(patient.demoCaseCode)
+    : undefined;
+  const metaParts = [
+    narrative?.titleEs,
+    narrative?.settingEs,
+    patient.demoCaseCode ? patient.demoCaseCode : null,
+  ].filter(Boolean);
 
   return (
     <EpisPatientChartShell

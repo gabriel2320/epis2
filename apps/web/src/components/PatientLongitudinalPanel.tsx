@@ -17,11 +17,11 @@ import {
   Box,
   Button,
   EpisTreeViewSuspense,
+  EpisWorkspaceSection,
   ExpandMoreIcon,
   List,
   ListItem,
   ListItemText,
-  Paper,
   Stack,
   Typography,
 } from '@epis2/epis2-ui';
@@ -53,17 +53,14 @@ function Section({
   testId?: string;
 }) {
   return (
-    <Paper variant="outlined" sx={{ p: 2 }} data-testid={testId}>
-      <Typography variant="subtitle2" gutterBottom>
-        {title}
-      </Typography>
+    <EpisWorkspaceSection title={title} testId={testId}>
       {empty ? (
         <Typography variant="body2" color="text.secondary" sx={{ mb: children ? 1 : 0 }}>
           {copy.longitudinal.emptySection}
         </Typography>
       ) : null}
       {children}
-    </Paper>
+    </EpisWorkspaceSection>
   );
 }
 

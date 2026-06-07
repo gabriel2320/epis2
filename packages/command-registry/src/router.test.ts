@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { AMBIGUOUS_PHRASES } from './definitions.js';
+import { requiresExplicitConfirmation } from './confirmation.js';
 import { COMMAND_PHRASE_SUITE } from './phrase-suite.js';
 import { resolveCommand } from './router.js';
 
@@ -17,7 +18,12 @@ describe('resolveCommand', () => {
       const input =
         intent === 'search_patient'
           ? { text: phrase, role }
-          : { text: phrase, role, patientId: DEMO_PATIENT_ID };
+          : {
+              text: phrase,
+              role,
+              patientId: DEMO_PATIENT_ID,
+              ...(requiresExplicitConfirmation(intent) ? { confirmed: true as const } : {}),
+            };
       const result = resolveCommand(input);
       expect(result.status, `frase: ${phrase}`).toBe('resolved');
       if (result.status === 'resolved') {
@@ -42,6 +48,7 @@ describe('resolveCommand', () => {
       text: 'solicitar interconsulta',
       role: 'physician',
       patientId: DEMO_PATIENT_ID,
+      confirmed: true,
     });
     expect(ref.status).toBe('resolved');
     if (ref.status === 'resolved') expect(ref.intent).toBe('request_referral');
@@ -50,12 +57,13 @@ describe('resolveCommand', () => {
       text: 'pedir tac',
       role: 'physician',
       patientId: DEMO_PATIENT_ID,
+      confirmed: true,
     });
     expect(img.status).toBe('resolved');
     if (img.status === 'resolved') expect(img.intent).toBe('request_imaging');
   });
 
-  it('ambigüedad devuelve hasta 3 candidatos ordenados por score', () => {
+  it('ambigüedad devuelve hasta 5 candidatos ordenados por score', () => {
     const result = resolveCommand({
       text: 'evolucion y epicrisis',
       role: 'physician',
@@ -64,7 +72,7 @@ describe('resolveCommand', () => {
     expect(result.status).toBe('needs_clarification');
     if (result.status === 'needs_clarification') {
       expect(result.candidates.length).toBeGreaterThan(1);
-      expect(result.candidates.length).toBeLessThanOrEqual(3);
+      expect(result.candidates.length).toBeLessThanOrEqual(5);
     }
   });
 

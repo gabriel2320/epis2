@@ -1,7 +1,13 @@
 import { copy } from '@epis2/design-system';
+import {
+  EpisAlert,
+  EpisAuthScreen,
+  EpisBrandMark,
+  EpisButton,
+  EpisM3Text,
+  Stack,
+} from '@epis2/epis2-ui';
 import { useNavigate } from '@tanstack/react-router';
-import { ErrorState } from '../components/ErrorState.js';
-import { Box, epis2ShellContentIslandSx } from '@epis2/epis2-ui';
 
 export type ForbiddenPageProps = {
   detail?: string;
@@ -12,13 +18,24 @@ export function ForbiddenPage({ detail }: ForbiddenPageProps) {
   const message = detail?.trim() ? detail : copy.errors.forbiddenMessage;
 
   return (
-    <Box sx={epis2ShellContentIslandSx} data-testid="epis2-forbidden">
-      <ErrorState
-        title={copy.errors.forbiddenTitle}
-        message={message}
-        onRetry={() => void navigate({ to: '/comando' })}
-        retryLabel={copy.errors.forbiddenAction}
-      />
-    </Box>
+    <EpisAuthScreen testId="epis2-forbidden">
+      <Stack spacing={2.5} alignItems="center" textAlign="center">
+        <EpisBrandMark size={48} />
+        <EpisM3Text role="titleLarge" component="h1">
+          {copy.errors.forbiddenTitle}
+        </EpisM3Text>
+        <EpisAlert severity="error" sx={{ width: '100%' }}>
+          {message}
+        </EpisAlert>
+        <EpisButton
+          appearance="filled"
+          fullWidth
+          onClick={() => void navigate({ to: '/comando' })}
+          data-testid="epis2-forbidden-action"
+        >
+          {copy.errors.forbiddenAction}
+        </EpisButton>
+      </Stack>
+    </EpisAuthScreen>
   );
 }

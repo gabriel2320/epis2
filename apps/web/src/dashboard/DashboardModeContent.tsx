@@ -22,6 +22,7 @@ import {
   Epis2NavigationRailFooter,
   useEpis2NavigationRailItems,
 } from '../navigation/epis2NavigationRail.js';
+import { ClinicalGlobalTopBar } from '../layouts/ClinicalGlobalTopBar.js';
 import { PatientDashboardTab } from '../components/PatientDashboardTab.js';
 import { QualityDashboardTab } from '../components/QualityDashboardTab.js';
 import { NursingDashboardTab } from '../components/NursingDashboardTab.js';
@@ -562,6 +563,7 @@ export function DashboardModeContent() {
     <EpisAppShellLayout
       railItems={railItems}
       railFooter={<Epis2NavigationRailFooter />}
+      appBar={<ClinicalGlobalTopBar active="dashboard" />}
       testId="epis2-dashboard-shell"
     >
       <EpisDashboardShell

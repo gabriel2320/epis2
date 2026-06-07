@@ -32,11 +32,15 @@ export const epis2IslandMarginSx: SystemStyleObject<Theme> = {
   maxWidth: epis2BarLayout.maxWidth.expanded,
 };
 
-/** Isla de contenido cuando el shell ya aplica margen exterior (ClinicalShellLayout). */
-export const epis2ShellContentIslandSx: SystemStyleObject<Theme> = {
-  ...epis2IslandSx,
-  ...epis2IslandPaddingSx,
+/** Contenido plano dentro del shell — sin segunda isla (LAYOUT-G12). */
+export const epis2ShellContentSx: SystemStyleObject<Theme> = {
+  width: '100%',
+  maxWidth: epis2BarLayout.maxWidth.expanded,
+  mx: 'auto',
 };
+
+/** Alias sin fondo paper duplicado. */
+export const epis2ShellContentIslandSx: SystemStyleObject<Theme> = epis2ShellContentSx;
 
 /** Composición estándar para páginas clínicas y comando. */
 export function epis2PageIslandSx(extra?: SystemStyleObject<Theme>): SxProps<Theme> {

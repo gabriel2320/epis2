@@ -3,6 +3,7 @@ import type { ClinicalIntent } from './types.js';
 /** Rutas del espacio clínico — destino tras resolver comando. */
 export const INTENT_ROUTE_PATHS: Record<ClinicalIntent, string> = {
   search_patient: '/espacio/buscar-paciente',
+  open_patient_chart: '/espacio/ficha',
   summarize_patient: '/espacio/resumen',
   create_evolution_draft: '/espacio/evolucion',
   prepare_discharge_draft: '/espacio/epicrisis',
@@ -25,6 +26,31 @@ export const INTENT_ROUTE_PATHS: Record<ClinicalIntent, string> = {
   create_outpatient_visit: '/espacio/ambulatorio',
   create_medical_certificate: '/espacio/certificado',
   respond_referral: '/espacio/informe-interconsulta',
+  register_allergy: '/espacio/alergia',
+  register_problem: '/espacio/problema',
+};
+
+/** Rutas que antes eran botones en ficha — deben resolverse vía comando. */
+export const WORKSPACE_QUICK_ROUTE_INTENTS: Record<string, ClinicalIntent> = {
+  '/espacio/ficha': 'open_patient_chart',
+  '/espacio/resumen': 'summarize_patient',
+  '/espacio/ambulatorio': 'create_outpatient_visit',
+  '/espacio/evolucion': 'create_evolution_draft',
+  '/espacio/epicrisis': 'prepare_discharge_draft',
+  '/espacio/receta': 'prepare_prescription',
+  '/espacio/laboratorio': 'request_laboratory',
+  '/espacio/imagenologia': 'request_imaging',
+  '/espacio/interconsulta': 'request_referral',
+  '/espacio/certificado': 'create_medical_certificate',
+  '/espacio/alergia': 'register_allergy',
+  '/espacio/problema': 'register_problem',
+  '/espacio/conciliacion': 'reconcile_medications',
+  '/espacio/enfermeria': 'create_nursing_note',
+  '/espacio/mar': 'record_medication_administration',
+  '/espacio/farmacia': 'prepare_pharmacy_review',
+  '/espacio/ingreso': 'admit_patient_hospital',
+  '/espacio/traslado': 'transfer_patient',
+  '/espacio/resultados': 'open_results_inbox',
 };
 
 export const DASHBOARD_TAB_BY_INTENT: Partial<Record<ClinicalIntent, string>> = {

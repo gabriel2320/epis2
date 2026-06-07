@@ -1,7 +1,34 @@
+import { INTENT_SECURE_METADATA } from './intent-metadata.js';
 import { INTENT_ROUTE_PATHS } from './routes.js';
 import type { CommandDefinition } from './types.js';
 
-export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
+type CommandDefCore = Pick<
+  CommandDefinition,
+  | 'intent'
+  | 'labelEs'
+  | 'aliasesEs'
+  | 'routePath'
+  | 'requiredPermission'
+  | 'requiresPatient'
+  | 'priority'
+  | 'match'
+>;
+
+function cmd(core: CommandDefCore): CommandDefinition {
+  const meta = INTENT_SECURE_METADATA[core.intent];
+  const def: CommandDefinition = {
+    ...meta,
+    ...core,
+    description: meta.description,
+    examples: meta.examples,
+  };
+  if (meta.formId !== undefined) {
+    def.formId = meta.formId;
+  }
+  return def;
+}
+
+const COMMAND_DEFINITIONS_CORE: readonly CommandDefCore[] = [
   {
     intent: 'search_patient',
     labelEs: 'Buscar paciente',
@@ -13,6 +40,8 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       'busqueda de paciente',
       'abrir busqueda',
       'ir a buscar paciente',
+      'buscar paciente juan',
+      'abrir ficha de juan',
     ],
     routePath: INTENT_ROUTE_PATHS.search_patient,
     requiredPermission: 'command.execute',
@@ -21,11 +50,37 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
     match: (q) =>
       /abrir\s+busqueda/.test(q) ||
       /ir\s+a\s+buscar/.test(q) ||
+      /abrir\s+ficha\s+(de|del)\s+\w/.test(q) ||
+      /ver\s+ficha\s+(de|del)\s+\w/.test(q) ||
       (/paciente/.test(q) &&
         /(buscar|busca|encontrar|localizar|busqueda)/.test(q) &&
         !/resumen|resumir|resume|evolucion|epicrisis|receta|prescripcion|laboratorio|lab\b|analitica/.test(
           q,
         )),
+  },
+  {
+    intent: 'open_patient_chart',
+    labelEs: 'Abrir ficha del paciente',
+    aliasesEs: [
+      'abrir ficha',
+      'ver ficha',
+      'ir a ficha',
+      'ir a la ficha',
+      'mostrar ficha',
+      'ficha del paciente',
+      'abrir la ficha',
+    ],
+    routePath: INTENT_ROUTE_PATHS.open_patient_chart,
+    requiredPermission: 'command.execute',
+    requiresPatient: true,
+    priority: 11,
+    match: (q) => {
+      if (/\bficha\s+(de|del)\s+\w/.test(q)) return false;
+      return (
+        /^(abrir|ver|ir\s+a|mostrar)(\s+la)?\s+ficha(\s+del\s+paciente)?$/.test(q) ||
+        (/\b(abrir|ver|ir\s+a|mostrar)\s+ficha\b/.test(q) && !/\bde\s+\w/.test(q))
+      );
+    },
   },
   {
     intent: 'summarize_patient',
@@ -40,6 +95,9 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       'ver resumen',
       'mostrar resumen',
       'historia resumida',
+      'resumir caso',
+      'preguntar a la ia',
+      'preguntarle a la ia por este paciente',
     ],
     routePath: INTENT_ROUTE_PATHS.summarize_patient,
     requiredPermission: 'command.execute',
@@ -51,7 +109,8 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
           q,
         )) ||
       /ultimas\s*24/.test(q) ||
-      /ver\s+sintesis/.test(q),
+      /ver\s+sintesis/.test(q) ||
+      /preguntar.*\bia\b|consultar\s+ia/.test(q),
   },
   {
     intent: 'create_evolution_draft',
@@ -63,17 +122,25 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       'nota de evolucion',
       'escribe evolucion',
       'crear evolucion',
+      'crear evolución',
       'evolucion medica',
       'actualizar evolucion',
       'redactar evolucion',
       'evolucionar',
+      'hacer evolucion',
+      'evolucionar paciente',
+      'crear nota diaria',
+      'escribir soap',
+      'nota diaria',
     ],
     routePath: INTENT_ROUTE_PATHS.create_evolution_draft,
     requiredPermission: 'command.execute',
     requiresPatient: true,
     priority: 50,
     match: (q) =>
-      /evolucion|evoluciona|evolucionar|nota\s+de\s+evolucion|evolucion\s+diaria/.test(q),
+      /evolucion|evoluciona|evolucionar|nota\s+de\s+evolucion|evolucion\s+diaria|nota\s+diaria|\bsoap\b/.test(
+        q,
+      ),
   },
   {
     intent: 'prepare_discharge_draft',
@@ -87,14 +154,17 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       'egreso',
       'resumen de alta',
       'preparar epicrisis',
+      'preparar alta',
       'nota de egreso',
+      'hacer epicrisis',
+      'revisar pendientes de alta',
     ],
     routePath: INTENT_ROUTE_PATHS.prepare_discharge_draft,
     requiredPermission: 'command.execute',
     requiresPatient: true,
     priority: 35,
     match: (q) =>
-      /epicrisis|alta\s+(medica|hospitalaria)|resumen\s+de\s+alta|egreso|discharge|nota\s+de\s+egreso/.test(q),
+      /epicrisis|alta\s+(medica|hospitalaria)|preparar\s+alta|resumen\s+de\s+alta|egreso|discharge|nota\s+de\s+egreso|pendientes\s+de\s+alta|revisar\s+pendientes/.test(q),
   },
   {
     intent: 'prepare_prescription',
@@ -113,13 +183,14 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       'ordenar medicamento',
       'recetar paracetamol',
       'prescribe amoxicilina',
+      'imprimir receta',
     ],
     routePath: INTENT_ROUTE_PATHS.prepare_prescription,
     requiredPermission: 'command.execute',
     requiresPatient: true,
     priority: 70,
     match: (q) =>
-      /receta|prescripcion|prescripción|prescribe|recetar|medicamento|preparar\s+receta|preparar\s+prescripcion/.test(
+      /receta|prescripcion|prescripción|prescribe|recetar|medicamento|preparar\s+receta|preparar\s+prescripcion|imprimir\s+receta/.test(
         q,
       ),
   },
@@ -134,13 +205,17 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       'resultados criticos',
       'ver resultados criticos',
       'mostrar resultados',
+      'ver examenes de hoy',
+      'como esta el laboratorio',
+      'revisar hemograma',
+      'revisar imagenes',
     ],
     routePath: INTENT_ROUTE_PATHS.open_results_inbox,
     requiredPermission: 'command.execute',
     requiresPatient: true,
     priority: 73,
     match: (q) =>
-      /(bandeja\s+de\s+resultados|ver\s+bandeja|ver\s+resultados|abrir\s+resultados|resultados\s+criticos|mostrar\s+resultados)/.test(
+      /(bandeja\s+de\s+resultados|ver\s+bandeja|ver\s+resultados|abrir\s+resultados|resultados\s+criticos|mostrar\s+resultados|examenes\s+de\s+hoy|como\s+esta\s+el\s+laboratorio|revisar\s+hemograma|revisar\s+imagenes)/.test(
         q,
       ) && !/\b(solicitar|solicita|pedir|pide|orden)\b/.test(q),
   },
@@ -159,6 +234,7 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       'hemograma',
       'hb ht',
       'solicitar lab',
+      'solicitar hemograma',
     ],
     routePath: INTENT_ROUTE_PATHS.request_laboratory,
     requiredPermission: 'command.execute',
@@ -175,16 +251,18 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
     labelEs: 'Interconsulta',
     aliasesEs: [
       'solicitar interconsulta',
+      'hacer interconsulta',
       'interconsulta',
       'derivar a especialidad',
       'pedir interconsulta',
+      'crear interconsulta a cardiologia',
     ],
     routePath: INTENT_ROUTE_PATHS.request_referral,
     requiredPermission: 'command.execute',
     requiresPatient: true,
     priority: 76,
     match: (q) =>
-      /solicitar\s+interconsulta|pedir\s+interconsulta|derivar\s+a\s+especialidad/.test(q) ||
+      /solicitar\s+interconsulta|hacer\s+interconsulta|pedir\s+interconsulta|derivar\s+a\s+especialidad/.test(q) ||
       (/interconsulta/.test(q) && !/informe|respuesta|contestar|especialista/.test(q)),
   },
   {
@@ -193,17 +271,20 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
     aliasesEs: [
       'solicitar imagen',
       'solicitar imagenologia',
+      'solicitar tac',
+      'solicita tac',
       'pedir tac',
       'pedir radiografia',
       'estudio de imagen',
       'orden de imagen',
+      'pedir tac de torax',
     ],
     routePath: INTENT_ROUTE_PATHS.request_imaging,
     requiredPermission: 'command.execute',
     requiresPatient: true,
     priority: 77,
     match: (q) =>
-      /imagenologia|imagenología|radiografia|radiografía|\btac\b|\brm\b|tomografia|ecografia/.test(
+      /imagenologia|imagenología|radiografia|radiografía|\btac\b|\brm\b|tomografia|ecografia|solicitar\s+imagen|solicita\s+imagen|pedir\s+tac/.test(
         q,
       ),
   },
@@ -231,6 +312,7 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       'mar',
       'dar medicamento',
       'administracion medicamento',
+      'ver mar',
     ],
     routePath: INTENT_ROUTE_PATHS.record_medication_administration,
     requiredPermission: 'command.execute',
@@ -308,13 +390,14 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       'emitir certificado',
       'licencia medica',
       'certificado de salud',
+      'imprimir certificado',
     ],
     routePath: INTENT_ROUTE_PATHS.create_medical_certificate,
     requiredPermission: 'command.execute',
     requiresPatient: true,
     priority: 63,
     match: (q) =>
-      /certificado\s+(medico|de\s+reposo|de\s+salud)|emitir\s+certificado|licencia\s+medica/.test(
+      /certificado\s+(medico|de\s+reposo|de\s+salud)|emitir\s+certificado|licencia\s+medica|imprimir\s+certificado/.test(
         q,
       ),
   },
@@ -344,13 +427,53 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
       'revisar prescripcion',
       'intervencion farmacia',
       'farmacia clinica',
+      'abrir farmacia',
+      'revisar antibioticos',
     ],
     routePath: INTENT_ROUTE_PATHS.prepare_pharmacy_review,
     requiredPermission: 'command.execute',
     requiresPatient: true,
     priority: 68,
     match: (q) =>
-      /validacion\s+farmaceutica|farmacia\s+clinica|intervencion\s+farmacia|revisar\s+prescripcion/.test(
+      /validacion\s+farmaceutica|farmacia\s+clinica|intervencion\s+farmacia|revisar\s+prescripcion|abrir\s+farmacia|revisar\s+antibioticos/.test(
+        q,
+      ),
+  },
+  {
+    intent: 'register_allergy',
+    labelEs: 'Registrar alergia',
+    aliasesEs: [
+      'registrar alergia',
+      'anotar alergia',
+      'nueva alergia',
+      'alergia del paciente',
+      'registro de alergia',
+    ],
+    routePath: INTENT_ROUTE_PATHS.register_allergy,
+    requiredPermission: 'command.execute',
+    requiresPatient: true,
+    priority: 61,
+    match: (q) =>
+      /registrar\s+alergia|anotar\s+alergia|nueva\s+alergia|registro\s+de\s+alergia|alergia\s+del\s+paciente/.test(
+        q,
+      ),
+  },
+  {
+    intent: 'register_problem',
+    labelEs: 'Registrar problema clínico',
+    aliasesEs: [
+      'registrar problema',
+      'nuevo problema clinico',
+      'anotar problema',
+      'problema activo',
+      'registro de problema',
+    ],
+    routePath: INTENT_ROUTE_PATHS.register_problem,
+    requiredPermission: 'command.execute',
+    requiresPatient: true,
+    priority: 60,
+    match: (q) =>
+      /registrar\s+problema|nuevo\s+problema|anotar\s+problema|problema\s+(clinico|activo)|registro\s+de\s+problema/.test(
         q,
       ),
   },
@@ -444,7 +567,10 @@ export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
         !/paciente|servicio|mi\s+trabajo/.test(q)) ||
       /\bver\s+indicadores\b/.test(q),
   },
-];
+] as const satisfies readonly CommandDefCore[];
+
+export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] =
+  COMMAND_DEFINITIONS_CORE.map(cmd);
 
 /** Frases que activan más de un intent con la misma prioridad — deben quedar ambiguas. */
 export const AMBIGUOUS_PHRASES = [

@@ -1,40 +1,49 @@
 import type { ReactNode } from 'react';
-import { EpisCard } from '../primitives/EpisCard.js';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import { epis2IslandPaddingSx, epis2IslandSx, epis2CanvasSx } from '../theme/island-layout.js';
+import { useTheme } from '@mui/material/styles';
+import { epis2Shape } from '../theme/shape.js';
 
 export type EpisAuthScreenProps = {
   children: ReactNode;
   testId?: string;
 };
 
-/** Pantalla de autenticación M3 Expressive — layout acogedor centrado. */
+/** Gateway M3 Expressive — superficie única flotante, sin marco anidado (LAYOUT-G12). */
 export function EpisAuthScreen({ children, testId = 'epis2-login-page' }: EpisAuthScreenProps) {
+  const theme = useTheme();
+  const visual = theme.epis2?.visual;
+
   return (
     <Box
+      data-testid="epis2-login-gateway"
       sx={{
-        ...epis2CanvasSx,
+        minHeight: '100dvh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        px: { xs: 3, sm: 4, md: 5 },
-        py: { xs: 4, sm: 5 },
+        px: { xs: 2, sm: 3 },
+        py: { xs: 3, sm: 5 },
+        bgcolor: 'background.default',
+        backgroundImage: visual?.canvasGradient
+          ? `linear-gradient(165deg, ${visual.canvasGradient} 0%, transparent 55%)`
+          : undefined,
       }}
     >
-      <EpisCard
-        elevation={0}
+      <Box
         sx={{
-          ...epis2IslandSx,
-          ...epis2IslandPaddingSx,
-          maxWidth: 420,
+          maxWidth: 440,
           width: '100%',
+          borderRadius: `${epis2Shape.floating}px`,
+          bgcolor: 'background.paper',
+          boxShadow: visual?.floatingDockShadow ?? 'none',
+          p: { xs: 3, sm: 4 },
         }}
       >
-        <Stack spacing={3.5} data-testid={testId}>
+        <Stack spacing={3} data-testid={testId}>
           {children}
         </Stack>
-      </EpisCard>
+      </Box>
     </Box>
   );
 }

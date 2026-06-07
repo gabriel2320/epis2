@@ -75,6 +75,14 @@ export function buildCommandPhraseSuite(): PhraseSuiteEntry[] {
     { phrase: 'orden laboratorio hemograma', intent: 'request_laboratory' },
     { phrase: 'solicitar analitica completa', intent: 'request_laboratory' },
     { phrase: 'pedir estudios de lab', intent: 'request_laboratory' },
+    { phrase: 'crear evolucion', intent: 'create_evolution_draft' },
+    { phrase: 'solicitar tac', intent: 'request_imaging' },
+    { phrase: 'hacer interconsulta cardiologia', intent: 'request_referral' },
+    { phrase: 'emitir receta', intent: 'prepare_prescription' },
+    { phrase: 'preparar alta', intent: 'prepare_discharge_draft' },
+    { phrase: 'abrir farmacia', intent: 'prepare_pharmacy_review' },
+    { phrase: 'registrar alergia', intent: 'register_allergy' },
+    { phrase: 'registrar problema', intent: 'register_problem' },
   ];
 
   for (const e of extras) push(e);

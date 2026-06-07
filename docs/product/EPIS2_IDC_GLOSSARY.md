@@ -38,6 +38,23 @@ No promover IDC **41** a `Done` hasta existir tablero UCI (Ola 13).
 
 ---
 
+## Promoción Command Engine + UX (2026-06-04)
+
+| Capacidad | Tipo | Evidencia | Estado |
+|-----------|------|-----------|--------|
+| CE-0 resolve NL | Capacidad | phrase suite 50 + rank | **Done** |
+| CE-1 assist route | Capacidad | `resolveWithAssist`, local-ai | **Done** |
+| CE-2 confirmación | Journey | dialog + E2E UX-G02 | **Done** |
+| CE-3b slot prefill | Formulario | imaging TAC | **Done** |
+| CE-4 context prefill | Formulario | evolución SOAP | **Done** |
+| CE-5 badge + URL limpia | Journey | E2E UX-G02 | **Done** |
+| Centro Comando wire | Superficie | hero + dock + registry cards | **Done** |
+| Login gateway M3 | Superficie | `EpisAuthScreen` + E2E | **Done** |
+
+**Gates:** `quality:ux-g02` (9/9 API) · `quality:ux-pilot` (E2E 5/5) · `quality:golden-journey` (17/17)
+
+---
+
 ## Promoción Ola 2 (MF-OLA2-001)
 
 | IDC | Tipo | Evidencia | Estado |

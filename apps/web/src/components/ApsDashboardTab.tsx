@@ -1,17 +1,13 @@
 import type { ApsDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import {
-  Alert,
+import { EpisWorkspaceSection, Alert,
   Button,
   Chip,
   EpisMetric,
   List,
   ListItem,
   ListItemText,
-  Paper,
-  Stack,
-  Typography,
-} from '@epis2/epis2-ui';
+  Stack, } from '@epis2/epis2-ui';
 
 export type ApsDashboardTabProps = {
   data: ApsDashboardResponse;
@@ -36,10 +32,7 @@ export function ApsDashboardTab({ data, onOpenPatient }: ApsDashboardTabProps) {
           value={String(data.metrics.homeVisitsToday)}
         />
       </Stack>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-aps-idc-panels">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.aps.idcPanelsTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.aps.idcPanelsTitle} testId="epis2-aps-idc-panels">
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
           {data.idcPanels.map((panel) => (
             <Chip
@@ -52,11 +45,8 @@ export function ApsDashboardTab({ data, onOpenPatient }: ApsDashboardTabProps) {
             />
           ))}
         </Stack>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-aps-cardiovascular">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.aps.cardiovascularTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.aps.cardiovascularTitle} testId="epis2-aps-cardiovascular">
         <List dense data-testid="epis2-aps-cardiovascular-rows">
           {data.cardiovascularControls.map((row) => (
             <ListItem key={row.patientId} disablePadding sx={{ py: 0.5 }}>
@@ -72,11 +62,8 @@ export function ApsDashboardTab({ data, onOpenPatient }: ApsDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-aps-framingham">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.aps.framinghamTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.aps.framinghamTitle} testId="epis2-aps-framingham">
         <List dense>
           {data.framinghamScores.map((row) => (
             <ListItem key={row.patientId} disablePadding>
@@ -87,11 +74,8 @@ export function ApsDashboardTab({ data, onOpenPatient }: ApsDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-aps-preventive-exam">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.aps.preventiveExamTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.aps.preventiveExamTitle} testId="epis2-aps-preventive-exam">
         <List dense>
           {data.preventiveExams.map((row) => (
             <ListItem key={row.patientId} disablePadding>
@@ -102,11 +86,8 @@ export function ApsDashboardTab({ data, onOpenPatient }: ApsDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-aps-diabetic-foot">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.aps.diabeticFootTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.aps.diabeticFootTitle} testId="epis2-aps-diabetic-foot">
         <List dense>
           {data.diabeticFootScreenings.map((row) => (
             <ListItem key={row.patientId} disablePadding>
@@ -117,11 +98,8 @@ export function ApsDashboardTab({ data, onOpenPatient }: ApsDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-aps-mental-health">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.aps.mentalHealthTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.aps.mentalHealthTitle} testId="epis2-aps-mental-health">
         <List dense>
           {data.mentalHealthScreenings.map((row) => (
             <ListItem key={row.patientId} disablePadding>
@@ -132,11 +110,8 @@ export function ApsDashboardTab({ data, onOpenPatient }: ApsDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-aps-child-wellness">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.aps.childWellnessTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.aps.childWellnessTitle} testId="epis2-aps-child-wellness">
         <List dense>
           {data.childWellnessControls.map((row) => (
             <ListItem key={row.patientId} disablePadding>
@@ -147,11 +122,8 @@ export function ApsDashboardTab({ data, onOpenPatient }: ApsDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-aps-immunization">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.aps.immunizationTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.aps.immunizationTitle} testId="epis2-aps-immunization">
         <List dense>
           {data.immunizationSchedule.map((row) => (
             <ListItem key={`${row.patientId}-${row.vaccine}`} disablePadding>
@@ -162,11 +134,8 @@ export function ApsDashboardTab({ data, onOpenPatient }: ApsDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-aps-prenatal">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.aps.prenatalTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.aps.prenatalTitle} testId="epis2-aps-prenatal">
         <List dense>
           {data.prenatalControls.map((row) => (
             <ListItem key={row.patientId} disablePadding>
@@ -177,11 +146,8 @@ export function ApsDashboardTab({ data, onOpenPatient }: ApsDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-aps-ministerial-referral">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.aps.ministerialReferralTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.aps.ministerialReferralTitle} testId="epis2-aps-ministerial-referral">
         <List dense>
           {data.ministerialReferrals.map((row) => (
             <ListItem key={row.patientId} disablePadding>
@@ -192,11 +158,8 @@ export function ApsDashboardTab({ data, onOpenPatient }: ApsDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-aps-home-visit">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.aps.homeVisitTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.aps.homeVisitTitle} testId="epis2-aps-home-visit">
         <List dense data-testid="epis2-aps-home-visit-rows">
           {data.homeVisits.map((row) => (
             <ListItem key={row.visitId} disablePadding>
@@ -207,7 +170,7 @@ export function ApsDashboardTab({ data, onOpenPatient }: ApsDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
     </Stack>
   );
 }

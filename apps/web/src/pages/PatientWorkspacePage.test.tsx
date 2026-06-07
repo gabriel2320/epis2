@@ -2,7 +2,7 @@
  * @vitest-environment jsdom
  */
 import { copy } from '@epis2/design-system';
-import { cleanup, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, screen, waitFor, within } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
 import { renderWithQuery } from '../test/renderWithQuery.js';
@@ -43,6 +43,14 @@ vi.mock('../auth/AuthContext.js', () => ({
   }),
 }));
 
+vi.mock('../query/hooks/useAiStatusQuery.js', () => ({
+  useAiStatusQuery: () => ({ aiAvailable: false }),
+}));
+
+vi.mock('../api/commandApi.js', () => ({
+  resolveCommand: vi.fn(),
+}));
+
 vi.mock('../api/clinicalApi.js', async (importOriginal) => {
   const actual = await importOriginal<typeof import('../api/clinicalApi.js')>();
   return {
@@ -58,7 +66,7 @@ vi.mock('../api/clinicalApi.js', async (importOriginal) => {
 afterEach(() => cleanup());
 
 describe('PatientWorkspacePage', () => {
-  it('muestra alertas clínicas en la ficha del paciente', async () => {
+  it('muestra ficha compacta UX-B.2 con split historial y dock', async () => {
     fetchPatientDetail.mockResolvedValue({
       patient: {
         id: patientId,
@@ -112,14 +120,27 @@ describe('PatientWorkspacePage', () => {
     await waitFor(() => {
       expect(screen.getByTestId('epis2-patient-workspace')).toBeInTheDocument();
     });
-    expect(screen.getByTestId('epis2-ficha-widget-panel')).toBeInTheDocument();
-    expect(screen.getByTestId('epis2-widget-patient-summary')).toBeInTheDocument();
+
+    expect(screen.queryByTestId('epis2-command-context-line')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('epis2-ficha-widget-panel')).not.toBeInTheDocument();
     expect(screen.getByTestId('epis2-clinical-alerts')).toBeInTheDocument();
-    expect(
-      screen.getByText(copy.commandCenter.clinicalAlertsTitle),
-    ).toBeInTheDocument();
-    expect(fetchPatientClinicalAlerts).toHaveBeenCalledWith(patientId, expect.any(Object));
     expect(screen.getByTestId('epis2-clinical-summary')).toBeInTheDocument();
-    expect(screen.getByTestId('epis2-longitudinal-panel')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-recent-activity')).toBeInTheDocument();
+    expect(
+      within(screen.getByTestId('epis2-recent-activity')).getByText('Consulta demo'),
+    ).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-ficha-command-panel')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-floating-command-dock')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-power-bar')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-ficha-history')).toBeInTheDocument();
+    expect(screen.queryByTestId('epis2-longitudinal-panel')).not.toBeInTheDocument();
+    expect(screen.queryByText(copy.activePatient.approvedNotes)).not.toBeInTheDocument();
+    expect(screen.queryByText(copy.activePatient.pendingDrafts)).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByText(copy.activePatient.viewFullHistory));
+    await waitFor(() => {
+      expect(screen.getByTestId('epis2-longitudinal-panel')).toBeInTheDocument();
+    });
+    expect(screen.getByTestId('epis2-ficha-split')).toBeInTheDocument();
   });
 });

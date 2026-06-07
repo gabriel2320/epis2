@@ -16,6 +16,11 @@ vi.mock('@tanstack/react-router', () => ({
   useSearch: () => ({ tab: 'work' }),
   useRouterState: ({ select }: { select: (s: { location: { pathname: string } }) => unknown }) =>
     select({ location: { pathname: '/epis2/dashboard' } }),
+  Link: ({ children, to, ...rest }: { children?: unknown; to: string }) => (
+    <a href={to} {...rest}>
+      {children as string}
+    </a>
+  ),
 }));
 
 vi.mock('../routes/clinicalNavigate.js', () => ({
@@ -29,6 +34,10 @@ vi.mock('../api/dashboardApi.js', async (importOriginal) => {
     fetchDashboardWork,
   };
 });
+
+vi.mock('../api/clinicalApi.js', () => ({
+  fetchPatientClinicalAlerts: vi.fn().mockResolvedValue({ alerts: [], readOnly: true }),
+}));
 
 vi.mock('../auth/AuthContext.js', () => ({
   useAuth: () => ({

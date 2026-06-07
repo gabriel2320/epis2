@@ -27,7 +27,7 @@ describe('SessionExpiredPage', () => {
     expect(screen.getByText(copy.errors.sessionExpiredTitle)).toBeInTheDocument();
     expect(screen.getByText(copy.errors.sessionExpiredMessage)).toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: copy.errors.sessionExpiredAction }));
+    await user.click(screen.getByTestId('epis2-session-expired-action'));
     expect(navigate).toHaveBeenCalledWith({ to: '/login' });
   });
 });

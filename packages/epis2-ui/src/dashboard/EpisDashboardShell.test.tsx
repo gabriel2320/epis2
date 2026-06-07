@@ -25,6 +25,8 @@ describe('EpisDashboardShell', () => {
       </Epis2ThemeProvider>,
     );
     expect(screen.getByTestId('epis2-dashboard-shell')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-dashboard-tabs')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-dashboard-panel')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-back-to-command')).toBeInTheDocument();
     expect(screen.getByText('Contenido tab')).toBeInTheDocument();
   });

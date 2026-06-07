@@ -1,6 +1,6 @@
 import type { PatientResultsInboxResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import { EpisTrendChartSuspense, Paper, Stack, Typography } from '@epis2/epis2-ui';
+import { EpisTrendChartSuspense, EpisWorkspaceSection, Stack } from '@epis2/epis2-ui';
 import { buildObservationTrend } from '../charts/observationTrend.js';
 
 export type ResultsInboxTrendsProps = {
@@ -10,38 +10,34 @@ export type ResultsInboxTrendsProps = {
 export function ResultsInboxTrends({ inbox }: ResultsInboxTrendsProps) {
   const inrTrend = buildObservationTrend(inbox.observations, 'INR');
   const pcrTrend = buildObservationTrend(inbox.observations, 'PCR');
-  const showInr =
-    inbox.demoCaseCode === 'DEMO-005' || inrTrend.values.length >= 1;
+  const showInr = inbox.demoCaseCode === 'DEMO-005' || inrTrend.values.length >= 1;
   const showPcr = pcrTrend.values.length >= 1;
 
   if (!showInr && !showPcr) return null;
 
   return (
     <Stack spacing={2} data-testid="epis2-results-trends">
-      <Typography variant="subtitle2">{copy.results.trendsSection}</Typography>
       {showInr ? (
-        <Paper variant="outlined" sx={{ p: 2 }}>
+        <EpisWorkspaceSection title={copy.results.trendInrTitle}>
           <EpisTrendChartSuspense
-            title={copy.results.trendInrTitle}
             xAxisLabels={inrTrend.xAxisLabels}
             series={[{ label: 'INR', data: inrTrend.values }]}
             emptyMessage={copy.charts.emptyTrend}
             loadingLabel={copy.charts.loading}
             data-testid="epis2-results-chart-inr"
           />
-        </Paper>
+        </EpisWorkspaceSection>
       ) : null}
       {showPcr ? (
-        <Paper variant="outlined" sx={{ p: 2 }}>
+        <EpisWorkspaceSection title={copy.results.trendPcrTitle}>
           <EpisTrendChartSuspense
-            title={copy.results.trendPcrTitle}
             xAxisLabels={pcrTrend.xAxisLabels}
             series={[{ label: 'PCR', data: pcrTrend.values }]}
             emptyMessage={copy.charts.emptyTrend}
             loadingLabel={copy.charts.loading}
             data-testid="epis2-results-chart-pcr"
           />
-        </Paper>
+        </EpisWorkspaceSection>
       ) : null}
     </Stack>
   );

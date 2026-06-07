@@ -51,3 +51,12 @@ export {
   scrollspySectionLabels,
   type ScrollspyLayoutBlueprintId,
 } from './scrollspy-blueprints.js';
+export {
+  buildCommandSlotPrefill,
+  hasCommandSlotPrefill,
+} from './command-slot-prefill.js';
+export {
+  buildContextClinicalPrefill,
+  mergePrefillOnlyEmpty,
+  supportsContextClinicalPrefill,
+} from './context-clinical-prefill.js';

@@ -1,17 +1,14 @@
 import type { PharmacyDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import {
-  Alert,
+import { EpisWorkspaceSection, Alert,
   Button,
   Chip,
   EpisMetric,
   List,
   ListItem,
   ListItemText,
-  Paper,
   Stack,
-  Typography,
-} from '@epis2/epis2-ui';
+  Typography, } from '@epis2/epis2-ui';
 
 export type PharmacyDashboardTabProps = {
   data: PharmacyDashboardResponse;
@@ -43,10 +40,7 @@ export function PharmacyDashboardTab({
           value={String(data.metrics.reconciliationCandidatesCount)}
         />
       </Stack>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-pharmacy-idc-panels">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.pharmacy.idcPanelsTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.pharmacy.idcPanelsTitle} testId="epis2-pharmacy-idc-panels">
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
           {data.idcPanels.map((panel) => (
             <Chip
@@ -59,12 +53,9 @@ export function PharmacyDashboardTab({
             />
           ))}
         </Stack>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-pharmacy-ysite">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.pharmacy.ySiteTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.pharmacy.ySiteTitle} testId="epis2-pharmacy-ysite">
         <List dense data-testid="epis2-pharmacy-ysite-rows">
           {data.ySiteChecks.map((row) => (
             <ListItem key={`${row.drugA}-${row.drugB}`} disablePadding sx={{ py: 0.25 }}>
@@ -75,12 +66,9 @@ export function PharmacyDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-pharmacy-renal-dose">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.pharmacy.renalDoseTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.pharmacy.renalDoseTitle} testId="epis2-pharmacy-renal-dose">
         <List dense>
           {data.renalDoseAdjustments.map((row) => (
             <ListItem key={`${row.patientDisplayName}-${row.medication}`} disablePadding sx={{ py: 0.25 }}>
@@ -91,12 +79,9 @@ export function PharmacyDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-pharmacy-tdm">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.pharmacy.tdmTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.pharmacy.tdmTitle} testId="epis2-pharmacy-tdm">
         <List dense>
           {data.tdmMonitoring.map((row) => (
             <ListItem key={`${row.patientDisplayName}-${row.drug}`} disablePadding sx={{ py: 0.25 }}>
@@ -107,12 +92,9 @@ export function PharmacyDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-pharmacy-ram">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.pharmacy.ramTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.pharmacy.ramTitle} testId="epis2-pharmacy-ram">
         <List dense>
           {data.ramReports.map((row) => (
             <ListItem key={`${row.patientDisplayName}-${row.suspectDrug}`} disablePadding sx={{ py: 0.25 }}>
@@ -123,12 +105,9 @@ export function PharmacyDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.inpatient.pharmacyValidations}
-        </Typography>
+      <EpisWorkspaceSection title={copy.inpatient.pharmacyValidations}>
         {data.pendingValidations.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.inpatient.noPharmacyPending}
@@ -154,12 +133,9 @@ export function PharmacyDashboardTab({
             ))}
           </Stack>
         )}
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-pharmacy-reconciliation">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.pharmacy.reconciliationTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.pharmacy.reconciliationTitle} testId="epis2-pharmacy-reconciliation">
         {data.reconciliationCandidates.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.inpatient.noPharmacyPending}
@@ -189,12 +165,9 @@ export function PharmacyDashboardTab({
             </Alert>
           ))
         )}
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-pharmacy-dispensing">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.pharmacy.dispensingTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.pharmacy.dispensingTitle} testId="epis2-pharmacy-dispensing">
         <List dense>
           {data.dispensingQueue.map((row) => (
             <ListItem key={row.prescriptionId} disablePadding sx={{ py: 0.25 }}>
@@ -205,12 +178,9 @@ export function PharmacyDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-pharmacy-crash-cart">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.pharmacy.crashCartTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.pharmacy.crashCartTitle} testId="epis2-pharmacy-crash-cart">
         <List dense>
           {data.crashCartInventory.map((row) => (
             <ListItem key={row.cartId} disablePadding sx={{ py: 0.25 }}>
@@ -221,12 +191,9 @@ export function PharmacyDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-pharmacy-controlled-substances">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.pharmacy.controlledSubstancesTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.pharmacy.controlledSubstancesTitle} testId="epis2-pharmacy-controlled-substances">
         <List dense>
           {data.controlledSubstances.map((row) => (
             <ListItem key={row.medication} disablePadding sx={{ py: 0.25 }}>
@@ -237,12 +204,9 @@ export function PharmacyDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-pharmacy-return">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.pharmacy.returnTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.pharmacy.returnTitle} testId="epis2-pharmacy-return">
         <List dense>
           {data.drugReturns.map((row) => (
             <ListItem key={`${row.patientDisplayName}-${row.medication}`} disablePadding sx={{ py: 0.25 }}>
@@ -253,12 +217,9 @@ export function PharmacyDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-pharmacy-stockout">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.pharmacy.stockoutTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.pharmacy.stockoutTitle} testId="epis2-pharmacy-stockout">
         <List dense data-testid="epis2-pharmacy-stockout-rows">
           {data.stockoutAlerts.map((row) => (
             <ListItem key={row.medication} disablePadding sx={{ py: 0.25 }}>
@@ -273,7 +234,7 @@ export function PharmacyDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
 
       <Stack direction="row" spacing={1} flexWrap="wrap">
         {data.demoTasks.map((task) => (

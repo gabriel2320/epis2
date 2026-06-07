@@ -28,6 +28,16 @@ Registro humano de cada extracción desde EPIS. Fuente de verdad estructurada: `
 
 ---
 
+## Referencias externas (sin manifiesto — no runtime)
+
+| ID | Fuente | Destino | Modo | Fecha | Estado |
+|----|--------|---------|------|-------|--------|
+| REF-20260607-001 | Tesser Lyra export 2026-05-28 | `migration/candidates/lyra/lyra-clinical-catalogs-export/clean/` | reference | 2026-06-07 | archivado |
+
+Ver `migration/candidates/lyra/lyra-clinical-catalogs-export/SOURCE.md`.
+
+---
+
 ## Reglas
 
 - No marcar «hecho» sin entrada en manifiesto.

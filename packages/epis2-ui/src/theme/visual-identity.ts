@@ -20,6 +20,8 @@ export type Epis2VisualIdentity = {
   powerBarBg: string;
   powerBarBorder: string;
   powerBarFocusShadow: string;
+  /** Sombra suave reservada al Command Dock flotante (única excepción tonal+shadow). */
+  floatingDockShadow: string;
   topBarBg: string;
   brandGradient: string;
   demoBadgeChip: Epis2StatusChipColors;
@@ -72,7 +74,11 @@ export function buildVisualIdentity(
     powerBarBg: resolved.surfaceContainerHigh,
     powerBarBorder: hexWithAlpha(borderBase, 0.45),
     powerBarFocusShadow: `0 0 0 2px ${hexWithAlpha(focusBase, 0.22)}`,
-    topBarBg: 'transparent',
+    floatingDockShadow:
+      mode === 'light'
+        ? `0 8px 32px ${hexWithAlpha(resolved.onSurface, 0.12)}, 0 2px 8px ${hexWithAlpha(resolved.onSurface, 0.06)}`
+        : `0 12px 40px ${hexWithAlpha('#000000', 0.45)}, 0 2px 8px ${hexWithAlpha('#000000', 0.25)}`,
+    topBarBg: resolved.surface,
     brandGradient: scheme ? scheme.primary : 'none',
     demoBadgeChip: {
       borderColor: borderBase,

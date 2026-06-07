@@ -1,17 +1,14 @@
 import type { EmergencyDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import {
-  Alert,
+import { EpisWorkspaceSection, Alert,
   Button,
   Chip,
   EpisMetric,
   List,
   ListItem,
   ListItemText,
-  Paper,
   Stack,
-  Typography,
-} from '@epis2/epis2-ui';
+  Typography, } from '@epis2/epis2-ui';
 
 export type EmergencyDashboardTabProps = {
   data: EmergencyDashboardResponse;
@@ -46,10 +43,7 @@ export function EmergencyDashboardTab({
           value={String(data.observationBeds)}
         />
       </Stack>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-emergency-idc-panels">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.emergency.idcPanelsTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.emergency.idcPanelsTitle} testId="epis2-emergency-idc-panels">
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
           {data.idcPanels.map((panel) => (
             <Chip
@@ -62,11 +56,8 @@ export function EmergencyDashboardTab({
             />
           ))}
         </Stack>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-emergency-discharge-actions">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.emergency.dischargeActionsTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.emergency.dischargeActionsTitle} testId="epis2-emergency-discharge-actions">
         {observationRows.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.longitudinal.emptySection}
@@ -121,11 +112,8 @@ export function EmergencyDashboardTab({
             {copy.emergency.prepareEpicrisis}
           </Button>
         ) : null}
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-emergency-triage-queue">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.emergency.triageTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.emergency.triageTitle} testId="epis2-emergency-triage-queue">
         <List dense>
           {data.triageQueue.map((row) => (
             <ListItem key={row.id} disablePadding sx={{ py: 0.5 }}>
@@ -136,7 +124,7 @@ export function EmergencyDashboardTab({
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
     </Stack>
   );
 }

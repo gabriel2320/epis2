@@ -1,17 +1,14 @@
 import type { OrDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import {
-  Alert,
+import { EpisWorkspaceSection, Alert,
   Button,
   Chip,
   EpisMetric,
   List,
   ListItem,
   ListItemText,
-  Paper,
   Stack,
-  Typography,
-} from '@epis2/epis2-ui';
+  Typography, } from '@epis2/epis2-ui';
 
 export type OrDashboardTabProps = {
   data: OrDashboardResponse;
@@ -52,10 +49,7 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
           value={String(data.metrics.inProgress)}
         />
       </Stack>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-idc-panels">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.or.idcPanelsTitle}
-        </Typography>
+      <EpisWorkspaceSection title={copy.or.idcPanelsTitle} testId="epis2-or-idc-panels">
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
           {data.idcPanels.map((panel) => (
             <Chip
@@ -68,11 +62,8 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
             />
           ))}
         </Stack>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-surgical-schedule">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.or.surgicalScheduleTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.or.surgicalScheduleTitle} testId="epis2-or-surgical-schedule">
         <List dense data-testid="epis2-or-surgical-schedule-rows">
           {data.surgicalSchedule.map((row) => (
             <ListItem
@@ -97,11 +88,8 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-who-checklist">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.or.whoChecklistTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.or.whoChecklistTitle} testId="epis2-or-who-checklist">
         {data.whoSafetyChecklist.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.longitudinal.emptySection}
@@ -118,11 +106,8 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
             ))}
           </List>
         )}
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-preanesthesia">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.or.preanesthesiaTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.or.preanesthesiaTitle} testId="epis2-or-preanesthesia">
         <List dense data-testid="epis2-or-preanesthesia-rows">
           {data.preanesthesiaEvaluations.map((row) => (
             <ListItem
@@ -147,11 +132,8 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-intraop-anesthesia">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.or.intraopAnesthesiaTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.or.intraopAnesthesiaTitle} testId="epis2-or-intraop-anesthesia">
         {data.intraopAnesthesia.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.longitudinal.emptySection}
@@ -168,11 +150,8 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
             ))}
           </List>
         )}
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-operative-protocol">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.or.operativeProtocolTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.or.operativeProtocolTitle} testId="epis2-or-operative-protocol">
         {data.operativeProtocols.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.longitudinal.emptySection}
@@ -189,11 +168,8 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
             ))}
           </List>
         )}
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-sponge-count">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.or.spongeCountTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.or.spongeCountTitle} testId="epis2-or-sponge-count">
         {data.spongeCounts.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.longitudinal.emptySection}
@@ -210,11 +186,8 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
             ))}
           </List>
         )}
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-intraop-biopsy">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.or.intraopBiopsyTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.or.intraopBiopsyTitle} testId="epis2-or-intraop-biopsy">
         {data.intraopBiopsies.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.longitudinal.emptySection}
@@ -231,11 +204,8 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
             ))}
           </List>
         )}
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-urpa-recovery">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.or.urpaRecoveryTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.or.urpaRecoveryTitle} testId="epis2-or-urpa-recovery">
         {data.urpaRecovery.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.longitudinal.emptySection}
@@ -252,11 +222,8 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
             ))}
           </List>
         )}
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-blood-bank">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.or.bloodBankTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.or.bloodBankTitle} testId="epis2-or-blood-bank">
         {data.bloodBankOrders.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.longitudinal.emptySection}
@@ -273,11 +240,8 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
             ))}
           </List>
         )}
-      </Paper>
-      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-sterilization">
-        <Typography variant="subtitle2" gutterBottom>
-          {copy.or.sterilizationTitle}
-        </Typography>
+      </EpisWorkspaceSection>
+      <EpisWorkspaceSection title={copy.or.sterilizationTitle} testId="epis2-or-sterilization">
         <List dense data-testid="epis2-or-sterilization-rows">
           {data.sterilizationLots.map((row) => (
             <ListItem key={row.lotNumber} disablePadding sx={{ py: 0.25 }}>
@@ -288,7 +252,7 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
             </ListItem>
           ))}
         </List>
-      </Paper>
+      </EpisWorkspaceSection>
     </Stack>
   );
 }

@@ -24,7 +24,7 @@ export const DEMO_CLINICAL_CASES: DemoClinicalCase[] = [
     displayName: 'Paciente Demo — Carmen Soto',
     birthDate: '1985-03-12',
     sex: 'F',
-    scenario: 'Hipertensión arterial ambulatoria (adulto)',
+    scenario: 'IAM en evaluación — HTA de base (demo)',
     encounterId: 'b0000001-0000-4000-8000-000000000001',
     summaryFields: {
       activeProblems: 'Hipertensión arterial esencial (sintético)\nControl ambulatorio en curso',
@@ -41,7 +41,7 @@ export const DEMO_CLINICAL_CASES: DemoClinicalCase[] = [
     displayName: 'Paciente Demo — Jorge Pérez',
     birthDate: '1972-11-08',
     sex: 'M',
-    scenario: 'Diabetes tipo 2 y dislipidemia (adulto)',
+    scenario: 'Pie diabético en control — DM2 (demo)',
     encounterId: 'b0000001-0000-4000-8000-000000000002',
     summaryFields: {
       activeProblems: 'Diabetes mellitus tipo 2 (sintético)\nDislipidemia mixta (sintético)',
@@ -75,7 +75,7 @@ export const DEMO_CLINICAL_CASES: DemoClinicalCase[] = [
     displayName: 'Paciente Demo — Roberto N. Vega',
     birthDate: '1960-01-30',
     sex: 'M',
-    scenario: 'Postoperatorio apendicectomía (hospitalización corta)',
+    scenario: 'Neumonía grave hospitalaria — postoperatorio (demo)',
     encounterId: 'b0000001-0000-4000-8000-000000000004',
     summaryFields: {
       activeProblems: 'Postoperatorio día 2 — apendicectomía (sintético)\nDolor abdominal controlado (demo)',
@@ -92,7 +92,7 @@ export const DEMO_CLINICAL_CASES: DemoClinicalCase[] = [
     displayName: 'Paciente Demo — Elena M. Fuentes',
     birthDate: '1948-09-14',
     sex: 'F',
-    scenario: 'Polifarmacia y anticoagulación en adulto mayor',
+    scenario: 'Bacteriemia en evaluación — FA y polifarmacia (demo)',
     encounterId: 'b0000001-0000-4000-8000-000000000005',
     summaryFields: {
       activeProblems: 'Fibrilación auricular (sintético)\nPolifarmacia en revisión (demo)',

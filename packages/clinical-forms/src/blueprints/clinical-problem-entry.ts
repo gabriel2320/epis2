@@ -6,7 +6,7 @@ export const clinicalProblemEntryBlueprint = defineBlueprint({
   blueprintId: 'clinical_problem_entry',
   label: 'Problema clínico activo',
   purpose: 'Alta de problema activo o antecedente quirúrgico con aprobación humana',
-  intentIds: ['summarize_patient'],
+  intentIds: ['register_problem'],
   allowedRoles: ['physician'],
   routePath: '/espacio/problema',
   outputKind: 'CLINICAL_NOTE_DRAFT',

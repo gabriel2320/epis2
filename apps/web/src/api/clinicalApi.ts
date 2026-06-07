@@ -128,6 +128,8 @@ export const INTENT_TO_ASSIST_BLUEPRINT: Record<string, string> = {
   create_outpatient_visit: 'outpatient_visit',
   create_medical_certificate: 'medical_certificate',
   respond_referral: 'referral_report',
+  register_allergy: 'allergy_entry',
+  register_problem: 'clinical_problem_entry',
 };
 
 export const BLUEPRINT_BY_ROUTE: Record<string, string> = {

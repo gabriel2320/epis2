@@ -50,6 +50,59 @@ export const localAiDraftAssistOutputSchema = z.object({
 
 export type LocalAiDraftAssistOutput = z.infer<typeof localAiDraftAssistOutputSchema>;
 
+export const aiAssistCommandRouteCatalogEntrySchema = z.object({
+  intent: z.string().min(1),
+  labelEs: z.string().min(1),
+  description: z.string().min(1),
+});
+
+export const aiAssistCommandRouteDeterministicSchema = z.object({
+  intent: z.string().min(1),
+  score: z.number(),
+});
+
+export const aiAssistCommandRouteRequestSchema = z.object({
+  text: z.string().min(1).max(2000),
+  role: z.string().min(1),
+  hasPatient: z.boolean(),
+  allowedIntents: z.array(aiAssistCommandRouteCatalogEntrySchema).min(1).max(40),
+  deterministicCandidates: z.array(aiAssistCommandRouteDeterministicSchema).max(5).optional(),
+});
+
+/** Payload interno validado en local-ai antes de devolver hint de ruta. */
+export const localAiCommandRouteOutputSchema = z.object({
+  intent: z.string().optional(),
+  confidence: z.number().min(0).max(1),
+  missingContext: z.array(z.enum(['patient', 'encounter', 'draft'])).max(3).default([]),
+  reason: z.string().max(240),
+  suggestedCandidates: z.array(z.string()).max(4).default([]),
+});
+
+export const aiAssistCommandRouteResponseSchema = z.discriminatedUnion('status', [
+  z.object({
+    status: z.literal('success'),
+    hint: localAiCommandRouteOutputSchema,
+    model: z.string(),
+    latencyMs: z.number().int().nonnegative(),
+    promptHash: z.string(),
+  }),
+  z.object({
+    status: z.literal('unavailable'),
+    message: z.string(),
+  }),
+  z.object({
+    status: z.literal('rejected'),
+    message: z.string(),
+    promptHash: z.string().optional(),
+    model: z.string().optional(),
+    latencyMs: z.number().int().nonnegative().optional(),
+  }),
+]);
+
+export type AiAssistCommandRouteRequest = z.infer<typeof aiAssistCommandRouteRequestSchema>;
+export type AiAssistCommandRouteResponse = z.infer<typeof aiAssistCommandRouteResponseSchema>;
+export type LocalAiCommandRouteOutput = z.infer<typeof localAiCommandRouteOutputSchema>;
+
 export const aiRunRowSchema = z.object({
   id: z.string().uuid(),
   blueprintId: z.string(),

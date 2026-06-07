@@ -316,7 +316,7 @@ describeIntegration('Golden Clinical Journey — API', () => {
       method: 'POST',
       url: '/api/commands/resolve',
       headers: { cookie: nurseCookie },
-      payload: { text: 'registrar mar', patientId: demo005.patientId },
+      payload: { text: 'registrar mar', patientId: demo005.patientId, confirmed: true },
     });
     expect(marCmd.statusCode).toBe(200);
     expect((marCmd.json() as { routePath: string }).routePath).toBe('/espacio/mar');
