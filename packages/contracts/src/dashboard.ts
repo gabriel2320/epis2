@@ -292,6 +292,66 @@ export const icuSedoanalgesiaRowSchema = z.object({
   rassScore: z.number().int(),
 });
 
+/** MF-TRAMO-G-002 … G-011 — UCI especializada (IDC 131–140). */
+export const icuSpontaneousVentTrialRowSchema = z.object({
+  patientDisplayName: z.string(),
+  trialType: z.string(),
+  durationMin: z.number().int(),
+  outcome: z.enum(['passed', 'failed', 'in_progress']),
+});
+
+export const icuRenalTherapyRowSchema = z.object({
+  patientDisplayName: z.string(),
+  modality: z.string(),
+  ultrafiltrationMl: z.number().int(),
+  anticoagulation: z.string(),
+});
+
+export const icuParenteralNutritionRowSchema = z.object({
+  patientDisplayName: z.string(),
+  caloriesKcal: z.number().int(),
+  proteinG: z.number().int(),
+  status: z.enum(['running', 'held', 'ordered']),
+});
+
+export const icuEnteralNutritionRowSchema = z.object({
+  patientDisplayName: z.string(),
+  route: z.string(),
+  rateMlH: z.number().int(),
+  gastricResidualMl: z.number().int(),
+});
+
+export const icuBrainDeathRowSchema = z.object({
+  patientDisplayName: z.string(),
+  checklistComplete: z.boolean(),
+  legalWitness: z.string(),
+});
+
+export const icuOrganProcurementRowSchema = z.object({
+  patientDisplayName: z.string(),
+  organ: z.string(),
+  coordinatorNotified: z.boolean(),
+});
+
+export const icuDiaryRowSchema = z.object({
+  patientDisplayName: z.string(),
+  entrySummary: z.string(),
+  authorRole: z.string(),
+});
+
+export const icuDeliriumRowSchema = z.object({
+  patientDisplayName: z.string(),
+  camIcuScore: z.enum(['negative', 'positive']),
+  intervention: z.string(),
+});
+
+export const icuProneProtocolRowSchema = z.object({
+  patientDisplayName: z.string(),
+  sessionHours: z.number().int(),
+  pao2Fio2Ratio: z.number().int(),
+  status: z.enum(['active', 'completed', 'planned']),
+});
+
 export const icuDashboardResponseSchema = z.object({
   readOnly: z.literal(true),
   roleView: z.enum(['physician', 'nurse', 'admin']),
@@ -307,6 +367,15 @@ export const icuDashboardResponseSchema = z.object({
   severityScales: z.array(icuSeverityScaleRowSchema),
   vasoactive: z.array(icuVasoactiveRowSchema),
   sedoanalgesia: z.array(icuSedoanalgesiaRowSchema),
+  spontaneousVentTrials: z.array(icuSpontaneousVentTrialRowSchema),
+  renalTherapies: z.array(icuRenalTherapyRowSchema),
+  parenteralNutrition: z.array(icuParenteralNutritionRowSchema),
+  enteralNutrition: z.array(icuEnteralNutritionRowSchema),
+  brainDeathChecklists: z.array(icuBrainDeathRowSchema),
+  organProcurement: z.array(icuOrganProcurementRowSchema),
+  icuDiaryEntries: z.array(icuDiaryRowSchema),
+  deliriumScreenings: z.array(icuDeliriumRowSchema),
+  proneProtocols: z.array(icuProneProtocolRowSchema),
   metrics: z.object({
     occupied: z.number().int(),
     available: z.number().int(),

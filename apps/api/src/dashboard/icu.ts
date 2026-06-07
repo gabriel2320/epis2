@@ -15,16 +15,16 @@ const ICU_IDC_PANELS = [
 ];
 
 const ICU_SPECIALIZED_PANELS = [
-  { idc: 131, label: 'Prueba ventilación espontánea', status: 'planned' as const },
-  { idc: 132, label: 'Terapias renales continuas', status: 'planned' as const },
-  { idc: 133, label: 'Nutrición parenteral total', status: 'planned' as const },
-  { idc: 134, label: 'Nutrición enteral', status: 'planned' as const },
+  { idc: 131, label: 'Prueba ventilación espontánea', status: 'active' as const },
+  { idc: 132, label: 'Terapias renales continuas', status: 'active' as const },
+  { idc: 133, label: 'Nutrición parenteral total', status: 'active' as const },
+  { idc: 134, label: 'Nutrición enteral', status: 'active' as const },
   { idc: 135, label: 'Monitorización hemodinámica', status: 'active' as const },
-  { idc: 136, label: 'Muerte encefálica', status: 'planned' as const },
-  { idc: 137, label: 'Procuramiento órganos', status: 'planned' as const },
-  { idc: 138, label: 'Diario UCI (humanización)', status: 'planned' as const },
-  { idc: 139, label: 'Seguimiento delirium', status: 'planned' as const },
-  { idc: 140, label: 'Protocolo decúbito prono', status: 'planned' as const },
+  { idc: 136, label: 'Muerte encefálica', status: 'active' as const },
+  { idc: 137, label: 'Procuramiento órganos', status: 'active' as const },
+  { idc: 138, label: 'Diario UCI (humanización)', status: 'active' as const },
+  { idc: 139, label: 'Seguimiento delirium', status: 'active' as const },
+  { idc: 140, label: 'Protocolo decúbito prono', status: 'active' as const },
 ];
 
 export async function getIcuDashboardSummary(db: Database, role: string) {
@@ -143,6 +143,87 @@ export async function getIcuDashboardSummary(db: Database, role: string) {
         : []),
     ]);
 
+  const ventPatient = criticalBeds.find((b) => b.onVentilator && b.patientDisplayName);
+
+  const spontaneousVentTrials = ventPatient
+    ? [
+        {
+          patientDisplayName: ventPatient.patientDisplayName!,
+          trialType: 'T-piece 30 min',
+          durationMin: 30,
+          outcome: 'in_progress' as const,
+        },
+      ]
+    : [];
+
+  const renalTherapies = criticalBeds
+    .filter((b) => b.patientDisplayName && b.bedLabel === 'UCI-1')
+    .map((b) => ({
+      patientDisplayName: b.patientDisplayName!,
+      modality: 'CVVHDF',
+      ultrafiltrationMl: 120,
+      anticoagulation: 'Citrato regional',
+    }));
+
+  const parenteralNutrition = criticalBeds
+    .filter((b) => b.patientDisplayName)
+    .slice(0, 2)
+    .map((b, index) => ({
+      patientDisplayName: b.patientDisplayName!,
+      caloriesKcal: 1800 + index * 200,
+      proteinG: 90 + index * 10,
+      status: (index === 0 ? 'running' : 'ordered') as 'running' | 'held' | 'ordered',
+    }));
+
+  const enteralNutrition = criticalBeds
+    .filter((b) => b.patientDisplayName)
+    .slice(0, 2)
+    .map((b) => ({
+      patientDisplayName: b.patientDisplayName!,
+      route: 'Sonda nasogástrica',
+      rateMlH: 55,
+      gastricResidualMl: 40,
+    }));
+
+  const brainDeathChecklists: {
+    patientDisplayName: string;
+    checklistComplete: boolean;
+    legalWitness: string;
+  }[] = [];
+
+  const organProcurement: {
+    patientDisplayName: string;
+    organ: string;
+    coordinatorNotified: boolean;
+  }[] = [];
+
+  const icuDiaryEntries = criticalBeds
+    .filter((b) => b.patientDisplayName)
+    .map((b) => ({
+      patientDisplayName: b.patientDisplayName!,
+      entrySummary: 'Familia informada · contención verbal efectiva',
+      authorRole: 'Enfermería UCI',
+    }));
+
+  const deliriumScreenings = criticalBeds
+    .filter((b) => b.patientDisplayName)
+    .map((b, index) => ({
+      patientDisplayName: b.patientDisplayName!,
+      camIcuScore: (index === 1 ? 'positive' : 'negative') as 'negative' | 'positive',
+      intervention: index === 1 ? 'Reorientación + movilización' : 'Sin intervención',
+    }));
+
+  const proneProtocols = ventPatient
+    ? [
+        {
+          patientDisplayName: ventPatient.patientDisplayName!,
+          sessionHours: 16,
+          pao2Fio2Ratio: 142,
+          status: 'active' as const,
+        },
+      ]
+    : [];
+
   return {
     readOnly: true as const,
     roleView: (role === 'admin' || role === 'nurse' ? role : 'physician') as
@@ -161,6 +242,15 @@ export async function getIcuDashboardSummary(db: Database, role: string) {
     severityScales,
     vasoactive,
     sedoanalgesia,
+    spontaneousVentTrials,
+    renalTherapies,
+    parenteralNutrition,
+    enteralNutrition,
+    brainDeathChecklists,
+    organProcurement,
+    icuDiaryEntries,
+    deliriumScreenings,
+    proneProtocols,
     metrics: {
       occupied: criticalBeds.length,
       available: 1,

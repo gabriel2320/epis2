@@ -133,9 +133,12 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'icu',
     md3Level: 0,
     status: 'partial',
-    idcRefs: [41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 135],
+    idcRefs: [
+      41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 131, 132, 133, 134, 135, 136, 137, 138, 139,
+      140,
+    ],
     ola: '13',
-    notes: 'MF-TRAMO-D-002 workspace icu',
+    notes: 'MF-TRAMO-D-002 workspace icu · MF-TRAMO-G specialized 131–140',
   },
   {
     id: 'dashboard-or',

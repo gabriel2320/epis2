@@ -13,10 +13,10 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 99 · Active: 63 · Blocked: 1 · Done: 37 |
-| **Prioridad** | Critical: 9 · High: 66 · Medium: 84 · Low: 41 |
-| **Horizonte** | Core: 40 · Post-core: 119 · Future: 41 |
-| **Decisión** | Build: 156 · Integrate: 5 · Defer: 37 · Exclude: 2 |
+| **Estado** | Planned: 90 · Active: 72 · Blocked: 1 · Done: 37 |
+| **Prioridad** | Critical: 9 · High: 73 · Medium: 77 · Low: 41 |
+| **Horizonte** | Core: 40 · Post-core: 128 · Future: 32 |
+| **Decisión** | Build: 165 · Integrate: 5 · Defer: 28 · Exclude: 2 |
 
 ### Leyenda
 
@@ -230,16 +230,16 @@
 
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
-| 131 | Prueba ventilación espontánea | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
-| 132 | Terapias renales continuas | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
-| 133 | Nutrición parenteral total | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
-| 134 | Nutrición enteral | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
-| 135 | Monitorización hemodinámica | 13 | icu | Active | High | Post-core | Build | PARTIAL | Hemodinámica demo MF-TRAMO-D-004 |
-| 136 | Muerte encefálica | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
-| 137 | Procuramiento órganos | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
-| 138 | Diario UCI (humanización) | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
-| 139 | Seguimiento delirium | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
-| 140 | Protocolo decúbito prono | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
+| 131 | Prueba ventilación espontánea | 13 | icu | Active | High | Post-core | Build | PARTIAL | SBT demo MF-TRAMO-G-002 |
+| 132 | Terapias renales continuas | 13 | icu | Active | High | Post-core | Build | PARTIAL | Terapias renales demo MF-TRAMO-G-003 |
+| 133 | Nutrición parenteral total | 13 | icu | Active | High | Post-core | Build | PARTIAL | NPT demo MF-TRAMO-G-004 |
+| 134 | Nutrición enteral | 13 | icu | Active | High | Post-core | Build | PARTIAL | Nutrición enteral demo MF-TRAMO-G-005 |
+| 135 | Monitorización hemodinámica | 13 | icu | Active | High | Post-core | Build | PARTIAL | Hemodinámica demo MF-TRAMO-D-004 · specialized MF-TRAMO-G |
+| 136 | Muerte encefálica | 13 | icu | Active | High | Post-core | Build | PARTIAL | Muerte encefálica demo MF-TRAMO-G-006 |
+| 137 | Procuramiento órganos | 13 | icu | Active | High | Post-core | Build | PARTIAL | Procuramiento órganos demo MF-TRAMO-G-007 |
+| 138 | Diario UCI (humanización) | 13 | icu | Active | Medium | Post-core | Build | PARTIAL | Diario UCI demo MF-TRAMO-G-008 |
+| 139 | Seguimiento delirium | 13 | icu | Active | Medium | Post-core | Build | PARTIAL | Delirium CAM-ICU demo MF-TRAMO-G-009 |
+| 140 | Protocolo decúbito prono | 13 | icu | Active | High | Post-core | Build | PARTIAL | Decúbito prono demo MF-TRAMO-G-010 |
 
 ## IAAS avanzada (141–150)
 

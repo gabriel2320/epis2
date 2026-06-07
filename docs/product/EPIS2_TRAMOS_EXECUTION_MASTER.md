@@ -1,4 +1,4 @@
-# EPIS2 — Plan maestro tramos A–F
+# EPIS2 — Plan maestro tramos A–G
 
 **Fecha:** 2026-06-07 · **Aprobación humana:** OK (sesión autónoma)  
 **Higiene:** [`EPIS2_TRAMOS_HYGIENE.md`](./EPIS2_TRAMOS_HYGIENE.md) · gate `quality:tramos-hygiene-gate`
@@ -15,8 +15,9 @@
 | **D** Programas especializados | ✅ Cerrado técnico (UCI demo) | 41–50·135 Active | `quality:tramo-d-closure-gate` |
 | **E** Pabellón y anestesia | ✅ Cerrado técnico (OR demo) | 151–160 Active | `quality:tramo-e-closure-gate` |
 | **F** APS / medicina general | ✅ Cerrado técnico (APS demo) | 121–130 Active | `quality:tramo-f-closure-gate` |
+| **G** UCI especializada | ✅ Cerrado técnico (UCI 131–140 demo) | 131–140 Active | `quality:tramo-g-closure-gate` |
 
-**Cadena A–F:** cerrada técnicamente. Signoff clínico institucional pendiente.
+**Cadena A–G:** cerrada técnicamente. Signoff clínico institucional pendiente.
 
 ---
 
@@ -30,6 +31,7 @@
 | D | `EPIS2_TRAMO_D_CLOSURE.md` | `EPIS2_TRAMO_D_PLAN.md` · UCI |
 | E | `EPIS2_TRAMO_E_CLOSURE.md` | `EPIS2_TRAMO_E_PLAN.md` · OR |
 | F | `EPIS2_TRAMO_F_CLOSURE.md` | `EPIS2_TRAMO_F_PLAN.md` · APS |
+| G | `EPIS2_TRAMO_G_CLOSURE.md` | `EPIS2_TRAMO_G_PLAN.md` · UCI especializada |
 
 ---
 
@@ -37,15 +39,16 @@
 
 `command` · `reception` · `ambulatory` · `emergency` · `icu` · `or` · `quality_iaas` · `admin_system`
 
-Tab APS: `/epis2/dashboard?tab=aps` bajo workspace `ambulatory`.
+Tab APS: `/epis2/dashboard?tab=aps` bajo workspace `ambulatory`.  
+Tab UCI especializada: `/epis2/dashboard?tab=icu` bloque IDC 131–140.
 
 ---
 
 ## Próximo paso global
 
-1. Signoff clínico institucional Tramos A–F
+1. Signoff clínico institucional Tramos A–G
 2. `quality:golden-journey` antes de piloto hospitalario
-3. UCI especializada IDC 131–140 · IAAS 141–150 · especialidades gráficas
+3. IAAS 141–150 · especialidades gráficas
 
 ---
 
@@ -56,5 +59,6 @@ Tab APS: `/epis2/dashboard?tab=aps` bajo workspace `ambulatory`.
 | `reports/epis2-tramos-hygiene-2026-06-07.md` | Higiene A–F |
 | `reports/epis2-tramo-f-closure-2026-06-07.md` | Cierre Tramo F |
 | `reports/epis2-tramo-f-start-2026-06-07.md` | Inicio Tramo F APS |
+| `reports/epis2-tramo-g-closure-2026-06-07.md` | Cierre Tramo G UCI especializada |
 
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*

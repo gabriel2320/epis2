@@ -5,26 +5,26 @@
     "canon": "EPIS2_WAVE_EXECUTION_CANON.md",
     "totals": {
       "estado": {
-        "Planned": 99,
-        "Active": 63,
+        "Planned": 90,
+        "Active": 72,
         "Blocked": 1,
         "Done": 37
       },
       "prioridad": {
         "Critical": 9,
-        "High": 66,
-        "Medium": 84,
+        "High": 73,
+        "Medium": 77,
         "Low": 41
       },
       "horizonte": {
         "Core": 40,
-        "Post-core": 119,
-        "Future": 41
+        "Post-core": 128,
+        "Future": 32
       },
       "decision": {
-        "Build": 156,
+        "Build": 165,
         "Integrate": 5,
-        "Defer": 37,
+        "Defer": 28,
         "Exclude": 2
       }
     }
@@ -1595,48 +1595,48 @@
       "nombre": "Prueba ventilación espontánea",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI especializada Tramo D"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "SBT demo MF-TRAMO-G-002"
     },
     {
       "idc": 132,
       "nombre": "Terapias renales continuas",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI especializada Tramo D"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Terapias renales demo MF-TRAMO-G-003"
     },
     {
       "idc": 133,
       "nombre": "Nutrición parenteral total",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI especializada Tramo D"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "NPT demo MF-TRAMO-G-004"
     },
     {
       "idc": 134,
       "nombre": "Nutrición enteral",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI especializada Tramo D"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Nutrición enteral demo MF-TRAMO-G-005"
     },
     {
       "idc": 135,
@@ -1648,67 +1648,67 @@
       "horizonte": "Post-core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": "Hemodinámica demo MF-TRAMO-D-004"
+      "nota": "Hemodinámica demo MF-TRAMO-D-004 · specialized MF-TRAMO-G"
     },
     {
       "idc": 136,
       "nombre": "Muerte encefálica",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI especializada Tramo D"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Muerte encefálica demo MF-TRAMO-G-006"
     },
     {
       "idc": 137,
       "nombre": "Procuramiento órganos",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI especializada Tramo D"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Procuramiento órganos demo MF-TRAMO-G-007"
     },
     {
       "idc": 138,
       "nombre": "Diario UCI (humanización)",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI especializada Tramo D"
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Diario UCI demo MF-TRAMO-G-008"
     },
     {
       "idc": 139,
       "nombre": "Seguimiento delirium",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI especializada Tramo D"
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Delirium CAM-ICU demo MF-TRAMO-G-009"
     },
     {
       "idc": 140,
       "nombre": "Protocolo decúbito prono",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI especializada Tramo D"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Decúbito prono demo MF-TRAMO-G-010"
     },
     {
       "idc": 141,

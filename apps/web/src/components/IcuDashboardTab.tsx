@@ -61,6 +61,23 @@ export function IcuDashboardTab({
           ))}
         </Stack>
       </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-specialized-idc-panels">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.specializedPanelsTitle}
+        </Typography>
+        <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+          {data.specializedPanels.map((panel) => (
+            <Chip
+              key={panel.idc}
+              label={`IDC ${panel.idc}: ${panel.label}`}
+              size="small"
+              color={panel.status === 'active' ? 'error' : 'default'}
+              variant={panel.status === 'active' ? 'filled' : 'outlined'}
+              data-testid={`epis2-icu-idc-${panel.idc}`}
+            />
+          ))}
+        </Stack>
+      </Paper>
       <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-bed-map">
         <Typography variant="subtitle2" gutterBottom>
           {copy.icu.bedMapTitle}
@@ -107,19 +124,6 @@ export function IcuDashboardTab({
         <Typography variant="subtitle2" gutterBottom>
           {copy.icu.hemodynamicsTitle}
         </Typography>
-        <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ mb: 1 }}>
-          {data.specializedPanels
-            .filter((p) => p.idc === 135)
-            .map((panel) => (
-              <Chip
-                key={panel.idc}
-                label={`IDC ${panel.idc}: ${panel.label}`}
-                size="small"
-                color="error"
-                data-testid={`epis2-icu-idc-${panel.idc}`}
-              />
-            ))}
-        </Stack>
         <List dense>
           {data.hemodynamics.map((row) => (
             <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
@@ -265,6 +269,141 @@ export function IcuDashboardTab({
             ))}
           </List>
         )}
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-spontaneous-vent">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.spontaneousVentTitle}
+        </Typography>
+        <List dense data-testid="epis2-icu-spontaneous-vent-rows">
+          {data.spontaneousVentTrials.length === 0 ? (
+            <ListItem disablePadding>
+              <ListItemText primary={copy.icu.noSpecializedCases} />
+            </ListItem>
+          ) : (
+            data.spontaneousVentTrials.map((row) => (
+              <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
+                <ListItemText
+                  primary={row.patientDisplayName}
+                  secondary={`${row.trialType} · ${row.durationMin} min · ${row.outcome}`}
+                />
+              </ListItem>
+            ))
+          )}
+        </List>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-renal-therapy">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.renalTherapyTitle}
+        </Typography>
+        <List dense>
+          {data.renalTherapies.map((row) => (
+            <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.patientDisplayName}
+                secondary={`${row.modality} · UF ${row.ultrafiltrationMl} mL · ${row.anticoagulation}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-parenteral-nutrition">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.parenteralNutritionTitle}
+        </Typography>
+        <List dense>
+          {data.parenteralNutrition.map((row) => (
+            <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.patientDisplayName}
+                secondary={`${row.caloriesKcal} kcal · ${row.proteinG} g proteína · ${row.status}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-enteral-nutrition">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.enteralNutritionTitle}
+        </Typography>
+        <List dense>
+          {data.enteralNutrition.map((row) => (
+            <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.patientDisplayName}
+                secondary={`${row.route} · ${row.rateMlH} mL/h · Residuo ${row.gastricResidualMl} mL`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-brain-death">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.brainDeathTitle}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {data.brainDeathChecklists.length === 0
+            ? copy.icu.noSpecializedCases
+            : data.brainDeathChecklists.map((r) => r.patientDisplayName).join(', ')}
+        </Typography>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-organ-procurement">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.organProcurementTitle}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {copy.icu.noSpecializedCases}
+        </Typography>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-diary">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.icuDiaryTitle}
+        </Typography>
+        <List dense data-testid="epis2-icu-diary-rows">
+          {data.icuDiaryEntries.map((row) => (
+            <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.patientDisplayName}
+                secondary={`${row.entrySummary} · ${row.authorRole}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-delirium">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.deliriumTitle}
+        </Typography>
+        <List dense data-testid="epis2-icu-delirium-rows">
+          {data.deliriumScreenings.map((row) => (
+            <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.patientDisplayName}
+                secondary={`CAM-ICU ${row.camIcuScore} · ${row.intervention}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-prone-protocol">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.proneProtocolTitle}
+        </Typography>
+        <List dense data-testid="epis2-icu-prone-protocol-rows">
+          {data.proneProtocols.length === 0 ? (
+            <ListItem disablePadding>
+              <ListItemText primary={copy.icu.noSpecializedCases} />
+            </ListItem>
+          ) : (
+            data.proneProtocols.map((row) => (
+              <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
+                <ListItemText
+                  primary={row.patientDisplayName}
+                  secondary={`${row.sessionHours} h · P/F ${row.pao2Fio2Ratio} · ${row.status}`}
+                />
+              </ListItem>
+            ))
+          )}
+        </List>
       </Paper>
       <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-discharge-actions">
         <Typography variant="subtitle2" gutterBottom>
