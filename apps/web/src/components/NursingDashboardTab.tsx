@@ -7,12 +7,14 @@ export type NursingDashboardTabProps = {
   data: NursingDashboardResponse;
   onOpenPatient: (patientId: string) => void;
   onOpenDraft: (draftId: string) => void;
+  onOpenMarForm?: (patientId: string) => void;
 };
 
 export function NursingDashboardTab({
   data,
   onOpenPatient,
   onOpenDraft,
+  onOpenMarForm,
 }: NursingDashboardTabProps) {
   return (
     <Stack spacing={2} data-testid="epis2-dashboard-nursing">
@@ -45,6 +47,16 @@ export function NursingDashboardTab({
                 </Typography>
                 {dose.requiresDoubleCheck ? (
                   <Chip size="small" label={copy.inpatient.doubleCheckRequired} color="warning" />
+                ) : null}
+                {onOpenMarForm ? (
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    onClick={() => onOpenMarForm(dose.patientId)}
+                    data-testid={`epis2-nursing-register-mar-${dose.id}`}
+                  >
+                    {copy.inpatient.registerMar}
+                  </Button>
                 ) : null}
                 <Button size="small" onClick={() => onOpenPatient(dose.patientId)}>
                   {copy.inpatient.openPatient}

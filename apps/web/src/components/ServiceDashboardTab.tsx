@@ -14,6 +14,7 @@ import {
   Button,
   Chip,
   EpisLoadingState,
+  EpisMetric,
   List,
   ListItem,
   ListItemText,
@@ -52,6 +53,10 @@ export function ServiceDashboardTab({
 
   const availableBeds = useMemo(
     () => data.census.filter((b) => b.status === 'available'),
+    [data.census],
+  );
+  const occupiedBeds = useMemo(
+    () => data.census.filter((b) => b.status === 'occupied').length,
     [data.census],
   );
 
@@ -154,10 +159,22 @@ export function ServiceDashboardTab({
         <LazyServiceDashboardCharts data={data} />
       </Suspense>
 
-      <Paper variant="outlined" sx={{ p: 2 }}>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-service-census">
         <Typography variant="subtitle2" gutterBottom>
           {copy.inpatient.census}
         </Typography>
+        <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ mb: 1.5 }}>
+          <EpisMetric
+            label={copy.inpatient.censusOccupied}
+            value={String(occupiedBeds)}
+            data-testid="epis2-service-census-occupied"
+          />
+          <EpisMetric
+            label={copy.inpatient.censusAvailable}
+            value={String(availableBeds.length)}
+            data-testid="epis2-service-census-available"
+          />
+        </Stack>
         <List dense disablePadding>
           {data.census.map((bed) => (
             <ListItem key={bed.bedId} disablePadding sx={{ py: 0.5, flexWrap: 'wrap', gap: 0.5 }}>

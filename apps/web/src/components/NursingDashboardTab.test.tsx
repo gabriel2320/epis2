@@ -91,6 +91,25 @@ describe('NursingDashboardTab', () => {
     expect(onOpenPatient).toHaveBeenCalledWith(PATIENT_ID);
   });
 
+  it('registra MAR abriendo formulario', async () => {
+    const user = userEvent.setup();
+    const onOpenMarForm = vi.fn();
+
+    render(
+      <Epis2ThemeProvider>
+        <NursingDashboardTab
+          data={nursingBoard}
+          onOpenPatient={vi.fn()}
+          onOpenDraft={vi.fn()}
+          onOpenMarForm={onOpenMarForm}
+        />
+      </Epis2ThemeProvider>,
+    );
+
+    await user.click(screen.getByTestId(`epis2-nursing-register-mar-${MAR_ID}`));
+    expect(onOpenMarForm).toHaveBeenCalledWith(PATIENT_ID);
+  });
+
   it('lista borradores de enfermería y abre borrador', async () => {
     const user = userEvent.setup();
     const onOpenDraft = vi.fn();

@@ -119,6 +119,8 @@ describe('PatientLongitudinalPanel — Ola 3 CTAs', () => {
     const onTransfer = vi.fn();
     const onNursing = vi.fn();
     const onOrders = vi.fn();
+    const onCensus = vi.fn();
+    const onMar = vi.fn();
 
     render(
       <Epis2ThemeProvider>
@@ -128,6 +130,8 @@ describe('PatientLongitudinalPanel — Ola 3 CTAs', () => {
           onTransferNote={onTransfer}
           onNursingNote={onNursing}
           onOpenServiceOrders={onOrders}
+          onOpenServiceCensus={onCensus}
+          onOpenNursingMar={onMar}
         />
       </Epis2ThemeProvider>,
     );
@@ -136,10 +140,14 @@ describe('PatientLongitudinalPanel — Ola 3 CTAs', () => {
     await user.click(screen.getByTestId('epis2-longitudinal-transfer-note'));
     await user.click(screen.getByTestId('epis2-longitudinal-nursing-note'));
     await user.click(screen.getByTestId('epis2-longitudinal-open-service-orders'));
+    await user.click(screen.getByTestId('epis2-longitudinal-open-service-census'));
+    await user.click(screen.getByTestId('epis2-longitudinal-open-nursing-mar'));
 
     expect(onAdmit).toHaveBeenCalledOnce();
     expect(onTransfer).toHaveBeenCalledOnce();
     expect(onNursing).toHaveBeenCalledOnce();
     expect(onOrders).toHaveBeenCalledOnce();
+    expect(onCensus).toHaveBeenCalledOnce();
+    expect(onMar).toHaveBeenCalledOnce();
   });
 });

@@ -1,6 +1,6 @@
 # EPIS2 — Plan Tramo C (hospitalización y urgencias)
 
-**Versión:** 1.0 · **Fecha:** 2026-06-07
+**Versión:** 1.1 · **Fecha:** 2026-06-07
 
 ---
 
@@ -12,7 +12,7 @@ Hospitalización general → Enfermería/MAR → Urgencias (emergency) → Farma
 
 ---
 
-## Estado actual (MF-TRAMO-C-002 … C-004)
+## Estado actual (MF-TRAMO-C-002 … C-008)
 
 | Hito | Estado | IDC |
 |------|--------|-----|
@@ -23,8 +23,9 @@ Hospitalización general → Enfermería/MAR → Urgencias (emergency) → Farma
 | Órdenes activas servicio | ✅ **MF-TRAMO-C-004** | CTA ficha → tablero |
 | Tendencias resultados | ✅ **MF-TRAMO-C-005** | IDC 58 Done + `ResultsInboxTrends` |
 | Epicrisis urgencias | ✅ **MF-TRAMO-C-006** | IDC 110 Active + CTA tablero |
-| Hospitalización censo | ◐ Partial | V2 service dashboard |
-| MAR enfermería | ◐ Partial | V3 nursing tab |
+| Censo hospitalario | ✅ **MF-TRAMO-C-007** | Tablero servicio + CTA ficha |
+| MAR enfermería | ✅ **MF-TRAMO-C-008** | IDC 116 Done + `/espacio/mar` |
+| **Cierre Tramo C** | ✅ **MF-TRAMO-C-CLOSURE** | `EPIS2_TRAMO_C_CLOSURE.md` |
 
 ---
 
@@ -32,19 +33,26 @@ Hospitalización general → Enfermería/MAR → Urgencias (emergency) → Farma
 
 | MF | Alcance | IDC |
 |----|---------|-----|
-| MF-TRAMO-C-003 | Ingreso hospitalario blueprint UI | 111+ |
+| MF-TRAMO-C-003 | Ingreso hospitalario blueprint UI | 111 ✅ |
 | MF-TRAMO-C-004 | Bandeja órdenes activas | 51–57 |
 | MF-TRAMO-C-005 | Tendencias resultados | 58 ✅ |
 | MF-TRAMO-C-006 | Epicrisis urgencias | 110 ✅ |
+| MF-TRAMO-C-007 | Censo hospitalario | V2 service ✅ |
+| MF-TRAMO-C-008 | MAR enfermería | 116 ✅ |
 
 ---
 
 ## Gates
 
 - `quality:tramo-c-emergency-gate` — scaffold urgencias
+- `quality:tramo-c-admission-gate` — hub hospitalización
+- `quality:tramo-c-orders-gate` — órdenes servicio
 - `quality:tramo-c-trends-gate` — tendencias bandeja resultados
 - `quality:tramo-c-epicrisis-gate` — epicrisis tablero urgencias
-- `quality:golden-journey` — antes de signoff Tramo C
+- `quality:tramo-c-census-gate` — censo hospitalario
+- `quality:tramo-c-mar-gate` — MAR enfermería
+- `quality:tramo-c-closure-gate` — cierre técnico Tramo C
+- `quality:golden-journey` — antes de signoff institucional
 
 ---
 

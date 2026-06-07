@@ -6,9 +6,9 @@
     "totals": {
       "estado": {
         "Planned": 129,
-        "Active": 34,
+        "Active": 33,
         "Blocked": 1,
-        "Done": 36
+        "Done": 37
       },
       "prioridad": {
         "Critical": 9,
@@ -1415,12 +1415,12 @@
       "nombre": "Tarjetón (5 correctos)",
       "ola": "11",
       "workspace": "icu",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "Critical",
       "horizonte": "Post-core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": "medication_administration"
+      "nota": "MAR tablero + /espacio/mar MF-TRAMO-C-008"
     },
     {
       "idc": 117,

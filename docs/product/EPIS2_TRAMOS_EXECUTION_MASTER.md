@@ -10,7 +10,7 @@
 |-------|--------|-----------|------|
 | **A** Clínico demostrable | ✅ Cerrado | 21–40 (38 Defer) | `quality:tramo-a-closure-gate` |
 | **B** Piloto ambulatorio | ✅ UI demo | 2–10 (6,10 Active) | `quality:tramo-b-ui-gate` |
-| **C** Hospitalización + urgencias | ◐ Scaffold | 101–105 Active | `quality:tramo-c-emergency-gate` |
+| **C** Hospitalización + urgencias | ✅ Cerrado técnico | 111·116·58 Done; 110 Active | `quality:tramo-c-closure-gate` |
 | **D** Programas especializados | 📋 Planificado | 41–50, 131–140 Defer | `quality:tramo-d-inventory-gate` |
 
 ---
@@ -21,7 +21,7 @@
 |-------|------------|
 | A | `EPIS2_TRAMO_A_CLOSURE.md` |
 | B | `EPIS2_TRAMO_B_RECEPTION_INVENTORY.md` · MF-TRAMO-B-002 UI |
-| C | `EPIS2_TRAMO_C_EMERGENCY_INVENTORY.md` · `EPIS2_TRAMO_C_PLAN.md` |
+| C | `EPIS2_TRAMO_C_EMERGENCY_INVENTORY.md` · `EPIS2_TRAMO_C_PLAN.md` · `EPIS2_TRAMO_C_CLOSURE.md` |
 | D | `EPIS2_TRAMO_D_UCI_INVENTORY.md` · `EPIS2_TRAMO_D_PLAN.md` |
 
 ---
@@ -34,9 +34,9 @@
 
 ## Próximo paso global
 
-1. MF-TRAMO-C-005 — tendencias resultados (IDC 164)
-2. MF-TRAMO-C-006 — epicrisis urgencias (IDC 110)
-3. Signoff clínico institucional Tramo A
+1. **Tramo D** — MF-TRAMO-D-002+ UCI según `EPIS2_TRAMO_D_PLAN.md`
+2. Signoff clínico institucional Tramo C
+3. `quality:golden-journey` antes de piloto hospitalario
 
 ---
 

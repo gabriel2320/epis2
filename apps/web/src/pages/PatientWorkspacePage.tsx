@@ -244,6 +244,18 @@ export function PatientWorkspacePage() {
                 search: { tab: 'service', patientId },
               })
             }
+            onOpenServiceCensus={() =>
+              void navigate({
+                to: '/epis2/dashboard',
+                search: { tab: 'service', patientId },
+              })
+            }
+            onOpenNursingMar={() =>
+              void navigate({
+                to: '/epis2/dashboard',
+                search: { tab: 'nursing', patientId },
+              })
+            }
           />
         ) : null}
 

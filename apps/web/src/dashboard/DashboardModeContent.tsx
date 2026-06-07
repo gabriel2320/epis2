@@ -379,6 +379,14 @@ export function DashboardModeContent() {
             data={nursingBoard}
             onOpenPatient={openPatient}
             onOpenDraft={openDraft}
+            onOpenMarForm={(pid) => {
+              const p = recentPatients.find((r) => r.id === pid);
+              if (p) setPatient(p);
+              void navigate({
+                to: '/espacio/mar',
+                search: { patientId: pid },
+              });
+            }}
           />
         ) : (
           <Alert severity="info">{copy.dashboard.loading}</Alert>

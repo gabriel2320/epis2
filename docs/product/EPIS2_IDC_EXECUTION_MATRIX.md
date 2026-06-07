@@ -13,7 +13,7 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 129 · Active: 34 · Blocked: 1 · Done: 36 |
+| **Estado** | Planned: 129 · Active: 33 · Blocked: 1 · Done: 37 |
 | **Prioridad** | Critical: 9 · High: 45 · Medium: 95 · Low: 51 |
 | **Horizonte** | Core: 40 · Post-core: 89 · Future: 71 |
 | **Decisión** | Build: 126 · Integrate: 5 · Defer: 67 · Exclude: 2 |
@@ -205,7 +205,7 @@
 | 113 | Riesgo UPP (Braden/Norton) | 11 | icu | Planned | High | Post-core | Build | MISSING |  |
 | 114 | Curaciones / heridas | 11 | icu | Planned | High | Post-core | Build | MISSING |  |
 | 115 | Diuresis / deposiciones | 11 | icu | Planned | High | Post-core | Build | MISSING |  |
-| 116 | Tarjetón (5 correctos) | 11 | icu | Active | Critical | Post-core | Build | PARTIAL | medication_administration |
+| 116 | Tarjetón (5 correctos) | 11 | icu | Done | Critical | Post-core | Build | PARTIAL | MAR tablero + /espacio/mar MF-TRAMO-C-008 |
 | 117 | Sujeción mecánica | 11 | icu | Planned | Medium | Post-core | Build | MISSING |  |
 | 118 | Valoración dolor EVA/FLACC | 11 | icu | Planned | Medium | Post-core | Build | MISSING |  |
 | 119 | Seguimiento dispositivos | 11 | icu | Planned | Medium | Post-core | Build | MISSING |  |

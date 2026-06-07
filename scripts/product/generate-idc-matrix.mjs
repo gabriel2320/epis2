@@ -348,7 +348,7 @@ const OVERRIDES = {
   106: { estado: 'Active', prioridad: 'Medium', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'transfer_note' },
   110: { estado: 'Active', prioridad: 'High', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'CTA epicrisis tablero urgencias MF-TRAMO-C-006' },
   111: { estado: 'Done', prioridad: 'High', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'nursing_note + CTA ficha MF-TRAMO-C-003' },
-  116: { estado: 'Active', prioridad: 'Critical', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'medication_administration' },
+  116: { estado: 'Done', prioridad: 'Critical', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'MAR tablero + /espacio/mar MF-TRAMO-C-008' },
   120: { estado: 'Active', prioridad: 'Medium', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL' },
   130: { estado: 'Active', prioridad: 'Medium', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL' },
   143: { estado: 'Active', prioridad: 'Medium', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL' },

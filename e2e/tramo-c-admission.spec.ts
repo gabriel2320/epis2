@@ -25,4 +25,14 @@ test.describe('Tramo C — hospitalización', () => {
     await expect(page).toHaveURL(/tab=service/);
     await expect(page.getByTestId('epis2-dashboard-tab-service')).toBeVisible();
   });
+
+  test('ficha — enlace censo servicio (MF-TRAMO-C-007)', async ({ page }) => {
+    await loginAsPhysician(page);
+    await pinDemoCase(page, 'DEMO-001');
+    await page.goto('/espacio/ficha?patientId=a0000001-0000-4000-8000-000000000001');
+    await page.getByTestId('epis2-longitudinal-open-service-census').click();
+    await expect(page).toHaveURL(/tab=service/);
+    await expect(page.getByTestId('epis2-service-census')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-service-census-occupied')).toBeVisible();
+  });
 });

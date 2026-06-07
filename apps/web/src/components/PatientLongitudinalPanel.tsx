@@ -37,6 +37,8 @@ export type PatientLongitudinalPanelProps = {
   onTransferNote?: () => void;
   onNursingNote?: () => void;
   onOpenServiceOrders?: () => void;
+  onOpenServiceCensus?: () => void;
+  onOpenNursingMar?: () => void;
 };
 
 function Section({
@@ -77,6 +79,8 @@ export function PatientLongitudinalPanel({
   onTransferNote,
   onNursingNote,
   onOpenServiceOrders,
+  onOpenServiceCensus,
+  onOpenNursingMar,
 }: PatientLongitudinalPanelProps) {
   const [exporting, setExporting] = useState<'txt' | 'pdf' | null>(null);
   const clinicalProblems = useMemo(
@@ -283,6 +287,26 @@ export function PatientLongitudinalPanel({
               data-testid="epis2-longitudinal-open-service-orders"
             >
               {copy.longitudinal.viewActiveOrders}
+            </Button>
+          ) : null}
+          {onOpenServiceCensus ? (
+            <Button
+              size="small"
+              variant="text"
+              onClick={onOpenServiceCensus}
+              data-testid="epis2-longitudinal-open-service-census"
+            >
+              {copy.longitudinal.viewServiceCensus}
+            </Button>
+          ) : null}
+          {onOpenNursingMar ? (
+            <Button
+              size="small"
+              variant="text"
+              onClick={onOpenNursingMar}
+              data-testid="epis2-longitudinal-open-nursing-mar"
+            >
+              {copy.longitudinal.viewNursingMar}
             </Button>
           ) : null}
         </Stack>
