@@ -16,4 +16,5 @@ coverage/
 Thumbs.db
 .vite/
 .turbo/
+packages/epis2-ui/storybook-static/
 backups/

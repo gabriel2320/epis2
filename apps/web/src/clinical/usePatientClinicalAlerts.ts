@@ -1,6 +1,7 @@
-import type { ClinicalAlert } from '@epis2/contracts';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useMemo, useState } from 'react';
 import { fetchPatientClinicalAlerts } from '../api/clinicalApi.js';
+import { queryKeys } from '../query/queryKeys.js';
 
 export type UsePatientClinicalAlertsOptions = {
   patientId?: string;
@@ -12,58 +13,51 @@ export type UsePatientClinicalAlertsOptions = {
 };
 
 export function usePatientClinicalAlerts(options: UsePatientClinicalAlertsOptions) {
-  const [alerts, setAlerts] = useState<ClinicalAlert[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [contextLabel, setContextLabel] = useState(options.contextLabel);
-  const hasAlertsRef = useRef(false);
+  const fieldsKey = useMemo(
+    () => (options.currentFields ? JSON.stringify(options.currentFields) : ''),
+    [options.currentFields],
+  );
+
+  const [debouncedReady, setDebouncedReady] = useState(
+    !options.debounceMs || options.debounceMs <= 0,
+  );
 
   useEffect(() => {
-    hasAlertsRef.current = alerts.length > 0;
-  }, [alerts]);
-
-  const reload = useCallback(async () => {
-    if (!options.patientId) {
-      setAlerts([]);
-      setContextLabel(undefined);
+    if (!options.debounceMs || options.debounceMs <= 0) {
+      setDebouncedReady(true);
       return;
     }
-    if (!hasAlertsRef.current) {
-      setLoading(true);
-    }
-    try {
+    setDebouncedReady(false);
+    const timer = setTimeout(() => setDebouncedReady(true), options.debounceMs);
+    return () => clearTimeout(timer);
+  }, [options.patientId, options.blueprintId, fieldsKey, options.debounceMs]);
+
+  const enabled =
+    options.enabled !== false && Boolean(options.patientId) && debouncedReady;
+
+  const query = useQuery({
+    queryKey: queryKeys.patients.clinicalAlerts(
+      options.patientId ?? '',
+      options.blueprintId,
+      fieldsKey,
+    ),
+    queryFn: () => {
       const fetchOpts: Parameters<typeof fetchPatientClinicalAlerts>[1] = {};
       if (options.blueprintId !== undefined) fetchOpts.blueprintId = options.blueprintId;
       if (options.currentFields !== undefined) fetchOpts.currentFields = options.currentFields;
-      const res = await fetchPatientClinicalAlerts(options.patientId, fetchOpts);
-      setAlerts(res.alerts);
-      setContextLabel(options.contextLabel);
-    } catch {
-      setAlerts([]);
-      setContextLabel(undefined);
-    } finally {
-      setLoading(false);
-    }
-  }, [options.patientId, options.blueprintId, options.currentFields, options.contextLabel]);
+      return fetchPatientClinicalAlerts(options.patientId!, fetchOpts);
+    },
+    enabled,
+    placeholderData: (previous) => previous,
+  });
 
-  useEffect(() => {
-    if (options.enabled === false) return;
-    if (!options.patientId) {
-      setAlerts([]);
-      return;
-    }
-    if (options.debounceMs && options.debounceMs > 0) {
-      const timer = setTimeout(() => void reload(), options.debounceMs);
-      return () => clearTimeout(timer);
-    }
-    void reload();
-  }, [
-    options.patientId,
-    options.blueprintId,
-    options.currentFields,
-    options.debounceMs,
-    options.enabled,
-    reload,
-  ]);
+  const alerts = query.data?.alerts ?? [];
+  const loading = query.isFetching && alerts.length === 0;
 
-  return { alerts, loading, contextLabel, reload };
-};
+  return {
+    alerts,
+    loading,
+    contextLabel: options.contextLabel,
+    reload: query.refetch,
+  };
+}

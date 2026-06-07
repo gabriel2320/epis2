@@ -2,10 +2,10 @@
  * @vitest-environment jsdom
  */
 import { copy } from '@epis2/design-system';
-import { Epis2ThemeProvider } from '@epis2/epis2-ui';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
+import { renderWithQuery } from '../test/renderWithQuery.js';
 import { PatientWorkspacePage } from './PatientWorkspacePage.js';
 
 const patientId = 'a0000001-0000-4000-8000-000000000005';
@@ -103,12 +103,10 @@ describe('PatientWorkspacePage', () => {
       ],
     });
 
-    render(
-      <Epis2ThemeProvider>
-        <ActivePatientProvider>
-          <PatientWorkspacePage />
-        </ActivePatientProvider>
-      </Epis2ThemeProvider>,
+    renderWithQuery(
+      <ActivePatientProvider>
+        <PatientWorkspacePage />
+      </ActivePatientProvider>,
     );
 
     await waitFor(() => {

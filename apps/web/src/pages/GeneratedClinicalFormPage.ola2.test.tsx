@@ -4,11 +4,11 @@
  */
 import { getBlueprintById } from '@epis2/clinical-forms';
 import { copy } from '@epis2/design-system';
-import { Epis2ThemeProvider } from '@epis2/epis2-ui';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
+import { renderWithQuery } from '../test/renderWithQuery.js';
 import { GeneratedClinicalFormPage } from './GeneratedClinicalFormPage.js';
 
 vi.mock('@tanstack/react-router', () => ({
@@ -34,31 +34,41 @@ vi.mock('../api/aiApi.js', () => ({
   requestDraftAssist: vi.fn(),
 }));
 
-vi.mock('../api/clinicalApi.js', () => ({
-  listPatients: vi.fn().mockResolvedValue({ patients: [] }),
-  fetchPatientDetail: vi.fn().mockResolvedValue({
-    patient: {
-      id: '00000000-0000-4000-8000-000000000099',
-      displayName: 'Paciente Demo — Ambulatorio',
-      isSynthetic: true,
-      demoLabel: 'DEMO/SINTÉTICO',
-      demoCaseCode: 'DEMO-099',
-    },
-    clinicalContext: { summaryFields: {} },
-    notes: [],
-  }),
-  fetchPatientLongitudinal: vi.fn().mockResolvedValue({
-    patientId: '00000000-0000-4000-8000-000000000099',
-    readOnly: false,
-    problems: [],
-    allergies: [],
-    medications: [],
-    observations: [],
-    documents: [],
-    encounters: [],
-    timeline: [],
-  }),
-}));
+vi.mock('../api/clinicalApi.js', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../api/clinicalApi.js')>();
+  return {
+    ...actual,
+    listPatients: vi.fn().mockResolvedValue({ patients: [] }),
+    fetchPatientDetail: vi.fn().mockResolvedValue({
+      patient: {
+        id: '00000000-0000-4000-8000-000000000099',
+        displayName: 'Paciente Demo — Ambulatorio',
+        isSynthetic: true,
+        demoLabel: 'DEMO/SINTÉTICO',
+        demoCaseCode: 'DEMO-099',
+      },
+      clinicalContext: { summaryFields: {}, problems: [], observations: [] },
+      notes: [],
+    }),
+    fetchPatientClinicalAlerts: vi.fn().mockResolvedValue({
+      patientId: '00000000-0000-4000-8000-000000000099',
+      readOnly: true,
+      evaluatedAt: new Date().toISOString(),
+      alerts: [],
+    }),
+    fetchPatientLongitudinal: vi.fn().mockResolvedValue({
+      patientId: '00000000-0000-4000-8000-000000000099',
+      readOnly: false,
+      problems: [],
+      allergies: [],
+      medications: [],
+      observations: [],
+      documents: [],
+      encounters: [],
+      timeline: [],
+    }),
+  };
+});
 
 vi.mock('@mui/material/useMediaQuery', () => ({
   default: () => true,
@@ -88,19 +98,21 @@ if (!outpatientBlueprint || !certificateBlueprint) {
   throw new Error('Ola 2 blueprints missing');
 }
 
+function renderForm(blueprint: NonNullable<typeof outpatientBlueprint>) {
+  return renderWithQuery(
+    <ActivePatientProvider>
+      <GeneratedClinicalFormPage blueprint={blueprint} />
+    </ActivePatientProvider>,
+  );
+}
+
 describe('GeneratedClinicalFormPage — Ola 2 M3-UI', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
   it('consulta ambulatoria usa scrollspy, app bar y FAB de cierre', async () => {
-    render(
-      <Epis2ThemeProvider>
-        <ActivePatientProvider>
-          <GeneratedClinicalFormPage blueprint={outpatientBlueprint} />
-        </ActivePatientProvider>
-      </Epis2ThemeProvider>,
-    );
+    renderForm(outpatientBlueprint);
 
     expect(screen.getByTestId('epis2-generated-clinical-page')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-form-outpatient_visit')).toBeInTheDocument();
@@ -118,13 +130,7 @@ describe('GeneratedClinicalFormPage — Ola 2 M3-UI', () => {
 
   it('valida campos obligatorios de consulta ambulatoria', async () => {
     const user = userEvent.setup();
-    render(
-      <Epis2ThemeProvider>
-        <ActivePatientProvider>
-          <GeneratedClinicalFormPage blueprint={outpatientBlueprint} />
-        </ActivePatientProvider>
-      </Epis2ThemeProvider>,
-    );
+    renderForm(outpatientBlueprint);
 
     await user.click(screen.getByRole('button', { name: copy.workspaces.ambulatory.fab }));
     await waitFor(() => {
@@ -133,13 +139,7 @@ describe('GeneratedClinicalFormPage — Ola 2 M3-UI', () => {
   });
 
   it('certificado médico renderiza formulario y guardar borrador', async () => {
-    render(
-      <Epis2ThemeProvider>
-        <ActivePatientProvider>
-          <GeneratedClinicalFormPage blueprint={certificateBlueprint} />
-        </ActivePatientProvider>
-      </Epis2ThemeProvider>,
-    );
+    renderForm(certificateBlueprint);
 
     expect(screen.getByTestId('epis2-form-medical_certificate')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-print-preview-medical_certificate')).toBeInTheDocument();

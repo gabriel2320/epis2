@@ -12,38 +12,11 @@ import {
   Typography,
 } from '@epis2/epis2-ui';
 import { useSearch } from '@tanstack/react-router';
-import { lazy, Suspense, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
-import {
-  fetchDashboardWork,
-  fetchEmergencyDashboard,
-  fetchIcuDashboard,
-  fetchOrDashboard,
-  fetchApsDashboard,
-  fetchSpecialtyDashboard,
-  fetchNursingDashboard,
-  fetchPatientDashboard,
-  fetchPharmacyDashboard,
-  fetchReceptionDashboard,
-  fetchServiceDashboard,
-} from '../api/dashboardApi.js';
-import { fetchQualityDashboard } from '../api/opsApi.js';
-import type {
-  DashboardWorkResponse,
-  EmergencyDashboardResponse,
-  IcuDashboardResponse,
-  OrDashboardResponse,
-  ApsDashboardResponse,
-  SpecialtyDashboardResponse,
-  NursingDashboardResponse,
-  PatientDashboardResponse,
-  PharmacyDashboardResponse,
-  QualityDashboardResponse,
-  ReceptionDashboardResponse,
-  ServiceDashboardResponse,
-} from '@epis2/contracts';
+import { lazy, Suspense, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { readRecentPatients } from '../clinical/recentPatients.js';
+import { useDashboardQueries } from '../query/hooks/useDashboardQueries.js';
 import { useClinicalNavigate, type DashboardTab } from '../routes/clinicalNavigate.js';
 import {
   Epis2NavigationRailFooter,
@@ -102,221 +75,43 @@ export function DashboardModeContent() {
   ) as DashboardTab;
   const dashboardPatientId = search.patientId ?? activePatient?.id;
 
-  const [work, setWork] = useState<DashboardWorkResponse | null>(null);
-  const [patientBoard, setPatientBoard] = useState<PatientDashboardResponse | null>(null);
-  const [serviceBoard, setServiceBoard] = useState<ServiceDashboardResponse | null>(null);
-  const [nursingBoard, setNursingBoard] = useState<NursingDashboardResponse | null>(null);
-  const [pharmacyBoard, setPharmacyBoard] = useState<PharmacyDashboardResponse | null>(null);
-  const [qualityBoard, setQualityBoard] = useState<QualityDashboardResponse | null>(null);
-  const [receptionBoard, setReceptionBoard] = useState<ReceptionDashboardResponse | null>(null);
-  const [emergencyBoard, setEmergencyBoard] = useState<EmergencyDashboardResponse | null>(null);
-  const [icuBoard, setIcuBoard] = useState<IcuDashboardResponse | null>(null);
-  const [orBoard, setOrBoard] = useState<OrDashboardResponse | null>(null);
-  const [apsBoard, setApsBoard] = useState<ApsDashboardResponse | null>(null);
-  const [specialtyBoard, setSpecialtyBoard] = useState<SpecialtyDashboardResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | undefined>();
-  const [recentPatients, setRecentPatients] = useState(readRecentPatients());
-
-  const load = useCallback(async () => {
-    setLoading(true);
-    setError(undefined);
-    try {
-      const res = await fetchDashboardWork();
-      setWork(res);
-      setRecentPatients(readRecentPatients());
-    } catch {
-      setError(copy.errors.genericMessage);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const loadService = useCallback(async () => {
-    setLoading(true);
-    setError(undefined);
-    try {
-      const res = await fetchServiceDashboard();
-      setServiceBoard(res);
-    } catch {
-      setError(copy.errors.genericMessage);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const loadNursing = useCallback(async () => {
-    setLoading(true);
-    setError(undefined);
-    try {
-      const res = await fetchNursingDashboard();
-      setNursingBoard(res);
-    } catch {
-      setError(copy.errors.genericMessage);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const loadPharmacy = useCallback(async () => {
-    setLoading(true);
-    setError(undefined);
-    try {
-      const res = await fetchPharmacyDashboard();
-      setPharmacyBoard(res);
-    } catch {
-      setError(copy.errors.genericMessage);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const loadQuality = useCallback(async () => {
-    setLoading(true);
-    setError(undefined);
-    try {
-      const res = await fetchQualityDashboard();
-      setQualityBoard(res);
-    } catch {
-      setError(copy.errors.genericMessage);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const loadReception = useCallback(async () => {
-    setLoading(true);
-    setError(undefined);
-    try {
-      const res = await fetchReceptionDashboard();
-      setReceptionBoard(res);
-    } catch {
-      setError(copy.errors.genericMessage);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const loadEmergency = useCallback(async () => {
-    setLoading(true);
-    setError(undefined);
-    try {
-      const res = await fetchEmergencyDashboard();
-      setEmergencyBoard(res);
-    } catch {
-      setError(copy.errors.genericMessage);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const loadIcu = useCallback(async () => {
-    setLoading(true);
-    setError(undefined);
-    try {
-      const res = await fetchIcuDashboard();
-      setIcuBoard(res);
-    } catch {
-      setError(copy.errors.genericMessage);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const loadOr = useCallback(async () => {
-    setLoading(true);
-    setError(undefined);
-    try {
-      const res = await fetchOrDashboard();
-      setOrBoard(res);
-    } catch {
-      setError(copy.errors.genericMessage);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const loadAps = useCallback(async () => {
-    setLoading(true);
-    setError(undefined);
-    try {
-      const res = await fetchApsDashboard();
-      setApsBoard(res);
-    } catch {
-      setError(copy.errors.genericMessage);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const loadSpecialty = useCallback(async () => {
-    setLoading(true);
-    setError(undefined);
-    try {
-      const res = await fetchSpecialtyDashboard();
-      setSpecialtyBoard(res);
-    } catch {
-      setError(copy.errors.genericMessage);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const loadPatient = useCallback(async (patientId: string) => {
-    setLoading(true);
-    setError(undefined);
-    try {
-      const res = await fetchPatientDashboard(patientId);
-      setPatientBoard(res);
-    } catch {
-      setError(copy.errors.genericMessage);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (tab === 'work') void load();
-    if (tab === 'service') void loadService();
-    if (tab === 'nursing' && canNursing) void loadNursing();
-    if (tab === 'pharmacy' && canPharmacy) void loadPharmacy();
-    if (tab === 'quality' && canQuality) void loadQuality();
-    if (tab === 'reception' && canReception) void loadReception();
-    if (tab === 'emergency' && canEmergency) void loadEmergency();
-    if (tab === 'icu' && canIcu) void loadIcu();
-    if (tab === 'or' && canOr) void loadOr();
-    if (tab === 'aps' && canAps) void loadAps();
-    if (tab === 'specialty' && canSpecialty) void loadSpecialty();
-    if (tab === 'patient' && dashboardPatientId) void loadPatient(dashboardPatientId);
-    if (tab === 'patient' && !dashboardPatientId) {
-      setLoading(false);
-      setPatientBoard(null);
-    }
-  }, [
+  const dashboardQueries = useDashboardQueries({
     tab,
-    load,
-    loadService,
-    loadNursing,
-    loadPharmacy,
-    loadQuality,
-    loadReception,
-    loadEmergency,
-    loadIcu,
-    loadOr,
-    loadAps,
-    loadSpecialty,
-    loadPatient,
-    dashboardPatientId,
+    patientId: dashboardPatientId,
     canQuality,
+    canNursing,
+    canPharmacy,
     canReception,
     canEmergency,
     canIcu,
     canOr,
     canAps,
     canSpecialty,
-    canNursing,
-    canPharmacy,
-  ]);
+  });
+
+  const [recentPatients, setRecentPatients] = useState(readRecentPatients());
+
+  useEffect(() => {
+    if (dashboardQueries.work.data) {
+      setRecentPatients(readRecentPatients());
+    }
+  }, [dashboardQueries.work.data]);
+
+  const loading =
+    tab === 'patient' && !dashboardPatientId ? false : dashboardQueries.active.isLoading;
+  const error = dashboardQueries.active.isError ? copy.errors.genericMessage : undefined;
+  const work = dashboardQueries.work.data ?? null;
+  const patientBoard = dashboardQueries.patient.data ?? null;
+  const serviceBoard = dashboardQueries.service.data ?? null;
+  const nursingBoard = dashboardQueries.nursing.data ?? null;
+  const pharmacyBoard = dashboardQueries.pharmacy.data ?? null;
+  const qualityBoard = dashboardQueries.quality.data ?? null;
+  const receptionBoard = dashboardQueries.reception.data ?? null;
+  const emergencyBoard = dashboardQueries.emergency.data ?? null;
+  const icuBoard = dashboardQueries.icu.data ?? null;
+  const orBoard = dashboardQueries.or.data ?? null;
+  const apsBoard = dashboardQueries.aps.data ?? null;
+  const specialtyBoard = dashboardQueries.specialty.data ?? null;
 
   const setTab = (next: DashboardTab) => {
     void navigate({
@@ -537,7 +332,7 @@ export function DashboardModeContent() {
           <ServiceDashboardTab
             data={serviceBoard}
             activePatientId={activePatient?.id}
-            onReload={() => void loadService()}
+            onReload={() => void dashboardQueries.service.refetch()}
             onOpenPatient={(pid) => {
               const p = recentPatients.find((r) => r.id === pid);
               if (p) setPatient(p);

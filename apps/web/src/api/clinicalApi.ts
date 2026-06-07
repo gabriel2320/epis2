@@ -251,6 +251,18 @@ export function fetchDraftDetail(draftId: string) {
   }>(`/api/drafts/${draftId}`);
 }
 
+export function createDraft(body: {
+  patientId: string;
+  draftType: string;
+  title: string;
+  body: Record<string, unknown>;
+}) {
+  return apiFetch<{ draft: ClinicalDraftDetail }>('/api/drafts', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+}
+
 export function updateDraft(
   draftId: string,
   body: { title?: string; body?: Record<string, unknown>; status?: string },

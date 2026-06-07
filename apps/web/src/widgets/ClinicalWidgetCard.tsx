@@ -24,8 +24,9 @@ import {
   type WidgetDefinition,
   type WidgetVisibility,
 } from '@epis2/epis2-widgets';
-import { useEffect, useState } from 'react';
-import { listDrafts, fetchPatientLongitudinal } from '../api/clinicalApi.js';
+import { useMemo } from 'react';
+import { useDraftsQuery } from '../query/hooks/useDraftsQuery.js';
+import { usePatientLongitudinalQuery } from '../query/hooks/usePatientLongitudinalQuery.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { useWidgetActions } from './useWidgetActions.js';
 
@@ -47,73 +48,63 @@ export function ClinicalWidgetCard({ definition, visibility, patientId }: Clinic
     layoutBreakpoint,
     preferences.motion === 'reduced',
   );
-  const [loadState, setLoadState] = useState<WidgetLoadState>('idle');
-  const [draftRows, setDraftRows] = useState<
-    { id: string; title: string; status: string }[]
-  >([]);
-  const [summaryLines, setSummaryLines] = useState<string[]>([]);
-  const [problemLines, setProblemLines] = useState<string[]>([]);
 
-  useEffect(() => {
-    if (!visibility.shouldFetch) {
-      setLoadState('idle');
-      return;
+  const shouldFetch = visibility.shouldFetch;
+  const fetchDrafts = shouldFetch && definition.id === 'pending-drafts';
+  const fetchLongitudinal =
+    shouldFetch &&
+    Boolean(patientId) &&
+    (definition.id === 'patient-summary' || definition.id === 'active-problems');
+
+  const draftsQuery = useDraftsQuery(patientId ? { patientId } : undefined, fetchDrafts);
+  const longitudinalQuery = usePatientLongitudinalQuery(patientId, fetchLongitudinal);
+
+  const draftRows = useMemo(
+    () =>
+      (draftsQuery.data ?? [])
+        .filter((d) => d.status !== 'approved' && d.status !== 'cancelled')
+        .map((d) => ({
+          id: d.id,
+          title: d.title,
+          status: d.status,
+        })),
+    [draftsQuery.data],
+  );
+
+  const summaryLines = useMemo(() => {
+    if (definition.id !== 'patient-summary') return [];
+    const longRes = longitudinalQuery.data;
+    if (!longRes) return [];
+    const highlights = [
+      ...longRes.problems.slice(0, 2).map((p) => p.description),
+      ...longRes.allergies.slice(0, 1).map((a) => `Alergia: ${a.substance}`),
+    ];
+    return highlights.length > 0 ? highlights : [...DEMO_PATIENT_SUMMARY.highlights];
+  }, [definition.id, longitudinalQuery.data]);
+
+  const problemLines = useMemo(() => {
+    if (definition.id !== 'active-problems') return [];
+    const longRes = longitudinalQuery.data;
+    if (!longRes) return [];
+    const problems = longRes.problems.map((p) => p.description);
+    return problems.length > 0 ? problems : [...DEMO_ACTIVE_PROBLEMS];
+  }, [definition.id, longitudinalQuery.data]);
+
+  const loadState: WidgetLoadState = (() => {
+    if (!shouldFetch) return 'idle';
+    if (definition.id === 'pending-drafts') {
+      if (draftsQuery.isLoading) return 'loading';
+      if (draftsQuery.isError) return 'error';
+      return 'ready';
     }
-
-    let cancelled = false;
-
-    async function load() {
-      setLoadState('loading');
-      try {
-        if (definition.id === 'pending-drafts') {
-          const res = await listDrafts(patientId ? { patientId } : undefined);
-          if (cancelled) return;
-          const open = res.drafts.filter((d) => d.status !== 'approved' && d.status !== 'cancelled');
-          setDraftRows(
-            open.map((d) => ({
-              id: d.id,
-              title: d.title,
-              status: d.status,
-            })),
-          );
-          setLoadState('ready');
-          return;
-        }
-
-        if (definition.id === 'patient-summary' || definition.id === 'active-problems') {
-          if (!patientId) {
-            setLoadState('ready');
-            return;
-          }
-          const longRes = await fetchPatientLongitudinal(patientId);
-          if (cancelled) return;
-          if (definition.id === 'patient-summary') {
-            const highlights = [
-              ...longRes.problems.slice(0, 2).map((p) => p.description),
-              ...longRes.allergies.slice(0, 1).map((a) => `Alergia: ${a.substance}`),
-            ];
-            setSummaryLines(
-              highlights.length > 0 ? highlights : [...DEMO_PATIENT_SUMMARY.highlights],
-            );
-          } else {
-            const problems = longRes.problems.map((p) => p.description);
-            setProblemLines(problems.length > 0 ? problems : [...DEMO_ACTIVE_PROBLEMS]);
-          }
-          setLoadState('ready');
-          return;
-        }
-
-        setLoadState('ready');
-      } catch {
-        if (!cancelled) setLoadState('error');
-      }
+    if (definition.id === 'patient-summary' || definition.id === 'active-problems') {
+      if (!patientId) return 'ready';
+      if (longitudinalQuery.isLoading) return 'loading';
+      if (longitudinalQuery.isError) return 'error';
+      return 'ready';
     }
-
-    void load();
-    return () => {
-      cancelled = true;
-    };
-  }, [definition.id, patientId, visibility.shouldFetch]);
+    return 'ready';
+  })();
 
   if (!visibility.visible) return null;
 

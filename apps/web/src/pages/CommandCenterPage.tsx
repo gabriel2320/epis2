@@ -28,11 +28,12 @@ import {
   VisibilityIcon,
   VisibilityOffIcon,
 } from '@epis2/epis2-ui';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { ApiError } from '../api/client.js';
 import { resolveCommand as resolveCommandApi } from '../api/commandApi.js';
-import { fetchAiStatus } from '../api/aiApi.js';
-import { INTENT_TO_ASSIST_BLUEPRINT, listPatients, type PatientListRow } from '../api/clinicalApi.js';
+import { INTENT_TO_ASSIST_BLUEPRINT } from '../api/clinicalApi.js';
+import { useAiStatusQuery } from '../query/hooks/useAiStatusQuery.js';
+import { usePatientsQuery } from '../query/hooks/usePatientsQuery.js';
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import {
@@ -54,20 +55,17 @@ export function CommandCenterPage() {
   const [error, setError] = useState<string | undefined>();
   const [isResolving, setIsResolving] = useState(false);
   const [lastResult, setLastResult] = useState<CommandResolveResponse | null>(null);
-  const [patients, setPatients] = useState<PatientListRow[]>([]);
-  const [aiAvailable, setAiAvailable] = useState<boolean | null>(null);
   const [patientPanelOpen, setPatientPanelOpen] = useState(false);
+  const [patientsFetchEnabled, setPatientsFetchEnabled] = useState(false);
+  const { aiAvailable } = useAiStatusQuery();
+  const { patients, refetch: refetchPatients } = usePatientsQuery({
+    enabled: patientsFetchEnabled,
+  });
 
   const role = session?.user.role ?? 'physician';
   const permissions = session?.permissions ?? [];
   const roleDisplay = copy.roles[role as keyof typeof copy.roles] ?? role;
   const aiHint = getCommandBarAiHint(role, aiAvailable === true);
-
-  useEffect(() => {
-    void fetchAiStatus()
-      .then((s) => setAiAvailable(s.available))
-      .catch(() => setAiAvailable(false));
-  }, []);
 
   const alertBlueprintId =
     lastResult?.status === 'resolved'
@@ -83,14 +81,10 @@ export function CommandCenterPage() {
       contextLabel: alertContextLabel,
     });
 
-  const loadPatients = useCallback(async () => {
-    try {
-      const res = await listPatients();
-      setPatients(res.patients);
-    } catch {
-      setPatients([]);
-    }
-  }, []);
+  const loadPatients = useCallback(() => {
+    setPatientsFetchEnabled(true);
+    void refetchPatients();
+  }, [refetchPatients]);
 
   const submit = useCallback(async (overrideText?: string) => {
     const trimmed = (overrideText ?? query).trim();

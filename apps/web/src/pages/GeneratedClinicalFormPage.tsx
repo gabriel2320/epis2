@@ -68,21 +68,17 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { ApiError } from '../api/client.js';
 
-import { apiFetch } from '../api/client.js';
-
-import { fetchAiStatus, requestDraftAssist } from '../api/aiApi.js';
+import { requestDraftAssist } from '../api/aiApi.js';
 
 import {
 
-  fetchPatientDetail,
-
-  listPatients,
-
   pickAssistContextFromSummary,
 
-  type PatientListRow,
-
 } from '../api/clinicalApi.js';
+import { useAiStatusQuery } from '../query/hooks/useAiStatusQuery.js';
+import { useCreateDraftMutation } from '../query/hooks/useDraftMutations.js';
+import { usePatientDetailQuery } from '../query/hooks/usePatientDetailQuery.js';
+import { usePatientsQuery } from '../query/hooks/usePatientsQuery.js';
 
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
 
@@ -155,18 +151,25 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
 
-  const [patients, setPatients] = useState<PatientListRow[]>([]);
-
   const [loadError, setLoadError] = useState<string | undefined>();
 
   const [isSuggesting, setIsSuggesting] = useState(false);
-  const [aiAvailable, setAiAvailable] = useState(false);
+  const [patientSearch, setPatientSearch] = useState<string | undefined>();
+  const [patientsFetchEnabled, setPatientsFetchEnabled] = useState(false);
 
   const [assistContext, setAssistContext] = useState<Record<string, string>>({});
+  const { aiAvailable: aiStatusAvailable } = useAiStatusQuery();
+  const { patients, refetch: refetchPatients } = usePatientsQuery({
+    search: patientSearch,
+    enabled: patientsFetchEnabled,
+  });
+  const patientDetailQuery = usePatientDetailQuery(effectivePatientId);
+  const createDraftMutation = useCreateDraftMutation();
 
   const canUseAiAssist = blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES;
   const clinicalProse = blueprintUsesClinicalProse(blueprint.blueprintId);
   const supportsClinicalContext = blueprintSupportsClinicalContext(blueprint.blueprintId);
+  const aiAvailable = supportsClinicalContext ? (aiStatusAvailable ?? false) : false;
   const usesScrollspyShell =
     supportsClinicalContext || blueprintUsesScrollspyLayout(blueprint.blueprintId);
   const contextStorageKey = useMemo(
@@ -224,13 +227,6 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     (!needsDraftWrite || roleHasPermission(role, 'draft.write'));
 
 
-
-  useEffect(() => {
-    if (!supportsClinicalContext) return;
-    void fetchAiStatus()
-      .then((res) => setAiAvailable(res.available))
-      .catch(() => setAiAvailable(false));
-  }, [supportsClinicalContext]);
 
   useEffect(() => {
 
@@ -292,53 +288,38 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
 
 
-  const loadPatients = useCallback(async () => {
+  const loadPatients = useCallback(() => {
 
     setLoadError(undefined);
 
     const term = values.identifier?.trim() || values.patientName?.trim();
 
-    try {
-
-      const res = await listPatients(term || undefined);
-
-      setPatients(res.patients);
-
-    } catch {
-
-      setPatients([]);
-
+    setPatientSearch(term || undefined);
+    setPatientsFetchEnabled(true);
+    void refetchPatients().catch(() => {
       setLoadError(copy.forms.loadPatientsError);
+    });
 
-    }
-
-  }, [values.identifier, values.patientName]);
+  }, [values.identifier, values.patientName, refetchPatients]);
 
 
 
   useEffect(() => {
 
-    if (!effectivePatientId) return;
+    const res = patientDetailQuery.data;
+    if (!res) return;
 
-    void fetchPatientDetail(effectivePatientId)
+    pinPatient(res.patient);
 
-      .then((res) => {
+    setAssistContext(pickAssistContextFromSummary(res.clinicalContext.summaryFields));
 
-        pinPatient(res.patient);
+    if (blueprint.blueprintId === 'patient_summary') {
 
-        setAssistContext(pickAssistContextFromSummary(res.clinicalContext.summaryFields));
+      setValues((prev) => ({ ...prev, ...res.clinicalContext.summaryFields }));
 
-        if (blueprint.blueprintId === 'patient_summary') {
+    }
 
-          setValues((prev) => ({ ...prev, ...res.clinicalContext.summaryFields }));
-
-        }
-
-      })
-
-      .catch(() => undefined);
-
-  }, [effectivePatientId, blueprint.blueprintId, pinPatient]);
+  }, [patientDetailQuery.data, blueprint.blueprintId, pinPatient]);
 
 
 
@@ -452,7 +433,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
 
 
-  const saveDraft = async () => {
+  const saveDraft = () => {
 
     setStatusMessage(undefined);
 
@@ -490,43 +471,47 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
 
 
-    try {
+    createDraftMutation.mutate(
 
-      const created = await apiFetch<{ draft: { id: string } }>('/api/drafts', {
+      {
 
-        method: 'POST',
+        patientId: effectivePatientId,
 
-        body: JSON.stringify({
+        draftType,
 
-          patientId: effectivePatientId,
+        title: blueprint.label,
 
-          draftType,
+        body: values,
 
-          title: blueprint.label,
+      },
 
-          body: values,
+      {
 
-        }),
+        onSuccess: (created) => {
 
-      });
+          navigate({
 
-      navigate({
+            to: '/espacio/borrador/$draftId',
 
-        to: '/espacio/borrador/$draftId',
+            params: { draftId: created.draft.id },
 
-        params: { draftId: created.draft.id },
+          });
 
-      });
+        },
 
-    } catch (e) {
+        onError: (e) => {
 
-      setStatusMessage(
+          setStatusMessage(
 
-        e instanceof ApiError ? e.message : copy.forms.saveDraftError,
+            e instanceof ApiError ? e.message : copy.forms.saveDraftError,
 
-      );
+          );
 
-    }
+        },
+
+      },
+
+    );
 
   };
 

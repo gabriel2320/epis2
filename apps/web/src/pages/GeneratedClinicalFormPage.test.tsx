@@ -3,11 +3,11 @@
  */
 import { getBlueprintById } from '@epis2/clinical-forms';
 import { copy } from '@epis2/design-system';
-import { Epis2ThemeProvider } from '@epis2/epis2-ui';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
+import { renderWithQuery } from '../test/renderWithQuery.js';
 import { GeneratedClinicalFormPage } from './GeneratedClinicalFormPage.js';
 
 vi.mock('@tanstack/react-router', () => ({
@@ -37,21 +37,31 @@ const { fetchPatientLongitudinal } = vi.hoisted(() => ({
   fetchPatientLongitudinal: vi.fn(),
 }));
 
-vi.mock('../api/clinicalApi.js', () => ({
-  listPatients: vi.fn().mockResolvedValue({ patients: [] }),
-  fetchPatientDetail: vi.fn().mockResolvedValue({
-    patient: {
-      id: '00000000-0000-4000-8000-000000000099',
-      displayName: 'Paciente Demo — Test',
-      isSynthetic: true,
-      demoLabel: 'DEMO/SINTÉTICO',
-      demoCaseCode: 'DEMO-099',
-    },
-    clinicalContext: { summaryFields: {} },
-    notes: [],
-  }),
-  fetchPatientLongitudinal,
-}));
+vi.mock('../api/clinicalApi.js', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../api/clinicalApi.js')>();
+  return {
+    ...actual,
+    listPatients: vi.fn().mockResolvedValue({ patients: [] }),
+    fetchPatientDetail: vi.fn().mockResolvedValue({
+      patient: {
+        id: '00000000-0000-4000-8000-000000000099',
+        displayName: 'Paciente Demo — Test',
+        isSynthetic: true,
+        demoLabel: 'DEMO/SINTÉTICO',
+        demoCaseCode: 'DEMO-099',
+      },
+      clinicalContext: { summaryFields: {}, problems: [], observations: [] },
+      notes: [],
+    }),
+    fetchPatientClinicalAlerts: vi.fn().mockResolvedValue({
+      patientId: '00000000-0000-4000-8000-000000000099',
+      readOnly: true,
+      evaluatedAt: new Date().toISOString(),
+      alerts: [],
+    }),
+    fetchPatientLongitudinal,
+  };
+});
 
 vi.mock('@mui/material/useMediaQuery', () => ({
   default: () => true,
@@ -101,16 +111,18 @@ if (!evolutionBlueprint) {
   throw new Error('evolution_note blueprint missing');
 }
 
+function renderForm(blueprint = evolutionBlueprint) {
+  return renderWithQuery(
+    <ActivePatientProvider>
+      <GeneratedClinicalFormPage blueprint={blueprint} />
+    </ActivePatientProvider>,
+  );
+}
+
 describe('GeneratedClinicalFormPage (sin IA)', () => {
   it('renderiza evolución y valida borrador local sin fetch de IA', async () => {
     const user = userEvent.setup();
-    render(
-      <Epis2ThemeProvider>
-        <ActivePatientProvider>
-          <GeneratedClinicalFormPage blueprint={evolutionBlueprint} />
-        </ActivePatientProvider>
-      </Epis2ThemeProvider>,
-    );
+    renderForm();
 
     expect(screen.getByTestId('epis2-form-evolution_note')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-ai-suggest')).toBeInTheDocument();
@@ -125,13 +137,7 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
     const { apiFetch } = await import('../api/client.js');
     vi.mocked(apiFetch).mockRejectedValueOnce(new Error('offline'));
 
-    render(
-      <Epis2ThemeProvider>
-        <ActivePatientProvider>
-          <GeneratedClinicalFormPage blueprint={evolutionBlueprint} />
-        </ActivePatientProvider>
-      </Epis2ThemeProvider>,
-    );
+    renderForm();
 
     await user.type(screen.getByRole('textbox', { name: /subjetivo/i }), 'Mejoría clínica (demo)');
     await user.type(screen.getByRole('textbox', { name: /análisis/i }), 'Evolución favorable');
@@ -144,13 +150,7 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
 
   it('abre panel de historial en layout two-pane', async () => {
     const user = userEvent.setup();
-    render(
-      <Epis2ThemeProvider>
-        <ActivePatientProvider>
-          <GeneratedClinicalFormPage blueprint={evolutionBlueprint} />
-        </ActivePatientProvider>
-      </Epis2ThemeProvider>,
-    );
+    renderForm();
 
     expect(screen.getByTestId('epis2-clinical-two-pane')).toBeInTheDocument();
     expect(screen.queryByTestId('epis2-clinical-context-pane')).not.toBeInTheDocument();
@@ -164,13 +164,7 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
   });
 
   it('muestra chips SOAP cuando IA está disponible y faltan campos', async () => {
-    render(
-      <Epis2ThemeProvider>
-        <ActivePatientProvider>
-          <GeneratedClinicalFormPage blueprint={evolutionBlueprint} />
-        </ActivePatientProvider>
-      </Epis2ThemeProvider>,
-    );
+    renderForm();
 
     await waitFor(() => {
       expect(screen.getByTestId('epis2-soap-gap-hints')).toBeInTheDocument();

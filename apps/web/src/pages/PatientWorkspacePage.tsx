@@ -2,7 +2,7 @@ import { getBlueprintByRoutePath } from '@epis2/clinical-forms';
 import { copy } from '@epis2/design-system';
 import { Link, useSearch } from '@tanstack/react-router';
 import { useClinicalNavigate, type ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 import {
@@ -17,15 +17,11 @@ import {
   Typography,
   epis2ShellContentIslandSx,
 } from '@epis2/epis2-ui';
-import {
-  BLUEPRINT_BY_ROUTE,
-  fetchPatientDetail,
-  fetchPatientLongitudinal,
-  listDrafts,
-  listPatients,
-  type PatientDetailResponse,
-  type PatientListRow,
-} from '../api/clinicalApi.js';
+import { BLUEPRINT_BY_ROUTE } from '../api/clinicalApi.js';
+import { useDraftsQuery } from '../query/hooks/useDraftsQuery.js';
+import { usePatientDetailQuery } from '../query/hooks/usePatientDetailQuery.js';
+import { usePatientLongitudinalQuery } from '../query/hooks/usePatientLongitudinalQuery.js';
+import { usePatientsQuery } from '../query/hooks/usePatientsQuery.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
 import { ClinicalPageNav } from '../components/ClinicalPageNav.js';
 import { ClinicalWidgetPanel } from '../widgets/ClinicalWidgetPanel.js';
@@ -33,7 +29,6 @@ import { ErrorState } from '../components/ErrorState.js';
 import { PatientListGrid } from '../components/PatientListGrid.js';
 import { PatientClinicalSummaryPanel } from '../components/PatientClinicalSummaryPanel.js';
 import { PatientLongitudinalPanel } from '../components/PatientLongitudinalPanel.js';
-import type { PatientLongitudinalResponse } from '@epis2/contracts';
 
 const QUICK_ROUTE_PATHS: ClinicalFormRoutePath[] = [
   '/espacio/resumen',
@@ -59,15 +54,18 @@ export function PatientWorkspacePage() {
   const search = useSearch({ strict: false }) as { patientId?: string };
   const navigate = useClinicalNavigate();
   const { patient: active, setPatient } = useActivePatient();
-  const [detail, setDetail] = useState<PatientDetailResponse | null>(null);
-  const [drafts, setDrafts] = useState<Awaited<ReturnType<typeof listDrafts>>['drafts']>([]);
-  const [patients, setPatients] = useState<PatientListRow[]>([]);
-  const [error, setError] = useState<string | undefined>();
   const [alertBlueprintId, setAlertBlueprintId] = useState<string | undefined>();
   const [alertLabel, setAlertLabel] = useState<string | undefined>();
-  const [longitudinal, setLongitudinal] = useState<PatientLongitudinalResponse | null>(null);
+  const [patientsFetchEnabled, setPatientsFetchEnabled] = useState(false);
 
   const patientId = search.patientId ?? active?.id;
+
+  const detailQuery = usePatientDetailQuery(patientId);
+  const draftsQuery = useDraftsQuery({ patientId }, Boolean(patientId));
+  const longitudinalQuery = usePatientLongitudinalQuery(patientId, Boolean(patientId));
+  const { patients, refetch: refetchPatients } = usePatientsQuery({
+    enabled: patientsFetchEnabled,
+  });
 
   const { alerts: clinicalAlerts, loading: alertsLoading, contextLabel } =
     usePatientClinicalAlerts({
@@ -76,39 +74,23 @@ export function PatientWorkspacePage() {
       contextLabel: alertLabel,
     });
 
-  const loadDetail = useCallback(async (id: string) => {
-    setError(undefined);
-    try {
-      const [res, draftRes, longRes] = await Promise.all([
-        fetchPatientDetail(id),
-        listDrafts({ patientId: id }),
-        fetchPatientLongitudinal(id),
-      ]);
-      setDetail(res);
-      setPatient(res.patient);
-      setDrafts(draftRes.drafts);
-      setLongitudinal(longRes);
+  useEffect(() => {
+    if (detailQuery.data) {
+      setPatient(detailQuery.data.patient);
       setAlertBlueprintId(undefined);
       setAlertLabel(undefined);
-    } catch {
-      setError(copy.errors.genericMessage);
     }
-  }, [setPatient]);
+  }, [detailQuery.data, setPatient]);
 
-  useEffect(() => {
-    if (patientId) {
-      void loadDetail(patientId);
-    }
-  }, [patientId, loadDetail]);
-
-  const loadPatientList = async () => {
-    try {
-      const res = await listPatients();
-      setPatients(res.patients);
-    } catch {
-      setPatients([]);
-    }
+  const loadPatientList = () => {
+    setPatientsFetchEnabled(true);
+    void refetchPatients();
   };
+
+  const detail = detailQuery.data ?? null;
+  const drafts = draftsQuery.data ?? [];
+  const longitudinal = longitudinalQuery.data ?? null;
+  const error = detailQuery.isError ? copy.errors.genericMessage : undefined;
 
   if (!patientId) {
     return (
@@ -142,7 +124,7 @@ export function PatientWorkspacePage() {
         <ErrorState
           title={copy.errors.genericTitle}
           message={error}
-          onRetry={() => patientId && void loadDetail(patientId)}
+          onRetry={() => patientId && void detailQuery.refetch()}
           retryLabel={copy.errors.retry}
         />
         <ClinicalPageNav patientId={patientId} />
@@ -150,7 +132,7 @@ export function PatientWorkspacePage() {
     );
   }
 
-  if (!detail) {
+  if (detailQuery.isLoading || !detail) {
     return (
       <Stack spacing={2} sx={epis2ShellContentIslandSx}>
         <Typography color="text.secondary">{copy.drafts.loading}</Typography>

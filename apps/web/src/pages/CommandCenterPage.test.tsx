@@ -2,20 +2,18 @@
  * @vitest-environment jsdom
  */
 import { copy } from '@epis2/design-system';
-import { Epis2ThemeProvider } from '@epis2/epis2-ui';
-import { cleanup, render, screen, within } from '@testing-library/react';
+import { cleanup, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
+import { renderWithQuery } from '../test/renderWithQuery.js';
 import { CommandCenterPage } from './CommandCenterPage.js';
 
 function renderCommandCenter() {
-  return render(
-    <Epis2ThemeProvider disablePreferences>
-      <ActivePatientProvider>
-        <CommandCenterPage />
-      </ActivePatientProvider>
-    </Epis2ThemeProvider>,
+  return renderWithQuery(
+    <ActivePatientProvider>
+      <CommandCenterPage />
+    </ActivePatientProvider>,
   );
 }
 

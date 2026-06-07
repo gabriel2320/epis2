@@ -2,10 +2,10 @@
  * @vitest-environment jsdom
  */
 import { copy } from '@epis2/design-system';
-import { Epis2ThemeProvider } from '@epis2/epis2-ui';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
+import { renderWithQuery } from '../test/renderWithQuery.js';
 import { DashboardModePage } from './DashboardModePage.js';
 
 const { fetchDashboardWork } = vi.hoisted(() => ({
@@ -22,9 +22,13 @@ vi.mock('../routes/clinicalNavigate.js', () => ({
   useClinicalNavigate: () => vi.fn(),
 }));
 
-vi.mock('../api/dashboardApi.js', () => ({
-  fetchDashboardWork,
-}));
+vi.mock('../api/dashboardApi.js', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../api/dashboardApi.js')>();
+  return {
+    ...actual,
+    fetchDashboardWork,
+  };
+});
 
 vi.mock('../auth/AuthContext.js', () => ({
   useAuth: () => ({
@@ -58,12 +62,10 @@ describe('DashboardModePage', () => {
       demoTasks: [{ id: 't1', label: 'Tarea demo', commandSample: 'evoluciona' }],
     });
 
-    render(
-      <Epis2ThemeProvider>
-        <ActivePatientProvider>
-          <DashboardModePage />
-        </ActivePatientProvider>
-      </Epis2ThemeProvider>,
+    renderWithQuery(
+      <ActivePatientProvider>
+        <DashboardModePage />
+      </ActivePatientProvider>,
     );
 
     await waitFor(() => {

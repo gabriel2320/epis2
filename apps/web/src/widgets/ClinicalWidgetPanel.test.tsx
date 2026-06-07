@@ -1,11 +1,11 @@
 /**
  * @vitest-environment jsdom
  */
-import { Epis2ThemeProvider } from '@epis2/epis2-ui';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { useEffect, type ReactNode } from 'react';
 import { ActivePatientProvider, useActivePatient } from '../clinical/ActivePatientContext.js';
+import { renderWithQuery } from '../test/renderWithQuery.js';
 import { ClinicalWidgetPanel } from './ClinicalWidgetPanel.js';
 
 vi.mock('@tanstack/react-router', () => ({
@@ -65,18 +65,16 @@ function renderPanel(
   props: Parameters<typeof ClinicalWidgetPanel>[0],
   withPatient = false,
 ) {
-  return render(
-    <Epis2ThemeProvider disablePreferences>
-      <ActivePatientProvider>
-        {withPatient ? (
-          <SeedPatient>
-            <ClinicalWidgetPanel {...props} />
-          </SeedPatient>
-        ) : (
+  return renderWithQuery(
+    <ActivePatientProvider>
+      {withPatient ? (
+        <SeedPatient>
           <ClinicalWidgetPanel {...props} />
-        )}
-      </ActivePatientProvider>
-    </Epis2ThemeProvider>,
+        </SeedPatient>
+      ) : (
+        <ClinicalWidgetPanel {...props} />
+      )}
+    </ActivePatientProvider>,
   );
 }
 
