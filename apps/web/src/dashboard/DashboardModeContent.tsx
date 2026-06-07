@@ -19,6 +19,7 @@ import {
   fetchIcuDashboard,
   fetchOrDashboard,
   fetchApsDashboard,
+  fetchSpecialtyDashboard,
   fetchNursingDashboard,
   fetchPatientDashboard,
   fetchPharmacyDashboard,
@@ -32,6 +33,7 @@ import type {
   IcuDashboardResponse,
   OrDashboardResponse,
   ApsDashboardResponse,
+  SpecialtyDashboardResponse,
   NursingDashboardResponse,
   PatientDashboardResponse,
   PharmacyDashboardResponse,
@@ -57,6 +59,7 @@ import { EmergencyDashboardTab } from '../components/EmergencyDashboardTab.js';
 import { IcuDashboardTab } from '../components/IcuDashboardTab.js';
 import { OrDashboardTab } from '../components/OrDashboardTab.js';
 import { ApsDashboardTab } from '../components/ApsDashboardTab.js';
+import { SpecialtyDashboardTab } from '../components/SpecialtyDashboardTab.js';
 
 const LazyDashboardWorklists = lazy(() =>
   import('../components/DashboardWorklists.js').then((m) => ({
@@ -80,6 +83,7 @@ export function DashboardModeContent() {
   const canIcu = role === 'admin' || role === 'nurse' || role === 'physician';
   const canOr = role === 'admin' || role === 'nurse' || role === 'physician';
   const canAps = role === 'admin' || role === 'nurse' || role === 'physician';
+  const canSpecialty = role === 'admin' || role === 'nurse' || role === 'physician';
   const { patient: activePatient, setPatient } = useActivePatient();
   const tab = (
     search.tab === 'patient' ||
@@ -89,6 +93,7 @@ export function DashboardModeContent() {
     (search.tab === 'icu' && canIcu) ||
     (search.tab === 'or' && canOr) ||
     (search.tab === 'aps' && canAps) ||
+    (search.tab === 'specialty' && canSpecialty) ||
     (search.tab === 'nursing' && canNursing) ||
     (search.tab === 'pharmacy' && canPharmacy) ||
     (search.tab === 'quality' && canQuality)
@@ -108,6 +113,7 @@ export function DashboardModeContent() {
   const [icuBoard, setIcuBoard] = useState<IcuDashboardResponse | null>(null);
   const [orBoard, setOrBoard] = useState<OrDashboardResponse | null>(null);
   const [apsBoard, setApsBoard] = useState<ApsDashboardResponse | null>(null);
+  const [specialtyBoard, setSpecialtyBoard] = useState<SpecialtyDashboardResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | undefined>();
   const [recentPatients, setRecentPatients] = useState(readRecentPatients());
@@ -243,6 +249,19 @@ export function DashboardModeContent() {
     }
   }, []);
 
+  const loadSpecialty = useCallback(async () => {
+    setLoading(true);
+    setError(undefined);
+    try {
+      const res = await fetchSpecialtyDashboard();
+      setSpecialtyBoard(res);
+    } catch {
+      setError(copy.errors.genericMessage);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   const loadPatient = useCallback(async (patientId: string) => {
     setLoading(true);
     setError(undefined);
@@ -267,6 +286,7 @@ export function DashboardModeContent() {
     if (tab === 'icu' && canIcu) void loadIcu();
     if (tab === 'or' && canOr) void loadOr();
     if (tab === 'aps' && canAps) void loadAps();
+    if (tab === 'specialty' && canSpecialty) void loadSpecialty();
     if (tab === 'patient' && dashboardPatientId) void loadPatient(dashboardPatientId);
     if (tab === 'patient' && !dashboardPatientId) {
       setLoading(false);
@@ -284,6 +304,7 @@ export function DashboardModeContent() {
     loadIcu,
     loadOr,
     loadAps,
+    loadSpecialty,
     loadPatient,
     dashboardPatientId,
     canQuality,
@@ -292,6 +313,7 @@ export function DashboardModeContent() {
     canIcu,
     canOr,
     canAps,
+    canSpecialty,
     canNursing,
     canPharmacy,
   ]);
@@ -380,8 +402,15 @@ export function DashboardModeContent() {
         'data-testid': 'epis2-dashboard-tab-aps',
       });
     }
+    if (canSpecialty) {
+      items.push({
+        value: 'specialty',
+        label: copy.dashboard.tabSpecialty,
+        'data-testid': 'epis2-dashboard-tab-specialty',
+      });
+    }
     return items;
-  }, [canQuality, canNursing, canPharmacy, canReception, canEmergency, canIcu, canOr, canAps]);
+  }, [canQuality, canNursing, canPharmacy, canReception, canEmergency, canIcu, canOr, canAps, canSpecialty]);
 
   const openPatient = (pid: string) => {
     const p = recentPatients.find((r) => r.id === pid);
@@ -637,6 +666,17 @@ export function DashboardModeContent() {
           <Typography color="text.secondary">{copy.dashboard.loading}</Typography>
         ) : apsBoard ? (
           <ApsDashboardTab data={apsBoard} onOpenPatient={openPatient} />
+        ) : null}
+      </>
+    );
+  } else if (tab === 'specialty') {
+    panel = (
+      <>
+        {error ? <Alert severity="error">{error}</Alert> : null}
+        {loading ? (
+          <Typography color="text.secondary">{copy.dashboard.loading}</Typography>
+        ) : specialtyBoard ? (
+          <SpecialtyDashboardTab data={specialtyBoard} />
         ) : null}
       </>
     );

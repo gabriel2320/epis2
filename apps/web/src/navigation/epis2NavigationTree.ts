@@ -165,6 +165,18 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     ola: '12',
     notes: 'MF-TRAMO-F-002 tablero APS',
   },
+  {
+    id: 'dashboard-specialty',
+    labelEs: 'Especialidades gráficas',
+    route: '/epis2/dashboard?tab=specialty',
+    kind: 'dashboard_tab',
+    workspace: 'ambulatory',
+    md3Level: 0,
+    status: 'partial',
+    idcRefs: [181, 182, 183, 184, 185, 186, 187, 188, 189, 190],
+    ola: '18',
+    notes: 'MF-TRAMO-I-002 tablero especialidades',
+  },
 ];
 
 const BLUEPRINT_IDC_MAP: Record<string, { idc: readonly number[]; status: EpisNavigationSurfaceStatus; workspace: EpisClinicalWorkspaceId; tab?: PatientChartTabId; ola?: string; notes?: string }> = {

@@ -4,6 +4,7 @@ import type {
   IcuDashboardResponse,
   OrDashboardResponse,
   ApsDashboardResponse,
+  SpecialtyDashboardResponse,
   NursingDashboardResponse,
   PatientDashboardResponse,
   PharmacyDashboardResponse,
@@ -51,6 +52,10 @@ export function fetchOrDashboard() {
 
 export function fetchApsDashboard() {
   return apiFetch<ApsDashboardResponse>('/api/dashboard/aps');
+}
+
+export function fetchSpecialtyDashboard() {
+  return apiFetch<SpecialtyDashboardResponse>('/api/dashboard/specialty');
 }
 
 export function acknowledgeCriticalResult(criticalId: string) {

@@ -611,3 +611,95 @@ export const apsDashboardResponseSchema = z.object({
 });
 
 export type ApsDashboardResponse = z.infer<typeof apsDashboardResponseSchema>;
+
+/** MF-TRAMO-I-002 — Tablero especialidades gráficas (IDC 181–190). */
+export const specialtyIdcPanelSchema = z.object({
+  idc: z.number().int(),
+  label: z.string(),
+  status: z.enum(['active', 'planned']),
+});
+
+export const specialtyPartogramRowSchema = z.object({
+  patientDisplayName: z.string(),
+  cervicalDilationCm: z.number(),
+  fetalStation: z.string(),
+  updatedAt: z.string(),
+});
+
+export const specialtyOncologyBoardRowSchema = z.object({
+  patientDisplayName: z.string(),
+  tumorType: z.string(),
+  discussionDate: z.string(),
+  recommendation: z.string(),
+});
+
+export const specialtyOdontogramRowSchema = z.object({
+  patientDisplayName: z.string(),
+  teethAffected: z.string(),
+  conditionSummary: z.string(),
+});
+
+export const specialtyEndoscopyRowSchema = z.object({
+  patientDisplayName: z.string(),
+  procedure: z.string(),
+  keyFinding: z.string(),
+});
+
+export const specialtyOphthalmologyRowSchema = z.object({
+  patientDisplayName: z.string(),
+  visualAcuity: z.string(),
+  iopMmHg: z.number().int(),
+});
+
+export const specialtyHemodialysisRowSchema = z.object({
+  patientDisplayName: z.string(),
+  sessionHours: z.number(),
+  ultrafiltrationMl: z.number().int(),
+});
+
+export const specialtyKinesiologyRowSchema = z.object({
+  patientDisplayName: z.string(),
+  joint: z.string(),
+  romDegrees: z.number().int(),
+});
+
+export const specialtyNutritionRowSchema = z.object({
+  patientDisplayName: z.string(),
+  bmi: z.number(),
+  planStatus: z.string(),
+});
+
+export const specialtyChemotherapyRowSchema = z.object({
+  patientDisplayName: z.string(),
+  protocol: z.string(),
+  cycleDay: z.number().int(),
+});
+
+export const specialtyPsychiatryRowSchema = z.object({
+  patientDisplayName: z.string(),
+  scaleName: z.string(),
+  score: z.number().int(),
+});
+
+export const specialtyDashboardResponseSchema = z.object({
+  readOnly: z.literal(true),
+  roleView: z.enum(['physician', 'nurse', 'admin']),
+  idcPanels: z.array(specialtyIdcPanelSchema),
+  partograms: z.array(specialtyPartogramRowSchema),
+  oncologyBoardCases: z.array(specialtyOncologyBoardRowSchema),
+  odontograms: z.array(specialtyOdontogramRowSchema),
+  endoscopyReports: z.array(specialtyEndoscopyRowSchema),
+  ophthalmologyEvaluations: z.array(specialtyOphthalmologyRowSchema),
+  hemodialysisSessions: z.array(specialtyHemodialysisRowSchema),
+  kinesiologyRecords: z.array(specialtyKinesiologyRowSchema),
+  nutritionRecords: z.array(specialtyNutritionRowSchema),
+  chemotherapyProtocols: z.array(specialtyChemotherapyRowSchema),
+  psychiatryFollowups: z.array(specialtyPsychiatryRowSchema),
+  metrics: z.object({
+    activeSpecialtyModules: z.number().int(),
+    pendingGraphicReviews: z.number().int(),
+    scheduledBoards: z.number().int(),
+  }),
+});
+
+export type SpecialtyDashboardResponse = z.infer<typeof specialtyDashboardResponseSchema>;

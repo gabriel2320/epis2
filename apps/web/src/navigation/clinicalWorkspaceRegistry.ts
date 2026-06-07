@@ -37,6 +37,7 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
       { id: 'honorarios', labelKey: 'workspaces.ambulatory.rail.honorarios', route: '/epis2/dashboard?tab=work', disabled: true },
       { id: 'patients', labelKey: 'workspaces.ambulatory.rail.patients', route: '/espacio/buscar-paciente' },
       { id: 'aps-board', labelKey: 'workspaces.ambulatory.rail.apsBoard', route: '/epis2/dashboard?tab=aps' },
+      { id: 'specialty-board', labelKey: 'workspaces.ambulatory.rail.specialtyBoard', route: '/epis2/dashboard?tab=specialty' },
     ],
     patientTabIds: ['summary', 'encounter', 'orders', 'results', 'certificates'],
     primaryFabKey: 'workspaces.ambulatory.fab',

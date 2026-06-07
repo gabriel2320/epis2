@@ -5,26 +5,26 @@
     "canon": "EPIS2_WAVE_EXECUTION_CANON.md",
     "totals": {
       "estado": {
-        "Planned": 81,
-        "Active": 81,
+        "Planned": 71,
+        "Active": 91,
         "Blocked": 1,
         "Done": 37
       },
       "prioridad": {
         "Critical": 9,
         "High": 78,
-        "Medium": 72,
-        "Low": 41
+        "Medium": 82,
+        "Low": 31
       },
       "horizonte": {
         "Core": 40,
-        "Post-core": 128,
-        "Future": 32
+        "Post-core": 138,
+        "Future": 22
       },
       "decision": {
-        "Build": 165,
+        "Build": 175,
         "Integrate": 5,
-        "Defer": 28,
+        "Defer": 18,
         "Exclude": 2
       }
     }
@@ -2195,120 +2195,120 @@
       "nombre": "Partograma (obstetricia)",
       "ola": "18",
       "workspace": "specialty",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "Especialidades Ola 18"
+      "estado": "Active",
+      "prioridad": "Medium",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Partograma demo MF-TRAMO-I-002"
     },
     {
       "idc": 182,
       "nombre": "Comité oncológico",
       "ola": "18",
       "workspace": "specialty",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "Especialidades Ola 18"
+      "estado": "Active",
+      "prioridad": "Medium",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Comité oncológico demo MF-TRAMO-I-003"
     },
     {
       "idc": 183,
       "nombre": "Odontograma",
       "ola": "18",
       "workspace": "specialty",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "Especialidades Ola 18"
+      "estado": "Active",
+      "prioridad": "Medium",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Odontograma demo MF-TRAMO-I-004"
     },
     {
       "idc": 184,
       "nombre": "Informe endoscópico",
       "ola": "18",
       "workspace": "specialty",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "Especialidades Ola 18"
+      "estado": "Active",
+      "prioridad": "Medium",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Endoscopia demo MF-TRAMO-I-005"
     },
     {
       "idc": 185,
       "nombre": "Evaluación oftalmológica",
       "ola": "18",
       "workspace": "specialty",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "Especialidades Ola 18"
+      "estado": "Active",
+      "prioridad": "Medium",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Oftalmología demo MF-TRAMO-I-006"
     },
     {
       "idc": 186,
       "nombre": "Hemodiálisis ambulatoria",
       "ola": "18",
       "workspace": "specialty",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "Especialidades Ola 18"
+      "estado": "Active",
+      "prioridad": "Medium",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Hemodiálisis demo MF-TRAMO-I-007"
     },
     {
       "idc": 187,
       "nombre": "Ficha kinesiológica",
       "ola": "18",
       "workspace": "specialty",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "Especialidades Ola 18"
+      "estado": "Active",
+      "prioridad": "Medium",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Kinesiología demo MF-TRAMO-I-008"
     },
     {
       "idc": 188,
       "nombre": "Ficha nutricional",
       "ola": "18",
       "workspace": "specialty",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "Especialidades Ola 18"
+      "estado": "Active",
+      "prioridad": "Medium",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Nutrición demo MF-TRAMO-I-009"
     },
     {
       "idc": 189,
       "nombre": "Protocolos quimioterapia",
       "ola": "18",
       "workspace": "specialty",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "Especialidades Ola 18"
+      "estado": "Active",
+      "prioridad": "Medium",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Quimioterapia demo MF-TRAMO-I-010"
     },
     {
       "idc": 190,
       "nombre": "Seguimiento psiquiátrico",
       "ola": "18",
       "workspace": "specialty",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "Especialidades Ola 18"
+      "estado": "Active",
+      "prioridad": "Medium",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Psiquiatría demo MF-TRAMO-I-011"
     },
     {
       "idc": 191,

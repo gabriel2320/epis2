@@ -13,10 +13,10 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 81 · Active: 81 · Blocked: 1 · Done: 37 |
-| **Prioridad** | Critical: 9 · High: 78 · Medium: 72 · Low: 41 |
-| **Horizonte** | Core: 40 · Post-core: 128 · Future: 32 |
-| **Decisión** | Build: 165 · Integrate: 5 · Defer: 28 · Exclude: 2 |
+| **Estado** | Planned: 71 · Active: 91 · Blocked: 1 · Done: 37 |
+| **Prioridad** | Critical: 9 · High: 78 · Medium: 82 · Low: 31 |
+| **Horizonte** | Core: 40 · Post-core: 138 · Future: 22 |
+| **Decisión** | Build: 175 · Integrate: 5 · Defer: 18 · Exclude: 2 |
 
 ### Leyenda
 
@@ -305,16 +305,16 @@
 
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
-| 181 | Partograma (obstetricia) | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
-| 182 | Comité oncológico | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
-| 183 | Odontograma | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
-| 184 | Informe endoscópico | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
-| 185 | Evaluación oftalmológica | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
-| 186 | Hemodiálisis ambulatoria | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
-| 187 | Ficha kinesiológica | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
-| 188 | Ficha nutricional | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
-| 189 | Protocolos quimioterapia | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
-| 190 | Seguimiento psiquiátrico | 18 | specialty | Planned | Low | Future | Defer | DEFERRED | Especialidades Ola 18 |
+| 181 | Partograma (obstetricia) | 18 | specialty | Active | Medium | Post-core | Build | PARTIAL | Partograma demo MF-TRAMO-I-002 |
+| 182 | Comité oncológico | 18 | specialty | Active | Medium | Post-core | Build | PARTIAL | Comité oncológico demo MF-TRAMO-I-003 |
+| 183 | Odontograma | 18 | specialty | Active | Medium | Post-core | Build | PARTIAL | Odontograma demo MF-TRAMO-I-004 |
+| 184 | Informe endoscópico | 18 | specialty | Active | Medium | Post-core | Build | PARTIAL | Endoscopia demo MF-TRAMO-I-005 |
+| 185 | Evaluación oftalmológica | 18 | specialty | Active | Medium | Post-core | Build | PARTIAL | Oftalmología demo MF-TRAMO-I-006 |
+| 186 | Hemodiálisis ambulatoria | 18 | specialty | Active | Medium | Post-core | Build | PARTIAL | Hemodiálisis demo MF-TRAMO-I-007 |
+| 187 | Ficha kinesiológica | 18 | specialty | Active | Medium | Post-core | Build | PARTIAL | Kinesiología demo MF-TRAMO-I-008 |
+| 188 | Ficha nutricional | 18 | specialty | Active | Medium | Post-core | Build | PARTIAL | Nutrición demo MF-TRAMO-I-009 |
+| 189 | Protocolos quimioterapia | 18 | specialty | Active | Medium | Post-core | Build | PARTIAL | Quimioterapia demo MF-TRAMO-I-010 |
+| 190 | Seguimiento psiquiátrico | 18 | specialty | Active | Medium | Post-core | Build | PARTIAL | Psiquiatría demo MF-TRAMO-I-011 |
 
 ## IA y hardware local (191–196)
 

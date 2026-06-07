@@ -81,6 +81,7 @@ export const copy = {
     tabIcu: 'UCI',
     tabOr: 'Pabellón',
     tabAps: 'APS / medicina general',
+    tabSpecialty: 'Especialidades gráficas',
     gridColumnTitle: 'Título',
     gridColumnPatient: 'Paciente',
     gridColumnType: 'Tipo',
@@ -288,6 +289,26 @@ export const copy = {
     outbreakStudyTitle: 'Estudio brote (IDC 148)',
     isolationMapTitle: 'Mapa aislamientos (IDC 149)',
     endemicCurvesTitle: 'Curvas endémicas (IDC 150)',
+  },
+  specialty: {
+    disclosure:
+      'Especialidades gráficas demo — módulos sintéticos. Home sigue siendo Centro de Comando.',
+    idcPanelsTitle: 'Especialidades gráficas (IDC 181–190)',
+    partogramTitle: 'Partograma obstétrico (IDC 181)',
+    oncologyBoardTitle: 'Comité oncológico (IDC 182)',
+    odontogramTitle: 'Odontograma (IDC 183)',
+    endoscopyTitle: 'Informe endoscópico (IDC 184)',
+    ophthalmologyTitle: 'Evaluación oftalmológica (IDC 185)',
+    hemodialysisTitle: 'Hemodiálisis ambulatoria (IDC 186)',
+    kinesiologyTitle: 'Ficha kinesiológica (IDC 187)',
+    nutritionTitle: 'Ficha nutricional (IDC 188)',
+    chemotherapyTitle: 'Protocolos quimioterapia (IDC 189)',
+    psychiatryTitle: 'Seguimiento psiquiátrico (IDC 190)',
+    metrics: {
+      activeModules: 'Módulos activos',
+      pendingReviews: 'Revisiones gráficas pendientes',
+      scheduledBoards: 'Comités programados',
+    },
   },
   inpatient: {
     census: 'Censo de camas',
@@ -654,6 +675,7 @@ export const copy = {
         honorarios: 'Mis honorarios',
         patients: 'Pacientes',
         apsBoard: 'Programas APS',
+        specialtyBoard: 'Especialidades gráficas',
       },
       tabs: {
         summary: 'Resumen histórico',

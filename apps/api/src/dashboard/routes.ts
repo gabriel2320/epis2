@@ -4,6 +4,7 @@ import {
   icuDashboardResponseSchema,
   orDashboardResponseSchema,
   apsDashboardResponseSchema,
+  specialtyDashboardResponseSchema,
   nursingDashboardResponseSchema,
   patientDashboardResponseSchema,
   pharmacyDashboardResponseSchema,
@@ -30,6 +31,7 @@ import { getEmergencyDashboardSummary } from './emergency.js';
 import { getIcuDashboardSummary } from './icu.js';
 import { getOrDashboardSummary } from './or.js';
 import { getApsDashboardSummary } from './aps.js';
+import { getSpecialtyDashboardSummary } from './specialty.js';
 import { DEMO_WORK_TASKS, getDashboardWorkSummary } from './service.js';
 
 export async function registerDashboardRoutes(
@@ -325,6 +327,34 @@ export async function registerDashboardRoutes(
 
       const summary = await getApsDashboardSummary(db, session.role);
       return apsDashboardResponseSchema.parse(summary);
+    },
+  );
+
+  app.get(
+    '/api/dashboard/specialty',
+    { preHandler: requireDashboardRead },
+    async (request, reply) => {
+      const session = (request as AuthenticatedRequest).session;
+      if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
+        return reply.status(403).send({ error: 'Tablero especialidades no disponible para este rol' });
+      }
+
+      await appendAudit(db, {
+        eventType: 'dashboard.opened',
+        actorId: session.sub,
+        username: session.username,
+        entityType: 'dashboard',
+        entityId: 'specialty',
+        message: 'Modo tablero — especialidades gráficas',
+        payload: { tab: 'specialty' },
+      });
+
+      if (!db) {
+        return reply.status(503).send({ error: 'Base de datos no disponible' });
+      }
+
+      const summary = await getSpecialtyDashboardSummary(db, session.role);
+      return specialtyDashboardResponseSchema.parse(summary);
     },
   );
 }

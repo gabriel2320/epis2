@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Higiene transversal Tramos A–H — conciliación docs, gates y plan maestro.
+ * Higiene transversal Tramos A–I — conciliación docs, gates y plan maestro.
  * No sustituye ejecutar cada closure-gate; valida estructura y coherencia canon.
  */
 import { existsSync, readFileSync } from 'node:fs';
@@ -67,6 +67,13 @@ const TRAMOS = [
     gateScript: 'validate-tramo-h-closure-gate.mjs',
     npmGate: 'quality:tramo-h-closure-gate',
   },
+  {
+    id: 'I',
+    closure: 'docs/product/EPIS2_TRAMO_I_CLOSURE.md',
+    mf: 'MF-TRAMO-I-CLOSURE',
+    gateScript: 'validate-tramo-i-closure-gate.mjs',
+    npmGate: 'quality:tramo-i-closure-gate',
+  },
 ];
 
 const hygieneDoc = join(root, 'docs/product/EPIS2_TRAMOS_HYGIENE.md');
@@ -130,4 +137,4 @@ if (errors.length) {
   console.error('tramos-hygiene-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
-console.log('tramos-hygiene-gate OK — Tramos A–H conciliados (docs · gates · plan maestro)');
+console.log('tramos-hygiene-gate OK — Tramos A–I conciliados (docs · gates · plan maestro)');
