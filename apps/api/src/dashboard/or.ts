@@ -3,7 +3,7 @@ import { patients } from '../db/schema.js';
 
 const OR_IDC_PANELS = [
   { idc: 151, label: 'Tabla quirúrgica', status: 'active' as const },
-  { idc: 152, label: 'Checklist cirugía segura OMS', status: 'planned' as const },
+  { idc: 152, label: 'Checklist cirugía segura OMS', status: 'active' as const },
   { idc: 153, label: 'Evaluación preanestésica', status: 'planned' as const },
   { idc: 154, label: 'Hoja anestesia intraoperatoria', status: 'planned' as const },
   { idc: 155, label: 'Protocolo operatorio', status: 'planned' as const },
@@ -39,6 +39,42 @@ export async function getOrDashboardSummary(db: Database, role: string) {
   const inProgress = surgicalSchedule.filter((row) => row.status === 'in_progress').length;
   const scheduledToday = surgicalSchedule.filter((row) => row.status !== 'completed').length;
 
+  const whoSafetyChecklist = surgicalSchedule
+    .filter((row) => row.status === 'in_progress' || row.status === 'preparing')
+    .flatMap((row) => {
+      const pauses = [
+        { pauseId: `${row.caseId}-sign-in`, pauseLabel: 'Sign In (pre-inducción)', totalItems: 7 },
+        { pauseId: `${row.caseId}-time-out`, pauseLabel: 'Time Out (pre-incisión)', totalItems: 6 },
+        { pauseId: `${row.caseId}-sign-out`, pauseLabel: 'Sign Out (pre-salida)', totalItems: 5 },
+      ];
+      return pauses.map((pause, index) => {
+        const completedItems =
+          row.status === 'in_progress'
+            ? index === 0
+              ? 7
+              : index === 1
+                ? 4
+                : 0
+            : index === 0
+              ? 3
+              : 0;
+        const status =
+          completedItems === 0
+            ? ('pending' as const)
+            : completedItems >= pause.totalItems
+              ? ('completed' as const)
+              : ('in_progress' as const);
+        return {
+          ...pause,
+          caseId: row.caseId,
+          patientDisplayName: row.patientDisplayName,
+          operatingRoom: row.operatingRoom,
+          completedItems,
+          status,
+        };
+      });
+    });
+
   return {
     readOnly: true as const,
     roleView: (role === 'admin' || role === 'nurse' ? role : 'physician') as
@@ -47,6 +83,7 @@ export async function getOrDashboardSummary(db: Database, role: string) {
       | 'admin',
     idcPanels: OR_IDC_PANELS,
     surgicalSchedule,
+    whoSafetyChecklist,
     metrics: {
       operatingRoomsInUse: inProgress + (surgicalSchedule.some((r) => r.status === 'preparing') ? 1 : 0),
       scheduledToday,

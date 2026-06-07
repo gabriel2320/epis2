@@ -12,7 +12,7 @@
 | **B** Piloto ambulatorio | ✅ UI demo | 2–10 (6,10 Active) | `quality:tramo-b-ui-gate` |
 | **C** Hospitalización + urgencias | ✅ Cerrado técnico | 111·116·58 Done; 110 Active | `quality:tramo-c-closure-gate` |
 | **D** Programas especializados | ✅ Cerrado técnico (UCI demo) | 41–50·135 Active | `quality:tramo-d-closure-gate` |
-| **E** Pabellón y anestesia | ◐ Scaffold demo | 151 Active; 152–160 Defer | `quality:tramo-e-or-gate` |
+| **E** Pabellón y anestesia | ◐ Scaffold demo | 151–152 Active; 153–160 Defer | `quality:tramo-e-or-gate` |
 
 ---
 
@@ -37,7 +37,7 @@
 ## Próximo paso global
 
 1. Signoff clínico institucional Tramos A–E
-2. MF-TRAMO-E-003 checklist OMS (IDC 152)
+2. MF-TRAMO-E-004 evaluación preanestésica (IDC 153)
 3. UCI especializada IDC 131–140 (Defer Future)
 
 ---

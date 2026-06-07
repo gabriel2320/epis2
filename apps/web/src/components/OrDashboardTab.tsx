@@ -25,6 +25,15 @@ const STATUS_LABEL: Record<OrDashboardResponse['surgicalSchedule'][number]['stat
   completed: copy.or.statusCompleted,
 };
 
+const WHO_STATUS_LABEL: Record<
+  OrDashboardResponse['whoSafetyChecklist'][number]['status'],
+  string
+> = {
+  pending: copy.or.whoStatusPending,
+  in_progress: copy.or.whoStatusInProgress,
+  completed: copy.or.whoStatusCompleted,
+};
+
 export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
   return (
     <Stack spacing={2} data-testid="epis2-or-dashboard">
@@ -88,6 +97,27 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
             </ListItem>
           ))}
         </List>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-who-checklist">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.or.whoChecklistTitle}
+        </Typography>
+        {data.whoSafetyChecklist.length === 0 ? (
+          <Typography variant="body2" color="text.secondary">
+            {copy.longitudinal.emptySection}
+          </Typography>
+        ) : (
+          <List dense data-testid="epis2-or-who-checklist-rows">
+            {data.whoSafetyChecklist.map((row) => (
+              <ListItem key={row.pauseId} disablePadding sx={{ py: 0.25 }}>
+                <ListItemText
+                  primary={`${row.operatingRoom} — ${row.pauseLabel}`}
+                  secondary={`${row.patientDisplayName} · ${copy.or.whoChecklistProgress} ${row.completedItems}/${row.totalItems} · ${WHO_STATUS_LABEL[row.status]}`}
+                />
+              </ListItem>
+            ))}
+          </List>
+        )}
       </Paper>
     </Stack>
   );

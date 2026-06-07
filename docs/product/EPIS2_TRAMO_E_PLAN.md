@@ -17,7 +17,7 @@ Pabellón · anestesia · obstetricia · odontología · telemedicina · IoT · 
 | Programa | IDC | EPIS2 hoy |
 |----------|-----|-----------|
 | Tabla quirúrgica | 151 | ✅ **MF-TRAMO-E-002** |
-| Checklist OMS | 152 | Defer |
+| Checklist OMS | 152 | ✅ **MF-TRAMO-E-003** |
 | Preanestesia | 153 | Defer |
 | Anestesia intraop | 154 | Defer |
 | Protocolo operatorio | 155 | Defer |
@@ -35,7 +35,8 @@ Pabellón · anestesia · obstetricia · odontología · telemedicina · IoT · 
 |----|---------|--------|
 | MF-TRAMO-E-001 | Inventario pabellón | ✅ |
 | MF-TRAMO-E-002 | Rail + tablero OR (IDC 151) | ✅ |
-| MF-TRAMO-E-003+ | Checklist OMS, preanestesia… | 📋 Planificado |
+| MF-TRAMO-E-003 | Checklist OMS (IDC 152) | ✅ |
+| MF-TRAMO-E-004+ | Preanestesia, anestesia intraop… | 📋 Planificado |
 
 ---
 
@@ -45,6 +46,7 @@ Pabellón · anestesia · obstetricia · odontología · telemedicina · IoT · 
 |------|-----------|
 | `quality:tramo-e-inventory-gate` | Inventario + plan |
 | `quality:tramo-e-or-gate` | Workspace + API + IDC 151 |
+| `quality:tramo-e-who-checklist-gate` | IDC 152 checklist OMS |
 
 ---
 

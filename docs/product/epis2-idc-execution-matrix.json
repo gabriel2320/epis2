@@ -5,26 +5,26 @@
     "canon": "EPIS2_WAVE_EXECUTION_CANON.md",
     "totals": {
       "estado": {
-        "Planned": 117,
-        "Active": 45,
+        "Planned": 116,
+        "Active": 46,
         "Blocked": 1,
         "Done": 37
       },
       "prioridad": {
         "Critical": 9,
-        "High": 57,
+        "High": 58,
         "Medium": 84,
-        "Low": 50
+        "Low": 49
       },
       "horizonte": {
         "Core": 40,
-        "Post-core": 101,
-        "Future": 59
+        "Post-core": 102,
+        "Future": 58
       },
       "decision": {
-        "Build": 138,
+        "Build": 139,
         "Integrate": 5,
-        "Defer": 55,
+        "Defer": 54,
         "Exclude": 2
       }
     }
@@ -1847,12 +1847,12 @@
       "nombre": "Checklist cirugía segura OMS",
       "ola": "15",
       "workspace": "or",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "MISSING",
-      "nota": "Pabellón Ola 15"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Checklist OMS demo MF-TRAMO-E-003"
     },
     {
       "idc": 153,

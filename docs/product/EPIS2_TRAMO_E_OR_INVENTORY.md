@@ -10,7 +10,7 @@
 | IDC | Nombre | Decisión Tramo E | Nota |
 |-----|--------|------------------|------|
 | 151 | Tabla quirúrgica | **Active** MF-E-002 | Agendamiento quirófanos demo |
-| 152 | Checklist cirugía segura OMS | Defer | Pausas pre-inducción/incisión |
+| 152 | Checklist cirugía segura OMS | **Active** MF-E-003 | Sign In · Time Out · Sign Out demo |
 | 153 | Evaluación preanestésica | Defer | ASA, Mallampati |
 | 154 | Hoja anestesia intraoperatoria | Defer | Grilla minuto a minuto |
 | 155 | Protocolo operatorio | Defer | Descripción técnica |
@@ -25,8 +25,8 @@
 ## Workspace EPIS2 hoy
 
 - Rail `or` **habilitado** — MF-TRAMO-E-002 (`/epis2/dashboard?tab=or`).
-- Tablero `OrDashboardTab` — IDC 151 Active (scaffold demo).
-- IDC 152–160 Planned en chips; implementación futura MF-E-003+.
+- Tablero `OrDashboardTab` — IDC 151–152 Active (MF-TRAMO-E-002 … E-003).
+- IDC 153–160 Planned en chips; implementación futura MF-E-004+.
 
 ---
 

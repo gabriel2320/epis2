@@ -13,4 +13,12 @@ test.describe('Tramo E — Pabellón', () => {
     await expect(page.getByTestId('epis2-or-surgical-schedule')).toBeVisible();
     await expect(page.getByTestId('epis2-or-surgical-schedule-rows')).toBeVisible();
   });
+
+  test('tablero pabellón — checklist OMS IDC 152', async ({ page }) => {
+    await loginAsPhysician(page);
+    await page.goto('/epis2/dashboard?tab=or');
+    await expect(page.getByTestId('epis2-or-who-checklist')).toBeVisible();
+    await expect(page.getByTestId('epis2-or-who-checklist-rows')).toBeVisible();
+    await expect(page.getByTestId('epis2-or-idc-152')).toBeVisible();
+  });
 });

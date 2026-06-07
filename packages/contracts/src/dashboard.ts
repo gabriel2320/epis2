@@ -336,11 +336,23 @@ export const orSurgicalScheduleRowSchema = z.object({
   surgeonDisplayName: z.string(),
 });
 
+export const orWhoChecklistRowSchema = z.object({
+  pauseId: z.string(),
+  pauseLabel: z.string(),
+  caseId: z.string(),
+  patientDisplayName: z.string(),
+  operatingRoom: z.string(),
+  completedItems: z.number().int(),
+  totalItems: z.number().int(),
+  status: z.enum(['pending', 'in_progress', 'completed']),
+});
+
 export const orDashboardResponseSchema = z.object({
   readOnly: z.literal(true),
   roleView: z.enum(['physician', 'nurse', 'admin']),
   idcPanels: z.array(orIdcPanelSchema),
   surgicalSchedule: z.array(orSurgicalScheduleRowSchema),
+  whoSafetyChecklist: z.array(orWhoChecklistRowSchema),
   metrics: z.object({
     operatingRoomsInUse: z.number().int(),
     scheduledToday: z.number().int(),
