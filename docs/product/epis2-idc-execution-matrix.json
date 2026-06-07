@@ -6,9 +6,9 @@
     "totals": {
       "estado": {
         "Planned": 129,
-        "Active": 35,
+        "Active": 34,
         "Blocked": 1,
-        "Done": 35
+        "Done": 36
       },
       "prioridad": {
         "Critical": 9,
@@ -1355,12 +1355,12 @@
       "nombre": "Entrega de turno (SBAR)",
       "ola": "11",
       "workspace": "icu",
-      "estado": "Active",
+      "estado": "Done",
       "prioridad": "High",
       "horizonte": "Post-core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": "nursing_note blueprint"
+      "nota": "nursing_note + CTA ficha MF-TRAMO-C-003"
     },
     {
       "idc": 112,

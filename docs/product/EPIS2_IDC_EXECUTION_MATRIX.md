@@ -13,7 +13,7 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 129 · Active: 35 · Blocked: 1 · Done: 35 |
+| **Estado** | Planned: 129 · Active: 34 · Blocked: 1 · Done: 36 |
 | **Prioridad** | Critical: 9 · High: 45 · Medium: 95 · Low: 51 |
 | **Horizonte** | Core: 40 · Post-core: 89 · Future: 71 |
 | **Decisión** | Build: 126 · Integrate: 5 · Defer: 67 · Exclude: 2 |
@@ -200,7 +200,7 @@
 
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
-| 111 | Entrega de turno (SBAR) | 11 | icu | Active | High | Post-core | Build | PARTIAL | nursing_note blueprint |
+| 111 | Entrega de turno (SBAR) | 11 | icu | Done | High | Post-core | Build | PARTIAL | nursing_note + CTA ficha MF-TRAMO-C-003 |
 | 112 | Riesgo de caídas | 11 | icu | Planned | High | Post-core | Build | MISSING |  |
 | 113 | Riesgo UPP (Braden/Norton) | 11 | icu | Planned | High | Post-core | Build | MISSING |  |
 | 114 | Curaciones / heridas | 11 | icu | Planned | High | Post-core | Build | MISSING |  |

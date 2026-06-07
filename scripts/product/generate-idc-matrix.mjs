@@ -347,7 +347,7 @@ const OVERRIDES = {
   100: { estado: 'Planned', prioridad: 'Low', horizonte: 'Future', decision: 'Integrate', legacy: 'DEFERRED', nota: 'Portal externo' },
   106: { estado: 'Active', prioridad: 'Medium', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'transfer_note' },
   110: { estado: 'Active', prioridad: 'High', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL' },
-  111: { estado: 'Active', prioridad: 'High', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'nursing_note blueprint' },
+  111: { estado: 'Done', prioridad: 'High', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'nursing_note + CTA ficha MF-TRAMO-C-003' },
   116: { estado: 'Active', prioridad: 'Critical', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'medication_administration' },
   120: { estado: 'Active', prioridad: 'Medium', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL' },
   130: { estado: 'Active', prioridad: 'Medium', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL' },

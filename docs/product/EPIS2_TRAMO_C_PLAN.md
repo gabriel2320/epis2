@@ -12,15 +12,17 @@ Hospitalización general → Enfermería/MAR → Urgencias (emergency) → Farma
 
 ---
 
-## Estado actual (MF-TRAMO-C-002)
+## Estado actual (MF-TRAMO-C-002 … C-004)
 
 | Hito | Estado | IDC |
 |------|--------|-----|
 | Workspace `emergency` | ✅ Scaffold | 101–105 Active |
 | Tablero triaje demo | ✅ | API + UI + E2E |
+| Hub hospitalización ficha | ✅ **MF-TRAMO-C-003** | 111 Done |
+| Ingreso / traslado UI | ✅ | `/espacio/ingreso` · `/espacio/traslado` |
+| Órdenes activas servicio | ◐ **MF-TRAMO-C-004** | CTA ficha → tablero |
 | Hospitalización censo | ◐ Partial | V2 service dashboard |
 | MAR enfermería | ◐ Partial | V3 nursing tab |
-| Bandeja órdenes extendida | Planned | 51–60 |
 
 ---
 

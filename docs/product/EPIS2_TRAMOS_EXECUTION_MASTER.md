@@ -34,9 +34,9 @@
 
 ## Próximo paso global
 
-1. MF-TRAMO-C-003 — hospitalización blueprint UI
-2. Signoff clínico institucional Tramo A
-3. MF-TRAMO-D-002 — habilitar UCI rail post Tramo C
+1. MF-TRAMO-C-005 — tendencias resultados (IDC 164)
+2. MF-TRAMO-C-006 — epicrisis urgencias (IDC 110)
+3. Signoff clínico institucional Tramo A
 
 ---
 

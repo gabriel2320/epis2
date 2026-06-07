@@ -33,6 +33,10 @@ export type PatientLongitudinalPanelProps = {
   onRegisterProblem?: () => void;
   onRegisterSurgicalHistory?: () => void;
   onOpenResults?: () => void;
+  onAdmitHospital?: () => void;
+  onTransferNote?: () => void;
+  onNursingNote?: () => void;
+  onOpenServiceOrders?: () => void;
 };
 
 function Section({
@@ -69,6 +73,10 @@ export function PatientLongitudinalPanel({
   onRegisterProblem,
   onRegisterSurgicalHistory,
   onOpenResults,
+  onAdmitHospital,
+  onTransferNote,
+  onNursingNote,
+  onOpenServiceOrders,
 }: PatientLongitudinalPanelProps) {
   const [exporting, setExporting] = useState<'txt' | 'pdf' | null>(null);
   const clinicalProblems = useMemo(
@@ -229,6 +237,55 @@ export function PatientLongitudinalPanel({
             </ListItem>
           ))}
         </List>
+      </Section>
+
+      <Section
+        title={copy.longitudinal.hospitalization}
+        empty={false}
+        testId="epis2-longitudinal-hospitalization"
+      >
+        <Stack direction="row" flexWrap="wrap" gap={1}>
+          {onAdmitHospital ? (
+            <Button
+              size="small"
+              variant="outlined"
+              onClick={onAdmitHospital}
+              data-testid="epis2-longitudinal-admit-hospital"
+            >
+              {copy.longitudinal.admitHospital}
+            </Button>
+          ) : null}
+          {onTransferNote ? (
+            <Button
+              size="small"
+              variant="outlined"
+              onClick={onTransferNote}
+              data-testid="epis2-longitudinal-transfer-note"
+            >
+              {copy.longitudinal.transferNote}
+            </Button>
+          ) : null}
+          {onNursingNote ? (
+            <Button
+              size="small"
+              variant="outlined"
+              onClick={onNursingNote}
+              data-testid="epis2-longitudinal-nursing-note"
+            >
+              {copy.longitudinal.nursingNote}
+            </Button>
+          ) : null}
+          {onOpenServiceOrders ? (
+            <Button
+              size="small"
+              variant="text"
+              onClick={onOpenServiceOrders}
+              data-testid="epis2-longitudinal-open-service-orders"
+            >
+              {copy.longitudinal.viewActiveOrders}
+            </Button>
+          ) : null}
+        </Stack>
       </Section>
 
       <Section

@@ -129,10 +129,10 @@
 |---|----------|------|--------|--------|
 | 1 | Resumen clínico | `/espacio/resumen` | **PARTIAL** | — |
 | 2 | Evolución médica | `/espacio/evolucion` | **COMPLETE** | — |
-| 3 | Ingreso hospitalario | API only | **MISSING** | Blueprint Ola 2 |
+| 3 | Ingreso hospitalario | `/espacio/ingreso` | **COMPLETE** | MF-TRAMO-C-003; blueprint `admission_note` |
 | 4 | Nota procedimiento | — | **MISSING** | Ola 2 |
 | 5 | Nota interconsulta | `/espacio/interconsulta` | **PARTIAL** | Orden, no nota |
-| 6 | Nota traslado | API inpatient | **MISSING** | Ola 4 |
+| 6 | Nota traslado | `/espacio/traslado` | **COMPLETE** | MF-TRAMO-C-003; blueprint `transfer_note` |
 | 7 | Epicrisis | `/espacio/epicrisis` | **COMPLETE** | — |
 | 8 | Certificado médico | `/espacio/certificado` | **COMPLETE** | Ola 2 |
 | 9 | Impresión certificado A5 | `/espacio/certificado/imprimir` | **COMPLETE** | E2E MF-OLA6A-002; IDC 40 Done |
@@ -149,7 +149,7 @@
 | Capacidad | Estado | Notas |
 |-----------|--------|-------|
 | Crear orden (lab, imagen, interconsulta) | **PARTIAL** | Blueprints draft; sin bandeja órdenes |
-| Revisar órdenes activas | **MISSING** | `clinical_orders` demo en API |
+| Revisar órdenes activas | **PARTIAL** | Tablero servicio + CTA ficha MF-TRAMO-C-004 |
 | Pendientes / completadas / canceladas | **MISSING** | Ola 4 |
 | Resultado crítico en orden | **PARTIAL** | Ack API inpatient |
 | Revisión antes de envío | **PARTIAL** | Flujo borrador |

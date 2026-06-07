@@ -51,6 +51,8 @@ const QUICK_ROUTE_PATHS: ClinicalFormRoutePath[] = [
   '/espacio/enfermeria',
   '/espacio/mar',
   '/espacio/farmacia',
+  '/espacio/ingreso',
+  '/espacio/traslado',
 ];
 
 export function PatientWorkspacePage() {
@@ -216,6 +218,30 @@ export function PatientWorkspacePage() {
               void navigate({
                 to: '/espacio/resultados',
                 search: { patientId },
+              })
+            }
+            onAdmitHospital={() =>
+              void navigate({
+                to: '/espacio/ingreso',
+                search: { patientId },
+              })
+            }
+            onTransferNote={() =>
+              void navigate({
+                to: '/espacio/traslado',
+                search: { patientId },
+              })
+            }
+            onNursingNote={() =>
+              void navigate({
+                to: '/espacio/enfermeria',
+                search: { patientId },
+              })
+            }
+            onOpenServiceOrders={() =>
+              void navigate({
+                to: '/epis2/dashboard',
+                search: { tab: 'service', patientId },
               })
             }
           />

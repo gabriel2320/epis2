@@ -112,4 +112,34 @@ describe('PatientLongitudinalPanel — Ola 3 CTAs', () => {
     expect(screen.getByText('Apendicectomía 2018')).toBeInTheDocument();
     expect(screen.getByText('HTA')).toBeInTheDocument();
   });
+
+  it('ofrece CTAs de hospitalización e ingreso', async () => {
+    const user = userEvent.setup();
+    const onAdmit = vi.fn();
+    const onTransfer = vi.fn();
+    const onNursing = vi.fn();
+    const onOrders = vi.fn();
+
+    render(
+      <Epis2ThemeProvider>
+        <PatientLongitudinalPanel
+          data={emptyLongitudinal}
+          onAdmitHospital={onAdmit}
+          onTransferNote={onTransfer}
+          onNursingNote={onNursing}
+          onOpenServiceOrders={onOrders}
+        />
+      </Epis2ThemeProvider>,
+    );
+
+    await user.click(screen.getByTestId('epis2-longitudinal-admit-hospital'));
+    await user.click(screen.getByTestId('epis2-longitudinal-transfer-note'));
+    await user.click(screen.getByTestId('epis2-longitudinal-nursing-note'));
+    await user.click(screen.getByTestId('epis2-longitudinal-open-service-orders'));
+
+    expect(onAdmit).toHaveBeenCalledOnce();
+    expect(onTransfer).toHaveBeenCalledOnce();
+    expect(onNursing).toHaveBeenCalledOnce();
+    expect(onOrders).toHaveBeenCalledOnce();
+  });
 });
