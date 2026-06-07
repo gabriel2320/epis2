@@ -21,4 +21,12 @@ test.describe('Tramo E — Pabellón', () => {
     await expect(page.getByTestId('epis2-or-who-checklist-rows')).toBeVisible();
     await expect(page.getByTestId('epis2-or-idc-152')).toBeVisible();
   });
+
+  test('tablero pabellón — preanestesia IDC 153', async ({ page }) => {
+    await loginAsPhysician(page);
+    await page.goto('/epis2/dashboard?tab=or');
+    await expect(page.getByTestId('epis2-or-preanesthesia')).toBeVisible();
+    await expect(page.getByTestId('epis2-or-preanesthesia-rows')).toBeVisible();
+    await expect(page.getByTestId('epis2-or-idc-153')).toBeVisible();
+  });
 });

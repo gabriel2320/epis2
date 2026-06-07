@@ -4,7 +4,7 @@ import { patients } from '../db/schema.js';
 const OR_IDC_PANELS = [
   { idc: 151, label: 'Tabla quirúrgica', status: 'active' as const },
   { idc: 152, label: 'Checklist cirugía segura OMS', status: 'active' as const },
-  { idc: 153, label: 'Evaluación preanestésica', status: 'planned' as const },
+  { idc: 153, label: 'Evaluación preanestésica', status: 'active' as const },
   { idc: 154, label: 'Hoja anestesia intraoperatoria', status: 'planned' as const },
   { idc: 155, label: 'Protocolo operatorio', status: 'planned' as const },
   { idc: 156, label: 'Recuento compresas / insumos', status: 'planned' as const },
@@ -75,6 +75,19 @@ export async function getOrDashboardSummary(db: Database, role: string) {
       });
     });
 
+  const preanesthesiaEvaluations = surgicalSchedule
+    .filter((row) => row.status !== 'completed')
+    .map((row, index) => ({
+      caseId: row.caseId,
+      patientId: row.patientId,
+      patientDisplayName: row.patientDisplayName,
+      operatingRoom: row.operatingRoom,
+      asaClass: (['II', 'III', 'II', 'I'][index] ?? 'II') as 'I' | 'II' | 'III' | 'IV' | 'V',
+      mallampati: (['II', 'III', 'I', 'II'][index] ?? 'II') as 'I' | 'II' | 'III' | 'IV',
+      allergyAlert: index === 0 ? 'Penicilina documentada' : index === 2 ? 'Látex — precaución' : null,
+      evaluationStatus: (row.status === 'scheduled' ? 'pending' : 'complete') as 'pending' | 'complete',
+    }));
+
   return {
     readOnly: true as const,
     roleView: (role === 'admin' || role === 'nurse' ? role : 'physician') as
@@ -84,6 +97,7 @@ export async function getOrDashboardSummary(db: Database, role: string) {
     idcPanels: OR_IDC_PANELS,
     surgicalSchedule,
     whoSafetyChecklist,
+    preanesthesiaEvaluations,
     metrics: {
       operatingRoomsInUse: inProgress + (surgicalSchedule.some((r) => r.status === 'preparing') ? 1 : 0),
       scheduledToday,

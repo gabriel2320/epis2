@@ -119,6 +119,35 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
           </List>
         )}
       </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-preanesthesia">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.or.preanesthesiaTitle}
+        </Typography>
+        <List dense data-testid="epis2-or-preanesthesia-rows">
+          {data.preanesthesiaEvaluations.map((row) => (
+            <ListItem
+              key={row.caseId}
+              disablePadding
+              sx={{ py: 0.5, flexWrap: 'wrap', gap: 0.5 }}
+            >
+              <ListItemText
+                primary={`${row.operatingRoom} — ${row.patientDisplayName}`}
+                secondary={`${copy.or.preanesthesiaAsa} ${row.asaClass} · ${copy.or.preanesthesiaMallampati} ${row.mallampati}${row.allergyAlert ? ` · ${row.allergyAlert}` : ''} · ${row.evaluationStatus === 'complete' ? copy.or.preanesthesiaComplete : copy.or.preanesthesiaPending}`}
+              />
+              {onOpenPatient ? (
+                <Button
+                  size="small"
+                  variant="text"
+                  onClick={() => onOpenPatient(row.patientId)}
+                  data-testid={`epis2-or-preanesthesia-open-${row.patientId}`}
+                >
+                  {copy.or.openPatientChart}
+                </Button>
+              ) : null}
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
     </Stack>
   );
 }

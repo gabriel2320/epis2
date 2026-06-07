@@ -5,26 +5,26 @@
     "canon": "EPIS2_WAVE_EXECUTION_CANON.md",
     "totals": {
       "estado": {
-        "Planned": 116,
-        "Active": 46,
+        "Planned": 115,
+        "Active": 47,
         "Blocked": 1,
         "Done": 37
       },
       "prioridad": {
         "Critical": 9,
-        "High": 58,
+        "High": 59,
         "Medium": 84,
-        "Low": 49
+        "Low": 48
       },
       "horizonte": {
         "Core": 40,
-        "Post-core": 102,
-        "Future": 58
+        "Post-core": 103,
+        "Future": 57
       },
       "decision": {
-        "Build": 139,
+        "Build": 140,
         "Integrate": 5,
-        "Defer": 54,
+        "Defer": 53,
         "Exclude": 2
       }
     }
@@ -1859,12 +1859,12 @@
       "nombre": "Evaluación preanestésica",
       "ola": "15",
       "workspace": "or",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "MISSING",
-      "nota": "Pabellón Ola 15"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Preanestesia demo MF-TRAMO-E-004"
     },
     {
       "idc": 154,

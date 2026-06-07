@@ -347,12 +347,24 @@ export const orWhoChecklistRowSchema = z.object({
   status: z.enum(['pending', 'in_progress', 'completed']),
 });
 
+export const orPreanesthesiaRowSchema = z.object({
+  caseId: z.string(),
+  patientId: z.string().uuid(),
+  patientDisplayName: z.string(),
+  operatingRoom: z.string(),
+  asaClass: z.enum(['I', 'II', 'III', 'IV', 'V']),
+  mallampati: z.enum(['I', 'II', 'III', 'IV']),
+  allergyAlert: z.string().nullable(),
+  evaluationStatus: z.enum(['pending', 'complete']),
+});
+
 export const orDashboardResponseSchema = z.object({
   readOnly: z.literal(true),
   roleView: z.enum(['physician', 'nurse', 'admin']),
   idcPanels: z.array(orIdcPanelSchema),
   surgicalSchedule: z.array(orSurgicalScheduleRowSchema),
   whoSafetyChecklist: z.array(orWhoChecklistRowSchema),
+  preanesthesiaEvaluations: z.array(orPreanesthesiaRowSchema),
   metrics: z.object({
     operatingRoomsInUse: z.number().int(),
     scheduledToday: z.number().int(),
