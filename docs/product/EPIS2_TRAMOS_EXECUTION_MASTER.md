@@ -45,9 +45,10 @@
 
 ## Próximo paso global
 
-1. Signoff clínico institucional Tramos A–K — [`EPIS2_TRAMOS_CLINICAL_SIGNOFF_CHECKLIST.md`](./EPIS2_TRAMOS_CLINICAL_SIGNOFF_CHECKLIST.md)
-2. `quality:golden-journey` antes de piloto hospitalario
-3. Piloto institucional post signoff
+1. Signoff clínico institucional Tramos A–K — [`EPIS2_TRAMOS_CLINICAL_SIGNOFF_CHECKLIST.md`](./EPIS2_TRAMOS_CLINICAL_SIGNOFF_CHECKLIST.md) · walkthrough [`EPIS2_PILOT_INSTITUTIONAL_WALKTHROUGH.md`](./EPIS2_PILOT_INSTITUTIONAL_WALKTHROUGH.md)
+2. `npm run quality:tramos-clinical-signoff-session` antes de la sesión humana
+3. `quality:golden-journey` antes de piloto hospitalario
+4. Piloto institucional post signoff — acta fuera del repo
 
 ---
 

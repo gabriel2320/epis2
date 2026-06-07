@@ -8,6 +8,12 @@
 ## Precondiciones técnicas (automatizables)
 
 ```bash
+npm run quality:tramos-clinical-signoff-session
+```
+
+Equivalente paso a paso:
+
+```bash
 npm run quality:tramos-signoff-prep-gate
 npm run quality:tramos-run-ak-closure-gates
 npm run quality:tramos-hygiene-gate
@@ -17,6 +23,9 @@ npm run dev:ai
 npm run ai:evals:tramo-k
 npm run ai:evals:closure
 ```
+
+**Walkthrough humano:** [`EPIS2_PILOT_INSTITUTIONAL_WALKTHROUGH.md`](./EPIS2_PILOT_INSTITUTIONAL_WALKTHROUGH.md)  
+**Acta (fuera del repo):** [`EPIS2_CLINICAL_SIGNOFF_ACTA_TEMPLATE.md`](./EPIS2_CLINICAL_SIGNOFF_ACTA_TEMPLATE.md)
 
 E2E tramos (con stack web+api):
 

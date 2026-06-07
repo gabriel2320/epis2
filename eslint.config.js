@@ -11,6 +11,7 @@ export default tseslint.config(
       '**/build/**',
       '**/coverage/**',
       '**/node_modules/**',
+      '**/storybook-static/**',
       'scripts/architecture/**/*.mjs',
     ],
   },

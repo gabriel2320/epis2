@@ -7,6 +7,12 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
+const walkthrough = join(root, 'docs/product/EPIS2_PILOT_INSTITUTIONAL_WALKTHROUGH.md');
+if (!existsSync(walkthrough)) errors.push('falta EPIS2_PILOT_INSTITUTIONAL_WALKTHROUGH.md');
+
+const session = join(root, 'scripts/quality/run-tramos-clinical-signoff-session.mjs');
+if (!existsSync(session)) errors.push('falta run-tramos-clinical-signoff-session.mjs');
+
 const report = join(root, 'reports/epis2-tramos-ak-signoff-prep-2026-06-07.md');
 if (!existsSync(report)) errors.push('falta reporte signoff prep');
 
@@ -23,6 +29,7 @@ for (const npm of [
   'quality:tramos-ak-closure-gate',
   'quality:tramos-signoff-prep-gate',
   'quality:tramos-run-ak-closure-gates',
+  'quality:tramos-clinical-signoff-session',
 ]) {
   if (!pkg.includes(`"${npm}"`)) errors.push(`package.json sin ${npm}`);
 }

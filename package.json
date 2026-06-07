@@ -41,6 +41,7 @@
     "quality:tramos-ak-closure-gate": "node scripts/quality/validate-tramos-ak-closure-gate.mjs",
     "quality:tramos-run-ak-closure-gates": "node scripts/run-tramos-ak-closure-gates.mjs",
     "quality:tramos-signoff-prep-gate": "node scripts/quality/validate-tramos-signoff-prep-gate.mjs",
+    "quality:tramos-clinical-signoff-session": "node scripts/quality/run-tramos-clinical-signoff-session.mjs",
     "quality:tramo-closure-evals-gate": "node scripts/quality/validate-tramo-closure-evals-gate.mjs",
     "quality:dev-agent-orchestration-gate": "node scripts/quality/validate-dev-agent-orchestration-gate.mjs",
     "quality:tramo-k-inventory-gate": "node scripts/quality/validate-tramo-k-inventory-gate.mjs",
