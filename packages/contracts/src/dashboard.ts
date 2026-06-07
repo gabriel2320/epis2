@@ -182,6 +182,7 @@ export type ReceptionDashboardResponse = z.infer<typeof receptionDashboardRespon
 /** MF-TRAMO-C-002 — Tablero urgencias (IDC 101–110). */
 export const emergencyTriageRowSchema = z.object({
   id: z.string(),
+  patientId: z.string().uuid(),
   patientDisplayName: z.string(),
   chiefComplaint: z.string(),
   triageLevel: z.enum(['1', '2', '3', '4', '5']),

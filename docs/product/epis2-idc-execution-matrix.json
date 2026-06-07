@@ -724,7 +724,7 @@
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "COMPLETE",
-      "nota": "ResultsInboxPage + comando + journey MF-OLA1C-001"
+      "nota": "ResultsInboxPage + tendencias MF-TRAMO-C-005 + journey MF-OLA1C-001"
     },
     {
       "idc": 59,
@@ -1348,7 +1348,7 @@
       "horizonte": "Post-core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": ""
+      "nota": "CTA epicrisis tablero urgencias MF-TRAMO-C-006"
     },
     {
       "idc": 111,

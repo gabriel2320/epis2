@@ -470,7 +470,26 @@ export function DashboardModeContent() {
         {loading ? (
           <Typography color="text.secondary">{copy.dashboard.loading}</Typography>
         ) : emergencyBoard ? (
-          <EmergencyDashboardTab data={emergencyBoard} />
+          <EmergencyDashboardTab
+            data={emergencyBoard}
+            activePatientId={activePatient?.id}
+            onOpenPatient={(pid) => {
+              const p = recentPatients.find((r) => r.id === pid);
+              if (p) setPatient(p);
+              void navigate({
+                to: '/espacio/ficha',
+                search: { patientId: pid },
+              });
+            }}
+            onOpenEpicrisis={(pid) => {
+              const p = recentPatients.find((r) => r.id === pid);
+              if (p) setPatient(p);
+              void navigate({
+                to: '/espacio/epicrisis',
+                search: { patientId: pid },
+              });
+            }}
+          />
         ) : null}
       </>
     );

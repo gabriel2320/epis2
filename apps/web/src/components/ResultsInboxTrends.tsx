@@ -1,6 +1,6 @@
 import type { PatientResultsInboxResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import { EpisTrendChartSuspense, Paper, Stack } from '@epis2/epis2-ui';
+import { EpisTrendChartSuspense, Paper, Stack, Typography } from '@epis2/epis2-ui';
 import { buildObservationTrend } from '../charts/observationTrend.js';
 
 export type ResultsInboxTrendsProps = {
@@ -18,6 +18,7 @@ export function ResultsInboxTrends({ inbox }: ResultsInboxTrendsProps) {
 
   return (
     <Stack spacing={2} data-testid="epis2-results-trends">
+      <Typography variant="subtitle2">{copy.results.trendsSection}</Typography>
       {showInr ? (
         <Paper variant="outlined" sx={{ p: 2 }}>
           <EpisTrendChartSuspense

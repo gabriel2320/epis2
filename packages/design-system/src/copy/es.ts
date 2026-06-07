@@ -162,6 +162,9 @@ export const copy = {
     disclosure: 'Urgencias demo — workspace propio. No sustituye consulta ambulatoria.',
     idcPanelsTitle: 'Capacidades urgencias (IDC 101–110)',
     triageTitle: 'Cola de triaje (IDC 101–102)',
+    dischargeActionsTitle: 'Alta y epicrisis (IDC 110)',
+    prepareEpicrisis: 'Preparar epicrisis',
+    openPatientChart: 'Ver ficha',
     metrics: {
       waiting: 'En espera',
       observation: 'En observación',

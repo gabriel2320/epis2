@@ -117,7 +117,7 @@
 | 55 | Solicitud laboratorio | 1C | ambulatory | Done | Critical | Core | Build | COMPLETE | lab_request |
 | 56 | Solicitud imagenología | 1C | ambulatory | Done | High | Core | Build | PARTIAL | imaging_request + journey MF-OLA1C-003 |
 | 57 | Solicitud procedimientos | 1C | ambulatory | Planned | Medium | Core | Build | MISSING |  |
-| 58 | Bandeja resultados lab | 1C | ambulatory | Done | High | Core | Build | COMPLETE | ResultsInboxPage + comando + journey MF-OLA1C-001 |
+| 58 | Bandeja resultados lab | 1C | ambulatory | Done | High | Core | Build | COMPLETE | ResultsInboxPage + tendencias MF-TRAMO-C-005 + journey MF-OLA1C-001 |
 | 59 | Visor DICOM (PACS) | 1C | ambulatory | Planned | Medium | Post-core | Integrate | MISSING | PACS externo |
 | 60 | Historial acumulativo exámenes | 1C | ambulatory | Planned | Medium | Core | Build | MISSING |  |
 
@@ -194,7 +194,7 @@
 | 107 | Protocolo ACV (Stroke) | 10 | emergency | Planned | High | Post-core | Build | MISSING |  |
 | 108 | Protocolo IAM | 10 | emergency | Planned | High | Post-core | Build | MISSING |  |
 | 109 | Ingreso toxicológico | 10 | emergency | Planned | High | Post-core | Build | MISSING |  |
-| 110 | Alta urgencia + APS | 10 | emergency | Active | High | Post-core | Build | PARTIAL |  |
+| 110 | Alta urgencia + APS | 10 | emergency | Active | High | Post-core | Build | PARTIAL | CTA epicrisis tablero urgencias MF-TRAMO-C-006 |
 
 ## Enfermería y cuidados (111–120)
 

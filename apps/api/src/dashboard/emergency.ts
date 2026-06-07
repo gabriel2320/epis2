@@ -11,7 +11,7 @@ const EMERGENCY_IDC_PANELS = [
   { idc: 107, label: 'Derivación hospitalización', status: 'planned' as const },
   { idc: 108, label: 'Procedimientos urgencia', status: 'planned' as const },
   { idc: 109, label: 'Consentimiento urgente', status: 'planned' as const },
-  { idc: 110, label: 'Epicrisis urgencias', status: 'planned' as const },
+  { idc: 110, label: 'Epicrisis urgencias', status: 'active' as const },
 ];
 
 export async function getEmergencyDashboardSummary(db: Database, role: string) {
@@ -22,6 +22,7 @@ export async function getEmergencyDashboardSummary(db: Database, role: string) {
 
   const triageQueue = rows.map((p, index) => ({
     id: `triage-${index + 1}`,
+    patientId: p.id,
     patientDisplayName: p.displayName,
     chiefComplaint: ['Dolor torácico', 'Trauma menor', 'Fiebre alta', 'Cefalea intensa'][index] ?? 'Consulta',
     triageLevel: (String(Math.min(index + 2, 5)) as '1' | '2' | '3' | '4' | '5'),

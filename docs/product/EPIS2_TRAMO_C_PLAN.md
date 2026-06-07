@@ -20,7 +20,9 @@ Hospitalización general → Enfermería/MAR → Urgencias (emergency) → Farma
 | Tablero triaje demo | ✅ | API + UI + E2E |
 | Hub hospitalización ficha | ✅ **MF-TRAMO-C-003** | 111 Done |
 | Ingreso / traslado UI | ✅ | `/espacio/ingreso` · `/espacio/traslado` |
-| Órdenes activas servicio | ◐ **MF-TRAMO-C-004** | CTA ficha → tablero |
+| Órdenes activas servicio | ✅ **MF-TRAMO-C-004** | CTA ficha → tablero |
+| Tendencias resultados | ✅ **MF-TRAMO-C-005** | IDC 58 Done + `ResultsInboxTrends` |
+| Epicrisis urgencias | ✅ **MF-TRAMO-C-006** | IDC 110 Active + CTA tablero |
 | Hospitalización censo | ◐ Partial | V2 service dashboard |
 | MAR enfermería | ◐ Partial | V3 nursing tab |
 
@@ -32,14 +34,16 @@ Hospitalización general → Enfermería/MAR → Urgencias (emergency) → Farma
 |----|---------|-----|
 | MF-TRAMO-C-003 | Ingreso hospitalario blueprint UI | 111+ |
 | MF-TRAMO-C-004 | Bandeja órdenes activas | 51–57 |
-| MF-TRAMO-C-005 | Tendencias resultados | 164 |
-| MF-TRAMO-C-006 | Epicrisis urgencias | 110 |
+| MF-TRAMO-C-005 | Tendencias resultados | 58 ✅ |
+| MF-TRAMO-C-006 | Epicrisis urgencias | 110 ✅ |
 
 ---
 
 ## Gates
 
 - `quality:tramo-c-emergency-gate` — scaffold urgencias
+- `quality:tramo-c-trends-gate` — tendencias bandeja resultados
+- `quality:tramo-c-epicrisis-gate` — epicrisis tablero urgencias
 - `quality:golden-journey` — antes de signoff Tramo C
 
 ---

@@ -2,6 +2,7 @@ import type { EmergencyDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import {
   Alert,
+  Button,
   Chip,
   EpisMetric,
   List,
@@ -14,9 +15,19 @@ import {
 
 export type EmergencyDashboardTabProps = {
   data: EmergencyDashboardResponse;
+  activePatientId?: string;
+  onOpenPatient?: (patientId: string) => void;
+  onOpenEpicrisis?: (patientId: string) => void;
 };
 
-export function EmergencyDashboardTab({ data }: EmergencyDashboardTabProps) {
+export function EmergencyDashboardTab({
+  data,
+  activePatientId,
+  onOpenPatient,
+  onOpenEpicrisis,
+}: EmergencyDashboardTabProps) {
+  const observationRows = data.triageQueue.filter((row) => row.status === 'observation');
+
   return (
     <Stack spacing={2} data-testid="epis2-emergency-dashboard">
       <Alert severity="warning">{copy.emergency.disclosure}</Alert>
@@ -51,6 +62,65 @@ export function EmergencyDashboardTab({ data }: EmergencyDashboardTabProps) {
             />
           ))}
         </Stack>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-emergency-discharge-actions">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.emergency.dischargeActionsTitle}
+        </Typography>
+        {observationRows.length === 0 ? (
+          <Typography variant="body2" color="text.secondary">
+            {copy.longitudinal.emptySection}
+          </Typography>
+        ) : (
+          <Stack spacing={1}>
+            {observationRows.map((row) => (
+              <Stack
+                key={row.id}
+                direction="row"
+                spacing={1}
+                flexWrap="wrap"
+                useFlexGap
+                alignItems="center"
+              >
+                <Typography variant="body2">
+                  {row.patientDisplayName} — ESI {row.triageLevel}
+                </Typography>
+                {onOpenPatient ? (
+                  <Button
+                    size="small"
+                    variant="text"
+                    onClick={() => onOpenPatient(row.patientId)}
+                    data-testid={`epis2-emergency-open-chart-${row.patientId}`}
+                  >
+                    {copy.emergency.openPatientChart}
+                  </Button>
+                ) : null}
+                {onOpenEpicrisis ? (
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    onClick={() => onOpenEpicrisis(row.patientId)}
+                    data-testid={`epis2-emergency-prepare-epicrisis-${row.patientId}`}
+                  >
+                    {copy.emergency.prepareEpicrisis}
+                  </Button>
+                ) : null}
+              </Stack>
+            ))}
+          </Stack>
+        )}
+        {activePatientId && onOpenEpicrisis ? (
+          <Button
+            size="small"
+            variant="contained"
+            color="warning"
+            sx={{ mt: 1 }}
+            onClick={() => onOpenEpicrisis(activePatientId)}
+            data-testid="epis2-emergency-prepare-epicrisis-active"
+          >
+            {copy.emergency.prepareEpicrisis}
+          </Button>
+        ) : null}
       </Paper>
       <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-emergency-triage-queue">
         <Typography variant="subtitle2" gutterBottom>
