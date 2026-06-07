@@ -36,8 +36,8 @@ Programas de medicina general y atención primaria (APS) Chile — scaffold demo
 
 ## Evidencia
 
-Gates: `quality:tramo-f-inventory-gate` · `quality:tramo-f-aps-gate` · `quality:tramo-f-scaffold-gate`
+Gates: `quality:tramo-f-inventory-gate` · `quality:tramo-f-aps-gate` · `quality:tramo-f-scaffold-gate` · `quality:tramo-f-closure-gate`
 
-Plan: [`EPIS2_TRAMO_F_PLAN.md`](./EPIS2_TRAMO_F_PLAN.md)
+Plan: [`EPIS2_TRAMO_F_PLAN.md`](./EPIS2_TRAMO_F_PLAN.md) · Cierre: [`EPIS2_TRAMO_F_CLOSURE.md`](./EPIS2_TRAMO_F_CLOSURE.md)
 
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*

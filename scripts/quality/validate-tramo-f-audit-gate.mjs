@@ -21,7 +21,7 @@ if (!apsMatch) {
 }
 
 const plan = readFileSync(join(root, 'docs/product/EPIS2_TRAMO_F_PLAN.md'), 'utf8');
-if (!plan.includes('MF-TRAMO-F-011')) errors.push('plan Tramo F sin MF-TRAMO-F-011');
+if (!plan.includes('MF-TRAMO-F-CLOSURE')) errors.push('plan Tramo F sin MF-TRAMO-F-CLOSURE');
 
 if (errors.length) {
   console.error('tramo-f-audit-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));

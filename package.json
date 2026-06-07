@@ -77,6 +77,7 @@
     "quality:tramo-f-aps-gate": "node scripts/quality/validate-tramo-f-aps-gate.mjs",
     "quality:tramo-f-scaffold-gate": "node scripts/quality/validate-tramo-f-scaffold-gate.mjs",
     "quality:tramo-f-audit-gate": "node scripts/quality/validate-tramo-f-audit-gate.mjs",
+    "quality:tramo-f-closure-gate": "node scripts/quality/validate-tramo-f-closure-gate.mjs",
     "test:e2e:tramo-f": "playwright test e2e/tramo-f-aps.spec.ts",
     "test:e2e:tramo-d": "playwright test e2e/tramo-d-icu.spec.ts",
     "test:e2e:tramo-b": "playwright test e2e/tramo-b-reception.spec.ts",

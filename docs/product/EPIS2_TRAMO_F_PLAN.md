@@ -1,6 +1,6 @@
 # EPIS2 — Plan Tramo F (APS / medicina general)
 
-**Versión:** 1.0 · **Fecha:** 2026-06-07
+**Versión:** 1.1 · **Fecha:** 2026-06-07
 
 ---
 
@@ -8,7 +8,7 @@
 
 Ola 12 — medicina general y APS (IDC 121–130) bajo workspace ambulatorio.
 
-**Horizonte:** Post-core — scaffold demo en curso.
+**Horizonte:** Post-core — scaffold APS demo cerrado técnicamente (MF-TRAMO-F-CLOSURE).
 
 ---
 
@@ -35,12 +35,12 @@ Ola 12 — medicina general y APS (IDC 121–130) bajo workspace ambulatorio.
 |----|---------|--------|
 | MF-TRAMO-F-001 | Inventario APS | ✅ |
 | MF-TRAMO-F-002 … F-011 | Scaffold tablero APS | ✅ |
-| MF-TRAMO-F-CLOSURE | Cierre técnico Tramo F | ◐ Pendiente signoff |
+| MF-TRAMO-F-CLOSURE | Cierre técnico Tramo F | ✅ |
 
 ---
 
 ## Gates
 
-`quality:tramo-f-inventory-gate` · `quality:tramo-f-aps-gate` · `quality:tramo-f-scaffold-gate` · `quality:tramo-f-audit-gate`
+Ver [`EPIS2_TRAMO_F_CLOSURE.md`](./EPIS2_TRAMO_F_CLOSURE.md).
 
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*

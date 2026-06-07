@@ -49,6 +49,6 @@ Workspace or → tabla quirúrgica → OMS → preanestesia → anestesia intrao
 
 ## Próximo tramo global
 
-Signoff clínico Tramos A–E · obstetricia / especialidades · UCI 131–140 Future
+Cadena **A–F** cerrada técnicamente — signoff clínico institucional · UCI 131–140 Future.
 
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*
