@@ -31,6 +31,8 @@ Semana 3 IA producto: `docs/product/EPIS2_AI_TRAMO_EVALS.md` · `quality:week3-g
 
 Semana 4 orquestación: `docs/product/EPIS2_DEV_AGENT_ORCHESTRATION.md` · `quality:week4-gate` · `dev:agent:tramo-k` · `ai:evals:closure` · `quality:tramos-clinical-signoff-gate` · Tramo K inventario (`quality:tramo-k-inventory-gate`).
 
+Signoff A–K: `docs/product/EPIS2_TRAMOS_CLINICAL_SIGNOFF_CHECKLIST.md` · `quality:tramos-signoff-prep-gate` · `quality:tramos-run-ak-closure-gates`.
+
 Si la fase lo exige: `npm run quality:golden-journey`.
 
 Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.

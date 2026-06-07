@@ -1,4 +1,4 @@
-# EPIS2 — Plan maestro tramos A–J
+# EPIS2 — Plan maestro tramos A–K
 
 **Fecha:** 2026-06-07 · **Aprobación humana:** OK (sesión autónoma)  
 **Higiene:** [`EPIS2_TRAMOS_HYGIENE.md`](./EPIS2_TRAMOS_HYGIENE.md) · gate `quality:tramos-hygiene-gate`
@@ -58,5 +58,6 @@
 | `reports/epis2-tramo-i-closure-2026-06-07.md` | Cierre Tramo I especialidades |
 | `reports/epis2-tramo-j-closure-2026-06-07.md` | Cierre Tramo J farmacia clínica |
 | `reports/epis2-tramo-k-closure-2026-06-07.md` | Cierre Tramo K calidad/auditoría |
+| `reports/epis2-tramos-ak-signoff-prep-2026-06-07.md` | Preparación signoff A–K |
 
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*

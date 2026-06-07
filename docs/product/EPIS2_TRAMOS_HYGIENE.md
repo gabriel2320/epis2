@@ -1,4 +1,4 @@
-# EPIS2 — Higiene tramos A–J
+# EPIS2 — Higiene tramos A–K
 
 **Fecha:** 2026-06-07 · **Gate:** `npm run quality:tramos-hygiene-gate`
 
@@ -8,8 +8,7 @@
 
 | Tramo | Cierre | Gate closure |
 |-------|--------|--------------|
-| **A–I** | ver plan maestro | `quality:tramo-*-closure-gate` |
-| **J** | `EPIS2_TRAMO_J_CLOSURE.md` | `quality:tramo-j-closure-gate` |
+| **A–K** | ver plan maestro | `quality:tramo-*-closure-gate` |
 
 **Plan maestro:** [`EPIS2_TRAMOS_EXECUTION_MASTER.md`](./EPIS2_TRAMOS_EXECUTION_MASTER.md)
 
@@ -19,7 +18,8 @@
 
 ```bash
 npm run quality:tramos-hygiene-gate
-npm run quality:tramo-j-closure-gate
+npm run quality:tramos-run-ak-closure-gates
+npm run quality:tramos-signoff-prep-gate
 npm run quality:golden-journey
 ```
 

@@ -58,4 +58,10 @@ if (process.env.EPIS2_LOCAL_CI_TRAMO_E2E === '1') {
   console.log('(i) E2E tramo J omitido — define EPIS2_LOCAL_CI_TRAMO_E2E=1');
 }
 
+if (process.env.EPIS2_LOCAL_CI_TRAMO_K_E2E === '1') {
+  runStep({ name: 'test:e2e:tramo-k', cmd: 'npm', args: ['run', 'test:e2e:tramo-k'] });
+} else {
+  console.log('(i) E2E tramo K omitido — define EPIS2_LOCAL_CI_TRAMO_K_E2E=1');
+}
+
 console.log('\n✓ quality:local-ci OK');

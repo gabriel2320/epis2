@@ -1,6 +1,6 @@
-# EPIS2 — Checklist signoff clínico institucional (Tramos A–J)
+# EPIS2 — Checklist signoff clínico institucional (Tramos A–K)
 
-**Versión:** 1.0 · **Fecha:** 2026-06-07  
+**Versión:** 1.1 · **Fecha:** 2026-06-07  
 **Alcance:** Preparación humana post-cierre técnico — **no sustituye** aprobación institucional.
 
 ---
@@ -8,11 +8,20 @@
 ## Precondiciones técnicas (automatizables)
 
 ```bash
+npm run quality:tramos-signoff-prep-gate
+npm run quality:tramos-run-ak-closure-gates
 npm run quality:tramos-hygiene-gate
 npm run quality:tramos-clinical-signoff-gate
 npm run quality:golden-journey
 npm run dev:ai
+npm run ai:evals:tramo-k
 npm run ai:evals:closure
+```
+
+E2E tramos (con stack web+api):
+
+```bash
+npm run test:e2e:tramo-k
 ```
 
 ---
@@ -31,6 +40,7 @@ npm run ai:evals:closure
 | H | ✅ | `quality:tramo-h-closure-gate` | [ ] |
 | I | ✅ | `quality:tramo-i-closure-gate` | [ ] |
 | J | ✅ | `quality:tramo-j-closure-gate` | [ ] |
+| K | ✅ | `quality:tramo-k-closure-gate` | [ ] |
 
 ---
 
@@ -44,8 +54,8 @@ npm run ai:evals:closure
 
 ---
 
-## Tras signoff A–J
+## Tras signoff A–K
 
-Próximo tramo producto: **K** calidad/auditoría IDC 171–180 — ver [`EPIS2_TRAMO_K_PLAN.md`](./EPIS2_TRAMO_K_PLAN.md).
+Piloto institucional hospitalario — ver [`EPIS2_TRAMOS_EXECUTION_MASTER.md`](./EPIS2_TRAMOS_EXECUTION_MASTER.md).
 
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*
