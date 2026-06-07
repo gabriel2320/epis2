@@ -6,12 +6,12 @@ const ICU_IDC_PANELS = [
   { idc: 42, label: 'Sábana clínica (flujograma)', status: 'active' as const },
   { idc: 43, label: 'Balance hídrico estricto', status: 'active' as const },
   { idc: 44, label: 'Parámetros ventilación', status: 'active' as const },
-  { idc: 45, label: 'Vías venosas e invasivos', status: 'planned' as const },
+  { idc: 45, label: 'Vías venosas e invasivos', status: 'active' as const },
   { idc: 46, label: 'Valoración neurológica', status: 'planned' as const },
   { idc: 47, label: 'Escalas severidad', status: 'planned' as const },
   { idc: 48, label: 'Titulación vasoactivos', status: 'planned' as const },
   { idc: 49, label: 'Sedoanalgesia', status: 'planned' as const },
-  { idc: 50, label: 'Epicrisis traslado UCI', status: 'planned' as const },
+  { idc: 50, label: 'Epicrisis traslado UCI', status: 'active' as const },
 ];
 
 const ICU_SPECIALIZED_PANELS = [
@@ -76,6 +76,29 @@ export async function getIcuDashboardSummary(db: Database, role: string) {
 
   const netFluidBalanceMl = fluidBalance.reduce((sum, row) => sum + row.balanceMl, 0);
 
+  const invasiveLines = criticalBeds
+    .filter((b) => b.patientId && b.patientDisplayName)
+    .flatMap((b, index) => [
+      {
+        patientId: b.patientId!,
+        patientDisplayName: b.patientDisplayName!,
+        lineType: index === 0 ? 'CVC yugular' : 'Vía periférica',
+        site: index === 0 ? 'Yugular derecha' : 'Antebrazo izquierdo',
+        daysInPlace: 2 + index,
+      },
+      ...(index === 0
+        ? [
+            {
+              patientId: b.patientId!,
+              patientDisplayName: b.patientDisplayName!,
+              lineType: 'Línea arterial',
+              site: 'Radial izquierda',
+              daysInPlace: 1,
+            },
+          ]
+        : []),
+    ]);
+
   return {
     readOnly: true as const,
     roleView: (role === 'admin' || role === 'nurse' ? role : 'physician') as
@@ -89,6 +112,7 @@ export async function getIcuDashboardSummary(db: Database, role: string) {
     hemodynamics,
     fluidBalance,
     ventilation,
+    invasiveLines,
     metrics: {
       occupied: criticalBeds.length,
       available: 1,

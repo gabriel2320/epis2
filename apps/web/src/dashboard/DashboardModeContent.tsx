@@ -540,6 +540,14 @@ export function DashboardModeContent() {
           <IcuDashboardTab
             data={icuBoard}
             onOpenPatient={openPatient}
+            onOpenEpicrisis={(pid) => {
+              const p = recentPatients.find((r) => r.id === pid);
+              if (p) setPatient(p);
+              void navigate({
+                to: '/espacio/epicrisis',
+                search: { patientId: pid },
+              });
+            }}
             onOpenHandover={(pid) => {
               const p = recentPatients.find((r) => r.id === pid);
               if (p) setPatient(p);

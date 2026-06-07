@@ -5,26 +5,26 @@
     "canon": "EPIS2_WAVE_EXECUTION_CANON.md",
     "totals": {
       "estado": {
-        "Planned": 124,
-        "Active": 38,
+        "Planned": 122,
+        "Active": 40,
         "Blocked": 1,
         "Done": 37
       },
       "prioridad": {
         "Critical": 9,
-        "High": 50,
-        "Medium": 90,
+        "High": 52,
+        "Medium": 88,
         "Low": 51
       },
       "horizonte": {
         "Core": 40,
-        "Post-core": 94,
-        "Future": 66
+        "Post-core": 96,
+        "Future": 64
       },
       "decision": {
-        "Build": 131,
+        "Build": 133,
         "Integrate": 5,
-        "Defer": 62,
+        "Defer": 60,
         "Exclude": 2
       }
     }
@@ -563,12 +563,12 @@
       "nombre": "Vías venosas e invasivos",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI Tramo D; duplica 131–140"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Vías invasivas demo MF-TRAMO-D-007"
     },
     {
       "idc": 46,
@@ -623,12 +623,12 @@
       "nombre": "Epicrisis traslado UCI",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI Tramo D; duplica 131–140"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Epicrisis traslado UCI MF-TRAMO-D-008"
     },
     {
       "idc": 51,

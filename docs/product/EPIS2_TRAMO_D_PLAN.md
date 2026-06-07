@@ -1,6 +1,6 @@
 # EPIS2 — Plan Tramo D (programas especializados)
 
-**Versión:** 1.2 · **Fecha:** 2026-06-07
+**Versión:** 1.3 · **Fecha:** 2026-06-07
 
 ---
 
@@ -8,23 +8,24 @@
 
 UCI · pabellón · anestesia · obstetricia · odontología · telemedicina · IoT · interop avanzada · facturación.
 
-**Horizonte:** Post-core — scaffold UCI habilitado tras cierre técnico Tramo C.
+**Horizonte:** Post-core — scaffold UCI demo cerrado técnicamente (MF-TRAMO-D-CLOSURE).
 
 ---
 
 ## Estado
 
-| Programa | IDC | Decisión | EPIS2 hoy |
-|----------|-----|----------|-----------|
-| UCI monitorización | 41–50 | Build demo | **MF-TRAMO-D-002** ✅ scaffold |
-| Sábana clínica 24h | 42 | Build demo | **MF-TRAMO-D-003** ✅ |
-| Balance hídrico | 43 | Build demo | **MF-TRAMO-D-005** ✅ |
-| Ventilación | 44 | Build demo | **MF-TRAMO-D-006** ✅ |
-| Hemodinámica | 135 | Build demo | **MF-TRAMO-D-004** ✅ |
-| UCI 45–50, 131–134, 136–140 | — | Defer | Planned |
-| Pabellón | 121–130 | Defer Ola 12 | — |
-| Telemedicina | 95–100 | Defer Ola 9 | — |
-| Facturación Chile | 11–20 | Defer Tramo B | Inventario ✅ |
+| Programa | IDC | EPIS2 hoy |
+|----------|-----|-----------|
+| Tablero UCI | 41 | ✅ **MF-TRAMO-D-002** |
+| Sábana clínica | 42 | ✅ **MF-TRAMO-D-003** |
+| Balance hídrico | 43 | ✅ **MF-TRAMO-D-005** |
+| Ventilación | 44 | ✅ **MF-TRAMO-D-006** |
+| Vías invasivas | 45 | ✅ **MF-TRAMO-D-007** |
+| Epicrisis traslado UCI | 50 | ✅ **MF-TRAMO-D-008** |
+| Hemodinámica | 135 | ✅ **MF-TRAMO-D-004** |
+| UCI 46–49, 131–134, 136–140 | — | Defer Future |
+| **Cierre scaffold UCI** | — | ✅ **MF-TRAMO-D-CLOSURE** |
+| Pabellón 121–130 | — | Defer Ola 12 |
 
 ---
 
@@ -33,22 +34,14 @@ UCI · pabellón · anestesia · obstetricia · odontología · telemedicina · 
 | MF | Alcance | Estado |
 |----|---------|--------|
 | MF-TRAMO-D-001 | Inventario UCI | ✅ |
-| MF-TRAMO-D-002 | Rail UCI + tablero IDC 41 | ✅ |
-| MF-TRAMO-D-003 | Sábana clínica IDC 42 | ✅ |
-| MF-TRAMO-D-004 | Hemodinámica IDC 135 | ✅ |
-| MF-TRAMO-D-005 | Balance hídrico IDC 43 | ✅ |
-| MF-TRAMO-D-006 | Ventilación IDC 44 | ✅ |
+| MF-TRAMO-D-002 … D-008 | Scaffold tablero UCI | ✅ |
+| MF-TRAMO-D-CLOSURE | Cierre técnico Tramo D (UCI demo) | ✅ |
 
 ---
 
 ## Gates
 
-- `quality:tramo-d-inventory-gate` — inventario
-- `quality:tramo-d-icu-gate` — workspace + tablero
-- `quality:tramo-d-flowsheet-gate` — sábana clínica
-- `quality:tramo-d-hemodynamics-gate` — hemodinámica
-- `quality:tramo-d-fluid-balance-gate` — balance hídrico
-- `quality:tramo-d-ventilation-gate` — ventilación
+Ver [`EPIS2_TRAMO_D_CLOSURE.md`](./EPIS2_TRAMO_D_CLOSURE.md).
 
 ---
 

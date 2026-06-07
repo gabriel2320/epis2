@@ -44,4 +44,24 @@ test.describe('Tramo D — UCI', () => {
     await expect(page.getByTestId('epis2-icu-ventilation-rows')).toBeVisible();
     await expect(page.getByTestId('epis2-icu-idc-44')).toBeVisible();
   });
+
+  test('tablero UCI — vías invasivas IDC 45', async ({ page }) => {
+    await loginAsPhysician(page);
+    await page.goto('/epis2/dashboard?tab=icu');
+    await expect(page.getByTestId('epis2-icu-invasive-lines')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-invasive-lines-rows')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-idc-45')).toBeVisible();
+  });
+
+  test('tablero UCI — epicrisis traslado IDC 50', async ({ page }) => {
+    await loginAsPhysician(page);
+    await page.goto('/epis2/dashboard?tab=icu');
+    await expect(page.getByTestId('epis2-icu-discharge-actions')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-idc-50')).toBeVisible();
+    const epicrisisCta = page.locator('[data-testid^="epis2-icu-prepare-epicrisis-"]').first();
+    await expect(epicrisisCta).toBeVisible();
+    await epicrisisCta.click();
+    await expect(page).toHaveURL(/\/espacio\/epicrisis/);
+    await expect(page.getByTestId('epis2-form-discharge_summary')).toBeVisible({ timeout: 15_000 });
+  });
 });

@@ -256,6 +256,14 @@ export const icuVentilationRowSchema = z.object({
   pip: z.number().int(),
 });
 
+export const icuInvasiveLineRowSchema = z.object({
+  patientId: z.string().uuid(),
+  patientDisplayName: z.string(),
+  lineType: z.string(),
+  site: z.string(),
+  daysInPlace: z.number().int(),
+});
+
 export const icuDashboardResponseSchema = z.object({
   readOnly: z.literal(true),
   roleView: z.enum(['physician', 'nurse', 'admin']),
@@ -266,6 +274,7 @@ export const icuDashboardResponseSchema = z.object({
   hemodynamics: z.array(icuHemodynamicsRowSchema),
   fluidBalance: z.array(icuFluidBalanceRowSchema),
   ventilation: z.array(icuVentilationRowSchema),
+  invasiveLines: z.array(icuInvasiveLineRowSchema),
   metrics: z.object({
     occupied: z.number().int(),
     available: z.number().int(),

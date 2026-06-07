@@ -17,9 +17,15 @@ export type IcuDashboardTabProps = {
   data: IcuDashboardResponse;
   onOpenPatient?: (patientId: string) => void;
   onOpenHandover?: (patientId: string) => void;
+  onOpenEpicrisis?: (patientId: string) => void;
 };
 
-export function IcuDashboardTab({ data, onOpenPatient, onOpenHandover }: IcuDashboardTabProps) {
+export function IcuDashboardTab({
+  data,
+  onOpenPatient,
+  onOpenHandover,
+  onOpenEpicrisis,
+}: IcuDashboardTabProps) {
   const primaryBed = data.criticalBeds.find((b) => b.patientId);
 
   return (
@@ -160,6 +166,69 @@ export function IcuDashboardTab({ data, onOpenPatient, onOpenHandover }: IcuDash
             ))}
           </List>
         )}
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-invasive-lines">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.invasiveLinesTitle}
+        </Typography>
+        <List dense data-testid="epis2-icu-invasive-lines-rows">
+          {data.invasiveLines.map((row, index) => (
+            <ListItem
+              key={`${row.patientId}-${row.lineType}-${index}`}
+              disablePadding
+              sx={{ py: 0.25, flexWrap: 'wrap', gap: 0.5 }}
+            >
+              <ListItemText
+                primary={`${row.patientDisplayName} — ${row.lineType}`}
+                secondary={`${row.site} · ${row.daysInPlace} d`}
+              />
+              {onOpenPatient ? (
+                <Button
+                  size="small"
+                  variant="text"
+                  onClick={() => onOpenPatient(row.patientId)}
+                  data-testid={`epis2-icu-invasive-open-${row.patientId}`}
+                >
+                  {copy.icu.openPatientChart}
+                </Button>
+              ) : null}
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-discharge-actions">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.dischargeActionsTitle}
+        </Typography>
+        <Stack spacing={1}>
+          {data.criticalBeds
+            .filter((bed) => bed.patientId)
+            .map((bed) => (
+              <Stack
+                key={bed.bedId}
+                direction="row"
+                spacing={1}
+                flexWrap="wrap"
+                useFlexGap
+                alignItems="center"
+              >
+                <Typography variant="body2">
+                  {bed.patientDisplayName} — {bed.bedLabel}
+                </Typography>
+                {onOpenEpicrisis ? (
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    color="error"
+                    onClick={() => onOpenEpicrisis(bed.patientId!)}
+                    data-testid={`epis2-icu-prepare-epicrisis-${bed.patientId}`}
+                  >
+                    {copy.icu.prepareUciDischarge}
+                  </Button>
+                ) : null}
+              </Stack>
+            ))}
+        </Stack>
       </Paper>
       {primaryBed?.patientId && onOpenHandover ? (
         <Button

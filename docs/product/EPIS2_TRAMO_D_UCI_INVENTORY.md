@@ -35,8 +35,8 @@ Nutrición · terapias renales · hemodinámica · muerte encefálica · procura
 ## Workspace EPIS2 hoy
 
 - Rail `icu` **habilitado** — MF-TRAMO-D-002 (`/epis2/dashboard?tab=icu`).
-- Tablero `IcuDashboardTab` — IDC 41 Active, sábana IDC 42, hemodinámica IDC 135.
-- Entrega turno → `/espacio/enfermeria` (≠ dashboard UCI IDC 41 ingreso clínico).
+- Tablero `IcuDashboardTab` — IDC 41–45, 50, 135 Active (MF-TRAMO-D-002 … D-008).
+- Cierre técnico: `EPIS2_TRAMO_D_CLOSURE.md`.
 
 ---
 

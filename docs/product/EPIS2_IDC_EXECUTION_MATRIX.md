@@ -13,10 +13,10 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 124 · Active: 38 · Blocked: 1 · Done: 37 |
-| **Prioridad** | Critical: 9 · High: 50 · Medium: 90 · Low: 51 |
-| **Horizonte** | Core: 40 · Post-core: 94 · Future: 66 |
-| **Decisión** | Build: 131 · Integrate: 5 · Defer: 62 · Exclude: 2 |
+| **Estado** | Planned: 122 · Active: 40 · Blocked: 1 · Done: 37 |
+| **Prioridad** | Critical: 9 · High: 52 · Medium: 88 · Low: 51 |
+| **Horizonte** | Core: 40 · Post-core: 96 · Future: 64 |
+| **Decisión** | Build: 133 · Integrate: 5 · Defer: 60 · Exclude: 2 |
 
 ### Leyenda
 
@@ -99,12 +99,12 @@
 | 42 | Sábana clínica (flujograma) | 13 | icu | Active | High | Post-core | Build | PARTIAL | Sábana clínica demo MF-TRAMO-D-003 |
 | 43 | Balance hídrico estricto | 13 | icu | Active | High | Post-core | Build | PARTIAL | Balance hídrico demo MF-TRAMO-D-005 |
 | 44 | Parámetros ventilación | 13 | icu | Active | High | Post-core | Build | PARTIAL | Ventilación demo MF-TRAMO-D-006 |
-| 45 | Vías venosas e invasivos | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
+| 45 | Vías venosas e invasivos | 13 | icu | Active | High | Post-core | Build | PARTIAL | Vías invasivas demo MF-TRAMO-D-007 |
 | 46 | Valoración neurológica | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
 | 47 | Escalas severidad | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
 | 48 | Titulación vasoactivos | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
 | 49 | Sedoanalgesia | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
-| 50 | Epicrisis traslado UCI | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
+| 50 | Epicrisis traslado UCI | 13 | icu | Active | High | Post-core | Build | PARTIAL | Epicrisis traslado UCI MF-TRAMO-D-008 |
 
 ## Prescripción y órdenes (51–60)
 

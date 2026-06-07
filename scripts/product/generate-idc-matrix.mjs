@@ -301,6 +301,8 @@ const OVERRIDES = {
   42: { estado: 'Active', prioridad: 'High', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'Sábana clínica demo MF-TRAMO-D-003' },
   43: { estado: 'Active', prioridad: 'High', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'Balance hídrico demo MF-TRAMO-D-005' },
   44: { estado: 'Active', prioridad: 'High', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'Ventilación demo MF-TRAMO-D-006' },
+  45: { estado: 'Active', prioridad: 'High', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'Vías invasivas demo MF-TRAMO-D-007' },
+  50: { estado: 'Active', prioridad: 'High', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'Epicrisis traslado UCI MF-TRAMO-D-008' },
   135: { estado: 'Active', prioridad: 'High', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'Hemodinámica demo MF-TRAMO-D-004' },
   102: { estado: 'Active', prioridad: 'Critical', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'MF-TRAMO-C-002 workspace emergency' },
   103: { estado: 'Active', prioridad: 'High', horizonte: 'Post-core', decision: 'Build', legacy: 'PARTIAL', nota: 'MF-TRAMO-C-002 panel reanimación demo' },
