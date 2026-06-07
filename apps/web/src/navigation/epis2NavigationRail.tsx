@@ -1,6 +1,7 @@
 import { copy } from '@epis2/design-system';
 import {
   AdminPanelSettingsIcon,
+  BiotechIcon,
   CalendarMonthIcon,
   EpisAppearancePreferencesLink,
   EpisThemeModeToggle,
@@ -39,6 +40,7 @@ const WORKSPACE_ICONS: Record<EpisClinicalWorkspaceId, ReactNode> = {
   ambulatory: <LocalHospitalIcon />,
   emergency: <HealthAndSafetyIcon />,
   icu: <MonitorHeartIcon />,
+  or: <BiotechIcon />,
   quality_iaas: <HealthAndSafetyIcon />,
   admin_system: <AdminPanelSettingsIcon />,
 };
@@ -57,6 +59,8 @@ const CONTEXTUAL_ICONS: Record<string, ReactNode> = {
   hardware: <MonitorHeartIcon />,
   interop: <ScienceIcon />,
   'forms-studio': <SettingsIcon />,
+  'or-schedule': <CalendarMonthIcon />,
+  'or-rooms': <BiotechIcon />,
 };
 
 /** Ítems del Navigation Rail — N0 conmutador de workspace + árbol contextual. */

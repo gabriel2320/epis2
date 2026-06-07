@@ -67,9 +67,11 @@ export {
   receptionDashboardResponseSchema,
   emergencyDashboardResponseSchema,
   icuDashboardResponseSchema,
+  orDashboardResponseSchema,
   type ReceptionDashboardResponse,
   type EmergencyDashboardResponse,
   type IcuDashboardResponse,
+  type OrDashboardResponse,
 } from './dashboard.js';
 export {
   patientLongitudinalResponseSchema,

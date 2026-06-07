@@ -1,0 +1,94 @@
+import type { OrDashboardResponse } from '@epis2/contracts';
+import { copy } from '@epis2/design-system';
+import {
+  Alert,
+  Button,
+  Chip,
+  EpisMetric,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  Stack,
+  Typography,
+} from '@epis2/epis2-ui';
+
+export type OrDashboardTabProps = {
+  data: OrDashboardResponse;
+  onOpenPatient?: (patientId: string) => void;
+};
+
+const STATUS_LABEL: Record<OrDashboardResponse['surgicalSchedule'][number]['status'], string> = {
+  scheduled: copy.or.statusScheduled,
+  preparing: copy.or.statusPreparing,
+  in_progress: copy.or.statusInProgress,
+  completed: copy.or.statusCompleted,
+};
+
+export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
+  return (
+    <Stack spacing={2} data-testid="epis2-or-dashboard">
+      <Alert severity="info">{copy.or.disclosure}</Alert>
+      <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+        <EpisMetric
+          label={copy.or.metrics.roomsInUse}
+          value={String(data.metrics.operatingRoomsInUse)}
+        />
+        <EpisMetric
+          label={copy.or.metrics.scheduledToday}
+          value={String(data.metrics.scheduledToday)}
+        />
+        <EpisMetric
+          label={copy.or.metrics.inProgress}
+          value={String(data.metrics.inProgress)}
+        />
+      </Stack>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-idc-panels">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.or.idcPanelsTitle}
+        </Typography>
+        <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+          {data.idcPanels.map((panel) => (
+            <Chip
+              key={panel.idc}
+              label={`IDC ${panel.idc}: ${panel.label}`}
+              size="small"
+              color={panel.status === 'active' ? 'primary' : 'default'}
+              variant={panel.status === 'active' ? 'filled' : 'outlined'}
+              data-testid={`epis2-or-idc-${panel.idc}`}
+            />
+          ))}
+        </Stack>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-or-surgical-schedule">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.or.surgicalScheduleTitle}
+        </Typography>
+        <List dense data-testid="epis2-or-surgical-schedule-rows">
+          {data.surgicalSchedule.map((row) => (
+            <ListItem
+              key={row.caseId}
+              disablePadding
+              sx={{ py: 0.5, flexWrap: 'wrap', gap: 0.5 }}
+            >
+              <ListItemText
+                primary={`${row.operatingRoom} — ${row.procedureName}`}
+                secondary={`${row.patientDisplayName} · ${row.scheduledStart} · ${row.estimatedDurationMin} min · ${STATUS_LABEL[row.status]}`}
+              />
+              {onOpenPatient ? (
+                <Button
+                  size="small"
+                  variant="text"
+                  onClick={() => onOpenPatient(row.patientId)}
+                  data-testid={`epis2-or-open-chart-${row.patientId}`}
+                >
+                  {copy.or.openPatientChart}
+                </Button>
+              ) : null}
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+    </Stack>
+  );
+}

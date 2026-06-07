@@ -316,3 +316,36 @@ export const icuDashboardResponseSchema = z.object({
 });
 
 export type IcuDashboardResponse = z.infer<typeof icuDashboardResponseSchema>;
+
+/** MF-TRAMO-E-002 — Tablero pabellón (IDC 151–160). */
+export const orIdcPanelSchema = z.object({
+  idc: z.number().int(),
+  label: z.string(),
+  status: z.enum(['active', 'planned']),
+});
+
+export const orSurgicalScheduleRowSchema = z.object({
+  caseId: z.string(),
+  patientId: z.string().uuid(),
+  patientDisplayName: z.string(),
+  procedureName: z.string(),
+  operatingRoom: z.string(),
+  scheduledStart: z.string(),
+  estimatedDurationMin: z.number().int(),
+  status: z.enum(['scheduled', 'preparing', 'in_progress', 'completed']),
+  surgeonDisplayName: z.string(),
+});
+
+export const orDashboardResponseSchema = z.object({
+  readOnly: z.literal(true),
+  roleView: z.enum(['physician', 'nurse', 'admin']),
+  idcPanels: z.array(orIdcPanelSchema),
+  surgicalSchedule: z.array(orSurgicalScheduleRowSchema),
+  metrics: z.object({
+    operatingRoomsInUse: z.number().int(),
+    scheduledToday: z.number().int(),
+    inProgress: z.number().int(),
+  }),
+});
+
+export type OrDashboardResponse = z.infer<typeof orDashboardResponseSchema>;

@@ -13,10 +13,10 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 118 · Active: 44 · Blocked: 1 · Done: 37 |
-| **Prioridad** | Critical: 9 · High: 56 · Medium: 84 · Low: 51 |
-| **Horizonte** | Core: 40 · Post-core: 100 · Future: 60 |
-| **Decisión** | Build: 137 · Integrate: 5 · Defer: 56 · Exclude: 2 |
+| **Estado** | Planned: 117 · Active: 45 · Blocked: 1 · Done: 37 |
+| **Prioridad** | Critical: 9 · High: 57 · Medium: 84 · Low: 50 |
+| **Horizonte** | Core: 40 · Post-core: 101 · Future: 59 |
+| **Decisión** | Build: 138 · Integrate: 5 · Defer: 55 · Exclude: 2 |
 
 ### Leyenda
 
@@ -260,7 +260,7 @@
 
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
-| 151 | Tabla quirúrgica | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
+| 151 | Tabla quirúrgica | 15 | or | Active | High | Post-core | Build | PARTIAL | OrDashboardTab MF-TRAMO-E-002 |
 | 152 | Checklist cirugía segura OMS | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
 | 153 | Evaluación preanestésica | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |
 | 154 | Hoja anestesia intraoperatoria | 15 | or | Planned | Low | Future | Defer | MISSING | Pabellón Ola 15 |

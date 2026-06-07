@@ -5,26 +5,26 @@
     "canon": "EPIS2_WAVE_EXECUTION_CANON.md",
     "totals": {
       "estado": {
-        "Planned": 118,
-        "Active": 44,
+        "Planned": 117,
+        "Active": 45,
         "Blocked": 1,
         "Done": 37
       },
       "prioridad": {
         "Critical": 9,
-        "High": 56,
+        "High": 57,
         "Medium": 84,
-        "Low": 51
+        "Low": 50
       },
       "horizonte": {
         "Core": 40,
-        "Post-core": 100,
-        "Future": 60
+        "Post-core": 101,
+        "Future": 59
       },
       "decision": {
-        "Build": 137,
+        "Build": 138,
         "Integrate": 5,
-        "Defer": 56,
+        "Defer": 55,
         "Exclude": 2
       }
     }
@@ -1835,12 +1835,12 @@
       "nombre": "Tabla quirúrgica",
       "ola": "15",
       "workspace": "or",
-      "estado": "Planned",
-      "prioridad": "Low",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "MISSING",
-      "nota": "Pabellón Ola 15"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "OrDashboardTab MF-TRAMO-E-002"
     },
     {
       "idc": 152,

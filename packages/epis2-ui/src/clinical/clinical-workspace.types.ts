@@ -5,6 +5,7 @@ export type EpisClinicalWorkspaceId =
   | 'ambulatory'
   | 'emergency'
   | 'icu'
+  | 'or'
   | 'quality_iaas'
   | 'admin_system';
 

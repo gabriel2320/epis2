@@ -2,6 +2,7 @@ import {
   dashboardWorkResponseSchema,
   emergencyDashboardResponseSchema,
   icuDashboardResponseSchema,
+  orDashboardResponseSchema,
   nursingDashboardResponseSchema,
   patientDashboardResponseSchema,
   pharmacyDashboardResponseSchema,
@@ -26,6 +27,7 @@ import { getPharmacyDashboardSummary } from './pharmacy.js';
 import { getReceptionDashboardSummary } from './reception.js';
 import { getEmergencyDashboardSummary } from './emergency.js';
 import { getIcuDashboardSummary } from './icu.js';
+import { getOrDashboardSummary } from './or.js';
 import { DEMO_WORK_TASKS, getDashboardWorkSummary } from './service.js';
 
 export async function registerDashboardRoutes(
@@ -265,6 +267,34 @@ export async function registerDashboardRoutes(
 
       const summary = await getIcuDashboardSummary(db, session.role);
       return icuDashboardResponseSchema.parse(summary);
+    },
+  );
+
+  app.get(
+    '/api/dashboard/or',
+    { preHandler: requireDashboardRead },
+    async (request, reply) => {
+      const session = (request as AuthenticatedRequest).session;
+      if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
+        return reply.status(403).send({ error: 'Tablero pabellón no disponible para este rol' });
+      }
+
+      await appendAudit(db, {
+        eventType: 'dashboard.opened',
+        actorId: session.sub,
+        username: session.username,
+        entityType: 'dashboard',
+        entityId: 'or',
+        message: 'Modo tablero — pabellón',
+        payload: { tab: 'or' },
+      });
+
+      if (!db) {
+        return reply.status(503).send({ error: 'Base de datos no disponible' });
+      }
+
+      const summary = await getOrDashboardSummary(db, session.role);
+      return orDashboardResponseSchema.parse(summary);
     },
   );
 }

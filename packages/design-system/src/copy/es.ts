@@ -79,6 +79,7 @@ export const copy = {
     tabReception: 'Recepción',
     tabEmergency: 'Urgencias',
     tabIcu: 'UCI',
+    tabOr: 'Pabellón',
     gridColumnTitle: 'Título',
     gridColumnPatient: 'Paciente',
     gridColumnType: 'Tipo',
@@ -198,6 +199,21 @@ export const copy = {
       available: 'Camas disponibles',
       onVentilator: 'En ventilación',
       netFluidBalance: 'Balance hídrico neto',
+    },
+  },
+  or: {
+    disclosure: 'Pabellón demo — workspace propio. No sustituye sistema de gestión quirúrgica institucional.',
+    idcPanelsTitle: 'Capacidades pabellón (IDC 151–160)',
+    surgicalScheduleTitle: 'Tabla quirúrgica del día (IDC 151)',
+    openPatientChart: 'Ver ficha',
+    statusScheduled: 'Programado',
+    statusPreparing: 'Preparación',
+    statusInProgress: 'En curso',
+    statusCompleted: 'Finalizado',
+    metrics: {
+      roomsInUse: 'Quirófanos en uso',
+      scheduledToday: 'Casos programados hoy',
+      inProgress: 'En curso',
     },
   },
   inpatient: {
@@ -597,6 +613,15 @@ export const copy = {
         nursing: 'Cuidados enfermería',
         iv_therapy: 'Terapia intravenosa',
         labs: 'Laboratorio acumulativo',
+      },
+    },
+    or: {
+      label: 'Pabellón',
+      description: 'Agenda quirúrgica, checklist OMS y anestesia — workspace propio.',
+      fab: 'Registrar hito quirúrgico',
+      rail: {
+        schedule: 'Tabla quirúrgica',
+        rooms: 'Quirófanos',
       },
     },
     qualityIaas: {

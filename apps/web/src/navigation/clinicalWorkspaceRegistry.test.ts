@@ -11,13 +11,14 @@ import {
 import { resolveWorkspaceCopyKey } from './workspaceCopy.js';
 
 describe('clinicalWorkspaceRegistry', () => {
-  it('define los siete espacios de trabajo canónicos', () => {
+  it('define los ocho espacios de trabajo canónicos', () => {
     expect(CLINICAL_WORKSPACE_ORDER).toEqual([
       'command',
       'reception',
       'ambulatory',
       'emergency',
       'icu',
+      'or',
       'quality_iaas',
       'admin_system',
     ]);
@@ -35,6 +36,10 @@ describe('clinicalWorkspaceRegistry', () => {
     expect(getWorkspaceDefaultRoute('reception')).toEqual({
       to: '/epis2/dashboard',
       search: { tab: 'reception' },
+    });
+    expect(getWorkspaceDefaultRoute('or')).toEqual({
+      to: '/epis2/dashboard',
+      search: { tab: 'or' },
     });
     expect(getWorkspaceDefaultRoute('admin_system')).toEqual({
       to: '/espacio/admin',

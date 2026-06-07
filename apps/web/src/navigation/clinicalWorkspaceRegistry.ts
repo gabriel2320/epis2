@@ -65,6 +65,17 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
     primaryFabKey: 'workspaces.icu.fab',
     allowedRoles: ['physician', 'nurse', 'admin'],
   },
+  or: {
+    id: 'or',
+    labelKey: 'workspaces.or.label',
+    descriptionKey: 'workspaces.or.description',
+    railItems: [
+      { id: 'or-schedule', labelKey: 'workspaces.or.rail.schedule', route: '/epis2/dashboard?tab=or' },
+      { id: 'or-rooms', labelKey: 'workspaces.or.rail.rooms', route: '/epis2/dashboard?tab=or' },
+    ],
+    primaryFabKey: 'workspaces.or.fab',
+    allowedRoles: ['physician', 'nurse', 'admin'],
+  },
   quality_iaas: {
     id: 'quality_iaas',
     labelKey: 'workspaces.qualityIaas.label',
@@ -101,6 +112,7 @@ export const CLINICAL_WORKSPACE_ORDER: readonly EpisClinicalWorkspaceId[] = [
   'ambulatory',
   'emergency',
   'icu',
+  'or',
   'quality_iaas',
   'admin_system',
 ];
@@ -138,6 +150,7 @@ export function getWorkspaceDefaultRoute(id: EpisClinicalWorkspaceId): Workspace
   if (id === 'reception') return { to: '/epis2/dashboard', search: { tab: 'reception' } };
   if (id === 'emergency') return { to: '/epis2/dashboard', search: { tab: 'emergency' } };
   if (id === 'icu') return { to: '/epis2/dashboard', search: { tab: 'icu' } };
+  if (id === 'or') return { to: '/epis2/dashboard', search: { tab: 'or' } };
   const def = CLINICAL_WORKSPACE_DEFINITIONS[id];
   const firstEnabled = def.railItems.find((item) => !item.disabled) ?? def.railItems[0];
   if (!firstEnabled) return { to: '/comando' };

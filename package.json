@@ -64,6 +64,8 @@
     "quality:tramo-d-vasoactive-gate": "node scripts/quality/validate-tramo-d-vasoactive-gate.mjs",
     "quality:tramo-d-sedoanalgesia-gate": "node scripts/quality/validate-tramo-d-sedoanalgesia-gate.mjs",
     "quality:tramo-d-closure-gate": "node scripts/quality/validate-tramo-d-closure-gate.mjs",
+    "quality:tramo-e-inventory-gate": "node scripts/quality/validate-tramo-e-inventory-gate.mjs",
+    "quality:tramo-e-or-gate": "node scripts/quality/validate-tramo-e-or-gate.mjs",
     "test:e2e:tramo-d": "playwright test e2e/tramo-d-icu.spec.ts",
     "test:e2e:tramo-b": "playwright test e2e/tramo-b-reception.spec.ts",
     "test:e2e:tramo-c": "playwright test e2e/tramo-c-emergency.spec.ts",

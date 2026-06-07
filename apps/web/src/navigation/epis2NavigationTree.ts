@@ -137,6 +137,18 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     ola: '13',
     notes: 'MF-TRAMO-D-002 workspace icu',
   },
+  {
+    id: 'dashboard-or',
+    labelEs: 'Pabellón',
+    route: '/epis2/dashboard?tab=or',
+    kind: 'dashboard_tab',
+    workspace: 'or',
+    md3Level: 0,
+    status: 'partial',
+    idcRefs: [151],
+    ola: '15',
+    notes: 'MF-TRAMO-E-002 workspace or',
+  },
 ];
 
 const BLUEPRINT_IDC_MAP: Record<string, { idc: readonly number[]; status: EpisNavigationSurfaceStatus; workspace: EpisClinicalWorkspaceId; tab?: PatientChartTabId; ola?: string; notes?: string }> = {
