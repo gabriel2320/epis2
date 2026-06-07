@@ -15,7 +15,7 @@ Paridad local ↔ CI: GitHub Actions ejecuta **todos** los tests de integración
 
 **Local (docker compose):** `postgresql://epis2_app:epis2@127.0.0.1:5433/epis2` — ver `.env.example`.
 
-**Migraciones (solo si falla permiso):** `postgresql://epis2:epis2@HOST:PORT/epis2` (superuser local Docker).
+**Migraciones:** `npm run db:migrate` usa superuser `epis2` automáticamente si `DATABASE_URL` apunta a `epis2_app`. Override opcional: `DATABASE_MIGRATE_URL`.
 
 ---
 
@@ -72,5 +72,7 @@ Helper: `describeIntegration()` — skip con etiqueta `[omitido: sin DATABASE_UR
 | Síntoma | Acción |
 |---------|--------|
 | `connection refused` | `docker compose up -d postgres`; puerto host **5433** |
+| `permission denied for schema public` en migrate | Dejar `DATABASE_URL=epis2_app`; `db:migrate` deriva `epis2` solo |
+| BD inconsistente / constraint en migrate | `npm run stack:reset` (borra volumen Docker) |
 | MAR / V3 fallan | `npm run db:migrate` (seed con ventanas relativas a `NOW()`) |
 | Skips con DATABASE_URL definida | Revisar URL, migraciones y `npm run quality:ci-parity` |

@@ -87,8 +87,9 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'ambulatory',
     md3Level: 0,
     status: 'partial',
-    idcRefs: [54],
-    ola: '1',
+    idcRefs: [54, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170],
+    ola: '16',
+    notes: 'MF-TRAMO-J-002 farmacia clínica 161–170',
   },
   {
     id: 'dashboard-quality',

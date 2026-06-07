@@ -1,4 +1,4 @@
-# EPIS2 — Plan maestro tramos A–I
+# EPIS2 — Plan maestro tramos A–J
 
 **Fecha:** 2026-06-07 · **Aprobación humana:** OK (sesión autónoma)  
 **Higiene:** [`EPIS2_TRAMOS_HYGIENE.md`](./EPIS2_TRAMOS_HYGIENE.md) · gate `quality:tramos-hygiene-gate`
@@ -18,8 +18,9 @@
 | **G** UCI especializada | ✅ Cerrado técnico (UCI 131–140 demo) | 131–140 Active | `quality:tramo-g-closure-gate` |
 | **H** IAAS avanzada | ✅ Cerrado técnico (IAAS 141–150 demo) | 141–150 Active | `quality:tramo-h-closure-gate` |
 | **I** Especialidades gráficas | ✅ Cerrado técnico (181–190 demo) | 181–190 Active | `quality:tramo-i-closure-gate` |
+| **J** Farmacia clínica | ✅ Cerrado técnico (161–170 demo) | 161–170 Active (165 Done core) | `quality:tramo-j-closure-gate` |
 
-**Cadena A–I:** cerrada técnicamente. Signoff clínico institucional pendiente.
+**Cadena A–J:** cerrada técnicamente. Signoff clínico institucional pendiente.
 
 ---
 
@@ -36,14 +37,15 @@
 | G | `EPIS2_TRAMO_G_CLOSURE.md` | `EPIS2_TRAMO_G_PLAN.md` · UCI especializada |
 | H | `EPIS2_TRAMO_H_CLOSURE.md` | `EPIS2_TRAMO_H_PLAN.md` · IAAS avanzada |
 | I | `EPIS2_TRAMO_I_CLOSURE.md` | `EPIS2_TRAMO_I_PLAN.md` · especialidades gráficas |
+| J | `EPIS2_TRAMO_J_CLOSURE.md` | `EPIS2_TRAMO_J_PLAN.md` · farmacia clínica |
 
 ---
 
 ## Próximo paso global
 
-1. Signoff clínico institucional Tramos A–I
+1. Signoff clínico institucional Tramos A–J
 2. `quality:golden-journey` antes de piloto hospitalario
-3. Piloto institucional · farmacia clínica 161–170
+3. Piloto institucional · calidad/auditoría 171–180
 
 ---
 
@@ -51,7 +53,7 @@
 
 | Reporte | Alcance |
 |---------|---------|
-| `reports/epis2-tramo-h-closure-2026-06-07.md` | Cierre Tramo H |
 | `reports/epis2-tramo-i-closure-2026-06-07.md` | Cierre Tramo I especialidades |
+| `reports/epis2-tramo-j-closure-2026-06-07.md` | Cierre Tramo J farmacia clínica |
 
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*

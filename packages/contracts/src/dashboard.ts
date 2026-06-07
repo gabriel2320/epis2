@@ -49,9 +49,78 @@ export const nursingDashboardResponseSchema = z.object({
   demoTasks: z.array(dashboardDemoTaskSchema),
 });
 
+/** MF-TRAMO-J-002 — Tablero farmacia clínica (IDC 161–170). */
+export const pharmacyIdcPanelSchema = z.object({
+  idc: z.number().int(),
+  label: z.string(),
+  status: z.enum(['active', 'planned']),
+});
+
+export const pharmacyYSiteRowSchema = z.object({
+  drugA: z.string(),
+  drugB: z.string(),
+  compatible: z.boolean(),
+  note: z.string(),
+});
+
+export const pharmacyRenalDoseRowSchema = z.object({
+  patientDisplayName: z.string(),
+  medication: z.string(),
+  gfrMlMin: z.number(),
+  recommendedDose: z.string(),
+});
+
+export const pharmacyTdmRowSchema = z.object({
+  patientDisplayName: z.string(),
+  drug: z.string(),
+  levelMcgMl: z.number(),
+  targetRange: z.string(),
+});
+
+export const pharmacyRamRowSchema = z.object({
+  patientDisplayName: z.string(),
+  suspectDrug: z.string(),
+  reactionType: z.string(),
+  severity: z.enum(['mild', 'moderate', 'severe']),
+});
+
+export const pharmacyDispensingRowSchema = z.object({
+  prescriptionId: z.string(),
+  patientDisplayName: z.string(),
+  medication: z.string(),
+  status: z.enum(['pending', 'dispensed', 'held']),
+});
+
+export const pharmacyCrashCartRowSchema = z.object({
+  cartId: z.string(),
+  location: z.string(),
+  expiryAlerts: z.number().int(),
+  lastCheck: z.string(),
+});
+
+export const pharmacyControlledSubstanceRowSchema = z.object({
+  medication: z.string(),
+  balanceUnits: z.number(),
+  discrepancyFlag: z.boolean(),
+});
+
+export const pharmacyReturnRowSchema = z.object({
+  patientDisplayName: z.string(),
+  medication: z.string(),
+  quantity: z.number(),
+  reason: z.string(),
+});
+
+export const pharmacyStockoutRowSchema = z.object({
+  medication: z.string(),
+  daysUntilStockout: z.number().int(),
+  alternativeSuggested: z.string().optional(),
+});
+
 export const pharmacyDashboardResponseSchema = z.object({
   readOnly: z.literal(true),
   roleView: z.literal('pharmacist'),
+  idcPanels: z.array(pharmacyIdcPanelSchema),
   pendingValidations: z.array(
     z.object({
       id: z.string().uuid(),
@@ -71,7 +140,21 @@ export const pharmacyDashboardResponseSchema = z.object({
       reason: z.string(),
     }),
   ),
+  ySiteChecks: z.array(pharmacyYSiteRowSchema),
+  renalDoseAdjustments: z.array(pharmacyRenalDoseRowSchema),
+  tdmMonitoring: z.array(pharmacyTdmRowSchema),
+  ramReports: z.array(pharmacyRamRowSchema),
+  dispensingQueue: z.array(pharmacyDispensingRowSchema),
+  crashCartInventory: z.array(pharmacyCrashCartRowSchema),
+  controlledSubstances: z.array(pharmacyControlledSubstanceRowSchema),
+  drugReturns: z.array(pharmacyReturnRowSchema),
+  stockoutAlerts: z.array(pharmacyStockoutRowSchema),
   demoTasks: z.array(dashboardDemoTaskSchema),
+  metrics: z.object({
+    activePharmacyModules: z.number().int(),
+    pendingValidationsCount: z.number().int(),
+    reconciliationCandidatesCount: z.number().int(),
+  }),
 });
 
 export type NursingDashboardResponse = z.infer<typeof nursingDashboardResponseSchema>;

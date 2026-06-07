@@ -310,6 +310,26 @@ export const copy = {
       scheduledBoards: 'Comités programados',
     },
   },
+  pharmacy: {
+    disclosure:
+      'Farmacia clínica demo — datos sintéticos. Home sigue siendo Centro de Comando.',
+    idcPanelsTitle: 'Farmacia clínica (IDC 161–170)',
+    ySiteTitle: 'Compatibilidad Y-Site (IDC 161)',
+    renalDoseTitle: 'Ajuste dosis renal (IDC 162)',
+    tdmTitle: 'Monitorización TDM (IDC 163)',
+    ramTitle: 'Reacciones adversas medicamentosas (IDC 164)',
+    reconciliationTitle: 'Conciliación medicamentosa (IDC 165)',
+    dispensingTitle: 'Dispensación recetas (IDC 166)',
+    crashCartTitle: 'Carro de paro (IDC 167)',
+    controlledSubstancesTitle: 'Estupefacientes (IDC 168)',
+    returnTitle: 'Devolución fármacos (IDC 169)',
+    stockoutTitle: 'Quiebre de stock (IDC 170)',
+    metrics: {
+      activeModules: 'Módulos activos',
+      pendingValidations: 'Validaciones pendientes',
+      reconciliationCandidates: 'Conciliaciones pendientes',
+    },
+  },
   inpatient: {
     census: 'Censo de camas',
     occupied: 'Ocupada',
@@ -676,6 +696,7 @@ export const copy = {
         patients: 'Pacientes',
         apsBoard: 'Programas APS',
         specialtyBoard: 'Especialidades gráficas',
+        pharmacyBoard: 'Farmacia clínica',
       },
       tabs: {
         summary: 'Resumen histórico',

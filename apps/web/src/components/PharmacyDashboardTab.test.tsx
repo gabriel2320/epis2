@@ -15,6 +15,7 @@ const PATIENT_ID = 'a0000001-0000-4000-8000-000000000005';
 const pharmacyBoard: PharmacyDashboardResponse = {
   readOnly: true,
   roleView: 'pharmacist',
+  idcPanels: [{ idc: 161, label: 'Compatibilidad Y-Site', status: 'active' }],
   pendingValidations: [
     {
       id: VALIDATION_ID,
@@ -34,9 +35,33 @@ const pharmacyBoard: PharmacyDashboardResponse = {
       reason: 'Conciliación medicamentosa pendiente (demo)',
     },
   ],
+  ySiteChecks: [{ drugA: 'Midazolam', drugB: 'Fentanilo', compatible: true, note: 'Compatible' }],
+  renalDoseAdjustments: [
+    { patientDisplayName: 'Paciente DEMO-005', medication: 'Gabapentina', gfrMlMin: 38, recommendedDose: '300 mg' },
+  ],
+  tdmMonitoring: [
+    { patientDisplayName: 'Paciente DEMO-005', drug: 'Vancomicina', levelMcgMl: 18, targetRange: '15–20' },
+  ],
+  ramReports: [
+    { patientDisplayName: 'Paciente DEMO-005', suspectDrug: 'Amoxicilina', reactionType: 'Urticaria', severity: 'moderate' },
+  ],
+  dispensingQueue: [
+    { prescriptionId: 'RX-1', patientDisplayName: 'Paciente DEMO-005', medication: 'Losartán', status: 'pending' },
+  ],
+  crashCartInventory: [{ cartId: 'CP-1', location: 'UCI', expiryAlerts: 0, lastCheck: '2026-06-07' }],
+  controlledSubstances: [{ medication: 'Fentanilo', balanceUnits: 12, discrepancyFlag: false }],
+  drugReturns: [
+    { patientDisplayName: 'Paciente DEMO-005', medication: 'Morfina', quantity: 2, reason: 'Alta' },
+  ],
+  stockoutAlerts: [{ medication: 'Meropenem', daysUntilStockout: 3 }],
   demoTasks: [
     { id: 'pharm-task-validation', label: 'Validación farmacéutica', commandSample: 'validacion farmaceutica' },
   ],
+  metrics: {
+    activePharmacyModules: 10,
+    pendingValidationsCount: 1,
+    reconciliationCandidatesCount: 1,
+  },
 };
 
 afterEach(() => cleanup());
@@ -79,7 +104,7 @@ describe('PharmacyDashboardTab', () => {
       </Epis2ThemeProvider>,
     );
 
-    expect(screen.getByText(copy.inpatient.reconciliation)).toBeInTheDocument();
+    expect(screen.getByText(copy.pharmacy.reconciliationTitle)).toBeInTheDocument();
     expect(screen.getByText(/Warfarina/)).toBeInTheDocument();
 
     await user.click(screen.getByTestId(`epis2-pharmacy-reconcile-${PATIENT_ID}`));

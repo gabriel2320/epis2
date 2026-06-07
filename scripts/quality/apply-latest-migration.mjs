@@ -7,6 +7,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import postgres from 'postgres';
 import { loadEnvFile } from '../load-env.mjs';
+import { resolveMigrateDatabaseUrl } from '../db-url.mjs';
 
 loadEnvFile();
 
@@ -14,9 +15,9 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const migrationsDir = join(root, 'database', 'migrations');
 
 async function main() {
-  const url = process.env.DATABASE_URL;
+  const url = resolveMigrateDatabaseUrl();
   if (!url) {
-    console.error('apply-latest-migration FAILED: DATABASE_URL no definida');
+    console.error('apply-latest-migration FAILED: DATABASE_URL o DATABASE_MIGRATE_URL no definida');
     process.exit(1);
   }
 

@@ -57,10 +57,10 @@ export async function buildAiApp(config: AiConfig) {
     );
 
     if (result.status === 'unavailable') {
-      return reply.status(503).send(result);
+      return reply.status(503).send({ ...result, requiresHumanReview: true as const });
     }
     if (result.status === 'rejected') {
-      return reply.status(422).send(result);
+      return reply.status(422).send({ ...result, requiresHumanReview: true as const });
     }
     return reply.send(result);
   });

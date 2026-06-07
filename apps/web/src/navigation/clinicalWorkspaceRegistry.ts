@@ -38,6 +38,7 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
       { id: 'patients', labelKey: 'workspaces.ambulatory.rail.patients', route: '/espacio/buscar-paciente' },
       { id: 'aps-board', labelKey: 'workspaces.ambulatory.rail.apsBoard', route: '/epis2/dashboard?tab=aps' },
       { id: 'specialty-board', labelKey: 'workspaces.ambulatory.rail.specialtyBoard', route: '/epis2/dashboard?tab=specialty' },
+      { id: 'pharmacy-board', labelKey: 'workspaces.ambulatory.rail.pharmacyBoard', route: '/epis2/dashboard?tab=pharmacy' },
     ],
     patientTabIds: ['summary', 'encounter', 'orders', 'results', 'certificates'],
     primaryFabKey: 'workspaces.ambulatory.fab',

@@ -10,6 +10,8 @@ loadEnvFile();
 
 const steps = [
   { name: 'docker compose up -d postgres', cmd: 'docker', args: ['compose', 'up', '-d', 'postgres'] },
+  { name: 'quality:dev-env-gate', cmd: 'npm', args: ['run', 'quality:dev-env-gate'] },
+  { name: 'quality:stack-dev-gate', cmd: 'npm', args: ['run', 'quality:stack-dev-gate'] },
   { name: 'db:migrate', cmd: 'npm', args: ['run', 'db:migrate'] },
   { name: 'check', cmd: 'npm', args: ['run', 'check'] },
   { name: 'test', cmd: 'npm', args: ['run', 'test'] },
@@ -21,13 +23,18 @@ const steps = [
 
 function runStep(step) {
   console.log(`\n▶ ${step.name}`);
-  const bin = process.platform === 'win32' && step.cmd === 'npm' ? 'npm.cmd' : step.cmd;
+  const isWin = process.platform === 'win32';
+  const bin = isWin && step.cmd === 'npm' ? 'npm.cmd' : step.cmd;
   const result = spawnSync(bin, step.args, {
     stdio: 'inherit',
     env: process.env,
-    shell: step.cmd === 'docker',
+    shell: step.cmd === 'docker' || (isWin && (step.cmd === 'node' || step.cmd === 'npm')),
   });
   if (result.status !== 0) {
+    if (step.optional) {
+      console.warn(`⚠ ${step.name} omitido (opcional)`);
+      return;
+    }
     console.error(`\n✗ quality:local-ci FAILED en ${step.name}`);
     process.exit(result.status ?? 1);
   }

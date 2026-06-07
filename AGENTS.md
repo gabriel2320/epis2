@@ -15,10 +15,17 @@
 ## Gates obligatorios al cerrar
 
 ```bash
+npm run stack:dev   # Postgres + Ollama smoke (antes de sesión)
 npm run check
 npm run test
 npm run db:validate
 ```
+
+Con `dev:ai` activo: `npm run ai:evals:live` (Ollama + blueprints assist).
+
+Semana 1 dev local: `npm run stack:dev` · gates `quality:stack-dev-gate` · `quality:dev-env-gate` · `quality:local-ci`.
+
+Si la fase lo exige: `npm run quality:golden-journey`.
 
 Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.
 

@@ -5,8 +5,8 @@
     "canon": "EPIS2_WAVE_EXECUTION_CANON.md",
     "totals": {
       "estado": {
-        "Planned": 71,
-        "Active": 91,
+        "Planned": 63,
+        "Active": 99,
         "Blocked": 1,
         "Done": 37
       },
@@ -1955,48 +1955,48 @@
       "nombre": "Compatibilidad Y-Site",
       "ola": "16",
       "workspace": "pharmacy",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "Y-Site demo MF-TRAMO-J-002"
     },
     {
       "idc": 162,
       "nombre": "Ajuste dosis renal",
       "ola": "16",
       "workspace": "pharmacy",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "Dosis renal demo MF-TRAMO-J-003"
     },
     {
       "idc": 163,
       "nombre": "Monitorización TDM",
       "ola": "16",
       "workspace": "pharmacy",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "TDM demo MF-TRAMO-J-004"
     },
     {
       "idc": 164,
       "nombre": "RAM",
       "ola": "16",
       "workspace": "pharmacy",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "RAM demo MF-TRAMO-J-005"
     },
     {
       "idc": 165,
@@ -2008,7 +2008,7 @@
       "horizonte": "Core",
       "decision": "Build",
       "legacyEstado": "COMPLETE",
-      "nota": ""
+      "nota": "Conciliación COMPLETE · panel MF-TRAMO-J-006"
     },
     {
       "idc": 166,
@@ -2020,55 +2020,55 @@
       "horizonte": "Post-core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": ""
+      "nota": "Dispensación demo MF-TRAMO-J-007"
     },
     {
       "idc": 167,
       "nombre": "Carro de paro",
       "ola": "16",
       "workspace": "pharmacy",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "Carro paro demo MF-TRAMO-J-008"
     },
     {
       "idc": 168,
       "nombre": "Estupefacientes",
       "ola": "16",
       "workspace": "pharmacy",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "Estupefacientes demo MF-TRAMO-J-009"
     },
     {
       "idc": 169,
       "nombre": "Devolución fármacos",
       "ola": "16",
       "workspace": "pharmacy",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "Devolución demo MF-TRAMO-J-010"
     },
     {
       "idc": 170,
       "nombre": "Quiebre de stock",
       "ola": "16",
       "workspace": "pharmacy",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "Quiebre stock demo MF-TRAMO-J-011"
     },
     {
       "idc": 171,

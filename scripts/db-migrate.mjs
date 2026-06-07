@@ -3,6 +3,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import postgres from 'postgres';
 import { loadEnvFile } from './load-env.mjs';
+import { maskDatabaseUrl, resolveMigrateDatabaseUrl } from './db-url.mjs';
 
 loadEnvFile();
 
@@ -11,10 +12,16 @@ const root = join(__dirname, '..');
 const migrationsDir = join(root, 'database', 'migrations');
 
 async function main() {
-  const url = process.env.DATABASE_URL;
+  const url = resolveMigrateDatabaseUrl();
   if (!url) {
-    console.error('db:migrate FAILED: DATABASE_URL no definida');
+    console.error('db:migrate FAILED: DATABASE_URL o DATABASE_MIGRATE_URL no definida');
     process.exit(1);
+  }
+
+  const appUrl = process.env.DATABASE_URL;
+  if (appUrl && url !== appUrl) {
+    console.log(`db:migrate — superuser ${maskDatabaseUrl(url)}`);
+    console.log(`         API/tests ${maskDatabaseUrl(appUrl)}`);
   }
 
   const files = (await readdir(migrationsDir))

@@ -24,7 +24,7 @@ function run(label, cmd, args, opts = {}) {
 console.log('EPIS2 stack:up — Postgres + Ollama (host)\n');
 
 run('postgres', 'docker', ['compose', 'up', '-d', 'postgres']);
-run('migrate', 'npm', ['run', 'db:migrate']);
+run('migrate', 'node', ['scripts/db-migrate.mjs']);
 
 console.log('\n▶ ai:enable (Ollama nativo en host — OLLAMA_BASE_URL / OLLAMA_MODEL desde .env)');
 console.log('   Contenedor Ollama opcional: docker compose --profile bundled-ollama up -d ollama\n');

@@ -13,7 +13,7 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 71 · Active: 91 · Blocked: 1 · Done: 37 |
+| **Estado** | Planned: 63 · Active: 99 · Blocked: 1 · Done: 37 |
 | **Prioridad** | Critical: 9 · High: 78 · Medium: 82 · Low: 31 |
 | **Horizonte** | Core: 40 · Post-core: 138 · Future: 22 |
 | **Decisión** | Build: 175 · Integrate: 5 · Defer: 18 · Exclude: 2 |
@@ -275,16 +275,16 @@
 
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
-| 161 | Compatibilidad Y-Site | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
-| 162 | Ajuste dosis renal | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
-| 163 | Monitorización TDM | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
-| 164 | RAM | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
-| 165 | Conciliación medicamentos | 16 | pharmacy | Done | High | Core | Build | COMPLETE |  |
-| 166 | Dispensación recetas | 16 | pharmacy | Active | Medium | Post-core | Build | PARTIAL |  |
-| 167 | Carro de paro | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
-| 168 | Estupefacientes | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
-| 169 | Devolución fármacos | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
-| 170 | Quiebre de stock | 16 | pharmacy | Planned | Medium | Post-core | Build | MISSING |  |
+| 161 | Compatibilidad Y-Site | 16 | pharmacy | Active | Medium | Post-core | Build | PARTIAL | Y-Site demo MF-TRAMO-J-002 |
+| 162 | Ajuste dosis renal | 16 | pharmacy | Active | Medium | Post-core | Build | PARTIAL | Dosis renal demo MF-TRAMO-J-003 |
+| 163 | Monitorización TDM | 16 | pharmacy | Active | Medium | Post-core | Build | PARTIAL | TDM demo MF-TRAMO-J-004 |
+| 164 | RAM | 16 | pharmacy | Active | Medium | Post-core | Build | PARTIAL | RAM demo MF-TRAMO-J-005 |
+| 165 | Conciliación medicamentos | 16 | pharmacy | Done | High | Core | Build | COMPLETE | Conciliación COMPLETE · panel MF-TRAMO-J-006 |
+| 166 | Dispensación recetas | 16 | pharmacy | Active | Medium | Post-core | Build | PARTIAL | Dispensación demo MF-TRAMO-J-007 |
+| 167 | Carro de paro | 16 | pharmacy | Active | Medium | Post-core | Build | PARTIAL | Carro paro demo MF-TRAMO-J-008 |
+| 168 | Estupefacientes | 16 | pharmacy | Active | Medium | Post-core | Build | PARTIAL | Estupefacientes demo MF-TRAMO-J-009 |
+| 169 | Devolución fármacos | 16 | pharmacy | Active | Medium | Post-core | Build | PARTIAL | Devolución demo MF-TRAMO-J-010 |
+| 170 | Quiebre de stock | 16 | pharmacy | Active | Medium | Post-core | Build | PARTIAL | Quiebre stock demo MF-TRAMO-J-011 |
 
 ## Calidad y auditoría (171–180)
 

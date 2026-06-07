@@ -1,0 +1,45 @@
+---
+description: Patrón scaffold tramos IDC — API, UI, gates, matriz, E2E
+globs: apps/web/src/components/*DashboardTab.tsx,apps/api/src/dashboard/*.ts,scripts/quality/validate-tramo-*-gate.mjs,docs/product/EPIS2_TRAMO_*.{md},e2e/tramo-*.spec.ts,scripts/product/generate-idc-matrix.mjs
+alwaysApply: false
+---
+
+# Tramo scaffold (IDC tableros)
+
+Patrón canónico Tramos F–J. Una sesión = un tramo o microfase MF-TRAMO-*.
+
+## Secuencia
+
+1. **Inventario + plan** — `EPIS2_TRAMO_X_*_INVENTORY.md`, `EPIS2_TRAMO_X_PLAN.md`
+2. **Contratos** — extender `packages/contracts/src/dashboard.ts` (schema + arrays demo)
+3. **API** — `apps/api/src/dashboard/<tab>.ts` con `IDC_PANELS` status `active`
+4. **UI** — `*DashboardTab.tsx`: `epis2-*-dashboard`, chips `epis2-*-idc-{N}`, paneles `epis2-*-{slug}`
+5. **Copy** — `packages/design-system/src/copy/es.ts` (sección dedicada, no hardcode UI)
+6. **Matriz** — overrides en `generate-idc-matrix.mjs` con `MF-TRAMO-X-00N`
+7. **Navigation** — `epis2NavigationTree.ts` idcRefs + `clinicalWorkspaceRegistry.ts` rail route
+8. **Gates** — inventory · first-idc · scaffold · audit · closure en `scripts/quality/`
+9. **E2E** — `e2e/tramo-x-*.spec.ts` (primer IDC + scaffold resto)
+10. **Cierre** — `EPIS2_TRAMO_X_CLOSURE.md`, `reports/epis2-tramo-x-closure-*.md`, higiene A–J
+
+## Reglas
+
+- Home = **Centro de Comando**; tablero = modo opcional (`?tab=…`).
+- IDC **Done** previo (ej. 165): mantener Done + panel scaffold; closure gate acepta Done + MF tag.
+- No commit/push salvo orden explícita.
+- Cierre obligatorio:
+
+```bash
+node scripts/product/generate-idc-matrix.mjs
+npm run quality:tramo-*-closure-gate
+npm run quality:tramos-hygiene-gate
+npm run check && npm run test && npm run db:validate
+```
+
+## Plantilla microfase
+
+| MF | IDC | testid panel | gate |
+|----|-----|--------------|------|
+| X-002 | primero | `epis2-{tab}-{slug}` | `tramo-x-{tab}-gate` |
+| X-003…011 | resto | mismo prefijo | `tramo-x-scaffold-gate` |
+
+Referencia: Tramo I (`SpecialtyDashboardTab`) · Tramo J (`PharmacyDashboardTab`).
