@@ -5,8 +5,8 @@
     "canon": "EPIS2_WAVE_EXECUTION_CANON.md",
     "totals": {
       "estado": {
-        "Planned": 108,
-        "Active": 54,
+        "Planned": 99,
+        "Active": 63,
         "Blocked": 1,
         "Done": 37
       },
@@ -18,13 +18,13 @@
       },
       "horizonte": {
         "Core": 40,
-        "Post-core": 110,
-        "Future": 50
+        "Post-core": 119,
+        "Future": 41
       },
       "decision": {
-        "Build": 147,
+        "Build": 156,
         "Integrate": 5,
-        "Defer": 46,
+        "Defer": 37,
         "Exclude": 2
       }
     }
@@ -1475,108 +1475,108 @@
       "nombre": "Control salud cardiovascular",
       "ola": "12",
       "workspace": "ambulatory",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
+      "horizonte": "Post-core",
+      "decision": "Build",
       "legacyEstado": "MISSING",
-      "nota": "Programas APS ministeriales"
+      "nota": "Control cardiovascular PSCV demo MF-TRAMO-F-002"
     },
     {
       "idc": 122,
       "nombre": "Calculadora Framingham",
       "ola": "12",
       "workspace": "ambulatory",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
+      "horizonte": "Post-core",
+      "decision": "Build",
       "legacyEstado": "MISSING",
-      "nota": "Programas APS ministeriales"
+      "nota": "Framingham demo MF-TRAMO-F-003"
     },
     {
       "idc": 123,
       "nombre": "Examen medicina preventiva (EMP)",
       "ola": "12",
       "workspace": "ambulatory",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
+      "horizonte": "Post-core",
+      "decision": "Build",
       "legacyEstado": "MISSING",
-      "nota": "Programas APS ministeriales"
+      "nota": "EMP tamizaje demo MF-TRAMO-F-004"
     },
     {
       "idc": 124,
       "nombre": "Pie diabético",
       "ola": "12",
       "workspace": "ambulatory",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
+      "horizonte": "Post-core",
+      "decision": "Build",
       "legacyEstado": "MISSING",
-      "nota": "Programas APS ministeriales"
+      "nota": "Pie diabético demo MF-TRAMO-F-005"
     },
     {
       "idc": 125,
       "nombre": "Tamizaje salud mental",
       "ola": "12",
       "workspace": "ambulatory",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
+      "horizonte": "Post-core",
+      "decision": "Build",
       "legacyEstado": "MISSING",
-      "nota": "Programas APS ministeriales"
+      "nota": "Salud mental demo MF-TRAMO-F-006"
     },
     {
       "idc": 126,
       "nombre": "Control niño sano",
       "ola": "12",
       "workspace": "ambulatory",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
+      "horizonte": "Post-core",
+      "decision": "Build",
       "legacyEstado": "MISSING",
-      "nota": "Programas APS ministeriales"
+      "nota": "Niño sano demo MF-TRAMO-F-007"
     },
     {
       "idc": 127,
       "nombre": "Calendario inmunizaciones",
       "ola": "12",
       "workspace": "ambulatory",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
+      "horizonte": "Post-core",
+      "decision": "Build",
       "legacyEstado": "MISSING",
-      "nota": "Programas APS ministeriales"
+      "nota": "PNI demo MF-TRAMO-F-008"
     },
     {
       "idc": 128,
       "nombre": "Control prenatal",
       "ola": "12",
       "workspace": "ambulatory",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
+      "horizonte": "Post-core",
+      "decision": "Build",
       "legacyEstado": "MISSING",
-      "nota": "Programas APS ministeriales"
+      "nota": "Control prenatal demo MF-TRAMO-F-009"
     },
     {
       "idc": 129,
       "nombre": "Derivación programas ministeriales",
       "ola": "12",
       "workspace": "ambulatory",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
+      "horizonte": "Post-core",
+      "decision": "Build",
       "legacyEstado": "MISSING",
-      "nota": "Programas APS ministeriales"
+      "nota": "Derivación ministerial demo MF-TRAMO-F-010"
     },
     {
       "idc": 130,
@@ -1588,7 +1588,7 @@
       "horizonte": "Post-core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": ""
+      "nota": "Visita domiciliaria demo MF-TRAMO-F-011"
     },
     {
       "idc": 131,

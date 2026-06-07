@@ -35,7 +35,8 @@ export type DashboardTab =
   | 'reception'
   | 'emergency'
   | 'icu'
-  | 'or';
+  | 'or'
+  | 'aps';
 
 export type DashboardSearch = { tab?: DashboardTab; patientId?: string };
 

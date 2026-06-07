@@ -55,8 +55,7 @@ Estado real:            Done técnico Tramo A
 
 ---
 
-## Próximo tramo
+## Próximo tramo global
 
-**Tramo B** — recepción IDC 2–10 (`MF-TRAMO-B-002`).
-
-*Los errores de EPIS no son recuerdos: son gates de EPIS2.*
+Cadena **A–E** cerrada técnicamente — ver [`EPIS2_TRAMOS_EXECUTION_MASTER.md`](./EPIS2_TRAMOS_EXECUTION_MASTER.md).  
+Signoff clínico institucional · `quality:golden-journey`.

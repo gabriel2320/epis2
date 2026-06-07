@@ -47,6 +47,12 @@ describe('dashboard API', () => {
     expect(res.statusCode).toBe(401);
   });
 
+  it('GET /api/dashboard/aps requiere sesión', async () => {
+    const app = await buildApp(testApiConfig);
+    const res = await app.inject({ method: 'GET', url: '/api/dashboard/aps' });
+    expect(res.statusCode).toBe(401);
+  });
+
   it('GET /api/dashboard/patient/:id requiere sesión', async () => {
     const app = await buildApp(testApiConfig);
     const res = await app.inject({

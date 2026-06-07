@@ -13,10 +13,10 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 108 · Active: 54 · Blocked: 1 · Done: 37 |
+| **Estado** | Planned: 99 · Active: 63 · Blocked: 1 · Done: 37 |
 | **Prioridad** | Critical: 9 · High: 66 · Medium: 84 · Low: 41 |
-| **Horizonte** | Core: 40 · Post-core: 110 · Future: 50 |
-| **Decisión** | Build: 147 · Integrate: 5 · Defer: 46 · Exclude: 2 |
+| **Horizonte** | Core: 40 · Post-core: 119 · Future: 41 |
+| **Decisión** | Build: 156 · Integrate: 5 · Defer: 37 · Exclude: 2 |
 
 ### Leyenda
 
@@ -215,16 +215,16 @@
 
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
-| 121 | Control salud cardiovascular | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
-| 122 | Calculadora Framingham | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
-| 123 | Examen medicina preventiva (EMP) | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
-| 124 | Pie diabético | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
-| 125 | Tamizaje salud mental | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
-| 126 | Control niño sano | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
-| 127 | Calendario inmunizaciones | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
-| 128 | Control prenatal | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
-| 129 | Derivación programas ministeriales | 12 | ambulatory | Planned | Medium | Future | Defer | MISSING | Programas APS ministeriales |
-| 130 | Visita domiciliaria integral | 12 | ambulatory | Active | Medium | Post-core | Build | PARTIAL |  |
+| 121 | Control salud cardiovascular | 12 | ambulatory | Active | Medium | Post-core | Build | MISSING | Control cardiovascular PSCV demo MF-TRAMO-F-002 |
+| 122 | Calculadora Framingham | 12 | ambulatory | Active | Medium | Post-core | Build | MISSING | Framingham demo MF-TRAMO-F-003 |
+| 123 | Examen medicina preventiva (EMP) | 12 | ambulatory | Active | Medium | Post-core | Build | MISSING | EMP tamizaje demo MF-TRAMO-F-004 |
+| 124 | Pie diabético | 12 | ambulatory | Active | Medium | Post-core | Build | MISSING | Pie diabético demo MF-TRAMO-F-005 |
+| 125 | Tamizaje salud mental | 12 | ambulatory | Active | Medium | Post-core | Build | MISSING | Salud mental demo MF-TRAMO-F-006 |
+| 126 | Control niño sano | 12 | ambulatory | Active | Medium | Post-core | Build | MISSING | Niño sano demo MF-TRAMO-F-007 |
+| 127 | Calendario inmunizaciones | 12 | ambulatory | Active | Medium | Post-core | Build | MISSING | PNI demo MF-TRAMO-F-008 |
+| 128 | Control prenatal | 12 | ambulatory | Active | Medium | Post-core | Build | MISSING | Control prenatal demo MF-TRAMO-F-009 |
+| 129 | Derivación programas ministeriales | 12 | ambulatory | Active | Medium | Post-core | Build | MISSING | Derivación ministerial demo MF-TRAMO-F-010 |
+| 130 | Visita domiciliaria integral | 12 | ambulatory | Active | Medium | Post-core | Build | PARTIAL | Visita domiciliaria demo MF-TRAMO-F-011 |
 
 ## UCI avanzada (131–140)
 

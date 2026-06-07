@@ -1,5 +1,7 @@
 # EPIS2 — Ejecución tramos A–D (2026-06-07)
 
+> **SUPERSEDED** — Solo A–D. Ver [`epis2-tramos-abcde-execution-2026-06-07.md`](./epis2-tramos-abcde-execution-2026-06-07.md).
+
 **Aprobación humana:** OK · **Último commit:** `b4d1050` (Tramo D cierre)
 
 ---

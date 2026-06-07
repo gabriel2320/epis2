@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** MF-OLA6A-001 — Vista Print A5 certificado (IDC 40 parcial). */
+/** MF-OLA6A-002 — Vista Print A5 certificado (IDC 40 Done). */
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';

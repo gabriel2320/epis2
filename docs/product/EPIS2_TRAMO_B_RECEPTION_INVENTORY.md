@@ -16,19 +16,19 @@ Conciliación explícita del bloque pre-clínico (recepción + facturación) con
 
 ---
 
-## IDC 2–10 — Recepción (Build, Planned)
+## IDC 2–10 — Recepción (Build)
 
 | IDC | Nombre | Decisión | Estado matriz | Acción Tramo B |
 |-----|--------|----------|---------------|----------------|
-| 2 | Dashboard recepción | Build | Planned | Tablero recepción — no home |
-| 3 | Agenda diaria profesional | Build | Planned | Integrar con comando calendario |
-| 4 | Calendario mensual centro | Build | Planned | Admin / recepción |
-| 5 | Formulario admisión | Build | Planned | Distinto de `admission_note` clínico |
-| 6 | Biometría / firma | Build | Planned | Custodia Tramo B+ |
-| 7 | Sala de espera virtual | Build | Planned | Display externo |
-| 8 | Gestión sobrecupos | Build | Planned | — |
-| 9 | Registro acompañantes | Build | Planned | — |
-| 10 | Panel llamado (tótem) | Integrate | Planned | IoT / display externo |
+| 2 | Dashboard recepción | Build | **Done** | Tablero recepción — no home |
+| 3 | Agenda diaria profesional | Build | **Done** | Panel demo recepción |
+| 4 | Calendario mensual centro | Build | **Done** | Panel demo recepción |
+| 5 | Formulario admisión | Build | **Done** | Admisión admin (≠ `admission_note`) |
+| 6 | Biometría / firma | Build | **Active** | Custodia Tramo B+ |
+| 7 | Sala de espera virtual | Build | **Done** | Panel demo |
+| 8 | Gestión sobrecupos | Build | **Done** | Métrica demo |
+| 9 | Registro acompañantes | Build | **Done** | Métrica demo |
+| 10 | Panel llamado (tótem) | Integrate | **Active** | Demo; IoT Future |
 
 **Invariante:** IDC 2 (dashboard recepción) **Exclude** como home — home canónico = Centro de Comando.
 
@@ -61,6 +61,6 @@ Conciliación explícita del bloque pre-clínico (recepción + facturación) con
 
 ## Evidencia
 
-Gate: `npm run quality:tramo-b-reception-gate`
+Gates: `quality:tramo-b-reception-gate` · `quality:tramo-b-ui-gate` · `quality:tramo-b-closure-gate`
 
-*Los errores de EPIS no son recuerdos: son gates de EPIS2.*
+Cierre: [`EPIS2_TRAMO_B_CLOSURE.md`](./EPIS2_TRAMO_B_CLOSURE.md)

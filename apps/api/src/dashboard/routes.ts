@@ -3,6 +3,7 @@ import {
   emergencyDashboardResponseSchema,
   icuDashboardResponseSchema,
   orDashboardResponseSchema,
+  apsDashboardResponseSchema,
   nursingDashboardResponseSchema,
   patientDashboardResponseSchema,
   pharmacyDashboardResponseSchema,
@@ -28,6 +29,7 @@ import { getReceptionDashboardSummary } from './reception.js';
 import { getEmergencyDashboardSummary } from './emergency.js';
 import { getIcuDashboardSummary } from './icu.js';
 import { getOrDashboardSummary } from './or.js';
+import { getApsDashboardSummary } from './aps.js';
 import { DEMO_WORK_TASKS, getDashboardWorkSummary } from './service.js';
 
 export async function registerDashboardRoutes(
@@ -295,6 +297,34 @@ export async function registerDashboardRoutes(
 
       const summary = await getOrDashboardSummary(db, session.role);
       return orDashboardResponseSchema.parse(summary);
+    },
+  );
+
+  app.get(
+    '/api/dashboard/aps',
+    { preHandler: requireDashboardRead },
+    async (request, reply) => {
+      const session = (request as AuthenticatedRequest).session;
+      if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
+        return reply.status(403).send({ error: 'Tablero APS no disponible para este rol' });
+      }
+
+      await appendAudit(db, {
+        eventType: 'dashboard.opened',
+        actorId: session.sub,
+        username: session.username,
+        entityType: 'dashboard',
+        entityId: 'aps',
+        message: 'Modo tablero — APS',
+        payload: { tab: 'aps' },
+      });
+
+      if (!db) {
+        return reply.status(503).send({ error: 'Base de datos no disponible' });
+      }
+
+      const summary = await getApsDashboardSummary(db, session.role);
+      return apsDashboardResponseSchema.parse(summary);
     },
   );
 }

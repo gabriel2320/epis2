@@ -1,5 +1,7 @@
 # EPIS2 — Auditoría integral y conciliación
 
+> **SUPERSEDED** — Conciliación pre-Tramo E. Ver [`EPIS2_TRAMOS_HYGIENE.md`](../docs/product/EPIS2_TRAMOS_HYGIENE.md).
+
 **Fecha:** 2026-06-07  
 **Alcance:** Producto · arquitectura · código · documentación · IDC · diseño ECM3  
 **Fuentes de verdad:** código (`epis2NavigationTree.ts`, `registry.ts`) > matriz IDC > inventarios > catálogos legacy

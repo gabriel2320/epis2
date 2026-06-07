@@ -176,6 +176,16 @@ Hospitalización general → Enfermería/MAR → Urgencias (emergency) → Farma
 
 UCI · pabellón · anestesia · obstetricia · odontología · telemedicina · IoT · interop avanzada · facturación.
 
+**Estado técnico (2026-06-07):** UCI demo IDC 41–50, 135 — ver `EPIS2_TRAMO_D_CLOSURE.md`.
+
+### Tramo E — Pabellón y anestesia
+
+```text
+Workspace or → tabla quirúrgica → OMS → preanestesia → intraop → URPA → banco sangre → esterilización
+```
+
+**Estado técnico (2026-06-07):** scaffold demo IDC 151–160 — ver `EPIS2_TRAMO_E_CLOSURE.md`.
+
 ---
 
 ## 10. Gates por ola (ninguna ola cierra solo por pantallas)
@@ -238,7 +248,7 @@ Estado real:          Active — no cerrada clínicamente
 | 12 | APS | Post-core | |
 | 13 | UCI | Future | Programa separado |
 | 14 | IAAS avanzada | Post-core | |
-| 15 | Pabellón | Future | **Defer** |
+| 15 | Pabellón | Post-core | Tramo E scaffold demo IDC 151–160 |
 | 16 | Farmacia clínica | Post-core | Conciliación ✓ |
 | 17 | Calidad, auditoría | Post-core | |
 | 18 | Especialidades gráficas | Future | **Defer** |
@@ -251,9 +261,9 @@ Estado real:          Active — no cerrada clínicamente
 
 1. Leer este canon + `PRODUCT_INVARIANTS.md` antes de planificar MF.
 2. Declarar **tramo**, **ola**, **milestone** y **dependencias** en reporte de sesión.
-3. **No** iniciar Tramo D desde agente sin signoff Tramo A.
+3. Tramos **A–E** cerrados técnicamente — no abrir tramo nuevo sin signoff o plan explícito.
 4. Una rama funcional activa; gates §10 antes de marcar `Done`.
-5. Actualizar métricas §11 en `reports/` al cierre.
+5. Actualizar métricas §11 en `reports/` al cierre · higiene: `quality:tramos-hygiene-gate`.
 
 ---
 

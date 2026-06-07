@@ -434,3 +434,111 @@ export const orDashboardResponseSchema = z.object({
 });
 
 export type OrDashboardResponse = z.infer<typeof orDashboardResponseSchema>;
+
+/** MF-TRAMO-F-002 — Tablero APS (IDC 121–130). */
+export const apsIdcPanelSchema = z.object({
+  idc: z.number().int(),
+  label: z.string(),
+  status: z.enum(['active', 'planned']),
+});
+
+export const apsCardiovascularRowSchema = z.object({
+  patientId: z.string().uuid(),
+  patientDisplayName: z.string(),
+  hba1c: z.number().optional(),
+  bloodPressure: z.string(),
+  ldl: z.number().optional(),
+  targetMet: z.boolean(),
+});
+
+export const apsFraminghamRowSchema = z.object({
+  patientId: z.string().uuid(),
+  patientDisplayName: z.string(),
+  riskPercent10y: z.number(),
+  riskCategory: z.enum(['low', 'moderate', 'high']),
+});
+
+export const apsPreventiveExamRowSchema = z.object({
+  patientId: z.string().uuid(),
+  patientDisplayName: z.string(),
+  ageYears: z.number().int(),
+  pendingItems: z.array(z.string()),
+});
+
+export const apsDiabeticFootRowSchema = z.object({
+  patientId: z.string().uuid(),
+  patientDisplayName: z.string(),
+  monofilamentResult: z.enum(['normal', 'abnormal']),
+  pulseStatus: z.string(),
+});
+
+export const apsMentalHealthRowSchema = z.object({
+  patientId: z.string().uuid(),
+  patientDisplayName: z.string(),
+  phq9Score: z.number().int(),
+  gad7Score: z.number().int(),
+  referralSuggested: z.boolean(),
+});
+
+export const apsChildWellnessRowSchema = z.object({
+  patientId: z.string().uuid(),
+  patientDisplayName: z.string(),
+  ageMonths: z.number().int(),
+  growthPercentile: z.number().int(),
+  nextControlDue: z.string(),
+});
+
+export const apsImmunizationRowSchema = z.object({
+  patientId: z.string().uuid(),
+  patientDisplayName: z.string(),
+  vaccine: z.string(),
+  dueDate: z.string(),
+  status: z.enum(['due', 'overdue', 'complete']),
+});
+
+export const apsPrenatalRowSchema = z.object({
+  patientId: z.string().uuid(),
+  patientDisplayName: z.string(),
+  gestationalWeeks: z.number().int(),
+  fundalHeightCm: z.number().int(),
+  fetalHeartRate: z.number().int(),
+});
+
+export const apsMinisterialReferralRowSchema = z.object({
+  patientId: z.string().uuid(),
+  patientDisplayName: z.string(),
+  program: z.string(),
+  status: z.enum(['eligible', 'enrolled', 'pending']),
+});
+
+export const apsHomeVisitRowSchema = z.object({
+  visitId: z.string(),
+  patientId: z.string().uuid(),
+  patientDisplayName: z.string(),
+  scheduledAt: z.string(),
+  territory: z.string(),
+  status: z.enum(['scheduled', 'in_progress', 'completed']),
+});
+
+export const apsDashboardResponseSchema = z.object({
+  readOnly: z.literal(true),
+  roleView: z.enum(['physician', 'nurse', 'admin']),
+  idcPanels: z.array(apsIdcPanelSchema),
+  cardiovascularControls: z.array(apsCardiovascularRowSchema),
+  framinghamScores: z.array(apsFraminghamRowSchema),
+  preventiveExams: z.array(apsPreventiveExamRowSchema),
+  diabeticFootScreenings: z.array(apsDiabeticFootRowSchema),
+  mentalHealthScreenings: z.array(apsMentalHealthRowSchema),
+  childWellnessControls: z.array(apsChildWellnessRowSchema),
+  immunizationSchedule: z.array(apsImmunizationRowSchema),
+  prenatalControls: z.array(apsPrenatalRowSchema),
+  ministerialReferrals: z.array(apsMinisterialReferralRowSchema),
+  homeVisits: z.array(apsHomeVisitRowSchema),
+  metrics: z.object({
+    enrolledPrograms: z.number().int(),
+    pendingScreenings: z.number().int(),
+    homeVisitsToday: z.number().int(),
+  }),
+});
+
+export type ApsDashboardResponse = z.infer<typeof apsDashboardResponseSchema>;

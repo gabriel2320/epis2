@@ -149,6 +149,18 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     ola: '15',
     notes: 'MF-TRAMO-E-002 workspace or',
   },
+  {
+    id: 'dashboard-aps',
+    labelEs: 'APS / medicina general',
+    route: '/epis2/dashboard?tab=aps',
+    kind: 'dashboard_tab',
+    workspace: 'ambulatory',
+    md3Level: 0,
+    status: 'partial',
+    idcRefs: [121, 122, 123, 124, 125, 126, 127, 128, 129, 130],
+    ola: '12',
+    notes: 'MF-TRAMO-F-002 tablero APS',
+  },
 ];
 
 const BLUEPRINT_IDC_MAP: Record<string, { idc: readonly number[]; status: EpisNavigationSurfaceStatus; workspace: EpisClinicalWorkspaceId; tab?: PatientChartTabId; ola?: string; notes?: string }> = {

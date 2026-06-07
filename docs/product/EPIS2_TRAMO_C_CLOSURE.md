@@ -57,8 +57,8 @@ Estado real:             Done técnico Tramo C
 
 ---
 
-## Próximo tramo
+## Próximo tramo global
 
-**Tramo D** — programas especializados UCI (`EPIS2_TRAMO_D_PLAN.md`).
+Cadena **A–E** cerrada técnicamente — signoff clínico institucional · `quality:golden-journey`.
 
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*

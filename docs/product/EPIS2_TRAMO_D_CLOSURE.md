@@ -64,6 +64,7 @@ Workspace icu → tablero monitorización → sábana · balance · ventilación
 
 ## Próximo tramo global
 
-Signoff clínico Tramos A–D · `quality:golden-journey` · pabellón Ola 15 (IDC 151–160).
+**Tramo E** cerrado técnicamente — ver `EPIS2_TRAMO_E_CLOSURE.md`.  
+Signoff clínico Tramos A–E · `quality:golden-journey`.
 
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*

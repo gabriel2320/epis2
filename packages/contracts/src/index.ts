@@ -68,10 +68,12 @@ export {
   emergencyDashboardResponseSchema,
   icuDashboardResponseSchema,
   orDashboardResponseSchema,
+  apsDashboardResponseSchema,
   type ReceptionDashboardResponse,
   type EmergencyDashboardResponse,
   type IcuDashboardResponse,
   type OrDashboardResponse,
+  type ApsDashboardResponse,
 } from './dashboard.js';
 export {
   patientLongitudinalResponseSchema,
