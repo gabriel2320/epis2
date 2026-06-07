@@ -7,10 +7,10 @@ const ICU_IDC_PANELS = [
   { idc: 43, label: 'Balance hídrico estricto', status: 'active' as const },
   { idc: 44, label: 'Parámetros ventilación', status: 'active' as const },
   { idc: 45, label: 'Vías venosas e invasivos', status: 'active' as const },
-  { idc: 46, label: 'Valoración neurológica', status: 'planned' as const },
-  { idc: 47, label: 'Escalas severidad', status: 'planned' as const },
-  { idc: 48, label: 'Titulación vasoactivos', status: 'planned' as const },
-  { idc: 49, label: 'Sedoanalgesia', status: 'planned' as const },
+  { idc: 46, label: 'Valoración neurológica', status: 'active' as const },
+  { idc: 47, label: 'Escalas severidad', status: 'active' as const },
+  { idc: 48, label: 'Titulación vasoactivos', status: 'active' as const },
+  { idc: 49, label: 'Sedoanalgesia', status: 'active' as const },
   { idc: 50, label: 'Epicrisis traslado UCI', status: 'active' as const },
 ];
 
@@ -76,6 +76,50 @@ export async function getIcuDashboardSummary(db: Database, role: string) {
 
   const netFluidBalanceMl = fluidBalance.reduce((sum, row) => sum + row.balanceMl, 0);
 
+  const neurological = criticalBeds
+    .filter((b) => b.patientDisplayName)
+    .map((b, index) => ({
+      patientDisplayName: b.patientDisplayName!,
+      gcsTotal: 13 - index,
+      pupils: index === 0 ? 'Isocóricas reactivas' : 'Midriasis leve derecha',
+      motorResponse: index === 0 ? 'Obedece órdenes' : 'Localiza dolor',
+    }));
+
+  const severityScales = criticalBeds
+    .filter((b) => b.patientDisplayName)
+    .flatMap((b, index) => [
+      {
+        patientDisplayName: b.patientDisplayName!,
+        scaleName: 'SOFA',
+        score: 6 + index,
+        interpretation: index === 0 ? 'Riesgo moderado' : 'Riesgo alto',
+      },
+      {
+        patientDisplayName: b.patientDisplayName!,
+        scaleName: 'APACHE II',
+        score: 14 + index * 2,
+        interpretation: 'Seguimiento 24h',
+      },
+    ]);
+
+  const vasoactive = criticalBeds
+    .filter((b, bedIndex) => b.patientDisplayName && bedIndex !== 2)
+    .map((b, index) => ({
+      patientDisplayName: b.patientDisplayName!,
+      agent: index === 0 ? 'Noradrenalina' : 'Dobutamina',
+      rateMcgKgMin: index === 0 ? 0.12 : 5.0,
+      mapTarget: 65,
+    }));
+
+  const sedoanalgesia = criticalBeds
+    .filter((b) => b.onVentilator && b.patientDisplayName)
+    .map((b) => ({
+      patientDisplayName: b.patientDisplayName!,
+      sedative: 'Propofol 20 mg/h',
+      analgesic: 'Fentanilo 100 mcg/h',
+      rassScore: -2,
+    }));
+
   const invasiveLines = criticalBeds
     .filter((b) => b.patientId && b.patientDisplayName)
     .flatMap((b, index) => [
@@ -113,6 +157,10 @@ export async function getIcuDashboardSummary(db: Database, role: string) {
     fluidBalance,
     ventilation,
     invasiveLines,
+    neurological,
+    severityScales,
+    vasoactive,
+    sedoanalgesia,
     metrics: {
       occupied: criticalBeds.length,
       available: 1,

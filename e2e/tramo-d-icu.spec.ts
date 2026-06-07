@@ -53,6 +53,38 @@ test.describe('Tramo D — UCI', () => {
     await expect(page.getByTestId('epis2-icu-idc-45')).toBeVisible();
   });
 
+  test('tablero UCI — valoración neurológica IDC 46', async ({ page }) => {
+    await loginAsPhysician(page);
+    await page.goto('/epis2/dashboard?tab=icu');
+    await expect(page.getByTestId('epis2-icu-neurological')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-neurological-rows')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-idc-46')).toBeVisible();
+  });
+
+  test('tablero UCI — escalas severidad IDC 47', async ({ page }) => {
+    await loginAsPhysician(page);
+    await page.goto('/epis2/dashboard?tab=icu');
+    await expect(page.getByTestId('epis2-icu-severity-scales')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-severity-scales-rows')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-idc-47')).toBeVisible();
+  });
+
+  test('tablero UCI — titulación vasoactivos IDC 48', async ({ page }) => {
+    await loginAsPhysician(page);
+    await page.goto('/epis2/dashboard?tab=icu');
+    await expect(page.getByTestId('epis2-icu-vasoactive')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-vasoactive-rows')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-idc-48')).toBeVisible();
+  });
+
+  test('tablero UCI — sedoanalgesia IDC 49', async ({ page }) => {
+    await loginAsPhysician(page);
+    await page.goto('/epis2/dashboard?tab=icu');
+    await expect(page.getByTestId('epis2-icu-sedoanalgesia')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-sedoanalgesia-rows')).toBeVisible();
+    await expect(page.getByTestId('epis2-icu-idc-49')).toBeVisible();
+  });
+
   test('tablero UCI — epicrisis traslado IDC 50', async ({ page }) => {
     await loginAsPhysician(page);
     await page.goto('/epis2/dashboard?tab=icu');

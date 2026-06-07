@@ -196,6 +196,76 @@ export function IcuDashboardTab({
           ))}
         </List>
       </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-neurological">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.neurologicalTitle}
+        </Typography>
+        <List dense data-testid="epis2-icu-neurological-rows">
+          {data.neurological.map((row) => (
+            <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.patientDisplayName}
+                secondary={`GCS ${row.gcsTotal} · ${row.pupils} · ${row.motorResponse}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-severity-scales">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.severityScalesTitle}
+        </Typography>
+        <List dense data-testid="epis2-icu-severity-scales-rows">
+          {data.severityScales.map((row, index) => (
+            <ListItem
+              key={`${row.patientDisplayName}-${row.scaleName}-${index}`}
+              disablePadding
+              sx={{ py: 0.25 }}
+            >
+              <ListItemText
+                primary={`${row.patientDisplayName} — ${row.scaleName} ${row.score}`}
+                secondary={row.interpretation}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-vasoactive">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.vasoactiveTitle}
+        </Typography>
+        <List dense data-testid="epis2-icu-vasoactive-rows">
+          {data.vasoactive.map((row) => (
+            <ListItem key={`${row.patientDisplayName}-${row.agent}`} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={`${row.patientDisplayName} — ${row.agent}`}
+                secondary={`${row.rateMcgKgMin} mcg/kg/min · PAM objetivo ${row.mapTarget}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-sedoanalgesia">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.icu.sedoanalgesiaTitle}
+        </Typography>
+        {data.sedoanalgesia.length === 0 ? (
+          <Typography variant="body2" color="text.secondary">
+            {copy.longitudinal.emptySection}
+          </Typography>
+        ) : (
+          <List dense data-testid="epis2-icu-sedoanalgesia-rows">
+            {data.sedoanalgesia.map((row) => (
+              <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
+                <ListItemText
+                  primary={row.patientDisplayName}
+                  secondary={`${row.sedative} · ${row.analgesic} · RASS ${row.rassScore}`}
+                />
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </Paper>
       <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-icu-discharge-actions">
         <Typography variant="subtitle2" gutterBottom>
           {copy.icu.dischargeActionsTitle}

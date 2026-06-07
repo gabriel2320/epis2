@@ -264,6 +264,34 @@ export const icuInvasiveLineRowSchema = z.object({
   daysInPlace: z.number().int(),
 });
 
+export const icuNeurologicalRowSchema = z.object({
+  patientDisplayName: z.string(),
+  gcsTotal: z.number().int(),
+  pupils: z.string(),
+  motorResponse: z.string(),
+});
+
+export const icuSeverityScaleRowSchema = z.object({
+  patientDisplayName: z.string(),
+  scaleName: z.string(),
+  score: z.number().int(),
+  interpretation: z.string(),
+});
+
+export const icuVasoactiveRowSchema = z.object({
+  patientDisplayName: z.string(),
+  agent: z.string(),
+  rateMcgKgMin: z.number(),
+  mapTarget: z.number().int(),
+});
+
+export const icuSedoanalgesiaRowSchema = z.object({
+  patientDisplayName: z.string(),
+  sedative: z.string(),
+  analgesic: z.string(),
+  rassScore: z.number().int(),
+});
+
 export const icuDashboardResponseSchema = z.object({
   readOnly: z.literal(true),
   roleView: z.enum(['physician', 'nurse', 'admin']),
@@ -275,6 +303,10 @@ export const icuDashboardResponseSchema = z.object({
   fluidBalance: z.array(icuFluidBalanceRowSchema),
   ventilation: z.array(icuVentilationRowSchema),
   invasiveLines: z.array(icuInvasiveLineRowSchema),
+  neurological: z.array(icuNeurologicalRowSchema),
+  severityScales: z.array(icuSeverityScaleRowSchema),
+  vasoactive: z.array(icuVasoactiveRowSchema),
+  sedoanalgesia: z.array(icuSedoanalgesiaRowSchema),
   metrics: z.object({
     occupied: z.number().int(),
     available: z.number().int(),

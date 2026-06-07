@@ -5,26 +5,26 @@
     "canon": "EPIS2_WAVE_EXECUTION_CANON.md",
     "totals": {
       "estado": {
-        "Planned": 122,
-        "Active": 40,
+        "Planned": 118,
+        "Active": 44,
         "Blocked": 1,
         "Done": 37
       },
       "prioridad": {
         "Critical": 9,
-        "High": 52,
-        "Medium": 88,
+        "High": 56,
+        "Medium": 84,
         "Low": 51
       },
       "horizonte": {
         "Core": 40,
-        "Post-core": 96,
-        "Future": 64
+        "Post-core": 100,
+        "Future": 60
       },
       "decision": {
-        "Build": 133,
+        "Build": 137,
         "Integrate": 5,
-        "Defer": 60,
+        "Defer": 56,
         "Exclude": 2
       }
     }
@@ -575,48 +575,48 @@
       "nombre": "Valoración neurológica",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI Tramo D; duplica 131–140"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Valoración neurológica demo MF-TRAMO-D-009"
     },
     {
       "idc": 47,
       "nombre": "Escalas severidad",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI Tramo D; duplica 131–140"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Escalas severidad demo MF-TRAMO-D-010"
     },
     {
       "idc": 48,
       "nombre": "Titulación vasoactivos",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI Tramo D; duplica 131–140"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Titulación vasoactivos demo MF-TRAMO-D-011"
     },
     {
       "idc": 49,
       "nombre": "Sedoanalgesia",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI Tramo D; duplica 131–140"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Sedoanalgesia demo MF-TRAMO-D-012"
     },
     {
       "idc": 50,

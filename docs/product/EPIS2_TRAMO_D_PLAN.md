@@ -21,9 +21,13 @@ UCI · pabellón · anestesia · obstetricia · odontología · telemedicina · 
 | Balance hídrico | 43 | ✅ **MF-TRAMO-D-005** |
 | Ventilación | 44 | ✅ **MF-TRAMO-D-006** |
 | Vías invasivas | 45 | ✅ **MF-TRAMO-D-007** |
+| Valoración neurológica | 46 | ✅ **MF-TRAMO-D-009** |
+| Escalas severidad | 47 | ✅ **MF-TRAMO-D-010** |
+| Titulación vasoactivos | 48 | ✅ **MF-TRAMO-D-011** |
+| Sedoanalgesia | 49 | ✅ **MF-TRAMO-D-012** |
 | Epicrisis traslado UCI | 50 | ✅ **MF-TRAMO-D-008** |
 | Hemodinámica | 135 | ✅ **MF-TRAMO-D-004** |
-| UCI 46–49, 131–134, 136–140 | — | Defer Future |
+| UCI 131–134, 136–140 | — | Defer Future |
 | **Cierre scaffold UCI** | — | ✅ **MF-TRAMO-D-CLOSURE** |
 | Pabellón 121–130 | — | Defer Ola 12 |
 
@@ -35,6 +39,7 @@ UCI · pabellón · anestesia · obstetricia · odontología · telemedicina · 
 |----|---------|--------|
 | MF-TRAMO-D-001 | Inventario UCI | ✅ |
 | MF-TRAMO-D-002 … D-008 | Scaffold tablero UCI | ✅ |
+| MF-TRAMO-D-009 … D-012 | UCI aguda demo (46–49) | ✅ |
 | MF-TRAMO-D-CLOSURE | Cierre técnico Tramo D (UCI demo) | ✅ |
 
 ---

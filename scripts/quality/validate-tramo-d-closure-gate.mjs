@@ -19,6 +19,10 @@ const gates = [
   'validate-tramo-d-ventilation-gate.mjs',
   'validate-tramo-d-invasive-gate.mjs',
   'validate-tramo-d-icu-discharge-gate.mjs',
+  'validate-tramo-d-neurological-gate.mjs',
+  'validate-tramo-d-severity-scales-gate.mjs',
+  'validate-tramo-d-vasoactive-gate.mjs',
+  'validate-tramo-d-sedoanalgesia-gate.mjs',
 ];
 
 for (const gate of gates) {
@@ -34,13 +38,17 @@ for (const mf of [
   'MF-TRAMO-D-006',
   'MF-TRAMO-D-007',
   'MF-TRAMO-D-008',
+  'MF-TRAMO-D-009',
+  'MF-TRAMO-D-010',
+  'MF-TRAMO-D-011',
+  'MF-TRAMO-D-012',
   'MF-TRAMO-D-CLOSURE',
 ]) {
   if (!plan.includes(mf)) errors.push(`plan sin ${mf}`);
 }
 
 const matrix = readFileSync(join(root, 'scripts/product/generate-idc-matrix.mjs'), 'utf8');
-for (const id of [41, 42, 43, 44, 45, 50, 135]) {
+for (const id of [41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 135]) {
   if (!matrix.includes(`${id}: { estado: 'Active'`)) {
     errors.push(`IDC ${id} no Active — Tramo D incompleto`);
   }

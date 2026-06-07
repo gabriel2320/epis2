@@ -11,7 +11,7 @@
 Workspace icu → tablero monitorización → sábana · balance · ventilación · invasivos · epicrisis traslado
 ```
 
-**Estado:** ✅ **Cerrado técnicamente** (scaffold demo UCI IDC 41–45, 50, 135). Signoff clínico e IDC 46–49 pendientes.
+**Estado:** ✅ **Cerrado técnicamente** (scaffold demo UCI IDC 41–50, 135). Signoff clínico pendiente.
 
 ---
 
@@ -27,6 +27,10 @@ Workspace icu → tablero monitorización → sábana · balance · ventilación
 | MF-TRAMO-D-006 | Ventilación | 44 Active |
 | MF-TRAMO-D-007 | Vías invasivas | 45 Active |
 | MF-TRAMO-D-008 | Epicrisis traslado UCI | 50 Active |
+| MF-TRAMO-D-009 | Valoración neurológica | 46 Active |
+| MF-TRAMO-D-010 | Escalas severidad | 47 Active |
+| MF-TRAMO-D-011 | Titulación vasoactivos | 48 Active |
+| MF-TRAMO-D-012 | Sedoanalgesia | 49 Active |
 
 ---
 
@@ -42,21 +46,24 @@ Workspace icu → tablero monitorización → sábana · balance · ventilación
 | `quality:tramo-d-ventilation-gate` | IDC 44 |
 | `quality:tramo-d-invasive-gate` | IDC 45 |
 | `quality:tramo-d-icu-discharge-gate` | IDC 50 |
+| `quality:tramo-d-neurological-gate` | IDC 46 |
+| `quality:tramo-d-severity-scales-gate` | IDC 47 |
+| `quality:tramo-d-vasoactive-gate` | IDC 48 |
+| `quality:tramo-d-sedoanalgesia-gate` | IDC 49 |
 | `quality:tramo-d-closure-gate` | Este documento |
 
 ---
 
 ## Excepciones / Defer
 
-- **IDC 46–49** — neurológico, escalas, vasoactivos, sedoanalgesia: Planned Future
 - **IDC 131–134, 136–140** — UCI especializada: Planned Future
 - **IDC 41** — tensión con `admission_note` ingreso clínico (ver inventario)
-- **Pabellón 121–130** — fuera de alcance scaffold D
+- **Pabellón 151–160** — Ola 15, fuera de alcance scaffold D
 
 ---
 
 ## Próximo tramo global
 
-Signoff clínico Tramos A–D · `quality:golden-journey` · pabellón Ola 12.
+Signoff clínico Tramos A–D · `quality:golden-journey` · pabellón Ola 15 (IDC 151–160).
 
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*

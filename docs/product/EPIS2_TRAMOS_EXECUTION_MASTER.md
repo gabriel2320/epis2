@@ -11,7 +11,7 @@
 | **A** Clínico demostrable | ✅ Cerrado | 21–40 (38 Defer) | `quality:tramo-a-closure-gate` |
 | **B** Piloto ambulatorio | ✅ UI demo | 2–10 (6,10 Active) | `quality:tramo-b-ui-gate` |
 | **C** Hospitalización + urgencias | ✅ Cerrado técnico | 111·116·58 Done; 110 Active | `quality:tramo-c-closure-gate` |
-| **D** Programas especializados | ✅ Cerrado técnico (UCI demo) | 41–45·50·135 Active | `quality:tramo-d-closure-gate` |
+| **D** Programas especializados | ✅ Cerrado técnico (UCI demo) | 41–50·135 Active | `quality:tramo-d-closure-gate` |
 
 ---
 
@@ -36,7 +36,7 @@
 
 1. Signoff clínico institucional Tramos A–D
 2. `quality:golden-journey` antes de piloto hospitalario
-3. Pabellón Ola 12 (IDC 121–130) — post signoff
+3. Pabellón Ola 15 (IDC 151–160) — post signoff
 
 ---
 

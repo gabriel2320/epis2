@@ -13,10 +13,10 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 122 · Active: 40 · Blocked: 1 · Done: 37 |
-| **Prioridad** | Critical: 9 · High: 52 · Medium: 88 · Low: 51 |
-| **Horizonte** | Core: 40 · Post-core: 96 · Future: 64 |
-| **Decisión** | Build: 133 · Integrate: 5 · Defer: 60 · Exclude: 2 |
+| **Estado** | Planned: 118 · Active: 44 · Blocked: 1 · Done: 37 |
+| **Prioridad** | Critical: 9 · High: 56 · Medium: 84 · Low: 51 |
+| **Horizonte** | Core: 40 · Post-core: 100 · Future: 60 |
+| **Decisión** | Build: 137 · Integrate: 5 · Defer: 56 · Exclude: 2 |
 
 ### Leyenda
 
@@ -100,10 +100,10 @@
 | 43 | Balance hídrico estricto | 13 | icu | Active | High | Post-core | Build | PARTIAL | Balance hídrico demo MF-TRAMO-D-005 |
 | 44 | Parámetros ventilación | 13 | icu | Active | High | Post-core | Build | PARTIAL | Ventilación demo MF-TRAMO-D-006 |
 | 45 | Vías venosas e invasivos | 13 | icu | Active | High | Post-core | Build | PARTIAL | Vías invasivas demo MF-TRAMO-D-007 |
-| 46 | Valoración neurológica | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
-| 47 | Escalas severidad | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
-| 48 | Titulación vasoactivos | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
-| 49 | Sedoanalgesia | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
+| 46 | Valoración neurológica | 13 | icu | Active | High | Post-core | Build | PARTIAL | Valoración neurológica demo MF-TRAMO-D-009 |
+| 47 | Escalas severidad | 13 | icu | Active | High | Post-core | Build | PARTIAL | Escalas severidad demo MF-TRAMO-D-010 |
+| 48 | Titulación vasoactivos | 13 | icu | Active | High | Post-core | Build | PARTIAL | Titulación vasoactivos demo MF-TRAMO-D-011 |
+| 49 | Sedoanalgesia | 13 | icu | Active | High | Post-core | Build | PARTIAL | Sedoanalgesia demo MF-TRAMO-D-012 |
 | 50 | Epicrisis traslado UCI | 13 | icu | Active | High | Post-core | Build | PARTIAL | Epicrisis traslado UCI MF-TRAMO-D-008 |
 
 ## Prescripción y órdenes (51–60)
