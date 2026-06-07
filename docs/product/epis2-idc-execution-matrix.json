@@ -5,26 +5,26 @@
     "canon": "EPIS2_WAVE_EXECUTION_CANON.md",
     "totals": {
       "estado": {
-        "Planned": 129,
-        "Active": 33,
+        "Planned": 126,
+        "Active": 36,
         "Blocked": 1,
         "Done": 37
       },
       "prioridad": {
         "Critical": 9,
-        "High": 45,
-        "Medium": 95,
+        "High": 48,
+        "Medium": 92,
         "Low": 51
       },
       "horizonte": {
         "Core": 40,
-        "Post-core": 89,
-        "Future": 71
+        "Post-core": 92,
+        "Future": 68
       },
       "decision": {
-        "Build": 126,
+        "Build": 129,
         "Integrate": 5,
-        "Defer": 67,
+        "Defer": 64,
         "Exclude": 2
       }
     }
@@ -515,24 +515,24 @@
       "nombre": "Dashboard monitorización UCI",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI Tramo D; duplica 131–140"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "IcuDashboardTab MF-TRAMO-D-002"
     },
     {
       "idc": 42,
       "nombre": "Sábana clínica (flujograma)",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI Tramo D; duplica 131–140"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Sábana clínica demo MF-TRAMO-D-003"
     },
     {
       "idc": 43,
@@ -1643,12 +1643,12 @@
       "nombre": "Monitorización hemodinámica",
       "ola": "13",
       "workspace": "icu",
-      "estado": "Planned",
-      "prioridad": "Medium",
-      "horizonte": "Future",
-      "decision": "Defer",
-      "legacyEstado": "DEFERRED",
-      "nota": "UCI especializada Tramo D"
+      "estado": "Active",
+      "prioridad": "High",
+      "horizonte": "Post-core",
+      "decision": "Build",
+      "legacyEstado": "PARTIAL",
+      "nota": "Hemodinámica demo MF-TRAMO-D-004"
     },
     {
       "idc": 136,

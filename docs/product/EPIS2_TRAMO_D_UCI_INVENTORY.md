@@ -34,8 +34,9 @@ Nutrición · terapias renales · hemodinámica · muerte encefálica · procura
 
 ## Workspace EPIS2 hoy
 
-- Rail `icu` presente con ítems **disabled** hasta signoff Tramo C.
-- Blueprints existentes: `admission_note`, `nursing_note`, `transfer_note` (≠ pantallas UCI completas).
+- Rail `icu` **habilitado** — MF-TRAMO-D-002 (`/epis2/dashboard?tab=icu`).
+- Tablero `IcuDashboardTab` — IDC 41 Active, sábana IDC 42, hemodinámica IDC 135.
+- Entrega turno → `/espacio/enfermeria` (≠ dashboard UCI IDC 41 ingreso clínico).
 
 ---
 

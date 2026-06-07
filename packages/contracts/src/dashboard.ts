@@ -210,3 +210,50 @@ export const emergencyDashboardResponseSchema = z.object({
 });
 
 export type EmergencyDashboardResponse = z.infer<typeof emergencyDashboardResponseSchema>;
+
+/** MF-TRAMO-D-002 — Tablero UCI (IDC 41–50, 131–140). */
+export const icuIdcPanelSchema = z.object({
+  idc: z.number().int(),
+  label: z.string(),
+  status: z.enum(['active', 'planned']),
+});
+
+export const icuCriticalBedRowSchema = z.object({
+  bedId: z.string(),
+  bedLabel: z.string(),
+  patientId: z.string().uuid().optional(),
+  patientDisplayName: z.string().optional(),
+  demoCaseCode: z.string().optional(),
+  onVentilator: z.boolean(),
+});
+
+export const icuFlowsheetHourRowSchema = z.object({
+  hourLabel: z.string(),
+  heartRate: z.number().int(),
+  map: z.number().int(),
+  spo2: z.number().int(),
+});
+
+export const icuHemodynamicsRowSchema = z.object({
+  patientDisplayName: z.string(),
+  map: z.number().int(),
+  cvp: z.number().int(),
+  lactate: z.number(),
+});
+
+export const icuDashboardResponseSchema = z.object({
+  readOnly: z.literal(true),
+  roleView: z.enum(['physician', 'nurse', 'admin']),
+  idcPanels: z.array(icuIdcPanelSchema),
+  specializedPanels: z.array(icuIdcPanelSchema),
+  criticalBeds: z.array(icuCriticalBedRowSchema),
+  flowsheetHours: z.array(icuFlowsheetHourRowSchema),
+  hemodynamics: z.array(icuHemodynamicsRowSchema),
+  metrics: z.object({
+    occupied: z.number().int(),
+    available: z.number().int(),
+    onVentilator: z.number().int(),
+  }),
+});
+
+export type IcuDashboardResponse = z.infer<typeof icuDashboardResponseSchema>;

@@ -1,6 +1,7 @@
 import type {
   DashboardWorkResponse,
   EmergencyDashboardResponse,
+  IcuDashboardResponse,
   NursingDashboardResponse,
   PatientDashboardResponse,
   PharmacyDashboardResponse,
@@ -36,6 +37,10 @@ export function fetchReceptionDashboard() {
 
 export function fetchEmergencyDashboard() {
   return apiFetch<EmergencyDashboardResponse>('/api/dashboard/emergency');
+}
+
+export function fetchIcuDashboard() {
+  return apiFetch<IcuDashboardResponse>('/api/dashboard/icu');
 }
 
 export function acknowledgeCriticalResult(criticalId: string) {

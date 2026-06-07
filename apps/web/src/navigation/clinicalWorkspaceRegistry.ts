@@ -57,9 +57,9 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
     labelKey: 'workspaces.icu.label',
     descriptionKey: 'workspaces.icu.description',
     railItems: [
-      { id: 'bed-map', labelKey: 'workspaces.icu.rail.bedMap', route: '/epis2/dashboard?tab=service', disabled: true },
-      { id: 'monitoring', labelKey: 'workspaces.icu.rail.monitoring', route: '/epis2/dashboard?tab=nursing', disabled: true },
-      { id: 'handover', labelKey: 'workspaces.icu.rail.handover', route: '/espacio/enfermeria', disabled: true },
+      { id: 'bed-map', labelKey: 'workspaces.icu.rail.bedMap', route: '/epis2/dashboard?tab=icu' },
+      { id: 'monitoring', labelKey: 'workspaces.icu.rail.monitoring', route: '/epis2/dashboard?tab=icu' },
+      { id: 'handover', labelKey: 'workspaces.icu.rail.handover', route: '/espacio/enfermeria' },
     ],
     patientTabIds: ['flowsheet', 'evolution', 'nursing', 'iv_therapy', 'labs'],
     primaryFabKey: 'workspaces.icu.fab',
@@ -137,6 +137,7 @@ export function getWorkspaceDefaultRoute(id: EpisClinicalWorkspaceId): Workspace
   if (id === 'command') return { to: '/comando' };
   if (id === 'reception') return { to: '/epis2/dashboard', search: { tab: 'reception' } };
   if (id === 'emergency') return { to: '/epis2/dashboard', search: { tab: 'emergency' } };
+  if (id === 'icu') return { to: '/epis2/dashboard', search: { tab: 'icu' } };
   const def = CLINICAL_WORKSPACE_DEFINITIONS[id];
   const firstEnabled = def.railItems.find((item) => !item.disabled) ?? def.railItems[0];
   if (!firstEnabled) return { to: '/comando' };

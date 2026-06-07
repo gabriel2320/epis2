@@ -16,6 +16,7 @@ import { lazy, Suspense, useCallback, useEffect, useMemo, useState, type ReactNo
 import {
   fetchDashboardWork,
   fetchEmergencyDashboard,
+  fetchIcuDashboard,
   fetchNursingDashboard,
   fetchPatientDashboard,
   fetchPharmacyDashboard,
@@ -26,6 +27,7 @@ import { fetchQualityDashboard } from '../api/opsApi.js';
 import type {
   DashboardWorkResponse,
   EmergencyDashboardResponse,
+  IcuDashboardResponse,
   NursingDashboardResponse,
   PatientDashboardResponse,
   PharmacyDashboardResponse,
@@ -48,6 +50,7 @@ import { PharmacyDashboardTab } from '../components/PharmacyDashboardTab.js';
 import { ServiceDashboardTab } from '../components/ServiceDashboardTab.js';
 import { ReceptionDashboardTab } from '../components/ReceptionDashboardTab.js';
 import { EmergencyDashboardTab } from '../components/EmergencyDashboardTab.js';
+import { IcuDashboardTab } from '../components/IcuDashboardTab.js';
 
 const LazyDashboardWorklists = lazy(() =>
   import('../components/DashboardWorklists.js').then((m) => ({
@@ -68,12 +71,14 @@ export function DashboardModeContent() {
     role === 'pharmacist' || role === 'physician' || role === 'admin';
   const canReception = role === 'admin' || role === 'nurse' || role === 'physician';
   const canEmergency = role === 'admin' || role === 'nurse' || role === 'physician';
+  const canIcu = role === 'admin' || role === 'nurse' || role === 'physician';
   const { patient: activePatient, setPatient } = useActivePatient();
   const tab = (
     search.tab === 'patient' ||
     search.tab === 'service' ||
     (search.tab === 'reception' && canReception) ||
     (search.tab === 'emergency' && canEmergency) ||
+    (search.tab === 'icu' && canIcu) ||
     (search.tab === 'nursing' && canNursing) ||
     (search.tab === 'pharmacy' && canPharmacy) ||
     (search.tab === 'quality' && canQuality)
@@ -90,6 +95,7 @@ export function DashboardModeContent() {
   const [qualityBoard, setQualityBoard] = useState<QualityDashboardResponse | null>(null);
   const [receptionBoard, setReceptionBoard] = useState<ReceptionDashboardResponse | null>(null);
   const [emergencyBoard, setEmergencyBoard] = useState<EmergencyDashboardResponse | null>(null);
+  const [icuBoard, setIcuBoard] = useState<IcuDashboardResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | undefined>();
   const [recentPatients, setRecentPatients] = useState(readRecentPatients());
@@ -186,6 +192,19 @@ export function DashboardModeContent() {
     }
   }, []);
 
+  const loadIcu = useCallback(async () => {
+    setLoading(true);
+    setError(undefined);
+    try {
+      const res = await fetchIcuDashboard();
+      setIcuBoard(res);
+    } catch {
+      setError(copy.errors.genericMessage);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   const loadPatient = useCallback(async (patientId: string) => {
     setLoading(true);
     setError(undefined);
@@ -207,6 +226,7 @@ export function DashboardModeContent() {
     if (tab === 'quality' && canQuality) void loadQuality();
     if (tab === 'reception' && canReception) void loadReception();
     if (tab === 'emergency' && canEmergency) void loadEmergency();
+    if (tab === 'icu' && canIcu) void loadIcu();
     if (tab === 'patient' && dashboardPatientId) void loadPatient(dashboardPatientId);
     if (tab === 'patient' && !dashboardPatientId) {
       setLoading(false);
@@ -221,11 +241,13 @@ export function DashboardModeContent() {
     loadQuality,
     loadReception,
     loadEmergency,
+    loadIcu,
     loadPatient,
     dashboardPatientId,
     canQuality,
     canReception,
     canEmergency,
+    canIcu,
     canNursing,
     canPharmacy,
   ]);
@@ -293,8 +315,15 @@ export function DashboardModeContent() {
         'data-testid': 'epis2-dashboard-tab-emergency',
       });
     }
+    if (canIcu) {
+      items.push({
+        value: 'icu',
+        label: copy.dashboard.tabIcu,
+        'data-testid': 'epis2-dashboard-tab-icu',
+      });
+    }
     return items;
-  }, [canQuality, canNursing, canPharmacy, canReception, canEmergency]);
+  }, [canQuality, canNursing, canPharmacy, canReception, canEmergency, canIcu]);
 
   const openPatient = (pid: string) => {
     const p = recentPatients.find((r) => r.id === pid);
@@ -494,6 +523,28 @@ export function DashboardModeContent() {
               if (p) setPatient(p);
               void navigate({
                 to: '/espacio/epicrisis',
+                search: { patientId: pid },
+              });
+            }}
+          />
+        ) : null}
+      </>
+    );
+  } else if (tab === 'icu') {
+    panel = (
+      <>
+        {error ? <Alert severity="error">{error}</Alert> : null}
+        {loading ? (
+          <Typography color="text.secondary">{copy.dashboard.loading}</Typography>
+        ) : icuBoard ? (
+          <IcuDashboardTab
+            data={icuBoard}
+            onOpenPatient={openPatient}
+            onOpenHandover={(pid) => {
+              const p = recentPatients.find((r) => r.id === pid);
+              if (p) setPatient(p);
+              void navigate({
+                to: '/espacio/enfermeria',
                 search: { patientId: pid },
               });
             }}

@@ -78,6 +78,7 @@ export const copy = {
     tabQualityRestricted: 'Tablero de calidad — requiere rol auditor o administrador.',
     tabReception: 'Recepción',
     tabEmergency: 'Urgencias',
+    tabIcu: 'UCI',
     gridColumnTitle: 'Título',
     gridColumnPatient: 'Paciente',
     gridColumnType: 'Tipo',
@@ -170,6 +171,20 @@ export const copy = {
       observation: 'En observación',
       discharged: 'Altas hoy',
       observationBeds: 'Camas observación',
+    },
+  },
+  icu: {
+    disclosure: 'UCI demo — workspace propio. No sustituye monitor central ni telemetría real.',
+    idcPanelsTitle: 'Capacidades UCI (IDC 41–50)',
+    bedMapTitle: 'Mapa de camas críticas (demo)',
+    flowsheetTitle: 'Sábana clínica 24h (IDC 42)',
+    hemodynamicsTitle: 'Monitorización hemodinámica (IDC 135)',
+    onVentilator: 'Ventilación mecánica',
+    openPatientChart: 'Ver ficha',
+    metrics: {
+      occupied: 'Camas ocupadas',
+      available: 'Camas disponibles',
+      onVentilator: 'En ventilación',
     },
   },
   inpatient: {

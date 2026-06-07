@@ -1,6 +1,7 @@
 import {
   dashboardWorkResponseSchema,
   emergencyDashboardResponseSchema,
+  icuDashboardResponseSchema,
   nursingDashboardResponseSchema,
   patientDashboardResponseSchema,
   pharmacyDashboardResponseSchema,
@@ -24,6 +25,7 @@ import { getNursingDashboardSummary } from './nursing.js';
 import { getPharmacyDashboardSummary } from './pharmacy.js';
 import { getReceptionDashboardSummary } from './reception.js';
 import { getEmergencyDashboardSummary } from './emergency.js';
+import { getIcuDashboardSummary } from './icu.js';
 import { DEMO_WORK_TASKS, getDashboardWorkSummary } from './service.js';
 
 export async function registerDashboardRoutes(
@@ -235,6 +237,34 @@ export async function registerDashboardRoutes(
 
       const summary = await getEmergencyDashboardSummary(db, session.role);
       return emergencyDashboardResponseSchema.parse(summary);
+    },
+  );
+
+  app.get(
+    '/api/dashboard/icu',
+    { preHandler: requireDashboardRead },
+    async (request, reply) => {
+      const session = (request as AuthenticatedRequest).session;
+      if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
+        return reply.status(403).send({ error: 'Tablero UCI no disponible para este rol' });
+      }
+
+      await appendAudit(db, {
+        eventType: 'dashboard.opened',
+        actorId: session.sub,
+        username: session.username,
+        entityType: 'dashboard',
+        entityId: 'icu',
+        message: 'Modo tablero — UCI',
+        payload: { tab: 'icu' },
+      });
+
+      if (!db) {
+        return reply.status(503).send({ error: 'Base de datos no disponible' });
+      }
+
+      const summary = await getIcuDashboardSummary(db, session.role);
+      return icuDashboardResponseSchema.parse(summary);
     },
   );
 }

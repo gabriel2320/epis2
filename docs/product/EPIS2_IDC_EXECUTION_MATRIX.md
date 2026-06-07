@@ -13,10 +13,10 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 129 · Active: 33 · Blocked: 1 · Done: 37 |
-| **Prioridad** | Critical: 9 · High: 45 · Medium: 95 · Low: 51 |
-| **Horizonte** | Core: 40 · Post-core: 89 · Future: 71 |
-| **Decisión** | Build: 126 · Integrate: 5 · Defer: 67 · Exclude: 2 |
+| **Estado** | Planned: 126 · Active: 36 · Blocked: 1 · Done: 37 |
+| **Prioridad** | Critical: 9 · High: 48 · Medium: 92 · Low: 51 |
+| **Horizonte** | Core: 40 · Post-core: 92 · Future: 68 |
+| **Decisión** | Build: 129 · Integrate: 5 · Defer: 64 · Exclude: 2 |
 
 ### Leyenda
 
@@ -95,8 +95,8 @@
 
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
-| 41 | Dashboard monitorización UCI | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
-| 42 | Sábana clínica (flujograma) | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
+| 41 | Dashboard monitorización UCI | 13 | icu | Active | High | Post-core | Build | PARTIAL | IcuDashboardTab MF-TRAMO-D-002 |
+| 42 | Sábana clínica (flujograma) | 13 | icu | Active | High | Post-core | Build | PARTIAL | Sábana clínica demo MF-TRAMO-D-003 |
 | 43 | Balance hídrico estricto | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
 | 44 | Parámetros ventilación | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
 | 45 | Vías venosas e invasivos | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI Tramo D; duplica 131–140 |
@@ -234,7 +234,7 @@
 | 132 | Terapias renales continuas | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
 | 133 | Nutrición parenteral total | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
 | 134 | Nutrición enteral | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
-| 135 | Monitorización hemodinámica | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
+| 135 | Monitorización hemodinámica | 13 | icu | Active | High | Post-core | Build | PARTIAL | Hemodinámica demo MF-TRAMO-D-004 |
 | 136 | Muerte encefálica | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
 | 137 | Procuramiento órganos | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |
 | 138 | Diario UCI (humanización) | 13 | icu | Planned | Medium | Future | Defer | DEFERRED | UCI especializada Tramo D |

@@ -33,7 +33,8 @@ export type DashboardTab =
   | 'pharmacy'
   | 'quality'
   | 'reception'
-  | 'emergency';
+  | 'emergency'
+  | 'icu';
 
 export type DashboardSearch = { tab?: DashboardTab; patientId?: string };
 

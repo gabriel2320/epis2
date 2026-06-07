@@ -125,6 +125,18 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     ola: '10',
     notes: 'MF-TRAMO-C-002 workspace emergency',
   },
+  {
+    id: 'dashboard-icu',
+    labelEs: 'UCI',
+    route: '/epis2/dashboard?tab=icu',
+    kind: 'dashboard_tab',
+    workspace: 'icu',
+    md3Level: 0,
+    status: 'partial',
+    idcRefs: [41, 42, 135],
+    ola: '13',
+    notes: 'MF-TRAMO-D-002 workspace icu',
+  },
 ];
 
 const BLUEPRINT_IDC_MAP: Record<string, { idc: readonly number[]; status: EpisNavigationSurfaceStatus; workspace: EpisClinicalWorkspaceId; tab?: PatientChartTabId; ola?: string; notes?: string }> = {
