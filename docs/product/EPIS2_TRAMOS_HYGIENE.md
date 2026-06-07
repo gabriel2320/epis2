@@ -1,4 +1,4 @@
-# EPIS2 — Higiene tramos A–G
+# EPIS2 — Higiene tramos A–H
 
 **Fecha:** 2026-06-07 · **Gate:** `npm run quality:tramos-hygiene-gate`
 
@@ -6,7 +6,7 @@
 
 ## Alcance
 
-Sanear fases A–G cerradas técnicamente: documentación simétrica, gates registrados, auditorías obsoletas marcadas, plan maestro como índice único.
+Sanear fases A–H cerradas técnicamente: documentación simétrica, gates registrados, auditorías obsoletas marcadas, plan maestro como índice único.
 
 ---
 
@@ -21,6 +21,7 @@ Sanear fases A–G cerradas técnicamente: documentación simétrica, gates regi
 | **E** | `EPIS2_TRAMO_E_CLOSURE.md` | `quality:tramo-e-closure-gate` | `EPIS2_TRAMO_E_PLAN.md` · inventario OR |
 | **F** | `EPIS2_TRAMO_F_CLOSURE.md` | `quality:tramo-f-closure-gate` | `EPIS2_TRAMO_F_PLAN.md` · inventario APS |
 | **G** | `EPIS2_TRAMO_G_CLOSURE.md` | `quality:tramo-g-closure-gate` | `EPIS2_TRAMO_G_PLAN.md` · UCI especializada |
+| **H** | `EPIS2_TRAMO_H_CLOSURE.md` | `quality:tramo-h-closure-gate` | `EPIS2_TRAMO_H_PLAN.md` · IAAS avanzada |
 
 **Plan maestro:** [`EPIS2_TRAMOS_EXECUTION_MASTER.md`](./EPIS2_TRAMOS_EXECUTION_MASTER.md)
 
@@ -37,6 +38,7 @@ npm run quality:tramo-d-closure-gate
 npm run quality:tramo-e-closure-gate
 npm run quality:tramo-f-closure-gate
 npm run quality:tramo-g-closure-gate
+npm run quality:tramo-h-closure-gate
 npm run quality:golden-journey
 ```
 
@@ -48,7 +50,7 @@ npm run quality:golden-journey
 |-----------|--------|
 | `reports/epis2-audit-2026-06-07.md` | Métricas pre-cierre A–F |
 | `reports/epis2-audit-reconcile-2026-06-07.md` | Conciliación pre-Tramo E |
-| `reports/epis2-tramos-abcd-execution-2026-06-07.md` | Solo A–D; ver A–E / A–F / A–G |
+| `reports/epis2-tramos-abcd-execution-2026-06-07.md` | Solo A–D; ver plan maestro A–H |
 
 **Fuente de verdad actual:** plan maestro + cierres por tramo + matriz IDC regenerada.
 

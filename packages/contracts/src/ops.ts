@@ -126,6 +126,91 @@ export const qualityDashboardResponseSchema = z.object({
     criticalUnacked: z.number().int(),
   }),
   ops: opsStatusResponseSchema.omit({ readOnly: true }),
+  /** MF-TRAMO-H-002 … H-011 — IAAS avanzada (IDC 141–150). */
+  iaasAdvancedPanels: z.array(
+    z.object({
+      idc: z.number().int(),
+      label: z.string(),
+      status: z.enum(['active', 'planned']),
+    }),
+  ),
+  surveillanceMatrix: z.array(
+    z.object({
+      organism: z.string(),
+      unit: z.string(),
+      casesLast30d: z.number().int(),
+      alertLevel: z.enum(['normal', 'elevated', 'outbreak']),
+    }),
+  ),
+  mdroAlerts: z.array(
+    z.object({
+      patientDisplayName: z.string(),
+      organism: z.string(),
+      isolationType: z.string(),
+      notifiedAt: z.string(),
+    }),
+  ),
+  antimicrobialConsumption: z.array(
+    z.object({
+      antibiotic: z.string(),
+      dddPer1000: z.number(),
+      trend: z.enum(['stable', 'rising', 'falling']),
+    }),
+  ),
+  proaRecommendations: z.array(
+    z.object({
+      patientDisplayName: z.string(),
+      currentRegimen: z.string(),
+      recommendation: z.string(),
+      status: z.enum(['pending', 'accepted', 'rejected']),
+    }),
+  ),
+  cvcInsertionChecklists: z.array(
+    z.object({
+      patientDisplayName: z.string(),
+      insertionSite: z.string(),
+      checklistComplete: z.boolean(),
+      bundleCompliance: z.number().int(),
+    }),
+  ),
+  navPreventionChecklists: z.array(
+    z.object({
+      unit: z.string(),
+      ventilatorDays: z.number().int(),
+      bundleCompliancePercent: z.number().int(),
+    }),
+  ),
+  handHygieneAudits: z.array(
+    z.object({
+      unit: z.string(),
+      opportunities: z.number().int(),
+      compliancePercent: z.number().int(),
+      auditDate: z.string(),
+    }),
+  ),
+  outbreakStudies: z.array(
+    z.object({
+      outbreakCode: z.string(),
+      unit: z.string(),
+      cases: z.number().int(),
+      status: z.enum(['open', 'closed', 'monitoring']),
+    }),
+  ),
+  isolationMap: z.array(
+    z.object({
+      bedLabel: z.string(),
+      patientDisplayName: z.string(),
+      precautionType: z.string(),
+    }),
+  ),
+  endemicCurves: z.array(
+    z.object({
+      indicator: z.string(),
+      endemicRate: z.number(),
+      observedRate: z.number(),
+      periodLabel: z.string(),
+    }),
+  ),
 });
 
 export type AuditEventsResponse = z.infer<typeof auditEventsResponseSchema>;

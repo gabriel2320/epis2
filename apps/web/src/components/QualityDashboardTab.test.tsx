@@ -58,6 +58,24 @@ const qualityBoard: QualityDashboardResponse = {
       rlsTransactions: false,
     },
   },
+  iaasAdvancedPanels: [
+    { idc: 141, label: 'Matriz vigilancia activa', status: 'active' as const },
+    { idc: 150, label: 'Curvas endémicas', status: 'active' as const },
+  ],
+  surveillanceMatrix: [
+    { organism: 'MRSA', unit: 'UCI', casesLast30d: 1, alertLevel: 'normal' as const },
+  ],
+  mdroAlerts: [],
+  antimicrobialConsumption: [
+    { antibiotic: 'Meropenem', dddPer1000: 12, trend: 'stable' as const },
+  ],
+  proaRecommendations: [],
+  cvcInsertionChecklists: [],
+  navPreventionChecklists: [],
+  handHygieneAudits: [],
+  outbreakStudies: [],
+  isolationMap: [],
+  endemicCurves: [],
 };
 
 const { validateHl7Message } = vi.hoisted(() => ({

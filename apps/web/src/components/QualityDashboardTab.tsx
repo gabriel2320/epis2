@@ -7,6 +7,10 @@ import { QualityDashboardGrids } from './QualityDashboardGrids.js';
 import {
   Alert,
   Button,
+  Chip,
+  List,
+  ListItem,
+  ListItemText,
   Paper,
   Stack,
   TextField,
@@ -63,6 +67,184 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
           {copy.interop.metricAudit24h}: {data.ops.counts.auditEvents24h} · {copy.interop.metricAiRuns}:{' '}
           {data.metrics.aiRuns} · {copy.interop.metricCriticalUnacked}: {data.metrics.criticalUnacked}
         </Typography>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-advanced-idc-panels">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.iaas.advancedPanelsTitle}
+        </Typography>
+        <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+          {data.iaasAdvancedPanels.map((panel) => (
+            <Chip
+              key={panel.idc}
+              label={`IDC ${panel.idc}: ${panel.label}`}
+              size="small"
+              color={panel.status === 'active' ? 'secondary' : 'default'}
+              variant={panel.status === 'active' ? 'filled' : 'outlined'}
+              data-testid={`epis2-iaas-idc-${panel.idc}`}
+            />
+          ))}
+        </Stack>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-surveillance-matrix">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.iaas.surveillanceMatrixTitle}
+        </Typography>
+        <List dense data-testid="epis2-iaas-surveillance-matrix-rows">
+          {data.surveillanceMatrix.map((row) => (
+            <ListItem key={`${row.organism}-${row.unit}`} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={`${row.organism} — ${row.unit}`}
+                secondary={`${row.casesLast30d} casos/30d · ${row.alertLevel}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-mdro-alert">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.iaas.mdroAlertTitle}
+        </Typography>
+        <List dense>
+          {data.mdroAlerts.map((row) => (
+            <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.patientDisplayName}
+                secondary={`${row.organism} · ${row.isolationType}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-antimicrobial-monitor">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.iaas.antimicrobialMonitorTitle}
+        </Typography>
+        <List dense>
+          {data.antimicrobialConsumption.map((row) => (
+            <ListItem key={row.antibiotic} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.antibiotic}
+                secondary={`DDD/1000 ${row.dddPer1000} · ${row.trend}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-proa">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.iaas.proaTitle}
+        </Typography>
+        <List dense>
+          {data.proaRecommendations.map((row) => (
+            <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.patientDisplayName}
+                secondary={`${row.currentRegimen} → ${row.recommendation} · ${row.status}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-cvc-checklist">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.iaas.cvcChecklistTitle}
+        </Typography>
+        <List dense>
+          {data.cvcInsertionChecklists.map((row) => (
+            <ListItem key={row.patientDisplayName} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.patientDisplayName}
+                secondary={`${row.insertionSite} · bundle ${row.bundleCompliance}%`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-nav-prevention">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.iaas.navPreventionTitle}
+        </Typography>
+        <List dense>
+          {data.navPreventionChecklists.map((row) => (
+            <ListItem key={row.unit} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.unit}
+                secondary={`${row.ventilatorDays} días VM · bundle ${row.bundleCompliancePercent}%`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-hand-hygiene">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.iaas.handHygieneTitle}
+        </Typography>
+        <List dense>
+          {data.handHygieneAudits.map((row) => (
+            <ListItem key={row.unit} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.unit}
+                secondary={`${row.compliancePercent}% · ${row.opportunities} oportunidades · ${row.auditDate}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-outbreak-study">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.iaas.outbreakStudyTitle}
+        </Typography>
+        <List dense>
+          {data.outbreakStudies.map((row) => (
+            <ListItem key={row.outbreakCode} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={`${row.outbreakCode} — ${row.unit}`}
+                secondary={`${row.cases} casos · ${row.status}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-isolation-map">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.iaas.isolationMapTitle}
+        </Typography>
+        <List dense data-testid="epis2-iaas-isolation-map-rows">
+          {data.isolationMap.map((row) => (
+            <ListItem key={`${row.bedLabel}-${row.patientDisplayName}`} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={`${row.bedLabel} — ${row.patientDisplayName}`}
+                secondary={row.precautionType}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+
+      <Paper variant="outlined" sx={{ p: 2 }} data-testid="epis2-iaas-endemic-curves">
+        <Typography variant="subtitle2" gutterBottom>
+          {copy.iaas.endemicCurvesTitle}
+        </Typography>
+        <List dense data-testid="epis2-iaas-endemic-curves-rows">
+          {data.endemicCurves.map((row) => (
+            <ListItem key={row.indicator} disablePadding sx={{ py: 0.25 }}>
+              <ListItemText
+                primary={row.indicator}
+                secondary={`endémico ${row.endemicRate} · observado ${row.observedRate} · ${row.periodLabel}`}
+              />
+            </ListItem>
+          ))}
+        </List>
       </Paper>
 
       <QualityDashboardGrids data={data} />

@@ -5,15 +5,15 @@
     "canon": "EPIS2_WAVE_EXECUTION_CANON.md",
     "totals": {
       "estado": {
-        "Planned": 90,
-        "Active": 72,
+        "Planned": 81,
+        "Active": 81,
         "Blocked": 1,
         "Done": 37
       },
       "prioridad": {
         "Critical": 9,
-        "High": 73,
-        "Medium": 77,
+        "High": 78,
+        "Medium": 72,
         "Low": 41
       },
       "horizonte": {
@@ -1715,24 +1715,24 @@
       "nombre": "Matriz vigilancia activa",
       "ola": "14",
       "workspace": "quality_iaas",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "High",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "Matriz vigilancia demo MF-TRAMO-H-002"
     },
     {
       "idc": 142,
       "nombre": "Alerta MDRO",
       "ola": "14",
       "workspace": "quality_iaas",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "High",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "Alerta MDRO demo MF-TRAMO-H-003"
     },
     {
       "idc": 143,
@@ -1740,95 +1740,95 @@
       "ola": "14",
       "workspace": "quality_iaas",
       "estado": "Active",
-      "prioridad": "Medium",
+      "prioridad": "High",
       "horizonte": "Post-core",
       "decision": "Build",
       "legacyEstado": "PARTIAL",
-      "nota": ""
+      "nota": "Consumo ATB demo MF-TRAMO-H-004"
     },
     {
       "idc": 144,
       "nombre": "PROA",
       "ola": "14",
       "workspace": "quality_iaas",
-      "estado": "Planned",
-      "prioridad": "Medium",
+      "estado": "Active",
+      "prioridad": "High",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "PROA demo MF-TRAMO-H-005"
     },
     {
       "idc": 145,
       "nombre": "Checklist inserción CVC",
       "ola": "14",
       "workspace": "quality_iaas",
-      "estado": "Planned",
-      "prioridad": "Medium",
+      "estado": "Active",
+      "prioridad": "High",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "Checklist CVC demo MF-TRAMO-H-006"
     },
     {
       "idc": 146,
       "nombre": "Checklist prevención NAV",
       "ola": "14",
       "workspace": "quality_iaas",
-      "estado": "Planned",
-      "prioridad": "Medium",
+      "estado": "Active",
+      "prioridad": "High",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "Prevención NAV demo MF-TRAMO-H-007"
     },
     {
       "idc": 147,
       "nombre": "Adherencia higiene de manos",
       "ola": "14",
       "workspace": "quality_iaas",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "Higiene manos demo MF-TRAMO-H-008"
     },
     {
       "idc": 148,
       "nombre": "Estudio brote",
       "ola": "14",
       "workspace": "quality_iaas",
-      "estado": "Planned",
-      "prioridad": "Medium",
+      "estado": "Active",
+      "prioridad": "High",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "Estudio brote demo MF-TRAMO-H-009"
     },
     {
       "idc": 149,
       "nombre": "Mapa aislamientos",
       "ola": "14",
       "workspace": "quality_iaas",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "Mapa aislamientos demo MF-TRAMO-H-010"
     },
     {
       "idc": 150,
       "nombre": "Curvas endémicas",
       "ola": "14",
       "workspace": "quality_iaas",
-      "estado": "Planned",
+      "estado": "Active",
       "prioridad": "Medium",
       "horizonte": "Post-core",
       "decision": "Build",
-      "legacyEstado": "MISSING",
-      "nota": ""
+      "legacyEstado": "PARTIAL",
+      "nota": "Curvas endémicas demo MF-TRAMO-H-011"
     },
     {
       "idc": 151,

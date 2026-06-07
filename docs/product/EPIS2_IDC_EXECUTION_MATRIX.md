@@ -13,8 +13,8 @@
 
 | Campo | Distribución |
 |-------|--------------|
-| **Estado** | Planned: 90 · Active: 72 · Blocked: 1 · Done: 37 |
-| **Prioridad** | Critical: 9 · High: 73 · Medium: 77 · Low: 41 |
+| **Estado** | Planned: 81 · Active: 81 · Blocked: 1 · Done: 37 |
+| **Prioridad** | Critical: 9 · High: 78 · Medium: 72 · Low: 41 |
 | **Horizonte** | Core: 40 · Post-core: 128 · Future: 32 |
 | **Decisión** | Build: 165 · Integrate: 5 · Defer: 28 · Exclude: 2 |
 
@@ -245,16 +245,16 @@
 
 | IDC | Nombre | Ola | Workspace | Estado | Prioridad | Horizonte | Decisión | Legacy | Nota |
 |-----|--------|-----|-----------|--------|-----------|-----------|----------|--------|------|
-| 141 | Matriz vigilancia activa | 14 | quality_iaas | Planned | High | Post-core | Build | MISSING |  |
-| 142 | Alerta MDRO | 14 | quality_iaas | Planned | High | Post-core | Build | MISSING |  |
-| 143 | Monitor consumo antimicrobianos | 14 | quality_iaas | Active | Medium | Post-core | Build | PARTIAL |  |
-| 144 | PROA | 14 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
-| 145 | Checklist inserción CVC | 14 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
-| 146 | Checklist prevención NAV | 14 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
-| 147 | Adherencia higiene de manos | 14 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
-| 148 | Estudio brote | 14 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
-| 149 | Mapa aislamientos | 14 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
-| 150 | Curvas endémicas | 14 | quality_iaas | Planned | Medium | Post-core | Build | MISSING |  |
+| 141 | Matriz vigilancia activa | 14 | quality_iaas | Active | High | Post-core | Build | PARTIAL | Matriz vigilancia demo MF-TRAMO-H-002 |
+| 142 | Alerta MDRO | 14 | quality_iaas | Active | High | Post-core | Build | PARTIAL | Alerta MDRO demo MF-TRAMO-H-003 |
+| 143 | Monitor consumo antimicrobianos | 14 | quality_iaas | Active | High | Post-core | Build | PARTIAL | Consumo ATB demo MF-TRAMO-H-004 |
+| 144 | PROA | 14 | quality_iaas | Active | High | Post-core | Build | PARTIAL | PROA demo MF-TRAMO-H-005 |
+| 145 | Checklist inserción CVC | 14 | quality_iaas | Active | High | Post-core | Build | PARTIAL | Checklist CVC demo MF-TRAMO-H-006 |
+| 146 | Checklist prevención NAV | 14 | quality_iaas | Active | High | Post-core | Build | PARTIAL | Prevención NAV demo MF-TRAMO-H-007 |
+| 147 | Adherencia higiene de manos | 14 | quality_iaas | Active | Medium | Post-core | Build | PARTIAL | Higiene manos demo MF-TRAMO-H-008 |
+| 148 | Estudio brote | 14 | quality_iaas | Active | High | Post-core | Build | PARTIAL | Estudio brote demo MF-TRAMO-H-009 |
+| 149 | Mapa aislamientos | 14 | quality_iaas | Active | Medium | Post-core | Build | PARTIAL | Mapa aislamientos demo MF-TRAMO-H-010 |
+| 150 | Curvas endémicas | 14 | quality_iaas | Active | Medium | Post-core | Build | PARTIAL | Curvas endémicas demo MF-TRAMO-H-011 |
 
 ## Pabellón y anestesia (151–160)
 

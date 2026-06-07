@@ -274,6 +274,21 @@ export const copy = {
       homeVisitsToday: 'Visitas domiciliarias hoy',
     },
   },
+  iaas: {
+    disclosure:
+      'IAAS avanzada demo — vigilancia sintética. Home sigue siendo Centro de Comando.',
+    advancedPanelsTitle: 'IAAS avanzada (IDC 141–150)',
+    surveillanceMatrixTitle: 'Matriz vigilancia activa (IDC 141)',
+    mdroAlertTitle: 'Alerta MDRO (IDC 142)',
+    antimicrobialMonitorTitle: 'Monitor consumo antimicrobianos (IDC 143)',
+    proaTitle: 'PROA (IDC 144)',
+    cvcChecklistTitle: 'Checklist inserción CVC (IDC 145)',
+    navPreventionTitle: 'Checklist prevención NAV (IDC 146)',
+    handHygieneTitle: 'Adherencia higiene de manos (IDC 147)',
+    outbreakStudyTitle: 'Estudio brote (IDC 148)',
+    isolationMapTitle: 'Mapa aislamientos (IDC 149)',
+    endemicCurvesTitle: 'Curvas endémicas (IDC 150)',
+  },
   inpatient: {
     census: 'Censo de camas',
     occupied: 'Ocupada',
