@@ -52,4 +52,10 @@ if (process.env.EPIS2_LOCAL_CI_E2E === '1') {
   console.log('\n(i) E2E omitido — define EPIS2_LOCAL_CI_E2E=1 para incluir Playwright');
 }
 
+if (process.env.EPIS2_LOCAL_CI_TRAMO_E2E === '1') {
+  runStep({ name: 'test:e2e:tramo-j', cmd: 'npm', args: ['run', 'test:e2e:tramo-j'] });
+} else {
+  console.log('(i) E2E tramo J omitido — define EPIS2_LOCAL_CI_TRAMO_E2E=1');
+}
+
 console.log('\n✓ quality:local-ci OK');

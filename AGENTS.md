@@ -25,6 +25,8 @@ Con `dev:ai` activo: `npm run ai:evals:live` (Ollama + blueprints assist).
 
 Semana 1 dev local: `npm run stack:dev` · gates `quality:stack-dev-gate` · `quality:dev-env-gate` · `quality:local-ci`.
 
+Semana 2 scaffold: `docs/product/EPIS2_TRAMO_SCAFFOLD_CANON.md` · `quality:week2-gate` · `test:e2e:tramo-j`.
+
 Si la fase lo exige: `npm run quality:golden-journey`.
 
 Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.
