@@ -1,0 +1,74 @@
+[
+  {
+    "codigo": 2245,
+    "nombre": "CIRUGIA BARIATRICA Y METABOLICA"
+  },
+  {
+    "codigo": 2478,
+    "nombre": "CIRUGIA COLORECTAL Y PROCTOLOGIA"
+  },
+  {
+    "codigo": 70,
+    "nombre": "CIRUGIA DIGESTIVA"
+  },
+  {
+    "codigo": 2250,
+    "nombre": "CIRUGIA GENERAL"
+  },
+  {
+    "codigo": 130,
+    "nombre": "CIRUGIA PLASTICA Y REPARADORA ADULTO"
+  },
+  {
+    "codigo": 2284,
+    "nombre": "CIRUGIA VASCULAR PERIFERICA"
+  },
+  {
+    "codigo": 180,
+    "nombre": "ENDOCRINOLOGIA ADULTO"
+  },
+  {
+    "codigo": 2464,
+    "nombre": "ENFERMERIA CURACIONES"
+  },
+  {
+    "codigo": 2249,
+    "nombre": "GINECOLOGIA GENERAL"
+  },
+  {
+    "codigo": 430,
+    "nombre": "KINESIOLOGIA"
+  },
+  {
+    "codigo": 280,
+    "nombre": "NEUROCIRUGIA ADULTO"
+  },
+  {
+    "codigo": 290,
+    "nombre": "NEUROLOGIA ADULTO"
+  },
+  {
+    "codigo": 2222,
+    "nombre": "NUTRICIÓN ADULTO"
+  },
+  {
+    "codigo": 340,
+    "nombre": "OTORRINOLARINGOLOGIA ADULTO"
+  },
+  {
+    "codigo": 2483,
+    "nombre": "TRAUMATOLOGIA DE COLUMNA"
+  },
+  {
+    "codigo": 2317,
+    "nombre": "TRAUMATOLOGIA MANO Y MUÑECA"
+  },
+  {
+    "codigo": 2319,
+    "nombre": "TRAUMATOLOGIA PIE Y TOBILLO"
+  },
+  {
+    "codigo": 2221,
+    "nombre": "UROLOGIA ADULTO"
+  }
+]

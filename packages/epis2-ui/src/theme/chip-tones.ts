@@ -26,6 +26,54 @@ function monoChip(theme: Theme, emphasis: 'soft' | 'strong' = 'soft'): SxProps<T
   };
 }
 
+/** Superficie pastel del icono en tarjetas de sugerencia (Mockup A). */
+export function intentIconSurfaceSx(tone: IntentChipTone, theme: Theme): SxProps<Theme> {
+  const clinical = theme.epis2?.clinical;
+  const map: Record<IntentChipTone, SxProps<Theme>> = {
+    ai: {
+      bgcolor: theme.palette.primary.light,
+      color: theme.palette.primary.dark,
+    },
+    search: {
+      bgcolor: theme.palette.action.hover,
+      color: theme.palette.text.primary,
+    },
+    evolution: {
+      bgcolor: theme.palette.primary.light,
+      color: theme.palette.primary.dark,
+    },
+    discharge: {
+      bgcolor: clinical?.approved.container ?? theme.palette.info.light,
+      color: clinical?.approved.onContainer ?? theme.palette.info.dark,
+    },
+    rx: {
+      bgcolor: clinical?.warning.container ?? theme.palette.warning.light,
+      color: clinical?.warning.onContainer ?? theme.palette.warning.dark,
+    },
+    labs: {
+      bgcolor: clinical?.approved.container ?? theme.palette.success.light,
+      color: clinical?.approved.onContainer ?? theme.palette.success.dark,
+    },
+    imaging: {
+      bgcolor: theme.palette.action.selected,
+      color: theme.palette.text.primary,
+    },
+    nursing: {
+      bgcolor: theme.palette.action.hover,
+      color: theme.palette.text.primary,
+    },
+    pharmacy: {
+      bgcolor: clinical?.warning.container ?? theme.palette.warning.light,
+      color: clinical?.warning.onContainer ?? theme.palette.warning.dark,
+    },
+    dashboard: {
+      bgcolor: theme.palette.action.selected,
+      color: theme.palette.text.primary,
+    },
+  };
+  return map[tone];
+}
+
 export function intentChipToneSx(tone: IntentChipTone, theme: Theme): SxProps<Theme> {
   const map: Record<IntentChipTone, SxProps<Theme>> = {
     ai: monoChip(theme),
@@ -46,6 +94,8 @@ export function roleChipToneSx(tone: RoleChipTone, theme: Theme): SxProps<Theme>
   const map: Record<RoleChipTone, SxProps<Theme>> = {
     physician: monoChip(theme, 'strong'),
     nurse: monoChip(theme),
+    paramedic: monoChip(theme, 'strong'),
+    kinesiologist: monoChip(theme),
     pharmacist: monoChip(theme),
     admin: monoChip(theme),
     auditor: {

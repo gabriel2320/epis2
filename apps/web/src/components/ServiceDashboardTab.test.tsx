@@ -4,7 +4,7 @@
 import type { ServiceDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import { Epis2ThemeProvider } from '@epis2/epis2-ui';
-import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ServiceDashboardTab } from './ServiceDashboardTab.js';
@@ -81,6 +81,54 @@ vi.mock('../api/dashboardApi.js', () => ({
 
 vi.mock('./ServiceDashboardCharts.js', () => ({
   ServiceDashboardCharts: () => null,
+}));
+
+vi.mock('./grids/DashboardHomogeneousGrid.js', () => ({
+  DashboardHomogeneousGrid: ({
+    rows,
+    extraBulkActions,
+    'data-testid': testId,
+  }: {
+    rows: Record<string, unknown>[];
+    extraBulkActions?: (ids: readonly string[]) => { id: string; label: string; onClick: () => void }[];
+    'data-testid'?: string;
+  }) => (
+    <div data-testid={testId}>
+      {rows.map((row) => (
+        <div key={String(row.id)}>
+          <span>{String(row.bedLabel ?? row.title ?? row.statusLabel ?? row.label ?? '')}</span>
+        </div>
+      ))}
+      {extraBulkActions
+        ? rows.map((row) => (
+            <div key={`bulk-${String(row.id)}`}>
+              {extraBulkActions([String(row.id)]).map((action) => (
+                <button
+                  key={action.id}
+                  type="button"
+                  data-testid={
+                    action.id === 'ack'
+                      ? `epis2-ack-critical-${String(row.id)}`
+                      : action.id === 'transfer'
+                        ? `epis2-inpatient-transfer-${String(row.admissionId ?? row.id)}`
+                        : action.id === 'discharge'
+                          ? `epis2-discharge-${String(row.admissionId ?? row.id)}`
+                          : `epis2-bulk-${action.id}-${String(row.id)}`
+                  }
+                  onClick={() => action.onClick()}
+                >
+                  {action.label}
+                </button>
+              ))}
+            </div>
+          ))
+        : null}
+    </div>
+  ),
+}));
+
+vi.mock('./rad/EpisRadDashboardTabShell.js', () => ({
+  EpisRadDashboardTabShell: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));
 
 afterEach(() => cleanup());
@@ -161,12 +209,8 @@ describe('ServiceDashboardTab', () => {
       expect(screen.getByText(copy.inpatient.admitSuccess)).toBeInTheDocument();
     });
 
-    const transferCombobox = within(
-      screen.getByTestId(`epis2-inpatient-transfer-select-${ADMISSION_ID}`),
-    ).getByRole('combobox');
-    fireEvent.mouseDown(transferCombobox);
-    await user.click(await screen.findByRole('option', { name: '102A' }));
-    await user.click(screen.getByTestId(`epis2-inpatient-transfer-${ADMISSION_ID}`));
+    const transferCombobox = screen.getByTestId(`epis2-inpatient-transfer-${ADMISSION_ID}`);
+    await user.click(transferCombobox);
 
     await waitFor(() => {
       expect(transferInpatientAdmission).toHaveBeenCalledWith(ADMISSION_ID, BED_102A);

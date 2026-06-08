@@ -1,6 +1,6 @@
 import type { PatientListRow } from '../api/clinicalApi.js';
 import { copy } from '@epis2/design-system';
-import { EpisDataGridSuspense, type GridColDef } from '@epis2/epis2-ui';
+import { ClinicalDataGrid, type ClinicalGridColDef } from '@epis2/clinical-productivity';
 import { useMemo } from 'react';
 import { getPrimaryNarrativeForDemoCode } from '../clinical/demoNarrativePresentation.js';
 
@@ -17,7 +17,7 @@ export function PatientListGrid({
   onSelectPatient,
   'data-testid': testId,
 }: PatientListGridProps) {
-  const columns = useMemo<GridColDef[]>(
+  const columns = useMemo<ClinicalGridColDef[]>(
     () => [
       {
         field: 'displayName',
@@ -47,7 +47,7 @@ export function PatientListGrid({
   );
 
   return (
-    <EpisDataGridSuspense
+    <ClinicalDataGrid
       rows={rows}
       columns={columns}
       emptyMessage={emptyMessage}

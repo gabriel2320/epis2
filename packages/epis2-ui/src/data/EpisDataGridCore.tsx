@@ -27,6 +27,9 @@ export type EpisDataGridProps = {
   onRowClick?: (row: EpisDataGridRow) => void;
   height?: number;
   hideFooter?: boolean;
+  checkboxSelection?: boolean;
+  selectedRowIds?: readonly string[];
+  onSelectedRowIdsChange?: (ids: string[]) => void;
   'data-testid'?: string;
   getRowId?: DataGridProps['getRowId'];
 };
@@ -50,6 +53,9 @@ export function EpisDataGrid({
   onRowClick,
   height = 280,
   hideFooter,
+  checkboxSelection = false,
+  selectedRowIds,
+  onSelectedRowIdsChange,
   'data-testid': testId,
   getRowId,
 }: EpisDataGridProps) {
@@ -92,6 +98,13 @@ export function EpisDataGrid({
         hideFooter={!showFooter}
         pageSizeOptions={[10, 25]}
         initialState={{ pagination: { paginationModel: { pageSize: 10 } } }}
+        {...(checkboxSelection ? { checkboxSelection: true } : {})}
+        {...(selectedRowIds && onSelectedRowIdsChange
+          ? {
+              rowSelectionModel: [...selectedRowIds],
+              onRowSelectionModelChange: (model) => onSelectedRowIdsChange([...model].map(String)),
+            }
+          : {})}
         {...(rowClickHandler ? { onRowClick: rowClickHandler } : {})}
         sx={{
           minHeight: height,

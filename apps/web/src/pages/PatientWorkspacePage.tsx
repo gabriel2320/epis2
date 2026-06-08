@@ -7,12 +7,12 @@ import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.j
 import {
   Alert,
   EpisButton,
-  EpisDockReserveLayout,
-  EpisSplitPane,
   Stack,
   Typography,
   epis2ShellContentIslandSx,
 } from '@epis2/epis2-ui';
+import { EpisClinicalWorkspaceShell } from '../components/layout/EpisClinicalWorkspaceShell.js';
+import { EpisSplitWorkspace } from '../components/layout/EpisSplitWorkspace.js';
 import { INTENT_TO_ASSIST_BLUEPRINT } from '../api/clinicalApi.js';
 import { usePatientDetailQuery } from '../query/hooks/usePatientDetailQuery.js';
 import { usePatientLongitudinalQuery } from '../query/hooks/usePatientLongitudinalQuery.js';
@@ -166,42 +166,30 @@ export function PatientWorkspacePage() {
         events={longitudinal?.timeline ?? []}
         onOpenDraft={openDraft}
       />
-
-      <Stack direction="row" spacing={1} alignItems="center">
-        <EpisButton
-          appearance="text"
-          size="small"
-          data-testid="epis2-ficha-history"
-          onClick={() => setHistoryOpen((open) => !open)}
-        >
-          {historyOpen ? copy.activePatient.hideFullHistory : copy.activePatient.viewFullHistory}
-        </EpisButton>
-        {historyOpen ? (
-          <Typography variant="body2" color="text.secondary">
-            {copy.activePatient.viewFullHistoryHint}
-          </Typography>
-        ) : null}
-      </Stack>
     </Stack>
   );
 
-  const secondaryColumn =
-    historyOpen && longitudinal ? (
-      <PatientLongitudinalPanel data={longitudinal} {...longitudinalNav} />
-    ) : historyOpen ? (
-      <Typography color="text.secondary">{copy.drafts.loading}</Typography>
-    ) : null;
+  const secondaryColumn = longitudinal ? (
+    <PatientLongitudinalPanel data={longitudinal} {...longitudinalNav} />
+  ) : (
+    <Typography color="text.secondary">{copy.drafts.loading}</Typography>
+  );
 
   return (
     <>
-      <EpisDockReserveLayout testId="epis2-patient-workspace">
-        <EpisSplitPane
+      <EpisClinicalWorkspaceShell screenKind="workspace" testId="epis2-patient-workspace">
+        <EpisSplitWorkspace
+          persistKey="patient-ficha-history"
           primary={primaryColumn}
           secondary={secondaryColumn}
-          secondaryOpen={historyOpen}
+          open={historyOpen}
+          onOpenChange={setHistoryOpen}
+          openLabel={copy.activePatient.viewFullHistory}
+          closeLabel={copy.activePatient.hideFullHistory}
+          toggleTestId="epis2-ficha-history"
           testId="epis2-ficha-split"
         />
-      </EpisDockReserveLayout>
+      </EpisClinicalWorkspaceShell>
 
       <PatientWorkspaceCommandPanel
         patientId={patientId}

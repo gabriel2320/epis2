@@ -7,7 +7,7 @@ export {
   DASHBOARD_TAB_BY_INTENT,
   WORKSPACE_QUICK_ROUTE_INTENTS,
 } from './routes.js';
-export { DASHBOARD_COMMAND_SAMPLE } from './chips.js';
+export { DASHBOARD_COMMAND_SAMPLE, COMMAND_CENTER_DENSITY } from './chips.js';
 export { normalizeCommandText } from './normalize.js';
 export { matchCommandDefinitions, pickBestMatch } from './matcher.js';
 export {
@@ -37,6 +37,7 @@ export {
   ROLE_COMMAND_INTENTS,
   ROLE_AI_COMMAND_HINTS,
   getRoleAiCommandHints,
+  filterDefinitionsForRole,
   type RoleAiCommandHint,
 } from './roleSuggestions.js';
 export {

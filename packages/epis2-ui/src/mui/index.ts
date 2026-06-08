@@ -38,6 +38,7 @@ export { default as Typography } from '@mui/material/Typography';
 export { default as AssignmentIcon } from '@mui/icons-material/Assignment';
 export { default as AutoAwesomeIcon } from '@mui/icons-material/AutoAwesome';
 export { default as BiotechIcon } from '@mui/icons-material/Biotech';
+export { default as BoltIcon } from '@mui/icons-material/Bolt';
 export { default as DashboardIcon } from '@mui/icons-material/Dashboard';
 export { default as ExpandMoreIcon } from '@mui/icons-material/ExpandMore';
 export { default as GroupsIcon } from '@mui/icons-material/Groups';

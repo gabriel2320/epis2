@@ -23,6 +23,8 @@ export type EpisClinicalFormProps = {
   clinicalDropEnabled?: boolean;
   onClinicalDrop?: (fieldId: string, payload: ClinicalContextDragPayload) => void;
   onChange: (fieldId: string, value: string) => void;
+  /** MF-RAD-M3-A — colapsar secciones secundarias (solo primera expandida). */
+  collapseNonPrimarySections?: boolean;
 };
 
 /** Renderiza un blueprint clínico con secciones y campos MUI. */
@@ -34,6 +36,7 @@ export function EpisClinicalForm({
   clinicalDropEnabled = false,
   onClinicalDrop,
   onChange,
+  collapseNonPrimarySections = false,
 }: EpisClinicalFormProps) {
   const fieldMap = new Map(blueprint.fields.map((f) => [f.id, f]));
 
@@ -42,7 +45,7 @@ export function EpisClinicalForm({
       <EpisM3Text role="bodyLarge" color="text.secondary" sx={{ px: 1 }}>
         {blueprint.purpose}
       </EpisM3Text>
-      {blueprint.sections.map((sec) => {
+      {blueprint.sections.map((sec, sectionIndex) => {
         const fields = sec.fieldIds
           .map((id) => fieldMap.get(id))
           .filter((f): f is NonNullable<typeof f> => Boolean(f));
@@ -71,12 +74,15 @@ export function EpisClinicalForm({
             })}
           </Box>
         );
-        if (sec.initialVisibility === 'collapsed') {
+        const useAccordion =
+          sec.initialVisibility === 'collapsed' ||
+          (collapseNonPrimarySections && sectionIndex > 0);
+        if (useAccordion) {
           return (
             <Accordion
               key={sec.id}
               id={`epis2-section-${sec.id}`}
-              defaultExpanded={false}
+              defaultExpanded={sec.initialVisibility !== 'collapsed' && sectionIndex === 0}
               disableGutters
               elevation={0}
               sx={{

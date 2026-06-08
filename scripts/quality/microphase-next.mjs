@@ -11,6 +11,20 @@ if (!result.ok) {
 }
 
 const next = result.next;
+if (!next) {
+  console.log(
+    JSON.stringify(
+      {
+        status: 'complete',
+        message: 'Sin microfases READY — programa post-MVP (MF-151→182) cerrado en ledger',
+        nextStep: 'Ver docs/product/EPIS2_GLOBAL_DEV_PLAN.md Fase B',
+      },
+      null,
+      2,
+    ),
+  );
+  process.exit(0);
+}
 console.log(JSON.stringify({
   id: next.id,
   name: next.name,

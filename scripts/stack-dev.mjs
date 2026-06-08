@@ -89,6 +89,8 @@ console.log(`
   Verificación   npm run quality:local-ci
   E2E local      ${e2eHint}
   Evals Ollama   npm run dev:ai && npm run ai:evals:live
+  Subagentes dev npm run dev:agent:orchestrate
+  Plan Ollama    npm run dev:agent:ollama   (opcional, JSON estructurado)
 
   Ollama: ${process.env.OLLAMA_BASE_URL ?? 'http://127.0.0.1:11434'}
   Modelo: ${process.env.OLLAMA_MODEL ?? 'qwen3:8b'}

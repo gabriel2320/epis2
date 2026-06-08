@@ -1,0 +1,74 @@
+[
+  {
+    "codigo": 999,
+    "nombre": "CONVENIO"
+  },
+  {
+    "codigo": 998,
+    "nombre": "CONVENIO LABORATORIOS EXTERNOS"
+  },
+  {
+    "codigo": 121,
+    "nombre": "EXAMENES A UNIDADES CLINICA SANTA MARIA"
+  },
+  {
+    "codigo": 2,
+    "nombre": "FONASA (FONDO NACIONAL DE SALUD)"
+  },
+  {
+    "codigo": 997,
+    "nombre": "GRD FONASA"
+  },
+  {
+    "codigo": 299,
+    "nombre": "ISALUD ISAPRE DE CODELCO SPA"
+  },
+  {
+    "codigo": 193,
+    "nombre": "ISAPRE BANMEDICA"
+  },
+  {
+    "codigo": 186,
+    "nombre": "ISAPRE COLMENA"
+  },
+  {
+    "codigo": 12,
+    "nombre": "ISAPRE CONSALUD"
+  },
+  {
+    "codigo": 174,
+    "nombre": "ISAPRE CRUZ BLANCA"
+  },
+  {
+    "codigo": 26,
+    "nombre": "ISAPRE CRUZ DEL NORTE"
+  },
+  {
+    "codigo": 208,
+    "nombre": "ISAPRE ESENCIAL"
+  },
+  {
+    "codigo": 201,
+    "nombre": "ISAPRE FUNDACION"
+  },
+  {
+    "codigo": 206,
+    "nombre": "ISAPRE NUEVA MASVIDA"
+  },
+  {
+    "codigo": 194,
+    "nombre": "ISAPRE VIDA TRES"
+  },
+  {
+    "codigo": 0,
+    "nombre": "ISAPRE VIRTUAL"
+  },
+  {
+    "codigo": 34,
+    "nombre": "PARTICULAR"
+  },
+  {
+    "codigo": 167,
+    "nombre": "SEGURO ESCOLAR"
+  }
+]

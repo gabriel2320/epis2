@@ -66,6 +66,58 @@ const pharmacyBoard: PharmacyDashboardResponse = {
 
 afterEach(() => cleanup());
 
+vi.mock('./grids/DashboardHomogeneousGrid.js', () => ({
+  DashboardHomogeneousGrid: ({
+    rows,
+    onRowClick,
+    extraBulkActions,
+    'data-testid': testId,
+  }: {
+    rows: { id: string; title?: string; patientId?: string; draftId?: string }[];
+    onRowClick?: (row: { id: string; draftId?: string }) => void;
+    extraBulkActions?: (ids: readonly string[]) => { id: string; onClick: () => void }[];
+    'data-testid'?: string;
+  }) => (
+    <div data-testid={testId}>
+      {rows.map((row) => (
+        <div key={row.id}>
+          <span>{row.title}</span>
+          {onRowClick ? (
+            <button
+              type="button"
+              data-testid={
+                testId?.includes('reconciliation')
+                  ? `epis2-pharmacy-reconcile-${row.patientId ?? row.id}`
+                  : `epis2-pharmacy-review-${row.draftId ?? row.id}`
+              }
+              onClick={() => onRowClick(row)}
+            >
+              open
+            </button>
+          ) : null}
+          {extraBulkActions && !onRowClick ? (
+            <button
+              type="button"
+              data-testid={`epis2-pharmacy-reconcile-${row.patientId ?? row.id}`}
+              onClick={() => extraBulkActions([row.id])[0]?.onClick()}
+            >
+              reconcile
+            </button>
+          ) : null}
+        </div>
+      ))}
+    </div>
+  ),
+}));
+
+vi.mock('./rad/EpisRadDashboardTabShell.js', () => ({
+  EpisRadDashboardTabShell: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+}));
+
+vi.mock('./rad/EpisRadFormSectionAccordion.js', () => ({
+  EpisRadFormSectionAccordion: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+}));
+
 describe('PharmacyDashboardTab', () => {
   it('muestra validaciones pendientes y abre borrador', async () => {
     const user = userEvent.setup();
@@ -105,7 +157,7 @@ describe('PharmacyDashboardTab', () => {
     );
 
     expect(screen.getByText(copy.pharmacy.reconciliationTitle)).toBeInTheDocument();
-    expect(screen.getByText(/Warfarina/)).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-pharmacy-reconciliation-grid')).toBeInTheDocument();
 
     await user.click(screen.getByTestId(`epis2-pharmacy-reconcile-${PATIENT_ID}`));
     expect(onOpenReconciliation).toHaveBeenCalledWith(PATIENT_ID);

@@ -28,6 +28,10 @@ for (const npm of [
   'quality:week4-gate',
   'ai:evals:closure',
   'dev:agent:tramo-k',
+  'dev:agent:orchestrate',
+  'dev:agent:ollama',
+  'dev:session',
+  'dev:agent:close',
 ]) {
   if (!pkg.includes(`"${npm}"`)) errors.push(`package.json sin ${npm}`);
 }

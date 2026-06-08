@@ -2,6 +2,8 @@
 export const CLINICAL_ROLES = [
   'physician',
   'nurse',
+  'paramedic',
+  'kinesiologist',
   'pharmacist',
   'admin',
   'auditor',

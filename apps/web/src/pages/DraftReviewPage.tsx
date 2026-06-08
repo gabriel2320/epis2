@@ -2,8 +2,7 @@ import { getBlueprintById } from '@epis2/clinical-forms';
 import { roleHasPermission, type ClinicalRole } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
 import {
-  Box,
-  EpisApprovalGate,
+  EpisAlert,
   EpisButton,
   EpisDraftStatus,
   epis2ShellContentIslandSx,
@@ -18,6 +17,7 @@ import { useEffect, useState } from 'react';
 import { DRAFT_TYPE_TO_BLUEPRINT } from '../api/clinicalApi.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
 import { ClinicalPageNav } from '../components/ClinicalPageNav.js';
+import { EpisRadDocumentSurface } from '../components/rad/EpisRadDocumentSurface.js';
 import { ErrorState } from '../components/ErrorState.js';
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
@@ -146,9 +146,40 @@ export function DraftReviewPage() {
     .filter(([, v]) => String(v).trim())
     .slice(0, 12);
 
+  const approvable = canApprove && ['draft', 'editing', 'ready_for_review'].includes(draft.status);
+
+  const documentActionBar = (
+    <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ px: 2, py: 1.5 }}>
+      {canEdit && draft.status !== 'ready_for_review' ? (
+        <EpisButton appearance="outlined" onClick={sendToReview}>
+          {copy.drafts.sendToReview}
+        </EpisButton>
+      ) : null}
+      {approvable ? (
+        <EpisButton appearance="filled" onClick={approve} data-testid="epis2-draft-approve">
+          {copy.drafts.approveHuman}
+        </EpisButton>
+      ) : null}
+      {canEdit && editFormRoute ? (
+        <EpisButton
+          variant="outlined"
+          size="small"
+          onClick={() =>
+            void navigate({
+              to: editFormRoute as ClinicalFormRoutePath,
+              search: { patientId: draft.patientId },
+            })
+          }
+        >
+          {copy.drafts.continueEditing}
+        </EpisButton>
+      ) : null}
+    </Stack>
+  );
+
   return (
-    <Stack sx={epis2ShellContentIslandSx} data-testid="epis2-draft-review">
-      <Stack spacing={2}>
+    <EpisRadDocumentSurface actionBar={documentActionBar} testId="epis2-rad-draft-review">
+      <Stack spacing={2} data-testid="epis2-draft-review">
         <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
           <Typography variant="h6" component="h1">
             {copy.drafts.reviewTitle}
@@ -167,11 +198,13 @@ export function DraftReviewPage() {
           hintBlueprintLabel={draft.title}
         />
 
-        <Box>
-          <Typography variant="subtitle2" gutterBottom>
-            {copy.drafts.contentTitle}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+        <EpisAlert severity="warning" variant="outlined">
+          {copy.drafts.approvalDisclaimer}
+        </EpisAlert>
+
+        <Stack spacing={1}>
+          <Typography variant="subtitle2">{copy.drafts.contentTitle}</Typography>
+          <Typography variant="body2" color="text.secondary">
             {copy.drafts.previewTruncated}
           </Typography>
           <List dense>
@@ -181,10 +214,10 @@ export function DraftReviewPage() {
               </ListItem>
             ))}
           </List>
-        </Box>
+        </Stack>
 
-        <Box>
-          <Typography variant="subtitle2" gutterBottom>
+        <Stack spacing={1}>
+          <Typography variant="subtitle2">
             {copy.drafts.versionsTitle} ({versions.length})
           </Typography>
           <List dense data-testid="epis2-draft-versions">
@@ -197,37 +230,16 @@ export function DraftReviewPage() {
               </ListItem>
             ))}
           </List>
-        </Box>
-
-        <EpisApprovalGate
-          status={draft.status}
-          canEdit={canEdit}
-          canApprove={canApprove}
-          showSendToReview={draft.status !== 'ready_for_review'}
-          onSendToReview={() => sendToReview()}
-          onApprove={() => approve()}
-          message={message}
-        />
-
-        <Stack direction="row" spacing={1} flexWrap="wrap">
-          {canEdit && editFormRoute ? (
-            <EpisButton
-              variant="outlined"
-              size="small"
-              onClick={() =>
-                void navigate({
-                  to: editFormRoute as ClinicalFormRoutePath,
-                  search: { patientId: draft.patientId },
-                })
-              }
-            >
-              {copy.drafts.continueEditing}
-            </EpisButton>
-          ) : null}
         </Stack>
+
+        {message ? (
+          <EpisAlert severity="success" data-testid="epis2-draft-review-message">
+            {message}
+          </EpisAlert>
+        ) : null}
 
         <ClinicalPageNav patientId={draft.patientId} />
       </Stack>
-    </Stack>
+    </EpisRadDocumentSurface>
   );
 }

@@ -3,9 +3,12 @@ export type EpisClinicalWorkspaceId =
   | 'command'
   | 'reception'
   | 'ambulatory'
+  | 'inpatient_ward'
+  | 'intermediate_care'
   | 'emergency'
   | 'icu'
   | 'or'
+  | 'pharmacy_clinical'
   | 'quality_iaas'
   | 'admin_system';
 

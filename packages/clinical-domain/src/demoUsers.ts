@@ -28,6 +28,20 @@ export const SYNTHETIC_USERS: readonly SyntheticUser[] = [
     demoAuthKey: 'DEMO-CLAVE-ENFERMERIA',
   },
   {
+    id: 'usr-paramedic-01',
+    username: 'paramedico.demo',
+    displayName: 'Tpm. Carla Demo',
+    role: 'paramedic',
+    demoAuthKey: 'DEMO-CLAVE-PARAMEDICO',
+  },
+  {
+    id: 'usr-kinesiologist-01',
+    username: 'kine.demo',
+    displayName: 'Kine. Marco Demo',
+    role: 'kinesiologist',
+    demoAuthKey: 'DEMO-CLAVE-KINE',
+  },
+  {
     id: 'usr-pharmacist-01',
     username: 'farmacia.demo',
     displayName: 'Q.F. Rosa Demo',

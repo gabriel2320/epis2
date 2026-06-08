@@ -10,7 +10,7 @@ const files = [
   'apps/web/src/components/ApsDashboardTab.tsx',
   'apps/web/src/components/OrDashboardTab.tsx',
   'apps/web/src/components/SpecialtyDashboardTab.tsx',
-  'apps/web/src/components/QualityDashboardGrids.tsx',
+  'apps/web/src/components/QualityDashboardTab.tsx',
 ];
 
 function transform(content) {

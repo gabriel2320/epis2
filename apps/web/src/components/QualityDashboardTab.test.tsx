@@ -114,8 +114,18 @@ vi.mock('../api/opsApi.js', async (importOriginal) => {
   return { ...actual, validateHl7Message };
 });
 
-vi.mock('./QualityDashboardGrids.js', () => ({
-  QualityDashboardGrids: () => <div data-testid="epis2-quality-grids-mock" />,
+vi.mock('./rad/EpisRadDashboardTabShell.js', () => ({
+  EpisRadDashboardTabShell: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+}));
+
+vi.mock('./rad/EpisRadFormSectionAccordion.js', () => ({
+  EpisRadFormSectionAccordion: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+}));
+
+vi.mock('./grids/DashboardHomogeneousGrid.js', () => ({
+  DashboardHomogeneousGrid: ({ 'data-testid': testId }: { 'data-testid'?: string }) => (
+    <div data-testid={testId ?? 'epis2-dashboard-grid'} />
+  ),
 }));
 
 afterEach(() => cleanup());
@@ -140,7 +150,8 @@ describe('QualityDashboardTab', () => {
         new RegExp(`${copy.interop.metricAiRuns}: 2`),
       ),
     ).toBeInTheDocument();
-    expect(screen.getByTestId('epis2-quality-grids-mock')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-quality-sentinel')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-quality-staging')).toBeInTheDocument();
   });
 
   it('valida mensaje HL7 demo y muestra resultado', async () => {

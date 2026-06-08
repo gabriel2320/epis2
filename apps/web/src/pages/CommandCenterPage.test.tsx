@@ -198,38 +198,22 @@ afterEach(() => {
 
 describe('CommandCenterPage', () => {
 
-  it('muestra hero híbrido y dock flotante compacto', () => {
-
+  it('muestra pantalla de decisión compacta sin rail ni tarjetas', () => {
     renderCommandCenter();
-
     expect(screen.getByTestId('epis2-command-hero')).toBeInTheDocument();
-
     expect(screen.getByTestId('epis2-command-prompt')).toHaveTextContent(copy.commandCenter.title);
-
-    expect(screen.getByTestId('epis2-floating-command-dock')).toBeInTheDocument();
-
+    expect(screen.getByTestId('epis2-command-hero-power-bar')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-power-bar')).toBeInTheDocument();
-
-    expect(screen.getByTestId('epis2-command-context-line')).toBeInTheDocument();
-
+    expect(screen.queryByTestId('epis2-floating-command-dock')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('epis2-command-suggestion-cards')).not.toBeInTheDocument();
     expect(screen.getByTestId('epis2-command-quick-chips')).toBeInTheDocument();
-
-    expect(screen.getByTestId('epis2-command-suggestion-cards')).toBeInTheDocument();
-
     expect(screen.queryByTestId('epis2-navigation-rail')).not.toBeInTheDocument();
-
   });
 
-
-
-  it('bento visible solo cuando hay datos', async () => {
-
+  it('continuar trabajo visible cuando hay datos', async () => {
     renderCommandCenter();
-
-    expect(await screen.findByTestId('epis2-command-minimal-blocks')).toBeInTheDocument();
-
-    expect(screen.getByTestId('epis2-command-block-tasks')).toBeInTheDocument();
-
+    expect(await screen.findByTestId('epis2-command-recent-activity')).toBeInTheDocument();
+    expect(screen.getByText(copy.commandCenter.continueWorkTitle)).toBeInTheDocument();
   });
 
 
@@ -270,14 +254,9 @@ describe('CommandCenterPage', () => {
 
 
 
-  it('integra estado IA en el dock', async () => {
-
+  it('integra hint IA en la barra inline', async () => {
     renderCommandCenter();
-
-    expect(await screen.findByTestId('epis2-command-ai-status')).toBeInTheDocument();
-
-    expect(screen.getByTestId('epis2-command-role-chip')).toBeInTheDocument();
-
+    expect(await screen.findByTestId('epis2-power-bar')).toBeInTheDocument();
   });
 
 });

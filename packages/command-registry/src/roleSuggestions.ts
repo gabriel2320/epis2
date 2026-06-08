@@ -27,6 +27,21 @@ export const ROLE_COMMAND_INTENTS: Record<ClinicalRole, readonly ClinicalIntent[
     'open_dashboard_work',
     'open_dashboard_patient',
   ],
+  paramedic: [
+    'search_patient',
+    'open_patient_chart',
+    'admit_patient_hospital',
+    'create_nursing_note',
+    'open_dashboard_work',
+  ],
+  kinesiologist: [
+    'search_patient',
+    'open_patient_chart',
+    'create_outpatient_visit',
+    'create_evolution_draft',
+    'open_dashboard_work',
+    'open_dashboard_patient',
+  ],
   pharmacist: [
     'prepare_pharmacy_review',
     'prepare_prescription',
@@ -63,6 +78,8 @@ export const ROLE_AI_COMMAND_HINTS: Record<ClinicalRole, readonly RoleAiCommandH
     { sampleEs: 'nota de enfermeria', captionEs: 'Nota con asistencia IA' },
     { sampleEs: 'registrar mar', captionEs: 'MAR + doble chequeo' },
   ],
+  paramedic: [{ sampleEs: 'triaje urgencia', captionEs: 'Urgencias — triaje' }],
+  kinesiologist: [{ sampleEs: 'sesion kinesiologia', captionEs: 'Plan kinésico ambulatorio' }],
   pharmacist: [
     { sampleEs: 'validacion farmaceutica', captionEs: 'Validación farmacéutica' },
     { sampleEs: 'preparar receta médica', captionEs: 'Revisión de receta (CDS)' },

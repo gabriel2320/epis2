@@ -1,0 +1,38 @@
+{
+  "generatedAt": "2026-06-08T00:17:00.640Z",
+  "model": "qwen3:8b",
+  "ollamaUrl": "http://127.0.0.1:11434",
+  "plan": {
+    "activePhase": "B",
+    "nextMicrophase": "MF-RAD-M3-A",
+    "objective": "Implementar grids dashboard + acordeones en formularios",
+    "allowedPaths": [
+      "apps/web/src/...",
+      "packages/clinical-productivity/...",
+      "packages/rad-m3/..."
+    ],
+    "forbiddenPatterns": [
+      "OpenMRS",
+      "auto-approve",
+      "dashboard",
+      "import-massive",
+      "Carbon"
+    ],
+    "gatesToRun": [
+      "npm run check",
+      "npm run quality:layers-integration-gate"
+    ],
+    "subagentSequence": [
+      "layers-integrator",
+      "gate-runner",
+      "ollama-clinical",
+      "golden-guardian"
+    ],
+    "risks": [
+      "Retraso en integración de capas",
+      "Incompatibilidad con UI-G02",
+      "Dificultad en autocomplete paciente"
+    ],
+    "requiresHumanReview": true
+  }
+}

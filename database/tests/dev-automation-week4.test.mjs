@@ -25,8 +25,11 @@ describe('dev-automation week4', () => {
     expect(text).toContain('ai:evals:closure');
   });
 
-  it('scripts cierre evals y prompt agente existen', () => {
+  it('scripts cierre evals y orquestador subagentes existen', () => {
     expect(existsSync(join(root, 'scripts/run-tramo-closure-evals.mjs'))).toBe(true);
-    expect(existsSync(join(root, 'scripts/dev-agent-tramo-prompt.mjs'))).toBe(true);
+    expect(existsSync(join(root, 'scripts/dev-agent/session.mjs'))).toBe(true);
+    expect(existsSync(join(root, 'scripts/dev-agent/brief.mjs'))).toBe(true);
+    expect(existsSync(join(root, 'scripts/dev-agent/close.mjs'))).toBe(true);
+    expect(existsSync(join(root, 'docs/product/EPIS2_AI_ASSISTED_DEV.md'))).toBe(true);
   });
 });

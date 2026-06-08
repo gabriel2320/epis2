@@ -4,13 +4,16 @@
 
 ## Antes de modificar código
 
+0. **Arranque IA:** `npm run dev:session` → adjuntar `@reports/dev-agent-brief.md` + prompt del subagente primario.
 1. Leer `docs/PRODUCT_CANON.md` y `docs/product/PRODUCT_INVARIANTS.md`.
 2. Leer `docs/product/EPIS2_WAVE_EXECUTION_CANON.md` — tramo, ola, dependencias, gates (no cola lineal automática).
 3. Ejecutar `npm run quality:microphase-next` — trabajar **solo** la microfase `READY`.
-3. Leer `docs/quality/MICROPHASE_PROGRAM.md` y `docs/quality/microphase-ledger.json`.
-4. Leer `docs/legacy/EPIS_POSTMORTEM.md` si tocas integración o migración.
-5. **Declarar alcance** (microfase MF-XXX, archivos permitidos/prohibidos).
-6. No importar desde `../Epis` sin entrada en `legacy-import-manifest.json`.
+4. Leer `docs/quality/MICROPHASE_PROGRAM.md` y `docs/quality/microphase-ledger.json`.
+5. Leer `docs/legacy/EPIS_POSTMORTEM.md` si tocas integración o migración.
+6. **Declarar alcance** (microfase MF-XXX, archivos permitidos/prohibidos).
+7. No importar desde `../Epis` sin entrada en `legacy-import-manifest.json`.
+
+Guía IA: `docs/product/EPIS2_AI_ASSISTED_DEV.md` · cierre `npm run dev:agent:close`.
 
 ## Gates obligatorios al cerrar
 
@@ -29,7 +32,9 @@ Semana 2 scaffold: `docs/product/EPIS2_TRAMO_SCAFFOLD_CANON.md` · `quality:week
 
 Semana 3 IA producto: `docs/product/EPIS2_AI_TRAMO_EVALS.md` · `quality:week3-gate` · `ai:evals:tramo-j` · `ai:catalog-assist-smoke` · `test:e2e:week3` (requiere `dev:ai` para evals live).
 
-Semana 4 orquestación: `docs/product/EPIS2_DEV_AGENT_ORCHESTRATION.md` · `quality:week4-gate` · `dev:agent:tramo-k` · `ai:evals:closure` · `quality:tramos-clinical-signoff-gate` · Tramo K inventario (`quality:tramo-k-inventory-gate`).
+Semana 4 orquestación: `docs/product/EPIS2_DEV_AGENT_ORCHESTRATION.md` · `docs/product/EPIS2_DEV_SUBAGENTS.md` · `quality:week4-gate` · `dev:agent:orchestrate` · `dev:agent:ollama` · `dev:agent:tramo-k` · `ai:evals:closure` · `quality:tramos-clinical-signoff-gate` · Tramo K inventario (`quality:tramo-k-inventory-gate`).
+
+Capas UI + IA asistida: **`npm run dev:session`** → `@reports/dev-agent-brief.md` · cierre **`npm run dev:agent:close`**.
 
 Signoff A–K: `docs/product/EPIS2_TRAMOS_CLINICAL_SIGNOFF_CHECKLIST.md` · `quality:tramos-signoff-prep-gate` · `quality:tramos-run-ak-closure-gates`.
 

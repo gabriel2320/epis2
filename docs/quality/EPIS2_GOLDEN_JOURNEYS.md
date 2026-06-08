@@ -89,7 +89,7 @@ Complementa [GOLDEN_CLINICAL_JOURNEY.md](./GOLDEN_CLINICAL_JOURNEY.md) (implemen
 
 **Tests:** `inpatient.integration.test.ts`
 
-**Automatización:** `golden-clinical-journey.api.spec.ts` (V2) + `inpatient.integration.test.ts`.
+**Automatización:** `golden-clinical-journey.api.spec.ts` (V2) + `inpatient.integration.test.ts` + **`e2e/golden-v2-admission-discharge.spec.ts`** (UI Fase B).
 
 ---
 

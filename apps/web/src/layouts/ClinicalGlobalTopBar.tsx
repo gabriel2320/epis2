@@ -5,6 +5,7 @@ import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { ClinicalAppBarAlertsAction } from './ClinicalAppBarAlertsAction.js';
 import { ClinicalAppBarUserMenu } from './ClinicalAppBarUserMenu.js';
+import { ClinicalRoleCareContext } from './ClinicalRoleCareContext.js';
 
 type ClinicalGlobalTopBarProps = {
   active?: 'command' | 'clinical' | 'dashboard';
@@ -35,6 +36,7 @@ export function ClinicalGlobalTopBar({ active = 'clinical' }: ClinicalGlobalTopB
       data-testid="epis2-global-top-bar"
       endActions={
         <>
+          <ClinicalRoleCareContext />
           <EpisButton
             component={Link}
             to="/espacio/buscar-paciente"

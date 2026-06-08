@@ -1,11 +1,12 @@
 # EPIS2 — Roadmap de completitud (post-auditoría)
 
-**Versión:** 1.2 · **Fecha:** 2026-06-04 (sync gates UX/CE)  
+**Versión:** 1.3 · **Fecha:** 2026-06-04 (Fase B lote 3 — golden V2 UI + RAD forms)  
+**Plan global consolidado:** [`EPIS2_GLOBAL_DEV_PLAN.md`](./EPIS2_GLOBAL_DEV_PLAN.md) · **Disciplina RAD/MD3:** [`../design/EPIS2_RAD_M3_DISCIPLINE.md`](../design/EPIS2_RAD_M3_DISCIPLINE.md)
 **Canon de ejecución:** [`EPIS2_WAVE_EXECUTION_CANON.md`](./EPIS2_WAVE_EXECUTION_CANON.md) — **fuente primaria** para agentes (precedencia, gates, tramos A–D, milestones 1A–1D).
 
 > Las olas agrupan capacidades; **no** implican cola lineal estricta. Ver definición **EPIS2 Core completado** en el canon.
 
-**Estado base:** Ola 0 cerrada · Ola 1 shell + **Command Engine CE-0→CE-5** + arco UX command-first · Ola 2 activa · **511 tests** · 32 migraciones · gates `quality:golden-journey` + `quality:ux-pilot` verdes (2026-06-04)
+**Estado base:** Ola 0 cerrada · Ola 1 shell + **Command Engine CE-0→CE-5** + arco UX command-first · Ola 2 activa · **538+ tests** · 32 migraciones · **19 blueprints** · Fase B palette+autocomplete ✓ · gates `quality:golden-journey` + `quality:ux-pilot` verdes (2026-06-04)
 
 ---
 
@@ -71,20 +72,21 @@ Detalle histórico v1.0:
 
 ## Ola 2 — Atención médica
 
-| Capacidad | Dependencias |
-|-----------|--------------|
-| Blueprint ingreso hospitalario | Ola 1 encuentros |
-| Comando `haz ingreso` → formulario | blueprint |
-| Consulta ambulatoria (blueprint) | encuentros |
-| Procedimiento / certificado | ○ |
-| Traslado (form + comando) | inpatient API ✓ |
-| Cierre encuentro | encuentros |
+| Capacidad | Estado | Dependencias |
+|-----------|--------|--------------|
+| Blueprint ingreso hospitalario | ✓ MF-157 | Ola 1 encuentros |
+| Comando `haz ingreso` → formulario | ✓ | blueprint |
+| Consulta ambulatoria (blueprint) | ✓ | encuentros |
+| Traslado (form + comando) | ✓ | inpatient API |
+| Certificado médico | ✓ MF-032 | impresión ◐ |
+| Procedimiento | ○ | — |
+| Cierre encuentro | ◐ | encuentros |
 
 **Rama sugerida:** `epis2-ola2-admission-blueprint`
 
 **Archivos:** `packages/clinical-forms`, `command-registry`, `GeneratedClinicalFormPage`, `inpatient/`
 
-**Journey:** extender `golden-v2-admission-discharge`
+**Journey:** `golden-v2-admission-discharge` — API ✓ · Playwright `e2e/golden-v2-admission-discharge.spec.ts` ✓
 
 ---
 

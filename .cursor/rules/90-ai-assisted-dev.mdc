@@ -1,0 +1,51 @@
+---
+description: Desarrollo asistido por IA — brief único, alcance, diff mínimo
+alwaysApply: true
+---
+
+# Desarrollo asistido por IA (EPIS2)
+
+## Inicio de sesión (obligatorio)
+
+```bash
+npm run stack:dev      # una vez por día / tras reinicio
+npm run dev:session    # genera brief + prompts subagentes
+```
+
+En Cursor, adjuntar **solo**:
+
+1. `@reports/dev-agent-brief.md`
+2. `@reports/dev-agent-prompt-<subagente-primario>.md`
+
+Opcional plan Ollama: `npm run dev:session -- --ollama`
+
+## Loop de trabajo
+
+1. **Declarar alcance** — MF del ledger, archivos permitidos/prohibidos, fase (A/B/tramo).
+2. **Un objetivo por sesión** — no mezclar tramo clínico + refactor UI masivo.
+3. **Reutilizar patrones** — `EpisRadDashboardTabShell`, `DashboardPanelGridSection`, `@epis2/clinical-productivity`.
+4. **No explorar en exceso** — leer canon citado en el brief, no todo el monorepo.
+5. **Verificar al cerrar** — no ejecutar `npm run test` completo tras cada archivo.
+
+## Cierre de sesión
+
+```bash
+npm run dev:agent:close   # checklist + plantilla reporte
+```
+
+Completar `reports/epis2-session-close-*.md` o reporte de sesión. Sin commit automático.
+
+## IA: dos capas (no mezclar)
+
+| Capa | Uso |
+|------|-----|
+| **Dev** (`dev:session`, `dev:agent:ollama`) | Planificar sesión; JSON con `requiresHumanReview` |
+| **Producto** (`dev:ai`, assist borradores) | Clínica demo; nunca escribe SoT |
+
+## Detenerse si
+
+- Contradice `PRODUCT_INVARIANTS.md`
+- `architecture:validate` falla
+- Se pide segundo registry temporal o import EPIS sin manifest
+
+Canon: `docs/product/EPIS2_AI_ASSISTED_DEV.md`

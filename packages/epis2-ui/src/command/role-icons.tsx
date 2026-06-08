@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import {
   AssignmentIcon,
+  HealthAndSafetyIcon,
   LocalHospitalIcon,
   MedicationIcon,
   PersonIcon,
@@ -16,6 +17,10 @@ export function getRoleChipIcon(role: string): ReactElement {
       return <LocalHospitalIcon {...props} />;
     case 'nurse':
       return <MedicationIcon {...props} />;
+    case 'paramedic':
+      return <HealthAndSafetyIcon {...props} />;
+    case 'kinesiologist':
+      return <ScienceIcon {...props} />;
     case 'pharmacist':
       return <ScienceIcon {...props} />;
     case 'auditor':

@@ -13,6 +13,7 @@
   "dependencies": {
     "@epis2/clinical-domain": "*",
     "@epis2/clinical-forms": "*",
+    "@epis2/clinical-productivity": "*",
     "@epis2/command-registry": "*",
     "@epis2/contracts": "*",
     "@epis2/design-system": "*",

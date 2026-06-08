@@ -6,6 +6,8 @@
 |---------|------------|
 | `medico.demo` | `DEMO-CLAVE-MEDICO` |
 | `enfermeria.demo` | `DEMO-CLAVE-ENFERMERIA` |
+| `paramedico.demo` | `DEMO-CLAVE-PARAMEDICO` |
+| `kine.demo` | `DEMO-CLAVE-KINE` |
 | `farmacia.demo` | `DEMO-CLAVE-FARMACIA` |
 | `admin.demo` | `DEMO-CLAVE-ADMIN` |
 | `auditor.demo` | `DEMO-CLAVE-AUDITOR` |

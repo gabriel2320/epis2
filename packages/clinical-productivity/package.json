@@ -1,0 +1,35 @@
+{
+  "name": "@epis2/clinical-productivity",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "EPIS2 — utilidades clínicas de productividad (wrappers MD3)",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@epis2/design-system": "*",
+    "@epis2/epis2-ui": "*",
+    "zod": "^3.25.42"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "typescript": "^5.8.3"
+  }
+}

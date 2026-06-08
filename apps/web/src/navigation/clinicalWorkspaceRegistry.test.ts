@@ -11,14 +11,17 @@ import {
 import { resolveWorkspaceCopyKey } from './workspaceCopy.js';
 
 describe('clinicalWorkspaceRegistry', () => {
-  it('define los ocho espacios de trabajo canónicos', () => {
+  it('define los once espacios de trabajo canónicos (rol × ámbito)', () => {
     expect(CLINICAL_WORKSPACE_ORDER).toEqual([
       'command',
       'reception',
       'ambulatory',
+      'inpatient_ward',
+      'intermediate_care',
       'emergency',
       'icu',
       'or',
+      'pharmacy_clinical',
       'quality_iaas',
       'admin_system',
     ]);
@@ -64,8 +67,13 @@ describe('clinicalWorkspaceRegistry', () => {
   });
 
   it('sugiere workspace inicial por rol demo', () => {
-    expect(resolveWorkspaceForRole('admin')).toBe('quality_iaas');
+    expect(resolveWorkspaceForRole('admin')).toBe('admin_system');
+    expect(resolveWorkspaceForRole('auditor')).toBe('quality_iaas');
     expect(resolveWorkspaceForRole('physician')).toBe('ambulatory');
+    expect(resolveWorkspaceForRole('nurse')).toBe('inpatient_ward');
+    expect(resolveWorkspaceForRole('paramedic')).toBe('emergency');
+    expect(resolveWorkspaceForRole('kinesiologist')).toBe('ambulatory');
+    expect(resolveWorkspaceForRole('pharmacist')).toBe('pharmacy_clinical');
   });
 
   it('expone copy español para cada workspace', () => {

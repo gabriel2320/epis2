@@ -23,6 +23,7 @@ export {
   EpisClinicalActionDockSecondary,
   type EpisClinicalActionDockProps,
 } from './EpisClinicalActionDock.js';
+export { EpisContextMenu, type EpisContextMenuItem, type EpisContextMenuProps } from './EpisContextMenu.js';
 export {
   EPIS2_NAV_RAIL_WIDTH_PX,
   EPIS2_PATIENT_CONTEXT_BAR_MIN_PX,

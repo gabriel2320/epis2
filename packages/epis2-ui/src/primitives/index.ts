@@ -5,6 +5,11 @@ export { EpisTopAppBar, type EpisTopAppBarProps } from './EpisTopAppBar.js';
 export { EpisAssistChip, EpisFilterChip, type EpisAssistChipProps, type EpisFilterChipProps } from './EpisM3Chips.js';
 export { EpisIconButton, type EpisIconButtonProps } from './EpisIconButton.js';
 export { EpisTextField, type EpisTextFieldProps } from './EpisTextField.js';
+export {
+  EpisAutocomplete,
+  EpisAutocompleteTextField,
+  type EpisAutocompleteProps,
+} from './EpisAutocomplete.js';
 export { EpisSelect, type EpisSelectProps } from './EpisSelect.js';
 export { EpisChip, type EpisChipProps } from './EpisChip.js';
 export { EpisDemoBadgeChip, epis2DemoBadgeChipSx, type EpisDemoBadgeChipProps } from './EpisDemoBadgeChip.js';

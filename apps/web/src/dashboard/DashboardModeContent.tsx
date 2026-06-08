@@ -2,7 +2,6 @@ import { copy } from '@epis2/design-system';
 import {
   Alert,
   Chip,
-  EpisAppShellLayout,
   EpisDashboardShell,
   type EpisDashboardTab,
   EpisLoadingState,
@@ -18,11 +17,11 @@ import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { readRecentPatients } from '../clinical/recentPatients.js';
 import { useDashboardQueries } from '../query/hooks/useDashboardQueries.js';
 import { useClinicalNavigate, type DashboardTab } from '../routes/clinicalNavigate.js';
-import {
-  Epis2NavigationRailFooter,
-  useEpis2NavigationRailItems,
-} from '../navigation/epis2NavigationRail.js';
-import { ClinicalGlobalTopBar } from '../layouts/ClinicalGlobalTopBar.js';
+import { useEpisSideNavigation } from '../components/layout/EpisSideNavigation.js';
+import { EpisAppScaffold } from '../components/layout/EpisAppScaffold.js';
+import { ClinicalShellCommandPalette } from '../components/ClinicalShellCommandPalette.js';
+import { EpisTopAppBar } from '../components/layout/EpisTopAppBar.js';
+import { EpisClinicalWorkspaceShell } from '../components/layout/EpisClinicalWorkspaceShell.js';
 import { PatientDashboardTab } from '../components/PatientDashboardTab.js';
 import { QualityDashboardTab } from '../components/QualityDashboardTab.js';
 import { NursingDashboardTab } from '../components/NursingDashboardTab.js';
@@ -44,7 +43,7 @@ const LazyDashboardWorklists = lazy(() =>
 export function DashboardModeContent() {
   const search = useSearch({ strict: false }) as { tab?: string; patientId?: string };
   const navigate = useClinicalNavigate();
-  const railItems = useEpis2NavigationRailItems();
+  const { sideNavItems, sideNavFooter } = useEpisSideNavigation();
   const { session, hasPermission } = useAuth();
   const role = session?.user.role;
   const canQuality = hasPermission('audit.read');
@@ -560,13 +559,16 @@ export function DashboardModeContent() {
   }
 
   return (
-    <EpisAppShellLayout
-      railItems={railItems}
-      railFooter={<Epis2NavigationRailFooter />}
-      appBar={<ClinicalGlobalTopBar active="dashboard" />}
+    <>
+    <EpisAppScaffold
+      screenKind="workspace"
+      topBar={<EpisTopAppBar active="dashboard" />}
+      sideNavItems={sideNavItems}
+      sideNavFooter={sideNavFooter}
       testId="epis2-dashboard-shell"
     >
-      <EpisDashboardShell
+      <EpisClinicalWorkspaceShell screenKind="workspace" testId="epis2-dashboard-workspace">
+        <EpisDashboardShell
         title={copy.dashboard.title}
         subtitle={copy.dashboard.subtitle}
         demoBadge={copy.demoBadge}
@@ -578,7 +580,10 @@ export function DashboardModeContent() {
         data-testid="epis2-dashboard-mode"
       >
         {panel}
-      </EpisDashboardShell>
-    </EpisAppShellLayout>
+        </EpisDashboardShell>
+      </EpisClinicalWorkspaceShell>
+    </EpisAppScaffold>
+    <ClinicalShellCommandPalette />
+    </>
   );
 }

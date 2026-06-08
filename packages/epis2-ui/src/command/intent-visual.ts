@@ -42,10 +42,45 @@ export function getIntentChipTone(intent: ClinicalIntent, aiAssisted?: boolean):
   }
 }
 
-export type RoleChipTone = 'physician' | 'nurse' | 'pharmacist' | 'admin' | 'auditor' | 'default';
+export type RoleChipTone =
+  | 'physician'
+  | 'nurse'
+  | 'paramedic'
+  | 'kinesiologist'
+  | 'pharmacist'
+  | 'admin'
+  | 'auditor'
+  | 'default';
+
+export type IntentSuggestionBadge = {
+  labelKey: 'suggestionBadgePending' | 'suggestionBadgeImportant' | 'suggestionBadgeReview';
+  tone: 'default' | 'success' | 'info' | 'warning';
+};
+
+export function getIntentSuggestionBadge(intent: ClinicalIntent): IntentSuggestionBadge {
+  switch (intent) {
+    case 'request_laboratory':
+      return { labelKey: 'suggestionBadgeImportant', tone: 'success' };
+    case 'prepare_pharmacy_review':
+    case 'record_medication_administration':
+      return { labelKey: 'suggestionBadgeReview', tone: 'warning' };
+    case 'prepare_discharge_draft':
+      return { labelKey: 'suggestionBadgePending', tone: 'info' };
+    default:
+      return { labelKey: 'suggestionBadgePending', tone: 'default' };
+  }
+}
 
 export function getRoleChipTone(role: string): RoleChipTone {
-  if (role === 'physician' || role === 'nurse' || role === 'pharmacist' || role === 'admin' || role === 'auditor') {
+  if (
+    role === 'physician' ||
+    role === 'nurse' ||
+    role === 'paramedic' ||
+    role === 'kinesiologist' ||
+    role === 'pharmacist' ||
+    role === 'admin' ||
+    role === 'auditor'
+  ) {
     return role;
   }
   return 'default';

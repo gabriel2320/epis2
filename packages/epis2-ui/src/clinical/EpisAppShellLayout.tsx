@@ -11,6 +11,8 @@ export type EpisAppShellLayoutProps = {
   /** Barra contextual paciente + tabs (Nivel 1–2). */
   patientChrome?: ReactNode;
       railHidden?: boolean;
+      /** Cuando true, el scroll vive en hijos (EpisAppScaffold) — no en el slot principal. */
+      embeddedLayout?: boolean;
       children: ReactNode;
   testId?: string;
 };
@@ -22,6 +24,7 @@ export function EpisAppShellLayout({
   appBar,
   patientChrome,
   railHidden = false,
+  embeddedLayout = false,
   children,
   testId = 'epis2-app-shell',
 }: EpisAppShellLayoutProps) {
@@ -67,7 +70,10 @@ export function EpisAppShellLayout({
         <Box
           sx={{
             flex: 1,
-            overflow: 'auto',
+            overflow: embeddedLayout ? 'hidden' : 'auto',
+            display: embeddedLayout ? 'flex' : 'block',
+            flexDirection: embeddedLayout ? 'column' : undefined,
+            minHeight: embeddedLayout ? 0 : undefined,
             px: { xs: 2, sm: 3 },
             py: { xs: 2, sm: 2.5 },
           }}

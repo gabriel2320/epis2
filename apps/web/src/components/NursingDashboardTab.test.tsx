@@ -65,6 +65,43 @@ vi.mock('./WorklistDraftGrid.js', () => ({
   ),
 }));
 
+vi.mock('./grids/DashboardHomogeneousGrid.js', () => ({
+  DashboardHomogeneousGrid: ({
+    rows,
+    onRowClick,
+    extraBulkActions,
+    'data-testid': testId,
+  }: {
+    rows: { id: string; patientDisplayName?: string; medication?: string; patientId?: string }[];
+    onRowClick?: (row: { id: string; patientId?: string }) => void;
+    extraBulkActions?: (ids: readonly string[]) => { id: string; label: string; onClick: () => void }[];
+    'data-testid'?: string;
+  }) => (
+    <div data-testid={testId}>
+      {rows.map((row) => (
+        <div key={row.id} data-testid={`epis2-nursing-mar-${row.id}`}>
+          <span>{row.medication}</span>
+          {row.requiresDoubleCheck ? (
+            <span>{copy.inpatient.doubleCheckRequired}</span>
+          ) : null}
+          <button type="button" onClick={() => onRowClick?.(row)}>
+            {copy.inpatient.openPatient}
+          </button>
+          {extraBulkActions ? (
+            <button
+              type="button"
+              data-testid={`epis2-nursing-register-mar-${row.id}`}
+              onClick={() => extraBulkActions([row.id])[0]?.onClick()}
+            >
+              {copy.inpatient.registerMar}
+            </button>
+          ) : null}
+        </div>
+      ))}
+    </div>
+  ),
+}));
+
 afterEach(() => cleanup());
 
 describe('NursingDashboardTab', () => {

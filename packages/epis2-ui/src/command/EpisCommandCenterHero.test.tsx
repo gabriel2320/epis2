@@ -22,12 +22,12 @@ function renderHero(onSelect = vi.fn()) {
 afterEach(() => cleanup());
 
 describe('EpisCommandCenterHero', () => {
-  it('renderiza título, chips y tarjetas del registry', () => {
+  it('renderiza título y chips compactos sin tarjetas', () => {
     renderHero();
     expect(screen.getByTestId('epis2-command-prompt')).toHaveTextContent(copy.commandCenter.title);
     expect(screen.getByTestId('epis2-command-quick-chips')).toBeInTheDocument();
-    expect(screen.getByTestId('epis2-command-suggestion-cards')).toBeInTheDocument();
-    expect(screen.getByTestId('epis2-command-safety-note')).toBeInTheDocument();
+    expect(screen.queryByTestId('epis2-command-suggestion-cards')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('epis2-command-safety-note')).not.toBeInTheDocument();
     expect(screen.getByTestId('ctx')).toBeInTheDocument();
   });
 
@@ -35,10 +35,7 @@ describe('EpisCommandCenterHero', () => {
     const user = userEvent.setup();
     const onSelect = vi.fn();
     renderHero(onSelect);
-    const cards = screen.getAllByRole('button');
-    const suggestionCard = cards.find((el) => el.getAttribute('data-testid')?.startsWith('epis2-suggestion-card-'));
-    expect(suggestionCard).toBeTruthy();
-    await user.click(suggestionCard!);
+    await user.click(screen.getAllByRole('button')[0]!);
     expect(onSelect).toHaveBeenCalled();
   });
 });

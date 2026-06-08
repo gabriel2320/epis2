@@ -67,11 +67,18 @@ export function getCommandChipsForRole(
   return merged.slice(0, max + (options?.aiAvailable ? 2 : 0));
 }
 
-/** Wire híbrido Centro de Comando — chips rápidos + tarjetas (registry, sin dashboard). */
+/** Presupuesto visual MF-UI-DENSITY — pantalla de decisión /comando. */
+export const COMMAND_CENTER_DENSITY = {
+  maxQuickChips: 4,
+  maxCardChips: 0,
+  maxContinueWorkRows: 5,
+} as const;
+
+/** Wire híbrido Centro de Comando — chips rápidos (+ tarjetas solo si density lo permite). */
 export function getCommandCenterWireSuggestions(
   role: string,
   permissions: readonly string[],
-  options?: { aiAvailable?: boolean },
+  options?: { aiAvailable?: boolean; richCards?: boolean },
 ): { quickChips: CommandChip[]; cardChips: CommandChip[] } {
   const all = getCommandChipsForRole(role, permissions, {
     ...(options?.aiAvailable !== undefined ? { aiAvailable: options.aiAvailable } : {}),
@@ -80,9 +87,10 @@ export function getCommandCenterWireSuggestions(
   const actionable = all.filter(
     (chip) => !chip.aiAssisted && !chip.intent.startsWith('open_dashboard'),
   );
+  const cardLimit = options?.richCards ? 4 : COMMAND_CENTER_DENSITY.maxCardChips;
   return {
-    quickChips: actionable.slice(0, 5),
-    cardChips: actionable.slice(0, 4),
+    quickChips: actionable.slice(0, COMMAND_CENTER_DENSITY.maxQuickChips),
+    cardChips: cardLimit > 0 ? actionable.slice(0, cardLimit) : [],
   };
 }
 
@@ -92,6 +100,8 @@ export function getCommandBarAiHint(role: string, aiAvailable: boolean): string 
     const off: Record<string, string> = {
       physician: 'IA local apagada — comandos y formularios manuales disponibles.',
       nurse: 'Sin asistencia de IA — notas y MAR se completan manualmente.',
+      paramedic: 'Sin asistencia de IA — urgencias y triaje manual.',
+      kinesiologist: 'Sin asistencia de IA — plan kinésico manual.',
       pharmacist: 'Sin asistencia de IA — validación farmacéutica manual.',
       admin: 'Sin asistencia de IA — tableros y auditoría operativos.',
       auditor: 'Sin asistencia de IA — tablero de calidad disponible.',
@@ -101,6 +111,8 @@ export function getCommandBarAiHint(role: string, aiAvailable: boolean): string 
   const on: Record<string, string> = {
     physician: 'IA local activa — asistencia en evolución, epicrisis y receta (siempre borrador).',
     nurse: 'IA local activa — apoyo en notas de enfermería y MAR (revisión humana).',
+    paramedic: 'IA local activa — apoyo en triaje (revisión humana).',
+    kinesiologist: 'IA local activa — apoyo en plan kinésico (revisión humana).',
     pharmacist: 'IA local activa — apoyo en validación farmacéutica (no dispensa).',
     admin: 'IA local activa — consultas en ficha; comandos de administración sin cambios.',
     auditor: 'IA local activa — lectura y trazabilidad; sin ejecución clínica.',

@@ -137,7 +137,7 @@ describe('PatientWorkspacePage', () => {
     expect(screen.queryByText(copy.activePatient.approvedNotes)).not.toBeInTheDocument();
     expect(screen.queryByText(copy.activePatient.pendingDrafts)).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByText(copy.activePatient.viewFullHistory));
+    fireEvent.click(screen.getByTestId('epis2-ficha-history'));
     await waitFor(() => {
       expect(screen.getByTestId('epis2-longitudinal-panel')).toBeInTheDocument();
     });

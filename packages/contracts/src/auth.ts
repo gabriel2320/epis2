@@ -9,7 +9,15 @@ export const sessionUserSchema = z.object({
   id: z.string().min(8),
   username: z.string(),
   displayName: z.string(),
-  role: z.enum(['physician', 'nurse', 'pharmacist', 'admin', 'auditor']),
+  role: z.enum([
+    'physician',
+    'nurse',
+    'paramedic',
+    'kinesiologist',
+    'pharmacist',
+    'admin',
+    'auditor',
+  ]),
 });
 
 export const sessionResponseSchema = z.object({

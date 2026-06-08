@@ -70,6 +70,8 @@ docker compose up -d   # solo Postgres por defecto
 npm run ai:enable      # verifica Ollama + pull qwen3:8b
 npm run quality:local-ci   # replica gates CI local (Postgres + migrate)
 npm run test:e2e:install && npm run test:e2e   # journey UI Playwright
+npm run stack:dev        # Postgres + migrate + Ollama smoke
+npm run dev:session      # brief IA + subagente primario (Cursor: @reports/dev-agent-brief.md)
 npm run dev:ai         # puerto 3002 (dejar en terminal aparte)
 npm run dev:api        # puerto 3001
 npm run dev:web        # puerto 5173

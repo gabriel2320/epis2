@@ -1,11 +1,11 @@
 import type { DashboardWorkResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import {
-  EpisDataGridSuspense,
-  EpisDraftStatus,
-  type GridColDef,
-} from '@epis2/epis2-ui';
-import { useMemo } from 'react';
+import { EpisDraftStatus } from '@epis2/epis2-ui';
+import type { ClinicalGridColDef } from '@epis2/clinical-productivity';
+import type { EpisDataGridRow } from '@epis2/epis2-ui';
+import { useCallback, useMemo } from 'react';
+import type { EpisBulkActionMenuItem } from './actions/EpisBulkActionMenu.js';
+import { EpisRadSelectableGrid } from './rad/EpisRadSelectableGrid.js';
 
 export type DraftWorklistRow = DashboardWorkResponse['myOpenDrafts'][number];
 
@@ -24,6 +24,7 @@ export type WorklistDraftGridProps = {
   error?: string;
   emptyMessage: string;
   onOpenDraft: (draftId: string) => void;
+  onCopySelection?: (lines: string[]) => void;
   showPatientColumn?: boolean;
   showUpdatedColumn?: boolean;
   'data-testid'?: string;
@@ -35,12 +36,13 @@ export function WorklistDraftGrid({
   error,
   emptyMessage,
   onOpenDraft,
+  onCopySelection,
   showPatientColumn = true,
   showUpdatedColumn = true,
   'data-testid': testId,
 }: WorklistDraftGridProps) {
-  const columns = useMemo<GridColDef[]>(() => {
-    const cols: GridColDef[] = [
+  const columns = useMemo<ClinicalGridColDef[]>(() => {
+    const cols: ClinicalGridColDef[] = [
       {
         field: 'title',
         headerName: copy.dashboard.gridColumnTitle,
@@ -82,15 +84,44 @@ export function WorklistDraftGrid({
     return cols;
   }, [showPatientColumn, showUpdatedColumn]);
 
+  const buildBulkActions = useCallback(
+    (selectedIds: readonly string[]): EpisBulkActionMenuItem[] => {
+      const actions: EpisBulkActionMenuItem[] = [];
+      if (onCopySelection) {
+        actions.push({
+          id: 'copy-selection',
+          label: copy.uiSimplify.bulkCopySelection,
+          onClick: () => {
+            const lines = selectedIds.map((id) => {
+              const row = rows.find((r) => r.id === id);
+              return row?.title ?? id;
+            });
+            onCopySelection(lines);
+          },
+        });
+      }
+      if (selectedIds.length === 1) {
+        actions.push({
+          id: 'open-draft',
+          label: copy.dashboard.gridColumnTitle,
+          onClick: () => onOpenDraft(selectedIds[0]!),
+        });
+      }
+      return actions;
+    },
+    [onCopySelection, onOpenDraft, rows],
+  );
+
   return (
-    <EpisDataGridSuspense
+    <EpisRadSelectableGrid
       rows={rows}
       columns={columns}
-      loading={loading}
-      error={error}
       emptyMessage={emptyMessage}
+      {...(loading !== undefined ? { loading } : {})}
+      {...(error ? { error } : {})}
+      onRowClick={(row: EpisDataGridRow) => onOpenDraft(row.id)}
+      buildBulkActions={buildBulkActions}
       hideFooter={rows.length <= 10}
-      onRowClick={(row) => onOpenDraft(row.id)}
       data-testid={testId}
     />
   );

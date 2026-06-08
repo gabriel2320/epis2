@@ -100,6 +100,7 @@ import { EpisClinicalSoapHints } from '../components/EpisClinicalSoapHints.js';
 import { ClinicalPageNav } from '../components/ClinicalPageNav.js';
 
 import { PatientListGrid } from '../components/PatientListGrid.js';
+import { PatientSearchAutocomplete } from '../components/PatientSearchAutocomplete.js';
 
 import { useAuth } from '../auth/AuthContext.js';
 
@@ -175,11 +176,12 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
   const [isSuggesting, setIsSuggesting] = useState(false);
   const [patientSearch, setPatientSearch] = useState<string | undefined>();
+  const [patientLookupQuery, setPatientLookupQuery] = useState('');
   const [patientsFetchEnabled, setPatientsFetchEnabled] = useState(false);
 
   const [assistContext, setAssistContext] = useState<Record<string, string>>({});
   const { aiAvailable: aiStatusAvailable } = useAiStatusQuery();
-  const { patients, refetch: refetchPatients } = usePatientsQuery({
+  const { patients, refetch: refetchPatients, isFetching: patientsFetching } = usePatientsQuery({
     search: patientSearch,
     enabled: patientsFetchEnabled,
   });
@@ -321,6 +323,20 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     });
 
   }, [values.identifier, values.patientName, refetchPatients]);
+
+  useEffect(() => {
+    if (blueprint.blueprintId !== 'patient_search') return;
+    const trimmed = patientLookupQuery.trim();
+    if (trimmed.length < 2) {
+      setPatientsFetchEnabled(false);
+      return;
+    }
+    const timer = window.setTimeout(() => {
+      setPatientSearch(trimmed);
+      setPatientsFetchEnabled(true);
+    }, 300);
+    return () => window.clearTimeout(timer);
+  }, [blueprint.blueprintId, patientLookupQuery]);
 
 
 
@@ -833,6 +849,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
                   clinicalDropEnabled
                   onClinicalDrop={onClinicalDrop}
                   onChange={onChange}
+                  collapseNonPrimarySections={blueprint.sections.length > 2}
                 />
               </EpisClinicalScrollspyLayout>
 
@@ -921,6 +938,20 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
         <Stack spacing={2}>
 
+          <PatientSearchAutocomplete
+
+            patients={patients}
+
+            query={patientLookupQuery}
+
+            onQueryChange={setPatientLookupQuery}
+
+            onSelectPatient={(row) => selectPatient(row.id)}
+
+            loading={patientsFetching}
+
+          />
+
           <EpisClinicalForm
 
             blueprint={blueprint}
@@ -932,6 +963,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
             clinicalProse={clinicalProse}
 
             onChange={onChange}
+
+            collapseNonPrimarySections={blueprint.sections.length > 2}
 
           />
 
@@ -972,6 +1005,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
             clinicalProse={clinicalProse}
 
             onChange={onChange}
+
+            collapseNonPrimarySections={blueprint.sections.length > 2}
 
           />
 
