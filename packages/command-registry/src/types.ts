@@ -27,6 +27,7 @@ export type ClinicalIntent =
   | 'request_laboratory'
   | 'request_referral'
   | 'request_imaging'
+  | 'request_procedure'
   | 'create_nursing_note'
   | 'record_medication_administration'
   | 'prepare_pharmacy_review'

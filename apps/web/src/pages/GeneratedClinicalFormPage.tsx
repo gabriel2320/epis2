@@ -16,13 +16,9 @@ import {
 
   defaultSummaryValues,
 
-  initialFormValues,
-
   mergePrefillOnlyEmpty,
 
   scrollspySectionLabels,
-
-  validateFormValues,
 
   type ClinicalFormBlueprint,
 
@@ -48,7 +44,7 @@ import {
 
   EpisClinicalFocusAppBar,
 
-  EpisClinicalForm,
+  EpisClinicalFormRhf,
 
   EpisClinicalFormActionBar,
 
@@ -60,9 +56,15 @@ import {
 
   EpisClinicalTwoPaneLayout,
 
+  epis2ClinicalFormContentMaxWidthSx,
+
   EpisM3Text,
 
+  FormProvider,
+
   Stack,
+
+  useEpisClinicalBlueprintForm,
 
   useEpisClinicalContextPanel,
 
@@ -164,11 +166,13 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
 
 
-  const [values, setValues] = useState(() => initialFormValues(blueprint, seed));
+  const form = useEpisClinicalBlueprintForm({ blueprint, seed });
+
+  const { watch, setValue, getValues, trigger, reset } = form;
+
+  const values = watch();
 
   const [showCommandPrefillBadge] = useState(() => hasCommandSlotSearchParams(search));
-
-  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
 
@@ -266,39 +270,16 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
 
 
-  const onChange = useCallback((fieldId: string, value: string) => {
-
-    setValues((prev) => ({ ...prev, [fieldId]: value }));
-
-    setFieldErrors((prev) => {
-
-      const next = { ...prev };
-
-      delete next[fieldId];
-
-      return next;
-
-    });
-
-  }, []);
-
-
-
   const insertContextFragment = useCallback(
     (payload: ClinicalContextInsertPayload) => {
       const fieldId = payload.fieldId ?? defaultContextInsertFieldId;
       const line = payload.text.trim();
       if (!line) return;
-      setValues((prev) => {
-        const current = prev[fieldId]?.trim();
-        return {
-          ...prev,
-          [fieldId]: current ? `${current}\n${line}` : line,
-        };
-      });
+      const current = getValues(fieldId)?.trim();
+      setValue(fieldId, current ? `${current}\n${line}` : line, { shouldDirty: true });
       setStatusMessage(copy.clinicalLayout.insertSuccess);
     },
-    [defaultContextInsertFieldId],
+    [defaultContextInsertFieldId, getValues, setValue],
   );
 
   const onClinicalDrop = useCallback(
@@ -314,7 +295,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
     setLoadError(undefined);
 
-    const term = values.identifier?.trim() || values.patientName?.trim();
+    const current = getValues();
+    const term = current.identifier?.trim() || current.patientName?.trim();
 
     setPatientSearch(term || undefined);
     setPatientsFetchEnabled(true);
@@ -322,7 +304,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       setLoadError(copy.forms.loadPatientsError);
     });
 
-  }, [values.identifier, values.patientName, refetchPatients]);
+  }, [getValues, refetchPatients]);
 
   useEffect(() => {
     if (blueprint.blueprintId !== 'patient_search') return;
@@ -350,7 +332,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     setAssistContext(pickAssistContextFromSummary(res.clinicalContext.summaryFields));
 
     if (blueprint.blueprintId === 'patient_summary') {
-      setValues((prev) => ({ ...prev, ...res.clinicalContext.summaryFields }));
+      reset({ ...getValues(), ...res.clinicalContext.summaryFields });
       return;
     }
 
@@ -359,10 +341,10 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       res.clinicalContext.summaryFields,
     );
     if (Object.keys(contextPrefill).length > 0) {
-      setValues((prev) => mergePrefillOnlyEmpty(prev, contextPrefill));
+      reset(mergePrefillOnlyEmpty(getValues(), contextPrefill));
     }
 
-  }, [patientDetailQuery.data, blueprint.blueprintId, pinPatient]);
+  }, [patientDetailQuery.data, blueprint.blueprintId, pinPatient, getValues, reset]);
 
   useEffect(() => {
     if (!hasCommandSlotSearchParams(search)) return;
@@ -411,7 +393,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
         blueprintId: blueprint.blueprintId,
 
-        currentFields: values,
+        currentFields: getValues(),
 
         context: { demo: copy.demoBadge, ...assistContext },
 
@@ -423,27 +405,19 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
       if (result.status === 'success') {
 
-        setValues((prev) => {
+        for (const [key, value] of Object.entries(
 
-          const next = { ...prev };
+          sanitizeAiSuggestedFields(result.suggestedFields),
 
-          for (const [key, value] of Object.entries(
+        )) {
 
-            sanitizeAiSuggestedFields(result.suggestedFields),
+          if (!getValues(key)?.trim()) {
 
-          )) {
-
-            if (!next[key]?.trim()) {
-
-              next[key] = value;
-
-            }
+            setValue(key, value, { shouldDirty: true });
 
           }
 
-          return next;
-
-        });
+        }
 
         setStatusMessage(copy.forms.aiApplied);
 
@@ -483,23 +457,13 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
 
 
-  const saveDraft = (intent: 'save' | 'sign' = 'save') => {
+  const saveDraft = async (intent: 'save' | 'sign' = 'save') => {
 
     setStatusMessage(undefined);
 
-    const validation = validateFormValues(blueprint, values);
+    const valid = await trigger();
 
-    if (!validation.valid) {
-
-      const map: Record<string, string> = {};
-
-      for (const e of validation.errors) {
-
-        map[e.fieldId] = e.message;
-
-      }
-
-      setFieldErrors(map);
+    if (!valid) {
 
       setStatusMessage(copy.forms.validationRequired);
 
@@ -507,7 +471,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
     }
 
-
+    const body = getValues();
 
     const draftType = BLUEPRINT_DRAFT_TYPES[blueprint.blueprintId];
 
@@ -531,7 +495,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
         title: blueprint.label,
 
-        body: values,
+        body,
 
       },
 
@@ -758,6 +722,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
     return (
 
+      <FormProvider {...form}>
+
       <Box data-testid="epis2-generated-clinical-page" sx={{ width: '100%' }}>
 
         <EpisClinicalTwoPaneLayout
@@ -812,9 +778,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
               sx={{
 
-                maxWidth: contextOpen ? '100%' : 640,
-
-                mx: 'auto',
+                ...(contextOpen ? { maxWidth: '100%' } : epis2ClinicalFormContentMaxWidthSx),
 
                 width: '100%',
 
@@ -841,14 +805,11 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
               />
 
               <EpisClinicalScrollspyLayout sections={scrollspySections}>
-                <EpisClinicalForm
+                <EpisClinicalFormRhf
                   blueprint={blueprint}
-                  values={values}
-                  errors={fieldErrors}
                   clinicalProse={clinicalProse}
                   clinicalDropEnabled
                   onClinicalDrop={onClinicalDrop}
-                  onChange={onChange}
                   collapseNonPrimarySections={blueprint.sections.length > 2}
                 />
               </EpisClinicalScrollspyLayout>
@@ -920,6 +881,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
       </Box>
 
+      </FormProvider>
+
     );
 
   }
@@ -927,6 +890,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
 
   return (
+
+    <FormProvider {...form}>
 
     <EpisClinicalFormPage title={blueprint.label} headerExtra={headerExtra}>
 
@@ -952,17 +917,11 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
           />
 
-          <EpisClinicalForm
+          <EpisClinicalFormRhf
 
             blueprint={blueprint}
 
-            values={values}
-
-            errors={fieldErrors}
-
             clinicalProse={clinicalProse}
-
-            onChange={onChange}
 
             collapseNonPrimarySections={blueprint.sections.length > 2}
 
@@ -994,17 +953,11 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
         <>
 
-          <EpisClinicalForm
+          <EpisClinicalFormRhf
 
             blueprint={blueprint}
 
-            values={values}
-
-            errors={fieldErrors}
-
             clinicalProse={clinicalProse}
-
-            onChange={onChange}
 
             collapseNonPrimarySections={blueprint.sections.length > 2}
 
@@ -1061,6 +1014,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       <ClinicalPageNav patientId={effectivePatientId} />
 
     </EpisClinicalFormPage>
+
+    </FormProvider>
 
   );
 

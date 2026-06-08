@@ -125,6 +125,9 @@ describe('PatientWorkspacePage', () => {
     expect(screen.queryByTestId('epis2-ficha-widget-panel')).not.toBeInTheDocument();
     expect(screen.getByTestId('epis2-clinical-alerts')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-clinical-summary')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-ficha-antecedents')).toBeInTheDocument();
+    expect(screen.getByText('Infección (demo)')).toBeInTheDocument();
+    expect(screen.queryByTestId('epis2-ficha-register-allergy')).not.toBeInTheDocument();
     expect(screen.getByTestId('epis2-recent-activity')).toBeInTheDocument();
     expect(
       within(screen.getByTestId('epis2-recent-activity')).getByText('Consulta demo'),

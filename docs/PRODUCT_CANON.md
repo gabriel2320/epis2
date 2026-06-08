@@ -86,6 +86,7 @@ EPIS queda **`LEGACY_REFERENCE`**. Se extrae visión, comandos, blueprints, micr
 ## Referencias internas
 
 - `SCOPE_V1.md` — MVP
+- `EPIS2_FORM_SCREEN_TREE.md` — árbol formulario → pantalla (canon)
 - `ARCHITECTURE_TARGET.md` — stack
 - `CLINICAL_SAFETY_PRINCIPLES.md` — seguridad
 - `ROADMAP.md` — fases de implementación

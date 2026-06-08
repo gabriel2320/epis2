@@ -3,6 +3,7 @@ import { copy } from '@epis2/design-system';
 import type { ClinicalGridColDef } from '@epis2/clinical-productivity';
 import {
   Alert,
+  Box,
   Chip,
   EpisMetric,
   EpisWorkspaceSection,
@@ -183,6 +184,7 @@ export function PharmacyDashboardTab({
                 />
               ))}
             </Stack>
+            <Box data-testid="epis2-pharmacy-ysite-rows">
             <DashboardHomogeneousGrid
               rows={data.ySiteChecks.map((row, index) => ({
                 id: `ysite-${index}`,
@@ -199,6 +201,7 @@ export function PharmacyDashboardTab({
               selectable={false}
               data-testid="epis2-pharmacy-ysite-grid"
             />
+            </Box>
           </Stack>
         </EpisRadFormSectionAccordion>
 

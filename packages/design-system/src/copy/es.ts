@@ -559,6 +559,7 @@ export const copy = {
     summaryMedications: 'Medicación activa',
     summaryPending: 'Pendientes',
     summaryAlerts: 'Alertas documentadas',
+    antecedentsTitle: 'Alergias y problemas activos',
   },
   drafts: {
     reviewTitle: 'Revisión de borrador',
@@ -571,6 +572,9 @@ export const copy = {
     approvalDisclaimer:
       'La aprobación humana es obligatoria antes de registrar la nota clínica final.',
     approvedSuccess: 'Aprobación registrada. Nota clínica creada.',
+    encounterClosureOnApprove:
+      'Al aprobar se cerrará el episodio ambulatorio abierto del paciente (acción humana auditada).',
+    encounterClosedSuccess: 'Episodio ambulatorio cerrado tras la aprobación.',
     approveError: 'No se pudo aprobar. Verifica permisos y estado.',
     transitionError: 'Transición de estado no permitida.',
     openReview: 'Ir a revisión',

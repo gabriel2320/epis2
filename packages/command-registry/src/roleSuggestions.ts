@@ -11,6 +11,7 @@ export const ROLE_COMMAND_INTENTS: Record<ClinicalRole, readonly ClinicalIntent[
     'request_laboratory',
     'request_referral',
     'request_imaging',
+    'request_procedure',
     'prepare_discharge_draft',
     'reconcile_medications',
     'register_allergy',

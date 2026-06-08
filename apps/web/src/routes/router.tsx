@@ -202,6 +202,13 @@ const imagingFormRoute = createRoute({
   component: clinicalFormPage('/espacio/imagenologia'),
 });
 
+const procedureFormRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/procedimiento',
+  validateSearch: validatePatientSearch,
+  component: clinicalFormPage('/espacio/procedimiento'),
+});
+
 const nursingFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/enfermeria',
@@ -381,6 +388,7 @@ export const routeTree = rootRoute.addChildren([
     labFormRoute,
     referralFormRoute,
     imagingFormRoute,
+    procedureFormRoute,
     nursingFormRoute,
     marFormRoute,
     pharmacyFormRoute,

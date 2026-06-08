@@ -146,6 +146,17 @@ export const INTENT_SECURE_METADATA: Record<ClinicalIntent, SecureCommandMeta> =
     examples: ['pedir TAC de tórax'],
     formId: 'imaging_order',
   },
+  request_procedure: {
+    family: 'medical_order',
+    description: 'Solicitar procedimiento diagnóstico o terapéutico.',
+    category: 'orders',
+    requiredContext: ['patient', 'encounter'],
+    safetyLevel: 'order',
+    actionType: 'open_form',
+    confirmationRequired: true,
+    examples: ['solicitar endoscopia', 'pedir biopsia', 'orden de procedimiento'],
+    formId: 'procedure_request',
+  },
   create_nursing_note: {
     family: 'daily_evolution',
     description: 'Nota de enfermería o cuidados.',

@@ -38,6 +38,10 @@ export {
   ClinicalSnippetExpander,
   type ClinicalRichTextEditorProps,
 } from './components/ClinicalRichTextEditor.js';
+export {
+  ClinicalRichTextField,
+  type ClinicalRichTextFieldProps,
+} from './components/ClinicalRichTextField.js';
 export { ClinicalSemanticSearchBox, type ClinicalSemanticSearchBoxProps } from './components/ClinicalSemanticSearchBox.js';
 export { ClinicalSpellCheck, type ClinicalSpellCheckProps } from './components/ClinicalSpellCheck.js';
 export {

@@ -23,6 +23,8 @@ export const ASSIST_BLUEPRINT_FIELDS: Record<string, readonly string[]> = {
     'clinicalNotes',
   ],
   lab_request: ['labTests', 'clinicalReason', 'priority'],
+  imaging_request: ['modality', 'studyDescription', 'clinicalIndication', 'priority'],
+  procedure_request: ['procedureType', 'procedureDescription', 'clinicalReason', 'priority'],
   nursing_note: [
     'bloodPressure',
     'heartRate',

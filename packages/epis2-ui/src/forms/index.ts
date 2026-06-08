@@ -1,5 +1,16 @@
+export { FormProvider } from 'react-hook-form';
 export { EpisClinicalField, type EpisClinicalFieldProps } from './EpisClinicalField.js';
+export {
+  epis2ClinicalFormCanvasSx,
+  epis2ClinicalFormContentMaxWidthSx,
+} from './clinical-field-layout.js';
 export { EpisClinicalForm, type EpisClinicalFormProps } from './EpisClinicalForm.js';
+export { EpisClinicalFormRhf, type EpisClinicalFormRhfProps } from './EpisClinicalFormRhf.js';
+export {
+  useEpisClinicalBlueprintForm,
+  type EpisClinicalFormValues,
+  type UseEpisClinicalBlueprintFormOptions,
+} from './useEpisClinicalBlueprintForm.js';
 export {
   EpisClinicalFormFooter,
   type EpisClinicalFormFooterProps,

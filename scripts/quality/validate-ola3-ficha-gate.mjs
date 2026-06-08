@@ -12,6 +12,8 @@ const errors = [];
 const requiredFiles = [
   'apps/web/src/components/PatientLongitudinalPanel.tsx',
   'apps/web/src/components/PatientLongitudinalPanel.test.tsx',
+  'apps/web/src/components/PatientSummaryAntecedentsBlock.tsx',
+  'apps/web/src/components/PatientSummaryAntecedentsBlock.test.tsx',
   'e2e/ola3-ficha-journey.spec.ts',
 ];
 
@@ -36,6 +38,35 @@ for (const token of [
   if (!panel.includes(token)) {
     errors.push(`PatientLongitudinalPanel sin ${token}`);
   }
+}
+
+const compact = readFileSync(
+  join(root, 'apps/web/src/components/PatientSummaryAntecedentsBlock.tsx'),
+  'utf8',
+);
+for (const token of [
+  'epis2-ficha-antecedents',
+  'epis2-ficha-register-allergy',
+  'epis2-ficha-register-problem',
+  'onRegisterAllergy',
+  'onRegisterProblem',
+]) {
+  if (!compact.includes(token)) {
+    errors.push(`PatientSummaryAntecedentsBlock sin ${token}`);
+  }
+}
+
+const workspace = readFileSync(
+  join(root, 'apps/web/src/pages/PatientWorkspacePage.tsx'),
+  'utf8',
+);
+if (!workspace.includes('PatientSummaryAntecedentsBlock')) {
+  errors.push('PatientWorkspacePage sin PatientSummaryAntecedentsBlock');
+}
+
+const e2e = readFileSync(join(root, 'e2e/ola3-ficha-journey.spec.ts'), 'utf8');
+if (!e2e.includes('epis2-ficha-register-allergy')) {
+  errors.push('e2e ola3 sin epis2-ficha-register-allergy');
 }
 
 if (errors.length) {

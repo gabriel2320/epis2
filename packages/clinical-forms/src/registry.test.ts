@@ -5,7 +5,7 @@ import { evolutionNoteBlueprint } from './blueprints/evolution-note.js';
 
 describe('EPIS2_FORM_BLUEPRINTS', () => {
   it('expone blueprints clínicos registrados sin duplicados', () => {
-    expect(EPIS2_FORM_BLUEPRINTS.length).toBeGreaterThanOrEqual(15);
+    expect(EPIS2_FORM_BLUEPRINTS.length).toBeGreaterThanOrEqual(20);
     expect(assertRegistryInvariants()).toEqual([]);
   });
 

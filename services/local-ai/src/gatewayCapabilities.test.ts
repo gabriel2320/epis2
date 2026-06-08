@@ -11,7 +11,8 @@ describe('local-ai gateway capabilities (EPIDOS pattern)', () => {
     expect(ids).toContain('medication_administration');
     expect(ids).toContain('pharmacy_validation');
     expect(ids).toContain('medication_reconciliation');
-    expect(ids.length).toBe(14);
+    expect(ids).toContain('procedure_request');
+    expect(ids.length).toBe(16);
   });
 
   it('marca chat, tools y RAG deshabilitados', () => {
@@ -20,7 +21,7 @@ describe('local-ai gateway capabilities (EPIDOS pattern)', () => {
     expect(caps.capabilities.toolCalling).toBe(false);
     expect(caps.capabilities.rag).toBe(false);
     expect(caps.capabilities.commandRouteAssist).toBe(false);
-    expect(caps.clinicalPromptIds.length).toBe(14);
+    expect(caps.clinicalPromptIds.length).toBe(15);
     expect(caps.promptCatalogVersion).toBe('epis2-prompts-v1.1');
     expect(caps.operational).toBe(false);
   });

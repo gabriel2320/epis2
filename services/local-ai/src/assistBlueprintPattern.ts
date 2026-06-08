@@ -27,6 +27,7 @@ export const ASSIST_ENABLED_BLUEPRINT_IDS = [
   'discharge_summary',
   'prescription',
   'lab_request',
+  'procedure_request',
   'nursing_note',
   'medication_administration',
   'pharmacy_validation',

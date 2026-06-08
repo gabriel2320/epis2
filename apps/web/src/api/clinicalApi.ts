@@ -120,6 +120,7 @@ export const INTENT_TO_ASSIST_BLUEPRINT: Record<string, string> = {
   request_laboratory: 'lab_request',
   request_referral: 'referral',
   request_imaging: 'imaging_request',
+  request_procedure: 'procedure_request',
   create_nursing_note: 'nursing_note',
   record_medication_administration: 'medication_administration',
   prepare_pharmacy_review: 'pharmacy_validation',
@@ -139,6 +140,7 @@ export const BLUEPRINT_BY_ROUTE: Record<string, string> = {
   '/espacio/laboratorio': 'lab_request',
   '/espacio/interconsulta': 'referral',
   '/espacio/imagenologia': 'imaging_request',
+  '/espacio/procedimiento': 'procedure_request',
   '/espacio/enfermeria': 'nursing_note',
   '/espacio/mar': 'medication_administration',
   '/espacio/farmacia': 'pharmacy_validation',
@@ -170,6 +172,7 @@ export const DRAFT_TYPE_TO_BLUEPRINT: Record<string, string> = {
   outpatient_visit: 'outpatient_visit',
   referral_report: 'referral_report',
   medical_certificate: 'medical_certificate',
+  procedure_request: 'procedure_request',
 };
 
 const SUMMARY_CONTEXT_KEYS = [

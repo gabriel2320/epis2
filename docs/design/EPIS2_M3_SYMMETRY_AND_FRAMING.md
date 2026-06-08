@@ -34,6 +34,7 @@
 | Entre secciones | `epis2M3FormLayout.sectionGap` | **32dp** |
 | Prosa clínica | `epis2ProseMaxWidth` | **65ch**, alineación izquierda |
 | Grid proporcional | `epis2M3FormGridSx` + `epis2M3ColumnSpanSx(n)` | 12 columnas (cuando el blueprint declare span) |
+| Encuadre canvas | `epis2BarLayout.clinicalFormMaxWidth` | **100%** compact · **560–720px** medium+ |
 
 **Alta densidad:** no reducir altura ad hoc; usar tokens de layout y, si hace falta, modo denso MUI en tablas (`EpisDataGrid`), no en campos outlined clínicos.
 

@@ -2,7 +2,8 @@
 
 **Versión:** 1.1 · **Fecha:** 2026-06-07  
 **Estado:** Sincronizado con registry (Ciclo A post MF-182)  
-**Registry único:** `packages/clinical-forms/src/registry.ts`
+**Registry único:** `packages/clinical-forms/src/registry.ts`  
+**Árbol formulario→pantalla:** [`EPIS2_FORM_SCREEN_TREE.md`](./EPIS2_FORM_SCREEN_TREE.md)
 
 ---
 

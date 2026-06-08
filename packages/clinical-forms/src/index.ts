@@ -15,6 +15,18 @@ export {
   validateFormValues,
   BLUEPRINT_DRAFT_TYPES,
 } from './validate.js';
+export {
+  buildBlueprintFormSchema,
+  mapBlueprintZodErrors,
+} from './blueprintFormSchema.js';
+export {
+  EPIS2_FORM_SCREEN_TREE,
+  assertFormScreenTreeInvariants,
+  getFormScreenNode,
+  resolveFormScreenLayout,
+  type FormScreenLayoutKind,
+  type FormScreenTreeNode,
+} from './formScreenTree.js';
 export { defaultSummaryValues } from './blueprints/patient-summary.js';
 export {
   CLINICAL_PROSE_BLUEPRINT_IDS,

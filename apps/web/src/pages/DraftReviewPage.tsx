@@ -74,6 +74,10 @@ export function DraftReviewPage() {
     }
   }, [patientDetailQuery.data, setPatient]);
 
+  const pendingEncounterClosure =
+    draft?.draftType === 'outpatient_visit' &&
+    (draft.body as Record<string, unknown>).closeEncounter === 'true';
+
   const sendToReview = () => {
     if (!draft) return;
     updateDraftMutation.mutate(
@@ -92,7 +96,11 @@ export function DraftReviewPage() {
     if (!draft) return;
     approveDraftMutation.mutate(draft.id, {
       onSuccess: () => {
-        setMessage(copy.drafts.approvedSuccess);
+        setMessage(
+          pendingEncounterClosure
+            ? `${copy.drafts.approvedSuccess} ${copy.drafts.encounterClosedSuccess}`
+            : copy.drafts.approvedSuccess,
+        );
         void draftQuery.refetch();
       },
       onError: () => setMessage(copy.drafts.approveError),
@@ -201,6 +209,12 @@ export function DraftReviewPage() {
         <EpisAlert severity="warning" variant="outlined">
           {copy.drafts.approvalDisclaimer}
         </EpisAlert>
+
+        {pendingEncounterClosure ? (
+          <EpisAlert severity="info" data-testid="epis2-draft-encounter-closure">
+            {copy.drafts.encounterClosureOnApprove}
+          </EpisAlert>
+        ) : null}
 
         <Stack spacing={1}>
           <Typography variant="subtitle2">{copy.drafts.contentTitle}</Typography>

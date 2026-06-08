@@ -289,6 +289,27 @@ const COMMAND_DEFINITIONS_CORE: readonly CommandDefCore[] = [
       ),
   },
   {
+    intent: 'request_procedure',
+    labelEs: 'Solicitud de procedimiento',
+    aliasesEs: [
+      'solicitar procedimiento',
+      'solicita procedimiento',
+      'pedir procedimiento',
+      'orden de procedimiento',
+      'solicitar endoscopia',
+      'pedir biopsia',
+      'solicitar colonoscopia',
+      'cateterismo',
+    ],
+    routePath: INTENT_ROUTE_PATHS.request_procedure,
+    requiredPermission: 'command.execute',
+    requiresPatient: true,
+    priority: 78,
+    match: (q) =>
+      /procedimiento|endoscop|biopsia|colonoscop|cateterismo|solicitar\s+proced/.test(q) &&
+      !/nota\s+de\s+proced/.test(q),
+  },
+  {
     intent: 'create_nursing_note',
     labelEs: 'Nota de enfermería',
     aliasesEs: [

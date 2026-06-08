@@ -190,6 +190,7 @@ const BLUEPRINT_IDC_MAP: Record<string, { idc: readonly number[]; status: EpisNa
   prescription: { idc: [52], status: 'complete', workspace: 'ambulatory', tab: 'orders', ola: '0' },
   lab_request: { idc: [55], status: 'partial', workspace: 'ambulatory', tab: 'results', ola: '0' },
   imaging_request: { idc: [56], status: 'partial', workspace: 'ambulatory', tab: 'results', ola: '0' },
+  procedure_request: { idc: [57], status: 'complete', workspace: 'ambulatory', tab: 'orders', ola: '2' },
   referral: { idc: [64], status: 'complete', workspace: 'ambulatory', tab: 'orders', ola: '0' },
   referral_report: { idc: [64], status: 'complete', workspace: 'ambulatory', tab: 'orders', ola: '6' },
   nursing_note: { idc: [111], status: 'complete', workspace: 'icu', tab: 'encounter', ola: '11' },

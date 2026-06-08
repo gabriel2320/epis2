@@ -52,15 +52,17 @@ Command palette Ctrl+K → **Fase B** (componente L5 existe; falta cableado en `
 - [x] Autocomplete búsqueda paciente (`PatientSearchAutocomplete`)
 - [x] Journey Playwright `golden-v2-admission-discharge` UI
 - [x] RAD `clinical-form-evolution` + `draft-review` → `done`
-- [ ] Procedimiento clínico blueprint
-- [ ] Cierre encuentro operativo UI
+- [x] Blueprint `procedure_request` + comando `request_procedure` (IDC 57)
+- [x] Cierre encuentro operativo UI + API (`outpatient_visit.closeEncounter`)
+- [x] `dashboard-pharmacy` → `done` (RAD grids + Y-Site gate)
+- [ ] Procedimiento nota clínica (distinto de solicitud) — Ola 2+ deferred
 - Orquestación: `npm run dev:agent:orchestrate` · plan Ollama `npm run dev:agent:ollama`
 
 ### Fase C — Ola 3 longitudinal
 
 - Ficha hub estable (split pane ✓)
 - Documentos + resultados bandeja plana (results-inbox ✓)
-- CTAs vacíos → formulario (alergia, problema)
+- [x] CTAs vacíos → formulario (alergia, problema) — `PatientSummaryAntecedentsBlock` en ficha compacta UX-B.2
 
 ### Fase D — Tramo J farmacia (post Fase B)
 

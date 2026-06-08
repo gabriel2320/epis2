@@ -19,6 +19,7 @@
   "dependencies": {
     "@epis2/design-system": "*",
     "@epis2/epis2-ui": "*",
+    "react-hook-form": "^7.56.4",
     "zod": "^3.25.42"
   },
   "peerDependencies": {

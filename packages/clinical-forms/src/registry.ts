@@ -19,6 +19,7 @@ import {
   outpatientVisitBlueprint,
   referralReportBlueprint,
   medicalCertificateBlueprint,
+  procedureRequestBlueprint,
 } from './blueprints/index.js';
 import type { ClinicalFormBlueprint } from './types.js';
 import { validateBlueprintLayout } from './layout.js';
@@ -44,6 +45,7 @@ export const EPIS2_FORM_BLUEPRINTS: readonly ClinicalFormBlueprint[] = [
   outpatientVisitBlueprint,
   referralReportBlueprint,
   medicalCertificateBlueprint,
+  procedureRequestBlueprint,
 ];
 
 const byId = new Map(EPIS2_FORM_BLUEPRINTS.map((b) => [b.blueprintId, b]));

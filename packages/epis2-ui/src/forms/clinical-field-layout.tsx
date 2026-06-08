@@ -50,6 +50,15 @@ export const epis2ClinicalFormCanvasSx: SystemStyleObject<Theme> = {
   width: '100%',
   maxWidth: epis2BarLayout.clinicalFormMaxWidth,
   mx: 'auto',
+  boxSizing: 'border-box',
+};
+
+/** Contenedor centrado dentro de two-pane / scrollspy — mismo encuadre que canvas. */
+export const epis2ClinicalFormContentMaxWidthSx: SystemStyleObject<Theme> = {
+  width: '100%',
+  maxWidth: epis2BarLayout.clinicalFormMaxWidth,
+  mx: 'auto',
+  boxSizing: 'border-box',
 };
 
 const clinicalInputPaddingSx = {

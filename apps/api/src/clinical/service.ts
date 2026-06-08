@@ -496,6 +496,30 @@ export async function approveDraft(db: Database, actor: Actor, draftId: string) 
     }
   }
 
+  if (draft.draftType === 'outpatient_visit') {
+    const body = draft.body as Record<string, unknown>;
+    const shouldClose =
+      body.closeEncounter === true ||
+      body.closeEncounter === 'true';
+    if (shouldClose) {
+      const encounterFilter = draft.encounterId
+        ? and(eq(encounters.id, draft.encounterId), eq(encounters.status, 'open'))
+        : and(eq(encounters.patientId, draft.patientId), eq(encounters.status, 'open'));
+      await db
+        .update(encounters)
+        .set({ status: 'closed', endedAt: now })
+        .where(encounterFilter);
+      await appendAudit(db, {
+        eventType: 'clinical.encounter.closed',
+        actorId: actor.id,
+        username: actor.username,
+        entityType: 'encounter',
+        entityId: draft.encounterId ?? draft.patientId,
+        message: 'Cierre de episodio tras aprobación de consulta ambulatoria',
+      });
+    }
+  }
+
   await appendAudit(db, {
     eventType: 'clinical.draft.approved',
     actorId: actor.id,

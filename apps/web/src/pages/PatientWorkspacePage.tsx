@@ -24,6 +24,7 @@ import { PatientListGrid } from '../components/PatientListGrid.js';
 import { PatientClinicalSummaryPanel } from '../components/PatientClinicalSummaryPanel.js';
 import { PatientLongitudinalPanel } from '../components/PatientLongitudinalPanel.js';
 import { PatientRecentActivityBlock } from '../components/PatientRecentActivityBlock.js';
+import { PatientSummaryAntecedentsBlock } from '../components/PatientSummaryAntecedentsBlock.js';
 import { PatientWorkspaceCommandPanel } from '../components/PatientWorkspaceCommandPanel.js';
 
 export function PatientWorkspacePage() {
@@ -159,6 +160,15 @@ export function PatientWorkspacePage() {
           alerts={clinicalAlerts}
           loading={alertsLoading}
           hintBlueprintLabel={contextLabel}
+        />
+      ) : null}
+
+      {longitudinal ? (
+        <PatientSummaryAntecedentsBlock
+          allergies={longitudinal.allergies}
+          problems={longitudinal.problems}
+          onRegisterAllergy={longitudinalNav.onRegisterAllergy}
+          onRegisterProblem={longitudinalNav.onRegisterProblem}
         />
       ) : null}
 

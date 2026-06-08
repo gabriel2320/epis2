@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "@epis2/clinical-domain": "*",
-    "@epis2/command-registry": "*"
+    "@epis2/command-registry": "*",
+    "zod": "^3.25.42"
   },
   "devDependencies": {
     "typescript": "^5.8.3"

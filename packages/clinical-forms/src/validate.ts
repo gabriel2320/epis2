@@ -59,4 +59,5 @@ export const BLUEPRINT_DRAFT_TYPES: Record<string, string> = {
   outpatient_visit: 'outpatient_visit',
   referral_report: 'referral_report',
   medical_certificate: 'medical_certificate',
+  procedure_request: 'procedure_request',
 };

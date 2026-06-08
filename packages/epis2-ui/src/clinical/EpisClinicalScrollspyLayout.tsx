@@ -20,10 +20,18 @@ export function EpisClinicalScrollspyLayout({
   return (
     <Box
       data-testid={testId}
-      sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, pb: `${bottomPadding}px` }}
+      sx={{
+        display: 'flex',
+        flexDirection: { xs: 'column', lg: 'row' },
+        alignItems: 'flex-start',
+        gap: { xs: 1.5, lg: 2 },
+        pb: `${bottomPadding}px`,
+        width: '100%',
+        minWidth: 0,
+      }}
     >
       <EpisClinicalScrollspy sections={sections} />
-      <Box sx={{ flex: 1, minWidth: 0 }}>{children}</Box>
+      <Box sx={{ flex: 1, minWidth: 0, width: '100%' }}>{children}</Box>
     </Box>
   );
 }

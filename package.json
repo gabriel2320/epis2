@@ -161,6 +161,8 @@
     "quality:ollama-structured-output-gate": "node scripts/quality/validate-ollama-structured-output-gate.mjs",
     "quality:grid-surface-gate": "node scripts/quality/validate-grid-surface-gate.mjs",
     "quality:form-collapse-gate": "node scripts/quality/validate-form-collapse-gate.mjs",
+    "quality:clinical-form-rhf-gate": "node scripts/quality/validate-clinical-form-rhf-gate.mjs",
+    "quality:form-screen-tree-gate": "node scripts/quality/validate-form-screen-tree-gate.mjs",
     "quality:layers-integration-gate": "node scripts/quality/validate-layers-integration-gate.mjs",
     "quality:rad-m3-discipline-gate": "node scripts/quality/validate-rad-m3-discipline-gate.mjs",
     "quality:design-mode-gate": "node scripts/quality/validate-design-mode-gate.mjs",

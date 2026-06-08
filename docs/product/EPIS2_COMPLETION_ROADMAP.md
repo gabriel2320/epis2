@@ -79,8 +79,8 @@ Detalle histórico v1.0:
 | Consulta ambulatoria (blueprint) | ✓ | encuentros |
 | Traslado (form + comando) | ✓ | inpatient API |
 | Certificado médico | ✓ MF-032 | impresión ◐ |
-| Procedimiento | ○ | — |
-| Cierre encuentro | ◐ | encuentros |
+| Procedimiento (solicitud) | ✓ MF-B04 | IDC 57 · `procedure_request` |
+| Cierre encuentro | ✓ MF-B04 | checkbox + API + revisión borrador |
 
 **Rama sugerida:** `epis2-ola2-admission-blueprint`
 

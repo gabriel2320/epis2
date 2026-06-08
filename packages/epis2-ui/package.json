@@ -47,7 +47,10 @@
     "@mui/x-date-pickers": "^7.29.4",
     "@mui/x-scheduler": "^9.0.0-alpha.4",
     "@mui/x-tree-view": "^7.29.10",
-    "dayjs": "^1.11.21"
+    "@hookform/resolvers": "^5.0.1",
+    "dayjs": "^1.11.21",
+    "react-hook-form": "^7.56.4",
+    "zod": "^3.25.42"
   },
   "peerDependencies": {
     "react": "^19.0.0",

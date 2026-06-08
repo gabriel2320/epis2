@@ -27,6 +27,7 @@ export const epis2BarLayout = {
   /** Relleno horizontal del contenido clínico (formularios, alertas). */
   clinicalPaddingX: { xs: 0.5, sm: 1, md: 1.5 },
   clinicalPaddingY: { xs: 2, sm: 2.5 },
-  clinicalFormMaxWidth: 640,
+  /** Ancho máximo del canvas de formulario — compacto 100%, medium+ encuadre lectura. */
+  clinicalFormMaxWidth: { xs: '100%', sm: 560, md: 640, lg: 720 },
   fieldStackGap: epis2M3FormLayout.fieldRowGap,
 } as const;

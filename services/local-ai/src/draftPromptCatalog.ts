@@ -41,6 +41,13 @@ export const DRAFT_PROMPT_CATALOG: DraftPromptSpec[] = [
     fieldHints: 'Prioridad rutina salvo urgencia explícita en contexto.',
   },
   {
+    blueprintId: 'procedure_request',
+    taskTitle: 'Solicitud de procedimiento',
+    taskDetail:
+      'Propón tipo de procedimiento, descripción e indicación clínica acorde al contexto.',
+    fieldHints: 'No indiques realización ni firma; es orden en borrador para revisión humana.',
+  },
+  {
     blueprintId: 'nursing_note',
     taskTitle: 'Nota de enfermería',
     taskDetail:
