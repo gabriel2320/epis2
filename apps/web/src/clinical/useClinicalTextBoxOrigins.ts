@@ -1,28 +1,46 @@
 import {
-  attachTextOriginsToDraftBody,
+  attachClinicalTextBoxTraceToDraftBody,
+  fieldMetaFromOrigins,
+  type DraftFieldTextBoxMeta,
   type DraftFieldTextOrigins,
   type ClinicalTextBoxChangeMeta,
 } from '@epis2/clinical-productivity';
 import { useCallback, useState } from 'react';
 
-/** Registra origen por campo ClinicalTextBox y lo adjunta al body del borrador al guardar. */
+/** Registra meta ClinicalTextBox por campo y la adjunta al body del borrador al guardar. */
 export function useClinicalTextBoxOrigins() {
-  const [origins, setOrigins] = useState<DraftFieldTextOrigins>({});
+  const [fieldMeta, setFieldMeta] = useState<DraftFieldTextBoxMeta>({});
 
   const recordFieldOrigin = useCallback((fieldId: string, meta: ClinicalTextBoxChangeMeta) => {
-    setOrigins((prev) => ({ ...prev, [fieldId]: meta.origin }));
+    setFieldMeta((prev) => ({ ...prev, [fieldId]: meta }));
   }, []);
 
   const attachToDraftBody = useCallback(
-    (body: Record<string, unknown>) => attachTextOriginsToDraftBody(body, origins),
-    [origins],
+    (body: Record<string, unknown>) => attachClinicalTextBoxTraceToDraftBody(body, fieldMeta),
+    [fieldMeta],
   );
 
-  const resetOrigins = useCallback(() => setOrigins({}), []);
+  const resetOrigins = useCallback(() => setFieldMeta({}), []);
 
-  const loadOrigins = useCallback((next: DraftFieldTextOrigins) => {
-    setOrigins(next);
+  const loadFieldMeta = useCallback((next: DraftFieldTextBoxMeta) => {
+    setFieldMeta(next);
   }, []);
 
-  return { origins, recordFieldOrigin, attachToDraftBody, resetOrigins, loadOrigins };
+  const loadOrigins = useCallback((next: DraftFieldTextOrigins) => {
+    setFieldMeta(fieldMetaFromOrigins(next));
+  }, []);
+
+  const origins = Object.fromEntries(
+    Object.entries(fieldMeta).map(([fieldId, entry]) => [fieldId, entry.origin]),
+  );
+
+  return {
+    fieldMeta,
+    origins,
+    recordFieldOrigin,
+    attachToDraftBody,
+    resetOrigins,
+    loadOrigins,
+    loadFieldMeta,
+  };
 }

@@ -114,7 +114,7 @@ import {
 } from '../clinical/clinicalTextBoxField.js';
 import { useClinicalTextBoxOrigins } from '../clinical/useClinicalTextBoxOrigins.js';
 import {
-  extractTextOriginsFromDraftBody,
+  mergeDraftFieldMetaFromBody,
   stripDraftMetaFromBody,
 } from '@epis2/clinical-productivity';
 
@@ -204,7 +204,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const createDraftMutation = useCreateDraftMutation();
   const updateDraftMutation = useUpdateDraftMutation();
   const editingDraftQuery = useDraftDetailQuery(editingDraftId);
-  const { recordFieldOrigin, attachToDraftBody, loadOrigins } = useClinicalTextBoxOrigins();
+  const { recordFieldOrigin, attachToDraftBody, loadFieldMeta } = useClinicalTextBoxOrigins();
   const hydratedDraftIdRef = useRef<string | null>(null);
 
   useEffect(() => {
@@ -218,9 +218,9 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     if (!expectedType || draft.draftType !== expectedType) return;
     hydratedDraftIdRef.current = editingDraftId;
     const rawBody = draft.body as Record<string, unknown>;
-    loadOrigins(extractTextOriginsFromDraftBody(rawBody));
+    loadFieldMeta(mergeDraftFieldMetaFromBody(rawBody));
     reset(stripDraftMetaFromBody(rawBody) as Record<string, string>);
-  }, [editingDraftId, editingDraftQuery.data, blueprint.blueprintId, loadOrigins, reset]);
+  }, [editingDraftId, editingDraftQuery.data, blueprint.blueprintId, loadFieldMeta, reset]);
 
   const canUseAiAssist = blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES;
   const clinicalProse = blueprintUsesClinicalProse(blueprint.blueprintId);

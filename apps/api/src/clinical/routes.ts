@@ -38,6 +38,7 @@ import { getPatientLongitudinal } from './longitudinal.js';
 import { getPatientResultsInbox } from './resultsInbox.js';
 import { buildPatientSummaryExport } from './summaryExport.js';
 import { parseClinicalTextSpellcheckRequest, runClinicalTextSpellcheck } from './textSpellcheck.js';
+import { validateDraftBodyEpis2Meta } from './draftBodyMeta.js';
 
 const createDraftSchema = z.object({
   patientId: z.string().uuid(),
@@ -312,11 +313,15 @@ export async function registerClinicalRoutes(
         return reply.status(403).send({ error: 'Sin permiso draft.write' });
       }
       const { patientId, draftType, title, body, encounterId } = parsed.data;
+      const metaCheck = validateDraftBodyEpis2Meta(body);
+      if (!metaCheck.success) {
+        return reply.status(400).send({ error: metaCheck.error });
+      }
       const draftInput: Parameters<typeof createDraft>[2] = {
         patientId,
         draftType,
         title,
-        body,
+        body: metaCheck.body,
       };
       if (encounterId !== undefined) draftInput.encounterId = encounterId;
       const draft = await runWithRlsContext(db, config, session, (tx) =>
@@ -387,7 +392,13 @@ export async function registerClinicalRoutes(
       try {
         const patch: Parameters<typeof updateDraft>[3] = {};
         if (parsed.data.title !== undefined) patch.title = parsed.data.title;
-        if (parsed.data.body !== undefined) patch.body = parsed.data.body;
+        if (parsed.data.body !== undefined) {
+          const metaCheck = validateDraftBodyEpis2Meta(parsed.data.body);
+          if (!metaCheck.success) {
+            return reply.status(400).send({ error: metaCheck.error });
+          }
+          patch.body = metaCheck.body;
+        }
         if (parsed.data.status !== undefined) patch.status = parsed.data.status;
         const draft = await runWithRlsContext(db, config, session, (tx) =>
           updateDraft(tx, { id: session.sub, username: session.username }, draftId, patch),

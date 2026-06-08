@@ -21,12 +21,15 @@ for (const trigger of ['.soap', '.alta', '.uci']) {
 }
 
 const coreSrc = readFileSync(coreSnippets, 'utf8');
-for (const trigger of ['.soap', '.alta', '.uci']) {
+for (const trigger of ['.soap', '.alta', '.uci', '.epicrisis', '.iaas']) {
   if (!coreSrc.includes(`trigger: '${trigger}'`)) {
     errors.push(`clinicalSnippets core debe definir ${trigger}`);
   }
 }
 
+if (!textboxSrc.includes('TEXTBOX_EXTENDED_SNIPPET_TRIGGERS')) {
+  errors.push('textbox/clinicalSnippets debe exponer TEXTBOX_EXTENDED_SNIPPET_TRIGGERS (.epicrisis, .iaas)');
+}
 if (!textboxSrc.includes('expandClinicalSnippet')) {
   errors.push('textbox/clinicalSnippets debe re-exportar expandClinicalSnippet');
 }
@@ -36,4 +39,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('clinical-snippets-gate OK — snippets .soap/.alta/.uci');
+console.log('clinical-snippets-gate OK — snippets .soap/.alta/.uci/.epicrisis/.iaas');

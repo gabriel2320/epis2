@@ -132,12 +132,27 @@ export {
 } from './textbox/clinicalTextCommands.js';
 export { pastedTextLooksLikeAi, sanitizePastedClinicalText } from './textbox/pasteSanitizer.js';
 export {
+  attachClinicalTextBoxTraceToDraftBody,
   attachTextOriginsToDraftBody,
+  draftHasReviewableTextBoxMeta,
   draftHasReviewableTextOrigins,
   EPIS2_DRAFT_TEXT_ORIGINS_KEY,
+  EPIS2_DRAFT_TEXTBOX_META_KEY,
+  extractTextBoxMetaFromDraftBody,
   extractTextOriginsFromDraftBody,
+  fieldMetaFromOrigins,
   isDraftMetaFieldKey,
+  mergeDraftFieldMetaFromBody,
   stripDraftMetaFromBody,
+  summarizeDraftTextBoxMeta,
   summarizeDraftTextOrigins,
+  type DraftFieldTextBoxMeta,
+  type DraftFieldTextBoxMetaEntry,
   type DraftFieldTextOrigins,
 } from './textbox/draftTextOrigins.js';
+export {
+  clinicalTextOriginSchema,
+  draftFieldTextBoxMetaEntrySchema,
+  validateDraftBodyEpis2Meta,
+  type ValidateDraftBodyEpis2MetaResult,
+} from './textbox/draftBodyMetaSchema.js';

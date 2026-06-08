@@ -1,9 +1,9 @@
 import { getBlueprintById } from '@epis2/clinical-forms';
 import {
-  draftHasReviewableTextOrigins,
-  extractTextOriginsFromDraftBody,
+  draftHasReviewableTextBoxMeta,
   isDraftMetaFieldKey,
-  summarizeDraftTextOrigins,
+  mergeDraftFieldMetaFromBody,
+  summarizeDraftTextBoxMeta,
 } from '@epis2/clinical-productivity';
 import { roleHasPermission, type ClinicalRole } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
@@ -59,8 +59,8 @@ export function DraftReviewPage() {
     !['approved', 'cancelled'].includes(draft.status);
 
   const draftBodyRecord = draft?.body as Record<string, unknown> | undefined;
-  const textOrigins = draftBodyRecord ? extractTextOriginsFromDraftBody(draftBodyRecord) : {};
-  const reviewableOrigins = summarizeDraftTextOrigins(textOrigins);
+  const textBoxMeta = draftBodyRecord ? mergeDraftFieldMetaFromBody(draftBodyRecord) : {};
+  const reviewableMetaLines = summarizeDraftTextBoxMeta(textBoxMeta);
 
   const draftBodyFields = draftBodyRecord
     ? Object.fromEntries(
@@ -221,11 +221,11 @@ export function DraftReviewPage() {
           {copy.drafts.approvalDisclaimer}
         </EpisAlert>
 
-        {draftHasReviewableTextOrigins(textOrigins) ? (
+        {draftHasReviewableTextBoxMeta(textBoxMeta) ? (
           <EpisAlert severity="info" data-testid="epis2-draft-text-origins">
             {copy.drafts.textOriginsReview}
             <List dense>
-              {reviewableOrigins.map((line) => (
+              {reviewableMetaLines.map((line) => (
                 <ListItem key={line} disablePadding>
                   <ListItemText primary={line} />
                 </ListItem>

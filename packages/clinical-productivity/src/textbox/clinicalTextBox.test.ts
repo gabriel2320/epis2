@@ -10,17 +10,21 @@ import { expandClinicalSnippet } from './clinicalSnippets.js';
 import { runLocalClinicalSpellcheck } from './clinicalSpellcheck.js';
 import { applySlashCommand } from './clinicalTextCommands.js';
 import {
+  attachClinicalTextBoxTraceToDraftBody,
   attachTextOriginsToDraftBody,
   extractTextOriginsFromDraftBody,
+  extractTextBoxMetaFromDraftBody,
   isDraftMetaFieldKey,
+  mergeDraftFieldMetaFromBody,
+  summarizeDraftTextBoxMeta,
 } from './draftTextOrigins.js';
 import { expandWhitelistedAbbreviation } from './clinicalDictionary.js';
 import { getLastLineToken, getTokenAtCursor, replaceTokenAtRange } from './clinicalTextToken.js';
 import { pastedTextLooksLikeAi, sanitizePastedClinicalText } from './pasteSanitizer.js';
 
 describe('MF-CLINICAL-TEXTBOX-TOOLS', () => {
-  it('expande snippets .soap, .alta y .uci', () => {
-    for (const trigger of ['.soap', '.alta', '.uci']) {
+  it('expande snippets .soap, .alta, .uci, .epicrisis y .iaas', () => {
+    for (const trigger of ['.soap', '.alta', '.uci', '.epicrisis', '.iaas']) {
       const { snippet } = expandClinicalSnippet(`Nota ${trigger}`);
       expect(snippet?.trigger).toBe(trigger);
     }
@@ -71,6 +75,34 @@ describe('MF-CLINICAL-TEXTBOX-TOOLS', () => {
     expect(isDraftMetaFieldKey('_epis2TextOrigins')).toBe(true);
     const parsed = extractTextOriginsFromDraftBody(body);
     expect(parsed.reactionNotes?.kind).toBe('paste');
+  });
+
+  it('persiste ClinicalTextBoxChangeMeta completa en _epis2TextBoxMeta', () => {
+    const origin = createTextOrigin('ai_suggestion', 'Asistencia local');
+    const body = attachClinicalTextBoxTraceToDraftBody(
+      { subjective: 'Nota' },
+      {
+        subjective: {
+          origin,
+          aiSuggestion: true,
+          pendingConfirmation: 'medication',
+        },
+      },
+    );
+    const meta = extractTextBoxMetaFromDraftBody(body);
+    expect(meta.subjective?.aiSuggestion).toBe(true);
+    expect(meta.subjective?.pendingConfirmation).toBe('medication');
+    expect(extractTextOriginsFromDraftBody(body).subjective?.kind).toBe('ai_suggestion');
+    const lines = summarizeDraftTextBoxMeta(meta);
+    expect(lines[0]).toContain('IA');
+    expect(lines[0]).toContain('medicación');
+  });
+
+  it('mergeDraftFieldMetaFromBody prioriza meta y retrocompat con origins', () => {
+    const origin = createTextOrigin('snippet', '.soap');
+    const legacy = attachTextOriginsToDraftBody({ plan: 'x' }, { plan: origin });
+    const merged = mergeDraftFieldMetaFromBody(legacy);
+    expect(merged.plan?.origin.kind).toBe('snippet');
   });
 
   it('expandWhitelistedAbbreviation no autocorrige términos sensibles por diseño', () => {

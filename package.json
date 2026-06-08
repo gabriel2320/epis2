@@ -158,6 +158,7 @@
     "quality:clinical-textbox-gate": "node scripts/quality/validate-clinical-textbox-gate.mjs",
     "quality:clinical-textbox-assist-gate": "node scripts/quality/validate-clinical-textbox-assist-gate.mjs",
     "quality:clinical-spellcheck-gate": "node scripts/quality/validate-clinical-spellcheck-gate.mjs",
+    "quality:clinical-spellcheck-integration": "node scripts/quality/validate-clinical-spellcheck-integration.mjs",
     "quality:clinical-snippets-gate": "node scripts/quality/validate-clinical-snippets-gate.mjs",
     "quality:clinical-ai-text-safety-gate": "node scripts/quality/validate-clinical-ai-text-safety-gate.mjs",
     "quality:autocomplete-gate": "node scripts/quality/validate-autocomplete-gate.mjs",

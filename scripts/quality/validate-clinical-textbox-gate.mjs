@@ -94,13 +94,46 @@ if (!formSrc.includes('updateDraftMutation')) {
 const draftReviewPath = join(root, 'apps/web/src/pages/DraftReviewPage.tsx');
 if (existsSync(draftReviewPath)) {
   const reviewSrc = readFileSync(draftReviewPath, 'utf8');
-  if (!reviewSrc.includes('extractTextOriginsFromDraftBody')) {
-    errors.push('DraftReviewPage debe mostrar trazabilidad de texto');
+  if (!reviewSrc.includes('summarizeDraftTextBoxMeta')) {
+    errors.push('DraftReviewPage debe mostrar meta completa de ClinicalTextBox');
+  }
+  if (!reviewSrc.includes('mergeDraftFieldMetaFromBody')) {
+    errors.push('DraftReviewPage debe leer _epis2TextBoxMeta con retrocompat');
+  }
+}
+
+const metaSchemaPath = join(
+  root,
+  'packages/clinical-productivity/src/textbox/draftBodyMetaSchema.ts',
+);
+if (!existsSync(metaSchemaPath)) {
+  errors.push('Falta draftBodyMetaSchema.ts (validación Zod meta borrador)');
+}
+const routesPath = join(root, 'apps/api/src/clinical/routes.ts');
+if (existsSync(routesPath)) {
+  const routesSrc = readFileSync(routesPath, 'utf8');
+  if (!routesSrc.includes('validateDraftBodyEpis2Meta')) {
+    errors.push('API drafts debe validar meta _epis2 con Zod');
   }
 }
 
 const originsPath = join(root, 'packages/clinical-productivity/src/textbox/draftTextOrigins.ts');
 if (!existsSync(originsPath)) errors.push('Falta textbox/draftTextOrigins.ts');
+const originsSrc = readFileSync(originsPath, 'utf8');
+if (!originsSrc.includes('EPIS2_DRAFT_TEXTBOX_META_KEY')) {
+  errors.push('draftTextOrigins debe persistir _epis2TextBoxMeta');
+}
+if (!originsSrc.includes('attachClinicalTextBoxTraceToDraftBody')) {
+  errors.push('draftTextOrigins debe adjuntar meta completa ClinicalTextBox');
+}
+
+const originsHookPath = join(root, 'apps/web/src/clinical/useClinicalTextBoxOrigins.ts');
+if (existsSync(originsHookPath)) {
+  const hookSrc = readFileSync(originsHookPath, 'utf8');
+  if (!hookSrc.includes('attachClinicalTextBoxTraceToDraftBody')) {
+    errors.push('useClinicalTextBoxOrigins debe persistir meta completa');
+  }
+}
 
 const allergySrc = readFileSync(allergyBlueprint, 'utf8');
 if (!allergySrc.includes('clinicalTextBox: true')) {
