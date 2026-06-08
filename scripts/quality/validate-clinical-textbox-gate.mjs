@@ -35,6 +35,21 @@ if (!textboxSrc.includes('ClinicalTextBoxRichEditor') && !textboxSrc.includes("m
 }
 const richPath = join(root, 'packages/clinical-productivity/src/textbox/ClinicalTextBoxRichEditor.tsx');
 if (!existsSync(richPath)) errors.push('Falta ClinicalTextBoxRichEditor.tsx (Tiptap)');
+const termDropdownPath = join(
+  root,
+  'packages/clinical-productivity/src/textbox/ClinicalTextBoxTermDropdown.tsx',
+);
+if (!existsSync(termDropdownPath)) {
+  errors.push('Falta ClinicalTextBoxTermDropdown.tsx (autocomplete inline)');
+}
+const statePath = join(root, 'packages/clinical-productivity/src/textbox/useClinicalTextBoxState.ts');
+const stateSrc = readFileSync(statePath, 'utf8');
+if (!stateSrc.includes('autocompleteClinicalTerms') || !stateSrc.includes('insertTermSuggestion')) {
+  errors.push('useClinicalTextBoxState debe cablear autocomplete inline del diccionario');
+}
+if (!textboxSrc.includes('ClinicalTextBoxTermDropdown')) {
+  errors.push('ClinicalTextBox debe renderizar dropdown de términos clínicos');
+}
 if (!textboxSrc.includes('createTextOrigin')) {
   errors.push('ClinicalTextBox debe registrar origen de texto');
 }

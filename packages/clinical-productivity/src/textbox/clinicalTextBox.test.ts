@@ -15,6 +15,7 @@ import {
   isDraftMetaFieldKey,
 } from './draftTextOrigins.js';
 import { expandWhitelistedAbbreviation } from './clinicalDictionary.js';
+import { getLastLineToken, getTokenAtCursor, replaceTokenAtRange } from './clinicalTextToken.js';
 import { pastedTextLooksLikeAi, sanitizePastedClinicalText } from './pasteSanitizer.js';
 
 describe('MF-CLINICAL-TEXTBOX-TOOLS', () => {
@@ -75,5 +76,19 @@ describe('MF-CLINICAL-TEXTBOX-TOOLS', () => {
   it('expandWhitelistedAbbreviation no autocorrige términos sensibles por diseño', () => {
     const hit = expandWhitelistedAbbreviation('mg');
     expect(hit === undefined || typeof hit === 'string').toBe(true);
+  });
+
+  it('getTokenAtCursor y replaceTokenAtRange insertan sin borrar contexto', () => {
+    const text = 'Paciente con neum';
+    const token = getTokenAtCursor(text, text.length);
+    expect(token?.token).toBe('neum');
+    const next = replaceTokenAtRange(text, token!.start, token!.end, 'neumonía');
+    expect(next).toBe('Paciente con neumonía');
+  });
+
+  it('getLastLineToken soporta rich editor (última palabra de línea)', () => {
+    const text = 'Línea uno\nPaciente con seps';
+    const token = getLastLineToken(text);
+    expect(token?.token).toBe('seps');
   });
 });

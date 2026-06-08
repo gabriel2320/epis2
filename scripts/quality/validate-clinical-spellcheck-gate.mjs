@@ -35,6 +35,22 @@ if (!ltSrc.includes('createEpisSpellcheckAdapter')) {
   errors.push('languageToolAdapter debe exponer createEpisSpellcheckAdapter');
 }
 
+const composePath = join(root, 'docker-compose.yml');
+if (existsSync(composePath)) {
+  const composeSrc = readFileSync(composePath, 'utf8');
+  if (!composeSrc.includes('languagetool') || !composeSrc.includes('profiles:')) {
+    errors.push('docker-compose.yml debe exponer profile languagetool');
+  }
+  if (!composeSrc.includes('8010:8010')) {
+    errors.push('docker-compose languagetool debe mapear puerto 8010');
+  }
+}
+
+const e2ePath = join(root, 'e2e/clinical-textbox-evolution-draft.spec.ts');
+if (!existsSync(e2ePath)) {
+  errors.push('Falta e2e clinical-textbox-evolution-draft.spec.ts');
+}
+
 const legacy = spawnSync('node', [join(root, 'scripts/quality/validate-spellcheck-gate.mjs')], {
   cwd: root,
   encoding: 'utf8',

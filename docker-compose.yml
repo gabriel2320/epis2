@@ -3,6 +3,10 @@
 # Ollama por defecto: instalación nativa en el host (Windows/macOS/Linux).
 # Los servicios en contenedor alcanzan el host vía host.docker.internal:11434.
 # Contenedor Ollama opcional: docker compose --profile bundled-ollama up -d ollama
+#
+# LanguageTool opcional (spellcheck clínico):
+#   docker compose --profile languagetool up -d languagetool
+#   LANGUAGETOOL_BASE_URL=http://127.0.0.1:8010
 
 x-ollama-env: &ollama-env
   OLLAMA_BASE_URL: http://host.docker.internal:11434
@@ -25,6 +29,22 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+  languagetool:
+    profiles:
+      - languagetool
+    image: silencio/languagetool:6.5
+    container_name: epis2-languagetool
+    environment:
+      langtool_languageModel: /ngrams
+    ports:
+      - '8010:8010'
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -qO- http://127.0.0.1:8010/v2/languages >/dev/null || exit 1']
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 45s
 
   ollama:
     profiles:

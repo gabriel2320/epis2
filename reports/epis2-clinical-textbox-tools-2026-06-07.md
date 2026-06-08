@@ -1,6 +1,6 @@
 # EPIS2 — MF-CLINICAL-TEXTBOX-TOOLS
 
-**Fecha:** 2026-06-07 (revisión fase 2c)  
+**Fecha:** 2026-06-07 (fase 3)  
 **Estado:** Implementación funcional en producción piloto — alergia, evolución SOAP, enfermería.
 
 ## Resumen por fase
@@ -11,6 +11,7 @@
 | 2a | `_epis2TextOrigins` en borrador + revisión en `DraftReviewPage` |
 | 2b | Tiptap rich (Subjetivo evolución), LanguageTool proxy, Ollama textbox, `?draftId=` |
 | 2c | Hidratación borrador idempotente, expansión abreviaturas whitelist, gate assist API |
+| 3 | Dropdown autocomplete inline, profile docker LanguageTool, E2E evolución→borrador→aprobar |
 
 ## Arquitectura (wrapper EPIS2)
 
@@ -61,13 +62,18 @@ LANGUAGETOOL_BASE_URL=http://127.0.0.1:8010
 OLLAMA_MODEL=qwen3:8b
 ```
 
+```bash
+docker compose --profile languagetool up -d languagetool
+npm run test:e2e:clinical-textbox
+```
+
 ## Riesgos abiertos
 
 | Riesgo | Mitigación actual |
 |--------|-------------------|
-| Autocompletar términos clínicos inline (dropdown) | Diccionario + expansión abreviaturas en blur; dropdown pendiente |
 | Rich editor sin toolbar de formato visible | Intencional MD3 sobrio; formato vía teclado |
-| Tests e2e rich + LT docker | Pendiente CI profile |
+| LanguageTool docker en CI | Profile `languagetool` en compose; API usa simulador si no hay URL |
+| Autocomplete inline en tokens cortos (<2 chars) | Umbral mínimo evita ruido en cada tecla |
 
 ## Verificación
 
@@ -80,10 +86,11 @@ npm run quality:clinical-ai-text-safety-gate
 npm run check
 npm run db:validate
 npx vitest run packages/clinical-productivity/src/textbox/
+npm run test:e2e:clinical-textbox
 ```
 
 ## Próximo paso sugerido
 
-1. Dropdown autocomplete clínico (sin saturar UI) en `ClinicalTextBox`.
-2. Profile docker LanguageTool en `docker-compose.yml`.
-3. Test e2e: evolución rich → guardar borrador → revisar orígenes → aprobar humano.
+1. Persistir `ClinicalTextBoxChangeMeta` completo en API de borrador (más allá de `_epis2TextOrigins`).
+2. Autocomplete semántico opcional (embeddings) detrás de flag — sin sustituir diccionario local.
+3. CI profile con postgres + languagetool para spellcheck integration tests.

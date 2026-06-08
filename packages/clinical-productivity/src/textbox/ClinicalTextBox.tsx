@@ -1,10 +1,11 @@
 import { copy } from '@epis2/design-system';
-import { Chip, EpisButton, EpisTextField, Stack, Typography } from '@epis2/epis2-ui';
+import { Box, Chip, EpisButton, EpisTextField, Stack, Typography } from '@epis2/epis2-ui';
 import { createTextOrigin } from '../safety/textOrigin.js';
 import type { ClinicalTextOrigin } from '../safety/textOrigin.js';
 import { ClinicalTextBoxChrome } from './ClinicalTextBoxChrome.js';
 import { ClinicalTextBoxMiniToolbar } from './ClinicalTextBoxMiniToolbar.js';
 import { ClinicalTextBoxRichEditor } from './ClinicalTextBoxRichEditor.js';
+import { ClinicalTextBoxTermDropdown } from './ClinicalTextBoxTermDropdown.js';
 import type { ClinicalSpellIssue, LanguageToolAdapter } from './clinicalSpellcheck.js';
 import type { ClinicalTextBoxAiAssistHandler } from './useClinicalTextBoxState.js';
 import { useClinicalTextBoxState } from './useClinicalTextBoxState.js';
@@ -126,12 +127,22 @@ export function ClinicalTextBox({
     disabled,
     minRows,
     mode,
+    richTokenMode: mode === 'rich',
     ...(error ? { error } : {}),
     ...(patientContext ? { patientContext } : {}),
     ...(spellcheckAdapter ? { spellcheckAdapter } : {}),
     ...(onRequestAiAssist ? { onRequestAiAssist } : {}),
     testId,
   });
+
+  const termDropdown = (
+    <ClinicalTextBoxTermDropdown
+      terms={state.termSuggestions}
+      visible={state.focused && !disabled && state.termSuggestions.length > 0}
+      testId={`${testId}-term-dropdown`}
+      onSelect={state.insertTermSuggestion}
+    />
+  );
 
   const toolbar = {
     onCopy: () => void state.copyFragment(),
@@ -147,39 +158,48 @@ export function ClinicalTextBox({
   };
 
   const plainInput = (
-    <div onPaste={state.handlePaste} data-testid={`${testId}-paste-zone`}>
-      <EpisTextField
-        inputRef={state.inputRef}
-        label={label}
-        value={value}
-        onChange={(event) => state.handlePlainInput(event.target.value)}
-        onFocus={() => state.setFocused(true)}
-        onBlur={state.handleBlur}
-        multiline
-        minRows={minRows}
-        fullWidth
-        disabled={disabled}
-        error={Boolean(error)}
-        helperText={error ?? ' '}
-        data-testid={`${testId}-input`}
-      />
-    </div>
+    <Box sx={{ position: 'relative' }}>
+      <div onPaste={state.handlePaste} data-testid={`${testId}-paste-zone`}>
+        <EpisTextField
+          inputRef={state.inputRef}
+          label={label}
+          value={value}
+          onChange={(event) => state.handlePlainInput(event.target.value)}
+          onFocus={() => state.setFocused(true)}
+          onBlur={state.handleBlur}
+          onClick={state.syncCursorFromInput}
+          onKeyUp={state.syncCursorFromInput}
+          onSelect={state.syncCursorFromInput}
+          multiline
+          minRows={minRows}
+          fullWidth
+          disabled={disabled}
+          error={Boolean(error)}
+          helperText={error ?? ' '}
+          data-testid={`${testId}-input`}
+        />
+      </div>
+      {termDropdown}
+    </Box>
   );
 
   const richInput = (
-    <ClinicalTextBoxRichEditor
-      value={value}
-      disabled={disabled}
-      minRows={minRows}
-      testId={`${testId}-rich`}
-      onFocus={() => state.setFocused(true)}
-      onBlur={state.handleBlur}
-      onPlainTextChange={(next) => {
-        state.emitChange(next, createTextOrigin('manual', 'Teclado'));
-      }}
-      onPastePlain={state.pastePlainAtCursor}
-      onCopySelection={(selection) => void state.copyFragment(selection)}
-    />
+    <Box sx={{ position: 'relative' }}>
+      <ClinicalTextBoxRichEditor
+        value={value}
+        disabled={disabled}
+        minRows={minRows}
+        testId={`${testId}-rich`}
+        onFocus={() => state.setFocused(true)}
+        onBlur={state.handleBlur}
+        onPlainTextChange={(next) => {
+          state.emitChange(next, createTextOrigin('manual', 'Teclado'));
+        }}
+        onPastePlain={state.pastePlainAtCursor}
+        onCopySelection={(selection) => void state.copyFragment(selection)}
+      />
+      {termDropdown}
+    </Box>
   );
 
   if (mode === 'plain') {

@@ -1,5 +1,6 @@
 import { copy } from '@epis2/design-system';
-import { useCallback, useEffect, useRef, useState, type ClipboardEvent } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ClipboardEvent } from 'react';
+import type { ChileClinicalTerm } from '../dictionaries/chileClinicalDictionary.js';
 import { createTextOrigin, type ClinicalTextOrigin } from '../safety/textOrigin.js';
 import {
   detectClinicalOmissions,
@@ -8,7 +9,17 @@ import {
   suggestSoapFromFreeText,
   type ClinicalTextboxAiAction,
 } from './clinicalAiAssist.js';
-import { expandWhitelistedAbbreviation, isSensitiveClinicalToken } from './clinicalDictionary.js';
+import {
+  autocompleteClinicalTerms,
+  expandWhitelistedAbbreviation,
+  isSensitiveClinicalToken,
+} from './clinicalDictionary.js';
+import {
+  getLastLineToken,
+  getTokenAtCursor,
+  replaceTokenAtRange,
+  type ActiveTextToken,
+} from './clinicalTextToken.js';
 import { expandClinicalSnippet } from './clinicalSnippets.js';
 import { runClinicalSpellcheck, type ClinicalSpellIssue, type LanguageToolAdapter } from './clinicalSpellcheck.js';
 import { applySlashCommand } from './clinicalTextCommands.js';
@@ -23,6 +34,8 @@ export type ClinicalTextBoxAiAssistHandler = (
 export type UseClinicalTextBoxStateOptions = ClinicalTextBoxProps & {
   spellcheckAdapter?: LanguageToolAdapter;
   onRequestAiAssist?: ClinicalTextBoxAiAssistHandler;
+  /** Rich mode no expone cursor Tiptap — usa último token de línea. */
+  richTokenMode?: boolean;
 };
 
 function buildPatientInsert(ctx?: ClinicalTextBoxPatientContext): string {
@@ -54,6 +67,7 @@ export function useClinicalTextBoxState({
   patientContext,
   spellcheckAdapter,
   onRequestAiAssist,
+  richTokenMode = false,
 }: UseClinicalTextBoxStateOptions) {
   const [focused, setFocused] = useState(false);
   const [spellIssues, setSpellIssues] = useState<ClinicalSpellIssue[]>([]);
@@ -61,7 +75,20 @@ export function useClinicalTextBoxState({
   const [lastOrigin, setLastOrigin] = useState<ClinicalTextOrigin | undefined>();
   const [confirmPending, setConfirmPending] = useState<string | undefined>();
   const [aiBusy, setAiBusy] = useState(false);
+  const [cursorPos, setCursorPos] = useState<number | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const activeToken = useMemo((): ActiveTextToken | null => {
+    if (!focused) return null;
+    if (richTokenMode) return getLastLineToken(value);
+    const pos = cursorPos ?? value.length;
+    return getTokenAtCursor(value, pos);
+  }, [cursorPos, focused, richTokenMode, value]);
+
+  const termSuggestions = useMemo(() => {
+    if (!activeToken || activeToken.token.length < 2) return [];
+    return autocompleteClinicalTerms(activeToken.token, 5);
+  }, [activeToken]);
 
   useEffect(() => {
     let cancelled = false;
@@ -81,9 +108,29 @@ export function useClinicalTextBoxState({
     [onChange],
   );
 
+  const syncCursorFromInput = () => {
+    const el = inputRef.current;
+    if (el) setCursorPos(el.selectionStart);
+  };
+
   const handlePlainInput = (next: string) => {
     emitChange(next, createTextOrigin('manual', 'Teclado'));
     setHint(undefined);
+    syncCursorFromInput();
+  };
+
+  const insertTermSuggestion = (term: ChileClinicalTerm) => {
+    const insertText = term.formal ?? term.expansions?.[0] ?? term.term;
+    if (term.category === 'medication' || term.category === 'unit') {
+      setConfirmPending(insertText);
+      return;
+    }
+    const token = activeToken;
+    const next = token
+      ? replaceTokenAtRange(value, token.start, token.end, insertText)
+      : insertPlainText(insertText);
+    emitChange(next, createTextOrigin('autocomplete', term.term));
+    setHint(copy.clinicalProductivity.textBoxTermInserted);
   };
 
   const handleBlur = () => {
@@ -202,6 +249,9 @@ export function useClinicalTextBoxState({
     confirmPending,
     aiBusy,
     inputRef,
+    termSuggestions,
+    insertTermSuggestion,
+    syncCursorFromInput,
     sensitiveTokenVisible,
     handlePlainInput,
     handleBlur,
