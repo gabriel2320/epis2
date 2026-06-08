@@ -13,8 +13,9 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadEnvFile } from '../load-env.mjs';
-import { generateOllamaJson, pingOllama } from './ollama-client.mjs';
-import { parseDevSessionPlan } from './schemas.mjs';
+import { generateOllamaJson } from './ollama-client.mjs';
+import { ensureOllamaReady, resolveOllamaRoute } from '../ollama/native-client.mjs';
+import { parseDevSessionPlanFromOllamaText } from './parse-ollama-plan.mjs';
 import { resolveSubagentSequence } from './subagents.mjs';
 import {
   getActivePhaseHint,
@@ -26,8 +27,6 @@ import {
 loadEnvFile();
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const OLLAMA_URL = process.env.OLLAMA_BASE_URL ?? 'http://127.0.0.1:11434';
-const MODEL = process.env.OLLAMA_MODEL ?? 'qwen3:8b';
 const phase = process.env.EPIS2_DEV_AGENT_PHASE ?? getActivePhaseHint(root);
 const tramo = process.env.EPIS2_DEV_AGENT_TRAMO?.toUpperCase();
 const git = getGitSummary(root, 12);
@@ -66,19 +65,20 @@ Schema JSON requerido:
   "requiresHumanReview": true
 }
 
-Propón la próxima sesión de desarrollo concreta.
-
-Estado conocido (no repetir trabajo ya hecho):
-- Fase A visual CERRADA: dashboard tabs en grids RAD, quality tab migrado, layers-integration-gate OK
-- Siguiente prioridad Fase B: ClinicalCommandPalette Ctrl+K en shell global + autocomplete búsqueda paciente
-- Tramo J farmacia BLOQUEADO hasta signoff UX-G02
+Propón la próxima sesión de desarrollo concreta según la fase activa (${phase}) y el plan global.
+No repitas trabajo ya marcado como cerrado en el extracto del plan.
 `;
 
 async function main() {
-  const up = await pingOllama(OLLAMA_URL);
-  if (!up) {
-    console.error('dev-agent-ollama FAILED: Ollama no responde.');
-    console.error('  npm run ai:enable && ollama pull ' + MODEL);
+  const route = await resolveOllamaRoute({ function: 'dev-plan' });
+  const OLLAMA_URL = route.baseUrl;
+  const MODEL = route.model;
+  console.log(`dev-agent-ollama · ${route.function} → ${MODEL} (tier ${route.tier}, ${route.mode})`);
+
+  const ready = await ensureOllamaReady({ function: 'dev-plan' });
+  if (!ready.ready) {
+    console.error(`dev-agent-ollama FAILED [${ready.stage}]: ${ready.reason}`);
+    console.error(`  ${ready.hint}`);
     process.exit(1);
   }
 
@@ -88,24 +88,17 @@ async function main() {
     process.exit(1);
   }
 
-  let raw;
-  try {
-    raw = JSON.parse(result.text);
-  } catch {
-    console.error('dev-agent-ollama FAILED: JSON inválido de Ollama');
-    console.error(result.text.slice(0, 500));
-    process.exit(1);
-  }
-
-  const parsed = parseDevSessionPlan(raw);
+  const parsed = parseDevSessionPlanFromOllamaText(result.text);
   if (!parsed.ok) {
     console.error(`dev-agent-ollama FAILED: schema — ${parsed.error}`);
+    console.error(result.text.slice(0, 500));
     process.exit(1);
   }
 
   const out = {
     generatedAt: new Date().toISOString(),
     model: result.model,
+    route: { function: route.function, tier: route.tier, mode: route.mode, model: route.model },
     ollamaUrl: OLLAMA_URL,
     plan: parsed.data,
   };

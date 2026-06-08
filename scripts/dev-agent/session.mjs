@@ -3,7 +3,8 @@
  * Arranque de sesión dev IA — un comando, un brief.
  *
  *   npm run dev:session
- *   npm run dev:session -- --ollama
+ *   npm run dev:session -- --ollama-auto
+ *   npm run dev:session -- --ollama-auto --apply
  *   npm run dev:session -- --tramo J
  *   EPIS2_DEV_SESSION_OLLAMA=1 npm run dev:session
  */
@@ -35,6 +36,8 @@ const tramo = (argValue('--tramo') ?? process.env.EPIS2_DEV_AGENT_TRAMO)?.toUppe
 const phase =
   argValue('--phase') ?? process.env.EPIS2_DEV_AGENT_PHASE ?? getActivePhaseHint(root);
 const withOllama = hasFlag('--ollama') || process.env.EPIS2_DEV_SESSION_OLLAMA === '1';
+const withOllamaAuto = hasFlag('--ollama-auto') || process.env.EPIS2_DEV_SESSION_OLLAMA_AUTO === '1';
+const ollamaApply = hasFlag('--apply');
 
 mkdirSync(join(root, 'reports'), { recursive: true });
 
@@ -59,7 +62,22 @@ if (tramo) {
 }
 
 let ollamaNote = '';
-if (withOllama) {
+if (withOllamaAuto) {
+  const autoArgs = [];
+  if (ollamaApply) autoArgs.push('--apply');
+  const r = spawnSync(process.execPath, [join(root, 'scripts/dev-agent/ollama-automation.mjs'), ...autoArgs], {
+    cwd: root,
+    stdio: 'pipe',
+    encoding: 'utf8',
+    env: { ...process.env, EPIS2_DEV_AGENT_PHASE: phase, EPIS2_DEV_AGENT_TRAMO: tramo ?? '' },
+  });
+  if (r.status === 0) {
+    ollamaNote = ollamaApply ? ' · Ollama auto OK (apply L0)' : ' · Ollama auto OK (dry-run)';
+  } else {
+    ollamaNote = ' · Ollama auto falló';
+    if (r.stderr || r.stdout) process.stderr.write(r.stderr || r.stdout);
+  }
+} else if (withOllama) {
   const r = spawnSync(process.execPath, [join(root, 'scripts/dev-agent/ollama-assist.mjs')], {
     cwd: root,
     stdio: 'pipe',

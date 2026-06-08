@@ -45,6 +45,16 @@ export {
   type AiAssistCommandRouteRequest,
   type AiAssistCommandRouteResponse,
   type LocalAiCommandRouteOutput,
+  clinicalTextSpellcheckRequestSchema,
+  clinicalTextSpellcheckResponseSchema,
+  aiTextboxAssistRequestSchema,
+  aiTextboxAssistResponseSchema,
+  localAiTextboxAssistOutputSchema,
+  type ClinicalTextSpellcheckRequest,
+  type ClinicalTextSpellcheckResponse,
+  type AiTextboxAssistRequest,
+  type AiTextboxAssistResponse,
+  type LocalAiTextboxAssistOutput,
 } from './ai.js';
 export {
   clinicalAlertSchema,

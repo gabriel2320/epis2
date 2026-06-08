@@ -4,6 +4,8 @@ import type {
   AiRunsListResponse,
   AiStatusResponse,
   AiSummarySuggestResponse,
+  AiTextboxAssistRequest,
+  AiTextboxAssistResponse,
   RagQueryResponse,
 } from '@epis2/contracts';
 import { apiFetch } from './client.js';
@@ -16,6 +18,15 @@ export function requestDraftAssist(
   body: AiAssistDraftRequest,
 ): Promise<AiAssistDraftResponse> {
   return apiFetch<AiAssistDraftResponse>('/api/ai/assist/draft', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+}
+
+export function requestTextboxAssist(
+  body: AiTextboxAssistRequest,
+): Promise<AiTextboxAssistResponse> {
+  return apiFetch<AiTextboxAssistResponse>('/api/ai/assist/textbox', {
     method: 'POST',
     body: JSON.stringify(body),
   });

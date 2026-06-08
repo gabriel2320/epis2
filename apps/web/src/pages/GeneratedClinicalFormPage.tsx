@@ -72,7 +72,7 @@ import {
 
 import { Link, useSearch } from '@tanstack/react-router';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { commandSlotsFromFormSearch, hasCommandSlotSearchParams, stripCommandSlotsFromFormSearch } from '../clinical/commandFormSearch.js';
 import { ApiError } from '../api/client.js';
@@ -86,7 +86,8 @@ import {
 
 } from '../api/clinicalApi.js';
 import { useAiStatusQuery } from '../query/hooks/useAiStatusQuery.js';
-import { useCreateDraftMutation } from '../query/hooks/useDraftMutations.js';
+import { useCreateDraftMutation, useUpdateDraftMutation } from '../query/hooks/useDraftMutations.js';
+import { useDraftDetailQuery } from '../query/hooks/useDraftDetailQuery.js';
 import { usePatientDetailQuery } from '../query/hooks/usePatientDetailQuery.js';
 import { usePatientsQuery } from '../query/hooks/usePatientsQuery.js';
 
@@ -107,6 +108,15 @@ import { PatientSearchAutocomplete } from '../components/PatientSearchAutocomple
 import { useAuth } from '../auth/AuthContext.js';
 
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
+import {
+  buildClinicalTextBoxPatientContext,
+  renderClinicalTextBoxField,
+} from '../clinical/clinicalTextBoxField.js';
+import { useClinicalTextBoxOrigins } from '../clinical/useClinicalTextBoxOrigins.js';
+import {
+  extractTextOriginsFromDraftBody,
+  stripDraftMetaFromBody,
+} from '@epis2/clinical-productivity';
 
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 
@@ -137,6 +147,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const search = useSearch({ strict: false }) as ClinicalFormSearch;
 
   const urlPatientId = search.patientId;
+  const editingDraftId = search.draftId;
 
   const effectivePatientId = urlPatientId ?? activePatient?.id;
 
@@ -191,11 +202,30 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   });
   const patientDetailQuery = usePatientDetailQuery(effectivePatientId);
   const createDraftMutation = useCreateDraftMutation();
+  const updateDraftMutation = useUpdateDraftMutation();
+  const editingDraftQuery = useDraftDetailQuery(editingDraftId);
+  const { recordFieldOrigin, attachToDraftBody, loadOrigins } = useClinicalTextBoxOrigins();
+  const hydratedDraftIdRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (!editingDraftId) {
+      hydratedDraftIdRef.current = null;
+      return;
+    }
+    const draft = editingDraftQuery.data?.draft;
+    if (!draft || hydratedDraftIdRef.current === editingDraftId) return;
+    const expectedType = BLUEPRINT_DRAFT_TYPES[blueprint.blueprintId];
+    if (!expectedType || draft.draftType !== expectedType) return;
+    hydratedDraftIdRef.current = editingDraftId;
+    const rawBody = draft.body as Record<string, unknown>;
+    loadOrigins(extractTextOriginsFromDraftBody(rawBody));
+    reset(stripDraftMetaFromBody(rawBody) as Record<string, string>);
+  }, [editingDraftId, editingDraftQuery.data, blueprint.blueprintId, loadOrigins, reset]);
 
   const canUseAiAssist = blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES;
   const clinicalProse = blueprintUsesClinicalProse(blueprint.blueprintId);
   const supportsClinicalContext = blueprintSupportsClinicalContext(blueprint.blueprintId);
-  const aiAvailable = supportsClinicalContext ? (aiStatusAvailable ?? false) : false;
+  const aiAvailable = canUseAiAssist ? (aiStatusAvailable ?? false) : false;
   const usesScrollspyShell =
     supportsClinicalContext || blueprintUsesScrollspyLayout(blueprint.blueprintId);
   const contextStorageKey = useMemo(
@@ -216,7 +246,53 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     [blueprint],
   );
 
+  const textBoxPatientContext = useMemo(() => {
+    const summary = patientDetailQuery.data?.clinicalContext.summaryFields;
+    return buildClinicalTextBoxPatientContext({
+      displayName: activePatient?.displayName,
+      ...(summary ? { structuredSummary: summary } : {}),
+      ...(summary?.activeMedications
+        ? {
+            activeMedications: summary.activeMedications
+              .split('\n')
+              .map((l) => l.trim())
+              .filter(Boolean),
+          }
+        : {}),
+      ...(summary?.relevantLabs
+        ? {
+            recentLabs: summary.relevantLabs
+              .split('\n')
+              .map((l) => l.trim())
+              .filter(Boolean),
+          }
+        : {}),
+    });
+  }, [activePatient?.displayName, patientDetailQuery.data?.clinicalContext.summaryFields]);
 
+  const renderClinicalTextBox = useCallback(
+    (props: {
+      field: import('@epis2/clinical-forms').FormField;
+      value: string;
+      error?: string;
+      onChange: (value: string) => void;
+    }) =>
+      renderClinicalTextBoxField(
+        props.field,
+        props.value,
+        (next, meta) => {
+          props.onChange(next);
+          if (meta) recordFieldOrigin(props.field.id, meta);
+        },
+        {
+          ...(props.error ? { error: props.error } : {}),
+          patientContext: textBoxPatientContext,
+          patientId: effectivePatientId,
+          aiAvailable,
+        },
+      ),
+    [textBoxPatientContext, recordFieldOrigin, effectivePatientId, aiAvailable],
+  );
 
   const { alerts: clinicalAlerts, loading: alertsLoading } = usePatientClinicalAlerts({
 
@@ -471,7 +547,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
     }
 
-    const body = getValues();
+    const persistBody = attachToDraftBody(getValues());
 
     const draftType = BLUEPRINT_DRAFT_TYPES[blueprint.blueprintId];
 
@@ -485,18 +561,34 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
 
 
+    if (editingDraftId && editingDraftQuery.data?.draft) {
+      updateDraftMutation.mutate(
+        { draftId: editingDraftId, body: { body: persistBody } },
+        {
+          onSuccess: (updated) => {
+            if (intent === 'sign') {
+              void navigate({
+                to: '/espacio/borrador/$draftId',
+                params: { draftId: updated.draft.id },
+              });
+              return;
+            }
+            setStatusMessage(copy.forms.draftSaved);
+          },
+          onError: (e) => {
+            setStatusMessage(e instanceof ApiError ? e.message : copy.forms.saveDraftError);
+          },
+        },
+      );
+      return;
+    }
+
     createDraftMutation.mutate(
-
       {
-
         patientId: effectivePatientId,
-
         draftType,
-
         title: blueprint.label,
-
-        body,
-
+        body: persistBody,
       },
 
       {
@@ -579,13 +671,13 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
       onSave={() => saveDraft('save')}
 
-      saveDisabled={createDraftMutation.isPending}
+      saveDisabled={createDraftMutation.isPending || updateDraftMutation.isPending}
 
       signLabel={canPersistDraft ? copy.forms.sign : undefined}
 
       onSign={canPersistDraft ? () => saveDraft('sign') : undefined}
 
-      signDisabled={createDraftMutation.isPending}
+      signDisabled={createDraftMutation.isPending || updateDraftMutation.isPending}
 
       overflow={formActionOverflow}
 
@@ -811,6 +903,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
                   clinicalDropEnabled
                   onClinicalDrop={onClinicalDrop}
                   collapseNonPrimarySections={blueprint.sections.length > 2}
+                  renderClinicalTextBox={renderClinicalTextBox}
                 />
               </EpisClinicalScrollspyLayout>
 
@@ -925,6 +1018,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
             collapseNonPrimarySections={blueprint.sections.length > 2}
 
+            renderClinicalTextBox={renderClinicalTextBox}
+
           />
 
           <EpisButton variant="outlined" onClick={() => void loadPatients()}>
@@ -960,6 +1055,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
             clinicalProse={clinicalProse}
 
             collapseNonPrimarySections={blueprint.sections.length > 2}
+
+            renderClinicalTextBox={renderClinicalTextBox}
 
           />
 

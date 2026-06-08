@@ -1,18 +1,17 @@
 import { localAiCommandRouteOutputSchema } from '@epis2/contracts';
+import { parseJsonFromOllamaText } from './extractOllamaJson.js';
 
 export type CommandRouteParseResult =
   | { ok: true; data: ReturnType<typeof localAiCommandRouteOutputSchema.parse> }
   | { ok: false; reason: string };
 
 export function parseAndValidateCommandRouteJson(text: string): CommandRouteParseResult {
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(text);
-  } catch {
-    return { ok: false, reason: 'JSON inválido del modelo' };
+  const extracted = parseJsonFromOllamaText(text);
+  if (!extracted.ok) {
+    return { ok: false, reason: extracted.reason };
   }
 
-  const validated = localAiCommandRouteOutputSchema.safeParse(parsed);
+  const validated = localAiCommandRouteOutputSchema.safeParse(extracted.value);
   if (!validated.success) {
     return { ok: false, reason: 'Esquema de ruta de comando inválido' };
   }

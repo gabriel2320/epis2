@@ -12,6 +12,20 @@ export type ClinicalSnippetDef = {
 
 export const CLINICAL_SNIPPETS: readonly ClinicalSnippetDef[] = [
   {
+    trigger: '.iaas',
+    title: 'Nota IAAS',
+    body: 'Evento asociado a asistencia:\nFecha:\nDispositivo/procedimiento:\nGermen:\nMedidas:',
+    scope: 'specialty',
+    originKind: 'snippet',
+  },
+  {
+    trigger: '.alta',
+    title: 'Indicaciones al alta',
+    body: 'Diagnóstico principal:\nEvolución resumida:\nTratamiento al alta:\nControles:\nSignos de alarma:',
+    scope: 'institutional',
+    originKind: 'snippet',
+  },
+  {
     trigger: '.soap',
     title: 'Consulta SOAP',
     body: 'S:\nO:\nA:\nP:\n',

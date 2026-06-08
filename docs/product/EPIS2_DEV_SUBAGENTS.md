@@ -22,6 +22,7 @@ Cada uno tiene alcance, canon y gates propios. Ollama **planifica**; el humano *
 | `golden-guardian` | Golden Journey G0–G3 | Cambios flujo clínico |
 | `m3-guardian` | Densidad M3 / anti-deriva UI | Diff en `apps/web` |
 | `ollama-clinical` | Assist producto + evals | Blueprints, `local-ai` |
+| `ollama-dev-writer` | Escritura dev bajo riesgo | Reportes, docs, `dev:agent:ollama-write` |
 | `gate-runner` | Cierre sesión estándar | Siempre al terminar |
 | `ledger-keeper` | Microfases MF | Apertura/cierre MF |
 | `ci-parity` | CI local Postgres | Pre-PR |
@@ -50,7 +51,8 @@ npm run dev:agent:ollama
 ```
 
 Ollama propone: objetivo, paths permitidos, secuencia subagentes, gates.  
-**No** escribe código ni corre gates automáticamente.
+Con `dev:agent:ollama-write` puede **proponer y aplicar (Tier L0)** reportes y docs tras revisión humana — ver [`EPIS2_DEV_AGENT_LOW_RISK_WRITE.md`](./EPIS2_DEV_AGENT_LOW_RISK_WRITE.md).  
+**No** escribe SoT clínico ni corre gates automáticamente sin humano.
 
 IA clínica producto (borradores assist) sigue en `dev:ai` + `ai:evals:live` — subagente `ollama-clinical`.
 

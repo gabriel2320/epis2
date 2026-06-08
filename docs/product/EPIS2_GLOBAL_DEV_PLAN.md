@@ -61,8 +61,10 @@ Command palette Ctrl+K → **Fase B** (componente L5 existe; falta cableado en `
 ### Fase C — Ola 3 longitudinal
 
 - Ficha hub estable (split pane ✓)
-- Documentos + resultados bandeja plana (results-inbox ✓)
+- [x] Documentos UI compacta — `PatientSummaryDocumentsBlock` + índice en historial
+- Resultados bandeja plana (results-inbox ✓)
 - [x] CTAs vacíos → formulario (alergia, problema) — `PatientSummaryAntecedentsBlock` en ficha compacta UX-B.2
+- [x] Timeline invocable — `epis2-ficha-open-timeline` + foco en historial longitudinal
 
 ### Fase D — Tramo J farmacia (post Fase B)
 

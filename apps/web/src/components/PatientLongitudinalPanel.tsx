@@ -1,4 +1,4 @@
-import { useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { isSurgicalHistoryDescription, stripSurgicalHistoryPrefix } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
@@ -25,8 +25,11 @@ import {
   Stack,
   Typography,
 } from '@epis2/epis2-ui';
+export type HistoryFocusSection = 'timeline' | 'documents';
+
 export type PatientLongitudinalPanelProps = {
   data: PatientLongitudinalResponse;
+  focusSection?: HistoryFocusSection | null;
   onOpenDraft?: (draftId: string) => void;
   onOpenNote?: (noteId: string) => void;
   onRegisterAllergy?: () => void;
@@ -66,6 +69,7 @@ function Section({
 
 export function PatientLongitudinalPanel({
   data,
+  focusSection,
   onOpenDraft,
   onOpenNote,
   onRegisterAllergy,
@@ -80,6 +84,8 @@ export function PatientLongitudinalPanel({
   onOpenNursingMar,
 }: PatientLongitudinalPanelProps) {
   const [exporting, setExporting] = useState<'txt' | 'pdf' | null>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const documentsRef = useRef<HTMLDivElement>(null);
   const clinicalProblems = useMemo(
     () => data.problems.filter((p) => !isSurgicalHistoryDescription(p.description)),
     [data.problems],
@@ -88,6 +94,13 @@ export function PatientLongitudinalPanel({
     () => data.problems.filter((p) => isSurgicalHistoryDescription(p.description)),
     [data.problems],
   );
+
+  useEffect(() => {
+    if (!focusSection) return;
+    const target =
+      focusSection === 'timeline' ? timelineRef.current : documentsRef.current;
+    target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [focusSection]);
 
   return (
     <Stack spacing={2} data-testid="epis2-longitudinal-panel">
@@ -309,37 +322,40 @@ export function PatientLongitudinalPanel({
         </Stack>
       </Section>
 
-      <Section
-        title={copy.longitudinal.timeline}
-        empty={data.timeline.length === 0}
-        testId="epis2-longitudinal-timeline"
-      >
-        <List dense disablePadding>
-          {data.timeline.map((ev) => (
-            <ListItem
-              key={ev.id}
-              disablePadding
-              data-testid={`epis2-longitudinal-timeline-item-${ev.id}`}
-              sx={{
-                cursor:
-                  (ev.kind === 'draft' && onOpenDraft) || (ev.kind === 'note' && onOpenNote)
-                    ? 'pointer'
-                    : 'default',
-              }}
-              onClick={() => {
-                if (ev.kind === 'draft' && ev.entityId && onOpenDraft) onOpenDraft(ev.entityId);
-                if (ev.kind === 'note' && onOpenNote) onOpenNote(ev.entityId ?? '');
-              }}
-            >
-              <ListItemText
-                primary={ev.title}
-                secondary={`${new Date(ev.at).toLocaleString('es-CL')} · ${ev.kind}${ev.detail ? ` — ${ev.detail}` : ''}`}
-              />
-            </ListItem>
-          ))}
-        </List>
-      </Section>
+      <Box ref={timelineRef}>
+        <Section
+          title={copy.longitudinal.timeline}
+          empty={data.timeline.length === 0}
+          testId="epis2-longitudinal-timeline"
+        >
+          <List dense disablePadding>
+            {data.timeline.map((ev) => (
+              <ListItem
+                key={ev.id}
+                disablePadding
+                data-testid={`epis2-longitudinal-timeline-item-${ev.id}`}
+                sx={{
+                  cursor:
+                    (ev.kind === 'draft' && onOpenDraft) || (ev.kind === 'note' && onOpenNote)
+                      ? 'pointer'
+                      : 'default',
+                }}
+                onClick={() => {
+                  if (ev.kind === 'draft' && ev.entityId && onOpenDraft) onOpenDraft(ev.entityId);
+                  if (ev.kind === 'note' && onOpenNote) onOpenNote(ev.entityId ?? '');
+                }}
+              >
+                <ListItemText
+                  primary={ev.title}
+                  secondary={`${new Date(ev.at).toLocaleString('es-CL')} · ${ev.kind}${ev.detail ? ` — ${ev.detail}` : ''}`}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Section>
+      </Box>
 
+      <Box ref={documentsRef}>
       <Section title={copy.longitudinal.documents} empty={data.documents.length === 0}>
         <DocumentIndexTree documents={data.documents} />
         <Box sx={{ mt: 2 }}>
@@ -367,6 +383,7 @@ export function PatientLongitudinalPanel({
           </AccordionDetails>
         </Accordion>
       </Section>
+      </Box>
     </Stack>
   );
 }

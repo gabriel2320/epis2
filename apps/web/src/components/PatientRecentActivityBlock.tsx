@@ -1,11 +1,20 @@
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import { EpisWorkspaceSection, List, ListItem, ListItemText, Typography } from '@epis2/epis2-ui';
+import {
+  Button,
+  EpisWorkspaceSection,
+  List,
+  ListItem,
+  ListItemText,
+  Stack,
+  Typography,
+} from '@epis2/epis2-ui';
 
 type PatientRecentActivityBlockProps = {
   events: PatientLongitudinalResponse['timeline'];
   maxEvents?: number;
   onOpenDraft?: (draftId: string) => void;
+  onViewFullTimeline?: () => void;
 };
 
 /** Actividad reciente compacta — UX-B.2 (≤8 eventos), sección plana. */
@@ -13,48 +22,63 @@ export function PatientRecentActivityBlock({
   events,
   maxEvents = 8,
   onOpenDraft,
+  onViewFullTimeline,
 }: PatientRecentActivityBlockProps) {
   const items = events.slice(0, maxEvents);
 
   return (
     <EpisWorkspaceSection title={copy.activePatient.recentActivityTitle} testId="epis2-recent-activity">
-      {items.length === 0 ? (
-        <Typography variant="body2" color="text.secondary">
-          {copy.longitudinal.emptySection}
-        </Typography>
-      ) : (
-        <List dense disablePadding>
-          {items.map((event) => (
-            <ListItem
-              key={event.id}
-              disablePadding
-              secondaryAction={
-                event.kind === 'draft' && event.entityId && onOpenDraft ? (
-                  <Typography
-                    component="button"
-                    variant="body2"
-                    onClick={() => onOpenDraft(event.entityId!)}
-                    sx={{
-                      border: 0,
-                      background: 'none',
-                      cursor: 'pointer',
-                      color: 'primary.main',
-                      p: 0,
-                    }}
-                  >
-                    {copy.activePatient.openDraft}
-                  </Typography>
-                ) : undefined
-              }
-            >
-              <ListItemText
-                primary={event.title}
-                secondary={new Date(event.at).toLocaleString('es-CL')}
-              />
-            </ListItem>
-          ))}
-        </List>
-      )}
+      <Stack spacing={1}>
+        {items.length === 0 ? (
+          <Typography variant="body2" color="text.secondary">
+            {copy.longitudinal.emptySection}
+          </Typography>
+        ) : (
+          <List dense disablePadding>
+            {items.map((event) => (
+              <ListItem
+                key={event.id}
+                disablePadding
+                secondaryAction={
+                  event.kind === 'draft' && event.entityId && onOpenDraft ? (
+                    <Typography
+                      component="button"
+                      variant="body2"
+                      onClick={() => onOpenDraft(event.entityId!)}
+                      sx={{
+                        border: 0,
+                        background: 'none',
+                        cursor: 'pointer',
+                        color: 'primary.main',
+                        p: 0,
+                      }}
+                    >
+                      {copy.activePatient.openDraft}
+                    </Typography>
+                  ) : undefined
+                }
+              >
+                <ListItemText
+                  primary={event.title}
+                  secondary={new Date(event.at).toLocaleString('es-CL')}
+                />
+              </ListItem>
+            ))}
+          </List>
+        )}
+
+        {onViewFullTimeline ? (
+          <Button
+            size="small"
+            variant="outlined"
+            onClick={onViewFullTimeline}
+            data-testid="epis2-ficha-open-timeline"
+            sx={{ alignSelf: 'flex-start' }}
+          >
+            {copy.activePatient.viewFullTimeline}
+          </Button>
+        ) : null}
+      </Stack>
     </EpisWorkspaceSection>
   );
 }

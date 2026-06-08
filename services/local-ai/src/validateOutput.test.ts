@@ -24,4 +24,17 @@ describe('parseAndValidateAssistJson', () => {
   it('rechaza JSON inválido', () => {
     expect(parseAndValidateAssistJson('no-json').ok).toBe(false);
   });
+
+  it('acepta JSON tras bloque think de Qwen', () => {
+    const tag = 'think';
+    const result = parseAndValidateAssistJson(
+      `<${tag}>analizo</${tag}>` +
+        JSON.stringify({
+          suggestedFields: { subjective: 'Demo' },
+          safetyNotes: ['Revisar'],
+          requiresHumanReview: true,
+        }),
+    );
+    expect(result.ok).toBe(true);
+  });
 });

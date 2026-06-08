@@ -1,4 +1,4 @@
-import type { ClinicalFormBlueprint } from '@epis2/clinical-forms';
+import type { ClinicalFormBlueprint, FormField } from '@epis2/clinical-forms';
 import { resolveFieldColumnSpan } from '@epis2/clinical-forms';
 import { ExpandMoreIcon } from '../mui/index.js';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
@@ -7,6 +7,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import type { ReactElement } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { epis2BarLayout } from '../theme/breakpoints.js';
 import { epis2M3ColumnSpanSx, epis2M3FormGridSx, epis2M3FormLayout } from '../theme/m3-layout-tokens.js';
@@ -20,6 +21,13 @@ export type EpisClinicalFormRhfProps = {
   clinicalDropEnabled?: boolean;
   onClinicalDrop?: (fieldId: string, payload: ClinicalContextDragPayload) => void;
   collapseNonPrimarySections?: boolean;
+  /** MF-CLINICAL-TEXTBOX-TOOLS — render opcional para campos textarea con clinicalTextBox. */
+  renderClinicalTextBox?: (props: {
+    field: FormField;
+    value: string;
+    error?: string;
+    onChange: (value: string) => void;
+  }) => ReactElement | null;
 };
 
 /** Formulario clínico MD3 con React Hook Form + Zod (resolver en FormProvider). */
@@ -29,6 +37,7 @@ export function EpisClinicalFormRhf({
   clinicalDropEnabled = false,
   onClinicalDrop,
   collapseNonPrimarySections = false,
+  renderClinicalTextBox,
 }: EpisClinicalFormRhfProps) {
   const { control } = useFormContext<EpisClinicalFormValues>();
   const fieldMap = new Map(blueprint.fields.map((f) => [f.id, f]));
@@ -54,17 +63,29 @@ export function EpisClinicalFormRhf({
                 <Controller
                   name={f.id}
                   control={control}
-                  render={({ field: rhf, fieldState }) => (
+                  render={({ field: rhf, fieldState }) => {
+                    const errorMsg = fieldState.error?.message;
+                    if (f.clinicalTextBox && f.type === 'textarea' && renderClinicalTextBox) {
+                      const custom = renderClinicalTextBox({
+                        field: f,
+                        value: rhf.value ?? '',
+                        ...(errorMsg ? { error: errorMsg } : {}),
+                        onChange: (value) => rhf.onChange(value),
+                      });
+                      if (custom) return custom;
+                    }
+                    return (
                     <EpisClinicalField
                       field={f}
                       value={rhf.value ?? ''}
                       clinicalProse={clinicalProse}
                       clinicalDropEnabled={clinicalDropEnabled}
                       {...(onClinicalDrop ? { onClinicalDrop } : {})}
-                      {...(fieldState.error?.message ? { error: fieldState.error.message } : {})}
+                      {...(errorMsg ? { error: errorMsg } : {})}
                       onChange={(_fieldId, value) => rhf.onChange(value)}
                     />
-                  )}
+                    );
+                  }}
                 />
               </Box>
             ))}

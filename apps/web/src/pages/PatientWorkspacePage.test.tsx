@@ -92,7 +92,15 @@ describe('PatientWorkspacePage', () => {
       allergies: [{ id: 'a1', substance: 'Penicilina', severity: 'moderate', status: 'active' }],
       medications: [{ id: 'm1', name: 'Warfarina', status: 'active' }],
       observations: [],
-      documents: [],
+      documents: [
+        {
+          id: 'e1',
+          title: 'Nota alergia penicilina — archivo demo',
+          documentType: 'txt',
+          mimeType: 'text/plain',
+          storageRef: 'demo://documents/demo-005-allergy.txt',
+        },
+      ],
       encounters: [],
       timeline: [{ id: 't1', kind: 'encounter', at: new Date().toISOString(), title: 'Consulta demo' }],
     });
@@ -126,9 +134,11 @@ describe('PatientWorkspacePage', () => {
     expect(screen.getByTestId('epis2-clinical-alerts')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-clinical-summary')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-ficha-antecedents')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-ficha-documents')).toBeInTheDocument();
     expect(screen.getByText('Infección (demo)')).toBeInTheDocument();
     expect(screen.queryByTestId('epis2-ficha-register-allergy')).not.toBeInTheDocument();
     expect(screen.getByTestId('epis2-recent-activity')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-ficha-open-timeline')).toBeInTheDocument();
     expect(
       within(screen.getByTestId('epis2-recent-activity')).getByText('Consulta demo'),
     ).toBeInTheDocument();

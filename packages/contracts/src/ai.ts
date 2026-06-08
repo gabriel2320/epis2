@@ -162,3 +162,53 @@ export type RagQueryRequest = z.infer<typeof ragQueryRequestSchema>;
 export type RagQueryResponse = z.infer<typeof ragQueryResponseSchema>;
 export type AiSummarySuggestRequest = z.infer<typeof aiSummarySuggestRequestSchema>;
 export type AiSummarySuggestResponse = z.infer<typeof aiSummarySuggestResponseSchema>;
+
+export const clinicalTextSpellcheckRequestSchema = z.object({
+  text: z.string().max(8000),
+});
+
+export const clinicalTextSpellcheckIssueSchema = z.object({
+  token: z.string(),
+  suggestions: z.array(z.string()),
+});
+
+export const clinicalTextSpellcheckResponseSchema = z.object({
+  issues: z.array(clinicalTextSpellcheckIssueSchema),
+});
+
+export const aiTextboxAssistRequestSchema = z.object({
+  action: z.enum(['reformulate', 'soap', 'omissions']),
+  text: z.string().min(1).max(8000),
+  patientId: z.string().uuid().optional(),
+});
+
+export const localAiTextboxAssistOutputSchema = z.object({
+  resultText: z.string(),
+  requiresHumanReview: z.literal(true),
+});
+
+export const aiTextboxAssistResponseSchema = z.discriminatedUnion('status', [
+  z.object({
+    status: z.literal('success'),
+    resultText: z.string(),
+    requiresHumanReview: z.literal(true),
+    model: z.string().optional(),
+    latencyMs: z.number().int().nonnegative().optional(),
+  }),
+  z.object({
+    status: z.literal('unavailable'),
+    message: z.string(),
+    requiresHumanReview: z.literal(true),
+  }),
+  z.object({
+    status: z.literal('rejected'),
+    message: z.string(),
+    requiresHumanReview: z.literal(true),
+  }),
+]);
+
+export type ClinicalTextSpellcheckRequest = z.infer<typeof clinicalTextSpellcheckRequestSchema>;
+export type ClinicalTextSpellcheckResponse = z.infer<typeof clinicalTextSpellcheckResponseSchema>;
+export type AiTextboxAssistRequest = z.infer<typeof aiTextboxAssistRequestSchema>;
+export type AiTextboxAssistResponse = z.infer<typeof aiTextboxAssistResponseSchema>;
+export type LocalAiTextboxAssistOutput = z.infer<typeof localAiTextboxAssistOutputSchema>;

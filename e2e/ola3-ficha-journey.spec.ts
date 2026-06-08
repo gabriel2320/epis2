@@ -65,11 +65,31 @@ test.describe('Ola 3 — ficha longitudinal CTAs', () => {
     await expect(page.getByTestId('epis2-chart-vitals-trend')).toBeVisible();
   });
 
+  test('ficha compacta muestra documentos indexados DEMO-001', async ({ page }) => {
+    await loginAsPhysician(page);
+    await pinDemoCase(page, 'DEMO-001');
+    await expect(page.getByTestId('epis2-ficha-documents')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByText('Informe laboratorio control HTA (demo)')).toBeVisible();
+    await page.getByTestId('epis2-ficha-open-documents-index').click();
+    await expect(page.getByTestId('epis2-longitudinal-documents-tree')).toBeVisible({
+      timeout: 15_000,
+    });
+  });
+
+  test('ficha compacta abre línea de tiempo desde actividad reciente', async ({ page }) => {
+    await loginAsPhysician(page);
+    await pinDemoCase(page, 'DEMO-001');
+    await expect(page.getByTestId('epis2-recent-activity')).toBeVisible({ timeout: 15_000 });
+    await page.getByTestId('epis2-ficha-open-timeline').click();
+    await expect(page.getByTestId('epis2-longitudinal-timeline')).toBeVisible({ timeout: 15_000 });
+  });
+
   test('ficha hub M3 carga workspace compacto y historial bajo demanda', async ({ page }) => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-001');
     await expect(page.getByTestId('epis2-patient-workspace')).toBeVisible({ timeout: 15_000 });
     await expect(page.getByTestId('epis2-ficha-antecedents')).toBeVisible();
+    await expect(page.getByTestId('epis2-ficha-documents')).toBeVisible();
     await expect(page.getByTestId('epis2-ficha-history')).toBeVisible();
     await expect(page.getByTestId('epis2-longitudinal-panel')).toHaveCount(0);
     await openFichaHistory(page);

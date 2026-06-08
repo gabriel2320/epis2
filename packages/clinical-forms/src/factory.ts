@@ -15,6 +15,8 @@ export type FieldDefinition = {
   options?: readonly string[];
   columnSpan?: number;
   readOnly?: boolean;
+  clinicalTextBox?: boolean;
+  clinicalTextBoxMode?: 'plain' | 'rich';
 };
 
 export function defineBlueprint(input: BlueprintInput): ClinicalFormBlueprint {
@@ -45,6 +47,8 @@ export function field(
   let opts: readonly string[] | undefined;
   let columnSpan: number | undefined;
   let readOnly: boolean | undefined;
+  let clinicalTextBox: boolean | undefined;
+  let clinicalTextBoxMode: 'plain' | 'rich' | undefined;
 
   if (typeof requiredOrDef === 'boolean') {
     required = requiredOrDef;
@@ -54,10 +58,17 @@ export function field(
     opts = requiredOrDef.options ?? options;
     columnSpan = requiredOrDef.columnSpan;
     readOnly = requiredOrDef.readOnly;
+    clinicalTextBox = requiredOrDef.clinicalTextBox;
+    clinicalTextBoxMode = requiredOrDef.clinicalTextBoxMode;
   }
 
   const base: FormField = { id, label, type, required };
   const withOpts = opts !== undefined ? { ...base, options: opts } : base;
   const withSpan = columnSpan !== undefined ? { ...withOpts, columnSpan } : withOpts;
-  return readOnly !== undefined ? { ...withSpan, readOnly } : withSpan;
+  const withReadOnly = readOnly !== undefined ? { ...withSpan, readOnly } : withSpan;
+  const withTextBox =
+    clinicalTextBox !== undefined ? { ...withReadOnly, clinicalTextBox } : withReadOnly;
+  return clinicalTextBoxMode !== undefined
+    ? { ...withTextBox, clinicalTextBoxMode }
+    : withTextBox;
 }

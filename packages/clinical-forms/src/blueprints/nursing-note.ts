@@ -19,9 +19,9 @@ export const nursingNoteBlueprint = defineBlueprint({
     field('heartRate', 'Frecuencia cardiaca', 'text', { columnSpan: 3 }),
     field('oxygenSaturation', 'SatO2 (%)', 'text', { columnSpan: 3 }),
     field('temperature', 'Temperatura (°C)', 'text', { columnSpan: 3 }),
-    field('careProvided', 'Cuidados realizados', 'textarea', true),
-    field('patientResponse', 'Respuesta del paciente', 'textarea', false),
-    field('observations', 'Observaciones adicionales', 'textarea', false),
+    field('careProvided', 'Cuidados realizados', 'textarea', { required: true, clinicalTextBox: true }),
+    field('patientResponse', 'Respuesta del paciente', 'textarea', { clinicalTextBox: true }),
+    field('observations', 'Observaciones adicionales', 'textarea', { clinicalTextBox: true }),
   ],
   validations: [{ fieldId: 'careProvided', message: 'Describa los cuidados' }],
 });

@@ -82,3 +82,62 @@ export {
   type ProductivityGap,
   type ProductivityScreenAudit,
 } from './inventory/productivityAudit.js';
+
+export {
+  ClinicalTextBox,
+  type ClinicalTextBoxChangeMeta,
+  type ClinicalTextBoxMode,
+  type ClinicalTextBoxPatientContext,
+  type ClinicalTextBoxProps,
+} from './textbox/ClinicalTextBox.js';
+export { ClinicalTextBoxMiniToolbar, type ClinicalTextBoxMiniToolbarProps } from './textbox/ClinicalTextBoxMiniToolbar.js';
+export {
+  autocompleteClinicalTerms,
+  expandWhitelistedAbbreviation,
+  isSensitiveClinicalToken,
+} from './textbox/clinicalDictionary.js';
+export {
+  detectClinicalOmissions,
+  formatSoapSuggestion,
+  parseAiSoapOutput,
+  reformulateClinicalText,
+  requiresMedicationConfirmation,
+  suggestSoapFromFreeText,
+  soapStructureSchema,
+  type ClinicalTextboxAiAction,
+  type SoapStructureOutput,
+} from './textbox/clinicalAiAssist.js';
+export { ClinicalTextBoxRichEditor, type ClinicalTextBoxRichEditorProps } from './textbox/ClinicalTextBoxRichEditor.js';
+export {
+  createEpisSpellcheckAdapter,
+  createLanguageToolAdapter,
+} from './textbox/languageToolAdapter.js';
+export {
+  runClinicalSpellcheck,
+  runLocalClinicalSpellcheck,
+  simulatedLanguageToolAdapter,
+  type ClinicalSpellIssue,
+  type LanguageToolAdapter,
+} from './textbox/clinicalSpellcheck.js';
+export {
+  getTextboxSnippetMenuItems,
+  insertSnippetBody,
+  TEXTBOX_PRIMARY_SNIPPET_TRIGGERS,
+} from './textbox/clinicalSnippets.js';
+export {
+  applySlashCommand,
+  CLINICAL_SLASH_COMMANDS,
+  detectSlashCommandAtCursor,
+  type ClinicalSlashCommand,
+} from './textbox/clinicalTextCommands.js';
+export { pastedTextLooksLikeAi, sanitizePastedClinicalText } from './textbox/pasteSanitizer.js';
+export {
+  attachTextOriginsToDraftBody,
+  draftHasReviewableTextOrigins,
+  EPIS2_DRAFT_TEXT_ORIGINS_KEY,
+  extractTextOriginsFromDraftBody,
+  isDraftMetaFieldKey,
+  stripDraftMetaFromBody,
+  summarizeDraftTextOrigins,
+  type DraftFieldTextOrigins,
+} from './textbox/draftTextOrigins.js';

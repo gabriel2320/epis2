@@ -14,6 +14,11 @@ const requiredScripts = [
   'scripts/dev-agent/close.mjs',
   'scripts/dev-agent/orchestrate.mjs',
   'scripts/dev-agent/ollama-assist.mjs',
+  'scripts/dev-agent/ollama-write.mjs',
+  'scripts/dev-agent/ollama-automation.mjs',
+  'scripts/ollama/native-client.mjs',
+  'scripts/ollama/probe.mjs',
+  'scripts/dev-agent/low-risk-policy.mjs',
   'scripts/dev-agent/subagents.mjs',
   'scripts/dev-agent/schemas.mjs',
   'scripts/dev-agent-tramo-prompt.mjs',
@@ -44,7 +49,7 @@ const text = existsSync(doc) ? readFileSync(doc, 'utf8') : '';
 if (!text.includes('dev:agent:ollama')) errors.push('orquestación sin Ollama dev assist');
 
 const subText = existsSync(subDoc) ? readFileSync(subDoc, 'utf8') : '';
-for (const id of ['golden-guardian', 'layers-integrator', 'ollama-clinical', 'gate-runner']) {
+for (const id of ['golden-guardian', 'layers-integrator', 'ollama-clinical', 'ollama-dev-writer', 'gate-runner']) {
   if (!subText.includes(id)) errors.push(`EPIS2_DEV_SUBAGENTS sin ${id}`);
 }
 
@@ -53,9 +58,15 @@ for (const npm of [
   'dev:session',
   'dev:agent:orchestrate',
   'dev:agent:ollama',
+  'dev:agent:ollama-write',
+  'dev:agent:ollama-auto',
+  'ollama:probe',
+  'ollama:route',
+  'quality:dev-agent-ollama-automation-gate',
   'dev:agent:close',
   'dev:agent:tramo-k',
   'dev:agent:subagent',
+  'quality:dev-agent-low-risk-write-gate',
 ]) {
   if (!pkg.includes(`"${npm}"`)) errors.push(`package.json sin ${npm}`);
 }

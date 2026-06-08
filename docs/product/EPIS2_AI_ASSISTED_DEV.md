@@ -27,7 +27,11 @@ npm run dev:ai
 Con plan Ollama:
 
 ```bash
-npm run dev:session -- --ollama
+npm run ollama:route                         # modelos por función + tier estación
+npm run dev:session -- --ollama              # solo plan sesión
+npm run dev:session -- --ollama-auto         # probe → plan → docs L0 (dry-run)
+npm run dev:session -- --ollama-auto --apply # idem + apply Tier L0 tras revisar
+npm run ollama:probe                         # diagnóstico + tabla rutas
 ```
 
 ---
@@ -81,6 +85,12 @@ Gates extra según rol: ver brief (`layers-integration-gate`, `golden-journey`, 
 | `npm run dev:session` | **`reports/dev-agent-brief.md`** (entrada única) |
 | `npm run dev:agent:orchestrate` | prompts + brief (sin Ollama) |
 | `npm run dev:agent:ollama` | `dev-agent-ollama-plan.json` |
+| `npm run dev:agent:ollama-auto` | Probe nativo → plan → write L0 → `dev-agent-ollama-automation.json` |
+| `npm run dev:agent:ollama-auto -- --apply` | Aplica Tier L0 (reportes/docs) tras revisión |
+| `npm run dev:agent:ollama-write` | Plan parches L0/L1 → `dev-agent-ollama-write-plan.json` |
+| `npm run dev:agent:ollama-write -- --apply` | Aplica Tier L0 (reportes/docs) tras revisión |
+| `npm run ai:pull-coder-models` | Descarga modelos cuantizados especialistas en código (dev) |
+| `npm run ollama:route` | Modelo por función según tier de estación |
 | `npm run dev:agent:close` | checklist + plantilla reporte |
 | `npm run quality:microphase-next` | MF READY del ledger |
 

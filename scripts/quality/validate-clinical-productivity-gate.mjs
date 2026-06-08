@@ -19,6 +19,7 @@ for (const exportName of [
   'ClinicalBulkActionMenu',
   'ClinicalRichTextEditor',
   'ClinicalCopyPasteTools',
+  'ClinicalTextBox',
 ]) {
   if (!indexSrc.includes(exportName)) errors.push(`index.ts no exporta ${exportName}`);
 }
@@ -64,6 +65,11 @@ for (const file of webRoots.flatMap((d) => walk(d))) {
 const subGates = [
   'validate-autocomplete-gate.mjs',
   'validate-spellcheck-gate.mjs',
+  'validate-clinical-textbox-gate.mjs',
+  'validate-clinical-textbox-assist-gate.mjs',
+  'validate-clinical-spellcheck-gate.mjs',
+  'validate-clinical-snippets-gate.mjs',
+  'validate-clinical-ai-text-safety-gate.mjs',
   'validate-command-palette-gate.mjs',
   'validate-clinical-grid-gate.mjs',
   'validate-bulk-actions-gate.mjs',

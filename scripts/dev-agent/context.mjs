@@ -2,7 +2,9 @@ import { execSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { findNextReady, loadLedger } from '../quality/microphase-ledger-lib.mjs';
-import { pingOllama } from './ollama-client.mjs';
+import { getOllamaStatus } from '../ollama/native-client.mjs';
+import { resolveAllOllamaRoutes } from '../ollama/model-router.mjs';
+import { getWorkstationProfile } from '../ollama/workstation-profile.mjs';
 
 /** @param {string} root */
 export function getNextMicrophase(root) {
@@ -43,12 +45,22 @@ export function getGitSummary(root, maxFiles = 24) {
 /** @param {string} root */
 export async function getStackHints(root) {
   const ollamaUrl = process.env.OLLAMA_BASE_URL ?? 'http://127.0.0.1:11434';
-  const ollamaUp = await pingOllama(ollamaUrl);
+  const clinicalModel = process.env.OLLAMA_MODEL ?? 'qwen3:8b';
+  const status = await getOllamaStatus({ baseUrl: ollamaUrl, model: clinicalModel });
+  const workstation = getWorkstationProfile();
+  const routes = await resolveAllOllamaRoutes(ollamaUrl);
   const hasEnv = existsSync(join(root, '.env'));
   return {
-    ollamaUp,
+    ollamaUp: status.up,
+    ollamaModelReady: status.modelReady,
     ollamaUrl,
-    model: process.env.OLLAMA_MODEL ?? 'qwen3:8b',
+    model: clinicalModel,
+    workstation,
+    routes: {
+      clinical: routes.clinical,
+      devPlan: routes['dev-plan'],
+      devWrite: routes['dev-write'],
+    },
     hasEnv,
     databaseUrl: Boolean(process.env.DATABASE_URL),
   };

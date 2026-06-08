@@ -11,6 +11,7 @@ const e2e = readFileSync(join(root, 'e2e/ola3-ficha-journey.spec.ts'), 'utf8');
 for (const token of [
   'epis2-patient-workspace',
   'epis2-ficha-antecedents',
+  'epis2-ficha-documents',
   'epis2-ficha-history',
   'epis2-longitudinal-panel',
 ]) {
@@ -21,7 +22,7 @@ const workspaceTest = readFileSync(
   join(root, 'apps/web/src/pages/PatientWorkspacePage.test.tsx'),
   'utf8',
 );
-for (const token of ['epis2-ficha-antecedents', 'epis2-longitudinal-panel', 'epis2-ficha-history']) {
+for (const token of ['epis2-ficha-antecedents', 'epis2-ficha-documents', 'epis2-longitudinal-panel', 'epis2-ficha-history']) {
   if (!workspaceTest.includes(token)) {
     errors.push(`PatientWorkspacePage.test sin ${token}`);
   }
@@ -33,6 +34,9 @@ const workspacePage = readFileSync(
 );
 if (!workspacePage.includes('PatientSummaryAntecedentsBlock')) {
   errors.push('PatientWorkspacePage sin bloque antecedentes compacto');
+}
+if (!workspacePage.includes('PatientSummaryDocumentsBlock')) {
+  errors.push('PatientWorkspacePage sin bloque documentos compacto');
 }
 
 if (errors.length) {

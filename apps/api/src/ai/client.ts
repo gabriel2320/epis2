@@ -1,4 +1,4 @@
-import type { AiAssistDraftRequest } from '@epis2/contracts';
+import type { AiAssistDraftRequest, AiTextboxAssistRequest } from '@epis2/contracts';
 
 export type LocalAiAssistResult =
   | {
@@ -52,5 +52,33 @@ export async function requestDraftAssist(
   });
 
   const payload = (await res.json()) as LocalAiAssistResult;
+  return { httpStatus: res.status, body: payload };
+}
+
+export type LocalAiTextboxAssistResult =
+  | {
+      status: 'success';
+      resultText: string;
+      requiresHumanReview: true;
+      model?: string;
+      latencyMs?: number;
+    }
+  | {
+      status: 'unavailable' | 'rejected';
+      message: string;
+      requiresHumanReview: true;
+    };
+
+export async function requestTextboxAssist(
+  baseUrl: string,
+  body: AiTextboxAssistRequest,
+): Promise<{ httpStatus: number; body: LocalAiTextboxAssistResult }> {
+  const res = await fetch(`${baseUrl.replace(/\/$/, '')}/assist/textbox`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    signal: AbortSignal.timeout(60_000),
+    body: JSON.stringify(body),
+  });
+  const payload = (await res.json()) as LocalAiTextboxAssistResult;
   return { httpStatus: res.status, body: payload };
 }

@@ -25,6 +25,7 @@ import { PatientClinicalSummaryPanel } from '../components/PatientClinicalSummar
 import { PatientLongitudinalPanel } from '../components/PatientLongitudinalPanel.js';
 import { PatientRecentActivityBlock } from '../components/PatientRecentActivityBlock.js';
 import { PatientSummaryAntecedentsBlock } from '../components/PatientSummaryAntecedentsBlock.js';
+import { PatientSummaryDocumentsBlock } from '../components/PatientSummaryDocumentsBlock.js';
 import { PatientWorkspaceCommandPanel } from '../components/PatientWorkspaceCommandPanel.js';
 
 export function PatientWorkspacePage() {
@@ -35,6 +36,12 @@ export function PatientWorkspacePage() {
   const [alertLabel, setAlertLabel] = useState<string | undefined>();
   const [patientsFetchEnabled, setPatientsFetchEnabled] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
+  const [historyFocus, setHistoryFocus] = useState<'timeline' | 'documents' | null>(null);
+
+  const openHistory = (focus: 'timeline' | 'documents' | null = null) => {
+    setHistoryFocus(focus);
+    setHistoryOpen(true);
+  };
 
   const patientId = search.patientId ?? active?.id;
 
@@ -164,23 +171,34 @@ export function PatientWorkspacePage() {
       ) : null}
 
       {longitudinal ? (
-        <PatientSummaryAntecedentsBlock
-          allergies={longitudinal.allergies}
-          problems={longitudinal.problems}
-          onRegisterAllergy={longitudinalNav.onRegisterAllergy}
-          onRegisterProblem={longitudinalNav.onRegisterProblem}
-        />
+        <>
+          <PatientSummaryAntecedentsBlock
+            allergies={longitudinal.allergies}
+            problems={longitudinal.problems}
+            onRegisterAllergy={longitudinalNav.onRegisterAllergy}
+            onRegisterProblem={longitudinalNav.onRegisterProblem}
+          />
+          <PatientSummaryDocumentsBlock
+            documents={longitudinal.documents}
+            onViewDocumentIndex={() => openHistory('documents')}
+          />
+        </>
       ) : null}
 
       <PatientRecentActivityBlock
         events={longitudinal?.timeline ?? []}
         onOpenDraft={openDraft}
+        onViewFullTimeline={() => openHistory('timeline')}
       />
     </Stack>
   );
 
   const secondaryColumn = longitudinal ? (
-    <PatientLongitudinalPanel data={longitudinal} {...longitudinalNav} />
+    <PatientLongitudinalPanel
+      data={longitudinal}
+      focusSection={historyOpen ? historyFocus : null}
+      {...longitudinalNav}
+    />
   ) : (
     <Typography color="text.secondary">{copy.drafts.loading}</Typography>
   );
@@ -193,7 +211,10 @@ export function PatientWorkspacePage() {
           primary={primaryColumn}
           secondary={secondaryColumn}
           open={historyOpen}
-          onOpenChange={setHistoryOpen}
+          onOpenChange={(open) => {
+            setHistoryOpen(open);
+            if (!open) setHistoryFocus(null);
+          }}
           openLabel={copy.activePatient.viewFullHistory}
           closeLabel={copy.activePatient.hideFullHistory}
           toggleTestId="epis2-ficha-history"

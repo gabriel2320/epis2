@@ -1,4 +1,10 @@
 import { getBlueprintById } from '@epis2/clinical-forms';
+import {
+  draftHasReviewableTextOrigins,
+  extractTextOriginsFromDraftBody,
+  isDraftMetaFieldKey,
+  summarizeDraftTextOrigins,
+} from '@epis2/clinical-productivity';
 import { roleHasPermission, type ClinicalRole } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
 import {
@@ -52,10 +58,15 @@ export function DraftReviewPage() {
     draft !== null &&
     !['approved', 'cancelled'].includes(draft.status);
 
-  const draftBodyFields = draft
+  const draftBodyRecord = draft?.body as Record<string, unknown> | undefined;
+  const textOrigins = draftBodyRecord ? extractTextOriginsFromDraftBody(draftBodyRecord) : {};
+  const reviewableOrigins = summarizeDraftTextOrigins(textOrigins);
+
+  const draftBodyFields = draftBodyRecord
     ? Object.fromEntries(
-        Object.entries(draft.body).filter(
-          (entry): entry is [string, string] => typeof entry[1] === 'string',
+        Object.entries(draftBodyRecord).filter(
+          (entry): entry is [string, string] =>
+            !isDraftMetaFieldKey(entry[0]) && typeof entry[1] === 'string',
         ),
       )
     : undefined;
@@ -150,8 +161,8 @@ export function DraftReviewPage() {
     );
   }
 
-  const bodyPreview = Object.entries(draft.body as Record<string, string>)
-    .filter(([, v]) => String(v).trim())
+  const bodyPreview = Object.entries(draftBodyRecord ?? {})
+    .filter(([key, v]) => !isDraftMetaFieldKey(key) && String(v).trim())
     .slice(0, 12);
 
   const approvable = canApprove && ['draft', 'editing', 'ready_for_review'].includes(draft.status);
@@ -175,7 +186,7 @@ export function DraftReviewPage() {
           onClick={() =>
             void navigate({
               to: editFormRoute as ClinicalFormRoutePath,
-              search: { patientId: draft.patientId },
+              search: { patientId: draft.patientId, draftId: draft.id },
             })
           }
         >
@@ -210,6 +221,19 @@ export function DraftReviewPage() {
           {copy.drafts.approvalDisclaimer}
         </EpisAlert>
 
+        {draftHasReviewableTextOrigins(textOrigins) ? (
+          <EpisAlert severity="info" data-testid="epis2-draft-text-origins">
+            {copy.drafts.textOriginsReview}
+            <List dense>
+              {reviewableOrigins.map((line) => (
+                <ListItem key={line} disablePadding>
+                  <ListItemText primary={line} />
+                </ListItem>
+              ))}
+            </List>
+          </EpisAlert>
+        ) : null}
+
         {pendingEncounterClosure ? (
           <EpisAlert severity="info" data-testid="epis2-draft-encounter-closure">
             {copy.drafts.encounterClosureOnApprove}
@@ -224,7 +248,7 @@ export function DraftReviewPage() {
           <List dense>
             {bodyPreview.map(([key, value]) => (
               <ListItem key={key} disablePadding>
-                <ListItemText primary={key} secondary={value} />
+                <ListItemText primary={key} secondary={String(value)} />
               </ListItem>
             ))}
           </List>

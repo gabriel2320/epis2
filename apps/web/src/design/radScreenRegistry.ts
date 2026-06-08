@@ -35,6 +35,7 @@ export const EPIS_RAD_SCREEN_REGISTRY: readonly EpisRadScreenAudit[] = [
     md3Pattern: 'split-workspace',
     iconBudget: 12,
     scrollPolicy: 'embedded',
+    notes: 'Ola 3 UX-B.2 — antecedentes/documentos/actividad compactos + split historial IDC 21–29',
   },
   {
     id: 'patient-search',

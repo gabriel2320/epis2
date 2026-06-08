@@ -49,4 +49,21 @@ describe('command route assist (CE-3 local-ai)', () => {
     );
     expect(parsed.ok).toBe(false);
   });
+
+  it('parseAndValidateCommandRouteJson tolera markdown y think', () => {
+    const tag = 'think';
+    const parsed = parseAndValidateCommandRouteJson(
+      '```json\n' +
+        `<${tag}>ok</${tag}>` +
+        JSON.stringify({
+          intent: 'prepare_discharge_draft',
+          confidence: 0.82,
+          missingContext: [],
+          reason: 'Alta',
+          suggestedCandidates: ['prepare_discharge_draft'],
+        }) +
+        '\n```',
+    );
+    expect(parsed.ok).toBe(true);
+  });
 });

@@ -21,7 +21,7 @@ export const allergyEntryBlueprint = defineBlueprint({
       options: SEVERITY_OPTIONS,
       columnSpan: 4,
     }),
-    field('reactionNotes', 'Reacción y notas', 'textarea'),
+    field('reactionNotes', 'Reacción y notas', 'textarea', { clinicalTextBox: true }),
   ],
   validations: [
     { fieldId: 'substance', message: 'Sustancia requerida' },

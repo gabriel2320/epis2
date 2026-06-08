@@ -19,6 +19,12 @@ En Cursor, adjuntar **solo**:
 
 Opcional plan Ollama: `npm run dev:session -- --ollama`
 
+Automatización nativa (probe → plan → docs): `npm run dev:session -- --ollama-auto` → revisar → `--apply`
+
+Enrutado por estación: `npm run ollama:route` (dev-plan vs dev-write vs clínica)
+
+Escritura bajo riesgo (reportes/docs): `npm run dev:agent:ollama-write` → revisar → `--apply`
+
 ## Loop de trabajo
 
 1. **Declarar alcance** — MF del ledger, archivos permitidos/prohibidos, fase (A/B/tramo).
@@ -40,6 +46,8 @@ Completar `reports/epis2-session-close-*.md` o reporte de sesión. Sin commit au
 | Capa | Uso |
 |------|-----|
 | **Dev** (`dev:session`, `dev:agent:ollama`) | Planificar sesión; JSON con `requiresHumanReview` |
+| **Dev auto** (`dev:agent:ollama-auto`) | Probe Ollama nativo + plan + documentación L0 (dry-run por defecto) |
+| **Dev write L0** (`dev:agent:ollama-write --apply`) | Reportes/docs allowlist; revisar plan antes de apply |
 | **Producto** (`dev:ai`, assist borradores) | Clínica demo; nunca escribe SoT |
 
 ## Detenerse si
@@ -48,4 +56,4 @@ Completar `reports/epis2-session-close-*.md` o reporte de sesión. Sin commit au
 - `architecture:validate` falla
 - Se pide segundo registry temporal o import EPIS sin manifest
 
-Canon: `docs/product/EPIS2_AI_ASSISTED_DEV.md`
+Canon: `docs/product/EPIS2_AI_ASSISTED_DEV.md` · `docs/product/EPIS2_DEV_AGENT_LOW_RISK_WRITE.md`

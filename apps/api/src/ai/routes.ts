@@ -1,6 +1,8 @@
 import {
   aiAssistDraftRequestSchema,
   aiAssistDraftResponseSchema,
+  aiTextboxAssistRequestSchema,
+  aiTextboxAssistResponseSchema,
   aiRunsListResponseSchema,
   aiStatusResponseSchema,
   aiSummarySuggestRequestSchema,
@@ -16,7 +18,7 @@ import {
 } from '../auth/authenticate.js';
 import type { AppConfig } from '../config.js';
 import type { Database } from '../db/client.js';
-import { fetchLocalAiStatus, pingOllama, requestDraftAssist } from './client.js';
+import { fetchLocalAiStatus, pingOllama, requestDraftAssist, requestTextboxAssist } from './client.js';
 import { getDemoSafetyNotesForPatient } from '../clinical/service.js';
 import { queryPatientRag } from './rag.js';
 import { suggestPatientSummary24h } from './summary.js';
@@ -159,6 +161,70 @@ export async function registerAiRoutes(
         requiresHumanReview: true,
       });
       return reply.status(httpStatus === 503 ? 503 : 503).send(response);
+    },
+  );
+
+  app.post(
+    '/api/ai/assist/textbox',
+    { preHandler: [limitAi, requireDraftWrite] },
+    async (request, reply) => {
+      const parsed = aiTextboxAssistRequestSchema.safeParse(request.body);
+      if (!parsed.success) {
+        return reply.status(400).send({ error: 'Solicitud textbox IA inválida' });
+      }
+      const session = (request as AuthenticatedRequest).session;
+      const { httpStatus, body } = await requestTextboxAssist(
+        config.LOCAL_AI_BASE_URL,
+        parsed.data,
+      );
+
+      const baseRun: Pick<AiRunRecord, 'actorId' | 'blueprintId' | 'inputPayload'> & {
+        patientId?: string;
+      } = {
+        actorId: session.sub,
+        blueprintId: 'clinical_textbox',
+        inputPayload: parsed.data as Record<string, unknown>,
+      };
+      if (parsed.data.patientId !== undefined) {
+        baseRun.patientId = parsed.data.patientId;
+      }
+
+      if (body.status === 'success') {
+        await recordAiRun(db, {
+          ...baseRun,
+          promptHash: 'textbox-assist',
+          model: body.model ?? 'unknown',
+          latencyMs: body.latencyMs ?? 0,
+          status: 'success',
+          outputPayload: { resultText: body.resultText },
+        });
+        return reply.send(
+          aiTextboxAssistResponseSchema.parse({
+            status: 'success',
+            resultText: body.resultText,
+            requiresHumanReview: true,
+            model: body.model,
+            latencyMs: body.latencyMs,
+          }),
+        );
+      }
+
+      await recordAiRun(db, {
+        ...baseRun,
+        promptHash: 'textbox-assist',
+        model: 'unknown',
+        latencyMs: 0,
+        status: body.status,
+        errorMessage: body.message,
+      });
+
+      return reply.status(httpStatus === 422 ? 422 : 503).send(
+        aiTextboxAssistResponseSchema.parse({
+          status: body.status,
+          message: body.message,
+          requiresHumanReview: true,
+        }),
+      );
     },
   );
 

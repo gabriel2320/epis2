@@ -37,6 +37,7 @@ import { searchPatientDocuments } from './documents.js';
 import { getPatientLongitudinal } from './longitudinal.js';
 import { getPatientResultsInbox } from './resultsInbox.js';
 import { buildPatientSummaryExport } from './summaryExport.js';
+import { parseClinicalTextSpellcheckRequest, runClinicalTextSpellcheck } from './textSpellcheck.js';
 
 const createDraftSchema = z.object({
   patientId: z.string().uuid(),
@@ -92,6 +93,19 @@ export async function registerClinicalRoutes(
   const requireDraftApprove = createRequirePermission(config, 'draft.approve');
 
   app.get('/api/clinical/status', async () => ({ enabled: true }));
+
+  app.post(
+    '/api/clinical/text-spellcheck',
+    { preHandler: requireDraftWrite },
+    async (request, reply) => {
+      const parsed = parseClinicalTextSpellcheckRequest(request.body);
+      if (!parsed.success) {
+        return reply.status(400).send({ error: 'Texto inválido para corrector clínico' });
+      }
+      const result = await runClinicalTextSpellcheck(config, parsed.data.text);
+      return reply.send(result);
+    },
+  );
 
   app.get(
     '/api/patients',

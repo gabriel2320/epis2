@@ -28,6 +28,7 @@ export type ClinicalPatientSearch = { patientId?: string };
 
 /** CE-3b/CE-4: slots del comando en query string al abrir formulario. */
 export type ClinicalFormSearch = ClinicalPatientSearch & {
+  draftId?: string;
   patientHint?: string;
   medicationHint?: string;
   studyHint?: string;
@@ -44,6 +45,9 @@ export function parseClinicalFormSearch(search: Record<string, unknown>): Clinic
   const parsed: ClinicalFormSearch = {};
   if (typeof search.patientId === 'string' && search.patientId) {
     parsed.patientId = search.patientId;
+  }
+  if (typeof search.draftId === 'string' && search.draftId) {
+    parsed.draftId = search.draftId;
   }
   if (typeof search.patientHint === 'string' && search.patientHint.trim()) {
     parsed.patientHint = search.patientHint.trim();

@@ -19,6 +19,9 @@
   "dependencies": {
     "@epis2/design-system": "*",
     "@epis2/epis2-ui": "*",
+    "@tiptap/pm": "^3.26.0",
+    "@tiptap/react": "^3.26.0",
+    "@tiptap/starter-kit": "^3.26.0",
     "react-hook-form": "^7.56.4",
     "zod": "^3.25.42"
   },

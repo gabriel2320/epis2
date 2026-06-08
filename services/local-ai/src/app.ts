@@ -2,11 +2,13 @@ import {
   aiAssistDraftRequestSchema,
   aiAssistCommandRouteRequestSchema,
   aiAssistCommandRouteResponseSchema,
+  aiTextboxAssistRequestSchema,
   healthResponseSchema,
 } from '@epis2/contracts';
 import Fastify from 'fastify';
 import { runDraftAssist } from './assist.js';
 import { runCommandRouteAssist } from './commandRoute.js';
+import { runTextboxAssist } from './textboxAssist.js';
 import type { AiConfig } from './config.js';
 import { buildLocalAiCapabilities } from './gatewayCapabilities.js';
 import { pingOllama } from './ollama.js';
@@ -89,6 +91,21 @@ export async function buildAiApp(config: AiConfig) {
 
     const body = aiAssistCommandRouteResponseSchema.parse(result);
     return reply.send(body);
+  });
+
+  app.post('/assist/textbox', async (request, reply) => {
+    const parsed = aiTextboxAssistRequestSchema.safeParse(request.body);
+    if (!parsed.success) {
+      return reply.status(400).send({ error: 'Solicitud textbox IA inválida' });
+    }
+    const result = await runTextboxAssist(config.OLLAMA_BASE_URL, model, parsed.data);
+    if (result.status === 'unavailable') {
+      return reply.status(503).send({ ...result, requiresHumanReview: true as const });
+    }
+    if (result.status === 'rejected') {
+      return reply.status(422).send({ ...result, requiresHumanReview: true as const });
+    }
+    return reply.send(result);
   });
 
   return app;

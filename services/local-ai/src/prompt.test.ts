@@ -17,6 +17,7 @@ describe('EPIS prompt policy (local-ai)', () => {
       'discharge_summary',
       'prescription',
       'lab_request',
+      'procedure_request',
       'nursing_note',
       'medication_administration',
       'admission_note',

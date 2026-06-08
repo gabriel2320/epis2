@@ -30,6 +30,10 @@ export type FormField = {
   readOnly?: boolean;
   /** Ancho en grid M3 de 12 columnas (escritorio). Por defecto 12. */
   columnSpan?: number;
+  /** MF-CLINICAL-TEXTBOX-TOOLS — caja con snippets, corrector y mini-toolbar. */
+  clinicalTextBox?: boolean;
+  /** Modo del ClinicalTextBox cuando clinicalTextBox=true. */
+  clinicalTextBoxMode?: 'plain' | 'rich';
 };
 
 export type FormValidationRule = {

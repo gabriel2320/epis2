@@ -17,7 +17,7 @@ Catálogo subagentes: [`EPIS2_DEV_SUBAGENTS.md`](./EPIS2_DEV_SUBAGENTS.md)
 
 ```bash
 npm run stack:dev                 # Postgres + Ollama smoke
-npm run dev:session               # brief único + prompts (opcional: --ollama)
+npm run dev:session               # brief único + prompts (opcional: --ollama | --ollama-auto)
 # Cursor: @reports/dev-agent-brief.md @reports/dev-agent-prompt-<primario>.md
 # … trabajo humano / Cursor …
 npm run dev:agent:close           # checklist + plantilla reporte
@@ -34,8 +34,14 @@ npm run dev:agent:close           # checklist + plantilla reporte
 | `npm run dev:agent:subagent -- --subagent golden-guardian` | Un prompt |
 | `npm run dev:agent:tramo-k` | Compat Semana 4 — tramo K |
 | `npm run dev:agent:ollama` | `reports/dev-agent-ollama-plan.json` |
+| `npm run dev:agent:ollama-auto` | Probe → plan → write L0 → `dev-agent-ollama-automation.json` |
+| `npm run ollama:probe` | Diagnóstico tags + modelo instalado |
+| `npm run dev:agent:ollama-write` | `reports/dev-agent-ollama-write-plan.json` |
+| `npm run dev:agent:ollama-write -- --apply` | Aplica Tier L0 (reportes/docs) tras revisión |
 
 Variables: `EPIS2_DEV_AGENT_PHASE` · `EPIS2_DEV_AGENT_TRAMO` · `EPIS2_DEV_AGENT_MF`
+
+Política: [`EPIS2_DEV_AGENT_LOW_RISK_WRITE.md`](./EPIS2_DEV_AGENT_LOW_RISK_WRITE.md)
 
 ---
 
@@ -43,12 +49,17 @@ Variables: `EPIS2_DEV_AGENT_PHASE` · `EPIS2_DEV_AGENT_TRAMO` · `EPIS2_DEV_AGEN
 
 | Capa | Servicio | Uso |
 |------|----------|-----|
-| **Dev planning** | Ollama directo vía `dev:agent:ollama` | Plan sesión JSON; no toca producto |
+| **Dev planning** | Ollama directo vía `dev:agent:ollama` | Plan sesión JSON; no toca producto clínico |
+| **Dev auto** | `dev:agent:ollama-auto` | Probe nativo + plan + documentación L0 (dry-run; `--apply` opcional) |
+| **Dev write L0** | `dev:agent:ollama-write` | Reportes/docs en allowlist; `--apply` tras revisión humana |
 | **Clínica producto** | `npm run dev:ai` → `local-ai :3002` | Draft assist, evals, chip IA en comando |
 
 Stack:
 
 ```bash
+npm run ai:pull-coder-models   # qwen2.5-coder + deepseek-coder (dev-agent)
+npm run ollama:route           # modelos por función según tier estación
+OLLAMA_ROUTE_MODE=auto         # fixed = usa OLLAMA_DEV_MODEL siempre
 npm run dev:ai        # terminal 2 — obligatorio para assist clínico
 npm run ai:evals:live # evals blueprints
 npm run ai:evals:closure

@@ -43,6 +43,16 @@ export const DEV_SUBAGENTS = {
     gates: ['quality:ollama-structured-output-gate', 'npm run ai:evals:live'],
     canon: ['docs/intelligence/EPIS2_OLLAMA_CAPABILITY_PLAN.md', 'docs/product/EPIS2_AI_TRAMO_EVALS.md'],
   },
+  'ollama-dev-writer': {
+    id: 'ollama-dev-writer',
+    title: 'Escritor dev bajo riesgo (Ollama)',
+    triggers: ['reporte sesión', 'documentación', 'dev:agent:ollama-write', 'reports/'],
+    gates: ['quality:dev-agent-low-risk-write-gate', 'npm run dev:agent:ollama-write'],
+    canon: [
+      'docs/product/EPIS2_DEV_AGENT_LOW_RISK_WRITE.md',
+      'docs/product/EPIS2_DEV_AGENT_ORCHESTRATION.md',
+    ],
+  },
   'gate-runner': {
     id: 'gate-runner',
     title: 'Ejecutor de gates',
@@ -69,7 +79,7 @@ export const DEV_SUBAGENTS = {
 /** Secuencia recomendada según fase activa del plan global. */
 export const PHASE_SUBAGENT_SEQUENCE = {
   A: ['layers-integrator', 'm3-guardian', 'gate-runner'],
-  B: ['layers-integrator', 'ollama-clinical', 'golden-guardian', 'gate-runner'],
+  B: ['layers-integrator', 'ollama-dev-writer', 'ollama-clinical', 'golden-guardian', 'gate-runner'],
   tramo: ['tramo-implementer', 'ollama-clinical', 'golden-guardian', 'gate-runner', 'ledger-keeper'],
   default: ['gate-runner', 'ci-parity', 'ledger-keeper'],
 };

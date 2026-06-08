@@ -10,6 +10,7 @@ const envSchema = z.object({
   WEB_ORIGIN: z.string().url().default('http://127.0.0.1:5173'),
   LOCAL_AI_BASE_URL: z.string().url().default('http://127.0.0.1:3002'),
   OLLAMA_BASE_URL: z.string().url().default('http://127.0.0.1:11434'),
+  LANGUAGETOOL_BASE_URL: z.string().url().optional(),
   RLS_MODE: z.enum(['off', 'enforce']).default('off'),
   AUTH_MODE: z.enum(['demo', 'hybrid']).default('demo'),
   SERVICE_API_KEY: z.string().min(32).optional(),
