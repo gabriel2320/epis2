@@ -1,6 +1,7 @@
 # EPIS2 — Plan de desarrollo global (consolidado)
 
-**Versión:** 1.2 · **Fecha:** 2026-06-04  
+**Versión:** 1.3 · **Fecha:** 2026-06-09  
+**Story board:** [`EPIS2_STORYBOARD.md`](./EPIS2_STORYBOARD.md)  
 **Fuentes fusionadas:** `ROADMAP.md` · `EPIS2_COMPLETION_ROADMAP.md` · MF-UI-SIMPLIFY · MF-RAD-M3 · MF-CLINICAL-PRODUCTIVITY · tramos A–K
 
 ---
@@ -46,11 +47,11 @@ Detalle de puente L4→L5: `docs/product/EPIS2_UI_LAYERS.md`.
 
 Command palette Ctrl+K → **Fase B** (componente L5 existe; falta cableado en `EpisAppScaffold`).
 
-### Fase B — Completitud Ola 2 + subagentes dev (**activa**)
+### Fase B — Completitud Ola 2 + subagentes dev (**activa** · CI E2E ✓ 2026-06-09)
 
 - [x] `ClinicalCommandPalette` Ctrl+K en shell global (`ClinicalShellCommandPalette`)
 - [x] Autocomplete búsqueda paciente (`PatientSearchAutocomplete`)
-- [x] Journey Playwright `golden-v2-admission-discharge` UI
+- [x] Journey Playwright `golden-v2-admission-discharge` UI — **CI 10/10 E2E** run [27181266125](https://github.com/gabriel2320/epis2/actions/runs/27181266125)
 - [x] RAD `clinical-form-evolution` + `draft-review` → `done`
 - [x] Blueprint `procedure_request` + comando `request_procedure` (IDC 57)
 - [x] Cierre encuentro operativo UI + API (`outpatient_visit.closeEncounter`)

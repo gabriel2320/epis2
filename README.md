@@ -28,7 +28,10 @@ Aplicación clínica **command-first**, independiente del proyecto EPIS (legacy)
 | **M3-00…09** | Completado — tokens M3, `createEpis2Theme`, primitivos, reskin Login/Comando/clínico/tablero, preferencias, QA signoff |
 | **UI plana + slices** | Completado — tema monocromático, chips sin truncar, 11 blueprints, WIDGET-00 |
 
-Reportes: `reports/epis2-m3-09-qa-signoff.md` · `reports/epis2-ux-stabilization.md` · `reports/epis2-audit-and-dev-plans-2026-06-05.md`
+| **CI master** | Verde — 10/10 E2E preview ([run 27181266125](https://github.com/gabriel2320/epis2/actions/runs/27181266125)) |
+| **EPIS2-PM-01 Tres modos** | Completado — PROG-THREE-MODES MF-01…08 |
+
+Story board: [`docs/product/EPIS2_STORYBOARD.md`](docs/product/EPIS2_STORYBOARD.md) · Reportes: `reports/epis2-m3-09-qa-signoff.md` · `reports/epis2-ci-e2e-closure-2026-06-09.md`
 
 ## Evolab (repositorio externo)
 
@@ -44,6 +47,7 @@ Plan de mejora: [EVOLAB_ROADMAP.md](https://github.com/gabriel2320/epis2-evolab/
 | [docs/ARCHITECTURE_TARGET.md](docs/ARCHITECTURE_TARGET.md) | Arquitectura objetivo |
 | [docs/LEGACY_DONOR_MAP.md](docs/LEGACY_DONOR_MAP.md) | Migración selectiva desde EPIS |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Fases EPIS2-00 … EPIS2-12 + frontera producto |
+| [docs/product/EPIS2_STORYBOARD.md](docs/product/EPIS2_STORYBOARD.md) | Story board vivo — hecho / en curso / siguiente |
 | [docs/SCOPE_V1.md](docs/SCOPE_V1.md) | MVP v1 + addendum slices demo |
 | [docs/design/M3_ADOPTION_PLAN.md](docs/design/M3_ADOPTION_PLAN.md) | Plan Material 3 Clinical (M3-00…09) |
 | [docs/design/EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md](docs/design/EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md) | Especificación M3 |

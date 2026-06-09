@@ -6,7 +6,7 @@
 
 > Las olas agrupan capacidades; **no** implican cola lineal estricta. Ver definición **EPIS2 Core completado** en el canon.
 
-**Estado base:** Ola 0 cerrada · Ola 1 shell + **Command Engine CE-0→CE-5** + arco UX command-first · Ola 2 activa · **538+ tests** · 32 migraciones · **19 blueprints** · Fase B palette+autocomplete ✓ · gates `quality:golden-journey` + `quality:ux-pilot` verdes (2026-06-04)
+**Estado base:** Ola 0 cerrada · Ola 1 shell + **Command Engine CE-0→CE-5** + arco UX command-first · Ola 2 activa · **538+ tests** · 32 migraciones · **19 blueprints** · Fase B palette+autocomplete ✓ · **CI master verde** (10/10 E2E preview, run 27181266125, 2026-06-09) · gates `quality:golden-journey` + `quality:ux-pilot` verdes
 
 ---
 
