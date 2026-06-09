@@ -810,6 +810,22 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
           {copy.print.previewA5}
         </EpisButton>
       ) : null}
+      {blueprint.blueprintId === 'prescription' && effectivePatientId ? (
+        <EpisButton
+          appearance="outlined"
+          size="small"
+          data-testid="epis2-print-preview-prescription"
+          onClick={() => {
+            writePrintPreview('prescription', values);
+            void navigate({
+              to: '/espacio/receta/imprimir',
+              search: { patientId: effectivePatientId },
+            });
+          }}
+        >
+          {copy.print.previewA5}
+        </EpisButton>
+      ) : null}
 
     </>
 

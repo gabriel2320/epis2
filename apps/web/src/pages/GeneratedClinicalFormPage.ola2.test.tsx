@@ -95,8 +95,9 @@ afterEach(() => cleanup());
 
 const outpatientBlueprint = getBlueprintById('outpatient_visit');
 const certificateBlueprint = getBlueprintById('medical_certificate');
+const prescriptionBlueprint = getBlueprintById('prescription');
 
-if (!outpatientBlueprint || !certificateBlueprint) {
+if (!outpatientBlueprint || !certificateBlueprint || !prescriptionBlueprint) {
   throw new Error('Ola 2 blueprints missing');
 }
 
@@ -148,5 +149,12 @@ describe('GeneratedClinicalFormPage — Ola 2 M3-UI', () => {
     expect(screen.getByTestId('epis2-form-medical_certificate')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-print-preview-medical_certificate')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: copy.forms.save })).toBeInTheDocument();
+  });
+
+  it('receta médica expone vista impresión A5', async () => {
+    renderForm(prescriptionBlueprint);
+
+    expect(screen.getByTestId('epis2-form-prescription')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-print-preview-prescription')).toBeInTheDocument();
   });
 });

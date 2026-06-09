@@ -28,7 +28,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 
 | Hilo | Notas |
 |------|-------|
-| **Hilo C** — Ola 3 longitudinal | Ficha hub · impresión clínica · piloto M3 |
+| **Hilo C** — Ola 3 longitudinal | Receta A5 ✓ · piloto M3 pendiente · [`epis2-hilo-c-p1-print-prescription-2026-06-09.md`](../../reports/epis2-hilo-c-p1-print-prescription-2026-06-09.md) |
 
 ---
 
@@ -36,7 +36,8 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 
 | Prioridad | Hilo / tramo | Gate |
 |-----------|--------------|------|
-| **P1** | **Hilo C** — Ola 3 | Impresión clínica · piloto humano M3 (PEND-006) |
+| **P1** | **Hilo C** — piloto M3 | `quality:m3-human-pilot` (+ stack:dev) |
+| P1b | Impresión clínica restante | Carta / más A5 (PEND-006 parcial) |
 | P2 | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | P3 | Backlog Ola 2+ | Nota procedimiento clínica (PEND-002 defer) |
 

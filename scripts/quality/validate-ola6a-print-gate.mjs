@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** MF-OLA6A-002 — Vista Print A5 certificado (IDC 40 Done). */
+/** MF-OLA6A-002 — Vista Print A5 certificado + receta (IDC 40 / receta A5). */
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -10,6 +10,7 @@ const errors = [];
 for (const rel of [
   'packages/epis2-ui/src/print/PrintA5Document.tsx',
   'apps/web/src/pages/MedicalCertificatePrintPage.tsx',
+  'apps/web/src/pages/PrescriptionPrintPage.tsx',
   'apps/web/src/clinical/printPreviewStorage.ts',
   'e2e/ola6a-print-certificate.spec.ts',
 ]) {
@@ -23,10 +24,16 @@ const form = readFileSync(
 if (!form.includes('epis2-print-preview-medical_certificate')) {
   errors.push('GeneratedClinicalFormPage sin botón vista impresión certificado');
 }
+if (!form.includes('epis2-print-preview-prescription')) {
+  errors.push('GeneratedClinicalFormPage sin botón vista impresión receta');
+}
 
 const router = readFileSync(join(root, 'apps/web/src/routes/router.tsx'), 'utf8');
 if (!router.includes('/espacio/certificado/imprimir')) {
   errors.push('router sin ruta imprimir certificado');
+}
+if (!router.includes('/espacio/receta/imprimir')) {
+  errors.push('router sin ruta imprimir receta');
 }
 
 const e2e = readFileSync(join(root, 'e2e/ola6a-print-certificate.spec.ts'), 'utf8');
@@ -38,4 +45,4 @@ if (errors.length) {
   console.error('ola6a-print-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
-console.log('ola6a-print-gate OK — Print A5 certificado (vista documental)');
+console.log('ola6a-print-gate OK — Print A5 certificado + receta (vista documental)');

@@ -64,6 +64,8 @@ Command palette Ctrl+K → **Hilo B**.
 - Ficha hub (split pane ✓)
 - [x] Documentos UI compacta · CTAs alergia/problema · timeline invocable
 - Resultados bandeja plana (results-inbox ✓)
+- [x] Impresión A5 receta · [`epis2-hilo-c-p1-print-prescription-2026-06-09.md`](../../reports/epis2-hilo-c-p1-print-prescription-2026-06-09.md)
+- [ ] Piloto humano M3 · PEND-006
 
 ### Hilo D — Tramo J farmacia (**cerrado** 2026-06-09)
 

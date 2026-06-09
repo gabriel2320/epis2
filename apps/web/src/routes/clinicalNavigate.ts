@@ -7,6 +7,7 @@ export type ClinicalFormRoutePath =
   | '/espacio/evolucion'
   | '/espacio/epicrisis'
   | '/espacio/receta'
+  | '/espacio/receta/imprimir'
   | '/espacio/laboratorio'
   | '/espacio/interconsulta'
   | '/espacio/imagenologia'

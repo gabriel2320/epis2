@@ -15,6 +15,7 @@ import { GeneratedClinicalFormPage } from '../pages/GeneratedClinicalFormPage.js
 import { PatientWorkspacePage } from '../pages/PatientWorkspacePage.js';
 import { ResultsInboxPage } from '../pages/ResultsInboxPage.js';
 import { MedicalCertificatePrintPage } from '../pages/MedicalCertificatePrintPage.js';
+import { PrescriptionPrintPage } from '../pages/PrescriptionPrintPage.js';
 import { AdminConsolePage } from '../pages/AdminConsolePage.js';
 import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
@@ -183,6 +184,13 @@ const prescriptionFormRoute = createRoute({
   path: '/espacio/receta',
   validateSearch: validatePatientSearch,
   component: clinicalFormPage('/espacio/receta'),
+});
+
+const prescriptionPrintRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/receta/imprimir',
+  validateSearch: validatePatientSearch,
+  component: PrescriptionPrintPage,
 });
 
 const labFormRoute = createRoute({
@@ -389,6 +397,7 @@ export const routeTree = rootRoute.addChildren([
     evolutionFormRoute,
     dischargeFormRoute,
     prescriptionFormRoute,
+    prescriptionPrintRoute,
     labFormRoute,
     referralFormRoute,
     imagingFormRoute,
