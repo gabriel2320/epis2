@@ -32,11 +32,11 @@ Reportes: `reports/epis2-m3-09-qa-signoff.md` · `reports/epis2-ux-stabilization
 
 ## Evolab (repositorio externo)
 
-El laboratorio de evolución supervisada **no vive en este monorepo**. Usa el repo independiente [epis2-evolab](https://github.com/gabriel2320/epis2-evolab), que apunta al sandbox EPIS2 vía HTTP sin acoplar código clínico.
+El laboratorio de evolución supervisada **no vive en este monorepo**. Usa [epis2-evolab](https://github.com/gabriel2320/epis2-evolab), que apunta al sandbox EPIS2 vía HTTP sin acoplar código clínico.
+
+Plan de mejora: [EVOLAB_ROADMAP.md](https://github.com/gabriel2320/epis2-evolab/blob/master/docs/evolution/EVOLAB_ROADMAP.md).
 
 ## Documentación esencial
-
-| Documento | Propósito |
 |-----------|-----------|
 | [docs/PRODUCT_CANON.md](docs/PRODUCT_CANON.md) | Visión y principios no negociables |
 | [docs/SCOPE_V1.md](docs/SCOPE_V1.md) | MVP v1 limitado |
