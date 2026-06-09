@@ -1,5 +1,14 @@
 import { copy } from '@epis2/design-system';
-import { Alert, Button, Paper, Stack, Tab, Tabs, TextField, Typography } from '@epis2/epis2-ui';
+import {
+  EpisAlert,
+  EpisButton,
+  EpisM3Text,
+  EpisTextField,
+  EpisWorkspaceSection,
+  Stack,
+  Tab,
+  Tabs,
+} from '@epis2/epis2-ui';
 import { useNavigate } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 import { BlueprintStudioPanel } from '../admin/BlueprintStudioPanel.js';
@@ -79,80 +88,86 @@ export function AdminConsolePage({ initialTab = 'users' }: AdminConsolePageProps
 
   return (
     <Stack spacing={2} data-testid="epis2-admin-console">
-      <Typography variant="h5">Consola de administración</Typography>
-      <Alert severity="info">Vista demo read-only/staging — sin escritura en SoT clínico aprobado.</Alert>
-      {error ? <Alert severity="error">{error}</Alert> : null}
+      <EpisM3Text role="titleLarge" component="h1" sx={{ m: 0 }}>
+        {copy.adminConsole.title}
+      </EpisM3Text>
+      <EpisAlert severity="info">{copy.adminConsole.demoDisclaimer}</EpisAlert>
+      {error ? <EpisAlert severity="error">{error}</EpisAlert> : null}
       <Tabs value={tab} onChange={onTabChange}>
-        <Tab label="Usuarios" value="users" data-testid="epis2-admin-tab-users" />
-        <Tab label="Catálogos" value="catalogs" data-testid="epis2-admin-tab-catalogs" />
-        <Tab label="Auditoría" value="audit" data-testid="epis2-admin-tab-audit" />
-        <Tab label="Operaciones" value="ops" data-testid="epis2-admin-tab-ops" />
-        <Tab label="Formularios" value="forms" data-testid="epis2-admin-tab-forms" />
+        <Tab label={copy.adminConsole.tabUsers} value="users" data-testid="epis2-admin-tab-users" />
+        <Tab
+          label={copy.adminConsole.tabCatalogs}
+          value="catalogs"
+          data-testid="epis2-admin-tab-catalogs"
+        />
+        <Tab label={copy.adminConsole.tabAudit} value="audit" data-testid="epis2-admin-tab-audit" />
+        <Tab label={copy.adminConsole.tabOps} value="ops" data-testid="epis2-admin-tab-ops" />
+        <Tab label={copy.adminConsole.tabForms} value="forms" data-testid="epis2-admin-tab-forms" />
       </Tabs>
 
       {tab === 'users' ? (
-        <Paper variant="outlined" sx={{ p: 2 }}>
+        <EpisWorkspaceSection title={copy.adminConsole.usersSection}>
           {users.map((u) => (
-            <Typography key={u.id} variant="body2" sx={{ mb: 0.5 }}>
+            <EpisM3Text key={u.id} role="bodyMedium" sx={{ mb: 0.5 }}>
               {u.displayName} ({u.username}) — {u.role}
-            </Typography>
+            </EpisM3Text>
           ))}
-        </Paper>
+        </EpisWorkspaceSection>
       ) : null}
 
       {tab === 'catalogs' ? (
         <Stack spacing={2}>
-          <Paper variant="outlined" sx={{ p: 2 }}>
+          <EpisWorkspaceSection title={copy.adminConsole.catalogsSection}>
             {catalogs.map((c) => (
-              <Typography key={c.id} variant="body2" sx={{ mb: 0.5 }}>
+              <EpisM3Text key={c.id} role="bodyMedium" sx={{ mb: 0.5 }}>
                 {c.catalogCode}/{c.entryCode}: {c.label}
-              </Typography>
+              </EpisM3Text>
             ))}
-          </Paper>
-          <Paper variant="outlined" sx={{ p: 2 }}>
+          </EpisWorkspaceSection>
+          <EpisWorkspaceSection title={copy.adminConsole.catalogNewEntrySection}>
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
-              <TextField
+              <EpisTextField
                 size="small"
-                label="Catálogo"
+                label={copy.adminConsole.catalogField}
                 value={catalogCode}
                 onChange={(e) => setCatalogCode(e.target.value)}
               />
-              <TextField
+              <EpisTextField
                 size="small"
-                label="Código"
+                label={copy.adminConsole.entryCodeField}
                 value={entryCode}
                 onChange={(e) => setEntryCode(e.target.value)}
               />
-              <TextField
+              <EpisTextField
                 size="small"
-                label="Etiqueta"
+                label={copy.adminConsole.entryLabelField}
                 value={entryLabel}
                 onChange={(e) => setEntryLabel(e.target.value)}
               />
-              <Button variant="contained" onClick={() => void addCatalogEntry()}>
-                Añadir staging
-              </Button>
+              <EpisButton appearance="filled" onClick={() => void addCatalogEntry()}>
+                {copy.adminConsole.addStaging}
+              </EpisButton>
             </Stack>
-          </Paper>
+          </EpisWorkspaceSection>
         </Stack>
       ) : null}
 
       {tab === 'audit' ? (
-        <Paper variant="outlined" sx={{ p: 2 }}>
+        <EpisWorkspaceSection title={copy.adminConsole.auditSection}>
           {auditEvents.map((ev, idx) => (
-            <Typography key={String(ev.id ?? idx)} variant="body2" sx={{ mb: 0.5 }}>
+            <EpisM3Text key={String(ev.id ?? idx)} role="bodyMedium" sx={{ mb: 0.5 }}>
               {String(ev.eventType ?? 'event')} — {String(ev.message ?? '')}
-            </Typography>
+            </EpisM3Text>
           ))}
-        </Paper>
+        </EpisWorkspaceSection>
       ) : null}
 
       {tab === 'ops' ? (
-        <Paper variant="outlined" sx={{ p: 2 }}>
-          <Typography variant="body2" component="pre" sx={{ whiteSpace: 'pre-wrap' }}>
+        <EpisWorkspaceSection title={copy.adminConsole.opsSection}>
+          <EpisM3Text role="bodyMedium" component="pre" sx={{ m: 0, whiteSpace: 'pre-wrap' }}>
             {opsStatus ? JSON.stringify(opsStatus, null, 2) : '—'}
-          </Typography>
-        </Paper>
+          </EpisM3Text>
+        </EpisWorkspaceSection>
       ) : null}
 
       {tab === 'forms' ? <BlueprintStudioPanel /> : null}

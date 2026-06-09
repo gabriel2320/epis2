@@ -24,6 +24,8 @@ export const epis2BarLayout = {
   toolbarPx: { xs: 3, sm: 4, md: 5 },
   inputMinHeight: 56,
   chipsToFieldGap: 4,
+  /** Altura mínima de tarjeta de sugerencia del Centro de Comando. */
+  suggestionCardMinHeight: 132,
   /** Relleno horizontal del contenido clínico (formularios, alertas). */
   clinicalPaddingX: { xs: 0.5, sm: 1, md: 1.5 },
   clinicalPaddingY: { xs: 2, sm: 2.5 },

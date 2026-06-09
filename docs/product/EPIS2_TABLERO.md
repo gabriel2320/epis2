@@ -1,6 +1,6 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-09 · **HEAD:** `2d77bfe` · **CI:** [27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998) ✅
+**Actualizado:** 2026-06-09 · **HEAD:** `fb5ba23`+Fase 3 · **CI:** [27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998) ✅
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports/epis2-audit-avance-proyecto-2026-06-09.md`](../../reports/epis2-audit-avance-proyecto-2026-06-09.md)
 
@@ -23,6 +23,9 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 | **Hilo D** — Tramo J farmacia | PEND-001 cerrado · `fa38e4d` · [`epis2-tramo-j-signoff-2026-06-09.md`](../../reports/epis2-tramo-j-signoff-2026-06-09.md) |
 | **Piloto M3 automatizado** (V1–V6) | `2d77bfe` · `quality:m3-human-pilot` OK · 6/6 E2E · [`epis2-m3-human-pilot-2026-06-09.md`](../../reports/epis2-m3-human-pilot-2026-06-09.md) |
 | Auditoría profunda | [`epis2-auditoria-profunda-2026-06-09.md`](../../reports/epis2-auditoria-profunda-2026-06-09.md) — plan 5 fases |
+| Auditoría Fase 1 — higiene | `b27fdcd` · [`epis2-auditoria-fase1-higiene-2026-06-09.md`](../../reports/epis2-auditoria-fase1-higiene-2026-06-09.md) |
+| Auditoría Fase 2 — robustez | `fb5ba23` · transacción approveDraft · JWT rol · E2E print en CI · [`epis2-auditoria-fase2-robustez-2026-06-09.md`](../../reports/epis2-auditoria-fase2-robustez-2026-06-09.md) |
+| Auditoría Fase 3 — pulido M3 | tertiary + surfaceContainer* runtime · EpisDraftStatus roles clínicos · Admin/DraftReview al DS · motion a11y · [`epis2-auditoria-fase3-pulido-m3-2026-06-09.md`](../../reports/epis2-auditoria-fase3-pulido-m3-2026-06-09.md) |
 
 ---
 
@@ -39,7 +42,8 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 | Prioridad | Hilo / tramo | Gate |
 |-----------|--------------|------|
 | **P1** | Impresión clínica restante (carta / más A5) | PEND-006 parcial · `quality:ola6a-print-gate` |
-| P1b | Fase 3 auditoría — pulido M3 (tertiary runtime, EpisDraftStatus, Admin) | [`epis2-auditoria-profunda-2026-06-09.md`](../../reports/epis2-auditoria-profunda-2026-06-09.md) §7 |
+| P1b | Fase 4 auditoría — deuda técnica (dividir `service.ts`, candados tamaño) | [`epis2-auditoria-profunda-2026-06-09.md`](../../reports/epis2-auditoria-profunda-2026-06-09.md) §7 |
+| P1c | Alto contraste ampliado (3.6 diferido — requiere signoff visual) | [`epis2-auditoria-fase3-pulido-m3-2026-06-09.md`](../../reports/epis2-auditoria-fase3-pulido-m3-2026-06-09.md) |
 | P2 | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | P3 | Backlog Ola 2+ | Nota procedimiento clínica (PEND-002 defer) |
 

@@ -1130,6 +1130,24 @@ export const copy = {
     noPatient: 'Sin paciente activo',
     episodeOpen: 'Episodio abierto',
   },
+  adminConsole: {
+    title: 'Consola de administración',
+    demoDisclaimer: 'Vista demo read-only/staging — sin escritura en SoT clínico aprobado.',
+    tabUsers: 'Usuarios',
+    tabCatalogs: 'Catálogos',
+    tabAudit: 'Auditoría',
+    tabOps: 'Operaciones',
+    tabForms: 'Formularios',
+    usersSection: 'Usuarios demo',
+    catalogsSection: 'Catálogo staging',
+    catalogNewEntrySection: 'Nueva entrada staging',
+    auditSection: 'Eventos de auditoría',
+    opsSection: 'Estado de operaciones',
+    catalogField: 'Catálogo',
+    entryCodeField: 'Código',
+    entryLabelField: 'Etiqueta',
+    addStaging: 'Añadir staging',
+  },
 } as const;
 
 export type DemoRole = keyof typeof copy.roles;

@@ -4,7 +4,7 @@ import {
   type CreateEpis2ThemeOptions,
   type Epis2Accent,
 } from '../theme/create-epis2-theme.js';
-import type { Epis2MotionScheme } from '../theme/motion.js';
+import { prefersReducedMotion, type Epis2MotionScheme } from '../theme/motion.js';
 import type { Epis2ThemeContrast, Epis2ThemeDensity } from '../theme/create-epis2-theme.js';
 import type { EpisClinicalWorkspaceId } from '../clinical/clinical-workspace.types.js';
 import {
@@ -39,15 +39,24 @@ const defaultPreferences: Epis2ThemePreferences = {
   clinicalWorkspace: 'command',
 };
 
+/** Sin preferencia explícita de motion → respeta prefers-reduced-motion del SO (A11Y). */
+function systemMotionDefaults(): Epis2ThemePreferences {
+  if (prefersReducedMotion()) {
+    return { ...defaultPreferences, motion: 'reduced' };
+  }
+  return defaultPreferences;
+}
+
 function loadPreferences(): Epis2ThemePreferences {
   if (typeof window === 'undefined') return defaultPreferences;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return defaultPreferences;
+    if (!raw) return systemMotionDefaults();
     const parsed = JSON.parse(raw) as Partial<Epis2ThemePreferences>;
-    return { ...defaultPreferences, ...parsed };
+    const base = parsed.motion === undefined ? systemMotionDefaults() : defaultPreferences;
+    return { ...base, ...parsed };
   } catch {
-    return defaultPreferences;
+    return systemMotionDefaults();
   }
 }
 

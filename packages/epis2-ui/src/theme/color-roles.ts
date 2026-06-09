@@ -71,8 +71,11 @@ export const accentPresets: Record<
 
 export type M3SurfaceRoles = {
   surface: string;
+  surfaceContainerLowest: string;
+  surfaceContainerLow: string;
   surfaceContainer: string;
   surfaceContainerHigh: string;
+  surfaceContainerHighest: string;
   onSurface: string;
   onSurfaceVariant: string;
   outline: string;
@@ -81,8 +84,11 @@ export type M3SurfaceRoles = {
 
 const lightSurfaces: M3SurfaceRoles = {
   surface: '#FFFFFF',
+  surfaceContainerLowest: '#FFFFFF',
+  surfaceContainerLow: '#FAFAFB',
   surfaceContainer: '#F5F5F7',
   surfaceContainerHigh: '#EBEBED',
+  surfaceContainerHighest: '#E4E4E7',
   onSurface: '#18181B',
   onSurfaceVariant: '#71717A',
   outline: '#E4E4E7',
@@ -98,8 +104,11 @@ export const epis2SemanticPalette = {
 
 const darkSurfaces: M3SurfaceRoles = {
   surface: '#1C1C1E',
+  surfaceContainerLowest: '#0F0F10',
+  surfaceContainerLow: '#1A1A1C',
   surfaceContainer: '#141416',
   surfaceContainerHigh: '#2C2C2E',
+  surfaceContainerHighest: '#363638',
   onSurface: '#FAFAFA',
   onSurfaceVariant: '#A1A1AA',
   outline: '#3F3F46',
@@ -117,6 +126,8 @@ export function buildM3PaletteOptions(
     mode,
     primary: preset.primary!,
     secondary: preset.secondary!,
+    // Path legacy sin MTB: tertiary cae al secondary del preset (documentado).
+    tertiary: preset.secondary!,
     background: {
       default: surfaces.surfaceContainer,
       paper: surfaces.surface,

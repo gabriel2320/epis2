@@ -7,6 +7,8 @@ import { useTheme, type Theme } from '@mui/material/styles';
 import { EpisChip } from '../primitives/EpisChip.js';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
 import { intentIconSurfaceSx } from '../theme/chip-tones.js';
+import { epis2BarLayout } from '../theme/breakpoints.js';
+import { epis2Motion } from '../theme/motion.js';
 import { epis2Shape } from '../theme/shape.js';
 import { getIntentChipIcon } from './intent-icons.js';
 import { getIntentChipTone, getIntentSuggestionBadge } from './intent-visual.js';
@@ -94,8 +96,8 @@ export function EpisCommandSuggestionCards({ cards, onSelect }: EpisCommandSugge
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 1.25,
-                minHeight: 132,
-                transition: 'background-color 120ms ease, border-color 120ms ease',
+                minHeight: epis2BarLayout.suggestionCardMinHeight,
+                transition: `background-color ${epis2Motion.duration.short}ms ${epis2Motion.easing.standard}, border-color ${epis2Motion.duration.short}ms ${epis2Motion.easing.standard}`,
                 '&:hover': {
                   bgcolor: 'action.hover',
                   borderColor: 'primary.main',

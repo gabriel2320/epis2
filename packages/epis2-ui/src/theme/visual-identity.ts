@@ -1,5 +1,6 @@
 import type { Epis2MaterialColorScheme } from './contracts/material-color-scheme.js';
 import type { M3SurfaceRoles } from './color-roles.js';
+import { darkSurfaces, lightSurfaces } from './color-roles.js';
 import { hexWithAlpha } from './color-alpha.js';
 
 export type Epis2ThemeMode = 'light' | 'dark';
@@ -35,25 +36,18 @@ function resolveSurfaces(
   if (scheme) {
     return {
       surface: scheme.surface,
+      surfaceContainerLowest: scheme.surfaceContainerLowest,
+      surfaceContainerLow: scheme.surfaceContainerLow,
       surfaceContainer: scheme.surfaceContainer,
       surfaceContainerHigh: scheme.surfaceContainerHigh,
+      surfaceContainerHighest: scheme.surfaceContainerHighest,
       onSurface: scheme.onSurface,
       onSurfaceVariant: scheme.onSurfaceVariant,
       outline: scheme.outline,
       outlineVariant: scheme.outlineVariant,
     };
   }
-  return (
-    surfaces ?? {
-      surface: mode === 'light' ? '#FFFFFF' : '#1C1C1E',
-      surfaceContainer: mode === 'light' ? '#F5F5F7' : '#141416',
-      surfaceContainerHigh: mode === 'light' ? '#EBEBED' : '#2C2C2E',
-      onSurface: mode === 'light' ? '#18181B' : '#FAFAFA',
-      onSurfaceVariant: mode === 'light' ? '#71717A' : '#A1A1AA',
-      outline: mode === 'light' ? '#E4E4E7' : '#3F3F46',
-      outlineVariant: mode === 'light' ? '#F0F0F2' : '#27272A',
-    }
-  );
+  return surfaces ?? (mode === 'light' ? lightSurfaces : darkSurfaces);
 }
 
 export function buildVisualIdentity(

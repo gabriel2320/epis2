@@ -43,6 +43,13 @@ declare module '@mui/material/styles' {
   interface ThemeOptions {
     epis2?: Theme['epis2'];
   }
+  interface Palette {
+    /** Rol M3 tertiary (MTB); en path legacy cae al secondary del preset. */
+    tertiary: Palette['primary'];
+  }
+  interface PaletteOptions {
+    tertiary?: PaletteOptions['primary'];
+  }
 }
 
 function resolveLegacySurfaces(mode: Epis2ThemeMode): M3SurfaceRoles {

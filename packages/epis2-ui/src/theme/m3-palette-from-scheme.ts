@@ -8,8 +8,11 @@ import { resolveEpis2SemanticPalette } from './semantic-palette.js';
 export function surfacesFromScheme(scheme: Epis2MaterialColorScheme): M3SurfaceRoles {
   return {
     surface: scheme.surface,
+    surfaceContainerLowest: scheme.surfaceContainerLowest,
+    surfaceContainerLow: scheme.surfaceContainerLow,
     surfaceContainer: scheme.surfaceContainer,
     surfaceContainerHigh: scheme.surfaceContainerHigh,
+    surfaceContainerHighest: scheme.surfaceContainerHighest,
     onSurface: scheme.onSurface,
     onSurfaceVariant: scheme.onSurfaceVariant,
     outline: scheme.outline,
@@ -38,6 +41,12 @@ export function paletteFromMaterialScheme(
       light: scheme.secondaryContainer,
       dark: scheme.onSecondaryContainer,
       contrastText: scheme.onSecondary,
+    },
+    tertiary: {
+      main: scheme.tertiary,
+      light: scheme.tertiaryContainer,
+      dark: scheme.onTertiaryContainer,
+      contrastText: scheme.onTertiary,
     },
     background: {
       default: scheme.surfaceContainer,

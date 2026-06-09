@@ -11,12 +11,12 @@ import {
   EpisAlert,
   EpisButton,
   EpisDraftStatus,
+  EpisM3Text,
   epis2ShellContentIslandSx,
   List,
   ListItem,
   ListItemText,
   Stack,
-  Typography,
 } from '@epis2/epis2-ui';
 import { useParams } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
@@ -141,7 +141,9 @@ export function DraftReviewPage() {
   if (!draft && draftQuery.isLoading) {
     return (
       <Stack spacing={2} sx={epis2ShellContentIslandSx}>
-        <Typography color="text.secondary">{copy.drafts.loading}</Typography>
+        <EpisM3Text role="bodyMedium" color="text.secondary">
+          {copy.drafts.loading}
+        </EpisM3Text>
         <ClinicalPageNav />
       </Stack>
     );
@@ -181,7 +183,7 @@ export function DraftReviewPage() {
       ) : null}
       {canEdit && editFormRoute ? (
         <EpisButton
-          variant="outlined"
+          appearance="outlined"
           size="small"
           onClick={() =>
             void navigate({
@@ -200,16 +202,16 @@ export function DraftReviewPage() {
     <EpisRadDocumentSurface actionBar={documentActionBar} testId="epis2-rad-draft-review">
       <Stack spacing={2} data-testid="epis2-draft-review">
         <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
-          <Typography variant="h6" component="h1">
+          <EpisM3Text role="titleMedium" component="h1">
             {copy.drafts.reviewTitle}
-          </Typography>
+          </EpisM3Text>
           <EpisDraftStatus status={draft.status} />
         </Stack>
 
-        <Typography variant="subtitle1">{draft.title}</Typography>
-        <Typography variant="body2" color="text.secondary">
+        <EpisM3Text role="bodyLarge">{draft.title}</EpisM3Text>
+        <EpisM3Text role="labelMedium" color="text.secondary">
           {copy.demoBadge} · {draft.draftType}
-        </Typography>
+        </EpisM3Text>
 
         <ClinicalAlertsPanel
           alerts={clinicalAlerts}
@@ -241,10 +243,12 @@ export function DraftReviewPage() {
         ) : null}
 
         <Stack spacing={1}>
-          <Typography variant="subtitle2">{copy.drafts.contentTitle}</Typography>
-          <Typography variant="body2" color="text.secondary">
+          <EpisM3Text role="labelLarge" component="h2">
+            {copy.drafts.contentTitle}
+          </EpisM3Text>
+          <EpisM3Text role="labelMedium" color="text.secondary">
             {copy.drafts.previewTruncated}
-          </Typography>
+          </EpisM3Text>
           <List dense>
             {bodyPreview.map(([key, value]) => (
               <ListItem key={key} disablePadding>
@@ -255,9 +259,9 @@ export function DraftReviewPage() {
         </Stack>
 
         <Stack spacing={1}>
-          <Typography variant="subtitle2">
+          <EpisM3Text role="labelLarge" component="h2">
             {copy.drafts.versionsTitle} ({versions.length})
-          </Typography>
+          </EpisM3Text>
           <List dense data-testid="epis2-draft-versions">
             {versions.map((v) => (
               <ListItem key={v.versionNo} disablePadding>

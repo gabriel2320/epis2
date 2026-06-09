@@ -6,6 +6,8 @@ import { cleanup, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { renderWithEpisApp } from '../test/renderWithEpisApp.js';
 import { DashboardModePage } from './DashboardModePage.js';
+// Precarga el módulo lazy: evita que la transformación en caliente agote el testTimeout.
+import '../dashboard/DashboardModeContent.js';
 
 const { fetchDashboardWork } = vi.hoisted(() => ({
   fetchDashboardWork: vi.fn(),
@@ -60,7 +62,7 @@ vi.mock('../auth/AuthContext.js', () => ({
 afterEach(() => cleanup());
 
 describe('DashboardModePage', () => {
-  it('muestra Mi trabajo y volver al Centro de Comando', async () => {
+  it('muestra Mi trabajo y volver al Centro de Comando', { timeout: 20000 }, async () => {
     fetchDashboardWork.mockResolvedValue({
       readOnly: true,
       myOpenDrafts: [
@@ -80,9 +82,13 @@ describe('DashboardModePage', () => {
 
     renderWithEpisApp(<DashboardModePage />);
 
-    await waitFor(() => {
-      expect(screen.getByTestId('epis2-dashboard-mode')).toBeInTheDocument();
-    });
+    // Lazy import del contenido — timeout extendido (flaky con 1s por defecto).
+    await waitFor(
+      () => {
+        expect(screen.getByTestId('epis2-dashboard-mode')).toBeInTheDocument();
+      },
+      { timeout: 8000 },
+    );
     expect(screen.getByText(copy.dashboard.title)).toBeInTheDocument();
     expect(screen.getByTestId('epis2-back-to-command')).toBeInTheDocument();
     await waitFor(

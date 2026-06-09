@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useTheme } from '@mui/material/styles';
 import { epis2BarLayout } from '../theme/breakpoints.js';
+import { epis2Motion } from '../theme/motion.js';
 import { epis2Shape } from '../theme/shape.js';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
 
@@ -60,7 +61,7 @@ export function EpisCommandCenterInlineBar({
           borderColor: visual?.powerBarBorder ?? 'primary.main',
           bgcolor: 'background.paper',
           boxShadow: 'none',
-          transition: 'border-color 120ms ease, box-shadow 120ms ease',
+          transition: `border-color ${epis2Motion.duration.short}ms ${epis2Motion.easing.standard}, box-shadow ${epis2Motion.duration.short}ms ${epis2Motion.easing.standard}`,
           '&:focus-within': {
             borderColor: 'primary.main',
             boxShadow: visual?.powerBarFocusShadow ?? 'none',
