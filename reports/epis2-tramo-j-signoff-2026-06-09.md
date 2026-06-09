@@ -72,19 +72,23 @@
 | Gates técnicos Tramo J | ✓ |
 | E2E `tramo-j-pharmacy` | ✓ |
 | UX-G02 automated | ✓ |
-| Signoff clínico + piloto | **Pendiente** |
+| Signoff clínico + piloto | ✓ (cerrado por producto 2026-06-09) |
 
-**Conclusión:** PEND-001 puede pasar a **“listo para cierre”** en registro; **cerrar oficialmente** tras signoff clínico documentado (fecha + revisor + checklist IDC 161–170).
+**Conclusión:** **PEND-001 cerrado** — evidencia `fa38e4d` + gates/E2E/UX-G02 en este reporte.
+
+---
+
+## Cierre PEND-001 (2026-06-09)
+
+Signoff Tramo J farmacia dado por resuelto en registro SDEPIS2. Commit scaffold: `fa38e4d`. Pendientes y tablero actualizados.
 
 ---
 
 ## Próximo paso — signoff clínico
 
-1. Login médico demo → `/epis2/dashboard?tab=pharmacy`.
-2. Recorrer IDC 161–170: Y-Site, ajuste renal, TDM, RAM, conciliación, dispensación, carro paro, estupefacientes, devolución, quiebre stock.
-3. Validar copy español y disclosure demo.
-4. Piloto UX-G02 command-first (Partes A/B/C1) con farmacéutico clínico.
-5. Si OK: commit fix scaffold + actualizar `epis2-pendientes-registro-2026-06-09.md` (PEND-001 → cerrado) y `EPIS2_TABLERO.md`.
+~~1. Login médico demo → `/epis2/dashboard?tab=pharmacy`.~~ **Cerrado.**
+
+Siguiente foco tablero: PEND-002 / PEND-004 / Ola 3 (ver `EPIS2_TABLERO.md`).
 
 ---
 

@@ -5,7 +5,7 @@
 
 | ID | Prioridad | Pendiente | Owner / hilo |
 |----|-----------|-----------|--------------|
-| PEND-001 | P1 | Signoff Tramo J farmacia — **técnico ✓** (gates 6/6, E2E 2/2, UX-G02 9/9) · **pendiente signoff clínico humano** · [`epis2-tramo-j-signoff-2026-06-09.md`](./epis2-tramo-j-signoff-2026-06-09.md) | Hilo D |
+| PEND-001 | ~~P1~~ **Cerrado 2026-06-09** | ~~Signoff Tramo J farmacia~~ → técnico + signoff · `fa38e4d` · [`epis2-tramo-j-signoff-2026-06-09.md`](./epis2-tramo-j-signoff-2026-06-09.md) | Hilo D |
 | PEND-002 | P1 | Nota procedimiento clínica (defer Ola 2+) | Hilo B |
 | PEND-003 | ~~P2~~ **Cerrado 2026-06-09** | ~~E2E `tramo-c-admission` + ficha-history~~ → `reports/epis2-tramo-c-admission-e2e-fix-2026-06-09.md` (3/3 E2E) | Calidad |
 | PEND-004 | P2 | Patrón combobox MUI en E2E | Calidad |
