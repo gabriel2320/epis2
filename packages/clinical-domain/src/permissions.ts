@@ -12,6 +12,7 @@ export const PERMISSIONS = [
   'draft.approve',
   'audit.read',
   'admin.users.read',
+  'admin.catalogs.write',
   'fhir.export',
   'dashboard.read',
   'ai.read',

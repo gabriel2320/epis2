@@ -22,6 +22,12 @@ describe('RBAC', () => {
     expect(roleHasPermission('auditor', 'fhir.export')).toBe(true);
   });
 
+  it('solo admin escribe catálogos staging', () => {
+    expect(roleHasPermission('admin', 'admin.catalogs.write')).toBe(true);
+    expect(roleHasPermission('auditor', 'admin.catalogs.write')).toBe(false);
+    expect(roleHasPermission('physician', 'admin.catalogs.write')).toBe(false);
+  });
+
   it('cada rol tiene al menos session.read', () => {
     for (const role of Object.keys(ROLE_PERMISSIONS)) {
       expect(roleHasPermission(role as keyof typeof ROLE_PERMISSIONS, 'session.read')).toBe(

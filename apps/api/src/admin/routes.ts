@@ -20,6 +20,7 @@ export async function registerAdminRoutes(
 ) {
   const requireUsersRead = createRequirePermission(config, 'admin.users.read');
   const requireAuditRead = createRequirePermission(config, 'audit.read');
+  const requireCatalogsWrite = createRequirePermission(config, 'admin.catalogs.write');
 
   app.get(
     '/api/admin/users',
@@ -76,7 +77,7 @@ export async function registerAdminRoutes(
 
   app.post(
     '/api/admin/catalogs',
-    { preHandler: requireAuditRead },
+    { preHandler: requireCatalogsWrite },
     async (request, reply) => {
       if (!db) {
         return reply.status(503).send({ error: 'Base de datos no disponible' });

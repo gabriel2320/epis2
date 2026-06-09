@@ -10,7 +10,7 @@
 | PEND-003 | ~~P2~~ **Cerrado 2026-06-09** | ~~E2E `tramo-c-admission` + ficha-history~~ → `reports/epis2-tramo-c-admission-e2e-fix-2026-06-09.md` (3/3 E2E) | Calidad |
 | PEND-004 | P2 | Patrón combobox MUI en E2E | Calidad |
 | PEND-005 | P2 | Hitos Ola 1C / 1D | Ola 1 |
-| PEND-006 | P1 | Impresión + piloto M3 | Ola 3 · receta A5 ✓ · cert A5 ✓ · m3-human-pilot pendiente |
+| PEND-006 | P1 | Impresión + piloto M3 | Ola 3 · receta A5 ✓ · cert A5 ✓ · m3-human-pilot **automatizado cerrado 2026-06-09** ([reporte](./epis2-m3-human-pilot-2026-06-09.md)) · resta carta/otros A5 + signoff humano opcional |
 | PEND-007 | P3 | Dependabot zod 4.x | Plataforma |
 | PEND-008 | ~~P3~~ **Cerrado 2026-06-09** | ~~microphase-next mensaje Hilo B~~ → ya usa Hilo B / Hilo D | Tooling |
 | PEND-009 | P3 | Storybook por IDC | UI |

@@ -65,6 +65,7 @@ export const ROLE_PERMISSIONS: Record<ClinicalRole, readonly Permission[]> = {
     'draft.read',
     'audit.read',
     'admin.users.read',
+    'admin.catalogs.write',
     'fhir.export',
     'dashboard.read',
     'ai.read',

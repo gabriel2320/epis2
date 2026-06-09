@@ -71,7 +71,7 @@ export function EpisNavigationRail({
                 <EpisM3Text
                   role="labelMedium"
                   color={item.active ? 'primary.main' : 'text.secondary'}
-                  sx={{ fontSize: '0.6875rem', textAlign: 'center', maxWidth: 72, lineHeight: 1.2 }}
+                  sx={{ textAlign: 'center', maxWidth: 72, lineHeight: 1.2 }}
                 >
                   {item.label}
                 </EpisM3Text>

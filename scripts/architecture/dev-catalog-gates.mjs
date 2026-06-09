@@ -17,9 +17,15 @@ const CATALOGS = [
     envRel: 'apps/web/src/dev/visualThemeCatalogEnv.ts',
     envFlag: 'VITE_ENABLE_VISUAL_THEME_CATALOG',
   },
+  {
+    path: '/dev/scheduler-spike',
+    guardFn: 'isSchedulerSpikeEnabled',
+    envRel: 'apps/web/src/dev/schedulerSpikeEnv.ts',
+    envFlag: 'VITE_ENABLE_SCHEDULER_SPIKE',
+  },
 ];
 
-const CATALOG_PATH_RE = /\/dev\/ui-catalog|\/desarrollo\/catalogo-visual/;
+const CATALOG_PATH_RE = /\/dev\/ui-catalog|\/desarrollo\/catalogo-visual|\/dev\/scheduler-spike/;
 
 export async function validate() {
   const details = [];

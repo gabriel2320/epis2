@@ -1,6 +1,6 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-09 · **HEAD:** `88ec444` · **CI:** [27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998) ✅
+**Actualizado:** 2026-06-09 · **HEAD:** `2d77bfe` · **CI:** [27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998) ✅
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports/epis2-audit-avance-proyecto-2026-06-09.md`](../../reports/epis2-audit-avance-proyecto-2026-06-09.md)
 
@@ -21,6 +21,8 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 | UX-G02 command-first E2E | Partes A/B/C1 ✓ |
 | E2E Tramo C admission | `tramo-c-admission` 3/3 · [`epis2-tramo-c-admission-e2e-fix-2026-06-09.md`](../../reports/epis2-tramo-c-admission-e2e-fix-2026-06-09.md) |
 | **Hilo D** — Tramo J farmacia | PEND-001 cerrado · `fa38e4d` · [`epis2-tramo-j-signoff-2026-06-09.md`](../../reports/epis2-tramo-j-signoff-2026-06-09.md) |
+| **Piloto M3 automatizado** (V1–V6) | `2d77bfe` · `quality:m3-human-pilot` OK · 6/6 E2E · [`epis2-m3-human-pilot-2026-06-09.md`](../../reports/epis2-m3-human-pilot-2026-06-09.md) |
+| Auditoría profunda | [`epis2-auditoria-profunda-2026-06-09.md`](../../reports/epis2-auditoria-profunda-2026-06-09.md) — plan 5 fases |
 
 ---
 
@@ -28,7 +30,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 
 | Hilo | Notas |
 |------|-------|
-| **Hilo C** — Ola 3 longitudinal | Receta A5 ✓ · piloto M3 pendiente · [`epis2-hilo-c-p1-print-prescription-2026-06-09.md`](../../reports/epis2-hilo-c-p1-print-prescription-2026-06-09.md) |
+| **Hilo C** — Ola 3 longitudinal | Receta A5 ✓ · piloto M3 automatizado ✓ (signoff humano opcional) · [`epis2-hilo-c-p1-print-prescription-2026-06-09.md`](../../reports/epis2-hilo-c-p1-print-prescription-2026-06-09.md) |
 
 ---
 
@@ -36,8 +38,8 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 
 | Prioridad | Hilo / tramo | Gate |
 |-----------|--------------|------|
-| **P1** | **Hilo C** — piloto M3 | `quality:m3-human-pilot` (+ stack:dev) |
-| P1b | Impresión clínica restante | Carta / más A5 (PEND-006 parcial) |
+| **P1** | Impresión clínica restante (carta / más A5) + E2E receta A5 | PEND-006 parcial · `quality:ola6a-print-gate` |
+| P1b | Fase 2 auditoría — transacción `approveDraft` | [`epis2-auditoria-profunda-2026-06-09.md`](../../reports/epis2-auditoria-profunda-2026-06-09.md) §7 |
 | P2 | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | P3 | Backlog Ola 2+ | Nota procedimiento clínica (PEND-002 defer) |
 
@@ -65,7 +67,7 @@ L1 Ola 1           ██████████████████░░ 
 L2 Tramos A–J      ████████████████████  scaffold · Tramo J signoff cerrado
 L3 UX densidad     ████████████████████  MF-UI-SIMPLIFY done
 L4 RAD MD3         ████████████████████  Hilo A done
-L5 clinical-prod   ████████████████░░░░  base · piloto extendido pendiente
+L5 clinical-prod   ██████████████████░░  base · piloto M3 automatizado OK · extensión clínica pendiente
 L6 Tramo J         ████████████████████  signoff PEND-001 cerrado 2026-06-09
 L1 Ola 2 Hilo B    ████████████████████  cerrado 2026-06-09 · PEND-002 defer
 ```

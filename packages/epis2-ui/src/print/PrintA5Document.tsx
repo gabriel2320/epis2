@@ -30,9 +30,10 @@ export function PrintA5Document({
         bgcolor: 'background.paper',
         color: 'text.primary',
         fontFamily: '"Times New Roman", Times, serif',
-        boxShadow: 1,
+        border: 1,
+        borderColor: 'divider',
         '@media print': {
-          boxShadow: 'none',
+          border: 'none',
           my: 0,
           width: '148mm',
           minHeight: '210mm',
