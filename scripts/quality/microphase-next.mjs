@@ -17,7 +17,7 @@ if (!next) {
       {
         status: 'complete',
         message: 'Sin microfases READY — programa post-MVP (MF-151→182) cerrado en ledger',
-        nextStep: 'Ver docs/product/EPIS2_GLOBAL_DEV_PLAN.md Fase B',
+        nextStep: 'Ver docs/product/EPIS2_GLOBAL_DEV_PLAN.md Hilo B / Hilo D (EPIS2_TABLERO.md)',
       },
       null,
       2,

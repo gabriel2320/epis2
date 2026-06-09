@@ -1,8 +1,8 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-09 · **HEAD:** `7993f2c` · **CI:** [27181266125](https://github.com/gabriel2320/epis2/actions/runs/27181266125) ✅
+**Actualizado:** 2026-06-09 · **HEAD:** `7f68f17` · **CI:** [27181266125](https://github.com/gabriel2320/epis2/actions/runs/27181266125) ✅
 
-Sistema de nomenclatura: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) (SDEPIS2).
+Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports/epis2-audit-avance-proyecto-2026-06-09.md`](../../reports/epis2-audit-avance-proyecto-2026-06-09.md)
 
 ---
 
@@ -65,4 +65,4 @@ L5 clinical-prod   ████████████████░░░░ 
 L6 Tramo J         ████████░░░░░░░░░░░░  scaffold ✓ · signoff pendiente
 ```
 
-Reporte cierre E2E: `reports/epis2-ci-e2e-closure-2026-06-09.md`
+Reporte cierre E2E: `reports/epis2-ci-e2e-closure-2026-06-09.md` · Pendientes: `reports/epis2-pendientes-registro-2026-06-09.md`
