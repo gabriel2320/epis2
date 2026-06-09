@@ -1,0 +1,19 @@
+{
+  "name": "epis2-marketplace",
+  "owner": {
+    "name": "EPIS2"
+  },
+  "metadata": {
+    "description": "Plugin local EPIS2 — SDEPIS2, gates, MCP GitHub",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "epis2",
+      "source": "./epis2",
+      "description": "Desarrollo clínico command-first: sesión, cierre, CI",
+      "version": "0.1.0",
+      "keywords": ["epis2", "clinical", "sdepis2", "quality-gates"]
+    }
+  ]
+}

@@ -229,6 +229,7 @@
     "ai:catalog-assist-smoke": "node scripts/ai-catalog-assist-smoke.mjs",
     "ai:evals:closure": "npm run build -w @epis2/local-ai && node scripts/run-tramo-closure-evals.mjs",
     "dev:session": "node scripts/dev-agent/session.mjs",
+    "cursor:verify": "node scripts/cursor/verify-setup.mjs",
     "dev:agent:orchestrate": "node scripts/dev-agent/orchestrate.mjs",
     "dev:agent:subagent": "node scripts/dev-agent/orchestrate.mjs",
     "dev:agent:ollama": "node scripts/dev-agent/ollama-assist.mjs",
