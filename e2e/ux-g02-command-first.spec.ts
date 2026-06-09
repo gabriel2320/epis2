@@ -11,11 +11,8 @@ const DEMO_001_PATIENT_ID = 'a0000001-0000-4000-8000-000000000001';
 test.describe('UX-G02 — command-first con paciente fijado', () => {
   test('Parte A: TAC → confirmación → badge → prefill → URL limpia', async ({ page }) => {
     await loginAsPhysician(page);
-
-    // 1–2: comando + episodio demo narrativo
-    await page.getByTestId('epis2-toggle-demo-narratives').click();
-    await expect(page.getByTestId('epis2-demo-narratives')).toBeVisible();
-    await page.getByTestId('epis2-demo-narrative-iam').getByText('IAM en evaluación').click();
+    await pinDemoCase(page, 'DEMO-001');
+    await page.goto('/comando');
 
     const powerBar = page.getByTestId('epis2-power-bar');
     await powerBar
@@ -91,8 +88,8 @@ test.describe('UX-G02 — command-first con paciente fijado', () => {
 
   test('Parte C1: cancelar confirmación no navega', async ({ page }) => {
     await loginAsPhysician(page);
-    await page.getByTestId('epis2-toggle-demo-narratives').click();
-    await page.getByTestId('epis2-demo-narrative-iam').getByText('IAM en evaluación').click();
+    await pinDemoCase(page, 'DEMO-001');
+    await page.goto('/comando');
 
     const powerBar = page.getByTestId('epis2-power-bar');
     await powerBar

@@ -4,16 +4,7 @@
  */
 import { copy } from '@epis2/design-system';
 import { test, expect } from '@playwright/test';
-import { pinDemoCase } from './helpers/demoPatient.js';
-
-async function loginAsMedico(page: import('@playwright/test').Page) {
-  await page.goto('/login');
-  await page.getByLabel(copy.login.usernameLabel).click();
-  await page.getByRole('option', { name: /Médico Demo/ }).click();
-  await page.getByLabel(copy.login.demoKeyLabel).fill('DEMO-CLAVE-MEDICO');
-  await page.getByRole('button', { name: copy.login.submit }).click();
-  await expect(page).toHaveURL(/\/comando/);
-}
+import { loginAsPhysician, pinDemoCase } from './helpers/demoPatient.js';
 
 async function openEvolutionForm(page: import('@playwright/test').Page) {
   await pinDemoCase(page, 'DEMO-001');
@@ -30,7 +21,7 @@ test.describe('ClinicalTextBox E2E — evolución rich y trazabilidad', () => {
   test('rich subjetivo + pegado objetivo → borrador con orígenes → aprobación humana', async ({
     page,
   }) => {
-    await loginAsMedico(page);
+    await loginAsPhysician(page);
     await openEvolutionForm(page);
 
     const richSubjective = page.getByTestId('epis2-field-subjective-rich-input');

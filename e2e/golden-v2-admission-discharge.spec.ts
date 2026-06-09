@@ -30,6 +30,8 @@ test.describe('Golden journey V2 UI — hospitalización', () => {
     }
 
     await pinDemoCase(page, 'DEMO-001');
+    await page.getByTestId('epis2-ficha-history').click();
+    await expect(page.getByTestId('epis2-longitudinal-admit-hospital')).toBeVisible();
     await page.getByTestId('epis2-longitudinal-admit-hospital').click();
     await expect(page).toHaveURL(/\/espacio\/ingreso/);
     await expect(page.getByTestId('epis2-form-admission_note')).toBeVisible();
