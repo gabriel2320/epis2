@@ -100,3 +100,10 @@ DATABASE_URL=... npm run test:e2e
 
 - `clinical-textbox` → paste vía `ClipboardEvent` en paste-zone (sin `navigator.clipboard` en CI)
 - `golden-v2` → select cama `#epis2-field-input-targetBedId` (MUI Select no expone `getByLabel`)
+
+**Lote 3 (`7993f2c`):**
+
+- `clinical-textbox` → paste-zone + **Firmar** (no `Guardar borrador`)
+- `golden-v2` → combobox en form + **Firmar**
+
+**CI final [27181266125](https://github.com/gabriel2320/epis2/actions/runs/27181266125):** ✅ 10/10 E2E, pipeline completo verde.
