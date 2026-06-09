@@ -3,6 +3,8 @@
 **Alcance:** cadena de fixes CI post PROG-THREE-MODES · gates · E2E Playwright  
 **HEAD al auditar:** `e4b9083` (+ fix gates pendiente de push)
 
+> **Actualización 2026-06-09:** Evolab ya no vive en este monorepo. El laboratorio está en [epis2-evolab](https://github.com/gabriel2320/epis2-evolab). Las notas sobre WIP `evolution-lab/` en el working tree **ya no aplican**.
+
 ---
 
 ## Semáforo
@@ -14,7 +16,7 @@
 | `npm run test` | 🟢 | 643 tests OK en runs recientes |
 | `npm run test:e2e` | 🟡 | Bloqueado por pm01 en último push; preview+proxy listos desde `71b7c13`/`deb6a3b` |
 | PROG-THREE-MODES | 🟢 | MF-01…08 cerrado; AppProviders bajo RouterProvider |
-| Working tree local | 🟡 | WIP `evolution-lab/` sin trackear; e2e helpers modificados sin commit |
+| Working tree local | 🟢 | Evolab externalizado a `epis2-evolab`; sin WIP en este repo |
 
 ---
 
@@ -47,7 +49,7 @@
 
 1. ✅ Actualizar `validate-three-modes-gate.mjs` y `validate-design-mode-gate.mjs`
 2. Push fix gates → esperar CI verde en `test:e2e`
-3. No mezclar WIP `evolution-lab/` en el mismo push (rompe `eslint`)
+3. Evolab: usar repo externo [epis2-evolab](https://github.com/gabriel2320/epis2-evolab) — no mezclar en pushes de EPIS2
 4. Tras CI verde: retomar Fase B / Tramo J según `EPIS2_GLOBAL_DEV_PLAN.md`
 
 ---
@@ -67,7 +69,7 @@ E2E local: `npm run build -w @epis2/web && npm run test:e2e`
 
 ## Riesgos
 
-- **evolution-lab** untracked rompe `npm run check` local si eslint lo escanea — mantener fuera del commit CI.
+- **Evolab** vive en [epis2-evolab](https://github.com/gabriel2320/epis2-evolab) — no afecta `npm run check` ni eslint de EPIS2.
 - **Node 20 deprecation** en GitHub Actions (warning, no bloqueante hoy).
 
 ## Próximo paso exacto
