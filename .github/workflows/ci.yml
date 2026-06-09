@@ -36,6 +36,7 @@ jobs:
       - run: npm run db:migrate
       - run: npm run check
       - run: npm run quality:pm01
+      - run: npm run quality:layers-integration-gate
       - run: npm run theme:validate
       - run: npm run test -- --reporter=default --reporter=json --outputFile=reports/.vitest-ci-parity-temp.json
       - run: npm run quality:ci-parity -- --from-report=reports/.vitest-ci-parity-temp.json

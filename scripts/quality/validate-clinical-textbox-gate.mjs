@@ -78,6 +78,15 @@ if (bridgeSrc.includes('@tiptap/') || bridgeSrc.includes('languagetool')) {
 }
 
 const formSrc = readFileSync(formPagePath, 'utf8');
+// La persistencia vive en el hook extraído (auditoría 4.1) — validar página + hook.
+const persistenceHookPath = join(
+  root,
+  'apps/web/src/clinical/generated-form/useGeneratedFormDraftPersistence.ts',
+);
+const persistenceSrc = existsSync(persistenceHookPath)
+  ? readFileSync(persistenceHookPath, 'utf8')
+  : '';
+const formAndPersistenceSrc = formSrc + persistenceSrc;
 if (!formSrc.includes('renderClinicalTextBox')) {
   errors.push('GeneratedClinicalFormPage debe cablear renderClinicalTextBox');
 }
@@ -87,7 +96,7 @@ if (!formSrc.includes('attachToDraftBody') || !formSrc.includes('useClinicalText
 if (!formSrc.includes('hydratedDraftIdRef') || !formSrc.includes('editingDraftId')) {
   errors.push('GeneratedClinicalFormPage debe hidratar borrador una sola vez por draftId');
 }
-if (!formSrc.includes('updateDraftMutation')) {
+if (!formAndPersistenceSrc.includes('updateDraftMutation')) {
   errors.push('GeneratedClinicalFormPage debe actualizar borrador existente');
 }
 
