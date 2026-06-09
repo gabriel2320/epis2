@@ -6,7 +6,7 @@ import {
   createLanguageToolAdapter,
   runClinicalSpellcheck,
   simulatedLanguageToolAdapter,
-} from '@epis2/clinical-productivity';
+} from '@epis2/clinical-productivity/server';
 import type { AppConfig } from '../config.js';
 
 export async function runClinicalTextSpellcheck(config: AppConfig, text: string) {

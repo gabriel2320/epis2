@@ -33,3 +33,11 @@ Ninguno clínico. Desarrollo local con `.env` sigue igual (`loadEnvFile` no sobr
 ## Próximo paso
 
 Push y verificar CI verde en `test:e2e` → `golden-journey`.
+
+---
+
+## Seguimiento (misma sesión)
+
+CI run [27177722988](https://github.com/gabriel2320/epis2/actions/runs/27177722988): `.env` resuelto; E2E falló porque `tsx` en API cargaba `@epis2/clinical-productivity` → MUI vía `create-epis2-theme.ts`.
+
+**Fix adicional:** subpath `@epis2/clinical-productivity/server` (sin React/MUI) + imports en `textSpellcheck.ts` y `draftBodyMeta.ts`.
