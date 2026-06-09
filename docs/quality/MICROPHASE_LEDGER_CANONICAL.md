@@ -1,6 +1,8 @@
 # EPIS2 — Ledger canónico de microfases
 
-> **Numeración unificada MF-1…51:** `docs/quality/MF_UNIFIED_CANON.md` (conciliación con EPIS2-00…12 + MF-151…182).
+> **Sistema SDEPIS2:** [`EPIS2_DEV_SYSTEM.md`](../product/EPIS2_DEV_SYSTEM.md) · Tablero: [`EPIS2_TABLERO.md`](../product/EPIS2_TABLERO.md)
+
+> **Numeración unificada MF-1…51:** `docs/quality/MF_UNIFIED_CANON.md`
 
 **Este documento no duplica el ledger.** La fuente de verdad es:
 

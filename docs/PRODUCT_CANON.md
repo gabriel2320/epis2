@@ -53,7 +53,7 @@ La home es el Centro de Comando. No es un dashboard. No es una ficha hospitalari
 | 12 | Interoperabilidad futura vía **frontera FHIR**, no como UI |
 | 13 | MVP acotado — ver `SCOPE_V1.md` |
 | 14 | EPIS = donante de conocimiento, no base de código obligatoria |
-| 15 | Una microfase termina antes de iniciar la siguiente |
+| 15 | Una **microfase** termina antes de iniciar la siguiente (ver [`EPIS2_DEV_SYSTEM.md`](product/EPIS2_DEV_SYSTEM.md)) |
 
 ---
 
@@ -91,4 +91,6 @@ EPIS queda **`LEGACY_REFERENCE`**. Se extrae visión, comandos, blueprints, micr
 - `EPIS2_FORM_SCREEN_TREE.md` — árbol formulario → pantalla (canon)
 - `ARCHITECTURE_TARGET.md` — stack
 - `CLINICAL_SAFETY_PRINCIPLES.md` — seguridad
-- `ROADMAP.md` — fases de implementación
+- `ROADMAP.md` — hitos bootstrap EPIS2-00 … EPIS2-12
+- `product/EPIS2_DEV_SYSTEM.md` — **sistema único de desarrollo** (olas, hilos, tramos, microfases)
+- `product/EPIS2_TABLERO.md` — tablero vivo (estado del producto)

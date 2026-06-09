@@ -1,8 +1,10 @@
 # EPIS2 — Roadmap por fases
 
-Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `reports/`.
+> **Nomenclatura SDEPIS2:** los bloques `EPIS2-00…12` son **hitos bootstrap** (no «fases» del plan global). Hilos activos post-MVP → [`EPIS2_DEV_SYSTEM.md`](product/EPIS2_DEV_SYSTEM.md) · [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md).
 
-**Regla:** no iniciar fase N+1 sin cumplir gate de N.
+Cada hito termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `reports/`.
+
+**Regla:** no iniciar hito N+1 sin cumplir gate de N.
 
 ---
 
@@ -162,7 +164,7 @@ Reportes: `reports/epis2-mf-three-modes-*.md` · auditorías `reports/epis2-thre
 | **EPIS2-PM-01 Tres modos MD3** | ✓ PROG-THREE-MODES MF-01…08 · CI E2E verde 2026-06-09 |
 | **CI master** | ✓ run [27181266125](https://github.com/gabriel2320/epis2/actions/runs/27181266125) — 10/10 E2E preview |
 
-**Siguiente recomendado:** **Fase D — Tramo J farmacia** — ver [`EPIS2_STORYBOARD.md`](product/EPIS2_STORYBOARD.md) · [`EPIS2_GLOBAL_DEV_PLAN.md`](product/EPIS2_GLOBAL_DEV_PLAN.md)
+**Siguiente recomendado:** **Hilo D — Tramo J farmacia** — ver [`EPIS2_DEV_SYSTEM.md`](product/EPIS2_DEV_SYSTEM.md) · [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md)
 
 ---
 

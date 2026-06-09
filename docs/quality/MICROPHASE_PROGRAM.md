@@ -1,5 +1,7 @@
 # EPIS2 — Programa de microfases (post-MVP)
 
+**Sistema SDEPIS2:** [`EPIS2_DEV_SYSTEM.md`](../product/EPIS2_DEV_SYSTEM.md) · Tablero: [`EPIS2_TABLERO.md`](../product/EPIS2_TABLERO.md)
+
 **Versión ledger:** 1.0.0 · **Auditoría base:** `reports/epis2-comprehensive-audit-2026-06-05.md`
 
 ## Fuente de verdad

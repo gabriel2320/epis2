@@ -1,5 +1,7 @@
 # EPIS2 — Canon unificado de microfases (MF-1…MF-51)
 
+**Sistema de nomenclatura:** [`EPIS2_DEV_SYSTEM.md`](../product/EPIS2_DEV_SYSTEM.md) (SDEPIS2)
+
 **Versión:** 1.0.0 · **Fecha:** 2026-06-07  
 **Propósito:** Numeración continua desde el primer paso del proyecto hasta el último planificado en hoja de ruta.  
 **Ledger operativo vigente:** sigue usando IDs `MF-151…182` + inserciones `MF-183…188` hasta migración explícita del JSON.
@@ -8,14 +10,14 @@
 
 | Regla | Descripción |
 |-------|-------------|
-| **MF-1…13** | Fases fundacionales `EPIS2-00` … `EPIS2-12` (MVP v1 + tablero) |
+| **MF-1…13** | **Hitos bootstrap** `EPIS2-00` … `EPIS2-12` (MVP v1 + modo tablero) |
 | **MF-14…51** | Programa post-MVP en **orden canónico** del ledger v1.1 (`canonicalExecutionOrder`) |
 | **Estado** | Fundación = DONE histórico; post-MVP = `microphase-ledger.json` al 2026-06-06 |
 | **Paralelos** | M3-00…09, MUI-01…10, Plan A–G, WIDGET, V0–V5 se ejecutaron en paralelo a EPIS2-02…12 — no ocupan MF propia; ver nota al pie |
 
 ## Tabla maestra
 
-| MF | ID legado | Fase / nombre | Ola | Estado |
+| MF | ID legado | Hito / nombre | Ola | Estado |
 |----|-----------|---------------|-----|--------|
 | **MF-1** | EPIS2-00 | Decisión y congelamiento (canon, alcance, reglas) | Fundación | DONE |
 | **MF-2** | EPIS2-01 | Bootstrap monorepo | Fundación | DONE |

@@ -6,12 +6,14 @@
 
 0. **Arranque IA:** `npm run dev:session` → adjuntar `@reports/dev-agent-brief.md` + prompt del subagente primario.
 1. Leer `docs/PRODUCT_CANON.md` y `docs/product/PRODUCT_INVARIANTS.md`.
-2. Leer `docs/product/EPIS2_WAVE_EXECUTION_CANON.md` — tramo, ola, dependencias, gates (no cola lineal automática).
-3. Ejecutar `npm run quality:microphase-next` — trabajar **solo** la microfase `READY`.
-4. Leer `docs/quality/MICROPHASE_PROGRAM.md` y `docs/quality/microphase-ledger.json`.
-5. Leer `docs/legacy/EPIS_POSTMORTEM.md` si tocas integración o migración.
-6. **Declarar alcance** (microfase MF-XXX, archivos permitidos/prohibidos).
-7. No importar desde `../Epis` sin entrada en `legacy-import-manifest.json`.
+2. Leer **`docs/product/EPIS2_DEV_SYSTEM.md`** — nomenclatura SDEPIS2 (ola · hilo · tramo · microfase · entrega).
+3. Leer `docs/product/EPIS2_TABLERO.md` — estado vivo y siguiente paso.
+4. Leer `docs/product/EPIS2_WAVE_EXECUTION_CANON.md` — olas, tramos, gates (no cola lineal automática).
+5. Ejecutar `npm run quality:microphase-next` — microfase READY o hilo activo del tablero.
+6. Leer `docs/quality/MICROPHASE_PROGRAM.md` y `docs/quality/microphase-ledger.json`.
+7. Leer `docs/legacy/EPIS_POSTMORTEM.md` si tocas integración o migración.
+8. **Declarar alcance** (nivel SDEPIS2 + ID MF-* / Hilo * + archivos permitidos).
+9. No importar desde `../Epis` sin entrada en `legacy-import-manifest.json`.
 
 Guía IA: `docs/product/EPIS2_AI_ASSISTED_DEV.md` · cierre `npm run dev:agent:close`.
 

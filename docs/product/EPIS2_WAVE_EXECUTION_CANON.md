@@ -1,6 +1,7 @@
 # EPIS2 — Canon de ejecución por olas
 
 **Versión:** 1.0 · **Fecha:** 2026-06-04  
+**Sistema:** [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) (SDEPIS2) · **Tablero:** [`EPIS2_TABLERO.md`](./EPIS2_TABLERO.md)  
 **Estado:** Canónico — gobierna agentes Cursor y planificación humana  
 **Complementa:** [`EPIS2_COMPLETION_ROADMAP.md`](./EPIS2_COMPLETION_ROADMAP.md) · [`EPIS2_INVENTORY_WORKSPACE_MATRIX.md`](./EPIS2_INVENTORY_WORKSPACE_MATRIX.md)
 
@@ -38,7 +39,7 @@ Los IDC 101–200 y programas UCI/pabellón/facturación **no** bloquean declara
 | **Dependencia** | Condición necesaria (datos, seguridad, journey) antes de iniciar MF |
 | **Gate** | Criterio objetivo para declarar una capacidad **Done** |
 | **Milestone** | Subconjunto cerrable dentro de una ola (ej. **1A**, **1B**) |
-| **Tramo** | Secuencia operacional recomendada (A→D) — ver §8 |
+| **Tramo** | Secuencia operacional recomendada (A→D) — ver §9; **Tramo clínico** A–K = dominio |
 
 **Regla:**
 

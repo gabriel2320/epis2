@@ -5,8 +5,8 @@ alwaysApply: true
 
 # EPIS2 — Canon (obligatorio antes de modificar)
 
-1. Leer `docs/PRODUCT_CANON.md` y `docs/product/PRODUCT_INVARIANTS.md`.
-2. Declarar alcance de la sesión (fase, archivos permitidos).
+1. Leer `docs/PRODUCT_CANON.md`, `docs/product/PRODUCT_INVARIANTS.md` y **`docs/product/EPIS2_DEV_SYSTEM.md`** (SDEPIS2).
+2. Declarar alcance (nivel SDEPIS2: hilo / tramo / microfase + ID + archivos permitidos).
 3. Home = **Centro de Comando** — nunca dashboard.
 4. PostgreSQL = SoT; borradores ≠ datos aprobados; IA no aprueba ni firma.
 5. EPIS (`../Epis`) = donante; **prohibido** copiar carpetas o importar sin `legacy-import-manifest.json`.

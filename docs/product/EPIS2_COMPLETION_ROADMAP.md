@@ -1,7 +1,8 @@
 # EPIS2 — Roadmap de completitud (post-auditoría)
 
-**Versión:** 1.3 · **Fecha:** 2026-06-04 (Fase B lote 3 — golden V2 UI + RAD forms)  
-**Plan global consolidado:** [`EPIS2_GLOBAL_DEV_PLAN.md`](./EPIS2_GLOBAL_DEV_PLAN.md) · **Disciplina RAD/MD3:** [`../design/EPIS2_RAD_M3_DISCIPLINE.md`](../design/EPIS2_RAD_M3_DISCIPLINE.md)
+**Versión:** 1.3 · **Fecha:** 2026-06-09  
+**Sistema:** [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Tablero:** [`EPIS2_TABLERO.md`](./EPIS2_TABLERO.md)  
+**Plan global:** [`EPIS2_GLOBAL_DEV_PLAN.md`](./EPIS2_GLOBAL_DEV_PLAN.md) · **Disciplina RAD/MD3:** [`../design/EPIS2_RAD_M3_DISCIPLINE.md`](../design/EPIS2_RAD_M3_DISCIPLINE.md)
 **Canon de ejecución:** [`EPIS2_WAVE_EXECUTION_CANON.md`](./EPIS2_WAVE_EXECUTION_CANON.md) — **fuente primaria** para agentes (precedencia, gates, tramos A–D, milestones 1A–1D).
 
 > Las olas agrupan capacidades; **no** implican cola lineal estricta. Ver definición **EPIS2 Core completado** en el canon.

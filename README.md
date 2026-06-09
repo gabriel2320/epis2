@@ -31,7 +31,7 @@ Aplicación clínica **command-first**, independiente del proyecto EPIS (legacy)
 | **CI master** | Verde — 10/10 E2E preview ([run 27181266125](https://github.com/gabriel2320/epis2/actions/runs/27181266125)) |
 | **EPIS2-PM-01 Tres modos** | Completado — PROG-THREE-MODES MF-01…08 |
 
-Story board: [`docs/product/EPIS2_STORYBOARD.md`](docs/product/EPIS2_STORYBOARD.md) · Reportes: `reports/epis2-m3-09-qa-signoff.md` · `reports/epis2-ci-e2e-closure-2026-06-09.md`
+**Sistema de desarrollo (SDEPIS2):** [`docs/product/EPIS2_DEV_SYSTEM.md`](docs/product/EPIS2_DEV_SYSTEM.md) · **Tablero:** [`docs/product/EPIS2_TABLERO.md`](docs/product/EPIS2_TABLERO.md)
 
 ## Evolab (repositorio externo)
 
@@ -47,7 +47,8 @@ Plan de mejora: [EVOLAB_ROADMAP.md](https://github.com/gabriel2320/epis2-evolab/
 | [docs/ARCHITECTURE_TARGET.md](docs/ARCHITECTURE_TARGET.md) | Arquitectura objetivo |
 | [docs/LEGACY_DONOR_MAP.md](docs/LEGACY_DONOR_MAP.md) | Migración selectiva desde EPIS |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Fases EPIS2-00 … EPIS2-12 + frontera producto |
-| [docs/product/EPIS2_STORYBOARD.md](docs/product/EPIS2_STORYBOARD.md) | Story board vivo — hecho / en curso / siguiente |
+| [docs/product/EPIS2_DEV_SYSTEM.md](docs/product/EPIS2_DEV_SYSTEM.md) | **SDEPIS2** — olas, hilos, tramos, microfases, entregas |
+| [docs/product/EPIS2_TABLERO.md](docs/product/EPIS2_TABLERO.md) | Tablero de desarrollo (estado vivo) |
 | [docs/SCOPE_V1.md](docs/SCOPE_V1.md) | MVP v1 + addendum slices demo |
 | [docs/design/M3_ADOPTION_PLAN.md](docs/design/M3_ADOPTION_PLAN.md) | Plan Material 3 Clinical (M3-00…09) |
 | [docs/design/EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md](docs/design/EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md) | Especificación M3 |
