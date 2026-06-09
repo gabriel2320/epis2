@@ -6,6 +6,7 @@ node_modules
 reports/.vitest-ci-parity-temp.json/
 reports/ai-evals-live-latest.json
 reports/dev-agent-prompt-tramo-*.md
+reports/evolution/runs/
 dist/
 build/
 coverage/
