@@ -1,5 +1,8 @@
 # EPIS2 — Canon de ejecución por olas (v1)
 
+> **ARCHIVADO (2026-06-09):** snapshot de generación. El canon vigente es
+> [`docs/product/EPIS2_WAVE_EXECUTION_CANON.md`](../docs/product/EPIS2_WAVE_EXECUTION_CANON.md) — no editar este archivo.
+
 **Fecha:** 2026-06-04  
 **Origen:** Revisión estratégica 8/10 — consolidación olas 0–20  
 **Entregable:** [`docs/product/EPIS2_WAVE_EXECUTION_CANON.md`](../docs/product/EPIS2_WAVE_EXECUTION_CANON.md)

@@ -40,7 +40,9 @@ El laboratorio de evolución supervisada **no vive en este monorepo**. Usa [epis
 Plan de mejora: [EVOLAB_ROADMAP.md](https://github.com/gabriel2320/epis2-evolab/blob/master/docs/evolution/EVOLAB_ROADMAP.md).
 
 ## Documentación esencial
+| Documento | Propósito |
 |-----------|-----------|
+| [docs/INDEX.md](docs/INDEX.md) | **Índice maestro** — niveles L0…L5 y ciclo de vida documental |
 | [docs/PRODUCT_CANON.md](docs/PRODUCT_CANON.md) | Visión y principios no negociables |
 | [docs/SCOPE_V1.md](docs/SCOPE_V1.md) | MVP v1 limitado |
 | [docs/NON_GOALS.md](docs/NON_GOALS.md) | Lo que EPIS2 no hará en v1 |

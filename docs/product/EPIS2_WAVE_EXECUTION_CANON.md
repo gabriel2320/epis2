@@ -1,6 +1,6 @@
 # EPIS2 — Canon de ejecución por olas
 
-**Versión:** 1.0 · **Fecha:** 2026-06-04  
+**Versión:** 1.1 · **Fecha:** 2026-06-09 (snapshots §3/§14) · 2026-06-04 (canon)  
 **Sistema:** [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) (SDEPIS2) · **Tablero:** [`EPIS2_TABLERO.md`](./EPIS2_TABLERO.md)  
 **Estado:** Canónico — gobierna agentes Cursor y planificación humana  
 **Complementa:** [`EPIS2_COMPLETION_ROADMAP.md`](./EPIS2_COMPLETION_ROADMAP.md) · [`EPIS2_INVENTORY_WORKSPACE_MATRIX.md`](./EPIS2_INVENTORY_WORKSPACE_MATRIX.md)
@@ -53,11 +53,11 @@ Los IDC 101–200 y programas UCI/pabellón/facturación **no** bloquean declara
 
 ## 3. Ola 1 — cuatro milestones (sin renumerar olas)
 
-| Milestone | Dominio | Entregables | Estado EPIS2 (2026-06-04) |
+| Milestone | Dominio | Entregables | Estado EPIS2 (2026-06-09) |
 |-----------|---------|-------------|---------------------------|
 | **1A Shell clínico** | Login, RBAC, rail, comando, contexto usuario/paciente/episodio | `/login`, `/comando`, workspaces, sesión expirada | **Done** |
-| **1B Consulta mínima** | Motivo, anamnesis, examen, dx, plan, borrador/firma | SOAP, `outpatient_visit` scrollspy | **Done** (Ola 2 extiende) |
-| **1C Indicaciones y resultados** | Receta, lab, imagen, órdenes, bandeja, CDS | 19 blueprints (parcial), alertas demo | **Partial** |
+| **1B Consulta mínima** | Motivo, anamnesis, examen, dx, plan, borrador/firma | SOAP, `outpatient_visit` scrollspy | **Done** (Ola 2 cerrada — Hilo B) |
+| **1C Indicaciones y resultados** | Receta, lab, imagen, órdenes, bandeja, CDS | 20 blueprints · print A5/Carta ✓ (`ola6a-print-gate`) · bandeja resultados | **Partial** (avanzado) |
 | **1D IA asistida segura** | Borrador, resumen, RAG, trazabilidad, sin firma IA | API assist, golden V5 | **Partial** |
 
 Ola 1 **cerrada operativamente** para shell (reporte `epis2-ola1-core-shell-closure.md`); **1C–1D** siguen abiertos como milestones, no bloquean Ola 3.
@@ -278,7 +278,7 @@ Estado real:          Active — no cerrada clínicamente
 | Plan global | **Fase UX-1** — `EPIS2_GLOBAL_DEV_PLAN.md` |
 | Microfases | **MF-THREE-MODES-01…08** |
 | Ola clínica | Transversal — no bloquea Tramo A–D |
-| Estado (2026-06-04) | MF-THREE-MODES-01/02 **Done** · 03…07 **Ready** |
+| Estado (2026-06-09) | MF-THREE-MODES-01…08 **Done** — programa cerrado (EPIS2-PM-01 ✓, `quality:three-modes-gate`) |
 
 ```text
 MF-CLASSIC-MD3 ──────┐

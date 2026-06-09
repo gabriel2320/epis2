@@ -4,6 +4,7 @@ import {
   getGitSummary,
   getNextMicrophase,
   getStackHints,
+  getTableroState,
   readOllamaPlan,
   suggestPrimarySubagent,
 } from './context.mjs';
@@ -31,6 +32,7 @@ export async function buildDevBrief(root, opts) {
   const mf = getNextMicrophase(root);
   const stack = await getStackHints(root);
   const ollamaPlan = readOllamaPlan(root);
+  const tablero = getTableroState(root);
   const primary =
     opts.primarySubagent ??
     suggestPrimarySubagent(git.files, { tramo, phase: resolvedPhase });
@@ -45,17 +47,32 @@ export async function buildDevBrief(root, opts) {
     '',
     `**Generado:** ${new Date().toISOString()} · **Fase:** ${resolvedPhase}${tramo ? ` · Tramo ${tramo}` : ''}`,
     '',
-    '## Objetivo sugerido',
+    '## Estado del tablero (fuente canónica)',
     '',
   ];
 
-  if (ollamaPlan?.plan?.objective) {
-    lines.push(`- **Ollama:** ${ollamaPlan.plan.objective}`);
-    lines.push(`- **MF propuesta:** ${ollamaPlan.plan.nextMicrophase}`);
-  } else if (mf) {
+  if (tablero.activeThreads.length > 0) {
+    lines.push(...tablero.activeThreads.map((t) => `- **En curso:** ${t}`));
+  }
+  if (tablero.nextSteps.length > 0) {
+    lines.push(...tablero.nextSteps.slice(0, 3).map((s) => `- **Siguiente:** ${s}`));
+  }
+  if (tablero.activeThreads.length === 0 && tablero.nextSteps.length === 0) {
+    lines.push('- Tablero no legible — revisar `docs/product/EPIS2_TABLERO.md` manualmente.');
+  }
+
+  lines.push('', '## Objetivo sugerido', '');
+
+  if (mf) {
     lines.push(`- **Ledger READY:** \`${mf.id}\` — ${mf.name}`);
+  } else if (tablero.nextSteps.length > 0) {
+    lines.push(`- ${tablero.nextSteps[0]}`);
   } else {
-    lines.push('- Ver `docs/product/EPIS2_GLOBAL_DEV_PLAN.md` — Fase B: Command palette + Ola 2');
+    lines.push('- Ver `docs/product/EPIS2_TABLERO.md` § Siguiente.');
+  }
+  if (ollamaPlan?.plan?.objective) {
+    lines.push(`- **Ollama (≤24 h):** ${ollamaPlan.plan.objective}`);
+    lines.push(`- **MF propuesta:** ${ollamaPlan.plan.nextMicrophase}`);
   }
 
   lines.push(

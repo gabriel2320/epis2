@@ -1,5 +1,8 @@
 # EPIS2 — Mapa completo de capacidades
 
+> **HISTÓRICO (2026-06-09):** snapshot de planificación pre-tramos A–K. El «siguiente paso»
+> canónico vive en [`EPIS2_TABLERO.md`](./EPIS2_TABLERO.md); no usar este mapa para decidir prioridades.
+
 **Versión:** 1.0 · **Estado:** Plan maestro (sin implementación productiva nueva)  
 **Frase guía:** *EPIS2 incorpora la experiencia acumulada, pero conserva una arquitectura limpia y una sola verdad.*
 

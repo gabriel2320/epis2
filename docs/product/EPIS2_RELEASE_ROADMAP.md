@@ -1,5 +1,9 @@
 # EPIS2 — Roadmap por versiones de producto
 
+> **HISTÓRICO (2026-06-09):** la taxonomía V0–V5 fue absorbida por SDEPIS2 (olas · hilos · tramos).
+> El estado vivo y el «siguiente paso» canónico están en [`EPIS2_TABLERO.md`](./EPIS2_TABLERO.md).
+> Este documento se conserva como referencia de los slices V0–V5 ya entregados.
+
 **Versión:** 1.0 · **Prioridad activa:** V0 (cerrar gates) → V1  
 **Regla:** Cursor **no** avanza de fase sin cierre explícito (capacidad + contratos + API + permisos + auditoría + tests + reporte + commit).
 

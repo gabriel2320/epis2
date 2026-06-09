@@ -26,8 +26,11 @@ quality:ui-simplify-gate
 
 # EPIS2 — Plan de desarrollo global (consolidado)
 
-**Versión:** 1.1 · **Fecha:** 2026-06-07  
-**Fuentes fusionadas:** `ROADMAP.md` · `EPIS2_COMPLETION_ROADMAP.md` · MF-UI-SIMPLIFY · MF-RAD-M3 · MF-CLINICAL-PRODUCTIVITY · tramos A–K
+**Versión:** 1.4 · **Fecha:** 2026-06-09  
+**Sistema:** [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) (SDEPIS2) · **Tablero:** [`EPIS2_TABLERO.md`](./EPIS2_TABLERO.md)  
+**Fuentes:** `ROADMAP.md` · `EPIS2_COMPLETION_ROADMAP.md` · MF-UI-SIMPLIFY · MF-RAD-M3 · tramos A–K
+
+> Vocabulario: **Hilo** (secuencia activa) · **Ola** (capacidad) · **Tramo** (dominio clínico) · **Microfase** (sesión) · **Entrega** (PR acotado). «Fase A/B» = **Hilo A/B** (deprecado).
 
 ---
 
@@ -46,39 +49,36 @@ Home = `/comando`. PostgreSQL = SoT. IA no firma. Sin OpenMRS/Carbon en UI.
 | Capa | Qué | Estado |
 |------|-----|--------|
 | **L0 Invariantes** | `PRODUCT_INVARIANTS.md`, architecture:validate | Permanente |
-| **L1 Producto** | Olas 0–3, golden journey | Ola 1 ✓ · Ola 2–3 activas |
-| **L2 Tramos clínicos** | A–K (urgencias, UCI, OR, farmacia…) | A–I ✓ · J pendiente |
+| **L1 Producto** | Olas 0–3, golden journey | Ola 1 ✓ · Ola 2 Hilo B ✓ · Ola 3 activa |
+| **L2 Tramos clínicos** | A–K (urgencias, UCI, OR, farmacia…) | A–J ✓ scaffold · signoff clínico Tramo J cerrado |
 | **L3 UX densidad** | MF-UI-SIMPLIFY-M3 scaffold | ✓ base |
-| **L4 RAD productividad** | MF-RAD-M3 disciplina VB→MD3 | ✓ Fase A dashboard |
+| **L4 RAD productividad** | MF-RAD-M3 disciplina VB→MD3 | ✓ Hilo A |
 | **L5 clinical-productivity** | `@epis2/clinical-productivity` wrappers | ✓ base · puente vía `ClinicalDataGrid` |
-| **L6 Tramo J** | Farmacia 161–170 | **Bloqueado** hasta `layers-integration-gate` estable |
+| **L6 Tramo J** | Farmacia 161–170 | Scaffold ✓ · signoff PEND-001 cerrado 2026-06-09 |
 
-Detalle de puente L4→L5: `docs/product/EPIS2_UI_LAYERS.md`.
+Detalle L4→L5: `docs/product/EPIS2_UI_LAYERS.md`.
 
 ---
 
-## Hilo activo recomendado (Q2 2026)
+## Hilos activos (Q2 2026)
 
-### Fase A — Consolidación visual (casi cerrada)
+### Hilo A — Consolidación visual (**cerrado** 2026-06-04)
 
 - [x] MF-UI-SIMPLIFY: scaffold, scroll único, ActionBar única
 - [x] MF-RAD-M3: superficies, registry, modo diseño, gates
 - [x] MF-CLINICAL-PRODUCTIVITY: paquete, gates, piloto `PatientListGrid`
-- [x] Dashboard tabs densos → `EpisRadDashboardTabShell` + grids (work, service, nursing, emergency, icu, specialty, patient)
-- [x] `EpisBulkActionMenu` en listas de trabajo / mapa camas UCI
-- [x] Acordeones sistemáticos en formularios largos + monitoreo UCI + farmacia/especialidad secundario
-- [x] Quality dashboard tab → migración grid completa
-- [ ] Command palette Ctrl+K en shell global (Fase B productivity)
+- [x] Dashboard tabs densos → `EpisRadDashboardTabShell` + grids
+- [x] Acordeones formularios + monitoreo UCI + farmacia secundario
+- [x] Programa microfases MF-151→182 DONE (`quality:microphases`)
 
-### Fase B — Completitud Ola 2 + subagentes dev
+Command palette Ctrl+K → **Hilo B**.
 
-- Blueprints: ingreso, ambulatorio, traslado, certificado
-- Comandos → formulario mínimo (registry existente)
-- Journey: `golden-v2-admission-discharge`
-- Adopción `ClinicalCommandPalette` + autocomplete en búsqueda paciente
-- Orquestación: `npm run dev:agent:orchestrate` · plan Ollama `npm run dev:agent:ollama`
+### Hilo B — Completitud Ola 2 (**cerrado** 2026-06-09)
 
-### Fase C — Ola 3 longitudinal
+- [x] `ClinicalCommandPalette` Ctrl+K (`ClinicalShellCommandPalette`)
+- [x] Autocomplete búsqueda paciente (`PatientSearchAutocomplete`)
+- [x] Journey `golden-v2-admission-discharge` — CI 10/10 E2E [27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998)
+- [x] RAD `clinical-form-evolution` + `draft-review` → `done`
 
 
 ## Reglas EPIS2 (no negociables)

@@ -1,25 +1,25 @@
-# EPIS2 — Subagente `ollama-clinical`
+# EPIS2 — Subagente `ollama-dev-writer`
 
-**Rol:** IA clínica local (Ollama producto)  
+**Rol:** Escritor dev bajo riesgo (Ollama)  
 **Microfase / alcance:** MF-FASE-B-001 · Fase B
 
 ## Canon obligatorio
 
-- `docs/intelligence/EPIS2_OLLAMA_CAPABILITY_PLAN.md`
-- `docs/product/EPIS2_AI_TRAMO_EVALS.md`
+- `docs/product/EPIS2_DEV_AGENT_LOW_RISK_WRITE.md`
+- `docs/product/EPIS2_DEV_AGENT_ORCHESTRATION.md`
 
 ## Disparadores
 
-- assist
-- blueprint
-- local-ai
-- RAG
+- reporte sesión
+- documentación
+- dev:agent:ollama-write
+- reports/
 
 ## Gates de este rol
 
 ```bash
-quality:ollama-structured-output-gate
-npm run ai:evals:live
+quality:dev-agent-low-risk-write-gate
+npm run dev:agent:ollama-write
 ```
 
 ## Plan global (extracto)

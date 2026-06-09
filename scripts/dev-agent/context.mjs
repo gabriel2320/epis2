@@ -66,15 +66,56 @@ export async function getStackHints(root) {
   };
 }
 
+const OLLAMA_PLAN_MAX_AGE_MS = 24 * 60 * 60 * 1000;
+
 /** @param {string} root */
 export function readOllamaPlan(root) {
   const path = join(root, 'reports/dev-agent-ollama-plan.json');
   if (!existsSync(path)) return null;
   try {
-    return JSON.parse(readFileSync(path, 'utf8'));
+    const plan = JSON.parse(readFileSync(path, 'utf8'));
+    // Plan viejo = contexto erróneo para el agente; el tablero manda.
+    const generatedAt = Date.parse(plan.generatedAt ?? '');
+    if (!Number.isFinite(generatedAt) || Date.now() - generatedAt > OLLAMA_PLAN_MAX_AGE_MS) {
+      return null;
+    }
+    return plan;
   } catch {
     return null;
   }
+}
+
+/**
+ * Estado vivo del tablero — fuente canónica del «siguiente paso» (SDEPIS2).
+ * @param {string} root
+ * @returns {{ activeThreads: string[], nextSteps: string[] }}
+ */
+export function getTableroState(root) {
+  const path = join(root, 'docs/product/EPIS2_TABLERO.md');
+  if (!existsSync(path)) return { activeThreads: [], nextSteps: [] };
+  const text = readFileSync(path, 'utf8');
+
+  /** @param {string} heading @param {(cells: string[]) => string | null} pick */
+  const rowsUnder = (heading, pick) => {
+    const section = text.split(new RegExp(`^## ${heading}$`, 'm'))[1]?.split(/^## /m)[0] ?? '';
+    const out = [];
+    for (const line of section.split('\n')) {
+      if (!line.startsWith('|') || line.includes('---')) continue;
+      const cells = line.split('|').map((c) => c.trim()).filter(Boolean);
+      if (cells.length < 2) continue;
+      const picked = pick(cells);
+      if (picked) out.push(picked.replace(/\[([^\]]+)\]\([^)]*\)/g, '$1'));
+    }
+    return out;
+  };
+
+  const activeThreads = rowsUnder('En curso', (cells) =>
+    cells[0] && !/^Hilo$/i.test(cells[0]) ? `${cells[0]} — ${cells[1] ?? ''}` : null,
+  );
+  const nextSteps = rowsUnder('Siguiente', (cells) =>
+    cells[0] && !/^Prioridad$/i.test(cells[0]) ? `${cells[0]}: ${cells[1] ?? ''}` : null,
+  );
+  return { activeThreads, nextSteps };
 }
 
 /** @param {string[]} files @param {{ tramo?: string, phase?: string }} opts */

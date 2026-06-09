@@ -1,9 +1,10 @@
 # EPIS2 — Norma gráfica y técnica para documentos clínicos imprimibles en Chile
 
-**Versión:** 1.0.0 · **Fecha:** 2026-06-07  
-**Estado:** Canónico — diseño (sin implementación productiva aún)  
+**Versión:** 1.1.0 · **Fecha:** 2026-06-09 (actualización estado) · 2026-06-07 (norma)  
+**Estado:** Canónico — **implementación parcial** (ver matriz §29)  
 **Relación M3:** pantalla = Material Design 3; impresión = documento plano (§4)  
-**Paquete objetivo:** `@epis2/epis2-ui` (primitivas `Print*` — §21)
+**Paquete:** `@epis2/epis2-ui` (`PrintA5Document`, `PrintLetterDocument`, `PrintSection`, `PrintField` — §21)  
+**Gate:** `npm run quality:ola6a-print-gate` · registry `apps/web/src/clinical/print/printableBlueprints.ts`
 
 ---
 
@@ -1116,29 +1117,24 @@ Los documentos deben construirse usando primitivas reutilizables dentro de:
 @epis2/epis2-ui
 ```
 
-Componentes recomendados (objetivo — no implementados aún):
+Componentes implementados (2026-06-09):
 
 ```text
-PrintDocument
-PrintLetterDocument
-PrintA5Document
-PrintHeader
-PrintCompactHeader
-PrintPatientIdentity
-PrintEncounterContext
-PrintDocumentTitle
-PrintDocumentStatus
-PrintSection
-PrintField
-PrintNarrative
-PrintClinicalTable
-PrintAlert
-PrintMedicationList
-PrintIndicationList
-PrintSignatureBlock
-PrintAuditSummary
-PrintWatermark
-PrintFooter
+PrintA5Document      ✓ packages/epis2-ui/src/print/PrintA5Document.tsx
+PrintLetterDocument  ✓ packages/epis2-ui/src/print/PrintLetterDocument.tsx (estado documental §14 integrado)
+PrintSection         ✓ secciones planas con breakInside: avoid (§11, §17.2)
+PrintField           ✓ etiqueta persistente (§12.1)
+```
+
+Soporte de página (apps/web): `usePrintPagePatient`, `PrintPageToolbar`, registry `PRINTABLE_BLUEPRINTS`, `printValueLabels` (prioridad explícita §16.2).
+
+Componentes objetivo restantes (implementar cuando un documento los exija):
+
+```text
+PrintHeader · PrintCompactHeader · PrintPatientIdentity · PrintEncounterContext
+PrintDocumentTitle · PrintNarrative · PrintClinicalTable · PrintAlert
+PrintMedicationList · PrintIndicationList · PrintSignatureBlock
+PrintAuditSummary · PrintWatermark · PrintFooter
 ```
 
 Los formularios no deben implementar sus propios sistemas visuales de impresión cuando exista una primitiva canónica.
@@ -1386,25 +1382,28 @@ Un formulario imprimible EPIS2 solo puede considerarse terminado cuando:
 
 ---
 
-## 29. Mapeo blueprint → formato (referencia)
+## 29. Mapeo blueprint → formato (estado 2026-06-09)
 
-Alineación con blueprints actuales y MF planificadas. **Impresión no implementada** — guía de diseño.
+Alineación con blueprints actuales. ✓ = vista print implementada con E2E en CI.
 
-| Blueprint / documento | Familia | Formato | Orientación |
-|----------------------|---------|---------|-------------|
-| `admission_note` | Longitudinal | Carta | vertical |
-| `evolution_note` | Longitudinal | Carta | vertical |
-| `discharge_summary` | Longitudinal | Carta | vertical |
-| `referral` / interconsulta | Longitudinal | Carta | vertical |
-| `transfer_note` (MF-167) | Longitudinal | Carta | vertical |
-| `medication_reconciliation` (MF-166) | Longitudinal | Carta | vertical |
-| `patient_summary` | Longitudinal | Carta | vertical |
-| `prescription` | Transaccional | A5 | vertical |
-| `lab_request` | Transaccional | A5 | vertical |
-| `imaging_request` | Transaccional | A5 | vertical |
-| `medication_administration` / MAR | Operacional | Carta | horizontal |
-| Tendencias resultados | Operacional | Carta | horizontal |
-| `nursing_note` (serie) | Operacional | Carta | horizontal |
+| Blueprint / documento | Familia | Formato | Orientación | Estado |
+|----------------------|---------|---------|-------------|--------|
+| `prescription` | Transaccional | A5 | vertical | **✓** `/espacio/receta/imprimir` |
+| `medical_certificate` | Transaccional | A5 | vertical | **✓** `/espacio/certificado/imprimir` |
+| `lab_request` | Transaccional | A5 | vertical | **✓** `/espacio/laboratorio/imprimir` |
+| `imaging_request` | Transaccional | A5 | vertical | **✓** `/espacio/imagenologia/imprimir` |
+| `discharge_summary` | Longitudinal | Carta | vertical | **✓** `/espacio/epicrisis/imprimir` |
+| `admission_note` | Longitudinal | Carta | vertical | pendiente |
+| `evolution_note` | Longitudinal | Carta | vertical | pendiente |
+| `referral` / interconsulta | Longitudinal | Carta | vertical | pendiente |
+| `transfer_note` (MF-167) | Longitudinal | Carta | vertical | pendiente |
+| `medication_reconciliation` (MF-166) | Longitudinal | Carta | vertical | pendiente |
+| `patient_summary` | Longitudinal | Carta | vertical | pendiente |
+| `medication_administration` / MAR | Operacional | Carta | horizontal | pendiente |
+| Tendencias resultados | Operacional | Carta | horizontal | pendiente |
+| `nursing_note` (serie) | Operacional | Carta | horizontal | pendiente |
+
+Para añadir un documento: 1 entrada en `PRINTABLE_BLUEPRINTS` + 1 página `*PrintPage` sobre las primitivas §21 + E2E.
 
 ---
 

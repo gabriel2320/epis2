@@ -1,7 +1,7 @@
 # EPIS2 — Subagente `gate-runner`
 
 **Rol:** Ejecutor de gates  
-**Microfase / alcance:** MF-TRAMO-J-002 · Fase B · Tramo J
+**Microfase / alcance:** MF-FASE-B-001 · Fase B
 
 ## Canon obligatorio
 
@@ -48,12 +48,12 @@ Home = `/comando`. PostgreSQL = SoT. IA no firma. Sin OpenMRS/Carbon en UI.
 | Capa | Qué | Estado |
 |------|-----|--------|
 | **L0 Invariantes** | `PRODUCT_INVARIANTS.md`, architecture:validate | Permanente |
-| **L1 Producto** | Olas 0–3, golden journey | Ola 1 ✓ · Ola 2–3 activas |
-| **L2 Tramos clínicos** | A–K (urgencias, UCI, OR, farmacia…) | A–I ✓ · J pendiente |
+| **L1 Producto** | Olas 0–3, golden journey | Ola 1 ✓ · Ola 2 Hilo B ✓ · Ola 3 activa |
+| **L2 Tramos clínicos** | A–K (urgencias, UCI, OR, farmacia…) | A–J ✓ scaffold · signoff clínico Tramo J cerrado |
 | **L3 UX densidad** | MF-UI-SIMPLIFY-M3 scaffold | ✓ base |
 | **L4 RAD productividad** | MF-RAD-M3 disciplina VB→MD3 | ✓ Hilo A |
 | **L5 clinical-productivity** | `@epis2/clinical-productivity` wrappers | ✓ base · puente vía `ClinicalDataGrid` |
-| **L6 Tramo J** | Farmacia 161–170 | Scaffold ✓ · grid `partial` · signoff clínico pendiente |
+| **L6 Tramo J** | Farmacia 161–170 | Scaffold ✓ · signoff PEND-001 cerrado 2026-06-09 |
 
 Detalle L4→L5: `docs/product/EPIS2_UI_LAYERS.md`.
 
@@ -72,62 +72,13 @@ Detalle L4→L5: `docs/product/EPIS2_UI_LAYERS.md`.
 
 Command palette Ctrl+K → **Hilo B**.
 
-### Hilo B — Completitud Ola 2 (**activo** · CI E2E ✓ 2026-06-09)
+### Hilo B — Completitud Ola 2 (**cerrado** 2026-06-09)
 
 - [x] `ClinicalCommandPalette` Ctrl+K (`ClinicalShellCommandPalette`)
 - [x] Autocomplete búsqueda paciente (`PatientSearchAutocomplete`)
-- [x] Journey `golden-v2-admission-discharge` — CI 10/10 E2E [27181266125](https://github.com/gabriel2320/epis2/actions/runs/27181266125)
+- [x] Journey `golden-v2-admission-discharge` — CI 10/10 E2E [27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998)
 - [x] RAD `clinical-form-evolution` + `draft-review` → `done`
 
-## Plan tramo J
-
-# EPIS2 — Plan Tramo J (farmacia clínica)
-
-**Versión:** 1.0 · **Fecha:** 2026-06-07
-
----
-
-## Secuencia canon
-
-Ola 16 — farmacia clínica IDC 161–170 bajo tab farmacia (`?tab=pharmacy`).
-
-**Horizonte:** Post-core — scaffold demo → cierre técnico.
-
----
-
-## Estado
-
-| Programa | IDC | EPIS2 hoy |
-|----------|-----|-----------|
-| Y-Site | 161 | ✅ **MF-TRAMO-J-002** |
-| Dosis renal | 162 | ✅ **MF-TRAMO-J-003** |
-| TDM | 163 | ✅ **MF-TRAMO-J-004** |
-| RAM | 164 | ✅ **MF-TRAMO-J-005** |
-| Conciliación | 165 | ✅ **MF-TRAMO-J-006** (core Done) |
-| Dispensación | 166 | ✅ **MF-TRAMO-J-007** |
-| Carro paro | 167 | ✅ **MF-TRAMO-J-008** |
-| Estupefacientes | 168 | ✅ **MF-TRAMO-J-009** |
-| Devolución | 169 | ✅ **MF-TRAMO-J-010** |
-| Quiebre stock | 170 | ✅ **MF-TRAMO-J-011** |
-
----
-
-## Microfases
-
-| MF | Alcance | Estado |
-|----|---------|--------|
-| MF-TRAMO-J-001 | Inventario farmacia clínica | ✅ |
-| MF-TRAMO-J-002 … J-011 | Scaffold paneles 161–170 | ✅ |
-| MF-TRAMO-J-CLOSURE | Cierre técnico Tramo J | ✅ |
-
----
-
-## Gates
-
-Ver [`EPIS2_TRAMO_J_CLOSURE.md`](./EPIS2_TRAMO_J_CLOSURE.md).
-
-
-Inventario: docs/product/EPIS2_TRAMO_J_PHARMACY_INVENTORY.md
 
 ## Reglas EPIS2 (no negociables)
 
