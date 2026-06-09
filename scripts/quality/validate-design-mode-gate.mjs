@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /** Modo diseño — flag dev sin impacto clínico en producción. */
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -9,7 +9,11 @@ const errors = [];
 
 const env = readFileSync(join(root, 'apps/web/src/design/designModeEnv.ts'), 'utf8');
 const provider = readFileSync(join(root, 'apps/web/src/design/EpisDesignModeProvider.tsx'), 'utf8');
-const main = readFileSync(join(root, 'apps/web/src/main.tsx'), 'utf8');
+const appProvidersPath = join(root, 'apps/web/src/AppProviders.tsx');
+const appProviders = existsSync(appProvidersPath)
+  ? readFileSync(appProvidersPath, 'utf8')
+  : '';
+const router = readFileSync(join(root, 'apps/web/src/routes/router.tsx'), 'utf8');
 const copy = readFileSync(join(root, 'packages/design-system/src/copy/es.ts'), 'utf8');
 
 if (!env.includes('VITE_ENABLE_DESIGN_MODE')) {
@@ -24,8 +28,12 @@ if (!provider.includes('EpisDesignModeOverlay')) {
   errors.push('Falta overlay de modo diseño');
 }
 
-if (!main.includes('EpisDesignModeProvider')) {
-  errors.push('main.tsx debe envolver app con EpisDesignModeProvider');
+const mountsDesignModeProvider =
+  appProviders.includes('EpisDesignModeProvider') && router.includes('EpisAppProviders');
+if (!mountsDesignModeProvider) {
+  errors.push(
+    'AppProviders.tsx debe montar EpisDesignModeProvider bajo RouterProvider (EpisAppProviders en router)',
+  );
 }
 
 if (!copy.includes('designMode:')) {

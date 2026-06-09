@@ -23,7 +23,10 @@ for (const f of required) {
 }
 
 const routerSrc = readFileSync(join(root, 'apps/web/src/routes/router.tsx'), 'utf8');
-const mainSrc = readFileSync(join(root, 'apps/web/src/main.tsx'), 'utf8');
+const appProvidersPath = join(root, 'apps/web/src/AppProviders.tsx');
+const appProvidersSrc = existsSync(appProvidersPath)
+  ? readFileSync(appProvidersPath, 'utf8')
+  : '';
 if (!routerSrc.includes("path: '/comando'")) errors.push('/comando debe ser home');
 if (!routerSrc.includes('parseCommandSearch')) {
   errors.push('router /comando debe validar search con parseCommandSearch');
@@ -45,7 +48,14 @@ for (const rel of deprecatedShims) {
     errors.push(`Shim deprecated presente: ${rel} — usar modes/index (MF-THREE-MODES-08)`);
   }
 }
-if (!mainSrc.includes('EpisSessionProvider')) errors.push('main.tsx debe montar EpisSessionProvider');
+const mountsSessionProvider =
+  appProvidersSrc.includes('EpisSessionProvider') &&
+  routerSrc.includes('EpisAppProviders');
+if (!mountsSessionProvider) {
+  errors.push(
+    'AppProviders.tsx debe montar EpisSessionProvider bajo RouterProvider (EpisAppProviders en router)',
+  );
+}
 
 if (errors.length) {
   console.error('three-modes-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
