@@ -26,7 +26,9 @@ async function main() {
     return;
   }
 
-  if (previous.trim() !== next.trim()) {
+  const normalize = (text) => text.replace(/\r\n/g, '\n').trim();
+
+  if (normalize(previous) !== normalize(next)) {
     console.error('compare-theme-snapshots FAILED — esquemas difieren del snapshot');
     console.error(`  Actualice con: node scripts/theme/compare-theme-snapshots.mjs --write`);
     if (process.argv.includes('--write')) {

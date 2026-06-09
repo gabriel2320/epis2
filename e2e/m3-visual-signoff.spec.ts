@@ -23,10 +23,14 @@ async function openEvolutionForm(page: Page) {
     .fill('evolucionar nota de hoy');
   await powerBar.getByRole('button', { name: copy.commandCenter.submit }).click();
   await expect(page).toHaveURL(/\/espacio\/evolucion/);
+  await expect(page.getByTestId('epis2-generated-clinical-page')).toBeVisible();
 }
 
 async function fillEvolutionDraft(page: Page, subjective: string) {
-  await page.getByLabel('Subjetivo').fill(subjective);
+  const richSubjective = page.getByTestId('epis2-field-subjective-rich-input');
+  await expect(richSubjective).toBeVisible();
+  await richSubjective.click();
+  await richSubjective.fill(subjective);
   await page.getByLabel('Análisis').fill('Evaluación demo M3 — signoff visual.');
   await page.getByLabel('Plan').fill('Plan demo M3 — seguimiento clínico.');
 }
@@ -67,8 +71,9 @@ test.describe('M3 visual signoff — V1–V6', () => {
     await expect(page.getByTestId('epis2-power-bar')).toBeVisible();
 
     await openEvolutionForm(page);
-    await expect(page.getByLabel('Subjetivo')).toBeVisible();
-    await expect(page.getByRole('button', { name: copy.forms.saveDraft })).toBeVisible();
+    await expect(page.getByTestId('epis2-field-subjective-rich-input')).toBeVisible();
+    await expect(page.getByTestId('epis2-form-save')).toBeVisible();
+    await expect(page.getByTestId('epis2-form-sign')).toBeVisible();
   });
 
   test('V3 — alto contraste mantiene flujo clínico', async ({ page }) => {
@@ -80,10 +85,10 @@ test.describe('M3 visual signoff — V1–V6', () => {
 
     await openEvolutionForm(page);
     await fillEvolutionDraft(page, 'Control alto contraste — texto legible.');
-    await page.getByRole('button', { name: copy.forms.saveDraft }).click();
+    await page.getByTestId('epis2-form-sign').click();
     await expect(page).toHaveURL(/\/espacio\/borrador\//);
     await expect(page.getByTestId('epis2-draft-review')).toBeVisible();
-    await expect(page.getByTestId('epis2-approval-gate')).toBeVisible();
+    await expect(page.getByTestId('epis2-draft-approve')).toBeVisible();
   });
 
   test('V4 — catálogo visual dev con roles clínicos y elevación tonal', async ({ page }) => {
@@ -100,9 +105,10 @@ test.describe('M3 visual signoff — V1–V6', () => {
     await expect(page.getByTestId('epis2-command-prompt')).toBeVisible();
     await openEvolutionForm(page);
     await fillEvolutionDraft(page, 'Recorrido M3 V5 — evolución demo.');
-    await page.getByRole('button', { name: copy.forms.saveDraft }).click();
+    await page.getByTestId('epis2-form-sign').click();
+    await expect(page).toHaveURL(/\/espacio\/borrador\//);
     await expect(page.getByTestId('epis2-draft-review')).toBeVisible();
-    await expect(page.getByTestId('epis2-approval-gate')).toBeVisible();
+    await expect(page.getByTestId('epis2-draft-approve')).toBeVisible();
     await page.getByTestId('epis2-draft-approve').click();
     await expect(page.getByTestId('epis2-draft-review-message')).toContainText(
       copy.drafts.approvedSuccess,
@@ -118,7 +124,7 @@ test.describe('M3 visual signoff — V1–V6', () => {
     await expect(page.getByTestId('epis2-offline-banner')).toBeVisible();
 
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await expect(page.getByLabel('Subjetivo')).toBeVisible();
+    await expect(page.getByTestId('epis2-field-subjective-rich-input')).toBeVisible();
     await page.evaluate(() => window.dispatchEvent(new Event('online')));
     await expect(page.getByTestId('epis2-offline-banner')).toHaveCount(0);
   });
