@@ -38,8 +38,8 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 
 | Prioridad | Hilo / tramo | Gate |
 |-----------|--------------|------|
-| **P1** | Impresión clínica restante (carta / más A5) + E2E receta A5 | PEND-006 parcial · `quality:ola6a-print-gate` |
-| P1b | Fase 2 auditoría — transacción `approveDraft` | [`epis2-auditoria-profunda-2026-06-09.md`](../../reports/epis2-auditoria-profunda-2026-06-09.md) §7 |
+| **P1** | Impresión clínica restante (carta / más A5) | PEND-006 parcial · `quality:ola6a-print-gate` |
+| P1b | Fase 3 auditoría — pulido M3 (tertiary runtime, EpisDraftStatus, Admin) | [`epis2-auditoria-profunda-2026-06-09.md`](../../reports/epis2-auditoria-profunda-2026-06-09.md) §7 |
 | P2 | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | P3 | Backlog Ola 2+ | Nota procedimiento clínica (PEND-002 defer) |
 

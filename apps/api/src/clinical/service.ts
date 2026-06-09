@@ -377,159 +377,164 @@ export async function approveDraft(db: Database, actor: Actor, draftId: string) 
   }
 
   const now = new Date();
-  const [note] = await db
-    .insert(clinicalNotes)
-    .values({
-      patientId: draft.patientId,
-      encounterId: draft.encounterId,
-      noteType: draft.draftType,
-      title: draft.title,
-      body: draft.body,
-      createdBy: actor.id,
-      updatedBy: actor.id,
-      createdAt: now,
-      updatedAt: now,
-    })
-    .returning();
-
-  if (!note) throw new Error('No se pudo crear nota clínica');
-
-  await db.insert(clinicalNoteVersions).values({
-    noteId: note.id,
-    versionNo: 1,
-    title: note.title,
-    body: note.body,
-    createdBy: actor.id,
-  });
-
-  await db.insert(approvals).values({
-    draftId: draft.id,
-    noteId: note.id,
-    approvedBy: actor.id,
-  });
-
-  const [approvedDraft] = await db
-    .update(clinicalDrafts)
-    .set({ status: 'approved', updatedAt: now, updatedBy: actor.id })
-    .where(eq(clinicalDrafts.id, draftId))
-    .returning();
-
-  if (draft.draftType === 'admission_note') {
-    const body = draft.body as Record<string, unknown>;
-    const rawBed = typeof body.targetBedId === 'string' ? body.targetBedId : '';
-    const bedId = rawBed.split('|')[0]?.trim();
-    if (bedId) {
-      await createInpatientAdmission(db, {
-        patientId: draft.patientId,
-        bedId,
-        actorId: actor.id,
-        username: actor.username,
-      });
-    }
-  }
-
-  if (draft.draftType === 'allergy_entry') {
-    const body = draft.body as Record<string, unknown>;
-    const substance = typeof body.substance === 'string' ? body.substance.trim() : '';
-    const severity = typeof body.severity === 'string' ? body.severity : 'moderate';
-    if (substance) {
-      await db.insert(patientAllergies).values({
-        patientId: draft.patientId,
-        substance,
-        severity,
-        createdBy: actor.id,
-      });
-    }
-  }
-
-  if (draft.draftType === 'clinical_problem_entry') {
-    const body = draft.body as Record<string, unknown>;
-    let description =
-      typeof body.description === 'string' ? body.description.trim() : draft.title;
-    const status = typeof body.status === 'string' ? body.status : 'active';
-    const category =
-      typeof body.problemCategory === 'string' ? body.problemCategory.split('|')[0] : 'active_problem';
-    if (category === 'surgical_history' && description) {
-      description = formatSurgicalHistoryDescription(description);
-    }
-    if (description) {
-      await db.insert(problems).values({
+  // Atomicidad SoT: nota + versión + approval + side-effects + auditoría en una sola
+  // transacción siempre (con RLS enforce, Drizzle anida como savepoint).
+  return db.transaction(async (rawTx) => {
+    const tx = rawTx as unknown as Database;
+    const [note] = await tx
+      .insert(clinicalNotes)
+      .values({
         patientId: draft.patientId,
         encounterId: draft.encounterId,
-        description,
-        status,
+        noteType: draft.draftType,
+        title: draft.title,
+        body: draft.body,
         createdBy: actor.id,
-      });
-    }
-  }
+        updatedBy: actor.id,
+        createdAt: now,
+        updatedAt: now,
+      })
+      .returning();
 
-  if (draft.draftType === 'medication_administration') {
-    const body = draft.body as Record<string, unknown>;
-    const medication = typeof body.medication === 'string' ? body.medication : draft.title;
-    const doseText = typeof body.dose === 'string' ? body.dose : '—';
-    const route = typeof body.route === 'string' ? body.route : '—';
-    const doubleCheck =
-      body.doubleCheckConfirmed === true || body.doubleCheckConfirmed === 'true';
-    await db.insert(marAdministrationRecords).values({
-      patientId: draft.patientId,
-      draftId: draft.id,
-      medication,
-      doseText,
-      route,
-      doubleCheck,
+    if (!note) throw new Error('No se pudo crear nota clínica');
+
+    await tx.insert(clinicalNoteVersions).values({
+      noteId: note.id,
+      versionNo: 1,
+      title: note.title,
+      body: note.body,
       createdBy: actor.id,
     });
-  }
 
-  if (draft.draftType === 'transfer_note') {
-    const body = draft.body as Record<string, unknown>;
-    const rawBed = typeof body.targetBedId === 'string' ? body.targetBedId : '';
-    const bedId = rawBed.split('|')[0]?.trim();
-    if (bedId) {
-      const admission = await getActiveAdmission(db, draft.patientId);
-      if (admission) {
-        await transferInpatientAdmission(db, admission.id, bedId, {
-          id: actor.id,
+    await tx.insert(approvals).values({
+      draftId: draft.id,
+      noteId: note.id,
+      approvedBy: actor.id,
+    });
+
+    const [approvedDraft] = await tx
+      .update(clinicalDrafts)
+      .set({ status: 'approved', updatedAt: now, updatedBy: actor.id })
+      .where(eq(clinicalDrafts.id, draftId))
+      .returning();
+
+    if (draft.draftType === 'admission_note') {
+      const body = draft.body as Record<string, unknown>;
+      const rawBed = typeof body.targetBedId === 'string' ? body.targetBedId : '';
+      const bedId = rawBed.split('|')[0]?.trim();
+      if (bedId) {
+        await createInpatientAdmission(tx, {
+          patientId: draft.patientId,
+          bedId,
+          actorId: actor.id,
           username: actor.username,
         });
       }
     }
-  }
 
-  if (draft.draftType === 'outpatient_visit') {
-    const body = draft.body as Record<string, unknown>;
-    const shouldClose =
-      body.closeEncounter === true ||
-      body.closeEncounter === 'true';
-    if (shouldClose) {
-      const encounterFilter = draft.encounterId
-        ? and(eq(encounters.id, draft.encounterId), eq(encounters.status, 'open'))
-        : and(eq(encounters.patientId, draft.patientId), eq(encounters.status, 'open'));
-      await db
-        .update(encounters)
-        .set({ status: 'closed', endedAt: now })
-        .where(encounterFilter);
-      await appendAudit(db, {
-        eventType: 'clinical.encounter.closed',
-        actorId: actor.id,
-        username: actor.username,
-        entityType: 'encounter',
-        entityId: draft.encounterId ?? draft.patientId,
-        message: 'Cierre de episodio tras aprobación de consulta ambulatoria',
+    if (draft.draftType === 'allergy_entry') {
+      const body = draft.body as Record<string, unknown>;
+      const substance = typeof body.substance === 'string' ? body.substance.trim() : '';
+      const severity = typeof body.severity === 'string' ? body.severity : 'moderate';
+      if (substance) {
+        await tx.insert(patientAllergies).values({
+          patientId: draft.patientId,
+          substance,
+          severity,
+          createdBy: actor.id,
+        });
+      }
+    }
+
+    if (draft.draftType === 'clinical_problem_entry') {
+      const body = draft.body as Record<string, unknown>;
+      let description =
+        typeof body.description === 'string' ? body.description.trim() : draft.title;
+      const status = typeof body.status === 'string' ? body.status : 'active';
+      const category =
+        typeof body.problemCategory === 'string' ? body.problemCategory.split('|')[0] : 'active_problem';
+      if (category === 'surgical_history' && description) {
+        description = formatSurgicalHistoryDescription(description);
+      }
+      if (description) {
+        await tx.insert(problems).values({
+          patientId: draft.patientId,
+          encounterId: draft.encounterId,
+          description,
+          status,
+          createdBy: actor.id,
+        });
+      }
+    }
+
+    if (draft.draftType === 'medication_administration') {
+      const body = draft.body as Record<string, unknown>;
+      const medication = typeof body.medication === 'string' ? body.medication : draft.title;
+      const doseText = typeof body.dose === 'string' ? body.dose : '—';
+      const route = typeof body.route === 'string' ? body.route : '—';
+      const doubleCheck =
+        body.doubleCheckConfirmed === true || body.doubleCheckConfirmed === 'true';
+      await tx.insert(marAdministrationRecords).values({
+        patientId: draft.patientId,
+        draftId: draft.id,
+        medication,
+        doseText,
+        route,
+        doubleCheck,
+        createdBy: actor.id,
       });
     }
-  }
 
-  await appendAudit(db, {
-    eventType: 'clinical.draft.approved',
-    actorId: actor.id,
-    username: actor.username,
-    entityType: 'clinical_draft',
-    entityId: draftId,
-    message: `Nota ${note.id}`,
+    if (draft.draftType === 'transfer_note') {
+      const body = draft.body as Record<string, unknown>;
+      const rawBed = typeof body.targetBedId === 'string' ? body.targetBedId : '';
+      const bedId = rawBed.split('|')[0]?.trim();
+      if (bedId) {
+        const admission = await getActiveAdmission(tx, draft.patientId);
+        if (admission) {
+          await transferInpatientAdmission(tx, admission.id, bedId, {
+            id: actor.id,
+            username: actor.username,
+          });
+        }
+      }
+    }
+
+    if (draft.draftType === 'outpatient_visit') {
+      const body = draft.body as Record<string, unknown>;
+      const shouldClose =
+        body.closeEncounter === true ||
+        body.closeEncounter === 'true';
+      if (shouldClose) {
+        const encounterFilter = draft.encounterId
+          ? and(eq(encounters.id, draft.encounterId), eq(encounters.status, 'open'))
+          : and(eq(encounters.patientId, draft.patientId), eq(encounters.status, 'open'));
+        await tx
+          .update(encounters)
+          .set({ status: 'closed', endedAt: now })
+          .where(encounterFilter);
+        await appendAudit(tx, {
+          eventType: 'clinical.encounter.closed',
+          actorId: actor.id,
+          username: actor.username,
+          entityType: 'encounter',
+          entityId: draft.encounterId ?? draft.patientId,
+          message: 'Cierre de episodio tras aprobación de consulta ambulatoria',
+        });
+      }
+    }
+
+    await appendAudit(tx, {
+      eventType: 'clinical.draft.approved',
+      actorId: actor.id,
+      username: actor.username,
+      entityType: 'clinical_draft',
+      entityId: draftId,
+      message: `Nota ${note.id}`,
+    });
+
+    return { draft: approvedDraft, note };
   });
-
-  return { draft: approvedDraft, note };
 }
 
 export async function getOpenEncounter(db: Database, patientId: string) {

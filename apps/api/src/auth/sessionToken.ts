@@ -1,5 +1,5 @@
 import { SignJWT, jwtVerify } from 'jose';
-import type { ClinicalRole } from '@epis2/clinical-domain';
+import { isClinicalRole, type ClinicalRole } from '@epis2/clinical-domain';
 
 export type SessionClaims = {
   sub: string;
@@ -51,11 +51,12 @@ export async function verifySessionToken(
       typeof sub !== 'string' ||
       typeof username !== 'string' ||
       typeof displayName !== 'string' ||
-      typeof role !== 'string'
+      typeof role !== 'string' ||
+      !isClinicalRole(role)
     ) {
       return null;
     }
-    return { sub, username, displayName, role: role as ClinicalRole };
+    return { sub, username, displayName, role };
   } catch {
     return null;
   }
