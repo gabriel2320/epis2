@@ -46,3 +46,10 @@ export async function openAmbulatoryFromCommand(page: Page) {
   await expect(page).toHaveURL(/\/espacio\/ambulatorio/);
   await expect(page.getByTestId('epis2-generated-clinical-page')).toBeVisible({ timeout: 15_000 });
 }
+
+export async function clickModeSwitcher(
+  page: Page,
+  mode: 'command' | 'classic' | 'dashboard',
+) {
+  await page.getByTestId(`epis2-mode-switcher-${mode}`).click();
+}

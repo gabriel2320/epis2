@@ -1,54 +1,47 @@
 import { describe, expect, it } from 'vitest';
-import { formSearchFromCommandSlots } from '../clinical/commandFormSearch.js';
-import { DASHBOARD_TABS, parseClinicalFormSearch, parseDashboardSearch } from './clinicalNavigate.js';
+import {
+  parseClinicalPatientSearch,
+  parseCommandSearch,
+} from './clinicalNavigate.js';
 
-describe('parseClinicalFormSearch (CE-3b)', () => {
-  it('parsea patientId y slots opcionales', () => {
+describe('parseCommandSearch', () => {
+  it('parsea intent selectPatient y nextMode classic', () => {
     expect(
-      parseClinicalFormSearch({
-        patientId: 'pid-1',
-        studyHint: ' hemograma ',
-        urgencyHint: 'urgent',
-        medicationHint: 'amoxicilina',
+      parseCommandSearch({
+        intent: 'selectPatient',
+        nextMode: 'classic',
+        patientId: 'p-1',
       }),
     ).toEqual({
-      patientId: 'pid-1',
-      studyHint: 'hemograma',
-      urgencyHint: 'urgent',
-      medicationHint: 'amoxicilina',
+      intent: 'selectPatient',
+      nextMode: 'classic',
+      patientId: 'p-1',
     });
   });
 
-  it('ignora urgencyHint inválido', () => {
-    expect(parseClinicalFormSearch({ urgencyHint: 'ya' })).toEqual({});
-  });
-});
-
-describe('formSearchFromCommandSlots', () => {
-  it('serializa slots útiles para navegación', () => {
-    expect(
-      formSearchFromCommandSlots('pid-1', {
-        specialtyHint: 'cardiologia',
-      }),
-    ).toEqual({
-      patientId: 'pid-1',
-      specialtyHint: 'cardiologia',
+  it('parsea contexto de retorno y error de permiso dashboard', () => {
+    expect(parseCommandSearch({ context: 'dashboard', tab: 'work' })).toEqual({
+      context: 'dashboard',
+      tab: 'work',
+    });
+    expect(parseCommandSearch({ error: 'dashboardPermission' })).toEqual({
+      error: 'dashboardPermission',
     });
   });
 });
 
-describe('parseDashboardSearch', () => {
-  it('acepta los 12 tabs dashboard (UX-G04b)', () => {
-    for (const tab of DASHBOARD_TABS) {
-      expect(parseDashboardSearch({ tab }).tab).toBe(tab);
-    }
-  });
-
-  it('fallback a work cuando tab inválido', () => {
-    expect(parseDashboardSearch({ tab: 'invalid' }).tab).toBe('work');
-  });
-
-  it('preserva patientId', () => {
-    expect(parseDashboardSearch({ tab: 'icu', patientId: 'pid-1' }).patientId).toBe('pid-1');
+describe('parseClinicalPatientSearch', () => {
+  it('parsea mode classic y returnTo dashboard', () => {
+    expect(
+      parseClinicalPatientSearch({
+        patientId: 'p-2',
+        mode: 'classic',
+        returnTo: 'dashboard',
+      }),
+    ).toEqual({
+      patientId: 'p-2',
+      mode: 'classic',
+      returnTo: 'dashboard',
+    });
   });
 });

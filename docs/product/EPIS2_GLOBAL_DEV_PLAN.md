@@ -72,20 +72,23 @@ Precedencia: Fase B palette + búsqueda → `dashboard-pharmacy` `migration: don
 
 `layers-integration-gate` ✓ — ya no bloquea scaffold J; bloquea **piloto producción** farmacia.
 
-### Fase E — Tres modos MD3 (**activa** 2026-06-04)
+### Fase UX-1 — Tres modos MD3 / **EPIS2-PM-01** (**cerrada** 2026-06-04)
 
-Consolidación orquestación Command · Classic · Dashboard sobre un árbol `modes/`.
+Programa **PROG-THREE-MODES** — orquestación Command · Classic · Dashboard sobre `modes/`.
 
 - [x] MF-THREE-MODES-01 — switcher, session, guards, transiciones
-- [x] MF-THREE-MODES-02 — `episModeSearch`, `episModeRuntime`, shims, sesión conectada
-- [ ] MF-THREE-MODES-03 — modal borrador no guardado
-- [ ] MF-THREE-MODES-04 — search params tipados en router
-- [ ] MF-THREE-MODES-05 — dashboard fila → classic con returnTo
-- [ ] MF-THREE-MODES-06 — migración imports → `modes/index`
-- [ ] MF-THREE-MODES-07 — E2E Playwright three-modes
+- [x] MF-THREE-MODES-02 — `episModeSearch`, `episModeRuntime`, sesión conectada
+- [x] MF-THREE-MODES-03 — modal borrador no guardado
+- [x] MF-THREE-MODES-04 — search params tipados en router
+- [x] MF-THREE-MODES-05 — dashboard → classic con returnTo
+- [x] MF-THREE-MODES-06 — migración imports → `modes/index`
+- [x] MF-THREE-MODES-07 — E2E Playwright three-modes
+- [x] MF-THREE-MODES-08 — shims eliminados
 
 Docs: `docs/architecture/EPIS2_MODES_LAYER.md` · `docs/product/EPIS2_THREE_MODES_DEV_PLAN.md`  
-Gates: `quality:three-modes-gate` · no contradice invariantes #6–7.
+Gates: `npm run quality:pm01` (PM01-A…E) · E2E en CI vía `test:e2e` (incl. `three-modes-journey`).
+
+> **No confundir:** ~~Fase E~~ con **Tramo E** (pabellón) ni **EPIS2-13** (Hospitalización V2).
 
 ---
 
@@ -99,8 +102,7 @@ Gates: `quality:three-modes-gate` · no contradice invariantes #6–7.
 | MF-RAD-M3-A | Grids dashboard + acordeones | grid-surface + form-collapse |
 | MF-CLINICAL-PRODUCTIVITY | Wrappers utilitarios | clinical-productivity-gate |
 | MF-LAYERS-INTEGRATION | Meta L3+L4+L5 | layers-integration-gate |
-| MF-THREE-MODES-01/02 | Orquestación + consolidación modos | three-modes-gate ✓ |
-| MF-THREE-MODES-03…07 | Seguridad transiciones + E2E | three-modes-gate (extend) |
+| MF-THREE-MODES-01…08 | Orquestación tres modos (EPIS2-PM-01) | `quality:pm01` ✓ |
 | MF-UI-05 | Form acordeones | form-collapse-gate ✓ |
 | MF-UI-06 | Grillas vs cards | grid-surface-gate ✓ |
 

@@ -2,17 +2,17 @@ import { copy } from '@epis2/design-system';
 import { EpisButton, Stack, Typography } from '@epis2/epis2-ui';
 import { useState } from 'react';
 import {
-  loadClassicUserPreferences,
+  loadEpisModePreferences,
   setDefaultPatientView,
   type ClassicPatientViewMode,
-} from '../../classic-md3/userPreferences.js';
+} from '../../modes/index.js';
 import { useClinicalNavigate } from '../../routes/clinicalNavigate.js';
 
 /** Preferencia de vista paciente — modo clásico vs moderno. */
 export function ClassicMd3PreferencesSection() {
   const navigate = useClinicalNavigate();
   const [view, setView] = useState<ClassicPatientViewMode>(
-    () => loadClassicUserPreferences().defaultPatientView,
+    () => loadEpisModePreferences().defaultPatientView,
   );
 
   const selectView = (mode: ClassicPatientViewMode) => {

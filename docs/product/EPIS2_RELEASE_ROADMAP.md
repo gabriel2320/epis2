@@ -227,6 +227,7 @@ IA desconectada = producto usable; con IA = trazabilidad `ai_runs` + fuentes cit
 | EPIS2-10 | Servicio Ollama | V0 |
 | EPIS2-11 | Documentos, OCR y RAG *(plan)* | V1 prep |
 | **EPIS2-12** | **Modo tablero básico** | **V0 gate** |
+| **EPIS2-PM-01** | **Tres modos MD3 (PROG-THREE-MODES)** | **Post-MVP UX** (paralelo a V2+) |
 | EPIS2-13 | Hospitalización | V2 |
 | EPIS2-14 | Enfermería y farmacia | V3 |
 | EPIS2-15 | FHIR e interoperabilidad | V4 |

@@ -9,6 +9,7 @@ import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { useDraftsQuery } from '../query/hooks/useDraftsQuery.js';
 import { queryKeys } from '../query/queryKeys.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
+import { useEpisSession } from '../session/EpisSessionContext.js';
 
 type ActivityRow = {
   id: string;
@@ -37,6 +38,7 @@ function patientLabelFor(draft: ClinicalDraftSummary, recentNames: Map<string, s
 /** Continuar trabajo — lista compacta bajo /comando (MF-UI-DENSITY, máx. 5 filas). */
 export function CommandCenterRecentActivity() {
   const navigate = useClinicalNavigate();
+  const { openDashboardMode } = useEpisSession();
   const { patient: activePatient } = useActivePatient();
   const recentPatients = readRecentPatients();
   const maxRows = COMMAND_CENTER_DENSITY.maxContinueWorkRows;
@@ -78,7 +80,7 @@ export function CommandCenterRecentActivity() {
       patientLabel: activePatient?.displayName ?? copy.commandCenter.recentActivityPatientFallback,
       atLabel: copy.commandCenter.recentActivityNow,
       badge: copy.commandCenter.suggestionBadgePending,
-      onClick: () => void navigate({ to: '/epis2/dashboard' }),
+      onClick: () => openDashboardMode('work'),
     });
   }
 
@@ -98,7 +100,7 @@ export function CommandCenterRecentActivity() {
           role="labelMedium"
           component="button"
           color="primary"
-          onClick={() => void navigate({ to: '/epis2/dashboard' })}
+          onClick={() => openDashboardMode('work')}
           sx={{ border: 0, bgcolor: 'transparent', cursor: 'pointer', p: 0, font: 'inherit' }}
         >
           {copy.commandCenter.recentCommandActivityViewAll}

@@ -1,7 +1,7 @@
 # EPIS2 — Inventario navegación tres modos (FASE 0)
 
 **Fecha:** 2026-06-08  
-**Microfase:** MF-THREE-MODES-ORCHESTRATION
+**Microfase:** MF-THREE-MODES-01 (alias histórico: ~~MF-THREE-MODES-ORCHESTRATION~~)
 
 ## Rutas canónicas
 

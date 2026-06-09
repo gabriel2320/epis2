@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { useAuth } from '../../auth/AuthContext.js';
 import { useActivePatient } from '../../clinical/ActivePatientContext.js';
 import { useClinicalNavigate } from '../../routes/clinicalNavigate.js';
+import { useEpisSession } from '../../session/EpisSessionContext.js';
 import { useAiStatusQuery } from '../../query/hooks/useAiStatusQuery.js';
 import { resolvePatientChartTabId, type PatientChartTabId } from '../../clinical/patientChartNavigation.js';
 import {
@@ -59,6 +60,7 @@ export function ClassicMd3WorkspaceLayout({
   draftStatusLabel,
 }: ClassicMd3WorkspaceLayoutProps) {
   const navigate = useClinicalNavigate();
+  const { openCommandCenter } = useEpisSession();
   const { session } = useAuth();
   const { patient } = useActivePatient();
   const { aiAvailable } = useAiStatusQuery();
@@ -102,7 +104,7 @@ export function ClassicMd3WorkspaceLayout({
           roleLabel={roleLabel}
           serviceLabel={copy.demoBadge}
           timestampLabel={new Date().toLocaleString('es-CL')}
-          onBackToCommand={() => void navigate({ to: '/comando' })}
+          onBackToCommand={() => openCommandCenter(patientId)}
           {...(onOpenCommandPalette ? { onOpenCommandPalette } : {})}
         />
       }

@@ -28,8 +28,18 @@ if (routerSrc.match(/path:\s*'\/espacio\/classic'/)) {
   errors.push('No crear router paralelo /espacio/classic');
 }
 
-const prefsPath = join(root, 'apps/web/src/classic-md3/userPreferences.ts');
-if (!existsSync(prefsPath)) errors.push('Falta userPreferences defaultPatientView');
+const prefsPath = join(root, 'apps/web/src/modes/episModePreferences.ts');
+if (!existsSync(prefsPath)) errors.push('Falta episModePreferences (defaultPatientView)');
+
+const deprecatedShims = [
+  'apps/web/src/classic-md3/useClassicMd3Mode.ts',
+  'apps/web/src/classic-md3/userPreferences.ts',
+];
+for (const rel of deprecatedShims) {
+  if (existsSync(join(root, rel))) {
+    errors.push(`Shim deprecated aún presente: ${rel} (MF-THREE-MODES-08)`);
+  }
+}
 
 const visualDir = join(root, 'apps/web/src/components/classic-md3');
 for (const file of [

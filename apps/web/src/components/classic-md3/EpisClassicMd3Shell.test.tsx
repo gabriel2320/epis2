@@ -4,6 +4,10 @@
 import { copy } from '@epis2/design-system';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+
+vi.mock('../modes/EpisModeSwitcher.js', () => ({
+  EpisModeSwitcher: () => null,
+}));
 import { EpisClassicMd3CommandBar } from './EpisClassicMd3CommandBar.js';
 import { EpisClassicMd3PatientHeader } from './EpisClassicMd3PatientHeader.js';
 import { EpisClassicMd3Shell } from './EpisClassicMd3Shell.js';

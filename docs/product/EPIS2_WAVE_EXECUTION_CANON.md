@@ -267,27 +267,29 @@ Estado real:          Active — no cerrada clínicamente
 
 ---
 
-## 14. Programa UX THREE-MODES (EPIS2-13 / Fase E plan global)
+## 14. Programa PROG-THREE-MODES (EPIS2-PM-01 / Fase UX-1)
 
-**No confundir** con Tramo E (pabellón §9). Es orquestación transversal Command · Classic · Dashboard.
+**No confundir** con **Tramo E** (pabellón §9) ni **EPIS2-13** (Hospitalización V2).
 
-| Campo | Valor |
-|-------|-------|
-| **Fase roadmap** | EPIS2-13 |
-| **Fase plan global** | Fase E — `EPIS2_GLOBAL_DEV_PLAN.md` |
-| **Ola clínica** | Transversal — no bloquea Tramo A–D |
-| **Milestone 1A+** | Extiende shell sin cambiar home |
-| **Estado (2026-06-04)** | MF-01/02 **Done** · MF-03…07 **Ready** |
+| Campo | ID canónico |
+|-------|-------------|
+| Roadmap post-MVP | **EPIS2-PM-01** |
+| Plan global | **Fase UX-1** — `EPIS2_GLOBAL_DEV_PLAN.md` |
+| Microfases | **MF-THREE-MODES-01…08** |
+| Ola clínica | Transversal — no bloquea Tramo A–D |
+| Estado (2026-06-04) | MF-THREE-MODES-01/02 **Done** · 03…07 **Ready** |
 
 ```text
-MF-CLASSIC-EMR-MD3 ──┐
-MF-DASHBOARD-MD3 ────┼──► MF-THREE-MODES-01 (orquestación) ──► MF-02 (consolidación modes/)
-                       │                                              │
-                       └──────────────────────────────────────────────┘
-                                         MF-03…07 (seguridad + E2E)
+MF-CLASSIC-MD3 ──────┐
+MF-DASHBOARD-MD3 ────┼──► MF-THREE-MODES-01 ──► MF-THREE-MODES-02 (modes/)
+                       │                              │
+                       └──────────────────────────────┘
+                                         MF-THREE-MODES-03…07
 ```
 
-**Gates:** `quality:three-modes-gate` · `QUALITY_GATES.md` § EPIS2-13.
+**Gates:** `QUALITY_GATES.md` § EPIS2-PM-01 (PM01-A…E) · `quality:three-modes-gate`.
+
+Nomenclatura completa: [`EPIS2_THREE_MODES_DEV_PLAN.md`](./EPIS2_THREE_MODES_DEV_PLAN.md) § tabla canónica.
 
 **Artefactos:** `apps/web/src/modes/` · `docs/architecture/EPIS2_MODES_LAYER.md`.
 
@@ -298,5 +300,5 @@ MF-DASHBOARD-MD3 ────┼──► MF-THREE-MODES-01 (orquestación) ─�
 - Árbol reconciliado: [`EPIS2_RECONCILED_NAVIGATION_TREE.md`](../architecture/EPIS2_RECONCILED_NAVIGATION_TREE.md)
 - Workspaces MD3: [`EPIS2_ROLE_WORKSPACES_M3.md`](../design/EPIS2_ROLE_WORKSPACES_M3.md)
 - Journeys: [`GOLDEN_CLINICAL_JOURNEY.md`](../quality/GOLDEN_CLINICAL_JOURNEY.md)
-- Tres modos UX: [`EPIS2_THREE_MODES_DEV_PLAN.md`](./EPIS2_THREE_MODES_DEV_PLAN.md) · [`EPIS2_MODES_LAYER.md`](../architecture/EPIS2_MODES_LAYER.md)
+- Tres modos UX: [`EPIS2_THREE_MODES_DEV_PLAN.md`](./EPIS2_THREE_MODES_DEV_PLAN.md) (**EPIS2-PM-01**) · [`EPIS2_MODES_LAYER.md`](../architecture/EPIS2_MODES_LAYER.md)
 - Reporte revisión: [`reports/epis2-wave-execution-canon-v1.md`](../../reports/epis2-wave-execution-canon-v1.md)

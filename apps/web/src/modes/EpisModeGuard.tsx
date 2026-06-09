@@ -1,10 +1,11 @@
 import { useEffect, type ReactNode } from 'react';
 import { useRouterState } from '@tanstack/react-router';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
-import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
+import { useClinicalNavigate, type CommandSearch } from '../routes/clinicalNavigate.js';
 import { useAuth } from '../auth/AuthContext.js';
 import { canOpenMode } from './episModeGuards.js';
 import { resolveActiveMode } from './episModes.js';
+import { EPIS_SELECT_PATIENT_FOR_CLASSIC } from './episModeSearch.js';
 
 export type EpisModeGuardProps = {
   children: ReactNode;
@@ -41,7 +42,7 @@ export function EpisModeGuard({
     if (enforceClassicPatient && activeMode === 'classic' && !patient?.id) {
       void navigate({
         to: '/comando',
-        search: { intent: 'selectPatient', nextMode: 'classic' } as never,
+        search: EPIS_SELECT_PATIENT_FOR_CLASSIC satisfies CommandSearch,
       });
       return;
     }
@@ -55,7 +56,7 @@ export function EpisModeGuard({
       if (!ok) {
         void navigate({
           to: '/comando',
-          search: { error: 'dashboardPermission' } as never,
+          search: { error: 'dashboardPermission' } satisfies CommandSearch,
         });
       }
     }

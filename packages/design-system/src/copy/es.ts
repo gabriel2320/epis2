@@ -263,6 +263,12 @@ export const copy = {
     currentMode: 'Modo actual',
     openDashboard: 'Abrir dashboard de turno',
     continuePatient: 'Continuar último paciente',
+    unsavedTitle: 'Cambiar de modo sin guardar',
+    unsavedBody:
+      'Hay un borrador o formulario con cambios sin guardar. Si cambias de modo ahora, podrías perder trabajo en curso.',
+    unsavedConfirm: 'Cambiar de modo',
+    unsavedCancel: 'Seguir editando',
+    selectPatientForClassic: 'Selecciona un paciente para abrir la ficha clásica',
   },
   schedulerSpike: {
     title: 'Spike Scheduler (MUI-10)',

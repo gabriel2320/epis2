@@ -1,6 +1,6 @@
 # EPIS2 — Modo Classic EMR Material Design 3
 
-**Microfase:** MF-CLASSIC-EMR-MD3 · **Estado:** Canónico (vista alternativa; `/comando` intacto)
+**Microfase:** MF-CLASSIC-MD3 · **Estado:** Canónico (vista alternativa; `/comando` intacto)
 
 ## Los tres modos de EPIS2
 

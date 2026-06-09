@@ -1,6 +1,6 @@
-# MF-THREE-MODES — Consolidación de árboles de modo
+# MF-THREE-MODES-02 — Consolidación de árboles de modo
 
-**Fecha:** 2026-06-08  
+**Programa:** PROG-THREE-MODES · **Roadmap:** EPIS2-PM-01 · **Fecha:** 2026-06-08  
 **Alcance:** Unificar detección de modo, search helpers, preferencias y navegación.
 
 ## Problema
@@ -61,5 +61,5 @@ npm run db:validate
 
 ## Próximo paso
 
-Plan formal: [`docs/product/EPIS2_THREE_MODES_DEV_PLAN.md`](../docs/product/EPIS2_THREE_MODES_DEV_PLAN.md).  
-Siguiente microfase: **MF-THREE-MODES-03** (modal borrador) → **05** (dashboard fila → classic) → **07** (E2E).
+Plan formal: [`docs/product/EPIS2_THREE_MODES_DEV_PLAN.md`](../docs/product/EPIS2_THREE_MODES_DEV_PLAN.md) (**EPIS2-PM-01**).  
+Siguiente microfase: **MF-THREE-MODES-03** → **05** → **07**.

@@ -20,8 +20,8 @@ import type { EpisClinicalWorkspaceId, EpisNavigationRailItem } from '@epis2/epi
 import { useRouterState } from '@tanstack/react-router';
 import type { ReactNode } from 'react';
 import { useAuth } from '../auth/AuthContext.js';
-import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
-import type { ClinicalNavigateOptions } from '../routes/clinicalNavigate.js';
+import { useClinicalNavigate, type ClinicalNavigateOptions } from '../routes/clinicalNavigate.js';
+import { useEpisSession } from '../session/EpisSessionContext.js';
 import {
   CLINICAL_WORKSPACE_ORDER,
   getClinicalWorkspaceDefinition,
@@ -97,6 +97,7 @@ export function useEpis2NavigationRailItems(): EpisNavigationRailItem[] {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const searchStr = useRouterState({ select: (s) => s.location.searchStr });
   const { activeWorkspace, setWorkspace, canUseWorkspace } = useClinicalWorkspace();
+  const { openDashboardMode } = useEpisSession();
 
   const isAgenda = pathname.startsWith('/epis2/dashboard');
   const isSearch =
@@ -112,7 +113,7 @@ export function useEpis2NavigationRailItems(): EpisNavigationRailItem[] {
           label: copy.patientChart.rail.workspaces,
           icon: <DashboardIcon />,
           active: false,
-          onClick: () => void navigate({ to: '/epis2/dashboard', search: { tab: 'work' } }),
+          onClick: () => openDashboardMode('work'),
           'data-testid': 'epis2-nav-workspaces',
         },
       ]
@@ -145,7 +146,7 @@ export function useEpis2NavigationRailItems(): EpisNavigationRailItem[] {
             label: copy.patientChart.rail.agenda,
             icon: <CalendarMonthIcon />,
             active: isAgenda,
-            onClick: () => void navigate({ to: '/epis2/dashboard', search: { tab: 'work' } }),
+            onClick: () => openDashboardMode('work'),
             'data-testid': 'epis2-nav-agenda',
           },
           {

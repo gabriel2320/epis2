@@ -13,7 +13,8 @@ import {
 } from '@epis2/epis2-ui';
 import { ClassicMd3WorkspaceLayout } from '../components/classic-md3/ClassicMd3WorkspaceLayout.js';
 import { EpisClassicMd3SplitPane } from '../components/classic-md3/EpisClassicMd3SplitPane.js';
-import { useClassicMd3Mode } from '../classic-md3/useClassicMd3Mode.js';
+import { useClassicMd3Mode } from '../modes/index.js';
+import { useEpisSession } from '../session/EpisSessionContext.js';
 import { classicCommandSuggestionLabels } from '../classic-md3/commandSuggestions.js';
 import { useClinicalCommandSubmit } from '../clinical/useClinicalCommandSubmit.js';
 import { useCommandResolveContext } from '../clinical/useCommandResolveContext.js';
@@ -38,6 +39,7 @@ import { CommandConfirmationDialog } from '../components/CommandConfirmationDial
 export function PatientWorkspacePage() {
   const search = useSearch({ strict: false }) as { patientId?: string; mode?: string };
   const navigate = useClinicalNavigate();
+  const { openDashboardMode } = useEpisSession();
   const isClassicMode = useClassicMd3Mode();
   const { patient: active, setPatient } = useActivePatient();
   const [alertBlueprintId, setAlertBlueprintId] = useState<string | undefined>();
@@ -118,12 +120,9 @@ export function PatientWorkspacePage() {
       void navigate({ to: '/espacio/traslado', search: { patientId: patientId! } }),
     onNursingNote: () =>
       void navigate({ to: '/espacio/enfermeria', search: { patientId: patientId! } }),
-    onOpenServiceOrders: () =>
-      void navigate({ to: '/epis2/dashboard', search: { tab: 'service', patientId: patientId! } }),
-    onOpenServiceCensus: () =>
-      void navigate({ to: '/epis2/dashboard', search: { tab: 'service', patientId: patientId! } }),
-    onOpenNursingMar: () =>
-      void navigate({ to: '/epis2/dashboard', search: { tab: 'nursing', patientId: patientId! } }),
+    onOpenServiceOrders: () => openDashboardMode('service'),
+    onOpenServiceCensus: () => openDashboardMode('service'),
+    onOpenNursingMar: () => openDashboardMode('nursing'),
   };
 
   if (!patientId) {

@@ -1,7 +1,6 @@
 # EPIS2 — Modo Dashboard Material Design 3
 
-**Microfase:** MF-DASHBOARD-MD3-AI-DESIGN-AGENTS  
-**Estado:** Canónico como tercer modo (junto Command Center y Classic EMR)
+**Microfase:** MF-DASHBOARD-MD3 · **Estado:** Canónico como tercer modo (junto Command Center y Classic EMR)
 
 ## Los tres modos de EPIS2
 

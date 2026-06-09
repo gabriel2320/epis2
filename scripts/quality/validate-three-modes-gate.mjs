@@ -25,6 +25,26 @@ for (const f of required) {
 const routerSrc = readFileSync(join(root, 'apps/web/src/routes/router.tsx'), 'utf8');
 const mainSrc = readFileSync(join(root, 'apps/web/src/main.tsx'), 'utf8');
 if (!routerSrc.includes("path: '/comando'")) errors.push('/comando debe ser home');
+if (!routerSrc.includes('parseCommandSearch')) {
+  errors.push('router /comando debe validar search con parseCommandSearch');
+}
+if (!routerSrc.includes('parseClinicalPatientSearch')) {
+  errors.push('router /espacio/ficha debe validar search con parseClinicalPatientSearch');
+}
+if (!existsSync(join(root, 'e2e/three-modes-journey.spec.ts'))) {
+  errors.push('Falta e2e/three-modes-journey.spec.ts (MF-THREE-MODES-07)');
+}
+
+const deprecatedShims = [
+  'apps/web/src/classic-md3/useClassicMd3Mode.ts',
+  'apps/web/src/classic-md3/userPreferences.ts',
+  'apps/web/src/dashboard-md3/useDashboardMd3Mode.ts',
+];
+for (const rel of deprecatedShims) {
+  if (existsSync(join(root, rel))) {
+    errors.push(`Shim deprecated presente: ${rel} — usar modes/index (MF-THREE-MODES-08)`);
+  }
+}
 if (!mainSrc.includes('EpisSessionProvider')) errors.push('main.tsx debe montar EpisSessionProvider');
 
 if (errors.length) {

@@ -1,8 +1,26 @@
 # EPIS2 — Plan de desarrollo: tres modos MD3
 
-**Versión:** 1.0 · **Fecha:** 2026-06-04  
+**Versión:** 1.1 · **Fecha:** 2026-06-04  
 **Precedencia:** post MF-151…182 · paralelo a Fase C longitudinal  
 **Canon:** [`PRODUCT_INVARIANTS.md`](PRODUCT_INVARIANTS.md) · [`EPIS2_GLOBAL_DEV_PLAN.md`](EPIS2_GLOBAL_DEV_PLAN.md)
+
+> **Fuente única de nomenclatura** del programa tres modos. Evitar alias sueltos (`Fase E`, `EPIS2-13`, `MF-01`).
+
+---
+
+## Tabla de nomenclatura (canónica)
+
+| Capa | ID canónico | Nombre | No usar (conflicto) |
+|------|-------------|--------|---------------------|
+| Roadmap post-MVP | **EPIS2-PM-01** | Tres modos MD3 | ~~EPIS2-13~~ → reservado a **Hospitalización V2** |
+| Plan global (hilo Q2) | **Fase UX-1** | Orquestación tres modos | ~~Fase E~~ → **Tramo E** = pabellón |
+| Programa | **PROG-THREE-MODES** | MF-THREE-MODES-01…08 | ~~MF-THREE-MODES-ORCHESTRATION~~ |
+| Prerrequisito shell | **MF-CLASSIC-MD3** | Classic EMR MD3 | alias reporte: MF-CLASSIC-EMR-MD3 |
+| Prerrequisito shell | **MF-DASHBOARD-MD3** | Dashboard MD3 | alias reporte: MF-DASHBOARD-MD3-AI-DESIGN-AGENTS |
+| Quality gates | **PM01-A…E** | Ver `QUALITY_GATES.md` § EPIS2-PM-01 | ~~13-A…E~~ |
+| Reporte cierre MF | `reports/epis2-mf-three-modes-NN-<slug>.md` | NN = 01…08 | ~~epis2-three-modes-*~~ salvo auditorías |
+
+**Numeración MVP (`ROADMAP.md`):** EPIS2-00…**12** cerradas. EPIS2-**13** en [`EPIS2_RELEASE_ROADMAP.md`](EPIS2_RELEASE_ROADMAP.md) = **Hospitalización (V2)** — eje distinto.
 
 ---
 
@@ -20,20 +38,20 @@ Arquitectura: [`EPIS2_MODES_LAYER.md`](../architecture/EPIS2_MODES_LAYER.md)
 
 ---
 
-## Microfases (programa THREE-MODES)
+## Microfases (PROG-THREE-MODES)
 
 | ID | Título | Estado | Depende de |
 |----|--------|--------|------------|
-| **MF-THREE-MODES-01** | Orquestación login → command → classic → dashboard | **DONE** | MF-CLASSIC-EMR-MD3, MF-DASHBOARD-MD3 |
-| **MF-THREE-MODES-02** | Consolidación árbol `modes/` + shims + sesión | **DONE** | MF-THREE-MODES-01 |
-| **MF-THREE-MODES-03** | Modal borrador no guardado en transiciones | **READY** | MF-THREE-MODES-02 |
-| **MF-THREE-MODES-04** | Search params tipados (`intent`, `returnTo`, `nextMode`) | **READY** | MF-THREE-MODES-02 |
-| **MF-THREE-MODES-05** | Dashboard fila → `transitionDashboardToClassic` | **READY** | MF-THREE-MODES-02 |
-| **MF-THREE-MODES-06** | Migrar imports legacy → `modes/index` | **READY** | MF-THREE-MODES-02 |
-| **MF-THREE-MODES-07** | Journey E2E Playwright three-modes | **READY** | MF-THREE-MODES-03, 05 |
-| **MF-THREE-MODES-08** | Eliminar shims deprecated | **BLOCKED** | MF-THREE-MODES-06 |
+| **MF-THREE-MODES-01** | Orquestación login → command → classic → dashboard | **DONE** | MF-CLASSIC-MD3, MF-DASHBOARD-MD3 |
+| **MF-THREE-MODES-02** | Consolidación árbol `modes/` + sesión | **DONE** | MF-THREE-MODES-01 |
+| **MF-THREE-MODES-03** | Modal borrador no guardado en transiciones | **DONE** | MF-THREE-MODES-02 |
+| **MF-THREE-MODES-04** | Search params tipados (`intent`, `returnTo`, `nextMode`) | **DONE** | MF-THREE-MODES-02 |
+| **MF-THREE-MODES-05** | Dashboard → `transitionDashboardToClassic` | **DONE** | MF-THREE-MODES-02 |
+| **MF-THREE-MODES-06** | Migrar imports legacy → `modes/index` | **DONE** | MF-THREE-MODES-02 |
+| **MF-THREE-MODES-07** | Journey E2E Playwright three-modes | **DONE** | MF-THREE-MODES-03, 05 |
+| **MF-THREE-MODES-08** | Eliminar shims deprecated | **DONE** | MF-THREE-MODES-06 |
 
-Reportes de cierre: `reports/epis2-three-modes-*.md`
+Reportes históricos: `reports/epis2-three-modes-*.md` · cierres nuevos: `reports/epis2-mf-three-modes-NN-*.md`
 
 ---
 
@@ -54,7 +72,7 @@ packages/design-system/src/copy/es.ts        (copy modal)
 
 - [ ] Hook `useUnsavedDraftGuard()` consulta borrador activo
 - [ ] Modal confirmación antes de `setActiveMode` / switcher
-- [ ] Gate `quality:mode-safety-gate` extendido
+- [ ] Gate `quality:mode-safety-gate` extendido (PM01-E)
 
 **Gates:** `npm run check` · `quality:three-modes-gate` · tests unitarios guard
 
@@ -92,12 +110,14 @@ apps/web/src/modes/episModeSearch.ts
 apps/web/src/components/dashboard-md3/EpisDashboardMd3MainGrid.tsx
 apps/web/src/components/dashboard-md3/EpisDashboardMd3DetailPane.tsx
 apps/web/src/dashboard/DashboardModeContent.tsx
+apps/web/src/session/EpisSessionContext.tsx   (transiciones cruzadas)
 ```
 
 **Entregables:**
 
 - [ ] `transitionDashboardToClassic(navigate, patientId, tab)` en handlers de fila
 - [ ] Detail pane CTA «Abrir modo clásico» con tab activo en returnTo
+- [ ] `setActiveMode` ramifica classic↔dashboard (no solo vía command)
 - [ ] Test unitario transición
 
 ---
@@ -134,22 +154,24 @@ apps/web/src/dashboard/DashboardModeContent.tsx      ✓ parcial
 
 **Artefacto:** `e2e/three-modes-journey.spec.ts` · screenshots en `reports/screenshots/three-modes/`
 
+**Gate cierre EPIS2-PM-01:** PM01-A…E + este journey.
+
 ---
 
 ## Integración con plan global
 
 | Plan global | Relación |
 |-------------|----------|
+| **Fase UX-1** (`EPIS2_GLOBAL_DEV_PLAN.md`) | Este programa — marcar cerrada al completar MF-07 |
 | **Fase C** longitudinal | Classic/detail pane comparte paciente activo — no bloquear |
 | **Fase D** Tramo J farmacia | Dashboard pharmacy tab usa `buildDashboardTabSearch` |
 | **MF-RAD-M3** | Grids dashboard legacy y MD3 comparten datos; modo solo cambia shell |
 | **Golden journey** | Paso 1–5 sin cambio; modos son atajos opcionales post-login |
-
-Actualizar [`EPIS2_GLOBAL_DEV_PLAN.md`](EPIS2_GLOBAL_DEV_PLAN.md) Fase E al cerrar MF-THREE-MODES-07.
+| **EPIS2-13** (RELEASE) | Hospitalización V2 — **sin dependencia** con PROG-THREE-MODES |
 
 ---
 
-## Definition of Done (cada microfase THREE-MODES)
+## Definition of Done (cada microfase)
 
 ```bash
 npm run check
@@ -158,7 +180,7 @@ npm run quality:three-modes-gate
 npm run db:validate
 ```
 
-Reporte `reports/epis2-mf-three-modes-XX-*.md` con alcance, gates, riesgos, próximo paso.
+Reporte `reports/epis2-mf-three-modes-NN-<slug>.md` con alcance, gates, riesgos, próximo paso.
 
 ---
 
@@ -168,12 +190,13 @@ Reporte `reports/epis2-mf-three-modes-XX-*.md` con alcance, gates, riesgos, pró
 |---|--------|------------|
 | 1 | Dashboard compite con home | Invariante #7 + copy + gates |
 | 2 | Tres árboles de detección reviven | Solo `modes/` + code review |
-| 3 | Navegación directa bypass session | Lint/gate: prohibir `navigate({ to: '/comando' })` en shells MD3 |
+| 3 | Navegación directa bypass session | MF-06: sesión o `navigateToMode` |
 | 4 | Preferencia classic por defecto | Default `modern`; opt-in explícito |
 | 5 | E2E flaky por timing session | `data-testid` en switcher + wait URL |
+| 6 | Colisión EPIS2-13 / Fase E | Usar solo IDs de la tabla § nomenclatura |
 
 ---
 
 ## Frase guía
 
-> EPIS2 tiene tres modos, pero una sola mente — el plan THREE-MODES cierra deuda de orquestación sin tocar SoT ni registries clínicos.
+> EPIS2 tiene tres modos, pero una sola mente — PROG-THREE-MODES cierra deuda de orquestación sin tocar SoT ni registries clínicos.

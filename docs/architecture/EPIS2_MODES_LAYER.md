@@ -151,7 +151,7 @@ Tests: `apps/web/src/modes/*.test.ts`
 | Documento | Rol |
 |-----------|-----|
 | [`EPIS2_THREE_MODES_ORCHESTRATION.md`](../design/EPIS2_THREE_MODES_ORCHESTRATION.md) | Comportamiento UX + transiciones |
-| [`EPIS2_THREE_MODES_DEV_PLAN.md`](../product/EPIS2_THREE_MODES_DEV_PLAN.md) | Roadmap microfases post-consolidación |
+| [`EPIS2_THREE_MODES_DEV_PLAN.md`](../product/EPIS2_THREE_MODES_DEV_PLAN.md) | Nomenclatura canónica · MF-03…08 · **EPIS2-PM-01** |
 | [`EPIS2_DASHBOARD_MD3_MODE.md`](../design/EPIS2_DASHBOARD_MD3_MODE.md) | Modo dashboard |
 | [`EPIS2_CLASSIC_EMR_MD3_MODE.md`](../design/EPIS2_CLASSIC_EMR_MD3_MODE.md) | Modo classic |
 | [`PRODUCT_INVARIANTS.md`](../product/PRODUCT_INVARIANTS.md) | #6 home, #7 no dashboard home |

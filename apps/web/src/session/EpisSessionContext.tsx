@@ -8,7 +8,11 @@ import {
 } from 'react';
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
-import type { DashboardTab } from '../routes/clinicalNavigate.js';
+import {
+  DASHBOARD_TAB_SET,
+  type CommandSearch,
+  type DashboardTab,
+} from '../routes/clinicalNavigate.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import {
   canOpenMode,
@@ -18,13 +22,15 @@ import {
 import {
   useEpisActiveMode,
   useEpisModePreferences,
-} from '../modes/episModeRuntime.js';
+} from '../modes/index.js';
 import { EPIS_SELECT_PATIENT_FOR_CLASSIC } from '../modes/episModeSearch.js';
 import { EPIS_MODE_DEFINITIONS, type EpisMode } from '../modes/episModes.js';
 import {
   transitionClassicToCommand,
+  transitionClassicToDashboard,
   transitionCommandToClassic,
   transitionCommandToDashboard,
+  transitionDashboardToClassic,
   transitionDashboardToCommand,
 } from '../modes/modeTransitions.js';
 
@@ -46,7 +52,7 @@ type EpisSessionContextValue = {
   setActiveMode: (mode: EpisMode) => void;
   setLastDashboardTab: (tab: DashboardTab) => void;
   openCommandCenter: (patientId?: string) => void;
-  openClassicMode: (patientId?: string) => void;
+  openClassicMode: (patientId?: string, fromDashboardTab?: DashboardTab) => void;
   openDashboardMode: (tab?: DashboardTab) => void;
   returnToPreviousMode: () => void;
 };
@@ -56,13 +62,17 @@ const EpisSessionContext = createContext<EpisSessionContextValue | null>(null);
 function readLastDashboardTab(): DashboardTab {
   try {
     const raw = sessionStorage.getItem(LAST_DASHBOARD_TAB_KEY);
-    if (raw === 'work' || raw === 'patient' || raw === 'service' || raw === 'pharmacy') {
-      return raw;
+    if (raw && DASHBOARD_TAB_SET.has(raw)) {
+      return raw as DashboardTab;
     }
   } catch {
     /* ignore */
   }
   return 'work';
+}
+
+function selectPatientSearch(): CommandSearch {
+  return { ...EPIS_SELECT_PATIENT_FOR_CLASSIC };
 }
 
 export function EpisSessionProvider({ children }: { children: ReactNode }) {
@@ -106,8 +116,62 @@ export function EpisSessionProvider({ children }: { children: ReactNode }) {
     sessionStorage.setItem(LAST_DASHBOARD_TAB_KEY, tab);
   }, []);
 
+  const openCommandCenter = useCallback(
+    (patientId?: string) => {
+      setPreviousMode(activeMode);
+      if (activeMode === 'dashboard') {
+        transitionDashboardToCommand(navigate, lastDashboardTab);
+        return;
+      }
+      transitionClassicToCommand(navigate, patientId ?? patient?.id);
+    },
+    [activeMode, lastDashboardTab, navigate, patient?.id],
+  );
+
+  const openClassicMode = useCallback(
+    (patientId?: string, fromDashboardTab?: DashboardTab) => {
+      const pid = patientId ?? patient?.id;
+      if (!pid) {
+        void navigate({
+          to: '/comando',
+          search: selectPatientSearch(),
+        });
+        return;
+      }
+      setPreviousMode(activeMode);
+      if (activeMode === 'dashboard') {
+        transitionDashboardToClassic(
+          navigate,
+          pid,
+          fromDashboardTab ?? lastDashboardTab,
+        );
+        return;
+      }
+      transitionCommandToClassic(navigate, { patientId: pid });
+    },
+    [activeMode, lastDashboardTab, navigate, patient?.id],
+  );
+
+  const openDashboardMode = useCallback(
+    (tab?: DashboardTab) => {
+      setPreviousMode(activeMode);
+      const nextTab = tab ?? lastDashboardTab;
+      setLastDashboardTab(nextTab);
+      if (activeMode === 'classic' && patient?.id) {
+        transitionClassicToDashboard(navigate, {
+          patientId: patient.id,
+          dashboardTab: nextTab,
+        });
+        return;
+      }
+      transitionCommandToDashboard(navigate, { dashboardTab: nextTab });
+    },
+    [activeMode, lastDashboardTab, navigate, patient?.id, setLastDashboardTab],
+  );
+
   const setActiveMode = useCallback(
     (mode: EpisMode) => {
+      if (mode === activeMode) return;
       setPreviousMode(activeMode);
       if (mode === 'command') {
         if (activeMode === 'dashboard') {
@@ -118,53 +182,12 @@ export function EpisSessionProvider({ children }: { children: ReactNode }) {
         return;
       }
       if (mode === 'classic') {
-        if (!patient?.id) {
-          void navigate({
-            to: '/comando',
-            search: EPIS_SELECT_PATIENT_FOR_CLASSIC as never,
-          });
-          return;
-        }
-        transitionCommandToClassic(navigate, { patientId: patient.id });
+        openClassicMode();
         return;
       }
-      transitionCommandToDashboard(navigate, { dashboardTab: lastDashboardTab });
+      openDashboardMode();
     },
-    [activeMode, lastDashboardTab, navigate, patient?.id],
-  );
-
-  const openCommandCenter = useCallback(
-    (patientId?: string) => {
-      setPreviousMode(activeMode);
-      transitionClassicToCommand(navigate, patientId ?? patient?.id);
-    },
-    [activeMode, navigate, patient?.id],
-  );
-
-  const openClassicMode = useCallback(
-    (patientId?: string) => {
-      const pid = patientId ?? patient?.id;
-      if (!pid) {
-        void navigate({
-          to: '/comando',
-          search: EPIS_SELECT_PATIENT_FOR_CLASSIC as never,
-        });
-        return;
-      }
-      setPreviousMode(activeMode);
-      transitionCommandToClassic(navigate, { patientId: pid });
-    },
-    [activeMode, navigate, patient?.id],
-  );
-
-  const openDashboardMode = useCallback(
-    (tab?: DashboardTab) => {
-      setPreviousMode(activeMode);
-      const nextTab = tab ?? lastDashboardTab;
-      setLastDashboardTab(nextTab);
-      transitionCommandToDashboard(navigate, { dashboardTab: nextTab });
-    },
-    [activeMode, lastDashboardTab, navigate, setLastDashboardTab],
+    [activeMode, lastDashboardTab, navigate, openClassicMode, openDashboardMode, patient?.id],
   );
 
   const returnToPreviousMode = useCallback(() => {

@@ -126,7 +126,7 @@ import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
 
 import { writePrintPreview } from '../clinical/printPreviewStorage.js';
 
-import { useClassicMd3Mode } from '../classic-md3/useClassicMd3Mode.js';
+import { registerUnsavedWorkProbe, useClassicMd3Mode } from '../modes/index.js';
 
 import { ClassicMd3ClinicalPageShell } from '../components/classic-md3/ClassicMd3ClinicalPageShell.js';
 export type GeneratedClinicalFormPageProps = {
@@ -182,7 +182,11 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
   const form = useEpisClinicalBlueprintForm({ blueprint, seed });
 
-  const { watch, setValue, getValues, trigger, reset } = form;
+  const { watch, setValue, getValues, trigger, reset, formState } = form;
+
+  useEffect(() => {
+    return registerUnsavedWorkProbe(() => formState.isDirty);
+  }, [formState.isDirty]);
 
   const values = watch();
 

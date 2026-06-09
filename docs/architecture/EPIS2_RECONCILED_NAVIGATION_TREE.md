@@ -59,7 +59,7 @@ EPIS2
 ├── [N1–N2] Ficha paciente M3
 │   └── /espacio/ficha?patientId=     COMPLETE
 │       ├── (modern)                  workspace M3 estándar
-│       └── ?mode=classic             EpisClassicMd3Shell (MF-CLASSIC-EMR-MD3)
+│       └── ?mode=classic             EpisClassicMd3Shell (MF-CLASSIC-MD3)
 │       ├── Tab Resumen    → /espacio/ficha, /espacio/resumen
 │       ├── Tab Historia   → /espacio/ficha
 │       ├── Tab Consulta   → /espacio/evolucion, /espacio/ambulatorio, /espacio/enfermeria
@@ -182,7 +182,7 @@ flowchart TD
 | [`EPIS2_ARCHITECTURE_INVENTORY_MEDICAL_RECORD.md`](../product/EPIS2_ARCHITECTURE_INVENTORY_MEDICAL_RECORD.md) | Índice 1–200 |
 | [`EPIS2_COMPLETE_FORM_CATALOG.md`](../product/EPIS2_COMPLETE_FORM_CATALOG.md) | 19 blueprints |
 | [`EPIS2_MODES_LAYER.md`](EPIS2_MODES_LAYER.md) | Tres modos × rutas × shells |
-| [`EPIS2_THREE_MODES_DEV_PLAN.md`](../product/EPIS2_THREE_MODES_DEV_PLAN.md) | Roadmap MF-THREE-MODES-03…07 |
+| [`EPIS2_THREE_MODES_DEV_PLAN.md`](../product/EPIS2_THREE_MODES_DEV_PLAN.md) | Roadmap MF-THREE-MODES-03…08 · **EPIS2-PM-01** |
 
 ---
 

@@ -116,7 +116,19 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 ---
 
-## EPIS2-13 — Tres modos MD3 (Command · Classic · Dashboard) ◐
+## Numeración post-MVP (no confundir)
+
+| Serie | Uso |
+|-------|-----|
+| **EPIS2-00…12** | MVP bootstrap — cerrado en este documento |
+| **EPIS2-PM-01…** | Post-MVP UX transversal — ver abajo |
+| **EPIS2-13…16** | Versiones producto V2–V4 — ver [`EPIS2_RELEASE_ROADMAP.md`](product/EPIS2_RELEASE_ROADMAP.md) (p. ej. EPIS2-13 = Hospitalización) |
+
+---
+
+## EPIS2-PM-01 — Tres modos MD3 (Command · Classic · Dashboard) ◐
+
+**Programa:** PROG-THREE-MODES · **Hilo plan global:** Fase UX-1
 
 **Objetivo:** Orquestar tres experiencias complementarias con una sesión y sin routers paralelos. Home sigue siendo `/comando`.
 
@@ -124,25 +136,19 @@ Cada fase termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 | MF | Estado |
 |----|--------|
-| MF-CLASSIC-EMR-MD3 | ✓ |
-| MF-DASHBOARD-MD3-AI-DESIGN-AGENTS | ✓ |
-| MF-THREE-MODES-01 Orquestación | ✓ |
-| MF-THREE-MODES-02 Consolidación `modes/` | ✓ |
-| MF-THREE-MODES-03…07 | ◐ READY |
+| MF-CLASSIC-MD3 | ✓ |
+| MF-DASHBOARD-MD3 | ✓ |
+| MF-THREE-MODES-01 | ✓ |
+| MF-THREE-MODES-02 | ✓ |
+| MF-THREE-MODES-03…08 | ◐ READY (08 BLOCKED) |
 
 **Entregables:** `apps/web/src/modes/`, `EpisSessionContext`, `EpisModeSwitcher`, shells MD3 classic/dashboard, gates `quality:three-modes-gate`.
 
-**Docs:** `docs/architecture/EPIS2_MODES_LAYER.md` · `docs/product/EPIS2_THREE_MODES_DEV_PLAN.md` · Fase E en `EPIS2_GLOBAL_DEV_PLAN.md`
+**Docs:** [`EPIS2_THREE_MODES_DEV_PLAN.md`](product/EPIS2_THREE_MODES_DEV_PLAN.md) · [`EPIS2_MODES_LAYER.md`](architecture/EPIS2_MODES_LAYER.md)
 
-**Gate:**
+**Gate (PM01-A…E):** ver [`QUALITY_GATES.md`](QUALITY_GATES.md) § EPIS2-PM-01
 
-```bash
-npm run quality:three-modes-gate
-npm run quality:classic-md3-mode-gate
-npm run quality:dashboard-md3-mode-gate
-```
-
-Reportes: `reports/epis2-three-modes-*.md`
+Reportes: `reports/epis2-mf-three-modes-*.md` · auditorías `reports/epis2-three-modes-*.md`
 
 ---
 
@@ -155,9 +161,9 @@ Reportes: `reports/epis2-three-modes-*.md`
 | **Plan A** estabilización UX/docs | ✓ `reports/epis2-ux-stabilization.md` |
 | **WIDGET-00** fundación | ✓ `reports/epis2-widget-foundation.md` |
 | **Slices V1–V5** | ◐ demo; gates completos abiertos — `reports/epis2-audit-and-dev-plans-2026-06-05.md` |
-| **EPIS2-13 Tres modos MD3** | ◐ MF-01/02 ✓ · MF-03…07 READY — `EPIS2_THREE_MODES_DEV_PLAN.md` |
+| **EPIS2-PM-01 Tres modos MD3** | ◐ MF-THREE-MODES-01/02 ✓ · 03…07 READY — [`EPIS2_THREE_MODES_DEV_PLAN.md`](product/EPIS2_THREE_MODES_DEV_PLAN.md) |
 
-**Siguiente recomendado:** **MF-THREE-MODES-03** (modal borrador) o **WIDGET-01** — ver `docs/product/EPIS2_THREE_MODES_DEV_PLAN.md` · `EPIS2_RELEASE_ROADMAP.md`
+**Siguiente recomendado:** **MF-THREE-MODES-03** (modal borrador) o **WIDGET-01** — ver [`EPIS2_THREE_MODES_DEV_PLAN.md`](product/EPIS2_THREE_MODES_DEV_PLAN.md) · [`EPIS2_RELEASE_ROADMAP.md`](product/EPIS2_RELEASE_ROADMAP.md) (EPIS2-13 = Hospitalización V2)
 
 ---
 

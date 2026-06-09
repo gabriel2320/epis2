@@ -24,7 +24,21 @@ export type ClinicalFormRoutePath =
   | '/espacio/traslado'
   | '/espacio/informe-interconsulta';
 
-export type ClinicalPatientSearch = { patientId?: string; mode?: 'classic' };
+export type ClinicalPatientSearch = { patientId?: string; mode?: 'classic'; returnTo?: 'dashboard' };
+
+export function parseClinicalPatientSearch(search: Record<string, unknown>): ClinicalPatientSearch {
+  const parsed: ClinicalPatientSearch = {};
+  if (typeof search.patientId === 'string' && search.patientId) {
+    parsed.patientId = search.patientId;
+  }
+  if (search.mode === 'classic') {
+    parsed.mode = 'classic';
+  }
+  if (search.returnTo === 'dashboard') {
+    parsed.returnTo = 'dashboard';
+  }
+  return parsed;
+}
 
 /** CE-3b/CE-4: slots del comando en query string al abrir formulario. */
 export type ClinicalFormSearch = ClinicalPatientSearch & {
@@ -116,6 +130,42 @@ export const DASHBOARD_TABS: readonly DashboardTab[] = [
 
 const DASHBOARD_TAB_SET = new Set<string>(DASHBOARD_TABS);
 
+export { DASHBOARD_TAB_SET };
+
+/** Search de `/comando` — intentos de modo y contexto de retorno. */
+export type CommandSearch = {
+  patientId?: string;
+  intent?: 'selectPatient';
+  nextMode?: 'classic';
+  context?: 'classic' | 'dashboard';
+  error?: 'dashboardPermission';
+  tab?: DashboardTab;
+};
+
+export function parseCommandSearch(search: Record<string, unknown>): CommandSearch {
+  const parsed: CommandSearch = {};
+  if (typeof search.patientId === 'string' && search.patientId) {
+    parsed.patientId = search.patientId;
+  }
+  if (search.intent === 'selectPatient') {
+    parsed.intent = 'selectPatient';
+  }
+  if (search.nextMode === 'classic') {
+    parsed.nextMode = 'classic';
+  }
+  if (search.context === 'classic' || search.context === 'dashboard') {
+    parsed.context = search.context;
+  }
+  if (search.error === 'dashboardPermission') {
+    parsed.error = 'dashboardPermission';
+  }
+  const tabRaw = search.tab;
+  if (typeof tabRaw === 'string' && DASHBOARD_TAB_SET.has(tabRaw)) {
+    parsed.tab = tabRaw as DashboardTab;
+  }
+  return parsed;
+}
+
 export function parseDashboardSearch(search: Record<string, unknown>): DashboardSearch {
   const tabRaw = search.tab;
   const tab =
@@ -155,9 +205,15 @@ export type ClinicalNavigateOptions =
   | { to: '/espacio/admin'; search?: AdminSearch; params?: never }
   | { to: '/sin-acceso'; search?: ForbiddenSearch; params?: never }
   | {
+      to: '/comando';
+      search?: CommandSearch;
+      params?: never;
+      replace?: boolean;
+    }
+  | {
       to: Exclude<
         ClinicalNavigateTarget,
-        '/espacio/borrador/$draftId' | '/epis2/dashboard' | '/espacio/admin' | '/sin-acceso'
+        '/espacio/borrador/$draftId' | '/epis2/dashboard' | '/espacio/admin' | '/sin-acceso' | '/comando'
       >;
       search?: ClinicalFormSearch;
       params?: never;

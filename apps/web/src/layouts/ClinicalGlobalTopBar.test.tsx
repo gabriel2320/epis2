@@ -4,8 +4,7 @@
 import { copy } from '@epis2/design-system';
 import { cleanup, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
-import { renderWithQuery } from '../test/renderWithQuery.js';
+import { renderWithEpisApp } from '../test/renderWithEpisApp.js';
 import { ClinicalGlobalTopBar } from './ClinicalGlobalTopBar.js';
 
 vi.mock('@tanstack/react-router', () => ({
@@ -14,8 +13,8 @@ vi.mock('@tanstack/react-router', () => ({
       {children as string}
     </a>
   ),
-  useRouterState: ({ select }: { select: (s: { location: { pathname: string } }) => unknown }) =>
-    select({ location: { pathname: '/espacio/ficha' } }),
+  useRouterState: ({ select }: { select: (s: { location: { pathname: string; searchStr?: string } }) => unknown }) =>
+    select({ location: { pathname: '/espacio/ficha', searchStr: '' } }),
 }));
 
 vi.mock('../auth/AuthContext.js', () => ({
@@ -45,11 +44,7 @@ afterEach(() => cleanup());
 
 describe('ClinicalGlobalTopBar', () => {
   it('expone solo Buscar · Comando · Paciente · Alertas · Usuario', () => {
-    renderWithQuery(
-      <ActivePatientProvider>
-        <ClinicalGlobalTopBar active="clinical" />
-      </ActivePatientProvider>,
-    );
+    renderWithEpisApp(<ClinicalGlobalTopBar active="clinical" />);
 
     expect(screen.getByTestId('epis2-global-top-bar')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-nav-buscar')).toHaveTextContent(copy.layout.navSearch);

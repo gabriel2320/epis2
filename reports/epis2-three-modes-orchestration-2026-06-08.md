@@ -1,7 +1,10 @@
-# MF-THREE-MODES-ORCHESTRATION — Reporte de cierre
+# MF-THREE-MODES-01 — Reporte de cierre
 
+**Programa:** PROG-THREE-MODES · **Roadmap:** EPIS2-PM-01  
 **Fecha:** 2026-06-08  
 **Alcance:** Login → Command Center → Classic EMR → Dashboard
+
+> Alias histórico del reporte: ~~MF-THREE-MODES-ORCHESTRATION~~ → unificado como **MF-THREE-MODES-01**.
 
 ## Objetivo
 

@@ -26,11 +26,11 @@ No es una capa de widgets: **orquesta shells** sobre rutas existentes.
 
 | Modo | Shell | Gate |
 |------|-------|------|
-| Command | `EpisAppScaffold` | `login-command-home-gate` |
-| Classic | `EpisClassicMd3Shell` | `classic-md3-mode-gate` |
-| Dashboard | `EpisDashboardMd3Shell` | `dashboard-md3-mode-gate` |
+| Command | `EpisAppScaffold` | PM01-A (`login-command-home-gate`) |
+| Classic | `EpisClassicMd3Shell` | PM01-B (`classic-md3-mode-gate`) |
+| Dashboard | `EpisDashboardMd3Shell` | PM01-C (`dashboard-md3-mode-gate`) |
 
-Código: `apps/web/src/modes/` · sesión: `EpisSessionContext` · plan: [`EPIS2_THREE_MODES_DEV_PLAN.md`](EPIS2_THREE_MODES_DEV_PLAN.md).
+Código: `apps/web/src/modes/` · sesión: `EpisSessionContext` · plan: [`EPIS2_THREE_MODES_DEV_PLAN.md`](EPIS2_THREE_MODES_DEV_PLAN.md) (**EPIS2-PM-01** / Fase UX-1).
 
 ---
 

@@ -12,9 +12,7 @@ import userEvent from '@testing-library/user-event';
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
-
-import { renderWithQuery } from '../test/renderWithQuery.js';
+import { renderWithEpisApp } from '../test/renderWithEpisApp.js';
 
 import { CommandCenterPage } from './CommandCenterPage.js';
 
@@ -22,13 +20,9 @@ import { CommandCenterPage } from './CommandCenterPage.js';
 
 function renderCommandCenter() {
 
-  return renderWithQuery(
+  return renderWithEpisApp(
 
-    <ActivePatientProvider>
-
-      <CommandCenterPage />
-
-    </ActivePatientProvider>,
+    <CommandCenterPage />
 
   );
 
@@ -40,9 +34,11 @@ vi.mock('@tanstack/react-router', () => ({
 
   useNavigate: () => vi.fn(),
 
-  useRouterState: ({ select }: { select: (s: { location: { pathname: string } }) => unknown }) =>
+  useSearch: () => ({}),
 
-    select({ location: { pathname: '/comando' } }),
+  useRouterState: ({ select }: { select: (s: { location: { pathname: string; searchStr?: string } }) => unknown }) =>
+
+    select({ location: { pathname: '/comando', searchStr: '' } }),
 
   Link: ({ children, to, ...rest }: { children?: unknown; to: string }) => (
 

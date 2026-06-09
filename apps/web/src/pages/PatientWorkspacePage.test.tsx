@@ -4,8 +4,7 @@
 import { copy } from '@epis2/design-system';
 import { cleanup, fireEvent, screen, waitFor, within } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
-import { renderWithQuery } from '../test/renderWithQuery.js';
+import { renderWithEpisApp } from '../test/renderWithEpisApp.js';
 import { PatientWorkspacePage } from './PatientWorkspacePage.js';
 
 const patientId = 'a0000001-0000-4000-8000-000000000005';
@@ -20,6 +19,9 @@ const { fetchPatientDetail, fetchPatientClinicalAlerts, fetchPatientLongitudinal
 
 vi.mock('@tanstack/react-router', () => ({
   useSearch: () => ({ patientId }),
+  useNavigate: () => vi.fn(),
+  useRouterState: ({ select }: { select: (s: { location: { pathname: string; searchStr?: string } }) => unknown }) =>
+    select({ location: { pathname: '/espacio/ficha', searchStr: '' } }),
   Link: ({ children }: { children?: unknown }) => <span>{children as string}</span>,
 }));
 
@@ -119,11 +121,7 @@ describe('PatientWorkspacePage', () => {
       ],
     });
 
-    renderWithQuery(
-      <ActivePatientProvider>
-        <PatientWorkspacePage />
-      </ActivePatientProvider>,
-    );
+    renderWithEpisApp(<PatientWorkspacePage />);
 
     await waitFor(() => {
       expect(screen.getByTestId('epis2-patient-workspace')).toBeInTheDocument();

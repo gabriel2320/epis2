@@ -14,6 +14,8 @@ import { GeneratedClinicalFormPage } from './GeneratedClinicalFormPage.js';
 vi.mock('@tanstack/react-router', () => ({
   useNavigate: () => vi.fn(),
   useSearch: () => ({ patientId: '00000000-0000-4000-8000-000000000099' }),
+  useRouterState: ({ select }: { select: (s: { location: { pathname: string; searchStr?: string } }) => unknown }) =>
+    select({ location: { pathname: '/espacio/evolucion', searchStr: '' } }),
   Link: ({ children }: { children: React.ReactNode }) => <a href="/">{children}</a>,
 }));
 

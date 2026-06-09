@@ -2,7 +2,7 @@ import { copy } from '@epis2/design-system';
 import type { ReactNode } from 'react';
 import { useMemo, useState } from 'react';
 import { useAuth } from '../../auth/AuthContext.js';
-import { useClinicalNavigate, type DashboardTab } from '../../routes/clinicalNavigate.js';
+import { type DashboardTab } from '../../routes/clinicalNavigate.js';
 import { useEpisSession } from '../../session/EpisSessionContext.js';
 import { useAiStatusQuery } from '../../query/hooks/useAiStatusQuery.js';
 import { visibleDashboardNavDestinations } from '../../dashboard-md3/dashboardNavDestinations.js';
@@ -66,7 +66,6 @@ export function DashboardMd3WorkspaceLayout({
   onClearScopeFilters,
   lastUpdatedLabel,
 }: DashboardMd3WorkspaceLayoutProps) {
-  const navigate = useClinicalNavigate();
   const { openCommandCenter, openClassicMode } = useEpisSession();
   const { session } = useAuth();
   const { aiAvailable } = useAiStatusQuery();
@@ -79,7 +78,7 @@ export function DashboardMd3WorkspaceLayout({
   const filterCount = activeScopeFilterChips(scopeFilters).length;
   const suggestions = dashboardCommandSuggestionLabels();
 
-  const openClassic = patientId ? () => openClassicMode(patientId) : undefined;
+  const openClassic = patientId ? () => openClassicMode(patientId, activeTab) : undefined;
 
   return (
     <EpisDashboardMd3Shell
@@ -123,11 +122,7 @@ export function DashboardMd3WorkspaceLayout({
           onOpenClassic={openClassic}
           onOpenChart={
             patientId
-              ? () =>
-                  void navigate({
-                    to: '/espacio/ficha',
-                    search: { patientId },
-                  })
+              ? () => openClassicMode(patientId, activeTab)
               : undefined
           }
         />

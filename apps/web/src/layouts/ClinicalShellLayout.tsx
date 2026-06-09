@@ -3,7 +3,7 @@ import { EpisButton, Box, LogoutIcon, Stack } from '@epis2/epis2-ui';
 import { Outlet } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import { useAuth } from '../auth/AuthContext.js';
-import { useClassicMd3Mode } from '../classic-md3/useClassicMd3Mode.js';
+import { useClassicMd3Mode } from '../modes/index.js';
 import { OfflineStatusBanner } from '../components/OfflineStatusBanner.js';
 import { ClinicalShellCommandPalette } from '../components/ClinicalShellCommandPalette.js';
 import { EpisAppScaffold } from '../components/layout/EpisAppScaffold.js';

@@ -9,13 +9,24 @@ const errors = [];
 
 const shellPath = join(root, 'apps/web/src/components/dashboard-md3/EpisDashboardMd3Shell.tsx');
 const contentPath = join(root, 'apps/web/src/dashboard/DashboardModeContent.tsx');
-const hookPath = join(root, 'apps/web/src/dashboard-md3/useDashboardMd3Mode.ts');
+const hookPath = join(root, 'apps/web/src/modes/episModeRuntime.ts');
+const modesIndexPath = join(root, 'apps/web/src/modes/index.ts');
 const routerPath = join(root, 'apps/web/src/routes/router.tsx');
 const docsPath = join(root, 'docs/design/EPIS2_DASHBOARD_MD3_MODE.md');
 
 if (!existsSync(shellPath)) errors.push('Falta EpisDashboardMd3Shell.tsx');
-if (!existsSync(hookPath)) errors.push('Falta useDashboardMd3Mode.ts');
+if (!existsSync(hookPath)) errors.push('Falta modes/episModeRuntime.ts');
+if (!existsSync(modesIndexPath)) errors.push('Falta modes/index.ts');
 if (!existsSync(docsPath)) errors.push('Falta EPIS2_DASHBOARD_MD3_MODE.md');
+
+const runtimeSrc = readFileSync(hookPath, 'utf8');
+if (!runtimeSrc.includes('useDashboardMd3Mode')) {
+  errors.push('episModeRuntime debe exportar useDashboardMd3Mode');
+}
+
+if (existsSync(join(root, 'apps/web/src/dashboard-md3/useDashboardMd3Mode.ts'))) {
+  errors.push('Shim deprecated useDashboardMd3Mode.ts aún presente (MF-THREE-MODES-08)');
+}
 
 const shellSrc = readFileSync(shellPath, 'utf8');
 if (!shellSrc.includes('100dvh')) errors.push('Shell dashboard debe usar 100dvh');

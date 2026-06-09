@@ -24,7 +24,7 @@ import { AppearancePreferencesPage } from '../pages/AppearancePreferencesPage.js
 import { isUiCatalogEnabled } from '../dev/uiCatalogEnv.js';
 import { isVisualThemeCatalogEnabled } from '../dev/visualThemeCatalogEnv.js';
 import { isSchedulerSpikeEnabled } from '../dev/schedulerSpikeEnv.js';
-import { parseDashboardSearch, parseClinicalFormSearch } from './clinicalNavigate.js';
+import { parseDashboardSearch, parseClinicalFormSearch, parseCommandSearch, parseClinicalPatientSearch } from './clinicalNavigate.js';
 
 const LazyUiCatalogPage = lazy(() =>
   import('../pages/dev/UiCatalogPage.js').then((m) => ({ default: m.UiCatalogPage })),
@@ -105,6 +105,7 @@ const appearancePreferencesRoute = createRoute({
 const commandCenterRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/comando',
+  validateSearch: (search: Record<string, unknown>) => parseCommandSearch(search),
   component: CommandCenterPage,
   beforeLoad: requireSession,
 });
@@ -133,9 +134,7 @@ const draftReviewRoute = createRoute({
 const patientWorkspaceRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/ficha',
-  validateSearch: (search: Record<string, unknown>) => ({
-    patientId: typeof search.patientId === 'string' ? search.patientId : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>) => parseClinicalPatientSearch(search),
   component: PatientWorkspacePage,
 });
 

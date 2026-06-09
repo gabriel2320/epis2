@@ -9,10 +9,12 @@ import { EpisCommandCenterGoogleBar } from '../components/command-center/EpisCom
 import {
   EpisButton,
   EpisCommandCenterLayout,
+  Alert,
   Stack,
 } from '@epis2/epis2-ui';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useSearch } from '@tanstack/react-router';
 
 import { INTENT_TO_ASSIST_BLUEPRINT } from '../api/clinicalApi.js';
 
@@ -32,6 +34,8 @@ import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.j
 
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 
+import { useEpisSession } from '../session/EpisSessionContext.js';
+
 import { CommandCenterRecentActivity } from '../components/CommandCenterRecentActivity.js';
 
 import { ClinicalShellCommandPalette } from '../components/ClinicalShellCommandPalette.js';
@@ -50,6 +54,13 @@ export function CommandCenterPage() {
   const { session } = useAuth();
   const { patient: activePatient, setPatient } = useActivePatient();
   const navigate = useClinicalNavigate();
+  const { openClassicMode } = useEpisSession();
+  const search = useSearch({ strict: false }) as {
+    intent?: string;
+    nextMode?: string;
+  };
+  const selectPatientIntent =
+    search.intent === 'selectPatient' && search.nextMode === 'classic';
   const railItems = useEpis2NavigationRailItems();
   const [demoPanelOpen, setDemoPanelOpen] = useState(false);
   const { aiAvailable } = useAiStatusQuery();
@@ -117,6 +128,12 @@ export function CommandCenterPage() {
     [setQuery, setError],
   );
 
+  useEffect(() => {
+    if (selectPatientIntent && activePatient?.id) {
+      openClassicMode(activePatient.id);
+    }
+  }, [activePatient?.id, openClassicMode, selectPatientIntent]);
+
   return (
     <>
     <EpisAppScaffold
@@ -146,6 +163,12 @@ export function CommandCenterPage() {
           onClarificationSelect={(label) => void submit(label)}
           footerSlot={
             <>
+              {selectPatientIntent && !activePatient ? (
+                <Alert severity="info" data-testid="epis2-select-patient-for-classic">
+                  {copy.threeModes.selectPatientForClassic}
+                </Alert>
+              ) : null}
+
               <CommandCenterRecentActivity />
 
               {error === copy.commandCenter.needsPatient ||

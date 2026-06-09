@@ -38,7 +38,7 @@ Capas UI + IA asistida: **`npm run dev:session`** → `@reports/dev-agent-brief.
 
 Signoff A–K: `docs/product/EPIS2_TRAMOS_CLINICAL_SIGNOFF_CHECKLIST.md` · `quality:tramos-signoff-prep-gate` · `quality:tramos-run-ak-closure-gates`.
 
-Tres modos MD3 (EPIS2-13): `docs/product/EPIS2_THREE_MODES_DEV_PLAN.md` · `quality:three-modes-gate` · importar modos desde `apps/web/src/modes/index.js`.
+Tres modos MD3 (**EPIS2-PM-01** / PROG-THREE-MODES): [`EPIS2_THREE_MODES_DEV_PLAN.md`](docs/product/EPIS2_THREE_MODES_DEV_PLAN.md) · `quality:three-modes-gate` · importar modos desde `apps/web/src/modes/index.js`.
 
 Si la fase lo exige: `npm run quality:golden-journey`.
 

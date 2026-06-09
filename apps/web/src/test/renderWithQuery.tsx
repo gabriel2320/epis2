@@ -8,6 +8,8 @@ type WrapperOptions = {
   queryClient?: ReturnType<typeof createTestQueryClient>;
 };
 
+export type { WrapperOptions };
+
 export function createQueryWrapper(options: WrapperOptions = {}) {
   const queryClient = options.queryClient ?? createTestQueryClient();
   return function Wrapper({ children }: { children: ReactNode }) {

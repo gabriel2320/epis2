@@ -9,7 +9,12 @@ for (const f of ['apps/web/src/modes/EpisModeGuard.tsx', 'apps/web/src/modes/epi
   if (!existsSync(join(root, f))) errors.push(`Falta ${f}`);
 }
 const guard = readFileSync(join(root, 'apps/web/src/modes/EpisModeGuard.tsx'), 'utf8');
-if (!guard.includes('selectPatient')) errors.push('Guard debe redirigir classic sin paciente');
+if (
+  !guard.includes('selectPatient') &&
+  !guard.includes('EPIS_SELECT_PATIENT_FOR_CLASSIC')
+) {
+  errors.push('Guard debe redirigir classic sin paciente');
+}
 if (!guard.includes('dashboardPermission')) errors.push('Guard debe validar permiso dashboard');
 
 const layout = readFileSync(join(root, 'apps/web/src/layouts/ClinicalShellLayout.tsx'), 'utf8');

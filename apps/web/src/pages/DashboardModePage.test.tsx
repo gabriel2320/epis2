@@ -4,8 +4,7 @@
 import { copy } from '@epis2/design-system';
 import { cleanup, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
-import { renderWithQuery } from '../test/renderWithQuery.js';
+import { renderWithEpisApp } from '../test/renderWithEpisApp.js';
 import { DashboardModePage } from './DashboardModePage.js';
 
 const { fetchDashboardWork } = vi.hoisted(() => ({
@@ -14,8 +13,8 @@ const { fetchDashboardWork } = vi.hoisted(() => ({
 
 vi.mock('@tanstack/react-router', () => ({
   useSearch: () => ({ tab: 'work' }),
-  useRouterState: ({ select }: { select: (s: { location: { pathname: string } }) => unknown }) =>
-    select({ location: { pathname: '/epis2/dashboard' } }),
+  useRouterState: ({ select }: { select: (s: { location: { pathname: string; searchStr?: string } }) => unknown }) =>
+    select({ location: { pathname: '/epis2/dashboard', searchStr: '?tab=work' } }),
   Link: ({ children, to, ...rest }: { children?: unknown; to: string }) => (
     <a href={to} {...rest}>
       {children as string}
@@ -41,12 +40,20 @@ vi.mock('../api/clinicalApi.js', () => ({
 
 vi.mock('../auth/AuthContext.js', () => ({
   useAuth: () => ({
-    session: null,
+    session: {
+      user: {
+        id: 'usr-physician-01',
+        displayName: 'Dra. Ana Demo',
+        role: 'physician',
+      },
+      permissions: ['command.execute', 'dashboard.read', 'draft.approve'],
+      expiresAt: new Date().toISOString(),
+    },
     isLoading: false,
     login: vi.fn(),
     logout: vi.fn(),
     refreshSession: vi.fn(),
-    hasPermission: () => false,
+    hasPermission: () => true,
   }),
 }));
 
@@ -71,11 +78,7 @@ describe('DashboardModePage', () => {
       demoTasks: [{ id: 't1', label: 'Tarea demo', commandSample: 'evoluciona' }],
     });
 
-    renderWithQuery(
-      <ActivePatientProvider>
-        <DashboardModePage />
-      </ActivePatientProvider>,
-    );
+    renderWithEpisApp(<DashboardModePage />);
 
     await waitFor(() => {
       expect(screen.getByTestId('epis2-dashboard-mode')).toBeInTheDocument();

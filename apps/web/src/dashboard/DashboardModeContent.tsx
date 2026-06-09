@@ -33,7 +33,7 @@ import { IcuDashboardTab } from '../components/IcuDashboardTab.js';
 import { OrDashboardTab } from '../components/OrDashboardTab.js';
 import { ApsDashboardTab } from '../components/ApsDashboardTab.js';
 import { SpecialtyDashboardTab } from '../components/SpecialtyDashboardTab.js';
-import { useDashboardMd3Mode } from '../dashboard-md3/useDashboardMd3Mode.js';
+import { useDashboardMd3Mode } from '../modes/index.js';
 import { buildDashboardTabSearch } from '../modes/episModeSearch.js';
 import { useEpisSession } from '../session/EpisSessionContext.js';
 import { DashboardMd3WorkspaceLayout } from '../components/dashboard-md3/DashboardMd3WorkspaceLayout.js';
@@ -53,7 +53,7 @@ export function DashboardModeContent() {
     mode?: string;
   };
   const isDashboardMd3 = useDashboardMd3Mode();
-  const { setLastDashboardTab } = useEpisSession();
+  const { setLastDashboardTab, openCommandCenter } = useEpisSession();
   const navigate = useClinicalNavigate();
   const { sideNavItems, sideNavFooter } = useEpisSideNavigation();
   const { session, hasPermission } = useAuth();
@@ -164,7 +164,7 @@ export function DashboardModeContent() {
     canSpecialty,
   ]);
 
-  const goCommand = () => void navigate({ to: '/comando' });
+  const goCommand = () => openCommandCenter(dashboardPatientId);
 
   const workKpiItems = useMemo((): DashboardKpiItem[] => {
     if (!work) return [];

@@ -1,6 +1,7 @@
 # EPIS2 — Orquestación de tres modos
 
-**Fase:** MF-THREE-MODES-ORCHESTRATION (consolidado)  
+**Programa:** PROG-THREE-MODES · **Microfase:** MF-THREE-MODES-01…02 (consolidado)  
+**Roadmap:** EPIS2-PM-01 · **Plan global:** Fase UX-1  
 **Canon:** Home = `/comando`. Dashboard ≠ home. IA no aprueba ni firma.
 
 ## Principio
@@ -99,4 +100,5 @@ Ver plan detallado: [`EPIS2_THREE_MODES_DEV_PLAN.md`](../product/EPIS2_THREE_MOD
 | [`EPIS2_DASHBOARD_MD3_MODE.md`](EPIS2_DASHBOARD_MD3_MODE.md) | Modo dashboard |
 | [`EPIS2_RECONCILED_NAVIGATION_TREE.md`](../architecture/EPIS2_RECONCILED_NAVIGATION_TREE.md) | Superficies clínicas |
 | [`EPIS2_UI_LAYERS.md`](../product/EPIS2_UI_LAYERS.md) | Stack L3–L5 |
-| [`EPIS2_GLOBAL_DEV_PLAN.md`](../product/EPIS2_GLOBAL_DEV_PLAN.md) | Plan global · Fase E |
+| [`EPIS2_GLOBAL_DEV_PLAN.md`](../product/EPIS2_GLOBAL_DEV_PLAN.md) | Plan global · **Fase UX-1** |
+| [`EPIS2_THREE_MODES_DEV_PLAN.md`](../product/EPIS2_THREE_MODES_DEV_PLAN.md) | Nomenclatura + MF-03…08 |
