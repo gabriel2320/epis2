@@ -77,7 +77,7 @@ Fuera del ledger MF-151…182; gobernado por [`EPIS2_THREE_MODES_DEV_PLAN.md`](.
 | MF-THREE-MODES-03 | DONE | modal borrador + probe formularios |
 | MF-THREE-MODES-04 | DONE | `parseCommandSearch` / `parseClinicalPatientSearch` en router |
 | MF-THREE-MODES-05 | DONE | dashboard→classic vía sesión + tests transición |
-| MF-THREE-MODES-06 | DONE | imports `modes/index` (shims solo compat) |
+| MF-THREE-MODES-06 | DONE | imports `modes/index` |
 | MF-THREE-MODES-07 | DONE | `e2e/three-modes-journey.spec.ts` |
 | MF-THREE-MODES-08 | DONE | shims eliminados; gates apuntan a `modes/` |
 

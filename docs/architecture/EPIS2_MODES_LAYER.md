@@ -55,20 +55,16 @@ apps/web/src/modes/                    ← fuente única
   episModeSearch.ts                    ?mode=, buildDashboardTabSearch
   episModeRuntime.ts                   hooks React unificados
   episModePreferences.ts               localStorage
-  modeTransitions.ts                   navigateToMode + 6 transiciones
+  modeTransitionSafety.ts              probes borrador no guardado (MF-03)
   EpisModeGuard.tsx                    guard classic sin paciente
   index.ts                             barrel
 
 apps/web/src/session/
   EpisSessionContext.tsx               sesión + transiciones UI
-
-Shims deprecated (compat):
-  classic-md3/useClassicMd3Mode.ts
-  dashboard-md3/useDashboardMd3Mode.ts
-  classic-md3/userPreferences.ts
 ```
 
-Import preferente: `import { … } from '../modes/index.js'`.
+Import preferente: `import { … } from '../modes/index.js'`.  
+Shims deprecated **eliminados** (MF-THREE-MODES-08) — no reintroducir.
 
 ---
 

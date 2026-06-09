@@ -1,5 +1,10 @@
 import { pickChipSampleEs } from './chip-samples.js';
-import { filterDefinitionsForRole, getRoleAiCommandHints, isClinicalRole } from './roleSuggestions.js';
+import {
+  filterDefinitionsForRole,
+  getRoleAiCommandHints,
+  isClinicalRole,
+  ROLE_COMMAND_INTENTS,
+} from './roleSuggestions.js';
 import type { ClinicalIntent } from './types.js';
 
 export type CommandChip = {
@@ -24,9 +29,20 @@ export function getCommandChipsForRole(
   options?: { aiAvailable?: boolean; maxChips?: number },
 ): CommandChip[] {
   const max = options?.maxChips ?? 8;
+  const roleOrder = isClinicalRole(role) ? ROLE_COMMAND_INTENTS[role] : null;
+  const orderIndex = (intent: ClinicalIntent): number => {
+    if (!roleOrder) return 999;
+    const index = roleOrder.indexOf(intent);
+    return index === -1 ? 999 : index;
+  };
+
   const defs = filterDefinitionsForRole(role, permissions)
     .filter((def) => !def.intent.startsWith('open_dashboard') || def.intent !== 'open_dashboard')
-    .sort((a, b) => b.priority - a.priority);
+    .sort((a, b) => {
+      const byRole = orderIndex(a.intent) - orderIndex(b.intent);
+      if (byRole !== 0) return byRole;
+      return b.priority - a.priority;
+    });
 
   const clinical = defs
     .filter((d) => d.requiredPermission === 'command.execute')
