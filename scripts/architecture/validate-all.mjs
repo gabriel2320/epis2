@@ -16,6 +16,7 @@ import { validate as widgetGates } from './widget-registry-gates.mjs';
 import { validate as devCatalogGates } from './dev-catalog-gates.mjs';
 import { validate as storybookThemeGate } from './storybook-theme-gate.mjs';
 import { validate as layoutG12Gate } from './layout-g12-gate.mjs';
+import { validate as componentsRootFrozen } from './web-components-root-frozen.mjs';
 
 const VALIDATORS = [
   ['main-product-invariants', invariants],
@@ -23,6 +24,7 @@ const VALIDATORS = [
   ['dev-catalog-gates', devCatalogGates],
   ['storybook-theme-gate', storybookThemeGate],
   ['layout-g12-gate', layoutG12Gate],
+  ['web-components-root-frozen', componentsRootFrozen],
   ['single-epis2-theme', singleEpis2Theme],
   ['no-legacy-dependencies', noLegacy],
   ['single-command-registry', singleCommand],

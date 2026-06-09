@@ -15,9 +15,9 @@ export const INTEGRATION_TEST_SUITES = [
   'apps/api/src/db/rls.integration.test.ts',
   'apps/api/src/fhir/fhir.integration.test.ts',
   'apps/api/src/inpatient/inpatient.integration.test.ts',
-  'apps/api/src/v4/v4.integration.test.ts',
+  'apps/api/src/interop/v4.integration.test.ts',
   'apps/api/src/interop/hl7.integration.test.ts',
-  'apps/api/src/v5/v5.integration.test.ts',
+  'apps/api/src/ai/v5.integration.test.ts',
   'tests/golden-clinical-journey.api.spec.ts',
 ] as const;
 

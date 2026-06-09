@@ -47,6 +47,8 @@ Regla de lectura: **un solo «siguiente paso»** — el del tablero (L1). Todo l
 | [`product/epis2-idc-execution-matrix.json`](./product/epis2-idc-execution-matrix.json) | [`product/EPIS2_IDC_EXECUTION_MATRIX.md`](./product/EPIS2_IDC_EXECUTION_MATRIX.md) |
 | [`quality/GOLDEN_CLINICAL_JOURNEY.md`](./quality/GOLDEN_CLINICAL_JOURNEY.md) | Gate producto final |
 
+Hogares de pruebas: `tests/` = golden journey **vitest** (contratos producto) · `e2e/` = Playwright navegador · resto co-localizado con su módulo. Ver [`tests/README.md`](../tests/README.md).
+
 ## L5 — Diseño / dominio / ops (referencia)
 
 | Carpeta | Contenido clave |
