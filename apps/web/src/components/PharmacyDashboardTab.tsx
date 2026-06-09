@@ -13,7 +13,6 @@ import {
 import { useMemo } from 'react';
 import { DashboardHomogeneousGrid } from './grids/DashboardHomogeneousGrid.js';
 import { EpisRadDashboardTabShell } from './rad/EpisRadDashboardTabShell.js';
-import { EpisRadFormSectionAccordion } from './rad/EpisRadFormSectionAccordion.js';
 
 export type PharmacyDashboardTabProps = {
   data: PharmacyDashboardResponse;
@@ -78,6 +77,83 @@ export function PharmacyDashboardTab({
     [data.reconciliationCandidates],
   );
 
+  const renalDoseRows = useMemo(
+    () =>
+      data.renalDoseAdjustments.map((row, index) => ({
+        id: `renal-${index}`,
+        title: `${row.patientDisplayName} — ${row.medication}`,
+        gfr: `${row.gfrMlMin} mL/min`,
+        dose: row.recommendedDose,
+      })),
+    [data.renalDoseAdjustments],
+  );
+
+  const tdmRows = useMemo(
+    () =>
+      data.tdmMonitoring.map((row, index) => ({
+        id: `tdm-${index}`,
+        title: `${row.patientDisplayName} — ${row.drug}`,
+        level: String(row.levelMcgMl),
+        target: row.targetRange,
+      })),
+    [data.tdmMonitoring],
+  );
+
+  const ramRows = useMemo(
+    () =>
+      data.ramReports.map((row, index) => ({
+        id: `ram-${index}`,
+        title: `${row.patientDisplayName} — ${row.suspectDrug}`,
+        reaction: row.reactionType,
+        severity: row.severity,
+      })),
+    [data.ramReports],
+  );
+
+  const crashCartRows = useMemo(
+    () =>
+      data.crashCartInventory.map((row) => ({
+        id: row.cartId,
+        title: row.cartId,
+        location: row.location,
+        alerts: String(row.expiryAlerts),
+      })),
+    [data.crashCartInventory],
+  );
+
+  const controlledSubstanceRows = useMemo(
+    () =>
+      data.controlledSubstances.map((row, index) => ({
+        id: `controlled-${index}`,
+        title: row.medication,
+        balance: String(row.balanceUnits),
+        status: row.discrepancyFlag ? 'Discrepancia' : 'Cuadrado',
+      })),
+    [data.controlledSubstances],
+  );
+
+  const returnRows = useMemo(
+    () =>
+      data.drugReturns.map((row, index) => ({
+        id: `return-${index}`,
+        title: `${row.patientDisplayName} — ${row.medication}`,
+        quantity: String(row.quantity),
+        reason: row.reason,
+      })),
+    [data.drugReturns],
+  );
+
+  const stockoutRows = useMemo(
+    () =>
+      data.stockoutAlerts.map((row, index) => ({
+        id: `stockout-${index}`,
+        title: row.medication,
+        days: String(row.daysUntilStockout),
+        alternative: row.alternativeSuggested ?? '—',
+      })),
+    [data.stockoutAlerts],
+  );
+
   return (
     <EpisRadDashboardTabShell testId="epis2-dashboard-pharmacy-rad">
       <Stack spacing={2} data-testid="epis2-dashboard-pharmacy">
@@ -96,6 +172,84 @@ export function PharmacyDashboardTab({
             value={String(data.metrics.reconciliationCandidatesCount)}
           />
         </Stack>
+
+        <EpisWorkspaceSection title={copy.pharmacy.idcPanelsTitle} testId="epis2-pharmacy-idc-panels">
+          <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+            {data.idcPanels.map((panel) => (
+              <Chip
+                key={panel.idc}
+                label={`IDC ${panel.idc}: ${panel.label}`}
+                size="small"
+                color={panel.status === 'active' ? 'primary' : 'default'}
+                variant={panel.status === 'active' ? 'filled' : 'outlined'}
+                data-testid={`epis2-pharmacy-idc-${panel.idc}`}
+              />
+            ))}
+          </Stack>
+        </EpisWorkspaceSection>
+
+        <EpisWorkspaceSection title={copy.pharmacy.ySiteTitle} testId="epis2-pharmacy-ysite">
+          <Box data-testid="epis2-pharmacy-ysite-rows">
+            <DashboardHomogeneousGrid
+              rows={data.ySiteChecks.map((row, index) => ({
+                id: `ysite-${index}`,
+                title: `${row.drugA} + ${row.drugB}`,
+                status: row.compatible ? 'Compatible' : 'Incompatible',
+                note: row.note,
+              }))}
+              columns={[
+                { field: 'title', headerName: copy.pharmacy.ySiteTitle, flex: 1, minWidth: 160 },
+                { field: 'status', headerName: copy.dashboard.gridColumnStatus, width: 120 },
+                { field: 'note', headerName: 'Nota', flex: 1, minWidth: 120 },
+              ]}
+              emptyMessage={copy.longitudinal.emptySection}
+              selectable={false}
+              data-testid="epis2-pharmacy-ysite-grid"
+            />
+          </Box>
+        </EpisWorkspaceSection>
+
+        <EpisWorkspaceSection title={copy.pharmacy.renalDoseTitle} testId="epis2-pharmacy-renal-dose">
+          <DashboardHomogeneousGrid
+            rows={renalDoseRows}
+            columns={[
+              { field: 'title', headerName: copy.dashboard.gridColumnPatient, flex: 1, minWidth: 180 },
+              { field: 'gfr', headerName: 'TFG', width: 100 },
+              { field: 'dose', headerName: 'Dosis sugerida', flex: 1, minWidth: 140 },
+            ]}
+            emptyMessage={copy.longitudinal.emptySection}
+            selectable={false}
+            data-testid="epis2-pharmacy-renal-dose-grid"
+          />
+        </EpisWorkspaceSection>
+
+        <EpisWorkspaceSection title={copy.pharmacy.tdmTitle} testId="epis2-pharmacy-tdm">
+          <DashboardHomogeneousGrid
+            rows={tdmRows}
+            columns={[
+              { field: 'title', headerName: copy.dashboard.gridColumnPatient, flex: 1, minWidth: 180 },
+              { field: 'level', headerName: 'Nivel', width: 100 },
+              { field: 'target', headerName: 'Rango objetivo', flex: 1, minWidth: 140 },
+            ]}
+            emptyMessage={copy.longitudinal.emptySection}
+            selectable={false}
+            data-testid="epis2-pharmacy-tdm-grid"
+          />
+        </EpisWorkspaceSection>
+
+        <EpisWorkspaceSection title={copy.pharmacy.ramTitle} testId="epis2-pharmacy-ram">
+          <DashboardHomogeneousGrid
+            rows={ramRows}
+            columns={[
+              { field: 'title', headerName: copy.dashboard.gridColumnPatient, flex: 1, minWidth: 180 },
+              { field: 'reaction', headerName: 'Reacción', flex: 1, minWidth: 140 },
+              { field: 'severity', headerName: copy.dashboard.gridColumnStatus, width: 120 },
+            ]}
+            emptyMessage={copy.longitudinal.emptySection}
+            selectable={false}
+            data-testid="epis2-pharmacy-ram-grid"
+          />
+        </EpisWorkspaceSection>
 
         <EpisWorkspaceSection title={copy.inpatient.pharmacyValidations}>
           {validationRows.length === 0 ? (
@@ -166,44 +320,66 @@ export function PharmacyDashboardTab({
           )}
         </EpisWorkspaceSection>
 
-        <EpisRadFormSectionAccordion
-          id="pharmacy-secondary-panels"
-          title={copy.pharmacy.idcPanelsTitle}
-          testId="epis2-pharmacy-secondary-accordion"
+        <EpisWorkspaceSection title={copy.pharmacy.crashCartTitle} testId="epis2-pharmacy-crash-cart">
+          <DashboardHomogeneousGrid
+            rows={crashCartRows}
+            columns={[
+              { field: 'title', headerName: 'Carro', width: 120 },
+              { field: 'location', headerName: 'Ubicación', flex: 1, minWidth: 160 },
+              { field: 'alerts', headerName: 'Alertas vencimiento', width: 140 },
+            ]}
+            emptyMessage={copy.longitudinal.emptySection}
+            selectable={false}
+            data-testid="epis2-pharmacy-crash-cart-grid"
+          />
+        </EpisWorkspaceSection>
+
+        <EpisWorkspaceSection
+          title={copy.pharmacy.controlledSubstancesTitle}
+          testId="epis2-pharmacy-controlled-substances"
         >
-          <Stack spacing={2}>
-            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-              {data.idcPanels.map((panel) => (
-                <Chip
-                  key={panel.idc}
-                  label={`IDC ${panel.idc}: ${panel.label}`}
-                  size="small"
-                  color={panel.status === 'active' ? 'primary' : 'default'}
-                  variant={panel.status === 'active' ? 'filled' : 'outlined'}
-                  data-testid={`epis2-pharmacy-idc-${panel.idc}`}
-                />
-              ))}
-            </Stack>
-            <Box data-testid="epis2-pharmacy-ysite-rows">
+          <DashboardHomogeneousGrid
+            rows={controlledSubstanceRows}
+            columns={[
+              { field: 'title', headerName: 'Medicamento', flex: 1, minWidth: 180 },
+              { field: 'balance', headerName: 'Saldo', width: 100 },
+              { field: 'status', headerName: copy.dashboard.gridColumnStatus, width: 120 },
+            ]}
+            emptyMessage={copy.longitudinal.emptySection}
+            selectable={false}
+            data-testid="epis2-pharmacy-controlled-substances-grid"
+          />
+        </EpisWorkspaceSection>
+
+        <EpisWorkspaceSection title={copy.pharmacy.returnTitle} testId="epis2-pharmacy-return">
+          <DashboardHomogeneousGrid
+            rows={returnRows}
+            columns={[
+              { field: 'title', headerName: copy.dashboard.gridColumnPatient, flex: 1, minWidth: 180 },
+              { field: 'quantity', headerName: 'Cantidad', width: 100 },
+              { field: 'reason', headerName: 'Motivo', flex: 1, minWidth: 160 },
+            ]}
+            emptyMessage={copy.longitudinal.emptySection}
+            selectable={false}
+            data-testid="epis2-pharmacy-return-grid"
+          />
+        </EpisWorkspaceSection>
+
+        <EpisWorkspaceSection title={copy.pharmacy.stockoutTitle} testId="epis2-pharmacy-stockout">
+          <Box data-testid="epis2-pharmacy-stockout-rows">
             <DashboardHomogeneousGrid
-              rows={data.ySiteChecks.map((row, index) => ({
-                id: `ysite-${index}`,
-                title: `${row.drugA} + ${row.drugB}`,
-                status: row.compatible ? 'Compatible' : 'Incompatible',
-                note: row.note,
-              }))}
+              rows={stockoutRows}
               columns={[
-                { field: 'title', headerName: copy.pharmacy.ySiteTitle, flex: 1, minWidth: 160 },
-                { field: 'status', headerName: copy.dashboard.gridColumnStatus, width: 120 },
-                { field: 'note', headerName: 'Nota', flex: 1, minWidth: 120 },
+                { field: 'title', headerName: 'Medicamento', flex: 1, minWidth: 160 },
+                { field: 'days', headerName: 'Días hasta quiebre', width: 140 },
+                { field: 'alternative', headerName: 'Alternativa', flex: 1, minWidth: 160 },
               ]}
               emptyMessage={copy.longitudinal.emptySection}
               selectable={false}
-              data-testid="epis2-pharmacy-ysite-grid"
+              data-testid="epis2-pharmacy-stockout-grid"
             />
-            </Box>
-          </Stack>
-        </EpisRadFormSectionAccordion>
+          </Box>
+        </EpisWorkspaceSection>
 
         <Stack direction="row" spacing={1} flexWrap="wrap">
           {data.demoTasks.map((task) => (

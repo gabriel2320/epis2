@@ -17,7 +17,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 | **Hilo UX-1** — tres modos MD3 | EPIS2-PM-01 cerrado |
 | Golden V2 UI E2E | `golden-v2-admission-discharge` ✓ |
 | UX-G02 command-first E2E | Partes A/B/C1 ✓ |
-| ClinicalTextBox E2E | rich + paste + orígenes + aprobación ✓ |
+| E2E Tramo C admission | `tramo-c-admission` 3/3 — ficha-history antes CTAs · [`epis2-tramo-c-admission-e2e-fix-2026-06-09.md`](../../reports/epis2-tramo-c-admission-e2e-fix-2026-06-09.md) |
 
 ---
 
@@ -26,6 +26,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 | Hilo | Notas |
 |------|-------|
 | **Hilo B** — Ola 2 | Palette ✓ · autocomplete ✓ · pharmacy dashboard ✓ · golden V2 ✓ · CI E2E ✓ |
+| **Hilo D** — Tramo J farmacia | Técnico ✓ · commit scaffold pendiente · signoff clínico PEND-001 · [`epis2-tramo-j-signoff-2026-06-09.md`](../../reports/epis2-tramo-j-signoff-2026-06-09.md) |
 | Procedimiento nota clínica (≠ solicitud) | Diferido Ola 2+ |
 
 ---
@@ -35,7 +36,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 | Prioridad | Hilo / tramo | Gate |
 |-----------|--------------|------|
 | **P1** | **Hilo D** — Tramo J farmacia | Signoff clínico + UX-G02 piloto |
-| P2 | Deuda E2E `tramo-c-admission` | Abrir `epis2-ficha-history` antes del CTA ingreso |
+| P2 | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | P3 | Ola 3 restante | Impresión clínica · piloto humano M3 |
 
 `npm run quality:microphase-next` → ledger MF cerrado; seguir **Hilo B/D** en plan global.
