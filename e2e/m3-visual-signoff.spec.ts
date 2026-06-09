@@ -4,15 +4,7 @@
  */
 import { copy } from '@epis2/design-system';
 import { test, expect, type Page } from '@playwright/test';
-
-async function loginAsPhysician(page: Page) {
-  const login = await page.request.post('/api/auth/login', {
-    data: { username: 'medico.demo', demoAuthKey: 'DEMO-CLAVE-MEDICO' },
-  });
-  expect(login.ok()).toBeTruthy();
-  await page.goto('/comando');
-  await expect(page).toHaveURL(/\/comando/);
-}
+import { loginAsPhysician, pinDemoCase } from './helpers/demoPatient.js';
 
 async function loginViaUi(page: Page) {
   await page.goto('/login');
@@ -23,10 +15,7 @@ async function loginViaUi(page: Page) {
 }
 
 async function openEvolutionForm(page: Page) {
-  await page.getByTestId('epis2-toggle-patient-panel').click();
-  await page.getByRole('button', { name: copy.forms.searchPatients }).click();
-  await page.getByRole('button', { name: 'DEMO-001' }).click();
-  await expect(page).toHaveURL(/\/espacio\/ficha/);
+  await pinDemoCase(page, 'DEMO-001');
   await page.goto('/comando');
   const powerBar = page.getByTestId('epis2-power-bar');
   await powerBar

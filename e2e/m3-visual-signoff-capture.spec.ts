@@ -6,6 +6,7 @@ import { copy } from '@epis2/design-system';
 import { test, expect, type Page } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { loginAsPhysician, pinDemoCase } from './helpers/demoPatient.js';
 
 const evidenceDir =
   process.env.M3_VISUAL_EVIDENCE_DIR ??
@@ -20,13 +21,6 @@ async function snap(page: Page, name: string) {
   });
 }
 
-async function loginAsPhysician(page: Page) {
-  const login = await page.request.post('/api/auth/login', {
-    data: { username: 'medico.demo', demoAuthKey: 'DEMO-CLAVE-MEDICO' },
-  });
-  expect(login.ok()).toBeTruthy();
-}
-
 async function loginViaUi(page: Page) {
   await page.goto('/login');
   await page.getByLabel(copy.login.demoKeyLabel).fill('DEMO-CLAVE-MEDICO');
@@ -35,10 +29,7 @@ async function loginViaUi(page: Page) {
 }
 
 async function openEvolutionForm(page: Page) {
-  await page.goto('/comando');
-  await page.getByTestId('epis2-toggle-patient-panel').click();
-  await page.getByRole('button', { name: copy.forms.searchPatients }).click();
-  await page.getByRole('button', { name: 'DEMO-001' }).click();
+  await pinDemoCase(page, 'DEMO-001');
   await page.goto('/comando');
   const powerBar = page.getByTestId('epis2-power-bar');
   await powerBar

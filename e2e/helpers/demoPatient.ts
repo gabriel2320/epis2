@@ -36,6 +36,16 @@ export async function pinDemoCase(page: Page, demoCode: string) {
   await expect(page.getByTestId('epis2-patient-workspace')).toBeVisible({ timeout: 15_000 });
 }
 
+/** Flujo UI Buscar → grid demo (alternativa cuando hace falta recorrer la búsqueda). */
+export async function selectDemoPatientViaSearch(page: Page, demoCode: string) {
+  await page.getByTestId('epis2-nav-buscar').click();
+  await expect(page).toHaveURL(/\/espacio\/buscar-paciente/);
+  await page.getByRole('button', { name: copy.forms.searchPatients }).click();
+  await page.getByRole('button', { name: demoCode }).click();
+  await expect(page).toHaveURL(/\/espacio\/ficha/);
+  await expect(page.getByTestId('epis2-patient-workspace')).toBeVisible({ timeout: 15_000 });
+}
+
 export async function openAmbulatoryFromCommand(page: Page) {
   await goToCommandCenter(page);
   const powerBar = page.getByTestId('epis2-power-bar');

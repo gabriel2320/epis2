@@ -4,6 +4,7 @@
  */
 import { copy } from '@epis2/design-system';
 import { test, expect } from '@playwright/test';
+import { pinDemoCase } from './helpers/demoPatient.js';
 
 async function loginAsMedico(page: import('@playwright/test').Page) {
   await page.goto('/login');
@@ -15,11 +16,7 @@ async function loginAsMedico(page: import('@playwright/test').Page) {
 }
 
 async function openEvolutionForm(page: import('@playwright/test').Page) {
-  await page.getByTestId('epis2-toggle-patient-panel').click();
-  await page.getByRole('button', { name: copy.forms.searchPatients }).click();
-  await page.getByRole('button', { name: 'DEMO-001' }).click();
-  await expect(page).toHaveURL(/\/espacio\/ficha/);
-
+  await pinDemoCase(page, 'DEMO-001');
   await page.goto('/comando');
   const powerBar = page.getByTestId('epis2-power-bar');
   await powerBar
