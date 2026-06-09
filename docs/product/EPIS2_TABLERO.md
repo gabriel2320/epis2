@@ -28,6 +28,8 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 | Auditoría Fase 3 — pulido M3 | `9b2b073` · tertiary + surfaceContainer* runtime · EpisDraftStatus roles clínicos · Admin/DraftReview al DS · motion a11y · [`epis2-auditoria-fase3-pulido-m3-2026-06-09.md`](../../reports/epis2-auditoria-fase3-pulido-m3-2026-06-09.md) |
 | Auditoría Fase 4 — deuda estructural | side-effects approveDraft modulares · GeneratedClinicalFormPage dividido · tabla control migraciones · tests admin/DraftReview/TabShell · layers-gate en CI · [`epis2-auditoria-fase4-deuda-2026-06-09.md`](../../reports/epis2-auditoria-fase4-deuda-2026-06-09.md) |
 | **P1 impresión Carta** — epicrisis | `PrintLetterDocument` + `/espacio/epicrisis/imprimir` · E2E en CI · gate ampliado · [`epis2-p1-print-discharge-letter-2026-06-09.md`](../../reports/epis2-p1-print-discharge-letter-2026-06-09.md) |
+| Auditoría II — inventario + limpieza + documental | Inventario completo · código muerto anclado por gates · plan F1–F5 · [`epis2-auditoria-inventario-limpieza-2026-06-09.md`](../../reports/epis2-auditoria-inventario-limpieza-2026-06-09.md) |
+| **F1+F2 — limpieza + PEND-006 código cerrado** | 3 componentes muertos fuera · registry `PRINTABLE_BLUEPRINTS` · lab/imagen A5 + E2E · [`epis2-f1-f2-limpieza-print-2026-06-09.md`](../../reports/epis2-f1-f2-limpieza-print-2026-06-09.md) |
 
 ---
 
@@ -43,7 +45,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 
 | Prioridad | Hilo / tramo | Gate |
 |-----------|--------------|------|
-| **P1** | Impresión A5 restante (órdenes lab / imagenología) — Carta epicrisis ✓ | PEND-006 parcial · `quality:ola6a-print-gate` |
+| **P1** | F4 sesión documental (sync `dev-agent-brief` ← tablero · índices · archivado) | Auditoría II §2.4 — PEND-006 código ✓ |
 | P1b | Alto contraste ampliado (3.6 diferido — requiere signoff visual) | [`epis2-auditoria-fase3-pulido-m3-2026-06-09.md`](../../reports/epis2-auditoria-fase3-pulido-m3-2026-06-09.md) |
 | P1c | Fase 5 auditoría — checklist pre-producción (solo si sale del laboratorio) | [`epis2-auditoria-profunda-2026-06-09.md`](../../reports/epis2-auditoria-profunda-2026-06-09.md) §7 |
 | P2 | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |

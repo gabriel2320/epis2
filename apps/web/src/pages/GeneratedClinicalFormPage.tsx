@@ -70,6 +70,7 @@ import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.j
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
 import { writePrintPreview } from '../clinical/printPreviewStorage.js';
+import { PRINTABLE_BLUEPRINTS } from '../clinical/print/printableBlueprints.js';
 import { registerUnsavedWorkProbe, useClassicMd3Mode } from '../modes/index.js';
 import { ClassicMd3ClinicalPageShell } from '../components/classic-md3/ClassicMd3ClinicalPageShell.js';
 import {
@@ -124,6 +125,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   }, [formState.isDirty]);
 
   const values = watch();
+  const printable = PRINTABLE_BLUEPRINTS[blueprint.blueprintId];
 
   const [showCommandPrefillBadge] = useState(() => hasCommandSlotSearchParams(search));
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
@@ -460,52 +462,20 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
           ) : null}
         </>
       ) : null}
-      {blueprint.blueprintId === 'medical_certificate' && effectivePatientId ? (
+      {printable && effectivePatientId ? (
         <EpisButton
           appearance="outlined"
           size="small"
-          data-testid="epis2-print-preview-medical_certificate"
+          data-testid={`epis2-print-preview-${blueprint.blueprintId}`}
           onClick={() => {
-            writePrintPreview('medical_certificate', values);
+            writePrintPreview(blueprint.blueprintId, values);
             void navigate({
-              to: '/espacio/certificado/imprimir',
+              to: printable.to,
               search: { patientId: effectivePatientId },
             });
           }}
         >
-          {copy.print.previewA5}
-        </EpisButton>
-      ) : null}
-      {blueprint.blueprintId === 'prescription' && effectivePatientId ? (
-        <EpisButton
-          appearance="outlined"
-          size="small"
-          data-testid="epis2-print-preview-prescription"
-          onClick={() => {
-            writePrintPreview('prescription', values);
-            void navigate({
-              to: '/espacio/receta/imprimir',
-              search: { patientId: effectivePatientId },
-            });
-          }}
-        >
-          {copy.print.previewA5}
-        </EpisButton>
-      ) : null}
-      {blueprint.blueprintId === 'discharge_summary' && effectivePatientId ? (
-        <EpisButton
-          appearance="outlined"
-          size="small"
-          data-testid="epis2-print-preview-discharge_summary"
-          onClick={() => {
-            writePrintPreview('discharge_summary', values);
-            void navigate({
-              to: '/espacio/epicrisis/imprimir',
-              search: { patientId: effectivePatientId },
-            });
-          }}
-        >
-          {copy.print.previewLetter}
+          {printable.ctaLabel}
         </EpisButton>
       ) : null}
     </>

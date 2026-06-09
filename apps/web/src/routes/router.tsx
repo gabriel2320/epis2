@@ -16,6 +16,8 @@ import { PatientWorkspacePage } from '../pages/PatientWorkspacePage.js';
 import { ResultsInboxPage } from '../pages/ResultsInboxPage.js';
 import { MedicalCertificatePrintPage } from '../pages/MedicalCertificatePrintPage.js';
 import { DischargeSummaryPrintPage } from '../pages/DischargeSummaryPrintPage.js';
+import { LabRequestPrintPage } from '../pages/LabRequestPrintPage.js';
+import { ImagingRequestPrintPage } from '../pages/ImagingRequestPrintPage.js';
 import { PrescriptionPrintPage } from '../pages/PrescriptionPrintPage.js';
 import { AdminConsolePage } from '../pages/AdminConsolePage.js';
 import { LoginPage } from '../pages/LoginPage.js';
@@ -208,6 +210,13 @@ const labFormRoute = createRoute({
   component: clinicalFormPage('/espacio/laboratorio'),
 });
 
+const labRequestPrintRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/laboratorio/imprimir',
+  validateSearch: validatePatientSearch,
+  component: LabRequestPrintPage,
+});
+
 const referralFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/interconsulta',
@@ -220,6 +229,13 @@ const imagingFormRoute = createRoute({
   path: '/espacio/imagenologia',
   validateSearch: validatePatientSearch,
   component: clinicalFormPage('/espacio/imagenologia'),
+});
+
+const imagingRequestPrintRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/imagenologia/imprimir',
+  validateSearch: validatePatientSearch,
+  component: ImagingRequestPrintPage,
 });
 
 const procedureFormRoute = createRoute({
@@ -407,8 +423,10 @@ export const routeTree = rootRoute.addChildren([
     prescriptionFormRoute,
     prescriptionPrintRoute,
     labFormRoute,
+    labRequestPrintRoute,
     referralFormRoute,
     imagingFormRoute,
+    imagingRequestPrintRoute,
     procedureFormRoute,
     nursingFormRoute,
     marFormRoute,

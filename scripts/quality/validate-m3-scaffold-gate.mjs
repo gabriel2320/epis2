@@ -12,7 +12,6 @@ const required = [
   'apps/web/src/components/layout/EpisClinicalWorkspaceShell.tsx',
   'apps/web/src/components/layout/EpisSplitWorkspace.tsx',
   'apps/web/src/components/actions/EpisClinicalActionBar.tsx',
-  'apps/web/src/components/command/EpisCommandBarContextual.tsx',
   'apps/web/src/quality/uiDensityRules.ts',
 ];
 

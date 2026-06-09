@@ -1,0 +1,41 @@
+import { copy } from '@epis2/design-system';
+import { PrintA5Document, PrintField, Stack, Typography } from '@epis2/epis2-ui';
+import { usePrintPagePatient } from '../clinical/print/usePrintPagePatient.js';
+import { PrintPageToolbar } from '../clinical/print/PrintPageToolbar.js';
+import { printPriorityLabel } from '../clinical/print/printValueLabels.js';
+import { ErrorState } from '../components/ErrorState.js';
+
+/** Vista impresión orden de laboratorio — A5 vertical (norma §19.7). */
+export function LabRequestPrintPage() {
+  const { patientId, values, error, physician, patientName } = usePrintPagePatient('lab_request');
+
+  if (!patientId) {
+    return <ErrorState title={copy.errors.genericTitle} message={copy.forms.needsPatient} />;
+  }
+  if (error) {
+    return <ErrorState title={copy.errors.genericTitle} message={error} />;
+  }
+
+  return (
+    <Stack spacing={2} data-testid="epis2-lab-request-print-page">
+      <PrintPageToolbar printLabel={copy.print.printA5} />
+      <PrintA5Document
+        title={copy.print.labRequestTitle}
+        subtitle={`${patientName} · ${copy.demoBadge}`}
+        footer={
+          <>
+            <PrintField label={copy.print.signedBy} value={physician} />
+            <Typography variant="caption" display="block" sx={{ mt: 1 }}>
+              {copy.print.auditDemo}
+            </Typography>
+          </>
+        }
+      >
+        <PrintField label={copy.print.scheduledDate} value={values.scheduledDate} />
+        <PrintField label={copy.print.labTests} value={values.labTests} />
+        <PrintField label={copy.print.clinicalReason} value={values.clinicalReason} />
+        <PrintField label={copy.print.priority} value={printPriorityLabel(values.priority)} />
+      </PrintA5Document>
+    </Stack>
+  );
+}
