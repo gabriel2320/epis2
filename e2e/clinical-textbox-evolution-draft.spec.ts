@@ -28,19 +28,22 @@ test.describe('ClinicalTextBox E2E — evolución rich y trazabilidad', () => {
     await richSubjective.click();
     await richSubjective.fill('Paciente refiere mejoría del dolor abdominal.');
 
-    const objectiveInput = page.getByTestId('epis2-field-objective-input');
-    await objectiveInput.click();
+    const objectiveField = page.getByTestId('epis2-field-objective-input');
     const pasteText = 'Examen físico estable, sin signos de alarma.';
-    await page.getByTestId('epis2-field-objective-paste-zone').evaluate((el, text) => {
+    await objectiveField.getByRole('textbox').click();
+    await page.getByTestId('epis2-field-objective-paste-zone').evaluate((zone, text) => {
       const dt = new DataTransfer();
       dt.setData('text/plain', text);
-      el.dispatchEvent(new ClipboardEvent('paste', { clipboardData: dt, bubbles: true }));
+      zone.dispatchEvent(
+        new ClipboardEvent('paste', { bubbles: true, cancelable: true, clipboardData: dt }),
+      );
     }, pasteText);
+    await expect(objectiveField.getByRole('textbox')).toHaveValue(/Examen físico estable, sin signos de alarma\./);
 
     await page.getByLabel('Análisis').fill('Evolución favorable.');
     await page.getByLabel('Plan').fill('Continuar tratamiento y control.');
 
-    await page.getByRole('button', { name: copy.forms.saveDraft }).click();
+    await page.getByTestId('epis2-form-sign').click();
     await expect(page).toHaveURL(/\/espacio\/borrador\//);
     await expect(page.getByTestId('epis2-draft-review')).toBeVisible();
     await expect(page.getByTestId('epis2-draft-text-origins')).toBeVisible();
