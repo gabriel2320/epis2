@@ -6,6 +6,7 @@ export type ClinicalFormRoutePath =
   | '/espacio/resumen'
   | '/espacio/evolucion'
   | '/espacio/epicrisis'
+  | '/espacio/epicrisis/imprimir'
   | '/espacio/receta'
   | '/espacio/receta/imprimir'
   | '/espacio/laboratorio'

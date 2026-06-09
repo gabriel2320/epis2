@@ -492,6 +492,22 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
           {copy.print.previewA5}
         </EpisButton>
       ) : null}
+      {blueprint.blueprintId === 'discharge_summary' && effectivePatientId ? (
+        <EpisButton
+          appearance="outlined"
+          size="small"
+          data-testid="epis2-print-preview-discharge_summary"
+          onClick={() => {
+            writePrintPreview('discharge_summary', values);
+            void navigate({
+              to: '/espacio/epicrisis/imprimir',
+              search: { patientId: effectivePatientId },
+            });
+          }}
+        >
+          {copy.print.previewLetter}
+        </EpisButton>
+      ) : null}
     </>
   );
 
