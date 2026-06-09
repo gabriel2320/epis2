@@ -40,6 +40,7 @@ jobs:
       - run: npm run test
       - run: npm run quality:ci-parity
       - run: npx playwright install --with-deps chromium
+      - run: npm run build -w @epis2/web
       - run: npm run test:e2e
       - run: npm run db:validate
       - run: npm run ai:evals

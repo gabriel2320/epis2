@@ -5,6 +5,15 @@ import { defineConfig } from 'vite';
 const analyze = process.env.ANALYZE === 'true';
 
 export default defineConfig({
+  optimizeDeps: {
+    include: [
+      '@mui/material',
+      '@mui/material/styles',
+      '@mui/material/locale',
+      '@emotion/react',
+      '@emotion/styled',
+    ],
+  },
   plugins: [
     react(),
     ...(analyze
