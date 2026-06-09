@@ -33,7 +33,7 @@ Invariante
 | **Ola** | Ola 0…9+ | Agrupación arquitectónica de capacidades (precedencia, no cola rígida) | `EPIS2_WAVE_EXECUTION_CANON.md` · Ola 2 = atención médica |
 | **Hito** | 1A, 1B, EPIS2-05 | Subconjunto cerrable dentro de ola o bootstrap MVP | `ROADMAP.md` · EPIS2-00…12 = hitos bootstrap |
 | **Capa** | L0…L6 | Eje transversal del plan global (invariantes, tramos, RAD…) | `EPIS2_GLOBAL_DEV_PLAN.md` |
-| **Hilo** | Hilo A…D, UX-1 | Secuencia de trabajo activa post-MVP (antes «Fase A/B/C») | Plan global · **Hilo B** activo |
+| **Hilo** | Hilo A…D, UX-1 | Secuencia de trabajo activa post-MVP (antes «Fase A/B/C») | Plan global · **Hilo C** activo |
 | **Tramo clínico** | Tramo A…K | Dominio clínico / IDC (`MF-TRAMO-*`) | Tramo J = farmacia |
 | **Secuencia operacional** | Sec. A…D | Orden recomendado de olas (≠ tramo clínico) | `EPIS2_WAVE_EXECUTION_CANON.md` §9 |
 | **Programa** | PROG-* | Iniciativa transversal con microfases propias | PROG-THREE-MODES |
@@ -115,7 +115,8 @@ Tabla MF-1…51 ↔ legado: [`docs/quality/MF_UNIFIED_CANON.md`](../quality/MF_U
 | Programa MF-151…182 | ✓ Cerrado |
 | PROG-THREE-MODES | ✓ Cerrado |
 | CI master | ✓ 10/10 E2E · [run 27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998) · `15b6131` |
-| **Hilo B** (Ola 2) | ◐ ~95 % — PEND-002 defer |
+| **Hilo B** (Ola 2) | ✓ Cerrado 2026-06-09 · PEND-002 defer |
+| **Hilo C** (Ola 3) | ○ Activo |
 | **Hilo D** / Tramo J | ✓ PEND-001 cerrado 2026-06-09 |
 | Ledger MF READY | 0 — usar hilo + tablero |
 

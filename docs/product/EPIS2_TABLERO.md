@@ -1,6 +1,6 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-09 · **HEAD:** `15b6131` · **CI:** [27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998) ✅
+**Actualizado:** 2026-06-09 · **HEAD:** `88ec444` · **CI:** [27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998) ✅
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports/epis2-audit-avance-proyecto-2026-06-09.md`](../../reports/epis2-audit-avance-proyecto-2026-06-09.md)
 
@@ -16,10 +16,11 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 | PROG-THREE-MODES MF-01…08 | `quality:pm01` ✓ · `three-modes-journey` E2E |
 | **Hilo A** — consolidación visual | RAD dashboard, acordeones, MF-151→182 |
 | **Hilo UX-1** — tres modos MD3 | EPIS2-PM-01 cerrado |
+| **Hilo B** — Ola 2 productividad | Palette · autocomplete · golden V2 · procedure_request · cierre encuentro · farmacia · [`epis2-hilo-b-closure-2026-06-09.md`](../../reports/epis2-hilo-b-closure-2026-06-09.md) |
 | Golden V2 UI E2E | `golden-v2-admission-discharge` ✓ |
 | UX-G02 command-first E2E | Partes A/B/C1 ✓ |
-| E2E Tramo C admission | `tramo-c-admission` 3/3 — ficha-history antes CTAs · [`epis2-tramo-c-admission-e2e-fix-2026-06-09.md`](../../reports/epis2-tramo-c-admission-e2e-fix-2026-06-09.md) |
-| **Hilo D** — Tramo J farmacia | Signoff PEND-001 cerrado · `fa38e4d` · gates 6/6 · E2E 2/2 · UX-G02 9/9 · [`epis2-tramo-j-signoff-2026-06-09.md`](../../reports/epis2-tramo-j-signoff-2026-06-09.md) |
+| E2E Tramo C admission | `tramo-c-admission` 3/3 · [`epis2-tramo-c-admission-e2e-fix-2026-06-09.md`](../../reports/epis2-tramo-c-admission-e2e-fix-2026-06-09.md) |
+| **Hilo D** — Tramo J farmacia | PEND-001 cerrado · `fa38e4d` · [`epis2-tramo-j-signoff-2026-06-09.md`](../../reports/epis2-tramo-j-signoff-2026-06-09.md) |
 
 ---
 
@@ -27,8 +28,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 
 | Hilo | Notas |
 |------|-------|
-| **Hilo B** — Ola 2 | Palette ✓ · autocomplete ✓ · pharmacy dashboard ✓ · golden V2 ✓ · CI E2E ✓ |
-| Procedimiento nota clínica (≠ solicitud) | Diferido Ola 2+ |
+| **Hilo C** — Ola 3 longitudinal | Ficha hub · impresión clínica · piloto M3 |
 
 ---
 
@@ -36,11 +36,11 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 
 | Prioridad | Hilo / tramo | Gate |
 |-----------|--------------|------|
-| **P1** | **Hilo B** — Ola 2 restante | Nota procedimiento clínica (PEND-002, defer) |
+| **P1** | **Hilo C** — Ola 3 | Impresión clínica · piloto humano M3 (PEND-006) |
 | P2 | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
-| P3 | Ola 3 restante | Impresión clínica · piloto humano M3 |
+| P3 | Backlog Ola 2+ | Nota procedimiento clínica (PEND-002 defer) |
 
-`npm run quality:microphase-next` → ledger MF cerrado; seguir **Hilo B** en plan global.
+`npm run quality:microphase-next` → ledger MF cerrado; seguir **Hilo C** en plan global.
 
 ---
 
@@ -48,9 +48,10 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 
 | Ítem | Impacto |
 |------|---------|
+| PEND-002 defer | Nota post-procedimiento (IDC 58+) — no bloquea Ola 2 |
 | MUI Select en E2E | `getByRole('combobox')` en formularios |
 | Dependabot zod 4.x | PR aparte |
-| **Storybook** (herramienta UI) | 12 stories; ampliar por IDC — no es este tablero |
+| **Storybook** (herramienta UI) | 12 stories; ampliar por IDC |
 | Evolab | Repo externo [epis2-evolab](https://github.com/gabriel2320/epis2-evolab) |
 
 ---
@@ -65,6 +66,7 @@ L3 UX densidad     ████████████████████ 
 L4 RAD MD3         ████████████████████  Hilo A done
 L5 clinical-prod   ████████████████░░░░  base · piloto extendido pendiente
 L6 Tramo J         ████████████████████  signoff PEND-001 cerrado 2026-06-09
+L1 Ola 2 Hilo B    ████████████████████  cerrado 2026-06-09 · PEND-002 defer
 ```
 
-Reporte cierre E2E: `reports/epis2-ci-e2e-closure-2026-06-09.md` · Pendientes: `reports/epis2-pendientes-registro-2026-06-09.md`
+Reporte cierre Hilo B: `reports/epis2-hilo-b-closure-2026-06-09.md` · Pendientes: `reports/epis2-pendientes-registro-2026-06-09.md`

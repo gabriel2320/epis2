@@ -23,7 +23,7 @@ Home = `/comando`. PostgreSQL = SoT. IA no firma. Sin OpenMRS/Carbon en UI.
 | Capa | Qué | Estado |
 |------|-----|--------|
 | **L0 Invariantes** | `PRODUCT_INVARIANTS.md`, architecture:validate | Permanente |
-| **L1 Producto** | Olas 0–3, golden journey | Ola 1 ✓ · Ola 2–3 activas |
+| **L1 Producto** | Olas 0–3, golden journey | Ola 1 ✓ · Ola 2 Hilo B ✓ · Ola 3 activa |
 | **L2 Tramos clínicos** | A–K (urgencias, UCI, OR, farmacia…) | A–J ✓ scaffold · signoff clínico Tramo J cerrado |
 | **L3 UX densidad** | MF-UI-SIMPLIFY-M3 scaffold | ✓ base |
 | **L4 RAD productividad** | MF-RAD-M3 disciplina VB→MD3 | ✓ Hilo A |
@@ -47,7 +47,7 @@ Detalle L4→L5: `docs/product/EPIS2_UI_LAYERS.md`.
 
 Command palette Ctrl+K → **Hilo B**.
 
-### Hilo B — Completitud Ola 2 (**activo** · CI E2E ✓ 2026-06-09)
+### Hilo B — Completitud Ola 2 (**cerrado** 2026-06-09)
 
 - [x] `ClinicalCommandPalette` Ctrl+K (`ClinicalShellCommandPalette`)
 - [x] Autocomplete búsqueda paciente (`PatientSearchAutocomplete`)
@@ -56,10 +56,10 @@ Command palette Ctrl+K → **Hilo B**.
 - [x] Blueprint `procedure_request` + comando `request_procedure` (IDC 57)
 - [x] Cierre encuentro UI + API (`outpatient_visit.closeEncounter`)
 - [x] `dashboard-pharmacy` → `done`
-- [ ] Procedimiento nota clínica (≠ solicitud) — diferido Ola 2+
-- Orquestación: `npm run dev:agent:orchestrate` · `dev:agent:ollama`
+- [x] Cierre técnico · [`epis2-hilo-b-closure-2026-06-09.md`](../../reports/epis2-hilo-b-closure-2026-06-09.md)
+- ~~Nota procedimiento clínica (≠ solicitud)~~ → **PEND-002 defer** Ola 2+/3 (no bloquea cierre)
 
-### Hilo C — Ola 3 longitudinal
+### Hilo C — Ola 3 longitudinal (**activo**)
 
 - Ficha hub (split pane ✓)
 - [x] Documentos UI compacta · CTAs alergia/problema · timeline invocable

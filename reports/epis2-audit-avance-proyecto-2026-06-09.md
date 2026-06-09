@@ -13,11 +13,12 @@
 | **Programa microfases** MF-151…182 | ✅ Cerrado (38 MF) |
 | **PROG-THREE-MODES** (EPIS2-PM-01) | ✅ Cerrado |
 | **CI master** | ✅ Verde — 10/10 E2E · [run 27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998) · `15b6131` |
-| **Hilo B** (Ola 2) | ◐ ~95 % — PEND-002 defer |
+| **Hilo B** (Ola 2) | ✅ Cerrado 2026-06-09 · PEND-002 defer |
+| **Hilo C** (Ola 3) | ○ Activo |
 | **Hilo D** / Tramo J | ✅ PEND-001 cerrado 2026-06-09 |
 | **Working tree** | Limpio |
 
-**Conclusión:** plataforma estable; CI verde tras fix ci-parity; foco en cierre formal **Hilo B** y deuda E2E menor (PEND-004).
+**Conclusión:** plataforma estable; Hilo B cerrado; foco **Hilo C** (Ola 3) y deuda E2E PEND-004.
 
 ---
 
@@ -148,13 +149,12 @@ Specs E2E en CI: `golden-command-evolution`, `golden-draft-approval`, `golden-v2
 
 ## 8. Próximo paso exacto
 
-1. Cerrar formalmente **Hilo B** (PEND-002 = defer documentado en plan global).
+1. **Hilo C** — impresión clínica + piloto M3 (PEND-006).
 2. **PEND-004** — helper E2E combobox MUI.
-3. Sync docs canon tras cada entrega (tablero + SDEPIS2).
+3. **PEND-002** — backlog Ola 2+/3 (nota post-procedimiento, no reabre Hilo B).
 
 ```bash
-npm run quality:microphase-next   # → Hilo B (ledger MF cerrado)
-npm run check && npm run test && npm run db:validate
+npm run quality:microphase-next   # → Hilo C (ledger MF cerrado)
 ```
 
 ---
