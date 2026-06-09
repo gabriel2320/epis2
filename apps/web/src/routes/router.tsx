@@ -25,6 +25,7 @@ import { isUiCatalogEnabled } from '../dev/uiCatalogEnv.js';
 import { isVisualThemeCatalogEnabled } from '../dev/visualThemeCatalogEnv.js';
 import { isSchedulerSpikeEnabled } from '../dev/schedulerSpikeEnv.js';
 import { parseDashboardSearch, parseClinicalFormSearch, parseCommandSearch, parseClinicalPatientSearch } from './clinicalNavigate.js';
+import { EpisAppProviders } from '../AppProviders.js';
 
 const LazyUiCatalogPage = lazy(() =>
   import('../pages/dev/UiCatalogPage.js').then((m) => ({ default: m.UiCatalogPage })),
@@ -52,7 +53,11 @@ async function requireSession() {
 }
 
 const rootRoute = createRootRoute({
-  component: () => <Outlet />,
+  component: () => (
+    <EpisAppProviders>
+      <Outlet />
+    </EpisAppProviders>
+  ),
 });
 
 const loginRoute = createRoute({
