@@ -31,3 +31,9 @@ Node ESM en CI no resuelve subpath MUI igual que el bundler de Vite en dev.
 ## Próximo paso
 
 Push y verificar CI verde en `test:e2e` → `golden-journey`.
+
+## Seguimiento (sesión 2)
+
+E2E arrancó con preview pero falló login/UI: **faltaba `preview.proxy` para `/api`** — preview devolvía HTML en `/api/*` con HTTP 200.
+
+Fix: `preview.proxy` compartido con `server.proxy` en `apps/web/vite.config.ts`.
