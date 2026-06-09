@@ -56,7 +56,11 @@ export const EPIS_MAX_LOCAL_ACTIONS_PER_CARD = 2;
 /** Rutas auditadas — clasificación MF-UI-SIMPLIFY. */
 export const EPIS_SCREEN_REGISTRY: Record<
   string,
-  { kind: EpisScreenKind; route: string; scaffold: 'EpisAppScaffold' | 'EpisClinicalWorkspaceShell' }
+  {
+    kind: EpisScreenKind;
+    route: string;
+    scaffold: 'EpisAppScaffold' | 'EpisClinicalWorkspaceShell' | 'EpisClassicMd3Shell' | 'EpisDashboardMd3Shell';
+  }
 > = {
   command: {
     kind: 'command',
@@ -68,6 +72,11 @@ export const EPIS_SCREEN_REGISTRY: Record<
     route: '/espacio/ficha',
     scaffold: 'EpisClinicalWorkspaceShell',
   },
+  patientChartClassic: {
+    kind: 'workspace',
+    route: '/espacio/ficha?mode=classic',
+    scaffold: 'EpisClassicMd3Shell',
+  },
   clinicalForm: {
     kind: 'form',
     route: '/espacio/evolucion',
@@ -77,6 +86,11 @@ export const EPIS_SCREEN_REGISTRY: Record<
     kind: 'workspace',
     route: '/epis2/dashboard',
     scaffold: 'EpisAppScaffold',
+  },
+  dashboardMd3: {
+    kind: 'workspace',
+    route: '/epis2/dashboard?mode=dashboard',
+    scaffold: 'EpisDashboardMd3Shell',
   },
   draftReview: {
     kind: 'document',
@@ -96,6 +110,8 @@ export const EPIS_M3_SCAFFOLD_COMPONENTS = [
   'EpisClinicalActionBar',
   'EpisClinicalWorkspaceShell',
   'EpisSplitWorkspace',
+  'EpisClassicMd3Shell',
+  'EpisDashboardMd3Shell',
 ] as const;
 
 /** Patrones de interacción MF-UI-SIMPLIFY. */

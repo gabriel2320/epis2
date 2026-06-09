@@ -200,10 +200,13 @@ describe('CommandCenterPage', () => {
 
   it('muestra pantalla de decisión compacta sin rail ni tarjetas', () => {
     renderCommandCenter();
+    expect(screen.getByTestId('epis2-command-google-bar')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-command-hero')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-command-prompt')).toHaveTextContent(copy.commandCenter.title);
     expect(screen.getByTestId('epis2-command-hero-power-bar')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-power-bar')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-command-classic-access')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-command-open-classic')).toBeInTheDocument();
     expect(screen.queryByTestId('epis2-floating-command-dock')).not.toBeInTheDocument();
     expect(screen.queryByTestId('epis2-command-suggestion-cards')).not.toBeInTheDocument();
     expect(screen.getByTestId('epis2-command-quick-chips')).toBeInTheDocument();

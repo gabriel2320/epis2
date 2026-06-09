@@ -125,6 +125,24 @@ Checklist obligatorio: `docs/quality/PILOT_DEMO_CHECKLIST.md`. Automatización: 
 
 ---
 
+## EPIS2-13 — Tres modos MD3 (post-MVP UX)
+
+Transversal a olas clínicas; **no** sustituye EPIS2-12 tablero legacy ni home en comando.
+
+| Gate | Comando | Criterio |
+|------|---------|----------|
+| 13-A Orquestación | `npm run quality:three-modes-gate` | Session provider, switcher, home `/comando` |
+| 13-B Classic aislado | `npm run quality:classic-md3-mode-gate` | Shell classic sin API en componentes visuales |
+| 13-C Dashboard MD3 | `npm run quality:dashboard-md3-mode-gate` | KPI accionables, grid MD3, no home |
+| 13-D Transiciones | `npm run quality:mode-transitions-gate` | Seis transiciones vía `modeTransitions.ts` |
+| 13-E Seguridad modo | `npm run quality:mode-safety-gate` | Classic requiere paciente; guards activos |
+
+Sub-gates: `quality:login-command-home-gate` · `quality:mode-switcher-gate` · `quality:command-center-hub-gate`.
+
+Plan microfases: `docs/product/EPIS2_THREE_MODES_DEV_PLAN.md`. Cierre parcial MF-01/02: `reports/epis2-three-modes-consolidation-2026-06-08.md`.
+
+---
+
 ## Criterio de parada (anti-deriva)
 
 Si antes de EPIS2-11 aparecen: dashboards extensos, menús hospitalarios, módulos no listados en `SCOPE_V1.md`, o integración OpenMRS — **detener desarrollo** y revisar alcance con `PRODUCT_CANON.md`.

@@ -10,6 +10,7 @@ import {
   epis2PageIslandSx,
   epis2CanvasSx,
 } from '@epis2/epis2-ui';
+import { ClassicMd3PreferencesSection } from '../components/classic-md3/ClassicMd3PreferencesSection.js';
 
 export function AppearancePreferencesPage() {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ export function AppearancePreferencesPage() {
               {copy.themePreferences.pageDescription}
             </EpisM3Text>
             <EpisAppearancePreferencesPanel />
+            <ClassicMd3PreferencesSection />
           </Stack>
         </Box>
       </Box>

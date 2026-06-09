@@ -66,6 +66,20 @@ MF-161…182  → Resultados, formularios, admin, piloto, HL7
 
 Próximo trabajo fuera del ledger hasta decisión sobre MF-2xx: Ciclo A doc sync, piloto humano M3, impresión clínica.
 
+## Programa paralelo THREE-MODES (post-MVP UX)
+
+Fuera del ledger MF-151…182; gobernado por [`EPIS2_THREE_MODES_DEV_PLAN.md`](../product/EPIS2_THREE_MODES_DEV_PLAN.md) y fase **EPIS2-13** en [`ROADMAP.md`](../ROADMAP.md).
+
+| MF | Estado | Gate principal |
+|----|--------|----------------|
+| MF-THREE-MODES-01 | DONE | `quality:three-modes-gate` |
+| MF-THREE-MODES-02 | DONE | `quality:three-modes-gate` |
+| MF-THREE-MODES-03…07 | READY | extend 13-A…13-E |
+
+Una microfase THREE-MODES por sesión; reporte `reports/epis2-mf-three-modes-XX-*.md` o `epis2-three-modes-*.md`.
+
+---
+
 ## Plantilla de cierre
 
 Ver `docs/MICROPHASE_TEMPLATE.md` y el formato en `reports/epis2-mf-151-governance.md`.

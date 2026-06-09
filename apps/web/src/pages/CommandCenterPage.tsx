@@ -4,14 +4,11 @@ import { getCommandBarAiHint } from '@epis2/command-registry';
 
 import { EpisAppScaffold } from '../components/layout/EpisAppScaffold.js';
 import { EpisTopAppBar } from '../components/layout/EpisTopAppBar.js';
+import { EpisCommandCenterGoogleBar } from '../components/command-center/EpisCommandCenterGoogleBar.js';
 
 import {
-  EpisChip,
-  EpisCommandCenterHero,
-  EpisCommandCenterInlineBar,
-  EpisCommandCenterLayout,
-  EpisCommandResult,
   EpisButton,
+  EpisCommandCenterLayout,
   Stack,
 } from '@epis2/epis2-ui';
 
@@ -131,77 +128,60 @@ export function CommandCenterPage() {
       testId="epis2-command-shell"
     >
       <EpisCommandCenterLayout maxWidth={720} reserveDockSpace={false}>
-        <EpisCommandCenterHero
+        <EpisCommandCenterGoogleBar
           role={role}
           permissions={permissions}
           aiAvailable={aiAvailable === true}
-          onSelect={selectSuggestion}
+          query={query}
+          onQueryChange={setQuery}
+          onSubmit={() => void submit()}
+          onSelectSuggestion={selectSuggestion}
+          isResolving={isResolving}
+          {...(error ? { error } : {})}
+          {...(error ? {} : { aiHint: aiHint ?? undefined })}
           contextSlot={activePatient ? <CommandCenterContextLine /> : null}
-          powerBarSlot={
-            <EpisCommandCenterInlineBar
-              label={copy.commandCenter.powerBarLabel}
-              placeholder={copy.commandCenter.powerBarPlaceholder}
-              submitLabel={isResolving ? copy.commandCenter.resolving : copy.commandCenter.submit}
-              value={query}
-              onChange={setQuery}
-              onSubmit={() => void submit()}
-              error={error}
-              aiHint={error ? undefined : aiHint}
-              disabled={isResolving}
-            />
+          clarificationCandidates={
+            lastResult?.status === 'needs_clarification' ? lastResult.candidates : undefined
+          }
+          onClarificationSelect={(label) => void submit(label)}
+          footerSlot={
+            <>
+              <CommandCenterRecentActivity />
+
+              {error === copy.commandCenter.needsPatient ||
+              lastResult?.status === 'needs_patient' ? (
+                <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ width: '100%' }}>
+                  <EpisButton
+                    size="small"
+                    appearance="outlined"
+                    onClick={() => void navigate({ to: '/espacio/buscar-paciente' })}
+                  >
+                    {copy.commandCenter.pickPatientToContinue}
+                  </EpisButton>
+                </Stack>
+              ) : null}
+
+              {demoNarrativesEnabled ? (
+                <Stack direction="row" justifyContent="center" sx={{ width: '100%' }}>
+                  <EpisButton
+                    appearance="text"
+                    size="small"
+                    onClick={() => setDemoPanelOpen((open) => !open)}
+                    data-testid="epis2-toggle-demo-narratives"
+                  >
+                    {demoPanelOpen
+                      ? copy.commandCenter.demoNarrativesToggleHide
+                      : copy.commandCenter.demoNarrativesToggleShow}
+                  </EpisButton>
+                </Stack>
+              ) : null}
+
+              {demoNarrativesEnabled && demoPanelOpen ? (
+                <DemoNarrativeWalkthroughPanel onSelectEpisode={selectDemoEpisode} />
+              ) : null}
+            </>
           }
         />
-
-        <CommandCenterRecentActivity />
-
-        {lastResult?.status === 'needs_clarification' && lastResult.candidates.length > 0 ? (
-          <EpisCommandResult title={copy.commandCenter.clarificationTitle}>
-            <Stack direction="row" flexWrap="wrap" gap={1}>
-              {lastResult.candidates.map((c) => (
-                <EpisChip
-                  key={c.intent}
-                  label={c.labelEs}
-                  size="small"
-                  variant="outlined"
-                  clickable
-                  onClick={() => void submit(c.labelEs)}
-                />
-              ))}
-            </Stack>
-          </EpisCommandResult>
-        ) : null}
-
-        {error === copy.commandCenter.needsPatient ||
-        lastResult?.status === 'needs_patient' ? (
-          <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ width: '100%' }}>
-            <EpisButton
-              size="small"
-              appearance="outlined"
-              onClick={() => void navigate({ to: '/espacio/buscar-paciente' })}
-            >
-              {copy.commandCenter.pickPatientToContinue}
-            </EpisButton>
-          </Stack>
-        ) : null}
-
-        {demoNarrativesEnabled ? (
-          <Stack direction="row" justifyContent="center" sx={{ width: '100%' }}>
-            <EpisButton
-              appearance="text"
-              size="small"
-              onClick={() => setDemoPanelOpen((open) => !open)}
-              data-testid="epis2-toggle-demo-narratives"
-            >
-              {demoPanelOpen
-                ? copy.commandCenter.demoNarrativesToggleHide
-                : copy.commandCenter.demoNarrativesToggleShow}
-            </EpisButton>
-          </Stack>
-        ) : null}
-
-        {demoNarrativesEnabled && demoPanelOpen ? (
-          <DemoNarrativeWalkthroughPanel onSelectEpisode={selectDemoEpisode} />
-        ) : null}
 
         <CommandConfirmationDialog
           pending={pendingConfirmation}

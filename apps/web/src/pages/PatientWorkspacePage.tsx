@@ -11,6 +11,12 @@ import {
   Typography,
   epis2ShellContentIslandSx,
 } from '@epis2/epis2-ui';
+import { ClassicMd3WorkspaceLayout } from '../components/classic-md3/ClassicMd3WorkspaceLayout.js';
+import { EpisClassicMd3SplitPane } from '../components/classic-md3/EpisClassicMd3SplitPane.js';
+import { useClassicMd3Mode } from '../classic-md3/useClassicMd3Mode.js';
+import { classicCommandSuggestionLabels } from '../classic-md3/commandSuggestions.js';
+import { useClinicalCommandSubmit } from '../clinical/useClinicalCommandSubmit.js';
+import { useCommandResolveContext } from '../clinical/useCommandResolveContext.js';
 import { EpisClinicalWorkspaceShell } from '../components/layout/EpisClinicalWorkspaceShell.js';
 import { EpisSplitWorkspace } from '../components/layout/EpisSplitWorkspace.js';
 import { INTENT_TO_ASSIST_BLUEPRINT } from '../api/clinicalApi.js';
@@ -27,16 +33,19 @@ import { PatientRecentActivityBlock } from '../components/PatientRecentActivityB
 import { PatientSummaryAntecedentsBlock } from '../components/PatientSummaryAntecedentsBlock.js';
 import { PatientSummaryDocumentsBlock } from '../components/PatientSummaryDocumentsBlock.js';
 import { PatientWorkspaceCommandPanel } from '../components/PatientWorkspaceCommandPanel.js';
+import { CommandConfirmationDialog } from '../components/CommandConfirmationDialog.js';
 
 export function PatientWorkspacePage() {
-  const search = useSearch({ strict: false }) as { patientId?: string };
+  const search = useSearch({ strict: false }) as { patientId?: string; mode?: string };
   const navigate = useClinicalNavigate();
+  const isClassicMode = useClassicMd3Mode();
   const { patient: active, setPatient } = useActivePatient();
   const [alertBlueprintId, setAlertBlueprintId] = useState<string | undefined>();
   const [alertLabel, setAlertLabel] = useState<string | undefined>();
   const [patientsFetchEnabled, setPatientsFetchEnabled] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
   const [historyFocus, setHistoryFocus] = useState<'timeline' | 'documents' | null>(null);
+  const [supportingOpen, setSupportingOpen] = useState(true);
 
   const openHistory = (focus: 'timeline' | 'documents' | null = null) => {
     setHistoryFocus(focus);
@@ -44,6 +53,15 @@ export function PatientWorkspacePage() {
   };
 
   const patientId = search.patientId ?? active?.id;
+  const commandContext = useCommandResolveContext('patient_chart');
+  const classicCommand = useClinicalCommandSubmit({
+    ...(patientId ? { patientId } : {}),
+    commandContext,
+    onResolved: (result) => {
+      setAlertBlueprintId(INTENT_TO_ASSIST_BLUEPRINT[result.intent]);
+      setAlertLabel(result.labelEs);
+    },
+  });
 
   const detailQuery = usePatientDetailQuery(patientId);
   const longitudinalQuery = usePatientLongitudinalQuery(patientId, Boolean(patientId));
@@ -202,6 +220,52 @@ export function PatientWorkspacePage() {
   ) : (
     <Typography color="text.secondary">{copy.drafts.loading}</Typography>
   );
+
+  if (isClassicMode) {
+    const allergyLabels = longitudinal?.allergies.map((a) => a.substance) ?? [];
+    const alertLabels = clinicalAlerts
+      .filter((a) => a.severity === 'critical')
+      .map((a) => a.message);
+    const metaLine = [
+      detail.patient.demoCaseCode,
+      detail.clinicalContext.openEncounterId ? copy.classicMd3.episodeOpen : undefined,
+    ]
+      .filter(Boolean)
+      .join(' · ');
+
+    return (
+      <>
+        <ClassicMd3WorkspaceLayout
+          patientId={patientId}
+          metaLine={metaLine}
+          allergyLabels={allergyLabels}
+          alertLabels={alertLabels}
+          supportingOpen={supportingOpen}
+          onSupportingToggle={() => setSupportingOpen((v) => !v)}
+          mainContent={
+            <EpisClassicMd3SplitPane
+              primary={primaryColumn}
+              secondary={secondaryColumn}
+              open={historyOpen}
+              onOpenChange={setHistoryOpen}
+              testId="epis2-classic-ficha-split"
+            />
+          }
+          supportingContent={secondaryColumn}
+          commandQuery={classicCommand.query}
+          onCommandQueryChange={classicCommand.setQuery}
+          onCommandSubmit={() => void classicCommand.submit()}
+          commandSuggestions={classicCommandSuggestionLabels(classicCommand.lastResult)}
+          onCommandSuggestion={(label) => void classicCommand.submit(label)}
+        />
+        <CommandConfirmationDialog
+          pending={classicCommand.pendingConfirmation}
+          onConfirm={classicCommand.confirmPending}
+          onCancel={classicCommand.cancelPending}
+        />
+      </>
+    );
+  }
 
   return (
     <>

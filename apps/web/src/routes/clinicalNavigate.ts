@@ -24,7 +24,7 @@ export type ClinicalFormRoutePath =
   | '/espacio/traslado'
   | '/espacio/informe-interconsulta';
 
-export type ClinicalPatientSearch = { patientId?: string };
+export type ClinicalPatientSearch = { patientId?: string; mode?: 'classic' };
 
 /** CE-3b/CE-4: slots del comando en query string al abrir formulario. */
 export type ClinicalFormSearch = ClinicalPatientSearch & {
@@ -91,7 +91,12 @@ export type DashboardTab =
   | 'aps'
   | 'specialty';
 
-export type DashboardSearch = { tab?: DashboardTab; patientId?: string };
+export type DashboardSearch = {
+  tab?: DashboardTab;
+  patientId?: string;
+  view?: 'classic';
+  mode?: 'dashboard';
+};
 
 /** Tabs dashboard — fuente única para router, UI y UX-G04b. */
 export const DASHBOARD_TABS: readonly DashboardTab[] = [
@@ -117,9 +122,12 @@ export function parseDashboardSearch(search: Record<string, unknown>): Dashboard
     typeof tabRaw === 'string' && DASHBOARD_TAB_SET.has(tabRaw)
       ? (tabRaw as DashboardTab)
       : 'work';
+  const mode = search.mode === 'dashboard' ? ('dashboard' as const) : undefined;
   return {
     tab,
     patientId: typeof search.patientId === 'string' ? search.patientId : undefined,
+    ...(search.view === 'classic' ? { view: 'classic' as const } : {}),
+    ...(mode ? { mode } : {}),
   };
 }
 

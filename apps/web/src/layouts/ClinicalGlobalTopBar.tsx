@@ -6,6 +6,7 @@ import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { ClinicalAppBarAlertsAction } from './ClinicalAppBarAlertsAction.js';
 import { ClinicalAppBarUserMenu } from './ClinicalAppBarUserMenu.js';
 import { ClinicalRoleCareContext } from './ClinicalRoleCareContext.js';
+import { EpisModeSwitcher } from '../components/modes/EpisModeSwitcher.js';
 
 type ClinicalGlobalTopBarProps = {
   active?: 'command' | 'clinical' | 'dashboard';
@@ -36,6 +37,7 @@ export function ClinicalGlobalTopBar({ active = 'clinical' }: ClinicalGlobalTopB
       data-testid="epis2-global-top-bar"
       endActions={
         <>
+          <EpisModeSwitcher compact />
           <ClinicalRoleCareContext />
           <EpisButton
             component={Link}

@@ -33,6 +33,12 @@ import { IcuDashboardTab } from '../components/IcuDashboardTab.js';
 import { OrDashboardTab } from '../components/OrDashboardTab.js';
 import { ApsDashboardTab } from '../components/ApsDashboardTab.js';
 import { SpecialtyDashboardTab } from '../components/SpecialtyDashboardTab.js';
+import { useDashboardMd3Mode } from '../dashboard-md3/useDashboardMd3Mode.js';
+import { buildDashboardTabSearch } from '../modes/episModeSearch.js';
+import { useEpisSession } from '../session/EpisSessionContext.js';
+import { DashboardMd3WorkspaceLayout } from '../components/dashboard-md3/DashboardMd3WorkspaceLayout.js';
+import type { DashboardKpiItem } from '../components/dashboard-md3/EpisDashboardMd3KpiStrip.js';
+import { useClinicalCommandSubmit } from '../clinical/useClinicalCommandSubmit.js';
 
 const LazyDashboardWorklists = lazy(() =>
   import('../components/DashboardWorklists.js').then((m) => ({
@@ -41,7 +47,13 @@ const LazyDashboardWorklists = lazy(() =>
 );
 
 export function DashboardModeContent() {
-  const search = useSearch({ strict: false }) as { tab?: string; patientId?: string };
+  const search = useSearch({ strict: false }) as {
+    tab?: string;
+    patientId?: string;
+    mode?: string;
+  };
+  const isDashboardMd3 = useDashboardMd3Mode();
+  const { setLastDashboardTab } = useEpisSession();
   const navigate = useClinicalNavigate();
   const { sideNavItems, sideNavFooter } = useEpisSideNavigation();
   const { session, hasPermission } = useAuth();
@@ -114,14 +126,81 @@ export function DashboardModeContent() {
   const specialtyBoard = dashboardQueries.specialty.data ?? null;
 
   const setTab = (next: DashboardTab) => {
+    setLastDashboardTab(next);
     void navigate({
       to: '/epis2/dashboard',
-      search: {
-        tab: next,
+      search: buildDashboardTabSearch(next, {
         ...(dashboardPatientId ? { patientId: dashboardPatientId } : {}),
-      },
+        md3: isDashboardMd3,
+      }),
     });
   };
+
+  const dashboardCommand = useClinicalCommandSubmit({
+    patientId: dashboardPatientId,
+  });
+
+  const allowedTabs = useMemo(() => {
+    const set = new Set<DashboardTab>(['work', 'patient', 'service']);
+    if (canNursing) set.add('nursing');
+    if (canPharmacy) set.add('pharmacy');
+    if (canQuality) set.add('quality');
+    if (canReception) set.add('reception');
+    if (canEmergency) set.add('emergency');
+    if (canIcu) set.add('icu');
+    if (canOr) set.add('or');
+    if (canAps) set.add('aps');
+    if (canSpecialty) set.add('specialty');
+    return set;
+  }, [
+    canNursing,
+    canPharmacy,
+    canQuality,
+    canReception,
+    canEmergency,
+    canIcu,
+    canOr,
+    canAps,
+    canSpecialty,
+  ]);
+
+  const goCommand = () => void navigate({ to: '/comando' });
+
+  const workKpiItems = useMemo((): DashboardKpiItem[] => {
+    if (!work) return [];
+    const owner = copy.dashboardMd3.kpiOwnerClinical;
+    const scrollToGrid = () => {
+      document
+        .querySelector('[data-testid="epis2-dashboard-md3-main-grid"]')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    return [
+      {
+        id: 'open-drafts',
+        label: copy.dashboardMd3.kpiOpenDrafts,
+        value: work.myOpenDrafts.length,
+        owner,
+        onClick: scrollToGrid,
+        testId: 'epis2-dashboard-kpi-open-drafts',
+      },
+      {
+        id: 'pending-review',
+        label: copy.dashboardMd3.kpiPendingReview,
+        value: work.pendingReview.length,
+        owner,
+        onClick: scrollToGrid,
+        testId: 'epis2-dashboard-kpi-pending-review',
+      },
+      {
+        id: 'demo-tasks',
+        label: copy.dashboardMd3.kpiDemoTasks,
+        value: work.demoTasks.length,
+        owner,
+        onClick: goCommand,
+        testId: 'epis2-dashboard-kpi-demo-tasks',
+      },
+    ];
+  }, [work, goCommand]);
 
   const tabs = useMemo((): EpisDashboardTab[] => {
     const items: EpisDashboardTab[] = [
@@ -231,8 +310,6 @@ export function DashboardModeContent() {
       params: { draftId },
     });
   };
-
-  const goCommand = () => void navigate({ to: '/comando' });
 
   let panel: ReactNode = null;
 
@@ -485,23 +562,25 @@ export function DashboardModeContent() {
           <Stack spacing={3}>
             {work ? (
               <>
-                <Stack direction="row" flexWrap="wrap" gap={2} data-testid="epis2-dashboard-work-metrics">
-                  <EpisMetric
-                    label={copy.dashboard.metricOpenDrafts}
-                    value={work.myOpenDrafts.length}
-                    data-testid="epis2-metric-open-drafts"
-                  />
-                  <EpisMetric
-                    label={copy.dashboard.metricPendingReview}
-                    value={work.pendingReview.length}
-                    data-testid="epis2-metric-pending-review"
-                  />
-                  <EpisMetric
-                    label={copy.dashboard.metricDemoTasks}
-                    value={work.demoTasks.length}
-                    data-testid="epis2-metric-demo-tasks"
-                  />
-                </Stack>
+                {!isDashboardMd3 ? (
+                  <Stack direction="row" flexWrap="wrap" gap={2} data-testid="epis2-dashboard-work-metrics">
+                    <EpisMetric
+                      label={copy.dashboard.metricOpenDrafts}
+                      value={work.myOpenDrafts.length}
+                      data-testid="epis2-metric-open-drafts"
+                    />
+                    <EpisMetric
+                      label={copy.dashboard.metricPendingReview}
+                      value={work.pendingReview.length}
+                      data-testid="epis2-metric-pending-review"
+                    />
+                    <EpisMetric
+                      label={copy.dashboard.metricDemoTasks}
+                      value={work.demoTasks.length}
+                      data-testid="epis2-metric-demo-tasks"
+                    />
+                  </Stack>
+                ) : null}
                 <Suspense fallback={<EpisLoadingState label={copy.dashboard.gridLoading} />}>
                   <LazyDashboardWorklists
                     work={work}
@@ -554,6 +633,47 @@ export function DashboardModeContent() {
             ) : null}
           </Stack>
         )}
+      </>
+    );
+  }
+
+  if (isDashboardMd3) {
+    const handleCommandSuggestion = (label: string) => {
+      if (label === copy.dashboardMd3.suggestOpenCommand) {
+        goCommand();
+        return;
+      }
+      if (label === copy.dashboardMd3.suggestOpenPharmacy) {
+        setTab('pharmacy');
+        return;
+      }
+      if (label === copy.dashboardMd3.suggestShowPending) {
+        setTab('work');
+        return;
+      }
+      if (label === copy.dashboardMd3.suggestShowCritical) {
+        setTab('icu');
+        return;
+      }
+      dashboardCommand.setQuery(label);
+    };
+
+    return (
+      <>
+        <DashboardMd3WorkspaceLayout
+          activeTab={tab}
+          allowedTabs={allowedTabs}
+          onTabChange={setTab}
+          mainContent={panel}
+          kpiItems={tab === 'work' ? workKpiItems : []}
+          {...(dashboardPatientId ? { patientId: dashboardPatientId } : {})}
+          commandQuery={dashboardCommand.query}
+          onCommandQueryChange={dashboardCommand.setQuery}
+          onCommandSubmit={() => void dashboardCommand.submit()}
+          onCommandSuggestion={handleCommandSuggestion}
+          lastUpdatedLabel={new Date().toLocaleTimeString('es-CL')}
+        />
+        <ClinicalShellCommandPalette />
       </>
     );
   }

@@ -47,6 +47,8 @@ EPIS2
 │
 ├── [N0–N2] Modo tablero (secundario — nunca home)
 │   └── /epis2/dashboard?tab=
+│       ├── legacy          EpisAppScaffold + RAD tabs
+│       └── ?mode=dashboard EpisDashboardMd3Shell (MF-DASHBOARD-MD3)
 │       ├── work        ambulatory    COMPLETE
 │       ├── patient     ambulatory    PARTIAL     IDC 21
 │       ├── service     quality_iaas  PARTIAL     IDC 81
@@ -56,6 +58,8 @@ EPIS2
 │
 ├── [N1–N2] Ficha paciente M3
 │   └── /espacio/ficha?patientId=     COMPLETE
+│       ├── (modern)                  workspace M3 estándar
+│       └── ?mode=classic             EpisClassicMd3Shell (MF-CLASSIC-EMR-MD3)
 │       ├── Tab Resumen    → /espacio/ficha, /espacio/resumen
 │       ├── Tab Historia   → /espacio/ficha
 │       ├── Tab Consulta   → /espacio/evolucion, /espacio/ambulatorio, /espacio/enfermeria
@@ -133,8 +137,12 @@ flowchart TD
   Draft --> Approve["POST approve → PostgreSQL SoT"]
   Rail["N0 Workspace switcher"] -.-> Comando
   Rail -.-> Tablero["/epis2/dashboard"]
+  Comando -->|"mode switcher"| Classic["/espacio/ficha?mode=classic"]
+  Comando -->|"mode switcher"| DashMd3["/epis2/dashboard?mode=dashboard"]
   Rail -.-> Admin["/espacio/admin"]
 ```
+
+**Orquestación modos:** `apps/web/src/modes/` · [`EPIS2_MODES_LAYER.md`](EPIS2_MODES_LAYER.md) — transversal a workspaces, no reemplaza rail N0.
 
 ---
 
@@ -173,6 +181,8 @@ flowchart TD
 | [`EPIS2_INVENTORY_WORKSPACE_MATRIX.md`](../product/EPIS2_INVENTORY_WORKSPACE_MATRIX.md) | IDC → workspace |
 | [`EPIS2_ARCHITECTURE_INVENTORY_MEDICAL_RECORD.md`](../product/EPIS2_ARCHITECTURE_INVENTORY_MEDICAL_RECORD.md) | Índice 1–200 |
 | [`EPIS2_COMPLETE_FORM_CATALOG.md`](../product/EPIS2_COMPLETE_FORM_CATALOG.md) | 19 blueprints |
+| [`EPIS2_MODES_LAYER.md`](EPIS2_MODES_LAYER.md) | Tres modos × rutas × shells |
+| [`EPIS2_THREE_MODES_DEV_PLAN.md`](../product/EPIS2_THREE_MODES_DEV_PLAN.md) | Roadmap MF-THREE-MODES-03…07 |
 
 ---
 

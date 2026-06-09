@@ -3,6 +3,8 @@ import { EpisChip, Stack, Typography } from '@epis2/epis2-ui';
 import { useRouterState } from '@tanstack/react-router';
 import { useEffect, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
+import { areDesignAgentsEnabled } from '../design-agents/designAgentsEnv.js';
+import { useEpisSession } from '../session/EpisSessionContext.js';
 import { iconBudgetForScreen, screenKindForRoute } from '../quality/uiDensityRules.js';
 import { isDesignModeEnabled } from './designModeEnv.js';
 import { auditForLocation } from './radScreenRegistry.js';
@@ -32,6 +34,15 @@ export function EpisDesignModeOverlay() {
   const surface = audit?.surface ?? radSurfaceForPath(pathname);
   const kind = screenKindForRoute(pathname);
   const iconBudget = iconBudgetForScreen(kind);
+  const isClassic = document.documentElement.getAttribute('data-epis-classic-md3') === 'true'
+    || new URLSearchParams(search).get('mode') === 'classic'
+    || new URLSearchParams(search).get('view') === 'classic';
+  const isDashboardMd3 =
+    document.documentElement.getAttribute('data-epis-dashboard-md3') === 'true'
+    || new URLSearchParams(search).get('mode') === 'dashboard';
+  const isCommandCenter = pathname === '/comando' || pathname.startsWith('/comando');
+  const agentsEnabled = areDesignAgentsEnabled();
+  const session = useEpisSession();
 
   return createPortal(
     <Stack
@@ -60,6 +71,37 @@ export function EpisDesignModeOverlay() {
       </Typography>
       <EpisChip size="small" label={`RAD: ${surface}`} variant="filled" />
       <EpisChip size="small" label={`MD3: ${kind}`} variant="outlined" />
+      {isClassic ? (
+        <>
+          <EpisChip size="small" label={copy.classicMd3.modeLabel} variant="outlined" />
+          <EpisChip size="small" label="supporting-pane" variant="outlined" />
+          <EpisChip size="small" label="scroll: main-pane-only" variant="outlined" />
+        </>
+      ) : isCommandCenter ? (
+        <EpisChip size="small" label="command-center / search" variant="outlined" />
+      ) : isDashboardMd3 ? (
+        <>
+          <EpisChip size="small" label={copy.dashboardMd3.modeLabel} variant="outlined" />
+          <EpisChip size="small" label="list-detail + supporting-pane" variant="outlined" />
+          <EpisChip size="small" label="scroll: main-grid-only" variant="outlined" />
+        </>
+      ) : null}
+      <EpisChip
+        size="small"
+        label={agentsEnabled ? 'agentes IA: on' : 'agentes IA: off'}
+        variant="outlined"
+      />
+      {session.activeMode ? (
+        <EpisChip size="small" label={`activeMode: ${session.activeMode}`} variant="outlined" />
+      ) : null}
+      {session.previousMode ? (
+        <EpisChip size="small" label={`prev: ${session.previousMode}`} variant="outlined" />
+      ) : null}
+      <EpisChip
+        size="small"
+        label={`patient: ${session.activePatientId ? 'sí' : 'no'}`}
+        variant="outlined"
+      />
       <EpisChip size="small" label={`iconos ≤${iconBudget}`} variant="outlined" />
       {audit ? (
         <Typography variant="caption" color="text.secondary" sx={{ width: '100%' }}>

@@ -5,6 +5,7 @@ import { createRoot } from 'react-dom/client';
 import { router } from './routes/router.js';
 import { AuthProvider } from './auth/AuthContext.js';
 import { ActivePatientProvider } from './clinical/ActivePatientContext.js';
+import { EpisSessionProvider } from './session/EpisSessionContext.js';
 import { Epis2QueryProvider } from './query/Epis2QueryProvider.js';
 import { EpisDesignModeProvider } from './design/EpisDesignModeProvider.js';
 
@@ -14,9 +15,11 @@ createRoot(document.getElementById('root')!).render(
       <Epis2QueryProvider>
         <AuthProvider>
           <ActivePatientProvider>
-            <EpisDesignModeProvider>
-              <RouterProvider router={router} />
-            </EpisDesignModeProvider>
+            <EpisSessionProvider>
+              <EpisDesignModeProvider>
+                <RouterProvider router={router} />
+              </EpisDesignModeProvider>
+            </EpisSessionProvider>
           </ActivePatientProvider>
         </AuthProvider>
       </Epis2QueryProvider>

@@ -126,8 +126,9 @@ import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
 
 import { writePrintPreview } from '../clinical/printPreviewStorage.js';
 
+import { useClassicMd3Mode } from '../classic-md3/useClassicMd3Mode.js';
 
-
+import { ClassicMd3ClinicalPageShell } from '../components/classic-md3/ClassicMd3ClinicalPageShell.js';
 export type GeneratedClinicalFormPageProps = {
 
   blueprint: ClinicalFormBlueprint;
@@ -145,6 +146,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const navigate = useClinicalNavigate();
 
   const search = useSearch({ strict: false }) as ClinicalFormSearch;
+
+  const isClassicMode = useClassicMd3Mode();
 
   const urlPatientId = search.patientId;
   const editingDraftId = search.draftId;
@@ -812,6 +815,79 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
   if (usesScrollspyShell) {
 
+    const scrollspyMain = (
+            <Stack
+              spacing={3}
+              sx={{
+                ...(contextOpen ? { maxWidth: '100%' } : epis2ClinicalFormContentMaxWidthSx),
+                width: '100%',
+              }}
+            >
+              <EpisM3Text role="titleLarge" component="h1">
+                {blueprint.label}
+              </EpisM3Text>
+              {canUseAiAssist ? <EpisAiDisclosure /> : null}
+              <EpisClinicalSoapHints
+                blueprintId={blueprint.blueprintId}
+                values={values}
+                aiAvailable={aiAvailable}
+              />
+              <EpisClinicalScrollspyLayout sections={scrollspySections}>
+                <EpisClinicalFormRhf
+                  blueprint={blueprint}
+                  clinicalProse={clinicalProse}
+                  clinicalDropEnabled
+                  onClinicalDrop={onClinicalDrop}
+                  collapseNonPrimarySections={blueprint.sections.length > 2}
+                  renderClinicalTextBox={renderClinicalTextBox}
+                />
+              </EpisClinicalScrollspyLayout>
+              {effectivePatientId && blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES ? (
+                <ClinicalAlertsPanel
+                  alerts={clinicalAlerts}
+                  loading={alertsLoading}
+                  hintBlueprintLabel={blueprint.label}
+                />
+              ) : null}
+              {statusMessage ? (
+                <EpisAlert
+                  severity={statusMessage.includes('guardado') ? 'success' : 'info'}
+                  data-testid="epis2-form-status"
+                >
+                  {statusMessage}
+                </EpisAlert>
+              ) : null}
+            </Stack>
+    );
+
+    const scrollspyMainClassic = (
+      <>
+        {scrollspyMain}
+        <EpisClinicalFormFooter actions={formActionBar} />
+      </>
+    );
+
+    const scrollspyContext = effectivePatientId ? (
+              <EpisClinicalContextPane
+                patientId={effectivePatientId}
+                defaultInsertFieldId={defaultContextInsertFieldId}
+                onInsertFragment={insertContextFragment}
+              />
+    ) : null;
+
+    if (isClassicMode && effectivePatientId) {
+      return (
+        <FormProvider {...form}>
+          <ClassicMd3ClinicalPageShell
+            patientId={effectivePatientId}
+            draftStatusLabel={statusMessage ?? copy.clinicalLayout.draftStatus}
+            mainContent={scrollspyMainClassic}
+            supportingContent={supportsClinicalContext ? scrollspyContext : undefined}
+          />
+        </FormProvider>
+      );
+    }
+
     return (
 
       <FormProvider {...form}>
@@ -862,102 +938,9 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
           }
 
-          actionPane={
+          actionPane={scrollspyMain}
 
-            <Stack
-
-              spacing={3}
-
-              sx={{
-
-                ...(contextOpen ? { maxWidth: '100%' } : epis2ClinicalFormContentMaxWidthSx),
-
-                width: '100%',
-
-              }}
-
-            >
-
-              <EpisM3Text role="titleLarge" component="h1">
-
-                {blueprint.label}
-
-              </EpisM3Text>
-
-              {canUseAiAssist ? <EpisAiDisclosure /> : null}
-
-              <EpisClinicalSoapHints
-
-                blueprintId={blueprint.blueprintId}
-
-                values={values}
-
-                aiAvailable={aiAvailable}
-
-              />
-
-              <EpisClinicalScrollspyLayout sections={scrollspySections}>
-                <EpisClinicalFormRhf
-                  blueprint={blueprint}
-                  clinicalProse={clinicalProse}
-                  clinicalDropEnabled
-                  onClinicalDrop={onClinicalDrop}
-                  collapseNonPrimarySections={blueprint.sections.length > 2}
-                  renderClinicalTextBox={renderClinicalTextBox}
-                />
-              </EpisClinicalScrollspyLayout>
-
-              {effectivePatientId && blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES ? (
-
-                <ClinicalAlertsPanel
-
-                  alerts={clinicalAlerts}
-
-                  loading={alertsLoading}
-
-                  hintBlueprintLabel={blueprint.label}
-
-                />
-
-              ) : null}
-
-              {statusMessage ? (
-
-                <EpisAlert
-
-                  severity={statusMessage.includes('guardado') ? 'success' : 'info'}
-
-                  data-testid="epis2-form-status"
-
-                >
-
-                  {statusMessage}
-
-                </EpisAlert>
-
-              ) : null}
-
-            </Stack>
-
-          }
-
-          contextPane={
-
-            effectivePatientId ? (
-
-              <EpisClinicalContextPane
-
-                patientId={effectivePatientId}
-
-                defaultInsertFieldId={defaultContextInsertFieldId}
-
-                onInsertFragment={insertContextFragment}
-
-              />
-
-            ) : null
-
-          }
+          contextPane={scrollspyContext}
 
           contextOpen={contextOpen}
 
@@ -981,6 +964,50 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   }
 
 
+
+  if (isClassicMode && effectivePatientId && blueprint.blueprintId !== 'patient_search') {
+    return (
+      <FormProvider {...form}>
+        <ClassicMd3ClinicalPageShell
+          patientId={effectivePatientId}
+          draftStatusLabel={statusMessage ?? copy.clinicalLayout.draftStatus}
+          mainContent={
+            <>
+              <EpisM3Text role="titleLarge" component="h1">
+                {blueprint.label}
+              </EpisM3Text>
+              {canUseAiAssist ? <EpisAiDisclosure /> : null}
+              <EpisClinicalFormRhf
+                blueprint={blueprint}
+                clinicalProse={clinicalProse}
+                collapseNonPrimarySections={blueprint.sections.length > 2}
+                renderClinicalTextBox={renderClinicalTextBox}
+              />
+              {blueprint.outputKind !== 'READ_ONLY_SUMMARY' &&
+              blueprint.outputKind !== 'SEARCH' ? (
+                <EpisClinicalFormFooter actions={formActionBar} />
+              ) : null}
+              {effectivePatientId && blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES ? (
+                <ClinicalAlertsPanel
+                  alerts={clinicalAlerts}
+                  loading={alertsLoading}
+                  hintBlueprintLabel={blueprint.label}
+                />
+              ) : null}
+              {statusMessage ? (
+                <EpisAlert
+                  severity={statusMessage.includes('guardado') ? 'success' : 'info'}
+                  data-testid="epis2-form-status"
+                >
+                  {statusMessage}
+                </EpisAlert>
+              ) : null}
+            </>
+          }
+        />
+      </FormProvider>
+    );
+  }
 
   return (
 

@@ -15,7 +15,22 @@ L3 UX densidad (MF-UI-SIMPLIFY-M3)
 L4 RAD productividad (MF-RAD-M3)
 L5 Clinical productivity (@epis2/clinical-productivity)
 L6 Tramo J farmacia — scaffold ✓ · grid partial · piloto tras Fase B
+L× Modos MD3 — orquestación transversal (Command · Classic · Dashboard); ver EPIS2_MODES_LAYER.md
 ```
+
+---
+
+## Modos MD3 (transversal L3)
+
+No es una capa de widgets: **orquesta shells** sobre rutas existentes.
+
+| Modo | Shell | Gate |
+|------|-------|------|
+| Command | `EpisAppScaffold` | `login-command-home-gate` |
+| Classic | `EpisClassicMd3Shell` | `classic-md3-mode-gate` |
+| Dashboard | `EpisDashboardMd3Shell` | `dashboard-md3-mode-gate` |
+
+Código: `apps/web/src/modes/` · sesión: `EpisSessionContext` · plan: [`EPIS2_THREE_MODES_DEV_PLAN.md`](EPIS2_THREE_MODES_DEV_PLAN.md).
 
 ---
 

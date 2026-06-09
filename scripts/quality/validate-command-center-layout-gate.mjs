@@ -31,8 +31,8 @@ if (!comando.includes('railHidden')) {
   errors.push('CommandCenterPage debe ocultar rail en pantalla Tipo A (railHidden)');
 }
 
-if (!comando.includes('EpisCommandCenterInlineBar')) {
-  errors.push('CommandCenterPage debe usar barra inline central');
+if (!comando.includes('EpisCommandCenterGoogleBar')) {
+  errors.push('CommandCenterPage debe usar EpisCommandCenterGoogleBar');
 }
 
 if (!comando.includes('reserveDockSpace={false}')) {

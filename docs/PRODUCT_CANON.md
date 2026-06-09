@@ -23,6 +23,8 @@ El profesional:
 
 Nada se firma ni ejecuta automáticamente.
 
+Modos secundarios (Classic EMR, Dashboard MD3) amplían la experiencia sin cambiar home: ver [`docs/architecture/EPIS2_MODES_LAYER.md`](architecture/EPIS2_MODES_LAYER.md).
+
 ---
 
 ## Frase guía

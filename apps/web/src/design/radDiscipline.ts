@@ -12,7 +12,7 @@ export type EpisRadScreenAudit = {
   route: string;
   surface: EpisRadSurface;
   primaryTask: string;
-  scaffold: 'EpisAppScaffold' | 'EpisClinicalWorkspaceShell' | 'EpisRadScreenShell';
+  scaffold: 'EpisAppScaffold' | 'EpisClinicalWorkspaceShell' | 'EpisRadScreenShell' | 'EpisClassicMd3Shell' | 'EpisDashboardMd3Shell';
   actionBar: 'none' | 'single' | 'required';
   preferGridOverCards: boolean;
   keyboardNav: boolean;
@@ -22,7 +22,8 @@ export type EpisRadScreenAudit = {
   md3Pattern?: string;
   iconBudget?: number;
   actionBudget?: number;
-  scrollPolicy?: 'single' | 'embedded' | 'section';
+  scrollPolicy?: 'single' | 'embedded' | 'section' | 'main-pane-only' | 'main-grid-only';
+  mode?: 'classic' | 'modern' | 'command-center' | 'dashboard';
   notes?: string;
 };
 

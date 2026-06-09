@@ -140,7 +140,8 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
 
     renderForm();
 
-    await user.type(screen.getByRole('textbox', { name: /subjetivo/i }), 'Mejoría clínica (demo)');
+    await user.click(screen.getByTestId('epis2-scrollspy-soap'));
+    await user.type(screen.getByRole('textbox', { name: /objetivo/i }), 'Signos estables (demo)');
     await user.type(screen.getByRole('textbox', { name: /análisis/i }), 'Evolución favorable');
     await user.type(screen.getByRole('textbox', { name: /^plan/i }), 'Continuar tratamiento');
 

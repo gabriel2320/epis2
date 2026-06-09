@@ -40,6 +40,7 @@ Violación = bug de arquitectura. Validador: `main-product-invariants.mjs`.
 ## Referencias
 
 - `docs/PRODUCT_CANON.md`
+- `docs/architecture/EPIS2_MODES_LAYER.md` — tres modos MD3 (secundarios; home = comando)
 - `docs/legacy/EPIS_POSTMORTEM.md`
 - `docs/quality/ANTI_DRIFT_GATES.md`
 - `docs/quality/GOLDEN_CLINICAL_JOURNEY.md`
