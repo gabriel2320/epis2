@@ -18,6 +18,14 @@ describe('CI test parity (MF-153)', () => {
     expect(doc).toContain('quality:ci-parity');
   });
 
+  it('gate ci-parity soporta --from-report (CI sin doble vitest)', () => {
+    const script = readFileSync(
+      join(ROOT, 'scripts/quality/validate-ci-test-parity.mjs'),
+      'utf8',
+    );
+    expect(script).toContain('--from-report');
+  });
+
   it('enumera las suites de integración', () => {
     expect(INTEGRATION_TEST_SUITES).toHaveLength(13);
     for (const rel of INTEGRATION_TEST_SUITES) {

@@ -61,9 +61,9 @@ Helper: `describeIntegration()` — skip con etiqueta `[omitido: sin DATABASE_UR
 
 | Comando | Sin DATABASE_URL | Con DATABASE_URL + migrate |
 |---------|------------------|----------------------------|
-| `npm run test` | ~299 passed, ~20 skipped (explícito) | ~319 passed, **0 skipped** |
-| `npm run quality:ci-parity` | **FALLA** (exige URL) | OK solo si 0 skipped |
-| CI `.github/workflows/ci.yml` | N/A | migrate → test → ci-parity → golden-journey |
+| `npm run test` | ~299 passed, ~20 skipped (explícito) | ~643 passed, **0 skipped** |
+| `npm run quality:ci-parity` | **FALLA** (exige URL) | OK si 0 skipped (local re-ejecuta vitest) |
+| CI `.github/workflows/ci.yml` | N/A | test → JSON report → `quality:ci-parity --from-report` (una pasada) |
 
 ---
 

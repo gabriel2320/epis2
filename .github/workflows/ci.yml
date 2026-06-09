@@ -37,8 +37,8 @@ jobs:
       - run: npm run check
       - run: npm run quality:pm01
       - run: npm run theme:validate
-      - run: npm run test
-      - run: npm run quality:ci-parity
+      - run: npm run test -- --reporter=default --reporter=json --outputFile=reports/.vitest-ci-parity-temp.json
+      - run: npm run quality:ci-parity -- --from-report=reports/.vitest-ci-parity-temp.json
       - run: npx playwright install --with-deps chromium
       - run: npm run build -w @epis2/web
       - run: npm run test:e2e

@@ -24,11 +24,11 @@ Home = `/comando`. PostgreSQL = SoT. IA no firma. Sin OpenMRS/Carbon en UI.
 |------|-----|--------|
 | **L0 Invariantes** | `PRODUCT_INVARIANTS.md`, architecture:validate | Permanente |
 | **L1 Producto** | Olas 0–3, golden journey | Ola 1 ✓ · Ola 2–3 activas |
-| **L2 Tramos clínicos** | A–K (urgencias, UCI, OR, farmacia…) | A–I ✓ · J pendiente |
+| **L2 Tramos clínicos** | A–K (urgencias, UCI, OR, farmacia…) | A–J ✓ scaffold · signoff clínico Tramo J cerrado |
 | **L3 UX densidad** | MF-UI-SIMPLIFY-M3 scaffold | ✓ base |
 | **L4 RAD productividad** | MF-RAD-M3 disciplina VB→MD3 | ✓ Hilo A |
 | **L5 clinical-productivity** | `@epis2/clinical-productivity` wrappers | ✓ base · puente vía `ClinicalDataGrid` |
-| **L6 Tramo J** | Farmacia 161–170 | Scaffold ✓ · grid `partial` · signoff clínico pendiente |
+| **L6 Tramo J** | Farmacia 161–170 | Scaffold ✓ · signoff PEND-001 cerrado 2026-06-09 |
 
 Detalle L4→L5: `docs/product/EPIS2_UI_LAYERS.md`.
 

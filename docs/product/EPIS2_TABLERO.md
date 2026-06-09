@@ -1,6 +1,6 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-09 · **HEAD:** `fa38e4d` · **CI:** [27181266125](https://github.com/gabriel2320/epis2/actions/runs/27181266125) ✅
+**Actualizado:** 2026-06-09 · **HEAD:** `37f5a52` · **CI:** fix ci-parity en curso — último verde `fa38e4d`
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports/epis2-audit-avance-proyecto-2026-06-09.md`](../../reports/epis2-audit-avance-proyecto-2026-06-09.md)
 
