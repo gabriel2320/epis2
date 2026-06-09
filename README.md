@@ -30,6 +30,10 @@ Aplicación clínica **command-first**, independiente del proyecto EPIS (legacy)
 
 Reportes: `reports/epis2-m3-09-qa-signoff.md` · `reports/epis2-ux-stabilization.md` · `reports/epis2-audit-and-dev-plans-2026-06-05.md`
 
+## Evolab (repositorio externo)
+
+El laboratorio de evolución supervisada **no vive en este monorepo**. Usa el repo independiente [epis2-evolab](https://github.com/gabriel2320/epis2-evolab), que apunta al sandbox EPIS2 vía HTTP sin acoplar código clínico.
+
 ## Documentación esencial
 
 | Documento | Propósito |
