@@ -4,7 +4,10 @@ import { epis2DisplayFontFamily, epis2MonoFontFamily } from './typography.js';
 import { epis2Shape } from './shape.js';
 import { epis2Motion } from './motion.js';
 
-export function buildEpis2Components(motionScheme: 'standard' | 'reduced' = 'standard'): Components<Theme> {
+export function buildEpis2Components(
+  motionScheme: 'standard' | 'reduced' = 'standard',
+  contrast: 'standard' | 'high' = 'standard',
+): Components<Theme> {
   const transition =
     motionScheme === 'reduced'
       ? 'none'
@@ -20,6 +23,15 @@ export function buildEpis2Components(motionScheme: 'standard' | 'reduced' = 'sta
           WebkitFontSmoothing: 'antialiased',
           MozOsxFontSmoothing: 'grayscale',
         },
+        // Alto contraste (auditoría 3.6): indicador de foco universal, visible sobre cualquier superficie.
+        ...(contrast === 'high'
+          ? {
+              '*:focus-visible': {
+                outline: `3px solid ${theme.palette.text.primary}`,
+                outlineOffset: '2px',
+              },
+            }
+          : {}),
         '::selection': {
           backgroundColor: theme.palette.action.selected,
           color: theme.palette.text.primary,

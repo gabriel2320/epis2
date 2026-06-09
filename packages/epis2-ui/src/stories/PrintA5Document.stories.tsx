@@ -24,3 +24,34 @@ export const CertificadoDemo: Story = {
     footer: 'Generado en EPIS2 — datos sintéticos',
   },
 };
+
+export const RecetaDemo: Story = {
+  args: {
+    title: 'Receta médica',
+    subtitle: 'Paciente Demo · 54 años — vista A5 (demo)',
+    children: (
+      <>
+        <PrintField label="Medicamento" value="Losartán 50 mg — 1 comprimido cada 24 h, vía oral" />
+        <PrintField label="Duración" value="30 días" />
+        <PrintField label="Indicaciones" value="Tomar en la mañana. No suspender sin control médico." />
+      </>
+    ),
+    footer: 'Dr./Dra. Demo — Generado en EPIS2 · datos sintéticos',
+  },
+};
+
+export const OrdenLaboratorioUrgente: Story = {
+  args: {
+    title: 'Orden de laboratorio',
+    subtitle: 'Paciente Demo · Episodio ambulatorio (demo)',
+    children: (
+      <>
+        <PrintField label="Exámenes" value="Hemograma completo · Perfil lipídico · Creatinina" />
+        {/* Prioridad como texto explícito — norma §16.2: nunca solo color. */}
+        <PrintField label="Prioridad" value="URGENTE" />
+        <PrintField label="Justificación" value="Control post-ajuste de terapia (demo)" />
+      </>
+    ),
+    footer: 'Generado en EPIS2 — datos sintéticos',
+  },
+};

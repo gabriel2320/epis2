@@ -31,6 +31,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 | Auditoría II — inventario + limpieza + documental | Inventario completo · código muerto anclado por gates · plan F1–F5 · [`epis2-auditoria-inventario-limpieza-2026-06-09.md`](../../reports/epis2-auditoria-inventario-limpieza-2026-06-09.md) |
 | **F1+F2 — limpieza + PEND-006 código cerrado** | 3 componentes muertos fuera · registry `PRINTABLE_BLUEPRINTS` · lab/imagen A5 + E2E · [`epis2-f1-f2-limpieza-print-2026-06-09.md`](../../reports/epis2-f1-f2-limpieza-print-2026-06-09.md) |
 | **F4 — sesión documental** | Brief sync con tablero · norma print v1.1 · banners históricos · `docs/INDEX.md` + `reports/INDEX.md` · [`epis2-f4-sesion-documental-2026-06-09.md`](../../reports/epis2-f4-sesion-documental-2026-06-09.md) |
+| **P1b — alto contraste ampliado + Storybook Print*** | Roles outline/onSurfaceVariant/foco (3.6 ✓ código) · stories Carta + receta/lab A5 · signoff visual pendiente · [`epis2-p1b-alto-contraste-storybook-print-2026-06-09.md`](../../reports/epis2-p1b-alto-contraste-storybook-print-2026-06-09.md) |
 
 ---
 
@@ -46,8 +47,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 
 | Prioridad | Hilo / tramo | Gate |
 |-----------|--------------|------|
-| **P1** | P1b alto contraste ampliado · o Storybook familia `Print*` (Auditoría II §5) | F4 documental ✓ |
-| P1b | Alto contraste ampliado (3.6 diferido — requiere signoff visual) | [`epis2-auditoria-fase3-pulido-m3-2026-06-09.md`](../../reports/epis2-auditoria-fase3-pulido-m3-2026-06-09.md) |
+| **P1** | Signoff visual alto contraste (humano — claro/oscuro en `/comando` + formularios) | P1b código ✓ |
 | P1c | Fase 5 auditoría — checklist pre-producción (solo si sale del laboratorio) | [`epis2-auditoria-profunda-2026-06-09.md`](../../reports/epis2-auditoria-profunda-2026-06-09.md) §7 |
 | P2 | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | P3 | Backlog Ola 2+ | Nota procedimiento clínica (PEND-002 defer) |

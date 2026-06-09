@@ -56,12 +56,26 @@ function resolveLegacySurfaces(mode: Epis2ThemeMode): M3SurfaceRoles {
   return mode === 'light' ? lightSurfaces : darkSurfaces;
 }
 
+/**
+ * Alto contraste ampliado (auditoría 3.6 / THEME-05): cada rol secundario sube un
+ * nivel hacia `onSurface` — sin inventar colores fuera del esquema MTB aprobado.
+ */
+export function applyHighContrastRoles(surfaces: M3SurfaceRoles): M3SurfaceRoles {
+  return {
+    ...surfaces,
+    onSurfaceVariant: surfaces.onSurface,
+    outline: surfaces.onSurfaceVariant,
+    outlineVariant: surfaces.outline,
+  };
+}
+
 /** Único generador de tema EPIS2 (M3-G01). */
 export function createEpis2Theme(options: CreateEpis2ThemeOptions = {}): Theme {
   const mode = options.mode ?? 'light';
   const accent = options.accent ?? 'clinicalBlue';
   const motion = options.motion ?? 'standard';
   const density = options.density ?? 'comfortable';
+  const contrast = options.contrast ?? 'standard';
   const mappedThemeId = resolveMaterialThemeId(options.themeId, accent);
 
   let surfaces: M3SurfaceRoles;
@@ -80,10 +94,19 @@ export function createEpis2Theme(options: CreateEpis2ThemeOptions = {}): Theme {
     palette = buildM3PaletteOptions(mode, accent);
   }
 
+  if (contrast === 'high') {
+    surfaces = applyHighContrastRoles(surfaces);
+    palette = {
+      ...palette,
+      text: { primary: surfaces.onSurface, secondary: surfaces.onSurfaceVariant },
+      divider: surfaces.outlineVariant,
+    };
+  }
+
   const visual = buildVisualIdentity(mode, activeScheme, surfaces);
 
   const typography =
-    options.contrast === 'high'
+    contrast === 'high'
       ? {
           ...epis2Typography,
           body1: { ...epis2TypographyRoles.bodyLarge, fontWeight: 500 },
@@ -101,7 +124,7 @@ export function createEpis2Theme(options: CreateEpis2ThemeOptions = {}): Theme {
       shape: { borderRadius: epis2ShapeBorderRadius },
       typography,
       spacing: density === 'compact' ? 7 : 8,
-      components: buildEpis2Components(motion),
+      components: buildEpis2Components(motion, contrast),
       epis2: {
         themeId: epis2ThemeId,
         accent,
