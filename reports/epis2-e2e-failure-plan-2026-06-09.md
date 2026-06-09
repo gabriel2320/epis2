@@ -95,3 +95,8 @@ DATABASE_URL=... npm run test:e2e
 - `clinical-textbox-evolution-draft.spec.ts` → `loginAsPhysician`
 - `golden-v2-admission-discharge.spec.ts` → `epis2-ficha-history` antes del CTA ingreso
 - `ux-g02-command-first.spec.ts` A/C1 → `pinDemoCase('DEMO-001')` + `/comando` (sin narrativos demo)
+
+**Run 27180606747:** 8/10 E2E OK. Quedan 2 fallos → **Lote 2 aplicado:**
+
+- `clinical-textbox` → paste vía `ClipboardEvent` en paste-zone (sin `navigator.clipboard` en CI)
+- `golden-v2` → select cama `#epis2-field-input-targetBedId` (MUI Select no expone `getByLabel`)

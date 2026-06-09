@@ -30,10 +30,12 @@ test.describe('ClinicalTextBox E2E — evolución rich y trazabilidad', () => {
 
     const objectiveInput = page.getByTestId('epis2-field-objective-input');
     await objectiveInput.click();
-    await page.evaluate(async () => {
-      await navigator.clipboard.writeText('Examen físico estable, sin signos de alarma.');
-    });
-    await page.keyboard.press('Control+V');
+    const pasteText = 'Examen físico estable, sin signos de alarma.';
+    await page.getByTestId('epis2-field-objective-paste-zone').evaluate((el, text) => {
+      const dt = new DataTransfer();
+      dt.setData('text/plain', text);
+      el.dispatchEvent(new ClipboardEvent('paste', { clipboardData: dt, bubbles: true }));
+    }, pasteText);
 
     await page.getByLabel('Análisis').fill('Evolución favorable.');
     await page.getByLabel('Plan').fill('Continuar tratamiento y control.');

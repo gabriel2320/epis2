@@ -38,7 +38,7 @@ test.describe('Golden journey V2 UI — hospitalización', () => {
     await page.getByLabel(/Motivo de ingreso/i).fill('Ingreso demo golden V2');
     await page.getByLabel(/Resumen clínico/i).fill('Estable para observación hospitalaria');
     await page.getByLabel(/Plan inicial/i).fill('Monitoreo y estudios complementarios');
-    await page.getByLabel(/Cama destino/i).click();
+    await page.locator('#epis2-field-input-targetBedId').click();
     await page.getByRole('option', { name: /102A/i }).click();
     await page.getByTestId('epis2-form-save').click();
     await expect(page).toHaveURL(/\/espacio\/borrador\//, { timeout: 15_000 });
