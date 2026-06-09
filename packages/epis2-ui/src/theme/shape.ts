@@ -2,6 +2,10 @@
 
 export const epis2Shape = {
 
+  /** Sin redondeo — tablas densas y documentos print. */
+
+  none: 0,
+
   extraSmall: 2,
 
   small: 4,

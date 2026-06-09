@@ -8,6 +8,8 @@ import { resolveEpis2SemanticPalette } from './semantic-palette.js';
 export function surfacesFromScheme(scheme: Epis2MaterialColorScheme): M3SurfaceRoles {
   return {
     surface: scheme.surface,
+    surfaceDim: scheme.surfaceDim,
+    surfaceBright: scheme.surfaceBright,
     surfaceContainerLowest: scheme.surfaceContainerLowest,
     surfaceContainerLow: scheme.surfaceContainerLow,
     surfaceContainer: scheme.surfaceContainer,
@@ -17,6 +19,9 @@ export function surfacesFromScheme(scheme: Epis2MaterialColorScheme): M3SurfaceR
     onSurfaceVariant: scheme.onSurfaceVariant,
     outline: scheme.outline,
     outlineVariant: scheme.outlineVariant,
+    inverseSurface: scheme.inverseSurface,
+    inverseOnSurface: scheme.inverseOnSurface,
+    scrim: scheme.scrim,
   };
 }
 

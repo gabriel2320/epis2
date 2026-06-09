@@ -2,7 +2,7 @@ import type { Components, Theme } from '@mui/material/styles';
 import { epis2M3TouchTargetMinPx } from './m3-layout-tokens.js';
 import { epis2DisplayFontFamily, epis2MonoFontFamily } from './typography.js';
 import { epis2Shape } from './shape.js';
-import { epis2Motion } from './motion.js';
+import { epis2Motion, epis2StateLayer } from './motion.js';
 
 export function buildEpis2Components(
   motionScheme: 'standard' | 'reduced' = 'standard',
@@ -23,15 +23,11 @@ export function buildEpis2Components(
           WebkitFontSmoothing: 'antialiased',
           MozOsxFontSmoothing: 'grayscale',
         },
-        // Alto contraste (auditoría 3.6): indicador de foco universal, visible sobre cualquier superficie.
-        ...(contrast === 'high'
-          ? {
-              '*:focus-visible': {
-                outline: `3px solid ${theme.palette.text.primary}`,
-                outlineOffset: '2px',
-              },
-            }
-          : {}),
+        // Indicador de foco universal (WCAG 2.4.7) — siempre visible; reforzado en alto contraste.
+        '*:focus-visible': {
+          outline: `${contrast === 'high' ? 3 : 2}px solid ${theme.palette.text.primary}`,
+          outlineOffset: '2px',
+        },
         '::selection': {
           backgroundColor: theme.palette.action.selected,
           color: theme.palette.text.primary,
@@ -57,10 +53,23 @@ export function buildEpis2Components(
                   backgroundColor: theme.palette[color].main,
                   color: theme.palette[color].contrastText,
                   boxShadow: 'none',
+                  // State layer M3: contrastText 8% sobre el contenedor (no palette.dark,
+                  // que en MTB mapea a onPrimaryContainer — rol sin semántica de interacción).
                   '&:hover': {
-                    backgroundColor: theme.palette[color].dark,
+                    backgroundColor: epis2StateLayer(
+                      theme.palette[color].main,
+                      theme.palette[color].contrastText,
+                      'hover',
+                    ),
                     color: theme.palette[color].contrastText,
                     boxShadow: 'none',
+                  },
+                  '&:active': {
+                    backgroundColor: epis2StateLayer(
+                      theme.palette[color].main,
+                      theme.palette[color].contrastText,
+                      'pressed',
+                    ),
                   },
                 },
               ]),
@@ -91,14 +100,14 @@ export function buildEpis2Components(
           color: theme.palette.primary.contrastText,
           backgroundColor: theme.palette.primary.main,
           '&:hover': {
-            backgroundColor: theme.palette.primary.dark,
+            backgroundColor: epis2StateLayer(theme.palette.primary.main, theme.palette.primary.contrastText),
             color: theme.palette.primary.contrastText,
           },
           '&.MuiFab-secondary': {
             color: theme.palette.secondary.contrastText,
             backgroundColor: theme.palette.secondary.main,
             '&:hover': {
-              backgroundColor: theme.palette.secondary.dark,
+              backgroundColor: epis2StateLayer(theme.palette.secondary.main, theme.palette.secondary.contrastText),
               color: theme.palette.secondary.contrastText,
             },
           },
@@ -106,7 +115,7 @@ export function buildEpis2Components(
             color: theme.palette.error.contrastText,
             backgroundColor: theme.palette.error.main,
             '&:hover': {
-              backgroundColor: theme.palette.error.dark,
+              backgroundColor: epis2StateLayer(theme.palette.error.main, theme.palette.error.contrastText),
               color: theme.palette.error.contrastText,
             },
           },
@@ -255,6 +264,20 @@ export function buildEpis2Components(
           minHeight: 36,
           maxWidth: '100%',
           fontSize: '0.875rem',
+          // Touch target M3: contenedor visual 36px + hit-area extendida a 48px en chips interactivos.
+          '&.MuiChip-clickable': {
+            position: 'relative',
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              top: (36 - epis2M3TouchTargetMinPx) / 2,
+              bottom: (36 - epis2M3TouchTargetMinPx) / 2,
+            },
+            // El icono de borrar queda por encima de la hit-area extendida.
+            '& .MuiChip-deleteIcon': { position: 'relative', zIndex: 1 },
+          },
           '& .MuiChip-label': {
             px: 1.5,
             py: 0.75,

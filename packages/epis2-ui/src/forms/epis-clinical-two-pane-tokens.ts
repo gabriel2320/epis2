@@ -10,17 +10,17 @@ export function epis2ClinicalSplitTransition(reducedMotion: boolean): string {
   return `${props} ${epis2Motion.duration.long}ms ${epis2Motion.easing.emphasized}`;
 }
 
-/** Panel de acción — superficie más clara (escritura activa). */
+/** Panel de acción — escritura activa sobre el tono más claro de la escalera (canon §two-pane). */
 export const epis2ClinicalActionPaneSx: SxProps<Theme> = {
   flex: 1,
   minWidth: 0,
-  bgcolor: 'background.paper',
+  bgcolor: (theme) => theme.epis2.surfaces.surfaceContainerLowest,
   overflow: 'auto',
 };
 
-/** Panel de consulta — superficie marginalmente más apagada. */
+/** Panel de consulta — un nivel tonal por encima: jerarquía sin sombras (canon §two-pane). */
 export const epis2ClinicalContextPaneSx: SxProps<Theme> = {
-  bgcolor: 'background.default',
+  bgcolor: (theme) => theme.epis2.surfaces.surfaceContainerLow,
   overflow: 'auto',
   height: '100%',
 };

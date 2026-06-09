@@ -27,7 +27,7 @@ describe('createEpis2Theme contrast (THEME-05)', () => {
     expect(high.epis2.surfaces.onSurface).toBe(standard.epis2.surfaces.onSurface);
   });
 
-  it('alto contraste agrega indicador de foco universal en CssBaseline', () => {
+  it('indicador de foco universal: 2px estándar, 3px alto contraste (WCAG 2.4.7)', () => {
     const high = createEpis2Theme({ mode: 'light', contrast: 'high' });
     const standard = createEpis2Theme({ mode: 'light', contrast: 'standard' });
 
@@ -38,12 +38,36 @@ describe('createEpis2Theme contrast (THEME-05)', () => {
         : (styles as Record<string, unknown>);
     };
 
-    const highRule = resolveBaseline(high)['*:focus-visible'] as
-      | { outline?: string; outlineOffset?: string }
-      | undefined;
-    expect(highRule?.outline).toContain('3px solid');
-    expect(highRule?.outlineOffset).toBe('2px');
-    expect(resolveBaseline(standard)['*:focus-visible']).toBeUndefined();
+    const focusRule = (theme: ReturnType<typeof createEpis2Theme>) =>
+      resolveBaseline(theme)['*:focus-visible'] as { outline?: string; outlineOffset?: string } | undefined;
+
+    expect(focusRule(high)?.outline).toContain('3px solid');
+    expect(focusRule(standard)?.outline).toContain('2px solid');
+    expect(focusRule(standard)?.outlineOffset).toBe('2px');
+  });
+
+  it('state layers M3: hover 8% / focus 10% / pressed 10% (states spec)', () => {
+    const theme = createEpis2Theme({ mode: 'light' });
+
+    expect(theme.palette.action.hoverOpacity).toBe(0.08);
+    expect(theme.palette.action.focusOpacity).toBe(0.1);
+    expect(theme.palette.action.activatedOpacity).toBe(0.1);
+    expect(theme.palette.action.selectedOpacity).toBe(0.08);
+    // El color del layer proviene de onSurface (color del contenido, no negro fijo).
+    expect(theme.palette.action.hover).toContain('rgba(');
+  });
+
+  it('expone roles tone-based completos: surfaceDim/Bright, inverse*, scrim', () => {
+    const mtb = createEpis2Theme({ mode: 'light', accent: 'clinicalBlue' });
+    const legacy = createEpis2Theme({ mode: 'dark', accent: 'neutral' });
+
+    for (const theme of [mtb, legacy]) {
+      expect(theme.epis2.surfaces.surfaceDim).toBeTruthy();
+      expect(theme.epis2.surfaces.surfaceBright).toBeTruthy();
+      expect(theme.epis2.surfaces.inverseSurface).toBeTruthy();
+      expect(theme.epis2.surfaces.inverseOnSurface).toBeTruthy();
+      expect(theme.epis2.surfaces.scrim).toBeTruthy();
+    }
   });
 
   it('dark + alto contraste + MTB mantiene palette oscura', () => {

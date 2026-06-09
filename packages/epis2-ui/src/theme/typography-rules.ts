@@ -1,4 +1,5 @@
 import type { SxProps, Theme } from '@mui/material/styles';
+import { epis2Motion } from './motion.js';
 
 /**
  * Canon tipográfico y estético EPIS2 — 20 reglas (docs/design/EPIS2_TYPOGRAPHY_AND_AESTHETICS_RULES.md).
@@ -62,8 +63,8 @@ export const epis2ForbiddenColors = {
   pureWhiteTextOnDark: '#FFFFFF',
 } as const;
 
-/** Regla 20 — duración de transición funcional (ms). */
+/** Regla 20 — duración de transición funcional (ms) — alineada a epis2Motion (medium/long). */
 export const epis2InteractionDuration = {
-  min: 150,
-  max: 300,
+  min: epis2Motion.duration.medium,
+  max: epis2Motion.duration.long,
 } as const;

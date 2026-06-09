@@ -12,7 +12,8 @@ export const epis2NavigationRailSx: SxProps<Theme> = {
   flexShrink: 0,
   borderRight: 1,
   borderColor: 'divider',
-  bgcolor: 'background.paper',
+  // Región de navegación un nivel tonal sobre el contenido (escalera M3, sin sombras).
+  bgcolor: (theme) => theme.epis2.surfaces.surfaceContainerLow,
   display: { xs: 'none', md: 'flex' },
   flexDirection: 'column',
   alignItems: 'center',

@@ -71,6 +71,10 @@ export const accentPresets: Record<
 
 export type M3SurfaceRoles = {
   surface: string;
+  /** Tono más apagado que surface — fondos atenuados (M3 tone-based surfaces). */
+  surfaceDim: string;
+  /** Tono más brillante que surface — énfasis sin elevación. */
+  surfaceBright: string;
   surfaceContainerLowest: string;
   surfaceContainerLow: string;
   surfaceContainer: string;
@@ -80,10 +84,17 @@ export type M3SurfaceRoles = {
   onSurfaceVariant: string;
   outline: string;
   outlineVariant: string;
+  /** Superficie invertida — snackbars/tooltips de alto contraste. */
+  inverseSurface: string;
+  inverseOnSurface: string;
+  /** Velo modal M3 — usar siempre con alpha en el punto de uso. */
+  scrim: string;
 };
 
 const lightSurfaces: M3SurfaceRoles = {
   surface: '#FFFFFF',
+  surfaceDim: '#DDDDE0',
+  surfaceBright: '#FCFCFD',
   surfaceContainerLowest: '#FFFFFF',
   surfaceContainerLow: '#FAFAFB',
   surfaceContainer: '#F5F5F7',
@@ -93,6 +104,9 @@ const lightSurfaces: M3SurfaceRoles = {
   onSurfaceVariant: '#71717A',
   outline: '#E4E4E7',
   outlineVariant: '#F0F0F2',
+  inverseSurface: '#27272A',
+  inverseOnSurface: '#F4F4F5',
+  scrim: '#000000',
 };
 
 /** warning/success/info — fijos; no provienen de MTB. */
@@ -104,6 +118,8 @@ export const epis2SemanticPalette = {
 
 const darkSurfaces: M3SurfaceRoles = {
   surface: '#1C1C1E',
+  surfaceDim: '#101012',
+  surfaceBright: '#3A3A3C',
   surfaceContainerLowest: '#0F0F10',
   surfaceContainerLow: '#1A1A1C',
   surfaceContainer: '#141416',
@@ -113,6 +129,9 @@ const darkSurfaces: M3SurfaceRoles = {
   onSurfaceVariant: '#A1A1AA',
   outline: '#3F3F46',
   outlineVariant: '#27272A',
+  inverseSurface: '#F4F4F5',
+  inverseOnSurface: '#27272A',
+  scrim: '#000000',
 };
 
 export function buildM3PaletteOptions(

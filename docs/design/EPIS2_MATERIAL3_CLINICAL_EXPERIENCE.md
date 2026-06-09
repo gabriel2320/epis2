@@ -100,15 +100,25 @@ Acentos permitidos (modifican primario, foco, navegación seleccionada, chips ac
 
 ### Forma
 
+**Decisión (2026-06-09):** EPIS2 usa una **escala comprimida clínica** — la mitad de los valores
+de referencia M3 (4/8/12/16/28). Razón: densidad de datos clínicos y estética de esquinas casi
+cuadradas; los overlays flotantes (`floating: 16`) conservan el extraLarge M3. Esta tabla refleja
+el código real (`shape.ts` es la verdad):
+
 ```ts
-// packages/epis2-ui/src/theme/shape.ts (objetivo M3-01)
+// packages/epis2-ui/src/theme/shape.ts (implementado)
 const epis2Shape = {
-  extraSmall: 4,
-  small: 8,
-  medium: 12,
-  large: 16,
-  extraLarge: 24,
-  full: 999,
+  none: 0,        // tablas densas, documentos print
+  extraSmall: 2,
+  small: 4,
+  medium: 6,
+  large: 8,       // = borderRadius base MUI
+  extraLarge: 10,
+  island: 8,      // isla de contenido principal
+  squircle: 8,    // botones y controles
+  pill: 8,        // power bar y chips — rectángulo redondeado, no píldora
+  floating: 16,   // dock flotante / overlays MD3
+  full: 9999,
 };
 ```
 
@@ -137,6 +147,11 @@ Reglas: formas grandes = espacios de trabajo; formas pequeñas = datos densos; s
 
 Reglas: Display solo Login y Comando; formularios usan title/body/label; sin MAYÚSCULAS completas; documentos clínicos priorizan lectura prolongada; copy visible en español.
 
+**Decisión (2026-06-09) — compresión tipográfica clínica:** EPIS2 implementa **10 de los 15 roles M3**
+(sin variantes Small) sobre base 14px con piso legible de 13px (`labelMedium`). No es deuda: la escala
+M3 canónica (display 57px) está diseñada para marketing/móvil, no para densidad clínica. Si un caso
+exige una variante Small, se añade el rol — no se baja del piso de 13px.
+
 **Canon extendido (20 reglas):** `EPIS2_TYPOGRAPHY_AND_AESTHETICS_RULES.md` — escala modular, prosa `65ch`, tabular-nums, grid 8pt, 60-30-10, estados y movimiento. Tokens en `typography-rules.ts`.
 
 **Anti-patrones (20 prohibidos):** `EPIS2_MATERIAL_DESIGN_ANTI_PATTERNS.md` — sombras pesadas, duplas rotas, cards anidadas, FAB abusivo, animaciones >300ms, etc.
@@ -148,18 +163,32 @@ M3 Standard  → formularios, documentos, aprobación, errores, alertas, navegac
 M3 Expressive controlado → login, foco Power Bar, sugerencias, nueva actividad, empty states
 ```
 
-Tokens objetivo en `packages/epis2-ui/src/theme/motion.ts`:
+Tokens implementados en `packages/epis2-ui/src/theme/motion.ts`:
 
 ```ts
 duration: { instant: 80, short: 120, medium: 180, long: 260 }
 easing: {
   standard: 'cubic-bezier(0.2, 0, 0, 1)',
-  emphasized: 'cubic-bezier(0.2, 0, 0, 1)',
+  emphasized: 'cubic-bezier(0.05, 0.7, 0.1, 1)',          // M3 emphasized-decelerate
+  emphasizedAccelerate: 'cubic-bezier(0.3, 0, 0.8, 0.15)', // M3 emphasized-accelerate
   exit: 'cubic-bezier(0.4, 0, 1, 1)',
 }
 ```
 
 Respetar `prefers-reduced-motion` siempre.
+
+### Estados (state layers M3)
+
+Feedback de interacción con **el color del contenido**, no negro fijo ni `filter: brightness`:
+
+```ts
+// motion.ts — epis2StateLayerOpacity / epis2StateLayer(container, layer, state)
+hover: 0.08 · focus: 0.10 · pressed: 0.10 · dragged: 0.16
+```
+
+`palette.action.*` queda alineado a estos valores en `createEpis2Theme`. Para superficies custom
+usar `epis2StateLayer()` (color-mix), nunca opacidades ad-hoc. Foco visible universal:
+`*:focus-visible` 2px (3px en alto contraste) — WCAG 2.4.7.
 
 ---
 

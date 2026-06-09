@@ -214,11 +214,12 @@ export const epis2M3TypographyVariants = {
 
   bodyLarge: 'body1',
 
-  bodyMedium: 'body1',
+  bodyMedium: 'body2',
 
   labelLarge: 'subtitle2',
 
-  labelMedium: 'body2',
+  // caption hereda las métricas de labelMedium (13px piso clínico + tracking) — antes body2 (14px cuerpo).
+  labelMedium: 'caption',
 
 } as const;
 

@@ -1,6 +1,7 @@
 import type { Epis2MaterialColorScheme } from './contracts/material-color-scheme.js';
 import type { M3SurfaceRoles } from './color-roles.js';
 import { darkSurfaces, lightSurfaces } from './color-roles.js';
+import { surfacesFromScheme } from './m3-palette-from-scheme.js';
 import { hexWithAlpha } from './color-alpha.js';
 
 export type Epis2ThemeMode = 'light' | 'dark';
@@ -33,21 +34,10 @@ function resolveSurfaces(
   scheme?: Epis2MaterialColorScheme,
   surfaces?: M3SurfaceRoles,
 ): M3SurfaceRoles {
-  if (scheme) {
-    return {
-      surface: scheme.surface,
-      surfaceContainerLowest: scheme.surfaceContainerLowest,
-      surfaceContainerLow: scheme.surfaceContainerLow,
-      surfaceContainer: scheme.surfaceContainer,
-      surfaceContainerHigh: scheme.surfaceContainerHigh,
-      surfaceContainerHighest: scheme.surfaceContainerHighest,
-      onSurface: scheme.onSurface,
-      onSurfaceVariant: scheme.onSurfaceVariant,
-      outline: scheme.outline,
-      outlineVariant: scheme.outlineVariant,
-    };
-  }
-  return surfaces ?? (mode === 'light' ? lightSurfaces : darkSurfaces);
+  // Las superficies ya transformadas (p.ej. alto contraste) tienen prioridad sobre el scheme crudo.
+  if (surfaces) return surfaces;
+  if (scheme) return surfacesFromScheme(scheme);
+  return mode === 'light' ? lightSurfaces : darkSurfaces;
 }
 
 export function buildVisualIdentity(

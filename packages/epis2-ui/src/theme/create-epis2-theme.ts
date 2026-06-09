@@ -9,6 +9,8 @@ import type { Epis2MaterialColorScheme } from './contracts/material-color-scheme
 import { getMaterialScheme, resolveMaterialThemeId } from './material-theme-registry.js';
 import { paletteFromMaterialScheme, surfacesFromScheme } from './m3-palette-from-scheme.js';
 import { epis2Shape, epis2ShapeBorderRadius } from './shape.js';
+import { epis2StateLayerOpacity } from './motion.js';
+import { hexWithAlpha } from './color-alpha.js';
 import { epis2Typography, epis2TypographyRoles } from './typography.js';
 import { buildEpis2Shadows, buildVisualIdentity, type Epis2VisualIdentity } from './visual-identity.js';
 import { createTheme, type Theme } from '@mui/material/styles';
@@ -102,6 +104,21 @@ export function createEpis2Theme(options: CreateEpis2ThemeOptions = {}): Theme {
       divider: surfaces.outlineVariant,
     };
   }
+
+  // State layers M3 (states spec): feedback de interacción con el color del contenido,
+  // no los defaults MUI (~4%). dragged (16%) no tiene clave MUI — usar epis2StateLayer().
+  palette = {
+    ...palette,
+    action: {
+      hover: hexWithAlpha(surfaces.onSurface, epis2StateLayerOpacity.hover),
+      hoverOpacity: epis2StateLayerOpacity.hover,
+      focus: hexWithAlpha(surfaces.onSurface, epis2StateLayerOpacity.focus),
+      focusOpacity: epis2StateLayerOpacity.focus,
+      selected: hexWithAlpha(surfaces.onSurface, epis2StateLayerOpacity.hover),
+      selectedOpacity: epis2StateLayerOpacity.hover,
+      activatedOpacity: epis2StateLayerOpacity.pressed,
+    },
+  };
 
   const visual = buildVisualIdentity(mode, activeScheme, surfaces);
 

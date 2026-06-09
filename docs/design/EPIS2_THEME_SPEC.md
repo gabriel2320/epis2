@@ -1,5 +1,9 @@
 # EPIS2 — Especificación de tema Material UI
 
+> **HISTÓRICO (2026-06-09):** describe el baseline **MUI-01** previo a la adopción M3 (cerrada — M3-00…09).
+> La verdad vigente del tema es el código (`packages/epis2-ui/src/theme/`) y el canon
+> [`EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md`](./EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md). No editar.
+
 **Fase:** EPIS2-MUI-01 (implementado) · **Evolución:** M3-01…M3-02 → roles Material 3  
 **Referencia M3:** `docs/design/EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md`
 

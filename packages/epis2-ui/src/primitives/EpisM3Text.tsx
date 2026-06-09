@@ -7,5 +7,12 @@ export type EpisM3TextProps = TypographyProps & {
 
 /** Texto con rol tipográfico M3 (display, headline, title, body, label). */
 export function EpisM3Text({ role, variant, ...rest }: EpisM3TextProps) {
-  return <Typography variant={variant ?? epis2M3TypographyVariants[role]} {...rest} />;
+  return (
+    <Typography
+      variant={variant ?? epis2M3TypographyVariants[role]}
+      // labelMedium mapea a caption (13px piso clínico); se mantiene elemento de bloque.
+      variantMapping={{ caption: 'p' }}
+      {...rest}
+    />
+  );
 }
