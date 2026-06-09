@@ -1,23 +1,24 @@
-# EPIS2 — Subagente `golden-guardian`
+# EPIS2 — Subagente `ledger-keeper`
 
-**Rol:** Guardián Golden Journey  
+**Rol:** Ledger microfases  
 **Microfase / alcance:** MF-TRAMO-J-002 · Fase B · Tramo J
 
 ## Canon obligatorio
 
-- `docs/quality/GOLDEN_CLINICAL_JOURNEY.md`
+- `docs/quality/MICROPHASE_PROGRAM.md`
+- `docs/quality/microphase-ledger.json`
 
 ## Disparadores
 
-- journey
-- e2e
-- golden-clinical-journey
+- MF-*
+- microphase
+- cierre MF
 
 ## Gates de este rol
 
 ```bash
-npm run quality:golden-journey
-test:e2e:ux-g02
+npm run quality:microphases
+npm run quality:microphase-next
 ```
 
 ## Plan global (extracto)

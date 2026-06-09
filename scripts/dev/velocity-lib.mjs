@@ -75,6 +75,7 @@ export function buildGateCommands(root, subagent, opts = {}) {
   for (const gate of agent.gates ?? []) {
     if (gate.startsWith('npm run ')) {
       const script = gate.replace('npm run ', '');
+      if (opts.fast && script === 'check') continue;
       commands.push({ label: gate, npm: script, required: false });
     } else if (gate.startsWith('quality:') || gate.startsWith('test:')) {
       commands.push({ label: gate, npm: gate, required: false });
