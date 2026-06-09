@@ -1,6 +1,6 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-09 · **HEAD:** `37f5a52` · **CI:** fix ci-parity en curso — último verde `fa38e4d`
+**Actualizado:** 2026-06-09 · **HEAD:** `15b6131` · **CI:** [27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998) ✅
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports/epis2-audit-avance-proyecto-2026-06-09.md`](../../reports/epis2-audit-avance-proyecto-2026-06-09.md)
 
@@ -10,7 +10,8 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 
 | Entrega / hito | Evidencia |
 |----------------|-----------|
-| CI pipeline completo | run 27181266125 — check, test, **10/10 E2E**, db:validate, golden-journey |
+| CI pipeline completo | run [27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998) — check, test, ci-parity, **10/10 E2E**, db:validate, golden-journey |
+| Fix ci-parity (sin doble vitest) | `15b6131` · `--from-report` · ci-parity ~1s en CI |
 | Entrega CI-E2E | `7993f2c` — Firmar → borrador; paste-zone; ficha-history |
 | PROG-THREE-MODES MF-01…08 | `quality:pm01` ✓ · `three-modes-journey` E2E |
 | **Hilo A** — consolidación visual | RAD dashboard, acordeones, MF-151→182 |
@@ -39,7 +40,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 | P2 | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | P3 | Ola 3 restante | Impresión clínica · piloto humano M3 |
 
-`npm run quality:microphase-next` → ledger MF cerrado; seguir **Hilo B/D** en plan global.
+`npm run quality:microphase-next` → ledger MF cerrado; seguir **Hilo B** en plan global.
 
 ---
 
@@ -59,7 +60,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 ```text
 L0 Invariantes     ████████████████████  permanente
 L1 Ola 1           ██████████████████░░  CE + shell · hitos 1C/1D partial
-L2 Tramos A–I      ████████████████████  signoff prep
+L2 Tramos A–J      ████████████████████  scaffold · Tramo J signoff cerrado
 L3 UX densidad     ████████████████████  MF-UI-SIMPLIFY done
 L4 RAD MD3         ████████████████████  Hilo A done
 L5 clinical-prod   ████████████████░░░░  base · piloto extendido pendiente

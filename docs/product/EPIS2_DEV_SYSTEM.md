@@ -114,7 +114,7 @@ Tabla MF-1…51 ↔ legado: [`docs/quality/MF_UNIFIED_CANON.md`](../quality/MF_U
 | Hitos bootstrap EPIS2-00…12 | ✓ Cerrados |
 | Programa MF-151…182 | ✓ Cerrado |
 | PROG-THREE-MODES | ✓ Cerrado |
-| CI master | ◐ Re-run tras fix ci-parity · último verde `fa38e4d` |
+| CI master | ✓ 10/10 E2E · [run 27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998) · `15b6131` |
 | **Hilo B** (Ola 2) | ◐ ~95 % — PEND-002 defer |
 | **Hilo D** / Tramo J | ✓ PEND-001 cerrado 2026-06-09 |
 | Ledger MF READY | 0 — usar hilo + tablero |

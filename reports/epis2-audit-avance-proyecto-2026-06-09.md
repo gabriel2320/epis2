@@ -1,6 +1,6 @@
 # EPIS2 — Auditoría de avance del proyecto
 
-**Fecha:** 2026-06-09 · **HEAD:** `7f68f17` · **Rama:** `master` (sync con origin)  
+**Fecha:** 2026-06-09 (tarde) · **HEAD:** `15b6131` · **Rama:** `master` (sync con origin)  
 **Sistema:** [SDEPIS2](../docs/product/EPIS2_DEV_SYSTEM.md) · **Tablero:** [EPIS2_TABLERO.md](../docs/product/EPIS2_TABLERO.md)
 
 ---
@@ -12,12 +12,12 @@
 | **MVP bootstrap** (EPIS2-00…12) | ✅ Cerrado |
 | **Programa microfases** MF-151…182 | ✅ Cerrado (38 MF) |
 | **PROG-THREE-MODES** (EPIS2-PM-01) | ✅ Cerrado |
-| **CI master** | ✅ Verde — 10/10 E2E · [run 27181266125](https://github.com/gabriel2320/epis2/actions/runs/27181266125) |
-| **Hilo B** (Ola 2) | ◐ ~95 % — 1 ítem diferido |
-| **Hilo D** / Tramo J | ○ Siguiente prioritario |
+| **CI master** | ✅ Verde — 10/10 E2E · [run 27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998) · `15b6131` |
+| **Hilo B** (Ola 2) | ◐ ~95 % — PEND-002 defer |
+| **Hilo D** / Tramo J | ✅ PEND-001 cerrado 2026-06-09 |
 | **Working tree** | Limpio |
 
-**Conclusión:** plataforma estable, pipeline CI confiable en preview, deuda principal en signoff clínico Tramo J y deuda E2E menor en specs fuera del set CI.
+**Conclusión:** plataforma estable; CI verde tras fix ci-parity; foco en cierre formal **Hilo B** y deuda E2E menor (PEND-004).
 
 ---
 
@@ -27,22 +27,22 @@
 |------|--------|---------|
 | L0 Invariantes | ████ 100 % | Gates architecture + product canon |
 | L1 Olas 0–1 | ███░ ~85 % | Ola 0 ✓ · Ola 1 hitos 1C/1D partial |
-| L2 Tramos A–I | ████ scaffold | Signoff institucional prep · Tramo J pendiente |
+| L2 Tramos A–K | ████ scaffold | Tramo J signoff cerrado · A–I signoff prep |
 | L3 UX densidad | ████ 100 % | MF-UI-SIMPLIFY |
 | L4 RAD MD3 | ████ 100 % | Hilo A cerrado |
 | L5 clinical-productivity | ███░ ~80 % | Paquete + gates · piloto extendido pendiente |
-| L6 Tramo J | ██░░ ~40 % | `dashboard-pharmacy` done · signoff clínico pendiente |
+| L6 Tramo J | ████ 100 % técnico | PEND-001 cerrado · IDC 161–170 |
 
 ---
 
-## 3. Gates verificados (última sesión CI verde)
+## 3. Gates verificados (CI run 27222014998)
 
-| Gate | Run 27181266125 |
+| Gate | Run 27222014998 |
 |------|-----------------|
 | `npm run check` | ✅ |
 | `quality:pm01` · `theme:validate` | ✅ |
-| `npm run test` · `quality:ci-parity` | ✅ |
-| `test:e2e` | ✅ **10/10** (20.1s) |
+| `npm run test` + `quality:ci-parity --from-report` | ✅ (643 tests · sin doble vitest) |
+| `test:e2e` | ✅ **10/10** |
 | `db:validate` · `ai:evals` · `quality:golden-journey` | ✅ |
 
 Specs E2E en CI: `golden-command-evolution`, `golden-draft-approval`, `golden-v2-admission-discharge`, `clinical-textbox-evolution-draft`, `login-gateway`×2, `three-modes-journey`, `ux-g02`×3.
@@ -71,7 +71,16 @@ Specs E2E en CI: `golden-command-evolution`, `golden-draft-approval`, `golden-v2
 | `1342876` | Evolab añadido (revertido después) |
 | `47a641e` · `4899475` · `c4deb70` | Evolab → repo [epis2-evolab](https://github.com/gabriel2320/epis2-evolab) |
 
-### Documentación y nomenclatura
+### Tarde 2026-06-09 (Tramo J + ci-parity)
+
+| Commit | Entrega | Efecto |
+|--------|---------|--------|
+| `fa38e4d` | Tramo J scaffold | IDC 161–170 `PharmacyDashboardTab` |
+| `37f5a52` | Docs PEND-001 | Tablero + pendientes (CI flake ci-parity) |
+| `15b6131` | Fix ci-parity | `--from-report` · CI verde 27222014998 |
+| `8e1a0ec` | E2E Tramo C | PEND-003 cerrado · ficha-history antes CTAs |
+
+### Documentación y nomenclatura (mañana)
 
 | Commit | Efecto |
 |--------|--------|
@@ -92,14 +101,14 @@ Specs E2E en CI: `golden-command-evolution`, `golden-draft-approval`, `golden-v2
 
 | ID | Hilo / tramo | Pendiente | Gate / criterio |
 |----|--------------|-----------|-----------------|
-| **PEND-001** | **Hilo D** · Tramo J | Signoff clínico farmacia + piloto UX-G02 | `quality:tramos-clinical-signoff-gate` |
+| ~~PEND-001~~ | ~~Hilo D · Tramo J~~ | **Cerrado 2026-06-09** · `fa38e4d` + signoff | [`epis2-tramo-j-signoff-2026-06-09.md`](./epis2-tramo-j-signoff-2026-06-09.md) |
 | **PEND-002** | Hilo B | Procedimiento nota clínica (≠ `procedure_request`) | Diferido Ola 2+ — documentar decisión |
 
 ### P2 — Calidad / deuda técnica
 
 | ID | Área | Pendiente | Notas |
 |----|------|-----------|-------|
-| **PEND-003** | E2E | `tramo-c-admission.spec.ts` drift | CTA ingreso requiere `epis2-ficha-history` (no en set CI) |
+| ~~PEND-003~~ | E2E | **Cerrado 2026-06-09** · `tramo-c-admission` 3/3 | [`epis2-tramo-c-admission-e2e-fix-2026-06-09.md`](./epis2-tramo-c-admission-e2e-fix-2026-06-09.md) |
 | **PEND-004** | E2E | Patrón MUI Select | Usar `getByRole('combobox')` en formularios |
 | **PEND-005** | Ola 1 | Hitos **1C** / **1D** partial | Resultados + IA asistida extendida |
 | **PEND-006** | Ola 3 | Impresión clínica · piloto humano M3 | `M3_VISUAL_SIGNOFF_STEPS.md` |
@@ -109,7 +118,7 @@ Specs E2E en CI: `golden-command-evolution`, `golden-draft-approval`, `golden-v2
 
 | ID | Área | Pendiente |
 |----|------|-----------|
-| **PEND-008** | `microphase-next.mjs` | Mensaje aún dice «Fase B» → alinear a **Hilo B** |
+| ~~PEND-008~~ | `microphase-next.mjs` | **Cerrado** — mensaje usa Hilo B / Hilo D |
 | **PEND-009** | Storybook | 12 stories bootstrap · ampliar por IDC |
 | **PEND-010** | MF-2xx | Propuesta arquitecto — no activa |
 
@@ -130,21 +139,21 @@ Specs E2E en CI: `golden-command-evolution`, `golden-draft-approval`, `golden-v2
 
 ## 7. Riesgos
 
-1. **Drift E2E** — specs fuera del set CI (`tramo-c-*`, `ola3-*`) pueden romperse sin aviso.
-2. **Confusión nomenclatura** — docs históricos aún dicen «Fase/Lote»; migración gradual vía SDEPIS2.
-3. **Tramo J antes de signoff** — scaffold listo pero piloto producción farmacia bloqueado por signoff clínico.
+1. **Drift E2E** — specs fuera del set CI (`ola3-*`, tramos no-CI) pueden romperse sin aviso.
+2. **Confusión nomenclatura** — docs históricos en `reports/` aún dicen «Fase/Lote»; canon SDEPIS2 al día.
+3. **Doble vitest ci-parity** — resuelto en `15b6131` (`--from-report`).
 4. **Evolab** — no mezclar de nuevo en monorepo sin manifiesto legacy.
 
 ---
 
 ## 8. Próximo paso exacto
 
-1. Cerrar formalmente **Hilo B** (marcar checklist en plan global; dejar PEND-002 documentado como defer).
-2. Abrir sesión **Hilo D — Tramo J**: signoff clínico + E2E farmacia si aplica.
-3. Entrega rápida **PEND-003**: alinear `tramo-c-admission.spec.ts` con patrón ficha-history.
+1. Cerrar formalmente **Hilo B** (PEND-002 = defer documentado en plan global).
+2. **PEND-004** — helper E2E combobox MUI.
+3. Sync docs canon tras cada entrega (tablero + SDEPIS2).
 
 ```bash
-npm run quality:microphase-next   # → Hilo B/D (ledger MF cerrado)
+npm run quality:microphase-next   # → Hilo B (ledger MF cerrado)
 npm run check && npm run test && npm run db:validate
 ```
 
@@ -155,8 +164,8 @@ npm run check && npm run test && npm run db:validate
 | Campo | Valor |
 |-------|-------|
 | Auditor | Sesión agente EPIS2 |
-| Alcance | Estado proyecto + historial 2026-06-08…09 + pendientes |
-| Gates locales | `quality:microphases` OK · working tree clean |
-| CI referencia | 27181266125 (código) · docs commits en validación |
+| Alcance | Estado proyecto + cierre Tramo J + fix ci-parity + sync docs |
+| Gates locales | `npm run check` OK · node_modules OK (mirror npmmirror, este equipo) |
+| CI referencia | [27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998) · `15b6131` |
 
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*

@@ -51,7 +51,7 @@ Command palette Ctrl+K → **Hilo B**.
 
 - [x] `ClinicalCommandPalette` Ctrl+K (`ClinicalShellCommandPalette`)
 - [x] Autocomplete búsqueda paciente (`PatientSearchAutocomplete`)
-- [x] Journey `golden-v2-admission-discharge` — CI 10/10 E2E [27181266125](https://github.com/gabriel2320/epis2/actions/runs/27181266125)
+- [x] Journey `golden-v2-admission-discharge` — CI 10/10 E2E [27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998)
 - [x] RAD `clinical-form-evolution` + `draft-review` → `done`
 - [x] Blueprint `procedure_request` + comando `request_procedure` (IDC 57)
 - [x] Cierre encuentro UI + API (`outpatient_visit.closeEncounter`)
@@ -65,9 +65,10 @@ Command palette Ctrl+K → **Hilo B**.
 - [x] Documentos UI compacta · CTAs alergia/problema · timeline invocable
 - Resultados bandeja plana (results-inbox ✓)
 
-### Hilo D — Tramo J farmacia (post Hilo B)
+### Hilo D — Tramo J farmacia (**cerrado** 2026-06-09)
 
-Precedencia: Hilo B → `dashboard-pharmacy` `done` → signoff UX-G02 + clínico institucional.
+- [x] Scaffold IDC 161–170 · `fa38e4d` · gates Tramo J 6/6 · E2E 2/2 · UX-G02 9/9
+- [x] PEND-001 signoff · [`epis2-tramo-j-signoff-2026-06-09.md`](../../reports/epis2-tramo-j-signoff-2026-06-09.md)
 
 ### Hilo UX-1 — PROG-THREE-MODES / **EPIS2-PM-01** (**cerrado** 2026-06-04)
 

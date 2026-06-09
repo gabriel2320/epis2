@@ -12,7 +12,7 @@
 | PEND-005 | P2 | Hitos Ola 1C / 1D | Ola 1 |
 | PEND-006 | P2 | Impresión + piloto M3 | Ola 3 |
 | PEND-007 | P3 | Dependabot zod 4.x | Plataforma |
-| PEND-008 | P3 | `microphase-next` mensaje Hilo B | Tooling |
+| PEND-008 | ~~P3~~ **Cerrado 2026-06-09** | ~~microphase-next mensaje Hilo B~~ → ya usa Hilo B / Hilo D | Tooling |
 | PEND-009 | P3 | Storybook por IDC | UI |
 | PEND-010 | P3 | MF-2xx propuesta | Arquitectura |
 
