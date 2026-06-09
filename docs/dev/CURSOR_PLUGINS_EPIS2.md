@@ -15,6 +15,7 @@
 | MCP plantilla | `.cursor/mcp.json` | GitHub vía variable de entorno (ver abajo) |
 | Plugin empaquetado | `cursor-plugin/epis2/` | Importar en Cursor o compartir con el equipo |
 | Verificación | `npm run cursor:verify` | Comprueba token GitHub y MCP local |
+| Velocidad dev | `npm run dev:velocity` | Tablero + brief + subagente · ver [EPIS2_DEV_VELOCITY.md](./EPIS2_DEV_VELOCITY.md) |
 
 ---
 
@@ -22,10 +23,11 @@
 
 ### P1 — Ya en repo (usar hoy)
 
-1. **`npm run dev:session`** → adjuntar `@reports/dev-agent-brief.md` en Cursor.
+1. **`npm run dev:velocity`** → arranque rápido; luego `@reports/dev-agent-brief.md` en Cursor.
 2. Comando **`/epis2-session`** o skill `epis2-session` para arranque SDEPIS2.
-3. Comando **`/epis2-close`** al terminar (gates + reporte).
-4. Reglas `.cursor/rules/` (canon, legacy, gates, clínica).
+3. Comando **`/epis2-velocity`** para loop completo documentado.
+4. Comando **`/epis2-close`** al terminar (gates + reporte).
+5. Reglas `.cursor/rules/` (canon, legacy, gates, clínica).
 
 ### P2 — Requiere un paso tuyo (5–10 min)
 

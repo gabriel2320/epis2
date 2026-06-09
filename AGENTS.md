@@ -16,6 +16,7 @@
 9. No importar desde `../Epis` sin entrada en `legacy-import-manifest.json`.
 
 Guía IA: `docs/product/EPIS2_AI_ASSISTED_DEV.md` · cierre `npm run dev:agent:close`.  
+Velocidad dev: `docs/dev/EPIS2_DEV_VELOCITY.md` · `npm run dev:velocity` · gates `npm run dev:velocity:gates`.  
 Cursor plugins/MCP: `docs/dev/CURSOR_PLUGINS_EPIS2.md` · verificar `npm run cursor:verify`.
 
 ## Gates obligatorios al cerrar

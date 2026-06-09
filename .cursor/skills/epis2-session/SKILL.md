@@ -7,11 +7,10 @@ description: >-
 
 # EPIS2 — Arranque de sesión
 
-## Orden obligatorio
+## Arranque obligatorio
 
-1. Ejecutar `npm run quality:microphase-next` (o leer salida reciente).
-2. Ejecutar `npm run dev:session` (opcional: `--tramo J`, `--ollama`, `--ollama-auto`).
-3. Leer en contexto:
+1. Ejecutar `npm run dev:velocity` (o `npm run quality:microphase-next` + `npm run dev:session`).
+2. Leer en contexto:
    - `@reports/dev-agent-brief.md`
    - `@docs/product/EPIS2_TABLERO.md`
    - `@docs/product/PRODUCT_INVARIANTS.md` si tocas clínica o datos

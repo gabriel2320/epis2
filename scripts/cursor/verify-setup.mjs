@@ -38,7 +38,11 @@ for (const s of skills) {
 const pluginManifest = join(root, 'cursor-plugin/epis2/.cursor-plugin/plugin.json');
 console.log(`  plugin epis2         ${existsSync(pluginManifest) ? 'OK' : 'MISSING'}`);
 
-console.log('\nNotion / Figma MCP: instalar desde Cursor Marketplace y Connect en Settings → MCP.');
+const velocityDoc = join(root, 'docs/dev/EPIS2_DEV_VELOCITY.md');
+console.log(`  dev velocity doc     ${existsSync(velocityDoc) ? 'OK' : 'MISSING'}`);
+
+console.log('\nVelocidad: npm run dev:velocity · gates: npm run dev:velocity:gates');
+console.log('Notion / Figma MCP: Cursor Marketplace → Install → Connect en Settings → MCP.');
 console.log('Doc: docs/dev/CURSOR_PLUGINS_EPIS2.md\n');
 
 if (!hasToken) {
