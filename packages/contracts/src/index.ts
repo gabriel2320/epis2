@@ -147,4 +147,5 @@ export {
   type OpsStatusResponse,
   type QualityDashboardResponse,
 } from './ops.js';
+export { draftsListQuerySchema, type DraftsListQuery } from './drafts.js';
 export { EPIS2_PRODUCT_NAME, EPIS2_PHASE } from './meta.js';

@@ -10,7 +10,7 @@ import {
   SYNTHETIC_LABEL,
   getDemoCaseByPatientId,
 } from '@epis2/test-fixtures';
-import { asc, eq, ilike, and, inArray } from 'drizzle-orm';
+import { asc, desc, eq, ilike, and, inArray } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import {
   approvals,
@@ -230,14 +230,21 @@ export async function listApprovedNotes(db: Database, patientId: string) {
 
 export async function listDrafts(
   db: Database,
-  filter: { patientId?: string; status?: string } = {},
+  filter: { patientId?: string; status?: string; limit?: number; offset?: number } = {},
 ) {
-  const rows = await db.select().from(clinicalDrafts);
-  return rows.filter((row) => {
-    if (filter.patientId && row.patientId !== filter.patientId) return false;
-    if (filter.status && row.status !== filter.status) return false;
-    return true;
-  });
+  const conditions = [
+    ...(filter.patientId ? [eq(clinicalDrafts.patientId, filter.patientId)] : []),
+    ...(filter.status ? [eq(clinicalDrafts.status, filter.status)] : []),
+  ];
+  let query = db
+    .select()
+    .from(clinicalDrafts)
+    .where(conditions.length > 0 ? and(...conditions) : undefined)
+    .orderBy(desc(clinicalDrafts.updatedAt))
+    .$dynamic();
+  if (filter.limit !== undefined) query = query.limit(filter.limit);
+  if (filter.offset !== undefined) query = query.offset(filter.offset);
+  return query;
 }
 
 export async function listDraftVersions(db: Database, draftId: string) {

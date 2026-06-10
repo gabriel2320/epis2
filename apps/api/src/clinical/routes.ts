@@ -3,6 +3,7 @@ import {
   documentIntakeResponseSchema,
   documentOcrResponseSchema,
   documentSearchResponseSchema,
+  draftsListQuerySchema,
   patientClinicalAlertsResponseSchema,
   patientLongitudinalResponseSchema,
   patientResultsInboxResponseSchema,
@@ -334,12 +335,16 @@ export async function registerClinicalRoutes(
   app.get(
     '/api/drafts',
     { preHandler: createRequirePermission(config, 'draft.read') },
-    async (request) => {
+    async (request, reply) => {
       const session = (request as AuthenticatedRequest).session;
-      const query = request.query as { patientId?: string; status?: string };
-      const filter: { patientId?: string; status?: string } = {};
-      if (query.patientId !== undefined) filter.patientId = query.patientId;
-      if (query.status !== undefined) filter.status = query.status;
+      const parsed = draftsListQuerySchema.safeParse(request.query);
+      if (!parsed.success) {
+        return reply.status(400).send({ error: 'Parámetros de paginación inválidos' });
+      }
+      const { patientId, status, limit, offset } = parsed.data;
+      const filter: Parameters<typeof listDrafts>[1] = { limit, offset };
+      if (patientId !== undefined) filter.patientId = patientId;
+      if (status !== undefined) filter.status = status;
       const drafts = await runWithRlsContext(db, config, session, (tx) => listDrafts(tx, filter));
       return {
         drafts: drafts.map((d) => ({
@@ -350,6 +355,8 @@ export async function registerClinicalRoutes(
           title: d.title,
           updatedAt: d.updatedAt,
         })),
+        limit,
+        offset,
       };
     },
   );
