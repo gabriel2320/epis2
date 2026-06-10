@@ -16,6 +16,9 @@ describe('assertProductionRlsEnforced', () => {
         RLS_MODE: 'off',
         AUTH_MODE: 'demo',
         LOG_LEVEL: 'info',
+        OTEL_ENABLED: false,
+        OTEL_EXPORTER_OTLP_ENDPOINT: 'http://127.0.0.1:4318',
+        OTEL_SERVICE_NAME: 'epis2-api',
       }),
     ).not.toThrow();
   });
@@ -34,6 +37,9 @@ describe('assertProductionRlsEnforced', () => {
         RLS_MODE: 'off',
         AUTH_MODE: 'demo',
         LOG_LEVEL: 'info',
+        OTEL_ENABLED: false,
+        OTEL_EXPORTER_OTLP_ENDPOINT: 'http://127.0.0.1:4318',
+        OTEL_SERVICE_NAME: 'epis2-api',
       }),
     ).toThrow(/RLS_MODE=enforce/);
   });

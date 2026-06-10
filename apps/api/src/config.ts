@@ -15,6 +15,13 @@ const envSchema = z.object({
   AUTH_MODE: z.enum(['demo', 'hybrid']).default('demo'),
   SERVICE_API_KEY: z.string().min(32).optional(),
   LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace']).default('info'),
+  // MF-NORM-203: OTel mínimo — off por defecto en dev; spans solo con flag explícito.
+  OTEL_ENABLED: z
+    .enum(['true', 'false'])
+    .default('false')
+    .transform((v) => v === 'true'),
+  OTEL_EXPORTER_OTLP_ENDPOINT: z.string().url().default('http://127.0.0.1:4318'),
+  OTEL_SERVICE_NAME: z.string().min(1).default('epis2-api'),
 });
 
 export type AppConfig = z.infer<typeof envSchema>;
