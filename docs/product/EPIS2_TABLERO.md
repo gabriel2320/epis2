@@ -51,6 +51,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 |-----------|--------------|------|
 | **P0** | **CI rojo (PEND-011)** — E2E print Ola 6A fallan en CI desde fase 2: `ola6a-print-certificate/discharge-summary/orders` esperan `epis2-form-<blueprint>` que no aparece (timeout 15s). Pasan o no se ejecutaron local; reproducir con `EPIS2_LOCAL_CI_E2E=1` o `npx playwright test e2e/ola6a-print-certificate.spec.ts` | run [27242226078](https://github.com/gabriel2320/epis2/actions/runs/27242226078) |
 | **P1** | Signoff visual conjunto: alto contraste + M3-R (hover/foco/rail/two-pane, claro/oscuro) — `quality:m3-visual-pass` + revisión humana | P1b + M3-R código ✓ |
+| **P1** | **Hilo NORM** (PEND-012) — plan de mejora norma full stack: N1 quick wins → N2 observabilidad → N3 OpenAPI/threat model → N4 a11y/E2E/móvil · **arranca cuando PEND-011 esté verde** | [`EPIS2_NORMA_FULLSTACK_PLAN.md`](EPIS2_NORMA_FULLSTACK_PLAN.md) · [auditoría](../../reports/epis2-norma-fullstack-compliance-2026-06-10.md) |
 | P1c | Fase 5 auditoría — checklist pre-producción (solo si sale del laboratorio) | [`epis2-auditoria-profunda-2026-06-09.md`](../../reports/epis2-auditoria-profunda-2026-06-09.md) §7 |
 | P2 | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | P3 | Backlog Ola 2+ | Nota procedimiento clínica (PEND-002 defer) |

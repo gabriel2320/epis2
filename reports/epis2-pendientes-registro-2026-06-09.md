@@ -15,6 +15,7 @@
 | PEND-008 | ~~P3~~ **Cerrado 2026-06-09** | ~~microphase-next mensaje Hilo B~~ → ya usa Hilo B / Hilo D | Tooling |
 | PEND-009 | P3 | Storybook por IDC | UI |
 | PEND-010 | P3 | MF-2xx propuesta | Arquitectura |
+| PEND-012 | P1 | **Hilo NORM** — plan de mejora norma full stack (auditoría 2026-06-10, cumplimiento ≈70%) · tramos N1–N4 · [plan](../docs/product/EPIS2_NORMA_FULLSTACK_PLAN.md) · [auditoría](./epis2-norma-fullstack-compliance-2026-06-10.md) · **bloqueado por PEND-011** | Arquitectura / Calidad |
 | PEND-011 | **P0** | **CI rojo desde fase 2** (`fb5ba23`, 2026-06-09) — E2E impresión Ola 6A (`ola6a-print-certificate`, `discharge-summary`, `orders` lab/imagen) fallan en CI: `epis2-form-<blueprint>` no visible (form testid vive en `EpisClinicalForm[Rhf]`, página no llega a renderizarlo en CI). Último verde [27228650107](https://github.com/gabriel2320/epis2/actions/runs/27228650107). Repro: `npx playwright test e2e/ola6a-print-*.spec.ts` con stack CI-parity | Calidad / CI |
 
 Cerrar ítem: marcar fecha en este registro + reporte `reports/` + actualizar [EPIS2_TABLERO.md](../docs/product/EPIS2_TABLERO.md).
