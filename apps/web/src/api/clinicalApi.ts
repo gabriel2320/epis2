@@ -1,5 +1,6 @@
 import type {
   DocumentSearchResponse,
+  MedicationCatalogSearchResponse,
   PatientClinicalAlertsResponse,
   PatientLongitudinalResponse,
   PatientResultsInboxResponse,
@@ -41,6 +42,12 @@ export function listPatients(query?: string) {
 
 export function fetchPatientDetail(patientId: string) {
   return apiFetch<PatientDetailResponse>(`/api/patients/${patientId}`);
+}
+
+/** MF-184: catálogo de medicamentos promovido (autocomplete receta/MAR). */
+export function searchMedicationCatalog(query: string) {
+  const q = query.trim() ? `?q=${encodeURIComponent(query.trim())}` : '';
+  return apiFetch<MedicationCatalogSearchResponse>(`/api/clinical/catalogs/medication${q}`);
 }
 
 export function fetchPatientLongitudinal(patientId: string) {

@@ -22,7 +22,11 @@ export const prescriptionBlueprint = defineBlueprint({
     section('instructions', 'Indicaciones', ['patientInstructions', 'clinicalNotes']),
   ],
   fields: [
-    field('medication', 'Medicamento', 'text', { required: true, columnSpan: 8 }),
+    field('medication', 'Medicamento', 'text', {
+      required: true,
+      columnSpan: 8,
+      catalogAutocomplete: 'medication',
+    }),
     field('dose', 'Dosis', 'text', { required: true, columnSpan: 4 }),
     field('quantity', 'Cantidad', 'text', { required: true, columnSpan: 4 }),
     field('route', 'Vía', 'select', { options: ['oral', 'intravenosa', 'topica'], columnSpan: 4 }),

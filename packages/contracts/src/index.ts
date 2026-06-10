@@ -157,4 +157,36 @@ export {
   type QualityDashboardResponse,
 } from './ops.js';
 export { draftsListQuerySchema, type DraftsListQuery } from './drafts.js';
+export {
+  clinicalCatalogEntrySchema,
+  medicationCatalogSearchResponseSchema,
+  type ClinicalCatalogEntry,
+  type MedicationCatalogSearchResponse,
+} from './catalogs.js';
+export {
+  drugIntelCorrelationSchema,
+  drugIntelDiscrepancySchema,
+  drugIntelDiscrepancySeveritySchema,
+  drugIntelDoseSchema,
+  drugIntelIspAlertSchema,
+  drugIntelListResponseSchema,
+  drugIntelPriceSchema,
+  drugIntelPromoteResponseSchema,
+  drugIntelRecordSchema,
+  drugIntelReviewRequestSchema,
+  drugIntelReviewStatusSchema,
+  drugIntelStagingRowSchema,
+  drugIntelTextWithSourceSchema,
+  type DrugIntelCorrelation,
+  type DrugIntelDiscrepancy,
+  type DrugIntelDose,
+  type DrugIntelIspAlert,
+  type DrugIntelListResponse,
+  type DrugIntelPrice,
+  type DrugIntelPromoteResponse,
+  type DrugIntelRecord,
+  type DrugIntelReviewRequest,
+  type DrugIntelReviewStatus,
+  type DrugIntelStagingRow,
+} from './drugIntel.js';
 export { EPIS2_PRODUCT_NAME, EPIS2_PHASE } from './meta.js';

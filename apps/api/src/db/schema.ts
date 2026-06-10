@@ -350,6 +350,24 @@ export const clinicalCatalogStaging = pgTable('clinical_catalog_staging', {
     .references(() => appUsers.id),
 });
 
+// MF-183: staging drug-intel (scraping fuentes públicas + correlación). No SoT clínico.
+export const drugIntelStaging = pgTable('drug_intel_staging', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  recordKey: text('record_key').notNull().unique(),
+  productName: text('product_name').notNull(),
+  activeIngredient: text('active_ingredient'),
+  atcCode: text('atc_code'),
+  reviewStatus: text('review_status').notNull().default('pending'),
+  requiresHumanReview: boolean('requires_human_review').notNull().default(true),
+  payload: jsonb('payload').notNull(),
+  sourceHash: text('source_hash').notNull(),
+  fetchedAt: timestamp('fetched_at', { withTimezone: true }).notNull(),
+  reviewedBy: text('reviewed_by').references(() => appUsers.id),
+  reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
 export const interopHl7Quarantine = pgTable('interop_hl7_quarantine', {
   id: uuid('id').primaryKey().defaultRandom(),
   messageType: text('message_type'),

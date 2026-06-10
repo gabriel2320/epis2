@@ -25,6 +25,11 @@ export type FormField = {
   clinicalTextBox?: boolean;
   /** Modo del ClinicalTextBox cuando clinicalTextBox=true. */
   clinicalTextBoxMode?: 'plain' | 'rich';
+  /**
+   * MF-184 — campo `text` con autocomplete alimentado por un catálogo clínico
+   * promovido (clinical_catalog_staging). El valor guardado sigue siendo string.
+   */
+  catalogAutocomplete?: 'medication';
 };
 
 export type FormValidationRule = {

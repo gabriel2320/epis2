@@ -12,6 +12,7 @@ export type FieldDefinition = {
   readOnly?: boolean;
   clinicalTextBox?: boolean;
   clinicalTextBoxMode?: 'plain' | 'rich';
+  catalogAutocomplete?: 'medication';
 };
 
 export function defineBlueprint(input: BlueprintInput): ClinicalFormBlueprint {
@@ -44,6 +45,7 @@ export function field(
   let readOnly: boolean | undefined;
   let clinicalTextBox: boolean | undefined;
   let clinicalTextBoxMode: 'plain' | 'rich' | undefined;
+  let catalogAutocomplete: 'medication' | undefined;
 
   if (typeof requiredOrDef === 'boolean') {
     required = requiredOrDef;
@@ -55,6 +57,7 @@ export function field(
     readOnly = requiredOrDef.readOnly;
     clinicalTextBox = requiredOrDef.clinicalTextBox;
     clinicalTextBoxMode = requiredOrDef.clinicalTextBoxMode;
+    catalogAutocomplete = requiredOrDef.catalogAutocomplete;
   }
 
   const base: FormField = { id, label, type, required };
@@ -63,5 +66,9 @@ export function field(
   const withReadOnly = readOnly !== undefined ? { ...withSpan, readOnly } : withSpan;
   const withTextBox =
     clinicalTextBox !== undefined ? { ...withReadOnly, clinicalTextBox } : withReadOnly;
-  return clinicalTextBoxMode !== undefined ? { ...withTextBox, clinicalTextBoxMode } : withTextBox;
+  const withTextBoxMode =
+    clinicalTextBoxMode !== undefined ? { ...withTextBox, clinicalTextBoxMode } : withTextBox;
+  return catalogAutocomplete !== undefined
+    ? { ...withTextBoxMode, catalogAutocomplete }
+    : withTextBoxMode;
 }

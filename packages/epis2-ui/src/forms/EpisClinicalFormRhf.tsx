@@ -32,6 +32,13 @@ export type EpisClinicalFormRhfProps = {
     error?: string;
     onChange: (value: string) => void;
   }) => ReactElement | null;
+  /** MF-184 — render opcional para campos con catalogAutocomplete (devuelve null para fallback). */
+  renderCatalogField?: (props: {
+    field: FormField;
+    value: string;
+    error?: string;
+    onChange: (value: string) => void;
+  }) => ReactElement | null;
 };
 
 /** Formulario clínico MD3 con React Hook Form + Zod (resolver en FormProvider). */
@@ -42,6 +49,7 @@ export function EpisClinicalFormRhf({
   onClinicalDrop,
   collapseNonPrimarySections = false,
   renderClinicalTextBox,
+  renderCatalogField,
 }: EpisClinicalFormRhfProps) {
   const { control } = useFormContext<EpisClinicalFormValues>();
   const fieldMap = new Map(blueprint.fields.map((f) => [f.id, f]));
@@ -72,6 +80,15 @@ export function EpisClinicalFormRhf({
                   control={control}
                   render={({ field: rhf, fieldState }) => {
                     const errorMsg = fieldState.error?.message;
+                    if (f.catalogAutocomplete && f.type === 'text' && renderCatalogField) {
+                      const custom = renderCatalogField({
+                        field: f,
+                        value: rhf.value ?? '',
+                        ...(errorMsg ? { error: errorMsg } : {}),
+                        onChange: (value) => rhf.onChange(value),
+                      });
+                      if (custom) return custom;
+                    }
                     if (f.clinicalTextBox && f.type === 'textarea' && renderClinicalTextBox) {
                       const custom = renderClinicalTextBox({
                         field: f,

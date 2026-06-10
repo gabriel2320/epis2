@@ -19,3 +19,5 @@ Thumbs.db
 .turbo/
 packages/epis2-ui/storybook-static/
 backups/
+services/drug-intel/.cache/
+data/drug-intel/
