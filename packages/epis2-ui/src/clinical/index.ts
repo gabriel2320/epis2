@@ -12,6 +12,7 @@ export {
   type EpisNavigationRailProps,
 } from './EpisNavigationRail.js';
 export { EpisAppShellLayout, type EpisAppShellLayoutProps } from './EpisAppShellLayout.js';
+export { EpisMobileNavDrawer, type EpisMobileNavDrawerProps } from './EpisMobileNavDrawer.js';
 export {
   EpisPatientContextBar,
   type EpisPatientContextBarProps,

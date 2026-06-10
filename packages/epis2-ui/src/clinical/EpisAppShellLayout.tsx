@@ -1,6 +1,9 @@
 import type { ReactNode } from 'react';
 import Box from '@mui/material/Box';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { epis2MediaQueries } from '../theme/breakpoints.js';
 import { epis2CanvasSx } from '../theme/island-layout.js';
+import { EpisMobileNavDrawer } from './EpisMobileNavDrawer.js';
 import { EpisNavigationRail, type EpisNavigationRailItem } from './EpisNavigationRail.js';
 
 export type EpisAppShellLayoutProps = {
@@ -28,11 +31,24 @@ export function EpisAppShellLayout({
   children,
   testId = 'epis2-app-shell',
 }: EpisAppShellLayoutProps) {
+  // MF-NORM-403: bajo el breakpoint medium el rail colapsa a Drawer modal MD3.
+  const compact = useMediaQuery(epis2MediaQueries.compactOnly);
+  const showRail = !railHidden && !compact;
+  const showMobileNav = !railHidden && compact;
+
+  const mobileNav = showMobileNav ? (
+    <EpisMobileNavDrawer
+      items={railItems}
+      {...(railFooter ? { footer: railFooter } : {})}
+      testId={`${testId}-mobile-nav`}
+    />
+  ) : null;
+
   return (
     <Box sx={{ ...epis2CanvasSx, display: 'flex', minHeight: '100vh' }} data-testid={testId}>
-      {railHidden ? null : (
+      {showRail ? (
         <EpisNavigationRail items={railItems} {...(railFooter ? { footer: railFooter } : {})} />
-      )}
+      ) : null}
       <Box
         component="main"
         sx={{
@@ -43,7 +59,7 @@ export function EpisAppShellLayout({
           minHeight: '100vh',
         }}
       >
-        {appBar ? (
+        {appBar || mobileNav ? (
           <Box
             sx={{
               position: 'sticky',
@@ -52,7 +68,14 @@ export function EpisAppShellLayout({
               flexShrink: 0,
             }}
           >
-            {appBar}
+            {mobileNav ? (
+              <Box sx={{ display: 'flex', alignItems: 'center', bgcolor: 'background.default' }}>
+                {mobileNav}
+                <Box sx={{ flex: 1, minWidth: 0 }}>{appBar}</Box>
+              </Box>
+            ) : (
+              appBar
+            )}
           </Box>
         ) : null}
         {patientChrome ? (
