@@ -60,6 +60,7 @@ npm run test:e2e:tramo-k
 3. Permisos negativos probados por rol clínico.
 4. Golden journey extremo a extremo con datos sintéticos DEMO-005.
 5. Acta de signoff archivada fuera del repo (institución).
+6. Threat model revisado y riesgos aceptados vigentes — [`docs/security/EPIS2_THREAT_MODEL.md`](../security/EPIS2_THREAT_MODEL.md).
 
 ---
 
