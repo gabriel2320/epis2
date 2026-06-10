@@ -16,6 +16,7 @@ export {
   epis2BodyFontFamily,
 } from './theme/theme.js';
 export { useTheme } from '@mui/material/styles';
+export { useEpis2ExpandedUp } from './hooks/useEpis2ExpandedUp.js';
 export {
   Epis2ThemeProvider,
   type Epis2ThemeProviderProps,

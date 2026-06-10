@@ -1,5 +1,12 @@
 import { copy } from '@epis2/design-system';
-import { Chip, Stack, Typography } from '@epis2/epis2-ui';
+import { Box, Chip, Stack, Typography } from '@epis2/epis2-ui';
+
+function patientInitials(displayName: string): string {
+  const parts = displayName.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return '?';
+  if (parts.length === 1) return parts[0]!.slice(0, 2).toUpperCase();
+  return `${parts[0]![0] ?? ''}${parts[parts.length - 1]![0] ?? ''}`.toUpperCase();
+}
 
 export type EpisClassicMd3PatientHeaderProps = {
   displayName?: string | undefined;
@@ -10,7 +17,7 @@ export type EpisClassicMd3PatientHeaderProps = {
   testId?: string | undefined;
 };
 
-/** Header clínico compacto — máx. 2 líneas, siempre visible. */
+/** Header clínico compacto — avatar + máx. 2 líneas, siempre visible. */
 export function EpisClassicMd3PatientHeader({
   displayName,
   metaLine,
@@ -19,11 +26,13 @@ export function EpisClassicMd3PatientHeader({
   episodeLabel,
   testId = 'epis2-classic-md3-patient-header',
 }: EpisClassicMd3PatientHeaderProps) {
+  const name = displayName ?? copy.classicMd3.noPatient;
+
   return (
     <Stack
       data-testid={testId}
       direction="row"
-      spacing={1}
+      spacing={1.5}
       alignItems="center"
       flexWrap="wrap"
       useFlexGap
@@ -38,19 +47,34 @@ export function EpisClassicMd3PatientHeader({
         overflow: 'hidden',
       }}
     >
-      <Typography
-        variant="subtitle1"
-        fontWeight={600}
-        noWrap
-        sx={{ maxWidth: { xs: '100%', md: '40%' } }}
+      <Box
+        aria-hidden
+        sx={{
+          width: 40,
+          height: 40,
+          borderRadius: '50%',
+          bgcolor: 'primary.main',
+          color: 'primary.contrastText',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: 14,
+          fontWeight: 600,
+          flexShrink: 0,
+        }}
       >
-        {displayName ?? copy.classicMd3.noPatient}
-      </Typography>
-      {metaLine ? (
-        <Typography variant="caption" color="text.secondary" noWrap sx={{ maxWidth: 320 }}>
-          {metaLine}
+        {patientInitials(name)}
+      </Box>
+      <Stack spacing={0.25} sx={{ minWidth: 0, flex: 1 }}>
+        <Typography variant="subtitle1" fontWeight={600} noWrap>
+          {name}
         </Typography>
-      ) : null}
+        {metaLine ? (
+          <Typography variant="caption" color="text.secondary" noWrap>
+            {metaLine}
+          </Typography>
+        ) : null}
+      </Stack>
       {episodeLabel ? <Chip size="small" variant="outlined" label={episodeLabel} /> : null}
       {allergyLabels.slice(0, 3).map((label) => (
         <Chip key={label} size="small" color="warning" variant="outlined" label={label} />

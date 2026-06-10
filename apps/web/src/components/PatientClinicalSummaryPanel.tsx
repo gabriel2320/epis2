@@ -1,14 +1,6 @@
 import { copy } from '@epis2/design-system';
 import { Box, EpisWorkspaceSection, Stack, Typography } from '@epis2/epis2-ui';
-
-const FIELD_LABELS: Record<string, string> = {
-  activeProblems: copy.activePatient.summaryActiveProblems,
-  recentEvents: copy.activePatient.summaryRecentEvents,
-  relevantLabs: copy.activePatient.summaryLabs,
-  activeMedications: copy.activePatient.summaryMedications,
-  pendingItems: copy.activePatient.summaryPending,
-  clinicalAlerts: copy.activePatient.summaryAlerts,
-};
+import { patientSummaryFieldLabel } from '../clinical/patientSummaryFieldLabels.js';
 
 export type PatientClinicalSummaryPanelProps = {
   summaryFields: Record<string, string>;
@@ -32,7 +24,7 @@ export function PatientClinicalSummaryPanel({ summaryFields }: PatientClinicalSu
               display="block"
               sx={{ lineHeight: 1.55 }}
             >
-              {FIELD_LABELS[key] ?? key}
+              {patientSummaryFieldLabel(key)}
             </Typography>
             <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap' }}>
               {value}

@@ -8,13 +8,13 @@ import {
   TerminalIcon,
   Typography,
 } from '@epis2/epis2-ui';
-import type { SvgIconComponent } from '@mui/icons-material';
+import type { ElementType } from 'react';
 import { useState } from 'react';
 import { hasUnsavedClinicalWork } from '../../modes/modeTransitionSafety.js';
 import { EPIS_MODES, type EpisMode } from '../../modes/episModes.js';
 import { useEpisSession } from '../../session/EpisSessionContext.js';
 
-const MODE_META: Record<EpisMode, { label: string; Icon: SvgIconComponent }> = {
+const MODE_META: Record<EpisMode, { label: string; Icon: ElementType<{ fontSize?: 'small' | 'medium' | 'inherit' }> }> = {
   command: { label: copy.threeModes.commandLabel, Icon: TerminalIcon },
   classic: { label: copy.threeModes.classicLabel, Icon: AssignmentIcon },
   dashboard: { label: copy.threeModes.dashboardLabel, Icon: DashboardIcon },

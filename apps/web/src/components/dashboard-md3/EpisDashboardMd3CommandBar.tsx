@@ -8,10 +8,11 @@ export type EpisDashboardMd3CommandBarProps = {
   onSuggestionSelect?: ((label: string) => void) | undefined;
   disabled?: boolean | undefined;
   testId?: string | undefined;
+  embedded?: boolean | undefined;
 };
 
 /** Command bar dashboard — delega en EpisUniversalCommandBar. */
-export function EpisDashboardMd3CommandBar(props: EpisDashboardMd3CommandBarProps) {
+export function EpisDashboardMd3CommandBar({ embedded = false, ...props }: EpisDashboardMd3CommandBarProps) {
   return (
     <EpisUniversalCommandBar
       variant="dashboard-operational"
@@ -22,6 +23,7 @@ export function EpisDashboardMd3CommandBar(props: EpisDashboardMd3CommandBarProp
       onSuggestionSelect={props.onSuggestionSelect}
       disabled={props.disabled ?? false}
       testId={props.testId ?? 'epis2-dashboard-md3-command-bar'}
+      embedded={embedded}
     />
   );
 }

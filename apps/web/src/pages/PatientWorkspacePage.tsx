@@ -6,7 +6,7 @@ import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 import { Alert, EpisButton, Stack, Typography, epis2ShellContentIslandSx } from '@epis2/epis2-ui';
 import { ClassicMd3WorkspaceLayout } from '../components/classic-md3/ClassicMd3WorkspaceLayout.js';
-import { EpisClassicMd3SplitPane } from '../components/classic-md3/EpisClassicMd3SplitPane.js';
+import { PatientClinicalSummaryGrid } from '../components/clinical-summary/PatientClinicalSummaryGrid.js';
 import { useClassicMd3Mode } from '../modes/index.js';
 import { useEpisSession } from '../session/EpisSessionContext.js';
 import { classicCommandSuggestionLabels } from '../classic-md3/commandSuggestions.js';
@@ -228,25 +228,45 @@ export function PatientWorkspacePage() {
       .filter(Boolean)
       .join(' · ');
 
+    const openSupportingTimeline = () => {
+      setHistoryFocus('timeline');
+      setSupportingOpen(true);
+    };
+
     return (
       <>
         <ClassicMd3WorkspaceLayout
           patientId={patientId}
+          patientDisplayName={detail.patient.displayName}
           metaLine={metaLine}
           allergyLabels={allergyLabels}
           alertLabels={alertLabels}
           supportingOpen={supportingOpen}
           onSupportingToggle={() => setSupportingOpen((v) => !v)}
           mainContent={
-            <EpisClassicMd3SplitPane
-              primary={primaryColumn}
-              secondary={secondaryColumn}
-              open={historyOpen}
-              onOpenChange={setHistoryOpen}
-              testId="epis2-classic-ficha-split"
+            <PatientClinicalSummaryGrid
+              summaryFields={detail.clinicalContext.summaryFields}
+              longitudinal={longitudinal}
+              alerts={clinicalAlerts}
+              onRegisterAllergy={longitudinalNav.onRegisterAllergy}
+              onRegisterProblem={longitudinalNav.onRegisterProblem}
+              onOpenResults={longitudinalNav.onOpenResults}
+              onOpenDraft={openDraft}
+              onViewFullTimeline={openSupportingTimeline}
+              onOpenEvolution={longitudinalNav.onOpenNote}
             />
           }
-          supportingContent={secondaryColumn}
+          supportingContent={
+            longitudinal ? (
+              <PatientLongitudinalPanel
+                data={longitudinal}
+                focusSection={historyFocus}
+                {...longitudinalNav}
+              />
+            ) : (
+              <Typography color="text.secondary">{copy.drafts.loading}</Typography>
+            )
+          }
           commandQuery={classicCommand.query}
           onCommandQueryChange={classicCommand.setQuery}
           onCommandSubmit={() => void classicCommand.submit()}

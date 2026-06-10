@@ -30,6 +30,14 @@ export {
   type EpisClassicMd3CommandBarProps,
 } from './EpisClassicMd3CommandBar.js';
 export {
+  EpisClassicMd3BottomDock,
+  type EpisClassicMd3BottomDockProps,
+} from './EpisClassicMd3BottomDock.js';
+export {
+  EpisClassicMd3MobileNav,
+  type EpisClassicMd3MobileNavProps,
+} from './EpisClassicMd3MobileNav.js';
+export {
   EpisClassicMd3StatusBar,
   type EpisClassicMd3StatusBarProps,
 } from './EpisClassicMd3StatusBar.js';

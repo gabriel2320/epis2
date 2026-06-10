@@ -7,6 +7,7 @@ import {
   epis2M3Spacing,
   epis2M3TouchTargetMinPx,
   epis2M3ColumnSpanSx,
+  resolveEpis2M3FormLayout,
 } from './m3-layout-tokens.js';
 
 describe('epis2 M3 layout tokens', () => {
@@ -27,6 +28,11 @@ describe('epis2 M3 layout tokens', () => {
     expect(epis2M3FormLayout.sectionGap).toBe(epis2M3Spacing.block);
     expect(epis2M3FormLayout.columns).toBe(12);
     expect(epis2M3FormColumns).toBe(12);
+  });
+
+  it('densidad compacta reduce sectionGap', () => {
+    expect(resolveEpis2M3FormLayout('compact').sectionGap).toBe(epis2M3Spacing.row);
+    expect(resolveEpis2M3FormLayout('comfortable').sectionGap).toBe(epis2M3Spacing.block);
   });
 
   it('touch target mínimo 48dp', () => {

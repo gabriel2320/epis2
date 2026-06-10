@@ -9,10 +9,14 @@ export type EpisClassicMd3CommandBarProps = {
   onSuggestionSelect?: (label: string) => void;
   disabled?: boolean;
   testId?: string;
+  embedded?: boolean;
 };
 
 /** Command bar clásica — delega en EpisUniversalCommandBar. */
-export function EpisClassicMd3CommandBar(props: EpisClassicMd3CommandBarProps) {
+export function EpisClassicMd3CommandBar({
+  embedded = false,
+  ...props
+}: EpisClassicMd3CommandBarProps) {
   return (
     <EpisUniversalCommandBar
       variant="classic-contextual"
@@ -23,6 +27,7 @@ export function EpisClassicMd3CommandBar(props: EpisClassicMd3CommandBarProps) {
       onSuggestionSelect={props.onSuggestionSelect}
       disabled={props.disabled ?? false}
       testId={props.testId ?? 'epis2-classic-md3-command-bar'}
+      embedded={embedded}
     />
   );
 }

@@ -7,6 +7,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import { useTheme } from '@mui/material/styles';
 import type { ReactElement } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { epis2BarLayout } from '../theme/breakpoints.js';
@@ -51,12 +52,14 @@ export function EpisClinicalFormRhf({
   renderClinicalTextBox,
   renderCatalogField,
 }: EpisClinicalFormRhfProps) {
+  const theme = useTheme();
+  const formLayout = theme.epis2?.formLayout ?? epis2M3FormLayout;
   const { control } = useFormContext<EpisClinicalFormValues>();
   const fieldMap = new Map(blueprint.fields.map((f) => [f.id, f]));
 
   return (
     <Stack
-      spacing={epis2M3FormLayout.sectionGap}
+      spacing={formLayout.sectionGap}
       data-testid={`epis2-form-${blueprint.blueprintId}`}
     >
       <EpisM3Text role="bodyLarge" color="text.secondary" sx={{ px: 1 }}>

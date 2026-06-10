@@ -4,12 +4,12 @@ import { Box } from '@epis2/epis2-ui';
 export type EpisDashboardMd3ShellProps = {
   topBar: ReactNode;
   scopeBar: ReactNode;
+  mobileNav?: ReactNode;
   navigationRail: ReactNode;
   kpiStrip?: ReactNode;
   mainGrid: ReactNode;
   detailPane?: ReactNode;
-  commandBar?: ReactNode;
-  statusBar: ReactNode;
+  bottomDock: ReactNode;
   testId?: string;
 };
 
@@ -17,12 +17,12 @@ export type EpisDashboardMd3ShellProps = {
 export function EpisDashboardMd3Shell({
   topBar,
   scopeBar,
+  mobileNav,
   navigationRail,
   kpiStrip,
   mainGrid,
   detailPane,
-  commandBar,
-  statusBar,
+  bottomDock,
   testId = 'epis2-dashboard-md3-shell',
 }: EpisDashboardMd3ShellProps) {
   return (
@@ -35,12 +35,15 @@ export function EpisDashboardMd3Shell({
         maxHeight: '100dvh',
         overflow: 'hidden',
         display: 'grid',
-        gridTemplateRows: 'auto auto minmax(0, 1fr) auto auto',
+        gridTemplateRows: mobileNav
+          ? 'auto auto auto minmax(0, 1fr) auto'
+          : 'auto auto minmax(0, 1fr) auto',
         bgcolor: 'background.default',
       }}
     >
       <Box sx={{ flexShrink: 0 }}>{topBar}</Box>
       <Box sx={{ flexShrink: 0 }}>{scopeBar}</Box>
+      {mobileNav ? <Box sx={{ flexShrink: 0 }}>{mobileNav}</Box> : null}
 
       <Box
         sx={{
@@ -87,8 +90,7 @@ export function EpisDashboardMd3Shell({
         ) : null}
       </Box>
 
-      {commandBar ? <Box sx={{ flexShrink: 0 }}>{commandBar}</Box> : null}
-      <Box sx={{ flexShrink: 0 }}>{statusBar}</Box>
+      <Box sx={{ flexShrink: 0 }}>{bottomDock}</Box>
     </Box>
   );
 }

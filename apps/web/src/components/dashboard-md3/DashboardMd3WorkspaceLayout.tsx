@@ -12,17 +12,19 @@ import {
   type DashboardScopeFilters,
 } from '../../dashboard-md3/dashboardScopeFilters.js';
 import { dashboardCommandSuggestionLabels } from '../../dashboard-md3/dashboardCommandSuggestions.js';
+import { EpisTopAppBar } from '../layout/EpisTopAppBar.js';
 import type { DashboardKpiItem } from './EpisDashboardMd3KpiStrip.js';
 import { EpisDashboardMd3Shell } from './EpisDashboardMd3Shell.js';
-import { EpisDashboardMd3TopBar } from './EpisDashboardMd3TopBar.js';
 import { EpisDashboardMd3ScopeBar } from './EpisDashboardMd3ScopeBar.js';
 import { EpisDashboardMd3NavigationRail } from './EpisDashboardMd3NavigationRail.js';
+import { EpisDashboardMd3MobileNav } from './EpisDashboardMd3MobileNav.js';
 import { EpisDashboardMd3KpiStrip } from './EpisDashboardMd3KpiStrip.js';
 import { EpisDashboardMd3MainGrid } from './EpisDashboardMd3MainGrid.js';
 import { EpisDashboardMd3DetailPane } from './EpisDashboardMd3DetailPane.js';
 import type { DashboardDetailSelection } from './EpisDashboardMd3MainGrid.js';
 import { EpisDashboardMd3CommandBar } from './EpisDashboardMd3CommandBar.js';
 import { EpisDashboardMd3StatusBar } from './EpisDashboardMd3StatusBar.js';
+import { EpisDashboardMd3BottomDock } from './EpisDashboardMd3BottomDock.js';
 
 export type DashboardMd3WorkspaceLayoutProps = {
   activeTab: DashboardTab;
@@ -36,7 +38,6 @@ export type DashboardMd3WorkspaceLayoutProps = {
   onCommandQueryChange: (value: string) => void;
   onCommandSubmit: () => void;
   onCommandSuggestion?: (label: string) => void;
-  onOpenCommandPalette?: () => void;
   patientId?: string;
   selectionCount?: number;
   scopeFilters?: DashboardScopeFilters;
@@ -57,14 +58,13 @@ export function DashboardMd3WorkspaceLayout({
   onCommandQueryChange,
   onCommandSubmit,
   onCommandSuggestion,
-  onOpenCommandPalette,
   patientId,
   selectionCount = 0,
   scopeFilters = DEFAULT_DASHBOARD_SCOPE,
   onClearScopeFilters,
   lastUpdatedLabel,
 }: DashboardMd3WorkspaceLayoutProps) {
-  const { openCommandCenter, openClassicMode } = useEpisSession();
+  const { openClassicMode } = useEpisSession();
   const { session } = useAuth();
   const { aiAvailable } = useAiStatusQuery();
   const [moreOpen, setMoreOpen] = useState(false);
@@ -80,22 +80,19 @@ export function DashboardMd3WorkspaceLayout({
 
   return (
     <EpisDashboardMd3Shell
-      topBar={
-        <EpisDashboardMd3TopBar
-          clinicianLabel={session?.user.displayName}
-          roleLabel={roleLabel}
-          serviceLabel={scopeFilters.service}
-          timestampLabel={new Date().toLocaleString('es-CL')}
-          onBackToCommand={() => openCommandCenter(patientId)}
-          onOpenClassicMode={openClassic}
-          classicModeDisabled={!patientId}
-          {...(onOpenCommandPalette ? { onOpenCommandPalette } : {})}
-        />
-      }
+      topBar={<EpisTopAppBar active="dashboard" />}
       scopeBar={
         <EpisDashboardMd3ScopeBar
           filters={scopeFilters}
           {...(onClearScopeFilters ? { onClearFilters: onClearScopeFilters } : {})}
+        />
+      }
+      mobileNav={
+        <EpisDashboardMd3MobileNav
+          primary={nav.primary}
+          more={nav.more}
+          activeTab={activeTab}
+          onTabChange={onTabChange}
         />
       }
       navigationRail={
@@ -121,25 +118,31 @@ export function DashboardMd3WorkspaceLayout({
           onOpenChart={patientId ? () => openClassicMode(patientId, activeTab) : undefined}
         />
       }
-      commandBar={
-        <EpisDashboardMd3CommandBar
-          query={commandQuery}
-          onQueryChange={onCommandQueryChange}
-          onSubmit={onCommandSubmit}
-          suggestions={suggestions}
-          onSuggestionSelect={onCommandSuggestion}
-        />
-      }
-      statusBar={
-        <EpisDashboardMd3StatusBar
-          lastUpdatedLabel={lastUpdatedLabel ?? new Date().toLocaleTimeString('es-CL')}
-          dbStatus="ok"
-          aiStatus={aiAvailable ? 'ok' : 'degraded'}
-          activeFilterCount={filterCount}
-          selectionCount={selectionCount}
-          userLabel={session?.user.displayName}
-          roleLabel={roleLabel}
-          environmentLabel="demo"
+      bottomDock={
+        <EpisDashboardMd3BottomDock
+          commandBar={
+            <EpisDashboardMd3CommandBar
+              embedded
+              query={commandQuery}
+              onQueryChange={onCommandQueryChange}
+              onSubmit={onCommandSubmit}
+              suggestions={suggestions}
+              onSuggestionSelect={onCommandSuggestion}
+            />
+          }
+          statusBar={
+            <EpisDashboardMd3StatusBar
+              embedded
+              lastUpdatedLabel={lastUpdatedLabel ?? new Date().toLocaleTimeString('es-CL')}
+              dbStatus="ok"
+              aiStatus={aiAvailable ? 'ok' : 'degraded'}
+              activeFilterCount={filterCount}
+              selectionCount={selectionCount}
+              userLabel={session?.user.displayName}
+              roleLabel={roleLabel}
+              environmentLabel="demo"
+            />
+          }
         />
       }
     />

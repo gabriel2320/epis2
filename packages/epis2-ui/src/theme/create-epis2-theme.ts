@@ -12,6 +12,7 @@ import { epis2Shape, epis2ShapeBorderRadius } from './shape.js';
 import { epis2StateLayerOpacity } from './motion.js';
 import { hexWithAlpha } from './color-alpha.js';
 import { epis2Typography, epis2TypographyRoles } from './typography.js';
+import { resolveEpis2M3FormLayout, type Epis2M3FormLayout } from './m3-layout-tokens.js';
 import {
   buildEpis2Shadows,
   buildVisualIdentity,
@@ -44,6 +45,7 @@ declare module '@mui/material/styles' {
       clinical: typeof clinicalRoles;
       shape: typeof epis2Shape;
       visual: Epis2VisualIdentity;
+      formLayout: Epis2M3FormLayout;
     };
   }
   interface ThemeOptions {
@@ -153,6 +155,7 @@ export function createEpis2Theme(options: CreateEpis2ThemeOptions = {}): Theme {
         clinical: clinicalRoles,
         shape: epis2Shape,
         visual,
+        formLayout: resolveEpis2M3FormLayout(density),
       },
     },
     esES,

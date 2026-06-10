@@ -7,4 +7,6 @@ export { EpisDashboardMd3MainGrid } from './EpisDashboardMd3MainGrid.js';
 export { EpisDashboardMd3DetailPane } from './EpisDashboardMd3DetailPane.js';
 export { EpisDashboardMd3CommandBar } from './EpisDashboardMd3CommandBar.js';
 export { EpisDashboardMd3StatusBar } from './EpisDashboardMd3StatusBar.js';
+export { EpisDashboardMd3BottomDock } from './EpisDashboardMd3BottomDock.js';
+export { EpisDashboardMd3MobileNav } from './EpisDashboardMd3MobileNav.js';
 export { DashboardMd3WorkspaceLayout } from './DashboardMd3WorkspaceLayout.js';

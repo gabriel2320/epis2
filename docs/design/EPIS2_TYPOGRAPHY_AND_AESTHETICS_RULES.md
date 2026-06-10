@@ -4,6 +4,8 @@
 
 Veinte reglas que gobiernan legibilidad clínica y composición visual. La implementación vive en `packages/epis2-ui/src/theme/`; este documento es la fuente de verdad normativa.
 
+**Plan estético integrado (2026-06-10):** [`EPIS2_CLINICAL_CALM_PREMIUM_PLAN.md`](./EPIS2_CLINICAL_CALM_PREMIUM_PLAN.md) — operacionaliza estas reglas en tramos THEME-CALM / UX-CALM (paleta, superficies, pantallas).
+
 **Implementación en código:**
 
 | Artefacto | Ruta |

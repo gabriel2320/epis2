@@ -4,12 +4,12 @@ import { Box } from '@epis2/epis2-ui';
 export type EpisClassicMd3ShellProps = {
   topAppBar: ReactNode;
   patientHeader: ReactNode;
+  mobileNav?: ReactNode;
   leftNavigation: ReactNode;
   mainPane: ReactNode;
   supportingPane?: ReactNode;
   actionRail?: ReactNode;
-  commandBar?: ReactNode;
-  statusBar: ReactNode;
+  bottomDock: ReactNode;
   testId?: string;
 };
 
@@ -17,12 +17,12 @@ export type EpisClassicMd3ShellProps = {
 export function EpisClassicMd3Shell({
   topAppBar,
   patientHeader,
+  mobileNav,
   leftNavigation,
   mainPane,
   supportingPane,
   actionRail,
-  commandBar,
-  statusBar,
+  bottomDock,
   testId = 'epis2-classic-md3-shell',
 }: EpisClassicMd3ShellProps) {
   return (
@@ -35,12 +35,15 @@ export function EpisClassicMd3Shell({
         maxHeight: '100dvh',
         overflow: 'hidden',
         display: 'grid',
-        gridTemplateRows: 'auto auto minmax(0, 1fr) auto auto',
+        gridTemplateRows: mobileNav
+          ? 'auto auto auto minmax(0, 1fr) auto'
+          : 'auto auto minmax(0, 1fr) auto',
         bgcolor: 'background.default',
       }}
     >
       <Box sx={{ flexShrink: 0 }}>{topAppBar}</Box>
       <Box sx={{ flexShrink: 0 }}>{patientHeader}</Box>
+      {mobileNav ? <Box sx={{ flexShrink: 0 }}>{mobileNav}</Box> : null}
 
       <Box
         sx={{
@@ -84,8 +87,7 @@ export function EpisClassicMd3Shell({
         ) : null}
       </Box>
 
-      {commandBar ? <Box sx={{ flexShrink: 0 }}>{commandBar}</Box> : null}
-      <Box sx={{ flexShrink: 0 }}>{statusBar}</Box>
+      <Box sx={{ flexShrink: 0 }}>{bottomDock}</Box>
     </Box>
   );
 }

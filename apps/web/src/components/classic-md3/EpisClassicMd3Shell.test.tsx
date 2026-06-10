@@ -11,6 +11,9 @@ vi.mock('../modes/EpisModeSwitcher.js', () => ({
 vi.mock('../../layouts/ClinicalAppBarSettingsAction.js', () => ({
   ClinicalAppBarSettingsAction: () => <button type="button" data-testid="epis2-nav-ajustes" />,
 }));
+vi.mock('../layout/EpisTopAppBar.js', () => ({
+  EpisTopAppBar: () => <div data-testid="epis2-global-top-bar">top</div>,
+}));
 import { EpisClassicMd3CommandBar } from './EpisClassicMd3CommandBar.js';
 import { EpisClassicMd3PatientHeader } from './EpisClassicMd3PatientHeader.js';
 import { EpisClassicMd3Shell } from './EpisClassicMd3Shell.js';
@@ -19,7 +22,7 @@ import { EpisClassicMd3SupportingPane } from './EpisClassicMd3SupportingPane.js'
 import { EpisClassicMd3TopAppBar } from './EpisClassicMd3TopAppBar.js';
 
 describe('EpisClassicMd3Shell', () => {
-  it('renderiza scaffold con paciente, nav, supporting, rail, command y status', () => {
+  it('renderiza scaffold con paciente, nav, supporting, rail y bottom dock', () => {
     render(
       <EpisClassicMd3Shell
         topAppBar={<div data-testid="top">top</div>}
@@ -28,8 +31,7 @@ describe('EpisClassicMd3Shell', () => {
         mainPane={<div data-testid="main">main</div>}
         supportingPane={<div data-testid="support">support</div>}
         actionRail={<div data-testid="rail">rail</div>}
-        commandBar={<div data-testid="command">command</div>}
-        statusBar={<div data-testid="status">status</div>}
+        bottomDock={<div data-testid="dock">dock</div>}
       />,
     );
 
@@ -38,8 +40,7 @@ describe('EpisClassicMd3Shell', () => {
     expect(screen.getByTestId('nav')).toBeInTheDocument();
     expect(screen.getByTestId('support')).toBeInTheDocument();
     expect(screen.getByTestId('rail')).toBeInTheDocument();
-    expect(screen.getByTestId('command')).toBeInTheDocument();
-    expect(screen.getByTestId('status')).toBeInTheDocument();
+    expect(screen.getByTestId('dock')).toBeInTheDocument();
   });
 
   it('no reserva slot duplicado de ActionBar clínica global', () => {
@@ -54,7 +55,7 @@ describe('EpisClassicMd3Shell', () => {
             labs
           </button>
         }
-        statusBar={<span>{copy.classicMd3.modeLabel}</span>}
+        bottomDock={<span>{copy.classicMd3.modeLabel}</span>}
       />,
     );
     expect(screen.queryByTestId('epis2-classic-md3-action-bar-slot')).not.toBeInTheDocument();
@@ -126,7 +127,7 @@ describe('EpisClassicMd3CommandBar', () => {
 });
 
 describe('EpisClassicMd3StatusBar', () => {
-  it('muestra modo clásico y estado', () => {
+  it('muestra borrador y expande estado del sistema', () => {
     render(
       <EpisClassicMd3StatusBar
         draftStatusLabel="Borrador"
@@ -137,9 +138,10 @@ describe('EpisClassicMd3StatusBar', () => {
         environmentLabel={copy.classicMd3.statusDemo}
       />,
     );
+    expect(screen.getByTestId('epis2-classic-md3-status-bar')).toHaveTextContent('Borrador');
+    fireEvent.click(screen.getByTestId('epis2-classic-md3-status-bar-toggle'));
     expect(screen.getByTestId('epis2-classic-md3-status-bar')).toHaveTextContent(
       copy.classicMd3.modeLabel,
     );
-    expect(screen.getByTestId('epis2-classic-md3-status-bar')).toHaveTextContent('Borrador');
   });
 });

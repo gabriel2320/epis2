@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
 import Stack from '@mui/material/Stack';
 import { epis2ClinicalFormCanvasSx } from './clinical-field-layout.js';
@@ -19,9 +20,12 @@ export function EpisClinicalFormPage({
   headerExtra,
   testId = 'epis2-generated-clinical-page',
 }: EpisClinicalFormPageProps) {
+  const theme = useTheme();
+  const formLayout = theme.epis2?.formLayout ?? epis2M3FormLayout;
+
   return (
     <Box sx={epis2ClinicalFormCanvasSx} data-testid={testId}>
-      <Stack spacing={epis2M3FormLayout.sectionGap}>
+      <Stack spacing={formLayout.sectionGap}>
         <Stack
           direction="row"
           spacing={1.5}

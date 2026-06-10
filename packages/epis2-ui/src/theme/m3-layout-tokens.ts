@@ -40,6 +40,31 @@ export const epis2M3FormLayout = {
   sectionGap: epis2M3Spacing.block,
 } as const;
 
+export type Epis2M3FormLayout = {
+  readonly columns: number;
+  readonly fieldRowGap: number;
+  readonly sectionLabelGap: number;
+  readonly blockGap: number;
+  readonly sectionGap: number;
+};
+
+/** Ritmo compacto — densidad UI «Compacta» en preferencias. */
+export const epis2M3FormLayoutCompact: Epis2M3FormLayout = {
+  ...epis2M3FormLayout,
+  fieldRowGap: epis2M3Spacing.tight,
+  sectionLabelGap: epis2M3Spacing.tight,
+  blockGap: epis2M3Spacing.row,
+  sectionGap: epis2M3Spacing.row,
+};
+
+export type Epis2ThemeDensityPreference = 'comfortable' | 'compact';
+
+export function resolveEpis2M3FormLayout(
+  density: Epis2ThemeDensityPreference = 'comfortable',
+): Epis2M3FormLayout {
+  return density === 'compact' ? epis2M3FormLayoutCompact : epis2M3FormLayout;
+}
+
 /** Regla 3 — área táctil mínima MD3 (48×48 dp). */
 export const epis2M3TouchTargetMinPx = 48;
 

@@ -2,11 +2,14 @@
  * @vitest-environment jsdom
  */
 import { copy } from '@epis2/design-system';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('../modes/EpisModeSwitcher.js', () => ({
   EpisModeSwitcher: () => null,
+}));
+vi.mock('../../layouts/ClinicalAppBarSettingsAction.js', () => ({
+  ClinicalAppBarSettingsAction: () => <button type="button" data-testid="epis2-nav-ajustes" />,
 }));
 import { EpisDashboardMd3Shell } from './EpisDashboardMd3Shell.js';
 import { EpisDashboardMd3TopBar } from './EpisDashboardMd3TopBar.js';
@@ -31,7 +34,7 @@ describe('EpisDashboardMd3Shell', () => {
         scopeBar={<div data-testid="scope">scope</div>}
         navigationRail={<div data-testid="nav">nav</div>}
         mainGrid={<div data-testid="main">main</div>}
-        statusBar={<div data-testid="status">status</div>}
+        bottomDock={<div data-testid="dock">dock</div>}
       />,
     );
     const shell = screen.getByTestId('epis2-dashboard-md3-shell');
@@ -48,9 +51,10 @@ describe('EpisDashboardMd3TopBar', () => {
 });
 
 describe('EpisDashboardMd3ScopeBar', () => {
-  it('muestra filtros', () => {
+  it('muestra servicio y toggle de filtros', () => {
     render(<EpisDashboardMd3ScopeBar filters={DEFAULT_DASHBOARD_SCOPE} />);
     expect(screen.getByTestId('epis2-dashboard-md3-scope-bar')).toBeTruthy();
+    expect(screen.getByText(copy.dashboardMd3.scopeShowFilters)).toBeTruthy();
   });
 });
 
@@ -104,10 +108,12 @@ describe('EpisDashboardMd3KpiStrip', () => {
 });
 
 describe('EpisDashboardMd3StatusBar', () => {
-  it('muestra actualización y modo', () => {
+  it('muestra actualización y expande detalle', () => {
     render(<EpisDashboardMd3StatusBar lastUpdatedLabel="12:00" userLabel="Demo" />);
     expect(screen.getByText(copy.dashboardMd3.statusMode)).toBeTruthy();
     expect(screen.getByText(/12:00/)).toBeTruthy();
+    fireEvent.click(screen.getByTestId('epis2-dashboard-md3-status-bar-toggle'));
+    expect(screen.getByText('Demo')).toBeTruthy();
   });
 });
 

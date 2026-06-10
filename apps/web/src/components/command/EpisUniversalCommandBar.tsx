@@ -28,6 +28,8 @@ export type EpisUniversalCommandBarProps = {
   onSuggestionSelect?: ((label: string) => void) | undefined;
   disabled?: boolean | undefined;
   testId?: string | undefined;
+  /** Sin borde superior — dentro del bottom dock. */
+  embedded?: boolean | undefined;
 };
 
 /** Command bar unificada — variantes por modo, command-registry vía callbacks de página. */
@@ -40,6 +42,7 @@ export function EpisUniversalCommandBar({
   onSuggestionSelect,
   disabled = false,
   testId = 'epis2-universal-command-bar',
+  embedded = false,
 }: EpisUniversalCommandBarProps) {
   const visibleSuggestions = suggestions.slice(0, EPIS_COMMAND_BAR_MAX_SUGGESTIONS);
 
@@ -51,10 +54,14 @@ export function EpisUniversalCommandBar({
       sx={{
         flexShrink: 0,
         px: { xs: 1.5, md: 2 },
-        py: 1,
-        borderTop: 1,
-        borderColor: 'divider',
-        bgcolor: 'background.paper',
+        py: embedded ? 0.75 : 1,
+        ...(embedded
+          ? {}
+          : {
+              borderTop: 1,
+              borderColor: 'divider',
+              bgcolor: 'background.paper',
+            }),
       }}
     >
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} alignItems={{ sm: 'center' }}>

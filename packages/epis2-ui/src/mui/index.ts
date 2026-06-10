@@ -49,6 +49,7 @@ export { default as LoginIcon } from '@mui/icons-material/Login';
 export { default as LockOutlinedIcon } from '@mui/icons-material/LockOutlined';
 export { default as LogoutIcon } from '@mui/icons-material/Logout';
 export { default as MedicationIcon } from '@mui/icons-material/Medication';
+export { default as MenuIcon } from '@mui/icons-material/Menu';
 export { default as PersonIcon } from '@mui/icons-material/Person';
 export { default as PersonOutlineIcon } from '@mui/icons-material/PersonOutline';
 export { default as PersonSearchIcon } from '@mui/icons-material/PersonSearch';
