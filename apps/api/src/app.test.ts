@@ -38,4 +38,24 @@ describe('epis2-api health', () => {
     expect(body.checks).toHaveProperty('database');
     await app.close();
   });
+
+  it('toda respuesta incluye x-correlation-id generado', async () => {
+    const app = await buildApp(testApiConfig);
+    const res = await app.inject({ method: 'GET', url: '/health' });
+    const correlationId = res.headers['x-correlation-id'];
+    expect(typeof correlationId).toBe('string');
+    expect(String(correlationId)).toMatch(/^[0-9a-f-]{36}$/);
+    await app.close();
+  });
+
+  it('respeta x-correlation-id entrante (propagación)', async () => {
+    const app = await buildApp(testApiConfig);
+    const res = await app.inject({
+      method: 'GET',
+      url: '/health',
+      headers: { 'x-correlation-id': 'corr-demo-123' },
+    });
+    expect(res.headers['x-correlation-id']).toBe('corr-demo-123');
+    await app.close();
+  });
 });

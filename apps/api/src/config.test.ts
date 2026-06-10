@@ -15,6 +15,7 @@ describe('assertProductionRlsEnforced', () => {
         SESSION_COOKIE_NAME: 'epis2_session',
         RLS_MODE: 'off',
         AUTH_MODE: 'demo',
+        LOG_LEVEL: 'info',
       }),
     ).not.toThrow();
   });
@@ -32,6 +33,7 @@ describe('assertProductionRlsEnforced', () => {
         SESSION_COOKIE_NAME: 'epis2_session',
         RLS_MODE: 'off',
         AUTH_MODE: 'demo',
+        LOG_LEVEL: 'info',
       }),
     ).toThrow(/RLS_MODE=enforce/);
   });

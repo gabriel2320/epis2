@@ -12,4 +12,5 @@ export const testApiConfig = {
   OLLAMA_BASE_URL: 'http://127.0.0.1:11434',
   RLS_MODE: 'off',
   AUTH_MODE: 'demo',
+  LOG_LEVEL: 'info',
 } satisfies AppConfig;

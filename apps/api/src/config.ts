@@ -14,6 +14,7 @@ const envSchema = z.object({
   RLS_MODE: z.enum(['off', 'enforce']).default('off'),
   AUTH_MODE: z.enum(['demo', 'hybrid']).default('demo'),
   SERVICE_API_KEY: z.string().min(32).optional(),
+  LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace']).default('info'),
 });
 
 export type AppConfig = z.infer<typeof envSchema>;

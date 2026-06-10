@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import cookie from '@fastify/cookie';
 import cors from '@fastify/cors';
 import { EPIS2_PHASE, healthResponseSchema } from '@epis2/contracts';
@@ -19,8 +20,32 @@ import { getDatabase, pingDatabase } from './db/client.js';
 const VERSION = '0.1.0';
 
 export async function buildApp(config: AppConfig) {
-  const app = Fastify({ logger: config.NODE_ENV !== 'test' });
+  const app = Fastify({
+    logger:
+      config.NODE_ENV === 'test'
+        ? false
+        : {
+            level: config.LOG_LEVEL,
+            redact: {
+              paths: [
+                'req.headers.authorization',
+                'req.headers.cookie',
+                'res.headers["set-cookie"]',
+              ],
+              censor: '[REDACTED]',
+            },
+          },
+    // Correlación por request (norma R-45/R-46): respeta x-correlation-id entrante
+    // o genera uuid; el id viaja en logs (reqId) y vuelve en la respuesta.
+    requestIdHeader: 'x-correlation-id',
+    requestIdLogLabel: 'correlationId',
+    genReqId: () => randomUUID(),
+  });
   const db = getDatabase(config.DATABASE_URL);
+
+  app.addHook('onSend', async (request, reply) => {
+    reply.header('x-correlation-id', request.id);
+  });
 
   await app.register(cors, {
     origin: config.WEB_ORIGIN,
