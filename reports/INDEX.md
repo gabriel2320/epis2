@@ -36,3 +36,4 @@ Ver tabla «Hecho» del [tablero](../docs/product/EPIS2_TABLERO.md) — cada fil
 - [`epis2-norm-n4-ui-a11y-e2e-2026-06-10.md`](./epis2-norm-n4-ui-a11y-e2e-2026-06-10.md) — Tramo N4 cerrado (axe + role-first + drawer móvil + RHF server errors; re-auditoría §4/§5/§10, ≈85%)
 - [`epis2-norm-n3-api-contract-2026-06-10.md`](./epis2-norm-n3-api-contract-2026-06-10.md) — Tramo N3 cerrado (OpenAPI desde Zod + ADR/threat model previos)
 - [`epis2-norm-hilo-close-2026-06-10.md`](./epis2-norm-hilo-close-2026-06-10.md) — Hilo NORM cerrado (16/16 MF, ≈90%)
+- [`epis2-m3-visual-pass-2026-06-10.md`](./epis2-m3-visual-pass-2026-06-10.md) — Pasada visual M3 V1–V6 (capturas en `m3-visual-evidence/2026-06-10/`)

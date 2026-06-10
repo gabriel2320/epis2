@@ -36,6 +36,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 | Housekeeping árbol (#6 #3 #1) | v4/v5 → interop/ y ai/ · `tests/README.md` (golden vitest ≠ e2e) · gate `web-components-root-frozen` · [`epis2-housekeeping-arbol-2026-06-09.md`](../../reports/epis2-housekeeping-arbol-2026-06-09.md) |
 | **PEND-011 — CI rojo print E2E cerrado** | Carrera auth en carga fría (guard `GeneratedClinicalFormPage` vs `isLoading`) · paridad CI local 5/5 · `test:e2e` 15/15 · [`epis2-pend011-ci-print-e2e-fix-2026-06-10.md`](../../reports/epis2-pend011-ci-print-e2e-fix-2026-06-10.md) |
 | **Hilo NORM — PEND-012 cerrado** | 16/16 MF · ≈90% norma full stack · [`epis2-norm-hilo-close-2026-06-10.md`](../../reports/epis2-norm-hilo-close-2026-06-10.md) |
+| **P1 signoff visual M3 — pasada V1–V6** | `quality:m3-signoff` ✓ · `quality:m3-visual-pass` ✓ (16 capturas) · post NORM (a11y, drawer móvil, alto contraste) · [`epis2-m3-visual-pass-2026-06-10.md`](../../reports/epis2-m3-visual-pass-2026-06-10.md) |
 
 ---
 
@@ -51,7 +52,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 
 | Prioridad | Hilo / tramo | Gate |
 |-----------|--------------|------|
-| **P1** | Signoff visual conjunto: alto contraste + M3-R (hover/foco/rail/two-pane, claro/oscuro) — `quality:m3-visual-pass` + revisión humana | P1b + M3-R código ✓ · NORM + a11y ✓ |
+| **P1** | Revisión humana opcional post-captura M3 (hover/foco/rail/two-pane claro/oscuro) — evidencia en `reports/m3-visual-evidence/2026-06-10/` | Automatizado ✓ · [`epis2-m3-visual-pass-2026-06-10.md`](../../reports/epis2-m3-visual-pass-2026-06-10.md) |
 | P1c | Fase 5 auditoría — checklist pre-producción (solo si sale del laboratorio) | [`epis2-auditoria-profunda-2026-06-09.md`](../../reports/epis2-auditoria-profunda-2026-06-09.md) §7 |
 | P2 | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | P3 | Backlog Ola 2+ | Nota procedimiento clínica (PEND-002 defer) |
