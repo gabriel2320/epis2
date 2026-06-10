@@ -1,6 +1,6 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-09 · **HEAD:** `fb5ba23`+Fase 3 · **CI:** [27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998) ✅
+**Actualizado:** 2026-06-10 · **HEAD:** `648e88d` · **CI:** [27242226078](https://github.com/gabriel2320/epis2/actions/runs/27242226078) ❌ **rojo desde fase 2** (`fb5ba23`) — E2E impresión Ola 6A · último verde: [27228650107](https://github.com/gabriel2320/epis2/actions/runs/27228650107) (`b27fdcd` fase 1)
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports/epis2-audit-avance-proyecto-2026-06-09.md`](../../reports/epis2-audit-avance-proyecto-2026-06-09.md)
 
@@ -49,6 +49,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 
 | Prioridad | Hilo / tramo | Gate |
 |-----------|--------------|------|
+| **P0** | **CI rojo (PEND-011)** — E2E print Ola 6A fallan en CI desde fase 2: `ola6a-print-certificate/discharge-summary/orders` esperan `epis2-form-<blueprint>` que no aparece (timeout 15s). Pasan o no se ejecutaron local; reproducir con `EPIS2_LOCAL_CI_E2E=1` o `npx playwright test e2e/ola6a-print-certificate.spec.ts` | run [27242226078](https://github.com/gabriel2320/epis2/actions/runs/27242226078) |
 | **P1** | Signoff visual conjunto: alto contraste + M3-R (hover/foco/rail/two-pane, claro/oscuro) — `quality:m3-visual-pass` + revisión humana | P1b + M3-R código ✓ |
 | P1c | Fase 5 auditoría — checklist pre-producción (solo si sale del laboratorio) | [`epis2-auditoria-profunda-2026-06-09.md`](../../reports/epis2-auditoria-profunda-2026-06-09.md) §7 |
 | P2 | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
