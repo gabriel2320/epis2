@@ -4,14 +4,17 @@ import {
   documentOcrResponseSchema,
   documentSearchResponseSchema,
   draftsListQuerySchema,
+  medicationCatalogSearchResponseSchema,
   patientClinicalAlertsResponseSchema,
   patientLongitudinalResponseSchema,
   patientResultsInboxResponseSchema,
 } from '@epis2/contracts';
 import { roleHasPermission } from '@epis2/clinical-domain';
+import { and, asc, eq, ilike } from 'drizzle-orm';
 import { z } from 'zod';
 import type { FastifyInstance } from 'fastify';
 import type { Database } from '../db/client.js';
+import { clinicalCatalogStaging } from '../db/schema.js';
 import { runWithRlsContext } from '../db/rlsContext.js';
 import { createRequirePermission, type AuthenticatedRequest } from '../auth/authenticate.js';
 import {
@@ -29,7 +32,7 @@ import {
   updateDraft,
 } from './service.js';
 import type { AppConfig } from '../config.js';
-import { sendApiError } from '../errors.js';
+import { sendApiError, zodIssuesToDetails } from '../errors.js';
 import { processDocumentOcr } from './documentOcr.js';
 import { intakePatientDocument } from './documentIntake.js';
 import { searchPatientDocuments } from './documents.js';
@@ -91,6 +94,39 @@ export async function registerClinicalRoutes(
   const requireDraftApprove = createRequirePermission(config, 'draft.approve');
 
   app.get('/api/clinical/status', async () => ({ enabled: true }));
+
+  // MF-184: catálogo de medicamentos promovido (drug-intel → clinical_catalog_staging)
+  // consultable por roles clínicos para autocomplete. Solo entryCode/label.
+  app.get(
+    '/api/clinical/catalogs/medication',
+    { preHandler: requirePatientRead },
+    async (request) => {
+      const query = request.query as { q?: string; limit?: string };
+      const q = query.q?.trim() ?? '';
+      const limit = Math.min(Math.max(Number(query.limit) || 20, 1), 50);
+      const conditions = [
+        eq(clinicalCatalogStaging.catalogCode, 'medication'),
+        eq(clinicalCatalogStaging.status, 'active'),
+      ];
+      if (q) {
+        conditions.push(ilike(clinicalCatalogStaging.label, `%${q}%`));
+      }
+      const rows = await db
+        .select({
+          entryCode: clinicalCatalogStaging.entryCode,
+          label: clinicalCatalogStaging.label,
+        })
+        .from(clinicalCatalogStaging)
+        .where(and(...conditions))
+        .orderBy(asc(clinicalCatalogStaging.label))
+        .limit(limit);
+      return medicationCatalogSearchResponseSchema.parse({
+        readOnly: true as const,
+        catalogCode: 'medication' as const,
+        entries: rows,
+      });
+    },
+  );
 
   app.post(
     '/api/clinical/text-spellcheck',
@@ -296,7 +332,9 @@ export async function registerClinicalRoutes(
   app.post('/api/drafts', { preHandler: requireDraftWrite }, async (request, reply) => {
     const parsed = createDraftSchema.safeParse(request.body);
     if (!parsed.success) {
-      return sendApiError(reply, 400, 'Datos de borrador inválidos');
+      return sendApiError(reply, 400, 'Datos de borrador inválidos', {
+        details: zodIssuesToDetails(parsed.error.issues),
+      });
     }
     const session = (request as AuthenticatedRequest).session;
     if (!roleHasPermission(session.role, 'draft.write')) {
@@ -378,7 +416,9 @@ export async function registerClinicalRoutes(
     const { draftId } = request.params as { draftId: string };
     const parsed = updateDraftSchema.safeParse(request.body);
     if (!parsed.success) {
-      return sendApiError(reply, 400, 'Actualización inválida');
+      return sendApiError(reply, 400, 'Actualización inválida', {
+        details: zodIssuesToDetails(parsed.error.issues),
+      });
     }
     const session = (request as AuthenticatedRequest).session;
     try {

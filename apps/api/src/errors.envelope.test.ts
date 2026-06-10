@@ -1,4 +1,5 @@
 import { apiErrorSchema } from '@epis2/contracts';
+import { describeIntegration } from '@epis2/test-fixtures/integration';
 import { describe, expect, it } from 'vitest';
 import { buildApp } from './app.js';
 import { testApiConfig } from './testConfig.js';
@@ -77,6 +78,30 @@ describe('envelope de error compartido (MF-NORM-202)', () => {
     expect(res.statusCode).toBe(500);
     expectEnvelope(res.json(), 'INTERNAL', res.headers['x-correlation-id']);
     expect((res.json() as { message: string }).message).toBe('Error interno');
+    await app.close();
+  });
+});
+
+describeIntegration('details por campo en el envelope (MF-NORM-404)', () => {
+  it('400 de POST /api/drafts incluye details con paths Zod', async () => {
+    const app = await buildApp({ ...testApiConfig, DATABASE_URL: process.env.DATABASE_URL });
+    const login = await app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      payload: { username: 'medico.demo', demoAuthKey: 'DEMO-CLAVE-MEDICO' },
+    });
+    const cookie = String(login.headers['set-cookie']).split(';')[0] ?? '';
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/drafts',
+      headers: { cookie },
+      payload: { patientId: 'no-es-uuid', draftType: 'evolution_note', title: '', body: {} },
+    });
+    expect(res.statusCode).toBe(400);
+    const parsed = apiErrorSchema.safeParse(res.json());
+    expect(parsed.success).toBe(true);
+    if (!parsed.success) return;
+    expect(parsed.data.details?.some((d) => d.path === 'patientId')).toBe(true);
     await app.close();
   });
 });

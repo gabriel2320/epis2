@@ -57,10 +57,12 @@ import { PatientListGrid } from '../components/PatientListGrid.js';
 import { PatientSearchAutocomplete } from '../components/PatientSearchAutocomplete.js';
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
+import { applyServerFieldErrors } from '../clinical/applyServerFieldErrors.js';
 import {
   buildClinicalTextBoxPatientContext,
   renderClinicalTextBoxField,
 } from '../clinical/clinicalTextBoxField.js';
+import { MedicationCatalogAutocomplete } from '../clinical/MedicationCatalogAutocomplete.js';
 import { useClinicalTextBoxOrigins } from '../clinical/useClinicalTextBoxOrigins.js';
 import { mergeDraftFieldMetaFromBody, stripDraftMetaFromBody } from '@epis2/clinical-productivity';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
@@ -118,7 +120,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     blueprint,
     ...(seed !== undefined ? { seed } : {}),
   });
-  const { watch, setValue, getValues, trigger, reset, formState } = form;
+  const { watch, setValue, getValues, trigger, reset, formState, setError } = form;
 
   useEffect(() => {
     return registerUnsavedWorkProbe(() => formState.isDirty);
@@ -235,6 +237,28 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
         },
       ),
     [textBoxPatientContext, recordFieldOrigin, effectivePatientId, aiAvailable],
+  );
+
+  // MF-184: campos text con catalogAutocomplete → autocomplete del catálogo promovido.
+  const renderCatalogField = useCallback(
+    (props: {
+      field: import('@epis2/clinical-forms').FormField;
+      value: string;
+      error?: string;
+      onChange: (value: string) => void;
+    }) => {
+      if (props.field.catalogAutocomplete !== 'medication') return null;
+      return (
+        <MedicationCatalogAutocomplete
+          label={props.field.label}
+          value={props.value}
+          required={Boolean(props.field.required)}
+          {...(props.error ? { error: props.error } : {})}
+          onChange={props.onChange}
+        />
+      );
+    },
+    [],
   );
 
   const { alerts: clinicalAlerts, loading: alertsLoading } = usePatientClinicalAlerts({
@@ -368,6 +392,12 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     validate: trigger,
     collectBody: () => attachToDraftBody(getValues()),
     onStatus: setStatusMessage,
+    applyServerErrors: (e) =>
+      applyServerFieldErrors(
+        e,
+        blueprint.fields.map((f) => f.id),
+        setError,
+      ),
   });
 
   const canPersistDraft = Boolean(
@@ -510,6 +540,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
             onClinicalDrop={onClinicalDrop}
             collapseNonPrimarySections={blueprint.sections.length > 2}
             renderClinicalTextBox={renderClinicalTextBox}
+            renderCatalogField={renderCatalogField}
           />
         </EpisClinicalScrollspyLayout>
         <GeneratedFormClinicalAlerts
@@ -610,6 +641,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
                 clinicalProse={clinicalProse}
                 collapseNonPrimarySections={blueprint.sections.length > 2}
                 renderClinicalTextBox={renderClinicalTextBox}
+                renderCatalogField={renderCatalogField}
               />
               {showDraftActions ? <EpisClinicalFormFooter actions={formActionBar} /> : null}
               <GeneratedFormClinicalAlerts
@@ -645,6 +677,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
               clinicalProse={clinicalProse}
               collapseNonPrimarySections={blueprint.sections.length > 2}
               renderClinicalTextBox={renderClinicalTextBox}
+              renderCatalogField={renderCatalogField}
             />
             <EpisButton variant="outlined" onClick={() => void loadPatients()}>
               {copy.forms.searchPatients}
@@ -664,6 +697,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
               clinicalProse={clinicalProse}
               collapseNonPrimarySections={blueprint.sections.length > 2}
               renderClinicalTextBox={renderClinicalTextBox}
+              renderCatalogField={renderCatalogField}
             />
             {showDraftActions ? <EpisClinicalFormFooter actions={formActionBar} /> : null}
           </>

@@ -17,6 +17,8 @@ type Options = {
   validate: () => Promise<boolean>;
   collectBody: () => Record<string, unknown>;
   onStatus: (message?: string) => void;
+  /** MF-NORM-404: mapea details del envelope a errores RHF; devuelve cuántos aplicó. */
+  applyServerErrors?: (error: unknown) => number;
 };
 
 /** Persistencia de borradores del formulario generado: crear/actualizar + firmar. */
@@ -28,6 +30,7 @@ export function useGeneratedFormDraftPersistence({
   validate,
   collectBody,
   onStatus,
+  applyServerErrors,
 }: Options) {
   const navigate = useClinicalNavigate();
   const createDraftMutation = useCreateDraftMutation();
@@ -55,6 +58,12 @@ export function useGeneratedFormDraftPersistence({
       onStatus(copy.forms.draftSaved);
     };
     const onError = (e: unknown) => {
+      // MF-NORM-404: si el envelope trae errores por campo, marcarlos en el form.
+      const appliedToFields = applyServerErrors?.(e) ?? 0;
+      if (appliedToFields > 0) {
+        onStatus(copy.forms.validationRequired);
+        return;
+      }
       onStatus(e instanceof ApiError ? e.message : copy.forms.saveDraftError);
     };
 
