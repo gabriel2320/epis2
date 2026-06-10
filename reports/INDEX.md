@@ -32,3 +32,4 @@ Ver tabla «Hecho» del [tablero](../docs/product/EPIS2_TABLERO.md) — cada fil
 - [`epis2-f1-f2-limpieza-print-2026-06-09.md`](./epis2-f1-f2-limpieza-print-2026-06-09.md) — PEND-006 código cerrado
 - [`epis2-pendientes-registro-2026-06-09.md`](./epis2-pendientes-registro-2026-06-09.md) — registro PEND-001…012
 - [`epis2-norma-fullstack-compliance-2026-06-10.md`](./epis2-norma-fullstack-compliance-2026-06-10.md) — auditoría norma full stack (≈70%) → [plan Hilo NORM](../docs/product/EPIS2_NORMA_FULLSTACK_PLAN.md)
+- [`epis2-norm-n1-quick-wins-2026-06-10.md`](./epis2-norm-n1-quick-wins-2026-06-10.md) — Tramo N1 cerrado (MF-101…105 + avance 201/302/303/401/402; gates verdes)

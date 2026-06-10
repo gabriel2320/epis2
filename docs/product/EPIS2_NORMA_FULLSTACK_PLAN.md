@@ -21,9 +21,9 @@ Bajo riesgo, sin decisiones de diseño. Paralelizable al 100%.
 
 | MF | Alcance | Archivos permitidos | Gate de cierre |
 |----|---------|---------------------|----------------|
-| **MF-NORM-101** ◐ | `apps/web/tsconfig.json` extiende `tsconfig.base.json` (gana `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`); corregir errores que aflore (~94 en 41 archivos) | `apps/web/tsconfig.json`, fixes puntuales en `apps/web/src/**` | en curso (subagente) — `npm run typecheck` verde sin overrides nuevos |
+| **MF-NORM-101** ✓ | `apps/web/tsconfig.json` extiende `tsconfig.base.json` (gana `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`); corregir errores que aflore (~94 en 46 archivos) | `apps/web/tsconfig.json`, fixes puntuales en `apps/web/src/**` | `6584d31` — typecheck 0 errores, vitest web 165/165 ✓ |
 | **MF-NORM-102** ✓ | Rutas health estándar: `/health/live` (proceso) + `/health/ready` (DB ping); `/health` y `/ready` quedan como alias legacy | `apps/api/src/app.ts`, tests | `eb759d5` — 4 tests ✓ |
-| **MF-NORM-103** ◐ | Prettier: `format` + `format:check` en `package.json`; formatear repo en commit aislado; paso `format:check` en CI | `package.json`, `.prettierrc*`, `.github/workflows/ci.yml` | scaffolding `c5142a7`; formateo masivo (1233 archivos) pendiente tras MF-101 |
+| **MF-NORM-103** ✓ | Prettier: `format` + `format:check` en `package.json`; formatear repo en commit aislado; paso `format:check` en CI | `package.json`, `.prettierrc*`, `.github/workflows/ci.yml` | scaffolding `c5142a7` + formateo masivo `425aec6` (1238 archivos) — `format:check` ✓ |
 | **MF-NORM-104** ✓ | Pin de Node: `.nvmrc` = 20 (paridad CI) + `engines >=20 <25` + nota en velocity doc | `.nvmrc`, `package.json`, `docs/dev/**` | `c5142a7` |
 | **MF-NORM-105** ✓ | Paginación `listDrafts`: `limit` default 50 / max 100 + `offset`, validado con Zod en contracts; SQL `WHERE`/`ORDER BY`/`LIMIT` | `packages/contracts/**`, `apps/api/src/clinical/*`, tests | `ce0bff5` — integración 55 drafts ✓ + 4 unit ✓ |
 
