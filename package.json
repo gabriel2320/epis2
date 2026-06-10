@@ -197,6 +197,7 @@
     "quality:dashboard-design-agents-gate": "node scripts/quality/validate-dashboard-design-agents-gate.mjs",
     "quality:dashboard-screenshot-advisory": "node scripts/quality/validate-dashboard-screenshot-advisory.mjs",
     "quality:three-modes-gate": "node scripts/quality/validate-three-modes-gate.mjs",
+    "quality:openapi-gate": "node scripts/quality/validate-openapi-gate.mjs",
     "quality:login-command-home-gate": "node scripts/quality/validate-login-command-home-gate.mjs",
     "quality:mode-switcher-gate": "node scripts/quality/validate-mode-switcher-gate.mjs",
     "quality:mode-guards-gate": "node scripts/quality/validate-mode-guards-gate.mjs",
@@ -269,6 +270,7 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "@apidevtools/swagger-parser": "^12.1.0",
     "@axe-core/playwright": "^4.11.3",
     "@eslint/js": "^9.28.0",
     "@playwright/test": "^1.60.0",

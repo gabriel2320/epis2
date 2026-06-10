@@ -59,3 +59,17 @@ describe('epis2-api health', () => {
     await app.close();
   });
 });
+
+describe('OpenAPI docs (MF-NORM-301)', () => {
+  it('GET /api/docs/openapi.json sirve spec OpenAPI 3.1', async () => {
+    const app = await buildApp(testApiConfig);
+    const res = await app.inject({ method: 'GET', url: '/api/docs/openapi.json' });
+    expect(res.statusCode).toBe(200);
+    const body = res.json() as { openapi: string; paths: Record<string, unknown> };
+    expect(body.openapi).toMatch(/^3\.1/);
+    expect(body.paths['/api/auth/login']).toBeDefined();
+    expect(body.paths['/api/drafts']).toBeDefined();
+    expect(body.paths['/api/patients']).toBeDefined();
+    await app.close();
+  });
+});

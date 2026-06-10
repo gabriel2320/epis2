@@ -41,7 +41,7 @@ La sección peor evaluada (§11 🔴). Orden: 201 → 202 → 203.
 | **MF-NORM-202** ✓ | Envelope de error compartido: schema Zod `apiErrorSchema` (`code`, `message`, `correlationId`, `details?`) en `packages/contracts`; `setErrorHandler`/`setNotFoundHandler` globales + helper `sendApiError`; 70 sitios `{ error }` migrados en 11 archivos; `ApiError` web expone `code`/`correlationId`/`details` | `packages/contracts/**`, `apps/api/src/**` (handler + rutas), `apps/web/src/api/client.ts` (parseo) | `errors.envelope.test.ts` 5/5 ✓ (400/401/403/404/500 cumplen schema; 500 con mensaje genérico) |
 | **MF-NORM-203** ✓ | OpenTelemetry mínimo: `NodeSDK` con instrumentación HTTP entrante (node:http/Fastify) + saliente (undici/fetch → local-ai/Ollama), exporter OTLP tras flag `OTEL_ENABLED` (off por defecto); **DB:** `postgres.js` sin instrumentación OTel oficial → span manual como extensión futura; `startOtel` antes del import dinámico de `app.js` (ESM); doc `docs/dev/EPIS2_OBSERVABILITY_OTEL.md` | `apps/api/src/otel.ts`, `server.ts`, `config.ts`, `package.json`, `docs/dev/**` | smoke 3/3 ✓ (sin flag → null; con flag → spans en exporter memoria; arranque real `dist/server.js` con flag HTTP 200) |
 
-**Cierre N2:** reporte + actualización de §11 en la auditoría (🔴 → 🟢).
+**Cierre N2:** ✓ §11 pasa de 🔴 a 🟢 (201 correlationId+pino, 202 envelope, 203 OTel opt-in).
 
 ---
 
@@ -49,11 +49,11 @@ La sección peor evaluada (§11 🔴). Orden: 201 → 202 → 203.
 
 | MF | Alcance | Archivos permitidos | Gate de cierre |
 |----|---------|---------------------|----------------|
-| **MF-NORM-301** | OpenAPI generado desde Zod (`fastify-zod-openapi` o `zod-openapi`): spec servida en `/api/docs/openapi.json`, artefacto en CI; sin reescribir rutas | `apps/api/**`, `package.json`, CI | spec generada cubre rutas drafts/search/auth; validador OpenAPI verde |
+| **MF-NORM-301** ✓ | OpenAPI 3.1 generado desde Zod (`zod-openapi` + schemas `zod/v4` en `apps/api/src/openapi/`): spec en `GET /api/docs/openapi.json`; cubre auth (login/session/logout), drafts (CRUD paginado) y search (pacientes + documentos); artefacto CI `reports/openapi.json`; validador `@apidevtools/swagger-parser` | `apps/api/src/openapi/**`, `package.json`, CI | `quality:openapi-gate` ✓ + `app.test.ts` GET spec ✓ |
 | **MF-NORM-302** ✓ | Threat model formal (STRIDE ligero): actores, superficies (auth, drafts, AI assist, import legacy), mitigaciones existentes (RBAC, RLS, audit), riesgos aceptados; gate doc en signoff | `docs/security/EPIS2_THREAT_MODEL.md`, checklist signoff (criterio 6) | `964d3a0` — revisión humana pendiente de signoff |
 | **MF-NORM-303** ✓ | Decisión versionado API: ADR corto (`/v1` vs header vs defer) — **decidir, no necesariamente implementar** antes del primer despliegue externo | `docs/adr/ADR-001-api-versioning.md` | `964d3a0` — defer aceptado; gate al primer consumidor externo |
 
-**Cierre N3:** reporte + ADR registrado.
+**Cierre N3:** ✓ [`reports/epis2-norm-n3-api-contract-2026-06-10.md`](../../reports/epis2-norm-n3-api-contract-2026-06-10.md) — OpenAPI desde Zod + ADR-001 + threat model.
 
 ---
 

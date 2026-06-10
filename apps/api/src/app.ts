@@ -11,6 +11,7 @@ import { registerFhirRoutes } from './fhir/routes.js';
 import { registerDashboardRoutes } from './dashboard/routes.js';
 import { registerAuditRoutes } from './audit/routes.js';
 import { registerInteropRoutes } from './interop/routes.js';
+import { registerOpenApiRoutes } from './openapi/routes.js';
 import { registerInpatientRoutes } from './inpatient/routes.js';
 import { registerOpsRoutes } from './ops/routes.js';
 import { registerAdminRoutes } from './admin/routes.js';
@@ -121,6 +122,7 @@ export async function buildApp(config: AppConfig) {
   await registerOpsRoutes(app, config, db);
   await registerAdminRoutes(app, config, db);
   await registerInteropRoutes(app, config, db);
+  registerOpenApiRoutes(app);
 
   return app;
 }

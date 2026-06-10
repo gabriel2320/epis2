@@ -34,3 +34,5 @@ Ver tabla «Hecho» del [tablero](../docs/product/EPIS2_TABLERO.md) — cada fil
 - [`epis2-norma-fullstack-compliance-2026-06-10.md`](./epis2-norma-fullstack-compliance-2026-06-10.md) — auditoría norma full stack (≈70%) → [plan Hilo NORM](../docs/product/EPIS2_NORMA_FULLSTACK_PLAN.md)
 - [`epis2-norm-n1-quick-wins-2026-06-10.md`](./epis2-norm-n1-quick-wins-2026-06-10.md) — Tramo N1 cerrado (MF-101…105 + avance 201/302/303/401/402; gates verdes)
 - [`epis2-norm-n4-ui-a11y-e2e-2026-06-10.md`](./epis2-norm-n4-ui-a11y-e2e-2026-06-10.md) — Tramo N4 cerrado (axe + role-first + drawer móvil + RHF server errors; re-auditoría §4/§5/§10, ≈85%)
+- [`epis2-norm-n3-api-contract-2026-06-10.md`](./epis2-norm-n3-api-contract-2026-06-10.md) — Tramo N3 cerrado (OpenAPI desde Zod + ADR/threat model previos)
+- [`epis2-norm-hilo-close-2026-06-10.md`](./epis2-norm-hilo-close-2026-06-10.md) — Hilo NORM cerrado (16/16 MF, ≈90%)
