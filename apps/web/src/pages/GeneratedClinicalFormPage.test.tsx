@@ -9,8 +9,10 @@ import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
 import { renderWithQuery } from '../test/renderWithQuery.js';
 import { GeneratedClinicalFormPage } from './GeneratedClinicalFormPage.js';
 
+const { navigateMock } = vi.hoisted(() => ({ navigateMock: vi.fn() }));
+
 vi.mock('@tanstack/react-router', () => ({
-  useNavigate: () => vi.fn(),
+  useNavigate: () => navigateMock,
   useSearch: () => ({ patientId: '00000000-0000-4000-8000-000000000099' }),
   useRouterState: ({ select }: { select: (s: { location: { pathname: string; searchStr?: string } }) => unknown }) =>
     select({ location: { pathname: '/espacio/evolucion', searchStr: '' } }),
@@ -68,8 +70,8 @@ vi.mock('@mui/material/useMediaQuery', () => ({
   default: () => true,
 }));
 
-vi.mock('../auth/AuthContext.js', () => ({
-  useAuth: () => ({
+const { authState } = vi.hoisted(() => ({
+  authState: {
     session: {
       user: {
         id: 'usr-physician-01',
@@ -79,11 +81,30 @@ vi.mock('../auth/AuthContext.js', () => ({
       },
       permissions: ['draft.write', 'command.execute'],
       expiresAt: new Date().toISOString(),
-    },
-  }),
+    } as Record<string, unknown> | null,
+    isLoading: false,
+  },
 }));
 
-afterEach(() => cleanup());
+vi.mock('../auth/AuthContext.js', () => ({
+  useAuth: () => authState,
+}));
+
+afterEach(() => {
+  cleanup();
+  navigateMock.mockClear();
+  authState.session = {
+    user: {
+      id: 'usr-physician-01',
+      username: 'medico.demo',
+      displayName: 'Dra. Ana Demo',
+      role: 'physician',
+    },
+    permissions: ['draft.write', 'command.execute'],
+    expiresAt: new Date().toISOString(),
+  };
+  authState.isLoading = false;
+});
 
 beforeEach(() => {
   fetchPatientLongitudinal.mockResolvedValue({
@@ -174,5 +195,30 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
       expect(screen.getByTestId('epis2-soap-gap-hints')).toBeInTheDocument();
     });
     expect(screen.getByTestId('epis2-soap-hint-subjective')).toBeInTheDocument();
+  });
+});
+
+describe('GeneratedClinicalFormPage — guard de acceso vs carga de sesión', () => {
+  it('no redirige a /sin-acceso mientras la sesión aún carga (carga fría)', () => {
+    authState.session = null;
+    authState.isLoading = true;
+
+    renderForm();
+
+    expect(navigateMock).not.toHaveBeenCalled();
+    expect(screen.queryByTestId('epis2-form-evolution_note')).not.toBeInTheDocument();
+  });
+
+  it('redirige a /sin-acceso cuando la sesión cargó y el rol no está permitido', async () => {
+    authState.session = null;
+    authState.isLoading = false;
+
+    renderForm();
+
+    await waitFor(() => {
+      expect(navigateMock).toHaveBeenCalledWith(
+        expect.objectContaining({ to: '/sin-acceso' }),
+      );
+    });
   });
 });

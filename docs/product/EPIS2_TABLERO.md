@@ -34,6 +34,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 | **P1b — alto contraste ampliado + Storybook Print*** | Roles outline/onSurfaceVariant/foco (3.6 ✓ código) · stories Carta + receta/lab A5 · signoff visual pendiente · [`epis2-p1b-alto-contraste-storybook-print-2026-06-09.md`](../../reports/epis2-p1b-alto-contraste-storybook-print-2026-06-09.md) |
 | **Hilo M3-R — state layers + foco + escalera superficies** | R1–R7 ✓ código: action 8/10/10 · focus-visible universal · emphasized real · two-pane/rail en escalera tonal · roles inverse/scrim/dim expuestos · labelMedium→caption · docs reconciliados · [`epis2-m3-r-state-layers-superficie-2026-06-09.md`](../../reports/epis2-m3-r-state-layers-superficie-2026-06-09.md) |
 | Housekeeping árbol (#6 #3 #1) | v4/v5 → interop/ y ai/ · `tests/README.md` (golden vitest ≠ e2e) · gate `web-components-root-frozen` · [`epis2-housekeeping-arbol-2026-06-09.md`](../../reports/epis2-housekeeping-arbol-2026-06-09.md) |
+| **PEND-011 — CI rojo print E2E cerrado** | Carrera auth en carga fría (guard `GeneratedClinicalFormPage` vs `isLoading`) · paridad CI local 5/5 · `test:e2e` 15/15 · [`epis2-pend011-ci-print-e2e-fix-2026-06-10.md`](../../reports/epis2-pend011-ci-print-e2e-fix-2026-06-10.md) |
 
 ---
 
@@ -49,9 +50,8 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 
 | Prioridad | Hilo / tramo | Gate |
 |-----------|--------------|------|
-| **P0** | **CI rojo (PEND-011)** — E2E print Ola 6A fallan en CI desde fase 2: `ola6a-print-certificate/discharge-summary/orders` esperan `epis2-form-<blueprint>` que no aparece (timeout 15s). Pasan o no se ejecutaron local; reproducir con `EPIS2_LOCAL_CI_E2E=1` o `npx playwright test e2e/ola6a-print-certificate.spec.ts` | run [27242226078](https://github.com/gabriel2320/epis2/actions/runs/27242226078) |
 | **P1** | Signoff visual conjunto: alto contraste + M3-R (hover/foco/rail/two-pane, claro/oscuro) — `quality:m3-visual-pass` + revisión humana | P1b + M3-R código ✓ |
-| **P1** | **Hilo NORM** (PEND-012) — plan de mejora norma full stack: N1 quick wins → N2 observabilidad → N3 OpenAPI/threat model → N4 a11y/E2E/móvil · **arranca cuando PEND-011 esté verde** | [`EPIS2_NORMA_FULLSTACK_PLAN.md`](EPIS2_NORMA_FULLSTACK_PLAN.md) · [auditoría](../../reports/epis2-norma-fullstack-compliance-2026-06-10.md) |
+| **P1** | **Hilo NORM** (PEND-012) — plan de mejora norma full stack: N1 quick wins → N2 observabilidad → N3 OpenAPI/threat model → N4 a11y/E2E/móvil · desbloqueado al cerrar PEND-011 (verificar run CI verde) | [`EPIS2_NORMA_FULLSTACK_PLAN.md`](EPIS2_NORMA_FULLSTACK_PLAN.md) · [auditoría](../../reports/epis2-norma-fullstack-compliance-2026-06-10.md) |
 | P1c | Fase 5 auditoría — checklist pre-producción (solo si sale del laboratorio) | [`epis2-auditoria-profunda-2026-06-09.md`](../../reports/epis2-auditoria-profunda-2026-06-09.md) §7 |
 | P2 | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | P3 | Backlog Ola 2+ | Nota procedimiento clínica (PEND-002 defer) |

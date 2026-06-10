@@ -85,7 +85,7 @@ export type GeneratedClinicalFormPageProps = {
 };
 
 export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPageProps) {
-  const { session } = useAuth();
+  const { session, isLoading: sessionLoading } = useAuth();
   const { patient: activePatient, setPatient: pinPatient } = useActivePatient();
   const navigate = useClinicalNavigate();
   const search = useSearch({ strict: false }) as ClinicalFormSearch;
@@ -399,13 +399,14 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   ) : null;
 
   useEffect(() => {
-    if (!allowed) {
-      void navigate({
-        to: '/sin-acceso',
-        search: { detail: copy.forms.forbidden },
-      });
-    }
-  }, [allowed, navigate]);
+    // No decidir acceso mientras la sesión aún carga (carga fría tras goto/refresh):
+    // con bundle de producción el primer render gana la carrera y redirigía a /sin-acceso.
+    if (sessionLoading || allowed) return;
+    void navigate({
+      to: '/sin-acceso',
+      search: { detail: copy.forms.forbidden },
+    });
+  }, [sessionLoading, allowed, navigate]);
 
   if (!allowed) {
     return null;

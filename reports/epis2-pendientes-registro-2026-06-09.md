@@ -16,6 +16,6 @@
 | PEND-009 | P3 | Storybook por IDC | UI |
 | PEND-010 | P3 | MF-2xx propuesta | Arquitectura |
 | PEND-012 | P1 | **Hilo NORM** — plan de mejora norma full stack (auditoría 2026-06-10, cumplimiento ≈70%) · tramos N1–N4 · [plan](../docs/product/EPIS2_NORMA_FULLSTACK_PLAN.md) · [auditoría](./epis2-norma-fullstack-compliance-2026-06-10.md) · **bloqueado por PEND-011** | Arquitectura / Calidad |
-| PEND-011 | **P0** | **CI rojo desde fase 2** (`fb5ba23`, 2026-06-09) — E2E impresión Ola 6A (`ola6a-print-certificate`, `discharge-summary`, `orders` lab/imagen) fallan en CI: `epis2-form-<blueprint>` no visible (form testid vive en `EpisClinicalForm[Rhf]`, página no llega a renderizarlo en CI). Último verde [27228650107](https://github.com/gabriel2320/epis2/actions/runs/27228650107). Repro: `npx playwright test e2e/ola6a-print-*.spec.ts` con stack CI-parity | Calidad / CI |
+| PEND-011 | ~~P0~~ **Cerrado 2026-06-10** | ~~CI rojo desde fase 2~~ — causa raíz: carrera de autenticación en carga fría (guard de `GeneratedClinicalFormPage` redirigía a `/sin-acceso` antes de cargar la sesión; solo visible con bundle preview de CI). Fix: guard espera `isLoading` + 2 tests unitarios · paridad CI local 5/5 y set `test:e2e` 15/15 · [reporte](./epis2-pend011-ci-print-e2e-fix-2026-06-10.md) | Calidad / CI |
 
 Cerrar ítem: marcar fecha en este registro + reporte `reports/` + actualizar [EPIS2_TABLERO.md](../docs/product/EPIS2_TABLERO.md).
