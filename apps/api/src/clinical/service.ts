@@ -27,6 +27,7 @@ import {
 } from '../db/schema.js';
 import { appendAudit } from '../audit/store.js';
 import { runApprovalSideEffects } from './approval-side-effects.js';
+import { assertDischargeApprovalAllowed } from './discharge-approval-guards.js';
 
 export type Actor = { id: string; username: string };
 
@@ -364,7 +365,16 @@ export async function updateDraft(
   return updated;
 }
 
-export async function approveDraft(db: Database, actor: Actor, draftId: string) {
+export type ApproveDraftOptions = {
+  clinicalOverrideReason?: string | undefined;
+};
+
+export async function approveDraft(
+  db: Database,
+  actor: Actor,
+  draftId: string,
+  options?: ApproveDraftOptions,
+) {
   const draft = await getDraftById(db, draftId);
   if (!draft) return null;
   if (draft.status === 'approved') {
@@ -373,6 +383,15 @@ export async function approveDraft(db: Database, actor: Actor, draftId: string) 
   if (!['ready_for_review', 'editing', 'draft'].includes(draft.status)) {
     throw new Error('Estado de borrador no permite aprobación');
   }
+
+  const guard = await assertDischargeApprovalAllowed(db, actor, {
+    draftId: draft.id,
+    patientId: draft.patientId,
+    draftType: draft.draftType,
+    ...(options?.clinicalOverrideReason !== undefined
+      ? { clinicalOverrideReason: options.clinicalOverrideReason }
+      : {}),
+  });
 
   const now = new Date();
   // Atomicidad SoT: nota + versión + approval + side-effects + auditoría en una sola
@@ -417,6 +436,18 @@ export async function approveDraft(db: Database, actor: Actor, draftId: string) 
       .returning();
 
     await runApprovalSideEffects(tx, { draft, actor, now });
+
+    if (guard.overrideApplied) {
+      const overrideReason = options?.clinicalOverrideReason?.trim() ?? '';
+      await appendAudit(tx, {
+        eventType: 'clinical.draft.approved_with_override',
+        actorId: actor.id,
+        username: actor.username,
+        entityType: 'clinical_draft',
+        entityId: draftId,
+        message: overrideReason,
+      });
+    }
 
     await appendAudit(tx, {
       eventType: 'clinical.draft.approved',

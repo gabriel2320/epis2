@@ -76,6 +76,10 @@ const updateDraftSchema = z.object({
   status: z.enum(['draft', 'editing', 'ready_for_review', 'rejected', 'cancelled']).optional(),
 });
 
+const approveDraftSchema = z.object({
+  clinicalOverrideReason: z.string().min(10).max(2000).optional(),
+});
+
 export async function registerClinicalRoutes(
   app: FastifyInstance,
   config: AppConfig,
@@ -450,9 +454,24 @@ export async function registerClinicalRoutes(
     async (request, reply) => {
       const { draftId } = request.params as { draftId: string };
       const session = (request as AuthenticatedRequest).session;
+      const bodyParsed = approveDraftSchema.safeParse(request.body ?? {});
+      if (!bodyParsed.success) {
+        return sendApiError(reply, 400, 'Payload de aprobación inválido', {
+          details: zodIssuesToDetails(bodyParsed.error.issues),
+        });
+      }
       try {
+        const approveOptions =
+          bodyParsed.data.clinicalOverrideReason !== undefined
+            ? { clinicalOverrideReason: bodyParsed.data.clinicalOverrideReason }
+            : undefined;
         const result = await runWithRlsContext(db, config, session, (tx) =>
-          approveDraft(tx, { id: session.sub, username: session.username }, draftId),
+          approveDraft(
+            tx,
+            { id: session.sub, username: session.username },
+            draftId,
+            approveOptions,
+          ),
         );
         if (!result) {
           return sendApiError(reply, 404, 'Borrador no encontrado');
