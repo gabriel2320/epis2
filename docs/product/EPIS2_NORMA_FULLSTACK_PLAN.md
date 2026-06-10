@@ -21,11 +21,11 @@ Bajo riesgo, sin decisiones de diseño. Paralelizable al 100%.
 
 | MF | Alcance | Archivos permitidos | Gate de cierre |
 |----|---------|---------------------|----------------|
-| **MF-NORM-101** | `apps/web/tsconfig.json` extiende `tsconfig.base.json` (gana `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`); corregir errores que aflore | `apps/web/tsconfig.json`, fixes puntuales en `apps/web/src/**` | `npm run typecheck` verde sin overrides nuevos |
-| **MF-NORM-102** | Rutas health estándar: `/health/live` (proceso) + `/health/ready` (DB ping); mantener `/health` y `/ready` como alias deprecados | `apps/api/src/server.ts` (o módulo health), test integración | test integración de ambas rutas verde |
-| **MF-NORM-103** | Prettier: `format` + `format:check` en `package.json`; formatear repo en commit aislado; paso `format:check` en CI | `package.json`, `.prettierrc*`, `.github/workflows/ci.yml` | `npm run format:check` verde en CI |
-| **MF-NORM-104** | Pin de Node: `.nvmrc` + `engines` exacto (`20.x` LTS actual) + nota en README dev | `.nvmrc`, `package.json`, `docs/dev/**` | `node -v` documentado = CI |
-| **MF-NORM-105** | Paginación `listDrafts`: `limit` default 50 / max 100 + `offset`, validado con Zod en contracts | `packages/contracts/**`, `apps/api/src/**/drafts*`, tests | test integración con >50 drafts verde |
+| **MF-NORM-101** ◐ | `apps/web/tsconfig.json` extiende `tsconfig.base.json` (gana `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`); corregir errores que aflore (~94 en 41 archivos) | `apps/web/tsconfig.json`, fixes puntuales en `apps/web/src/**` | en curso (subagente) — `npm run typecheck` verde sin overrides nuevos |
+| **MF-NORM-102** ✓ | Rutas health estándar: `/health/live` (proceso) + `/health/ready` (DB ping); `/health` y `/ready` quedan como alias legacy | `apps/api/src/app.ts`, tests | `eb759d5` — 4 tests ✓ |
+| **MF-NORM-103** ◐ | Prettier: `format` + `format:check` en `package.json`; formatear repo en commit aislado; paso `format:check` en CI | `package.json`, `.prettierrc*`, `.github/workflows/ci.yml` | scaffolding `c5142a7`; formateo masivo (1233 archivos) pendiente tras MF-101 |
+| **MF-NORM-104** ✓ | Pin de Node: `.nvmrc` = 20 (paridad CI) + `engines >=20 <25` + nota en velocity doc | `.nvmrc`, `package.json`, `docs/dev/**` | `c5142a7` |
+| **MF-NORM-105** ✓ | Paginación `listDrafts`: `limit` default 50 / max 100 + `offset`, validado con Zod en contracts; SQL `WHERE`/`ORDER BY`/`LIMIT` | `packages/contracts/**`, `apps/api/src/clinical/*`, tests | `ce0bff5` — integración 55 drafts ✓ + 4 unit ✓ |
 
 **Cierre N1:** reporte `reports/epis2-norm-n1-*.md`.
 
@@ -37,7 +37,7 @@ La sección peor evaluada (§11 🔴). Orden: 201 → 202 → 203.
 
 | MF | Alcance | Archivos permitidos | Gate de cierre |
 |----|---------|---------------------|----------------|
-| **MF-NORM-201** | Logging estructurado: configurar pino explícito (nivel por env, redact de campos sensibles), `correlationId` por request (header `x-correlation-id` o uuid) propagado vía `req.log.child()` y devuelto en la respuesta | `apps/api/src/server.ts`, plugin nuevo `apps/api/src/plugins/correlation.ts`, test | test: respuesta incluye `x-correlation-id`; logs lo incluyen |
+| **MF-NORM-201** ✓ | Logging estructurado: pino explícito (nivel `LOG_LEVEL` validado Zod, redact authorization/cookie), `correlationId` por request vía `requestIdHeader`/`requestIdLogLabel` y header `x-correlation-id` en toda respuesta | `apps/api/src/app.ts`, `config.ts`, tests | `21fc02e` — 3 tests ✓ |
 | **MF-NORM-202** | Envelope de error compartido: schema Zod `ApiErrorSchema` (`code`, `message`, `correlationId`, `details?`) en `packages/contracts`; error handler global Fastify lo emite; rutas dejan de construir `{ error }` ad-hoc | `packages/contracts/**`, `apps/api/src/**` (handler + rutas), `apps/web/src/lib/api*` (parseo) | test integración: 400/403/404/500 cumplen schema |
 | **MF-NORM-203** | OpenTelemetry mínimo: instrumentación HTTP + pg, exporter OTLP detrás de flag `OTEL_ENABLED` (off por defecto en dev); documentar en `docs/dev/` | `apps/api/src/otel.ts`, `package.json`, `docs/dev/**` | smoke: arranque con y sin flag; spans visibles en collector local |
 
@@ -50,8 +50,8 @@ La sección peor evaluada (§11 🔴). Orden: 201 → 202 → 203.
 | MF | Alcance | Archivos permitidos | Gate de cierre |
 |----|---------|---------------------|----------------|
 | **MF-NORM-301** | OpenAPI generado desde Zod (`fastify-zod-openapi` o `zod-openapi`): spec servida en `/api/docs/openapi.json`, artefacto en CI; sin reescribir rutas | `apps/api/**`, `package.json`, CI | spec generada cubre rutas drafts/search/auth; validador OpenAPI verde |
-| **MF-NORM-302** | Threat model formal (STRIDE ligero): actores, superficies (auth, drafts, AI assist, import legacy), mitigaciones existentes (RBAC, RLS, audit), riesgos aceptados; gate doc en signoff | `docs/security/EPIS2_THREAT_MODEL.md`, `docs/product/EPIS2_TRAMOS_CLINICAL_SIGNOFF_CHECKLIST.md` (referencia) | revisión humana + linkeado desde AGENTS/canon |
-| **MF-NORM-303** | Decisión versionado API: ADR corto (`/v1` vs header vs defer) — **decidir, no necesariamente implementar** antes del primer despliegue externo | `docs/adr/` (nuevo) | ADR aceptado en tablero |
+| **MF-NORM-302** ✓ | Threat model formal (STRIDE ligero): actores, superficies (auth, drafts, AI assist, import legacy), mitigaciones existentes (RBAC, RLS, audit), riesgos aceptados; gate doc en signoff | `docs/security/EPIS2_THREAT_MODEL.md`, checklist signoff (criterio 6) | `964d3a0` — revisión humana pendiente de signoff |
+| **MF-NORM-303** ✓ | Decisión versionado API: ADR corto (`/v1` vs header vs defer) — **decidir, no necesariamente implementar** antes del primer despliegue externo | `docs/adr/ADR-001-api-versioning.md` | `964d3a0` — defer aceptado; gate al primer consumidor externo |
 
 **Cierre N3:** reporte + ADR registrado.
 
@@ -61,8 +61,9 @@ La sección peor evaluada (§11 🔴). Orden: 201 → 202 → 203.
 
 | MF | Alcance | Archivos permitidos | Gate de cierre |
 |----|---------|---------------------|----------------|
-| **MF-NORM-401** | axe-core smoke: `@axe-core/playwright` sobre 3 pantallas (Centro de Comando, ficha, formulario clínico); umbral: 0 violaciones `serious`/`critical`; job CI | `e2e/a11y-smoke.spec.ts`, `package.json`, CI | `npm run test:e2e:a11y` verde |
-| **MF-NORM-402** | Política selectores E2E role-first: documento corto + helper `e2e/support/queries.ts`; regla: specs **nuevos** usan `getByRole`/`getByLabel`; los 89% `getByTestId` existentes se migran oportunísticamente, no en masa | `docs/quality/E2E_SELECTOR_POLICY.md`, `e2e/support/**` | nueva spec piloto escrita role-first verde |
+| **MF-NORM-401** ✓ | axe-core smoke: `@axe-core/playwright` sobre 3 pantallas (Centro de Comando, ficha, formulario clínico); umbral: 0 violaciones `serious`/`critical`; job CI | `e2e/a11y-smoke.spec.ts`, `package.json`, CI | spec creada (`75097fb`); **detectó violaciones reales** → CI bloqueado por 401b |
+| **MF-NORM-401b** | Corregir violaciones axe detectadas: `button-name` (critical, IconButtons rail `epis2-nav-workspace-*` sin aria-label), `color-contrast` (CTAs `open-classic`/`open-dashboard`, `ficha-history`), `label-title-only` + `list` (formulario evolución); luego activar `test:e2e:a11y` en CI | `apps/web/src/**`, tema (coordinar con signoff M3-R), CI | `npm run test:e2e:a11y` verde + paso CI activo |
+| **MF-NORM-402** ✓ | Política selectores E2E role-first: documento corto + helper `e2e/support/queries.ts`; regla: specs **nuevos** usan `getByRole`/`getByLabel`; los 89% `getByTestId` existentes se migran oportunísticamente, no en masa | `docs/quality/E2E_SELECTOR_POLICY.md`, `e2e/support/**` | `75097fb` — piloto = spec a11y role-first |
 | **MF-NORM-403** | Drawer móvil: navegación colapsa a `Drawer` modal MD3 bajo breakpoint `md`; sin tocar registries; Storybook story + viewport test | `apps/web/src/components/` (shell de navegación), stories, e2e viewport | e2e con viewport 390px verde + `quality:three-modes-gate` |
 | **MF-NORM-404** | Mapeo server→field errors en RHF: cuando `ApiErrorSchema.details` trae paths Zod, `setError` por campo en `useEpisClinicalBlueprintForm` (depende de MF-NORM-202) | `apps/web/src/hooks/**`, tests unitarios | test unitario de mapeo verde |
 
