@@ -19,7 +19,7 @@ Regla de lectura: **un solo «siguiente paso»** — el del tablero (L1). Todo l
 |---|---|
 | [`product/EPIS2_TABLERO.md`](./product/EPIS2_TABLERO.md) | **Fuente única del siguiente paso** |
 | [`product/EPIS2_GLOBAL_DEV_PLAN.md`](./product/EPIS2_GLOBAL_DEV_PLAN.md) | Hilos activos/cerrados |
-| [`product/EPIS2_NORMA_FULLSTACK_PLAN.md`](./product/EPIS2_NORMA_FULLSTACK_PLAN.md) | Hilo NORM — plan de mejora norma full stack (PEND-012) |
+| [`product/EPIS2_NORMA_FULLSTACK_PLAN.md`](./product/EPIS2_NORMA_FULLSTACK_PLAN.md) | Hilo NORM — plan de mejora norma full stack (PEND-012 cerrado 2026-06-10) |
 | [`security/EPIS2_THREAT_MODEL.md`](./security/EPIS2_THREAT_MODEL.md) | Threat model STRIDE (revisar al cerrar cada tramo NORM) |
 | [`adr/ADR-001-api-versioning.md`](./adr/ADR-001-api-versioning.md) | ADR — versionado API diferido al primer consumidor externo |
 | [`product/EPIS2_DEV_SYSTEM.md`](./product/EPIS2_DEV_SYSTEM.md) | Nomenclatura SDEPIS2 (ola · hilo · tramo · MF) |

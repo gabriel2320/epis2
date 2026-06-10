@@ -78,8 +78,7 @@ export function parseCruzVerdeJson(body: string, fetchedAt: string): PriceEntry[
   for (const hit of hits) {
     if (typeof hit !== 'object' || hit === null) continue;
     const record = hit as Record<string, unknown>;
-    const name =
-      typeof record['productName'] === 'string' ? record['productName'].trim() : '';
+    const name = typeof record['productName'] === 'string' ? record['productName'].trim() : '';
     const prices = (record['prices'] ?? {}) as Record<string, unknown>;
     const amount = parseClpAmount(prices['price-list-cl'] ?? prices['price-sale-cl']);
     if (!name || amount === null) continue;

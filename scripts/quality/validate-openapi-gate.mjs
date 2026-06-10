@@ -7,11 +7,11 @@ import { spawnSync } from 'node:child_process';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
-const test = spawnSync(
-  'npx',
-  ['vitest', 'run', 'apps/api/src/openapi/document.test.ts'],
-  { cwd: root, stdio: 'inherit', shell: true },
-);
+const test = spawnSync('npx', ['vitest', 'run', 'apps/api/src/openapi/document.test.ts'], {
+  cwd: root,
+  stdio: 'inherit',
+  shell: true,
+});
 if (test.status !== 0) {
   process.exit(test.status ?? 1);
 }

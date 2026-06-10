@@ -17,9 +17,10 @@ const REQUIRED_PATHS = [
 describe('OpenAPI document (MF-NORM-301)', () => {
   it('genera spec OpenAPI 3.1 válida con rutas auth/drafts/search', async () => {
     const doc = buildOpenApiDocument();
-    const validated = (await SwaggerParser.validate(
-      JSON.parse(JSON.stringify(doc)),
-    )) as { openapi?: string; paths?: Record<string, unknown> };
+    const validated = (await SwaggerParser.validate(JSON.parse(JSON.stringify(doc)))) as {
+      openapi?: string;
+      paths?: Record<string, unknown>;
+    };
 
     expect(String(validated.openapi)).toMatch(/^3\.1/);
     for (const path of REQUIRED_PATHS) {

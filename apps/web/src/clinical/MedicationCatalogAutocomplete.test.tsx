@@ -23,12 +23,7 @@ const apiFetchMock = vi.mocked(apiFetch);
 function Harness() {
   const [value, setValue] = useState('');
   return (
-    <MedicationCatalogAutocomplete
-      label="Medicamento"
-      value={value}
-      required
-      onChange={setValue}
-    />
+    <MedicationCatalogAutocomplete label="Medicamento" value={value} required onChange={setValue} />
   );
 }
 
