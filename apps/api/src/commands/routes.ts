@@ -9,6 +9,7 @@ import {
 import type { FastifyInstance } from 'fastify';
 import { createAuthenticate, type AuthenticatedRequest } from '../auth/authenticate.js';
 import type { AppConfig } from '../config.js';
+import { sendApiError } from '../errors.js';
 import type { Database } from '../db/client.js';
 import { createRateLimitPreHandler } from '../security/rateLimit.js';
 import { appendAudit } from '../audit/store.js';
@@ -33,7 +34,7 @@ export async function registerCommandRoutes(
     async (request, reply) => {
       const parsed = commandResolveRequestSchema.safeParse(request.body);
       if (!parsed.success) {
-        return reply.status(400).send({ error: 'Comando inválido' });
+        return sendApiError(reply, 400, 'Comando inválido');
       }
 
       const session = (request as AuthenticatedRequest).session;
@@ -82,10 +83,7 @@ export async function registerCommandRoutes(
       });
 
       if (result.status === 'forbidden') {
-        return reply.status(403).send({
-          error: result.message,
-          permission: result.permission,
-        });
+        return sendApiError(reply, 403, result.message);
       }
 
       const body = commandResolveResponseSchema.parse(result);
@@ -99,7 +97,7 @@ export async function registerCommandRoutes(
     async (request, reply) => {
       const parsed = commandSuggestRequestSchema.safeParse(request.body);
       if (!parsed.success) {
-        return reply.status(400).send({ error: 'Texto inválido para sugerencias' });
+        return sendApiError(reply, 400, 'Texto inválido para sugerencias');
       }
 
       const ranked = rankCommandDefinitions(parsed.data.text).slice(0, 5);

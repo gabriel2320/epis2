@@ -4,6 +4,7 @@ import type { FastifyInstance } from 'fastify';
 import type { Database } from '../db/client.js';
 import { appendAudit, listAuthAuditEvents } from '../audit/store.js';
 import type { AppConfig } from '../config.js';
+import { sendApiError } from '../errors.js';
 import {
   createAuthenticate,
   createRequirePermission,
@@ -30,16 +31,18 @@ export async function registerAuthRoutes(
         windowMs: 15 * 60 * 1000,
       });
       if (!limit.allowed) {
-        return reply.status(429).send({
-          error: 'Demasiados intentos de inicio de sesión. Intente más tarde.',
-          retryAfterSec: limit.retryAfterSec,
-        });
+        reply.header('retry-after', String(limit.retryAfterSec ?? 0));
+        return sendApiError(
+          reply,
+          429,
+          'Demasiados intentos de inicio de sesión. Intente más tarde.',
+        );
       }
     }
 
     const body = loginRequestSchema.safeParse(request.body);
     if (!body.success) {
-      return reply.status(400).send({ error: 'Datos de inicio de sesión inválidos' });
+      return sendApiError(reply, 400, 'Datos de inicio de sesión inválidos');
     }
 
     const user = findSyntheticUser(body.data.username);
@@ -49,7 +52,7 @@ export async function registerAuthRoutes(
         username: body.data.username,
         message: 'Credenciales demo inválidas',
       });
-      return reply.status(401).send({ error: 'Usuario o clave demo incorrectos' });
+      return sendApiError(reply, 401, 'Usuario o clave demo incorrectos');
     }
 
     const { token, expiresAt } = await signSessionToken(

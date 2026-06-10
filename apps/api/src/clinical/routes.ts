@@ -29,6 +29,7 @@ import {
   updateDraft,
 } from './service.js';
 import type { AppConfig } from '../config.js';
+import { sendApiError } from '../errors.js';
 import { processDocumentOcr } from './documentOcr.js';
 import { intakePatientDocument } from './documentIntake.js';
 import { searchPatientDocuments } from './documents.js';
@@ -97,7 +98,7 @@ export async function registerClinicalRoutes(
     async (request, reply) => {
       const parsed = parseClinicalTextSpellcheckRequest(request.body);
       if (!parsed.success) {
-        return reply.status(400).send({ error: 'Texto inválido para corrector clínico' });
+        return sendApiError(reply, 400, 'Texto inválido para corrector clínico');
       }
       const result = await runClinicalTextSpellcheck(config, parsed.data.text);
       return reply.send(result);
@@ -144,7 +145,7 @@ export async function registerClinicalRoutes(
       }
       const evaluated = await getDemoClinicalAlertsForPatient(db, patientId, alertOpts);
       if (!evaluated) {
-        return reply.status(404).send({ error: 'Paciente no encontrado' });
+        return sendApiError(reply, 404, 'Paciente no encontrado');
       }
       return patientClinicalAlertsResponseSchema.parse({
         patientId,
@@ -165,7 +166,7 @@ export async function registerClinicalRoutes(
         getPatientById(tx, patientId),
       );
       if (!patient) {
-        return reply.status(404).send({ error: 'Paciente no encontrado' });
+        return sendApiError(reply, 404, 'Paciente no encontrado');
       }
       const notes = await runWithRlsContext(db, config, session, (tx) =>
         listApprovedNotes(tx, patientId),
@@ -199,7 +200,7 @@ export async function registerClinicalRoutes(
       const q = (request.query as { q?: string }).q ?? '';
       const patient = await getPatientById(db, patientId);
       if (!patient) {
-        return reply.status(404).send({ error: 'Paciente no encontrado' });
+        return sendApiError(reply, 404, 'Paciente no encontrado');
       }
       const data = await searchPatientDocuments(db, patientId, q);
       return documentSearchResponseSchema.parse({ readOnly: true as const, ...data });
@@ -213,11 +214,11 @@ export async function registerClinicalRoutes(
       const { patientId } = request.params as { patientId: string };
       const parsed = documentIntakeRequestSchema.safeParse(request.body);
       if (!parsed.success) {
-        return reply.status(400).send({ error: 'Intake de documento inválido' });
+        return sendApiError(reply, 400, 'Intake de documento inválido');
       }
       const patient = await getPatientById(db, patientId);
       if (!patient) {
-        return reply.status(404).send({ error: 'Paciente no encontrado' });
+        return sendApiError(reply, 404, 'Paciente no encontrado');
       }
       const session = (request as AuthenticatedRequest).session;
       const result = await intakePatientDocument(
@@ -238,7 +239,7 @@ export async function registerClinicalRoutes(
       const { documentId } = request.params as { documentId: string };
       const result = await processDocumentOcr(db, documentId, config.OLLAMA_BASE_URL);
       if (!result) {
-        return reply.status(404).send({ error: 'Documento no encontrado' });
+        return sendApiError(reply, 404, 'Documento no encontrado');
       }
       return documentOcrResponseSchema.parse({
         ...result,
@@ -255,7 +256,7 @@ export async function registerClinicalRoutes(
       const format = (request.query as { format?: string }).format === 'pdf' ? 'pdf' : 'txt';
       const exported = await buildPatientSummaryExport(db, patientId, format);
       if (!exported) {
-        return reply.status(404).send({ error: 'Paciente no encontrado' });
+        return sendApiError(reply, 404, 'Paciente no encontrado');
       }
       return reply
         .header('Content-Type', exported.contentType)
@@ -271,7 +272,7 @@ export async function registerClinicalRoutes(
       const { patientId } = request.params as { patientId: string };
       const patient = await getPatientById(db, patientId);
       if (!patient) {
-        return reply.status(404).send({ error: 'Paciente no encontrado' });
+        return sendApiError(reply, 404, 'Paciente no encontrado');
       }
       const data = await getPatientLongitudinal(db, patientId);
       return patientLongitudinalResponseSchema.parse(data);
@@ -285,7 +286,7 @@ export async function registerClinicalRoutes(
       const { patientId } = request.params as { patientId: string };
       const patient = await getPatientById(db, patientId);
       if (!patient) {
-        return reply.status(404).send({ error: 'Paciente no encontrado' });
+        return sendApiError(reply, 404, 'Paciente no encontrado');
       }
       const data = await getPatientResultsInbox(db, patientId);
       return patientResultsInboxResponseSchema.parse(data);
@@ -295,16 +296,16 @@ export async function registerClinicalRoutes(
   app.post('/api/drafts', { preHandler: requireDraftWrite }, async (request, reply) => {
     const parsed = createDraftSchema.safeParse(request.body);
     if (!parsed.success) {
-      return reply.status(400).send({ error: 'Datos de borrador inválidos' });
+      return sendApiError(reply, 400, 'Datos de borrador inválidos');
     }
     const session = (request as AuthenticatedRequest).session;
     if (!roleHasPermission(session.role, 'draft.write')) {
-      return reply.status(403).send({ error: 'Sin permiso draft.write' });
+      return sendApiError(reply, 403, 'Sin permiso draft.write');
     }
     const { patientId, draftType, title, body, encounterId } = parsed.data;
     const metaCheck = validateDraftBodyEpis2Meta(body);
     if (!metaCheck.success) {
-      return reply.status(400).send({ error: metaCheck.error });
+      return sendApiError(reply, 400, metaCheck.error);
     }
     const draftInput: Parameters<typeof createDraft>[2] = {
       patientId,
@@ -326,7 +327,7 @@ export async function registerClinicalRoutes(
       const session = (request as AuthenticatedRequest).session;
       const parsed = draftsListQuerySchema.safeParse(request.query);
       if (!parsed.success) {
-        return reply.status(400).send({ error: 'Parámetros de paginación inválidos' });
+        return sendApiError(reply, 400, 'Parámetros de paginación inválidos');
       }
       const { patientId, status, limit, offset } = parsed.data;
       const filter: Parameters<typeof listDrafts>[1] = { limit, offset };
@@ -358,7 +359,7 @@ export async function registerClinicalRoutes(
         getDraftDetail(tx, draftId),
       );
       if (!detail) {
-        return reply.status(404).send({ error: 'Borrador no encontrado' });
+        return sendApiError(reply, 404, 'Borrador no encontrado');
       }
       return {
         draft: detail.draft,
@@ -377,7 +378,7 @@ export async function registerClinicalRoutes(
     const { draftId } = request.params as { draftId: string };
     const parsed = updateDraftSchema.safeParse(request.body);
     if (!parsed.success) {
-      return reply.status(400).send({ error: 'Actualización inválida' });
+      return sendApiError(reply, 400, 'Actualización inválida');
     }
     const session = (request as AuthenticatedRequest).session;
     try {
@@ -386,7 +387,7 @@ export async function registerClinicalRoutes(
       if (parsed.data.body !== undefined) {
         const metaCheck = validateDraftBodyEpis2Meta(parsed.data.body);
         if (!metaCheck.success) {
-          return reply.status(400).send({ error: metaCheck.error });
+          return sendApiError(reply, 400, metaCheck.error);
         }
         patch.body = metaCheck.body;
       }
@@ -395,13 +396,11 @@ export async function registerClinicalRoutes(
         updateDraft(tx, { id: session.sub, username: session.username }, draftId, patch),
       );
       if (!draft) {
-        return reply.status(404).send({ error: 'Borrador no encontrado' });
+        return sendApiError(reply, 404, 'Borrador no encontrado');
       }
       return { draft };
     } catch (e) {
-      return reply.status(409).send({
-        error: e instanceof Error ? e.message : 'Conflicto al actualizar',
-      });
+      return sendApiError(reply, 409, e instanceof Error ? e.message : 'Conflicto al actualizar');
     }
   });
 
@@ -416,13 +415,11 @@ export async function registerClinicalRoutes(
           approveDraft(tx, { id: session.sub, username: session.username }, draftId),
         );
         if (!result) {
-          return reply.status(404).send({ error: 'Borrador no encontrado' });
+          return sendApiError(reply, 404, 'Borrador no encontrado');
         }
         return { draft: result.draft, note: result.note };
       } catch (e) {
-        return reply.status(409).send({
-          error: e instanceof Error ? e.message : 'No se pudo aprobar',
-        });
+        return sendApiError(reply, 409, e instanceof Error ? e.message : 'No se pudo aprobar');
       }
     },
   );

@@ -1,5 +1,6 @@
 import type { FastifyInstance } from 'fastify';
 import type { AppConfig } from '../config.js';
+import { sendApiError } from '../errors.js';
 import type { Database } from '../db/client.js';
 import { createRequirePermission } from '../auth/authenticate.js';
 import {
@@ -21,9 +22,9 @@ function sendFhir(reply: import('fastify').FastifyReply, resource: unknown) {
 function mapExportError(reply: import('fastify').FastifyReply, error: unknown) {
   if (error instanceof FhirExportError) {
     const status = error.code === 'NOT_FOUND' ? 404 : error.code === 'UNSUPPORTED' ? 422 : 500;
-    return reply.status(status).send({ error: error.message, code: error.code });
+    return sendApiError(reply, status, error.message);
   }
-  return reply.status(500).send({ error: 'Error al exportar FHIR' });
+  return sendApiError(reply, 500, 'Error al exportar FHIR');
 }
 
 export async function registerFhirRoutes(

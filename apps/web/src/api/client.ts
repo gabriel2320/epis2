@@ -15,6 +15,12 @@ export class ApiError extends Error {
   constructor(
     message: string,
     public status: number,
+    /** Código estable del envelope (`apiErrorSchema`), p. ej. NOT_FOUND. */
+    public code?: string,
+    /** Id de correlación para buscar el error en los logs de la API. */
+    public correlationId?: string,
+    /** Detalle por campo (paths Zod) para mapear a formularios (MF-NORM-404). */
+    public details?: Array<{ path: string; message: string }>,
   ) {
     super(message);
     this.name = 'ApiError';
@@ -33,16 +39,28 @@ export async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> 
 
   if (!res.ok) {
     let message = res.statusText;
+    let code: string | undefined;
+    let correlationId: string | undefined;
+    let details: Array<{ path: string; message: string }> | undefined;
     try {
-      const body = (await res.json()) as { error?: string };
-      if (body.error) message = body.error;
+      // Envelope compartido de la API (MF-NORM-202): { code, message, correlationId, details? }.
+      const body = (await res.json()) as {
+        message?: string;
+        code?: string;
+        correlationId?: string;
+        details?: Array<{ path: string; message: string }>;
+      };
+      if (body.message) message = body.message;
+      code = body.code;
+      correlationId = body.correlationId;
+      details = body.details;
     } catch {
       /* ignore */
     }
     if (res.status === 401 && shouldRedirectOn401()) {
       redirectToSessionExpired();
     }
-    throw new ApiError(message, res.status);
+    throw new ApiError(message, res.status, code, correlationId, details);
   }
 
   if (res.status === 204) {

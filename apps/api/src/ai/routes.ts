@@ -17,6 +17,7 @@ import {
   type AuthenticatedRequest,
 } from '../auth/authenticate.js';
 import type { AppConfig } from '../config.js';
+import { sendApiError } from '../errors.js';
 import type { Database } from '../db/client.js';
 import {
   fetchLocalAiStatus,
@@ -72,7 +73,7 @@ export async function registerAiRoutes(
     async (request, reply) => {
       const parsed = aiAssistDraftRequestSchema.safeParse(request.body);
       if (!parsed.success) {
-        return reply.status(400).send({ error: 'Solicitud IA inválida' });
+        return sendApiError(reply, 400, 'Solicitud IA inválida');
       }
 
       const session = (request as AuthenticatedRequest).session;
@@ -172,7 +173,7 @@ export async function registerAiRoutes(
     async (request, reply) => {
       const parsed = aiTextboxAssistRequestSchema.safeParse(request.body);
       if (!parsed.success) {
-        return reply.status(400).send({ error: 'Solicitud textbox IA inválida' });
+        return sendApiError(reply, 400, 'Solicitud textbox IA inválida');
       }
       const session = (request as AuthenticatedRequest).session;
       const { httpStatus, body } = await requestTextboxAssist(
@@ -233,7 +234,7 @@ export async function registerAiRoutes(
   app.get('/api/ai/runs', { preHandler: requireAiRead }, async (request, reply) => {
     const q = request.query as { patientId?: string; limit?: string };
     if (!db) {
-      return reply.status(503).send({ error: 'Base de datos no disponible' });
+      return sendApiError(reply, 503, 'Base de datos no disponible');
     }
     const limit = q.limit ? Math.min(Number(q.limit), 100) : 30;
     const runs = await listRecentAiRuns(db, {
@@ -249,10 +250,10 @@ export async function registerAiRoutes(
     async (request, reply) => {
       const parsed = ragQueryRequestSchema.safeParse(request.body);
       if (!parsed.success) {
-        return reply.status(400).send({ error: 'Consulta RAG inválida' });
+        return sendApiError(reply, 400, 'Consulta RAG inválida');
       }
       if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
+        return sendApiError(reply, 503, 'Base de datos no disponible');
       }
       const session = (request as AuthenticatedRequest).session;
       const result = await queryPatientRag(
@@ -272,10 +273,10 @@ export async function registerAiRoutes(
     async (request, reply) => {
       const parsed = aiSummarySuggestRequestSchema.safeParse(request.body);
       if (!parsed.success) {
-        return reply.status(400).send({ error: 'Solicitud de resumen inválida' });
+        return sendApiError(reply, 400, 'Solicitud de resumen inválida');
       }
       if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
+        return sendApiError(reply, 503, 'Base de datos no disponible');
       }
       const session = (request as AuthenticatedRequest).session;
       const result = await suggestPatientSummary24h(db, config, session.sub, parsed.data.patientId);

@@ -10,6 +10,7 @@ import {
 import { z } from 'zod';
 import type { FastifyInstance } from 'fastify';
 import type { AppConfig } from '../config.js';
+import { sendApiError } from '../errors.js';
 import type { Database } from '../db/client.js';
 import { createRequirePermission, type AuthenticatedRequest } from '../auth/authenticate.js';
 import { validateHl7Message } from './hl7.js';
@@ -33,7 +34,7 @@ export async function registerInteropRoutes(
 
   app.get('/api/interop/staging', { preHandler: requireAuditRead }, async (_request, reply) => {
     if (!db) {
-      return reply.status(503).send({ error: 'Base de datos no disponible' });
+      return sendApiError(reply, 503, 'Base de datos no disponible');
     }
     const batches = await listInteropStagingBatches(db);
     return interopStagingResponseSchema.parse({ readOnly: true as const, batches });
@@ -44,7 +45,7 @@ export async function registerInteropRoutes(
     { preHandler: requireAuditRead },
     async (_request, reply) => {
       if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
+        return sendApiError(reply, 503, 'Base de datos no disponible');
       }
       const messages = await listHl7Quarantine(db);
       return hl7QuarantineListResponseSchema.parse({ readOnly: true as const, messages });
@@ -72,11 +73,11 @@ export async function registerInteropRoutes(
     { preHandler: requireAuditRead },
     async (request, reply) => {
       if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
+        return sendApiError(reply, 503, 'Base de datos no disponible');
       }
       const parsed = hl7BodySchema.safeParse(request.body);
       if (!parsed.success) {
-        return reply.status(400).send({ error: 'Cuerpo inválido' });
+        return sendApiError(reply, 400, 'Cuerpo inválido');
       }
       const session = (request as AuthenticatedRequest).session;
       try {
@@ -91,9 +92,7 @@ export async function registerInteropRoutes(
           status: 'quarantine' as const,
         });
       } catch (err) {
-        return reply.status(400).send({
-          error: err instanceof Error ? err.message : 'HL7 inválido',
-        });
+        return sendApiError(reply, 400, err instanceof Error ? err.message : 'HL7 inválido');
       }
     },
   );
@@ -103,12 +102,12 @@ export async function registerInteropRoutes(
     { preHandler: requireAuditRead },
     async (request, reply) => {
       if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
+        return sendApiError(reply, 503, 'Base de datos no disponible');
       }
       const { quarantineId } = request.params as { quarantineId: string };
       const preview = await getHl7MappingPreview(db, quarantineId);
       if (!preview) {
-        return reply.status(404).send({ error: 'Cuarentena no encontrada' });
+        return sendApiError(reply, 404, 'Cuarentena no encontrada');
       }
       return hl7MappingPreviewSchema.parse({ readOnly: true as const, ...preview });
     },
@@ -119,7 +118,7 @@ export async function registerInteropRoutes(
     { preHandler: requireAuditRead },
     async (request, reply) => {
       if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
+        return sendApiError(reply, 503, 'Base de datos no disponible');
       }
       const { quarantineId } = request.params as { quarantineId: string };
       const session = (request as AuthenticatedRequest).session;
@@ -141,9 +140,11 @@ export async function registerInteropRoutes(
           preview,
         });
       } catch (err) {
-        return reply.status(400).send({
-          error: err instanceof Error ? err.message : 'No se pudo proponer writeback',
-        });
+        return sendApiError(
+          reply,
+          400,
+          err instanceof Error ? err.message : 'No se pudo proponer writeback',
+        );
       }
     },
   );
@@ -153,7 +154,7 @@ export async function registerInteropRoutes(
     { preHandler: requireAuditRead },
     async (request, reply) => {
       if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
+        return sendApiError(reply, 503, 'Base de datos no disponible');
       }
       const { quarantineId } = request.params as { quarantineId: string };
       const session = (request as AuthenticatedRequest).session;
@@ -164,9 +165,7 @@ export async function registerInteropRoutes(
         });
         return hl7RevertResponseSchema.parse({ readOnly: true as const, ...result });
       } catch (err) {
-        return reply.status(400).send({
-          error: err instanceof Error ? err.message : 'No se pudo revertir',
-        });
+        return sendApiError(reply, 400, err instanceof Error ? err.message : 'No se pudo revertir');
       }
     },
   );

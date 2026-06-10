@@ -1,6 +1,7 @@
 import { opsStatusResponseSchema } from '@epis2/contracts';
 import type { FastifyInstance } from 'fastify';
 import type { AppConfig } from '../config.js';
+import { sendApiError } from '../errors.js';
 import type { Database } from '../db/client.js';
 import { createRequirePermission } from '../auth/authenticate.js';
 import { getOpsStatus } from './service.js';
@@ -14,7 +15,7 @@ export async function registerOpsRoutes(
 
   app.get('/api/ops/status', { preHandler: requireAuditRead }, async (_request, reply) => {
     if (!db) {
-      return reply.status(503).send({ error: 'Base de datos no disponible' });
+      return sendApiError(reply, 503, 'Base de datos no disponible');
     }
     const status = await getOpsStatus(db, config);
     const { aiRunsTotal, ...body } = status;

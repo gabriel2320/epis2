@@ -15,6 +15,7 @@ import {
 import type { FastifyInstance } from 'fastify';
 import { appendAudit } from '../audit/store.js';
 import type { AppConfig } from '../config.js';
+import { sendApiError } from '../errors.js';
 import type { Database } from '../db/client.js';
 import { createRequirePermission, type AuthenticatedRequest } from '../auth/authenticate.js';
 import { getPatientById } from '../clinical/service.js';
@@ -71,12 +72,10 @@ export async function registerDashboardRoutes(
     async (request, reply) => {
       const session = (request as AuthenticatedRequest).session;
       if (session.role !== 'nurse' && session.role !== 'physician' && session.role !== 'admin') {
-        return reply
-          .status(403)
-          .send({ error: 'Tablero de enfermería no disponible para este rol' });
+        return sendApiError(reply, 403, 'Tablero de enfermería no disponible para este rol');
       }
       if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
+        return sendApiError(reply, 503, 'Base de datos no disponible');
       }
       const summary = await getNursingDashboardSummary(db, session.sub);
       return nursingDashboardResponseSchema.parse(summary);
@@ -93,10 +92,10 @@ export async function registerDashboardRoutes(
         session.role !== 'physician' &&
         session.role !== 'admin'
       ) {
-        return reply.status(403).send({ error: 'Tablero de farmacia no disponible para este rol' });
+        return sendApiError(reply, 403, 'Tablero de farmacia no disponible para este rol');
       }
       if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
+        return sendApiError(reply, 503, 'Base de datos no disponible');
       }
       const summary = await getPharmacyDashboardSummary(db);
       return pharmacyDashboardResponseSchema.parse(summary);
@@ -121,12 +120,12 @@ export async function registerDashboardRoutes(
       });
 
       if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
+        return sendApiError(reply, 503, 'Base de datos no disponible');
       }
 
       const patient = await getPatientById(db, patientId);
       if (!patient) {
-        return reply.status(404).send({ error: 'Paciente no encontrado' });
+        return sendApiError(reply, 404, 'Paciente no encontrado');
       }
 
       const summary = await getPatientDashboardSummary(db, patientId, patient.displayName);
@@ -152,7 +151,7 @@ export async function registerDashboardRoutes(
       });
 
       if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
+        return sendApiError(reply, 503, 'Base de datos no disponible');
       }
 
       const summary = await getServiceDashboardSummary(db, unitCode);
@@ -174,7 +173,7 @@ export async function registerDashboardRoutes(
     });
 
     if (!db) {
-      return reply.status(503).send({ error: 'Base de datos no disponible' });
+      return sendApiError(reply, 503, 'Base de datos no disponible');
     }
 
     const summary = await getQualityDashboardSummary(db);
@@ -187,9 +186,7 @@ export async function registerDashboardRoutes(
     async (request, reply) => {
       const session = (request as AuthenticatedRequest).session;
       if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
-        return reply
-          .status(403)
-          .send({ error: 'Tablero de recepción no disponible para este rol' });
+        return sendApiError(reply, 403, 'Tablero de recepción no disponible para este rol');
       }
 
       await appendAudit(db, {
@@ -203,7 +200,7 @@ export async function registerDashboardRoutes(
       });
 
       if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
+        return sendApiError(reply, 503, 'Base de datos no disponible');
       }
 
       const summary = await getReceptionDashboardSummary(db, session.role);
@@ -217,9 +214,7 @@ export async function registerDashboardRoutes(
     async (request, reply) => {
       const session = (request as AuthenticatedRequest).session;
       if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
-        return reply
-          .status(403)
-          .send({ error: 'Tablero de urgencias no disponible para este rol' });
+        return sendApiError(reply, 403, 'Tablero de urgencias no disponible para este rol');
       }
 
       await appendAudit(db, {
@@ -233,7 +228,7 @@ export async function registerDashboardRoutes(
       });
 
       if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
+        return sendApiError(reply, 503, 'Base de datos no disponible');
       }
 
       const summary = await getEmergencyDashboardSummary(db, session.role);
@@ -244,7 +239,7 @@ export async function registerDashboardRoutes(
   app.get('/api/dashboard/icu', { preHandler: requireDashboardRead }, async (request, reply) => {
     const session = (request as AuthenticatedRequest).session;
     if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
-      return reply.status(403).send({ error: 'Tablero UCI no disponible para este rol' });
+      return sendApiError(reply, 403, 'Tablero UCI no disponible para este rol');
     }
 
     await appendAudit(db, {
@@ -258,7 +253,7 @@ export async function registerDashboardRoutes(
     });
 
     if (!db) {
-      return reply.status(503).send({ error: 'Base de datos no disponible' });
+      return sendApiError(reply, 503, 'Base de datos no disponible');
     }
 
     const summary = await getIcuDashboardSummary(db, session.role);
@@ -268,7 +263,7 @@ export async function registerDashboardRoutes(
   app.get('/api/dashboard/or', { preHandler: requireDashboardRead }, async (request, reply) => {
     const session = (request as AuthenticatedRequest).session;
     if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
-      return reply.status(403).send({ error: 'Tablero pabellón no disponible para este rol' });
+      return sendApiError(reply, 403, 'Tablero pabellón no disponible para este rol');
     }
 
     await appendAudit(db, {
@@ -282,7 +277,7 @@ export async function registerDashboardRoutes(
     });
 
     if (!db) {
-      return reply.status(503).send({ error: 'Base de datos no disponible' });
+      return sendApiError(reply, 503, 'Base de datos no disponible');
     }
 
     const summary = await getOrDashboardSummary(db, session.role);
@@ -292,7 +287,7 @@ export async function registerDashboardRoutes(
   app.get('/api/dashboard/aps', { preHandler: requireDashboardRead }, async (request, reply) => {
     const session = (request as AuthenticatedRequest).session;
     if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
-      return reply.status(403).send({ error: 'Tablero APS no disponible para este rol' });
+      return sendApiError(reply, 403, 'Tablero APS no disponible para este rol');
     }
 
     await appendAudit(db, {
@@ -306,7 +301,7 @@ export async function registerDashboardRoutes(
     });
 
     if (!db) {
-      return reply.status(503).send({ error: 'Base de datos no disponible' });
+      return sendApiError(reply, 503, 'Base de datos no disponible');
     }
 
     const summary = await getApsDashboardSummary(db, session.role);
@@ -319,9 +314,7 @@ export async function registerDashboardRoutes(
     async (request, reply) => {
       const session = (request as AuthenticatedRequest).session;
       if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
-        return reply
-          .status(403)
-          .send({ error: 'Tablero especialidades no disponible para este rol' });
+        return sendApiError(reply, 403, 'Tablero especialidades no disponible para este rol');
       }
 
       await appendAudit(db, {
@@ -335,7 +328,7 @@ export async function registerDashboardRoutes(
       });
 
       if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
+        return sendApiError(reply, 503, 'Base de datos no disponible');
       }
 
       const summary = await getSpecialtyDashboardSummary(db, session.role);

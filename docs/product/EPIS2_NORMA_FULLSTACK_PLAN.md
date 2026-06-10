@@ -38,7 +38,7 @@ La sección peor evaluada (§11 🔴). Orden: 201 → 202 → 203.
 | MF | Alcance | Archivos permitidos | Gate de cierre |
 |----|---------|---------------------|----------------|
 | **MF-NORM-201** ✓ | Logging estructurado: pino explícito (nivel `LOG_LEVEL` validado Zod, redact authorization/cookie), `correlationId` por request vía `requestIdHeader`/`requestIdLogLabel` y header `x-correlation-id` en toda respuesta | `apps/api/src/app.ts`, `config.ts`, tests | `21fc02e` — 3 tests ✓ |
-| **MF-NORM-202** | Envelope de error compartido: schema Zod `ApiErrorSchema` (`code`, `message`, `correlationId`, `details?`) en `packages/contracts`; error handler global Fastify lo emite; rutas dejan de construir `{ error }` ad-hoc | `packages/contracts/**`, `apps/api/src/**` (handler + rutas), `apps/web/src/lib/api*` (parseo) | test integración: 400/403/404/500 cumplen schema |
+| **MF-NORM-202** ✓ | Envelope de error compartido: schema Zod `apiErrorSchema` (`code`, `message`, `correlationId`, `details?`) en `packages/contracts`; `setErrorHandler`/`setNotFoundHandler` globales + helper `sendApiError`; 70 sitios `{ error }` migrados en 11 archivos; `ApiError` web expone `code`/`correlationId`/`details` | `packages/contracts/**`, `apps/api/src/**` (handler + rutas), `apps/web/src/api/client.ts` (parseo) | `errors.envelope.test.ts` 5/5 ✓ (400/401/403/404/500 cumplen schema; 500 con mensaje genérico) |
 | **MF-NORM-203** | OpenTelemetry mínimo: instrumentación HTTP + pg, exporter OTLP detrás de flag `OTEL_ENABLED` (off por defecto en dev); documentar en `docs/dev/` | `apps/api/src/otel.ts`, `package.json`, `docs/dev/**` | smoke: arranque con y sin flag; spans visibles en collector local |
 
 **Cierre N2:** reporte + actualización de §11 en la auditoría (🔴 → 🟢).

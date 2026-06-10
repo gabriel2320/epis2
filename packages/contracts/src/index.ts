@@ -1,5 +1,14 @@
 export { healthResponseSchema, type HealthResponse } from './health.js';
 export {
+  apiErrorCodeSchema,
+  apiErrorDetailSchema,
+  apiErrorSchema,
+  defaultApiErrorCode,
+  type ApiErrorBody,
+  type ApiErrorCode,
+  type ApiErrorDetail,
+} from './apiError.js';
+export {
   auditEventSchema,
   loginRequestSchema,
   sessionResponseSchema,

@@ -2,6 +2,7 @@ import { permissionsForRole, roleHasPermission } from '@epis2/clinical-domain';
 import type { Permission } from '@epis2/clinical-domain';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import type { AppConfig } from '../config.js';
+import { sendApiError } from '../errors.js';
 import { verifySessionToken, type SessionClaims } from './sessionToken.js';
 import { PILOT_SERVICE_AUDITOR_SESSION, SERVICE_API_KEY_HEADER } from './serviceAccount.js';
 
@@ -38,11 +39,11 @@ export function createAuthenticate(config: AppConfig) {
 
     const token = readToken(request, config.SESSION_COOKIE_NAME);
     if (!token) {
-      return reply.status(401).send({ error: 'No autenticado' });
+      return sendApiError(reply, 401, 'No autenticado');
     }
     const session = await verifySessionToken(token, config.SESSION_SECRET);
     if (!session) {
-      return reply.status(401).send({ error: 'Sesión inválida o expirada' });
+      return sendApiError(reply, 401, 'Sesión inválida o expirada');
     }
     (request as AuthenticatedRequest).session = session;
   };
@@ -58,10 +59,7 @@ export function createRequirePermission(config: AppConfig, permission: Permissio
     if (reply.sent) return;
     const session = (request as AuthenticatedRequest).session;
     if (!roleHasPermission(session.role, permission)) {
-      return reply.status(403).send({
-        error: 'Sin permiso',
-        permission,
-      });
+      return sendApiError(reply, 403, `Sin permiso ${permission}`);
     }
   };
 }

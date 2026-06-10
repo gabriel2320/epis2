@@ -16,6 +16,7 @@ import { registerOpsRoutes } from './ops/routes.js';
 import { registerAdminRoutes } from './admin/routes.js';
 import type { AppConfig } from './config.js';
 import { getDatabase, pingDatabase } from './db/client.js';
+import { apiErrorHandler, apiNotFoundHandler } from './errors.js';
 
 const VERSION = '0.1.0';
 
@@ -46,6 +47,10 @@ export async function buildApp(config: AppConfig) {
   app.addHook('onSend', async (request, reply) => {
     reply.header('x-correlation-id', request.id);
   });
+
+  // Envelope de error compartido (MF-NORM-202, norma R-37).
+  app.setErrorHandler(apiErrorHandler);
+  app.setNotFoundHandler(apiNotFoundHandler);
 
   await app.register(cors, {
     origin: config.WEB_ORIGIN,

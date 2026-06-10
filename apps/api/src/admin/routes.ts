@@ -2,6 +2,7 @@ import { asc, eq } from 'drizzle-orm';
 import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import type { AppConfig } from '../config.js';
+import { sendApiError } from '../errors.js';
 import type { Database } from '../db/client.js';
 import { createRequirePermission, type AuthenticatedRequest } from '../auth/authenticate.js';
 import { appUsers, clinicalCatalogStaging } from '../db/schema.js';
@@ -24,7 +25,7 @@ export async function registerAdminRoutes(
 
   app.get('/api/admin/users', { preHandler: requireUsersRead }, async (_request, reply) => {
     if (!db) {
-      return reply.status(503).send({ error: 'Base de datos no disponible' });
+      return sendApiError(reply, 503, 'Base de datos no disponible');
     }
     const rows = await db
       .select({
@@ -41,7 +42,7 @@ export async function registerAdminRoutes(
 
   app.get('/api/admin/catalogs', { preHandler: requireAuditRead }, async (request, reply) => {
     if (!db) {
-      return reply.status(503).send({ error: 'Base de datos no disponible' });
+      return sendApiError(reply, 503, 'Base de datos no disponible');
     }
     const catalogCode = (request.query as { catalogCode?: string }).catalogCode?.trim();
     const rows = catalogCode
@@ -69,11 +70,11 @@ export async function registerAdminRoutes(
 
   app.post('/api/admin/catalogs', { preHandler: requireCatalogsWrite }, async (request, reply) => {
     if (!db) {
-      return reply.status(503).send({ error: 'Base de datos no disponible' });
+      return sendApiError(reply, 503, 'Base de datos no disponible');
     }
     const parsed = catalogBodySchema.safeParse(request.body);
     if (!parsed.success) {
-      return reply.status(400).send({ error: 'Cuerpo inválido' });
+      return sendApiError(reply, 400, 'Cuerpo inválido');
     }
     const actor = (request as AuthenticatedRequest).session;
     const [row] = await db

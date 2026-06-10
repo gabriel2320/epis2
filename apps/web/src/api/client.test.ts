@@ -21,7 +21,11 @@ describe('apiFetch', () => {
         ok: false,
         status: 401,
         statusText: 'Unauthorized',
-        json: async () => ({ error: 'Sesión inválida' }),
+        json: async () => ({
+          code: 'UNAUTHORIZED',
+          message: 'Sesión inválida',
+          correlationId: 'cid-1',
+        }),
       }),
     );
 
@@ -39,11 +43,41 @@ describe('apiFetch', () => {
         ok: false,
         status: 401,
         statusText: 'Unauthorized',
-        json: async () => ({ error: 'Sin sesión' }),
+        json: async () => ({
+          code: 'UNAUTHORIZED',
+          message: 'Sin sesión',
+          correlationId: 'cid-2',
+        }),
       }),
     );
 
     await expect(apiFetch('/api/auth/session')).rejects.toBeInstanceOf(ApiError);
     expect(assign).not.toHaveBeenCalled();
+  });
+
+  it('expone code, correlationId y details del envelope (MF-NORM-202)', async () => {
+    vi.stubGlobal('location', { pathname: '/comando', search: '', assign: vi.fn() });
+
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: false,
+        status: 400,
+        statusText: 'Bad Request',
+        json: async () => ({
+          code: 'VALIDATION',
+          message: 'Datos de borrador inválidos',
+          correlationId: 'cid-3',
+          details: [{ path: 'patientId', message: 'Requerido' }],
+        }),
+      }),
+    );
+
+    const error = await apiFetch('/api/drafts').catch((e: unknown) => e as ApiError);
+    expect(error).toBeInstanceOf(ApiError);
+    expect((error as ApiError).message).toBe('Datos de borrador inválidos');
+    expect((error as ApiError).code).toBe('VALIDATION');
+    expect((error as ApiError).correlationId).toBe('cid-3');
+    expect((error as ApiError).details).toEqual([{ path: 'patientId', message: 'Requerido' }]);
   });
 });

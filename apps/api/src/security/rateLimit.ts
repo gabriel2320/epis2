@@ -1,3 +1,6 @@
+import type { FastifyReply, FastifyRequest } from 'fastify';
+import { sendApiError } from '../errors.js';
+
 type Bucket = { count: number; resetAt: number };
 
 const buckets = new Map<string, Bucket>();
@@ -43,10 +46,7 @@ export function createRateLimitPreHandler(options: {
   nodeEnv: string;
 }) {
   const { keyPrefix, max, windowMs, skipInTest = true, nodeEnv } = options;
-  return async function rateLimitPreHandler(
-    request: { ip: string },
-    reply: { status: (code: number) => { send: (body: unknown) => unknown } },
-  ) {
+  return async function rateLimitPreHandler(request: FastifyRequest, reply: FastifyReply) {
     if (skipInTest && nodeEnv === 'test') return;
     const limit = checkRateLimit({
       key: `${keyPrefix}:${request.ip || 'unknown'}`,
@@ -54,10 +54,8 @@ export function createRateLimitPreHandler(options: {
       windowMs,
     });
     if (!limit.allowed) {
-      return reply.status(429).send({
-        error: 'Demasiadas solicitudes. Intente más tarde.',
-        retryAfterSec: limit.retryAfterSec,
-      });
+      reply.header('retry-after', String(limit.retryAfterSec ?? 0));
+      return sendApiError(reply, 429, 'Demasiadas solicitudes. Intente más tarde.');
     }
   };
 }

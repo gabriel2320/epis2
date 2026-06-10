@@ -8,6 +8,7 @@ import {
 import type { FastifyInstance } from 'fastify';
 import { appendAudit } from '../audit/store.js';
 import type { AppConfig } from '../config.js';
+import { sendApiError } from '../errors.js';
 import type { Database } from '../db/client.js';
 import { createRequirePermission, type AuthenticatedRequest } from '../auth/authenticate.js';
 import {
@@ -36,7 +37,7 @@ export async function registerInpatientRoutes(
 
       const updated = await acknowledgeCriticalResult(db, criticalId, session.sub);
       if (!updated) {
-        return reply.status(404).send({ error: 'Resultado crítico no encontrado' });
+        return sendApiError(reply, 404, 'Resultado crítico no encontrado');
       }
 
       await appendAudit(db, {
@@ -63,7 +64,7 @@ export async function registerInpatientRoutes(
     async (request, reply) => {
       const parsed = inpatientAdmissionCreateSchema.safeParse(request.body);
       if (!parsed.success) {
-        return reply.status(400).send({ error: 'Ingreso hospitalario inválido' });
+        return sendApiError(reply, 400, 'Ingreso hospitalario inválido');
       }
       const session = (request as AuthenticatedRequest).session;
       try {
@@ -76,9 +77,7 @@ export async function registerInpatientRoutes(
         });
         return reply.status(201).send(inpatientAdmissionCreateResponseSchema.parse(result));
       } catch (e) {
-        return reply.status(409).send({
-          error: e instanceof Error ? e.message : 'No se pudo admitir',
-        });
+        return sendApiError(reply, 409, e instanceof Error ? e.message : 'No se pudo admitir');
       }
     },
   );
@@ -90,7 +89,7 @@ export async function registerInpatientRoutes(
       const { admissionId } = request.params as { admissionId: string };
       const parsed = inpatientTransferSchema.safeParse(request.body);
       if (!parsed.success) {
-        return reply.status(400).send({ error: 'Traslado inválido' });
+        return sendApiError(reply, 400, 'Traslado inválido');
       }
       const session = (request as AuthenticatedRequest).session;
       try {
@@ -100,9 +99,7 @@ export async function registerInpatientRoutes(
         });
         return inpatientTransferResponseSchema.parse(result);
       } catch (e) {
-        return reply.status(409).send({
-          error: e instanceof Error ? e.message : 'No se pudo trasladar',
-        });
+        return sendApiError(reply, 409, e instanceof Error ? e.message : 'No se pudo trasladar');
       }
     },
   );
@@ -120,9 +117,7 @@ export async function registerInpatientRoutes(
         });
         return inpatientDischargeResponseSchema.parse(result);
       } catch (e) {
-        return reply.status(409).send({
-          error: e instanceof Error ? e.message : 'No se pudo dar de alta',
-        });
+        return sendApiError(reply, 409, e instanceof Error ? e.message : 'No se pudo dar de alta');
       }
     },
   );
