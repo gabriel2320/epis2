@@ -76,11 +76,13 @@ export function EpisSplitWorkspace({
     <Stack spacing={1} data-testid={testId} sx={{ width: '100%' }}>
       {canSplit ? (
         <Stack direction="row" justifyContent="flex-end">
+          {/* primary.dark (onPrimaryContainer M3): primary no alcanza 4.5:1 sobre surfaceContainer (MF-NORM-401b). */}
           <EpisButton
             appearance="text"
             size="small"
             onClick={toggle}
             data-testid={toggleTestId ?? `${testId}-toggle`}
+            sx={{ color: 'primary.dark' }}
           >
             {open ? closeLabel : openLabel}
           </EpisButton>

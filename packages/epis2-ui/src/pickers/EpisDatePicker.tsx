@@ -13,6 +13,8 @@ export type EpisDatePickerProps = {
   required?: boolean;
   error?: string;
   disabled?: boolean;
+  /** Id del input — permite asociar un label externo visible (htmlFor). */
+  id?: string;
   'data-testid'?: string;
 };
 
@@ -29,6 +31,7 @@ export function EpisDatePicker({
   required,
   error,
   disabled,
+  id,
   'data-testid': testId,
 }: EpisDatePickerProps) {
   return (
@@ -45,6 +48,7 @@ export function EpisDatePicker({
             hiddenLabel: true,
             error: Boolean(error),
             helperText: error ?? ' ',
+            ...(id ? { id } : {}),
             ...(required ? { required: true } : {}),
             slotProps: clinicalOutlinedInputSlotProps,
           },

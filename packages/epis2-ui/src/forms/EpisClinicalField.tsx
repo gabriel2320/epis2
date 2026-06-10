@@ -84,6 +84,7 @@ function EpisClinicalFieldInner({
       <ClinicalFieldStack label={dateLabel} htmlFor={fieldId} required={Boolean(field.required)}>
         <EpisDatePicker
           label=""
+          id={fieldId}
           value={value}
           required={Boolean(field.required)}
           {...(error ? { error } : {})}

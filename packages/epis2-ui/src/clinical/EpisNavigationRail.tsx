@@ -55,6 +55,7 @@ export function EpisNavigationRail({
 
           const button = (
             <EpisIconButton
+              aria-label={item.label}
               color={item.active ? 'primary' : 'default'}
               {...(item.disabled ? { disabled: true } : {})}
               {...(item.onClick ? { onClick: item.onClick } : {})}

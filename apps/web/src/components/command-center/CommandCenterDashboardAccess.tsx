@@ -14,12 +14,14 @@ export function CommandCenterDashboardAccess() {
       justifyContent="center"
       data-testid="epis2-command-dashboard-access"
     >
+      {/* primary.dark (onPrimaryContainer M3): primary no alcanza 4.5:1 sobre surfaceContainer (MF-NORM-401b). */}
       <EpisButton
         appearance="outlined"
         size="small"
         data-testid="epis2-command-open-dashboard"
         disabled={!session.canOpenDashboard}
         onClick={() => session.openDashboardMode('work')}
+        sx={{ color: 'primary.dark' }}
       >
         {copy.commandCenter.openDashboard}
       </EpisButton>

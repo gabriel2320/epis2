@@ -3,9 +3,8 @@
  * Gate: 0 violaciones `serious`/`critical` en Centro de Comando, ficha y formulario clínico.
  * Escrito role-first (piloto MF-NORM-402 — docs/quality/E2E_SELECTOR_POLICY.md).
  *
- * Estado 2026-06-10: el smoke detecta violaciones reales (button-name critical en rail,
- * color-contrast en CTAs, label-title-only y list en formularios). Entra a CI cuando
- * MF-NORM-401b las corrija — ver reports/epis2-norm-n1-quick-wins-2026-06-10.md.
+ * En CI dentro de `test:e2e` desde MF-NORM-401b (rail con aria-label, CTAs con
+ * primary.dark sobre surfaceContainer, label asociado en date picker, ul>li en scrollspy).
  */
 import AxeBuilder from '@axe-core/playwright';
 import { test, expect, type Page } from '@playwright/test';

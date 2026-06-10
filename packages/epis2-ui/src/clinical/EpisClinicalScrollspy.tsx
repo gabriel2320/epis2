@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Box from '@mui/material/Box';
@@ -78,18 +79,20 @@ export function EpisClinicalScrollspy({
     >
       <List dense disablePadding>
         {sections.map((section) => (
-          <ListItemButton
-            key={section.id}
-            selected={activeId === section.id}
-            onClick={() => scrollTo(section.id)}
-            data-testid={`epis2-scrollspy-${section.id}`}
-            sx={{ borderRadius: 1, mb: 0.5 }}
-          >
-            <ListItemText
-              primary={section.label}
-              primaryTypographyProps={{ fontSize: '0.875rem' }}
-            />
-          </ListItemButton>
+          // ul > li > button (axe `list`, MF-NORM-401b): ListItemButton suelto renderiza div.
+          <ListItem key={section.id} disablePadding>
+            <ListItemButton
+              selected={activeId === section.id}
+              onClick={() => scrollTo(section.id)}
+              data-testid={`epis2-scrollspy-${section.id}`}
+              sx={{ borderRadius: 1, mb: 0.5 }}
+            >
+              <ListItemText
+                primary={section.label}
+                primaryTypographyProps={{ fontSize: '0.875rem' }}
+              />
+            </ListItemButton>
+          </ListItem>
         ))}
       </List>
     </Box>

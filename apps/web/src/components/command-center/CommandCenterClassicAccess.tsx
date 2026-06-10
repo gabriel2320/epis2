@@ -14,11 +14,13 @@ export function CommandCenterClassicAccess() {
       justifyContent="center"
       data-testid="epis2-command-classic-access"
     >
+      {/* primary.dark (onPrimaryContainer M3): primary no alcanza 4.5:1 sobre surfaceContainer (MF-NORM-401b). */}
       <EpisButton
         appearance="outlined"
         size="small"
         data-testid="epis2-command-open-classic"
         onClick={() => session.openClassicMode()}
+        sx={{ color: 'primary.dark' }}
       >
         {copy.commandCenter.openClassicMode}
       </EpisButton>
@@ -28,6 +30,7 @@ export function CommandCenterClassicAccess() {
           size="small"
           data-testid="epis2-command-continue-classic"
           onClick={() => session.openClassicMode(session.activePatientId)}
+          sx={{ color: 'primary.dark' }}
         >
           {copy.commandCenter.continueClassicMode}
         </EpisButton>

@@ -99,7 +99,7 @@ export function CommandCenterRecentActivity() {
         <EpisM3Text
           role="labelMedium"
           component="button"
-          color="primary"
+          color="primary.dark"
           onClick={() => openDashboardMode('work')}
           sx={{ border: 0, bgcolor: 'transparent', cursor: 'pointer', p: 0, font: 'inherit' }}
         >
