@@ -1,5 +1,20 @@
 import { copy } from '@epis2/design-system';
-import { EpisButton, Stack, Typography } from '@epis2/epis2-ui';
+import {
+  AdminPanelSettingsIcon,
+  BoltIcon,
+  CalendarMonthIcon,
+  EpisButton,
+  GroupsIcon,
+  HealthAndSafetyIcon,
+  LocalHospitalIcon,
+  MedicationIcon,
+  MonitorHeartIcon,
+  PersonOutlineIcon,
+  ScienceIcon,
+  Stack,
+  Typography,
+} from '@epis2/epis2-ui';
+import type { ReactNode } from 'react';
 import type { DashboardTab } from '../../routes/clinicalNavigate.js';
 import type { DashboardNavDestination } from '../../dashboard-md3/dashboardNavDestinations.js';
 import { EPIS_DASHBOARD_NAV_MAX_VISIBLE } from '../../dashboard-md3/dashboardNavDestinations.js';
@@ -12,6 +27,21 @@ export type EpisDashboardMd3NavigationRailProps = {
   moreOpen?: boolean;
   onMoreToggle?: () => void;
   testId?: string;
+};
+
+const NAV_ICONS: Partial<Record<DashboardTab, ReactNode>> = {
+  work: <BoltIcon fontSize="small" />,
+  patient: <PersonOutlineIcon fontSize="small" />,
+  service: <GroupsIcon fontSize="small" />,
+  nursing: <LocalHospitalIcon fontSize="small" />,
+  pharmacy: <MedicationIcon fontSize="small" />,
+  icu: <MonitorHeartIcon fontSize="small" />,
+  quality: <HealthAndSafetyIcon fontSize="small" />,
+  reception: <CalendarMonthIcon fontSize="small" />,
+  emergency: <MonitorHeartIcon fontSize="small" />,
+  or: <ScienceIcon fontSize="small" />,
+  aps: <GroupsIcon fontSize="small" />,
+  specialty: <AdminPanelSettingsIcon fontSize="small" />,
 };
 
 /** Navigation rail — máx. 7 destinos visibles; resto bajo “Más”. */
@@ -27,6 +57,31 @@ export function EpisDashboardMd3NavigationRail({
   if (primary.length > EPIS_DASHBOARD_NAV_MAX_VISIBLE) {
     throw new Error(`Navigation rail excede ${EPIS_DASHBOARD_NAV_MAX_VISIBLE} destinos visibles`);
   }
+
+  const renderNavButton = (dest: DashboardNavDestination) => {
+    const active = dest.id === activeTab;
+    return (
+      <EpisButton
+        key={dest.id}
+        appearance={active ? 'filled' : 'text'}
+        size="small"
+        title={dest.label}
+        onClick={() => onTabChange(dest.id)}
+        data-testid={dest.testId}
+        sx={{
+          flexDirection: 'column',
+          gap: 0.25,
+          minHeight: 56,
+          fontSize: '0.65rem',
+          lineHeight: 1.2,
+          px: 0.5,
+        }}
+      >
+        {NAV_ICONS[dest.id] ?? <BoltIcon fontSize="small" />}
+        <span>{dest.label.slice(0, 8)}</span>
+      </EpisButton>
+    );
+  };
 
   return (
     <Stack
@@ -44,28 +99,7 @@ export function EpisDashboardMd3NavigationRail({
         overflowY: 'auto',
       }}
     >
-      {primary.map((dest) => {
-        const active = dest.id === activeTab;
-        return (
-          <EpisButton
-            key={dest.id}
-            appearance={active ? 'filled' : 'text'}
-            size="small"
-            title={dest.label}
-            onClick={() => onTabChange(dest.id)}
-            data-testid={dest.testId}
-            sx={{
-              flexDirection: 'column',
-              minHeight: 56,
-              fontSize: '0.65rem',
-              lineHeight: 1.2,
-              px: 0.5,
-            }}
-          >
-            {dest.label.slice(0, 8)}
-          </EpisButton>
-        );
-      })}
+      {primary.map(renderNavButton)}
       {more.length > 0 ? (
         <>
           <EpisButton
@@ -77,21 +111,7 @@ export function EpisDashboardMd3NavigationRail({
           >
             {copy.dashboardMd3.navMore}
           </EpisButton>
-          {moreOpen
-            ? more.map((dest) => (
-                <EpisButton
-                  key={dest.id}
-                  appearance={dest.id === activeTab ? 'filled' : 'text'}
-                  size="small"
-                  title={dest.label}
-                  onClick={() => onTabChange(dest.id)}
-                  data-testid={dest.testId}
-                  sx={{ fontSize: '0.65rem' }}
-                >
-                  {dest.label.slice(0, 10)}
-                </EpisButton>
-              ))
-            : null}
+          {moreOpen ? more.map(renderNavButton) : null}
         </>
       ) : null}
       <Typography variant="caption" color="text.secondary" sx={{ px: 0.5, mt: 1, display: 'none' }}>

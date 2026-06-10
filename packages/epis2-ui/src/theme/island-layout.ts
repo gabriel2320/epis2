@@ -7,6 +7,7 @@ import { epis2Shape } from './shape.js';
 /** Fondo de aplicación — canvas neutro (background.default). */
 export const epis2CanvasSx: SystemStyleObject<Theme> = {
   minHeight: '100vh',
+  overflowY: 'auto',
   bgcolor: 'background.default',
   backgroundImage: 'none',
 };

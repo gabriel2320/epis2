@@ -8,6 +8,9 @@ import { describe, expect, it, vi } from 'vitest';
 vi.mock('../modes/EpisModeSwitcher.js', () => ({
   EpisModeSwitcher: () => null,
 }));
+vi.mock('../../layouts/ClinicalAppBarSettingsAction.js', () => ({
+  ClinicalAppBarSettingsAction: () => <button type="button" data-testid="epis2-nav-ajustes" />,
+}));
 import { EpisClassicMd3CommandBar } from './EpisClassicMd3CommandBar.js';
 import { EpisClassicMd3PatientHeader } from './EpisClassicMd3PatientHeader.js';
 import { EpisClassicMd3Shell } from './EpisClassicMd3Shell.js';
@@ -73,7 +76,7 @@ describe('EpisClassicMd3PatientHeader', () => {
 });
 
 describe('EpisClassicMd3TopAppBar', () => {
-  it('muestra médico y rol sin acciones clínicas irreversibles', () => {
+  it('muestra paciente y ajustes sin acciones clínicas irreversibles', () => {
     render(
       <EpisClassicMd3TopAppBar
         patientLabel="Ana"
@@ -84,8 +87,9 @@ describe('EpisClassicMd3TopAppBar', () => {
         onBackToCommand={() => undefined}
       />,
     );
-    expect(screen.getByText('Dr. Pérez')).toBeInTheDocument();
-    expect(screen.getByText('Médico')).toBeInTheDocument();
+    expect(screen.getByText('Ana')).toBeInTheDocument();
+    expect(screen.queryByText('Dr. Pérez')).not.toBeInTheDocument();
+    expect(screen.getByTestId('epis2-nav-ajustes')).toBeInTheDocument();
     expect(screen.queryByText(/Firmar/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/Guardar/i)).not.toBeInTheDocument();
   });

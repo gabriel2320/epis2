@@ -36,8 +36,8 @@ export const epis2M3FormLayout = {
   sectionLabelGap: epis2M3Spacing.row,
   /** 24dp entre bloques relacionados (propósito → primera sección). */
   blockGap: epis2M3Spacing.block,
-  /** 32dp entre secciones principales. */
-  sectionGap: epis2M3Spacing.section,
+  /** 24dp entre secciones principales (ritmo más compacto que 32dp). */
+  sectionGap: epis2M3Spacing.block,
 } as const;
 
 /** Regla 3 — área táctil mínima MD3 (48×48 dp). */

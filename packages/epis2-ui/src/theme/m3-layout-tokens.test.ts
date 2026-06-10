@@ -24,7 +24,7 @@ describe('epis2 M3 layout tokens', () => {
 
   it('ritmo vertical de formulario clínico', () => {
     expect(epis2M3FormLayout.fieldRowGap).toBe(epis2M3Spacing.row);
-    expect(epis2M3FormLayout.sectionGap).toBe(epis2M3Spacing.section);
+    expect(epis2M3FormLayout.sectionGap).toBe(epis2M3Spacing.block);
     expect(epis2M3FormLayout.columns).toBe(12);
     expect(epis2M3FormColumns).toBe(12);
   });

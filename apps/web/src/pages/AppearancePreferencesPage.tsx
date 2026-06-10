@@ -32,7 +32,6 @@ export function AppearancePreferencesPage() {
       <Box sx={{ px: { xs: 3, sm: 4, md: 5 }, py: 3 }}>
         <Box sx={epis2PageIslandSx({ maxWidth: 560, mx: 'auto' })}>
           <Stack spacing={2}>
-            <EpisM3Text role="headlineLarge">{copy.themePreferences.title}</EpisM3Text>
             <EpisM3Text role="bodyMedium" color="text.secondary">
               {copy.themePreferences.pageDescription}
             </EpisM3Text>

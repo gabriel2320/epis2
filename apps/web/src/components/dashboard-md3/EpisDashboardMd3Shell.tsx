@@ -78,7 +78,8 @@ export function EpisDashboardMd3Shell({
             sx={{
               minHeight: 0,
               overflow: 'hidden',
-              display: { xs: 'none', lg: 'block' },
+              display: { xs: 'none', lg: 'flex' },
+              flexDirection: 'column',
             }}
           >
             {detailPane}

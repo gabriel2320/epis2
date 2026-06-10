@@ -1,5 +1,6 @@
 import { copy } from '@epis2/design-system';
 import { EpisButton, Stack, Toolbar, Typography } from '@epis2/epis2-ui';
+import { ClinicalAppBarSettingsAction } from '../../layouts/ClinicalAppBarSettingsAction.js';
 import { EpisModeSwitcher } from '../modes/EpisModeSwitcher.js';
 
 export type EpisDashboardMd3TopBarProps = {
@@ -18,8 +19,8 @@ const FORBIDDEN_ACTIONS = ['firmar', 'aprobar', 'eliminar', 'sign', 'approve', '
 
 /** Top bar dashboard — orientación sin actos clínicos irreversibles. */
 export function EpisDashboardMd3TopBar({
-  clinicianLabel,
-  roleLabel,
+  clinicianLabel: _clinicianLabel,
+  roleLabel: _roleLabel,
   serviceLabel,
   timestampLabel,
   onBackToCommand,
@@ -40,6 +41,8 @@ export function EpisDashboardMd3TopBar({
         borderColor: 'divider',
         bgcolor: 'background.paper',
         gap: 1,
+        flexWrap: 'wrap',
+        rowGap: 1,
       }}
     >
       <Typography variant="subtitle2" fontWeight={700} sx={{ mr: 0.5 }}>
@@ -58,23 +61,14 @@ export function EpisDashboardMd3TopBar({
           onClick={onOpenClassicMode}
           disabled={classicModeDisabled}
           data-testid={`${testId}-classic-mode`}
+          sx={{ display: { xs: 'none', md: 'inline-flex' } }}
         >
           {copy.dashboardMd3.openClassicMode}
         </EpisButton>
       ) : null}
       <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ flex: 1, minWidth: 0 }}>
-        {clinicianLabel ? (
-          <Typography variant="caption" color="text.secondary" noWrap>
-            {clinicianLabel}
-          </Typography>
-        ) : null}
-        {roleLabel ? (
-          <Typography variant="caption" color="text.secondary" noWrap>
-            {roleLabel}
-          </Typography>
-        ) : null}
         {serviceLabel ? (
-          <Typography variant="caption" color="text.secondary" noWrap>
+          <Typography variant="body2" color="text.secondary" noWrap sx={{ maxWidth: 200 }}>
             {serviceLabel}
           </Typography>
         ) : null}
@@ -89,10 +83,16 @@ export function EpisDashboardMd3TopBar({
         </Typography>
       ) : null}
       {onOpenCommandPalette ? (
-        <EpisButton appearance="text" size="small" onClick={onOpenCommandPalette}>
+        <EpisButton
+          appearance="text"
+          size="small"
+          onClick={onOpenCommandPalette}
+          sx={{ display: { xs: 'none', sm: 'inline-flex' } }}
+        >
           {copy.dashboardMd3.commandPalette}
         </EpisButton>
       ) : null}
+      <ClinicalAppBarSettingsAction />
       <EpisModeSwitcher compact />
     </Toolbar>
   );

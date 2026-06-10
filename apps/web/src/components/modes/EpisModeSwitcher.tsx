@@ -1,9 +1,24 @@
 import { copy } from '@epis2/design-system';
-import { EpisButton, EpisDialog, Stack, Typography } from '@epis2/epis2-ui';
+import {
+  AssignmentIcon,
+  DashboardIcon,
+  EpisButton,
+  EpisDialog,
+  Stack,
+  TerminalIcon,
+  Typography,
+} from '@epis2/epis2-ui';
+import type { SvgIconComponent } from '@mui/icons-material';
 import { useState } from 'react';
 import { hasUnsavedClinicalWork } from '../../modes/modeTransitionSafety.js';
 import { EPIS_MODES, type EpisMode } from '../../modes/episModes.js';
 import { useEpisSession } from '../../session/EpisSessionContext.js';
+
+const MODE_META: Record<EpisMode, { label: string; Icon: SvgIconComponent }> = {
+  command: { label: copy.threeModes.commandLabel, Icon: TerminalIcon },
+  classic: { label: copy.threeModes.classicLabel, Icon: AssignmentIcon },
+  dashboard: { label: copy.threeModes.dashboardLabel, Icon: DashboardIcon },
+};
 
 export type EpisModeSwitcherProps = {
   compact?: boolean;
@@ -67,12 +82,8 @@ export function EpisModeSwitcher({
           const active = session.activeMode === mode;
           const reason = disabledReason(mode);
           const disabled = mode !== 'command' && Boolean(reason);
-          const label =
-            mode === 'command'
-              ? copy.threeModes.commandLabel
-              : mode === 'classic'
-                ? copy.threeModes.classicLabel
-                : copy.threeModes.dashboardLabel;
+          const { label, Icon } = MODE_META[mode];
+          const shortLabel = label.split(' ')[0] ?? label;
 
           return (
             <EpisButton
@@ -80,12 +91,17 @@ export function EpisModeSwitcher({
               appearance={active ? 'filled' : 'text'}
               size="small"
               disabled={disabled}
-              title={reason}
+              title={reason ?? label}
               onClick={() => onSelect(mode)}
               data-testid={`${testId}-${mode}`}
-              sx={{ minWidth: compact ? 0 : undefined, px: compact ? 1 : undefined }}
+              startIcon={<Icon fontSize="small" />}
+              sx={{
+                minWidth: compact ? 40 : undefined,
+                px: compact ? { xs: 1, md: 1.5 } : undefined,
+                '& .epis-mode-label': { display: compact ? { xs: 'none', md: 'inline' } : 'inline' },
+              }}
             >
-              {compact ? label.split(' ')[0] : label}
+              <span className="epis-mode-label">{compact ? shortLabel : label}</span>
             </EpisButton>
           );
         })}

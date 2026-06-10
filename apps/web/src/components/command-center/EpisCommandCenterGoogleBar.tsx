@@ -5,7 +5,6 @@ import {
   EpisCommandCenterInlineBar,
   EpisChip,
   EpisCommandResult,
-  EpisM3Text,
   Stack,
 } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
@@ -57,15 +56,6 @@ export function EpisCommandCenterGoogleBar({
 
   return (
     <Stack spacing={2.5} sx={{ width: '100%' }} data-testid="epis2-command-google-bar">
-      <EpisM3Text
-        role="labelMedium"
-        color="text.secondary"
-        sx={{ textAlign: 'center', letterSpacing: 0.4 }}
-        data-testid="epis2-command-google-brand"
-      >
-        {copy.commandCenter.googleBarBrand}
-      </EpisM3Text>
-
       <EpisCommandCenterHero
         role={role}
         permissions={permissions}

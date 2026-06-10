@@ -24,7 +24,7 @@ describe('AppearancePreferencesPage', () => {
     );
 
     expect(screen.getByTestId('epis2-appearance-preferences-page')).toBeInTheDocument();
-    expect(screen.getAllByText(copy.themePreferences.title).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(copy.themePreferences.title)).toHaveLength(1);
     expect(screen.queryByTestId('epis2-accent-calmGreen')).not.toBeInTheDocument();
 
     await user.click(screen.getByTestId('epis2-accent-tealBlue'));

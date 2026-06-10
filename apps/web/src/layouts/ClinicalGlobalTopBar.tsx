@@ -10,6 +10,7 @@ import { Link, useRouterState } from '@tanstack/react-router';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { ClinicalAppBarAlertsAction } from './ClinicalAppBarAlertsAction.js';
+import { ClinicalAppBarSettingsAction } from './ClinicalAppBarSettingsAction.js';
 import { ClinicalAppBarUserMenu } from './ClinicalAppBarUserMenu.js';
 import { ClinicalRoleCareContext } from './ClinicalRoleCareContext.js';
 import { EpisModeSwitcher } from '../components/modes/EpisModeSwitcher.js';
@@ -52,8 +53,13 @@ export function ClinicalGlobalTopBar({ active = 'clinical' }: ClinicalGlobalTopB
             size="small"
             startIcon={<PersonSearchIcon />}
             data-testid="epis2-nav-buscar"
+            sx={{
+              minWidth: { xs: 40, md: 'auto' },
+              px: { xs: 1, md: 1.5 },
+              '& .epis-nav-label': { display: { xs: 'none', lg: 'inline' } },
+            }}
           >
-            {copy.layout.navSearch}
+            <span className="epis-nav-label">{copy.layout.navSearch}</span>
           </EpisButton>
           <EpisButton
             component={Link}
@@ -62,8 +68,13 @@ export function ClinicalGlobalTopBar({ active = 'clinical' }: ClinicalGlobalTopB
             size="small"
             startIcon={<TerminalIcon />}
             data-testid="epis2-nav-comando"
+            sx={{
+              minWidth: { xs: 40, md: 'auto' },
+              px: { xs: 1, md: 1.5 },
+              '& .epis-nav-label': { display: { xs: 'none', lg: 'inline' } },
+            }}
           >
-            {copy.layout.commandShort}
+            <span className="epis-nav-label">{copy.layout.commandShort}</span>
           </EpisButton>
           <EpisButton
             appearance={patientActive ? 'tonal' : 'text'}
@@ -71,9 +82,15 @@ export function ClinicalGlobalTopBar({ active = 'clinical' }: ClinicalGlobalTopB
             startIcon={<PersonOutlineIcon />}
             data-testid="epis2-nav-paciente"
             onClick={openPatient}
+            sx={{
+              minWidth: { xs: 40, md: 'auto' },
+              px: { xs: 1, md: 1.5 },
+              '& .epis-nav-label': { display: { xs: 'none', lg: 'inline' } },
+            }}
           >
-            {copy.layout.navPatient}
+            <span className="epis-nav-label">{copy.layout.navPatient}</span>
           </EpisButton>
+          <ClinicalAppBarSettingsAction />
           <ClinicalAppBarAlertsAction />
           <ClinicalAppBarUserMenu />
         </>

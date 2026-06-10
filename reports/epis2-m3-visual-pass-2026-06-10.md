@@ -14,7 +14,7 @@
 | Fecha | 2026-06-10 |
 | Entorno | local · PostgreSQL 5433 · API 3001 · Web 5173 |
 | V1–V6 | **PASS** (evidencia capturada) |
-| Resultado | **GO DEMO M3** |
+| Resultado | **NO-GO** — revisión humana rechazada (ver `epis2-ux-audit-visual-2026-06-10.md`) |
 
 ---
 
@@ -65,4 +65,5 @@ npm run quality:m3-human-pilot  # E2E assertions V1–V6
 
 ## Próximo paso
 
-Impresión clínica Chile — `docs/design/EPIS2_PRINTABLE_CLINICAL_DOCUMENTS_NORM.md`
+**Re-signoff humano** tras tramo UX-AESTHETIC P1 (`reports/epis2-ux-audit-visual-2026-06-10.md`).  
+Luego: impresión clínica Chile — `docs/design/EPIS2_PRINTABLE_CLINICAL_DOCUMENTS_NORM.md`

@@ -1,5 +1,6 @@
 import { copy } from '@epis2/design-system';
 import { EpisButton, Stack, Toolbar, Typography } from '@epis2/epis2-ui';
+import { ClinicalAppBarSettingsAction } from '../../layouts/ClinicalAppBarSettingsAction.js';
 import { EpisModeSwitcher } from '../modes/EpisModeSwitcher.js';
 
 export type EpisClassicMd3TopAppBarProps = {
@@ -17,9 +18,9 @@ export type EpisClassicMd3TopAppBarProps = {
 /** Top app bar MD3 — orienta, no ejecuta actos clínicos irreversibles. */
 export function EpisClassicMd3TopAppBar({
   patientLabel,
-  clinicianLabel,
-  roleLabel,
-  serviceLabel,
+  clinicianLabel: _clinicianLabel,
+  roleLabel: _roleLabel,
+  serviceLabel: _serviceLabel,
   timestampLabel,
   onBackToCommand,
   onOpenCommandPalette,
@@ -37,33 +38,23 @@ export function EpisClassicMd3TopAppBar({
         borderColor: 'divider',
         bgcolor: 'background.paper',
         gap: 1,
+        flexWrap: 'wrap',
+        rowGap: 1,
       }}
     >
-      <Typography variant="subtitle2" fontWeight={700} sx={{ mr: 1 }}>
+      <Typography variant="subtitle2" fontWeight={700} sx={{ mr: 0.5 }}>
         EPIS2
+      </Typography>
+      <Typography variant="caption" color="text.secondary" sx={{ mr: 0.5 }}>
+        {copy.classicMd3.modeLabel}
       </Typography>
       <EpisButton appearance="text" size="small" onClick={onBackToCommand}>
         {copy.classicMd3.backToCommand}
       </EpisButton>
       <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ flex: 1, minWidth: 0 }}>
         {patientLabel ? (
-          <Typography variant="body2" noWrap sx={{ maxWidth: 180 }}>
+          <Typography variant="body2" fontWeight={600} noWrap sx={{ maxWidth: { xs: 140, md: 240 } }}>
             {patientLabel}
-          </Typography>
-        ) : null}
-        {clinicianLabel ? (
-          <Typography variant="caption" color="text.secondary" noWrap>
-            {clinicianLabel}
-          </Typography>
-        ) : null}
-        {roleLabel ? (
-          <Typography variant="caption" color="text.secondary" noWrap>
-            {roleLabel}
-          </Typography>
-        ) : null}
-        {serviceLabel ? (
-          <Typography variant="caption" color="text.secondary" noWrap>
-            {serviceLabel}
           </Typography>
         ) : null}
       </Stack>
@@ -86,10 +77,16 @@ export function EpisClassicMd3TopAppBar({
         </Typography>
       ) : null}
       {onOpenCommandPalette ? (
-        <EpisButton appearance="text" size="small" onClick={onOpenCommandPalette}>
+        <EpisButton
+          appearance="text"
+          size="small"
+          onClick={onOpenCommandPalette}
+          sx={{ display: { xs: 'none', sm: 'inline-flex' } }}
+        >
           {copy.classicMd3.commandPalette}
         </EpisButton>
       ) : null}
+      <ClinicalAppBarSettingsAction />
       <EpisModeSwitcher compact />
     </Toolbar>
   );

@@ -64,13 +64,16 @@ export function EpisClassicMd3Shell({
         >
           {leftNavigation}
         </Box>
-        <Box sx={{ minHeight: 0, minWidth: 0, overflow: 'hidden' }}>{mainPane}</Box>
+        <Box sx={{ minHeight: 0, minWidth: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+          {mainPane}
+        </Box>
         {supportingPane ? (
           <Box
             sx={{
               minHeight: 0,
               overflow: 'hidden',
-              display: { xs: 'none', lg: 'block' },
+              display: { xs: 'none', lg: 'flex' },
+              flexDirection: 'column',
             }}
           >
             {supportingPane}

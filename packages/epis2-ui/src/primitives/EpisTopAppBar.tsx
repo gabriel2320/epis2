@@ -45,7 +45,9 @@ export function EpisTopAppBar({
           minHeight: epis2BarLayout.inputMinHeight,
           px: epis2BarLayout.toolbarPx,
           py: 1,
-          gap: 1.5,
+          gap: 1,
+          rowGap: 1,
+          flexWrap: 'wrap',
           width: '100%',
         }}
       >
@@ -58,7 +60,18 @@ export function EpisTopAppBar({
           <Box sx={{ flex: 1 }} />
         )}
         {endActions ? (
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 0.75,
+              flexShrink: 0,
+              flexWrap: 'wrap',
+              justifyContent: 'flex-end',
+              maxWidth: { xs: '100%', sm: '72%' },
+              ml: 'auto',
+            }}
+          >
             {endActions}
           </Box>
         ) : null}

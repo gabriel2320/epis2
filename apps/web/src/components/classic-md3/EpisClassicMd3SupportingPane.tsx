@@ -25,13 +25,14 @@ export function EpisClassicMd3SupportingPane({
       sx={{
         width: { md: 340, lg: 360 },
         maxWidth: '100%',
-        flexShrink: 0,
+        flex: 1,
+        minHeight: 0,
+        height: '100%',
         display: { xs: 'none', md: 'flex' },
         flexDirection: 'column',
         borderLeft: 1,
         borderColor: 'divider',
         bgcolor: 'background.default',
-        minHeight: 0,
       }}
     >
       <Stack
