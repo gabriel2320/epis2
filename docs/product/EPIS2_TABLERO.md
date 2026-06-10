@@ -51,7 +51,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 | Prioridad | Hilo / tramo | Gate |
 |-----------|--------------|------|
 | **P1** | Signoff visual conjunto: alto contraste + M3-R (hover/foco/rail/two-pane, claro/oscuro) — `quality:m3-visual-pass` + revisión humana | P1b + M3-R código ✓ |
-| **P1** | **Hilo NORM** (PEND-012) — **Tramo N1 cerrado** ([reporte](../../reports/epis2-norm-n1-quick-wins-2026-06-10.md); 10/16 MF ✓, gates verdes) · siguen N2 (202 envelope error, 203 OTel) → MF-401b axe → N4 móvil/RHF | [`EPIS2_NORMA_FULLSTACK_PLAN.md`](EPIS2_NORMA_FULLSTACK_PLAN.md) · [auditoría](../../reports/epis2-norma-fullstack-compliance-2026-06-10.md) |
+| **P1** | **Hilo NORM** (PEND-012) — **Tramos N1 + N4 cerrados** ([N1](../../reports/epis2-norm-n1-quick-wins-2026-06-10.md) · [N4](../../reports/epis2-norm-n4-ui-a11y-e2e-2026-06-10.md); 13/16 MF ✓, ≈85%) · quedan 203 OTel + 301 OpenAPI (pausadas hasta commit drug-intel — tocan `package-lock.json`) | [`EPIS2_NORMA_FULLSTACK_PLAN.md`](EPIS2_NORMA_FULLSTACK_PLAN.md) · [auditoría](../../reports/epis2-norma-fullstack-compliance-2026-06-10.md) |
 | P1c | Fase 5 auditoría — checklist pre-producción (solo si sale del laboratorio) | [`epis2-auditoria-profunda-2026-06-09.md`](../../reports/epis2-auditoria-profunda-2026-06-09.md) §7 |
 | P2 | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | P3 | Backlog Ola 2+ | Nota procedimiento clínica (PEND-002 defer) |

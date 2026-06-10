@@ -67,7 +67,7 @@ La sección peor evaluada (§11 🔴). Orden: 201 → 202 → 203.
 | **MF-NORM-403** ✓ | Drawer móvil: bajo breakpoint medium (<768px) `EpisAppShellLayout` colapsa el rail a `EpisMobileNavDrawer` (Drawer modal MD3, mismos items/data-testid del rail, trigger «Abrir navegación» junto al app bar); sin tocar registries; story + unit jsdom (matchMedia stub) + e2e viewport 390px (`test:e2e:mobile`, incluido en `test:e2e`) | `packages/epis2-ui/src/clinical/**`, stories, `e2e/mobile-drawer.spec.ts`, `package.json` | e2e 390px 2/2 ✓ + `quality:three-modes-gate` ✓ + `npm run check` ✓ |
 | **MF-NORM-404** ✓ | Mapeo server→field errors en RHF: `applyServerFieldErrors` mapea `details` del envelope (paths Zod, p. ej. `body.<fieldId>`) a `setError(type: 'server')`; cableado en `useGeneratedFormDraftPersistence` (si aplica a campos, muestra «corrige los campos» en vez del error global); API emite `details` en 400 de create/update draft | `apps/web/src/clinical/applyServerFieldErrors.ts`, `generated-form/useGeneratedFormDraftPersistence.ts`, `GeneratedClinicalFormPage.tsx`, `apps/api/src/clinical/routes.ts` | 3 unit de mapeo ✓ + integración 400 con `details.path=patientId` ✓ |
 
-**Cierre N4:** reporte + re-auditoría §4/§5/§10.
+**Cierre N4:** ✓ [`reports/epis2-norm-n4-ui-a11y-e2e-2026-06-10.md`](../../reports/epis2-norm-n4-ui-a11y-e2e-2026-06-10.md) — re-auditoría §4 🟢 · §5 🟢 · §10 🟢/🟡; cumplimiento ≈85% (≥90% requiere 203 + 301, en pausa por trabajo paralelo).
 
 ---
 
