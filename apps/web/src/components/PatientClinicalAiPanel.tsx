@@ -1,15 +1,7 @@
 import type { AiRunRow, RagQueryResponse, AiSummarySuggestResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import { useCallback, useEffect, useState } from 'react';
-import {
-  Alert,
-  Box,
-  Button,
-  Chip,
-  Stack,
-  TextField,
-  Typography,
-} from '@epis2/epis2-ui';
+import { Alert, Box, Button, Chip, Stack, TextField, Typography } from '@epis2/epis2-ui';
 import {
   fetchAiRuns,
   fetchAiStatus,
@@ -88,36 +80,51 @@ export function PatientClinicalAiPanel({ patientId }: PatientClinicalAiPanelProp
       {error ? <Alert severity="error">{error}</Alert> : null}
 
       <Box>
-          <Typography variant="body2" gutterBottom>
-            {copy.ai.ragTitle}
-          </Typography>
-          <TextField
-            fullWidth
-            size="small"
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            placeholder={copy.ai.ragPlaceholder}
-          />
-          <Button size="small" sx={{ mt: 1 }} variant="outlined" disabled={loading} onClick={() => void runRag()}>
-            {copy.ai.ragSubmit}
-          </Button>
-          {ragResult ? (
-            <Box sx={{ mt: 1 }}>
-              <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap' }}>
-                {ragResult.answer}
+        <Typography variant="body2" gutterBottom>
+          {copy.ai.ragTitle}
+        </Typography>
+        <TextField
+          fullWidth
+          size="small"
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+          placeholder={copy.ai.ragPlaceholder}
+        />
+        <Button
+          size="small"
+          sx={{ mt: 1 }}
+          variant="outlined"
+          disabled={loading}
+          onClick={() => void runRag()}
+        >
+          {copy.ai.ragSubmit}
+        </Button>
+        {ragResult ? (
+          <Box sx={{ mt: 1 }}>
+            <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap' }}>
+              {ragResult.answer}
+            </Typography>
+            {ragResult.citations.length > 0 ? (
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                display="block"
+                sx={{ mt: 1, lineHeight: 1.55 }}
+              >
+                {copy.ai.citations}: {ragResult.citations.map((c) => c.title).join(' · ')}
               </Typography>
-              {ragResult.citations.length > 0 ? (
-                <Typography variant="body2" color="text.secondary" display="block" sx={{ mt: 1, lineHeight: 1.55 }}>
-                  {copy.ai.citations}:{' '}
-                  {ragResult.citations.map((c) => c.title).join(' · ')}
-                </Typography>
-              ) : null}
-            </Box>
-          ) : null}
+            ) : null}
+          </Box>
+        ) : null}
       </Box>
 
       <Box>
-        <Button size="small" variant="outlined" disabled={loading} onClick={() => void runSummary()}>
+        <Button
+          size="small"
+          variant="outlined"
+          disabled={loading}
+          onClick={() => void runSummary()}
+        >
           {copy.ai.summary24h}
         </Button>
         {summaryResult ? (
@@ -133,7 +140,12 @@ export function PatientClinicalAiPanel({ patientId }: PatientClinicalAiPanelProp
             {copy.ai.recentRuns}
           </Typography>
           {runs.map((r) => (
-            <Typography key={r.id} variant="caption" display="block" sx={{ fontFamily: 'monospace' }}>
+            <Typography
+              key={r.id}
+              variant="caption"
+              display="block"
+              sx={{ fontFamily: 'monospace' }}
+            >
               {new Date(r.createdAt).toLocaleString('es-CL')} · {r.blueprintId} · {r.status}
             </Typography>
           ))}

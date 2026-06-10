@@ -113,7 +113,11 @@ export function EpisClinicalTwoPaneLayout({
           </Drawer>
         ) : null}
       </Box>
-      <Box component="footer" sx={epis2ClinicalTwoPaneFooterSx} data-testid="epis2-clinical-two-pane-footer">
+      <Box
+        component="footer"
+        sx={epis2ClinicalTwoPaneFooterSx}
+        data-testid="epis2-clinical-two-pane-footer"
+      >
         {footer}
       </Box>
     </Stack>

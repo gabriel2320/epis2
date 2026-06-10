@@ -30,10 +30,7 @@ for (const rel of [
 }
 
 // El CTA de impresión es genérico y se alimenta del registry PRINTABLE_BLUEPRINTS.
-const form = readFileSync(
-  join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'),
-  'utf8',
-);
+const form = readFileSync(join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'), 'utf8');
 if (!form.includes('PRINTABLE_BLUEPRINTS') || !form.includes('epis2-print-preview-')) {
   errors.push('GeneratedClinicalFormPage sin CTA de impresión basado en PRINTABLE_BLUEPRINTS');
 }
@@ -78,7 +75,10 @@ if (!e2eLetter.includes('epis2-print-letter-document')) {
 }
 
 const e2eOrders = readFileSync(join(root, 'e2e/ola6a-print-orders.spec.ts'), 'utf8');
-if (!e2eOrders.includes('epis2-lab-request-print-page') || !e2eOrders.includes('epis2-imaging-request-print-page')) {
+if (
+  !e2eOrders.includes('epis2-lab-request-print-page') ||
+  !e2eOrders.includes('epis2-imaging-request-print-page')
+) {
   errors.push('e2e ola6a órdenes sin vistas lab/imagen');
 }
 

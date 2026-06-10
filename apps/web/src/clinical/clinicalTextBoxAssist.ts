@@ -5,10 +5,13 @@ import { apiFetch } from '../api/client.js';
 import { requestTextboxAssist } from '../api/aiApi.js';
 
 export const episClinicalSpellcheckAdapter = createEpisSpellcheckAdapter(async (text) =>
-  apiFetch<{ issues: { token: string; suggestions: string[] }[] }>('/api/clinical/text-spellcheck', {
-    method: 'POST',
-    body: JSON.stringify({ text }),
-  }),
+  apiFetch<{ issues: { token: string; suggestions: string[] }[] }>(
+    '/api/clinical/text-spellcheck',
+    {
+      method: 'POST',
+      body: JSON.stringify({ text }),
+    },
+  ),
 );
 
 export async function requestClinicalTextboxAiAssist(

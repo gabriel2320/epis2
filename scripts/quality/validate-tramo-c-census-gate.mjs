@@ -15,11 +15,12 @@ if (!panel.includes('epis2-longitudinal-open-service-census')) {
   errors.push('PatientLongitudinalPanel sin CTA censo servicio');
 }
 
-const service = readFileSync(
-  join(root, 'apps/web/src/components/ServiceDashboardTab.tsx'),
-  'utf8',
-);
-for (const token of ['epis2-service-census', 'epis2-service-census-occupied', 'copy.inpatient.census']) {
+const service = readFileSync(join(root, 'apps/web/src/components/ServiceDashboardTab.tsx'), 'utf8');
+for (const token of [
+  'epis2-service-census',
+  'epis2-service-census-occupied',
+  'copy.inpatient.census',
+]) {
   if (!service.includes(token)) errors.push(`ServiceDashboardTab sin ${token}`);
 }
 

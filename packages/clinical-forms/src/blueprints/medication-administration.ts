@@ -27,12 +27,7 @@ export const medicationAdministrationBlueprint = defineBlueprint({
     field('route', 'Vía', 'text', { required: true, columnSpan: 3 }),
     field('scheduledTime', 'Hora programada', 'text', { columnSpan: 3 }),
     field('administeredAt', 'Hora de administración', 'text', { columnSpan: 3 }),
-    field(
-      'doubleCheckConfirmed',
-      'Doble chequeo confirmado (alto riesgo)',
-      'checkbox',
-      false,
-    ),
+    field('doubleCheckConfirmed', 'Doble chequeo confirmado (alto riesgo)', 'checkbox', false),
     field('administrationNotes', 'Notas de administración', 'textarea', false),
   ],
   validations: [

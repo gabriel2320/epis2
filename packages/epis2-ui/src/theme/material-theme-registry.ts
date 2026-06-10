@@ -1,4 +1,7 @@
-import type { Epis2ApprovedThemeId, Epis2MaterialColorScheme } from './contracts/material-color-scheme.js';
+import type {
+  Epis2ApprovedThemeId,
+  Epis2MaterialColorScheme,
+} from './contracts/material-color-scheme.js';
 import type { Epis2Accent } from './color-roles.js';
 import {
   calmTealDarkScheme,

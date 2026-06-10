@@ -9,10 +9,7 @@
 import { spawnSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import {
-  formatVelocityBanner,
-  resolveVelocityContext,
-} from './velocity-lib.mjs';
+import { formatVelocityBanner, resolveVelocityContext } from './velocity-lib.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const args = process.argv.slice(2);
@@ -41,6 +38,8 @@ if (refresh) {
 const ctx = resolveVelocityContext(root, { tramo });
 console.log(formatVelocityBanner(ctx));
 console.log('\nGates sugeridos al cerrar:');
-console.log(`  npm run dev:velocity:gates -- --subagent ${ctx.subagent}${tramo ? ` --tramo ${tramo}` : ''}`);
+console.log(
+  `  npm run dev:velocity:gates -- --subagent ${ctx.subagent}${tramo ? ` --tramo ${tramo}` : ''}`,
+);
 console.log('\nPre-PR (opcional):');
 console.log('  EPIS2_LOCAL_CI_E2E=1 npm run quality:local-ci');

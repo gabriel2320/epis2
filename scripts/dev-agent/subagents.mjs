@@ -18,7 +18,12 @@ export const DEV_SUBAGENTS = {
   'layers-integrator': {
     id: 'layers-integrator',
     title: 'Integrador capas L3+L4+L5',
-    triggers: ['MF-RAD-M3', 'MF-CLINICAL-PRODUCTIVITY', 'dashboard tab', 'EpisRadDashboardTabShell'],
+    triggers: [
+      'MF-RAD-M3',
+      'MF-CLINICAL-PRODUCTIVITY',
+      'dashboard tab',
+      'EpisRadDashboardTabShell',
+    ],
     gates: ['quality:layers-integration-gate', 'quality:ui-simplify-gate'],
     canon: ['docs/product/EPIS2_UI_LAYERS.md', 'docs/product/EPIS2_GLOBAL_DEV_PLAN.md'],
   },
@@ -41,7 +46,10 @@ export const DEV_SUBAGENTS = {
     title: 'IA clínica local (Ollama producto)',
     triggers: ['assist', 'blueprint', 'local-ai', 'RAG'],
     gates: ['quality:ollama-structured-output-gate', 'npm run ai:evals:live'],
-    canon: ['docs/intelligence/EPIS2_OLLAMA_CAPABILITY_PLAN.md', 'docs/product/EPIS2_AI_TRAMO_EVALS.md'],
+    canon: [
+      'docs/intelligence/EPIS2_OLLAMA_CAPABILITY_PLAN.md',
+      'docs/product/EPIS2_AI_TRAMO_EVALS.md',
+    ],
   },
   'ollama-dev-writer': {
     id: 'ollama-dev-writer',
@@ -79,8 +87,20 @@ export const DEV_SUBAGENTS = {
 /** Secuencia recomendada según fase activa del plan global. */
 export const PHASE_SUBAGENT_SEQUENCE = {
   A: ['layers-integrator', 'm3-guardian', 'gate-runner'],
-  B: ['layers-integrator', 'ollama-dev-writer', 'ollama-clinical', 'golden-guardian', 'gate-runner'],
-  tramo: ['tramo-implementer', 'ollama-clinical', 'golden-guardian', 'gate-runner', 'ledger-keeper'],
+  B: [
+    'layers-integrator',
+    'ollama-dev-writer',
+    'ollama-clinical',
+    'golden-guardian',
+    'gate-runner',
+  ],
+  tramo: [
+    'tramo-implementer',
+    'ollama-clinical',
+    'golden-guardian',
+    'gate-runner',
+    'ledger-keeper',
+  ],
   default: ['gate-runner', 'ci-parity', 'ledger-keeper'],
 };
 

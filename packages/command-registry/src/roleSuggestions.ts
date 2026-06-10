@@ -57,11 +57,7 @@ export const ROLE_COMMAND_INTENTS: Record<ClinicalRole, readonly ClinicalIntent[
     'open_dashboard_service',
     'search_patient',
   ],
-  auditor: [
-    'open_dashboard_quality',
-    'open_dashboard',
-    'open_dashboard_work',
-  ],
+  auditor: ['open_dashboard_quality', 'open_dashboard', 'open_dashboard_work'],
 };
 
 export type RoleAiCommandHint = {
@@ -85,12 +81,8 @@ export const ROLE_AI_COMMAND_HINTS: Record<ClinicalRole, readonly RoleAiCommandH
     { sampleEs: 'validacion farmaceutica', captionEs: 'Validación farmacéutica' },
     { sampleEs: 'preparar receta médica', captionEs: 'Revisión de receta (CDS)' },
   ],
-  admin: [
-    { sampleEs: 'tablero de calidad', captionEs: 'Auditoría y ops' },
-  ],
-  auditor: [
-    { sampleEs: 'tablero de calidad', captionEs: 'Auditoría del sistema' },
-  ],
+  admin: [{ sampleEs: 'tablero de calidad', captionEs: 'Auditoría y ops' }],
+  auditor: [{ sampleEs: 'tablero de calidad', captionEs: 'Auditoría del sistema' }],
 };
 
 export function isClinicalRole(value: string): value is ClinicalRole {
@@ -105,10 +97,7 @@ export function getRoleAiCommandHints(
   return ROLE_AI_COMMAND_HINTS[role];
 }
 
-export function filterDefinitionsForRole(
-  role: string,
-  permissions: readonly string[],
-) {
+export function filterDefinitionsForRole(role: string, permissions: readonly string[]) {
   const allowed = isClinicalRole(role) ? new Set(ROLE_COMMAND_INTENTS[role]) : null;
   return EPIS2_COMMAND_DEFINITIONS.filter((def) => {
     if (!permissions.includes(def.requiredPermission)) return false;

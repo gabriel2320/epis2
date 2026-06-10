@@ -21,7 +21,9 @@ export function ClinicalSemanticSearchBox({
   disabled = false,
   testId = 'epis2-clinical-semantic-search',
 }: ClinicalSemanticSearchBoxProps) {
-  const hints = findClinicalTerms(value, 3).map((t) => t.term).join(', ');
+  const hints = findClinicalTerms(value, 3)
+    .map((t) => t.term)
+    .join(', ');
 
   return (
     <EpisTextField

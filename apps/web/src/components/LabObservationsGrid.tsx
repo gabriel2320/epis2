@@ -23,7 +23,12 @@ export function LabObservationsGrid({
   const columns = useMemo<GridColDef[]>(
     () => [
       { field: 'label', headerName: copy.longitudinal.gridColumnLabTest, flex: 1, minWidth: 140 },
-      { field: 'valueText', headerName: copy.longitudinal.gridColumnLabValue, flex: 1, minWidth: 120 },
+      {
+        field: 'valueText',
+        headerName: copy.longitudinal.gridColumnLabValue,
+        flex: 1,
+        minWidth: 120,
+      },
       ...(showOrderTrace
         ? [
             {
@@ -40,8 +45,7 @@ export function LabObservationsGrid({
         field: 'observedAt',
         headerName: copy.longitudinal.gridColumnLabDate,
         width: 170,
-        valueFormatter: (value) =>
-          value ? new Date(String(value)).toLocaleString('es-CL') : '',
+        valueFormatter: (value) => (value ? new Date(String(value)).toLocaleString('es-CL') : ''),
       },
     ],
     [showOrderTrace],

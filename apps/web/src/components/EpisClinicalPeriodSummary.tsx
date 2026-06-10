@@ -47,7 +47,9 @@ export function EpisClinicalPeriodSummary({ patientId }: EpisClinicalPeriodSumma
         onClick={() => void loadSummary()}
         data-testid="epis2-period-summary-action"
       >
-        {loading ? copy.clinicalLayout.periodSummaryLoading : copy.clinicalLayout.periodSummaryAction}
+        {loading
+          ? copy.clinicalLayout.periodSummaryLoading
+          : copy.clinicalLayout.periodSummaryAction}
       </EpisButton>
       {error ? (
         <Typography variant="body2" color="error">
@@ -60,7 +62,12 @@ export function EpisClinicalPeriodSummary({ patientId }: EpisClinicalPeriodSumma
           onChange={(_, open) => setExpanded(open)}
           disableGutters
           elevation={0}
-          sx={{ border: 1, borderColor: 'divider', borderRadius: 1, '&:before': { display: 'none' } }}
+          sx={{
+            border: 1,
+            borderColor: 'divider',
+            borderRadius: 1,
+            '&:before': { display: 'none' },
+          }}
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon fontSize="small" />}>
             <Typography variant="body2">{copy.clinicalLayout.periodSummaryTitle}</Typography>

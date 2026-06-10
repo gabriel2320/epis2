@@ -1,12 +1,6 @@
 import type { CommandResolveResponse as CommandResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import {
-  Box,
-  EpisButton,
-  EpisDialog,
-  EpisM3Text,
-  Stack,
-} from '@epis2/epis2-ui';
+import { Box, EpisButton, EpisDialog, EpisM3Text, Stack } from '@epis2/epis2-ui';
 
 type CommandConfirmationDialogProps = {
   pending: Extract<CommandResponse, { status: 'needs_confirmation' }> | null;
@@ -40,11 +34,7 @@ export function CommandConfirmationDialog({
         ) : null}
         <Stack direction="row" spacing={1} justifyContent="flex-end" sx={{ mt: 2.5 }}>
           <EpisButton onClick={onCancel}>{copy.commandCenter.needsConfirmationCancel}</EpisButton>
-          <EpisButton
-            variant="contained"
-            onClick={onConfirm}
-            data-testid="epis2-command-confirm"
-          >
+          <EpisButton variant="contained" onClick={onConfirm} data-testid="epis2-command-confirm">
             {copy.commandCenter.needsConfirmationConfirm}
           </EpisButton>
         </Stack>

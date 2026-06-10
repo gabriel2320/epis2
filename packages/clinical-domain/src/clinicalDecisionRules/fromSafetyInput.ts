@@ -69,9 +69,7 @@ export function buildCdrContextFromSafetyInput(
   }
 
   const actionId = mapBlueprintToCdrActionId(options?.blueprintId);
-  const mode =
-    options?.mode ??
-    (options?.blueprintId === 'discharge_summary' ? 'sign' : 'commit');
+  const mode = options?.mode ?? (options?.blueprintId === 'discharge_summary' ? 'sign' : 'commit');
 
   return {
     actionId,

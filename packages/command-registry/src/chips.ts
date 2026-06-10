@@ -55,7 +55,9 @@ export function getCommandChipsForRole(
     }));
 
   const dashboard = defs
-    .filter((d) => d.requiredPermission === 'dashboard.read' || d.requiredPermission === 'audit.read')
+    .filter(
+      (d) => d.requiredPermission === 'dashboard.read' || d.requiredPermission === 'audit.read',
+    )
     .slice(0, 3)
     .map((def) => ({
       id: def.intent,

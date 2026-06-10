@@ -6,7 +6,10 @@ import { useActivePatient } from '../../clinical/ActivePatientContext.js';
 import { useClinicalNavigate } from '../../routes/clinicalNavigate.js';
 import { useEpisSession } from '../../session/EpisSessionContext.js';
 import { useAiStatusQuery } from '../../query/hooks/useAiStatusQuery.js';
-import { resolvePatientChartTabId, type PatientChartTabId } from '../../clinical/patientChartNavigation.js';
+import {
+  resolvePatientChartTabId,
+  type PatientChartTabId,
+} from '../../clinical/patientChartNavigation.js';
 import {
   CLASSIC_ACTION_RAIL_DESTINATIONS,
   CLASSIC_LEFT_NAV_DESTINATIONS,

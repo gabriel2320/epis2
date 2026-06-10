@@ -59,7 +59,11 @@ export const EPIS_SCREEN_REGISTRY: Record<
   {
     kind: EpisScreenKind;
     route: string;
-    scaffold: 'EpisAppScaffold' | 'EpisClinicalWorkspaceShell' | 'EpisClassicMd3Shell' | 'EpisDashboardMd3Shell';
+    scaffold:
+      | 'EpisAppScaffold'
+      | 'EpisClinicalWorkspaceShell'
+      | 'EpisClassicMd3Shell'
+      | 'EpisDashboardMd3Shell';
   }
 > = {
   command: {

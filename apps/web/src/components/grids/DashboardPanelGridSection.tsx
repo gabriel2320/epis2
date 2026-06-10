@@ -41,10 +41,7 @@ export function DashboardPanelGridSection({
 }: DashboardPanelGridSectionProps) {
   const message = emptyFallback ?? copy.longitudinal.emptySection;
   const columns: ClinicalGridColDef[] = titleHeader
-    ? [
-        { ...titleColumn, headerName: titleHeader },
-        detailColumn,
-      ]
+    ? [{ ...titleColumn, headerName: titleHeader }, detailColumn]
     : [titleColumn, detailColumn];
 
   return (

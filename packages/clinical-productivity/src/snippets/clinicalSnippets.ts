@@ -62,7 +62,10 @@ export const CLINICAL_SNIPPETS: readonly ClinicalSnippetDef[] = [
   },
 ];
 
-export function expandClinicalSnippet(text: string): { expanded: string; snippet?: ClinicalSnippetDef } {
+export function expandClinicalSnippet(text: string): {
+  expanded: string;
+  snippet?: ClinicalSnippetDef;
+} {
   const trimmed = text.trimEnd();
   const hit = CLINICAL_SNIPPETS.find((s) => trimmed.endsWith(s.trigger));
   if (!hit) return { expanded: text };

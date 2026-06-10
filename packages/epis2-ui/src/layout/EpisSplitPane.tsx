@@ -34,7 +34,10 @@ export function EpisSplitPane({
 
   if (!isMedium) {
     return (
-      <Box data-testid={testId} sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%' }}>
+      <Box
+        data-testid={testId}
+        sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%' }}
+      >
         {primary}
         {secondary}
       </Box>

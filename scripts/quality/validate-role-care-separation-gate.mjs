@@ -7,7 +7,10 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
-const matrix = readFileSync(join(root, 'apps/web/src/navigation/clinicalRoleCareMatrix.ts'), 'utf8');
+const matrix = readFileSync(
+  join(root, 'apps/web/src/navigation/clinicalRoleCareMatrix.ts'),
+  'utf8',
+);
 const roles = readFileSync(join(root, 'packages/clinical-domain/src/roles.ts'), 'utf8');
 const auth = readFileSync(join(root, 'packages/contracts/src/auth.ts'), 'utf8');
 const copy = readFileSync(join(root, 'packages/design-system/src/copy/es.ts'), 'utf8');

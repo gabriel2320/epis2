@@ -12,7 +12,11 @@ import { epis2Shape, epis2ShapeBorderRadius } from './shape.js';
 import { epis2StateLayerOpacity } from './motion.js';
 import { hexWithAlpha } from './color-alpha.js';
 import { epis2Typography, epis2TypographyRoles } from './typography.js';
-import { buildEpis2Shadows, buildVisualIdentity, type Epis2VisualIdentity } from './visual-identity.js';
+import {
+  buildEpis2Shadows,
+  buildVisualIdentity,
+  type Epis2VisualIdentity,
+} from './visual-identity.js';
 import { createTheme, type Theme } from '@mui/material/styles';
 import { esES } from '@mui/material/locale';
 

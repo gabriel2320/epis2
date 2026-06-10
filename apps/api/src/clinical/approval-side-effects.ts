@@ -1,12 +1,7 @@
 import { formatSurgicalHistoryDescription } from '@epis2/clinical-domain';
 import { and, eq } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
-import {
-  encounters,
-  marAdministrationRecords,
-  patientAllergies,
-  problems,
-} from '../db/schema.js';
+import { encounters, marAdministrationRecords, patientAllergies, problems } from '../db/schema.js';
 import { appendAudit } from '../audit/store.js';
 import {
   createInpatientAdmission,
@@ -67,7 +62,9 @@ async function clinicalProblemEntry(tx: Database, { draft, actor }: ApprovalSide
   let description = typeof body.description === 'string' ? body.description.trim() : draft.title;
   const status = typeof body.status === 'string' ? body.status : 'active';
   const category =
-    typeof body.problemCategory === 'string' ? body.problemCategory.split('|')[0] : 'active_problem';
+    typeof body.problemCategory === 'string'
+      ? body.problemCategory.split('|')[0]
+      : 'active_problem';
   if (category === 'surgical_history' && description) {
     description = formatSurgicalHistoryDescription(description);
   }

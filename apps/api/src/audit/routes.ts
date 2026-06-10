@@ -12,16 +12,12 @@ export async function registerAuditRoutes(
 ) {
   const requireAuditRead = createRequirePermission(config, 'audit.read');
 
-  app.get(
-    '/api/audit/events',
-    { preHandler: requireAuditRead },
-    async (request) => {
-      const limit = Math.min(
-        200,
-        Math.max(1, Number((request.query as { limit?: string }).limit) || 50),
-      );
-      const events = await listRecentAuditEvents(db, limit);
-      return auditEventsResponseSchema.parse({ readOnly: true as const, events });
-    },
-  );
+  app.get('/api/audit/events', { preHandler: requireAuditRead }, async (request) => {
+    const limit = Math.min(
+      200,
+      Math.max(1, Number((request.query as { limit?: string }).limit) || 50),
+    );
+    const events = await listRecentAuditEvents(db, limit);
+    return auditEventsResponseSchema.parse({ readOnly: true as const, events });
+  });
 }

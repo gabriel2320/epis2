@@ -54,10 +54,7 @@ export function IcuDashboardTab({
     [data.criticalBeds],
   );
 
-  const bedById = useMemo(
-    () => new Map(bedRows.map((row) => [row.id, row])),
-    [bedRows],
-  );
+  const bedById = useMemo(() => new Map(bedRows.map((row) => [row.id, row])), [bedRows]);
 
   const handleBedRowClick = useCallback(
     (row: EpisDataGridRow) => {

@@ -65,7 +65,13 @@ export function validateRut(input: string): RutValidationResult {
   const body = cleaned.slice(0, -1).replace(/^0+/, '') || '0';
 
   if (!/^\d+$/.test(body)) {
-    return { valid: false, normalized: null, body: null, verifier: null, error: 'Cuerpo RUT inválido' };
+    return {
+      valid: false,
+      normalized: null,
+      body: null,
+      verifier: null,
+      error: 'Cuerpo RUT inválido',
+    };
   }
 
   if (body.length < 7 || body.length > 8) {

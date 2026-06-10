@@ -15,10 +15,7 @@ if (!panel.includes('epis2-longitudinal-open-nursing-mar')) {
   errors.push('PatientLongitudinalPanel sin CTA bandeja MAR');
 }
 
-const nursing = readFileSync(
-  join(root, 'apps/web/src/components/NursingDashboardTab.tsx'),
-  'utf8',
-);
+const nursing = readFileSync(join(root, 'apps/web/src/components/NursingDashboardTab.tsx'), 'utf8');
 if (!nursing.includes('epis2-nursing-register-mar-')) {
   errors.push('NursingDashboardTab sin CTA registrar MAR');
 }

@@ -1,5 +1,9 @@
 import { WIDGET_CONTEXT_REQUIREMENTS } from '../contracts/widget-context.js';
-import { WIDGET_ACTION_KINDS, WIDGET_CATEGORIES, type WidgetDefinition } from '../contracts/widget-definition.js';
+import {
+  WIDGET_ACTION_KINDS,
+  WIDGET_CATEGORIES,
+  type WidgetDefinition,
+} from '../contracts/widget-definition.js';
 import { WIDGET_STATE_KINDS } from '../contracts/widget-state.js';
 
 /** Palabras inglesas prohibidas en copy visible (no coincidir con español legítimo). */
@@ -73,7 +77,11 @@ export function validateWidgetDefinition(widget: WidgetDefinition): WidgetGateRe
     details.push(`${widget.id}: términos técnicos en copy visible`);
   }
 
-  if (widget.dataSource === 'api' && widget.aiMode !== 'none' && widget.aiMode !== 'optional-offline') {
+  if (
+    widget.dataSource === 'api' &&
+    widget.aiMode !== 'none' &&
+    widget.aiMode !== 'optional-offline'
+  ) {
     details.push(`${widget.id}: widget IA debe soportar optional-offline`);
   }
 

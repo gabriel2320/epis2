@@ -1,10 +1,5 @@
 import { copy } from '@epis2/design-system';
-import {
-  EpisButton,
-  Stack,
-  Toolbar,
-  Typography,
-} from '@epis2/epis2-ui';
+import { EpisButton, Stack, Toolbar, Typography } from '@epis2/epis2-ui';
 import { EpisModeSwitcher } from '../modes/EpisModeSwitcher.js';
 
 export type EpisClassicMd3TopAppBarProps = {
@@ -73,12 +68,20 @@ export function EpisClassicMd3TopAppBar({
         ) : null}
       </Stack>
       {timestampLabel ? (
-        <Typography variant="caption" color="text.secondary" sx={{ display: { xs: 'none', md: 'block' } }}>
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          sx={{ display: { xs: 'none', md: 'block' } }}
+        >
           {timestampLabel}
         </Typography>
       ) : null}
       {connectivityLabel ? (
-        <Typography variant="caption" color="text.secondary" sx={{ display: { xs: 'none', lg: 'block' } }}>
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          sx={{ display: { xs: 'none', lg: 'block' } }}
+        >
           {connectivityLabel}
         </Typography>
       ) : null}

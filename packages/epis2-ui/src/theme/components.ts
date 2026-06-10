@@ -42,7 +42,14 @@ export function buildEpis2Components(
       defaultProps: { disableElevation: true },
       styleOverrides: {
         root: ({ theme }) => {
-          const containedColors = ['primary', 'secondary', 'error', 'warning', 'info', 'success'] as const;
+          const containedColors = [
+            'primary',
+            'secondary',
+            'error',
+            'warning',
+            'info',
+            'success',
+          ] as const;
           const containedContrastRules = Object.fromEntries(
             containedColors
               .filter((color) => theme.palette[color]?.main && theme.palette[color]?.contrastText)
@@ -100,14 +107,20 @@ export function buildEpis2Components(
           color: theme.palette.primary.contrastText,
           backgroundColor: theme.palette.primary.main,
           '&:hover': {
-            backgroundColor: epis2StateLayer(theme.palette.primary.main, theme.palette.primary.contrastText),
+            backgroundColor: epis2StateLayer(
+              theme.palette.primary.main,
+              theme.palette.primary.contrastText,
+            ),
             color: theme.palette.primary.contrastText,
           },
           '&.MuiFab-secondary': {
             color: theme.palette.secondary.contrastText,
             backgroundColor: theme.palette.secondary.main,
             '&:hover': {
-              backgroundColor: epis2StateLayer(theme.palette.secondary.main, theme.palette.secondary.contrastText),
+              backgroundColor: epis2StateLayer(
+                theme.palette.secondary.main,
+                theme.palette.secondary.contrastText,
+              ),
               color: theme.palette.secondary.contrastText,
             },
           },
@@ -115,7 +128,10 @@ export function buildEpis2Components(
             color: theme.palette.error.contrastText,
             backgroundColor: theme.palette.error.main,
             '&:hover': {
-              backgroundColor: epis2StateLayer(theme.palette.error.main, theme.palette.error.contrastText),
+              backgroundColor: epis2StateLayer(
+                theme.palette.error.main,
+                theme.palette.error.contrastText,
+              ),
               color: theme.palette.error.contrastText,
             },
           },

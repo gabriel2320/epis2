@@ -53,9 +53,7 @@ export function sanitizeAssistRouteHint(
   if (!isClinicalRole(role)) return null;
   if (raw.confidence < ASSIST_ROUTE_MIN_CONFIDENCE) return null;
 
-  const allowed = new Set(
-    listAssistRouteIntentsForRole(role).map((entry) => entry.intent),
-  );
+  const allowed = new Set(listAssistRouteIntentsForRole(role).map((entry) => entry.intent));
   if (allowed.size === 0) return null;
 
   const suggestedCandidates: ClinicalIntent[] = [];

@@ -45,7 +45,7 @@ const pageSrc = readFileSync(formPage, 'utf8');
 if (!pageSrc.includes('epis2ClinicalFormContentMaxWidthSx')) {
   errors.push('GeneratedClinicalFormPage sin token responsive de encuadre');
 }
-if (pageSrc.includes('maxWidth: contextOpen ? \'100%\' : 640')) {
+if (pageSrc.includes("maxWidth: contextOpen ? '100%' : 640")) {
   errors.push('GeneratedClinicalFormPage aún usa maxWidth 640px fijo');
 }
 

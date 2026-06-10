@@ -16,7 +16,8 @@ for (const tramo of ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K']) {
 }
 if (!text.includes('quality:golden-journey')) errors.push('checklist sin golden-journey');
 if (!text.includes('ai:evals:closure')) errors.push('checklist sin ai:evals:closure');
-if (!text.includes('quality:tramo-k-closure-gate')) errors.push('checklist sin tramo-k-closure-gate');
+if (!text.includes('quality:tramo-k-closure-gate'))
+  errors.push('checklist sin tramo-k-closure-gate');
 if (!text.includes('Tramos A–K')) errors.push('checklist sin alcance A–K');
 
 const master = readFileSync(join(root, 'docs/product/EPIS2_TRAMOS_EXECUTION_MASTER.md'), 'utf8');
@@ -30,7 +31,9 @@ if (!pkg.includes('"quality:tramos-clinical-signoff-gate"')) {
 }
 
 if (errors.length) {
-  console.error('tramos-clinical-signoff-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
+  console.error(
+    'tramos-clinical-signoff-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
+  );
   process.exit(1);
 }
 console.log('tramos-clinical-signoff-gate OK — checklist signoff A–K documentado');

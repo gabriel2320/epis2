@@ -1,9 +1,4 @@
-import type {
-  ClinicalFormBlueprint,
-  FormField,
-  FormFieldType,
-  FormSection,
-} from './types.js';
+import type { ClinicalFormBlueprint, FormField, FormFieldType, FormSection } from './types.js';
 
 type BlueprintInput = Omit<ClinicalFormBlueprint, 'aiAssistMode' | 'approvalRequired'> & {
   aiAssistMode?: 'NONE';
@@ -68,7 +63,5 @@ export function field(
   const withReadOnly = readOnly !== undefined ? { ...withSpan, readOnly } : withSpan;
   const withTextBox =
     clinicalTextBox !== undefined ? { ...withReadOnly, clinicalTextBox } : withReadOnly;
-  return clinicalTextBoxMode !== undefined
-    ? { ...withTextBox, clinicalTextBoxMode }
-    : withTextBox;
+  return clinicalTextBoxMode !== undefined ? { ...withTextBox, clinicalTextBoxMode } : withTextBox;
 }

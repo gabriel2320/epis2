@@ -65,7 +65,13 @@ export function pickModelForFunction(fn, opts = {}) {
 
   if (override) {
     if (installed.length === 0 || isModelInstalled(installed, override)) {
-      return { model: override, tier, mode: 'override', candidates: [override], fallbackUsed: false };
+      return {
+        model: override,
+        tier,
+        mode: 'override',
+        candidates: [override],
+        fallbackUsed: false,
+      };
     }
   }
 
@@ -136,7 +142,9 @@ export async function resolveOllamaRoute(opts = {}) {
 export function formatRouteTable(routes) {
   const lines = [];
   const ws = routes.clinical?.workstation ?? getWorkstationProfile();
-  lines.push(`Estación: tier ${ws.tier} · ${ws.ramGb} GB RAM · ${ws.vramGb || '?'} GB VRAM · ${ws.cpuCores} cores`);
+  lines.push(
+    `Estación: tier ${ws.tier} · ${ws.ramGb} GB RAM · ${ws.vramGb || '?'} GB VRAM · ${ws.cpuCores} cores`,
+  );
   lines.push(`Modo: ${process.env.OLLAMA_ROUTE_MODE ?? 'auto'}`);
   lines.push('');
   for (const fn of OLLAMA_FUNCTIONS) {

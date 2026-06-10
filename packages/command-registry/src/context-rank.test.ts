@@ -48,7 +48,8 @@ describe('context ranking (CE-1)', () => {
       hasPatient: true,
       context: { activeAlertCount: 3, workspace: 'patient_chart' },
     });
-    const inboxWithout = withoutContext.find((r) => r.def.intent === 'open_results_inbox')?.score ?? 0;
+    const inboxWithout =
+      withoutContext.find((r) => r.def.intent === 'open_results_inbox')?.score ?? 0;
     const inboxWith = withAlerts.find((r) => r.def.intent === 'open_results_inbox')?.score ?? 0;
     expect(inboxWith).toBeGreaterThan(inboxWithout);
   });
@@ -59,10 +60,8 @@ describe('context ranking (CE-1)', () => {
       hasPatient: true,
       context: { pendingDraftCount: 2, workspace: 'patient_chart' },
     });
-    const evoWithout =
-      without.find((r) => r.def.intent === 'create_evolution_draft')?.score ?? 0;
-    const evoWith =
-      withDrafts.find((r) => r.def.intent === 'create_evolution_draft')?.score ?? 0;
+    const evoWithout = without.find((r) => r.def.intent === 'create_evolution_draft')?.score ?? 0;
+    const evoWith = withDrafts.find((r) => r.def.intent === 'create_evolution_draft')?.score ?? 0;
     expect(evoWith).toBeGreaterThan(evoWithout);
   });
 

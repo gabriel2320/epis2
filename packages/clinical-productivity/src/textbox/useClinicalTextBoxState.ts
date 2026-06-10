@@ -21,10 +21,18 @@ import {
   type ActiveTextToken,
 } from './clinicalTextToken.js';
 import { expandClinicalSnippet } from './clinicalSnippets.js';
-import { runClinicalSpellcheck, type ClinicalSpellIssue, type LanguageToolAdapter } from './clinicalSpellcheck.js';
+import {
+  runClinicalSpellcheck,
+  type ClinicalSpellIssue,
+  type LanguageToolAdapter,
+} from './clinicalSpellcheck.js';
 import { applySlashCommand } from './clinicalTextCommands.js';
 import { pastedTextLooksLikeAi, sanitizePastedClinicalText } from './pasteSanitizer.js';
-import type { ClinicalTextBoxChangeMeta, ClinicalTextBoxPatientContext, ClinicalTextBoxProps } from './ClinicalTextBox.js';
+import type {
+  ClinicalTextBoxChangeMeta,
+  ClinicalTextBoxPatientContext,
+  ClinicalTextBoxProps,
+} from './ClinicalTextBox.js';
 
 export type ClinicalTextBoxAiAssistHandler = (
   action: ClinicalTextboxAiAction,
@@ -166,7 +174,10 @@ export function useClinicalTextBoxState({
     const raw = event.clipboardData.getData('text/plain');
     const clean = sanitizePastedClinicalText(raw);
     const fromAi = pastedTextLooksLikeAi(raw);
-    const origin = createTextOrigin(fromAi ? 'ai_suggestion' : 'paste', fromAi ? 'IA' : 'Portapapeles');
+    const origin = createTextOrigin(
+      fromAi ? 'ai_suggestion' : 'paste',
+      fromAi ? 'IA' : 'Portapapeles',
+    );
     const next = value ? `${value}\n${clean}` : clean;
     emitChange(next, origin, { aiSuggestion: fromAi });
     setHint(copy.clinicalProductivity.textBoxPasteClean);
@@ -187,9 +198,13 @@ export function useClinicalTextBoxState({
 
   const confirmPendingInsert = () => {
     if (!confirmPending) return;
-    emitChange(insertPlainText(`\n\n${confirmPending}`), createTextOrigin('autocomplete', 'Inserción confirmada'), {
-      pendingConfirmation: 'medication',
-    });
+    emitChange(
+      insertPlainText(`\n\n${confirmPending}`),
+      createTextOrigin('autocomplete', 'Inserción confirmada'),
+      {
+        pendingConfirmation: 'medication',
+      },
+    );
     setConfirmPending(undefined);
   };
 
@@ -228,7 +243,10 @@ export function useClinicalTextBoxState({
   const pastePlainAtCursor = (raw: string) => {
     const clean = sanitizePastedClinicalText(raw);
     const fromAi = pastedTextLooksLikeAi(raw);
-    const origin = createTextOrigin(fromAi ? 'ai_suggestion' : 'paste', fromAi ? 'IA' : 'Portapapeles');
+    const origin = createTextOrigin(
+      fromAi ? 'ai_suggestion' : 'paste',
+      fromAi ? 'IA' : 'Portapapeles',
+    );
     const next = value ? `${value}\n${clean}` : clean;
     emitChange(next, origin, { aiSuggestion: fromAi });
     setHint(copy.clinicalProductivity.textBoxPasteClean);
@@ -265,8 +283,7 @@ export function useClinicalTextBoxState({
     buildPatientInsert: () => buildPatientInsert(patientContext),
     buildMedicationInsert: () => buildMedicationInsert(patientContext?.activeMedications),
     buildLabsInsert: () => buildLabsInsert(patientContext?.recentLabs),
-    onReformulate: () =>
-      void runAiAction('reformulate', () => reformulateClinicalText(value)),
+    onReformulate: () => void runAiAction('reformulate', () => reformulateClinicalText(value)),
     onSoapConvert: () =>
       void runAiAction('soap', () => formatSoapSuggestion(suggestSoapFromFreeText(value))),
     onDetectOmissions: () => {

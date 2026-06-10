@@ -1,6 +1,9 @@
 import type { ReactNode } from 'react';
 import Box from '@mui/material/Box';
-import { EpisClinicalScrollspy, type EpisClinicalScrollspySection } from './EpisClinicalScrollspy.js';
+import {
+  EpisClinicalScrollspy,
+  type EpisClinicalScrollspySection,
+} from './EpisClinicalScrollspy.js';
 
 export type EpisClinicalScrollspyLayoutProps = {
   sections: EpisClinicalScrollspySection[];

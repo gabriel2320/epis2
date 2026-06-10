@@ -3,10 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { REPO_ROOT } from './lib/paths.mjs';
 
-const CREATE_THEME_FILE = path.join(
-  REPO_ROOT,
-  'packages/epis2-ui/src/theme/create-epis2-theme.ts',
-);
+const CREATE_THEME_FILE = path.join(REPO_ROOT, 'packages/epis2-ui/src/theme/create-epis2-theme.ts');
 
 export async function validateSingleTheme() {
   const content = await fs.readFile(CREATE_THEME_FILE, 'utf8');

@@ -12,7 +12,11 @@ describe('EpisSplitPane', () => {
   it('muestra solo primario cuando secondary cerrado', () => {
     render(
       <Epis2ThemeProvider>
-        <EpisSplitPane primary={<div>Resumen</div>} secondary={<div>Historial</div>} secondaryOpen={false} />
+        <EpisSplitPane
+          primary={<div>Resumen</div>}
+          secondary={<div>Historial</div>}
+          secondaryOpen={false}
+        />
       </Epis2ThemeProvider>,
     );
     expect(screen.getByText('Resumen')).toBeInTheDocument();

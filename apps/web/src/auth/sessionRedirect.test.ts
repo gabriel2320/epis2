@@ -2,7 +2,10 @@
  * @vitest-environment jsdom
  */
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { redirectToSessionExpired, resetSessionExpiredRedirectForTests } from './sessionRedirect.js';
+import {
+  redirectToSessionExpired,
+  resetSessionExpiredRedirectForTests,
+} from './sessionRedirect.js';
 
 describe('redirectToSessionExpired', () => {
   afterEach(() => {

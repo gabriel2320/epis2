@@ -24,10 +24,15 @@ export async function getEmergencyDashboardSummary(db: Database, role: string) {
     id: `triage-${index + 1}`,
     patientId: p.id,
     patientDisplayName: p.displayName,
-    chiefComplaint: ['Dolor torácico', 'Trauma menor', 'Fiebre alta', 'Cefalea intensa'][index] ?? 'Consulta',
-    triageLevel: (String(Math.min(index + 2, 5)) as '1' | '2' | '3' | '4' | '5'),
+    chiefComplaint:
+      ['Dolor torácico', 'Trauma menor', 'Fiebre alta', 'Cefalea intensa'][index] ?? 'Consulta',
+    triageLevel: String(Math.min(index + 2, 5)) as '1' | '2' | '3' | '4' | '5',
     arrivedAt: new Date(Date.now() - index * 18 * 60_000).toISOString(),
-    status: (index === 0 ? 'observation' : 'waiting') as 'waiting' | 'observation' | 'discharged' | 'admitted',
+    status: (index === 0 ? 'observation' : 'waiting') as
+      | 'waiting'
+      | 'observation'
+      | 'discharged'
+      | 'admitted',
   }));
 
   return {

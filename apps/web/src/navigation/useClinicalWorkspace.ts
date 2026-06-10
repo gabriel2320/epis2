@@ -14,8 +14,7 @@ export function useClinicalWorkspace() {
   const { session } = useAuth();
   const role = session?.user.role ?? 'physician';
 
-  const activeWorkspace =
-    preferences.clinicalWorkspace ?? defaultWorkspaceForRole(role);
+  const activeWorkspace = preferences.clinicalWorkspace ?? defaultWorkspaceForRole(role);
 
   const definition = getClinicalWorkspaceDefinition(activeWorkspace);
 

@@ -97,7 +97,11 @@ async function main() {
   );
 
   const slots = extractSlots(phraseImaging);
-  record('4-slots-tac-torax', Boolean(slots.studyHint) && Boolean(slots.bodySiteHint), JSON.stringify(slots));
+  record(
+    '4-slots-tac-torax',
+    Boolean(slots.studyHint) && Boolean(slots.bodySiteHint),
+    JSON.stringify(slots),
+  );
 
   const resolve2 = await app.inject({
     method: 'POST',

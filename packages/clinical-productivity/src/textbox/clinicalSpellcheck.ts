@@ -19,7 +19,9 @@ export const simulatedLanguageToolAdapter: LanguageToolAdapter = {
 /** Sugiere ortografía; nunca reemplaza texto automáticamente. */
 export function runLocalClinicalSpellcheck(text: string, limit = 5): ClinicalSpellIssue[] {
   const tokens = text.split(/\s+/).filter(Boolean);
-  const unknown = tokens.filter((t) => !isWhitelistedClinicalTerm(t) && t.length > 2).slice(0, limit);
+  const unknown = tokens
+    .filter((t) => !isWhitelistedClinicalTerm(t) && t.length > 2)
+    .slice(0, limit);
   return unknown.map((token) => ({
     token,
     suggestions: findClinicalTerms(token, 2).map((hit) => hit.formal ?? hit.term),

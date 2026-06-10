@@ -41,7 +41,11 @@ export function validateLedger(ledger) {
     if (item.state === 'DONE' && !item.closureReport) {
       errors.push(`${item.id}: DONE requiere closureReport`);
     }
-    if (item.state === 'DONE' && item.closureReport && !existsSync(join(ROOT, item.closureReport))) {
+    if (
+      item.state === 'DONE' &&
+      item.closureReport &&
+      !existsSync(join(ROOT, item.closureReport))
+    ) {
       warnings.push(`${item.id}: closureReport no existe aún: ${item.closureReport}`);
     }
   }
@@ -80,7 +84,9 @@ export function validateLedger(ledger) {
       errors.push('Programa completo: no debe haber microfases READY');
     }
   } else if (ready.length !== 1) {
-    errors.push(`Debe haber exactamente 1 microfase READY; hay ${ready.length}: ${ready.map((i) => i.id).join(', ') || 'ninguna'}`);
+    errors.push(
+      `Debe haber exactamente 1 microfase READY; hay ${ready.length}: ${ready.map((i) => i.id).join(', ') || 'ninguna'}`,
+    );
   }
   if (inProgress.length > 1) {
     errors.push(`Como máximo 1 IN_PROGRESS; hay ${inProgress.length}`);
@@ -97,7 +103,13 @@ export function validateLedger(ledger) {
     }
   }
 
-  return { ok: errors.length === 0, errors, warnings, ready: ready[0] ?? null, inProgress: inProgress[0] ?? null };
+  return {
+    ok: errors.length === 0,
+    errors,
+    warnings,
+    ready: ready[0] ?? null,
+    inProgress: inProgress[0] ?? null,
+  };
 }
 
 function topologicalSort(items, byId, errors) {

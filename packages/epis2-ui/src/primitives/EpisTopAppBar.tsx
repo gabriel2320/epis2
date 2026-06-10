@@ -58,7 +58,9 @@ export function EpisTopAppBar({
           <Box sx={{ flex: 1 }} />
         )}
         {endActions ? (
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>{endActions}</Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>
+            {endActions}
+          </Box>
         ) : null}
       </Toolbar>
     </AppBar>

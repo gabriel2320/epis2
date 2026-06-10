@@ -33,14 +33,18 @@ export async function validate() {
     }
   }
 
-  for await (const { rel, content } of walkSourceFiles({ roots: ['packages/epis2-ui/.storybook'] })) {
+  for await (const { rel, content } of walkSourceFiles({
+    roots: ['packages/epis2-ui/.storybook'],
+  })) {
     if (CREATE_THEME.test(content) && !rel.includes('preview.tsx')) {
       details.push(`${rel} → createTheme prohibido fuera del provider canónico`);
     }
   }
 
   if (existsSync(STORIES_DIR)) {
-    for await (const { rel, content } of walkSourceFiles({ roots: ['packages/epis2-ui/src/stories'] })) {
+    for await (const { rel, content } of walkSourceFiles({
+      roots: ['packages/epis2-ui/src/stories'],
+    })) {
       if (CREATE_THEME.test(content)) {
         details.push(`${rel} → createTheme prohibido en stories`);
       }

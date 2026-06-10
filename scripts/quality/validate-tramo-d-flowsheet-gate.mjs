@@ -8,7 +8,11 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
 const panel = readFileSync(join(root, 'apps/web/src/components/IcuDashboardTab.tsx'), 'utf8');
-for (const token of ['epis2-icu-flowsheet', 'epis2-icu-flowsheet-hours', 'copy.icu.flowsheetTitle']) {
+for (const token of [
+  'epis2-icu-flowsheet',
+  'epis2-icu-flowsheet-hours',
+  'copy.icu.flowsheetTitle',
+]) {
   if (!panel.includes(token)) errors.push(`IcuDashboardTab sin ${token}`);
 }
 

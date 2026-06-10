@@ -31,7 +31,12 @@ export function EpisCommandCenterLayout({
   if (!reserveDockSpace) {
     return (
       <Box sx={{ maxWidth: resolvedMaxWidth, mx: 'auto', width: '100%' }}>
-        <Stack spacing={{ xs: 2.5, md: 3 }} alignItems="stretch" data-testid="epis2-command-center" sx={{ width: '100%' }}>
+        <Stack
+          spacing={{ xs: 2.5, md: 3 }}
+          alignItems="stretch"
+          data-testid="epis2-command-center"
+          sx={{ width: '100%' }}
+        >
           {children}
         </Stack>
       </Box>

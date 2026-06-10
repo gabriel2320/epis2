@@ -3,9 +3,7 @@ import { copy } from '@epis2/design-system';
 import type { EpisTreeNode } from '@epis2/epis2-ui';
 import { buildDocumentTreeByType } from './documentTree.js';
 
-export function buildLongitudinalSectionTree(
-  data: PatientLongitudinalResponse,
-): EpisTreeNode[] {
+export function buildLongitudinalSectionTree(data: PatientLongitudinalResponse): EpisTreeNode[] {
   const nodes: EpisTreeNode[] = [];
 
   if (data.problems.length > 0) {

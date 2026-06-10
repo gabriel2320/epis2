@@ -14,7 +14,9 @@ if (src.includes('Guardar') || src.includes('Firmar')) {
   errors.push('Supporting pane no debe duplicar acciones globales');
 }
 if (errors.length) {
-  console.error('classic-supporting-pane-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
+  console.error(
+    'classic-supporting-pane-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
+  );
   process.exit(1);
 }
 console.log('classic-supporting-pane-gate OK');

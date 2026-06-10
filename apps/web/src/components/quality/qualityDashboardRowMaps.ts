@@ -60,11 +60,7 @@ export function buildQualityDashboardGridRows(data: QualityDashboardResponse) {
       ),
     ),
     surgicalSuspension: data.surgicalSuspensions.map((r) =>
-      row(
-        r.caseCode,
-        `${r.caseCode} — ${r.operatingRoom}`,
-        `${r.reason} · ${r.suspendedAt}`,
-      ),
+      row(r.caseCode, `${r.caseCode} — ${r.operatingRoom}`, `${r.reason} · ${r.suspendedAt}`),
     ),
     surveillance: data.surveillanceMatrix.map((r) =>
       row(
@@ -74,11 +70,7 @@ export function buildQualityDashboardGridRows(data: QualityDashboardResponse) {
       ),
     ),
     mdro: data.mdroAlerts.map((r, index) =>
-      row(
-        `mdro-${index}`,
-        r.patientDisplayName,
-        `${r.organism} · ${r.isolationType}`,
-      ),
+      row(`mdro-${index}`, r.patientDisplayName, `${r.organism} · ${r.isolationType}`),
     ),
     antimicrobial: data.antimicrobialConsumption.map((r) =>
       row(r.antibiotic, r.antibiotic, `DDD/1000 ${r.dddPer1000} · ${r.trend}`),
@@ -98,11 +90,7 @@ export function buildQualityDashboardGridRows(data: QualityDashboardResponse) {
       ),
     ),
     nav: data.navPreventionChecklists.map((r) =>
-      row(
-        r.unit,
-        r.unit,
-        `${r.ventilatorDays} días VM · bundle ${r.bundleCompliancePercent}%`,
-      ),
+      row(r.unit, r.unit, `${r.ventilatorDays} días VM · bundle ${r.bundleCompliancePercent}%`),
     ),
     handHygiene: data.handHygieneAudits.map((r) =>
       row(
@@ -115,11 +103,7 @@ export function buildQualityDashboardGridRows(data: QualityDashboardResponse) {
       row(r.outbreakCode, `${r.outbreakCode} — ${r.unit}`, `${r.cases} casos · ${r.status}`),
     ),
     isolation: data.isolationMap.map((r, index) =>
-      row(
-        `iso-${index}`,
-        `${r.bedLabel} — ${r.patientDisplayName}`,
-        r.precautionType,
-      ),
+      row(`iso-${index}`, `${r.bedLabel} — ${r.patientDisplayName}`, r.precautionType),
     ),
     endemic: data.endemicCurves.map((r) =>
       row(
@@ -129,11 +113,7 @@ export function buildQualityDashboardGridRows(data: QualityDashboardResponse) {
       ),
     ),
     staging: data.stagingBatches.map((r) =>
-      row(
-        r.id,
-        r.batchLabel,
-        `${r.sourceSystem} · ${r.status} · ${r.recordCount} reg.`,
-      ),
+      row(r.id, r.batchLabel, `${r.sourceSystem} · ${r.status} · ${r.recordCount} reg.`),
     ),
     audit: data.recentAudit.map((r) =>
       row(

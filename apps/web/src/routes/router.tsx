@@ -28,7 +28,12 @@ import { AppearancePreferencesPage } from '../pages/AppearancePreferencesPage.js
 import { isUiCatalogEnabled } from '../dev/uiCatalogEnv.js';
 import { isVisualThemeCatalogEnabled } from '../dev/visualThemeCatalogEnv.js';
 import { isSchedulerSpikeEnabled } from '../dev/schedulerSpikeEnv.js';
-import { parseDashboardSearch, parseClinicalFormSearch, parseCommandSearch, parseClinicalPatientSearch } from './clinicalNavigate.js';
+import {
+  parseDashboardSearch,
+  parseClinicalFormSearch,
+  parseCommandSearch,
+  parseClinicalPatientSearch,
+} from './clinicalNavigate.js';
 import { EpisAppProviders } from '../AppProviders.js';
 
 const LazyUiCatalogPage = lazy(() =>

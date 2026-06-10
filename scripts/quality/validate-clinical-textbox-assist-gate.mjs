@@ -55,7 +55,9 @@ if (!webSrc.includes('requestTextboxAssist')) {
 }
 
 if (errors.length) {
-  console.error('clinical-textbox-assist-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
+  console.error(
+    'clinical-textbox-assist-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
+  );
   process.exit(1);
 }
 

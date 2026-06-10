@@ -53,7 +53,9 @@ async function main() {
     process.exit(1);
   }
 
-  console.log(`clinical-spellcheck-integration OK — ${data.matches.length} match(es) desde ${baseUrl}`);
+  console.log(
+    `clinical-spellcheck-integration OK — ${data.matches.length} match(es) desde ${baseUrl}`,
+  );
 }
 
 void main();

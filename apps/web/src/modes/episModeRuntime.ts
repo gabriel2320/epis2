@@ -29,10 +29,7 @@ export function isDashboardModeActive(
 
 export function useEpisModeSearchRecord(): EpisModeSearchRecord {
   const searchStr = useRouterState({ select: (s) => s.location.searchStr ?? '' });
-  return useMemo(
-    () => parseModeSearchRecord(new URLSearchParams(searchStr)),
-    [searchStr],
-  );
+  return useMemo(() => parseModeSearchRecord(new URLSearchParams(searchStr)), [searchStr]);
 }
 
 export function useEpisModePreferences(): EpisModeUserPreferences {

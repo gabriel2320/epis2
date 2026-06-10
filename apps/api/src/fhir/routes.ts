@@ -20,8 +20,7 @@ function sendFhir(reply: import('fastify').FastifyReply, resource: unknown) {
 
 function mapExportError(reply: import('fastify').FastifyReply, error: unknown) {
   if (error instanceof FhirExportError) {
-    const status =
-      error.code === 'NOT_FOUND' ? 404 : error.code === 'UNSUPPORTED' ? 422 : 500;
+    const status = error.code === 'NOT_FOUND' ? 404 : error.code === 'UNSUPPORTED' ? 422 : 500;
     return reply.status(status).send({ error: error.message, code: error.code });
   }
   return reply.status(500).send({ error: 'Error al exportar FHIR' });

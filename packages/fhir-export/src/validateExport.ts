@@ -40,7 +40,12 @@ export function assertExportClean(resource: unknown): ExportValidationResult {
     }
     case 'AllergyIntolerance':
     case 'MedicationStatement': {
-      const r = resource as { resourceType?: string; id?: string; patient?: unknown; subject?: unknown };
+      const r = resource as {
+        resourceType?: string;
+        id?: string;
+        patient?: unknown;
+        subject?: unknown;
+      };
       if (!r.id || (!r.patient && !r.subject)) {
         return { ok: false, profileErrors: 'recurso longitudinal incompleto' };
       }

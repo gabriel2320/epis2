@@ -7,7 +7,9 @@ import { Epis2ThemeProvider } from '@epis2/epis2-ui';
 import { SchedulerSpikePage } from './SchedulerSpikePage.js';
 
 vi.mock('@epis2/epis2-ui/scheduler', () => ({
-  EpisEventCalendarSpike: () => <div data-testid="epis2-scheduler-spike-calendar-mock">Calendario mock</div>,
+  EpisEventCalendarSpike: () => (
+    <div data-testid="epis2-scheduler-spike-calendar-mock">Calendario mock</div>
+  ),
 }));
 
 describe('SchedulerSpikePage', () => {

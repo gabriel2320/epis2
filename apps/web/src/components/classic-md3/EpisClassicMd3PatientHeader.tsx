@@ -38,7 +38,12 @@ export function EpisClassicMd3PatientHeader({
         overflow: 'hidden',
       }}
     >
-      <Typography variant="subtitle1" fontWeight={600} noWrap sx={{ maxWidth: { xs: '100%', md: '40%' } }}>
+      <Typography
+        variant="subtitle1"
+        fontWeight={600}
+        noWrap
+        sx={{ maxWidth: { xs: '100%', md: '40%' } }}
+      >
         {displayName ?? copy.classicMd3.noPatient}
       </Typography>
       {metaLine ? (

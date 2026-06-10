@@ -55,11 +55,12 @@ describe('Epis2Widget UI', () => {
 
   it('renderiza acciones de navegación', () => {
     wrap(
-      <Epis2WidgetActions
-        actions={[{ id: 'go', label: 'Abrir ficha', href: '/espacio/ficha' }]}
-      />,
+      <Epis2WidgetActions actions={[{ id: 'go', label: 'Abrir ficha', href: '/espacio/ficha' }]} />,
     );
     expect(screen.getByTestId('epis2-widget-actions')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Abrir ficha' })).toHaveAttribute('href', '/espacio/ficha');
+    expect(screen.getByRole('link', { name: 'Abrir ficha' })).toHaveAttribute(
+      'href',
+      '/espacio/ficha',
+    );
   });
 });

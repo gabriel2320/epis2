@@ -55,7 +55,9 @@ test.describe('UX-G02 — command-first con paciente fijado', () => {
       .toBe(true);
 
     // 10: guardar tras revisión (campos mínimos)
-    await page.getByRole('textbox', { name: /indicación clínica/i }).fill('Evaluación torácica (UX-G02 demo)');
+    await page
+      .getByRole('textbox', { name: /indicación clínica/i })
+      .fill('Evaluación torácica (UX-G02 demo)');
     await page.getByRole('button', { name: copy.forms.save }).click();
     await expect(page.getByTestId('epis2-form-status')).toBeVisible();
   });
@@ -77,7 +79,9 @@ test.describe('UX-G02 — command-first con paciente fijado', () => {
       .fill('hacer evolución');
     await fichaBar.getByRole('button', { name: copy.commandCenter.submit }).click();
 
-    await expect(page).toHaveURL(new RegExp(`/espacio/evolucion.*patientId=${DEMO_001_PATIENT_ID}`));
+    await expect(page).toHaveURL(
+      new RegExp(`/espacio/evolucion.*patientId=${DEMO_001_PATIENT_ID}`),
+    );
     await expect(page.getByTestId('epis2-form-evolution_note')).toBeVisible();
     await expect(page.getByTestId('epis2-active-patient')).toBeVisible();
 

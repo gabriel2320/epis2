@@ -1,14 +1,7 @@
 import type { PatientDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import type { ClinicalGridColDef } from '@epis2/clinical-productivity';
-import {
-  Alert,
-  Box,
-  Button,
-  EpisWorkspaceSection,
-  Stack,
-  Typography,
-} from '@epis2/epis2-ui';
+import { Alert, Box, Button, EpisWorkspaceSection, Stack, Typography } from '@epis2/epis2-ui';
 import { useMemo } from 'react';
 import { DashboardHomogeneousGrid } from './grids/DashboardHomogeneousGrid.js';
 import { LabObservationsGrid } from './LabObservationsGrid.js';
@@ -39,8 +32,7 @@ export function PatientDashboardTab({ data, onOpenFicha, onOpenDraft }: PatientD
         field: 'at',
         headerName: copy.dashboard.gridColumnUpdated,
         width: 170,
-        valueFormatter: (value) =>
-          value ? new Date(String(value)).toLocaleString('es-CL') : '',
+        valueFormatter: (value) => (value ? new Date(String(value)).toLocaleString('es-CL') : ''),
       },
     ],
     [],
@@ -49,7 +41,13 @@ export function PatientDashboardTab({ data, onOpenFicha, onOpenDraft }: PatientD
   return (
     <EpisRadDashboardTabShell testId="epis2-dashboard-patient-rad">
       <Stack spacing={2} data-testid="epis2-dashboard-patient">
-        <Stack direction="row" justifyContent="space-between" alignItems="center" flexWrap="wrap" gap={1}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          flexWrap="wrap"
+          gap={1}
+        >
           <Box>
             <Typography variant="h6">{data.displayName}</Typography>
             {data.demoCaseCode ? (

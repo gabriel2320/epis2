@@ -158,7 +158,9 @@ async function main() {
   const names = await getOllamaModels();
   console.log(`Modelos Ollama: ${names.join(', ') || '(ninguno)'}`);
   if (names.length && !modelInstalled(names, MODEL)) {
-    console.log(`\n⚠ OLLAMA_MODEL=${MODEL} no está en la lista. Actualiza .env o ejecuta: npm run ai:pull-model`);
+    console.log(
+      `\n⚠ OLLAMA_MODEL=${MODEL} no está en la lista. Actualiza .env o ejecuta: npm run ai:pull-model`,
+    );
   }
 
   console.log('\nListo. Stack IA:');

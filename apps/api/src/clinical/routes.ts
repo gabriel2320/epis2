@@ -13,10 +13,7 @@ import { z } from 'zod';
 import type { FastifyInstance } from 'fastify';
 import type { Database } from '../db/client.js';
 import { runWithRlsContext } from '../db/rlsContext.js';
-import {
-  createRequirePermission,
-  type AuthenticatedRequest,
-} from '../auth/authenticate.js';
+import { createRequirePermission, type AuthenticatedRequest } from '../auth/authenticate.js';
 import {
   approveDraft,
   createDraft,
@@ -72,9 +69,7 @@ const createDraftSchema = z.object({
 const updateDraftSchema = z.object({
   title: z.string().min(1).optional(),
   body: z.record(z.unknown()).optional(),
-  status: z
-    .enum(['draft', 'editing', 'ready_for_review', 'rejected', 'cancelled'])
-    .optional(),
+  status: z.enum(['draft', 'editing', 'ready_for_review', 'rejected', 'cancelled']).optional(),
 });
 
 export async function registerClinicalRoutes(
@@ -109,27 +104,23 @@ export async function registerClinicalRoutes(
     },
   );
 
-  app.get(
-    '/api/patients',
-    { preHandler: requirePatientRead },
-    async (request) => {
-      const session = (request as AuthenticatedRequest).session;
-      const q = (request.query as { q?: string }).q;
-      const rows = await runWithRlsContext(db, config, session, (tx) => searchPatients(tx, q));
-      const patients = await Promise.all(
-        rows.map(async (p) => {
-          const demoCaseCode = await getPatientDemoCaseCode(db, p.id);
-          return {
-            id: p.id,
-            displayName: p.displayName,
-            ...patientDemoPresentation(p),
-            demoCaseCode,
-          };
-        }),
-      );
-      return { patients };
-    },
-  );
+  app.get('/api/patients', { preHandler: requirePatientRead }, async (request) => {
+    const session = (request as AuthenticatedRequest).session;
+    const q = (request.query as { q?: string }).q;
+    const rows = await runWithRlsContext(db, config, session, (tx) => searchPatients(tx, q));
+    const patients = await Promise.all(
+      rows.map(async (p) => {
+        const demoCaseCode = await getPatientDemoCaseCode(db, p.id);
+        return {
+          id: p.id,
+          displayName: p.displayName,
+          ...patientDemoPresentation(p),
+          demoCaseCode,
+        };
+      }),
+    );
+    return { patients };
+  });
 
   app.get(
     '/api/patients/:patientId/clinical-alerts',
@@ -301,36 +292,32 @@ export async function registerClinicalRoutes(
     },
   );
 
-  app.post(
-    '/api/drafts',
-    { preHandler: requireDraftWrite },
-    async (request, reply) => {
-      const parsed = createDraftSchema.safeParse(request.body);
-      if (!parsed.success) {
-        return reply.status(400).send({ error: 'Datos de borrador inválidos' });
-      }
-      const session = (request as AuthenticatedRequest).session;
-      if (!roleHasPermission(session.role, 'draft.write')) {
-        return reply.status(403).send({ error: 'Sin permiso draft.write' });
-      }
-      const { patientId, draftType, title, body, encounterId } = parsed.data;
-      const metaCheck = validateDraftBodyEpis2Meta(body);
-      if (!metaCheck.success) {
-        return reply.status(400).send({ error: metaCheck.error });
-      }
-      const draftInput: Parameters<typeof createDraft>[2] = {
-        patientId,
-        draftType,
-        title,
-        body: metaCheck.body,
-      };
-      if (encounterId !== undefined) draftInput.encounterId = encounterId;
-      const draft = await runWithRlsContext(db, config, session, (tx) =>
-        createDraft(tx, { id: session.sub, username: session.username }, draftInput),
-      );
-      return reply.status(201).send({ draft });
-    },
-  );
+  app.post('/api/drafts', { preHandler: requireDraftWrite }, async (request, reply) => {
+    const parsed = createDraftSchema.safeParse(request.body);
+    if (!parsed.success) {
+      return reply.status(400).send({ error: 'Datos de borrador inválidos' });
+    }
+    const session = (request as AuthenticatedRequest).session;
+    if (!roleHasPermission(session.role, 'draft.write')) {
+      return reply.status(403).send({ error: 'Sin permiso draft.write' });
+    }
+    const { patientId, draftType, title, body, encounterId } = parsed.data;
+    const metaCheck = validateDraftBodyEpis2Meta(body);
+    if (!metaCheck.success) {
+      return reply.status(400).send({ error: metaCheck.error });
+    }
+    const draftInput: Parameters<typeof createDraft>[2] = {
+      patientId,
+      draftType,
+      title,
+      body: metaCheck.body,
+    };
+    if (encounterId !== undefined) draftInput.encounterId = encounterId;
+    const draft = await runWithRlsContext(db, config, session, (tx) =>
+      createDraft(tx, { id: session.sub, username: session.username }, draftInput),
+    );
+    return reply.status(201).send({ draft });
+  });
 
   app.get(
     '/api/drafts',
@@ -386,41 +373,37 @@ export async function registerClinicalRoutes(
     },
   );
 
-  app.patch(
-    '/api/drafts/:draftId',
-    { preHandler: requireDraftWrite },
-    async (request, reply) => {
-      const { draftId } = request.params as { draftId: string };
-      const parsed = updateDraftSchema.safeParse(request.body);
-      if (!parsed.success) {
-        return reply.status(400).send({ error: 'Actualización inválida' });
-      }
-      const session = (request as AuthenticatedRequest).session;
-      try {
-        const patch: Parameters<typeof updateDraft>[3] = {};
-        if (parsed.data.title !== undefined) patch.title = parsed.data.title;
-        if (parsed.data.body !== undefined) {
-          const metaCheck = validateDraftBodyEpis2Meta(parsed.data.body);
-          if (!metaCheck.success) {
-            return reply.status(400).send({ error: metaCheck.error });
-          }
-          patch.body = metaCheck.body;
+  app.patch('/api/drafts/:draftId', { preHandler: requireDraftWrite }, async (request, reply) => {
+    const { draftId } = request.params as { draftId: string };
+    const parsed = updateDraftSchema.safeParse(request.body);
+    if (!parsed.success) {
+      return reply.status(400).send({ error: 'Actualización inválida' });
+    }
+    const session = (request as AuthenticatedRequest).session;
+    try {
+      const patch: Parameters<typeof updateDraft>[3] = {};
+      if (parsed.data.title !== undefined) patch.title = parsed.data.title;
+      if (parsed.data.body !== undefined) {
+        const metaCheck = validateDraftBodyEpis2Meta(parsed.data.body);
+        if (!metaCheck.success) {
+          return reply.status(400).send({ error: metaCheck.error });
         }
-        if (parsed.data.status !== undefined) patch.status = parsed.data.status;
-        const draft = await runWithRlsContext(db, config, session, (tx) =>
-          updateDraft(tx, { id: session.sub, username: session.username }, draftId, patch),
-        );
-        if (!draft) {
-          return reply.status(404).send({ error: 'Borrador no encontrado' });
-        }
-        return { draft };
-      } catch (e) {
-        return reply.status(409).send({
-          error: e instanceof Error ? e.message : 'Conflicto al actualizar',
-        });
+        patch.body = metaCheck.body;
       }
-    },
-  );
+      if (parsed.data.status !== undefined) patch.status = parsed.data.status;
+      const draft = await runWithRlsContext(db, config, session, (tx) =>
+        updateDraft(tx, { id: session.sub, username: session.username }, draftId, patch),
+      );
+      if (!draft) {
+        return reply.status(404).send({ error: 'Borrador no encontrado' });
+      }
+      return { draft };
+    } catch (e) {
+      return reply.status(409).send({
+        error: e instanceof Error ? e.message : 'Conflicto al actualizar',
+      });
+    }
+  });
 
   app.post(
     '/api/drafts/:draftId/approve',

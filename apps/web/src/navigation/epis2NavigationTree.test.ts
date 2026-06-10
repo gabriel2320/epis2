@@ -37,7 +37,9 @@ describe('epis2NavigationTree', () => {
   });
 
   it('no coloca dashboard como home', () => {
-    const dashboardNodes = EPIS2_NAVIGATION_TREE.filter((n) => n.route.startsWith('/epis2/dashboard'));
+    const dashboardNodes = EPIS2_NAVIGATION_TREE.filter((n) =>
+      n.route.startsWith('/epis2/dashboard'),
+    );
     for (const node of dashboardNodes) {
       expect(node.workspace).not.toBe('command');
       expect(node.md3Level).toBeGreaterThanOrEqual(0);

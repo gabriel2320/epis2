@@ -13,10 +13,7 @@ if (!existsSync(doc)) errors.push('falta EPIS2_TRAMO_B_CLOSURE.md');
 const inventory = join(root, 'docs/product/EPIS2_TRAMO_B_RECEPTION_INVENTORY.md');
 if (!existsSync(inventory)) errors.push('falta EPIS2_TRAMO_B_RECEPTION_INVENTORY.md');
 
-for (const gate of [
-  'validate-tramo-b-reception-gate.mjs',
-  'validate-tramo-b-ui-gate.mjs',
-]) {
+for (const gate of ['validate-tramo-b-reception-gate.mjs', 'validate-tramo-b-ui-gate.mjs']) {
   if (!existsSync(join(root, 'scripts/quality', gate))) {
     errors.push(`falta gate ${gate}`);
   }

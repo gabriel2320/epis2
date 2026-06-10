@@ -3,7 +3,10 @@
  */
 import { describe, expect, it } from 'vitest';
 import { parseDevSessionPlan } from '../../scripts/dev-agent/schemas.mjs';
-import { parseDevSessionPlanFromOllamaText, parseDevLowRiskWritePlanFromOllamaText } from '../../scripts/dev-agent/parse-ollama-plan.mjs';
+import {
+  parseDevSessionPlanFromOllamaText,
+  parseDevLowRiskWritePlanFromOllamaText,
+} from '../../scripts/dev-agent/parse-ollama-plan.mjs';
 import { parseJsonFromOllamaText } from '../../scripts/ollama/json-from-response.mjs';
 
 describe('dev-agent schemas', () => {

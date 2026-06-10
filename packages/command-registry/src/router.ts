@@ -5,15 +5,9 @@ import { buildConfirmationMessage, requiresExplicitConfirmation } from './confir
 import { AMBIGUOUS_PHRASES } from './definitions.js';
 import { EPIS_DISAMBIGUATION_RULES } from './epis-disambiguation.js';
 import { isEpisOutOfScopePhrase } from './epis-out-of-scope.js';
-import {
-  buildGuidedFallbackCandidates,
-  GUIDED_FALLBACK_MESSAGE,
-} from './fallback.js';
+import { buildGuidedFallbackCandidates, GUIDED_FALLBACK_MESSAGE } from './fallback.js';
 import { normalizeCommandText } from './normalize.js';
-import {
-  pickBestFromRanked,
-  rankCommandDefinitions,
-} from './rank.js';
+import { pickBestFromRanked, rankCommandDefinitions } from './rank.js';
 import { extractSlots } from './slots.js';
 import type { CommandResolveInput, CommandResolveResult } from './types.js';
 
@@ -121,10 +115,7 @@ export function resolveCommand(input: CommandResolveInput): CommandResolveResult
     }
   }
 
-  if (
-    !input.assistHint &&
-    AMBIGUOUS_PHRASES.some((p) => normalizeCommandText(p) === normalized)
-  ) {
+  if (!input.assistHint && AMBIGUOUS_PHRASES.some((p) => normalizeCommandText(p) === normalized)) {
     return clarificationResult({
       message: 'El comando es ambiguo. Elige una acción más específica.',
       ...clarificationBase,

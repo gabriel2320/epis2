@@ -27,9 +27,16 @@ describeIntegration('clinical API (integration)', () => {
       url: '/api/patients',
       headers: { cookie },
     });
-    const list = (patients.json() as {
-      patients: { id: string; isSynthetic?: boolean; demoLabel?: string; demoCaseCode?: string }[];
-    }).patients;
+    const list = (
+      patients.json() as {
+        patients: {
+          id: string;
+          isSynthetic?: boolean;
+          demoLabel?: string;
+          demoCaseCode?: string;
+        }[];
+      }
+    ).patients;
     expect(list.length).toBeGreaterThanOrEqual(5);
     expect(list.every((p) => p.isSynthetic && p.demoLabel === 'DEMO/SINTÉTICO')).toBe(true);
     expect(list.some((p) => p.demoCaseCode === 'DEMO-005')).toBe(true);
@@ -72,9 +79,7 @@ describeIntegration('clinical API (integration)', () => {
       expect(alertsRx.statusCode).toBe(200);
       const rxJson = alertsRx.json() as { alerts: { ruleId: string }[] };
       expect(
-        rxJson.alerts.some(
-          (a) => a.ruleId.includes('beta-lactam') || a.ruleId.includes('allergy'),
-        ),
+        rxJson.alerts.some((a) => a.ruleId.includes('beta-lactam') || a.ruleId.includes('allergy')),
       ).toBe(true);
     }
 
@@ -175,8 +180,7 @@ describeIntegration('clinical API (integration)', () => {
       expect(boardJson.timelinePreview.length).toBeGreaterThan(0);
     }
 
-    const docPatientId =
-      list.find((p) => p.demoCaseCode === 'DEMO-001')?.id ?? patientId;
+    const docPatientId = list.find((p) => p.demoCaseCode === 'DEMO-001')?.id ?? patientId;
     const docSearch = await app.inject({
       method: 'GET',
       url: `/api/patients/${docPatientId}/documents/search?q=laboratorio`,
@@ -231,9 +235,7 @@ describeIntegration('clinical API (integration)', () => {
       payload: { text: 'solicitar interconsulta', role: 'physician', patientId },
     });
     expect(referralCmd.statusCode).toBe(200);
-    expect((referralCmd.json() as { routePath: string }).routePath).toBe(
-      '/espacio/interconsulta',
-    );
+    expect((referralCmd.json() as { routePath: string }).routePath).toBe('/espacio/interconsulta');
 
     const imagingCmd = await app.inject({
       method: 'POST',

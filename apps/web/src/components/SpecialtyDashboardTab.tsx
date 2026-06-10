@@ -1,13 +1,7 @@
 import type { SpecialtyDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import type { ClinicalGridColDef } from '@epis2/clinical-productivity';
-import {
-  Alert,
-  Chip,
-  EpisMetric,
-  EpisWorkspaceSection,
-  Stack,
-} from '@epis2/epis2-ui';
+import { Alert, Chip, EpisMetric, EpisWorkspaceSection, Stack } from '@epis2/epis2-ui';
 import { useMemo } from 'react';
 import { DashboardHomogeneousGrid } from './grids/DashboardHomogeneousGrid.js';
 import { EpisRadDashboardTabShell } from './rad/EpisRadDashboardTabShell.js';
@@ -117,7 +111,10 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
           />
         </Stack>
 
-        <EpisWorkspaceSection title={copy.specialty.idcPanelsTitle} testId="epis2-specialty-idc-panels">
+        <EpisWorkspaceSection
+          title={copy.specialty.idcPanelsTitle}
+          testId="epis2-specialty-idc-panels"
+        >
           <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
             {data.idcPanels.map((panel) => (
               <Chip
@@ -132,11 +129,19 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
           </Stack>
         </EpisWorkspaceSection>
 
-        <EpisWorkspaceSection title={copy.specialty.partogramTitle} testId="epis2-specialty-partogram">
+        <EpisWorkspaceSection
+          title={copy.specialty.partogramTitle}
+          testId="epis2-specialty-partogram"
+        >
           <DashboardHomogeneousGrid
             rows={partogramRows}
             columns={[
-              { field: 'title', headerName: copy.dashboard.gridColumnPatient, flex: 1, minWidth: 160 },
+              {
+                field: 'title',
+                headerName: copy.dashboard.gridColumnPatient,
+                flex: 1,
+                minWidth: 160,
+              },
               detailColumn,
             ]}
             emptyMessage={copy.longitudinal.emptySection}
@@ -145,11 +150,19 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
           />
         </EpisWorkspaceSection>
 
-        <EpisWorkspaceSection title={copy.specialty.oncologyBoardTitle} testId="epis2-specialty-oncology-board">
+        <EpisWorkspaceSection
+          title={copy.specialty.oncologyBoardTitle}
+          testId="epis2-specialty-oncology-board"
+        >
           <DashboardHomogeneousGrid
             rows={oncologyRows}
             columns={[
-              { field: 'title', headerName: copy.dashboard.gridColumnPatient, flex: 1, minWidth: 160 },
+              {
+                field: 'title',
+                headerName: copy.dashboard.gridColumnPatient,
+                flex: 1,
+                minWidth: 160,
+              },
               detailColumn,
             ]}
             emptyMessage={copy.longitudinal.emptySection}
@@ -166,7 +179,12 @@ export function SpecialtyDashboardTab({ data }: SpecialtyDashboardTabProps) {
           <DashboardHomogeneousGrid
             rows={secondaryPanels}
             columns={[
-              { field: 'title', headerName: copy.dashboard.gridColumnPatient, flex: 1, minWidth: 160 },
+              {
+                field: 'title',
+                headerName: copy.dashboard.gridColumnPatient,
+                flex: 1,
+                minWidth: 160,
+              },
               detailColumn,
             ]}
             emptyMessage={copy.longitudinal.emptySection}

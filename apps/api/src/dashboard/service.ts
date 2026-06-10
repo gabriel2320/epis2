@@ -64,13 +64,11 @@ function draftVisibleForRole(draftType: string, role: string): boolean {
   return true;
 }
 
-export async function getDashboardWorkSummary(
-  db: Database,
-  actorId: string,
-  role = 'physician',
-) {
+export async function getDashboardWorkSummary(db: Database, actorId: string, role = 'physician') {
   const drafts = await listDrafts(db);
-  const patientRows = await db.select({ id: patients.id, displayName: patients.displayName }).from(patients);
+  const patientRows = await db
+    .select({ id: patients.id, displayName: patients.displayName })
+    .from(patients);
   const nameById = new Map(patientRows.map((p) => [p.id, p.displayName]));
 
   const toRow = (d: (typeof drafts)[number]) => ({
@@ -94,10 +92,7 @@ export async function getDashboardWorkSummary(
     .map(toRow);
 
   const pendingReview = drafts
-    .filter(
-      (d) =>
-        d.status === 'ready_for_review' && draftVisibleForRole(d.draftType, role),
-    )
+    .filter((d) => d.status === 'ready_for_review' && draftVisibleForRole(d.draftType, role))
     .sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
     .map(toRow);
 

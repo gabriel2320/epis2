@@ -69,8 +69,7 @@ export function ResultsInboxCriticalGrid({
         field: 'observedAt',
         headerName: copy.dashboard.gridColumnUpdated,
         width: 160,
-        valueFormatter: (value) =>
-          value ? new Date(String(value)).toLocaleString('es-CL') : '',
+        valueFormatter: (value) => (value ? new Date(String(value)).toLocaleString('es-CL') : ''),
       },
       {
         field: 'id',

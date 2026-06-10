@@ -7,7 +7,10 @@ export type ClinicalOCRImportProps = {
 };
 
 /** OCR Fase E — Tesseract.js pendiente; texto preliminar revisable. */
-export function ClinicalOCRImport({ onImport, testId = 'epis2-clinical-ocr' }: ClinicalOCRImportProps) {
+export function ClinicalOCRImport({
+  onImport,
+  testId = 'epis2-clinical-ocr',
+}: ClinicalOCRImportProps) {
   return (
     <Stack spacing={1} data-testid={testId}>
       <Typography variant="body2" color="text.secondary">

@@ -17,7 +17,12 @@ for (const rel of [
 }
 
 const policy = readFileSync(join(root, 'scripts/dev-agent/low-risk-policy.mjs'), 'utf8');
-for (const token of ['getPathTier', 'applyLowRiskPatches', 'FORBIDDEN_CONTENT_PATTERNS', 'LOW_RISK_TIER_L0_PREFIXES']) {
+for (const token of [
+  'getPathTier',
+  'applyLowRiskPatches',
+  'FORBIDDEN_CONTENT_PATTERNS',
+  'LOW_RISK_TIER_L0_PREFIXES',
+]) {
   if (!policy.includes(token)) errors.push(`low-risk-policy sin ${token}`);
 }
 
@@ -35,7 +40,9 @@ const sub = readFileSync(join(root, 'scripts/dev-agent/subagents.mjs'), 'utf8');
 if (!sub.includes('ollama-dev-writer')) errors.push('subagents sin ollama-dev-writer');
 
 if (errors.length) {
-  console.error('dev-agent-low-risk-write-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
+  console.error(
+    'dev-agent-low-risk-write-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
+  );
   process.exit(1);
 }
 console.log('dev-agent-low-risk-write-gate OK — Ollama dev escritura L0/L1 acotada');

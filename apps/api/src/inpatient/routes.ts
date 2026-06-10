@@ -9,10 +9,7 @@ import type { FastifyInstance } from 'fastify';
 import { appendAudit } from '../audit/store.js';
 import type { AppConfig } from '../config.js';
 import type { Database } from '../db/client.js';
-import {
-  createRequirePermission,
-  type AuthenticatedRequest,
-} from '../auth/authenticate.js';
+import { createRequirePermission, type AuthenticatedRequest } from '../auth/authenticate.js';
 import {
   createInpatientAdmission,
   dischargeInpatientAdmission,
@@ -97,12 +94,10 @@ export async function registerInpatientRoutes(
       }
       const session = (request as AuthenticatedRequest).session;
       try {
-        const result = await transferInpatientAdmission(
-          db,
-          admissionId,
-          parsed.data.targetBedId,
-          { id: session.sub, username: session.username },
-        );
+        const result = await transferInpatientAdmission(db, admissionId, parsed.data.targetBedId, {
+          id: session.sub,
+          username: session.username,
+        });
         return inpatientTransferResponseSchema.parse(result);
       } catch (e) {
         return reply.status(409).send({

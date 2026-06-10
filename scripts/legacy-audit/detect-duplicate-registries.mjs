@@ -73,13 +73,25 @@ const report = {
 
 for (const [proj, data] of Object.entries(byProject)) {
   if (data['command-registry']?.count > 2) {
-    report.warnings.push({ project: proj, issue: 'Múltiples archivos con command-registry', count: data['command-registry'].count });
+    report.warnings.push({
+      project: proj,
+      issue: 'Múltiples archivos con command-registry',
+      count: data['command-registry'].count,
+    });
   }
   if (data['form-registry']?.count > 3) {
-    report.warnings.push({ project: proj, issue: 'Múltiples form registries', count: data['form-registry'].count });
+    report.warnings.push({
+      project: proj,
+      issue: 'Múltiples form registries',
+      count: data['form-registry'].count,
+    });
   }
   if (data['intent-resolver']?.count > 5) {
-    report.warnings.push({ project: proj, issue: 'Resolvers de intent dispersos', count: data['intent-resolver'].count });
+    report.warnings.push({
+      project: proj,
+      issue: 'Resolvers de intent dispersos',
+      count: data['intent-resolver'].count,
+    });
   }
 }
 

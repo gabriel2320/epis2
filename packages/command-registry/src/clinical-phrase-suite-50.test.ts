@@ -39,10 +39,7 @@ describe('clinical phrase suite 50 (CE-0)', () => {
         role: 'physician',
       };
       if (expectation.kind !== 'needs_patient') {
-        if (
-          expectation.kind !== 'resolved' ||
-          expectation.intent !== 'search_patient'
-        ) {
+        if (expectation.kind !== 'resolved' || expectation.intent !== 'search_patient') {
           input.patientId = DEMO_PATIENT_ID;
         }
       }

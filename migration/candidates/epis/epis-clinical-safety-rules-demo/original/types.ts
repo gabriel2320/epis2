@@ -1,6 +1,6 @@
 export interface SafetyMedication {
   name: string;
-  status?: "active" | "held" | "discontinued" | string;
+  status?: 'active' | 'held' | 'discontinued' | string;
 }
 
 export interface SafetyAllergy {
@@ -27,7 +27,7 @@ export interface ClinicalSafetyInput {
 
 export interface SafetyWarning {
   ruleId: string;
-  severity: "warning" | "critical";
+  severity: 'warning' | 'critical';
   message: string;
   detail: string;
 }

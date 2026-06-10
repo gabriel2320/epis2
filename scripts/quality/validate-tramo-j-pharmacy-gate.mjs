@@ -16,7 +16,8 @@ if (!registry.includes("route: '/epis2/dashboard?tab=pharmacy'")) {
 }
 
 const panel = readFileSync(join(root, 'apps/web/src/components/PharmacyDashboardTab.tsx'), 'utf8');
-if (!panel.includes('epis2-dashboard-pharmacy')) errors.push('PharmacyDashboardTab sin testid raíz');
+if (!panel.includes('epis2-dashboard-pharmacy'))
+  errors.push('PharmacyDashboardTab sin testid raíz');
 if (!panel.includes('epis2-pharmacy-ysite')) errors.push('PharmacyDashboardTab sin panel IDC 161');
 if (!panel.includes('epis2-pharmacy-ysite-rows')) {
   errors.push('PharmacyDashboardTab sin filas Y-Site');

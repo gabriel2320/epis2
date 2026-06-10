@@ -26,7 +26,10 @@ for (const rel of required) {
 
 const registry = readFileSync(join(root, 'apps/web/src/design/radScreenRegistry.ts'), 'utf8');
 const discipline = readFileSync(join(root, 'apps/web/src/design/radDiscipline.ts'), 'utf8');
-const formPage = readFileSync(join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'), 'utf8');
+const formPage = readFileSync(
+  join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'),
+  'utf8',
+);
 
 for (const surface of ['command', 'workspace', 'form', 'grid', 'document']) {
   if (!discipline.includes(`'${surface}'`)) errors.push(`radDiscipline sin superficie ${surface}`);
@@ -40,7 +43,10 @@ if ((formPage.match(/<EpisClinicalFormActionBar/g) ?? []).length !== 1) {
   errors.push('Formulario clínico debe tener una sola ActionBar');
 }
 
-const radComponents = readFileSync(join(root, 'apps/web/src/components/rad/EpisRadFormSurface.tsx'), 'utf8');
+const radComponents = readFileSync(
+  join(root, 'apps/web/src/components/rad/EpisRadFormSurface.tsx'),
+  'utf8',
+);
 if (radComponents.includes('usePatient') || radComponents.includes('clinicalApi')) {
   errors.push('Superficies RAD no deben importar lógica clínica');
 }

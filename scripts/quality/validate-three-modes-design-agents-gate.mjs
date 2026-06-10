@@ -14,7 +14,9 @@ for (const s of ['ThreeModesArchitectureResultSchema', 'ModeTransitionResultSche
 }
 
 if (errors.length) {
-  console.error('three-modes-design-agents-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
+  console.error(
+    'three-modes-design-agents-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
+  );
   process.exit(1);
 }
 console.log('three-modes-design-agents-gate OK');

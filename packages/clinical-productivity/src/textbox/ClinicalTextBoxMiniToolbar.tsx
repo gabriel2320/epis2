@@ -42,11 +42,23 @@ export function ClinicalTextBoxMiniToolbar({
       label: c.label,
       onClick: () => onSlashCommand(c.command),
     })),
-    { id: 'meds', label: copy.clinicalProductivity.textBoxInsertMeds, onClick: onInsertMedications },
+    {
+      id: 'meds',
+      label: copy.clinicalProductivity.textBoxInsertMeds,
+      onClick: onInsertMedications,
+    },
     { id: 'labs', label: copy.clinicalProductivity.textBoxInsertLabs, onClick: onInsertLabs },
-    { id: 'reformulate', label: copy.clinicalProductivity.textBoxReformulate, onClick: onReformulate },
+    {
+      id: 'reformulate',
+      label: copy.clinicalProductivity.textBoxReformulate,
+      onClick: onReformulate,
+    },
     { id: 'soap', label: copy.clinicalProductivity.textBoxSoapConvert, onClick: onSoapConvert },
-    { id: 'omissions', label: copy.clinicalProductivity.textBoxDetectOmissions, onClick: onDetectOmissions },
+    {
+      id: 'omissions',
+      label: copy.clinicalProductivity.textBoxDetectOmissions,
+      onClick: onDetectOmissions,
+    },
     ...getTextboxSnippetMenuItems()
       .filter((s) => !['.soap', '.alta'].includes(s.trigger))
       .map((s) => ({
@@ -58,7 +70,11 @@ export function ClinicalTextBoxMiniToolbar({
 
   const visible = [
     { id: 'copy', label: copy.clinicalProductivity.textBoxCopy, onClick: onCopy },
-    { id: 'patient', label: copy.clinicalProductivity.textBoxInsertPatient, onClick: onInsertPatient },
+    {
+      id: 'patient',
+      label: copy.clinicalProductivity.textBoxInsertPatient,
+      onClick: onInsertPatient,
+    },
     {
       id: 'snippet-soap',
       label: '.soap',

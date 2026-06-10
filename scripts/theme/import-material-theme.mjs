@@ -21,11 +21,7 @@ async function main() {
   }
 
   const raw = JSON.parse(await fs.readFile(path.resolve(inputPath), 'utf8'));
-  const seed =
-    raw.metadata?.sourceColor ??
-    raw.seed ??
-    raw.coreColors?.primary ??
-    '#000000';
+  const seed = raw.metadata?.sourceColor ?? raw.seed ?? raw.coreColors?.primary ?? '#000000';
 
   const normalized = {
     description: raw.description ?? `TYPE: CUSTOM — EPIS2 ${themeId}`,

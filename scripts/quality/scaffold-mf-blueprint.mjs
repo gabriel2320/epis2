@@ -5,9 +5,7 @@
  */
 const [blueprintId, label, intentId, routePath] = process.argv.slice(2);
 if (!blueprintId || !label || !intentId || !routePath) {
-  console.error(
-    'Uso: scaffold-mf-blueprint.mjs <blueprintId> <label> <intentId> <routePath>',
-  );
+  console.error('Uso: scaffold-mf-blueprint.mjs <blueprintId> <label> <intentId> <routePath>');
   process.exit(1);
 }
 

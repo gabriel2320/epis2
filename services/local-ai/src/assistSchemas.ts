@@ -43,12 +43,7 @@ export const ASSIST_BLUEPRINT_FIELDS: Record<string, readonly string[]> = {
     'doubleCheckConfirmed',
     'administrationNotes',
   ],
-  admission_note: [
-    'admissionReason',
-    'clinicalSummary',
-    'initialPlan',
-    'targetBedId',
-  ],
+  admission_note: ['admissionReason', 'clinicalSummary', 'initialPlan', 'targetBedId'],
   allergy_entry: ['substance', 'severity', 'reactionNotes'],
   clinical_problem_entry: ['description', 'status'],
   pharmacy_validation: [

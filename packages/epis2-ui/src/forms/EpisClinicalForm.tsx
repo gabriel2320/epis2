@@ -8,7 +8,12 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { epis2BarLayout } from '../theme/breakpoints.js';
-import { epis2M3ColumnSpanSx, epis2M3FormGridSx, epis2M3FormLayout } from '../theme/m3-layout-tokens.js';import type { ClinicalContextDragPayload } from './clinical-context-dnd.js';
+import {
+  epis2M3ColumnSpanSx,
+  epis2M3FormGridSx,
+  epis2M3FormLayout,
+} from '../theme/m3-layout-tokens.js';
+import type { ClinicalContextDragPayload } from './clinical-context-dnd.js';
 import { EpisClinicalField } from './EpisClinicalField.js';
 
 const clinicalSectionPadding = epis2BarLayout.clinicalPaddingX;
@@ -41,7 +46,10 @@ export function EpisClinicalForm({
   const fieldMap = new Map(blueprint.fields.map((f) => [f.id, f]));
 
   return (
-    <Stack spacing={epis2M3FormLayout.sectionGap} data-testid={`epis2-form-${blueprint.blueprintId}`}>
+    <Stack
+      spacing={epis2M3FormLayout.sectionGap}
+      data-testid={`epis2-form-${blueprint.blueprintId}`}
+    >
       <EpisM3Text role="bodyLarge" color="text.secondary" sx={{ px: 1 }}>
         {blueprint.purpose}
       </EpisM3Text>
@@ -75,8 +83,7 @@ export function EpisClinicalForm({
           </Box>
         );
         const useAccordion =
-          sec.initialVisibility === 'collapsed' ||
-          (collapseNonPrimarySections && sectionIndex > 0);
+          sec.initialVisibility === 'collapsed' || (collapseNonPrimarySections && sectionIndex > 0);
         if (useAccordion) {
           return (
             <Accordion

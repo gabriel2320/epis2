@@ -1,11 +1,7 @@
 import { walkSourceFiles } from './lib/scan-sources.mjs';
 
 const CANONICAL_PREFIX = 'packages/clinical-forms/';
-const FORBIDDEN_NAMES = [
-  'formRegistry.ts',
-  'clinicalFormRegistry.ts',
-  'blueprintRegistry.ts',
-];
+const FORBIDDEN_NAMES = ['formRegistry.ts', 'clinicalFormRegistry.ts', 'blueprintRegistry.ts'];
 
 export async function validate() {
   const details = [];
@@ -16,7 +12,10 @@ export async function validate() {
         details.push(`${rel} → segundo Clinical Form Registry prohibido`);
       }
     }
-    if (/FormRegistryV2|secondFormRegistry|createFormRegistry\(/i.test(content) && !rel.startsWith(CANONICAL_PREFIX)) {
+    if (
+      /FormRegistryV2|secondFormRegistry|createFormRegistry\(/i.test(content) &&
+      !rel.startsWith(CANONICAL_PREFIX)
+    ) {
       details.push(`${rel} → posible segundo Form Registry`);
     }
   }

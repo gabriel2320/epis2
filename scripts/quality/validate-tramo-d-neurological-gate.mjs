@@ -17,7 +17,7 @@ for (const token of [
 }
 
 const api = readFileSync(join(root, 'apps/api/src/dashboard/icu.ts'), 'utf8');
-if (!api.includes('neurological') || !api.includes("idc: 46")) {
+if (!api.includes('neurological') || !api.includes('idc: 46')) {
   errors.push('icu.ts sin neurological o IDC 46 active');
 }
 

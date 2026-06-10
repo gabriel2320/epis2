@@ -16,8 +16,10 @@ if (!registry.includes("route: '/epis2/dashboard?tab=specialty'")) {
 }
 
 const panel = readFileSync(join(root, 'apps/web/src/components/SpecialtyDashboardTab.tsx'), 'utf8');
-if (!panel.includes('epis2-specialty-dashboard')) errors.push('SpecialtyDashboardTab sin testid raíz');
-if (!panel.includes('epis2-specialty-partogram')) errors.push('SpecialtyDashboardTab sin panel IDC 181');
+if (!panel.includes('epis2-specialty-dashboard'))
+  errors.push('SpecialtyDashboardTab sin testid raíz');
+if (!panel.includes('epis2-specialty-partogram'))
+  errors.push('SpecialtyDashboardTab sin panel IDC 181');
 if (!panel.includes('epis2-specialty-partogram-rows')) {
   errors.push('SpecialtyDashboardTab sin filas partograma');
 }

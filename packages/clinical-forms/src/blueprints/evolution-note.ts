@@ -16,7 +16,11 @@ export const evolutionNoteBlueprint = defineBlueprint({
   ],
   fields: [
     field('encounterDate', 'Fecha del encuentro', 'date', { required: true, columnSpan: 4 }),
-    field('subjective', 'Subjetivo', 'textarea', { required: true, clinicalTextBox: true, clinicalTextBoxMode: 'rich' }),
+    field('subjective', 'Subjetivo', 'textarea', {
+      required: true,
+      clinicalTextBox: true,
+      clinicalTextBoxMode: 'rich',
+    }),
     field('objective', 'Objetivo', 'textarea', { clinicalTextBox: true }),
     field('assessment', 'Análisis', 'textarea', { required: true, clinicalTextBox: true }),
     field('plan', 'Plan', 'textarea', { required: true, clinicalTextBox: true }),

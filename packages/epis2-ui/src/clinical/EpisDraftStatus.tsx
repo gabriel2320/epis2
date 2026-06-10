@@ -19,8 +19,7 @@ export type EpisDraftStatusProps = {
 
 export function EpisDraftStatus({ status }: EpisDraftStatusProps) {
   const theme = useTheme();
-  const label =
-    copy.drafts.statusLabels[status as keyof typeof copy.drafts.statusLabels] ?? status;
+  const label = copy.drafts.statusLabels[status as keyof typeof copy.drafts.statusLabels] ?? status;
   const roleKey = STATUS_ROLE[status];
   const role = roleKey ? theme.epis2.clinical[roleKey] : undefined;
   return (

@@ -33,10 +33,10 @@ function argValue(flag) {
 }
 
 const tramo = (argValue('--tramo') ?? process.env.EPIS2_DEV_AGENT_TRAMO)?.toUpperCase();
-const phase =
-  argValue('--phase') ?? process.env.EPIS2_DEV_AGENT_PHASE ?? getActivePhaseHint(root);
+const phase = argValue('--phase') ?? process.env.EPIS2_DEV_AGENT_PHASE ?? getActivePhaseHint(root);
 const withOllama = hasFlag('--ollama') || process.env.EPIS2_DEV_SESSION_OLLAMA === '1';
-const withOllamaAuto = hasFlag('--ollama-auto') || process.env.EPIS2_DEV_SESSION_OLLAMA_AUTO === '1';
+const withOllamaAuto =
+  hasFlag('--ollama-auto') || process.env.EPIS2_DEV_SESSION_OLLAMA_AUTO === '1';
 const ollamaApply = hasFlag('--apply');
 
 mkdirSync(join(root, 'reports'), { recursive: true });
@@ -65,12 +65,16 @@ let ollamaNote = '';
 if (withOllamaAuto) {
   const autoArgs = [];
   if (ollamaApply) autoArgs.push('--apply');
-  const r = spawnSync(process.execPath, [join(root, 'scripts/dev-agent/ollama-automation.mjs'), ...autoArgs], {
-    cwd: root,
-    stdio: 'pipe',
-    encoding: 'utf8',
-    env: { ...process.env, EPIS2_DEV_AGENT_PHASE: phase, EPIS2_DEV_AGENT_TRAMO: tramo ?? '' },
-  });
+  const r = spawnSync(
+    process.execPath,
+    [join(root, 'scripts/dev-agent/ollama-automation.mjs'), ...autoArgs],
+    {
+      cwd: root,
+      stdio: 'pipe',
+      encoding: 'utf8',
+      env: { ...process.env, EPIS2_DEV_AGENT_PHASE: phase, EPIS2_DEV_AGENT_TRAMO: tramo ?? '' },
+    },
+  );
   if (r.status === 0) {
     ollamaNote = ollamaApply ? ' · Ollama auto OK (apply L0)' : ' · Ollama auto OK (dry-run)';
   } else {
@@ -100,4 +104,6 @@ console.log(`dev-session OK → ${briefPath}${ollamaNote}`);
 console.log(`  Subagente primario: ${primarySubagent}`);
 console.log(`  Secuencia: ${sequence.join(' → ')}`);
 console.log('');
-console.log('  Cursor: @reports/dev-agent-brief.md @reports/dev-agent-prompt-' + primarySubagent + '.md');
+console.log(
+  '  Cursor: @reports/dev-agent-brief.md @reports/dev-agent-prompt-' + primarySubagent + '.md',
+);

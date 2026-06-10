@@ -1,33 +1,33 @@
 export type MedicalActionCandidateKind =
-  | "clinical_action"
-  | "medication"
-  | "lab_test"
-  | "imaging_test"
-  | "procedure"
-  | "endoscopy"
-  | "interconsultation"
-  | "diagnosis"
-  | "document"
-  | "visualization"
-  | "tool"
-  | "safety_action";
+  | 'clinical_action'
+  | 'medication'
+  | 'lab_test'
+  | 'imaging_test'
+  | 'procedure'
+  | 'endoscopy'
+  | 'interconsultation'
+  | 'diagnosis'
+  | 'document'
+  | 'visualization'
+  | 'tool'
+  | 'safety_action';
 
 export type MedicalActionSource =
-  | "epione"
-  | "local_catalog"
-  | "isp_mock"
-  | "rxnorm"
-  | "loinc"
-  | "fonasa"
-  | "cie10"
-  | "ges"
-  | "epivigila"
-  | "openmrs_import"
-  | "gnuhealth_inspiration"
-  | "lyra"
-  | "manual";
+  | 'epione'
+  | 'local_catalog'
+  | 'isp_mock'
+  | 'rxnorm'
+  | 'loinc'
+  | 'fonasa'
+  | 'cie10'
+  | 'ges'
+  | 'epivigila'
+  | 'openmrs_import'
+  | 'gnuhealth_inspiration'
+  | 'lyra'
+  | 'manual';
 
-export type MedicalActionResolveContext = "census" | "patient" | "form" | "document";
+export type MedicalActionResolveContext = 'census' | 'patient' | 'form' | 'document';
 
 export interface MedicalActionCandidate {
   id: string;
@@ -49,7 +49,7 @@ export interface MedicalActionCandidate {
   requiredPermissions?: readonly string[];
   priority: number;
   commonalityScore: number;
-  riskLevel?: "low" | "medium" | "high";
+  riskLevel?: 'low' | 'medium' | 'high';
   prefillFormData?: Record<string, string>;
   metadata?: Record<string, string | boolean | number>;
 }
@@ -57,12 +57,12 @@ export interface MedicalActionCandidate {
 export interface MedicalActionSuggestion {
   label: string;
   description: string;
-  kind: MedicalActionCandidateKind | "action" | "visualization" | "tool";
+  kind: MedicalActionCandidateKind | 'action' | 'visualization' | 'tool';
   actionId?: string;
   viewId?: string;
   toolId?: string;
   prefillFormData?: Record<string, string>;
-  confidence: "high" | "medium" | "low";
+  confidence: 'high' | 'medium' | 'low';
   chips: readonly string[];
   source: MedicalActionSource;
   requiresHumanReview: true;

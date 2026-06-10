@@ -39,9 +39,11 @@ describeIntegration('Golden Clinical Journey — API', () => {
       headers: { cookie },
     });
     expect(patientsRes.statusCode).toBe(200);
-    const patients = (patientsRes.json() as {
-      patients: { id: string; demoLabel?: string; isSynthetic?: boolean }[];
-    }).patients;
+    const patients = (
+      patientsRes.json() as {
+        patients: { id: string; demoLabel?: string; isSynthetic?: boolean }[];
+      }
+    ).patients;
     const demo001 = DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-001');
     const patient =
       patients.find((p) => p.id === demo001?.patientId) ??

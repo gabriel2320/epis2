@@ -33,7 +33,10 @@ export const RecetaDemo: Story = {
       <>
         <PrintField label="Medicamento" value="Losartán 50 mg — 1 comprimido cada 24 h, vía oral" />
         <PrintField label="Duración" value="30 días" />
-        <PrintField label="Indicaciones" value="Tomar en la mañana. No suspender sin control médico." />
+        <PrintField
+          label="Indicaciones"
+          value="Tomar en la mañana. No suspender sin control médico."
+        />
       </>
     ),
     footer: 'Dr./Dra. Demo — Generado en EPIS2 · datos sintéticos',

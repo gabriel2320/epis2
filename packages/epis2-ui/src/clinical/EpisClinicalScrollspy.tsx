@@ -70,7 +70,12 @@ export function EpisClinicalScrollspy({
   if (sections.length < 2) return null;
 
   return (
-    <Box component="nav" aria-label="Índice del formulario" sx={epis2ClinicalScrollspyNavSx} data-testid={testId}>
+    <Box
+      component="nav"
+      aria-label="Índice del formulario"
+      sx={epis2ClinicalScrollspyNavSx}
+      data-testid={testId}
+    >
       <List dense disablePadding>
         {sections.map((section) => (
           <ListItemButton
@@ -80,7 +85,10 @@ export function EpisClinicalScrollspy({
             data-testid={`epis2-scrollspy-${section.id}`}
             sx={{ borderRadius: 1, mb: 0.5 }}
           >
-            <ListItemText primary={section.label} primaryTypographyProps={{ fontSize: '0.875rem' }} />
+            <ListItemText
+              primary={section.label}
+              primaryTypographyProps={{ fontSize: '0.875rem' }}
+            />
           </ListItemButton>
         ))}
       </List>

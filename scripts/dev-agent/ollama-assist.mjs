@@ -73,7 +73,9 @@ async function main() {
   const route = await resolveOllamaRoute({ function: 'dev-plan' });
   const OLLAMA_URL = route.baseUrl;
   const MODEL = route.model;
-  console.log(`dev-agent-ollama · ${route.function} → ${MODEL} (tier ${route.tier}, ${route.mode})`);
+  console.log(
+    `dev-agent-ollama · ${route.function} → ${MODEL} (tier ${route.tier}, ${route.mode})`,
+  );
 
   const ready = await ensureOllamaReady({ function: 'dev-plan' });
   if (!ready.ready) {

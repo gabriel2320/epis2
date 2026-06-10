@@ -14,18 +14,24 @@ export type PatientClinicalSummaryPanelProps = {
   summaryFields: Record<string, string>;
 };
 
-export function PatientClinicalSummaryPanel({
-  summaryFields,
-}: PatientClinicalSummaryPanelProps) {
+export function PatientClinicalSummaryPanel({ summaryFields }: PatientClinicalSummaryPanelProps) {
   const entries = Object.entries(summaryFields).filter(([, v]) => v.trim());
   if (entries.length === 0) return null;
 
   return (
-    <EpisWorkspaceSection title={copy.activePatient.clinicalContextTitle} testId="epis2-clinical-summary">
+    <EpisWorkspaceSection
+      title={copy.activePatient.clinicalContextTitle}
+      testId="epis2-clinical-summary"
+    >
       <Stack spacing={1.5}>
         {entries.map(([key, value]) => (
           <Box key={key}>
-            <Typography variant="body2" color="text.secondary" display="block" sx={{ lineHeight: 1.55 }}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              display="block"
+              sx={{ lineHeight: 1.55 }}
+            >
               {FIELD_LABELS[key] ?? key}
             </Typography>
             <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap' }}>

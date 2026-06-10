@@ -18,7 +18,10 @@ for (const rel of required) {
   if (!existsSync(join(root, rel))) errors.push(`Falta ${rel}`);
 }
 
-const schemaSrc = readFileSync(join(root, 'packages/clinical-forms/src/blueprintFormSchema.ts'), 'utf8');
+const schemaSrc = readFileSync(
+  join(root, 'packages/clinical-forms/src/blueprintFormSchema.ts'),
+  'utf8',
+);
 if (!schemaSrc.includes('buildBlueprintFormSchema')) {
   errors.push('blueprintFormSchema.ts sin buildBlueprintFormSchema');
 }
@@ -44,7 +47,10 @@ for (const exportName of ['FormProvider', 'EpisClinicalFormRhf', 'useEpisClinica
   if (!formsIndex.includes(exportName)) errors.push(`forms/index.ts no exporta ${exportName}`);
 }
 
-const pageSrc = readFileSync(join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'), 'utf8');
+const pageSrc = readFileSync(
+  join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'),
+  'utf8',
+);
 if (!pageSrc.includes('useEpisClinicalBlueprintForm')) {
   errors.push('GeneratedClinicalFormPage no usa useEpisClinicalBlueprintForm');
 }

@@ -35,5 +35,9 @@ run('npm run db:validate', 'npm', ['run', 'db:validate']);
 run('quality:golden-journey', 'npm', ['run', 'quality:golden-journey']);
 run('quality:pilot-trial', 'npm', ['run', 'quality:pilot-trial']);
 
-console.log('\nrun-tramos-clinical-signoff-session OK — gates técnicos listos para signoff humano A–K');
-console.log('Siguiente: docs/product/EPIS2_PILOT_INSTITUTIONAL_WALKTHROUGH.md + acta fuera del repo');
+console.log(
+  '\nrun-tramos-clinical-signoff-session OK — gates técnicos listos para signoff humano A–K',
+);
+console.log(
+  'Siguiente: docs/product/EPIS2_PILOT_INSTITUTIONAL_WALKTHROUGH.md + acta fuera del repo',
+);

@@ -8,7 +8,10 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
 const rules = readFileSync(join(root, 'apps/web/src/quality/uiDensityRules.ts'), 'utf8');
-const hero = readFileSync(join(root, 'packages/epis2-ui/src/command/EpisCommandCenterHero.tsx'), 'utf8');
+const hero = readFileSync(
+  join(root, 'packages/epis2-ui/src/command/EpisCommandCenterHero.tsx'),
+  'utf8',
+);
 const inlineBar = readFileSync(
   join(root, 'packages/epis2-ui/src/command/EpisCommandCenterInlineBar.tsx'),
   'utf8',

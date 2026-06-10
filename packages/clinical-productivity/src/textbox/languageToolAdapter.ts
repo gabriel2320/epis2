@@ -16,7 +16,11 @@ function tokenFromMatch(text: string, match: LanguageToolMatch): string {
   return text.slice(match.offset, match.offset + match.length).trim();
 }
 
-function mapLanguageToolResponse(text: string, data: LanguageToolResponse, limit = 5): ClinicalSpellIssue[] {
+function mapLanguageToolResponse(
+  text: string,
+  data: LanguageToolResponse,
+  limit = 5,
+): ClinicalSpellIssue[] {
   const matches = data.matches ?? [];
   return matches.slice(0, limit).map((match) => ({
     token: tokenFromMatch(text, match),

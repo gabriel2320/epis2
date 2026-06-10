@@ -25,7 +25,7 @@ if (!dashboard.includes("to: '/espacio/epicrisis'") || !dashboard.includes('onOp
 }
 
 const api = readFileSync(join(root, 'apps/api/src/dashboard/icu.ts'), 'utf8');
-if (!api.includes("idc: 50") || !api.includes("status: 'active'")) {
+if (!api.includes('idc: 50') || !api.includes("status: 'active'")) {
   errors.push('icu.ts IDC 50 no active');
 }
 

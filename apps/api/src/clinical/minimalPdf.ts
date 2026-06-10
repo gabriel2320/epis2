@@ -1,8 +1,6 @@
 /** PDF 1.4 mínimo (texto ASCII) — sin dependencias externas. */
 export function buildMinimalPdf(lines: string[]): Buffer {
-  const safe = lines
-    .map((line) => line.replace(/[^\x20-\x7EáéíóúñÁÉÍÓÚÑüÜ]/g, '?'))
-    .slice(0, 48);
+  const safe = lines.map((line) => line.replace(/[^\x20-\x7EáéíóúñÁÉÍÓÚÑüÜ]/g, '?')).slice(0, 48);
 
   const textOps = safe
     .map((line, i) => {

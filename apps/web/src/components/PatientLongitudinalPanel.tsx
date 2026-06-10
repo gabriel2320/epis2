@@ -97,8 +97,7 @@ export function PatientLongitudinalPanel({
 
   useEffect(() => {
     if (!focusSection) return;
-    const target =
-      focusSection === 'timeline' ? timelineRef.current : documentsRef.current;
+    const target = focusSection === 'timeline' ? timelineRef.current : documentsRef.current;
     target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, [focusSection]);
 
@@ -119,7 +118,9 @@ export function PatientLongitudinalPanel({
               );
             }}
           >
-            {exporting === 'txt' ? copy.longitudinal.exportDownloading : copy.longitudinal.exportSummary}
+            {exporting === 'txt'
+              ? copy.longitudinal.exportDownloading
+              : copy.longitudinal.exportSummary}
           </Button>
           <Button
             size="small"
@@ -230,10 +231,7 @@ export function PatientLongitudinalPanel({
             {copy.longitudinal.viewResults}
           </Button>
         ) : null}
-        <LabObservationsGrid
-          rows={data.observations}
-          data-testid="epis2-lab-observations-grid"
-        />
+        <LabObservationsGrid rows={data.observations} data-testid="epis2-lab-observations-grid" />
       </Section>
 
       <Section
@@ -356,43 +354,39 @@ export function PatientLongitudinalPanel({
       </Box>
 
       <Box ref={documentsRef}>
-      <Section title={copy.longitudinal.documents} empty={data.documents.length === 0}>
-        <DocumentIndexTree documents={data.documents} />
-        <Box sx={{ mt: 2 }}>
-          <DocumentSearchPanel patientId={data.patientId} />
-        </Box>
-        <Accordion
-          disableGutters
-          elevation={0}
-          defaultExpanded={false}
-          sx={{
-            mt: 2,
-            border: 1,
-            borderColor: 'divider',
-            borderRadius: 1,
-            bgcolor: 'transparent',
-            '&:before': { display: 'none' },
-          }}
-          data-testid="epis2-patient-ai-panel-accordion"
-        >
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography variant="subtitle2">{copy.ai.panelTitle}</Typography>
-          </AccordionSummary>
-          <AccordionDetails sx={{ pt: 0 }}>
-            <PatientClinicalAiPanel patientId={data.patientId} />
-          </AccordionDetails>
-        </Accordion>
-      </Section>
+        <Section title={copy.longitudinal.documents} empty={data.documents.length === 0}>
+          <DocumentIndexTree documents={data.documents} />
+          <Box sx={{ mt: 2 }}>
+            <DocumentSearchPanel patientId={data.patientId} />
+          </Box>
+          <Accordion
+            disableGutters
+            elevation={0}
+            defaultExpanded={false}
+            sx={{
+              mt: 2,
+              border: 1,
+              borderColor: 'divider',
+              borderRadius: 1,
+              bgcolor: 'transparent',
+              '&:before': { display: 'none' },
+            }}
+            data-testid="epis2-patient-ai-panel-accordion"
+          >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography variant="subtitle2">{copy.ai.panelTitle}</Typography>
+            </AccordionSummary>
+            <AccordionDetails sx={{ pt: 0 }}>
+              <PatientClinicalAiPanel patientId={data.patientId} />
+            </AccordionDetails>
+          </Accordion>
+        </Section>
       </Box>
     </Stack>
   );
 }
 
-function DocumentIndexTree({
-  documents,
-}: {
-  documents: PatientLongitudinalResponse['documents'];
-}) {
+function DocumentIndexTree({ documents }: { documents: PatientLongitudinalResponse['documents'] }) {
   const items = useMemo(
     () =>
       buildDocumentTreeByType(

@@ -10,19 +10,10 @@ export type EpisTreeViewSuspenseProps = EpisTreeViewProps & {
   loadingLabel?: string;
 };
 
-export function EpisTreeViewSuspense({
-  loadingLabel,
-  ...props
-}: EpisTreeViewSuspenseProps) {
+export function EpisTreeViewSuspense({ loadingLabel, ...props }: EpisTreeViewSuspenseProps) {
   return (
     <Suspense
-      fallback={
-        loadingLabel ? (
-          <EpisLoadingState label={loadingLabel} />
-        ) : (
-          <EpisLoadingState />
-        )
-      }
+      fallback={loadingLabel ? <EpisLoadingState label={loadingLabel} /> : <EpisLoadingState />}
     >
       <LazyEpisTreeView {...props} />
     </Suspense>

@@ -2,9 +2,8 @@
  * Evals sintéticas IA (V5) — sin Ollama.
  */
 async function main() {
-  const { runSyntheticAiEvals, allSyntheticEvalsPassed } = await import(
-    '../services/local-ai/dist/syntheticEvals.js'
-  );
+  const { runSyntheticAiEvals, allSyntheticEvalsPassed } =
+    await import('../services/local-ai/dist/syntheticEvals.js');
   const results = runSyntheticAiEvals();
   for (const r of results) {
     const mark = r.passed ? 'OK' : 'FAIL';

@@ -1,7 +1,4 @@
-export {
-  EPIS2_COMMAND_DEFINITIONS,
-  AMBIGUOUS_PHRASES,
-} from './definitions.js';
+export { EPIS2_COMMAND_DEFINITIONS, AMBIGUOUS_PHRASES } from './definitions.js';
 export {
   INTENT_ROUTE_PATHS,
   DASHBOARD_TAB_BY_INTENT,
@@ -20,10 +17,7 @@ export {
   type RankedCommandMatch,
 } from './rank.js';
 export { extractSlots } from './slots.js';
-export {
-  buildConfirmationMessage,
-  requiresExplicitConfirmation,
-} from './confirmation.js';
+export { buildConfirmationMessage, requiresExplicitConfirmation } from './confirmation.js';
 export { resolveCommandWithAutoConfirm } from './resolve-command-test.js';
 export { resolveCommand } from './router.js';
 export {
@@ -59,11 +53,7 @@ export {
   MAX_GUIDED_CANDIDATES,
   requiresConfirmation,
 } from './fallback.js';
-export {
-  COLLOQUIAL_RULES,
-  matchColloquialRule,
-  type ColloquialRule,
-} from './colloquial-rules.js';
+export { COLLOQUIAL_RULES, matchColloquialRule, type ColloquialRule } from './colloquial-rules.js';
 export {
   INTENT_SECURE_METADATA,
   getSecureCommandMeta,
@@ -74,10 +64,7 @@ export {
   type CommandSafetyLevel,
   type SecureCommandMeta,
 } from './intent-metadata.js';
-export {
-  applyContextScoreBoost,
-  contextFallbackIntents,
-} from './context-rank.js';
+export { applyContextScoreBoost, contextFallbackIntents } from './context-rank.js';
 export {
   ASSIST_ROUTE_MIN_CONFIDENCE,
   ASSIST_ROUTE_RESOLVE_CONFIDENCE,

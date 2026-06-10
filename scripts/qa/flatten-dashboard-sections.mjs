@@ -28,12 +28,10 @@ function transform(content) {
   out = out.replace(/Paper, /g, '');
 
   if (out.includes('EpisWorkspaceSection') && !out.includes('EpisWorkspaceSection,')) {
-    out = out.replace(
-      /import \{([^}]+)\} from '@epis2\/epis2-ui';/,
-      (match, imports) =>
-        imports.includes('EpisWorkspaceSection')
-          ? match
-          : `import { EpisWorkspaceSection, ${imports.trim()} } from '@epis2/epis2-ui';`,
+    out = out.replace(/import \{([^}]+)\} from '@epis2\/epis2-ui';/, (match, imports) =>
+      imports.includes('EpisWorkspaceSection')
+        ? match
+        : `import { EpisWorkspaceSection, ${imports.trim()} } from '@epis2/epis2-ui';`,
     );
   }
   return out;

@@ -1,5 +1,11 @@
 import type { ReactNode } from 'react';
-import { Accordion, AccordionDetails, AccordionSummary, EpisM3Text, ExpandMoreIcon } from '@epis2/epis2-ui';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  EpisM3Text,
+  ExpandMoreIcon,
+} from '@epis2/epis2-ui';
 import { useRadTabIndex } from '../../design/useRadTabIndex.js';
 
 export type EpisRadFormSectionAccordionProps = {

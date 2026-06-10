@@ -57,7 +57,9 @@ export function ClinicalCommandPalette({
 
   const run = (item: ClinicalCommandPaletteItem) => {
     if (item.requiresConfirmation) {
-      const ok = window.confirm(copy.clinicalProductivity.confirmRiskyAction.replace('{action}', item.label));
+      const ok = window.confirm(
+        copy.clinicalProductivity.confirmRiskyAction.replace('{action}', item.label),
+      );
       if (!ok) return;
     }
     item.onSelect();
@@ -65,7 +67,13 @@ export function ClinicalCommandPalette({
   };
 
   return (
-    <EpisDialog open={open} onClose={onClose} fullWidth maxWidth="sm" data-testid="epis2-clinical-command-palette">
+    <EpisDialog
+      open={open}
+      onClose={onClose}
+      fullWidth
+      maxWidth="sm"
+      data-testid="epis2-clinical-command-palette"
+    >
       <Stack spacing={2} sx={{ p: 2 }}>
         <Typography variant="h6">{title}</Typography>
         <EpisTextField
@@ -79,7 +87,10 @@ export function ClinicalCommandPalette({
         <List dense>
           {filtered.map((item) => (
             <ListItemButton key={item.id} onClick={() => run(item)}>
-              <ListItemText primary={item.label} {...(item.group ? { secondary: item.group } : {})} />
+              <ListItemText
+                primary={item.label}
+                {...(item.group ? { secondary: item.group } : {})}
+              />
             </ListItemButton>
           ))}
         </List>

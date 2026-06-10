@@ -216,9 +216,7 @@ export function ClinicalWidgetCard({ definition, visibility, patientId }: Clinic
         badge={copy.demoBadge}
       />
       <Epis2WidgetBody>{body}</Epis2WidgetBody>
-      {definition.id !== 'pending-drafts' ? (
-        <Epis2WidgetActions actions={headerActions} />
-      ) : null}
+      {definition.id !== 'pending-drafts' ? <Epis2WidgetActions actions={headerActions} /> : null}
       {definition.copy.aiDisclosure ? (
         <Epis2WidgetAiDisclosure message={definition.copy.aiDisclosure} />
       ) : null}

@@ -4,7 +4,10 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const bulkSrc = readFileSync(join(root, 'apps/web/src/components/actions/EpisBulkActionMenu.tsx'), 'utf8');
+const bulkSrc = readFileSync(
+  join(root, 'apps/web/src/components/actions/EpisBulkActionMenu.tsx'),
+  'utf8',
+);
 const gridSrc = readFileSync(
   join(root, 'apps/web/src/components/dashboard-md3/EpisDashboardMd3MainGrid.tsx'),
   'utf8',

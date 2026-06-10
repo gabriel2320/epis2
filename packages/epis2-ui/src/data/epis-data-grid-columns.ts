@@ -2,7 +2,10 @@ import type { GridColDef } from '@mui/x-data-grid';
 
 const NUMERIC_CELL_CLASS = 'epis2-grid-numeric-cell';
 
-function mergeCellClass(existing: GridColDef['cellClassName'], extra: string): GridColDef['cellClassName'] {
+function mergeCellClass(
+  existing: GridColDef['cellClassName'],
+  extra: string,
+): GridColDef['cellClassName'] {
   if (!existing) return extra;
   if (typeof existing === 'function') {
     return (params) => {

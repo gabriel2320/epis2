@@ -30,7 +30,9 @@ describe('buildEpis2Components motion', () => {
     expect((reducedRoot as (p: { theme: Theme }) => object)({ theme: mockTheme })).toMatchObject({
       transition: 'none',
     });
-    expect((standardRoot as (p: { theme: Theme }) => object)({ theme: mockTheme })).not.toMatchObject({
+    expect(
+      (standardRoot as (p: { theme: Theme }) => object)({ theme: mockTheme }),
+    ).not.toMatchObject({
       transition: 'none',
     });
   });

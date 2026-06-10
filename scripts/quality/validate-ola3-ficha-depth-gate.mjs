@@ -28,11 +28,7 @@ if (!charts.includes('epis2-patient-clinical-charts')) {
 }
 
 const e2e = readFileSync(join(root, 'e2e/ola3-ficha-journey.spec.ts'), 'utf8');
-for (const token of [
-  'epis2-longitudinal-timeline',
-  'Losartán',
-  'epis2-chart-vitals-trend',
-]) {
+for (const token of ['epis2-longitudinal-timeline', 'Losartán', 'epis2-chart-vitals-trend']) {
   if (!e2e.includes(token)) errors.push(`e2e ola3 sin ${token}`);
 }
 

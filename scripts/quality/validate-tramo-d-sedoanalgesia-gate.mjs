@@ -17,7 +17,7 @@ for (const token of [
 }
 
 const api = readFileSync(join(root, 'apps/api/src/dashboard/icu.ts'), 'utf8');
-if (!api.includes('sedoanalgesia') || !api.includes("idc: 49")) {
+if (!api.includes('sedoanalgesia') || !api.includes('idc: 49')) {
   errors.push('icu.ts sin sedoanalgesia o IDC 49 active');
 }
 

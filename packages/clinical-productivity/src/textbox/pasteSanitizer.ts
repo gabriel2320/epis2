@@ -1,10 +1,4 @@
-const DANGEROUS_PATTERNS = [
-  /<script[\s>]/i,
-  /javascript:/i,
-  /on\w+\s*=/i,
-  /<iframe/i,
-  /<object/i,
-];
+const DANGEROUS_PATTERNS = [/<script[\s>]/i, /javascript:/i, /on\w+\s*=/i, /<iframe/i, /<object/i];
 
 /** Pega solo texto plano; elimina HTML/formato externo peligroso. */
 export function sanitizePastedClinicalText(raw: string): string {

@@ -1,9 +1,5 @@
 import { copy } from '@epis2/design-system';
-import {
-  EpisButton,
-  Stack,
-  Typography,
-} from '@epis2/epis2-ui';
+import { EpisButton, Stack, Typography } from '@epis2/epis2-ui';
 import type { DashboardTab } from '../../routes/clinicalNavigate.js';
 import type { DashboardNavDestination } from '../../dashboard-md3/dashboardNavDestinations.js';
 import { EPIS_DASHBOARD_NAV_MAX_VISIBLE } from '../../dashboard-md3/dashboardNavDestinations.js';

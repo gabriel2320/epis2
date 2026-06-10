@@ -37,25 +37,51 @@ const pharmacyBoard: PharmacyDashboardResponse = {
   ],
   ySiteChecks: [{ drugA: 'Midazolam', drugB: 'Fentanilo', compatible: true, note: 'Compatible' }],
   renalDoseAdjustments: [
-    { patientDisplayName: 'Paciente DEMO-005', medication: 'Gabapentina', gfrMlMin: 38, recommendedDose: '300 mg' },
+    {
+      patientDisplayName: 'Paciente DEMO-005',
+      medication: 'Gabapentina',
+      gfrMlMin: 38,
+      recommendedDose: '300 mg',
+    },
   ],
   tdmMonitoring: [
-    { patientDisplayName: 'Paciente DEMO-005', drug: 'Vancomicina', levelMcgMl: 18, targetRange: '15–20' },
+    {
+      patientDisplayName: 'Paciente DEMO-005',
+      drug: 'Vancomicina',
+      levelMcgMl: 18,
+      targetRange: '15–20',
+    },
   ],
   ramReports: [
-    { patientDisplayName: 'Paciente DEMO-005', suspectDrug: 'Amoxicilina', reactionType: 'Urticaria', severity: 'moderate' },
+    {
+      patientDisplayName: 'Paciente DEMO-005',
+      suspectDrug: 'Amoxicilina',
+      reactionType: 'Urticaria',
+      severity: 'moderate',
+    },
   ],
   dispensingQueue: [
-    { prescriptionId: 'RX-1', patientDisplayName: 'Paciente DEMO-005', medication: 'Losartán', status: 'pending' },
+    {
+      prescriptionId: 'RX-1',
+      patientDisplayName: 'Paciente DEMO-005',
+      medication: 'Losartán',
+      status: 'pending',
+    },
   ],
-  crashCartInventory: [{ cartId: 'CP-1', location: 'UCI', expiryAlerts: 0, lastCheck: '2026-06-07' }],
+  crashCartInventory: [
+    { cartId: 'CP-1', location: 'UCI', expiryAlerts: 0, lastCheck: '2026-06-07' },
+  ],
   controlledSubstances: [{ medication: 'Fentanilo', balanceUnits: 12, discrepancyFlag: false }],
   drugReturns: [
     { patientDisplayName: 'Paciente DEMO-005', medication: 'Morfina', quantity: 2, reason: 'Alta' },
   ],
   stockoutAlerts: [{ medication: 'Meropenem', daysUntilStockout: 3 }],
   demoTasks: [
-    { id: 'pharm-task-validation', label: 'Validación farmacéutica', commandSample: 'validacion farmaceutica' },
+    {
+      id: 'pharm-task-validation',
+      label: 'Validación farmacéutica',
+      commandSample: 'validacion farmaceutica',
+    },
   ],
   metrics: {
     activePharmacyModules: 10,
@@ -115,7 +141,9 @@ vi.mock('./rad/EpisRadDashboardTabShell.js', () => ({
 }));
 
 vi.mock('./rad/EpisRadFormSectionAccordion.js', () => ({
-  EpisRadFormSectionAccordion: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+  EpisRadFormSectionAccordion: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
 }));
 
 describe('PharmacyDashboardTab', () => {

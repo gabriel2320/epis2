@@ -27,7 +27,10 @@ if (aiSrc.includes('onSign') || aiSrc.includes('autoApprove')) {
 }
 
 const textboxSrc = readFileSync(textboxPath, 'utf8');
-const statePath = join(root, 'packages/clinical-productivity/src/textbox/useClinicalTextBoxState.ts');
+const statePath = join(
+  root,
+  'packages/clinical-productivity/src/textbox/useClinicalTextBoxState.ts',
+);
 const stateSrc = readFileSync(statePath, 'utf8');
 if (!textboxSrc.includes('ai_suggestion') && !stateSrc.includes('ai_suggestion')) {
   errors.push('ClinicalTextBox debe marcar origen ai_suggestion');
@@ -48,7 +51,9 @@ if (!originSrc.match(/mayAutoSign[\s\S]*return false/)) {
 }
 
 if (errors.length) {
-  console.error('clinical-ai-text-safety-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
+  console.error(
+    'clinical-ai-text-safety-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
+  );
   process.exit(1);
 }
 

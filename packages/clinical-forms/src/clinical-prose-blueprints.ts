@@ -7,6 +7,8 @@ export const CLINICAL_PROSE_BLUEPRINT_IDS = [
 
 export type ClinicalProseBlueprintId = (typeof CLINICAL_PROSE_BLUEPRINT_IDS)[number];
 
-export function blueprintUsesClinicalProse(blueprintId: string): blueprintId is ClinicalProseBlueprintId {
+export function blueprintUsesClinicalProse(
+  blueprintId: string,
+): blueprintId is ClinicalProseBlueprintId {
   return (CLINICAL_PROSE_BLUEPRINT_IDS as readonly string[]).includes(blueprintId);
 }

@@ -5,7 +5,10 @@ import { getBlueprintById } from '@epis2/clinical-forms';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { Epis2ThemeProvider } from '../providers/Epis2ThemeProvider.js';
-import { CLINICAL_CONTEXT_DRAG_MIME, serializeClinicalContextDrag } from './clinical-context-dnd.js';
+import {
+  CLINICAL_CONTEXT_DRAG_MIME,
+  serializeClinicalContextDrag,
+} from './clinical-context-dnd.js';
 import { EpisClinicalField } from './EpisClinicalField.js';
 
 afterEach(() => cleanup());

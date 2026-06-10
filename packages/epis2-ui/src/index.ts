@@ -16,8 +16,15 @@ export {
   epis2BodyFontFamily,
 } from './theme/theme.js';
 export { useTheme } from '@mui/material/styles';
-export { Epis2ThemeProvider, type Epis2ThemeProviderProps, useEpis2ThemePreferences } from './providers/Epis2ThemeProvider.js';
-export { EpisThemeModeToggle, type EpisThemeModeToggleProps } from './providers/EpisThemeModeToggle.js';
+export {
+  Epis2ThemeProvider,
+  type Epis2ThemeProviderProps,
+  useEpis2ThemePreferences,
+} from './providers/Epis2ThemeProvider.js';
+export {
+  EpisThemeModeToggle,
+  type EpisThemeModeToggleProps,
+} from './providers/EpisThemeModeToggle.js';
 export {
   EpisAppearancePreferencesPanel,
   type EpisAppearancePreferencesPanelProps,

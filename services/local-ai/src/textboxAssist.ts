@@ -54,7 +54,10 @@ export async function runTextboxAssist(
 
   for (const pattern of FORBIDDEN) {
     if (pattern.test(generated.text)) {
-      return { status: 'rejected' as const, message: 'Respuesta IA rechazada por política de seguridad' };
+      return {
+        status: 'rejected' as const,
+        message: 'Respuesta IA rechazada por política de seguridad',
+      };
     }
   }
 

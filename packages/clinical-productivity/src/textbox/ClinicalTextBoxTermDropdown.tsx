@@ -37,7 +37,11 @@ export function ClinicalTextBoxTermDropdown({
         overflow: 'auto',
       }}
     >
-      <Typography variant="caption" color="text.secondary" sx={{ px: 1.5, pt: 1, display: 'block' }}>
+      <Typography
+        variant="caption"
+        color="text.secondary"
+        sx={{ px: 1.5, pt: 1, display: 'block' }}
+      >
         {copy.clinicalProductivity.textBoxTermSuggestions}
       </Typography>
       <List dense disablePadding>

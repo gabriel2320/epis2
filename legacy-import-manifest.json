@@ -310,7 +310,12 @@
       "targetArea": "apps/web/src/pages/DashboardModePage",
       "reason": "Worklist y agregación Mi trabajo; Modo tablero opcional EPIS2-12",
       "legacyDependencies": ["EpioneMasterDashboard"],
-      "requiredAdaptations": ["Ruta /epis2/dashboard", "No home", "MUI", "Intents open_dashboard_*"],
+      "requiredAdaptations": [
+        "Ruta /epis2/dashboard",
+        "No home",
+        "MUI",
+        "Intents open_dashboard_*"
+      ],
       "requiredTests": ["golden-v0 incluye paso tablero", "command-center-home validator"],
       "status": "PLANNED",
       "productVersion": "V0",

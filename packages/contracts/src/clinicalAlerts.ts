@@ -16,6 +16,4 @@ export const patientClinicalAlertsResponseSchema = z.object({
 });
 
 export type ClinicalAlert = z.infer<typeof clinicalAlertSchema>;
-export type PatientClinicalAlertsResponse = z.infer<
-  typeof patientClinicalAlertsResponseSchema
->;
+export type PatientClinicalAlertsResponse = z.infer<typeof patientClinicalAlertsResponseSchema>;

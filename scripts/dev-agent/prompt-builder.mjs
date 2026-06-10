@@ -95,7 +95,10 @@ export function buildSessionIndex(root, { phase, tramo, sequence }) {
     '',
     '## Secuencia recomendada',
     '',
-    ...sequence.map((id, i) => `${i + 1}. [\`${id}\`](./dev-agent-prompt-${id}.md) — ${DEV_SUBAGENTS[id]?.title ?? id}`),
+    ...sequence.map(
+      (id, i) =>
+        `${i + 1}. [\`${id}\`](./dev-agent-prompt-${id}.md) — ${DEV_SUBAGENTS[id]?.title ?? id}`,
+    ),
     '',
     '## Stack Ollama (desarrollo)',
     '',

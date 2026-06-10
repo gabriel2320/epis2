@@ -10,19 +10,10 @@ export type EpisTrendChartSuspenseProps = EpisTrendChartProps & {
   loadingLabel?: string;
 };
 
-export function EpisTrendChartSuspense({
-  loadingLabel,
-  ...props
-}: EpisTrendChartSuspenseProps) {
+export function EpisTrendChartSuspense({ loadingLabel, ...props }: EpisTrendChartSuspenseProps) {
   return (
     <Suspense
-      fallback={
-        loadingLabel ? (
-          <EpisLoadingState label={loadingLabel} />
-        ) : (
-          <EpisLoadingState />
-        )
-      }
+      fallback={loadingLabel ? <EpisLoadingState label={loadingLabel} /> : <EpisLoadingState />}
     >
       <LazyEpisTrendChart {...props} />
     </Suspense>

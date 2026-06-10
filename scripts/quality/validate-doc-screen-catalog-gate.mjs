@@ -5,10 +5,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const catalog = readFileSync(
-  join(root, 'docs/product/EPIS2_COMPLETE_SCREEN_CATALOG.md'),
-  'utf8',
-);
+const catalog = readFileSync(join(root, 'docs/product/EPIS2_COMPLETE_SCREEN_CATALOG.md'), 'utf8');
 const errors = [];
 
 const checks = [

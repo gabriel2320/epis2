@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import type { GridColDef } from '@mui/x-data-grid';
-import { enhanceEpisDataGridColumns, episDataGridNumericCellClass } from './epis-data-grid-columns.js';
+import {
+  enhanceEpisDataGridColumns,
+  episDataGridNumericCellClass,
+} from './epis-data-grid-columns.js';
 
 describe('enhanceEpisDataGridColumns', () => {
   it('marca columnas number con clase numérica y alineación derecha', () => {

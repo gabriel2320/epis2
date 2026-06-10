@@ -23,11 +23,10 @@ export function parseModeSearchRecord(
   return search;
 }
 
-export function withModeSearch<T extends Record<string, unknown>, M extends Extract<EpisMode, 'classic' | 'dashboard'>>(
-  search: T,
-  mode: M,
-  enabled = true,
-): T & { mode?: M } {
+export function withModeSearch<
+  T extends Record<string, unknown>,
+  M extends Extract<EpisMode, 'classic' | 'dashboard'>,
+>(search: T, mode: M, enabled = true): T & { mode?: M } {
   if (!enabled) return search;
   return { ...search, mode };
 }

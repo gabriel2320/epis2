@@ -90,7 +90,9 @@ vi.mock('./grids/DashboardHomogeneousGrid.js', () => ({
     'data-testid': testId,
   }: {
     rows: Record<string, unknown>[];
-    extraBulkActions?: (ids: readonly string[]) => { id: string; label: string; onClick: () => void }[];
+    extraBulkActions?: (
+      ids: readonly string[],
+    ) => { id: string; label: string; onClick: () => void }[];
     'data-testid'?: string;
   }) => (
     <div data-testid={testId}>
@@ -194,7 +196,9 @@ describe('ServiceDashboardTab', () => {
       onOpenEpicrisis,
     });
 
-    const admitSelect = screen.getByTestId('epis2-inpatient-admit').querySelector('[role="combobox"]');
+    const admitSelect = screen
+      .getByTestId('epis2-inpatient-admit')
+      .querySelector('[role="combobox"]');
     expect(admitSelect).toBeTruthy();
     await user.click(admitSelect!);
     await user.click(await screen.findByRole('option', { name: '102A' }));

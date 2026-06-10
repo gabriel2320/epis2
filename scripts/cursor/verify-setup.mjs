@@ -22,12 +22,16 @@ console.log('EPIS2 Cursor setup\n');
 if (existsSync(mcpPath)) {
   const raw = readFileSync(mcpPath, 'utf8');
   const usesEnv = raw.includes('${env:GITHUB_PERSONAL_ACCESS_TOKEN}');
-  console.log(`  .cursor/mcp.json     ${usesEnv ? 'OK (usa env var)' : 'WARN (revisa que no haya PAT en git)'}`);
+  console.log(
+    `  .cursor/mcp.json     ${usesEnv ? 'OK (usa env var)' : 'WARN (revisa que no haya PAT en git)'}`,
+  );
 } else {
   console.log('  .cursor/mcp.json     MISSING — copia desde .cursor/mcp.json.example');
 }
 
-console.log(`  GITHUB_PAT env       ${hasToken ? 'OK (definido)' : 'MISSING — ver docs/dev/CURSOR_PLUGINS_EPIS2.md'}`);
+console.log(
+  `  GITHUB_PAT env       ${hasToken ? 'OK (definido)' : 'MISSING — ver docs/dev/CURSOR_PLUGINS_EPIS2.md'}`,
+);
 
 const skills = ['epis2-session', 'epis2-close', 'epis2-ci'];
 for (const s of skills) {

@@ -64,14 +64,12 @@ async function requestOllamaChat(
     message?: { content?: string; thinking?: string };
   };
   const text =
-    normalizeOllamaText(body.message?.content) ||
-    normalizeOllamaText(body.message?.thinking);
+    normalizeOllamaText(body.message?.content) || normalizeOllamaText(body.message?.thinking);
 
   if (!text) {
     return {
       ok: false,
-      reason:
-        'Ollama devolvió respuesta vacía (revise modelo, num_predict o desactive think)',
+      reason: 'Ollama devolvió respuesta vacía (revise modelo, num_predict o desactive think)',
     };
   }
 
@@ -110,8 +108,7 @@ async function requestOllamaGenerate(
     thinking?: string;
     model?: string;
   };
-  const text =
-    normalizeOllamaText(body.response) || normalizeOllamaText(body.thinking);
+  const text = normalizeOllamaText(body.response) || normalizeOllamaText(body.thinking);
 
   if (!text) {
     return { ok: false, reason: 'Ollama devolvió respuesta vacía' };

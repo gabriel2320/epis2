@@ -57,7 +57,9 @@ for (const file of files.sort()) {
 
 console.log('\n--- Chunks (gzip KB) ---');
 for (const row of rows) {
-  console.log(`${row.file.padEnd(48)} ${row.gzipKb.toFixed(1).padStart(8)} gzip  ${row.rawKb.toFixed(1).padStart(8)} raw`);
+  console.log(
+    `${row.file.padEnd(48)} ${row.gzipKb.toFixed(1).padStart(8)} gzip  ${row.rawKb.toFixed(1).padStart(8)} raw`,
+  );
 }
 
 console.log('\n--- Presupuestos MUI X ---');

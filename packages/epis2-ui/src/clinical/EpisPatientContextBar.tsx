@@ -36,7 +36,12 @@ export function EpisPatientContextBar({
       sx={epis2PatientContextBarSx}
       data-testid={testId}
     >
-      <EpisM3Text role="titleLarge" component="h1" noWrap sx={{ maxWidth: { xs: '100%', sm: 360 } }}>
+      <EpisM3Text
+        role="titleLarge"
+        component="h1"
+        noWrap
+        sx={{ maxWidth: { xs: '100%', sm: 360 } }}
+      >
         {displayName}
       </EpisM3Text>
       {meta ? (

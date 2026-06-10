@@ -20,10 +20,7 @@ for (const token of [
   if (!panel.includes(token)) errors.push(`PatientLongitudinalPanel sin ${token}`);
 }
 
-const workspace = readFileSync(
-  join(root, 'apps/web/src/pages/PatientWorkspacePage.tsx'),
-  'utf8',
-);
+const workspace = readFileSync(join(root, 'apps/web/src/pages/PatientWorkspacePage.tsx'), 'utf8');
 if (!workspace.includes("'/espacio/ingreso'")) {
   errors.push('PatientWorkspacePage sin quick action ingreso');
 }

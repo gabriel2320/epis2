@@ -38,7 +38,12 @@ const outpatient = readFileSync(
   join(root, 'packages/clinical-forms/src/blueprints/outpatient-visit.ts'),
   'utf8',
 );
-for (const token of ['closeEncounter', 'icd10Code', 'patientSummaryForPatient', 'physicalExamGeneral']) {
+for (const token of [
+  'closeEncounter',
+  'icd10Code',
+  'patientSummaryForPatient',
+  'physicalExamGeneral',
+]) {
   if (!outpatient.includes(token)) {
     errors.push(`outpatient_visit sin campo ${token}`);
   }

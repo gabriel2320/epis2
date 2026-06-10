@@ -25,7 +25,9 @@ if (!envSrc.includes("enabledRaw === 'true'")) {
 const agentsSrc = readFileSync(join(dir, 'dashboardDesignAgents.ts'), 'utf8');
 if (agentsSrc.includes('../api/')) errors.push('Agentes dashboard no deben llamar API');
 if (errors.length) {
-  console.error('dashboard-design-agents-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
+  console.error(
+    'dashboard-design-agents-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
+  );
   process.exit(1);
 }
 console.log('dashboard-design-agents-gate OK');

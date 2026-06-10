@@ -7,11 +7,8 @@ export const queryKeys = {
     list: (search?: string) => ['patients', 'list', search ?? ''] as const,
     detail: (patientId: string) => ['patients', 'detail', patientId] as const,
     longitudinal: (patientId: string) => ['patients', 'longitudinal', patientId] as const,
-    clinicalAlerts: (
-      patientId: string,
-      blueprintId?: string,
-      fieldsKey?: string,
-    ) => ['patients', 'clinical-alerts', patientId, blueprintId ?? '', fieldsKey ?? ''] as const,
+    clinicalAlerts: (patientId: string, blueprintId?: string, fieldsKey?: string) =>
+      ['patients', 'clinical-alerts', patientId, blueprintId ?? '', fieldsKey ?? ''] as const,
   },
   drafts: {
     all: () => ['drafts'] as const,

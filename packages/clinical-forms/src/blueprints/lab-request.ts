@@ -10,7 +10,9 @@ export const labRequestBlueprint = defineBlueprint({
   outputKind: 'ORDER_DRAFT',
   requiresPatient: true,
   requiresEncounter: true,
-  sections: [section('order', 'Solicitud', ['scheduledDate', 'labTests', 'clinicalReason', 'priority'])],
+  sections: [
+    section('order', 'Solicitud', ['scheduledDate', 'labTests', 'clinicalReason', 'priority']),
+  ],
   fields: [
     field('scheduledDate', 'Fecha programada', 'date', { required: true, columnSpan: 4 }),
     field('labTests', 'Exámenes', 'textarea', true),

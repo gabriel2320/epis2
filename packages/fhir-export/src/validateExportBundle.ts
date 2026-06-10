@@ -51,16 +51,12 @@ function checkForbiddenTerminology(
 ): void {
   if (!value || typeof value !== 'object') return;
   if (Array.isArray(value)) {
-    value.forEach((item, index) =>
-      checkForbiddenTerminology(item, `${path}[${index}]`, issues),
-    );
+    value.forEach((item, index) => checkForbiddenTerminology(item, `${path}[${index}]`, issues));
     return;
   }
   const obj = value as Record<string, unknown>;
   if (typeof obj.system === 'string' && FORBIDDEN_CODE_SYSTEM.test(obj.system)) {
-    issues.push(
-      issue(path, `system terminológico no autorizado en export EPIS2: ${obj.system}`),
-    );
+    issues.push(issue(path, `system terminológico no autorizado en export EPIS2: ${obj.system}`));
   }
   for (const [key, nested] of Object.entries(obj)) {
     checkForbiddenTerminology(nested, `${path}.${key}`, issues);

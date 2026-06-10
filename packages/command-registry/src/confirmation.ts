@@ -7,10 +7,7 @@ export function requiresExplicitConfirmation(intent: ClinicalIntent): boolean {
   return meta.safetyLevel === 'order' || meta.safetyLevel === 'sign';
 }
 
-export function buildConfirmationMessage(
-  def: CommandDefinition,
-  slots: CommandSlots,
-): string {
+export function buildConfirmationMessage(def: CommandDefinition, slots: CommandSlots): string {
   const detailParts: string[] = [];
   if (slots.medicationHint) detailParts.push(`medicamento: ${slots.medicationHint}`);
   if (slots.studyHint) detailParts.push(`estudio: ${slots.studyHint}`);
@@ -20,8 +17,7 @@ export function buildConfirmationMessage(
     detailParts.push(`urgencia: ${slots.urgencyHint}`);
   }
 
-  const detail =
-    detailParts.length > 0 ? ` (${detailParts.join(' · ')})` : '';
+  const detail = detailParts.length > 0 ? ` (${detailParts.join(' · ')})` : '';
 
   return `Vas a abrir ${def.labelEs.toLowerCase()}${detail}. Se creará un borrador para revisión humana — no se firma automáticamente.`;
 }

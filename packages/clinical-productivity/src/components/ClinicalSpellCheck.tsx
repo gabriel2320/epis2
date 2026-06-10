@@ -1,6 +1,9 @@
 import { copy } from '@epis2/design-system';
 import { Typography } from '@epis2/epis2-ui';
-import { findClinicalTerms, isWhitelistedClinicalTerm } from '../dictionaries/chileClinicalDictionary.js';
+import {
+  findClinicalTerms,
+  isWhitelistedClinicalTerm,
+} from '../dictionaries/chileClinicalDictionary.js';
 
 export type ClinicalSpellCheckProps = {
   text: string;
@@ -8,7 +11,10 @@ export type ClinicalSpellCheckProps = {
 };
 
 /** Corrector local Fase B — diccionario chileno; LanguageTool pendiente. */
-export function ClinicalSpellCheck({ text, testId = 'epis2-clinical-spellcheck' }: ClinicalSpellCheckProps) {
+export function ClinicalSpellCheck({
+  text,
+  testId = 'epis2-clinical-spellcheck',
+}: ClinicalSpellCheckProps) {
   const tokens = text.split(/\s+/).filter(Boolean);
   const unknown = tokens.filter((t) => !isWhitelistedClinicalTerm(t) && t.length > 2).slice(0, 5);
 

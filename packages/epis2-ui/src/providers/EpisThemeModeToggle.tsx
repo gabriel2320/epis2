@@ -26,7 +26,11 @@ export function EpisThemeModeToggle({
       onClick={() => setPreferences({ mode: nextMode })}
       data-testid={testId}
     >
-      {isDark ? <LightModeOutlinedIcon fontSize="small" /> : <DarkModeOutlinedIcon fontSize="small" />}
+      {isDark ? (
+        <LightModeOutlinedIcon fontSize="small" />
+      ) : (
+        <DarkModeOutlinedIcon fontSize="small" />
+      )}
     </EpisIconButton>
   );
 }

@@ -12,7 +12,8 @@ loadEnvFile();
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const LOCAL_AI_URL = process.env.LOCAL_AI_BASE_URL ?? 'http://127.0.0.1:3002';
-const API_URL = process.env.EPIS2_SMOKE_API_URL ?? `http://127.0.0.1:${process.env.API_PORT ?? 3001}`;
+const API_URL =
+  process.env.EPIS2_SMOKE_API_URL ?? `http://127.0.0.1:${process.env.API_PORT ?? 3001}`;
 const errors = [];
 
 const router = readFileSync(join(root, 'apps/web/src/routes/router.tsx'), 'utf8');

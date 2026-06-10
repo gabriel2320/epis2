@@ -18,9 +18,12 @@ for (const fn of [
 ]) {
   if (!transitions.includes(fn)) errors.push(`Falta ${fn}`);
 }
-if (!session.includes('openCommandCenter')) errors.push('EpisSessionContext debe exponer openCommandCenter');
-if (!session.includes('openClassicMode')) errors.push('EpisSessionContext debe exponer openClassicMode');
-if (!session.includes('openDashboardMode')) errors.push('EpisSessionContext debe exponer openDashboardMode');
+if (!session.includes('openCommandCenter'))
+  errors.push('EpisSessionContext debe exponer openCommandCenter');
+if (!session.includes('openClassicMode'))
+  errors.push('EpisSessionContext debe exponer openClassicMode');
+if (!session.includes('openDashboardMode'))
+  errors.push('EpisSessionContext debe exponer openDashboardMode');
 
 if (errors.length) {
   console.error('mode-transitions-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));

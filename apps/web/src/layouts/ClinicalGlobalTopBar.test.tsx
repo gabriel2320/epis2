@@ -13,8 +13,11 @@ vi.mock('@tanstack/react-router', () => ({
       {children as string}
     </a>
   ),
-  useRouterState: ({ select }: { select: (s: { location: { pathname: string; searchStr?: string } }) => unknown }) =>
-    select({ location: { pathname: '/espacio/ficha', searchStr: '' } }),
+  useRouterState: ({
+    select,
+  }: {
+    select: (s: { location: { pathname: string; searchStr?: string } }) => unknown;
+  }) => select({ location: { pathname: '/espacio/ficha', searchStr: '' } }),
 }));
 
 vi.mock('../auth/AuthContext.js', () => ({

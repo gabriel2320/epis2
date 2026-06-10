@@ -1,6 +1,9 @@
 /** Cliente Ollama estructurado para dev-agent (chat → generate fallback). */
 
-import { parseJsonFromOllamaText, stripOllamaResponseNoise } from '../ollama/json-from-response.mjs';
+import {
+  parseJsonFromOllamaText,
+  stripOllamaResponseNoise,
+} from '../ollama/json-from-response.mjs';
 
 export { parseJsonFromOllamaText, stripOllamaResponseNoise };
 
@@ -52,8 +55,7 @@ async function requestChat(base, model, prompt, timeoutMs) {
   if (!text) {
     return {
       ok: false,
-      reason:
-        'Ollama devolvió respuesta vacía (revise modelo o num_predict; use think:false)',
+      reason: 'Ollama devolvió respuesta vacía (revise modelo o num_predict; use think:false)',
     };
   }
 

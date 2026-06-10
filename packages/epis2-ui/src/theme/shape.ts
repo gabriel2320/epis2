@@ -1,7 +1,6 @@
 /** Escala de forma EPIS2 (px) — grid base 8px; esquinas cuadradas con leve redondeo. */
 
 export const epis2Shape = {
-
   /** Sin redondeo — tablas densas y documentos print. */
 
   none: 0,
@@ -37,17 +36,10 @@ export const epis2Shape = {
   bar: 8,
 
   full: 9999,
-
 } as const;
 
-
-
 export type Epis2ShapeKey = keyof typeof epis2Shape;
-
-
 
 /** Radio base MUI `shape.borderRadius` — alias de large. */
 
 export const epis2ShapeBorderRadius = epis2Shape.large;
-
-

@@ -10,7 +10,11 @@ import Stack from '@mui/material/Stack';
 import type { ReactElement } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { epis2BarLayout } from '../theme/breakpoints.js';
-import { epis2M3ColumnSpanSx, epis2M3FormGridSx, epis2M3FormLayout } from '../theme/m3-layout-tokens.js';
+import {
+  epis2M3ColumnSpanSx,
+  epis2M3FormGridSx,
+  epis2M3FormLayout,
+} from '../theme/m3-layout-tokens.js';
 import type { ClinicalContextDragPayload } from './clinical-context-dnd.js';
 import { EpisClinicalField } from './EpisClinicalField.js';
 import type { EpisClinicalFormValues } from './useEpisClinicalBlueprintForm.js';
@@ -43,7 +47,10 @@ export function EpisClinicalFormRhf({
   const fieldMap = new Map(blueprint.fields.map((f) => [f.id, f]));
 
   return (
-    <Stack spacing={epis2M3FormLayout.sectionGap} data-testid={`epis2-form-${blueprint.blueprintId}`}>
+    <Stack
+      spacing={epis2M3FormLayout.sectionGap}
+      data-testid={`epis2-form-${blueprint.blueprintId}`}
+    >
       <EpisM3Text role="bodyLarge" color="text.secondary" sx={{ px: 1 }}>
         {blueprint.purpose}
       </EpisM3Text>
@@ -75,15 +82,15 @@ export function EpisClinicalFormRhf({
                       if (custom) return custom;
                     }
                     return (
-                    <EpisClinicalField
-                      field={f}
-                      value={rhf.value ?? ''}
-                      clinicalProse={clinicalProse}
-                      clinicalDropEnabled={clinicalDropEnabled}
-                      {...(onClinicalDrop ? { onClinicalDrop } : {})}
-                      {...(errorMsg ? { error: errorMsg } : {})}
-                      onChange={(_fieldId, value) => rhf.onChange(value)}
-                    />
+                      <EpisClinicalField
+                        field={f}
+                        value={rhf.value ?? ''}
+                        clinicalProse={clinicalProse}
+                        clinicalDropEnabled={clinicalDropEnabled}
+                        {...(onClinicalDrop ? { onClinicalDrop } : {})}
+                        {...(errorMsg ? { error: errorMsg } : {})}
+                        onChange={(_fieldId, value) => rhf.onChange(value)}
+                      />
                     );
                   }}
                 />
@@ -93,8 +100,7 @@ export function EpisClinicalFormRhf({
         );
 
         const useAccordion =
-          sec.initialVisibility === 'collapsed' ||
-          (collapseNonPrimarySections && sectionIndex > 0);
+          sec.initialVisibility === 'collapsed' || (collapseNonPrimarySections && sectionIndex > 0);
 
         if (useAccordion) {
           return (

@@ -37,9 +37,7 @@ describe('rankCommandDefinitions (MAU v2)', () => {
 
   it('reseta normaliza y puntúa receta', () => {
     const normalized = normalizeCommandText('reseta paracetamol');
-    const rx = EPIS2_COMMAND_DEFINITIONS.find(
-      (d) => d.intent === 'prepare_prescription',
-    );
+    const rx = EPIS2_COMMAND_DEFINITIONS.find((d) => d.intent === 'prepare_prescription');
     expect(rx).toBeDefined();
     const score = scoreCommandDefinition(rx!, normalized, 'reseta paracetamol');
     expect(score).toBeGreaterThanOrEqual(MIN_MATCH_SCORE);

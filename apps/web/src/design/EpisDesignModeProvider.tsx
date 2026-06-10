@@ -34,12 +34,13 @@ export function EpisDesignModeOverlay() {
   const surface = audit?.surface ?? radSurfaceForPath(pathname);
   const kind = screenKindForRoute(pathname);
   const iconBudget = iconBudgetForScreen(kind);
-  const isClassic = document.documentElement.getAttribute('data-epis-classic-md3') === 'true'
-    || new URLSearchParams(search).get('mode') === 'classic'
-    || new URLSearchParams(search).get('view') === 'classic';
+  const isClassic =
+    document.documentElement.getAttribute('data-epis-classic-md3') === 'true' ||
+    new URLSearchParams(search).get('mode') === 'classic' ||
+    new URLSearchParams(search).get('view') === 'classic';
   const isDashboardMd3 =
-    document.documentElement.getAttribute('data-epis-dashboard-md3') === 'true'
-    || new URLSearchParams(search).get('mode') === 'dashboard';
+    document.documentElement.getAttribute('data-epis-dashboard-md3') === 'true' ||
+    new URLSearchParams(search).get('mode') === 'dashboard';
   const isCommandCenter = pathname === '/comando' || pathname.startsWith('/comando');
   const agentsEnabled = areDesignAgentsEnabled();
   const session = useEpisSession();

@@ -44,7 +44,9 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
   const runQuarantine = async () => {
     try {
       const res = await quarantineHl7Message(hl7);
-      setQuarantineResult(`Cuarentena ${res.quarantineId.slice(0, 8)}… (${res.messageType ?? 'HL7'})`);
+      setQuarantineResult(
+        `Cuarentena ${res.quarantineId.slice(0, 8)}… (${res.messageType ?? 'HL7'})`,
+      );
     } catch {
       setQuarantineResult(copy.errors.genericMessage);
     }
@@ -61,12 +63,14 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
             {copy.interop.schemaVersion}: {data.ops.schemaVersion ?? '—'}
           </Typography>
           <Typography variant="body2">
-            {copy.interop.metricPatients}: {data.ops.counts.patients} · {copy.interop.metricOpenDrafts}:{' '}
-            {data.metrics.openDrafts} · {copy.interop.metricApprovedNotes}: {data.metrics.approvedNotes}
+            {copy.interop.metricPatients}: {data.ops.counts.patients} ·{' '}
+            {copy.interop.metricOpenDrafts}: {data.metrics.openDrafts} ·{' '}
+            {copy.interop.metricApprovedNotes}: {data.metrics.approvedNotes}
           </Typography>
           <Typography variant="body2">
-            {copy.interop.metricAudit24h}: {data.ops.counts.auditEvents24h} · {copy.interop.metricAiRuns}:{' '}
-            {data.metrics.aiRuns} · {copy.interop.metricCriticalUnacked}: {data.metrics.criticalUnacked}
+            {copy.interop.metricAudit24h}: {data.ops.counts.auditEvents24h} ·{' '}
+            {copy.interop.metricAiRuns}: {data.metrics.aiRuns} ·{' '}
+            {copy.interop.metricCriticalUnacked}: {data.metrics.criticalUnacked}
           </Typography>
         </EpisWorkspaceSection>
 
@@ -86,7 +90,10 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
           />
         </Stack>
 
-        <EpisWorkspaceSection title={copy.qualityAudit.idcPanelsTitle} testId="epis2-quality-idc-panels">
+        <EpisWorkspaceSection
+          title={copy.qualityAudit.idcPanelsTitle}
+          testId="epis2-quality-idc-panels"
+        >
           <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
             {data.qualityAuditPanels.map((panel) => (
               <Chip
@@ -163,7 +170,10 @@ export function QualityDashboardTab({ data }: QualityDashboardTabProps) {
           </Stack>
         </EpisRadFormSectionAccordion>
 
-        <EpisWorkspaceSection title={copy.iaas.advancedPanelsTitle} testId="epis2-iaas-advanced-idc-panels">
+        <EpisWorkspaceSection
+          title={copy.iaas.advancedPanelsTitle}
+          testId="epis2-iaas-advanced-idc-panels"
+        >
           <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
             {data.iaasAdvancedPanels.map((panel) => (
               <Chip

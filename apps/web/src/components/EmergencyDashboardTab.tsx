@@ -53,7 +53,10 @@ export function EmergencyDashboardTab({
             value={String(data.observationBeds)}
           />
         </Stack>
-        <EpisWorkspaceSection title={copy.emergency.idcPanelsTitle} testId="epis2-emergency-idc-panels">
+        <EpisWorkspaceSection
+          title={copy.emergency.idcPanelsTitle}
+          testId="epis2-emergency-idc-panels"
+        >
           <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
             {data.idcPanels.map((panel) => (
               <Chip
@@ -67,7 +70,10 @@ export function EmergencyDashboardTab({
             ))}
           </Stack>
         </EpisWorkspaceSection>
-        <EpisWorkspaceSection title={copy.emergency.dischargeActionsTitle} testId="epis2-emergency-discharge-actions">
+        <EpisWorkspaceSection
+          title={copy.emergency.dischargeActionsTitle}
+          testId="epis2-emergency-discharge-actions"
+        >
           {observationRows.length === 0 ? (
             <Typography variant="body2" color="text.secondary">
               {copy.longitudinal.emptySection}
@@ -81,7 +87,12 @@ export function EmergencyDashboardTab({
                 patientId: row.patientId,
               }))}
               columns={[
-                { field: 'title', headerName: copy.dashboard.gridColumnPatient, flex: 1, minWidth: 180 },
+                {
+                  field: 'title',
+                  headerName: copy.dashboard.gridColumnPatient,
+                  flex: 1,
+                  minWidth: 180,
+                },
                 { field: 'status', headerName: copy.dashboard.gridColumnStatus, width: 120 },
               ]}
               emptyMessage={copy.longitudinal.emptySection}
@@ -113,12 +124,20 @@ export function EmergencyDashboardTab({
             </Button>
           ) : null}
         </EpisWorkspaceSection>
-        <EpisWorkspaceSection title={copy.emergency.triageTitle} testId="epis2-emergency-triage-queue">
+        <EpisWorkspaceSection
+          title={copy.emergency.triageTitle}
+          testId="epis2-emergency-triage-queue"
+        >
           <DashboardHomogeneousGrid
             rows={triageRows}
             columns={[
               { field: 'title', headerName: copy.emergency.triageTitle, flex: 1, minWidth: 180 },
-              { field: 'chiefComplaint', headerName: copy.dashboard.gridColumnTitle, flex: 1, minWidth: 160 },
+              {
+                field: 'chiefComplaint',
+                headerName: copy.dashboard.gridColumnTitle,
+                flex: 1,
+                minWidth: 160,
+              },
               { field: 'status', headerName: copy.dashboard.gridColumnStatus, width: 120 },
             ]}
             emptyMessage={copy.longitudinal.emptySection}

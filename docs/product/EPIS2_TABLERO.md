@@ -51,7 +51,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Auditoría: [`reports
 | Prioridad | Hilo / tramo | Gate |
 |-----------|--------------|------|
 | **P1** | Signoff visual conjunto: alto contraste + M3-R (hover/foco/rail/two-pane, claro/oscuro) — `quality:m3-visual-pass` + revisión humana | P1b + M3-R código ✓ |
-| **P1** | **Hilo NORM** (PEND-012) — plan de mejora norma full stack: N1 quick wins → N2 observabilidad → N3 OpenAPI/threat model → N4 a11y/E2E/móvil · desbloqueado al cerrar PEND-011 (verificar run CI verde) | [`EPIS2_NORMA_FULLSTACK_PLAN.md`](EPIS2_NORMA_FULLSTACK_PLAN.md) · [auditoría](../../reports/epis2-norma-fullstack-compliance-2026-06-10.md) |
+| **P1** | **Hilo NORM** (PEND-012) — **Tramo N1 en curso** (CI verde [27274610746](https://github.com/gabriel2320/epis2/actions/runs/27274610746) confirmó cierre PEND-011) · luego N2 observabilidad → N3 OpenAPI/threat model → N4 a11y/E2E/móvil | [`EPIS2_NORMA_FULLSTACK_PLAN.md`](EPIS2_NORMA_FULLSTACK_PLAN.md) · [auditoría](../../reports/epis2-norma-fullstack-compliance-2026-06-10.md) |
 | P1c | Fase 5 auditoría — checklist pre-producción (solo si sale del laboratorio) | [`epis2-auditoria-profunda-2026-06-09.md`](../../reports/epis2-auditoria-profunda-2026-06-09.md) §7 |
 | P2 | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | P3 | Backlog Ola 2+ | Nota procedimiento clínica (PEND-002 defer) |

@@ -41,9 +41,7 @@ describe('EpisDashboardMd3Shell', () => {
 
 describe('EpisDashboardMd3TopBar', () => {
   it('no contiene firmar ni aprobar', () => {
-    render(
-      <EpisDashboardMd3TopBar onBackToCommand={() => undefined} clinicianLabel="Dr. Demo" />,
-    );
+    render(<EpisDashboardMd3TopBar onBackToCommand={() => undefined} clinicianLabel="Dr. Demo" />);
     expect(screen.queryByText(/firmar/i)).toBeNull();
     expect(screen.queryByText(/aprobar/i)).toBeNull();
   });

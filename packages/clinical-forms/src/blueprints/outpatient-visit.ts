@@ -55,12 +55,10 @@ export const outpatientVisitBlueprint = defineBlueprint({
     field('assessment', 'Evaluación clínica', 'textarea', true),
     field('plan', 'Plan terapéutico', 'textarea', true),
     field('generalIndications', 'Indicaciones generales (reposo, dieta, controles)', 'textarea'),
-    field('closeEncounter', 'Marcar episodio para cierre al aprobar', 'checkbox', { columnSpan: 6 }),
-    field(
-      'patientSummaryForPatient',
-      'Resumen para el paciente (legible, sin jerga)',
-      'textarea',
-    ),
+    field('closeEncounter', 'Marcar episodio para cierre al aprobar', 'checkbox', {
+      columnSpan: 6,
+    }),
+    field('patientSummaryForPatient', 'Resumen para el paciente (legible, sin jerga)', 'textarea'),
   ],
   validations: [
     { fieldId: 'chiefComplaint', message: 'Motivo de consulta requerido' },

@@ -79,7 +79,11 @@ export function VisualThemeCatalogPage() {
 
   return (
     <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', py: 4, px: 2 }}>
-      <Stack spacing={3} sx={{ maxWidth: 720, mx: 'auto' }} data-testid="epis2-visual-theme-catalog">
+      <Stack
+        spacing={3}
+        sx={{ maxWidth: 720, mx: 'auto' }}
+        data-testid="epis2-visual-theme-catalog"
+      >
         <Stack spacing={1}>
           <EpisM3Text role="headlineLarge" color="primary.main">
             {copy.visualThemeCatalog.title}
@@ -91,7 +95,12 @@ export function VisualThemeCatalogPage() {
             <EpisButton href="/comando" component="a" appearance="text" size="small">
               {copy.visualThemeCatalog.backToCommand}
             </EpisButton>
-            <EpisButton href="/preferencias-apariencia" component="a" appearance="text" size="small">
+            <EpisButton
+              href="/preferencias-apariencia"
+              component="a"
+              appearance="text"
+              size="small"
+            >
               {copy.visualThemeCatalog.openPreferences}
             </EpisButton>
           </Stack>
@@ -174,7 +183,10 @@ export function VisualThemeCatalogPage() {
         </CatalogSection>
 
         <CatalogSection title={copy.visualThemeCatalog.proseSection}>
-          <EpisM3Text role="bodyLarge" sx={{ maxWidth: '65ch', lineHeight: 1.5, textAlign: 'left' }}>
+          <EpisM3Text
+            role="bodyLarge"
+            sx={{ maxWidth: '65ch', lineHeight: 1.5, textAlign: 'left' }}
+          >
             {copy.visualThemeCatalog.proseSample}
           </EpisM3Text>
         </CatalogSection>
@@ -182,13 +194,23 @@ export function VisualThemeCatalogPage() {
         <CatalogSection title={copy.visualThemeCatalog.numericSection}>
           <EpisM3Text
             role="bodyLarge"
-            sx={{ fontVariantNumeric: 'tabular-nums', textAlign: 'right', maxWidth: 120, ml: 'auto' }}
+            sx={{
+              fontVariantNumeric: 'tabular-nums',
+              textAlign: 'right',
+              maxWidth: 120,
+              ml: 'auto',
+            }}
           >
             1 234,50
           </EpisM3Text>
           <EpisM3Text
             role="bodyLarge"
-            sx={{ fontVariantNumeric: 'tabular-nums', textAlign: 'right', maxWidth: 120, ml: 'auto' }}
+            sx={{
+              fontVariantNumeric: 'tabular-nums',
+              textAlign: 'right',
+              maxWidth: 120,
+              ml: 'auto',
+            }}
           >
             98,70
           </EpisM3Text>
@@ -207,7 +229,9 @@ export function VisualThemeCatalogPage() {
                 <Epis2WidgetBody>
                   <EpisM3Text role="bodyMedium">Paciente demo — lectura contextual</EpisM3Text>
                 </Epis2WidgetBody>
-                <Epis2WidgetActions actions={[{ id: 'ficha', label: 'Abrir ficha', href: '/espacio/ficha' }]} />
+                <Epis2WidgetActions
+                  actions={[{ id: 'ficha', label: 'Abrir ficha', href: '/espacio/ficha' }]}
+                />
               </Epis2WidgetSurface>
             </Epis2WidgetGrid>
           </Stack>

@@ -62,10 +62,7 @@ import {
   renderClinicalTextBoxField,
 } from '../clinical/clinicalTextBoxField.js';
 import { useClinicalTextBoxOrigins } from '../clinical/useClinicalTextBoxOrigins.js';
-import {
-  mergeDraftFieldMetaFromBody,
-  stripDraftMetaFromBody,
-} from '@epis2/clinical-productivity';
+import { mergeDraftFieldMetaFromBody, stripDraftMetaFromBody } from '@epis2/clinical-productivity';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
@@ -139,7 +136,11 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const [assistContext, setAssistContext] = useState<Record<string, string>>({});
 
   const { aiAvailable: aiStatusAvailable } = useAiStatusQuery();
-  const { patients, refetch: refetchPatients, isFetching: patientsFetching } = usePatientsQuery({
+  const {
+    patients,
+    refetch: refetchPatients,
+    isFetching: patientsFetching,
+  } = usePatientsQuery({
     search: patientSearch,
     enabled: patientsFetchEnabled,
   });
@@ -238,8 +239,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
   const { alerts: clinicalAlerts, loading: alertsLoading } = usePatientClinicalAlerts({
     patientId: effectivePatientId,
-    blueprintId:
-      blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES ? blueprint.blueprintId : undefined,
+    blueprintId: blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES ? blueprint.blueprintId : undefined,
     contextLabel: blueprint.label,
     enabled: Boolean(effectivePatientId && blueprint.blueprintId in BLUEPRINT_DRAFT_TYPES),
   });
@@ -393,9 +393,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       saveLabel={copy.forms.save}
       onSave={() => saveDraft('save')}
       saveDisabled={isSaving}
-      {...(canPersistDraft
-        ? { signLabel: copy.forms.sign, onSign: () => saveDraft('sign') }
-        : {})}
+      {...(canPersistDraft ? { signLabel: copy.forms.sign, onSign: () => saveDraft('sign') } : {})}
       signDisabled={isSaving}
       overflow={formActionOverflow}
       overflowAriaLabel={copy.forms.moreActions}

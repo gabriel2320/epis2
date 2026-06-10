@@ -71,7 +71,10 @@ describe('MF-CLINICAL-TEXTBOX-TOOLS', () => {
 
   it('adjunta y extrae trazabilidad en body de borrador', () => {
     const origin = createTextOrigin('paste', 'Portapapeles');
-    const body = attachTextOriginsToDraftBody({ reactionNotes: 'Urticaria' }, { reactionNotes: origin });
+    const body = attachTextOriginsToDraftBody(
+      { reactionNotes: 'Urticaria' },
+      { reactionNotes: origin },
+    );
     expect(isDraftMetaFieldKey('_epis2TextOrigins')).toBe(true);
     const parsed = extractTextOriginsFromDraftBody(body);
     expect(parsed.reactionNotes?.kind).toBe('paste');

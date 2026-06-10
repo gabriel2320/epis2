@@ -13,7 +13,9 @@ export type EpisButtonProps<C extends ElementType = 'button'> = ButtonProps<
   appearance?: EpisButtonAppearance;
 };
 
-function resolveAppearance(appearance: EpisButtonAppearance): Pick<ButtonProps, 'variant' | 'color'> {
+function resolveAppearance(
+  appearance: EpisButtonAppearance,
+): Pick<ButtonProps, 'variant' | 'color'> {
   switch (appearance) {
     case 'filled':
       return { variant: 'contained', color: 'primary' };
@@ -47,11 +49,19 @@ export function EpisButton<C extends ElementType = 'button'>({
           bgcolor: theme.palette.primary.light,
           color: theme.palette.primary.dark,
           '&:hover': {
-            bgcolor: epis2StateLayer(theme.palette.primary.light, theme.palette.primary.dark, 'hover'),
+            bgcolor: epis2StateLayer(
+              theme.palette.primary.light,
+              theme.palette.primary.dark,
+              'hover',
+            ),
             color: theme.palette.primary.dark,
           },
           '&:active': {
-            bgcolor: epis2StateLayer(theme.palette.primary.light, theme.palette.primary.dark, 'pressed'),
+            bgcolor: epis2StateLayer(
+              theme.palette.primary.light,
+              theme.palette.primary.dark,
+              'pressed',
+            ),
           },
         }
       : undefined;

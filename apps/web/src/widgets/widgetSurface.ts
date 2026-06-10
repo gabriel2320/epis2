@@ -12,7 +12,9 @@ const SURFACE_CATEGORIES: Record<WidgetSurface, readonly WidgetDefinition['categ
 };
 
 /** Widgets candidatos por superficie (antes de visibilidad/permisos). */
-export function listWidgetCandidatesForSurface(surface: WidgetSurface): readonly WidgetDefinition[] {
+export function listWidgetCandidatesForSurface(
+  surface: WidgetSurface,
+): readonly WidgetDefinition[] {
   const categories = SURFACE_CATEGORIES[surface];
   return EPIS2_WIDGET_REGISTRY.filter((w) => categories.includes(w.category));
 }

@@ -97,7 +97,9 @@ export async function dashboardDensityAgent(
     DashboardDensityResultSchema,
     () => {
       const cardCountEstimate = ctx.htmlSnippet?.match(/EpisMetric|data-epis-kpi/g)?.length ?? 0;
-      const gridCountEstimate = ctx.htmlSnippet?.match(/Grid|Worklist|data-testid="epis2-dashboard-md3-main-grid"/g)?.length ?? 0;
+      const gridCountEstimate =
+        ctx.htmlSnippet?.match(/Grid|Worklist|data-testid="epis2-dashboard-md3-main-grid"/g)
+          ?.length ?? 0;
       const total = cardCountEstimate + gridCountEstimate || 1;
       const gridOverCardRatio = gridCountEstimate / total;
       const violations: string[] = [];
@@ -209,7 +211,9 @@ export async function dashboardPatchPlannerAgent(
     DashboardPatchPlanSchema,
     () => ({
       files: ['apps/web/src/components/dashboard-md3/EpisDashboardMd3Shell.tsx'],
-      changes: violations.length ? violations.map((v) => `Revisar: ${v}`) : ['Sin cambios urgentes'],
+      changes: violations.length
+        ? violations.map((v) => `Revisar: ${v}`)
+        : ['Sin cambios urgentes'],
       risks: ['Revisión humana obligatoria'],
       testsRequired: ['EpisDashboardMd3Shell.test.tsx'],
       gatesRequired: ['quality:dashboard-md3-mode-gate', 'quality:three-modes-gate'],

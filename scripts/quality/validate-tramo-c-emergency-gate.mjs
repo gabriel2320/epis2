@@ -16,10 +16,7 @@ const registry = readFileSync(
 );
 if (!registry.includes("id: 'emergency'")) errors.push('registry sin workspace emergency');
 
-const panel = readFileSync(
-  join(root, 'apps/web/src/components/EmergencyDashboardTab.tsx'),
-  'utf8',
-);
+const panel = readFileSync(join(root, 'apps/web/src/components/EmergencyDashboardTab.tsx'), 'utf8');
 if (!panel.includes('epis2-emergency-idc-${panel.idc}')) {
   errors.push('EmergencyDashboardTab sin chips IDC dinámicos');
 }

@@ -17,10 +17,17 @@ export async function validate() {
         details.push(`${rel} → segundo widget registry prohibido (canónico: ${CANONICAL_PREFIX})`);
       }
     }
-    if (rel.includes('epis2-widgets') && rel.endsWith('widget-registry.ts') && !rel.includes('.test.')) {
+    if (
+      rel.includes('epis2-widgets') &&
+      rel.endsWith('widget-registry.ts') &&
+      !rel.includes('.test.')
+    ) {
       registryFiles.push(rel);
     }
-    if (/WidgetRegistryV2|secondWidgetRegistry|createWidgetRegistry\(/i.test(content) && !rel.startsWith(CANONICAL_PREFIX)) {
+    if (
+      /WidgetRegistryV2|secondWidgetRegistry|createWidgetRegistry\(/i.test(content) &&
+      !rel.startsWith(CANONICAL_PREFIX)
+    ) {
       details.push(`${rel} → indica un segundo Widget Registry`);
     }
   }

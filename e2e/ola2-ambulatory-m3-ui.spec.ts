@@ -15,7 +15,8 @@ test.describe('Ola 2 — M3-UI visual regression', () => {
   test.beforeEach(async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.addStyleTag({
-      content: '*, *::before, *::after { animation-duration: 0s !important; transition-duration: 0s !important; }',
+      content:
+        '*, *::before, *::after { animation-duration: 0s !important; transition-duration: 0s !important; }',
     });
   });
 
@@ -59,7 +60,9 @@ test.describe('Ola 2 — M3-UI visual regression', () => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto('/espacio/certificado?patientId=a0000001-0000-4000-8000-000000000001');
     await expect(page.getByTestId('epis2-form-medical_certificate')).toBeVisible();
-    await expect(page).toHaveScreenshot('ola2-medical-certificate.png', { maxDiffPixelRatio: 0.03 });
+    await expect(page).toHaveScreenshot('ola2-medical-certificate.png', {
+      maxDiffPixelRatio: 0.03,
+    });
   });
 
   test('journey ambulatorio — guardar borrador', async ({ page }) => {

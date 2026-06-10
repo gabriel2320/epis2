@@ -42,9 +42,7 @@ export function resolveVelocityContext(root, opts = {}) {
   const git = getGitSummary(root);
   const phase = opts.phase ?? getActivePhaseHint(root);
   const tramo = opts.tramo?.toUpperCase();
-  const subagent =
-    opts.subagent ??
-    suggestPrimarySubagent(git.files, { tramo, phase });
+  const subagent = opts.subagent ?? suggestPrimarySubagent(git.files, { tramo, phase });
   const agent = DEV_SUBAGENTS[subagent];
   const mf = getNextMicrophase(root);
   const tableroNext = readTableroNext(root);
@@ -84,10 +82,18 @@ export function buildGateCommands(root, subagent, opts = {}) {
 
   const tramo = opts.tramo?.toUpperCase();
   if (tramo === 'J') {
-    commands.push({ label: 'tramo-j-pharmacy', npm: 'quality:tramo-j-pharmacy-gate', required: false });
+    commands.push({
+      label: 'tramo-j-pharmacy',
+      npm: 'quality:tramo-j-pharmacy-gate',
+      required: false,
+    });
     commands.push({ label: 'e2e-tramo-j', npm: 'test:e2e:tramo-j', required: false });
   } else if (tramo === 'C') {
-    commands.push({ label: 'tramo-c-admission', npm: 'test:e2e:tramo-c-admission', required: false });
+    commands.push({
+      label: 'tramo-c-admission',
+      npm: 'test:e2e:tramo-c-admission',
+      required: false,
+    });
   }
 
   if (!commands.some((c) => c.npm === 'test')) {

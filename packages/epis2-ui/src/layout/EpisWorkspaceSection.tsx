@@ -37,11 +37,7 @@ export type EpisDockReserveLayoutProps = {
 };
 
 /** Reserva espacio inferior para EpisFloatingCommandDock. */
-export function EpisDockReserveLayout({
-  children,
-  maxWidth,
-  testId,
-}: EpisDockReserveLayoutProps) {
+export function EpisDockReserveLayout({ children, maxWidth, testId }: EpisDockReserveLayoutProps) {
   return (
     <Box
       data-testid={testId}

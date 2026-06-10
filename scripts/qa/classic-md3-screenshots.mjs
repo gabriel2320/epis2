@@ -11,6 +11,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const outDir = join(root, 'reports/screenshots/classic-md3');
 mkdirSync(outDir, { recursive: true });
 
-console.log('classic-screenshot-capture: ejecutar Playwright manualmente cuando dev:web esté activo.');
+console.log(
+  'classic-screenshot-capture: ejecutar Playwright manualmente cuando dev:web esté activo.',
+);
 console.log('Destino:', outDir);
 process.exit(0);

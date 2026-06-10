@@ -52,13 +52,11 @@ export function extractSlots(raw: string): CommandSlots {
 
   if (/\b(stat|urgente|inmediato|emergente)\b/.test(normalized)) {
     slots.urgencyHint = /\bstat\b/.test(normalized) ? 'stat' : 'urgent';
-  } else   if (/\b(rutina|rutinario|rutinaria)\b/.test(normalized)) {
+  } else if (/\b(rutina|rutinario|rutinaria)\b/.test(normalized)) {
     slots.urgencyHint = 'routine';
   }
 
-  const reasonMatch = normalized.match(
-    /(?:por|motivo|debido a|indicacion)\s+([a-z0-9\s]{3,48})/,
-  );
+  const reasonMatch = normalized.match(/(?:por|motivo|debido a|indicacion)\s+([a-z0-9\s]{3,48})/);
   if (reasonMatch?.[1]) {
     slots.clinicalReasonHint = reasonMatch[1].trim();
   }

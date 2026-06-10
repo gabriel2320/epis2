@@ -138,7 +138,11 @@ export function EpisClinicalContextPane({
         <Typography variant="subtitle2" component="h2">
           {selected.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ fontVariantNumeric: 'tabular-nums' }}>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ fontVariantNumeric: 'tabular-nums' }}
+        >
           {new Date(selected.at).toLocaleString('es-CL')} · {selected.kind}
         </Typography>
         {selected.detail ? (
@@ -170,7 +174,11 @@ export function EpisClinicalContextPane({
   }
 
   return (
-    <Stack spacing={2} sx={{ p: { xs: 2, sm: 2.5 }, height: '100%' }} data-testid="epis2-clinical-context-pane">
+    <Stack
+      spacing={2}
+      sx={{ p: { xs: 2, sm: 2.5 }, height: '100%' }}
+      data-testid="epis2-clinical-context-pane"
+    >
       <Typography variant="subtitle2" component="h2">
         {copy.clinicalLayout.contextPaneTitle}
       </Typography>
@@ -204,7 +212,9 @@ export function EpisClinicalContextPane({
           />
           {filtered.length === 0 ? (
             <Typography variant="body2" color="text.secondary">
-              {search.trim() ? copy.clinicalLayout.contextSearchNoResults : copy.longitudinal.emptySection}
+              {search.trim()
+                ? copy.clinicalLayout.contextSearchNoResults
+                : copy.longitudinal.emptySection}
             </Typography>
           ) : (
             <List dense disablePadding data-testid="epis2-context-timeline-list">

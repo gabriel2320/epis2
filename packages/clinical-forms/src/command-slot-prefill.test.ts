@@ -3,9 +3,9 @@ import { buildCommandSlotPrefill, hasCommandSlotPrefill } from './command-slot-p
 
 describe('buildCommandSlotPrefill (CE-3b)', () => {
   it('prefill receta desde medicationHint', () => {
-    expect(
-      buildCommandSlotPrefill('prescription', { medicationHint: 'amoxicilina' }),
-    ).toEqual({ medication: 'amoxicilina' });
+    expect(buildCommandSlotPrefill('prescription', { medicationHint: 'amoxicilina' })).toEqual({
+      medication: 'amoxicilina',
+    });
   });
 
   it('prefill laboratorio desde studyHint y urgencia', () => {
@@ -62,9 +62,9 @@ describe('buildCommandSlotPrefill (CE-3b)', () => {
   });
 
   it('prefill búsqueda de paciente', () => {
-    expect(
-      buildCommandSlotPrefill('patient_search', { patientHint: 'juan perez' }),
-    ).toEqual({ patientName: 'juan perez' });
+    expect(buildCommandSlotPrefill('patient_search', { patientHint: 'juan perez' })).toEqual({
+      patientName: 'juan perez',
+    });
   });
 
   it('hasCommandSlotPrefill detecta slots útiles', () => {

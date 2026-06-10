@@ -13,7 +13,10 @@ export type UseEpisClinicalContextPanelOptions = {
   storageKey?: string;
 };
 
-function readStoredContextOpen(storageKey: string | undefined, splitScreenDefault: boolean): boolean {
+function readStoredContextOpen(
+  storageKey: string | undefined,
+  splitScreenDefault: boolean,
+): boolean {
   if (storageKey && typeof sessionStorage !== 'undefined') {
     try {
       const stored = sessionStorage.getItem(storageKey);

@@ -70,17 +70,17 @@ export function createInpatientAdmission(body: {
   bedId: string;
   unitCode?: string;
 }) {
-  return apiFetch<{ admission: { id: string; bedLabel: string } }>(
-    '/api/inpatient/admissions',
-    { method: 'POST', body: JSON.stringify(body) },
-  );
+  return apiFetch<{ admission: { id: string; bedLabel: string } }>('/api/inpatient/admissions', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
 }
 
 export function transferInpatientAdmission(admissionId: string, targetBedId: string) {
-  return apiFetch<{ toBedLabel: string }>(
-    `/api/inpatient/admissions/${admissionId}/transfer`,
-    { method: 'POST', body: JSON.stringify({ targetBedId }) },
-  );
+  return apiFetch<{ toBedLabel: string }>(`/api/inpatient/admissions/${admissionId}/transfer`, {
+    method: 'POST',
+    body: JSON.stringify({ targetBedId }),
+  });
 }
 
 export function dischargeInpatientAdmission(admissionId: string) {

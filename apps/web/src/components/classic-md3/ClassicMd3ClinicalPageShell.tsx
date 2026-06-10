@@ -39,9 +39,7 @@ export function ClassicMd3ClinicalPageShell({
   const { alerts: clinicalAlerts } = usePatientClinicalAlerts({ patientId });
 
   const allergyLabels = longitudinalQuery.data?.allergies.map((a) => a.substance) ?? [];
-  const alertLabels = clinicalAlerts
-    .filter((a) => a.severity === 'critical')
-    .map((a) => a.message);
+  const alertLabels = clinicalAlerts.filter((a) => a.severity === 'critical').map((a) => a.message);
   const metaLine = [
     detailQuery.data?.patient.demoCaseCode,
     detailQuery.data?.clinicalContext.openEncounterId ? copy.classicMd3.episodeOpen : undefined,

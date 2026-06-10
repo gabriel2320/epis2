@@ -81,11 +81,7 @@ function EpisClinicalFieldInner({
           ? copy.forms.scheduledDate
           : field.label;
     return (
-      <ClinicalFieldStack
-        label={dateLabel}
-        htmlFor={fieldId}
-        required={Boolean(field.required)}
-      >
+      <ClinicalFieldStack label={dateLabel} htmlFor={fieldId} required={Boolean(field.required)}>
         <EpisDatePicker
           label=""
           value={value}
@@ -102,7 +98,13 @@ function EpisClinicalFieldInner({
   if (field.type === 'select') {
     return (
       <ClinicalFieldStack label={field.label} htmlFor={fieldId} required={Boolean(field.required)}>
-        <FormControl fullWidth error={Boolean(error)} margin="dense" variant="outlined" sx={clinicalFieldShellSx()}>
+        <FormControl
+          fullWidth
+          error={Boolean(error)}
+          margin="dense"
+          variant="outlined"
+          sx={clinicalFieldShellSx()}
+        >
           <EpisSelect
             id={fieldId}
             displayEmpty
@@ -125,7 +127,8 @@ function EpisClinicalFieldInner({
   }
 
   const multiline = field.type === 'textarea';
-  const acceptsDrop = multiline && clinicalDropEnabled && Boolean(onClinicalDrop) && !field.readOnly;
+  const acceptsDrop =
+    multiline && clinicalDropEnabled && Boolean(onClinicalDrop) && !field.readOnly;
 
   const textField = (
     <EpisTextField
@@ -170,7 +173,9 @@ function EpisClinicalFieldInner({
           onDragLeave={() => setDropActive(false)}
           onDrop={(e) => {
             setDropActive(false);
-            const payload = parseClinicalContextDrag(e.dataTransfer.getData(CLINICAL_CONTEXT_DRAG_MIME));
+            const payload = parseClinicalContextDrag(
+              e.dataTransfer.getData(CLINICAL_CONTEXT_DRAG_MIME),
+            );
             if (!payload) return;
             e.preventDefault();
             onClinicalDrop?.(field.id, payload);

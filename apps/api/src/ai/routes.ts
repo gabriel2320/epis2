@@ -18,7 +18,12 @@ import {
 } from '../auth/authenticate.js';
 import type { AppConfig } from '../config.js';
 import type { Database } from '../db/client.js';
-import { fetchLocalAiStatus, pingOllama, requestDraftAssist, requestTextboxAssist } from './client.js';
+import {
+  fetchLocalAiStatus,
+  pingOllama,
+  requestDraftAssist,
+  requestTextboxAssist,
+} from './client.js';
 import { getDemoSafetyNotesForPatient } from '../clinical/service.js';
 import { queryPatientRag } from './rag.js';
 import { suggestPatientSummary24h } from './summary.js';
@@ -71,10 +76,7 @@ export async function registerAiRoutes(
       }
 
       const session = (request as AuthenticatedRequest).session;
-      const { httpStatus, body } = await requestDraftAssist(
-        config.LOCAL_AI_BASE_URL,
-        parsed.data,
-      );
+      const { httpStatus, body } = await requestDraftAssist(config.LOCAL_AI_BASE_URL, parsed.data);
 
       const baseRun: Pick<AiRunRecord, 'actorId' | 'blueprintId' | 'inputPayload'> & {
         patientId?: string;
@@ -228,22 +230,18 @@ export async function registerAiRoutes(
     },
   );
 
-  app.get(
-    '/api/ai/runs',
-    { preHandler: requireAiRead },
-    async (request, reply) => {
-      const q = request.query as { patientId?: string; limit?: string };
-      if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
-      }
-      const limit = q.limit ? Math.min(Number(q.limit), 100) : 30;
-      const runs = await listRecentAiRuns(db, {
-        ...(q.patientId !== undefined ? { patientId: q.patientId } : {}),
-        limit: Number.isFinite(limit) ? limit : 30,
-      });
-      return aiRunsListResponseSchema.parse({ readOnly: true, runs });
-    },
-  );
+  app.get('/api/ai/runs', { preHandler: requireAiRead }, async (request, reply) => {
+    const q = request.query as { patientId?: string; limit?: string };
+    if (!db) {
+      return reply.status(503).send({ error: 'Base de datos no disponible' });
+    }
+    const limit = q.limit ? Math.min(Number(q.limit), 100) : 30;
+    const runs = await listRecentAiRuns(db, {
+      ...(q.patientId !== undefined ? { patientId: q.patientId } : {}),
+      limit: Number.isFinite(limit) ? limit : 30,
+    });
+    return aiRunsListResponseSchema.parse({ readOnly: true, runs });
+  });
 
   app.post(
     '/api/ai/rag/query',
@@ -280,12 +278,7 @@ export async function registerAiRoutes(
         return reply.status(503).send({ error: 'Base de datos no disponible' });
       }
       const session = (request as AuthenticatedRequest).session;
-      const result = await suggestPatientSummary24h(
-        db,
-        config,
-        session.sub,
-        parsed.data.patientId,
-      );
+      const result = await suggestPatientSummary24h(db, config, session.sub, parsed.data.patientId);
       return aiSummarySuggestResponseSchema.parse(result);
     },
   );

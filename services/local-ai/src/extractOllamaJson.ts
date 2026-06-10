@@ -51,9 +51,7 @@ export function extractFirstJsonObject(text: string): string | null {
   return null;
 }
 
-export type ParseOllamaJsonResult =
-  | { ok: true; value: unknown }
-  | { ok: false; reason: string };
+export type ParseOllamaJsonResult = { ok: true; value: unknown } | { ok: false; reason: string };
 
 export function parseJsonFromOllamaText(raw: string): ParseOllamaJsonResult {
   const cleaned = stripOllamaResponseNoise(raw);

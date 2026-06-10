@@ -66,9 +66,7 @@ const qualityBoard: QualityDashboardResponse = {
     { organism: 'MRSA', unit: 'UCI', casesLast30d: 1, alertLevel: 'normal' as const },
   ],
   mdroAlerts: [],
-  antimicrobialConsumption: [
-    { antibiotic: 'Meropenem', dddPer1000: 12, trend: 'stable' as const },
-  ],
+  antimicrobialConsumption: [{ antibiotic: 'Meropenem', dddPer1000: 12, trend: 'stable' as const }],
   proaRecommendations: [],
   cvcInsertionChecklists: [],
   navPreventionChecklists: [],
@@ -119,7 +117,9 @@ vi.mock('./rad/EpisRadDashboardTabShell.js', () => ({
 }));
 
 vi.mock('./rad/EpisRadFormSectionAccordion.js', () => ({
-  EpisRadFormSectionAccordion: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+  EpisRadFormSectionAccordion: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
 }));
 
 vi.mock('./grids/DashboardHomogeneousGrid.js', () => ({
@@ -140,16 +140,8 @@ describe('QualityDashboardTab', () => {
 
     expect(screen.getByTestId('epis2-dashboard-quality')).toBeInTheDocument();
     expect(screen.getByText(copy.dashboard.tabQuality)).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        new RegExp(`${copy.interop.metricPatients}: 5`),
-      ),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        new RegExp(`${copy.interop.metricAiRuns}: 2`),
-      ),
-    ).toBeInTheDocument();
+    expect(screen.getByText(new RegExp(`${copy.interop.metricPatients}: 5`))).toBeInTheDocument();
+    expect(screen.getByText(new RegExp(`${copy.interop.metricAiRuns}: 2`))).toBeInTheDocument();
     expect(screen.getByTestId('epis2-quality-sentinel')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-quality-staging')).toBeInTheDocument();
   });

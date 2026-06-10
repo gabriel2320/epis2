@@ -32,7 +32,10 @@ export const epis2PatientResourceSchema = z.object({
     .min(1),
   name: z.array(z.object({ use: z.literal('official'), text: z.string().min(1) })).min(1),
   gender: z.enum(['male', 'female', 'other', 'unknown']),
-  birthDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+  birthDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/)
+    .optional(),
 });
 
 export const epis2EncounterResourceSchema = z.object({

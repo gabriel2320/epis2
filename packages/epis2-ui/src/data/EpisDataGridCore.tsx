@@ -11,7 +11,10 @@ import {
 import { esES as dataGridEsES } from '@mui/x-data-grid/locales';
 import { useMemo } from 'react';
 import { epis2TonalContainerSx } from '../theme/epis2-elevation.js';
-import { enhanceEpisDataGridColumns, episDataGridNumericCellClass } from './epis-data-grid-columns.js';
+import {
+  enhanceEpisDataGridColumns,
+  episDataGridNumericCellClass,
+} from './epis-data-grid-columns.js';
 
 export type { GridColDef, GridRowParams };
 

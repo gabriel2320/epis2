@@ -1,22 +1,12 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
-import {
-  REPO_ROOT,
-  SCAN_EXTENSIONS,
-  SCAN_IGNORE_DIRS,
-  SCAN_ROOTS,
-  isLegacyDoc,
-} from './paths.mjs';
+import { REPO_ROOT, SCAN_EXTENSIONS, SCAN_IGNORE_DIRS, SCAN_ROOTS, isLegacyDoc } from './paths.mjs';
 
 /**
  * @returns {AsyncGenerator<{ path: string, rel: string, content: string }>}
  */
 export async function* walkSourceFiles(options = {}) {
-  const {
-    roots = SCAN_ROOTS,
-    extraIgnore = [],
-    includeScriptsArchitecture = false,
-  } = options;
+  const { roots = SCAN_ROOTS, extraIgnore = [], includeScriptsArchitecture = false } = options;
 
   const ignore = new Set([...SCAN_IGNORE_DIRS, ...extraIgnore]);
 

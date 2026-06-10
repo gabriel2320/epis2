@@ -25,7 +25,10 @@ export function serializeWidgetLayoutToJson(
   return JSON.stringify(document, null, pretty ? 2 : undefined);
 }
 
-export function parseWidgetLayoutImport(raw: string, expectedSurface?: string): WidgetLayoutImportResult {
+export function parseWidgetLayoutImport(
+  raw: string,
+  expectedSurface?: string,
+): WidgetLayoutImportResult {
   let parsed: unknown;
   try {
     parsed = JSON.parse(raw);
@@ -60,7 +63,8 @@ export function parseWidgetLayoutImport(raw: string, expectedSurface?: string): 
       schemaVersion: WIDGET_LAYOUT_SCHEMA_VERSION,
       surface,
       widgetIds,
-      exportedAt: typeof record.exportedAt === 'string' ? record.exportedAt : new Date().toISOString(),
+      exportedAt:
+        typeof record.exportedAt === 'string' ? record.exportedAt : new Date().toISOString(),
     },
   };
 }

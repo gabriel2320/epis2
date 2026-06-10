@@ -76,9 +76,7 @@ describeIntegration('GET /api/drafts — paginación (MF-NORM-105)', () => {
     const page2Json = page2.json() as { drafts: { id: string }[] };
     expect(page2Json.drafts.length).toBeGreaterThanOrEqual(5);
 
-    const firstPageIds = new Set(
-      (defaultJson.drafts as { id: string }[]).map((d) => d.id),
-    );
+    const firstPageIds = new Set((defaultJson.drafts as { id: string }[]).map((d) => d.id));
     expect(page2Json.drafts.every((d) => !firstPageIds.has(d.id))).toBe(true);
 
     const tooBig = await app.inject({

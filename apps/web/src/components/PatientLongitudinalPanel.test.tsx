@@ -57,7 +57,13 @@ describe('PatientLongitudinalPanel — Ola 3 CTAs', () => {
           data={{
             ...emptyLongitudinal,
             medications: [
-              { id: 'm1', name: 'Losartán', doseText: '50 mg/día', route: 'oral', status: 'active' },
+              {
+                id: 'm1',
+                name: 'Losartán',
+                doseText: '50 mg/día',
+                route: 'oral',
+                status: 'active',
+              },
             ],
             observations: [
               {

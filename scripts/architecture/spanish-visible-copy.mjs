@@ -23,12 +23,12 @@ export async function validate() {
     if (rel.includes('.test.')) continue;
 
     for (const phrase of FORBIDDEN_VISIBLE_EN) {
-      const inLiteral = new RegExp(`['"\`]${phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"\`]`).test(
-        content,
-      );
-      const inJsxText = new RegExp(`>\\s*${phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*<`).test(
-        content,
-      );
+      const inLiteral = new RegExp(
+        `['"\`]${phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"\`]`,
+      ).test(content);
+      const inJsxText = new RegExp(
+        `>\\s*${phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*<`,
+      ).test(content);
       if (inLiteral || inJsxText) {
         details.push(`${rel} → microcopy visible en inglés: "${phrase}"`);
       }

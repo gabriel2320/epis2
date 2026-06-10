@@ -1,7 +1,4 @@
-import type {
-  EpisClinicalWorkspaceDefinition,
-  EpisClinicalWorkspaceId,
-} from '@epis2/epis2-ui';
+import type { EpisClinicalWorkspaceDefinition, EpisClinicalWorkspaceId } from '@epis2/epis2-ui';
 import {
   CLINICAL_WORKSPACE_ORDER,
   defaultWorkspaceForRole,
@@ -25,9 +22,21 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
     labelKey: 'workspaces.reception.label',
     descriptionKey: 'workspaces.reception.description',
     railItems: [
-      { id: 'reception-board', labelKey: 'workspaces.reception.rail.board', route: '/epis2/dashboard?tab=reception' },
-      { id: 'reception-agenda', labelKey: 'workspaces.reception.rail.agenda', route: '/epis2/dashboard?tab=reception' },
-      { id: 'reception-call', labelKey: 'workspaces.reception.rail.callPanel', route: '/epis2/dashboard?tab=reception' },
+      {
+        id: 'reception-board',
+        labelKey: 'workspaces.reception.rail.board',
+        route: '/epis2/dashboard?tab=reception',
+      },
+      {
+        id: 'reception-agenda',
+        labelKey: 'workspaces.reception.rail.agenda',
+        route: '/epis2/dashboard?tab=reception',
+      },
+      {
+        id: 'reception-call',
+        labelKey: 'workspaces.reception.rail.callPanel',
+        route: '/epis2/dashboard?tab=reception',
+      },
     ],
     primaryFabKey: 'workspaces.reception.fab',
     allowedRoles: ['admin', 'nurse', 'physician'],
@@ -37,11 +46,31 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
     labelKey: 'workspaces.ambulatory.label',
     descriptionKey: 'workspaces.ambulatory.description',
     railItems: [
-      { id: 'daily-agenda', labelKey: 'workspaces.ambulatory.rail.dailyAgenda', route: '/epis2/dashboard?tab=work' },
-      { id: 'patients', labelKey: 'workspaces.ambulatory.rail.patients', route: '/espacio/buscar-paciente' },
-      { id: 'outpatient', labelKey: 'workspaces.ambulatory.tabs.encounter', route: '/espacio/ambulatorio' },
-      { id: 'aps-board', labelKey: 'workspaces.ambulatory.rail.apsBoard', route: '/epis2/dashboard?tab=aps' },
-      { id: 'specialty-board', labelKey: 'workspaces.ambulatory.rail.specialtyBoard', route: '/epis2/dashboard?tab=specialty' },
+      {
+        id: 'daily-agenda',
+        labelKey: 'workspaces.ambulatory.rail.dailyAgenda',
+        route: '/epis2/dashboard?tab=work',
+      },
+      {
+        id: 'patients',
+        labelKey: 'workspaces.ambulatory.rail.patients',
+        route: '/espacio/buscar-paciente',
+      },
+      {
+        id: 'outpatient',
+        labelKey: 'workspaces.ambulatory.tabs.encounter',
+        route: '/espacio/ambulatorio',
+      },
+      {
+        id: 'aps-board',
+        labelKey: 'workspaces.ambulatory.rail.apsBoard',
+        route: '/epis2/dashboard?tab=aps',
+      },
+      {
+        id: 'specialty-board',
+        labelKey: 'workspaces.ambulatory.rail.specialtyBoard',
+        route: '/epis2/dashboard?tab=specialty',
+      },
     ],
     patientTabIds: ['summary', 'encounter', 'orders', 'results', 'certificates'],
     primaryFabKey: 'workspaces.ambulatory.fab',
@@ -52,10 +81,26 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
     labelKey: 'workspaces.inpatientWard.label',
     descriptionKey: 'workspaces.inpatientWard.description',
     railItems: [
-      { id: 'ward-census', labelKey: 'workspaces.inpatientWard.rail.census', route: '/epis2/dashboard?tab=service' },
-      { id: 'ward-admissions', labelKey: 'workspaces.inpatientWard.rail.admissions', route: '/espacio/ingreso' },
-      { id: 'ward-rounds', labelKey: 'workspaces.inpatientWard.rail.rounds', route: '/espacio/evolucion' },
-      { id: 'ward-discharge', labelKey: 'workspaces.inpatientWard.rail.discharge', route: '/espacio/epicrisis' },
+      {
+        id: 'ward-census',
+        labelKey: 'workspaces.inpatientWard.rail.census',
+        route: '/epis2/dashboard?tab=service',
+      },
+      {
+        id: 'ward-admissions',
+        labelKey: 'workspaces.inpatientWard.rail.admissions',
+        route: '/espacio/ingreso',
+      },
+      {
+        id: 'ward-rounds',
+        labelKey: 'workspaces.inpatientWard.rail.rounds',
+        route: '/espacio/evolucion',
+      },
+      {
+        id: 'ward-discharge',
+        labelKey: 'workspaces.inpatientWard.rail.discharge',
+        route: '/espacio/epicrisis',
+      },
     ],
     patientTabIds: ['summary', 'encounter', 'orders', 'results'],
     primaryFabKey: 'workspaces.inpatientWard.fab',
@@ -66,9 +111,21 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
     labelKey: 'workspaces.intermediateCare.label',
     descriptionKey: 'workspaces.intermediateCare.description',
     railItems: [
-      { id: 'intermediate-census', labelKey: 'workspaces.intermediateCare.rail.census', route: '/epis2/dashboard?tab=nursing' },
-      { id: 'intermediate-monitoring', labelKey: 'workspaces.intermediateCare.rail.monitoring', route: '/epis2/dashboard?tab=nursing' },
-      { id: 'intermediate-nursing', labelKey: 'workspaces.intermediateCare.rail.nursing', route: '/espacio/enfermeria' },
+      {
+        id: 'intermediate-census',
+        labelKey: 'workspaces.intermediateCare.rail.census',
+        route: '/epis2/dashboard?tab=nursing',
+      },
+      {
+        id: 'intermediate-monitoring',
+        labelKey: 'workspaces.intermediateCare.rail.monitoring',
+        route: '/epis2/dashboard?tab=nursing',
+      },
+      {
+        id: 'intermediate-nursing',
+        labelKey: 'workspaces.intermediateCare.rail.nursing',
+        route: '/espacio/enfermeria',
+      },
     ],
     patientTabIds: ['summary', 'encounter', 'orders'],
     primaryFabKey: 'workspaces.intermediateCare.fab',
@@ -79,8 +136,16 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
     labelKey: 'workspaces.emergency.label',
     descriptionKey: 'workspaces.emergency.description',
     railItems: [
-      { id: 'emergency-triage', labelKey: 'workspaces.emergency.rail.triage', route: '/epis2/dashboard?tab=emergency' },
-      { id: 'emergency-observation', labelKey: 'workspaces.emergency.rail.observation', route: '/epis2/dashboard?tab=emergency' },
+      {
+        id: 'emergency-triage',
+        labelKey: 'workspaces.emergency.rail.triage',
+        route: '/epis2/dashboard?tab=emergency',
+      },
+      {
+        id: 'emergency-observation',
+        labelKey: 'workspaces.emergency.rail.observation',
+        route: '/epis2/dashboard?tab=emergency',
+      },
     ],
     primaryFabKey: 'workspaces.emergency.fab',
     allowedRoles: ['physician', 'nurse', 'paramedic', 'admin'],
@@ -91,7 +156,11 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
     descriptionKey: 'workspaces.icu.description',
     railItems: [
       { id: 'bed-map', labelKey: 'workspaces.icu.rail.bedMap', route: '/epis2/dashboard?tab=icu' },
-      { id: 'monitoring', labelKey: 'workspaces.icu.rail.monitoring', route: '/epis2/dashboard?tab=icu' },
+      {
+        id: 'monitoring',
+        labelKey: 'workspaces.icu.rail.monitoring',
+        route: '/epis2/dashboard?tab=icu',
+      },
       { id: 'handover', labelKey: 'workspaces.icu.rail.handover', route: '/espacio/enfermeria' },
     ],
     patientTabIds: ['flowsheet', 'evolution', 'nursing', 'iv_therapy', 'labs'],
@@ -103,7 +172,11 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
     labelKey: 'workspaces.or.label',
     descriptionKey: 'workspaces.or.description',
     railItems: [
-      { id: 'or-schedule', labelKey: 'workspaces.or.rail.schedule', route: '/epis2/dashboard?tab=or' },
+      {
+        id: 'or-schedule',
+        labelKey: 'workspaces.or.rail.schedule',
+        route: '/epis2/dashboard?tab=or',
+      },
       { id: 'or-rooms', labelKey: 'workspaces.or.rail.rooms', route: '/epis2/dashboard?tab=or' },
     ],
     primaryFabKey: 'workspaces.or.fab',
@@ -114,10 +187,26 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
     labelKey: 'workspaces.pharmacyClinical.label',
     descriptionKey: 'workspaces.pharmacyClinical.description',
     railItems: [
-      { id: 'pharmacy-validation', labelKey: 'workspaces.pharmacyClinical.rail.validation', route: '/espacio/farmacia' },
-      { id: 'pharmacy-reconciliation', labelKey: 'workspaces.pharmacyClinical.rail.reconciliation', route: '/espacio/conciliacion' },
-      { id: 'pharmacy-antimicrobials', labelKey: 'workspaces.pharmacyClinical.rail.antimicrobials', route: '/epis2/dashboard?tab=pharmacy' },
-      { id: 'pharmacy-dashboard', labelKey: 'workspaces.pharmacyClinical.rail.dashboard', route: '/epis2/dashboard?tab=pharmacy' },
+      {
+        id: 'pharmacy-validation',
+        labelKey: 'workspaces.pharmacyClinical.rail.validation',
+        route: '/espacio/farmacia',
+      },
+      {
+        id: 'pharmacy-reconciliation',
+        labelKey: 'workspaces.pharmacyClinical.rail.reconciliation',
+        route: '/espacio/conciliacion',
+      },
+      {
+        id: 'pharmacy-antimicrobials',
+        labelKey: 'workspaces.pharmacyClinical.rail.antimicrobials',
+        route: '/epis2/dashboard?tab=pharmacy',
+      },
+      {
+        id: 'pharmacy-dashboard',
+        labelKey: 'workspaces.pharmacyClinical.rail.dashboard',
+        route: '/epis2/dashboard?tab=pharmacy',
+      },
     ],
     patientTabIds: ['summary', 'orders'],
     primaryFabKey: 'workspaces.pharmacyClinical.fab',
@@ -128,10 +217,28 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
     labelKey: 'workspaces.qualityIaas.label',
     descriptionKey: 'workspaces.qualityIaas.description',
     railItems: [
-      { id: 'quality-kpi', labelKey: 'workspaces.qualityIaas.rail.quality', route: '/epis2/dashboard?tab=quality' },
-      { id: 'epi', labelKey: 'workspaces.qualityIaas.rail.epi', route: '/epis2/dashboard?tab=quality', disabled: true },
-      { id: 'iaas', labelKey: 'workspaces.qualityIaas.rail.iaas', route: '/epis2/dashboard?tab=quality', disabled: true },
-      { id: 'bed-mgmt', labelKey: 'workspaces.qualityIaas.rail.beds', route: '/epis2/dashboard?tab=service' },
+      {
+        id: 'quality-kpi',
+        labelKey: 'workspaces.qualityIaas.rail.quality',
+        route: '/epis2/dashboard?tab=quality',
+      },
+      {
+        id: 'epi',
+        labelKey: 'workspaces.qualityIaas.rail.epi',
+        route: '/epis2/dashboard?tab=quality',
+        disabled: true,
+      },
+      {
+        id: 'iaas',
+        labelKey: 'workspaces.qualityIaas.rail.iaas',
+        route: '/epis2/dashboard?tab=quality',
+        disabled: true,
+      },
+      {
+        id: 'bed-mgmt',
+        labelKey: 'workspaces.qualityIaas.rail.beds',
+        route: '/epis2/dashboard?tab=service',
+      },
     ],
     patientTabIds: [],
     primaryFabKey: 'workspaces.qualityIaas.fab',
@@ -142,11 +249,33 @@ export const CLINICAL_WORKSPACE_DEFINITIONS: Record<
     labelKey: 'workspaces.adminSystem.label',
     descriptionKey: 'workspaces.adminSystem.description',
     railItems: [
-      { id: 'emr-config', labelKey: 'workspaces.adminSystem.rail.emr', route: '/espacio/admin?tab=ops' },
-      { id: 'roles', labelKey: 'workspaces.adminSystem.rail.roles', route: '/espacio/admin?tab=users' },
-      { id: 'hardware', labelKey: 'workspaces.adminSystem.rail.hardware', route: '/espacio/admin?tab=ops', disabled: true },
-      { id: 'interop', labelKey: 'workspaces.adminSystem.rail.interop', route: '/espacio/admin?tab=ops', disabled: true },
-      { id: 'forms-studio', labelKey: 'workspaces.adminSystem.rail.forms', route: '/espacio/admin?tab=forms' },
+      {
+        id: 'emr-config',
+        labelKey: 'workspaces.adminSystem.rail.emr',
+        route: '/espacio/admin?tab=ops',
+      },
+      {
+        id: 'roles',
+        labelKey: 'workspaces.adminSystem.rail.roles',
+        route: '/espacio/admin?tab=users',
+      },
+      {
+        id: 'hardware',
+        labelKey: 'workspaces.adminSystem.rail.hardware',
+        route: '/espacio/admin?tab=ops',
+        disabled: true,
+      },
+      {
+        id: 'interop',
+        labelKey: 'workspaces.adminSystem.rail.interop',
+        route: '/espacio/admin?tab=ops',
+        disabled: true,
+      },
+      {
+        id: 'forms-studio',
+        labelKey: 'workspaces.adminSystem.rail.forms',
+        route: '/espacio/admin?tab=forms',
+      },
     ],
     primaryFabKey: 'workspaces.adminSystem.fab',
     allowedRoles: ['admin', 'auditor'],
@@ -165,7 +294,10 @@ export function resolveWorkspaceForRole(role: string): EpisClinicalWorkspaceId {
   return defaultWorkspaceForRole(role);
 }
 
-export function canRoleAccessWorkspace(role: string, workspaceId: EpisClinicalWorkspaceId): boolean {
+export function canRoleAccessWorkspace(
+  role: string,
+  workspaceId: EpisClinicalWorkspaceId,
+): boolean {
   return roleMayUseWorkspace(role, workspaceId);
 }
 
@@ -197,11 +329,7 @@ export function getWorkspaceDefaultRoute(id: EpisClinicalWorkspaceId): Workspace
   return parseClinicalRoute(firstEnabled.route);
 }
 
-export function routeMatchesPath(
-  pathname: string,
-  searchStr: string,
-  route: string,
-): boolean {
+export function routeMatchesPath(pathname: string, searchStr: string, route: string): boolean {
   const target = parseClinicalRoute(route);
   if (!pathname.startsWith(target.to)) return false;
   if (!target.search) return true;

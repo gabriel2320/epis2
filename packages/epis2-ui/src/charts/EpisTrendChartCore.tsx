@@ -24,7 +24,15 @@ function hasChartData(series: EpisTrendSeries[]) {
   return series.some((s) => s.data.length > 0 && s.data.some((v) => Number.isFinite(v)));
 }
 
-function EmptyChart({ message, height, testId }: { message: string; height: number; testId?: string }) {
+function EmptyChart({
+  message,
+  height,
+  testId,
+}: {
+  message: string;
+  height: number;
+  testId?: string;
+}) {
   return (
     <Box
       data-testid={testId}
@@ -54,13 +62,7 @@ export function EpisTrendChart({
   'data-testid': testId,
 }: EpisTrendChartProps) {
   if (!hasChartData(series) || xAxisLabels.length === 0) {
-    return (
-      <EmptyChart
-        message={emptyMessage}
-        height={height}
-        {...(testId ? { testId } : {})}
-      />
-    );
+    return <EmptyChart message={emptyMessage} height={height} {...(testId ? { testId } : {})} />;
   }
 
   const chartSeries = series.map((s) => ({

@@ -27,7 +27,10 @@ for (const [tramo, spec, npmScript] of registry) {
   if (!pkg.includes(`"${npmScript}"`)) errors.push(`package.json sin ${npmScript}`);
 }
 
-const jScaffold = readFileSync(join(root, 'scripts/quality/validate-tramo-j-scaffold-gate.mjs'), 'utf8');
+const jScaffold = readFileSync(
+  join(root, 'scripts/quality/validate-tramo-j-scaffold-gate.mjs'),
+  'utf8',
+);
 if (!jScaffold.includes('epis2-pharmacy-stockout')) {
   errors.push('scaffold gate J sin panel IDC 170');
 }

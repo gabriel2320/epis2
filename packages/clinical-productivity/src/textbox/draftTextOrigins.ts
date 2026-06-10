@@ -16,7 +16,10 @@ export type DraftFieldTextBoxMetaEntry = {
 
 export type DraftFieldTextBoxMeta = Record<string, DraftFieldTextBoxMetaEntry>;
 
-const PENDING_LABELS: Record<NonNullable<DraftFieldTextBoxMetaEntry['pendingConfirmation']>, string> = {
+const PENDING_LABELS: Record<
+  NonNullable<DraftFieldTextBoxMetaEntry['pendingConfirmation']>,
+  string
+> = {
   medication: 'medicación',
   dose: 'dosis',
   unit: 'unidad',

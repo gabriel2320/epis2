@@ -7,7 +7,10 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
-const formPage = readFileSync(join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'), 'utf8');
+const formPage = readFileSync(
+  join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'),
+  'utf8',
+);
 const actionBarCount = (formPage.match(/<EpisClinicalFormActionBar/g) ?? []).length;
 if (actionBarCount !== 1) {
   errors.push(`GeneratedClinicalFormPage: una ActionBar (encontradas ${actionBarCount})`);

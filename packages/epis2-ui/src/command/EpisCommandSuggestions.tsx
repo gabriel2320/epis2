@@ -29,7 +29,11 @@ export function EpisCommandSuggestions({
   const roleChips = chips.filter((c) => !c.aiAssisted);
 
   return (
-    <Stack spacing={3} sx={{ width: '100%', px: { xs: 0.5, sm: 1 } }} data-testid="epis2-command-chips">
+    <Stack
+      spacing={3}
+      sx={{ width: '100%', px: { xs: 0.5, sm: 1 } }}
+      data-testid="epis2-command-chips"
+    >
       {aiChips.length > 0 ? (
         <Stack spacing={1} alignItems="center">
           <Stack direction="row" alignItems="center" spacing={0.75}>

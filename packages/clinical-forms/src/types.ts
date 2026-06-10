@@ -1,18 +1,9 @@
 import type { ClinicalRole } from '@epis2/clinical-domain';
 import type { ClinicalIntent } from '@epis2/command-registry';
 
-export type FormFieldType =
-  | 'text'
-  | 'textarea'
-  | 'select'
-  | 'date'
-  | 'checkbox';
+export type FormFieldType = 'text' | 'textarea' | 'select' | 'date' | 'checkbox';
 
-export type FormOutputKind =
-  | 'SEARCH'
-  | 'READ_ONLY_SUMMARY'
-  | 'CLINICAL_NOTE_DRAFT'
-  | 'ORDER_DRAFT';
+export type FormOutputKind = 'SEARCH' | 'READ_ONLY_SUMMARY' | 'CLINICAL_NOTE_DRAFT' | 'ORDER_DRAFT';
 
 export type FormSection = {
   id: string;

@@ -21,7 +21,13 @@ export function SchedulerSpikePage() {
       sx={{ maxWidth: 1200, mx: 'auto', p: { xs: 2, md: 4 } }}
       data-testid="epis2-scheduler-spike-page"
     >
-      <Stack direction="row" justifyContent="space-between" alignItems="flex-start" gap={2} flexWrap="wrap">
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="flex-start"
+        gap={2}
+        flexWrap="wrap"
+      >
         <div>
           <Typography variant="h4" component="h1" gutterBottom>
             {copy.schedulerSpike.title}
@@ -30,7 +36,12 @@ export function SchedulerSpikePage() {
             {copy.schedulerSpike.subtitle}
           </Typography>
         </div>
-        <EpisButton href="/comando" component="a" variant="outlined" data-testid="epis2-scheduler-spike-back">
+        <EpisButton
+          href="/comando"
+          component="a"
+          variant="outlined"
+          data-testid="epis2-scheduler-spike-back"
+        >
           {copy.layout.backToCommand}
         </EpisButton>
       </Stack>

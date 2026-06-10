@@ -60,7 +60,14 @@ export function EpisModeGuard({
         });
       }
     }
-  }, [activeMode, enforceClassicPatient, enforceDashboardPermission, navigate, patient?.id, session]);
+  }, [
+    activeMode,
+    enforceClassicPatient,
+    enforceDashboardPermission,
+    navigate,
+    patient?.id,
+    session,
+  ]);
 
   return children;
 }

@@ -1,11 +1,5 @@
-import {
-  findSyntheticUser,
-  verifyDemoAuthKey,
-} from '@epis2/clinical-domain';
-import {
-  loginRequestSchema,
-  sessionResponseSchema,
-} from '@epis2/contracts';
+import { findSyntheticUser, verifyDemoAuthKey } from '@epis2/clinical-domain';
+import { loginRequestSchema, sessionResponseSchema } from '@epis2/contracts';
 import type { FastifyInstance } from 'fastify';
 import type { Database } from '../db/client.js';
 import { appendAudit, listAuthAuditEvents } from '../audit/store.js';
@@ -111,12 +105,8 @@ export async function registerAuthRoutes(
     return sessionResponseSchema.parse(response);
   });
 
-  app.get(
-    '/api/auth/audit/login',
-    { preHandler: requireAuditRead },
-    async (_request, reply) => {
-      const events = await listAuthAuditEvents(db, 200);
-      return reply.send({ events });
-    },
-  );
+  app.get('/api/auth/audit/login', { preHandler: requireAuditRead }, async (_request, reply) => {
+    const events = await listAuthAuditEvents(db, 200);
+    return reply.send({ events });
+  });
 }

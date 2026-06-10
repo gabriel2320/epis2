@@ -13,10 +13,7 @@ import { listDrafts } from '../clinical/service.js';
 
 const DEFAULT_UNIT_CODE = 'CIRUGIA-DEMO';
 
-export async function getServiceDashboardSummary(
-  db: Database,
-  unitCode = DEFAULT_UNIT_CODE,
-) {
+export async function getServiceDashboardSummary(db: Database, unitCode = DEFAULT_UNIT_CODE) {
   const [unit] = await db
     .select()
     .from(clinicalUnits)
@@ -55,9 +52,7 @@ export async function getServiceDashboardSummary(
     })
     .from(inpatientAdmissions)
     .innerJoin(patients, eq(inpatientAdmissions.patientId, patients.id))
-    .where(
-      and(eq(inpatientAdmissions.unitId, unit.id), eq(inpatientAdmissions.status, 'active')),
-    );
+    .where(and(eq(inpatientAdmissions.unitId, unit.id), eq(inpatientAdmissions.status, 'active')));
 
   const admissionByBed = new Map(activeAdmissions.map((a) => [a.bedId, a]));
 
@@ -170,11 +165,7 @@ export async function getServiceDashboardSummary(
   };
 }
 
-export async function acknowledgeCriticalResult(
-  db: Database,
-  criticalId: string,
-  actorId: string,
-) {
+export async function acknowledgeCriticalResult(db: Database, criticalId: string, actorId: string) {
   const [row] = await db
     .select()
     .from(clinicalCriticalResults)

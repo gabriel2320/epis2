@@ -10,7 +10,10 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
 const comando = readFileSync(join(root, 'apps/web/src/pages/CommandCenterPage.tsx'), 'utf8');
-const hero = readFileSync(join(root, 'packages/epis2-ui/src/command/EpisCommandCenterHero.tsx'), 'utf8');
+const hero = readFileSync(
+  join(root, 'packages/epis2-ui/src/command/EpisCommandCenterHero.tsx'),
+  'utf8',
+);
 const chips = readFileSync(join(root, 'packages/command-registry/src/chips.ts'), 'utf8');
 
 const forbiddenInComando = [

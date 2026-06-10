@@ -40,7 +40,9 @@ describe('PatientSummaryAntecedentsBlock', () => {
     render(
       <Epis2ThemeProvider>
         <PatientSummaryAntecedentsBlock
-          allergies={[{ id: 'a1', substance: 'Penicilina', severity: 'moderate', status: 'active' }]}
+          allergies={[
+            { id: 'a1', substance: 'Penicilina', severity: 'moderate', status: 'active' },
+          ]}
           problems={[{ id: 'p1', description: 'HTA', status: 'active' }]}
         />
       </Epis2ThemeProvider>,

@@ -29,16 +29,18 @@ function runChecks() {
     errors.push('falta alias epis2ShellContentSx plano para shell clínico');
   }
 
-  const dashboardShell = path.join(
-    root,
-    'packages/epis2-ui/src/dashboard/EpisDashboardShell.tsx',
-  );
+  const dashboardShell = path.join(root, 'packages/epis2-ui/src/dashboard/EpisDashboardShell.tsx');
   const dashboardContent = fs.readFileSync(dashboardShell, 'utf8');
-  if (dashboardContent.includes('epis2IslandSx') || dashboardContent.includes('epis2IslandPaddingSx')) {
+  if (
+    dashboardContent.includes('epis2IslandSx') ||
+    dashboardContent.includes('epis2IslandPaddingSx')
+  ) {
     errors.push('EpisDashboardShell no debe usar epis2IslandSx (LAYOUT-G12)');
   }
   if (dashboardContent.includes('epis2CanvasSx')) {
-    errors.push('EpisDashboardShell no debe duplicar epis2CanvasSx — ya lo provee EpisAppShellLayout');
+    errors.push(
+      'EpisDashboardShell no debe duplicar epis2CanvasSx — ya lo provee EpisAppShellLayout',
+    );
   }
   if (/border:\s*1[,}]/.test(dashboardContent)) {
     errors.push('EpisDashboardShell no debe usar cajas con border: 1 (UX-A.2 flatten)');

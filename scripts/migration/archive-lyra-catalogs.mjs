@@ -97,9 +97,7 @@ function slimGenerico(row, keys) {
 const SLIMMERS = {
   'medicamentos-vademecum.json': (rows) => rows.map(slimMedicamento),
   'medicamentos-frecuentes-capture.json': (rows) =>
-    rows
-      .filter((r) => r.CodigoMedicamento && r.NombreMedicamento)
-      .map((r) => slimMedicamento(r)),
+    rows.filter((r) => r.CodigoMedicamento && r.NombreMedicamento).map((r) => slimMedicamento(r)),
   'diagnosticos-cie10.json': (rows) => rows.map(slimDiagnostico),
   'diagnosticos-favoritos.json': (rows) => rows.map(slimDiagnostico),
   'especialidades.json': (rows) => rows.map(slimEspecialidad),

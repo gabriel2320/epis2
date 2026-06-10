@@ -2,7 +2,11 @@ import type { CommandResolveResponse } from '@epis2/contracts';
 import { DASHBOARD_TAB_BY_INTENT, type ClinicalIntent } from '@epis2/command-registry';
 import { formSearchFromCommandSlots } from './commandFormSearch.js';
 import { resolveModeRoute } from '../modes/episModeGuards.js';
-import type { ClinicalFormRoutePath, ClinicalNavigateFn, DashboardTab } from '../routes/clinicalNavigate.js';
+import type {
+  ClinicalFormRoutePath,
+  ClinicalNavigateFn,
+  DashboardTab,
+} from '../routes/clinicalNavigate.js';
 
 export function navigateClinicalCommandResult(
   navigate: ClinicalNavigateFn,
@@ -10,8 +14,8 @@ export function navigateClinicalCommandResult(
   patientId?: string,
 ): void {
   if (result.routePath === '/epis2/dashboard') {
-    const tab =
-      (DASHBOARD_TAB_BY_INTENT[result.intent as ClinicalIntent] ?? 'work') as DashboardTab;
+    const tab = (DASHBOARD_TAB_BY_INTENT[result.intent as ClinicalIntent] ??
+      'work') as DashboardTab;
     navigate(
       resolveModeRoute('dashboard', {
         dashboardTab: tab,

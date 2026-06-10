@@ -39,7 +39,9 @@ describe('createEpis2Theme contrast (THEME-05)', () => {
     };
 
     const focusRule = (theme: ReturnType<typeof createEpis2Theme>) =>
-      resolveBaseline(theme)['*:focus-visible'] as { outline?: string; outlineOffset?: string } | undefined;
+      resolveBaseline(theme)['*:focus-visible'] as
+        | { outline?: string; outlineOffset?: string }
+        | undefined;
 
     expect(focusRule(high)?.outline).toContain('3px solid');
     expect(focusRule(standard)?.outline).toContain('2px solid');

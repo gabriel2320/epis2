@@ -1,9 +1,6 @@
 import type { ReactNode } from 'react';
 import Stack from '@mui/material/Stack';
-import {
-  epis2ClinicalFormFooterSx,
-  epis2M3Spacing,
-} from '../theme/m3-layout-tokens.js';
+import { epis2ClinicalFormFooterSx, epis2M3Spacing } from '../theme/m3-layout-tokens.js';
 
 export type EpisClinicalFormFooterProps = {
   /** Acciones primarias — alineadas a la derecha (MD3 cierre de formulario). */

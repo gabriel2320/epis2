@@ -38,7 +38,9 @@ test.describe('ClinicalTextBox E2E — evolución rich y trazabilidad', () => {
         new ClipboardEvent('paste', { bubbles: true, cancelable: true, clipboardData: dt }),
       );
     }, pasteText);
-    await expect(objectiveField.getByRole('textbox')).toHaveValue(/Examen físico estable, sin signos de alarma\./);
+    await expect(objectiveField.getByRole('textbox')).toHaveValue(
+      /Examen físico estable, sin signos de alarma\./,
+    );
 
     await page.getByLabel('Análisis').fill('Evolución favorable.');
     await page.getByLabel('Plan').fill('Continuar tratamiento y control.');

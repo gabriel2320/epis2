@@ -12,17 +12,13 @@ export async function registerOpsRoutes(
 ) {
   const requireAuditRead = createRequirePermission(config, 'audit.read');
 
-  app.get(
-    '/api/ops/status',
-    { preHandler: requireAuditRead },
-    async (_request, reply) => {
-      if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
-      }
-      const status = await getOpsStatus(db, config);
-      const { aiRunsTotal, ...body } = status;
-      void aiRunsTotal;
-      return opsStatusResponseSchema.parse(body);
-    },
-  );
+  app.get('/api/ops/status', { preHandler: requireAuditRead }, async (_request, reply) => {
+    if (!db) {
+      return reply.status(503).send({ error: 'Base de datos no disponible' });
+    }
+    const status = await getOpsStatus(db, config);
+    const { aiRunsTotal, ...body } = status;
+    void aiRunsTotal;
+    return opsStatusResponseSchema.parse(body);
+  });
 }

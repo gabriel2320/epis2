@@ -172,8 +172,7 @@ export const EPIS_RAD_SCREEN_REGISTRY: readonly EpisRadScreenAudit[] = [
     iconBudget: 6,
     actionBudget: 0,
     scrollPolicy: 'single',
-    notes:
-      'MF-THREE-MODES-ORCHESTRATION — árbol canónico en apps/web/src/modes/; home /comando',
+    notes: 'MF-THREE-MODES-ORCHESTRATION — árbol canónico en apps/web/src/modes/; home /comando',
   },
   {
     id: 'dashboard-work',

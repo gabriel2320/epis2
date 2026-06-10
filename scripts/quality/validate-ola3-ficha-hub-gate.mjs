@@ -22,7 +22,12 @@ const workspaceTest = readFileSync(
   join(root, 'apps/web/src/pages/PatientWorkspacePage.test.tsx'),
   'utf8',
 );
-for (const token of ['epis2-ficha-antecedents', 'epis2-ficha-documents', 'epis2-longitudinal-panel', 'epis2-ficha-history']) {
+for (const token of [
+  'epis2-ficha-antecedents',
+  'epis2-ficha-documents',
+  'epis2-longitudinal-panel',
+  'epis2-ficha-history',
+]) {
   if (!workspaceTest.includes(token)) {
     errors.push(`PatientWorkspacePage.test sin ${token}`);
   }

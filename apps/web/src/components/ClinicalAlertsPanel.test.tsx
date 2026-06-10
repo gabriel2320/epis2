@@ -25,6 +25,8 @@ describe('ClinicalAlertsPanel accesibilidad M3', () => {
     const alert = screen.getByRole('alert');
     expect(alert).toHaveTextContent('Cruce beta-lactámicos');
     expect(alert).toHaveTextContent('Revisar alergia documentada');
-    expect(screen.getByTestId('epis2-clinical-alert-beta-lactam-cross-reactivity')).toBeInTheDocument();
+    expect(
+      screen.getByTestId('epis2-clinical-alert-beta-lactam-cross-reactivity'),
+    ).toBeInTheDocument();
   });
 });

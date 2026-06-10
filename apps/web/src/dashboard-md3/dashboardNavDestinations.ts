@@ -86,14 +86,14 @@ export const DASHBOARD_NAV_DESTINATIONS: readonly DashboardNavDestination[] = [
   },
 ];
 
-export function visibleDashboardNavDestinations(
-  allowedTabs: ReadonlySet<DashboardTab>,
-): {
+export function visibleDashboardNavDestinations(allowedTabs: ReadonlySet<DashboardTab>): {
   primary: DashboardNavDestination[];
   more: DashboardNavDestination[];
 } {
   const filtered = DASHBOARD_NAV_DESTINATIONS.filter((d) => allowedTabs.has(d.id));
-  const primary = filtered.filter((d) => d.group === 'primary').slice(0, EPIS_DASHBOARD_NAV_MAX_VISIBLE);
+  const primary = filtered
+    .filter((d) => d.group === 'primary')
+    .slice(0, EPIS_DASHBOARD_NAV_MAX_VISIBLE);
   const more = filtered.filter((d) => d.group === 'more');
   return { primary, more };
 }

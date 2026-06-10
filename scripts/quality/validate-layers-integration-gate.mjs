@@ -70,7 +70,13 @@ for (const file of dashboardTabs) {
 }
 
 const registry = readFileSync(join(root, 'apps/web/src/design/radScreenRegistry.ts'), 'utf8');
-for (const id of ['dashboard-icu', 'dashboard-specialty', 'dashboard-patient', 'dashboard-quality', 'dashboard-pharmacy']) {
+for (const id of [
+  'dashboard-icu',
+  'dashboard-specialty',
+  'dashboard-patient',
+  'dashboard-quality',
+  'dashboard-pharmacy',
+]) {
   const entry = registry.match(new RegExp(`id: '${id}'[\\s\\S]*?migrationStatus: 'done'`));
   if (!entry) errors.push(`${id} debe estar migrationStatus done en registry`);
 }

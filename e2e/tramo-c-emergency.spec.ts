@@ -19,7 +19,9 @@ test.describe('Tramo C — urgencias', () => {
     await page.goto('/epis2/dashboard?tab=emergency');
     await expect(page.getByTestId('epis2-emergency-discharge-actions')).toBeVisible();
     await expect(page.getByTestId('epis2-emergency-idc-110')).toBeVisible();
-    const epicrisisCta = page.locator('[data-testid^="epis2-emergency-prepare-epicrisis-"]').first();
+    const epicrisisCta = page
+      .locator('[data-testid^="epis2-emergency-prepare-epicrisis-"]')
+      .first();
     await expect(epicrisisCta).toBeVisible();
     await epicrisisCta.click();
     await expect(page).toHaveURL(/\/espacio\/epicrisis/);

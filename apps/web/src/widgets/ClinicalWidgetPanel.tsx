@@ -86,40 +86,39 @@ export function ClinicalWidgetPanel({
     setOrder(result.document.widgetIds);
   };
 
-  const toolbar =
-    reorderable ? (
-      <Stack spacing={1} sx={{ mb: 1 }} data-testid="epis2-widget-layout-toolbar">
-        <EpisM3Text role="labelLarge" color="text.secondary">
-          {copy.widgetLayout.hint}
-        </EpisM3Text>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} alignItems={{ sm: 'center' }}>
-          <TextField
-            size="small"
-            fullWidth
-            placeholder={copy.widgetLayout.importPlaceholder}
-            value={layoutImportJson}
-            onChange={(e) => setLayoutImportJson(e.target.value)}
-            data-testid="epis2-widget-layout-import-json"
-          />
-          <EpisButton appearance="outlined" size="small" onClick={exportLayout}>
-            {copy.widgetLayout.export}
-          </EpisButton>
-          <EpisButton
-            appearance="filled"
-            size="small"
-            onClick={importLayout}
-            disabled={!layoutImportJson.trim()}
-          >
-            {copy.widgetLayout.import}
-          </EpisButton>
-        </Stack>
-        {layoutError ? (
-          <EpisM3Text role="bodyMedium" color="error.main">
-            {layoutError}
-          </EpisM3Text>
-        ) : null}
+  const toolbar = reorderable ? (
+    <Stack spacing={1} sx={{ mb: 1 }} data-testid="epis2-widget-layout-toolbar">
+      <EpisM3Text role="labelLarge" color="text.secondary">
+        {copy.widgetLayout.hint}
+      </EpisM3Text>
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} alignItems={{ sm: 'center' }}>
+        <TextField
+          size="small"
+          fullWidth
+          placeholder={copy.widgetLayout.importPlaceholder}
+          value={layoutImportJson}
+          onChange={(e) => setLayoutImportJson(e.target.value)}
+          data-testid="epis2-widget-layout-import-json"
+        />
+        <EpisButton appearance="outlined" size="small" onClick={exportLayout}>
+          {copy.widgetLayout.export}
+        </EpisButton>
+        <EpisButton
+          appearance="filled"
+          size="small"
+          onClick={importLayout}
+          disabled={!layoutImportJson.trim()}
+        >
+          {copy.widgetLayout.import}
+        </EpisButton>
       </Stack>
-    ) : null;
+      {layoutError ? (
+        <EpisM3Text role="bodyMedium" color="error.main">
+          {layoutError}
+        </EpisM3Text>
+      ) : null}
+    </Stack>
+  ) : null;
 
   const items = visibleWidgets.map(({ id, definition, visibility }) => ({
     id,
@@ -137,7 +136,11 @@ export function ClinicalWidgetPanel({
     <Stack data-testid={testId}>
       {toolbar}
       {reorderable ? (
-        <EpisDraggableWidgetGrid items={items} onReorder={setOrder} data-testid={`${testId}-grid`} />
+        <EpisDraggableWidgetGrid
+          items={items}
+          onReorder={setOrder}
+          data-testid={`${testId}-grid`}
+        />
       ) : (
         <Epis2WidgetGrid data-testid={`${testId}-grid`}>
           {items.map((item) => (

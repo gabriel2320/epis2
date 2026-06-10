@@ -18,7 +18,13 @@ const TAB_ROUTE_PREFIXES: Record<PatientChartTabId, readonly string[]> = {
   history: ['/espacio/ficha'],
   encounter: ['/espacio/evolucion', '/espacio/ambulatorio', '/espacio/enfermeria'],
   results: ['/espacio/resultados', '/espacio/laboratorio', '/espacio/imagenologia'],
-  orders: ['/espacio/receta', '/espacio/mar', '/espacio/farmacia', '/espacio/interconsulta', '/espacio/certificado'],
+  orders: [
+    '/espacio/receta',
+    '/espacio/mar',
+    '/espacio/farmacia',
+    '/espacio/interconsulta',
+    '/espacio/certificado',
+  ],
 };
 
 export function resolvePatientChartTabId(pathname: string): PatientChartTabId {

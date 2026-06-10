@@ -48,8 +48,7 @@ export function ResultsInboxPendingOrdersGrid({
         field: 'orderedAt',
         headerName: copy.dashboard.gridColumnUpdated,
         width: 170,
-        valueFormatter: (value) =>
-          value ? new Date(String(value)).toLocaleString('es-CL') : '',
+        valueFormatter: (value) => (value ? new Date(String(value)).toLocaleString('es-CL') : ''),
       },
     ],
     [],
@@ -63,9 +62,7 @@ export function ResultsInboxPendingOrdersGrid({
         onClick: () => {
           const lines = selectedIds.map((id) => {
             const row = rows.find((r) => r.id === id);
-            return row
-              ? `${row.title} · ${orderTypeLabel(row.orderType)} · ${row.priority}`
-              : id;
+            return row ? `${row.title} · ${orderTypeLabel(row.orderType)} · ${row.priority}` : id;
           });
           onCopySelection(lines);
         },

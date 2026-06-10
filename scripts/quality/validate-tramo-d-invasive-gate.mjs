@@ -17,7 +17,7 @@ for (const token of [
 }
 
 const api = readFileSync(join(root, 'apps/api/src/dashboard/icu.ts'), 'utf8');
-if (!api.includes('invasiveLines') || !api.includes("idc: 45")) {
+if (!api.includes('invasiveLines') || !api.includes('idc: 45')) {
   errors.push('icu.ts sin invasiveLines o IDC 45');
 }
 

@@ -21,9 +21,7 @@ async function main() {
     process.exit(1);
   }
 
-  const files = (await readdir(migrationsDir))
-    .filter((f) => f.endsWith('.sql'))
-    .sort();
+  const files = (await readdir(migrationsDir)).filter((f) => f.endsWith('.sql')).sort();
   const toApply = files.slice(-2);
   if (toApply.length === 0) {
     console.error('apply-latest-migration FAILED: sin migraciones');

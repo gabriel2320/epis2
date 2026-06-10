@@ -19,7 +19,11 @@ export type EpisClinicalFieldLabelProps = {
   children: ReactNode;
 };
 
-export function EpisClinicalFieldLabel({ htmlFor, required, children }: EpisClinicalFieldLabelProps) {
+export function EpisClinicalFieldLabel({
+  htmlFor,
+  required,
+  children,
+}: EpisClinicalFieldLabelProps) {
   return (
     <EpisM3Text
       role="labelLarge"

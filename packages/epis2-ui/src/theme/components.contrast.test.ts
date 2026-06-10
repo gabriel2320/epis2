@@ -36,7 +36,9 @@ describe('buildEpis2Components contained contrast', () => {
     const styles = (root as (p: { theme: Theme }) => Record<string, unknown>)({ theme });
     const primaryRule = styles['&.MuiButton-containedPrimary'] as Record<string, string>;
     expect(primaryRule.color).toBe(theme.palette.primary.contrastText);
-    expect(contrastRatio(primaryRule.color, primaryRule.backgroundColor)).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio(primaryRule.color, primaryRule.backgroundColor)).toBeGreaterThanOrEqual(
+      4.5,
+    );
   });
 
   it('chips filledPrimary usan contrastText', () => {

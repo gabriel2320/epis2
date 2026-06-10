@@ -4,13 +4,7 @@ import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { useEffect, useState } from 'react';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
-import {
-  Alert,
-  EpisButton,
-  Stack,
-  Typography,
-  epis2ShellContentIslandSx,
-} from '@epis2/epis2-ui';
+import { Alert, EpisButton, Stack, Typography, epis2ShellContentIslandSx } from '@epis2/epis2-ui';
 import { ClassicMd3WorkspaceLayout } from '../components/classic-md3/ClassicMd3WorkspaceLayout.js';
 import { EpisClassicMd3SplitPane } from '../components/classic-md3/EpisClassicMd3SplitPane.js';
 import { useClassicMd3Mode } from '../modes/index.js';
@@ -71,12 +65,15 @@ export function PatientWorkspacePage() {
     enabled: patientsFetchEnabled,
   });
 
-  const { alerts: clinicalAlerts, loading: alertsLoading, contextLabel } =
-    usePatientClinicalAlerts({
-      patientId,
-      blueprintId: alertBlueprintId,
-      contextLabel: alertLabel,
-    });
+  const {
+    alerts: clinicalAlerts,
+    loading: alertsLoading,
+    contextLabel,
+  } = usePatientClinicalAlerts({
+    patientId,
+    blueprintId: alertBlueprintId,
+    contextLabel: alertLabel,
+  });
 
   useEffect(() => {
     if (detailQuery.data) {
@@ -104,8 +101,7 @@ export function PatientWorkspacePage() {
 
   const longitudinalNav = {
     onOpenDraft: openDraft,
-    onOpenNote: () =>
-      void navigate({ to: '/espacio/resumen', search: { patientId: patientId! } }),
+    onOpenNote: () => void navigate({ to: '/espacio/resumen', search: { patientId: patientId! } }),
     onRegisterAllergy: () =>
       void navigate({ to: '/espacio/alergia', search: { patientId: patientId! } }),
     onRegisterProblem: () =>

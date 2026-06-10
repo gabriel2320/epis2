@@ -1,8 +1,5 @@
 import { copy } from '@epis2/design-system';
-import {
-  EpisAutocomplete,
-  EpisAutocompleteTextField,
-} from '@epis2/epis2-ui';
+import { EpisAutocomplete, EpisAutocompleteTextField } from '@epis2/epis2-ui';
 import { useMemo, type SyntheticEvent } from 'react';
 import {
   findClinicalTerms,

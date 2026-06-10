@@ -1,12 +1,6 @@
 import { copy } from '@epis2/design-system';
 import { getCommandBarAiHint } from '@epis2/command-registry';
-import {
-  Box,
-  EpisChip,
-  EpisCommandResult,
-  EpisFloatingCommandDock,
-  Stack,
-} from '@epis2/epis2-ui';
+import { Box, EpisChip, EpisCommandResult, EpisFloatingCommandDock, Stack } from '@epis2/epis2-ui';
 import { useAuth } from '../auth/AuthContext.js';
 import { CommandConfirmationDialog } from './CommandConfirmationDialog.js';
 import { useClinicalCommandSubmit } from '../clinical/useClinicalCommandSubmit.js';
@@ -67,18 +61,18 @@ export function PatientWorkspaceCommandPanel({
         >
           <Box sx={{ pointerEvents: 'auto', maxWidth: 920, width: '100%' }}>
             <EpisCommandResult title={copy.commandCenter.clarificationTitle}>
-            <Stack direction="row" flexWrap="wrap" gap={1}>
-              {lastResult.candidates.map((c) => (
-                <EpisChip
-                  key={c.intent}
-                  label={c.labelEs}
-                  size="small"
-                  variant="outlined"
-                  clickable
-                  onClick={() => void submit(c.labelEs)}
-                />
-              ))}
-            </Stack>
+              <Stack direction="row" flexWrap="wrap" gap={1}>
+                {lastResult.candidates.map((c) => (
+                  <EpisChip
+                    key={c.intent}
+                    label={c.labelEs}
+                    size="small"
+                    variant="outlined"
+                    clickable
+                    onClick={() => void submit(c.labelEs)}
+                  />
+                ))}
+              </Stack>
             </EpisCommandResult>
           </Box>
         </Stack>

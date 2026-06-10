@@ -1,5 +1,11 @@
 import { copy } from '@epis2/design-system';
-import { EpisButton, EpisTopAppBar, PersonOutlineIcon, PersonSearchIcon, TerminalIcon } from '@epis2/epis2-ui';
+import {
+  EpisButton,
+  EpisTopAppBar,
+  PersonOutlineIcon,
+  PersonSearchIcon,
+  TerminalIcon,
+} from '@epis2/epis2-ui';
 import { Link, useRouterState } from '@tanstack/react-router';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';

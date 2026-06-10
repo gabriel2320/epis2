@@ -2,13 +2,7 @@ import { copy } from '@epis2/design-system';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { getPrimaryNarrativeForDemoCode } from '../clinical/demoNarrativePresentation.js';
-import {
-  Chip,
-  EpisDemoBadgeChip,
-  ScienceIcon,
-  Stack,
-  Typography,
-} from '@epis2/epis2-ui';
+import { Chip, EpisDemoBadgeChip, ScienceIcon, Stack, Typography } from '@epis2/epis2-ui';
 
 export function ActivePatientBanner() {
   const navigate = useClinicalNavigate();

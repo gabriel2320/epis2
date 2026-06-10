@@ -9,7 +9,11 @@ import { loadEnvFile } from '../load-env.mjs';
 loadEnvFile();
 
 const steps = [
-  { name: 'docker compose up -d postgres', cmd: 'docker', args: ['compose', 'up', '-d', 'postgres'] },
+  {
+    name: 'docker compose up -d postgres',
+    cmd: 'docker',
+    args: ['compose', 'up', '-d', 'postgres'],
+  },
   { name: 'quality:dev-env-gate', cmd: 'npm', args: ['run', 'quality:dev-env-gate'] },
   { name: 'quality:stack-dev-gate', cmd: 'npm', args: ['run', 'quality:stack-dev-gate'] },
   { name: 'db:migrate', cmd: 'npm', args: ['run', 'db:migrate'] },

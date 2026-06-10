@@ -75,9 +75,6 @@ export {
   type EpisClassicUserPreferences,
 } from './episModePreferences.js';
 
-export {
-  hasUnsavedClinicalWork,
-  registerUnsavedWorkProbe,
-} from './modeTransitionSafety.js';
+export { hasUnsavedClinicalWork, registerUnsavedWorkProbe } from './modeTransitionSafety.js';
 
 export { EpisModeGuard } from './EpisModeGuard.js';

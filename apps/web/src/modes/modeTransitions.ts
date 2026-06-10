@@ -52,10 +52,7 @@ export function transitionClassicToDashboard(
   });
 }
 
-export function transitionClassicToCommand(
-  navigate: ClinicalNavigateFn,
-  patientId?: string,
-): void {
+export function transitionClassicToCommand(navigate: ClinicalNavigateFn, patientId?: string): void {
   navigateToMode(navigate, 'command', {
     ...(patientId ? { patientId } : {}),
     context: 'classic',

@@ -29,9 +29,7 @@ export function buildBlueprintFormSchema(blueprint: ClinicalFormBlueprint) {
   return z.object(shape);
 }
 
-export function mapBlueprintZodErrors(
-  error: z.ZodError,
-): Record<string, string> {
+export function mapBlueprintZodErrors(error: z.ZodError): Record<string, string> {
   const map: Record<string, string> = {};
   for (const issue of error.issues) {
     const key = issue.path[0];

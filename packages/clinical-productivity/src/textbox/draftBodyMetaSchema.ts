@@ -41,7 +41,10 @@ const ALLOWED_EPIS2_META_KEYS = new Set([
   EPIS2_DRAFT_TEXTBOX_META_KEY,
 ]);
 
-function originMatches(a: z.infer<typeof clinicalTextOriginSchema>, b: z.infer<typeof clinicalTextOriginSchema>) {
+function originMatches(
+  a: z.infer<typeof clinicalTextOriginSchema>,
+  b: z.infer<typeof clinicalTextOriginSchema>,
+) {
   return (
     a.kind === b.kind &&
     a.label === b.label &&

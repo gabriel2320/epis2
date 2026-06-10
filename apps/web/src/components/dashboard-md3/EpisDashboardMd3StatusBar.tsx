@@ -51,16 +51,10 @@ export function EpisDashboardMd3StatusBar({
           {copy.dashboardMd3.statusUpdated}: {lastUpdatedLabel}
         </Typography>
       ) : null}
-      <Typography
-        variant="caption"
-        color={dbStatus === 'ok' ? 'text.secondary' : 'warning.main'}
-      >
+      <Typography variant="caption" color={dbStatus === 'ok' ? 'text.secondary' : 'warning.main'}>
         {dbStatus === 'ok' ? copy.dashboardMd3.dbOk : copy.dashboardMd3.dbDegraded}
       </Typography>
-      <Typography
-        variant="caption"
-        color={aiStatus === 'ok' ? 'text.secondary' : 'warning.main'}
-      >
+      <Typography variant="caption" color={aiStatus === 'ok' ? 'text.secondary' : 'warning.main'}>
         {aiStatus === 'ok' ? copy.dashboardMd3.aiOk : copy.dashboardMd3.aiDegraded}
       </Typography>
       {activeFilterCount > 0 ? (
@@ -87,7 +81,11 @@ export function EpisDashboardMd3StatusBar({
         {copy.dashboardMd3.statusEnvironment}: {environmentLabel}
       </Typography>
       {lastAuditLabel ? (
-        <Typography variant="caption" color="text.secondary" sx={{ display: { xs: 'none', lg: 'inline' } }}>
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          sx={{ display: { xs: 'none', lg: 'inline' } }}
+        >
           {copy.dashboardMd3.statusLastAudit}: {lastAuditLabel}
         </Typography>
       ) : null}

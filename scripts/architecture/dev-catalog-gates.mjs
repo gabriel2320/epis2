@@ -40,7 +40,10 @@ export async function validate() {
   }
 
   for (const catalog of CATALOGS) {
-    if (!router.includes(`path: '${catalog.path}'`) && !router.includes(`path: "${catalog.path}"`)) {
+    if (
+      !router.includes(`path: '${catalog.path}'`) &&
+      !router.includes(`path: "${catalog.path}"`)
+    ) {
       details.push(`router → falta ruta ${catalog.path}`);
       continue;
     }
@@ -78,7 +81,9 @@ export async function validate() {
         details.push(`.env.example → documentar ${catalog.envFlag}`);
       }
       if (new RegExp(`^${catalog.envFlag}=true`, 'm').test(envExample)) {
-        details.push(`.env.example → ${catalog.envFlag}=true activo por defecto (prohibido en piloto)`);
+        details.push(
+          `.env.example → ${catalog.envFlag}=true activo por defecto (prohibido en piloto)`,
+        );
       }
     }
   } catch {

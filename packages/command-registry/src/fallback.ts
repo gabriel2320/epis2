@@ -4,7 +4,12 @@ import { EPIS2_COMMAND_DEFINITIONS } from './definitions.js';
 import { getSecureCommandMeta } from './intent-metadata.js';
 import type { RankedCommandMatch } from './rank.js';
 import { topClarificationCandidates } from './rank.js';
-import type { ClinicalIntent, CommandActiveContext, CommandCandidate, CommandDefinition } from './types.js';
+import type {
+  ClinicalIntent,
+  CommandActiveContext,
+  CommandCandidate,
+  CommandDefinition,
+} from './types.js';
 
 export const MIN_GUIDED_CANDIDATES = 3;
 export const MAX_GUIDED_CANDIDATES = 5;
@@ -82,7 +87,12 @@ const KEYWORD_INTENT_BOOSTS: Array<{
   },
   {
     pattern: /buscar|encontrar|ficha|paciente/,
-    intents: ['search_patient', 'open_patient_chart', 'summarize_patient', 'open_dashboard_patient'],
+    intents: [
+      'search_patient',
+      'open_patient_chart',
+      'summarize_patient',
+      'open_dashboard_patient',
+    ],
   },
   {
     pattern: /resumen|resumir|ia\b|caso/,
@@ -90,11 +100,7 @@ const KEYWORD_INTENT_BOOSTS: Array<{
   },
   {
     pattern: /imprimir|certificado|documento/,
-    intents: [
-      'create_medical_certificate',
-      'prepare_prescription',
-      'prepare_discharge_draft',
-    ],
+    intents: ['create_medical_certificate', 'prepare_prescription', 'prepare_discharge_draft'],
   },
 ];
 
@@ -191,10 +197,15 @@ export function buildGuidedFallbackCandidates(input: {
 export const GUIDED_FALLBACK_MESSAGE =
   'No encontré una acción exacta. ¿Quieres revisar, crear, imprimir o preguntar sobre el caso?';
 
-export function isUsefulCommandResolveResult(
-  result: { status: string; candidates?: CommandCandidate[] },
-): boolean {
-  if (result.status === 'resolved' || result.status === 'needs_patient' || result.status === 'forbidden') {
+export function isUsefulCommandResolveResult(result: {
+  status: string;
+  candidates?: CommandCandidate[];
+}): boolean {
+  if (
+    result.status === 'resolved' ||
+    result.status === 'needs_patient' ||
+    result.status === 'forbidden'
+  ) {
     return true;
   }
   if (result.status === 'needs_confirmation') {

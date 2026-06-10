@@ -1,13 +1,16 @@
 import type { ReceptionDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import { EpisWorkspaceSection, Alert,
+import {
+  EpisWorkspaceSection,
+  Alert,
   Chip,
   EpisMetric,
   List,
   ListItem,
   ListItemText,
   Stack,
-  Typography, } from '@epis2/epis2-ui';
+  Typography,
+} from '@epis2/epis2-ui';
 
 export type ReceptionDashboardTabProps = {
   data: ReceptionDashboardResponse;
@@ -19,15 +22,24 @@ export function ReceptionDashboardTab({ data, onOpenPatientSearch }: ReceptionDa
     <Stack spacing={2} data-testid="epis2-reception-dashboard">
       <Alert severity="info">{copy.reception.disclosure}</Alert>
       <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-        <EpisMetric label={copy.reception.metrics.checkedIn} value={String(data.metrics.checkedIn)} />
+        <EpisMetric
+          label={copy.reception.metrics.checkedIn}
+          value={String(data.metrics.checkedIn)}
+        />
         <EpisMetric label={copy.reception.metrics.waiting} value={String(data.metrics.waiting)} />
-        <EpisMetric label={copy.reception.metrics.companions} value={String(data.metrics.companions)} />
+        <EpisMetric
+          label={copy.reception.metrics.companions}
+          value={String(data.metrics.companions)}
+        />
         <EpisMetric
           label={copy.reception.metrics.overbooking}
           value={String(data.metrics.overbookingAlerts)}
         />
       </Stack>
-      <EpisWorkspaceSection title={copy.reception.idcPanelsTitle} testId="epis2-reception-idc-panels">
+      <EpisWorkspaceSection
+        title={copy.reception.idcPanelsTitle}
+        testId="epis2-reception-idc-panels"
+      >
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
           {data.idcPanels.map((panel) => (
             <Chip
@@ -41,7 +53,10 @@ export function ReceptionDashboardTab({ data, onOpenPatientSearch }: ReceptionDa
           ))}
         </Stack>
       </EpisWorkspaceSection>
-      <EpisWorkspaceSection title={copy.reception.callPanelTitle} testId="epis2-reception-call-panel">
+      <EpisWorkspaceSection
+        title={copy.reception.callPanelTitle}
+        testId="epis2-reception-call-panel"
+      >
         <Typography variant="body2">
           {data.callPanel.ticketNumber
             ? `${data.callPanel.ticketNumber} — ${data.callPanel.lastCalled ?? ''}`
@@ -60,7 +75,10 @@ export function ReceptionDashboardTab({ data, onOpenPatientSearch }: ReceptionDa
           ))}
         </List>
       </EpisWorkspaceSection>
-      <EpisWorkspaceSection title={copy.reception.waitingTitle} testId="epis2-reception-waiting-queue">
+      <EpisWorkspaceSection
+        title={copy.reception.waitingTitle}
+        testId="epis2-reception-waiting-queue"
+      >
         <List dense>
           {data.waitingQueue.map((row) => (
             <ListItem key={row.ticket} disablePadding sx={{ py: 0.5 }}>

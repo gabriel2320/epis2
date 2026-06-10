@@ -31,11 +31,7 @@ export const SCAN_IGNORE_DIRS = new Set([
 ]);
 
 /** Rutas donde se permite mencionar términos prohibidos (memoria EPIS). */
-export const LEGACY_DOC_PREFIXES = [
-  'docs/legacy/',
-  'docs/LEGACY_DONOR_MAP.md',
-  'reports/',
-];
+export const LEGACY_DOC_PREFIXES = ['docs/legacy/', 'docs/LEGACY_DONOR_MAP.md', 'reports/'];
 
 export function isLegacyDoc(relativePath) {
   const normalized = relativePath.replace(/\\/g, '/');

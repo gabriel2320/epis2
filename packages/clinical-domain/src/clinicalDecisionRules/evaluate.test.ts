@@ -18,9 +18,7 @@ describe('evaluateDemoClinicalAlerts', () => {
     );
     expect(result.warnings.some((w) => w.ruleId.includes('beta-lactam'))).toBe(true);
     expect(
-      result.warnings.some(
-        (w) => w.ruleId.includes('duplicate') || w.ruleId.includes('allergy'),
-      ),
+      result.warnings.some((w) => w.ruleId.includes('duplicate') || w.ruleId.includes('allergy')),
     ).toBe(true);
   });
 
@@ -48,7 +46,9 @@ describe('evaluateDemoClinicalAlerts', () => {
       { blueprintId: 'discharge_summary' },
     );
     expect(
-      result.warnings.some((w) => w.ruleId.includes('critical_lab') || w.ruleId.includes('discharge')),
+      result.warnings.some(
+        (w) => w.ruleId.includes('critical_lab') || w.ruleId.includes('discharge'),
+      ),
     ).toBe(true);
   });
 });

@@ -1,8 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  parseClinicalPatientSearch,
-  parseCommandSearch,
-} from './clinicalNavigate.js';
+import { parseClinicalPatientSearch, parseCommandSearch } from './clinicalNavigate.js';
 
 describe('parseCommandSearch', () => {
   it('parsea intent selectPatient y nextMode classic', () => {

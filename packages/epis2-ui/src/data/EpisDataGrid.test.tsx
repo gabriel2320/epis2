@@ -42,7 +42,12 @@ describe('EpisDataGrid', () => {
 
     rerender(
       <Epis2ThemeProvider>
-        <EpisDataGrid rows={[]} columns={columns} error="Error de carga" data-testid="epis2-grid-err" />
+        <EpisDataGrid
+          rows={[]}
+          columns={columns}
+          error="Error de carga"
+          data-testid="epis2-grid-err"
+        />
       </Epis2ThemeProvider>,
     );
     expect(screen.getByText('Error de carga')).toBeInTheDocument();

@@ -69,7 +69,9 @@ type Epis2ThemePreferencesContextValue = {
 const Epis2ThemePreferencesContext = createContext<Epis2ThemePreferencesContextValue | null>(null);
 
 export function Epis2ThemePreferencesProvider({ children }: { children: ReactNode }) {
-  const [preferences, setPreferencesState] = useState<Epis2ThemePreferences>(() => loadPreferences());
+  const [preferences, setPreferencesState] = useState<Epis2ThemePreferences>(() =>
+    loadPreferences(),
+  );
   const [systemRevision, setSystemRevision] = useState(0);
 
   useEffect(() => {

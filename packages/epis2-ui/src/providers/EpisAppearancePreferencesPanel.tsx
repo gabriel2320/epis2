@@ -8,7 +8,11 @@ import { EpisFilterChip } from '../primitives/EpisM3Chips.js';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
 import { useEpis2ThemePreferences } from './EpisThemePreferences.js';
 
-const LEGACY_ACCENTS = ['calmGreen', 'soberViolet', 'neutral'] as const satisfies readonly Epis2Accent[];
+const LEGACY_ACCENTS = [
+  'calmGreen',
+  'soberViolet',
+  'neutral',
+] as const satisfies readonly Epis2Accent[];
 
 export type EpisAppearancePreferencesPanelProps = {
   /** Dev/catálogo: incluye acentos legacy no MTB. */
@@ -16,13 +20,7 @@ export type EpisAppearancePreferencesPanelProps = {
   'data-testid'?: string;
 };
 
-function PreferenceRow({
-  label,
-  children,
-}: {
-  label: string;
-  children: ReactNode;
-}) {
+function PreferenceRow({ label, children }: { label: string; children: ReactNode }) {
   return (
     <Stack spacing={0.75}>
       <EpisM3Text role="labelLarge" color="text.secondary">

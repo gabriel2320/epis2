@@ -1,6 +1,4 @@
-import MuiAutocomplete, {
-  type AutocompleteProps,
-} from '@mui/material/Autocomplete';
+import MuiAutocomplete, { type AutocompleteProps } from '@mui/material/Autocomplete';
 import { EpisTextField } from './EpisTextField.js';
 
 export type EpisAutocompleteProps<
@@ -16,9 +14,7 @@ export function EpisAutocomplete<
   Multiple extends boolean | undefined = false,
   DisableClearable extends boolean | undefined = false,
   FreeSolo extends boolean | undefined = false,
->(
-  props: EpisAutocompleteProps<Value, Multiple, DisableClearable, FreeSolo>,
-) {
+>(props: EpisAutocompleteProps<Value, Multiple, DisableClearable, FreeSolo>) {
   return <MuiAutocomplete {...props} />;
 }
 

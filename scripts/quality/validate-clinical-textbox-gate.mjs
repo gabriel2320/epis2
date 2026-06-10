@@ -15,10 +15,7 @@ const toolbarPath = join(
 const indexPath = join(root, 'packages/clinical-productivity/src/index.ts');
 const bridgePath = join(root, 'apps/web/src/clinical/clinicalTextBoxField.tsx');
 const formPagePath = join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx');
-const allergyBlueprint = join(
-  root,
-  'packages/clinical-forms/src/blueprints/allergy-entry.ts',
-);
+const allergyBlueprint = join(root, 'packages/clinical-forms/src/blueprints/allergy-entry.ts');
 
 for (const p of [textboxPath, toolbarPath, indexPath, bridgePath, allergyBlueprint]) {
   if (!existsSync(p)) errors.push(`Falta ${p.replace(root + '/', '')}`);
@@ -33,7 +30,10 @@ const textboxSrc = readFileSync(textboxPath, 'utf8');
 if (!textboxSrc.includes('ClinicalTextBoxRichEditor') && !textboxSrc.includes("mode === 'rich'")) {
   errors.push('ClinicalTextBox debe soportar modo rich vía Tiptap wrapper');
 }
-const richPath = join(root, 'packages/clinical-productivity/src/textbox/ClinicalTextBoxRichEditor.tsx');
+const richPath = join(
+  root,
+  'packages/clinical-productivity/src/textbox/ClinicalTextBoxRichEditor.tsx',
+);
 if (!existsSync(richPath)) errors.push('Falta ClinicalTextBoxRichEditor.tsx (Tiptap)');
 const termDropdownPath = join(
   root,
@@ -42,7 +42,10 @@ const termDropdownPath = join(
 if (!existsSync(termDropdownPath)) {
   errors.push('Falta ClinicalTextBoxTermDropdown.tsx (autocomplete inline)');
 }
-const statePath = join(root, 'packages/clinical-productivity/src/textbox/useClinicalTextBoxState.ts');
+const statePath = join(
+  root,
+  'packages/clinical-productivity/src/textbox/useClinicalTextBoxState.ts',
+);
 const stateSrc = readFileSync(statePath, 'utf8');
 if (!stateSrc.includes('autocompleteClinicalTerms') || !stateSrc.includes('insertTermSuggestion')) {
   errors.push('useClinicalTextBoxState debe cablear autocomplete inline del diccionario');
@@ -53,7 +56,13 @@ if (!textboxSrc.includes('ClinicalTextBoxTermDropdown')) {
 if (!textboxSrc.includes('createTextOrigin')) {
   errors.push('ClinicalTextBox debe registrar origen de texto');
 }
-if (!textboxSrc.includes('sanitizePastedClinicalText') && !readFileSync(join(root, 'packages/clinical-productivity/src/textbox/useClinicalTextBoxState.ts'), 'utf8').includes('sanitizePastedClinicalText')) {
+if (
+  !textboxSrc.includes('sanitizePastedClinicalText') &&
+  !readFileSync(
+    join(root, 'packages/clinical-productivity/src/textbox/useClinicalTextBoxState.ts'),
+    'utf8',
+  ).includes('sanitizePastedClinicalText')
+) {
   errors.push('ClinicalTextBox debe pegar limpio vía pasteSanitizer');
 }
 if (textboxSrc.includes('mayAutoSign') && textboxSrc.match(/mayAutoSign\([^)]+\)\s*\?\s*onSign/)) {

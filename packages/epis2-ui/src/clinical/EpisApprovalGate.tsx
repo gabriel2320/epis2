@@ -39,22 +39,14 @@ export function EpisApprovalGate({
             {copy.drafts.sendToReview}
           </EpisButton>
           {approvable ? (
-            <EpisButton
-              appearance="filled"
-              onClick={onApprove}
-              data-testid="epis2-draft-approve"
-            >
+            <EpisButton appearance="filled" onClick={onApprove} data-testid="epis2-draft-approve">
               {copy.drafts.approveHuman}
             </EpisButton>
           ) : null}
         </Stack>
       ) : approvable ? (
         <Stack direction="row" sx={epis2ClinicalFormFooterSx}>
-          <EpisButton
-            appearance="filled"
-            onClick={onApprove}
-            data-testid="epis2-draft-approve"
-          >
+          <EpisButton appearance="filled" onClick={onApprove} data-testid="epis2-draft-approve">
             {copy.drafts.approveHuman}
           </EpisButton>
         </Stack>

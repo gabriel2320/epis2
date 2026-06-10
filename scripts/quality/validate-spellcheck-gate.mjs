@@ -7,8 +7,14 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
-const spellPath = join(root, 'packages/clinical-productivity/src/components/ClinicalSpellCheck.tsx');
-const dictPath = join(root, 'packages/clinical-productivity/src/dictionaries/chileClinicalDictionary.ts');
+const spellPath = join(
+  root,
+  'packages/clinical-productivity/src/components/ClinicalSpellCheck.tsx',
+);
+const dictPath = join(
+  root,
+  'packages/clinical-productivity/src/dictionaries/chileClinicalDictionary.ts',
+);
 
 if (!existsSync(spellPath)) errors.push('Falta ClinicalSpellCheck.tsx');
 if (!existsSync(dictPath)) errors.push('Falta chileClinicalDictionary.ts');

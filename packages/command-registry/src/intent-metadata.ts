@@ -17,12 +17,7 @@ export type CommandFamily =
   | 'navigation';
 
 export type CommandSafetyLevel = 'read' | 'draft' | 'order' | 'sign';
-export type CommandActionType =
-  | 'navigate'
-  | 'open_form'
-  | 'open_panel'
-  | 'ai_assist'
-  | 'search';
+export type CommandActionType = 'navigate' | 'open_form' | 'open_panel' | 'ai_assist' | 'search';
 
 export type CommandRequiredContext = 'patient' | 'encounter' | 'draft';
 

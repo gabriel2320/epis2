@@ -97,7 +97,8 @@ export function parseBlueprintImport(raw: string): BlueprintImportResult {
 
   const document: BlueprintExportDocument = {
     schemaVersion: BLUEPRINT_EXPORT_SCHEMA_VERSION,
-    exportedAt: typeof parsed.exportedAt === 'string' ? parsed.exportedAt : new Date().toISOString(),
+    exportedAt:
+      typeof parsed.exportedAt === 'string' ? parsed.exportedAt : new Date().toISOString(),
     blueprint: blueprint as ClinicalFormBlueprint,
   };
 

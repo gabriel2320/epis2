@@ -34,7 +34,12 @@ for (const rel of requiredFiles) {
 }
 
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
-for (const script of ['quality:ux-g02', 'quality:ux-pilot', 'test:e2e:ux-g02', 'test:e2e:login-gateway']) {
+for (const script of [
+  'quality:ux-g02',
+  'quality:ux-pilot',
+  'test:e2e:ux-g02',
+  'test:e2e:login-gateway',
+]) {
   if (!pkg.scripts?.[script]) {
     errors.push(`package.json sin script ${script}`);
   }

@@ -1,9 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { outpatientVisitBlueprint } from './blueprints/outpatient-visit.js';
-import {
-  blueprintUsesScrollspyLayout,
-  scrollspySectionLabels,
-} from './scrollspy-blueprints.js';
+import { blueprintUsesScrollspyLayout, scrollspySectionLabels } from './scrollspy-blueprints.js';
 
 describe('scrollspy-blueprints', () => {
   it('marca consulta ambulatoria con layout scrollspy', () => {

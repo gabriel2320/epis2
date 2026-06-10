@@ -18,7 +18,8 @@ const e2eText = existsSync(e2e) ? readFileSync(e2e, 'utf8') : '';
 if (!e2eText.includes('catalogo-visual')) errors.push('e2e week3 sin catálogo visual');
 
 const pkg = readFileSync(join(root, 'package.json'), 'utf8');
-if (!pkg.includes('"ai:catalog-assist-smoke"')) errors.push('package.json sin ai:catalog-assist-smoke');
+if (!pkg.includes('"ai:catalog-assist-smoke"'))
+  errors.push('package.json sin ai:catalog-assist-smoke');
 if (!pkg.includes('"test:e2e:week3"')) errors.push('package.json sin test:e2e:week3');
 
 if (errors.length) {

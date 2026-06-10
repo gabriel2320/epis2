@@ -13,15 +13,21 @@ const matrix = JSON.parse(
 const doneIdc = matrix.items.filter((i) => i.estado === 'Done').map((i) => i.idc);
 const activeIdc = matrix.items.filter((i) => i.estado === 'Active').length;
 
-console.log(JSON.stringify({
-  idc: {
-    total: matrix.items.length,
-    done: doneIdc.length,
-    active: activeIdc,
-    doneIds: doneIdc,
-    totals: matrix.meta.totals,
-  },
-  blueprints: 19,
-  migrations: 32,
-  tests: 405,
-}, null, 2));
+console.log(
+  JSON.stringify(
+    {
+      idc: {
+        total: matrix.items.length,
+        done: doneIdc.length,
+        active: activeIdc,
+        doneIds: doneIdc,
+        totals: matrix.meta.totals,
+      },
+      blueprints: 19,
+      migrations: 32,
+      tests: 405,
+    },
+    null,
+    2,
+  ),
+);

@@ -13,10 +13,7 @@ const registry = readFileSync(
 );
 if (!registry.includes("id: 'reception'")) errors.push('registry sin workspace reception');
 
-const panel = readFileSync(
-  join(root, 'apps/web/src/components/ReceptionDashboardTab.tsx'),
-  'utf8',
-);
+const panel = readFileSync(join(root, 'apps/web/src/components/ReceptionDashboardTab.tsx'), 'utf8');
 for (const token of [
   'epis2-reception-dashboard',
   'epis2-reception-idc-${panel.idc}',

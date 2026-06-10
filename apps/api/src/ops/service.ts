@@ -29,10 +29,7 @@ export async function getOpsStatus(
     db.select({ n: count() }).from(patients),
     db.select({ status: clinicalDrafts.status }).from(clinicalDrafts),
     db.select({ n: count() }).from(clinicalNotes),
-    db
-      .select({ n: count() })
-      .from(auditEvents)
-      .where(gte(auditEvents.at, since)),
+    db.select({ n: count() }).from(auditEvents).where(gte(auditEvents.at, since)),
     db.select({ n: count() }).from(aiRuns),
   ]);
 

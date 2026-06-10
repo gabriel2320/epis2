@@ -22,7 +22,12 @@ for (const token of ['probeOllamaNative', 'ensureOllamaReady', 'getOllamaStatus'
 }
 
 const automation = readFileSync(join(root, 'scripts/dev-agent/ollama-automation.mjs'), 'utf8');
-for (const token of ['ensureOllamaReady', 'ollama-assist.mjs', 'ollama-write.mjs', 'dev-agent-ollama-automation.json']) {
+for (const token of [
+  'ensureOllamaReady',
+  'ollama-assist.mjs',
+  'ollama-write.mjs',
+  'dev-agent-ollama-automation.json',
+]) {
   if (!automation.includes(token)) errors.push(`ollama-automation sin ${token}`);
 }
 
@@ -33,7 +38,11 @@ const assist = readFileSync(join(root, 'scripts/dev-agent/ollama-assist.mjs'), '
 if (!assist.includes('ensureOllamaReady')) errors.push('ollama-assist sin ensureOllamaReady');
 
 const pkg = readFileSync(join(root, 'package.json'), 'utf8');
-for (const npm of ['dev:agent:ollama-auto', 'ollama:probe', 'quality:dev-agent-ollama-automation-gate']) {
+for (const npm of [
+  'dev:agent:ollama-auto',
+  'ollama:probe',
+  'quality:dev-agent-ollama-automation-gate',
+]) {
   if (!pkg.includes(`"${npm}"`)) errors.push(`package.json sin ${npm}`);
 }
 
@@ -62,7 +71,9 @@ for (const token of ['resolveOllamaRoute', 'pickModelForFunction', 'dev-plan', '
 if (!pkg.includes('ollama:route')) errors.push('package.json sin ollama:route');
 
 if (errors.length) {
-  console.error('dev-agent-ollama-automation-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
+  console.error(
+    'dev-agent-ollama-automation-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
+  );
   process.exit(1);
 }
 console.log('dev-agent-ollama-automation-gate OK — probe nativo + pipeline ollama-auto integrados');

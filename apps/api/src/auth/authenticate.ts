@@ -3,10 +3,7 @@ import type { Permission } from '@epis2/clinical-domain';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import type { AppConfig } from '../config.js';
 import { verifySessionToken, type SessionClaims } from './sessionToken.js';
-import {
-  PILOT_SERVICE_AUDITOR_SESSION,
-  SERVICE_API_KEY_HEADER,
-} from './serviceAccount.js';
+import { PILOT_SERVICE_AUDITOR_SESSION, SERVICE_API_KEY_HEADER } from './serviceAccount.js';
 
 export type AuthenticatedRequest = FastifyRequest & {
   session: SessionClaims;
@@ -29,10 +26,7 @@ function readServiceApiKey(request: FastifyRequest): string | undefined {
 }
 
 export function createAuthenticate(config: AppConfig) {
-  return async function authenticate(
-    request: FastifyRequest,
-    reply: FastifyReply,
-  ): Promise<void> {
+  return async function authenticate(request: FastifyRequest, reply: FastifyReply): Promise<void> {
     if (
       config.AUTH_MODE === 'hybrid' &&
       config.SERVICE_API_KEY &&

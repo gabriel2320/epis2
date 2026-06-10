@@ -1,7 +1,4 @@
-import {
-  applyAssistScoreBoost,
-  ASSIST_ROUTE_RESOLVE_CONFIDENCE,
-} from './assist-route.js';
+import { applyAssistScoreBoost, ASSIST_ROUTE_RESOLVE_CONFIDENCE } from './assist-route.js';
 import { applyContextScoreBoost } from './context-rank.js';
 import { EPIS2_COMMAND_DEFINITIONS } from './definitions.js';
 import { normalizeCommandText } from './normalize.js';
@@ -34,16 +31,10 @@ const QUERY_STOP_WORDS = new Set([
 ]);
 
 function tokenize(normalized: string): string[] {
-  return normalized
-    .split(/\s+/)
-    .filter((t) => t.length > 1 && !QUERY_STOP_WORDS.has(t));
+  return normalized.split(/\s+/).filter((t) => t.length > 1 && !QUERY_STOP_WORDS.has(t));
 }
 
-function aliasScore(
-  normalized: string,
-  alias: string,
-  tokens: string[],
-): number {
+function aliasScore(normalized: string, alias: string, tokens: string[]): number {
   const a = normalizeCommandText(alias);
   if (!a) return 0;
   if (normalized === a) return 100;
@@ -64,11 +55,7 @@ function aliasScore(
   return Math.round(55 + ratio * 35);
 }
 
-function entityBoost(
-  def: CommandDefinition,
-  normalized: string,
-  raw: string,
-): number {
+function entityBoost(def: CommandDefinition, normalized: string, raw: string): number {
   const lower = raw.toLowerCase();
   if (
     def.intent === 'open_results_inbox' &&
@@ -208,9 +195,7 @@ export function rankCommandDefinitions(
     });
 }
 
-export function pickBestFromRanked(
-  ranked: RankedCommandMatch[],
-): CommandDefinition | null {
+export function pickBestFromRanked(ranked: RankedCommandMatch[]): CommandDefinition | null {
   if (ranked.length === 0) return null;
   const first = ranked[0];
   if (!first) return null;

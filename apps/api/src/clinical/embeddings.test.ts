@@ -13,8 +13,7 @@ describe('demoEmbedText', () => {
     const a = demoEmbedText('hemoglobina glicosilada diabetes');
     const b = demoEmbedText('hba1c diabetes control');
     const c = demoEmbedText('radiografia torax');
-    const sim = (x: number[], y: number[]) =>
-      x.reduce((s, v, i) => s + v * (y[i] ?? 0), 0);
+    const sim = (x: number[], y: number[]) => x.reduce((s, v, i) => s + v * (y[i] ?? 0), 0);
     expect(sim(a, b)).toBeGreaterThan(sim(a, c));
   });
 });

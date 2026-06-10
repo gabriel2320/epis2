@@ -97,8 +97,7 @@ export async function proposeHl7Writeback(
   }
 
   const preview =
-    (row.mappedPreview as ReturnType<typeof mapHl7Message> | null) ??
-    mapHl7Message(row.rawMessage);
+    (row.mappedPreview as ReturnType<typeof mapHl7Message> | null) ?? mapHl7Message(row.rawMessage);
   const draftType = preview.suggestedDraftType ?? 'evolution_note';
   const patientId = await resolvePatientId(db, preview.patientHint);
   if (!patientId) throw new Error('No se pudo resolver paciente demo para borrador');

@@ -134,10 +134,7 @@ const darkSurfaces: M3SurfaceRoles = {
   scrim: '#000000',
 };
 
-export function buildM3PaletteOptions(
-  mode: 'light' | 'dark',
-  accent: Epis2Accent,
-): PaletteOptions {
+export function buildM3PaletteOptions(mode: 'light' | 'dark', accent: Epis2Accent): PaletteOptions {
   const preset = accentPresets[accent];
   const surfaces = mode === 'light' ? lightSurfaces : darkSurfaces;
 

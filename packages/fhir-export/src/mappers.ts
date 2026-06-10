@@ -175,11 +175,14 @@ export function toFhirServiceRequest(
 ): Epis2ServiceRequestResource | null {
   if (source.draftType !== 'lab_request') return null;
   const labTests = typeof source.body.labTests === 'string' ? source.body.labTests : '';
-  const reason =
-    typeof source.body.clinicalReason === 'string' ? source.body.clinicalReason : '';
+  const reason = typeof source.body.clinicalReason === 'string' ? source.body.clinicalReason : '';
   const priorityRaw = typeof source.body.priority === 'string' ? source.body.priority : '';
   const priority =
-    priorityRaw === 'urgente' ? ('urgent' as const) : priorityRaw === 'rutina' ? ('routine' as const) : undefined;
+    priorityRaw === 'urgente'
+      ? ('urgent' as const)
+      : priorityRaw === 'rutina'
+        ? ('routine' as const)
+        : undefined;
 
   const resource: Epis2ServiceRequestResource = {
     resourceType: 'ServiceRequest',
@@ -220,7 +223,12 @@ export function toFhirAllergyIntolerance(source: AllergySource, isSynthetic: boo
     id: source.id,
     meta: syntheticTagMeta(EPIS2_PROFILES.allergyIntolerance, isSynthetic),
     clinicalStatus: {
-      coding: [{ system: 'http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical', code: 'active' }],
+      coding: [
+        {
+          system: 'http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical',
+          code: 'active',
+        },
+      ],
     },
     code: { text: source.substance },
     patient: patientReference(source.patientId),
@@ -236,9 +244,7 @@ export function toFhirMedicationStatement(source: MedicationSource, isSynthetic:
     status: source.status === 'active' ? 'active' : 'stopped',
     medicationCodeableConcept: { text: source.name },
     subject: patientReference(source.patientId),
-    dosage: source.doseText
-      ? [{ text: source.doseText }]
-      : undefined,
+    dosage: source.doseText ? [{ text: source.doseText }] : undefined,
   };
 }
 

@@ -25,8 +25,7 @@ export const COLLOQUIAL_RULES: readonly ColloquialRule[] = [
   {
     id: 'discharge-pending',
     matches: (q) => /que falta para el alta|pendientes de alta|falta para el alta/.test(q),
-    message:
-      'Para el alta puedo revisar pendientes, resumir el caso o preparar la epicrisis.',
+    message: 'Para el alta puedo revisar pendientes, resumir el caso o preparar la epicrisis.',
     intentHints: [
       'prepare_discharge_draft',
       'summarize_patient',
@@ -82,11 +81,7 @@ export const COLLOQUIAL_RULES: readonly ColloquialRule[] = [
     id: 'print-cert',
     matches: (q) => /imprimir certificado|imprimir certificado medico/.test(q),
     message: 'Puedo abrir el formulario de certificado médico.',
-    intentHints: [
-      'create_medical_certificate',
-      'prepare_prescription',
-      'summarize_patient',
-    ],
+    intentHints: ['create_medical_certificate', 'prepare_prescription', 'summarize_patient'],
   },
 ];
 

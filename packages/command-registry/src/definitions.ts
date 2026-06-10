@@ -164,7 +164,9 @@ const COMMAND_DEFINITIONS_CORE: readonly CommandDefCore[] = [
     requiresPatient: true,
     priority: 35,
     match: (q) =>
-      /epicrisis|alta\s+(medica|hospitalaria)|preparar\s+alta|resumen\s+de\s+alta|egreso|discharge|nota\s+de\s+egreso|pendientes\s+de\s+alta|revisar\s+pendientes/.test(q),
+      /epicrisis|alta\s+(medica|hospitalaria)|preparar\s+alta|resumen\s+de\s+alta|egreso|discharge|nota\s+de\s+egreso|pendientes\s+de\s+alta|revisar\s+pendientes/.test(
+        q,
+      ),
   },
   {
     intent: 'prepare_prescription',
@@ -262,7 +264,9 @@ const COMMAND_DEFINITIONS_CORE: readonly CommandDefCore[] = [
     requiresPatient: true,
     priority: 76,
     match: (q) =>
-      /solicitar\s+interconsulta|hacer\s+interconsulta|pedir\s+interconsulta|derivar\s+a\s+especialidad/.test(q) ||
+      /solicitar\s+interconsulta|hacer\s+interconsulta|pedir\s+interconsulta|derivar\s+a\s+especialidad/.test(
+        q,
+      ) ||
       (/interconsulta/.test(q) && !/informe|respuesta|contestar|especialista/.test(q)),
   },
   {
@@ -312,12 +316,7 @@ const COMMAND_DEFINITIONS_CORE: readonly CommandDefCore[] = [
   {
     intent: 'create_nursing_note',
     labelEs: 'Nota de enfermería',
-    aliasesEs: [
-      'nota de enfermeria',
-      'nota enfermeria',
-      'registrar cuidados',
-      'signos vitales',
-    ],
+    aliasesEs: ['nota de enfermeria', 'nota enfermeria', 'registrar cuidados', 'signos vitales'],
     routePath: INTENT_ROUTE_PATHS.create_nursing_note,
     requiredPermission: 'command.execute',
     requiresPatient: true,
@@ -525,9 +524,7 @@ const COMMAND_DEFINITIONS_CORE: readonly CommandDefCore[] = [
     requiredPermission: 'dashboard.read',
     requiresPatient: false,
     priority: 85,
-    match: (q) =>
-      /^ver\s+mi\s+trabajo/.test(q) ||
-      /mi\s+trabajo|mis\s+tareas|mi\s+bandeja/.test(q),
+    match: (q) => /^ver\s+mi\s+trabajo/.test(q) || /mi\s+trabajo|mis\s+tareas|mi\s+bandeja/.test(q),
   },
   {
     intent: 'open_dashboard_patient',
@@ -584,8 +581,7 @@ const COMMAND_DEFINITIONS_CORE: readonly CommandDefCore[] = [
     priority: 82,
     match: (q) =>
       /modo\s+(tablero|dashboard)|abre\s+el\s+tablero|abrir\s+tablero|ir\s+al\s+tablero/.test(q) ||
-      (/\btablero\b/.test(q) &&
-        !/paciente|servicio|mi\s+trabajo/.test(q)) ||
+      (/\btablero\b/.test(q) && !/paciente|servicio|mi\s+trabajo/.test(q)) ||
       /\bver\s+indicadores\b/.test(q),
   },
 ] as const satisfies readonly CommandDefCore[];

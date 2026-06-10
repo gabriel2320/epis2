@@ -17,7 +17,7 @@ const AI_DEV_LOOP = [
   '**4. Verificar tarde** — `npm run check` al cerrar, no tras cada línea (salvo typecheck puntual).',
   '**5. Gates del rol** — Ejecutar solo los del subagente + cierre estándar.',
   '**6. Reporte** — `reports/epis2-*.md` con alcance, gates, riesgos, próximo paso exacto.',
-    '**7. Humano decide** — Sin commit/push automático; Ollama auto (`dev:agent:ollama-auto`) o apply L0 tras revisar plan.',
+  '**7. Humano decide** — Sin commit/push automático; Ollama auto (`dev:agent:ollama-auto`) o apply L0 tras revisar plan.',
 ];
 
 /**
@@ -34,8 +34,7 @@ export async function buildDevBrief(root, opts) {
   const ollamaPlan = readOllamaPlan(root);
   const tablero = getTableroState(root);
   const primary =
-    opts.primarySubagent ??
-    suggestPrimarySubagent(git.files, { tramo, phase: resolvedPhase });
+    opts.primarySubagent ?? suggestPrimarySubagent(git.files, { tramo, phase: resolvedPhase });
 
   const primaryAgent = DEV_SUBAGENTS[primary];
   const lines = [

@@ -45,7 +45,11 @@ export function ClinicalAppBarUserMenu() {
           ) : null}
           <List dense disablePadding>
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="/preferencias-apariencia" onClick={() => setOpen(false)}>
+              <ListItemButton
+                component={Link}
+                to="/preferencias-apariencia"
+                onClick={() => setOpen(false)}
+              >
                 <ListItemText primary={copy.themePreferences.openLink} />
               </ListItemButton>
             </ListItem>
@@ -56,7 +60,14 @@ export function ClinicalAppBarUserMenu() {
             </Typography>
             <EpisThemeModeToggle data-testid="epis2-nav-usuario-theme" />
           </Stack>
-          <EpisButton appearance="outlined" size="small" onClick={() => { setOpen(false); logout(); }}>
+          <EpisButton
+            appearance="outlined"
+            size="small"
+            onClick={() => {
+              setOpen(false);
+              logout();
+            }}
+          >
             {copy.layout.logout}
           </EpisButton>
         </Stack>

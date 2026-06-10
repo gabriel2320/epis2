@@ -101,7 +101,10 @@ export function getTableroState(root) {
     const out = [];
     for (const line of section.split('\n')) {
       if (!line.startsWith('|') || line.includes('---')) continue;
-      const cells = line.split('|').map((c) => c.trim()).filter(Boolean);
+      const cells = line
+        .split('|')
+        .map((c) => c.trim())
+        .filter(Boolean);
       if (cells.length < 2) continue;
       const picked = pick(cells);
       if (picked) out.push(picked.replace(/\[([^\]]+)\]\([^)]*\)/g, '$1'));
@@ -126,7 +129,11 @@ export function suggestPrimarySubagent(files, { tramo, phase = 'B' } = {}) {
     return 'ollama-clinical';
   }
   if (text.includes('e2e/') || text.includes('golden-clinical')) return 'golden-guardian';
-  if (text.includes('apps/web') || text.includes('epis2-ui') || text.includes('clinical-productivity')) {
+  if (
+    text.includes('apps/web') ||
+    text.includes('epis2-ui') ||
+    text.includes('clinical-productivity')
+  ) {
     return phase === 'A' ? 'm3-guardian' : 'layers-integrator';
   }
   if (text.includes('microphase') || text.includes('reports/epis2')) return 'ledger-keeper';

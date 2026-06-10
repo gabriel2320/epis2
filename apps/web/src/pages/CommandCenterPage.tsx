@@ -6,12 +6,7 @@ import { EpisAppScaffold } from '../components/layout/EpisAppScaffold.js';
 import { EpisTopAppBar } from '../components/layout/EpisTopAppBar.js';
 import { EpisCommandCenterGoogleBar } from '../components/command-center/EpisCommandCenterGoogleBar.js';
 
-import {
-  EpisButton,
-  EpisCommandCenterLayout,
-  Alert,
-  Stack,
-} from '@epis2/epis2-ui';
+import { EpisButton, EpisCommandCenterLayout, Alert, Stack } from '@epis2/epis2-ui';
 
 import { useCallback, useEffect, useState } from 'react';
 import { useSearch } from '@tanstack/react-router';
@@ -28,7 +23,10 @@ import { useClinicalCommandSubmit } from '../clinical/useClinicalCommandSubmit.j
 
 import { useCommandResolveContext } from '../clinical/useCommandResolveContext.js';
 
-import { Epis2NavigationRailFooter, useEpis2NavigationRailItems } from '../navigation/epis2NavigationRail.js';
+import {
+  Epis2NavigationRailFooter,
+  useEpis2NavigationRailItems,
+} from '../navigation/epis2NavigationRail.js';
 
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 
@@ -59,8 +57,7 @@ export function CommandCenterPage() {
     intent?: string;
     nextMode?: string;
   };
-  const selectPatientIntent =
-    search.intent === 'selectPatient' && search.nextMode === 'classic';
+  const selectPatientIntent = search.intent === 'selectPatient' && search.nextMode === 'classic';
   const railItems = useEpis2NavigationRailItems();
   const [demoPanelOpen, setDemoPanelOpen] = useState(false);
   const { aiAvailable } = useAiStatusQuery();
@@ -91,12 +88,9 @@ export function CommandCenterPage() {
   });
 
   const alertBlueprintId =
-    lastResult?.status === 'resolved'
-      ? INTENT_TO_ASSIST_BLUEPRINT[lastResult.intent]
-      : undefined;
+    lastResult?.status === 'resolved' ? INTENT_TO_ASSIST_BLUEPRINT[lastResult.intent] : undefined;
 
-  const alertContextLabel =
-    lastResult?.status === 'resolved' ? lastResult.labelEs : undefined;
+  const alertContextLabel = lastResult?.status === 'resolved' ? lastResult.labelEs : undefined;
 
   usePatientClinicalAlerts({
     patientId: activePatient?.id,
@@ -136,84 +130,84 @@ export function CommandCenterPage() {
 
   return (
     <>
-    <EpisAppScaffold
-      screenKind="command"
-      topBar={<EpisTopAppBar active="command" />}
-      sideNavItems={railItems}
-      sideNavFooter={<Epis2NavigationRailFooter />}
-      railHidden
-      testId="epis2-command-shell"
-    >
-      <EpisCommandCenterLayout maxWidth={720} reserveDockSpace={false}>
-        <EpisCommandCenterGoogleBar
-          role={role}
-          permissions={permissions}
-          aiAvailable={aiAvailable === true}
-          query={query}
-          onQueryChange={setQuery}
-          onSubmit={() => void submit()}
-          onSelectSuggestion={selectSuggestion}
-          isResolving={isResolving}
-          {...(error ? { error } : {})}
-          {...(error ? {} : { aiHint: aiHint ?? undefined })}
-          contextSlot={activePatient ? <CommandCenterContextLine /> : null}
-          clarificationCandidates={
-            lastResult?.status === 'needs_clarification' ? lastResult.candidates : undefined
-          }
-          onClarificationSelect={(label) => void submit(label)}
-          footerSlot={
-            <>
-              {selectPatientIntent && !activePatient ? (
-                <Alert severity="info" data-testid="epis2-select-patient-for-classic">
-                  {copy.threeModes.selectPatientForClassic}
-                </Alert>
-              ) : null}
+      <EpisAppScaffold
+        screenKind="command"
+        topBar={<EpisTopAppBar active="command" />}
+        sideNavItems={railItems}
+        sideNavFooter={<Epis2NavigationRailFooter />}
+        railHidden
+        testId="epis2-command-shell"
+      >
+        <EpisCommandCenterLayout maxWidth={720} reserveDockSpace={false}>
+          <EpisCommandCenterGoogleBar
+            role={role}
+            permissions={permissions}
+            aiAvailable={aiAvailable === true}
+            query={query}
+            onQueryChange={setQuery}
+            onSubmit={() => void submit()}
+            onSelectSuggestion={selectSuggestion}
+            isResolving={isResolving}
+            {...(error ? { error } : {})}
+            {...(error ? {} : { aiHint: aiHint ?? undefined })}
+            contextSlot={activePatient ? <CommandCenterContextLine /> : null}
+            clarificationCandidates={
+              lastResult?.status === 'needs_clarification' ? lastResult.candidates : undefined
+            }
+            onClarificationSelect={(label) => void submit(label)}
+            footerSlot={
+              <>
+                {selectPatientIntent && !activePatient ? (
+                  <Alert severity="info" data-testid="epis2-select-patient-for-classic">
+                    {copy.threeModes.selectPatientForClassic}
+                  </Alert>
+                ) : null}
 
-              <CommandCenterRecentActivity />
+                <CommandCenterRecentActivity />
 
-              {error === copy.commandCenter.needsPatient ||
-              lastResult?.status === 'needs_patient' ? (
-                <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ width: '100%' }}>
-                  <EpisButton
-                    size="small"
-                    appearance="outlined"
-                    onClick={() => void navigate({ to: '/espacio/buscar-paciente' })}
-                  >
-                    {copy.commandCenter.pickPatientToContinue}
-                  </EpisButton>
-                </Stack>
-              ) : null}
+                {error === copy.commandCenter.needsPatient ||
+                lastResult?.status === 'needs_patient' ? (
+                  <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ width: '100%' }}>
+                    <EpisButton
+                      size="small"
+                      appearance="outlined"
+                      onClick={() => void navigate({ to: '/espacio/buscar-paciente' })}
+                    >
+                      {copy.commandCenter.pickPatientToContinue}
+                    </EpisButton>
+                  </Stack>
+                ) : null}
 
-              {demoNarrativesEnabled ? (
-                <Stack direction="row" justifyContent="center" sx={{ width: '100%' }}>
-                  <EpisButton
-                    appearance="text"
-                    size="small"
-                    onClick={() => setDemoPanelOpen((open) => !open)}
-                    data-testid="epis2-toggle-demo-narratives"
-                  >
-                    {demoPanelOpen
-                      ? copy.commandCenter.demoNarrativesToggleHide
-                      : copy.commandCenter.demoNarrativesToggleShow}
-                  </EpisButton>
-                </Stack>
-              ) : null}
+                {demoNarrativesEnabled ? (
+                  <Stack direction="row" justifyContent="center" sx={{ width: '100%' }}>
+                    <EpisButton
+                      appearance="text"
+                      size="small"
+                      onClick={() => setDemoPanelOpen((open) => !open)}
+                      data-testid="epis2-toggle-demo-narratives"
+                    >
+                      {demoPanelOpen
+                        ? copy.commandCenter.demoNarrativesToggleHide
+                        : copy.commandCenter.demoNarrativesToggleShow}
+                    </EpisButton>
+                  </Stack>
+                ) : null}
 
-              {demoNarrativesEnabled && demoPanelOpen ? (
-                <DemoNarrativeWalkthroughPanel onSelectEpisode={selectDemoEpisode} />
-              ) : null}
-            </>
-          }
-        />
+                {demoNarrativesEnabled && demoPanelOpen ? (
+                  <DemoNarrativeWalkthroughPanel onSelectEpisode={selectDemoEpisode} />
+                ) : null}
+              </>
+            }
+          />
 
-        <CommandConfirmationDialog
-          pending={pendingConfirmation}
-          onConfirm={() => void confirmPending()}
-          onCancel={cancelPending}
-        />
-      </EpisCommandCenterLayout>
-    </EpisAppScaffold>
-    <ClinicalShellCommandPalette />
+          <CommandConfirmationDialog
+            pending={pendingConfirmation}
+            onConfirm={() => void confirmPending()}
+            onCancel={cancelPending}
+          />
+        </EpisCommandCenterLayout>
+      </EpisAppScaffold>
+      <ClinicalShellCommandPalette />
     </>
   );
 }

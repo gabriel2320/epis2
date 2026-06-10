@@ -17,7 +17,7 @@ for (const token of [
 }
 
 const api = readFileSync(join(root, 'apps/api/src/dashboard/or.ts'), 'utf8');
-if (!api.includes('preanesthesiaEvaluations') || !api.includes("idc: 153")) {
+if (!api.includes('preanesthesiaEvaluations') || !api.includes('idc: 153')) {
   errors.push('or.ts sin preanesthesiaEvaluations o IDC 153 active');
 }
 

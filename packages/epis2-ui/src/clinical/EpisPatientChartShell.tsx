@@ -1,13 +1,7 @@
 import type { ReactNode } from 'react';
 import Box from '@mui/material/Box';
-import {
-  EpisPatientChartTabs,
-  type EpisPatientChartTab,
-} from './EpisPatientChartTabs.js';
-import {
-  EpisPatientContextBar,
-  type EpisPatientContextAlert,
-} from './EpisPatientContextBar.js';
+import { EpisPatientChartTabs, type EpisPatientChartTab } from './EpisPatientChartTabs.js';
+import { EpisPatientContextBar, type EpisPatientContextAlert } from './EpisPatientContextBar.js';
 
 export type EpisPatientChartShellProps = {
   displayName: string;

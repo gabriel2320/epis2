@@ -19,10 +19,7 @@ describe('CI test parity (MF-153)', () => {
   });
 
   it('gate ci-parity soporta --from-report (CI sin doble vitest)', () => {
-    const script = readFileSync(
-      join(ROOT, 'scripts/quality/validate-ci-test-parity.mjs'),
-      'utf8',
-    );
+    const script = readFileSync(join(ROOT, 'scripts/quality/validate-ci-test-parity.mjs'), 'utf8');
     expect(script).toContain('--from-report');
   });
 

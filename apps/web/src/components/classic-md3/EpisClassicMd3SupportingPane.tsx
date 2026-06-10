@@ -34,7 +34,12 @@ export function EpisClassicMd3SupportingPane({
         minHeight: 0,
       }}
     >
-      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1.5, py: 1 }}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ px: 1.5, py: 1 }}
+      >
         <Typography variant="subtitle2">{copy.classicMd3.supportingPaneTitle}</Typography>
         {onToggle ? (
           <EpisButton appearance="text" size="small" onClick={onToggle}>

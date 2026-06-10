@@ -123,7 +123,11 @@ export function EpisCommandBar({
             endAdornment:
               aiAvailable === true ? (
                 <InputAdornment position="end" sx={{ mr: 0.5 }}>
-                  <AutoAwesomeIcon sx={{ color: clinical?.approved.main }} fontSize="small" aria-hidden />
+                  <AutoAwesomeIcon
+                    sx={{ color: clinical?.approved.main }}
+                    fontSize="small"
+                    aria-hidden
+                  />
                 </InputAdornment>
               ) : aiAvailable === false ? (
                 <InputAdornment position="end" sx={{ mr: 0.5 }}>

@@ -2,9 +2,7 @@
   "resourceType": "Bundle",
   "type": "collection",
   "meta": {
-    "profile": [
-      "http://epis2.local/fhir/StructureDefinition/epis2-patient-export-bundle"
-    ]
+    "profile": ["http://epis2.local/fhir/StructureDefinition/epis2-patient-export-bundle"]
   },
   "entry": [
     {
@@ -13,9 +11,7 @@
         "resourceType": "Patient",
         "id": "a0000001-0000-4000-8000-000000000001",
         "meta": {
-          "profile": [
-            "http://epis2.local/fhir/StructureDefinition/epis2-patient-minimal"
-          ],
+          "profile": ["http://epis2.local/fhir/StructureDefinition/epis2-patient-minimal"],
           "tag": [
             {
               "system": "http://epis2.local/fhir/CodeSystem/data-origin",
@@ -46,9 +42,7 @@
         "resourceType": "Encounter",
         "id": "b0000001-0000-4000-8000-000000000001",
         "meta": {
-          "profile": [
-            "http://epis2.local/fhir/StructureDefinition/epis2-encounter-minimal"
-          ]
+          "profile": ["http://epis2.local/fhir/StructureDefinition/epis2-encounter-minimal"]
         },
         "status": "in-progress",
         "class": {

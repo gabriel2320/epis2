@@ -112,10 +112,7 @@ export function DocumentSearchPanel({ patientId }: DocumentSearchPanelProps) {
     [hits],
   );
 
-  const defaultExpanded = useMemo(
-    () => treeItems.map((n) => n.id),
-    [treeItems],
-  );
+  const defaultExpanded = useMemo(() => treeItems.map((n) => n.id), [treeItems]);
 
   return (
     <Stack spacing={1} data-testid="epis2-document-search">

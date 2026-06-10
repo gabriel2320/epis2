@@ -2,10 +2,7 @@ import { ClinicalDataGrid, type ClinicalGridColDef } from '@epis2/clinical-produ
 import type { EpisDataGridRow } from '@epis2/epis2-ui';
 import { useMemo } from 'react';
 import { useRadBulkSelection } from '../../design/useRadBulkSelection.js';
-import {
-  EpisBulkActionMenu,
-  type EpisBulkActionMenuItem,
-} from '../actions/EpisBulkActionMenu.js';
+import { EpisBulkActionMenu, type EpisBulkActionMenuItem } from '../actions/EpisBulkActionMenu.js';
 
 export type EpisRadSelectableGridProps = {
   rows: EpisDataGridRow[];

@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-  type ReactNode,
-} from 'react';
+import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react';
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import {
@@ -19,10 +12,7 @@ import {
   getDefaultModeAfterLogin,
   type EpisSessionContextSnapshot,
 } from '../modes/episModeGuards.js';
-import {
-  useEpisActiveMode,
-  useEpisModePreferences,
-} from '../modes/index.js';
+import { useEpisActiveMode, useEpisModePreferences } from '../modes/index.js';
 import { EPIS_SELECT_PATIENT_FOR_CLASSIC } from '../modes/episModeSearch.js';
 import { EPIS_MODE_DEFINITIONS, type EpisMode } from '../modes/episModes.js';
 import {
@@ -140,11 +130,7 @@ export function EpisSessionProvider({ children }: { children: ReactNode }) {
       }
       setPreviousMode(activeMode);
       if (activeMode === 'dashboard') {
-        transitionDashboardToClassic(
-          navigate,
-          pid,
-          fromDashboardTab ?? lastDashboardTab,
-        );
+        transitionDashboardToClassic(navigate, pid, fromDashboardTab ?? lastDashboardTab);
         return;
       }
       transitionCommandToClassic(navigate, { patientId: pid });

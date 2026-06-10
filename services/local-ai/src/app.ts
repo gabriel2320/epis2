@@ -55,11 +55,7 @@ export async function buildAiApp(config: AiConfig) {
       return reply.status(400).send({ error: 'Solicitud de asistencia inválida' });
     }
 
-    const result = await runDraftAssist(
-      config.OLLAMA_BASE_URL,
-      model,
-      parsed.data,
-    );
+    const result = await runDraftAssist(config.OLLAMA_BASE_URL, model, parsed.data);
 
     if (result.status === 'unavailable') {
       return reply.status(503).send({ ...result, requiresHumanReview: true as const });
@@ -76,11 +72,7 @@ export async function buildAiApp(config: AiConfig) {
       return reply.status(400).send({ error: 'Solicitud de ruta de comando inválida' });
     }
 
-    const result = await runCommandRouteAssist(
-      config.OLLAMA_BASE_URL,
-      model,
-      parsed.data,
-    );
+    const result = await runCommandRouteAssist(config.OLLAMA_BASE_URL, model, parsed.data);
 
     if (result.status === 'unavailable') {
       return reply.status(503).send({ message: result.message, status: result.status });

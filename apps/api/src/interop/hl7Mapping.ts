@@ -8,7 +8,10 @@ export type Hl7MappingPreview = {
 };
 
 function splitSegments(raw: string): string[] {
-  return raw.trim().split(/\r\n|\r|\n/).filter(Boolean);
+  return raw
+    .trim()
+    .split(/\r\n|\r|\n/)
+    .filter(Boolean);
 }
 
 function field(segment: string, index: number): string {
@@ -46,9 +49,7 @@ export function mapHl7Message(raw: string): Hl7MappingPreview {
     const obx = segments.filter((s) => s.startsWith('OBX|'));
     if (obr) fields.labTests = field(obr, 4) || field(obr, 3);
     if (obx.length > 0) {
-      fields.clinicalReason = obx
-        .map((s) => `${field(s, 3)}: ${field(s, 5)}`)
-        .join('; ');
+      fields.clinicalReason = obx.map((s) => `${field(s, 3)}: ${field(s, 5)}`).join('; ');
     } else {
       warnings.push('ORU sin segmentos OBX — preview parcial');
     }

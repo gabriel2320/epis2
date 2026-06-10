@@ -8,7 +8,10 @@ export type EpisBrandMarkProps = {
 };
 
 /** Marca EPIS2 — letra E azul sobre fondo cuadrado blanco. */
-export function EpisBrandMark({ size = 56, 'data-testid': testId = 'epis2-brand-mark' }: EpisBrandMarkProps) {
+export function EpisBrandMark({
+  size = 56,
+  'data-testid': testId = 'epis2-brand-mark',
+}: EpisBrandMarkProps) {
   const theme = useTheme();
 
   return (

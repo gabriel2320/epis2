@@ -54,7 +54,13 @@ export function EpisDashboardShell({
       }}
       data-testid={testId}
     >
-      <Stack direction="row" justifyContent="space-between" alignItems="flex-start" flexWrap="wrap" gap={1}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="flex-start"
+        flexWrap="wrap"
+        gap={1}
+      >
         <Box>
           <EpisM3Text role="titleLarge" component="h1">
             {title}
@@ -67,9 +73,7 @@ export function EpisDashboardShell({
         </Box>
       </Stack>
 
-      {demoBadge ? (
-        <EpisDemoBadgeChip label={demoBadge} sx={{ alignSelf: 'flex-start' }} />
-      ) : null}
+      {demoBadge ? <EpisDemoBadgeChip label={demoBadge} sx={{ alignSelf: 'flex-start' }} /> : null}
 
       <Tabs
         value={activeTab}
@@ -101,7 +105,11 @@ export function EpisDashboardShell({
       {showFooterBack ? (
         <>
           <Divider />
-          <EpisButton appearance="text" onClick={onBackToCommand} data-testid="epis2-back-to-command">
+          <EpisButton
+            appearance="text"
+            onClick={onBackToCommand}
+            data-testid="epis2-back-to-command"
+          >
             {backLabel}
           </EpisButton>
         </>

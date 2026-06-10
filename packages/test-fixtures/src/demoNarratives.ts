@@ -59,12 +59,16 @@ export const DEMO_NARRATIVE_EPISODES: readonly DemoNarrativeEpisode[] = [
   },
 ] as const;
 
-export function getDemoNarrativeById(id: DemoNarrativeEpisode['id']): DemoNarrativeEpisode | undefined {
+export function getDemoNarrativeById(
+  id: DemoNarrativeEpisode['id'],
+): DemoNarrativeEpisode | undefined {
   return DEMO_NARRATIVE_EPISODES.find((e) => e.id === id);
 }
 
 /** Episodio principal mostrado en listas cuando un código demo tiene más de un relato piloto. */
-export function getPrimaryNarrativeForDemoCode(demoCaseCode: string): DemoNarrativeEpisode | undefined {
+export function getPrimaryNarrativeForDemoCode(
+  demoCaseCode: string,
+): DemoNarrativeEpisode | undefined {
   return DEMO_NARRATIVE_EPISODES.find((e) => e.demoCaseCode === demoCaseCode);
 }
 

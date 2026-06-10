@@ -55,7 +55,11 @@ export function EpisCommandSuggestionCards({ cards, onSelect }: EpisCommandSugge
 
   return (
     <Stack spacing={1.5} sx={{ width: '100%' }} data-testid="epis2-command-suggestion-cards">
-      <EpisM3Text role="titleMedium" component="h2" sx={{ textAlign: { xs: 'center', md: 'left' } }}>
+      <EpisM3Text
+        role="titleMedium"
+        component="h2"
+        sx={{ textAlign: { xs: 'center', md: 'left' } }}
+      >
         {copy.commandCenter.suggestionsForYou}
       </EpisM3Text>
       <Box
@@ -108,8 +112,18 @@ export function EpisCommandSuggestionCards({ cards, onSelect }: EpisCommandSugge
                 },
               }}
             >
-              <Stack direction="row" alignItems="flex-start" justifyContent="space-between" spacing={1}>
-                <Stack direction="row" spacing={1.25} alignItems="center" sx={{ minWidth: 0, flex: 1 }}>
+              <Stack
+                direction="row"
+                alignItems="flex-start"
+                justifyContent="space-between"
+                spacing={1}
+              >
+                <Stack
+                  direction="row"
+                  spacing={1.25}
+                  alignItems="center"
+                  sx={{ minWidth: 0, flex: 1 }}
+                >
                   <Box
                     sx={{
                       display: 'flex',
@@ -129,7 +143,11 @@ export function EpisCommandSuggestionCards({ cards, onSelect }: EpisCommandSugge
                     <EpisM3Text role="titleMedium" component="span" sx={{ display: 'block' }}>
                       {card.labelEs}
                     </EpisM3Text>
-                    <EpisM3Text role="bodyMedium" color="text.secondary" sx={{ display: 'block', mt: 0.25 }}>
+                    <EpisM3Text
+                      role="bodyMedium"
+                      color="text.secondary"
+                      sx={{ display: 'block', mt: 0.25 }}
+                    >
                       {card.sampleEs}
                     </EpisM3Text>
                   </Box>
@@ -140,7 +158,12 @@ export function EpisCommandSuggestionCards({ cards, onSelect }: EpisCommandSugge
                 size="small"
                 label={badgeLabel}
                 variant="outlined"
-                sx={{ alignSelf: 'flex-start', maxWidth: '100%', fontWeight: 600, ...badgeSx(badge.tone, theme) }}
+                sx={{
+                  alignSelf: 'flex-start',
+                  maxWidth: '100%',
+                  fontWeight: 600,
+                  ...badgeSx(badge.tone, theme),
+                }}
                 tabIndex={-1}
               />
             </Box>

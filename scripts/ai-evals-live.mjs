@@ -35,7 +35,9 @@ const DEFAULT_BLUEPRINTS = [
 /** @returns {Promise<string[]>} */
 async function resolveBlueprintIds() {
   if (process.env.EPIS2_AI_EVALS_BLUEPRINTS) {
-    return process.env.EPIS2_AI_EVALS_BLUEPRINTS.split(',').map((s) => s.trim()).filter(Boolean);
+    return process.env.EPIS2_AI_EVALS_BLUEPRINTS.split(',')
+      .map((s) => s.trim())
+      .filter(Boolean);
   }
   if (process.env.EPIS2_AI_EVALS_TRAMO) {
     const ids = blueprintsForTramo(process.env.EPIS2_AI_EVALS_TRAMO);
@@ -179,7 +181,13 @@ export async function runLiveEvals() {
       console.log(result.passed ? `OK (${result.detail})` : `FAIL — ${result.detail}`);
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
-      results.push({ blueprintId, passed: false, contractValid: false, detail: message, latencyMs: 0 });
+      results.push({
+        blueprintId,
+        passed: false,
+        contractValid: false,
+        detail: message,
+        latencyMs: 0,
+      });
       console.log(`FAIL — ${message}`);
     }
   }

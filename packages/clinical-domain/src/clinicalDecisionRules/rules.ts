@@ -184,9 +184,7 @@ function isPharmacyValidation(actionId: string): boolean {
 export function evaluateMedicationReconciliationGap(ctx: CdrContext): CdrCheckResult | null {
   if (!isPharmacyValidation(ctx.actionId)) return null;
 
-  const activeMeds = ctx.medicationOrders.filter(
-    (o) => !isBlockedMedicationStatus(o.status),
-  );
+  const activeMeds = ctx.medicationOrders.filter((o) => !isBlockedMedicationStatus(o.status));
   if (activeMeds.length < 2) return null;
 
   const intervention = trimField(ctx.formData.intervention);

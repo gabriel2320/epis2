@@ -10,10 +10,10 @@ export type EpisAppShellLayoutProps = {
   appBar?: ReactNode;
   /** Barra contextual paciente + tabs (Nivel 1–2). */
   patientChrome?: ReactNode;
-      railHidden?: boolean;
-      /** Cuando true, el scroll vive en hijos (EpisAppScaffold) — no en el slot principal. */
-      embeddedLayout?: boolean;
-      children: ReactNode;
+  railHidden?: boolean;
+  /** Cuando true, el scroll vive en hijos (EpisAppScaffold) — no en el slot principal. */
+  embeddedLayout?: boolean;
+  children: ReactNode;
   testId?: string;
 };
 

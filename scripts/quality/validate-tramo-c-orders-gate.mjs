@@ -15,10 +15,7 @@ if (!panel.includes('epis2-longitudinal-open-service-orders')) {
   errors.push('PatientLongitudinalPanel sin CTA órdenes servicio');
 }
 
-const service = readFileSync(
-  join(root, 'apps/web/src/components/ServiceDashboardTab.tsx'),
-  'utf8',
-);
+const service = readFileSync(join(root, 'apps/web/src/components/ServiceDashboardTab.tsx'), 'utf8');
 if (!service.includes('activeOrders')) {
   errors.push('ServiceDashboardTab sin órdenes activas');
 }

@@ -46,13 +46,7 @@ export const longitudinalEncounterSchema = z.object({
 
 export const timelineEventSchema = z.object({
   id: z.string(),
-  kind: z.enum([
-    'encounter',
-    'note',
-    'observation',
-    'document',
-    'draft',
-  ]),
+  kind: z.enum(['encounter', 'note', 'observation', 'document', 'draft']),
   at: z.string(),
   title: z.string(),
   detail: z.string().optional(),

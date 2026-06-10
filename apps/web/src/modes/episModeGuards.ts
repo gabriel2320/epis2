@@ -51,7 +51,10 @@ export function getSafeFallbackRoute(mode: EpisMode, _ctx: EpisSessionContextSna
   return EPIS_MODE_DEFINITIONS.command.canonicalRoute;
 }
 
-export function resolveModeRoute(mode: EpisMode, options: ModeRouteOptions = {}): {
+export function resolveModeRoute(
+  mode: EpisMode,
+  options: ModeRouteOptions = {},
+): {
   to: '/comando' | '/espacio/ficha' | '/epis2/dashboard';
   search: Record<string, string | undefined>;
   replace?: boolean;
@@ -75,7 +78,10 @@ export function resolveModeRoute(mode: EpisMode, options: ModeRouteOptions = {})
           mode: 'classic',
           ...(options.patientId ? { patientId: options.patientId } : {}),
           ...(options.returnTo === 'dashboard'
-            ? { returnTo: 'dashboard', ...(options.dashboardTab ? { tab: options.dashboardTab } : {}) }
+            ? {
+                returnTo: 'dashboard',
+                ...(options.dashboardTab ? { tab: options.dashboardTab } : {}),
+              }
             : {}),
         },
         ...(options.replace ? { replace: true } : {}),
@@ -86,7 +92,7 @@ export function resolveModeRoute(mode: EpisMode, options: ModeRouteOptions = {})
         search: {
           mode: 'dashboard',
           tab: options.dashboardTab ?? 'work',
-          ...(options.focusPatientId ?? options.patientId
+          ...((options.focusPatientId ?? options.patientId)
             ? { patientId: options.focusPatientId ?? options.patientId }
             : {}),
           ...(options.returnTo ? { returnTo: options.returnTo } : {}),

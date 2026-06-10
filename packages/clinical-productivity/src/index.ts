@@ -42,8 +42,14 @@ export {
   ClinicalRichTextField,
   type ClinicalRichTextFieldProps,
 } from './components/ClinicalRichTextField.js';
-export { ClinicalSemanticSearchBox, type ClinicalSemanticSearchBoxProps } from './components/ClinicalSemanticSearchBox.js';
-export { ClinicalSpellCheck, type ClinicalSpellCheckProps } from './components/ClinicalSpellCheck.js';
+export {
+  ClinicalSemanticSearchBox,
+  type ClinicalSemanticSearchBoxProps,
+} from './components/ClinicalSemanticSearchBox.js';
+export {
+  ClinicalSpellCheck,
+  type ClinicalSpellCheckProps,
+} from './components/ClinicalSpellCheck.js';
 export {
   ClinicalTreeSelector,
   type ClinicalTreeSelectorProps,
@@ -90,7 +96,10 @@ export {
   type ClinicalTextBoxPatientContext,
   type ClinicalTextBoxProps,
 } from './textbox/ClinicalTextBox.js';
-export { ClinicalTextBoxMiniToolbar, type ClinicalTextBoxMiniToolbarProps } from './textbox/ClinicalTextBoxMiniToolbar.js';
+export {
+  ClinicalTextBoxMiniToolbar,
+  type ClinicalTextBoxMiniToolbarProps,
+} from './textbox/ClinicalTextBoxMiniToolbar.js';
 export {
   autocompleteClinicalTerms,
   expandWhitelistedAbbreviation,
@@ -107,7 +116,10 @@ export {
   type ClinicalTextboxAiAction,
   type SoapStructureOutput,
 } from './textbox/clinicalAiAssist.js';
-export { ClinicalTextBoxRichEditor, type ClinicalTextBoxRichEditorProps } from './textbox/ClinicalTextBoxRichEditor.js';
+export {
+  ClinicalTextBoxRichEditor,
+  type ClinicalTextBoxRichEditorProps,
+} from './textbox/ClinicalTextBoxRichEditor.js';
 export {
   createEpisSpellcheckAdapter,
   createLanguageToolAdapter,

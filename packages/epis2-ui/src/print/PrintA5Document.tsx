@@ -54,7 +54,9 @@ export function PrintA5Document({
       ) : null}
       <Box sx={{ fontSize: '11pt', lineHeight: 1.45 }}>{children}</Box>
       {footer ? (
-        <Box sx={{ mt: 4, pt: 2, borderTop: 1, borderColor: 'divider', fontSize: '9pt' }}>{footer}</Box>
+        <Box sx={{ mt: 4, pt: 2, borderTop: 1, borderColor: 'divider', fontSize: '9pt' }}>
+          {footer}
+        </Box>
       ) : null}
     </Box>
   );

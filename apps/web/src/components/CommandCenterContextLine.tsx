@@ -2,13 +2,7 @@ import { copy } from '@epis2/design-system';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { getPrimaryNarrativeForDemoCode } from '../clinical/demoNarrativePresentation.js';
-import {
-  EpisChip,
-  EpisDemoBadgeChip,
-  EpisM3Text,
-  PersonOutlineIcon,
-  Stack,
-} from '@epis2/epis2-ui';
+import { EpisChip, EpisDemoBadgeChip, EpisM3Text, PersonOutlineIcon, Stack } from '@epis2/epis2-ui';
 
 /** Una línea de contexto activo — UX-B.1 above-the-fold. */
 export function CommandCenterContextLine() {
@@ -70,9 +64,7 @@ export function CommandCenterContextLine() {
         size="small"
         variant="outlined"
         clickable
-        onClick={() =>
-          void navigate({ to: '/espacio/ficha', search: { patientId: patient.id } })
-        }
+        onClick={() => void navigate({ to: '/espacio/ficha', search: { patientId: patient.id } })}
       />
     </Stack>
   );

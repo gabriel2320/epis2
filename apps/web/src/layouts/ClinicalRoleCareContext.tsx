@@ -16,9 +16,7 @@ export function ClinicalRoleCareContext() {
     return null;
   }
 
-  const roleLabel = isClinicalRole(role)
-    ? copy.roles[role]
-    : role;
+  const roleLabel = isClinicalRole(role) ? copy.roles[role] : role;
   const workspaceLabel = resolveWorkspaceCopyKey(definition.labelKey);
   const careKey = WORKSPACE_CARE_SETTING[activeWorkspace];
   const careLabel =

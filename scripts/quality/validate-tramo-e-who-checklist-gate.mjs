@@ -17,12 +17,13 @@ for (const token of [
 }
 
 const api = readFileSync(join(root, 'apps/api/src/dashboard/or.ts'), 'utf8');
-if (!api.includes('whoSafetyChecklist') || !api.includes("idc: 152")) {
+if (!api.includes('whoSafetyChecklist') || !api.includes('idc: 152')) {
   errors.push('or.ts sin whoSafetyChecklist o IDC 152 active');
 }
 
 const e2e = readFileSync(join(root, 'e2e/tramo-e-or.spec.ts'), 'utf8');
-if (!e2e.includes('epis2-or-who-checklist')) errors.push('e2e tramo-e-or sin journey checklist OMS');
+if (!e2e.includes('epis2-or-who-checklist'))
+  errors.push('e2e tramo-e-or sin journey checklist OMS');
 
 const matrix = readFileSync(join(root, 'scripts/product/generate-idc-matrix.mjs'), 'utf8');
 if (!matrix.includes('MF-TRAMO-E-003')) errors.push('IDC 152 sin nota MF-TRAMO-E-003');

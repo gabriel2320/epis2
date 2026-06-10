@@ -24,12 +24,7 @@ export const pharmacyValidationBlueprint = defineBlueprint({
     field('prescribedDose', 'Dosis prescrita', 'text', { required: true, columnSpan: 4 }),
     field('intervention', 'Tipo de intervención', 'select', {
       required: true,
-      options: [
-        'sin_intervencion',
-        'ajuste_dosis',
-        'sustitucion',
-        'alerta_clinica',
-      ],
+      options: ['sin_intervencion', 'ajuste_dosis', 'sustitucion', 'alerta_clinica'],
       columnSpan: 6,
     }),
     field('recommendation', 'Recomendación farmacéutica', 'textarea', true),

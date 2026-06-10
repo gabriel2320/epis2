@@ -7,10 +7,7 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
-const panel = readFileSync(
-  join(root, 'apps/web/src/components/EmergencyDashboardTab.tsx'),
-  'utf8',
-);
+const panel = readFileSync(join(root, 'apps/web/src/components/EmergencyDashboardTab.tsx'), 'utf8');
 for (const token of [
   'epis2-emergency-discharge-actions',
   'epis2-emergency-prepare-epicrisis-',
@@ -20,7 +17,7 @@ for (const token of [
 }
 
 const api = readFileSync(join(root, 'apps/api/src/dashboard/emergency.ts'), 'utf8');
-if (!api.includes("idc: 110") || !api.includes("status: 'active'")) {
+if (!api.includes('idc: 110') || !api.includes("status: 'active'")) {
   errors.push('emergency.ts IDC 110 no active');
 }
 if (!api.includes('patientId:')) {
@@ -31,7 +28,10 @@ const dashboard = readFileSync(
   join(root, 'apps/web/src/dashboard/DashboardModeContent.tsx'),
   'utf8',
 );
-if (!dashboard.includes("to: '/espacio/epicrisis'") || !dashboard.includes('EmergencyDashboardTab')) {
+if (
+  !dashboard.includes("to: '/espacio/epicrisis'") ||
+  !dashboard.includes('EmergencyDashboardTab')
+) {
   errors.push('DashboardModeContent sin navegación epicrisis urgencias');
 }
 

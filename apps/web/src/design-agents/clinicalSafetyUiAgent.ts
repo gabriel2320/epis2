@@ -22,8 +22,7 @@ export async function clinicalSafetyUiAgent(
         'Guardar borrador',
       ]);
       const duplicateActionBars =
-        countActionBars(snippet) > 1 ||
-        (snippet.match(/epis2-form-save/g) ?? []).length > 1;
+        countActionBars(snippet) > 1 || (snippet.match(/epis2-form-save/g) ?? []).length > 1;
 
       const violations: string[] = [];
       if (irreversibleInTopBar && ctx.mode === 'classic') {

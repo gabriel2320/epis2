@@ -20,6 +20,8 @@ export function listWidgets(): readonly WidgetDefinition[] {
   return EPIS2_WIDGET_REGISTRY;
 }
 
-export function listWidgetsByCategory(category: WidgetDefinition['category']): readonly WidgetDefinition[] {
+export function listWidgetsByCategory(
+  category: WidgetDefinition['category'],
+): readonly WidgetDefinition[] {
   return EPIS2_WIDGET_REGISTRY.filter((w) => w.category === category);
 }

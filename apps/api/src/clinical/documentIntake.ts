@@ -1,11 +1,7 @@
 import { sql } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import { clinicalDocuments } from '../db/schema.js';
-import {
-  chunkText,
-  demoEmbedToPgVectorLiteral,
-  resolveEmbedding,
-} from './embeddings.js';
+import { chunkText, demoEmbedToPgVectorLiteral, resolveEmbedding } from './embeddings.js';
 
 export type DocumentIntakeInput = {
   title: string;
@@ -23,11 +19,8 @@ export async function intakePatientDocument(
   ollamaBaseUrl?: string,
 ) {
   const rawText = input.textContent?.trim() ?? '';
-  const needsOcr =
-    !rawText && (input.documentType === 'image' || input.documentType === 'pdf');
-  const textContent = needsOcr
-    ? `[OCR pendiente — demo] ${input.title}`
-    : rawText || input.title;
+  const needsOcr = !rawText && (input.documentType === 'image' || input.documentType === 'pdf');
+  const textContent = needsOcr ? `[OCR pendiente — demo] ${input.title}` : rawText || input.title;
   const intakeStatus = needsOcr ? 'ocr_pending' : 'indexed';
   const storageRef = input.filename
     ? `demo://intake/${patientId}/${input.filename}`
@@ -55,9 +48,7 @@ export async function intakePatientDocument(
   const chunks = chunkText(textContent);
   for (let i = 0; i < chunks.length; i++) {
     const chunk = chunks[i]!;
-    const embedding = demoEmbedToPgVectorLiteral(
-      await resolveEmbedding(chunk, ollamaBaseUrl),
-    );
+    const embedding = demoEmbedToPgVectorLiteral(await resolveEmbedding(chunk, ollamaBaseUrl));
     await db.execute(sql`
       INSERT INTO clinical_document_chunks (document_id, patient_id, chunk_index, chunk_text, embedding)
       VALUES (

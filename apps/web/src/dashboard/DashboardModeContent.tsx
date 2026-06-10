@@ -59,10 +59,8 @@ export function DashboardModeContent() {
   const { session, hasPermission } = useAuth();
   const role = session?.user.role;
   const canQuality = hasPermission('audit.read');
-  const canNursing =
-    role === 'nurse' || role === 'physician' || role === 'admin';
-  const canPharmacy =
-    role === 'pharmacist' || role === 'physician' || role === 'admin';
+  const canNursing = role === 'nurse' || role === 'physician' || role === 'admin';
+  const canPharmacy = role === 'pharmacist' || role === 'physician' || role === 'admin';
   const canReception = role === 'admin' || role === 'nurse' || role === 'physician';
   const canEmergency = role === 'admin' || role === 'nurse' || role === 'physician';
   const canIcu = role === 'admin' || role === 'nurse' || role === 'physician';
@@ -284,7 +282,17 @@ export function DashboardModeContent() {
       });
     }
     return items;
-  }, [canQuality, canNursing, canPharmacy, canReception, canEmergency, canIcu, canOr, canAps, canSpecialty]);
+  }, [
+    canQuality,
+    canNursing,
+    canPharmacy,
+    canReception,
+    canEmergency,
+    canIcu,
+    canOr,
+    canAps,
+    canSpecialty,
+  ]);
 
   const openPatient = (pid: string) => {
     const p = recentPatients.find((r) => r.id === pid);
@@ -563,7 +571,12 @@ export function DashboardModeContent() {
             {work ? (
               <>
                 {!isDashboardMd3 ? (
-                  <Stack direction="row" flexWrap="wrap" gap={2} data-testid="epis2-dashboard-work-metrics">
+                  <Stack
+                    direction="row"
+                    flexWrap="wrap"
+                    gap={2}
+                    data-testid="epis2-dashboard-work-metrics"
+                  >
                     <EpisMetric
                       label={copy.dashboard.metricOpenDrafts}
                       value={work.myOpenDrafts.length}
@@ -680,30 +693,30 @@ export function DashboardModeContent() {
 
   return (
     <>
-    <EpisAppScaffold
-      screenKind="workspace"
-      topBar={<EpisTopAppBar active="dashboard" />}
-      sideNavItems={sideNavItems}
-      sideNavFooter={sideNavFooter}
-      testId="epis2-dashboard-shell"
-    >
-      <EpisClinicalWorkspaceShell screenKind="workspace" testId="epis2-dashboard-workspace">
-        <EpisDashboardShell
-        title={copy.dashboard.title}
-        subtitle={copy.dashboard.subtitle}
-        demoBadge={copy.demoBadge}
-        tabs={tabs}
-        activeTab={tab}
-        onTabChange={(v) => setTab(v as DashboardTab)}
-        onBackToCommand={goCommand}
-        backLabel={copy.layout.backToCommand}
-        data-testid="epis2-dashboard-mode"
+      <EpisAppScaffold
+        screenKind="workspace"
+        topBar={<EpisTopAppBar active="dashboard" />}
+        sideNavItems={sideNavItems}
+        sideNavFooter={sideNavFooter}
+        testId="epis2-dashboard-shell"
       >
-        {panel}
-        </EpisDashboardShell>
-      </EpisClinicalWorkspaceShell>
-    </EpisAppScaffold>
-    <ClinicalShellCommandPalette />
+        <EpisClinicalWorkspaceShell screenKind="workspace" testId="epis2-dashboard-workspace">
+          <EpisDashboardShell
+            title={copy.dashboard.title}
+            subtitle={copy.dashboard.subtitle}
+            demoBadge={copy.demoBadge}
+            tabs={tabs}
+            activeTab={tab}
+            onTabChange={(v) => setTab(v as DashboardTab)}
+            onBackToCommand={goCommand}
+            backLabel={copy.layout.backToCommand}
+            data-testid="epis2-dashboard-mode"
+          >
+            {panel}
+          </EpisDashboardShell>
+        </EpisClinicalWorkspaceShell>
+      </EpisAppScaffold>
+      <ClinicalShellCommandPalette />
     </>
   );
 }

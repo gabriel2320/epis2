@@ -44,11 +44,7 @@ export async function getApsDashboardSummary(db: Database, role: string) {
     patientDisplayName: p.displayName,
     ageYears: 45 + index * 12,
     pendingItems:
-      index === 0
-        ? ['Mamografía', 'PSA']
-        : index === 1
-          ? ['Citología']
-          : ['Colonoscopia'],
+      index === 0 ? ['Mamografía', 'PSA'] : index === 1 ? ['Citología'] : ['Colonoscopia'],
   }));
 
   const diabeticFootScreenings = rows.slice(0, 2).map((p, index) => ({
@@ -77,7 +73,8 @@ export async function getApsDashboardSummary(db: Database, role: string) {
   const immunizationSchedule = rows.map((p, index) => ({
     patientId: p.id,
     patientDisplayName: p.displayName,
-    vaccine: ['Influenza estacional', 'Hepatitis B refuerzo', 'Neumocócica', 'COVID-19'][index] ?? 'PNI',
+    vaccine:
+      ['Influenza estacional', 'Hepatitis B refuerzo', 'Neumocócica', 'COVID-19'][index] ?? 'PNI',
     dueDate: `2026-06-${String(10 + index).padStart(2, '0')}`,
     status: (index === 0 ? 'due' : index === 1 ? 'overdue' : 'complete') as
       | 'due'
@@ -108,7 +105,8 @@ export async function getApsDashboardSummary(db: Database, role: string) {
     patientId: p.id,
     patientDisplayName: p.displayName,
     scheduledAt: `2026-06-07T${String(9 + index).padStart(2, '0')}:00:00`,
-    territory: ['Sector Norte', 'Sector Centro', 'Sector Sur', 'Sector Rural'][index] ?? 'Territorio',
+    territory:
+      ['Sector Norte', 'Sector Centro', 'Sector Sur', 'Sector Rural'][index] ?? 'Territorio',
     status: (index === 0 ? 'in_progress' : index === 1 ? 'scheduled' : 'completed') as
       | 'scheduled'
       | 'in_progress'

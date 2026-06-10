@@ -47,10 +47,9 @@ function walk(dir, acc = []) {
   return acc;
 }
 
-const webRoots = [
-  join(root, 'apps/web/src/pages'),
-  join(root, 'apps/web/src/components'),
-].filter(existsSync);
+const webRoots = [join(root, 'apps/web/src/pages'), join(root, 'apps/web/src/components')].filter(
+  existsSync,
+);
 
 for (const file of webRoots.flatMap((d) => walk(d))) {
   const rel = relative(root, file);

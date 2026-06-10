@@ -1,15 +1,9 @@
 import { desc, eq } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
-import {
-  clinicalCriticalResults,
-  clinicalOrders,
-  observations,
-} from '../db/schema.js';
+import { clinicalCriticalResults, clinicalOrders, observations } from '../db/schema.js';
 import { getPatientDemoCaseCode } from './service.js';
 
-function orderTitleById(
-  orders: { id: string; title: string }[],
-): Map<string, string> {
+function orderTitleById(orders: { id: string; title: string }[]): Map<string, string> {
   return new Map(orders.map((o) => [o.id, o.title]));
 }
 

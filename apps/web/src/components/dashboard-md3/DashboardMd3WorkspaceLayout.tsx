@@ -19,9 +19,7 @@ import { EpisDashboardMd3ScopeBar } from './EpisDashboardMd3ScopeBar.js';
 import { EpisDashboardMd3NavigationRail } from './EpisDashboardMd3NavigationRail.js';
 import { EpisDashboardMd3KpiStrip } from './EpisDashboardMd3KpiStrip.js';
 import { EpisDashboardMd3MainGrid } from './EpisDashboardMd3MainGrid.js';
-import {
-  EpisDashboardMd3DetailPane,
-} from './EpisDashboardMd3DetailPane.js';
+import { EpisDashboardMd3DetailPane } from './EpisDashboardMd3DetailPane.js';
 import type { DashboardDetailSelection } from './EpisDashboardMd3MainGrid.js';
 import { EpisDashboardMd3CommandBar } from './EpisDashboardMd3CommandBar.js';
 import { EpisDashboardMd3StatusBar } from './EpisDashboardMd3StatusBar.js';
@@ -120,11 +118,7 @@ export function DashboardMd3WorkspaceLayout({
           collapsed={detailCollapsed}
           onToggleCollapse={() => setDetailCollapsed((v) => !v)}
           onOpenClassic={openClassic}
-          onOpenChart={
-            patientId
-              ? () => openClassicMode(patientId, activeTab)
-              : undefined
-          }
+          onOpenChart={patientId ? () => openClassicMode(patientId, activeTab) : undefined}
         />
       }
       commandBar={

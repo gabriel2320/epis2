@@ -68,8 +68,7 @@ export async function getPatientClinicalContext(db: Database, patientId: string)
   const openEncounter = await getOpenEncounter(db, patientId);
 
   const summaryFields =
-    demoCase?.summaryFields ??
-    buildSummaryFromClinicalRows(problemRows, observationRows);
+    demoCase?.summaryFields ?? buildSummaryFromClinicalRows(problemRows, observationRows);
 
   return {
     demoCaseCode,
@@ -182,8 +181,7 @@ export async function getDemoClinicalAlertsForPatient(
     if (!input.allergies.some((x) => x.substance === a.substance)) {
       input.allergies.push({
         substance: a.substance,
-        severity:
-          a.severity === 'severe' || a.severity === 'mild' ? a.severity : 'moderate',
+        severity: a.severity === 'severe' || a.severity === 'mild' ? a.severity : 'moderate',
       });
     }
   }
@@ -214,9 +212,7 @@ export async function getDemoSafetyNotesForPatient(
 ): Promise<string[]> {
   const result = await getDemoClinicalAlertsForPatient(db, patientId, options);
   if (!result?.alerts.length) return [];
-  return result.alerts.map(
-    (a) => `- [${a.severity}] ${a.message}: ${a.detail}`,
-  );
+  return result.alerts.map((a) => `- [${a.severity}] ${a.message}: ${a.detail}`);
 }
 
 export async function getPatientById(db: Database, patientId: string) {
@@ -353,10 +349,7 @@ export async function updateDraft(
     .where(eq(clinicalDrafts.id, draftId))
     .returning();
 
-  const versions = await db
-    .select()
-    .from(draftVersions)
-    .where(eq(draftVersions.draftId, draftId));
+  const versions = await db.select().from(draftVersions).where(eq(draftVersions.draftId, draftId));
   const versionNo = versions.length + 1;
 
   await db.insert(draftVersions).values({

@@ -21,7 +21,13 @@ const VALID_STATUS = new Set([
   'APPROVED_FOR_INTEGRATION',
   'REJECTED',
 ]);
-const FORBIDDEN_SOURCE = [/node_modules/i, /package-lock/i, /\.env$/i, /openmrs[\\/]/i, /@openmrs/i];
+const FORBIDDEN_SOURCE = [
+  /node_modules/i,
+  /package-lock/i,
+  /\.env$/i,
+  /openmrs[\\/]/i,
+  /@openmrs/i,
+];
 
 let fail = 0;
 

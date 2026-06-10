@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-  type ReactNode,
-} from 'react';
+import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react';
 import type { PatientListRow } from '../api/clinicalApi.js';
 import { pushRecentPatient } from './recentPatients.js';
 
@@ -53,9 +46,7 @@ export function ActivePatientProvider({ children }: { children: ReactNode }) {
     [patient, setPatient, clearPatient],
   );
 
-  return (
-    <ActivePatientContext.Provider value={value}>{children}</ActivePatientContext.Provider>
-  );
+  return <ActivePatientContext.Provider value={value}>{children}</ActivePatientContext.Provider>;
 }
 
 export function useActivePatient() {

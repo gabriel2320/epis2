@@ -28,9 +28,7 @@ async function buildSummaryLines(db: Database, patientId: string) {
     `Generado: ${new Date().toISOString()}`,
     '',
     '== Problemas activos ==',
-    ...longitudinal.problems
-      .filter((p) => p.status === 'active')
-      .map((p) => `- ${p.description}`),
+    ...longitudinal.problems.filter((p) => p.status === 'active').map((p) => `- ${p.description}`),
     '',
     '== Alergias ==',
     ...longitudinal.allergies.map((a) => `- ${a.substance} (${a.severity})`),

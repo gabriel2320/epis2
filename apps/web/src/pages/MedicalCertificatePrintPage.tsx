@@ -42,7 +42,10 @@ export function MedicalCertificatePrintPage() {
           </>
         }
       >
-        <PrintField label={copy.print.certificateType} value={labelForCertificateType(values.certificateType)} />
+        <PrintField
+          label={copy.print.certificateType}
+          value={labelForCertificateType(values.certificateType)}
+        />
         <PrintField
           label={copy.print.diagnosis}
           {...(values.diagnosisSummary !== undefined ? { value: values.diagnosisSummary } : {})}

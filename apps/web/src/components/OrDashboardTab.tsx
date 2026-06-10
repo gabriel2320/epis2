@@ -1,6 +1,8 @@
 import type { OrDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import { EpisWorkspaceSection, Alert,
+import {
+  EpisWorkspaceSection,
+  Alert,
   Button,
   Chip,
   EpisMetric,
@@ -8,7 +10,8 @@ import { EpisWorkspaceSection, Alert,
   ListItem,
   ListItemText,
   Stack,
-  Typography, } from '@epis2/epis2-ui';
+  Typography,
+} from '@epis2/epis2-ui';
 
 export type OrDashboardTabProps = {
   data: OrDashboardResponse;
@@ -44,10 +47,7 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
           label={copy.or.metrics.scheduledToday}
           value={String(data.metrics.scheduledToday)}
         />
-        <EpisMetric
-          label={copy.or.metrics.inProgress}
-          value={String(data.metrics.inProgress)}
-        />
+        <EpisMetric label={copy.or.metrics.inProgress} value={String(data.metrics.inProgress)} />
       </Stack>
       <EpisWorkspaceSection title={copy.or.idcPanelsTitle} testId="epis2-or-idc-panels">
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
@@ -63,14 +63,13 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
           ))}
         </Stack>
       </EpisWorkspaceSection>
-      <EpisWorkspaceSection title={copy.or.surgicalScheduleTitle} testId="epis2-or-surgical-schedule">
+      <EpisWorkspaceSection
+        title={copy.or.surgicalScheduleTitle}
+        testId="epis2-or-surgical-schedule"
+      >
         <List dense data-testid="epis2-or-surgical-schedule-rows">
           {data.surgicalSchedule.map((row) => (
-            <ListItem
-              key={row.caseId}
-              disablePadding
-              sx={{ py: 0.5, flexWrap: 'wrap', gap: 0.5 }}
-            >
+            <ListItem key={row.caseId} disablePadding sx={{ py: 0.5, flexWrap: 'wrap', gap: 0.5 }}>
               <ListItemText
                 primary={`${row.operatingRoom} — ${row.procedureName}`}
                 secondary={`${row.patientDisplayName} · ${row.scheduledStart} · ${row.estimatedDurationMin} min · ${STATUS_LABEL[row.status]}`}
@@ -110,11 +109,7 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
       <EpisWorkspaceSection title={copy.or.preanesthesiaTitle} testId="epis2-or-preanesthesia">
         <List dense data-testid="epis2-or-preanesthesia-rows">
           {data.preanesthesiaEvaluations.map((row) => (
-            <ListItem
-              key={row.caseId}
-              disablePadding
-              sx={{ py: 0.5, flexWrap: 'wrap', gap: 0.5 }}
-            >
+            <ListItem key={row.caseId} disablePadding sx={{ py: 0.5, flexWrap: 'wrap', gap: 0.5 }}>
               <ListItemText
                 primary={`${row.operatingRoom} — ${row.patientDisplayName}`}
                 secondary={`${copy.or.preanesthesiaAsa} ${row.asaClass} · ${copy.or.preanesthesiaMallampati} ${row.mallampati}${row.allergyAlert ? ` · ${row.allergyAlert}` : ''} · ${row.evaluationStatus === 'complete' ? copy.or.preanesthesiaComplete : copy.or.preanesthesiaPending}`}
@@ -133,7 +128,10 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
           ))}
         </List>
       </EpisWorkspaceSection>
-      <EpisWorkspaceSection title={copy.or.intraopAnesthesiaTitle} testId="epis2-or-intraop-anesthesia">
+      <EpisWorkspaceSection
+        title={copy.or.intraopAnesthesiaTitle}
+        testId="epis2-or-intraop-anesthesia"
+      >
         {data.intraopAnesthesia.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.longitudinal.emptySection}
@@ -151,7 +149,10 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
           </List>
         )}
       </EpisWorkspaceSection>
-      <EpisWorkspaceSection title={copy.or.operativeProtocolTitle} testId="epis2-or-operative-protocol">
+      <EpisWorkspaceSection
+        title={copy.or.operativeProtocolTitle}
+        testId="epis2-or-operative-protocol"
+      >
         {data.operativeProtocols.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
             {copy.longitudinal.emptySection}
@@ -232,10 +233,7 @@ export function OrDashboardTab({ data, onOpenPatient }: OrDashboardTabProps) {
           <List dense data-testid="epis2-or-blood-bank-rows">
             {data.bloodBankOrders.map((row) => (
               <ListItem key={row.caseId} disablePadding sx={{ py: 0.25 }}>
-                <ListItemText
-                  primary={`${row.product} — ${row.units} U`}
-                  secondary={row.status}
-                />
+                <ListItemText primary={`${row.product} — ${row.units} U`} secondary={row.status} />
               </ListItem>
             ))}
           </List>

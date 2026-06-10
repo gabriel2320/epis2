@@ -4,7 +4,10 @@ import { procedureRequestBlueprint } from './procedure-request.js';
 
 describe('procedure_request blueprint', () => {
   it('valida campos obligatorios', () => {
-    const invalid = validateFormValues(procedureRequestBlueprint, initialFormValues(procedureRequestBlueprint));
+    const invalid = validateFormValues(
+      procedureRequestBlueprint,
+      initialFormValues(procedureRequestBlueprint),
+    );
     expect(invalid.valid).toBe(false);
 
     const valid = validateFormValues(procedureRequestBlueprint, {

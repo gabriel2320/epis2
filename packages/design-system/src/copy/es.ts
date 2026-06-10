@@ -44,7 +44,8 @@ export const copy = {
     needsConfirmationTitle: 'Confirmar acción clínica',
     needsConfirmationConfirm: 'Abrir formulario',
     needsConfirmationCancel: 'Cancelar',
-    needsClarification: 'El comando es ambiguo. Elige una opción o escribe una frase más específica.',
+    needsClarification:
+      'El comando es ambiguo. Elige una opción o escribe una frase más específica.',
     clarificationTitle: 'Opciones posibles',
     forbidden: 'Tu rol no puede ejecutar este comando.',
     unknownCommand: 'No reconocimos el comando.',
@@ -391,7 +392,8 @@ export const copy = {
     },
   },
   or: {
-    disclosure: 'Pabellón demo — workspace propio. No sustituye sistema de gestión quirúrgica institucional.',
+    disclosure:
+      'Pabellón demo — workspace propio. No sustituye sistema de gestión quirúrgica institucional.',
     idcPanelsTitle: 'Capacidades pabellón (IDC 151–160)',
     surgicalScheduleTitle: 'Tabla quirúrgica del día (IDC 151)',
     whoChecklistTitle: 'Checklist cirugía segura OMS (IDC 152)',
@@ -472,8 +474,7 @@ export const copy = {
     },
   },
   iaas: {
-    disclosure:
-      'IAAS avanzada demo — vigilancia sintética. Home sigue siendo Centro de Comando.',
+    disclosure: 'IAAS avanzada demo — vigilancia sintética. Home sigue siendo Centro de Comando.',
     advancedPanelsTitle: 'IAAS avanzada (IDC 141–150)',
     surveillanceMatrixTitle: 'Matriz vigilancia activa (IDC 141)',
     mdroAlertTitle: 'Alerta MDRO (IDC 142)',
@@ -507,8 +508,7 @@ export const copy = {
     },
   },
   pharmacy: {
-    disclosure:
-      'Farmacia clínica demo — datos sintéticos. Home sigue siendo Centro de Comando.',
+    disclosure: 'Farmacia clínica demo — datos sintéticos. Home sigue siendo Centro de Comando.',
     idcPanelsTitle: 'Farmacia clínica (IDC 161–170)',
     ySiteTitle: 'Compatibilidad Y-Site (IDC 161)',
     renalDoseTitle: 'Ajuste dosis renal (IDC 162)',
@@ -681,8 +681,7 @@ export const copy = {
     backToFicha: 'Volver a la ficha',
     continueEditing: 'Continuar edición',
     previewTruncated: 'Vista previa — campos con contenido (máx. 12).',
-    textOriginsReview:
-      'Campos con texto pegado, IA, snippet u OCR — revisar antes de aprobar:',
+    textOriginsReview: 'Campos con texto pegado, IA, snippet u OCR — revisar antes de aprobar:',
     statusLabels: {
       draft: 'Borrador',
       editing: 'En edición',
@@ -724,7 +723,8 @@ export const copy = {
     validationRequired: 'Revisa los campos obligatorios antes de guardar.',
     demoValidLocal:
       'Formulario válido en demo local. Conecta un paciente y la API para guardar el borrador.',
-    loadPatientsError: 'No hay pacientes demo disponibles. Verifica que la API y la base estén activas.',
+    loadPatientsError:
+      'No hay pacientes demo disponibles. Verifica que la API y la base estén activas.',
     saveDraftError: 'No se pudo guardar el borrador.',
     saveDraft: 'Guardar borrador',
     save: 'Guardar',

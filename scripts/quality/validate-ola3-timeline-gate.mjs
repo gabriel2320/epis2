@@ -23,10 +23,7 @@ for (const token of ['epis2-ficha-open-timeline', 'onViewFullTimeline']) {
   if (!activity.includes(token)) errors.push(`PatientRecentActivityBlock sin ${token}`);
 }
 
-const workspace = readFileSync(
-  join(root, 'apps/web/src/pages/PatientWorkspacePage.tsx'),
-  'utf8',
-);
+const workspace = readFileSync(join(root, 'apps/web/src/pages/PatientWorkspacePage.tsx'), 'utf8');
 for (const token of ['openHistory', 'focusSection', "openHistory('timeline')"]) {
   if (!workspace.includes(token)) errors.push(`PatientWorkspacePage sin ${token}`);
 }

@@ -1,13 +1,16 @@
 import type { ApsDashboardResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import { EpisWorkspaceSection, Alert,
+import {
+  EpisWorkspaceSection,
+  Alert,
   Button,
   Chip,
   EpisMetric,
   List,
   ListItem,
   ListItemText,
-  Stack, } from '@epis2/epis2-ui';
+  Stack,
+} from '@epis2/epis2-ui';
 
 export type ApsDashboardTabProps = {
   data: ApsDashboardResponse;
@@ -147,7 +150,10 @@ export function ApsDashboardTab({ data, onOpenPatient }: ApsDashboardTabProps) {
           ))}
         </List>
       </EpisWorkspaceSection>
-      <EpisWorkspaceSection title={copy.aps.ministerialReferralTitle} testId="epis2-aps-ministerial-referral">
+      <EpisWorkspaceSection
+        title={copy.aps.ministerialReferralTitle}
+        testId="epis2-aps-ministerial-referral"
+      >
         <List dense>
           {data.ministerialReferrals.map((row) => (
             <ListItem key={row.patientId} disablePadding>

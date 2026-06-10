@@ -1,1 +1,4 @@
-export { EpisEventCalendarSpike, type EpisEventCalendarSpikeProps } from './EpisEventCalendarSpike.js';
+export {
+  EpisEventCalendarSpike,
+  type EpisEventCalendarSpikeProps,
+} from './EpisEventCalendarSpike.js';

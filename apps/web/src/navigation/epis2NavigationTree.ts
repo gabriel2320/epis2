@@ -3,7 +3,12 @@ import type { EpisClinicalShellLevel, EpisClinicalWorkspaceId } from '@epis2/epi
 import { PATIENT_CHART_TABS, type PatientChartTabId } from '../clinical/patientChartNavigation.js';
 
 /** Estado de conciliación del árbol EPIS2. */
-export type EpisNavigationSurfaceStatus = 'complete' | 'partial' | 'missing' | 'disabled' | 'deferred';
+export type EpisNavigationSurfaceStatus =
+  | 'complete'
+  | 'partial'
+  | 'missing'
+  | 'disabled'
+  | 'deferred';
 
 export type EpisNavigationSurfaceKind =
   | 'auth'
@@ -99,7 +104,10 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'quality_iaas',
     md3Level: 2,
     status: 'partial',
-    idcRefs: [71, 72, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180],
+    idcRefs: [
+      71, 72, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 171, 172, 173, 174, 175, 176, 177,
+      178, 179, 180,
+    ],
     ola: '17',
     notes: 'MF-TRAMO-H-002 IAAS 141–150 · MF-TRAMO-K-002 calidad 171–180',
   },
@@ -136,8 +144,7 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     md3Level: 0,
     status: 'partial',
     idcRefs: [
-      41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 131, 132, 133, 134, 135, 136, 137, 138, 139,
-      140,
+      41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140,
     ],
     ola: '13',
     notes: 'MF-TRAMO-D-002 workspace icu · MF-TRAMO-G specialized 131–140',
@@ -180,26 +187,127 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
   },
 ];
 
-const BLUEPRINT_IDC_MAP: Record<string, { idc: readonly number[]; status: EpisNavigationSurfaceStatus; workspace: EpisClinicalWorkspaceId; tab?: PatientChartTabId; ola?: string; notes?: string }> = {
-  patient_search: { idc: [21], status: 'complete', workspace: 'ambulatory', tab: 'summary', ola: '0' },
-  patient_summary: { idc: [21, 26], status: 'partial', workspace: 'ambulatory', tab: 'summary', ola: '1' },
-  evolution_note: { idc: [37], status: 'complete', workspace: 'ambulatory', tab: 'encounter', ola: '0' },
-  outpatient_visit: { idc: [31, 32, 33, 34, 35, 36, 39], status: 'complete', workspace: 'ambulatory', tab: 'encounter', ola: '2' },
-  medical_certificate: { idc: [39, 40], status: 'complete', workspace: 'ambulatory', tab: 'orders', ola: '2' },
-  discharge_summary: { idc: [63, 110], status: 'complete', workspace: 'ambulatory', tab: 'encounter', ola: '6' },
+const BLUEPRINT_IDC_MAP: Record<
+  string,
+  {
+    idc: readonly number[];
+    status: EpisNavigationSurfaceStatus;
+    workspace: EpisClinicalWorkspaceId;
+    tab?: PatientChartTabId;
+    ola?: string;
+    notes?: string;
+  }
+> = {
+  patient_search: {
+    idc: [21],
+    status: 'complete',
+    workspace: 'ambulatory',
+    tab: 'summary',
+    ola: '0',
+  },
+  patient_summary: {
+    idc: [21, 26],
+    status: 'partial',
+    workspace: 'ambulatory',
+    tab: 'summary',
+    ola: '1',
+  },
+  evolution_note: {
+    idc: [37],
+    status: 'complete',
+    workspace: 'ambulatory',
+    tab: 'encounter',
+    ola: '0',
+  },
+  outpatient_visit: {
+    idc: [31, 32, 33, 34, 35, 36, 39],
+    status: 'complete',
+    workspace: 'ambulatory',
+    tab: 'encounter',
+    ola: '2',
+  },
+  medical_certificate: {
+    idc: [39, 40],
+    status: 'complete',
+    workspace: 'ambulatory',
+    tab: 'orders',
+    ola: '2',
+  },
+  discharge_summary: {
+    idc: [63, 110],
+    status: 'complete',
+    workspace: 'ambulatory',
+    tab: 'encounter',
+    ola: '6',
+  },
   prescription: { idc: [52], status: 'complete', workspace: 'ambulatory', tab: 'orders', ola: '0' },
   lab_request: { idc: [55], status: 'partial', workspace: 'ambulatory', tab: 'results', ola: '0' },
-  imaging_request: { idc: [56], status: 'partial', workspace: 'ambulatory', tab: 'results', ola: '0' },
-  procedure_request: { idc: [57], status: 'complete', workspace: 'ambulatory', tab: 'orders', ola: '2' },
+  imaging_request: {
+    idc: [56],
+    status: 'partial',
+    workspace: 'ambulatory',
+    tab: 'results',
+    ola: '0',
+  },
+  procedure_request: {
+    idc: [57],
+    status: 'complete',
+    workspace: 'ambulatory',
+    tab: 'orders',
+    ola: '2',
+  },
   referral: { idc: [64], status: 'complete', workspace: 'ambulatory', tab: 'orders', ola: '0' },
-  referral_report: { idc: [64], status: 'complete', workspace: 'ambulatory', tab: 'orders', ola: '6' },
+  referral_report: {
+    idc: [64],
+    status: 'complete',
+    workspace: 'ambulatory',
+    tab: 'orders',
+    ola: '6',
+  },
   nursing_note: { idc: [111], status: 'complete', workspace: 'icu', tab: 'encounter', ola: '11' },
-  medication_administration: { idc: [53], status: 'partial', workspace: 'ambulatory', tab: 'orders', ola: '1' },
-  pharmacy_validation: { idc: [54], status: 'partial', workspace: 'ambulatory', tab: 'orders', ola: '1' },
-  admission_note: { idc: [41], status: 'complete', workspace: 'icu', tab: 'encounter', ola: '13', notes: 'Ingreso clínico — no confundir con IDC 41 dashboard UCI (ver EPIS2_IDC_GLOSSARY.md)' },
-  allergy_entry: { idc: [27, 28], status: 'complete', workspace: 'ambulatory', tab: 'summary', ola: '3' },
-  clinical_problem_entry: { idc: [29, 30], status: 'complete', workspace: 'ambulatory', tab: 'summary', ola: '3' },
-  medication_reconciliation: { idc: [165], status: 'complete', workspace: 'ambulatory', tab: 'orders', ola: '10' },
+  medication_administration: {
+    idc: [53],
+    status: 'partial',
+    workspace: 'ambulatory',
+    tab: 'orders',
+    ola: '1',
+  },
+  pharmacy_validation: {
+    idc: [54],
+    status: 'partial',
+    workspace: 'ambulatory',
+    tab: 'orders',
+    ola: '1',
+  },
+  admission_note: {
+    idc: [41],
+    status: 'complete',
+    workspace: 'icu',
+    tab: 'encounter',
+    ola: '13',
+    notes: 'Ingreso clínico — no confundir con IDC 41 dashboard UCI (ver EPIS2_IDC_GLOSSARY.md)',
+  },
+  allergy_entry: {
+    idc: [27, 28],
+    status: 'complete',
+    workspace: 'ambulatory',
+    tab: 'summary',
+    ola: '3',
+  },
+  clinical_problem_entry: {
+    idc: [29, 30],
+    status: 'complete',
+    workspace: 'ambulatory',
+    tab: 'summary',
+    ola: '3',
+  },
+  medication_reconciliation: {
+    idc: [165],
+    status: 'complete',
+    workspace: 'ambulatory',
+    tab: 'orders',
+    ola: '10',
+  },
   transfer_note: { idc: [42], status: 'complete', workspace: 'icu', tab: 'encounter', ola: '13' },
 };
 
@@ -344,7 +452,8 @@ export function getNavigationSurfacesForWorkspace(
   workspace: EpisClinicalWorkspaceId,
 ): EpisNavigationSurface[] {
   return EPIS2_NAVIGATION_TREE.filter(
-    (node) => node.workspace === workspace || (workspace === 'command' && node.workspace === 'global'),
+    (node) =>
+      node.workspace === workspace || (workspace === 'command' && node.workspace === 'global'),
   );
 }
 

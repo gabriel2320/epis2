@@ -58,8 +58,18 @@ export async function getPharmacyDashboardSummary(db: Database) {
     .filter((r): r is NonNullable<typeof r> => r !== null);
 
   const ySiteChecks = [
-    { drugA: 'Midazolam', drugB: 'Fentanilo', compatible: true, note: 'Compatible en Y-Site (demo)' },
-    { drugA: 'Amiodarona', drugB: 'Heparina', compatible: false, note: 'Precipitación — usar vía separada' },
+    {
+      drugA: 'Midazolam',
+      drugB: 'Fentanilo',
+      compatible: true,
+      note: 'Compatible en Y-Site (demo)',
+    },
+    {
+      drugA: 'Amiodarona',
+      drugB: 'Heparina',
+      compatible: false,
+      note: 'Precipitación — usar vía separada',
+    },
   ];
 
   const renalDoseAdjustments = names.slice(0, 2).map((name, index) => ({
@@ -91,8 +101,18 @@ export async function getPharmacyDashboardSummary(db: Database) {
   }));
 
   const crashCartInventory = [
-    { cartId: 'CP-UCI-01', location: 'UCI box 3', expiryAlerts: 1, lastCheck: '2026-06-07T08:00:00' },
-    { cartId: 'CP-URG-02', location: 'Urgencias triage', expiryAlerts: 0, lastCheck: '2026-06-07T06:30:00' },
+    {
+      cartId: 'CP-UCI-01',
+      location: 'UCI box 3',
+      expiryAlerts: 1,
+      lastCheck: '2026-06-07T08:00:00',
+    },
+    {
+      cartId: 'CP-URG-02',
+      location: 'Urgencias triage',
+      expiryAlerts: 0,
+      lastCheck: '2026-06-07T06:30:00',
+    },
   ];
 
   const controlledSubstances = [
@@ -108,7 +128,11 @@ export async function getPharmacyDashboardSummary(db: Database) {
   }));
 
   const stockoutAlerts = [
-    { medication: 'Meropenem 1 g', daysUntilStockout: 3, alternativeSuggested: 'Imipenem/cilastatina' },
+    {
+      medication: 'Meropenem 1 g',
+      daysUntilStockout: 3,
+      alternativeSuggested: 'Imipenem/cilastatina',
+    },
     { medication: 'Enoxaparina 40 mg', daysUntilStockout: 5 },
   ];
 

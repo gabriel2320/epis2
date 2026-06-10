@@ -19,12 +19,7 @@ export function ClinicalShellCommandPalette() {
   const [open, setOpen] = useState(false);
   const commandContext = useCommandResolveContext('patient_chart');
 
-  const {
-    submit,
-    pendingConfirmation,
-    confirmPending,
-    cancelPending,
-  } = useClinicalCommandSubmit({
+  const { submit, pendingConfirmation, confirmPending, cancelPending } = useClinicalCommandSubmit({
     patientId: patient?.id,
     commandContext,
     onResolved: () => setOpen(false),

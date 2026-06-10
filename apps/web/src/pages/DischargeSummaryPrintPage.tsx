@@ -1,11 +1,5 @@
 import { copy } from '@epis2/design-system';
-import {
-  PrintField,
-  PrintLetterDocument,
-  PrintSection,
-  Stack,
-  Typography,
-} from '@epis2/epis2-ui';
+import { PrintField, PrintLetterDocument, PrintSection, Stack, Typography } from '@epis2/epis2-ui';
 import { usePrintPagePatient } from '../clinical/print/usePrintPagePatient.js';
 import { PrintPageToolbar } from '../clinical/print/PrintPageToolbar.js';
 import { ErrorState } from '../components/ErrorState.js';

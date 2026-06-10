@@ -60,7 +60,9 @@ if (!ollamaSrc.includes('/api/chat')) {
 }
 
 if (errors.length) {
-  console.error('ollama-structured-output-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
+  console.error(
+    'ollama-structured-output-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
+  );
   process.exit(1);
 }
 

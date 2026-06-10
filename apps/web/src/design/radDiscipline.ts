@@ -12,7 +12,12 @@ export type EpisRadScreenAudit = {
   route: string;
   surface: EpisRadSurface;
   primaryTask: string;
-  scaffold: 'EpisAppScaffold' | 'EpisClinicalWorkspaceShell' | 'EpisRadScreenShell' | 'EpisClassicMd3Shell' | 'EpisDashboardMd3Shell';
+  scaffold:
+    | 'EpisAppScaffold'
+    | 'EpisClinicalWorkspaceShell'
+    | 'EpisRadScreenShell'
+    | 'EpisClassicMd3Shell'
+    | 'EpisDashboardMd3Shell';
   actionBar: 'none' | 'single' | 'required';
   preferGridOverCards: boolean;
   keyboardNav: boolean;

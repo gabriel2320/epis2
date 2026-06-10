@@ -27,7 +27,9 @@ run('postgres', 'docker', ['compose', 'up', '-d', 'postgres']);
 run('migrate', 'node', ['scripts/db-migrate.mjs']);
 
 console.log('\n▶ ai:enable (Ollama nativo en host — OLLAMA_BASE_URL / OLLAMA_MODEL desde .env)');
-console.log('   Contenedor Ollama opcional: docker compose --profile bundled-ollama up -d ollama\n');
+console.log(
+  '   Contenedor Ollama opcional: docker compose --profile bundled-ollama up -d ollama\n',
+);
 run('ai:enable', 'npm', ['run', 'ai:enable']);
 
 console.log(`

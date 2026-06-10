@@ -3,18 +3,9 @@
  */
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { computeWorkstationTier, getWorkstationProfile } from './workstation-profile.mjs';
-import {
-  pickModelForFunction,
-  getCandidates,
-  OLLAMA_FUNCTIONS,
-} from './model-router.mjs';
+import { pickModelForFunction, getCandidates, OLLAMA_FUNCTIONS } from './model-router.mjs';
 
-const INSTALLED = [
-  'qwen3:8b',
-  'qwen2.5-coder:7b',
-  'qwen2.5-coder:14b',
-  'deepseek-coder-v2:16b',
-];
+const INSTALLED = ['qwen3:8b', 'qwen2.5-coder:7b', 'qwen2.5-coder:14b', 'deepseek-coder-v2:16b'];
 
 describe('workstation-profile', () => {
   it('computeWorkstationTier por RAM/VRAM', () => {
@@ -84,7 +75,10 @@ describe('model-router', () => {
 
   it('override por función', () => {
     process.env.OLLAMA_ROUTE_DEV_WRITE = 'qwen2.5-coder:7b';
-    const r = pickModelForFunction('dev-write', { tier: 'performance', installedModels: INSTALLED });
+    const r = pickModelForFunction('dev-write', {
+      tier: 'performance',
+      installedModels: INSTALLED,
+    });
     expect(r.model).toBe('qwen2.5-coder:7b');
     expect(r.mode).toBe('override');
   });
@@ -92,7 +86,10 @@ describe('model-router', () => {
   it('modo fixed usa OLLAMA_DEV_MODEL', () => {
     process.env.OLLAMA_ROUTE_MODE = 'fixed';
     process.env.OLLAMA_DEV_MODEL = 'deepseek-coder:6.7b';
-    const r = pickModelForFunction('dev-write', { tier: 'performance', installedModels: INSTALLED });
+    const r = pickModelForFunction('dev-write', {
+      tier: 'performance',
+      installedModels: INSTALLED,
+    });
     expect(r.model).toBe('deepseek-coder:6.7b');
     expect(r.mode).toBe('fixed');
   });

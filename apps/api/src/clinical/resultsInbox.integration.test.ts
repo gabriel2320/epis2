@@ -72,9 +72,7 @@ describeIntegration('bandeja resultados (MF-161)', () => {
       headers: { cookie },
     });
     const inbox = patientResultsInboxResponseSchema.parse(res.json());
-    const leucocitos = inbox.observations.find(
-      (o) => o.label === 'Leucocitos' && o.orderTitle,
-    );
+    const leucocitos = inbox.observations.find((o) => o.label === 'Leucocitos' && o.orderTitle);
     expect(leucocitos?.orderTitle).toBe('Hemograma control mañana');
     expect(inbox.pendingOrders.some((o) => o.title === 'Hemograma control mañana')).toBe(false);
 
@@ -123,9 +121,7 @@ describeIntegration('bandeja resultados (MF-161)', () => {
       headers: { cookie },
     });
     const inboxAfter = patientResultsInboxResponseSchema.parse(after.json());
-    expect(
-      inboxAfter.criticalResults.find((c) => c.id === pcr!.id)?.acknowledged,
-    ).toBe(true);
+    expect(inboxAfter.criticalResults.find((c) => c.id === pcr!.id)?.acknowledged).toBe(true);
 
     const auditorLogin = await app.inject({
       method: 'POST',
@@ -139,8 +135,7 @@ describeIntegration('bandeja resultados (MF-161)', () => {
       headers: { cookie: auditorCookie },
     });
     expect(audit.statusCode).toBe(200);
-    const events = (audit.json() as { events: { eventType: string; entityId?: string }[] })
-      .events;
+    const events = (audit.json() as { events: { eventType: string; entityId?: string }[] }).events;
     expect(
       events.some((e) => e.eventType === 'critical.acknowledged' && e.entityId === pcr!.id),
     ).toBe(true);

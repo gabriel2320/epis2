@@ -1,12 +1,6 @@
 import { and, eq } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
-import {
-  beds,
-  clinicalUnits,
-  encounters,
-  inpatientAdmissions,
-  patients,
-} from '../db/schema.js';
+import { beds, clinicalUnits, encounters, inpatientAdmissions, patients } from '../db/schema.js';
 import { appendAudit } from '../audit/store.js';
 import { getOpenEncounter } from '../clinical/service.js';
 
@@ -32,10 +26,7 @@ export async function getActiveAdmission(db: Database, patientId: string) {
     .select()
     .from(inpatientAdmissions)
     .where(
-      and(
-        eq(inpatientAdmissions.patientId, patientId),
-        eq(inpatientAdmissions.status, 'active'),
-      ),
+      and(eq(inpatientAdmissions.patientId, patientId), eq(inpatientAdmissions.status, 'active')),
     )
     .limit(1);
   return row ?? null;
@@ -127,12 +118,7 @@ export async function transferInpatientAdmission(
   const [adm] = await db
     .select()
     .from(inpatientAdmissions)
-    .where(
-      and(
-        eq(inpatientAdmissions.id, admissionId),
-        eq(inpatientAdmissions.status, 'active'),
-      ),
-    )
+    .where(and(eq(inpatientAdmissions.id, admissionId), eq(inpatientAdmissions.status, 'active')))
     .limit(1);
   if (!adm) throw new Error('Ingreso activo no encontrado');
 
@@ -145,11 +131,7 @@ export async function transferInpatientAdmission(
     throw new Error('Cama destino no disponible');
   }
 
-  const [sourceBed] = await db
-    .select()
-    .from(beds)
-    .where(eq(beds.id, adm.bedId))
-    .limit(1);
+  const [sourceBed] = await db.select().from(beds).where(eq(beds.id, adm.bedId)).limit(1);
 
   await db
     .update(inpatientAdmissions)
@@ -186,12 +168,7 @@ export async function dischargeInpatientAdmission(
   const [adm] = await db
     .select()
     .from(inpatientAdmissions)
-    .where(
-      and(
-        eq(inpatientAdmissions.id, admissionId),
-        eq(inpatientAdmissions.status, 'active'),
-      ),
-    )
+    .where(and(eq(inpatientAdmissions.id, admissionId), eq(inpatientAdmissions.status, 'active')))
     .limit(1);
   if (!adm) throw new Error('Ingreso activo no encontrado');
 

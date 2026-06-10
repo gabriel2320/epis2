@@ -16,10 +16,7 @@ export function EpisRadDashboardTabShell({
   testId,
 }: EpisRadDashboardTabShellProps) {
   return (
-    <EpisRadGridSurface
-      bulkActions={bulkActions}
-      {...(testId !== undefined ? { testId } : {})}
-    >
+    <EpisRadGridSurface bulkActions={bulkActions} {...(testId !== undefined ? { testId } : {})}>
       {hero}
       {children}
     </EpisRadGridSurface>

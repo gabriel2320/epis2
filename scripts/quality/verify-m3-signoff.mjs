@@ -11,7 +11,11 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 
 function run(label, cmd, args) {
   console.log(`\n▶ ${label}`);
-  const result = spawnSync(cmd, args, { cwd: root, stdio: 'inherit', shell: process.platform === 'win32' });
+  const result = spawnSync(cmd, args, {
+    cwd: root,
+    stdio: 'inherit',
+    shell: process.platform === 'win32',
+  });
   if (result.status !== 0) {
     console.error(`verify-m3-signoff FAILED en: ${label}`);
     process.exit(result.status ?? 1);

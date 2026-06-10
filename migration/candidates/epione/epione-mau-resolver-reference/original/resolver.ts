@@ -1,32 +1,32 @@
-import { canSuggestActionToRole } from "../action-metadata.js";
-import { loadMedicalActionCandidates } from "./loader.js";
-import { normalizeMedicalQuery } from "./normalizer.js";
-import { buildPrefillForCandidate, buildSecondarySuggestions } from "./prefill.js";
-import { sortRankedCandidates } from "./ranker.js";
+import { canSuggestActionToRole } from '../action-metadata.js';
+import { loadMedicalActionCandidates } from './loader.js';
+import { normalizeMedicalQuery } from './normalizer.js';
+import { buildPrefillForCandidate, buildSecondarySuggestions } from './prefill.js';
+import { sortRankedCandidates } from './ranker.js';
 import type {
   MedicalActionCandidate,
   MedicalActionResolution,
   MedicalActionResolveInput,
   MedicalActionSuggestion,
-} from "./types.js";
+} from './types.js';
 
-const READ_ONLY_ROLES = new Set(["read_only", "auditor"]);
+const READ_ONLY_ROLES = new Set(['read_only', 'auditor']);
 
 function primaryLabel(candidate: MedicalActionCandidate): string {
   switch (candidate.kind) {
-    case "medication":
+    case 'medication':
       return `Indicar ${candidate.label}`;
-    case "lab_test":
+    case 'lab_test':
       return `Solicitar ${candidate.label}`;
-    case "imaging_test":
+    case 'imaging_test':
       return `Solicitar ${candidate.label}`;
-    case "endoscopy":
-    case "procedure":
+    case 'endoscopy':
+    case 'procedure':
       return `Solicitar ${candidate.label}`;
-    case "interconsultation":
+    case 'interconsultation':
       return `Solicitar interconsulta — ${candidate.specialty ?? candidate.label}`;
-    case "document":
-    case "clinical_action":
+    case 'document':
+    case 'clinical_action':
       return candidate.label;
     default:
       return candidate.label;
@@ -35,22 +35,22 @@ function primaryLabel(candidate: MedicalActionCandidate): string {
 
 function chipForCandidate(candidate: MedicalActionCandidate): string {
   switch (candidate.kind) {
-    case "medication":
-      return "Orden médica";
-    case "lab_test":
-      return "Laboratorio";
-    case "imaging_test":
-      return "Imagen";
-    case "endoscopy":
-      return "Endoscopia";
-    case "procedure":
-      return "Procedimiento";
-    case "interconsultation":
-      return "Interconsulta";
-    case "document":
-      return "Documento médico";
+    case 'medication':
+      return 'Orden médica';
+    case 'lab_test':
+      return 'Laboratorio';
+    case 'imaging_test':
+      return 'Imagen';
+    case 'endoscopy':
+      return 'Endoscopia';
+    case 'procedure':
+      return 'Procedimiento';
+    case 'interconsultation':
+      return 'Interconsulta';
+    case 'document':
+      return 'Documento médico';
     default:
-      return "Acción clínica";
+      return 'Acción clínica';
   }
 }
 
@@ -65,7 +65,7 @@ function candidateToPrimarySuggestion(
 
   const allowedByRole = canPerformAction
     ? canPerformAction(actionId)
-    : canSuggestActionToRole(actionId, "attending_physician");
+    : canSuggestActionToRole(actionId, 'attending_physician');
   const available = isActionAvailable ? isActionAvailable(actionId) : true;
   if (!allowedByRole || !available) return null;
 
@@ -75,7 +75,7 @@ function candidateToPrimarySuggestion(
     kind: candidate.kind,
     actionId,
     prefillFormData: buildPrefillForCandidate(candidate),
-    confidence: score >= 90 ? "high" : score >= 70 ? "medium" : "low",
+    confidence: score >= 90 ? 'high' : score >= 70 ? 'medium' : 'low',
     chips: [chipForCandidate(candidate), candidate.source],
     source: candidate.source,
     requiresHumanReview: true,
@@ -105,13 +105,13 @@ export function resolveMedicalActions(input: MedicalActionResolveInput): Medical
   if (READ_ONLY_ROLES.has(input.role)) {
     const readSuggestions: MedicalActionSuggestion[] = [
       {
-        label: "Buscar en ficha clínica",
-        description: "Visualización · solo lectura",
-        kind: "visualization",
-        viewId: "lab_renal_trend",
-        confidence: "medium",
-        chips: ["Lectura"],
-        source: "epione",
+        label: 'Buscar en ficha clínica',
+        description: 'Visualización · solo lectura',
+        kind: 'visualization',
+        viewId: 'lab_renal_trend',
+        confidence: 'medium',
+        chips: ['Lectura'],
+        source: 'epione',
         requiresHumanReview: true,
         score: 60,
       },

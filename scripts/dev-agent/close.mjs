@@ -27,7 +27,12 @@ for (const gate of gates) {
     continue;
   }
   process.stdout.write(`▶ ${gate.label}… `);
-  const r = spawnSync(gate.cmd, gate.args, { cwd: root, stdio: 'pipe', encoding: 'utf8', shell: true });
+  const r = spawnSync(gate.cmd, gate.args, {
+    cwd: root,
+    stdio: 'pipe',
+    encoding: 'utf8',
+    shell: true,
+  });
   const ok = r.status === 0;
   results.push({ ...gate, status: ok ? 'ok' : 'fail' });
   console.log(ok ? 'OK' : 'FAIL');

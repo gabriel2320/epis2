@@ -11,7 +11,8 @@ const resultsPage = join(root, 'apps/web/src/pages/ResultsInboxPage.tsx');
 if (!existsSync(resultsPage)) errors.push('Falta ResultsInboxPage.tsx');
 else {
   const src = readFileSync(resultsPage, 'utf8');
-  if (!src.includes('EpisRadGridSurface')) errors.push('ResultsInboxPage debe usar EpisRadGridSurface');
+  if (!src.includes('EpisRadGridSurface'))
+    errors.push('ResultsInboxPage debe usar EpisRadGridSurface');
   if (!src.includes('ResultsInboxCriticalGrid')) errors.push('ResultsInboxPage sin grid críticos');
   if (src.includes('<ListItem')) errors.push('ResultsInboxPage aún usa listas card-like');
 }
@@ -23,7 +24,12 @@ if (!resultsEntry) errors.push('results-inbox debe estar migration done en regis
 const workEntry = registry.match(/id: 'dashboard-work'[\s\S]*?migration: 'done'/);
 if (!workEntry) errors.push('dashboard-work debe estar migration done');
 
-for (const id of ['dashboard-icu', 'dashboard-specialty', 'dashboard-patient', 'dashboard-quality']) {
+for (const id of [
+  'dashboard-icu',
+  'dashboard-specialty',
+  'dashboard-patient',
+  'dashboard-quality',
+]) {
   const entry = registry.match(new RegExp(`id: '${id}'[\\s\\S]*?migration: 'done'`));
   if (!entry) errors.push(`${id} debe estar migration done en registry`);
 }

@@ -22,7 +22,10 @@ export function DashboardWorklists({ work, onOpenDraft }: DashboardWorklistsProp
   return (
     <EpisRadDashboardTabShell testId="epis2-dashboard-work-rad">
       <Stack spacing={2}>
-        <EpisWorkspaceSection title={copy.dashboard.myOpenDrafts} testId="epis2-dashboard-my-drafts">
+        <EpisWorkspaceSection
+          title={copy.dashboard.myOpenDrafts}
+          testId="epis2-dashboard-my-drafts"
+        >
           <WorklistDraftGrid
             rows={work.myOpenDrafts}
             emptyMessage={copy.dashboard.emptyDrafts}
@@ -32,7 +35,10 @@ export function DashboardWorklists({ work, onOpenDraft }: DashboardWorklistsProp
           />
         </EpisWorkspaceSection>
 
-        <EpisWorkspaceSection title={copy.dashboard.pendingReview} testId="epis2-dashboard-pending-review">
+        <EpisWorkspaceSection
+          title={copy.dashboard.pendingReview}
+          testId="epis2-dashboard-pending-review"
+        >
           <WorklistDraftGrid
             rows={work.pendingReview}
             emptyMessage={copy.dashboard.emptyReview}

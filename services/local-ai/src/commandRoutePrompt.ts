@@ -7,9 +7,7 @@ export function buildCommandRoutePrompt(input: AiAssistCommandRouteRequest): str
 
   const deterministic =
     input.deterministicCandidates && input.deterministicCandidates.length > 0
-      ? input.deterministicCandidates
-          .map((c) => `${c.intent} (${c.score})`)
-          .join(', ')
+      ? input.deterministicCandidates.map((c) => `${c.intent} (${c.score})`).join(', ')
       : 'ninguno';
 
   return [

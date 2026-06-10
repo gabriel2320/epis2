@@ -1,8 +1,6 @@
 import { defineBlueprint, field, section } from '../factory.js';
 
-const DEMO_TRANSFER_BEDS = [
-  'f0000002-0000-4000-8000-000000000003|102A — disponible',
-] as const;
+const DEMO_TRANSFER_BEDS = ['f0000002-0000-4000-8000-000000000003|102A — disponible'] as const;
 
 export const transferNoteBlueprint = defineBlueprint({
   blueprintId: 'transfer_note',

@@ -30,11 +30,14 @@ if (existsSync(join(root, 'apps/web/src/dashboard-md3/useDashboardMd3Mode.ts')))
 
 const shellSrc = readFileSync(shellPath, 'utf8');
 if (!shellSrc.includes('100dvh')) errors.push('Shell dashboard debe usar 100dvh');
-if (!shellSrc.includes('main-grid-only')) errors.push('Shell dashboard debe declarar scroll policy');
+if (!shellSrc.includes('main-grid-only'))
+  errors.push('Shell dashboard debe declarar scroll policy');
 
 const contentSrc = readFileSync(contentPath, 'utf8');
-if (!contentSrc.includes('useDashboardMd3Mode')) errors.push('DashboardModeContent debe bifurcar modo MD3');
-if (!contentSrc.includes('DashboardMd3WorkspaceLayout')) errors.push('DashboardModeContent debe usar layout MD3');
+if (!contentSrc.includes('useDashboardMd3Mode'))
+  errors.push('DashboardModeContent debe bifurcar modo MD3');
+if (!contentSrc.includes('DashboardMd3WorkspaceLayout'))
+  errors.push('DashboardModeContent debe usar layout MD3');
 
 const routerSrc = readFileSync(routerPath, 'utf8');
 if (!routerSrc.includes("path: '/comando'")) errors.push('Home canónica /comando debe persistir');

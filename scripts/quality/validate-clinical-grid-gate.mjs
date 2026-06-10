@@ -20,7 +20,9 @@ if (!existsSync(patientGrid)) errors.push('Falta PatientListGrid.tsx piloto');
 else {
   const src = readFileSync(patientGrid, 'utf8');
   if (!src.includes('@epis2/clinical-productivity')) {
-    errors.push('PatientListGrid debe importar ClinicalDataGrid desde @epis2/clinical-productivity');
+    errors.push(
+      'PatientListGrid debe importar ClinicalDataGrid desde @epis2/clinical-productivity',
+    );
   }
   if (src.includes('@mui/x-data-grid')) {
     errors.push('PatientListGrid no debe importar MUI X Data Grid directamente');

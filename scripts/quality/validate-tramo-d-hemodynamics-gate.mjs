@@ -13,7 +13,7 @@ for (const token of ['epis2-icu-hemodynamics', 'idc === 135', 'copy.icu.hemodyna
 }
 
 const api = readFileSync(join(root, 'apps/api/src/dashboard/icu.ts'), 'utf8');
-if (!api.includes("idc: 135") || !api.includes("status: 'active'")) {
+if (!api.includes('idc: 135') || !api.includes("status: 'active'")) {
   errors.push('icu.ts IDC 135 no active');
 }
 if (!api.includes('hemodynamics')) errors.push('icu.ts sin hemodynamics');

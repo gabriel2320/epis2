@@ -50,10 +50,7 @@ export function BlueprintStudioPanel() {
     [selectedId],
   );
 
-  const intentOptions = useMemo(
-    () => EPIS2_COMMAND_DEFINITIONS.map((def) => def.intent),
-    [],
-  );
+  const intentOptions = useMemo(() => EPIS2_COMMAND_DEFINITIONS.map((def) => def.intent), []);
 
   const exportSelected = () => {
     if (!selected) return;
@@ -113,9 +110,7 @@ export function BlueprintStudioPanel() {
   };
 
   const toggleRole = (role: ClinicalRole) => {
-    setNewRoles((prev) =>
-      prev.includes(role) ? prev.filter((r) => r !== role) : [...prev, role],
-    );
+    setNewRoles((prev) => (prev.includes(role) ? prev.filter((r) => r !== role) : [...prev, role]));
   };
 
   return (
@@ -127,7 +122,10 @@ export function BlueprintStudioPanel() {
           {copy.blueprintStudio.registryTitle}
         </EpisM3Text>
         <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-          {copy.blueprintStudio.registryHint.replace('{count}', String(EPIS2_FORM_BLUEPRINTS.length))}
+          {copy.blueprintStudio.registryHint.replace(
+            '{count}',
+            String(EPIS2_FORM_BLUEPRINTS.length),
+          )}
         </Typography>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} alignItems={{ sm: 'center' }}>
           <TextField
@@ -145,10 +143,18 @@ export function BlueprintStudioPanel() {
               </MenuItem>
             ))}
           </TextField>
-          <EpisButton appearance="filled" onClick={exportSelected} data-testid="epis2-blueprint-export-one">
+          <EpisButton
+            appearance="filled"
+            onClick={exportSelected}
+            data-testid="epis2-blueprint-export-one"
+          >
             {copy.blueprintStudio.exportOne}
           </EpisButton>
-          <EpisButton appearance="outlined" onClick={exportRegistry} data-testid="epis2-blueprint-export-all">
+          <EpisButton
+            appearance="outlined"
+            onClick={exportRegistry}
+            data-testid="epis2-blueprint-export-all"
+          >
             {copy.blueprintStudio.exportAll}
           </EpisButton>
         </Stack>
@@ -173,7 +179,11 @@ export function BlueprintStudioPanel() {
           data-testid="epis2-blueprint-import-json"
         />
         <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
-          <EpisButton appearance="filled" onClick={validateImport} data-testid="epis2-blueprint-validate-import">
+          <EpisButton
+            appearance="filled"
+            onClick={validateImport}
+            data-testid="epis2-blueprint-validate-import"
+          >
             {copy.blueprintStudio.validateImport}
           </EpisButton>
           <EpisButton
@@ -253,7 +263,11 @@ export function BlueprintStudioPanel() {
               </EpisButton>
             ))}
           </Stack>
-          <EpisButton appearance="filled" onClick={generateNewScaffold} data-testid="epis2-blueprint-generate-scaffold">
+          <EpisButton
+            appearance="filled"
+            onClick={generateNewScaffold}
+            data-testid="epis2-blueprint-generate-scaffold"
+          >
             {copy.blueprintStudio.generateScaffold}
           </EpisButton>
         </Stack>

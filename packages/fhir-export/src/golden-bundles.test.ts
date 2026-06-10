@@ -8,10 +8,7 @@ import { buildPatientExportBundle, toFhirEncounter, toFhirPatient } from './mapp
 import { assertExportClean } from './validateExport.js';
 import { assertValidEpis2ExportBundle, validateEpis2ExportBundle } from './validateExportBundle.js';
 
-const goldenDir = join(
-  dirname(fileURLToPath(import.meta.url)),
-  '../fixtures/golden',
-);
+const goldenDir = join(dirname(fileURLToPath(import.meta.url)), '../fixtures/golden');
 
 function readGoldenBundle(name: string): unknown {
   return JSON.parse(readFileSync(join(goldenDir, name), 'utf8'));

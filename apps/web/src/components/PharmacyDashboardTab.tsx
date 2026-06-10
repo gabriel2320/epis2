@@ -173,7 +173,10 @@ export function PharmacyDashboardTab({
           />
         </Stack>
 
-        <EpisWorkspaceSection title={copy.pharmacy.idcPanelsTitle} testId="epis2-pharmacy-idc-panels">
+        <EpisWorkspaceSection
+          title={copy.pharmacy.idcPanelsTitle}
+          testId="epis2-pharmacy-idc-panels"
+        >
           <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
             {data.idcPanels.map((panel) => (
               <Chip
@@ -209,11 +212,19 @@ export function PharmacyDashboardTab({
           </Box>
         </EpisWorkspaceSection>
 
-        <EpisWorkspaceSection title={copy.pharmacy.renalDoseTitle} testId="epis2-pharmacy-renal-dose">
+        <EpisWorkspaceSection
+          title={copy.pharmacy.renalDoseTitle}
+          testId="epis2-pharmacy-renal-dose"
+        >
           <DashboardHomogeneousGrid
             rows={renalDoseRows}
             columns={[
-              { field: 'title', headerName: copy.dashboard.gridColumnPatient, flex: 1, minWidth: 180 },
+              {
+                field: 'title',
+                headerName: copy.dashboard.gridColumnPatient,
+                flex: 1,
+                minWidth: 180,
+              },
               { field: 'gfr', headerName: 'TFG', width: 100 },
               { field: 'dose', headerName: 'Dosis sugerida', flex: 1, minWidth: 140 },
             ]}
@@ -227,7 +238,12 @@ export function PharmacyDashboardTab({
           <DashboardHomogeneousGrid
             rows={tdmRows}
             columns={[
-              { field: 'title', headerName: copy.dashboard.gridColumnPatient, flex: 1, minWidth: 180 },
+              {
+                field: 'title',
+                headerName: copy.dashboard.gridColumnPatient,
+                flex: 1,
+                minWidth: 180,
+              },
               { field: 'level', headerName: 'Nivel', width: 100 },
               { field: 'target', headerName: 'Rango objetivo', flex: 1, minWidth: 140 },
             ]}
@@ -241,7 +257,12 @@ export function PharmacyDashboardTab({
           <DashboardHomogeneousGrid
             rows={ramRows}
             columns={[
-              { field: 'title', headerName: copy.dashboard.gridColumnPatient, flex: 1, minWidth: 180 },
+              {
+                field: 'title',
+                headerName: copy.dashboard.gridColumnPatient,
+                flex: 1,
+                minWidth: 180,
+              },
               { field: 'reaction', headerName: 'Reacción', flex: 1, minWidth: 140 },
               { field: 'severity', headerName: copy.dashboard.gridColumnStatus, width: 120 },
             ]}
@@ -281,7 +302,10 @@ export function PharmacyDashboardTab({
           )}
         </EpisWorkspaceSection>
 
-        <EpisWorkspaceSection title={copy.pharmacy.dispensingTitle} testId="epis2-pharmacy-dispensing">
+        <EpisWorkspaceSection
+          title={copy.pharmacy.dispensingTitle}
+          testId="epis2-pharmacy-dispensing"
+        >
           <DashboardHomogeneousGrid
             rows={dispensingRows}
             columns={dispensingColumns}
@@ -290,7 +314,10 @@ export function PharmacyDashboardTab({
           />
         </EpisWorkspaceSection>
 
-        <EpisWorkspaceSection title={copy.pharmacy.reconciliationTitle} testId="epis2-pharmacy-reconciliation">
+        <EpisWorkspaceSection
+          title={copy.pharmacy.reconciliationTitle}
+          testId="epis2-pharmacy-reconciliation"
+        >
           {reconciliationRows.length === 0 ? (
             <Typography variant="body2" color="text.secondary">
               {copy.inpatient.noPharmacyPending}
@@ -299,8 +326,18 @@ export function PharmacyDashboardTab({
             <DashboardHomogeneousGrid
               rows={reconciliationRows}
               columns={[
-                { field: 'title', headerName: copy.dashboard.gridColumnPatient, flex: 1, minWidth: 160 },
-                { field: 'reason', headerName: copy.dashboard.gridColumnTitle, flex: 1, minWidth: 180 },
+                {
+                  field: 'title',
+                  headerName: copy.dashboard.gridColumnPatient,
+                  flex: 1,
+                  minWidth: 160,
+                },
+                {
+                  field: 'reason',
+                  headerName: copy.dashboard.gridColumnTitle,
+                  flex: 1,
+                  minWidth: 180,
+                },
               ]}
               emptyMessage={copy.inpatient.noPharmacyPending}
               onRowClick={(row) => onOpenReconciliation(String(row.patientId))}
@@ -320,7 +357,10 @@ export function PharmacyDashboardTab({
           )}
         </EpisWorkspaceSection>
 
-        <EpisWorkspaceSection title={copy.pharmacy.crashCartTitle} testId="epis2-pharmacy-crash-cart">
+        <EpisWorkspaceSection
+          title={copy.pharmacy.crashCartTitle}
+          testId="epis2-pharmacy-crash-cart"
+        >
           <DashboardHomogeneousGrid
             rows={crashCartRows}
             columns={[
@@ -355,7 +395,12 @@ export function PharmacyDashboardTab({
           <DashboardHomogeneousGrid
             rows={returnRows}
             columns={[
-              { field: 'title', headerName: copy.dashboard.gridColumnPatient, flex: 1, minWidth: 180 },
+              {
+                field: 'title',
+                headerName: copy.dashboard.gridColumnPatient,
+                flex: 1,
+                minWidth: 180,
+              },
               { field: 'quantity', headerName: 'Cantidad', width: 100 },
               { field: 'reason', headerName: 'Motivo', flex: 1, minWidth: 160 },
             ]}

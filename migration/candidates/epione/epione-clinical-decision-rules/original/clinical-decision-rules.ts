@@ -3,14 +3,14 @@
  * EPIONE demo avanzada / no producción. Ollama solo explica alertas; no decide bloqueos.
  */
 
-import type { SafetySeverity } from "./safety.js";
+import type { SafetySeverity } from './safety.js';
 
 export const CDR_RULE_IDS = [
-  "allergy_medication_conflict",
-  "critical_lab_without_ack",
-  "discharge_with_open_critical_orders",
-  "duplicate_medication_order",
-  "high_risk_med_without_double_check",
+  'allergy_medication_conflict',
+  'critical_lab_without_ack',
+  'discharge_with_open_critical_orders',
+  'duplicate_medication_order',
+  'high_risk_med_without_double_check',
 ] as const;
 
 export type CdrRuleId = (typeof CDR_RULE_IDS)[number];
@@ -30,7 +30,7 @@ export interface CdrMedicalOrder {
 export interface CdrLabResult {
   id?: string;
   testName: string;
-  interpretation?: "normal" | "abnormal" | "critical";
+  interpretation?: 'normal' | 'abnormal' | 'critical';
   reviewedAt?: string;
 }
 
@@ -45,7 +45,7 @@ export interface CdrDoubleCheck {
 
 export interface CdrContext {
   actionId: string;
-  mode: "commit" | "sign";
+  mode: 'commit' | 'sign';
   formData: Record<string, unknown>;
   allergies: string[];
   medicationOrders: CdrMedicationOrder[];
@@ -66,20 +66,20 @@ export interface CdrCheckResult {
 
 /** Fármacos de alto riesgo que exigen doble chequeo antes de administración. */
 export const HIGH_RISK_DRUG_PATTERNS = [
-  "insulina",
-  "heparina",
-  "warfarina",
-  "potasio",
-  "morfina",
-  "fentanilo",
-  "adrenalina",
-  "noradrenalina",
+  'insulina',
+  'heparina',
+  'warfarina',
+  'potasio',
+  'morfina',
+  'fentanilo',
+  'adrenalina',
+  'noradrenalina',
 ] as const;
 
-const CRITICAL_ORDER_PATTERNS = ["vasoactiv", "transfusion", "heparina", "insulina"];
+const CRITICAL_ORDER_PATTERNS = ['vasoactiv', 'transfusion', 'heparina', 'insulina'];
 
 function trimField(value: unknown): string {
-  return typeof value === "string" ? value.trim() : "";
+  return typeof value === 'string' ? value.trim() : '';
 }
 
 function extractDrugName(formData: Record<string, unknown>): string {
@@ -92,7 +92,7 @@ function extractDrugName(formData: Record<string, unknown>): string {
 }
 
 function normalizeDrug(value: string): string {
-  return value.toLowerCase().normalize("NFD").replace(/\p{M}/gu, "");
+  return value.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '');
 }
 
 function matchesAllergy(drugName: string, allergies: string[]): string | null {
@@ -111,20 +111,20 @@ function isHighRiskDrug(drugName: string): boolean {
 }
 
 function isMarAction(actionId: string): boolean {
-  return actionId === "medication_administration" || actionId === "mar_administer";
+  return actionId === 'medication_administration' || actionId === 'mar_administer';
 }
 
 function isOrderAction(actionId: string): boolean {
-  return actionId === "medical_order" || actionId === "prescription";
+  return actionId === 'medical_order' || actionId === 'prescription';
 }
 
 function isDischargeAction(actionId: string): boolean {
-  return actionId === "discharge_summary";
+  return actionId === 'discharge_summary';
 }
 
 function isBlockedMedicationStatus(status: string): boolean {
   const normalized = status.toLowerCase();
-  return normalized === "hold" || normalized === "discontinued" || normalized === "cancelled";
+  return normalized === 'hold' || normalized === 'discontinued' || normalized === 'cancelled';
 }
 
 export function evaluateAllergyMedicationConflict(ctx: CdrContext): CdrCheckResult | null {
@@ -136,13 +136,13 @@ export function evaluateAllergyMedicationConflict(ctx: CdrContext): CdrCheckResu
   if (!allergy) return null;
 
   return {
-    ruleId: "allergy_medication_conflict",
-    id: "cdr.allergy_medication_conflict",
-    severity: "block",
+    ruleId: 'allergy_medication_conflict',
+    id: 'cdr.allergy_medication_conflict',
+    severity: 'block',
     message: `Conflicto alergia–medicamento: ${drugName} coincide con alergia (${allergy}).`,
     clinicalRationale:
-      "Administrar o prescribir un fármaco relacionado con alergia documentada puede provocar reacción adversa grave.",
-    field: "medication",
+      'Administrar o prescribir un fármaco relacionado con alergia documentada puede provocar reacción adversa grave.',
+    field: 'medication',
   };
 }
 
@@ -150,29 +150,29 @@ export function evaluateCriticalLabWithoutAck(ctx: CdrContext): CdrCheckResult |
   if (ctx.criticalLabAlerts.length === 0) return null;
 
   const blockingActions = new Set([
-    "discharge_summary",
-    "patient_transfer",
-    "transfer",
-    "bed_release",
+    'discharge_summary',
+    'patient_transfer',
+    'transfer',
+    'bed_release',
   ]);
   if (!blockingActions.has(ctx.actionId)) return null;
 
-  const pending = ctx.criticalLabAlerts.map((a) => a.testName).join(", ");
+  const pending = ctx.criticalLabAlerts.map((a) => a.testName).join(', ');
   return {
-    ruleId: "critical_lab_without_ack",
-    id: "cdr.critical_lab_without_ack",
-    severity: "block",
+    ruleId: 'critical_lab_without_ack',
+    id: 'cdr.critical_lab_without_ack',
+    severity: 'block',
     message: `Resultado crítico sin acuse: ${pending}.`,
     clinicalRationale:
-      "No se debe continuar el flujo clínico hasta acusar recibo y documentar acción sobre resultados críticos.",
+      'No se debe continuar el flujo clínico hasta acusar recibo y documentar acción sobre resultados críticos.',
   };
 }
 
 export function evaluateDischargeWithOpenCriticalOrders(ctx: CdrContext): CdrCheckResult | null {
-  if (!isDischargeAction(ctx.actionId) || ctx.mode !== "sign") return null;
+  if (!isDischargeAction(ctx.actionId) || ctx.mode !== 'sign') return null;
 
   const openCritical = ctx.medicalOrders.filter((order) => {
-    if (order.status === "completed" || order.status === "cancelled") return false;
+    if (order.status === 'completed' || order.status === 'cancelled') return false;
     const summary = order.summary.toLowerCase();
     return CRITICAL_ORDER_PATTERNS.some((pattern) => summary.includes(pattern));
   });
@@ -180,13 +180,13 @@ export function evaluateDischargeWithOpenCriticalOrders(ctx: CdrContext): CdrChe
   if (openCritical.length === 0) return null;
 
   return {
-    ruleId: "discharge_with_open_critical_orders",
-    id: "cdr.discharge_with_open_critical_orders",
-    severity: "block",
-    message: "Alta bloqueada: existen órdenes críticas activas pendientes.",
+    ruleId: 'discharge_with_open_critical_orders',
+    id: 'cdr.discharge_with_open_critical_orders',
+    severity: 'block',
+    message: 'Alta bloqueada: existen órdenes críticas activas pendientes.',
     clinicalRationale:
-      "El alta hospitalaria no debe firmarse mientras permanezcan órdenes de alto impacto sin resolver.",
-    field: "discharge_plan",
+      'El alta hospitalaria no debe firmarse mientras permanezcan órdenes de alto impacto sin resolver.',
+    field: 'discharge_plan',
   };
 }
 
@@ -206,13 +206,13 @@ export function evaluateDuplicateMedicationOrder(ctx: CdrContext): CdrCheckResul
   if (!duplicate) return null;
 
   return {
-    ruleId: "duplicate_medication_order",
-    id: "cdr.duplicate_medication_order",
-    severity: "block",
+    ruleId: 'duplicate_medication_order',
+    id: 'cdr.duplicate_medication_order',
+    severity: 'block',
     message: `Orden duplicada: ${duplicate.drugName} ya está activa.`,
     clinicalRationale:
-      "Duplicar la misma medicación activa incrementa riesgo de error de dosificación y eventos adversos.",
-    field: "summary",
+      'Duplicar la misma medicación activa incrementa riesgo de error de dosificación y eventos adversos.',
+    field: 'summary',
   };
 }
 
@@ -229,13 +229,13 @@ export function evaluateHighRiskMedWithoutDoubleCheck(ctx: CdrContext): CdrCheck
   if (hasDoubleCheck) return null;
 
   return {
-    ruleId: "high_risk_med_without_double_check",
-    id: "cdr.high_risk_med_without_double_check",
-    severity: "block",
+    ruleId: 'high_risk_med_without_double_check',
+    id: 'cdr.high_risk_med_without_double_check',
+    severity: 'block',
     message: `Doble chequeo obligatorio para medicamento de alto riesgo: ${drugName}.`,
     clinicalRationale:
-      "Medicamentos de alto riesgo requieren verificación independiente antes de administración.",
-    field: "medication_order_id",
+      'Medicamentos de alto riesgo requieren verificación independiente antes de administración.',
+    field: 'medication_order_id',
   };
 }
 
@@ -262,11 +262,11 @@ export function evaluateSuspendedMedicationMar(ctx: CdrContext): CdrCheckResult 
   if (!order || !isBlockedMedicationStatus(order.status)) return null;
 
   return {
-    ruleId: "allergy_medication_conflict",
-    id: "cdr.mar_suspended_medication",
-    severity: "block",
+    ruleId: 'allergy_medication_conflict',
+    id: 'cdr.mar_suspended_medication',
+    severity: 'block',
     message: `No administrar: la orden de ${order.drugName} está ${order.status}.`,
-    clinicalRationale: "No se debe administrar medicación suspendida, en hold o discontinuada.",
-    field: "medication_order_id",
+    clinicalRationale: 'No se debe administrar medicación suspendida, en hold o discontinuada.',
+    field: 'medication_order_id',
   };
 }

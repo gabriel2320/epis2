@@ -32,8 +32,15 @@ export function EpisNavigationRail({
   testId = 'epis2-navigation-rail',
 }: EpisNavigationRailProps) {
   return (
-    <Box component="nav" aria-label="Navegación principal" sx={epis2NavigationRailSx} data-testid={testId}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.5, flex: 1 }}>
+    <Box
+      component="nav"
+      aria-label="Navegación principal"
+      sx={epis2NavigationRailSx}
+      data-testid={testId}
+    >
+      <Box
+        sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.5, flex: 1 }}
+      >
         {items.map((item) => {
           if (item.variant === 'divider') {
             return (
@@ -66,7 +73,9 @@ export function EpisNavigationRail({
 
           return (
             <Tooltip key={item.id} title={item.label} placement="right">
-              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.25 }}>
+              <Box
+                sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.25 }}
+              >
                 {button}
                 <EpisM3Text
                   role="labelMedium"

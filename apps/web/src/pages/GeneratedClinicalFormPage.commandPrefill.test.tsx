@@ -19,8 +19,11 @@ const mockSearch = vi.fn(() => ({
 vi.mock('@tanstack/react-router', () => ({
   useNavigate: () => mockNavigate,
   useSearch: () => mockSearch(),
-  useRouterState: ({ select }: { select: (s: { location: { pathname: string; searchStr?: string } }) => unknown }) =>
-    select({ location: { pathname: '/espacio/evolucion', searchStr: '' } }),
+  useRouterState: ({
+    select,
+  }: {
+    select: (s: { location: { pathname: string; searchStr?: string } }) => unknown;
+  }) => select({ location: { pathname: '/espacio/evolucion', searchStr: '' } }),
   Link: ({ children }: { children: React.ReactNode }) => <a href="/">{children}</a>,
 }));
 

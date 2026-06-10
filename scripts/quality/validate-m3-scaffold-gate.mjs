@@ -21,12 +21,20 @@ for (const rel of required) {
 
 const shell = readFileSync(join(root, 'apps/web/src/layouts/ClinicalShellLayout.tsx'), 'utf8');
 const comando = readFileSync(join(root, 'apps/web/src/pages/CommandCenterPage.tsx'), 'utf8');
-const dashboard = readFileSync(join(root, 'apps/web/src/dashboard/DashboardModeContent.tsx'), 'utf8');
+const dashboard = readFileSync(
+  join(root, 'apps/web/src/dashboard/DashboardModeContent.tsx'),
+  'utf8',
+);
 const ficha = readFileSync(join(root, 'apps/web/src/pages/PatientWorkspacePage.tsx'), 'utf8');
-const appShell = readFileSync(join(root, 'packages/epis2-ui/src/clinical/EpisAppShellLayout.tsx'), 'utf8');
+const appShell = readFileSync(
+  join(root, 'packages/epis2-ui/src/clinical/EpisAppShellLayout.tsx'),
+  'utf8',
+);
 
-if (!shell.includes('EpisAppScaffold')) errors.push('ClinicalShellLayout debe usar EpisAppScaffold');
-if (!comando.includes('EpisAppScaffold')) errors.push('CommandCenterPage debe usar EpisAppScaffold');
+if (!shell.includes('EpisAppScaffold'))
+  errors.push('ClinicalShellLayout debe usar EpisAppScaffold');
+if (!comando.includes('EpisAppScaffold'))
+  errors.push('CommandCenterPage debe usar EpisAppScaffold');
 if (!dashboard.includes('EpisClinicalWorkspaceShell')) {
   errors.push('DashboardModeContent debe usar EpisClinicalWorkspaceShell');
 }

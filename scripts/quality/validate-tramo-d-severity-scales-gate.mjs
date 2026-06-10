@@ -17,7 +17,7 @@ for (const token of [
 }
 
 const api = readFileSync(join(root, 'apps/api/src/dashboard/icu.ts'), 'utf8');
-if (!api.includes('severityScales') || !api.includes("idc: 47")) {
+if (!api.includes('severityScales') || !api.includes('idc: 47')) {
   errors.push('icu.ts sin severityScales o IDC 47 active');
 }
 
@@ -28,7 +28,9 @@ const matrix = readFileSync(join(root, 'scripts/product/generate-idc-matrix.mjs'
 if (!matrix.includes('MF-TRAMO-D-010')) errors.push('IDC 47 sin nota MF-TRAMO-D-010');
 
 if (errors.length) {
-  console.error('tramo-d-severity-scales-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
+  console.error(
+    'tramo-d-severity-scales-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
+  );
   process.exit(1);
 }
 console.log('tramo-d-severity-scales-gate OK — escalas severidad demo (IDC 47)');

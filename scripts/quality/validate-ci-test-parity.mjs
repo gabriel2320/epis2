@@ -97,16 +97,13 @@ function runVitestJsonReport(outPath) {
     unlinkSync(outPath);
   }
 
-  const run = spawnSync(
-    `npx vitest run --reporter=json --outputFile="${outPath}"`,
-    {
-      cwd: ROOT,
-      env: process.env,
-      stdio: ['inherit', 'pipe', 'inherit'],
-      encoding: 'utf8',
-      shell: true,
-    },
-  );
+  const run = spawnSync(`npx vitest run --reporter=json --outputFile="${outPath}"`, {
+    cwd: ROOT,
+    env: process.env,
+    stdio: ['inherit', 'pipe', 'inherit'],
+    encoding: 'utf8',
+    shell: true,
+  });
 
   if (!existsSync(outPath)) {
     console.error('quality:ci-parity FAILED: vitest no generó reporte JSON');

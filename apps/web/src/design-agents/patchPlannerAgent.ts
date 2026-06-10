@@ -1,10 +1,6 @@
 import type { DesignScreenContext } from './designScreenContext.js';
 import { runDesignAgent } from './runDesignAgent.js';
-import {
-  PatchPlanSchema,
-  type PatchPlan,
-  type DesignAgentRunOutcome,
-} from './schemas.js';
+import { PatchPlanSchema, type PatchPlan, type DesignAgentRunOutcome } from './schemas.js';
 
 /** Solo planifica — nunca modifica código ni lógica clínica. */
 export async function patchPlannerAgent(

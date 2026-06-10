@@ -1,6 +1,9 @@
 import { defineBlueprint, field, section } from '../factory.js';
 
-const PROBLEM_CATEGORY_OPTIONS = ['active_problem|Problema clínico activo', 'surgical_history|Antecedente quirúrgico'] as const;
+const PROBLEM_CATEGORY_OPTIONS = [
+  'active_problem|Problema clínico activo',
+  'surgical_history|Antecedente quirúrgico',
+] as const;
 
 export const clinicalProblemEntryBlueprint = defineBlueprint({
   blueprintId: 'clinical_problem_entry',

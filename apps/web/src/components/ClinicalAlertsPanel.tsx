@@ -1,15 +1,7 @@
 import type { ClinicalAlert } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 
-import {
-  Alert,
-  AlertTitle,
-  Box,
-  Chip,
-  Paper,
-  Stack,
-  Typography,
-} from '@epis2/epis2-ui';
+import { Alert, AlertTitle, Box, Chip, Paper, Stack, Typography } from '@epis2/epis2-ui';
 
 export type ClinicalAlertsPanelProps = {
   alerts: ClinicalAlert[];
@@ -46,18 +38,32 @@ export function ClinicalAlertsPanel({
       }}
       data-testid="epis2-clinical-alerts"
     >
-      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1.5, px: 0.5 }}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ mb: 1.5, px: 0.5 }}
+      >
         <Typography variant="subtitle1">{copy.commandCenter.clinicalAlertsTitle}</Typography>
         <Stack direction="row" spacing={0.75} alignItems="center">
           {loading && alerts.length > 0 ? (
-            <Chip size="small" label={copy.commandCenter.clinicalAlertsLoading} variant="outlined" />
+            <Chip
+              size="small"
+              label={copy.commandCenter.clinicalAlertsLoading}
+              variant="outlined"
+            />
           ) : null}
           {hintBlueprintLabel ? (
             <Chip size="small" label={hintBlueprintLabel} variant="outlined" />
           ) : null}
         </Stack>
       </Stack>
-      <Typography variant="body2" color="text.secondary" display="block" sx={{ mb: 2, px: 0.5, lineHeight: 1.55 }}>
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        display="block"
+        sx={{ mb: 2, px: 0.5, lineHeight: 1.55 }}
+      >
         {copy.commandCenter.clinicalAlertsHint}
       </Typography>
 

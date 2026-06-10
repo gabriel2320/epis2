@@ -53,9 +53,7 @@ export function fetchPatientResultsInbox(patientId: string) {
 
 export function searchPatientDocuments(patientId: string, query: string) {
   const q = encodeURIComponent(query.trim());
-  return apiFetch<DocumentSearchResponse>(
-    `/api/patients/${patientId}/documents/search?q=${q}`,
-  );
+  return apiFetch<DocumentSearchResponse>(`/api/patients/${patientId}/documents/search?q=${q}`);
 }
 
 export function intakePatientDocument(
@@ -244,9 +242,7 @@ export function listDrafts(params?: { patientId?: string; status?: string }) {
   if (params?.patientId) search.set('patientId', params.patientId);
   if (params?.status) search.set('status', params.status);
   const q = search.toString();
-  return apiFetch<{ drafts: ClinicalDraftSummary[] }>(
-    `/api/drafts${q ? `?${q}` : ''}`,
-  );
+  return apiFetch<{ drafts: ClinicalDraftSummary[] }>(`/api/drafts${q ? `?${q}` : ''}`);
 }
 
 export function fetchDraftDetail(draftId: string) {

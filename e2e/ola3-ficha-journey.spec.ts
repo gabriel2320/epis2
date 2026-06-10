@@ -60,7 +60,9 @@ test.describe('Ola 3 — ficha longitudinal CTAs', () => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-005');
     await openFichaHistory(page);
-    await expect(page.getByTestId('epis2-patient-clinical-charts')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-patient-clinical-charts')).toBeVisible({
+      timeout: 15_000,
+    });
     await expect(page.getByTestId('epis2-chart-inr-trend')).toBeVisible();
     await expect(page.getByTestId('epis2-chart-vitals-trend')).toBeVisible();
   });

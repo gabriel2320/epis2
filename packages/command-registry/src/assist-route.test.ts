@@ -22,7 +22,11 @@ describe('assist-route (CE-3)', () => {
   it('shouldInvokeAssistRoute solo en needs_clarification', () => {
     expect(
       shouldInvokeAssistRoute(
-        resolveCommand({ text: 'dejarlo listo para irse', role: 'physician', patientId: DEMO_PATIENT_ID }),
+        resolveCommand({
+          text: 'dejarlo listo para irse',
+          role: 'physician',
+          patientId: DEMO_PATIENT_ID,
+        }),
       ),
     ).toBe(true);
     expect(

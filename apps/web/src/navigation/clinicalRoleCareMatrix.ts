@@ -42,7 +42,10 @@ export type EpisRoleCareProfile = {
 };
 
 /** Workspace MD3 → ámbito clínico dominante. */
-export const WORKSPACE_CARE_SETTING: Record<EpisClinicalWorkspaceId, EpisCareSettingId | 'institutional'> = {
+export const WORKSPACE_CARE_SETTING: Record<
+  EpisClinicalWorkspaceId,
+  EpisCareSettingId | 'institutional'
+> = {
   command: 'ambulatory',
   reception: 'ambulatory',
   ambulatory: 'ambulatory',
@@ -62,27 +65,53 @@ export const EPIS_ACTION_WINDOWS: Record<EpisActionWindowId, EpisActionWindowDef
     labelKey: 'actionWindows.commandIntent',
     careSetting: 'ambulatory',
     routes: ['/comando'],
-    allowedRoles: ['physician', 'nurse', 'paramedic', 'kinesiologist', 'pharmacist', 'admin', 'auditor'],
+    allowedRoles: [
+      'physician',
+      'nurse',
+      'paramedic',
+      'kinesiologist',
+      'pharmacist',
+      'admin',
+      'auditor',
+    ],
   },
   patient_lookup: {
     id: 'patient_lookup',
     labelKey: 'actionWindows.patientLookup',
     careSetting: 'ambulatory',
     routes: ['/espacio/buscar-paciente', '/espacio/ficha', '/espacio/resumen'],
-    allowedRoles: ['physician', 'nurse', 'paramedic', 'kinesiologist', 'pharmacist', 'admin', 'auditor'],
+    allowedRoles: [
+      'physician',
+      'nurse',
+      'paramedic',
+      'kinesiologist',
+      'pharmacist',
+      'admin',
+      'auditor',
+    ],
   },
   ambulatory_encounter: {
     id: 'ambulatory_encounter',
     labelKey: 'actionWindows.ambulatoryEncounter',
     careSetting: 'ambulatory',
-    routes: ['/espacio/ambulatorio', '/espacio/evolucion', '/espacio/certificado', '/epis2/dashboard?tab=aps'],
+    routes: [
+      '/espacio/ambulatorio',
+      '/espacio/evolucion',
+      '/espacio/certificado',
+      '/epis2/dashboard?tab=aps',
+    ],
     allowedRoles: ['physician', 'nurse', 'kinesiologist'],
   },
   inpatient_ward_care: {
     id: 'inpatient_ward_care',
     labelKey: 'actionWindows.inpatientWardCare',
     careSetting: 'inpatient_ward',
-    routes: ['/espacio/ingreso', '/espacio/traslado', '/espacio/epicrisis', '/epis2/dashboard?tab=service'],
+    routes: [
+      '/espacio/ingreso',
+      '/espacio/traslado',
+      '/espacio/epicrisis',
+      '/epis2/dashboard?tab=service',
+    ],
     allowedRoles: ['physician', 'nurse', 'kinesiologist'],
   },
   intermediate_care_monitoring: {
@@ -117,7 +146,12 @@ export const EPIS_ACTION_WINDOWS: Record<EpisActionWindowId, EpisActionWindowDef
     id: 'pharmacy_clinical_review',
     labelKey: 'actionWindows.pharmacyClinicalReview',
     careSetting: 'ambulatory',
-    routes: ['/espacio/farmacia', '/espacio/conciliacion', '/espacio/receta', '/epis2/dashboard?tab=pharmacy'],
+    routes: [
+      '/espacio/farmacia',
+      '/espacio/conciliacion',
+      '/espacio/receta',
+      '/epis2/dashboard?tab=pharmacy',
+    ],
     allowedRoles: ['pharmacist', 'physician'],
   },
   quality_audit: {
@@ -155,7 +189,15 @@ export const EPIS_ROLE_CARE_PROFILES: Record<ClinicalRole, EpisRoleCareProfile> 
     role: 'physician',
     labelKey: 'roles.physician',
     defaultWorkspace: WS.ambulatory,
-    workspaces: [WS.command, WS.ambulatory, WS.inpatient, WS.intermediate, WS.emergency, WS.icu, WS.or],
+    workspaces: [
+      WS.command,
+      WS.ambulatory,
+      WS.inpatient,
+      WS.intermediate,
+      WS.emergency,
+      WS.icu,
+      WS.or,
+    ],
     careSettings: ['ambulatory', 'inpatient_ward', 'intermediate_care', 'emergency', 'icu', 'or'],
     actionWindows: [
       'command_intent',
@@ -174,7 +216,15 @@ export const EPIS_ROLE_CARE_PROFILES: Record<ClinicalRole, EpisRoleCareProfile> 
     role: 'nurse',
     labelKey: 'roles.nurse',
     defaultWorkspace: WS.inpatient,
-    workspaces: [WS.command, WS.inpatient, WS.intermediate, WS.emergency, WS.icu, WS.or, WS.ambulatory],
+    workspaces: [
+      WS.command,
+      WS.inpatient,
+      WS.intermediate,
+      WS.emergency,
+      WS.icu,
+      WS.or,
+      WS.ambulatory,
+    ],
     careSettings: ['inpatient_ward', 'intermediate_care', 'emergency', 'icu', 'or', 'ambulatory'],
     actionWindows: [
       'command_intent',

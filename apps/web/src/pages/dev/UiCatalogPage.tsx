@@ -37,13 +37,7 @@ import {
 import { getBlueprintById, initialFormValues } from '@epis2/clinical-forms';
 import { useState, type ReactNode } from 'react';
 
-function CatalogSection({
-  title,
-  children,
-}: {
-  title: string;
-  children: ReactNode;
-}) {
+function CatalogSection({ title, children }: { title: string; children: ReactNode }) {
   return (
     <EpisCard sx={{ p: 3 }}>
       <Typography variant="h5" gutterBottom>
@@ -302,9 +296,7 @@ export function UiCatalogPage() {
                   field: 'status',
                   headerName: 'Estado',
                   width: 140,
-                  renderCell: ({ value }) => (
-                    <EpisDraftStatus status={String(value ?? '')} />
-                  ),
+                  renderCell: ({ value }) => <EpisDraftStatus status={String(value ?? '')} />,
                 },
               ] satisfies GridColDef[]
             }

@@ -30,9 +30,7 @@ async function main() {
     console.log(`         API/tests ${maskDatabaseUrl(appUrl)}`);
   }
 
-  const files = (await readdir(migrationsDir))
-    .filter((f) => f.endsWith('.sql'))
-    .sort();
+  const files = (await readdir(migrationsDir)).filter((f) => f.endsWith('.sql')).sort();
 
   const sql = postgres(url, { max: 1 });
   try {
@@ -86,7 +84,9 @@ async function main() {
         continue;
       }
       if (known !== undefined && known !== sum) {
-        console.warn(`AVISO: ${file} cambió tras aplicarse (checksum distinto) — re-aplicando (SQL idempotente).`);
+        console.warn(
+          `AVISO: ${file} cambió tras aplicarse (checksum distinto) — re-aplicando (SQL idempotente).`,
+        );
       }
 
       console.log(`Aplicando ${file}…`);

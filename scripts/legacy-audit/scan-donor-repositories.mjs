@@ -24,12 +24,22 @@ function gitMeta(root) {
     return { git: false };
   }
   try {
-    const branch = execSync('git rev-parse --abbrev-ref HEAD', { cwd: root, encoding: 'utf8' }).trim();
+    const branch = execSync('git rev-parse --abbrev-ref HEAD', {
+      cwd: root,
+      encoding: 'utf8',
+    }).trim();
     const head = execSync('git log -1 --format=%H', { cwd: root, encoding: 'utf8' }).trim();
     const oneline = execSync('git log -1 --oneline', { cwd: root, encoding: 'utf8' }).trim();
     const status = execSync('git status -sb', { cwd: root, encoding: 'utf8' }).trim();
     const dirty = status.split('\n').filter((l) => l.startsWith(' M') || l.startsWith('??')).length;
-    return { git: true, branch, head, oneline, dirtyFileCount: dirty, statusFirstLine: status.split('\n')[0] };
+    return {
+      git: true,
+      branch,
+      head,
+      oneline,
+      dirtyFileCount: dirty,
+      statusFirstLine: status.split('\n')[0],
+    };
   } catch (e) {
     return { git: true, error: String(e.message) };
   }
@@ -108,5 +118,7 @@ fs.mkdirSync(path.dirname(OUT), { recursive: true });
 fs.writeFileSync(OUT, JSON.stringify(report, null, 2), 'utf8');
 console.log(`legacy:audit scan → ${OUT}`);
 for (const [k, v] of Object.entries(report.repositories)) {
-  console.log(`  ${k}: ${v.status}${v.fileCountApprox != null ? ` (${v.fileCountApprox} archivos)` : ''}`);
+  console.log(
+    `  ${k}: ${v.status}${v.fileCountApprox != null ? ` (${v.fileCountApprox} archivos)` : ''}`,
+  );
 }

@@ -24,7 +24,13 @@ export async function getOrDashboardSummary(db: Database, role: string) {
     caseId: `or-case-${index + 1}`,
     patientId: p.id,
     patientDisplayName: p.displayName,
-    procedureName: ['Colecistectomía laparoscópica', 'Apendicectomía', 'Hernioplastia inguinal', 'Artroscopía rodilla'][index] ?? 'Procedimiento programado',
+    procedureName:
+      [
+        'Colecistectomía laparoscópica',
+        'Apendicectomía',
+        'Hernioplastia inguinal',
+        'Artroscopía rodilla',
+      ][index] ?? 'Procedimiento programado',
     operatingRoom: `QX-${index + 1}`,
     scheduledStart: `${String(8 + index * 2).padStart(2, '0')}:00`,
     estimatedDurationMin: 90 + index * 15,
@@ -33,7 +39,8 @@ export async function getOrDashboardSummary(db: Database, role: string) {
       | 'preparing'
       | 'in_progress'
       | 'completed',
-    surgeonDisplayName: ['Dra. Morales', 'Dr. Soto', 'Dr. Vega', 'Dra. Ríos'][index] ?? 'Equipo quirúrgico',
+    surgeonDisplayName:
+      ['Dra. Morales', 'Dr. Soto', 'Dr. Vega', 'Dra. Ríos'][index] ?? 'Equipo quirúrgico',
   }));
 
   const activeCase = surgicalSchedule.find((row) => row.status === 'in_progress');
@@ -87,8 +94,11 @@ export async function getOrDashboardSummary(db: Database, role: string) {
       operatingRoom: row.operatingRoom,
       asaClass: (['II', 'III', 'II', 'I'][index] ?? 'II') as 'I' | 'II' | 'III' | 'IV' | 'V',
       mallampati: (['II', 'III', 'I', 'II'][index] ?? 'II') as 'I' | 'II' | 'III' | 'IV',
-      allergyAlert: index === 0 ? 'Penicilina documentada' : index === 2 ? 'Látex — precaución' : null,
-      evaluationStatus: (row.status === 'scheduled' ? 'pending' : 'complete') as 'pending' | 'complete',
+      allergyAlert:
+        index === 0 ? 'Penicilina documentada' : index === 2 ? 'Látex — precaución' : null,
+      evaluationStatus: (row.status === 'scheduled' ? 'pending' : 'complete') as
+        | 'pending'
+        | 'complete',
     }));
 
   const intraopAnesthesia = activeCase
@@ -195,7 +205,8 @@ export async function getOrDashboardSummary(db: Database, role: string) {
     bloodBankOrders,
     sterilizationLots,
     metrics: {
-      operatingRoomsInUse: inProgress + (surgicalSchedule.some((r) => r.status === 'preparing') ? 1 : 0),
+      operatingRoomsInUse:
+        inProgress + (surgicalSchedule.some((r) => r.status === 'preparing') ? 1 : 0),
       scheduledToday,
       inProgress,
     },

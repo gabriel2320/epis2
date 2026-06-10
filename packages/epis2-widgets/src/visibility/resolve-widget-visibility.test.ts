@@ -96,14 +96,11 @@ describe('resolve-widget-visibility', () => {
       const widget = getWidgetById(id)!;
       expect(widget.requiredContext).toContain('user');
     }
-    const vis = resolveVisibleWidgets(
-      [getWidgetById('my-work')!],
-      {
-        surface: 'dashboard',
-        role: 'physician',
-        explicitlyShownWidgetIds: ['my-work'],
-      },
-    );
+    const vis = resolveVisibleWidgets([getWidgetById('my-work')!], {
+      surface: 'dashboard',
+      role: 'physician',
+      explicitlyShownWidgetIds: ['my-work'],
+    });
     expect(vis[0]?.shouldFetch).toBe(false);
     expect(vis[0]?.reason).toBe('missing-context');
   });

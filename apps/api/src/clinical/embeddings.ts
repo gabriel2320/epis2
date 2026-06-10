@@ -38,10 +38,7 @@ export async function fetchOllamaEmbedding(
   }
 }
 
-export async function resolveEmbedding(
-  text: string,
-  ollamaBaseUrl?: string,
-): Promise<number[]> {
+export async function resolveEmbedding(text: string, ollamaBaseUrl?: string): Promise<number[]> {
   if (ollamaBaseUrl) {
     const remote = await fetchOllamaEmbedding(ollamaBaseUrl, text);
     if (remote) return poolEmbedding(remote, DEMO_EMBED_DIM);

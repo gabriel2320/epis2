@@ -13,7 +13,9 @@ test.describe('Ola 6A — impresión certificado A5', () => {
     await pinDemoCase(page, 'DEMO-001');
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto(`/espacio/certificado?patientId=${DEMO001_PATIENT_ID}`);
-    await expect(page.getByTestId('epis2-form-medical_certificate')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-form-medical_certificate')).toBeVisible({
+      timeout: 15_000,
+    });
     await expect(page.getByTestId('epis2-print-preview-medical_certificate')).toBeVisible({
       timeout: 15_000,
     });

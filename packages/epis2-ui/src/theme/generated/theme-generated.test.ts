@@ -28,7 +28,7 @@ const REQUIRED = [
   'inversePrimary',
 ] as const;
 
-const ALL_SCHEMES: [string, (typeof clinicalBlueLightScheme)][] = [
+const ALL_SCHEMES: [string, typeof clinicalBlueLightScheme][] = [
   ['clinical-blue light', clinicalBlueLightScheme],
   ['clinical-blue dark', clinicalBlueDarkScheme],
   ['calm-teal light', calmTealLightScheme],

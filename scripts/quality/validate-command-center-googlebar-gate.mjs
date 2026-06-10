@@ -7,8 +7,14 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 const comando = readFileSync(join(root, 'apps/web/src/pages/CommandCenterPage.tsx'), 'utf8');
-const googleBar = join(root, 'apps/web/src/components/command-center/EpisCommandCenterGoogleBar.tsx');
-const classicAccess = join(root, 'apps/web/src/components/command-center/CommandCenterClassicAccess.tsx');
+const googleBar = join(
+  root,
+  'apps/web/src/components/command-center/EpisCommandCenterGoogleBar.tsx',
+);
+const classicAccess = join(
+  root,
+  'apps/web/src/components/command-center/CommandCenterClassicAccess.tsx',
+);
 
 if (!existsSync(googleBar)) errors.push('Falta EpisCommandCenterGoogleBar.tsx');
 if (!existsSync(classicAccess)) errors.push('Falta CommandCenterClassicAccess.tsx');
@@ -26,7 +32,9 @@ if (barSrc.includes('Firmar') || barSrc.includes('Aprobar')) {
   errors.push('Google bar no debe contener firmar/aprobar');
 }
 if (errors.length) {
-  console.error('command-center-googlebar-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
+  console.error(
+    'command-center-googlebar-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
+  );
   process.exit(1);
 }
 console.log('command-center-googlebar-gate OK');

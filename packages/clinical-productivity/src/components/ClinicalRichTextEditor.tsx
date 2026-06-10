@@ -34,7 +34,9 @@ export function ClinicalRichTextEditor({
           const { expanded, snippet } = expandClinicalSnippet(value);
           if (snippet) {
             onChange(expanded, createTextOrigin('snippet', snippet.trigger));
-            setHint(copy.clinicalProductivity.snippetInserted.replace('{trigger}', snippet.trigger));
+            setHint(
+              copy.clinicalProductivity.snippetInserted.replace('{trigger}', snippet.trigger),
+            );
           }
         }}
         multiline

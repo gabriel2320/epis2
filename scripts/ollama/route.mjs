@@ -18,7 +18,11 @@ const routes = await resolveAllOllamaRoutes(baseUrl);
 if (jsonOut) {
   mkdirSync(join(root, 'reports'), { recursive: true });
   const outPath = join(root, 'reports/ollama-model-routes.json');
-  writeFileSync(outPath, JSON.stringify({ generatedAt: new Date().toISOString(), routes }, null, 2), 'utf8');
+  writeFileSync(
+    outPath,
+    JSON.stringify({ generatedAt: new Date().toISOString(), routes }, null, 2),
+    'utf8',
+  );
   console.log(outPath);
   process.exit(0);
 }

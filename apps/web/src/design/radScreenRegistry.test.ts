@@ -12,8 +12,6 @@ describe('radScreenRegistry', () => {
   });
 
   it('resuelve dashboard con query', () => {
-    expect(
-      auditForLocation('/epis2/dashboard', '?tab=work&mode=dashboard')?.surface,
-    ).toBe('grid');
+    expect(auditForLocation('/epis2/dashboard', '?tab=work&mode=dashboard')?.surface).toBe('grid');
   });
 });

@@ -1,11 +1,7 @@
 import type { ClinicalRole } from '@epis2/clinical-domain';
 
 /** Superficies donde puede montarse un widget (home sigue siendo Centro de Comando). */
-export type WidgetSurface =
-  | 'command-center'
-  | 'patient-workspace'
-  | 'clinical-form'
-  | 'dashboard';
+export type WidgetSurface = 'command-center' | 'patient-workspace' | 'clinical-form' | 'dashboard';
 
 /** Requisitos de contexto que puede exigir un widget. */
 export const WIDGET_CONTEXT_REQUIREMENTS = [

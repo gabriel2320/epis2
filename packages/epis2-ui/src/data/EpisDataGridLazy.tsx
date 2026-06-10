@@ -12,13 +12,7 @@ export function EpisDataGridSuspense(props: EpisDataGridSuspenseProps) {
   const { loadingLabel, ...gridProps } = props;
   return (
     <Suspense
-      fallback={
-        loadingLabel ? (
-          <EpisLoadingState label={loadingLabel} />
-        ) : (
-          <EpisLoadingState />
-        )
-      }
+      fallback={loadingLabel ? <EpisLoadingState label={loadingLabel} /> : <EpisLoadingState />}
     >
       <LazyEpisDataGrid {...gridProps} />
     </Suspense>

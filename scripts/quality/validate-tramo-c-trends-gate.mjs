@@ -7,10 +7,7 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
-const trends = readFileSync(
-  join(root, 'apps/web/src/components/ResultsInboxTrends.tsx'),
-  'utf8',
-);
+const trends = readFileSync(join(root, 'apps/web/src/components/ResultsInboxTrends.tsx'), 'utf8');
 for (const token of [
   'epis2-results-trends',
   'epis2-results-chart-inr',

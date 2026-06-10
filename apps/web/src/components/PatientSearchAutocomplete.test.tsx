@@ -14,9 +14,7 @@ describe('PatientSearchAutocomplete', () => {
     const user = userEvent.setup();
     const onSelect = vi.fn();
     const onQueryChange = vi.fn();
-    const patients = [
-      { id: 'p1', displayName: 'Juan Demo', demoCaseCode: 'DEMO-001' },
-    ];
+    const patients = [{ id: 'p1', displayName: 'Juan Demo', demoCaseCode: 'DEMO-001' }];
 
     renderWithQuery(
       <PatientSearchAutocomplete

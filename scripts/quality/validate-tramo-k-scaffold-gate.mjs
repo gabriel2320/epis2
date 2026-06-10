@@ -31,7 +31,8 @@ for (const [testid, idc, mf] of panels) {
 
 const e2e = readFileSync(join(root, 'e2e/tramo-k-quality.spec.ts'), 'utf8');
 if (!e2e.includes('epis2-quality-accreditation')) errors.push('e2e sin journey acreditación');
-if (!e2e.includes('epis2-quality-surgical-suspension')) errors.push('e2e sin journey suspensión Qx');
+if (!e2e.includes('epis2-quality-surgical-suspension'))
+  errors.push('e2e sin journey suspensión Qx');
 if (!e2e.includes('epis2-quality-idc-180')) errors.push('e2e sin chip IDC 180');
 
 if (errors.length) {

@@ -73,7 +73,10 @@ export const aiAssistCommandRouteRequestSchema = z.object({
 export const localAiCommandRouteOutputSchema = z.object({
   intent: z.string().optional(),
   confidence: z.number().min(0).max(1),
-  missingContext: z.array(z.enum(['patient', 'encounter', 'draft'])).max(3).default([]),
+  missingContext: z
+    .array(z.enum(['patient', 'encounter', 'draft']))
+    .max(3)
+    .default([]),
   reason: z.string().max(240),
   suggestedCandidates: z.array(z.string()).max(4).default([]),
 });

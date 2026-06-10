@@ -113,8 +113,9 @@ describeIntegration('V4 interoperabilidad API (integration)', () => {
       headers: { cookie },
     });
     expect(bundle.statusCode).toBe(200);
-    const entry = (bundle.json() as { entry: { resource: { resourceType: string; code?: unknown } }[] })
-      .entry;
+    const entry = (
+      bundle.json() as { entry: { resource: { resourceType: string; code?: unknown } }[] }
+    ).entry;
     const allergies = entry.filter((e) => e.resource.resourceType === 'AllergyIntolerance');
     expect(allergies.length).toBeGreaterThan(0);
     const penicillin = allergies.some((a) =>

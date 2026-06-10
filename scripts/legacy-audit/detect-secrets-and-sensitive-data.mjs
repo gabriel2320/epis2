@@ -4,7 +4,18 @@ import path from 'node:path';
 import { REPOS, SKIP_DIR_NAMES, SECRET_PATTERNS, PHI_HINT_PATTERNS } from './paths.mjs';
 
 const OUT = path.join(REPOS.EPIS2, 'migration', 'reports', 'secrets-scan-latest.json');
-const TEXT_EXT = new Set(['.ts', '.tsx', '.js', '.mjs', '.json', '.env', '.yaml', '.yml', '.md', '.sql']);
+const TEXT_EXT = new Set([
+  '.ts',
+  '.tsx',
+  '.js',
+  '.mjs',
+  '.json',
+  '.env',
+  '.yaml',
+  '.yml',
+  '.md',
+  '.sql',
+]);
 
 function* walk(root, limit = 8000) {
   let n = 0;
@@ -61,5 +72,12 @@ for (const [name, root] of Object.entries(REPOS)) {
 }
 
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
-fs.writeFileSync(OUT, JSON.stringify({ scannedAt: new Date().toISOString(), count: findings.length, findings }, null, 2));
+fs.writeFileSync(
+  OUT,
+  JSON.stringify(
+    { scannedAt: new Date().toISOString(), count: findings.length, findings },
+    null,
+    2,
+  ),
+);
 console.log(`secrets-scan: ${findings.length} hallazgos (sin contenido) → ${OUT}`);

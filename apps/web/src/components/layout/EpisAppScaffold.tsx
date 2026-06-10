@@ -1,9 +1,5 @@
 import type { ReactNode } from 'react';
-import {
-  Box,
-  EpisAppShellLayout,
-  type EpisNavigationRailItem,
-} from '@epis2/epis2-ui';
+import { Box, EpisAppShellLayout, type EpisNavigationRailItem } from '@epis2/epis2-ui';
 import type { EpisScreenKind } from '../../quality/uiDensityRules.js';
 
 export type EpisAppScaffoldProps = {

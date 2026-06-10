@@ -17,7 +17,7 @@ for (const token of [
 }
 
 const api = readFileSync(join(root, 'apps/api/src/dashboard/icu.ts'), 'utf8');
-if (!api.includes('ventilation') || !api.includes("idc: 44")) {
+if (!api.includes('ventilation') || !api.includes('idc: 44')) {
   errors.push('icu.ts sin ventilación o IDC 44');
 }
 

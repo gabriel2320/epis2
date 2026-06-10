@@ -1,7 +1,4 @@
-import type {
-  Hl7ValidateResponse,
-  QualityDashboardResponse,
-} from '@epis2/contracts';
+import type { Hl7ValidateResponse, QualityDashboardResponse } from '@epis2/contracts';
 import { apiFetch } from './client.js';
 
 export function fetchQualityDashboard() {
@@ -17,12 +14,14 @@ export function validateHl7Message(message: string) {
 }
 
 export function quarantineHl7Message(message: string) {
-  return apiFetch<{ readOnly: true; quarantineId: string; messageType?: string; status: 'quarantine' }>(
-    '/api/interop/hl7/quarantine',
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message }),
-    },
-  );
+  return apiFetch<{
+    readOnly: true;
+    quarantineId: string;
+    messageType?: string;
+    status: 'quarantine';
+  }>('/api/interop/hl7/quarantine', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message }),
+  });
 }

@@ -1,7 +1,10 @@
 export { EpisRadScreenShell, type EpisRadScreenShellProps } from './EpisRadScreenShell.js';
 export { EpisRadFormSurface, type EpisRadFormSurfaceProps } from './EpisRadFormSurface.js';
 export { EpisRadGridSurface, type EpisRadGridSurfaceProps } from './EpisRadGridSurface.js';
-export { EpisRadDocumentSurface, type EpisRadDocumentSurfaceProps } from './EpisRadDocumentSurface.js';
+export {
+  EpisRadDocumentSurface,
+  type EpisRadDocumentSurfaceProps,
+} from './EpisRadDocumentSurface.js';
 export {
   EpisRadContextMenu,
   type EpisRadContextMenuItem,

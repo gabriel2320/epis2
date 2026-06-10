@@ -2,11 +2,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync, appendFileSync } fr
 import { dirname, join } from 'node:path';
 
 /** Tier L0 — aplicable con dev:agent:ollama-write --apply */
-export const LOW_RISK_TIER_L0_PREFIXES = [
-  'reports/',
-  'docs/product/',
-  'docs/design/',
-];
+export const LOW_RISK_TIER_L0_PREFIXES = ['reports/', 'docs/product/', 'docs/design/'];
 
 /** Tier L0 archivos sueltos */
 export const LOW_RISK_TIER_L0_FILES = [];

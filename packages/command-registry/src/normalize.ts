@@ -7,10 +7,7 @@ export function normalizeCommandText(raw: string): string {
     .replace(/\btorax\b/gi, 'torax')
     .replace(/\s+/g, ' ');
 
-  const lowered = trimmed
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/\p{M}/gu, '');
+  const lowered = trimmed.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '');
 
   return lowered.replace(/^(por favor|necesito|quiero)\s+/, '');
 }

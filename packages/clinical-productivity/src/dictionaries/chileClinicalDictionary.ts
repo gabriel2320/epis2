@@ -23,7 +23,12 @@ const TERMS: readonly ChileClinicalTerm[] = [
   { id: 'abbr-ta', term: 'TA', formal: 'tensión arterial', category: 'abbreviation' },
   { id: 'abbr-fc', term: 'FC', formal: 'frecuencia cardíaca', category: 'abbreviation' },
   { id: 'abbr-fr', term: 'FR', formal: 'frecuencia respiratoria', category: 'abbreviation' },
-  { id: 'med-ceftriaxona', term: 'ceftriaxona', category: 'medication', expansions: ['Ceftriaxona 1 g IV'] },
+  {
+    id: 'med-ceftriaxona',
+    term: 'ceftriaxona',
+    category: 'medication',
+    expansions: ['Ceftriaxona 1 g IV'],
+  },
   { id: 'med-paracetamol', term: 'paracetamol', category: 'medication' },
   { id: 'lab-hemograma', term: 'hemograma', category: 'lab' },
   { id: 'lab-pcr', term: 'PCR', formal: 'proteína C reactiva', category: 'lab' },
@@ -55,9 +60,7 @@ export function findClinicalTerms(query: string, limit = 12): ChileClinicalTerm[
 export function isWhitelistedClinicalTerm(token: string): boolean {
   const normalized = token.trim().toLowerCase();
   return TERMS.some(
-    (t) =>
-      t.term.toLowerCase() === normalized ||
-      t.formal?.toLowerCase() === normalized,
+    (t) => t.term.toLowerCase() === normalized || t.formal?.toLowerCase() === normalized,
   );
 }
 

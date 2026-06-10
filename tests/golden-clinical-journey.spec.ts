@@ -118,9 +118,7 @@ describe('Golden Clinical Journey', () => {
     });
 
     it('5. página evolución desde blueprint único', async () => {
-      const { getBlueprintById, assertRegistryInvariants } = await import(
-        '@epis2/clinical-forms'
-      );
+      const { getBlueprintById, assertRegistryInvariants } = await import('@epis2/clinical-forms');
       expect(assertRegistryInvariants()).toEqual([]);
       const bp = getBlueprintById('evolution_note');
       expect(bp?.routePath).toBe('/espacio/evolucion');

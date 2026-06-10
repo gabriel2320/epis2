@@ -3,10 +3,7 @@ import { getCommandChipsForRole, getCommandBarAiHint } from './chips.js';
 
 describe('getCommandChipsForRole', () => {
   it('médico ve evolución y receta, no MAR', () => {
-    const chips = getCommandChipsForRole('physician', [
-      'command.execute',
-      'dashboard.read',
-    ]);
+    const chips = getCommandChipsForRole('physician', ['command.execute', 'dashboard.read']);
     const samples = chips.map((c) => c.sampleEs);
     const rx = chips.find((c) => c.intent === 'prepare_prescription');
     expect(samples.some((s) => /evoluciona/.test(s))).toBe(true);

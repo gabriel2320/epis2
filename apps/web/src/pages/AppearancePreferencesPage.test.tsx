@@ -28,7 +28,9 @@ describe('AppearancePreferencesPage', () => {
     expect(screen.queryByTestId('epis2-accent-calmGreen')).not.toBeInTheDocument();
 
     await user.click(screen.getByTestId('epis2-accent-tealBlue'));
-    const stored = JSON.parse(window.localStorage.getItem('epis2-theme-preferences-v2') ?? '{}') as {
+    const stored = JSON.parse(
+      window.localStorage.getItem('epis2-theme-preferences-v2') ?? '{}',
+    ) as {
       accent?: string;
     };
     expect(stored.accent).toBe('tealBlue');

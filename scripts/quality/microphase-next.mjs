@@ -25,12 +25,18 @@ if (!next) {
   );
   process.exit(0);
 }
-console.log(JSON.stringify({
-  id: next.id,
-  name: next.name,
-  wave: next.wave,
-  waveName: next.waveName,
-  dependsOn: next.dependsOn,
-  state: next.state,
-  evidenceRequired: next.evidenceRequired,
-}, null, 2));
+console.log(
+  JSON.stringify(
+    {
+      id: next.id,
+      name: next.name,
+      wave: next.wave,
+      waveName: next.waveName,
+      dependsOn: next.dependsOn,
+      state: next.state,
+      evidenceRequired: next.evidenceRequired,
+    },
+    null,
+    2,
+  ),
+);

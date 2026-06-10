@@ -77,8 +77,7 @@ export function WorklistDraftGrid({
         field: 'updatedAt',
         headerName: copy.dashboard.gridColumnUpdated,
         width: 170,
-        valueFormatter: (value) =>
-          value ? new Date(String(value)).toLocaleString('es-CL') : '',
+        valueFormatter: (value) => (value ? new Date(String(value)).toLocaleString('es-CL') : ''),
       });
     }
     return cols;

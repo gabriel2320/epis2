@@ -35,12 +35,16 @@ function runScript(relPath, extraArgs = []) {
 }
 
 async function main() {
-  const routes = await resolveAllOllamaRoutes(process.env.OLLAMA_BASE_URL ?? 'http://127.0.0.1:11434');
+  const routes = await resolveAllOllamaRoutes(
+    process.env.OLLAMA_BASE_URL ?? 'http://127.0.0.1:11434',
+  );
   const planRoute = routes['dev-plan'];
   const writeRoute = routes['dev-write'];
   console.log('EPIS2 dev:agent:ollama-auto\n');
   console.log(`  Ollama ${planRoute.baseUrl}`);
-  console.log(`  Estación tier ${planRoute.tier} · dev-plan → ${planRoute.model} · dev-write → ${writeRoute.model}`);
+  console.log(
+    `  Estación tier ${planRoute.tier} · dev-plan → ${planRoute.model} · dev-write → ${writeRoute.model}`,
+  );
 
   const ready = await ensureOllamaReady({ function: 'dev-plan' });
   if (!ready.ready) {
@@ -100,7 +104,9 @@ async function main() {
 
   console.log(`\nollama-auto OK → ${outPath}`);
   if (!apply) {
-    console.log('  Revisar planes. Aplicar L0: npm run dev:agent:ollama-auto -- --apply --skip-plan');
+    console.log(
+      '  Revisar planes. Aplicar L0: npm run dev:agent:ollama-auto -- --apply --skip-plan',
+    );
   } else {
     console.log('  Revisar diff. Commit humano explícito.');
   }

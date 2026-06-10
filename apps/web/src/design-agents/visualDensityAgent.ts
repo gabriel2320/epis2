@@ -20,7 +20,10 @@ export async function visualDensityAgent(
       const violations: string[] = [];
       if (cardCountEstimate > 6) violations.push('Exceso de cards');
       if (iconCountEstimate > 12) violations.push('Exceso de iconos');
-      const score = Math.max(0, 100 - violations.length * 25 - Math.max(0, cardCountEstimate - 4) * 5);
+      const score = Math.max(
+        0,
+        100 - violations.length * 25 - Math.max(0, cardCountEstimate - 4) * 5,
+      );
       return {
         score,
         violations,

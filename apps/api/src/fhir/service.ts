@@ -58,11 +58,7 @@ export async function exportFhirPatient(db: Database, patientId: string) {
 }
 
 export async function exportFhirEncounter(db: Database, encounterId: string) {
-  const [enc] = await db
-    .select()
-    .from(encounters)
-    .where(eq(encounters.id, encounterId))
-    .limit(1);
+  const [enc] = await db.select().from(encounters).where(eq(encounters.id, encounterId)).limit(1);
   if (!enc) throw new FhirExportError('Encuentro no encontrado', 'NOT_FOUND');
   const resource = toFhirEncounter({
     id: enc.id,
@@ -74,11 +70,7 @@ export async function exportFhirEncounter(db: Database, encounterId: string) {
 }
 
 export async function exportFhirDocumentReference(db: Database, noteId: string) {
-  const [note] = await db
-    .select()
-    .from(clinicalNotes)
-    .where(eq(clinicalNotes.id, noteId))
-    .limit(1);
+  const [note] = await db.select().from(clinicalNotes).where(eq(clinicalNotes.id, noteId)).limit(1);
   if (!note) throw new FhirExportError('Nota no encontrada', 'NOT_FOUND');
   const patient = await getPatientById(db, note.patientId);
   const resource = toFhirDocumentReference(
@@ -136,10 +128,7 @@ export async function exportFhirPatientBundle(db: Database, patientId: string) {
   if (demoCaseCode !== undefined) patientSource.demoIdentifier = demoCaseCode;
   const patientResource = toFhirPatient(patientSource);
 
-  const encRows = await db
-    .select()
-    .from(encounters)
-    .where(eq(encounters.patientId, patientId));
+  const encRows = await db.select().from(encounters).where(eq(encounters.patientId, patientId));
   const encounterResources = encRows.map((enc) =>
     toFhirEncounter({ id: enc.id, patientId: enc.patientId, status: enc.status }),
   );

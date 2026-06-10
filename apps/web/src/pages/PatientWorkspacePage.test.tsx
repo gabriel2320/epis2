@@ -20,8 +20,11 @@ const { fetchPatientDetail, fetchPatientClinicalAlerts, fetchPatientLongitudinal
 vi.mock('@tanstack/react-router', () => ({
   useSearch: () => ({ patientId }),
   useNavigate: () => vi.fn(),
-  useRouterState: ({ select }: { select: (s: { location: { pathname: string; searchStr?: string } }) => unknown }) =>
-    select({ location: { pathname: '/espacio/ficha', searchStr: '' } }),
+  useRouterState: ({
+    select,
+  }: {
+    select: (s: { location: { pathname: string; searchStr?: string } }) => unknown;
+  }) => select({ location: { pathname: '/espacio/ficha', searchStr: '' } }),
   Link: ({ children }: { children?: unknown }) => <span>{children as string}</span>,
 }));
 
@@ -104,7 +107,9 @@ describe('PatientWorkspacePage', () => {
         },
       ],
       encounters: [],
-      timeline: [{ id: 't1', kind: 'encounter', at: new Date().toISOString(), title: 'Consulta demo' }],
+      timeline: [
+        { id: 't1', kind: 'encounter', at: new Date().toISOString(), title: 'Consulta demo' },
+      ],
     });
     fetchPatientClinicalAlerts.mockResolvedValue({
       patientId,

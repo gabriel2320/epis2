@@ -43,9 +43,7 @@ export function assertPatchDraftStatus(from: string, to: string): void {
 /** Campos que la IA no puede inyectar en formularios/borradores. */
 export const AI_BLOCKED_FIELD_KEYS = /^status$|^approve|^approved$|^firma$/i;
 
-export function sanitizeAiSuggestedFields(
-  fields: Record<string, string>,
-): Record<string, string> {
+export function sanitizeAiSuggestedFields(fields: Record<string, string>): Record<string, string> {
   return Object.fromEntries(
     Object.entries(fields).filter(([key]) => !AI_BLOCKED_FIELD_KEYS.test(key)),
   );

@@ -4,7 +4,11 @@ import { getOllamaEnv, isModelInstalled, probeOllamaNative } from './ollama-core
 import { resolveOllamaRoute } from './model-router.mjs';
 
 export { getOllamaEnv, isModelInstalled, probeOllamaNative } from './ollama-core.mjs';
-export { resolveOllamaRoute, resolveAllOllamaRoutes, pickModelForFunction } from './model-router.mjs';
+export {
+  resolveOllamaRoute,
+  resolveAllOllamaRoutes,
+  pickModelForFunction,
+} from './model-router.mjs';
 export { getWorkstationProfile, computeWorkstationTier } from './workstation-profile.mjs';
 
 /**

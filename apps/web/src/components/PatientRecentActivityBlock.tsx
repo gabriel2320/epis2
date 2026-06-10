@@ -27,7 +27,10 @@ export function PatientRecentActivityBlock({
   const items = events.slice(0, maxEvents);
 
   return (
-    <EpisWorkspaceSection title={copy.activePatient.recentActivityTitle} testId="epis2-recent-activity">
+    <EpisWorkspaceSection
+      title={copy.activePatient.recentActivityTitle}
+      testId="epis2-recent-activity"
+    >
       <Stack spacing={1}>
         {items.length === 0 ? (
           <Typography variant="body2" color="text.secondary">

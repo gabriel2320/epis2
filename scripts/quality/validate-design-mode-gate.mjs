@@ -10,9 +10,7 @@ const errors = [];
 const env = readFileSync(join(root, 'apps/web/src/design/designModeEnv.ts'), 'utf8');
 const provider = readFileSync(join(root, 'apps/web/src/design/EpisDesignModeProvider.tsx'), 'utf8');
 const appProvidersPath = join(root, 'apps/web/src/AppProviders.tsx');
-const appProviders = existsSync(appProvidersPath)
-  ? readFileSync(appProvidersPath, 'utf8')
-  : '';
+const appProviders = existsSync(appProvidersPath) ? readFileSync(appProvidersPath, 'utf8') : '';
 const router = readFileSync(join(root, 'apps/web/src/routes/router.tsx'), 'utf8');
 const copy = readFileSync(join(root, 'packages/design-system/src/copy/es.ts'), 'utf8');
 

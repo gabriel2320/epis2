@@ -1,7 +1,4 @@
-import {
-  buildClinicalAssistantPreamble,
-  formatContextBlock,
-} from './clinicalPromptPolicy.js';
+import { buildClinicalAssistantPreamble, formatContextBlock } from './clinicalPromptPolicy.js';
 import { getDraftPromptSpec } from './draftPromptCatalog.js';
 
 export type DraftAssistPromptInput = {

@@ -119,4 +119,3 @@ export async function buildApp(config: AppConfig) {
 
   return app;
 }
-

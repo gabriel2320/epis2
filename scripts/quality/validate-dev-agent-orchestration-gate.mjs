@@ -49,7 +49,13 @@ const text = existsSync(doc) ? readFileSync(doc, 'utf8') : '';
 if (!text.includes('dev:agent:ollama')) errors.push('orquestación sin Ollama dev assist');
 
 const subText = existsSync(subDoc) ? readFileSync(subDoc, 'utf8') : '';
-for (const id of ['golden-guardian', 'layers-integrator', 'ollama-clinical', 'ollama-dev-writer', 'gate-runner']) {
+for (const id of [
+  'golden-guardian',
+  'layers-integrator',
+  'ollama-clinical',
+  'ollama-dev-writer',
+  'gate-runner',
+]) {
   if (!subText.includes(id)) errors.push(`EPIS2_DEV_SUBAGENTS sin ${id}`);
 }
 
@@ -80,7 +86,9 @@ const brief = readFileSync(join(root, 'scripts/dev-agent/brief.mjs'), 'utf8');
 if (!brief.includes('buildDevBrief')) errors.push('brief.mjs incompleto');
 
 if (errors.length) {
-  console.error('dev-agent-orchestration-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
+  console.error(
+    'dev-agent-orchestration-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
+  );
   process.exit(1);
 }
 console.log('dev-agent-orchestration-gate OK — sesión IA + subagentes + brief integrados');

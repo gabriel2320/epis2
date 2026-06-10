@@ -36,13 +36,13 @@ function run(label, cmd, args, env = process.env) {
 
 run('verify-m3-signoff (theme + vitest M3)', 'node', ['scripts/quality/verify-m3-signoff.mjs']);
 
-const dbUrl =
-  process.env.DATABASE_URL ?? 'postgresql://epis2_app:epis2@127.0.0.1:5433/epis2';
-run('m3-visual-signoff E2E (V1–V6)', 'npx', [
-  'playwright',
-  'test',
-  'e2e/m3-visual-signoff.spec.ts',
-], { ...process.env, DATABASE_URL: dbUrl });
+const dbUrl = process.env.DATABASE_URL ?? 'postgresql://epis2_app:epis2@127.0.0.1:5433/epis2';
+run(
+  'm3-visual-signoff E2E (V1–V6)',
+  'npx',
+  ['playwright', 'test', 'e2e/m3-visual-signoff.spec.ts'],
+  { ...process.env, DATABASE_URL: dbUrl },
+);
 
 const reportPath = join(root, 'reports', `epis2-m3-human-pilot-${date}.md`);
 mkdirSync(join(root, 'reports'), { recursive: true });

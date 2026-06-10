@@ -5,7 +5,13 @@ import { beforeEach, expect, it } from 'vitest';
 import { resolveCommand, resolveCommandWithAutoConfirm } from '@epis2/command-registry';
 import { buildApp } from '../app.js';
 import { getDatabase } from '../db/client.js';
-import { beds, clinicalNotes, inpatientAdmissions, patientAllergies, problems } from '../db/schema.js';
+import {
+  beds,
+  clinicalNotes,
+  inpatientAdmissions,
+  patientAllergies,
+  problems,
+} from '../db/schema.js';
 import { resetInpatientDemoCensus } from '../inpatient/integrationReset.js';
 import { testApiConfig } from '../testConfig.js';
 

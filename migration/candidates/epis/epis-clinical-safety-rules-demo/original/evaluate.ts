@@ -1,5 +1,9 @@
-import { checkAceInhibitorInPregnancy, checkBetaLactamAllergy, checkRenalDoseAdjustment } from "./rules.js";
-import type { ClinicalSafetyInput, ClinicalSafetyResult } from "./types.js";
+import {
+  checkAceInhibitorInPregnancy,
+  checkBetaLactamAllergy,
+  checkRenalDoseAdjustment,
+} from './rules.js';
+import type { ClinicalSafetyInput, ClinicalSafetyResult } from './types.js';
 
 export function evaluateClinicalSafety(input: ClinicalSafetyInput): ClinicalSafetyResult {
   const warnings = [
@@ -17,10 +21,10 @@ export function evaluateClinicalSafety(input: ClinicalSafetyInput): ClinicalSafe
 
 export function formatSafetyWarningsForPrompt(result: ClinicalSafetyResult): string {
   if (!result.warnings.length) {
-    return "ALERTAS DE SEGURIDAD (demo CDS): ninguna regla disparada en este contexto.";
+    return 'ALERTAS DE SEGURIDAD (demo CDS): ninguna regla disparada en este contexto.';
   }
   return [
-    "ALERTAS DE SEGURIDAD (demo CDS — no bloqueantes, revisión clínica obligatoria):",
+    'ALERTAS DE SEGURIDAD (demo CDS — no bloqueantes, revisión clínica obligatoria):',
     ...result.warnings.map((w) => `- [${w.severity}] ${w.message}: ${w.detail}`),
-  ].join("\n");
+  ].join('\n');
 }

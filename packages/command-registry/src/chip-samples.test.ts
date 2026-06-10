@@ -7,7 +7,10 @@ describe('pickChipSampleEs', () => {
       pickChipSampleEs(['prepara receta', 'preparar receta médica', 'receta'], 'Receta médica'),
     ).toBe('preparar receta médica');
     expect(
-      pickChipSampleEs(['solicita laboratorio', 'solicitar laboratorio'], 'Solicitud de laboratorio'),
+      pickChipSampleEs(
+        ['solicita laboratorio', 'solicitar laboratorio'],
+        'Solicitud de laboratorio',
+      ),
     ).toBe('solicitar laboratorio');
   });
 });

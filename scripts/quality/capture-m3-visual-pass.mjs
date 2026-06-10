@@ -25,19 +25,14 @@ mkdirSync(evidenceDir, { recursive: true });
 
 console.log(`\nCaptura visual → ${evidenceDir}\n`);
 
-const dbUrl =
-  process.env.DATABASE_URL ?? 'postgresql://epis2_app:epis2@127.0.0.1:5433/epis2';
+const dbUrl = process.env.DATABASE_URL ?? 'postgresql://epis2_app:epis2@127.0.0.1:5433/epis2';
 
-const result = spawnSync(
-  'npx',
-  ['playwright', 'test', 'e2e/m3-visual-signoff-capture.spec.ts'],
-  {
-    cwd: root,
-    stdio: 'inherit',
-    shell: process.platform === 'win32',
-    env: { ...process.env, DATABASE_URL: dbUrl, M3_VISUAL_EVIDENCE_DIR: evidenceDir },
-  },
-);
+const result = spawnSync('npx', ['playwright', 'test', 'e2e/m3-visual-signoff-capture.spec.ts'], {
+  cwd: root,
+  stdio: 'inherit',
+  shell: process.platform === 'win32',
+  env: { ...process.env, DATABASE_URL: dbUrl, M3_VISUAL_EVIDENCE_DIR: evidenceDir },
+});
 
 if (result.status !== 0) {
   console.error('capture-m3-visual-pass FAILED — revisar Playwright');

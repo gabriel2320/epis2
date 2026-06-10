@@ -73,7 +73,11 @@ export function ResultsInboxPage() {
 
   if (!patientId) {
     return (
-      <Stack spacing={2} sx={epis2ShellContentIslandSx} data-testid="epis2-results-inbox-no-patient">
+      <Stack
+        spacing={2}
+        sx={epis2ShellContentIslandSx}
+        data-testid="epis2-results-inbox-no-patient"
+      >
         <Alert severity="info">{copy.activePatient.pinHint}</Alert>
         <ClinicalPageNav showFicha={false} />
       </Stack>

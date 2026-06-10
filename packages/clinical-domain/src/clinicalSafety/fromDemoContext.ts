@@ -6,12 +6,18 @@ function parseMedicationLines(text: string): SafetyMedication[] {
     .split(/\n|·|;/)
     .map((s) => s.trim())
     .filter(Boolean)
-    .map((line) => ({ name: line.replace(/\s*\(demo\)\s*$/i, '').trim(), status: 'active' as const }));
+    .map((line) => ({
+      name: line.replace(/\s*\(demo\)\s*$/i, '').trim(),
+      status: 'active' as const,
+    }));
 }
 
 function parseLabLines(text: string): SafetyLab[] {
   if (!text.trim()) return [];
-  const parts = text.split(/·|;/).map((s) => s.trim()).filter(Boolean);
+  const parts = text
+    .split(/·|;/)
+    .map((s) => s.trim())
+    .filter(Boolean);
   return parts.map((part) => {
     const match = /^(.+?)\s+([\d,.]+)\s*(.*)$/.exec(part);
     if (match) {
@@ -29,7 +35,11 @@ function extractAllergies(
   problems: { description: string }[],
 ): SafetyAllergy[] {
   const found: SafetyAllergy[] = [];
-  const blob = [summaryFields.clinicalAlerts, summaryFields.activeProblems, ...problems.map((p) => p.description)]
+  const blob = [
+    summaryFields.clinicalAlerts,
+    summaryFields.activeProblems,
+    ...problems.map((p) => p.description),
+  ]
     .filter(Boolean)
     .join(' ');
   if (/penicilina|beta\s*-?\s*lact/i.test(blob)) {

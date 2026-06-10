@@ -39,7 +39,9 @@ describe('EpisAppearancePreferencesPanel', () => {
     const panel = screen.getByTestId('epis2-appearance-preferences');
     await user.click(within(panel).getByTestId('epis2-contrast-high'));
 
-    const stored = JSON.parse(window.localStorage.getItem('epis2-theme-preferences-v2') ?? '{}') as {
+    const stored = JSON.parse(
+      window.localStorage.getItem('epis2-theme-preferences-v2') ?? '{}',
+    ) as {
       contrast?: string;
     };
     expect(stored.contrast).toBe('high');

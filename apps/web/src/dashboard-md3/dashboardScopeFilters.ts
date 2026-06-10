@@ -19,9 +19,14 @@ export const DEFAULT_DASHBOARD_SCOPE: DashboardScopeFilters = {
   shift: 'Turno actual',
 };
 
-export function activeScopeFilterChips(filters: DashboardScopeFilters): { key: keyof DashboardScopeFilters; label: string }[] {
+export function activeScopeFilterChips(
+  filters: DashboardScopeFilters,
+): { key: keyof DashboardScopeFilters; label: string }[] {
   const chips: { key: keyof DashboardScopeFilters; label: string }[] = [];
-  for (const [key, value] of Object.entries(filters) as [keyof DashboardScopeFilters, string | undefined][]) {
+  for (const [key, value] of Object.entries(filters) as [
+    keyof DashboardScopeFilters,
+    string | undefined,
+  ][]) {
     if (value && value !== 'Todas') {
       chips.push({ key, label: value });
     }

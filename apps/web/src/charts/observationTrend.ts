@@ -31,7 +31,12 @@ export function buildObservationTrend(
 
   return {
     xAxisLabels: points.map((p) =>
-      p.at.toLocaleString('es-CL', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }),
+      p.at.toLocaleString('es-CL', {
+        day: '2-digit',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
     ),
     values: points.map((p) => p.value),
   };

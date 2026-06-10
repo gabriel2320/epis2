@@ -58,10 +58,7 @@ for (const token of [
   }
 }
 
-const workspace = readFileSync(
-  join(root, 'apps/web/src/pages/PatientWorkspacePage.tsx'),
-  'utf8',
-);
+const workspace = readFileSync(join(root, 'apps/web/src/pages/PatientWorkspacePage.tsx'), 'utf8');
 if (!workspace.includes('PatientSummaryAntecedentsBlock')) {
   errors.push('PatientWorkspacePage sin PatientSummaryAntecedentsBlock');
 }

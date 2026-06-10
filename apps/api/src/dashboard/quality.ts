@@ -43,7 +43,12 @@ export async function getQualityDashboardSummary(db: Database) {
   const names = patientRows.map((p) => p.displayName);
 
   const surveillanceMatrix = [
-    { organism: 'K. pneumoniae BLEE', unit: 'UCI', casesLast30d: 2, alertLevel: 'elevated' as const },
+    {
+      organism: 'K. pneumoniae BLEE',
+      unit: 'UCI',
+      casesLast30d: 2,
+      alertLevel: 'elevated' as const,
+    },
     { organism: 'C. difficile', unit: 'Medicina', casesLast30d: 1, alertLevel: 'normal' as const },
     { organism: 'MRSA', unit: 'Cirugía', casesLast30d: 3, alertLevel: 'outbreak' as const },
   ];
@@ -96,8 +101,18 @@ export async function getQualityDashboardSummary(db: Database) {
   }));
 
   const endemicCurves = [
-    { indicator: 'ITU asociada a catéter', endemicRate: 2.1, observedRate: 1.8, periodLabel: 'Q2 2026' },
-    { indicator: 'Neumonía asociada a VM', endemicRate: 5.4, observedRate: 6.2, periodLabel: 'Q2 2026' },
+    {
+      indicator: 'ITU asociada a catéter',
+      endemicRate: 2.1,
+      observedRate: 1.8,
+      periodLabel: 'Q2 2026',
+    },
+    {
+      indicator: 'Neumonía asociada a VM',
+      endemicRate: 5.4,
+      observedRate: 6.2,
+      periodLabel: 'Q2 2026',
+    },
   ];
 
   const sentinelEvents = [
@@ -134,13 +149,28 @@ export async function getQualityDashboardSummary(db: Database) {
   ];
 
   const recordAudits = [
-    { recordType: 'Evoluciones médicas', sampleSize: 40, compliancePercent: 92, auditor: 'Auditoría interna' },
-    { recordType: 'Consentimientos informados', sampleSize: 25, compliancePercent: 88, auditor: 'Calidad clínica' },
+    {
+      recordType: 'Evoluciones médicas',
+      sampleSize: 40,
+      compliancePercent: 92,
+      auditor: 'Auditoría interna',
+    },
+    {
+      recordType: 'Consentimientos informados',
+      sampleSize: 25,
+      compliancePercent: 88,
+      auditor: 'Calidad clínica',
+    },
   ];
 
   const oirsClaims = [
     { claimId: 'OIRS-8842', category: 'Atención', daysOpen: 5, status: 'investigating' as const },
-    { claimId: 'OIRS-8845', category: 'Tiempos de espera', daysOpen: 2, status: 'received' as const },
+    {
+      claimId: 'OIRS-8845',
+      category: 'Tiempos de espera',
+      daysOpen: 2,
+      status: 'received' as const,
+    },
   ];
 
   const workClimateSurveys = [
@@ -221,8 +251,9 @@ export async function getQualityDashboardSummary(db: Database) {
       openSentinelEvents: sentinelEvents.filter(
         (e) => e.status === 'open' || e.status === 'under_review',
       ).length,
-      pendingAccreditationReviews: accreditationIndicators.filter((i) => i.observedPercent < i.targetPercent)
-        .length,
+      pendingAccreditationReviews: accreditationIndicators.filter(
+        (i) => i.observedPercent < i.targetPercent,
+      ).length,
     },
     iaasAdvancedPanels: IAAS_ADVANCED_PANELS,
     surveillanceMatrix,

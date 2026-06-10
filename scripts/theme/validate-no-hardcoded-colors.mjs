@@ -52,7 +52,9 @@ export async function validateNoHardcodedColors() {
       const content = await fs.readFile(file, 'utf8');
       const matches = content.match(HEX);
       if (matches?.length) {
-        violations.push(`${rel} → ${matches.length} hex hardcodeado(s): ${[...new Set(matches)].join(', ')}`);
+        violations.push(
+          `${rel} → ${matches.length} hex hardcodeado(s): ${[...new Set(matches)].join(', ')}`,
+        );
       }
     }
   }

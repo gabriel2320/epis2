@@ -101,7 +101,13 @@ export function EpisFloatingCommandDock({
         {compact ? (
           <Box
             component="h2"
-            sx={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}
+            sx={{
+              position: 'absolute',
+              width: 1,
+              height: 1,
+              overflow: 'hidden',
+              clip: 'rect(0 0 0 0)',
+            }}
           >
             {prompt}
           </Box>
@@ -116,7 +122,13 @@ export function EpisFloatingCommandDock({
           </EpisM3Text>
         )}
 
-        <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap" sx={{ mb: 1, gap: 0.75 }}>
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          flexWrap="wrap"
+          sx={{ mb: 1, gap: 0.75 }}
+        >
           {roleLabel ? (
             <EpisChip
               size="small"
@@ -153,7 +165,11 @@ export function EpisFloatingCommandDock({
           ) : null}
         </Stack>
 
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ sm: 'flex-start' }}>
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          spacing={1.5}
+          alignItems={{ sm: 'flex-start' }}
+        >
           <EpisTextField
             fullWidth
             label={label}
@@ -172,7 +188,11 @@ export function EpisFloatingCommandDock({
                 endAdornment:
                   aiAvailable === true ? (
                     <InputAdornment position="end" sx={{ mr: 0.25 }}>
-                      <AutoAwesomeIcon sx={{ color: clinical?.approved.main }} fontSize="small" aria-hidden />
+                      <AutoAwesomeIcon
+                        sx={{ color: clinical?.approved.main }}
+                        fontSize="small"
+                        aria-hidden
+                      />
                     </InputAdornment>
                   ) : undefined,
               },

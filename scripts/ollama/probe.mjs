@@ -15,7 +15,9 @@ console.log(`  Clínica: ${status.model} · ${status.modelReady ? '✓' : '✗'}
 console.log(`  Up:     ${status.up ? '✓' : '✗'}`);
 
 if (status.models?.length) {
-  console.log(`  Tags:   ${status.models.slice(0, 8).join(', ')}${status.models.length > 8 ? '…' : ''}`);
+  console.log(
+    `  Tags:   ${status.models.slice(0, 8).join(', ')}${status.models.length > 8 ? '…' : ''}`,
+  );
 }
 
 console.log('\n' + formatRouteTable(routes));

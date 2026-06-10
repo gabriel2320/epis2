@@ -22,14 +22,19 @@ function runGate(script) {
 
 runGate('validate-command-center-layout-gate.mjs');
 
-const formPage = readFileSync(join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'), 'utf8');
+const formPage = readFileSync(
+  join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'),
+  'utf8',
+);
 if (!formPage.includes('EpisClinicalFormActionBar')) {
   errors.push('GeneratedClinicalFormPage sin EpisClinicalFormActionBar');
 }
 
 const actionBarJsx = (formPage.match(/<EpisClinicalFormActionBar/g) ?? []).length;
 if (actionBarJsx !== 1) {
-  errors.push(`GeneratedClinicalFormPage debe renderizar una sola ActionBar (encontradas: ${actionBarJsx})`);
+  errors.push(
+    `GeneratedClinicalFormPage debe renderizar una sola ActionBar (encontradas: ${actionBarJsx})`,
+  );
 }
 
 if (errors.length) {

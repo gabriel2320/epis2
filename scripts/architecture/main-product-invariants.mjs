@@ -44,7 +44,9 @@ export async function validate() {
     const manifest = await readJsonFromRepo('legacy-import-manifest.json');
     const list = manifest.entries ?? manifest.imports;
     if (!manifest.version || !Array.isArray(list)) {
-      details.push('legacy-import-manifest.json → estructura inválida (requiere version y entries[])');
+      details.push(
+        'legacy-import-manifest.json → estructura inválida (requiere version y entries[])',
+      );
     }
   } catch (e) {
     details.push(`legacy-import-manifest.json → ${e.message}`);

@@ -28,10 +28,7 @@ export function PatientSummaryDocumentsBlock({
   maxItems = 2,
 }: PatientSummaryDocumentsBlockProps) {
   return (
-    <EpisWorkspaceSection
-      title={copy.activePatient.documentsTitle}
-      testId="epis2-ficha-documents"
-    >
+    <EpisWorkspaceSection title={copy.activePatient.documentsTitle} testId="epis2-ficha-documents">
       <Stack spacing={1}>
         {documents.length === 0 ? (
           <Typography variant="body2" color="text.secondary">
@@ -41,10 +38,7 @@ export function PatientSummaryDocumentsBlock({
           <List dense disablePadding>
             {documents.slice(0, maxItems).map((doc) => (
               <ListItem key={doc.id} disablePadding>
-                <ListItemText
-                  primary={doc.title}
-                  secondary={documentTypeLabel(doc.documentType)}
-                />
+                <ListItemText primary={doc.title} secondary={documentTypeLabel(doc.documentType)} />
               </ListItem>
             ))}
           </List>

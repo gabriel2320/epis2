@@ -28,7 +28,9 @@ for (const trigger of ['.soap', '.alta', '.uci', '.epicrisis', '.iaas']) {
 }
 
 if (!textboxSrc.includes('TEXTBOX_EXTENDED_SNIPPET_TRIGGERS')) {
-  errors.push('textbox/clinicalSnippets debe exponer TEXTBOX_EXTENDED_SNIPPET_TRIGGERS (.epicrisis, .iaas)');
+  errors.push(
+    'textbox/clinicalSnippets debe exponer TEXTBOX_EXTENDED_SNIPPET_TRIGGERS (.epicrisis, .iaas)',
+  );
 }
 if (!textboxSrc.includes('expandClinicalSnippet')) {
   errors.push('textbox/clinicalSnippets debe re-exportar expandClinicalSnippet');

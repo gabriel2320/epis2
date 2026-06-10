@@ -15,8 +15,11 @@ const { fetchDashboardWork } = vi.hoisted(() => ({
 
 vi.mock('@tanstack/react-router', () => ({
   useSearch: () => ({ tab: 'work' }),
-  useRouterState: ({ select }: { select: (s: { location: { pathname: string; searchStr?: string } }) => unknown }) =>
-    select({ location: { pathname: '/epis2/dashboard', searchStr: '?tab=work' } }),
+  useRouterState: ({
+    select,
+  }: {
+    select: (s: { location: { pathname: string; searchStr?: string } }) => unknown;
+  }) => select({ location: { pathname: '/epis2/dashboard', searchStr: '?tab=work' } }),
   Link: ({ children, to, ...rest }: { children?: unknown; to: string }) => (
     <a href={to} {...rest}>
       {children as string}

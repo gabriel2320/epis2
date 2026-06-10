@@ -76,7 +76,12 @@ export function ServiceDashboardTab({
   const censusColumns = useMemo<ClinicalGridColDef[]>(
     () => [
       { field: 'bedLabel', headerName: copy.inpatient.census, flex: 1, minWidth: 120 },
-      { field: 'statusLabel', headerName: copy.dashboard.gridColumnPatient, flex: 1, minWidth: 160 },
+      {
+        field: 'statusLabel',
+        headerName: copy.dashboard.gridColumnPatient,
+        flex: 1,
+        minWidth: 160,
+      },
       { field: 'demoCaseCode', headerName: copy.dashboard.gridColumnDemoCase, width: 110 },
     ],
     [],
@@ -247,7 +252,12 @@ export function ServiceDashboardTab({
             <DashboardHomogeneousGrid
               rows={orderRows}
               columns={[
-                { field: 'title', headerName: copy.dashboard.gridColumnTitle, flex: 1, minWidth: 200 },
+                {
+                  field: 'title',
+                  headerName: copy.dashboard.gridColumnTitle,
+                  flex: 1,
+                  minWidth: 200,
+                },
                 { field: 'orderType', headerName: copy.dashboard.gridColumnType, width: 120 },
                 { field: 'priority', headerName: 'Prioridad', width: 100 },
               ]}
@@ -271,7 +281,12 @@ export function ServiceDashboardTab({
                 severity: c.severity,
               }))}
               columns={[
-                { field: 'title', headerName: copy.results.criticalSection, flex: 1, minWidth: 220 },
+                {
+                  field: 'title',
+                  headerName: copy.results.criticalSection,
+                  flex: 1,
+                  minWidth: 220,
+                },
                 { field: 'severity', headerName: 'Severidad', width: 100 },
               ]}
               emptyMessage={copy.inpatient.noCriticals}
@@ -302,8 +317,18 @@ export function ServiceDashboardTab({
                 patientId: d.patientId,
               }))}
               columns={[
-                { field: 'title', headerName: copy.dashboard.gridColumnPatient, flex: 1, minWidth: 180 },
-                { field: 'reason', headerName: copy.dashboard.gridColumnTitle, flex: 1, minWidth: 160 },
+                {
+                  field: 'title',
+                  headerName: copy.dashboard.gridColumnPatient,
+                  flex: 1,
+                  minWidth: 180,
+                },
+                {
+                  field: 'reason',
+                  headerName: copy.dashboard.gridColumnTitle,
+                  flex: 1,
+                  minWidth: 160,
+                },
               ]}
               emptyMessage={copy.longitudinal.emptySection}
               onRowClick={(row) => onOpenPatient(String(row.patientId))}
@@ -332,7 +357,12 @@ export function ServiceDashboardTab({
                 patientId: w.patientId ?? w.id,
               }))}
               columns={[
-                { field: 'title', headerName: copy.dashboard.gridColumnTitle, flex: 1, minWidth: 200 },
+                {
+                  field: 'title',
+                  headerName: copy.dashboard.gridColumnTitle,
+                  flex: 1,
+                  minWidth: 200,
+                },
               ]}
               emptyMessage={copy.longitudinal.emptySection}
               onRowClick={(row) => {

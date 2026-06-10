@@ -5,9 +5,9 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const gates = 'ABCDEFGHIJK'.split('').map(
-  (id) => `validate-tramo-${id.toLowerCase()}-closure-gate.mjs`,
-);
+const gates = 'ABCDEFGHIJK'
+  .split('')
+  .map((id) => `validate-tramo-${id.toLowerCase()}-closure-gate.mjs`);
 
 console.log('EPIS2 run-tramos-ak-closure-gates\n');
 

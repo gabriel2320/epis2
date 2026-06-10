@@ -38,7 +38,10 @@ export function ClinicalCopyPasteTools({
       event.preventDefault();
       const plain = event.clipboardData.getData('text/plain');
       const fromAi = plain.includes('[IA]') || aiSourceHint;
-      const origin = createTextOrigin(fromAi ? 'ai_suggestion' : 'paste', fromAi ? 'IA' : 'Portapapeles');
+      const origin = createTextOrigin(
+        fromAi ? 'ai_suggestion' : 'paste',
+        fromAi ? 'IA' : 'Portapapeles',
+      );
       onPastePlain(plain.replace(/\[IA\]/g, '').trim(), origin);
     },
     [onPastePlain, aiSourceHint],

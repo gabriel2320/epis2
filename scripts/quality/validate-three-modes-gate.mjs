@@ -24,9 +24,7 @@ for (const f of required) {
 
 const routerSrc = readFileSync(join(root, 'apps/web/src/routes/router.tsx'), 'utf8');
 const appProvidersPath = join(root, 'apps/web/src/AppProviders.tsx');
-const appProvidersSrc = existsSync(appProvidersPath)
-  ? readFileSync(appProvidersPath, 'utf8')
-  : '';
+const appProvidersSrc = existsSync(appProvidersPath) ? readFileSync(appProvidersPath, 'utf8') : '';
 if (!routerSrc.includes("path: '/comando'")) errors.push('/comando debe ser home');
 if (!routerSrc.includes('parseCommandSearch')) {
   errors.push('router /comando debe validar search con parseCommandSearch');
@@ -49,8 +47,7 @@ for (const rel of deprecatedShims) {
   }
 }
 const mountsSessionProvider =
-  appProvidersSrc.includes('EpisSessionProvider') &&
-  routerSrc.includes('EpisAppProviders');
+  appProvidersSrc.includes('EpisSessionProvider') && routerSrc.includes('EpisAppProviders');
 if (!mountsSessionProvider) {
   errors.push(
     'AppProviders.tsx debe montar EpisSessionProvider bajo RouterProvider (EpisAppProviders en router)',
@@ -63,7 +60,9 @@ if (errors.length) {
 }
 
 for (const gate of ['validate-login-command-home-gate.mjs', 'validate-mode-switcher-gate.mjs']) {
-  const child = spawnSync(process.execPath, [join(root, 'scripts/quality', gate)], { stdio: 'inherit' });
+  const child = spawnSync(process.execPath, [join(root, 'scripts/quality', gate)], {
+    stdio: 'inherit',
+  });
   if (child.status !== 0) process.exit(child.status ?? 1);
 }
 

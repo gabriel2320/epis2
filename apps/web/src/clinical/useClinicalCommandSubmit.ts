@@ -10,7 +10,9 @@ import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 type UseClinicalCommandSubmitOptions = {
   patientId?: string | undefined;
   commandContext?: CommandActiveContext | undefined;
-  onResolved?: ((result: Extract<CommandResolveResponse, { status: 'resolved' }>) => void) | undefined;
+  onResolved?:
+    | ((result: Extract<CommandResolveResponse, { status: 'resolved' }>) => void)
+    | undefined;
   onNeedsPatient?: (() => void) | undefined;
 };
 
@@ -21,9 +23,10 @@ export function useClinicalCommandSubmit(options: UseClinicalCommandSubmitOption
   const [error, setError] = useState<string | undefined>();
   const [isResolving, setIsResolving] = useState(false);
   const [lastResult, setLastResult] = useState<CommandResolveResponse | null>(null);
-  const [pendingConfirmation, setPendingConfirmation] = useState<
-    Extract<CommandResolveResponse, { status: 'needs_confirmation' }> | null
-  >(null);
+  const [pendingConfirmation, setPendingConfirmation] = useState<Extract<
+    CommandResolveResponse,
+    { status: 'needs_confirmation' }
+  > | null>(null);
   const [pendingText, setPendingText] = useState('');
 
   const handleResult = useCallback(

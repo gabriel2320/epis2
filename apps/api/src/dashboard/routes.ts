@@ -16,10 +16,7 @@ import type { FastifyInstance } from 'fastify';
 import { appendAudit } from '../audit/store.js';
 import type { AppConfig } from '../config.js';
 import type { Database } from '../db/client.js';
-import {
-  createRequirePermission,
-  type AuthenticatedRequest,
-} from '../auth/authenticate.js';
+import { createRequirePermission, type AuthenticatedRequest } from '../auth/authenticate.js';
 import { getPatientById } from '../clinical/service.js';
 import { getPatientDashboardSummary } from '../clinical/longitudinal.js';
 import { getServiceDashboardSummary } from '../inpatient/service.js';
@@ -42,35 +39,31 @@ export async function registerDashboardRoutes(
   const requireDashboardRead = createRequirePermission(config, 'dashboard.read');
   const requireAuditRead = createRequirePermission(config, 'audit.read');
 
-  app.get(
-    '/api/dashboard/work',
-    { preHandler: requireDashboardRead },
-    async (request) => {
-      const session = (request as AuthenticatedRequest).session;
+  app.get('/api/dashboard/work', { preHandler: requireDashboardRead }, async (request) => {
+    const session = (request as AuthenticatedRequest).session;
 
-      await appendAudit(db, {
-        eventType: 'dashboard.opened',
-        actorId: session.sub,
-        username: session.username,
-        entityType: 'dashboard',
-        entityId: 'work',
-        message: 'Modo tablero — Mi trabajo',
-        payload: { tab: 'work' },
+    await appendAudit(db, {
+      eventType: 'dashboard.opened',
+      actorId: session.sub,
+      username: session.username,
+      entityType: 'dashboard',
+      entityId: 'work',
+      message: 'Modo tablero — Mi trabajo',
+      payload: { tab: 'work' },
+    });
+
+    if (!db) {
+      return dashboardWorkResponseSchema.parse({
+        readOnly: true,
+        myOpenDrafts: [],
+        pendingReview: [],
+        demoTasks: [...DEMO_WORK_TASKS],
       });
+    }
 
-      if (!db) {
-        return dashboardWorkResponseSchema.parse({
-          readOnly: true,
-          myOpenDrafts: [],
-          pendingReview: [],
-          demoTasks: [...DEMO_WORK_TASKS],
-        });
-      }
-
-      const summary = await getDashboardWorkSummary(db, session.sub, session.role);
-      return dashboardWorkResponseSchema.parse(summary);
-    },
-  );
+    const summary = await getDashboardWorkSummary(db, session.sub, session.role);
+    return dashboardWorkResponseSchema.parse(summary);
+  });
 
   app.get(
     '/api/dashboard/nursing',
@@ -78,7 +71,9 @@ export async function registerDashboardRoutes(
     async (request, reply) => {
       const session = (request as AuthenticatedRequest).session;
       if (session.role !== 'nurse' && session.role !== 'physician' && session.role !== 'admin') {
-        return reply.status(403).send({ error: 'Tablero de enfermería no disponible para este rol' });
+        return reply
+          .status(403)
+          .send({ error: 'Tablero de enfermería no disponible para este rol' });
       }
       if (!db) {
         return reply.status(503).send({ error: 'Base de datos no disponible' });
@@ -165,30 +160,26 @@ export async function registerDashboardRoutes(
     },
   );
 
-  app.get(
-    '/api/dashboard/quality',
-    { preHandler: requireAuditRead },
-    async (request, reply) => {
-      const session = (request as AuthenticatedRequest).session;
+  app.get('/api/dashboard/quality', { preHandler: requireAuditRead }, async (request, reply) => {
+    const session = (request as AuthenticatedRequest).session;
 
-      await appendAudit(db, {
-        eventType: 'dashboard.opened',
-        actorId: session.sub,
-        username: session.username,
-        entityType: 'dashboard',
-        entityId: 'quality',
-        message: 'Modo tablero — calidad',
-        payload: { tab: 'quality' },
-      });
+    await appendAudit(db, {
+      eventType: 'dashboard.opened',
+      actorId: session.sub,
+      username: session.username,
+      entityType: 'dashboard',
+      entityId: 'quality',
+      message: 'Modo tablero — calidad',
+      payload: { tab: 'quality' },
+    });
 
-      if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
-      }
+    if (!db) {
+      return reply.status(503).send({ error: 'Base de datos no disponible' });
+    }
 
-      const summary = await getQualityDashboardSummary(db);
-      return qualityDashboardResponseSchema.parse(summary);
-    },
-  );
+    const summary = await getQualityDashboardSummary(db);
+    return qualityDashboardResponseSchema.parse(summary);
+  });
 
   app.get(
     '/api/dashboard/reception',
@@ -196,7 +187,9 @@ export async function registerDashboardRoutes(
     async (request, reply) => {
       const session = (request as AuthenticatedRequest).session;
       if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
-        return reply.status(403).send({ error: 'Tablero de recepción no disponible para este rol' });
+        return reply
+          .status(403)
+          .send({ error: 'Tablero de recepción no disponible para este rol' });
       }
 
       await appendAudit(db, {
@@ -224,7 +217,9 @@ export async function registerDashboardRoutes(
     async (request, reply) => {
       const session = (request as AuthenticatedRequest).session;
       if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
-        return reply.status(403).send({ error: 'Tablero de urgencias no disponible para este rol' });
+        return reply
+          .status(403)
+          .send({ error: 'Tablero de urgencias no disponible para este rol' });
       }
 
       await appendAudit(db, {
@@ -246,89 +241,77 @@ export async function registerDashboardRoutes(
     },
   );
 
-  app.get(
-    '/api/dashboard/icu',
-    { preHandler: requireDashboardRead },
-    async (request, reply) => {
-      const session = (request as AuthenticatedRequest).session;
-      if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
-        return reply.status(403).send({ error: 'Tablero UCI no disponible para este rol' });
-      }
+  app.get('/api/dashboard/icu', { preHandler: requireDashboardRead }, async (request, reply) => {
+    const session = (request as AuthenticatedRequest).session;
+    if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
+      return reply.status(403).send({ error: 'Tablero UCI no disponible para este rol' });
+    }
 
-      await appendAudit(db, {
-        eventType: 'dashboard.opened',
-        actorId: session.sub,
-        username: session.username,
-        entityType: 'dashboard',
-        entityId: 'icu',
-        message: 'Modo tablero — UCI',
-        payload: { tab: 'icu' },
-      });
+    await appendAudit(db, {
+      eventType: 'dashboard.opened',
+      actorId: session.sub,
+      username: session.username,
+      entityType: 'dashboard',
+      entityId: 'icu',
+      message: 'Modo tablero — UCI',
+      payload: { tab: 'icu' },
+    });
 
-      if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
-      }
+    if (!db) {
+      return reply.status(503).send({ error: 'Base de datos no disponible' });
+    }
 
-      const summary = await getIcuDashboardSummary(db, session.role);
-      return icuDashboardResponseSchema.parse(summary);
-    },
-  );
+    const summary = await getIcuDashboardSummary(db, session.role);
+    return icuDashboardResponseSchema.parse(summary);
+  });
 
-  app.get(
-    '/api/dashboard/or',
-    { preHandler: requireDashboardRead },
-    async (request, reply) => {
-      const session = (request as AuthenticatedRequest).session;
-      if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
-        return reply.status(403).send({ error: 'Tablero pabellón no disponible para este rol' });
-      }
+  app.get('/api/dashboard/or', { preHandler: requireDashboardRead }, async (request, reply) => {
+    const session = (request as AuthenticatedRequest).session;
+    if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
+      return reply.status(403).send({ error: 'Tablero pabellón no disponible para este rol' });
+    }
 
-      await appendAudit(db, {
-        eventType: 'dashboard.opened',
-        actorId: session.sub,
-        username: session.username,
-        entityType: 'dashboard',
-        entityId: 'or',
-        message: 'Modo tablero — pabellón',
-        payload: { tab: 'or' },
-      });
+    await appendAudit(db, {
+      eventType: 'dashboard.opened',
+      actorId: session.sub,
+      username: session.username,
+      entityType: 'dashboard',
+      entityId: 'or',
+      message: 'Modo tablero — pabellón',
+      payload: { tab: 'or' },
+    });
 
-      if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
-      }
+    if (!db) {
+      return reply.status(503).send({ error: 'Base de datos no disponible' });
+    }
 
-      const summary = await getOrDashboardSummary(db, session.role);
-      return orDashboardResponseSchema.parse(summary);
-    },
-  );
+    const summary = await getOrDashboardSummary(db, session.role);
+    return orDashboardResponseSchema.parse(summary);
+  });
 
-  app.get(
-    '/api/dashboard/aps',
-    { preHandler: requireDashboardRead },
-    async (request, reply) => {
-      const session = (request as AuthenticatedRequest).session;
-      if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
-        return reply.status(403).send({ error: 'Tablero APS no disponible para este rol' });
-      }
+  app.get('/api/dashboard/aps', { preHandler: requireDashboardRead }, async (request, reply) => {
+    const session = (request as AuthenticatedRequest).session;
+    if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
+      return reply.status(403).send({ error: 'Tablero APS no disponible para este rol' });
+    }
 
-      await appendAudit(db, {
-        eventType: 'dashboard.opened',
-        actorId: session.sub,
-        username: session.username,
-        entityType: 'dashboard',
-        entityId: 'aps',
-        message: 'Modo tablero — APS',
-        payload: { tab: 'aps' },
-      });
+    await appendAudit(db, {
+      eventType: 'dashboard.opened',
+      actorId: session.sub,
+      username: session.username,
+      entityType: 'dashboard',
+      entityId: 'aps',
+      message: 'Modo tablero — APS',
+      payload: { tab: 'aps' },
+    });
 
-      if (!db) {
-        return reply.status(503).send({ error: 'Base de datos no disponible' });
-      }
+    if (!db) {
+      return reply.status(503).send({ error: 'Base de datos no disponible' });
+    }
 
-      const summary = await getApsDashboardSummary(db, session.role);
-      return apsDashboardResponseSchema.parse(summary);
-    },
-  );
+    const summary = await getApsDashboardSummary(db, session.role);
+    return apsDashboardResponseSchema.parse(summary);
+  });
 
   app.get(
     '/api/dashboard/specialty',
@@ -336,7 +319,9 @@ export async function registerDashboardRoutes(
     async (request, reply) => {
       const session = (request as AuthenticatedRequest).session;
       if (session.role !== 'admin' && session.role !== 'nurse' && session.role !== 'physician') {
-        return reply.status(403).send({ error: 'Tablero especialidades no disponible para este rol' });
+        return reply
+          .status(403)
+          .send({ error: 'Tablero especialidades no disponible para este rol' });
       }
 
       await appendAudit(db, {

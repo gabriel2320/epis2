@@ -61,10 +61,7 @@ function SeedPatient({ children }: { children: ReactNode }) {
   return children;
 }
 
-function renderPanel(
-  props: Parameters<typeof ClinicalWidgetPanel>[0],
-  withPatient = false,
-) {
+function renderPanel(props: Parameters<typeof ClinicalWidgetPanel>[0], withPatient = false) {
   return renderWithQuery(
     <ActivePatientProvider>
       {withPatient ? (

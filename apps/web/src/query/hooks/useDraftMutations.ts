@@ -28,13 +28,8 @@ export function useCreateDraftMutation() {
 export function useUpdateDraftMutation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({
-      draftId,
-      body,
-    }: {
-      draftId: string;
-      body: Parameters<typeof updateDraft>[1];
-    }) => updateDraft(draftId, body),
+    mutationFn: ({ draftId, body }: { draftId: string; body: Parameters<typeof updateDraft>[1] }) =>
+      updateDraft(draftId, body),
     onSuccess: (data) => invalidateFromDraft(queryClient, data.draft),
   });
 }

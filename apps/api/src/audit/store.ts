@@ -66,18 +66,12 @@ export async function listAuthAuditEvents(db: Database | null, limit = 200) {
       .orderBy(desc(auditEvents.at))
       .limit(limit);
   }
-  return memoryEvents
-    .filter((e) => e.eventType.startsWith('auth.'))
-    .slice(-limit);
+  return memoryEvents.filter((e) => e.eventType.startsWith('auth.')).slice(-limit);
 }
 
 export async function listRecentAuditEvents(db: Database | null, limit = 100) {
   if (db) {
-    const rows = await db
-      .select()
-      .from(auditEvents)
-      .orderBy(desc(auditEvents.at))
-      .limit(limit);
+    const rows = await db.select().from(auditEvents).orderBy(desc(auditEvents.at)).limit(limit);
     return rows.map((r) => ({
       id: r.id,
       eventType: r.eventType,

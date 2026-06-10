@@ -7,7 +7,12 @@ export { createEpis2Theme, type CreateEpis2ThemeOptions } from './create-epis2-t
 export { buildM3PaletteOptions, accentPresets, type Epis2Accent } from './color-roles.js';
 export { clinicalRoles, type ClinicalRoleKey } from './clinical-roles.js';
 export { epis2Shape, epis2ShapeBorderRadius } from './shape.js';
-export { epis2Motion, motionTransition, prefersReducedMotion, type Epis2MotionScheme } from './motion.js';
+export {
+  epis2Motion,
+  motionTransition,
+  prefersReducedMotion,
+  type Epis2MotionScheme,
+} from './motion.js';
 export {
   epis2BarLayout,
   epis2Breakpoints,
@@ -21,7 +26,11 @@ export {
   epis2FontFamily,
   type Epis2M3TypographyRole,
 } from './typography.js';
-export { buildVisualIdentity, buildEpis2Shadows, type Epis2VisualIdentity } from './visual-identity.js';
+export {
+  buildVisualIdentity,
+  buildEpis2Shadows,
+  type Epis2VisualIdentity,
+} from './visual-identity.js';
 export {
   epis2CanvasSx,
   epis2IslandSx,

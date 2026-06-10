@@ -67,7 +67,9 @@ export function EpisEventCalendarSpike({
         views={['day', 'week', 'agenda']}
         defaultVisibleDate={anchorDate}
         localeText={esES.components.MuiEventCalendar.defaultProps.localeText}
-        {...(readOnly ? { readOnly: true, areEventsDraggable: false, areEventsResizable: false } : {})}
+        {...(readOnly
+          ? { readOnly: true, areEventsDraggable: false, areEventsResizable: false }
+          : {})}
       />
     </Box>
   );

@@ -32,8 +32,7 @@ export function usePatientClinicalAlerts(options: UsePatientClinicalAlertsOption
     return () => clearTimeout(timer);
   }, [options.patientId, options.blueprintId, fieldsKey, options.debounceMs]);
 
-  const enabled =
-    options.enabled !== false && Boolean(options.patientId) && debouncedReady;
+  const enabled = options.enabled !== false && Boolean(options.patientId) && debouncedReady;
 
   const query = useQuery({
     queryKey: queryKeys.patients.clinicalAlerts(

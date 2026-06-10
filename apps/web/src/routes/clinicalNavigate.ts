@@ -177,9 +177,7 @@ export function parseCommandSearch(search: Record<string, unknown>): CommandSear
 export function parseDashboardSearch(search: Record<string, unknown>): DashboardSearch {
   const tabRaw = search.tab;
   const tab =
-    typeof tabRaw === 'string' && DASHBOARD_TAB_SET.has(tabRaw)
-      ? (tabRaw as DashboardTab)
-      : 'work';
+    typeof tabRaw === 'string' && DASHBOARD_TAB_SET.has(tabRaw) ? (tabRaw as DashboardTab) : 'work';
   const mode = search.mode === 'dashboard' ? ('dashboard' as const) : undefined;
   return {
     tab,
@@ -208,7 +206,11 @@ export type ClinicalNavigateTarget =
   | '/sin-acceso';
 
 export type ClinicalNavigateOptions =
-  | { to: '/espacio/borrador/$draftId'; params: { draftId: string }; search?: ClinicalPatientSearch }
+  | {
+      to: '/espacio/borrador/$draftId';
+      params: { draftId: string };
+      search?: ClinicalPatientSearch;
+    }
   | { to: '/epis2/dashboard'; search?: DashboardSearch; params?: never }
   | { to: '/espacio/admin'; search?: AdminSearch; params?: never }
   | { to: '/sin-acceso'; search?: ForbiddenSearch; params?: never }
@@ -221,7 +223,11 @@ export type ClinicalNavigateOptions =
   | {
       to: Exclude<
         ClinicalNavigateTarget,
-        '/espacio/borrador/$draftId' | '/epis2/dashboard' | '/espacio/admin' | '/sin-acceso' | '/comando'
+        | '/espacio/borrador/$draftId'
+        | '/epis2/dashboard'
+        | '/espacio/admin'
+        | '/sin-acceso'
+        | '/comando'
       >;
       search?: ClinicalFormSearch;
       params?: never;

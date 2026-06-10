@@ -11,7 +11,9 @@ export type DemoNarrativeWalkthroughPanelProps = {
 };
 
 /** Episodios piloto curados — presentación narrativa, no dump de BD (UX-A.4). */
-export function DemoNarrativeWalkthroughPanel({ onSelectEpisode }: DemoNarrativeWalkthroughPanelProps) {
+export function DemoNarrativeWalkthroughPanel({
+  onSelectEpisode,
+}: DemoNarrativeWalkthroughPanelProps) {
   return (
     <Stack spacing={2} sx={{ width: '100%' }} data-testid="epis2-demo-narratives">
       <EpisM3Text role="titleMedium">{copy.commandCenter.demoNarrativesTitle}</EpisM3Text>
@@ -43,7 +45,11 @@ export function DemoNarrativeWalkthroughPanel({ onSelectEpisode }: DemoNarrative
                   </EpisM3Text>
                 ) : null}
               </Stack>
-              <EpisM3Text role="bodyMedium" color="text.secondary" sx={{ lineHeight: 1.5, fontSize: '0.8125rem' }}>
+              <EpisM3Text
+                role="bodyMedium"
+                color="text.secondary"
+                sx={{ lineHeight: 1.5, fontSize: '0.8125rem' }}
+              >
                 {episode.oneLinerEs}
               </EpisM3Text>
               <EpisM3Text role="labelMedium" color="primary.main">

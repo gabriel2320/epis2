@@ -80,7 +80,11 @@ export function EpisDashboardMd3TopBar({
         ) : null}
       </Stack>
       {timestampLabel ? (
-        <Typography variant="caption" color="text.secondary" sx={{ display: { xs: 'none', md: 'block' } }}>
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          sx={{ display: { xs: 'none', md: 'block' } }}
+        >
           {timestampLabel}
         </Typography>
       ) : null}

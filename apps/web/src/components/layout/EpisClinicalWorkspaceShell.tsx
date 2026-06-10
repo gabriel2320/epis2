@@ -38,10 +38,7 @@ export function EpisClinicalWorkspaceShell({
       }}
     >
       {commandBar ? (
-        <Box
-          data-testid="epis2-workspace-command-bar"
-          sx={{ flexShrink: 0, pb: 1 }}
-        >
+        <Box data-testid="epis2-workspace-command-bar" sx={{ flexShrink: 0, pb: 1 }}>
           {commandBar}
         </Box>
       ) : null}

@@ -139,7 +139,13 @@ export function CommandCenterRecentActivity() {
                 {row.patientLabel} · {row.atLabel}
               </EpisM3Text>
             </Stack>
-            <EpisChip size="small" label={row.badge} variant="outlined" tabIndex={-1} sx={{ flexShrink: 0 }} />
+            <EpisChip
+              size="small"
+              label={row.badge}
+              variant="outlined"
+              tabIndex={-1}
+              sx={{ flexShrink: 0 }}
+            />
             <ChevronRightIcon fontSize="small" color="action" aria-hidden />
           </Stack>
         ))}

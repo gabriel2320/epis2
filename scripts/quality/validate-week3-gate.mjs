@@ -10,10 +10,7 @@ const errors = [];
 const report = join(root, 'reports/epis2-dev-automation-week3-2026-06-07.md');
 if (!existsSync(report)) errors.push('falta reporte week3');
 
-for (const gate of [
-  'validate-ai-tramo-evals-gate.mjs',
-  'validate-ai-catalog-smoke-gate.mjs',
-]) {
+for (const gate of ['validate-ai-tramo-evals-gate.mjs', 'validate-ai-catalog-smoke-gate.mjs']) {
   if (!existsSync(join(root, 'scripts/quality', gate))) errors.push(`falta ${gate}`);
 }
 
