@@ -28,18 +28,19 @@ export async function buildApp(config: AppConfig) {
   });
   await app.register(cookie);
 
-  app.get('/health', async () => {
-    const body = healthResponseSchema.parse({
+  const livenessHandler = async () =>
+    healthResponseSchema.parse({
       status: 'ok',
       service: 'epis2-api',
       version: VERSION,
       timestamp: new Date().toISOString(),
-      checks: { database: config.DATABASE_URL ? 'skipped' : 'skipped' },
+      checks: { database: 'skipped' },
     });
-    return body;
-  });
 
-  app.get('/ready', async (_req, reply) => {
+  const readinessHandler = async (
+    _req: import('fastify').FastifyRequest,
+    reply: import('fastify').FastifyReply,
+  ) => {
     const checks: Record<string, 'up' | 'down' | 'skipped'> = {
       database: 'skipped',
     };
@@ -64,7 +65,13 @@ export async function buildApp(config: AppConfig) {
       return reply.status(503).send(body);
     }
     return body;
-  });
+  };
+
+  // Rutas estándar (norma R-48); /health y /ready se mantienen como alias legacy.
+  app.get('/health/live', livenessHandler);
+  app.get('/health/ready', readinessHandler);
+  app.get('/health', livenessHandler);
+  app.get('/ready', readinessHandler);
 
   app.get('/api/meta', async () => ({
     product: 'EPIS2',
