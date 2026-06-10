@@ -35,6 +35,7 @@ jobs:
       - run: npm run build -w @epis2/contracts
       - run: npm run db:migrate
       - run: npm run check
+      - run: npm run format:check
       - run: npm run quality:pm01
       - run: npm run quality:layers-integration-gate
       - run: npm run theme:validate

@@ -141,6 +141,11 @@ EPIS2_LOCAL_CI_E2E=1 npm run quality:local-ci
 
 ---
 
+## Versión de Node (MF-NORM-104)
+
+- **CI usa Node 20** (`.github/workflows/ci.yml`); `.nvmrc` fija `20` para paridad (`nvm use`).
+- `engines` acota `>=20 <25`; local con Node 24 funciona, pero ante diferencias de comportamiento reproducir con 20.
+
 ## Troubleshooting
 
 | Problema | Acción |

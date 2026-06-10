@@ -1,0 +1,13 @@
+node_modules
+dist
+build
+coverage
+playwright-report
+test-results
+reports
+docs
+*.md
+package-lock.json
+.cursor
+cursor-plugin
+db/backups
