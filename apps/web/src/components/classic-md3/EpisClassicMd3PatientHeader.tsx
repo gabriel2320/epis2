@@ -2,12 +2,12 @@ import { copy } from '@epis2/design-system';
 import { Chip, Stack, Typography } from '@epis2/epis2-ui';
 
 export type EpisClassicMd3PatientHeaderProps = {
-  displayName?: string;
-  metaLine?: string;
-  allergyLabels?: readonly string[];
-  alertLabels?: readonly string[];
-  episodeLabel?: string;
-  testId?: string;
+  displayName?: string | undefined;
+  metaLine?: string | undefined;
+  allergyLabels?: readonly string[] | undefined;
+  alertLabels?: readonly string[] | undefined;
+  episodeLabel?: string | undefined;
+  testId?: string | undefined;
 };
 
 /** Header clínico compacto — máx. 2 líneas, siempre visible. */

@@ -4,7 +4,7 @@ import { EpisDataGridSuspense, type GridColDef } from '@epis2/epis2-ui';
 import { useMemo } from 'react';
 
 export type LabObservationRow = PatientLongitudinalResponse['observations'][number] & {
-  orderTitle?: string;
+  orderTitle?: string | undefined;
 };
 
 export type LabObservationsGridProps = {
@@ -53,7 +53,7 @@ export function LabObservationsGrid({
       columns={columns}
       emptyMessage={emptyMessage}
       hideFooter={rows.length <= 10}
-      data-testid={testId}
+      {...(testId !== undefined ? { 'data-testid': testId } : {})}
     />
   );
 }

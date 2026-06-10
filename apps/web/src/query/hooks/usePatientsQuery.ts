@@ -3,8 +3,8 @@ import { listPatients } from '../../api/clinicalApi.js';
 import { queryKeys } from '../queryKeys.js';
 
 type UsePatientsQueryOptions = {
-  search?: string;
-  enabled?: boolean;
+  search?: string | undefined;
+  enabled?: boolean | undefined;
 };
 
 export function usePatientsQuery(options: UsePatientsQueryOptions = {}) {

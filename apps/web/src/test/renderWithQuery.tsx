@@ -5,7 +5,7 @@ import type { ReactElement, ReactNode } from 'react';
 import { createTestQueryClient } from '../query/queryClient.js';
 
 type WrapperOptions = {
-  queryClient?: ReturnType<typeof createTestQueryClient>;
+  queryClient?: ReturnType<typeof createTestQueryClient> | undefined;
 };
 
 export type { WrapperOptions };

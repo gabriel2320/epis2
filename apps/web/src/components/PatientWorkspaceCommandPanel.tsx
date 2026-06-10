@@ -93,9 +93,9 @@ export function PatientWorkspaceCommandPanel({
         value={query}
         onChange={setQuery}
         onSubmit={() => void submit()}
-        error={error}
+        {...(error !== undefined ? { error } : {})}
         aiAvailable={aiAvailable}
-        aiHint={error ? undefined : aiHint}
+        {...(error === undefined && aiHint !== undefined ? { aiHint } : {})}
         roleLabel={roleDisplay}
         role={role}
         disabled={isResolving}

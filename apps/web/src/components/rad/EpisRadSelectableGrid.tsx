@@ -10,15 +10,15 @@ import {
 export type EpisRadSelectableGridProps = {
   rows: EpisDataGridRow[];
   columns: ClinicalGridColDef[];
-  emptyMessage?: string;
-  loading?: boolean;
-  error?: string;
-  hideFooter?: boolean;
-  onRowClick?: (row: EpisDataGridRow) => void;
+  emptyMessage?: string | undefined;
+  loading?: boolean | undefined;
+  error?: string | undefined;
+  hideFooter?: boolean | undefined;
+  onRowClick?: ((row: EpisDataGridRow) => void) | undefined;
   buildBulkActions: (selectedIds: readonly string[]) => EpisBulkActionMenuItem[];
-  selectable?: boolean;
-  height?: number;
-  'data-testid'?: string;
+  selectable?: boolean | undefined;
+  height?: number | undefined;
+  'data-testid'?: string | undefined;
 };
 
 /** Grid RAD con selección múltiple y menú masivo bajo demanda. */
@@ -73,7 +73,7 @@ export function EpisRadSelectableGrid({
               onSelectedRowIdsChange: setSelectedIds,
             }
           : {})}
-        data-testid={testId}
+        {...(testId !== undefined ? { 'data-testid': testId } : {})}
       />
     </>
   );

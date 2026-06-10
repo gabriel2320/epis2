@@ -5,7 +5,7 @@ import { buildLongitudinalSectionTree, resolveTimelineDraftId } from '../tree/lo
 
 export type LongitudinalNavTreeProps = {
   data: PatientLongitudinalResponse;
-  onOpenDraft?: (draftId: string) => void;
+  onOpenDraft?: ((draftId: string) => void) | undefined;
 };
 
 export function LongitudinalNavTree({ data, onOpenDraft }: LongitudinalNavTreeProps) {

@@ -33,7 +33,7 @@ import { useWidgetActions } from './useWidgetActions.js';
 export type ClinicalWidgetCardProps = {
   definition: WidgetDefinition;
   visibility: WidgetVisibility;
-  patientId?: string;
+  patientId?: string | undefined;
 };
 
 type WidgetLoadState = 'idle' | 'loading' | 'ready' | 'error';

@@ -41,13 +41,33 @@ export function PrescriptionPrintPage() {
           </>
         }
       >
-        <PrintField label={copy.print.medication} value={values.medication} />
-        <PrintField label={copy.print.dose} value={values.dose} />
-        <PrintField label={copy.print.quantity} value={values.quantity} />
+        <PrintField
+          label={copy.print.medication}
+          {...(values.medication !== undefined ? { value: values.medication } : {})}
+        />
+        <PrintField
+          label={copy.print.dose}
+          {...(values.dose !== undefined ? { value: values.dose } : {})}
+        />
+        <PrintField
+          label={copy.print.quantity}
+          {...(values.quantity !== undefined ? { value: values.quantity } : {})}
+        />
         <PrintField label={copy.print.route} value={labelForRoute(values.route)} />
-        <PrintField label={copy.print.frequency} value={values.frequency} />
-        <PrintField label={copy.print.duration} value={values.duration} />
-        <PrintField label={copy.print.patientInstructions} value={values.patientInstructions} />
+        <PrintField
+          label={copy.print.frequency}
+          {...(values.frequency !== undefined ? { value: values.frequency } : {})}
+        />
+        <PrintField
+          label={copy.print.duration}
+          {...(values.duration !== undefined ? { value: values.duration } : {})}
+        />
+        <PrintField
+          label={copy.print.patientInstructions}
+          {...(values.patientInstructions !== undefined
+            ? { value: values.patientInstructions }
+            : {})}
+        />
       </PrintA5Document>
     </Stack>
   );

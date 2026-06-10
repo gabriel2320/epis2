@@ -24,10 +24,10 @@ export type EpisUniversalCommandBarProps = {
   query: string;
   onQueryChange: (value: string) => void;
   onSubmit: () => void;
-  suggestions?: readonly string[];
-  onSuggestionSelect?: (label: string) => void;
-  disabled?: boolean;
-  testId?: string;
+  suggestions?: readonly string[] | undefined;
+  onSuggestionSelect?: ((label: string) => void) | undefined;
+  disabled?: boolean | undefined;
+  testId?: string | undefined;
 };
 
 /** Command bar unificada — variantes por modo, command-registry vía callbacks de página. */

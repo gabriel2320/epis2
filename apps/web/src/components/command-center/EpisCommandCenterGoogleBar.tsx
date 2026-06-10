@@ -22,12 +22,12 @@ export type EpisCommandCenterGoogleBarProps = {
   onSubmit: () => void;
   onSelectSuggestion: (command: string) => void;
   isResolving: boolean;
-  error?: string;
-  aiHint?: string;
-  contextSlot?: ReactNode;
-  clarificationCandidates?: readonly { intent: string; labelEs: string }[];
-  onClarificationSelect?: (label: string) => void;
-  footerSlot?: ReactNode;
+  error?: string | undefined;
+  aiHint?: string | undefined;
+  contextSlot?: ReactNode | undefined;
+  clarificationCandidates?: readonly { intent: string; labelEs: string }[] | undefined;
+  onClarificationSelect?: ((label: string) => void) | undefined;
+  footerSlot?: ReactNode | undefined;
 };
 
 /**

@@ -8,10 +8,10 @@ import { navigateClinicalCommandResult } from './navigateClinicalCommandResult.j
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 
 type UseClinicalCommandSubmitOptions = {
-  patientId?: string;
-  commandContext?: CommandActiveContext;
-  onResolved?: (result: Extract<CommandResolveResponse, { status: 'resolved' }>) => void;
-  onNeedsPatient?: () => void;
+  patientId?: string | undefined;
+  commandContext?: CommandActiveContext | undefined;
+  onResolved?: ((result: Extract<CommandResolveResponse, { status: 'resolved' }>) => void) | undefined;
+  onNeedsPatient?: (() => void) | undefined;
 };
 
 export function useClinicalCommandSubmit(options: UseClinicalCommandSubmitOptions = {}) {

@@ -4,12 +4,12 @@ import { fetchPatientClinicalAlerts } from '../api/clinicalApi.js';
 import { queryKeys } from '../query/queryKeys.js';
 
 export type UsePatientClinicalAlertsOptions = {
-  patientId?: string;
-  blueprintId?: string;
-  currentFields?: Record<string, string>;
-  contextLabel?: string;
-  debounceMs?: number;
-  enabled?: boolean;
+  patientId?: string | undefined;
+  blueprintId?: string | undefined;
+  currentFields?: Record<string, string> | undefined;
+  contextLabel?: string | undefined;
+  debounceMs?: number | undefined;
+  enabled?: boolean | undefined;
 };
 
 export function usePatientClinicalAlerts(options: UsePatientClinicalAlertsOptions) {

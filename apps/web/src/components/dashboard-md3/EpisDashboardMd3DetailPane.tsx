@@ -3,13 +3,13 @@ import { EpisButton, Stack, Typography } from '@epis2/epis2-ui';
 import type { DashboardDetailSelection } from './EpisDashboardMd3MainGrid.js';
 
 export type EpisDashboardMd3DetailPaneProps = {
-  selection?: DashboardDetailSelection | null;
-  collapsed?: boolean;
-  onToggleCollapse?: () => void;
-  onOpenClassic?: () => void;
-  onOpenChart?: () => void;
-  onCreateDraft?: () => void;
-  testId?: string;
+  selection?: DashboardDetailSelection | null | undefined;
+  collapsed?: boolean | undefined;
+  onToggleCollapse?: (() => void) | undefined;
+  onOpenClassic?: (() => void) | undefined;
+  onOpenChart?: (() => void) | undefined;
+  onCreateDraft?: (() => void) | undefined;
+  testId?: string | undefined;
 };
 
 /** Detail pane — contexto sin reemplazar ficha clásica ni firmar. */

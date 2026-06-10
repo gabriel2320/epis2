@@ -29,11 +29,12 @@ export function ClinicalPatientChartChrome() {
     narrative?.settingEs,
     patient.demoCaseCode ? patient.demoCaseCode : null,
   ].filter(Boolean);
+  const metaLine = metaParts.join(' · ');
 
   return (
     <EpisPatientChartShell
       displayName={patient.displayName}
-      meta={metaParts.join(' · ') || undefined}
+      {...(metaLine ? { meta: metaLine } : {})}
       alerts={[]}
       tabs={PATIENT_CHART_TABS}
       activeTabId={activeTabId}

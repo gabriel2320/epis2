@@ -4,8 +4,8 @@ import { Link } from '@tanstack/react-router';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 
 export type ClinicalPageNavProps = {
-  patientId?: string;
-  showFicha?: boolean;
+  patientId?: string | undefined;
+  showFicha?: boolean | undefined;
 };
 
 /** Enlaces de salida estándar en formularios y revisiones clínicas. */

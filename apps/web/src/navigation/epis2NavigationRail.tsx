@@ -179,12 +179,14 @@ export function useEpis2NavigationRailItems(): EpisNavigationRailItem[] {
             label: resolveWorkspaceCopyKey(item.labelKey),
             icon: CONTEXTUAL_ICONS[item.id] ?? <LocalHospitalIcon />,
             active: routeMatchesPath(pathname, searchStr, item.route),
-            disabled: item.disabled,
-            onClick: item.disabled
-              ? undefined
-              : () => {
-                  void navigate(toNavigateOptions(parseClinicalRoute(item.route)));
-                },
+            ...(item.disabled !== undefined ? { disabled: item.disabled } : {}),
+            ...(item.disabled
+              ? {}
+              : {
+                  onClick: () => {
+                    void navigate(toNavigateOptions(parseClinicalRoute(item.route)));
+                  },
+                }),
             'data-testid': `epis2-nav-${item.id}`,
           })),
           {

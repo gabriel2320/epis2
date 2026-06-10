@@ -17,11 +17,11 @@ export function renderClinicalTextBoxField(
   value: string,
   onChange: (value: string, meta?: ClinicalTextBoxChangeMeta) => void,
   opts?: {
-    error?: string;
-    patientContext?: ClinicalTextBoxPatientContext;
-    patientId?: string;
-    aiAvailable?: boolean;
-    spellcheckAdapter?: LanguageToolAdapter;
+    error?: string | undefined;
+    patientContext?: ClinicalTextBoxPatientContext | undefined;
+    patientId?: string | undefined;
+    aiAvailable?: boolean | undefined;
+    spellcheckAdapter?: LanguageToolAdapter | undefined;
   },
 ) {
   if (!field.clinicalTextBox || field.type !== 'textarea' || field.readOnly) return null;
@@ -33,12 +33,12 @@ export function renderClinicalTextBoxField(
       mode={mode}
       onChange={(next, meta) => onChange(next, meta)}
       spellcheckAdapter={opts?.spellcheckAdapter ?? episClinicalSpellcheckAdapter}
-      onRequestAiAssist={
-        opts?.aiAvailable
-          ? (action: ClinicalTextboxAiAction, text: string) =>
-              requestClinicalTextboxAiAssist(action, text, opts?.patientId)
-          : undefined
-      }
+      {...(opts?.aiAvailable
+        ? {
+            onRequestAiAssist: (action: ClinicalTextboxAiAction, text: string) =>
+              requestClinicalTextboxAiAssist(action, text, opts?.patientId),
+          }
+        : {})}
       {...(opts?.error ? { error: opts.error } : {})}
       {...(opts?.patientContext ? { patientContext: opts.patientContext } : {})}
       testId={`epis2-field-${field.id}`}
@@ -47,10 +47,10 @@ export function renderClinicalTextBoxField(
 }
 
 export function buildClinicalTextBoxPatientContext(input: {
-  displayName?: string;
-  summaryFields?: Record<string, string>;
-  activeMedications?: readonly string[];
-  recentLabs?: readonly string[];
+  displayName?: string | undefined;
+  summaryFields?: Record<string, string> | undefined;
+  activeMedications?: readonly string[] | undefined;
+  recentLabs?: readonly string[] | undefined;
 }): ClinicalTextBoxPatientContext {
   return {
     ...(input.displayName ? { displayName: input.displayName } : {}),

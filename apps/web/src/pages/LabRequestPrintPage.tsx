@@ -31,9 +31,18 @@ export function LabRequestPrintPage() {
           </>
         }
       >
-        <PrintField label={copy.print.scheduledDate} value={values.scheduledDate} />
-        <PrintField label={copy.print.labTests} value={values.labTests} />
-        <PrintField label={copy.print.clinicalReason} value={values.clinicalReason} />
+        <PrintField
+          label={copy.print.scheduledDate}
+          {...(values.scheduledDate !== undefined ? { value: values.scheduledDate } : {})}
+        />
+        <PrintField
+          label={copy.print.labTests}
+          {...(values.labTests !== undefined ? { value: values.labTests } : {})}
+        />
+        <PrintField
+          label={copy.print.clinicalReason}
+          {...(values.clinicalReason !== undefined ? { value: values.clinicalReason } : {})}
+        />
         <PrintField label={copy.print.priority} value={printPriorityLabel(values.priority)} />
       </PrintA5Document>
     </Stack>

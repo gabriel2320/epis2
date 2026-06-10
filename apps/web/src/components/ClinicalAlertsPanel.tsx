@@ -13,8 +13,8 @@ import {
 
 export type ClinicalAlertsPanelProps = {
   alerts: ClinicalAlert[];
-  loading?: boolean;
-  hintBlueprintLabel?: string;
+  loading?: boolean | undefined;
+  hintBlueprintLabel?: string | undefined;
 };
 
 function alertSeverity(severity: ClinicalAlert['severity']): 'error' | 'warning' | 'info' {

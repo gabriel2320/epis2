@@ -3,15 +3,15 @@ import { EpisButton, Stack, Toolbar, Typography } from '@epis2/epis2-ui';
 import { EpisModeSwitcher } from '../modes/EpisModeSwitcher.js';
 
 export type EpisDashboardMd3TopBarProps = {
-  clinicianLabel?: string;
-  roleLabel?: string;
-  serviceLabel?: string;
-  timestampLabel?: string;
+  clinicianLabel?: string | undefined;
+  roleLabel?: string | undefined;
+  serviceLabel?: string | undefined;
+  timestampLabel?: string | undefined;
   onBackToCommand: () => void;
-  onOpenClassicMode?: () => void;
-  classicModeDisabled?: boolean;
-  onOpenCommandPalette?: () => void;
-  testId?: string;
+  onOpenClassicMode?: (() => void) | undefined;
+  classicModeDisabled?: boolean | undefined;
+  onOpenCommandPalette?: (() => void) | undefined;
+  testId?: string | undefined;
 };
 
 const FORBIDDEN_ACTIONS = ['firmar', 'aprobar', 'eliminar', 'sign', 'approve', 'delete'] as const;

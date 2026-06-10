@@ -5,10 +5,10 @@ import type { WidgetContext, WidgetSurface } from '@epis2/epis2-widgets';
 export type BuildWidgetContextInput = {
   surface: WidgetSurface;
   session: SessionResponse | null;
-  patientId?: string;
-  encounterId?: string;
-  explicitlyShownWidgetIds?: readonly string[];
-  offline?: boolean;
+  patientId?: string | undefined;
+  encounterId?: string | undefined;
+  explicitlyShownWidgetIds?: readonly string[] | undefined;
+  offline?: boolean | undefined;
 };
 
 export function buildWidgetContext({
@@ -19,13 +19,14 @@ export function buildWidgetContext({
   explicitlyShownWidgetIds,
   offline,
 }: BuildWidgetContextInput): WidgetContext {
+  const role = session?.user.role as ClinicalRole | undefined;
   return {
     surface,
-    userId: session?.user.id,
-    role: session?.user.role as ClinicalRole | undefined,
-    patientId,
-    encounterId,
-    explicitlyShownWidgetIds,
-    offline,
+    ...(session?.user.id !== undefined ? { userId: session.user.id } : {}),
+    ...(role !== undefined ? { role } : {}),
+    ...(patientId !== undefined ? { patientId } : {}),
+    ...(encounterId !== undefined ? { encounterId } : {}),
+    ...(explicitlyShownWidgetIds !== undefined ? { explicitlyShownWidgetIds } : {}),
+    ...(offline !== undefined ? { offline } : {}),
   };
 }

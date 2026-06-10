@@ -43,11 +43,26 @@ export function MedicalCertificatePrintPage() {
         }
       >
         <PrintField label={copy.print.certificateType} value={labelForCertificateType(values.certificateType)} />
-        <PrintField label={copy.print.diagnosis} value={values.diagnosisSummary} />
-        <PrintField label={copy.print.restDays} value={values.restDays} />
-        <PrintField label={copy.print.validFrom} value={values.validFrom} />
-        <PrintField label={copy.print.validUntil} value={values.validUntil} />
-        <PrintField label={copy.print.instructions} value={values.instructions} />
+        <PrintField
+          label={copy.print.diagnosis}
+          {...(values.diagnosisSummary !== undefined ? { value: values.diagnosisSummary } : {})}
+        />
+        <PrintField
+          label={copy.print.restDays}
+          {...(values.restDays !== undefined ? { value: values.restDays } : {})}
+        />
+        <PrintField
+          label={copy.print.validFrom}
+          {...(values.validFrom !== undefined ? { value: values.validFrom } : {})}
+        />
+        <PrintField
+          label={copy.print.validUntil}
+          {...(values.validUntil !== undefined ? { value: values.validUntil } : {})}
+        />
+        <PrintField
+          label={copy.print.instructions}
+          {...(values.instructions !== undefined ? { value: values.instructions } : {})}
+        />
       </PrintA5Document>
     </Stack>
   );

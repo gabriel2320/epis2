@@ -2,16 +2,16 @@ import { copy } from '@epis2/design-system';
 import { Stack, Typography } from '@epis2/epis2-ui';
 
 export type EpisDashboardMd3StatusBarProps = {
-  lastUpdatedLabel?: string;
-  dbStatus?: 'ok' | 'degraded';
-  aiStatus?: 'ok' | 'degraded';
-  activeFilterCount?: number;
-  selectionCount?: number;
-  userLabel?: string;
-  roleLabel?: string;
-  environmentLabel?: string;
-  lastAuditLabel?: string;
-  testId?: string;
+  lastUpdatedLabel?: string | undefined;
+  dbStatus?: 'ok' | 'degraded' | undefined;
+  aiStatus?: 'ok' | 'degraded' | undefined;
+  activeFilterCount?: number | undefined;
+  selectionCount?: number | undefined;
+  userLabel?: string | undefined;
+  roleLabel?: string | undefined;
+  environmentLabel?: string | undefined;
+  lastAuditLabel?: string | undefined;
+  testId?: string | undefined;
 };
 
 /** Status bar sobria — sin botones clínicos principales. */

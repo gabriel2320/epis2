@@ -8,15 +8,15 @@ import {
 import { EpisModeSwitcher } from '../modes/EpisModeSwitcher.js';
 
 export type EpisClassicMd3TopAppBarProps = {
-  patientLabel?: string;
-  clinicianLabel?: string;
-  roleLabel?: string;
-  serviceLabel?: string;
-  timestampLabel?: string;
+  patientLabel?: string | undefined;
+  clinicianLabel?: string | undefined;
+  roleLabel?: string | undefined;
+  serviceLabel?: string | undefined;
+  timestampLabel?: string | undefined;
   onBackToCommand: () => void;
-  onOpenCommandPalette?: () => void;
-  connectivityLabel?: string;
-  testId?: string;
+  onOpenCommandPalette?: (() => void) | undefined;
+  connectivityLabel?: string | undefined;
+  testId?: string | undefined;
 };
 
 /** Top app bar MD3 — orienta, no ejecuta actos clínicos irreversibles. */

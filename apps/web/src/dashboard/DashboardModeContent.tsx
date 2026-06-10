@@ -624,7 +624,7 @@ export function DashboardModeContent() {
                     id: task.id,
                     label: task.label,
                     actionLabel: copy.dashboard.useCommand,
-                    disabled: task.disabled,
+                    ...(task.disabled !== undefined ? { disabled: task.disabled } : {}),
                     onAction: goCommand,
                   }))}
                   data-testid="epis2-dashboard-demo-tasks"

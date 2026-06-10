@@ -28,7 +28,11 @@ export type ClinicalFormRoutePath =
   | '/espacio/traslado'
   | '/espacio/informe-interconsulta';
 
-export type ClinicalPatientSearch = { patientId?: string; mode?: 'classic'; returnTo?: 'dashboard' };
+export type ClinicalPatientSearch = {
+  patientId?: string | undefined;
+  mode?: 'classic' | undefined;
+  returnTo?: 'dashboard' | undefined;
+};
 
 export function parseClinicalPatientSearch(search: Record<string, unknown>): ClinicalPatientSearch {
   const parsed: ClinicalPatientSearch = {};
@@ -46,15 +50,15 @@ export function parseClinicalPatientSearch(search: Record<string, unknown>): Cli
 
 /** CE-3b/CE-4: slots del comando en query string al abrir formulario. */
 export type ClinicalFormSearch = ClinicalPatientSearch & {
-  draftId?: string;
-  patientHint?: string;
-  medicationHint?: string;
-  studyHint?: string;
-  specialtyHint?: string;
-  bodySiteHint?: string;
-  urgencyHint?: 'routine' | 'urgent' | 'stat';
-  clinicalReasonHint?: string;
-  noteHint?: string;
+  draftId?: string | undefined;
+  patientHint?: string | undefined;
+  medicationHint?: string | undefined;
+  studyHint?: string | undefined;
+  specialtyHint?: string | undefined;
+  bodySiteHint?: string | undefined;
+  urgencyHint?: 'routine' | 'urgent' | 'stat' | undefined;
+  clinicalReasonHint?: string | undefined;
+  noteHint?: string | undefined;
 };
 
 const URGENCY_HINTS = new Set(['routine', 'urgent', 'stat']);
@@ -110,10 +114,10 @@ export type DashboardTab =
   | 'specialty';
 
 export type DashboardSearch = {
-  tab?: DashboardTab;
-  patientId?: string;
-  view?: 'classic';
-  mode?: 'dashboard';
+  tab?: DashboardTab | undefined;
+  patientId?: string | undefined;
+  view?: 'classic' | undefined;
+  mode?: 'dashboard' | undefined;
 };
 
 /** Tabs dashboard — fuente única para router, UI y UX-G04b. */
@@ -138,12 +142,12 @@ export { DASHBOARD_TAB_SET };
 
 /** Search de `/comando` — intentos de modo y contexto de retorno. */
 export type CommandSearch = {
-  patientId?: string;
-  intent?: 'selectPatient';
-  nextMode?: 'classic';
-  context?: 'classic' | 'dashboard';
-  error?: 'dashboardPermission';
-  tab?: DashboardTab;
+  patientId?: string | undefined;
+  intent?: 'selectPatient' | undefined;
+  nextMode?: 'classic' | undefined;
+  context?: 'classic' | 'dashboard' | undefined;
+  error?: 'dashboardPermission' | undefined;
+  tab?: DashboardTab | undefined;
 };
 
 export function parseCommandSearch(search: Record<string, unknown>): CommandSearch {
@@ -233,6 +237,6 @@ export type ClinicalNavigateFn = (options: ClinicalNavigateOptions) => void;
 export function useClinicalNavigate() {
   const navigate = useNavigate();
   return (options: ClinicalNavigateOptions) => {
-    void navigate(options as Parameters<typeof navigate>[0]);
+    void navigate(options as unknown as Parameters<typeof navigate>[0]);
   };
 }

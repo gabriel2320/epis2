@@ -37,15 +37,15 @@ import {
 const LAST_DASHBOARD_TAB_KEY = 'epis2-last-dashboard-tab';
 
 type EpisSessionContextValue = {
-  userId?: string;
-  userName?: string;
+  userId?: string | undefined;
+  userName?: string | undefined;
   role: string;
   permissions: readonly string[];
   environment: string;
   activeMode: EpisMode;
   previousMode: EpisMode | null;
-  activePatientId?: string;
-  modePreference?: EpisMode;
+  activePatientId?: string | undefined;
+  modePreference?: EpisMode | undefined;
   lastDashboardTab: DashboardTab;
   canOpenClassic: boolean;
   canOpenDashboard: boolean;

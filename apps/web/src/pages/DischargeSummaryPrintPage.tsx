@@ -39,23 +39,42 @@ export function DischargeSummaryPrintPage() {
         }
       >
         <PrintSection title={copy.print.sectionDiagnoses}>
-          <PrintField label={copy.print.diagnosis} value={values.diagnoses} />
+          <PrintField
+            label={copy.print.diagnosis}
+            {...(values.diagnoses !== undefined ? { value: values.diagnoses } : {})}
+          />
         </PrintSection>
         <PrintSection title={copy.print.sectionHospitalization}>
-          <PrintField label={copy.print.dischargeDate} value={values.dischargeDate} />
+          <PrintField
+            label={copy.print.dischargeDate}
+            {...(values.dischargeDate !== undefined ? { value: values.dischargeDate } : {})}
+          />
           <PrintField
             label={copy.print.hospitalizationSummary}
-            value={values.hospitalizationSummary}
+            {...(values.hospitalizationSummary !== undefined
+              ? { value: values.hospitalizationSummary }
+              : {})}
           />
-          <PrintField label={copy.print.evolution} value={values.evolution} />
+          <PrintField
+            label={copy.print.evolution}
+            {...(values.evolution !== undefined ? { value: values.evolution } : {})}
+          />
         </PrintSection>
         <PrintSection title={copy.print.sectionDischarge}>
           <PrintField
             label={copy.print.dischargeMedications}
-            value={values.dischargeMedications}
+            {...(values.dischargeMedications !== undefined
+              ? { value: values.dischargeMedications }
+              : {})}
           />
-          <PrintField label={copy.print.instructions} value={values.instructions} />
-          <PrintField label={copy.print.followUpPlan} value={values.followUpPlan} />
+          <PrintField
+            label={copy.print.instructions}
+            {...(values.instructions !== undefined ? { value: values.instructions } : {})}
+          />
+          <PrintField
+            label={copy.print.followUpPlan}
+            {...(values.followUpPlan !== undefined ? { value: values.followUpPlan } : {})}
+          />
         </PrintSection>
       </PrintLetterDocument>
     </Stack>

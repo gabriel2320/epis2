@@ -117,7 +117,10 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     search.noteHint,
   ]);
 
-  const form = useEpisClinicalBlueprintForm({ blueprint, seed });
+  const form = useEpisClinicalBlueprintForm({
+    blueprint,
+    ...(seed !== undefined ? { seed } : {}),
+  });
   const { watch, setValue, getValues, trigger, reset, formState } = form;
 
   useEffect(() => {
@@ -174,7 +177,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     [effectivePatientId, supportsClinicalContext, blueprint.blueprintId],
   );
   const { contextOpen, setContextOpen } = useEpisClinicalContextPanel({
-    storageKey: contextStorageKey,
+    ...(contextStorageKey !== undefined ? { storageKey: contextStorageKey } : {}),
   });
   const defaultContextInsertFieldId = blueprintSupportsClinicalContext(blueprint.blueprintId)
     ? defaultClinicalContextInsertField(blueprint.blueprintId)
@@ -390,8 +393,9 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       saveLabel={copy.forms.save}
       onSave={() => saveDraft('save')}
       saveDisabled={isSaving}
-      signLabel={canPersistDraft ? copy.forms.sign : undefined}
-      onSign={canPersistDraft ? () => saveDraft('sign') : undefined}
+      {...(canPersistDraft
+        ? { signLabel: copy.forms.sign, onSign: () => saveDraft('sign') }
+        : {})}
       signDisabled={isSaving}
       overflow={formActionOverflow}
       overflowAriaLabel={copy.forms.moreActions}
@@ -554,7 +558,9 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
           <EpisClinicalTwoPaneLayout
             appBar={
               <EpisClinicalFocusAppBar
-                patientName={activePatient?.displayName}
+                {...(activePatient?.displayName !== undefined
+                  ? { patientName: activePatient.displayName }
+                  : {})}
                 patientMeta={headerExtra}
                 contextOpen={contextOpen}
                 onContextOpenChange={setContextOpen}

@@ -2,15 +2,15 @@ import { copy } from '@epis2/design-system';
 import { Stack, Typography } from '@epis2/epis2-ui';
 
 export type EpisClassicMd3StatusBarProps = {
-  draftStatusLabel?: string;
-  lastSavedLabel?: string;
-  userLabel?: string;
-  roleLabel?: string;
-  aiStatusLabel?: string;
-  dbStatusLabel?: string;
-  environmentLabel?: string;
-  lastAuditLabel?: string;
-  testId?: string;
+  draftStatusLabel?: string | undefined;
+  lastSavedLabel?: string | undefined;
+  userLabel?: string | undefined;
+  roleLabel?: string | undefined;
+  aiStatusLabel?: string | undefined;
+  dbStatusLabel?: string | undefined;
+  environmentLabel?: string | undefined;
+  lastAuditLabel?: string | undefined;
+  testId?: string | undefined;
 };
 
 /** Barra de estado compacta — sin botones clínicos principales. */

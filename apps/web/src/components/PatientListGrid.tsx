@@ -53,7 +53,7 @@ export function PatientListGrid({
       emptyMessage={emptyMessage}
       hideFooter={rows.length <= 10}
       onRowClick={(row) => onSelectPatient(row.id)}
-      data-testid={testId}
+      {...(testId !== undefined ? { 'data-testid': testId } : {})}
     />
   );
 }

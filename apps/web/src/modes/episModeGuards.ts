@@ -4,22 +4,22 @@ import { EPIS_MODE_DEFINITIONS, type EpisMode } from './episModes.js';
 export type EpisSessionContextSnapshot = {
   role: string;
   permissions: readonly string[];
-  activePatientId?: string;
-  activeDashboardTab?: DashboardTab;
-  modePreference?: EpisMode;
+  activePatientId?: string | undefined;
+  activeDashboardTab?: DashboardTab | undefined;
+  modePreference?: EpisMode | undefined;
 };
 
 export type ModeRouteOptions = {
-  patientId?: string;
-  encounterId?: string;
-  dashboardTab?: DashboardTab;
-  serviceId?: string;
-  unitId?: string;
-  returnTo?: EpisMode | 'dashboard' | 'classic' | 'command';
-  focusPatientId?: string;
-  intent?: string;
-  context?: string;
-  replace?: boolean;
+  patientId?: string | undefined;
+  encounterId?: string | undefined;
+  dashboardTab?: DashboardTab | undefined;
+  serviceId?: string | undefined;
+  unitId?: string | undefined;
+  returnTo?: EpisMode | 'dashboard' | 'classic' | 'command' | undefined;
+  focusPatientId?: string | undefined;
+  intent?: string | undefined;
+  context?: string | undefined;
+  replace?: boolean | undefined;
 };
 
 export function canOpenMode(mode: EpisMode, ctx: EpisSessionContextSnapshot): boolean {

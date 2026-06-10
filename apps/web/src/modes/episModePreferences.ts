@@ -4,7 +4,7 @@ export type DashboardViewMode = 'legacy' | 'dashboard';
 
 export type EpisModeUserPreferences = {
   defaultPatientView: ClassicPatientViewMode;
-  defaultDashboardView?: DashboardViewMode;
+  defaultDashboardView?: DashboardViewMode | undefined;
 };
 
 /** @deprecated Usar EpisModeUserPreferences */

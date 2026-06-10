@@ -37,9 +37,11 @@ export function commandSlotsFromFormSearch(search: ClinicalFormSearch): CommandS
   return slots;
 }
 
+type CommandSlotsInput = { [K in keyof CommandSlots]?: CommandSlots[K] | undefined };
+
 export function formSearchFromCommandSlots(
   patientId: string | undefined,
-  slots: CommandSlots,
+  slots: CommandSlotsInput,
 ): ClinicalFormSearch {
   const search: ClinicalFormSearch = {};
   if (patientId) search.patientId = patientId;

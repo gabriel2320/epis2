@@ -14,9 +14,9 @@ import { EpisRadDashboardTabShell } from './rad/EpisRadDashboardTabShell.js';
 
 export type EmergencyDashboardTabProps = {
   data: EmergencyDashboardResponse;
-  activePatientId?: string;
-  onOpenPatient?: (patientId: string) => void;
-  onOpenEpicrisis?: (patientId: string) => void;
+  activePatientId?: string | undefined;
+  onOpenPatient?: ((patientId: string) => void) | undefined;
+  onOpenEpicrisis?: ((patientId: string) => void) | undefined;
 };
 
 export function EmergencyDashboardTab({

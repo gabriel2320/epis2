@@ -16,15 +16,15 @@ import type { ReactNode } from 'react';
 export type ClassicLeftNavItem = {
   id: string;
   label: string;
-  group?: 'primary' | 'more';
+  group?: 'primary' | 'more' | undefined;
 };
 
 export type EpisClassicMd3LeftNavigationProps = {
   items: readonly ClassicLeftNavItem[];
-  activeId?: string;
-  compact?: boolean;
+  activeId?: string | undefined;
+  compact?: boolean | undefined;
   onSelect: (id: string) => void;
-  testId?: string;
+  testId?: string | undefined;
 };
 
 const ICONS: Record<string, ReactNode> = {

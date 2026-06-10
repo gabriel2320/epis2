@@ -32,10 +32,22 @@ export function ImagingRequestPrintPage() {
           </>
         }
       >
-        <PrintField label={copy.print.scheduledDate} value={values.scheduledDate} />
-        <PrintField label={copy.print.modality} value={values.modality} />
-        <PrintField label={copy.print.studyDescription} value={values.studyDescription} />
-        <PrintField label={copy.print.clinicalIndication} value={values.clinicalIndication} />
+        <PrintField
+          label={copy.print.scheduledDate}
+          {...(values.scheduledDate !== undefined ? { value: values.scheduledDate } : {})}
+        />
+        <PrintField
+          label={copy.print.modality}
+          {...(values.modality !== undefined ? { value: values.modality } : {})}
+        />
+        <PrintField
+          label={copy.print.studyDescription}
+          {...(values.studyDescription !== undefined ? { value: values.studyDescription } : {})}
+        />
+        <PrintField
+          label={copy.print.clinicalIndication}
+          {...(values.clinicalIndication !== undefined ? { value: values.clinicalIndication } : {})}
+        />
         <PrintField label={copy.print.priority} value={printPriorityLabel(values.priority)} />
       </PrintA5Document>
     </Stack>

@@ -52,7 +52,7 @@ export function getModeDefinition(mode: EpisMode): EpisModeDefinition {
 
 export function resolveActiveMode(
   pathname: string,
-  search: { mode?: string; view?: string },
+  search: { mode?: string | undefined; view?: string | undefined },
 ): EpisMode {
   if (pathname === '/comando' || pathname.startsWith('/comando')) return 'command';
   if (pathname.startsWith('/epis2/dashboard')) {

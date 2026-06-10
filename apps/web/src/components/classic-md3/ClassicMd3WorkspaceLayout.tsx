@@ -24,21 +24,21 @@ import {
 } from './index.js';
 
 export type ClassicMd3WorkspaceLayoutProps = {
-  patientId?: string;
-  metaLine?: string;
-  allergyLabels?: readonly string[];
-  alertLabels?: readonly string[];
+  patientId?: string | undefined;
+  metaLine?: string | undefined;
+  allergyLabels?: readonly string[] | undefined;
+  alertLabels?: readonly string[] | undefined;
   mainContent: ReactNode;
-  supportingContent?: ReactNode;
-  supportingOpen?: boolean;
-  onSupportingToggle?: () => void;
+  supportingContent?: ReactNode | undefined;
+  supportingOpen?: boolean | undefined;
+  onSupportingToggle?: (() => void) | undefined;
   commandQuery: string;
   onCommandQueryChange: (value: string) => void;
   onCommandSubmit: () => void;
-  commandSuggestions?: readonly string[];
-  onCommandSuggestion?: (label: string) => void;
-  onOpenCommandPalette?: () => void;
-  draftStatusLabel?: string;
+  commandSuggestions?: readonly string[] | undefined;
+  onCommandSuggestion?: ((label: string) => void) | undefined;
+  onOpenCommandPalette?: (() => void) | undefined;
+  draftStatusLabel?: string | undefined;
 };
 
 /** Layout visual modo clásico — props/callbacks únicamente. */

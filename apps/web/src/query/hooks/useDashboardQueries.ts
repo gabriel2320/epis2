@@ -30,7 +30,7 @@ type DashboardPermissions = {
 
 type UseDashboardQueriesOptions = DashboardPermissions & {
   tab: DashboardTab;
-  patientId?: string;
+  patientId?: string | undefined;
 };
 
 export function useDashboardQueries(options: UseDashboardQueriesOptions) {

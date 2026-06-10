@@ -10,7 +10,7 @@ import {
 import { useNavigate } from '@tanstack/react-router';
 
 export type ForbiddenPageProps = {
-  detail?: string;
+  detail?: string | undefined;
 };
 
 export function ForbiddenPage({ detail }: ForbiddenPageProps) {

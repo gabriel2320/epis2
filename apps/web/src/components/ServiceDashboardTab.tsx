@@ -31,9 +31,9 @@ const LazyServiceDashboardCharts = lazy(() =>
 
 export type ServiceDashboardTabProps = {
   data: ServiceDashboardResponse;
-  activePatientId?: string;
+  activePatientId?: string | undefined;
   onOpenPatient: (patientId: string) => void;
-  onOpenEpicrisis?: (patientId: string) => void;
+  onOpenEpicrisis?: ((patientId: string) => void) | undefined;
   onReload: () => void;
 };
 

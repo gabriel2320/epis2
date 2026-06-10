@@ -53,10 +53,10 @@ function Section({
   title: string;
   empty: boolean;
   children: ReactNode;
-  testId?: string;
+  testId?: string | undefined;
 }) {
   return (
-    <EpisWorkspaceSection title={title} testId={testId}>
+    <EpisWorkspaceSection title={title} {...(testId !== undefined ? { testId } : {})}>
       {empty ? (
         <Typography variant="body2" color="text.secondary" sx={{ mb: children ? 1 : 0 }}>
           {copy.longitudinal.emptySection}
