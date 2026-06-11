@@ -26,7 +26,7 @@
       "id": "H-AUTO-0",
       "name": "Bootstrap stack + Ollama probe",
       "order": 0,
-      "state": "FAILED",
+      "state": "DONE",
       "commands": [
         "stack:dev",
         "ollama:probe",

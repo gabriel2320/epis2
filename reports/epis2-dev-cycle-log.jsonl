@@ -25,3 +25,7 @@
 {"at":"2026-06-11T03:10:44.531Z","event":"cycle-tramo-start","order":0,"id":"H-AUTO-0","flags":{"ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}}
 {"at":"2026-06-11T03:11:24.925Z","event":"cycle-tramo-failed","order":0,"stage":"dev:auto:6h"}
 {"at":"2026-06-11T03:11:24.927Z","event":"cycle-tramo-start","order":2,"id":"H-AUTO-2","flags":{"ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}}
+{"at":"2026-06-11T03:12:11.318Z","event":"cycle-tramo-ok","order":2,"id":"H-AUTO-2"}
+{"at":"2026-06-11T03:12:16.655Z","event":"cycle-bootstrap-start","ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}
+{"at":"2026-06-11T03:12:28.732Z","event":"cycle-bootstrap-ok","ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}
+{"at":"2026-06-11T03:12:28.736Z","event":"cycle-tramo-start","order":0,"id":"H-AUTO-0","flags":{"ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}}

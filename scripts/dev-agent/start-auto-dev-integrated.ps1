@@ -7,6 +7,7 @@ param(
   [switch]$DryRun,
   [switch]$NoPush,
   [switch]$Push,
+  [switch]$Continuous,
   [int]$Hours = 6
 )
 
@@ -63,7 +64,11 @@ if ($env:EPIS2_EVOLAB_ROOT) {
   exit 1
 }
 
-$parallelArgs = @("run", "dev:auto:parallel", "--", "--commit", "--continue-on-fail")
+$parallelArgs = if ($Continuous) {
+  @("run", "dev:auto:continuous", "--", "--commit")
+} else {
+  @("run", "dev:auto:parallel", "--", "--commit", "--continue-on-fail", "--retry-failed")
+}
 if ($Push -and -not $NoPush) { $parallelArgs += "--push" }
 if ($DryRun) { $parallelArgs += "--dry-run" }
 

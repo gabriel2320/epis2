@@ -38,3 +38,6 @@
 {"at":"2026-06-11T03:11:24.904Z","event":"tramo-failed","id":"H-AUTO-0","order":0}
 {"at":"2026-06-11T03:11:28.735Z","event":"tramo-start","id":"H-AUTO-2","order":2}
 {"at":"2026-06-11T03:11:37.328Z","event":"tramo-done","id":"H-AUTO-2","order":2}
+{"at":"2026-06-11T03:11:39.814Z","event":"complete","orders":[2]}
+{"at":"2026-06-11T03:12:29.213Z","event":"tramo-start","id":"H-AUTO-0","order":0}
+{"at":"2026-06-11T03:13:04.702Z","event":"tramo-done","id":"H-AUTO-0","order":0}

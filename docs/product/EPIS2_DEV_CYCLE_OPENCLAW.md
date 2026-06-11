@@ -60,7 +60,7 @@ npm run dev:cycle:sync
 
 ## Candado single-instance (`dev:auto:parallel`)
 
-El lanzador paralelo escribe `reports/auto-dev-parallel.lock.json` al arrancar (pid, startedAt, comando). Si ya hay una instancia viva, registra `parallel-already-running` en `reports/auto-dev-parallel-log.jsonl`, imprime un aviso claro y sale con código 0. Si el pid del lock está muerto, re-adquiere el candado. Para comprobar estado: `Get-Content reports/auto-dev-parallel.lock.json` (PowerShell) o `cat reports/auto-dev-parallel.lock.json`; si el proceso sigue activo, no lances otra sesión paralela.
+Módulo compartido `scripts/dev-agent/auto-dev-session-lock.mjs` (adquisición atómica `wx`). `dev:auto:parallel` y `dev:auto:orchestrate` (modo secuencial) adquieren el lock; el hijo orquestador bajo parallel usa `EPIS2_AUTO_DEV_UNDER_PARALLEL=1` y no compite. `dev:auto:cycle` y `start-auto-dev-full-cycle.ps1` comprueban el lock **antes** del bootstrap — duplicado → exit 0. El lock incluye PIDs hijos (`orchestratorPid`, `evolvePid`). Stale (PID muerto) → re-adquisición automática. Comprobar: `Get-Content reports/auto-dev-parallel.lock.json`.
 
 ## Candados (L3 MAX POWER)
 

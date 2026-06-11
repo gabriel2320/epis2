@@ -12,10 +12,13 @@ import { setTimeout as sleepMs } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 import { loadEnvFile } from '../load-env.mjs';
 import { applyDevCycleEnv, runCycleBootstrap, runCycleClose, runTramoCycle } from './openclaw-dev-cycle.mjs';
+import { acquireSessionLock, printAlreadyRunning, releaseSessionLock } from './auto-dev-session-lock.mjs';
 
 loadEnvFile();
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
+const underParallel = process.env.EPIS2_AUTO_DEV_UNDER_PARALLEL === '1';
+let lockHeld = false;
 const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
 const doCommit = args.includes('--commit');
@@ -57,6 +60,20 @@ function elapsedMs(start) {
 async function main() {
   process.env = applyDevCycleEnv(process.env);
 
+  if (!dryRun && !underParallel) {
+    const result = acquireSessionLock({
+      root,
+      cmd: `node scripts/dev-agent/auto-dev-orchestrator.mjs ${args.join(' ')}`.trim(),
+      mode: 'orchestrate',
+    });
+    if (!result.acquired) {
+      if (result.lock) printAlreadyRunning(result.lock, root);
+      log('orchestrator-already-running', { pid: result.lock?.pid });
+      process.exit(0);
+    }
+    lockHeld = true;
+  }
+
   console.log('EPIS2 dev:auto:orchestrate — PM-03 (dev-cycle)\n');
   console.log(`  Duración máx: ${durationHours} h · Pausa tramo: ${pauseMs} ms`);
   console.log(
@@ -65,6 +82,7 @@ async function main() {
 
   if ((doCommit || doPush) && process.env.EPIS2_AUTO_DEV_AUTHORIZED !== '1') {
     console.error('Set EPIS2_AUTO_DEV_AUTHORIZED=1 para commit/push');
+    if (lockHeld) releaseSessionLock(root);
     process.exit(1);
   }
 
@@ -72,6 +90,7 @@ async function main() {
     const boot = runCycleBootstrap({ dryRun: false });
     if (!boot.ok) {
       log('bootstrap-failed', { stage: boot.stage });
+      if (lockHeld) releaseSessionLock(root);
       process.exit(1);
     }
   }
@@ -108,7 +127,10 @@ async function main() {
       tramo.state = 'FAILED';
       saveLedger(ledger);
       log('tramo-orchestrate-failed', { order, stage: result.stage });
-      if (!args.includes('--continue-on-fail')) process.exit(1);
+      if (!args.includes('--continue-on-fail')) {
+        if (lockHeld) releaseSessionLock(root);
+        process.exit(1);
+      }
       continue;
     }
 
@@ -124,7 +146,10 @@ async function main() {
       stdio: 'inherit',
       shell: true,
     });
-    if (r.status !== 0) process.exit(1);
+    if (r.status !== 0) {
+      if (lockHeld) releaseSessionLock(root);
+      process.exit(1);
+    }
     log('push', { ok: true });
   }
 
@@ -134,9 +159,11 @@ async function main() {
 
   console.log('\ndev:auto:orchestrate OK');
   log('orchestrator-complete', { elapsedMs: elapsedMs(start) });
+  if (lockHeld) releaseSessionLock(root);
 }
 
 main().catch((err) => {
   console.error('dev:auto:orchestrate FAILED', err);
+  if (lockHeld) releaseSessionLock(root);
   process.exit(1);
 });

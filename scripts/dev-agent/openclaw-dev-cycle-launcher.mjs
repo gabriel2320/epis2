@@ -9,6 +9,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadEnvFile } from '../load-env.mjs';
 import { applyDevCycleEnv, runCycleBootstrap, runCycleClose } from './openclaw-dev-cycle.mjs';
+import { exitIfSessionActive } from './auto-dev-session-lock.mjs';
 
 loadEnvFile();
 
@@ -32,6 +33,10 @@ console.log(`  Modo:     ${parallel ? 'parallel (PM-03 + evolve background)' : '
 if ((doCommit || doPush) && process.env.EPIS2_AUTO_DEV_AUTHORIZED !== '1') {
   console.error('Set EPIS2_AUTO_DEV_AUTHORIZED=1 para commit/push');
   process.exit(1);
+}
+
+if (!dryRun) {
+  exitIfSessionActive(root, { exitCode: 0 });
 }
 
 const boot = runCycleBootstrap({ dryRun });

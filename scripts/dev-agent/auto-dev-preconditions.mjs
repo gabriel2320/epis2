@@ -12,23 +12,13 @@ import { loadEnvFile } from '../load-env.mjs';
 import { isEvolabPresent, resolveEvolabRoot } from './evolab-bridge.mjs';
 import { isOpenClawAutoDevEnabled } from './openclaw-lib.mjs';
 import { resolveOpenClawLocks } from './openclaw-policy.mjs';
+import { LOCK_REL, readActiveLock } from './auto-dev-session-lock.mjs';
 
 loadEnvFile();
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const parallelLockPath = join(root, 'reports/auto-dev-parallel.lock.json');
 const warnings = [];
 const errors = [];
-
-function isPidAlive(pid) {
-  if (!pid || pid <= 0) return false;
-  try {
-    process.kill(pid, 0);
-    return true;
-  } catch {
-    return false;
-  }
-}
 
 function ok(msg) {
   console.log(`  [OK] ${msg}`);
@@ -46,17 +36,15 @@ function fail(msg) {
 
 console.log('EPIS2 dev:auto:preconditions — PM-03\n');
 
-if (existsSync(parallelLockPath)) {
-  try {
-    const lock = JSON.parse(readFileSync(parallelLockPath, 'utf8'));
-    if (isPidAlive(lock.pid)) {
-      warn(
-        `dev:auto:parallel activo (PID ${lock.pid}, desde ${lock.startedAt ?? lock.at ?? '?'}) — lock ${parallelLockPath}`,
-      );
-    }
-  } catch {
-    warn(`Lock paralelo ilegible — revisar ${parallelLockPath}`);
-  }
+const activeLock = readActiveLock(root);
+if (activeLock) {
+  const kids = [];
+  if (activeLock.children?.orchestratorPid) kids.push(`orch=${activeLock.children.orchestratorPid}`);
+  if (activeLock.children?.evolvePid) kids.push(`evolve=${activeLock.children.evolvePid}`);
+  const extra = kids.length ? ` · ${kids.join(' ')}` : '';
+  warn(
+    `Sesión auto-dev activa (PID ${activeLock.pid}, modo ${activeLock.mode ?? 'parallel'}, desde ${activeLock.startedAt ?? '?'}) — ${LOCK_REL}${extra}`,
+  );
 }
 
 if (process.env.EPIS2_AUTO_DEV_AUTHORIZED === '1') {

@@ -10,6 +10,7 @@ const errors = [];
 for (const rel of [
   'scripts/dev-agent/openclaw-dev-cycle.mjs',
   'scripts/dev-agent/openclaw-dev-cycle-launcher.mjs',
+  'scripts/dev-agent/auto-dev-session-lock.mjs',
   'scripts/dev-agent/dev-cycle-sync.mjs',
   'docs/product/EPIS2_DEV_CYCLE_OPENCLAW.md',
 ]) {
@@ -20,6 +21,17 @@ const pkg = readFileSync(join(root, 'package.json'), 'utf8');
 for (const script of ['dev:auto:cycle', 'dev:cycle:sync', 'quality:openclaw-cycle-gate']) {
   if (!pkg.includes(`"${script}"`)) errors.push(`package.json sin ${script}`);
 }
+
+const lockMod = readFileSync(join(root, 'scripts/dev-agent/auto-dev-session-lock.mjs'), 'utf8');
+for (const token of ['acquireSessionLock', 'readActiveLock', 'exitIfSessionActive', 'flag: \'wx\'']) {
+  if (!lockMod.includes(token)) errors.push(`auto-dev-session-lock sin ${token}`);
+}
+
+const parallel = readFileSync(join(root, 'scripts/dev-agent/auto-dev-parallel-launcher.mjs'), 'utf8');
+if (!parallel.includes('auto-dev-session-lock')) errors.push('parallel-launcher sin session-lock');
+
+const cycleLauncher = readFileSync(join(root, 'scripts/dev-agent/openclaw-dev-cycle-launcher.mjs'), 'utf8');
+if (!cycleLauncher.includes('exitIfSessionActive')) errors.push('cycle-launcher sin exitIfSessionActive');
 
 const cycle = readFileSync(join(root, 'scripts/dev-agent/openclaw-dev-cycle.mjs'), 'utf8');
 for (const token of ['runCycleBootstrap', 'runTramoCycle', 'runCycleClose', 'applyDevCycleEnv']) {

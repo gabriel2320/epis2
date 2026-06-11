@@ -5,43 +5,47 @@
  *   EPIS2_AUTO_DEV_AUTHORIZED=1 EPIS2_AUTO_DEV_EVOLAB=1 EPIS2_AUTO_DEV_PARALLEL=1 \
  *     npm run dev:auto:parallel -- --commit [--push] [--continue-on-fail]
  *
- * Seguridad (env forzado en spawn Evolab):
- *   EPIS2_EVOLAB_PATCHING_ENABLED=false
- *   EPIS2_EVOLAB_REQUIRE_HUMAN_APPROVAL=true
- *   EPIS2_EVOLAB_LLM_CONCURRENCY=1
- *   EPIS2_AUTO_DEV_TRAMO_PAUSE_MS=120000
- *
- * Solo el track PM-03 hace commit/push git; Evolab permanece en sandbox.
+ * Candado: reports/auto-dev-parallel.lock.json (single-instance, stale-safe).
  */
-import { appendFileSync, createWriteStream, existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
+import { appendFileSync, createWriteStream, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { loadEnvFile } from '../load-env.mjs';
 import { applyDevCycleEnv } from './openclaw-dev-cycle.mjs';
 import { openClawSafetyEnv } from './openclaw-policy.mjs';
+import {
+  acquireSessionLock,
+  printAlreadyRunning,
+  releaseSessionLock,
+  updateSessionLockChildren,
+} from './auto-dev-session-lock.mjs';
 
 loadEnvFile();
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const logPath = join(root, 'reports/auto-dev-parallel-log.jsonl');
-const lockPath = join(root, 'reports/auto-dev-parallel.lock.json');
 const args = process.argv.slice(2);
 let evolveChild = null;
+let lockHeld = false;
 const dryRun = args.includes('--dry-run');
 const doCommit = args.includes('--commit');
 const doPush = args.includes('--push');
 const continueOnFail = args.includes('--continue-on-fail') || process.env.EPIS2_AUTO_DEV_PARALLEL !== '0';
-const retryFailed = args.includes('--retry-failed');
 const skipEvolve = args.includes('--no-evolve') || process.env.EPIS2_AUTO_DEV_EVOLAB !== '1';
 
 const evolveGenerations = process.env.EPIS2_EVOLAB_EVOLVE_GENERATIONS ?? '2';
 const evolveBudgetMinutes = process.env.EPIS2_EVOLAB_EVOLVE_BUDGET_MINUTES ?? '300';
 
+function launcherCmd() {
+  return `node scripts/dev-agent/auto-dev-parallel-launcher.mjs ${args.join(' ')}`.trim();
+}
+
 /** Env de seguridad compartido para procesos Evolab + OpenClaw. */
-function safetyEnv() {
+function safetyEnv(extra = {}) {
   const base = {
     ...process.env,
+    ...extra,
     EPIS2_ROOT: root,
     EPIS2_EVOLAB_PATCHING_ENABLED: 'false',
     EPIS2_EVOLAB_REQUIRE_HUMAN_APPROVAL: 'true',
@@ -54,78 +58,41 @@ function safetyEnv() {
   return openClawSafetyEnv(base);
 }
 
-function isPidAlive(pid) {
-  if (!pid || pid <= 0) return false;
-  try {
-    process.kill(pid, 0);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-function launcherCmd() {
-  return `node scripts/dev-agent/auto-dev-parallel-launcher.mjs ${args.join(' ')}`.trim();
-}
-
-function acquireSessionLock() {
-  if (dryRun || process.env.EPIS2_AUTO_DEV_PARALLEL_SKIP_LOCK === '1') return;
+function log(event, detail = {}) {
   mkdirSync(join(root, 'reports'), { recursive: true });
-  if (existsSync(lockPath)) {
-    try {
-      const existing = JSON.parse(readFileSync(lockPath, 'utf8'));
-      if (isPidAlive(existing.pid)) {
-        const startedAt = existing.startedAt ?? existing.at ?? '?';
-        console.log(
-          `\n[INFO] dev:auto:parallel ya en ejecución — no se inicia una segunda instancia.`,
-        );
-        console.log(`  PID:       ${existing.pid}`);
-        console.log(`  Inicio:    ${startedAt}`);
-        console.log(`  Comando:   ${existing.cmd ?? '?'}`);
-        console.log(`  Lock:      ${lockPath}\n`);
-        log('parallel-already-running', {
-          pid: existing.pid,
-          startedAt,
-          cmd: existing.cmd,
-        });
-        process.exit(0);
-      }
-      log('parallel-lock-stale', {
-        stalePid: existing.pid,
-        startedAt: existing.startedAt ?? existing.at,
-      });
-    } catch {
-      log('parallel-lock-corrupt', { lockPath });
-    }
-  }
-  const lock = {
-    pid: process.pid,
-    startedAt: new Date().toISOString(),
-    cmd: launcherCmd(),
-  };
-  writeFileSync(lockPath, `${JSON.stringify(lock)}\n`, 'utf8');
-  log('parallel-lock-acquired', { pid: lock.pid, cmd: lock.cmd });
+  appendFileSync(logPath, `${JSON.stringify({ at: new Date().toISOString(), event, ...detail })}\n`, 'utf8');
 }
 
-function releaseSessionLock() {
-  if (dryRun || process.env.EPIS2_AUTO_DEV_PARALLEL_SKIP_LOCK === '1' || !existsSync(lockPath)) return;
-  try {
-    const existing = JSON.parse(readFileSync(lockPath, 'utf8'));
-    if (existing.pid === process.pid) unlinkSync(lockPath);
-  } catch {
-    /* ignore */
+function tryAcquireLock() {
+  const result = acquireSessionLock({
+    root,
+    cmd: launcherCmd(),
+    mode: 'parallel',
+    dryRun,
+  });
+  if (!result.acquired) {
+    if (result.lock) {
+      printAlreadyRunning(result.lock);
+      log('parallel-already-running', {
+        pid: result.lock.pid,
+        startedAt: result.lock.startedAt,
+        cmd: result.lock.cmd,
+        mode: result.lock.mode,
+      });
+    } else {
+      log('parallel-lock-contested', {});
+      console.log('\n[INFO] Otra instancia adquirió el lock — saliendo.\n');
+    }
+    process.exit(0);
   }
+  lockHeld = true;
+  log('parallel-lock-acquired', { pid: process.pid, cmd: launcherCmd() });
 }
 
 function cleanupAndExit(code) {
   if (evolveChild) killChild(evolveChild, 'evolab-evolve');
-  releaseSessionLock();
+  if (lockHeld) releaseSessionLock(root);
   process.exit(code);
-}
-
-function log(event, detail = {}) {
-  mkdirSync(join(root, 'reports'), { recursive: true });
-  appendFileSync(logPath, `${JSON.stringify({ at: new Date().toISOString(), event, ...detail })}\n`, 'utf8');
 }
 
 async function isOllamaUp() {
@@ -205,7 +172,6 @@ function spawnOrchestrator() {
   if (doCommit) orchArgs.push('--commit');
   if (doPush) orchArgs.push('--push');
   if (continueOnFail) orchArgs.push('--continue-on-fail');
-  if (retryFailed) orchArgs.push('--retry-failed');
   if (dryRun) orchArgs.push('--dry-run');
 
   if (dryRun) {
@@ -218,9 +184,13 @@ function spawnOrchestrator() {
       cwd: root,
       stdio: 'inherit',
       shell: true,
-      env: safetyEnv(),
+      env: safetyEnv({
+        EPIS2_AUTO_DEV_UNDER_PARALLEL: '1',
+        EPIS2_DEV_CYCLE_SKIP_BOOTSTRAP: '1',
+      }),
     });
     log('spawn-orchestrator', { pid: child.pid, args: orchArgs });
+    updateSessionLockChildren(root, { orchestratorPid: child.pid });
     child.on('close', (code) => {
       log('orchestrator-exit', { pid: child.pid, code });
       resolve({ ok: code === 0, status: code ?? 1, pid: child.pid });
@@ -247,8 +217,7 @@ function killChild(child, label) {
 }
 
 async function main() {
-  acquireSessionLock();
-  process.on('exit', releaseSessionLock);
+  tryAcquireLock();
   process.on('SIGINT', () => cleanupAndExit(130));
   process.on('SIGTERM', () => cleanupAndExit(143));
 
@@ -258,7 +227,7 @@ async function main() {
 
   if ((doCommit || doPush) && process.env.EPIS2_AUTO_DEV_AUTHORIZED !== '1') {
     console.error('Set EPIS2_AUTO_DEV_AUTHORIZED=1 para commit/push');
-    process.exit(1);
+    cleanupAndExit(1);
   }
 
   log('parallel-start', {
@@ -286,7 +255,7 @@ async function main() {
       const stackRun = runSyncNpm('stack:dev');
       if (!stackRun.ok) {
         log('stack-dev-failed', {});
-        process.exit(1);
+        cleanupAndExit(1);
       }
       log('stack-dev-ok', {});
     } else {
@@ -297,7 +266,7 @@ async function main() {
     const pre = runSyncNode('scripts/dev-agent/auto-dev-preconditions.mjs', [], { env: safetyEnv() });
     if (!pre.ok) {
       log('preconditions-failed', {});
-      process.exit(1);
+      cleanupAndExit(1);
     }
 
     if (process.env.EPIS2_AUTO_DEV_EVOLAB === '1') {
@@ -305,7 +274,7 @@ async function main() {
       const doctor = runSyncNpm('evolab:doctor', [], { env: safetyEnv() });
       if (!doctor.ok) {
         log('evolab-doctor-failed', {});
-        process.exit(1);
+        cleanupAndExit(1);
       }
     }
 
@@ -314,7 +283,7 @@ async function main() {
       const policy = runSyncNpm('openclaw:policy', [], { env: safetyEnv() });
       if (!policy.ok) {
         log('openclaw-policy-failed', {});
-        process.exit(1);
+        cleanupAndExit(1);
       }
       runSyncNpm('dev:openclaw:sync', [], { env: safetyEnv() });
     }
@@ -341,6 +310,7 @@ async function main() {
     });
     if (evolveChild) {
       log('evolab-evolve-start', { pid: evolveChild.pid, evolveLog });
+      updateSessionLockChildren(root, { evolvePid: evolveChild.pid });
     }
   }
 
@@ -350,6 +320,7 @@ async function main() {
   if (evolveChild) {
     console.log('\n▶ Deteniendo Evolab evolve (orquestador finalizado)\n');
     killChild(evolveChild, 'evolab-evolve');
+    evolveChild = null;
   }
 
   if (!dryRun && process.env.EPIS2_AUTO_DEV_EVOLAB === '1') {
@@ -367,7 +338,7 @@ async function main() {
 
   if (!orch.ok && !continueOnFail) {
     console.error('\ndev:auto:parallel FAILED — orquestador PM-03 terminó con error');
-    process.exit(orch.status || 1);
+    cleanupAndExit(orch.status || 1);
   }
   if (!orch.ok && continueOnFail) {
     console.warn('\n[WARN] Orquestador terminó con error — continue-on-fail activo (revisar logs)');
@@ -375,6 +346,10 @@ async function main() {
 
   console.log('\ndev:auto:parallel OK');
   console.log(`Log: ${logPath}`);
+  cleanupAndExit(0);
 }
 
-void main();
+void main().catch((err) => {
+  console.error('dev:auto:parallel FAILED', err);
+  cleanupAndExit(1);
+});

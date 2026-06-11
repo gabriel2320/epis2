@@ -60,6 +60,8 @@ if ($env:EPIS2_EVOLAB_ROOT) {
   exit 1
 }
 
+# Candado single-instance: dev:auto:cycle comprueba lock antes de bootstrap (exit 0 si ya activo).
+
 $cycleArgs = @("run", "dev:auto:cycle", "--", "--commit", "--continue-on-fail")
 if ($Push -and -not $NoPush) { $cycleArgs += "--push" }
 if ($DryRun) { $cycleArgs += "--dry-run" }

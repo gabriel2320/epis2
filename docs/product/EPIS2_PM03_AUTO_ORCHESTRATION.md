@@ -151,6 +151,12 @@ Abrir en Cursor: `@reports/auto-dev-cursor-prompt-tramo-N.md` + `@reports/dev-ag
 
 ---
 
+## Candado single-instance
+
+Una sola sesión auto-dev activa (parallel, cycle u orchestrate secuencial). Lock: `reports/auto-dev-parallel.lock.json` vía `auto-dev-session-lock.mjs` (adquisición atómica; stale si el PID murió). Duplicado → mensaje + **exit 0**. El orquestador hijo de `dev:auto:parallel` no compite (`EPIS2_AUTO_DEV_UNDER_PARALLEL=1`). `dev:auto:preconditions` avisa si el lock está vivo.
+
+---
+
 ## Gate
 
 ```bash

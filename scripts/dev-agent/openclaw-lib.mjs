@@ -21,6 +21,7 @@ export const AGENT_IDS = [
   'ledger',
   'release',
   'ux',
+  'programming',
 ];
 
 /** @type {Record<string, { id: string, name: string, skill: string, paths: string[], gates: string[] }>} */
@@ -118,6 +119,23 @@ export const AGENT_CATALOG = {
       'docs/quality/M3_ANTI_DRIFT_GATES.md',
     ],
     gates: ['quality:ui-simplify-gate', 'quality:three-modes-gate'],
+  },
+  programming: {
+    id: 'programming',
+    name: 'Programming / OpenClaw Support',
+    skill: '.openclaw/epis2/skills/epis2-programming-agent/SKILL.md',
+    paths: [
+      'scripts/dev-agent',
+      'docs/product/EPIS2_OPENCLAW_INTEGRATION.md',
+      'docs/product/EPIS2_DEV_CYCLE_OPENCLAW.md',
+      'docs/product/EPIS2_PM03_AUTO_ORCHESTRATION.md',
+      'reports/openclaw-latest-brief.md',
+      'reports/openclaw-latest-handoff.md',
+      'reports/openclaw-programming-latest.md',
+      'reports/auto-dev-cursor-prompt-tramo-1.md',
+      '.openclaw/epis2',
+    ],
+    gates: ['quality:openclaw-gate', 'quality:openclaw-cycle-gate', 'check'],
   },
 };
 
@@ -224,6 +242,7 @@ export function suggestAgents({ tramo, phase, changedFiles = [] }) {
   if (tramo) {
     agents.add('release');
     agents.add('ledger');
+    if (['1', '2', '3', '4', 'J', 'K'].includes(String(tramo))) agents.add('programming');
     if (['J', 'K', '2', '3'].includes(String(tramo))) agents.add('ux');
     if (['J', 'K', '4', '6'].includes(String(tramo))) agents.add('golden');
   }
