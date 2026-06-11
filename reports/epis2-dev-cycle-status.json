@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-06-11T03:04:55.217Z",
+  "syncedAt": "2026-06-11T03:08:27.412Z",
   "cycle": {
     "openclaw": true,
     "ollama": true,
@@ -9,60 +9,60 @@
     "level": "L3",
     "mode": "max-power-max-power-patch-code",
     "maxPower": true,
-    "artifactCount": 3,
+    "artifactCount": 10,
     "latestBrief": "reports/openclaw-latest-brief.md",
     "latestHandoff": null
   },
   "ollama": {
-    "planObjective": "Completar la fase B con las microfases pendientes y preparar la entrega final de Ola 2.",
-    "nextMicrophase": "MF-183→204",
+    "planObjective": "Completar la Ola 2 y avanzar con la Ola 3 longitudinal, enfocándose en el Tramo J farmacia.",
+    "nextMicrophase": "MF-183→200",
     "automationOk": null,
     "model": "qwen2.5-coder:14b"
   },
   "evolab": {
     "present": true,
     "root": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\epis2-evolab",
-    "openFindings": 18,
-    "syncedAt": "2026-06-11T03:00:20.355Z",
+    "openFindings": 22,
+    "syncedAt": "2026-06-11T03:08:26.790Z",
     "topFindings": [
+      {
+        "id": "6acb36a0-111e-4bde-9f25-e91a58e02e67",
+        "severity": "high",
+        "fingerprint": "bebd14371350f384",
+        "scenarioId": "discharge-critical-pending-001-m8pp-006",
+        "runIdPrefix": "31e28ba3",
+        "reviewStatus": "open"
+      },
+      {
+        "id": "8b913e8b-7669-42cd-a154-92e20ca6033e",
+        "severity": "high",
+        "fingerprint": "f0afe0d70dada190",
+        "scenarioId": "admission-double-booking-001-m8cx-004",
+        "runIdPrefix": "8a8ff5d1",
+        "reviewStatus": "open"
+      },
+      {
+        "id": "af46931e-f535-4a0f-a818-b2f6dd59cb18",
+        "severity": "medium",
+        "fingerprint": "68c457a21613e462",
+        "scenarioId": "admission-discharge-001-m8rs-001",
+        "runIdPrefix": "43134749",
+        "reviewStatus": "open"
+      },
+      {
+        "id": "9ba07368-9cf7-4c20-b339-c9b2e245fc9d",
+        "severity": "high",
+        "fingerprint": "50df1d69aac96d12",
+        "scenarioId": "admission-discharge-001-m8rs-001",
+        "runIdPrefix": "43134749",
+        "reviewStatus": "open"
+      },
       {
         "id": "c3d6a0de-13ba-4e57-96d5-a2d23720e710",
         "severity": "high",
         "fingerprint": "f0afe0d70dada190",
         "scenarioId": "admission-double-booking-001-m8cx-004",
         "runIdPrefix": "985128a3",
-        "reviewStatus": "open"
-      },
-      {
-        "id": "53a3091d-2c84-4688-bea3-12a6e781788a",
-        "severity": "medium",
-        "fingerprint": "68c457a21613e462",
-        "scenarioId": "admission-discharge-001-m8rs-001",
-        "runIdPrefix": "478289a5",
-        "reviewStatus": "open"
-      },
-      {
-        "id": "1c0b218b-ea61-4b39-9c88-93a2f22cc0fe",
-        "severity": "high",
-        "fingerprint": "50df1d69aac96d12",
-        "scenarioId": "admission-discharge-001-m8rs-001",
-        "runIdPrefix": "478289a5",
-        "reviewStatus": "open"
-      },
-      {
-        "id": "66cd8a89-bbe9-4a5a-bbc6-b255af5f0ced",
-        "severity": "high",
-        "fingerprint": "47934da9328984b6",
-        "scenarioId": "discharge-critical-pending-001",
-        "runIdPrefix": "9afec774",
-        "reviewStatus": "open"
-      },
-      {
-        "id": "e9e72053-67d3-49f6-bcfe-f4066a706233",
-        "severity": "high",
-        "fingerprint": "47934da9328984b6",
-        "scenarioId": "discharge-critical-pending-001",
-        "runIdPrefix": "ccc706d2",
         "reviewStatus": "open"
       }
     ]
@@ -77,7 +77,7 @@
       {
         "order": 1,
         "id": "H-AUTO-1",
-        "state": "PENDING"
+        "state": "DONE"
       },
       {
         "order": 2,

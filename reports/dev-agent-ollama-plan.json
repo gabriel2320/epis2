@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-11T03:05:06.137Z",
+  "generatedAt": "2026-06-11T03:08:32.373Z",
   "model": "qwen2.5-coder:7b",
   "route": {
     "function": "dev-plan",
@@ -10,11 +10,11 @@
   "ollamaUrl": "http://127.0.0.1:11434",
   "plan": {
     "activePhase": "B",
-    "nextMicrophase": "MF-183",
-    "objective": "Completar la implementación de la fase B, enfocándose en la microfase MF-183 que incluye la integración de nuevas funcionalidades y mejoras en el flujo de trabajo del paciente.",
+    "nextMicrophase": "MF-183→190",
+    "objective": "Completar la implementación de las microfases MF-183 a MF-190, enfocándose en mejorar la experiencia del usuario y la productividad clínica.",
     "allowedPaths": [
-      "apps/web/components/MicrophaseMF183",
-      "packages/clinical-productivity/microphases/MF183"
+      "apps/web/src/components/MicrophaseForms",
+      "packages/clinical-productivity/src"
     ],
     "forbiddenPatterns": [
       "OpenMRS",
@@ -31,8 +31,8 @@
       "ledger-keeper"
     ],
     "risks": [
-      "Interferencia con funcionalidades existentes",
-      "Errores en la integración de nuevas funcionalidades"
+      "Complejidad de las microfases",
+      "Requerimientos cambiantes"
     ],
     "requiresHumanReview": true
   }

@@ -12,11 +12,12 @@ No se lanzó ciclo duplicado — sesión previa activa.
 
 | Proceso | PID | Rol |
 |---------|-----|-----|
-| Launcher full-cycle | 20964 | `start-auto-dev-full-cycle.ps1 -NoPush` |
-| PM-03 orquestador | 11120 | `dev:auto:orchestrate --commit --continue-on-fail` |
-| Evolab evolve (bg) | 30112 | 2 gen · 300 min → `reports/evolab-evolve-parallel.log` |
+| Launcher full-cycle | 24904 | `start-auto-dev-full-cycle.ps1 -NoPush` (relanzado) |
+| PM-03 orquestador | ver log | `dev:auto:orchestrate --commit --continue-on-fail` |
+| Evolab evolve (bg) | ver log | → `reports/evolab-evolve-parallel.log` |
 
 **Tramo actual:** H-AUTO-1 ✓ DONE → pausa 120s → siguiente (resume ledger)  
+**Duplicado detenido:** segundo spawn (PID 4624/13408) eliminado para evitar colisión con orquestador principal.
 **Subagentes activos:**
 
 | Capa | Estado |
@@ -63,9 +64,9 @@ Estado unificado: `reports/epis2-dev-cycle-status.json`
 
 ---
 
-## Fix aplicado (pendiente commit)
+## Fix aplicado
 
-`auto-dev-6h-runner.mjs`: mensaje git commit ASCII-only (`tramo-N-ID`) para evitar pathspec en Windows con nombres unicode/`+`.
+`0de70d1` — `auto-dev-6h-runner.mjs`: mensaje git commit ASCII-only para Windows.
 
 ---
 

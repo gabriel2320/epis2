@@ -1,9 +1,9 @@
 # OpenClaw EPIS2 Brief
 
-> **Microfase:** H-AUTO-1
+> **Microfase:** H-AUTO-CYCLE
 > **Modo:** max-power-max-power-patch-code (L3)
 > **Candados:** safe-run=true · patching=true · git-write=false
-> **Generado:** 2026-06-11T03:05:02.376Z
+> **Generado:** 2026-06-11T03:08:30.184Z
 
 ## Restricciones activas
 
@@ -15,16 +15,23 @@
 ## Git status (sanitized)
 
 ```
-## master...origin/master [ahead 2]
+## master...origin/master [ahead 3]
+ M reports/auto-dev-6h-log.jsonl
  M reports/auto-dev-orchestrator-log.jsonl
  M reports/auto-dev-parallel-log.jsonl
+ M reports/dev-agent-brief.md
+ M reports/dev-agent-ollama-automation.json
  M reports/dev-agent-ollama-plan.json
+ M reports/dev-agent-ollama-write-plan.json
+ M reports/epis2-auto-dev-6h-close-2026-06-10.md
+ M reports/epis2-continuous-dev-active-2026-06-11.md
  M reports/epis2-dev-cycle-log.jsonl
  M reports/epis2-dev-cycle-status.json
  M reports/evolab-open-findings.json
  M reports/openclaw-auto-dev-index.json
  M reports/openclaw-latest-brief.md
- M scripts/dev-agent/start-auto-dev-full-cycle.ps1
+ M scripts/dev-agent/auto-dev-parallel-launcher.mjs
+?? reports/epis2-dev-cycle-close-2026-06-11.md
 ```
 
 ## Flags (.env.example keys only — valores no cargados)
@@ -68,39 +75,32 @@
 - `scripts/legacy-audit/validate-quarantine.mjs`
 - `docs/legacy/EPIS_POSTMORTEM.md`
 
-## Agente: Clinical Safety Reviewer
+## Agente: Architecture/Legacy Reviewer
 
-- **Skill:** `.openclaw/epis2/skills/epis2-clinical-safety-reviewer/SKILL.md`
-- **Gates sugeridos (solo lectura):** `npm run test`, `npm run quality:tramos-clinical-signoff-gate`
-
-### Archivos a revisar
-
-- `packages/clinical-domain/src/clinicalSafety/evaluate.test.ts`
-- `packages/clinical-domain/src/clinicalSafety/evaluate.ts`
-- `packages/clinical-domain/src/clinicalSafety/fromDemoContext.test.ts`
-- `packages/clinical-domain/src/clinicalSafety/fromDemoContext.ts`
-- `packages/clinical-domain/src/clinicalSafety/rules.ts`
-- `packages/clinical-domain/src/clinicalSafety/types.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/evaluate.test.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/evaluate.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/fromSafetyInput.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/rules.test.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/rules.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/toSafetyWarnings.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/types.ts`
-- `packages/clinical-domain/src/draftStates.ts`
-- `docs/quality/GOLDEN_CLINICAL_JOURNEY.md`
-
-## Agente: Microphase Ledger Reviewer
-
-- **Skill:** `.openclaw/epis2/skills/epis2-ledger-reviewer/SKILL.md`
-- **Gates sugeridos (solo lectura):** `npm run quality:microphases`, `npm run quality:microphase-next`
+- **Skill:** `.openclaw/epis2/skills/epis2-architecture-reviewer/SKILL.md`
+- **Gates sugeridos (solo lectura):** `npm run architecture:validate`, `npm run legacy:validate-manifest`
 
 ### Archivos a revisar
 
-- `docs/quality/microphase-ledger.json`
-- `docs/quality/MICROPHASE_PROGRAM.md`
-- `docs/product/EPIS2_TABLERO.md`
+- `docs/PRODUCT_CANON.md`
+- `legacy-import-manifest.json`
+- `docs/legacy/LEGACY_IMPORT_LEDGER.md`
+- `scripts/architecture/ai-write-boundary.mjs`
+- `scripts/architecture/command-center-home.mjs`
+- `scripts/architecture/dev-catalog-gates.mjs`
+- `scripts/architecture/explicit-permissions.mjs`
+- `scripts/architecture/fhir-export-boundary.mjs`
+- `scripts/architecture/human-approval-required.mjs`
+- `scripts/architecture/layout-g12-gate.mjs`
+- `scripts/architecture/lib/paths.mjs`
+- `scripts/architecture/lib/report.mjs`
+- `scripts/architecture/lib/scan-sources.mjs`
+- `scripts/architecture/main-product-invariants.mjs`
+- `scripts/architecture/no-direct-mui-imports.mjs`
+- `scripts/architecture/no-legacy-dependencies.mjs`
+- `scripts/architecture/single-command-registry.mjs`
+- `scripts/architecture/single-epis2-theme.mjs`
+- … +8 más bajo `scripts/architecture`
 
 ## Comandos de verificación sugeridos (humanos / Cursor)
 
@@ -114,4 +114,4 @@ npm run db:validate
 ## Prompt semilla para OpenClaw
 
 Actúa como revisor read-only EPIS2. No modifiques archivos. No ejecutes push/commit/.env.
-Microfase objetivo: H-AUTO-1. Revisa los archivos listados y entrega hallazgos en formato handoff.
+Microfase objetivo: H-AUTO-CYCLE. Revisa los archivos listados y entrega hallazgos en formato handoff.

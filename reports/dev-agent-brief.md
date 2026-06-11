@@ -1,8 +1,8 @@
 # EPIS2 — Dev Brief (IA asistida)
 
-> **Inicio rápido:** abrir `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-layers-integrator.md` en Cursor y declarar alcance en el primer mensaje.
+> **Inicio rápido:** abrir `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-ollama-clinical.md` en Cursor y declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-11T03:03:21.469Z · **Fase:** B
+**Generado:** 2026-06-11T03:06:55.662Z · **Fase:** B
 
 ## Estado del tablero (fuente canónica)
 
@@ -14,10 +14,12 @@
 ## Objetivo sugerido
 
 - **P1**: Revisión humana opcional post-captura M3 (hover/foco/rail/two-pane claro/oscuro) — evidencia en `reports/m3-visual-evidence/2026-06-10/`
+- **Ollama (≤24 h):** Completar la implementación de la fase B, enfocándose en la microfase MF-183 que incluye la integración de nuevas funcionalidades y mejoras en el flujo de trabajo del paciente.
+- **MF propuesta:** MF-183
 
 ## Subagente primario
 
-**[`layers-integrator`](./dev-agent-prompt-layers-integrator.md)** — Integrador capas L3+L4+L5
+**[`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md)** — IA clínica local (Ollama producto)
 
 ## Secuencia completa
 
@@ -29,38 +31,32 @@
 
 ## Working tree
 
-- Rama: `master` · cambios: 68 (lista truncada)
+- Rama: `master` · cambios: 18
 
 ```
-MM .env.example
-M  .gitignore
-A  .openclaw/epis2/README.md
-A  .openclaw/epis2/policies/epis2-forbidden-actions.md
-AM .openclaw/epis2/policies/epis2-readonly-policy.md
-A  .openclaw/epis2/skills/epis2-architecture-reviewer/SKILL.md
-A  .openclaw/epis2/skills/epis2-clinical-safety-reviewer/SKILL.md
-A  .openclaw/epis2/skills/epis2-eval-reviewer/SKILL.md
-A  .openclaw/epis2/skills/epis2-golden-reviewer/SKILL.md
-A  .openclaw/epis2/skills/epis2-ledger-reviewer/SKILL.md
-A  .openclaw/epis2/skills/epis2-release-reviewer/SKILL.md
-A  .openclaw/epis2/skills/epis2-security-phi-reviewer/SKILL.md
-A  .openclaw/epis2/skills/epis2-ux-reviewer/SKILL.md
-M  docs/product/EPIS2_DEV_AGENT_ORCHESTRATION.md
-M docs/product/EPIS2_EVOLAB_INTEGRATION.md
-AM docs/product/EPIS2_OPENCLAW_INTEGRATION.md
-MM docs/product/EPIS2_PM03_AUTO_ORCHESTRATION.md
-MM docs/quality/auto-dev-6h-ledger.json
-MM package.json
+M  docs/quality/auto-dev-6h-ledger.json
 MM reports/auto-dev-6h-log.jsonl
 M  reports/auto-dev-cursor-prompt-tramo-1.md
-M  reports/auto-dev-cursor-prompt-tramo-3.md
 M  reports/auto-dev-cursor-queue.jsonl
-MM reports/auto-dev-orchestrator-log.jsonl
+M  reports/auto-dev-orchestrator-log.jsonl
+M  reports/auto-dev-parallel-log.jsonl
+M reports/dev-agent-ollama-automation.json
+M  reports/dev-agent-ollama-plan.json
+M reports/dev-agent-ollama-write-plan.json
+M reports/epis2-auto-dev-6h-close-2026-06-10.md
+MM reports/epis2-dev-cycle-log.jsonl
+MM reports/epis2-dev-cycle-status.json
+M  reports/evolab-open-findings.json
+M  reports/openclaw-auto-dev-index.json
+MM reports/openclaw-latest-brief.md
+M scripts/dev-agent/auto-dev-6h-runner.mjs
+M scripts/dev-agent/auto-dev-parallel-launcher.mjs
+M  scripts/dev-agent/start-auto-dev-full-cycle.ps1
 ```
 
 ## Evolab (QA externo)
 
-- Evolab hallazgos abiertos: **18** (sync 2026-06-11T03:00:20.355Z)
+- Evolab hallazgos abiertos: **18** (sync 2026-06-11T03:05:01.969Z)
 - Root: `C:\Users\gdela\OneDrive\Documentos Importantes\epis2-evolab`
 
 ## OpenClaw (revisores read-only)
@@ -119,7 +115,7 @@ npm run dev:agent:close                     # checklist + plantilla reporte
 # EPIS2 — Sesión subagentes de desarrollo
 
 **Fase:** B
-**Generado:** 2026-06-11T03:03:21.470Z
+**Generado:** 2026-06-11T03:06:55.664Z
 
 ## Secuencia recomendada
 

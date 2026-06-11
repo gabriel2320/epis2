@@ -24,3 +24,14 @@
 {"at":"2026-06-11T03:05:01.994Z","event":"spawn-detached","label":"evolab-evolve","pid":30112,"cmd":"C:\\Program Files\\nodejs\\node.exe scripts/dev-agent/evolab-bridge.mjs evolve --generations 2 --budget-minutes 300 --json"}
 {"at":"2026-06-11T03:05:01.994Z","event":"evolab-evolve-start","pid":30112,"evolveLog":"C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS2\\reports\\evolab-evolve-parallel.log"}
 {"at":"2026-06-11T03:05:02.001Z","event":"spawn-orchestrator","pid":11120,"args":["run","dev:auto:orchestrate","--","--commit","--continue-on-fail"]}
+{"at":"2026-06-11T03:07:09.988Z","event":"parallel-start","doCommit":true,"doPush":false,"continueOnFail":true,"skipEvolve":false,"evolveGenerations":"2","evolveBudgetMinutes":"300","env":{"EPIS2_EVOLAB_PATCHING_ENABLED":"false","EPIS2_EVOLAB_REQUIRE_HUMAN_APPROVAL":"true","EPIS2_EVOLAB_LLM_CONCURRENCY":"1","EPIS2_AUTO_DEV_TRAMO_PAUSE_MS":"120000"}}
+{"at":"2026-06-11T03:07:10.014Z","event":"stack-skipped","reason":"stack-ready"}
+{"at":"2026-06-11T03:07:15.356Z","event":"spawn-detached","label":"evolab-evolve","pid":13408,"cmd":"C:\\Program Files\\nodejs\\node.exe scripts/dev-agent/evolab-bridge.mjs evolve --generations 2 --budget-minutes 300 --json"}
+{"at":"2026-06-11T03:07:15.356Z","event":"evolab-evolve-start","pid":13408,"evolveLog":"C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS2\\reports\\evolab-evolve-parallel.log"}
+{"at":"2026-06-11T03:07:15.363Z","event":"spawn-orchestrator","pid":4624,"args":["run","dev:auto:orchestrate","--","--commit","--continue-on-fail"]}
+{"at":"2026-06-11T03:08:09.963Z","event":"orchestrator-exit","pid":11120,"code":1}
+{"at":"2026-06-11T03:08:10.129Z","event":"kill-child","label":"evolab-evolve","pid":30112}
+{"at":"2026-06-11T03:08:14.258Z","event":"orchestrator-exit","pid":4624,"code":4294967295}
+{"at":"2026-06-11T03:08:14.559Z","event":"kill-child","label":"evolab-evolve","pid":13408}
+{"at":"2026-06-11T03:08:18.524Z","event":"parallel-complete","orchestratorOk":false,"orchestratorStatus":1}
+{"at":"2026-06-11T03:08:23.507Z","event":"parallel-complete","orchestratorOk":false,"orchestratorStatus":4294967295}

@@ -60,7 +60,7 @@
       "id": "H-AUTO-3",
       "name": "Deprecación UI redundante",
       "order": 3,
-      "state": "PENDING",
+      "state": "DONE",
       "commands": [
         "quality:dual-chart-legacy-freeze-gate",
         "quality:three-modes-gate"

@@ -13,7 +13,7 @@
  *
  * Solo el track PM-03 hace commit/push git; Evolab permanece en sandbox.
  */
-import { appendFileSync, createWriteStream, mkdirSync } from 'node:fs';
+import { appendFileSync, createWriteStream, existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -25,6 +25,7 @@ loadEnvFile();
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const logPath = join(root, 'reports/auto-dev-parallel-log.jsonl');
+const lockPath = join(root, 'reports/auto-dev-parallel.lock');
 const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
 const doCommit = args.includes('--commit');
@@ -49,6 +50,49 @@ function safetyEnv() {
     return applyDevCycleEnv(base);
   }
   return openClawSafetyEnv(base);
+}
+
+function isPidAlive(pid) {
+  if (!pid || pid <= 0) return false;
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function acquireSessionLock() {
+  if (dryRun) return;
+  mkdirSync(join(root, 'reports'), { recursive: true });
+  if (existsSync(lockPath)) {
+    try {
+      const existing = JSON.parse(readFileSync(lockPath, 'utf8'));
+      if (isPidAlive(existing.pid)) {
+        console.error(
+          `\n[FAIL] Sesión paralela ya activa (PID ${existing.pid}). Espera a que termine o borra ${lockPath}\n`,
+        );
+        process.exit(1);
+      }
+    } catch {
+      /* lock corrupto — sobrescribir */
+    }
+  }
+  writeFileSync(
+    lockPath,
+    `${JSON.stringify({ pid: process.pid, at: new Date().toISOString() })}\n`,
+    'utf8',
+  );
+}
+
+function releaseSessionLock() {
+  if (dryRun || !existsSync(lockPath)) return;
+  try {
+    const existing = JSON.parse(readFileSync(lockPath, 'utf8'));
+    if (existing.pid === process.pid) unlinkSync(lockPath);
+  } catch {
+    /* ignore */
+  }
 }
 
 function log(event, detail = {}) {
@@ -174,6 +218,17 @@ function killChild(child, label) {
 }
 
 async function main() {
+  acquireSessionLock();
+  process.on('exit', releaseSessionLock);
+  process.on('SIGINT', () => {
+    releaseSessionLock();
+    process.exit(130);
+  });
+  process.on('SIGTERM', () => {
+    releaseSessionLock();
+    process.exit(143);
+  });
+
   console.log('EPIS2 dev:auto:parallel — sesión integrada PM-03 + Evolab\n');
   console.log('  Seguridad: patching=off · human approval=on · LLM concurrency=1');
   console.log(`  Evolab evolve: ${skipEvolve ? 'off' : `on (${evolveGenerations} gen, ${evolveBudgetMinutes} min)`}\n`);

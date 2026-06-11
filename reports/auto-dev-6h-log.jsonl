@@ -30,3 +30,6 @@
 {"at":"2026-06-11T03:00:14.613Z","event":"tramo-failed","id":"H-AUTO-6","order":6}
 {"at":"2026-06-11T03:05:06.534Z","event":"tramo-start","id":"H-AUTO-1","order":1}
 {"at":"2026-06-11T03:05:07.957Z","event":"tramo-done","id":"H-AUTO-1","order":1}
+{"at":"2026-06-11T03:05:08.114Z","event":"complete","orders":[1]}
+{"at":"2026-06-11T03:08:32.781Z","event":"tramo-start","id":"H-AUTO-3","order":3}
+{"at":"2026-06-11T03:08:34.005Z","event":"tramo-done","id":"H-AUTO-3","order":3}
