@@ -45,3 +45,5 @@
 {"at":"2026-06-11T03:14:15.083Z","event":"tramo-start","id":"H-AUTO-4","order":4}
 {"at":"2026-06-11T03:15:09.135Z","event":"tramo-start","id":"H-AUTO-4","order":4}
 {"at":"2026-06-11T03:15:20.736Z","event":"tramo-done","id":"H-AUTO-4","order":4}
+{"at":"2026-06-11T03:15:22.782Z","event":"complete","orders":[4]}
+{"at":"2026-06-11T03:16:36.921Z","event":"tramo-done","id":"H-AUTO-4","order":4}

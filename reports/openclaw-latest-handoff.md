@@ -14,7 +14,7 @@ read-only-reviewer · EPIS2-native
 - Programming / OpenClaw Support (`programming`)
 
 ## Generado
-2026-06-11T03:15:20.825Z
+2026-06-11T03:16:36.992Z
 
 ## Archivos revisados
 - `.env.example`
@@ -55,6 +55,7 @@ read-only-reviewer · EPIS2-native
 - `scripts/quality/run-pilot-trial.mjs`
 - `reports/auto-dev-6h-log.jsonl`
 - `reports/auto-dev-continuous-log.jsonl`
+- `reports/auto-dev-continuous.lock`
 - `reports/auto-dev-cursor-prompt-tramo-1.md`
 - `reports/auto-dev-cursor-prompt-tramo-2.md`
 - `reports/auto-dev-cursor-prompt-tramo-3.md`
@@ -62,7 +63,6 @@ read-only-reviewer · EPIS2-native
 - `reports/auto-dev-cursor-queue.jsonl`
 - `reports/auto-dev-orchestrator-log.jsonl`
 - `reports/auto-dev-parallel-log.jsonl`
-- `reports/dev-agent-brief.md`
 - `docs/quality/GOLDEN_CLINICAL_JOURNEY.md`
 - `e2e/a11y-smoke.spec.ts`
 - `e2e/clinical-textbox-evolution-draft.spec.ts`

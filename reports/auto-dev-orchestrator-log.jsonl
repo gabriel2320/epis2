@@ -33,3 +33,5 @@
 {"at":"2026-06-11T03:12:28.734Z","event":"tramo-orchestrate","order":0,"id":"H-AUTO-0"}
 {"at":"2026-06-11T03:14:11.335Z","event":"tramo-orchestrate","order":4,"id":"H-AUTO-4"}
 {"at":"2026-06-11T03:15:05.173Z","event":"tramo-orchestrate","order":4,"id":"H-AUTO-4"}
+{"at":"2026-06-11T03:16:00.192Z","event":"orchestrator-start","durationHours":6,"pauseMs":120000,"orders":[0,1,2,3,4,5,6]}
+{"at":"2026-06-11T03:16:00.195Z","event":"orchestrator-complete","elapsedMs":3}

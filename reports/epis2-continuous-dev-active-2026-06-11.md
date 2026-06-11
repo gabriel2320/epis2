@@ -1,7 +1,7 @@
 # EPIS2 — Proceso continuo activo (OpenClaw + Ollama + Evolab)
 
 **Actualizado:** 2026-06-11  
-**Commit base:** `fix(dev): lock single-instance auto-dev parallel` (pendiente push)
+**Commit lock:** `aa8290c` (tramo-0-H-AUTO-0, incluye `auto-dev-session-lock.mjs`)
 
 ---
 
