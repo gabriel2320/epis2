@@ -16,8 +16,19 @@ import { resolveOpenClawLocks } from './openclaw-policy.mjs';
 loadEnvFile();
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
+const parallelLockPath = join(root, 'reports/auto-dev-parallel.lock.json');
 const warnings = [];
 const errors = [];
+
+function isPidAlive(pid) {
+  if (!pid || pid <= 0) return false;
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 function ok(msg) {
   console.log(`  [OK] ${msg}`);
@@ -34,6 +45,19 @@ function fail(msg) {
 }
 
 console.log('EPIS2 dev:auto:preconditions — PM-03\n');
+
+if (existsSync(parallelLockPath)) {
+  try {
+    const lock = JSON.parse(readFileSync(parallelLockPath, 'utf8'));
+    if (isPidAlive(lock.pid)) {
+      warn(
+        `dev:auto:parallel activo (PID ${lock.pid}, desde ${lock.startedAt ?? lock.at ?? '?'}) — lock ${parallelLockPath}`,
+      );
+    }
+  } catch {
+    warn(`Lock paralelo ilegible — revisar ${parallelLockPath}`);
+  }
+}
 
 if (process.env.EPIS2_AUTO_DEV_AUTHORIZED === '1') {
   ok('EPIS2_AUTO_DEV_AUTHORIZED=1 (commit/push permitidos)');

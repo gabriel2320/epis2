@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-06-11T03:09:40.120Z",
+  "syncedAt": "2026-06-11T03:11:39.038Z",
   "cycle": {
     "openclaw": true,
     "ollama": true,
@@ -9,13 +9,13 @@
     "level": "L3",
     "mode": "max-power-max-power-patch-code",
     "maxPower": true,
-    "artifactCount": 12,
+    "artifactCount": 17,
     "latestBrief": "reports/openclaw-latest-brief.md",
-    "latestHandoff": null
+    "latestHandoff": "reports/openclaw-latest-handoff.md"
   },
   "ollama": {
-    "planObjective": "Completar la Ola 2 y avanzar hacia la Ola 3 longitudinal.",
-    "nextMicrophase": "MF-183→200",
+    "planObjective": "Completar la Ola 2 y preparar la Ola 3 longitudinal.",
+    "nextMicrophase": "MF-183→190",
     "automationOk": null,
     "model": "qwen2.5-coder:14b"
   },
@@ -23,7 +23,7 @@
     "present": true,
     "root": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\epis2-evolab",
     "openFindings": 24,
-    "syncedAt": "2026-06-11T03:08:58.745Z",
+    "syncedAt": "2026-06-11T03:11:38.981Z",
     "topFindings": [
       {
         "id": "fb0241fd-aaac-42de-bd29-834f8c6f71c1",
@@ -82,7 +82,7 @@
       {
         "order": 2,
         "id": "H-AUTO-2",
-        "state": "FAILED"
+        "state": "DONE"
       },
       {
         "order": 3,

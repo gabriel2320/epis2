@@ -1,31 +1,45 @@
 # OpenClaw EPIS2 Brief
 
-> **Microfase:** H-AUTO-CYCLE
-> **Modo:** read-only-reviewer (L0)
-> **Candados:** safe-run=false · patching=false · git-write=false
-> **Generado:** 2026-06-11T03:09:29.670Z
+> **Microfase:** H-AUTO-2
+> **Modo:** max-power-max-power-patch-code (L3)
+> **Candados:** safe-run=true · patching=true · git-write=false
+> **Generado:** 2026-06-11T03:11:25.005Z
 
 ## Restricciones activas
 
 - Read-only reviewer/planner — sin commits, push, ni edits autónomos
-- Perfil L0: solo brief/handoff
+- Perfil L3: safe-run allowlist activo
 - PostgreSQL = SoT · borradores ≠ datos aprobados · IA no aprueba ni firma
 - Sin import EPIS sin manifest · sin OpenMRS/Carbon · Home = Centro de Comando
 
 ## Git status (sanitized)
 
 ```
-## master...origin/master [ahead 4]
+## master...origin/master [ahead 5]
+ M docs/product/EPIS2_DEV_CYCLE_OPENCLAW.md
  M reports/auto-dev-6h-log.jsonl
  M reports/auto-dev-orchestrator-log.jsonl
  M reports/auto-dev-parallel-log.jsonl
+ M reports/dev-agent-brief.md
+ M reports/dev-agent-ollama-automation.json
  M reports/dev-agent-ollama-plan.json
+ M reports/dev-agent-ollama-write-plan.json
+ M reports/dev-agent-prompt-gate-runner.md
+ M reports/dev-agent-prompt-golden-guardian.md
+ M reports/dev-agent-prompt-ledger-keeper.md
+ M reports/dev-agent-prompt-ollama-clinical.md
  M reports/epis2-auto-dev-6h-close-2026-06-10.md
+ M reports/epis2-continuous-dev-active-2026-06-11.md
  M reports/epis2-dev-cycle-close-2026-06-11.md
  M reports/epis2-dev-cycle-log.jsonl
  M reports/epis2-dev-cycle-status.json
  M reports/evolab-open-findings.json
  M reports/openclaw-auto-dev-index.json
+ M reports/openclaw-latest-brief.md
+ M scripts/dev-agent/auto-dev-parallel-launcher.mjs
+ M scripts/dev-agent/auto-dev-preconditions.mjs
+ M scripts/dev-agent/openclaw-handoff.mjs
+?? reports/openclaw-latest-handoff.md
 ```
 
 ## Flags (.env.example keys only — valores no cargados)
@@ -69,6 +83,33 @@
 - `scripts/legacy-audit/validate-quarantine.mjs`
 - `docs/legacy/EPIS_POSTMORTEM.md`
 
+## Agente: UX/M3 Reviewer
+
+- **Skill:** `.openclaw/epis2/skills/epis2-ux-reviewer/SKILL.md`
+- **Gates sugeridos (solo lectura):** `npm run quality:ui-simplify-gate`, `npm run quality:three-modes-gate`
+
+### Archivos a revisar
+
+- `apps/web/src/admin/BlueprintStudioPanel.tsx`
+- `apps/web/src/api/adminApi.ts`
+- `apps/web/src/api/aiApi.ts`
+- `apps/web/src/api/client.test.ts`
+- `apps/web/src/api/client.ts`
+- `apps/web/src/api/clinicalApi.ts`
+- `apps/web/src/api/commandApi.ts`
+- `apps/web/src/api/dashboardApi.ts`
+- `apps/web/src/api/opsApi.ts`
+- `apps/web/src/AppProviders.tsx`
+- `apps/web/src/auth/authApi.ts`
+- `apps/web/src/auth/AuthContext.tsx`
+- `apps/web/src/auth/sessionRedirect.test.ts`
+- `apps/web/src/auth/sessionRedirect.ts`
+- `apps/web/src/charts/observationTrend.test.ts`
+- … +10 más bajo `apps/web/src`
+- `docs/design/M3_ADOPTION_PLAN.md`
+- `docs/product/EPIS2_THREE_MODES_DEV_PLAN.md`
+- `docs/quality/M3_ANTI_DRIFT_GATES.md`
+
 ## Agente: Architecture/Legacy Reviewer
 
 - **Skill:** `.openclaw/epis2/skills/epis2-architecture-reviewer/SKILL.md`
@@ -96,6 +137,32 @@
 - `scripts/architecture/single-epis2-theme.mjs`
 - … +8 más bajo `scripts/architecture`
 
+## Agente: Golden Journey Reviewer
+
+- **Skill:** `.openclaw/epis2/skills/epis2-golden-reviewer/SKILL.md`
+- **Gates sugeridos (solo lectura):** `npm run quality:golden-journey`, `npm run test:e2e:ux-g02`
+
+### Archivos a revisar
+
+- `docs/quality/GOLDEN_CLINICAL_JOURNEY.md`
+- `e2e/a11y-smoke.spec.ts`
+- `e2e/clinical-textbox-evolution-draft.spec.ts`
+- `e2e/dual-chart-modes.spec.ts`
+- `e2e/golden-command-evolution.spec.ts`
+- `e2e/golden-draft-approval.spec.ts`
+- `e2e/golden-v2-admission-discharge.spec.ts`
+- `e2e/helpers/demoPatient.ts`
+- `e2e/login-gateway.spec.ts`
+- `e2e/m3-visual-signoff-capture.spec.ts`
+- `e2e/m3-visual-signoff.spec.ts`
+- `e2e/mobile-drawer.spec.ts`
+- `e2e/ola1c-results-journey.spec.ts`
+- `e2e/ola2-ambulatory-m3-ui.spec.ts`
+- `e2e/ola2-ambulatory-m3-ui.spec.ts-snapshots/ola2-comando-chromium-win32.png`
+- `e2e/ola2-ambulatory-m3-ui.spec.ts-snapshots/ola2-medical-certificate-chromium-win32.png`
+- … +10 más bajo `e2e`
+- `scripts/quality/run-golden-journey.mjs` — *(no encontrado o vacío)*
+
 ## Comandos de verificación sugeridos (humanos / Cursor)
 
 ```bash
@@ -108,4 +175,4 @@ npm run db:validate
 ## Prompt semilla para OpenClaw
 
 Actúa como revisor read-only EPIS2. No modifiques archivos. No ejecutes push/commit/.env.
-Microfase objetivo: H-AUTO-CYCLE. Revisa los archivos listados y entrega hallazgos en formato handoff.
+Microfase objetivo: H-AUTO-2. Revisa los archivos listados y entrega hallazgos en formato handoff.

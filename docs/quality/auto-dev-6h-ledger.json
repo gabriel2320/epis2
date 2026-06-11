@@ -48,7 +48,7 @@
       "id": "H-AUTO-2",
       "name": "Ficha tradicional + autocompletar barra",
       "order": 2,
-      "state": "FAILED",
+      "state": "DONE",
       "commands": [
         "quality:dual-chart-gate",
         "test:unit:chart"

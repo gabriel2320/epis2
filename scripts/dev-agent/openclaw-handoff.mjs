@@ -12,12 +12,20 @@ import {
   listExisting,
   parseArgs,
   sanitizeText,
+  suggestAgents,
   writeArtifact,
 } from './openclaw-lib.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
 const args = parseArgs(process.argv);
+const agentsArgIdx = process.argv.indexOf('--agents');
+if (agentsArgIdx >= 0 && process.argv[agentsArgIdx + 1] === 'auto') {
+  args.agents = suggestAgents({
+    tramo: process.env.EPIS2_DEV_AGENT_TRAMO,
+    phase: process.env.EPIS2_DEV_AGENT_PHASE,
+  });
+}
 const timestamp = new Date().toISOString();
 const invalid = args.agents.filter((id) => !AGENT_CATALOG[id]);
 if (invalid.length) {

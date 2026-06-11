@@ -1,8 +1,43 @@
 {
-  "syncedAt": "2026-06-11T03:09:30.221Z",
-  "autoDevEnabled": false,
-  "artifactCount": 12,
+  "syncedAt": "2026-06-11T03:11:39.483Z",
+  "autoDevEnabled": true,
+  "artifactCount": 19,
   "artifacts": [
+    {
+      "path": ".agent-runs/openclaw/handoff-H-AUTO-2-2026-06-11T03-11-37-429Z.md",
+      "mtime": "2026-06-11T03:11:37.435Z",
+      "bytes": 4311
+    },
+    {
+      "path": ".agent-runs/openclaw/brief-H-AUTO-2-2026-06-11T03-11-25-005Z.md",
+      "mtime": "2026-06-11T03:11:25.048Z",
+      "bytes": 6783
+    },
+    {
+      "path": ".agent-runs/openclaw/brief-H-AUTO-0-2026-06-11T03-10-48-253Z.md",
+      "mtime": "2026-06-11T03:10:48.300Z",
+      "bytes": 9403
+    },
+    {
+      "path": ".agent-runs/openclaw/brief-auto-2026-06-11T03-10-47-102Z.md",
+      "mtime": "2026-06-11T03:10:47.161Z",
+      "bytes": 7123
+    },
+    {
+      "path": ".agent-runs/openclaw/brief-H-AUTO-0-2026-06-11T03-10-44-620Z.md",
+      "mtime": "2026-06-11T03:10:44.668Z",
+      "bytes": 6194
+    },
+    {
+      "path": ".agent-runs/openclaw/brief-H-AUTO-CYCLE-2026-06-11T03-10-33-366Z.md",
+      "mtime": "2026-06-11T03:10:33.426Z",
+      "bytes": 4394
+    },
+    {
+      "path": ".agent-runs/openclaw/handoff-H-AUTO-CYCLE-2026-06-11T03-09-53-005Z.md",
+      "mtime": "2026-06-11T03:09:53.009Z",
+      "bytes": 3253
+    },
     {
       "path": ".agent-runs/openclaw/brief-H-AUTO-CYCLE-2026-06-11T03-09-29-670Z.md",
       "mtime": "2026-06-11T03:09:29.747Z",
@@ -66,8 +101,12 @@
   ],
   "latestBrief": {
     "path": "reports/openclaw-latest-brief.md",
-    "mtime": "2026-06-11T03:09:29.747Z",
-    "bytes": 4196
+    "mtime": "2026-06-11T03:11:25.048Z",
+    "bytes": 6783
   },
-  "latestHandoff": null
+  "latestHandoff": {
+    "path": "reports/openclaw-latest-handoff.md",
+    "mtime": "2026-06-11T03:11:37.435Z",
+    "bytes": 4311
+  }
 }

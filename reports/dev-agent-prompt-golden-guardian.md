@@ -1,7 +1,7 @@
 # EPIS2 — Subagente `golden-guardian`
 
 **Rol:** Guardián Golden Journey  
-**Microfase / alcance:** MF-FASE-B-001 · Fase B
+**Microfase / alcance:** MF-TRAMO-0-002 · Fase B · Tramo 0
 
 ## Canon obligatorio
 

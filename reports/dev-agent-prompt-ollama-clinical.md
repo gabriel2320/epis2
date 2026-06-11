@@ -1,7 +1,7 @@
 # EPIS2 — Subagente `ollama-clinical`
 
 **Rol:** IA clínica local (Ollama producto)  
-**Microfase / alcance:** MF-FASE-B-001 · Fase B
+**Microfase / alcance:** MF-TRAMO-0-002 · Fase B · Tramo 0
 
 ## Canon obligatorio
 

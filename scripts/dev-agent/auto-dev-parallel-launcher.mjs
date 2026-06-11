@@ -32,6 +32,7 @@ const dryRun = args.includes('--dry-run');
 const doCommit = args.includes('--commit');
 const doPush = args.includes('--push');
 const continueOnFail = args.includes('--continue-on-fail') || process.env.EPIS2_AUTO_DEV_PARALLEL !== '0';
+const retryFailed = args.includes('--retry-failed');
 const skipEvolve = args.includes('--no-evolve') || process.env.EPIS2_AUTO_DEV_EVOLAB !== '1';
 
 const evolveGenerations = process.env.EPIS2_EVOLAB_EVOLVE_GENERATIONS ?? '2';
@@ -68,7 +69,7 @@ function launcherCmd() {
 }
 
 function acquireSessionLock() {
-  if (dryRun) return;
+  if (dryRun || process.env.EPIS2_AUTO_DEV_PARALLEL_SKIP_LOCK === '1') return;
   mkdirSync(join(root, 'reports'), { recursive: true });
   if (existsSync(lockPath)) {
     try {
@@ -107,7 +108,7 @@ function acquireSessionLock() {
 }
 
 function releaseSessionLock() {
-  if (dryRun || !existsSync(lockPath)) return;
+  if (dryRun || process.env.EPIS2_AUTO_DEV_PARALLEL_SKIP_LOCK === '1' || !existsSync(lockPath)) return;
   try {
     const existing = JSON.parse(readFileSync(lockPath, 'utf8'));
     if (existing.pid === process.pid) unlinkSync(lockPath);
@@ -204,6 +205,7 @@ function spawnOrchestrator() {
   if (doCommit) orchArgs.push('--commit');
   if (doPush) orchArgs.push('--push');
   if (continueOnFail) orchArgs.push('--continue-on-fail');
+  if (retryFailed) orchArgs.push('--retry-failed');
   if (dryRun) orchArgs.push('--dry-run');
 
   if (dryRun) {

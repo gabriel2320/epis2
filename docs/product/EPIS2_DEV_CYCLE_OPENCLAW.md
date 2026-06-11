@@ -55,6 +55,12 @@ npm run dev:cycle:sync
 | `reports/openclaw-latest-handoff.md` | Handoff + hallazgos Evolab |
 | `reports/evolab-open-findings.json` | Hallazgos Evolab abiertos |
 | `reports/epis2-dev-cycle-log.jsonl` | Log del ciclo |
+| `reports/auto-dev-parallel.lock.json` | Candado single-instance `dev:auto:parallel` (pid, startedAt, cmd) |
+| `reports/auto-dev-parallel-log.jsonl` | Log del lanzador paralelo |
+
+## Candado single-instance (`dev:auto:parallel`)
+
+El lanzador paralelo escribe `reports/auto-dev-parallel.lock.json` al arrancar (pid, startedAt, comando). Si ya hay una instancia viva, registra `parallel-already-running` en `reports/auto-dev-parallel-log.jsonl`, imprime un aviso claro y sale con código 0. Si el pid del lock está muerto, re-adquiere el candado. Para comprobar estado: `Get-Content reports/auto-dev-parallel.lock.json` (PowerShell) o `cat reports/auto-dev-parallel.lock.json`; si el proceso sigue activo, no lances otra sesión paralela.
 
 ## Candados (L3 MAX POWER)
 

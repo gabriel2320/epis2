@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-11T03:08:32.373Z",
+  "generatedAt": "2026-06-11T03:11:28.264Z",
   "model": "qwen2.5-coder:7b",
   "route": {
     "function": "dev-plan",
@@ -11,10 +11,10 @@
   "plan": {
     "activePhase": "B",
     "nextMicrophase": "MF-183→190",
-    "objective": "Completar la implementación de las microfases MF-183 a MF-190, enfocándose en mejorar la experiencia del usuario y la productividad clínica.",
+    "objective": "Completar la Ola 2 y preparar la Ola 3 longitudinal.",
     "allowedPaths": [
-      "apps/web/src/components/MicrophaseForms",
-      "packages/clinical-productivity/src"
+      "apps/web/src/components/ClinicalFormEvolution",
+      "packages/clinical-productivity"
     ],
     "forbiddenPatterns": [
       "OpenMRS",
@@ -26,13 +26,13 @@
       "quality:microphases"
     ],
     "subagentSequence": [
-      "tramo-implementer",
+      "layers-integrator",
       "gate-runner",
       "ledger-keeper"
     ],
     "risks": [
-      "Complejidad de las microfases",
-      "Requerimientos cambiantes"
+      "Complejidad de las microfases adicionales",
+      "Revisión humana necesaria para algunos cambios"
     ],
     "requiresHumanReview": true
   }

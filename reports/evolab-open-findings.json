@@ -1,8 +1,24 @@
 {
-  "syncedAt": "2026-06-11T03:08:26.790Z",
+  "syncedAt": "2026-06-11T03:11:38.981Z",
   "evolabRoot": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\epis2-evolab",
-  "count": 22,
+  "count": 24,
   "findings": [
+    {
+      "id": "fb0241fd-aaac-42de-bd29-834f8c6f71c1",
+      "severity": "medium",
+      "fingerprint": "68c457a21613e462",
+      "scenarioId": "admission-discharge-001-m8rs-001",
+      "runIdPrefix": "49b18d1e",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "6bd9d90e-16d1-47a3-91ee-3f51b7942f1d",
+      "severity": "high",
+      "fingerprint": "50df1d69aac96d12",
+      "scenarioId": "admission-discharge-001-m8rs-001",
+      "runIdPrefix": "49b18d1e",
+      "reviewStatus": "open"
+    },
     {
       "id": "6acb36a0-111e-4bde-9f25-e91a58e02e67",
       "severity": "high",
@@ -20,17 +36,17 @@
       "reviewStatus": "open"
     },
     {
-      "id": "af46931e-f535-4a0f-a818-b2f6dd59cb18",
-      "severity": "medium",
-      "fingerprint": "68c457a21613e462",
+      "id": "9ba07368-9cf7-4c20-b339-c9b2e245fc9d",
+      "severity": "high",
+      "fingerprint": "50df1d69aac96d12",
       "scenarioId": "admission-discharge-001-m8rs-001",
       "runIdPrefix": "43134749",
       "reviewStatus": "open"
     },
     {
-      "id": "9ba07368-9cf7-4c20-b339-c9b2e245fc9d",
-      "severity": "high",
-      "fingerprint": "50df1d69aac96d12",
+      "id": "af46931e-f535-4a0f-a818-b2f6dd59cb18",
+      "severity": "medium",
+      "fingerprint": "68c457a21613e462",
       "scenarioId": "admission-discharge-001-m8rs-001",
       "runIdPrefix": "43134749",
       "reviewStatus": "open"
@@ -76,14 +92,6 @@
       "reviewStatus": "open"
     },
     {
-      "id": "bb80842f-6f29-4997-ae59-28a4aee83a19",
-      "severity": "medium",
-      "fingerprint": "39cf42cbd4461e5e",
-      "scenarioId": "admission-discharge-001-m8cx-008",
-      "runIdPrefix": "df88c218",
-      "reviewStatus": "open"
-    },
-    {
       "id": "4d8be5a5-2b64-4307-8709-c4f4af157982",
       "severity": "high",
       "fingerprint": "36f99e24a9f862a5",
@@ -92,9 +100,25 @@
       "reviewStatus": "open"
     },
     {
+      "id": "bb80842f-6f29-4997-ae59-28a4aee83a19",
+      "severity": "medium",
+      "fingerprint": "39cf42cbd4461e5e",
+      "scenarioId": "admission-discharge-001-m8cx-008",
+      "runIdPrefix": "df88c218",
+      "reviewStatus": "open"
+    },
+    {
       "id": "108ac776-501d-4462-a0f9-f574bb409f49",
       "severity": "high",
       "fingerprint": "303642d4786fe652",
+      "scenarioId": "admission-double-booking-001-m8cx-004",
+      "runIdPrefix": "518b0f66",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "af30e7d6-6982-4d99-99bb-40db43fc1929",
+      "severity": "high",
+      "fingerprint": "f0afe0d70dada190",
       "scenarioId": "admission-double-booking-001-m8cx-004",
       "runIdPrefix": "518b0f66",
       "reviewStatus": "open"
@@ -116,11 +140,11 @@
       "reviewStatus": "open"
     },
     {
-      "id": "af30e7d6-6982-4d99-99bb-40db43fc1929",
+      "id": "93bd475d-21d7-42fe-9dab-dac6352845fd",
       "severity": "high",
-      "fingerprint": "f0afe0d70dada190",
-      "scenarioId": "admission-double-booking-001-m8cx-004",
-      "runIdPrefix": "518b0f66",
+      "fingerprint": "50df1d69aac96d12",
+      "scenarioId": "admission-discharge-001-m8rs-001",
+      "runIdPrefix": "139a47a9",
       "reviewStatus": "open"
     },
     {
@@ -132,25 +156,17 @@
       "reviewStatus": "open"
     },
     {
-      "id": "93bd475d-21d7-42fe-9dab-dac6352845fd",
+      "id": "4ee8e0fb-8d0e-4564-a457-768b82192613",
       "severity": "high",
-      "fingerprint": "50df1d69aac96d12",
-      "scenarioId": "admission-discharge-001-m8rs-001",
-      "runIdPrefix": "139a47a9",
+      "fingerprint": "bd1390f420e6a892",
+      "scenarioId": "llm-command-evolution-001",
+      "runIdPrefix": "b7984d8c",
       "reviewStatus": "open"
     },
     {
       "id": "b69cf6ba-8ce3-4cba-b0ca-ded012621138",
       "severity": "high",
       "fingerprint": "c8a26389121b941c",
-      "scenarioId": "llm-command-evolution-001",
-      "runIdPrefix": "b7984d8c",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "4ee8e0fb-8d0e-4564-a457-768b82192613",
-      "severity": "high",
-      "fingerprint": "bd1390f420e6a892",
       "scenarioId": "llm-command-evolution-001",
       "runIdPrefix": "b7984d8c",
       "reviewStatus": "open"

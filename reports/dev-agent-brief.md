@@ -1,8 +1,8 @@
 # EPIS2 — Dev Brief (IA asistida)
 
-> **Inicio rápido:** abrir `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-ollama-clinical.md` en Cursor y declarar alcance en el primer mensaje.
+> **Inicio rápido:** abrir `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-tramo-implementer.md` en Cursor y declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-11T03:06:55.662Z · **Fase:** B
+**Generado:** 2026-06-11T03:10:48.973Z · **Fase:** B · Tramo 0
 
 ## Estado del tablero (fuente canónica)
 
@@ -14,49 +14,54 @@
 ## Objetivo sugerido
 
 - **P1**: Revisión humana opcional post-captura M3 (hover/foco/rail/two-pane claro/oscuro) — evidencia en `reports/m3-visual-evidence/2026-06-10/`
-- **Ollama (≤24 h):** Completar la implementación de la fase B, enfocándose en la microfase MF-183 que incluye la integración de nuevas funcionalidades y mejoras en el flujo de trabajo del paciente.
+- **Ollama (≤24 h):** Continuar con el desarrollo de la funcionalidad de MF-183, que se centra en mejorar la experiencia del usuario al gestionar los procedimientos clínicos.
 - **MF propuesta:** MF-183
 
 ## Subagente primario
 
-**[`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md)** — IA clínica local (Ollama producto)
+**[`tramo-implementer`](./dev-agent-prompt-tramo-implementer.md)** — Implementador de tramo
 
 ## Secuencia completa
 
-1. `layers-integrator` — Integrador capas L3+L4+L5
-2. `ollama-dev-writer` — Escritor dev bajo riesgo (Ollama)
-3. `ollama-clinical` — IA clínica local (Ollama producto)
-4. `golden-guardian` — Guardián Golden Journey
-5. `gate-runner` — Ejecutor de gates
+1. `tramo-implementer` — Implementador de tramo
+2. `ollama-clinical` — IA clínica local (Ollama producto)
+3. `golden-guardian` — Guardián Golden Journey
+4. `gate-runner` — Ejecutor de gates
+5. `ledger-keeper` — Ledger microfases
 
 ## Working tree
 
-- Rama: `master` · cambios: 18
+- Rama: `master` · cambios: 23
 
 ```
-M  docs/quality/auto-dev-6h-ledger.json
-MM reports/auto-dev-6h-log.jsonl
-M  reports/auto-dev-cursor-prompt-tramo-1.md
-M  reports/auto-dev-cursor-queue.jsonl
-M  reports/auto-dev-orchestrator-log.jsonl
-M  reports/auto-dev-parallel-log.jsonl
+M docs/product/EPIS2_DEV_CYCLE_OPENCLAW.md
+M docs/quality/auto-dev-6h-ledger.json
+M reports/auto-dev-6h-log.jsonl
+M reports/auto-dev-orchestrator-log.jsonl
+M reports/auto-dev-parallel-log.jsonl
+M reports/dev-agent-brief.md
 M reports/dev-agent-ollama-automation.json
-M  reports/dev-agent-ollama-plan.json
+M reports/dev-agent-ollama-plan.json
 M reports/dev-agent-ollama-write-plan.json
+M reports/dev-agent-prompt-gate-runner.md
+M reports/dev-agent-prompt-golden-guardian.md
+M reports/dev-agent-prompt-ledger-keeper.md
+M reports/dev-agent-prompt-ollama-clinical.md
 M reports/epis2-auto-dev-6h-close-2026-06-10.md
-MM reports/epis2-dev-cycle-log.jsonl
-MM reports/epis2-dev-cycle-status.json
-M  reports/evolab-open-findings.json
-M  reports/openclaw-auto-dev-index.json
-MM reports/openclaw-latest-brief.md
-M scripts/dev-agent/auto-dev-6h-runner.mjs
-M scripts/dev-agent/auto-dev-parallel-launcher.mjs
-M  scripts/dev-agent/start-auto-dev-full-cycle.ps1
+M reports/epis2-dev-cycle-close-2026-06-11.md
+M reports/epis2-dev-cycle-log.jsonl
+M reports/epis2-dev-cycle-status.json
+M reports/evolab-open-findings.json
+M reports/openclaw-auto-dev-index.json
+M reports/openclaw-latest-brief.md
+M scripts/dev-agent/auto-dev-preconditions.mjs
+M scripts/dev-agent/openclaw-handoff.mjs
+?? reports/openclaw-latest-handoff.md
 ```
 
 ## Evolab (QA externo)
 
-- Evolab hallazgos abiertos: **18** (sync 2026-06-11T03:05:01.969Z)
+- Evolab hallazgos abiertos: **24** (sync 2026-06-11T03:08:58.745Z)
 - Root: `C:\Users\gdela\OneDrive\Documentos Importantes\epis2-evolab`
 
 ## OpenClaw (revisores read-only)
@@ -114,16 +119,16 @@ npm run dev:agent:close                     # checklist + plantilla reporte
 
 # EPIS2 — Sesión subagentes de desarrollo
 
-**Fase:** B
-**Generado:** 2026-06-11T03:06:55.664Z
+**Fase:** B · **Tramo:** 0
+**Generado:** 2026-06-11T03:10:48.974Z
 
 ## Secuencia recomendada
 
-1. [`layers-integrator`](./dev-agent-prompt-layers-integrator.md) — Integrador capas L3+L4+L5
-2. [`ollama-dev-writer`](./dev-agent-prompt-ollama-dev-writer.md) — Escritor dev bajo riesgo (Ollama)
-3. [`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md) — IA clínica local (Ollama producto)
-4. [`golden-guardian`](./dev-agent-prompt-golden-guardian.md) — Guardián Golden Journey
-5. [`gate-runner`](./dev-agent-prompt-gate-runner.md) — Ejecutor de gates
+1. [`tramo-implementer`](./dev-agent-prompt-tramo-implementer.md) — Implementador de tramo
+2. [`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md) — IA clínica local (Ollama producto)
+3. [`golden-guardian`](./dev-agent-prompt-golden-guardian.md) — Guardián Golden Journey
+4. [`gate-runner`](./dev-agent-prompt-gate-runner.md) — Ejecutor de gates
+5. [`ledger-keeper`](./dev-agent-prompt-ledger-keeper.md) — Ledger microfases
 
 ## Stack Ollama (desarrollo)
 

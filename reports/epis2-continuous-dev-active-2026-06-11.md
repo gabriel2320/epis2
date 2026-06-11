@@ -1,31 +1,46 @@
 # EPIS2 — Proceso continuo activo (OpenClaw + Ollama + Evolab)
 
-**Inicio ciclo:** 2026-06-11T03:04:40Z  
-**Commit base:** `12836fc`  
-**Modo:** `-NoPush` · L3 MAX POWER · 6 h máx
+**Auditoría:** 2026-06-11T03:11:00Z  
+**Commit base:** `659b445`  
+**Modo:** `-NoPush -Sequential -RetryFailed` · L3 MAX POWER · 6 h máx
 
 ---
 
-## Estado: EN EJECUCIÓN
+## Estado: EN EJECUCIÓN (estabilizado)
 
-No se lanzó ciclo duplicado — sesión previa activa.
+**Relaunch:** NO — ciclo sano activo; no se lanzó duplicado.
+
+**Acción auditoría:** detenido orquestador huérfano (PIDs 26244/26324/28128) que completó a las 03:08:42Z pero no terminó. Se conservó el ciclo más reciente (launcher 30628).
 
 | Proceso | PID | Rol |
 |---------|-----|-----|
-| Launcher full-cycle | 24904 | `start-auto-dev-full-cycle.ps1 -NoPush` (relanzado) |
-| PM-03 orquestador | ver log | `dev:auto:orchestrate --commit --continue-on-fail` |
-| Evolab evolve (bg) | ver log | → `reports/evolab-evolve-parallel.log` |
+| Launcher full-cycle | **30628** | `start-auto-dev-full-cycle.ps1 -NoPush -Sequential -RetryFailed` |
+| npm dev:auto:cycle | **29336** | `openclaw-dev-cycle-launcher.mjs` |
+| Cycle launcher | **13216** / 28848 | bootstrap + orquestación |
+| PM-03 orquestador | **29640** / 30256 | `dev:auto:orchestrate --commit --continue-on-fail --retry-failed` |
+| Tramo runner | **5796** / 24820 | `dev:auto:6h --tramo 0 --commit --ollama-auto` |
 
-**Tramo actual:** H-AUTO-1 ✓ DONE → pausa 120s → siguiente (resume ledger)  
-**Duplicado detenido:** segundo spawn (PID 4624/13408) eliminado para evitar colisión con orquestador principal.
+**Tramo actual:** **H-AUTO-0** (Bootstrap stack + Ollama probe) — `RUNNING`  
+**Ledger resume:** H-AUTO-1 ✓ · H-AUTO-3 ✓ · H-AUTO-5 ✓ · FAILED: 0,2,4,6 (reintento vía `--retry-failed`)
+
 **Subagentes activos:**
 
 | Capa | Estado |
 |------|--------|
-| **OpenClaw L3** | brief `reports/openclaw-latest-brief.md` · 8 skills en `.openclaw/epis2/` |
+| **OpenClaw L3** | brief `reports/openclaw-latest-brief.md` · handoff `reports/openclaw-latest-handoff.md` · 14 artefactos |
 | **Ollama nativo** | plan MF-183 · `dev:agent:ollama-auto` post-tramo (dry-run) |
 | **Cursor Tier X** | cola IDE → `reports/auto-dev-cursor-queue.jsonl` (sin `CURSOR_API_KEY`) |
-| **Evolab** | 18 hallazgos abiertos · evolve en background |
+| **Evolab** | 24 hallazgos abiertos · evolve secuencial (no bg en modo `-Sequential`) |
+
+---
+
+## Health checks (2026-06-11T03:09:44Z)
+
+| Probe | Resultado |
+|-------|-----------|
+| API `:3001/health` | ✓ `{"status":"ok","service":"epis2-api"}` |
+| `npm run ollama:probe` | ✓ UP · qwen3:8b · dev-plan/dev-write OK |
+| `npm run evolab:doctor` | ✓ target sandbox · API ready · DB OK |
 
 ---
 
@@ -45,11 +60,20 @@ EPIS2_OPENCLAW_MAX_POWER=1
 ## Monitoreo
 
 ```powershell
+# Procesos activos
+Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -match 'auto-dev|dev:auto|full-cycle' } |
+  Select-Object ProcessId, Name, @{N='Cmd';E={$_.CommandLine.Substring(0,[Math]::Min(120,$_.CommandLine.Length))}}
+
+# Logs en vivo
 Get-Content reports/auto-dev-orchestrator-log.jsonl -Wait -Tail 15
 Get-Content reports/epis2-dev-cycle-log.jsonl -Wait -Tail 15
 Get-Content reports/epis2-dev-cycle-status.json
 Get-Content reports/evolab-evolve-parallel.log -Wait -Tail 20
 Get-Content reports/auto-dev-cursor-queue.jsonl -Tail 5
+
+# Sync manual (sin relanzar ciclo)
+npm run dev:cycle:sync
+npm run dev:openclaw:sync
 ```
 
 Estado unificado: `reports/epis2-dev-cycle-status.json`
@@ -64,22 +88,24 @@ Estado unificado: `reports/epis2-dev-cycle-status.json`
 
 ---
 
-## Fix aplicado
-
-`0de70d1` — `auto-dev-6h-runner.mjs`: mensaje git commit ASCII-only para Windows.
-
----
-
 ## Ledger tramos
 
 | Order | ID | Estado |
 |-------|-----|--------|
-| 0 | H-AUTO-0 | FAILED |
+| 0 | H-AUTO-0 | **RUNNING** |
 | 1 | H-AUTO-1 | DONE |
-| 2 | H-AUTO-2 | FAILED (previo) |
-| 3 | H-AUTO-3 | PENDING |
-| 4 | H-AUTO-4 | FAILED (previo) |
+| 2 | H-AUTO-2 | FAILED (retry pendiente) |
+| 3 | H-AUTO-3 | DONE |
+| 4 | H-AUTO-4 | FAILED (retry pendiente) |
 | 5 | H-AUTO-5 | DONE |
-| 6 | H-AUTO-6 | FAILED (previo) |
+| 6 | H-AUTO-6 | FAILED (retry pendiente) |
 
-`--continue-on-fail` + `--resume` avanza tramos pendientes.
+`--continue-on-fail` + `--retry-failed` + `--resume` avanza tramos pendientes.
+
+---
+
+## Refresh aplicado (auditoría)
+
+- `npm run dev:session -- --openclaw` ✓
+- `npm run dev:cycle:sync` ✓
+- `npm run dev:openclaw:sync` ✓
