@@ -187,14 +187,22 @@
       {
         "id": "MF-PAPER-PLANNER-00",
         "name": "ADR-003 + DailyClinicalPage scaffold",
-        "state": "READY",
+        "state": "DONE",
         "gate": "quality:paper-planner-scaffold-gate",
-        "allowedPaths": ["docs/adr/ADR-003-paper-planner-mode.md", "apps/web/src/components/chart/paper/planner/**"]
+        "allowedPaths": [
+          "docs/adr/ADR-003-paper-planner-mode.md",
+          "apps/web/src/components/chart/paper/planner/**",
+          "apps/web/src/routes/chartModeSearch.ts",
+          "apps/web/src/components/chart/PaperChartMode.tsx",
+          "packages/design-system/src/copy/es.ts"
+        ],
+        "closureReport": "reports/epis2-mf-paper-planner-00-scaffold.md",
+        "unblocks": ["MF-PAPER-PLANNER-01"]
       },
       {
         "id": "MF-PAPER-PLANNER-01",
         "name": "Vista semanal + algoritmos",
-        "state": "BLOCKED",
+        "state": "READY",
         "gate": "quality:paper-planner-week-gate"
       },
       {

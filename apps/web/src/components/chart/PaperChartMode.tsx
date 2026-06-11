@@ -3,7 +3,9 @@ import { Box, Stack, epis2PaperStatusCaptionSx } from '@epis2/epis2-ui';
 import { useSearch } from '@tanstack/react-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useClinicalNavigate } from '../../routes/clinicalNavigate.js';
-import { parseChartModeSearch } from '../../routes/chartModeSearch.js';
+import { parseChartModeSearch, resolvePaperSurface, resolvePlannerView } from '../../routes/chartModeSearch.js';
+import type { PaperPlannerSurface, PaperPlannerView } from './paper/planner/types.js';
+import { PaperPlannerShell, PaperPlannerSurfaceTabs } from './paper/planner/index.js';
 import { usePaperChartDraft } from '../../clinical/usePaperChartDraft.js';
 import type { PaperChartSectionId } from './paper/paperChartSections.js';
 import { PAPER_CHART_SECTION_IDS } from './paper/paperChartSections.js';
@@ -20,6 +22,7 @@ export type PaperChartModeProps = {
   patientName?: string | undefined;
   recordNumber?: string | undefined;
   patientStrip?: Omit<PaperPatientStripProps, 'patientName' | 'recordNumber'> | undefined;
+  userDisplayName?: string | undefined;
   testId?: string | undefined;
 };
 
@@ -30,11 +33,14 @@ export function PaperChartMode({
   patientName,
   recordNumber,
   patientStrip,
+  userDisplayName,
   testId = 'epis2-paper-chart-mode',
 }: PaperChartModeProps) {
   const navigate = useClinicalNavigate();
   const rawSearch = useSearch({ strict: false }) as Record<string, unknown>;
   const chartSearch = parseChartModeSearch(rawSearch);
+  const paperSurface = resolvePaperSurface(chartSearch);
+  const plannerView = resolvePlannerView(chartSearch);
   const initialSection =
     chartSearch.section && PAPER_CHART_SECTION_IDS.includes(chartSearch.section)
       ? chartSearch.section
@@ -90,9 +96,36 @@ export function PaperChartMode({
     if (patientId) {
       void navigate({
         to: '/espacio/ficha',
-        search: { patientId, chartMode: 'paper', section: sectionId, printFormat },
+        search: {
+          patientId,
+          chartMode: 'paper',
+          paperSurface: 'document',
+          section: sectionId,
+          printFormat,
+        },
       });
     }
+  };
+
+  const handleSurfaceChange = (surface: PaperPlannerSurface) => {
+    if (!patientId) return;
+    void navigate({
+      to: '/espacio/ficha',
+      search: {
+        patientId,
+        chartMode: 'paper',
+        paperSurface: surface,
+        ...(surface === 'document' ? { section: activeSectionId, printFormat } : { plannerView }),
+      },
+    });
+  };
+
+  const handlePlannerViewChange = (view: PaperPlannerView) => {
+    if (!patientId) return;
+    void navigate({
+      to: '/espacio/ficha',
+      search: { patientId, chartMode: 'paper', paperSurface: 'planner', plannerView: view },
+    });
   };
 
   const handlePrint = () => {
@@ -178,29 +211,42 @@ export function PaperChartMode({
           {copy.chartModes.aiDraftNotice} ({draft.unconfirmedAiCount})
         </Box>
       ) : null}
-      <Box sx={{ display: 'flex', flex: 1, minHeight: 0, overflow: 'hidden' }}>
-        <PaperSectionNavigator
-          activeSectionId={activeSectionId}
-          onSectionSelect={handleSectionSelect}
-          aiPendingSections={patientId ? draft.aiPendingSections : undefined}
+      <PaperPlannerSurfaceTabs
+        activeSurface={paperSurface}
+        onSurfaceChange={handleSurfaceChange}
+      />
+      {paperSurface === 'planner' ? (
+        <PaperPlannerShell
+          activeView={plannerView}
+          onViewChange={handlePlannerViewChange}
+          clinicianName={userDisplayName}
+          serviceUnit={patientStrip?.serviceUnit}
         />
-        <PaperPageCanvas>
-          <PaperChartTemplate
-            values={values}
-            fields={patientId ? draft.fields : undefined}
-            printFormat={printFormat}
-            patientName={patientName}
-            recordNumber={recordNumber}
-            patientStrip={patientStrip}
-            page={1}
-            totalPages={totalPages}
-            onSectionChange={patientId && !draft.readOnly ? draft.onSectionChange : onSectionChange}
-            onConfirmSection={
-              patientId && !draft.readOnly ? draft.confirmSection : undefined
-            }
+      ) : (
+        <Box sx={{ display: 'flex', flex: 1, minHeight: 0, overflow: 'hidden' }}>
+          <PaperSectionNavigator
+            activeSectionId={activeSectionId}
+            onSectionSelect={handleSectionSelect}
+            aiPendingSections={patientId ? draft.aiPendingSections : undefined}
           />
-        </PaperPageCanvas>
-      </Box>
+          <PaperPageCanvas>
+            <PaperChartTemplate
+              values={values}
+              fields={patientId ? draft.fields : undefined}
+              printFormat={printFormat}
+              patientName={patientName}
+              recordNumber={recordNumber}
+              patientStrip={patientStrip}
+              page={1}
+              totalPages={totalPages}
+              onSectionChange={patientId && !draft.readOnly ? draft.onSectionChange : onSectionChange}
+              onConfirmSection={
+                patientId && !draft.readOnly ? draft.confirmSection : undefined
+              }
+            />
+          </PaperPageCanvas>
+        </Box>
+      )}
     </Stack>
   );
 }

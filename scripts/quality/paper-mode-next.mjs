@@ -12,8 +12,12 @@ const ledgerPath = join(root, 'docs/quality/paper-mode-ledger.json');
 
 const ledger = JSON.parse(readFileSync(ledgerPath, 'utf8'));
 
-const ready = ledger.phases.find((p) => p.state === 'READY');
-const inProgress = ledger.phases.find((p) => p.state === 'IN_PROGRESS');
+const ready =
+  ledger.phases.find((p) => p.state === 'READY') ??
+  ledger.plannerProgram?.phases.find((p) => p.state === 'READY');
+const inProgress =
+  ledger.phases.find((p) => p.state === 'IN_PROGRESS') ??
+  ledger.plannerProgram?.phases.find((p) => p.state === 'IN_PROGRESS');
 
 const next =
   inProgress ??
@@ -21,7 +25,15 @@ const next =
   ledger.phases.find((p) => p.state === 'BLOCKED' && p.dependsOn.every((dep) => {
     const d = ledger.phases.find((x) => x.id === dep);
     return d?.state === 'DONE';
-  }));
+  })) ??
+  ledger.plannerProgram?.phases.find(
+    (p) =>
+      p.state === 'BLOCKED' &&
+      (p.dependsOn ?? []).every((dep) => {
+        const d = ledger.plannerProgram?.phases.find((x) => x.id === dep);
+        return d?.state === 'DONE';
+      }),
+  );
 
 const out = {
   program: ledger.program,

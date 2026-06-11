@@ -147,6 +147,7 @@ export function DualChartPatientPage({
             patientId={patientId}
             patientName={detail.patient.displayName}
             recordNumber={detail.patient.demoCaseCode ?? detail.patient.id.slice(0, 8)}
+            userDisplayName={session?.user.displayName}
             patientStrip={{
               nationalId: demoNationalId(detail.patient.demoCaseCode),
               ageYears: demoCase ? ageFromBirthDate(demoCase.birthDate) : undefined,
