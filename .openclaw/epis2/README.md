@@ -34,6 +34,7 @@ npm run dev:session -- --openclaw
 ## Documentación
 
 - [docs/product/EPIS2_OPENCLAW_INTEGRATION.md](../../docs/product/EPIS2_OPENCLAW_INTEGRATION.md)
+- [docs/product/EPIS2_OPENCLAW_SIBLING_REPO.md](../../docs/product/EPIS2_OPENCLAW_SIBLING_REPO.md) — plan repo hermano `openclaw-epis2` (migración workspace Fase 2)
 
 ## Reglas
 

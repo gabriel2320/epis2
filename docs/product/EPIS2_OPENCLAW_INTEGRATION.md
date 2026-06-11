@@ -223,8 +223,19 @@ Estado unificado: `reports/epis2-dev-cycle-status.json`
 
 ---
 
+## Repo hermano (plan)
+
+Estación manual estable: workspace OpenClaw externalizado, Cursor como IDE único, L0 read-only primero.
+
+Ver **[EPIS2_OPENCLAW_SIBLING_REPO.md](./EPIS2_OPENCLAW_SIBLING_REPO.md)** — plan `openclaw-epis2` (scaffold pendiente).
+
+Variable prevista: `EPIS2_OPENCLAW_ROOT=../openclaw-epis2`
+
+---
+
 ## Referencias
 
+- [EPIS2_OPENCLAW_SIBLING_REPO.md](./EPIS2_OPENCLAW_SIBLING_REPO.md) — plan repo hermano
 - Donor (solo lectura conceptual): `../Epis/docs/agents/OPENCLAW_EPIS_INTEGRATION.md`
 - [EPIS2_DEV_CYCLE_OPENCLAW.md](./EPIS2_DEV_CYCLE_OPENCLAW.md)
 - [EPIS2_EVOLAB_INTEGRATION.md](./EPIS2_EVOLAB_INTEGRATION.md)
