@@ -50,3 +50,38 @@ jobs:
       - run: npm run quality:golden-journey
       - run: npm run qa:bundle-analyze
       - run: npm audit --omit=dev --audit-level=high
+
+  # Entrega C-4 — E2E dual ficha opt-in (flag off en job principal para legacy E2E).
+  e2e-dual-chart:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: epis2
+          POSTGRES_PASSWORD: epis2
+          POSTGRES_DB: epis2
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U epis2 -d epis2"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://epis2_app:epis2@localhost:5432/epis2
+      VITE_ENABLE_DUAL_CHART_MODES: 'true'
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - run: npm run build -w @epis2/contracts
+      - run: npm run db:migrate
+      - run: npm run quality:dual-chart-gate
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build -w @epis2/web
+      - run: npm run test:e2e:dual-chart

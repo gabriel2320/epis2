@@ -1,6 +1,6 @@
 # EPIS2 — Plan de desarrollo global (consolidado)
 
-**Versión:** 1.4 · **Fecha:** 2026-06-09  
+**Versión:** 1.5 · **Fecha:** 2026-06-11  
 **Sistema:** [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) (SDEPIS2) · **Tablero:** [`EPIS2_TABLERO.md`](./EPIS2_TABLERO.md)  
 **Fuentes:** `ROADMAP.md` · `EPIS2_COMPLETION_ROADMAP.md` · MF-UI-SIMPLIFY · MF-RAD-M3 · tramos A–K
 
@@ -61,11 +61,17 @@ Command palette Ctrl+K → **Hilo B**.
 
 ### Hilo C — Ola 3 longitudinal (**activo**)
 
-- Ficha hub (split pane ✓)
-- [x] Documentos UI compacta · CTAs alergia/problema · timeline invocable
-- Resultados bandeja plana (results-inbox ✓)
-- [x] Impresión A5 receta · [`epis2-hilo-c-p1-print-prescription-2026-06-09.md`](../../reports/epis2-hilo-c-p1-print-prescription-2026-06-09.md)
-- [x] Piloto M3 automatizado (V1–V6 6/6) · [`epis2-m3-human-pilot-2026-06-09.md`](../../reports/epis2-m3-human-pilot-2026-06-09.md) · PEND-006 parcial (resta carta/otros A5 + signoff humano opcional)
+Infraestructura cerrada; trabajo pendiente por **entregas** (ver [`EPIS2_TABLERO.md`](./EPIS2_TABLERO.md)):
+
+| Entrega | Alcance | Estado |
+|---------|---------|--------|
+| — | Ficha hub split pane · documentos compactos · results-inbox | ✓ |
+| — | Impresión A5 receta + Carta | ✓ · [`epis2-hilo-c-p1-print-prescription-2026-06-09.md`](../../reports/epis2-hilo-c-p1-print-prescription-2026-06-09.md) |
+| — | Piloto M3 automatizado V1–V6 | ✓ · [`epis2-m3-human-pilot-2026-06-09.md`](../../reports/epis2-m3-human-pilot-2026-06-09.md) |
+| **C-1** | Signoff visual M3 (humano opcional) | Automatizado ✓ · humano pendiente |
+| **C-2** | PROG-CALM-PREMIUM · THEME-CALM-01 + UX-AESTHETIC P3 | Parcial (alto contraste) · signoff NO-GO |
+| **C-3** | MF-CLINICAL-SUMMARY-B + UX-CALM-PATIENT | C-3a scaffold ✓ · C-3b pendiente |
+| **C-4** | Activar PROG-DUAL-CHART en prod + E2E opt-in | Pendiente · flag off |
 
 ### Hilo D — Tramo J farmacia (**cerrado** 2026-06-09)
 

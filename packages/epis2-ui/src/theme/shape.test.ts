@@ -1,0 +1,24 @@
+import { describe, expect, it } from 'vitest';
+import { epis2Shape, epis2ShapeProfiles, epis2TraditionalShapeMaxPx } from './shape.js';
+
+describe('epis2Shape traditional profile', () => {
+  it('EMR radii stay within institutional square cap', () => {
+    const { traditional } = epis2ShapeProfiles;
+    expect(traditional.chip).toBeLessThanOrEqual(traditional.max);
+    expect(traditional.field).toBeLessThanOrEqual(traditional.max);
+    expect(traditional.island).toBeLessThanOrEqual(traditional.max);
+    expect(traditional.dialog).toBeLessThanOrEqual(traditional.max);
+    expect(traditional.max).toBe(epis2TraditionalShapeMaxPx);
+  });
+
+  it('chip and field use 4px (small) — not pill/full', () => {
+    expect(epis2ShapeProfiles.traditional.chip).toBe(epis2Shape.small);
+    expect(epis2ShapeProfiles.traditional.field).toBe(epis2Shape.small);
+    expect(epis2Shape.small).toBe(4);
+  });
+
+  it('command bar keeps separate profile from EMR surfaces', () => {
+    expect(epis2ShapeProfiles.command.bar).toBe(epis2Shape.pill);
+    expect(epis2ShapeProfiles.command.palette).toBe(epis2Shape.extraLarge);
+  });
+});

@@ -52,6 +52,19 @@ vi.mock('../query/hooks/useAiStatusQuery.js', () => ({
   useAiStatusQuery: () => ({ aiAvailable: false }),
 }));
 
+vi.mock('../dev/dualChartModesEnv.js', () => ({
+  isDualChartModesEnabled: () => false,
+  parseChartMode: (value: unknown) => (value === 'paper' ? 'paper' : 'traditional'),
+}));
+
+vi.mock('../modes/index.js', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../modes/index.js')>();
+  return {
+    ...actual,
+    useClassicMd3Mode: () => false,
+  };
+});
+
 vi.mock('../api/commandApi.js', () => ({
   resolveCommand: vi.fn(),
 }));

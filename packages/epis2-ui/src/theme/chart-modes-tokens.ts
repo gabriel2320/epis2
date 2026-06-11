@@ -1,4 +1,5 @@
 import type { SxProps, Theme } from '@mui/material/styles';
+import { epis2Shape } from './shape.js';
 
 /** Tokens modo ficha electrónica tradicional — denso, institucional (ADR-002). */
 export const epis2TraditionalChartTokens = {
@@ -76,7 +77,7 @@ export function epis2PaperDocumentSx(format: 'letter' | 'a5' = 'letter'): SxProp
     bgcolor: t.paperBg,
     color: 'text.primary',
     boxShadow: 1,
-    borderRadius: 2,
+    borderRadius: `${epis2Shape.small}px`,
     border: 1,
     borderColor: 'divider',
     fontSize: t.proseFontSize,

@@ -1,7 +1,7 @@
 import type { Components, Theme } from '@mui/material/styles';
 import { epis2M3TouchTargetMinPx } from './m3-layout-tokens.js';
 import { epis2DisplayFontFamily, epis2MonoFontFamily } from './typography.js';
-import { epis2Shape } from './shape.js';
+import { epis2Shape, epis2ShapeProfiles } from './shape.js';
 import { epis2Motion, epis2StateLayer } from './motion.js';
 
 export function buildEpis2Components(
@@ -144,7 +144,7 @@ export function buildEpis2Components(
     MuiOutlinedInput: {
       styleOverrides: {
         root: ({ theme }) => ({
-          borderRadius: epis2Shape.large,
+          borderRadius: epis2ShapeProfiles.traditional.field,
           transition: 'none',
           minHeight: 48,
           backgroundColor: theme.palette.background.paper,
@@ -275,7 +275,7 @@ export function buildEpis2Components(
         root: ({ theme }) => ({
           fontWeight: 500,
           fontFamily: epis2DisplayFontFamily,
-          borderRadius: epis2Shape.pill,
+          borderRadius: epis2ShapeProfiles.traditional.chip,
           height: 'auto',
           minHeight: 36,
           maxWidth: '100%',
