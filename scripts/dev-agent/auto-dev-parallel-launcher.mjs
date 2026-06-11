@@ -33,7 +33,10 @@ const doCommit = args.includes('--commit');
 const doPush = args.includes('--push');
 const continueOnFail = args.includes('--continue-on-fail') || process.env.EPIS2_AUTO_DEV_PARALLEL !== '0';
 const retryFailed = args.includes('--retry-failed');
-const skipEvolve = args.includes('--no-evolve') || process.env.EPIS2_AUTO_DEV_EVOLAB !== '1';
+const skipEvolve =
+  args.includes('--no-evolve') ||
+  process.env.EPIS2_AUTO_DEV_EVOLAB !== '1' ||
+  process.env.EPIS2_EVOLAB_PARALLEL_EVOLVE !== '1';
 
 const evolveGenerations = process.env.EPIS2_EVOLAB_EVOLVE_GENERATIONS ?? '2';
 const evolveBudgetMinutes = process.env.EPIS2_EVOLAB_EVOLVE_BUDGET_MINUTES ?? '300';
@@ -64,7 +67,13 @@ function log(event, detail = {}) {
   appendFileSync(logPath, `${JSON.stringify({ at: new Date().toISOString(), event, ...detail })}\n`, 'utf8');
 }
 
+const skipSessionLock = process.env.EPIS2_AUTO_DEV_PARALLEL_SKIP_LOCK === '1';
+
 function tryAcquireLock() {
+  if (skipSessionLock) {
+    log('parallel-lock-skipped', { reason: 'EPIS2_AUTO_DEV_PARALLEL_SKIP_LOCK=1' });
+    return;
+  }
   const result = acquireSessionLock({
     root,
     cmd: launcherCmd(),
@@ -92,7 +101,7 @@ function tryAcquireLock() {
 
 function cleanupAndExit(code) {
   if (evolveChild) killChild(evolveChild, 'evolab-evolve');
-  if (lockHeld) releaseSessionLock(root);
+  if (lockHeld && !skipSessionLock) releaseSessionLock(root);
   process.exit(code);
 }
 
@@ -225,7 +234,9 @@ async function main() {
 
   console.log('EPIS2 dev:auto:parallel — sesión integrada PM-03 + Evolab\n');
   console.log('  Seguridad: patching=off · human approval=on · LLM concurrency=1');
-  console.log(`  Evolab evolve: ${skipEvolve ? 'off' : `on (${evolveGenerations} gen, ${evolveBudgetMinutes} min)`}\n`);
+  const evolveMode =
+    skipEvolve ? 'off (complement entre ciclos)' : `on paralelo (${evolveGenerations} gen, ${evolveBudgetMinutes} min)`;
+  console.log(`  Evolab evolve: ${evolveMode}\n`);
 
   if ((doCommit || doPush) && process.env.EPIS2_AUTO_DEV_AUTHORIZED !== '1') {
     console.error('Set EPIS2_AUTO_DEV_AUTHORIZED=1 para commit/push');

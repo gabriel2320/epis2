@@ -1,9 +1,9 @@
 # OpenClaw EPIS2 Brief
 
-> **Microfase:** H-AUTO-0
+> **Microfase:** H-AUTO-6
 > **Modo:** max-power-max-power-patch-code (L3)
 > **Candados:** safe-run=true · patching=true · git-write=false
-> **Generado:** 2026-06-11T03:19:22.325Z
+> **Generado:** 2026-06-11T03:38:57.571Z
 
 ## Restricciones activas
 
@@ -15,14 +15,14 @@
 ## Git status (sanitized)
 
 ```
-## master...origin/master [ahead 10]
+## master...origin/master [ahead 11]
  M docs/quality/auto-dev-6h-ledger.json
+ M package.json
  M reports/auto-dev-6h-log.jsonl
  M reports/auto-dev-continuous-log.jsonl
+ D reports/auto-dev-continuous.lock
  M reports/auto-dev-orchestrator-log.jsonl
  M reports/auto-dev-parallel-log.jsonl
- M reports/dev-agent-ollama-automation.json
- M reports/dev-agent-ollama-write-plan.json
  M reports/epis2-auto-dev-6h-close-2026-06-10.md
  M reports/epis2-dev-cycle-close-2026-06-11.md
  M reports/epis2-dev-cycle-log.jsonl
@@ -31,7 +31,11 @@
  M reports/evolab-open-findings.json
  M reports/openclaw-auto-dev-index.json
  M reports/openclaw-latest-brief.md
- M reports/openclaw-latest-handoff.md
+ M scripts/dev-agent/auto-dev-continuous.mjs
+ M scripts/dev-agent/auto-dev-parallel-launcher.mjs
+?? reports/evolab-complement-log.jsonl
+?? scripts/dev-agent/evolab-complement.mjs
+?? scripts/dev-agent/stop-auto-dev-session.mjs
 ```
 
 ## Flags (.env.example keys only — valores no cargados)
@@ -129,7 +133,6 @@
 - … +10 más bajo `scripts/quality`
 - `reports/auto-dev-6h-log.jsonl`
 - `reports/auto-dev-continuous-log.jsonl`
-- `reports/auto-dev-continuous.lock`
 - `reports/auto-dev-cursor-prompt-tramo-1.md`
 - `reports/auto-dev-cursor-prompt-tramo-2.md`
 - `reports/auto-dev-cursor-prompt-tramo-3.md`
@@ -142,7 +145,34 @@
 - `reports/dev-agent-ollama-automation.json`
 - `reports/dev-agent-ollama-plan.json`
 - `reports/dev-agent-ollama-write-plan.json`
+- `reports/dev-agent-prompt-gate-runner.md`
 - … +10 más bajo `reports`
+
+## Agente: Golden Journey Reviewer
+
+- **Skill:** `.openclaw/epis2/skills/epis2-golden-reviewer/SKILL.md`
+- **Gates sugeridos (solo lectura):** `npm run quality:golden-journey`, `npm run test:e2e:ux-g02`
+
+### Archivos a revisar
+
+- `docs/quality/GOLDEN_CLINICAL_JOURNEY.md`
+- `e2e/a11y-smoke.spec.ts`
+- `e2e/clinical-textbox-evolution-draft.spec.ts`
+- `e2e/dual-chart-modes.spec.ts`
+- `e2e/golden-command-evolution.spec.ts`
+- `e2e/golden-draft-approval.spec.ts`
+- `e2e/golden-v2-admission-discharge.spec.ts`
+- `e2e/helpers/demoPatient.ts`
+- `e2e/login-gateway.spec.ts`
+- `e2e/m3-visual-signoff-capture.spec.ts`
+- `e2e/m3-visual-signoff.spec.ts`
+- `e2e/mobile-drawer.spec.ts`
+- `e2e/ola1c-results-journey.spec.ts`
+- `e2e/ola2-ambulatory-m3-ui.spec.ts`
+- `e2e/ola2-ambulatory-m3-ui.spec.ts-snapshots/ola2-comando-chromium-win32.png`
+- `e2e/ola2-ambulatory-m3-ui.spec.ts-snapshots/ola2-medical-certificate-chromium-win32.png`
+- … +10 más bajo `e2e`
+- `scripts/quality/run-golden-journey.mjs` — *(no encontrado o vacío)*
 
 ## Agente: Microphase Ledger Reviewer
 
@@ -154,56 +184,6 @@
 - `docs/quality/microphase-ledger.json`
 - `docs/quality/MICROPHASE_PROGRAM.md`
 - `docs/product/EPIS2_TABLERO.md`
-
-## Agente: AI Eval Reviewer
-
-- **Skill:** `.openclaw/epis2/skills/epis2-eval-reviewer/SKILL.md`
-- **Gates sugeridos (solo lectura):** `npm run quality:ai-tramo-evals-gate`, `npm run ai:evals:live`
-
-### Archivos a revisar
-
-- `docs/product/EPIS2_AI_TRAMO_EVALS.md`
-- `scripts/ai` — *(no encontrado o vacío)*
-- `packages/clinical-forms/src/blueprints/admission-note.test.ts`
-- `packages/clinical-forms/src/blueprints/admission-note.ts`
-- `packages/clinical-forms/src/blueprints/allergy-entry.ts`
-- `packages/clinical-forms/src/blueprints/clinical-problem-entry.ts`
-- `packages/clinical-forms/src/blueprints/discharge-summary.ts`
-- `packages/clinical-forms/src/blueprints/evolution-note.ts`
-- `packages/clinical-forms/src/blueprints/imaging-request.ts`
-- `packages/clinical-forms/src/blueprints/index.ts`
-- `packages/clinical-forms/src/blueprints/lab-request.ts`
-- `packages/clinical-forms/src/blueprints/medical-certificate.test.ts`
-- `packages/clinical-forms/src/blueprints/medical-certificate.ts`
-- `packages/clinical-forms/src/blueprints/medication-administration.ts`
-- `packages/clinical-forms/src/blueprints/medication-reconciliation.test.ts`
-- `packages/clinical-forms/src/blueprints/medication-reconciliation.ts`
-- `packages/clinical-forms/src/blueprints/nursing-note.ts`
-- … +10 más bajo `packages/clinical-forms/src/blueprints`
-- `reports/ai-evals-live-latest.json` — *(no encontrado o vacío)*
-
-## Agente: Clinical Safety Reviewer
-
-- **Skill:** `.openclaw/epis2/skills/epis2-clinical-safety-reviewer/SKILL.md`
-- **Gates sugeridos (solo lectura):** `npm run test`, `npm run quality:tramos-clinical-signoff-gate`
-
-### Archivos a revisar
-
-- `packages/clinical-domain/src/clinicalSafety/evaluate.test.ts`
-- `packages/clinical-domain/src/clinicalSafety/evaluate.ts`
-- `packages/clinical-domain/src/clinicalSafety/fromDemoContext.test.ts`
-- `packages/clinical-domain/src/clinicalSafety/fromDemoContext.ts`
-- `packages/clinical-domain/src/clinicalSafety/rules.ts`
-- `packages/clinical-domain/src/clinicalSafety/types.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/evaluate.test.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/evaluate.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/fromSafetyInput.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/rules.test.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/rules.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/toSafetyWarnings.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/types.ts`
-- `packages/clinical-domain/src/draftStates.ts`
-- `docs/quality/GOLDEN_CLINICAL_JOURNEY.md`
 
 ## Comandos de verificación sugeridos (humanos / Cursor)
 
@@ -217,4 +197,4 @@ npm run db:validate
 ## Prompt semilla para OpenClaw
 
 Actúa como revisor read-only EPIS2. No modifiques archivos. No ejecutes push/commit/.env.
-Microfase objetivo: H-AUTO-0. Revisa los archivos listados y entrega hallazgos en formato handoff.
+Microfase objetivo: H-AUTO-6. Revisa los archivos listados y entrega hallazgos en formato handoff.

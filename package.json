@@ -274,6 +274,8 @@
     "dev:auto:orchestrate": "node scripts/dev-agent/auto-dev-orchestrator.mjs",
     "dev:auto:parallel": "node scripts/dev-agent/auto-dev-parallel-launcher.mjs",
     "dev:auto:continuous": "node scripts/dev-agent/auto-dev-continuous.mjs",
+    "dev:auto:stop": "node scripts/dev-agent/stop-auto-dev-session.mjs",
+    "dev:evolab:complement": "node scripts/dev-agent/evolab-complement.mjs",
     "dev:auto:integrated": "node scripts/dev-agent/auto-dev-parallel-launcher.mjs",
     "dev:auto:cycle": "node scripts/dev-agent/openclaw-dev-cycle-launcher.mjs",
     "dev:cycle:sync": "node scripts/dev-agent/dev-cycle-sync.mjs",

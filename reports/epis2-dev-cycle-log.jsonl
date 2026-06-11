@@ -40,3 +40,12 @@
 {"at":"2026-06-11T03:18:13.993Z","event":"cycle-close-ok","ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}
 {"at":"2026-06-11T03:19:03.165Z","event":"cycle-tramo-start","order":6,"id":"H-AUTO-6","flags":{"ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}}
 {"at":"2026-06-11T03:19:19.799Z","event":"cycle-tramo-start","order":0,"id":"H-AUTO-0","flags":{"ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}}
+{"at":"2026-06-11T03:19:49.707Z","event":"cycle-tramo-ok","order":0,"id":"H-AUTO-0"}
+{"at":"2026-06-11T03:22:56.324Z","event":"cycle-tramo-start","order":6,"id":"H-AUTO-6","flags":{"ollama":true,"ollamaApply":false,"evolab":false,"openclaw":false}}
+{"at":"2026-06-11T03:23:36.163Z","event":"cycle-tramo-failed","order":6,"stage":"dev:auto:6h"}
+{"at":"2026-06-11T03:23:36.164Z","event":"cycle-close-start","ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}
+{"at":"2026-06-11T03:23:37.084Z","event":"cycle-close-ok","ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}
+{"at":"2026-06-11T03:26:35.842Z","event":"cycle-tramo-failed","order":6,"stage":"dev:auto:6h"}
+{"at":"2026-06-11T03:32:19.979Z","event":"cycle-tramo-start","order":6,"id":"H-AUTO-6","flags":{"ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}}
+{"at":"2026-06-11T03:35:43.554Z","event":"cycle-tramo-failed","order":6,"stage":"dev:auto:6h"}
+{"at":"2026-06-11T03:38:57.507Z","event":"cycle-tramo-start","order":6,"id":"H-AUTO-6","flags":{"ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}}
