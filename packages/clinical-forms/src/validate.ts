@@ -60,4 +60,5 @@ export const BLUEPRINT_DRAFT_TYPES: Record<string, string> = {
   referral_report: 'referral_report',
   medical_certificate: 'medical_certificate',
   procedure_request: 'procedure_request',
+  paper_chart: 'paper_chart',
 };

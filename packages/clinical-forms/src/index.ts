@@ -59,3 +59,15 @@ export {
   mergePrefillOnlyEmpty,
   supportsContextClinicalPrefill,
 } from './context-clinical-prefill.js';
+export {
+  PAPER_CHART_DRAFT_TYPE,
+  PAPER_CHART_SECTION_IDS,
+  emptyPaperChartDraft,
+  mergePaperChartSection,
+  paperChartBlueprint,
+  paperChartSectionSchema,
+  parsePaperChartBody,
+  parsePaperChartSectionPatch,
+  type PaperChartDraftBody,
+  type PaperChartSectionId,
+} from './paper-chart/index.js';

@@ -54,6 +54,13 @@ export {
   epis2M3FormGridSx,
   epis2M3ColumnSpanSx,
 } from './m3-layout-tokens.js';
+export {
+  epis2ChartModeTokens,
+  epis2TraditionalChartTokens,
+  epis2PaperChartTokens,
+  epis2TraditionalChartShellSx,
+  epis2PaperDocumentSx,
+} from './chart-modes-tokens.js';
 
 /** @deprecated Usar buildM3PaletteOptions / theme.palette */
 export { epis2Palette } from './palette-legacy.js';

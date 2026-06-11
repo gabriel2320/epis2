@@ -287,3 +287,28 @@ export function approveDraft(draftId: string) {
     { method: 'POST', body: '{}' },
   );
 }
+
+export type PaperChartSections = Record<
+  'cover' | 'anamnesis' | 'physicalExam' | 'orders' | 'soap' | 'labs' | 'discharge',
+  string
+>;
+
+export function fetchPaperChartDraft(patientId: string) {
+  return apiFetch<{ patientId: string; sections: PaperChartSections; readOnly: boolean }>(
+    `/api/patients/${patientId}/paper-chart`,
+  );
+}
+
+export function patchPaperChartSection(
+  patientId: string,
+  sectionId: keyof PaperChartSections,
+  body: string,
+) {
+  return apiFetch<{ patientId: string; draftId: string; sections: PaperChartSections }>(
+    `/api/patients/${patientId}/paper-chart`,
+    {
+      method: 'PATCH',
+      body: JSON.stringify({ sectionId, body }),
+    },
+  );
+}

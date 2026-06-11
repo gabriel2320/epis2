@@ -14,6 +14,11 @@ export {
   epis2PillBarSx,
   epis2DisplayFontFamily,
   epis2BodyFontFamily,
+  epis2TraditionalChartShellSx,
+  epis2TraditionalChartTokens,
+  epis2PaperChartTokens,
+  epis2PaperDocumentSx,
+  epis2ChartModeTokens,
 } from './theme/theme.js';
 export { useTheme } from '@mui/material/styles';
 export { useEpis2ExpandedUp } from './hooks/useEpis2ExpandedUp.js';

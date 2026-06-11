@@ -1,4 +1,5 @@
 import { useNavigate } from '@tanstack/react-router';
+import { parseChartModeSearch, type ChartModeSearch } from './chartModeSearch.js';
 
 /** Rutas de formularios clínicos (shell `/espacio/*`). */
 export type ClinicalFormRoutePath =
@@ -28,24 +29,19 @@ export type ClinicalFormRoutePath =
   | '/espacio/traslado'
   | '/espacio/informe-interconsulta';
 
-export type ClinicalPatientSearch = {
+export type ClinicalPatientSearch = ChartModeSearch & {
   patientId?: string | undefined;
   mode?: 'classic' | undefined;
   returnTo?: 'dashboard' | undefined;
 };
 
 export function parseClinicalPatientSearch(search: Record<string, unknown>): ClinicalPatientSearch {
-  const parsed: ClinicalPatientSearch = {};
-  if (typeof search.patientId === 'string' && search.patientId) {
-    parsed.patientId = search.patientId;
-  }
-  if (search.mode === 'classic') {
-    parsed.mode = 'classic';
-  }
-  if (search.returnTo === 'dashboard') {
-    parsed.returnTo = 'dashboard';
-  }
-  return parsed;
+  return {
+    ...parseChartModeSearch(search),
+    ...(typeof search.patientId === 'string' && search.patientId ? { patientId: search.patientId } : {}),
+    ...(search.mode === 'classic' ? { mode: 'classic' as const } : {}),
+    ...(search.returnTo === 'dashboard' ? { returnTo: 'dashboard' as const } : {}),
+  };
 }
 
 /** CE-3b/CE-4: slots del comando en query string al abrir formulario. */
@@ -196,6 +192,7 @@ export type AdminSearch = { tab?: AdminTab };
 export type ClinicalNavigateTarget =
   | ClinicalFormRoutePath
   | '/espacio/ficha'
+  | '/espacio/ficha/imprimir'
   | '/espacio/resultados'
   | '/espacio/borrador/$draftId'
   | '/espacio/admin'

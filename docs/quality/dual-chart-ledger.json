@@ -1,0 +1,159 @@
+{
+  "version": "1.0.0",
+  "program": "PROG-DUAL-CHART",
+  "canonicalPlan": "docs/product/EPIS2_DUAL_CHART_DEV_PLAN.md",
+  "adr": "docs/adr/ADR-002-dual-chart-modes.md",
+  "states": ["BLOCKED", "READY", "IN_PROGRESS", "DONE"],
+  "rules": {
+    "oneReadyAtMost": true,
+    "oneInProgressAtMost": true,
+    "stopAfterEachPhase": true,
+    "legacyTestsMustPass": ["three-modes-journey.spec.ts"]
+  },
+  "phases": [
+    {
+      "id": "MF-DUAL-CHART-00",
+      "name": "Scaffold ADR + ClinicalShell + preview dev",
+      "phase": 0,
+      "dependsOn": [],
+      "state": "DONE",
+      "gate": "quality:dual-chart-scaffold-gate",
+      "unitTests": ["test:unit:chart"],
+      "e2eOptional": "test:e2e:dual-chart",
+      "allowedPaths": [
+        "docs/adr/ADR-002-dual-chart-modes.md",
+        "docs/architecture/EPIS2_DUAL_CHART_*.md",
+        "apps/web/src/components/chart/**",
+        "apps/web/src/pages/dev/DualChartModesPreviewPage.tsx",
+        "apps/web/src/dev/dualChartModesEnv.ts",
+        "packages/epis2-ui/src/theme/chart-modes-tokens.ts",
+        "packages/epis2-ui/src/stories/ChartModesPreview.stories.tsx",
+        "e2e/dual-chart-modes.spec.ts"
+      ],
+      "evidenceRequired": [
+        "npm run quality:dual-chart-scaffold-gate",
+        "npm run test:unit:chart",
+        "Preview /dev/chart-modes con VITE_ENABLE_DUAL_CHART_MODES=true"
+      ],
+      "closureReport": "reports/epis2-mf-dual-chart-00-scaffold.md",
+      "unblocks": ["MF-DUAL-CHART-01"]
+    },
+    {
+      "id": "MF-DUAL-CHART-01",
+      "name": "Paridad visual ficha electrónica tradicional",
+      "phase": 1,
+      "dependsOn": ["MF-DUAL-CHART-00"],
+      "state": "DONE",
+      "gate": "quality:dual-chart-traditional-gate",
+      "unitTests": ["test:unit:chart"],
+      "e2eOptional": "test:e2e:dual-chart",
+      "allowedPaths": [
+        "apps/web/src/routes/chartModeSearch.ts",
+        "apps/web/src/components/chart/TraditionalEhrMode.tsx",
+        "apps/web/src/components/chart/ClinicalShell.tsx",
+        "apps/web/src/pages/PatientWorkspacePage.tsx",
+        "apps/web/src/layouts/**",
+        "packages/design-system/src/copy/es.ts"
+      ],
+      "evidenceRequired": [
+        "parseChartModeSearch() en chartModeSearch.ts",
+        "PatientClinicalSummaryGrid en TraditionalEhrMode",
+        "Command bar transversal en ClinicalShell para /espacio/*",
+        "npm run quality:dual-chart-traditional-gate"
+      ],
+      "closureReport": "reports/epis2-mf-dual-chart-01-traditional.md",
+      "unblocks": ["MF-DUAL-CHART-02"]
+    },
+    {
+      "id": "MF-DUAL-CHART-02",
+      "name": "Modo papel SoT + impresión Carta/A5",
+      "phase": 2,
+      "dependsOn": ["MF-DUAL-CHART-01"],
+      "state": "DONE",
+      "gate": "quality:dual-chart-paper-sot-gate",
+      "unitTests": ["test:unit:chart"],
+      "e2eOptional": "test:e2e:dual-chart",
+      "allowedPaths": [
+        "apps/web/src/components/chart/paper/**",
+        "packages/clinical-forms/**",
+        "apps/api/**",
+        "apps/web/src/routes/router.tsx"
+      ],
+      "evidenceRequired": [
+        "Blueprints Zod paper-chart por sección I–VII",
+        "Ruta /espacio/ficha/imprimir",
+        "API borrador por sección (PostgreSQL)",
+        "@page letter y a5 en paperChartPrint.css",
+        "npm run quality:dual-chart-paper-sot-gate"
+      ],
+      "closureReport": "reports/epis2-mf-dual-chart-02-paper-sot.md",
+      "unblocks": ["MF-DUAL-CHART-03"]
+    },
+    {
+      "id": "MF-DUAL-CHART-03",
+      "name": "Router switch chartMode en /espacio/ficha",
+      "phase": 3,
+      "dependsOn": ["MF-DUAL-CHART-02"],
+      "state": "READY",
+      "gate": "quality:dual-chart-router-gate",
+      "unitTests": ["test:unit:chart"],
+      "e2eOptional": "test:e2e:dual-chart",
+      "allowedPaths": [
+        "apps/web/src/pages/PatientWorkspacePage.tsx",
+        "apps/web/src/pages/DualChartPatientPage.tsx",
+        "apps/web/src/routes/router.tsx",
+        "apps/web/src/routes/clinicalNavigate.ts"
+      ],
+      "evidenceRequired": [
+        "DualChartPatientPage detrás de isDualChartModesEnabled()",
+        "Default chartMode=traditional con patientId",
+        "three-modes-journey.spec.ts sin cambios",
+        "npm run quality:dual-chart-router-gate"
+      ],
+      "closureReport": "reports/epis2-mf-dual-chart-03-router.md",
+      "unblocks": ["MF-DUAL-CHART-04"]
+    },
+    {
+      "id": "MF-DUAL-CHART-04",
+      "name": "Congelar legacy classic/dashboard",
+      "phase": 4,
+      "dependsOn": ["MF-DUAL-CHART-03"],
+      "state": "BLOCKED",
+      "gate": "quality:dual-chart-legacy-freeze-gate",
+      "allowedPaths": [
+        "apps/web/src/components/modes/EpisModeSwitcher.tsx",
+        "apps/web/src/modes/modeTransitions.ts",
+        "apps/web/src/routes/clinicalNavigate.ts"
+      ],
+      "evidenceRequired": [
+        "Banner deprecación en EpisModeSwitcher",
+        "Redirect ?mode=classic → chartMode=traditional",
+        "npm run quality:three-modes-gate",
+        "npm run quality:dual-chart-legacy-freeze-gate"
+      ],
+      "closureReport": "reports/epis2-mf-dual-chart-04-legacy-freeze.md",
+      "unblocks": ["MF-DUAL-CHART-05"]
+    },
+    {
+      "id": "MF-DUAL-CHART-05",
+      "name": "Comando launcher delgado + enmienda invariante #6",
+      "phase": 5,
+      "dependsOn": ["MF-DUAL-CHART-04"],
+      "state": "BLOCKED",
+      "gate": "quality:dual-chart-launcher-gate",
+      "allowedPaths": [
+        "apps/web/src/pages/CommandCenterPage.tsx",
+        "docs/product/PRODUCT_INVARIANTS.md",
+        "docs/adr/ADR-002-dual-chart-modes.md"
+      ],
+      "evidenceRequired": [
+        "Comando reducido a búsqueda + sugerencias",
+        "Enmienda PRODUCT_INVARIANTS #6 documentada",
+        "Signoff clínico dual chart",
+        "npm run quality:dual-chart-launcher-gate"
+      ],
+      "closureReport": "reports/epis2-mf-dual-chart-05-launcher.md",
+      "unblocks": []
+    }
+  ]
+}

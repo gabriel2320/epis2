@@ -41,4 +41,18 @@ describe('parseClinicalPatientSearch', () => {
       returnTo: 'dashboard',
     });
   });
+
+  it('parsea chartMode dual ficha', () => {
+    expect(
+      parseClinicalPatientSearch({
+        patientId: 'p-3',
+        chartMode: 'paper',
+        section: 'anamnesis',
+      }),
+    ).toEqual({
+      patientId: 'p-3',
+      chartMode: 'paper',
+      section: 'anamnesis',
+    });
+  });
 });

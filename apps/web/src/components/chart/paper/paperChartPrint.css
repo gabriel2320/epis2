@@ -1,0 +1,38 @@
+/** Impresión ficha papel — Carta y A5 (no A4). ADR-002. */
+@page letter {
+  size: letter portrait;
+  margin: 0.75in;
+}
+
+@page a5 {
+  size: 148mm 210mm;
+  margin: 12mm;
+}
+
+@media print {
+  .epis2-paper-chart-print-letter {
+    page: letter;
+  }
+
+  .epis2-paper-chart-print-a5 {
+    page: a5;
+  }
+
+  .epis2-paper-chart-no-print {
+    display: none !important;
+  }
+
+  .epis2-paper-chart-section {
+    break-inside: avoid-page;
+  }
+}
+
+.epis2-paper-chart-ruled {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 23px,
+    var(--epis2-paper-ruled-line, #c5ced8) 23px,
+    var(--epis2-paper-ruled-line, #c5ced8) 24px
+  );
+}

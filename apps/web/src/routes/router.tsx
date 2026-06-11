@@ -19,6 +19,7 @@ import { DischargeSummaryPrintPage } from '../pages/DischargeSummaryPrintPage.js
 import { LabRequestPrintPage } from '../pages/LabRequestPrintPage.js';
 import { ImagingRequestPrintPage } from '../pages/ImagingRequestPrintPage.js';
 import { PrescriptionPrintPage } from '../pages/PrescriptionPrintPage.js';
+import { PaperChartPrintPage } from '../pages/PaperChartPrintPage.js';
 import { AdminConsolePage } from '../pages/AdminConsolePage.js';
 import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
@@ -28,6 +29,7 @@ import { AppearancePreferencesPage } from '../pages/AppearancePreferencesPage.js
 import { isUiCatalogEnabled } from '../dev/uiCatalogEnv.js';
 import { isVisualThemeCatalogEnabled } from '../dev/visualThemeCatalogEnv.js';
 import { isSchedulerSpikeEnabled } from '../dev/schedulerSpikeEnv.js';
+import { isDualChartModesEnabled } from '../dev/dualChartModesEnv.js';
 import {
   parseDashboardSearch,
   parseClinicalFormSearch,
@@ -150,6 +152,13 @@ const patientWorkspaceRoute = createRoute({
   path: '/espacio/ficha',
   validateSearch: (search: Record<string, unknown>) => parseClinicalPatientSearch(search),
   component: PatientWorkspacePage,
+});
+
+const paperChartPrintRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/ficha/imprimir',
+  validateSearch: (search: Record<string, unknown>) => parseClinicalPatientSearch(search),
+  component: PaperChartPrintPage,
 });
 
 const validatePatientSearch = parseClinicalFormSearch;
@@ -394,6 +403,28 @@ const uiCatalogRoute = createRoute({
   },
 });
 
+const LazyDualChartModesPreviewPage = lazy(() =>
+  import('../pages/dev/DualChartModesPreviewPage.js').then((m) => ({
+    default: m.DualChartModesPreviewPage,
+  })),
+);
+
+/** Preview dual ficha ADR-002 — dev o VITE_ENABLE_DUAL_CHART_MODES=true. */
+const dualChartModesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/dev/chart-modes',
+  validateSearch: (search: Record<string, unknown>) => ({
+    chartMode: typeof search.chartMode === 'string' ? search.chartMode : undefined,
+  }),
+  component: LazyDualChartModesPreviewPage,
+  beforeLoad: async () => {
+    if (!isDualChartModesEnabled()) {
+      throw redirect({ to: '/comando' });
+    }
+    await requireSession();
+  },
+});
+
 /** Spike Scheduler MUI-10 (LIC-007 EVALUATE): solo dev o VITE_ENABLE_SCHEDULER_SPIKE=true. */
 const schedulerSpikeRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -415,12 +446,14 @@ export const routeTree = rootRoute.addChildren([
   appearancePreferencesRoute,
   visualThemeCatalogRoute,
   uiCatalogRoute,
+  dualChartModesRoute,
   schedulerSpikeRoute,
   commandCenterRoute,
   dashboardModeRoute,
   clinicalLayoutRoute.addChildren([
     draftReviewRoute,
     patientWorkspaceRoute,
+    paperChartPrintRoute,
     patientSearchFormRoute,
     patientSummaryFormRoute,
     evolutionFormRoute,

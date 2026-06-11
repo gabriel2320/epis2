@@ -105,6 +105,17 @@ Si prefieres contenedor, copia `.cursor/mcp.json.example` → `.cursor/mcp.local
 
 Skills Figma del marketplace: `figma-use`, `figma-generate-design` (solo cuando pidas explícitamente diseño en Figma).
 
+### Code Connect + GitHub (este repo)
+
+Para vincular `gabriel2320/epis2` con tu biblioteca Figma:
+
+1. Completar OAuth Figma MCP (arriba).
+2. En Figma: Dev Mode → Library → **Connect components to code** → ⚙ → **Connect to GitHub** → repo `epis2`.
+3. Token CLI en `.env`: `FIGMA_ACCESS_TOKEN=figd_...` (scopes Code Connect Write + File Read).
+4. Verificar: `npm run figma:verify` · publicar: `npm run figma:connect:publish`.
+
+Guía completa: [`EPIS2_FIGMA_CODE_CONNECT.md`](./EPIS2_FIGMA_CODE_CONNECT.md)
+
 ---
 
 ## Plugin EPIS2 (`cursor-plugin/epis2`)

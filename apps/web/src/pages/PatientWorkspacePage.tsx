@@ -1,6 +1,9 @@
 import { copy } from '@epis2/design-system';
 import { Link, useSearch } from '@tanstack/react-router';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
+import { resolveChartMode } from '../routes/chartModeSearch.js';
+import type { ChartModeId } from '../dev/dualChartModesEnv.js';
+import { isDualChartModesEnabled } from '../dev/dualChartModesEnv.js';
 import { useEffect, useState } from 'react';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
@@ -29,9 +32,17 @@ import { PatientSummaryAntecedentsBlock } from '../components/PatientSummaryAnte
 import { PatientSummaryDocumentsBlock } from '../components/PatientSummaryDocumentsBlock.js';
 import { PatientWorkspaceCommandPanel } from '../components/PatientWorkspaceCommandPanel.js';
 import { CommandConfirmationDialog } from '../components/CommandConfirmationDialog.js';
+import { ClinicalShell } from '../components/chart/ClinicalShell.js';
+import { PaperChartMode } from '../components/chart/PaperChartMode.js';
+import { TraditionalEhrMode } from '../components/chart/TraditionalEhrMode.js';
+import { EpisClinicalContextPane } from '../components/EpisClinicalContextPane.js';
 
 export function PatientWorkspacePage() {
-  const search = useSearch({ strict: false }) as { patientId?: string; mode?: string };
+  const search = useSearch({ strict: false }) as {
+    patientId?: string;
+    mode?: string;
+    chartMode?: string;
+  };
   const navigate = useClinicalNavigate();
   const { openDashboardMode } = useEpisSession();
   const isClassicMode = useClassicMd3Mode();
@@ -216,23 +227,36 @@ export function PatientWorkspacePage() {
     <Typography color="text.secondary">{copy.drafts.loading}</Typography>
   );
 
+  const isDualChart = isDualChartModesEnabled();
+  const chartMode: ChartModeId = resolveChartMode({
+    chartMode: search.chartMode === 'paper' ? 'paper' : search.chartMode === 'traditional' ? 'traditional' : undefined,
+  });
+
+  const setChartMode = (mode: ChartModeId) => {
+    if (!patientId) return;
+    void navigate({
+      to: '/espacio/ficha',
+      search: { patientId, chartMode: mode },
+    });
+  };
+
+  const allergyLabels = longitudinal?.allergies.map((a) => a.substance) ?? [];
+  const alertLabels = clinicalAlerts
+    .filter((a) => a.severity === 'critical')
+    .map((a) => a.message);
+  const metaLine = [
+    detail.patient.demoCaseCode,
+    detail.clinicalContext.openEncounterId ? copy.classicMd3.episodeOpen : undefined,
+  ]
+    .filter(Boolean)
+    .join(' · ');
+
+  const openSupportingTimeline = () => {
+    setHistoryFocus('timeline');
+    setSupportingOpen(true);
+  };
+
   if (isClassicMode) {
-    const allergyLabels = longitudinal?.allergies.map((a) => a.substance) ?? [];
-    const alertLabels = clinicalAlerts
-      .filter((a) => a.severity === 'critical')
-      .map((a) => a.message);
-    const metaLine = [
-      detail.patient.demoCaseCode,
-      detail.clinicalContext.openEncounterId ? copy.classicMd3.episodeOpen : undefined,
-    ]
-      .filter(Boolean)
-      .join(' · ');
-
-    const openSupportingTimeline = () => {
-      setHistoryFocus('timeline');
-      setSupportingOpen(true);
-    };
-
     return (
       <>
         <ClassicMd3WorkspaceLayout
@@ -273,6 +297,51 @@ export function PatientWorkspacePage() {
           commandSuggestions={classicCommandSuggestionLabels(classicCommand.lastResult)}
           onCommandSuggestion={(label) => void classicCommand.submit(label)}
         />
+        <CommandConfirmationDialog
+          pending={classicCommand.pendingConfirmation}
+          onConfirm={classicCommand.confirmPending}
+          onCancel={classicCommand.cancelPending}
+        />
+      </>
+    );
+  }
+
+  if (isDualChart) {
+    return (
+      <>
+        <ClinicalShell
+          chartMode={chartMode}
+          onChartModeChange={setChartMode}
+          displayName={detail.patient.displayName}
+          metaLine={metaLine}
+          allergyLabels={allergyLabels}
+          commandQuery={classicCommand.query}
+          onCommandQueryChange={classicCommand.setQuery}
+          onCommandSubmit={() => void classicCommand.submit()}
+          commandSuggestions={classicCommandSuggestionLabels(classicCommand.lastResult)}
+          onCommandSuggestion={(label) => void classicCommand.submit(label)}
+        >
+          {chartMode === 'paper' ? (
+            <PaperChartMode
+              patientId={patientId}
+              patientName={detail.patient.displayName}
+              recordNumber={detail.patient.demoCaseCode ?? detail.patient.id.slice(0, 8)}
+            />
+          ) : (
+            <TraditionalEhrMode
+              summaryFields={detail.clinicalContext.summaryFields}
+              longitudinal={longitudinal}
+              alerts={clinicalAlerts}
+              onRegisterAllergy={longitudinalNav.onRegisterAllergy}
+              onRegisterProblem={longitudinalNav.onRegisterProblem}
+              onOpenResults={longitudinalNav.onOpenResults}
+              onOpenDraft={openDraft}
+              onViewFullTimeline={openSupportingTimeline}
+              onOpenEvolution={longitudinalNav.onOpenNote}
+              contextPane={<EpisClinicalContextPane patientId={patientId} />}
+            />
+          )}
+        </ClinicalShell>
         <CommandConfirmationDialog
           pending={classicCommand.pendingConfirmation}
           onConfirm={classicCommand.confirmPending}

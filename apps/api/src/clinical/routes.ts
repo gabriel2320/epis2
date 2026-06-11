@@ -41,6 +41,12 @@ import { getPatientResultsInbox } from './resultsInbox.js';
 import { buildPatientSummaryExport } from './summaryExport.js';
 import { parseClinicalTextSpellcheckRequest, runClinicalTextSpellcheck } from './textSpellcheck.js';
 import { validateDraftBodyEpis2Meta } from './draftBodyMeta.js';
+import {
+  getPaperChartDraftBody,
+  patchPaperChartSection,
+  upsertPaperChartDraft,
+} from './paperChart.js';
+import { parsePaperChartBody, parsePaperChartSectionPatch } from '@epis2/clinical-forms';
 
 const createDraftSchema = z.object({
   patientId: z.string().uuid(),
@@ -64,6 +70,7 @@ const createDraftSchema = z.object({
     'referral_report',
     'medical_certificate',
     'procedure_request',
+    'paper_chart',
     'other',
   ]),
   title: z.string().min(1),
@@ -330,6 +337,79 @@ export async function registerClinicalRoutes(
       }
       const data = await getPatientResultsInbox(db, patientId);
       return patientResultsInboxResponseSchema.parse(data);
+    },
+  );
+
+  app.get(
+    '/api/patients/:patientId/paper-chart',
+    { preHandler: requirePatientRead },
+    async (request, reply) => {
+      const { patientId } = request.params as { patientId: string };
+      const session = (request as AuthenticatedRequest).session;
+      const patient = await getPatientById(db, patientId);
+      if (!patient) {
+        return sendApiError(reply, 404, 'Paciente no encontrado');
+      }
+      const sections = await runWithRlsContext(db, config, session, (tx) =>
+        getPaperChartDraftBody(tx, patientId),
+      );
+      return { patientId, sections, readOnly: false };
+    },
+  );
+
+  app.put(
+    '/api/patients/:patientId/paper-chart',
+    { preHandler: requireDraftWrite },
+    async (request, reply) => {
+      const { patientId } = request.params as { patientId: string };
+      const session = (request as AuthenticatedRequest).session;
+      const patient = await getPatientById(db, patientId);
+      if (!patient) {
+        return sendApiError(reply, 404, 'Paciente no encontrado');
+      }
+      let sections;
+      try {
+        sections = parsePaperChartBody(request.body);
+      } catch {
+        return sendApiError(reply, 400, 'Cuerpo paper-chart inválido');
+      }
+      const draft = await runWithRlsContext(db, config, session, (tx) =>
+        upsertPaperChartDraft(tx, { id: session.sub, username: session.username }, patientId, sections),
+      );
+      return { patientId, sections, draftId: draft.id };
+    },
+  );
+
+  app.patch(
+    '/api/patients/:patientId/paper-chart',
+    { preHandler: requireDraftWrite },
+    async (request, reply) => {
+      const { patientId } = request.params as { patientId: string };
+      const session = (request as AuthenticatedRequest).session;
+      let patch;
+      try {
+        patch = parsePaperChartSectionPatch(request.body);
+      } catch {
+        return sendApiError(reply, 400, 'Sección paper-chart inválida');
+      }
+      const patient = await getPatientById(db, patientId);
+      if (!patient) {
+        return sendApiError(reply, 404, 'Paciente no encontrado');
+      }
+      const result = await runWithRlsContext(db, config, session, (tx) =>
+        patchPaperChartSection(
+          tx,
+          { id: session.sub, username: session.username },
+          patientId,
+          patch.sectionId,
+          patch.body,
+        ),
+      );
+      return {
+        patientId,
+        draftId: result.draft.id,
+        sections: result.sections,
+      };
     },
   );
 

@@ -19,3 +19,10 @@ export type {
   Epis2ThemeOptions,
   MaterialThemeSourceMetadata,
 } from './contracts/material-color-scheme.js';
+export {
+  epis2ChartModeTokens,
+  epis2TraditionalChartTokens,
+  epis2PaperChartTokens,
+  epis2TraditionalChartShellSx,
+  epis2PaperDocumentSx,
+} from './chart-modes-tokens.js';

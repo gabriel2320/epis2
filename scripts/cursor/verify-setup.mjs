@@ -46,6 +46,7 @@ const velocityDoc = join(root, 'docs/dev/EPIS2_DEV_VELOCITY.md');
 console.log(`  dev velocity doc     ${existsSync(velocityDoc) ? 'OK' : 'MISSING'}`);
 
 console.log('\nVelocidad: npm run dev:velocity · gates: npm run dev:velocity:gates');
+console.log('Figma Code Connect: npm run figma:verify · docs/dev/EPIS2_FIGMA_CODE_CONNECT.md');
 console.log('Notion / Figma MCP: Cursor Marketplace → Install → Connect en Settings → MCP.');
 console.log('Doc: docs/dev/CURSOR_PLUGINS_EPIS2.md\n');
 
