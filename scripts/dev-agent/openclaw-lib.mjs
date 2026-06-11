@@ -265,11 +265,11 @@ export function suggestAgents({ tramo, phase, changedFiles = [] }) {
 
 /** Agentes OpenClaw por tramo PROG-AUTO-DEV-6H / PM-03. */
 export const AUTO_DEV_TRAMO_AGENTS = {
-  0: ['security', 'architecture', 'release'],
-  1: ['security', 'clinical-safety', 'ledger'],
-  2: ['security', 'ux', 'architecture', 'golden'],
-  3: ['security', 'ux', 'architecture'],
-  4: ['security', 'architecture', 'release', 'golden'],
+  0: ['security', 'architecture', 'release', 'programming'],
+  1: ['security', 'clinical-safety', 'ledger', 'programming'],
+  2: ['security', 'ux', 'architecture', 'golden', 'programming'],
+  3: ['security', 'ux', 'architecture', 'programming'],
+  4: ['security', 'architecture', 'release', 'golden', 'programming'],
   5: ['security', 'ledger', 'release'],
   6: ['security', 'architecture', 'release', 'golden', 'ledger'],
 };

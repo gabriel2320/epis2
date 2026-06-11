@@ -56,8 +56,21 @@ Complementa (no reemplaza):
 | `ledger` | Microphase Ledger | ledger, tablero |
 | `release` | Release/Gates | check, test, local-ci |
 | `ux` | UX/M3 | apps/web, three modes, M3 gates |
+| `programming` | Programming / OpenClaw apoyo | PM-03, Ollama route, safe-run, cursor queue, dev-cycle |
 
 Skills: `.openclaw/epis2/skills/*/SKILL.md`
+
+### Agente `programming` (L3 apoyo)
+
+Orquesta autodesarrollo supervisado — **no** coder L5. Skill: `.openclaw/epis2/skills/epis2-programming-agent/SKILL.md`.
+
+```bash
+# Slice de comandos + brief por tramo
+npm run openclaw:programming -- --tramo 2
+npm run openclaw:programming -- --mf H-AUTO-2 --json
+```
+
+Incluido en `suggestAgents` y tramos H-AUTO-0…4 vía `AUTO_DEV_TRAMO_AGENTS`. Artefacto: `reports/openclaw-programming-latest.md`.
 
 ---
 
@@ -86,6 +99,7 @@ npm run openclaw:policy
 # Ejecutar gate / ollama (L3 max-power)
 npm run openclaw:safe-run -- --cmd "npm run check"
 npm run openclaw:post-tramo -- --tramo 2
+npm run openclaw:programming -- --tramo 2
 npm run openclaw:safe-patch -- --proposal .agent-runs/openclaw/patch-proposal.json
 ```
 

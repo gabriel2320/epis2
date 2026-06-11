@@ -294,6 +294,7 @@
     "openclaw:safe-patch": "node scripts/dev-agent/openclaw-safe-patch.mjs",
     "openclaw:verify-tramo": "node scripts/dev-agent/openclaw-verify-tramo.mjs",
     "openclaw:post-tramo": "node scripts/dev-agent/openclaw-post-tramo.mjs",
+    "openclaw:programming": "node scripts/dev-agent/openclaw-programming-support.mjs",
     "dev:openclaw:sync": "node scripts/dev-agent/openclaw-sync.mjs",
     "quality:auto-dev-6h-gate": "node scripts/quality/validate-auto-dev-6h-gate.mjs",
     "quality:evolab-bridge-gate": "node scripts/quality/validate-evolab-bridge-gate.mjs",

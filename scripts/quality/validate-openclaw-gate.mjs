@@ -12,6 +12,8 @@ for (const rel of [
   'scripts/dev-agent/openclaw-safe-patch.mjs',
   'scripts/dev-agent/openclaw-post-tramo.mjs',
   'scripts/dev-agent/openclaw-tramo.mjs',
+  'scripts/dev-agent/openclaw-programming-support.mjs',
+  '.openclaw/epis2/skills/epis2-programming-agent/SKILL.md',
   '.openclaw/epis2/policies/epis2-auto-dev-locks.md',
   'docs/product/EPIS2_OPENCLAW_INTEGRATION.md',
 ]) {
@@ -24,6 +26,7 @@ for (const script of [
   'openclaw:safe-run',
   'openclaw:safe-patch',
   'openclaw:post-tramo',
+  'openclaw:programming',
   'quality:openclaw-gate',
 ]) {
   if (!pkg.includes(`"${script}"`)) errors.push(`package.json sin ${script}`);
@@ -52,8 +55,12 @@ if (!ps1.includes('EPIS2_OPENCLAW_MAX_POWER')) errors.push('start-auto-dev-6h.ps
 const envEx = readFileSync(join(root, '.env.example'), 'utf8');
 if (!envEx.includes('EPIS2_OPENCLAW_MAX_POWER')) errors.push('.env.example sin MAX_POWER');
 
+const lib = readFileSync(join(root, 'scripts/dev-agent/openclaw-lib.mjs'), 'utf8');
+if (!lib.includes("'programming'")) errors.push('openclaw-lib sin agente programming');
+
 const doc = readFileSync(join(root, 'docs/product/EPIS2_OPENCLAW_INTEGRATION.md'), 'utf8');
 if (!doc.includes('MAX POWER')) errors.push('OPENCLAW_INTEGRATION sin MAX POWER');
+if (!doc.includes('programming')) errors.push('OPENCLAW_INTEGRATION sin agente programming');
 
 if (errors.length) {
   console.error('openclaw-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));

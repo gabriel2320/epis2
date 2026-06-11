@@ -7,12 +7,11 @@
  *   npm run openclaw:programming -- --tramo 1 --json
  */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadEnvFile } from '../load-env.mjs';
 import {
   AGENT_CATALOG,
-  AUTO_DEV_TRAMO_AGENTS,
   buildBriefMarkdown,
   listExisting,
   suggestAgentsForAutoTramo,
@@ -96,7 +95,7 @@ const report = {
   artifacts: {
     brief: 'reports/openclaw-latest-brief.md',
     handoff: 'reports/openclaw-latest-handoff.md',
-    cursorPrompt: existsSync(cursorPrompt) ? relativeReport(cursorPrompt) : null,
+    cursorPrompt: existsSync(cursorPrompt) ? relative(root, cursorPrompt).replace(/\\/g, '/') : null,
     cycleStatus: 'reports/epis2-dev-cycle-status.json',
     ollamaPlan: 'reports/dev-agent-ollama-automation.json',
     ollamaWrite: 'reports/dev-agent-ollama-write-plan.json',
@@ -104,12 +103,6 @@ const report = {
   indexedFileCount: indexedFiles.length,
   generatedAt: timestamp,
 };
-
-function relativeReport(abs) {
-  return abs.replace(/\\/g, '/').split('/reports/').pop()
-    ? `reports/${abs.replace(/\\/g, '/').split('/reports/').pop()}`
-    : abs;
-}
 
 const markdown = [
   '# EPIS2 — Programming Agent (OpenClaw apoyo)',
