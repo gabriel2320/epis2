@@ -55,6 +55,7 @@ export interface MaterialThemeSourceMetadata {
 export type Epis2ApprovedThemeId =
   | 'clinical-blue'
   | 'calm-teal'
+  | 'clinical-calm'
   | 'slate-professional'
   | 'sage-clinical'
   | 'ocean-depth'

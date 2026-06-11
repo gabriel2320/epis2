@@ -268,9 +268,9 @@ Cada etapa = 1 sesión agente manual. Nomenclatura SDEPIS2.
 ## 8. Definition of Done (este plan)
 
 - [x] Modo traditional: contenedores EMR con radio ≤ 10px (chips/campos 4px vía `epis2ShapeProfiles`)
-- [ ] 8 perfiles MTB registrados incl. `clinical-calm` y `monochrome-gray`
+- [x] 8 perfiles MTB registrados incl. `clinical-calm` y `monochrome-gray`
 - [ ] Light + dark + high contrast validados en los 8
-- [ ] Barra comando visible y coherente en censo + traditional + paper
+- [x] Barra comando visible y coherente en censo + traditional + paper (variantes `census-search` / `clinical-chart`)
 - [ ] Gates: `check` · `theme:validate` · `clinical-roles.contrast` · E2E dual + ux-g02
 - [ ] Docs: este plan + `EPIS2_CLINICAL_DESIGN_SYSTEM_M3` §1 actualizado
 - [ ] Conflicto Calm Premium 20px resuelto: solo fuera de traditional EMR

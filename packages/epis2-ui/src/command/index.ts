@@ -1,4 +1,5 @@
 export { EpisCommandBar, type EpisCommandBarProps } from './EpisCommandBar.js';
+export { episUniversalCommandBarLayoutSx } from './episUniversalCommandBarLayout.js';
 export {
   EpisCommandCenterInlineBar,
   type EpisCommandCenterInlineBarProps,

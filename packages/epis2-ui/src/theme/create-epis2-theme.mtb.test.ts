@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { clinicalBlueLightScheme } from './generated/clinical-blue.js';
 import { calmTealLightScheme } from './generated/calm-teal.js';
+import { clinicalCalmLightScheme } from './generated/clinical-calm.js';
 import { clinicalRoles } from './clinical-roles.js';
 import { createEpis2Theme } from './create-epis2-theme.js';
 
@@ -17,6 +18,13 @@ describe('createEpis2Theme — Material Theme Builder', () => {
     const theme = createEpis2Theme({ accent: 'tealBlue' });
     expect(theme.epis2.themeId).toBe('calm-teal');
     expect(theme.palette.primary?.main).toBe(calmTealLightScheme.primary);
+  });
+
+  it('resuelve clinicalCalm a Clinical Calm MTB (8º perfil)', () => {
+    const theme = createEpis2Theme({ accent: 'clinicalCalm' });
+    expect(theme.epis2.themeId).toBe('clinical-calm');
+    expect(theme.palette.primary?.main).toBe(clinicalCalmLightScheme.primary);
+    expect(clinicalCalmLightScheme.primary).toBe('#0B5C66');
   });
 
   it('themeId explícito calm-teal ignora acento legacy', () => {

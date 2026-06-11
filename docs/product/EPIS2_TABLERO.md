@@ -55,7 +55,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Nomenclatura: **Entre
 | Entrega | Alcance | Gate |
 |---------|---------|------|
 | **C-1** | Revisión humana opcional post-captura M3 (hover/foco/rail/two-pane claro/oscuro) — evidencia en `reports/m3-visual-evidence/2026-06-10/` | Automatizado ✓ · [`epis2-m3-visual-pass-2026-06-10.md`](../../reports/epis2-m3-visual-pass-2026-06-10.md) |
-| **C-2** | **PROG-CALM-PREMIUM** — tramos `THEME-CALM-01` + `UX-AESTHETIC P3` (8 paletas MTB · forma cuadrada traditional · barra comando) | [`EPIS2_TRADITIONAL_M3_SHAPE_COLOR_PLAN.md`](../design/EPIS2_TRADITIONAL_M3_SHAPE_COLOR_PLAN.md) · [`EPIS2_CLINICAL_CALM_PREMIUM_PLAN.md`](../design/EPIS2_CLINICAL_CALM_PREMIUM_PLAN.md) · signoff NO-GO |
+| **C-2** | **PROG-CALM-PREMIUM** — 8 paletas ✓ · forma E3 ✓ · barra E5 ✓ · signoff capturas pendiente | [`EPIS2_TRADITIONAL_M3_SHAPE_COLOR_PLAN.md`](../design/EPIS2_TRADITIONAL_M3_SHAPE_COLOR_PLAN.md) · [`reports/epis2-sesion-etapas-e4-e5-e6-2026-06-11.md`](../../reports/epis2-sesion-etapas-e4-e5-e6-2026-06-11.md) |
 | **C-3** | **Entrega C-3a** ✓ scaffold · **C-3b** pendiente — MF-CLINICAL-SUMMARY-B + tramo `UX-CALM-PATIENT` | [`EPIS2_CLINICAL_SUMMARY_MD3.md`](../design/EPIS2_CLINICAL_SUMMARY_MD3.md) |
 | **C-4** | Activar dual ficha en prod (`VITE_ENABLE_DUAL_CHART_MODES=true`) + E2E CI opt-in | CI job `e2e-dual-chart` ✓ · prod flag off · local/staging manual |
 | backlog | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |

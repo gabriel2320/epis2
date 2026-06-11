@@ -11,6 +11,6 @@ Exportaciones Material Theme Builder (JSON). **No editar** archivos en `generate
 | `ocean-depth.material-theme.json` | `ocean-depth` | `#0C4A6E` | Azul océano profundo |
 | `warm-linen.material-theme.json` | `warm-linen` | `#78716C` | Neutro cálido lectura |
 | `monochrome-gray.material-theme.json` | `monochrome-gray` | `#171717` | Blanco y negro / escala de grises |
-| `clinical-calm.material-theme.json` | `clinical-calm` | `#0B5C66` | **Pendiente** — petróleo Calm Premium (8º perfil) |
+| `clinical-calm.material-theme.json` | `clinical-calm` | `#0B5C66` | ✓ Petróleo Calm Premium (8º perfil) |
 
 Canon de diseño: `docs/design/EPIS2_CLINICAL_DESIGN_SYSTEM_M3.md` · Plan forma/color traditional: `docs/design/EPIS2_TRADITIONAL_M3_SHAPE_COLOR_PLAN.md`

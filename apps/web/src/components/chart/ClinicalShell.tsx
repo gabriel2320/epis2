@@ -95,7 +95,7 @@ export function ClinicalShell({
 
   const commandBar = (
     <EpisUniversalCommandBar
-      variant="classic-contextual"
+      variant="clinical-chart"
       embedded
       query={commandQuery}
       onQueryChange={onCommandQueryChange}

@@ -43,6 +43,7 @@ export function EpisAppearancePreferencesPanel({
   const accentLabels: Record<Epis2Accent, string> = {
     clinicalBlue: copy.themePreferences.accentClinicalBlue,
     tealBlue: copy.themePreferences.accentTeal,
+    clinicalCalm: copy.themePreferences.accentClinicalCalm,
     slateProfessional: copy.themePreferences.accentSlate,
     sageClinical: copy.themePreferences.accentSage,
     oceanDepth: copy.themePreferences.accentOcean,

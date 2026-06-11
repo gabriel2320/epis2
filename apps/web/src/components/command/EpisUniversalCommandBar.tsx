@@ -1,22 +1,34 @@
 import { copy } from '@epis2/design-system';
 import { EPIS_COMMAND_BAR_MAX_SUGGESTIONS } from '../../quality/uiDensityRules.js';
-import { EpisButton, EpisChip, EpisTextField, Stack } from '@epis2/epis2-ui';
+import {
+  EpisButton,
+  EpisChip,
+  EpisTextField,
+  episUniversalCommandBarLayoutSx,
+  Stack,
+} from '@epis2/epis2-ui';
 
 export type EpisUniversalCommandBarVariant =
   | 'command-center'
   | 'classic-contextual'
-  | 'dashboard-operational';
+  | 'dashboard-operational'
+  | 'clinical-chart'
+  | 'census-search';
 
 const PLACEHOLDER: Record<EpisUniversalCommandBarVariant, string> = {
   'command-center': copy.commandCenter.title,
   'classic-contextual': copy.classicMd3.commandPlaceholder,
   'dashboard-operational': copy.dashboardMd3.commandPlaceholder,
+  'clinical-chart': copy.chartModes.commandPlaceholder,
+  'census-search': copy.chartModes.censusCommandPlaceholder,
 };
 
 const SUBMIT_LABEL: Record<EpisUniversalCommandBarVariant, string> = {
   'command-center': copy.commandCenter.submit,
   'classic-contextual': copy.classicMd3.commandSubmit,
   'dashboard-operational': copy.dashboardMd3.commandSubmit,
+  'clinical-chart': copy.classicMd3.commandSubmit,
+  'census-search': copy.chartModes.censusCommandSubmit,
 };
 
 export type EpisUniversalCommandBarProps = {
@@ -28,11 +40,11 @@ export type EpisUniversalCommandBarProps = {
   onSuggestionSelect?: ((label: string) => void) | undefined;
   disabled?: boolean | undefined;
   testId?: string | undefined;
-  /** Sin borde superior — dentro del bottom dock. */
+  /** Sin borde superior — dentro del bottom dock o barra clínica. */
   embedded?: boolean | undefined;
 };
 
-/** Command bar unificada — variantes por modo, command-registry vía callbacks de página. */
+/** Command bar unificada — variantes por superficie, command-registry vía callbacks de página. */
 export function EpisUniversalCommandBar({
   variant,
   query,
@@ -45,24 +57,29 @@ export function EpisUniversalCommandBar({
   embedded = false,
 }: EpisUniversalCommandBarProps) {
   const visibleSuggestions = suggestions.slice(0, EPIS_COMMAND_BAR_MAX_SUGGESTIONS);
+  const isClinicalSurface = variant === 'clinical-chart' || variant === 'census-search';
 
   return (
     <Stack
       data-testid={testId}
       data-epis-command-variant={variant}
       spacing={1}
-      sx={{
-        flexShrink: 0,
-        px: { xs: 1.5, md: 2 },
-        py: embedded ? 0.75 : 1,
-        ...(embedded
-          ? {}
+      sx={
+        isClinicalSurface
+          ? episUniversalCommandBarLayoutSx(embedded)
           : {
-              borderTop: 1,
-              borderColor: 'divider',
-              bgcolor: 'background.paper',
-            }),
-      }}
+              flexShrink: 0,
+              px: { xs: 1.5, md: 2 },
+              py: embedded ? 0.75 : 1,
+              ...(embedded
+                ? {}
+                : {
+                    borderTop: 1,
+                    borderColor: 'divider',
+                    bgcolor: 'background.paper',
+                  }),
+            }
+      }
     >
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} alignItems={{ sm: 'center' }}>
         <EpisTextField

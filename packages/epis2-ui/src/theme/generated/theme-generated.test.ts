@@ -3,6 +3,8 @@ import { MATERIAL_THEME_METADATA } from './theme-metadata.js';
 import {
   calmTealDarkScheme,
   calmTealLightScheme,
+  clinicalCalmDarkScheme,
+  clinicalCalmLightScheme,
   clinicalBlueDarkScheme,
   clinicalBlueLightScheme,
   oceanDepthDarkScheme,
@@ -33,6 +35,8 @@ const ALL_SCHEMES: [string, typeof clinicalBlueLightScheme][] = [
   ['clinical-blue dark', clinicalBlueDarkScheme],
   ['calm-teal light', calmTealLightScheme],
   ['calm-teal dark', calmTealDarkScheme],
+  ['clinical-calm light', clinicalCalmLightScheme],
+  ['clinical-calm dark', clinicalCalmDarkScheme],
   ['slate-professional light', slateProfessionalLightScheme],
   ['slate-professional dark', slateProfessionalDarkScheme],
   ['sage-clinical light', sageClinicalLightScheme],
@@ -46,13 +50,14 @@ const ALL_SCHEMES: [string, typeof clinicalBlueLightScheme][] = [
 ];
 
 describe('generated Material Theme Builder schemes', () => {
-  it('metadata lista 7 perfiles MTB aprobados', () => {
-    expect(MATERIAL_THEME_METADATA).toHaveLength(7);
+  it('metadata lista 8 perfiles MTB aprobados', () => {
+    expect(MATERIAL_THEME_METADATA).toHaveLength(8);
     const ids = MATERIAL_THEME_METADATA.map((m) => m.id);
     expect(ids).toEqual(
       expect.arrayContaining([
         'clinical-blue',
         'calm-teal',
+        'clinical-calm',
         'slate-professional',
         'sage-clinical',
         'ocean-depth',

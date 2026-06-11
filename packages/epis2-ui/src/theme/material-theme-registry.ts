@@ -6,6 +6,8 @@ import type { Epis2Accent } from './color-roles.js';
 import {
   calmTealDarkScheme,
   calmTealLightScheme,
+  clinicalCalmDarkScheme,
+  clinicalCalmLightScheme,
   clinicalBlueDarkScheme,
   clinicalBlueLightScheme,
   oceanDepthDarkScheme,
@@ -31,6 +33,10 @@ export const MATERIAL_THEME_SCHEMES: Record<
   'calm-teal': {
     light: calmTealLightScheme,
     dark: calmTealDarkScheme,
+  },
+  'clinical-calm': {
+    light: clinicalCalmLightScheme,
+    dark: clinicalCalmDarkScheme,
   },
   'slate-professional': {
     light: slateProfessionalLightScheme,
@@ -58,6 +64,7 @@ export const MATERIAL_THEME_SCHEMES: Record<
 export const ACCENT_TO_THEME_ID: Partial<Record<Epis2Accent, Epis2ApprovedThemeId>> = {
   clinicalBlue: 'clinical-blue',
   tealBlue: 'calm-teal',
+  clinicalCalm: 'clinical-calm',
   slateProfessional: 'slate-professional',
   sageClinical: 'sage-clinical',
   oceanDepth: 'ocean-depth',

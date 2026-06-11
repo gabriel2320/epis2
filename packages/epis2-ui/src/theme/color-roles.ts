@@ -3,6 +3,7 @@ import type { PaletteOptions } from '@mui/material/styles';
 export type Epis2Accent =
   | 'clinicalBlue'
   | 'tealBlue'
+  | 'clinicalCalm'
   | 'slateProfessional'
   | 'sageClinical'
   | 'oceanDepth'
@@ -26,6 +27,11 @@ export const accentPresets: Record<
     primary: { main: '#0D7377', light: '#E0F4F5', dark: '#095456', contrastText: '#FFFFFF' },
     secondary: { main: '#546E7A', light: '#ECEFF1', dark: '#37474F', contrastText: '#FFFFFF' },
     surfaceTint: '#E0F4F5',
+  },
+  clinicalCalm: {
+    primary: { main: '#0B5C66', light: '#B8E8ED', dark: '#004F58', contrastText: '#FFFFFF' },
+    secondary: { main: '#4A5F63', light: '#E8F0F2', dark: '#32484C', contrastText: '#FFFFFF' },
+    surfaceTint: '#E8F0F2',
   },
   slateProfessional: {
     primary: { main: '#475569', light: '#DCE3ED', dark: '#334155', contrastText: '#FFFFFF' },

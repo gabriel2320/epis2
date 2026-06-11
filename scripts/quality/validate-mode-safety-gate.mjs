@@ -33,8 +33,13 @@ const universal = readFileSync(
   join(root, 'apps/web/src/components/command/EpisUniversalCommandBar.tsx'),
   'utf8',
 );
-if (!universal.includes('command-center') || !universal.includes('classic-contextual')) {
-  errors.push('EpisUniversalCommandBar debe tener variantes por modo');
+if (
+  !universal.includes('command-center') ||
+  !universal.includes('classic-contextual') ||
+  !universal.includes('clinical-chart') ||
+  !universal.includes('census-search')
+) {
+  errors.push('EpisUniversalCommandBar debe tener variantes por modo (incl. clinical-chart y census-search)');
 }
 if (universal.includes('firmar') || universal.includes('approve')) {
   errors.push('Command bar no debe auto-firmar');

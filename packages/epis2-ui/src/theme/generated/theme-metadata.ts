@@ -19,6 +19,14 @@ export const MATERIAL_THEME_METADATA: readonly MaterialThemeSourceMetadata[] = [
     version: '1.0',
   },
   {
+    id: 'clinical-calm',
+    label: 'Petróleo calm premium',
+    sourceColor: '#0B5C66',
+    importedAt: '2026-06-11',
+    source: 'material-theme-builder',
+    version: '1.0',
+  },
+  {
     id: 'monochrome-gray',
     label: 'Monochrome Gray',
     sourceColor: '#171717',
