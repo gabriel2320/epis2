@@ -19,6 +19,7 @@ import {
   printAlreadyRunning,
   releaseSessionLock,
 } from './auto-dev-session-lock.mjs';
+import { countPendingOrFailed, isLedgerCycleComplete, loadAutoDevLedger } from './auto-dev-ledger-lib.mjs';
 
 loadEnvFile();
 
@@ -53,8 +54,7 @@ function resetStuckTramos() {
 }
 
 function pendingOrFailedCount() {
-  const ledger = JSON.parse(readFileSync(ledgerPath, 'utf8'));
-  return ledger.tramos.filter((t) => t.state === 'FAILED' || t.state === 'PENDING').length;
+  return countPendingOrFailed(loadAutoDevLedger(root));
 }
 
 async function ensureApiUp() {
@@ -169,18 +169,35 @@ async function main() {
     cleanup(1);
   }
 
+  const ledgerAtStart = loadAutoDevLedger(root);
+  if (isLedgerCycleComplete(ledgerAtStart, { retryFailed: true })) {
+    console.log('\n✓ Ledger auto-dev completo — continuous no inicia bucles vacíos\n');
+    console.log('  Resetea docs/quality/auto-dev-6h-ledger.json o usa dev:auto:orchestrate --retry-failed\n');
+    log('continuous-idle-exit', { reason: 'ledger-complete-at-start' });
+    cleanup(0);
+  }
+
   const start = Date.now();
   let cycle = 0;
 
   while (Date.now() - start < maxMs) {
     cycle += 1;
+    const ledgerBefore = loadAutoDevLedger(root);
+    if (isLedgerCycleComplete(ledgerBefore, { retryFailed: true })) {
+      console.log('\n✓ Todos los tramos completos — deteniendo continuous (anti-bucle vacío)\n');
+      log('continuous-idle-exit', { cycle, reason: 'ledger-complete', elapsedMs: Date.now() - start });
+      break;
+    }
+
     runOrchestratorCycle(cycle);
     runEvolabComplement(cycle);
 
     const remaining = pendingOrFailedCount();
     log('continuous-status', { cycle, remaining, elapsedMs: Date.now() - start });
     if (remaining === 0) {
-      console.log('\n✓ Todos los tramos DONE — continúa hasta tope horas\n');
+      console.log('\n✓ Todos los tramos DONE — deteniendo continuous\n');
+      log('continuous-idle-exit', { cycle, reason: 'no-pending-or-failed', elapsedMs: Date.now() - start });
+      break;
     }
 
     if (Date.now() - start >= maxMs) break;

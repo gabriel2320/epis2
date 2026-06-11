@@ -20,6 +20,7 @@ import {
   releaseSessionLock,
   updateSessionLockChildren,
 } from './auto-dev-session-lock.mjs';
+import { countOrchestratorRunnable, isLedgerCycleComplete, loadAutoDevLedger } from './auto-dev-ledger-lib.mjs';
 
 loadEnvFile();
 
@@ -71,7 +72,13 @@ const skipSessionLock = process.env.EPIS2_AUTO_DEV_PARALLEL_SKIP_LOCK === '1';
 
 function tryAcquireLock() {
   if (skipSessionLock) {
-    log('parallel-lock-skipped', { reason: 'EPIS2_AUTO_DEV_PARALLEL_SKIP_LOCK=1' });
+    log('parallel-lock-skipped', {
+      reason: 'EPIS2_AUTO_DEV_PARALLEL_SKIP_LOCK=1',
+      warn: 'candado desactivado — riesgo de solapamiento si hay otra sesión auto-dev',
+    });
+    console.warn(
+      '\n[WARN] EPIS2_AUTO_DEV_PARALLEL_SKIP_LOCK=1 — candado de sesión desactivado (solo uso interno continuous)\n',
+    );
     return;
   }
   const result = acquireSessionLock({
@@ -327,8 +334,17 @@ async function main() {
     }
   }
 
-  console.log('\n▶ PM-03 orquestador (track principal)\n');
-  const orch = await spawnOrchestrator();
+  const ledger = loadAutoDevLedger(root);
+  const runnable = countOrchestratorRunnable(ledger, { resume: true, retryFailed });
+  let orch = { ok: true, status: 0, pid: null };
+
+  if (isLedgerCycleComplete(ledger, { retryFailed }) || runnable === 0) {
+    console.log('\n✓ Ledger completo — omitiendo orquestador PM-03 (anti-bucle vacío)\n');
+    log('parallel-orchestrator-skipped', { reason: 'ledger-complete', runnable, retryFailed });
+  } else {
+    console.log('\n▶ PM-03 orquestador (track principal)\n');
+    orch = await spawnOrchestrator();
+  }
 
   if (evolveChild) {
     console.log('\n▶ Deteniendo Evolab evolve (orquestador finalizado)\n');

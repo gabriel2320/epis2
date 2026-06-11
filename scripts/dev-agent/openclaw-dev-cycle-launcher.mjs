@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { loadEnvFile } from '../load-env.mjs';
 import { applyDevCycleEnv, runCycleBootstrap, runCycleClose } from './openclaw-dev-cycle.mjs';
 import { exitIfSessionActive } from './auto-dev-session-lock.mjs';
+import { isLedgerCycleComplete, loadAutoDevLedger } from './auto-dev-ledger-lib.mjs';
 
 loadEnvFile();
 
@@ -46,6 +47,17 @@ if (!boot.ok) {
 }
 
 process.env.EPIS2_DEV_CYCLE_SKIP_BOOTSTRAP = '1';
+
+if (!dryRun && isLedgerCycleComplete(loadAutoDevLedger(root), { retryFailed })) {
+  console.log('\n✓ Ledger auto-dev completo — dev:auto:cycle idle (sin orquestador)\n');
+  if (!retryFailed) {
+    console.log('  Usa --retry-failed para reintentar tramos FAILED.\n');
+    runCycleClose({ dryRun: false });
+    console.log('\ndev:auto:cycle OK (idle)');
+    console.log('  Estado: reports/epis2-dev-cycle-status.json');
+    process.exit(0);
+  }
+}
 
 const targetScript = parallel ? 'dev:auto:parallel' : 'dev:auto:orchestrate';
 const npmArgs = ['run', targetScript, '--'];

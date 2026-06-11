@@ -11,6 +11,7 @@ for (const rel of [
   'scripts/dev-agent/openclaw-dev-cycle.mjs',
   'scripts/dev-agent/openclaw-dev-cycle-launcher.mjs',
   'scripts/dev-agent/auto-dev-session-lock.mjs',
+  'scripts/dev-agent/auto-dev-ledger-lib.mjs',
   'scripts/dev-agent/dev-cycle-sync.mjs',
   'docs/product/EPIS2_DEV_CYCLE_OPENCLAW.md',
 ]) {
@@ -40,6 +41,13 @@ for (const token of ['runCycleBootstrap', 'runTramoCycle', 'runCycleClose', 'app
 
 const orch = readFileSync(join(root, 'scripts/dev-agent/auto-dev-orchestrator.mjs'), 'utf8');
 if (!orch.includes('runTramoCycle')) errors.push('orchestrator no delega en runTramoCycle');
+if (!orch.includes('orchestrator-idle-skip')) errors.push('orchestrator sin guard anti-bucle vacío');
+
+const continuous = readFileSync(join(root, 'scripts/dev-agent/auto-dev-continuous.mjs'), 'utf8');
+if (!continuous.includes('continuous-idle-exit')) errors.push('continuous sin guard anti-bucle vacío');
+
+const ledgerLib = readFileSync(join(root, 'scripts/dev-agent/auto-dev-ledger-lib.mjs'), 'utf8');
+if (!ledgerLib.includes('countOrchestratorRunnable')) errors.push('auto-dev-ledger-lib incompleto');
 
 const handoff = readFileSync(join(root, 'scripts/dev-agent/openclaw-handoff.mjs'), 'utf8');
 if (!handoff.includes('evolab-open-findings')) errors.push('handoff sin Evolab findings');

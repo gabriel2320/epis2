@@ -9,6 +9,8 @@ import { fileURLToPath } from 'node:url';
 import {
   AGENT_CATALOG,
   buildHandoffMarkdown,
+  dedupeEvolabFindings,
+  formatEvolabFindingLine,
   listExisting,
   parseArgs,
   sanitizeText,
@@ -70,13 +72,14 @@ function loadOllamaPlanHint() {
 
 const evolab = loadEvolabFindings();
 const ollamaHint = loadOllamaPlanHint();
-const evolabCritical = evolab.items.filter((f) => f.severity === 'critical' || f.severity === 'high');
-const evolabMedium = evolab.items.filter((f) => f.severity === 'medium' || f.severity === 'warn');
+const deduped = dedupeEvolabFindings(evolab.items);
+const evolabCritical = deduped.filter((f) => f.severity === 'critical' || f.severity === 'high');
+const evolabMedium = deduped.filter((f) => f.severity === 'medium' || f.severity === 'warn');
 
 const findings = {
   filesReviewed: uniqueFiles,
-  critical: evolabCritical.slice(0, 8).map((f) => `[Evolab ${f.severity}] ${f.scenarioId}: ${f.fingerprint}`),
-  medium: evolabMedium.slice(0, 12).map((f) => `[Evolab ${f.severity}] ${f.scenarioId}: ${f.fingerprint}`),
+  critical: evolabCritical.slice(0, 8).map(formatEvolabFindingLine),
+  medium: evolabMedium.slice(0, 12).map(formatEvolabFindingLine),
   minor: [],
   invariants: [],
   suggestedCommands: [
@@ -86,7 +89,7 @@ const findings = {
   ],
   cursorPrompt: notesBlock
     ? `Revisa el handoff OpenClaw EPIS2 para ${args.mf}. Notas del revisor:\n\n${notesBlock.slice(0, 6000)}`
-    : `Revisa el handoff OpenClaw EPIS2 para ${args.mf}. Evolab: ${evolab.count} hallazgos abiertos. Ollama: ${ollamaHint ?? 'sin plan'}. Aplica correcciones en Cursor bajo supervisión humana. No commits automáticos ni auto-aprobación clínica.`,
+    : `Revisa el handoff OpenClaw EPIS2 para ${args.mf}. Evolab: ${deduped.length} hallazgos únicos (${evolab.count} registros). Ollama: ${ollamaHint ?? 'sin plan'}. Aplica correcciones en Cursor bajo supervisión humana. No commits automáticos ni auto-aprobación clínica.`,
   recommendation:
     evolabCritical.length > 0
       ? 'Atender hallazgos Evolab críticos antes de cerrar tramo'

@@ -5,7 +5,7 @@
  *   EPIS2_AUTO_DEV_AUTHORIZED=1 npm run dev:auto:orchestrate -- --commit --push
  *   npm run dev:auto:orchestrate -- --dry-run
  */
-import { appendFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { appendFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { setTimeout as sleepMs } from 'node:timers/promises';
@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 import { loadEnvFile } from '../load-env.mjs';
 import { applyDevCycleEnv, runCycleBootstrap, runCycleClose, runTramoCycle } from './openclaw-dev-cycle.mjs';
 import { acquireSessionLock, printAlreadyRunning, releaseSessionLock } from './auto-dev-session-lock.mjs';
+import { countOrchestratorRunnable, loadAutoDevLedger } from './auto-dev-ledger-lib.mjs';
 
 loadEnvFile();
 
@@ -46,7 +47,7 @@ async function pauseBetweenTramos(ms) {
 }
 
 function loadLedger() {
-  return JSON.parse(readFileSync(ledgerPath, 'utf8'));
+  return loadAutoDevLedger(root);
 }
 
 function saveLedger(ledger) {
@@ -86,6 +87,27 @@ async function main() {
     process.exit(1);
   }
 
+  const start = Date.now();
+  const maxMs = durationHours * 3600 * 1000;
+  const ledger = loadLedger();
+  const orders = ledger.tramos.map((t) => t.order).sort((a, b) => a - b);
+  const retryFailed = args.includes('--retry-failed');
+  const runnable = countOrchestratorRunnable(ledger, { resume, retryFailed });
+
+  log('orchestrator-start', { durationHours, pauseMs, orders, runnable });
+
+  if (runnable === 0) {
+    console.log('\n✓ Todos los tramos completos — orquestador idle (sin trabajo pendiente)\n');
+    console.log('  Usa --retry-failed para reintentar tramos FAILED o resetea el ledger para un ciclo nuevo.\n');
+    log('orchestrator-idle-skip', { reason: 'no-runnable-tramos', retryFailed });
+    if (!dryRun && !skipBootstrap) {
+      runCycleClose({ dryRun: false });
+    }
+    log('orchestrator-complete', { elapsedMs: elapsedMs(start), idle: true });
+    if (lockHeld) releaseSessionLock(root);
+    return;
+  }
+
   if (!dryRun && !skipBootstrap) {
     const boot = runCycleBootstrap({ dryRun: false });
     if (!boot.ok) {
@@ -94,13 +116,6 @@ async function main() {
       process.exit(1);
     }
   }
-
-  const start = Date.now();
-  const maxMs = durationHours * 3600 * 1000;
-  const ledger = loadLedger();
-  const orders = ledger.tramos.map((t) => t.order).sort((a, b) => a - b);
-
-  log('orchestrator-start', { durationHours, pauseMs, orders });
 
   for (const order of orders) {
     if (elapsedMs(start) >= maxMs) {

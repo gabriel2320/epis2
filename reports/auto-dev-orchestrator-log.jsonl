@@ -153,3 +153,6 @@
 {"at":"2026-06-11T06:18:49.305Z","event":"orchestrator-complete","elapsedMs":1}
 {"at":"2026-06-11T06:22:01.236Z","event":"orchestrator-start","durationHours":6,"pauseMs":120000,"orders":[0,1,2,3,4,5,6]}
 {"at":"2026-06-11T06:22:01.237Z","event":"orchestrator-complete","elapsedMs":1}
+{"at":"2026-06-11T12:03:20.137Z","event":"orchestrator-start","durationHours":6,"pauseMs":120000,"orders":[0,1,2,3,4,5,6],"runnable":0}
+{"at":"2026-06-11T12:03:20.137Z","event":"orchestrator-idle-skip","reason":"no-runnable-tramos","retryFailed":false}
+{"at":"2026-06-11T12:03:20.137Z","event":"orchestrator-complete","elapsedMs":1,"idle":true}
