@@ -1,285 +1,268 @@
 # EPIS2 — Plan de desarrollo automatizado: modos dual ficha (PROG-DUAL-CHART)
 
-**Versión:** 1.0 · **Fecha:** 2026-06-10  
+**Versión:** 2.0 · **Fecha:** 2026-06-11  
 **ADR:** [`ADR-002-dual-chart-modes.md`](../adr/ADR-002-dual-chart-modes.md)  
-**Ledger:** [`docs/quality/dual-chart-ledger.json`](../quality/dual-chart-ledger.json)  
-**Precedencia:** post PROG-THREE-MODES · paralelo a olas clínicas
+**Canon visual:** [`EPIS2_DUAL_CHART_VISUAL_CANON.md`](../design/EPIS2_DUAL_CHART_VISUAL_CANON.md)  
+**Ledger:** [`docs/quality/dual-chart-ledger.json`](../quality/dual-chart-ledger.json)
 
 > **Fuente única** del programa dual ficha. Automatización: `npm run quality:dual-chart-plan`.
 
 ---
 
-## Tabla de nomenclatura
-
-| Capa | ID canónico | Nombre |
-|------|-------------|--------|
-| Programa | **PROG-DUAL-CHART** | Dos modos ficha + command bar transversal |
-| Roadmap | **EPIS2-PM-02** | Dual chart modes (alias plan visual mayor) |
-| Fases | **MF-DUAL-CHART-00…05** | Scaffold → launcher |
-| Quality gates | **DC-00…DC-05** | `quality:dual-chart-*-gate` |
-| Flag | `VITE_ENABLE_DUAL_CHART_MODES` | Preview + router switch (default DEV) |
-
-**Decisión MUI:** **No abandonar.** Dos composiciones sobre `@epis2/epis2-ui` (electrónico denso + papel institucional).
-
----
-
-## Norte arquitectónico
+## Decisión visual mayor (v2)
 
 ```text
-Login → /comando (HOME — launcher delgado en fase 5)
-         └─► /espacio/ficha?patientId=&chartMode=traditional|paper
-                  ClinicalShell (siempre)
-                  ├── PatientChartBanner
-                  ├── ChartModeSwitch
-                  ├── TraditionalEhrMode | PaperChartMode
-                  ├── CommandPaletteOverlay (Ctrl+K)
-                  └── EpisUniversalCommandBar (dock transversal)
-
-Legacy congelado (bugfix only):
-  ?mode=classic · /epis2/dashboard?mode=dashboard
+EPIS2
+└── Ficha del paciente
+    ├── Modo Ficha Electrónica (traditional)
+    └── Modo Ficha Papel (paper)
 ```
 
-Referencias Figma Make:
+**Barra de comandos:** transversal (Ctrl+K), **no** tercer modo visual.
 
-- [Medical Record — ficha electrónica](https://www.figma.com/make/PhZ55jJhxLQUtIWEuf17ZO/Medical-Record)
-- [Ficha papel editable](https://www.figma.com/make/AJ9MNrSyClA0hh8jB8sx49/Crear-p%C3%A1ginas-de-ficha-m%C3%A9dica)
+**Deprecar como experiencia principal:** Command Center · Modo Clásico · Dashboard.
+
+**Flujo canónico:**
+
+```text
+Login → Búsqueda/Censo → Ficha → [Ficha Electrónica | Ficha Papel]
+```
+
+**Cuatro capas fijas:** Header institucional · Banda paciente · Barra clínica · Contenido + Footer estado.
+
+**MUI:** mantener vía `@epis2/epis2-ui` — dos composiciones (denso institucional + documento papel).
 
 ---
 
-## Automatización (comandos)
+## Nomenclatura
+
+| Capa | ID | Nombre |
+|------|-----|--------|
+| Programa | **PROG-DUAL-CHART** | Dos modos ficha + command transversal |
+| Roadmap | **EPIS2-PM-02** | Decisión visual mayor post three-modes |
+| Fases | **MF-DUAL-CHART-00…09** | Scaffold → census-first + signoff |
+| Gates | **DC-00…DC-09** | `quality:dual-chart-*-gate` |
+| Flag | `VITE_ENABLE_DUAL_CHART_MODES` | Preview + switch progresivo |
+
+---
+
+## Automatización
 
 | Comando | Uso |
 |---------|-----|
-| `npm run quality:dual-chart-ledger` | Valida ledger JSON (1 READY, deps) |
-| `npm run quality:dual-chart-next` | JSON fase activa + comandos |
-| `npm run dev:dual-chart:session` | Genera `reports/dual-chart-session-brief.md` |
-| `npm run quality:dual-chart-plan` | Gate de fase activa |
-| `npm run quality:dual-chart-plan -- --phase N` | Gate fase N |
-| `npm run quality:dual-chart-plan -- --through N` | Gates 0…N acumulados |
-| `npm run quality:dual-chart-plan -- --verify` | `check` + gate + unit chart |
-| `npm run quality:dual-chart-plan -- --verify --e2e --legacy` | Cierre fase completo |
-| `npm run quality:dual-chart-gate` | Ledger + scaffold + gate activo |
-| `npm run test:unit:chart` | Vitest `components/chart/` |
-| `npm run test:e2e:dual-chart` | Playwright (flag opt-in) |
-
-### Flujo diario recomendado
-
-```bash
-npm run stack:dev
-npm run dev:dual-chart:session          # brief → reports/dual-chart-session-brief.md
-npm run quality:dual-chart-next         # confirmar MF-DUAL-CHART-NN READY
-
-# desarrollo…
-
-npm run quality:dual-chart-plan -- --verify --e2e
-npm run test:e2e:three-modes            # legacy intacto
-npm run dev:agent:close
-```
-
-### Cierre de fase (manual en ledger)
-
-1. Gate de fase pasa: `npm run quality:dual-chart-plan -- --phase N --verify --e2e --legacy`
-2. Completar `reports/epis2-mf-dual-chart-NN-*.md`
-3. Editar `dual-chart-ledger.json`: fase `DONE` → siguiente `READY`
-4. `npm run quality:dual-chart-ledger`
+| `npm run dev:dual-chart:session` | Brief fase READY |
+| `npm run quality:dual-chart-next` | JSON fase activa |
+| `npm run quality:dual-chart-plan -- --phase N --verify` | Gate + check |
+| `npm run quality:dual-chart-plan -- --verify --e2e --legacy` | Cierre fase |
 
 ---
 
-## Fases detalladas
+## Roadmap de fases
 
-### MF-DUAL-CHART-00 — Scaffold (DONE)
-
-**Objetivo:** ADR, tokens, `ClinicalShell`, preview `/dev/chart-modes`, Storybook, E2E opt-in.
-
-**Entregables:**
-
-- [x] ADR-002 + mapa rutas + migración
-- [x] `apps/web/src/components/chart/*`
-- [x] `chart-modes-tokens.ts` (traditional + paper)
-- [x] `PaperChartTemplate` 7 secciones I–VII
-- [x] `paperChartPrint.css` Carta/A5 (no A4)
-- [x] E2E `dual-chart-modes.spec.ts` (a–f)
-- [x] Storybook `ChartModesPreview.stories.tsx`
-
-**Gate:** `npm run quality:dual-chart-scaffold-gate`
-
-**Preview:** `VITE_ENABLE_DUAL_CHART_MODES=true` → `/dev/chart-modes`
+| Fase | ID | Estado | Entrega |
+|------|-----|--------|---------|
+| 0 | MF-DUAL-CHART-00 | **DONE** | ADR, ClinicalShell scaffold, tokens, E2E opt-in |
+| 1 | MF-DUAL-CHART-01 | **DONE** | chartModeSearch, grid EMR, command `/espacio/*` |
+| 2 | MF-DUAL-CHART-02 | **DONE** | Paper SoT Zod + API + `/espacio/ficha/imprimir` |
+| 3 | MF-DUAL-CHART-03 | **READY** | `DualChartPatientPage`, default `chartMode=traditional` |
+| 4 | MF-DUAL-CHART-04 | BLOCKED | **Anatomía shell v2** — header, banda, action bar, footer |
+| 5 | MF-DUAL-CHART-05 | BLOCKED | **TraditionalEhrLayout** — nav clínico completo + panel colapsable |
+| 6 | MF-DUAL-CHART-06 | BLOCKED | **PaperChartLayout v2** — toolbar documental + estética institucional |
+| 7 | MF-DUAL-CHART-07 | BLOCKED | Legacy freeze + redirects classic/dashboard |
+| 8 | MF-DUAL-CHART-08 | BLOCKED | **Census-first** — post-login búsqueda/censo (reemplaza comando hero) |
+| 9 | MF-DUAL-CHART-09 | BLOCKED | Enmienda invariante #6 + signoff + ADR Aceptado |
 
 ---
 
-### MF-DUAL-CHART-01 — Paridad visual traditional (READY)
+## MF-DUAL-CHART-03 — Router switch (READY)
 
-**Objetivo:** EMR denso alineado a Figma Medical Record; command bar en todo `/espacio/*`.
-
-**Alcance permitido:**
-
-```text
-apps/web/src/routes/chartModeSearch.ts          (nuevo)
-apps/web/src/components/chart/TraditionalEhrMode.tsx
-apps/web/src/components/chart/ClinicalShell.tsx
-apps/web/src/pages/PatientWorkspacePage.tsx     (solo rama flag, sin romper legacy)
-apps/web/src/layouts/ClinicalShellLayout.tsx
-packages/design-system/src/copy/es.ts
-```
+**Objetivo:** Ficha dual canónica en `/espacio/ficha` detrás de flag.
 
 **Tareas:**
 
-1. Crear `parseChartModeSearch()` — `chartMode`, `section`, `printFormat`
-2. Integrar `PatientClinicalSummaryGrid` en área central `TraditionalEhrMode`
-3. Nav lateral: anamnesis, examen, evolución, labs, meds, epicrisis
-4. Panel derecho contexto/IA ≥1280px (`EpisClinicalContextPane` o stub)
-5. Montar `ClinicalShell` + dock command en rutas `/espacio/*` (flag)
+1. `DualChartPatientPage.tsx` — extraer rama dual de `PatientWorkspacePage`
+2. Default `chartMode=traditional` con `patientId`
+3. E2E `dual-chart-modes.spec.ts` incluye `/espacio/ficha`
+4. Legacy modern stack intacto si flag=false
 
-**DoD:**
-
-- [ ] Gate `quality:dual-chart-traditional-gate` verde
-- [ ] Unit chart tests verdes
-- [ ] E2E preview o `/espacio/ficha` con flag
-- [ ] `three-modes-journey` sin cambios
-
-**Sesión Cursor:** `@reports/dual-chart-session-brief.md`
+**Gate:** `quality:dual-chart-router-gate`
 
 ---
 
-### MF-DUAL-CHART-02 — Modo papel SoT
+## MF-DUAL-CHART-04 — Anatomía shell v2
 
-**Objetivo:** Datos estructurados por sección; impresión real Carta/A5; borrador PostgreSQL.
+**Objetivo:** Cuatro capas fijas según canon visual §2–5, §9.
 
-**Alcance:**
+**Componentes nuevos/refactor:**
 
 ```text
-packages/clinical-forms/src/paper-chart/**     (blueprints Zod I–VII)
-apps/api/src/**/paper-chart*                   (draft API)
-apps/web/src/components/chart/paper/**
-apps/web/src/routes/router.tsx                   (+ /espacio/ficha/imprimir)
+ClinicalInstitutionalHeader     (azul marino 56–64px)
+PatientIdentityBand             (reemplaza PatientChartBanner)
+ClinicalActionBar               (modos + acciones + slot Ctrl+K)
+ClinicalFooterStatus            (autoguardado + estado legal)
+ClinicalShell                   (compone las 4 capas)
 ```
 
-**Tareas:**
+**Reglas:**
 
-1. Blueprint Zod por sección — mapeo a campos clínicos existentes
-2. API borrador JSONB (reutilizar drafts si aplica)
-3. `PaperChartTemplate`: `onSectionChange` → persistencia
-4. Ruta print preview con `printFormat=letter|a5`
-5. Extender golden journey (papel mínimo)
+- Header **sin** guardar/firmar/imprimir.
+- Alergias siempre en banda.
+- Eliminar dock suelto; unificar en `ClinicalActionBar`.
 
-**DoD:**
+**Gate:** `quality:dual-chart-shell-anatomy-gate` (nuevo)
 
-- [ ] Gate `quality:dual-chart-paper-sot-gate`
-- [ ] E2E edita anamnesis + print Carta/A5
-- [ ] IA solo propone borrador — humano firma
-
-**Editor rico (fase 2b, opcional):** interfaz `ClinicalDocumentSectionEditor`; Tiptap/Lexical tras gate seguridad deps.
+**Copy:** `packages/design-system/src/copy/es.ts` → `chartShell.*`
 
 ---
 
-### MF-DUAL-CHART-03 — Router switch
+## MF-DUAL-CHART-05 — TraditionalEhrLayout
 
-**Objetivo:** `/espacio/ficha?chartMode=` canónico; legacy default sin flag.
+**Objetivo:** Ficha electrónica hospitalaria densa — no wizard, no dashboard.
 
-**Alcance:**
+**Componentes:**
 
 ```text
-apps/web/src/pages/DualChartPatientPage.tsx      (nuevo)
-apps/web/src/pages/PatientWorkspacePage.tsx
-apps/web/src/routes/router.tsx
-apps/web/src/routes/clinicalNavigate.ts
+TraditionalEhrLayout
+├── TraditionalSectionNav      (17 secciones clínicas — canon §6)
+├── TraditionalClinicalPanel   (sección activa tabular/compacta)
+└── ClinicalRightContextPanel  (pendientes, labs, IA — colapsable)
 ```
 
-**Pseudocódigo:**
+**Contenido por sección (MVP incremental):**
 
-```tsx
-if (isDualChartModesEnabled() && patientId) {
-  return <DualChartPatientPage chartMode={parseChartModeSearch(search)} />;
-}
-// legacy PatientWorkspacePage stack
-```
+| Sección | MVP |
+|---------|-----|
+| Resumen clínico | Grid actual + alertas |
+| Evolución | Link `/espacio/evolucion` + lista borradores |
+| Indicaciones | Tabla + CTA nueva |
+| Laboratorio | Inbox resultados |
+| Epicrisis | Link formulario |
 
-**DoD:**
+**Prohibido:** botón “Siguiente” como navegación principal.
 
-- [ ] Default `chartMode=traditional`
-- [ ] E2E incluye `/espacio/ficha`
-- [ ] `three-modes-journey` intacto
+**Gate:** `quality:dual-chart-traditional-layout-gate`
 
 ---
 
-### MF-DUAL-CHART-04 — Congelar legacy
+## MF-DUAL-CHART-06 — PaperChartLayout v2
 
-**Objetivo:** Classic/dashboard bugfix-only; redirect suave a `chartMode=traditional`.
+**Objetivo:** Documento institucional editable — Carta/A5, no A4.
 
-**Tareas:**
+**Componentes:**
+
+```text
+PaperChartLayout
+├── PaperDocumentToolbar       (formato, zoom, guardar, firmar, print, PDF)
+├── PaperSectionNavigator      (I–VII)
+├── PaperPageCanvas            (hoja centrada, fondo gris)
+├── PaperFieldLine / PaperTable / PaperSignatureBlock
+└── PaperFooter                (confidencial + página N/M)
+```
+
+**Estética:** serif títulos · monoespaciado campos · cabecera `#0B2540` · sin cajas MUI en cuerpo.
+
+**Gate:** `quality:dual-chart-paper-layout-gate`
+
+---
+
+## MF-DUAL-CHART-07 — Legacy freeze
+
+**Objetivo:** Classic/dashboard bugfix-only; redirects suaves.
 
 1. Banner deprecación `EpisModeSwitcher`
-2. `clinicalNavigate`: `?mode=classic` → `chartMode=traditional`
-3. Mantener dashboard turno hasta signoff clínico
+2. `?mode=classic` → `chartMode=traditional`
+3. Dashboard turno → panel derecho / resumen clínico (no modo)
 
-**DoD:**
-
-- [ ] `quality:three-modes-gate` + `quality:dual-chart-legacy-freeze-gate`
+**Gate:** `quality:dual-chart-legacy-freeze-gate` + `quality:three-modes-gate`
 
 ---
 
-### MF-DUAL-CHART-05 — Comando launcher + invariante #6
+## MF-DUAL-CHART-08 — Census-first
 
-**Objetivo:** Home = búsqueda paciente; ficha = workspace principal.
+**Objetivo:** Post-login = búsqueda/censo de pacientes, no Command Center hero.
+
+```text
+/login → /pacientes (o /comando slim) → selección → /espacio/ficha
+```
 
 **Tareas:**
 
-1. `CommandCenterPage` layout slim (sin hero dashboard)
-2. Enmienda `PRODUCT_INVARIANTS.md` #6
-3. ADR-002 estado **Aceptado**
-4. `EPIS2_DUAL_CHART_CLINICAL_SIGNOFF.md`
+1. Reducir `CommandCenterPage` a búsqueda + recientes (sin widgets dashboard)
+2. Ruta canónica censo: `/espacio/buscar-paciente` o nueva `/pacientes`
+3. Redirect `/comando` → census cuando flag dual activo
+4. Redistribuir widgets dashboard → `ClinicalRightContextPanel` + Resumen clínico
 
-**DoD:**
-
-- [ ] Signoff producto + clínica
-- [ ] Gate launcher verde
+**Gate:** `quality:dual-chart-census-gate`
 
 ---
 
-## Mapa de rutas (resumen)
+## MF-DUAL-CHART-09 — Signoff + invariante #6
 
-Ver [`EPIS2_DUAL_CHART_ROUTE_MAP.md`](../architecture/EPIS2_DUAL_CHART_ROUTE_MAP.md).
+**Objetivo:** Cierre programa visual mayor.
 
-| Ruta | Modo | Shell |
-|------|------|-------|
-| `/comando` | Launcher | EpisAppScaffold |
-| `/espacio/ficha?chartMode=traditional` | EMR denso | ClinicalShell |
-| `/espacio/ficha?chartMode=paper` | Documento | ClinicalShell |
-| `/espacio/ficha/imprimir` | Print | ClinicalShell |
-| `/dev/chart-modes` | Preview dev | ClinicalShell |
-| `?mode=classic` | Legacy | EpisClassicMd3Shell |
+1. Enmienda `PRODUCT_INVARIANTS.md` #6: *Home = búsqueda paciente; workspace = ficha*
+2. ADR-002 estado **Aceptado**
+3. `docs/product/EPIS2_DUAL_CHART_CLINICAL_SIGNOFF.md`
+4. `quality:golden-journey` extensión dual chart
+
+**Gate:** `quality:dual-chart-launcher-gate` (renombrar a signoff en v2.1)
 
 ---
 
-## Matriz de tests
+## Mapa de rutas objetivo
 
-| Test | Fases | CI |
-|------|-------|-----|
-| `three-modes-journey.spec.ts` | 0–5 | Siempre |
-| `dual-chart-modes.spec.ts` | 0+ | Opt-in flag |
-| `test:unit:chart` | 0+ | Con `--verify` |
-| Storybook ChartModes | 0+ | Manual / Chromatic futuro |
-| `quality:golden-journey` | 2+ ext. | Pre-release |
+| Ruta | Rol post-MF-08 |
+|------|----------------|
+| `/login` | Auth |
+| `/pacientes` o `/espacio/buscar-paciente` | **Censo canónico** |
+| `/espacio/ficha?chartMode=` | **Workspace principal** |
+| `/espacio/ficha/imprimir` | Print Carta/A5 |
+| `/comando` | Legacy redirect → censo (MF-08) |
+| `/epis2/dashboard` | Legacy congelado |
+| `?mode=classic` | Legacy redirect (MF-07) |
+| `/dev/chart-modes` | Preview dev |
 
-Casos E2E dual chart (a–f):
+Detalle: [`EPIS2_DUAL_CHART_ROUTE_MAP.md`](../architecture/EPIS2_DUAL_CHART_ROUTE_MAP.md)
 
-1. Abre ficha electrónica
-2. Alterna a ficha papel
-3. Edita anamnesis
-4. Previsualiza Carta
-5. Previsualiza A5
-6. Command bar ambos modos + Ctrl+K
+---
+
+## Matriz E2E (obligatoria)
+
+| Caso | Descripción |
+|------|-------------|
+| a | Abre ficha electrónica |
+| b | Cambia a ficha papel |
+| c | Edita anamnesis (modo papel) |
+| d | Imprime/previsualiza Carta |
+| e | Imprime/previsualiza A5 |
+| f | Ctrl+K en ambos modos |
+
+Spec: `e2e/dual-chart-modes.spec.ts` · CI opt-in `VITE_ENABLE_DUAL_CHART_MODES=true`
 
 ---
 
 ## Design tokens
 
-| Token set | Archivo | Uso |
-|-----------|---------|-----|
-| `epis2TraditionalChartTokens` | `chart-modes-tokens.ts` | Nav 240px, banner 72px, context 360px |
-| `epis2PaperChartTokens` | `chart-modes-tokens.ts` | Navy `#0B2540`, paper `#FAFAF8`, letter/A5 px |
+| Token | Modo | Notas |
+|-------|------|-------|
+| `epis2TraditionalChartTokens` | Electrónico | Denso, nav 240px, context 360px |
+| `epis2PaperChartTokens` | Papel | Navy `#0B2540`, paper `#FAFAF8`, letter/A5 |
+| *(nuevo MF-04)* `epis2ClinicalShellTokens` | Shell | Header 56–64px, footer 32px |
 
-Import: `@epis2/epis2-ui/theme` — **no** `@mui/*` desde apps/web.
+Archivo: `packages/epis2-ui/src/theme/chart-modes-tokens.ts`
+
+---
+
+## Qué cambia vs primera imagen (turquesa)
+
+| Actual problemático | Rediseño |
+|--------------------|----------|
+| Header turquesa genérico | Azul marino institucional |
+| Botón “Siguiente” | Guardar / Firmar / sección |
+| Campos grandes con aire | Tabular compacto |
+| Paciente débil abajo | `PatientIdentityBand` fija |
+| Menú corto administrativo | Nav clínico hospitalario 17 ítems |
+| Dashboard como modo | Panel derecho colapsable |
 
 ---
 
@@ -289,23 +272,12 @@ Import: `@epis2/epis2-ui/theme` — **no** `@mui/*` desde apps/web.
 VITE_ENABLE_DUAL_CHART_MODES=false
 ```
 
-Rutas legacy sin cambios. Ledger puede revertir fase a `IN_PROGRESS`.
-
----
-
-## Riesgos y mitigaciones
-
-| Riesgo | Mitigación |
-|--------|------------|
-| Conflicto invariante #6 | Fases 0–4 mantienen `/comando` home |
-| Regresión three-modes | Gate `--legacy` en cierre fase |
-| Scope editor rico | MVP textarea + Zod; Tiptap fase 2b |
-| components/ congelado | Subcarpeta `chart/` ✓ |
+Legacy three-modes intacto; tests `three-modes-journey` siempre verdes en CI.
 
 ---
 
 ## Documentos relacionados
 
 - [`EPIS2_DUAL_CHART_MIGRATION.md`](../architecture/EPIS2_DUAL_CHART_MIGRATION.md)
-- [`EPIS2_THREE_MODES_DEV_PLAN.md`](../product/EPIS2_THREE_MODES_DEV_PLAN.md) (legacy congelado)
+- [`EPIS2_THREE_MODES_DEV_PLAN.md`](EPIS2_THREE_MODES_DEV_PLAN.md) (histórico — congelado)
 - [`EPIS2_FIGMA_CODE_CONNECT.md`](../dev/EPIS2_FIGMA_CODE_CONNECT.md)

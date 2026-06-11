@@ -1,6 +1,7 @@
-# EPIS2 — Mapa de rutas (modos dual ficha)
+# EPIS2 — Mapa de rutas (modos dual ficha) v0.2
 
-**Versión:** 0.1 · **ADR:** [`ADR-002-dual-chart-modes.md`](../adr/ADR-002-dual-chart-modes.md)
+**Versión:** 0.2 · **ADR:** [`ADR-002-dual-chart-modes.md`](../adr/ADR-002-dual-chart-modes.md)  
+**Canon visual:** [`EPIS2_DUAL_CHART_VISUAL_CANON.md`](../design/EPIS2_DUAL_CHART_VISUAL_CANON.md)
 
 ---
 
@@ -9,36 +10,36 @@
 | Símbolo | Significado |
 |---------|-------------|
 | 🟢 | Canónico nuevo |
-| 🟡 | Legacy congelado |
-| 🔵 | Sin cambio (home / auth) |
+| 🟡 | Legacy congelado → redirect |
+| 🔵 | Transitorio (MF-08 census-first) |
 
 ---
 
-## Rutas objetivo (post-migración fase 2+)
+## Flujo objetivo (post MF-DUAL-CHART-08)
 
 ```text
 /login                          🔵
-/comando                        🔵 HOME (launcher delgado fase 3)
-/sesion-expirada                🔵
-
-/espacio/ficha                  🟢 ClinicalShell + chartMode
+/pacientes | /espacio/buscar-paciente   🟢 Censo canónico
+/espacio/ficha                  🟢 Workspace principal
   ?patientId=
-  &chartMode=traditional|paper  (default: traditional)
-  &section=anamnesis            (paper: sección activa)
-
-/espacio/ficha/imprimir         🟢 preview print Carta/A5
-  ?patientId=&format=letter|a5&section=all|anamnesis
-
-/espacio/*                      🟡 formularios — heredan ClinicalShell + command bar
-  (evolucion, epicrisis, labs…)
-
-/dev/chart-modes                🟢 preview scaffold (flag VITE_ENABLE_DUAL_CHART_MODES)
-
-/epis2/dashboard                🟡 legacy congelado
-  ?mode=dashboard
-
-/espacio/ficha?mode=classic     🟡 legacy MD3 — sin nuevas features
+  &chartMode=traditional|paper
+/espacio/ficha/imprimir         🟢 Print Carta/A5
+/espacio/*                      🟢 Formularios (heredan shell + command bar)
+/comando                        🟡 → redirect censo (MF-08)
+/epis2/dashboard                🟡 congelado
+?mode=classic                   🟡 → chartMode=traditional (MF-07)
+/dev/chart-modes                🟢 preview dev
 ```
+
+---
+
+## Flujo mental del médico
+
+```text
+Busco paciente → entro a ficha → [Ficha Electrónica | Ficha Papel]
+```
+
+No más: Command Center · Modo Clásico · Dashboard como tres “modos visuales”.
 
 ---
 
@@ -47,41 +48,26 @@
 | Param | Valores | Uso |
 |-------|---------|-----|
 | `patientId` | UUID | Paciente activo |
-| `chartMode` | `traditional` \| `paper` | Modo ficha dual |
-| `section` | `cover` \| `anamnesis` \| … | Scroll/foco modo papel |
-| `printFormat` | `letter` \| `a5` | Impresión |
-| `mode` | `classic` \| `dashboard` | **Legacy** — ignorar en código nuevo |
-| `returnTo` | `dashboard` | **Legacy** retorno |
+| `chartMode` | `traditional` \| `paper` | Modo ficha |
+| `section` | `cover` … `discharge` | Foco modo papel |
+| `printFormat` | `letter` \| `a5` | Impresión (no A4) |
+| `mode` | `classic` \| `dashboard` | **Legacy** |
 
-Parser: `parseChartModeSearch()` en `apps/web/src/routes/chartModeSearch.ts` (fase 1).
-
----
-
-## Layout × ruta
-
-| Ruta | Shell | Command bar | Modo visual |
-|------|-------|-------------|-------------|
-| `/comando` | `EpisAppScaffold` | hero + dock | Launcher |
-| `/espacio/ficha` (nuevo) | `ClinicalShell` | dock fijo + Ctrl+K | traditional / paper |
-| `/espacio/ficha?mode=classic` | `EpisClassicMd3Shell` | dock MD3 | Legacy |
-| `/espacio/*` modern | `EpisAppScaffold` | floating dock | Legacy modern |
-| `/epis2/dashboard` | dashboard MD3 / RAD | dock | Legacy |
+Parser: `parseChartModeSearch()` · `parseClinicalPatientSearch()`
 
 ---
 
-## Componentes × ruta
+## Layout × ruta (objetivo MF-04+)
 
-```text
-ClinicalShell
-├── PatientChartBanner
-├── ChartModeSwitch
-├── CommandPaletteOverlay → ClinicalShellCommandPalette
-├── EpisUniversalCommandBar (variant: chart-transversal)
-└── Outlet
-      ├── TraditionalEhrMode   (chartMode=traditional)
-      └── PaperChartMode       (chartMode=paper)
-            └── PaperChartTemplate (7 secciones)
-```
+| Capa | Componente |
+|------|------------|
+| Header | `ClinicalInstitutionalHeader` |
+| Banda | `PatientIdentityBand` |
+| Acciones | `ClinicalActionBar` + `CommandPaletteOverlay` |
+| Contenido | `TraditionalEhrLayout` \| `PaperChartLayout` |
+| Footer | `ClinicalFooterStatus` |
+
+Orquestador: `ClinicalShell`
 
 ---
 
@@ -90,6 +76,4 @@ ClinicalShell
 | Modo | Prototipo |
 |------|-----------|
 | Traditional | [Medical Record](https://www.figma.com/make/PhZ55jJhxLQUtIWEuf17ZO/Medical-Record) |
-| Paper | [Crear páginas ficha médica](https://www.figma.com/make/AJ9MNrSyClA0hh8jB8sx49/Crear-p%C3%A1ginas-de-ficha-m%C3%A9dica) |
-
-Mapeo Code Connect: `docs/dev/EPIS2_FIGMA_CODE_CONNECT.md`
+| Paper | [Ficha papel](https://www.figma.com/make/AJ9MNrSyClA0hh8jB8sx49/Crear-p%C3%A1ginas-de-ficha-m%C3%A9dica) |

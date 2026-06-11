@@ -8,7 +8,7 @@ test('dual-chart ledger válido con MF-DUAL-CHART-03 READY', () => {
   const result = validateDualChartLedger(ledger);
   assert.equal(result.ok, true, result.errors.join('; '));
   assert.equal(result.ready?.id, 'MF-DUAL-CHART-03');
-  assert.equal(ledger.phases.length, 6);
+  assert.equal(ledger.phases.length, 10);
 });
 
 test('fases 0–2 DONE desbloquea fase 3', () => {

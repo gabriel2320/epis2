@@ -21,8 +21,12 @@ const PHASE_GATES = {
   1: 'dual-chart-traditional-gate',
   2: 'dual-chart-paper-sot-gate',
   3: 'dual-chart-router-gate',
-  4: 'dual-chart-legacy-freeze-gate',
-  5: 'dual-chart-launcher-gate',
+  4: 'dual-chart-shell-anatomy-gate',
+  5: 'dual-chart-traditional-layout-gate',
+  6: 'dual-chart-paper-layout-gate',
+  7: 'dual-chart-legacy-freeze-gate',
+  8: 'dual-chart-census-gate',
+  9: 'dual-chart-launcher-gate',
 };
 
 function hasFlag(flag) {

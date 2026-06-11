@@ -18,8 +18,12 @@ const PHASE_GATES = {
   1: 'validate-dual-chart-traditional-gate.mjs',
   2: 'validate-dual-chart-paper-sot-gate.mjs',
   3: 'validate-dual-chart-router-gate.mjs',
-  4: 'validate-dual-chart-legacy-freeze-gate.mjs',
-  5: 'validate-dual-chart-launcher-gate.mjs',
+  4: 'validate-dual-chart-shell-anatomy-gate.mjs',
+  5: 'validate-dual-chart-traditional-layout-gate.mjs',
+  6: 'validate-dual-chart-paper-layout-gate.mjs',
+  7: 'validate-dual-chart-legacy-freeze-gate.mjs',
+  8: 'validate-dual-chart-census-gate.mjs',
+  9: 'validate-dual-chart-launcher-gate.mjs',
 };
 
 function argValue(flag) {

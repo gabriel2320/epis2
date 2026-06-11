@@ -1,6 +1,7 @@
 # ADR-002 — Dos modos de ficha clínica + Command Bar transversal
 
-**Estado:** Propuesto · **Fecha:** 2026-06-10  
+**Estado:** Propuesto (v2 visual) · **Fecha:** 2026-06-11  
+**Canon visual:** [`EPIS2_DUAL_CHART_VISUAL_CANON.md`](../design/EPIS2_DUAL_CHART_VISUAL_CANON.md)
 **Decisores:** producto + arquitectura EPIS2  
 **Referencias Figma:** [Medical Record](https://www.figma.com/make/PhZ55jJhxLQUtIWEuf17ZO/Medical-Record) · [Ficha papel](https://www.figma.com/make/AJ9MNrSyClA0hh8jB8sx49/Crear-p%C3%A1ginas-de-ficha-m%C3%A9dica)
 
@@ -29,34 +30,45 @@ La **barra de comando IA** debe permanecer **transversal** (Power Bar / palette)
 
 ---
 
-## Decisión 2 — Dos modos canónicos de ficha (reemplazo progresivo de classic/modern/dashboard en ficha)
+## Decisión 2 — Dos modos canónicos (eliminar three-modes como experiencia)
+
+```text
+EPIS2
+└── Ficha del paciente
+    ├── Ficha Electrónica (traditional)
+    └── Ficha Papel (paper)
+```
+
+**Deprecar como pantallas principales:** Command Center · Classic · Dashboard.
+
+Flujo: `Login → Censo → Ficha → selector modos`.
 
 | Modo | ID | UX |
 |------|-----|-----|
-| Ficha electrónica tradicional | `traditional` | Nav lateral · banner · área central · panel contexto opcional |
-| Ficha papel editable | `paper` | 7 secciones documento · Carta/A5 · cabecera institucional |
-
-Activación: search `chartMode=traditional|paper` en rutas `/espacio/ficha*` (fase B).  
-Legacy: `?mode=classic|dashboard` congelado — sin nuevas features.
+| Ficha electrónica | `traditional` | Nav clínico · denso · panel IA colapsable |
+| Ficha papel | `paper` | Documento I–VII · Carta/A5 · institucional |
 
 ---
 
-## Decisión 3 — Command Bar siempre presente
+## Decisión 2b — Anatomía de pantalla (cuatro capas)
 
-Componente transversal **`ClinicalShell`** envuelve toda ruta clínica autenticada:
+Ver canon visual. Componentes objetivo:
 
 ```text
 ClinicalShell
-├── PatientChartBanner
-├── ChartModeSwitch (traditional ↔ paper)
-├── {TraditionalEhrMode | PaperChartMode}
-├── CommandPaletteOverlay (Ctrl+K, existente)
-└── EpisUniversalCommandBar (variant chart-transversal, dock fijo)
+├── ClinicalInstitutionalHeader      (azul marino, 56–64px)
+├── PatientIdentityBand              (RUN, alergias, estado legal)
+├── ClinicalActionBar                (modos + acciones + Ctrl+K)
+├── TraditionalEhrLayout | PaperChartLayout
+├── ClinicalFooterStatus             (autoguardado, confidencial)
+└── CommandPaletteOverlay            (transversal, no modo)
 ```
 
-- **No eliminar** `/comando` como home (invariante #6) en fase 1.
-- Post-login con paciente fijado: deep-link preferido → `/espacio/ficha?patientId=&chartMode=traditional`.
-- Comando deja de ser “pantalla vacía principal” en fase 3 (ADR enmienda propuesta).
+Implementación incremental: MF-00…02 scaffold · MF-04+ anatomía completa.
+
+---
+
+## Decisión 3 — Command Bar transversal (no modo)
 
 ---
 
@@ -102,12 +114,14 @@ Ver [`EPIS2_DUAL_CHART_DEV_PLAN.md`](../product/EPIS2_DUAL_CHART_DEV_PLAN.md) ·
 
 | Fase | Entrega | Gates |
 |------|---------|-------|
-| **0** | ADR + tokens + scaffold + Storybook + E2E bajo flag | `check` |
-| **1** | Preview dev `/dev/chart-modes` | Storybook + E2E opt-in |
-| **2** | `chartMode` en `/espacio/ficha`; legacy default | `three-modes` sin cambios |
-| **3** | Deprecar `PatientWorkspacePage` modern stack | journey golden |
-| **4** | Congelar `/epis2/dashboard` y classic shell | signoff clínico |
-| **5** | Comando → launcher delgado | enmienda invariante #6 |
+| **0–2** | Scaffold + EMR + paper SoT | DONE |
+| **3** | Router dual canónico | router-gate |
+| **4** | Shell v2 anatomía | shell-anatomy-gate |
+| **5** | TraditionalEhrLayout | traditional-layout-gate |
+| **6** | PaperChartLayout v2 | paper-layout-gate |
+| **7** | Legacy freeze | legacy-freeze-gate |
+| **8** | Census-first | census-gate |
+| **9** | Signoff + invariante #6 | launcher-gate |
 
 ---
 
