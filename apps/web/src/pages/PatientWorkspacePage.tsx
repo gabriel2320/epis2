@@ -16,7 +16,9 @@ import { EpisClinicalWorkspaceShell } from '../components/layout/EpisClinicalWor
 import { EpisSplitWorkspace } from '../components/layout/EpisSplitWorkspace.js';
 import { INTENT_TO_ASSIST_BLUEPRINT } from '../api/clinicalApi.js';
 import { usePatientDetailQuery } from '../query/hooks/usePatientDetailQuery.js';
+import { usePatientClinicalSummaryQuery } from '../query/hooks/usePatientClinicalSummaryQuery.js';
 import { usePatientLongitudinalQuery } from '../query/hooks/usePatientLongitudinalQuery.js';
+import { mergeClinicalSummaryFields } from '../clinical/mergeClinicalSummaryFields.js';
 import { usePatientsQuery } from '../query/hooks/usePatientsQuery.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
 import { ClinicalPageNav } from '../components/ClinicalPageNav.js';
@@ -30,7 +32,7 @@ import { PatientSummaryDocumentsBlock } from '../components/PatientSummaryDocume
 import { PatientWorkspaceCommandPanel } from '../components/PatientWorkspaceCommandPanel.js';
 import { CommandConfirmationDialog } from '../components/CommandConfirmationDialog.js';
 import { DualChartPatientPage } from './DualChartPatientPage.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export function PatientWorkspacePage() {
   const search = useSearch({ strict: false }) as {
@@ -67,6 +69,7 @@ export function PatientWorkspacePage() {
 
   const detailQuery = usePatientDetailQuery(patientId);
   const longitudinalQuery = usePatientLongitudinalQuery(patientId, Boolean(patientId));
+  const clinicalSummaryQuery = usePatientClinicalSummaryQuery(patientId, Boolean(patientId));
   const { patients, refetch: refetchPatients } = usePatientsQuery({
     enabled: patientsFetchEnabled,
   });
@@ -106,6 +109,14 @@ export function PatientWorkspacePage() {
 
   const detail = detailQuery.data ?? null;
   const longitudinal = longitudinalQuery.data ?? null;
+  const clinicalSummary = clinicalSummaryQuery.data ?? null;
+  const summaryFields = useMemo(
+    () =>
+      detail
+        ? mergeClinicalSummaryFields(detail.clinicalContext.summaryFields, clinicalSummary)
+        : {},
+    [detail, clinicalSummary],
+  );
   const error = detailQuery.isError ? copy.errors.genericMessage : undefined;
 
   const openDraft = (draftId: string) => {
@@ -189,7 +200,7 @@ export function PatientWorkspacePage() {
 
   const primaryColumn = (
     <Stack spacing={2}>
-      <PatientClinicalSummaryPanel summaryFields={detail.clinicalContext.summaryFields} />
+      <PatientClinicalSummaryPanel summaryFields={summaryFields} />
 
       {showAlerts ? (
         <ClinicalAlertsPanel
@@ -261,7 +272,8 @@ export function PatientWorkspacePage() {
           onSupportingToggle={() => setSupportingOpen((v) => !v)}
           mainContent={
             <PatientClinicalSummaryGrid
-              summaryFields={detail.clinicalContext.summaryFields}
+              summaryFields={summaryFields}
+              clinicalSummary={clinicalSummary}
               longitudinal={longitudinal}
               alerts={clinicalAlerts}
               onRegisterAllergy={longitudinalNav.onRegisterAllergy}
@@ -303,6 +315,8 @@ export function PatientWorkspacePage() {
       <DualChartPatientPage
         patientId={patientId}
         detail={detail}
+        summaryFields={summaryFields}
+        clinicalSummary={clinicalSummary}
         longitudinal={longitudinal}
         clinicalAlerts={clinicalAlerts}
         onOpenDraft={openDraft}

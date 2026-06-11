@@ -690,6 +690,9 @@ export const copy = {
     medsSuspendedZone: 'Suspendida',
     allergySeverity: 'Severidad',
     labsHighlight: 'Resultado reciente',
+    coveragePrevision: 'Previsión',
+    hospitalizedBadge: 'Hospitalizado',
+    lastEncounter: 'Último encuentro',
   },
   chartModes: {
     traditional: 'Ficha electrónica',

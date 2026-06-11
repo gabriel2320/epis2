@@ -2,7 +2,11 @@ import { copy } from '@epis2/design-system';
 import { getDemoCaseByPatientId } from '@epis2/test-fixtures';
 import { useSearch } from '@tanstack/react-router';
 import { useEffect, useMemo } from 'react';
-import type { ClinicalAlert, PatientLongitudinalResponse } from '@epis2/contracts';
+import type {
+  ClinicalAlert,
+  PatientClinicalSummaryResponse,
+  PatientLongitudinalResponse,
+} from '@epis2/contracts';
 import { useAuth } from '../auth/AuthContext.js';
 import { classicCommandSuggestionLabels } from '../classic-md3/commandSuggestions.js';
 import { useCommandDictionarySuggestions } from '../clinical/useCommandDictionarySuggestions.js';
@@ -35,6 +39,8 @@ function demoNationalId(demoCaseCode: string | undefined): string | undefined {
 export type DualChartPatientPageProps = {
   patientId: string;
   detail: PatientDetailResponse;
+  summaryFields: Record<string, string>;
+  clinicalSummary: PatientClinicalSummaryResponse | null;
   longitudinal: PatientLongitudinalResponse | null;
   clinicalAlerts: readonly ClinicalAlert[];
   onOpenDraft: (draftId: string) => void;
@@ -49,6 +55,8 @@ export type DualChartPatientPageProps = {
 export function DualChartPatientPage({
   patientId,
   detail,
+  summaryFields,
+  clinicalSummary,
   longitudinal,
   clinicalAlerts,
   onOpenDraft,
@@ -158,7 +166,8 @@ export function DualChartPatientPage({
           />
         ) : (
           <TraditionalEhrMode
-            summaryFields={detail.clinicalContext.summaryFields}
+            summaryFields={summaryFields}
+            clinicalSummary={clinicalSummary}
             longitudinal={longitudinal}
             alerts={clinicalAlerts}
             onRegisterAllergy={onRegisterAllergy}

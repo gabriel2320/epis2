@@ -1,4 +1,8 @@
-import type { ClinicalAlert, PatientLongitudinalResponse } from '@epis2/contracts';
+import type {
+  ClinicalAlert,
+  PatientClinicalSummaryResponse,
+  PatientLongitudinalResponse,
+} from '@epis2/contracts';
 import { Box, epis2TraditionalChartShellSx } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
@@ -9,6 +13,7 @@ import { TraditionalSectionNav, type TraditionalSectionId } from './TraditionalS
 
 export type TraditionalEhrModeProps = {
   summaryFields?: Record<string, string> | undefined;
+  clinicalSummary?: PatientClinicalSummaryResponse | null | undefined;
   longitudinal?: PatientLongitudinalResponse | null | undefined;
   alerts?: readonly ClinicalAlert[] | undefined;
   onRegisterAllergy?: (() => void) | undefined;
@@ -27,6 +32,7 @@ export type TraditionalEhrModeProps = {
 /** Ficha electrónica tradicional — nav + panel + contexto colapsable (ADR-002). */
 export function TraditionalEhrMode({
   summaryFields,
+  clinicalSummary,
   longitudinal,
   alerts,
   onRegisterAllergy,
@@ -52,6 +58,7 @@ export function TraditionalEhrMode({
       <PatientClinicalSummaryGrid
         surfaceProfile="traditional"
         summaryFields={summaryFields}
+        clinicalSummary={clinicalSummary}
         longitudinal={longitudinal}
         alerts={alerts}
         onRegisterAllergy={onRegisterAllergy}

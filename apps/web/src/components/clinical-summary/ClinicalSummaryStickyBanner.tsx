@@ -6,6 +6,8 @@ import { formatAllergyLine } from './clinicalSummaryData.js';
 export type ClinicalSummaryStickyBannerProps = {
   alerts?: readonly ClinicalAlert[] | undefined;
   allergies?: PatientLongitudinalResponse['allergies'] | undefined;
+  previsionResumen?: string | null | undefined;
+  hospitalizado?: boolean | undefined;
   testId?: string;
 };
 
@@ -13,12 +15,17 @@ export type ClinicalSummaryStickyBannerProps = {
 export function ClinicalSummaryStickyBanner({
   alerts = [],
   allergies = [],
+  previsionResumen,
+  hospitalizado = false,
   testId = 'epis2-clinical-summary-sticky-banner',
 }: ClinicalSummaryStickyBannerProps) {
   const critical = alerts.filter((a) => a.severity === 'critical');
   const allergyChips = allergies.slice(0, 4);
+  const prevision = previsionResumen?.trim();
 
-  if (critical.length === 0 && allergyChips.length === 0) return null;
+  if (critical.length === 0 && allergyChips.length === 0 && !prevision && !hospitalizado) {
+    return null;
+  }
 
   return (
     <Box
@@ -37,6 +44,23 @@ export function ClinicalSummaryStickyBanner({
       }}
     >
       <Stack direction="row" flexWrap="wrap" gap={0.75} alignItems="center">
+        {prevision ? (
+          <Chip
+            size="small"
+            variant="outlined"
+            label={`${copy.clinicalSummary.coveragePrevision}: ${prevision}`}
+            data-testid={`${testId}-prevision`}
+          />
+        ) : null}
+        {hospitalizado ? (
+          <Chip
+            size="small"
+            variant="filled"
+            label={copy.clinicalSummary.hospitalizedBadge}
+            data-testid={`${testId}-hospitalized`}
+            sx={{ bgcolor: 'info.light', color: 'info.dark' }}
+          />
+        ) : null}
         {critical.map((a) => (
           <Chip
             key={a.ruleId}

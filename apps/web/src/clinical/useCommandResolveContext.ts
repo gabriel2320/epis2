@@ -16,6 +16,8 @@ export function buildCommandResolveContext(
     pendingDraftCount: number;
     activeAlertCount: number;
     chartMode?: 'traditional' | 'paper' | undefined;
+    paperSurface?: CommandActiveContext['paperSurface'];
+    plannerView?: CommandActiveContext['plannerView'];
   },
 ): CommandActiveContext {
   const context: CommandActiveContext = { workspace };
@@ -27,6 +29,10 @@ export function buildCommandResolveContext(
   }
   if (workspace === 'patient_chart' && opts.chartMode) {
     context.chartMode = opts.chartMode;
+    if (opts.chartMode === 'paper') {
+      if (opts.paperSurface) context.paperSurface = opts.paperSurface;
+      if (opts.plannerView) context.plannerView = opts.plannerView;
+    }
   }
   return context;
 }
@@ -39,9 +45,11 @@ export function useCommandResolveContext(
   const { patient } = useActivePatient();
   const patientScoped = Boolean(patient?.id) || workspace === 'command_center';
   const rawSearch = useSearch({ strict: false }) as Record<string, unknown>;
-  const urlChartMode =
-    workspace === 'patient_chart' ? parseChartModeSearch(rawSearch).chartMode : undefined;
-  const chartMode = options?.chartMode ?? urlChartMode;
+  const chartSearch =
+    workspace === 'patient_chart' ? parseChartModeSearch(rawSearch) : undefined;
+  const chartMode = options?.chartMode ?? chartSearch?.chartMode;
+  const paperSurface = chartSearch?.paperSurface;
+  const plannerView = chartSearch?.plannerView;
 
   const draftsQuery = useDraftsQuery(
     patient?.id ? { patientId: patient.id } : undefined,
@@ -56,5 +64,7 @@ export function useCommandResolveContext(
     pendingDraftCount: (draftsQuery.data ?? []).length,
     activeAlertCount: patient ? alerts.length : 0,
     chartMode,
+    paperSurface,
+    plannerView,
   });
 }

@@ -2,6 +2,7 @@ import type {
   DocumentSearchResponse,
   MedicationCatalogSearchResponse,
   PatientClinicalAlertsResponse,
+  PatientClinicalSummaryResponse,
   PatientLongitudinalResponse,
   PatientResultsInboxResponse,
 } from '@epis2/contracts';
@@ -53,6 +54,11 @@ export function searchMedicationCatalog(query: string) {
 
 export function fetchPatientLongitudinal(patientId: string) {
   return apiFetch<PatientLongitudinalResponse>(`/api/patients/${patientId}/longitudinal`);
+}
+
+/** MF-CHILE-UI-01 — read model SQL patient_clinical_summary. */
+export function fetchPatientClinicalSummary(patientId: string) {
+  return apiFetch<PatientClinicalSummaryResponse>(`/api/patients/${patientId}/clinical-summary`);
 }
 
 export function fetchPatientResultsInbox(patientId: string) {

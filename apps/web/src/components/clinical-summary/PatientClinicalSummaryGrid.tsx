@@ -1,4 +1,8 @@
-import type { ClinicalAlert, PatientLongitudinalResponse } from '@epis2/contracts';
+import type {
+  ClinicalAlert,
+  PatientClinicalSummaryResponse,
+  PatientLongitudinalResponse,
+} from '@epis2/contracts';
 import { isSurgicalHistoryDescription } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
 import { Box, EpisButton, EpisM3Text, Stack } from '@epis2/epis2-ui';
@@ -22,6 +26,7 @@ export type PatientClinicalSummaryGridProps = {
   /** Perfil visual — traditional en ficha EMR dual; calm en modo clásico MD3. */
   surfaceProfile?: ClinicalSummarySurface | undefined;
   summaryFields: Record<string, string>;
+  clinicalSummary?: PatientClinicalSummaryResponse | null | undefined;
   longitudinal?: PatientLongitudinalResponse | null | undefined;
   alerts?: readonly ClinicalAlert[] | undefined;
   onRegisterAllergy?: (() => void) | undefined;
@@ -34,7 +39,7 @@ export type PatientClinicalSummaryGridProps = {
 };
 
 const NOW_KEYS = ['recentEvents', 'pendingItems', 'clinicalAlerts'] as const;
-const CONTEXT_KEYS = ['activeProblems'] as const;
+const CONTEXT_KEYS = ['activeProblems', 'coveragePrevision'] as const;
 
 const FIELD_ICON_KEYS: Partial<Record<string, ClinicalSummaryIconKey>> = {
   recentEvents: 'events',
@@ -43,6 +48,7 @@ const FIELD_ICON_KEYS: Partial<Record<string, ClinicalSummaryIconKey>> = {
   activeProblems: 'problems',
   activeMedications: 'medications',
   relevantLabs: 'labs',
+  coveragePrevision: 'problems',
 };
 
 function calmLeadingIcon(surface: ClinicalSummarySurface, key?: ClinicalSummaryIconKey) {
@@ -63,6 +69,7 @@ function formatTimelinePreview(events: PatientLongitudinalResponse['timeline'], 
 /** Grid de tarjetas-resumen — responde en 2 scrolls: ahora + contexto (MD3 / EHR benchmark). */
 export function PatientClinicalSummaryGrid({
   summaryFields,
+  clinicalSummary,
   longitudinal,
   alerts = [],
   onRegisterAllergy,
@@ -135,7 +142,12 @@ export function PatientClinicalSummaryGrid({
 
   return (
     <Stack spacing={2.5} data-testid={testId}>
-      <ClinicalSummaryStickyBanner alerts={alerts} allergies={longitudinal?.allergies} />
+      <ClinicalSummaryStickyBanner
+        alerts={alerts}
+        allergies={longitudinal?.allergies}
+        previsionResumen={clinicalSummary?.previsionResumen}
+        hospitalizado={clinicalSummary?.hospitalizado}
+      />
       {criticalAlerts.length > 0 ? (
         <EpisClinicalSummaryCard
           title={copy.clinicalSummary.criticalAlerts}

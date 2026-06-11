@@ -9,13 +9,19 @@ import { PatientWorkspacePage } from './PatientWorkspacePage.js';
 
 const patientId = 'a0000001-0000-4000-8000-000000000005';
 
-const { fetchPatientDetail, fetchPatientClinicalAlerts, fetchPatientLongitudinal, listDrafts } =
-  vi.hoisted(() => ({
-    fetchPatientDetail: vi.fn(),
-    fetchPatientClinicalAlerts: vi.fn(),
-    fetchPatientLongitudinal: vi.fn(),
-    listDrafts: vi.fn(),
-  }));
+const {
+  fetchPatientDetail,
+  fetchPatientClinicalAlerts,
+  fetchPatientClinicalSummary,
+  fetchPatientLongitudinal,
+  listDrafts,
+} = vi.hoisted(() => ({
+  fetchPatientDetail: vi.fn(),
+  fetchPatientClinicalAlerts: vi.fn(),
+  fetchPatientClinicalSummary: vi.fn(),
+  fetchPatientLongitudinal: vi.fn(),
+  listDrafts: vi.fn(),
+}));
 
 vi.mock('@tanstack/react-router', () => ({
   useSearch: () => ({ patientId }),
@@ -75,6 +81,7 @@ vi.mock('../api/clinicalApi.js', async (importOriginal) => {
     ...actual,
     fetchPatientDetail,
     fetchPatientClinicalAlerts,
+    fetchPatientClinicalSummary,
     fetchPatientLongitudinal,
     listDrafts,
     listPatients: vi.fn(),
@@ -123,6 +130,20 @@ describe('PatientWorkspacePage', () => {
       timeline: [
         { id: 't1', kind: 'encounter', at: new Date().toISOString(), title: 'Consulta demo' },
       ],
+    });
+    fetchPatientClinicalSummary.mockResolvedValue({
+      patientId,
+      displayName: 'Paciente Demo — Penicilina',
+      birthDate: '1980-01-01',
+      sex: 'M',
+      edadAnios: 46,
+      previsionResumen: null,
+      alergiasCriticas: null,
+      problemasActivos: null,
+      medicamentosActivos: null,
+      ultimoEncuentroAt: null,
+      hospitalizado: false,
+      refreshedAt: new Date().toISOString(),
     });
     fetchPatientClinicalAlerts.mockResolvedValue({
       patientId,

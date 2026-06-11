@@ -12,6 +12,18 @@ describe('buildCommandResolveContext', () => {
     expect(ctx.workspace).toBe('patient_chart');
   });
 
+  it('propaga paperSurface y plannerView cuando chartMode=paper', () => {
+    const ctx = buildCommandResolveContext('patient_chart', {
+      pendingDraftCount: 0,
+      activeAlertCount: 0,
+      chartMode: 'paper',
+      paperSurface: 'planner',
+      plannerView: 'week',
+    });
+    expect(ctx.paperSurface).toBe('planner');
+    expect(ctx.plannerView).toBe('week');
+  });
+
   it('no propaga chartMode fuera de patient_chart', () => {
     const ctx = buildCommandResolveContext('command_center', {
       pendingDraftCount: 1,
