@@ -109,6 +109,10 @@ export {
   type PatientDashboardResponse,
 } from './longitudinal.js';
 export {
+  patientClinicalSummaryResponseSchema,
+  type PatientClinicalSummaryResponse,
+} from './clinicalSummary.js';
+export {
   patientResultsInboxResponseSchema,
   resultsInboxCriticalSchema,
   resultsInboxObservationSchema,

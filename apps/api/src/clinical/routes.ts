@@ -6,6 +6,7 @@ import {
   draftsListQuerySchema,
   medicationCatalogSearchResponseSchema,
   patientClinicalAlertsResponseSchema,
+  patientClinicalSummaryResponseSchema,
   patientLongitudinalResponseSchema,
   patientResultsInboxResponseSchema,
 } from '@epis2/contracts';
@@ -37,6 +38,7 @@ import { processDocumentOcr } from './documentOcr.js';
 import { intakePatientDocument } from './documentIntake.js';
 import { searchPatientDocuments } from './documents.js';
 import { getPatientLongitudinal } from './longitudinal.js';
+import { getPatientClinicalSummary } from './patientClinicalSummary.js';
 import { getPatientResultsInbox } from './resultsInbox.js';
 import { buildPatientSummaryExport } from './summaryExport.js';
 import { parseClinicalTextSpellcheckRequest, runClinicalTextSpellcheck } from './textSpellcheck.js';
@@ -325,6 +327,19 @@ export async function registerClinicalRoutes(
       }
       const data = await getPatientLongitudinal(db, patientId);
       return patientLongitudinalResponseSchema.parse(data);
+    },
+  );
+
+  app.get(
+    '/api/patients/:patientId/clinical-summary',
+    { preHandler: requirePatientRead },
+    async (request, reply) => {
+      const { patientId } = request.params as { patientId: string };
+      const summary = await getPatientClinicalSummary(db, patientId);
+      if (!summary) {
+        return sendApiError(reply, 404, 'Paciente no encontrado');
+      }
+      return patientClinicalSummaryResponseSchema.parse(summary);
     },
   );
 

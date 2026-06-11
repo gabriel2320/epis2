@@ -1,4 +1,11 @@
-import type { ClinicalFormBlueprint, FormField, FormFieldType, FormSection } from './types.js';
+import type {
+  ClinicalFormBlueprint,
+  FormField,
+  FormFieldAuditLevel,
+  FormFieldPrintMapping,
+  FormFieldType,
+  FormSection,
+} from './types.js';
 
 type BlueprintInput = Omit<ClinicalFormBlueprint, 'aiAssistMode' | 'approvalRequired'> & {
   aiAssistMode?: 'NONE';
@@ -13,6 +20,12 @@ export type FieldDefinition = {
   clinicalTextBox?: boolean;
   clinicalTextBoxMode?: 'plain' | 'rich';
   catalogAutocomplete?: 'medication';
+  variableKey?: string;
+  fhirPath?: string;
+  auditLevel?: FormFieldAuditLevel;
+  aiAllowed?: boolean;
+  printMapping?: FormFieldPrintMapping;
+  searchable?: boolean;
 };
 
 export function defineBlueprint(input: BlueprintInput): ClinicalFormBlueprint {
@@ -46,6 +59,12 @@ export function field(
   let clinicalTextBox: boolean | undefined;
   let clinicalTextBoxMode: 'plain' | 'rich' | undefined;
   let catalogAutocomplete: 'medication' | undefined;
+  let variableKey: string | undefined;
+  let fhirPath: string | undefined;
+  let auditLevel: FormFieldAuditLevel | undefined;
+  let aiAllowed: boolean | undefined;
+  let printMapping: FormFieldPrintMapping | undefined;
+  let searchable: boolean | undefined;
 
   if (typeof requiredOrDef === 'boolean') {
     required = requiredOrDef;
@@ -58,6 +77,12 @@ export function field(
     clinicalTextBox = requiredOrDef.clinicalTextBox;
     clinicalTextBoxMode = requiredOrDef.clinicalTextBoxMode;
     catalogAutocomplete = requiredOrDef.catalogAutocomplete;
+    variableKey = requiredOrDef.variableKey;
+    fhirPath = requiredOrDef.fhirPath;
+    auditLevel = requiredOrDef.auditLevel;
+    aiAllowed = requiredOrDef.aiAllowed;
+    printMapping = requiredOrDef.printMapping;
+    searchable = requiredOrDef.searchable;
   }
 
   const base: FormField = { id, label, type, required };
@@ -68,7 +93,13 @@ export function field(
     clinicalTextBox !== undefined ? { ...withReadOnly, clinicalTextBox } : withReadOnly;
   const withTextBoxMode =
     clinicalTextBoxMode !== undefined ? { ...withTextBox, clinicalTextBoxMode } : withTextBox;
-  return catalogAutocomplete !== undefined
-    ? { ...withTextBoxMode, catalogAutocomplete }
-    : withTextBoxMode;
+  let out: FormField = withTextBoxMode;
+  if (catalogAutocomplete !== undefined) out = { ...out, catalogAutocomplete };
+  if (variableKey !== undefined) out = { ...out, variableKey };
+  if (fhirPath !== undefined) out = { ...out, fhirPath };
+  if (auditLevel !== undefined) out = { ...out, auditLevel };
+  if (aiAllowed !== undefined) out = { ...out, aiAllowed };
+  if (printMapping !== undefined) out = { ...out, printMapping };
+  if (searchable !== undefined) out = { ...out, searchable };
+  return out;
 }

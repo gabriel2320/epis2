@@ -9,6 +9,7 @@ export const EPIS2_PROFILES = {
   bundle: `${EPIS2_FHIR_BASE}/StructureDefinition/epis2-patient-export-bundle`,
   allergyIntolerance: `${EPIS2_FHIR_BASE}/StructureDefinition/epis2-allergy-minimal`,
   medicationStatement: `${EPIS2_FHIR_BASE}/StructureDefinition/epis2-medication-minimal`,
+  medicationRequest: `${EPIS2_FHIR_BASE}/StructureDefinition/epis2-medication-request-snre`,
 } as const;
 
 export const EPIS2_IDENTIFIER_SYSTEM_DEMO = `${EPIS2_FHIR_BASE}/NamingSystem/demo` as const;

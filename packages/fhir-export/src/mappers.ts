@@ -8,6 +8,7 @@ import { UI_ONLY_EXPORT_KEYS } from './uiForbidden.js';
 import type {
   Epis2DocumentReferenceResource,
   Epis2EncounterResource,
+  Epis2MedicationRequestResource,
   Epis2PatientResource,
   Epis2ServiceRequestResource,
 } from './profile.js';
@@ -234,6 +235,71 @@ export function toFhirAllergyIntolerance(source: AllergySource, isSynthetic: boo
     patient: patientReference(source.patientId),
     criticality,
   };
+}
+
+export type PrescriptionDraftSource = {
+  id: string;
+  patientId: string;
+  draftType: string;
+  body: Record<string, unknown>;
+};
+
+function readBodyString(body: Record<string, unknown>, key: string): string {
+  const value = body[key];
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+function parseQuantity(value: string): number | undefined {
+  const match = value.match(/(\d+(?:[.,]\d+)?)/);
+  if (!match) return undefined;
+  const parsed = Number.parseFloat(match[1]!.replace(',', '.'));
+  return Number.isFinite(parsed) ? parsed : undefined;
+}
+
+/** MF-CHILE-RX-01 — MedicationRequest mínimo (SNRE / FHIR frontera demo). */
+export function toFhirMedicationRequest(
+  source: PrescriptionDraftSource,
+  isSynthetic: boolean,
+): Epis2MedicationRequestResource | null {
+  if (source.draftType !== 'prescription') return null;
+
+  const medication = readBodyString(source.body, 'medication');
+  if (!medication) return null;
+
+  const dose = readBodyString(source.body, 'dose');
+  const quantity = readBodyString(source.body, 'quantity');
+  const route = readBodyString(source.body, 'route');
+  const frequency = readBodyString(source.body, 'frequency');
+  const duration = readBodyString(source.body, 'duration');
+  const patientInstructions = readBodyString(source.body, 'patientInstructions');
+
+  const dosageParts = [dose, frequency, duration].filter(Boolean);
+  const dosageText = dosageParts.length ? dosageParts.join(' · ') : undefined;
+  const qtyValue = parseQuantity(quantity);
+
+  const resource: Epis2MedicationRequestResource = {
+    resourceType: 'MedicationRequest',
+    id: source.id,
+    meta: syntheticTagMeta(EPIS2_PROFILES.medicationRequest, isSynthetic),
+    status: 'draft',
+    intent: 'order',
+    medicationCodeableConcept: { text: medication },
+    subject: patientReference(source.patientId),
+    dosageInstruction: [
+      {
+        text: dosageText,
+        patientInstruction: patientInstructions || undefined,
+        route: route ? { text: route } : undefined,
+        timing: frequency ? { code: { text: frequency } } : undefined,
+      },
+    ],
+  };
+
+  if (qtyValue !== undefined) {
+    resource.dispenseRequest = { quantity: { value: qtyValue, unit: 'unidad' } };
+  }
+
+  return resource;
 }
 
 export function toFhirMedicationStatement(source: MedicationSource, isSynthetic: boolean) {

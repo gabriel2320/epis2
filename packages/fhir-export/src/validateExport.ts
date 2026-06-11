@@ -3,6 +3,7 @@ import {
   validateDocumentReferenceResource,
   validateEncounterResource,
   validatePatientResource,
+  validateMedicationRequestResource,
   validateServiceRequestResource,
 } from './profile.js';
 
@@ -35,6 +36,11 @@ export function assertExportClean(resource: unknown): ExportValidationResult {
     }
     case 'ServiceRequest': {
       const v = validateServiceRequestResource(resource);
+      if (!v.ok) return { ok: false, profileErrors: v.errors };
+      break;
+    }
+    case 'MedicationRequest': {
+      const v = validateMedicationRequestResource(resource);
       if (!v.ok) return { ok: false, profileErrors: v.errors };
       break;
     }

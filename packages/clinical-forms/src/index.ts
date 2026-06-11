@@ -55,6 +55,12 @@ export {
 } from './scrollspy-blueprints.js';
 export { buildCommandSlotPrefill, hasCommandSlotPrefill } from './command-slot-prefill.js';
 export {
+  PAPER_MIRROR_VARIABLE_KEYS,
+  getPaperMirrorByVariableKey,
+  getPaperMirrorForClassicField,
+  type PaperMirrorEntry,
+} from './paper-mirror/variable-keys.js';
+export {
   buildContextClinicalPrefill,
   mergePrefillOnlyEmpty,
   supportsContextClinicalPrefill,

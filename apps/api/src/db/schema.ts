@@ -42,11 +42,62 @@ export const patientIdentifiers = pgTable('patient_identifiers', {
     .references(() => appUsers.id),
 });
 
+export const patientCoverage = pgTable('patient_coverage', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  patientId: uuid('patient_id')
+    .notNull()
+    .references(() => patients.id, { onDelete: 'cascade' }),
+  tipoPrevision: text('tipo_prevision').notNull(),
+  fonasaTramo: text('fonasa_tramo'),
+  isapreNombre: text('isapre_nombre'),
+  planNombre: text('plan_nombre'),
+  vigenteDesde: date('vigente_desde').notNull(),
+  vigenteHasta: date('vigente_hasta'),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
+export const episodesOfCare = pgTable('episodes_of_care', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  patientId: uuid('patient_id')
+    .notNull()
+    .references(() => patients.id, { onDelete: 'cascade' }),
+  tipoEpisodio: text('tipo_episodio').notNull().default('ambulatory'),
+  estado: text('estado').notNull().default('active'),
+  fechaInicio: timestamp('fecha_inicio', { withTimezone: true }).notNull().defaultNow(),
+  fechaFin: timestamp('fecha_fin', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
+export const professionals = pgTable('professionals', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  appUserId: text('app_user_id')
+    .notNull()
+    .unique()
+    .references(() => appUsers.id),
+  runNormalizado: text('run_normalizado'),
+  rnpiNumero: text('rnpi_numero'),
+  titulo: text('titulo'),
+  especialidad: text('especialidad'),
+  subespecialidad: text('subespecialidad'),
+  registroActivo: boolean('registro_activo').notNull().default(true),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: text('created_by')
+    .notNull()
+    .references(() => appUsers.id),
+});
+
 export const encounters = pgTable('encounters', {
   id: uuid('id').primaryKey().defaultRandom(),
   patientId: uuid('patient_id')
     .notNull()
     .references(() => patients.id, { onDelete: 'cascade' }),
+  episodeId: uuid('episode_id').references(() => episodesOfCare.id, { onDelete: 'set null' }),
   status: text('status').notNull().default('open'),
   startedAt: timestamp('started_at', { withTimezone: true }).notNull().defaultNow(),
   endedAt: timestamp('ended_at', { withTimezone: true }),
@@ -178,6 +229,12 @@ export const auditEvents = pgTable('audit_events', {
   username: text('username'),
   entityType: text('entity_type'),
   entityId: text('entity_id'),
+  patientId: uuid('patient_id').references(() => patients.id, { onDelete: 'set null' }),
+  action: text('action'),
+  tableName: text('table_name'),
+  recordId: text('record_id'),
+  ipAddress: text('ip_address'),
+  reason: text('reason'),
   message: text('message'),
   payload: jsonb('payload'),
 });

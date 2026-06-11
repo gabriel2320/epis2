@@ -9,6 +9,7 @@ import {
   toFhirDocumentReference,
   toFhirEncounter,
   toFhirPatient,
+  toFhirMedicationRequest,
   toFhirServiceRequest,
 } from './mappers.js';
 
@@ -111,6 +112,41 @@ describe('FHIR export mappers (EPIS2-10)', () => {
       (e) => (e.resource as { resourceType?: string }).resourceType === 'AllergyIntolerance',
     );
     expect(hasAllergy).toBe(true);
+  });
+
+  it('MedicationRequest solo desde prescription (MF-CHILE-RX-01)', () => {
+    const mr = toFhirMedicationRequest(
+      {
+        id: 'rx-demo-001',
+        patientId: demo.patientId,
+        draftType: 'prescription',
+        body: {
+          medication: 'Losartán',
+          dose: '50 mg',
+          quantity: '30 comprimidos',
+          route: 'oral',
+          frequency: '1 vez al día',
+          duration: '30 días',
+          patientInstructions: 'Tomar con agua',
+        },
+      },
+      true,
+    );
+    expect(mr).not.toBeNull();
+    expect(mr?.resourceType).toBe('MedicationRequest');
+    expect(mr?.status).toBe('draft');
+    expect(assertExportClean(mr).ok).toBe(true);
+
+    const skip = toFhirMedicationRequest(
+      {
+        id: 'rx-demo-002',
+        patientId: demo.patientId,
+        draftType: 'evolution_note',
+        body: { medication: 'No debe exportar' },
+      },
+      true,
+    );
+    expect(skip).toBeNull();
   });
 
   it('bundle de paciente valida y no contiene UI-only', () => {

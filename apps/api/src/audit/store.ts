@@ -9,6 +9,12 @@ export type AuditInput = {
   username?: string;
   entityType?: string;
   entityId?: string;
+  patientId?: string;
+  action?: string;
+  tableName?: string;
+  recordId?: string;
+  ipAddress?: string;
+  reason?: string;
   message?: string;
   payload?: Record<string, unknown>;
 };
@@ -36,6 +42,12 @@ export async function appendAudit(db: Database | null, input: AuditInput) {
         username: input.username,
         entityType: input.entityType,
         entityId: input.entityId,
+        patientId: input.patientId,
+        action: input.action,
+        tableName: input.tableName,
+        recordId: input.recordId,
+        ipAddress: input.ipAddress,
+        reason: input.reason,
         message: input.message,
         payload: input.payload ?? null,
       })

@@ -15,12 +15,15 @@ export {
   validateEncounterResource,
   validateDocumentReferenceResource,
   validateServiceRequestResource,
+  validateMedicationRequestResource,
+  epis2MedicationRequestResourceSchema,
 } from './profile.js';
 export type {
   Epis2PatientResource,
   Epis2EncounterResource,
   Epis2DocumentReferenceResource,
   Epis2ServiceRequestResource,
+  Epis2MedicationRequestResource,
 } from './profile.js';
 export {
   bodyToNarrative,
@@ -31,11 +34,13 @@ export {
   toFhirServiceRequest,
   toFhirAllergyIntolerance,
   toFhirMedicationStatement,
+  toFhirMedicationRequest,
   type PatientSource,
   type EncounterSource,
   type ClinicalNoteSource,
   type LabDraftSource,
   type AllergySource,
   type MedicationSource,
+  type PrescriptionDraftSource,
 } from './mappers.js';
 export { assertExportClean, type ExportValidationResult } from './validateExport.js';

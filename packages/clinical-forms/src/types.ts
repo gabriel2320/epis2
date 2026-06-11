@@ -3,6 +3,14 @@ import type { ClinicalIntent } from '@epis2/command-registry';
 
 export type FormFieldType = 'text' | 'textarea' | 'select' | 'date' | 'checkbox';
 
+export type FormFieldAuditLevel = 'low' | 'clinical' | 'critical' | 'legal';
+
+export type FormFieldPrintMapping = {
+  chartMode?: 'traditional' | 'paper';
+  sectionId?: string;
+  slot?: string;
+};
+
 export type FormOutputKind = 'SEARCH' | 'READ_ONLY_SUMMARY' | 'CLINICAL_NOTE_DRAFT' | 'ORDER_DRAFT';
 
 export type FormSection = {
@@ -30,6 +38,13 @@ export type FormField = {
    * promovido (clinical_catalog_staging). El valor guardado sigue siendo string.
    */
   catalogAutocomplete?: 'medication';
+  /** MF-REGISTRY-META — clave estable EMR / papel / FHIR / print. */
+  variableKey?: string;
+  fhirPath?: string;
+  auditLevel?: FormFieldAuditLevel;
+  aiAllowed?: boolean;
+  printMapping?: FormFieldPrintMapping;
+  searchable?: boolean;
 };
 
 export type FormValidationRule = {

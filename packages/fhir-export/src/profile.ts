@@ -87,6 +87,37 @@ export const epis2ServiceRequestResourceSchema = z.object({
   reasonCode: z.array(z.object({ text: z.string() })).optional(),
 });
 
+export const epis2MedicationRequestResourceSchema = z.object({
+  resourceType: z.literal('MedicationRequest'),
+  id: z.string().min(1),
+  meta: metaSchema,
+  status: z.enum(['active', 'draft', 'completed', 'cancelled']),
+  intent: z.literal('order'),
+  medicationCodeableConcept: z.object({
+    text: z.string().min(1),
+  }),
+  subject: referenceSchema,
+  dosageInstruction: z
+    .array(
+      z.object({
+        text: z.string().optional(),
+        patientInstruction: z.string().optional(),
+        route: z.object({ text: z.string() }).optional(),
+        timing: z
+          .object({
+            code: z.object({ text: z.string() }).optional(),
+          })
+          .optional(),
+      }),
+    )
+    .optional(),
+  dispenseRequest: z
+    .object({
+      quantity: z.object({ value: z.number(), unit: z.string().optional() }).optional(),
+    })
+    .optional(),
+});
+
 export const epis2BundleSchema = z.object({
   resourceType: z.literal('Bundle'),
   type: z.literal('collection'),
@@ -103,6 +134,7 @@ export type Epis2PatientResource = z.infer<typeof epis2PatientResourceSchema>;
 export type Epis2EncounterResource = z.infer<typeof epis2EncounterResourceSchema>;
 export type Epis2DocumentReferenceResource = z.infer<typeof epis2DocumentReferenceResourceSchema>;
 export type Epis2ServiceRequestResource = z.infer<typeof epis2ServiceRequestResourceSchema>;
+export type Epis2MedicationRequestResource = z.infer<typeof epis2MedicationRequestResourceSchema>;
 
 export function validatePatientResource(resource: unknown) {
   const parsed = epis2PatientResourceSchema.safeParse(resource);
@@ -129,6 +161,18 @@ export function validateDocumentReferenceResource(resource: unknown) {
     return {
       ok: false as const,
       errors: { formErrors: ['meta.profile DocumentReference requerido'] },
+    };
+  }
+  return { ok: true as const, resource: parsed.data };
+}
+
+export function validateMedicationRequestResource(resource: unknown) {
+  const parsed = epis2MedicationRequestResourceSchema.safeParse(resource);
+  if (!parsed.success) return { ok: false as const, errors: parsed.error.flatten() };
+  if (!parsed.data.meta.profile?.includes(EPIS2_PROFILES.medicationRequest)) {
+    return {
+      ok: false as const,
+      errors: { formErrors: ['meta.profile MedicationRequest requerido'] },
     };
   }
   return { ok: true as const, resource: parsed.data };

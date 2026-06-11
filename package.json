@@ -62,6 +62,7 @@
     "quality:ola6a-print-gate": "node scripts/quality/validate-ola6a-print-gate.mjs",
     "quality:doc-screen-catalog-gate": "node scripts/quality/validate-doc-screen-catalog-gate.mjs",
     "quality:ola3-longitudinal-gate": "node scripts/quality/validate-ola3-longitudinal-gate.mjs",
+    "quality:registry-meta-gate": "node scripts/quality/validate-registry-meta-gate.mjs",
     "quality:ola3-ficha-depth-gate": "node scripts/quality/validate-ola3-ficha-depth-gate.mjs",
     "quality:ola3-ficha-hub-gate": "node scripts/quality/validate-ola3-ficha-hub-gate.mjs",
     "quality:ola3-surgical-gate": "node scripts/quality/validate-ola3-surgical-gate.mjs",

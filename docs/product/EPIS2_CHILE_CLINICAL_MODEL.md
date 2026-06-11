@@ -155,7 +155,7 @@ searchable?: boolean;
 
 Export JSON existente (`blueprint-io.ts`) incluye metadata para gates y documentación.
 
-**Gate propuesto:** `quality:registry-meta-gate` — todo blueprint clínico con `variableKey` en campos obligatorios.
+**Gate:** `quality:registry-meta-gate` ✓ — blueprints Chile clave con `variableKey` en campos obligatorios.
 
 ---
 
@@ -174,9 +174,11 @@ Export JSON existente (`blueprint-io.ts`) incluye metadata para gates y document
 
 **No hacer:** PK en RUT; exponer RUT en rutas web.
 
-**Siguiente:** MF-CHILE-ADM-01 (`patient_coverage`).
+**Siguiente:** ~~MF-CHILE-ADM-01~~ ✓
 
-### MF-CHILE-ADM-01 — Previsión y demographics mínimos
+### MF-CHILE-ADM-01 — Previsión y demographics mínimos ✓
+
+**Archivos:** `database/migrations/036_chile_patient_coverage.sql`, `apps/api/src/db/schema.ts` (`patientCoverage`)
 
 **Tabla nueva:** `patient_coverage`
 
@@ -187,9 +189,11 @@ vigente_desde, vigente_hasta, created_by
 
 Blueprints: extender `patient_summary` / futuro `patient_registration` (IDC).
 
-### MF-SUMMARY-VIEW-01 — Read model resumen
+### MF-SUMMARY-VIEW-01 — Read model resumen ✓
 
-**Vista o tabla:** `patient_clinical_summary` (materialized refresh on approve)
+**Archivos:** `database/migrations/037_chile_patient_clinical_summary.sql`, `apps/api/src/clinical/patientClinicalSummary.ts`, `GET /api/patients/:id/clinical-summary`, `packages/contracts/src/clinicalSummary.ts`
+
+**Vista SQL:** `patient_clinical_summary`
 
 Campos mínimos:
 
@@ -201,19 +205,29 @@ ultimo_encuentro_at, hospitalizado, alertas_json, updated_at
 
 Consumidores: `PatientClinicalSummaryGrid`, censo, carátula papel, comando contexto.
 
-### MF-EPISODE-01 — Episodio de cuidado
+### MF-EPISODE-01 — Episodio de cuidado ✓
+
+**Archivos:** `database/migrations/038_chile_episodes_of_care.sql`, `episodesOfCare` + `encounters.episodeId` en schema Drizzle
 
 **Tabla:** `episodes_of_care` — `encounter.episode_id` FK opcional.
 
 No reemplaza `encounters`; agrupa hospitalización / programa crónico.
 
-### MF-CHILE-RX-01 — Receta SNRE (fase posterior)
+### MF-CHILE-RX-01 — Receta SNRE ✓
 
-Extender draft `prescription` + mapper FHIR `MedicationRequest` / SNRE IG. Sin auto-firma.
+**Archivos:** `prescription` blueprint con `variableKey` + `toFhirMedicationRequest` en `packages/fhir-export`. Sin auto-firma.
 
-### MF-CHILE-PRO-01 — Profesional RNPI
+### MF-CHILE-PRO-01 — Profesional RNPI ✓
 
-Tabla `professionals` ligada a `app_users` + `rnpi_numero`, especialidad. Catálogo consulta externa futura.
+**Archivos:** `database/migrations/039_chile_professionals.sql`, tabla `professionals` en schema Drizzle. Catálogo consulta externa futura.
+
+### MF-REGISTRY-META ✓ · PROG-PAPER-MIRROR ✓
+
+**Archivos:** `packages/clinical-forms/src/types.ts`, blueprints `patient_summary` / `prescription`, `paper-mirror/variable-keys.ts`, gate `quality:registry-meta-gate`.
+
+### Auditoría extendida ✓
+
+**Archivo:** `database/migrations/040_chile_audit_extend.sql`, columnas en `audit_events` + `apps/api/src/audit/store.ts`.
 
 ---
 
