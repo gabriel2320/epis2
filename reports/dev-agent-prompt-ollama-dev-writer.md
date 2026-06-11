@@ -26,7 +26,7 @@ npm run dev:agent:ollama-write
 
 # EPIS2 — Plan de desarrollo global (consolidado)
 
-**Versión:** 1.4 · **Fecha:** 2026-06-09  
+**Versión:** 1.5 · **Fecha:** 2026-06-11  
 **Sistema:** [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) (SDEPIS2) · **Tablero:** [`EPIS2_TABLERO.md`](./EPIS2_TABLERO.md)  
 **Fuentes:** `ROADMAP.md` · `EPIS2_COMPLETION_ROADMAP.md` · MF-UI-SIMPLIFY · MF-RAD-M3 · tramos A–K
 

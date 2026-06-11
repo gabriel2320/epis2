@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-11T03:19:26.296Z",
+  "generatedAt": "2026-06-11T03:55:02.524Z",
   "model": "qwen2.5-coder:7b",
   "route": {
     "function": "dev-plan",
@@ -10,11 +10,11 @@
   "ollamaUrl": "http://127.0.0.1:11434",
   "plan": {
     "activePhase": "B",
-    "nextMicrophase": "MF-183",
-    "objective": "Implementar la funcionalidad de seguimiento de procesos clínicos y actualización de estados de pacientes.",
+    "nextMicrophase": "MF-183→190",
+    "objective": "Continuar con la consolidación visual y mejorar la experiencia de usuario para los formularios clínicos.",
     "allowedPaths": [
-      "apps/web/src/components/clinical-tracking",
-      "packages/core/services/patient-status"
+      "apps/web/src/components/forms",
+      "packages/clinical-productivity"
     ],
     "forbiddenPatterns": [
       "OpenMRS",
@@ -23,16 +23,14 @@
     ],
     "gatesToRun": [
       "npm run check",
-      "quality:clinical-tracking"
+      "quality:microphases"
     ],
     "subagentSequence": [
-      "tramo-implementer",
-      "gate-runner",
-      "ledger-keeper"
+      "ollama-clinical",
+      "gate-runner"
     ],
     "risks": [
-      "Interferencia con la funcionalidad existente de seguimiento de pacientes.",
-      "Errores en la actualización de estados de pacientes que puedan causar inconsistencias en el sistema."
+      "Problemas técnicos en la integración de formularios"
     ],
     "requiresHumanReview": true
   }

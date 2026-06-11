@@ -1,14 +1,15 @@
 # EPIS2 — Sesión subagentes de desarrollo
 
 **Fase:** B
-**Generado:** 2026-06-08T00:16:44.404Z
+**Generado:** 2026-06-11T03:54:55.714Z
 
 ## Secuencia recomendada
 
 1. [`layers-integrator`](./dev-agent-prompt-layers-integrator.md) — Integrador capas L3+L4+L5
-2. [`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md) — IA clínica local (Ollama producto)
-3. [`golden-guardian`](./dev-agent-prompt-golden-guardian.md) — Guardián Golden Journey
-4. [`gate-runner`](./dev-agent-prompt-gate-runner.md) — Ejecutor de gates
+2. [`ollama-dev-writer`](./dev-agent-prompt-ollama-dev-writer.md) — Escritor dev bajo riesgo (Ollama)
+3. [`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md) — IA clínica local (Ollama producto)
+4. [`golden-guardian`](./dev-agent-prompt-golden-guardian.md) — Guardián Golden Journey
+5. [`gate-runner`](./dev-agent-prompt-gate-runner.md) — Ejecutor de gates
 
 ## Stack Ollama (desarrollo)
 

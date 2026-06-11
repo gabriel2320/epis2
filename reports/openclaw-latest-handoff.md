@@ -1,7 +1,7 @@
 # OpenClaw EPIS2 Handoff
 
 ## Microfase
-H-AUTO-6
+H-AUTO-CYCLE
 
 ## Modo
 read-only-reviewer · EPIS2-native
@@ -9,12 +9,9 @@ read-only-reviewer · EPIS2-native
 ## Agentes ejecutados
 - Security/PHI Reviewer (`security`)
 - Architecture/Legacy Reviewer (`architecture`)
-- Release/Gates Reviewer (`release`)
-- Golden Journey Reviewer (`golden`)
-- Microphase Ledger Reviewer (`ledger`)
 
 ## Generado
-2026-06-11T03:43:03.965Z
+2026-06-11T11:38:19.761Z
 
 ## Archivos revisados
 - `.env.example`
@@ -41,42 +38,6 @@ read-only-reviewer · EPIS2-native
 - `scripts/architecture/lib/paths.mjs`
 - `scripts/architecture/lib/report.mjs`
 - `scripts/architecture/lib/scan-sources.mjs`
-- `package.json`
-- `docs/quality/auto-dev-6h-ledger.json`
-- `scripts/quality/apply-latest-migration.mjs`
-- `scripts/quality/capture-m3-visual-pass.mjs`
-- `scripts/quality/dual-chart-ledger-lib.mjs`
-- `scripts/quality/dual-chart-next.mjs`
-- `scripts/quality/microphase-ledger-lib.mjs`
-- `scripts/quality/microphase-next.mjs`
-- `scripts/quality/run-dual-chart-plan.mjs`
-- `scripts/quality/run-local-ci.mjs`
-- `scripts/quality/run-m3-human-pilot.mjs`
-- `scripts/quality/run-pilot-trial.mjs`
-- `reports/auto-dev-6h-log.jsonl`
-- `reports/auto-dev-continuous-log.jsonl`
-- `reports/auto-dev-cursor-prompt-tramo-1.md`
-- `reports/auto-dev-cursor-prompt-tramo-2.md`
-- `reports/auto-dev-cursor-prompt-tramo-3.md`
-- `reports/auto-dev-cursor-prompt-tramo-4.md`
-- `reports/auto-dev-cursor-queue.jsonl`
-- `reports/auto-dev-orchestrator-log.jsonl`
-- `reports/auto-dev-parallel-log.jsonl`
-- `reports/auto-dev-parallel.lock.json`
-- `docs/quality/GOLDEN_CLINICAL_JOURNEY.md`
-- `e2e/a11y-smoke.spec.ts`
-- `e2e/clinical-textbox-evolution-draft.spec.ts`
-- `e2e/dual-chart-modes.spec.ts`
-- `e2e/golden-command-evolution.spec.ts`
-- `e2e/golden-draft-approval.spec.ts`
-- `e2e/golden-v2-admission-discharge.spec.ts`
-- `e2e/helpers/demoPatient.ts`
-- `e2e/login-gateway.spec.ts`
-- `e2e/m3-visual-signoff-capture.spec.ts`
-- `e2e/m3-visual-signoff.spec.ts`
-- `docs/quality/microphase-ledger.json`
-- `docs/quality/MICROPHASE_PROGRAM.md`
-- `docs/product/EPIS2_TABLERO.md`
 
 ## Hallazgos críticos
 - [Evolab high] admission-discharge-001-m8rs-001: 50df1d69aac96d12
@@ -113,20 +74,13 @@ npm run legacy:audit
 npm run db:validate
 npm run architecture:validate
 npm run legacy:validate-manifest
-npm run check
-npm run test
-npm run quality:local-ci
-npm run quality:golden-journey
-npm run test:e2e:ux-g02
-npm run quality:microphases
-npm run quality:microphase-next
 npm run evolab:findings
 npm run dev:evolab:sync
 npm run dev:agent:ollama
 ```
 
 ## Prompt recomendado para Cursor
-Revisa el handoff OpenClaw EPIS2 para H-AUTO-6. Evolab: 24 hallazgos abiertos. Ollama: Implementar la funcionalidad de seguimiento de procesos clínicos y actualización de estados de pacientes.. Aplica correcciones en Cursor bajo supervisión humana. No commits automáticos ni auto-aprobación clínica.
+Revisa el handoff OpenClaw EPIS2 para H-AUTO-CYCLE. Evolab: 24 hallazgos abiertos. Ollama: Continuar con la consolidación visual y mejorar la experiencia de usuario para los formularios clínicos.. Aplica correcciones en Cursor bajo supervisión humana. No commits automáticos ni auto-aprobación clínica.
 
 ## Recomendación
 Atender hallazgos Evolab críticos antes de cerrar tramo

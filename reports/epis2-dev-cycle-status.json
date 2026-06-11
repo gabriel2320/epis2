@@ -1,21 +1,21 @@
 {
-  "syncedAt": "2026-06-11T03:43:05.187Z",
+  "syncedAt": "2026-06-11T11:38:20.082Z",
   "cycle": {
     "openclaw": true,
     "ollama": true,
     "evolab": true
   },
   "openclaw": {
-    "level": "L3",
-    "mode": "max-power-max-power-patch-code",
-    "maxPower": true,
-    "artifactCount": 36,
+    "level": "L0",
+    "mode": "read-only-reviewer",
+    "maxPower": false,
+    "artifactCount": 42,
     "latestBrief": "reports/openclaw-latest-brief.md",
     "latestHandoff": "reports/openclaw-latest-handoff.md"
   },
   "ollama": {
-    "planObjective": "Implementar la funcionalidad de seguimiento de procesos clínicos y actualización de estados de pacientes.",
-    "nextMicrophase": "MF-183",
+    "planObjective": "Continuar con la consolidación visual y mejorar la experiencia de usuario para los formularios clínicos.",
+    "nextMicrophase": "MF-183→190",
     "automationOk": null,
     "model": "qwen2.5-coder:14b"
   },
@@ -23,7 +23,7 @@
     "present": true,
     "root": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\epis2-evolab",
     "openFindings": 24,
-    "syncedAt": "2026-06-11T03:43:05.142Z",
+    "syncedAt": "2026-06-11T11:38:19.500Z",
     "topFindings": [
       {
         "id": "fb0241fd-aaac-42de-bd29-834f8c6f71c1",
