@@ -9,9 +9,12 @@ const errors = [];
 
 for (const rel of [
   'docs/product/EPIS2_AUTO_DEV_6H_PROGRAM.md',
+  'docs/product/EPIS2_PM03_AUTO_ORCHESTRATION.md',
   'docs/product/EPIS2_CLINICAL_TERMINOLOGY.md',
   'docs/quality/auto-dev-6h-ledger.json',
   'scripts/dev-agent/auto-dev-6h-runner.mjs',
+  'scripts/dev-agent/auto-dev-orchestrator.mjs',
+  'scripts/dev-agent/auto-dev-preconditions.mjs',
   'packages/command-registry/src/clinical-command-dictionary.ts',
   'apps/web/src/clinical/useCommandDictionarySuggestions.ts',
 ]) {

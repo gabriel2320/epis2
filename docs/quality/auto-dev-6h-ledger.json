@@ -7,7 +7,9 @@
   "rules": {
     "requiresEnv": "EPIS2_AUTO_DEV_AUTHORIZED",
     "stopOnInvariantViolation": true,
-    "maxCheckRetries": 2
+    "maxCheckRetries": 2,
+    "orchestrator": "docs/product/EPIS2_PM03_AUTO_ORCHESTRATION.md",
+    "tierXTramos": [1, 2, 3, 4]
   },
   "tramos": [
     {

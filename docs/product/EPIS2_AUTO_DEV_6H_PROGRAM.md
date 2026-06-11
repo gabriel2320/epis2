@@ -33,14 +33,15 @@ Orquestar **6 horas** de mejora continua del repo con Ollama local, gates EPIS2 
 # Sesión completa (6 tramos secuenciales)
 EPIS2_AUTO_DEV_AUTHORIZED=1 npm run dev:auto:6h -- --commit --push
 
-# Un tramo
-npm run dev:auto:6h -- --tramo 1 --commit
+# Orquestador PM-03 (Ollama entre tramos + Cursor SDK + pausa 6 h)
+EPIS2_AUTO_DEV_AUTHORIZED=1 npm run dev:auto:orchestrate -- --commit --push
 
-# Dry-run (solo planifica y gates, sin git)
-npm run dev:auto:6h -- --dry-run
+# Windows one-liner
+# .\scripts\dev-agent\start-auto-dev-6h.ps1
 
-# Con Ollama docs L0 entre tramos
-npm run dev:auto:6h -- --ollama-auto --apply
+# Verificar condiciones
+npm run dev:auto:preconditions
+npm run quality:pm03-orchestration-gate
 ```
 
 ---

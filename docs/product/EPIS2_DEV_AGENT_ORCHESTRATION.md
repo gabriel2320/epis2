@@ -69,6 +69,8 @@ npm run ai:evals:closure
 
 ## Cursor SDK (opcional, fuera del repo)
 
+Ver **[EPIS2_PM03_AUTO_ORCHESTRATION.md](./EPIS2_PM03_AUTO_ORCHESTRATION.md)** — orquestador 6 h con Ollama + cola Cursor.
+
 Requiere `@cursor/sdk` y `CURSOR_API_KEY`:
 
 ```typescript
