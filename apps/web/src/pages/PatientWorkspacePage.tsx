@@ -1,6 +1,9 @@
 import { copy } from '@epis2/design-system';
 import { Link, useSearch } from '@tanstack/react-router';
-import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
+import {
+  classicModeToDualChartSearch,
+  useClinicalNavigate,
+} from '../routes/clinicalNavigate.js';
 import { isDualChartModesEnabled } from '../dev/dualChartModesEnv.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
@@ -88,6 +91,16 @@ export function PatientWorkspacePage() {
       setAlertLabel(undefined);
     }
   }, [detailQuery.data, setPatient]);
+
+  /** MF-DUAL-CHART-07: legacy ?mode=classic → chartMode=traditional cuando dual ficha activo. */
+  useEffect(() => {
+    if (!isDualChartModesEnabled() || search.mode !== 'classic' || !patientId) return;
+    void navigate({
+      to: '/espacio/ficha',
+      search: classicModeToDualChartSearch(patientId),
+      replace: true,
+    });
+  }, [navigate, patientId, search.mode]);
 
   const loadPatientList = () => {
     setPatientsFetchEnabled(true);

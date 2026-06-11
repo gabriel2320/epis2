@@ -83,6 +83,7 @@ export function TraditionalEhrMode({
       <TraditionalSectionNav
         activeSection={activeSection}
         onSectionChange={setActiveSection}
+        testId="epis2-traditional-ehr-nav"
       />
       <TraditionalClinicalPanel activeSection={activeSection}>
         {resolvedMain}

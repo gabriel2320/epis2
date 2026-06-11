@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { parseClinicalPatientSearch, parseCommandSearch } from './clinicalNavigate.js';
+import {
+  classicModeToDualChartSearch,
+  parseClinicalPatientSearch,
+  parseCommandSearch,
+} from './clinicalNavigate.js';
 
 describe('parseCommandSearch', () => {
   it('parsea intent selectPatient y nextMode classic', () => {
@@ -39,6 +43,18 @@ describe('parseClinicalPatientSearch', () => {
       patientId: 'p-2',
       mode: 'classic',
       returnTo: 'dashboard',
+    });
+  });
+
+  it('classicModeToDualChartSearch mapea a chartMode traditional', () => {
+    expect(classicModeToDualChartSearch('p-1')).toEqual({
+      patientId: 'p-1',
+      chartMode: 'traditional',
+    });
+    expect(classicModeToDualChartSearch('p-2', { section: 'cover' })).toEqual({
+      patientId: 'p-2',
+      chartMode: 'traditional',
+      section: 'cover',
     });
   });
 

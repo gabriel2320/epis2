@@ -64,13 +64,15 @@ Login → Búsqueda/Censo → Ficha → [Ficha Electrónica | Ficha Papel]
 | 0 | MF-DUAL-CHART-00 | **DONE** | ADR, ClinicalShell scaffold, tokens, E2E opt-in |
 | 1 | MF-DUAL-CHART-01 | **DONE** | chartModeSearch, grid EMR, command `/espacio/*` |
 | 2 | MF-DUAL-CHART-02 | **DONE** | Paper SoT Zod + API + `/espacio/ficha/imprimir` |
-| 3 | MF-DUAL-CHART-03 | **READY** | `DualChartPatientPage`, default `chartMode=traditional` |
-| 4 | MF-DUAL-CHART-04 | BLOCKED | **Anatomía shell v2** — header, banda, action bar, footer |
-| 5 | MF-DUAL-CHART-05 | BLOCKED | **TraditionalEhrLayout** — nav clínico completo + panel colapsable |
-| 6 | MF-DUAL-CHART-06 | BLOCKED | **PaperChartLayout v2** — toolbar documental + estética institucional |
-| 7 | MF-DUAL-CHART-07 | BLOCKED | Legacy freeze + redirects classic/dashboard |
-| 8 | MF-DUAL-CHART-08 | BLOCKED | **Census-first** — post-login búsqueda/censo (reemplaza comando hero) |
-| 9 | MF-DUAL-CHART-09 | BLOCKED | Enmienda invariante #6 + signoff + ADR Aceptado |
+| 3 | MF-DUAL-CHART-03 | **DONE** | `DualChartPatientPage`, default `chartMode=traditional` |
+| 4 | MF-DUAL-CHART-04 | **DONE** | **Anatomía shell v2** — header, banda, action bar, footer |
+| 5 | MF-DUAL-CHART-05 | **DONE** | **TraditionalEhrLayout** — nav clínico completo + panel colapsable |
+| 6 | MF-DUAL-CHART-06 | **DONE** | **PaperChartLayout v2** — toolbar documental + estética institucional |
+| 7 | MF-DUAL-CHART-07 | **DONE** | Legacy freeze + redirects classic/dashboard |
+| 8 | MF-DUAL-CHART-08 | **DONE** | **Census-first** — post-login búsqueda/censo (reemplaza comando hero) |
+| 9 | MF-DUAL-CHART-09 | **DONE** | Enmienda invariante #6 + signoff + ADR Aceptado |
+
+**Programa PROG-DUAL-CHART cerrado** — ledger 10/10 DONE · commit `eab749c` · auditoría [`reports/epis2-dual-chart-audit-2026-06-10.md`](../../reports/epis2-dual-chart-audit-2026-06-10.md).
 
 ---
 
