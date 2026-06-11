@@ -29,18 +29,18 @@ npm run check
 
 > **Inicio rápido:** abrir `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-ollama-clinical.md` en Cursor y declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-09T21:51:19.823Z · **Fase:** B
+**Generado:** 2026-06-11T02:47:39.353Z · **Fase:** B
 
 ## Estado del tablero (fuente canónica)
 
 - **En curso:** **Hilo C** — Ola 3 longitudinal — Receta A5 ✓ · piloto M3 automatizado ✓ (signoff humano opcional) · `epis2-hilo-c-p1-print-prescription-2026-06-09.md`
-- **Siguiente:** **P1**: P1b alto contraste ampliado · o Storybook familia `Print*` (Auditoría II §5)
-- **Siguiente:** P1b: Alto contraste ampliado (3.6 diferido — requiere signoff visual)
-- **Siguiente:** P1c: Fase 5 auditoría — checklist pre-producción (solo si sale del laboratorio)
+- **Siguiente:** **P1**: Revisión humana opcional post-captura M3 (hover/foco/rail/two-pane claro/oscuro) — evidencia en `reports/m3-visual-evidence/2026-06-10/`
+- **Siguiente:** **P1b**: **Clinical Calm Premium** — `THEME-CALM-01` + `UX-AESTHETIC P3` (tokens petróleo, islas tonales)
+- **Siguiente:** **P1c**: MF-CLINICAL-SUMMARY-B + `UX-CALM-PATIENT` (mosaico + banner + métricas labs)
 
 ## Objetivo sugerido
 
-- **P1**: P1b alto contraste ampliado · o Storybook familia `Print*` (Auditoría II §5)
+- **P1**: Revisión humana opcional post-captura M3 (hover/foco/rail/two-pane claro/oscuro) — evidencia en `reports/m3-visual-evidence/2026-06-10/`
 
 ## Subagente primario
 
@@ -56,34 +56,45 @@ npm run check
 
 ## Working tree
 
-- Rama: `master` · cambios: 18
+- Rama: `master` · cambios: 33 (lista truncada)
 
 ```
-M README.md
-M docs/design/EPIS2_PRINTABLE_CLINICAL_DOCUMENTS_NORM.md
-M docs/product/EPIS2_COMPLETE_CAPABILITY_MAP.md
-M docs/product/EPIS2_RELEASE_ROADMAP.md
-M docs/product/EPIS2_TABLERO.md
-M docs/product/EPIS2_WAVE_EXECUTION_CANON.md
-M reports/dev-agent-brief.md
+M  .env.example
+A  docs/product/EPIS2_EVOLAB_INTEGRATION.md
+M  docs/product/EPIS2_PM03_AUTO_ORCHESTRATION.md
+M  docs/quality/auto-dev-6h-ledger.json
+M  package.json
+AM reports/auto-dev-6h-log.jsonl
+A  reports/auto-dev-cursor-prompt-tramo-1.md
+A  reports/auto-dev-cursor-prompt-tramo-2.md
+A  reports/auto-dev-cursor-prompt-tramo-3.md
+A  reports/auto-dev-cursor-prompt-tramo-4.md
+A  reports/auto-dev-cursor-queue.jsonl
+A  reports/auto-dev-orchestrator-log.jsonl
+A  reports/auto-dev-parallel-log.jsonl
+AM reports/dev-agent-ollama-automation.json
+AM reports/dev-agent-ollama-write-plan.json
 M reports/dev-agent-prompt-gate-runner.md
 M reports/dev-agent-prompt-golden-guardian.md
 M reports/dev-agent-prompt-layers-integrator.md
 M reports/dev-agent-prompt-ollama-clinical.md
-M reports/epis2-wave-execution-canon-v1.md
-M scripts/dev-agent/brief.mjs
-M scripts/dev-agent/context.mjs
-?? docs/INDEX.md
-?? reports/INDEX.md
-?? reports/dev-agent-prompt-ollama-dev-writer.md
-?? reports/epis2-f4-sesion-documental-2026-06-09.md
+M reports/dev-agent-prompt-ollama-dev-writer.md
+AM reports/epis2-auto-dev-6h-close-2026-06-10.md
+A  reports/epis2-branch-archive-2026-06-10.md
+A  reports/epis2-integrated-dev-kickoff-2026-06-10.md
+M  scripts/dev-agent/auto-dev-orchestrator.mjs
 ```
+
+## Evolab (QA externo)
+
+- Evolab configurado — ejecutar `npm run dev:evolab:sync` para conteo de hallazgos abiertos
+- Root: `C:\Users\gdela\OneDrive\Documentos Importantes\epis2-evolab`
 
 ## Stack local
 
-- Estación: tier **minimal** · 15 GB RAM · ? GB VRAM
+- Estación: tier **performance** · 63 GB RAM · 12 GB VRAM
 - Ollama clínica: ✓ up → `qwen3:8b`
-- dev-plan: `qwen3:8b` (auto) · dev-write: `qwen3:8b` (auto)
+- dev-plan: `qwen2.5-coder:7b` (auto) · dev-write: `deepseek-coder-v2:16b` (auto)
 - Enrutado: `npm run ollama:route` · pull coders: `npm run ai:pull-coder-models`
 - .env: ✓ · DATABASE_URL: ✓
 
@@ -104,31 +115,7 @@ npm run dev:agent:ollama-write  # solo parches bajo riesgo (docs/reportes)
 - **3. Diff mínimo** — Un problema, un PR lógico; reutilizar patrones existentes (`DashboardPanelGridSection`, RAD shell).
 - **4. Verificar tarde** — `npm run check` al cerrar, no tras cada línea (salvo typecheck puntual).
 - **5. Gates del rol** — Ejecutar solo los del subagente + cierre estándar.
-- **6. Reporte** — `reports/epis2-*.md` con alcance, gates, riesgos, próximo paso exacto.
-- **7. Humano decide** — Sin commit/push automático; Ollama auto (`dev:agent:ollama-auto`) o apply L0 tras revisar plan.
-
-## Prohibido
-
-- OpenMRS / Carbon / dashboard como home
-- Import masivo EPIS sin manifest
-- Auto-aprobación clínica · IA escribiendo SoT
-- Segundo Command/Form Registry temporal
-
-## Cierre sesión
-
-```bash
-npm run check
-npm run test
-npm run db:validate
-npm run quality:layers-integration-gate   # si tocaste UI
-npm run dev:agent:close                     # checklist + plantilla reporte
-```
-
----
-
-# EPIS2 — Sesión subagentes de desarrollo
-
-**Fas
+- **6. Reporte** — `reports/epis2-*.md` c
 
 ## Reglas
 

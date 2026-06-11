@@ -29,6 +29,17 @@ $env:EPIS2_AUTO_DEV_RESUME = "1"
 $env:EPIS2_EVOLAB_PATCHING_ENABLED = "false"
 $env:EPIS2_EVOLAB_REQUIRE_HUMAN_APPROVAL = "true"
 $env:EPIS2_EVOLAB_LLM_CONCURRENCY = "1"
+$env:EPIS2_AUTO_DEV_OPENCLAW = "1"
+$env:EPIS2_OPENCLAW_SESSION = "1"
+$env:EPIS2_OPENCLAW_MAX_POWER = "1"
+$env:EPIS2_OPENCLAW_POWER_LEVEL = "L3"
+$env:EPIS2_OPENCLAW_PATCHING_ENABLED = "true"
+$env:EPIS2_OPENCLAW_SAFE_RUN = "true"
+$env:EPIS2_OPENCLAW_AUTHORIZE_CONDITIONAL = "true"
+$env:EPIS2_OPENCLAW_AUTHORIZE_CODE = "true"
+$env:EPIS2_OPENCLAW_REQUIRE_HUMAN_APPROVAL = "true"
+$env:EPIS2_OPENCLAW_GIT_WRITE = "false"
+$env:EPIS2_OPENCLAW_READ_ENV = "false"
 
 $siblingEvolab = Join-Path (Split-Path $Root -Parent) "epis2-evolab"
 if (-not $env:EPIS2_EVOLAB_ROOT -and (Test-Path (Join-Path $siblingEvolab "package.json"))) {
@@ -39,6 +50,7 @@ Write-Host "EPIS2 - sesion integrada paralela (PM-03 + Evolab)" -ForegroundColor
 Write-Host "  Repo: $Root"
 Write-Host "  Ollama: $ollamaBase"
 Write-Host "  Seguridad: patching=off, human approval=on, LLM concurrency=1"
+Write-Host "  OpenClaw: MAX POWER L3 (patch + gates + ollama-auto)" -ForegroundColor Green
 if ($env:CURSOR_API_KEY) {
   Write-Host "  Cursor SDK: API key presente" -ForegroundColor Green
 } else {

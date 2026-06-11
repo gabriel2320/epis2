@@ -51,8 +51,25 @@ start-auto-dev-6h.ps1 / dev:auto:orchestrate
 | `EPIS2_EVOLAB_LLM_CONCURRENCY` | No | `1` | Cap Ollama compartido PM-03 + Evolab |
 | `EPIS2_EVOLAB_ROOT` | No | `../epis2-evolab` | Clone repo hermano Evolab |
 | `EPIS2_EVOLAB_OPTIONAL` | No | — | `1` → bridge skip si falta clone |
+| `EPIS2_AUTO_DEV_OPENCLAW` | No | off | `1` → L1 brief/handoff/verify por tramo |
+| `EPIS2_OPENCLAW_POWER_LEVEL` | No | `L0`/`L1`* | L1 en auto-dev scripts |
+| `EPIS2_OPENCLAW_SAFE_RUN` | No | ver candados | Gates allowlist |
+| `EPIS2_OPENCLAW_PATCHING_ENABLED` | No | `false` | Prohibido `true` |
 
 Copiar bloque en `.env` desde `.env.example` (sección PM-03).
+
+### OpenClaw (MAX POWER L3 — auto-dev)
+
+Candados: [EPIS2_OPENCLAW_INTEGRATION.md](./EPIS2_OPENCLAW_INTEGRATION.md) § MAX POWER.
+
+| Momento | Acción |
+|---------|--------|
+| Pre-orquestación | `openclaw:policy` + brief + sync |
+| Pre tramo | `openclaw:tramo --phase brief` |
+| Post tramos 2,4,6 | handoff + `openclaw:post-tramo` (verify + ollama-auto + sync) |
+| Parches propuestos | `openclaw:safe-patch --proposal …` |
+
+Documentación: [EPIS2_OPENCLAW_INTEGRATION.md](./EPIS2_OPENCLAW_INTEGRATION.md).
 
 ### Evolab (capa QA opcional)
 
@@ -92,6 +109,10 @@ Documentación: [EPIS2_EVOLAB_INTEGRATION.md](./EPIS2_EVOLAB_INTEGRATION.md).
 
 # Sesión integrada paralela (PM-03 + Evolab evolve) — ver EPIS2_EVOLAB_INTEGRATION.md
 .\scripts\dev-agent\start-auto-dev-integrated.ps1 -NoPush
+
+# Ciclo completo OpenClaw + Ollama + Evolab (recomendado)
+.\scripts\dev-agent\start-auto-dev-full-cycle.ps1 -NoPush
+npm run dev:auto:cycle -- --commit --continue-on-fail --parallel
 
 # Manual
 $env:EPIS2_AUTO_DEV_AUTHORIZED="1"
@@ -134,6 +155,7 @@ Abrir en Cursor: `@reports/auto-dev-cursor-prompt-tramo-N.md` + `@reports/dev-ag
 
 ```bash
 npm run quality:evolab-bridge-gate
+npm run quality:openclaw-gate
 npm run quality:pm03-orchestration-gate
 ```
 
@@ -144,3 +166,4 @@ npm run quality:pm03-orchestration-gate
 - `EPIS2_DEV_AGENT_LOW_RISK_WRITE.md`
 - `EPIS2_DEV_AGENT_ORCHESTRATION.md`
 - Cursor SDK: https://cursor.com/docs/sdk/typescript
+- OpenClaw: [`EPIS2_OPENCLAW_INTEGRATION.md`](./EPIS2_OPENCLAW_INTEGRATION.md)

@@ -121,6 +121,16 @@ npm run dev:auto:integrated -- --commit --continue-on-fail
 | `EPIS2_EVOLAB_REQUIRE_HUMAN_APPROVAL` | `true` | hallazgos requieren revisión |
 | `EPIS2_EVOLAB_LLM_CONCURRENCY` | `1` | cap Ollama compartido |
 | `EPIS2_AUTO_DEV_TRAMO_PAUSE_MS` | `120000` | pausa entre tramos PM-03 |
+| `EPIS2_OPENCLAW_MAX_POWER` | `1` | defaults L3 max-power |
+| `EPIS2_OPENCLAW_POWER_LEVEL` | `L3` | patch-code-limited |
+| `EPIS2_OPENCLAW_PATCHING_ENABLED` | `true` | safe-patch L0/L1 |
+| `EPIS2_OPENCLAW_SAFE_RUN` | `true` | gates allowlist + quality:* |
+| `EPIS2_OPENCLAW_AUTHORIZE_CONDITIONAL` | `true` | ollama/e2e/evolab |
+| `EPIS2_OPENCLAW_AUTHORIZE_CODE` | `true` | parches tier L1 |
+| `EPIS2_OPENCLAW_GIT_WRITE` | `false` | OpenClaw no commit/push |
+| `EPIS2_OPENCLAW_READ_ENV` | `false` | solo `.env.example` |
+
+Ver [EPIS2_OPENCLAW_INTEGRATION.md](./EPIS2_OPENCLAW_INTEGRATION.md) § Candados.
 
 Logs: `reports/auto-dev-parallel-log.jsonl`, `reports/evolab-evolve-parallel.log`.
 

@@ -17,6 +17,7 @@ import { buildDevBrief } from './brief.mjs';
 import { buildSubagentPrompt, buildTramoImplementerPrompt } from './prompt-builder.mjs';
 import { getActivePhaseHint, getGitSummary, suggestPrimarySubagent } from './context.mjs';
 import { resolveSubagentSequence } from './subagents.mjs';
+import { suggestAgents } from './openclaw-lib.mjs';
 
 loadEnvFile();
 
@@ -38,6 +39,7 @@ const withOllama = hasFlag('--ollama') || process.env.EPIS2_DEV_SESSION_OLLAMA =
 const withOllamaAuto =
   hasFlag('--ollama-auto') || process.env.EPIS2_DEV_SESSION_OLLAMA_AUTO === '1';
 const ollamaApply = hasFlag('--apply');
+const withOpenClaw = hasFlag('--openclaw') || process.env.EPIS2_OPENCLAW_SESSION === '1';
 
 mkdirSync(join(root, 'reports'), { recursive: true });
 
@@ -96,14 +98,38 @@ if (withOllamaAuto) {
   }
 }
 
+let openclawNote = '';
+if (withOpenClaw) {
+  const mf = process.env.EPIS2_DEV_AGENT_MF ?? 'auto';
+  const agents = suggestAgents({ tramo, phase }).join(',');
+  const r = spawnSync(
+    process.execPath,
+    [
+      join(root, 'scripts/dev-agent/openclaw-brief.mjs'),
+      '--mf',
+      mf,
+      '--agents',
+      agents,
+    ],
+    { cwd: root, stdio: 'pipe', encoding: 'utf8', env: process.env },
+  );
+  openclawNote = r.status === 0 ? ' · OpenClaw brief OK' : ' · OpenClaw brief falló';
+  if (r.status !== 0 && (r.stderr || r.stdout)) process.stderr.write(r.stderr || r.stdout);
+}
+
 const brief = await buildDevBrief(root, { phase, tramo, sequence, primarySubagent });
 const briefPath = join(root, 'reports/dev-agent-brief.md');
 writeFileSync(briefPath, brief, 'utf8');
 
-console.log(`dev-session OK → ${briefPath}${ollamaNote}`);
+console.log(`dev-session OK → ${briefPath}${ollamaNote}${openclawNote}`);
 console.log(`  Subagente primario: ${primarySubagent}`);
 console.log(`  Secuencia: ${sequence.join(' → ')}`);
 console.log('');
-console.log(
-  '  Cursor: @reports/dev-agent-brief.md @reports/dev-agent-prompt-' + primarySubagent + '.md',
-);
+if (withOpenClaw) {
+  console.log('  Cursor: @reports/dev-agent-brief.md @reports/openclaw-latest-brief.md');
+  console.log('           @reports/dev-agent-prompt-' + primarySubagent + '.md');
+} else {
+  console.log(
+    '  Cursor: @reports/dev-agent-brief.md @reports/dev-agent-prompt-' + primarySubagent + '.md',
+  );
+}

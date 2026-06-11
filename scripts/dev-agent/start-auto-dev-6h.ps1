@@ -21,6 +21,17 @@ $env:EPIS2_AUTO_DEV_OLLAMA = "1"
 $env:EPIS2_AUTO_DEV_OLLAMA_APPLY = "0"
 $env:EPIS2_AUTO_DEV_CURSOR_SDK = "1"
 $env:EPIS2_AUTO_DEV_RESUME = "1"
+$env:EPIS2_AUTO_DEV_OPENCLAW = "1"
+$env:EPIS2_OPENCLAW_SESSION = "1"
+$env:EPIS2_OPENCLAW_MAX_POWER = "1"
+$env:EPIS2_OPENCLAW_POWER_LEVEL = "L3"
+$env:EPIS2_OPENCLAW_PATCHING_ENABLED = "true"
+$env:EPIS2_OPENCLAW_SAFE_RUN = "true"
+$env:EPIS2_OPENCLAW_AUTHORIZE_CONDITIONAL = "true"
+$env:EPIS2_OPENCLAW_AUTHORIZE_CODE = "true"
+$env:EPIS2_OPENCLAW_REQUIRE_HUMAN_APPROVAL = "true"
+$env:EPIS2_OPENCLAW_GIT_WRITE = "false"
+$env:EPIS2_OPENCLAW_READ_ENV = "false"
 
 $siblingEvolab = Join-Path (Split-Path $Root -Parent) "epis2-evolab"
 if (-not $env:EPIS2_EVOLAB_ROOT -and (Test-Path (Join-Path $siblingEvolab "package.json"))) {
@@ -40,6 +51,7 @@ if ($env:EPIS2_EVOLAB_ROOT) {
 } else {
   Write-Host "  Evolab: no configurado (EPIS2_AUTO_DEV_EVOLAB=1 requiere clone)" -ForegroundColor DarkGray
 }
+Write-Host "  OpenClaw: MAX POWER L3 (patch L0/L1 + safe-run L4 breadth)" -ForegroundColor Green
 
 npm run dev:auto:preconditions
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

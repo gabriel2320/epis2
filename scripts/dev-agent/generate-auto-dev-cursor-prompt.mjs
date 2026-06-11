@@ -24,6 +24,11 @@ if (!tramo) {
 const briefPath = join(root, 'reports/dev-agent-brief.md');
 const brief = existsSync(briefPath) ? readFileSync(briefPath, 'utf8').slice(0, 4000) : '(ejecutar npm run dev:session)';
 
+const openclawBriefPath = join(root, 'reports/openclaw-latest-brief.md');
+const openclawBrief = existsSync(openclawBriefPath)
+  ? readFileSync(openclawBriefPath, 'utf8').slice(0, 3000)
+  : null;
+
 const canon = [
   'docs/product/PRODUCT_INVARIANTS.md',
   'docs/design/EPIS2_DUAL_CHART_VISUAL_CANON.md',
@@ -56,6 +61,8 @@ ${canon.map((c) => `- @${c}`).join('\n')}
 ## Brief sesión (extracto)
 
 ${brief}
+
+${openclawBrief ? `## OpenClaw brief (read-only — revisar antes de implementar)\n\n@reports/openclaw-latest-brief.md\n\n${openclawBrief}\n` : '## OpenClaw\n\n_(ejecutar `npm run openclaw:tramo -- --tramo ' + tramoIdx + ' --phase brief` si EPIS2_AUTO_DEV_OPENCLAW=1)_\n'}
 
 ## Reglas
 

@@ -10,6 +10,8 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { loadEnvFile } from '../load-env.mjs';
 import { isEvolabPresent, resolveEvolabRoot } from './evolab-bridge.mjs';
+import { isOpenClawAutoDevEnabled } from './openclaw-lib.mjs';
+import { resolveOpenClawLocks } from './openclaw-policy.mjs';
 
 loadEnvFile();
 
@@ -98,6 +100,43 @@ if (process.env.EPIS2_AUTO_DEV_EVOLAB === '1') {
   }
 } else {
   ok('Evolab desactivado (EPIS2_AUTO_DEV_EVOLAB≠1)');
+}
+
+if (isOpenClawAutoDevEnabled()) {
+  const openclawReadme = join(root, '.openclaw/epis2/README.md');
+  if (existsSync(openclawReadme)) {
+    ok('OpenClaw workspace .openclaw/epis2 presente');
+  } else {
+    fail('EPIS2_AUTO_DEV_OPENCLAW=1 pero falta .openclaw/epis2/');
+  }
+  for (const script of [
+    'openclaw:brief',
+    'openclaw:handoff',
+    'openclaw:tramo',
+    'openclaw:policy',
+    'openclaw:safe-run',
+    'openclaw:safe-patch',
+    'openclaw:post-tramo',
+    'dev:openclaw:sync',
+  ]) {
+    if (pkg.includes(`"${script}"`)) ok(`npm script ${script}`);
+    else fail(`Falta npm script ${script}`);
+  }
+  const policy = spawnSync('npm', ['run', 'openclaw:policy'], {
+    cwd: root,
+    stdio: 'pipe',
+    shell: true,
+    encoding: 'utf8',
+    env: process.env,
+  });
+  if (policy.status === 0) {
+    const locks = resolveOpenClawLocks();
+    ok(`OpenClaw candados OK (${locks.level} · safe-run=${locks.safeRun})`);
+  } else {
+    fail('openclaw:policy falló — revisar candados EPIS2_OPENCLAW_*');
+  }
+} else {
+  ok('OpenClaw auto-dev desactivado (EPIS2_AUTO_DEV_OPENCLAW≠1)');
 }
 
 console.log('');

@@ -18,6 +18,8 @@ import { dirname, join } from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { loadEnvFile } from '../load-env.mjs';
+import { applyDevCycleEnv } from './openclaw-dev-cycle.mjs';
+import { openClawSafetyEnv } from './openclaw-policy.mjs';
 
 loadEnvFile();
 
@@ -33,9 +35,9 @@ const skipEvolve = args.includes('--no-evolve') || process.env.EPIS2_AUTO_DEV_EV
 const evolveGenerations = process.env.EPIS2_EVOLAB_EVOLVE_GENERATIONS ?? '2';
 const evolveBudgetMinutes = process.env.EPIS2_EVOLAB_EVOLVE_BUDGET_MINUTES ?? '300';
 
-/** Env de seguridad compartido para procesos Evolab. */
+/** Env de seguridad compartido para procesos Evolab + OpenClaw. */
 function safetyEnv() {
-  return {
+  const base = {
     ...process.env,
     EPIS2_ROOT: root,
     EPIS2_EVOLAB_PATCHING_ENABLED: 'false',
@@ -43,6 +45,10 @@ function safetyEnv() {
     EPIS2_EVOLAB_LLM_CONCURRENCY: process.env.EPIS2_EVOLAB_LLM_CONCURRENCY ?? '1',
     EPIS2_AUTO_DEV_TRAMO_PAUSE_MS: process.env.EPIS2_AUTO_DEV_TRAMO_PAUSE_MS ?? '120000',
   };
+  if (process.env.EPIS2_AUTO_DEV_OPENCLAW === '1' && process.env.EPIS2_AUTO_DEV_EVOLAB === '1') {
+    return applyDevCycleEnv(base);
+  }
+  return openClawSafetyEnv(base);
 }
 
 function log(event, detail = {}) {
@@ -225,6 +231,16 @@ async function main() {
       }
     }
 
+    if (process.env.EPIS2_AUTO_DEV_OPENCLAW === '1') {
+      console.log('\n▶ openclaw:policy + dev:openclaw:sync (inicio)\n');
+      const policy = runSyncNpm('openclaw:policy', [], { env: safetyEnv() });
+      if (!policy.ok) {
+        log('openclaw-policy-failed', {});
+        process.exit(1);
+      }
+      runSyncNpm('dev:openclaw:sync', [], { env: safetyEnv() });
+    }
+
     console.log('\n▶ dev:evolab:sync (inicio)\n');
     runSyncNpm('dev:evolab:sync', [], { env: safetyEnv() });
   }
@@ -263,6 +279,11 @@ async function main() {
     console.log('\n▶ evolab:validate + dev:evolab:sync (cierre)\n');
     runSyncNpm('evolab:validate', [], { env: safetyEnv() });
     runSyncNpm('dev:evolab:sync', [], { env: safetyEnv() });
+  }
+
+  if (!dryRun && process.env.EPIS2_AUTO_DEV_OPENCLAW === '1') {
+    console.log('\n▶ dev:openclaw:sync (cierre)\n');
+    runSyncNpm('dev:openclaw:sync', [], { env: safetyEnv() });
   }
 
   log('parallel-complete', { orchestratorOk: orch.ok, orchestratorStatus: orch.status });

@@ -38,10 +38,13 @@ npm run dev:agent:close           # checklist + plantilla reporte
 | `npm run ollama:probe` | Diagnóstico tags + modelo instalado |
 | `npm run dev:agent:ollama-write` | `reports/dev-agent-ollama-write-plan.json` |
 | `npm run dev:agent:ollama-write -- --apply` | Aplica Tier L0 (reportes/docs) tras revisión |
+| `npm run openclaw:brief` | Brief read-only → `reports/openclaw-latest-brief.md` |
+| `npm run openclaw:handoff` | Handoff post-revisión → `reports/openclaw-latest-handoff.md` |
+| `npm run dev:session -- --openclaw` | Brief dev + brief OpenClaw |
 
-Variables: `EPIS2_DEV_AGENT_PHASE` · `EPIS2_DEV_AGENT_TRAMO` · `EPIS2_DEV_AGENT_MF`
+Variables: `EPIS2_DEV_AGENT_PHASE` · `EPIS2_DEV_AGENT_TRAMO` · `EPIS2_DEV_AGENT_MF` · `EPIS2_OPENCLAW_SESSION`
 
-Política: [`EPIS2_DEV_AGENT_LOW_RISK_WRITE.md`](./EPIS2_DEV_AGENT_LOW_RISK_WRITE.md)
+Política: [`EPIS2_DEV_AGENT_LOW_RISK_WRITE.md`](./EPIS2_DEV_AGENT_LOW_RISK_WRITE.md) · OpenClaw: [`EPIS2_OPENCLAW_INTEGRATION.md`](./EPIS2_OPENCLAW_INTEGRATION.md)
 
 ---
 

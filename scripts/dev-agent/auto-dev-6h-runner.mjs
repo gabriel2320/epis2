@@ -10,6 +10,11 @@ import { appendFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { loadEnvFile } from '../load-env.mjs';
+import { AUTO_DEV_OPENCLAW_HANDOFF_TRAMOS, isOpenClawAutoDevEnabled } from './openclaw-lib.mjs';
+import { openClawSafetyEnv } from './openclaw-policy.mjs';
+
+loadEnvFile();
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const args = process.argv.slice(2);
@@ -19,6 +24,7 @@ const doPush = args.includes('--push');
 const withOllamaAuto = args.includes('--ollama-auto');
 const ollamaApply = args.includes('--apply');
 const tramoArg = args.includes('--tramo') ? Number(args[args.indexOf('--tramo') + 1]) : undefined;
+const openclawEnabled = isOpenClawAutoDevEnabled();
 
 const ledgerPath = join(root, 'docs/quality/auto-dev-6h-ledger.json');
 const logPath = join(root, 'reports/auto-dev-6h-log.jsonl');
@@ -90,12 +96,29 @@ function archiveBranchesReport() {
   log('branch-archive', { count: lines.length, reportPath });
 }
 
+function runNode(rel, nodeArgs = []) {
+  if (dryRun) {
+    log('dry-run-node', { rel, nodeArgs });
+    return { ok: true, skipped: true };
+  }
+  const r = spawnSync(process.execPath, [join(root, rel), ...nodeArgs], {
+    cwd: root,
+    stdio: 'inherit',
+    shell: false,
+    env: process.env,
+  });
+  return { ok: r.status === 0, status: r.status ?? 1 };
+}
+
 const TRAMO_STEPS = {
   0: () => {
     const steps = [
       () => runNpm('stack:dev'),
       () => runNpm('ollama:probe'),
-      () => runNpm('dev:session'),
+      () =>
+        openclawEnabled
+          ? runNpm('dev:session', ['--', '--openclaw'])
+          : runNpm('dev:session'),
     ];
     if (withOllamaAuto) steps.push(() => runNpm('dev:agent:ollama-auto', ollamaApply ? ['--', '--apply'] : []));
     return steps;
@@ -160,6 +183,11 @@ function runTramo(order, ledger) {
   saveLedger(ledger);
   log('tramo-done', { id: tramo.id, order });
 
+  if (openclawEnabled && AUTO_DEV_OPENCLAW_HANDOFF_TRAMOS.has(order)) {
+    runNode('scripts/dev-agent/openclaw-tramo.mjs', ['--tramo', String(order), '--phase', 'handoff']);
+    runNpm('dev:openclaw:sync');
+  }
+
   if (doCommit && process.env.EPIS2_AUTO_DEV_AUTHORIZED === '1' && !dryRun) {
     runGit(['add', '-A']);
     runGit(['commit', '-m', `chore(auto-dev): tramo ${order} ${tramo.id} — ${tramo.name}`]);
@@ -168,7 +196,12 @@ function runTramo(order, ledger) {
 }
 
 function main() {
+  if (openclawEnabled) {
+    process.env = openClawSafetyEnv(process.env);
+  }
+
   console.log('EPIS2 dev:auto:6h — PROG-AUTO-DEV-6H\n');
+  if (openclawEnabled) console.log('  OpenClaw: MAX POWER L3\n');
   if ((doCommit || doPush) && process.env.EPIS2_AUTO_DEV_AUTHORIZED !== '1') {
     console.error('Set EPIS2_AUTO_DEV_AUTHORIZED=1 for automated commit/push');
     process.exit(1);

@@ -118,6 +118,18 @@ export async function buildDevBrief(root, opts) {
     lines.push('', '## Evolab (QA externo)', '', `- ${evolabHint}`, `- Root: \`${resolveEvolabRoot()}\``);
   }
 
+  const openclawBrief = join(root, 'reports/openclaw-latest-brief.md');
+  if (existsSync(openclawBrief)) {
+    lines.push(
+      '',
+      '## OpenClaw (revisores read-only)',
+      '',
+      '- Brief: `@reports/openclaw-latest-brief.md`',
+      '- Handoff cierre: `npm run openclaw:handoff -- --agents auto`',
+      '- Docs: `docs/product/EPIS2_OPENCLAW_INTEGRATION.md`',
+    );
+  }
+
   lines.push(
     '',
     '## Stack local',

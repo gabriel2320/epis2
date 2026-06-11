@@ -1,0 +1,8 @@
+{"at":"2026-06-11T03:01:53.425Z","event":"cycle-bootstrap-start","ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}
+{"at":"2026-06-11T03:01:53.426Z","event":"dry-run-npm","script":"evolab:doctor","extraArgs":[]}
+{"at":"2026-06-11T03:01:53.426Z","event":"dry-run-npm","script":"openclaw:policy","extraArgs":[]}
+{"at":"2026-06-11T03:01:53.426Z","event":"dry-run-npm","script":"openclaw:brief","extraArgs":["--","--mf","H-AUTO-CYCLE","--agents","auto"]}
+{"at":"2026-06-11T03:01:53.427Z","event":"dry-run-node","rel":"scripts/dev-agent/dev-cycle-sync.mjs","nodeArgs":[]}
+{"at":"2026-06-11T03:01:53.427Z","event":"dry-run-npm","script":"dev:evolab:sync","extraArgs":[]}
+{"at":"2026-06-11T03:01:53.428Z","event":"dry-run-npm","script":"dev:openclaw:sync","extraArgs":[]}
+{"at":"2026-06-11T03:01:53.428Z","event":"cycle-bootstrap-ok","ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}

@@ -10,9 +10,12 @@ const errors = [];
 for (const rel of [
   'scripts/dev-agent/evolab-bridge.mjs',
   'scripts/dev-agent/evolab-sync.mjs',
+  'scripts/dev-agent/openclaw-dev-cycle.mjs',
   'scripts/dev-agent/auto-dev-parallel-launcher.mjs',
   'scripts/dev-agent/start-auto-dev-integrated.ps1',
+  'scripts/dev-agent/start-auto-dev-full-cycle.ps1',
   'docs/product/EPIS2_EVOLAB_INTEGRATION.md',
+  'docs/product/EPIS2_DEV_CYCLE_OPENCLAW.md',
 ]) {
   if (!existsSync(join(root, rel))) errors.push(`Falta ${rel}`);
 }
@@ -59,10 +62,13 @@ for (const token of [
   if (!parallel.includes(token)) errors.push(`parallel-launcher sin ${token}`);
 }
 
-const orch = readFileSync(join(root, 'scripts/dev-agent/auto-dev-orchestrator.mjs'), 'utf8');
-for (const token of ['EPIS2_AUTO_DEV_EVOLAB', 'evolab:smoke', 'evolab:validate', 'evolab:doctor']) {
-  if (!orch.includes(token)) errors.push(`orchestrator sin ${token}`);
+const cycle = readFileSync(join(root, 'scripts/dev-agent/openclaw-dev-cycle.mjs'), 'utf8');
+for (const token of ['EPIS2_AUTO_DEV_EVOLAB', 'evolab:smoke', 'evolab:validate', 'evolab:doctor', 'dev:evolab:sync']) {
+  if (!cycle.includes(token)) errors.push(`openclaw-dev-cycle sin ${token}`);
 }
+
+const orch = readFileSync(join(root, 'scripts/dev-agent/auto-dev-orchestrator.mjs'), 'utf8');
+if (!orch.includes('runTramoCycle')) errors.push('orchestrator sin runTramoCycle');
 
 const pre = readFileSync(join(root, 'scripts/dev-agent/auto-dev-preconditions.mjs'), 'utf8');
 if (!pre.includes('EPIS2_AUTO_DEV_EVOLAB')) errors.push('preconditions sin EPIS2_AUTO_DEV_EVOLAB');

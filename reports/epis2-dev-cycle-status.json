@@ -1,0 +1,109 @@
+{
+  "syncedAt": "2026-06-11T03:01:38.783Z",
+  "cycle": {
+    "openclaw": true,
+    "ollama": true,
+    "evolab": false
+  },
+  "openclaw": {
+    "level": "L1",
+    "mode": "controlled-verifier",
+    "maxPower": false,
+    "artifactCount": 3,
+    "latestBrief": "reports/openclaw-latest-brief.md",
+    "latestHandoff": null
+  },
+  "ollama": {
+    "planObjective": "Implementar grids dashboard + acordeones en formularios",
+    "nextMicrophase": "MF-RAD-M3-A",
+    "automationOk": null,
+    "model": "qwen2.5-coder:14b"
+  },
+  "evolab": {
+    "present": true,
+    "root": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\epis2-evolab",
+    "openFindings": 18,
+    "syncedAt": "2026-06-11T03:00:20.355Z",
+    "topFindings": [
+      {
+        "id": "c3d6a0de-13ba-4e57-96d5-a2d23720e710",
+        "severity": "high",
+        "fingerprint": "f0afe0d70dada190",
+        "scenarioId": "admission-double-booking-001-m8cx-004",
+        "runIdPrefix": "985128a3",
+        "reviewStatus": "open"
+      },
+      {
+        "id": "53a3091d-2c84-4688-bea3-12a6e781788a",
+        "severity": "medium",
+        "fingerprint": "68c457a21613e462",
+        "scenarioId": "admission-discharge-001-m8rs-001",
+        "runIdPrefix": "478289a5",
+        "reviewStatus": "open"
+      },
+      {
+        "id": "1c0b218b-ea61-4b39-9c88-93a2f22cc0fe",
+        "severity": "high",
+        "fingerprint": "50df1d69aac96d12",
+        "scenarioId": "admission-discharge-001-m8rs-001",
+        "runIdPrefix": "478289a5",
+        "reviewStatus": "open"
+      },
+      {
+        "id": "66cd8a89-bbe9-4a5a-bbc6-b255af5f0ced",
+        "severity": "high",
+        "fingerprint": "47934da9328984b6",
+        "scenarioId": "discharge-critical-pending-001",
+        "runIdPrefix": "9afec774",
+        "reviewStatus": "open"
+      },
+      {
+        "id": "e9e72053-67d3-49f6-bcfe-f4066a706233",
+        "severity": "high",
+        "fingerprint": "47934da9328984b6",
+        "scenarioId": "discharge-critical-pending-001",
+        "runIdPrefix": "ccc706d2",
+        "reviewStatus": "open"
+      }
+    ]
+  },
+  "ledger": {
+    "tramos": [
+      {
+        "order": 0,
+        "id": "H-AUTO-0",
+        "state": "FAILED"
+      },
+      {
+        "order": 1,
+        "id": "H-AUTO-1",
+        "state": "PENDING"
+      },
+      {
+        "order": 2,
+        "id": "H-AUTO-2",
+        "state": "FAILED"
+      },
+      {
+        "order": 3,
+        "id": "H-AUTO-3",
+        "state": "PENDING"
+      },
+      {
+        "order": 4,
+        "id": "H-AUTO-4",
+        "state": "FAILED"
+      },
+      {
+        "order": 5,
+        "id": "H-AUTO-5",
+        "state": "DONE"
+      },
+      {
+        "order": 6,
+        "id": "H-AUTO-6",
+        "state": "FAILED"
+      }
+    ]
+  }
+}

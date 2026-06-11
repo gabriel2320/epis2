@@ -92,7 +92,7 @@
       "id": "H-AUTO-6",
       "name": "Auditoría cierre + git",
       "order": 6,
-      "state": "PENDING",
+      "state": "FAILED",
       "commands": [
         "quality:dual-chart-ledger",
         "dev:agent:close"
