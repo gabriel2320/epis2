@@ -81,7 +81,7 @@ export function PatientIdentityBand({
             height: 44,
             borderRadius: '50%',
             bgcolor: epis2ClinicalShellTokens.institutionalNavy,
-            color: '#FFFFFF',
+            color: epis2ClinicalShellTokens.onInstitutional,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

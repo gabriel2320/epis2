@@ -3,8 +3,11 @@ import type { ReactNode } from 'react';
 
 export type EpisClinicalSummaryCardProps = {
   title: string;
-  children: ReactNode;
+  children?: ReactNode;
   meta?: string | undefined;
+  /** Valor destacado (p. ej. labs MF-CLINICAL-SUMMARY-B). */
+  highlightValue?: string | undefined;
+  highlightMeta?: string | undefined;
   actionLabel?: string | undefined;
   onAction?: (() => void) | undefined;
   severity?: 'default' | 'warning' | 'critical' | undefined;
@@ -16,6 +19,8 @@ export function EpisClinicalSummaryCard({
   title,
   children,
   meta,
+  highlightValue,
+  highlightMeta,
   actionLabel,
   onAction,
   severity = 'default',
@@ -52,9 +57,27 @@ export function EpisClinicalSummaryCard({
           </EpisM3Text>
         ) : null}
       </Stack>
-      <EpisM3Text role="bodyMedium" component="div" sx={{ flex: 1, whiteSpace: 'pre-wrap' }}>
-        {children}
-      </EpisM3Text>
+      {highlightValue ? (
+        <Stack spacing={0.5} sx={{ flex: 1 }}>
+          <EpisM3Text role="titleLarge" component="p" sx={{ m: 0, fontVariantNumeric: 'tabular-nums' }}>
+            {highlightValue}
+          </EpisM3Text>
+          {highlightMeta ? (
+            <EpisM3Text role="labelMedium" color="text.secondary">
+              {highlightMeta}
+            </EpisM3Text>
+          ) : null}
+          {children ? (
+            <EpisM3Text role="bodyMedium" component="div" sx={{ whiteSpace: 'pre-wrap' }}>
+              {children}
+            </EpisM3Text>
+          ) : null}
+        </Stack>
+      ) : (
+        <EpisM3Text role="bodyMedium" component="div" sx={{ flex: 1, whiteSpace: 'pre-wrap' }}>
+          {children}
+        </EpisM3Text>
+      )}
       {actionLabel && onAction ? (
         <EpisButton appearance="text" size="small" onClick={onAction} sx={{ alignSelf: 'flex-start', px: 0 }}>
           {actionLabel}

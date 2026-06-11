@@ -4,6 +4,14 @@ import { copy } from '@epis2/design-system';
 import { Box, EpisButton, EpisM3Text, Stack } from '@epis2/epis2-ui';
 import { useMemo } from 'react';
 import { patientSummaryFieldLabel } from '../../clinical/patientSummaryFieldLabels.js';
+import { ClinicalSummaryStickyBanner } from './ClinicalSummaryStickyBanner.js';
+import {
+  formatAllergyLine,
+  formatLabObservedAt,
+  formatMedicationLine,
+  partitionMedicationZones,
+  selectLabHighlights,
+} from './clinicalSummaryData.js';
 import { EpisClinicalSummaryCard } from './EpisClinicalSummaryCard.js';
 
 export type PatientClinicalSummaryGridProps = {
@@ -20,7 +28,7 @@ export type PatientClinicalSummaryGridProps = {
 };
 
 const NOW_KEYS = ['recentEvents', 'pendingItems', 'clinicalAlerts'] as const;
-const CONTEXT_KEYS = ['activeProblems', 'activeMedications', 'relevantLabs'] as const;
+const CONTEXT_KEYS = ['activeProblems'] as const;
 
 function formatTimelinePreview(
   events: PatientLongitudinalResponse['timeline'],
@@ -53,6 +61,18 @@ export function PatientClinicalSummaryGrid({
   const criticalAlerts = alerts.filter((a) => a.severity === 'critical');
   const draftEvents = longitudinal?.timeline.filter((e) => e.kind === 'draft') ?? [];
   const firstDraftId = draftEvents[0]?.entityId;
+  const medicationZones = useMemo(
+    () => partitionMedicationZones(longitudinal?.medications ?? []),
+    [longitudinal?.medications],
+  );
+  const labHighlights = useMemo(
+    () => selectLabHighlights(longitudinal?.observations ?? []),
+    [longitudinal?.observations],
+  );
+  const hasStructuredMeds =
+    medicationZones.active.length > 0 ||
+    medicationZones.prn.length > 0 ||
+    medicationZones.suspended.length > 0;
 
   const renderFieldCard = (key: string, severity: 'default' | 'warning' | 'critical' = 'default') => {
     const value = summaryFields[key]?.trim();
@@ -69,8 +89,29 @@ export function PatientClinicalSummaryGrid({
     );
   };
 
+  const renderMedicationZone = (
+    zoneKey: 'active' | 'prn' | 'suspended',
+    title: string,
+    items: typeof medicationZones.active,
+  ) => {
+    if (items.length === 0) return null;
+    return (
+      <EpisClinicalSummaryCard
+        key={zoneKey}
+        title={title}
+        testId={`${testId}-meds-${zoneKey}`}
+      >
+        {items.map(formatMedicationLine).join('\n')}
+      </EpisClinicalSummaryCard>
+    );
+  };
+
   return (
     <Stack spacing={2.5} data-testid={testId}>
+      <ClinicalSummaryStickyBanner
+        alerts={alerts}
+        allergies={longitudinal?.allergies}
+      />
       {criticalAlerts.length > 0 ? (
         <EpisClinicalSummaryCard
           title={copy.clinicalSummary.criticalAlerts}
@@ -106,8 +147,8 @@ export function PatientClinicalSummaryGrid({
               onAction={onRegisterAllergy}
             >
               {longitudinal.allergies
-                .slice(0, 3)
-                .map((a) => `${a.substance}${a.severity ? ` (${a.severity})` : ''}`)
+                .slice(0, 5)
+                .map(formatAllergyLine)
                 .join('\n')}
             </EpisClinicalSummaryCard>
           ) : onRegisterAllergy ? (
@@ -147,6 +188,39 @@ export function PatientClinicalSummaryGrid({
           }}
         >
           {CONTEXT_KEYS.map((key) => renderFieldCard(key))}
+          {hasStructuredMeds ? (
+            <>
+              {renderMedicationZone(
+                'active',
+                copy.clinicalSummary.medsActiveZone,
+                medicationZones.active,
+              )}
+              {renderMedicationZone('prn', copy.clinicalSummary.medsPrnZone, medicationZones.prn)}
+              {renderMedicationZone(
+                'suspended',
+                copy.clinicalSummary.medsSuspendedZone,
+                medicationZones.suspended,
+              )}
+            </>
+          ) : (
+            renderFieldCard('activeMedications')
+          )}
+          {labHighlights.length > 0 ? (
+            labHighlights.map((lab) => (
+              <EpisClinicalSummaryCard
+                key={lab.id}
+                title={lab.label}
+                meta={copy.clinicalSummary.labsHighlight}
+                highlightValue={lab.valueText}
+                highlightMeta={formatLabObservedAt(lab.observedAt)}
+                testId={`${testId}-lab-${lab.id}`}
+                actionLabel={onOpenResults ? copy.clinicalSummary.openLabs : undefined}
+                onAction={onOpenResults}
+              />
+            ))
+          ) : (
+            renderFieldCard('relevantLabs')
+          )}
           {clinicalProblems.length > 0 ? (
             <EpisClinicalSummaryCard
               title={copy.activePatient.summaryActiveProblems}
@@ -169,16 +243,6 @@ export function PatientClinicalSummaryGrid({
               onAction={onViewFullTimeline}
             >
               {formatTimelinePreview(longitudinal.timeline)}
-            </EpisClinicalSummaryCard>
-          ) : null}
-          {summaryFields.relevantLabs?.trim() && onOpenResults ? (
-            <EpisClinicalSummaryCard
-              title={copy.activePatient.summaryLabs}
-              testId={`${testId}-labs-cta`}
-              actionLabel={copy.clinicalSummary.openLabs}
-              onAction={onOpenResults}
-            >
-              {summaryFields.relevantLabs}
             </EpisClinicalSummaryCard>
           ) : null}
         </Box>

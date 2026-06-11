@@ -685,6 +685,11 @@ export const copy = {
     quickActions: 'Acciones rápidas',
     openTimeline: 'Línea de tiempo',
     registerEvolution: 'Registrar evolución',
+    medsActiveZone: 'Medicación activa',
+    medsPrnZone: 'PRN / rescate',
+    medsSuspendedZone: 'Suspendida',
+    allergySeverity: 'Severidad',
+    labsHighlight: 'Resultado reciente',
   },
   chartModes: {
     traditional: 'Ficha electrónica',

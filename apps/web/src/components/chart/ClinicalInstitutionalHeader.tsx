@@ -28,7 +28,7 @@ export function ClinicalInstitutionalHeader({
         minHeight: epis2ClinicalShellTokens.institutionalHeaderHeight,
         px: 2,
         bgcolor: epis2ClinicalShellTokens.institutionalNavy,
-        color: '#FFFFFF',
+        color: epis2ClinicalShellTokens.onInstitutional,
         flexShrink: 0,
       }}
     >
@@ -78,9 +78,12 @@ export function ClinicalInstitutionalHeader({
           onClick={() => void logout()}
           data-testid="epis2-chart-header-logout"
           sx={{
-            color: '#FFFFFF',
+            color: epis2ClinicalShellTokens.onInstitutional,
             borderColor: 'rgba(255,255,255,0.45)',
-            '&:hover': { borderColor: '#FFFFFF', bgcolor: 'rgba(255,255,255,0.08)' },
+            '&:hover': {
+              borderColor: epis2ClinicalShellTokens.onInstitutional,
+              bgcolor: 'rgba(255,255,255,0.08)',
+            },
           }}
         >
           {copy.layout.logout}

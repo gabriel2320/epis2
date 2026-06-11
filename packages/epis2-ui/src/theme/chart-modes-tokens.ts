@@ -1,10 +1,15 @@
 import type { SxProps, Theme } from '@mui/material/styles';
+import {
+  epis2ClinicalShellColors,
+  epis2PaperChartColors,
+  epis2TraditionalChartColors,
+} from './clinical/chart-modes-colors.js';
 import { epis2Shape } from './shape.js';
 
 /** Tokens modo ficha electrónica tradicional — denso, institucional (ADR-002). */
 export const epis2TraditionalChartTokens = {
-  shellBg: '#EEF3F7',
-  surface: '#FFFFFF',
+  shellBg: epis2TraditionalChartColors.shellBg,
+  surface: epis2TraditionalChartColors.surface,
   navWidth: 240,
   navWidthCompact: 72,
   bannerHeight: 72,
@@ -18,29 +23,30 @@ export const epis2TraditionalChartTokens = {
 
 /** Tokens anatomía shell v2 — header institucional, banda, footer (MF-DUAL-CHART-04). */
 export const epis2ClinicalShellTokens = {
-  institutionalNavy: '#0B2540',
+  institutionalNavy: epis2ClinicalShellColors.institutionalNavy,
+  onInstitutional: epis2ClinicalShellColors.onInstitutional,
   institutionalHeaderHeight: 60,
   identityBandMinHeight: 80,
   actionBarMinHeight: 52,
   footerHeight: 36,
-  allergyChipBg: '#FFF3E0',
-  allergyChipBorder: '#ED6C02',
+  allergyChipBg: epis2ClinicalShellColors.allergyChipBg,
+  allergyChipBorder: epis2ClinicalShellColors.allergyChipBorder,
 } as const;
 
 /** Tokens modo ficha papel — documento hospitalario Carta/A5. */
 export const epis2PaperChartTokens = {
-  navyHeader: '#0B2540',
-  paperBg: '#FAFAF8',
-  ruledLine: '#C5CED8',
-  marginLine: '#E8ECF0',
+  navyHeader: epis2PaperChartColors.navyHeader,
+  paperBg: epis2PaperChartColors.paperBg,
+  ruledLine: epis2PaperChartColors.ruledLine,
+  marginLine: epis2PaperChartColors.marginLine,
   letterWidthPx: 816,
   letterMinHeightPx: 1056,
   a5WidthPx: 559,
   a5MinHeightPx: 794,
   proseFontSize: 15,
   proseLineHeight: 1.55,
-  sectionHeaderBg: '#0B2540',
-  sectionHeaderColor: '#FFFFFF',
+  sectionHeaderBg: epis2PaperChartColors.sectionHeaderBg,
+  sectionHeaderColor: epis2PaperChartColors.sectionHeaderColor,
   institutionStampOpacity: 0.12,
 } as const;
 

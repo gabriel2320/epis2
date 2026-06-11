@@ -32,6 +32,8 @@ Responder en **≤2 scrolls** las preguntas clínicas habituales al abrir una fi
 |------------|-----|
 | `EpisClinicalSummaryCard` | Tarjeta MD3: título, meta/timestamp, cuerpo, CTA opcional, severidad |
 | `PatientClinicalSummaryGrid` | Orquesta secciones **Ahora** / **Contexto** + alertas críticas live |
+| `ClinicalSummaryStickyBanner` | Banner sticky chips críticos + alergias (C-3b) |
+| `clinicalSummaryData` | Partición medicación 3 zonas · labs · alergias estructuradas |
 | `EpisClassicMd3PatientHeader` | Avatar iniciales + identidad compacta |
 
 ### Pulido estético pendiente (Calm Premium)
@@ -39,10 +41,10 @@ Responder en **≤2 scrolls** las preguntas clínicas habituales al abrir una fi
 | Aspecto | Objetivo | Tramo |
 |---------|----------|-------|
 | Tarjetas | Borde `outlineVariant`, radius 20px, sin sombra | UX-AESTHETIC P3 |
-| Banner | Sticky, 2 líneas + chips tonales | UX-CALM-PATIENT |
+| Banner | Sticky, chips críticos + alergias (`ClinicalSummaryStickyBanner`) | UX-CALM-PATIENT ✓ C-3b |
 | Fondo app | `#F7F9FC` vía tema | THEME-CALM-01 |
 | Iconos por tarjeta | Material Symbols Outlined | UX-CALM-PATIENT |
-| Labs destacados | Valor grande + meta temporal | MF-CLINICAL-SUMMARY-B |
+| Labs destacados | Valor grande + meta temporal | MF-CLINICAL-SUMMARY-B ✓ C-3b |
 
 ## Datos
 
@@ -61,9 +63,17 @@ Responder en **≤2 scrolls** las preguntas clínicas habituales al abrir una fi
 | Timeline preview | Abrir supporting pane (línea de tiempo) |
 | Labs | Bandeja de resultados |
 
+## Entrega C-3b (MF-CLINICAL-SUMMARY-B) ✓
+
+- Medicación 3 zonas: activa / PRN / suspendida (`partitionMedicationZones`)
+- Labs destacados con valor tipográfico grande + timestamp
+- Alergias con severidad estructurada (`formatAllergyLine`)
+- Banner sticky con chips críticos + alergias
+- Storybook: `Ficha/Resumen clínico MD3` → `GridScaffold`
+
 ## Fuera de alcance (Fases B–D)
 
-- Medicación 3 zonas (activa / PRN / suspendida)
+- Cola de firma transversal (medicación 3 zonas ya en C-3b)
 - Cola de firma transversal
 - Timeline filtrado por tipo
 - Re-signoff visual piloto

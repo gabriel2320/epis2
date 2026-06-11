@@ -1,0 +1,66 @@
+import type { ClinicalAlert, PatientLongitudinalResponse } from '@epis2/contracts';
+import { copy } from '@epis2/design-system';
+import { Box, Chip, Stack } from '@epis2/epis2-ui';
+import { formatAllergyLine } from './clinicalSummaryData.js';
+
+export type ClinicalSummaryStickyBannerProps = {
+  alerts?: readonly ClinicalAlert[] | undefined;
+  allergies?: PatientLongitudinalResponse['allergies'] | undefined;
+  testId?: string;
+};
+
+/** Banner sticky 2 líneas + chips — UX-CALM-PATIENT (MF-CLINICAL-SUMMARY-B). */
+export function ClinicalSummaryStickyBanner({
+  alerts = [],
+  allergies = [],
+  testId = 'epis2-clinical-summary-sticky-banner',
+}: ClinicalSummaryStickyBannerProps) {
+  const critical = alerts.filter((a) => a.severity === 'critical');
+  const allergyChips = allergies.slice(0, 4);
+
+  if (critical.length === 0 && allergyChips.length === 0) return null;
+
+  return (
+    <Box
+      data-testid={testId}
+      sx={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 2,
+        py: 1,
+        px: 1.5,
+        mb: 1,
+        borderRadius: 1,
+        border: 1,
+        borderColor: 'outlineVariant',
+        bgcolor: 'surfaceContainerHigh',
+      }}
+    >
+      <Stack direction="row" flexWrap="wrap" gap={0.75} alignItems="center">
+        {critical.map((a) => (
+          <Chip
+            key={a.ruleId}
+            size="small"
+            color="error"
+            variant="outlined"
+            label={a.message}
+          />
+        ))}
+        {allergyChips.map((a) => (
+          <Chip
+            key={a.id}
+            size="small"
+            color="warning"
+            variant="outlined"
+            label={formatAllergyLine(a)}
+          />
+        ))}
+        {critical.length === 0 && allergyChips.length > 0 ? (
+          <Box component="span" sx={{ typography: 'caption', color: 'text.secondary' }}>
+            {copy.clinicalSummary.manageAllergies}
+          </Box>
+        ) : null}
+      </Stack>
+    </Box>
+  );
+}

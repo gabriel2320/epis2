@@ -30,9 +30,9 @@ function TraditionalPreview() {
 function PaperPreview() {
   const t = epis2PaperChartTokens;
   return (
-    <Box sx={{ p: 2, bgcolor: '#EEF3F7' }}>
+    <Box sx={{ p: 2, bgcolor: epis2TraditionalChartTokens.shellBg }}>
       <Box sx={{ ...epis2PaperDocumentSx('letter'), p: 3 }}>
-        <Box sx={{ bgcolor: t.navyHeader, color: '#fff', p: 2, mb: 2, borderRadius: 1 }}>
+        <Box sx={{ bgcolor: t.navyHeader, color: t.sectionHeaderColor, p: 2, mb: 2, borderRadius: 1 }}>
           I. Carátula — EPIS2 demo
         </Box>
         <Typography variant="body2">Documento clínico editable — Carta</Typography>
