@@ -3,21 +3,35 @@
   "program": "PROG-AUTO-DEV-6H",
   "canonicalPlan": "docs/product/EPIS2_AUTO_DEV_6H_PROGRAM.md",
   "durationHours": 6,
-  "states": ["PENDING", "RUNNING", "DONE", "FAILED"],
+  "states": [
+    "PENDING",
+    "RUNNING",
+    "DONE",
+    "FAILED"
+  ],
   "rules": {
     "requiresEnv": "EPIS2_AUTO_DEV_AUTHORIZED",
     "stopOnInvariantViolation": true,
     "maxCheckRetries": 2,
     "orchestrator": "docs/product/EPIS2_PM03_AUTO_ORCHESTRATION.md",
-    "tierXTramos": [1, 2, 3, 4]
+    "tierXTramos": [
+      1,
+      2,
+      3,
+      4
+    ]
   },
   "tramos": [
     {
       "id": "H-AUTO-0",
       "name": "Bootstrap stack + Ollama probe",
       "order": 0,
-      "state": "PENDING",
-      "commands": ["stack:dev", "ollama:probe", "dev:session"],
+      "state": "FAILED",
+      "commands": [
+        "stack:dev",
+        "ollama:probe",
+        "dev:session"
+      ],
       "gate": "quality:dev-env-gate"
     },
     {
@@ -25,39 +39,53 @@
       "name": "Terminología + diccionario comandos",
       "order": 1,
       "state": "PENDING",
-      "commands": ["test -w @epis2/command-registry"],
+      "commands": [
+        "test -w @epis2/command-registry"
+      ],
       "gate": null
     },
     {
       "id": "H-AUTO-2",
       "name": "Ficha tradicional + autocompletar barra",
       "order": 2,
-      "state": "PENDING",
-      "commands": ["quality:dual-chart-gate", "test:unit:chart"],
-      "gate": "quality:dual-chart-gate"
+      "state": "FAILED",
+      "commands": [
+        "quality:dual-chart-gate",
+        "test:unit:chart"
+      ],
+      "gate": "quality:dual-chart-gate",
+      "evolabGate": "evolab:smoke (opcional si EPIS2_AUTO_DEV_EVOLAB=1)"
     },
     {
       "id": "H-AUTO-3",
       "name": "Deprecación UI redundante",
       "order": 3,
       "state": "PENDING",
-      "commands": ["quality:dual-chart-legacy-freeze-gate", "quality:three-modes-gate"],
+      "commands": [
+        "quality:dual-chart-legacy-freeze-gate",
+        "quality:three-modes-gate"
+      ],
       "gate": "quality:dual-chart-legacy-freeze-gate"
     },
     {
       "id": "H-AUTO-4",
       "name": "Tests + repair loop",
       "order": 4,
-      "state": "PENDING",
-      "commands": ["check"],
-      "gate": null
+      "state": "FAILED",
+      "commands": [
+        "check"
+      ],
+      "gate": null,
+      "evolabGate": "evolab:smoke (opcional si EPIS2_AUTO_DEV_EVOLAB=1)"
     },
     {
       "id": "H-AUTO-5",
       "name": "Docs + archivo ramas",
       "order": 5,
-      "state": "PENDING",
-      "commands": ["quality:auto-dev-6h-gate"],
+      "state": "DONE",
+      "commands": [
+        "quality:auto-dev-6h-gate"
+      ],
       "gate": "quality:auto-dev-6h-gate"
     },
     {
@@ -65,8 +93,12 @@
       "name": "Auditoría cierre + git",
       "order": 6,
       "state": "PENDING",
-      "commands": ["quality:dual-chart-ledger", "dev:agent:close"],
-      "gate": "quality:dual-chart-ledger"
+      "commands": [
+        "quality:dual-chart-ledger",
+        "dev:agent:close"
+      ],
+      "gate": "quality:dual-chart-ledger",
+      "evolabGate": "evolab:validate (opcional si EPIS2_AUTO_DEV_EVOLAB=1)"
     }
   ]
 }

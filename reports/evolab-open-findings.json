@@ -1,0 +1,127 @@
+{
+  "syncedAt": "2026-06-11T02:48:07.530Z",
+  "evolabRoot": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\epis2-evolab",
+  "count": 15,
+  "findings": [
+    {
+      "id": "66cd8a89-bbe9-4a5a-bbc6-b255af5f0ced",
+      "severity": "high",
+      "fingerprint": "47934da9328984b6",
+      "scenarioId": "discharge-critical-pending-001",
+      "runIdPrefix": "9afec774",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "e9e72053-67d3-49f6-bcfe-f4066a706233",
+      "severity": "high",
+      "fingerprint": "47934da9328984b6",
+      "scenarioId": "discharge-critical-pending-001",
+      "runIdPrefix": "ccc706d2",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "bb80842f-6f29-4997-ae59-28a4aee83a19",
+      "severity": "medium",
+      "fingerprint": "39cf42cbd4461e5e",
+      "scenarioId": "admission-discharge-001-m8cx-008",
+      "runIdPrefix": "df88c218",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "4d8be5a5-2b64-4307-8709-c4f4af157982",
+      "severity": "high",
+      "fingerprint": "36f99e24a9f862a5",
+      "scenarioId": "admission-discharge-001-m8cx-008",
+      "runIdPrefix": "df88c218",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "108ac776-501d-4462-a0f9-f574bb409f49",
+      "severity": "high",
+      "fingerprint": "303642d4786fe652",
+      "scenarioId": "admission-double-booking-001-m8cx-004",
+      "runIdPrefix": "518b0f66",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "06f2e304-3b23-4eb7-ab53-c8bf6be5b370",
+      "severity": "critical",
+      "fingerprint": "25cfbfe37b34dcd3",
+      "scenarioId": "admission-double-booking-001-m8cx-004",
+      "runIdPrefix": "518b0f66",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "fc37a66c-fe69-4cc4-a5ab-308b6e02daa0",
+      "severity": "high",
+      "fingerprint": "9915da53fd892db6",
+      "scenarioId": "admission-double-booking-001-m8cx-004",
+      "runIdPrefix": "518b0f66",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "af30e7d6-6982-4d99-99bb-40db43fc1929",
+      "severity": "high",
+      "fingerprint": "f0afe0d70dada190",
+      "scenarioId": "admission-double-booking-001-m8cx-004",
+      "runIdPrefix": "518b0f66",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "a4b6d8ca-094e-4df7-bfdc-7b8f71ee72d7",
+      "severity": "medium",
+      "fingerprint": "68c457a21613e462",
+      "scenarioId": "admission-discharge-001-m8rs-001",
+      "runIdPrefix": "139a47a9",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "93bd475d-21d7-42fe-9dab-dac6352845fd",
+      "severity": "high",
+      "fingerprint": "50df1d69aac96d12",
+      "scenarioId": "admission-discharge-001-m8rs-001",
+      "runIdPrefix": "139a47a9",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "4ee8e0fb-8d0e-4564-a457-768b82192613",
+      "severity": "high",
+      "fingerprint": "bd1390f420e6a892",
+      "scenarioId": "llm-command-evolution-001",
+      "runIdPrefix": "b7984d8c",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "b69cf6ba-8ce3-4cba-b0ca-ded012621138",
+      "severity": "high",
+      "fingerprint": "c8a26389121b941c",
+      "scenarioId": "llm-command-evolution-001",
+      "runIdPrefix": "b7984d8c",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "4aa4c8a5-fdd2-4a12-ac76-0ec0bfc47dec",
+      "severity": "medium",
+      "fingerprint": "dd399ef1fab7dc52",
+      "scenarioId": "role-evolution-sign-001",
+      "runIdPrefix": "f760130e",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "d929bc46-86bf-4246-a8af-628a4e238483",
+      "severity": "medium",
+      "fingerprint": "dd399ef1fab7dc52",
+      "scenarioId": "role-evolution-sign-001",
+      "runIdPrefix": "df1e1f50",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "9df618b2-baa4-4d98-bf45-57f86510a21c",
+      "severity": "critical",
+      "fingerprint": "cb7471b16b549859",
+      "scenarioId": "discharge-critical-pending-001",
+      "runIdPrefix": "7d389618",
+      "reviewStatus": "open"
+    }
+  ]
+}

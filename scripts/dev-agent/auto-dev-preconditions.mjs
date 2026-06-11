@@ -9,6 +9,7 @@ import { dirname, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { loadEnvFile } from '../load-env.mjs';
+import { isEvolabPresent, resolveEvolabRoot } from './evolab-bridge.mjs';
 
 loadEnvFile();
 
@@ -77,6 +78,26 @@ if (git.stdout?.trim()) {
   warn('Working tree con cambios sin commit — el orquestador puede mezclar commits por tramo');
 } else {
   ok('Working tree limpio');
+}
+
+if (process.env.EPIS2_AUTO_DEV_EVOLAB === '1') {
+  const evolabRoot = resolveEvolabRoot();
+  if (isEvolabPresent(evolabRoot)) {
+    ok(`Evolab presente (${evolabRoot})`);
+    const doctor = spawnSync('npm', ['run', 'evolab:doctor'], {
+      cwd: root,
+      stdio: 'pipe',
+      shell: true,
+      encoding: 'utf8',
+      env: { ...process.env, EPIS2_EVOLAB_ROOT: evolabRoot, EPIS2_ROOT: root },
+    });
+    if (doctor.status === 0) ok('evolab:doctor OK');
+    else fail(`evolab:doctor falló — revisar clone en ${evolabRoot}`);
+  } else {
+    fail(`EPIS2_AUTO_DEV_EVOLAB=1 pero Evolab no encontrado en ${evolabRoot}`);
+  }
+} else {
+  ok('Evolab desactivado (EPIS2_AUTO_DEV_EVOLAB≠1)');
 }
 
 console.log('');

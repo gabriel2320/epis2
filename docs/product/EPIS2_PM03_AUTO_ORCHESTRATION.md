@@ -44,8 +44,27 @@ start-auto-dev-6h.ps1 / dev:auto:orchestrate
 | `CURSOR_API_KEY` | No | — | Habilita `Agent.prompt` real |
 | `OLLAMA_BASE_URL` | No | `http://127.0.0.1:11434` | Probe Ollama |
 | `EPIS2_AUTO_DEV_RESUME` | No | `1` | Saltar tramos `DONE` en ledger |
+| `EPIS2_AUTO_DEV_EVOLAB` | No | off | `1` → capa QA Evolab (doctor/smoke/validate) |
+| `EPIS2_AUTO_DEV_PARALLEL` | No | off | `1` → lanza evolve en background vía `dev:auto:parallel` |
+| `EPIS2_EVOLAB_PATCHING_ENABLED` | No | `false` | `true` prohibido en sesión integrada |
+| `EPIS2_EVOLAB_REQUIRE_HUMAN_APPROVAL` | No | `true` | Evolab no promueve sin humano |
+| `EPIS2_EVOLAB_LLM_CONCURRENCY` | No | `1` | Cap Ollama compartido PM-03 + Evolab |
+| `EPIS2_EVOLAB_ROOT` | No | `../epis2-evolab` | Clone repo hermano Evolab |
+| `EPIS2_EVOLAB_OPTIONAL` | No | — | `1` → bridge skip si falta clone |
 
 Copiar bloque en `.env` desde `.env.example` (sección PM-03).
+
+### Evolab (capa QA opcional)
+
+Con `EPIS2_AUTO_DEV_EVOLAB=1` el orquestador invoca el **puente** (`evolab-bridge.mjs`) — sin importar código Evolab:
+
+| Momento | Comando |
+|---------|---------|
+| Tras preconditions | `evolab:doctor` |
+| Post H-AUTO-2, H-AUTO-4 | `evolab:smoke` |
+| Post H-AUTO-6 | `evolab:validate` |
+
+Documentación: [EPIS2_EVOLAB_INTEGRATION.md](./EPIS2_EVOLAB_INTEGRATION.md).
 
 ---
 
@@ -70,6 +89,9 @@ Copiar bloque en `.env` desde `.env.example` (sección PM-03).
 ```powershell
 # Arranque Windows (recomendado)
 .\scripts\dev-agent\start-auto-dev-6h.ps1
+
+# Sesión integrada paralela (PM-03 + Evolab evolve) — ver EPIS2_EVOLAB_INTEGRATION.md
+.\scripts\dev-agent\start-auto-dev-integrated.ps1 -NoPush
 
 # Manual
 $env:EPIS2_AUTO_DEV_AUTHORIZED="1"
@@ -111,6 +133,7 @@ Abrir en Cursor: `@reports/auto-dev-cursor-prompt-tramo-N.md` + `@reports/dev-ag
 ## Gate
 
 ```bash
+npm run quality:evolab-bridge-gate
 npm run quality:pm03-orchestration-gate
 ```
 

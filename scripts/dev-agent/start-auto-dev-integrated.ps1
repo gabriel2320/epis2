@@ -1,10 +1,12 @@
-# EPIS2 — Arranque autodesarrollo 6 h (PM-03)
-# Uso: .\scripts\dev-agent\start-auto-dev-6h.ps1
-#      .\scripts\dev-agent\start-auto-dev-6h.ps1 -DryRun
+# EPIS2 - Arranque sesion integrada paralela (PM-03 + Evolab evolve)
+# Uso: .\scripts\dev-agent\start-auto-dev-integrated.ps1
+#      .\scripts\dev-agent\start-auto-dev-integrated.ps1 -NoPush
+#      .\scripts\dev-agent\start-auto-dev-integrated.ps1 -DryRun
 
 param(
   [switch]$DryRun,
   [switch]$NoPush,
+  [switch]$Push,
   [int]$Hours = 6
 )
 
@@ -14,22 +16,29 @@ Set-Location $Root
 
 $ollamaBase = if ($env:OLLAMA_BASE_URL) { $env:OLLAMA_BASE_URL } else { "http://127.0.0.1:11434" }
 
+# Seguridad: patching Evolab off; aprobacion humana obligatoria
 $env:EPIS2_AUTO_DEV_AUTHORIZED = "1"
+$env:EPIS2_AUTO_DEV_EVOLAB = "1"
+$env:EPIS2_AUTO_DEV_PARALLEL = "1"
 $env:EPIS2_AUTO_DEV_DURATION_HOURS = "$Hours"
 $env:EPIS2_AUTO_DEV_TRAMO_PAUSE_MS = "120000"
 $env:EPIS2_AUTO_DEV_OLLAMA = "1"
 $env:EPIS2_AUTO_DEV_OLLAMA_APPLY = "0"
 $env:EPIS2_AUTO_DEV_CURSOR_SDK = "1"
 $env:EPIS2_AUTO_DEV_RESUME = "1"
+$env:EPIS2_EVOLAB_PATCHING_ENABLED = "false"
+$env:EPIS2_EVOLAB_REQUIRE_HUMAN_APPROVAL = "true"
+$env:EPIS2_EVOLAB_LLM_CONCURRENCY = "1"
 
 $siblingEvolab = Join-Path (Split-Path $Root -Parent) "epis2-evolab"
 if (-not $env:EPIS2_EVOLAB_ROOT -and (Test-Path (Join-Path $siblingEvolab "package.json"))) {
   $env:EPIS2_EVOLAB_ROOT = $siblingEvolab
 }
 
-Write-Host "EPIS2 PM-03 — autodesarrollo ${Hours}h" -ForegroundColor Cyan
+Write-Host "EPIS2 - sesion integrada paralela (PM-03 + Evolab)" -ForegroundColor Cyan
 Write-Host "  Repo: $Root"
 Write-Host "  Ollama: $ollamaBase"
+Write-Host "  Seguridad: patching=off, human approval=on, LLM concurrency=1"
 if ($env:CURSOR_API_KEY) {
   Write-Host "  Cursor SDK: API key presente" -ForegroundColor Green
 } else {
@@ -38,15 +47,13 @@ if ($env:CURSOR_API_KEY) {
 if ($env:EPIS2_EVOLAB_ROOT) {
   Write-Host "  Evolab: $($env:EPIS2_EVOLAB_ROOT)" -ForegroundColor Green
 } else {
-  Write-Host "  Evolab: no configurado (EPIS2_AUTO_DEV_EVOLAB=1 requiere clone)" -ForegroundColor DarkGray
+  Write-Host "  Evolab: no configurado - requiere clone epis2-evolab" -ForegroundColor Red
+  exit 1
 }
 
-npm run dev:auto:preconditions
-if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+$parallelArgs = @("run", "dev:auto:parallel", "--", "--commit", "--continue-on-fail")
+if ($Push -and -not $NoPush) { $parallelArgs += "--push" }
+if ($DryRun) { $parallelArgs += "--dry-run" }
 
-$orchArgs = @("run", "dev:auto:orchestrate", "--", "--commit")
-if (-not $NoPush) { $orchArgs += "--push" }
-if ($DryRun) { $orchArgs += "--dry-run" }
-
-npm @orchArgs
+npm @parallelArgs
 exit $LASTEXITCODE

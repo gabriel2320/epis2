@@ -1,0 +1,5 @@
+{"at":"2026-06-11T02:33:38.747Z","event":"parallel-start","doCommit":true,"doPush":false,"continueOnFail":true,"skipEvolve":false,"evolveGenerations":"2","evolveBudgetMinutes":"300","env":{"EPIS2_EVOLAB_PATCHING_ENABLED":"false","EPIS2_EVOLAB_REQUIRE_HUMAN_APPROVAL":"true","EPIS2_EVOLAB_LLM_CONCURRENCY":"1","EPIS2_AUTO_DEV_TRAMO_PAUSE_MS":"120000"}}
+{"at":"2026-06-11T02:33:38.771Z","event":"stack-skipped","reason":"ollama-up"}
+{"at":"2026-06-11T02:33:42.447Z","event":"spawn-detached","label":"evolab-evolve","pid":20400,"cmd":"C:\\Program Files\\nodejs\\node.exe scripts/dev-agent/evolab-bridge.mjs evolve --generations 2 --budget-minutes 300 --json"}
+{"at":"2026-06-11T02:33:42.451Z","event":"evolab-evolve-start","pid":20400,"evolveLog":"C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\EPIS2\\reports\\evolab-evolve-parallel.log"}
+{"at":"2026-06-11T02:33:42.457Z","event":"spawn-orchestrator","pid":25536,"args":["run","dev:auto:orchestrate","--","--commit","--continue-on-fail"]}

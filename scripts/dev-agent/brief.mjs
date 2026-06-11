@@ -1,3 +1,5 @@
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { DEV_SUBAGENTS } from './subagents.mjs';
 import {
   getActivePhaseHint,
@@ -9,6 +11,22 @@ import {
   suggestPrimarySubagent,
 } from './context.mjs';
 import { buildSessionIndex } from './prompt-builder.mjs';
+import { isEvolabPresent, resolveEvolabRoot } from './evolab-bridge.mjs';
+
+function getEvolabOpenFindingsHint(root) {
+  if (!process.env.EPIS2_EVOLAB_ROOT?.trim() && !isEvolabPresent()) return null;
+  const syncPath = join(root, 'reports/evolab-open-findings.json');
+  if (!existsSync(syncPath)) {
+    return 'Evolab configurado — ejecutar `npm run dev:evolab:sync` para conteo de hallazgos abiertos';
+  }
+  try {
+    const data = JSON.parse(readFileSync(syncPath, 'utf8'));
+    const count = data.count ?? data.findings?.length ?? 0;
+    return `Evolab hallazgos abiertos: **${count}** (sync ${data.syncedAt ?? '?'})`;
+  } catch {
+    return 'Evolab sync ilegible — `npm run dev:evolab:sync`';
+  }
+}
 
 const AI_DEV_LOOP = [
   '**1. Alcance** — Declarar MF, archivos permitidos y prohibidos antes de editar.',
@@ -93,6 +111,11 @@ export async function buildDevBrief(root, opts) {
     lines.push('', '```', ...git.lines, '```');
   } else {
     lines.push('', '_Working tree limpio._');
+  }
+
+  const evolabHint = getEvolabOpenFindingsHint(root);
+  if (evolabHint) {
+    lines.push('', '## Evolab (QA externo)', '', `- ${evolabHint}`, `- Root: \`${resolveEvolabRoot()}\``);
   }
 
   lines.push(

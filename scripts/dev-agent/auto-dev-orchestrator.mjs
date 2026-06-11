@@ -25,6 +25,10 @@ const pauseMs = Number(process.env.EPIS2_AUTO_DEV_TRAMO_PAUSE_MS) || 120_000;
 const ollamaEnabled = process.env.EPIS2_AUTO_DEV_OLLAMA !== '0';
 const ollamaApply = process.env.EPIS2_AUTO_DEV_OLLAMA_APPLY === '1';
 const resume = process.env.EPIS2_AUTO_DEV_RESUME !== '0';
+const evolabEnabled = process.env.EPIS2_AUTO_DEV_EVOLAB === '1';
+
+const EVOLAB_SMOKE_TRAMOS = new Set([2, 4]);
+const EVOLAB_VALIDATE_TRAMOS = new Set([6]);
 
 const ledgerPath = join(root, 'docs/quality/auto-dev-6h-ledger.json');
 const logPath = join(root, 'reports/auto-dev-orchestrator-log.jsonl');
@@ -84,7 +88,9 @@ function elapsedMs(start) {
 async function main() {
   console.log('EPIS2 dev:auto:orchestrate — PM-03\n');
   console.log(`  Duración máx: ${durationHours} h · Pausa tramo: ${pauseMs} ms`);
-  console.log(`  Ollama: ${ollamaEnabled ? 'on' : 'off'} · Resume: ${resume ? 'on' : 'off'}\n`);
+  console.log(
+    `  Ollama: ${ollamaEnabled ? 'on' : 'off'} · Evolab: ${evolabEnabled ? 'on' : 'off'} · Resume: ${resume ? 'on' : 'off'}\n`,
+  );
 
   if ((doCommit || doPush) && process.env.EPIS2_AUTO_DEV_AUTHORIZED !== '1') {
     console.error('Set EPIS2_AUTO_DEV_AUTHORIZED=1 para commit/push');
@@ -94,6 +100,13 @@ async function main() {
   if (!dryRun) {
     const pre = runNode('scripts/dev-agent/auto-dev-preconditions.mjs');
     if (!pre.ok) process.exit(1);
+    if (evolabEnabled) {
+      console.log('\n▶ Evolab doctor (pre-orquestación)\n');
+      if (!runNpm('evolab:doctor').ok) {
+        log('evolab-doctor-failed', {});
+        process.exit(1);
+      }
+    }
   }
 
   const start = Date.now();
@@ -146,6 +159,26 @@ async function main() {
       const ollamaArgs = ['--', '--skip-plan'];
       if (ollamaApply) ollamaArgs.push('--apply');
       runNpm('dev:agent:ollama-auto', ollamaArgs);
+    }
+
+    if (evolabEnabled && EVOLAB_SMOKE_TRAMOS.has(order)) {
+      console.log(`\n▶ Evolab smoke (post tramo ${order})\n`);
+      if (!runNpm('evolab:smoke').ok) {
+        tramo.state = 'FAILED';
+        saveLedger(ledger);
+        log('evolab-smoke-failed', { order });
+        if (!args.includes('--continue-on-fail')) process.exit(1);
+      }
+    }
+
+    if (evolabEnabled && EVOLAB_VALIDATE_TRAMOS.has(order)) {
+      console.log(`\n▶ Evolab validate (post tramo ${order})\n`);
+      if (!runNpm('evolab:validate').ok) {
+        tramo.state = 'FAILED';
+        saveLedger(ledger);
+        log('evolab-validate-failed', { order });
+        if (!args.includes('--continue-on-fail')) process.exit(1);
+      }
     }
 
     await pauseBetweenTramos(pauseMs);
