@@ -136,4 +136,7 @@ async function main() {
   log('orchestrator-complete', { elapsedMs: elapsedMs(start) });
 }
 
-void main();
+main().catch((err) => {
+  console.error('dev:auto:orchestrate FAILED', err);
+  process.exit(1);
+});

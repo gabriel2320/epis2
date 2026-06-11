@@ -19,6 +19,7 @@ const doCommit = args.includes('--commit');
 const doPush = args.includes('--push');
 const parallel = args.includes('--parallel') || process.env.EPIS2_AUTO_DEV_PARALLEL === '1';
 const continueOnFail = args.includes('--continue-on-fail');
+const retryFailed = args.includes('--retry-failed');
 
 process.env = applyDevCycleEnv(process.env);
 
@@ -46,6 +47,7 @@ const npmArgs = ['run', targetScript, '--'];
 if (doCommit) npmArgs.push('--commit');
 if (doPush) npmArgs.push('--push');
 if (continueOnFail) npmArgs.push('--continue-on-fail');
+if (retryFailed) npmArgs.push('--retry-failed');
 if (dryRun) npmArgs.push('--dry-run');
 
 console.log(`\n▶ ${targetScript}\n`);

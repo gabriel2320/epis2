@@ -25,8 +25,9 @@ loadEnvFile();
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const logPath = join(root, 'reports/auto-dev-parallel-log.jsonl');
-const lockPath = join(root, 'reports/auto-dev-parallel.lock');
+const lockPath = join(root, 'reports/auto-dev-parallel.lock.json');
 const args = process.argv.slice(2);
+let evolveChild = null;
 const dryRun = args.includes('--dry-run');
 const doCommit = args.includes('--commit');
 const doPush = args.includes('--push');
@@ -62,6 +63,10 @@ function isPidAlive(pid) {
   }
 }
 
+function launcherCmd() {
+  return `node scripts/dev-agent/auto-dev-parallel-launcher.mjs ${args.join(' ')}`.trim();
+}
+
 function acquireSessionLock() {
   if (dryRun) return;
   mkdirSync(join(root, 'reports'), { recursive: true });
@@ -69,20 +74,36 @@ function acquireSessionLock() {
     try {
       const existing = JSON.parse(readFileSync(lockPath, 'utf8'));
       if (isPidAlive(existing.pid)) {
-        console.error(
-          `\n[FAIL] Sesión paralela ya activa (PID ${existing.pid}). Espera a que termine o borra ${lockPath}\n`,
+        const startedAt = existing.startedAt ?? existing.at ?? '?';
+        console.log(
+          `\n[INFO] dev:auto:parallel ya en ejecución — no se inicia una segunda instancia.`,
         );
-        process.exit(1);
+        console.log(`  PID:       ${existing.pid}`);
+        console.log(`  Inicio:    ${startedAt}`);
+        console.log(`  Comando:   ${existing.cmd ?? '?'}`);
+        console.log(`  Lock:      ${lockPath}\n`);
+        log('parallel-already-running', {
+          pid: existing.pid,
+          startedAt,
+          cmd: existing.cmd,
+        });
+        process.exit(0);
       }
+      log('parallel-lock-stale', {
+        stalePid: existing.pid,
+        startedAt: existing.startedAt ?? existing.at,
+      });
     } catch {
-      /* lock corrupto — sobrescribir */
+      log('parallel-lock-corrupt', { lockPath });
     }
   }
-  writeFileSync(
-    lockPath,
-    `${JSON.stringify({ pid: process.pid, at: new Date().toISOString() })}\n`,
-    'utf8',
-  );
+  const lock = {
+    pid: process.pid,
+    startedAt: new Date().toISOString(),
+    cmd: launcherCmd(),
+  };
+  writeFileSync(lockPath, `${JSON.stringify(lock)}\n`, 'utf8');
+  log('parallel-lock-acquired', { pid: lock.pid, cmd: lock.cmd });
 }
 
 function releaseSessionLock() {
@@ -93,6 +114,12 @@ function releaseSessionLock() {
   } catch {
     /* ignore */
   }
+}
+
+function cleanupAndExit(code) {
+  if (evolveChild) killChild(evolveChild, 'evolab-evolve');
+  releaseSessionLock();
+  process.exit(code);
 }
 
 function log(event, detail = {}) {
@@ -220,14 +247,8 @@ function killChild(child, label) {
 async function main() {
   acquireSessionLock();
   process.on('exit', releaseSessionLock);
-  process.on('SIGINT', () => {
-    releaseSessionLock();
-    process.exit(130);
-  });
-  process.on('SIGTERM', () => {
-    releaseSessionLock();
-    process.exit(143);
-  });
+  process.on('SIGINT', () => cleanupAndExit(130));
+  process.on('SIGTERM', () => cleanupAndExit(143));
 
   console.log('EPIS2 dev:auto:parallel — sesión integrada PM-03 + Evolab\n');
   console.log('  Seguridad: patching=off · human approval=on · LLM concurrency=1');
@@ -300,7 +321,6 @@ async function main() {
     runSyncNpm('dev:evolab:sync', [], { env: safetyEnv() });
   }
 
-  let evolveChild = null;
   if (!skipEvolve) {
     const evolveLog = join(root, 'reports/evolab-evolve-parallel.log');
     const evolveArgs = [
@@ -341,11 +361,14 @@ async function main() {
     runSyncNpm('dev:openclaw:sync', [], { env: safetyEnv() });
   }
 
-  log('parallel-complete', { orchestratorOk: orch.ok, orchestratorStatus: orch.status });
+  log('parallel-complete', { orchestratorOk: orch.ok, orchestratorStatus: orch.status, continueOnFail });
 
-  if (!orch.ok) {
+  if (!orch.ok && !continueOnFail) {
     console.error('\ndev:auto:parallel FAILED — orquestador PM-03 terminó con error');
     process.exit(orch.status || 1);
+  }
+  if (!orch.ok && continueOnFail) {
+    console.warn('\n[WARN] Orquestador terminó con error — continue-on-fail activo (revisar logs)');
   }
 
   console.log('\ndev:auto:parallel OK');

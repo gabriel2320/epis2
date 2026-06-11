@@ -7,6 +7,7 @@ param(
   [switch]$NoPush,
   [switch]$Push,
   [switch]$Sequential,
+  [switch]$RetryFailed,
   [int]$Hours = 6
 )
 
@@ -62,6 +63,7 @@ if ($env:EPIS2_EVOLAB_ROOT) {
 $cycleArgs = @("run", "dev:auto:cycle", "--", "--commit", "--continue-on-fail")
 if ($Push -and -not $NoPush) { $cycleArgs += "--push" }
 if ($DryRun) { $cycleArgs += "--dry-run" }
+if ($RetryFailed) { $cycleArgs += "--retry-failed" }
 if (-not $Sequential) { $cycleArgs += "--parallel" }
 
 npm @cycleArgs

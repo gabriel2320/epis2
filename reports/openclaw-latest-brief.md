@@ -1,37 +1,31 @@
 # OpenClaw EPIS2 Brief
 
 > **Microfase:** H-AUTO-CYCLE
-> **Modo:** max-power-max-power-patch-code (L3)
-> **Candados:** safe-run=true · patching=true · git-write=false
-> **Generado:** 2026-06-11T03:08:30.184Z
+> **Modo:** read-only-reviewer (L0)
+> **Candados:** safe-run=false · patching=false · git-write=false
+> **Generado:** 2026-06-11T03:09:29.670Z
 
 ## Restricciones activas
 
 - Read-only reviewer/planner — sin commits, push, ni edits autónomos
-- Perfil L3: safe-run allowlist activo
+- Perfil L0: solo brief/handoff
 - PostgreSQL = SoT · borradores ≠ datos aprobados · IA no aprueba ni firma
 - Sin import EPIS sin manifest · sin OpenMRS/Carbon · Home = Centro de Comando
 
 ## Git status (sanitized)
 
 ```
-## master...origin/master [ahead 3]
+## master...origin/master [ahead 4]
  M reports/auto-dev-6h-log.jsonl
  M reports/auto-dev-orchestrator-log.jsonl
  M reports/auto-dev-parallel-log.jsonl
- M reports/dev-agent-brief.md
- M reports/dev-agent-ollama-automation.json
  M reports/dev-agent-ollama-plan.json
- M reports/dev-agent-ollama-write-plan.json
  M reports/epis2-auto-dev-6h-close-2026-06-10.md
- M reports/epis2-continuous-dev-active-2026-06-11.md
+ M reports/epis2-dev-cycle-close-2026-06-11.md
  M reports/epis2-dev-cycle-log.jsonl
  M reports/epis2-dev-cycle-status.json
  M reports/evolab-open-findings.json
  M reports/openclaw-auto-dev-index.json
- M reports/openclaw-latest-brief.md
- M scripts/dev-agent/auto-dev-parallel-launcher.mjs
-?? reports/epis2-dev-cycle-close-2026-06-11.md
 ```
 
 ## Flags (.env.example keys only — valores no cargados)
