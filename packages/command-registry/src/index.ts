@@ -40,6 +40,16 @@ export {
   type PhraseSuiteEntry,
 } from './phrase-suite.js';
 export {
+  buildClinicalCommandDictionary,
+  CLINICAL_COMMAND_DICTIONARY,
+  filterClinicalCommandAutocomplete,
+  getClinicalCommandMenuGroups,
+  getDictionaryEntriesByCategory,
+  type ClinicalCommandCategory,
+  type ClinicalCommandDictionaryEntry,
+  type ClinicalCommandUiKind,
+} from './clinical-command-dictionary.js';
+export {
   CLINICAL_PHRASE_SUITE_50,
   CLINICAL_PHRASE_SUITE_MIN_USEFUL_RATIO,
   type ClinicalPhraseExpectation,

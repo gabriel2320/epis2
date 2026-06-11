@@ -83,6 +83,9 @@ export function buildCommandPhraseSuite(): PhraseSuiteEntry[] {
     { phrase: 'abrir farmacia', intent: 'prepare_pharmacy_review' },
     { phrase: 'registrar alergia', intent: 'register_allergy' },
     { phrase: 'registrar problema', intent: 'register_problem' },
+    { phrase: 'registrar diagnostico hipertension', intent: 'register_problem' },
+    { phrase: 'nuevo diagnostico cie-10', intent: 'register_problem' },
+    { phrase: 'impresion diagnostica', intent: 'register_problem' },
   ];
 
   for (const e of extras) push(e);

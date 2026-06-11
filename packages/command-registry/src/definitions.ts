@@ -487,13 +487,19 @@ const COMMAND_DEFINITIONS_CORE: readonly CommandDefCore[] = [
       'anotar problema',
       'problema activo',
       'registro de problema',
+      'registrar diagnostico',
+      'nuevo diagnostico',
+      'impresion diagnostica',
+      'hipotesis diagnostica',
+      'codigo cie-10',
+      'comorbilidad',
     ],
     routePath: INTENT_ROUTE_PATHS.register_problem,
     requiredPermission: 'command.execute',
     requiresPatient: true,
     priority: 60,
     match: (q) =>
-      /registrar\s+problema|nuevo\s+problema|anotar\s+problema|problema\s+(clinico|activo)|registro\s+de\s+problema/.test(
+      /registrar\s+(problema|diagnostico|diagnóstico)|nuevo\s+(problema|diagnostico|diagnóstico)|anotar\s+problema|problema\s+(clinico|activo)|registro\s+de\s+problema|impresion\s+diagnostica|hipotesis\s+diagnostica|cie-?10|comorbilidad/.test(
         q,
       ),
   },

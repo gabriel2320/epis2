@@ -269,6 +269,8 @@
     "quality:dev-agent-low-risk-write-gate": "node scripts/quality/validate-dev-agent-low-risk-write-gate.mjs",
     "quality:dev-agent-ollama-automation-gate": "node scripts/quality/validate-dev-agent-ollama-automation-gate.mjs",
     "dev:agent:close": "node scripts/dev-agent/close.mjs",
+    "dev:auto:6h": "node scripts/dev-agent/auto-dev-6h-runner.mjs",
+    "quality:auto-dev-6h-gate": "node scripts/quality/validate-auto-dev-6h-gate.mjs",
     "dev:agent:tramo-k": "node scripts/dev-agent/orchestrate.mjs --tramo K",
     "ai:pull-model": "ollama pull qwen3:8b",
     "ai:pull-coder-models": "node scripts/ollama/pull-coder-models.mjs",

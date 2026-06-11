@@ -5,6 +5,7 @@ import { useEffect, useMemo } from 'react';
 import type { ClinicalAlert, PatientLongitudinalResponse } from '@epis2/contracts';
 import { useAuth } from '../auth/AuthContext.js';
 import { classicCommandSuggestionLabels } from '../classic-md3/commandSuggestions.js';
+import { useCommandDictionarySuggestions } from '../clinical/useCommandDictionarySuggestions.js';
 import { ClinicalShell } from '../components/chart/ClinicalShell.js';
 import { PaperChartMode } from '../components/chart/PaperChartMode.js';
 import { TraditionalEhrMode } from '../components/chart/TraditionalEhrMode.js';
@@ -80,6 +81,15 @@ export function DualChartPatientPage({
     onResolved: () => {},
   });
 
+  const dictionarySuggestions = useCommandDictionarySuggestions(classicCommand.query, { patientId });
+  const clarificationSuggestions = classicCommandSuggestionLabels(classicCommand.lastResult);
+  const commandSuggestions =
+    clarificationSuggestions && clarificationSuggestions.length > 0
+      ? clarificationSuggestions
+      : dictionarySuggestions.length > 0
+        ? [...dictionarySuggestions]
+        : undefined;
+
   const setChartMode = (mode: ChartModeId) => {
     void navigate({
       to: '/espacio/ficha',
@@ -128,7 +138,7 @@ export function DualChartPatientPage({
         commandQuery={classicCommand.query}
         onCommandQueryChange={classicCommand.setQuery}
         onCommandSubmit={() => void classicCommand.submit()}
-        commandSuggestions={classicCommandSuggestionLabels(classicCommand.lastResult)}
+        commandSuggestions={commandSuggestions}
         onCommandSuggestion={(label) => void classicCommand.submit(label)}
         testId="epis2-dual-chart-ficha"
       >
