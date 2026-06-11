@@ -1,4 +1,4 @@
-import { boolean, date, integer, jsonb, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { boolean, char, date, integer, jsonb, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 
 export const appUsers = pgTable('app_users', {
   id: text('id').primaryKey(),
@@ -28,6 +28,14 @@ export const patientIdentifiers = pgTable('patient_identifiers', {
     .references(() => patients.id, { onDelete: 'cascade' }),
   system: text('system').notNull(),
   value: text('value').notNull(),
+  identifierType: text('identifier_type').notNull().default('RUN'),
+  rutNumero: integer('rut_numero'),
+  rutDv: char('rut_dv', { length: 1 }),
+  valueNormalized: text('value_normalized'),
+  countryCode: char('country_code', { length: 2 }).notNull().default('CL'),
+  validFrom: timestamp('valid_from', { withTimezone: true }),
+  validTo: timestamp('valid_to', { withTimezone: true }),
+  verified: boolean('verified').notNull().default(false),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   createdBy: text('created_by')
     .notNull()

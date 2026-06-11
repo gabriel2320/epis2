@@ -4,13 +4,14 @@ import {
   CHILE_RUT_IDENTIFIER_SYSTEM,
   evaluateDemoClinicalAlerts,
   normalizeRut,
+  parseRutParts,
 } from '@epis2/clinical-domain';
 import {
   DEMO_IDENTIFIER_SYSTEM,
   SYNTHETIC_LABEL,
   getDemoCaseByPatientId,
 } from '@epis2/test-fixtures';
-import { asc, desc, eq, ilike, and, inArray } from 'drizzle-orm';
+import { asc, desc, eq, ilike, and, inArray, or } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import {
   approvals,
@@ -102,17 +103,24 @@ export async function searchPatients(db: Database, query?: string) {
     return db.select().from(patients).where(eq(patients.isSynthetic, true)).limit(50);
   }
 
-  const rutNorm = normalizeRut(term);
+  const rutParts = parseRutParts(term);
+  const rutNorm = rutParts?.normalized ?? normalizeRut(term);
   if (rutNorm) {
+    const rutMatch =
+      rutParts != null
+        ? or(
+            eq(patientIdentifiers.value, rutNorm),
+            eq(patientIdentifiers.valueNormalized, rutNorm),
+            and(
+              eq(patientIdentifiers.rutNumero, rutParts.rutNumero),
+              eq(patientIdentifiers.rutDv, rutParts.rutDv),
+            ),
+          )
+        : or(eq(patientIdentifiers.value, rutNorm), eq(patientIdentifiers.valueNormalized, rutNorm));
     const idRows = await db
       .select({ patientId: patientIdentifiers.patientId })
       .from(patientIdentifiers)
-      .where(
-        and(
-          eq(patientIdentifiers.system, CHILE_RUT_IDENTIFIER_SYSTEM),
-          eq(patientIdentifiers.value, rutNorm),
-        ),
-      );
+      .where(and(eq(patientIdentifiers.system, CHILE_RUT_IDENTIFIER_SYSTEM), rutMatch));
     const ids = idRows.map((r) => r.patientId);
     if (ids.length === 0) return [];
     return db

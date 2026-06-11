@@ -29,6 +29,13 @@ export {
 } from './draftStates.js';
 export { CHILE_RUT_IDENTIFIER_SYSTEM } from './chile/constants.js';
 export {
+  CHILE_PATIENT_IDENTIFIER_TYPES,
+  DEFAULT_RUN_IDENTIFIER_TYPE,
+  isChilePatientIdentifierType,
+  type ChilePatientIdentifierType,
+} from './chile/identifier-types.js';
+export { parseRutParts, type RutParts } from './chile/rut-parts.js';
+export {
   cleanRutInput,
   computeRutVerifier,
   formatRut,

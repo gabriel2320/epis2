@@ -59,6 +59,8 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Nomenclatura: **Entre
 | **C-3** | **C-3a** ✓ · **C-3b** ✓ · **UX-CALM-PATIENT** ✓ (banner, iconos, span grid) | [`EPIS2_CLINICAL_SUMMARY_MD3.md`](../design/EPIS2_CLINICAL_SUMMARY_MD3.md) |
 | **C-4** | Staging ✓ · runbook prod ✓ (`.env.production.example`) · despliegue operador | [`EPIS2_DUAL_CHART_PROD_ROLLOUT.md`](../ops/EPIS2_DUAL_CHART_PROD_ROLLOUT.md) |
 | **PROG-PAPER-MODE** | MF-PAPER-03 ✓ IA meta · **MF-PAPER-04/05 READY** | [`EPIS2_PAPER_MODE_DEV_PLAN.md`](../product/EPIS2_PAPER_MODE_DEV_PLAN.md) |
+| **PROG-CHILE-CLINICAL** | **MF-CHILE-ID-01** ✓ migración 035 · tipos MINSAL · búsqueda RUT | [`EPIS2_CHILE_CLINICAL_MODEL.md`](./EPIS2_CHILE_CLINICAL_MODEL.md) |
+| backlog | **MF-CHILE-ADM-01** previsión · **MF-REGISTRY-META** | Tras CHILE-ID |
 | backlog | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | backlog | Ola 2+ — nota procedimiento clínica (PEND-002 defer) | No bloquea Hilo C |
 
