@@ -797,6 +797,8 @@ export const copy = {
       demoDataNotice: 'Datos demo — integración API en MF-PLANNER-01',
       weekPlaceholder: 'Vista semanal — próximo MF-PAPER-PLANNER-01',
       monthPlaceholder: 'Vista mensual — próximo MF-PAPER-PLANNER-02',
+      weekTitle: 'Agenda clínica semanal',
+      overflowSuffix: 'más',
     },
     draftNotice: 'Borrador — requiere revisión y firma humana',
     aiDraftNotice: 'Borrador IA — revisar antes de firmar.',

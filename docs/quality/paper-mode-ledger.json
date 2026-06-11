@@ -202,13 +202,21 @@
       {
         "id": "MF-PAPER-PLANNER-01",
         "name": "Vista semanal + algoritmos",
-        "state": "READY",
-        "gate": "quality:paper-planner-week-gate"
+        "state": "DONE",
+        "gate": "quality:paper-planner-week-gate",
+        "allowedPaths": [
+          "apps/web/src/components/chart/paper/planner/weekLayout.ts",
+          "apps/web/src/components/chart/paper/planner/WeeklyClinicalPage.tsx",
+          "apps/web/src/components/chart/paper/planner/demoWeekData.ts",
+          "apps/web/src/components/chart/paper/planner/PaperPlannerShell.tsx"
+        ],
+        "closureReport": "reports/epis2-mf-paper-planner-01-week.md",
+        "unblocks": ["MF-PAPER-PLANNER-02"]
       },
       {
         "id": "MF-PAPER-PLANNER-02",
         "name": "Vista mensual + markers",
-        "state": "BLOCKED",
+        "state": "READY",
         "gate": "quality:paper-planner-month-gate"
       },
       {

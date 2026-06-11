@@ -214,6 +214,7 @@
     "quality:paper-mode-fichapapel-reference-gate": "node scripts/quality/validate-paper-mode-fichapapel-reference-gate.mjs",
     "quality:paper-chart-section-tree-gate": "node scripts/quality/validate-paper-chart-section-tree-gate.mjs",
     "quality:paper-planner-scaffold-gate": "node scripts/quality/validate-paper-planner-scaffold-gate.mjs",
+    "quality:paper-planner-week-gate": "node scripts/quality/validate-paper-planner-week-gate.mjs",
     "quality:dual-chart-scaffold-gate": "node scripts/quality/validate-dual-chart-scaffold-gate.mjs",
     "quality:dual-chart-traditional-gate": "node scripts/quality/validate-dual-chart-traditional-gate.mjs",
     "quality:dual-chart-paper-sot-gate": "node scripts/quality/validate-dual-chart-paper-sot-gate.mjs",

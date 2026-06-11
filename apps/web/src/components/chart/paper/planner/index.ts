@@ -19,6 +19,18 @@ export {
 } from './demoAgendaData.js';
 export { DailyClinicalPage } from './DailyClinicalPage.js';
 export type { DailyClinicalPageProps } from './DailyClinicalPage.js';
+export { WeeklyClinicalPage } from './WeeklyClinicalPage.js';
+export type { WeeklyClinicalPageProps } from './WeeklyClinicalPage.js';
+export {
+  PLANNER_WEEK_MAX_ITEMS_PER_DAY,
+  buildWeekDayDates,
+  layoutWeekGrid,
+  startOfWeek,
+  type PaperPlannerWeekEvent,
+  type PaperPlannerWeekItem,
+  type WeekDayColumn,
+} from './weekLayout.js';
+export { DEMO_WEEK_EVENTS, DEMO_WEEK_START } from './demoWeekData.js';
 export { PaperPlannerShell } from './PaperPlannerShell.js';
 export type { PaperPlannerShellProps } from './PaperPlannerShell.js';
 export { PaperPlannerSurfaceTabs } from './PaperPlannerSurfaceTabs.js';
