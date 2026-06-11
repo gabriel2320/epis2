@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-11T03:12:36.562Z",
+  "generatedAt": "2026-06-11T03:15:08.604Z",
   "model": "qwen2.5-coder:7b",
   "route": {
     "function": "dev-plan",
@@ -10,11 +10,11 @@
   "ollamaUrl": "http://127.0.0.1:11434",
   "plan": {
     "activePhase": "B",
-    "nextMicrophase": "MF-183→204",
-    "objective": "Completar la Ola 2 y preparar la Ola 3 longitudinal.",
+    "nextMicrophase": "MF-183→190",
+    "objective": "Completar la Ola 2 y avanzar hacia la Ola 3 longitudinal.",
     "allowedPaths": [
       "apps/web/src/components/ClinicalFormEvolution",
-      "packages/clinical-productivity/src/PatientListGrid"
+      "packages/clinical-productivity"
     ],
     "forbiddenPatterns": [
       "OpenMRS",
@@ -31,8 +31,8 @@
       "ledger-keeper"
     ],
     "risks": [
-      "Dependencia de pruebas E2E completas para la Ola 2.",
-      "Revisión humana opcional en el piloto M3 automatizado."
+      "Complejidad de las formularios adicionales",
+      "Tiempo necesario para la aprobación humana"
     ],
     "requiresHumanReview": true
   }

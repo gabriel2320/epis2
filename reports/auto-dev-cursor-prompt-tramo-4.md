@@ -27,63 +27,81 @@ npm run check
 
 # EPIS2 — Dev Brief (IA asistida)
 
-> **Inicio rápido:** abrir `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-ollama-clinical.md` en Cursor y declarar alcance en el primer mensaje.
+> **Inicio rápido:** abrir `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-tramo-implementer.md` en Cursor y declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-09T21:51:19.823Z · **Fase:** B
+**Generado:** 2026-06-11T03:12:32.263Z · **Fase:** B · Tramo 0
 
 ## Estado del tablero (fuente canónica)
 
 - **En curso:** **Hilo C** — Ola 3 longitudinal — Receta A5 ✓ · piloto M3 automatizado ✓ (signoff humano opcional) · `epis2-hilo-c-p1-print-prescription-2026-06-09.md`
-- **Siguiente:** **P1**: P1b alto contraste ampliado · o Storybook familia `Print*` (Auditoría II §5)
-- **Siguiente:** P1b: Alto contraste ampliado (3.6 diferido — requiere signoff visual)
-- **Siguiente:** P1c: Fase 5 auditoría — checklist pre-producción (solo si sale del laboratorio)
+- **Siguiente:** **P1**: Revisión humana opcional post-captura M3 (hover/foco/rail/two-pane claro/oscuro) — evidencia en `reports/m3-visual-evidence/2026-06-10/`
+- **Siguiente:** **P1b**: **Clinical Calm Premium** — `THEME-CALM-01` + `UX-AESTHETIC P3` (tokens petróleo, islas tonales)
+- **Siguiente:** **P1c**: MF-CLINICAL-SUMMARY-B + `UX-CALM-PATIENT` (mosaico + banner + métricas labs)
 
 ## Objetivo sugerido
 
-- **P1**: P1b alto contraste ampliado · o Storybook familia `Print*` (Auditoría II §5)
+- **P1**: Revisión humana opcional post-captura M3 (hover/foco/rail/two-pane claro/oscuro) — evidencia en `reports/m3-visual-evidence/2026-06-10/`
+- **Ollama (≤24 h):** Completar la Ola 2 y avanzar con la Ola 3 longitudinal, enfocándose en las funcionalidades de impresión y gestión de documentos.
+- **MF propuesta:** MF-183→200
 
 ## Subagente primario
 
-**[`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md)** — IA clínica local (Ollama producto)
+**[`tramo-implementer`](./dev-agent-prompt-tramo-implementer.md)** — Implementador de tramo
 
 ## Secuencia completa
 
-1. `layers-integrator` — Integrador capas L3+L4+L5
-2. `ollama-dev-writer` — Escritor dev bajo riesgo (Ollama)
-3. `ollama-clinical` — IA clínica local (Ollama producto)
-4. `golden-guardian` — Guardián Golden Journey
-5. `gate-runner` — Ejecutor de gates
+1. `tramo-implementer` — Implementador de tramo
+2. `ollama-clinical` — IA clínica local (Ollama producto)
+3. `golden-guardian` — Guardián Golden Journey
+4. `gate-runner` — Ejecutor de gates
+5. `ledger-keeper` — Ledger microfases
 
 ## Working tree
 
-- Rama: `master` · cambios: 18
+- Rama: `master` · cambios: 23
 
 ```
-M README.md
-M docs/design/EPIS2_PRINTABLE_CLINICAL_DOCUMENTS_NORM.md
-M docs/product/EPIS2_COMPLETE_CAPABILITY_MAP.md
-M docs/product/EPIS2_RELEASE_ROADMAP.md
-M docs/product/EPIS2_TABLERO.md
-M docs/product/EPIS2_WAVE_EXECUTION_CANON.md
-M reports/dev-agent-brief.md
-M reports/dev-agent-prompt-gate-runner.md
-M reports/dev-agent-prompt-golden-guardian.md
-M reports/dev-agent-prompt-layers-integrator.md
-M reports/dev-agent-prompt-ollama-clinical.md
-M reports/epis2-wave-execution-canon-v1.md
-M scripts/dev-agent/brief.mjs
-M scripts/dev-agent/context.mjs
-?? docs/INDEX.md
-?? reports/INDEX.md
-?? reports/dev-agent-prompt-ollama-dev-writer.md
-?? reports/epis2-f4-sesion-documental-2026-06-09.md
+M docs/quality/auto-dev-6h-ledger.json
+M package.json
+M reports/auto-dev-6h-log.jsonl
+M reports/auto-dev-orchestrator-log.jsonl
+M reports/auto-dev-parallel-log.jsonl
+M reports/dev-agent-ollama-automation.json
+M reports/dev-agent-ollama-plan.json
+M reports/dev-agent-ollama-write-plan.json
+M reports/epis2-auto-dev-6h-close-2026-06-10.md
+M reports/epis2-dev-cycle-log.jsonl
+M reports/epis2-dev-cycle-status.json
+M reports/evolab-open-findings.json
+M reports/openclaw-auto-dev-index.json
+M reports/openclaw-latest-brief.md
+M reports/openclaw-latest-handoff.md
+M scripts/dev-agent/auto-dev-orchestrator.mjs
+M scripts/dev-agent/auto-dev-parallel-launcher.mjs
+M scripts/dev-agent/auto-dev-preconditions.mjs
+M scripts/dev-agent/openclaw-dev-cycle-launcher.mjs
+M scripts/dev-agent/start-auto-dev-integrated.ps1
+?? reports/auto-dev-continuous-log.jsonl
+?? reports/auto-dev-continuous.lock
+?? scripts/dev-agent/auto-dev-session-lock.mjs
 ```
+
+## Evolab (QA externo)
+
+- Evolab hallazgos abiertos: **24** (sync 2026-06-11T03:12:28.380Z)
+- Root: `C:\Users\gdela\OneDrive\Documentos Importantes\epis2-evolab`
+
+## OpenClaw (revisores read-only)
+
+- Brief: `@reports/openclaw-latest-brief.md`
+- Handoff cierre: `npm run openclaw:handoff -- --agents auto`
+- Docs: `docs/product/EPIS2_OPENCLAW_INTEGRATION.md`
 
 ## Stack local
 
-- Estación: tier **minimal** · 15 GB RAM · ? GB VRAM
+- Estación: tier **performance** · 63 GB RAM · 12 GB VRAM
 - Ollama clínica: ✓ up → `qwen3:8b`
-- dev-plan: `qwen3:8b` (auto) · dev-write: `qwen3:8b` (auto)
+- dev-plan: `qwen2.5-coder:7b` (auto) · dev-write: `deepseek-coder-v2:16b` (auto)
 - Enrutado: `npm run ollama:route` · pull coders: `npm run ai:pull-coder-models`
 - .env: ✓ · DATABASE_URL: ✓
 
@@ -101,34 +119,94 @@ npm run dev:agent:ollama-write  # solo parches bajo riesgo (docs/reportes)
 
 - **1. Alcance** — Declarar MF, archivos permitidos y prohibidos antes de editar.
 - **2. Contexto mínimo** — Leer solo canon + prompt del subagente activo; no re-leer todo el repo.
-- **3. Diff mínimo** — Un problema, un PR lógico; reutilizar patrones existentes (`DashboardPanelGridSection`, RAD shell).
-- **4. Verificar tarde** — `npm run check` al cerrar, no tras cada línea (salvo typecheck puntual).
-- **5. Gates del rol** — Ejecutar solo los del subagente + cierre estándar.
-- **6. Reporte** — `reports/epis2-*.md` con alcance, gates, riesgos, próximo paso exacto.
-- **7. Humano decide** — Sin commit/push automático; Ollama auto (`dev:agent:ollama-auto`) o apply L0 tras revisar plan.
+- **3. Diff mínimo** — Un problema, un PR lógico; reutilizar patrones existentes (`DashboardPanelGridSectio
 
-## Prohibido
+## OpenClaw brief (read-only — revisar antes de implementar)
 
-- OpenMRS / Carbon / dashboard como home
-- Import masivo EPIS sin manifest
-- Auto-aprobación clínica · IA escribiendo SoT
-- Segundo Command/Form Registry temporal
+@reports/openclaw-latest-brief.md
 
-## Cierre sesión
+# OpenClaw EPIS2 Brief
 
-```bash
-npm run check
-npm run test
-npm run db:validate
-npm run quality:layers-integration-gate   # si tocaste UI
-npm run dev:agent:close                     # checklist + plantilla reporte
+> **Microfase:** H-AUTO-4
+> **Modo:** max-power-max-power-patch-code (L3)
+> **Candados:** safe-run=true · patching=true · git-write=false
+> **Generado:** 2026-06-11T03:15:05.271Z
+
+## Restricciones activas
+
+- Read-only reviewer/planner — sin commits, push, ni edits autónomos
+- Perfil L3: safe-run allowlist activo
+- PostgreSQL = SoT · borradores ≠ datos aprobados · IA no aprueba ni firma
+- Sin import EPIS sin manifest · sin OpenMRS/Carbon · Home = Centro de Comando
+
+## Git status (sanitized)
+
+```
+## master...origin/master [ahead 8]
+ M docs/quality/auto-dev-6h-ledger.json
+ M reports/auto-dev-6h-log.jsonl
+ M reports/auto-dev-cursor-prompt-tramo-4.md
+ M reports/auto-dev-cursor-queue.jsonl
+ M reports/auto-dev-orchestrator-log.jsonl
+ M reports/dev-agent-ollama-plan.json
+ M reports/epis2-auto-dev-6h-close-2026-06-10.md
+ M reports/epis2-dev-cycle-log.jsonl
+ M reports/epis2-dev-cycle-status.json
+ M reports/openclaw-latest-brief.md
 ```
 
----
+## Flags (.env.example keys only — valores no cargados)
 
-# EPIS2 — Sesión subagentes de desarrollo
+```json
+{
+  "NODE_ENV": "(see .env.example — value not loaded)",
+  "API_HOST": "(see .env.example — value not loaded)",
+  "API_PORT": "(see .env.example — value not loaded)",
+  "DATABASE_URL": "(see .env.example — value not loaded)",
+  "VITE_API_BASE_URL": "(see .env.example — value not loaded)",
+  "SESSION_SECRET": "(see .env.example — value not loaded)",
+  "SESSION_COOKIE_NAME": "(see .env.example — value not loaded)",
+  "WEB_ORIGIN": "(see .env.example — value not loaded)",
+  "AI_HOST": "(see .env.example — value not loaded)",
+  "AI_PORT": "(see .env.example — value not loaded)",
+  "OLLAMA_BASE_URL": "(see .env.example — value not loaded)",
+  "OLLAMA_MODEL": "(see .env.example — value not loaded)",
+  "OLLAMA_DEV_MODEL": "(see .env.example — value not loaded)",
+  "OLLAMA_ROUTE_MODE": "(see .env.example — value not loaded)",
+  "LOCAL_AI_BASE_URL": "(see .env.example — value not loaded)"
+}
+```
 
-**Fas
+## Agente: Security/PHI Reviewer
+
+- **Skill:** `.openclaw/epis2/skills/epis2-security-phi-reviewer/SKILL.md`
+- **Gates sugeridos (solo lectura):** `npm run check`, `npm run legacy:audit`, `npm run db:validate`
+
+### Archivos a revisar
+
+- `.env.example`
+- `docs/product/PRODUCT_INVARIANTS.md`
+- `scripts/legacy-audit/detect-duplicate-registries.mjs`
+- `scripts/legacy-audit/detect-forbidden-dependencies.mjs`
+- `scripts/legacy-audit/detect-legacy-routes.mjs`
+- `scripts/legacy-audit/detect-secrets-and-sensitive-data.mjs`
+- `scripts/legacy-audit/paths.mjs`
+- `scripts/legacy-audit/scan-donor-repositories.mjs`
+- `scripts/legacy-audit/validate-import-manifest.mjs`
+- `scripts/legacy-audit/validate-quarantine.mjs`
+- `docs/legacy/EPIS_POSTMORTEM.md`
+
+## Agente: Architecture/Legacy Reviewer
+
+- **Skill:** `.openclaw/epis2/skills/epis2-architecture-reviewer/SKILL.md`
+- **Gates sugeridos (solo lectura):** `npm run architecture:validate`, `npm run legacy:validate-manifest`
+
+### Archivos a revisar
+
+- `docs/PRODUCT_CANON.md`
+- `legacy-import-manifest.json`
+- `docs/legacy/LEGA
+
 
 ## Reglas
 

@@ -1,9 +1,9 @@
 # OpenClaw EPIS2 Brief
 
-> **Microfase:** H-AUTO-0
+> **Microfase:** H-AUTO-4
 > **Modo:** max-power-max-power-patch-code (L3)
 > **Candados:** safe-run=true · patching=true · git-write=false
-> **Generado:** 2026-06-11T03:12:31.675Z
+> **Generado:** 2026-06-11T03:15:05.271Z
 
 ## Restricciones activas
 
@@ -15,30 +15,17 @@
 ## Git status (sanitized)
 
 ```
-## master...origin/master [ahead 6]
+## master...origin/master [ahead 8]
  M docs/quality/auto-dev-6h-ledger.json
- M package.json
  M reports/auto-dev-6h-log.jsonl
+ M reports/auto-dev-cursor-prompt-tramo-4.md
+ M reports/auto-dev-cursor-queue.jsonl
  M reports/auto-dev-orchestrator-log.jsonl
- M reports/auto-dev-parallel-log.jsonl
- M reports/dev-agent-ollama-automation.json
  M reports/dev-agent-ollama-plan.json
- M reports/dev-agent-ollama-write-plan.json
  M reports/epis2-auto-dev-6h-close-2026-06-10.md
  M reports/epis2-dev-cycle-log.jsonl
  M reports/epis2-dev-cycle-status.json
- M reports/evolab-open-findings.json
- M reports/openclaw-auto-dev-index.json
  M reports/openclaw-latest-brief.md
- M reports/openclaw-latest-handoff.md
- M scripts/dev-agent/auto-dev-orchestrator.mjs
- M scripts/dev-agent/auto-dev-parallel-launcher.mjs
- M scripts/dev-agent/auto-dev-preconditions.mjs
- M scripts/dev-agent/openclaw-dev-cycle-launcher.mjs
- M scripts/dev-agent/start-auto-dev-integrated.ps1
-?? reports/auto-dev-continuous-log.jsonl
-?? reports/auto-dev-continuous.lock
-?? scripts/dev-agent/auto-dev-session-lock.mjs
 ```
 
 ## Flags (.env.example keys only — valores no cargados)
@@ -151,66 +138,76 @@
 - `reports/dev-agent-prompt-gate-runner.md`
 - … +10 más bajo `reports`
 
-## Agente: Microphase Ledger Reviewer
+## Agente: Golden Journey Reviewer
 
-- **Skill:** `.openclaw/epis2/skills/epis2-ledger-reviewer/SKILL.md`
-- **Gates sugeridos (solo lectura):** `npm run quality:microphases`, `npm run quality:microphase-next`
-
-### Archivos a revisar
-
-- `docs/quality/microphase-ledger.json`
-- `docs/quality/MICROPHASE_PROGRAM.md`
-- `docs/product/EPIS2_TABLERO.md`
-
-## Agente: AI Eval Reviewer
-
-- **Skill:** `.openclaw/epis2/skills/epis2-eval-reviewer/SKILL.md`
-- **Gates sugeridos (solo lectura):** `npm run quality:ai-tramo-evals-gate`, `npm run ai:evals:live`
+- **Skill:** `.openclaw/epis2/skills/epis2-golden-reviewer/SKILL.md`
+- **Gates sugeridos (solo lectura):** `npm run quality:golden-journey`, `npm run test:e2e:ux-g02`
 
 ### Archivos a revisar
 
-- `docs/product/EPIS2_AI_TRAMO_EVALS.md`
-- `scripts/ai` — *(no encontrado o vacío)*
-- `packages/clinical-forms/src/blueprints/admission-note.test.ts`
-- `packages/clinical-forms/src/blueprints/admission-note.ts`
-- `packages/clinical-forms/src/blueprints/allergy-entry.ts`
-- `packages/clinical-forms/src/blueprints/clinical-problem-entry.ts`
-- `packages/clinical-forms/src/blueprints/discharge-summary.ts`
-- `packages/clinical-forms/src/blueprints/evolution-note.ts`
-- `packages/clinical-forms/src/blueprints/imaging-request.ts`
-- `packages/clinical-forms/src/blueprints/index.ts`
-- `packages/clinical-forms/src/blueprints/lab-request.ts`
-- `packages/clinical-forms/src/blueprints/medical-certificate.test.ts`
-- `packages/clinical-forms/src/blueprints/medical-certificate.ts`
-- `packages/clinical-forms/src/blueprints/medication-administration.ts`
-- `packages/clinical-forms/src/blueprints/medication-reconciliation.test.ts`
-- `packages/clinical-forms/src/blueprints/medication-reconciliation.ts`
-- `packages/clinical-forms/src/blueprints/nursing-note.ts`
-- … +10 más bajo `packages/clinical-forms/src/blueprints`
-- `reports/ai-evals-live-latest.json` — *(no encontrado o vacío)*
-
-## Agente: Clinical Safety Reviewer
-
-- **Skill:** `.openclaw/epis2/skills/epis2-clinical-safety-reviewer/SKILL.md`
-- **Gates sugeridos (solo lectura):** `npm run test`, `npm run quality:tramos-clinical-signoff-gate`
-
-### Archivos a revisar
-
-- `packages/clinical-domain/src/clinicalSafety/evaluate.test.ts`
-- `packages/clinical-domain/src/clinicalSafety/evaluate.ts`
-- `packages/clinical-domain/src/clinicalSafety/fromDemoContext.test.ts`
-- `packages/clinical-domain/src/clinicalSafety/fromDemoContext.ts`
-- `packages/clinical-domain/src/clinicalSafety/rules.ts`
-- `packages/clinical-domain/src/clinicalSafety/types.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/evaluate.test.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/evaluate.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/fromSafetyInput.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/rules.test.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/rules.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/toSafetyWarnings.ts`
-- `packages/clinical-domain/src/clinicalDecisionRules/types.ts`
-- `packages/clinical-domain/src/draftStates.ts`
 - `docs/quality/GOLDEN_CLINICAL_JOURNEY.md`
+- `e2e/a11y-smoke.spec.ts`
+- `e2e/clinical-textbox-evolution-draft.spec.ts`
+- `e2e/dual-chart-modes.spec.ts`
+- `e2e/golden-command-evolution.spec.ts`
+- `e2e/golden-draft-approval.spec.ts`
+- `e2e/golden-v2-admission-discharge.spec.ts`
+- `e2e/helpers/demoPatient.ts`
+- `e2e/login-gateway.spec.ts`
+- `e2e/m3-visual-signoff-capture.spec.ts`
+- `e2e/m3-visual-signoff.spec.ts`
+- `e2e/mobile-drawer.spec.ts`
+- `e2e/ola1c-results-journey.spec.ts`
+- `e2e/ola2-ambulatory-m3-ui.spec.ts`
+- `e2e/ola2-ambulatory-m3-ui.spec.ts-snapshots/ola2-comando-chromium-win32.png`
+- `e2e/ola2-ambulatory-m3-ui.spec.ts-snapshots/ola2-medical-certificate-chromium-win32.png`
+- … +10 más bajo `e2e`
+- `scripts/quality/run-golden-journey.mjs` — *(no encontrado o vacío)*
+
+## Agente: Programming / OpenClaw Support
+
+- **Skill:** `.openclaw/epis2/skills/epis2-programming-agent/SKILL.md`
+- **Gates sugeridos (solo lectura):** `npm run quality:openclaw-gate`, `npm run quality:openclaw-cycle-gate`, `npm run check`
+
+### Archivos a revisar
+
+- `scripts/dev-agent/auto-dev-6h-runner.mjs`
+- `scripts/dev-agent/auto-dev-continuous.mjs`
+- `scripts/dev-agent/auto-dev-orchestrator.mjs`
+- `scripts/dev-agent/auto-dev-parallel-launcher.mjs`
+- `scripts/dev-agent/auto-dev-preconditions.mjs`
+- `scripts/dev-agent/auto-dev-session-lock.mjs`
+- `scripts/dev-agent/brief.mjs`
+- `scripts/dev-agent/close.mjs`
+- `scripts/dev-agent/context.mjs`
+- `scripts/dev-agent/context.test.mjs`
+- `scripts/dev-agent/cursor-sdk-tramo.mjs`
+- `scripts/dev-agent/dev-cycle-sync.mjs`
+- `scripts/dev-agent/evolab-bridge.mjs`
+- `scripts/dev-agent/evolab-sync.mjs`
+- `scripts/dev-agent/generate-auto-dev-cursor-prompt.mjs`
+- … +10 más bajo `scripts/dev-agent`
+- `docs/product/EPIS2_OPENCLAW_INTEGRATION.md`
+- `docs/product/EPIS2_DEV_CYCLE_OPENCLAW.md`
+- `docs/product/EPIS2_PM03_AUTO_ORCHESTRATION.md`
+- `reports/openclaw-latest-brief.md`
+- `reports/openclaw-latest-handoff.md`
+- `reports/openclaw-programming-latest.md`
+- `reports/auto-dev-cursor-prompt-tramo-1.md`
+- `.openclaw/epis2/policies/epis2-auto-dev-locks.md`
+- `.openclaw/epis2/policies/epis2-forbidden-actions.md`
+- `.openclaw/epis2/policies/epis2-readonly-policy.md`
+- `.openclaw/epis2/policies/README.md`
+- `.openclaw/epis2/README.md`
+- `.openclaw/epis2/skills/epis2-architecture-reviewer/SKILL.md`
+- `.openclaw/epis2/skills/epis2-clinical-safety-reviewer/SKILL.md`
+- `.openclaw/epis2/skills/epis2-eval-reviewer/SKILL.md`
+- `.openclaw/epis2/skills/epis2-golden-reviewer/SKILL.md`
+- `.openclaw/epis2/skills/epis2-ledger-reviewer/SKILL.md`
+- `.openclaw/epis2/skills/epis2-programming-agent/SKILL.md`
+- `.openclaw/epis2/skills/epis2-release-reviewer/SKILL.md`
+- `.openclaw/epis2/skills/epis2-security-phi-reviewer/SKILL.md`
+- `.openclaw/epis2/skills/epis2-ux-reviewer/SKILL.md`
 
 ## Comandos de verificación sugeridos (humanos / Cursor)
 
@@ -224,4 +221,4 @@ npm run db:validate
 ## Prompt semilla para OpenClaw
 
 Actúa como revisor read-only EPIS2. No modifiques archivos. No ejecutes push/commit/.env.
-Microfase objetivo: H-AUTO-0. Revisa los archivos listados y entrega hallazgos en formato handoff.
+Microfase objetivo: H-AUTO-4. Revisa los archivos listados y entrega hallazgos en formato handoff.

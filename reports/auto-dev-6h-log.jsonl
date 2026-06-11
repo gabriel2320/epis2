@@ -41,3 +41,7 @@
 {"at":"2026-06-11T03:11:39.814Z","event":"complete","orders":[2]}
 {"at":"2026-06-11T03:12:29.213Z","event":"tramo-start","id":"H-AUTO-0","order":0}
 {"at":"2026-06-11T03:13:04.702Z","event":"tramo-done","id":"H-AUTO-0","order":0}
+{"at":"2026-06-11T03:13:05.074Z","event":"complete","orders":[0]}
+{"at":"2026-06-11T03:14:15.083Z","event":"tramo-start","id":"H-AUTO-4","order":4}
+{"at":"2026-06-11T03:15:09.135Z","event":"tramo-start","id":"H-AUTO-4","order":4}
+{"at":"2026-06-11T03:15:20.736Z","event":"tramo-done","id":"H-AUTO-4","order":4}

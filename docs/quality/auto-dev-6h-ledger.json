@@ -71,7 +71,7 @@
       "id": "H-AUTO-4",
       "name": "Tests + repair loop",
       "order": 4,
-      "state": "FAILED",
+      "state": "DONE",
       "commands": [
         "check"
       ],
