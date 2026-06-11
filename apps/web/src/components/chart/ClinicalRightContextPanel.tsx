@@ -1,11 +1,21 @@
 import { copy } from '@epis2/design-system';
-import { Box, EpisButton, EpisM3Text, Stack, Typography, epis2TraditionalChartTokens } from '@epis2/epis2-ui';
-import type { ReactNode } from 'react';
+import { Box, Chip, EpisButton, EpisM3Text, Stack, Typography, epis2TraditionalChartTokens } from '@epis2/epis2-ui';
+import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
 
 export type PaperAiDraftHint = {
   sectionId: string;
   sectionLabel: string;
 };
+
+export type ClinicalContextPanelMeta = {
+  setAiAvailable: (available: boolean | null) => void;
+};
+
+export const ClinicalContextPanelMetaContext = createContext<ClinicalContextPanelMeta | null>(null);
+
+export function useClinicalContextPanelMeta(): ClinicalContextPanelMeta | null {
+  return useContext(ClinicalContextPanelMetaContext);
+}
 
 export type ClinicalRightContextPanelProps = {
   children: ReactNode;
@@ -13,6 +23,8 @@ export type ClinicalRightContextPanelProps = {
   onToggle?: (() => void) | undefined;
   /** Borradores IA pendientes en modo papel (MF-PAPER-08). */
   paperAiHints?: readonly PaperAiDraftHint[] | undefined;
+  /** MF-TE-06 — eventos visibles en timeline del panel. */
+  contextEventCount?: number | undefined;
   testId?: string | undefined;
 };
 
@@ -22,9 +34,12 @@ export function ClinicalRightContextPanel({
   open = true,
   onToggle,
   paperAiHints,
+  contextEventCount,
   testId = 'epis2-clinical-right-context-panel',
 }: ClinicalRightContextPanelProps) {
   const t = epis2TraditionalChartTokens;
+  const [aiAvailable, setAiAvailable] = useState<boolean | null>(null);
+  const meta = useMemo<ClinicalContextPanelMeta>(() => ({ setAiAvailable }), []);
 
   if (!open) {
     return (
@@ -66,14 +81,37 @@ export function ClinicalRightContextPanel({
         borderColor: t.borderColor,
         bgcolor: 'background.paper',
         overflow: 'auto',
-        p: 2,
+        p: 1.5,
         display: { xs: 'none', lg: 'block' },
       }}
     >
-      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1.5 }}>
-        <EpisM3Text role="titleMedium" component="h2">
-          {copy.chartModes.contextPaneTitle}
-        </EpisM3Text>
+      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1 }}>
+        <Stack spacing={0.25}>
+          <Stack direction="row" alignItems="center" spacing={0.75} flexWrap="wrap">
+            <EpisM3Text role="titleMedium" component="h2">
+              {copy.chartModes.contextPaneTitle}
+            </EpisM3Text>
+            {aiAvailable !== null ? (
+              <Chip
+                size="small"
+                label={aiAvailable ? copy.ai.statusOn : copy.ai.statusOff}
+                color={aiAvailable ? 'success' : 'default'}
+                variant="outlined"
+                data-testid="epis2-context-panel-ai-status"
+              />
+            ) : null}
+          </Stack>
+          {contextEventCount !== undefined ? (
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              data-testid="epis2-context-event-count"
+              sx={{ fontVariantNumeric: 'tabular-nums' }}
+            >
+              {contextEventCount} eventos visibles
+            </Typography>
+          ) : null}
+        </Stack>
         {onToggle ? (
           <EpisButton
             appearance="text"
@@ -104,7 +142,7 @@ export function ClinicalRightContextPanel({
           </Stack>
         </Box>
       ) : null}
-      {children}
+      <ClinicalContextPanelMetaContext.Provider value={meta}>{children}</ClinicalContextPanelMetaContext.Provider>
     </Box>
   );
 }

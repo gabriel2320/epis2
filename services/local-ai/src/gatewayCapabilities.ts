@@ -1,12 +1,19 @@
 import { listAssistBlueprints } from './assistSchemas.js';
+import type { AiConfig } from './config.js';
 import { listDraftPromptSpecs, PROMPT_CATALOG_VERSION } from './draftPromptCatalog.js';
 
 const AI_DISCLAIMER =
-  'Asistencia IA local — borrador sugerido; requiere revisión humana antes de aprobar.';
+  'Asistencia IA — borrador sugerido; requiere revisión humana antes de aprobar.';
 
 export type LocalAiCapabilities = {
   operational: boolean;
-  provider: 'ollama';
+  provider: 'ollama' | 'openai' | 'router';
+  inferenceMode: AiConfig['AI_INFERENCE_MODE'];
+  cloudEnabled: boolean;
+  providers: {
+    ollama: 'up' | 'down';
+    openai: 'up' | 'down' | 'disabled';
+  };
   structuredSchemas: string[];
   clinicalPromptIds: string[];
   promptCatalogVersion: string;
@@ -20,15 +27,28 @@ export type LocalAiCapabilities = {
   disclaimer: string;
 };
 
-export function buildLocalAiCapabilities(ollamaUp: boolean): LocalAiCapabilities {
+export function buildLocalAiCapabilities(
+  config: AiConfig,
+  ollamaUp: boolean,
+  openaiUp: boolean,
+): LocalAiCapabilities {
+  const cloudConfigured = config.AI_CLOUD_ENABLED && Boolean(config.OPENAI_API_KEY?.trim());
+  const operational = ollamaUp || (cloudConfigured && openaiUp);
+
   return {
-    operational: ollamaUp,
-    provider: 'ollama',
+    operational,
+    provider: config.AI_INFERENCE_MODE === 'router' ? 'router' : config.AI_INFERENCE_MODE,
+    inferenceMode: config.AI_INFERENCE_MODE,
+    cloudEnabled: config.AI_CLOUD_ENABLED,
+    providers: {
+      ollama: ollamaUp ? 'up' : 'down',
+      openai: !cloudConfigured ? 'disabled' : openaiUp ? 'up' : 'down',
+    },
     structuredSchemas: listAssistBlueprints().map((b) => b.id),
     clinicalPromptIds: listDraftPromptSpecs().map((p) => p.blueprintId),
     promptCatalogVersion: PROMPT_CATALOG_VERSION,
     capabilities: {
-      draftAssist: ollamaUp,
+      draftAssist: operational,
       commandRouteAssist: ollamaUp,
       chat: false,
       toolCalling: false,

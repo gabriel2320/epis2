@@ -45,5 +45,8 @@ export {
 export { DEMO_WEEK_EVENTS, DEMO_WEEK_START } from './demoWeekData.js';
 export { PaperPlannerShell } from './PaperPlannerShell.js';
 export type { PaperPlannerShellProps } from './PaperPlannerShell.js';
+export { PaperPlannerCommandHints } from './PaperPlannerCommandHints.js';
+export type { PaperPlannerCommandHintsProps } from './PaperPlannerCommandHints.js';
+export { usePaperPlannerCommands } from './usePaperPlannerCommands.js';
 export { PaperPlannerSurfaceTabs } from './PaperPlannerSurfaceTabs.js';
 export type { PaperPlannerSurfaceTabsProps } from './PaperPlannerSurfaceTabs.js';

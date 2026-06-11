@@ -1,5 +1,6 @@
 import { copy } from '@epis2/design-system';
-import { Box, Stack, Typography, epis2TraditionalChartTokens } from '@epis2/epis2-ui';
+import { Box, EpisM3Text, Stack, epis2TraditionalChartTokens } from '@epis2/epis2-ui';
+import { EPIS_CLINICAL_CARD_MAX_FONT_WEIGHT } from '../../quality/uiDensityRules.js';
 
 /** 17 secciones clínicas del canon visual §6 (MF-DUAL-CHART-05). */
 export const TRADITIONAL_SECTION_IDS = [
@@ -27,6 +28,8 @@ export type TraditionalSectionId = (typeof TRADITIONAL_SECTION_IDS)[number];
 export type TraditionalSectionNavProps = {
   activeSection?: TraditionalSectionId | undefined;
   onSectionChange?: ((section: TraditionalSectionId) => void) | undefined;
+  /** Filtra ítems vacíos en demo (MF-NORM-10). */
+  visibleSectionIds?: readonly TraditionalSectionId[] | undefined;
   testId?: string | undefined;
 };
 
@@ -34,9 +37,11 @@ export type TraditionalSectionNavProps = {
 export function TraditionalSectionNav({
   activeSection = 'navSummary',
   onSectionChange,
+  visibleSectionIds,
   testId = 'epis2-traditional-section-nav',
 }: TraditionalSectionNavProps) {
   const t = epis2TraditionalChartTokens;
+  const sectionIds = visibleSectionIds ?? TRADITIONAL_SECTION_IDS;
 
   return (
     <Box
@@ -55,14 +60,13 @@ export function TraditionalSectionNav({
       }}
     >
       <Stack spacing={0.25}>
-        {TRADITIONAL_SECTION_IDS.map((key) => {
+        {sectionIds.map((key) => {
           const active = key === activeSection;
           return (
-            <Typography
+            <Box
               key={key}
               component="button"
               type="button"
-              variant="body2"
               onClick={() => onSectionChange?.(key)}
               sx={{
                 textAlign: 'left',
@@ -74,15 +78,17 @@ export function TraditionalSectionNav({
                 py: 0.75,
                 borderRadius: 1,
                 cursor: onSectionChange ? 'pointer' : 'default',
-                fontWeight: active ? 600 : 400,
+                fontWeight: active ? EPIS_CLINICAL_CARD_MAX_FONT_WEIGHT : 400,
                 bgcolor: active ? 'action.selected' : 'transparent',
                 color: active ? 'primary.main' : 'text.primary',
                 '&:hover': onSectionChange ? { bgcolor: 'action.hover' } : undefined,
               }}
               data-testid={`${testId}-${key}`}
             >
-              {copy.chartModes[key]}
-            </Typography>
+              <EpisM3Text role="bodyMedium" component="span">
+                {copy.chartModes[key]}
+              </EpisM3Text>
+            </Box>
           );
         })}
       </Stack>

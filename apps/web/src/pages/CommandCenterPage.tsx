@@ -1,6 +1,6 @@
 import { copy } from '@epis2/design-system';
 
-import { getCommandBarAiHint } from '@epis2/command-registry';
+import { getCommandBarAiHint, assistClarifyFooterHint } from '@epis2/command-registry';
 
 import { EpisAppScaffold } from '../components/layout/EpisAppScaffold.js';
 import { EpisTopAppBar } from '../components/layout/EpisTopAppBar.js';
@@ -262,6 +262,24 @@ export function CommandCenterPage() {
               </>
             }
           />
+
+          {aiHint && !error ? (
+            <span data-testid="epis2-command-center-ai-hint" hidden>
+              {aiHint}
+            </span>
+          ) : null}
+
+          {lastResult?.status === 'needs_clarification' &&
+          lastResult.candidates.length > 0 &&
+          assistClarifyFooterHint(lastResult.candidates.length) ? (
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              data-testid="epis2-command-clarify-assist"
+            >
+              {assistClarifyFooterHint(lastResult.candidates.length)}
+            </Typography>
+          ) : null}
 
           <CommandConfirmationDialog
             pending={pendingConfirmation}

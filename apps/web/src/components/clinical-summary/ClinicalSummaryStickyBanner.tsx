@@ -1,13 +1,16 @@
 import type { ClinicalAlert, PatientLongitudinalResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import { Box, Chip, Stack } from '@epis2/epis2-ui';
+import { Box, Chip, Stack, epis2ShapeProfiles } from '@epis2/epis2-ui';
 import { formatAllergyLine } from './clinicalSummaryData.js';
+import type { ClinicalSummarySurface } from './EpisClinicalSummaryCard.js';
 
 export type ClinicalSummaryStickyBannerProps = {
   alerts?: readonly ClinicalAlert[] | undefined;
   allergies?: PatientLongitudinalResponse['allergies'] | undefined;
   previsionResumen?: string | null | undefined;
   hospitalizado?: boolean | undefined;
+  /** calm = isla 20px · traditional EMR ≤10px (MF-NORM-04). */
+  surface?: ClinicalSummarySurface | undefined;
   testId?: string;
 };
 
@@ -17,8 +20,11 @@ export function ClinicalSummaryStickyBanner({
   allergies = [],
   previsionResumen,
   hospitalizado = false,
+  surface = 'calm',
   testId = 'epis2-clinical-summary-sticky-banner',
 }: ClinicalSummaryStickyBannerProps) {
+  const profile =
+    surface === 'calm' ? epis2ShapeProfiles.calm : epis2ShapeProfiles.traditional;
   const critical = alerts.filter((a) => a.severity === 'critical');
   const allergyChips = allergies.slice(0, 4);
   const prevision = previsionResumen?.trim();
@@ -37,7 +43,7 @@ export function ClinicalSummaryStickyBanner({
         py: 1,
         px: 1.5,
         mb: 1,
-        borderRadius: `${20}px`,
+        borderRadius: `${profile.island}px`,
         border: 1,
         borderColor: 'outlineVariant',
         bgcolor: 'surfaceContainerHigh',

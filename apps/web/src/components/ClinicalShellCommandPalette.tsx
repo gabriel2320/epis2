@@ -51,6 +51,7 @@ export function ClinicalShellCommandPalette() {
         onClose={() => setOpen(false)}
         items={items}
         maxVisible={PALETTE_MAX_VISIBLE}
+        onSubmitNaturalLanguage={runCommand}
       />
       <CommandConfirmationDialog
         pending={pendingConfirmation}

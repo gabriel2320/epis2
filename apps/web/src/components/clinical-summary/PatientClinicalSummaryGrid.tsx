@@ -5,8 +5,8 @@ import type {
 } from '@epis2/contracts';
 import { isSurgicalHistoryDescription } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
-import { Box, EpisButton, EpisM3Text, Stack } from '@epis2/epis2-ui';
-import { useMemo } from 'react';
+import { Box, EpisButton, EpisChip, EpisM3Text, Stack } from '@epis2/epis2-ui';
+import { useMemo, useState } from 'react';
 import { patientSummaryFieldLabel } from '../../clinical/patientSummaryFieldLabels.js';
 import { ClinicalSummaryStickyBanner } from './ClinicalSummaryStickyBanner.js';
 import {
@@ -16,6 +16,12 @@ import {
   partitionMedicationZones,
   selectLabHighlights,
 } from './clinicalSummaryData.js';
+import {
+  CLINICAL_SUMMARY_TIMELINE_KINDS,
+  filterTimelineByKind,
+  formatTimelinePreviewLines,
+  type TimelineKindFilter,
+} from './clinicalSummaryTimeline.js';
 import {
   clinicalSummaryCardIcon,
   type ClinicalSummaryIconKey,
@@ -51,19 +57,21 @@ const FIELD_ICON_KEYS: Partial<Record<string, ClinicalSummaryIconKey>> = {
   coveragePrevision: 'problems',
 };
 
+const TIMELINE_KIND_LABELS: Record<(typeof CLINICAL_SUMMARY_TIMELINE_KINDS)[number], string> = {
+  encounter: copy.clinicalSummary.timelineKindEncounter,
+  note: copy.clinicalSummary.timelineKindNote,
+  observation: copy.clinicalSummary.timelineKindObservation,
+  document: copy.clinicalSummary.timelineKindDocument,
+  draft: copy.clinicalSummary.timelineKindDraft,
+};
+
 function calmLeadingIcon(surface: ClinicalSummarySurface, key?: ClinicalSummaryIconKey) {
   return surface === 'calm' && key ? clinicalSummaryCardIcon(key) : undefined;
 }
 
 function formatTimelinePreview(events: PatientLongitudinalResponse['timeline'], max = 3): string {
-  const items = events.slice(0, max);
-  if (items.length === 0) return copy.longitudinal.emptySection;
-  return items
-    .map(
-      (e) =>
-        `${new Date(e.at).toLocaleString('es-CL', { dateStyle: 'short', timeStyle: 'short' })} — ${e.title}`,
-    )
-    .join('\n');
+  const text = formatTimelinePreviewLines(events, max);
+  return text || copy.longitudinal.emptySection;
 }
 
 /** Grid de tarjetas-resumen — responde en 2 scrolls: ahora + contexto (MD3 / EHR benchmark). */
@@ -81,6 +89,7 @@ export function PatientClinicalSummaryGrid({
   testId = 'epis2-clinical-summary-grid',
   surfaceProfile = 'calm',
 }: PatientClinicalSummaryGridProps) {
+  const [timelineFilter, setTimelineFilter] = useState<TimelineKindFilter>('all');
   const clinicalProblems = useMemo(
     () => longitudinal?.problems.filter((p) => !isSurgicalHistoryDescription(p.description)) ?? [],
     [longitudinal?.problems],
@@ -95,6 +104,10 @@ export function PatientClinicalSummaryGrid({
   const labHighlights = useMemo(
     () => selectLabHighlights(longitudinal?.observations ?? []),
     [longitudinal?.observations],
+  );
+  const filteredTimeline = useMemo(
+    () => filterTimelineByKind(longitudinal?.timeline ?? [], timelineFilter),
+    [longitudinal?.timeline, timelineFilter],
   );
   const hasStructuredMeds =
     medicationZones.active.length > 0 ||
@@ -147,6 +160,7 @@ export function PatientClinicalSummaryGrid({
         allergies={longitudinal?.allergies}
         previsionResumen={clinicalSummary?.previsionResumen}
         hospitalizado={clinicalSummary?.hospitalizado}
+        surface={surfaceProfile}
       />
       {criticalAlerts.length > 0 ? (
         <EpisClinicalSummaryCard
@@ -283,6 +297,27 @@ export function PatientClinicalSummaryGrid({
           ) : null}
           {longitudinal && longitudinal.timeline.length > 0 ? (
             <Box {...(surfaceProfile === 'calm' ? { sx: { gridColumn: { md: 'span 2' } } } : {})}>
+              <Stack spacing={1} sx={{ mb: 1 }} direction="row" flexWrap="wrap" useFlexGap>
+                <EpisChip
+                  label={copy.clinicalSummary.timelineFilterAll}
+                  size="small"
+                  color={timelineFilter === 'all' ? 'primary' : 'default'}
+                  variant={timelineFilter === 'all' ? 'filled' : 'outlined'}
+                  onClick={() => setTimelineFilter('all')}
+                  data-testid={`${testId}-timeline-filter-all`}
+                />
+                {CLINICAL_SUMMARY_TIMELINE_KINDS.map((kind) => (
+                  <EpisChip
+                    key={kind}
+                    label={TIMELINE_KIND_LABELS[kind]}
+                    size="small"
+                    color={timelineFilter === kind ? 'primary' : 'default'}
+                    variant={timelineFilter === kind ? 'filled' : 'outlined'}
+                    onClick={() => setTimelineFilter(kind)}
+                    data-testid={`${testId}-timeline-filter-${kind}`}
+                  />
+                ))}
+              </Stack>
               <EpisClinicalSummaryCard
                 title={copy.activePatient.recentActivityTitle}
                 surface={surfaceProfile}
@@ -292,7 +327,7 @@ export function PatientClinicalSummaryGrid({
                 actionLabel={copy.activePatient.viewFullTimeline}
                 onAction={onViewFullTimeline}
               >
-                {formatTimelinePreview(longitudinal.timeline)}
+                {formatTimelinePreview(filteredTimeline)}
               </EpisClinicalSummaryCard>
             </Box>
           ) : null}

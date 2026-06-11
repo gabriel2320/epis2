@@ -13,7 +13,7 @@ export type PaperSectionNavigatorProps = {
   testId?: string | undefined;
 };
 
-/** Índice lateral I–VII — pestañas documento (FichaPapel). */
+/** Índice lateral I–XIV — pestañas documento (FichaPapel). */
 export function PaperSectionNavigator({
   activeSectionId,
   onSectionSelect,
@@ -45,7 +45,7 @@ export function PaperSectionNavigator({
         sx={{
           display: { xs: 'none', md: 'block' },
           fontFamily: t.typography.label,
-          fontWeight: 700,
+          fontWeight: 600,
           textTransform: 'uppercase',
           letterSpacing: '0.08em',
           color: t.paperMuted,

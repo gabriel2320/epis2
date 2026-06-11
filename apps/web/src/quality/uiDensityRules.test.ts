@@ -9,6 +9,7 @@ import {
 describe('uiDensityRules', () => {
   it('define presupuesto de iconos por tipo de pantalla', () => {
     expect(iconBudgetForScreen('command')).toBe(EPIS_ICON_BUDGET.command);
+    expect(EPIS_ICON_BUDGET.workspace).toBe(10);
     expect(EPIS_ICON_BUDGET.document).toBe(0);
   });
 

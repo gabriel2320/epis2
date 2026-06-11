@@ -5,6 +5,8 @@ import { PAPER_PLANNER_VIEWS } from './types.js';
 import { DailyClinicalPage } from './DailyClinicalPage.js';
 import { MonthlyClinicalPage } from './MonthlyClinicalPage.js';
 import { WeeklyClinicalPage } from './WeeklyClinicalPage.js';
+import { PaperPlannerCommandHints } from './PaperPlannerCommandHints.js';
+import { usePaperPlannerCommands } from './usePaperPlannerCommands.js';
 
 export type PaperPlannerShellProps = {
   activeView: PaperPlannerView;
@@ -28,8 +30,11 @@ export function PaperPlannerShell({
   serviceUnit,
   testId = 'epis2-paper-planner-shell',
 }: PaperPlannerShellProps) {
+  const { phrases, runPhrase, enabled } = usePaperPlannerCommands();
+
   return (
     <Box data-testid={testId} sx={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}>
+      <PaperPlannerCommandHints phrases={phrases} onRunPhrase={runPhrase} enabled={enabled} />
       <Box
         className="epis2-paper-planner-view-tabs epis2-no-print"
         data-testid="epis2-paper-planner-view-tabs"

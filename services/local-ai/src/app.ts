@@ -8,8 +8,10 @@ import {
 import Fastify from 'fastify';
 import { runDraftAssist } from './assist.js';
 import { runCommandRouteAssist } from './commandRoute.js';
-import { runTextboxAssist } from './textboxAssist.js';
 import type { AiConfig } from './config.js';
+import { buildInferencePolicyConfig, createInferenceProviders } from './inference/router.js';
+import { pingOpenAi } from './inference/openaiProvider.js';
+import { runTextboxAssist } from './textboxAssist.js';
 import { buildLocalAiCapabilities } from './gatewayCapabilities.js';
 import { pingOllama } from './ollama.js';
 
@@ -30,20 +32,33 @@ export async function buildAiApp(config: AiConfig) {
 
   app.get('/capabilities', async () => {
     const ollamaUp = await pingOllama(config.OLLAMA_BASE_URL);
-    return buildLocalAiCapabilities(ollamaUp);
+    const openaiUp =
+      config.AI_CLOUD_ENABLED && config.OPENAI_API_KEY
+        ? await pingOpenAi(config.OPENAI_API_KEY, config.OPENAI_BASE_URL)
+        : false;
+    return buildLocalAiCapabilities(config, ollamaUp, openaiUp);
   });
 
   app.get('/ready', async (_req, reply) => {
     const ollamaUp = await pingOllama(config.OLLAMA_BASE_URL);
-    const status = ollamaUp ? 'ok' : 'degraded';
+    const openaiUp =
+      config.AI_CLOUD_ENABLED && config.OPENAI_API_KEY
+        ? await pingOpenAi(config.OPENAI_API_KEY, config.OPENAI_BASE_URL)
+        : false;
+    const policy = buildInferencePolicyConfig(config);
+    const operational = ollamaUp || (policy.cloudEnabled && openaiUp);
+    const status = operational ? 'ok' : 'degraded';
     const body = healthResponseSchema.parse({
       status,
       service: 'epis2-local-ai',
       version: VERSION,
       timestamp: new Date().toISOString(),
-      checks: { ollama: ollamaUp ? 'up' : 'down' },
+      checks: {
+        ollama: ollamaUp ? 'up' : 'down',
+        openai: openaiUp ? 'up' : (policy.cloudEnabled ? 'down' : 'skipped'),
+      },
     });
-    if (!ollamaUp) {
+    if (!operational) {
       return reply.status(503).send(body);
     }
     return body;
@@ -55,7 +70,7 @@ export async function buildAiApp(config: AiConfig) {
       return reply.status(400).send({ error: 'Solicitud de asistencia inválida' });
     }
 
-    const result = await runDraftAssist(config.OLLAMA_BASE_URL, model, parsed.data);
+    const result = await runDraftAssist(config, parsed.data);
 
     if (result.status === 'unavailable') {
       return reply.status(503).send({ ...result, requiresHumanReview: true as const });
@@ -102,3 +117,6 @@ export async function buildAiApp(config: AiConfig) {
 
   return app;
 }
+
+/** @internal — expuesto para tests de readiness multi-proveedor. */
+export { createInferenceProviders };

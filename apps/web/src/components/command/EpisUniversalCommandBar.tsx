@@ -57,7 +57,8 @@ export function EpisUniversalCommandBar({
   embedded = false,
 }: EpisUniversalCommandBarProps) {
   const visibleSuggestions = suggestions.slice(0, EPIS_COMMAND_BAR_MAX_SUGGESTIONS);
-  const isClinicalSurface = variant === 'clinical-chart' || variant === 'census-search';
+  const isClinicalSurface =
+    variant === 'clinical-chart' || variant === 'census-search' || variant === 'classic-contextual';
 
   return (
     <Stack

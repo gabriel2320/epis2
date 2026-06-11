@@ -107,4 +107,24 @@ test.describe('UX-G02 — command-first con paciente fijado', () => {
     await expect(page).toHaveURL(/\/comando/);
     await expect(page.getByTestId('epis2-form-imaging_request')).not.toBeAttached();
   });
+
+  test('Parte D: Ctrl+K abre paleta en ficha en <1s (MF-CM-08)', async ({ page }) => {
+    await loginAsPhysician(page);
+    await pinDemoCase(page, 'DEMO-001');
+
+    const start = Date.now();
+    await page.keyboard.press('Control+k');
+    await expect(page.getByTestId('epis2-clinical-command-palette')).toBeVisible();
+    await expect(page.getByTestId('epis2-command-palette-query')).toBeVisible();
+    expect(Date.now() - start).toBeLessThan(1000);
+  });
+
+  test('Parte E: panel IA contextual en ficha tradicional (MF-CM-08)', async ({ page }) => {
+    await loginAsPhysician(page);
+    await page.goto(`/espacio/ficha?patientId=${DEMO_001_PATIENT_ID}&chartMode=traditional`);
+    await expect(page.getByTestId('epis2-patient-workspace')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
+    await expect(page.getByTestId('epis2-context-ai-panel')).toBeVisible();
+    await expect(page.getByTestId('epis2-context-suggested-actions')).toBeVisible();
+  });
 });

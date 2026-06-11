@@ -94,6 +94,11 @@ export function PatientWorkspaceCommandPanel({
         role={role}
         disabled={isResolving}
       />
+      {aiHint && error === undefined ? (
+        <span data-testid="epis2-ficha-command-ai-hint" hidden>
+          {aiHint}
+        </span>
+      ) : null}
 
       <CommandConfirmationDialog
         pending={pendingConfirmation}

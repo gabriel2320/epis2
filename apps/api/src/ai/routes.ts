@@ -21,6 +21,7 @@ import { sendApiError } from '../errors.js';
 import type { Database } from '../db/client.js';
 import {
   fetchLocalAiStatus,
+  fetchLocalAiCapabilities,
   pingOllama,
   requestDraftAssist,
   requestTextboxAssist,
@@ -48,22 +49,35 @@ export async function registerAiRoutes(
 
   app.get('/api/ai/status', { preHandler: authenticate }, async () => {
     const localAiUp = await fetchLocalAiStatus(config.LOCAL_AI_BASE_URL);
-    let ollama: 'up' | 'down' | 'unknown' = 'unknown';
-    if (localAiUp) {
-      const up = await pingOllama(config.OLLAMA_BASE_URL);
-      ollama = up ? 'up' : 'down';
-    } else {
-      ollama = 'down';
-    }
+    const caps = localAiUp
+      ? await fetchLocalAiCapabilities(config.LOCAL_AI_BASE_URL)
+      : null;
+    const ollamaUp = await pingOllama(config.OLLAMA_BASE_URL);
+    const ollama: 'up' | 'down' | 'unknown' = ollamaUp ? 'up' : 'down';
 
-    const available = localAiUp && ollama === 'up';
+    const available = localAiUp;
+    const openaiState = caps?.providers.openai;
+    const activeProvider =
+      caps?.providers.ollama === 'up'
+        ? ('ollama' as const)
+        : openaiState === 'up'
+          ? ('openai' as const)
+          : undefined;
+
     return aiStatusResponseSchema.parse({
       available,
       ollama,
       localAi: localAiUp ? 'up' : 'down',
       message: available
-        ? 'Asistencia IA local disponible (demo).'
+        ? activeProvider === 'openai'
+          ? 'Asistencia IA disponible (cloud demo, L0).'
+          : 'Asistencia IA local disponible (demo).'
         : 'IA no disponible — el flujo manual sigue operativo.',
+      ...(caps?.inferenceMode !== undefined ? { inferenceMode: caps.inferenceMode } : {}),
+      ...(openaiState !== undefined
+        ? { cloud: { openai: openaiState } }
+        : {}),
+      ...(activeProvider !== undefined ? { activeProvider } : {}),
     });
   });
 
@@ -84,7 +98,12 @@ export async function registerAiRoutes(
       } = {
         actorId: session.sub,
         blueprintId: parsed.data.blueprintId,
-        inputPayload: parsed.data as Record<string, unknown>,
+        inputPayload: {
+          ...(parsed.data as Record<string, unknown>),
+          ...(parsed.data.context?.source === 'command_bar'
+            ? { assistOrigin: 'command_bar' as const }
+            : {}),
+        },
       };
       if (parsed.data.patientId !== undefined) {
         baseRun.patientId = parsed.data.patientId;
@@ -116,6 +135,8 @@ export async function registerAiRoutes(
           outputPayload: {
             suggestedFields: body.suggestedFields,
             safetyNotes,
+            ...(body.provider !== undefined ? { provider: body.provider } : {}),
+            ...(body.dataTier !== undefined ? { dataTier: body.dataTier } : {}),
           },
         });
 
@@ -127,6 +148,8 @@ export async function registerAiRoutes(
           runId: row?.id,
           model: body.model,
           latencyMs: body.latencyMs,
+          ...(body.provider !== undefined ? { provider: body.provider } : {}),
+          ...(body.dataTier !== undefined ? { dataTier: body.dataTier } : {}),
         });
         return reply.send(response);
       }

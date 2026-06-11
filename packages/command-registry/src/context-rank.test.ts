@@ -70,4 +70,17 @@ describe('context ranking (CE-1)', () => {
     const best = pickBestFromRanked(ranked);
     expect(best?.intent).toBe('open_patient_chart');
   });
+
+  it('navMeds impulsa conciliación sobre ranking base', () => {
+    const without = rankCommandDefinitions('conciliacion medicamentosa', { hasPatient: true });
+    const withSection = rankCommandDefinitions('conciliacion medicamentosa', {
+      hasPatient: true,
+      context: { workspace: 'patient_chart', chartMode: 'traditional', traditionalSection: 'navMeds' },
+    });
+    const reconcileWithout =
+      without.find((r) => r.def.intent === 'reconcile_medications')?.score ?? 0;
+    const reconcileWith =
+      withSection.find((r) => r.def.intent === 'reconcile_medications')?.score ?? 0;
+    expect(reconcileWith).toBeGreaterThan(reconcileWithout);
+  });
 });

@@ -1,10 +1,18 @@
 import type { CommandResolveResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import type { CommandActiveContext } from '@epis2/command-registry';
+import {
+  resolveAssistBlueprintForIntent,
+  shouldInvokeCommandAssistDraft,
+  stashCommandAssistDraft,
+} from '@epis2/local-ai/commandAssistDraft';
 import { useCallback, useState } from 'react';
+import { fetchAiStatus, requestDraftAssist } from '../api/aiApi.js';
 import { ApiError } from '../api/client.js';
 import { resolveCommand as resolveCommandApi } from '../api/commandApi.js';
+import { formSearchFromCommandSlots } from './commandFormSearch.js';
 import { navigateClinicalCommandResult } from './navigateClinicalCommandResult.js';
+import type { ClinicalFormRoutePath, ClinicalNavigateFn } from '../routes/clinicalNavigate.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 
 type UseClinicalCommandSubmitOptions = {
@@ -15,6 +23,49 @@ type UseClinicalCommandSubmitOptions = {
     | undefined;
   onNeedsPatient?: (() => void) | undefined;
 };
+
+async function navigateResolvedWithAssistDraft(
+  navigate: ClinicalNavigateFn,
+  result: Extract<CommandResolveResponse, { status: 'resolved' }>,
+  patientId: string | undefined,
+  commandText: string,
+): Promise<void> {
+  const blueprintId = resolveAssistBlueprintForIntent(result.intent);
+  let assistDraft = false;
+
+  if (blueprintId && patientId) {
+    try {
+      const aiStatus = await fetchAiStatus();
+      if (shouldInvokeCommandAssistDraft(result.intent, aiStatus.available)) {
+        const assist = await requestDraftAssist({
+          blueprintId,
+          patientId,
+          context: { source: 'command_bar', commandText },
+        });
+        if (assist.status === 'success') {
+          stashCommandAssistDraft(blueprintId, assist.suggestedFields, assist.runId);
+          assistDraft = true;
+        }
+      }
+    } catch {
+      /* Degradación sin Ollama — navegación manual */
+    }
+  }
+
+  if (assistDraft && result.routePath !== '/epis2/dashboard') {
+    const search = {
+      ...formSearchFromCommandSlots(patientId, result.slots),
+      assistDraft: true as const,
+    };
+    navigate({
+      to: result.routePath as ClinicalFormRoutePath,
+      search,
+    });
+    return;
+  }
+
+  navigateClinicalCommandResult(navigate, result, patientId);
+}
 
 export function useClinicalCommandSubmit(options: UseClinicalCommandSubmitOptions = {}) {
   const { patientId, commandContext, onResolved, onNeedsPatient } = options;
@@ -30,12 +81,12 @@ export function useClinicalCommandSubmit(options: UseClinicalCommandSubmitOption
   const [pendingText, setPendingText] = useState('');
 
   const handleResult = useCallback(
-    (result: CommandResolveResponse, trimmed: string) => {
+    async (result: CommandResolveResponse, trimmed: string) => {
       setLastResult(result);
       if (result.status === 'resolved') {
         setPendingConfirmation(null);
         onResolved?.(result);
-        navigateClinicalCommandResult(navigate, result, patientId);
+        await navigateResolvedWithAssistDraft(navigate, result, patientId, trimmed);
         return;
       }
       if (result.status === 'needs_confirmation') {
@@ -89,7 +140,7 @@ export function useClinicalCommandSubmit(options: UseClinicalCommandSubmitOption
         if (commandContext) resolveBody.context = commandContext;
         if (submitOptions?.confirmed) resolveBody.confirmed = true;
         const result = await resolveCommandApi(resolveBody);
-        handleResult(result, trimmed);
+        await handleResult(result, trimmed);
       } catch (e) {
         if (e instanceof ApiError && e.status === 403) {
           void navigate({
@@ -129,3 +180,6 @@ export function useClinicalCommandSubmit(options: UseClinicalCommandSubmitOption
     submit,
   };
 }
+
+/** @internal export for tests — navegación post-comando con assist opcional. */
+export { navigateResolvedWithAssistDraft };

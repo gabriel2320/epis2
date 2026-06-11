@@ -56,20 +56,19 @@ Modo clásico (operativo)  ←→  Modelo clínico único  ←→  Modo papel (d
 - Command palette transversal; panel contexto colapsable
 - Print Carta/A5 vía HTML/CSS (`paperChartPrint.css`, `PrintLetterDocument`)
 
-### 2.3 Brecha espejo (lo que el prompt pide y EPIS2 aún no tiene)
+### 2.3 Brecha espejo (MF-PA-05 MVP ✓)
 
 ```text
-Hoy:
-  traditional → summaryFields, longitudinal, drafts por tipo (evolución, epicrisis…)
-  paper       → paper_chart 7 secciones (cover…discharge)
+Entregado MF-PA-05:
+  mirrorReconcile.ts — seed summaryFields → paper_chart (borrador vacío)
+  getPaperChartState — mirrorSeeded en carga empty
+  PAPER_MIRROR_VARIABLE_KEYS + CHART_SECTION_MIRROR_BINDINGS
 
-No hay:
-  ClinicalFieldBinding fieldId ↔ clinicalPath
-  applyMirrorEvent() bidireccional
-  Modo split classic|paper para depuración
+Pendiente PROG-PAPER-MIRROR:
+  applyMirrorEvent() bidireccional en tiempo real
+  Modo split classic|paper
   PdfTemplateProfile / AcroForm mapping
-  PaperExpansionPlanner automático
-  PaperQualityGate score formal
+  PaperQualityGate mirrorSyncWorks = true
 ```
 
 **Riesgo si se implementa el prompt literal:** segundo registry, dos SoT, duplicación validaciones — **viola** invariantes #10, #12 y postmortem EPIS.

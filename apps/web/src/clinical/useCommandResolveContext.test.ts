@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { buildCommandResolveContext } from './useCommandResolveContext.js';
+import {
+  buildCommandResolveContext,
+  parseEhrSectionSearch,
+} from './useCommandResolveContext.js';
 
 describe('buildCommandResolveContext', () => {
   it('propaga chartMode=paper en patient_chart', () => {
@@ -32,5 +35,44 @@ describe('buildCommandResolveContext', () => {
     });
     expect(ctx.chartMode).toBeUndefined();
     expect(ctx.pendingDraftCount).toBe(1);
+  });
+
+  it('propaga traditionalSection sin chartMode explícito (default tradicional)', () => {
+    const ctx = buildCommandResolveContext('patient_chart', {
+      pendingDraftCount: 0,
+      activeAlertCount: 0,
+      traditionalSection: 'navOrders',
+    });
+    expect(ctx.traditionalSection).toBe('navOrders');
+    expect(ctx.chartMode).toBeUndefined();
+  });
+
+  it('propaga traditionalSection en chartMode=traditional (MF-CM-04)', () => {
+    const ctx = buildCommandResolveContext('patient_chart', {
+      pendingDraftCount: 0,
+      activeAlertCount: 0,
+      chartMode: 'traditional',
+      traditionalSection: 'navMeds',
+    });
+    expect(ctx.traditionalSection).toBe('navMeds');
+  });
+
+  it('propaga assistBlueprintId', () => {
+    const ctx = buildCommandResolveContext('patient_chart', {
+      pendingDraftCount: 0,
+      activeAlertCount: 0,
+      assistBlueprintId: 'evolution_note',
+    });
+    expect(ctx.assistBlueprintId).toBe('evolution_note');
+  });
+});
+
+describe('parseEhrSectionSearch MF-CM-04', () => {
+  it('acepta nav ids válidos', () => {
+    expect(parseEhrSectionSearch({ ehrSection: 'navOrders' })).toBe('navOrders');
+  });
+
+  it('rechaza ids desconocidos', () => {
+    expect(parseEhrSectionSearch({ ehrSection: 'navFoo' })).toBeUndefined();
   });
 });

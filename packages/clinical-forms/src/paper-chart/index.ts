@@ -36,3 +36,18 @@ export {
   getPaperChartSectionTreeNode,
   type PaperChartSectionTreeNode,
 } from './paperChartSectionTree.js';
+export {
+  PAPER_CHART_SECTIONS_I_VII,
+  PAPER_CHART_SECTIONS_VIII_XIV,
+  assertPaperChartSectionsViiiXivInvariants,
+  isPaperChartSectionViiiXiv,
+} from './paperSectionBatch.js';
+export {
+  assertPaperMirrorReconcileInvariants,
+  buildMirrorVariablesFromSummaryFields,
+  isPaperDraftEmpty,
+  reconcilePaperDraftFromSummaryFields,
+  resolvePaperSectionForChartFieldId,
+  seedPaperDraftFromMirrorVariables,
+  type PaperMirrorVariables,
+} from './mirrorReconcile.js';

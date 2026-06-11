@@ -13,7 +13,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan activo:** [`EP
 | Frente | Programa | MF activa | Comando |
 |--------|----------|-----------|---------|
 | **A · Papel** | PROG-FICHA-PAPEL | **MF-PA-01** planner mensual | `quality:paper-mode-next` |
-| **B · Electrónica** | PROG-FICHA-ELECTRONICA | **MF-TE-01** C-4 staging dual chart | `quality:dual-chart-gate` |
+| **B · Electrónica** | PROG-FICHA-ELECTRONICA + **PROG-FICHA-NORM** | **MF-TE-01** C-4 · **MF-NORM-00** benchmark | `quality:dual-chart-gate` |
 | **C · Comando+IA** | PROG-BARRA-COMANDO | **MF-CM-01** barra NL unificada | `test:e2e:ux-g02` |
 
 **Regla sesión:** elegir **un frente** · un MF · declarar alcance · cerrar con gate.

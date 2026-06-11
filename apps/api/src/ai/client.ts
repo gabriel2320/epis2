@@ -9,6 +9,8 @@ export type LocalAiAssistResult =
       model: string;
       latencyMs: number;
       promptHash: string;
+      provider?: 'ollama' | 'openai';
+      dataTier?: string;
     }
   | {
       status: 'unavailable' | 'rejected';
@@ -37,6 +39,30 @@ export async function fetchLocalAiStatus(baseUrl: string): Promise<boolean> {
     return res.ok;
   } catch {
     return false;
+  }
+}
+
+export type LocalAiCapabilitiesSnapshot = {
+  operational: boolean;
+  inferenceMode: 'ollama' | 'openai' | 'router';
+  providers: {
+    ollama: 'up' | 'down';
+    openai: 'up' | 'down' | 'disabled';
+  };
+};
+
+export async function fetchLocalAiCapabilities(
+  baseUrl: string,
+): Promise<LocalAiCapabilitiesSnapshot | null> {
+  try {
+    const res = await fetch(`${baseUrl.replace(/\/$/, '')}/capabilities`, {
+      signal: AbortSignal.timeout(3000),
+    });
+    if (!res.ok) return null;
+    const body = (await res.json()) as LocalAiCapabilitiesSnapshot;
+    return body;
+  } catch {
+    return null;
   }
 }
 

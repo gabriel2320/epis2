@@ -1,4 +1,9 @@
 export {
+  mapLabelValueRowsToDenseTabular,
+  mapMarRowsToDenseTabular,
+  type ClinicalDenseTabularRow,
+} from './tables/clinicalDenseTabular.js';
+export {
   ClinicalAutocomplete,
   type ClinicalAutocompleteOption,
   type ClinicalAutocompleteProps,
@@ -14,6 +19,10 @@ export {
   type ClinicalCommandPaletteItem,
   type ClinicalCommandPaletteProps,
 } from './components/ClinicalCommandPalette.js';
+export {
+  filterClinicalCommandPaletteItems,
+  scoreClinicalCommandPaletteMatch,
+} from './components/filterClinicalCommandPaletteItems.js';
 export {
   ClinicalCopyPasteTools,
   type ClinicalCopyPasteToolsProps,

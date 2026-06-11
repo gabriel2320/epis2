@@ -9,10 +9,10 @@ export const EPIS_SCREEN_KINDS: readonly EpisScreenKind[] = [
   'document',
 ];
 
-/** Presupuesto de iconos visibles por tipo de pantalla. */
+/** Presupuesto de iconos visibles por tipo de pantalla (MF-NORM-05: workspace 10). */
 export const EPIS_ICON_BUDGET: Record<EpisScreenKind, number> = {
   command: 6,
-  workspace: 12,
+  workspace: 10,
   form: 6,
   document: 0,
 };
@@ -44,8 +44,14 @@ export const EPIS_LOCAL_CARD_ACTIONS = [
   'copyText',
 ] as const;
 
-/** Máximo de sugerencias visibles en command bar contextual. */
-export const EPIS_COMMAND_BAR_MAX_SUGGESTIONS = 4;
+/** Máximo de sugerencias visibles en command bar contextual (MF-NORM-03). */
+export const EPIS_COMMAND_BAR_MAX_SUGGESTIONS = 3;
+
+/** Acciones globales visibles en barra clínica sin expandir (Guardar · Firmar · Imprimir). */
+export const EPIS_CLINICAL_ACTION_BAR_MAX_PRIMARY = 3;
+
+/** Peso tipográfico máximo por tarjeta/sección clínica (MF-NORM-05). */
+export const EPIS_CLINICAL_CARD_MAX_FONT_WEIGHT = 600;
 
 /** Máximo de cards verticales antes de tabs/acordeón. */
 export const EPIS_MAX_VERTICAL_CARDS = 6;

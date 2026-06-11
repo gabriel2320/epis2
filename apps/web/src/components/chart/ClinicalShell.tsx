@@ -1,4 +1,4 @@
-import { Box } from '@epis2/epis2-ui';
+import { Box, epis2ChartContentTransitionSx } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
 import type { ChartModeId } from '../../dev/dualChartModesEnv.js';
 import { EpisUniversalCommandBar } from '../command/EpisUniversalCommandBar.js';
@@ -133,10 +133,12 @@ export function ClinicalShell({
           onSign={onSign}
           onPrint={onPrint}
         />
-        <Box sx={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
+        <Box
+          key={chartMode}
+          sx={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', ...epis2ChartContentTransitionSx() }}
+        >
           {children}
-        </Box>
-        <ClinicalFooterStatus
+        </Box>        <ClinicalFooterStatus
           userDisplayName={userDisplayName}
           userRoleLabel={userRoleLabel}
           documentStatus={documentStatus}

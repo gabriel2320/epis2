@@ -55,3 +55,17 @@ export function prefersReducedMotion(): boolean {
   if (typeof window === 'undefined' || !window.matchMedia) return false;
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
+
+/** Entrada panel/sección ficha dual (MF-NORM-08). */
+export function epis2ChartContentTransitionSx(): Record<string, unknown> {
+  return {
+    '@keyframes epis2ChartFadeIn': {
+      from: { opacity: 0, transform: 'translateY(4px)' },
+      to: { opacity: 1, transform: 'translateY(0)' },
+    },
+    animation: `epis2ChartFadeIn ${epis2Motion.duration.medium}ms ${epis2Motion.easing.emphasized}`,
+    '@media (prefers-reduced-motion: reduce)': {
+      animation: 'none',
+    },
+  };
+}

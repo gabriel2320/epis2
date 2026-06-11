@@ -1,7 +1,9 @@
 import type { AiAssistDraftRequest } from '@epis2/contracts';
+import type { AiConfig } from './config.js';
 import { getAssistBlueprintFields } from './assistSchemas.js';
 import { hashPrompt } from './hash.js';
-import { generateOllamaJson, pingOllama } from './ollama.js';
+import type { InferenceProviderId } from './inference/types.js';
+import { generateWithInferenceRouter } from './inference/router.js';
 import { buildDraftAssistPrompt } from './prompt.js';
 import { parseAndValidateAssistJson } from './validateOutput.js';
 
@@ -13,6 +15,8 @@ export type AssistSuccess = {
   model: string;
   latencyMs: number;
   promptHash: string;
+  provider: InferenceProviderId;
+  dataTier: string;
 };
 
 export type AssistFailure = {
@@ -21,11 +25,11 @@ export type AssistFailure = {
   promptHash?: string;
   model?: string;
   latencyMs?: number;
+  provider?: InferenceProviderId;
 };
 
 export async function runDraftAssist(
-  ollamaBaseUrl: string,
-  model: string,
+  config: AiConfig,
   request: AiAssistDraftRequest,
 ): Promise<AssistSuccess | AssistFailure> {
   const fieldIds = getAssistBlueprintFields(request.blueprintId);
@@ -33,14 +37,6 @@ export async function runDraftAssist(
     return {
       status: 'rejected',
       message: 'Blueprint sin asistencia IA configurada',
-    };
-  }
-
-  const up = await pingOllama(ollamaBaseUrl);
-  if (!up) {
-    return {
-      status: 'unavailable',
-      message: 'Ollama no está disponible. Continúa con el formulario manual.',
     };
   }
 
@@ -54,7 +50,7 @@ export async function runDraftAssist(
   const promptHash = hashPrompt(prompt);
   const started = Date.now();
 
-  const generated = await generateOllamaJson(ollamaBaseUrl, prompt, model);
+  const generated = await generateWithInferenceRouter(config, prompt, request.context);
   const latencyMs = Date.now() - started;
 
   if (!generated.ok) {
@@ -62,7 +58,7 @@ export async function runDraftAssist(
       status: 'unavailable',
       message: generated.reason,
       promptHash,
-      model,
+      provider: generated.provider,
       latencyMs,
     };
   }
@@ -74,6 +70,7 @@ export async function runDraftAssist(
       message: validated.reason,
       promptHash,
       model: generated.model,
+      provider: generated.provider,
       latencyMs,
     };
   }
@@ -92,6 +89,7 @@ export async function runDraftAssist(
       message: 'La IA no devolvió campos utilizables',
       promptHash,
       model: generated.model,
+      provider: generated.provider,
       latencyMs,
     };
   }
@@ -104,5 +102,7 @@ export async function runDraftAssist(
     model: generated.model,
     latencyMs,
     promptHash,
+    provider: generated.provider,
+    dataTier: generated.dataTier,
   };
 }

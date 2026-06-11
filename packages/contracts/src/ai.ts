@@ -1,10 +1,22 @@
 import { z } from 'zod';
 
+const inferenceProviderIdSchema = z.enum(['ollama', 'openai']);
+const inferenceModeSchema = z.enum(['ollama', 'openai', 'router']);
+const inferenceDataTierSchema = z.enum(['L0_synthetic', 'L1_deidentified', 'L2_phi']);
+
 export const aiStatusResponseSchema = z.object({
   available: z.boolean(),
   ollama: z.enum(['up', 'down', 'unknown']),
   localAi: z.enum(['up', 'down']),
   message: z.string(),
+  /** ADR-005 — enriquecimiento opcional sin romper clientes existentes */
+  inferenceMode: inferenceModeSchema.optional(),
+  cloud: z
+    .object({
+      openai: z.enum(['up', 'down', 'disabled']),
+    })
+    .optional(),
+  activeProvider: inferenceProviderIdSchema.optional(),
 });
 
 export const aiAssistDraftRequestSchema = z.object({
@@ -23,6 +35,8 @@ export const aiAssistDraftResponseSchema = z.discriminatedUnion('status', [
     runId: z.string().uuid().optional(),
     model: z.string().optional(),
     latencyMs: z.number().int().nonnegative().optional(),
+    provider: inferenceProviderIdSchema.optional(),
+    dataTier: inferenceDataTierSchema.optional(),
   }),
   z.object({
     status: z.literal('unavailable'),

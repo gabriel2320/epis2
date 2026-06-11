@@ -61,6 +61,24 @@ export {
   type PaperMirrorEntry,
 } from './paper-mirror/variable-keys.js';
 export {
+  TRADITIONAL_SECTION_NAV_IDS,
+  CHART_SECTION_MIRROR_BINDINGS,
+  assertChartSectionMirrorInvariants,
+  getMirrorBindingForTraditionalSection,
+  getMirrorBindingForPaperSection,
+  CHART_MIRROR_BATCH1_NAV_IDS,
+  CHART_MIRROR_BATCH2_NAV_IDS,
+  isChartMirrorBatch1Section,
+  isChartMirrorBatch2Section,
+  isChartMirrorBatchSection,
+  assertChartMirrorBatch1Bindings,
+  assertChartMirrorBatch2Bindings,
+  type ChartMirrorBatch1NavId,
+  type ChartMirrorBatch2NavId,
+  type TraditionalSectionNavId,
+  type ChartSectionMirrorBinding,
+} from './chart-section-mirror.js';
+export {
   buildContextClinicalPrefill,
   mergePrefillOnlyEmpty,
   supportsContextClinicalPrefill,
@@ -93,4 +111,12 @@ export {
   assertPaperChartSectionTreeInvariants,
   getPaperChartSectionTreeNode,
   type PaperChartSectionTreeNode,
+  assertPaperMirrorReconcileInvariants,
+  buildMirrorVariablesFromSummaryFields,
+  isPaperDraftEmpty,
+  reconcilePaperDraftFromSummaryFields,
+  resolvePaperSectionForChartFieldId,
+  seedPaperDraftFromMirrorVariables,
+  isPaperChartSectionViiiXiv,
+  type PaperMirrorVariables,
 } from './paper-chart/index.js';

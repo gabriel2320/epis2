@@ -9,7 +9,8 @@ import {
   Stack,
   Typography,
 } from '@epis2/epis2-ui';
-import { useEffect, useMemo, useState, type ChangeEvent } from 'react';
+import { useEffect, useMemo, useState, type ChangeEvent, type KeyboardEvent as ReactKeyboardEvent } from 'react';
+import { filterClinicalCommandPaletteItems } from './filterClinicalCommandPaletteItems.js';
 
 export type ClinicalCommandPaletteItem = {
   id: string;
@@ -26,6 +27,8 @@ export type ClinicalCommandPaletteProps = {
   items: ClinicalCommandPaletteItem[];
   title?: string;
   maxVisible?: number;
+  /** Misma resolución NL que la barra — Enter con texto libre. */
+  onSubmitNaturalLanguage?: (text: string) => void;
 };
 
 /** Command palette MUI — refuerza `/comando` (cmdk en Fase A+ opcional). */
@@ -35,6 +38,7 @@ export function ClinicalCommandPalette({
   items,
   title = copy.clinicalProductivity.commandPaletteTitle,
   maxVisible = 8,
+  onSubmitNaturalLanguage,
 }: ClinicalCommandPaletteProps) {
   const [query, setQuery] = useState('');
 
@@ -42,18 +46,10 @@ export function ClinicalCommandPalette({
     if (!open) setQuery('');
   }, [open]);
 
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    const list = q
-      ? items.filter(
-          (item) =>
-            item.label.toLowerCase().includes(q) ||
-            item.keywords?.toLowerCase().includes(q) ||
-            item.group?.toLowerCase().includes(q),
-        )
-      : items;
-    return list.slice(0, maxVisible);
-  }, [items, maxVisible, query]);
+  const filtered = useMemo(
+    () => filterClinicalCommandPaletteItems(items, query, maxVisible),
+    [items, maxVisible, query],
+  );
 
   const run = (item: ClinicalCommandPaletteItem) => {
     if (item.requiresConfirmation) {
@@ -64,6 +60,20 @@ export function ClinicalCommandPalette({
     }
     item.onSelect();
     onClose();
+  };
+
+  const handleQueryKeyDown = (event: ReactKeyboardEvent<HTMLInputElement>) => {
+    if (event.key !== 'Enter') return;
+    event.preventDefault();
+    const text = query.trim();
+    if (filtered.length === 1 && filtered[0]) {
+      run(filtered[0]);
+      return;
+    }
+    if (text && onSubmitNaturalLanguage) {
+      onSubmitNaturalLanguage(text);
+      onClose();
+    }
   };
 
   return (
@@ -81,12 +91,17 @@ export function ClinicalCommandPalette({
           label={copy.clinicalProductivity.commandPaletteSearch}
           value={query}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
+          onKeyDown={handleQueryKeyDown}
           placeholder={copy.commandCenter.powerBarPlaceholder}
           data-testid="epis2-command-palette-query"
         />
         <List dense>
           {filtered.map((item) => (
-            <ListItemButton key={item.id} onClick={() => run(item)}>
+            <ListItemButton
+              key={item.id}
+              onClick={() => run(item)}
+              data-testid={`epis2-command-palette-item-${item.id}`}
+            >
               <ListItemText
                 primary={item.label}
                 {...(item.group ? { secondary: item.group } : {})}

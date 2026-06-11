@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { epis2Shape, epis2ShapeProfiles, epis2TraditionalShapeMaxPx } from './shape.js';
+import {
+  clampTraditionalRadiusPx,
+  epis2Shape,
+  epis2ShapeProfiles,
+  epis2TraditionalShapeMaxPx,
+} from './shape.js';
 
 describe('epis2Shape traditional profile', () => {
   it('EMR radii stay within institutional square cap', () => {
@@ -20,6 +25,11 @@ describe('epis2Shape traditional profile', () => {
   it('command bar keeps separate profile from EMR surfaces', () => {
     expect(epis2ShapeProfiles.command.bar).toBe(epis2Shape.pill);
     expect(epis2ShapeProfiles.command.palette).toBe(epis2Shape.extraLarge);
+  });
+
+  it('clampTraditionalRadiusPx acota al max EMR', () => {
+    expect(clampTraditionalRadiusPx(24)).toBe(10);
+    expect(clampTraditionalRadiusPx(6)).toBe(6);
   });
 
   it('perfil calm mantiene islas 20px fuera de traditional EMR', () => {

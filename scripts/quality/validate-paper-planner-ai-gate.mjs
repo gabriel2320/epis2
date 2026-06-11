@@ -33,9 +33,49 @@ if (!rank.includes('paperPlannerIntentBoost')) {
   errors.push('context-rank sin paperPlannerIntentBoost');
 }
 
+const hintsPath = join(
+  root,
+  'apps/web/src/components/chart/paper/planner/PaperPlannerCommandHints.tsx',
+);
+const shellPath = join(root, 'apps/web/src/components/chart/paper/planner/PaperPlannerShell.tsx');
+const hookPath = join(
+  root,
+  'apps/web/src/components/chart/paper/planner/usePaperPlannerCommands.ts',
+);
+
+for (const [label, path] of [
+  ['PaperPlannerCommandHints', hintsPath],
+  ['usePaperPlannerCommands', hookPath],
+]) {
+  if (!existsSync(path)) errors.push(`Falta ${label}: ${path}`);
+}
+
+if (existsSync(shellPath)) {
+  const src = readFileSync(shellPath, 'utf8');
+  for (const needle of ['PaperPlannerCommandHints', 'usePaperPlannerCommands']) {
+    if (!src.includes(needle)) errors.push(`PaperPlannerShell falta ${needle}`);
+  }
+}
+
+if (existsSync(hintsPath)) {
+  const src = readFileSync(hintsPath, 'utf8');
+  if (!src.includes('epis2-paper-planner-command-hints')) {
+    errors.push('PaperPlannerCommandHints sin testid principal');
+  }
+}
+
+if (!existsSync(join(root, 'reports/epis2-mf-pa-07-planner-ai.md'))) {
+  errors.push('falta reports/epis2-mf-pa-07-planner-ai.md');
+}
+
 const vitest = spawnSync(
   'npx',
-  ['vitest', 'run', 'packages/command-registry/src/paper-planner-commands.test.ts'],
+  [
+    'vitest',
+    'run',
+    'packages/command-registry/src/paper-planner-commands.test.ts',
+    'apps/web/src/components/chart/paper/planner/PaperPlannerCommandHints.test.tsx',
+  ],
   { cwd: root, shell: true, stdio: 'inherit' },
 );
 if (vitest.status !== 0) errors.push('paper-planner-commands.test falló');

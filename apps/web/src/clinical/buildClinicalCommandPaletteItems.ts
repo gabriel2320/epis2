@@ -20,6 +20,11 @@ function commandTextForDefinition(def: CommandDefinition): string {
   return def.examples[0] ?? def.aliasesEs[0] ?? def.labelEs;
 }
 
+/** Texto NL canónico para barra y paleta (MF-CM-02). */
+export function clinicalCommandTextForDefinition(def: CommandDefinition): string {
+  return commandTextForDefinition(def);
+}
+
 function keywordsForDefinition(def: CommandDefinition): string {
   return [def.labelEs, ...def.aliasesEs, ...def.examples].join(' ');
 }

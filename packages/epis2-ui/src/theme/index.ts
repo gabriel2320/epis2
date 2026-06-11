@@ -25,12 +25,15 @@ export {
   epis2PaperChartTokens,
   epis2PaperChartTypography,
   epis2TraditionalChartShellSx,
+  epis2ChartMainScrollSx,
   epis2PaperDocumentSx,
 } from './chart-modes-tokens.js';
 export {
   FICHAPAPEL_VISUAL_REFERENCE,
   epis2PaperCanvasSx,
+  epis2PaperCalmCanvasSx,
   epis2PaperChromeBarSx,
+  epis2PaperCalmChromeBarSx,
   epis2PaperToolbarControlSx,
   epis2PaperBridgeControlSx,
   epis2PaperSectionTitleSx,

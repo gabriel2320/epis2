@@ -112,6 +112,10 @@ export type CommandActiveContext = {
   /** MF-PAPER-PLANNER-04: superficie documento vs agenda */
   paperSurface?: 'document' | 'planner';
   plannerView?: 'day' | 'week' | 'month';
+  /** MF-CM-04: sección nav activa en ficha tradicional */
+  traditionalSection?: import('./context-section-rank.js').TraditionalSectionNavId;
+  /** MF-CM-04: blueprint de borrador/formulario activo */
+  assistBlueprintId?: string;
 };
 
 export type CommandAssistHint = {

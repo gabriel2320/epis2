@@ -1,7 +1,7 @@
 import { copy } from '@epis2/design-system';
 import { getDemoCaseByPatientId } from '@epis2/test-fixtures';
 import { useSearch } from '@tanstack/react-router';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type {
   ClinicalAlert,
   PatientClinicalSummaryResponse,
@@ -72,6 +72,7 @@ export function DualChartPatientPage({
   const chartSearch = parseChartModeSearch(rawSearch);
   const chartMode: ChartModeId = resolveChartMode(chartSearch);
   const demoCase = useMemo(() => getDemoCaseByPatientId(patientId), [patientId]);
+  const [contextEventCount, setContextEventCount] = useState<number | undefined>();
 
   useEffect(() => {
     if (rawSearch.chartMode === 'traditional' || rawSearch.chartMode === 'paper') return;
@@ -166,6 +167,7 @@ export function DualChartPatientPage({
           />
         ) : (
           <TraditionalEhrMode
+            demoCaseCode={detail.patient.demoCaseCode ?? demoCase?.demoCaseCode}
             summaryFields={summaryFields}
             clinicalSummary={clinicalSummary}
             longitudinal={longitudinal}
@@ -176,7 +178,13 @@ export function DualChartPatientPage({
             onOpenDraft={onOpenDraft}
             onViewFullTimeline={onViewFullTimeline}
             onOpenEvolution={onOpenEvolution}
-            contextPane={<EpisClinicalContextPane patientId={patientId} />}
+            contextEventCount={contextEventCount}
+            contextPane={
+              <EpisClinicalContextPane
+                patientId={patientId}
+                onTimelineCountChange={setContextEventCount}
+              />
+            }
           />
         )}
       </ClinicalShell>

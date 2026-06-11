@@ -71,12 +71,19 @@ Responder en **≤2 scrolls** las preguntas clínicas habituales al abrir una fi
 - Banner sticky con chips críticos + alergias
 - Storybook: `Ficha/Resumen clínico MD3` → `GridScaffold`
 
-## Fuera de alcance (Fases B–D)
+## Entrega fases C/D (MF-TE-05) ✓
 
-- Cola de firma transversal (medicación 3 zonas ya en C-3b)
+| Fase | Entrega |
+|------|---------|
+| **C — Contexto** | Sección Contexto con meds 3 zonas, labs destacados, problemas activos, previsión |
+| **D — Timeline** | Chips filtro por `kind` en tarjeta timeline del resumen (`clinicalSummaryTimeline.ts`) |
+| **Tema** | Superficie `calm` (Calm Premium) en ficha dual tradicional; MTB `clinical-calm` 8º perfil |
+
+## Fuera de alcance (post TE-05)
+
 - Cola de firma transversal
-- Timeline filtrado por tipo
-- Re-signoff visual piloto
+- Re-signoff visual piloto completo
+- Supporting pane timeline (MF-TE-06)
 
 ## Invariantes respetados
 

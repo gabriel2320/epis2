@@ -32,7 +32,7 @@ function StripCell({ label, value }: { label: string; value: string }) {
         sx={{
           fontFamily: t.typography.body,
           fontSize: '12px',
-          fontWeight: 700,
+          fontWeight: 600,
           color: t.navyHeader,
           lineHeight: 1.2,
         }}
@@ -103,13 +103,13 @@ export function PaperPatientStrip({
           sx={{
             ml: { md: 'auto' },
             bgcolor: t.allergyAlert,
-            color: '#fff',
+            color: 'common.white',
             px: 1.5,
             py: 0.5,
             borderRadius: 0.5,
             fontFamily: t.typography.institution,
             fontSize: '11px',
-            fontWeight: 700,
+            fontWeight: 600,
             letterSpacing: '0.06em',
           }}
           data-testid="epis2-paper-allergy-alert"

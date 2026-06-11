@@ -14,6 +14,7 @@ export { default as Button } from '@mui/material/Button';
 export { default as Checkbox } from '@mui/material/Checkbox';
 export { default as Chip } from '@mui/material/Chip';
 export { default as Container } from '@mui/material/Container';
+export { default as Collapse } from '@mui/material/Collapse';
 export { default as Divider } from '@mui/material/Divider';
 export { default as Drawer } from '@mui/material/Drawer';
 export { default as FormControl } from '@mui/material/FormControl';

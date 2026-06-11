@@ -1,8 +1,11 @@
 import { sanitizeAiSuggestedFields } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
-import { useState } from 'react';
+import { consumeCommandAssistDraft } from '@epis2/local-ai/commandAssistDraft';
+import { useSearch } from '@tanstack/react-router';
+import { useEffect, useRef, useState } from 'react';
 import { requestDraftAssist } from '../../api/aiApi.js';
 import { ApiError } from '../../api/client.js';
+import type { ClinicalFormSearch } from '../../routes/clinicalNavigate.js';
 
 type Options = {
   blueprintId: string;
@@ -24,6 +27,20 @@ export function useGeneratedFormAiAssist({
   onStatus,
 }: Options) {
   const [isSuggesting, setIsSuggesting] = useState(false);
+  const appliedCommandAssistRef = useRef(false);
+  const rawSearch = useSearch({ strict: false }) as ClinicalFormSearch;
+  const shouldApplyCommandAssist = rawSearch.assistDraft === true;
+
+  useEffect(() => {
+    if (!shouldApplyCommandAssist || appliedCommandAssistRef.current) return;
+    const pending = consumeCommandAssistDraft(blueprintId);
+    if (!pending) return;
+    appliedCommandAssistRef.current = true;
+    for (const [key, value] of Object.entries(sanitizeAiSuggestedFields(pending.fields))) {
+      applyIfEmpty(key, value);
+    }
+    onStatus(copy.forms.aiApplied);
+  }, [applyIfEmpty, blueprintId, onStatus, shouldApplyCommandAssist]);
 
   const suggestWithAi = async () => {
     setIsSuggesting(true);

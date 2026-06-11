@@ -32,6 +32,19 @@
 5. **Puente documental** — receta, epicrisis, lab, certificado, imagen desde ficha papel.
 6. **Comandos contextuales** — 6 intents paper en command-registry.
 7. **Auditoría visual** — `PaperVisualAudit` score ≥ 0.92.
+8. **Calm Premium (MF-PA-06)** — canvas `#F7F9FC` fuera del área imprimible.
+9. **Planner (MF-PA-07)** — comandos NL contextuales en agenda día/semana/mes.
+10. **Signoff MF-PA-08** — E2E dual-chart + planner + capturas humanas complementarias.
+
+---
+
+## Gates MF-PA-08
+
+```bash
+npm run quality:paper-mode-signoff-gate
+npm run quality:paper-planner-ai-gate
+npm run quality:dual-chart-gate -- --phase 6
+```
 
 ---
 

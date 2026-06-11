@@ -1,0 +1,578 @@
+{
+  "version": "1.1.0",
+  "program": "PROG-EXPERIENCIA-CORE-2026",
+  "strategy": "tres frentes + normalización espejo papel↔electrónica",
+  "canonicalPlan": "docs/product/EPIS2_TRES_FRENTES_DEV_PLAN.md",
+  "normalizationPlan": "docs/design/EPIS2_FICHA_NORMALIZACION_PLAN.md",
+  "globalGate": "quality:experiencia-core-signoff-gate",
+  "blockedUntilSignoff": [
+    "PROG-STRENGTHEN-2026",
+    "PROG-CHILE backlog post-4",
+    "PROG-MEDIA-FUTURE"
+  ],
+  "states": ["BLOCKED", "READY", "IN_PROGRESS", "DONE"],
+  "rules": {
+    "oneReadyPerFrontAtMost": true,
+    "oneInProgressAtMost": true,
+    "stopAfterEachPhase": true,
+    "noNewMediaServices": true,
+    "singleCommandRegistry": true,
+    "singleFormRegistry": true
+  },
+  "fronts": [
+    { "id": "A", "program": "PROG-FICHA-PAPEL", "name": "Modo papel" },
+    { "id": "B", "program": "PROG-FICHA-ELECTRONICA", "name": "Ficha electrónica clásica" },
+    { "id": "C", "program": "PROG-BARRA-COMANDO", "name": "Barra de comando + IA" }
+  ],
+  "phases": [
+    {
+      "id": "MF-PA-01",
+      "front": "A",
+      "program": "PROG-FICHA-PAPEL",
+      "name": "Planner mensual + markers",
+      "alias": "MF-PAPER-PLANNER-02",
+      "dependsOn": [],
+      "state": "DONE",
+      "gate": "quality:paper-planner-month-gate",
+      "allowedPaths": [
+        "apps/web/src/components/chart/paper/planner/**",
+        "packages/design-system/src/copy/es.ts",
+        "scripts/quality/validate-paper-planner-month-gate.mjs"
+      ],
+      "closureReport": "reports/epis2-mf-pa-01-planner-month.md",
+      "unblocks": ["MF-PA-02"]
+    },
+    {
+      "id": "MF-PA-02",
+      "front": "A",
+      "program": "PROG-FICHA-PAPEL",
+      "name": "Planner print + E2E",
+      "alias": "MF-PAPER-PLANNER-03",
+      "dependsOn": ["MF-PA-01"],
+      "state": "DONE",
+      "gate": "quality:paper-planner-print-gate",
+      "allowedPaths": ["apps/web/src/components/chart/paper/planner/**", "e2e/**"],
+      "closureReport": "reports/epis2-mf-pa-02-planner-print.md",
+      "unblocks": ["MF-PA-03"]
+    },
+    {
+      "id": "MF-PA-03",
+      "front": "A",
+      "program": "PROG-FICHA-PAPEL",
+      "name": "Paginación N/M real (motor bloques)",
+      "dependsOn": ["MF-PA-02"],
+      "state": "DONE",
+      "gate": "quality:paper-mode-pagination-gate",
+      "allowedPaths": ["apps/web/src/components/chart/paper/pagination/**", "apps/web/src/components/chart/paper/PaperFooter.tsx"],
+      "closureReport": "reports/epis2-mf-pa-03-pagination.md",
+      "unblocks": ["MF-PA-04"]
+    },
+    {
+      "id": "MF-PA-04",
+      "front": "A",
+      "program": "PROG-FICHA-PAPEL",
+      "name": "Secciones papel VIII–XIV scaffold",
+      "dependsOn": ["MF-PA-03"],
+      "state": "DONE",
+      "gate": "quality:paper-mode-nav-gate",
+      "allowedPaths": [
+        "apps/web/src/components/chart/paper/**",
+        "packages/clinical-forms/src/paper-chart/**",
+        "docs/architecture/EPIS2_PAPER_CHART_SECTION_TREE.md"
+      ],
+      "closureReport": "reports/epis2-mf-pa-04-sections.md",
+      "unblocks": ["MF-PA-05"]
+    },
+    {
+      "id": "MF-PA-05",
+      "front": "A",
+      "program": "PROG-FICHA-PAPEL",
+      "name": "Mirror classic↔paper (SoT reconciliado)",
+      "dependsOn": ["MF-NORM-09"],
+      "state": "DONE",
+      "gate": null,
+      "allowedPaths": [
+        "docs/product/EPIS2_PAPER_MIRROR_RECONCILIATION.md",
+        "apps/api/src/clinical/paperChart.ts",
+        "apps/web/src/clinical/usePaperChartDraft.ts",
+        "packages/clinical-forms/src/paper-chart/**"
+      ],
+      "closureReport": "reports/epis2-mf-pa-05-mirror.md",
+      "unblocks": ["MF-PA-06"]
+    },
+    {
+      "id": "MF-PA-06",
+      "front": "A",
+      "program": "PROG-FICHA-PAPEL",
+      "name": "Calm premium en superficies papel",
+      "dependsOn": ["MF-PA-05"],
+      "state": "DONE",
+      "gate": "quality:paper-mode-fichapapel-reference-gate",
+      "allowedPaths": [
+        "packages/epis2-ui/src/theme/**",
+        "apps/web/src/components/chart/paper/**",
+        "docs/design/EPIS2_FICHAPAPEL_VISUAL_REFERENCE.md"
+      ],
+      "closureReport": "reports/epis2-mf-pa-06-calm-paper.md",
+      "unblocks": ["MF-PA-07"]
+    },
+    {
+      "id": "MF-PA-07",
+      "front": "A",
+      "program": "PROG-FICHA-PAPEL",
+      "name": "Comandos IA contextual planner",
+      "alias": "MF-PAPER-PLANNER-04",
+      "dependsOn": ["MF-PA-06"],
+      "state": "DONE",
+      "gate": "quality:paper-planner-ai-gate",
+      "allowedPaths": ["packages/command-registry/**", "apps/web/src/components/chart/paper/planner/**"],
+      "closureReport": "reports/epis2-mf-pa-07-planner-ai.md",
+      "unblocks": ["MF-PA-08"]
+    },
+    {
+      "id": "MF-PA-08",
+      "front": "A",
+      "program": "PROG-FICHA-PAPEL",
+      "name": "Signoff visual papel competitivo",
+      "dependsOn": ["MF-PA-07"],
+      "state": "DONE",
+      "gate": "quality:paper-mode-signoff-gate",
+      "evidenceRequired": [
+        "Print preview Carta/A5",
+        "E2E dual-chart paper",
+        "Capturas planner día/semana/mes",
+        "npm run quality:dual-chart-gate"
+      ],
+      "allowedPaths": ["apps/web/src/components/chart/paper/audit/**", "docs/product/EPIS2_PAPER_MODE_CLINICAL_SIGNOFF.md"],
+      "closureReport": "reports/epis2-mf-pa-08-signoff.md",
+      "unblocks": []
+    },
+    {
+      "id": "MF-TE-01",
+      "front": "B",
+      "program": "PROG-FICHA-ELECTRONICA",
+      "name": "C-4 activación dual chart staging",
+      "dependsOn": [],
+      "state": "DONE",
+      "gate": "quality:dual-chart-gate",
+      "evidenceRequired": [
+        "VITE_ENABLE_DUAL_CHART_MODES=true staging",
+        "E2E dual-chart-modes",
+        "Cuatro capas shell visibles",
+        "docs/ops/EPIS2_DUAL_CHART_PROD_ROLLOUT.md"
+      ],
+      "allowedPaths": [
+        "apps/web/src/pages/DualChart*",
+        "apps/web/src/dev/dualChartModesEnv.ts",
+        ".env.example",
+        "e2e/dual-chart*.ts",
+        "docs/ops/**"
+      ],
+      "closureReport": "reports/epis2-mf-te-01-c4-staging.md",
+      "unblocks": ["MF-TE-02"]
+    },
+    {
+      "id": "MF-NORM-00",
+      "front": "B",
+      "program": "PROG-FICHA-NORM",
+      "name": "Benchmark board MD3 + capturas before",
+      "dependsOn": [],
+      "state": "DONE",
+      "gate": "quality:ficha-norm-benchmark-gate",
+      "allowedPaths": ["docs/design/references/**", "reports/epis2-mf-norm-00-*.md"],
+      "closureReport": "reports/epis2-mf-norm-00-benchmark.md",
+      "unblocks": ["MF-NORM-01", "MF-NORM-02", "MF-NORM-03"]
+    },
+    {
+      "id": "MF-NORM-01",
+      "front": "B",
+      "program": "PROG-FICHA-NORM",
+      "name": "Contrato sección fieldId papel↔nav",
+      "dependsOn": ["MF-NORM-00"],
+      "state": "DONE",
+      "allowedPaths": ["packages/clinical-forms/**", "docs/design/EPIS2_FICHA_NORMALIZACION_PLAN.md"],
+      "closureReport": "reports/epis2-mf-norm-01-contract.md",
+      "unblocks": ["MF-NORM-09"]
+    },
+    {
+      "id": "MF-NORM-02",
+      "front": "B",
+      "program": "PROG-FICHA-NORM",
+      "name": "Viewport shell scroll único 100dvh",
+      "dependsOn": ["MF-NORM-00"],
+      "state": "DONE",
+      "gate": "quality:dual-chart-gate",
+      "allowedPaths": ["apps/web/src/components/chart/ClinicalShell.tsx", "apps/web/src/components/chart/TraditionalEhrMode.tsx", "apps/web/src/components/chart/PaperChartMode.tsx"],
+      "closureReport": "reports/epis2-mf-norm-02-viewport.md",
+      "unblocks": ["MF-TE-02", "MF-NORM-04"]
+    },
+    {
+      "id": "MF-NORM-03",
+      "front": "C",
+      "program": "PROG-FICHA-NORM",
+      "name": "Barra comando compacta dedupe acciones",
+      "dependsOn": ["MF-NORM-00", "MF-CM-01"],
+      "state": "DONE",
+      "allowedPaths": ["apps/web/src/components/chart/ClinicalActionBar.tsx", "apps/web/src/quality/uiDensityRules.ts"],
+      "closureReport": "reports/epis2-mf-norm-03-command-compact.md",
+      "unblocks": ["MF-CM-02"]
+    },
+    {
+      "id": "MF-NORM-04",
+      "front": "B",
+      "program": "PROG-FICHA-NORM",
+      "name": "Audit radius traditional max 10px",
+      "dependsOn": ["MF-NORM-02"],
+      "state": "DONE",
+      "gate": "quality:ficha-norm-density-gate",
+      "allowedPaths": ["packages/epis2-ui/src/theme/shape.ts", "apps/web/src/components/**"],
+      "closureReport": "reports/epis2-mf-norm-04-shape.md",
+      "unblocks": ["MF-NORM-05"]
+    },
+    {
+      "id": "MF-NORM-05",
+      "front": "B",
+      "program": "PROG-FICHA-NORM",
+      "name": "Audit tipografía padding bold budget",
+      "dependsOn": ["MF-NORM-04"],
+      "state": "DONE",
+      "gate": "quality:ficha-norm-typography-gate",
+      "allowedPaths": ["packages/epis2-ui/src/theme/typography*.ts", "apps/web/src/components/clinical-summary/**"],
+      "closureReport": "reports/epis2-mf-norm-05-typography.md",
+      "unblocks": ["MF-TE-02", "MF-NORM-06", "MF-NORM-07"]
+    },
+    {
+      "id": "MF-NORM-06",
+      "front": "B",
+      "program": "PROG-FICHA-NORM",
+      "name": "Demo cases curados (5 casos)",
+      "dependsOn": ["MF-NORM-05"],
+      "state": "DONE",
+      "gate": "quality:ficha-norm-demo-gate",
+      "allowedPaths": ["packages/test-fixtures/**", "scripts/demo/**"],
+      "closureReport": "reports/epis2-mf-norm-06-demo.md",
+      "unblocks": ["MF-NORM-09"]
+    },
+    {
+      "id": "MF-NORM-07",
+      "front": "B",
+      "program": "PROG-FICHA-NORM",
+      "name": "Tema clinical-calm default + escalera tonal",
+      "dependsOn": ["MF-NORM-05"],
+      "state": "DONE",
+      "gate": "quality:ficha-norm-theme-gate",
+      "allowedPaths": ["packages/epis2-ui/src/theme/source/clinical-calm.material-theme.json"],
+      "closureReport": "reports/epis2-mf-norm-07-theme.md",
+      "unblocks": ["MF-NORM-08"]
+    },
+    {
+      "id": "MF-NORM-08",
+      "front": "B",
+      "program": "PROG-FICHA-NORM",
+      "name": "Motion switch modo + panel + sección",
+      "dependsOn": ["MF-NORM-07"],
+      "state": "DONE",
+      "gate": "quality:ficha-norm-motion-gate",
+      "allowedPaths": ["packages/epis2-ui/src/theme/motion.ts", "apps/web/src/components/chart/**"],
+      "closureReport": "reports/epis2-mf-norm-08-motion.md",
+      "unblocks": ["MF-NORM-09"]
+    },
+    {
+      "id": "MF-NORM-09",
+      "front": "B",
+      "program": "PROG-FICHA-NORM",
+      "name": "Secciones espejo batch 1 (5 secciones)",
+      "dependsOn": ["MF-NORM-01", "MF-NORM-06", "MF-NORM-08"],
+      "state": "DONE",
+      "gate": "quality:ficha-norm-mirror-b1-gate",
+      "allowedPaths": ["apps/web/src/components/chart/sections/**"],
+      "closureReport": "reports/epis2-mf-norm-09-sections-b1.md",
+      "unblocks": ["MF-NORM-10", "MF-PA-05"]
+    },
+    {
+      "id": "MF-NORM-10",
+      "front": "B",
+      "program": "PROG-FICHA-NORM",
+      "name": "Secciones espejo batch 2 + ocultar vacías demo",
+      "dependsOn": ["MF-NORM-09"],
+      "state": "DONE",
+      "gate": "quality:ficha-norm-mirror-b2-gate",
+      "allowedPaths": ["apps/web/src/components/chart/sections/**", "apps/web/src/components/chart/TraditionalSectionNav.tsx"],
+      "closureReport": "reports/epis2-mf-norm-10-sections-b2.md",
+      "unblocks": ["MF-NORM-11"]
+    },
+    {
+      "id": "MF-NORM-11",
+      "front": "B",
+      "program": "PROG-FICHA-NORM",
+      "name": "Signoff paridad visual papel↔electrónica",
+      "dependsOn": ["MF-NORM-10"],
+      "state": "DONE",
+      "gate": "quality:ficha-norm-signoff-gate",
+      "closureReport": "reports/epis2-mf-norm-11-signoff.md",
+      "unblocks": ["MF-TE-08", "MF-PA-08"]
+    },
+    {
+      "id": "MF-TE-02",
+      "front": "B",
+      "program": "PROG-FICHA-ELECTRONICA",
+      "name": "5 secciones con contenido real (prioridad)",
+      "dependsOn": ["MF-NORM-05", "MF-NORM-02"],
+      "state": "DONE",
+      "gate": "quality:te-02-sections-gate",
+      "evidenceRequired": [
+        "navAllergies navMeds navOrders navLabs navEvolution con datos/blueprint",
+        "Sin sectionEmpty en esas 5",
+        "E2E navegación sección"
+      ],
+      "allowedPaths": [
+        "apps/web/src/components/chart/TraditionalEhrMode.tsx",
+        "apps/web/src/components/chart/TraditionalClinicalPanel.tsx",
+        "apps/web/src/components/chart/sections/**",
+        "apps/web/src/pages/DualChartPatientPage.tsx"
+      ],
+      "closureReport": "reports/epis2-mf-te-02-sections-p1.md",
+      "unblocks": ["MF-TE-03"]
+    },
+    {
+      "id": "MF-TE-03",
+      "front": "B",
+      "program": "PROG-FICHA-ELECTRONICA",
+      "name": "5 secciones batch 2",
+      "dependsOn": ["MF-TE-02"],
+      "state": "DONE",
+      "gate": null,
+      "evidenceRequired": [
+        "navAnamnesis navPhysicalExam navDiagnoses navImaging navConsults con contenido",
+        "CTA a blueprints donde aplique"
+      ],
+      "allowedPaths": ["apps/web/src/components/chart/sections/**", "packages/clinical-forms/**"],
+      "closureReport": "reports/epis2-mf-te-03-sections-p2.md",
+      "unblocks": ["MF-TE-04"]
+    },
+    {
+      "id": "MF-TE-04",
+      "front": "B",
+      "program": "PROG-FICHA-ELECTRONICA",
+      "name": "Secciones batch 3 + nav móvil",
+      "dependsOn": ["MF-TE-03"],
+      "state": "DONE",
+      "gate": "quality:te-04-sections-gate",
+      "evidenceRequired": [
+        "navAdmin navDocuments navEpicrisis navProcedures navAudit",
+        "Drawer/select secciones en xs/sm"
+      ],
+      "allowedPaths": ["apps/web/src/components/chart/TraditionalSectionNav.tsx", "apps/web/src/components/chart/sections/**"],
+      "closureReport": "reports/epis2-mf-te-04-sections-p3-mobile.md",
+      "unblocks": ["MF-TE-05"]
+    },
+    {
+      "id": "MF-TE-05",
+      "front": "B",
+      "program": "PROG-FICHA-ELECTRONICA",
+      "name": "Resumen fases C/D + tema clinical-calm",
+      "dependsOn": ["MF-TE-04"],
+      "state": "DONE",
+      "gate": "theme:validate",
+      "evidenceRequired": [
+        "clinical-calm 8º perfil MTB",
+        "Timeline filtrado supporting pane",
+        "EPIS2_CLINICAL_SUMMARY_MD3 fases C/D"
+      ],
+      "allowedPaths": [
+        "apps/web/src/components/clinical-summary/**",
+        "packages/epis2-ui/src/theme/source/**",
+        "docs/design/EPIS2_CLINICAL_SUMMARY_MD3.md"
+      ],
+      "closureReport": "reports/epis2-mf-te-05-summary-theme.md",
+      "unblocks": ["MF-TE-06"]
+    },
+    {
+      "id": "MF-TE-06",
+      "front": "B",
+      "program": "PROG-FICHA-ELECTRONICA",
+      "name": "Supporting pane timeline + contexto denso",
+      "dependsOn": ["MF-TE-05"],
+      "state": "DONE",
+      "gate": "quality:te-06-supporting-pane-gate",
+      "allowedPaths": ["apps/web/src/components/EpisClinicalContextPane.tsx", "apps/web/src/components/chart/ClinicalRightContextPanel.tsx"],
+      "closureReport": "reports/epis2-mf-te-06-supporting-pane.md",
+      "unblocks": ["MF-TE-07"]
+    },
+    {
+      "id": "MF-TE-07",
+      "front": "B",
+      "program": "PROG-FICHA-ELECTRONICA",
+      "name": "Densidad tabular órdenes/MAR en ficha",
+      "dependsOn": ["MF-TE-06"],
+      "state": "DONE",
+      "gate": "quality:te-07-tabular-gate",
+      "allowedPaths": ["packages/clinical-productivity/**", "apps/web/src/components/chart/sections/**"],
+      "closureReport": "reports/epis2-mf-te-07-tabular.md",
+      "unblocks": ["MF-TE-08"]
+    },
+    {
+      "id": "MF-TE-08",
+      "front": "B",
+      "program": "PROG-FICHA-ELECTRONICA",
+      "name": "Signoff ficha electrónica competitiva",
+      "dependsOn": ["MF-NORM-11"],
+      "state": "DONE",
+      "gate": "quality:te-08-signoff-gate",
+      "evidenceRequired": [
+        "17/17 secciones sin placeholder vacío",
+        "Capturas light/dark traditional",
+        "Piloto 15 min clínico demo"
+      ],
+      "closureReport": "reports/epis2-mf-te-08-signoff.md",
+      "unblocks": []
+    },
+    {
+      "id": "MF-CM-01",
+      "front": "C",
+      "program": "PROG-BARRA-COMANDO",
+      "name": "Barra NL unificada (censo · ficha · papel)",
+      "dependsOn": [],
+      "state": "DONE",
+      "gate": "quality:cm-01-barra-gate",
+      "evidenceRequired": [
+        "EpisUniversalCommandBar clinical-chart + census-search coherentes",
+        "UX-CALM-COMMAND tramo",
+        "Altura/radius Calm premium"
+      ],
+      "allowedPaths": [
+        "apps/web/src/components/command/EpisUniversalCommandBar.tsx",
+        "apps/web/src/components/chart/ClinicalShell.tsx",
+        "apps/web/src/components/chart/ClinicalActionBar.tsx",
+        "packages/epis2-ui/src/theme/**"
+      ],
+      "closureReport": "reports/epis2-mf-cm-01-barra-unificada.md",
+      "unblocks": ["MF-CM-02"]
+    },
+    {
+      "id": "MF-CM-02",
+      "front": "C",
+      "program": "PROG-BARRA-COMANDO",
+      "name": "Ctrl+K + barra: misma resolución NL",
+      "dependsOn": ["MF-CM-01"],
+      "state": "DONE",
+      "gate": "quality:cm-02-palette-gate",
+      "evidenceRequired": [
+        "Palette ejecuta submit(text) igual que barra",
+        "Búsqueda fuzzy en palette items",
+        "E2E Ctrl+K desde ficha traditional y paper"
+      ],
+      "allowedPaths": [
+        "apps/web/src/components/ClinicalShellCommandPalette.tsx",
+        "packages/clinical-productivity/**",
+        "apps/web/src/clinical/buildClinicalCommandPaletteItems.ts"
+      ],
+      "closureReport": "reports/epis2-mf-cm-02-palette-nl.md",
+      "unblocks": ["MF-CM-03"]
+    },
+    {
+      "id": "MF-CM-03",
+      "front": "C",
+      "program": "PROG-BARRA-COMANDO",
+      "name": "assist-route + hint IA visible en barra",
+      "dependsOn": ["MF-CM-02"],
+      "state": "DONE",
+      "gate": "quality:cm-03-assist-route-gate",
+      "evidenceRequired": [
+        "getCommandBarAiHint cuando dev:ai",
+        "pickAssistFallback en clarify",
+        "npm run ai:evals:live"
+      ],
+      "allowedPaths": [
+        "packages/command-registry/src/assist-route.ts",
+        "apps/web/src/pages/CommandCenterPage.tsx",
+        "apps/web/src/components/PatientWorkspaceCommandPanel.tsx"
+      ],
+      "closureReport": "reports/epis2-mf-cm-03-assist-route.md",
+      "unblocks": ["MF-CM-04"]
+    },
+    {
+      "id": "MF-CM-04",
+      "front": "C",
+      "program": "PROG-BARRA-COMANDO",
+      "name": "Contexto resolve: sección + chartMode + blueprint",
+      "dependsOn": ["MF-CM-03"],
+      "state": "DONE",
+      "gate": "quality:cm-04-context-gate",
+      "allowedPaths": [
+        "packages/command-registry/**",
+        "apps/web/src/clinical/useCommandResolveContext.ts",
+        "packages/contracts/src/command*.ts"
+      ],
+      "closureReport": "reports/epis2-mf-cm-04-context.md",
+      "unblocks": ["MF-CM-05"]
+    },
+    {
+      "id": "MF-CM-05",
+      "front": "C",
+      "program": "PROG-BARRA-COMANDO",
+      "name": "Panel IA: resumen paciente + acciones sugeridas",
+      "dependsOn": ["MF-CM-04"],
+      "state": "DONE",
+      "gate": "quality:cm-05-panel-ia-gate",
+      "allowedPaths": [
+        "apps/web/src/components/chart/ClinicalRightContextPanel.tsx",
+        "apps/web/src/components/EpisClinicalContextPane.tsx",
+        "services/local-ai/**"
+      ],
+      "closureReport": "reports/epis2-mf-cm-05-panel-ia.md",
+      "unblocks": ["MF-CM-06"]
+    },
+    {
+      "id": "MF-CM-06",
+      "front": "C",
+      "program": "PROG-BARRA-COMANDO",
+      "name": "Assist borrador invocable desde barra",
+      "dependsOn": ["MF-CM-05"],
+      "state": "DONE",
+      "gate": "quality:cm-06-assist-draft-gate",
+      "evidenceRequired": [
+        "Comando assist → borrador sin approve",
+        "ai_runs trazado",
+        "Degradación sin Ollama"
+      ],
+      "allowedPaths": ["apps/api/src/routes/ai/**", "services/local-ai/**", "apps/web/src/clinical/useClinicalCommandSubmit.ts"],
+      "closureReport": "reports/epis2-mf-cm-06-assist-draft.md",
+      "unblocks": ["MF-CM-07"]
+    },
+    {
+      "id": "MF-CM-07",
+      "front": "C",
+      "program": "PROG-BARRA-COMANDO",
+      "name": "Evals + frases coloquiales ampliadas",
+      "dependsOn": ["MF-CM-06"],
+      "state": "DONE",
+      "gate": "quality:cm-07-evals-gate",
+      "allowedPaths": ["packages/command-registry/**", "scripts/ai/evals/**"],
+      "closureReport": "reports/epis2-mf-cm-07-evals.md",
+      "unblocks": ["MF-CM-08"]
+    },
+    {
+      "id": "MF-CM-08",
+      "front": "C",
+      "program": "PROG-BARRA-COMANDO",
+      "name": "Signoff barra comando inteligente",
+      "dependsOn": ["MF-CM-07"],
+      "state": "DONE",
+      "gate": "quality:cm-08-signoff-gate",
+      "evidenceRequired": [
+        "NL libre resuelve ≥90% frases suite demo",
+        "Ctrl+K <1s en ficha",
+        "Panel IA útil en piloto"
+      ],
+      "closureReport": "reports/epis2-mf-cm-08-signoff.md",
+      "unblocks": []
+    }
+  ],
+  "signoff": {
+    "id": "SIGNOFF-EXPERIENCIA-CORE",
+    "requires": ["MF-PA-08", "MF-TE-08", "MF-CM-08"],
+    "gate": "quality:experiencia-core-signoff-gate",
+    "thenUnblocks": ["PROG-STRENGTHEN-2026", "PROG-CHILE backlog"]
+  }
+}

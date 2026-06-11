@@ -11,6 +11,7 @@ import {
   pickAssistFallback,
   sanitizeAssistRouteHint,
   shouldInvokeAssistRoute,
+  assistClarifyFooterHint,
 } from './assist-route.js';
 import { EPIS2_COMMAND_DEFINITIONS } from './definitions.js';
 import { rankCommandDefinitions } from './rank.js';
@@ -146,5 +147,10 @@ describe('assist-route (CE-3)', () => {
       suggestedCandidates: ['prepare_discharge_draft'],
     });
     expect(picked?.intent).toBe('prepare_discharge_draft');
+  });
+
+  it('assistClarifyFooterHint visible con candidatos', () => {
+    expect(assistClarifyFooterHint(2)).toMatch(/candidato/i);
+    expect(assistClarifyFooterHint(0)).toBeUndefined();
   });
 });

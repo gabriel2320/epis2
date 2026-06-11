@@ -87,4 +87,44 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
     await expect(page.getByRole('dialog')).toBeVisible();
     await expect(page.getByTestId('epis2-command-palette-query')).toBeVisible();
   });
+
+  test('k) Ctrl+K en ficha papel (MF-CM-02)', async ({ page }) => {
+    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=paper`);
+    await expect(page.getByTestId('epis2-paper-chart-mode')).toBeVisible({ timeout: 15_000 });
+    await page.keyboard.press('Control+k');
+    await expect(page.getByTestId('epis2-clinical-command-palette')).toBeVisible();
+    await expect(page.getByTestId('epis2-command-palette-query')).toBeVisible();
+  });
+
+  test('l) paleta fuzzy filtra evolución (MF-CM-02)', async ({ page }) => {
+    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
+    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    await page.keyboard.press('Control+k');
+    await page.getByTestId('epis2-command-palette-query').fill('evol');
+    await expect(page.getByTestId('epis2-command-palette-item-create_evolution_draft')).toBeVisible();
+  });
+
+  test('j) navega sección alergias con contenido (MF-TE-02)', async ({ page }) => {
+    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
+    await page.getByTestId('epis2-traditional-ehr-nav-navAllergies').click();
+    await expect(page.getByTestId('epis2-traditional-section-allergies')).toBeVisible();
+    await expect(page.getByTestId('epis2-traditional-section-allergies-table')).toBeVisible();
+  });
+
+  test('m) switch modo preserva paciente (MF-NORM-11)', async ({ page }) => {
+    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
+    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    await page.getByTestId('epis2-chart-mode-paper').click();
+    await expect(page).toHaveURL(/chartMode=paper/);
+    await expect(page.getByTestId('epis2-paper-chart-mode')).toBeVisible();
+    await page.getByTestId('epis2-chart-mode-traditional').click();
+    await expect(page).toHaveURL(/chartMode=traditional/);
+    await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
+  });
+
+  test('n) oculta nav demo vacías (MF-NORM-11)', async ({ page }) => {
+    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
+    await expect(page.getByTestId('epis2-traditional-ehr-nav')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-traditional-ehr-nav-navAntecedents')).toHaveCount(0);
+  });
 });

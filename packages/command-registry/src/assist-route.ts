@@ -129,3 +129,12 @@ export function pickAssistFallback(
 
   return null;
 }
+
+/** Hint visible en barra cuando dev:ai (MF-CM-03). Reexport canónico. */
+export { getCommandBarAiHint } from './chips.js';
+
+/** Mensaje auxiliar bajo candidatos en clarify asistido. */
+export function assistClarifyFooterHint(candidateCount: number): string | undefined {
+  if (candidateCount <= 0) return undefined;
+  return 'El asistente sugiere elegir un candidato o reformular con más detalle clínico.';
+}

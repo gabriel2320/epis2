@@ -32,7 +32,7 @@ export function PaperInstitutionalHeader({
         sx={{
           width: 44,
           height: 44,
-          bgcolor: '#fff',
+          bgcolor: 'common.white',
           borderRadius: 0.5,
           display: 'flex',
           alignItems: 'center',
@@ -52,7 +52,7 @@ export function PaperInstitutionalHeader({
           sx={{
             fontFamily: t.typography.institution,
             fontSize: '15px',
-            fontWeight: 700,
+            fontWeight: 600,
             letterSpacing: '0.04em',
             lineHeight: 1.3,
           }}
@@ -98,7 +98,7 @@ export function PaperInstitutionalHeader({
           sx={{
             fontFamily: t.typography.body,
             fontSize: '14px',
-            fontWeight: 700,
+            fontWeight: 600,
           }}
         >
           Nº {recordNumber}

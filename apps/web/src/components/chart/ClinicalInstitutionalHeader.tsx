@@ -43,7 +43,7 @@ export function ClinicalInstitutionalHeader({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontWeight: 700,
+            fontWeight: 600,
             fontSize: 12,
             letterSpacing: 0.5,
           }}

@@ -3,7 +3,9 @@ import {
   applyPaperChartSectionPatch,
   canSignPaperChart,
   emptyPaperChartDraft,
+  isPaperDraftEmpty,
   parsePaperChartBody,
+  reconcilePaperDraftFromSummaryFields,
   type PaperChartDraftBody,
   type PaperChartSectionPatch,
 } from '@epis2/clinical-forms';
@@ -11,7 +13,7 @@ import { and, desc, eq } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import { clinicalDrafts } from '../db/schema.js';
 import { appendAudit } from '../audit/store.js';
-import { approveDraft, createDraft, updateDraft, type Actor } from './service.js';
+import { approveDraft, createDraft, getPatientClinicalContext, updateDraft, type Actor } from './service.js';
 
 export class PaperChartSignBlockedError extends Error {
   readonly blockers: string[];
@@ -105,6 +107,8 @@ export type PaperChartLoadState = {
   draftId?: string;
   readOnly: boolean;
   status: 'draft' | 'approved' | 'empty';
+  /** Secciones pre-rellenadas desde resumen clásico (MF-PA-05). */
+  mirrorSeeded?: boolean;
 };
 
 /** Carga borrador activo o última ficha firmada (read-only). */
@@ -158,12 +162,29 @@ export async function getPaperChartState(
     };
   }
 
+  const empty = emptyPaperChartDraft();
+  const { sections, mirrorSeeded } = await seedPaperChartFromClinicalMirror(db, patientId, empty);
   return {
     patientId,
-    sections: emptyPaperChartDraft(),
+    sections,
     readOnly: false,
     status: 'empty',
+    ...(mirrorSeeded ? { mirrorSeeded: true } : {}),
   };
+}
+
+async function seedPaperChartFromClinicalMirror(
+  db: Database,
+  patientId: string,
+  sections: PaperChartDraftBody,
+): Promise<{ sections: PaperChartDraftBody; mirrorSeeded: boolean }> {
+  if (!isPaperDraftEmpty(sections)) {
+    return { sections, mirrorSeeded: false };
+  }
+  const ctx = await getPatientClinicalContext(db, patientId);
+  const seeded = reconcilePaperDraftFromSummaryFields(ctx.summaryFields, sections);
+  const mirrorSeeded = !isPaperDraftEmpty(seeded);
+  return { sections: seeded, mirrorSeeded };
 }
 
 /** Firma ficha papel — valida IA pendiente y aprueba borrador SoT. */

@@ -45,7 +45,8 @@ Definidos en `packages/epis2-ui/src/theme/clinical/chart-modes-colors.ts` y help
 | `C.ruleLight` `#d8d4cc` | `ruledLine` | Pauta horizontal |
 | `C.rule` `#b0aaa0` | `ruledLineStrong` | Subrayado campos |
 | `#5fa3d8` | `sectionAccent` | Borde izquierdo sección |
-| `#e8e6e0` (page bg) | `paperCanvasBg` | Escritorio detrás hoja |
+| `#e8e6e0` (page bg) | `paperCanvasBg` | Escritorio detrás hoja (legacy) |
+| `#F7F9FC` (Calm canvas) | `epis2PaperCalmCanvasSx` | Escritorio Calm Premium MF-PA-06 |
 
 ### Tipografía
 
@@ -74,9 +75,9 @@ Cargadas en `apps/web/src/styles/epis2-fonts.css` (import desde `main.tsx`). **N
 | `PaperSectionChrome` | Orquestación por sección | `paperSectionChrome.tsx` |
 | `PaperTextarea` | `RuleBlock` | CSS `.epis2-paper-chart-ruled` |
 | `PaperFooter` | Footer confidencial + p. N/M | `epis2PaperFooterSx` |
-| `PaperPageCanvas` | `S.page` fondo | `epis2PaperCanvasSx` |
+| `PaperPageCanvas` | `S.page` fondo | `epis2PaperCalmCanvasSx` (Calm) |
 | `PaperSectionNavigator` | Tab bar documento | `epis2PaperNavTabSx` |
-| `PaperDocumentToolbar` | Toolbar imprimir tab | `epis2PaperChromeBarSx` + `ToolbarControlSx` |
+| `PaperDocumentToolbar` | Toolbar imprimir tab | `epis2PaperCalmChromeBarSx` + `ToolbarControlSx` |
 | `PaperBridgeBackButton` | Botón volver | `epis2PaperBridgeControlSx` |
 | `PaperChartPrintPage` | Hoja centrada preview | `PaperPageCanvas` |
 
@@ -89,6 +90,7 @@ Cargadas en `apps/web/src/styles/epis2-fonts.css` (import desde `main.tsx`). **N
 3. Vistas print con `returnChartMode=paper` usan `PaperBridgeBackButton` (misma estética chrome).
 4. Cambios visuales papel: actualizar tokens → helpers → componentes → gate `quality:paper-mode-fichapapel-reference-gate`.
 5. Subestructuras ricas (tablas diagnóstico, subsecciones A/B/C) se añaden **dentro** de `PaperChartTemplate` por sección, no en repo externo.
+6. **Calm Premium (MF-PA-06):** chrome y canvas fuera del área imprimible usan `#F7F9FC`; la hoja conserva `#fdfcf7` y tipografía FichaPapel.
 
 ---
 

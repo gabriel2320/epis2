@@ -1,4 +1,4 @@
-import { rankCommandDefinitions, type CommandResolveInput } from '@epis2/command-registry';
+import { rankCommandDefinitions, type CommandActiveContext, type CommandResolveInput } from '@epis2/command-registry';
 import { buildCommandTelemetryEvent } from '@epis2/command-registry/telemetry';
 import {
   commandResolveRequestSchema,
@@ -14,6 +14,21 @@ import type { Database } from '../db/client.js';
 import { createRateLimitPreHandler } from '../security/rateLimit.js';
 import { appendAudit } from '../audit/store.js';
 import { resolveCommandWithOptionalAssist } from './resolveWithAssist.js';
+
+function compactCommandContext(
+  ctx: NonNullable<import('@epis2/contracts').CommandResolveRequest['context']>,
+): CommandActiveContext {
+  const out: CommandActiveContext = {};
+  if (ctx.pendingDraftCount !== undefined) out.pendingDraftCount = ctx.pendingDraftCount;
+  if (ctx.activeAlertCount !== undefined) out.activeAlertCount = ctx.activeAlertCount;
+  if (ctx.workspace !== undefined) out.workspace = ctx.workspace;
+  if (ctx.chartMode !== undefined) out.chartMode = ctx.chartMode;
+  if (ctx.paperSurface !== undefined) out.paperSurface = ctx.paperSurface;
+  if (ctx.plannerView !== undefined) out.plannerView = ctx.plannerView;
+  if (ctx.traditionalSection !== undefined) out.traditionalSection = ctx.traditionalSection;
+  if (ctx.assistBlueprintId !== undefined) out.assistBlueprintId = ctx.assistBlueprintId;
+  return out;
+}
 
 export async function registerCommandRoutes(
   app: FastifyInstance,
@@ -47,14 +62,7 @@ export async function registerCommandRoutes(
         resolveInput.patientId = parsed.data.patientId;
       }
       if (parsed.data.context !== undefined) {
-        const ctx = parsed.data.context;
-        resolveInput.context = {
-          ...(ctx.workspace !== undefined ? { workspace: ctx.workspace } : {}),
-          ...(ctx.pendingDraftCount !== undefined
-            ? { pendingDraftCount: ctx.pendingDraftCount }
-            : {}),
-          ...(ctx.activeAlertCount !== undefined ? { activeAlertCount: ctx.activeAlertCount } : {}),
-        };
+        resolveInput.context = compactCommandContext(parsed.data.context);
       }
       if (parsed.data.confirmed === true) {
         resolveInput.confirmed = true;

@@ -1,9 +1,34 @@
 import { z } from 'zod';
 
+const traditionalSectionNavIdSchema = z.enum([
+  'navSummary',
+  'navAdmin',
+  'navAnamnesis',
+  'navAntecedents',
+  'navAllergies',
+  'navPhysicalExam',
+  'navDiagnoses',
+  'navOrders',
+  'navMeds',
+  'navEvolution',
+  'navLabs',
+  'navImaging',
+  'navConsults',
+  'navDocuments',
+  'navEpicrisis',
+  'navProcedures',
+  'navAudit',
+]);
+
 export const commandActiveContextSchema = z.object({
   pendingDraftCount: z.number().int().min(0).optional(),
   activeAlertCount: z.number().int().min(0).optional(),
   workspace: z.enum(['command_center', 'patient_chart', 'clinical_form']).optional(),
+  chartMode: z.enum(['traditional', 'paper']).optional(),
+  paperSurface: z.enum(['document', 'planner']).optional(),
+  plannerView: z.enum(['day', 'week', 'month']).optional(),
+  traditionalSection: traditionalSectionNavIdSchema.optional(),
+  assistBlueprintId: z.string().min(1).max(64).optional(),
 });
 
 export const commandSlotsSchema = z.object({

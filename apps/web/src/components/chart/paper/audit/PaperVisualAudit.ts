@@ -15,6 +15,8 @@ export type PaperVisualAuditResult = {
   hasPatientStrip: boolean;
   toolbarUsesPaperChrome: boolean;
   hasExtendedSections: boolean;
+  hasCalmPaperCanvas: boolean;
+  hasPlannerCommandHints: boolean;
   score: number;
 };
 
@@ -50,7 +52,14 @@ export function auditPaperVisualArtifacts(): PaperVisualAuditResult {
     hasExtendedSections:
       sectionChrome.includes('socialWork') && sectionChrome.includes('epis2-paper-sub-nursing-nanda'),
     hasPatientStrip: template.includes('PaperPatientStrip'),
-    toolbarUsesPaperChrome: toolbar.includes('epis2PaperChromeBarSx'),
+    toolbarUsesPaperChrome:
+      toolbar.includes('epis2PaperCalmChromeBarSx') || toolbar.includes('epis2PaperChromeBarSx'),
+    hasCalmPaperCanvas: readProjectFile(
+      'apps/web/src/components/chart/paper/PaperPageCanvas.tsx',
+    ).includes('epis2PaperCalmCanvasSx'),
+    hasPlannerCommandHints: readProjectFile(
+      'apps/web/src/components/chart/paper/planner/PaperPlannerShell.tsx',
+    ).includes('PaperPlannerCommandHints'),
   };
 
   const values = Object.values(checks);
@@ -59,7 +68,7 @@ export function auditPaperVisualArtifacts(): PaperVisualAuditResult {
   return { ...checks, score };
 }
 
-/** Umbral mínimo signoff PROG-PAPER-MODE. */
+/** Umbral mínimo signoff PROG-PAPER-MODE / MF-PA-08. */
 export const PAPER_VISUAL_AUDIT_MIN_SCORE = 0.92;
 
 export function paperVisualAuditPasses(result: PaperVisualAuditResult): boolean {

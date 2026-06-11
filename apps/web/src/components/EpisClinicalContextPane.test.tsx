@@ -5,16 +5,17 @@ import { copy } from '@epis2/design-system';
 import { Epis2ThemeProvider } from '@epis2/epis2-ui';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { EpisClinicalContextPane } from './EpisClinicalContextPane.js';
 
 const patientId = '00000000-0000-4000-8000-000000000099';
 
-const { fetchPatientLongitudinal, searchPatientDocuments, suggestPatientSummary } = vi.hoisted(
+const { fetchPatientLongitudinal, searchPatientDocuments, suggestPatientSummary, fetchAiStatus } = vi.hoisted(
   () => ({
     fetchPatientLongitudinal: vi.fn(),
     searchPatientDocuments: vi.fn(),
     suggestPatientSummary: vi.fn(),
+    fetchAiStatus: vi.fn(),
   }),
 );
 
@@ -25,6 +26,26 @@ vi.mock('../api/clinicalApi.js', async (importOriginal) => {
 
 vi.mock('../api/aiApi.js', () => ({
   suggestPatientSummary,
+  fetchAiStatus,
+}));
+
+const commandSubmit = vi.hoisted(() => vi.fn());
+
+vi.mock('../clinical/useClinicalCommandSubmit.js', () => ({
+  useClinicalCommandSubmit: () => ({ submit: commandSubmit }),
+}));
+
+vi.mock('../clinical/useCommandResolveContext.js', () => ({
+  useCommandResolveContext: () => ({
+    workspace: 'patient_chart',
+    activeAlertCount: 1,
+    pendingDraftCount: 0,
+    traditionalSection: 'navMeds',
+  }),
+}));
+
+vi.mock('../auth/AuthContext.js', () => ({
+  useAuth: () => ({ session: { user: { role: 'physician' } } }),
 }));
 
 vi.mock('@epis2/epis2-ui', async (importOriginal) => {
@@ -35,6 +56,40 @@ vi.mock('@epis2/epis2-ui', async (importOriginal) => {
 afterEach(() => cleanup());
 
 describe('EpisClinicalContextPane', () => {
+  beforeEach(() => {
+    fetchAiStatus.mockResolvedValue({ available: true, readOnly: true });
+    commandSubmit.mockReset();
+  });
+
+  it('muestra acciones sugeridas y ejecuta comando (MF-CM-05)', async () => {
+    const user = userEvent.setup();
+    fetchPatientLongitudinal.mockResolvedValue({
+      patientId,
+      readOnly: true,
+      problems: [],
+      allergies: [],
+      medications: [],
+      observations: [],
+      documents: [],
+      encounters: [],
+      timeline: [],
+    });
+
+    render(
+      <Epis2ThemeProvider>
+        <EpisClinicalContextPane patientId={patientId} />
+      </Epis2ThemeProvider>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('epis2-context-ai-panel')).toBeInTheDocument();
+    });
+
+    const chip = await screen.findByTestId('epis2-context-suggest-reconcile_medications');
+    await user.click(chip);
+    expect(commandSubmit).toHaveBeenCalledWith('conciliacion medicamentosa');
+  });
+
   it('muestra timeline, filtra por búsqueda e inserta fragmento', async () => {
     const user = userEvent.setup();
     const onInsert = vi.fn();
@@ -90,6 +145,50 @@ describe('EpisClinicalContextPane', () => {
         text: expect.stringContaining('Meropenem'),
       }),
     );
+  });
+
+  it('filtra timeline por kind (MF-TE-06)', async () => {
+    const user = userEvent.setup();
+    fetchPatientLongitudinal.mockResolvedValue({
+      patientId,
+      readOnly: true,
+      problems: [],
+      allergies: [],
+      medications: [],
+      observations: [],
+      documents: [],
+      encounters: [],
+      timeline: [
+        {
+          id: 'ev-note',
+          kind: 'note',
+          at: '2026-05-10T10:00:00.000Z',
+          title: 'Nota clínica',
+          detail: 'Detalle',
+        },
+        {
+          id: 'ev-lab',
+          kind: 'observation',
+          at: '2026-05-08T10:00:00.000Z',
+          title: 'Laboratorio',
+          detail: 'Hb',
+        },
+      ],
+    });
+
+    render(
+      <Epis2ThemeProvider>
+        <EpisClinicalContextPane patientId={patientId} />
+      </Epis2ThemeProvider>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('epis2-context-timeline-kind-filters')).toBeInTheDocument();
+    });
+
+    await user.click(screen.getByTestId('epis2-context-kind-observation'));
+    expect(screen.getByText('Laboratorio')).toBeInTheDocument();
+    expect(screen.queryByText('Nota clínica')).not.toBeInTheDocument();
   });
 
   it('marca filas de timeline como draggable en desktop', async () => {

@@ -28,6 +28,8 @@ if (existsSync(paths.reference)) {
   for (const needle of [
     'FICHAPAPEL_VISUAL_REFERENCE',
     'epis2PaperChromeBarSx',
+    'epis2PaperCalmCanvasSx',
+    'epis2PaperCalmChromeBarSx',
     'epis2PaperSectionTitleSx',
     'epis2PaperFieldLabelSx',
     'github.com/gabriel2320/FichaPapel',
@@ -45,8 +47,16 @@ if (existsSync(paths.template)) {
 
 if (existsSync(paths.toolbar)) {
   const src = readFileSync(paths.toolbar, 'utf8');
-  if (!src.includes('epis2PaperChromeBarSx')) {
-    errors.push('PaperDocumentToolbar debe usar epis2PaperChromeBarSx');
+  if (!src.includes('epis2PaperCalmChromeBarSx')) {
+    errors.push('PaperDocumentToolbar debe usar epis2PaperCalmChromeBarSx');
+  }
+}
+
+const canvasPath = join(root, 'apps/web/src/components/chart/paper/PaperPageCanvas.tsx');
+if (existsSync(canvasPath)) {
+  const src = readFileSync(canvasPath, 'utf8');
+  if (!src.includes('epis2PaperCalmCanvasSx')) {
+    errors.push('PaperPageCanvas debe usar epis2PaperCalmCanvasSx');
   }
 }
 

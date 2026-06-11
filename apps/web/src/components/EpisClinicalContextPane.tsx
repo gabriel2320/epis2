@@ -1,6 +1,7 @@
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 
 type TimelineEvent = PatientLongitudinalResponse['timeline'][number];
+import { buildContextPanelSuggestions } from '@epis2/local-ai/contextPanelSuggestions';
 import { copy } from '@epis2/design-system';
 import {
   CLINICAL_CONTEXT_DRAG_MIME,
@@ -18,7 +19,17 @@ import {
   useEpisClinicalContextDragEnabled,
 } from '@epis2/epis2-ui';
 import { useEffect, useMemo, useState } from 'react';
+import { fetchAiStatus } from '../api/aiApi.js';
 import { fetchPatientLongitudinal } from '../api/clinicalApi.js';
+import { useAuth } from '../auth/AuthContext.js';
+import { useClinicalCommandSubmit } from '../clinical/useClinicalCommandSubmit.js';
+import { useCommandResolveContext } from '../clinical/useCommandResolveContext.js';
+import {
+  CLINICAL_SUMMARY_TIMELINE_KINDS,
+  filterTimelineByKind,
+  type TimelineKindFilter,
+} from './clinical-summary/clinicalSummaryTimeline.js';
+import { useClinicalContextPanelMeta } from './chart/ClinicalRightContextPanel.js';
 import { EpisClinicalContextDocuments } from './EpisClinicalContextDocuments.js';
 import { EpisClinicalPeriodSummary } from './EpisClinicalPeriodSummary.js';
 import { ErrorState } from './ErrorState.js';
@@ -34,9 +45,22 @@ export type EpisClinicalContextPaneProps = {
   /** Campo destino por defecto para el chip de inserción. */
   defaultInsertFieldId?: string;
   onInsertFragment?: (payload: ClinicalContextInsertPayload) => void;
+  /** MF-TE-06 — contador eventos para panel lateral denso. */
+  onTimelineCountChange?: (count: number) => void;
 };
 
 type ContextTab = 'timeline' | 'documents';
+
+const TIMELINE_KIND_LABELS: Record<
+  (typeof CLINICAL_SUMMARY_TIMELINE_KINDS)[number],
+  string
+> = {
+  encounter: copy.clinicalSummary.timelineKindEncounter,
+  note: copy.clinicalSummary.timelineKindNote,
+  observation: copy.clinicalSummary.timelineKindObservation,
+  document: copy.clinicalSummary.timelineKindDocument,
+  draft: copy.clinicalSummary.timelineKindDraft,
+};
 
 function formatTimelineInsertText(ev: TimelineEvent): string {
   const date = new Date(ev.at).toLocaleDateString('es-CL');
@@ -51,16 +75,96 @@ function matchesTimelineQuery(ev: TimelineEvent, query: string): boolean {
   return hay.includes(needle);
 }
 
+/** Resumen + acciones sugeridas en panel lateral (MF-CM-05). */
+function EpisClinicalContextAiSection({ patientId }: { patientId: string }) {
+  const panelMeta = useClinicalContextPanelMeta();
+  const { session } = useAuth();
+  const commandContext = useCommandResolveContext('patient_chart');
+  const { submit } = useClinicalCommandSubmit({ patientId, commandContext });
+  const [aiAvailable, setAiAvailable] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    void fetchAiStatus()
+      .then((status) => {
+        if (cancelled) return;
+        setAiAvailable(status.available);
+        panelMeta?.setAiAvailable(status.available);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setAiAvailable(false);
+        panelMeta?.setAiAvailable(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [panelMeta]);
+
+  const suggestions = useMemo(
+    () =>
+      buildContextPanelSuggestions({
+        role: session?.user.role ?? 'physician',
+        aiAvailable: aiAvailable ?? false,
+        activeAlertCount: commandContext.activeAlertCount,
+        pendingDraftCount: commandContext.pendingDraftCount,
+        traditionalSection: commandContext.traditionalSection,
+      }),
+    [
+      session?.user.role,
+      aiAvailable,
+      commandContext.activeAlertCount,
+      commandContext.pendingDraftCount,
+      commandContext.traditionalSection,
+    ],
+  );
+
+  return (
+    <Stack spacing={1.25} data-testid="epis2-context-ai-panel" sx={{ mb: 0.5 }}>
+      <Typography variant="subtitle2" component="h3">
+        {copy.ai.panelTitle}
+      </Typography>
+      <EpisClinicalPeriodSummary patientId={patientId} />
+      {suggestions.length > 0 ? (
+        <Stack spacing={0.5}>
+          <Typography variant="caption" color="text.secondary">
+            Acciones sugeridas
+          </Typography>
+          <Stack
+            direction="row"
+            flexWrap="wrap"
+            gap={0.5}
+            data-testid="epis2-context-suggested-actions"
+          >
+            {suggestions.map((item) => (
+              <EpisChip
+                key={item.intent}
+                label={item.labelEs}
+                size="small"
+                variant="outlined"
+                onClick={() => void submit(item.commandText)}
+                data-testid={`epis2-context-suggest-${item.intent}`}
+              />
+            ))}
+          </Stack>
+        </Stack>
+      ) : null}
+    </Stack>
+  );
+}
+
 /** Panel de consulta clínica — timeline, documentos e inserción (LAYOUT-02+). */
 export function EpisClinicalContextPane({
   patientId,
   defaultInsertFieldId = 'plan',
   onInsertFragment,
+  onTimelineCountChange,
 }: EpisClinicalContextPaneProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | undefined>();
   const [timeline, setTimeline] = useState<TimelineEvent[]>([]);
   const [search, setSearch] = useState('');
+  const [kindFilter, setKindFilter] = useState<TimelineKindFilter>('all');
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<ContextTab>('timeline');
@@ -89,10 +193,14 @@ export function EpisClinicalContextPane({
     };
   }, [patientId]);
 
-  const filtered = useMemo(
-    () => timeline.filter((ev) => matchesTimelineQuery(ev, search)),
-    [timeline, search],
-  );
+  const filtered = useMemo(() => {
+    const byKind = filterTimelineByKind(timeline, kindFilter);
+    return byKind.filter((ev) => matchesTimelineQuery(ev, search));
+  }, [timeline, kindFilter, search]);
+
+  useEffect(() => {
+    onTimelineCountChange?.(filtered.length);
+  }, [filtered.length, onTimelineCountChange]);
 
   const selected = useMemo(
     () => (selectedId ? timeline.find((ev) => ev.id === selectedId) : undefined),
@@ -182,7 +290,7 @@ export function EpisClinicalContextPane({
       <Typography variant="subtitle2" component="h2">
         {copy.clinicalLayout.contextPaneTitle}
       </Typography>
-      <EpisClinicalPeriodSummary patientId={patientId} />
+      <EpisClinicalContextAiSection patientId={patientId} />
       <Tabs
         value={activeTab}
         onChange={(_, value) => setActiveTab(value as ContextTab)}
@@ -202,6 +310,25 @@ export function EpisClinicalContextPane({
       </Tabs>
       {activeTab === 'timeline' ? (
         <>
+          <Stack direction="row" flexWrap="wrap" gap={0.5} data-testid="epis2-context-timeline-kind-filters">
+            <EpisChip
+              label={copy.clinicalSummary.timelineFilterAll}
+              size="small"
+              variant={kindFilter === 'all' ? 'filled' : 'outlined'}
+              onClick={() => setKindFilter('all')}
+              data-testid="epis2-context-kind-all"
+            />
+            {CLINICAL_SUMMARY_TIMELINE_KINDS.map((kind) => (
+              <EpisChip
+                key={kind}
+                label={TIMELINE_KIND_LABELS[kind]}
+                size="small"
+                variant={kindFilter === kind ? 'filled' : 'outlined'}
+                onClick={() => setKindFilter(kind)}
+                data-testid={`epis2-context-kind-${kind}`}
+              />
+            ))}
+          </Stack>
           <TextField
             size="small"
             fullWidth
@@ -240,8 +367,16 @@ export function EpisClinicalContextPane({
                 >
                   <ListItemText
                     primary={ev.title}
-                    secondary={`${new Date(ev.at).toLocaleDateString('es-CL')} · ${ev.kind}${ev.detail ? ` — ${ev.detail}` : ''}`}
-                    secondaryTypographyProps={{ sx: { fontVariantNumeric: 'tabular-nums' } }}
+                    secondary={`${new Date(ev.at).toLocaleDateString('es-CL')} · ${TIMELINE_KIND_LABELS[ev.kind as (typeof CLINICAL_SUMMARY_TIMELINE_KINDS)[number]] ?? ev.kind}${ev.detail ? ` — ${ev.detail}` : ''}`}
+                    secondaryTypographyProps={{
+                      sx: {
+                        fontVariantNumeric: 'tabular-nums',
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                      },
+                    }}
                   />
                 </ListItemButton>
               ))}

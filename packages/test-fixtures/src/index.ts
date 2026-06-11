@@ -20,3 +20,20 @@ export {
   getDemoCaseByPatientId,
   type DemoClinicalCase,
 } from './demoCases.js';
+export {
+  DEMO_CHART_PRIORITY_SECTIONS,
+  DEMO_CHART_SECTIONS_BY_CODE,
+  assertDemoChartSectionsInvariants,
+  getDemoChartSectionRows,
+  getDemoChartBatch2Rows,
+  getDemoChartBatch3Rows,
+  getDemoChartDemoSectionRows,
+  hasDemoTraditionalSectionContent,
+  DEMO_CHART_BATCH2_SECTIONS,
+  DEMO_CHART_BATCH3_SECTIONS,
+  type DemoChartBatch2SectionId,
+  type DemoChartBatch3SectionId,
+  type DemoChartDemoSectionId,
+  type DemoChartPrioritySectionId,
+  type DemoChartSectionRow,
+} from './demoChartSections.js';

@@ -13,6 +13,7 @@ import { PaperChartTemplate } from './paper/PaperChartTemplate.js';
 import type { PaperPatientStripProps } from './paper/PaperPatientStrip.js';
 import { PaperDocumentToolbar } from './PaperDocumentToolbar.js';
 import { paginatePaperChart } from './paper/pagination/index.js';
+import { resolvePaperSectionMinRows } from './paper/paperSectionScaffold.js';
 import { PaperPageCanvas } from './paper/PaperPageCanvas.js';
 import { PaperSectionNavigator } from './paper/PaperSectionNavigator.js';
 
@@ -56,19 +57,11 @@ export function PaperChartMode({
   );
   const draft = usePaperChartDraft(patientId);
   const values = patientId ? draft.values : previewValues;
-  const { totalPages } = useMemo(() => {
+  const { totalPages, pages } = useMemo(() => {
     const sections = PAPER_CHART_SECTION_IDS.map((sectionId) => ({
       sectionId,
       value: (patientId ? draft.values[sectionId] : previewValues[sectionId]) ?? '',
-      minRows:
-        sectionId === 'cover'
-          ? 3
-          : sectionId === 'nursing' ||
-              sectionId === 'fluidBalance' ||
-              sectionId === 'procedures' ||
-              sectionId === 'socialWork'
-            ? 10
-            : 5,
+      minRows: resolvePaperSectionMinRows(sectionId),
     }));
     return paginatePaperChart(sections, printFormat);
   }, [patientId, draft.values, previewValues, printFormat]);
@@ -251,7 +244,7 @@ export function PaperChartMode({
               patientName={patientName}
               recordNumber={recordNumber}
               patientStrip={patientStrip}
-              page={1}
+              pageLayouts={pages}
               totalPages={totalPages}
               onSectionChange={patientId && !draft.readOnly ? draft.onSectionChange : onSectionChange}
               onConfirmSection={

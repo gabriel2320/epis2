@@ -17,6 +17,8 @@ describe('PaperVisualAudit MF-PAPER-09', () => {
     expect(result.hasPaperPageClass).toBe(true);
     expect(result.hasBaselineGrid).toBe(true);
     expect(result.hasPrintMediaRules).toBe(true);
+    expect(result.hasCalmPaperCanvas).toBe(true);
+    expect(result.hasPlannerCommandHints).toBe(true);
   });
 
   it('footer visible en impresión (no epis2-paper-chart-no-print)', () => {

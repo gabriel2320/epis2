@@ -1,4 +1,5 @@
 import type { SxProps, Theme } from '@mui/material/styles';
+import { epis2ClinicalCalmCanvasColors } from './clinical/clinical-calm-canvas.js';
 import { epis2PaperChartTokens } from './chart-modes-tokens.js';
 
 /**
@@ -21,6 +22,16 @@ export function epis2PaperCanvasSx(): SxProps<Theme> {
   };
 }
 
+/**
+ * Escritorio Calm Premium (THEME-CALM-01) — MF-PA-06.
+ * Canvas `#F7F9FC`; la hoja imprimible conserva `paperBg`.
+ */
+export function epis2PaperCalmCanvasSx(): SxProps<Theme> {
+  return {
+    bgcolor: epis2ClinicalCalmCanvasColors.light,
+  };
+}
+
 /** Barra chrome fuera del área imprimible (toolbar, avisos). */
 export function epis2PaperChromeBarSx(): SxProps<Theme> {
   const t = epis2PaperChartTokens;
@@ -30,6 +41,17 @@ export function epis2PaperChromeBarSx(): SxProps<Theme> {
     px: 2,
     py: 1.25,
     fontFamily: t.typography.label,
+  };
+}
+
+/** Chrome toolbar con superficie Calm Premium fuera del área imprimible — MF-PA-06. */
+export function epis2PaperCalmChromeBarSx(): SxProps<Theme> {
+  const t = epis2PaperChartTokens;
+  return {
+    ...epis2PaperChromeBarSx(),
+    bgcolor: epis2ClinicalCalmCanvasColors.light,
+    borderBottom: `2px solid ${t.navyHeader}`,
+    boxShadow: 'inset 0 -1px 0 rgba(11, 92, 102, 0.14)',
   };
 }
 

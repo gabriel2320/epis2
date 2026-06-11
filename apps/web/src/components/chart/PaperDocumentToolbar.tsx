@@ -3,7 +3,7 @@ import {
   Box,
   Stack,
   epis2PaperBridgeControlSx,
-  epis2PaperChromeBarSx,
+  epis2PaperCalmChromeBarSx,
   epis2PaperToolbarControlSx,
 } from '@epis2/epis2-ui';
 import {
@@ -79,7 +79,7 @@ export function PaperDocumentToolbar({
       spacing={1}
       className="epis2-paper-chart-no-print"
       data-testid={testId}
-      sx={epis2PaperChromeBarSx()}
+      sx={epis2PaperCalmChromeBarSx()}
     >
       <Stack direction="row" spacing={0.75} flexWrap="wrap" alignItems="center">
         <Box

@@ -56,6 +56,15 @@ export {
   type ClinicalPhraseSuiteEntry,
 } from './clinical-phrase-suite-50.js';
 export {
+  CLINICAL_PHRASE_SUITE_COLLOQUIAL,
+  CLINICAL_PHRASE_SUITE_COLLOQUIAL_MIN_USEFUL_RATIO,
+} from './clinical-phrase-suite-colloquial.js';
+export {
+  COMMAND_INTENT_TOP10,
+  COMMAND_INTENT_TOP10_MIN_RESOLVE_RATIO,
+  type CommandIntentTop10Entry,
+} from './command-intent-top10.js';
+export {
   buildGuidedFallbackCandidates,
   GUIDED_FALLBACK_MESSAGE,
   isUsefulCommandResolveResult,
@@ -75,6 +84,13 @@ export {
   type SecureCommandMeta,
 } from './intent-metadata.js';
 export { applyContextScoreBoost, contextFallbackIntents } from './context-rank.js';
+export {
+  TRADITIONAL_SECTION_NAV_IDS,
+  assistBlueprintIntentBoost,
+  isTraditionalSectionNavId,
+  traditionalSectionIntentBoost,
+  type TraditionalSectionNavId,
+} from './context-section-rank.js';
 export {
   PAPER_CHART_COMMAND_DEFINITIONS,
   PAPER_CHART_INTENTS,
@@ -100,6 +116,7 @@ export {
   pickAssistFallback,
   sanitizeAssistRouteHint,
   shouldInvokeAssistRoute,
+  assistClarifyFooterHint,
   type AssistRouteIntentCatalogEntry,
 } from './assist-route.js';
 export type {

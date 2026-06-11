@@ -1,5 +1,12 @@
 import { copy } from '@epis2/design-system';
-import { Box, EpisM3Text, Typography, epis2TraditionalChartTokens } from '@epis2/epis2-ui';
+import {
+  Box,
+  EpisM3Text,
+  Typography,
+  epis2ChartContentTransitionSx,
+  epis2ChartMainScrollSx,
+  epis2TraditionalChartTokens,
+} from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
 import { TRADITIONAL_SECTION_IDS, type TraditionalSectionId } from './TraditionalSectionNav.js';
 
@@ -21,10 +28,9 @@ export function TraditionalClinicalPanel({
   return (
     <Box
       data-testid={testId}
+      data-epis2-chart-scroll="main"
       sx={{
-        flex: 1,
-        minWidth: 0,
-        overflow: 'auto',
+        ...epis2ChartMainScrollSx(),
         p: t.sectionGap,
         bgcolor: t.surface,
       }}
@@ -36,11 +42,13 @@ export function TraditionalClinicalPanel({
       >
         {sectionLabel}
       </EpisM3Text>
-      {children ?? (
-        <Typography variant="body2" color="text.secondary">
-          {copy.chartModes.sectionEmpty}
-        </Typography>
-      )}
+      <Box key={activeSection} sx={epis2ChartContentTransitionSx()}>
+        {children ?? (
+          <Typography variant="body2" color="text.secondary">
+            {copy.chartModes.sectionEmpty}
+          </Typography>
+        )}
+      </Box>
     </Box>
   );
 }

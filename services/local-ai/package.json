@@ -3,6 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "main": "./dist/server.js",
+  "types": "./dist/server.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/server.d.ts",
+      "import": "./dist/server.js"
+    },
+    "./contextPanelSuggestions": {
+      "types": "./dist/contextPanelSuggestions.d.ts",
+      "import": "./dist/contextPanelSuggestions.js"
+    },
+    "./commandAssistDraft": {
+      "types": "./dist/commandAssistDraft.d.ts",
+      "import": "./dist/commandAssistDraft.js"
+    }
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",

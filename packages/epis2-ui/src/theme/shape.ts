@@ -54,7 +54,7 @@ export const epis2ShapeProfiles = {
     bar: epis2Shape.pill,
     palette: epis2Shape.extraLarge,
   },
-  /** Calm Premium — mosaico clásico MD3 / comando (no ficha traditional EMR). */
+  /** Calm Premium — mosaico resumen navSummary / modo clásico MD3 (no nav secciones EMR). */
   calm: {
     chip: 16,
     field: epis2Shape.medium,
@@ -63,6 +63,11 @@ export const epis2ShapeProfiles = {
     max: 24,
   },
 } as const;
+
+/** Acota radio px al perfil traditional EMR (MF-NORM-04). */
+export function clampTraditionalRadiusPx(px: number): number {
+  return Math.min(Math.max(0, px), epis2TraditionalShapeMaxPx);
+}
 
 export type Epis2ShapeKey = keyof typeof epis2Shape;
 

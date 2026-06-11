@@ -31,8 +31,48 @@ if (existsSync(modePath)) {
     'scrollToSection',
     'epis2-paper-section-',
     'section: sectionId',
+    'resolvePaperSectionMinRows',
   ]) {
     if (!src.includes(needle)) errors.push(`PaperChartMode falta ${needle}`);
+  }
+}
+
+const chromePath = join(root, 'apps/web/src/components/chart/paper/paperSectionChrome.tsx');
+const scaffoldPath = join(root, 'apps/web/src/components/chart/paper/paperSectionScaffold.ts');
+const batchPath = join(
+  root,
+  'packages/clinical-forms/src/paper-chart/paperSectionBatch.ts',
+);
+
+for (const [label, path] of [
+  ['paperSectionChrome', chromePath],
+  ['paperSectionScaffold', scaffoldPath],
+  ['paperSectionBatch', batchPath],
+]) {
+  if (!existsSync(path)) errors.push(`Falta ${label}: ${path}`);
+}
+
+if (existsSync(chromePath)) {
+  const src = readFileSync(chromePath, 'utf8');
+  for (const section of [
+    'nursing',
+    'fluidBalance',
+    'consults',
+    'procedures',
+    'imaging',
+    'consent',
+    'socialWork',
+  ]) {
+    if (!src.includes(`case '${section}':`)) {
+      errors.push(`paperSectionChrome falta scaffold ${section}`);
+    }
+  }
+}
+
+if (existsSync(batchPath)) {
+  const src = readFileSync(batchPath, 'utf8');
+  if (!src.includes('PAPER_CHART_SECTIONS_VIII_XIV')) {
+    errors.push('paperSectionBatch falta PAPER_CHART_SECTIONS_VIII_XIV');
   }
 }
 

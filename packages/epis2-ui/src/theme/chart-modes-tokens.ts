@@ -113,6 +113,16 @@ export function epis2TraditionalChartShellSx(): SxProps<Theme> {
   };
 }
 
+/** Scroll único panel central ficha (MF-NORM-02). */
+export function epis2ChartMainScrollSx(): SxProps<Theme> {
+  return {
+    flex: 1,
+    minHeight: 0,
+    minWidth: 0,
+    overflow: 'auto',
+  };
+}
+
 /** Contenedor documento papel en pantalla. */
 export function epis2PaperDocumentSx(format: 'letter' | 'a5' = 'letter'): SxProps<Theme> {
   const t = epis2PaperChartTokens;

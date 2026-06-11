@@ -39,6 +39,21 @@ if (existsSync(footerPath)) {
   }
 }
 
+const modePath = join(root, 'apps/web/src/components/chart/PaperChartMode.tsx');
+const templatePath = join(root, 'apps/web/src/components/chart/paper/PaperChartTemplate.tsx');
+if (existsSync(modePath)) {
+  const src = readFileSync(modePath, 'utf8');
+  if (!src.includes('pageLayouts={pages}')) {
+    errors.push('PaperChartMode debe pasar pageLayouts desde paginatePaperChart');
+  }
+}
+if (existsSync(templatePath)) {
+  const src = readFileSync(templatePath, 'utf8');
+  if (!src.includes('pageLayouts')) {
+    errors.push('PaperChartTemplate debe aceptar pageLayouts multi-hoja');
+  }
+}
+
 if (errors.length) {
   console.error('paper-mode-pagination-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);

@@ -75,6 +75,8 @@ export type ClinicalFormSearch = ClinicalPatientSearch & {
   urgencyHint?: 'routine' | 'urgent' | 'stat' | undefined;
   clinicalReasonHint?: string | undefined;
   noteHint?: string | undefined;
+  /** MF-CM-06: barra invocó assist — aplicar borrador al abrir formulario. */
+  assistDraft?: boolean | undefined;
 };
 
 const URGENCY_HINTS = new Set(['routine', 'urgent', 'stat']);
@@ -110,6 +112,9 @@ export function parseClinicalFormSearch(search: Record<string, unknown>): Clinic
   const urgencyRaw = search.urgencyHint;
   if (typeof urgencyRaw === 'string' && URGENCY_HINTS.has(urgencyRaw)) {
     parsed.urgencyHint = urgencyRaw as ClinicalFormSearch['urgencyHint'];
+  }
+  if (search.assistDraft === true || search.assistDraft === 'true' || search.assistDraft === '1') {
+    parsed.assistDraft = true;
   }
   return parsed;
 }
