@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-11T03:16:07.204Z",
+  "generatedAt": "2026-06-11T03:19:49.117Z",
   "baseUrl": "http://127.0.0.1:11434",
   "routes": {
     "dev-plan": {
@@ -24,8 +24,7 @@
   "steps": [
     {
       "step": "plan",
-      "ok": true,
-      "skipped": true
+      "ok": true
     },
     {
       "step": "write",

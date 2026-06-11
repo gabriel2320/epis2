@@ -2,7 +2,7 @@
 
 ## Gates
 
-- [ ] check (lint+types+arch) (fail)
+- [x] check (lint+types+arch) (ok)
 - [ ] test (fail)
 - [x] db:validate (ok)
 
@@ -23,5 +23,5 @@ _(qué MF / archivos tocó esta sesión)_
 -
 
 
-**Atención:** 2 gate(s) fallaron — corregir antes de commit.
+**Atención:** 1 gate(s) fallaron — corregir antes de commit.
 
