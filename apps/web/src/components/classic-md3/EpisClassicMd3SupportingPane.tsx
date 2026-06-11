@@ -23,7 +23,7 @@ export function EpisClassicMd3SupportingPane({
       component="aside"
       data-testid={testId}
       sx={{
-        width: { md: 340, lg: 360 },
+        width: { md: 300, lg: 380 },
         maxWidth: '100%',
         flex: 1,
         minHeight: 0,

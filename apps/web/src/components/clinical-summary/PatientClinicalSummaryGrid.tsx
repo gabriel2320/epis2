@@ -13,6 +13,10 @@ import {
   selectLabHighlights,
 } from './clinicalSummaryData.js';
 import {
+  clinicalSummaryCardIcon,
+  type ClinicalSummaryIconKey,
+} from './clinicalSummaryCardIcons.js';
+import {
   EpisClinicalSummaryCard,
   type ClinicalSummarySurface,
 } from './EpisClinicalSummaryCard.js';
@@ -34,6 +38,22 @@ export type PatientClinicalSummaryGridProps = {
 
 const NOW_KEYS = ['recentEvents', 'pendingItems', 'clinicalAlerts'] as const;
 const CONTEXT_KEYS = ['activeProblems'] as const;
+
+const FIELD_ICON_KEYS: Partial<Record<string, ClinicalSummaryIconKey>> = {
+  recentEvents: 'events',
+  pendingItems: 'drafts',
+  clinicalAlerts: 'alerts',
+  activeProblems: 'problems',
+  activeMedications: 'medications',
+  relevantLabs: 'labs',
+};
+
+function calmLeadingIcon(
+  surface: ClinicalSummarySurface,
+  key?: ClinicalSummaryIconKey,
+) {
+  return surface === 'calm' && key ? clinicalSummaryCardIcon(key) : undefined;
+}
 
 function formatTimelinePreview(
   events: PatientLongitudinalResponse['timeline'],
@@ -89,6 +109,7 @@ export function PatientClinicalSummaryGrid({
         title={patientSummaryFieldLabel(key)}
         severity={severity}
         surface={surfaceProfile}
+        leadingIcon={calmLeadingIcon(surfaceProfile, FIELD_ICON_KEYS[key])}
         testId={`${testId}-${key}`}
       >
         {value}
@@ -107,6 +128,7 @@ export function PatientClinicalSummaryGrid({
         key={zoneKey}
         title={title}
         surface={surfaceProfile}
+        leadingIcon={calmLeadingIcon(surfaceProfile, 'medications')}
         testId={`${testId}-meds-${zoneKey}`}
       >
         {items.map(formatMedicationLine).join('\n')}
@@ -125,6 +147,7 @@ export function PatientClinicalSummaryGrid({
           title={copy.clinicalSummary.criticalAlerts}
           severity="critical"
           surface={surfaceProfile}
+          leadingIcon={calmLeadingIcon(surfaceProfile, 'alerts')}
           testId={`${testId}-live-alerts`}
           actionLabel={copy.clinicalSummary.viewAlerts}
           onAction={onOpenEvolution}
@@ -152,6 +175,7 @@ export function PatientClinicalSummaryGrid({
               title={copy.longitudinal.allergies}
               severity="warning"
               surface={surfaceProfile}
+              leadingIcon={calmLeadingIcon(surfaceProfile, 'allergies')}
               testId={`${testId}-allergies`}
               actionLabel={copy.clinicalSummary.manageAllergies}
               onAction={onRegisterAllergy}
@@ -218,18 +242,25 @@ export function PatientClinicalSummaryGrid({
             renderFieldCard('activeMedications')
           )}
           {labHighlights.length > 0 ? (
-            labHighlights.map((lab) => (
-              <EpisClinicalSummaryCard
+            labHighlights.map((lab, index) => (
+              <Box
                 key={lab.id}
-                title={lab.label}
-                surface={surfaceProfile}
-                meta={copy.clinicalSummary.labsHighlight}
-                highlightValue={lab.valueText}
-                highlightMeta={formatLabObservedAt(lab.observedAt)}
-                testId={`${testId}-lab-${lab.id}`}
-                actionLabel={onOpenResults ? copy.clinicalSummary.openLabs : undefined}
-                onAction={onOpenResults}
-              />
+                {...(surfaceProfile === 'calm' && index === 0
+                  ? { sx: { gridColumn: { md: 'span 2' } } }
+                  : {})}
+              >
+                <EpisClinicalSummaryCard
+                  title={lab.label}
+                  surface={surfaceProfile}
+                  leadingIcon={calmLeadingIcon(surfaceProfile, 'labs')}
+                  meta={copy.clinicalSummary.labsHighlight}
+                  highlightValue={lab.valueText}
+                  highlightMeta={formatLabObservedAt(lab.observedAt)}
+                  testId={`${testId}-lab-${lab.id}`}
+                  actionLabel={onOpenResults ? copy.clinicalSummary.openLabs : undefined}
+                  onAction={onOpenResults}
+                />
+              </Box>
             ))
           ) : (
             renderFieldCard('relevantLabs')
@@ -238,6 +269,7 @@ export function PatientClinicalSummaryGrid({
             <EpisClinicalSummaryCard
               title={copy.activePatient.summaryActiveProblems}
               surface={surfaceProfile}
+              leadingIcon={calmLeadingIcon(surfaceProfile, 'problems')}
               testId={`${testId}-problems`}
               actionLabel={copy.clinicalSummary.manageProblems}
               onAction={onRegisterProblem}
@@ -249,16 +281,21 @@ export function PatientClinicalSummaryGrid({
             </EpisClinicalSummaryCard>
           ) : null}
           {longitudinal && longitudinal.timeline.length > 0 ? (
-            <EpisClinicalSummaryCard
-              title={copy.activePatient.recentActivityTitle}
-              surface={surfaceProfile}
-              meta={copy.clinicalSummary.lastEvents}
-              testId={`${testId}-timeline`}
-              actionLabel={copy.activePatient.viewFullTimeline}
-              onAction={onViewFullTimeline}
+            <Box
+              {...(surfaceProfile === 'calm' ? { sx: { gridColumn: { md: 'span 2' } } } : {})}
             >
-              {formatTimelinePreview(longitudinal.timeline)}
-            </EpisClinicalSummaryCard>
+              <EpisClinicalSummaryCard
+                title={copy.activePatient.recentActivityTitle}
+                surface={surfaceProfile}
+                leadingIcon={calmLeadingIcon(surfaceProfile, 'timeline')}
+                meta={copy.clinicalSummary.lastEvents}
+                testId={`${testId}-timeline`}
+                actionLabel={copy.activePatient.viewFullTimeline}
+                onAction={onViewFullTimeline}
+              >
+                {formatTimelinePreview(longitudinal.timeline)}
+              </EpisClinicalSummaryCard>
+            </Box>
           ) : null}
         </Box>
       </Box>

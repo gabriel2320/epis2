@@ -30,7 +30,7 @@ export function ClinicalSummaryStickyBanner({
         py: 1,
         px: 1.5,
         mb: 1,
-        borderRadius: 1,
+        borderRadius: `${20}px`,
         border: 1,
         borderColor: 'outlineVariant',
         bgcolor: 'surfaceContainerHigh',

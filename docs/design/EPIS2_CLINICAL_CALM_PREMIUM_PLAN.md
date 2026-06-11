@@ -289,9 +289,9 @@ ClassicMd3WorkspaceLayout.tsx            (proporciones panel 300–380px)
 
 **Entregables:**
 
-- [ ] Banner sticky con borde inferior tonal (nivel 2)
-- [ ] Tarjetas distinto peso visual (span 2 cols evolución vs vitals)
-- [ ] Integración Fase B meds/alergias/labs crítica-first con estética métrica
+- [x] Banner sticky con borde inferior tonal (nivel 2) — `EpisClassicMd3PatientHeader` + `ClinicalSummaryStickyBanner`
+- [x] Tarjetas distinto peso visual (span 2 cols timeline + primer lab)
+- [x] Iconos Material por tarjeta + labs métrica destacada (Fase B)
 
 **Producto enlazado:** MF-CLINICAL-SUMMARY-B
 

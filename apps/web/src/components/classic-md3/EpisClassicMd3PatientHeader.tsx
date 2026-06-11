@@ -37,13 +37,16 @@ export function EpisClassicMd3PatientHeader({
       flexWrap="wrap"
       useFlexGap
       sx={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 3,
         minHeight: 64,
         maxHeight: 72,
         px: 2,
         py: 1,
         borderBottom: 1,
-        borderColor: 'divider',
-        bgcolor: 'background.default',
+        borderColor: 'outlineVariant',
+        bgcolor: 'surfaceContainerHigh',
         overflow: 'hidden',
       }}
     >
@@ -77,10 +80,22 @@ export function EpisClassicMd3PatientHeader({
       </Stack>
       {episodeLabel ? <Chip size="small" variant="outlined" label={episodeLabel} /> : null}
       {allergyLabels.slice(0, 3).map((label) => (
-        <Chip key={label} size="small" color="warning" variant="outlined" label={label} />
+        <Chip
+          key={label}
+          size="small"
+          variant="filled"
+          label={label}
+          sx={{ bgcolor: 'warning.light', color: 'warning.dark' }}
+        />
       ))}
       {alertLabels.slice(0, 2).map((label) => (
-        <Chip key={label} size="small" color="error" variant="outlined" label={label} />
+        <Chip
+          key={label}
+          size="small"
+          variant="filled"
+          label={label}
+          sx={{ bgcolor: 'error.light', color: 'error.dark' }}
+        />
       ))}
     </Stack>
   );

@@ -56,8 +56,8 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Nomenclatura: **Entre
 |---------|---------|------|
 | **C-1** | Revisión humana opcional post-captura M3 (hover/foco/rail/two-pane claro/oscuro) — evidencia en `reports/m3-visual-evidence/2026-06-10/` | Automatizado ✓ · [`epis2-m3-visual-pass-2026-06-10.md`](../../reports/epis2-m3-visual-pass-2026-06-10.md) |
 | **C-2** | **PROG-CALM-PREMIUM** ✓ signoff GO · THEME-CALM-01 · UX-AESTHETIC P3 · E3.5 | [`EPIS2_CLINICAL_CALM_PREMIUM_PLAN.md`](../design/EPIS2_CLINICAL_CALM_PREMIUM_PLAN.md) |
-| **C-3** | **C-3a** ✓ scaffold · **C-3b** ✓ MF-CLINICAL-SUMMARY-B (zonas meds, labs, banner) · pulido Calm Premium P3 pendiente | [`EPIS2_CLINICAL_SUMMARY_MD3.md`](../design/EPIS2_CLINICAL_SUMMARY_MD3.md) |
-| **C-4** | Staging/local ✓ (`VITE_ENABLE_DUAL_CHART_MODES=true`) · prod flag decisión operador | CI `e2e-dual-chart` ✓ · `.env.staging.example` |
+| **C-3** | **C-3a** ✓ · **C-3b** ✓ · **UX-CALM-PATIENT** ✓ (banner, iconos, span grid) | [`EPIS2_CLINICAL_SUMMARY_MD3.md`](../design/EPIS2_CLINICAL_SUMMARY_MD3.md) |
+| **C-4** | Staging ✓ · runbook prod ✓ (`.env.production.example`) · despliegue operador | [`EPIS2_DUAL_CHART_PROD_ROLLOUT.md`](../ops/EPIS2_DUAL_CHART_PROD_ROLLOUT.md) |
 | backlog | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | backlog | Ola 2+ — nota procedimiento clínica (PEND-002 defer) | No bloquea Hilo C |
 

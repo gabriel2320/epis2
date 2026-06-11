@@ -1,4 +1,5 @@
 import {
+  Box,
   EpisButton,
   EpisM3Text,
   Stack,
@@ -7,7 +8,7 @@ import {
   epis2IslandSx,
   epis2ShapeProfiles,
 } from '@epis2/epis2-ui';
-import type { ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 
 export type ClinicalSummarySurface = 'calm' | 'traditional';
 
@@ -23,6 +24,8 @@ export type EpisClinicalSummaryCardProps = {
   actionLabel?: string | undefined;
   onAction?: (() => void) | undefined;
   severity?: 'default' | 'warning' | 'critical' | undefined;
+  /** Icono outlined — UX-CALM-PATIENT (solo perfil calm). */
+  leadingIcon?: ReactElement | undefined;
   testId?: string | undefined;
 };
 
@@ -37,6 +40,7 @@ export function EpisClinicalSummaryCard({
   onAction,
   severity = 'default',
   surface = 'calm',
+  leadingIcon,
   testId,
 }: EpisClinicalSummaryCardProps) {
   const isCalm = surface === 'calm';
@@ -67,9 +71,19 @@ export function EpisClinicalSummaryCard({
       }}
     >
       <Stack direction="row" justifyContent="space-between" alignItems="flex-start" gap={1}>
-        <EpisM3Text role="titleMedium" component="h3" sx={{ m: 0 }}>
-          {title}
-        </EpisM3Text>
+        <Stack direction="row" alignItems="center" gap={1} sx={{ minWidth: 0 }}>
+          {isCalm && leadingIcon ? (
+            <Box
+              component="span"
+              sx={{ color: 'onSurfaceVariant', display: 'flex', flexShrink: 0 }}
+            >
+              {leadingIcon}
+            </Box>
+          ) : null}
+          <EpisM3Text role="titleMedium" component="h3" sx={{ m: 0 }}>
+            {title}
+          </EpisM3Text>
+        </Stack>
         {meta ? (
           <EpisM3Text role="labelMedium" color="text.secondary" sx={{ whiteSpace: 'nowrap' }}>
             {meta}
