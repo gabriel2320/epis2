@@ -23,6 +23,7 @@
     "quality:m3-signoff": "node scripts/quality/verify-m3-signoff.mjs",
     "quality:m3-human-pilot": "node scripts/quality/run-m3-human-pilot.mjs",
     "quality:m3-visual-pass": "node scripts/quality/capture-m3-visual-pass.mjs",
+    "quality:calm-premium-signoff": "node scripts/quality/capture-calm-premium-signoff.mjs",
     "quality:pilot-trial": "node scripts/quality/run-pilot-trial.mjs",
     "quality:microphases": "node scripts/quality/validate-microphase-ledger.mjs",
     "quality:microphase-next": "node scripts/quality/microphase-next.mjs",

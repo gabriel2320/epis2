@@ -2,6 +2,7 @@ import type { PaletteOptions } from '@mui/material/styles';
 import type { Epis2ApprovedThemeId } from './contracts/material-color-scheme.js';
 import type { Epis2MaterialColorScheme } from './contracts/material-color-scheme.js';
 import { type M3SurfaceRoles } from './color-roles.js';
+import { clinicalCalmCanvasBackground } from './clinical/clinical-calm-canvas.js';
 import { resolveEpis2SemanticPalette } from './semantic-palette.js';
 
 /** Extrae superficies M3 usadas por epis2.surfaces y layout. */
@@ -54,7 +55,10 @@ export function paletteFromMaterialScheme(
       contrastText: scheme.onTertiary,
     },
     background: {
-      default: scheme.surfaceContainer,
+      default:
+        themeId === 'clinical-calm'
+          ? clinicalCalmCanvasBackground(mode, scheme)
+          : scheme.surfaceContainer,
       paper: scheme.surface,
     },
     text: {

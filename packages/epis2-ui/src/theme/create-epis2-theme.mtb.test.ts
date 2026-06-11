@@ -25,6 +25,12 @@ describe('createEpis2Theme — Material Theme Builder', () => {
     expect(theme.epis2.themeId).toBe('clinical-calm');
     expect(theme.palette.primary?.main).toBe(clinicalCalmLightScheme.primary);
     expect(clinicalCalmLightScheme.primary).toBe('#0B5C66');
+    expect(theme.palette.background?.default).toBe('#F7F9FC');
+  });
+
+  it('clinical-calm dark usa canvas #101418 (THEME-CALM-01)', () => {
+    const theme = createEpis2Theme({ accent: 'clinicalCalm', mode: 'dark' });
+    expect(theme.palette.background?.default).toBe('#101418');
   });
 
   it('themeId explícito calm-teal ignora acento legacy', () => {

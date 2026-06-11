@@ -186,7 +186,7 @@ Cada etapa = 1 sesión agente manual. Nomenclatura SDEPIS2.
 | E3.2 | `components.ts` | Chips EMR: `borderRadius: 4` en ficha; mantener touch 48px |
 | E3.3 | `chart-modes-tokens.ts` | Alinear `borderRadius` papel (2px preview / 0 print) |
 | E3.4 | `island-layout.ts` | Confirmar `island: 8` en traditional |
-| E3.5 | Storybook | Stories traditional light/dark × forma cuadrada |
+| E3.5 | Storybook | Stories traditional light/dark × forma cuadrada ✓ `Ficha/Forma traditional E3.5` |
 
 **Criterio Done:** ningún componente de ficha traditional con radius > 10px salvo excepción documentada (dialog).
 
@@ -269,9 +269,9 @@ Cada etapa = 1 sesión agente manual. Nomenclatura SDEPIS2.
 
 - [x] Modo traditional: contenedores EMR con radio ≤ 10px (chips/campos 4px vía `epis2ShapeProfiles`)
 - [x] 8 perfiles MTB registrados incl. `clinical-calm` y `monochrome-gray`
-- [ ] Light + dark + high contrast validados en los 8
+- [ ] Light + dark + high contrast validados en los 8 (manual UI)
 - [x] Barra comando visible y coherente en censo + traditional + paper (variantes `census-search` / `clinical-chart`)
-- [ ] Gates: `check` · `theme:validate` · `clinical-roles.contrast` · E2E dual + ux-g02
+- [x] Gates: `check` · `theme:validate` · `clinical-roles.contrast` · E2E dual + ux-g02 (parcial)
 - [ ] Docs: este plan + `EPIS2_CLINICAL_DESIGN_SYSTEM_M3` §1 actualizado
 - [ ] Conflicto Calm Premium 20px resuelto: solo fuera de traditional EMR
 
