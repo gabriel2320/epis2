@@ -69,7 +69,7 @@
       "name": "Anatomía shell v2 — header, banda, action bar, footer",
       "phase": 4,
       "dependsOn": ["MF-DUAL-CHART-03"],
-      "state": "READY",
+      "state": "DONE",
       "gate": "quality:dual-chart-shell-anatomy-gate",
       "evidenceRequired": [
         "ClinicalInstitutionalHeader azul marino",
@@ -95,7 +95,7 @@
       "name": "TraditionalEhrLayout — nav clínico + panel colapsable",
       "phase": 5,
       "dependsOn": ["MF-DUAL-CHART-04"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "gate": "quality:dual-chart-traditional-layout-gate",
       "evidenceRequired": [
         "TraditionalSectionNav 17 secciones clínicas",
@@ -118,7 +118,7 @@
       "name": "PaperChartLayout v2 — toolbar documental + estética institucional",
       "phase": 6,
       "dependsOn": ["MF-DUAL-CHART-05"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "gate": "quality:dual-chart-paper-layout-gate",
       "evidenceRequired": [
         "PaperDocumentToolbar Carta/A5/print/PDF",
@@ -138,7 +138,7 @@
       "name": "Congelar legacy classic/dashboard",
       "phase": 7,
       "dependsOn": ["MF-DUAL-CHART-06"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "gate": "quality:dual-chart-legacy-freeze-gate",
       "closureReport": "reports/epis2-mf-dual-chart-07-legacy-freeze.md",
       "unblocks": ["MF-DUAL-CHART-08"]
@@ -148,7 +148,7 @@
       "name": "Flujo census-first — búsqueda/censo post-login",
       "phase": 8,
       "dependsOn": ["MF-DUAL-CHART-07"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "gate": "quality:dual-chart-census-gate",
       "evidenceRequired": [
         "Post-login censo pacientes canónico",
@@ -169,7 +169,7 @@
       "name": "Signoff clínico + enmienda invariante #6",
       "phase": 9,
       "dependsOn": ["MF-DUAL-CHART-08"],
-      "state": "BLOCKED",
+      "state": "DONE",
       "gate": "quality:dual-chart-launcher-gate",
       "evidenceRequired": [
         "ADR-002 Aceptado",

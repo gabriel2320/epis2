@@ -1,5 +1,6 @@
 import { copy } from '@epis2/design-system';
 import {
+  Alert,
   AssignmentIcon,
   DashboardIcon,
   EpisButton,
@@ -58,12 +59,19 @@ export function EpisModeSwitcher({
 
   return (
     <>
+      <Stack spacing={0.5} data-testid={testId} sx={{ flexShrink: 0 }}>
+        <Alert
+          severity="warning"
+          variant="outlined"
+          data-testid="epis2-mode-switcher-deprecated-banner"
+          sx={{ display: { xs: 'none', md: 'flex' }, py: 0, typography: 'caption' }}
+        >
+          {copy.threeModes.deprecatedModesBanner}
+        </Alert>
       <Stack
         direction="row"
         spacing={0.5}
         alignItems="center"
-        data-testid={testId}
-        sx={{ flexShrink: 0 }}
       >
         {!compact ? (
           <Stack
@@ -105,6 +113,7 @@ export function EpisModeSwitcher({
             </EpisButton>
           );
         })}
+      </Stack>
       </Stack>
 
       <EpisDialog

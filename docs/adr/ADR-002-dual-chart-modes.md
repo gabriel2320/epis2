@@ -1,6 +1,6 @@
 # ADR-002 — Dos modos de ficha clínica + Command Bar transversal
 
-**Estado:** Propuesto (v2 visual) · **Fecha:** 2026-06-11  
+**Estado:** Aceptado · **Fecha:** 2026-06-11  
 **Canon visual:** [`EPIS2_DUAL_CHART_VISUAL_CANON.md`](../design/EPIS2_DUAL_CHART_VISUAL_CANON.md)
 **Decisores:** producto + arquitectura EPIS2  
 **Referencias Figma:** [Medical Record](https://www.figma.com/make/PhZ55jJhxLQUtIWEuf17ZO/Medical-Record) · [Ficha papel](https://www.figma.com/make/AJ9MNrSyClA0hh8jB8sx49/Crear-p%C3%A1ginas-de-ficha-m%C3%A9dica)

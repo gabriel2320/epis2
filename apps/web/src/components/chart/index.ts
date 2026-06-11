@@ -1,8 +1,16 @@
 export { ClinicalShell, type ClinicalShellProps } from './ClinicalShell.js';
+export { ClinicalInstitutionalHeader, type ClinicalInstitutionalHeaderProps } from './ClinicalInstitutionalHeader.js';
+export { PatientIdentityBand, type PatientIdentityBandProps, type PatientDocumentStatus } from './PatientIdentityBand.js';
+export { ClinicalActionBar, type ClinicalActionBarProps } from './ClinicalActionBar.js';
+export { ClinicalFooterStatus, type ClinicalFooterStatusProps } from './ClinicalFooterStatus.js';
 export { ChartEspacioCommandDock } from './ChartEspacioCommandDock.js';
 export { PatientChartBanner, type PatientChartBannerProps } from './PatientChartBanner.js';
 export { ChartModeSwitch, type ChartModeSwitchProps } from './ChartModeSwitch.js';
 export { CommandPaletteOverlay } from './CommandPaletteOverlay.js';
 export { TraditionalEhrMode, type TraditionalEhrModeProps } from './TraditionalEhrMode.js';
+export { TraditionalSectionNav, TRADITIONAL_SECTION_IDS, type TraditionalSectionId, type TraditionalSectionNavProps } from './TraditionalSectionNav.js';
+export { TraditionalClinicalPanel, type TraditionalClinicalPanelProps } from './TraditionalClinicalPanel.js';
+export { ClinicalRightContextPanel, type ClinicalRightContextPanelProps } from './ClinicalRightContextPanel.js';
 export { PaperChartMode, type PaperChartModeProps } from './PaperChartMode.js';
+export { PaperDocumentToolbar, type PaperDocumentToolbarProps } from './PaperDocumentToolbar.js';
 export { PaperChartTemplate, type PaperChartTemplateProps } from './paper/PaperChartTemplate.js';

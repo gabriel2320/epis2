@@ -15,6 +15,17 @@ export const epis2TraditionalChartTokens = {
   density: 'compact' as const,
 } as const;
 
+/** Tokens anatomía shell v2 — header institucional, banda, footer (MF-DUAL-CHART-04). */
+export const epis2ClinicalShellTokens = {
+  institutionalNavy: '#0B2540',
+  institutionalHeaderHeight: 60,
+  identityBandMinHeight: 80,
+  actionBarMinHeight: 52,
+  footerHeight: 36,
+  allergyChipBg: '#FFF3E0',
+  allergyChipBorder: '#ED6C02',
+} as const;
+
 /** Tokens modo ficha papel — documento hospitalario Carta/A5. */
 export const epis2PaperChartTokens = {
   navyHeader: '#0B2540',

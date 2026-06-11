@@ -16,6 +16,7 @@ export {
   epis2BodyFontFamily,
   epis2TraditionalChartShellSx,
   epis2TraditionalChartTokens,
+  epis2ClinicalShellTokens,
   epis2PaperChartTokens,
   epis2PaperDocumentSx,
   epis2ChartModeTokens,

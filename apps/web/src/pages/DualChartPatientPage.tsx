@@ -1,7 +1,9 @@
 import { copy } from '@epis2/design-system';
+import { getDemoCaseByPatientId } from '@epis2/test-fixtures';
 import { useSearch } from '@tanstack/react-router';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import type { ClinicalAlert, PatientLongitudinalResponse } from '@epis2/contracts';
+import { useAuth } from '../auth/AuthContext.js';
 import { classicCommandSuggestionLabels } from '../classic-md3/commandSuggestions.js';
 import { ClinicalShell } from '../components/chart/ClinicalShell.js';
 import { PaperChartMode } from '../components/chart/PaperChartMode.js';
@@ -14,6 +16,20 @@ import type { ChartModeId } from '../dev/dualChartModesEnv.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { parseChartModeSearch, resolveChartMode } from '../routes/chartModeSearch.js';
 import type { PatientDetailResponse } from '../api/clinicalApi.js';
+
+function ageFromBirthDate(birthDate: string): number {
+  const birth = new Date(birthDate);
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const monthDelta = today.getMonth() - birth.getMonth();
+  if (monthDelta < 0 || (monthDelta === 0 && today.getDate() < birth.getDate())) age -= 1;
+  return age;
+}
+
+function demoNationalId(demoCaseCode: string | undefined): string | undefined {
+  if (!demoCaseCode) return undefined;
+  return `${demoCaseCode} · ${copy.chartModes.identitySyntheticId}`;
+}
 
 export type DualChartPatientPageProps = {
   patientId: string;
@@ -43,8 +59,10 @@ export function DualChartPatientPage({
 }: DualChartPatientPageProps) {
   const rawSearch = useSearch({ strict: false }) as Record<string, unknown>;
   const navigate = useClinicalNavigate();
+  const { session } = useAuth();
   const chartSearch = parseChartModeSearch(rawSearch);
   const chartMode: ChartModeId = resolveChartMode(chartSearch);
+  const demoCase = useMemo(() => getDemoCaseByPatientId(patientId), [patientId]);
 
   useEffect(() => {
     if (rawSearch.chartMode === 'traditional' || rawSearch.chartMode === 'paper') return;
@@ -76,6 +94,14 @@ export function DualChartPatientPage({
   ]
     .filter(Boolean)
     .join(' · ');
+  const sexLabel =
+    demoCase?.sex === 'F'
+      ? copy.chartModes.sexFemale
+      : demoCase?.sex === 'M'
+        ? copy.chartModes.sexMale
+        : undefined;
+  const roleKey = session?.user.role as keyof typeof copy.roles | undefined;
+  const userRoleLabel = roleKey ? (copy.roles[roleKey] ?? roleKey) : undefined;
 
   return (
     <>
@@ -84,7 +110,21 @@ export function DualChartPatientPage({
         onChartModeChange={setChartMode}
         displayName={detail.patient.displayName}
         metaLine={metaLine}
+        nationalId={demoNationalId(detail.patient.demoCaseCode)}
+        ageYears={demoCase ? ageFromBirthDate(demoCase.birthDate) : undefined}
+        sexLabel={sexLabel}
+        serviceUnit={demoCase?.scenario ?? copy.chartModes.shellServiceDefault}
+        headerServiceUnit={copy.careSettings.ambulatory}
         allergyLabels={allergyLabels}
+        documentStatus="draft"
+        userDisplayName={session?.user.displayName}
+        userRoleLabel={userRoleLabel}
+        onNewEvolution={onOpenEvolution}
+        onNewOrder={onRegisterProblem}
+        onOpenLab={onOpenResults}
+        onOpenPrescription={() =>
+          void navigate({ to: '/espacio/receta', search: { patientId } })
+        }
         commandQuery={classicCommand.query}
         onCommandQueryChange={classicCommand.setQuery}
         onCommandSubmit={() => void classicCommand.submit()}

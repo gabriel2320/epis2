@@ -6,7 +6,7 @@ import { EpisAppScaffold } from '../components/layout/EpisAppScaffold.js';
 import { EpisTopAppBar } from '../components/layout/EpisTopAppBar.js';
 import { EpisCommandCenterGoogleBar } from '../components/command-center/EpisCommandCenterGoogleBar.js';
 
-import { EpisButton, EpisCommandCenterLayout, Alert, Stack } from '@epis2/epis2-ui';
+import { EpisButton, EpisCommandCenterLayout, Alert, Stack, Typography } from '@epis2/epis2-ui';
 
 import { useCallback, useEffect, useState } from 'react';
 import { useSearch } from '@tanstack/react-router';
@@ -47,6 +47,48 @@ import { DemoNarrativeWalkthroughPanel } from '../components/DemoNarrativeWalkth
 import { isDemoNarrativesEnabled } from '../dev/demoNarrativesEnv.js';
 
 import { getDemoCaseByCode, type DemoNarrativeEpisode } from '@epis2/test-fixtures';
+
+/** Launcher delgado census-first — búsqueda paciente sin hero dashboard (MF-08/09). */
+function CommandLauncherSlim({
+  onOpenCensus,
+  onOpenFicha,
+  patientId,
+}: {
+  onOpenCensus: () => void;
+  onOpenFicha?: (() => void) | undefined;
+  patientId?: string | undefined;
+}) {
+  return (
+    <Stack
+      spacing={2}
+      data-testid="epis2-command-launcher-slim"
+      data-layout="slim census-first search-only"
+      sx={{ width: '100%', mb: 2 }}
+    >
+      <Stack spacing={0.5}>
+        <Typography variant="h5" component="h1">
+          {copy.commandCenter.censusTitle}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {copy.commandCenter.censusSubtitle}
+        </Typography>
+      </Stack>
+      <Stack direction="row" spacing={1} flexWrap="wrap">
+        <EpisButton appearance="filled" onClick={onOpenCensus} data-testid="epis2-census-open-search">
+          {copy.commandCenter.censusOpenSearch}
+        </EpisButton>
+        {patientId && onOpenFicha ? (
+          <EpisButton appearance="outlined" onClick={onOpenFicha} data-testid="epis2-census-open-ficha">
+            {copy.chartModes.traditional}
+          </EpisButton>
+        ) : null}
+      </Stack>
+      <Typography variant="caption" color="text.secondary">
+        {copy.commandCenter.slimLauncherHint}
+      </Typography>
+    </Stack>
+  );
+}
 
 export function CommandCenterPage() {
   const { session } = useAuth();
@@ -139,6 +181,19 @@ export function CommandCenterPage() {
         testId="epis2-command-shell"
       >
         <EpisCommandCenterLayout maxWidth={720} reserveDockSpace={false}>
+          <CommandLauncherSlim
+            onOpenCensus={() => void navigate({ to: '/espacio/buscar-paciente' })}
+            onOpenFicha={
+              activePatient?.id
+                ? () =>
+                    void navigate({
+                      to: '/espacio/ficha',
+                      search: { patientId: activePatient.id, chartMode: 'traditional' },
+                    })
+                : undefined
+            }
+            patientId={activePatient?.id}
+          />
           <EpisCommandCenterGoogleBar
             role={role}
             permissions={permissions}

@@ -56,6 +56,7 @@ export {
 } from './m3-layout-tokens.js';
 export {
   epis2ChartModeTokens,
+  epis2ClinicalShellTokens,
   epis2TraditionalChartTokens,
   epis2PaperChartTokens,
   epis2TraditionalChartShellSx,

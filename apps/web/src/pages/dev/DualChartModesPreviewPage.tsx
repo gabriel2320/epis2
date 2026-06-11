@@ -12,8 +12,12 @@ import { PaperChartMode } from '../../components/chart/PaperChartMode.js';
 import { TraditionalEhrMode } from '../../components/chart/TraditionalEhrMode.js';
 
 const DEMO_PATIENT = {
-  displayName: 'Paciente Demo — Penicilina',
+  displayName: 'Paciente Demo — Elena M. Fuentes',
   metaLine: 'DEMO-005 · Consulta ambulatoria',
+  nationalId: 'DEMO-005 · Identificador demo',
+  ageYears: 77,
+  sexLabel: 'Femenino',
+  serviceUnit: 'Bacteriemia en evaluación — FA y polifarmacia (demo)',
   allergyLabels: ['Penicilina'],
   summaryFields: {
     activeProblems: 'Infección respiratoria (demo)',
@@ -39,6 +43,10 @@ export function DualChartModesPreviewPage() {
         onChartModeChange={setChartMode}
         displayName={DEMO_PATIENT.displayName}
         metaLine={DEMO_PATIENT.metaLine}
+        nationalId={DEMO_PATIENT.nationalId}
+        ageYears={DEMO_PATIENT.ageYears}
+        sexLabel={DEMO_PATIENT.sexLabel}
+        serviceUnit={DEMO_PATIENT.serviceUnit}
         allergyLabels={DEMO_PATIENT.allergyLabels}
         commandQuery={classicCommand.query}
         onCommandQueryChange={classicCommand.setQuery}

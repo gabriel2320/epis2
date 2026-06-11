@@ -15,7 +15,7 @@ Violación = bug de arquitectura. Validador: `main-product-invariants.mjs`.
 | 3 | Sin migración sin allowlist | Manifiesto + ledger |
 | 4 | Frontend visible = React + MUI únicamente | `no-legacy-dependencies` |
 | 5 | PostgreSQL = SoT clínica | ADR-001; sin OpenMRS SoT |
-| 6 | Home = Command Center | `command-center-home` |
+| 6 | Home = búsqueda/censo paciente; workspace = ficha dual (ADR-002) | `command-center-home` + dual-chart census-gate |
 | 7 | No dashboard como home | `command-center-home` |
 | 8 | Información no solicitada oculta | Canon + revisión UX |
 | 9 | Un solo Command Registry | `packages/command-registry` |
@@ -40,7 +40,8 @@ Violación = bug de arquitectura. Validador: `main-product-invariants.mjs`.
 ## Referencias
 
 - `docs/PRODUCT_CANON.md`
-- `docs/architecture/EPIS2_MODES_LAYER.md` — tres modos MD3 (secundarios; home = comando)
+- `docs/architecture/EPIS2_MODES_LAYER.md` — tres modos MD3 (secundarios; home = censo)
+- `docs/adr/ADR-002-dual-chart-modes.md` — dual chart: ficha electrónica + papel; launcher delgado
 - `docs/legacy/EPIS_POSTMORTEM.md`
 - `docs/quality/ANTI_DRIFT_GATES.md`
 - `docs/quality/GOLDEN_CLINICAL_JOURNEY.md`

@@ -44,6 +44,21 @@ export function parseClinicalPatientSearch(search: Record<string, unknown>): Cli
   };
 }
 
+/**
+ * Legacy `?mode=classic` → ficha dual `chartMode=traditional` (MF-DUAL-CHART-07).
+ * Usar al redirigir desde modos clásico/dashboard congelados.
+ */
+export function classicModeToDualChartSearch(
+  patientId: string,
+  extras: Omit<ClinicalPatientSearch, 'patientId' | 'chartMode' | 'mode'> = {},
+): ClinicalPatientSearch {
+  return {
+    patientId,
+    chartMode: 'traditional',
+    ...extras,
+  };
+}
+
 /** CE-3b/CE-4: slots del comando en query string al abrir formulario. */
 export type ClinicalFormSearch = ClinicalPatientSearch & {
   draftId?: string | undefined;
