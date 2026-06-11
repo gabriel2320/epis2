@@ -1,10 +1,7 @@
 import { copy } from '@epis2/design-system';
 import { Link, useSearch } from '@tanstack/react-router';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
-import { resolveChartMode } from '../routes/chartModeSearch.js';
-import type { ChartModeId } from '../dev/dualChartModesEnv.js';
 import { isDualChartModesEnabled } from '../dev/dualChartModesEnv.js';
-import { useEffect, useState } from 'react';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 import { Alert, EpisButton, Stack, Typography, epis2ShellContentIslandSx } from '@epis2/epis2-ui';
@@ -32,10 +29,8 @@ import { PatientSummaryAntecedentsBlock } from '../components/PatientSummaryAnte
 import { PatientSummaryDocumentsBlock } from '../components/PatientSummaryDocumentsBlock.js';
 import { PatientWorkspaceCommandPanel } from '../components/PatientWorkspaceCommandPanel.js';
 import { CommandConfirmationDialog } from '../components/CommandConfirmationDialog.js';
-import { ClinicalShell } from '../components/chart/ClinicalShell.js';
-import { PaperChartMode } from '../components/chart/PaperChartMode.js';
-import { TraditionalEhrMode } from '../components/chart/TraditionalEhrMode.js';
-import { EpisClinicalContextPane } from '../components/EpisClinicalContextPane.js';
+import { DualChartPatientPage } from './DualChartPatientPage.js';
+import { useEffect, useState } from 'react';
 
 export function PatientWorkspacePage() {
   const search = useSearch({ strict: false }) as {
@@ -145,7 +140,7 @@ export function PatientWorkspacePage() {
           onSelectPatient={(id) =>
             void navigate({
               to: '/espacio/ficha',
-              search: { patientId: id },
+              search: { patientId: id, chartMode: 'traditional' },
             })
           }
           data-testid="epis2-workspace-patient-grid"
@@ -228,17 +223,6 @@ export function PatientWorkspacePage() {
   );
 
   const isDualChart = isDualChartModesEnabled();
-  const chartMode: ChartModeId = resolveChartMode({
-    chartMode: search.chartMode === 'paper' ? 'paper' : search.chartMode === 'traditional' ? 'traditional' : undefined,
-  });
-
-  const setChartMode = (mode: ChartModeId) => {
-    if (!patientId) return;
-    void navigate({
-      to: '/espacio/ficha',
-      search: { patientId, chartMode: mode },
-    });
-  };
 
   const allergyLabels = longitudinal?.allergies.map((a) => a.substance) ?? [];
   const alertLabels = clinicalAlerts
@@ -308,46 +292,18 @@ export function PatientWorkspacePage() {
 
   if (isDualChart) {
     return (
-      <>
-        <ClinicalShell
-          chartMode={chartMode}
-          onChartModeChange={setChartMode}
-          displayName={detail.patient.displayName}
-          metaLine={metaLine}
-          allergyLabels={allergyLabels}
-          commandQuery={classicCommand.query}
-          onCommandQueryChange={classicCommand.setQuery}
-          onCommandSubmit={() => void classicCommand.submit()}
-          commandSuggestions={classicCommandSuggestionLabels(classicCommand.lastResult)}
-          onCommandSuggestion={(label) => void classicCommand.submit(label)}
-        >
-          {chartMode === 'paper' ? (
-            <PaperChartMode
-              patientId={patientId}
-              patientName={detail.patient.displayName}
-              recordNumber={detail.patient.demoCaseCode ?? detail.patient.id.slice(0, 8)}
-            />
-          ) : (
-            <TraditionalEhrMode
-              summaryFields={detail.clinicalContext.summaryFields}
-              longitudinal={longitudinal}
-              alerts={clinicalAlerts}
-              onRegisterAllergy={longitudinalNav.onRegisterAllergy}
-              onRegisterProblem={longitudinalNav.onRegisterProblem}
-              onOpenResults={longitudinalNav.onOpenResults}
-              onOpenDraft={openDraft}
-              onViewFullTimeline={openSupportingTimeline}
-              onOpenEvolution={longitudinalNav.onOpenNote}
-              contextPane={<EpisClinicalContextPane patientId={patientId} />}
-            />
-          )}
-        </ClinicalShell>
-        <CommandConfirmationDialog
-          pending={classicCommand.pendingConfirmation}
-          onConfirm={classicCommand.confirmPending}
-          onCancel={classicCommand.cancelPending}
-        />
-      </>
+      <DualChartPatientPage
+        patientId={patientId}
+        detail={detail}
+        longitudinal={longitudinal}
+        clinicalAlerts={clinicalAlerts}
+        onOpenDraft={openDraft}
+        onRegisterAllergy={longitudinalNav.onRegisterAllergy}
+        onRegisterProblem={longitudinalNav.onRegisterProblem}
+        onOpenResults={longitudinalNav.onOpenResults}
+        onOpenEvolution={longitudinalNav.onOpenNote}
+        onViewFullTimeline={openSupportingTimeline}
+      />
     );
   }
 

@@ -2,7 +2,10 @@
  * ADR-002 — E2E dual chart modes (opt-in CI: VITE_ENABLE_DUAL_CHART_MODES=true).
  */
 import { test, expect } from '@playwright/test';
+import { getDemoCaseByCode } from '@epis2/test-fixtures';
 import { loginAsPhysician } from './helpers/demoPatient.js';
+
+const demoPatientId = getDemoCaseByCode('DEMO-005')!.patientId;
 
 test.describe('Dual chart modes ADR-002', () => {
   test.beforeEach(async ({ page }) => {
@@ -51,5 +54,29 @@ test.describe('Dual chart modes ADR-002', () => {
     await expect(page.getByTestId('epis2-chart-command-bar')).toBeVisible();
     await page.keyboard.press('Control+k');
     await expect(page.getByRole('dialog')).toBeVisible();
+  });
+});
+
+test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
+  test.beforeEach(async ({ page }) => {
+    test.skip(
+      process.env.VITE_ENABLE_DUAL_CHART_MODES !== 'true',
+      'Requiere VITE_ENABLE_DUAL_CHART_MODES=true',
+    );
+    await loginAsPhysician(page);
+  });
+
+  test('g) abre ficha tradicional en /espacio/ficha', async ({ page }) => {
+    await page.goto(`/espacio/ficha?patientId=${demoPatientId}`);
+    await expect(page).toHaveURL(/chartMode=traditional/);
+    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
+  });
+
+  test('h) alterna a papel desde /espacio/ficha', async ({ page }) => {
+    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
+    await page.getByTestId('epis2-chart-mode-paper').click();
+    await expect(page).toHaveURL(/chartMode=paper/);
+    await expect(page.getByTestId('epis2-paper-chart-mode')).toBeVisible();
   });
 });
