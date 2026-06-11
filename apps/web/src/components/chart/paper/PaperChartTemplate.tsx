@@ -1,8 +1,7 @@
 import { copy } from '@epis2/design-system';
+import type { PaperFieldState } from '@epis2/clinical-forms';
 import {
   Box,
-  EpisM3Text,
-  EpisTextField,
   Stack,
   Typography,
   epis2PaperChartTokens,
@@ -14,24 +13,53 @@ import {
   paperChartSectionLabel,
   type PaperChartSectionId,
 } from './paperChartSections.js';
+import { PaperSection, PaperTextarea } from './fields/index.js';
+import { PaperFooter } from './PaperFooter.js';
+import { PaperInstitutionalHeader } from './PaperInstitutionalHeader.js';
+import { PaperPatientStrip, type PaperPatientStripProps } from './PaperPatientStrip.js';
+import { PaperSectionChrome } from './paperSectionChrome.js';
 import './paperChartPrint.css';
 
 export type PaperChartTemplateProps = {
   values?: Partial<Record<PaperChartSectionId, string>> | undefined;
+  fields?: Partial<Record<PaperChartSectionId, PaperFieldState>> | undefined;
   onSectionChange?: ((id: PaperChartSectionId, value: string) => void) | undefined;
+  onConfirmSection?: ((id: PaperChartSectionId) => void) | undefined;
   printFormat?: 'letter' | 'a5' | undefined;
   patientName?: string | undefined;
   recordNumber?: string | undefined;
+  patientStrip?: Omit<PaperPatientStripProps, 'patientName' | 'recordNumber'> | undefined;
+  page?: number | undefined;
+  totalPages?: number | undefined;
   testId?: string | undefined;
 };
 
-/** Plantilla ficha papel — 7 secciones institucionales (ADR-002). */
+function resolveSectionField(
+  sectionId: PaperChartSectionId,
+  values: Partial<Record<PaperChartSectionId, string>>,
+  fields?: Partial<Record<PaperChartSectionId, PaperFieldState>>,
+): PaperFieldState {
+  const fromFields = fields?.[sectionId];
+  if (fromFields) return fromFields;
+  return {
+    value: values[sectionId] ?? '',
+    source: 'human',
+    confirmed: true,
+  };
+}
+
+/** Plantilla ficha papel — 14 secciones institucionales (ADR-002 · visual FichaPapel v1). */
 export function PaperChartTemplate({
   values = {},
+  fields,
   onSectionChange,
+  onConfirmSection,
   printFormat = 'letter',
   patientName = 'Paciente demo',
   recordNumber = '0000000',
+  patientStrip,
+  page = 1,
+  totalPages = 1,
   testId = 'epis2-paper-chart-template',
 }: PaperChartTemplateProps) {
   const merged = { ...EMPTY_PAPER_CHART_DRAFT, ...values };
@@ -42,73 +70,120 @@ export function PaperChartTemplate({
   return (
     <Box
       data-testid={testId}
-      className={printClass}
+      className={`${printClass} epis2-paper-page`}
       sx={{
         ...epis2PaperDocumentSx(printFormat),
-        '--epis2-paper-ruled-line': t.ruledLine,
       }}
     >
+      <PaperInstitutionalHeader
+        recordNumber={recordNumber}
+        serviceUnit={patientStrip?.serviceUnit}
+      />
+
+      <PaperPatientStrip
+        patientName={patientName}
+        recordNumber={recordNumber}
+        nationalId={patientStrip?.nationalId}
+        ageYears={patientStrip?.ageYears}
+        sexLabel={patientStrip?.sexLabel}
+        serviceUnit={patientStrip?.serviceUnit}
+        bedLabel={patientStrip?.bedLabel}
+        admissionDate={patientStrip?.admissionDate}
+        allergyLabels={patientStrip?.allergyLabels}
+      />
+
       <Box
+        className="epis2-paper-draft-notice epis2-paper-chart-no-print"
         sx={{
-          bgcolor: t.navyHeader,
-          color: t.sectionHeaderColor,
-          px: 3,
-          py: 2,
-          borderTopLeftRadius: 8,
-          borderTopRightRadius: 8,
+          px: 2,
+          py: 0.75,
+          bgcolor: t.paperBgAlt,
+          borderBottom: `1px solid ${t.ruledLine}`,
         }}
       >
-        <Typography variant="subtitle1" fontWeight={700}>
-          {copy.chartModes.institutionLine}
-        </Typography>
-        <Typography variant="body2" sx={{ opacity: 0.9 }}>
-          {patientName} · Ficha {recordNumber}
-        </Typography>
-        <Typography variant="caption" display="block" sx={{ mt: 0.5, opacity: 0.75 }}>
+        <Typography
+          sx={{
+            fontFamily: t.typography.label,
+            fontSize: '10px',
+            letterSpacing: '0.06em',
+            color: t.paperInkMid,
+          }}
+        >
           {copy.chartModes.draftNotice}
         </Typography>
       </Box>
 
-      <Stack spacing={3} sx={{ p: { xs: 2, md: 4 } }}>
-        {PAPER_CHART_SECTION_IDS.map((sectionId) => (
-          <Box
-            key={sectionId}
-            className="epis2-paper-chart-section"
-            data-testid={`epis2-paper-section-${sectionId}`}
-          >
-            <EpisM3Text
-              role="titleMedium"
-              component="h3"
-              sx={{
-                bgcolor: t.sectionHeaderBg,
-                color: t.sectionHeaderColor,
-                px: 2,
-                py: 0.75,
-                borderRadius: 1,
-                mb: 1.5,
-              }}
+      <Stack spacing={0}>
+        {PAPER_CHART_SECTION_IDS.map((sectionId) => {
+          const field = resolveSectionField(sectionId, merged, fields);
+          const showAiConfirm =
+            field.source === 'ai_draft' && !field.confirmed && Boolean(onConfirmSection);
+
+          return (
+            <PaperSection
+              key={sectionId}
+              title={paperChartSectionLabel(sectionId)}
+              testId={`epis2-paper-section-${sectionId}`}
             >
-              {paperChartSectionLabel(sectionId)}
-            </EpisM3Text>
-            <Box className="epis2-paper-chart-ruled" sx={{ px: 1, py: 0.5 }}>
-              <EpisTextField
-                multiline
-                minRows={sectionId === 'cover' ? 3 : 5}
-                fullWidth
-                label={paperChartSectionLabel(sectionId)}
-                value={merged[sectionId]}
-                onChange={(e) => onSectionChange?.(sectionId, e.target.value)}
-                slotProps={{
-                  htmlInput: {
-                    'data-testid': `epis2-paper-field-${sectionId}`,
-                    'aria-label': paperChartSectionLabel(sectionId),
-                  },
-                }}
+              <PaperSectionChrome
+                sectionId={sectionId}
+                patientName={patientName}
+                recordNumber={recordNumber}
+                patientStrip={patientStrip}
               />
-            </Box>
-          </Box>
-        ))}
+              <Box className="epis2-paper-chart-ruled" sx={{ px: 2, py: 1 }}>
+                <PaperTextarea
+                  minRows={sectionId === 'cover' ? 3 : 5}
+                  value={field.value}
+                  onChange={
+                    onSectionChange
+                      ? (body) => onSectionChange(sectionId, body)
+                      : undefined
+                  }
+                  ariaLabel={paperChartSectionLabel(sectionId)}
+                  testId={`epis2-paper-field-${sectionId}`}
+                  aiDraft={field.source === 'ai_draft' && !field.confirmed}
+                />
+              </Box>
+              {showAiConfirm ? (
+                <Box sx={{ px: 2, pb: 1.5 }} className="epis2-paper-chart-no-print">
+                  <Typography
+                    sx={{
+                      fontFamily: t.typography.label,
+                      fontSize: '10px',
+                      color: t.paperMuted,
+                      display: 'block',
+                      mb: 0.5,
+                    }}
+                  >
+                    {copy.chartModes.aiDraftNotice}
+                  </Typography>
+                  <button
+                    type="button"
+                    data-testid={`epis2-paper-confirm-ai-${sectionId}`}
+                    onClick={() => onConfirmSection?.(sectionId)}
+                    style={{
+                      fontFamily: t.typography.label,
+                      fontSize: '10px',
+                      padding: '4px 10px',
+                      cursor: 'pointer',
+                      border: `1px solid ${t.ruledLineStrong}`,
+                      background: t.paperBg,
+                      color: t.paperInkMid,
+                      letterSpacing: '0.04em',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {copy.chartModes.confirmAiDraft}
+                  </button>
+                </Box>
+              ) : null}
+            </PaperSection>
+          );
+        })}
       </Stack>
+
+      <PaperFooter page={page} totalPages={totalPages} recordNumber={recordNumber} />
     </Box>
   );
 }

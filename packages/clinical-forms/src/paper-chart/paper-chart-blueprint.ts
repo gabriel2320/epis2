@@ -1,11 +1,11 @@
 import { defineBlueprint, field, section } from '../factory.js';
 import { PAPER_CHART_SECTION_IDS } from './schema.js';
 
-/** Blueprint ficha papel — 7 secciones estructuradas (no PDF plano). */
+/** Blueprint ficha papel — 14 secciones estructuradas (no PDF plano). */
 export const paperChartBlueprint = defineBlueprint({
   blueprintId: 'paper_chart',
   label: 'Ficha clínica papel',
-  purpose: 'Documento institucional editable Carta/A5 con secciones I–VII',
+  purpose: 'Documento institucional editable Carta/A5 con secciones I–XIV',
   intentIds: [],
   allowedRoles: ['physician', 'nurse'],
   routePath: '/espacio/ficha/papel',
@@ -20,6 +20,13 @@ export const paperChartBlueprint = defineBlueprint({
     section('soap', 'V. Evolución SOAP', ['soap']),
     section('labs', 'VI. Laboratorio', ['labs']),
     section('discharge', 'VII. Epicrisis', ['discharge']),
+    section('nursing', 'VIII. Enfermería', ['nursing']),
+    section('fluidBalance', 'IX. Balance hídrico', ['fluidBalance']),
+    section('consults', 'X. Interconsultas', ['consults']),
+    section('procedures', 'XI. Procedimientos', ['procedures']),
+    section('imaging', 'XII. Imágenes', ['imaging']),
+    section('consent', 'XIII. Consentimiento', ['consent']),
+    section('socialWork', 'XIV. Trabajo social', ['socialWork']),
   ],
   fields: PAPER_CHART_SECTION_IDS.map((id) => field(id, id, 'textarea', { clinicalTextBox: true })),
   validations: [],

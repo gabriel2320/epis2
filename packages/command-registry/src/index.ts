@@ -76,6 +76,15 @@ export {
 } from './intent-metadata.js';
 export { applyContextScoreBoost, contextFallbackIntents } from './context-rank.js';
 export {
+  PAPER_CHART_COMMAND_DEFINITIONS,
+  PAPER_CHART_INTENTS,
+  PAPER_CHART_ROUTE_PATHS,
+  getPaperChartCommandSuggestions,
+  isPaperChartIntent,
+  paperChartIntentBoost,
+  type PaperChartIntent,
+} from './paper-commands.js';
+export {
   ASSIST_ROUTE_MIN_CONFIDENCE,
   ASSIST_ROUTE_RESOLVE_CONFIDENCE,
   applyAssistScoreBoost,

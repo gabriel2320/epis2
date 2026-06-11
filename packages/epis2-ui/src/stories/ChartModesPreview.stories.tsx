@@ -33,17 +33,48 @@ function TraditionalPreview() {
   );
 }
 
-function PaperPreview() {
+function PaperPreview({ format = 'letter' as 'letter' | 'a5' }) {
   const t = epis2PaperChartTokens;
   return (
-    <Box sx={{ p: 2, bgcolor: epis2TraditionalChartTokens.shellBg }}>
-      <Box sx={{ ...epis2PaperDocumentSx('letter'), p: 3 }}>
+    <Box sx={{ p: 2, bgcolor: t.paperCanvasBg }}>
+      <Box
+        className="epis2-paper-page epis2-paper-chart-print-letter epis2-paper-chart-ruled"
+        sx={{ ...epis2PaperDocumentSx(format) }}
+      >
         <Box
-          sx={{ bgcolor: t.navyHeader, color: t.sectionHeaderColor, p: 2, mb: 2, borderRadius: 1 }}
+          sx={{
+            bgcolor: t.navyHeader,
+            color: t.sectionHeaderColor,
+            px: 2,
+            py: 1.5,
+            borderBottom: `3px solid ${t.navyMid}`,
+            fontFamily: t.typography.institution,
+            fontSize: '14px',
+            fontWeight: 700,
+          }}
         >
           I. Carátula — EPIS2 demo
         </Box>
-        <Typography variant="body2">Documento clínico editable — Carta</Typography>
+        <Box sx={{ px: 2, py: 2, minHeight: 120, fontFamily: t.typography.body, fontSize: '12px' }}>
+          Documento clínico editable — {format === 'letter' ? 'Carta' : 'A5'}
+        </Box>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          sx={{
+            mt: 0,
+            px: 2,
+            py: 0.75,
+            bgcolor: t.paperBgAlt,
+            borderTop: `1px solid ${t.ruledLine}`,
+            fontFamily: t.typography.label,
+            fontSize: '9px',
+            color: t.paperMuted,
+          }}
+        >
+          <span>Confidencial — demo</span>
+          <span style={{ fontFamily: t.typography.body }}>p. 1/3</span>
+        </Stack>
       </Box>
     </Box>
   );
@@ -60,14 +91,19 @@ export const TraditionalEhr: StoryObj = {
   render: () => <TraditionalPreview />,
 };
 
+export const PaperDocumentLetter: StoryObj = {
+  render: () => <PaperPreview format="letter" />,
+};
+
+export const PaperDocumentA5: StoryObj = {
+  render: () => <PaperPreview format="a5" />,
+};
+
+/** Alias legacy Storybook */
 export const PaperDocument: StoryObj = {
-  render: () => <PaperPreview />,
+  render: () => <PaperPreview format="letter" />,
 };
 
 export const PaperA5: StoryObj = {
-  render: () => (
-    <Box sx={{ p: 2 }}>
-      <Box sx={{ ...epis2PaperDocumentSx('a5'), p: 2 }}>Vista A5 demo</Box>
-    </Box>
-  ),
+  render: () => <PaperPreview format="a5" />,
 };

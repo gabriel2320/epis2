@@ -1,38 +1,59 @@
 import { copy } from '@epis2/design-system';
-import { Box, Typography } from '@epis2/epis2-ui';
+import { Box, epis2PaperChartTokens, epis2PaperFooterSx } from '@epis2/epis2-ui';
 
 export type PaperFooterProps = {
   page?: number | undefined;
   totalPages?: number | undefined;
+  recordNumber?: string | undefined;
   testId?: string | undefined;
 };
 
-/** Pie legal modo papel — página N/M (MF-DUAL-CHART-06). */
+/** Pie legal modo papel — fondo marfil oscuro + p. N/M (FichaPapel). */
 export function PaperFooter({
   page = 1,
-  totalPages = 7,
+  totalPages = 1,
+  recordNumber,
   testId = 'epis2-paper-footer',
 }: PaperFooterProps) {
+  const t = epis2PaperChartTokens;
+  const pageLabel = `p. ${page}/${totalPages}`;
+
   return (
     <Box
       data-testid={testId}
-      className="epis2-paper-chart-no-print"
+      className="epis2-paper-chart-footer epis2-paper-page-footer"
       sx={{
-        mt: 2,
-        pt: 1,
-        borderTop: 1,
-        borderColor: 'divider',
+        ...epis2PaperFooterSx(),
+        px: 2.5,
+        py: 0.75,
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        typography: 'caption',
-        color: 'text.secondary',
+        gap: 2,
+        breakInside: 'avoid-page',
       }}
     >
-      <Typography variant="caption">{copy.chartModes.footerConfidential}</Typography>
-      <Typography variant="caption" data-testid={`${testId}-page`}>
-        p. {page}/{totalPages}
-      </Typography>
+      <Box
+        sx={{
+          fontFamily: t.typography.label,
+          fontSize: '9px',
+          letterSpacing: '0.06em',
+          color: t.paperMuted,
+        }}
+      >
+        {copy.chartModes.footerConfidential}
+      </Box>
+      <Box
+        data-testid={`${testId}-page`}
+        sx={{
+          fontFamily: t.typography.body,
+          fontSize: '9px',
+          color: t.paperMuted,
+        }}
+      >
+        {recordNumber ? `Ficha Nº ${recordNumber} · ` : ''}
+        {pageLabel}
+      </Box>
     </Box>
   );
 }

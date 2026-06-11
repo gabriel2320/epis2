@@ -42,9 +42,11 @@ import { buildPatientSummaryExport } from './summaryExport.js';
 import { parseClinicalTextSpellcheckRequest, runClinicalTextSpellcheck } from './textSpellcheck.js';
 import { validateDraftBodyEpis2Meta } from './draftBodyMeta.js';
 import {
-  getPaperChartDraftBody,
+  getPaperChartState,
   patchPaperChartSection,
   upsertPaperChartDraft,
+  approvePaperChartDraft,
+  PaperChartSignBlockedError,
 } from './paperChart.js';
 import { parsePaperChartBody, parsePaperChartSectionPatch } from '@epis2/clinical-forms';
 
@@ -350,10 +352,43 @@ export async function registerClinicalRoutes(
       if (!patient) {
         return sendApiError(reply, 404, 'Paciente no encontrado');
       }
-      const sections = await runWithRlsContext(db, config, session, (tx) =>
-        getPaperChartDraftBody(tx, patientId),
+      const state = await runWithRlsContext(db, config, session, (tx) =>
+        getPaperChartState(tx, patientId),
       );
-      return { patientId, sections, readOnly: false };
+      return state;
+    },
+  );
+
+  app.post(
+    '/api/patients/:patientId/paper-chart/approve',
+    { preHandler: requireDraftApprove },
+    async (request, reply) => {
+      const { patientId } = request.params as { patientId: string };
+      const session = (request as AuthenticatedRequest).session;
+      const patient = await getPatientById(db, patientId);
+      if (!patient) {
+        return sendApiError(reply, 404, 'Paciente no encontrado');
+      }
+      try {
+        const result = await runWithRlsContext(db, config, session, (tx) =>
+          approvePaperChartDraft(
+            tx,
+            { id: session.sub, username: session.username },
+            patientId,
+          ),
+        );
+        return { patientId, ...result };
+      } catch (err) {
+        if (err instanceof PaperChartSignBlockedError) {
+          return sendApiError(reply, 409, err.message, {
+            details: err.blockers.map((message, index) => ({
+              path: `blockers[${index}]`,
+              message,
+            })),
+          });
+        }
+        return sendApiError(reply, 400, err instanceof Error ? err.message : 'No se pudo firmar');
+      }
     },
   );
 
@@ -406,8 +441,7 @@ export async function registerClinicalRoutes(
           tx,
           { id: session.sub, username: session.username },
           patientId,
-          patch.sectionId,
-          patch.body,
+          patch,
         ),
       );
       return {

@@ -76,7 +76,7 @@ Barra de comandos (Ctrl+K): TRANSVERSAL — no es tercer modo visual
 | PROG-DUAL-CHART | ✓ código · flag **off** | `epis2-dual-chart-audit-2026-06-10.md` |
 | Hilo C infra | ✓ receta A5 · M3 piloto · print carta | `epis2-hilo-c-p1-print-prescription-2026-06-09.md` |
 | Entrega C-1 | Automatizado ✓ · humano opcional | `epis2-m3-visual-pass-2026-06-10.md` |
-| Entrega C-2 | Parcial (alto contraste) · signoff NO-GO | `EPIS2_CLINICAL_CALM_PREMIUM_PLAN.md` |
+| Entrega C-2 | ✓ signoff GO | [`EPIS2_CLINICAL_CALM_PREMIUM_PLAN.md`](../design/EPIS2_CLINICAL_CALM_PREMIUM_PLAN.md) · [`epis2-entrega-c2-calm-premium-2026-06-11.md`](../../reports/epis2-entrega-c2-calm-premium-2026-06-11.md) |
 | Entrega C-3a | ✓ scaffold resumen | `EPIS2_CLINICAL_SUMMARY_MD3.md` |
 | Entrega C-4 | Pendiente | `VITE_ENABLE_DUAL_CHART_MODES=false` |
 | PROG-AUTO-DEV-6H | **Pausado** | No relanzar sin decisión |
@@ -259,6 +259,8 @@ THEME-CALM-01 → UX-AESTHETIC P3 → UX-CALM-PATIENT / UX-CALM-COMMAND → Sign
 
 | Prioridad | Hilo / Tramo | Depende de |
 |-----------|--------------|------------|
+| **0** | **PROG-PAPER-MODE** MF-PAPER-00…09 | C-4 · [`EPIS2_PAPER_MODE_DEV_PLAN.md`](../docs/product/EPIS2_PAPER_MODE_DEV_PLAN.md) |
+| **0b** | **PROG-PAPER-PLANNER** MF-PLANNER-00…04 | MF-PAPER-02 |
 | 1 | Extensión `@epis2/clinical-productivity` en ficha dual | C-2, C-3 |
 | 2 | Tramo K / inventario IDC pendiente | `quality:tramo-k-inventory-gate` |
 | 3 | PEND-002 nota post-procedimiento | Ola 2+ defer |

@@ -33,6 +33,8 @@ export type ClinicalPatientSearch = ChartModeSearch & {
   patientId?: string | undefined;
   mode?: 'classic' | undefined;
   returnTo?: 'dashboard' | undefined;
+  /** MF-PAPER-07: retorno a ficha papel desde vista print. */
+  returnChartMode?: 'paper' | undefined;
 };
 
 export function parseClinicalPatientSearch(search: Record<string, unknown>): ClinicalPatientSearch {
@@ -43,6 +45,7 @@ export function parseClinicalPatientSearch(search: Record<string, unknown>): Cli
       : {}),
     ...(search.mode === 'classic' ? { mode: 'classic' as const } : {}),
     ...(search.returnTo === 'dashboard' ? { returnTo: 'dashboard' as const } : {}),
+    ...(search.returnChartMode === 'paper' ? { returnChartMode: 'paper' as const } : {}),
   };
 }
 
@@ -77,10 +80,9 @@ export type ClinicalFormSearch = ClinicalPatientSearch & {
 const URGENCY_HINTS = new Set(['routine', 'urgent', 'stat']);
 
 export function parseClinicalFormSearch(search: Record<string, unknown>): ClinicalFormSearch {
-  const parsed: ClinicalFormSearch = {};
-  if (typeof search.patientId === 'string' && search.patientId) {
-    parsed.patientId = search.patientId;
-  }
+  const parsed: ClinicalFormSearch = {
+    ...parseClinicalPatientSearch(search),
+  };
   if (typeof search.draftId === 'string' && search.draftId) {
     parsed.draftId = search.draftId;
   }
@@ -249,6 +251,15 @@ export type ClinicalNavigateOptions =
     };
 
 export type ClinicalNavigateFn = (options: ClinicalNavigateOptions) => void;
+
+export {
+  navigateBackToPaperChart,
+  navigatePaperDocumentBridge,
+  PAPER_DOCUMENT_BRIDGES,
+  parsePaperPrintSearch,
+  type PaperDocumentBridgeId,
+  type PaperPrintSearch,
+} from './paperDocumentBridge.js';
 
 /**
  * Navegación tipada al shell clínico. TanStack pierde literales cuando las rutas

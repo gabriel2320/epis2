@@ -33,6 +33,7 @@ Registro humano de cada extracción desde EPIS. Fuente de verdad estructurada: `
 | ID | Fuente | Destino | Modo | Fecha | Estado |
 |----|--------|---------|------|-------|--------|
 | REF-20260607-001 | Tesser Lyra export 2026-05-28 | `migration/candidates/lyra/lyra-clinical-catalogs-export/clean/` | reference | 2026-06-07 | archivado |
+| REF-20260611-001 | [FichaPapel](https://github.com/gabriel2320/FichaPapel) · Figma Make | `packages/epis2-ui/src/theme/paper-visual-reference.ts` + `components/chart/paper/` | reference | 2026-06-11 | activo |
 
 Ver `migration/candidates/lyra/lyra-clinical-catalogs-export/SOURCE.md`.
 

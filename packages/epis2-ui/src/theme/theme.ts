@@ -60,9 +60,30 @@ export {
   epis2ClinicalShellTokens,
   epis2TraditionalChartTokens,
   epis2PaperChartTokens,
+  epis2PaperChartTypography,
   epis2TraditionalChartShellSx,
   epis2PaperDocumentSx,
+  epis2PaperChartCssVars,
 } from './chart-modes-tokens.js';
+export {
+  FICHAPAPEL_VISUAL_REFERENCE,
+  epis2PaperCanvasSx,
+  epis2PaperChromeBarSx,
+  epis2PaperToolbarControlSx,
+  epis2PaperBridgeControlSx,
+  epis2PaperSectionTitleSx,
+  epis2PaperFieldLabelSx,
+  epis2PaperFieldValueSx,
+  epis2PaperInstitutionalHeaderSx,
+  epis2PaperPatientStripSx,
+  epis2PaperFooterSx,
+  epis2PaperNavTabSx,
+  epis2PaperStatusCaptionSx,
+  epis2PaperSubSectionTitleSx,
+  epis2PaperTableHeaderCellSx,
+  epis2PaperTableBodyCellSx,
+  epis2PaperSignatureLineSx,
+} from './paper-visual-reference.js';
 
 /** @deprecated Usar buildM3PaletteOptions / theme.palette */
 export { epis2Palette } from './palette-legacy.js';

@@ -1,4 +1,4 @@
-import { Box, epis2TraditionalChartTokens } from '@epis2/epis2-ui';
+import { Box, epis2PaperCanvasSx } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
 
 export type PaperPageCanvasProps = {
@@ -6,20 +6,18 @@ export type PaperPageCanvasProps = {
   testId?: string | undefined;
 };
 
-/** Fondo gris frío + hoja centrada (MF-DUAL-CHART-06). */
+/** Fondo escritorio cálido + hoja centrada (FichaPapel). */
 export function PaperPageCanvas({
   children,
   testId = 'epis2-paper-page-canvas',
 }: PaperPageCanvasProps) {
-  const shellBg = epis2TraditionalChartTokens.shellBg;
-
   return (
     <Box
       data-testid={testId}
       sx={{
+        ...epis2PaperCanvasSx(),
         flex: 1,
         overflow: 'auto',
-        bgcolor: shellBg,
         py: 3,
         px: { xs: 1, md: 3 },
         display: 'flex',

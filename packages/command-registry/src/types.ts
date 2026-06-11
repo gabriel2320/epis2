@@ -44,7 +44,13 @@ export type ClinicalIntent =
   | 'create_medical_certificate'
   | 'respond_referral'
   | 'register_allergy'
-  | 'register_problem';
+  | 'register_problem'
+  | 'paper_order_soap'
+  | 'paper_summarize_24h'
+  | 'paper_prepare_print'
+  | 'paper_prepare_discharge_draft'
+  | 'paper_create_prescription_a5'
+  | 'paper_detect_pending';
 
 export type CommandResolveStatus =
   | 'resolved'
@@ -98,6 +104,8 @@ export type CommandActiveContext = {
   pendingDraftCount?: number;
   activeAlertCount?: number;
   workspace?: CommandWorkspace;
+  /** MF-PAPER-08: boost comandos papel en ficha chartMode=paper */
+  chartMode?: 'traditional' | 'paper';
 };
 
 export type CommandAssistHint = {

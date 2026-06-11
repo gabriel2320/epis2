@@ -65,6 +65,10 @@ EPIS2
 │       ├── Tab Consulta   → /espacio/evolucion, /espacio/ambulatorio, /espacio/enfermeria
 │       ├── Tab Exámenes   → /espacio/resultados, /espacio/laboratorio, /espacio/imagenologia
 │       └── Tab Recetas    → /espacio/receta, /espacio/mar, /espacio/farmacia, /espacio/interconsulta
+│       └── Dual-chart (PROG-PAPER-MODE)
+│           ├── ?chartMode=traditional   → 17 secciones EHR tradicional
+│           ├── ?chartMode=paper         → ficha papel I–XIV (paperChartNavigationTree)
+│           └── /espacio/ficha/papel/imprimir
 │
 ├── [N3] Formularios clínicos (Scrollspy / Two-pane) — 19 blueprints
 │   └── /espacio/*  (ver §4)

@@ -147,6 +147,13 @@ export function DualChartPatientPage({
             patientId={patientId}
             patientName={detail.patient.displayName}
             recordNumber={detail.patient.demoCaseCode ?? detail.patient.id.slice(0, 8)}
+            patientStrip={{
+              nationalId: demoNationalId(detail.patient.demoCaseCode),
+              ageYears: demoCase ? ageFromBirthDate(demoCase.birthDate) : undefined,
+              sexLabel,
+              serviceUnit: demoCase?.scenario ?? copy.chartModes.shellServiceDefault,
+              allergyLabels,
+            }}
           />
         ) : (
           <TraditionalEhrMode

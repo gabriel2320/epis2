@@ -1,7 +1,11 @@
 import { copy } from '@epis2/design-system';
 import { PrintA5Document, PrintField, Stack, Typography } from '@epis2/epis2-ui';
+import { useSearch } from '@tanstack/react-router';
 import { usePrintPagePatient } from '../clinical/print/usePrintPagePatient.js';
 import { PrintPageToolbar } from '../clinical/print/PrintPageToolbar.js';
+import { PaperBridgeBackButton } from '../components/chart/paper/PaperBridgeBackButton.js';
+import { navigateBackToPaperChart, parsePaperPrintSearch } from '../routes/paperDocumentBridge.js';
+import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { printPriorityLabel } from '../clinical/print/printValueLabels.js';
 import { ErrorState } from '../components/ErrorState.js';
 
@@ -9,6 +13,9 @@ import { ErrorState } from '../components/ErrorState.js';
 export function ImagingRequestPrintPage() {
   const { patientId, values, error, physician, patientName } =
     usePrintPagePatient('imaging_request');
+  const rawSearch = useSearch({ strict: false }) as Record<string, unknown>;
+  const paperSearch = parsePaperPrintSearch(rawSearch);
+  const navigate = useClinicalNavigate();
 
   if (!patientId) {
     return <ErrorState title={copy.errors.genericTitle} message={copy.forms.needsPatient} />;
@@ -19,6 +26,9 @@ export function ImagingRequestPrintPage() {
 
   return (
     <Stack spacing={2} data-testid="epis2-imaging-request-print-page">
+      {paperSearch.returnChartMode === 'paper' ? (
+        <PaperBridgeBackButton onClick={() => navigateBackToPaperChart(navigate, patientId, 'a5')} />
+      ) : null}
       <PrintPageToolbar printLabel={copy.print.printA5} />
       <PrintA5Document
         title={copy.print.imagingRequestTitle}

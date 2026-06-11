@@ -2,6 +2,7 @@ import { Epis2ThemeProvider } from '@epis2/epis2-ui';
 import { RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import './styles/epis2-fonts.css';
 import { router } from './routes/router.js';
 import { AuthProvider } from './auth/AuthContext.js';
 import { ActivePatientProvider } from './clinical/ActivePatientContext.js';

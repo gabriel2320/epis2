@@ -5,6 +5,7 @@ import type {
   PatientLongitudinalResponse,
   PatientResultsInboxResponse,
 } from '@epis2/contracts';
+import type { PaperChartDraftBody, PaperChartSectionId } from '@epis2/clinical-forms';
 import { ApiError, apiFetch } from './client.js';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? '';
@@ -288,27 +289,48 @@ export function approveDraft(draftId: string) {
   );
 }
 
-export type PaperChartSections = Record<
-  'cover' | 'anamnesis' | 'physicalExam' | 'orders' | 'soap' | 'labs' | 'discharge',
-  string
->;
+export type PaperChartFieldState = PaperChartDraftBody[PaperChartSectionId];
+
+export type PaperChartSections = PaperChartDraftBody;
+
+export type PaperChartSectionPatchRequest = {
+  sectionId: PaperChartSectionId;
+  body: string;
+  source?: PaperChartFieldState['source'];
+  confirmed?: boolean;
+};
 
 export function fetchPaperChartDraft(patientId: string) {
-  return apiFetch<{ patientId: string; sections: PaperChartSections; readOnly: boolean }>(
-    `/api/patients/${patientId}/paper-chart`,
-  );
+  return apiFetch<{
+    patientId: string;
+    sections: PaperChartSections;
+    draftId?: string;
+    readOnly: boolean;
+    status: 'draft' | 'approved' | 'empty';
+  }>(`/api/patients/${patientId}/paper-chart`);
+}
+
+export function approvePaperChartDraft(patientId: string) {
+  return apiFetch<{
+    patientId: string;
+    draftId: string;
+    noteId: string;
+    readOnly: boolean;
+  }>(`/api/patients/${patientId}/paper-chart/approve`, {
+    method: 'POST',
+    body: '{}',
+  });
 }
 
 export function patchPaperChartSection(
   patientId: string,
-  sectionId: keyof PaperChartSections,
-  body: string,
+  patch: PaperChartSectionPatchRequest,
 ) {
   return apiFetch<{ patientId: string; draftId: string; sections: PaperChartSections }>(
     `/api/patients/${patientId}/paper-chart`,
     {
       method: 'PATCH',
-      body: JSON.stringify({ sectionId, body }),
+      body: JSON.stringify(patch),
     },
   );
 }

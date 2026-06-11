@@ -19,10 +19,26 @@ describe('PaperChartTemplate', () => {
     const onSectionChange = vi.fn();
     render(<PaperChartTemplate onSectionChange={onSectionChange} />);
     const section = screen.getByTestId('epis2-paper-section-anamnesis');
-    const field = within(section).getByRole('textbox');
+    const field = within(section).getByTestId('epis2-paper-field-anamnesis');
     fireEvent.change(field, {
       target: { value: 'Dolor torácico demo' },
     });
     expect(onSectionChange).toHaveBeenCalledWith('anamnesis', 'Dolor torácico demo');
+  });
+
+  it('muestra confirmación IA y subrayado', () => {
+    const onConfirmSection = vi.fn();
+    render(
+      <PaperChartTemplate
+        fields={{
+          soap: { value: 'Plan IA', source: 'ai_draft', confirmed: false },
+        }}
+        onConfirmSection={onConfirmSection}
+      />,
+    );
+    const field = screen.getByTestId('epis2-paper-field-soap');
+    expect(field).toHaveClass('epis2-paper-ai-draft');
+    fireEvent.click(screen.getByTestId('epis2-paper-confirm-ai-soap'));
+    expect(onConfirmSection).toHaveBeenCalledWith('soap');
   });
 });

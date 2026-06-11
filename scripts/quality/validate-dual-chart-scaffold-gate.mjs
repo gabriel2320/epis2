@@ -62,7 +62,22 @@ const sections = readFileSync(
   join(root, 'apps/web/src/components/chart/paper/paperChartSections.ts'),
   'utf8',
 );
-const sectionIds = ['cover', 'anamnesis', 'physicalExam', 'orders', 'soap', 'labs', 'discharge'];
+const sectionIds = [
+  'cover',
+  'anamnesis',
+  'physicalExam',
+  'orders',
+  'soap',
+  'labs',
+  'discharge',
+  'nursing',
+  'fluidBalance',
+  'consults',
+  'procedures',
+  'imaging',
+  'consent',
+  'socialWork',
+];
 for (const id of sectionIds) {
   if (!sections.includes(id)) {
     errors.push(`paperChartSections.ts sin sección ${id}`);

@@ -389,7 +389,7 @@ export const EPIS2_NAVIGATION_TREE: readonly EpisNavigationSurface[] = [
     patientChartTab: 'summary',
     idcRefs: [21],
     ola: '1',
-    notes: `Tabs: ${PATIENT_CHART_TABS.map((t) => t.id).join(', ')}`,
+    notes: `Tabs M3: ${PATIENT_CHART_TABS.map((t) => t.id).join(', ')} · dual-chart: traditional|paper (I–XIV) · ver paperChartNavigationTree`,
   },
   {
     id: 'results-inbox',

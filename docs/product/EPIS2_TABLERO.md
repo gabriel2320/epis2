@@ -10,7 +10,8 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Nomenclatura: **Entre
 
 | Entrega / hito | Evidencia |
 |----------------|-----------|
-| CI pipeline completo | run [27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998) — check, test, ci-parity, **10/10 E2E**, db:validate, golden-journey |
+| CI pipeline completo | run [27351241135](https://github.com/gabriel2320/epis2/actions/runs/27351241135) — check + e2e-dual-chart ✓ · `a294f20` |
+| Fix CI post-pull (2026-06-11) | Prettier · `build:packages` · E2E dual-chart · otel/admission · three-modes · `5a8ecd0`…`a294f20` |
 | Fix ci-parity (sin doble vitest) | `15b6131` · `--from-report` · ci-parity ~1s en CI |
 | Entrega CI-E2E | `7993f2c` — Firmar → borrador; paste-zone; ficha-history |
 | PROG-THREE-MODES MF-01…08 | `quality:pm01` ✓ · `three-modes-journey` E2E |
@@ -31,7 +32,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Nomenclatura: **Entre
 | Auditoría II — inventario + limpieza + documental | Inventario completo · código muerto anclado por gates · plan F1–F5 · [`epis2-auditoria-inventario-limpieza-2026-06-09.md`](../../reports/epis2-auditoria-inventario-limpieza-2026-06-09.md) |
 | **F1+F2 — limpieza + PEND-006 código cerrado** | 3 componentes muertos fuera · registry `PRINTABLE_BLUEPRINTS` · lab/imagen A5 + E2E · [`epis2-f1-f2-limpieza-print-2026-06-09.md`](../../reports/epis2-f1-f2-limpieza-print-2026-06-09.md) |
 | **F4 — sesión documental** | Brief sync con tablero · norma print v1.1 · banners históricos · `docs/INDEX.md` + `reports/INDEX.md` · [`epis2-f4-sesion-documental-2026-06-09.md`](../../reports/epis2-f4-sesion-documental-2026-06-09.md) |
-| **Entrega C-2 (parcial)** — alto contraste + Storybook Print* | Roles outline/onSurfaceVariant/foco (3.6 ✓ código) · stories Carta + receta/lab A5 · signoff Calm Premium pendiente · [`epis2-p1b-alto-contraste-storybook-print-2026-06-09.md`](../../reports/epis2-p1b-alto-contraste-storybook-print-2026-06-09.md) |
+| **Entrega C-2** — Calm Premium signoff GO | THEME-CALM-01 · UX-AESTHETIC P3 · E3.5 · [`epis2-entrega-c2-calm-premium-2026-06-11.md`](../../reports/epis2-entrega-c2-calm-premium-2026-06-11.md) |
 | **Hilo M3-R — state layers + foco + escalera superficies** | R1–R7 ✓ código: action 8/10/10 · focus-visible universal · emphasized real · two-pane/rail en escalera tonal · roles inverse/scrim/dim expuestos · labelMedium→caption · docs reconciliados · [`epis2-m3-r-state-layers-superficie-2026-06-09.md`](../../reports/epis2-m3-r-state-layers-superficie-2026-06-09.md) |
 | Housekeeping árbol (#6 #3 #1) | v4/v5 → interop/ y ai/ · `tests/README.md` (golden vitest ≠ e2e) · gate `web-components-root-frozen` · [`epis2-housekeeping-arbol-2026-06-09.md`](../../reports/epis2-housekeeping-arbol-2026-06-09.md) |
 | **PEND-011 — CI rojo print E2E cerrado** | Carrera auth en carga fría (guard `GeneratedClinicalFormPage` vs `isLoading`) · paridad CI local 5/5 · `test:e2e` 15/15 · [`epis2-pend011-ci-print-e2e-fix-2026-06-10.md`](../../reports/epis2-pend011-ci-print-e2e-fix-2026-06-10.md) |
@@ -54,10 +55,10 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Nomenclatura: **Entre
 
 | Entrega | Alcance | Gate |
 |---------|---------|------|
-| **C-1** | Revisión humana opcional post-captura M3 (hover/foco/rail/two-pane claro/oscuro) — evidencia en `reports/m3-visual-evidence/2026-06-10/` | Automatizado ✓ · [`epis2-m3-visual-pass-2026-06-10.md`](../../reports/epis2-m3-visual-pass-2026-06-10.md) |
-| **C-2** | **PROG-CALM-PREMIUM** ✓ signoff GO · THEME-CALM-01 · UX-AESTHETIC P3 · E3.5 | [`EPIS2_CLINICAL_CALM_PREMIUM_PLAN.md`](../design/EPIS2_CLINICAL_CALM_PREMIUM_PLAN.md) |
+| **C-1** | Revisión humana opcional post-captura M3 — evidencia en `reports/m3-visual-evidence/2026-06-10/` | Automatizado ✓ · [`epis2-m3-visual-pass-2026-06-10.md`](../../reports/epis2-m3-visual-pass-2026-06-10.md) |
 | **C-3** | **C-3a** ✓ · **C-3b** ✓ · **UX-CALM-PATIENT** ✓ (banner, iconos, span grid) | [`EPIS2_CLINICAL_SUMMARY_MD3.md`](../design/EPIS2_CLINICAL_SUMMARY_MD3.md) |
 | **C-4** | Staging ✓ · runbook prod ✓ (`.env.production.example`) · despliegue operador | [`EPIS2_DUAL_CHART_PROD_ROLLOUT.md`](../ops/EPIS2_DUAL_CHART_PROD_ROLLOUT.md) |
+| **PROG-PAPER-MODE** | MF-PAPER-03 ✓ IA meta · **MF-PAPER-04/05 READY** | [`EPIS2_PAPER_MODE_DEV_PLAN.md`](../product/EPIS2_PAPER_MODE_DEV_PLAN.md) |
 | backlog | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | backlog | Ola 2+ — nota procedimiento clínica (PEND-002 defer) | No bloquea Hilo C |
 

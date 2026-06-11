@@ -149,11 +149,13 @@ Laboratorio · Imagenología · Interconsultas · Documentos · Epicrisis · Aud
 
 ## 5. Modo Ficha Papel (`PaperChartLayout`)
 
+**Referencia visual canónica:** [EPIS2_FICHAPAPEL_VISUAL_REFERENCE.md](./EPIS2_FICHAPAPEL_VISUAL_REFERENCE.md) — prototipo [FichaPapel](https://github.com/gabriel2320/FichaPapel) (modo `reference`, sin import runtime). Helpers transversales: `packages/epis2-ui/src/theme/paper-visual-reference.ts`.
+
 Debe parecer **documento institucional**, no MUI moderno:
 
 ```text
-Fondo exterior gris frío · Página blanco/marfil · Cabecera azul marino
-Secciones numeradas I–VII · Líneas pautadas · Tablas · Firmas · Pie legal
+Fondo escritorio #e8e6e0 · Hoja marfil #fdfcf7 · Cabecera navy #0d2b5e
+Secciones I–VII banda navy + acento #5fa3d8 · Pauta #d8d4cc · Courier Prime cuerpo
 ```
 
 ### Toolbar documental (`PaperDocumentToolbar`)

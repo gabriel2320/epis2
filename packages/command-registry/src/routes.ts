@@ -29,6 +29,12 @@ export const INTENT_ROUTE_PATHS: Record<ClinicalIntent, string> = {
   respond_referral: '/espacio/informe-interconsulta',
   register_allergy: '/espacio/alergia',
   register_problem: '/espacio/problema',
+  paper_order_soap: '/espacio/ficha',
+  paper_summarize_24h: '/espacio/resumen',
+  paper_prepare_print: '/espacio/ficha/imprimir',
+  paper_prepare_discharge_draft: '/espacio/ficha',
+  paper_create_prescription_a5: '/espacio/receta',
+  paper_detect_pending: '/espacio/ficha',
 };
 
 /** Rutas que antes eran botones en ficha — deben resolverse vía comando. */

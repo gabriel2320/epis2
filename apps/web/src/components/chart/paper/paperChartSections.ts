@@ -1,17 +1,11 @@
+import {
+  PAPER_CHART_SECTION_IDS,
+  type PaperChartSectionId,
+} from '@epis2/clinical-forms';
 import { copy } from '@epis2/design-system';
 
-/** IDs de sección modo papel (ADR-002). */
-export const PAPER_CHART_SECTION_IDS = [
-  'cover',
-  'anamnesis',
-  'physicalExam',
-  'orders',
-  'soap',
-  'labs',
-  'discharge',
-] as const;
-
-export type PaperChartSectionId = (typeof PAPER_CHART_SECTION_IDS)[number];
+/** Re-export SoT — `@epis2/clinical-forms` schema + árbol I–XIV. */
+export { PAPER_CHART_SECTION_IDS, type PaperChartSectionId };
 
 export function paperChartSectionLabel(id: PaperChartSectionId): string {
   return copy.chartModes.paperSections[id];
@@ -22,12 +16,6 @@ export type PaperChartSectionDraft = {
   body: string;
 };
 
-export const EMPTY_PAPER_CHART_DRAFT: Record<PaperChartSectionId, string> = {
-  cover: '',
-  anamnesis: '',
-  physicalExam: '',
-  orders: '',
-  soap: '',
-  labs: '',
-  discharge: '',
-};
+export const EMPTY_PAPER_CHART_DRAFT: Record<PaperChartSectionId, string> = Object.fromEntries(
+  PAPER_CHART_SECTION_IDS.map((id) => [id, '']),
+) as Record<PaperChartSectionId, string>;

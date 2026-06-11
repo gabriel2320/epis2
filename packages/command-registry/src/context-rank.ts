@@ -1,4 +1,5 @@
 import type { CommandActiveContext, CommandDefinition } from './types.js';
+import { paperChartIntentBoost } from './paper-commands.js';
 
 const DRAFT_CONTEXT_INTENTS = new Set([
   'create_evolution_draft',
@@ -42,6 +43,10 @@ export function applyContextScoreBoost(
 
   if (context.workspace === 'patient_chart' && def.intent === 'summarize_patient') {
     boost = Math.max(boost, 4);
+  }
+
+  if (context.chartMode === 'paper') {
+    boost = Math.max(boost, paperChartIntentBoost(def.intent, context.chartMode));
   }
 
   return boost;

@@ -105,19 +105,18 @@ export const epis2TypographyRoles = {
 import type { ThemeOptions } from '@mui/material/styles';
 
 /** Encabezados y controles — Google Sans Text (estilo Google Workspace). */
-
 export const epis2DisplayFontFamily =
-  '"Google Sans Text", "Google Sans", "Product Sans", system-ui, sans-serif';
+  '"Google Sans Text", "Google Sans", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif';
 
-/** Cuerpo y metadata — Roboto. */
-
-export const epis2BodyFontFamily = '"Roboto", "Helvetica Neue", Arial, sans-serif';
+/** Cuerpo y metadata — Roboto con fallbacks Microsoft/sistema. */
+export const epis2BodyFontFamily =
+  '"Roboto", "Segoe UI", "Helvetica Neue", Arial, sans-serif';
 
 export const epis2FontFamily = epis2BodyFontFamily;
 
 /** Regla 1 — monoespaciada para código, logs y datos técnicos. */
 export const epis2MonoFontFamily =
-  '"Roboto Mono", "Consolas", "Cascadia Mono", ui-monospace, monospace';
+  '"Cascadia Mono", "Roboto Mono", "Consolas", ui-monospace, monospace';
 
 export const epis2Typography: NonNullable<ThemeOptions['typography']> = {
   fontSize: 14,
