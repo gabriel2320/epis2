@@ -5,12 +5,38 @@
  */
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { join, relative, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { resolveOpenClawLocks } from './openclaw-policy.mjs';
 
 export const OPENCLAW_MODE = 'read-only-reviewer';
 export const OPENCLAW_VERSION = '0.1.0';
+
+const EVOLAB_SEVERITY_RANK = { critical: 0, high: 1, medium: 2, warn: 3, low: 4 };
+
+/** Deduplica hallazgos Evolab por escenario+fingerprint (conserva mayor severidad). */
+export function dedupeEvolabFindings(items) {
+  const byKey = new Map();
+  const runCounts = new Map();
+  for (const f of items) {
+    const key = `${f.scenarioId ?? '?'}:${f.fingerprint ?? f.id ?? '?'}`;
+    runCounts.set(key, (runCounts.get(key) ?? 0) + 1);
+    const existing = byKey.get(key);
+    const rank = EVOLAB_SEVERITY_RANK[f.severity] ?? 5;
+    const existingRank = existing ? (EVOLAB_SEVERITY_RANK[existing.severity] ?? 5) : 99;
+    if (!existing || rank < existingRank) byKey.set(key, f);
+  }
+  return [...byKey.values()].map((f) => {
+    const key = `${f.scenarioId ?? '?'}:${f.fingerprint ?? f.id ?? '?'}`;
+    const runCount = runCounts.get(key) ?? 1;
+    return runCount > 1 ? { ...f, runCount } : f;
+  });
+}
+
+export function formatEvolabFindingLine(f) {
+  const runs = f.runCount > 1 ? ` (${f.runCount} runs)` : '';
+  return `[Evolab ${f.severity}] ${f.scenarioId}: ${f.fingerprint}${runs}`;
+}
 
 export const AGENT_IDS = [
   'security',
@@ -149,6 +175,25 @@ const SECRET_REDACT = [
   ],
   [/\bAKIA[0-9A-Z]{16}\b/g, '[AWS_KEY_REDACTED]'],
 ];
+
+/** Prefer sibling repo workspace/skills when EPIS2_OPENCLAW_ROOT is set (bridge). */
+export function resolveOpenClawSkillPath(root, catalogSkillPath) {
+  const match = String(catalogSkillPath).match(/skills\/(.+\/SKILL\.md)$/);
+  if (!match) return catalogSkillPath;
+  const suffix = match[1];
+  const sibling = process.env.EPIS2_OPENCLAW_ROOT?.trim();
+  if (sibling) {
+    const abs = join(resolve(sibling), 'workspace', 'skills', suffix);
+    if (existsSync(abs)) {
+      return relative(root, abs).replace(/\\/g, '/');
+    }
+  }
+  const embedded = join(root, '.openclaw/epis2/skills', suffix);
+  if (existsSync(embedded)) {
+    return `.openclaw/epis2/skills/${suffix}`;
+  }
+  return catalogSkillPath;
+}
 
 export function sanitizeText(text, _relativePath = '') {
   let out = String(text ?? '');
@@ -323,7 +368,7 @@ export function buildBriefMarkdown(root, { mf, agents, timestamp }) {
     const agent = AGENT_CATALOG[agentId];
     if (!agent) continue;
     lines.push(`## Agente: ${agent.name}`, '');
-    lines.push(`- **Skill:** \`${agent.skill}\``);
+    lines.push(`- **Skill:** \`${resolveOpenClawSkillPath(root, agent.skill)}\``);
     lines.push(
       `- **Gates sugeridos (solo lectura):** ${agent.gates.map((g) => `\`npm run ${g}\``).join(', ')}`,
     );
