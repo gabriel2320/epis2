@@ -12,9 +12,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const args = process.argv.slice(2);
 const tramoIdx = args.includes('--tramo') ? Number(args[args.indexOf('--tramo') + 1]) : NaN;
 
-const ledger = JSON.parse(
-  readFileSync(join(root, 'docs/quality/auto-dev-6h-ledger.json'), 'utf8'),
-);
+const ledger = JSON.parse(readFileSync(join(root, 'docs/quality/auto-dev-6h-ledger.json'), 'utf8'));
 const tramo = ledger.tramos.find((t) => t.order === tramoIdx);
 if (!tramo) {
   console.error(`Tramo ${tramoIdx} no encontrado en ledger`);
@@ -22,7 +20,9 @@ if (!tramo) {
 }
 
 const briefPath = join(root, 'reports/dev-agent-brief.md');
-const brief = existsSync(briefPath) ? readFileSync(briefPath, 'utf8').slice(0, 4000) : '(ejecutar npm run dev:session)';
+const brief = existsSync(briefPath)
+  ? readFileSync(briefPath, 'utf8').slice(0, 4000)
+  : '(ejecutar npm run dev:session)';
 
 const openclawBriefPath = join(root, 'reports/openclaw-latest-brief.md');
 const openclawBrief = existsSync(openclawBriefPath)

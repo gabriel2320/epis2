@@ -13,11 +13,10 @@ if (!existsSync(dualPage)) {
 }
 
 const workspace = readFileSync(join(root, 'apps/web/src/pages/PatientWorkspacePage.tsx'), 'utf8');
-if (
-  !workspace.includes('isDualChartModesEnabled') &&
-  !workspace.includes('DualChartPatientPage')
-) {
-  errors.push('PatientWorkspacePage.tsx debe ramificar a DualChartPatientPage con isDualChartModesEnabled()');
+if (!workspace.includes('isDualChartModesEnabled') && !workspace.includes('DualChartPatientPage')) {
+  errors.push(
+    'PatientWorkspacePage.tsx debe ramificar a DualChartPatientPage con isDualChartModesEnabled()',
+  );
 }
 if (!workspace.includes('chartMode')) {
   errors.push('PatientWorkspacePage.tsx debe leer chartMode del search');
@@ -28,7 +27,7 @@ if (!existsSync(chartSearch)) {
   errors.push('Falta chartModeSearch.ts');
 } else {
   const src = readFileSync(chartSearch, 'utf8');
-  if (!src.includes("default") && !src.includes("'traditional'")) {
+  if (!src.includes('default') && !src.includes("'traditional'")) {
     errors.push('parseChartModeSearch debe default traditional');
   }
 }

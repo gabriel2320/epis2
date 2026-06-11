@@ -20,7 +20,11 @@ const dryRun = process.argv.includes('--dry-run');
 
 function log(event, detail = {}) {
   mkdirSync(join(root, 'reports'), { recursive: true });
-  appendFileSync(logPath, `${JSON.stringify({ at: new Date().toISOString(), event, ...detail })}\n`, 'utf8');
+  appendFileSync(
+    logPath,
+    `${JSON.stringify({ at: new Date().toISOString(), event, ...detail })}\n`,
+    'utf8',
+  );
 }
 
 function env() {
@@ -67,7 +71,10 @@ function main() {
 
   const steps = [
     { label: 'sync', fn: () => runNpm('dev:evolab:sync') },
-    { label: 'queue', fn: () => runNode('scripts/dev-agent/evolab-bridge.mjs', ['queue', '--limit', '10']) },
+    {
+      label: 'queue',
+      fn: () => runNode('scripts/dev-agent/evolab-bridge.mjs', ['queue', '--limit', '10']),
+    },
     {
       label: 'evolve-short',
       fn: () =>

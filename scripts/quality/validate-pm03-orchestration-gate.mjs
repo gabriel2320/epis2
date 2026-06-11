@@ -28,7 +28,13 @@ for (const rel of [
 }
 
 const pkg = readFileSync(join(root, 'package.json'), 'utf8');
-for (const script of ['dev:auto:orchestrate', 'dev:auto:preconditions', 'dev:auto:parallel', 'dev:auto:cycle', 'quality:pm03-orchestration-gate']) {
+for (const script of [
+  'dev:auto:orchestrate',
+  'dev:auto:preconditions',
+  'dev:auto:parallel',
+  'dev:auto:cycle',
+  'quality:pm03-orchestration-gate',
+]) {
   if (!pkg.includes(`"${script}"`)) errors.push(`package.json sin ${script}`);
 }
 
@@ -43,7 +49,12 @@ if (!orch.includes('runTramoCycle')) {
 }
 
 const cycle = readFileSync(join(root, 'scripts/dev-agent/openclaw-dev-cycle.mjs'), 'utf8');
-for (const token of ['generate-auto-dev-cursor-prompt', 'cursor-sdk-tramo', 'dev:auto:6h', 'auto-dev-preconditions']) {
+for (const token of [
+  'generate-auto-dev-cursor-prompt',
+  'cursor-sdk-tramo',
+  'dev:auto:6h',
+  'auto-dev-preconditions',
+]) {
   if (!cycle.includes(token)) errors.push(`openclaw-dev-cycle sin ${token}`);
 }
 
@@ -55,7 +66,10 @@ if (!envEx.includes('EPIS2_OPENCLAW_SESSION')) {
   errors.push('.env.example sin EPIS2_OPENCLAW_SESSION');
 }
 
-const orchOpenclaw = readFileSync(join(root, 'scripts/dev-agent/auto-dev-orchestrator.mjs'), 'utf8');
+const orchOpenclaw = readFileSync(
+  join(root, 'scripts/dev-agent/auto-dev-orchestrator.mjs'),
+  'utf8',
+);
 if (!orchOpenclaw.includes('EPIS2_AUTO_DEV_OPENCLAW')) {
   errors.push('orchestrator sin EPIS2_AUTO_DEV_OPENCLAW');
 }

@@ -12,7 +12,10 @@ export type EpisDashboardMd3CommandBarProps = {
 };
 
 /** Command bar dashboard — delega en EpisUniversalCommandBar. */
-export function EpisDashboardMd3CommandBar({ embedded = false, ...props }: EpisDashboardMd3CommandBarProps) {
+export function EpisDashboardMd3CommandBar({
+  embedded = false,
+  ...props
+}: EpisDashboardMd3CommandBarProps) {
   return (
     <EpisUniversalCommandBar
       variant="dashboard-operational"

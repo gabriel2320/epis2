@@ -374,7 +374,12 @@ export async function registerClinicalRoutes(
         return sendApiError(reply, 400, 'Cuerpo paper-chart inválido');
       }
       const draft = await runWithRlsContext(db, config, session, (tx) =>
-        upsertPaperChartDraft(tx, { id: session.sub, username: session.username }, patientId, sections),
+        upsertPaperChartDraft(
+          tx,
+          { id: session.sub, username: session.username },
+          patientId,
+          sections,
+        ),
       );
       return { patientId, sections, draftId: draft.id };
     },

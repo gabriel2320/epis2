@@ -48,7 +48,9 @@ const figmaTsCount = (() => {
     return 0;
   }
 })();
-console.log(`  archivos .figma.ts   ${figmaTsCount > 0 ? `${figmaTsCount} mapeo(s)` : 'ninguno aún (normal al inicio)'}`);
+console.log(
+  `  archivos .figma.ts   ${figmaTsCount > 0 ? `${figmaTsCount} mapeo(s)` : 'ninguno aún (normal al inicio)'}`,
+);
 
 console.log(
   `  FIGMA_ACCESS_TOKEN   ${hasToken ? 'OK (definido en .env)' : 'MISSING — token Figma con scopes Code Connect + File content'}`,

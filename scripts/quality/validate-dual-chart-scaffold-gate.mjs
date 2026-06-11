@@ -75,7 +75,11 @@ const printCss = readFileSync(
 );
 if (!printCss.includes('@page letter')) errors.push('paperChartPrint.css sin @page letter');
 if (!printCss.includes('@page a5')) errors.push('paperChartPrint.css sin @page a5');
-if (printCss.includes('@page a4') || printCss.includes('size: a4') || printCss.includes('210mm 297mm')) {
+if (
+  printCss.includes('@page a4') ||
+  printCss.includes('size: a4') ||
+  printCss.includes('210mm 297mm')
+) {
   errors.push('paperChartPrint.css no debe usar A4');
 }
 
@@ -84,7 +88,10 @@ for (const token of ['EpisUniversalCommandBar', 'CommandPaletteOverlay', 'ChartM
   if (!shell.includes(token)) errors.push(`ClinicalShell.tsx sin ${token}`);
 }
 
-const tokens = readFileSync(join(root, 'packages/epis2-ui/src/theme/chart-modes-tokens.ts'), 'utf8');
+const tokens = readFileSync(
+  join(root, 'packages/epis2-ui/src/theme/chart-modes-tokens.ts'),
+  'utf8',
+);
 for (const token of ['epis2TraditionalChartTokens', 'epis2PaperChartTokens']) {
   if (!tokens.includes(token)) errors.push(`chart-modes-tokens.ts sin ${token}`);
 }

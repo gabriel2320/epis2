@@ -11,8 +11,17 @@ import { spawnSync } from 'node:child_process';
 import { setTimeout as sleepMs } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 import { loadEnvFile } from '../load-env.mjs';
-import { applyDevCycleEnv, runCycleBootstrap, runCycleClose, runTramoCycle } from './openclaw-dev-cycle.mjs';
-import { acquireSessionLock, printAlreadyRunning, releaseSessionLock } from './auto-dev-session-lock.mjs';
+import {
+  applyDevCycleEnv,
+  runCycleBootstrap,
+  runCycleClose,
+  runTramoCycle,
+} from './openclaw-dev-cycle.mjs';
+import {
+  acquireSessionLock,
+  printAlreadyRunning,
+  releaseSessionLock,
+} from './auto-dev-session-lock.mjs';
 import { countOrchestratorRunnable, loadAutoDevLedger } from './auto-dev-ledger-lib.mjs';
 
 loadEnvFile();
@@ -38,7 +47,11 @@ const logPath = join(root, 'reports/auto-dev-orchestrator-log.jsonl');
 
 function log(event, detail = {}) {
   mkdirSync(join(root, 'reports'), { recursive: true });
-  appendFileSync(logPath, `${JSON.stringify({ at: new Date().toISOString(), event, ...detail })}\n`, 'utf8');
+  appendFileSync(
+    logPath,
+    `${JSON.stringify({ at: new Date().toISOString(), event, ...detail })}\n`,
+    'utf8',
+  );
 }
 
 async function pauseBetweenTramos(ms) {
@@ -98,7 +111,9 @@ async function main() {
 
   if (runnable === 0) {
     console.log('\n✓ Todos los tramos completos — orquestador idle (sin trabajo pendiente)\n');
-    console.log('  Usa --retry-failed para reintentar tramos FAILED o resetea el ledger para un ciclo nuevo.\n');
+    console.log(
+      '  Usa --retry-failed para reintentar tramos FAILED o resetea el ledger para un ciclo nuevo.\n',
+    );
     log('orchestrator-idle-skip', { reason: 'no-runnable-tramos', retryFailed });
     if (!dryRun && !skipBootstrap) {
       runCycleClose({ dryRun: false });

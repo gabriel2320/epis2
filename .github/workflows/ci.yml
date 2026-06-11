@@ -83,5 +83,6 @@ jobs:
       - run: npm run db:migrate
       - run: npm run quality:dual-chart-gate
       - run: npx playwright install --with-deps chromium
+      - run: npm run build:packages
       - run: npm run build -w @epis2/web
       - run: npm run test:e2e:dual-chart

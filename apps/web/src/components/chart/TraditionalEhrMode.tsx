@@ -1,17 +1,11 @@
 import type { ClinicalAlert, PatientLongitudinalResponse } from '@epis2/contracts';
-import {
-  Box,
-  epis2TraditionalChartShellSx,
-} from '@epis2/epis2-ui';
+import { Box, epis2TraditionalChartShellSx } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 import { PatientClinicalSummaryGrid } from '../clinical-summary/PatientClinicalSummaryGrid.js';
 import { ClinicalRightContextPanel } from './ClinicalRightContextPanel.js';
 import { TraditionalClinicalPanel } from './TraditionalClinicalPanel.js';
-import {
-  TraditionalSectionNav,
-  type TraditionalSectionId,
-} from './TraditionalSectionNav.js';
+import { TraditionalSectionNav, type TraditionalSectionId } from './TraditionalSectionNav.js';
 
 export type TraditionalEhrModeProps = {
   summaryFields?: Record<string, string> | undefined;
@@ -50,8 +44,7 @@ export function TraditionalEhrMode({
   const [activeSection, setActiveSection] = useState<TraditionalSectionId>('navSummary');
   const [internalContextOpen, setInternalContextOpen] = useState(true);
   const resolvedContextOpen = contextOpen ?? internalContextOpen;
-  const toggleContext =
-    onContextToggle ?? (() => setInternalContextOpen((open) => !open));
+  const toggleContext = onContextToggle ?? (() => setInternalContextOpen((open) => !open));
 
   const resolvedMain =
     mainContent ??
@@ -90,10 +83,7 @@ export function TraditionalEhrMode({
         {resolvedMain}
       </TraditionalClinicalPanel>
       {contextPane ? (
-        <ClinicalRightContextPanel
-          open={resolvedContextOpen}
-          onToggle={toggleContext}
-        >
+        <ClinicalRightContextPanel open={resolvedContextOpen} onToggle={toggleContext}>
           {contextPane}
         </ClinicalRightContextPanel>
       ) : null}

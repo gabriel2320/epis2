@@ -24,17 +24,20 @@ async function snap(page: Page, name: string) {
 }
 
 async function setCalmPreferences(page: Page, mode: 'light' | 'dark') {
-  await page.addInitScript((prefs) => {
-    window.localStorage.setItem('epis2-theme-preferences-v2', JSON.stringify(prefs));
-  }, {
-    mode,
-    accent: 'clinicalCalm',
-    density: 'comfortable',
-    contrast: 'standard',
-    motion: 'standard',
-    clinicalSplitScreen: 'focus',
-    clinicalWorkspace: 'command',
-  });
+  await page.addInitScript(
+    (prefs) => {
+      window.localStorage.setItem('epis2-theme-preferences-v2', JSON.stringify(prefs));
+    },
+    {
+      mode,
+      accent: 'clinicalCalm',
+      density: 'comfortable',
+      contrast: 'standard',
+      motion: 'standard',
+      clinicalSplitScreen: 'focus',
+      clinicalWorkspace: 'command',
+    },
+  );
 }
 
 test.describe('Calm Premium signoff capture C-2.4', () => {
@@ -68,7 +71,9 @@ test.describe('Calm Premium signoff capture C-2.4', () => {
       await expect(page.getByTestId('epis2-paper-chart-mode')).toBeVisible({ timeout: 15_000 });
       await snap(page, 's5-dark-paper-calm');
 
-      await page.goto(`/espacio/ficha/imprimir?patientId=${demoPatientId}&chartMode=paper&printFormat=letter`);
+      await page.goto(
+        `/espacio/ficha/imprimir?patientId=${demoPatientId}&chartMode=paper&printFormat=letter`,
+      );
       await page.waitForTimeout(800);
       await snap(page, 's6-print-letter-calm');
     } else {

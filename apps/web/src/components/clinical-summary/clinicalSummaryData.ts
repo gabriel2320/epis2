@@ -50,17 +50,12 @@ export function formatMedicationLine(med: Medication): string {
 export function formatAllergyLine(allergy: Allergy): string {
   const severity = allergy.severity ? ` · ${allergy.severity}` : '';
   const status =
-    allergy.status && normalizeStatus(allergy.status) !== 'active'
-      ? ` (${allergy.status})`
-      : '';
+    allergy.status && normalizeStatus(allergy.status) !== 'active' ? ` (${allergy.status})` : '';
   return `${allergy.substance}${severity}${status}`;
 }
 
 /** Labs crítica-first — observaciones recientes para tarjeta destacada. */
-export function selectLabHighlights(
-  observations: readonly Observation[],
-  max = 3,
-): Observation[] {
+export function selectLabHighlights(observations: readonly Observation[], max = 3): Observation[] {
   return [...observations]
     .sort((a, b) => new Date(b.observedAt).getTime() - new Date(a.observedAt).getTime())
     .slice(0, max);

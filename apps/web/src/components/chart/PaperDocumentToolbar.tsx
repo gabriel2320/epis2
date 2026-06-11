@@ -57,7 +57,12 @@ export function PaperDocumentToolbar({
         </EpisButton>
       ) : null}
       {onPrint ? (
-        <EpisButton appearance="outlined" size="small" onClick={onPrint} data-testid="epis2-paper-print">
+        <EpisButton
+          appearance="outlined"
+          size="small"
+          onClick={onPrint}
+          data-testid="epis2-paper-print"
+        >
           {copy.chartModes.actionPrint}
         </EpisButton>
       ) : null}

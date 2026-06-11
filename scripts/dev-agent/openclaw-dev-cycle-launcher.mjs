@@ -29,7 +29,9 @@ console.log('EPIS2 dev:auto:cycle — OpenClaw + Ollama + Evolab\n');
 console.log('  OpenClaw: orquesta brief/handoff/verify (L3 MAX POWER)');
 console.log('  Ollama:   plan + ollama-auto por tramo');
 console.log('  Evolab:   doctor/smoke/validate + sync hallazgos');
-console.log(`  Modo:     ${parallel ? 'parallel (PM-03 + evolve background)' : 'orchestrate secuencial'}\n`);
+console.log(
+  `  Modo:     ${parallel ? 'parallel (PM-03 + evolve background)' : 'orchestrate secuencial'}\n`,
+);
 
 if ((doCommit || doPush) && process.env.EPIS2_AUTO_DEV_AUTHORIZED !== '1') {
   console.error('Set EPIS2_AUTO_DEV_AUTHORIZED=1 para commit/push');

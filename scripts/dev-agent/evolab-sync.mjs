@@ -59,12 +59,16 @@ function main() {
     process.exit(1);
   }
 
-  const r = spawnSync('npm', ['run', 'evolab:findings', '--', '--status', 'open', '--limit', '200'], {
-    cwd: evolabRoot,
-    encoding: 'utf8',
-    shell: true,
-    env: { ...process.env, EPIS2_ROOT: epis2Root },
-  });
+  const r = spawnSync(
+    'npm',
+    ['run', 'evolab:findings', '--', '--status', 'open', '--limit', '200'],
+    {
+      cwd: evolabRoot,
+      encoding: 'utf8',
+      shell: true,
+      env: { ...process.env, EPIS2_ROOT: epis2Root },
+    },
+  );
 
   if (r.status !== 0) {
     console.error('dev:evolab:sync — evolab:findings falló');

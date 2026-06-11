@@ -136,16 +136,18 @@ export function PatientIdentityBand({
             {copy.chartModes.identityAllergies}:
           </Typography>
           {allergiesVisible ? (
-            allergyLabels.slice(0, 6).map((label) => (
-              <Chip
-                key={label}
-                size="small"
-                color="warning"
-                variant="outlined"
-                label={label}
-                data-testid="epis2-patient-allergy-chip"
-              />
-            ))
+            allergyLabels
+              .slice(0, 6)
+              .map((label) => (
+                <Chip
+                  key={label}
+                  size="small"
+                  color="warning"
+                  variant="outlined"
+                  label={label}
+                  data-testid="epis2-patient-allergy-chip"
+                />
+              ))
           ) : (
             <Typography variant="body2" color="text.secondary">
               {copy.chartModes.identityNoAllergies}

@@ -39,7 +39,8 @@ console.log('EPIS2 dev:auto:preconditions — PM-03\n');
 const activeLock = readActiveLock(root);
 if (activeLock) {
   const kids = [];
-  if (activeLock.children?.orchestratorPid) kids.push(`orch=${activeLock.children.orchestratorPid}`);
+  if (activeLock.children?.orchestratorPid)
+    kids.push(`orch=${activeLock.children.orchestratorPid}`);
   if (activeLock.children?.evolvePid) kids.push(`evolve=${activeLock.children.evolvePid}`);
   const extra = kids.length ? ` · ${kids.join(' ')}` : '';
   warn(
@@ -87,7 +88,11 @@ for (const script of ['dev:auto:orchestrate', 'dev:auto:6h', 'dev:auto:precondit
   else fail(`Falta npm script ${script}`);
 }
 
-const git = spawnSync('git', ['status', '--porcelain'], { cwd: root, encoding: 'utf8', shell: true });
+const git = spawnSync('git', ['status', '--porcelain'], {
+  cwd: root,
+  encoding: 'utf8',
+  shell: true,
+});
 if (git.stdout?.trim()) {
   warn('Working tree con cambios sin commit — el orquestador puede mezclar commits por tramo');
 } else {

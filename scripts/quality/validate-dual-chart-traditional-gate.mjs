@@ -22,7 +22,9 @@ const traditional = readFileSync(
   'utf8',
 );
 if (!traditional.includes('PatientClinicalSummaryGrid')) {
-  errors.push('TraditionalEhrMode.tsx debe integrar PatientClinicalSummaryGrid (Figma Medical Record)');
+  errors.push(
+    'TraditionalEhrMode.tsx debe integrar PatientClinicalSummaryGrid (Figma Medical Record)',
+  );
 }
 if (!traditional.includes('epis2-traditional-ehr-nav')) {
   errors.push('TraditionalEhrMode.tsx sin nav lateral testId');
@@ -32,7 +34,9 @@ const workspace = join(root, 'apps/web/src/pages/PatientWorkspacePage.tsx');
 if (existsSync(workspace)) {
   const ws = readFileSync(workspace, 'utf8');
   if (!ws.includes('ClinicalShell') && !ws.includes('DualChartPatientPage')) {
-    errors.push('PatientWorkspacePage.tsx debe usar ClinicalShell o DualChartPatientPage detrás de flag');
+    errors.push(
+      'PatientWorkspacePage.tsx debe usar ClinicalShell o DualChartPatientPage detrás de flag',
+    );
   }
 }
 

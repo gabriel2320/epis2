@@ -18,6 +18,8 @@ describe('paperChartSectionSchema', () => {
   });
 
   it('valida patch de sección', () => {
-    expect(parsePaperChartSectionPatch({ sectionId: 'soap', body: 'S/O/A/P' }).body).toBe('S/O/A/P');
+    expect(parsePaperChartSectionPatch({ sectionId: 'soap', body: 'S/O/A/P' }).body).toBe(
+      'S/O/A/P',
+    );
   });
 });

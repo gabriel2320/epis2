@@ -70,11 +70,15 @@ function saveLedger(ledger) {
 }
 
 function archiveBranchesReport() {
-  const r = spawnSync('git', ['branch', '-a', '--format=%(refname:short)|%(committerdate:iso8601)|%(upstream:track)'], {
-    cwd: root,
-    encoding: 'utf8',
-    shell: true,
-  });
+  const r = spawnSync(
+    'git',
+    ['branch', '-a', '--format=%(refname:short)|%(committerdate:iso8601)|%(upstream:track)'],
+    {
+      cwd: root,
+      encoding: 'utf8',
+      shell: true,
+    },
+  );
   const lines = (r.stdout ?? '').split('\n').filter(Boolean);
   const reportPath = join(root, 'reports/epis2-branch-archive-2026-06-10.md');
   const body = [
@@ -115,12 +119,10 @@ const TRAMO_STEPS = {
     const steps = [
       () => runNpm('stack:dev'),
       () => runNpm('ollama:probe'),
-      () =>
-        openclawEnabled
-          ? runNpm('dev:session', ['--', '--openclaw'])
-          : runNpm('dev:session'),
+      () => (openclawEnabled ? runNpm('dev:session', ['--', '--openclaw']) : runNpm('dev:session')),
     ];
-    if (withOllamaAuto) steps.push(() => runNpm('dev:agent:ollama-auto', ollamaApply ? ['--', '--apply'] : []));
+    if (withOllamaAuto)
+      steps.push(() => runNpm('dev:agent:ollama-auto', ollamaApply ? ['--', '--apply'] : []));
     return steps;
   },
   1: () => [
@@ -144,10 +146,7 @@ const TRAMO_STEPS = {
     archiveBranchesReport();
     return [() => runNpm('quality:auto-dev-6h-gate')];
   },
-  6: () => [
-    () => runNpm('quality:dual-chart-ledger'),
-    () => runNpm('dev:agent:close'),
-  ],
+  6: () => [() => runNpm('quality:dual-chart-ledger'), () => runNpm('dev:agent:close')],
 };
 
 function runTramo(order, ledger) {
@@ -184,7 +183,12 @@ function runTramo(order, ledger) {
   log('tramo-done', { id: tramo.id, order });
 
   if (openclawEnabled && AUTO_DEV_OPENCLAW_HANDOFF_TRAMOS.has(order)) {
-    runNode('scripts/dev-agent/openclaw-tramo.mjs', ['--tramo', String(order), '--phase', 'handoff']);
+    runNode('scripts/dev-agent/openclaw-tramo.mjs', [
+      '--tramo',
+      String(order),
+      '--phase',
+      'handoff',
+    ]);
     runNpm('dev:openclaw:sync');
   }
 

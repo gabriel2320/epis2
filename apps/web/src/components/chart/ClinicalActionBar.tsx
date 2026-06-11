@@ -56,13 +56,28 @@ export function ClinicalActionBar({
         <Box sx={{ flex: 1, minWidth: 0 }}>{commandBar}</Box>
       </Stack>
       <Stack direction="row" flexWrap="wrap" useFlexGap spacing={1} alignItems="center">
-        <EpisButton size="small" appearance="outlined" onClick={onNewEvolution} data-testid="epis2-chart-action-evolution">
+        <EpisButton
+          size="small"
+          appearance="outlined"
+          onClick={onNewEvolution}
+          data-testid="epis2-chart-action-evolution"
+        >
           + {copy.chartModes.actionEvolution}
         </EpisButton>
-        <EpisButton size="small" appearance="outlined" onClick={onNewOrder} data-testid="epis2-chart-action-order">
+        <EpisButton
+          size="small"
+          appearance="outlined"
+          onClick={onNewOrder}
+          data-testid="epis2-chart-action-order"
+        >
           + {copy.chartModes.actionOrder}
         </EpisButton>
-        <EpisButton size="small" appearance="outlined" onClick={onOpenLab} data-testid="epis2-chart-action-lab">
+        <EpisButton
+          size="small"
+          appearance="outlined"
+          onClick={onOpenLab}
+          data-testid="epis2-chart-action-lab"
+        >
           + {copy.chartModes.actionLab}
         </EpisButton>
         <EpisButton
@@ -74,13 +89,28 @@ export function ClinicalActionBar({
           + {copy.chartModes.actionPrescription}
         </EpisButton>
         <Box sx={{ flex: 1 }} />
-        <EpisButton size="small" appearance="tonal" onClick={onSaveDraft} data-testid="epis2-chart-action-save">
+        <EpisButton
+          size="small"
+          appearance="tonal"
+          onClick={onSaveDraft}
+          data-testid="epis2-chart-action-save"
+        >
           {copy.chartModes.actionSave}
         </EpisButton>
-        <EpisButton size="small" appearance="outlined" onClick={onSign} data-testid="epis2-chart-action-sign">
+        <EpisButton
+          size="small"
+          appearance="outlined"
+          onClick={onSign}
+          data-testid="epis2-chart-action-sign"
+        >
           {copy.chartModes.actionSign}
         </EpisButton>
-        <EpisButton size="small" appearance="filled" onClick={onPrint} data-testid="epis2-chart-action-print">
+        <EpisButton
+          size="small"
+          appearance="filled"
+          onClick={onPrint}
+          data-testid="epis2-chart-action-print"
+        >
           {copy.chartModes.actionPrint}
         </EpisButton>
       </Stack>

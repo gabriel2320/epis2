@@ -1,10 +1,7 @@
 import { copy } from '@epis2/design-system';
 import { Box, EpisM3Text, Typography, epis2TraditionalChartTokens } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
-import {
-  TRADITIONAL_SECTION_IDS,
-  type TraditionalSectionId,
-} from './TraditionalSectionNav.js';
+import { TRADITIONAL_SECTION_IDS, type TraditionalSectionId } from './TraditionalSectionNav.js';
 
 export type TraditionalClinicalPanelProps = {
   activeSection?: TraditionalSectionId | undefined;

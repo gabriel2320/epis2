@@ -38,7 +38,9 @@ export type ClinicalPatientSearch = ChartModeSearch & {
 export function parseClinicalPatientSearch(search: Record<string, unknown>): ClinicalPatientSearch {
   return {
     ...parseChartModeSearch(search),
-    ...(typeof search.patientId === 'string' && search.patientId ? { patientId: search.patientId } : {}),
+    ...(typeof search.patientId === 'string' && search.patientId
+      ? { patientId: search.patientId }
+      : {}),
     ...(search.mode === 'classic' ? { mode: 'classic' as const } : {}),
     ...(search.returnTo === 'dashboard' ? { returnTo: 'dashboard' as const } : {}),
   };

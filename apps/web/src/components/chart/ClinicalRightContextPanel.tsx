@@ -1,11 +1,5 @@
 import { copy } from '@epis2/design-system';
-import {
-  Box,
-  EpisButton,
-  EpisM3Text,
-  Stack,
-  epis2TraditionalChartTokens,
-} from '@epis2/epis2-ui';
+import { Box, EpisButton, EpisM3Text, Stack, epis2TraditionalChartTokens } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
 
 export type ClinicalRightContextPanelProps = {

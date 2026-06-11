@@ -2,7 +2,11 @@ import type { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
-import { epis2CalmIslandSx, epis2IslandPaddingSx, epis2ShellContentSx } from '../theme/island-layout.js';
+import {
+  epis2CalmIslandSx,
+  epis2IslandPaddingSx,
+  epis2ShellContentSx,
+} from '../theme/island-layout.js';
 
 export type EpisWorkspaceSectionProps = {
   title: string;

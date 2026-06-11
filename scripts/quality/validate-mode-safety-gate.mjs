@@ -39,7 +39,9 @@ if (
   !universal.includes('clinical-chart') ||
   !universal.includes('census-search')
 ) {
-  errors.push('EpisUniversalCommandBar debe tener variantes por modo (incl. clinical-chart y census-search)');
+  errors.push(
+    'EpisUniversalCommandBar debe tener variantes por modo (incl. clinical-chart y census-search)',
+  );
 }
 if (universal.includes('firmar') || universal.includes('approve')) {
   errors.push('Command bar no debe auto-firmar');

@@ -38,10 +38,7 @@ function scanDirForToken(dir, token) {
 }
 
 const apiRoot = join(root, 'apps/api/src');
-if (
-  !scanDirForToken(apiRoot, 'paperChart') &&
-  !scanDirForToken(apiRoot, 'paper-chart')
-) {
+if (!scanDirForToken(apiRoot, 'paperChart') && !scanDirForToken(apiRoot, 'paper-chart')) {
   errors.push('API sin handler borrador paper-chart (paperChart / paper-chart en apps/api/src)');
 }
 

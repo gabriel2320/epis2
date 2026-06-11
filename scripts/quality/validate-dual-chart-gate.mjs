@@ -55,8 +55,7 @@ if (!validation.ok) {
 }
 
 const phaseArg = argValue('--phase');
-const targetPhase =
-  phaseArg !== undefined ? Number(phaseArg) : (validation.next?.phase ?? 0);
+const targetPhase = phaseArg !== undefined ? Number(phaseArg) : (validation.next?.phase ?? 0);
 
 const phase = ledger.phases.find((p) => p.phase === targetPhase);
 if (!phase) {

@@ -29,17 +29,21 @@ const dbUrl = process.env.DATABASE_URL ?? 'postgresql://epis2_app:epis2@127.0.0.
 console.log(`\nCalm Premium signoff → ${evidenceDir}\n`);
 console.log(`VITE_ENABLE_DUAL_CHART_MODES=${dualFlag ? 'true' : 'false'}\n`);
 
-const result = spawnSync('npx', ['playwright', 'test', 'e2e/calm-premium-signoff-capture.spec.ts'], {
-  cwd: root,
-  stdio: 'inherit',
-  shell: process.platform === 'win32',
-  env: {
-    ...process.env,
-    DATABASE_URL: dbUrl,
-    CALM_PREMIUM_EVIDENCE_DIR: evidenceDir,
-    VITE_ENABLE_DUAL_CHART_MODES: dualFlag ? 'true' : 'false',
+const result = spawnSync(
+  'npx',
+  ['playwright', 'test', 'e2e/calm-premium-signoff-capture.spec.ts'],
+  {
+    cwd: root,
+    stdio: 'inherit',
+    shell: process.platform === 'win32',
+    env: {
+      ...process.env,
+      DATABASE_URL: dbUrl,
+      CALM_PREMIUM_EVIDENCE_DIR: evidenceDir,
+      VITE_ENABLE_DUAL_CHART_MODES: dualFlag ? 'true' : 'false',
+    },
   },
-});
+);
 
 const shots = [
   ['s1-comando-calm-light.png', 'Comando', 'clinical-calm light'],
@@ -59,9 +63,10 @@ const tableRows = shots
   })
   .join('\n');
 
-const verdict = dualFlag && shots.every(([f]) => existsSync(join(evidenceDir, f)))
-  ? 'GO scaffold — pendiente revisión humana'
-  : 'NO-GO scaffold — completar capturas (activar dual flag para 2–6)';
+const verdict =
+  dualFlag && shots.every(([f]) => existsSync(join(evidenceDir, f)))
+    ? 'GO scaffold — pendiente revisión humana'
+    : 'NO-GO scaffold — completar capturas (activar dual flag para 2–6)';
 
 const report = `# EPIS2 — Signoff scaffold Calm Premium C-2.4 (${date})
 

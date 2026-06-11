@@ -19,7 +19,9 @@ describe('PatientClinicalSummaryGrid', () => {
           readOnly: true,
           demoCaseCode: 'DEMO-005',
           problems: [],
-          allergies: [{ id: 'a1', substance: 'Penicilina', severity: 'moderate', status: 'active' }],
+          allergies: [
+            { id: 'a1', substance: 'Penicilina', severity: 'moderate', status: 'active' },
+          ],
           medications: [],
           observations: [],
           documents: [],

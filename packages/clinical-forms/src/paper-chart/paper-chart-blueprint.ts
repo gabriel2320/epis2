@@ -21,8 +21,6 @@ export const paperChartBlueprint = defineBlueprint({
     section('labs', 'VI. Laboratorio', ['labs']),
     section('discharge', 'VII. Epicrisis', ['discharge']),
   ],
-  fields: PAPER_CHART_SECTION_IDS.map((id) =>
-    field(id, id, 'textarea', { clinicalTextBox: true }),
-  ),
+  fields: PAPER_CHART_SECTION_IDS.map((id) => field(id, id, 'textarea', { clinicalTextBox: true })),
   validations: [],
 });

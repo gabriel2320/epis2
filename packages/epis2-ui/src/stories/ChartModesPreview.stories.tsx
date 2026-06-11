@@ -1,5 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Box, Stack, Typography, epis2PaperDocumentSx, epis2TraditionalChartShellSx } from '../theme/theme.js';
+import {
+  Box,
+  Stack,
+  Typography,
+  epis2PaperDocumentSx,
+  epis2TraditionalChartShellSx,
+} from '../theme/theme.js';
 import { epis2PaperChartTokens, epis2TraditionalChartTokens } from '../theme/chart-modes-tokens.js';
 
 function TraditionalPreview() {
@@ -32,7 +38,9 @@ function PaperPreview() {
   return (
     <Box sx={{ p: 2, bgcolor: epis2TraditionalChartTokens.shellBg }}>
       <Box sx={{ ...epis2PaperDocumentSx('letter'), p: 3 }}>
-        <Box sx={{ bgcolor: t.navyHeader, color: t.sectionHeaderColor, p: 2, mb: 2, borderRadius: 1 }}>
+        <Box
+          sx={{ bgcolor: t.navyHeader, color: t.sectionHeaderColor, p: 2, mb: 2, borderRadius: 1 }}
+        >
           I. Carátula — EPIS2 demo
         </Box>
         <Typography variant="body2">Documento clínico editable — Carta</Typography>

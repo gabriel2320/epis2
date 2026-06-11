@@ -20,8 +20,14 @@ function ShapeDemo({ mode, accent, label }: ShapeDemoProps) {
           {label} — forma cuadrada (max {profile.max}px)
         </EpisM3Text>
         <Stack direction="row" flexWrap="wrap" gap={1.5} sx={{ mb: 2 }}>
-          <Chip label={`island ${epis2Shape.island}px`} sx={{ borderRadius: `${epis2Shape.island}px` }} />
-          <Chip label={`chip ${epis2Shape.small}px`} sx={{ borderRadius: `${epis2Shape.small}px` }} />
+          <Chip
+            label={`island ${epis2Shape.island}px`}
+            sx={{ borderRadius: `${epis2Shape.island}px` }}
+          />
+          <Chip
+            label={`chip ${epis2Shape.small}px`}
+            sx={{ borderRadius: `${epis2Shape.small}px` }}
+          />
           <Chip label={`field ${profile.field}px`} sx={{ borderRadius: `${profile.field}px` }} />
         </Stack>
         <Box

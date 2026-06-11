@@ -92,7 +92,11 @@ export const CONDITIONAL_COMMANDS = [
 ];
 
 /** L3+ — cualquier npm run quality:* */
-export const ALLOWLIST_PREFIXES_L3 = ['npm run quality:', 'npm run openclaw:', 'npm run dev:openclaw:'];
+export const ALLOWLIST_PREFIXES_L3 = [
+  'npm run quality:',
+  'npm run openclaw:',
+  'npm run dev:openclaw:',
+];
 
 /** L4 — además test:e2e:* y dev:agent:* (sin commit). */
 export const ALLOWLIST_PREFIXES_L4 = [
@@ -182,7 +186,11 @@ export function isAllowedCommand(cmd, locks) {
 
   if (CONDITIONAL_COMMANDS.includes(n) || CONDITIONAL_COMMANDS.some((c) => n.startsWith(`${c} `))) {
     if (locks.authorizeConditional) return { allowed: true, tier: 'conditional' };
-    return { allowed: false, reason: 'Requiere EPIS2_OPENCLAW_AUTHORIZE_CONDITIONAL=true', tier: 'conditional' };
+    return {
+      allowed: false,
+      reason: 'Requiere EPIS2_OPENCLAW_AUTHORIZE_CONDITIONAL=true',
+      tier: 'conditional',
+    };
   }
 
   if (levelOrder >= 4 && matchesPrefix(n, ALLOWLIST_PREFIXES_L4)) {
@@ -202,7 +210,9 @@ export function isAllowedCommand(cmd, locks) {
 
 export function resolveOpenClawLocks(env = process.env) {
   const maxPower = env.EPIS2_OPENCLAW_MAX_POWER === '1' || env.EPIS2_OPENCLAW_MAX_POWER === 'true';
-  const level = (maxPower ? env.EPIS2_OPENCLAW_POWER_LEVEL ?? 'L3' : env.EPIS2_OPENCLAW_POWER_LEVEL ?? 'L0').toUpperCase();
+  const level = (
+    maxPower ? (env.EPIS2_OPENCLAW_POWER_LEVEL ?? 'L3') : (env.EPIS2_OPENCLAW_POWER_LEVEL ?? 'L0')
+  ).toUpperCase();
   const profile = PROFILE_MAP[level] ?? PROFILE_MAP.L0;
 
   const patchingEnabled =
@@ -242,7 +252,8 @@ export function validatePatchPaths(paths, locks = resolveOpenClawLocks()) {
     const tier = getPathTier(path);
     let allowed = false;
     if (tier === 'L0' && locks.safePatch) allowed = true;
-    else if (tier === 'L1' && locks.safePatch && locks.authorizeCode && locks.levelOrder >= 3) allowed = true;
+    else if (tier === 'L1' && locks.safePatch && locks.authorizeCode && locks.levelOrder >= 3)
+      allowed = true;
     else if (tier === 'forbidden') allowed = false;
     else ok = false;
     results.push({ path, tier, allowed, note: allowed ? 'ok' : `tier ${tier}` });
@@ -256,7 +267,11 @@ export function validatePatchProposalFiles(files, locks = resolveOpenClawLocks()
   if (!pathCheck.ok) return pathCheck;
 
   for (const file of files) {
-    const v = validatePatch({ path: file.path, content: file.content ?? '', action: file.action ?? 'create' });
+    const v = validatePatch({
+      path: file.path,
+      content: file.content ?? '',
+      action: file.action ?? 'create',
+    });
     if (!v.ok) {
       return {
         ok: false,
@@ -266,7 +281,9 @@ export function validatePatchProposalFiles(files, locks = resolveOpenClawLocks()
     if (v.tier === 'L1' && (!locks.authorizeCode || locks.levelOrder < 3)) {
       return {
         ok: false,
-        results: [{ path: file.path, tier: 'L1', allowed: false, note: 'Requiere L3 + AUTHORIZE_CODE' }],
+        results: [
+          { path: file.path, tier: 'L1', allowed: false, note: 'Requiere L3 + AUTHORIZE_CODE' },
+        ],
       };
     }
   }
@@ -292,7 +309,8 @@ export function assertLocksForSafeRun(locks = resolveOpenClawLocks()) {
   const errors = [];
   if (locks.gitWrite) errors.push('EPIS2_OPENCLAW_GIT_WRITE debe ser false (git vía PM-03)');
   if (locks.readEnv) errors.push('EPIS2_OPENCLAW_READ_ENV debe ser false');
-  if (locks.level === 'L0' && locks.safeRun) errors.push('L0 no permite EPIS2_OPENCLAW_SAFE_RUN=true');
+  if (locks.level === 'L0' && locks.safeRun)
+    errors.push('L0 no permite EPIS2_OPENCLAW_SAFE_RUN=true');
   if (locks.levelOrder >= 5) errors.push('L5 prohibido en EPIS2');
   return errors;
 }

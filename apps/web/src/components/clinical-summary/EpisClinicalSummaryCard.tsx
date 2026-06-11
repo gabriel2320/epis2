@@ -92,7 +92,11 @@ export function EpisClinicalSummaryCard({
       </Stack>
       {highlightValue ? (
         <Stack spacing={0.5} sx={{ flex: 1 }}>
-          <EpisM3Text role="titleLarge" component="p" sx={{ m: 0, fontVariantNumeric: 'tabular-nums' }}>
+          <EpisM3Text
+            role="titleLarge"
+            component="p"
+            sx={{ m: 0, fontVariantNumeric: 'tabular-nums' }}
+          >
             {highlightValue}
           </EpisM3Text>
           {highlightMeta ? (
@@ -112,7 +116,12 @@ export function EpisClinicalSummaryCard({
         </EpisM3Text>
       )}
       {actionLabel && onAction ? (
-        <EpisButton appearance="text" size="small" onClick={onAction} sx={{ alignSelf: 'flex-start', px: 0 }}>
+        <EpisButton
+          appearance="text"
+          size="small"
+          onClick={onAction}
+          sx={{ alignSelf: 'flex-start', px: 0 }}
+        >
           {actionLabel}
         </EpisButton>
       ) : null}

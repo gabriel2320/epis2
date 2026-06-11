@@ -115,7 +115,13 @@ export async function buildDevBrief(root, opts) {
 
   const evolabHint = getEvolabOpenFindingsHint(root);
   if (evolabHint) {
-    lines.push('', '## Evolab (QA externo)', '', `- ${evolabHint}`, `- Root: \`${resolveEvolabRoot()}\``);
+    lines.push(
+      '',
+      '## Evolab (QA externo)',
+      '',
+      `- ${evolabHint}`,
+      `- Root: \`${resolveEvolabRoot()}\``,
+    );
   }
 
   const openclawBrief = join(root, 'reports/openclaw-latest-brief.md');

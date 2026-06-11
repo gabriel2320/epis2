@@ -24,15 +24,22 @@ for (const script of ['dev:auto:cycle', 'dev:cycle:sync', 'quality:openclaw-cycl
 }
 
 const lockMod = readFileSync(join(root, 'scripts/dev-agent/auto-dev-session-lock.mjs'), 'utf8');
-for (const token of ['acquireSessionLock', 'readActiveLock', 'exitIfSessionActive', 'flag: \'wx\'']) {
+for (const token of ['acquireSessionLock', 'readActiveLock', 'exitIfSessionActive', "flag: 'wx'"]) {
   if (!lockMod.includes(token)) errors.push(`auto-dev-session-lock sin ${token}`);
 }
 
-const parallel = readFileSync(join(root, 'scripts/dev-agent/auto-dev-parallel-launcher.mjs'), 'utf8');
+const parallel = readFileSync(
+  join(root, 'scripts/dev-agent/auto-dev-parallel-launcher.mjs'),
+  'utf8',
+);
 if (!parallel.includes('auto-dev-session-lock')) errors.push('parallel-launcher sin session-lock');
 
-const cycleLauncher = readFileSync(join(root, 'scripts/dev-agent/openclaw-dev-cycle-launcher.mjs'), 'utf8');
-if (!cycleLauncher.includes('exitIfSessionActive')) errors.push('cycle-launcher sin exitIfSessionActive');
+const cycleLauncher = readFileSync(
+  join(root, 'scripts/dev-agent/openclaw-dev-cycle-launcher.mjs'),
+  'utf8',
+);
+if (!cycleLauncher.includes('exitIfSessionActive'))
+  errors.push('cycle-launcher sin exitIfSessionActive');
 
 const cycle = readFileSync(join(root, 'scripts/dev-agent/openclaw-dev-cycle.mjs'), 'utf8');
 for (const token of ['runCycleBootstrap', 'runTramoCycle', 'runCycleClose', 'applyDevCycleEnv']) {
@@ -41,10 +48,12 @@ for (const token of ['runCycleBootstrap', 'runTramoCycle', 'runCycleClose', 'app
 
 const orch = readFileSync(join(root, 'scripts/dev-agent/auto-dev-orchestrator.mjs'), 'utf8');
 if (!orch.includes('runTramoCycle')) errors.push('orchestrator no delega en runTramoCycle');
-if (!orch.includes('orchestrator-idle-skip')) errors.push('orchestrator sin guard anti-bucle vacío');
+if (!orch.includes('orchestrator-idle-skip'))
+  errors.push('orchestrator sin guard anti-bucle vacío');
 
 const continuous = readFileSync(join(root, 'scripts/dev-agent/auto-dev-continuous.mjs'), 'utf8');
-if (!continuous.includes('continuous-idle-exit')) errors.push('continuous sin guard anti-bucle vacío');
+if (!continuous.includes('continuous-idle-exit'))
+  errors.push('continuous sin guard anti-bucle vacío');
 
 const ledgerLib = readFileSync(join(root, 'scripts/dev-agent/auto-dev-ledger-lib.mjs'), 'utf8');
 if (!ledgerLib.includes('countOrchestratorRunnable')) errors.push('auto-dev-ledger-lib incompleto');

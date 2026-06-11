@@ -31,8 +31,7 @@ export function PaperChartPrintPage() {
     );
   }
 
-  const printLabel =
-    printFormat === 'a5' ? copy.chartModes.printA5 : copy.chartModes.printLetter;
+  const printLabel = printFormat === 'a5' ? copy.chartModes.printA5 : copy.chartModes.printLetter;
 
   return (
     <Stack spacing={2} data-testid="epis2-paper-chart-print-page">

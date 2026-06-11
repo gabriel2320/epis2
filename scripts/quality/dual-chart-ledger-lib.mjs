@@ -84,7 +84,9 @@ export function validateDualChartLedger(ledger) {
     for (const dep of item.dependsOn ?? []) {
       const depItem = byId.get(dep);
       if (depItem?.state !== 'DONE') {
-        errors.push(`${item.id} está READY pero dependencia ${dep} no está DONE (${depItem?.state})`);
+        errors.push(
+          `${item.id} está READY pero dependencia ${dep} no está DONE (${depItem?.state})`,
+        );
       }
     }
   }

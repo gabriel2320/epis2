@@ -26,7 +26,9 @@ if (existsSync(mode)) {
 }
 
 if (errors.length) {
-  console.error('dual-chart-paper-layout-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
+  console.error(
+    'dual-chart-paper-layout-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
+  );
   process.exit(1);
 }
 

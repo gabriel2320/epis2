@@ -53,7 +53,12 @@ export function EpisClassicMd3TopAppBar({
       </EpisButton>
       <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ flex: 1, minWidth: 0 }}>
         {patientLabel ? (
-          <Typography variant="body2" fontWeight={600} noWrap sx={{ maxWidth: { xs: 140, md: 240 } }}>
+          <Typography
+            variant="body2"
+            fontWeight={600}
+            noWrap
+            sx={{ maxWidth: { xs: 140, md: 240 } }}
+          >
             {patientLabel}
           </Typography>
         ) : null}

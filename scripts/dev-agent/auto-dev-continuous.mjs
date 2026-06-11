@@ -19,7 +19,11 @@ import {
   printAlreadyRunning,
   releaseSessionLock,
 } from './auto-dev-session-lock.mjs';
-import { countPendingOrFailed, isLedgerCycleComplete, loadAutoDevLedger } from './auto-dev-ledger-lib.mjs';
+import {
+  countPendingOrFailed,
+  isLedgerCycleComplete,
+  loadAutoDevLedger,
+} from './auto-dev-ledger-lib.mjs';
 
 loadEnvFile();
 
@@ -38,7 +42,11 @@ let lockHeld = false;
 
 function log(event, detail = {}) {
   mkdirSync(join(root, 'reports'), { recursive: true });
-  appendFileSync(logPath, `${JSON.stringify({ at: new Date().toISOString(), event, ...detail })}\n`, 'utf8');
+  appendFileSync(
+    logPath,
+    `${JSON.stringify({ at: new Date().toISOString(), event, ...detail })}\n`,
+    'utf8',
+  );
 }
 
 function resetStuckTramos() {
@@ -108,7 +116,8 @@ function runOrchestratorCycle(cycle) {
       ...process.env,
       EPIS2_AUTO_DEV_PARALLEL_SKIP_LOCK: '1',
       EPIS2_EVOLAB_PARALLEL_EVOLVE: '0',
-      EPIS2_DEV_CYCLE_SKIP_BOOTSTRAP: cycle > 1 ? '1' : process.env.EPIS2_DEV_CYCLE_SKIP_BOOTSTRAP ?? '0',
+      EPIS2_DEV_CYCLE_SKIP_BOOTSTRAP:
+        cycle > 1 ? '1' : (process.env.EPIS2_DEV_CYCLE_SKIP_BOOTSTRAP ?? '0'),
     },
   });
   log('continuous-orchestrator-end', { cycle, status: r.status });
@@ -172,7 +181,9 @@ async function main() {
   const ledgerAtStart = loadAutoDevLedger(root);
   if (isLedgerCycleComplete(ledgerAtStart, { retryFailed: true })) {
     console.log('\n✓ Ledger auto-dev completo — continuous no inicia bucles vacíos\n');
-    console.log('  Resetea docs/quality/auto-dev-6h-ledger.json o usa dev:auto:orchestrate --retry-failed\n');
+    console.log(
+      '  Resetea docs/quality/auto-dev-6h-ledger.json o usa dev:auto:orchestrate --retry-failed\n',
+    );
     log('continuous-idle-exit', { reason: 'ledger-complete-at-start' });
     cleanup(0);
   }
@@ -185,7 +196,11 @@ async function main() {
     const ledgerBefore = loadAutoDevLedger(root);
     if (isLedgerCycleComplete(ledgerBefore, { retryFailed: true })) {
       console.log('\n✓ Todos los tramos completos — deteniendo continuous (anti-bucle vacío)\n');
-      log('continuous-idle-exit', { cycle, reason: 'ledger-complete', elapsedMs: Date.now() - start });
+      log('continuous-idle-exit', {
+        cycle,
+        reason: 'ledger-complete',
+        elapsedMs: Date.now() - start,
+      });
       break;
     }
 
@@ -196,7 +211,11 @@ async function main() {
     log('continuous-status', { cycle, remaining, elapsedMs: Date.now() - start });
     if (remaining === 0) {
       console.log('\n✓ Todos los tramos DONE — deteniendo continuous\n');
-      log('continuous-idle-exit', { cycle, reason: 'no-pending-or-failed', elapsedMs: Date.now() - start });
+      log('continuous-idle-exit', {
+        cycle,
+        reason: 'no-pending-or-failed',
+        elapsedMs: Date.now() - start,
+      });
       break;
     }
 

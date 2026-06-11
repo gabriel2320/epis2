@@ -15,7 +15,10 @@ import { hasUnsavedClinicalWork } from '../../modes/modeTransitionSafety.js';
 import { EPIS_MODES, type EpisMode } from '../../modes/episModes.js';
 import { useEpisSession } from '../../session/EpisSessionContext.js';
 
-const MODE_META: Record<EpisMode, { label: string; Icon: ElementType<{ fontSize?: 'small' | 'medium' | 'inherit' }> }> = {
+const MODE_META: Record<
+  EpisMode,
+  { label: string; Icon: ElementType<{ fontSize?: 'small' | 'medium' | 'inherit' }> }
+> = {
   command: { label: copy.threeModes.commandLabel, Icon: TerminalIcon },
   classic: { label: copy.threeModes.classicLabel, Icon: AssignmentIcon },
   dashboard: { label: copy.threeModes.dashboardLabel, Icon: DashboardIcon },
@@ -68,52 +71,50 @@ export function EpisModeSwitcher({
         >
           {copy.threeModes.deprecatedModesBanner}
         </Alert>
-      <Stack
-        direction="row"
-        spacing={0.5}
-        alignItems="center"
-      >
-        {!compact ? (
-          <Stack
-            component="span"
-            sx={{
-              mr: 0.5,
-              display: { xs: 'none', sm: 'inline' },
-              typography: 'caption',
-              color: 'text.secondary',
-            }}
-          >
-            {copy.threeModes.switcherLabel}
-          </Stack>
-        ) : null}
-        {EPIS_MODES.map((mode) => {
-          const active = session.activeMode === mode;
-          const reason = disabledReason(mode);
-          const disabled = mode !== 'command' && Boolean(reason);
-          const { label, Icon } = MODE_META[mode];
-          const shortLabel = label.split(' ')[0] ?? label;
-
-          return (
-            <EpisButton
-              key={mode}
-              appearance={active ? 'filled' : 'text'}
-              size="small"
-              disabled={disabled}
-              title={reason ?? label}
-              onClick={() => onSelect(mode)}
-              data-testid={`${testId}-${mode}`}
-              startIcon={<Icon fontSize="small" />}
+        <Stack direction="row" spacing={0.5} alignItems="center">
+          {!compact ? (
+            <Stack
+              component="span"
               sx={{
-                minWidth: compact ? 40 : undefined,
-                px: compact ? { xs: 1, md: 1.5 } : undefined,
-                '& .epis-mode-label': { display: compact ? { xs: 'none', md: 'inline' } : 'inline' },
+                mr: 0.5,
+                display: { xs: 'none', sm: 'inline' },
+                typography: 'caption',
+                color: 'text.secondary',
               }}
             >
-              <span className="epis-mode-label">{compact ? shortLabel : label}</span>
-            </EpisButton>
-          );
-        })}
-      </Stack>
+              {copy.threeModes.switcherLabel}
+            </Stack>
+          ) : null}
+          {EPIS_MODES.map((mode) => {
+            const active = session.activeMode === mode;
+            const reason = disabledReason(mode);
+            const disabled = mode !== 'command' && Boolean(reason);
+            const { label, Icon } = MODE_META[mode];
+            const shortLabel = label.split(' ')[0] ?? label;
+
+            return (
+              <EpisButton
+                key={mode}
+                appearance={active ? 'filled' : 'text'}
+                size="small"
+                disabled={disabled}
+                title={reason ?? label}
+                onClick={() => onSelect(mode)}
+                data-testid={`${testId}-${mode}`}
+                startIcon={<Icon fontSize="small" />}
+                sx={{
+                  minWidth: compact ? 40 : undefined,
+                  px: compact ? { xs: 1, md: 1.5 } : undefined,
+                  '& .epis-mode-label': {
+                    display: compact ? { xs: 'none', md: 'inline' } : 'inline',
+                  },
+                }}
+              >
+                <span className="epis-mode-label">{compact ? shortLabel : label}</span>
+              </EpisButton>
+            );
+          })}
+        </Stack>
       </Stack>
 
       <EpisDialog

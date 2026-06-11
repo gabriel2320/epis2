@@ -50,7 +50,10 @@ for (const token of [
   if (!bridge.includes(token)) errors.push(`evolab-bridge sin ${token}`);
 }
 
-const parallel = readFileSync(join(root, 'scripts/dev-agent/auto-dev-parallel-launcher.mjs'), 'utf8');
+const parallel = readFileSync(
+  join(root, 'scripts/dev-agent/auto-dev-parallel-launcher.mjs'),
+  'utf8',
+);
 for (const token of [
   'EPIS2_EVOLAB_PATCHING_ENABLED',
   'EPIS2_EVOLAB_REQUIRE_HUMAN_APPROVAL',
@@ -63,7 +66,13 @@ for (const token of [
 }
 
 const cycle = readFileSync(join(root, 'scripts/dev-agent/openclaw-dev-cycle.mjs'), 'utf8');
-for (const token of ['EPIS2_AUTO_DEV_EVOLAB', 'evolab:smoke', 'evolab:validate', 'evolab:doctor', 'dev:evolab:sync']) {
+for (const token of [
+  'EPIS2_AUTO_DEV_EVOLAB',
+  'evolab:smoke',
+  'evolab:validate',
+  'evolab:doctor',
+  'dev:evolab:sync',
+]) {
   if (!cycle.includes(token)) errors.push(`openclaw-dev-cycle sin ${token}`);
 }
 
@@ -78,7 +87,8 @@ if (!envEx.includes('EPIS2_EVOLAB_ROOT')) errors.push('.env.example sin EPIS2_EV
 
 const ledger = readFileSync(join(root, 'docs/quality/auto-dev-6h-ledger.json'), 'utf8');
 for (const id of ['H-AUTO-2', 'H-AUTO-4', 'H-AUTO-6']) {
-  if (!ledger.includes(id) || !ledger.includes('evolab')) errors.push(`ledger ${id} sin nota evolab`);
+  if (!ledger.includes(id) || !ledger.includes('evolab'))
+    errors.push(`ledger ${id} sin nota evolab`);
 }
 
 if (errors.length) {

@@ -1,9 +1,6 @@
 {
   "codeConnect": {
-    "include": [
-      "packages/epis2-ui/src/**/*.figma.ts",
-      "apps/web/src/**/*.figma.ts"
-    ],
+    "include": ["packages/epis2-ui/src/**/*.figma.ts", "apps/web/src/**/*.figma.ts"],
     "exclude": ["**/node_modules/**", "**/*.test.*", "**/dist/**"],
     "label": "React",
     "parser": "react",

@@ -40,7 +40,12 @@ if (isNpmRun) {
   const [script, ...npmExtra] = rest.split(' -- ');
   const npmArgs = ['run', script.trim()];
   if (npmExtra.length) npmArgs.push('--', ...npmExtra.join(' -- ').split(' ').filter(Boolean));
-  const r = spawnSync('npm', npmArgs, { cwd: root, stdio: 'inherit', shell: true, env: process.env });
+  const r = spawnSync('npm', npmArgs, {
+    cwd: root,
+    stdio: 'inherit',
+    shell: true,
+    env: process.env,
+  });
   status = r.status ?? 1;
 } else if (cmd.startsWith('git ')) {
   const r = spawnSync(cmd, { cwd: root, stdio: 'inherit', shell: true, env: process.env });

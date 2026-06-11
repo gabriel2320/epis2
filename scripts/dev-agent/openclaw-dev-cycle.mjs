@@ -98,8 +98,11 @@ export function runCycleBootstrap({ dryRun = false } = {}) {
 
   if (flags.openclaw) {
     console.log('\n▶ [OpenClaw] policy + brief global\n');
-    if (!runNpm('openclaw:policy', [], { dryRun }).ok) return { ok: false, stage: 'openclaw:policy' };
-    if (!runNpm('openclaw:brief', ['--', '--mf', 'H-AUTO-CYCLE', '--agents', 'auto'], { dryRun }).ok) {
+    if (!runNpm('openclaw:policy', [], { dryRun }).ok)
+      return { ok: false, stage: 'openclaw:policy' };
+    if (
+      !runNpm('openclaw:brief', ['--', '--mf', 'H-AUTO-CYCLE', '--agents', 'auto'], { dryRun }).ok
+    ) {
       return { ok: false, stage: 'openclaw:brief' };
     }
   }
@@ -139,7 +142,13 @@ export function runTramoCycle({
 
   if (flags.openclaw) {
     console.log('\n▶ [OpenClaw] brief pre-tramo\n');
-    if (!runNode('scripts/dev-agent/openclaw-tramo.mjs', ['--tramo', String(order), '--phase', 'brief'], { dryRun }).ok) {
+    if (
+      !runNode(
+        'scripts/dev-agent/openclaw-tramo.mjs',
+        ['--tramo', String(order), '--phase', 'brief'],
+        { dryRun },
+      ).ok
+    ) {
       return { ok: false, stage: 'openclaw-brief', order };
     }
   }
@@ -150,7 +159,9 @@ export function runTramoCycle({
   }
 
   if (TIER_X_TRAMOS.has(order)) {
-    runNode('scripts/dev-agent/generate-auto-dev-cursor-prompt.mjs', ['--tramo', String(order)], { dryRun });
+    runNode('scripts/dev-agent/generate-auto-dev-cursor-prompt.mjs', ['--tramo', String(order)], {
+      dryRun,
+    });
     runNode('scripts/dev-agent/cursor-sdk-tramo.mjs', ['--tramo', String(order)], { dryRun });
   }
 
@@ -192,7 +203,11 @@ export function runTramoCycle({
 
   if (flags.openclaw && AUTO_DEV_OPENCLAW_HANDOFF_TRAMOS.has(order)) {
     console.log('\n▶ [OpenClaw] handoff + post-tramo\n');
-    runNode('scripts/dev-agent/openclaw-tramo.mjs', ['--tramo', String(order), '--phase', 'handoff'], { dryRun });
+    runNode(
+      'scripts/dev-agent/openclaw-tramo.mjs',
+      ['--tramo', String(order), '--phase', 'handoff'],
+      { dryRun },
+    );
   }
 
   runNode('scripts/dev-agent/dev-cycle-sync.mjs', [], { dryRun });
@@ -220,7 +235,10 @@ export function runCycleClose({ dryRun = false } = {}) {
   runNode('scripts/dev-agent/dev-cycle-sync.mjs', [], { dryRun });
 
   if (!dryRun) {
-    const closePath = join(root, `reports/epis2-dev-cycle-close-${new Date().toISOString().slice(0, 10)}.md`);
+    const closePath = join(
+      root,
+      `reports/epis2-dev-cycle-close-${new Date().toISOString().slice(0, 10)}.md`,
+    );
     const evolabRoot = resolveEvolabRoot();
     writeFileSync(
       closePath,
@@ -284,7 +302,9 @@ function main() {
     const r = runCycleClose({ dryRun });
     process.exit(r.ok ? 0 : 1);
   }
-  console.error('Uso: openclaw-dev-cycle.mjs <bootstrap|tramo|close> [--tramo N] [--commit] [--dry-run]');
+  console.error(
+    'Uso: openclaw-dev-cycle.mjs <bootstrap|tramo|close> [--tramo N] [--commit] [--dry-run]',
+  );
   process.exit(1);
 }
 

@@ -16,10 +16,7 @@ import {
   clinicalSummaryCardIcon,
   type ClinicalSummaryIconKey,
 } from './clinicalSummaryCardIcons.js';
-import {
-  EpisClinicalSummaryCard,
-  type ClinicalSummarySurface,
-} from './EpisClinicalSummaryCard.js';
+import { EpisClinicalSummaryCard, type ClinicalSummarySurface } from './EpisClinicalSummaryCard.js';
 
 export type PatientClinicalSummaryGridProps = {
   /** Perfil visual — traditional en ficha EMR dual; calm en modo clásico MD3. */
@@ -48,21 +45,18 @@ const FIELD_ICON_KEYS: Partial<Record<string, ClinicalSummaryIconKey>> = {
   relevantLabs: 'labs',
 };
 
-function calmLeadingIcon(
-  surface: ClinicalSummarySurface,
-  key?: ClinicalSummaryIconKey,
-) {
+function calmLeadingIcon(surface: ClinicalSummarySurface, key?: ClinicalSummaryIconKey) {
   return surface === 'calm' && key ? clinicalSummaryCardIcon(key) : undefined;
 }
 
-function formatTimelinePreview(
-  events: PatientLongitudinalResponse['timeline'],
-  max = 3,
-): string {
+function formatTimelinePreview(events: PatientLongitudinalResponse['timeline'], max = 3): string {
   const items = events.slice(0, max);
   if (items.length === 0) return copy.longitudinal.emptySection;
   return items
-    .map((e) => `${new Date(e.at).toLocaleString('es-CL', { dateStyle: 'short', timeStyle: 'short' })} — ${e.title}`)
+    .map(
+      (e) =>
+        `${new Date(e.at).toLocaleString('es-CL', { dateStyle: 'short', timeStyle: 'short' })} — ${e.title}`,
+    )
     .join('\n');
 }
 
@@ -100,7 +94,10 @@ export function PatientClinicalSummaryGrid({
     medicationZones.prn.length > 0 ||
     medicationZones.suspended.length > 0;
 
-  const renderFieldCard = (key: string, severity: 'default' | 'warning' | 'critical' = 'default') => {
+  const renderFieldCard = (
+    key: string,
+    severity: 'default' | 'warning' | 'critical' = 'default',
+  ) => {
     const value = summaryFields[key]?.trim();
     if (!value) return null;
     return (
@@ -138,10 +135,7 @@ export function PatientClinicalSummaryGrid({
 
   return (
     <Stack spacing={2.5} data-testid={testId}>
-      <ClinicalSummaryStickyBanner
-        alerts={alerts}
-        allergies={longitudinal?.allergies}
-      />
+      <ClinicalSummaryStickyBanner alerts={alerts} allergies={longitudinal?.allergies} />
       {criticalAlerts.length > 0 ? (
         <EpisClinicalSummaryCard
           title={copy.clinicalSummary.criticalAlerts}
@@ -180,10 +174,7 @@ export function PatientClinicalSummaryGrid({
               actionLabel={copy.clinicalSummary.manageAllergies}
               onAction={onRegisterAllergy}
             >
-              {longitudinal.allergies
-                .slice(0, 5)
-                .map(formatAllergyLine)
-                .join('\n')}
+              {longitudinal.allergies.slice(0, 5).map(formatAllergyLine).join('\n')}
             </EpisClinicalSummaryCard>
           ) : onRegisterAllergy ? (
             <EpisClinicalSummaryCard
@@ -241,30 +232,28 @@ export function PatientClinicalSummaryGrid({
           ) : (
             renderFieldCard('activeMedications')
           )}
-          {labHighlights.length > 0 ? (
-            labHighlights.map((lab, index) => (
-              <Box
-                key={lab.id}
-                {...(surfaceProfile === 'calm' && index === 0
-                  ? { sx: { gridColumn: { md: 'span 2' } } }
-                  : {})}
-              >
-                <EpisClinicalSummaryCard
-                  title={lab.label}
-                  surface={surfaceProfile}
-                  leadingIcon={calmLeadingIcon(surfaceProfile, 'labs')}
-                  meta={copy.clinicalSummary.labsHighlight}
-                  highlightValue={lab.valueText}
-                  highlightMeta={formatLabObservedAt(lab.observedAt)}
-                  testId={`${testId}-lab-${lab.id}`}
-                  actionLabel={onOpenResults ? copy.clinicalSummary.openLabs : undefined}
-                  onAction={onOpenResults}
-                />
-              </Box>
-            ))
-          ) : (
-            renderFieldCard('relevantLabs')
-          )}
+          {labHighlights.length > 0
+            ? labHighlights.map((lab, index) => (
+                <Box
+                  key={lab.id}
+                  {...(surfaceProfile === 'calm' && index === 0
+                    ? { sx: { gridColumn: { md: 'span 2' } } }
+                    : {})}
+                >
+                  <EpisClinicalSummaryCard
+                    title={lab.label}
+                    surface={surfaceProfile}
+                    leadingIcon={calmLeadingIcon(surfaceProfile, 'labs')}
+                    meta={copy.clinicalSummary.labsHighlight}
+                    highlightValue={lab.valueText}
+                    highlightMeta={formatLabObservedAt(lab.observedAt)}
+                    testId={`${testId}-lab-${lab.id}`}
+                    actionLabel={onOpenResults ? copy.clinicalSummary.openLabs : undefined}
+                    onAction={onOpenResults}
+                  />
+                </Box>
+              ))
+            : renderFieldCard('relevantLabs')}
           {clinicalProblems.length > 0 ? (
             <EpisClinicalSummaryCard
               title={copy.activePatient.summaryActiveProblems}
@@ -281,9 +270,7 @@ export function PatientClinicalSummaryGrid({
             </EpisClinicalSummaryCard>
           ) : null}
           {longitudinal && longitudinal.timeline.length > 0 ? (
-            <Box
-              {...(surfaceProfile === 'calm' ? { sx: { gridColumn: { md: 'span 2' } } } : {})}
-            >
+            <Box {...(surfaceProfile === 'calm' ? { sx: { gridColumn: { md: 'span 2' } } } : {})}>
               <EpisClinicalSummaryCard
                 title={copy.activePatient.recentActivityTitle}
                 surface={surfaceProfile}

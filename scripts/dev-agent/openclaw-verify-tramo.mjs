@@ -40,10 +40,14 @@ if (!gate) {
 const cmd = `npm run ${gate}`;
 console.log(`openclaw:verify-tramo: ${tramo?.id ?? tramoIdx} → ${cmd}\n`);
 
-const r = spawnSync(process.execPath, [join(root, 'scripts/dev-agent/openclaw-safe-run.mjs'), '--cmd', cmd], {
-  cwd: root,
-  stdio: 'inherit',
-  env: process.env,
-});
+const r = spawnSync(
+  process.execPath,
+  [join(root, 'scripts/dev-agent/openclaw-safe-run.mjs'), '--cmd', cmd],
+  {
+    cwd: root,
+    stdio: 'inherit',
+    env: process.env,
+  },
+);
 
 process.exit(r.status ?? 1);

@@ -1,9 +1,6 @@
 import { copy } from '@epis2/design-system';
 import { Link, useSearch } from '@tanstack/react-router';
-import {
-  classicModeToDualChartSearch,
-  useClinicalNavigate,
-} from '../routes/clinicalNavigate.js';
+import { classicModeToDualChartSearch, useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { isDualChartModesEnabled } from '../dev/dualChartModesEnv.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
@@ -238,9 +235,7 @@ export function PatientWorkspacePage() {
   const isDualChart = isDualChartModesEnabled();
 
   const allergyLabels = longitudinal?.allergies.map((a) => a.substance) ?? [];
-  const alertLabels = clinicalAlerts
-    .filter((a) => a.severity === 'critical')
-    .map((a) => a.message);
+  const alertLabels = clinicalAlerts.filter((a) => a.severity === 'critical').map((a) => a.message);
   const metaLine = [
     detail.patient.demoCaseCode,
     detail.clinicalContext.openEncounterId ? copy.classicMd3.episodeOpen : undefined,

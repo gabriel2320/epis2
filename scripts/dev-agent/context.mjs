@@ -113,12 +113,12 @@ export function getTableroState(root) {
   };
 
   const activeThreads = rowsUnder('En curso', (cells) =>
-    cells[0] && !/^Hilo$/i.test(cells[0])
-      ? `${cells[0]}${cells[1] ? ` — ${cells[1]}` : ''}`
-      : null,
+    cells[0] && !/^Hilo$/i.test(cells[0]) ? `${cells[0]}${cells[1] ? ` — ${cells[1]}` : ''}` : null,
   );
   const nextSteps = rowsUnder('Siguiente', (cells) =>
-    cells[0] && !/^(?:Prioridad|Entrega)$/i.test(cells[0]) ? `${cells[0]}: ${cells[1] ?? ''}` : null,
+    cells[0] && !/^(?:Prioridad|Entrega)$/i.test(cells[0])
+      ? `${cells[0]}: ${cells[1] ?? ''}`
+      : null,
   );
   return { activeThreads, nextSteps };
 }

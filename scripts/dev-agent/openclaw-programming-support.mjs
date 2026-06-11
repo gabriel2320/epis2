@@ -60,7 +60,9 @@ const suggestedCommands = [
   'npm run ollama:route',
   'npm run dev:agent:ollama',
   ...(existsSync(cursorPrompt)
-    ? [`# Cursor: @reports/auto-dev-cursor-prompt-tramo-${order}.md @reports/openclaw-latest-brief.md`]
+    ? [
+        `# Cursor: @reports/auto-dev-cursor-prompt-tramo-${order}.md @reports/openclaw-latest-brief.md`,
+      ]
     : [`npm run dev:auto:6h -- --tramo ${order}`]),
   `npm run dev:auto:6h -- --tramo ${order}`,
   'npm run dev:agent:ollama-auto -- --skip-plan',
@@ -95,7 +97,9 @@ const report = {
   artifacts: {
     brief: 'reports/openclaw-latest-brief.md',
     handoff: 'reports/openclaw-latest-handoff.md',
-    cursorPrompt: existsSync(cursorPrompt) ? relative(root, cursorPrompt).replace(/\\/g, '/') : null,
+    cursorPrompt: existsSync(cursorPrompt)
+      ? relative(root, cursorPrompt).replace(/\\/g, '/')
+      : null,
     cycleStatus: 'reports/epis2-dev-cycle-status.json',
     ollamaPlan: 'reports/dev-agent-ollama-automation.json',
     ollamaWrite: 'reports/dev-agent-ollama-write-plan.json',
@@ -139,7 +143,10 @@ const markdown = [
   '',
   '## Brief slice (programming paths)',
   '',
-  buildBriefMarkdown(root, { mf, agents: ['programming'], timestamp }).split('\n').slice(15, 45).join('\n'),
+  buildBriefMarkdown(root, { mf, agents: ['programming'], timestamp })
+    .split('\n')
+    .slice(15, 45)
+    .join('\n'),
   '',
 ].join('\n');
 
@@ -152,7 +159,13 @@ const latestPath = join(root, 'reports/openclaw-programming-latest.md');
 writeFileSync(latestPath, markdown, 'utf8');
 
 if (jsonOut) {
-  console.log(JSON.stringify({ ...report, artifact: saved, latest: 'reports/openclaw-programming-latest.md' }, null, 2));
+  console.log(
+    JSON.stringify(
+      { ...report, artifact: saved, latest: 'reports/openclaw-programming-latest.md' },
+      null,
+      2,
+    ),
+  );
 } else {
   console.log(`openclaw:programming OK — tramo ${order} (${mf})\n`);
   console.log(`  Skill: ${programming.skill}`);

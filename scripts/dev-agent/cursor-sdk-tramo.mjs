@@ -16,11 +16,15 @@ const dryRun = args.includes('--dry-run');
 
 const promptPath = join(root, `reports/auto-dev-cursor-prompt-tramo-${tramoIdx}.md`);
 if (!existsSync(promptPath)) {
-  spawnSync(process.execPath, ['scripts/dev-agent/generate-auto-dev-cursor-prompt.mjs', '--tramo', String(tramoIdx)], {
-    cwd: root,
-    stdio: 'inherit',
-    shell: true,
-  });
+  spawnSync(
+    process.execPath,
+    ['scripts/dev-agent/generate-auto-dev-cursor-prompt.mjs', '--tramo', String(tramoIdx)],
+    {
+      cwd: root,
+      stdio: 'inherit',
+      shell: true,
+    },
+  );
 }
 
 const apiKey = process.env.CURSOR_API_KEY?.trim();

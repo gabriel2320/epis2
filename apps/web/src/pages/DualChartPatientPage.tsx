@@ -81,7 +81,9 @@ export function DualChartPatientPage({
     onResolved: () => {},
   });
 
-  const dictionarySuggestions = useCommandDictionarySuggestions(classicCommand.query, { patientId });
+  const dictionarySuggestions = useCommandDictionarySuggestions(classicCommand.query, {
+    patientId,
+  });
   const clarificationSuggestions = classicCommandSuggestionLabels(classicCommand.lastResult);
   const commandSuggestions =
     clarificationSuggestions && clarificationSuggestions.length > 0
@@ -132,9 +134,7 @@ export function DualChartPatientPage({
         onNewEvolution={onOpenEvolution}
         onNewOrder={onRegisterProblem}
         onOpenLab={onOpenResults}
-        onOpenPrescription={() =>
-          void navigate({ to: '/espacio/receta', search: { patientId } })
-        }
+        onOpenPrescription={() => void navigate({ to: '/espacio/receta', search: { patientId } })}
         commandQuery={classicCommand.query}
         onCommandQueryChange={classicCommand.setQuery}
         onCommandSubmit={() => void classicCommand.submit()}

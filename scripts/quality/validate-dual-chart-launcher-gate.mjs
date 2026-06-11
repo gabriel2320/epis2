@@ -24,7 +24,9 @@ if (
   !invariants.includes('ADR-002') &&
   !invariants.includes('dual chart')
 ) {
-  errors.push('PRODUCT_INVARIANTS.md debe documentar enmienda #6 (home launcher + ficha workspace)');
+  errors.push(
+    'PRODUCT_INVARIANTS.md debe documentar enmienda #6 (home launcher + ficha workspace)',
+  );
 }
 
 const adr = readFileSync(join(root, 'docs/adr/ADR-002-dual-chart-modes.md'), 'utf8');

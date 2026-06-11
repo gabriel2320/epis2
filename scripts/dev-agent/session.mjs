@@ -104,13 +104,7 @@ if (withOpenClaw) {
   const agents = suggestAgents({ tramo, phase }).join(',');
   const r = spawnSync(
     process.execPath,
-    [
-      join(root, 'scripts/dev-agent/openclaw-brief.mjs'),
-      '--mf',
-      mf,
-      '--agents',
-      agents,
-    ],
+    [join(root, 'scripts/dev-agent/openclaw-brief.mjs'), '--mf', mf, '--agents', agents],
     { cwd: root, stdio: 'pipe', encoding: 'utf8', env: process.env },
   );
   openclawNote = r.status === 0 ? ' · OpenClaw brief OK' : ' · OpenClaw brief falló';

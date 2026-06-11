@@ -126,12 +126,7 @@ export const AGENT_CATALOG = {
     id: 'release',
     name: 'Release/Gates Reviewer',
     skill: '.openclaw/epis2/skills/epis2-release-reviewer/SKILL.md',
-    paths: [
-      'package.json',
-      'docs/quality/auto-dev-6h-ledger.json',
-      'scripts/quality',
-      'reports',
-    ],
+    paths: ['package.json', 'docs/quality/auto-dev-6h-ledger.json', 'scripts/quality', 'reports'],
     gates: ['check', 'test', 'quality:local-ci'],
   },
   ux: {
@@ -228,7 +223,10 @@ export function parseArgs(argv) {
 }
 
 export function gitStatusShort(root) {
-  const result = spawnSync('git', ['status', '--short', '--branch'], { cwd: root, encoding: 'utf8' });
+  const result = spawnSync('git', ['status', '--short', '--branch'], {
+    cwd: root,
+    encoding: 'utf8',
+  });
   if (result.status !== 0) return '(git status unavailable)';
   return sanitizeText(result.stdout.trim() || '(clean)');
 }
@@ -328,9 +326,7 @@ export function suggestAgentsForAutoTramo(order) {
 }
 
 export function isOpenClawAutoDevEnabled() {
-  return (
-    process.env.EPIS2_AUTO_DEV_OPENCLAW === '1' || process.env.EPIS2_OPENCLAW_SESSION === '1'
-  );
+  return process.env.EPIS2_AUTO_DEV_OPENCLAW === '1' || process.env.EPIS2_OPENCLAW_SESSION === '1';
 }
 
 export function buildBriefMarkdown(root, { mf, agents, timestamp }) {

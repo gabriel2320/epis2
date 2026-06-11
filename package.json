@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "build": "npm run build -w @epis2/contracts && npm run build -w @epis2/clinical-domain && npm run build -w @epis2/design-system && npm run build -w @epis2/command-registry && npm run build -w @epis2/clinical-forms && npm run build -w @epis2/epis2-widgets && npm run build -w @epis2/epis2-ui && npm run build -w @epis2/clinical-productivity && npm run build -w @epis2/test-fixtures && npm run build -w @epis2/fhir-export && npm run build -w @epis2/local-ai && npm run build -w @epis2/drug-intel && npm run build -w @epis2/api && npm run build -w @epis2/web",
+    "build:packages": "npm run build -w @epis2/contracts && npm run build -w @epis2/clinical-domain && npm run build -w @epis2/design-system && npm run build -w @epis2/command-registry && npm run build -w @epis2/clinical-forms && npm run build -w @epis2/epis2-widgets && npm run build -w @epis2/epis2-ui && npm run build -w @epis2/clinical-productivity && npm run build -w @epis2/test-fixtures && npm run build -w @epis2/fhir-export && npm run build -w @epis2/local-ai && npm run build -w @epis2/drug-intel",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

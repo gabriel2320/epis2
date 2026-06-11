@@ -12,5 +12,7 @@ export function clinicalCalmCanvasBackground(
   scheme: Epis2MaterialColorScheme,
 ): string {
   void scheme;
-  return mode === 'light' ? epis2ClinicalCalmCanvasColors.light : epis2ClinicalCalmCanvasColors.dark;
+  return mode === 'light'
+    ? epis2ClinicalCalmCanvasColors.light
+    : epis2ClinicalCalmCanvasColors.dark;
 }

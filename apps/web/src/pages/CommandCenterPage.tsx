@@ -74,11 +74,19 @@ function CommandLauncherSlim({
         </Typography>
       </Stack>
       <Stack direction="row" spacing={1} flexWrap="wrap">
-        <EpisButton appearance="filled" onClick={onOpenCensus} data-testid="epis2-census-open-search">
+        <EpisButton
+          appearance="filled"
+          onClick={onOpenCensus}
+          data-testid="epis2-census-open-search"
+        >
           {copy.commandCenter.censusOpenSearch}
         </EpisButton>
         {patientId && onOpenFicha ? (
-          <EpisButton appearance="outlined" onClick={onOpenFicha} data-testid="epis2-census-open-ficha">
+          <EpisButton
+            appearance="outlined"
+            onClick={onOpenFicha}
+            data-testid="epis2-census-open-ficha"
+          >
             {copy.chartModes.traditional}
           </EpisButton>
         ) : null}

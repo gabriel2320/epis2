@@ -20,7 +20,11 @@ import {
   releaseSessionLock,
   updateSessionLockChildren,
 } from './auto-dev-session-lock.mjs';
-import { countOrchestratorRunnable, isLedgerCycleComplete, loadAutoDevLedger } from './auto-dev-ledger-lib.mjs';
+import {
+  countOrchestratorRunnable,
+  isLedgerCycleComplete,
+  loadAutoDevLedger,
+} from './auto-dev-ledger-lib.mjs';
 
 loadEnvFile();
 
@@ -32,7 +36,8 @@ let lockHeld = false;
 const dryRun = args.includes('--dry-run');
 const doCommit = args.includes('--commit');
 const doPush = args.includes('--push');
-const continueOnFail = args.includes('--continue-on-fail') || process.env.EPIS2_AUTO_DEV_PARALLEL !== '0';
+const continueOnFail =
+  args.includes('--continue-on-fail') || process.env.EPIS2_AUTO_DEV_PARALLEL !== '0';
 const retryFailed = args.includes('--retry-failed');
 const skipEvolve =
   args.includes('--no-evolve') ||
@@ -65,7 +70,11 @@ function safetyEnv(extra = {}) {
 
 function log(event, detail = {}) {
   mkdirSync(join(root, 'reports'), { recursive: true });
-  appendFileSync(logPath, `${JSON.stringify({ at: new Date().toISOString(), event, ...detail })}\n`, 'utf8');
+  appendFileSync(
+    logPath,
+    `${JSON.stringify({ at: new Date().toISOString(), event, ...detail })}\n`,
+    'utf8',
+  );
 }
 
 const skipSessionLock = process.env.EPIS2_AUTO_DEV_PARALLEL_SKIP_LOCK === '1';
@@ -224,7 +233,10 @@ function killChild(child, label) {
   if (!child?.pid) return;
   try {
     if (process.platform === 'win32') {
-      spawnSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], { stdio: 'ignore', shell: true });
+      spawnSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], {
+        stdio: 'ignore',
+        shell: true,
+      });
     } else {
       process.kill(-child.pid, 'SIGTERM');
     }
@@ -241,8 +253,9 @@ async function main() {
 
   console.log('EPIS2 dev:auto:parallel — sesión integrada PM-03 + Evolab\n');
   console.log('  Seguridad: patching=off · human approval=on · LLM concurrency=1');
-  const evolveMode =
-    skipEvolve ? 'off (complement entre ciclos)' : `on paralelo (${evolveGenerations} gen, ${evolveBudgetMinutes} min)`;
+  const evolveMode = skipEvolve
+    ? 'off (complement entre ciclos)'
+    : `on paralelo (${evolveGenerations} gen, ${evolveBudgetMinutes} min)`;
   console.log(`  Evolab evolve: ${evolveMode}\n`);
 
   if ((doCommit || doPush) && process.env.EPIS2_AUTO_DEV_AUTHORIZED !== '1') {
@@ -283,7 +296,9 @@ async function main() {
       log('stack-skipped', { reason: 'stack-ready' });
     }
 
-    const pre = runSyncNode('scripts/dev-agent/auto-dev-preconditions.mjs', [], { env: safetyEnv() });
+    const pre = runSyncNode('scripts/dev-agent/auto-dev-preconditions.mjs', [], {
+      env: safetyEnv(),
+    });
     if (!pre.ok) {
       log('preconditions-failed', {});
       cleanupAndExit(1);
@@ -363,7 +378,11 @@ async function main() {
     runSyncNpm('dev:openclaw:sync', [], { env: safetyEnv() });
   }
 
-  log('parallel-complete', { orchestratorOk: orch.ok, orchestratorStatus: orch.status, continueOnFail });
+  log('parallel-complete', {
+    orchestratorOk: orch.ok,
+    orchestratorStatus: orch.status,
+    continueOnFail,
+  });
 
   if (!orch.ok && !continueOnFail) {
     console.error('\ndev:auto:parallel FAILED — orquestador PM-03 terminó con error');

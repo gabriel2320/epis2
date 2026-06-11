@@ -80,7 +80,11 @@ if (!validation.ok) {
 }
 
 if (!apply) {
-  const saved = writeArtifact(root, `safe-patch-dryrun-${Date.now()}.json`, `${JSON.stringify(audit, null, 2)}\n`);
+  const saved = writeArtifact(
+    root,
+    `safe-patch-dryrun-${Date.now()}.json`,
+    `${JSON.stringify(audit, null, 2)}\n`,
+  );
   console.log(`DRY-RUN OK — ${files.length} archivo(s) · usar --apply para escribir`);
   console.log(reportLines.join('\n'));
   console.log(`Audit: ${saved}`);
@@ -91,9 +95,15 @@ const applyTier = locks.authorizeCode && locks.levelOrder >= 3 ? 'L0+L1' : 'L0';
 const result = applyLowRiskPatches(files, { root, applyTier });
 
 audit.result = result;
-const saved = writeArtifact(root, `safe-patch-applied-${Date.now()}.json`, `${JSON.stringify(audit, null, 2)}\n`);
+const saved = writeArtifact(
+  root,
+  `safe-patch-applied-${Date.now()}.json`,
+  `${JSON.stringify(audit, null, 2)}\n`,
+);
 
-console.log(`APPLIED ${result.applied.length} · SKIPPED ${result.skipped.length} · ERRORS ${result.errors.length}`);
+console.log(
+  `APPLIED ${result.applied.length} · SKIPPED ${result.skipped.length} · ERRORS ${result.errors.length}`,
+);
 result.applied.forEach(({ patch }) => console.log(`  ✓ ${patch.path}`));
 for (const e of result.errors) console.error(`  ✗ ${e.patch.path}: ${e.error}`);
 console.log(`Audit: ${saved}`);

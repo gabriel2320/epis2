@@ -58,10 +58,7 @@ export function EpisClinicalFormRhf({
   const fieldMap = new Map(blueprint.fields.map((f) => [f.id, f]));
 
   return (
-    <Stack
-      spacing={formLayout.sectionGap}
-      data-testid={`epis2-form-${blueprint.blueprintId}`}
-    >
+    <Stack spacing={formLayout.sectionGap} data-testid={`epis2-form-${blueprint.blueprintId}`}>
       <EpisM3Text role="bodyLarge" color="text.secondary" sx={{ px: 1 }}>
         {blueprint.purpose}
       </EpisM3Text>

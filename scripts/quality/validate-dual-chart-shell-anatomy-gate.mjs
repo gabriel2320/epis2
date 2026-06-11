@@ -32,16 +32,15 @@ if (existsSync(shell)) {
   }
 }
 
-const canon = readFileSync(
-  join(root, 'docs/design/EPIS2_DUAL_CHART_VISUAL_CANON.md'),
-  'utf8',
-);
+const canon = readFileSync(join(root, 'docs/design/EPIS2_DUAL_CHART_VISUAL_CANON.md'), 'utf8');
 if (!canon.includes('PatientIdentityBand')) {
   errors.push('Canon visual debe documentar PatientIdentityBand');
 }
 
 if (errors.length) {
-  console.error('dual-chart-shell-anatomy-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
+  console.error(
+    'dual-chart-shell-anatomy-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
+  );
   process.exit(1);
 }
 
