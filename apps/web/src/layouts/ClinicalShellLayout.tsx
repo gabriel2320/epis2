@@ -70,22 +70,19 @@ export function ClinicalShellLayout() {
 
   if (isDualChartFicha) {
     return (
-      <>
-        <Box
-          sx={{
-            height: '100dvh',
-            maxHeight: '100dvh',
-            overflow: 'hidden',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-          data-testid="epis2-clinical-shell-dual-chart"
-        >
-          <OfflineStatusBanner />
-          <Outlet />
-        </Box>
-        <ClinicalShellCommandPalette />
-      </>
+      <Box
+        sx={{
+          height: '100dvh',
+          maxHeight: '100dvh',
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+        data-testid="epis2-clinical-shell-dual-chart"
+      >
+        <OfflineStatusBanner />
+        <Outlet />
+      </Box>
     );
   }
 

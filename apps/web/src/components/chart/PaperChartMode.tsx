@@ -26,13 +26,15 @@ export function PaperChartMode({
 }: PaperChartModeProps) {
   const navigate = useClinicalNavigate();
   const [printFormat, setPrintFormat] = useState<'letter' | 'a5'>('letter');
+  const [previewValues, setPreviewValues] = useState<Partial<Record<PaperChartSectionId, string>>>(
+    () => initialValues ?? {},
+  );
   const draft = usePaperChartDraft(patientId);
-  const values = patientId ? draft.values : (initialValues ?? {});
+  const values = patientId ? draft.values : previewValues;
   const onSectionChange = patientId
     ? draft.onSectionChange
     : (id: PaperChartSectionId, body: string) => {
-        void id;
-        void body;
+        setPreviewValues((prev) => ({ ...prev, [id]: body }));
       };
 
   const handlePrint = () => {

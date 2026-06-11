@@ -84,7 +84,7 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
     await page.goto(`/espacio/ficha?patientId=${demoPatientId}`);
     await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
     await page.keyboard.press('Control+k');
-    await expect(page.getByTestId('epis2-clinical-command-palette')).toBeVisible();
+    await expect(page.getByRole('dialog')).toBeVisible();
     await expect(page.getByTestId('epis2-command-palette-query')).toBeVisible();
   });
 });

@@ -264,6 +264,8 @@ describeIntegration('cadena ingreso hospitalario (MF-158)', () => {
       );
     expect(before?.bedId).toBe('f0000002-0000-4000-8000-000000000001');
 
+    await db.update(beds).set({ status: 'available' }).where(eq(beds.id, BED_102A));
+
     const created = await app.inject({
       method: 'POST',
       url: '/api/drafts',
@@ -287,6 +289,9 @@ describeIntegration('cadena ingreso hospitalario (MF-158)', () => {
       method: 'POST',
       url: `/api/drafts/${draftId}/approve`,
       headers: { cookie },
+      payload: {
+        clinicalOverrideReason: 'Traslado demo autorizado con resultados pendientes de acuse',
+      },
     });
     expect(approved.statusCode).toBe(200);
 
