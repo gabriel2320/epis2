@@ -212,6 +212,7 @@ export type ClinicalNavigateTarget =
   | ClinicalFormRoutePath
   | '/espacio/ficha'
   | '/espacio/ficha/imprimir'
+  | '/espacio/ficha/agenda/imprimir'
   | '/espacio/resultados'
   | '/espacio/borrador/$draftId'
   | '/espacio/admin'

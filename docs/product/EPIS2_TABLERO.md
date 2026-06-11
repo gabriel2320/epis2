@@ -2,7 +2,23 @@
 
 **Actualizado:** 2026-06-11 · **HEAD:** ver git log
 
-Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Nomenclatura: **Entrega C-n** = unidad dentro de **Hilo C** (reemplaza P1/P1b/P1c/P1d) · Auditoría: [`reports/epis2-audit-avance-proyecto-2026-06-09.md`](../../reports/epis2-audit-avance-proyecto-2026-06-09.md)
+Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan activo:** [`EPIS2_TRES_FRENTES_DEV_PLAN.md`](./EPIS2_TRES_FRENTES_DEV_PLAN.md) · `npm run quality:tres-frentes-next`
+
+> **Prioridad única (2026-06-11):** tres frentes en paralelo — **papel · ficha electrónica · barra comando+IA**. Todo lo demás pausado hasta signoff experiencia core.
+
+---
+
+## En curso — PROG-EXPERIENCIA-CORE-2026
+
+| Frente | Programa | MF activa | Comando |
+|--------|----------|-----------|---------|
+| **A · Papel** | PROG-FICHA-PAPEL | **MF-PA-01** planner mensual | `quality:paper-mode-next` |
+| **B · Electrónica** | PROG-FICHA-ELECTRONICA | **MF-TE-01** C-4 staging dual chart | `quality:dual-chart-gate` |
+| **C · Comando+IA** | PROG-BARRA-COMANDO | **MF-CM-01** barra NL unificada | `test:e2e:ux-g02` |
+
+**Regla sesión:** elegir **un frente** · un MF · declarar alcance · cerrar con gate.
+
+**Pausado hasta signoff global:** PROG-STRENGTHEN · CHILE backlog · multimedia · auto-dev.
 
 ---
 
@@ -40,33 +56,28 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Nomenclatura: **Entre
 | **Entrega C-1 (automatizada)** — signoff visual M3 V1–V6 | `quality:m3-signoff` ✓ · `quality:m3-visual-pass` ✓ (16 capturas) · post NORM (a11y, drawer móvil, alto contraste) · [`epis2-m3-visual-pass-2026-06-10.md`](../../reports/epis2-m3-visual-pass-2026-06-10.md) |
 | **PROG-DUAL-CHART** MF-DUAL-CHART-00…09 | `eab749c` · ledger 10/10 DONE · gates DC-00…09 ✓ · [`epis2-dual-chart-audit-2026-06-10.md`](../../reports/epis2-dual-chart-audit-2026-06-10.md) |
 | **PROG-AUTO-DEV-6H** H-AUTO-0…6 | Ledger DONE · ejecución **pausada** 2026-06-11 · desarrollo manual vía `dev:session` |
+| **PROG-PAPER-MODE** MF-PAPER-01…09 | Signoff visual · paginación · puente A5 · comandos IA papel |
+| **PROG-PAPER-PLANNER** MF-PAPER-PLANNER-00…04 | Agenda día/semana/mes · print · comandos IA · [`epis2-prog-paper-planner-close-2026-06-11.md`](../../reports/epis2-prog-paper-planner-close-2026-06-11.md) |
 
 ---
 
-## En curso
+## En curso (histórico — ver PROG-EXPERIENCIA-CORE arriba)
 
-| Hilo | Entrega activa | Notas |
-|------|----------------|-------|
-| **Hilo C** — Ola 3 longitudinal | **C-1** (humano opcional) | Receta A5 ✓ · piloto M3 ✓ · [`epis2-hilo-c-p1-print-prescription-2026-06-09.md`](../../reports/epis2-hilo-c-p1-print-prescription-2026-06-09.md) |
+Hilos C / PAPER / comando absorbidos en tres frentes. C-3 ✓ · MF-PAPER-01…09 ✓ scaffold.
 
 ---
 
-## Siguiente
+## Roadmap por frente (ledger)
 
-| Entrega | Alcance | Gate |
-|---------|---------|------|
-| **C-1** | Revisión humana opcional post-captura M3 — evidencia en `reports/m3-visual-evidence/2026-06-10/` | Automatizado ✓ · [`epis2-m3-visual-pass-2026-06-10.md`](../../reports/epis2-m3-visual-pass-2026-06-10.md) |
-| **C-3** | **C-3a** ✓ · **C-3b** ✓ · **UX-CALM-PATIENT** ✓ (banner, iconos, span grid) | [`EPIS2_CLINICAL_SUMMARY_MD3.md`](../design/EPIS2_CLINICAL_SUMMARY_MD3.md) |
-| **C-4** | Staging ✓ · runbook prod ✓ (`.env.production.example`) · despliegue operador | [`EPIS2_DUAL_CHART_PROD_ROLLOUT.md`](../ops/EPIS2_DUAL_CHART_PROD_ROLLOUT.md) |
-| **PROG-PAPER-MODE** | MF-PAPER-03 ✓ IA meta · **MF-PAPER-04/05 READY** | [`EPIS2_PAPER_MODE_DEV_PLAN.md`](../product/EPIS2_PAPER_MODE_DEV_PLAN.md) |
-| **PROG-CHILE-CLINICAL** | **CHILE-0…4** ✓ migraciones 035–040 · summary API · registry meta · SNRE · paper-mirror | [`EPIS2_CHILE_CLINICAL_MODEL.md`](./EPIS2_CHILE_CLINICAL_MODEL.md) · `quality:registry-meta-gate` |
-| backlog | `patient_registration` IDC · catálogo RNPI externo | Tras CHILE-4 |
-| backlog | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
-| backlog | Ola 2+ — nota procedimiento clínica (PEND-002 defer) | No bloquea Hilo C |
+| Frente | Ola 1 READY | Olas 2–6 |
+|--------|-------------|----------|
+| **A Papel** | MF-PA-01 planner mes | print · paginación · secciones VIII–XIV · mirror · signoff |
+| **B Electrónica** | MF-TE-01 C-4 staging | **16 secciones vacías → contenido** · Calm · signoff |
+| **C Comando+IA** | MF-CM-01 barra unificada | palette=NL · assist · panel IA · signoff |
 
-`npm run quality:microphase-next` → ledger MF cerrado; seguir **Hilo C** · entregas **C-1→C-4** en [`EPIS2_GLOBAL_DEV_PLAN.md`](./EPIS2_GLOBAL_DEV_PLAN.md).
+`npm run quality:tres-frentes-next` · [`tres-frentes-ledger.json`](../quality/tres-frentes-ledger.json) · [`EPIS2_TRES_FRENTES_DEV_PLAN.md`](./EPIS2_TRES_FRENTES_DEV_PLAN.md)
 
-**Plan maestro por partes (evaluar · revisar · mejorar · seguir):** [`reports/epis2-plan-maestro-desarrollo-por-partes-2026-06-11.md`](../../reports/epis2-plan-maestro-desarrollo-por-partes-2026-06-11.md) — dual ficha + barra comando transversal + agentes.
+**Pausado:** PROG-STRENGTHEN · CHILE backlog · multimedia · auto-dev — hasta SIGNOFF-EXPERIENCIA-CORE.
 
 ---
 

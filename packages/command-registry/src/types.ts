@@ -50,7 +50,10 @@ export type ClinicalIntent =
   | 'paper_prepare_print'
   | 'paper_prepare_discharge_draft'
   | 'paper_create_prescription_a5'
-  | 'paper_detect_pending';
+  | 'paper_detect_pending'
+  | 'paper_planner_summarize_day'
+  | 'paper_planner_print_agenda'
+  | 'paper_planner_review_pending';
 
 export type CommandResolveStatus =
   | 'resolved'
@@ -106,6 +109,9 @@ export type CommandActiveContext = {
   workspace?: CommandWorkspace;
   /** MF-PAPER-08: boost comandos papel en ficha chartMode=paper */
   chartMode?: 'traditional' | 'paper';
+  /** MF-PAPER-PLANNER-04: superficie documento vs agenda */
+  paperSurface?: 'document' | 'planner';
+  plannerView?: 'day' | 'week' | 'month';
 };
 
 export type CommandAssistHint = {

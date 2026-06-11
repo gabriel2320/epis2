@@ -3,6 +3,7 @@ import { Box, epis2PaperNavTabSx } from '@epis2/epis2-ui';
 import type { PaperPlannerView } from './types.js';
 import { PAPER_PLANNER_VIEWS } from './types.js';
 import { DailyClinicalPage } from './DailyClinicalPage.js';
+import { MonthlyClinicalPage } from './MonthlyClinicalPage.js';
 import { WeeklyClinicalPage } from './WeeklyClinicalPage.js';
 
 export type PaperPlannerShellProps = {
@@ -70,13 +71,7 @@ export function PaperPlannerShell({
         ) : activeView === 'week' ? (
           <WeeklyClinicalPage clinicianName={clinicianName} serviceUnit={serviceUnit} />
         ) : (
-          <Box
-            className="epis2-paper-page"
-            data-testid={`epis2-paper-planner-placeholder-${activeView}`}
-            sx={{ p: 4, textAlign: 'center', fontFamily: 'var(--epis2-paper-font-body)' }}
-          >
-            {copy.chartModes.paperPlanner.monthPlaceholder}
-          </Box>
+          <MonthlyClinicalPage clinicianName={clinicianName} serviceUnit={serviceUnit} />
         )}
       </Box>
     </Box>

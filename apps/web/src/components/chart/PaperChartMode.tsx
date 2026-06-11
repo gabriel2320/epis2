@@ -130,6 +130,19 @@ export function PaperChartMode({
 
   const handlePrint = () => {
     if (patientId) {
+      if (paperSurface === 'planner') {
+        void navigate({
+          to: '/espacio/ficha/agenda/imprimir',
+          search: {
+            patientId,
+            printFormat,
+            chartMode: 'paper',
+            paperSurface: 'planner',
+            plannerView,
+          },
+        });
+        return;
+      }
       void navigate({
         to: '/espacio/ficha/imprimir',
         search: { patientId, printFormat, chartMode: 'paper', section: activeSectionId },
@@ -171,9 +184,10 @@ export function PaperChartMode({
           printFormat={printFormat}
           onPrintFormatChange={setPrintFormat}
           patientId={patientId}
+          surface={paperSurface === 'planner' ? 'planner' : 'document'}
           onPrint={handlePrint}
-          onSave={patientId ? handleSave : undefined}
-          onSign={patientId ? handleSign : undefined}
+          onSave={paperSurface === 'document' && patientId ? handleSave : undefined}
+          onSign={paperSurface === 'document' && patientId ? handleSign : undefined}
           onPdf={handlePrint}
           saving={draft.saving}
           signing={draft.signing}

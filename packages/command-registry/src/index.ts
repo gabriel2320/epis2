@@ -85,6 +85,14 @@ export {
   type PaperChartIntent,
 } from './paper-commands.js';
 export {
+  PAPER_PLANNER_COMMAND_DEFINITIONS,
+  PAPER_PLANNER_INTENTS,
+  PAPER_PLANNER_ROUTE_PATHS,
+  getPaperPlannerCommandSuggestions,
+  paperPlannerIntentBoost,
+  type PaperPlannerIntent,
+} from './paper-planner-commands.js';
+export {
   ASSIST_ROUTE_MIN_CONFIDENCE,
   ASSIST_ROUTE_RESOLVE_CONFIDENCE,
   applyAssistScoreBoost,

@@ -20,6 +20,7 @@ import { LabRequestPrintPage } from '../pages/LabRequestPrintPage.js';
 import { ImagingRequestPrintPage } from '../pages/ImagingRequestPrintPage.js';
 import { PrescriptionPrintPage } from '../pages/PrescriptionPrintPage.js';
 import { PaperChartPrintPage } from '../pages/PaperChartPrintPage.js';
+import { PaperPlannerPrintPage } from '../pages/PaperPlannerPrintPage.js';
 import { AdminConsolePage } from '../pages/AdminConsolePage.js';
 import { LoginPage } from '../pages/LoginPage.js';
 import { NotFoundPage } from '../pages/NotFoundPage.js';
@@ -159,6 +160,13 @@ const paperChartPrintRoute = createRoute({
   path: '/espacio/ficha/imprimir',
   validateSearch: (search: Record<string, unknown>) => parseClinicalPatientSearch(search),
   component: PaperChartPrintPage,
+});
+
+const paperPlannerPrintRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/ficha/agenda/imprimir',
+  validateSearch: (search: Record<string, unknown>) => parseClinicalPatientSearch(search),
+  component: PaperPlannerPrintPage,
 });
 
 const validatePatientSearch = parseClinicalFormSearch;
@@ -454,6 +462,7 @@ export const routeTree = rootRoute.addChildren([
     draftReviewRoute,
     patientWorkspaceRoute,
     paperChartPrintRoute,
+    paperPlannerPrintRoute,
     patientSearchFormRoute,
     patientSummaryFormRoute,
     evolutionFormRoute,

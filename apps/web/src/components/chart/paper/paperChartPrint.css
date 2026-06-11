@@ -123,4 +123,16 @@
   .epis2-paper-chart-section {
     break-inside: avoid-page;
   }
+
+  .epis2-paper-planner-day,
+  .epis2-paper-planner-week,
+  .epis2-paper-planner-month {
+    box-shadow: none !important;
+    break-inside: avoid-page;
+  }
+
+  .epis2-paper-planner-view-tabs,
+  .epis2-paper-planner-surface-tabs {
+    display: none !important;
+  }
 }

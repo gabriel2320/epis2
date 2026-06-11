@@ -25,6 +25,8 @@ export type PaperDocumentToolbarProps = {
   signing?: boolean | undefined;
   signDisabled?: boolean | undefined;
   readOnly?: boolean | undefined;
+  /** MF-PAPER-PLANNER-03: agenda oculta firmar/guardar/puentes documento. */
+  surface?: 'document' | 'planner' | undefined;
   testId?: string | undefined;
 };
 
@@ -41,8 +43,10 @@ export function PaperDocumentToolbar({
   signing = false,
   signDisabled = false,
   readOnly = false,
+  surface = 'document',
   testId = 'epis2-paper-document-toolbar',
 }: PaperDocumentToolbarProps) {
+  const isPlanner = surface === 'planner';
   const navigate = useClinicalNavigate();
 
   const openBridge = (bridgeId: PaperDocumentBridgeId) => {
@@ -96,24 +100,28 @@ export function PaperDocumentToolbar({
         >
           {copy.chartModes.printA5}
         </Box>
-        {!readOnly
+        {!isPlanner && !readOnly
           ? actionButton(
               saving ? copy.chartModes.actionSaving : copy.chartModes.actionSave,
               onSave,
               { testId: 'epis2-paper-save', disabled: saving },
             )
           : null}
-        {!readOnly
+        {!isPlanner && !readOnly
           ? actionButton(
               signing ? copy.chartModes.signInProgress : copy.chartModes.actionSign,
               onSign,
               { testId: 'epis2-paper-sign', disabled: signDisabled || signing },
             )
           : null}
-        {actionButton(copy.chartModes.actionPrint, onPrint, { testId: 'epis2-paper-print' })}
+        {actionButton(
+          isPlanner ? copy.chartModes.paperPlanner.printAgenda : copy.chartModes.actionPrint,
+          onPrint,
+          { testId: 'epis2-paper-print' },
+        )}
         {actionButton('PDF', onPdf, { testId: 'epis2-paper-pdf' })}
       </Stack>
-      {patientId ? (
+      {patientId && !isPlanner ? (
         <Stack direction="row" spacing={0.5} flexWrap="wrap" data-testid="epis2-paper-doc-bridge">
           {PAPER_DOCUMENT_BRIDGES.map((bridge) => (
             <Box

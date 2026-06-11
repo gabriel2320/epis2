@@ -31,7 +31,6 @@ export function auditPaperVisualArtifacts(): PaperVisualAuditResult {
   const printCss = readProjectFile('apps/web/src/components/chart/paper/paperChartPrint.css');
   const template = readProjectFile('apps/web/src/components/chart/paper/PaperChartTemplate.tsx');
   const sectionChrome = readProjectFile('apps/web/src/components/chart/paper/paperSectionChrome.tsx');
-  const sections = readProjectFile('apps/web/src/components/chart/paper/paperChartSections.ts');
   const footer = readProjectFile('apps/web/src/components/chart/paper/PaperFooter.tsx');
   const reference = readProjectFile('packages/epis2-ui/src/theme/paper-visual-reference.ts');
   const toolbar = readProjectFile('apps/web/src/components/chart/PaperDocumentToolbar.tsx');
@@ -49,7 +48,7 @@ export function auditPaperVisualArtifacts(): PaperVisualAuditResult {
     hasSectionChrome: template.includes('PaperSectionChrome'),
     hasLabsTable: sectionChrome.includes('epis2-paper-labs-table'),
     hasExtendedSections:
-      sections.includes("'socialWork'") && sectionChrome.includes('epis2-paper-sub-nursing-nanda'),
+      sectionChrome.includes('socialWork') && sectionChrome.includes('epis2-paper-sub-nursing-nanda'),
     hasPatientStrip: template.includes('PaperPatientStrip'),
     toolbarUsesPaperChrome: toolbar.includes('epis2PaperChromeBarSx'),
   };

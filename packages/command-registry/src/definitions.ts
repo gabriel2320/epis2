@@ -1,5 +1,6 @@
 import { INTENT_SECURE_METADATA } from './intent-metadata.js';
 import { PAPER_CHART_COMMAND_DEFINITIONS } from './paper-commands.js';
+import { PAPER_PLANNER_COMMAND_DEFINITIONS } from './paper-planner-commands.js';
 import { INTENT_ROUTE_PATHS } from './routes.js';
 import type { CommandDefinition } from './types.js';
 
@@ -596,6 +597,7 @@ const COMMAND_DEFINITIONS_CORE: readonly CommandDefCore[] = [
 export const EPIS2_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
   ...COMMAND_DEFINITIONS_CORE.map(cmd),
   ...PAPER_CHART_COMMAND_DEFINITIONS,
+  ...PAPER_PLANNER_COMMAND_DEFINITIONS,
 ];
 
 /** Frases que activan más de un intent con la misma prioridad — deben quedar ambiguas. */

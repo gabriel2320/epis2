@@ -216,20 +216,39 @@
       {
         "id": "MF-PAPER-PLANNER-02",
         "name": "Vista mensual + markers",
-        "state": "READY",
-        "gate": "quality:paper-planner-month-gate"
+        "state": "DONE",
+        "gate": "quality:paper-planner-month-gate",
+        "allowedPaths": [
+          "apps/web/src/components/chart/paper/planner/monthLayout.ts",
+          "apps/web/src/components/chart/paper/planner/MonthlyClinicalPage.tsx",
+          "apps/web/src/components/chart/paper/planner/demoMonthData.ts",
+          "apps/web/src/components/chart/paper/planner/PaperPlannerShell.tsx"
+        ],
+        "closureReport": "reports/epis2-mf-paper-planner-02-month.md"
       },
       {
         "id": "MF-PAPER-PLANNER-03",
         "name": "Print planner + E2E",
-        "state": "BLOCKED",
-        "gate": "quality:paper-planner-print-gate"
+        "state": "DONE",
+        "gate": "quality:paper-planner-print-gate",
+        "allowedPaths": [
+          "apps/web/src/pages/PaperPlannerPrintPage.tsx",
+          "apps/web/src/routes/router.tsx",
+          "e2e/paper-planner-journey.spec.ts",
+          "apps/web/src/components/chart/paper/paperChartPrint.css"
+        ],
+        "closureReport": "reports/epis2-mf-paper-planner-03-print.md"
       },
       {
         "id": "MF-PAPER-PLANNER-04",
         "name": "Comandos IA contextuales planner",
-        "state": "BLOCKED",
-        "gate": "quality:paper-planner-ai-gate"
+        "state": "DONE",
+        "gate": "quality:paper-planner-ai-gate",
+        "allowedPaths": [
+          "packages/command-registry/src/paper-planner-commands.ts",
+          "packages/command-registry/src/context-rank.ts"
+        ],
+        "closureReport": "reports/epis2-prog-paper-planner-close-2026-06-11.md"
       }
     ]
   }

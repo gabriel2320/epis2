@@ -399,6 +399,36 @@ export const INTENT_SECURE_METADATA: Record<ClinicalIntent, SecureCommandMeta> =
     examples: ['detectar pendientes', 'revisar borradores IA'],
     formId: 'paper_chart',
   },
+  paper_planner_summarize_day: {
+    family: 'ai_assist',
+    description: 'Resumir agenda clínica del día en modo papel.',
+    category: 'assist',
+    requiredContext: ['patient'],
+    safetyLevel: 'read',
+    actionType: 'ai_assist',
+    confirmationRequired: false,
+    examples: ['resumir agenda del día', 'síntesis agenda hoy'],
+  },
+  paper_planner_print_agenda: {
+    family: 'navigation',
+    description: 'Abrir vista impresión de agenda papel (día/semana/mes).',
+    category: 'navigation',
+    requiredContext: ['patient'],
+    safetyLevel: 'read',
+    actionType: 'navigate',
+    confirmationRequired: false,
+    examples: ['imprimir agenda', 'vista previa agenda'],
+  },
+  paper_planner_review_pending: {
+    family: 'ai_assist',
+    description: 'Revisar pendientes marcados en agenda clínica papel.',
+    category: 'assist',
+    requiredContext: ['patient'],
+    safetyLevel: 'read',
+    actionType: 'ai_assist',
+    confirmationRequired: false,
+    examples: ['revisar pendientes agenda', 'qué falta en la agenda'],
+  },
 };
 
 export function getSecureCommandMeta(intent: ClinicalIntent): SecureCommandMeta {

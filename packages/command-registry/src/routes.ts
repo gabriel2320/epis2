@@ -35,6 +35,9 @@ export const INTENT_ROUTE_PATHS: Record<ClinicalIntent, string> = {
   paper_prepare_discharge_draft: '/espacio/ficha',
   paper_create_prescription_a5: '/espacio/receta',
   paper_detect_pending: '/espacio/ficha',
+  paper_planner_summarize_day: '/espacio/ficha',
+  paper_planner_print_agenda: '/espacio/ficha/agenda/imprimir',
+  paper_planner_review_pending: '/espacio/ficha',
 };
 
 /** Rutas que antes eran botones en ficha — deben resolverse vía comando. */
