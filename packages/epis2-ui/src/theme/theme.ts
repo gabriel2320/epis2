@@ -6,7 +6,7 @@ export const epis2Theme = createEpis2Theme();
 export { createEpis2Theme, type CreateEpis2ThemeOptions } from './create-epis2-theme.js';
 export { buildM3PaletteOptions, accentPresets, type Epis2Accent } from './color-roles.js';
 export { clinicalRoles, type ClinicalRoleKey } from './clinical-roles.js';
-export { epis2Shape, epis2ShapeBorderRadius } from './shape.js';
+export { epis2Shape, epis2ShapeBorderRadius, epis2ShapeProfiles } from './shape.js';
 export {
   epis2Motion,
   motionTransition,
@@ -34,6 +34,7 @@ export {
 export {
   epis2CanvasSx,
   epis2IslandSx,
+  epis2CalmIslandSx,
   epis2IslandPaddingSx,
   epis2IslandMarginSx,
   epis2ShellContentIslandSx,

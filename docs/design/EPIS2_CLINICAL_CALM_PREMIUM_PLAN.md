@@ -2,7 +2,7 @@
 
 **Versión:** 1.0 · **Fecha:** 2026-06-10  
 **Tipo:** Solo estética y composición — **sin cambio de lógica clínica**  
-**Estado signoff:** **NO-GO** humano (`reports/epis2-ux-audit-visual-2026-06-10.md`)
+**Estado signoff:** **GO** humano · 2026-06-11 (`reports/epis2-entrega-c2-calm-premium-2026-06-11.md`)
 
 **Canon relacionado:**
 
@@ -234,9 +234,9 @@ packages/epis2-ui/src/primitives/EpisWorkspaceSection.tsx
 
 **Entregables:**
 
-- [ ] `epis2IslandSx`: radius 20px, border 1px `outlineVariant`, shadow none
-- [ ] Fondo app canvas `#F7F9FC` vía tema, no hex suelto en pages
-- [ ] Chips alerta: tonal (`errorContainer`), no bloques rojos planos
+- [x] `epis2CalmIslandSx`: radius 20px, border 1px `outlineVariant`, shadow none (P3 ✓)
+- [x] Fondo app canvas `#F7F9FC` vía tema, no hex suelto en pages (THEME-CALM-01 ✓)
+- [x] Chips alerta: tonal (`error.light` / `warning.light`), no bloques rojos planos (P3 ✓)
 - [ ] Eliminar duplicación visual restante (textos, CTAs redundantes)
 
 **Depende de:** THEME-CALM-01 (ideal) o `calm-teal` temporal

@@ -12,9 +12,14 @@ import {
   partitionMedicationZones,
   selectLabHighlights,
 } from './clinicalSummaryData.js';
-import { EpisClinicalSummaryCard } from './EpisClinicalSummaryCard.js';
+import {
+  EpisClinicalSummaryCard,
+  type ClinicalSummarySurface,
+} from './EpisClinicalSummaryCard.js';
 
 export type PatientClinicalSummaryGridProps = {
+  /** Perfil visual — traditional en ficha EMR dual; calm en modo clásico MD3. */
+  surfaceProfile?: ClinicalSummarySurface | undefined;
   summaryFields: Record<string, string>;
   longitudinal?: PatientLongitudinalResponse | null | undefined;
   alerts?: readonly ClinicalAlert[] | undefined;
@@ -53,6 +58,7 @@ export function PatientClinicalSummaryGrid({
   onViewFullTimeline,
   onOpenEvolution,
   testId = 'epis2-clinical-summary-grid',
+  surfaceProfile = 'calm',
 }: PatientClinicalSummaryGridProps) {
   const clinicalProblems = useMemo(
     () => longitudinal?.problems.filter((p) => !isSurgicalHistoryDescription(p.description)) ?? [],
@@ -82,6 +88,7 @@ export function PatientClinicalSummaryGrid({
         key={key}
         title={patientSummaryFieldLabel(key)}
         severity={severity}
+        surface={surfaceProfile}
         testId={`${testId}-${key}`}
       >
         {value}
@@ -99,6 +106,7 @@ export function PatientClinicalSummaryGrid({
       <EpisClinicalSummaryCard
         key={zoneKey}
         title={title}
+        surface={surfaceProfile}
         testId={`${testId}-meds-${zoneKey}`}
       >
         {items.map(formatMedicationLine).join('\n')}
@@ -116,6 +124,7 @@ export function PatientClinicalSummaryGrid({
         <EpisClinicalSummaryCard
           title={copy.clinicalSummary.criticalAlerts}
           severity="critical"
+          surface={surfaceProfile}
           testId={`${testId}-live-alerts`}
           actionLabel={copy.clinicalSummary.viewAlerts}
           onAction={onOpenEvolution}
@@ -142,6 +151,7 @@ export function PatientClinicalSummaryGrid({
             <EpisClinicalSummaryCard
               title={copy.longitudinal.allergies}
               severity="warning"
+              surface={surfaceProfile}
               testId={`${testId}-allergies`}
               actionLabel={copy.clinicalSummary.manageAllergies}
               onAction={onRegisterAllergy}
@@ -154,6 +164,7 @@ export function PatientClinicalSummaryGrid({
           ) : onRegisterAllergy ? (
             <EpisClinicalSummaryCard
               title={copy.longitudinal.allergies}
+              surface={surfaceProfile}
               testId={`${testId}-allergies-empty`}
               actionLabel={copy.longitudinal.registerAllergy}
               onAction={onRegisterAllergy}
@@ -164,6 +175,7 @@ export function PatientClinicalSummaryGrid({
           {draftEvents.length > 0 && onOpenDraft && firstDraftId ? (
             <EpisClinicalSummaryCard
               title={copy.clinicalSummary.pendingDrafts}
+              surface={surfaceProfile}
               testId={`${testId}-drafts`}
               actionLabel={copy.activePatient.openDraft}
               onAction={() => onOpenDraft(firstDraftId)}
@@ -210,6 +222,7 @@ export function PatientClinicalSummaryGrid({
               <EpisClinicalSummaryCard
                 key={lab.id}
                 title={lab.label}
+                surface={surfaceProfile}
                 meta={copy.clinicalSummary.labsHighlight}
                 highlightValue={lab.valueText}
                 highlightMeta={formatLabObservedAt(lab.observedAt)}
@@ -224,6 +237,7 @@ export function PatientClinicalSummaryGrid({
           {clinicalProblems.length > 0 ? (
             <EpisClinicalSummaryCard
               title={copy.activePatient.summaryActiveProblems}
+              surface={surfaceProfile}
               testId={`${testId}-problems`}
               actionLabel={copy.clinicalSummary.manageProblems}
               onAction={onRegisterProblem}
@@ -237,6 +251,7 @@ export function PatientClinicalSummaryGrid({
           {longitudinal && longitudinal.timeline.length > 0 ? (
             <EpisClinicalSummaryCard
               title={copy.activePatient.recentActivityTitle}
+              surface={surfaceProfile}
               meta={copy.clinicalSummary.lastEvents}
               testId={`${testId}-timeline`}
               actionLabel={copy.activePatient.viewFullTimeline}

@@ -41,18 +41,18 @@ export function ClinicalSummaryStickyBanner({
           <Chip
             key={a.ruleId}
             size="small"
-            color="error"
-            variant="outlined"
+            variant="filled"
             label={a.message}
+            sx={{ bgcolor: 'error.light', color: 'error.dark' }}
           />
         ))}
         {allergyChips.map((a) => (
           <Chip
             key={a.id}
             size="small"
-            color="warning"
-            variant="outlined"
+            variant="filled"
             label={formatAllergyLine(a)}
+            sx={{ bgcolor: 'warning.light', color: 'warning.dark' }}
           />
         ))}
         {critical.length === 0 && allergyChips.length > 0 ? (

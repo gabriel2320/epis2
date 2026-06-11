@@ -21,4 +21,9 @@ describe('epis2Shape traditional profile', () => {
     expect(epis2ShapeProfiles.command.bar).toBe(epis2Shape.pill);
     expect(epis2ShapeProfiles.command.palette).toBe(epis2Shape.extraLarge);
   });
+
+  it('perfil calm mantiene islas 20px fuera de traditional EMR', () => {
+    expect(epis2ShapeProfiles.calm.island).toBe(20);
+    expect(epis2ShapeProfiles.calm.max).toBe(24);
+  });
 });

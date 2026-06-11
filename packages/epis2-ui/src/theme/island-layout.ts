@@ -2,7 +2,7 @@ import type { SxProps, Theme } from '@mui/material/styles';
 import type { SystemStyleObject } from '@mui/system';
 import { epis2BarLayout } from './breakpoints.js';
 import { epis2M3IslandPadding } from './m3-layout-tokens.js';
-import { epis2Shape } from './shape.js';
+import { epis2Shape, epis2ShapeProfiles } from './shape.js';
 
 /** Fondo de aplicación — canvas neutro (background.default). */
 export const epis2CanvasSx: SystemStyleObject<Theme> = {
@@ -17,6 +17,16 @@ export const epis2IslandSx: SystemStyleObject<Theme> = {
   bgcolor: 'background.paper',
   borderRadius: epis2Shape.island,
   border: 'none',
+  boxShadow: 'none',
+  width: '100%',
+};
+
+/** Isla Calm Premium (UX-AESTHETIC P3) — radius 20px, borde outlineVariant, sin sombra. */
+export const epis2CalmIslandSx: SystemStyleObject<Theme> = {
+  bgcolor: 'background.paper',
+  borderRadius: `${epis2ShapeProfiles.calm.island}px`,
+  border: 1,
+  borderColor: 'outlineVariant',
   boxShadow: 'none',
   width: '100%',
 };

@@ -55,9 +55,9 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · Nomenclatura: **Entre
 | Entrega | Alcance | Gate |
 |---------|---------|------|
 | **C-1** | Revisión humana opcional post-captura M3 (hover/foco/rail/two-pane claro/oscuro) — evidencia en `reports/m3-visual-evidence/2026-06-10/` | Automatizado ✓ · [`epis2-m3-visual-pass-2026-06-10.md`](../../reports/epis2-m3-visual-pass-2026-06-10.md) |
-| **C-2** | **PROG-CALM-PREMIUM** — THEME-CALM-01 ✓ · E3.5 Storybook ✓ · scaffold signoff `quality:calm-premium-signoff` · GO humano pendiente | [`EPIS2_TRADITIONAL_M3_SHAPE_COLOR_PLAN.md`](../design/EPIS2_TRADITIONAL_M3_SHAPE_COLOR_PLAN.md) |
+| **C-2** | **PROG-CALM-PREMIUM** ✓ signoff GO · THEME-CALM-01 · UX-AESTHETIC P3 · E3.5 | [`EPIS2_CLINICAL_CALM_PREMIUM_PLAN.md`](../design/EPIS2_CLINICAL_CALM_PREMIUM_PLAN.md) |
 | **C-3** | **C-3a** ✓ scaffold · **C-3b** ✓ MF-CLINICAL-SUMMARY-B (zonas meds, labs, banner) · pulido Calm Premium P3 pendiente | [`EPIS2_CLINICAL_SUMMARY_MD3.md`](../design/EPIS2_CLINICAL_SUMMARY_MD3.md) |
-| **C-4** | Activar dual ficha en prod (`VITE_ENABLE_DUAL_CHART_MODES=true`) + E2E CI opt-in | CI job `e2e-dual-chart` ✓ · prod flag off · local/staging manual |
+| **C-4** | Staging/local ✓ (`VITE_ENABLE_DUAL_CHART_MODES=true`) · prod flag decisión operador | CI `e2e-dual-chart` ✓ · `.env.staging.example` |
 | backlog | Patrón combobox MUI en E2E (PEND-004) | Helper / docs testing |
 | backlog | Ola 2+ — nota procedimiento clínica (PEND-002 defer) | No bloquea Hilo C |
 

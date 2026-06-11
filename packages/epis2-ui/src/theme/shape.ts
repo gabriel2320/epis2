@@ -54,6 +54,14 @@ export const epis2ShapeProfiles = {
     bar: epis2Shape.pill,
     palette: epis2Shape.extraLarge,
   },
+  /** Calm Premium — mosaico clásico MD3 / comando (no ficha traditional EMR). */
+  calm: {
+    chip: 16,
+    field: epis2Shape.medium,
+    island: 20,
+    dialog: 24,
+    max: 24,
+  },
 } as const;
 
 export type Epis2ShapeKey = keyof typeof epis2Shape;

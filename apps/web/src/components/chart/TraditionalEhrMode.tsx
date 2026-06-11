@@ -57,6 +57,7 @@ export function TraditionalEhrMode({
     mainContent ??
     (activeSection === 'navSummary' && summaryFields ? (
       <PatientClinicalSummaryGrid
+        surfaceProfile="traditional"
         summaryFields={summaryFields}
         longitudinal={longitudinal}
         alerts={alerts}

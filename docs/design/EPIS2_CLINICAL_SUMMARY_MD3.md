@@ -40,7 +40,7 @@ Responder en **≤2 scrolls** las preguntas clínicas habituales al abrir una fi
 
 | Aspecto | Objetivo | Tramo |
 |---------|----------|-------|
-| Tarjetas | Borde `outlineVariant`, radius 20px, sin sombra | UX-AESTHETIC P3 |
+| Tarjetas | Borde `outlineVariant`, radius 20px, sin sombra (`surface=calm`) | UX-AESTHETIC P3 ✓ |
 | Banner | Sticky, chips críticos + alergias (`ClinicalSummaryStickyBanner`) | UX-CALM-PATIENT ✓ C-3b |
 | Fondo app | `#F7F9FC` vía tema | THEME-CALM-01 |
 | Iconos por tarjeta | Material Symbols Outlined | UX-CALM-PATIENT |

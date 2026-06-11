@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
-import { epis2ShellContentSx } from '../theme/island-layout.js';
+import { epis2CalmIslandSx, epis2IslandPaddingSx, epis2ShellContentSx } from '../theme/island-layout.js';
 
 export type EpisWorkspaceSectionProps = {
   title: string;
@@ -16,10 +16,9 @@ export function EpisWorkspaceSection({ title, children, testId }: EpisWorkspaceS
     <Box
       data-testid={testId}
       sx={{
+        ...epis2CalmIslandSx,
+        ...epis2IslandPaddingSx,
         width: '100%',
-        bgcolor: 'background.default',
-        borderRadius: 2,
-        p: 2,
       }}
     >
       <EpisM3Text role="headlineMedium" component="h2" sx={{ m: 0, mb: 1.5 }}>
