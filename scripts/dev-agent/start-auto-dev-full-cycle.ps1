@@ -1,4 +1,4 @@
-# EPIS2 — Ciclo completo de desarrollo (OpenClaw + Ollama + Evolab)
+# EPIS2 - Ciclo completo de desarrollo (OpenClaw + Ollama + Evolab)
 # Uso: .\scripts\dev-agent\start-auto-dev-full-cycle.ps1
 #      .\scripts\dev-agent\start-auto-dev-full-cycle.ps1 -NoPush -DryRun
 
@@ -45,15 +45,17 @@ if (-not $env:EPIS2_EVOLAB_ROOT -and (Test-Path (Join-Path $siblingEvolab "packa
   $env:EPIS2_EVOLAB_ROOT = $siblingEvolab
 }
 
-Write-Host "EPIS2 — ciclo dev completo (OpenClaw + Ollama + Evolab)" -ForegroundColor Cyan
+$modeLabel = if ($Sequential) { "secuencial (orchestrate)" } else { "paralelo (PM-03 evolve)" }
+
+Write-Host "EPIS2 - ciclo dev completo (OpenClaw + Ollama + Evolab)" -ForegroundColor Cyan
 Write-Host "  Repo: $Root"
 Write-Host "  Ollama: $ollamaBase"
-Write-Host "  Modo: $(if ($Sequential) { 'secuencial (orchestrate)' } else { 'paralelo (PM-03 + evolve)' })"
-Write-Host "  OpenClaw: L3 MAX POWER — orquesta brief/handoff/verify" -ForegroundColor Green
+Write-Host "  Modo: $modeLabel"
+Write-Host "  OpenClaw: L3 MAX POWER - orquesta brief/handoff/verify" -ForegroundColor Green
 if ($env:EPIS2_EVOLAB_ROOT) {
   Write-Host "  Evolab: $($env:EPIS2_EVOLAB_ROOT)" -ForegroundColor Green
 } else {
-  Write-Host "  Evolab: no configurado — requiere clone epis2-evolab" -ForegroundColor Red
+  Write-Host "  Evolab: no configurado - requiere clone epis2-evolab" -ForegroundColor Red
   exit 1
 }
 

@@ -28,3 +28,5 @@
 {"at":"2026-06-11T02:56:33.906Z","event":"tramo-start","id":"H-AUTO-6","order":6}
 {"at":"2026-06-11T02:58:18.493Z","event":"tramo-failed","id":"H-AUTO-6","order":6}
 {"at":"2026-06-11T03:00:14.613Z","event":"tramo-failed","id":"H-AUTO-6","order":6}
+{"at":"2026-06-11T03:05:06.534Z","event":"tramo-start","id":"H-AUTO-1","order":1}
+{"at":"2026-06-11T03:05:07.957Z","event":"tramo-done","id":"H-AUTO-1","order":1}

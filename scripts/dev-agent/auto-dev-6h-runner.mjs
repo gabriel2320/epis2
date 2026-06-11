@@ -57,7 +57,7 @@ function runGit(argsGit) {
     log('dry-run-git', { args: argsGit });
     return { ok: true };
   }
-  const r = spawnSync('git', argsGit, { cwd: root, stdio: 'inherit', shell: true });
+  const r = spawnSync('git', argsGit, { cwd: root, stdio: 'inherit', shell: false });
   return { ok: r.status === 0 };
 }
 
@@ -189,8 +189,12 @@ function runTramo(order, ledger) {
   }
 
   if (doCommit && process.env.EPIS2_AUTO_DEV_AUTHORIZED === '1' && !dryRun) {
-    runGit(['add', '-A']);
-    runGit(['commit', '-m', `chore(auto-dev): tramo ${order} ${tramo.id} — ${tramo.name}`]);
+    const status = spawnSync('git', ['status', '--porcelain'], { cwd: root, encoding: 'utf8' });
+    if ((status.stdout ?? '').trim()) {
+      runGit(['add', '-A']);
+      // ASCII-only message — evita pathspec en Windows con nombres unicode/+ en tramo.name
+      runGit(['commit', '-m', `chore(auto-dev): tramo-${order}-${tramo.id}`]);
+    }
   }
   return true;
 }

@@ -1,21 +1,21 @@
 {
-  "syncedAt": "2026-06-11T03:01:38.783Z",
+  "syncedAt": "2026-06-11T03:04:55.217Z",
   "cycle": {
     "openclaw": true,
     "ollama": true,
-    "evolab": false
+    "evolab": true
   },
   "openclaw": {
-    "level": "L1",
-    "mode": "controlled-verifier",
-    "maxPower": false,
+    "level": "L3",
+    "mode": "max-power-max-power-patch-code",
+    "maxPower": true,
     "artifactCount": 3,
     "latestBrief": "reports/openclaw-latest-brief.md",
     "latestHandoff": null
   },
   "ollama": {
-    "planObjective": "Implementar grids dashboard + acordeones en formularios",
-    "nextMicrophase": "MF-RAD-M3-A",
+    "planObjective": "Completar la fase B con las microfases pendientes y preparar la entrega final de Ola 2.",
+    "nextMicrophase": "MF-183→204",
     "automationOk": null,
     "model": "qwen2.5-coder:14b"
   },

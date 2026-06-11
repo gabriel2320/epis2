@@ -1,37 +1,38 @@
 {
-  "generatedAt": "2026-06-08T00:17:00.640Z",
-  "model": "qwen3:8b",
+  "generatedAt": "2026-06-11T03:05:06.137Z",
+  "model": "qwen2.5-coder:7b",
+  "route": {
+    "function": "dev-plan",
+    "tier": "performance",
+    "mode": "auto",
+    "model": "qwen2.5-coder:7b"
+  },
   "ollamaUrl": "http://127.0.0.1:11434",
   "plan": {
     "activePhase": "B",
-    "nextMicrophase": "MF-RAD-M3-A",
-    "objective": "Implementar grids dashboard + acordeones en formularios",
+    "nextMicrophase": "MF-183",
+    "objective": "Completar la implementación de la fase B, enfocándose en la microfase MF-183 que incluye la integración de nuevas funcionalidades y mejoras en el flujo de trabajo del paciente.",
     "allowedPaths": [
-      "apps/web/src/...",
-      "packages/clinical-productivity/...",
-      "packages/rad-m3/..."
+      "apps/web/components/MicrophaseMF183",
+      "packages/clinical-productivity/microphases/MF183"
     ],
     "forbiddenPatterns": [
       "OpenMRS",
       "auto-approve",
-      "dashboard",
-      "import-massive",
-      "Carbon"
+      "import masivo desde EPIS"
     ],
     "gatesToRun": [
       "npm run check",
-      "npm run quality:layers-integration-gate"
+      "quality:microphases"
     ],
     "subagentSequence": [
-      "layers-integrator",
+      "tramo-implementer",
       "gate-runner",
-      "ollama-clinical",
-      "golden-guardian"
+      "ledger-keeper"
     ],
     "risks": [
-      "Retraso en integración de capas",
-      "Incompatibilidad con UI-G02",
-      "Dificultad en autocomplete paciente"
+      "Interferencia con funcionalidades existentes",
+      "Errores en la integración de nuevas funcionalidades"
     ],
     "requiresHumanReview": true
   }

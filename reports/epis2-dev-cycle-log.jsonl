@@ -6,3 +6,6 @@
 {"at":"2026-06-11T03:01:53.427Z","event":"dry-run-npm","script":"dev:evolab:sync","extraArgs":[]}
 {"at":"2026-06-11T03:01:53.428Z","event":"dry-run-npm","script":"dev:openclaw:sync","extraArgs":[]}
 {"at":"2026-06-11T03:01:53.428Z","event":"cycle-bootstrap-ok","ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}
+{"at":"2026-06-11T03:04:41.023Z","event":"cycle-bootstrap-start","ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}
+{"at":"2026-06-11T03:04:56.765Z","event":"cycle-bootstrap-ok","ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}
+{"at":"2026-06-11T03:05:02.300Z","event":"cycle-tramo-start","order":1,"id":"H-AUTO-1","flags":{"ollama":true,"ollamaApply":false,"evolab":true,"openclaw":true}}
