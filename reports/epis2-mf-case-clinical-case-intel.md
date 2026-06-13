@@ -127,6 +127,16 @@ npm run quality:case-intel-promote-gate
 
 ## Próximo paso sugerido
 
-- Commit en `epis2-evolab` (10 escenarios + demo-fixtures SIM).
 - Integrar `quality:case-intel-promote-gate` en CI cuando Postgres esté disponible.
 - Ampliar catálogo (>10) con más condiciones Synthea o casos docentes revisados.
+
+## Cierre sesión (2026-06-13)
+
+| Repo | Commit | Estado |
+|------|--------|--------|
+| EPIS2 | `bf1c67c` | MF-CASE-01…08 + reporte |
+| epis2-evolab | (commit SIM) | 10 escenarios + demo-fixtures |
+
+**Gates finales:** `quality:case-intel-catalog-gate` OK · `quality:case-intel-promote-gate` OK · `verify-sim-seed` 10 EPIS2-SIM.
+
+**Push:** `origin/master` en ambos repos.
