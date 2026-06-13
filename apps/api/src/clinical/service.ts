@@ -8,13 +8,15 @@ import {
 } from '@epis2/clinical-domain';
 import {
   DEMO_IDENTIFIER_SYSTEM,
+  SIM_IDENTIFIER_SYSTEM,
   SYNTHETIC_LABEL,
   getDemoCaseByPatientId,
 } from '@epis2/test-fixtures';
-import { asc, desc, eq, ilike, and, inArray, or } from 'drizzle-orm';
+import { asc, desc, eq, ilike, and, inArray, or, isNull } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import {
   approvals,
+  clinicalCriticalResults,
   clinicalDrafts,
   clinicalNoteVersions,
   clinicalNotes,
@@ -49,7 +51,7 @@ export async function getPatientDemoCaseCode(db: Database, patientId: string) {
     .where(
       and(
         eq(patientIdentifiers.patientId, patientId),
-        eq(patientIdentifiers.system, DEMO_IDENTIFIER_SYSTEM),
+        inArray(patientIdentifiers.system, [DEMO_IDENTIFIER_SYSTEM, SIM_IDENTIFIER_SYSTEM]),
       ),
     )
     .limit(1);
@@ -194,6 +196,32 @@ export async function getDemoClinicalAlertsForPatient(
       });
     }
   }
+
+  const unackedCriticals = await db
+    .select({
+      label: clinicalCriticalResults.label,
+      valueText: clinicalCriticalResults.valueText,
+    })
+    .from(clinicalCriticalResults)
+    .where(
+      and(
+        eq(clinicalCriticalResults.patientId, patientId),
+        isNull(clinicalCriticalResults.acknowledgedAt),
+      ),
+    );
+  if (unackedCriticals.length > 0) {
+    input.labs = input.labs ?? [];
+    for (const row of unackedCriticals) {
+      if (!input.labs.some((lab) => lab.name === row.label)) {
+        input.labs.push({
+          name: row.label,
+          value: row.valueText,
+          flag: 'critical',
+        });
+      }
+    }
+  }
+
   const alertOpts: Parameters<typeof evaluateDemoClinicalAlerts>[1] = {};
   if (options?.blueprintId !== undefined) alertOpts.blueprintId = options.blueprintId;
   if (options?.currentFields !== undefined) alertOpts.currentFields = options.currentFields;

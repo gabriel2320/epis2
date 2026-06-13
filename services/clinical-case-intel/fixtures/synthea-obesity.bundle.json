@@ -1,0 +1,29 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "synthea-fixture-obesity-001",
+        "gender": "male",
+        "birthDate": "1988-06-25"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "code": { "text": "Obesity" },
+        "subject": { "reference": "Patient/synthea-fixture-obesity-001" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "code": { "text": "Body mass index" },
+        "valueQuantity": { "value": 32.4, "unit": "kg/m2" },
+        "subject": { "reference": "Patient/synthea-fixture-obesity-001" }
+      }
+    }
+  ]
+}

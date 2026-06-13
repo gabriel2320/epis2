@@ -1,0 +1,37 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "synthea-fixture-hf-001",
+        "gender": "female",
+        "birthDate": "1943-08-07"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "code": { "text": "Heart failure" },
+        "subject": { "reference": "Patient/synthea-fixture-hf-001" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "code": { "text": "BNP" },
+        "valueQuantity": { "value": 420, "unit": "pg/mL" },
+        "subject": { "reference": "Patient/synthea-fixture-hf-001" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "medicationCodeableConcept": { "text": "Furosemide" },
+        "dosage": [{ "text": "40 mg daily" }],
+        "subject": { "reference": "Patient/synthea-fixture-hf-001" }
+      }
+    }
+  ]
+}

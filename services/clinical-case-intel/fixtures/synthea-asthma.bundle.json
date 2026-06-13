@@ -1,0 +1,37 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "synthea-fixture-asthma-001",
+        "gender": "female",
+        "birthDate": "1992-02-20"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "code": { "text": "Asthma" },
+        "subject": { "reference": "Patient/synthea-fixture-asthma-001" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "code": { "text": "Peak flow" },
+        "valueQuantity": { "value": 310, "unit": "L/min" },
+        "subject": { "reference": "Patient/synthea-fixture-asthma-001" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "medicationCodeableConcept": { "text": "Fluticasone/Salmeterol" },
+        "dosage": [{ "text": "1 inhalación BID" }],
+        "subject": { "reference": "Patient/synthea-fixture-asthma-001" }
+      }
+    }
+  ]
+}

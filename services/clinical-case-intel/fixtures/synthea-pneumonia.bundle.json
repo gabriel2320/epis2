@@ -1,0 +1,37 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "synthea-fixture-pneumonia-001",
+        "gender": "male",
+        "birthDate": "1955-09-03"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "code": { "text": "Community acquired pneumonia" },
+        "subject": { "reference": "Patient/synthea-fixture-pneumonia-001" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "code": { "text": "Temperature" },
+        "valueQuantity": { "value": 38.4, "unit": "Cel" },
+        "subject": { "reference": "Patient/synthea-fixture-pneumonia-001" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "medicationCodeableConcept": { "text": "Amoxicillin" },
+        "dosage": [{ "text": "500 mg TID" }],
+        "subject": { "reference": "Patient/synthea-fixture-pneumonia-001" }
+      }
+    }
+  ]
+}

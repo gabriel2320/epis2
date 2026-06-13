@@ -18,9 +18,12 @@ coverage/
 *.log
 .DS_Store
 Thumbs.db
+epis2/
 .vite/
 .turbo/
 packages/epis2-ui/storybook-static/
 backups/
 services/drug-intel/.cache/
 data/drug-intel/
+services/clinical-case-intel/.cache/
+data/clinical-cases/

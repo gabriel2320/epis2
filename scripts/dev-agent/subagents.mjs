@@ -65,7 +65,7 @@ export const DEV_SUBAGENTS = {
     id: 'gate-runner',
     title: 'Ejecutor de gates',
     triggers: ['cierre sesión', 'pre-push', 'quality gate'],
-    gates: ['npm run check', 'npm run test', 'npm run db:validate'],
+    gates: ['npm run check', 'npm run test', 'npm run db:validate', 'quality:case-intel-catalog-gate'],
     canon: ['AGENTS.md'],
   },
   'ledger-keeper': {

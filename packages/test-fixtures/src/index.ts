@@ -14,12 +14,20 @@ export {
 export {
   DEMO_CLINICAL_CASES,
   DEMO_IDENTIFIER_SYSTEM,
+  SIM_IDENTIFIER_SYSTEM,
   SYNTHETIC_LABEL,
   assertDemoCasesInvariants,
   getDemoCaseByCode,
   getDemoCaseByPatientId,
   type DemoClinicalCase,
 } from './demoCases.js';
+export {
+  SIM_CLINICAL_CASES,
+  assertSimCasesInvariants,
+  getSimCaseByCode,
+  getSimCaseByPatientId,
+} from './simCases.js';
+export { stableSimCaseUuids } from './simCaseIds.js';
 export {
   DEMO_CHART_PRIORITY_SECTIONS,
   DEMO_CHART_SECTIONS_BY_CODE,

@@ -1,0 +1,21 @@
+{
+  "resourceType": "TeachingCase",
+  "id": "pmc-fixture-dm2-001",
+  "title": "Adulto con diabetes tipo 2 descompensada leve en atención primaria",
+  "license": "CC BY 4.0 (rewrite sintético EPIS2; sin PHI de casos reales)",
+  "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/teaching-case-synthetic-rewrite",
+  "patient": {
+    "birthDate": "1962-05-19",
+    "sex": "F"
+  },
+  "presentation": "Paciente femenina de 63 años con poliuria y sed intensa de 5 días. Glucemia capilar en 248 mg/dL. Sin cetoacidosis ni alteración del estado de conciencia (sintético).",
+  "diagnoses": ["Type 2 diabetes"],
+  "findings": [
+    { "label": "HbA1c", "value": "9.1%" },
+    { "label": "Glucemia capilar", "value": "248 mg/dL" }
+  ],
+  "medications": [
+    { "name": "Metformin", "dose": "850 mg BID" },
+    { "name": "Glimepiride", "dose": "2 mg daily" }
+  ]
+}

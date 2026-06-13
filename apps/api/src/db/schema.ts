@@ -433,6 +433,22 @@ export const drugIntelStaging = pgTable('drug_intel_staging', {
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
+// MF-CASE-01: staging clinical-case-intel (casos sintéticos scrapeados/normalizados). No SoT hasta promote.
+export const clinicalCaseStaging = pgTable('clinical_case_staging', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  caseCode: text('case_code').notNull().unique(),
+  scenario: text('scenario').notNull(),
+  reviewStatus: text('review_status').notNull().default('pending'),
+  requiresHumanReview: boolean('requires_human_review').notNull().default(true),
+  payload: jsonb('payload').notNull(),
+  sourceHash: text('source_hash').notNull(),
+  fetchedAt: timestamp('fetched_at', { withTimezone: true }).notNull(),
+  reviewedBy: text('reviewed_by').references(() => appUsers.id),
+  reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
 export const interopHl7Quarantine = pgTable('interop_hl7_quarantine', {
   id: uuid('id').primaryKey().defaultRandom(),
   messageType: text('message_type'),
