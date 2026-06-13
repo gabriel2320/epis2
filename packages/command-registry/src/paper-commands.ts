@@ -79,18 +79,19 @@ export const PAPER_CHART_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
     intent: 'paper_summarize_24h',
     labelEs: 'Resumir últimas 24 h (papel)',
     aliasesEs: [
-      'resumir ultimas 24 horas',
-      'resumen ultimas 24h',
-      'sintesis ultimo dia',
-      'resumir evolucion reciente',
+      'resumir ultimas 24 horas papel',
+      'resumir ultimas 24 horas en ficha',
+      'resumen ultimas 24h papel',
+      'sintesis ultimo dia en ficha',
+      'resumir evolucion reciente papel',
     ],
     routePath: PAPER_CHART_ROUTE_PATHS.paper_summarize_24h,
     requiredPermission: 'command.execute',
     requiresPatient: true,
     priority: 86,
     match: (q) =>
-      /ultimas?\s*24/.test(q) ||
-      (/resum(ir|en)/.test(q) && /24|dia|jornada/.test(q) && /papel|ficha|soap/.test(q)),
+      (/resum(ir|en)/.test(q) && /24|dia|jornada/.test(q) && /papel|ficha|soap|seccion/.test(q)) ||
+      (/ultimas?\s*24/.test(q) && /papel|ficha|soap|seccion/.test(q)),
   }),
   paperCmd({
     intent: 'paper_prepare_print',

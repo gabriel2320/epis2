@@ -37,4 +37,9 @@ describe('colloquial rules (MF-CM-07)', () => {
   it('hay al menos 15 reglas coloquiales', () => {
     expect(COLLOQUIAL_RULES.length).toBeGreaterThanOrEqual(15);
   });
+
+  it('imprimir receta a5 no activa print-rx (papel)', () => {
+    const normalized = normalizeCommandText('imprimir receta a5');
+    expect(matchColloquialRule(normalized)?.id).not.toBe('print-rx');
+  });
 });

@@ -1,4 +1,6 @@
 import { EPIS2_COMMAND_DEFINITIONS } from './definitions.js';
+import { PAPER_CHART_INTENTS } from './paper-commands.js';
+import { PAPER_PLANNER_INTENTS } from './paper-planner-commands.js';
 import type { ClinicalIntent } from './types.js';
 
 export type PhraseSuiteEntry = {
@@ -17,6 +19,11 @@ const DASHBOARD_INTENTS = new Set<ClinicalIntent>([
   'admit_patient_hospital',
 ]);
 
+const PAPER_ACTION_INTENTS = new Set<ClinicalIntent>([
+  ...PAPER_CHART_INTENTS,
+  ...PAPER_PLANNER_INTENTS,
+]);
+
 function expandPhrase(base: string, intent: ClinicalIntent): PhraseSuiteEntry[] {
   const entries: PhraseSuiteEntry[] = [{ phrase: base, intent }];
   if (intent !== 'search_patient') {
@@ -28,6 +35,7 @@ function expandPhrase(base: string, intent: ClinicalIntent): PhraseSuiteEntry[] 
     intent !== 'search_patient' &&
     !base.includes('paciente') &&
     !DASHBOARD_INTENTS.has(intent) &&
+    !PAPER_ACTION_INTENTS.has(intent) &&
     intent !== 'open_dashboard_patient'
   ) {
     for (const suffix of PATIENT_SUFFIXES) {

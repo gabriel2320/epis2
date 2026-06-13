@@ -1,4 +1,9 @@
-import { EPIS2_COMMAND_DEFINITIONS } from '@epis2/command-registry';
+import {
+  EPIS2_COMMAND_DEFINITIONS,
+  PAPER_CHART_INTENTS,
+  PAPER_PLANNER_INTENTS,
+  type ClinicalIntent,
+} from '@epis2/command-registry';
 import {
   dischargeSummaryBlueprint,
   evolutionNoteBlueprint,
@@ -51,6 +56,12 @@ export const EPIS2_FORM_BLUEPRINTS: readonly ClinicalFormBlueprint[] = [
 const byId = new Map(EPIS2_FORM_BLUEPRINTS.map((b) => [b.blueprintId, b]));
 const byRoute = new Map(EPIS2_FORM_BLUEPRINTS.map((b) => [b.routePath, b]));
 
+/** Comandos modo papel / planner — navegan ficha, no abren GeneratedClinicalFormPage. */
+const PAPER_CHART_ACTION_INTENTS = new Set<ClinicalIntent>([
+  ...PAPER_CHART_INTENTS,
+  ...PAPER_PLANNER_INTENTS,
+]);
+
 export function getBlueprintById(blueprintId: string): ClinicalFormBlueprint | undefined {
   return byId.get(blueprintId);
 }
@@ -89,7 +100,8 @@ export function assertRegistryInvariants(): string[] {
     if (
       def.routePath.startsWith('/epis2/dashboard') ||
       def.intent === 'open_results_inbox' ||
-      def.intent === 'open_patient_chart'
+      def.intent === 'open_patient_chart' ||
+      PAPER_CHART_ACTION_INTENTS.has(def.intent)
     ) {
       continue;
     }

@@ -89,7 +89,9 @@ export const COLLOQUIAL_RULES: readonly ColloquialRule[] = [
   {
     id: 'print-rx',
     matches: (q) =>
-      /imprimir receta|imprimir prescripcion|armar la receta|hacer la receta|dejar la receta lista/.test(q),
+      /imprimir receta|imprimir prescripcion|armar la receta|hacer la receta|dejar la receta lista/.test(
+        q,
+      ) && !/\ba5\b|papel/.test(q),
     message: 'La receta se prepara como borrador antes de imprimir.',
     intentHints: ['prepare_prescription', 'reconcile_medications', 'summarize_patient'],
   },
