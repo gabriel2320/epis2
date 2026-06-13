@@ -596,4 +596,78 @@ describeIntegration('Golden Clinical Journey — API', () => {
 
     await app.close();
   });
+
+  it('golden-v7-sim-journey: borrador evolución SIM → aprobación → auditoría', async () => {
+    const app = await buildApp(config);
+    const db = getDatabase(config.DATABASE_URL)!;
+    const cookie = await loginCookie(app);
+    const sim = getSimCaseByCode('SIM-DIABETES-81dd');
+    expect(sim?.patientId).toBeTruthy();
+
+    const journeyTitle = `Journey SIM v7 ${Date.now()}`;
+    const draftRes = await app.inject({
+      method: 'POST',
+      url: '/api/drafts',
+      headers: { cookie },
+      payload: {
+        patientId: sim!.patientId,
+        draftType: 'evolution_note',
+        title: journeyTitle,
+        body: {
+          subjective: 'Paciente refiere adherencia a tratamiento (SIM sintético)',
+          objective: 'Glicemia en meta documentada (demo)',
+          assessment: 'DM2 en control ambulatorio (sintético)',
+          plan: 'Continuar metformina y control en 3 meses',
+        },
+      },
+    });
+    expect(draftRes.statusCode).toBe(201);
+    const draft = (draftRes.json() as { draft: { id: string; status: string } }).draft;
+    expect(['draft', 'editing']).toContain(draft.status);
+
+    const notesBefore = await app.inject({
+      method: 'GET',
+      url: `/api/patients/${sim!.patientId}`,
+      headers: { cookie },
+    });
+    const noteCountBefore = (notesBefore.json() as { notes: unknown[] }).notes.length;
+
+    const approveRes = await app.inject({
+      method: 'POST',
+      url: `/api/drafts/${draft.id}/approve`,
+      headers: { cookie },
+    });
+    expect(approveRes.statusCode).toBe(200);
+    const approved = approveRes.json() as { draft: { status: string }; note: { id: string } };
+    expect(approved.draft.status).toBe('approved');
+
+    const notesAfter = await app.inject({
+      method: 'GET',
+      url: `/api/patients/${sim!.patientId}`,
+      headers: { cookie },
+    });
+    expect((notesAfter.json() as { notes: unknown[] }).notes.length).toBe(noteCountBefore + 1);
+
+    const [approvalRow] = await db
+      .select()
+      .from(approvals)
+      .where(eq(approvals.draftId, draft.id))
+      .limit(1);
+    expect(approvalRow?.noteId).toBe(approved.note.id);
+
+    const auditRows = await db
+      .select()
+      .from(auditEvents)
+      .where(
+        and(
+          eq(auditEvents.entityId, draft.id),
+          eq(auditEvents.eventType, 'clinical.draft.approved'),
+        ),
+      )
+      .orderBy(desc(auditEvents.at))
+      .limit(1);
+    expect(auditRows.length).toBe(1);
+
+    await app.close();
+  });
 });

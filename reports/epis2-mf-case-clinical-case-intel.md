@@ -130,6 +130,20 @@ npm run quality:case-intel-promote-gate
 - ~~Integrar `quality:case-intel-promote-gate` en CI cuando Postgres esté disponible.~~ ✓ MF-CASE-09
 - ~~Ampliar catálogo (>10) con más condiciones Synthea o casos docentes revisados.~~ ✓ MF-CASE-09 (12 casos)
 - MF-CASE-10: evals assist con casos SIM en journey golden; documentar en `EPIS2_AI_TRAMO_EVALS`. ✓
+- MF-CASE-11: golden v7 SIM (borrador→aprobación), matriz assist 12 casos, closure gate. ✓
+
+## MF-CASE-11 — Cierre programa (2026-06-13)
+
+| Entrega | Detalle |
+|---------|---------|
+| Golden v7 | `golden-v7-sim-journey` — evolución SIM → aprobación → auditoría |
+| Matriz assist | 13 entradas cubriendo los 12 `caseCode` del catálogo |
+| Gate unificado | `quality:case-intel-gate` incluye catalog + promote + assist |
+| Signoff | `quality:case-intel-closure-gate` — artefactos MF-CASE-01…11 |
+
+```bash
+npm run quality:case-intel-closure-gate
+```
 
 ## MF-CASE-10 — Evals assist SIM (2026-06-13)
 
@@ -164,9 +178,12 @@ npm run case-intel:pipeline:catalog -- --apply
 
 | Repo | Commit | Estado |
 |------|--------|--------|
-| EPIS2 | `bf1c67c` | MF-CASE-01…08 + reporte |
-| epis2-evolab | `d87df9d` | 10 escenarios + demo-fixtures |
+| EPIS2 | `da3fb62` | MF-CASE-10 assist + golden v6 |
+| EPIS2 | `a1accaf` | MF-CASE-09 CI + catálogo 12 |
+| epis2-evolab | `98205fb` | 12 escenarios SIM |
 
-**Gates finales:** `quality:case-intel-catalog-gate` OK · `quality:case-intel-promote-gate` OK · `verify-sim-seed` 10 EPIS2-SIM.
+**Gates finales:** `quality:case-intel-closure-gate` · `verify-sim-seed` 12 EPIS2-SIM.
 
 **Push:** `origin/master` en ambos repos.
+
+## Cierre sesión histórico (2026-06-13)

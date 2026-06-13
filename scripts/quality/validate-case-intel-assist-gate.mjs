@@ -26,6 +26,9 @@ if (!existsSync(goldenApiPath)) {
   if (!golden.includes('golden-v6-sim-assist')) {
     errors.push('golden-clinical-journey.api.spec.ts sin golden-v6-sim-assist');
   }
+  if (!golden.includes('golden-v7-sim-journey')) {
+    errors.push('golden-clinical-journey.api.spec.ts sin golden-v7-sim-journey');
+  }
 }
 
 if (!existsSync(evalsDocPath)) {

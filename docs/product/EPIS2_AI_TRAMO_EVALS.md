@@ -65,4 +65,15 @@ Golden journey API: `golden-v6-sim-assist` — paciente `EPIS2-SIM`, comando evo
 
 Salida live: `reports/ai-evals-sim-latest.json`
 
+---
+
+## MF-CASE-11 — Cierre programa clinical-case-intel
+
+| Comando | Uso |
+|---------|-----|
+| `npm run quality:case-intel-closure-gate` | Signoff MF-CASE-01…11 (CI) |
+| `npm run quality:case-intel-gate` | catalog + promote + assist |
+
+Golden journey API: `golden-v7-sim-journey` — borrador evolución SIM → aprobación humana → auditoría.
+
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*

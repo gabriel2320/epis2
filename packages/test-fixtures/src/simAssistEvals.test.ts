@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { SIM_CLINICAL_CASES } from './simCases.js';
 import {
   SIM_ASSIST_EVAL_MATRIX,
   assertSimAssistEvalMatrix,
@@ -6,10 +7,10 @@ import {
   simAssistEvalPatientId,
 } from './simAssistEvals.js';
 
-describe('SIM_ASSIST_EVAL_MATRIX (MF-CASE-10)', () => {
-  it('matriz piloto válida y alineada con SIM_CLINICAL_CASES', () => {
+describe('SIM_ASSIST_EVAL_MATRIX (MF-CASE-10/11)', () => {
+  it('matriz cubre todos los casos SIM del catálogo', () => {
     expect(assertSimAssistEvalMatrix()).toEqual([]);
-    expect(SIM_ASSIST_EVAL_MATRIX.length).toBeGreaterThanOrEqual(4);
+    expect(SIM_ASSIST_EVAL_MATRIX.length).toBeGreaterThanOrEqual(SIM_CLINICAL_CASES.length);
   });
 
   it('resuelve paciente HTA para evolution_note', () => {
