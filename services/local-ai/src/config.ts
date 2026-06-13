@@ -18,6 +18,8 @@ const envSchema = z.object({
   OPENAI_API_KEY: z.string().optional(),
   OPENAI_MODEL: z.string().default('gpt-4o-mini'),
   OPENAI_BASE_URL: z.string().url().default('https://api.openai.com/v1'),
+  /** Opcional — si está definida, /assist/* exige header x-local-ai-key (auditoría A1). */
+  LOCAL_AI_API_KEY: z.string().min(16).optional(),
 });
 
 export type AiConfig = z.infer<typeof envSchema>;

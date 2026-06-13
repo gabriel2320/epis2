@@ -14,12 +14,15 @@ import { pingOpenAi } from './inference/openaiProvider.js';
 import { runTextboxAssist } from './textboxAssist.js';
 import { buildLocalAiCapabilities } from './gatewayCapabilities.js';
 import { pingOllama } from './ollama.js';
+import { createLocalAiAuthHook } from './localAiAuth.js';
 
 const VERSION = '0.1.0';
 
 export async function buildAiApp(config: AiConfig) {
   const app = Fastify({ logger: false });
   const model = config.OLLAMA_MODEL;
+
+  app.addHook('onRequest', createLocalAiAuthHook(config.LOCAL_AI_API_KEY));
 
   app.get('/health', async () =>
     healthResponseSchema.parse({

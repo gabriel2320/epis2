@@ -44,16 +44,20 @@ export async function resolveCommandWithOptionalAssist(
   }
 
   const ranked = rankCommandDefinitions(input.text, buildRankOptions(input)).slice(0, 5);
-  const assistResponse = await requestCommandRouteAssist(config.LOCAL_AI_BASE_URL, {
-    text: input.text,
-    role: input.role,
-    hasPatient: Boolean(input.patientId),
-    allowedIntents,
-    deterministicCandidates: ranked.map((match) => ({
-      intent: match.def.intent,
-      score: match.score,
-    })),
-  });
+  const assistResponse = await requestCommandRouteAssist(
+    config.LOCAL_AI_BASE_URL,
+    {
+      text: input.text,
+      role: input.role,
+      hasPatient: Boolean(input.patientId),
+      allowedIntents,
+      deterministicCandidates: ranked.map((match) => ({
+        intent: match.def.intent,
+        score: match.score,
+      })),
+    },
+    config.LOCAL_AI_API_KEY,
+  );
 
   if (assistResponse.body.status !== 'success') {
     return { result: first, assistRouteUsed: false };

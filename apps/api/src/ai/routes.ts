@@ -91,7 +91,11 @@ export async function registerAiRoutes(
       }
 
       const session = (request as AuthenticatedRequest).session;
-      const { httpStatus, body } = await requestDraftAssist(config.LOCAL_AI_BASE_URL, parsed.data);
+      const { httpStatus, body } = await requestDraftAssist(
+        config.LOCAL_AI_BASE_URL,
+        parsed.data,
+        config.LOCAL_AI_API_KEY,
+      );
 
       const baseRun: Pick<AiRunRecord, 'actorId' | 'blueprintId' | 'inputPayload'> & {
         patientId?: string;
@@ -202,6 +206,7 @@ export async function registerAiRoutes(
       const { httpStatus, body } = await requestTextboxAssist(
         config.LOCAL_AI_BASE_URL,
         parsed.data,
+        config.LOCAL_AI_API_KEY,
       );
 
       const baseRun: Pick<AiRunRecord, 'actorId' | 'blueprintId' | 'inputPayload'> & {
