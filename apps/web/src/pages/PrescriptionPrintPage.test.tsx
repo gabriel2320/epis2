@@ -10,6 +10,11 @@ import { PrescriptionPrintPage } from './PrescriptionPrintPage.js';
 
 vi.mock('@tanstack/react-router', () => ({
   useSearch: () => ({ patientId: 'a0000001-0000-4000-8000-000000000001' }),
+  useNavigate: () => vi.fn(),
+}));
+
+vi.mock('../routes/clinicalNavigate.js', () => ({
+  useClinicalNavigate: () => vi.fn(),
 }));
 
 vi.mock('../auth/AuthContext.js', () => ({

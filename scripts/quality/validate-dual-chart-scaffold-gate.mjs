@@ -58,10 +58,22 @@ if (!copy.includes('chartModes:')) {
   errors.push('copy/es.ts sin sección chartModes');
 }
 
-const sections = readFileSync(
+const webSections = readFileSync(
   join(root, 'apps/web/src/components/chart/paper/paperChartSections.ts'),
   'utf8',
 );
+const schemaSections = readFileSync(
+  join(root, 'packages/clinical-forms/src/paper-chart/schema.ts'),
+  'utf8',
+);
+if (
+  !webSections.includes('@epis2/clinical-forms') ||
+  !webSections.includes('PAPER_CHART_SECTION_IDS')
+) {
+  errors.push(
+    'paperChartSections.ts debe re-exportar PAPER_CHART_SECTION_IDS desde @epis2/clinical-forms',
+  );
+}
 const sectionIds = [
   'cover',
   'anamnesis',
@@ -79,8 +91,8 @@ const sectionIds = [
   'socialWork',
 ];
 for (const id of sectionIds) {
-  if (!sections.includes(id)) {
-    errors.push(`paperChartSections.ts sin sección ${id}`);
+  if (!schemaSections.includes(`'${id}'`)) {
+    errors.push(`clinical-forms paper-chart/schema.ts sin sección ${id}`);
   }
 }
 
