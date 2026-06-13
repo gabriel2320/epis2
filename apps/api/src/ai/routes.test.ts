@@ -53,6 +53,39 @@ describe('AI routes', () => {
     await app.close();
   });
 
+  it('assist devuelve unavailable cuando local-ai no responde', async () => {
+    vi.spyOn(aiClient, 'requestDraftAssist').mockResolvedValue({
+      httpStatus: 503,
+      body: {
+        status: 'unavailable',
+        message: 'IA local no disponible — el flujo manual sigue operativo.',
+      },
+    });
+
+    const app = await buildApp(config);
+    const login = await app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      payload: { username: 'medico.demo', demoAuthKey: 'DEMO-CLAVE-MEDICO' },
+    });
+    const cookie = String(login.headers['set-cookie']).split(';')[0];
+
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/ai/assist/draft',
+      headers: { cookie },
+      payload: {
+        blueprintId: 'evolution_note',
+        patientId: 'a0000002-0000-4000-8000-7e3ca20d97a4',
+      },
+    });
+    expect(res.statusCode).toBe(503);
+    const body = res.json() as { status: string; requiresHumanReview: boolean };
+    expect(body.status).toBe('unavailable');
+    expect(body.requiresHumanReview).toBe(true);
+    await app.close();
+  });
+
   it('assist rechaza respuesta inválida y no devuelve success', async () => {
     vi.spyOn(aiClient, 'requestDraftAssist').mockResolvedValue({
       httpStatus: 422,

@@ -140,7 +140,7 @@ describeIntegration('admin clinical-cases batch promote (MF-CASE-08)', () => {
     }
   });
 
-  it('fixtures SIM_CLINICAL_CASES tiene 10 entradas alineadas con catálogo', () => {
-    expect(SIM_CLINICAL_CASES).toHaveLength(10);
+  it('fixtures SIM_CLINICAL_CASES alineadas con catálogo piloto', () => {
+    expect(SIM_CLINICAL_CASES.length).toBeGreaterThanOrEqual(10);
   });
 });

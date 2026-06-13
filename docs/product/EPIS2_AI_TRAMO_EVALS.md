@@ -50,4 +50,19 @@ npm run ai:evals:tramo-k   # tramo activo
 npm run ai:evals:closure   # EPIS2_AI_EVALS_LIVE=all
 ```
 
+---
+
+## MF-CASE-10 — Evals assist con casos SIM
+
+Matriz piloto `SIM_ASSIST_EVAL_MATRIX` en `@epis2/test-fixtures` (tier `L0_synthetic`, sin PHI).
+
+| Comando | Uso |
+|---------|-----|
+| `npm run quality:case-intel-assist-gate` | Matriz + golden v6 (CI, sin Ollama) |
+| `npm run ai:evals:sim` | Live assist por caso SIM (requiere `dev:ai`) |
+
+Golden journey API: `golden-v6-sim-assist` — paciente `EPIS2-SIM`, comando evolución y frontera `/api/ai/assist/draft` con `requiresHumanReview: true`.
+
+Salida live: `reports/ai-evals-sim-latest.json`
+
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*

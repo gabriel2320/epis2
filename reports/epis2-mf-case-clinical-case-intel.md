@@ -129,7 +129,21 @@ npm run quality:case-intel-promote-gate
 
 - ~~Integrar `quality:case-intel-promote-gate` en CI cuando Postgres esté disponible.~~ ✓ MF-CASE-09
 - ~~Ampliar catálogo (>10) con más condiciones Synthea o casos docentes revisados.~~ ✓ MF-CASE-09 (12 casos)
-- MF-CASE-10: evals assist con casos SIM en journey golden; documentar en `EPIS2_AI_TRAMO_EVALS`.
+- MF-CASE-10: evals assist con casos SIM en journey golden; documentar en `EPIS2_AI_TRAMO_EVALS`. ✓
+
+## MF-CASE-10 — Evals assist SIM (2026-06-13)
+
+| Entrega | Detalle |
+|---------|---------|
+| Matriz | `packages/test-fixtures/src/simAssistEvals.ts` — 6 entradas piloto |
+| Golden v6 | `golden-v6-sim-assist` en `golden-clinical-journey.api.spec.ts` |
+| Live evals | `npm run ai:evals:sim` → `reports/ai-evals-sim-latest.json` |
+| Gate CI | `quality:case-intel-assist-gate` |
+
+```bash
+npm run quality:case-intel-assist-gate
+npm run ai:evals:sim   # con dev:ai
+```
 
 ## MF-CASE-09 — CI + catálogo 12 (2026-06-13)
 

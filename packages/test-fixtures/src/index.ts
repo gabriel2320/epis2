@@ -29,6 +29,14 @@ export {
 } from './simCases.js';
 export { stableSimCaseUuids } from './simCaseIds.js';
 export {
+  SIM_ASSIST_EVAL_MATRIX,
+  assertSimAssistEvalMatrix,
+  resolveSimAssistEvalEntry,
+  simAssistEvalPatientId,
+  type SimAssistBlueprintId,
+  type SimAssistEvalEntry,
+} from './simAssistEvals.js';
+export {
   DEMO_CHART_PRIORITY_SECTIONS,
   DEMO_CHART_SECTIONS_BY_CODE,
   assertDemoChartSectionsInvariants,

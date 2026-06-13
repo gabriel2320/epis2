@@ -3,7 +3,7 @@
  * Requiere Postgres: DATABASE_URL + npm run db:migrate
  */
 import { and, desc, eq } from 'drizzle-orm';
-import { DEMO_CLINICAL_CASES } from '@epis2/test-fixtures';
+import { DEMO_CLINICAL_CASES, getSimCaseByCode } from '@epis2/test-fixtures';
 import { describeIntegration } from '@epis2/test-fixtures/integration';
 import { expect, it } from 'vitest';
 import { buildApp } from '../apps/api/src/app.js';
@@ -534,6 +534,65 @@ describeIntegration('Golden Clinical Journey — API', () => {
         (r) => r.blueprintId === 'rag_query',
       ),
     ).toBe(true);
+
+    await app.close();
+  });
+
+  it('golden-v6-sim-assist: paciente SIM, comando y frontera assist (sin Ollama)', async () => {
+    const app = await buildApp(config);
+    const cookie = await loginCookie(app);
+    const sim = getSimCaseByCode('SIM-HIPERTENSI-N-ac1e');
+    expect(sim?.patientId).toBeTruthy();
+
+    const patientRes = await app.inject({
+      method: 'GET',
+      url: `/api/patients/${sim!.patientId}`,
+      headers: { cookie },
+    });
+    expect(patientRes.statusCode).toBe(200);
+    const patientJson = patientRes.json() as {
+      patient: {
+        id: string;
+        isSynthetic?: boolean;
+        demoLabel?: string;
+        demoCaseCode?: string;
+      };
+    };
+    expect(patientJson.patient.isSynthetic).toBe(true);
+    expect(patientJson.patient.demoCaseCode).toBe(sim!.demoCaseCode);
+
+    const cmd = await app.inject({
+      method: 'POST',
+      url: '/api/commands/resolve',
+      headers: { cookie },
+      payload: { text: 'evolucionar nota de hoy', patientId: sim!.patientId },
+    });
+    expect(cmd.statusCode).toBe(200);
+    expect((cmd.json() as { routePath: string }).routePath).toBe('/espacio/evolucion');
+
+    const assist = await app.inject({
+      method: 'POST',
+      url: '/api/ai/assist/draft',
+      headers: { cookie },
+      payload: {
+        blueprintId: 'evolution_note',
+        patientId: sim!.patientId,
+        context: { eval: 'golden-v6', tier: 'L0_synthetic', demoCaseCode: sim!.demoCaseCode },
+      },
+    });
+    expect([200, 422, 503]).toContain(assist.statusCode);
+    const assistJson = assist.json() as {
+      status: string;
+      requiresHumanReview?: boolean;
+      suggestedFields?: Record<string, string>;
+    };
+    expect(['success', 'rejected', 'unavailable']).toContain(assistJson.status);
+    if (assistJson.status === 'success') {
+      expect(assistJson.requiresHumanReview).toBe(true);
+      expect(Object.keys(assistJson.suggestedFields ?? {}).length).toBeGreaterThan(0);
+    } else {
+      expect(assistJson.requiresHumanReview).toBe(true);
+    }
 
     await app.close();
   });

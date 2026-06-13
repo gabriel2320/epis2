@@ -1,4 +1,5 @@
 import type { AiAssistDraftRequest, AiTextboxAssistRequest } from '@epis2/contracts';
+import { buildLocalAiRequestHeaders } from './localAiHeaders.js';
 
 export type LocalAiAssistResult =
   | {
@@ -69,16 +70,27 @@ export async function fetchLocalAiCapabilities(
 export async function requestDraftAssist(
   baseUrl: string,
   body: AiAssistDraftRequest,
+  apiKey?: string,
 ): Promise<{ httpStatus: number; body: LocalAiAssistResult }> {
-  const res = await fetch(`${baseUrl.replace(/\/$/, '')}/assist/draft-suggestion`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    signal: AbortSignal.timeout(60_000),
-    body: JSON.stringify(body),
-  });
+  try {
+    const res = await fetch(`${baseUrl.replace(/\/$/, '')}/assist/draft-suggestion`, {
+      method: 'POST',
+      headers: buildLocalAiRequestHeaders(apiKey),
+      signal: AbortSignal.timeout(60_000),
+      body: JSON.stringify(body),
+    });
 
-  const payload = (await res.json()) as LocalAiAssistResult;
-  return { httpStatus: res.status, body: payload };
+    const payload = (await res.json()) as LocalAiAssistResult;
+    return { httpStatus: res.status, body: payload };
+  } catch {
+    return {
+      httpStatus: 503,
+      body: {
+        status: 'unavailable',
+        message: 'IA local no disponible — el flujo manual sigue operativo.',
+      },
+    };
+  }
 }
 
 export type LocalAiTextboxAssistResult =
@@ -98,10 +110,11 @@ export type LocalAiTextboxAssistResult =
 export async function requestTextboxAssist(
   baseUrl: string,
   body: AiTextboxAssistRequest,
+  apiKey?: string,
 ): Promise<{ httpStatus: number; body: LocalAiTextboxAssistResult }> {
   const res = await fetch(`${baseUrl.replace(/\/$/, '')}/assist/textbox`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: buildLocalAiRequestHeaders(apiKey),
     signal: AbortSignal.timeout(60_000),
     body: JSON.stringify(body),
   });

@@ -36,6 +36,7 @@ jobs:
       - run: npm run db:migrate
       - run: npm run quality:case-intel-catalog-gate
       - run: npm run quality:case-intel-promote-gate
+      - run: npm run quality:case-intel-assist-gate
       - run: npm run check
       - run: npm run format:check
       - run: npm run quality:openapi-gate

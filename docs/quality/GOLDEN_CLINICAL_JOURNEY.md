@@ -69,6 +69,7 @@ Login
 |------|---------|-----------|
 | Contratos / comando / home | `golden-clinical-journey.spec.ts` | Siempre (CI) |
 | API clínica completa | `golden-clinical-journey.api.spec.ts` | `DATABASE_URL` + migraciones |
+| SIM + assist (MF-CASE-10) | `golden-v6-sim-assist` en API spec | `042_sim_clinical_cases_seed.sql` |
 
 Ejecutar: `npm run quality:golden-journey`
 
