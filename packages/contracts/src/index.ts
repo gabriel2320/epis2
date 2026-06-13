@@ -66,6 +66,14 @@ export {
   type LocalAiTextboxAssistOutput,
 } from './ai.js';
 export {
+  EPIS2_DRAFT_ASSIST_TRACE_KEY,
+  draftAssistTraceSchema,
+  mergeAssistTraceIntoDraftBody,
+  readAssistTraceFromDraftBody,
+  stripAssistTraceFromDraftBody,
+  type DraftAssistTrace,
+} from './approvalTrace.js';
+export {
   clinicalAlertSchema,
   patientClinicalAlertsResponseSchema,
   type ClinicalAlert,

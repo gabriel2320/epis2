@@ -1,26 +1,36 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-11 · **HEAD:** ver git log
+**Actualizado:** 2026-06-13 · **HEAD:** ver git log
 
-Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan activo:** [`EPIS2_TRES_FRENTES_DEV_PLAN.md`](./EPIS2_TRES_FRENTES_DEV_PLAN.md) · `npm run quality:tres-frentes-next`
+Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan activo:** [`PROG-STRENGTHEN-2026`](../quality/strengthen-ledger.json) · `npm run quality:strengthen-next`
 
-> **Prioridad única (2026-06-11):** tres frentes en paralelo — **papel · ficha electrónica · barra comando+IA**. Todo lo demás pausado hasta signoff experiencia core.
+> **Signoff experiencia core (2026-06-13):** tres frentes A/B/C cerrados (36/36). **PROG-STRENGTHEN-2026** reanudado.
+
+---
+
+## En curso — PROG-STRENGTHEN-2026
+
+| Subprograma | MF activa | Gate |
+|-------------|-----------|------|
+| **PROG-CORE-HARDEN** | **MF-SH-02** evals intent top-10 | `ai:evals:live` |
+
+`npm run quality:strengthen-next` · ledger [`strengthen-ledger.json`](../quality/strengthen-ledger.json)
+
+**Regla sesión:** un MF-SH/IM/CU/IC · declarar alcance · cerrar con gate.
 
 ---
 
-## En curso — PROG-EXPERIENCIA-CORE-2026
+## Hecho reciente
 
-| Frente | Programa | MF activa | Comando |
-|--------|----------|-----------|---------|
-| **A · Papel** | PROG-FICHA-PAPEL | **MF-PA-01** planner mensual | `quality:paper-mode-next` |
-| **B · Electrónica** | PROG-FICHA-ELECTRONICA + **PROG-FICHA-NORM** | **MF-TE-01** C-4 · **MF-NORM-00** benchmark | `quality:dual-chart-gate` |
-| **C · Comando+IA** | PROG-BARRA-COMANDO | **MF-CM-01** barra NL unificada | `test:e2e:ux-g02` |
-
-**Regla sesión:** elegir **un frente** · un MF · declarar alcance · cerrar con gate.
-
-**Pausado hasta signoff global:** PROG-STRENGTHEN · CHILE backlog · multimedia · auto-dev.
+| Entrega | Evidencia |
+|---------|-----------|
+| SIGNOFF-EXPERIENCIA-CORE | `quality:experiencia-core-signoff-gate` · tres frentes 36/36 |
+| P1 ai:evals:sim | 13/13 · `reports/ai-evals-sim-2026-06-13.json` |
+| **MF-SH-01** draft trace | `043_approvals_ai_run.sql` · `quality:draft-trace-gate` · [`epis2-mf-sh-01-draft-trace.md`](../../reports/epis2-mf-sh-01-draft-trace.md) |
 
 ---
+
+## Histórico — PROG-EXPERIENCIA-CORE-2026 (cerrado)
 
 ## Hecho
 

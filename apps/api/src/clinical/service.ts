@@ -7,6 +7,11 @@ import {
   parseRutParts,
 } from '@epis2/clinical-domain';
 import {
+  mergeAssistTraceIntoDraftBody,
+  readAssistTraceFromDraftBody,
+  stripAssistTraceFromDraftBody,
+} from '@epis2/contracts';
+import {
   DEMO_IDENTIFIER_SYSTEM,
   SIM_IDENTIFIER_SYSTEM,
   SYNTHETIC_LABEL,
@@ -318,8 +323,13 @@ export async function createDraft(
     draftType: string;
     title: string;
     body: Record<string, unknown>;
+    assistAiRunId?: string;
   },
 ) {
+  const body =
+    input.assistAiRunId !== undefined
+      ? mergeAssistTraceIntoDraftBody(input.body, { aiRunId: input.assistAiRunId })
+      : input.body;
   const now = new Date();
   const [draft] = await db
     .insert(clinicalDrafts)
@@ -329,7 +339,7 @@ export async function createDraft(
       draftType: input.draftType,
       status: 'draft',
       title: input.title,
-      body: input.body,
+      body,
       createdBy: actor.id,
       updatedBy: actor.id,
       createdAt: now,
@@ -363,7 +373,12 @@ export async function updateDraft(
   db: Database,
   actor: Actor,
   draftId: string,
-  input: { title?: string; body?: Record<string, unknown>; status?: string },
+  input: {
+    title?: string;
+    body?: Record<string, unknown>;
+    status?: string;
+    assistAiRunId?: string;
+  },
 ) {
   const existing = await getDraftById(db, draftId);
   if (!existing) return null;
@@ -372,7 +387,10 @@ export async function updateDraft(
   }
 
   const nextTitle = input.title ?? existing.title;
-  const nextBody = input.body ?? (existing.body as Record<string, unknown>);
+  let nextBody = input.body ?? (existing.body as Record<string, unknown>);
+  if (input.assistAiRunId !== undefined) {
+    nextBody = mergeAssistTraceIntoDraftBody(nextBody, { aiRunId: input.assistAiRunId });
+  }
   const nextStatus = input.status ?? existing.status;
   if (input.status !== undefined && input.status !== existing.status) {
     assertPatchDraftStatus(existing.status, input.status);
@@ -435,6 +453,9 @@ export async function approveDraft(
   });
 
   const now = new Date();
+  const rawBody = draft.body as Record<string, unknown>;
+  const assistTrace = readAssistTraceFromDraftBody(rawBody);
+  const clinicalBody = stripAssistTraceFromDraftBody(rawBody);
   // Atomicidad SoT: nota + versión + approval + side-effects + auditoría en una sola
   // transacción siempre (con RLS enforce, Drizzle anida como savepoint).
   return db.transaction(async (rawTx) => {
@@ -446,7 +467,7 @@ export async function approveDraft(
         encounterId: draft.encounterId,
         noteType: draft.draftType,
         title: draft.title,
-        body: draft.body,
+        body: clinicalBody,
         createdBy: actor.id,
         updatedBy: actor.id,
         createdAt: now,
@@ -468,6 +489,7 @@ export async function approveDraft(
       draftId: draft.id,
       noteId: note.id,
       approvedBy: actor.id,
+      ...(assistTrace?.aiRunId !== undefined ? { aiRunId: assistTrace.aiRunId } : {}),
     });
 
     const [approvedDraft] = await tx
@@ -497,6 +519,10 @@ export async function approveDraft(
       entityType: 'clinical_draft',
       entityId: draftId,
       message: `Nota ${note.id}`,
+      payload: {
+        noteId: note.id,
+        ...(assistTrace?.aiRunId !== undefined ? { aiRunId: assistTrace.aiRunId } : {}),
+      },
     });
 
     return { draft: approvedDraft, note };

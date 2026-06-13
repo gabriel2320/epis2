@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { EPIS2_DRAFT_ASSIST_TRACE_KEY, draftAssistTraceSchema } from '@epis2/contracts';
 import {
   EPIS2_DRAFT_TEXTBOX_META_KEY,
   EPIS2_DRAFT_TEXT_ORIGINS_KEY,
@@ -39,6 +40,7 @@ const draftFieldTextBoxMetaSchema = z.record(
 const ALLOWED_EPIS2_META_KEYS = new Set([
   EPIS2_DRAFT_TEXT_ORIGINS_KEY,
   EPIS2_DRAFT_TEXTBOX_META_KEY,
+  EPIS2_DRAFT_ASSIST_TRACE_KEY,
 ]);
 
 function originMatches(
@@ -74,6 +76,7 @@ export function validateDraftBodyEpis2Meta(
 
   const rawOrigins = body[EPIS2_DRAFT_TEXT_ORIGINS_KEY];
   const rawMeta = body[EPIS2_DRAFT_TEXTBOX_META_KEY];
+  const rawAssistTrace = body[EPIS2_DRAFT_ASSIST_TRACE_KEY];
 
   let origins: DraftFieldTextOrigins | undefined;
   if (rawOrigins !== undefined) {
@@ -91,6 +94,13 @@ export function validateDraftBodyEpis2Meta(
       return { success: false, error: 'Meta _epis2TextBoxMeta inválida' };
     }
     meta = parsed.data as DraftFieldTextBoxMeta;
+  }
+
+  if (rawAssistTrace !== undefined) {
+    const parsed = draftAssistTraceSchema.safeParse(rawAssistTrace);
+    if (!parsed.success) {
+      return { success: false, error: 'Meta _epis2AssistTrace inválida' };
+    }
   }
 
   if (origins && meta) {

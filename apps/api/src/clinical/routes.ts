@@ -79,12 +79,14 @@ const createDraftSchema = z.object({
   ]),
   title: z.string().min(1),
   body: z.record(z.unknown()).default({}),
+  assistAiRunId: z.string().uuid().optional(),
 });
 
 const updateDraftSchema = z.object({
   title: z.string().min(1).optional(),
   body: z.record(z.unknown()).optional(),
   status: z.enum(['draft', 'editing', 'ready_for_review', 'rejected', 'cancelled']).optional(),
+  assistAiRunId: z.string().uuid().optional(),
 });
 
 const approveDraftSchema = z.object({
@@ -478,7 +480,7 @@ export async function registerClinicalRoutes(
     if (!roleHasPermission(session.role, 'draft.write')) {
       return sendApiError(reply, 403, 'Sin permiso draft.write');
     }
-    const { patientId, draftType, title, body, encounterId } = parsed.data;
+    const { patientId, draftType, title, body, encounterId, assistAiRunId } = parsed.data;
     const metaCheck = validateDraftBodyEpis2Meta(body);
     if (!metaCheck.success) {
       return sendApiError(reply, 400, metaCheck.error);
@@ -490,6 +492,7 @@ export async function registerClinicalRoutes(
       body: metaCheck.body,
     };
     if (encounterId !== undefined) draftInput.encounterId = encounterId;
+    if (assistAiRunId !== undefined) draftInput.assistAiRunId = assistAiRunId;
     const draft = await runWithRlsContext(db, config, session, (tx) =>
       createDraft(tx, { id: session.sub, username: session.username }, draftInput),
     );
@@ -570,6 +573,7 @@ export async function registerClinicalRoutes(
         patch.body = metaCheck.body;
       }
       if (parsed.data.status !== undefined) patch.status = parsed.data.status;
+      if (parsed.data.assistAiRunId !== undefined) patch.assistAiRunId = parsed.data.assistAiRunId;
       const draft = await runWithRlsContext(db, config, session, (tx) =>
         updateDraft(tx, { id: session.sub, username: session.username }, draftId, patch),
       );

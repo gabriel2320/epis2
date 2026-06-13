@@ -209,6 +209,7 @@
     "quality:dual-chart-next": "node scripts/quality/dual-chart-next.mjs",
     "quality:paper-mode-next": "node scripts/quality/paper-mode-next.mjs",
     "quality:strengthen-next": "node scripts/quality/strengthen-next.mjs",
+    "quality:draft-trace-gate": "node scripts/quality/validate-draft-trace-gate.mjs",
     "quality:tres-frentes-next": "node scripts/quality/tres-frentes-next.mjs",
     "quality:ficha-norm-benchmark-gate": "node scripts/quality/validate-ficha-norm-benchmark-gate.mjs",
     "quality:ficha-norm-density-gate": "node scripts/quality/validate-ficha-norm-density-gate.mjs",

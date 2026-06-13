@@ -219,6 +219,7 @@ export const approvals = pgTable('approvals', {
   approvedBy: text('approved_by')
     .notNull()
     .references(() => appUsers.id),
+  aiRunId: uuid('ai_run_id').references(() => aiRuns.id, { onDelete: 'set null' }),
 });
 
 export const auditEvents = pgTable('audit_events', {
