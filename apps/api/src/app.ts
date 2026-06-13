@@ -18,6 +18,7 @@ import { registerAdminRoutes } from './admin/routes.js';
 import type { AppConfig } from './config.js';
 import { getDatabase, pingDatabase } from './db/client.js';
 import { apiErrorHandler, apiNotFoundHandler } from './errors.js';
+import { registerSecurityHeaders } from './security/headers.js';
 
 const VERSION = '0.1.0';
 
@@ -44,6 +45,8 @@ export async function buildApp(config: AppConfig) {
     genReqId: () => randomUUID(),
   });
   const db = getDatabase(config.DATABASE_URL);
+
+  registerSecurityHeaders(app);
 
   app.addHook('onSend', async (request, reply) => {
     reply.header('x-correlation-id', request.id);
