@@ -135,7 +135,7 @@ npm run quality:case-intel-promote-gate
 | Repo | Commit | Estado |
 |------|--------|--------|
 | EPIS2 | `bf1c67c` | MF-CASE-01…08 + reporte |
-| epis2-evolab | (commit SIM) | 10 escenarios + demo-fixtures |
+| epis2-evolab | `d87df9d` | 10 escenarios + demo-fixtures |
 
 **Gates finales:** `quality:case-intel-catalog-gate` OK · `quality:case-intel-promote-gate` OK · `verify-sim-seed` 10 EPIS2-SIM.
 
