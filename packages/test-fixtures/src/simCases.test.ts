@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { assertSimCasesInvariants, getSimCaseByCode, SIM_CLINICAL_CASES } from './simCases.js';
 import { stableSimCaseUuids } from './simCaseIds.js';
 
-describe('SIM_CLINICAL_CASES (MF-CASE-04/06)', () => {
+describe('SIM_CLINICAL_CASES (MF-CASE-04/06/09)', () => {
   it('catálogo piloto con invariantes y UUIDs estables', () => {
-    expect(SIM_CLINICAL_CASES).toHaveLength(10);
+    expect(SIM_CLINICAL_CASES.length).toBeGreaterThanOrEqual(10);
     expect(assertSimCasesInvariants()).toEqual([]);
   });
 

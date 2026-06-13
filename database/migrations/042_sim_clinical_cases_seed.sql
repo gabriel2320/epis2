@@ -1,4 +1,4 @@
--- MF-CASE-04: casos SIM desde clinical-case-intel (sin PHI real)
+-- MF-CASE-04/06: casos SIM desde clinical-case-intel (sin PHI real)
 -- Regenerar: npm run case-intel:export-fixtures -- --apply
 
 INSERT INTO patients (id, is_synthetic, display_name, birth_date, sex, created_by)
@@ -12,7 +12,9 @@ VALUES
   ('a0000002-0000-4000-8000-a6195830689a', TRUE, 'Paciente Sim — Valentina M.', '1970-01-30', 'F', 'usr-physician-01'),
   ('a0000002-0000-4000-8000-f093668ff9e7', TRUE, 'Paciente Sim — Andrés P.', '1952-04-11', 'M', 'usr-physician-01'),
   ('a0000002-0000-4000-8000-c20352778c56', TRUE, 'Paciente Sim — Daniela V.', '1943-08-07', 'F', 'usr-physician-01'),
-  ('a0000002-0000-4000-8000-ee68a3bec8e4', TRUE, 'Paciente Sim — Matías R.', '1998-07-14', 'M', 'usr-physician-01')
+  ('a0000002-0000-4000-8000-ee68a3bec8e4', TRUE, 'Paciente Sim — Matías R.', '1998-07-14', 'M', 'usr-physician-01'),
+  ('a0000002-0000-4000-8000-f4fce778c742', TRUE, 'Paciente Sim — Valentina M.', '1985-03-22', 'F', 'usr-physician-01'),
+  ('a0000002-0000-4000-8000-bbc56d13c875', TRUE, 'Paciente Sim — Andrés P.', '1968-10-05', 'M', 'usr-physician-01')
 ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO patient_identifiers (patient_id, system, value, created_by)
@@ -26,7 +28,9 @@ VALUES
   ('a0000002-0000-4000-8000-a6195830689a', 'EPIS2-SIM', 'SIM-DISLIPIDEMIA-cd13', 'usr-physician-01'),
   ('a0000002-0000-4000-8000-f093668ff9e7', 'EPIS2-SIM', 'SIM-EPOC-MODERAD-2b2f', 'usr-physician-01'),
   ('a0000002-0000-4000-8000-c20352778c56', 'EPIS2-SIM', 'SIM-INSUFICIENCI-cd9f', 'usr-physician-01'),
-  ('a0000002-0000-4000-8000-ee68a3bec8e4', 'EPIS2-SIM', 'SIM-ASTHMA-c6be', 'usr-physician-01')
+  ('a0000002-0000-4000-8000-ee68a3bec8e4', 'EPIS2-SIM', 'SIM-ASTHMA-c6be', 'usr-physician-01'),
+  ('a0000002-0000-4000-8000-f4fce778c742', 'EPIS2-SIM', 'SIM-TRASTORNO-DE-9437', 'usr-physician-01'),
+  ('a0000002-0000-4000-8000-bbc56d13c875', 'EPIS2-SIM', 'SIM-ENFERMEDAD-R-40f8', 'usr-physician-01')
 ON CONFLICT (system, value) DO NOTHING;
 
 INSERT INTO encounters (id, patient_id, status, created_by)
@@ -40,7 +44,9 @@ VALUES
   ('b0000002-0000-4000-8000-be93863498d2', 'a0000002-0000-4000-8000-a6195830689a', 'open', 'usr-physician-01'),
   ('b0000002-0000-4000-8000-d577ab3340e5', 'a0000002-0000-4000-8000-f093668ff9e7', 'open', 'usr-physician-01'),
   ('b0000002-0000-4000-8000-9b799e9301b6', 'a0000002-0000-4000-8000-c20352778c56', 'open', 'usr-physician-01'),
-  ('b0000002-0000-4000-8000-24a2012ffa8d', 'a0000002-0000-4000-8000-ee68a3bec8e4', 'open', 'usr-physician-01')
+  ('b0000002-0000-4000-8000-24a2012ffa8d', 'a0000002-0000-4000-8000-ee68a3bec8e4', 'open', 'usr-physician-01'),
+  ('b0000002-0000-4000-8000-e07343ee457b', 'a0000002-0000-4000-8000-f4fce778c742', 'open', 'usr-physician-01'),
+  ('b0000002-0000-4000-8000-0e1165b65328', 'a0000002-0000-4000-8000-bbc56d13c875', 'open', 'usr-physician-01')
 ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO problems (patient_id, encounter_id, description, created_by)
@@ -54,7 +60,9 @@ VALUES
   ('a0000002-0000-4000-8000-a6195830689a', 'b0000002-0000-4000-8000-be93863498d2', 'Dislipidemia mixta (sintético)', 'usr-physician-01'),
   ('a0000002-0000-4000-8000-f093668ff9e7', 'b0000002-0000-4000-8000-d577ab3340e5', 'EPOC moderada (sintético)', 'usr-physician-01'),
   ('a0000002-0000-4000-8000-c20352778c56', 'b0000002-0000-4000-8000-9b799e9301b6', 'Insuficiencia cardíaca congestiva (sintético)', 'usr-physician-01'),
-  ('a0000002-0000-4000-8000-ee68a3bec8e4', 'b0000002-0000-4000-8000-24a2012ffa8d', 'Asma bronquial persistente leve (sintético)', 'usr-physician-01')
+  ('a0000002-0000-4000-8000-ee68a3bec8e4', 'b0000002-0000-4000-8000-24a2012ffa8d', 'Asma bronquial persistente leve (sintético)', 'usr-physician-01'),
+  ('a0000002-0000-4000-8000-f4fce778c742', 'b0000002-0000-4000-8000-e07343ee457b', 'Trastorno depresivo mayor (sintético)', 'usr-physician-01'),
+  ('a0000002-0000-4000-8000-bbc56d13c875', 'b0000002-0000-4000-8000-0e1165b65328', 'Enfermedad renal crónica estadio 3 (sintético)', 'usr-physician-01')
 ;
 
 INSERT INTO observations (patient_id, encounter_id, label, value_text, created_by)
@@ -69,7 +77,9 @@ VALUES
   ('a0000002-0000-4000-8000-f093668ff9e7', 'b0000002-0000-4000-8000-d577ab3340e5', 'FEV1', '58 % predicted (sintético)', 'usr-physician-01'),
   ('a0000002-0000-4000-8000-c20352778c56', 'b0000002-0000-4000-8000-9b799e9301b6', 'BNP', '420 pg/mL (sintético)', 'usr-physician-01'),
   ('a0000002-0000-4000-8000-ee68a3bec8e4', 'b0000002-0000-4000-8000-24a2012ffa8d', 'Peak expiratory flow', '320 L/min (sintético)', 'usr-physician-01'),
-  ('a0000002-0000-4000-8000-ee68a3bec8e4', 'b0000002-0000-4000-8000-24a2012ffa8d', 'SpO2', '97% en aire ambiente (sintético)', 'usr-physician-01')
+  ('a0000002-0000-4000-8000-ee68a3bec8e4', 'b0000002-0000-4000-8000-24a2012ffa8d', 'SpO2', '97% en aire ambiente (sintético)', 'usr-physician-01'),
+  ('a0000002-0000-4000-8000-f4fce778c742', 'b0000002-0000-4000-8000-e07343ee457b', 'PHQ-9 score', '14 score (sintético)', 'usr-physician-01'),
+  ('a0000002-0000-4000-8000-bbc56d13c875', 'b0000002-0000-4000-8000-0e1165b65328', 'Creatinine', '1.8 mg/dL (sintético)', 'usr-physician-01')
 ;
 
 INSERT INTO patient_medications (patient_id, name, dose_text, route, status, created_by)
@@ -83,7 +93,8 @@ VALUES
   ('a0000002-0000-4000-8000-f093668ff9e7', 'Tiotropium (demo)', '18 mcg daily', NULL, 'active', 'usr-physician-01'),
   ('a0000002-0000-4000-8000-c20352778c56', 'Furosemide (demo)', '40 mg daily', NULL, 'active', 'usr-physician-01'),
   ('a0000002-0000-4000-8000-ee68a3bec8e4', 'Salbutamol (demo)', '2 inhalaciones PRN', NULL, 'active', 'usr-physician-01'),
-  ('a0000002-0000-4000-8000-ee68a3bec8e4', 'Budesonida (demo)', '200 mcg BID', NULL, 'active', 'usr-physician-01')
+  ('a0000002-0000-4000-8000-ee68a3bec8e4', 'Budesonida (demo)', '200 mcg BID', NULL, 'active', 'usr-physician-01'),
+  ('a0000002-0000-4000-8000-bbc56d13c875', 'Lisinopril (demo)', '10 mg daily', NULL, 'active', 'usr-physician-01')
 ;
 
 INSERT INTO patient_allergies (patient_id, substance, severity, created_by)

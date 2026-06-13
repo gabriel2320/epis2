@@ -34,6 +34,8 @@ jobs:
       - run: npm ci
       - run: npm run build -w @epis2/contracts
       - run: npm run db:migrate
+      - run: npm run quality:case-intel-catalog-gate
+      - run: npm run quality:case-intel-promote-gate
       - run: npm run check
       - run: npm run format:check
       - run: npm run quality:openapi-gate

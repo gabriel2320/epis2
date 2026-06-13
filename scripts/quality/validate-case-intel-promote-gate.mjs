@@ -1,14 +1,22 @@
 #!/usr/bin/env node
 /**
- * MF-CASE-08: verifica ≥10 pacientes EPIS2-SIM en SoT (requiere DATABASE_URL + migrate 042).
+ * MF-CASE-09: verifica pacientes EPIS2-SIM en SoT (requiere DATABASE_URL + migrate 042).
  */
 import { existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
+import { readExpectedSimCatalogSize } from './lib/case-intel-expected.mjs';
+
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const EXPECTED = 10;
+let EXPECTED;
+try {
+  EXPECTED = readExpectedSimCatalogSize();
+} catch (err) {
+  console.error('case-intel-promote-gate FAILED:\n  - ' + (err instanceof Error ? err.message : err));
+  process.exit(1);
+}
 const errors = [];
 
 function loadDatabaseUrl() {

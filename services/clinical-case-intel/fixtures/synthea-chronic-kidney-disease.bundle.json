@@ -1,0 +1,37 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "synthea-fixture-ckd-001",
+        "gender": "male",
+        "birthDate": "1968-10-05"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "code": { "text": "Chronic kidney disease stage 3" },
+        "subject": { "reference": "Patient/synthea-fixture-ckd-001" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "code": { "text": "Creatinine" },
+        "valueQuantity": { "value": 1.8, "unit": "mg/dL" },
+        "subject": { "reference": "Patient/synthea-fixture-ckd-001" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "medicationCodeableConcept": { "text": "Lisinopril" },
+        "dosage": [{ "text": "10 mg daily" }],
+        "subject": { "reference": "Patient/synthea-fixture-ckd-001" }
+      }
+    }
+  ]
+}

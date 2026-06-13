@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "description": "Catálogo piloto MF-CASE-06 (~10 casos sintéticos, sin PHI)",
+  "description": "Catálogo MF-CASE-09 (12 casos sintéticos, sin PHI)",
   "entries": [
     {
       "id": "hta",
@@ -61,6 +61,18 @@
       "source": "meded",
       "file": "meded-asthma-teaching.json",
       "label": "Asma — caso docente (MedEd sintético)"
+    },
+    {
+      "id": "depression",
+      "source": "synthea",
+      "file": "synthea-depression.bundle.json",
+      "label": "Trastorno depresivo mayor"
+    },
+    {
+      "id": "ckd",
+      "source": "synthea",
+      "file": "synthea-chronic-kidney-disease.bundle.json",
+      "label": "Enfermedad renal crónica estadio 3"
     }
   ]
 }

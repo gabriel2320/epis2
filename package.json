@@ -36,6 +36,7 @@
     "quality:dev-env-gate": "node scripts/quality/validate-dev-env-gate.mjs",
     "quality:case-intel-catalog-gate": "node scripts/quality/validate-case-intel-catalog-gate.mjs",
     "quality:case-intel-promote-gate": "node scripts/quality/validate-case-intel-promote-gate.mjs",
+    "quality:case-intel-gate": "npm run quality:case-intel-catalog-gate && npm run quality:case-intel-promote-gate",
     "quality:stack-dev-gate": "node scripts/quality/validate-stack-dev-gate.mjs",
     "quality:tramo-scaffold-canon-gate": "node scripts/quality/validate-tramo-scaffold-canon-gate.mjs",
     "quality:tramo-e2e-registry-gate": "node scripts/quality/validate-tramo-e2e-registry-gate.mjs",

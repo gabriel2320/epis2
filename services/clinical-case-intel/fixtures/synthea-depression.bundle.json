@@ -1,0 +1,29 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "synthea-fixture-depression-001",
+        "gender": "female",
+        "birthDate": "1985-03-22"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "code": { "text": "Major depressive disorder" },
+        "subject": { "reference": "Patient/synthea-fixture-depression-001" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "code": { "text": "PHQ-9 score" },
+        "valueQuantity": { "value": 14, "unit": "score" },
+        "subject": { "reference": "Patient/synthea-fixture-depression-001" }
+      }
+    }
+  ]
+}

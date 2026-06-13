@@ -2,6 +2,7 @@ import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import type { ClinicalCaseRecord } from '@epis2/contracts';
 import { SIM_CLINICAL_CASES } from '@epis2/test-fixtures';
+import { readCatalogEntryCount } from './catalogCanon.js';
 import { loadRecords } from './load.js';
 import {
   approveStagingCases,
@@ -13,7 +14,12 @@ import { buildRecordsFromCatalog } from './sources/catalog.js';
 import { readSnapshot } from './snapshot.js';
 import { filterValidRecords } from './validate.js';
 
-export const EXPECTED_SIM_CATALOG_SIZE = 10;
+export function expectedSimCatalogSize(fixturesDir: string): number {
+  return readCatalogEntryCount(fixturesDir);
+}
+
+/** @deprecated use expectedSimCatalogSize — mantiene compat tests */
+export const EXPECTED_SIM_CATALOG_SIZE = readCatalogEntryCount();
 
 export type PromoteCatalogOptions = {
   repoRoot: string;
@@ -53,10 +59,9 @@ export async function runPromoteCatalog(
   options: PromoteCatalogOptions,
 ): Promise<PromoteCatalogResult> {
   const records = await resolveCatalogRecords(options);
-  if (records.length < EXPECTED_SIM_CATALOG_SIZE) {
-    throw new Error(
-      `Catálogo incompleto para promote: ${records.length}/${EXPECTED_SIM_CATALOG_SIZE}`,
-    );
+  const expected = expectedSimCatalogSize(options.fixturesDir);
+  if (records.length < expected) {
+    throw new Error(`Catálogo incompleto para promote: ${records.length}/${expected}`);
   }
 
   const caseCodes = records.map((r) => r.caseCode);
@@ -100,10 +105,8 @@ export async function runPromoteCatalog(
     'utf8',
   );
 
-  if (simPatientsInDb < EXPECTED_SIM_CATALOG_SIZE) {
-    throw new Error(
-      `SoT incompleto tras promote: ${simPatientsInDb}/${EXPECTED_SIM_CATALOG_SIZE} EPIS2-SIM`,
-    );
+  if (simPatientsInDb < expected) {
+    throw new Error(`SoT incompleto tras promote: ${simPatientsInDb}/${expected} EPIS2-SIM`);
   }
 
   return result;

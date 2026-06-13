@@ -20,6 +20,7 @@ import { buildRecordsFromBundle } from './sources/synthea.js';
 import { runPipelineCatalog } from './pipelineCatalog.js';
 import { countSimPatientsInDb } from './promoteBatch.js';
 import { runPromoteCatalog, EXPECTED_SIM_CATALOG_SIZE } from './promoteCatalog.js';
+import { readCatalogEntryCount } from './catalogCanon.js';
 import { buildExportBundle, writeExportArtifacts } from './exportFixtures.js';
 import {
   buildEvolabExportBundle,
@@ -156,7 +157,7 @@ async function readRecordsFromSource(
 async function commandScrape(args: string[]): Promise<void> {
   const source = getArg(args, 'source') ?? 'synthea';
   const limitArg = getArg(args, 'limit');
-  const limit = limitArg ? Number(limitArg) : source === 'catalog' ? 10 : 5;
+  const limit = limitArg ? Number(limitArg) : source === 'catalog' ? readCatalogEntryCount() : 5;
   const scrapedAt = new Date().toISOString();
   const failures: string[] = [];
 
@@ -454,8 +455,9 @@ async function commandPipelineCatalog(args: string[]): Promise<void> {
     console.warn(`Advertencias (${result.failures.length}):`);
     for (const failure of result.failures) console.warn(`  - ${failure}`);
   }
-  if (result.recordCount < 10) {
-    throw new Error(`Catálogo incompleto: ${result.recordCount}/10 casos`);
+  const expected = readCatalogEntryCount();
+  if (result.recordCount < expected) {
+    throw new Error(`Catálogo incompleto: ${result.recordCount}/${expected} casos`);
   }
 }
 

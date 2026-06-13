@@ -21,6 +21,11 @@ const CONDITION_ES: Record<string, string> = {
   copd: 'EPOC moderada (sintético)',
   'heart failure': 'Insuficiencia cardíaca congestiva (sintético)',
   'community acquired pneumonia': 'Neumonía adquirida en la comunidad (sintético)',
+  depression: 'Trastorno depresivo mayor (sintético)',
+  'major depressive disorder': 'Trastorno depresivo mayor (sintético)',
+  'chronic kidney disease': 'Enfermedad renal crónica estadio 3 (sintético)',
+  'chronic kidney disease stage 3': 'Enfermedad renal crónica estadio 3 (sintético)',
+  ckd: 'Enfermedad renal crónica estadio 3 (sintético)',
 };
 
 const CAPABILITY_BY_PROBLEM: Record<string, string[]> = {
@@ -33,6 +38,11 @@ const CAPABILITY_BY_PROBLEM: Record<string, string[]> = {
   'heart failure': ['evolution_note', 'discharge_summary', 'lab_request'],
   hyperlipidemia: ['evolution_note', 'prescription', 'lab_request'],
   obesity: ['evolution_note', 'lab_request'],
+  depression: ['evolution_note', 'prescription'],
+  'major depressive disorder': ['evolution_note', 'prescription'],
+  'chronic kidney disease': ['evolution_note', 'lab_request', 'prescription'],
+  'chronic kidney disease stage 3': ['evolution_note', 'lab_request', 'prescription'],
+  ckd: ['evolution_note', 'lab_request', 'prescription'],
 };
 
 type FhirResource = {

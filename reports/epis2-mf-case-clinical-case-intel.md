@@ -127,8 +127,24 @@ npm run quality:case-intel-promote-gate
 
 ## Próximo paso sugerido
 
-- Integrar `quality:case-intel-promote-gate` en CI cuando Postgres esté disponible.
-- Ampliar catálogo (>10) con más condiciones Synthea o casos docentes revisados.
+- ~~Integrar `quality:case-intel-promote-gate` en CI cuando Postgres esté disponible.~~ ✓ MF-CASE-09
+- ~~Ampliar catálogo (>10) con más condiciones Synthea o casos docentes revisados.~~ ✓ MF-CASE-09 (12 casos)
+- MF-CASE-10: evals assist con casos SIM en journey golden; documentar en `EPIS2_AI_TRAMO_EVALS`.
+
+## MF-CASE-09 — CI + catálogo 12 (2026-06-13)
+
+| Entrega | Detalle |
+|---------|---------|
+| CI | `quality:case-intel-catalog-gate` + `quality:case-intel-promote-gate` tras `db:migrate` en `.github/workflows/ci.yml` |
+| Local CI | `quality:case-intel-gate` en `run-local-ci.mjs` |
+| Catálogo | +2 Synthea: depresión (`SIM-TRASTORNO-DE-9437`), ERC estadio 3 (`SIM-ENFERMEDAD-R-40f8`) |
+| Gates dinámicos | `catalog.json` define N esperado (`scripts/quality/lib/case-intel-expected.mjs`, `catalogCanon.ts`) |
+| Evolab | 12 escenarios `sim-*-evolution-001.yaml` |
+
+```bash
+npm run quality:case-intel-gate
+npm run case-intel:pipeline:catalog -- --apply
+```
 
 ## Cierre sesión (2026-06-13)
 

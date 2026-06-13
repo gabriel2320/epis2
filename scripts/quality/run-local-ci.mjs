@@ -17,6 +17,7 @@ const steps = [
   { name: 'quality:dev-env-gate', cmd: 'npm', args: ['run', 'quality:dev-env-gate'] },
   { name: 'quality:stack-dev-gate', cmd: 'npm', args: ['run', 'quality:stack-dev-gate'] },
   { name: 'db:migrate', cmd: 'npm', args: ['run', 'db:migrate'] },
+  { name: 'quality:case-intel-gate', cmd: 'npm', args: ['run', 'quality:case-intel-gate'] },
   { name: 'check', cmd: 'npm', args: ['run', 'check'] },
   {
     name: 'test',
