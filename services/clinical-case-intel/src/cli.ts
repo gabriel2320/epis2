@@ -37,10 +37,6 @@ const cacheDir = join(moduleDir, '..', '.cache');
 const fixturesDir = join(moduleDir, '..', 'fixtures');
 const defaultFixture = join(fixturesDir, 'synthea-hypertension.bundle.json');
 
-const SYNTHEA_SAMPLE_URL =
-  process.env.CASE_INTEL_SYNTHEA_URL ??
-  'https://raw.githubusercontent.com/synthetichealth/synthea-sample-data/master/fhir/R4/onePatient.json';
-
 async function loadDotEnv(): Promise<void> {
   try {
     const raw = await readFile(join(repoRoot, '.env'), 'utf8');
