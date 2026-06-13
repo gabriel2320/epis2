@@ -58,6 +58,8 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan activo:** [`EP
 | **PROG-AUTO-DEV-6H** H-AUTO-0…6 | Ledger DONE · ejecución **pausada** 2026-06-11 · desarrollo manual vía `dev:session` |
 | **PROG-PAPER-MODE** MF-PAPER-01…09 | Signoff visual · paginación · puente A5 · comandos IA papel |
 | **PROG-PAPER-PLANNER** MF-PAPER-PLANNER-00…04 | Agenda día/semana/mes · print · comandos IA · [`epis2-prog-paper-planner-close-2026-06-11.md`](../../reports/epis2-prog-paper-planner-close-2026-06-11.md) |
+| **MF-CASE-01…11** clinical-case-intel | 12 SIM · golden v6/v7 · `quality:case-intel-closure-gate` · [`epis2-session-close-2026-06-13-mf-case.md`](../../reports/epis2-session-close-2026-06-13-mf-case.md) |
+| **Conciliación WIP 2026-06-13** | security headers · LOCAL_AI_API_KEY · Evolab CDR/RBAC · paper commands · `657b5a1`…`32b5805` |
 
 ---
 
