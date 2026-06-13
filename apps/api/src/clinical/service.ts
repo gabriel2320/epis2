@@ -212,7 +212,12 @@ export async function getDemoClinicalAlertsForPatient(
   if (unackedCriticals.length > 0) {
     input.labs = input.labs ?? [];
     for (const row of unackedCriticals) {
-      if (!input.labs.some((lab) => lab.name === row.label)) {
+      const existing = input.labs.find((lab) => lab.name === row.label);
+      if (existing) {
+        // Resumen clínico puede listar el mismo analito sin flag — priorizar SoT DB.
+        existing.flag = 'critical';
+        if (row.valueText) existing.value = row.valueText;
+      } else {
         input.labs.push({
           name: row.label,
           value: row.valueText,

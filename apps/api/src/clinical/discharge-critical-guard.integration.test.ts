@@ -131,5 +131,39 @@ describeIntegration(
 
       await app.close();
     });
+
+    it('clinical-alerts expone CDR por PCR sin acuse (Evolab cdr_consistency)', async () => {
+      const db = getDatabase(process.env.DATABASE_URL!);
+      if (!db) throw new Error('DATABASE_URL requerida');
+
+      await db
+        .update(clinicalCriticalResults)
+        .set({ acknowledgedAt: null, acknowledgedBy: null })
+        .where(eq(clinicalCriticalResults.id, DEMO004_PCR_CRITICAL_ID));
+
+      const app = await buildApp({ ...testApiConfig, DATABASE_URL: process.env.DATABASE_URL });
+      const login = await app.inject({
+        method: 'POST',
+        url: '/api/auth/login',
+        payload: { username: 'medico.demo', demoAuthKey: 'DEMO-CLAVE-MEDICO' },
+      });
+      const cookie = String(login.headers['set-cookie']).split(';')[0];
+      const demo004 = DEMO_CLINICAL_CASES.find((c) => c.demoCaseCode === 'DEMO-004')!;
+
+      const alerts = await app.inject({
+        method: 'GET',
+        url: `/api/patients/${demo004.patientId}/clinical-alerts?blueprintId=discharge_summary`,
+        headers: { cookie },
+      });
+      expect(alerts.statusCode).toBe(200);
+      const body = alerts.json() as { alerts: { ruleId: string; source: string }[] };
+      expect(
+        body.alerts.some(
+          (a) => a.source === 'cdr' && a.ruleId.includes('critical_lab_without_ack'),
+        ),
+      ).toBe(true);
+
+      await app.close();
+    });
   },
 );

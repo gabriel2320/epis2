@@ -27,6 +27,7 @@ export async function registerInpatientRoutes(
 
   const requirePatientRead = createRequirePermission(config, 'patient.read');
   const requireDraftWrite = createRequirePermission(config, 'draft.write');
+  const requireDraftApprove = createRequirePermission(config, 'draft.approve');
 
   app.post(
     '/api/inpatient/critical-results/:criticalId/acknowledge',
@@ -106,7 +107,7 @@ export async function registerInpatientRoutes(
 
   app.post(
     '/api/inpatient/admissions/:admissionId/discharge',
-    { preHandler: requireDraftWrite },
+    { preHandler: requireDraftApprove },
     async (request, reply) => {
       const { admissionId } = request.params as { admissionId: string };
       const session = (request as AuthenticatedRequest).session;

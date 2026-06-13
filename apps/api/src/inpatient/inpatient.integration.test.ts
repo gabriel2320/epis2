@@ -108,4 +108,25 @@ describeIntegration('inpatient API (integration)', () => {
 
     await app.close();
   });
+
+  it('enfermería no puede ejecutar alta operativa (Evolab hyp-b / draft.approve)', async () => {
+    await resetInpatientDemoCensus(config.DATABASE_URL!);
+    const app = await buildApp(config);
+
+    const nurseLogin = await app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      payload: { username: 'enfermeria.demo', demoAuthKey: 'DEMO-CLAVE-ENFERMERIA' },
+    });
+    const nurseCookie = String(nurseLogin.headers['set-cookie']).split(';')[0];
+
+    const discharge = await app.inject({
+      method: 'POST',
+      url: `/api/inpatient/admissions/${DEMO004_ADMISSION}/discharge`,
+      headers: { cookie: nurseCookie },
+    });
+    expect(discharge.statusCode).toBe(403);
+
+    await app.close();
+  });
 });
