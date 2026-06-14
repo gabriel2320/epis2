@@ -125,9 +125,9 @@ describe('Golden Clinical Journey', () => {
       expect(bp?.outputKind).toBe('CLINICAL_NOTE_DRAFT');
     });
 
-    it('9. home del producto es Centro de Comando', async () => {
-      const { EPIS2_COMMAND_CENTER_HOME } = await import('../apps/web/src/routes/home.js');
-      expect(EPIS2_COMMAND_CENTER_HOME).toBe('/comando');
+    it('9. home clínica es censo/búsqueda (barra transversal)', async () => {
+      const { EPIS2_CLINICAL_HOME } = await import('../apps/web/src/routes/home.js');
+      expect(EPIS2_CLINICAL_HOME).toBe('/espacio/buscar-paciente');
       expect(JOURNEY_STEPS[8]).toBe('volver-command-center');
     });
 

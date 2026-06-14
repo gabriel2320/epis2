@@ -7,6 +7,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { formatVelocityBanner, resolveVelocityContext } from '../../scripts/dev/velocity-lib.mjs';
 import { formatStrengthenLine } from '../../scripts/dev/strengthen-context.mjs';
+import { formatFichaFirstLine } from '../../scripts/dev/ficha-first-context.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -48,6 +49,7 @@ const response = {
     'Adjuntar en Cursor: @docs/AGENT_CONTEXT_MINIMAL.md @reports/dev-agent-brief.md',
     ctx.brief.stale ? 'Brief stale → npm run dev:session' : '',
     strengthenLine,
+    ctx.fichaFirst ? formatFichaFirstLine(ctx.fichaFirst) : '',
     'Iteración: npm run dev:rapid · Cierre MF: npm run quality:clinical',
     'No iniciar MF READY salvo petición explícita del usuario.',
     `session: ${sessionId}`,

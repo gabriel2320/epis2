@@ -4,7 +4,7 @@
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:** [`epis2-plan-conciliacion-triada-2026-06-14.md`](../../reports/epis2-plan-conciliacion-triada-2026-06-14.md) · **Correcciones:** [`epis2-plan-correcciones-prioritarias-2026-06-14.md`](../../reports/epis2-plan-correcciones-prioritarias-2026-06-14.md) · **Tríada:** [`EPIS2_TRIADA_REPOS.md`](./EPIS2_TRIADA_REPOS.md)
 
-> **PROG-RAPID** MF-RAPID-01…04 ✓ · **PROG-CORE-HARDEN** MF-SH-01…06 ✓ · **Siguiente STRENGTHEN:** **MF-IM-03** RAG incremental (PROG-IA-MODERNIZE).
+> **PROG-RAPID** ✓ · **PROG-FICHA-FIRST** MF-FF-01…03 ✓ · **STRENGTHEN** MF-IM-03 READY (no auto) · HEAD `cd6ecdc`
 
 ---
 
@@ -30,6 +30,20 @@ Inventario: [`reports/conciliacion/`](../../reports/conciliacion/)
 Evidencia: [`epis2-mf-rapid-close-2026.md`](../../reports/epis2-mf-rapid-close-2026.md) · commits `7cb4fab` · `d84e1ef`
 
 **Loop diario:** `npm run dev:rapid`
+
+---
+
+## Cerrado — PROG-FICHA-FIRST-2026 (MF-FF-01…03)
+
+| MF | Entrega | Gate |
+|----|---------|------|
+| MF-FF-01 | Dual chart ON default | `quality:ficha-first-gate` |
+| MF-FF-02 | Home = censo `/espacio/buscar-paciente` | ↑ |
+| MF-FF-03 | `/comando` redirect compat | ↑ |
+
+Evidencia: [`epis2-mf-ff-01-03-ficha-first.md`](../../reports/epis2-mf-ff-01-03-ficha-first.md)
+
+**Siguiente FICHA-FIRST:** **MF-FF-06** ClinicalShell en formularios `/espacio/*`
 
 ---
 
@@ -71,6 +85,7 @@ Evidencia: [`epis2-mf-rapid-close-2026.md`](../../reports/epis2-mf-rapid-close-2
 | **MF-SH-02** intent evals | 93.3% top-10 · ai:evals:live 4/4 · [`epis2-mf-sh-02-intent-evals.md`](../../reports/epis2-mf-sh-02-intent-evals.md) |
 | **MF-IM-01** embeddings 384d | migración 046 · dual-read 128/384 · [`epis2-mf-im-01-embeddings.md`](../../reports/epis2-mf-im-01-embeddings.md) |
 | **MF-IM-02** embed Ollama | contrato embedDocument · [`epis2-mf-im-02-embed-api.md`](../../reports/epis2-mf-im-02-embed-api.md) |
+| **MF-FF-01…03** ficha-first | censo home · dual default · `/comando` redirect · [`epis2-mf-ff-01-03-ficha-first.md`](../../reports/epis2-mf-ff-01-03-ficha-first.md) |
 | **PROG-CONCILIACION tríada** | F0–F7 ✓ · [`epis2-prog-conciliacion-triada-close-2026.md`](../../reports/epis2-prog-conciliacion-triada-close-2026.md) |
 
 ---

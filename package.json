@@ -227,6 +227,7 @@
     "quality:sh-05-rls-gate": "node scripts/quality/validate-sh-05-rls-gate.mjs",
     "quality:sh-06-migration-gate": "node scripts/quality/validate-sh-06-migration-gate.mjs",
     "quality:im-02-embed-gate": "node scripts/quality/validate-im-02-embed-gate.mjs",
+    "quality:ficha-first-gate": "node scripts/quality/validate-ficha-first-gate.mjs",
     "quality:tres-frentes-next": "node scripts/quality/tres-frentes-next.mjs",
     "quality:ficha-norm-benchmark-gate": "node scripts/quality/validate-ficha-norm-benchmark-gate.mjs",
     "quality:ficha-norm-density-gate": "node scripts/quality/validate-ficha-norm-density-gate.mjs",

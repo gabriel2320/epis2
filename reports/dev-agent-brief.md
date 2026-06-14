@@ -2,13 +2,15 @@
 
 > **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-golden-guardian.md` — declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-14T17:26:58.931Z · **HEAD:** `710bd1a` · **Fase:** B
+**Generado:** 2026-06-14T17:40:52.401Z · **HEAD:** `cd6ecdc` · **Fase:** B
 
 ## Orquestador (MF-RAPID + STRENGTHEN)
 
 - **PROG-RAPID** ✓ — iteración: `npm run dev:rapid` · cierre MF: `npm run quality:clinical`
+- **PROG-FICHA-FIRST** — MF-FF-01…03 ✓ · home censo · `/comando` redirect
 - **No** iniciar la MF READY siguiente salvo petición explícita del usuario.
 - STRENGTHEN READY: **MF-IM-03** — RAG incremental (retrieval secuencial) · gate `quality:rag-retrieval-gate`
+- FICHA-FIRST READY: **MF-FF-06** — ClinicalShell en formularios /espacio/* · gate `quality:ficha-first-gate`
 - Allowlist: services/local-ai/src/rag/**, scripts/quality/validate-rag-retrieval-gate.mjs, packages/test-fixtures/**
 
 ## Estado del tablero (fuente canónica)
@@ -35,29 +37,30 @@
 
 ## Working tree
 
-- Rama: `master` · cambios: 20
+- Rama: `master` · cambios: 21
 
 ```
-M .cursor/commands/epis2-session.md
 M .cursor/hooks/session-start.mjs
-M .cursor/rules/50-fast-loop.mdc
-M .cursor/skills/epis2-session/SKILL.md
 M apps/web/src/dev/dualChartModesEnv.ts
 M apps/web/src/routes/home.ts
 M apps/web/src/routes/router.test.ts
 M apps/web/src/routes/router.tsx
 M docs/AGENT_CONTEXT_MINIMAL.md
+M docs/product/EPIS2_TABLERO.md
 M e2e/helpers/demoPatient.ts
+M package.json
 M reports/dev-agent-prompt-gate-runner.md
 M scripts/architecture/command-center-home.mjs
 M scripts/dev-agent/brief.mjs
-M scripts/dev-agent/context.mjs
 M scripts/dev/velocity-lib.mjs
 M tests/golden-clinical-journey.spec.ts
 ?? apps/web/src/dev/dualChartModesEnv.test.ts
+?? docs/quality/ficha-first-ledger.json
 ?? reports/dev-agent-audit-diff-latest.json
 ?? reports/epis2-auditoria-ingeniero-externo-2026-06-14.md
-?? scripts/dev/strengthen-context.mjs
+?? reports/epis2-mf-ff-01-03-ficha-first.md
+?? scripts/dev/ficha-first-context.mjs
+?? scripts/quality/validate-ficha-first-gate.mjs
 ```
 
 ## Evolab (QA externo)
@@ -120,7 +123,7 @@ npm run dev:agent:close    # checklist + plantilla reporte
 # EPIS2 — Sesión subagentes de desarrollo
 
 **Fase:** B
-**Generado:** 2026-06-14T17:26:58.932Z
+**Generado:** 2026-06-14T17:40:52.402Z
 
 ## Secuencia recomendada
 

@@ -1,6 +1,6 @@
 # EPIS2 — Contexto mínimo para agentes (Cursor)
 
-**Versión:** 1.2 · **MF-RAPID** ✓ · **STRENGTHEN** MF-IM-01/02 ✓ · Lectura obligatoria antes de codear.
+**Versión:** 1.3 · **MF-RAPID** ✓ · **FICHA-FIRST** MF-FF-01…03 ✓ · **STRENGTHEN** MF-IM-01/02 ✓
 
 > Canon completo solo si la tarea lo exige: `docs/PRODUCT_CANON.md`, `docs/product/PRODUCT_INVARIANTS.md`, `AGENTS.md`.
 
@@ -40,9 +40,10 @@ Un objetivo · pocos archivos · diff mínimo.
 | Programa | Estado | Comando estado |
 |----------|--------|----------------|
 | **PROG-RAPID** | ✓ cerrado | `npm run quality:rapid-gate` |
+| **PROG-FICHA-FIRST** | MF-FF-01…03 ✓ · **MF-FF-06** READY | `npm run quality:ficha-first-gate` |
 | **PROG-STRENGTHEN** | MF-IM-03 READY (no auto-iniciar) | `npm run quality:strengthen-next` |
 
-Cerrado hoy: MF-IM-01 embeddings 384d · MF-IM-02 embed Ollama (`embedDocument`).
+Cerrado hoy: MF-IM-01 embeddings · MF-IM-02 embed Ollama · **MF-FF-01…03** censo-first.
 
 ---
 

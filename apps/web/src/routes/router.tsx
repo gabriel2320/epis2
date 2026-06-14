@@ -9,7 +9,7 @@ import { getBlueprintByRoutePath } from '@epis2/clinical-forms';
 import { loadSessionForRouter } from '../auth/AuthContext.js';
 import { ClinicalShellLayout } from '../layouts/ClinicalShellLayout.js';
 import { lazy } from 'react';
-import { CommandCenterPage } from '../pages/CommandCenterPage.js';
+import { EPIS2_CLINICAL_HOME } from './home.js';
 import { DraftReviewPage } from '../pages/DraftReviewPage.js';
 import { GeneratedClinicalFormPage } from '../pages/GeneratedClinicalFormPage.js';
 import { PatientWorkspacePage } from '../pages/PatientWorkspacePage.js';
@@ -79,7 +79,7 @@ const loginRoute = createRoute({
   beforeLoad: async () => {
     const session = await loadSessionForRouter();
     if (session) {
-      throw redirect({ to: '/comando' });
+      throw redirect({ to: EPIS2_CLINICAL_HOME });
     }
   },
 });
@@ -91,7 +91,7 @@ const sessionExpiredRoute = createRoute({
   beforeLoad: async () => {
     const session = await loadSessionForRouter();
     if (session) {
-      throw redirect({ to: '/comando' });
+      throw redirect({ to: EPIS2_CLINICAL_HOME });
     }
   },
 });
@@ -111,7 +111,6 @@ function ForbiddenRoutePage() {
   return <ForbiddenPage detail={detail} />;
 }
 
-/** Home canónica = Centro de Comando (sin dashboard). */
 const appearancePreferencesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/preferencias-apariencia',
@@ -119,12 +118,29 @@ const appearancePreferencesRoute = createRoute({
   beforeLoad: requireSession,
 });
 
+/** Compat — /comando redirige a censo o ficha (barra transversal, no pantalla home). */
 const commandCenterRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/comando',
   validateSearch: (search: Record<string, unknown>) => parseCommandSearch(search),
-  component: CommandCenterPage,
-  beforeLoad: requireSession,
+  beforeLoad: async ({ search }) => {
+    await requireSession();
+    const parsed = parseCommandSearch(search);
+    if (parsed.intent === 'selectPatient' && parsed.patientId) {
+      throw redirect({
+        to: '/espacio/ficha',
+        search: { patientId: parsed.patientId, chartMode: 'traditional' },
+      });
+    }
+    if (parsed.context === 'dashboard' || parsed.tab) {
+      throw redirect({
+        to: '/epis2/dashboard',
+        search: parseDashboardSearch(search),
+      });
+    }
+    throw redirect({ to: EPIS2_CLINICAL_HOME });
+  },
+  component: () => null,
 });
 
 const dashboardModeRoute = createRoute({
@@ -379,7 +395,7 @@ const indexRoute = createRoute({
   beforeLoad: async () => {
     const session = await loadSessionForRouter();
     if (session) {
-      throw redirect({ to: '/comando' });
+      throw redirect({ to: EPIS2_CLINICAL_HOME });
     }
     throw redirect({ to: '/login' });
   },
@@ -392,7 +408,7 @@ const visualThemeCatalogRoute = createRoute({
   component: LazyVisualThemeCatalogPage,
   beforeLoad: async () => {
     if (!isVisualThemeCatalogEnabled()) {
-      throw redirect({ to: '/comando' });
+      throw redirect({ to: EPIS2_CLINICAL_HOME });
     }
     await requireSession();
   },
@@ -405,7 +421,7 @@ const uiCatalogRoute = createRoute({
   component: LazyUiCatalogPage,
   beforeLoad: async () => {
     if (!isUiCatalogEnabled()) {
-      throw redirect({ to: '/comando' });
+      throw redirect({ to: EPIS2_CLINICAL_HOME });
     }
     await requireSession();
   },
@@ -427,7 +443,7 @@ const dualChartModesRoute = createRoute({
   component: LazyDualChartModesPreviewPage,
   beforeLoad: async () => {
     if (!isDualChartModesEnabled()) {
-      throw redirect({ to: '/comando' });
+      throw redirect({ to: EPIS2_CLINICAL_HOME });
     }
     await requireSession();
   },
@@ -440,7 +456,7 @@ const schedulerSpikeRoute = createRoute({
   component: LazySchedulerSpikePage,
   beforeLoad: async () => {
     if (!isSchedulerSpikeEnabled()) {
-      throw redirect({ to: '/comando' });
+      throw redirect({ to: EPIS2_CLINICAL_HOME });
     }
     await requireSession();
   },
@@ -498,7 +514,7 @@ export const router = createRouter({
   defaultNotFoundComponent: NotFoundPage,
 });
 
-export { EPIS2_COMMAND_CENTER_HOME } from './home.js';
+export { EPIS2_CLINICAL_HOME, EPIS2_COMMAND_CENTER_HOME } from './home.js';
 
 declare module '@tanstack/react-router' {
   interface Register {

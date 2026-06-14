@@ -11,10 +11,10 @@ const FORBIDDEN_HOME_PATTERNS = [
 ];
 
 const REQUIRED_HOME_MARKERS = [
-  "'/comando'",
-  '"/comando"',
-  'epis2-command-center',
-  'EPIS2_COMMAND_CENTER_HOME',
+  "'/espacio/buscar-paciente'",
+  '"/espacio/buscar-paciente"',
+  'EPIS2_CLINICAL_HOME',
+  'epis2-census-command-bar',
 ];
 
 export async function validate() {
@@ -44,7 +44,7 @@ export async function validate() {
   }
 
   if (webRouterFound && !hasHomeMarker) {
-    details.push('apps/web router → falta home canónica /comando (Command Center)');
+    details.push('apps/web router → falta home clínica /espacio/buscar-paciente (censo-first)');
   }
 
   return {
@@ -52,7 +52,7 @@ export async function validate() {
     message:
       details.length === 0
         ? 'Sin dashboard ni rutas legacy como home'
-        : 'Home debe ser Command Center, no dashboard',
+        : 'Home debe ser censo clínico, no dashboard',
     details,
   };
 }

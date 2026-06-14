@@ -12,6 +12,7 @@ import {
   suggestPrimarySubagent,
 } from '../dev-agent/context.mjs';
 import { formatStrengthenLine, getStrengthenActive } from './strengthen-context.mjs';
+import { formatFichaFirstLine, getFichaFirstActive } from './ficha-first-context.mjs';
 
 /** @param {string} root */
 export function readTableroNext(root) {
@@ -47,6 +48,7 @@ export function resolveVelocityContext(root, opts = {}) {
   const agent = DEV_SUBAGENTS[subagent];
   const mf = getNextMicrophase(root);
   const strengthen = getStrengthenActive(root);
+  const fichaFirst = getFichaFirstActive(root);
   const tableroNext = readTableroNext(root);
   const brief = getBriefStatus(root);
   const head = getHeadShort(root);
@@ -60,6 +62,7 @@ export function resolveVelocityContext(root, opts = {}) {
     gates: agent?.gates ?? DEV_SUBAGENTS['gate-runner'].gates,
     mf,
     strengthen,
+    fichaFirst,
     tableroNext,
     brief,
     head,
@@ -142,6 +145,7 @@ export function formatVelocityBanner(ctx) {
   ];
   if (ctx.tramo) lines.push(`- Tramo: ${ctx.tramo}`);
   if (ctx.strengthen) lines.push(formatStrengthenLine(ctx.strengthen));
+  if (ctx.fichaFirst) lines.push(formatFichaFirstLine(ctx.fichaFirst));
   if (ctx.tableroNext?.length) lines.push(`- Tablero P1: ${ctx.tableroNext[0]}`);
   if (ctx.mf && !ctx.strengthen?.active) lines.push(`- MF ledger: ${ctx.mf.id}`);
   if (ctx.brief.exists) {

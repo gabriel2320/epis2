@@ -1,9 +1,8 @@
-/** Preview dual chart modes — solo dev o flag explícito (ADR-002). */
+/** Dual ficha clásica + papel — default ON (opt-out con VITE_ENABLE_DUAL_CHART_MODES=false). */
 export function isDualChartModesEnabled(): boolean {
   const flag = import.meta.env.VITE_ENABLE_DUAL_CHART_MODES;
-  if (flag === 'true') return true;
   if (flag === 'false') return false;
-  return import.meta.env.DEV;
+  return true;
 }
 
 export type ChartModeId = 'traditional' | 'paper';

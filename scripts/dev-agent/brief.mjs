@@ -11,6 +11,7 @@ import {
   suggestPrimarySubagent,
 } from './context.mjs';
 import { formatStrengthenLine, getStrengthenActive } from '../dev/strengthen-context.mjs';
+import { formatFichaFirstLine, getFichaFirstActive } from '../dev/ficha-first-context.mjs';
 import { getHeadShort } from '../dev/velocity-lib.mjs';
 import { buildSessionIndex } from './prompt-builder.mjs';
 import { isEvolabPresent, resolveEvolabRoot } from './evolab-bridge.mjs';
@@ -51,6 +52,7 @@ export async function buildDevBrief(root, opts) {
   const git = getGitSummary(root);
   const mf = getNextMicrophase(root);
   const strengthen = getStrengthenActive(root);
+  const fichaFirst = getFichaFirstActive(root);
   const stack = await getStackHints(root);
   const ollamaPlan = readOllamaPlan(root);
   const tablero = getTableroState(root);
@@ -71,8 +73,10 @@ export async function buildDevBrief(root, opts) {
     '## Orquestador (MF-RAPID + STRENGTHEN)',
     '',
     '- **PROG-RAPID** ✓ — iteración: `npm run dev:rapid` · cierre MF: `npm run quality:clinical`',
+    '- **PROG-FICHA-FIRST** — MF-FF-01…03 ✓ · home censo · `/comando` redirect',
     '- **No** iniciar la MF READY siguiente salvo petición explícita del usuario.',
     ...(strengthen ? [formatStrengthenLine(strengthen)] : []),
+    ...(fichaFirst ? [formatFichaFirstLine(fichaFirst)] : []),
     strengthen?.active
       ? `- Allowlist: ${strengthen.active.allowedPaths.slice(0, 4).join(', ')}${strengthen.active.allowedPaths.length > 4 ? '…' : ''}`
       : '',

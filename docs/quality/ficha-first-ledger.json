@@ -1,0 +1,50 @@
+{
+  "version": "1.0.0",
+  "program": "PROG-FICHA-FIRST-2026",
+  "strategy": "censo-first · barra transversal · dual chart default",
+  "executionStatus": "ACTIVE",
+  "states": ["READY", "IN_PROGRESS", "DONE"],
+  "rules": {
+    "oneReadyAtMost": true,
+    "homeIsCensus": true,
+    "commandRouteCompatOnly": true
+  },
+  "phases": [
+    {
+      "id": "MF-FF-01",
+      "name": "Dual chart ON por default",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
+      "gate": "quality:ficha-first-gate",
+      "allowedPaths": ["apps/web/src/dev/dualChartModesEnv.ts"]
+    },
+    {
+      "id": "MF-FF-02",
+      "name": "Home = censo clínico",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
+      "gate": "quality:ficha-first-gate",
+      "allowedPaths": ["apps/web/src/routes/home.ts", "apps/web/src/routes/router.tsx"]
+    },
+    {
+      "id": "MF-FF-03",
+      "name": "/comando redirect compat",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
+      "gate": "quality:ficha-first-gate",
+      "allowedPaths": ["apps/web/src/routes/router.tsx", "scripts/architecture/command-center-home.mjs"]
+    },
+    {
+      "id": "MF-FF-06",
+      "name": "ClinicalShell en formularios /espacio/*",
+      "state": "READY",
+      "gate": "quality:ficha-first-gate",
+      "allowedPaths": [
+        "apps/web/src/layouts/**",
+        "apps/web/src/pages/GeneratedClinicalFormPage.tsx",
+        "apps/web/src/components/chart/ClinicalShell.tsx"
+      ],
+      "dependsOn": ["MF-FF-03"]
+    }
+  ]
+}

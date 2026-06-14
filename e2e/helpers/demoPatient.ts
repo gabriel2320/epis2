@@ -14,16 +14,14 @@ export async function loginAsPhysician(page: Page) {
   }
   const state = await page.request.storageState();
   await page.context().addCookies(state.cookies);
-  await page.goto('/comando');
-  await expect(page.getByTestId('epis2-command-hero')).toBeVisible({ timeout: 15_000 });
-  await expect(page.getByTestId('epis2-command-prompt')).toBeVisible();
-  await expect(page.getByTestId('epis2-power-bar')).toBeVisible();
+  await page.goto('/espacio/buscar-paciente');
+  await expect(page.getByTestId('epis2-census-command-bar')).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByTestId('epis2-generated-clinical-page')).toBeVisible();
 }
 
 export async function goToCommandCenter(page: Page) {
-  await page.goto('/comando');
-  await expect(page.getByTestId('epis2-command-hero')).toBeVisible({ timeout: 15_000 });
-  await expect(page.getByTestId('epis2-power-bar')).toBeVisible();
+  await page.goto('/espacio/buscar-paciente');
+  await expect(page.getByTestId('epis2-census-command-bar')).toBeVisible({ timeout: 15_000 });
 }
 
 /** Fija paciente demo por código DEMO-00x — navegación directa a ficha. */
@@ -34,7 +32,10 @@ export async function pinDemoCase(page: Page, demoCode: string) {
   }
   await page.goto(`/espacio/ficha?patientId=${demo.patientId}&chartMode=traditional`);
   await expect(
-    page.getByTestId('epis2-patient-workspace').or(page.getByTestId('epis2-dual-chart-ficha')),
+    page
+      .getByTestId('epis2-dual-chart-ficha')
+      .or(page.getByTestId('epis2-clinical-shell-v2'))
+      .or(page.getByTestId('epis2-patient-workspace')),
   ).toBeVisible({ timeout: 15_000 });
 }
 
@@ -45,7 +46,12 @@ export async function selectDemoPatientViaSearch(page: Page, demoCode: string) {
   await page.getByRole('button', { name: copy.forms.searchPatients }).click();
   await page.getByRole('button', { name: demoCode }).click();
   await expect(page).toHaveURL(/\/espacio\/ficha/);
-  await expect(page.getByTestId('epis2-patient-workspace')).toBeVisible({ timeout: 15_000 });
+  await expect(
+    page
+      .getByTestId('epis2-dual-chart-ficha')
+      .or(page.getByTestId('epis2-clinical-shell-v2'))
+      .or(page.getByTestId('epis2-patient-workspace')),
+  ).toBeVisible({ timeout: 15_000 });
 }
 
 export async function openAmbulatoryFromCommand(page: Page) {
