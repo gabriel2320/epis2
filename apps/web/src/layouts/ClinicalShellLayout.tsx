@@ -99,7 +99,7 @@ export function ClinicalShellLayout() {
             <ClinicalPatientChartChrome />
           </>
         }
-        commandBar={dualChartEnabled ? <ChartEspacioCommandDock /> : undefined}
+        commandBar={<ChartEspacioCommandDock />}
         testId="epis2-clinical-shell"
       >
         <Outlet />
