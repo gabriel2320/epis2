@@ -52,18 +52,15 @@ export type EpisClinicalContextPaneProps = {
   /** MF-DI-06 — alertas CDS/CDR para chips silenciosos. */
   clinicalAlerts?: readonly ClinicalAlert[] | undefined;
   summaryFields?: Record<string, string> | undefined;
-  longitudinalSnapshot?: Pick<
-    PatientLongitudinalResponse,
-    'allergies' | 'observations'
-  > | null | undefined;
+  longitudinalSnapshot?:
+    | Pick<PatientLongitudinalResponse, 'allergies' | 'observations'>
+    | null
+    | undefined;
 };
 
 type ContextTab = 'timeline' | 'documents';
 
-const TIMELINE_KIND_LABELS: Record<
-  (typeof CLINICAL_SUMMARY_TIMELINE_KINDS)[number],
-  string
-> = {
+const TIMELINE_KIND_LABELS: Record<(typeof CLINICAL_SUMMARY_TIMELINE_KINDS)[number], string> = {
   encounter: copy.clinicalSummary.timelineKindEncounter,
   note: copy.clinicalSummary.timelineKindNote,
   observation: copy.clinicalSummary.timelineKindObservation,
@@ -94,10 +91,10 @@ function EpisClinicalContextAiSection({
   patientId: string;
   clinicalAlerts?: readonly ClinicalAlert[] | undefined;
   summaryFields?: Record<string, string> | undefined;
-  longitudinalSnapshot?: Pick<
-    PatientLongitudinalResponse,
-    'allergies' | 'observations'
-  > | null | undefined;
+  longitudinalSnapshot?:
+    | Pick<PatientLongitudinalResponse, 'allergies' | 'observations'>
+    | null
+    | undefined;
 }) {
   const panelMeta = useClinicalContextPanelMeta();
   const { session } = useAuth();
@@ -371,7 +368,12 @@ export function EpisClinicalContextPane({
       </Tabs>
       {activeTab === 'timeline' ? (
         <>
-          <Stack direction="row" flexWrap="wrap" gap={0.5} data-testid="epis2-context-timeline-kind-filters">
+          <Stack
+            direction="row"
+            flexWrap="wrap"
+            gap={0.5}
+            data-testid="epis2-context-timeline-kind-filters"
+          >
             <EpisChip
               label={copy.clinicalSummary.timelineFilterAll}
               size="small"

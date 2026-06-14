@@ -5,7 +5,5 @@ import { TRADITIONAL_SECTION_IDS, type TraditionalSectionId } from './Traditiona
 export function resolveVisibleTraditionalSections(
   demoCaseCode: string | undefined,
 ): readonly TraditionalSectionId[] {
-  return TRADITIONAL_SECTION_IDS.filter((id) =>
-    hasDemoTraditionalSectionContent(demoCaseCode, id),
-  );
+  return TRADITIONAL_SECTION_IDS.filter((id) => hasDemoTraditionalSectionContent(demoCaseCode, id));
 }

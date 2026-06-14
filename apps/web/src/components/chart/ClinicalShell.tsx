@@ -139,10 +139,17 @@ export function ClinicalShell({
         />
         <Box
           key={chartMode}
-          sx={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', ...epis2ChartContentTransitionSx() }}
+          sx={{
+            flex: 1,
+            minHeight: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            ...epis2ChartContentTransitionSx(),
+          }}
         >
           {children}
-        </Box>        <ClinicalFooterStatus
+        </Box>{' '}
+        <ClinicalFooterStatus
           userDisplayName={userDisplayName}
           userRoleLabel={userRoleLabel}
           documentStatus={documentStatus}

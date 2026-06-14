@@ -3,10 +3,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { clinicalCaseRecordSchema } from '@epis2/contracts';
-import {
-  buildRecordsFromBundle,
-  parseFhirBundle,
-} from './synthea.js';
+import { buildRecordsFromBundle, parseFhirBundle } from './synthea.js';
 import { filterValidRecords } from '../validate.js';
 
 const moduleDir = dirname(fileURLToPath(import.meta.url));

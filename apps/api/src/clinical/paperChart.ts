@@ -13,7 +13,13 @@ import { and, desc, eq } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import { clinicalDrafts } from '../db/schema.js';
 import { appendAudit } from '../audit/store.js';
-import { approveDraft, createDraft, getPatientClinicalContext, updateDraft, type Actor } from './service.js';
+import {
+  approveDraft,
+  createDraft,
+  getPatientClinicalContext,
+  updateDraft,
+  type Actor,
+} from './service.js';
 
 export class PaperChartSignBlockedError extends Error {
   readonly blockers: string[];
@@ -188,11 +194,7 @@ async function seedPaperChartFromClinicalMirror(
 }
 
 /** Firma ficha papel — valida IA pendiente y aprueba borrador SoT. */
-export async function approvePaperChartDraft(
-  db: Database,
-  actor: Actor,
-  patientId: string,
-) {
+export async function approvePaperChartDraft(db: Database, actor: Actor, patientId: string) {
   const body = await getPaperChartDraftBody(db, patientId);
   const signCheck = validatePaperChartSign(body);
   if (!signCheck.ok) {

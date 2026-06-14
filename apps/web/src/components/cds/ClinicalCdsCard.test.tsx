@@ -29,7 +29,11 @@ describe('ClinicalCdsCard (MF-CU-01)', () => {
 
     rerender(
       <Epis2ThemeProvider>
-        <ClinicalCdsCard variant="suggestion" label="Solicitar laboratorio" testId="cds-suggestion" />
+        <ClinicalCdsCard
+          variant="suggestion"
+          label="Solicitar laboratorio"
+          testId="cds-suggestion"
+        />
       </Epis2ThemeProvider>,
     );
     expect(screen.getByTestId('cds-suggestion')).not.toHaveClass('MuiAlert-outlined');

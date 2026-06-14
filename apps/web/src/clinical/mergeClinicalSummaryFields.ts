@@ -21,9 +21,7 @@ export function mergeClinicalSummaryFields(
   }
   if (sql.hospitalizado) {
     const badge = copy.clinicalSummary.hospitalizedBadge;
-    merged.clinicalAlerts = merged.clinicalAlerts
-      ? `${merged.clinicalAlerts} · ${badge}`
-      : badge;
+    merged.clinicalAlerts = merged.clinicalAlerts ? `${merged.clinicalAlerts} · ${badge}` : badge;
   }
   if (sql.ultimoEncuentroAt) {
     const label = new Date(sql.ultimoEncuentroAt).toLocaleString('es-CL', {
@@ -31,9 +29,7 @@ export function mergeClinicalSummaryFields(
       timeStyle: 'short',
     });
     const line = `${copy.clinicalSummary.lastEncounter}: ${label}`;
-    merged.recentEvents = merged.recentEvents?.trim()
-      ? `${line}\n${merged.recentEvents}`
-      : line;
+    merged.recentEvents = merged.recentEvents?.trim() ? `${line}\n${merged.recentEvents}` : line;
   }
   if (sql.previsionResumen?.trim()) {
     merged.coveragePrevision = sql.previsionResumen;

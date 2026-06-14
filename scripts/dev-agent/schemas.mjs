@@ -67,10 +67,7 @@ export function parseDevLowRiskWritePlan(raw) {
 }
 
 export function parseDevDiffAudit(raw) {
-  const normalized =
-    raw && typeof raw === 'object'
-      ? { ...raw, requiresHumanReview: true }
-      : raw;
+  const normalized = raw && typeof raw === 'object' ? { ...raw, requiresHumanReview: true } : raw;
   const parsed = devDiffAuditSchema.safeParse(normalized);
   if (!parsed.success) {
     return { ok: false, error: parsed.error.message };

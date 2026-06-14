@@ -17,9 +17,7 @@ export const CKD_RENAL_LIVE_TEMPLATE: LiveTemplateDefinition = {
   blueprintId: 'evolution_note',
   label: 'Seguimiento función renal',
   suggestWhen: ['requires_ckd'],
-  extraSections: [
-    section('ckd_review', 'Seguimiento renal', ['ckdFunctionReview'], 'visible'),
-  ],
+  extraSections: [section('ckd_review', 'Seguimiento renal', ['ckdFunctionReview'], 'visible')],
   extraFields: [
     field('ckdFunctionReview', 'Función renal (ERC)', 'textarea', {
       clinicalTextBox: true,

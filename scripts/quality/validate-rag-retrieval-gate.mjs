@@ -37,27 +37,30 @@ function run(label, cmd, args, { inherit = false } = {}) {
 
 run('build contracts', 'npm', ['run', 'build', '-w', '@epis2/contracts']);
 
-run('MF-IM-03 demo-005 fixture', 'npx', [
-  'vitest',
-  'run',
-  'packages/test-fixtures/src/demoRagChunks.test.ts',
-], { inherit: true });
+run(
+  'MF-IM-03 demo-005 fixture',
+  'npx',
+  ['vitest', 'run', 'packages/test-fixtures/src/demoRagChunks.test.ts'],
+  { inherit: true },
+);
 
-run('MF-IM-03 sequential retrieval', 'npx', [
-  'vitest',
-  'run',
-  'services/local-ai/src/rag/sequentialRetrieval.test.ts',
-], { inherit: true });
+run(
+  'MF-IM-03 sequential retrieval',
+  'npx',
+  ['vitest', 'run', 'services/local-ai/src/rag/sequentialRetrieval.test.ts'],
+  { inherit: true },
+);
 
-run('MF-IM-04 assist citations', 'npx', [
-  'vitest',
-  'run',
-  'services/local-ai/src/rag/assistCitations.test.ts',
-], { inherit: true });
+run(
+  'MF-IM-04 assist citations',
+  'npx',
+  ['vitest', 'run', 'services/local-ai/src/rag/assistCitations.test.ts'],
+  { inherit: true },
+);
 
-run('MF-IM-04 rag citation eval sim', 'node', [
-  'scripts/ai/evals/run-rag-citation-evals.mjs',
-], { inherit: true });
+run('MF-IM-04 rag citation eval sim', 'node', ['scripts/ai/evals/run-rag-citation-evals.mjs'], {
+  inherit: true,
+});
 
 if (errors.length) {
   console.error('rag-retrieval-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));

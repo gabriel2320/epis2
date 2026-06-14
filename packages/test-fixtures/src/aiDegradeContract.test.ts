@@ -12,10 +12,9 @@ const DEMO_PATIENT_ID = '00000000-0000-4000-8000-000000000001';
 
 describe('MF-SH-03 — resolveCommand sin assistHint', () => {
   it('resuelve frases clínicas sin depender de IA', () => {
-    const sample = COMMAND_PHRASE_SUITE.filter((entry) => entry.intent !== 'open_dashboard_quality').slice(
-      0,
-      12,
-    );
+    const sample = COMMAND_PHRASE_SUITE.filter(
+      (entry) => entry.intent !== 'open_dashboard_quality',
+    ).slice(0, 12);
 
     for (const { phrase, intent } of sample) {
       const role = intent === 'search_patient' ? ('physician' as const) : ('physician' as const);

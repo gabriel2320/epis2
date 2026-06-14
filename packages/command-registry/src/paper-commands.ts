@@ -72,8 +72,7 @@ export const PAPER_CHART_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
     requiresPatient: true,
     priority: 88,
     match: (q) =>
-      /orden(ar)?\s+(en\s+)?soap/.test(q) ||
-      (/orden/.test(q) && /soap|seccion\s+v/.test(q)),
+      /orden(ar)?\s+(en\s+)?soap/.test(q) || (/orden/.test(q) && /soap|seccion\s+v/.test(q)),
   }),
   paperCmd({
     intent: 'paper_summarize_24h',
@@ -130,12 +129,7 @@ export const PAPER_CHART_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
   paperCmd({
     intent: 'paper_create_prescription_a5',
     labelEs: 'Receta A5',
-    aliasesEs: [
-      'crear receta a5',
-      'receta formato a5',
-      'prescripcion a5',
-      'imprimir receta a5',
-    ],
+    aliasesEs: ['crear receta a5', 'receta formato a5', 'prescripcion a5', 'imprimir receta a5'],
     routePath: PAPER_CHART_ROUTE_PATHS.paper_create_prescription_a5,
     requiredPermission: 'command.execute',
     requiresPatient: true,

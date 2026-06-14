@@ -28,9 +28,7 @@ export const clinicalCaseProvenanceSchema = z.object({
 
 export const clinicalCasePatientSchema = z.object({
   displayName: z.string().min(1),
-  birthDate: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, 'birthDate debe ser YYYY-MM-DD'),
+  birthDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'birthDate debe ser YYYY-MM-DD'),
   sex: z.enum(['F', 'M']),
   isSynthetic: z.literal(true),
 });

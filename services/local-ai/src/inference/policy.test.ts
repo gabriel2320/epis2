@@ -1,9 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  cloudAllowedForTier,
-  resolveProviderChain,
-  resolveRequestDataTier,
-} from './policy.js';
+import { cloudAllowedForTier, resolveProviderChain, resolveRequestDataTier } from './policy.js';
 
 describe('inference policy (ADR-005)', () => {
   it('marca demo como L0_synthetic', () => {

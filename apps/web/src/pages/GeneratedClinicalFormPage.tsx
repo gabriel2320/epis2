@@ -67,7 +67,12 @@ import {
 } from '../clinical/clinicalTextBoxField.js';
 import { MedicationCatalogAutocomplete } from '../clinical/MedicationCatalogAutocomplete.js';
 import { useClinicalTextBoxOrigins } from '../clinical/useClinicalTextBoxOrigins.js';
-import { mergeDraftFieldMetaFromBody, resolvePostSaveMicrojourneys, stripDraftMetaFromBody, type PostSaveMicrojourneyAction } from '@epis2/clinical-productivity';
+import {
+  mergeDraftFieldMetaFromBody,
+  resolvePostSaveMicrojourneys,
+  stripDraftMetaFromBody,
+  type PostSaveMicrojourneyAction,
+} from '@epis2/clinical-productivity';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
@@ -87,9 +92,7 @@ import { isDualChartModesEnabled } from '../dev/dualChartModesEnv.js';
 import { TraditionalEhrMode } from '../components/chart/TraditionalEhrMode.js';
 import { usePatientLongitudinalQuery } from '../query/hooks/usePatientLongitudinalQuery.js';
 import { usePatientClinicalSummaryQuery } from '../query/hooks/usePatientClinicalSummaryQuery.js';
-import {
-  navigateBackToPaperChartFromPrescriptionForm,
-} from './prescriptionTripleViewNav.js';
+import { navigateBackToPaperChartFromPrescriptionForm } from './prescriptionTripleViewNav.js';
 
 export type GeneratedClinicalFormPageProps = {
   blueprint: ClinicalFormBlueprint;
@@ -432,7 +435,10 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       }
     }
     if (activeLiveTemplateId) {
-      const livePrefill = buildLiveTemplatePrefill(activeLiveTemplateId, res.clinicalContext.summaryFields);
+      const livePrefill = buildLiveTemplatePrefill(
+        activeLiveTemplateId,
+        res.clinicalContext.summaryFields,
+      );
       if (Object.keys(livePrefill).length > 0) {
         reset(mergePrefillOnlyEmpty(getValues(), livePrefill));
       }
@@ -644,9 +650,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
           appearance="outlined"
           size="small"
           data-testid="epis2-prescription-back-paper"
-          onClick={() =>
-            navigateBackToPaperChartFromPrescriptionForm(navigate, effectivePatientId)
-          }
+          onClick={() => navigateBackToPaperChartFromPrescriptionForm(navigate, effectivePatientId)}
         >
           {copy.chartModes.paper}
         </EpisButton>
@@ -801,9 +805,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       );
     }
 
-    return (
-      <FormProvider {...form}>{twoPaneLayout}</FormProvider>
-    );
+    return <FormProvider {...form}>{twoPaneLayout}</FormProvider>;
   }
 
   if (isClassicMode && effectivePatientId && blueprint.blueprintId !== 'patient_search') {

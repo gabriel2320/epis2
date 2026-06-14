@@ -9,7 +9,10 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
 const hookPath = join(root, 'apps/web/src/clinical/useClinicalCommandSubmit.ts');
-const formAssistPath = join(root, 'apps/web/src/clinical/generated-form/useGeneratedFormAiAssist.ts');
+const formAssistPath = join(
+  root,
+  'apps/web/src/clinical/generated-form/useGeneratedFormAiAssist.ts',
+);
 const assistPath = join(root, 'services/local-ai/src/commandAssistDraft.ts');
 const apiRoutesPath = join(root, 'apps/api/src/ai/routes.ts');
 
@@ -28,7 +31,7 @@ for (const needle of [
   'requestDraftAssist',
   'stashCommandAssistDraft',
   'assistDraft: true',
-  'source: \'command_bar\'',
+  "source: 'command_bar'",
 ]) {
   if (!hook.includes(needle)) errors.push(`useClinicalCommandSubmit falta ${needle}`);
 }

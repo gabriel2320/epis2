@@ -5,10 +5,7 @@ import {
   DEMO_005_RAG_CHUNKS,
 } from '@epis2/test-fixtures';
 import { assembleRagContext } from './assembleContext.js';
-import {
-  retrieveChunksSequential,
-  runSequentialRagRetrieval,
-} from './sequentialRetrieval.js';
+import { retrieveChunksSequential, runSequentialRagRetrieval } from './sequentialRetrieval.js';
 import * as similarity from './similarity.js';
 import { scoreChunkCandidate } from './similarity.js';
 

@@ -33,7 +33,10 @@ export function PaperPlannerShell({
   const { phrases, runPhrase, enabled } = usePaperPlannerCommands();
 
   return (
-    <Box data-testid={testId} sx={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}>
+    <Box
+      data-testid={testId}
+      sx={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}
+    >
       <PaperPlannerCommandHints phrases={phrases} onRunPhrase={runPhrase} enabled={enabled} />
       <Box
         className="epis2-paper-planner-view-tabs epis2-no-print"

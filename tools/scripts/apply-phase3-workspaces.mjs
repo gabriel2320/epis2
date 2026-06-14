@@ -111,7 +111,9 @@ writeFileSync(apiPkgPath, JSON.stringify(apiPkg, null, 2) + '\n');
 writeFileSync(webPkgPath, JSON.stringify(webPkg, null, 2) + '\n');
 writeFileSync(rootPkgPath, JSON.stringify(rootPkg, null, 2) + '\n');
 
-console.log(`phase3-workspaces OK — api db:* ${Object.keys(DB_SCRIPTS).length}, web e2e ${Object.keys(webE2e).length}`);
+console.log(
+  `phase3-workspaces OK — api db:* ${Object.keys(DB_SCRIPTS).length}, web e2e ${Object.keys(webE2e).length}`,
+);
 console.log(`  root removed: ${removedE2e} test:e2e*, ${removedDb} db:*`);
 console.log(`  root shims: db:migrate/validate, test:e2e (+ wired CI/catalog)`);
 console.log('  Otros E2E: npm run test:e2e:tramo-j -w @epis2/web');

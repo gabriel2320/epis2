@@ -10,9 +10,12 @@ export const DM2_LAB_CONTROL_PANEL = [
   'Microalbuminuria en orina',
 ].join('\n');
 
-export const HTA_LAB_CONTROL_PANEL = ['Creatinina', 'Electrolitos', 'Perfil lipídico', 'Orina completa'].join(
-  '\n',
-);
+export const HTA_LAB_CONTROL_PANEL = [
+  'Creatinina',
+  'Electrolitos',
+  'Perfil lipídico',
+  'Orina completa',
+].join('\n');
 
 const DM2_PATTERN = /diabetes|dm2|\bdm\b|glicemia|hba1c|metformina/i;
 const HTA_PATTERN = /hipertension|\bhta\b|losartan|enalapril/i;
@@ -65,16 +68,13 @@ export type ParsedMedicationLine = {
 };
 
 /** Primera línea de medicación activa del resumen demo. */
-export function parseFirstActiveMedicationLine(activeMedications: string): ParsedMedicationLine | null {
-  const raw = activeMedications
-    .split('\n')[0]
-    ?.split('·')[0]
-    ?.trim();
+export function parseFirstActiveMedicationLine(
+  activeMedications: string,
+): ParsedMedicationLine | null {
+  const raw = activeMedications.split('\n')[0]?.split('·')[0]?.trim();
   if (!raw) return null;
 
-  const detailed = raw.match(
-    /^(.+?)\s+(\d[\d.,]*\s*(?:mg|mcg|g|UI|%)(?:\s*\/\s*\w+)?)\s*(.*)$/i,
-  );
+  const detailed = raw.match(/^(.+?)\s+(\d[\d.,]*\s*(?:mg|mcg|g|UI|%)(?:\s*\/\s*\w+)?)\s*(.*)$/i);
   if (detailed) {
     const result: ParsedMedicationLine = {
       name: detailed[1]!.trim(),

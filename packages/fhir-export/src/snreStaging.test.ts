@@ -68,9 +68,9 @@ describe('SNRE staging (MF-IC-02)', () => {
       prescriptionDraftFixture('rx-tag-check', demo.patientId),
       true,
     );
-    expect(mr?.meta.tag?.some((t) => t.system === EPIS2_SNRE_STAGING_TAG_SYSTEM && t.code === 'staging')).toBe(
-      true,
-    );
+    expect(
+      mr?.meta.tag?.some((t) => t.system === EPIS2_SNRE_STAGING_TAG_SYSTEM && t.code === 'staging'),
+    ).toBe(true);
     expect(mr?.meta.tag?.some((t) => t.code === 'synthetic')).toBe(true);
   });
 

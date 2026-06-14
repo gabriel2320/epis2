@@ -58,9 +58,7 @@ function isInteractionRule(ruleId: string): boolean {
 }
 
 function isOrderSelectRule(ruleId: string): boolean {
-  return (
-    isDuplicateRule(ruleId) || isPrescriptionAllergyRule(ruleId) || isInteractionRule(ruleId)
-  );
+  return isDuplicateRule(ruleId) || isPrescriptionAllergyRule(ruleId) || isInteractionRule(ruleId);
 }
 
 function mapSeverityToVariant(alert: ClinicalAlert): SilentSuggestionVariant {

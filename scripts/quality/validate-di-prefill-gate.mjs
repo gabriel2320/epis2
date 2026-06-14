@@ -20,7 +20,10 @@ for (const rel of required) {
   if (!existsSync(join(root, rel))) errors.push(`Falta ${rel}`);
 }
 
-const ctx = readFileSync(join(root, 'packages/clinical-forms/src/context-clinical-prefill.ts'), 'utf8');
+const ctx = readFileSync(
+  join(root, 'packages/clinical-forms/src/context-clinical-prefill.ts'),
+  'utf8',
+);
 for (const bp of ['prescription', 'lab_request', 'medical_certificate']) {
   if (!ctx.includes(`case '${bp}'`)) errors.push(`context-clinical-prefill sin case ${bp}`);
 }

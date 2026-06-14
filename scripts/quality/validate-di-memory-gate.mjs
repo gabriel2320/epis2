@@ -27,7 +27,10 @@ if (!dual.includes('useOperationalMemory')) {
   errors.push('DualChartPatientPage debe usar memoria operacional');
 }
 
-const trad = readFileSync(join(root, 'apps/web/src/components/chart/TraditionalEhrMode.tsx'), 'utf8');
+const trad = readFileSync(
+  join(root, 'apps/web/src/components/chart/TraditionalEhrMode.tsx'),
+  'utf8',
+);
 if (!trad.includes('onTraditionalSectionPersist')) {
   errors.push('TraditionalEhrMode debe persistir sección tradicional');
 }

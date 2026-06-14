@@ -171,7 +171,8 @@ export const SIM_CLINICAL_CASES: DemoClinicalCase[] = [
       activeProblems: 'Asma bronquial persistente leve (sintético)',
       recentEvents:
         'Paciente masculino de 27 años con sibilancias intermitentes y disnea leve al esfuerzo. Sin fiebre ni expectoración purulenta. Refiere mejoría parcial con broncodilatador de rescate (sintético). (sintético)',
-      relevantLabs: 'Peak expiratory flow 320 L/min (sintético) · SpO2 97% en aire ambiente (sintético)',
+      relevantLabs:
+        'Peak expiratory flow 320 L/min (sintético) · SpO2 97% en aire ambiente (sintético)',
       activeMedications: 'Salbutamol (demo) 2 inhalaciones PRN · Budesonida (demo) 200 mcg BID',
       pendingItems: 'Seguimiento ambulatorio en 7 días (demo)',
       clinicalAlerts: 'SIM / SINTÉTICO — sin alertas reales',

@@ -39,10 +39,7 @@ if (existsSync(modePath)) {
 
 const chromePath = join(root, 'apps/web/src/components/chart/paper/paperSectionChrome.tsx');
 const scaffoldPath = join(root, 'apps/web/src/components/chart/paper/paperSectionScaffold.ts');
-const batchPath = join(
-  root,
-  'packages/clinical-forms/src/paper-chart/paperSectionBatch.ts',
-);
+const batchPath = join(root, 'packages/clinical-forms/src/paper-chart/paperSectionBatch.ts');
 
 for (const [label, path] of [
   ['paperSectionChrome', chromePath],

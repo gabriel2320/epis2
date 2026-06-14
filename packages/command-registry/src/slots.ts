@@ -74,7 +74,9 @@ export function extractSlots(raw: string): CommandSlots {
     slots.clinicalReasonHint = 'Renovación receta crónica';
   }
 
-  if (/panel\s+control\s+dm2|laboratorio\s+control\s+diabetes|control\s+dm2\s+lab/.test(normalized)) {
+  if (
+    /panel\s+control\s+dm2|laboratorio\s+control\s+diabetes|control\s+dm2\s+lab/.test(normalized)
+  ) {
     slots.studyHint = slots.studyHint ?? 'panel control dm2';
     if (!slots.clinicalReasonHint) {
       slots.clinicalReasonHint = 'Control diabetes mellitus tipo 2';

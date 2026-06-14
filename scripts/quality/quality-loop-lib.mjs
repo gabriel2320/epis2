@@ -84,7 +84,12 @@ function siblingTestPaths(root, sourcePath) {
   const base = match[1];
   const ext = match[2];
   /** @type {string[]} */
-  const candidates = [`${base}.test.${ext}`, `${base}.test.ts`, `${base}.test.tsx`, `${base}.spec.ts`];
+  const candidates = [
+    `${base}.test.${ext}`,
+    `${base}.test.ts`,
+    `${base}.test.tsx`,
+    `${base}.spec.ts`,
+  ];
   return candidates.filter((c, i, arr) => arr.indexOf(c) === i && existsSync(join(root, c)));
 }
 
@@ -132,7 +137,12 @@ export function scanChangedForSensitive(root, paths) {
     if (content.length > 500_000) continue;
     for (const pat of patterns) {
       if (pat.re.test(content)) {
-        findings.push({ file: rel, id: pat.id, label: pat.label ?? pat.id, severity: pat.severity });
+        findings.push({
+          file: rel,
+          id: pat.id,
+          label: pat.label ?? pat.id,
+          severity: pat.severity,
+        });
       }
     }
   }
@@ -192,12 +202,12 @@ export function typecheckWorkspaces(root, workspacePkgPaths) {
     return true;
   }
 
-  const names = workspacePkgPaths
-    .map((p) => readWorkspaceName(root, p))
-    .filter((n) => n != null);
+  const names = workspacePkgPaths.map((p) => readWorkspaceName(root, p)).filter((n) => n != null);
 
   if (names.includes('@epis2/contracts') === false && names.some((n) => n.startsWith('@epis2/'))) {
-    if (!runCmd(root, 'build @epis2/contracts', 'npm', ['run', 'build', '-w', '@epis2/contracts'])) {
+    if (
+      !runCmd(root, 'build @epis2/contracts', 'npm', ['run', 'build', '-w', '@epis2/contracts'])
+    ) {
       return false;
     }
   }
@@ -218,12 +228,11 @@ export function vitestTouched(root, vitestTargets) {
 
   const fileTargets = vitestTargets.filter((t) => /\.(test|spec)\.(tsx?|jsx?|mjs)$/i.test(t));
   if (fileTargets.length === vitestTargets.length) {
-    return runCmd(
-      root,
-      `vitest (${fileTargets.length} archivos)`,
-      'npx',
-      ['vitest', 'run', ...fileTargets],
-    );
+    return runCmd(root, `vitest (${fileTargets.length} archivos)`, 'npx', [
+      'vitest',
+      'run',
+      ...fileTargets,
+    ]);
   }
 
   let ok = true;

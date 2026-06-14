@@ -60,7 +60,9 @@ describe('context-clinical-prefill (CE-4 / CE-6)', () => {
       clinicalReason: 'Control diabetes mellitus tipo 2',
       priority: 'rutina',
     });
-    expect(buildContextClinicalPrefill('lab_request', DM2_SUMMARY).scheduledDate).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(buildContextClinicalPrefill('lab_request', DM2_SUMMARY).scheduledDate).toMatch(
+      /^\d{4}-\d{2}-\d{2}$/,
+    );
   });
 
   it('prefill certificado desde diagnóstico activo', () => {

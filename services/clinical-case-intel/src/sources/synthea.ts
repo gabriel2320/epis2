@@ -202,9 +202,9 @@ export function parseFhirBundle(bundle: unknown): SyntheaParsedPatient[] {
 
 export function inferEvolabHints(primaryProblemSlug: string): ClinicalCaseRecord['evolabHints'] {
   const key = primaryProblemSlug.replace(/-/g, ' ');
-  const capabilities =
-    Object.entries(CAPABILITY_BY_PROBLEM).find(([needle]) => key.includes(needle))?.[1] ??
-    ['evolution_note', 'lab_request'];
+  const capabilities = Object.entries(CAPABILITY_BY_PROBLEM).find(([needle]) =>
+    key.includes(needle),
+  )?.[1] ?? ['evolution_note', 'lab_request'];
   return {
     capabilities,
     suggestedGoals: ['create_evolution_note', 'review_clinical_context'],

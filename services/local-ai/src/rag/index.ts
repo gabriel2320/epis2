@@ -12,8 +12,4 @@ export {
   type SequentialRetrievalOptions,
 } from './sequentialRetrieval.js';
 export { cosineSimilarity, scoreChunkCandidate } from './similarity.js';
-export type {
-  RagChunkCandidate,
-  RetrievedChunk,
-  SequentialRetrievalResult,
-} from './types.js';
+export type { RagChunkCandidate, RetrievedChunk, SequentialRetrievalResult } from './types.js';

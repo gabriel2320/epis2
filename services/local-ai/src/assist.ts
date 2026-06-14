@@ -121,8 +121,6 @@ export async function runDraftAssist(
     promptHash,
     provider: generated.provider,
     dataTier: generated.dataTier,
-    ...(citationBundle?.citations.length
-      ? { documentCitations: citationBundle.citations }
-      : {}),
+    ...(citationBundle?.citations.length ? { documentCitations: citationBundle.citations } : {}),
   };
 }

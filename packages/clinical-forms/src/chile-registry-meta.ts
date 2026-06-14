@@ -27,7 +27,9 @@ export function validateChileBlueprintRegistryMeta(blueprint: ClinicalFormBluepr
     }
     const key = field.variableKey?.trim();
     if (key && !isChileRegistryMetaKey(key)) {
-      errors.push(`${blueprint.blueprintId}.${field.id}: variableKey "${key}" fuera de allowlist CHILE`);
+      errors.push(
+        `${blueprint.blueprintId}.${field.id}: variableKey "${key}" fuera de allowlist CHILE`,
+      );
     }
   }
   return errors;

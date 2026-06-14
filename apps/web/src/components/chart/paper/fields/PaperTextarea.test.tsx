@@ -31,9 +31,7 @@ describe('PaperTextarea', () => {
   });
 
   it('marca borrador IA', () => {
-    render(
-      <PaperTextarea value="Sugerencia" ariaLabel="Plan" testId="f" aiDraft readOnly />,
-    );
+    render(<PaperTextarea value="Sugerencia" ariaLabel="Plan" testId="f" aiDraft readOnly />);
     expect(screen.getByTestId('f')).toHaveClass('epis2-paper-ai-draft');
   });
 });

@@ -259,12 +259,7 @@ export async function writeExportArtifacts(
   }
 
   const simCasesPath = join(repoRoot, 'packages', 'test-fixtures', 'src', 'simCases.ts');
-  const migrationPath = join(
-    repoRoot,
-    'database',
-    'migrations',
-    '042_sim_clinical_cases_seed.sql',
-  );
+  const migrationPath = join(repoRoot, 'database', 'migrations', '042_sim_clinical_cases_seed.sql');
   await writeFile(simCasesPath, renderSimCasesTs(bundle.cases), 'utf8');
   await writeFile(migrationPath, renderSimSeedSql(bundle.records), 'utf8');
   return { previewPath, simCasesPath, migrationPath };

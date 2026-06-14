@@ -38,7 +38,9 @@ async function main() {
       ) AS exists
     `;
     if (!exists) {
-      console.error('db:reindex-chunks FAILED: falta columna embedding_384 — aplicar migración 046');
+      console.error(
+        'db:reindex-chunks FAILED: falta columna embedding_384 — aplicar migración 046',
+      );
       process.exit(1);
     }
 

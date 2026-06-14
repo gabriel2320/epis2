@@ -4,7 +4,8 @@ export type {
   FormSection,
   FormValidationResult,
   LiveTemplateCondition,
-} from './types.js';export {
+} from './types.js';
+export {
   EPIS2_FORM_BLUEPRINTS,
   getBlueprintById,
   getBlueprintByRoutePath,

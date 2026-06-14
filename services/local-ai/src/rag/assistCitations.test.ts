@@ -62,10 +62,7 @@ describe('assistCitations (MF-IM-04)', () => {
 
   it('MF-IM-08: chunk AIAST no aparece en citas assist aunque supere score', () => {
     const aiast = getDemo005AiastAllergyChunk();
-    const candidates = filterAssistEligibleCandidates([
-      ...getDemo005RagChunks(),
-      aiast,
-    ]);
+    const candidates = filterAssistEligibleCandidates([...getDemo005RagChunks(), aiast]);
 
     const retrieval = runSequentialRagRetrieval({
       query: DEMO_005_ALLERGY_QUERY,

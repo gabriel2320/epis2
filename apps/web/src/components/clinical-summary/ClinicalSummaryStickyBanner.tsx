@@ -23,8 +23,7 @@ export function ClinicalSummaryStickyBanner({
   surface = 'calm',
   testId = 'epis2-clinical-summary-sticky-banner',
 }: ClinicalSummaryStickyBannerProps) {
-  const profile =
-    surface === 'calm' ? epis2ShapeProfiles.calm : epis2ShapeProfiles.traditional;
+  const profile = surface === 'calm' ? epis2ShapeProfiles.calm : epis2ShapeProfiles.traditional;
   const critical = alerts.filter((a) => a.severity === 'critical');
   const allergyChips = allergies.slice(0, 4);
   const prevision = previsionResumen?.trim();

@@ -1,4 +1,8 @@
-export { ClinicalCdsCard, type ClinicalCdsCardProps, type ClinicalCdsCardVariant } from './ClinicalCdsCard.js';
+export {
+  ClinicalCdsCard,
+  type ClinicalCdsCardProps,
+  type ClinicalCdsCardVariant,
+} from './ClinicalCdsCard.js';
 export {
   ClinicalPatientViewCdsPanel,
   type ClinicalPatientViewCdsPanelProps,

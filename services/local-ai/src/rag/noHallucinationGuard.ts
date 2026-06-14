@@ -18,10 +18,7 @@ const STOPWORDS = new Set([
 ]);
 
 function normalizeForMatch(text: string): string {
-  return text
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/\p{M}/gu, '');
+  return text.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '');
 }
 
 function tokenize(text: string): string[] {

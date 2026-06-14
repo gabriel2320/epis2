@@ -27,7 +27,11 @@ if (!shell.includes('contextDenseStrip')) {
 }
 
 const dual = readFileSync(join(root, 'apps/web/src/pages/DualChartPatientPage.tsx'), 'utf8');
-for (const token of ['ClinicalContextDenseStrip', 'buildClinicalContextDense', 'contextDenseStrip']) {
+for (const token of [
+  'ClinicalContextDenseStrip',
+  'buildClinicalContextDense',
+  'contextDenseStrip',
+]) {
   if (!dual.includes(token)) errors.push(`DualChartPatientPage.tsx sin ${token}`);
 }
 
@@ -46,18 +50,28 @@ if (!e2e.includes('epis2-clinical-context-dense-strip')) {
   errors.push('e2e/dual-chart-modes.spec.ts debe verificar context dense strip');
 }
 
-const domainTest = spawnSync('npm', ['run', 'test', '--', '--run', 'packages/clinical-domain/src/clinicalContextDense.test.ts'], {
-  cwd: root,
-  shell: true,
-  encoding: 'utf8',
-});
+const domainTest = spawnSync(
+  'npm',
+  ['run', 'test', '--', '--run', 'packages/clinical-domain/src/clinicalContextDense.test.ts'],
+  {
+    cwd: root,
+    shell: true,
+    encoding: 'utf8',
+  },
+);
 if (domainTest.status !== 0) {
   errors.push('clinicalContextDense.test.ts falló');
 }
 
 const stripTest = spawnSync(
   'npm',
-  ['run', 'test', '--', '--run', 'apps/web/src/components/chart/ClinicalContextDenseStrip.test.tsx'],
+  [
+    'run',
+    'test',
+    '--',
+    '--run',
+    'apps/web/src/components/chart/ClinicalContextDenseStrip.test.tsx',
+  ],
   { cwd: root, shell: true, encoding: 'utf8' },
 );
 if (stripTest.status !== 0) {

@@ -1,6 +1,14 @@
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
-import { EpisChip, EpisM3Text, List, ListItem, ListItemText, Stack, Typography } from '@epis2/epis2-ui';
+import {
+  EpisChip,
+  EpisM3Text,
+  List,
+  ListItem,
+  ListItemText,
+  Stack,
+  Typography,
+} from '@epis2/epis2-ui';
 import { useMemo, useState } from 'react';
 import {
   CLINICAL_TIMELINE_FILTERS,
@@ -69,7 +77,10 @@ export function ClinicalFilterableTimeline({
                   disablePadding
                   data-testid={`${testId}-event-${event.id}`}
                   sx={{
-                    cursor: event.kind === 'draft' && event.entityId && onOpenDraft ? 'pointer' : 'default',
+                    cursor:
+                      event.kind === 'draft' && event.entityId && onOpenDraft
+                        ? 'pointer'
+                        : 'default',
                     py: 0.75,
                   }}
                   onClick={() => {

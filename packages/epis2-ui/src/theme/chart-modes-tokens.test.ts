@@ -1,8 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  epis2PaperChartCssVars,
-  epis2PaperChartTokens,
-} from './chart-modes-tokens.js';
+import { epis2PaperChartCssVars, epis2PaperChartTokens } from './chart-modes-tokens.js';
 
 describe('epis2PaperChartTokens MF-PAPER-01', () => {
   it('usa marfil cálido FichaPapel y grilla basal carta 6mm', () => {

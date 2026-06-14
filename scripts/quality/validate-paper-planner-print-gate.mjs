@@ -20,7 +20,10 @@ if (!routerSrc.includes('/espacio/ficha/agenda/imprimir')) {
   errors.push('router sin ruta agenda/imprimir');
 }
 
-const modeSrc = readFileSync(join(root, 'apps/web/src/components/chart/PaperChartMode.tsx'), 'utf8');
+const modeSrc = readFileSync(
+  join(root, 'apps/web/src/components/chart/PaperChartMode.tsx'),
+  'utf8',
+);
 if (!modeSrc.includes('/espacio/ficha/agenda/imprimir')) {
   errors.push('PaperChartMode sin navegación print agenda');
 }

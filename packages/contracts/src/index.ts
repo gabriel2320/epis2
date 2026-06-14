@@ -80,10 +80,7 @@ export {
   type AiDocumentCitation,
   type AiRunDocumentCitationsPayload,
 } from './rag.js';
-export {
-  aiProvenanceRecordSchema,
-  type AiProvenanceRecord,
-} from './ai-provenance.js';
+export { aiProvenanceRecordSchema, type AiProvenanceRecord } from './ai-provenance.js';
 export {
   EPIS2_DRAFT_ASSIST_TRACE_KEY,
   draftAssistTraceSchema,

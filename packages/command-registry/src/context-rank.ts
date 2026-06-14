@@ -1,5 +1,8 @@
 import type { CommandActiveContext, CommandDefinition } from './types.js';
-import { assistBlueprintIntentBoost, traditionalSectionIntentBoost } from './context-section-rank.js';
+import {
+  assistBlueprintIntentBoost,
+  traditionalSectionIntentBoost,
+} from './context-section-rank.js';
 import { paperChartIntentBoost } from './paper-commands.js';
 import { paperPlannerIntentBoost } from './paper-planner-commands.js';
 
@@ -53,10 +56,7 @@ export function applyContextScoreBoost(
   }
 
   if (context.chartMode === 'traditional' || context.chartMode === undefined) {
-    boost = Math.max(
-      boost,
-      traditionalSectionIntentBoost(def, context.traditionalSection),
-    );
+    boost = Math.max(boost, traditionalSectionIntentBoost(def, context.traditionalSection));
   }
 
   boost = Math.max(boost, assistBlueprintIntentBoost(def, context.assistBlueprintId));

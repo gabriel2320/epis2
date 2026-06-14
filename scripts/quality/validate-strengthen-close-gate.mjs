@@ -28,10 +28,14 @@ const ledger = JSON.parse(readFileSync(join(root, 'docs/quality/strengthen-ledge
 const phases = ledger.phases ?? [];
 const done = phases.filter((p) => p.state === 'DONE');
 if (done.length !== phases.length) {
-  errors.push(`strengthen-ledger: ${done.length}/${phases.length} DONE (esperado ${phases.length}/${phases.length})`);
+  errors.push(
+    `strengthen-ledger: ${done.length}/${phases.length} DONE (esperado ${phases.length}/${phases.length})`,
+  );
 }
 if (ledger.executionStatus !== 'CLOSED') {
-  errors.push(`strengthen-ledger.executionStatus debe ser CLOSED (actual: ${ledger.executionStatus})`);
+  errors.push(
+    `strengthen-ledger.executionStatus debe ser CLOSED (actual: ${ledger.executionStatus})`,
+  );
 }
 const ic04 = phases.find((p) => p.id === 'MF-IC-04');
 if (!ic04 || ic04.state !== 'DONE') {

@@ -1,8 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  getProbablePatientActionChips,
-  inferPatientCareSetting,
-} from './probableActions.js';
+import { getProbablePatientActionChips, inferPatientCareSetting } from './probableActions.js';
 
 const PHYSICIAN_PERMS = ['command.execute', 'draft.write', 'patient.read'] as const;
 
@@ -10,7 +7,9 @@ describe('probableActions (MF-DI-05)', () => {
   it('inferPatientCareSetting — ambulatorio vs hospitalizado vs urgencia', () => {
     expect(inferPatientCareSetting({ hospitalizado: true })).toBe('hospitalized');
     expect(inferPatientCareSetting({ scenarioLabel: 'Urgencia adulto' })).toBe('urgency');
-    expect(inferPatientCareSetting({ scenarioLabel: 'Control ambulatorio DM2' })).toBe('ambulatory');
+    expect(inferPatientCareSetting({ scenarioLabel: 'Control ambulatorio DM2' })).toBe(
+      'ambulatory',
+    );
   });
 
   it('ambulatorio devuelve evolución y receta entre top acciones', () => {
@@ -32,7 +31,9 @@ describe('probableActions (MF-DI-05)', () => {
       careSetting: 'ambulatory',
       chronicFocus: 'dm2',
     });
-    expect(chips.find((c) => c.intent === 'create_evolution_draft')?.sampleEs).toBe('control diabetes');
+    expect(chips.find((c) => c.intent === 'create_evolution_draft')?.sampleEs).toBe(
+      'control diabetes',
+    );
     expect(chips.find((c) => c.intent === 'request_laboratory')?.sampleEs).toBe(
       'solicitar panel control dm2',
     );

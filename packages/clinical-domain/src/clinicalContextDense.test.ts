@@ -45,9 +45,7 @@ describe('clinicalContextDense (MF-DI-01)', () => {
         { name: 'Metformina', doseText: '850 mg c/12 h', status: 'active' },
         { name: 'Losartán', doseText: '50 mg/día', status: 'active' },
       ],
-      observations: [
-        { label: 'HbA1c', valueText: '7.4 %', observedAt: '2026-03-01T10:00:00Z' },
-      ],
+      observations: [{ label: 'HbA1c', valueText: '7.4 %', observedAt: '2026-03-01T10:00:00Z' }],
       ultimoEncuentroAt: '2026-02-10T10:00:00Z',
       openEncounterId: 'enc-1',
       careSettingLabel: 'Consulta ambulatoria',

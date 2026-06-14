@@ -49,9 +49,7 @@ if (existsSync(goldenPath)) {
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 const scripts = pkg.scripts ?? {};
 const catalogPath = join(root, 'tools/gates/catalog-full.json');
-const catalog = existsSync(catalogPath)
-  ? JSON.parse(readFileSync(catalogPath, 'utf8'))
-  : null;
+const catalog = existsSync(catalogPath) ? JSON.parse(readFileSync(catalogPath, 'utf8')) : null;
 
 for (const script of ['case-intel:pipeline:catalog', 'case-intel:export-evolab', 'ai:evals:sim']) {
   if (!scripts[script]) errors.push(`package.json sin script ${script}`);

@@ -2,7 +2,10 @@
  * PROG-FICHA-FIRST-2026 — lectura del ledger para agente / velocity.
  */
 import { join } from 'node:path';
-import { findNextFichaFirstPhase, loadFichaFirstLedger } from '../quality/ficha-first-ledger-lib.mjs';
+import {
+  findNextFichaFirstPhase,
+  loadFichaFirstLedger,
+} from '../quality/ficha-first-ledger-lib.mjs';
 
 /** @param {string} root */
 export function getFichaFirstActive(root) {

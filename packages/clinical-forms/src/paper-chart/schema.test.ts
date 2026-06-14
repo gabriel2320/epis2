@@ -22,7 +22,8 @@ describe('paperChartSectionSchema', () => {
 
   it('valida patch de sección con metadatos IA', () => {
     expect(
-      parsePaperChartSectionPatch({ sectionId: 'soap', body: 'S/O/A/P', source: 'ai_draft' }).source,
+      parsePaperChartSectionPatch({ sectionId: 'soap', body: 'S/O/A/P', source: 'ai_draft' })
+        .source,
     ).toBe('ai_draft');
   });
 

@@ -74,10 +74,7 @@ async function loginAdminCookie(app: Awaited<ReturnType<typeof buildApp>>) {
 
 describeIntegration('admin clinical-cases batch promote (MF-CASE-08)', () => {
   let sql: ReturnType<typeof postgres>;
-  const caseCodes = [
-    `${BATCH_PREFIX}-A`,
-    `${BATCH_PREFIX}-B`,
-  ];
+  const caseCodes = [`${BATCH_PREFIX}-A`, `${BATCH_PREFIX}-B`];
   const patientIds = caseCodes.map((c) => stableSimCaseUuids(c).patientId);
 
   beforeAll(async () => {

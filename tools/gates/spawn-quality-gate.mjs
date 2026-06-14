@@ -8,7 +8,10 @@ import { fileURLToPath } from 'node:url';
  * @param {string} gateName e.g. quality:case-intel-gate
  * @param {string} [root] repo root
  */
-export function spawnQualityGate(gateName, root = join(dirname(fileURLToPath(import.meta.url)), '../..')) {
+export function spawnQualityGate(
+  gateName,
+  root = join(dirname(fileURLToPath(import.meta.url)), '../..'),
+) {
   return spawnSync('node', ['tools/gates/run-legacy.mjs', gateName], {
     cwd: root,
     stdio: 'pipe',

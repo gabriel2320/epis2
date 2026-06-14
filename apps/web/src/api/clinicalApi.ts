@@ -47,7 +47,10 @@ export function fetchPatientDetail(patientId: string) {
 }
 
 /** MF-184 / MF-DI-03: catálogo ranked (institucional + personal). */
-export function searchMedicationCatalog(query: string, options?: { frequent?: boolean | undefined }) {
+export function searchMedicationCatalog(
+  query: string,
+  options?: { frequent?: boolean | undefined },
+) {
   const params = new URLSearchParams();
   const trimmed = query.trim();
   if (trimmed) params.set('q', trimmed);
@@ -332,10 +335,7 @@ export function approvePaperChartDraft(patientId: string) {
   });
 }
 
-export function patchPaperChartSection(
-  patientId: string,
-  patch: PaperChartSectionPatchRequest,
-) {
+export function patchPaperChartSection(patientId: string, patch: PaperChartSectionPatchRequest) {
   return apiFetch<{ patientId: string; draftId: string; sections: PaperChartSections }>(
     `/api/patients/${patientId}/paper-chart`,
     {

@@ -20,10 +20,8 @@ function runBuild() {
 }
 
 async function runTop10Metrics() {
-  const {
-    COMMAND_INTENT_TOP10,
-    COMMAND_INTENT_TOP10_MIN_RESOLVE_RATIO,
-  } = await import('@epis2/command-registry');
+  const { COMMAND_INTENT_TOP10, COMMAND_INTENT_TOP10_MIN_RESOLVE_RATIO } =
+    await import('@epis2/command-registry');
   const { resolveCommand } = await import('@epis2/command-registry');
   const { requiresExplicitConfirmation } = await import('@epis2/command-registry');
 

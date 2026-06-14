@@ -15,10 +15,7 @@ function fold(value: string): string {
   return value.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
 }
 
-function institutionalBoost(
-  searchText: string,
-  weights: Readonly<Record<string, number>>,
-): number {
+function institutionalBoost(searchText: string, weights: Readonly<Record<string, number>>): number {
   const hay = fold(searchText);
   let boost = 0;
   for (const [needle, score] of Object.entries(weights)) {
@@ -38,8 +35,7 @@ export function rankCatalogEntries<T>(input: RankCatalogEntryInput<T>): T[] {
       const key = input.getKey(item);
       const text = input.getSearchText(item);
       const textFold = fold(text);
-      const textMatch =
-        !q || textFold.includes(q) || textFold.startsWith(q) ? (q ? 40 : 0) : -1;
+      const textMatch = !q || textFold.includes(q) || textFold.startsWith(q) ? (q ? 40 : 0) : -1;
       if (!input.frequentOnly && textMatch < 0) return null;
 
       const personalScore = (personal[key] ?? 0) * 12;

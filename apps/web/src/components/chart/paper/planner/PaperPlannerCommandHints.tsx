@@ -1,9 +1,4 @@
-import {
-  Box,
-  Stack,
-  epis2PaperStatusCaptionSx,
-  epis2PaperToolbarControlSx,
-} from '@epis2/epis2-ui';
+import { Box, Stack, epis2PaperStatusCaptionSx, epis2PaperToolbarControlSx } from '@epis2/epis2-ui';
 
 export type PaperPlannerCommandHintsProps = {
   phrases: readonly string[];

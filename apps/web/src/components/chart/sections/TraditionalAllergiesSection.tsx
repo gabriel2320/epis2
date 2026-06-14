@@ -32,7 +32,12 @@ export function TraditionalAllergiesSection({
     <Stack spacing={1.5} data-testid={testId}>
       <TraditionalSectionDataTable rows={rows} testId={`${testId}-table`} />
       {onRegisterAllergy ? (
-        <EpisButton appearance="text" size="small" onClick={onRegisterAllergy} sx={{ alignSelf: 'flex-start' }}>
+        <EpisButton
+          appearance="text"
+          size="small"
+          onClick={onRegisterAllergy}
+          sx={{ alignSelf: 'flex-start' }}
+        >
           {copy.clinicalSummary.manageAllergies}
         </EpisButton>
       ) : null}

@@ -88,7 +88,9 @@ describeIntegration('draft assist trace (MF-SH-01)', () => {
       .from(auditEvents)
       .where(eq(auditEvents.entityId, draftId))
       .orderBy(auditEvents.at);
-    const approvedEvent = auditRows.filter((row) => row.eventType === 'clinical.draft.approved').at(-1);
+    const approvedEvent = auditRows
+      .filter((row) => row.eventType === 'clinical.draft.approved')
+      .at(-1);
     expect((approvedEvent?.payload as { aiRunId?: string })?.aiRunId).toBe(aiRun!.id);
 
     await app.close();

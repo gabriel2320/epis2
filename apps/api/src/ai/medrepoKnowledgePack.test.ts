@@ -47,9 +47,9 @@ describe('MF-FF-14 medrepoKnowledgePack', () => {
     const notes = getMedrepoAssistSafetyNotes('prescription', {
       medication: 'Metformina 850 mg',
     });
-    expect(notes.some((n) => n.includes('[medrepo]') && n.toLowerCase().includes('metformina'))).toBe(
-      true,
-    );
+    expect(
+      notes.some((n) => n.includes('[medrepo]') && n.toLowerCase().includes('metformina')),
+    ).toBe(true);
   });
 
   it('expone status read-only sin PHI', () => {
@@ -63,9 +63,7 @@ describe('MF-FF-14 medrepoKnowledgePack', () => {
 
   it('fixture demo existe en repo', () => {
     expect(
-      existsSync(
-        join(process.cwd(), 'apps/api/src/ai/fixtures/medrepo-knowledge-pack-demo.json'),
-      ),
+      existsSync(join(process.cwd(), 'apps/api/src/ai/fixtures/medrepo-knowledge-pack-demo.json')),
     ).toBe(true);
   });
 });

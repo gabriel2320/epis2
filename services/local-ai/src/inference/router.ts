@@ -19,7 +19,9 @@ export function buildInferencePolicyConfig(config: AiConfig): InferencePolicyCon
   };
 }
 
-export function createInferenceProviders(config: AiConfig): Map<InferenceProviderId, InferenceProvider> {
+export function createInferenceProviders(
+  config: AiConfig,
+): Map<InferenceProviderId, InferenceProvider> {
   const map = new Map<InferenceProviderId, InferenceProvider>();
   map.set('ollama', createOllamaProvider(config.OLLAMA_BASE_URL, config.OLLAMA_MODEL));
   if (config.OPENAI_API_KEY?.trim()) {

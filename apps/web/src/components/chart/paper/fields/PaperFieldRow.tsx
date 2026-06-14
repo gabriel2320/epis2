@@ -33,10 +33,18 @@ export function PaperFieldRow({ fields, testId }: PaperFieldRowProps) {
           key={field.label}
           sx={{ gridColumn: field.wide ? { xs: '1 / -1', sm: '1 / -1' } : undefined }}
         >
-          <Box component="span" className="epis2-paper-label" sx={{ ...epis2PaperFieldLabelSx(), display: 'block', mb: 0.25 }}>
+          <Box
+            component="span"
+            className="epis2-paper-label"
+            sx={{ ...epis2PaperFieldLabelSx(), display: 'block', mb: 0.25 }}
+          >
             {field.label}
           </Box>
-          <Box component="span" className="epis2-paper-value" sx={{ ...epis2PaperFieldValueSx(), display: 'block' }}>
+          <Box
+            component="span"
+            className="epis2-paper-value"
+            sx={{ ...epis2PaperFieldValueSx(), display: 'block' }}
+          >
             {field.value || '\u00a0'}
           </Box>
         </Box>

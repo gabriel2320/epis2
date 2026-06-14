@@ -12,7 +12,10 @@ type OpenAiChatResponse = {
   error?: { message?: string };
 };
 
-export async function pingOpenAi(apiKey: string, baseUrl = 'https://api.openai.com/v1'): Promise<boolean> {
+export async function pingOpenAi(
+  apiKey: string,
+  baseUrl = 'https://api.openai.com/v1',
+): Promise<boolean> {
   if (!apiKey.trim()) return false;
   try {
     const res = await fetch(`${baseUrl.replace(/\/$/, '')}/models`, {

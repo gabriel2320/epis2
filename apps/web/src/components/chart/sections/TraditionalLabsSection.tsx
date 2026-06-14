@@ -24,7 +24,9 @@ export function TraditionalLabsSection({
     value: `${o.valueText} · ${formatLabObservedAt(o.observedAt)}`,
   }));
   const rows =
-    fromLongitudinal.length > 0 ? fromLongitudinal : getDemoChartSectionRows(demoCaseCode, 'navLabs');
+    fromLongitudinal.length > 0
+      ? fromLongitudinal
+      : getDemoChartSectionRows(demoCaseCode, 'navLabs');
 
   return (
     <Stack data-testid={testId}>

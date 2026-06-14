@@ -18,9 +18,9 @@ describe('MonthlyClinicalPage', () => {
 
   it('muestra celdas atenuadas fuera del mes', () => {
     render(<MonthlyClinicalPage events={[]} />);
-    const outside = screen.getAllByTestId(/^epis2-paper-planner-month-cell-/).filter(
-      (el) => el.getAttribute('data-in-month') === 'false',
-    );
+    const outside = screen
+      .getAllByTestId(/^epis2-paper-planner-month-cell-/)
+      .filter((el) => el.getAttribute('data-in-month') === 'false');
     expect(outside.length).toBeGreaterThan(0);
   });
 });

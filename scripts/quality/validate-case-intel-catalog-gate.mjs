@@ -16,14 +16,13 @@ let EXPECTED;
 try {
   EXPECTED = readExpectedSimCatalogSize();
 } catch (err) {
-  console.error('case-intel-catalog-gate FAILED:\n  - ' + (err instanceof Error ? err.message : err));
+  console.error(
+    'case-intel-catalog-gate FAILED:\n  - ' + (err instanceof Error ? err.message : err),
+  );
   process.exit(1);
 }
 
-const catalogPath = join(
-  root,
-  'services/clinical-case-intel/fixtures/catalog.json',
-);
+const catalogPath = join(root, 'services/clinical-case-intel/fixtures/catalog.json');
 const simCasesPath = join(root, 'packages/test-fixtures/src/simClinicalCases.ts');
 const seedPath = join(root, 'database/migrations/042_sim_clinical_cases_seed.sql');
 

@@ -17,10 +17,7 @@ if (build.status !== 0) {
   errors.push('build @epis2/clinical-forms falló');
 }
 
-const treePath = join(
-  root,
-  'packages/clinical-forms/src/paper-chart/paperChartSectionTree.ts',
-);
+const treePath = join(root, 'packages/clinical-forms/src/paper-chart/paperChartSectionTree.ts');
 const navPath = join(root, 'apps/web/src/navigation/paperChartNavigationTree.ts');
 const docPath = join(root, 'docs/architecture/EPIS2_PAPER_CHART_SECTION_TREE.md');
 

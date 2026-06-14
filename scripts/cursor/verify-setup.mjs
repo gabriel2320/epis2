@@ -43,12 +43,18 @@ if (existsSync(mcpPath)) {
   const usesEnvPat = raw.includes('${env:GITHUB_PERSONAL_ACCESS_TOKEN}');
   const usesEnvDb = raw.includes('${env:EPIS2_MCP_DATABASE_URL}');
   const hasHardcodedSecret =
-    /ghp_[A-Za-z0-9]+/.test(raw) ||
-    /gho_[A-Za-z0-9]+/.test(raw) ||
-    /figd_[A-Za-z0-9]+/.test(raw);
+    /ghp_[A-Za-z0-9]+/.test(raw) || /gho_[A-Za-z0-9]+/.test(raw) || /figd_[A-Za-z0-9]+/.test(raw);
 
-  status(!hasHardcodedSecret, '.cursor/mcp.json', hasHardcodedSecret ? 'posible secreto en git' : null);
-  status(usesEnvPat, '  github env var', usesEnvPat ? null : 'usa ${env:GITHUB_PERSONAL_ACCESS_TOKEN}');
+  status(
+    !hasHardcodedSecret,
+    '.cursor/mcp.json',
+    hasHardcodedSecret ? 'posible secreto en git' : null,
+  );
+  status(
+    usesEnvPat,
+    '  github env var',
+    usesEnvPat ? null : 'usa ${env:GITHUB_PERSONAL_ACCESS_TOKEN}',
+  );
   status(usesEnvDb, '  postgres env var', usesEnvDb ? null : 'usa ${env:EPIS2_MCP_DATABASE_URL}');
 
   let parsed;
@@ -80,10 +86,7 @@ if (hasMcpDbUrl) {
   const masked = mcpDbUrl.replace(/:([^:@/]+)@/, ':***@');
   console.log(`  EPIS2_MCP_DATABASE_URL OK (${masked})`);
 } else {
-  warn(
-    'EPIS2_MCP_DATABASE_URL',
-    'añadir a .env tras npm run db:migrate — rol epis2_mcp_ro',
-  );
+  warn('EPIS2_MCP_DATABASE_URL', 'añadir a .env tras npm run db:migrate — rol epis2_mcp_ro');
 }
 
 const skills = ['epis2-session', 'epis2-close', 'epis2-ci'];

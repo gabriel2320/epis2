@@ -1,10 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { ClinicalCaseRecord } from '@epis2/contracts';
-import {
-  buildEvolabScenario,
-  evolabScenarioId,
-  buildEvolabExportBundle,
-} from './exportEvolab.js';
+import { buildEvolabScenario, evolabScenarioId, buildEvolabExportBundle } from './exportEvolab.js';
 
 const sampleRecord: ClinicalCaseRecord = {
   caseCode: 'SIM-HIPERTENSI-N-ac1e',
@@ -53,9 +49,7 @@ const sampleRecord: ClinicalCaseRecord = {
 
 describe('clinical-case-intel exportEvolab', () => {
   it('genera id de escenario estable', () => {
-    expect(evolabScenarioId('SIM-HIPERTENSI-N-ac1e')).toBe(
-      'sim-hipertensi-n-ac1e-evolution-001',
-    );
+    expect(evolabScenarioId('SIM-HIPERTENSI-N-ac1e')).toBe('sim-hipertensi-n-ac1e-evolution-001');
   });
 
   it('YAML incluye fixture demoCaseCode y flow API', () => {

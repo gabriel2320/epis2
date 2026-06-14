@@ -87,8 +87,7 @@ export function useCommandResolveContext(
   const { patient } = useActivePatient();
   const patientScoped = Boolean(patient?.id) || workspace === 'command_center';
   const rawSearch = useSearch({ strict: false }) as Record<string, unknown>;
-  const chartSearch =
-    workspace === 'patient_chart' ? parseChartModeSearch(rawSearch) : undefined;
+  const chartSearch = workspace === 'patient_chart' ? parseChartModeSearch(rawSearch) : undefined;
   const chartMode = options?.chartMode ?? chartSearch?.chartMode;
   const paperSurface = chartSearch?.paperSurface;
   const plannerView = chartSearch?.plannerView;

@@ -114,9 +114,7 @@ export async function runPipelineCatalog(
 
   const { valid, invalid } = filterValidRecords(records);
   for (const item of invalid) {
-    failures.push(
-      `${item.record.caseCode}: ${item.issues.map((i) => i.message).join('; ')}`,
-    );
+    failures.push(`${item.record.caseCode}: ${item.issues.map((i) => i.message).join('; ')}`);
   }
 
   const scrapedPath = await writeSnapshot(options.dataDir, {

@@ -30,9 +30,7 @@ export const DEMO_CHART_SECTIONS_BY_CODE: Record<string, DemoChartSectionContent
       { label: 'Creatinina', value: '0.9 mg/dL · 2026-06-01 (sintético)' },
       { label: 'Hb', value: '14 g/dL · 2026-06-01 (sintético)' },
     ],
-    navEvolution: [
-      { label: '2026-06-10', value: 'Control HTA estable — plan ambulatorio (demo)' },
-    ],
+    navEvolution: [{ label: '2026-06-10', value: 'Control HTA estable — plan ambulatorio (demo)' }],
   },
   'DEMO-002': {
     navAllergies: [{ label: 'Estado', value: 'Sin alergias documentadas (demo)' }],
@@ -78,14 +76,10 @@ export const DEMO_CHART_SECTIONS_BY_CODE: Record<string, DemoChartSectionContent
       { label: 'Leucocitos', value: '9.2 ×10³/µL · 2026-06-10 (sintético)' },
       { label: 'PCR', value: '12 mg/L · 2026-06-10 (sintético)' },
     ],
-    navEvolution: [
-      { label: '2026-06-10', value: 'Postoperatorio día 2 — tolera vía oral (demo)' },
-    ],
+    navEvolution: [{ label: '2026-06-10', value: 'Postoperatorio día 2 — tolera vía oral (demo)' }],
   },
   'DEMO-005': {
-    navAllergies: [
-      { label: 'Penicilina', value: 'Anafilaxia · severa · activa (demo)' },
-    ],
+    navAllergies: [{ label: 'Penicilina', value: 'Anafilaxia · severa · activa (demo)' }],
     navMeds: [
       { label: 'Warfarina', value: '5 mg · VO · día (demo)' },
       { label: 'Ceftriaxona', value: '1 g · IV · c/24 h (demo — revisar alergia)' },
@@ -98,9 +92,7 @@ export const DEMO_CHART_SECTIONS_BY_CODE: Record<string, DemoChartSectionContent
       { label: 'INR', value: '2.4 · 2026-06-09 (sintético)' },
       { label: 'Creatinina', value: '1.1 mg/dL · 2026-06-09 (sintético)' },
     ],
-    navEvolution: [
-      { label: '2026-06-09', value: 'Fiebre en descenso — ceftriaxona día 2 (demo)' },
-    ],
+    navEvolution: [{ label: '2026-06-09', value: 'Fiebre en descenso — ceftriaxona día 2 (demo)' }],
   },
 };
 
@@ -149,7 +141,9 @@ const BATCH2_BY_CODE: Record<string, DemoChartBatch2Content> = {
   },
   'DEMO-005': {
     navAnamnesis: [{ label: 'Motivo', value: 'Fiebre en estudio — bacteriemia (demo)' }],
-    navPhysicalExam: [{ label: 'General', value: 'Febril 38.1 °C — hemodinámicamente estable (demo)' }],
+    navPhysicalExam: [
+      { label: 'General', value: 'Febril 38.1 °C — hemodinámicamente estable (demo)' },
+    ],
     navDiagnoses: [{ label: 'Principal', value: 'Bacteriemia en evaluación (demo)' }],
     navImaging: [{ label: 'Eco cardio', value: 'Solicitada — pendiente (demo)' }],
     navConsults: [{ label: 'Cardiología', value: 'Interconsulta FA (demo)' }],
@@ -176,7 +170,10 @@ export type DemoChartBatch3SectionId = (typeof DEMO_CHART_BATCH3_SECTIONS)[numbe
 
 export type DemoChartDemoSectionId = DemoChartBatch2SectionId | DemoChartBatch3SectionId;
 
-const BATCH3_BY_CODE: Record<string, Partial<Record<DemoChartBatch3SectionId, readonly DemoChartSectionRow[]>>> = {
+const BATCH3_BY_CODE: Record<
+  string,
+  Partial<Record<DemoChartBatch3SectionId, readonly DemoChartSectionRow[]>>
+> = {
   'DEMO-001': {
     navAdmin: [{ label: 'Previsión', value: 'FONASA · ambulatorio (demo)' }],
     navDocuments: [{ label: 'Consentimiento', value: 'No requerido — control (demo)' }],
@@ -257,7 +254,9 @@ export function hasDemoTraditionalSectionContent(
     (DEMO_CHART_BATCH2_SECTIONS as readonly string[]).includes(sectionId) ||
     (DEMO_CHART_BATCH3_SECTIONS as readonly string[]).includes(sectionId)
   ) {
-    return getDemoChartDemoSectionRows(demoCaseCode, sectionId as DemoChartDemoSectionId).length > 0;
+    return (
+      getDemoChartDemoSectionRows(demoCaseCode, sectionId as DemoChartDemoSectionId).length > 0
+    );
   }
   return false;
 }

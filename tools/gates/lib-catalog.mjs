@@ -11,7 +11,9 @@ export function repoRootFromGatesDir(gatesDir) {
 }
 
 export function loadCatalogFile(gatesDir, preferFull = true) {
-  const names = preferFull ? ['catalog-full.json', 'catalog.json'] : ['catalog.json', 'catalog-full.json'];
+  const names = preferFull
+    ? ['catalog-full.json', 'catalog.json']
+    : ['catalog.json', 'catalog-full.json'];
   for (const name of names) {
     const path = join(gatesDir, name);
     if (existsSync(path)) {

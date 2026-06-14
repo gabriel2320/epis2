@@ -55,7 +55,10 @@ export function ClinicalSilentSuggestionsPanel({
         >
           {expanded
             ? copy.clinicalSummary.silentSuggestionsShowLess
-            : copy.clinicalSummary.silentSuggestionsShowMore.replace('{count}', String(hiddenCount))}
+            : copy.clinicalSummary.silentSuggestionsShowMore.replace(
+                '{count}',
+                String(hiddenCount),
+              )}
         </EpisButton>
       ) : null}
     </Stack>

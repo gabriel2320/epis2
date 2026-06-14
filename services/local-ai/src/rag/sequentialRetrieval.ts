@@ -1,10 +1,6 @@
 import { assembleRagContext } from './assembleContext.js';
 import { scoreChunkCandidate } from './similarity.js';
-import type {
-  RagChunkCandidate,
-  RetrievedChunk,
-  SequentialRetrievalResult,
-} from './types.js';
+import type { RagChunkCandidate, RetrievedChunk, SequentialRetrievalResult } from './types.js';
 
 type RemainingCandidate = RagChunkCandidate & { sourceIndex: number };
 
@@ -38,10 +34,7 @@ export function retrieveChunksSequential(
     for (let i = 0; i < remaining.length; i += 1) {
       const candidate = remaining[i]!;
       const score = scoreChunkCandidate(queryEmbedding, candidate);
-      if (
-        score > bestScore ||
-        (score === bestScore && candidate.sourceIndex < bestSourceIndex)
-      ) {
+      if (score > bestScore || (score === bestScore && candidate.sourceIndex < bestSourceIndex)) {
         bestScore = score;
         bestIdx = i;
         bestSourceIndex = candidate.sourceIndex;

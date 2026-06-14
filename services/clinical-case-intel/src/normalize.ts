@@ -43,8 +43,9 @@ export function buildSummaryFields(
         ? clinical.observations.map((o) => `${o.label} ${o.valueText}`).join(' · ')
         : 'Sin laboratorio reciente (sintético)',
     activeMedications:
-      clinical.medications?.map((m) => `${m.name}${m.doseText ? ` ${m.doseText}` : ''}`).join(' · ') ??
-      'Sin medicación activa registrada (sintético)',
+      clinical.medications
+        ?.map((m) => `${m.name}${m.doseText ? ` ${m.doseText}` : ''}`)
+        .join(' · ') ?? 'Sin medicación activa registrada (sintético)',
     pendingItems: 'Seguimiento ambulatorio en 7 días (demo)',
     clinicalAlerts: 'SIM / SINTÉTICO — sin alertas reales',
   };

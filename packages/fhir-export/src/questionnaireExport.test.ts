@@ -59,8 +59,13 @@ describe('Questionnaire export (MF-IC-03)', () => {
       { sections: EVOLUTION_NOTE_FIXTURE.sections },
     );
 
-    const collectIds = (items: { linkId: string; item?: { linkId: string; item?: unknown[] }[] }[]): string[] =>
-      items.flatMap((item) => [item.linkId, ...(item.item ? collectIds(item.item as typeof items) : [])]);
+    const collectIds = (
+      items: { linkId: string; item?: { linkId: string; item?: unknown[] }[] }[],
+    ): string[] =>
+      items.flatMap((item) => [
+        item.linkId,
+        ...(item.item ? collectIds(item.item as typeof items) : []),
+      ]);
 
     const linkIds = new Set(collectIds(questionnaire.item));
     for (const fieldId of EVOLUTION_NOTE_QUESTIONNAIRE_FIELD_IDS) {

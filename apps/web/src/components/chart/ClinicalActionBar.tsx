@@ -1,11 +1,5 @@
 import { copy } from '@epis2/design-system';
-import {
-  Box,
-  Collapse,
-  EpisButton,
-  Stack,
-  epis2ClinicalShellTokens,
-} from '@epis2/epis2-ui';
+import { Box, Collapse, EpisButton, Stack, epis2ClinicalShellTokens } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 import type { ChartModeId } from '../../dev/dualChartModesEnv.js';
@@ -71,7 +65,14 @@ export function ClinicalActionBar({
         </EpisButton>
       </Stack>
       <Collapse in={moreOpen} sx={{ display: { xs: 'none', lg: 'block' } }}>
-        <Stack direction="row" flexWrap="wrap" useFlexGap spacing={1} alignItems="center" sx={{ pt: 0.5 }}>
+        <Stack
+          direction="row"
+          flexWrap="wrap"
+          useFlexGap
+          spacing={1}
+          alignItems="center"
+          sx={{ pt: 0.5 }}
+        >
           <EpisButton
             size="small"
             appearance="tonal"

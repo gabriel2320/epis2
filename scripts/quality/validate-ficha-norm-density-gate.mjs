@@ -45,7 +45,7 @@ function walkChart(dir) {
     else if (/\.(tsx|ts)$/.test(name)) {
       const rel = relative(root, full).replace(/\\/g, '/');
       const src = readFileSync(full, 'utf8');
-      if (forbiddenRadius.test(src) && !src.includes('borderRadius: \'50%\'')) {
+      if (forbiddenRadius.test(src) && !src.includes("borderRadius: '50%'")) {
         errors.push(`${rel}: borderRadius >10px no permitido en chart/`);
       }
     }

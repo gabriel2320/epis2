@@ -22,10 +22,7 @@ export function resolveRequestDataTier(
 }
 
 /** Cloud bloqueado para L2_phi hasta BAA explícito (fail-closed). */
-export function cloudAllowedForTier(
-  tier: InferenceDataTier,
-  cloudEnabled: boolean,
-): boolean {
+export function cloudAllowedForTier(tier: InferenceDataTier, cloudEnabled: boolean): boolean {
   if (!cloudEnabled) return false;
   return tier === 'L0_synthetic' || tier === 'L1_deidentified';
 }

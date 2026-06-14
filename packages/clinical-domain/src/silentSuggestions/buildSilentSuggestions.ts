@@ -32,7 +32,9 @@ function fold(value: string): string {
 }
 
 function detectChronicFocus(summaryFields: Record<string, string>): 'dm2' | 'hta' | null {
-  const blob = fold([summaryFields.activeProblems, summaryFields.relevantLabs].filter(Boolean).join(' '));
+  const blob = fold(
+    [summaryFields.activeProblems, summaryFields.relevantLabs].filter(Boolean).join(' '),
+  );
   if (/diabetes|dm2|dm\s*2|glicemia|hba1c/.test(blob)) return 'dm2';
   if (/hipertension|hta|presion arterial|presión arterial/.test(blob)) return 'hta';
   return null;

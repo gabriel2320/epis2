@@ -27,16 +27,14 @@ export function TraditionalMedsSection({
     ...zones.suspended.map((m) => ({ label: 'Suspendida', value: formatMedicationLine(m) })),
   ];
   const rows =
-    fromLongitudinal.length > 0 ? fromLongitudinal : getDemoChartSectionRows(demoCaseCode, 'navMeds');
+    fromLongitudinal.length > 0
+      ? fromLongitudinal
+      : getDemoChartSectionRows(demoCaseCode, 'navMeds');
   const denseRows = mapMarRowsToDenseTabular(rows);
 
   return (
     <Stack data-testid={testId}>
-      <TraditionalDenseSectionGrid
-        rows={denseRows}
-        variant="mar"
-        testId={`${testId}-dense-grid`}
-      />
+      <TraditionalDenseSectionGrid rows={denseRows} variant="mar" testId={`${testId}-dense-grid`} />
     </Stack>
   );
 }

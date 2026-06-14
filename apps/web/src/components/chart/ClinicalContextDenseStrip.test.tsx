@@ -37,9 +37,9 @@ describe('ClinicalContextDenseStrip (MF-DI-01)', () => {
     expect(screen.getByTestId('epis2-clinical-context-dense-strip-medications')).toHaveTextContent(
       'Metformina',
     );
-    expect(screen.getByTestId('epis2-clinical-context-dense-strip-last-encounter')).toHaveTextContent(
-      'hace 4 meses',
-    );
+    expect(
+      screen.getByTestId('epis2-clinical-context-dense-strip-last-encounter'),
+    ).toHaveTextContent('hace 4 meses');
     expect(screen.getByTestId('epis2-clinical-context-dense-strip-lab-hba1c')).toHaveTextContent(
       '7.4 % · hace 3 meses',
     );

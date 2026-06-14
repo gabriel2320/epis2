@@ -1,7 +1,4 @@
-import {
-  PAPER_CHART_SECTION_IDS,
-  type PaperChartSectionId,
-} from '@epis2/clinical-forms';
+import { PAPER_CHART_SECTION_IDS, type PaperChartSectionId } from '@epis2/clinical-forms';
 import { copy } from '@epis2/design-system';
 
 /** Re-export SoT — `@epis2/clinical-forms` schema + árbol I–XIV. */

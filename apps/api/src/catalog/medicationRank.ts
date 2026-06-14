@@ -1,7 +1,4 @@
-import {
-  INSTITUTIONAL_MEDICATION_WEIGHTS,
-  rankCatalogEntries,
-} from '@epis2/clinical-domain';
+import { INSTITUTIONAL_MEDICATION_WEIGHTS, rankCatalogEntries } from '@epis2/clinical-domain';
 import type { ClinicalCatalogEntry } from '@epis2/contracts';
 import { and, asc, eq, ilike } from 'drizzle-orm';
 import type { Database } from '../db/client.js';

@@ -39,7 +39,11 @@ export function PaperChartPrintPage() {
       <Stack spacing={2} data-testid="epis2-paper-chart-print-page" sx={{ width: '100%' }}>
         <PrintPageToolbar printLabel={printLabel} />
         {readOnly ? (
-          <Stack component="span" className="epis2-no-print" sx={{ fontSize: '11px', color: 'text.secondary' }}>
+          <Stack
+            component="span"
+            className="epis2-no-print"
+            sx={{ fontSize: '11px', color: 'text.secondary' }}
+          >
             {copy.chartModes.signedNotice}
           </Stack>
         ) : null}

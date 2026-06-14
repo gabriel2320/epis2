@@ -80,7 +80,10 @@ if (!cdsRoutes.includes("app.post(\n    '/api/cds/cards'")) {
 }
 
 const cdsContracts = readFileSync(join(root, 'packages/contracts/src/cdsCards.ts'), 'utf8');
-if (!cdsContracts.includes('cdsCardsRequestSchema') || !cdsContracts.includes('cdsCardsResponseSchema')) {
+if (
+  !cdsContracts.includes('cdsCardsRequestSchema') ||
+  !cdsContracts.includes('cdsCardsResponseSchema')
+) {
   errors.push('packages/contracts/src/cdsCards.ts debe definir request/response schemas');
 }
 

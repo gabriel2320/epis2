@@ -113,5 +113,7 @@ pkg.scripts = scripts;
 writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
 
 console.log(`phase2-prune OK — kept ${kept} meta, shimmed ${shimmed}, removed ${removed}`);
-console.log(`  quality:* restantes: ${Object.keys(scripts).filter((k) => k.startsWith('quality:')).length}`);
+console.log(
+  `  quality:* restantes: ${Object.keys(scripts).filter((k) => k.startsWith('quality:')).length}`,
+);
 console.log('  Invocar catálogo: npm run quality:gate -- quality:<name>');

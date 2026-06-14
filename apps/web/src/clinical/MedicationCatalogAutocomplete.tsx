@@ -73,9 +73,7 @@ export function MedicationCatalogAutocomplete({
       onChange={handleSelect}
       getOptionLabel={(option) => (typeof option === 'string' ? option : option.label)}
       isOptionEqualToValue={(a, b) =>
-        typeof a === 'string' || typeof b === 'string'
-          ? a === b
-          : a.entryCode === b.entryCode
+        typeof a === 'string' || typeof b === 'string' ? a === b : a.entryCode === b.entryCode
       }
       renderInput={(params) => (
         <EpisAutocompleteTextField

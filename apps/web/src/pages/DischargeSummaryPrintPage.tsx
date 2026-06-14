@@ -26,7 +26,9 @@ export function DischargeSummaryPrintPage() {
   return (
     <Stack spacing={2} data-testid="epis2-discharge-summary-print-page">
       {paperSearch.returnChartMode === 'paper' ? (
-        <PaperBridgeBackButton onClick={() => navigateBackToPaperChart(navigate, patientId, 'letter')} />
+        <PaperBridgeBackButton
+          onClick={() => navigateBackToPaperChart(navigate, patientId, 'letter')}
+        />
       ) : null}
       <PrintPageToolbar printLabel={copy.print.printLetter} />
       <PrintLetterDocument

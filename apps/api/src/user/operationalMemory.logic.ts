@@ -13,10 +13,7 @@ export function mergeRecentPatients(
   incoming: OperationalRecentPatient,
 ): OperationalRecentPatient[] {
   const accessedAt = incoming.accessedAt ?? new Date().toISOString();
-  const next = [
-    { ...incoming, accessedAt },
-    ...current.filter((row) => row.id !== incoming.id),
-  ];
+  const next = [{ ...incoming, accessedAt }, ...current.filter((row) => row.id !== incoming.id)];
   return next.slice(0, MAX_RECENT_PATIENTS);
 }
 

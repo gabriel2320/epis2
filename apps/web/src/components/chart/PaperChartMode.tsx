@@ -3,7 +3,11 @@ import { Box, Stack, epis2PaperStatusCaptionSx } from '@epis2/epis2-ui';
 import { useSearch } from '@tanstack/react-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useClinicalNavigate } from '../../routes/clinicalNavigate.js';
-import { parseChartModeSearch, resolvePaperSurface, resolvePlannerView } from '../../routes/chartModeSearch.js';
+import {
+  parseChartModeSearch,
+  resolvePaperSurface,
+  resolvePlannerView,
+} from '../../routes/chartModeSearch.js';
 import type { PaperPlannerSurface, PaperPlannerView } from './paper/planner/types.js';
 import { PaperPlannerShell, PaperPlannerSurfaceTabs } from './paper/planner/index.js';
 import { usePaperChartDraft } from '../../clinical/usePaperChartDraft.js';
@@ -192,7 +196,9 @@ export function PaperChartMode({
         <Box sx={{ px: 2, ...epis2PaperStatusCaptionSx(), color: 'error.main' }}>{draft.error}</Box>
       ) : null}
       {draft.notice ? (
-        <Box sx={{ px: 2, ...epis2PaperStatusCaptionSx(), color: 'success.main' }}>{draft.notice}</Box>
+        <Box sx={{ px: 2, ...epis2PaperStatusCaptionSx(), color: 'success.main' }}>
+          {draft.notice}
+        </Box>
       ) : null}
       {signError ? (
         <Box
@@ -218,10 +224,7 @@ export function PaperChartMode({
           {copy.chartModes.aiDraftNotice} ({draft.unconfirmedAiCount})
         </Box>
       ) : null}
-      <PaperPlannerSurfaceTabs
-        activeSurface={paperSurface}
-        onSurfaceChange={handleSurfaceChange}
-      />
+      <PaperPlannerSurfaceTabs activeSurface={paperSurface} onSurfaceChange={handleSurfaceChange} />
       {paperSurface === 'planner' ? (
         <PaperPlannerShell
           activeView={plannerView}
@@ -246,10 +249,10 @@ export function PaperChartMode({
               patientStrip={patientStrip}
               pageLayouts={pages}
               totalPages={totalPages}
-              onSectionChange={patientId && !draft.readOnly ? draft.onSectionChange : onSectionChange}
-              onConfirmSection={
-                patientId && !draft.readOnly ? draft.confirmSection : undefined
+              onSectionChange={
+                patientId && !draft.readOnly ? draft.onSectionChange : onSectionChange
               }
+              onConfirmSection={patientId && !draft.readOnly ? draft.confirmSection : undefined}
             />
           </PaperPageCanvas>
         </Box>

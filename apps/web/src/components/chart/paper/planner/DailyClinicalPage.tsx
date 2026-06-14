@@ -137,7 +137,9 @@ export function DailyClinicalPage({
                 </Box>
                 <Box sx={{ px: 1.5, py: 0.75 }}>
                   {hourEvents.length === 0 ? (
-                    <Box sx={{ ...epis2PaperFieldValueSx(), color: t.paperInkMid, minHeight: 24 }} />
+                    <Box
+                      sx={{ ...epis2PaperFieldValueSx(), color: t.paperInkMid, minHeight: 24 }}
+                    />
                   ) : (
                     hourEvents.map((evt) => (
                       <Box

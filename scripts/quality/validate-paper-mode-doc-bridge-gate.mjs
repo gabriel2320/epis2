@@ -21,7 +21,11 @@ for (const [label, path] of [
 
 if (existsSync(toolbarPath)) {
   const src = readFileSync(toolbarPath, 'utf8');
-  for (const needle of ['epis2-paper-doc-bridge', 'navigatePaperDocumentBridge', 'PAPER_DOCUMENT_BRIDGES']) {
+  for (const needle of [
+    'epis2-paper-doc-bridge',
+    'navigatePaperDocumentBridge',
+    'PAPER_DOCUMENT_BRIDGES',
+  ]) {
     if (!src.includes(needle)) errors.push(`PaperDocumentToolbar falta ${needle}`);
   }
 }

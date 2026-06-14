@@ -492,7 +492,9 @@ export function toFhirAiModelCardDocumentReference(source: AiModelCardSource) {
 }
 
 /** Entradas extras (Device + model card + Provenance) para bundle de export asistido. */
-export function buildAssistProvenanceExtras(source: AssistProvenanceSource): Record<string, unknown>[] {
+export function buildAssistProvenanceExtras(
+  source: AssistProvenanceSource,
+): Record<string, unknown>[] {
   const modelCard = toFhirAiModelCardDocumentReference({
     model: source.aiProvenance.model,
     promptHash: source.aiProvenance.promptHash,

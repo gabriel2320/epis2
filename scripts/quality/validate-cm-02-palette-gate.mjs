@@ -36,7 +36,9 @@ if (!shell.includes('onSubmitNaturalLanguage={runCommand}')) {
   errors.push('ClinicalShellCommandPalette debe pasar onSubmitNaturalLanguage=runCommand');
 }
 if (!shell.includes('useClinicalCommandSubmit')) {
-  errors.push('ClinicalShellCommandPalette debe usar useClinicalCommandSubmit (misma vía que barra)');
+  errors.push(
+    'ClinicalShellCommandPalette debe usar useClinicalCommandSubmit (misma vía que barra)',
+  );
 }
 
 const build = readFileSync(paths.buildItems, 'utf8');
@@ -45,7 +47,11 @@ if (!build.includes('clinicalCommandTextForDefinition')) {
 }
 
 const e2e = readFileSync(paths.e2e, 'utf8');
-for (const needle of ['MF-CM-02', 'epis2-command-palette-item-create_evolution_draft', 'chartMode=paper']) {
+for (const needle of [
+  'MF-CM-02',
+  'epis2-command-palette-item-create_evolution_draft',
+  'chartMode=paper',
+]) {
   if (!e2e.includes(needle)) errors.push(`dual-chart-modes.spec.ts falta evidencia ${needle}`);
 }
 
