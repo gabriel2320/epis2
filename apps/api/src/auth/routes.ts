@@ -3,7 +3,7 @@ import { loginRequestSchema, sessionResponseSchema } from '@epis2/contracts';
 import type { FastifyInstance } from 'fastify';
 import type { Database } from '../db/client.js';
 import { appendAudit, listAuthAuditEvents } from '../audit/store.js';
-import type { AppConfig } from '../config.js';
+import { type AppConfig, isDemoAuthEnabled, isDeployedEnv } from '../config.js';
 import { sendApiError } from '../errors.js';
 import {
   createAuthenticate,
@@ -45,6 +45,14 @@ export async function registerAuthRoutes(
       return sendApiError(reply, 400, 'Datos de inicio de sesión inválidos');
     }
 
+    if (!isDemoAuthEnabled(config)) {
+      return sendApiError(
+        reply,
+        403,
+        'Autenticación demo no disponible en este entorno. Configure un proveedor de identidad.',
+      );
+    }
+
     const user = findSyntheticUser(body.data.username);
     if (!user || !verifyDemoAuthKey(user, body.data.demoAuthKey)) {
       await appendAudit(db, {
@@ -68,7 +76,7 @@ export async function registerAuthRoutes(
     reply.setCookie(config.SESSION_COOKIE_NAME, token, {
       httpOnly: true,
       sameSite: 'lax',
-      secure: config.NODE_ENV === 'production',
+      secure: isDeployedEnv(config.NODE_ENV),
       path: '/',
       maxAge: 60 * 60 * 8,
     });

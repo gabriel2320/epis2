@@ -117,4 +117,22 @@ describe('auth routes', () => {
     expect(res.statusCode).toBe(401);
     await app.close();
   });
+
+  it('rechaza login demo en staging (MF-CON-05)', async () => {
+    const stagingConfig = {
+      ...config,
+      NODE_ENV: 'staging' as const,
+      RLS_MODE: 'enforce' as const,
+      AUTH_MODE: 'hybrid' as const,
+      SESSION_SECRET: 'staging-test-session-min-32-chars',
+    };
+    const app = await buildApp(stagingConfig);
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      payload: { username: 'medico.demo', demoAuthKey: 'DEMO-CLAVE-MEDICO' },
+    });
+    expect(res.statusCode).toBe(403);
+    await app.close();
+  });
 });
