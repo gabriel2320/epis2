@@ -441,15 +441,15 @@ npm run check && npm run medrepo:doctor
 - [ ] Commit PROG-DI pushed · CI verde
 
 ### F3 ☐
-- [ ] Evolab pushed
-- [ ] findings sync fresco
-- [ ] smoke OK
+- [x] Evolab pushed
+- [x] findings sync fresco
+- [x] smoke OK
 
 ### F4 ☐
-- [ ] MedRepo en git · check verde
+- [x] MedRepo en git · check verde
 
 ### F5 ☐
-- [ ] Informe gates tríada
+- [x] Informe gates tríada
 
 ### F6 ☐
 - [ ] Backlog Evolab triaged

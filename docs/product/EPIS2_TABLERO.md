@@ -1,10 +1,10 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-14 · **HEAD committed:** `b46c6bc`
+**Actualizado:** 2026-06-14 · **HEAD committed:** `752af4f`
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:** [`epis2-plan-conciliacion-triada-2026-06-14.md`](../../reports/epis2-plan-conciliacion-triada-2026-06-14.md) · **Correcciones:** [`epis2-plan-correcciones-prioritarias-2026-06-14.md`](../../reports/epis2-plan-correcciones-prioritarias-2026-06-14.md) · **Tríada:** [`EPIS2_TRIADA_REPOS.md`](./EPIS2_TRIADA_REPOS.md)
 
-> **F3 Evolab** ✓ · **F4 MedRepo** ✓ (check 75/75). **Siguiente:** F5 smoke tríada · **MF-SH-02**.
+> **F3–F5 tríada** ✓ · **F4 MedRepo** check 75/75. **Siguiente:** F6 integración packs · **MF-SH-02**.
 
 ---
 
@@ -17,7 +17,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:
 | **F3 Evolab** | ✓ push `246fc27` · smoke 14/14 | — |
 | **F4 MedRepo** | ✓ git baseline · check 75/75 | remote push opcional |
 | **A2–C1 correcciones** | ✓ S1 cerrado | — |
-| **F5 smoke tríada** | ☐ | matriz gates |
+| **F5 smoke tríada** | ✓ gates 7/8 · export SKIP F6 | [`epis2-f5-close-2026-06-14.md`](../../reports/conciliacion/epis2-f5-close-2026-06-14.md) |
 
 Inventario: [`reports/conciliacion/`](../conciliacion/)
 
@@ -45,6 +45,7 @@ Inventario: [`reports/conciliacion/`](../conciliacion/)
 | **S1 conciliación tríada** | F0 manifest + MF-DI map · F1 tablero/triada · [`conciliacion/`](../conciliacion/) · 2026-06-14 |
 | **PROG-DI** | 10/10 DONE · commit `f56b7d2` · [`epis2-prog-di-close-2026.md`](../../reports/epis2-prog-di-close-2026.md) |
 | **F4 MedRepo** | git `3e1181b` · check 75/75 · [`epis2-f4-close-2026-06-14.md`](../../reports/conciliacion/epis2-f4-close-2026-06-14.md) |
+| **F5 smoke tríada** | gates 7/8 · smoke 14/14 · [`epis2-f5-close-2026-06-14.md`](../../reports/conciliacion/epis2-f5-close-2026-06-14.md) |
 
 ---
 
