@@ -449,7 +449,8 @@
       "subprogram": "PROG-CDS-UX",
       "phase": 4,
       "dependsOn": ["MF-CU-02"],
-      "state": "BLOCKED",
+      "state": "DONE",
+      "completedAt": "2026-06-15",
       "gate": "quality:cds-hooks-gate",
       "evidenceRequired": [
         "GET/POST /cds/cards con prefetch paciente",

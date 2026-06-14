@@ -99,6 +99,16 @@ export {
   type PatientClinicalAlertsResponse,
 } from './clinicalAlerts.js';
 export {
+  cdsHookIdSchema,
+  cdsCardSchema,
+  cdsCardsRequestSchema,
+  cdsCardsResponseSchema,
+  type CdsHookId,
+  type CdsCard,
+  type CdsCardsRequest,
+  type CdsCardsResponse,
+} from './cdsCards.js';
+export {
   censusBedRowSchema,
   clinicalOrderRowSchema,
   criticalResultRowSchema,

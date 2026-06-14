@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** MF-CU-02 / MF-CU-03 — CDS Hooks patient-view + order-select. */
+/** MF-CU-02 / MF-CU-03 / MF-CU-04 — CDS Hooks patient-view + order-select + API /cds/cards. */
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -26,7 +26,13 @@ const requiredCu03 = [
   'reports/epis2-mf-cu-03-order-select.md',
 ];
 
-for (const rel of [...requiredCu02, ...requiredCu03]) {
+const requiredCu04 = [
+  'packages/contracts/src/cdsCards.ts',
+  'apps/api/src/routes/cds/cards.integration.test.ts',
+  'reports/epis2-mf-cu-04-cds-api.md',
+];
+
+for (const rel of [...requiredCu02, ...requiredCu03, ...requiredCu04]) {
   if (!existsSync(join(root, rel))) errors.push(`Falta ${rel}`);
 }
 
@@ -66,6 +72,17 @@ const cdsRoutes = readFileSync(join(root, 'apps/api/src/routes/cds/routes.ts'), 
 if (!cdsRoutes.includes('/api/cds/order-select/:patientId')) {
   errors.push('API debe exponer GET /api/cds/order-select/:patientId');
 }
+if (!cdsRoutes.includes('/api/cds/cards/:patientId')) {
+  errors.push('API debe exponer GET /api/cds/cards/:patientId');
+}
+if (!cdsRoutes.includes("app.post(\n    '/api/cds/cards'")) {
+  errors.push('API debe exponer POST /api/cds/cards');
+}
+
+const cdsContracts = readFileSync(join(root, 'packages/contracts/src/cdsCards.ts'), 'utf8');
+if (!cdsContracts.includes('cdsCardsRequestSchema') || !cdsContracts.includes('cdsCardsResponseSchema')) {
+  errors.push('packages/contracts/src/cdsCards.ts debe definir request/response schemas');
+}
 
 const e2eDual = readFileSync(join(root, 'e2e/dual-chart-modes.spec.ts'), 'utf8');
 if (!e2eDual.includes('epis2-cds-patient-view')) {
@@ -78,7 +95,7 @@ if (!e2eRx.includes('epis2-cds-order-select')) {
 }
 
 const ledger = JSON.parse(readFileSync(join(root, 'docs/quality/strengthen-ledger.json'), 'utf8'));
-for (const id of ['MF-CU-02', 'MF-CU-03']) {
+for (const id of ['MF-CU-02', 'MF-CU-03', 'MF-CU-04']) {
   const mf = ledger.phases?.find((m) => m.id === id);
   if (!mf || mf.state !== 'DONE') {
     errors.push(`strengthen-ledger.json: ${id} debe estar DONE`);
@@ -112,4 +129,6 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('quality:cds-hooks-gate — OK (MF-CU-02 patient-view + MF-CU-03 order-select)');
+console.log(
+  'quality:cds-hooks-gate — OK (MF-CU-02 patient-view + MF-CU-03 order-select + MF-CU-04 /cds/cards)',
+);
