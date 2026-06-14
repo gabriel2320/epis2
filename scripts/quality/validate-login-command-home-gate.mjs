@@ -11,7 +11,7 @@ const router = readFileSync(join(root, 'apps/web/src/routes/router.tsx'), 'utf8'
 const home = readFileSync(join(root, 'apps/web/src/routes/home.ts'), 'utf8');
 const guards = readFileSync(join(root, 'apps/web/src/modes/episModeGuards.ts'), 'utf8');
 
-const clinicalHome = "/espacio/buscar-paciente";
+const clinicalHome = '/espacio/buscar-paciente';
 
 if (!home.includes(`EPIS2_CLINICAL_HOME = '${clinicalHome}'`)) {
   errors.push(`home.ts debe definir EPIS2_CLINICAL_HOME = ${clinicalHome}`);
