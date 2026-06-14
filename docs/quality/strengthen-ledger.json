@@ -405,7 +405,8 @@
       "subprogram": "PROG-CDS-UX",
       "phase": 2,
       "dependsOn": ["MF-CU-01"],
-      "state": "BLOCKED",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
       "gate": "quality:cds-hooks-gate",
       "evidenceRequired": [
         "Cards alergias/gaps al abrir ficha",

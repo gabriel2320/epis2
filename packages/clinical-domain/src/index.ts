@@ -104,6 +104,11 @@ export {
   type SilentSuggestionVariant,
 } from './silentSuggestions/buildSilentSuggestions.js';
 export {
+  mapClinicalAlertsToPatientViewCards,
+  type CdsHookId,
+  type PatientViewCdsCard,
+} from './cdsHooks/mapClinicalAlertsToPatientViewCards.js';
+export {
   bumpUsageCount,
   INSTITUTIONAL_DIAGNOSIS_PHRASE_WEIGHTS,
   INSTITUTIONAL_LAB_PHRASE_WEIGHTS,

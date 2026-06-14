@@ -130,7 +130,15 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
     await expect(page.getByTestId('epis2-microjourney-print-rx')).toBeVisible();
   });
 
-  test('h) alterna a papel desde /espacio/ficha', async ({ page }) => {
+  test('h) patient-view muestra CDS card al abrir ficha DEMO-005', async ({ page }) => {
+    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
+    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    const patientViewPanel = page.getByTestId('epis2-cds-patient-view');
+    await expect(patientViewPanel).toBeVisible({ timeout: 15_000 });
+    await expect(page.locator('[data-testid^="epis2-cds-patient-view-card-"]').first()).toBeVisible();
+  });
+
+  test('h-alt) alterna a papel desde /espacio/ficha', async ({ page }) => {
     await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
     await page.getByTestId('epis2-chart-mode-paper').click();
     await expect(page).toHaveURL(/chartMode=paper/);

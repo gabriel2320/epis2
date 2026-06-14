@@ -215,6 +215,7 @@
     "quality:di-context-gate": "node scripts/quality/validate-di-context-gate.mjs",
     "quality:di-prefill-gate": "node scripts/quality/validate-di-prefill-gate.mjs",
     "quality:di-suggestions-gate": "node scripts/quality/validate-di-suggestions-gate.mjs",
+    "quality:cds-hooks-gate": "node scripts/quality/validate-cds-hooks-gate.mjs",
     "quality:di-memory-gate": "node scripts/quality/validate-di-memory-gate.mjs",
     "quality:di-autocomplete-gate": "node scripts/quality/validate-di-autocomplete-gate.mjs",
     "quality:di-templates-gate": "node scripts/quality/validate-di-templates-gate.mjs",

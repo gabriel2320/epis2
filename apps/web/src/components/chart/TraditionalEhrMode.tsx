@@ -7,6 +7,7 @@ import type { CommandChip } from '@epis2/command-registry';
 import { Box, epis2TraditionalChartTokens } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
 import { useEffect, useMemo, useState } from 'react';
+import { ClinicalPatientViewCdsPanel } from '../cds/ClinicalPatientViewCdsPanel.js';
 import { PatientClinicalSummaryGrid } from '../clinical-summary/PatientClinicalSummaryGrid.js';
 import { ClinicalRightContextPanel } from './ClinicalRightContextPanel.js';
 import { resolveTraditionalSectionContent } from './sections/index.js';
@@ -139,6 +140,7 @@ export function TraditionalEhrMode({
         bgcolor: epis2TraditionalChartTokens.shellBg,
       }}
     >
+      {alerts && alerts.length > 0 ? <ClinicalPatientViewCdsPanel alerts={alerts} /> : null}
       <TraditionalSectionMobileNav
         activeSection={activeSection}
         onSectionChange={handleSectionChange}
