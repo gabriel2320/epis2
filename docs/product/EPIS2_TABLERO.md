@@ -1,10 +1,10 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-14 · **HEAD committed:** `5b92002` · **WIP:** PROG-DI ~105 archivos (gitPending)
+**Actualizado:** 2026-06-14 · **HEAD committed:** `f56b7d2` · **ahead origin:** 2 commits
 
-Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:** [`epis2-plan-conciliacion-triada-2026-06-14.md`](../../reports/epis2-plan-conciliacion-triada-2026-06-14.md) · **Tríada:** [`EPIS2_TRIADA_REPOS.md`](./EPIS2_TRIADA_REPOS.md)
+Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:** [`epis2-plan-conciliacion-triada-2026-06-14.md`](../../reports/epis2-plan-conciliacion-triada-2026-06-14.md) · **Correcciones:** [`epis2-plan-correcciones-prioritarias-2026-06-14.md`](../../reports/epis2-plan-correcciones-prioritarias-2026-06-14.md) · **Tríada:** [`EPIS2_TRIADA_REPOS.md`](./EPIS2_TRIADA_REPOS.md)
 
-> **Signoff experiencia core (2026-06-13):** tres frentes A/B/C cerrados (36/36). **PROG-DI** cerrado en ledger (10/10) — **commit pendiente F2**. **PROG-STRENGTHEN** retoma tras push DI.
+> **Signoff experiencia core (2026-06-13):** tres frentes A/B/C cerrados (36/36). **PROG-DI** CLOSED (`f56b7d2`). **Siguiente:** push origin → F3 Evolab · **MF-SH-02** tras push.
 
 ---
 
@@ -12,8 +12,9 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:
 
 | Fase | Estado | Siguiente |
 |------|--------|-----------|
-| **S1 F0+F1** | ✓ inventario + docs | S2 F2-A gates DI |
-| **PROG-DI git** | WIP sin commit | `quality:di-signoff-gate` → push |
+| **S1 F0+F1** | ✓ inventario + docs | — |
+| **F2 PROG-DI** | ✓ commit `f56b7d2` | **push origin** (A1) |
+| **A2–C1 correcciones** | en curso | tablero + canon Home + MCP review |
 | **epis2-evolab** | ahead 1 (`6b9e40b`) | F3 push + sync findings |
 | **EPIS2-MedRepo** | sin git · check rojo | F4 |
 
@@ -21,7 +22,7 @@ Inventario: [`reports/conciliacion/`](../conciliacion/)
 
 ---
 
-## Bloqueado hasta F2 — PROG-STRENGTHEN-2026
+## Desbloqueado — PROG-STRENGTHEN-2026 (tras push A1)
 
 | Subprograma | MF activa | Gate |
 |-------------|-----------|------|
@@ -41,7 +42,8 @@ Inventario: [`reports/conciliacion/`](../conciliacion/)
 | P1 ai:evals:sim | 13/13 · `reports/ai-evals-sim-2026-06-13.json` |
 | **MF-SH-01** draft trace | `043_approvals_ai_run.sql` · `quality:draft-trace-gate` · [`epis2-mf-sh-01-draft-trace.md`](../../reports/epis2-mf-sh-01-draft-trace.md) |
 | **S1 conciliación tríada** | F0 manifest + MF-DI map · F1 tablero/triada · [`conciliacion/`](../conciliacion/) · 2026-06-14 |
-| **PROG-DI** (ledger) | 10/10 DONE · **gitPending** · [`epis2-prog-di-close-2026.md`](../../reports/epis2-prog-di-close-2026.md) · commit en F2 |
+| **PROG-DI** | 10/10 DONE · commit `f56b7d2` · [`epis2-prog-di-close-2026.md`](../../reports/epis2-prog-di-close-2026.md) |
+| **S1 correcciones A3** | MCP safety review · [`mcp-safety-review-2026-06-14.md`](../../reports/conciliacion/mcp-safety-review-2026-06-14.md) |
 
 ---
 

@@ -31,16 +31,31 @@ Modos secundarios (Classic EMR, Dashboard MD3) amplían la experiencia sin cambi
 
 > **¿Qué necesitas hacer?**
 
-La home es el Centro de Comando. No es un dashboard. No es una ficha hospitalaria completa en v1.
+La home es el Centro de Comando (`/comando`). No es un dashboard. No es una ficha hospitalaria completa en v1.
 
 ---
+
+## Home canónica (anatomía)
+
+Un solo concepto de home; tres capas de experiencia:
+
+```text
+Home canónica = Centro de Comando (/comando)
+  Estado inicial     → búsqueda / censo de paciente
+  Tras fijar paciente → workspace ficha dual (electrónica | papel)
+  Dashboard          → secundario; nunca home
+```
+
+La barra de comando (palette Ctrl+K) es **transversal** al workspace; no compite con la ficha. Ver [`adr/ADR-002-dual-chart-modes.md`](adr/ADR-002-dual-chart-modes.md) para evolución dual chart.
+
+Gate ejecutable: `command-center-home` (prohíbe dashboard como entrada).
 
 ## Principios no negociables
 
 | # | Principio |
 |---|-----------|
 | 1 | EPIS2 First — experiencia y modelo propios |
-| 2 | Home = Centro de Comando |
+| 2 | Home = Centro de Comando (`/comando`); estado inicial = búsqueda/censo; tras paciente = workspace ficha dual | `command-center-home` + dual-chart census-gate |
 | 3 | Command-first — texto → intent → formulario → borrador |
 | 4 | Información no solicitada permanece **oculta** |
 | 5 | IA local **asiste**; no decide, firma ni aprueba |

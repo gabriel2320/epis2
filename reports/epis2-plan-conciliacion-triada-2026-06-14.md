@@ -13,7 +13,7 @@
 
 | Brecha | Repo | Evidencia | Severidad |
 |--------|------|-----------|-----------|
-| PROG-DI cerrado en ledger, código sin commit | EPIS2 | `di-ledger.json` 10/10 DONE · ~103 archivos WIP | **P0** |
+| PROG-DI cerrado en ledger, commit local | EPIS2 | `di-ledger.json` CLOSED · `f56b7d2` · push pendiente A1 | **P0** → push |
 | Plan DI desactualizado (0/10) vs ledger (10/10) | EPIS2 | `epis2-plan-deterministic-intelligence-2026-06-14.md` | P1 |
 | Tablero no refleja WIP DI ni estado post-signoff | EPIS2 | `EPIS2_TABLERO.md` | P1 |
 | Findings Evolab stale | EPIS2 ↔ Evolab | `evolab-open-findings.json` sync 2026-06-11 | P1 |

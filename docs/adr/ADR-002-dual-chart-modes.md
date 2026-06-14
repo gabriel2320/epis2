@@ -101,7 +101,7 @@ CSS `@page` en `paperChartPrint.css` — tamaños US Letter y A5 únicamente.
 
 | Riesgo | Mitigación |
 |--------|------------|
-| Conflicto invariante #6 (home=comando) | Fase 1–2: comando launcher; fase 3: ADR enmienda + signoff producto |
+| Conflicto redacción home vs censo-first | **Resuelto en docs (2026-06-14):** home = Centro de Comando; censo = estado inicial; ficha dual = workspace. Routing sin cambio hasta signoff fase 3 |
 | Regresión E2E three-modes | Legacy congelado; tests legacy intactos; nuevos tests bajo flag |
 | Scope editor rico | MVP campos simples; ADR fase Tiptap |
 | Gate `web-components-root-frozen` | Nuevos bajo `components/chart/` — registrar excepción en validador si aplica |
