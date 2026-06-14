@@ -627,6 +627,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
           alerts={clinicalAlerts}
           loading={alertsLoading}
           label={blueprint.label}
+          blueprintId={blueprint.blueprintId}
         />
         <GeneratedFormStatusAlert message={statusMessage} />
         <GeneratedFormPostSaveMicrojourneys
@@ -732,6 +733,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
                 alerts={clinicalAlerts}
                 loading={alertsLoading}
                 label={blueprint.label}
+                blueprintId={blueprint.blueprintId}
               />
               <GeneratedFormStatusAlert message={statusMessage} />
               <GeneratedFormPostSaveMicrojourneys
@@ -795,6 +797,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
           alerts={clinicalAlerts}
           loading={alertsLoading}
           label={blueprint.label}
+          blueprintId={blueprint.blueprintId}
         />
         <GeneratedFormStatusAlert message={statusMessage} />
         <GeneratedFormPostSaveMicrojourneys

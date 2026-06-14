@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** MF-CU-02 — CDS Hooks patient-view (cards al abrir ficha). */
+/** MF-CU-02 / MF-CU-03 — CDS Hooks patient-view + order-select. */
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
-const required = [
+const requiredCu02 = [
   'packages/clinical-domain/src/cdsHooks/mapClinicalAlertsToPatientViewCards.ts',
   'packages/clinical-domain/src/cdsHooks/mapClinicalAlertsToPatientViewCards.test.ts',
   'apps/web/src/components/cds/ClinicalPatientViewCdsPanel.tsx',
@@ -16,7 +16,17 @@ const required = [
   'reports/epis2-mf-cu-02-patient-view.md',
 ];
 
-for (const rel of required) {
+const requiredCu03 = [
+  'packages/clinical-domain/src/cdsHooks/mapClinicalAlertsToOrderSelectCards.ts',
+  'packages/clinical-domain/src/cdsHooks/mapClinicalAlertsToOrderSelectCards.test.ts',
+  'apps/web/src/pages/prescription/ClinicalOrderSelectCdsPanel.tsx',
+  'apps/web/src/pages/prescription/ClinicalOrderSelectCdsPanel.test.tsx',
+  'apps/api/src/routes/cds/routes.ts',
+  'apps/api/src/routes/cds/orderSelect.integration.test.ts',
+  'reports/epis2-mf-cu-03-order-select.md',
+];
+
+for (const rel of [...requiredCu02, ...requiredCu03]) {
   if (!existsSync(join(root, rel))) errors.push(`Falta ${rel}`);
 }
 
@@ -28,40 +38,66 @@ if (!traditional.includes('ClinicalPatientViewCdsPanel')) {
   errors.push('TraditionalEhrMode debe integrar ClinicalPatientViewCdsPanel');
 }
 
-const mapper = readFileSync(
+const generatedForm = readFileSync(
+  join(root, 'apps/web/src/clinical/generated-form/GeneratedFormSections.tsx'),
+  'utf8',
+);
+if (!generatedForm.includes('ClinicalOrderSelectCdsPanel')) {
+  errors.push('GeneratedFormSections debe integrar ClinicalOrderSelectCdsPanel para prescription');
+}
+
+const patientViewMapper = readFileSync(
   join(root, 'packages/clinical-domain/src/cdsHooks/mapClinicalAlertsToPatientViewCards.ts'),
   'utf8',
 );
-if (!mapper.includes('mapClinicalAlertsToPatientViewCards')) {
-  errors.push('Mapper mapClinicalAlertsToPatientViewCards incompleto');
-}
-if (!mapper.includes("hook: 'patient-view'")) {
-  errors.push('Mapper debe emitir hook patient-view');
+if (!patientViewMapper.includes("hook: 'patient-view'")) {
+  errors.push('Mapper patient-view debe emitir hook patient-view');
 }
 
-const e2e = readFileSync(join(root, 'e2e/dual-chart-modes.spec.ts'), 'utf8');
-if (!e2e.includes('epis2-cds-patient-view')) {
+const orderSelectMapper = readFileSync(
+  join(root, 'packages/clinical-domain/src/cdsHooks/mapClinicalAlertsToOrderSelectCards.ts'),
+  'utf8',
+);
+if (!orderSelectMapper.includes("hook: 'order-select'")) {
+  errors.push('Mapper order-select debe emitir hook order-select');
+}
+
+const cdsRoutes = readFileSync(join(root, 'apps/api/src/routes/cds/routes.ts'), 'utf8');
+if (!cdsRoutes.includes('/api/cds/order-select/:patientId')) {
+  errors.push('API debe exponer GET /api/cds/order-select/:patientId');
+}
+
+const e2eDual = readFileSync(join(root, 'e2e/dual-chart-modes.spec.ts'), 'utf8');
+if (!e2eDual.includes('epis2-cds-patient-view')) {
   errors.push('E2E dual-chart debe verificar panel patient-view CDS');
 }
 
-const ledger = JSON.parse(readFileSync(join(root, 'docs/quality/strengthen-ledger.json'), 'utf8'));
-const mf = ledger.phases?.find((m) => m.id === 'MF-CU-02');
-if (!mf || mf.state !== 'DONE') {
-  errors.push('strengthen-ledger.json: MF-CU-02 debe estar DONE');
+const e2eRx = readFileSync(join(root, 'e2e/ola6a-print-prescription.spec.ts'), 'utf8');
+if (!e2eRx.includes('epis2-cds-order-select')) {
+  errors.push('E2E receta debe verificar panel order-select CDS (DEMO-005)');
 }
+
+const ledger = JSON.parse(readFileSync(join(root, 'docs/quality/strengthen-ledger.json'), 'utf8'));
+for (const id of ['MF-CU-02', 'MF-CU-03']) {
+  const mf = ledger.phases?.find((m) => m.id === id);
+  if (!mf || mf.state !== 'DONE') {
+    errors.push(`strengthen-ledger.json: ${id} debe estar DONE`);
+  }
+}
+
+const build = spawnSync('npm', ['run', 'build', '-w', '@epis2/clinical-domain'], {
+  cwd: root,
+  shell: true,
+  encoding: 'utf8',
+});
+if (build.status !== 0) errors.push('build @epis2/clinical-domain falló');
 
 for (const suite of [
   'packages/clinical-domain/src/cdsHooks/mapClinicalAlertsToPatientViewCards.test.ts',
+  'packages/clinical-domain/src/cdsHooks/mapClinicalAlertsToOrderSelectCards.test.ts',
   'apps/web/src/components/cds/ClinicalPatientViewCdsPanel.test.tsx',
+  'apps/web/src/pages/prescription/ClinicalOrderSelectCdsPanel.test.tsx',
 ]) {
-  if (suite.includes('ClinicalPatientViewCdsPanel')) {
-    const build = spawnSync('npm', ['run', 'build', '-w', '@epis2/clinical-domain'], {
-      cwd: root,
-      shell: true,
-      encoding: 'utf8',
-    });
-    if (build.status !== 0) errors.push('build @epis2/clinical-domain falló');
-  }
   const run = spawnSync('npx', ['vitest', 'run', '--run', suite], {
     cwd: root,
     shell: true,
@@ -76,4 +112,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('quality:cds-hooks-gate — OK (MF-CU-02 patient-view)');
+console.log('quality:cds-hooks-gate — OK (MF-CU-02 patient-view + MF-CU-03 order-select)');

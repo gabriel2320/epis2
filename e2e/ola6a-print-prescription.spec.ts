@@ -1,11 +1,14 @@
 /**
  * Hilo C P1 — Journey receta → vista impresión A5 (PEND-006).
+ * MF-CU-03 — CDS order-select en receta DEMO-005.
  */
 import { copy } from '@epis2/design-system';
+import { getDemoCaseByCode } from '@epis2/test-fixtures';
 import { test, expect } from '@playwright/test';
 import { loginAsPhysician, pinDemoCase } from './helpers/demoPatient.js';
 
 const DEMO001_PATIENT_ID = 'a0000001-0000-4000-8000-000000000001';
+const demo005PatientId = getDemoCaseByCode('DEMO-005')!.patientId;
 
 test.describe('Ola 6A — impresión receta A5', () => {
   test('receta expone CTA impresión y renderiza vista A5', async ({ page }) => {
@@ -40,5 +43,16 @@ test.describe('Ola 6A — impresión receta A5', () => {
     await expect(page.getByText(copy.print.prescriptionTitle)).toBeVisible();
     await expect(page.getByText('Losartán 50 mg')).toBeVisible();
     await expect(page.getByTestId('epis2-print-execute')).toBeVisible();
+  });
+
+  test('receta DEMO-005 muestra CDS order-select al abrir prescripción', async ({ page }) => {
+    await loginAsPhysician(page);
+    await pinDemoCase(page, 'DEMO-005');
+    await page.goto(`/espacio/receta?patientId=${demo005PatientId}`);
+    await expect(page.getByTestId('epis2-form-prescription')).toBeVisible({ timeout: 15_000 });
+
+    const orderSelectPanel = page.getByTestId('epis2-cds-order-select');
+    await expect(orderSelectPanel).toBeVisible({ timeout: 15_000 });
+    await expect(page.locator('[data-testid^="epis2-cds-order-select-card-"]').first()).toBeVisible();
   });
 });

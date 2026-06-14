@@ -7,6 +7,7 @@ import { registerAuthRoutes } from './auth/routes.js';
 import { registerAiRoutes } from './ai/routes.js';
 import { registerCommandRoutes } from './commands/routes.js';
 import { registerClinicalRoutes } from './clinical/routes.js';
+import { registerCdsRoutes } from './routes/cds/routes.js';
 import { registerFhirRoutes } from './fhir/routes.js';
 import { registerDashboardRoutes } from './dashboard/routes.js';
 import { registerAuditRoutes } from './audit/routes.js';
@@ -119,6 +120,7 @@ export async function buildApp(config: AppConfig) {
   await registerCommandRoutes(app, config, db);
   await registerAiRoutes(app, config, db);
   await registerClinicalRoutes(app, config, db);
+  await registerCdsRoutes(app, config, db);
   await registerFhirRoutes(app, config, db);
   await registerDashboardRoutes(app, config, db);
   await registerInpatientRoutes(app, config, db);

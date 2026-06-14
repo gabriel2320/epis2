@@ -1,7 +1,8 @@
 import type { ClinicalAlert } from '@epis2/contracts';
 import type { SilentSuggestionVariant } from '../silentSuggestions/buildSilentSuggestions.js';
+import type { CdsHookId } from './types.js';
 
-export type CdsHookId = 'patient-view';
+export type { CdsHookId } from './types.js';
 
 export type PatientViewCdsCard = {
   id: string;
