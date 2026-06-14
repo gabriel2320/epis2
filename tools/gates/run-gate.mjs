@@ -12,6 +12,16 @@ import { spawnSync } from 'node:child_process';
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const gatesDir = dirname(fileURLToPath(import.meta.url));
 
+function loadCatalog() {
+  for (const name of ['catalog-full.json', 'catalog.json']) {
+    const path = join(gatesDir, name);
+    if (existsSync(path)) {
+      return JSON.parse(readFileSync(path, 'utf8'));
+    }
+  }
+  return null;
+}
+
 function usage() {
   console.error(`Usage:
   node tools/gates/run-gate.mjs <required|nightly|experimental>
@@ -54,21 +64,16 @@ function runManifest(manifest, dryRun) {
 }
 
 function runCatalogScript(scriptName, dryRun) {
-  const catalogPath = join(gatesDir, 'catalog.json');
-  if (!existsSync(catalogPath)) {
-    console.error('catalog.json missing — run: npm run tool:gates:sync-catalog');
+  const catalog = loadCatalog();
+  if (!catalog) {
+    console.error('catalog missing — run: npm run tool:gates:sync-catalog');
     process.exit(1);
   }
-  const catalog = JSON.parse(readFileSync(catalogPath, 'utf8'));
-  const entry = catalog.gates?.[scriptName];
-  if (!entry) {
+  if (!catalog.gates?.[scriptName]) {
     console.error(`Unknown gate in catalog: ${scriptName}`);
     process.exit(1);
   }
-  if (entry.type === 'file') {
-    return runStep(`node ${entry.path}`, dryRun);
-  }
-  return runStep(entry.command ?? `npm run ${scriptName}`, dryRun);
+  return runStep(`node tools/gates/run-legacy.mjs ${scriptName}`, dryRun);
 }
 
 const argv = process.argv.slice(2);

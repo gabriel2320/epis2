@@ -30,7 +30,12 @@ El `package.json` raíz debe ser **puerta de entrada**, no catálogo de 400+ mic
 | **`npm run quality:nightly`** | **Nuevo** — paridad CI extendida |
 | `npm run quality:ui` / `quality:ai` | Aliases MF-FF-15 |
 
-Los ~400 scripts restantes **siguen en root** (Fase 1 no elimina). Fase 2 los moverá al catálogo con shims.
+Los scripts restantes en root (Fase 2): **33** `quality:*` (7 meta + 25 wired shims + `quality:gate`). El resto vive en `catalog-full.json`.
+
+```bash
+npm run quality:gate -- quality:ficha-first-next   # gate no wired en CI
+node tools/gates/run-legacy.mjs quality:registry-status
+```
 
 ---
 
@@ -116,7 +121,7 @@ npm run quality:fast
 |------|---------|--------|
 | **0** | Backup + classify CSV + este doc | ✓ |
 | **1** | `tools/gates/*` + `quality:required/nightly` | ✓ |
-| **2** | Quitar ~250 `quality:*` del root; shims legacy | pendiente |
+| **2** | Quitar ~245 `quality:*` del root; `quality:gate` + shims wired | ✓ |
 | **3** | `db:*` → api workspace; E2E → web | pendiente |
 
 ---

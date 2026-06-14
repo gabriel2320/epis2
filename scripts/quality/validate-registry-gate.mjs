@@ -9,6 +9,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
 const requiredScripts = [
+  'quality:gate',
   'quality:rapid-gate',
   'quality:strengthen-next',
   'quality:strengthen-close-gate',
@@ -18,9 +19,17 @@ const requiredScripts = [
 ];
 
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+const catalogPath = join(root, 'tools/gates/catalog-full.json');
+const catalog = existsSync(catalogPath)
+  ? JSON.parse(readFileSync(catalogPath, 'utf8'))
+  : null;
+
 for (const script of requiredScripts) {
   if (!pkg.scripts?.[script]) {
     errors.push(`package.json sin script ${script}`);
+  }
+  if (catalog && script.startsWith('quality:') && script !== 'quality:gate' && !catalog.gates?.[script]) {
+    errors.push(`catalog-full.json sin ${script}`);
   }
 }
 

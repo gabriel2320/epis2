@@ -1,6 +1,6 @@
 # EPIS2 — Contexto mínimo para agentes (Cursor)
 
-**Versión:** 4.2 · **Ola 14 ✓** · **STRENGTHEN** 23/23 ✓ · **FICHA-FIRST ✓** · **Consolidación** Fase 0–1 ✓
+**Versión:** 4.3 · **Ola 14 ✓** · **STRENGTHEN** 23/23 ✓ · **FICHA-FIRST ✓** · **Consolidación** Fase 0–2 ✓
 
 > **Brújula de alcance:** [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) · inventario: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md)
 
@@ -71,6 +71,7 @@ Cierre FICHA-FIRST: [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-pr
 | API/web/packages clínicos, microfase | `npm run quality:clinical` |
 | Pre-PR | `npm run quality:full` o **`quality:required`** |
 | CI extendido local | `npm run quality:nightly` |
+| Gate MF histórico | `npm run quality:gate -- quality:<name>` |
 
 ### `quality:fast` incluye
 

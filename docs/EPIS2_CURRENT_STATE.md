@@ -66,7 +66,7 @@ Regla: **core no depende de labs** (deuda: API aún puede tocar case-intel — m
 | PROG-CDS-UX | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
 | PROG-RAPID | ✓ cerrado | `quality:rapid-gate` |
 | PROG-DI / tríada F6 | ✓ contratos | ver `reports/conciliacion/` |
-| **PROG-CONSOLIDATE** (propuesto) | ◐ Fase 0–1 ✓ | ver §Consolidación · `tool:gates:verify` |
+| **PROG-CONSOLIDATE** (propuesto) | ◐ Fase 0–2 ✓ | ver §Consolidación · `tool:gates:verify` |
 
 Detalle inventario módulos: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md).
 
@@ -115,9 +115,9 @@ Detalle inventario módulos: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md).
 | IA frontera | `npm run quality:ai` | degrade + ai-client + web-ai-boundary |
 | Producto ficha | `npm run quality:ficha-first-gate` | PROG-FICHA-FIRST regresión |
 
-**Fase 0–1 ✓ (2026-06-15):** snapshot `tools/legacy-scripts/package-before-consolidation.json`, clasificador CSV (`tool:scripts:classify`), manifiestos `tools/gates/{required,nightly,experimental}.json`, catálogo `tools/gates/catalog.json` (272 `quality:*`), runners `quality:required` / `quality:nightly`. Ver [`MAINTENANCE_PACKAGE_SCRIPTS.md`](MAINTENANCE_PACKAGE_SCRIPTS.md).
+**Fase 0–2 ✓ (2026-06-15):** snapshot + clasificador; manifiestos `required`/`nightly`; catálogo `catalog-full.json` (273 gates); **245** `quality:*` eliminados del root → **33** restantes + `npm run quality:gate -- quality:<name>`. Ver [`MAINTENANCE_PACKAGE_SCRIPTS.md`](MAINTENANCE_PACKAGE_SCRIPTS.md).
 
-Métrica de deuda: **424** scripts npm totales · **272** `quality:*` en catálogo — Fase 2+ sacará aliases del root sin borrar validadores históricos.
+Métrica de deuda: **~180** scripts npm totales · **273** gates en catálogo · **33** `quality:*` visibles en root.
 
 ---
 
@@ -139,7 +139,8 @@ Prohibido en fase consolidación: nuevos registries, nuevo home, auto-aprobació
 |------|--------|------------|
 | **0** Snapshot + clasificación | ✓ | `tools/legacy-scripts/`, `tool:scripts:classify` |
 | **1** Meta-gates + catálogo | ✓ | `tools/gates/`, `quality:required`, `quality:nightly` |
-| **2+** Reducir root `package.json` | pendiente | shims desde `catalog.json`; migrar CI gradual |
+| **2** Reducir root `package.json` | ✓ | `quality:gate`, shims wired, `catalog-full.json` |
+| **3+** Mover `db:*` / E2E a workspaces | pendiente | ver MAINTENANCE §Fase 3 |
 
 **Duración sugerida:** 1–2 semanas · **Sin features clínicas nuevas**
 

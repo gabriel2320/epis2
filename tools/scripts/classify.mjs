@@ -34,9 +34,11 @@ const KEEP_ROOT = new Set([
   'quality:nightly',
   'quality:ui',
   'quality:ai',
+  'quality:gate',
   'tool:scripts:classify',
   'tool:gates:sync-catalog',
   'tool:gates:verify',
+  'tool:gates:apply-phase2',
   'test:e2e',
 ]);
 

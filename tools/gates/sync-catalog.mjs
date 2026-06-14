@@ -1,40 +1,46 @@
 #!/usr/bin/env node
-/** Regenera tools/gates/catalog.json desde package.json (quality:* → validate-*.mjs). */
-import { writeFileSync, readFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+/** Regenera tools/gates/catalog.json — merge catalog-full + scripts/quality/*.mjs. */
+import { readdirSync, readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+import {
+  buildCatalogFromPackage,
+  gatesDirFrom,
+  loadCatalogFile,
+  mergeCatalog,
+  repoRootFromGatesDir,
+  writeCatalog,
+} from './lib-catalog.mjs';
 
-const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
-const gates = {};
+const gatesDir = gatesDirFrom(import.meta.url);
+const root = repoRootFromGatesDir(gatesDir);
+const snapshotPath = join(root, 'tools/legacy-scripts/package-before-consolidation.json');
 
-for (const [name, command] of Object.entries(pkg.scripts ?? {})) {
-  if (!name.startsWith('quality:')) continue;
-  const fileMatch = /^node scripts\/quality\/(validate-[\w-]+\.mjs)/.exec(String(command).trim());
-  if (fileMatch) {
-    gates[name] = { type: 'file', path: `scripts/quality/${fileMatch[1]}` };
-    continue;
+let gates = {};
+const existing = loadCatalogFile(gatesDir, true);
+if (existing) {
+  gates = { ...existing.data.gates };
+} else if (existsSync(snapshotPath)) {
+  const snap = JSON.parse(readFileSync(snapshotPath, 'utf8'));
+  gates = buildCatalogFromPackage(snap);
+}
+
+const qualityDir = join(root, 'scripts/quality');
+for (const file of readdirSync(qualityDir)) {
+  if (!file.endsWith('.mjs')) continue;
+  const base = file.replace(/\.mjs$/, '');
+  let gateName = null;
+  if (base.startsWith('validate-') && base.endsWith('-gate')) {
+    gateName = `quality:${base.slice('validate-'.length)}`;
+  } else if (base.endsWith('-gate')) {
+    gateName = `quality:${base}`;
   }
-  if (String(command).includes('node scripts/quality/')) {
-    const loose = String(command).match(/scripts\/quality\/[\w-]+\.mjs/);
-    if (loose) {
-      gates[name] = { type: 'file', path: loose[0] };
-      continue;
-    }
-  }
-  if (String(command).startsWith('npm run')) {
-    gates[name] = { type: 'npm', command: String(command) };
+  if (gateName && !gates[gateName]) {
+    gates[gateName] = { type: 'file', path: `scripts/quality/${file}` };
   }
 }
 
-const out = {
-  version: '1.0.0',
-  generatedAt: new Date().toISOString(),
-  source: 'package.json',
-  note: 'Regenerar: npm run tool:gates:sync-catalog',
-  gates,
-};
+const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+gates = mergeCatalog({ gates }, buildCatalogFromPackage(pkg));
 
-const outPath = join(dirname(fileURLToPath(import.meta.url)), 'catalog.json');
-writeFileSync(outPath, JSON.stringify(out, null, 2) + '\n');
+writeCatalog(gatesDir, gates, existing ? 'catalog-full+fs' : 'package-before-consolidation+fs');
 console.log(`catalog.json OK — ${Object.keys(gates).length} entradas quality:*`);

@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "generatedAt": "2026-06-14T20:50:28.163Z",
-  "source": "catalog-full+fs",
+  "source": "package.json",
   "note": "Regenerar: npm run tool:gates:sync-catalog",
   "gates": {
     "quality:m3-signoff": {
