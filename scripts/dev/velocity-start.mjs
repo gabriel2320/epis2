@@ -37,6 +37,9 @@ if (refresh) {
 
 const ctx = resolveVelocityContext(root, { tramo });
 console.log(formatVelocityBanner(ctx));
+console.log('\nLoop iteración (post-cambio):');
+console.log('  npm run dev:rapid');
+console.log('  npm run dev:rapid -- --skip-audit   # sin Ollama audit-diff');
 console.log('\nGates sugeridos al cerrar:');
 console.log(
   `  npm run dev:velocity:gates -- --subagent ${ctx.subagent}${tramo ? ` --tramo ${tramo}` : ''}`,

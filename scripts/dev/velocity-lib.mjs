@@ -144,6 +144,7 @@ export function formatVelocityBanner(ctx) {
   } else {
     lines.push('- Brief: missing — npm run dev:session');
   }
+  lines.push('- Iteración: npm run dev:rapid (quality:fast + audit-diff opcional)');
   lines.push('- Cursor: /epis2-session · cierre: /epis2-close');
   lines.push('- Doc: docs/dev/EPIS2_DEV_VELOCITY.md');
   return lines.join('\n');

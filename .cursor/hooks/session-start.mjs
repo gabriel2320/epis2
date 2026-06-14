@@ -42,8 +42,8 @@ const response = {
     'EPIS2 velocity (sessionStart hook)',
     banner,
     '',
-    'Arranque: npm run dev:velocity · Cursor: /epis2-session',
-    'Cierre: npm run dev:velocity:gates · /epis2-close',
+    'Iteración: npm run dev:rapid · Arranque: npm run dev:velocity · /epis2-session',
+    'Cierre: npm run dev:velocity:gates · quality:clinical · /epis2-close',
     `session: ${sessionId}`,
   ].join('\n'),
 };

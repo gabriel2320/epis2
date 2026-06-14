@@ -1,10 +1,10 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-14 · **HEAD committed:** `d84e1ef`
+**Actualizado:** 2026-06-14 · **HEAD committed:** `d9b9b52`
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:** [`epis2-plan-conciliacion-triada-2026-06-14.md`](../../reports/epis2-plan-conciliacion-triada-2026-06-14.md) · **Correcciones:** [`epis2-plan-correcciones-prioritarias-2026-06-14.md`](../../reports/epis2-plan-correcciones-prioritarias-2026-06-14.md) · **Tríada:** [`EPIS2_TRIADA_REPOS.md`](./EPIS2_TRIADA_REPOS.md)
 
-> **PROG-CORE-HARDEN** MF-SH-01…06 ✓ · **Siguiente STRENGTHEN:** **MF-IM-01** embeddings pgvector (PROG-IA-MODERNIZE).
+> **PROG-RAPID** MF-RAPID-01…04 ✓ · **PROG-CORE-HARDEN** MF-SH-01…06 ✓ · **Siguiente STRENGTHEN:** **MF-IM-01** embeddings pgvector (PROG-IA-MODERNIZE).
 
 ---
 
@@ -15,6 +15,21 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:
 | F0–F7 | ✓ [`epis2-prog-conciliacion-triada-close-2026.md`](../../reports/epis2-prog-conciliacion-triada-close-2026.md) |
 
 Inventario: [`reports/conciliacion/`](../../reports/conciliacion/)
+
+---
+
+## Cerrado — PROG-RAPID-2026
+
+| MF | Entrega | Gate |
+|----|---------|------|
+| MF-RAPID-01 | `quality:fast` · `clinical` · `full` + contexto mínimo | — |
+| MF-RAPID-02 | `dev:agent:audit-diff` | — |
+| MF-RAPID-03 | `dev:rapid` | — |
+| MF-RAPID-04 | Cierre formal | `npm run quality:rapid-gate` |
+
+Evidencia: [`epis2-mf-rapid-close-2026.md`](../../reports/epis2-mf-rapid-close-2026.md) · commits `7cb4fab` · `d84e1ef`
+
+**Loop diario:** `npm run dev:rapid`
 
 ---
 

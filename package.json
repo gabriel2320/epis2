@@ -307,6 +307,7 @@
     "quality:fast": "node scripts/quality/run-quality-fast.mjs",
     "quality:clinical": "node scripts/quality/run-quality-clinical.mjs",
     "quality:full": "node scripts/quality/run-quality-full.mjs",
+    "quality:rapid-gate": "node scripts/quality/validate-rapid-gate.mjs",
     "db:validate": "node scripts/db-validate.mjs",
     "db:migrate": "node scripts/db-migrate.mjs",
     "db:backup": "node scripts/epis-db-backup.mjs",
