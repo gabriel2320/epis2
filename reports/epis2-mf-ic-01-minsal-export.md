@@ -26,8 +26,8 @@ Export FHIR Chile MINSAL (subset demo): Patient con identifier RUN + coding CSTi
 ## Gates
 
 ```bash
+npm run quality:interop-chile-gate
 npm run test -- packages/fhir-export
-npm run check
 ```
 
 ## Próximo paso

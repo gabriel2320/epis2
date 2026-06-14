@@ -1,5 +1,6 @@
 export {
   EPIS2_FHIR_BASE,
+  EPIS2_CL_FHIR_BASE,
   EPIS2_PROFILES,
   EPIS2_IDENTIFIER_SYSTEM_DEMO,
   EPIS2_DATA_ORIGIN_SYSTEM,
@@ -58,6 +59,7 @@ export {
 export { assertExportClean, type ExportValidationResult } from './validateExport.js';
 export {
   buildMinsalExportBundle,
+  MINSAL_PROFILES,
   toMinsalFhirDocumentReference,
   toMinsalFhirEncounter,
   toMinsalFhirPatient,

@@ -19,6 +19,7 @@ Borrador `prescription` → JSON staging MedicationRequest con perfil SNRE demo 
 ## Gates
 
 ```bash
+npm run quality:interop-chile-gate
 npm run test -- packages/fhir-export
 ```
 

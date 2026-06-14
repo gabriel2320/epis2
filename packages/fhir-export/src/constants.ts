@@ -1,6 +1,9 @@
 /** Base canónica del perfil mínimo EPIS2 (laboratorio / demo). */
 export const EPIS2_FHIR_BASE = 'http://epis2.local/fhir' as const;
 
+/** Base FHIR demo EPIS2 alineada a interop Chile (MINSAL / SNRE staging). */
+export const EPIS2_CL_FHIR_BASE = 'http://epis2.cl/fhir' as const;
+
 export const EPIS2_PROFILES = {
   patient: `${EPIS2_FHIR_BASE}/StructureDefinition/epis2-patient-minimal`,
   encounter: `${EPIS2_FHIR_BASE}/StructureDefinition/epis2-encounter-minimal`,

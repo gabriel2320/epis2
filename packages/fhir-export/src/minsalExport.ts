@@ -1,15 +1,17 @@
 import {
   DEFAULT_RUN_IDENTIFIER_TYPE,
-  EPIS2_MINSAL_FHIR_BASE,
   MINSAL_PROFILES,
   mapPatientIdentifierToFhir,
   type ChilePatientIdentifierType,
 } from '@epis2/clinical-domain';
+import { syntheticOriginTag } from './chileInteropMeta.js';
 import {
   EPIS2_AIAST_SYSTEM,
-  EPIS2_DATA_ORIGIN_SYSTEM,
+  EPIS2_CL_FHIR_BASE,
   EPIS2_IDENTIFIER_SYSTEM_DEMO,
 } from './constants.js';
+
+export { MINSAL_PROFILES } from '@epis2/clinical-domain';
 import {
   bodyToNarrative,
   type ClinicalNoteSource,
@@ -38,18 +40,11 @@ const NOTE_TYPE_LABELS: Record<string, string> = {
 
 function minsalMeta(profile: string, isSynthetic?: boolean, extraTags?: Epis2PatientResource['meta']['tag']) {
   const meta: Epis2PatientResource['meta'] = { profile: [profile] };
-  if (isSynthetic) {
-    meta.tag = [
-      {
-        system: EPIS2_DATA_ORIGIN_SYSTEM,
-        code: 'synthetic',
-        display: 'DEMO/SINTÉTICO',
-      },
-    ];
-  }
-  if (extraTags?.length) {
-    meta.tag = [...(meta.tag ?? []), ...extraTags];
-  }
+  const tags = [];
+  const synthetic = syntheticOriginTag(isSynthetic ?? false);
+  if (synthetic) tags.push(synthetic);
+  if (extraTags?.length) tags.push(...extraTags);
+  if (tags.length) meta.tag = tags;
   return meta;
 }
 
@@ -159,19 +154,19 @@ export function buildMinsalExportBundle(
 ) {
   const entries: { fullUrl: string; resource: Record<string, unknown> }[] = [
     {
-      fullUrl: `${EPIS2_MINSAL_FHIR_BASE}/Patient/${patient.id}`,
+      fullUrl: `${EPIS2_CL_FHIR_BASE}/Patient/${patient.id}`,
       resource: patient as unknown as Record<string, unknown>,
     },
   ];
   for (const enc of encounters) {
     entries.push({
-      fullUrl: `${EPIS2_MINSAL_FHIR_BASE}/Encounter/${enc.id}`,
+      fullUrl: `${EPIS2_CL_FHIR_BASE}/Encounter/${enc.id}`,
       resource: enc as unknown as Record<string, unknown>,
     });
   }
   for (const doc of documents) {
     entries.push({
-      fullUrl: `${EPIS2_MINSAL_FHIR_BASE}/DocumentReference/${doc.id}`,
+      fullUrl: `${EPIS2_CL_FHIR_BASE}/DocumentReference/${doc.id}`,
       resource: doc as unknown as Record<string, unknown>,
     });
   }
