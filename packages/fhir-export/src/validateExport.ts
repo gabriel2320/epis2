@@ -57,6 +57,20 @@ export function assertExportClean(resource: unknown): ExportValidationResult {
       }
       break;
     }
+    case 'Provenance': {
+      const r = resource as { id?: string; target?: unknown[]; recorded?: string };
+      if (!r.id || !r.target?.length || !r.recorded) {
+        return { ok: false, profileErrors: 'Provenance incompleto' };
+      }
+      break;
+    }
+    case 'Device': {
+      const r = resource as { id?: string; deviceName?: unknown[] };
+      if (!r.id || !r.deviceName?.length) {
+        return { ok: false, profileErrors: 'Device incompleto' };
+      }
+      break;
+    }
     case 'Bundle': {
       const bundle = resource as { entry?: { resource: unknown }[] };
       for (const entry of bundle.entry ?? []) {

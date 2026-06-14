@@ -1,7 +1,12 @@
+import type { AiProvenanceRecord } from '@epis2/contracts';
 import {
+  EPIS2_AIAST_SYSTEM,
+  EPIS2_AI_RUN_SYSTEM,
   EPIS2_DATA_ORIGIN_SYSTEM,
   EPIS2_FHIR_BASE,
   EPIS2_IDENTIFIER_SYSTEM_DEMO,
+  EPIS2_MODEL_CARD_SYSTEM,
+  EPIS2_MODEL_CARD_VERSION,
   EPIS2_PROFILES,
 } from './constants.js';
 import { UI_ONLY_EXPORT_KEYS } from './uiForbidden.js';
@@ -62,6 +67,39 @@ function syntheticTagMeta(profile: string, isSynthetic: boolean) {
     ];
   }
   return meta;
+}
+
+function documentReferenceMeta(isSynthetic: boolean, hasAiAssist: boolean) {
+  const meta = syntheticTagMeta(EPIS2_PROFILES.documentReference, isSynthetic);
+  if (hasAiAssist) {
+    meta.tag = [
+      ...(meta.tag ?? []),
+      {
+        system: EPIS2_AIAST_SYSTEM,
+        code: 'AIAST',
+        display: 'Asistido por IA',
+      },
+    ];
+  }
+  return meta;
+}
+
+function aiDeviceIdFromModel(model: string): string {
+  const slug = model
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 48);
+  return `ai-device-${slug || 'unknown'}`;
+}
+
+function aiModelCardIdFromModel(model: string): string {
+  const slug = model
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 48);
+  return `epis2-ai-model-card-${slug || 'v1'}`;
 }
 
 function mapSex(sex: string | null): Epis2PatientResource['gender'] {
@@ -142,16 +180,21 @@ const NOTE_TYPE_LABELS: Record<string, string> = {
   other: 'Documento clínico',
 };
 
+export type DocumentReferenceOptions = {
+  aiProvenance?: AiProvenanceRecord;
+};
+
 export function toFhirDocumentReference(
   source: ClinicalNoteSource,
   isSynthetic: boolean,
+  options?: DocumentReferenceOptions,
 ): Epis2DocumentReferenceResource {
   const narrative = bodyToNarrative(source.body);
   const encoded = Buffer.from(narrative, 'utf8').toString('base64');
   return {
     resourceType: 'DocumentReference',
     id: source.id,
-    meta: syntheticTagMeta(EPIS2_PROFILES.documentReference, isSynthetic),
+    meta: documentReferenceMeta(isSynthetic, options?.aiProvenance !== undefined),
     status: 'current',
     type: {
       text: NOTE_TYPE_LABELS[source.noteType] ?? source.noteType,
@@ -312,6 +355,155 @@ export function toFhirMedicationStatement(source: MedicationSource, isSynthetic:
     subject: patientReference(source.patientId),
     dosage: source.doseText ? [{ text: source.doseText }] : undefined,
   };
+}
+
+export type AssistProvenanceSource = {
+  noteId: string;
+  patientId: string;
+  aiProvenance: AiProvenanceRecord;
+  approvedAt: Date;
+};
+
+/** Device FHIR mínimo para modelo IA (MF-IM-06). */
+export function toFhirAiDevice(model: string) {
+  return {
+    resourceType: 'Device' as const,
+    id: aiDeviceIdFromModel(model),
+    meta: syntheticMeta(EPIS2_PROFILES.device),
+    deviceName: [{ name: model, type: 'model-name' as const }],
+    status: 'active' as const,
+  };
+}
+
+/** Provenance FHIR post-approve asistido — apunta a DocumentReference + Device + model card. */
+export function toFhirProvenance(source: AssistProvenanceSource, modelCardId?: string) {
+  const deviceId = aiDeviceIdFromModel(source.aiProvenance.model);
+  const entity: {
+    role: 'source' | 'derivation';
+    what: { reference?: string; identifier?: { system: string; value: string } };
+  }[] = [
+    {
+      role: 'source',
+      what: {
+        identifier: {
+          system: EPIS2_AI_RUN_SYSTEM,
+          value: source.aiProvenance.aiRunId,
+        },
+      },
+    },
+  ];
+  if (modelCardId) {
+    entity.push({
+      role: 'derivation',
+      what: { reference: `DocumentReference/${modelCardId}` },
+    });
+  }
+  return {
+    resourceType: 'Provenance' as const,
+    id: `prov-${source.noteId}`,
+    meta: syntheticMeta(EPIS2_PROFILES.provenance),
+    target: [{ reference: `DocumentReference/${source.noteId}` }],
+    recorded: source.approvedAt.toISOString(),
+    activity: {
+      coding: [
+        {
+          system: 'http://terminology.hl7.org/CodeSystem/v3-DataOperation',
+          code: 'CREATE',
+          display: 'create',
+        },
+      ],
+    },
+    agent: [
+      {
+        type: {
+          coding: [
+            {
+              system: 'http://terminology.hl7.org/CodeSystem/provenance-participant-type',
+              code: 'assembler',
+              display: 'Assembler',
+            },
+          ],
+        },
+        who: { reference: `Device/${deviceId}` },
+      },
+    ],
+    entity,
+  };
+}
+
+export type AiModelCardSource = {
+  model: string;
+  promptHash: string;
+  blueprintId: string;
+  cardVersion: string;
+};
+
+/** Markdown embebido para export FHIR (model card runtime). */
+export function buildAiModelCardMarkdown(source: AiModelCardSource): string {
+  return `# Model Card IA — EPIS2 Assist
+
+**Versión:** \`${source.cardVersion}\`
+**Modelo:** \`${source.model}\`
+**Blueprint:** \`${source.blueprintId}\`
+**Prompt hash:** \`${source.promptHash}\`
+
+## Stack
+
+- Runtime: Ollama local (EPIS2 demo)
+- Aprobación humana obligatoria — sin auto-aprobación
+- IA no escribe SoT; borrador ≠ dato aprobado
+
+## Política de prompt
+
+- Blueprint clínico versionado (\`blueprintId\`)
+- Hash de prompt (\`promptHash\`) para reproducibilidad
+- Contexto RAG limitado al expediente del paciente (demo/sintético)
+
+## Identificador
+
+- Sistema: \`${EPIS2_MODEL_CARD_SYSTEM}\`
+- Valor: \`${source.cardVersion}\`
+`;
+}
+
+/** DocumentReference markdown con model card estática (MF-IM-07). */
+export function toFhirAiModelCardDocumentReference(source: AiModelCardSource) {
+  const markdown = buildAiModelCardMarkdown(source);
+  const encoded = Buffer.from(markdown, 'utf8').toString('base64');
+  const id = aiModelCardIdFromModel(source.model);
+  return {
+    resourceType: 'DocumentReference' as const,
+    id,
+    meta: syntheticMeta(EPIS2_PROFILES.documentReference),
+    status: 'current' as const,
+    type: { text: 'Model Card IA EPIS2' },
+    identifier: [{ system: EPIS2_MODEL_CARD_SYSTEM, value: source.cardVersion }],
+    date: new Date().toISOString(),
+    content: [
+      {
+        attachment: {
+          contentType: 'text/markdown' as const,
+          data: encoded,
+          title: `Model Card — ${source.model}`,
+        },
+      },
+    ],
+  };
+}
+
+/** Entradas extras (Device + model card + Provenance) para bundle de export asistido. */
+export function buildAssistProvenanceExtras(source: AssistProvenanceSource): Record<string, unknown>[] {
+  const modelCard = toFhirAiModelCardDocumentReference({
+    model: source.aiProvenance.model,
+    promptHash: source.aiProvenance.promptHash,
+    blueprintId: source.aiProvenance.blueprintId,
+    cardVersion: EPIS2_MODEL_CARD_VERSION,
+  });
+  return [
+    toFhirAiDevice(source.aiProvenance.model),
+    modelCard,
+    toFhirProvenance(source, modelCard.id),
+  ];
 }
 
 export function buildPatientExportBundle(

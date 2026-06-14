@@ -58,13 +58,21 @@ export const epis2DocumentReferenceResourceSchema = z.object({
   type: z.object({
     text: z.string().min(1),
   }),
-  subject: referenceSchema,
-  date: z.string().min(20),
+  subject: referenceSchema.optional(),
+  date: z.string().min(20).optional(),
+  identifier: z
+    .array(
+      z.object({
+        system: z.string(),
+        value: z.string(),
+      }),
+    )
+    .optional(),
   content: z
     .array(
       z.object({
         attachment: z.object({
-          contentType: z.literal('text/plain'),
+          contentType: z.enum(['text/plain', 'text/markdown']),
           data: z.string().min(1),
           title: z.string().min(1),
         }),

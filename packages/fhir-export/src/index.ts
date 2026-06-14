@@ -3,6 +3,10 @@ export {
   EPIS2_PROFILES,
   EPIS2_IDENTIFIER_SYSTEM_DEMO,
   EPIS2_DATA_ORIGIN_SYSTEM,
+  EPIS2_AIAST_SYSTEM,
+  EPIS2_AI_RUN_SYSTEM,
+  EPIS2_MODEL_CARD_SYSTEM,
+  EPIS2_MODEL_CARD_VERSION,
 } from './constants.js';
 export { UI_ONLY_EXPORT_KEYS, findUiOnlyKeys } from './uiForbidden.js';
 export {
@@ -27,10 +31,15 @@ export type {
 } from './profile.js';
 export {
   bodyToNarrative,
+  buildAiModelCardMarkdown,
+  buildAssistProvenanceExtras,
   buildPatientExportBundle,
+  toFhirAiDevice,
+  toFhirAiModelCardDocumentReference,
   toFhirDocumentReference,
   toFhirEncounter,
   toFhirPatient,
+  toFhirProvenance,
   toFhirServiceRequest,
   toFhirAllergyIntolerance,
   toFhirMedicationStatement,
@@ -42,5 +51,8 @@ export {
   type AllergySource,
   type MedicationSource,
   type PrescriptionDraftSource,
+  type AssistProvenanceSource,
+  type AiModelCardSource,
+  type DocumentReferenceOptions,
 } from './mappers.js';
 export { assertExportClean, type ExportValidationResult } from './validateExport.js';

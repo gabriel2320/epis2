@@ -4,14 +4,18 @@ import { assertExportClean } from './validateExport.js';
 import { findUiOnlyKeys } from './uiForbidden.js';
 import {
   bodyToNarrative,
+  buildAssistProvenanceExtras,
   buildPatientExportBundle,
   toFhirAllergyIntolerance,
+  toFhirAiModelCardDocumentReference,
   toFhirDocumentReference,
   toFhirEncounter,
   toFhirPatient,
   toFhirMedicationRequest,
+  toFhirProvenance,
   toFhirServiceRequest,
 } from './mappers.js';
+import { EPIS2_AIAST_SYSTEM, EPIS2_MODEL_CARD_VERSION } from './constants.js';
 
 describe('FHIR export mappers (EPIS2-10)', () => {
   const demo = getDemoCaseByPatientId('a0000001-0000-4000-8000-000000000001')!;
@@ -165,5 +169,120 @@ describe('FHIR export mappers (EPIS2-10)', () => {
     });
     const bundle = buildPatientExportBundle(patient, [enc], [], []);
     expect(assertExportClean(bundle).ok).toBe(true);
+  });
+
+  it('DocumentReference con aiProvenance lleva tag AIAST (MF-IM-06)', () => {
+    const noteId = 'c0000001-0000-4000-8000-000000000099';
+    const aiProvenance = {
+      aiRunId: 'f0000001-0000-4000-8000-000000000001',
+      blueprintId: 'evolution_note',
+      model: 'llama3.2:3b',
+      promptHash: 'abc123',
+    };
+    const doc = toFhirDocumentReference(
+      {
+        id: noteId,
+        patientId: demo.patientId,
+        noteType: 'evolution_note',
+        title: 'Evolución asistida (demo)',
+        body: { subjective: 'Mejoría', plan: 'Control' },
+        createdAt: new Date('2026-01-15T10:00:00.000Z'),
+      },
+      true,
+      { aiProvenance },
+    );
+    const aiastTag = doc.meta.tag?.find((t) => t.code === 'AIAST');
+    expect(aiastTag?.system).toBe(EPIS2_AIAST_SYSTEM);
+    expect(assertExportClean(doc).ok).toBe(true);
+  });
+
+  it('bundle incluye Provenance + Device + model card cuando aiProvenance (MF-IM-06/07)', () => {
+    const noteId = 'c0000001-0000-4000-8000-000000000099';
+    const approvedAt = new Date('2026-01-15T11:00:00.000Z');
+    const aiProvenance = {
+      aiRunId: 'f0000001-0000-4000-8000-000000000001',
+      blueprintId: 'evolution_note',
+      model: 'llama3.2:3b',
+      promptHash: 'abc123',
+    };
+    const patient = toFhirPatient({
+      id: demo.patientId,
+      displayName: demo.displayName,
+      birthDate: demo.birthDate,
+      sex: demo.sex,
+      isSynthetic: true,
+      demoIdentifier: demo.demoCaseCode,
+    });
+    const doc = toFhirDocumentReference(
+      {
+        id: noteId,
+        patientId: demo.patientId,
+        noteType: 'evolution_note',
+        title: 'Evolución asistida (demo)',
+        body: { subjective: 'Mejoría' },
+        createdAt: new Date('2026-01-15T10:00:00.000Z'),
+      },
+      true,
+      { aiProvenance },
+    );
+    const extras = buildAssistProvenanceExtras({
+      noteId,
+      patientId: demo.patientId,
+      aiProvenance,
+      approvedAt,
+    });
+    const bundle = buildPatientExportBundle(patient, [], [doc], [], extras);
+    const types = (bundle.entry ?? []).map(
+      (e) => (e.resource as { resourceType?: string }).resourceType,
+    );
+    expect(types).toContain('Provenance');
+    expect(types).toContain('Device');
+    expect(types).toContain('DocumentReference');
+    const modelCardEntries = (bundle.entry ?? []).filter(
+      (e) =>
+        (e.resource as { resourceType?: string; type?: { text?: string } }).resourceType ===
+          'DocumentReference' &&
+        (e.resource as { type?: { text?: string } }).type?.text === 'Model Card IA EPIS2',
+    );
+    expect(modelCardEntries.length).toBe(1);
+
+    const prov = toFhirProvenance(
+      {
+        noteId,
+        patientId: demo.patientId,
+        aiProvenance,
+        approvedAt,
+      },
+      'epis2-ai-model-card-llama3-2-3b',
+    );
+    expect(prov.target?.[0]?.reference).toBe(`DocumentReference/${noteId}`);
+    expect(prov.agent?.[0]?.who?.reference).toContain('Device/ai-device-');
+    expect(prov.entity?.some((e) => e.role === 'derivation')).toBe(true);
+    expect(assertExportClean(bundle).ok).toBe(true);
+  });
+
+  it('model card DocumentReference valida y round-trip markdown (MF-IM-07)', () => {
+    const aiProvenance = {
+      aiRunId: 'f0000001-0000-4000-8000-000000000001',
+      blueprintId: 'evolution_note',
+      model: 'llama3.2:3b',
+      promptHash: 'abc123def456',
+    };
+    const modelCard = toFhirAiModelCardDocumentReference({
+      model: aiProvenance.model,
+      promptHash: aiProvenance.promptHash,
+      blueprintId: aiProvenance.blueprintId,
+      cardVersion: EPIS2_MODEL_CARD_VERSION,
+    });
+    expect(modelCard.id).toBe('epis2-ai-model-card-llama3-2-3b');
+    expect(modelCard.content[0]?.attachment.contentType).toBe('text/markdown');
+    expect(assertExportClean(modelCard).ok).toBe(true);
+
+    const data = modelCard.content[0]?.attachment.data ?? '';
+    const decoded = Buffer.from(data, 'base64').toString('utf8');
+    expect(decoded).toContain('llama3.2:3b');
+    expect(decoded).toContain('abc123def456');
+    expect(decoded).toContain('evolution_note');
+    expect(decoded).toContain(EPIS2_MODEL_CARD_VERSION);
   });
 });

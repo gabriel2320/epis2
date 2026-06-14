@@ -10,7 +10,15 @@ export const EPIS2_PROFILES = {
   allergyIntolerance: `${EPIS2_FHIR_BASE}/StructureDefinition/epis2-allergy-minimal`,
   medicationStatement: `${EPIS2_FHIR_BASE}/StructureDefinition/epis2-medication-minimal`,
   medicationRequest: `${EPIS2_FHIR_BASE}/StructureDefinition/epis2-medication-request-snre`,
+  provenance: `${EPIS2_FHIR_BASE}/StructureDefinition/epis2-provenance-ai-assist`,
+  device: `${EPIS2_FHIR_BASE}/StructureDefinition/epis2-ai-device-minimal`,
 } as const;
 
 export const EPIS2_IDENTIFIER_SYSTEM_DEMO = `${EPIS2_FHIR_BASE}/NamingSystem/demo` as const;
 export const EPIS2_DATA_ORIGIN_SYSTEM = `${EPIS2_FHIR_BASE}/CodeSystem/data-origin` as const;
+/** Tag AIAST — documento aprobado con asistencia IA (MF-IM-06). */
+export const EPIS2_AIAST_SYSTEM = `${EPIS2_FHIR_BASE}/CodeSystem/ai-assist` as const;
+export const EPIS2_AI_RUN_SYSTEM = `${EPIS2_FHIR_BASE}/NamingSystem/ai-run` as const;
+/** Versión canónica de model card estática (MF-IM-07). */
+export const EPIS2_MODEL_CARD_VERSION = 'epis2-model-card/2026-06-14' as const;
+export const EPIS2_MODEL_CARD_SYSTEM = `${EPIS2_FHIR_BASE}/NamingSystem/ai-model-card` as const;
