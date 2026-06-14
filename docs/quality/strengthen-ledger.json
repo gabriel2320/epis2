@@ -239,7 +239,8 @@
       "subprogram": "PROG-IA-MODERNIZE",
       "phase": 3,
       "dependsOn": ["MF-IM-02"],
-      "state": "READY",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
       "gate": "quality:rag-retrieval-gate",
       "evidenceRequired": [
         "Retrieval secuencial por chunk en local-ai",
@@ -260,7 +261,8 @@
       "subprogram": "PROG-IA-MODERNIZE",
       "phase": 4,
       "dependsOn": ["MF-IM-03"],
-      "state": "BLOCKED",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
       "gate": "quality:rag-retrieval-gate",
       "evidenceRequired": [
         "ai_runs.output_payload con document_id + chunk_index[]",
@@ -281,7 +283,8 @@
       "subprogram": "PROG-IA-MODERNIZE",
       "phase": 5,
       "dependsOn": ["MF-IM-04"],
-      "state": "BLOCKED",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
       "gate": null,
       "evidenceRequired": [
         "Tipos AiProvenanceRecord en packages/contracts",
@@ -301,7 +304,8 @@
       "subprogram": "PROG-IA-MODERNIZE",
       "phase": 6,
       "dependsOn": ["MF-IM-05"],
-      "state": "BLOCKED",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
       "gate": "quality:ai-provenance-gate",
       "evidenceRequired": [
         "fhir-export genera Provenance + Device",
@@ -322,7 +326,8 @@
       "subprogram": "PROG-IA-MODERNIZE",
       "phase": 7,
       "dependsOn": ["MF-IM-06"],
-      "state": "BLOCKED",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
       "gate": "quality:ai-provenance-gate",
       "evidenceRequired": [
         "DocumentReference markdown model card en fhir-export",
@@ -338,8 +343,9 @@
       "subprogram": "PROG-IA-MODERNIZE",
       "phase": 8,
       "dependsOn": ["MF-IM-06"],
-      "state": "BLOCKED",
-      "gate": "ai:evals:live",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
+      "gate": "ai:evals:feedback-loop",
       "evidenceRequired": [
         "Policy assist excluye contexto AIAST",
         "Eval regression fixture",
@@ -355,8 +361,9 @@
       "subprogram": "PROG-IA-MODERNIZE",
       "phase": 9,
       "dependsOn": ["MF-IM-06"],
-      "state": "BLOCKED",
-      "gate": null,
+      "state": "DONE",
+      "completedAt": "2026-06-14",
+      "gate": "quality:ai-otel-gate",
       "evidenceRequired": [
         "Span ai.run con latencia modelo",
         "Trace smoke en CI o dev",
@@ -376,7 +383,8 @@
       "subprogram": "PROG-CDS-UX",
       "phase": 1,
       "dependsOn": ["MF-IM-04"],
-      "state": "BLOCKED",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
       "gate": null,
       "evidenceRequired": [
         "ClinicalCdsCard MUI info/suggestion/warning",

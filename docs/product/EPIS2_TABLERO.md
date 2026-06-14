@@ -1,10 +1,10 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-14 · **HEAD committed:** `d9b9b52`
+**Actualizado:** 2026-06-14 · **HEAD local:** `0faad77` (+ pendientes sesión FF-06)
 
-Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:** [`epis2-plan-conciliacion-triada-2026-06-14.md`](../../reports/epis2-plan-conciliacion-triada-2026-06-14.md) · **Correcciones:** [`epis2-plan-correcciones-prioritarias-2026-06-14.md`](../../reports/epis2-plan-correcciones-prioritarias-2026-06-14.md) · **Tríada:** [`EPIS2_TRIADA_REPOS.md`](./EPIS2_TRIADA_REPOS.md)
+Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan unificado:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) · **Correcciones:** [`epis2-plan-correcciones-prioritarias-2026-06-14.md`](../../reports/epis2-plan-correcciones-prioritarias-2026-06-14.md)
 
-> **PROG-RAPID** ✓ · **PROG-FICHA-FIRST** MF-FF-01…03 ✓ · **STRENGTHEN** MF-IM-03 READY (no auto) · HEAD `cd6ecdc`
+> **PROG-RAPID** ✓ · **PROG-FICHA-FIRST** wave1 ✓ · **PROG-STRENGTHEN** 15/23 · **MF-CU-01** siguiente · Plan [`EPIS2_FICHA_FIRST_DEV_PLAN.md`](./EPIS2_FICHA_FIRST_DEV_PLAN.md)
 
 ---
 
@@ -33,26 +33,42 @@ Evidencia: [`epis2-mf-rapid-close-2026.md`](../../reports/epis2-mf-rapid-close-2
 
 ---
 
-## Cerrado — PROG-FICHA-FIRST-2026 (MF-FF-01…03)
+## PROG-FICHA-FIRST-2026
+
+**Plan:** [`EPIS2_FICHA_FIRST_DEV_PLAN.md`](./EPIS2_FICHA_FIRST_DEV_PLAN.md) · **Ledger:** [`ficha-first-ledger.json`](../quality/ficha-first-ledger.json) · `npm run quality:ficha-first-next`
+
+### Ola 1 — Activación ✓
 
 | MF | Entrega | Gate |
 |----|---------|------|
 | MF-FF-01 | Dual chart ON default | `quality:ficha-first-gate` |
-| MF-FF-02 | Home = censo `/espacio/buscar-paciente` | ↑ |
-| MF-FF-03 | `/comando` redirect compat | ↑ |
+| MF-FF-02 | Home = censo | ↑ |
+| MF-FF-03 | `/comando` redirect | ↑ |
+| MF-FF-06 | ClinicalShell + barra en `/espacio/*` | ↑ |
 
-Evidencia: [`epis2-mf-ff-01-03-ficha-first.md`](../../reports/epis2-mf-ff-01-03-ficha-first.md)
+Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/epis2-prog-ficha-first-wave1-close-2026-06-14.md)
 
-**Siguiente FICHA-FIRST:** **MF-FF-06** ClinicalShell en formularios `/espacio/*`
+### Ola 2 — Canon (activa)
+
+| MF | Estado | Entrega |
+|----|--------|---------|
+| **MF-FF-00** | **READY** | Invariante #6 · Golden journey · MODES_LAYER |
+| MF-FF-04 | BLOCKED | Dashboard secundario |
+| MF-FF-05 | BLOCKED | VISION_EPIS2 + agente |
+
+**Siguiente:** `npm run quality:ficha-first-next`
 
 ---
 
 ## En curso — PROG-STRENGTHEN-2026
 
-| Subprograma | MF activa | Gate |
-|-------------|-----------|------|
-| **PROG-CORE-HARDEN** | ✓ MF-SH-01…06 cerrado | — |
-| **PROG-IA-MODERNIZE** | **MF-IM-03** RAG incremental | `quality:rag-retrieval-gate` |
+**Progreso:** 15/23 MF cerradas · Ola 6 ✓ (IM-09 OTel) · **PROG-CDS-UX** → MF-CU-01
+
+| Subprograma | Estado | Siguiente |
+|-------------|--------|-----------|
+| **PROG-CORE-HARDEN** | ✓ MF-SH-01…06 | — |
+| **PROG-IA-MODERNIZE** | ✓ MF-IM-01…09 | — |
+| **PROG-CDS-UX** | pendiente | **MF-CU-01** ClinicalCdsCard · `quality:cds-hooks-gate` |
 
 `npm run quality:strengthen-next` · ledger [`strengthen-ledger.json`](../quality/strengthen-ledger.json)
 
@@ -85,7 +101,14 @@ Evidencia: [`epis2-mf-ff-01-03-ficha-first.md`](../../reports/epis2-mf-ff-01-03-
 | **MF-SH-02** intent evals | 93.3% top-10 · ai:evals:live 4/4 · [`epis2-mf-sh-02-intent-evals.md`](../../reports/epis2-mf-sh-02-intent-evals.md) |
 | **MF-IM-01** embeddings 384d | migración 046 · dual-read 128/384 · [`epis2-mf-im-01-embeddings.md`](../../reports/epis2-mf-im-01-embeddings.md) |
 | **MF-IM-02** embed Ollama | contrato embedDocument · [`epis2-mf-im-02-embed-api.md`](../../reports/epis2-mf-im-02-embed-api.md) |
-| **MF-FF-01…03** ficha-first | censo home · dual default · `/comando` redirect · [`epis2-mf-ff-01-03-ficha-first.md`](../../reports/epis2-mf-ff-01-03-ficha-first.md) |
+| **MF-IM-03** RAG incremental | retrieval secuencial · [`epis2-mf-im-03-rag-incremental.md`](../../reports/epis2-mf-im-03-rag-incremental.md) |
+| **MF-IM-04** assist citas | `documentCitations` en assist · [`epis2-mf-im-04-assist-citas.md`](../../reports/epis2-mf-im-04-assist-citas.md) |
+| **MF-IM-05** provenance interno | `AiProvenanceRecord` en audit approve · [`epis2-mf-im-05-provenance-internal.md`](../../reports/epis2-mf-im-05-provenance-internal.md) |
+| **MF-IM-06** FHIR Provenance + AIAST | export `fhir-export` · [`epis2-mf-im-06-provenance-fhir.md`](../../reports/epis2-mf-im-06-provenance-fhir.md) |
+| **MF-IM-07** model card | `DocumentReference` markdown · [`epis2-mf-im-07-model-card.md`](../../reports/epis2-mf-im-07-model-card.md) |
+| **MF-IM-08** anti feedback-loop | policy assist excluye AIAST · [`epis2-mf-im-08-feedback-loop.md`](../../reports/epis2-mf-im-08-feedback-loop.md) |
+| **MF-IM-09** OTel spans IA | span `ai.run` · [`epis2-mf-im-09-otel.md`](../../reports/epis2-mf-im-09-otel.md) |
+| **MF-FF-01…06** ficha-first wave1 | censo home · dual default · `/comando` redirect · ClinicalShell · [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/epis2-prog-ficha-first-wave1-close-2026-06-14.md) |
 | **PROG-CONCILIACION tríada** | F0–F7 ✓ · [`epis2-prog-conciliacion-triada-close-2026.md`](../../reports/epis2-prog-conciliacion-triada-close-2026.md) |
 
 ---
@@ -149,7 +172,7 @@ Hilos C / PAPER / comando absorbidos en tres frentes. C-3 ✓ · MF-PAPER-01…0
 
 `npm run quality:tres-frentes-next` · [`tres-frentes-ledger.json`](../quality/tres-frentes-ledger.json) · [`EPIS2_TRES_FRENTES_DEV_PLAN.md`](./EPIS2_TRES_FRENTES_DEV_PLAN.md)
 
-**Pausado:** PROG-STRENGTHEN · CHILE backlog · multimedia · auto-dev — hasta SIGNOFF-EXPERIENCIA-CORE.
+**Pausado:** CHILE backlog (MF-IC-*) · multimedia · auto-dev — STRENGTHEN activo en PROG-CDS-UX (MF-CU-01).
 
 ---
 

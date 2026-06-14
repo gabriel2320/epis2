@@ -1,31 +1,36 @@
 # EPIS2 — Dev Brief (IA asistida)
 
-> **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-golden-guardian.md` — declarar alcance en el primer mensaje.
+> **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-layers-integrator.md` — declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-14T17:40:52.401Z · **HEAD:** `cd6ecdc` · **Fase:** B
+**Generado:** 2026-06-15T00:15:00.000Z · **HEAD:** `0faad77` · **Fase:** A5 · **Ola:** 7 (fast dev)
 
 ## Orquestador (MF-RAPID + STRENGTHEN)
 
 - **PROG-RAPID** ✓ — iteración: `npm run dev:rapid` · cierre MF: `npm run quality:clinical`
-- **PROG-FICHA-FIRST** — MF-FF-01…03 ✓ · home censo · `/comando` redirect
-- **No** iniciar la MF READY siguiente salvo petición explícita del usuario.
-- STRENGTHEN READY: **MF-IM-03** — RAG incremental (retrieval secuencial) · gate `quality:rag-retrieval-gate`
-- FICHA-FIRST READY: **MF-FF-06** — ClinicalShell en formularios /espacio/* · gate `quality:ficha-first-gate`
-- Allowlist: services/local-ai/src/rag/**, scripts/quality/validate-rag-retrieval-gate.mjs, packages/test-fixtures/**
+- **PROG-FICHA-FIRST** ✓ wave1 — MF-FF-01…06 · home censo · `/comando` redirect · wave2 MF-FF-00 READY
+- **PROG-STRENGTHEN** — **15/23** · MF-SH-01…06 ✓ · MF-IM-01…09 ✓ · **MF-CU-01 EN CURSO** (PROG-CDS-UX)
+- **No** iniciar MF-CU-02+ salvo petición explícita del usuario.
+- Ola 6 ✓ cerrada — MF-IM-09 OTel · **PROG-IA-MODERNIZE** completo
+- Ola 7 **EN CURSO** — MF-CU-01 ClinicalCdsCard · subprograma PROG-CDS-UX
+- Plan: [`dev-agent-orchestration-plan.json`](./dev-agent-orchestration-plan.json) · reporte: [`epis2-orquestacion-paralela-2026-06-14.md`](./epis2-orquestacion-paralela-2026-06-14.md) §16
 
 ## Estado del tablero (fuente canónica)
 
-- **En curso:** **PROG-CORE-HARDEN**: ✓ MF-SH-01…06 cerrado (—)
-- **En curso:** **PROG-IA-MODERNIZE**: **MF-IM-03** RAG incremental (`quality:rag-retrieval-gate`)
+- **Cerrado:** **PROG-CORE-HARDEN** ✓ MF-SH-01…06 · **PROG-IA-MODERNIZE** MF-IM-01…09 ✓ · **PROG-FICHA-FIRST** wave1 ✓
+- **En curso:** **MF-CU-01** ClinicalCdsCard (PROG-CDS-UX)
+- **Siguiente (blocked):** **MF-CU-02** Hook patient-view · `quality:cds-hooks-gate`
+- **Abierto:** commit tree (humano)
 
 ## Objetivo sugerido
 
-- **STRENGTHEN READY:** `MF-IM-03` — RAG incremental (retrieval secuencial)
-- **Gate:** `quality:rag-retrieval-gate`
+- **MF activa:** `MF-CU-01` — Componente ClinicalCdsCard (info / suggestion / warning)
+- **Gate cierre:** `npm run check` · Storybook o unit test
+- **Allowlist:** `apps/web/src/components/cds/**`, `packages/epis2-ui/src/stories/**`, `packages/design-system/src/copy/es.ts`
+- **Prohibido:** hooks CDS (CU-02), API `/cds/cards` (CU-04), migraciones
 
 ## Subagente primario
 
-**[`golden-guardian`](./dev-agent-prompt-golden-guardian.md)** — Guardián Golden Journey
+**[`layers-integrator`](./dev-agent-prompt-layers-integrator.md)** — Integrador capas L3+L4+L5 (UI CDS)
 
 ## Secuencia completa
 
@@ -37,30 +42,33 @@
 
 ## Working tree
 
-- Rama: `master` · cambios: 21
+- Rama: `master` · cambios: 68 (lista truncada)
 
 ```
-M .cursor/hooks/session-start.mjs
-M apps/web/src/dev/dualChartModesEnv.ts
-M apps/web/src/routes/home.ts
-M apps/web/src/routes/router.test.ts
-M apps/web/src/routes/router.tsx
+M apps/api/src/ai/client.ts
+M apps/api/src/ai/routes.test.ts
+M apps/api/src/ai/routes.ts
+M apps/api/src/clinical/service.ts
+M apps/web/src/modes/EpisModeGuard.tsx
+M apps/web/src/modes/episModeGuards.ts
+M apps/web/src/modes/episModes.test.ts
+M apps/web/src/modes/episModes.ts
+M apps/web/src/modes/modeTransitions.test.ts
+M apps/web/src/pages/CommandCenterPage.tsx
 M docs/AGENT_CONTEXT_MINIMAL.md
+M docs/PRODUCT_CANON.md
 M docs/product/EPIS2_TABLERO.md
+M docs/product/PRODUCT_INVARIANTS.md
+M docs/quality/ficha-first-ledger.json
+M docs/quality/strengthen-ledger.json
+M e2e/a11y-smoke.spec.ts
+M e2e/calm-premium-signoff-capture.spec.ts
+M e2e/clinical-textbox-evolution-draft.spec.ts
+M e2e/golden-command-evolution.spec.ts
+M e2e/golden-draft-approval.spec.ts
+M e2e/golden-v2-admission-discharge.spec.ts
 M e2e/helpers/demoPatient.ts
-M package.json
-M reports/dev-agent-prompt-gate-runner.md
-M scripts/architecture/command-center-home.mjs
-M scripts/dev-agent/brief.mjs
-M scripts/dev/velocity-lib.mjs
-M tests/golden-clinical-journey.spec.ts
-?? apps/web/src/dev/dualChartModesEnv.test.ts
-?? docs/quality/ficha-first-ledger.json
-?? reports/dev-agent-audit-diff-latest.json
-?? reports/epis2-auditoria-ingeniero-externo-2026-06-14.md
-?? reports/epis2-mf-ff-01-03-ficha-first.md
-?? scripts/dev/ficha-first-context.mjs
-?? scripts/quality/validate-ficha-first-gate.mjs
+M e2e/m3-visual-signoff-capture.spec.ts
 ```
 
 ## Evolab (QA externo)
@@ -123,7 +131,7 @@ npm run dev:agent:close    # checklist + plantilla reporte
 # EPIS2 — Sesión subagentes de desarrollo
 
 **Fase:** B
-**Generado:** 2026-06-14T17:40:52.402Z
+**Generado:** 2026-06-14T18:10:03.314Z
 
 ## Secuencia recomendada
 

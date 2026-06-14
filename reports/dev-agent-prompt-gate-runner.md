@@ -19,6 +19,7 @@
 npm run check
 npm run test
 npm run db:validate
+quality:case-intel-catalog-gate
 ```
 
 ## Plan global (extracto)

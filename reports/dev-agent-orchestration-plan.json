@@ -1,0 +1,820 @@
+{
+  "generatedAt": "2026-06-15T00:15:00.000Z",
+  "version": "7.0",
+  "mode": "parallel-wave",
+  "wave": 7,
+  "waveMode": "fast-dev",
+  "activePhase": "A5",
+  "masterPlan": "reports/epis2-plan-desarrollo-unificado-2026-06-14.md",
+  "orchestrationReport": "reports/epis2-orquestacion-paralela-2026-06-14.md",
+  "iterationCommand": "npm run dev:rapid",
+  "programs": {
+    "PROG-FICHA-FIRST": {
+      "state": "CLOSED",
+      "wave": 1,
+      "evidence": "reports/epis2-prog-ficha-first-wave1-close-2026-06-14.md",
+      "gate": "quality:ficha-first-gate"
+    },
+    "PROG-STRENGTHEN": {
+      "state": "ACTIVE",
+      "progress": "15/23",
+      "activeMicrophase": "MF-CU-01",
+      "nextMicrophase": "MF-CU-02",
+      "ledger": "docs/quality/strengthen-ledger.json"
+    },
+    "PROG-CDS-UX": {
+      "state": "ACTIVE",
+      "wave": 7,
+      "activeMicrophase": "MF-CU-01",
+      "nextMicrophase": "MF-CU-02",
+      "subprogramOf": "PROG-STRENGTHEN",
+      "ledger": "docs/quality/strengthen-ledger.json"
+    }
+  },
+  "closedPending": [
+    "PROG-FICHA-FIRST",
+    "MF-IM-01",
+    "MF-IM-02",
+    "MF-IM-03",
+    "MF-IM-04",
+    "MF-IM-05",
+    "MF-IM-06",
+    "MF-IM-07",
+    "MF-IM-08",
+    "MF-IM-09",
+    "E2E-FASE-B",
+    "PROG-IA-MODERNIZE"
+  ],
+  "openPending": [
+    "MF-CU-01-cds-card-in-progress",
+    "commit-tree"
+  ],
+  "workingTree": {
+    "branch": "master",
+    "pendingChanges": 68,
+    "summary": {
+      "apps": 10,
+      "docs": 6,
+      "e2e": 12,
+      "reports": 8,
+      "scripts": 5,
+      "packages": 8,
+      "services": 6,
+      "other": 8
+    },
+    "commitOwner": "human"
+  },
+  "wave1": {
+    "completedAt": "2026-06-14",
+    "tracksCompleted": 4,
+    "outcome": "MF-IM-03 DONE · MF-IM-04 DONE · E2E Fase B · FICHA-FIRST closed"
+  },
+  "wave2": {
+    "startedAt": "2026-06-14",
+    "completedAt": "2026-06-14",
+    "tracks": 3,
+    "outcome": "MF-IM-05 DONE · docs Ola 2 sync",
+    "parallelTracks": [
+      {
+        "id": "wave2-track-1-clinical",
+        "subagent": "ollama-clinical",
+        "microphase": "MF-IM-05",
+        "state": "DONE",
+        "subprogram": "PROG-IA-MODERNIZE",
+        "objective": "AI Provenance interno — tipos AiProvenanceRecord en contracts; link approve → provenance",
+        "allowedPaths": [
+          "packages/contracts/src/ai-provenance*.ts",
+          "apps/api/src/routes/approvals/**"
+        ],
+        "forbiddenPaths": [
+          "e2e/**",
+          "reports/**",
+          "docs/**",
+          "database/migrations/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run check",
+          "mfClose": "npm run quality:clinical"
+        },
+        "closureReport": "reports/epis2-mf-im-05-provenance-internal.md",
+        "prompt": "reports/dev-agent-prompt-ollama-clinical.md",
+        "unblocks": ["MF-IM-06"]
+      },
+      {
+        "id": "wave2-track-2-gates",
+        "subagent": "gate-runner",
+        "microphase": "FAST-GATES-WORKING-TREE",
+        "state": "DONE",
+        "objective": "dev:rapid + fast gates sobre working tree acumulado (~63 cambios)",
+        "allowedPaths": [
+          "reports/dev-agent-audit-diff-latest.json"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "validation": [
+            "npm run quality:fast",
+            "npm run quality:ficha-first-gate"
+          ],
+          "prePr": [
+            "npm run check",
+            "npm run test",
+            "npm run db:validate"
+          ]
+        },
+        "startWhen": "parallel",
+        "prompt": "reports/dev-agent-prompt-gate-runner.md"
+      },
+      {
+        "id": "wave2-track-3-writer",
+        "subagent": "ollama-dev-writer",
+        "microphase": "MF-RAPID-03-L0",
+        "state": "DONE",
+        "objective": "Documentación Ola 2 — sync brief, plan JSON, AGENT_CONTEXT",
+        "allowedPaths": [
+          "reports/**",
+          "docs/AGENT_CONTEXT_MINIMAL.md"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**",
+          "database/migrations/**"
+        ],
+        "deliverables": [
+          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/dev-agent-orchestration-plan.json",
+          "reports/dev-agent-brief.md",
+          "docs/AGENT_CONTEXT_MINIMAL.md"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run dev:rapid -- --skip-audit"
+        },
+        "prompt": "reports/dev-agent-prompt-ollama-dev-writer.md"
+      }
+    ]
+  },
+  "wave3": {
+    "startedAt": "2026-06-14",
+    "completedAt": "2026-06-14",
+    "tracks": 3,
+    "outcome": "MF-IM-06 DONE · docs Ola 3 sync",
+    "parallelTracks": [
+      {
+        "id": "wave3-track-1-clinical",
+        "subagent": "ollama-clinical",
+        "microphase": "MF-IM-06",
+        "state": "DONE",
+        "subprogram": "PROG-IA-MODERNIZE",
+        "objective": "Export FHIR Provenance + AIAST — fhir-export Provenance + Device; tag AIAST post-approve asistido",
+        "allowedPaths": [
+          "packages/fhir-export/**",
+          "database/migrations/043_ai_provenance.sql",
+          "scripts/quality/validate-ai-provenance-gate.mjs"
+        ],
+        "forbiddenPaths": [
+          "e2e/**",
+          "reports/**",
+          "docs/**",
+          "database/migrations/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run quality:ai-provenance-gate",
+          "mfClose": "npm run quality:clinical"
+        },
+        "closureReport": "reports/epis2-mf-im-06-provenance-fhir.md",
+        "prompt": "reports/dev-agent-prompt-ollama-clinical.md",
+        "unblocks": ["MF-IM-07"]
+      },
+      {
+        "id": "wave3-track-2-gates",
+        "subagent": "gate-runner",
+        "microphase": "FAST-GATES-WORKING-TREE",
+        "state": "DONE",
+        "objective": "dev:rapid + fast gates sobre working tree acumulado (~68 cambios)",
+        "allowedPaths": [
+          "reports/dev-agent-audit-diff-latest.json"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "validation": [
+            "npm run quality:fast",
+            "npm run quality:ficha-first-gate"
+          ],
+          "prePr": [
+            "npm run check",
+            "npm run test",
+            "npm run db:validate"
+          ]
+        },
+        "startWhen": "parallel",
+        "prompt": "reports/dev-agent-prompt-gate-runner.md"
+      },
+      {
+        "id": "wave3-track-3-writer",
+        "subagent": "ollama-dev-writer",
+        "microphase": "MF-RAPID-03-L0",
+        "state": "DONE",
+        "objective": "Documentación Ola 3 — sync brief, plan JSON, AGENT_CONTEXT",
+        "allowedPaths": [
+          "reports/**",
+          "docs/AGENT_CONTEXT_MINIMAL.md"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**",
+          "database/migrations/**"
+        ],
+        "deliverables": [
+          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/dev-agent-orchestration-plan.json",
+          "reports/dev-agent-brief.md",
+          "docs/AGENT_CONTEXT_MINIMAL.md"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run dev:rapid -- --skip-audit"
+        },
+        "prompt": "reports/dev-agent-prompt-ollama-dev-writer.md"
+      }
+    ]
+  },
+  "wave4": {
+    "startedAt": "2026-06-14",
+    "completedAt": "2026-06-14",
+    "tracks": 3,
+    "outcome": "MF-IM-07 DONE · docs Ola 4 sync · STRENGTHEN 13/23",
+    "parallelTracks": [
+      {
+        "id": "wave4-track-1-clinical",
+        "subagent": "ollama-clinical",
+        "microphase": "MF-IM-07",
+        "state": "DONE",
+        "subprogram": "PROG-IA-MODERNIZE",
+        "objective": "Model card estático (export) — DocumentReference markdown model card en fhir-export; test export round-trip",
+        "allowedPaths": [
+          "packages/fhir-export/**",
+          "docs/product/EPIS2_AI_MODEL_CARD.md"
+        ],
+        "forbiddenPaths": [
+          "e2e/**",
+          "reports/**",
+          "docs/**",
+          "database/migrations/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run quality:ai-provenance-gate",
+          "mfClose": "npm run quality:clinical"
+        },
+        "closureReport": "reports/epis2-mf-im-07-model-card.md",
+        "prompt": "reports/dev-agent-prompt-ollama-clinical.md",
+        "unblocks": ["MF-IM-08"]
+      },
+      {
+        "id": "wave4-track-2-gates",
+        "subagent": "gate-runner",
+        "microphase": "FAST-GATES-WORKING-TREE",
+        "state": "DONE",
+        "objective": "dev:rapid + fast gates sobre working tree acumulado (~68 cambios)",
+        "allowedPaths": [
+          "reports/dev-agent-audit-diff-latest.json"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "validation": [
+            "npm run quality:fast",
+            "npm run quality:ficha-first-gate"
+          ],
+          "prePr": [
+            "npm run check",
+            "npm run test",
+            "npm run db:validate"
+          ]
+        },
+        "startWhen": "parallel",
+        "prompt": "reports/dev-agent-prompt-gate-runner.md"
+      },
+      {
+        "id": "wave4-track-3-writer",
+        "subagent": "ollama-dev-writer",
+        "microphase": "MF-RAPID-03-L0",
+        "state": "DONE",
+        "objective": "Documentación Ola 4 — sync brief, plan JSON, AGENT_CONTEXT",
+        "allowedPaths": [
+          "reports/**",
+          "docs/AGENT_CONTEXT_MINIMAL.md"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**",
+          "database/migrations/**"
+        ],
+        "deliverables": [
+          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/dev-agent-orchestration-plan.json",
+          "reports/dev-agent-brief.md",
+          "docs/AGENT_CONTEXT_MINIMAL.md"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run dev:rapid -- --skip-audit"
+        },
+        "prompt": "reports/dev-agent-prompt-ollama-dev-writer.md"
+      }
+    ]
+  },
+  "wave5": {
+    "startedAt": "2026-06-14",
+    "completedAt": "2026-06-14",
+    "tracks": 3,
+    "outcome": "MF-IM-08 DONE · docs Ola 5 sync · STRENGTHEN 14/23",
+    "parallelTracks": [
+      {
+        "id": "wave5-track-1-clinical",
+        "subagent": "ollama-clinical",
+        "microphase": "MF-IM-08",
+        "state": "DONE",
+        "subprogram": "PROG-IA-MODERNIZE",
+        "objective": "Anti feedback-loop (policy assist) — excluir contexto AIAST del assist; eval regression fixture",
+        "allowedPaths": [
+          "services/local-ai/**",
+          "scripts/ai/evals/**"
+        ],
+        "forbiddenPaths": [
+          "e2e/**",
+          "reports/**",
+          "docs/**",
+          "database/migrations/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run ai:evals:live",
+          "mfClose": "npm run quality:clinical"
+        },
+        "closureReport": "reports/epis2-mf-im-08-feedback-loop.md",
+        "prompt": "reports/dev-agent-prompt-ollama-clinical.md",
+        "unblocks": ["MF-IM-09"]
+      },
+      {
+        "id": "wave5-track-2-gates",
+        "subagent": "gate-runner",
+        "microphase": "FAST-GATES-WORKING-TREE",
+        "state": "DONE",
+        "objective": "dev:rapid + fast gates sobre working tree acumulado (~68 cambios)",
+        "allowedPaths": [
+          "reports/dev-agent-audit-diff-latest.json"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "validation": [
+            "npm run quality:fast",
+            "npm run quality:ficha-first-gate"
+          ],
+          "prePr": [
+            "npm run check",
+            "npm run test",
+            "npm run db:validate"
+          ]
+        },
+        "startWhen": "parallel",
+        "prompt": "reports/dev-agent-prompt-gate-runner.md"
+      },
+      {
+        "id": "wave5-track-3-writer",
+        "subagent": "ollama-dev-writer",
+        "microphase": "MF-RAPID-03-L0",
+        "state": "DONE",
+        "objective": "Documentación Ola 5 — sync brief, plan JSON, AGENT_CONTEXT",
+        "allowedPaths": [
+          "reports/**",
+          "docs/AGENT_CONTEXT_MINIMAL.md"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**",
+          "database/migrations/**"
+        ],
+        "deliverables": [
+          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/dev-agent-orchestration-plan.json",
+          "reports/dev-agent-brief.md",
+          "docs/AGENT_CONTEXT_MINIMAL.md"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run dev:rapid -- --skip-audit"
+        },
+        "prompt": "reports/dev-agent-prompt-ollama-dev-writer.md"
+      }
+    ]
+  },
+  "wave6": {
+    "startedAt": "2026-06-14",
+    "completedAt": "2026-06-14",
+    "tracks": 3,
+    "outcome": "MF-IM-09 DONE · PROG-IA-MODERNIZE completo · docs Ola 6 sync · STRENGTHEN 15/23",
+    "parallelTracks": [
+      {
+        "id": "wave6-track-1-clinical",
+        "subagent": "ollama-clinical",
+        "microphase": "MF-IM-09",
+        "state": "DONE",
+        "subprogram": "PROG-IA-MODERNIZE",
+        "objective": "OTel spans pipeline IA — span ai.run con latencia modelo; trace smoke",
+        "allowedPaths": [
+          "apps/api/src/routes/ai/**",
+          "services/local-ai/**",
+          "apps/api/src/otel/**"
+        ],
+        "forbiddenPaths": [
+          "e2e/**",
+          "reports/**",
+          "docs/**",
+          "database/migrations/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run quality:ai-otel-gate",
+          "mfClose": "npm run quality:clinical"
+        },
+        "closureReport": "reports/epis2-mf-im-09-otel.md",
+        "prompt": "reports/dev-agent-prompt-ollama-clinical.md",
+        "unblocks": ["MF-CU-01"]
+      },
+      {
+        "id": "wave6-track-2-gates",
+        "subagent": "gate-runner",
+        "microphase": "FAST-GATES-WORKING-TREE",
+        "state": "DONE",
+        "objective": "dev:rapid + ai-otel-gate sobre working tree acumulado (~68 cambios)",
+        "allowedPaths": [
+          "reports/dev-agent-audit-diff-latest.json"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "validation": [
+            "npm run quality:fast",
+            "npm run quality:ai-otel-gate"
+          ],
+          "prePr": [
+            "npm run check",
+            "npm run test",
+            "npm run db:validate"
+          ]
+        },
+        "startWhen": "parallel",
+        "prompt": "reports/dev-agent-prompt-gate-runner.md"
+      },
+      {
+        "id": "wave6-track-3-writer",
+        "subagent": "ollama-dev-writer",
+        "microphase": "MF-RAPID-03-L0",
+        "state": "DONE",
+        "objective": "Documentación Ola 6 — sync brief, plan JSON, AGENT_CONTEXT",
+        "allowedPaths": [
+          "reports/**",
+          "docs/AGENT_CONTEXT_MINIMAL.md"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**",
+          "database/migrations/**"
+        ],
+        "deliverables": [
+          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/dev-agent-orchestration-plan.json",
+          "reports/dev-agent-brief.md",
+          "docs/AGENT_CONTEXT_MINIMAL.md"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run dev:rapid -- --skip-audit"
+        },
+        "prompt": "reports/dev-agent-prompt-ollama-dev-writer.md"
+      }
+    ]
+  },
+  "wave7": {
+    "startedAt": "2026-06-14",
+    "completedAt": null,
+    "tracks": 3,
+    "outcome": "MF-CU-01 IN PROGRESS · PROG-CDS-UX abierto · docs Ola 7 sync",
+    "parallelTracks": [
+      {
+        "id": "wave7-track-1-layers",
+        "subagent": "layers-integrator",
+        "microphase": "MF-CU-01",
+        "state": "IN_PROGRESS",
+        "subprogram": "PROG-CDS-UX",
+        "objective": "ClinicalCdsCard — tarjeta CDS compacta MUI (info / suggestion / warning); Storybook o unit test",
+        "allowedPaths": [
+          "apps/web/src/components/cds/**",
+          "packages/epis2-ui/src/stories/**",
+          "packages/design-system/src/copy/es.ts"
+        ],
+        "forbiddenPaths": [
+          "apps/api/**",
+          "services/local-ai/**",
+          "e2e/**",
+          "reports/**",
+          "docs/**",
+          "database/migrations/**",
+          "apps/web/src/components/chart/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run check",
+          "mfClose": "npm run quality:clinical"
+        },
+        "closureReport": "reports/epis2-mf-cu-01-cds-card.md",
+        "prompt": "reports/dev-agent-prompt-layers-integrator.md",
+        "unblocks": ["MF-CU-02"]
+      },
+      {
+        "id": "wave7-track-2-gates",
+        "subagent": "gate-runner",
+        "microphase": "FAST-GATES-WORKING-TREE",
+        "state": "READY",
+        "objective": "dev:rapid + fast gates sobre working tree acumulado (~68 cambios)",
+        "allowedPaths": [
+          "reports/dev-agent-audit-diff-latest.json"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "validation": [
+            "npm run quality:fast",
+            "npm run quality:ficha-first-gate"
+          ],
+          "prePr": [
+            "npm run check",
+            "npm run test",
+            "npm run db:validate"
+          ]
+        },
+        "startWhen": "parallel",
+        "prompt": "reports/dev-agent-prompt-gate-runner.md"
+      },
+      {
+        "id": "wave7-track-3-writer",
+        "subagent": "ollama-dev-writer",
+        "microphase": "MF-RAPID-03-L0",
+        "state": "DONE",
+        "objective": "Documentación Ola 7 — sync brief, plan JSON, AGENT_CONTEXT",
+        "allowedPaths": [
+          "reports/**",
+          "docs/AGENT_CONTEXT_MINIMAL.md"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**",
+          "database/migrations/**"
+        ],
+        "deliverables": [
+          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/dev-agent-orchestration-plan.json",
+          "reports/dev-agent-brief.md",
+          "docs/AGENT_CONTEXT_MINIMAL.md"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run dev:rapid -- --skip-audit"
+        },
+        "prompt": "reports/dev-agent-prompt-ollama-dev-writer.md"
+      }
+    ]
+  },
+  "parallelTracks": [
+    {
+      "id": "track-1-clinical",
+      "subagent": "ollama-clinical",
+      "microphase": "MF-IM-03",
+      "subprogram": "PROG-IA-MODERNIZE",
+      "state": "DONE",
+      "wave": 1,
+      "objective": "RAG incremental (retrieval secuencial) en local-ai",
+      "allowedPaths": [
+        "services/local-ai/src/rag/**",
+        "scripts/quality/validate-rag-retrieval-gate.mjs",
+        "packages/test-fixtures/**"
+      ],
+      "forbiddenPaths": [
+        "apps/**",
+        "e2e/**",
+        "reports/**",
+        "docs/**",
+        "database/migrations/**"
+      ],
+      "gates": {
+        "iteration": "npm run dev:rapid",
+        "closure": "npm run quality:rag-retrieval-gate",
+        "mfClose": "npm run quality:clinical"
+      },
+      "closureReport": "reports/epis2-mf-im-03-rag-incremental.md",
+      "prompt": "reports/dev-agent-prompt-ollama-clinical.md",
+      "unblocks": ["MF-IM-04"]
+    },
+    {
+      "id": "track-2-golden",
+      "subagent": "golden-guardian",
+      "microphase": "FASE-B-E2E-CENSO-FIRST",
+      "state": "DONE",
+      "wave": 1,
+      "objective": "Migrar specs E2E de /comando a patrón censo-first (getTransversalCommandBar)",
+      "allowedPaths": [
+        "e2e/**",
+        "e2e/helpers/demoPatient.ts"
+      ],
+      "forbiddenPaths": [
+        "services/local-ai/**",
+        "apps/web/**",
+        "reports/**",
+        "database/migrations/**"
+      ],
+      "prioritySpecs": [
+        "e2e/golden-v2-admission-discharge.spec.ts",
+        "e2e/golden-command-evolution.spec.ts",
+        "e2e/m3-visual-signoff*.spec.ts",
+        "e2e/ola1c-results-journey.spec.ts",
+        "e2e/three-modes-journey.spec.ts",
+        "e2e/ux-g02-command-first.spec.ts"
+      ],
+      "gates": {
+        "closure": "npm run quality:clinical",
+        "subset": "npm run test:e2e:ux-g02"
+      },
+      "prompt": "reports/dev-agent-prompt-golden-guardian.md"
+    },
+    {
+      "id": "track-3-writer",
+      "subagent": "ollama-dev-writer",
+      "microphase": "MF-RAPID-03-L0",
+      "state": "DONE",
+      "wave": 1,
+      "objective": "Documentación orquestación paralela y sync brief/session",
+      "allowedPaths": [
+        "reports/**",
+        "docs/AGENT_CONTEXT_MINIMAL.md"
+      ],
+      "forbiddenPaths": [
+        "apps/**",
+        "services/**",
+        "e2e/**",
+        "packages/**",
+        "database/migrations/**"
+      ],
+      "deliverables": [
+        "reports/epis2-orquestacion-paralela-2026-06-14.md",
+        "reports/dev-agent-orchestration-plan.json",
+        "reports/dev-agent-brief.md",
+        "reports/dev-agent-session.md"
+      ],
+      "gates": {
+        "iteration": "npm run dev:rapid",
+        "closure": "npm run dev:rapid -- --skip-audit"
+      },
+      "prompt": "reports/dev-agent-prompt-ollama-dev-writer.md"
+    },
+    {
+      "id": "track-4-gates",
+      "subagent": "gate-runner",
+      "microphase": "VALIDACION-WORKING-TREE",
+      "state": "DONE",
+      "wave": 1,
+      "objective": "dev:rapid + ficha-first-gate sobre cambios pendientes",
+      "allowedPaths": [
+        "reports/dev-agent-audit-diff-latest.json"
+      ],
+      "forbiddenPaths": [
+        "apps/**",
+        "services/**",
+        "e2e/**",
+        "packages/**"
+      ],
+      "gates": {
+        "iteration": "npm run dev:rapid",
+        "validation": "npm run quality:ficha-first-gate",
+        "prePr": [
+          "npm run check",
+          "npm run test",
+          "npm run db:validate"
+        ]
+      },
+      "startWhen": "late-parallel",
+      "prompt": "reports/dev-agent-prompt-gate-runner.md"
+    }
+  ],
+  "crossTrackRules": {
+    "priorityOrder": ["layers-integrator", "gate-runner", "ollama-dev-writer"],
+    "serializeOnConflict": true,
+    "noAutoCommit": true,
+    "noAutoStartNextReady": true,
+    "iterationCommand": "npm run dev:rapid"
+  },
+  "activeSession": {
+    "microphase": "MF-CU-01",
+    "name": "Componente ClinicalCdsCard",
+    "subprogram": "PROG-CDS-UX",
+    "wave": 7,
+    "dependsOn": ["MF-IM-04"],
+    "state": "IN_PROGRESS",
+    "subagent": "layers-integrator",
+    "gates": [
+      "npm run check"
+    ],
+    "allowedPaths": [
+      "apps/web/src/components/cds/**",
+      "packages/epis2-ui/src/stories/**",
+      "packages/design-system/src/copy/es.ts"
+    ],
+    "forbiddenPaths": [
+      "apps/api/src/routes/cds/**",
+      "apps/web/src/components/chart/**",
+      "database/migrations/**"
+    ],
+    "closureReport": "reports/epis2-mf-cu-01-cds-card.md",
+    "orchestrationReportSection": "reports/epis2-orquestacion-paralela-2026-06-14.md#16-ola-7--mf-cu-01-clinicalcdscard"
+  },
+  "nextSession": {
+    "microphase": "MF-CU-02",
+    "name": "Hook patient-view (cards al abrir ficha)",
+    "dependsOn": ["MF-CU-01"],
+    "state": "BLOCKED",
+    "gates": [
+      "npm run quality:cds-hooks-gate"
+    ],
+    "allowedPaths": [
+      "apps/web/src/components/cds/**",
+      "apps/web/src/components/chart/**",
+      "apps/api/src/routes/cds/**",
+      "packages/clinical-domain/**"
+    ],
+    "closureReport": "reports/epis2-mf-cu-02-patient-view.md"
+  },
+  "startup": {
+    "commands": [
+      "npm run stack:dev",
+      "npm run dev:velocity"
+    ],
+    "cursorAttachments": [
+      "reports/dev-agent-brief.md",
+      "reports/dev-agent-prompt-<subagente>.md"
+    ]
+  },
+  "requiresHumanReview": false,
+  "risks": [
+    "Commit tree acumulado (~68 archivos) sin reconciliar",
+    "Mezcla CU-01 y CU-02 en misma sesión clínica",
+    "Import @mui/* directo en apps/web (usar @epis2/epis2-ui)",
+    "Gate ficha-first rojo tras cambios en modos MD3 o contracts"
+  ]
+}

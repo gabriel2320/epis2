@@ -1,0 +1,45 @@
+{
+  "generatedAt": "2026-06-14T16:50:03.174Z",
+  "model": "qwen2.5-coder:7b",
+  "route": {
+    "baseUrl": "http://127.0.0.1:11434",
+    "function": "dev-plan",
+    "model": "qwen2.5-coder:7b",
+    "tier": "performance",
+    "mode": "auto",
+    "candidates": [
+      "qwen2.5-coder:7b",
+      "deepseek-coder:6.7b",
+      "qwen3:8b"
+    ],
+    "fallbackUsed": false,
+    "workstation": {
+      "ramGb": 63,
+      "vramGb": 12,
+      "cpuCores": 16,
+      "tier": "performance",
+      "platform": "win32"
+    },
+    "installedModels": [
+      "qwen2.5-coder:14b",
+      "deepseek-coder:6.7b",
+      "deepseek-coder-v2:16b",
+      "qwen2.5-coder:7b",
+      "llama3.2:latest",
+      "bge-m3:latest",
+      "qwen3:8b",
+      "nomic-embed-text:latest"
+    ],
+    "ollamaUp": true
+  },
+  "stagedOnly": false,
+  "diffChars": 6873,
+  "truncated": false,
+  "audit": {
+    "verdict": "APROBAR",
+    "summary": "El diff no contiene riesgos significativos que requieran acción inmediata.",
+    "findings": [],
+    "suggestedTests": [],
+    "requiresHumanReview": true
+  }
+}

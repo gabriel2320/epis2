@@ -1,6 +1,6 @@
 # EPIS2 — Contexto mínimo para agentes (Cursor)
 
-**Versión:** 1.3 · **MF-RAPID** ✓ · **FICHA-FIRST** MF-FF-01…03 ✓ · **STRENGTHEN** MF-IM-01/02 ✓
+**Versión:** 2.5 · **MF-RAPID** ✓ · **FICHA-FIRST** wave1 ✓ · **MF-IM-01…09** ✓ · **STRENGTHEN** 15/23 · **Ola 7** MF-CU-01 EN CURSO
 
 > Canon completo solo si la tarea lo exige: `docs/PRODUCT_CANON.md`, `docs/product/PRODUCT_INVARIANTS.md`, `AGENTS.md`.
 
@@ -40,10 +40,21 @@ Un objetivo · pocos archivos · diff mínimo.
 | Programa | Estado | Comando estado |
 |----------|--------|----------------|
 | **PROG-RAPID** | ✓ cerrado | `npm run quality:rapid-gate` |
-| **PROG-FICHA-FIRST** | MF-FF-01…03 ✓ · **MF-FF-06** READY | `npm run quality:ficha-first-gate` |
-| **PROG-STRENGTHEN** | MF-IM-03 READY (no auto-iniciar) | `npm run quality:strengthen-next` |
+| **PROG-FICHA-FIRST** | ✓ wave1 cerrado · wave2 MF-FF-00 READY | `quality:ficha-first-gate` |
+| **PROG-STRENGTHEN** | **15/23** · MF-IM-01…09 ✓ · **MF-CU-01 EN CURSO** | `npm run quality:strengthen-next` |
+| **PROG-CDS-UX** | **EN CURSO** (Ola 7) | MF-CU-01 · gate cierre `npm run check` |
 
-Cerrado hoy: MF-IM-01 embeddings · MF-IM-02 embed Ollama · **MF-FF-01…03** censo-first.
+Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) · orquestación Ola 7: [`reports/epis2-orquestacion-paralela-2026-06-14.md`](../reports/epis2-orquestacion-paralela-2026-06-14.md) §16
+
+**Ola 6:** ✓ MF-IM-09 OTel spans pipeline IA · `quality:ai-otel-gate` · PROG-IA-MODERNIZE completo.
+
+**Ola 7:** **MF-CU-01** ClinicalCdsCard · PROG-CDS-UX · allowlist `apps/web/src/components/cds/**` · subagente `layers-integrator`.
+
+Cerrado: MF-IM-01…09 · **MF-FF-01…06** (wave1) · PROG-RAPID · PROG-DI · tríada · PROG-IA-MODERNIZE.
+
+Siguiente (blocked): **MF-CU-02** Hook patient-view · `quality:cds-hooks-gate`.
+
+Abierto: commit tree (humano).
 
 ---
 

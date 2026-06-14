@@ -1,7 +1,7 @@
 # EPIS2 — Sesión subagentes de desarrollo
 
 **Fase:** B
-**Generado:** 2026-06-11T03:54:55.714Z
+**Generado:** 2026-06-14T18:10:02.705Z
 
 ## Secuencia recomendada
 
