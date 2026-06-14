@@ -43,8 +43,9 @@ EPIS2-MedRepo ──knowledge-pack JSON──► EPIS2 (consumo futuro CDS)
 | `evolab-bridge.mjs` | EPIS2 scripts | spawn CLI Evolab | `import @evolab/*` en apps |
 | Escenario YAML | case-intel / MedRepo | Evolab `scenarios/` | Copiar evolution-lab a EPIS2 |
 | Findings sync | Evolab DB | EPIS2 `dev:evolab:sync` | Auto-fix sin humano |
-| Knowledge Pack | MedRepo export | EPIS2 read-only loader | MedRepo como SoT clínico |
-| clinical-case-intel | EPIS2 service | Evolab YAML | — |
+| Knowledge Pack | MedRepo `medrepo:export:epis2` | EPIS2 read-only loader (F7+) | MedRepo como SoT clínico |
+| Scenario pack | MedRepo `medrepo:export:evolab` | Evolab (MF-017b) | — |
+| clinical-case-intel | EPIS2 `case-intel:export-evolab` | Evolab YAML | — |
 
 ---
 
@@ -65,7 +66,7 @@ Ver [`EPIS2_EVOLAB_INTEGRATION.md`](./EPIS2_EVOLAB_INTEGRATION.md) · MedRepo: `
 1. EPIS2 — gates PROG-DI verdes → push `master`
 2. epis2-evolab — push → `evolab:smoke` contra EPIS2 nuevo
 3. EPIS2-MedRepo — git init + check verde → push
-4. Integración F6 — packs y triage findings
+4. Integración F6 ✓ — packs y triage findings · **F7** cierre
 
 ---
 

@@ -18,7 +18,10 @@
 | `npm run evolab:validate` | Evolab | F5 | ✓ 590 tests |
 | `npm run medrepo:doctor` | MedRepo | F4/F5 | ✓ |
 | `npm run check` | MedRepo | F4 | ✓ 75/75 |
-| `medrepo:export:verify` | MedRepo | **F6** | SKIP — sin pack |
+| `medrepo:export:verify` | MedRepo | **F6** | ✓ v1 SHA OK |
+| `case-intel:verify-sim-seed` | EPIS2 | F6 | ✓ 12 SIM |
+| `case-intel:export-evolab` | EPIS2→Evolab | F6 | ✓ dry-run |
+| `medrepo:export:evolab` | MedRepo | F6 | ✓ v1 · 0 items (MF-017b) |
 
 ## Notas F5
 

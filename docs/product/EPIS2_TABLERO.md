@@ -1,10 +1,10 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-14 · **HEAD committed:** `752af4f`
+**Actualizado:** 2026-06-14 · **HEAD committed:** `c074e0d` (F6 docs pendiente commit)
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:** [`epis2-plan-conciliacion-triada-2026-06-14.md`](../../reports/epis2-plan-conciliacion-triada-2026-06-14.md) · **Correcciones:** [`epis2-plan-correcciones-prioritarias-2026-06-14.md`](../../reports/epis2-plan-correcciones-prioritarias-2026-06-14.md) · **Tríada:** [`EPIS2_TRIADA_REPOS.md`](./EPIS2_TRIADA_REPOS.md)
 
-> **F3–F5 tríada** ✓ · **F4 MedRepo** check 75/75. **Siguiente:** F6 integración packs · **MF-SH-02**.
+> **F3–F6 tríada** ✓ · exports MedRepo verify OK. **Siguiente:** F7 cierre · **MF-SH-02**.
 
 ---
 
@@ -18,6 +18,7 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:
 | **F4 MedRepo** | ✓ git baseline · check 75/75 | remote push opcional |
 | **A2–C1 correcciones** | ✓ S1 cerrado | — |
 | **F5 smoke tríada** | ✓ gates 7/8 · export SKIP F6 | [`epis2-f5-close-2026-06-14.md`](../../reports/conciliacion/epis2-f5-close-2026-06-14.md) |
+| **F6 integración** | ✓ backlog · pack EPIS2 verify · Evolab pack 0 items | [`epis2-f6-close-2026-06-14.md`](../../reports/conciliacion/epis2-f6-close-2026-06-14.md) |
 
 Inventario: [`reports/conciliacion/`](../conciliacion/)
 
@@ -46,6 +47,7 @@ Inventario: [`reports/conciliacion/`](../conciliacion/)
 | **PROG-DI** | 10/10 DONE · commit `f56b7d2` · [`epis2-prog-di-close-2026.md`](../../reports/epis2-prog-di-close-2026.md) |
 | **F4 MedRepo** | git `3e1181b` · check 75/75 · [`epis2-f4-close-2026-06-14.md`](../../reports/conciliacion/epis2-f4-close-2026-06-14.md) |
 | **F5 smoke tríada** | gates 7/8 · smoke 14/14 · [`epis2-f5-close-2026-06-14.md`](../../reports/conciliacion/epis2-f5-close-2026-06-14.md) |
+| **F6 integración** | backlog top-15 · MedRepo export verify · case-intel 12 SIM · [`epis2-f6-close-2026-06-14.md`](../../reports/conciliacion/epis2-f6-close-2026-06-14.md) |
 
 ---
 

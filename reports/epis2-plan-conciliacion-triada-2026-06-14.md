@@ -452,8 +452,8 @@ npm run check && npm run medrepo:doctor
 - [x] Informe gates tríada
 
 ### F6 ☐
-- [ ] Backlog Evolab triaged
-- [ ] Export MedRepo verificado
+- [x] Backlog Evolab triaged
+- [x] Export MedRepo verificado
 - [ ] (Opcional) loader pack EPIS2
 
 ### F7 ☐
