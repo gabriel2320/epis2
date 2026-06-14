@@ -310,6 +310,7 @@
     "quality:rapid-gate": "node scripts/quality/validate-rapid-gate.mjs",
     "db:validate": "node scripts/db-validate.mjs",
     "db:migrate": "node scripts/db-migrate.mjs",
+    "db:reindex-chunks": "node scripts/db/reindex-document-chunks.mjs",
     "db:backup": "node scripts/epis-db-backup.mjs",
     "db:restore": "node scripts/epis-db-restore.mjs",
     "db:apply-latest": "node scripts/quality/apply-latest-migration.mjs",

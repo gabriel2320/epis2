@@ -4,7 +4,7 @@
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:** [`epis2-plan-conciliacion-triada-2026-06-14.md`](../../reports/epis2-plan-conciliacion-triada-2026-06-14.md) · **Correcciones:** [`epis2-plan-correcciones-prioritarias-2026-06-14.md`](../../reports/epis2-plan-correcciones-prioritarias-2026-06-14.md) · **Tríada:** [`EPIS2_TRIADA_REPOS.md`](./EPIS2_TRIADA_REPOS.md)
 
-> **PROG-RAPID** MF-RAPID-01…04 ✓ · **PROG-CORE-HARDEN** MF-SH-01…06 ✓ · **Siguiente STRENGTHEN:** **MF-IM-01** embeddings pgvector (PROG-IA-MODERNIZE).
+> **PROG-RAPID** MF-RAPID-01…04 ✓ · **PROG-CORE-HARDEN** MF-SH-01…06 ✓ · **Siguiente STRENGTHEN:** **MF-IM-02** embed Ollama (PROG-IA-MODERNIZE).
 
 ---
 
@@ -38,7 +38,7 @@ Evidencia: [`epis2-mf-rapid-close-2026.md`](../../reports/epis2-mf-rapid-close-2
 | Subprograma | MF activa | Gate |
 |-------------|-----------|------|
 | **PROG-CORE-HARDEN** | ✓ MF-SH-01…06 cerrado | — |
-| **PROG-IA-MODERNIZE** | **MF-IM-01** embeddings pgvector 384d | `npm run db:validate` |
+| **PROG-IA-MODERNIZE** | **MF-IM-02** embed vía Ollama | smoke embed |
 
 `npm run quality:strengthen-next` · ledger [`strengthen-ledger.json`](../quality/strengthen-ledger.json)
 
@@ -69,6 +69,7 @@ Evidencia: [`epis2-mf-rapid-close-2026.md`](../../reports/epis2-mf-rapid-close-2
 | **F4 MedRepo** | git `3e1181b` · check 75/75 · [`epis2-f4-close-2026-06-14.md`](../../reports/conciliacion/epis2-f4-close-2026-06-14.md) |
 | **F5 smoke tríada** | gates 7/8 · smoke 14/14 · [`epis2-f5-close-2026-06-14.md`](../../reports/conciliacion/epis2-f5-close-2026-06-14.md) |
 | **MF-SH-02** intent evals | 93.3% top-10 · ai:evals:live 4/4 · [`epis2-mf-sh-02-intent-evals.md`](../../reports/epis2-mf-sh-02-intent-evals.md) |
+| **MF-IM-01** embeddings 384d | migración 046 · dual-read 128/384 · [`epis2-mf-im-01-embeddings.md`](../../reports/epis2-mf-im-01-embeddings.md) |
 | **PROG-CONCILIACION tríada** | F0–F7 ✓ · [`epis2-prog-conciliacion-triada-close-2026.md`](../../reports/epis2-prog-conciliacion-triada-close-2026.md) |
 
 ---

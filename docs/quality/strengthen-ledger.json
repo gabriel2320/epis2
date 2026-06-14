@@ -193,18 +193,20 @@
       "subprogram": "PROG-IA-MODERNIZE",
       "phase": 1,
       "dependsOn": ["MF-SH-02"],
-      "state": "READY",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
       "gate": "db:validate",
       "evidenceRequired": [
-        "Migración 042_rag_embeddings_384.sql",
+        "Migración 046_rag_embeddings_384.sql",
         "Re-index script demo",
         "Lectura dual 128/384 backward-compatible",
         "test chunk search"
       ],
       "allowedPaths": [
-        "database/migrations/042_rag_embeddings_384.sql",
+        "database/migrations/046_rag_embeddings_384.sql",
         "scripts/db/reindex-document-chunks.mjs",
-        "apps/api/src/routes/documents/**"
+        "apps/api/src/clinical/documents.ts",
+        "apps/api/src/clinical/embeddings.ts"
       ],
       "closureReport": "reports/epis2-mf-im-01-embeddings.md",
       "unblocks": ["MF-IM-02"]
@@ -215,7 +217,7 @@
       "subprogram": "PROG-IA-MODERNIZE",
       "phase": 2,
       "dependsOn": ["MF-IM-01"],
-      "state": "BLOCKED",
+      "state": "READY",
       "gate": null,
       "evidenceRequired": [
         "Contrato embedDocument en packages/contracts",

@@ -1,7 +1,7 @@
 import { eq, sql } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import { clinicalDocuments } from '../db/schema.js';
-import { chunkText, demoEmbedToPgVectorLiteral, resolveEmbedding } from './embeddings.js';
+import { chunkText, demoEmbedToPgVectorLiteral, resolveChunkEmbeddings } from './embeddings.js';
 import { extractDemoOcrText } from './ocrDemo.js';
 
 export async function processDocumentOcr(db: Database, documentId: string, ollamaBaseUrl?: string) {
@@ -34,10 +34,21 @@ export async function processDocumentOcr(db: Database, documentId: string, ollam
   const chunks = chunkText(ocr.text);
   for (let i = 0; i < chunks.length; i++) {
     const chunk = chunks[i]!;
-    const embedding = demoEmbedToPgVectorLiteral(await resolveEmbedding(chunk, ollamaBaseUrl));
+    const { dim128, dim384 } = await resolveChunkEmbeddings(chunk, ollamaBaseUrl);
+    const embedding128 = demoEmbedToPgVectorLiteral(dim128);
+    const embedding384 = demoEmbedToPgVectorLiteral(dim384);
     await db.execute(sql`
-      INSERT INTO clinical_document_chunks (document_id, patient_id, chunk_index, chunk_text, embedding)
-      VALUES (${documentId}::uuid, ${doc.patientId}::uuid, ${i}, ${chunk}, ${embedding}::vector)
+      INSERT INTO clinical_document_chunks (
+        document_id, patient_id, chunk_index, chunk_text, embedding, embedding_384
+      )
+      VALUES (
+        ${documentId}::uuid,
+        ${doc.patientId}::uuid,
+        ${i},
+        ${chunk},
+        ${embedding128}::vector,
+        ${embedding384}::vector
+      )
     `);
   }
 
