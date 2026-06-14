@@ -1,6 +1,6 @@
 # EPIS2 — Contexto mínimo para agentes (Cursor)
 
-**Versión:** 3.5 · **Ola 12 ✓** · **STRENGTHEN** 21/23
+**Versión:** 3.7 · **Ola 14 ✓** · **STRENGTHEN** 23/23 ✓ cerrado
 
 > Canon completo solo si la tarea lo exige: `docs/PRODUCT_CANON.md`, `docs/product/PRODUCT_INVARIANTS.md`, `AGENTS.md`.
 
@@ -41,7 +41,7 @@ Un objetivo · pocos archivos · diff mínimo.
 |----------|--------|----------------|
 | **PROG-RAPID** | ✓ cerrado | `npm run quality:rapid-gate` |
 | **PROG-FICHA-FIRST** | ✓ wave1 cerrado · wave2 MF-FF-00 READY | `quality:ficha-first-gate` |
-| **PROG-STRENGTHEN** | **21/23** · MF-IC-01…02 ✓ · **MF-IC-03** siguiente (blocked) | `npm run quality:strengthen-next` |
+| **PROG-STRENGTHEN** | ✓ **23/23 cerrado** · MF-IC-01…04 ✓ | `npm run quality:strengthen-close-gate` |
 | **PROG-CDS-UX** | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
 
 Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.5 · orquestación: [`reports/epis2-orquestacion-paralela-2026-06-14.md`](../reports/epis2-orquestacion-paralela-2026-06-14.md) §22–§23
@@ -50,9 +50,13 @@ Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../rep
 
 **Ola 12:** ✓ MF-IC-02 SNRE staging · [`epis2-mf-ic-02-snre-staging.md`](../reports/epis2-mf-ic-02-snre-staging.md)
 
-Cerrado: MF-IM-01…09 · **MF-CU-01…04** · **MF-IC-01…02** · **MF-FF-01…06** (wave1) · PROG-RAPID · PROG-DI · tríada · PROG-IA-MODERNIZE · **PROG-CDS-UX**.
+**Ola 13:** ✓ MF-IC-03 Questionnaire export · [`epis2-mf-ic-03-questionnaire.md`](../reports/epis2-mf-ic-03-questionnaire.md)
 
-Siguiente: **MF-IC-03** Questionnaire export piloto (blocked).
+**Ola 14:** ✓ MF-IC-04 HL7 quarantine hardening · [`epis2-prog-strengthen-close-2026.md`](../reports/epis2-prog-strengthen-close-2026.md)
+
+Cerrado: MF-IM-01…09 · **MF-CU-01…04** · **MF-IC-01…04** · **MF-FF-01…06** (wave1) · **PROG-STRENGTHEN** · PROG-RAPID · PROG-DI · tríada · PROG-IA-MODERNIZE · **PROG-CDS-UX**.
+
+Siguiente producto: **PROG-FICHA-FIRST** wave 2 — **MF-FF-00 READY** (`quality:ficha-first-next`). **PROG-MEDIA-FUTURE** diferido 2027+.
 
 ---
 
@@ -61,6 +65,7 @@ Siguiente: **MF-IC-03** Questionnaire export piloto (blocked).
 | Cambio | Gate |
 |--------|------|
 | Docs, reportes, scripts quality, UI menor | `npm run quality:fast` o `npm run dev:rapid` |
+| Estado ledgers (iteración) | `npm run quality:registry-status` |
 | API/web/packages clínicos, microfase | `npm run quality:clinical` |
 | Pre-PR, cierre tramo, signoff | `npm run quality:full` |
 
@@ -99,6 +104,7 @@ npm run stack:dev          # si hace falta
 npm run dev:velocity       # brief + subagente
 # … implementar microfase …
 npm run dev:rapid          # fast + audit-diff (MF-RAPID-03)
+npm run quality:registry-status  # ledgers consolidados (iteración)
 npm run quality:clinical   # cierre MF clínico
 npm run dev:agent:close    # reporte sesión
 ```

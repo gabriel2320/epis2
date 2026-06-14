@@ -11,6 +11,7 @@ const errors = [];
 const evidence = [
   'reports/epis2-mf-ic-01-minsal-export.md',
   'reports/epis2-mf-ic-02-snre-staging.md',
+  'reports/epis2-mf-ic-03-questionnaire.md',
 ];
 
 const requiredSources = [
@@ -18,8 +19,10 @@ const requiredSources = [
   'packages/fhir-export/src/chileInteropMeta.ts',
   'packages/fhir-export/src/minsalExport.ts',
   'packages/fhir-export/src/snreStaging.ts',
+  'packages/fhir-export/src/questionnaireExport.ts',
   'packages/fhir-export/src/minsalExport.test.ts',
   'packages/fhir-export/src/snreStaging.test.ts',
+  'packages/fhir-export/src/questionnaireExport.test.ts',
   'packages/clinical-domain/src/chile/minsalProfiles.ts',
 ];
 
@@ -49,7 +52,7 @@ if (minsalExport.includes('EPIS2_MINSAL_FHIR_BASE')) {
 }
 
 const ledger = JSON.parse(readFileSync(join(root, 'docs/quality/strengthen-ledger.json'), 'utf8'));
-for (const id of ['MF-IC-01', 'MF-IC-02']) {
+for (const id of ['MF-IC-01', 'MF-IC-02', 'MF-IC-03']) {
   const mf = ledger.phases?.find((m) => m.id === id);
   if (!mf || mf.state !== 'DONE') {
     errors.push(`strengthen-ledger.json: ${id} debe estar DONE`);
@@ -85,4 +88,6 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('quality:interop-chile-gate — OK (MF-IC-01 MINSAL export + MF-IC-02 SNRE staging)');
+console.log(
+  'quality:interop-chile-gate — OK (MF-IC-01 MINSAL + MF-IC-02 SNRE + MF-IC-03 Questionnaire)',
+);

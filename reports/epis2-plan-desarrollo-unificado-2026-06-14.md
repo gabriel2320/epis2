@@ -15,7 +15,7 @@
 | **PROG-CONCILIACION-TRIADA** | ✓ CERRADO | F0–F7 · tríada Evolab/MedRepo |
 | **PROG-DI** (inteligencia determinística) | ✓ CERRADO | 10/10 MF · `di-ledger.json` |
 | **PROG-FICHA-FIRST** | ✓ wave1 CERRADO | MF-FF-01…06 · `quality:ficha-first-gate` · wave2 MF-FF-00 READY |
-| **PROG-STRENGTHEN** | ACTIVO **21/23** | MF-SH-01…06 ✓ · MF-IM-01…09 ✓ · MF-CU-01…04 ✓ · **MF-IC-01…02 ✓** · **siguiente MF-IC-03** (blocked) |
+| **PROG-STRENGTHEN** | ✓ **23/23 cerrado** | MF-SH-01…06 ✓ · MF-IM-01…09 ✓ · MF-CU-01…04 ✓ · **MF-IC-01…04 ✓** · [`epis2-prog-strengthen-close-2026.md`](./epis2-prog-strengthen-close-2026.md) |
 | **PROG-COMPACTACION** (bloque D correcciones) | DIFERIDO | Tras STRENGTHEN CU-03…04 o cierre parcial CDS |
 
 **Home canónica (unificada):** `/espacio/buscar-paciente` · barra transversal · `/comando` = redirect compat.

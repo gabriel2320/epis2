@@ -2,23 +2,23 @@
 
 > **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-layers-integrator.md` — declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-15T22:00:00.000Z · **Ola:** 12 ✓ · **STRENGTHEN** 21/23
+**Generado:** 2026-06-15T23:30:00.000Z · **Ola:** 14 ✓ · **STRENGTHEN** 23/23 ✓ cerrado
 
 ## Orquestador (MF-RAPID + STRENGTHEN)
 
-- **PROG-STRENGTHEN** — **21/23** · **MF-IC-01…02 ✓** · **PROG-INTEROP-CHILE** fases 1–2
-- Ola 12 ✓ cerrada — MF-IC-02 SNRE staging · `test packages/fhir-export`
+- **PROG-STRENGTHEN** — ✓ **23/23 cerrado** · [`epis2-prog-strengthen-close-2026.md`](./epis2-prog-strengthen-close-2026.md)
+- Ola 14 ✓ cerrada — MF-IC-04 HL7 hardening · `quality:strengthen-close-gate`
 - Plan: [`dev-agent-orchestration-plan.json`](./dev-agent-orchestration-plan.json) · §22–§23 [`epis2-orquestacion-paralela-2026-06-14.md`](./epis2-orquestacion-paralela-2026-06-14.md)
 
 ## Estado del tablero (fuente canónica)
 
-- **Cerrado:** **MF-IC-01…02** ✓ · **MF-CU-01…04** ✓ · **PROG-CDS-UX** ✓ · **PROG-IA-MODERNIZE** ✓
-- **Siguiente (blocked):** **MF-IC-03** Questionnaire export piloto
+- **Cerrado:** **PROG-STRENGTHEN** ✓ 23/23 · **MF-IC-01…04** ✓
+- **Siguiente (READY):** **MF-FF-00** — Conciliar canon censo-first (PROG-FICHA-FIRST)
 
 ## Objetivo sugerido
 
-- **MF sugerida (blocked):** `MF-IC-03` — Questionnaire export piloto
-- **Gate:** tests `packages/fhir-export`
+- **MF sugerida (READY):** `MF-FF-00` — Conciliar canon censo-first
+- **Gate:** `npm run quality:ficha-first-gate`
 
 ## Subagente primario
 
@@ -61,6 +61,7 @@
 npm run stack:dev          # si falta Postgres/Ollama
 npm run dev:velocity       # banner vivo (STRENGTHEN + HEAD)
 npm run dev:rapid          # iteración MF-RAPID
+npm run quality:registry-status  # ledgers consolidados
 npm run dev:session        # regenerar este brief
 npm run quality:strengthen-next
 npm run ollama:route        # modelos por función + tier estación
@@ -87,6 +88,7 @@ npm run ollama:route        # modelos por función + tier estación
 
 ```bash
 npm run dev:rapid
+npm run quality:registry-status  # ledgers consolidados
 npm run quality:clinical   # cierre MF clínico
 npm run quality:full       # pre-PR
 npm run db:validate

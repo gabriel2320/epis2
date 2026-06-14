@@ -12,6 +12,26 @@ const ledgerPath = join(root, 'docs/quality/strengthen-ledger.json');
 
 const ledger = JSON.parse(readFileSync(ledgerPath, 'utf8'));
 
+if (ledger.executionStatus === 'CLOSED') {
+  const doneCount = ledger.phases.filter((p) => p.state === 'DONE').length;
+  const totalCount = ledger.phases.length;
+  console.log(
+    JSON.stringify(
+      {
+        program: ledger.program,
+        executionStatus: 'CLOSED',
+        progress: `${doneCount}/${totalCount}`,
+        closeReport: ledger.closeReport ?? null,
+        closedAt: ledger.closedAt ?? null,
+        note: 'PROG-STRENGTHEN cerrado. Siguiente: PROG-FICHA-FIRST (quality:ficha-first-next) o PROG-MEDIA-FUTURE (2027+).',
+      },
+      null,
+      2,
+    ),
+  );
+  process.exit(0);
+}
+
 if (ledger.executionStatus === 'PAUSED') {
   const out = {
     program: ledger.program,

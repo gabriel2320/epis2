@@ -25,7 +25,7 @@ npm run test -- packages/fhir-export
 
 ## Próximo paso
 
-**MF-IC-03** — Questionnaire export piloto (BLOCKED).
+**MF-IC-04** — HL7 quarantine hardening + runbook (BLOCKED).
 
 ---
 

@@ -1,4 +1,5 @@
--- MF-180…182: cuarentena HL7 inbound (sin writeback directo a SoT).
+-- MF-180…182 + MF-IC-04: cuarentena HL7 inbound (sin writeback directo a SoT).
+-- Runbook: docs/ops/HL7_INTEROP_INGESTION_RUNBOOK.md
 
 CREATE TABLE IF NOT EXISTS interop_hl7_quarantine (
   id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),

@@ -1477,9 +1477,7 @@ flowchart TB
 
 ---
 
-## 23. Ola 13 — MF-IC-03 Questionnaire export piloto (operational stub)
-
-**Versión ola:** 13.0 · **Modo:** fast dev (`npm run dev:rapid`) · **Tracks:** 3 en paralelo · **Estado ola:** **BLOCKED** (stub operativo)  
+## 23. Ola 13 — MF-IC-03 Questionnaire export piloto (✓ cerrada)  
 **Plan maestro:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](./epis2-plan-desarrollo-unificado-2026-06-14.md)
 
 > Tras cierre de Ola 12 (MF-IC-02 ✓ · **STRENGTHEN 21/23**), la Ola 13 implementará **MF-IC-03** (Questionnaire export piloto desde demo). Sin envío MINSAL/SNRE real. Al cierre: **STRENGTHEN 22/23** · siguiente **MF-IC-04**.
@@ -1497,11 +1495,11 @@ flowchart TB
 
 | Item | Estado | Notas |
 |------|--------|-------|
-| **MF-IC-03** Questionnaire export piloto | **BLOCKED** | Track `ollama-clinical` · activación humana |
+| **MF-IC-03** Questionnaire export piloto | ✓ **→ Ola 13 cerrada** | [`epis2-mf-ic-03-questionnaire.md`](./epis2-mf-ic-03-questionnaire.md) |
 | **Commit tree / push** | **HUMANO** | ~22 commits ahead of `origin/master` |
 | **MF-IC-04** Interop Chile cierre | **BLOCKED** | Tras cierre IC-03 · sesión dedicada |
 
-**STRENGTHEN:** **21/23** (pre-Ola 13) → **22/23** al cierre MF-IC-03 · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
+**STRENGTHEN:** **22/23** MF cerradas (al cierre Ola 13) · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
 
 ```mermaid
 flowchart TB
@@ -1578,3 +1576,21 @@ flowchart TB
 ```
 
 *Actualizado 2026-06-15 · Ola 13 BLOCKED stub · MF-IC-03 siguiente · STRENGTHEN 21/23 → 22/23 al cierre · requiresHumanReview: false (L0 docs)*
+
+---
+
+## 24. Ola 14 — MF-IC-04 HL7 hardening + cierre PROG-STRENGTHEN (✓ cerrada)
+
+**Versión ola:** 14.0 · **Estado ola:** **✓ cerrada 2026-06-15**
+
+| Item | Evidencia |
+|------|-----------|
+| **MF-IC-04** HL7 quarantine hardening | [`epis2-mf-ic-04-hl7-quarantine-hardening.md`](./epis2-mf-ic-04-hl7-quarantine-hardening.md) |
+| Runbook ops | [`docs/ops/HL7_INTEROP_INGESTION_RUNBOOK.md`](../docs/ops/HL7_INTEROP_INGESTION_RUNBOOK.md) |
+| **PROG-STRENGTHEN** 23/23 | [`epis2-prog-strengthen-close-2026.md`](./epis2-prog-strengthen-close-2026.md) |
+
+**Gate cierre programa:** `npm run quality:strengthen-close-gate`
+
+**Siguiente producto:** PROG-FICHA-FIRST MF-FF-00 READY · PROG-MEDIA-FUTURE diferido 2027+
+
+*Actualizado 2026-06-15 · Ola 14 ✓ · STRENGTHEN 23/23 cerrado · requiresHumanReview: false (L0 docs)*

@@ -78,3 +78,16 @@ export {
   validateSnreStagingMedicationRequest,
   type SnreStagingPayload,
 } from './snreStaging.js';
+export {
+  EPIS2_QUESTIONNAIRE_PROFILES,
+  EVOLUTION_NOTE_BLUEPRINT_ID,
+  EVOLUTION_NOTE_QUESTIONNAIRE_FIELD_IDS,
+  buildEvolutionNoteQuestionnaire,
+  epis2QuestionnaireResourceSchema,
+  validateEvolutionNoteQuestionnaire,
+  type BuildEvolutionNoteQuestionnaireOptions,
+  type Epis2QuestionnaireResource,
+  type EvolutionNoteQuestionnaireFieldId,
+  type QuestionnaireFieldSource,
+  type QuestionnaireSectionSource,
+} from './questionnaireExport.js';

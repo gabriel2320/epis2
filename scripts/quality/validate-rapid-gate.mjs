@@ -17,6 +17,8 @@ const required = [
   ['quality:full', 'scripts/quality/run-quality-full.mjs'],
   ['dev:rapid', 'scripts/dev/run-dev-rapid.mjs'],
   ['audit diff', 'scripts/dev-agent/ollama-audit-diff.mjs'],
+  ['registry status', 'scripts/quality/registry-status.mjs'],
+  ['registry gate', 'scripts/quality/validate-registry-gate.mjs'],
   ['closure report', 'reports/epis2-mf-rapid-close-2026.md'],
 ];
 
@@ -46,6 +48,10 @@ run('MF-RAPID audit-diff dry-run', 'node', ['scripts/dev-agent/ollama-audit-diff
 });
 
 run('MF-RAPID dev:rapid (skip audit)', 'npm', ['run', 'dev:rapid', '--', '--skip-audit'], {
+  inherit: true,
+});
+
+run('MF-RAPID registry-gate', 'node', ['scripts/quality/validate-registry-gate.mjs'], {
   inherit: true,
 });
 

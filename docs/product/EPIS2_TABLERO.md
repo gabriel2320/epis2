@@ -1,10 +1,10 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-15 · **STRENGTHEN** 21/23
+**Actualizado:** 2026-06-15 · **STRENGTHEN** 23/23 ✓ cerrado
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan unificado:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.5 · **Orquestación:** [`epis2-orquestacion-paralela-2026-06-14.md`](../../reports/epis2-orquestacion-paralela-2026-06-14.md) §22–§23
 
-> **PROG-STRENGTHEN** **21/23** · **MF-IC-01…02 ✓** · **siguiente MF-IC-03** (blocked)
+> **PROG-STRENGTHEN** ✓ **23/23 cerrado** · **siguiente PROG-FICHA-FIRST** MF-FF-00 READY
 
 ---
 
@@ -60,16 +60,16 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 
 ---
 
-## En curso — PROG-STRENGTHEN-2026
+## En curso — PROG-STRENGTHEN-2026 ✓ cerrado
 
-**Progreso:** **21/23** MF cerradas · Ola 12 ✓ (MF-IC-02 SNRE staging)
+**Progreso:** **23/23** MF cerradas · Ola 14 ✓ (MF-IC-04 HL7 hardening) · [`epis2-prog-strengthen-close-2026.md`](../../reports/epis2-prog-strengthen-close-2026.md)
 
 | Subprograma | Estado | Siguiente |
 |-------------|--------|-----------|
 | **PROG-CORE-HARDEN** | ✓ MF-SH-01…06 | — |
 | **PROG-IA-MODERNIZE** | ✓ MF-IM-01…09 | — |
 | **PROG-CDS-UX** | ✓ MF-CU-01…04 | — |
-| **PROG-INTEROP-CHILE** | fases 1–2 ✓ | **MF-IC-03** Questionnaire (blocked) |
+| **PROG-INTEROP-CHILE** | ✓ fases 1–4 | — |
 
 `npm run quality:strengthen-next` · ledger [`strengthen-ledger.json`](../quality/strengthen-ledger.json)
 
@@ -115,6 +115,8 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 | **MF-CU-04** API `/cds/cards` | prefetch paciente interno · [`epis2-mf-cu-04-cds-api.md`](../../reports/epis2-mf-cu-04-cds-api.md) |
 | **MF-IC-01** MINSAL export | Patient/Encounter/DocumentReference · [`epis2-mf-ic-01-minsal-export.md`](../../reports/epis2-mf-ic-01-minsal-export.md) |
 | **MF-IC-02** SNRE staging | MedicationRequest staging JSON · [`epis2-mf-ic-02-snre-staging.md`](../../reports/epis2-mf-ic-02-snre-staging.md) |
+| **MF-IC-03** Questionnaire export piloto | FHIR Questionnaire evolution_note · [`epis2-mf-ic-03-questionnaire.md`](../../reports/epis2-mf-ic-03-questionnaire.md) |
+| **MF-IC-04** HL7 quarantine hardening | Runbook + tests migración · [`epis2-prog-strengthen-close-2026.md`](../../reports/epis2-prog-strengthen-close-2026.md) |
 | **MF-FF-01…06** ficha-first wave1 | censo home · dual default · `/comando` redirect · ClinicalShell · [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/epis2-prog-ficha-first-wave1-close-2026-06-14.md) |
 | **PROG-CONCILIACION tríada** | F0–F7 ✓ · [`epis2-prog-conciliacion-triada-close-2026.md`](../../reports/epis2-prog-conciliacion-triada-close-2026.md) |
 
@@ -179,7 +181,7 @@ Hilos C / PAPER / comando absorbidos en tres frentes. C-3 ✓ · MF-PAPER-01…0
 
 `npm run quality:tres-frentes-next` · [`tres-frentes-ledger.json`](../quality/tres-frentes-ledger.json) · [`EPIS2_TRES_FRENTES_DEV_PLAN.md`](./EPIS2_TRES_FRENTES_DEV_PLAN.md)
 
-**Pausado:** multimedia · auto-dev — STRENGTHEN activo en PROG-INTEROP-CHILE (MF-IC-03 blocked).
+**Pausado:** multimedia (PROG-MEDIA-FUTURE 2027+) · auto-dev — **STRENGTHEN ✓ cerrado**.
 
 ---
 

@@ -40,6 +40,8 @@ EPIS2_LOCAL_CI_E2E=1 npm run quality:local-ci   # antes de PR grande
 | `npm run quality:fast` | Loop rápido: git + PHI scan + lint/typecheck/vitest tocados + architecture |
 | `npm run dev:rapid` | MF-RAPID-03: `quality:fast` + `dev:agent:audit-diff` |
 | `npm run quality:rapid-gate` | MF-RAPID-04: smoke cierre PROG-RAPID |
+| `npm run quality:registry-status` | JSON consolidado STRENGTHEN · DI · FICHA-FIRST |
+| `npm run quality:registry-gate` | Valida ledgers + scripts npm de registro |
 | `npm run quality:clinical` | fast + db:validate + gates rol (`dev:velocity:gates --fast`) |
 | `npm run quality:full` | check + test + db:validate (pre-PR) |
 | `npm run dev:velocity` | Tablero P1, subagente sugerido, estado brief |
@@ -125,6 +127,22 @@ npm run quality:ux-g02
 npm run check && npm run test
 EPIS2_LOCAL_CI_E2E=1 npm run quality:local-ci
 ```
+
+---
+
+## Registros consolidados (MF-RAPID)
+
+`npm run quality:registry-status` emite JSON con el estado de los ledgers canónicos:
+
+| Programa | Ledger | Qué muestra |
+|----------|--------|-------------|
+| **PROG-STRENGTHEN** | `docs/quality/strengthen-ledger.json` | `progress`, MF activa, `executionStatus` |
+| **PROG-DI** | `docs/quality/di-ledger.json` | Resumen cerrado (`closedSummary`) |
+| **PROG-FICHA-FIRST** | `docs/quality/ficha-first-ledger.json` | Ola activa, MF READY/IN_PROGRESS |
+
+Campos globales: `iterationCommand` (`npm run dev:rapid`) · `recommendedNext` (`npm run quality:strengthen-next`).
+
+En iteración rápida: `dev:rapid` + `quality:registry-status`. Cierre PROG-RAPID: `quality:registry-gate` (incluido en `quality:rapid-gate`).
 
 ---
 

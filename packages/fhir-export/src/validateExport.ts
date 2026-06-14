@@ -4,6 +4,7 @@ import {
   validateMinsalEncounterResource,
   validateMinsalPatientResource,
 } from './minsalExport.js';
+import { validateEvolutionNoteQuestionnaire } from './questionnaireExport.js';
 import { validateSnreStagingMedicationRequest } from './snreStaging.js';
 import {
   validateDocumentReferenceResource,
@@ -55,6 +56,11 @@ export function assertExportClean(resource: unknown): ExportValidationResult {
       const snre = validateSnreStagingMedicationRequest(resource);
       if (snre.ok) break;
       const v = validateMedicationRequestResource(resource);
+      if (!v.ok) return { ok: false, profileErrors: v.errors };
+      break;
+    }
+    case 'Questionnaire': {
+      const v = validateEvolutionNoteQuestionnaire(resource);
       if (!v.ok) return { ok: false, profileErrors: v.errors };
       break;
     }
