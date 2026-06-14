@@ -703,6 +703,13 @@ export const copy = {
     silentSuggestionsShowMore: 'Ver {count} más',
     silentSuggestionsShowLess: 'Ocultar',
   },
+  cdsCard: {
+    variantInfo: 'Información',
+    variantSuggestion: 'Sugerencia',
+    variantWarning: 'Advertencia',
+    actionLabel: 'Ver acción sugerida',
+    nonBlockingHint: 'Informativo — no bloquea comandos ni aprobación.',
+  },
   contextDense: {
     activeProblems: 'Problemas activos',
     activeMedications: 'Medicamentos activos',
