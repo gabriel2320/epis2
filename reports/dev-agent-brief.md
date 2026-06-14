@@ -2,19 +2,20 @@
 
 > **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-layers-integrator.md` — declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-15T01:15:00.000Z · **HEAD:** `ee76efc` · **Ola:** 8 ✓
+**Generado:** 2026-06-15T02:00:00.000Z · **HEAD:** `310c909` · **Ola:** 8 ✓ · **Commits:** +11 vs `origin/master`
 
 ## Orquestador (MF-RAPID + STRENGTHEN)
 
+- **PROG-RAPID** ✓ · **PROG-FICHA-FIRST** wave1 ✓ · **PROG-IA-MODERNIZE** ✓
 - **PROG-STRENGTHEN** — **17/23** · MF-CU-01…02 ✓
-- Ola 8 ✓ cerrada — MF-CU-02 patient-view CDS hook
-- Plan: [`dev-agent-orchestration-plan.json`](./dev-agent-orchestration-plan.json) · reporte: [`epis2-orquestacion-paralela-2026-06-14.md`](./epis2-orquestacion-paralela-2026-06-14.md) §17
+- Ola 8 ✓ cerrada — MF-CU-02 patient-view · gate `quality:cds-hooks-gate`
+- Plan: [`dev-agent-orchestration-plan.json`](./dev-agent-orchestration-plan.json) · §17–§18 [`epis2-orquestacion-paralela-2026-06-14.md`](./epis2-orquestacion-paralela-2026-06-14.md)
 
 ## Estado del tablero (fuente canónica)
 
 - **Cerrado:** **MF-CU-01…02** ✓ · **PROG-IA-MODERNIZE** ✓ · **PROG-FICHA-FIRST** wave1 ✓
 - **Siguiente (blocked):** **MF-CU-03** Hook order-select
-- **Abierto:** commit tree (humano)
+- **Git:** working tree limpio · push pendiente (humano)
 
 ## Objetivo sugerido
 
@@ -35,34 +36,9 @@
 
 ## Working tree
 
-- Rama: `master` · cambios: 68 (lista truncada)
-
-```
-M apps/api/src/ai/client.ts
-M apps/api/src/ai/routes.test.ts
-M apps/api/src/ai/routes.ts
-M apps/api/src/clinical/service.ts
-M apps/web/src/modes/EpisModeGuard.tsx
-M apps/web/src/modes/episModeGuards.ts
-M apps/web/src/modes/episModes.test.ts
-M apps/web/src/modes/episModes.ts
-M apps/web/src/modes/modeTransitions.test.ts
-M apps/web/src/pages/CommandCenterPage.tsx
-M docs/AGENT_CONTEXT_MINIMAL.md
-M docs/PRODUCT_CANON.md
-M docs/product/EPIS2_TABLERO.md
-M docs/product/PRODUCT_INVARIANTS.md
-M docs/quality/ficha-first-ledger.json
-M docs/quality/strengthen-ledger.json
-M e2e/a11y-smoke.spec.ts
-M e2e/calm-premium-signoff-capture.spec.ts
-M e2e/clinical-textbox-evolution-draft.spec.ts
-M e2e/golden-command-evolution.spec.ts
-M e2e/golden-draft-approval.spec.ts
-M e2e/golden-v2-admission-discharge.spec.ts
-M e2e/helpers/demoPatient.ts
-M e2e/m3-visual-signoff-capture.spec.ts
-```
+- Rama: `master` · **limpio** · ahead of `origin/master`: **11 commits**
+- Último commit: `310c909` — docs Ola 8 / MF-CU-02
+- Push: pendiente (humano)
 
 ## Evolab (QA externo)
 

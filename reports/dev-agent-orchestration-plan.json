@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-06-15T01:00:00.000Z",
-  "version": "8.0",
+  "generatedAt": "2026-06-15T02:00:00.000Z",
+  "version": "8.1",
   "mode": "parallel-wave",
   "wave": 8,
   "waveMode": "fast-dev",
-  "activePhase": "A5",
+  "activePhase": "A5b",
   "masterPlan": "reports/epis2-plan-desarrollo-unificado-2026-06-14.md",
   "orchestrationReport": "reports/epis2-orquestacion-paralela-2026-06-14.md",
   "iterationCommand": "npm run dev:rapid",
@@ -17,16 +17,16 @@
     },
     "PROG-STRENGTHEN": {
       "state": "ACTIVE",
-      "progress": "16/23",
-      "activeMicrophase": "MF-CU-02",
-      "nextMicrophase": "MF-CU-03",
+      "progress": "17/23",
+      "activeMicrophase": "MF-CU-03",
+      "nextMicrophase": "MF-CU-04",
       "ledger": "docs/quality/strengthen-ledger.json"
     },
     "PROG-CDS-UX": {
       "state": "ACTIVE",
       "wave": 8,
-      "activeMicrophase": "MF-CU-02",
-      "nextMicrophase": "MF-CU-03",
+      "activeMicrophase": "MF-CU-03",
+      "nextMicrophase": "MF-CU-04",
       "subprogramOf": "PROG-STRENGTHEN",
       "ledger": "docs/quality/strengthen-ledger.json"
     }
@@ -44,25 +44,19 @@
     "MF-IM-09",
     "E2E-FASE-B",
     "PROG-IA-MODERNIZE",
-    "MF-CU-01"
+    "MF-CU-01",
+    "MF-CU-02"
   ],
   "openPending": [
-    "MF-CU-02-patient-view-in-progress",
-    "commit-tree"
+    "MF-CU-03-order-select",
+    "git-push"
   ],
   "workingTree": {
     "branch": "master",
-    "pendingChanges": 68,
-    "summary": {
-      "apps": 10,
-      "docs": 6,
-      "e2e": 12,
-      "reports": 8,
-      "scripts": 5,
-      "packages": 8,
-      "services": 6,
-      "other": 8
-    },
+    "pendingChanges": 0,
+    "aheadOfOrigin": 11,
+    "lastCommit": "310c909",
+    "summary": {},
     "commitOwner": "human"
   },
   "wave1": {
@@ -636,15 +630,15 @@
   },
   "wave8": {
     "startedAt": "2026-06-14",
-    "completedAt": null,
+    "completedAt": "2026-06-15",
     "tracks": 3,
-    "outcome": "MF-CU-02 IN PROGRESS · PROG-CDS-UX fase 2 · docs Ola 8 sync",
+    "outcome": "MF-CU-02 DONE · PROG-CDS-UX fases 1-2 · docs Ola 8 sync · STRENGTHEN 17/23",
     "parallelTracks": [
       {
         "id": "wave8-track-1-layers",
         "subagent": "layers-integrator",
         "microphase": "MF-CU-02",
-        "state": "IN_PROGRESS",
+        "state": "DONE",
         "subprogram": "PROG-CDS-UX",
         "objective": "Hook patient-view — ClinicalCdsCard al abrir ficha (alergias/gaps demo); estilo CDS Hooks sin servidor externo",
         "allowedPaths": [
@@ -675,8 +669,8 @@
         "id": "wave8-track-2-gates",
         "subagent": "gate-runner",
         "microphase": "FAST-GATES-WORKING-TREE",
-        "state": "READY",
-        "objective": "dev:rapid + cds-hooks-gate sobre working tree acumulado (~68 cambios)",
+        "state": "DONE",
+        "objective": "dev:rapid + cds-hooks-gate — MF-CU-02 closure",
         "allowedPaths": [
           "reports/dev-agent-audit-diff-latest.json"
         ],
@@ -863,36 +857,13 @@
     "iterationCommand": "npm run dev:rapid"
   },
   "activeSession": {
-    "microphase": "MF-CU-02",
-    "name": "Hook patient-view (cards al abrir ficha)",
-    "subprogram": "PROG-CDS-UX",
-    "wave": 8,
-    "dependsOn": ["MF-CU-01"],
-    "state": "IN_PROGRESS",
-    "subagent": "layers-integrator",
-    "gates": [
-      "npm run quality:cds-hooks-gate"
-    ],
-    "allowedPaths": [
-      "apps/web/src/components/cds/**",
-      "apps/web/src/components/chart/**",
-      "apps/api/src/routes/cds/**",
-      "packages/clinical-domain/**",
-      "scripts/quality/validate-cds-hooks-gate.mjs"
-    ],
-    "forbiddenPaths": [
-      "apps/web/src/pages/**/prescription/**",
-      "packages/contracts/src/cds*.ts",
-      "database/migrations/**"
-    ],
-    "closureReport": "reports/epis2-mf-cu-02-patient-view.md",
-    "orchestrationReportSection": "reports/epis2-orquestacion-paralela-2026-06-14.md#17-ola-8--mf-cu-02-patient-view-cds-hook"
-  },
-  "nextSession": {
     "microphase": "MF-CU-03",
     "name": "Hook order-select (prescripción)",
+    "subprogram": "PROG-CDS-UX",
+    "wave": null,
     "dependsOn": ["MF-CU-02"],
     "state": "BLOCKED",
+    "subagent": "layers-integrator",
     "gates": [
       "npm run quality:cds-hooks-gate"
     ],
@@ -901,7 +872,26 @@
       "apps/web/src/pages/**/prescription/**",
       "packages/clinical-domain/**"
     ],
-    "closureReport": "reports/epis2-mf-cu-03-order-select.md"
+    "forbiddenPaths": [
+      "database/migrations/**",
+      "services/asr-local/**"
+    ],
+    "closureReport": "reports/epis2-mf-cu-03-order-select.md",
+    "orchestrationReportSection": "reports/epis2-orquestacion-paralela-2026-06-14.md#18-próxima-ola--mf-cu-03-order-select-blocked"
+  },
+  "nextSession": {
+    "microphase": "MF-CU-04",
+    "name": "API /cds/cards interno",
+    "dependsOn": ["MF-CU-02"],
+    "state": "BLOCKED",
+    "gates": [
+      "npm run quality:cds-hooks-gate"
+    ],
+    "allowedPaths": [
+      "apps/api/src/routes/cds/**",
+      "packages/contracts/src/cds*.ts"
+    ],
+    "closureReport": "reports/epis2-mf-cu-04-cds-api.md"
   },
   "startup": {
     "commands": [
@@ -915,10 +905,9 @@
   },
   "requiresHumanReview": false,
   "risks": [
-    "Commit tree acumulado (~68 archivos) sin reconciliar",
-    "Mezcla CU-02 y CU-03/CU-04 en misma sesión clínica",
+    "Push remoto pendiente (11 commits ahead of origin/master)",
+    "Mezcla CU-03 y CU-04 en misma sesión clínica",
     "Import @mui/* directo en apps/web (usar @epis2/epis2-ui / ClinicalCdsCard)",
-    "Gate ficha-first rojo tras cambios en chart o modos MD3",
-    "Gate cds-hooks-gate aún no implementado (script pendiente en CU-02)"
+    "E2E dual-chart requiere VITE_ENABLE_DUAL_CHART_MODES=true"
   ]
 }

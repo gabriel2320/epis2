@@ -1,10 +1,10 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-14 · **HEAD local:** `23e6cd9` (+ pendientes sesión Ola 8)
+**Actualizado:** 2026-06-15 · **HEAD local:** `310c909` · **STRENGTHEN** 17/23
 
-Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan unificado:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) · **Correcciones:** [`epis2-plan-correcciones-prioritarias-2026-06-14.md`](../../reports/epis2-plan-correcciones-prioritarias-2026-06-14.md)
+Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan unificado:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) · **Orquestación:** [`epis2-orquestacion-paralela-2026-06-14.md`](../../reports/epis2-orquestacion-paralela-2026-06-14.md) §17
 
-> **PROG-RAPID** ✓ · **PROG-FICHA-FIRST** wave1 ✓ · **PROG-STRENGTHEN** 16/23 · **MF-CU-02** EN CURSO · Plan [`EPIS2_FICHA_FIRST_DEV_PLAN.md`](./EPIS2_FICHA_FIRST_DEV_PLAN.md)
+> **PROG-RAPID** ✓ · **PROG-FICHA-FIRST** wave1 ✓ · **PROG-IA-MODERNIZE** ✓ · **PROG-STRENGTHEN** **17/23** · **siguiente MF-CU-03** (blocked)
 
 ---
 
@@ -62,13 +62,13 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 
 ## En curso — PROG-STRENGTHEN-2026
 
-**Progreso:** 16/23 MF cerradas · Ola 8 EN CURSO (MF-CU-02 patient-view) · **PROG-CDS-UX** fase 2
+**Progreso:** **17/23** MF cerradas · Ola 8 ✓ (MF-CU-02 patient-view) · **PROG-CDS-UX** fases 1–2 ✓
 
 | Subprograma | Estado | Siguiente |
 |-------------|--------|-----------|
 | **PROG-CORE-HARDEN** | ✓ MF-SH-01…06 | — |
 | **PROG-IA-MODERNIZE** | ✓ MF-IM-01…09 | — |
-| **PROG-CDS-UX** | fase 2 activa | **MF-CU-02** Hook patient-view · `quality:cds-hooks-gate` |
+| **PROG-CDS-UX** | fases 1–2 ✓ | **MF-CU-03** Hook order-select · `quality:cds-hooks-gate` (blocked) |
 
 `npm run quality:strengthen-next` · ledger [`strengthen-ledger.json`](../quality/strengthen-ledger.json)
 
@@ -109,6 +109,7 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 | **MF-IM-08** anti feedback-loop | policy assist excluye AIAST · [`epis2-mf-im-08-feedback-loop.md`](../../reports/epis2-mf-im-08-feedback-loop.md) |
 | **MF-IM-09** OTel spans IA | span `ai.run` · [`epis2-mf-im-09-otel.md`](../../reports/epis2-mf-im-09-otel.md) |
 | **MF-CU-01** ClinicalCdsCard | variantes info/suggestion/warning · [`epis2-mf-cu-01-cds-card.md`](../../reports/epis2-mf-cu-01-cds-card.md) |
+| **MF-CU-02** patient-view CDS hook | cards al abrir ficha · [`epis2-mf-cu-02-patient-view.md`](../../reports/epis2-mf-cu-02-patient-view.md) |
 | **MF-FF-01…06** ficha-first wave1 | censo home · dual default · `/comando` redirect · ClinicalShell · [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/epis2-prog-ficha-first-wave1-close-2026-06-14.md) |
 | **PROG-CONCILIACION tríada** | F0–F7 ✓ · [`epis2-prog-conciliacion-triada-close-2026.md`](../../reports/epis2-prog-conciliacion-triada-close-2026.md) |
 

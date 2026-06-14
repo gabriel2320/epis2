@@ -863,12 +863,12 @@ flowchart TB
 
 | Item | Estado | Notas |
 |------|--------|-------|
-| **MF-CU-02** Hook patient-view | **EN CURSO** | Track `layers-integrator` · gate `quality:cds-hooks-gate` |
-| **Commit tree** | **HUMANO** | ~68 cambios acumulados; sin push automático |
-| **MF-CU-03** Hook order-select | **BLOCKED** | Tras cierre CU-02 |
-| **MF-CU-04** API `/cds/cards` | **BLOCKED** | Tras cierre CU-02 |
+| **MF-CU-02** Hook patient-view | **✓ CERRADO** | [`epis2-mf-cu-02-patient-view.md`](./epis2-mf-cu-02-patient-view.md) · commits `654bf93` · `310c909` |
+| **MF-CU-03** Hook order-select | **BLOCKED** | Tras CU-02 ✓ |
+| **MF-CU-04** API `/cds/cards` | **BLOCKED** | Tras CU-02 ✓ |
+| **Push remoto** | **HUMANO** | 11 commits ahead of `origin/master` |
 
-**STRENGTHEN:** **16/23** MF cerradas · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
+**STRENGTHEN:** **17/23** MF cerradas · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
 
 ```mermaid
 flowchart TB
@@ -963,4 +963,14 @@ flowchart TB
 5. Tras CU-02: MF-CU-03 order-select o MF-CU-04 API (sesión dedicada · no mezclar)
 ```
 
-*Actualizado por subagente `ollama-dev-writer` · Ola 8 EN CURSO · MF-CU-02 · STRENGTHEN 16/23 · requiresHumanReview: false (L0 docs)*
+*Actualizado 2026-06-15 · Ola 8 ✓ cerrada · MF-CU-02 ✓ · STRENGTHEN 17/23 · HEAD `310c909`*
+
+---
+
+## 18. Próxima ola — MF-CU-03 order-select (blocked)
+
+**MF:** MF-CU-03 — Hook order-select (prescripción) · **Gate:** `quality:cds-hooks-gate`  
+**Allowlist:** `apps/api/src/routes/cds/**`, `apps/web/src/pages/**/prescription/**`, `packages/clinical-domain/**`  
+**Subagente sugerido:** `layers-integrator` + `gate-runner` + `ollama-dev-writer` (patrón 3 tracks)
+
+No iniciar salvo petición explícita del usuario (`strengthen-ledger.json` · `AGENT_CONTEXT_MINIMAL.md`).
