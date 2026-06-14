@@ -24,7 +24,7 @@ export function epis2PaperCanvasSx(): SxProps<Theme> {
 
 /**
  * Escritorio Calm Premium (THEME-CALM-01) — MF-PA-06.
- * Canvas `#F7F9FC`; la hoja imprimible conserva `paperBg`.
+ * Canvas Calm Premium (`epis2ClinicalCalmCanvasColors.light`); la hoja imprimible conserva `paperBg`.
  */
 export function epis2PaperCalmCanvasSx(): SxProps<Theme> {
   return {
