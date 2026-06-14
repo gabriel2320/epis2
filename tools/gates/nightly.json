@@ -2,9 +2,7 @@
   "name": "nightly",
   "description": "Paridad extendida con .github/workflows/ci.yml (job check). Requiere Postgres y tiempo.",
   "steps": [
-    "npm run build -w @epis2/contracts",
-    "npm run build -w @epis2/command-registry",
-    "npm run build -w @epis2/test-fixtures",
+    "npm run build:ci-fixtures-chain",
     "npm run db:migrate",
     "npm run quality:case-intel-closure-gate",
     "npm run check",

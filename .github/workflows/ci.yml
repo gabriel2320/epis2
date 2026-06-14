@@ -32,9 +32,7 @@ jobs:
           node-version: '20'
           cache: npm
       - run: npm ci
-      - run: npm run build -w @epis2/contracts
-      - run: npm run build -w @epis2/command-registry
-      - run: npm run build -w @epis2/test-fixtures
+      - run: npm run build:ci-fixtures-chain
       - run: npm run db:migrate
       - run: npm run quality:case-intel-closure-gate
       - run: npm run check
@@ -82,9 +80,7 @@ jobs:
           node-version: '20'
           cache: npm
       - run: npm ci
-      - run: npm run build -w @epis2/contracts
-      - run: npm run build -w @epis2/command-registry
-      - run: npm run build -w @epis2/test-fixtures
+      - run: npm run build:ci-fixtures-chain
       - run: npm run db:migrate
       - run: npm run quality:dual-chart-gate
       - run: npx playwright install --with-deps chromium

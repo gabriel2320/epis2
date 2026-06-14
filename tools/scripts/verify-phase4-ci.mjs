@@ -27,6 +27,9 @@ for (const gate of ciGates) {
 }
 
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+if (!pkg.scripts?.['build:ci-fixtures-chain']) {
+  errors.push('package.json sin build:ci-fixtures-chain');
+}
 if (!pkg.scripts?.['build:packages']?.includes('@epis2/ai-client')) {
   errors.push('build:packages debe incluir @epis2/ai-client antes de local-ai');
 }
@@ -38,8 +41,8 @@ for (const script of ['db:migrate', 'test:e2e', 'test:e2e:dual-chart']) {
 }
 
 const ciYml = readFileSync(join(root, '.github/workflows/ci.yml'), 'utf8');
-if (!ciYml.includes('build -w @epis2/test-fixtures')) {
-  errors.push('ci.yml debe build @epis2/test-fixtures antes de case-intel-closure-gate');
+if (!ciYml.includes('build:ci-fixtures-chain')) {
+  errors.push('ci.yml debe usar build:ci-fixtures-chain antes de case-intel-closure-gate');
 }
 
 const dry = spawnSync('node', ['tools/gates/run-gate.mjs', '--dry-run', 'required'], {
