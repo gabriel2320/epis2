@@ -49,8 +49,7 @@ test.describe('Calm Premium signoff capture C-2.4', () => {
     await setCalmPreferences(page, 'light');
     await loginAsPhysician(page);
 
-    await page.goto('/comando');
-    await expect(page.getByTestId('epis2-power-bar')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-census-command-bar')).toBeVisible({ timeout: 15_000 });
     await snap(page, 's1-comando-calm-light');
 
     if (dualOn) {

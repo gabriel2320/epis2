@@ -4,16 +4,11 @@
  */
 import { copy } from '@epis2/design-system';
 import { test, expect } from '@playwright/test';
-import { loginAsPhysician, pinDemoCase } from './helpers/demoPatient.js';
+import { fillTransversalCommand, loginAsPhysician, pinDemoCase } from './helpers/demoPatient.js';
 
 async function openEvolutionForm(page: import('@playwright/test').Page) {
   await pinDemoCase(page, 'DEMO-001');
-  await page.goto('/comando');
-  const powerBar = page.getByTestId('epis2-power-bar');
-  await powerBar
-    .getByRole('textbox', { name: copy.commandCenter.powerBarLabel })
-    .fill('evolucionar nota de hoy');
-  await powerBar.getByRole('button', { name: copy.commandCenter.submit }).click();
+  await fillTransversalCommand(page, 'evolucionar nota de hoy');
   await expect(page).toHaveURL(/\/espacio\/evolucion/);
 }
 

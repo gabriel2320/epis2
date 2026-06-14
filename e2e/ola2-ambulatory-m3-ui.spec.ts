@@ -4,7 +4,12 @@
  */
 import { copy } from '@epis2/design-system';
 import { test, expect, type Page } from '@playwright/test';
-import { loginAsPhysician, openAmbulatoryFromCommand, pinDemoCase } from './helpers/demoPatient.js';
+import {
+  goToCommandCenter,
+  loginAsPhysician,
+  openAmbulatoryFromCommand,
+  pinDemoCase,
+} from './helpers/demoPatient.js';
 
 async function selectDemoPatient(page: Page) {
   await loginAsPhysician(page);
@@ -20,11 +25,12 @@ test.describe('Ola 2 — M3-UI visual regression', () => {
     });
   });
 
-  test('comando — viewport expandido', async ({ page }) => {
+  test('censo — viewport expandido', async ({ page }) => {
     await loginAsPhysician(page);
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto('/comando');
-    await expect(page.getByTestId('epis2-command-prompt')).toBeVisible();
+    await goToCommandCenter(page);
+    await expect(page.getByTestId('epis2-census-command-bar')).toBeVisible();
+    await expect(page.getByTestId('epis2-generated-clinical-page')).toBeVisible();
     await expect(page).toHaveScreenshot('ola2-comando.png', { maxDiffPixelRatio: 0.02 });
   });
 

@@ -17,7 +17,7 @@ test.describe('PROG-THREE-MODES — journey E2E', () => {
     await expect(page.getByTestId('epis2-clinical-shell-classic')).toBeVisible();
 
     await page.getByTestId('epis2-mode-switcher-command').click();
-    await expect(page).toHaveURL(/\/comando/, { timeout: 15_000 });
+    await expect(page).toHaveURL(/\/espacio\/buscar-paciente/, { timeout: 15_000 });
 
     await page.getByTestId('epis2-mode-switcher-dashboard').click();
     await expect(page).toHaveURL(/mode=dashboard/, { timeout: 15_000 });

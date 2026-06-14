@@ -1,4 +1,5 @@
 import type { DashboardTab } from '../routes/clinicalNavigate.js';
+import { EPIS2_CLINICAL_HOME, EPIS2_COMMAND_CENTER_HOME } from '../routes/home.js';
 import { EPIS_MODE_DEFINITIONS, type EpisMode } from './episModes.js';
 
 export type EpisSessionContextSnapshot = {
@@ -43,10 +44,10 @@ export function getDefaultRouteAfterLogin(_ctx: EpisSessionContextSnapshot): str
 
 export function getSafeFallbackRoute(mode: EpisMode, _ctx: EpisSessionContextSnapshot): string {
   if (mode === 'classic') {
-    return '/comando?intent=selectPatient&nextMode=classic';
+    return `${EPIS2_COMMAND_CENTER_HOME}?intent=selectPatient&nextMode=classic`;
   }
   if (mode === 'dashboard') {
-    return '/comando?error=dashboardPermission';
+    return `${EPIS2_COMMAND_CENTER_HOME}?error=dashboardPermission`;
   }
   return EPIS_MODE_DEFINITIONS.command.canonicalRoute;
 }
@@ -55,14 +56,14 @@ export function resolveModeRoute(
   mode: EpisMode,
   options: ModeRouteOptions = {},
 ): {
-  to: '/comando' | '/espacio/ficha' | '/epis2/dashboard';
+  to: typeof EPIS2_CLINICAL_HOME | '/espacio/ficha' | '/epis2/dashboard';
   search: Record<string, string | undefined>;
   replace?: boolean;
 } {
   switch (mode) {
     case 'command':
       return {
-        to: '/comando',
+        to: EPIS2_CLINICAL_HOME,
         search: {
           ...(options.patientId ? { patientId: options.patientId } : {}),
           ...(options.intent ? { intent: options.intent } : {}),

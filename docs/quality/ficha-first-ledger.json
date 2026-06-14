@@ -1,50 +1,236 @@
 {
-  "version": "1.0.0",
+  "version": "2.0.0",
   "program": "PROG-FICHA-FIRST-2026",
-  "strategy": "censo-first · barra transversal · dual chart default",
+  "canonicalPlan": "docs/product/EPIS2_FICHA_FIRST_DEV_PLAN.md",
+  "strategy": "censo-first · barra transversal · ficha clásica + papel",
   "executionStatus": "ACTIVE",
-  "states": ["READY", "IN_PROGRESS", "DONE"],
+  "wave1ClosedAt": "2026-06-14",
+  "states": ["BLOCKED", "READY", "IN_PROGRESS", "DONE"],
   "rules": {
     "oneReadyAtMost": true,
+    "oneInProgressAtMost": true,
     "homeIsCensus": true,
-    "commandRouteCompatOnly": true
+    "commandRouteCompatOnly": true,
+    "stopAfterEachPhase": true
   },
+  "waves": [
+    { "id": "wave-1", "name": "Activación", "state": "DONE", "mfs": ["MF-FF-01", "MF-FF-02", "MF-FF-03", "MF-FF-06"] },
+    { "id": "wave-2", "name": "Canon y navegación", "state": "ACTIVE", "mfs": ["MF-FF-00", "MF-FF-04", "MF-FF-05"] },
+    { "id": "wave-3", "name": "Experiencia clínica determinística", "state": "BLOCKED", "mfs": ["MF-FF-07", "MF-FF-08", "MF-FF-09", "MF-FF-10"] },
+    { "id": "wave-4", "name": "Frontera IA", "state": "BLOCKED", "mfs": ["MF-FF-11", "MF-FF-12", "MF-FF-13"] },
+    { "id": "wave-5", "name": "Integración y velocidad", "state": "BLOCKED", "mfs": ["MF-FF-14", "MF-FF-15"] }
+  ],
   "phases": [
     {
       "id": "MF-FF-01",
+      "wave": "wave-1",
       "name": "Dual chart ON por default",
       "state": "DONE",
       "completedAt": "2026-06-14",
       "gate": "quality:ficha-first-gate",
-      "allowedPaths": ["apps/web/src/dev/dualChartModesEnv.ts"]
+      "allowedPaths": ["apps/web/src/dev/dualChartModesEnv.ts"],
+      "closureReport": "reports/epis2-mf-ff-01-03-ficha-first.md",
+      "unblocks": ["MF-FF-02"]
     },
     {
       "id": "MF-FF-02",
+      "wave": "wave-1",
       "name": "Home = censo clínico",
       "state": "DONE",
       "completedAt": "2026-06-14",
+      "dependsOn": ["MF-FF-01"],
       "gate": "quality:ficha-first-gate",
-      "allowedPaths": ["apps/web/src/routes/home.ts", "apps/web/src/routes/router.tsx"]
+      "allowedPaths": ["apps/web/src/routes/home.ts", "apps/web/src/routes/router.tsx"],
+      "closureReport": "reports/epis2-mf-ff-01-03-ficha-first.md",
+      "unblocks": ["MF-FF-03"]
     },
     {
       "id": "MF-FF-03",
+      "wave": "wave-1",
       "name": "/comando redirect compat",
       "state": "DONE",
       "completedAt": "2026-06-14",
+      "dependsOn": ["MF-FF-02"],
       "gate": "quality:ficha-first-gate",
-      "allowedPaths": ["apps/web/src/routes/router.tsx", "scripts/architecture/command-center-home.mjs"]
+      "allowedPaths": [
+        "apps/web/src/routes/router.tsx",
+        "scripts/architecture/command-center-home.mjs"
+      ],
+      "closureReport": "reports/epis2-mf-ff-01-03-ficha-first.md",
+      "unblocks": ["MF-FF-06", "MF-FF-00"]
     },
     {
       "id": "MF-FF-06",
+      "wave": "wave-1",
       "name": "ClinicalShell en formularios /espacio/*",
-      "state": "READY",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
+      "dependsOn": ["MF-FF-03"],
       "gate": "quality:ficha-first-gate",
       "allowedPaths": [
         "apps/web/src/layouts/**",
+        "apps/web/src/modes/**",
         "apps/web/src/pages/GeneratedClinicalFormPage.tsx",
-        "apps/web/src/components/chart/ClinicalShell.tsx"
+        "apps/web/src/components/chart/ChartEspacioCommandDock.tsx",
+        "e2e/helpers/demoPatient.ts",
+        "e2e/ux-g02-command-first.spec.ts",
+        "e2e/three-modes-journey.spec.ts"
       ],
-      "dependsOn": ["MF-FF-03"]
+      "closureReport": "reports/epis2-mf-ff-06-clinical-shell-forms.md",
+      "unblocks": ["MF-FF-00", "MF-FF-07"]
+    },
+    {
+      "id": "MF-FF-00",
+      "wave": "wave-2",
+      "name": "Conciliar canon censo-first",
+      "state": "READY",
+      "dependsOn": ["MF-FF-06"],
+      "gate": "quality:ficha-first-gate",
+      "allowedPaths": [
+        "docs/product/PRODUCT_INVARIANTS.md",
+        "docs/PRODUCT_CANON.md",
+        "docs/architecture/EPIS2_MODES_LAYER.md",
+        "docs/quality/GOLDEN_CLINICAL_JOURNEY.md",
+        "docs/adr/ADR-002-dual-chart-modes.md"
+      ],
+      "evidenceRequired": [
+        "Invariante #6 = censo-first",
+        "Golden journey paso 2 = censo + barra transversal",
+        "ADR-002 aprobación enmienda home"
+      ],
+      "closureReport": "reports/epis2-mf-ff-00-canon-censo-first.md",
+      "unblocks": ["MF-FF-04", "MF-FF-05"]
+    },
+    {
+      "id": "MF-FF-04",
+      "wave": "wave-2",
+      "name": "Dashboard secundario en nav",
+      "state": "BLOCKED",
+      "dependsOn": ["MF-FF-00"],
+      "gate": "quality:ui-simplify-gate",
+      "allowedPaths": [
+        "apps/web/src/navigation/epis2NavigationTree.ts",
+        "apps/web/src/quality/uiDensityRules.ts"
+      ],
+      "closureReport": "reports/epis2-mf-ff-04-dashboard-secondary.md",
+      "unblocks": ["MF-FF-07"]
+    },
+    {
+      "id": "MF-FF-05",
+      "wave": "wave-2",
+      "name": "VISION_EPIS2 + reglas agente",
+      "state": "BLOCKED",
+      "dependsOn": ["MF-FF-00"],
+      "gate": "quality:fast",
+      "allowedPaths": [
+        "docs/product/VISION_EPIS2.md",
+        "docs/AGENT_CONTEXT_MINIMAL.md",
+        ".cursor/rules/**"
+      ],
+      "closureReport": "reports/epis2-mf-ff-05-vision-agent.md",
+      "unblocks": []
+    },
+    {
+      "id": "MF-FF-07",
+      "wave": "wave-3",
+      "name": "Acciones probables en toda ficha",
+      "state": "BLOCKED",
+      "dependsOn": ["MF-FF-06", "MF-FF-04"],
+      "gate": "quality:clinical-productivity-gate",
+      "allowedPaths": ["apps/web/src/pages/PatientWorkspacePage.tsx", "apps/web/src/pages/DualChartPatientPage.tsx"],
+      "closureReport": "reports/epis2-mf-ff-07-probable-actions.md",
+      "unblocks": ["MF-FF-08"]
+    },
+    {
+      "id": "MF-FF-08",
+      "wave": "wave-3",
+      "name": "Live templates en web",
+      "state": "BLOCKED",
+      "dependsOn": ["MF-FF-07"],
+      "gate": "quality:clinical-productivity-gate",
+      "allowedPaths": [
+        "apps/web/src/pages/GeneratedClinicalFormPage.tsx",
+        "packages/clinical-forms/src/live-templates/**"
+      ],
+      "closureReport": "reports/epis2-mf-ff-08-live-templates.md",
+      "unblocks": ["MF-FF-09"]
+    },
+    {
+      "id": "MF-FF-09",
+      "wave": "wave-3",
+      "name": "Evolución diaria layout clínico",
+      "state": "BLOCKED",
+      "dependsOn": ["MF-FF-08"],
+      "gate": "quality:clinical-grid-gate",
+      "allowedPaths": ["apps/web/src/components/chart/**", "apps/web/src/pages/GeneratedClinicalFormPage.tsx"],
+      "closureReport": "reports/epis2-mf-ff-09-evolution-layout.md",
+      "unblocks": ["MF-FF-10"]
+    },
+    {
+      "id": "MF-FF-10",
+      "wave": "wave-3",
+      "name": "Receta A5 triple vista",
+      "state": "BLOCKED",
+      "dependsOn": ["MF-FF-09"],
+      "gate": "quality:golden-journey",
+      "allowedPaths": ["apps/web/src/pages/**", "packages/clinical-forms/**"],
+      "closureReport": "reports/epis2-mf-ff-10-prescription-a5.md",
+      "unblocks": ["MF-FF-11"]
+    },
+    {
+      "id": "MF-FF-11",
+      "wave": "wave-4",
+      "name": "Package @epis2/ai-client",
+      "state": "BLOCKED",
+      "dependsOn": ["MF-FF-10"],
+      "gate": "architecture:validate",
+      "allowedPaths": ["packages/ai-client/**", "apps/web/src/api/**"],
+      "closureReport": "reports/epis2-mf-ff-11-ai-client.md",
+      "unblocks": ["MF-FF-12"]
+    },
+    {
+      "id": "MF-FF-12",
+      "wave": "wave-4",
+      "name": "web sin @epis2/local-ai",
+      "state": "BLOCKED",
+      "dependsOn": ["MF-FF-11"],
+      "gate": "quality:clinical-ai-text-safety-gate",
+      "allowedPaths": ["apps/web/**"],
+      "closureReport": "reports/epis2-mf-ff-12-web-ai-boundary.md",
+      "unblocks": ["MF-FF-13"]
+    },
+    {
+      "id": "MF-FF-13",
+      "wave": "wave-4",
+      "name": "IA asistiva + degraded E2E",
+      "state": "BLOCKED",
+      "dependsOn": ["MF-FF-12"],
+      "gate": "ai:evals:sim",
+      "allowedPaths": ["services/local-ai/**", "apps/api/src/ai/**"],
+      "closureReport": "reports/epis2-mf-ff-13-ai-assist.md",
+      "unblocks": ["MF-FF-14"]
+    },
+    {
+      "id": "MF-FF-14",
+      "wave": "wave-5",
+      "name": "MedRepo knowledge-pack loader",
+      "state": "BLOCKED",
+      "dependsOn": ["MF-FF-13"],
+      "gate": "quality:fast",
+      "allowedPaths": ["apps/api/src/ai/**"],
+      "closureReport": "reports/epis2-mf-ff-14-medrepo-loader.md",
+      "unblocks": ["MF-FF-15"]
+    },
+    {
+      "id": "MF-FF-15",
+      "wave": "wave-5",
+      "name": "Aliases quality:ui / quality:ai",
+      "state": "BLOCKED",
+      "dependsOn": ["MF-FF-14"],
+      "gate": "quality:fast",
+      "allowedPaths": ["package.json", "scripts/quality/**", "docs/dev/EPIS2_DEV_VELOCITY.md"],
+      "closureReport": "reports/epis2-prog-ficha-first-close-2026.md",
+      "unblocks": []
     }
   ]
 }

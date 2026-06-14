@@ -28,7 +28,7 @@ async function expectNoSevereViolations(page: Page, surface: string) {
 test.describe('A11y smoke — axe-core', () => {
   test('Centro de Comando sin violaciones serias', async ({ page }) => {
     await loginAsPhysician(page);
-    await expectNoSevereViolations(page, 'Centro de Comando (/comando)');
+    await expectNoSevereViolations(page, 'Centro de Comando (/espacio/buscar-paciente)');
   });
 
   test('Ficha del paciente sin violaciones serias', async ({ page }) => {

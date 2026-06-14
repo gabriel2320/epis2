@@ -3,7 +3,22 @@
  */
 import { copy } from '@epis2/design-system';
 import { getDemoCaseByCode } from '@epis2/test-fixtures';
-import { expect, type Page } from '@playwright/test';
+import { expect, type Locator, type Page } from '@playwright/test';
+
+/** Barra transversal PROG-FICHA-FIRST — censo, formulario clínico o dock flotante en ficha. */
+export function getTransversalCommandBar(page: Page): Locator {
+  return page
+    .getByTestId('epis2-census-command-bar')
+    .or(page.getByTestId('epis2-espacio-chart-command-bar'))
+    .or(page.getByTestId('epis2-floating-command-dock').getByTestId('epis2-power-bar'));
+}
+
+export async function fillTransversalCommand(page: Page, query: string) {
+  const bar = getTransversalCommandBar(page);
+  await expect(bar).toBeVisible({ timeout: 15_000 });
+  await bar.locator('input').first().fill(query);
+  await bar.getByRole('button').first().click();
+}
 
 export async function loginAsPhysician(page: Page) {
   const login = await page.request.post('/api/auth/login', {
@@ -56,11 +71,7 @@ export async function selectDemoPatientViaSearch(page: Page, demoCode: string) {
 
 export async function openAmbulatoryFromCommand(page: Page) {
   await goToCommandCenter(page);
-  const powerBar = page.getByTestId('epis2-power-bar');
-  await powerBar
-    .getByRole('textbox', { name: copy.commandCenter.powerBarLabel })
-    .fill('consulta ambulatoria de control');
-  await powerBar.getByRole('button', { name: copy.commandCenter.submit }).click();
+  await fillTransversalCommand(page, 'consulta ambulatoria de control');
   await expect(page).toHaveURL(/\/espacio\/ambulatorio/);
   await expect(page.getByTestId('epis2-generated-clinical-page')).toBeVisible({ timeout: 15_000 });
 }

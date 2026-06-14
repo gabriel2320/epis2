@@ -29,11 +29,11 @@ Login → /espacio/buscar-paciente (censo + barra transversal)
 | E2E helper `demoPatient.ts` | ✓ `epis2-census-command-bar` |
 | Golden journey home step | ✓ |
 
-## Pendiente (MF-FF-06 READY)
+## Pendiente (cerrado MF-FF-06)
 
-- ClinicalShell en todos los formularios `/espacio/*`
-- E2E legacy (`ux-g02`, `three-modes-journey`) aún con `/comando` directo
-- Canon `PRODUCT_INVARIANTS.md` / `PRODUCT_CANON.md` (diff mínimo; hacer en MF dedicado)
+- ~~ClinicalShell en todos los formularios `/espacio/*`~~ → [`epis2-mf-ff-06-clinical-shell-forms.md`](epis2-mf-ff-06-clinical-shell-forms.md)
+- ~~E2E legacy (`ux-g02`, `three-modes-journey`)~~ → helper `getTransversalCommandBar`
+- ~~Canon `PRODUCT_INVARIANTS.md` / `PRODUCT_CANON.md`~~ → censo-first 2026-06-14
 
 ## Comandos
 
@@ -44,4 +44,4 @@ npm run dev:rapid -- --skip-audit
 
 ## Próximo paso
 
-**MF-FF-06** — barra transversal siempre visible en formularios clínicos.
+**PROG-STRENGTHEN** — MF-IM-03 RAG incremental (`quality:strengthen-next`).

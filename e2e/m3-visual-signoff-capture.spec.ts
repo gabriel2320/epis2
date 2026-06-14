@@ -6,7 +6,12 @@ import { copy } from '@epis2/design-system';
 import { test, expect, type Page } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { loginAsPhysician, pinDemoCase } from './helpers/demoPatient.js';
+import {
+  fillTransversalCommand,
+  goToCommandCenter,
+  loginAsPhysician,
+  pinDemoCase,
+} from './helpers/demoPatient.js';
 
 const evidenceDir =
   process.env.M3_VISUAL_EVIDENCE_DIR ??
@@ -25,17 +30,13 @@ async function loginViaUi(page: Page) {
   await page.goto('/login');
   await page.getByLabel(copy.login.demoKeyLabel).fill('DEMO-CLAVE-MEDICO');
   await page.getByRole('button', { name: copy.login.submit }).click();
-  await expect(page).toHaveURL(/\/comando/);
+  await expect(page).toHaveURL(/\/espacio\/buscar-paciente/, { timeout: 15_000 });
+  await expect(page.getByTestId('epis2-census-command-bar')).toBeVisible({ timeout: 15_000 });
 }
 
 async function openEvolutionForm(page: Page) {
   await pinDemoCase(page, 'DEMO-001');
-  await page.goto('/comando');
-  const powerBar = page.getByTestId('epis2-power-bar');
-  await powerBar
-    .getByRole('textbox', { name: copy.commandCenter.powerBarLabel })
-    .fill('evolucionar nota de hoy');
-  await powerBar.getByRole('button', { name: copy.commandCenter.submit }).click();
+  await fillTransversalCommand(page, 'evolucionar nota de hoy');
   await expect(page).toHaveURL(/\/espacio\/evolucion/);
   await expect(page.getByTestId('epis2-generated-clinical-page')).toBeVisible();
 }
@@ -62,14 +63,14 @@ test.describe('M3 visual pass — captura V1–V6', () => {
     await page.getByTestId('epis2-accent-tealBlue').click();
     await snap(page, 'v1-preferencias-calm-teal');
 
-    await page.goto('/comando');
+    await goToCommandCenter(page);
     await snap(page, 'v1-comando-tras-paleta');
 
     // V2 — modo oscuro
     await page.goto('/preferencias-apariencia');
     await page.getByTestId('epis2-mode-dark').click();
     await snap(page, 'v2-preferencias-modo-oscuro');
-    await page.goto('/comando');
+    await goToCommandCenter(page);
     await snap(page, 'v2-comando-modo-oscuro');
     await openEvolutionForm(page);
     await snap(page, 'v2-evolucion-modo-oscuro');
@@ -102,7 +103,7 @@ test.describe('M3 visual pass — captura V1–V6', () => {
     await page.getByTestId('epis2-draft-approve').click();
     await expect(page.getByTestId('epis2-draft-review-message')).toBeVisible();
     await snap(page, 'v5-nota-aprobada');
-    await page.goto('/comando');
+    await goToCommandCenter(page);
     await snap(page, 'v5-retorno-comando');
 
     // V6 — offline + reduced motion

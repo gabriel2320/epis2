@@ -21,13 +21,16 @@ describe('episModes', () => {
 
   it('resuelve modo activo desde ruta', () => {
     expect(resolveActiveMode('/comando', {})).toBe('command');
+    expect(resolveActiveMode('/espacio/buscar-paciente', {})).toBe('command');
     expect(resolveActiveMode('/epis2/dashboard', { mode: 'dashboard' })).toBe('dashboard');
     expect(resolveActiveMode('/espacio/ficha', { mode: 'classic' })).toBe('classic');
   });
 
-  it('login default siempre es comando', () => {
+  it('login default siempre es comando (censo-first)', () => {
     expect(getDefaultModeAfterLogin({ role: 'physician', permissions: [] })).toBe('command');
-    expect(getDefaultRouteAfterLogin({ role: 'physician', permissions: [] })).toBe('/comando');
+    expect(getDefaultRouteAfterLogin({ role: 'physician', permissions: [] })).toBe(
+      '/espacio/buscar-paciente',
+    );
   });
 
   it('classic requiere paciente', () => {

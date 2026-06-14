@@ -1,3 +1,8 @@
+/**
+ * @deprecated PROG-FICHA-FIRST MF-FF-03 — ya no montada en router.
+ * `/comando` redirige a censo/ficha/dashboard. Mantener solo tests unitarios hasta archivar.
+ * Barra transversal: {@link ChartEspacioCommandDock} en {@link ClinicalShellLayout}.
+ */
 import { copy } from '@epis2/design-system';
 
 import { getCommandBarAiHint, assistClarifyFooterHint } from '@epis2/command-registry';

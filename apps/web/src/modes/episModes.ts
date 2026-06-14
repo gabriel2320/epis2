@@ -1,4 +1,5 @@
 import { copy } from '@epis2/design-system';
+import { EPIS2_CLINICAL_HOME } from '../routes/home.js';
 
 /** Modos canónicos EPIS2 — una sesión, un contexto, cero routers paralelos. */
 export type EpisMode = 'command' | 'classic' | 'dashboard';
@@ -20,7 +21,7 @@ export const EPIS_MODE_DEFINITIONS: Record<EpisMode, EpisModeDefinition> = {
   command: {
     id: 'command',
     label: copy.threeModes.commandLabel,
-    canonicalRoute: '/comando',
+    canonicalRoute: EPIS2_CLINICAL_HOME,
     requiresPatient: false,
     allowedRoles: ALL_CLINICAL_ROLES,
     description: copy.threeModes.commandDescription,
@@ -54,7 +55,13 @@ export function resolveActiveMode(
   pathname: string,
   search: { mode?: string | undefined; view?: string | undefined },
 ): EpisMode {
-  if (pathname === '/comando' || pathname.startsWith('/comando')) return 'command';
+  if (
+    pathname === '/comando' ||
+    pathname.startsWith('/comando') ||
+    pathname.startsWith('/espacio/buscar-paciente')
+  ) {
+    return 'command';
+  }
   if (pathname.startsWith('/epis2/dashboard')) {
     return search.mode === 'dashboard' ? 'dashboard' : 'command';
   }

@@ -4,7 +4,12 @@
  */
 import { copy } from '@epis2/design-system';
 import { test, expect } from '@playwright/test';
-import { loginAsPhysician, pinDemoCase } from './helpers/demoPatient.js';
+import {
+  fillTransversalCommand,
+  getTransversalCommandBar,
+  loginAsPhysician,
+  pinDemoCase,
+} from './helpers/demoPatient.js';
 
 const DEMO_001_PATIENT_ID = 'a0000001-0000-4000-8000-000000000001';
 
@@ -12,13 +17,9 @@ test.describe('UX-G02 — command-first con paciente fijado', () => {
   test('Parte A: TAC → confirmación → badge → prefill → URL limpia', async ({ page }) => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-001');
-    await page.goto('/comando');
+    await page.goto('/espacio/buscar-paciente');
 
-    const powerBar = page.getByTestId('epis2-power-bar');
-    await powerBar
-      .getByRole('textbox', { name: copy.commandCenter.powerBarLabel })
-      .fill('pedir TAC de tórax');
-    await powerBar.getByRole('button', { name: copy.commandCenter.submit }).click();
+    await fillTransversalCommand(page, 'pedir TAC de tórax');
 
     // 5: confirmación CE-2
     const dialog = page.getByTestId('epis2-command-confirmation-dialog');
@@ -73,11 +74,9 @@ test.describe('UX-G02 — command-first con paciente fijado', () => {
     await expect(page.getByTestId('epis2-ficha-history')).toBeVisible();
 
     // 12–13: evolución desde Power Bar de ficha
-    const fichaBar = page.getByTestId('epis2-floating-command-dock').getByTestId('epis2-power-bar');
-    await fichaBar
-      .getByRole('textbox', { name: copy.commandCenter.powerBarLabel })
-      .fill('hacer evolución');
-    await fichaBar.getByRole('button', { name: copy.commandCenter.submit }).click();
+    const fichaBar = getTransversalCommandBar(page);
+    await fichaBar.locator('input').first().fill('hacer evolución');
+    await fichaBar.getByRole('button').first().click();
 
     await expect(page).toHaveURL(
       new RegExp(`/espacio/evolucion.*patientId=${DEMO_001_PATIENT_ID}`),
@@ -93,18 +92,14 @@ test.describe('UX-G02 — command-first con paciente fijado', () => {
   test('Parte C1: cancelar confirmación no navega', async ({ page }) => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-001');
-    await page.goto('/comando');
+    await page.goto('/espacio/buscar-paciente');
 
-    const powerBar = page.getByTestId('epis2-power-bar');
-    await powerBar
-      .getByRole('textbox', { name: copy.commandCenter.powerBarLabel })
-      .fill('pedir TAC de tórax');
-    await powerBar.getByRole('button', { name: copy.commandCenter.submit }).click();
+    await fillTransversalCommand(page, 'pedir TAC de tórax');
 
     await expect(page.getByTestId('epis2-command-confirmation-dialog')).toBeVisible();
     await page.getByRole('button', { name: copy.commandCenter.needsConfirmationCancel }).click();
 
-    await expect(page).toHaveURL(/\/comando/);
+    await expect(page).toHaveURL(/\/espacio\/buscar-paciente/);
     await expect(page.getByTestId('epis2-form-imaging_request')).not.toBeAttached();
   });
 

@@ -1,41 +1,54 @@
 /**
  * PROG-FICHA-FIRST-2026 — lectura del ledger para agente / velocity.
  */
-import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { findNextFichaFirstPhase, loadFichaFirstLedger } from '../quality/ficha-first-ledger-lib.mjs';
 
 /** @param {string} root */
 export function getFichaFirstActive(root) {
   const path = join(root, 'docs/quality/ficha-first-ledger.json');
-  if (!existsSync(path)) return null;
+  try {
+    const ledger = loadFichaFirstLedger(path);
+    const result = findNextFichaFirstPhase(ledger);
 
-  const ledger = JSON.parse(readFileSync(path, 'utf8'));
-  if (ledger.executionStatus !== 'ACTIVE') return { program: ledger.program, paused: true };
+    if (!result.ok) {
+      return { program: ledger.program, error: result.errors.join('; ') };
+    }
 
-  const phases = ledger.phases ?? [];
-  const inProgress = phases.find((p) => p.state === 'IN_PROGRESS');
-  const ready = phases.find((p) => p.state === 'READY');
-  const next = inProgress ?? ready;
-  const doneCount = phases.filter((p) => p.state === 'DONE').length;
+    if (result.complete || ledger.executionStatus === 'CLOSED') {
+      return {
+        program: ledger.program,
+        progress: `${result.doneCount}/${result.total}`,
+        complete: true,
+        wave1ClosedAt: ledger.wave1ClosedAt,
+      };
+    }
 
-  return {
-    program: ledger.program,
-    progress: `${doneCount}/${phases.length}`,
-    active: next
-      ? {
-          id: next.id,
-          name: next.name,
-          state: next.state,
-          gate: next.gate,
-        }
-      : null,
-  };
+    return {
+      program: ledger.program,
+      progress: `${result.doneCount}/${result.total}`,
+      active: result.next
+        ? {
+            id: result.next.id,
+            name: result.next.name,
+            state: result.next.state,
+            wave: result.next.wave,
+            gate: result.next.gate,
+          }
+        : null,
+    };
+  } catch {
+    return null;
+  }
 }
 
 /** @param {ReturnType<typeof getFichaFirstActive>} fichaFirst */
 export function formatFichaFirstLine(fichaFirst) {
   if (!fichaFirst) return '- FICHA-FIRST: ledger no legible';
-  if (fichaFirst.paused) return `- FICHA-FIRST: PAUSED (${fichaFirst.program})`;
+  if (fichaFirst.error) return `- FICHA-FIRST: ERROR — ${fichaFirst.error}`;
+  if (fichaFirst.complete) {
+    return `- FICHA-FIRST: ${fichaFirst.program} · ${fichaFirst.progress} DONE (programa cerrado)`;
+  }
   if (!fichaFirst.active) {
     return `- FICHA-FIRST: ${fichaFirst.program} · ${fichaFirst.progress} DONE`;
   }
