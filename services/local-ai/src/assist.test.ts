@@ -22,6 +22,27 @@ describe('runDraftAssist', () => {
     expect(result.status).toBe('unavailable');
   });
 
+  it('MF-SH-03 — mensaje guía formulario manual cuando Ollama cae', async () => {
+    vi.spyOn(router, 'generateWithInferenceRouter').mockResolvedValue({
+      ok: false,
+      reason: 'Ollama no está disponible. Continúa con el formulario manual.',
+      provider: 'ollama',
+      dataTier: 'L0_synthetic',
+    });
+
+    const config = loadAiConfig({
+      AI_INFERENCE_MODE: 'ollama',
+      OLLAMA_BASE_URL: 'http://127.0.0.1:11434',
+      OLLAMA_MODEL: 'test',
+    });
+
+    const result = await runDraftAssist(config, { blueprintId: 'evolution_note' });
+    expect(result.status).toBe('unavailable');
+    if (result.status === 'unavailable') {
+      expect(result.message.toLowerCase()).toMatch(/manual|formulario/);
+    }
+  });
+
   it('propaga provider y dataTier en éxito', async () => {
     vi.spyOn(router, 'generateWithInferenceRouter').mockResolvedValue({
       ok: true,

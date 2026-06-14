@@ -100,8 +100,9 @@
       "subprogram": "PROG-CORE-HARDEN",
       "phase": 3,
       "dependsOn": ["MF-SH-02"],
-      "state": "READY",
-      "gate": null,
+      "state": "DONE",
+      "completedAt": "2026-06-14",
+      "gate": "quality:sh-03-degrade-gate",
       "evidenceRequired": [
         "Test: Ollama unavailable → formulario manual operativo",
         "Test: resolveCommand sin assist sigue funcionando",
@@ -122,7 +123,7 @@
       "subprogram": "PROG-CORE-HARDEN",
       "phase": 4,
       "dependsOn": ["MF-SH-03"],
-      "state": "BLOCKED",
+      "state": "READY",
       "gate": "quality:registry-meta-gate",
       "evidenceRequired": [
         "registryMeta SNRE/RUT en blueprints allowlist CHILE",

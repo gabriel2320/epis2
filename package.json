@@ -223,6 +223,7 @@
     "quality:di-signoff-gate": "node scripts/quality/validate-di-signoff-gate.mjs",
     "quality:draft-trace-gate": "node scripts/quality/validate-draft-trace-gate.mjs",
     "quality:sh-02-intent-evals-gate": "node scripts/quality/validate-sh-02-intent-evals-gate.mjs",
+    "quality:sh-03-degrade-gate": "node scripts/quality/validate-sh-03-degrade-gate.mjs",
     "quality:tres-frentes-next": "node scripts/quality/tres-frentes-next.mjs",
     "quality:ficha-norm-benchmark-gate": "node scripts/quality/validate-ficha-norm-benchmark-gate.mjs",
     "quality:ficha-norm-density-gate": "node scripts/quality/validate-ficha-norm-density-gate.mjs",

@@ -24,6 +24,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
+    "@epis2/command-registry": "*",
     "typescript": "^5.8.3",
     "vitest": "^3.2.6"
   }

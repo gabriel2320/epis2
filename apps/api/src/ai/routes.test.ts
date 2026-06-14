@@ -120,7 +120,7 @@ describe('AI routes', () => {
     await app.close();
   });
 
-  it('flujo manual: resolver comando sin depender de IA', async () => {
+  it('MF-SH-03 — flujo manual: resolver comando sin depender de IA', async () => {
     const app = await buildApp(config);
     const login = await app.inject({
       method: 'POST',
