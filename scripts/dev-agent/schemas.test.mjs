@@ -2,7 +2,7 @@
  * @vitest-environment node
  */
 import { describe, expect, it } from 'vitest';
-import { parseDevSessionPlan } from '../../scripts/dev-agent/schemas.mjs';
+import { parseDevSessionPlan, parseDevDiffAudit } from '../../scripts/dev-agent/schemas.mjs';
 import {
   parseDevSessionPlanFromOllamaText,
   parseDevLowRiskWritePlanFromOllamaText,
@@ -75,5 +75,17 @@ describe('dev-agent schemas', () => {
       }),
     );
     expect(result.ok).toBe(true);
+  });
+
+  it('parseDevDiffAudit normaliza requiresHumanReview', () => {
+    const result = parseDevDiffAudit({
+      verdict: 'APROBAR',
+      summary: 'ok',
+      findings: [],
+      suggestedTests: [],
+      requiresHumanReview: false,
+    });
+    expect(result.ok).toBe(true);
+    if (result.ok) expect(result.data.requiresHumanReview).toBe(true);
   });
 });

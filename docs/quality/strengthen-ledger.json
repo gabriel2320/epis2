@@ -144,8 +144,9 @@
       "subprogram": "PROG-CORE-HARDEN",
       "phase": 5,
       "dependsOn": ["MF-SH-04"],
-      "state": "READY",
-      "gate": null,
+      "state": "DONE",
+      "completedAt": "2026-06-14",
+      "gate": "quality:sh-05-rls-gate",
       "evidenceRequired": [
         "docs/ops runbook RLS",
         "EPIS2_RLS_FORCE documentado en .env.production.example",
@@ -166,7 +167,7 @@
       "subprogram": "PROG-CORE-HARDEN",
       "phase": 6,
       "dependsOn": ["MF-SH-05"],
-      "state": "BLOCKED",
+      "state": "READY",
       "gate": "db:validate",
       "evidenceRequired": [
         "db:validate incluye checksum migraciones 035–040",

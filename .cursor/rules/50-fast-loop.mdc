@@ -3,7 +3,7 @@ description: Loop rápido quality:fast — contexto mínimo y gates por alcance
 alwaysApply: true
 ---
 
-# Fast loop (MF-RAPID-01)
+# Fast loop (MF-RAPID-01 / MF-RAPID-03)
 
 Antes de modificar código:
 
@@ -17,6 +17,7 @@ Antes de modificar código:
 | Alcance | Comando |
 |---------|---------|
 | Docs, quality scripts, UI menor, tests locales | `npm run quality:fast` |
+| Iteración con auditor Ollama | `npm run dev:rapid` |
 | Clínico API/web/packages, cierre MF | `npm run quality:clinical` |
 | Pre-PR, signoff, release | `npm run quality:full` |
 
@@ -24,7 +25,7 @@ Antes de modificar código:
 
 Cierre de sesión / PR: `quality:clinical` o `quality:full` según riesgo.
 
-Tras `quality:fast` en cambios de código: `npm run dev:agent:audit-diff` (Ollama auditor; exit 1 si RECHAZAR/P0).
+Tras cambios de código: `npm run dev:rapid` (recomendado) o `quality:fast` + `dev:agent:audit-diff` por separado.
 
 ## Detenerse si
 

@@ -1,6 +1,6 @@
 # EPIS2 — Contexto mínimo para agentes (Cursor)
 
-**Versión:** 1.0 · **MF-RAPID-01** · Lectura obligatoria antes de codear.
+**Versión:** 1.1 · **MF-RAPID-01/03** · Lectura obligatoria antes de codear.
 
 > Canon completo solo si la tarea lo exige: `docs/PRODUCT_CANON.md`, `docs/product/PRODUCT_INVARIANTS.md`, `AGENTS.md`.
 
@@ -37,7 +37,7 @@ Un objetivo · pocos archivos · diff mínimo.
 
 | Cambio | Gate |
 |--------|------|
-| Docs, reportes, scripts quality, UI menor | `npm run quality:fast` |
+| Docs, reportes, scripts quality, UI menor | `npm run quality:fast` o `npm run dev:rapid` |
 | API/web/packages clínicos, microfase | `npm run quality:clinical` |
 | Pre-PR, cierre tramo, signoff | `npm run quality:full` |
 
@@ -45,8 +45,12 @@ Un objetivo · pocos archivos · diff mínimo.
 
 - resumen `git status`
 - scan PHI/secrets en archivos tocados
-- eslint + typecheck + vitest **solo zonas tocadas**
+- eslint + typecheck + vitest **archivos tocados** (tests hermanos si existen)
 - `architecture:validate`
+
+### `dev:rapid` (MF-RAPID-03)
+
+= `quality:fast` + `dev:agent:audit-diff` (omitido si solo docs o `--skip-audit`).
 
 ### No leer salvo petición explícita
 
@@ -71,13 +75,12 @@ Un objetivo · pocos archivos · diff mínimo.
 npm run stack:dev          # si hace falta
 npm run dev:velocity       # brief + subagente
 # … implementar microfase …
-npm run quality:fast       # iteración
-npm run dev:agent:audit-diff  # Ollama revisa diff (secundario)
+npm run dev:rapid          # fast + audit-diff (MF-RAPID-03)
 npm run quality:clinical   # cierre MF clínico
 npm run dev:agent:close    # reporte sesión
 ```
 
-Ollama como **auditor de diff** (no escritor de SoT): `npm run dev:agent:audit-diff` tras `quality:fast`.
+Atajos: `quality:fast` · `dev:agent:audit-diff` · `dev:rapid -- --skip-audit`
 
 ---
 

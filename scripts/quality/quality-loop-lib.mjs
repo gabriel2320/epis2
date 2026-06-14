@@ -77,12 +77,33 @@ export function readWorkspaceName(root, pkgRel) {
   }
 }
 
+/** @param {string} root @param {string} sourcePath */
+function siblingTestPaths(root, sourcePath) {
+  const match = sourcePath.match(/^(.+)\.([^.]+)$/);
+  if (!match) return [];
+  const base = match[1];
+  const ext = match[2];
+  /** @type {string[]} */
+  const candidates = [`${base}.test.${ext}`, `${base}.test.ts`, `${base}.test.tsx`, `${base}.spec.ts`];
+  return candidates.filter((c, i, arr) => arr.indexOf(c) === i && existsSync(join(root, c)));
+}
+
 /** @param {string} root @param {string[]} changedPaths */
 export function inferVitestTargets(root, changedPaths) {
   /** @type {Set<string>} */
+  const files = new Set();
+  /** @type {Set<string>} */
   const dirs = new Set();
+
   for (const p of changedPaths) {
     if (!CODE_EXT.test(p)) continue;
+    if (/\.(test|spec)\.(tsx?|jsx?|mjs)$/i.test(p)) {
+      files.add(p);
+      continue;
+    }
+    for (const testPath of siblingTestPaths(root, p)) {
+      files.add(testPath);
+    }
     const parts = p.split('/');
     if (parts[0] === 'apps' || parts[0] === 'packages' || parts[0] === 'services') {
       dirs.add(`${parts[0]}/${parts[1]}`);
@@ -90,6 +111,8 @@ export function inferVitestTargets(root, changedPaths) {
       dirs.add('scripts');
     }
   }
+
+  if (files.size > 0) return [...files].sort();
   return [...dirs].sort();
 }
 
@@ -186,14 +209,25 @@ export function typecheckWorkspaces(root, workspacePkgPaths) {
   return ok;
 }
 
-/** @param {string} root @param {string[]} vitestDirs */
-export function vitestTouched(root, vitestDirs) {
-  if (vitestDirs.length === 0) {
+/** @param {string} root @param {string[]} vitestTargets */
+export function vitestTouched(root, vitestTargets) {
+  if (vitestTargets.length === 0) {
     console.log('▶ vitest (touched) … skip');
     return true;
   }
+
+  const fileTargets = vitestTargets.filter((t) => /\.(test|spec)\.(tsx?|jsx?|mjs)$/i.test(t));
+  if (fileTargets.length === vitestTargets.length) {
+    return runCmd(
+      root,
+      `vitest (${fileTargets.length} archivos)`,
+      'npx',
+      ['vitest', 'run', ...fileTargets],
+    );
+  }
+
   let ok = true;
-  for (const dir of vitestDirs) {
+  for (const dir of vitestTargets) {
     ok = runCmd(root, `vitest ${dir}`, 'npx', ['vitest', 'run', dir]) && ok;
   }
   return ok;
