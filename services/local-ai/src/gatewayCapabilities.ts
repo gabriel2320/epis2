@@ -20,6 +20,7 @@ export type LocalAiCapabilities = {
   capabilities: {
     draftAssist: boolean;
     commandRouteAssist: boolean;
+    embedDocument: boolean;
     chat: false;
     toolCalling: false;
     rag: false;
@@ -50,6 +51,7 @@ export function buildLocalAiCapabilities(
     capabilities: {
       draftAssist: operational,
       commandRouteAssist: ollamaUp,
+      embedDocument: ollamaUp,
       chat: false,
       toolCalling: false,
       rag: false,

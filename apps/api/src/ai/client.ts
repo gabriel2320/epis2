@@ -1,4 +1,5 @@
-import type { AiAssistDraftRequest, AiTextboxAssistRequest } from '@epis2/contracts';
+import type { AiAssistDraftRequest, AiTextboxAssistRequest, EmbedDocumentRequest, EmbedDocumentResponse } from '@epis2/contracts';
+import { embedDocumentResponseSchema } from '@epis2/contracts';
 import { buildLocalAiRequestHeaders } from './localAiHeaders.js';
 
 export type LocalAiAssistResult =
@@ -120,4 +121,30 @@ export async function requestTextboxAssist(
   });
   const payload = (await res.json()) as LocalAiTextboxAssistResult;
   return { httpStatus: res.status, body: payload };
+}
+
+export async function requestEmbedDocument(
+  baseUrl: string,
+  body: EmbedDocumentRequest,
+  apiKey?: string,
+): Promise<{ httpStatus: number; body: EmbedDocumentResponse }> {
+  try {
+    const res = await fetch(`${baseUrl.replace(/\/$/, '')}/embed/document`, {
+      method: 'POST',
+      headers: buildLocalAiRequestHeaders(apiKey),
+      signal: AbortSignal.timeout(20_000),
+      body: JSON.stringify(body),
+    });
+    const payload = embedDocumentResponseSchema.parse(await res.json());
+    return { httpStatus: res.status, body: payload };
+  } catch {
+    return {
+      httpStatus: 503,
+      body: {
+        status: 'unavailable',
+        message: 'IA local no disponible — use embeddings demo determinísticos.',
+        provider: 'ollama',
+      },
+    };
+  }
 }

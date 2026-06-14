@@ -66,6 +66,16 @@ export {
   type LocalAiTextboxAssistOutput,
 } from './ai.js';
 export {
+  RAG_EMBED_DIM,
+  RAG_EMBED_MODEL_DEFAULT,
+  embedDocumentRequestSchema,
+  embedDocumentResponseSchema,
+  poolEmbeddingVector,
+  normalizeEmbeddingVector,
+  type EmbedDocumentRequest,
+  type EmbedDocumentResponse,
+} from './rag.js';
+export {
   EPIS2_DRAFT_ASSIST_TRACE_KEY,
   draftAssistTraceSchema,
   mergeAssistTraceIntoDraftBody,

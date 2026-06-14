@@ -9,6 +9,8 @@ import {
   aiSummarySuggestResponseSchema,
   ragQueryRequestSchema,
   ragQueryResponseSchema,
+  embedDocumentRequestSchema,
+  embedDocumentResponseSchema,
 } from '@epis2/contracts';
 import type { FastifyInstance } from 'fastify';
 import {
@@ -24,6 +26,7 @@ import {
   fetchLocalAiCapabilities,
   pingOllama,
   requestDraftAssist,
+  requestEmbedDocument,
   requestTextboxAssist,
 } from './client.js';
 import { getDemoSafetyNotesForPatient } from '../clinical/service.js';
@@ -271,6 +274,25 @@ export async function registerAiRoutes(
     });
     return aiRunsListResponseSchema.parse({ readOnly: true, runs });
   });
+
+  app.post(
+    '/api/ai/embed/document',
+    { preHandler: [limitAi, requireAiRead] },
+    async (request, reply) => {
+      const parsed = embedDocumentRequestSchema.safeParse(request.body);
+      if (!parsed.success) {
+        return sendApiError(reply, 400, 'Solicitud embed document inválida');
+      }
+
+      const { httpStatus, body } = await requestEmbedDocument(
+        config.LOCAL_AI_BASE_URL,
+        parsed.data,
+        config.LOCAL_AI_API_KEY,
+      );
+      const response = embedDocumentResponseSchema.parse(body);
+      return reply.status(httpStatus === 200 ? 200 : 503).send(response);
+    },
+  );
 
   app.post(
     '/api/ai/rag/query',

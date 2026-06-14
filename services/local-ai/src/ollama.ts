@@ -152,3 +152,34 @@ export async function generateOllamaJson(
     return { ok: false, reason: 'No se pudo contactar Ollama' };
   }
 }
+
+export type OllamaEmbeddingResult =
+  | { ok: true; embedding: number[]; model: string }
+  | { ok: false; reason: string };
+
+export async function fetchOllamaEmbedding(
+  baseUrl: string,
+  model: string,
+  text: string,
+  timeoutMs = 12_000,
+): Promise<OllamaEmbeddingResult> {
+  const base = baseUrl.replace(/\/$/, '');
+  try {
+    const res = await fetch(`${base}/api/embeddings`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: AbortSignal.timeout(timeoutMs),
+      body: JSON.stringify({ model, prompt: text }),
+    });
+    if (!res.ok) {
+      return { ok: false, reason: await readOllamaFailure(res) };
+    }
+    const body = (await res.json()) as { embedding?: number[]; model?: string };
+    if (!Array.isArray(body.embedding) || body.embedding.length === 0) {
+      return { ok: false, reason: 'Ollama devolvió embedding vacío' };
+    }
+    return { ok: true, embedding: body.embedding, model: body.model ?? model };
+  } catch {
+    return { ok: false, reason: 'No se pudo contactar Ollama' };
+  }
+}

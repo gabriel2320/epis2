@@ -3,11 +3,13 @@ import {
   aiAssistCommandRouteRequestSchema,
   aiAssistCommandRouteResponseSchema,
   aiTextboxAssistRequestSchema,
+  embedDocumentRequestSchema,
   healthResponseSchema,
 } from '@epis2/contracts';
 import Fastify from 'fastify';
 import { runDraftAssist } from './assist.js';
 import { runCommandRouteAssist } from './commandRoute.js';
+import { runEmbedDocument } from './embedDocument.js';
 import type { AiConfig } from './config.js';
 import { buildInferencePolicyConfig, createInferenceProviders } from './inference/router.js';
 import { pingOpenAi } from './inference/openaiProvider.js';
@@ -114,6 +116,19 @@ export async function buildAiApp(config: AiConfig) {
     }
     if (result.status === 'rejected') {
       return reply.status(422).send({ ...result, requiresHumanReview: true as const });
+    }
+    return reply.send(result);
+  });
+
+  app.post('/embed/document', async (request, reply) => {
+    const parsed = embedDocumentRequestSchema.safeParse(request.body);
+    if (!parsed.success) {
+      return reply.status(400).send({ error: 'Solicitud embed document inválida' });
+    }
+
+    const result = await runEmbedDocument(config, parsed.data);
+    if (result.status === 'unavailable') {
+      return reply.status(503).send(result);
     }
     return reply.send(result);
   });

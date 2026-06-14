@@ -217,8 +217,9 @@
       "subprogram": "PROG-IA-MODERNIZE",
       "phase": 2,
       "dependsOn": ["MF-IM-01"],
-      "state": "READY",
-      "gate": null,
+      "state": "DONE",
+      "completedAt": "2026-06-14",
+      "gate": "quality:im-02-embed-gate",
       "evidenceRequired": [
         "Contrato embedDocument en packages/contracts",
         "Smoke nomic-embed-text vía Ollama",
@@ -238,7 +239,7 @@
       "subprogram": "PROG-IA-MODERNIZE",
       "phase": 3,
       "dependsOn": ["MF-IM-02"],
-      "state": "BLOCKED",
+      "state": "READY",
       "gate": "quality:rag-retrieval-gate",
       "evidenceRequired": [
         "Retrieval secuencial por chunk en local-ai",

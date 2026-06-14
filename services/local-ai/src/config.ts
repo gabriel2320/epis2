@@ -8,6 +8,7 @@ const envSchema = z.object({
   AI_PORT: z.coerce.number().int().positive().default(3002),
   OLLAMA_BASE_URL: z.string().url().default('http://127.0.0.1:11434'),
   OLLAMA_MODEL: z.string().default('qwen3:8b'),
+  OLLAMA_EMBED_MODEL: z.string().default('nomic-embed-text'),
   /** ADR-005: ollama | openai | router (local first + cloud fallback) */
   AI_INFERENCE_MODE: inferenceModeSchema.default('router'),
   AI_CLOUD_ENABLED: z
