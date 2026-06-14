@@ -37,7 +37,11 @@ EPIS2_LOCAL_CI_E2E=1 npm run quality:local-ci   # antes de PR grande
 
 | Comando | Qué hace |
 |---------|----------|
+| `npm run quality:fast` | Loop rápido: git + PHI scan + lint/typecheck/vitest tocados + architecture |
+| `npm run quality:clinical` | fast + db:validate + gates rol (`dev:velocity:gates --fast`) |
+| `npm run quality:full` | check + test + db:validate (pre-PR) |
 | `npm run dev:velocity` | Tablero P1, subagente sugerido, estado brief |
+| `npm run dev:agent:audit-diff` | Ollama auditor sobre git diff (MF-RAPID-02) |
 | `npm run dev:velocity -- --refresh` | Fuerza `dev:session` + banner |
 | `npm run dev:velocity -- --tramo J` | Contexto Tramo J |
 | `npm run dev:velocity:gates` | Gates del subagente (git + rol) |

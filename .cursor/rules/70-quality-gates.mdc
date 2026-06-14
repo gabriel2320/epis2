@@ -5,13 +5,17 @@ alwaysApply: true
 
 # Quality gates
 
-Antes de terminar una sesión:
+**Durante la sesión (iteración):** `npm run quality:fast` · clínico: `quality:clinical` · ver `docs/AGENT_CONTEXT_MINIMAL.md`.
+
+Antes de terminar sesión / PR:
 
 ```bash
 npm run check          # lint + typecheck + architecture:validate
 npm run test
 npm run db:validate
 ```
+
+Atajo pre-PR: `npm run quality:full` (= check + test + db:validate).
 
 Si la fase lo exige: `npm run quality:golden-journey`.
 

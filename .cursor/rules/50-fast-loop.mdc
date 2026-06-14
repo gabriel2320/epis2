@@ -1,0 +1,33 @@
+---
+description: Loop rápido quality:fast — contexto mínimo y gates por alcance
+alwaysApply: true
+---
+
+# Fast loop (MF-RAPID-01)
+
+Antes de modificar código:
+
+1. Leer **`docs/AGENT_CONTEXT_MINIMAL.md`** (no leer auditorías históricas salvo petición).
+2. Declarar microfase: objetivo · allowlist · prohibidos · gate · riesgo.
+3. Leer **solo** archivos de la tarea + canon citado en el brief.
+4. Implementar diff mínimo.
+
+## Gates por alcance
+
+| Alcance | Comando |
+|---------|---------|
+| Docs, quality scripts, UI menor, tests locales | `npm run quality:fast` |
+| Clínico API/web/packages, cierre MF | `npm run quality:clinical` |
+| Pre-PR, signoff, release | `npm run quality:full` |
+
+**No** ejecutar `npm run check` + `npm run test` completos en cada iteración de chat.
+
+Cierre de sesión / PR: `quality:clinical` o `quality:full` según riesgo.
+
+Tras `quality:fast` en cambios de código: `npm run dev:agent:audit-diff` (Ollama auditor; exit 1 si RECHAZAR/P0).
+
+## Detenerse si
+
+- `architecture:validate` falla en `quality:fast`
+- Contradice `PRODUCT_INVARIANTS.md`
+- Toca migraciones, RBAC, RLS o aprobación sin MF autorizada

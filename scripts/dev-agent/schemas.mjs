@@ -31,6 +31,23 @@ export const devLowRiskWritePlanSchema = z.object({
   requiresHumanReview: z.literal(true),
 });
 
+/** Auditoría diff — MF-RAPID-02 (Ollama secundario). */
+export const devDiffAuditSchema = z.object({
+  verdict: z.enum(['APROBAR', 'CORREGIR', 'RECHAZAR']),
+  summary: z.string().min(1),
+  findings: z
+    .array(
+      z.object({
+        severity: z.enum(['P0', 'P1', 'P2']),
+        category: z.enum(['phi', 'approval', 'registry', 'boundary', 'security', 'tests', 'other']),
+        detail: z.string().min(1),
+      }),
+    )
+    .default([]),
+  suggestedTests: z.array(z.string()).default([]),
+  requiresHumanReview: z.literal(true),
+});
+
 /** @typedef {z.infer<typeof devLowRiskWritePlanSchema>} DevLowRiskWritePlan */
 
 export function parseDevSessionPlan(raw) {
@@ -43,6 +60,18 @@ export function parseDevSessionPlan(raw) {
 
 export function parseDevLowRiskWritePlan(raw) {
   const parsed = devLowRiskWritePlanSchema.safeParse(raw);
+  if (!parsed.success) {
+    return { ok: false, error: parsed.error.message };
+  }
+  return { ok: true, data: parsed.data };
+}
+
+export function parseDevDiffAudit(raw) {
+  const normalized =
+    raw && typeof raw === 'object'
+      ? { ...raw, requiresHumanReview: true }
+      : raw;
+  const parsed = devDiffAuditSchema.safeParse(normalized);
   if (!parsed.success) {
     return { ok: false, error: parsed.error.message };
   }

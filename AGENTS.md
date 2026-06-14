@@ -4,16 +4,17 @@
 
 ## Antes de modificar código
 
-0. **Arranque IA:** `npm run dev:session` → adjuntar `@reports/dev-agent-brief.md` + prompt del subagente primario.
-1. Leer `docs/PRODUCT_CANON.md` y `docs/product/PRODUCT_INVARIANTS.md`.
-2. Leer **`docs/product/EPIS2_DEV_SYSTEM.md`** — nomenclatura SDEPIS2 (ola · hilo · tramo · microfase · entrega).
-3. Leer `docs/product/EPIS2_TABLERO.md` — estado vivo y siguiente paso.
-4. Leer `docs/product/EPIS2_WAVE_EXECUTION_CANON.md` — olas, tramos, gates (no cola lineal automática).
-5. Ejecutar `npm run quality:microphase-next` — microfase READY o hilo activo del tablero.
-6. Leer `docs/quality/MICROPHASE_PROGRAM.md` y `docs/quality/microphase-ledger.json`.
-7. Leer `docs/legacy/EPIS_POSTMORTEM.md` si tocas integración o migración.
-8. **Declarar alcance** (nivel SDEPIS2 + ID MF-* / Hilo * + archivos permitidos).
-9. No importar desde `../Epis` sin entrada en `legacy-import-manifest.json`.
+0. **Contexto mínimo:** leer `docs/AGENT_CONTEXT_MINIMAL.md` · loop `npm run quality:fast` en iteración.
+1. **Arranque IA:** `npm run dev:session` → adjuntar `@reports/dev-agent-brief.md` + prompt del subagente primario.
+2. Leer `docs/PRODUCT_CANON.md` y `docs/product/PRODUCT_INVARIANTS.md`.
+3. Leer **`docs/product/EPIS2_DEV_SYSTEM.md`** — nomenclatura SDEPIS2 (ola · hilo · tramo · microfase · entrega).
+4. Leer `docs/product/EPIS2_TABLERO.md` — estado vivo y siguiente paso.
+5. Leer `docs/product/EPIS2_WAVE_EXECUTION_CANON.md` — olas, tramos, gates (no cola lineal automática).
+6. Ejecutar `npm run quality:microphase-next` — microfase READY o hilo activo del tablero.
+7. Leer `docs/quality/MICROPHASE_PROGRAM.md` y `docs/quality/microphase-ledger.json`.
+8. Leer `docs/legacy/EPIS_POSTMORTEM.md` si tocas integración o migración.
+9. **Declarar alcance** (nivel SDEPIS2 + ID MF-* / Hilo * + archivos permitidos).
+10. No importar desde `../Epis` sin entrada en `legacy-import-manifest.json`.
 
 Guía IA: `docs/product/EPIS2_AI_ASSISTED_DEV.md` · cierre `npm run dev:agent:close`.  
 Velocidad dev: `docs/dev/EPIS2_DEV_VELOCITY.md` · `npm run dev:velocity` · gates `npm run dev:velocity:gates`.  
