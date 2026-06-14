@@ -29,13 +29,12 @@ vi.mock('../api/client.js', () => ({
   },
 }));
 
+const { fetchAiStatus } = vi.hoisted(() => ({
+  fetchAiStatus: vi.fn(),
+}));
+
 vi.mock('../api/aiApi.js', () => ({
-  fetchAiStatus: vi.fn().mockResolvedValue({
-    available: true,
-    ollama: 'up',
-    localAi: 'up',
-    message: '',
-  }),
+  fetchAiStatus,
   requestDraftAssist: vi.fn(),
 }));
 
@@ -110,6 +109,13 @@ afterEach(() => {
 });
 
 beforeEach(() => {
+  sessionStorage.clear();
+  fetchAiStatus.mockResolvedValue({
+    available: false,
+    ollama: 'down',
+    localAi: 'down',
+    message: '',
+  });
   fetchPatientLongitudinal.mockResolvedValue({
     patientId: '00000000-0000-4000-8000-000000000099',
     readOnly: true,
@@ -147,16 +153,17 @@ function renderForm(blueprint = evolutionBlueprint) {
 describe('GeneratedClinicalFormPage (sin IA)', () => {
   it('renderiza evolución y valida borrador local sin fetch de IA', async () => {
     const user = userEvent.setup();
+    const { requestDraftAssist } = await import('../api/aiApi.js');
     renderForm();
 
     expect(screen.getByTestId('epis2-form-evolution_note')).toBeInTheDocument();
-    await user.click(screen.getByTestId('epis2-form-more-actions'));
-    expect(screen.getByTestId('epis2-ai-suggest')).toBeInTheDocument();
-    await user.keyboard('{Escape}');
-
+    await user.click(screen.getByTestId('epis2-scrollspy-soap'));
     await user.click(screen.getByTestId('epis2-form-save'));
 
-    expect(screen.getByTestId('epis2-form-status')).toHaveTextContent(/obligatorios|válido/i);
+    await waitFor(() => {
+      expect(screen.getByTestId('epis2-form-status')).toHaveTextContent(/obligatorios/i);
+    });
+    expect(requestDraftAssist).not.toHaveBeenCalled();
   });
 
   it('acepta evolución completa y muestra mensaje de éxito local o remoto', async () => {
@@ -181,7 +188,7 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
     renderForm();
 
     expect(screen.getByTestId('epis2-clinical-two-pane')).toBeInTheDocument();
-    expect(screen.queryByTestId('epis2-clinical-context-pane')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('epis2-context-timeline-list')).not.toBeInTheDocument();
 
     await user.click(screen.getByTestId('epis2-clinical-context-toggle'));
 
@@ -192,6 +199,12 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
   });
 
   it('muestra chips SOAP cuando IA está disponible y faltan campos', async () => {
+    fetchAiStatus.mockResolvedValue({
+      available: true,
+      ollama: 'up',
+      localAi: 'up',
+      message: '',
+    });
     renderForm();
 
     await waitFor(() => {
