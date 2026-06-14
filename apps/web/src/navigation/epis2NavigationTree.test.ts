@@ -22,10 +22,22 @@ describe('epis2NavigationTree', () => {
     }
   });
 
-  it('registra home canónica en workspace command', () => {
+  it('registra home primaria en censo y /comando como compat', () => {
+    const census = EPIS2_NAVIGATION_TREE.find(
+      (n) => n.route === '/espacio/buscar-paciente' && n.blueprintId === 'patient_search',
+    );
+    expect(census?.navigationTier).toBe('primary');
+
     const command = EPIS2_NAVIGATION_TREE_BY_ROUTE.get('/comando');
-    expect(command?.workspace).toBe('command');
-    expect(command?.status).toBe('complete');
+    expect(command?.navigationTier).toBe('compat');
+  });
+
+  it('marca todos los dashboard tabs como secundarios', () => {
+    const dashboardNodes = EPIS2_NAVIGATION_TREE.filter((n) => n.kind === 'dashboard_tab');
+    expect(dashboardNodes.length).toBeGreaterThan(0);
+    for (const node of dashboardNodes) {
+      expect(node.navigationTier).toBe('secondary');
+    }
   });
 
   it('asigna cada workspace al menos una superficie habilitada o parcial', () => {

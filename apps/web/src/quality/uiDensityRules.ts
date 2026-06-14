@@ -1,6 +1,17 @@
 /** Superficies clínicas MD3 (MF-UI) — ver MF-RAD-M3 para Form/Grid/Document/Workspace. */
 
+import { EPIS2_CLINICAL_HOME_ROUTE } from '../navigation/epis2NavigationTree.js';
+
 export type EpisScreenKind = 'command' | 'workspace' | 'form' | 'document';
+
+export type EpisNavTier = 'primary' | 'secondary' | 'compat';
+
+/** Rutas por tier de navegación clínica (MF-FF-04). */
+export const EPIS_NAV_TIER_BY_ROUTE_PREFIX: readonly { prefix: string; tier: EpisNavTier }[] = [
+  { prefix: EPIS2_CLINICAL_HOME_ROUTE, tier: 'primary' },
+  { prefix: '/comando', tier: 'compat' },
+  { prefix: '/epis2/dashboard', tier: 'secondary' },
+];
 
 export const EPIS_SCREEN_KINDS: readonly EpisScreenKind[] = [
   'command',
@@ -72,7 +83,12 @@ export const EPIS_SCREEN_REGISTRY: Record<
       | 'EpisDashboardMd3Shell';
   }
 > = {
-  command: {
+  clinicalCensusHome: {
+    kind: 'command',
+    route: EPIS2_CLINICAL_HOME_ROUTE,
+    scaffold: 'EpisClinicalWorkspaceShell',
+  },
+  commandCompat: {
     kind: 'command',
     route: '/comando',
     scaffold: 'EpisAppScaffold',
@@ -140,8 +156,21 @@ export function isGlobalClinicalAction(action: string): action is EpisGlobalClin
   return (EPIS_GLOBAL_CLINICAL_ACTIONS as readonly string[]).includes(action);
 }
 
+export function navigationTierForPathname(pathname: string): EpisNavTier {
+  for (const { prefix, tier } of EPIS_NAV_TIER_BY_ROUTE_PREFIX) {
+    if (pathname === prefix || pathname.startsWith(`${prefix}/`) || pathname.startsWith(prefix)) {
+      return tier;
+    }
+  }
+  return 'primary';
+}
+
+export function isSecondaryClinicalRoute(pathname: string): boolean {
+  return navigationTierForPathname(pathname) === 'secondary';
+}
+
 export function screenKindForRoute(pathname: string): EpisScreenKind {
-  if (pathname === '/comando' || pathname.startsWith('/comando')) return 'command';
+  if (pathname.startsWith(EPIS2_CLINICAL_HOME_ROUTE) || pathname === '/comando') return 'command';
   if (pathname.includes('/borrador/')) return 'document';
   if (
     pathname.includes('/evolucion') ||

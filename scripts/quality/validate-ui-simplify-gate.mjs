@@ -17,6 +17,7 @@ const subGates = [
   'validate-drag-drop-safety-gate.mjs',
   'validate-copy-paste-safety-gate.mjs',
   'validate-ui-density-gate.mjs',
+  'validate-dashboard-secondary-gate.mjs',
 ];
 
 for (const script of subGates) {

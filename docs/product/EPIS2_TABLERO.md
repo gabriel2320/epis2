@@ -4,7 +4,7 @@
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan unificado:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.5 · **Orquestación:** [`epis2-orquestacion-paralela-2026-06-14.md`](../../reports/epis2-orquestacion-paralela-2026-06-14.md) §22–§23
 
-> **PROG-STRENGTHEN** ✓ **23/23 cerrado** · **siguiente PROG-FICHA-FIRST** MF-FF-00 READY
+> **PROG-STRENGTHEN** ✓ **23/23 cerrado** · **PROG-FICHA-FIRST** wave 2 ✓ · **MF-FF-07** READY (wave 3)
 
 ---
 
@@ -48,13 +48,19 @@ Evidencia: [`epis2-mf-rapid-close-2026.md`](../../reports/epis2-mf-rapid-close-2
 
 Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/epis2-prog-ficha-first-wave1-close-2026-06-14.md)
 
-### Ola 2 — Canon (activa)
+### Ola 2 — Canon ✓
 
 | MF | Estado | Entrega |
 |----|--------|---------|
 | **MF-FF-00** | ✓ DONE | Invariante #6 · Golden journey · MODES_LAYER |
-| MF-FF-04 | **READY** | Dashboard secundario |
-| MF-FF-05 | BLOCKED | VISION_EPIS2 + agente |
+| **MF-FF-04** | ✓ DONE | Dashboard secundario · [`epis2-mf-ff-04-dashboard-secondary.md`](../../reports/epis2-mf-ff-04-dashboard-secondary.md) |
+| **MF-FF-05** | ✓ DONE | [`VISION_EPIS2.md`](./VISION_EPIS2.md) · reglas agente |
+
+### Ola 3 — Experiencia clínica (activa)
+
+| MF | Estado | Entrega |
+|----|--------|---------|
+| **MF-FF-07** | **READY** | Acciones probables en toda ficha |
 
 **Siguiente:** `npm run quality:ficha-first-next`
 

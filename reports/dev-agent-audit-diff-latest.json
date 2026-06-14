@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-14T16:50:03.174Z",
+  "generatedAt": "2026-06-14T20:14:45.066Z",
   "model": "qwen2.5-coder:7b",
   "route": {
     "baseUrl": "http://127.0.0.1:11434",
@@ -33,12 +33,18 @@
     "ollamaUp": true
   },
   "stagedOnly": false,
-  "diffChars": 6873,
+  "diffChars": 23036,
   "truncated": false,
   "audit": {
     "verdict": "APROBAR",
     "summary": "El diff no contiene riesgos significativos que requieran acción inmediata.",
-    "findings": [],
+    "findings": [
+      {
+        "severity": "P2",
+        "category": "other",
+        "detail": "Se agregaron nuevos tipos de navegación y categorías, pero no se detectaron problemas evidentes."
+      }
+    ],
     "suggestedTests": [],
     "requiresHumanReview": true
   }

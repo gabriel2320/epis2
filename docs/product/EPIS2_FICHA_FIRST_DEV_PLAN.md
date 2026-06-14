@@ -51,8 +51,8 @@ Evidencia: [`epis2-mf-ff-01-03-ficha-first.md`](../../reports/epis2-mf-ff-01-03-
 | MF | Entrega | Gate |
 |----|---------|------|
 | **MF-FF-00** | Enmienda invariante #6 · `GOLDEN_CLINICAL_JOURNEY` · `EPIS2_MODES_LAYER` censo-first | ✓ DONE |
-| **MF-FF-04** | Dashboard → secundario (nav sin competir con ficha) | `quality:ui-simplify-gate` |
-| **MF-FF-05** | `VISION_EPIS2.md` + reglas agente | `quality:fast` |
+| **MF-FF-04** | Dashboard → secundario (nav sin competir con ficha) | ✓ DONE |
+| **MF-FF-05** | `VISION_EPIS2.md` + reglas agente | ✓ DONE |
 
 ### Ola 3 — Experiencia clínica determinística
 

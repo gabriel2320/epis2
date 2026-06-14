@@ -15,8 +15,8 @@
   },
   "waves": [
     { "id": "wave-1", "name": "Activación", "state": "DONE", "mfs": ["MF-FF-01", "MF-FF-02", "MF-FF-03", "MF-FF-06"] },
-    { "id": "wave-2", "name": "Canon y navegación", "state": "ACTIVE", "mfs": ["MF-FF-00", "MF-FF-04", "MF-FF-05"] },
-    { "id": "wave-3", "name": "Experiencia clínica determinística", "state": "BLOCKED", "mfs": ["MF-FF-07", "MF-FF-08", "MF-FF-09", "MF-FF-10"] },
+    { "id": "wave-2", "name": "Canon y navegación", "state": "DONE", "closedAt": "2026-06-15", "mfs": ["MF-FF-00", "MF-FF-04", "MF-FF-05"] },
+    { "id": "wave-3", "name": "Experiencia clínica determinística", "state": "ACTIVE", "mfs": ["MF-FF-07", "MF-FF-08", "MF-FF-09", "MF-FF-10"] },
     { "id": "wave-4", "name": "Frontera IA", "state": "BLOCKED", "mfs": ["MF-FF-11", "MF-FF-12", "MF-FF-13"] },
     { "id": "wave-5", "name": "Integración y velocidad", "state": "BLOCKED", "mfs": ["MF-FF-14", "MF-FF-15"] }
   ],
@@ -106,7 +106,8 @@
       "id": "MF-FF-04",
       "wave": "wave-2",
       "name": "Dashboard secundario en nav",
-      "state": "READY",
+      "state": "DONE",
+      "completedAt": "2026-06-15",
       "dependsOn": ["MF-FF-00"],
       "gate": "quality:ui-simplify-gate",
       "allowedPaths": [
@@ -120,7 +121,8 @@
       "id": "MF-FF-05",
       "wave": "wave-2",
       "name": "VISION_EPIS2 + reglas agente",
-      "state": "BLOCKED",
+      "state": "DONE",
+      "completedAt": "2026-06-15",
       "dependsOn": ["MF-FF-00"],
       "gate": "quality:fast",
       "allowedPaths": [
@@ -135,7 +137,7 @@
       "id": "MF-FF-07",
       "wave": "wave-3",
       "name": "Acciones probables en toda ficha",
-      "state": "BLOCKED",
+      "state": "READY",
       "dependsOn": ["MF-FF-06", "MF-FF-04"],
       "gate": "quality:clinical-productivity-gate",
       "allowedPaths": ["apps/web/src/pages/PatientWorkspacePage.tsx", "apps/web/src/pages/DualChartPatientPage.tsx"],

@@ -23,7 +23,7 @@ Patrón canónico Tramos F–J. Una sesión = un tramo o microfase MF-TRAMO-*.
 
 ## Reglas
 
-- Home = **Centro de Comando**; tablero = modo opcional (`?tab=…`).
+- Home = **censo clínico** (`/espacio/buscar-paciente`); tablero = nav secundaria (`/epis2/dashboard`).
 - IDC **Done** previo (ej. 165): mantener Done + panel scaffold; closure gate acepta Done + MF tag.
 - No commit/push salvo orden explícita.
 - Cierre obligatorio:

@@ -18,6 +18,9 @@ const required = [
   ['closure ff-01-03', 'reports/epis2-mf-ff-01-03-ficha-first.md'],
   ['closure ff-06', 'reports/epis2-mf-ff-06-clinical-shell-forms.md'],
   ['closure ff-00', 'reports/epis2-mf-ff-00-canon-censo-first.md'],
+  ['closure ff-04', 'reports/epis2-mf-ff-04-dashboard-secondary.md'],
+  ['closure ff-05', 'reports/epis2-mf-ff-05-vision-agent.md'],
+  ['vision', 'docs/product/VISION_EPIS2.md'],
 ];
 
 for (const [label, rel] of required) {
@@ -43,6 +46,18 @@ const ledger = JSON.parse(readFileSync(join(root, 'docs/quality/ficha-first-ledg
 const ff00 = ledger.phases?.find((p) => p.id === 'MF-FF-00');
 if (!ff00 || ff00.state !== 'DONE') {
   errors.push('ficha-first-ledger: MF-FF-00 debe estar DONE');
+}
+const ff04 = ledger.phases?.find((p) => p.id === 'MF-FF-04');
+if (!ff04 || ff04.state !== 'DONE') {
+  errors.push('ficha-first-ledger: MF-FF-04 debe estar DONE');
+}
+const ff05 = ledger.phases?.find((p) => p.id === 'MF-FF-05');
+if (!ff05 || ff05.state !== 'DONE') {
+  errors.push('ficha-first-ledger: MF-FF-05 debe estar DONE');
+}
+const wave2 = ledger.waves?.find((w) => w.id === 'wave-2');
+if (!wave2 || wave2.state !== 'DONE') {
+  errors.push('ficha-first-ledger: wave-2 debe estar DONE');
 }
 
 const router = readFileSync(join(root, 'apps/web/src/routes/router.tsx'), 'utf8');
@@ -94,4 +109,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('ficha-first-gate OK — MF-FF-00…06');
+console.log('ficha-first-gate OK — MF-FF-00…06 · wave-2 (MF-FF-04/05)');

@@ -10,6 +10,12 @@ export type EpisNavigationSurfaceStatus =
   | 'disabled'
   | 'deferred';
 
+/** Prioridad en nav clínica — MF-FF-04 dashboard secundario. */
+export type EpisNavigationTier = 'primary' | 'secondary' | 'compat';
+
+/** Home clínica canónica (censo-first). */
+export const EPIS2_CLINICAL_HOME_ROUTE = '/espacio/buscar-paciente' as const;
+
 export type EpisNavigationSurfaceKind =
   | 'auth'
   | 'command_home'
@@ -31,6 +37,8 @@ export type EpisNavigationSurface = {
   workspace: EpisClinicalWorkspaceId | 'global' | 'reception_deferred';
   md3Level: EpisClinicalShellLevel;
   status: EpisNavigationSurfaceStatus;
+  /** MF-FF-04 — primary = censo/ficha; secondary = dashboard tabs; compat = redirect. */
+  navigationTier?: EpisNavigationTier;
   blueprintId?: string;
   patientChartTab?: PatientChartTabId;
   idcRefs?: readonly number[];
@@ -38,7 +46,7 @@ export type EpisNavigationSurface = {
   notes?: string;
 };
 
-/** Tabs del modo tablero — mapeo a workspaces. */
+/** Tabs del modo tablero — secundarios; nunca home (MF-FF-04). */
 export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
   {
     id: 'dashboard-work',
@@ -48,6 +56,7 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'ambulatory',
     md3Level: 0,
     status: 'complete',
+    navigationTier: 'secondary',
     idcRefs: [3],
     ola: '2',
   },
@@ -59,6 +68,7 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'ambulatory',
     md3Level: 1,
     status: 'partial',
+    navigationTier: 'secondary',
     idcRefs: [21],
     ola: '1',
   },
@@ -70,6 +80,7 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'inpatient_ward',
     md3Level: 0,
     status: 'partial',
+    navigationTier: 'secondary',
     idcRefs: [81],
     ola: '8',
   },
@@ -81,6 +92,7 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'intermediate_care',
     md3Level: 0,
     status: 'partial',
+    navigationTier: 'secondary',
     idcRefs: [111],
     ola: '11',
   },
@@ -92,6 +104,7 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'pharmacy_clinical',
     md3Level: 0,
     status: 'partial',
+    navigationTier: 'secondary',
     idcRefs: [54, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170],
     ola: '16',
     notes: 'MF-TRAMO-J-002 farmacia clínica 161–170',
@@ -104,6 +117,7 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'quality_iaas',
     md3Level: 2,
     status: 'partial',
+    navigationTier: 'secondary',
     idcRefs: [
       71, 72, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 171, 172, 173, 174, 175, 176, 177,
       178, 179, 180,
@@ -119,9 +133,10 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'reception',
     md3Level: 0,
     status: 'complete',
+    navigationTier: 'secondary',
     idcRefs: [2, 3, 4, 5, 7, 8, 9, 10],
     ola: '4',
-    notes: 'MF-TRAMO-B-002 — never home',
+    notes: 'MF-TRAMO-B-002 — tab secundario; never home',
   },
   {
     id: 'dashboard-emergency',
@@ -131,6 +146,7 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'emergency',
     md3Level: 0,
     status: 'partial',
+    navigationTier: 'secondary',
     idcRefs: [101, 102, 103, 105],
     ola: '10',
     notes: 'MF-TRAMO-C-002 workspace emergency',
@@ -143,6 +159,7 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'icu',
     md3Level: 0,
     status: 'partial',
+    navigationTier: 'secondary',
     idcRefs: [
       41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140,
     ],
@@ -157,6 +174,7 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'or',
     md3Level: 0,
     status: 'partial',
+    navigationTier: 'secondary',
     idcRefs: [151, 152, 153, 154, 155, 156, 157, 158, 159, 160],
     ola: '15',
     notes: 'MF-TRAMO-E-002 workspace or',
@@ -169,6 +187,7 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'ambulatory',
     md3Level: 0,
     status: 'partial',
+    navigationTier: 'secondary',
     idcRefs: [121, 122, 123, 124, 125, 126, 127, 128, 129, 130],
     ola: '12',
     notes: 'MF-TRAMO-F-002 tablero APS',
@@ -181,6 +200,7 @@ export const EPIS2_DASHBOARD_TAB_SURFACES: readonly EpisNavigationSurface[] = [
     workspace: 'ambulatory',
     md3Level: 0,
     status: 'partial',
+    navigationTier: 'secondary',
     idcRefs: [181, 182, 183, 184, 185, 186, 187, 188, 189, 190],
     ola: '18',
     notes: 'MF-TRAMO-I-002 tablero especialidades',
@@ -196,6 +216,7 @@ const BLUEPRINT_IDC_MAP: Record<
     tab?: PatientChartTabId;
     ola?: string;
     notes?: string;
+    navigationTier?: EpisNavigationTier;
   }
 > = {
   patient_search: {
@@ -204,6 +225,8 @@ const BLUEPRINT_IDC_MAP: Record<
     workspace: 'ambulatory',
     tab: 'summary',
     ola: '0',
+    navigationTier: 'primary',
+    notes: 'Home censo clínico ficha-first (MF-FF-04)',
   },
   patient_summary: {
     idc: [21, 26],
@@ -330,6 +353,8 @@ function blueprintSurfaces(): EpisNavigationSurface[] {
       ...(meta.tab ? { patientChartTab: meta.tab } : {}),
       idcRefs: meta.idc,
       ...(meta.ola ? { ola: meta.ola } : {}),
+      ...(meta.notes ? { notes: meta.notes } : {}),
+      ...(meta.navigationTier ? { navigationTier: meta.navigationTier } : {}),
     };
   });
 }
@@ -368,14 +393,15 @@ export const EPIS2_NAVIGATION_TREE: readonly EpisNavigationSurface[] = [
     ola: '0',
   },
   {
-    id: 'command-home',
-    labelEs: 'Centro de Comando',
+    id: 'command-home-compat',
+    labelEs: 'Centro de Comando (compat)',
     route: '/comando',
     kind: 'command_home',
     workspace: 'command',
     md3Level: 0,
     status: 'complete',
-    notes: 'Home canónica — nunca dashboard',
+    navigationTier: 'compat',
+    notes: 'Redirect → censo; no competir con ficha (MF-FF-04)',
   },
   ...EPIS2_DASHBOARD_TAB_SURFACES,
   {
@@ -457,6 +483,17 @@ export function getNavigationSurfacesForWorkspace(
   );
 }
 
+/** Superficies de nav secundaria (dashboard tabs) — MF-FF-04. */
+export function getSecondaryDashboardSurfaces(): EpisNavigationSurface[] {
+  return EPIS2_NAVIGATION_TREE.filter((node) => node.navigationTier === 'secondary');
+}
+
+export function getPrimaryClinicalHomeSurface(): EpisNavigationSurface | undefined {
+  return EPIS2_NAVIGATION_TREE.find(
+    (node) => node.route === EPIS2_CLINICAL_HOME_ROUTE && node.navigationTier === 'primary',
+  );
+}
+
 export function assertNavigationTreeInvariants(): string[] {
   const errors: string[] = [];
   const routes = new Set<string>();
@@ -482,6 +519,22 @@ export function assertNavigationTreeInvariants(): string[] {
     errors.push(
       `conteo blueprint: árbol=${treeBlueprintIds.size} registry=${EPIS2_FORM_BLUEPRINTS.length}`,
     );
+  }
+
+  const primaryHome = getPrimaryClinicalHomeSurface();
+  if (!primaryHome) {
+    errors.push(`falta home primaria en ${EPIS2_CLINICAL_HOME_ROUTE} (MF-FF-04)`);
+  }
+
+  const compatHome = EPIS2_NAVIGATION_TREE.find((n) => n.route === '/comando');
+  if (compatHome?.navigationTier !== 'compat') {
+    errors.push('/comando debe ser navigationTier compat (MF-FF-04)');
+  }
+
+  for (const node of EPIS2_NAVIGATION_TREE.filter((n) => n.kind === 'dashboard_tab')) {
+    if (node.navigationTier !== 'secondary') {
+      errors.push(`dashboard tab ${node.id} debe ser navigationTier secondary`);
+    }
   }
 
   return errors;
