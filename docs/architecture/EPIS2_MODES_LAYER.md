@@ -74,7 +74,8 @@ El árbol [`EPIS2_RECONCILED_NAVIGATION_TREE.md`](EPIS2_RECONCILED_NAVIGATION_TR
 
 ```text
 EPIS2 (navegación)
-├── /comando                          → modo command (HOME)
+├── /espacio/buscar-paciente          → home censo clínico + barra transversal
+├── /comando                          → redirect compat (→ censo)
 ├── /espacio/ficha?patientId=
 │   ├── (modern)                      → workspace ambulatory M3
 │   └── ?mode=classic                 → modo classic EMR MD3
@@ -84,7 +85,7 @@ EPIS2 (navegación)
     └── ?mode=dashboard               → modo dashboard MD3
 ```
 
-**No contradice** invariante #6–7: dashboard sigue siendo secundario; home = comando.
+**No contradice** invariante #6–7: dashboard sigue siendo secundario; **home = censo clínico** (`/espacio/buscar-paciente`).
 
 ---
 

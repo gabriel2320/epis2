@@ -24,15 +24,15 @@ Demostrar que EPIS2 es un producto command-first **demostrable por humanos**, no
 
 | # | Paso | Criterio de éxito |
 |---|------|-------------------|
-| 1 | Login | Sesión iniciada; redirección al Centro de Comando |
-| 2 | Centro de Comando | Power bar visible; una acción principal |
-| 3 | Buscar paciente sintético | Contexto de paciente fijado |
+| 1 | Login | Sesión iniciada; redirección al censo clínico (`/espacio/buscar-paciente`) |
+| 2 | Censo clínico | Barra de comando transversal visible; búsqueda / selección de paciente |
+| 3 | Contexto paciente | Paciente sintético fijado en workspace |
 | 4 | Comando de evolución | Intent resuelto; sin dashboard intermedio |
 | 5 | Página de evolución | Formulario desde blueprint único |
 | 6 | Guardar borrador | Estado `draft` o `editing`; no nota final |
 | 7 | Aprobación humana | Transición a `approved` solo por usuario autorizado |
 | 8 | Auditoría | Evento en `audit_events` / `approvals` |
-| 9 | Volver al Centro de Comando | Home restaurada; contexto coherente |
+| 9 | Volver al censo clínico | Home (`/espacio/buscar-paciente`) restaurada; contexto coherente |
 
 ---
 
@@ -40,14 +40,14 @@ Demostrar que EPIS2 es un producto command-first **demostrable por humanos**, no
 
 ```text
 Login
-  → Command Center
-  → buscar paciente sintético
+  → censo clínico (/espacio/buscar-paciente) + barra transversal
+  → buscar / seleccionar paciente sintético
   → comando de evolución
   → página de evolución
   → guardar borrador
   → aprobación humana
   → auditoría
-  → volver al Command Center
+  → volver al censo clínico (home)
 ```
 
 ---

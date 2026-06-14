@@ -52,8 +52,8 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 
 | MF | Estado | Entrega |
 |----|--------|---------|
-| **MF-FF-00** | **READY** | Invariante #6 · Golden journey · MODES_LAYER |
-| MF-FF-04 | BLOCKED | Dashboard secundario |
+| **MF-FF-00** | ✓ DONE | Invariante #6 · Golden journey · MODES_LAYER |
+| MF-FF-04 | **READY** | Dashboard secundario |
 | MF-FF-05 | BLOCKED | VISION_EPIS2 + agente |
 
 **Siguiente:** `npm run quality:ficha-first-next`

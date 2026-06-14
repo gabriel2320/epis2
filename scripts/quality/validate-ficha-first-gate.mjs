@@ -17,10 +17,32 @@ const required = [
   ['command dock', 'apps/web/src/components/chart/ChartEspacioCommandDock.tsx'],
   ['closure ff-01-03', 'reports/epis2-mf-ff-01-03-ficha-first.md'],
   ['closure ff-06', 'reports/epis2-mf-ff-06-clinical-shell-forms.md'],
+  ['closure ff-00', 'reports/epis2-mf-ff-00-canon-censo-first.md'],
 ];
 
 for (const [label, rel] of required) {
   if (!existsSync(join(root, rel))) errors.push(`Falta ${label}: ${rel}`);
+}
+
+const invariants = readFileSync(join(root, 'docs/product/PRODUCT_INVARIANTS.md'), 'utf8');
+if (!invariants.includes('/espacio/buscar-paciente')) {
+  errors.push('PRODUCT_INVARIANTS #6 debe referenciar censo /espacio/buscar-paciente');
+}
+
+const golden = readFileSync(join(root, 'docs/quality/GOLDEN_CLINICAL_JOURNEY.md'), 'utf8');
+if (!/paso 2|^\| 2 \|/m.test(golden) || !golden.includes('barra')) {
+  errors.push('GOLDEN_CLINICAL_JOURNEY paso 2 debe describir censo + barra transversal');
+}
+
+const adr002 = readFileSync(join(root, 'docs/adr/ADR-002-dual-chart-modes.md'), 'utf8');
+if (!adr002.includes('[x] Enmienda invariante #6')) {
+  errors.push('ADR-002 debe marcar enmienda invariante #6 aprobada (MF-FF-00)');
+}
+
+const ledger = JSON.parse(readFileSync(join(root, 'docs/quality/ficha-first-ledger.json'), 'utf8'));
+const ff00 = ledger.phases?.find((p) => p.id === 'MF-FF-00');
+if (!ff00 || ff00.state !== 'DONE') {
+  errors.push('ficha-first-ledger: MF-FF-00 debe estar DONE');
 }
 
 const router = readFileSync(join(root, 'apps/web/src/routes/router.tsx'), 'utf8');
@@ -72,4 +94,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('ficha-first-gate OK — MF-FF-01…06');
+console.log('ficha-first-gate OK — MF-FF-00…06');

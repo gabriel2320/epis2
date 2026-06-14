@@ -83,7 +83,8 @@
       "id": "MF-FF-00",
       "wave": "wave-2",
       "name": "Conciliar canon censo-first",
-      "state": "READY",
+      "state": "DONE",
+      "completedAt": "2026-06-15",
       "dependsOn": ["MF-FF-06"],
       "gate": "quality:ficha-first-gate",
       "allowedPaths": [
@@ -105,7 +106,7 @@
       "id": "MF-FF-04",
       "wave": "wave-2",
       "name": "Dashboard secundario en nav",
-      "state": "BLOCKED",
+      "state": "READY",
       "dependsOn": ["MF-FF-00"],
       "gate": "quality:ui-simplify-gate",
       "allowedPaths": [

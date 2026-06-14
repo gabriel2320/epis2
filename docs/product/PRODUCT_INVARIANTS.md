@@ -1,6 +1,6 @@
 # EPIS2 — Invariantes de producto
 
-**Versión:** 1.0 · **Vinculante:** permanente en `main`
+**Versión:** 1.1 · **Vinculante:** permanente en `main` · **MF-FF-00** conciliado 2026-06-15
 
 Violación = bug de arquitectura. Validador: `main-product-invariants.mjs`.
 

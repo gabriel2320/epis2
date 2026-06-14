@@ -13,12 +13,13 @@
 ## Estado del tablero (fuente canónica)
 
 - **Cerrado:** **PROG-STRENGTHEN** ✓ 23/23 · **MF-IC-01…04** ✓
-- **Siguiente (READY):** **MF-FF-00** — Conciliar canon censo-first (PROG-FICHA-FIRST)
+- **Siguiente (READY):** **MF-FF-04** — Dashboard secundario en nav
+- **Gate:** `npm run quality:ui-simplify-gate`
 
 ## Objetivo sugerido
 
-- **MF sugerida (READY):** `MF-FF-00` — Conciliar canon censo-first
-- **Gate:** `npm run quality:ficha-first-gate`
+- **MF sugerida (READY):** `MF-FF-04` — Dashboard secundario en nav
+- **Gate:** `npm run quality:ui-simplify-gate`
 
 ## Subagente primario
 

@@ -40,7 +40,7 @@ Un objetivo · pocos archivos · diff mínimo.
 | Programa | Estado | Comando estado |
 |----------|--------|----------------|
 | **PROG-RAPID** | ✓ cerrado | `npm run quality:rapid-gate` |
-| **PROG-FICHA-FIRST** | ✓ wave1 cerrado · wave2 MF-FF-00 READY | `quality:ficha-first-gate` |
+| **PROG-FICHA-FIRST** | ✓ wave1 cerrado · wave2 **MF-FF-00 ✓** · **MF-FF-04** READY | `quality:ficha-first-gate` |
 | **PROG-STRENGTHEN** | ✓ **23/23 cerrado** · MF-IC-01…04 ✓ | `npm run quality:strengthen-close-gate` |
 | **PROG-CDS-UX** | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
 

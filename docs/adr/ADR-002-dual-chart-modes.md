@@ -135,7 +135,7 @@ Ver [`EPIS2_DUAL_CHART_DEV_PLAN.md`](../product/EPIS2_DUAL_CHART_DEV_PLAN.md) ·
 
 ## Aprobación pendiente
 
-- [ ] Enmienda invariante #6 (fase 3+) — home delgado vs ficha-first
+- [x] Enmienda invariante #6 (fase 3+) — home censo-first · **MF-FF-00** 2026-06-15
 - [ ] Signoff clínico modo papel (7 secciones)
 - [ ] `architecture:validate` — allowlist `components/chart/`
 
