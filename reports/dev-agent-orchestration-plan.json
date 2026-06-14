@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-15T20:00:00.000Z",
-  "version": "10.1",
+  "generatedAt": "2026-06-15T21:00:00.000Z",
+  "version": "11.0",
   "mode": "parallel-wave",
   "wave": 11,
   "waveMode": "fast-dev",
@@ -933,6 +933,109 @@
       }
     ]
   },
+  "wave11": {
+    "state": "BLOCKED",
+    "activationRequired": true,
+    "tracks": 3,
+    "outcome": "BLOCKED — activación humana requerida · MF-IC-01 Perfil export MINSAL · PROG-INTEROP-CHILE",
+    "parallelTracks": [
+      {
+        "id": "wave11-track-1-clinical",
+        "subagent": "ollama-clinical",
+        "microphase": "MF-IC-01",
+        "state": "BLOCKED",
+        "subprogram": "PROG-INTEROP-CHILE",
+        "dependsOn": ["MF-IM-06", "MF-CU-04"],
+        "objective": "Perfil export MINSAL — Patient/Encounter/DocumentReference desde demo; tests round-trip fhir-export Chile; alinear EPIS2_CHILE_CLINICAL_MODEL.md",
+        "allowedPaths": [
+          "packages/fhir-export/**",
+          "packages/clinical-domain/src/chile/**",
+          "docs/product/EPIS2_CHILE_CLINICAL_MODEL.md"
+        ],
+        "forbiddenPaths": [
+          "apps/web/**",
+          "apps/api/src/routes/cds/**",
+          "packages/contracts/src/cds*.ts",
+          "services/local-ai/**",
+          "e2e/**",
+          "reports/**",
+          "docs/**",
+          "database/migrations/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run test packages/fhir-export",
+          "mfClose": "npm run db:validate"
+        },
+        "closureReport": "reports/epis2-mf-ic-01-minsal-export.md",
+        "prompt": "reports/dev-agent-prompt-ollama-clinical.md",
+        "unblocks": ["MF-IC-02"]
+      },
+      {
+        "id": "wave11-track-2-gates",
+        "subagent": "gate-runner",
+        "microphase": "FAST-GATES-WORKING-TREE",
+        "state": "BLOCKED",
+        "objective": "dev:rapid + fhir-export tests + db:validate — MF-IC-01 closure (post activación humana)",
+        "allowedPaths": [
+          "reports/dev-agent-audit-diff-latest.json"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "validation": [
+            "npm run quality:fast",
+            "npm run quality:ficha-first-gate",
+            "npm run test packages/fhir-export",
+            "npm run db:validate"
+          ],
+          "prePr": [
+            "npm run check",
+            "npm run test",
+            "npm run db:validate"
+          ]
+        },
+        "startWhen": "parallel-after-human-activation",
+        "prompt": "reports/dev-agent-prompt-gate-runner.md"
+      },
+      {
+        "id": "wave11-track-3-writer",
+        "subagent": "ollama-dev-writer",
+        "microphase": "MF-RAPID-03-L0",
+        "state": "IN_PROGRESS",
+        "objective": "Documentación Ola 11 — sync brief, plan JSON, AGENT_CONTEXT, TABLERO, sección §21",
+        "allowedPaths": [
+          "reports/**",
+          "docs/AGENT_CONTEXT_MINIMAL.md",
+          "docs/product/EPIS2_TABLERO.md"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**",
+          "database/migrations/**"
+        ],
+        "deliverables": [
+          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/dev-agent-orchestration-plan.json",
+          "reports/dev-agent-brief.md",
+          "docs/AGENT_CONTEXT_MINIMAL.md",
+          "docs/product/EPIS2_TABLERO.md"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run dev:rapid -- --skip-audit"
+        },
+        "prompt": "reports/dev-agent-prompt-ollama-dev-writer.md"
+      }
+    ]
+  },
   "parallelTracks": [
     {
       "id": "track-1-clinical",
@@ -1078,7 +1181,7 @@
       "docs/product/EPIS2_CHILE_CLINICAL_MODEL.md"
     ],
     "closureReport": "reports/epis2-mf-ic-01-minsal-export.md",
-    "orchestrationReportSection": "reports/epis2-orquestacion-paralela-2026-06-14.md#21-próxima-ola--mf-ic-01-minsal-export-blocked"
+    "orchestrationReportSection": "reports/epis2-orquestacion-paralela-2026-06-14.md#21-ola-11--mf-ic-01-perfil-export-minsal"
   },
   "nextSession": {
     "microphase": "MF-IC-01",
