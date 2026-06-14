@@ -56,3 +56,13 @@ export {
   type DocumentReferenceOptions,
 } from './mappers.js';
 export { assertExportClean, type ExportValidationResult } from './validateExport.js';
+export {
+  buildMinsalExportBundle,
+  toMinsalFhirDocumentReference,
+  toMinsalFhirEncounter,
+  toMinsalFhirPatient,
+  validateMinsalDocumentReferenceResource,
+  validateMinsalEncounterResource,
+  validateMinsalPatientResource,
+  type MinsalPatientSource,
+} from './minsalExport.js';

@@ -467,7 +467,8 @@
       "subprogram": "PROG-INTEROP-CHILE",
       "phase": 1,
       "dependsOn": ["MF-IM-06"],
-      "state": "BLOCKED",
+      "state": "DONE",
+      "completedAt": "2026-06-15",
       "gate": null,
       "evidenceRequired": [
         "Tests fhir-export Chile MINSAL",

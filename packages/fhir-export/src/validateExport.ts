@@ -1,5 +1,10 @@
 import { findUiOnlyKeys } from './uiForbidden.js';
 import {
+  validateMinsalDocumentReferenceResource,
+  validateMinsalEncounterResource,
+  validateMinsalPatientResource,
+} from './minsalExport.js';
+import {
   validateDocumentReferenceResource,
   validateEncounterResource,
   validatePatientResource,
@@ -20,16 +25,22 @@ export function assertExportClean(resource: unknown): ExportValidationResult {
   const r = resource as { resourceType?: string };
   switch (r.resourceType) {
     case 'Patient': {
+      const minsal = validateMinsalPatientResource(resource);
+      if (minsal.ok) break;
       const v = validatePatientResource(resource);
       if (!v.ok) return { ok: false, profileErrors: v.errors };
       break;
     }
     case 'Encounter': {
+      const minsal = validateMinsalEncounterResource(resource);
+      if (minsal.ok) break;
       const v = validateEncounterResource(resource);
       if (!v.ok) return { ok: false, profileErrors: v.errors };
       break;
     }
     case 'DocumentReference': {
+      const minsal = validateMinsalDocumentReferenceResource(resource);
+      if (minsal.ok) break;
       const v = validateDocumentReferenceResource(resource);
       if (!v.ok) return { ok: false, profileErrors: v.errors };
       break;

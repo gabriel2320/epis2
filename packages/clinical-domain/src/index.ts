@@ -29,6 +29,16 @@ export {
 } from './draftStates.js';
 export { CHILE_RUT_IDENTIFIER_SYSTEM } from './chile/constants.js';
 export {
+  EPIS2_MINSAL_FHIR_BASE,
+  MINSAL_IDENTIFIER_TYPE_SYSTEM,
+  MINSAL_NID_IG_BASE,
+  MINSAL_PROFILES,
+  buildMinsalIdentifierCoding,
+  mapPatientIdentifierToFhir,
+  type MinsalIdentifierCoding,
+  type MinsalPatientIdentifierFhir,
+} from './chile/minsalProfiles.js';
+export {
   CHILE_REGISTRY_META_ALLOWLIST,
   CHILE_RUT_REGISTRY_META_KEYS,
   CHILE_SNRE_REGISTRY_META_KEYS,
