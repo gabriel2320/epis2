@@ -4,7 +4,7 @@
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:** [`epis2-plan-conciliacion-triada-2026-06-14.md`](../../reports/epis2-plan-conciliacion-triada-2026-06-14.md) · **Correcciones:** [`epis2-plan-correcciones-prioritarias-2026-06-14.md`](../../reports/epis2-plan-correcciones-prioritarias-2026-06-14.md) · **Tríada:** [`EPIS2_TRIADA_REPOS.md`](./EPIS2_TRIADA_REPOS.md)
 
-> **Signoff experiencia core (2026-06-13):** tres frentes A/B/C cerrados (36/36). **PROG-DI** CLOSED (`f56b7d2`). **Siguiente:** push origin → F3 Evolab · **MF-SH-02** tras push.
+> **Signoff experiencia core (2026-06-13):** tres frentes A/B/C cerrados (36/36). **PROG-DI** CLOSED. **F3 Evolab** ✓. **Siguiente:** F4 MedRepo · **MF-SH-02**.
 
 ---
 
@@ -13,9 +13,9 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:
 | Fase | Estado | Siguiente |
 |------|--------|-----------|
 | **S1 F0+F1** | ✓ inventario + docs | — |
-| **F2 PROG-DI** | ✓ commit `f56b7d2` | **push origin** (A1) |
-| **A2–C1 correcciones** | en curso | tablero + canon Home + MCP review |
-| **epis2-evolab** | ahead 1 (`6b9e40b`) | F3 push + sync findings |
+| **F2 PROG-DI** | ✓ commit + push | — |
+| **F3 Evolab** | ✓ push `246fc27` · smoke 14/14 | **F4 MedRepo** |
+| **A2–C1 correcciones** | ✓ S1 cerrado | — |
 | **EPIS2-MedRepo** | sin git · check rojo | F4 |
 
 Inventario: [`reports/conciliacion/`](../conciliacion/)
@@ -43,7 +43,7 @@ Inventario: [`reports/conciliacion/`](../conciliacion/)
 | **MF-SH-01** draft trace | `043_approvals_ai_run.sql` · `quality:draft-trace-gate` · [`epis2-mf-sh-01-draft-trace.md`](../../reports/epis2-mf-sh-01-draft-trace.md) |
 | **S1 conciliación tríada** | F0 manifest + MF-DI map · F1 tablero/triada · [`conciliacion/`](../conciliacion/) · 2026-06-14 |
 | **PROG-DI** | 10/10 DONE · commit `f56b7d2` · [`epis2-prog-di-close-2026.md`](../../reports/epis2-prog-di-close-2026.md) |
-| **S1 correcciones A3** | MCP safety review · [`mcp-safety-review-2026-06-14.md`](../../reports/conciliacion/mcp-safety-review-2026-06-14.md) |
+| **F3 Evolab** | push + smoke 14/14 · [`epis2-f3-close-2026-06-14.md`](../../reports/conciliacion/epis2-f3-close-2026-06-14.md) |
 
 ---
 

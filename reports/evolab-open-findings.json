@@ -1,14 +1,1598 @@
 {
-  "syncedAt": "2026-06-11T11:38:19.500Z",
+  "syncedAt": "2026-06-14T15:49:41.450Z",
   "evolabRoot": "C:\\Users\\gdela\\OneDrive\\Documentos Importantes\\epis2-evolab",
-  "count": 24,
+  "count": 200,
   "findings": [
     {
-      "id": "fb0241fd-aaac-42de-bd29-834f8c6f71c1",
+      "id": "52218eda-53cd-43ee-8f00-e9722515036d",
       "severity": "medium",
-      "fingerprint": "68c457a21613e462",
+      "fingerprint": "c706f5f40557e0cd",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "c6e7f55d",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "ec7a6e21-1444-447f-866e-370bc85a8a5d",
+      "severity": "high",
+      "fingerprint": "efa918267c3cb027",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "c6e7f55d",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "35d19b51-504a-4930-bffd-9b463f4b05de",
+      "severity": "high",
+      "fingerprint": "efa918267c3cb027",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "8d0eafb5",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "e3d21129-dd20-4a57-b8d5-a721cbcdaefa",
+      "severity": "medium",
+      "fingerprint": "c706f5f40557e0cd",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "8d0eafb5",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "7aea836a-15dd-47c4-beea-b9bd0d1391d0",
+      "severity": "high",
+      "fingerprint": "efa918267c3cb027",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "19b74ef2",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "5d4b78cb-0ddf-40c8-a426-928b219fd549",
+      "severity": "medium",
+      "fingerprint": "c706f5f40557e0cd",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "19b74ef2",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "68b5327d-212a-4187-8bf9-d507e55c6b0a",
+      "severity": "medium",
+      "fingerprint": "c706f5f40557e0cd",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "5e39ecb7",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "668eaa24-3e17-4d42-9040-dd61b10b6e84",
+      "severity": "high",
+      "fingerprint": "efa918267c3cb027",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "5e39ecb7",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "4a768b75-7504-471e-8283-c4739444975b",
+      "severity": "high",
+      "fingerprint": "4dba84098d45b881",
+      "scenarioId": "admission-discharge-001",
+      "runIdPrefix": "aafe4831",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "fb3ccd8e-28d7-4386-8259-c655c53b13f2",
+      "severity": "high",
+      "fingerprint": "50df1d69aac96d12",
       "scenarioId": "admission-discharge-001-m8rs-001",
-      "runIdPrefix": "49b18d1e",
+      "runIdPrefix": "ff295701",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "5d4d958f-0679-415f-8c23-5c9cd892510e",
+      "severity": "high",
+      "fingerprint": "47934da9328984b6",
+      "scenarioId": "discharge-critical-pending-001",
+      "runIdPrefix": "56d79209",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "5133cf46-14f5-42b2-8a9a-447e0a0bdd63",
+      "severity": "high",
+      "fingerprint": "47934da9328984b6",
+      "scenarioId": "discharge-critical-pending-001",
+      "runIdPrefix": "905197fa",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "0e97375e-152e-45ef-9d09-d105f57c1f48",
+      "severity": "high",
+      "fingerprint": "50df1d69aac96d12",
+      "scenarioId": "admission-discharge-001-m8rs-001",
+      "runIdPrefix": "b7a5b564",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "a999423e-82de-4220-a95a-10ca5ad351cc",
+      "severity": "high",
+      "fingerprint": "ad10b9ca2328a548",
+      "scenarioId": "admission-discharge-001-m8cx-009",
+      "runIdPrefix": "b586d498",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "c9946032-9711-4fa6-8cd7-74b88d4f4270",
+      "severity": "high",
+      "fingerprint": "8aeb8c6185184187",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "ae7288a2",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "21d656ad-dabb-47a8-8b56-0f9a8eabc1c4",
+      "severity": "medium",
+      "fingerprint": "4b2bd11919d42ee6",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "ae7288a2",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "660ff918-555a-467d-8783-9cb8773f492b",
+      "severity": "high",
+      "fingerprint": "004600c0eb603e6e",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "ae7288a2",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "8a44ab30-187a-41b2-b7d2-82d859927435",
+      "severity": "medium",
+      "fingerprint": "e5e1514331b56ec0",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "e0ac0d45",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "b7949ffb-ed85-4849-8023-8234cf7426f5",
+      "severity": "high",
+      "fingerprint": "ab2c941bd9403548",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "e0ac0d45",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "71241e06-f76c-42d9-8c88-315e5e3ec6a8",
+      "severity": "high",
+      "fingerprint": "129c4d642faf16a7",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "e0ac0d45",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "7472c0f4-4697-400d-96dc-009ddcfac7ac",
+      "severity": "high",
+      "fingerprint": "573cf1a080ff62ee",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "e0ac0d45",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "37af1da1-710b-49b6-830b-72799fffc98e",
+      "severity": "high",
+      "fingerprint": "ff799ee212fae760",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8si-003",
+      "runIdPrefix": "4e75b274",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "fa3e7d6e-c245-4f75-9071-8d41c5d06db7",
+      "severity": "medium",
+      "fingerprint": "a52085257b014a97",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8si-003",
+      "runIdPrefix": "4e75b274",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "1a58301e-0000-437c-a314-ae3bc3a4a24c",
+      "severity": "medium",
+      "fingerprint": "6572cef63b968d89",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-037",
+      "runIdPrefix": "6a207658",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "5234d2f8-edfb-44ce-9fd7-a2885d423b73",
+      "severity": "high",
+      "fingerprint": "117caa12a7a5cc32",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-037",
+      "runIdPrefix": "6a207658",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "d1095612-da78-40b0-b7f3-9b6b5e73ef07",
+      "severity": "high",
+      "fingerprint": "38b77515783d8518",
+      "scenarioId": "role-nurse-approve-001-m8cx-024",
+      "runIdPrefix": "c275fd3b",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "7630ca23-0988-492b-bfa5-6938ca87bdb0",
+      "severity": "high",
+      "fingerprint": "574d5e3ea683be74",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8si-023",
+      "runIdPrefix": "6fe6f5ac",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "831f6acb-4d7e-4f47-8377-a26ae608002a",
+      "severity": "high",
+      "fingerprint": "ffbc98868df3fc12",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8pp-022",
+      "runIdPrefix": "5bd1f22d",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "f6d484a8-7934-489f-be55-63ad60a37d16",
+      "severity": "high",
+      "fingerprint": "0fb4aaf3272dce09",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8pp-022",
+      "runIdPrefix": "5bd1f22d",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "59764902-69c5-4228-95c1-931b3ce3a85f",
+      "severity": "high",
+      "fingerprint": "0bf2e44cf31856bb",
+      "scenarioId": "role-evolution-sign-001-m8rs-021",
+      "runIdPrefix": "b2c4b3f1",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "069c8df9-f4cf-45c7-9ec4-c2bd230fb3a1",
+      "severity": "high",
+      "fingerprint": "cbcd5e5a13f3aa5b",
+      "scenarioId": "critical-ack-snapshot-001-m8cx-036-m8cx-016",
+      "runIdPrefix": "98e65062",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "786d86d1-0d81-4fed-918c-fdd4245da767",
+      "severity": "medium",
+      "fingerprint": "c706f5f40557e0cd",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "a2d52443",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "7238a5ce-86aa-4bad-af90-1d10892f1d01",
+      "severity": "high",
+      "fingerprint": "e795fbc7bfed68c1",
+      "scenarioId": "critical-acknowledge-001-m8cx-012",
+      "runIdPrefix": "110497d8",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "34d8682e-180f-4d28-8f61-4ad4ef3e4ed2",
+      "severity": "high",
+      "fingerprint": "506ef4bc80655fff",
+      "scenarioId": "discharge-critical-pending-001-m8pp-006-m8pp-010",
+      "runIdPrefix": "14f23f14",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "ff2b6550-2828-4394-b34a-7bf70d3dec29",
+      "severity": "high",
+      "fingerprint": "6a0e632691a335f3",
+      "scenarioId": "critical-acknowledge-001-m8rs-009",
+      "runIdPrefix": "fc1a9495",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "777496a6-342b-4e9c-ab11-95f20866cc62",
+      "severity": "high",
+      "fingerprint": "ad10b9ca2328a548",
+      "scenarioId": "admission-discharge-001-m8cx-009",
+      "runIdPrefix": "f59e157e",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "27591aa7-53cd-4a81-a6d9-90cfc6e57226",
+      "severity": "medium",
+      "fingerprint": "4b2bd11919d42ee6",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "14c90358",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "33e870ca-1f4d-4dec-9976-f51059171acc",
+      "severity": "high",
+      "fingerprint": "8aeb8c6185184187",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "14c90358",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "ac468cf5-7dbd-4cf2-a50d-ab58a6bf8782",
+      "severity": "high",
+      "fingerprint": "129c4d642faf16a7",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "2f7e11f1",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "24dbea2c-85b1-4b7d-a0b0-7c8d0ff2e17f",
+      "severity": "high",
+      "fingerprint": "ab2c941bd9403548",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "2f7e11f1",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "d68c3725-757e-4bdb-873a-c534dd75fea4",
+      "severity": "medium",
+      "fingerprint": "e5e1514331b56ec0",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "2f7e11f1",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "dc657114-577f-4f15-bda2-f6957b7ad0a5",
+      "severity": "high",
+      "fingerprint": "573cf1a080ff62ee",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "2f7e11f1",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "08c79ec5-8ecb-4f9c-b06b-e13a97490c22",
+      "severity": "medium",
+      "fingerprint": "790af35b48b4cc83",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-001",
+      "runIdPrefix": "3e50a1c4",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "0f1b000a-c1e9-47d1-a3c4-a2fc137bc772",
+      "severity": "high",
+      "fingerprint": "a7778ce22236b9ef",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8si-039",
+      "runIdPrefix": "6e0d6af2",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "2e316df3-8a90-45e4-ba42-62b6fd95d22e",
+      "severity": "medium",
+      "fingerprint": "8796e6b5e8ba7191",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8si-039",
+      "runIdPrefix": "6e0d6af2",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "9e15b359-0778-4e64-97df-81b5190eb3ba",
+      "severity": "high",
+      "fingerprint": "b4121357f506ba14",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8si-039",
+      "runIdPrefix": "6e0d6af2",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "fa1604e5-68dc-4830-94f3-444bca427ae4",
+      "severity": "medium",
+      "fingerprint": "6572cef63b968d89",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-037",
+      "runIdPrefix": "5776a439",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "5718f48c-cb6c-4d63-a57d-3a73d652b655",
+      "severity": "high",
+      "fingerprint": "2f5e783a3139475d",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-037",
+      "runIdPrefix": "5776a439",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "178d3d2f-0cf1-42e8-b9b6-9b07f83dbc7e",
+      "severity": "high",
+      "fingerprint": "19204fdd9cb2756b",
+      "scenarioId": "critical-ack-snapshot-001-m8cx-036",
+      "runIdPrefix": "e88f2e0f",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "1e4f4ec5-adca-4966-ad5b-b848828089fe",
+      "severity": "high",
+      "fingerprint": "a512384868392eb0",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025",
+      "runIdPrefix": "1f7fc702",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "b83c6f1c-bf94-4c51-8715-bced37bbf89b",
+      "severity": "medium",
+      "fingerprint": "a8a737704c15836c",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025",
+      "runIdPrefix": "1f7fc702",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "4b6293f4-cbf5-4ae2-89dd-77d9d66e4260",
+      "severity": "high",
+      "fingerprint": "38b77515783d8518",
+      "scenarioId": "role-nurse-approve-001-m8cx-024",
+      "runIdPrefix": "1b8005e0",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "825d34d9-cc1c-4574-b813-30491c0f3891",
+      "severity": "high",
+      "fingerprint": "574d5e3ea683be74",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8si-023",
+      "runIdPrefix": "1ae57c0c",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "ad3e1ca8-273b-42ff-8fb0-3e6e3b8680d0",
+      "severity": "high",
+      "fingerprint": "0bf2e44cf31856bb",
+      "scenarioId": "role-evolution-sign-001-m8rs-021",
+      "runIdPrefix": "7fbd50b3",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "00d743f5-f91b-4682-8114-52fab28b70ca",
+      "severity": "high",
+      "fingerprint": "14c9dcef63844e6e",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8pp-014",
+      "runIdPrefix": "f4d7f69b",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "b01d985a-4999-4a17-8c0b-752bba6b47f3",
+      "severity": "medium",
+      "fingerprint": "c706f5f40557e0cd",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "edbcbb61",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "ebbeabb9-14b5-456e-8479-67eab6b6f97a",
+      "severity": "high",
+      "fingerprint": "efa918267c3cb027",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "edbcbb61",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "24d6c20a-8107-486a-b5fc-4ef251041ce0",
+      "severity": "high",
+      "fingerprint": "4cdf8990b633c22e",
+      "scenarioId": "critical-acknowledge-001-m8cx-012",
+      "runIdPrefix": "72b2343e",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "db6ba621-28b1-4b5e-a656-1d318de35267",
+      "severity": "high",
+      "fingerprint": "506ef4bc80655fff",
+      "scenarioId": "discharge-critical-pending-001-m8pp-006-m8pp-010",
+      "runIdPrefix": "eabdaa03",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "9211477b-c638-46be-9f4b-0dd6a57b82d0",
+      "severity": "high",
+      "fingerprint": "79911819162b1be2",
+      "scenarioId": "critical-acknowledge-001-m8pp-006",
+      "runIdPrefix": "f6d743cf",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "1199bb52-1994-4902-832e-c1b4faecf732",
+      "severity": "high",
+      "fingerprint": "8aeb8c6185184187",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "a3bf5b72",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "d694ee0f-6b6d-4142-bb44-0cd5d8ef5d2b",
+      "severity": "high",
+      "fingerprint": "35678b9d7869f70d",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "a3bf5b72",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "fb6f40a3-b3ab-45b4-860c-bb3c427c8a34",
+      "severity": "medium",
+      "fingerprint": "4b2bd11919d42ee6",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "a3bf5b72",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "a10a2ff2-f623-489a-9686-948452535c1d",
+      "severity": "high",
+      "fingerprint": "129c4d642faf16a7",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "1f548cde",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "77194cc0-6850-488a-a684-2ffab7733683",
+      "severity": "high",
+      "fingerprint": "9d9a1724822d3e2c",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "1f548cde",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "67e347f3-32fe-4132-8bce-5001dad5bd84",
+      "severity": "medium",
+      "fingerprint": "e5e1514331b56ec0",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "1f548cde",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "015919ba-e56d-49d1-ad2f-51a20ef1136f",
+      "severity": "high",
+      "fingerprint": "78455036c3058f8e",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-037-m8rs-041",
+      "runIdPrefix": "3552176e",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "ab80a0df-7c55-493b-bad3-d70ce24faec5",
+      "severity": "high",
+      "fingerprint": "915629bbcf1d7abe",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-037-m8cx-040",
+      "runIdPrefix": "09b03a12",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "4aaa131c-f5ea-40be-ad88-173995042acf",
+      "severity": "high",
+      "fingerprint": "55a88eb5732ee853",
+      "scenarioId": "discharge-critical-pending-001-m8pp-006-m8cx-024",
+      "runIdPrefix": "77752d9c",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "642f8e33-559a-4a51-8044-f18ffdb6d72d",
+      "severity": "high",
+      "fingerprint": "0fb4aaf3272dce09",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8pp-022",
+      "runIdPrefix": "73586e06",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "31b5127e-d2a9-4b98-b42f-59291a0b6ba7",
+      "severity": "high",
+      "fingerprint": "ffbc98868df3fc12",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8pp-022",
+      "runIdPrefix": "73586e06",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "3af1a7d9-8e89-488a-a2c1-64fa473f24d9",
+      "severity": "medium",
+      "fingerprint": "f98045f56663a650",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-020",
+      "runIdPrefix": "0dc437a1",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "5a1931e5-6b65-4baa-9fcf-3c39030c7eda",
+      "severity": "high",
+      "fingerprint": "6eebd0945c408c9a",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-020",
+      "runIdPrefix": "0dc437a1",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "6f435bc9-7a85-4362-a635-012d209abdca",
+      "severity": "high",
+      "fingerprint": "b9c623f78e03a653",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-020",
+      "runIdPrefix": "0dc437a1",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "9b4fe6b2-2d95-4622-b0c3-2183696e5938",
+      "severity": "high",
+      "fingerprint": "ea11922727c11d2f",
+      "scenarioId": "discharge-critical-pending-001-m8pp-006-m8si-019",
+      "runIdPrefix": "0a979e52",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "f03df05b-ab5c-42cd-84e1-2a8edca75cfa",
+      "severity": "high",
+      "fingerprint": "8b0eb9166b9f18c8",
+      "scenarioId": "critical-acknowledge-001-m8rs-009-m8cx-016",
+      "runIdPrefix": "79dd00dc",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "8303957a-5b76-4dbb-8d4b-f3d25a6f95b0",
+      "severity": "medium",
+      "fingerprint": "c706f5f40557e0cd",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "cfd9cfaa",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "c741d30f-1427-47f1-8a2d-5653dbf3681b",
+      "severity": "high",
+      "fingerprint": "e795fbc7bfed68c1",
+      "scenarioId": "critical-acknowledge-001-m8cx-012",
+      "runIdPrefix": "0e4edf9e",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "42e66a7d-5a11-4683-890c-b7e6fe23c2c1",
+      "severity": "high",
+      "fingerprint": "506ef4bc80655fff",
+      "scenarioId": "discharge-critical-pending-001-m8pp-006-m8pp-010",
+      "runIdPrefix": "37581f88",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "32a27236-beeb-49f4-9d62-57174e11f427",
+      "severity": "high",
+      "fingerprint": "6a0e632691a335f3",
+      "scenarioId": "critical-acknowledge-001-m8rs-009",
+      "runIdPrefix": "d385ba9f",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "944c846d-b6b7-4d1e-89f7-e0901e78cfee",
+      "severity": "high",
+      "fingerprint": "ad10b9ca2328a548",
+      "scenarioId": "admission-discharge-001-m8cx-009",
+      "runIdPrefix": "af50eb41",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "249144bb-f004-4ff2-9fa5-70576d426b6b",
+      "severity": "medium",
+      "fingerprint": "9005e6c8e7245193",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8pp-006",
+      "runIdPrefix": "00b7022f",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "05493712-bdb2-49ef-aec6-de521337a0c5",
+      "severity": "high",
+      "fingerprint": "597098aaff66e8cd",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8pp-006",
+      "runIdPrefix": "00b7022f",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "c199b6c8-18dc-40f2-a066-ecd6c9818b53",
+      "severity": "high",
+      "fingerprint": "e455597457441189",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8pp-006",
+      "runIdPrefix": "00b7022f",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "1ed14916-2765-4991-a92b-962be4e2fbfd",
+      "severity": "medium",
+      "fingerprint": "4b2bd11919d42ee6",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "fd63f514",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "84328451-e1f0-4dea-bc3f-a942b9796670",
+      "severity": "high",
+      "fingerprint": "573cf1a080ff62ee",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "315cecf0",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "bcccc290-6dae-4033-87c2-92a0888578b7",
+      "severity": "high",
+      "fingerprint": "129c4d642faf16a7",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "315cecf0",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "09b0005a-0806-449f-8f80-d11e19954f24",
+      "severity": "medium",
+      "fingerprint": "e5e1514331b56ec0",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "315cecf0",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "8b13f8c6-13c8-47ab-8200-855f9aae6977",
+      "severity": "medium",
+      "fingerprint": "790af35b48b4cc83",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-001",
+      "runIdPrefix": "d0e62e54",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "6a6d404d-511a-42dd-98bb-187ff8ad790f",
+      "severity": "medium",
+      "fingerprint": "8796e6b5e8ba7191",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8si-039",
+      "runIdPrefix": "b4c7c043",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "c368295c-3e85-42e3-9515-b7e3fae02ac8",
+      "severity": "high",
+      "fingerprint": "b4121357f506ba14",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8si-039",
+      "runIdPrefix": "b4c7c043",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "73dbb498-68ea-4eb0-8480-e00ddaad6a58",
+      "severity": "high",
+      "fingerprint": "a7778ce22236b9ef",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8si-039",
+      "runIdPrefix": "b4c7c043",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "f7f01d3d-ef8f-4ce5-888e-2558d2f8386a",
+      "severity": "high",
+      "fingerprint": "2f5e783a3139475d",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-037",
+      "runIdPrefix": "79921051",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "70946c33-a0c0-4dc6-8c2f-6b3a0ef3872f",
+      "severity": "medium",
+      "fingerprint": "6572cef63b968d89",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-037",
+      "runIdPrefix": "79921051",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "991dd069-dcdd-4cb4-baec-b607fa4f3ece",
+      "severity": "high",
+      "fingerprint": "a36995ea10881ccf",
+      "scenarioId": "role-evolution-sign-001-m8cx-028",
+      "runIdPrefix": "8a89146a",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "e9258a75-7aec-40fa-8428-985d19cc61a0",
+      "severity": "high",
+      "fingerprint": "a512384868392eb0",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025",
+      "runIdPrefix": "b723562b",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "253a3705-8318-4670-92c7-370cd003a755",
+      "severity": "medium",
+      "fingerprint": "a8a737704c15836c",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025",
+      "runIdPrefix": "b723562b",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "3ae1d317-d8c1-4d86-8fdd-8379d861075d",
+      "severity": "high",
+      "fingerprint": "574d5e3ea683be74",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8si-023",
+      "runIdPrefix": "d14f5e48",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "78c318a4-33a7-4d07-9339-e7e5cd31fd0e",
+      "severity": "high",
+      "fingerprint": "0bf2e44cf31856bb",
+      "scenarioId": "role-evolution-sign-001-m8rs-021",
+      "runIdPrefix": "1f1e5455",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "6388b07d-6b83-4ed1-9418-427a2d1260cc",
+      "severity": "high",
+      "fingerprint": "14c9dcef63844e6e",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8pp-014",
+      "runIdPrefix": "fc7eab4c",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "d69f7856-8276-46a8-8f73-0895aaaed1c4",
+      "severity": "high",
+      "fingerprint": "efa918267c3cb027",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "29372644",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "bb25ea5c-3cc9-46fe-a856-935e816bbbc4",
+      "severity": "medium",
+      "fingerprint": "c706f5f40557e0cd",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "29372644",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "8c54f079-3595-4337-b79b-7ae56c0f7389",
+      "severity": "high",
+      "fingerprint": "4cdf8990b633c22e",
+      "scenarioId": "critical-acknowledge-001-m8cx-012",
+      "runIdPrefix": "20d1150b",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "674c2998-0687-4761-bf98-6ef6bc2ec1ba",
+      "severity": "high",
+      "fingerprint": "506ef4bc80655fff",
+      "scenarioId": "discharge-critical-pending-001-m8pp-006-m8pp-010",
+      "runIdPrefix": "b9340e3f",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "0db85d6a-d95a-452e-a00e-dc8d3f4d6a17",
+      "severity": "high",
+      "fingerprint": "8aeb8c6185184187",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "27f0a3e0",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "8c1b3066-7d3e-4c45-b6b1-c841fe5b405d",
+      "severity": "high",
+      "fingerprint": "004600c0eb603e6e",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "27f0a3e0",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "6f03e099-2e96-4a36-96d4-ab3fa8646c99",
+      "severity": "medium",
+      "fingerprint": "4b2bd11919d42ee6",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "27f0a3e0",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "5b0e4311-a42d-4687-9486-7c7abf0bd742",
+      "severity": "high",
+      "fingerprint": "9d9a1724822d3e2c",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "4cb38665",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "83cb3cfc-5268-4863-a8ad-a0ec3aca784b",
+      "severity": "high",
+      "fingerprint": "129c4d642faf16a7",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "4cb38665",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "8a7399de-6d72-40e9-9ccc-9c8e2e34ee15",
+      "severity": "medium",
+      "fingerprint": "e5e1514331b56ec0",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "4cb38665",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "acfca259-e663-4bab-93d5-ab2a0e0be15d",
+      "severity": "high",
+      "fingerprint": "108f173fcbf68471",
+      "scenarioId": "critical-ack-snapshot-001-m8rs-009-m8rs-041",
+      "runIdPrefix": "f50de19e",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "2ad402c5-000e-4449-80dd-12e422fe02c5",
+      "severity": "medium",
+      "fingerprint": "8796e6b5e8ba7191",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8si-039",
+      "runIdPrefix": "bbe5bfef",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "c8e3893b-8e91-4e03-a269-6cceb2a86295",
+      "severity": "high",
+      "fingerprint": "b4121357f506ba14",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8si-039",
+      "runIdPrefix": "bbe5bfef",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "da4340dd-8b7a-4f77-9ea2-fefb128db9ab",
+      "severity": "high",
+      "fingerprint": "b8f55f5761fcac44",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8si-039",
+      "runIdPrefix": "bbe5bfef",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "e4b6dfe3-1c66-4f18-ad4e-3cf99f850522",
+      "severity": "high",
+      "fingerprint": "a7778ce22236b9ef",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8si-039",
+      "runIdPrefix": "bbe5bfef",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "aa49da23-0988-4175-a57f-7e8e553051d1",
+      "severity": "medium",
+      "fingerprint": "6572cef63b968d89",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-037",
+      "runIdPrefix": "cb6ce7ff",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "eb821f9e-9d32-435b-8c03-68f262d8b9a5",
+      "severity": "high",
+      "fingerprint": "2f5e783a3139475d",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-037",
+      "runIdPrefix": "cb6ce7ff",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "8c474311-3377-43a2-9d8f-4cd96a50ebb9",
+      "severity": "high",
+      "fingerprint": "a36995ea10881ccf",
+      "scenarioId": "role-evolution-sign-001-m8cx-028",
+      "runIdPrefix": "447686f0",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "8c5ec4fe-21ff-4d40-8ccc-7af00eec6f2a",
+      "severity": "high",
+      "fingerprint": "a512384868392eb0",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025",
+      "runIdPrefix": "1d695c76",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "4da12a1f-bc92-4a4b-808e-3b49270aa7c4",
+      "severity": "medium",
+      "fingerprint": "a8a737704c15836c",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025",
+      "runIdPrefix": "1d695c76",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "e5b22ee5-2c86-4e5e-bd65-961c9c3e9c22",
+      "severity": "high",
+      "fingerprint": "38b77515783d8518",
+      "scenarioId": "role-nurse-approve-001-m8cx-024",
+      "runIdPrefix": "42721c5c",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "0ede0f58-4de6-4c1f-8a0d-006dac8dedb3",
+      "severity": "high",
+      "fingerprint": "574d5e3ea683be74",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8si-023",
+      "runIdPrefix": "7ed4e015",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "ffe216ce-ab67-408a-899a-56c66b71276d",
+      "severity": "high",
+      "fingerprint": "0bf2e44cf31856bb",
+      "scenarioId": "role-evolution-sign-001-m8rs-021",
+      "runIdPrefix": "1c994693",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "24c98311-d1bf-4035-8089-514878507442",
+      "severity": "high",
+      "fingerprint": "14c9dcef63844e6e",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8pp-014",
+      "runIdPrefix": "3d261f77",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "9aa95332-7115-4c3a-a9e1-2ca29488b4cb",
+      "severity": "high",
+      "fingerprint": "efa918267c3cb027",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "631ffa25",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "1f27b948-dd6d-4772-8c68-de7c67a94f95",
+      "severity": "medium",
+      "fingerprint": "c706f5f40557e0cd",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "631ffa25",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "78087c01-78eb-4a33-b3d3-cce9a7a0fc88",
+      "severity": "high",
+      "fingerprint": "506ef4bc80655fff",
+      "scenarioId": "discharge-critical-pending-001-m8pp-006-m8pp-010",
+      "runIdPrefix": "c6eec852",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "fa9a33ef-2d84-41db-bda2-fd280bfd0113",
+      "severity": "medium",
+      "fingerprint": "4b2bd11919d42ee6",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "2a36e40c",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "bcaf0cb6-9d69-4efb-a0d7-466bd924c526",
+      "severity": "high",
+      "fingerprint": "004600c0eb603e6e",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "2a36e40c",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "a570506b-169e-4215-973c-959b2249de1d",
+      "severity": "high",
+      "fingerprint": "129c4d642faf16a7",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "e157783e",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "70517a25-e8d7-4709-90ae-99eff0b96678",
+      "severity": "high",
+      "fingerprint": "108f173fcbf68471",
+      "scenarioId": "critical-ack-snapshot-001-m8rs-009-m8rs-041",
+      "runIdPrefix": "afb45c0c",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "8b601dcb-aa6b-4809-b99c-b64cea145b86",
+      "severity": "high",
+      "fingerprint": "117caa12a7a5cc32",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-037",
+      "runIdPrefix": "476fdf5a",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "67b95136-0d75-4034-a488-125bb9b2903c",
+      "severity": "medium",
+      "fingerprint": "6572cef63b968d89",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-037",
+      "runIdPrefix": "476fdf5a",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "0e6c4f15-b143-4e76-9748-35e3b760d88b",
+      "severity": "high",
+      "fingerprint": "855270c1cab39925",
+      "scenarioId": "critical-ack-snapshot-001-m8cx-036",
+      "runIdPrefix": "c9d81099",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "d5b1303c-7361-451f-bca1-470f2a024a3d",
+      "severity": "high",
+      "fingerprint": "a0036ae031396677",
+      "scenarioId": "critical-ack-snapshot-001-m8rs-009-m8cx-032",
+      "runIdPrefix": "f8f0297f",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "0afc9c79-9a0d-4c56-aeab-647988ea9c2b",
+      "severity": "high",
+      "fingerprint": "67eb7523d8cb4bc6",
+      "scenarioId": "discharge-critical-pending-001-m8pp-006-m8cx-020-m8cx-024",
+      "runIdPrefix": "253b0414",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "4e79343e-d881-45cf-84b6-a6ae12d95e28",
+      "severity": "high",
+      "fingerprint": "a139b82c6df6e7b4",
+      "scenarioId": "discharge-critical-pending-001-m8pp-006-m8pp-022",
+      "runIdPrefix": "4a81aacc",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "9d4299d9-457f-43c4-aece-67a253e276da",
+      "severity": "high",
+      "fingerprint": "14a8dd72d86279ad",
+      "scenarioId": "role-evolution-sign-001-m8rs-017",
+      "runIdPrefix": "9e4198aa",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "02cc0756-9101-40ea-bee6-9010ae3a9f8a",
+      "severity": "high",
+      "fingerprint": "58698dfe99df5996",
+      "scenarioId": "critical-ack-snapshot-001-m8rs-009-m8cx-016",
+      "runIdPrefix": "504929a4",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "c35d7378-5628-4c30-bd75-9fbccd672e19",
+      "severity": "medium",
+      "fingerprint": "c706f5f40557e0cd",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "7ea77bf8",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "3ad335a5-aa45-472f-9775-00d69709e4c7",
+      "severity": "high",
+      "fingerprint": "879c774270406c65",
+      "scenarioId": "critical-ack-snapshot-001-m8rs-009",
+      "runIdPrefix": "b2824526",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "64ad6c56-b085-4d4c-8bae-903e54f74f99",
+      "severity": "high",
+      "fingerprint": "ad10b9ca2328a548",
+      "scenarioId": "admission-discharge-001-m8cx-009",
+      "runIdPrefix": "2c99bcc9",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "2e8d5a9b-2f9e-451d-8277-791475e9becb",
+      "severity": "high",
+      "fingerprint": "e32ddac405ce2b1c",
+      "scenarioId": "critical-acknowledge-001-m8pp-006",
+      "runIdPrefix": "bb59d99b",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "d81a0ad8-ffe6-483b-a8c2-5f7625720c64",
+      "severity": "medium",
+      "fingerprint": "4b2bd11919d42ee6",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "988b8246",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "116967ee-9310-4d09-972c-e1868bb4a9dd",
+      "severity": "high",
+      "fingerprint": "8aeb8c6185184187",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-005",
+      "runIdPrefix": "988b8246",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "25148fbd-5a3c-4bf5-ab87-0e0301ef2d40",
+      "severity": "high",
+      "fingerprint": "ab2c941bd9403548",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "9172a976",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "f02feedc-4f2c-42eb-8b25-080faeea25b5",
+      "severity": "medium",
+      "fingerprint": "e5e1514331b56ec0",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "9172a976",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "1a82fd87-8d40-4ebc-819a-ff204a8dd47d",
+      "severity": "high",
+      "fingerprint": "129c4d642faf16a7",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "9172a976",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "2e432d94-abef-4db7-8a8a-79c68b849b0f",
+      "severity": "high",
+      "fingerprint": "573cf1a080ff62ee",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8cx-004",
+      "runIdPrefix": "9172a976",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "4d741476-b051-4137-9abd-203b95374dc4",
+      "severity": "medium",
+      "fingerprint": "790af35b48b4cc83",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-001",
+      "runIdPrefix": "3d59dda6",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "5c304524-3daa-456b-b863-2895a4381f99",
+      "severity": "high",
+      "fingerprint": "855270c1cab39925",
+      "scenarioId": "critical-ack-snapshot-001-m8cx-036",
+      "runIdPrefix": "d482f3cb",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "f25f1732-ea50-4eb7-9991-f4121c7ed227",
+      "severity": "high",
+      "fingerprint": "f586ae3ef5673576",
+      "scenarioId": "draft-lifecycle-cancelled-001-m8pp-030",
+      "runIdPrefix": "2b9b6980",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "20d26c75-3ccf-40c9-9538-4fa40064c60a",
+      "severity": "high",
+      "fingerprint": "3c9216086ecfdea8",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8cx-016",
+      "runIdPrefix": "1f69377a",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "00d04ebc-1d71-465a-8d17-3afe5ed7d14d",
+      "severity": "high",
+      "fingerprint": "10165ea19f156f6f",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-041",
+      "runIdPrefix": "598ed28c",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "30dc7458-33ba-450e-aaac-dfca428c70c5",
+      "severity": "high",
+      "fingerprint": "8cb5f6d23592ac33",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-041",
+      "runIdPrefix": "598ed28c",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "0f3e17b1-fe3e-442a-bc71-2e4f2c2e35ff",
+      "severity": "medium",
+      "fingerprint": "9e272243210c4c29",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-041",
+      "runIdPrefix": "598ed28c",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "a197669c-e944-4572-9e92-fcb4b9cf0acb",
+      "severity": "high",
+      "fingerprint": "d2a27973b13ba08b",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8rs-041",
+      "runIdPrefix": "598ed28c",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "a9236170-fa96-46b1-8960-2e10313d2345",
+      "severity": "high",
+      "fingerprint": "3ed6d7c0afc49dd6",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8cx-040",
+      "runIdPrefix": "a0086a5b",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "ff7e3544-0a07-4f7d-b870-46f3911653df",
+      "severity": "medium",
+      "fingerprint": "6dcf242229eaed99",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025-m8cx-040",
+      "runIdPrefix": "a0086a5b",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "0bcbcadf-c5ea-452a-892c-2ef75489e5f3",
+      "severity": "medium",
+      "fingerprint": "6572cef63b968d89",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-037",
+      "runIdPrefix": "9140e34e",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "981ff719-423f-4263-9f34-8961df5ce95e",
+      "severity": "high",
+      "fingerprint": "2f5e783a3139475d",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-037",
+      "runIdPrefix": "9140e34e",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "7825c76a-814c-460a-9b5e-e58c83a0fb47",
+      "severity": "high",
+      "fingerprint": "c8132af54b4e1d0b",
+      "scenarioId": "admission-double-booking-001-m8cx-036",
+      "runIdPrefix": "8d420f2f",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "4a336e98-c07e-4c6e-b624-655c653ca7ba",
+      "severity": "high",
+      "fingerprint": "635b3e8b6c554aff",
+      "scenarioId": "suspended-medication-mar-001-m8rs-033",
+      "runIdPrefix": "a0c107d3",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "f91bdea1-7c16-41d9-b326-6a01c9ee2084",
+      "severity": "medium",
+      "fingerprint": "7b0e1f6851987b7e",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8si-031",
+      "runIdPrefix": "9d8da181",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "a107264d-ee92-40bc-8693-616ef4f6c485",
+      "severity": "high",
+      "fingerprint": "17fc517545bfea7b",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8si-031",
+      "runIdPrefix": "9d8da181",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "b400b357-5f14-4984-86b2-658ce0d34862",
+      "severity": "high",
+      "fingerprint": "1417e04f33c8d061",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8si-031",
+      "runIdPrefix": "9d8da181",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "4a1c1882-92cd-4d67-86eb-c386944a7e57",
+      "severity": "high",
+      "fingerprint": "900b1ead44623291",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8si-031",
+      "runIdPrefix": "9d8da181",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "fa544514-f3a0-423e-8e05-b697f700e0e5",
+      "severity": "medium",
+      "fingerprint": "fea38935a18a4c8b",
+      "scenarioId": "discharge-critical-pending-001-m8pp-030",
+      "runIdPrefix": "b92aa49e",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "692106bd-83b0-40a6-8572-40aec7d89d28",
+      "severity": "medium",
+      "fingerprint": "b00506dbd163ec41",
+      "scenarioId": "discharge-critical-pending-001-m8pp-030",
+      "runIdPrefix": "b92aa49e",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "31bc76ce-5397-45e2-8dc7-f651c268c9fa",
+      "severity": "high",
+      "fingerprint": "a36d9ecd2521e504",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8si-027",
+      "runIdPrefix": "be471479",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "15bc61da-aba1-498b-a300-8bc4ebaea37c",
+      "severity": "medium",
+      "fingerprint": "1978686a1fa633ff",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8si-027",
+      "runIdPrefix": "be471479",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "e0cec5b2-8f26-4704-b31e-5cce25572bd7",
+      "severity": "high",
+      "fingerprint": "a512384868392eb0",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025",
+      "runIdPrefix": "94a0b877",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "370dfe5a-b76f-4227-a7e1-5148bf34db99",
+      "severity": "medium",
+      "fingerprint": "a8a737704c15836c",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-025",
+      "runIdPrefix": "94a0b877",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "fdfc9527-46ee-4d63-a642-37b5f987efef",
+      "severity": "high",
+      "fingerprint": "dfa1e6335b20deb1",
+      "scenarioId": "admission-discharge-001-m8cx-024",
+      "runIdPrefix": "6005d04f",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "3217c8d4-d0c5-4c65-883d-62293d8543d5",
+      "severity": "high",
+      "fingerprint": "da790499fa17215e",
+      "scenarioId": "discharge-critical-pending-001-m8si-023",
+      "runIdPrefix": "7e30dad1",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "bdbe5d1d-c540-428e-a18f-ef78796fd35e",
+      "severity": "medium",
+      "fingerprint": "fb4c1be15b7ad027",
+      "scenarioId": "discharge-critical-pending-001-m8si-023",
+      "runIdPrefix": "7e30dad1",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "92f30fa4-0382-40e0-94ca-a5201ce6a685",
+      "severity": "high",
+      "fingerprint": "86e10ae01ea5cd7a",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8pp-022",
+      "runIdPrefix": "d73a0af7",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "5641f148-4af6-4161-8833-9ac25f5f3a81",
+      "severity": "medium",
+      "fingerprint": "087f45f9505a0d83",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8pp-022",
+      "runIdPrefix": "d73a0af7",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "8904de4a-6080-42e1-995c-dd5a6bfbff9e",
+      "severity": "high",
+      "fingerprint": "0fb4aaf3272dce09",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8pp-022",
+      "runIdPrefix": "d73a0af7",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "ae122733-ee44-4630-9a7b-282d43c52630",
+      "severity": "medium",
+      "fingerprint": "27fc9c70c6376ba8",
+      "scenarioId": "admission-double-booking-001-m8cx-004-m8pp-022",
+      "runIdPrefix": "d73a0af7",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "dbcf8a3b-78a7-44a2-81bc-dd87bf88c592",
+      "severity": "medium",
+      "fingerprint": "a351dc3849773ad8",
+      "scenarioId": "discharge-critical-pending-001-m8rs-021",
+      "runIdPrefix": "77589fd1",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "7b7a1498-73d0-4e68-a208-ae7032b86482",
+      "severity": "high",
+      "fingerprint": "c4f772c3f2d61f24",
+      "scenarioId": "discharge-critical-pending-001-m8rs-021",
+      "runIdPrefix": "77589fd1",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "82b4b262-0dd8-48dd-8a09-7565f7b6f80f",
+      "severity": "medium",
+      "fingerprint": "9d272652493d1710",
+      "scenarioId": "discharge-critical-pending-001-m8pp-006-m8cx-020",
+      "runIdPrefix": "4bbc7f50",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "6150d9b9-4af1-426b-ab60-4bf48b91161c",
+      "severity": "high",
+      "fingerprint": "fe511094c2b69755",
+      "scenarioId": "discharge-critical-pending-001-m8pp-006-m8cx-020",
+      "runIdPrefix": "4bbc7f50",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "b1c0d18b-1852-49bc-80d8-fd7f83998328",
+      "severity": "high",
+      "fingerprint": "efa918267c3cb027",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "8b95122f",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "696c1bc7-1a98-4702-b44e-7adf8c0d3224",
+      "severity": "medium",
+      "fingerprint": "c706f5f40557e0cd",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-013",
+      "runIdPrefix": "8b95122f",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "119856cd-77f1-403e-b688-fa6a922d85c8",
+      "severity": "high",
+      "fingerprint": "73d8ff4824d67af4",
+      "scenarioId": "admission-discharge-001-m8pp-010",
+      "runIdPrefix": "da685061",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "f0d69c1f-9bef-475e-8a76-3f5b76b2f174",
+      "severity": "high",
+      "fingerprint": "879c774270406c65",
+      "scenarioId": "critical-ack-snapshot-001-m8rs-009",
+      "runIdPrefix": "bdd544bc",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "ca20b928-356c-46ba-b94e-1a136309e4dc",
+      "severity": "high",
+      "fingerprint": "e56d70d1ac6fb766",
+      "scenarioId": "admission-discharge-001-m8cx-004",
+      "runIdPrefix": "e428ecb7",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "3c04b8cd-4dad-43c4-a39e-7f568bb9260f",
+      "severity": "high",
+      "fingerprint": "f419070fd5e77030",
+      "scenarioId": "admission-discharge-001-m8cx-004",
+      "runIdPrefix": "e428ecb7",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "248fc20c-7096-426b-b7da-dd8e71f45f0c",
+      "severity": "medium",
+      "fingerprint": "1bada329bfe32f7b",
+      "scenarioId": "admission-discharge-001-m8cx-004",
+      "runIdPrefix": "e428ecb7",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "56ea1f79-6a80-44e7-942b-60f84756367a",
+      "severity": "medium",
+      "fingerprint": "0685312675fbc86b",
+      "scenarioId": "admission-discharge-001-m8cx-004",
+      "runIdPrefix": "e428ecb7",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "aac8b7e6-2fc0-41fe-924f-19693d311141",
+      "severity": "high",
+      "fingerprint": "261c37349c8e39c2",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-001",
+      "runIdPrefix": "3f1da1c8",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "69e2e72f-89d7-480d-9912-4e46e1e99831",
+      "severity": "medium",
+      "fingerprint": "790af35b48b4cc83",
+      "scenarioId": "admission-discharge-001-m8cx-008-m8rs-001",
+      "runIdPrefix": "3f1da1c8",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "dfb4386f-a85f-4872-9ac3-a0ff6804d18c",
+      "severity": "high",
+      "fingerprint": "f89a772ce1bc7823",
+      "scenarioId": "admission-discharge-001-m8cx-008",
+      "runIdPrefix": "2b36c741",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "e89d9faf-5158-4cb0-a6ea-d66a4be3f3db",
+      "severity": "medium",
+      "fingerprint": "144e79f1f3fa51fb",
+      "scenarioId": "admission-discharge-001-m8cx-008",
+      "runIdPrefix": "2b36c741",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "18f18669-bf46-44b0-9d58-1d4f12465926",
+      "severity": "high",
+      "fingerprint": "39126c4932797038",
+      "scenarioId": "admission-discharge-001-m8cx-008",
+      "runIdPrefix": "2b36c741",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "8ececefa-46f5-4f16-8673-37d4a554fd91",
+      "severity": "high",
+      "fingerprint": "36f99e24a9f862a5",
+      "scenarioId": "admission-discharge-001-m8cx-008",
+      "runIdPrefix": "2b36c741",
+      "reviewStatus": "open"
+    },
+    {
+      "id": "e6ad0872-32b0-47b2-8eb2-957aaa1338da",
+      "severity": "high",
+      "fingerprint": "50df1d69aac96d12",
+      "scenarioId": "admission-discharge-001-m8rs-001",
+      "runIdPrefix": "55f89367",
       "reviewStatus": "open"
     },
     {
@@ -17,182 +1601,6 @@
       "fingerprint": "50df1d69aac96d12",
       "scenarioId": "admission-discharge-001-m8rs-001",
       "runIdPrefix": "49b18d1e",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "6acb36a0-111e-4bde-9f25-e91a58e02e67",
-      "severity": "high",
-      "fingerprint": "bebd14371350f384",
-      "scenarioId": "discharge-critical-pending-001-m8pp-006",
-      "runIdPrefix": "31e28ba3",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "8b913e8b-7669-42cd-a154-92e20ca6033e",
-      "severity": "high",
-      "fingerprint": "f0afe0d70dada190",
-      "scenarioId": "admission-double-booking-001-m8cx-004",
-      "runIdPrefix": "8a8ff5d1",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "9ba07368-9cf7-4c20-b339-c9b2e245fc9d",
-      "severity": "high",
-      "fingerprint": "50df1d69aac96d12",
-      "scenarioId": "admission-discharge-001-m8rs-001",
-      "runIdPrefix": "43134749",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "af46931e-f535-4a0f-a818-b2f6dd59cb18",
-      "severity": "medium",
-      "fingerprint": "68c457a21613e462",
-      "scenarioId": "admission-discharge-001-m8rs-001",
-      "runIdPrefix": "43134749",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "c3d6a0de-13ba-4e57-96d5-a2d23720e710",
-      "severity": "high",
-      "fingerprint": "f0afe0d70dada190",
-      "scenarioId": "admission-double-booking-001-m8cx-004",
-      "runIdPrefix": "985128a3",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "1c0b218b-ea61-4b39-9c88-93a2f22cc0fe",
-      "severity": "high",
-      "fingerprint": "50df1d69aac96d12",
-      "scenarioId": "admission-discharge-001-m8rs-001",
-      "runIdPrefix": "478289a5",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "53a3091d-2c84-4688-bea3-12a6e781788a",
-      "severity": "medium",
-      "fingerprint": "68c457a21613e462",
-      "scenarioId": "admission-discharge-001-m8rs-001",
-      "runIdPrefix": "478289a5",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "66cd8a89-bbe9-4a5a-bbc6-b255af5f0ced",
-      "severity": "high",
-      "fingerprint": "47934da9328984b6",
-      "scenarioId": "discharge-critical-pending-001",
-      "runIdPrefix": "9afec774",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "e9e72053-67d3-49f6-bcfe-f4066a706233",
-      "severity": "high",
-      "fingerprint": "47934da9328984b6",
-      "scenarioId": "discharge-critical-pending-001",
-      "runIdPrefix": "ccc706d2",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "4d8be5a5-2b64-4307-8709-c4f4af157982",
-      "severity": "high",
-      "fingerprint": "36f99e24a9f862a5",
-      "scenarioId": "admission-discharge-001-m8cx-008",
-      "runIdPrefix": "df88c218",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "bb80842f-6f29-4997-ae59-28a4aee83a19",
-      "severity": "medium",
-      "fingerprint": "39cf42cbd4461e5e",
-      "scenarioId": "admission-discharge-001-m8cx-008",
-      "runIdPrefix": "df88c218",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "108ac776-501d-4462-a0f9-f574bb409f49",
-      "severity": "high",
-      "fingerprint": "303642d4786fe652",
-      "scenarioId": "admission-double-booking-001-m8cx-004",
-      "runIdPrefix": "518b0f66",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "af30e7d6-6982-4d99-99bb-40db43fc1929",
-      "severity": "high",
-      "fingerprint": "f0afe0d70dada190",
-      "scenarioId": "admission-double-booking-001-m8cx-004",
-      "runIdPrefix": "518b0f66",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "fc37a66c-fe69-4cc4-a5ab-308b6e02daa0",
-      "severity": "high",
-      "fingerprint": "9915da53fd892db6",
-      "scenarioId": "admission-double-booking-001-m8cx-004",
-      "runIdPrefix": "518b0f66",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "06f2e304-3b23-4eb7-ab53-c8bf6be5b370",
-      "severity": "critical",
-      "fingerprint": "25cfbfe37b34dcd3",
-      "scenarioId": "admission-double-booking-001-m8cx-004",
-      "runIdPrefix": "518b0f66",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "93bd475d-21d7-42fe-9dab-dac6352845fd",
-      "severity": "high",
-      "fingerprint": "50df1d69aac96d12",
-      "scenarioId": "admission-discharge-001-m8rs-001",
-      "runIdPrefix": "139a47a9",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "a4b6d8ca-094e-4df7-bfdc-7b8f71ee72d7",
-      "severity": "medium",
-      "fingerprint": "68c457a21613e462",
-      "scenarioId": "admission-discharge-001-m8rs-001",
-      "runIdPrefix": "139a47a9",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "4ee8e0fb-8d0e-4564-a457-768b82192613",
-      "severity": "high",
-      "fingerprint": "bd1390f420e6a892",
-      "scenarioId": "llm-command-evolution-001",
-      "runIdPrefix": "b7984d8c",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "b69cf6ba-8ce3-4cba-b0ca-ded012621138",
-      "severity": "high",
-      "fingerprint": "c8a26389121b941c",
-      "scenarioId": "llm-command-evolution-001",
-      "runIdPrefix": "b7984d8c",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "4aa4c8a5-fdd2-4a12-ac76-0ec0bfc47dec",
-      "severity": "medium",
-      "fingerprint": "dd399ef1fab7dc52",
-      "scenarioId": "role-evolution-sign-001",
-      "runIdPrefix": "f760130e",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "d929bc46-86bf-4246-a8af-628a4e238483",
-      "severity": "medium",
-      "fingerprint": "dd399ef1fab7dc52",
-      "scenarioId": "role-evolution-sign-001",
-      "runIdPrefix": "df1e1f50",
-      "reviewStatus": "open"
-    },
-    {
-      "id": "9df618b2-baa4-4d98-bf45-57f86510a21c",
-      "severity": "critical",
-      "fingerprint": "cb7471b16b549859",
-      "scenarioId": "discharge-critical-pending-001",
-      "runIdPrefix": "7d389618",
       "reviewStatus": "open"
     }
   ]
