@@ -4,6 +4,7 @@ import { useClinicalCommandSubmit } from '../../clinical/useClinicalCommandSubmi
 import { useCommandResolveContext } from '../../clinical/useCommandResolveContext.js';
 import { useActivePatient } from '../../clinical/ActivePatientContext.js';
 import { isDualChartModesEnabled } from '../../dev/dualChartModesEnv.js';
+import { CommandConfirmationDialog } from '../CommandConfirmationDialog.js';
 import { EpisUniversalCommandBar } from '../command/EpisUniversalCommandBar.js';
 
 /** Command bar transversal en rutas /espacio/* — censo sin paciente o ficha con paciente (E5). */
@@ -19,6 +20,8 @@ export function ChartEspacioCommandDock() {
     ...(patientId ? { patientId } : {}),
     commandContext,
   });
+  const { query, setQuery, submit, pendingConfirmation, confirmPending, cancelPending } =
+    command;
 
   if (!isCensus && !patientId) return null;
 
@@ -26,15 +29,22 @@ export function ChartEspacioCommandDock() {
   if (pathname.startsWith('/espacio/ficha') && !isDualChartModesEnabled()) return null;
 
   return (
-    <EpisUniversalCommandBar
-      variant={isCensus ? 'census-search' : 'clinical-chart'}
-      embedded
-      query={command.query}
-      onQueryChange={command.setQuery}
-      onSubmit={() => void command.submit()}
-      suggestions={classicCommandSuggestionLabels(command.lastResult)}
-      onSuggestionSelect={(label) => void command.submit(label)}
-      testId={isCensus ? 'epis2-census-command-bar' : 'epis2-espacio-chart-command-bar'}
-    />
+    <>
+      <EpisUniversalCommandBar
+        variant={isCensus ? 'census-search' : 'clinical-chart'}
+        embedded
+        query={query}
+        onQueryChange={setQuery}
+        onSubmit={() => void submit()}
+        suggestions={classicCommandSuggestionLabels(command.lastResult)}
+        onSuggestionSelect={(label) => void submit(label)}
+        testId={isCensus ? 'epis2-census-command-bar' : 'epis2-espacio-chart-command-bar'}
+      />
+      <CommandConfirmationDialog
+        pending={pendingConfirmation}
+        onConfirm={() => void confirmPending()}
+        onCancel={cancelPending}
+      />
+    </>
   );
 }
