@@ -35,6 +35,17 @@ export {
   type SimAssistEvalEntry,
 } from './simAssistEvals.js';
 export {
+  DEMO_005_AIAST_DOCUMENT_ID,
+  DEMO_005_ALLERGY_QUERY,
+  DEMO_005_DOCUMENT_ID,
+  DEMO_005_QUERY_EMBEDDING,
+  DEMO_005_RAG_CHUNKS,
+  getDemo005AiastAllergyChunk,
+  getDemo005RagChunks,
+  type DemoRagChunkFixture,
+} from './demoRagChunks.js';
+export { demoEmbedText384 } from './demoRagEmbeddings.js';
+export {
   DEMO_CHART_PRIORITY_SECTIONS,
   DEMO_CHART_SECTIONS_BY_CODE,
   assertDemoChartSectionsInvariants,

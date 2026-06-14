@@ -1,10 +1,11 @@
-import type { AiAssistDraftRequest } from '@epis2/contracts';
+import type { AiAssistDraftRequest, AiDocumentCitation } from '@epis2/contracts';
 import type { AiConfig } from './config.js';
 import { getAssistBlueprintFields } from './assistSchemas.js';
 import { hashPrompt } from './hash.js';
 import type { InferenceProviderId } from './inference/types.js';
 import { generateWithInferenceRouter } from './inference/router.js';
 import { buildDraftAssistPrompt } from './prompt.js';
+import { resolveAssistDocumentCitations } from './rag/assistCitations.js';
 import { parseAndValidateAssistJson } from './validateOutput.js';
 
 export type AssistSuccess = {
@@ -17,6 +18,7 @@ export type AssistSuccess = {
   promptHash: string;
   provider: InferenceProviderId;
   dataTier: string;
+  documentCitations?: AiDocumentCitation[];
 };
 
 export type AssistFailure = {
@@ -46,6 +48,21 @@ export async function runDraftAssist(
   };
   if (request.context !== undefined) promptInput.context = request.context;
   if (request.currentFields !== undefined) promptInput.currentFields = request.currentFields;
+
+  const retrievalQuery = [
+    request.blueprintId.replace(/_/g, ' '),
+    request.context?.clinicalReason,
+    request.context?.chiefComplaint,
+    request.context?.eval,
+  ]
+    .filter((part): part is string => typeof part === 'string' && part.trim().length > 0)
+    .join(' ');
+
+  const citationBundle = resolveAssistDocumentCitations(request.patientId, retrievalQuery);
+  if (citationBundle?.contextText) {
+    promptInput.documentContext = citationBundle.contextText;
+  }
+
   const prompt = buildDraftAssistPrompt(promptInput);
   const promptHash = hashPrompt(prompt);
   const started = Date.now();
@@ -104,5 +121,8 @@ export async function runDraftAssist(
     promptHash,
     provider: generated.provider,
     dataTier: generated.dataTier,
+    ...(citationBundle?.citations.length
+      ? { documentCitations: citationBundle.citations }
+      : {}),
   };
 }

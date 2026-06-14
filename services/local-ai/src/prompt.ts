@@ -6,6 +6,7 @@ export type DraftAssistPromptInput = {
   fieldIds: string[];
   context?: Record<string, string>;
   currentFields?: Record<string, string>;
+  documentContext?: string;
 };
 
 export function buildDraftAssistPrompt(input: DraftAssistPromptInput): string {
@@ -32,6 +33,9 @@ export function buildDraftAssistPrompt(input: DraftAssistPromptInput): string {
     `Blueprint: ${input.blueprintId}`,
     `Campos permitidos: ${input.fieldIds.join(', ')}`,
     formatContextBlock(input.context ?? {}),
+    input.documentContext
+      ? `Fuentes documentales citadas (solo usar estas; no inventar datos):\n${input.documentContext}`
+      : '',
     currentLines ? `Borrador actual:\n${currentLines}` : '',
     'Genera sugerencias breves en español para campos vacíos o incompletos.',
   ]

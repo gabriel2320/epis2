@@ -2,6 +2,8 @@
  * Política de prompts clínica (concepto EPIS epis-ai-prompts) — sin RAG ni OpenMRS.
  */
 
+import { buildAntiFeedbackLoopPolicy } from './rag/assistContextPolicy.js';
+
 export const CLINICAL_DRAFT_DISCLAIMER =
   'BORRADOR IA — requiere revisión y firma médica. No guardar sin validación clínica.';
 
@@ -26,6 +28,7 @@ export function buildClinicalInferencePolicy(): string {
     '- PLAN/SUGERENCIAS: orienta al médico; NUNCA uses prescribo, indico, ordeno, administro.',
     '- Alergia, embarazo, anticoagulación o ERC: adviértelo si consta.',
     '- Toda salida permanece BORRADOR; requiere revisión humana.',
+    buildAntiFeedbackLoopPolicy(),
   ].join('\n');
 }
 

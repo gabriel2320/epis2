@@ -13,6 +13,7 @@ export type LocalAiAssistResult =
       promptHash: string;
       provider?: 'ollama' | 'openai';
       dataTier?: string;
+      documentCitations?: { documentId: string; chunkIndex: number }[];
     }
   | {
       status: 'unavailable' | 'rejected';

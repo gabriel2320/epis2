@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { aiDocumentCitationsSchema } from './rag.js';
 
 const inferenceProviderIdSchema = z.enum(['ollama', 'openai']);
 const inferenceModeSchema = z.enum(['ollama', 'openai', 'router']);
@@ -37,6 +38,7 @@ export const aiAssistDraftResponseSchema = z.discriminatedUnion('status', [
     latencyMs: z.number().int().nonnegative().optional(),
     provider: inferenceProviderIdSchema.optional(),
     dataTier: inferenceDataTierSchema.optional(),
+    documentCitations: aiDocumentCitationsSchema.optional(),
   }),
   z.object({
     status: z.literal('unavailable'),

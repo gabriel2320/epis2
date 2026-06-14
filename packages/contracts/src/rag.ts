@@ -43,3 +43,20 @@ export const embedDocumentResponseSchema = z.discriminatedUnion('status', [
 
 export type EmbedDocumentRequest = z.infer<typeof embedDocumentRequestSchema>;
 export type EmbedDocumentResponse = z.infer<typeof embedDocumentResponseSchema>;
+
+/** Cita documental trazable en assist (MF-IM-04). */
+export const aiDocumentCitationSchema = z.object({
+  documentId: z.string().uuid(),
+  chunkIndex: z.number().int().nonnegative(),
+});
+
+export const aiDocumentCitationsSchema = z.array(aiDocumentCitationSchema).max(8);
+
+export type AiDocumentCitation = z.infer<typeof aiDocumentCitationSchema>;
+
+/** Payload parcial persistido en ai_runs.output_payload. */
+export const aiRunDocumentCitationsPayloadSchema = z.object({
+  documentCitations: aiDocumentCitationsSchema,
+});
+
+export type AiRunDocumentCitationsPayload = z.infer<typeof aiRunDocumentCitationsPayloadSchema>;

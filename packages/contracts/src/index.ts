@@ -68,13 +68,22 @@ export {
 export {
   RAG_EMBED_DIM,
   RAG_EMBED_MODEL_DEFAULT,
+  aiDocumentCitationSchema,
+  aiDocumentCitationsSchema,
+  aiRunDocumentCitationsPayloadSchema,
   embedDocumentRequestSchema,
   embedDocumentResponseSchema,
   poolEmbeddingVector,
   normalizeEmbeddingVector,
   type EmbedDocumentRequest,
   type EmbedDocumentResponse,
+  type AiDocumentCitation,
+  type AiRunDocumentCitationsPayload,
 } from './rag.js';
+export {
+  aiProvenanceRecordSchema,
+  type AiProvenanceRecord,
+} from './ai-provenance.js';
 export {
   EPIS2_DRAFT_ASSIST_TRACE_KEY,
   draftAssistTraceSchema,

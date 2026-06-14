@@ -34,6 +34,7 @@ import { queryPatientRag } from './rag.js';
 import { suggestPatientSummary24h } from './summary.js';
 import { listRecentAiRuns, recordAiRun, type AiRunRecord } from './store.js';
 import { createRateLimitPreHandler } from '../security/rateLimit.js';
+import { withAiRunSpan } from './tracing.js';
 
 export async function registerAiRoutes(
   app: FastifyInstance,
@@ -94,10 +95,16 @@ export async function registerAiRoutes(
       }
 
       const session = (request as AuthenticatedRequest).session;
-      const { httpStatus, body } = await requestDraftAssist(
-        config.LOCAL_AI_BASE_URL,
-        parsed.data,
-        config.LOCAL_AI_API_KEY,
+      const { httpStatus, body } = await withAiRunSpan(
+        parsed.data.blueprintId,
+        () =>
+          requestDraftAssist(config.LOCAL_AI_BASE_URL, parsed.data, config.LOCAL_AI_API_KEY),
+        (result) => ({
+          model: result.body.model,
+          latencyMs: result.body.latencyMs,
+          provider:
+            result.body.status === 'success' ? result.body.provider : undefined,
+        }),
       );
 
       const baseRun: Pick<AiRunRecord, 'actorId' | 'blueprintId' | 'inputPayload'> & {
@@ -144,6 +151,9 @@ export async function registerAiRoutes(
             safetyNotes,
             ...(body.provider !== undefined ? { provider: body.provider } : {}),
             ...(body.dataTier !== undefined ? { dataTier: body.dataTier } : {}),
+            ...(body.documentCitations?.length
+              ? { documentCitations: body.documentCitations }
+              : {}),
           },
         });
 
@@ -157,6 +167,9 @@ export async function registerAiRoutes(
           latencyMs: body.latencyMs,
           ...(body.provider !== undefined ? { provider: body.provider } : {}),
           ...(body.dataTier !== undefined ? { dataTier: body.dataTier } : {}),
+          ...(body.documentCitations?.length
+            ? { documentCitations: body.documentCitations }
+            : {}),
         });
         return reply.send(response);
       }

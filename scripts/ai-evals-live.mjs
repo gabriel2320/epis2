@@ -145,11 +145,25 @@ async function evalBlueprint(blueprintId, attempt = 1) {
   }
 
   const fieldCount = Object.keys(data.suggestedFields ?? {}).length;
+  const citations = data.documentCitations ?? [];
+  if (citations.length === 0) {
+    return {
+      blueprintId,
+      passed: false,
+      contractValid: true,
+      detail: 'MF-IM-04: sin documentCitations (DEMO-005)',
+      latencyMs,
+    };
+  }
+
   return {
     blueprintId,
     passed: fieldCount > 0,
     contractValid: true,
-    detail: fieldCount > 0 ? `${fieldCount} campos · ${latencyMs}ms` : 'sin suggestedFields',
+    detail:
+      fieldCount > 0
+        ? `${fieldCount} campos · ${citations.length} citas · ${latencyMs}ms`
+        : 'sin suggestedFields',
     latencyMs,
   };
 }
