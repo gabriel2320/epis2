@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-15T21:00:00.000Z",
+  "generatedAt": "2026-06-14T22:00:00.000Z",
   "version": "11.0",
   "mode": "parallel-wave",
   "wave": 11,
@@ -17,10 +17,10 @@
     },
     "PROG-STRENGTHEN": {
       "state": "ACTIVE",
-      "progress": "19/23",
-      "activeMicrophase": "MF-IC-01",
-      "activeMicrophaseState": "BLOCKED",
-      "nextMicrophase": "MF-IC-02",
+      "progress": "20/23",
+      "activeMicrophase": "MF-IC-02",
+      "activeMicrophaseState": "READY",
+      "nextMicrophase": "MF-IC-03",
       "ledger": "docs/quality/strengthen-ledger.json"
     },
     "PROG-CDS-UX": {
@@ -50,10 +50,12 @@
     "MF-CU-02",
     "MF-CU-03",
     "MF-CU-04",
-    "PROG-CDS-UX"
+    "PROG-CDS-UX",
+    "MF-IC-01"
   ],
   "openPending": [
-    "MF-IC-01-minsal-export",
+    "MF-IC-01-ledger-close",
+    "MF-IC-02-snre-staging",
     "git-push"
   ],
   "workingTree": {
@@ -934,16 +936,17 @@
     ]
   },
   "wave11": {
-    "state": "BLOCKED",
-    "activationRequired": true,
+    "startedAt": "2026-06-14",
+    "completedAt": "2026-06-14",
+    "state": "DONE",
     "tracks": 3,
-    "outcome": "BLOCKED — activación humana requerida · MF-IC-01 Perfil export MINSAL · PROG-INTEROP-CHILE",
+    "outcome": "MF-IC-01 DONE · PROG-INTEROP-CHILE fase 1 · docs Ola 11 sync · STRENGTHEN 20/23",
     "parallelTracks": [
       {
         "id": "wave11-track-1-clinical",
         "subagent": "ollama-clinical",
         "microphase": "MF-IC-01",
-        "state": "BLOCKED",
+        "state": "DONE",
         "subprogram": "PROG-INTEROP-CHILE",
         "dependsOn": ["MF-IM-06", "MF-CU-04"],
         "objective": "Perfil export MINSAL — Patient/Encounter/DocumentReference desde demo; tests round-trip fhir-export Chile; alinear EPIS2_CHILE_CLINICAL_MODEL.md",
@@ -975,7 +978,7 @@
         "id": "wave11-track-2-gates",
         "subagent": "gate-runner",
         "microphase": "FAST-GATES-WORKING-TREE",
-        "state": "BLOCKED",
+        "state": "DONE",
         "objective": "dev:rapid + fhir-export tests + db:validate — MF-IC-01 closure (post activación humana)",
         "allowedPaths": [
           "reports/dev-agent-audit-diff-latest.json"
@@ -1000,14 +1003,14 @@
             "npm run db:validate"
           ]
         },
-        "startWhen": "parallel-after-human-activation",
+        "startWhen": "parallel",
         "prompt": "reports/dev-agent-prompt-gate-runner.md"
       },
       {
         "id": "wave11-track-3-writer",
         "subagent": "ollama-dev-writer",
         "microphase": "MF-RAPID-03-L0",
-        "state": "IN_PROGRESS",
+        "state": "DONE",
         "objective": "Documentación Ola 11 — sync brief, plan JSON, AGENT_CONTEXT, TABLERO, sección §21",
         "allowedPaths": [
           "reports/**",
@@ -1164,12 +1167,12 @@
     "iterationCommand": "npm run dev:rapid"
   },
   "activeSession": {
-    "microphase": "MF-IC-01",
-    "name": "Perfil export MINSAL (Patient/Encounter/DocumentReference)",
+    "microphase": "MF-IC-02",
+    "name": "SNRE staging MedicationRequest",
     "subprogram": "PROG-INTEROP-CHILE",
-    "wave": 11,
-    "dependsOn": ["MF-IM-06", "MF-CU-04"],
-    "state": "BLOCKED",
+    "wave": 12,
+    "dependsOn": ["MF-IC-01"],
+    "state": "READY",
     "subagent": "ollama-clinical",
     "gates": [
       "npm run test packages/fhir-export",
@@ -1180,14 +1183,13 @@
       "packages/clinical-domain/src/chile/**",
       "docs/product/EPIS2_CHILE_CLINICAL_MODEL.md"
     ],
-    "closureReport": "reports/epis2-mf-ic-01-minsal-export.md",
-    "orchestrationReportSection": "reports/epis2-orquestacion-paralela-2026-06-14.md#21-ola-11--mf-ic-01-perfil-export-minsal"
+    "closureReport": "reports/epis2-mf-ic-02-snre-staging.md"
   },
   "nextSession": {
-    "microphase": "MF-IC-01",
-    "name": "Perfil export MINSAL (Patient/Encounter/DocumentReference)",
-    "dependsOn": ["MF-CU-04"],
-    "state": "BLOCKED",
+    "microphase": "MF-IC-02",
+    "name": "SNRE staging MedicationRequest",
+    "dependsOn": ["MF-IC-01"],
+    "state": "READY",
     "subprogram": "PROG-INTEROP-CHILE",
     "gates": [
       "npm run test packages/fhir-export",
@@ -1198,7 +1200,7 @@
       "packages/clinical-domain/src/chile/**",
       "docs/product/EPIS2_CHILE_CLINICAL_MODEL.md"
     ],
-    "closureReport": "reports/epis2-mf-ic-01-minsal-export.md"
+    "closureReport": "reports/epis2-mf-ic-02-snre-staging.md"
   },
   "startup": {
     "commands": [
@@ -1213,8 +1215,8 @@
   "requiresHumanReview": false,
   "risks": [
     "Push remoto pendiente (12 commits ahead of origin/master)",
-    "Mezcla CU-04 y MF-IC-01 en misma sesión clínica",
-    "Contratos cds*.ts deben alinearse con mappers CU-02/CU-03 existentes",
+    "MF-IC-01 ledger pendiente actualización humana al merge código",
+    "Mezcla IC-02 y MF-IC-03 en misma sesión clínica",
     "Import @mui/* directo en apps/web (usar @epis2/epis2-ui / ClinicalCdsCard)",
     "E2E dual-chart requiere VITE_ENABLE_DUAL_CHART_MODES=true"
   ]

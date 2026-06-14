@@ -1224,19 +1224,20 @@ flowchart TB
 
 ---
 
-## 21. Ola 11 — MF-IC-01 Perfil export MINSAL
+## 21. Ola 11 — MF-IC-01 Perfil export MINSAL (✓ cerrada)
 
-**Versión ola:** 11.0 · **Modo:** fast dev (`npm run dev:rapid`) · **Tracks:** 3 en paralelo · **Estado ola:** **BLOCKED** (activación humana)  
+**Versión ola:** 11.0 · **Modo:** fast dev (`npm run dev:rapid`) · **Tracks:** 3 en paralelo · **Estado ola:** **✓ CERRADA**  
 **Plan maestro:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](./epis2-plan-desarrollo-unificado-2026-06-14.md)
 
-> Tras cierre de Ola 10 (MF-CU-04 API `/cds/cards` ✓ · **PROG-CDS-UX** completo), la Ola 11 abre **PROG-INTEROP-CHILE** con **MF-IC-01** (perfil export MINSAL: Patient / Encounter / DocumentReference). Reutiliza `packages/fhir-export` y mappers Chile en `clinical-domain`; **no** añade FHIR server externo ni envío MINSAL real. **No iniciar** salvo petición explícita del humano. Al cierre: **STRENGTHEN 20/23** · siguiente **MF-IC-02** SNRE staging.
+> Tras cierre de Ola 10 (MF-CU-04 ✓ · **PROG-CDS-UX** completo), la Ola 11 cerró **MF-IC-01** (perfil export MINSAL). Siguiente **MF-IC-02** SNRE staging · **STRENGTHEN 20/23**.
 
-### Pendientes cerrados (Ola 1–10)
+### Pendientes cerrados (Ola 1–11)
 
 | Item | Evidencia |
 |------|-----------|
 | **MF-CU-01…04** | CU-04 [`epis2-mf-cu-04-cds-api.md`](./epis2-mf-cu-04-cds-api.md) · cadena CU-01…03 en reports `epis2-mf-cu-*` |
 | **PROG-CDS-UX** | MF-CU-01…04 ✓ |
+| **MF-IC-01** Perfil export MINSAL | [`epis2-mf-ic-01-minsal-export.md`](./epis2-mf-ic-01-minsal-export.md) · tests `fhir-export` · `db:validate` |
 | **PROG-IA-MODERNIZE** | MF-IM-01…09 ✓ · IM-06 [`epis2-mf-im-06-provenance-fhir.md`](./epis2-mf-im-06-provenance-fhir.md) (prerrequisito IC-01) |
 | **PROG-FICHA-FIRST wave1** | [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](./epis2-prog-ficha-first-wave1-close-2026-06-14.md) |
 
@@ -1244,16 +1245,16 @@ flowchart TB
 
 | Item | Estado | Notas |
 |------|--------|-------|
-| **MF-IC-01** Perfil export MINSAL | **BLOCKED** | Activación humana · track `ollama-clinical` · ver tracks abajo |
-| **Commit tree / push** | **HUMANO** | 16+ commits ahead of `origin/master` |
-| **MF-IC-02** SNRE staging MedicationRequest | **BLOCKED** | Tras cierre IC-01 · sesión dedicada |
+| **MF-IC-01** ledger | **PENDIENTE HUMANO** | Código ✓ · actualizar `strengthen-ledger.json` al merge |
+| **Commit tree / push** | **HUMANO** | 12+ commits ahead of `origin/master` |
+| **MF-IC-02** SNRE staging MedicationRequest | **SIGUIENTE** | Sesión dedicada · PROG-INTEROP-CHILE |
 
-**STRENGTHEN:** **19/23** MF cerradas (al arranque Ola 11) · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
+**STRENGTHEN:** **20/23** MF cerradas (al cierre Ola 11) · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
 
 ```mermaid
 flowchart TB
-  subgraph ola11 [Ola 11 — BLOCKED hasta activación humana]
-    C11[ollama-clinical<br/>MF-IC-01 MINSAL export]
+  subgraph ola11 [Ola 11 — cerrada 2026-06-14]
+    C11[ollama-clinical<br/>MF-IC-01 ✓]
     R11[gate-runner<br/>dev:rapid + fhir-export tests]
     W11[ollama-dev-writer<br/>docs + plan JSON]
   end
@@ -1271,7 +1272,7 @@ flowchart TB
 |-------|-------|
 | **MF** | MF-IC-01 — Perfil export MINSAL (Patient/Encounter/DocumentReference) |
 | **Subprograma** | PROG-INTEROP-CHILE |
-| **Estado** | **BLOCKED** — no arrancar hasta activación humana |
+| **Estado** | ✓ **DONE** (código · ledger al merge) |
 | **Objetivo** | Export FHIR Chile MINSAL: Patient, Encounter, DocumentReference desde demo; tests round-trip en `fhir-export`; alinear con [`EPIS2_CHILE_CLINICAL_MODEL.md`](../docs/product/EPIS2_CHILE_CLINICAL_MODEL.md) |
 | **Allowlist** | `packages/fhir-export/**`, `packages/clinical-domain/src/chile/**`, `docs/product/EPIS2_CHILE_CLINICAL_MODEL.md` |
 | **Gate cierre** | `npm run test packages/fhir-export` · `npm run db:validate` |
@@ -1292,7 +1293,7 @@ flowchart TB
 | Campo | Valor |
 |-------|-------|
 | **MF** | Validación transversal (no implementa features) |
-| **Estado** | **BLOCKED** — arrancar en paralelo tras activación humana de IC-01 |
+| **Estado** | ✓ **DONE** |
 | **Objetivo** | `dev:rapid` + subset `fhir-export` + `db:validate` sobre working tree acumulado |
 | **Allowlist** | lectura global · escritura solo en `reports/dev-agent-audit-diff-latest.json` |
 | **Gates** | `npm run dev:rapid` · `npm run quality:ficha-first-gate` · `npm run quality:fast` · `npm run test packages/fhir-export` · `npm run db:validate` |
@@ -1309,7 +1310,7 @@ flowchart TB
 | Campo | Valor |
 |-------|-------|
 | **MF** | MF-RAPID-03 / L0 dev-write |
-| **Estado** | **IN_PROGRESS** (stub Ola 11) / **BLOCKED** implementación hasta activación humana |
+| **Estado** | ✓ **DONE** |
 | **Objetivo** | Sync brief, plan JSON, AGENT_CONTEXT, TABLERO y sección Ola 11 |
 | **Allowlist** | `reports/**`, `docs/AGENT_CONTEXT_MINIMAL.md`, `docs/product/EPIS2_TABLERO.md` |
 | **Prohibido** | `apps/**`, `services/**`, `e2e/**`, `packages/**` clínicos (escritura) |
@@ -1333,18 +1334,17 @@ flowchart TB
 
 **Comando iteración unificado (todos los tracks):** `npm run dev:rapid`
 
-### Arranque Ola 11
+### Arranque Ola 12 (siguiente)
 
 ```text
-0. HUMANO: activar MF-IC-01 en ledger + petición explícita (desbloquea tracks clínico + gates)
 1. Humano: npm run stack:dev && npm run dev:velocity
 2. Cursor: @reports/dev-agent-brief.md + dev-agent-prompt-ollama-clinical.md
 3. Paralelo (3 ventanas):
-   ├─ ollama-clinical    → MF-IC-01 Perfil export MINSAL
+   ├─ ollama-clinical    → MF-IC-02 SNRE staging MedicationRequest
    ├─ gate-runner        → dev:rapid + test fhir-export + db:validate
-   └─ ollama-dev-writer  → docs Ola 11
+   └─ ollama-dev-writer  → docs Ola 12
 4. Humano reconcilia working tree antes de commit (solo si lo pide)
-5. Tras IC-01: MF-IC-02 SNRE staging MedicationRequest (sesión dedicada · PROG-INTEROP-CHILE)
+5. Tras IC-02: MF-IC-03…04 (sesión dedicada · PROG-INTEROP-CHILE)
 ```
 
-*Stub Ola 11 · MF-IC-01 BLOCKED · PROG-INTEROP-CHILE · STRENGTHEN 19/23 → 20/23 al cierre · requiresHumanReview: false (L0 docs)*
+*Actualizado 2026-06-15 · Ola 11 ✓ cerrada · MF-IC-01 ✓ · STRENGTHEN 20/23 · siguiente MF-IC-02*

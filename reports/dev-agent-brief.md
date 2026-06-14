@@ -2,31 +2,31 @@
 
 > **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-layers-integrator.md` — declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-15T20:00:00.000Z · **Ola:** 10 ✓ · **STRENGTHEN** 19/23
+**Generado:** 2026-06-14T22:00:00.000Z · **Ola:** 11 ✓ · **STRENGTHEN** 20/23
 
 ## Orquestador (MF-RAPID + STRENGTHEN)
 
-- **PROG-STRENGTHEN** — **19/23** · **PROG-CDS-UX ✓** (MF-CU-01…04)
-- Ola 10 ✓ cerrada — MF-CU-04 API `/cds/cards` · `quality:cds-hooks-gate`
+- **PROG-STRENGTHEN** — **20/23** · **MF-IC-01 ✓** (cierre al merge código) · **PROG-INTEROP-CHILE** activo
+- Ola 11 ✓ cerrada — MF-IC-01 Perfil export MINSAL · `test packages/fhir-export` · `db:validate`
 - Plan: [`dev-agent-orchestration-plan.json`](./dev-agent-orchestration-plan.json) · §21 [`epis2-orquestacion-paralela-2026-06-14.md`](./epis2-orquestacion-paralela-2026-06-14.md)
 
 ## Estado del tablero (fuente canónica)
 
-- **Cerrado:** **MF-CU-01…04** ✓ · **PROG-CDS-UX** ✓ · **PROG-IA-MODERNIZE** ✓ · **PROG-FICHA-FIRST** wave1 ✓
-- **Siguiente (blocked):** **MF-IC-01** MINSAL export
+- **Cerrado:** **MF-IC-01** ✓ (código) · **MF-CU-01…04** ✓ · **PROG-CDS-UX** ✓ · **PROG-IA-MODERNIZE** ✓ · **PROG-FICHA-FIRST** wave1 ✓
+- **Siguiente:** **MF-IC-02** SNRE staging MedicationRequest
 
 ## Objetivo sugerido
 
-- **MF sugerida (blocked):** `MF-IC-01` — Perfil export MINSAL
+- **MF sugerida:** `MF-IC-02` — SNRE staging MedicationRequest
 - **Gate:** tests `packages/fhir-export` + `db:validate`
 
 ## Subagente primario
 
-**[`layers-integrator`](./dev-agent-prompt-layers-integrator.md)** — Integrador capas L3+L4+L5 (API CDS + contracts)
+**[`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md)** — IA clínica local (Ollama producto · PROG-INTEROP-CHILE)
 
 ## Secuencia completa
 
-1. `layers-integrator` — Integrador capas L3+L4+L5
+1. `ollama-clinical` — IA clínica local (PROG-INTEROP-CHILE)
 2. `ollama-dev-writer` — Escritor dev bajo riesgo (Ollama)
 3. `ollama-clinical` — IA clínica local (Ollama producto)
 4. `golden-guardian` — Guardián Golden Journey
@@ -102,9 +102,9 @@ npm run dev:agent:close    # checklist + plantilla reporte
 
 ## Secuencia recomendada
 
-1. [`layers-integrator`](./dev-agent-prompt-layers-integrator.md) — Integrador capas L3+L4+L5
+1. [`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md) — IA clínica local (PROG-INTEROP-CHILE)
 2. [`ollama-dev-writer`](./dev-agent-prompt-ollama-dev-writer.md) — Escritor dev bajo riesgo (Ollama)
-3. [`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md) — IA clínica local (Ollama producto)
+3. [`layers-integrator`](./dev-agent-prompt-layers-integrator.md) — Integrador capas L3+L4+L5
 4. [`golden-guardian`](./dev-agent-prompt-golden-guardian.md) — Guardián Golden Journey
 5. [`gate-runner`](./dev-agent-prompt-gate-runner.md) — Ejecutor de gates
 
