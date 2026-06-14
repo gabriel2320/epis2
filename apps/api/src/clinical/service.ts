@@ -20,6 +20,7 @@ import {
 import { asc, desc, eq, ilike, and, inArray, or, isNull } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import {
+  aiRuns,
   approvals,
   clinicalCriticalResults,
   clinicalDrafts,
@@ -34,6 +35,7 @@ import {
   problems,
 } from '../db/schema.js';
 import { appendAudit } from '../audit/store.js';
+import { buildAiProvenanceRecord } from './aiProvenance.js';
 import { runApprovalSideEffects } from './approval-side-effects.js';
 import { assertDischargeApprovalAllowed } from './discharge-approval-guards.js';
 
@@ -512,6 +514,19 @@ export async function approveDraft(
       });
     }
 
+    let aiProvenance;
+    if (assistTrace?.aiRunId !== undefined) {
+      const [aiRunRow] = await tx
+        .select()
+        .from(aiRuns)
+        .where(eq(aiRuns.id, assistTrace.aiRunId))
+        .limit(1);
+      if (aiRunRow) {
+        aiProvenance =
+          buildAiProvenanceRecord(aiRunRow, { aiRunId: assistTrace.aiRunId }) ?? undefined;
+      }
+    }
+
     await appendAudit(tx, {
       eventType: 'clinical.draft.approved',
       actorId: actor.id,
@@ -522,6 +537,7 @@ export async function approveDraft(
       payload: {
         noteId: note.id,
         ...(assistTrace?.aiRunId !== undefined ? { aiRunId: assistTrace.aiRunId } : {}),
+        ...(aiProvenance !== undefined ? { aiProvenance } : {}),
       },
     });
 
