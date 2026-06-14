@@ -66,7 +66,7 @@ Regla: **core no depende de labs** (deuda: API aún puede tocar case-intel — m
 | PROG-CDS-UX | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
 | PROG-RAPID | ✓ cerrado | `quality:rapid-gate` |
 | PROG-DI / tríada F6 | ✓ contratos | ver `reports/conciliacion/` |
-| **PROG-CONSOLIDATE** (propuesto) | ◐ Fase 0–3 ✓ | ver §Consolidación · `tool:gates:verify` |
+| **PROG-CONSOLIDATE** (propuesto) | ✓ Fase 0–4 | `tool:consolidate:verify-phase4` |
 
 Detalle inventario módulos: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md).
 
@@ -140,7 +140,8 @@ Prohibido en fase consolidación: nuevos registries, nuevo home, auto-aprobació
 | **0** Snapshot + clasificación | ✓ | `tools/legacy-scripts/`, `tool:scripts:classify` |
 | **1** Meta-gates + catálogo | ✓ | `tools/gates/`, `quality:required`, `quality:nightly` |
 | **2** Reducir root `package.json` | ✓ | `quality:gate`, shims wired, `catalog-full.json` |
-| **3** Mover `db:*` / E2E a workspaces | ✓ | `@epis2/api` db · `@epis2/web` e2e · root shims |
+| **3** Mover `db:*` / E2E a workspaces | ✓ | `@epis2/api` db · `@epis2/web` e2e |
+| **4** CI/catalog compat | ✓ | case-intel gates · `build:packages` + ai-client |
 
 **Duración sugerida:** 1–2 semanas · **Sin features clínicas nuevas**
 

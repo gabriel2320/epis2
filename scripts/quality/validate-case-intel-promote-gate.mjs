@@ -30,11 +30,10 @@ function loadDatabaseUrl() {
   return process.env.DATABASE_URL;
 }
 
-const catalogGate = spawnSync('npm', ['run', 'quality:case-intel-catalog-gate'], {
+const catalogGate = spawnSync('node', ['tools/gates/run-legacy.mjs', 'quality:case-intel-catalog-gate'], {
   cwd: root,
   stdio: 'pipe',
   encoding: 'utf8',
-  shell: true,
 });
 if (catalogGate.status !== 0) {
   errors.push('quality:case-intel-catalog-gate falló (precondición fixtures)');

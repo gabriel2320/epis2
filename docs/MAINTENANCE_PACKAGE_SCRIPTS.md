@@ -125,6 +125,7 @@ npm run quality:fast
 | **1** | `tools/gates/*` + `quality:required/nightly` | ✓ |
 | **2** | Quitar ~245 `quality:*` del root; `quality:gate` + shims wired | ✓ |
 | **3** | `db:*` → `@epis2/api`; `test:e2e*` → `@epis2/web` | ✓ |
+| **4** | Gates CI catalog-aware + `build:packages` + verify | ✓ |
 
 ---
 
