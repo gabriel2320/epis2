@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-14T20:14:45.066Z",
+  "generatedAt": "2026-06-14T20:18:49.298Z",
   "model": "qwen2.5-coder:7b",
   "route": {
     "baseUrl": "http://127.0.0.1:11434",
@@ -33,19 +33,21 @@
     "ollamaUp": true
   },
   "stagedOnly": false,
-  "diffChars": 23036,
+  "diffChars": 17048,
   "truncated": false,
   "audit": {
     "verdict": "APROBAR",
-    "summary": "El diff no contiene riesgos significativos que requieran acción inmediata.",
+    "summary": "El diff no contiene riesgos significativos que requieran corrección inmediata.",
     "findings": [
       {
         "severity": "P2",
         "category": "other",
-        "detail": "Se agregaron nuevos tipos de navegación y categorías, pero no se detectaron problemas evidentes."
+        "detail": "Se ha eliminado el uso de 'getProbablePatientActionChips' en DualChartPatientPage y se ha añadido la lógica para calcular las acciones probables en PatientWorkspacePage. Esto es parte del MF-FF-07."
       }
     ],
-    "suggestedTests": [],
+    "suggestedTests": [
+      "npm run quality:clinical-productivity-gate"
+    ],
     "requiresHumanReview": true
   }
 }

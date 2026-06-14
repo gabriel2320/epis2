@@ -58,7 +58,7 @@ Evidencia: [`epis2-mf-ff-01-03-ficha-first.md`](../../reports/epis2-mf-ff-01-03-
 
 | MF | Entrega | Gate |
 |----|---------|------|
-| **MF-FF-07** | Acciones probables en toda ficha (no solo dual-chart path) | `quality:clinical-productivity-gate` |
+| **MF-FF-07** | Acciones probables en toda ficha (no solo dual-chart path) | ✓ DONE |
 | **MF-FF-08** | Live templates cableadas (`dm2_control` + 2 nuevas) | `quality:clinical-productivity-gate` |
 | **MF-FF-09** | Evolución diaria — layout clínico fijo (TraditionalEhrLayout) | `quality:clinical-grid-gate` |
 | **MF-FF-10** | Receta A5 — triple vista (form + papel + print) | `golden-journey` |

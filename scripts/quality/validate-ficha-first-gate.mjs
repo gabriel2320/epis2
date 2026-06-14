@@ -20,6 +20,7 @@ const required = [
   ['closure ff-00', 'reports/epis2-mf-ff-00-canon-censo-first.md'],
   ['closure ff-04', 'reports/epis2-mf-ff-04-dashboard-secondary.md'],
   ['closure ff-05', 'reports/epis2-mf-ff-05-vision-agent.md'],
+  ['closure ff-07', 'reports/epis2-mf-ff-07-probable-actions.md'],
   ['vision', 'docs/product/VISION_EPIS2.md'],
 ];
 
@@ -58,6 +59,15 @@ if (!ff05 || ff05.state !== 'DONE') {
 const wave2 = ledger.waves?.find((w) => w.id === 'wave-2');
 if (!wave2 || wave2.state !== 'DONE') {
   errors.push('ficha-first-ledger: wave-2 debe estar DONE');
+}
+const ff07 = ledger.phases?.find((p) => p.id === 'MF-FF-07');
+if (!ff07 || ff07.state !== 'DONE') {
+  errors.push('ficha-first-ledger: MF-FF-07 debe estar DONE');
+}
+
+const workspacePage = readFileSync(join(root, 'apps/web/src/pages/PatientWorkspacePage.tsx'), 'utf8');
+if (!workspacePage.includes('getProbablePatientActionChips')) {
+  errors.push('PatientWorkspacePage debe cablear acciones probables (MF-FF-07)');
 }
 
 const router = readFileSync(join(root, 'apps/web/src/routes/router.tsx'), 'utf8');
@@ -109,4 +119,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('ficha-first-gate OK — MF-FF-00…06 · wave-2 (MF-FF-04/05)');
+console.log('ficha-first-gate OK — MF-FF-00…07 · wave-2/3');

@@ -4,7 +4,7 @@
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan unificado:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.5 · **Orquestación:** [`epis2-orquestacion-paralela-2026-06-14.md`](../../reports/epis2-orquestacion-paralela-2026-06-14.md) §22–§23
 
-> **PROG-STRENGTHEN** ✓ **23/23 cerrado** · **PROG-FICHA-FIRST** wave 2 ✓ · **MF-FF-07** READY (wave 3)
+> **PROG-STRENGTHEN** ✓ **23/23 cerrado** · **PROG-FICHA-FIRST** wave 3 · **MF-FF-08** READY
 
 ---
 
@@ -60,7 +60,8 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 
 | MF | Estado | Entrega |
 |----|--------|---------|
-| **MF-FF-07** | **READY** | Acciones probables en toda ficha |
+| **MF-FF-07** | ✓ DONE | Acciones probables · [`epis2-mf-ff-07-probable-actions.md`](../../reports/epis2-mf-ff-07-probable-actions.md) |
+| **MF-FF-08** | **READY** | Live templates en web |
 
 **Siguiente:** `npm run quality:ficha-first-next`
 

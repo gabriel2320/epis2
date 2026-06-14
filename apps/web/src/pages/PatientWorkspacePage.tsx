@@ -1,7 +1,14 @@
 import { copy } from '@epis2/design-system';
+import { detectChronicFocus } from '@epis2/clinical-forms';
+import {
+  getProbablePatientActionChips,
+  inferPatientCareSetting,
+} from '@epis2/command-registry';
+import { getDemoCaseByPatientId } from '@epis2/test-fixtures';
 import { Link, useSearch } from '@tanstack/react-router';
 import { classicModeToDualChartSearch, useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { isDualChartModesEnabled } from '../dev/dualChartModesEnv.js';
+import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 import { Alert, EpisButton, Stack, Typography, epis2ShellContentIslandSx } from '@epis2/epis2-ui';
@@ -31,6 +38,7 @@ import { PatientSummaryAntecedentsBlock } from '../components/PatientSummaryAnte
 import { PatientSummaryDocumentsBlock } from '../components/PatientSummaryDocumentsBlock.js';
 import { PatientWorkspaceCommandPanel } from '../components/PatientWorkspaceCommandPanel.js';
 import { CommandConfirmationDialog } from '../components/CommandConfirmationDialog.js';
+import { ClinicalProbableActionsPanel } from '../components/chart/ClinicalProbableActionsPanel.js';
 import { DualChartPatientPage } from './DualChartPatientPage.js';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -41,8 +49,10 @@ export function PatientWorkspacePage() {
     chartMode?: string;
   };
   const navigate = useClinicalNavigate();
+  const { session } = useAuth();
   const { openDashboardMode } = useEpisSession();
   const isClassicMode = useClassicMd3Mode();
+  const isDualChart = isDualChartModesEnabled();
   const { patient: active, setPatient } = useActivePatient();
   const [alertBlueprintId, setAlertBlueprintId] = useState<string | undefined>();
   const [alertLabel, setAlertLabel] = useState<string | undefined>();
@@ -118,6 +128,49 @@ export function PatientWorkspacePage() {
     [detail, clinicalSummary],
   );
   const error = detailQuery.isError ? copy.errors.genericMessage : undefined;
+  const demoCase = useMemo(
+    () => (patientId ? getDemoCaseByPatientId(patientId) : undefined),
+    [patientId],
+  );
+  const pendingDraftCount = useMemo(
+    () => longitudinal?.timeline.filter((event) => event.kind === 'draft').length ?? 0,
+    [longitudinal?.timeline],
+  );
+  const chronicFocus = useMemo(() => {
+    if (!summaryFields || Object.keys(summaryFields).length === 0) return null;
+    return detectChronicFocus(summaryFields);
+  }, [summaryFields]);
+  const probableActionChips = useMemo(() => {
+    if (!session || !patientId) return [];
+    const chartMode =
+      search.chartMode === 'paper' ? 'paper' : ('traditional' as const);
+    return getProbablePatientActionChips({
+      role: session.user.role,
+      permissions: session.permissions,
+      careSetting: inferPatientCareSetting({
+        hospitalizado: clinicalSummary?.hospitalizado,
+        scenarioLabel: demoCase?.scenario,
+      }),
+      context: {
+        workspace: 'patient_chart',
+        chartMode: isDualChart ? chartMode : 'traditional',
+        pendingDraftCount,
+        activeAlertCount: clinicalAlerts.length,
+      },
+      chronicFocus,
+    });
+  }, [
+    session,
+    patientId,
+    clinicalSummary?.hospitalizado,
+    demoCase?.scenario,
+    pendingDraftCount,
+    clinicalAlerts.length,
+    chronicFocus,
+    isDualChart,
+    search.chartMode,
+  ]);
+  const onProbableAction = (label: string) => void classicCommand.submit(label);
 
   const openDraft = (draftId: string) => {
     void navigate({
@@ -202,6 +255,10 @@ export function PatientWorkspacePage() {
     <Stack spacing={2}>
       <PatientClinicalSummaryPanel summaryFields={summaryFields} />
 
+      {probableActionChips.length > 0 ? (
+        <ClinicalProbableActionsPanel chips={probableActionChips} onSelect={onProbableAction} />
+      ) : null}
+
       {showAlerts ? (
         <ClinicalAlertsPanel
           alerts={clinicalAlerts}
@@ -243,8 +300,6 @@ export function PatientWorkspacePage() {
     <Typography color="text.secondary">{copy.drafts.loading}</Typography>
   );
 
-  const isDualChart = isDualChartModesEnabled();
-
   const allergyLabels = longitudinal?.allergies.map((a) => a.substance) ?? [];
   const alertLabels = clinicalAlerts.filter((a) => a.severity === 'critical').map((a) => a.message);
   const metaLine = [
@@ -282,6 +337,8 @@ export function PatientWorkspacePage() {
               onOpenDraft={openDraft}
               onViewFullTimeline={openSupportingTimeline}
               onOpenEvolution={longitudinalNav.onOpenNote}
+              probableActionChips={probableActionChips}
+              onProbableAction={onProbableAction}
             />
           }
           supportingContent={
@@ -325,6 +382,8 @@ export function PatientWorkspacePage() {
         onOpenResults={longitudinalNav.onOpenResults}
         onOpenEvolution={longitudinalNav.onOpenNote}
         onViewFullTimeline={openSupportingTimeline}
+        probableActionChips={probableActionChips}
+        onProbableAction={onProbableAction}
       />
     );
   }

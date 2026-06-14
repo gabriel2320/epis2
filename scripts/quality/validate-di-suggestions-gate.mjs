@@ -42,8 +42,12 @@ if (!contextPane.includes('ClinicalSilentSuggestionsPanel')) {
 }
 
 const dual = readFileSync(join(root, 'apps/web/src/pages/DualChartPatientPage.tsx'), 'utf8');
-if (!dual.includes('getProbablePatientActionChips')) {
-  errors.push('DualChartPatientPage debe calcular acciones probables');
+const workspace = readFileSync(join(root, 'apps/web/src/pages/PatientWorkspacePage.tsx'), 'utf8');
+if (!workspace.includes('getProbablePatientActionChips')) {
+  errors.push('PatientWorkspacePage debe calcular acciones probables (MF-FF-07)');
+}
+if (!dual.includes('probableActionChips')) {
+  errors.push('DualChartPatientPage debe recibir acciones probables');
 }
 if (!dual.includes('clinicalAlerts={clinicalAlerts}')) {
   errors.push('DualChartPatientPage debe pasar alertas al panel de contexto');

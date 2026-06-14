@@ -1,10 +1,5 @@
 import { copy } from '@epis2/design-system';
 import { buildClinicalContextDense } from '@epis2/clinical-domain';
-import { detectChronicFocus } from '@epis2/clinical-forms';
-import {
-  getProbablePatientActionChips,
-  inferPatientCareSetting,
-} from '@epis2/command-registry';
 import { getDemoCaseByPatientId } from '@epis2/test-fixtures';
 import { useSearch } from '@tanstack/react-router';
 import { useEffect, useMemo, useState } from 'react';
@@ -13,6 +8,7 @@ import type {
   PatientClinicalSummaryResponse,
   PatientLongitudinalResponse,
 } from '@epis2/contracts';
+import type { CommandChip } from '@epis2/command-registry';
 import { useAuth } from '../auth/AuthContext.js';
 import { classicCommandSuggestionLabels } from '../classic-md3/commandSuggestions.js';
 import { useCommandDictionarySuggestions } from '../clinical/useCommandDictionarySuggestions.js';
@@ -57,6 +53,8 @@ export type DualChartPatientPageProps = {
   onOpenResults: () => void;
   onOpenEvolution: () => void;
   onViewFullTimeline: () => void;
+  probableActionChips: readonly CommandChip[];
+  onProbableAction: (commandSample: string) => void;
 };
 
 /** Ficha dual ADR-002 — tradicional | papel bajo flag (MF-DUAL-CHART-03). */
@@ -73,6 +71,8 @@ export function DualChartPatientPage({
   onOpenResults,
   onOpenEvolution,
   onViewFullTimeline,
+  probableActionChips,
+  onProbableAction,
 }: DualChartPatientPageProps) {
   const rawSearch = useSearch({ strict: false }) as Record<string, unknown>;
   const navigate = useClinicalNavigate();
@@ -158,42 +158,6 @@ export function DualChartPatientPage({
     });
   }, [longitudinal, clinicalSummary?.ultimoEncuentroAt, detail.clinicalContext.openEncounterId, demoCase?.scenario]);
 
-  const pendingDraftCount = useMemo(
-    () => longitudinal?.timeline.filter((event) => event.kind === 'draft').length ?? 0,
-    [longitudinal?.timeline],
-  );
-
-  const chronicFocus = useMemo(() => {
-    if (!summaryFields || Object.keys(summaryFields).length === 0) return null;
-    return detectChronicFocus(summaryFields);
-  }, [summaryFields]);
-
-  const probableActionChips = useMemo(() => {
-    if (!session) return [];
-    return getProbablePatientActionChips({
-      role: session.user.role,
-      permissions: session.permissions,
-      careSetting: inferPatientCareSetting({
-        hospitalizado: clinicalSummary?.hospitalizado,
-        scenarioLabel: demoCase?.scenario,
-      }),
-      context: {
-        workspace: 'patient_chart',
-        chartMode: 'traditional',
-        pendingDraftCount,
-        activeAlertCount: clinicalAlerts.length,
-      },
-      chronicFocus,
-    });
-  }, [
-    session,
-    clinicalSummary?.hospitalizado,
-    demoCase?.scenario,
-    pendingDraftCount,
-    clinicalAlerts.length,
-    chronicFocus,
-  ]);
-
   return (
     <>
       <ClinicalShell
@@ -250,7 +214,7 @@ export function DualChartPatientPage({
             onViewFullTimeline={handleViewFullTimeline}
             onOpenEvolution={onOpenEvolution}
             probableActionChips={probableActionChips}
-            onProbableAction={(label) => void classicCommand.submit(label)}
+            onProbableAction={onProbableAction}
             initialTraditionalSection={savedTraditionalSection}
             focusTraditionalSection={focusTimelineSection}
             onTraditionalSectionPersist={saveTraditionalSection}

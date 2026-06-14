@@ -137,7 +137,8 @@
       "id": "MF-FF-07",
       "wave": "wave-3",
       "name": "Acciones probables en toda ficha",
-      "state": "READY",
+      "state": "DONE",
+      "completedAt": "2026-06-15",
       "dependsOn": ["MF-FF-06", "MF-FF-04"],
       "gate": "quality:clinical-productivity-gate",
       "allowedPaths": ["apps/web/src/pages/PatientWorkspacePage.tsx", "apps/web/src/pages/DualChartPatientPage.tsx"],
@@ -148,7 +149,7 @@
       "id": "MF-FF-08",
       "wave": "wave-3",
       "name": "Live templates en web",
-      "state": "BLOCKED",
+      "state": "READY",
       "dependsOn": ["MF-FF-07"],
       "gate": "quality:clinical-productivity-gate",
       "allowedPaths": [

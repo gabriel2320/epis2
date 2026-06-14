@@ -170,6 +170,7 @@ describe('PatientWorkspacePage', () => {
     expect(screen.queryByTestId('epis2-ficha-widget-panel')).not.toBeInTheDocument();
     expect(screen.getByTestId('epis2-clinical-alerts')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-clinical-summary')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-clinical-probable-actions')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-ficha-antecedents')).toBeInTheDocument();
     expect(screen.getByTestId('epis2-ficha-documents')).toBeInTheDocument();
     expect(screen.getByText('Infección (demo)')).toBeInTheDocument();
