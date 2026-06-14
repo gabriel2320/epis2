@@ -3,6 +3,7 @@ import { classicCommandSuggestionLabels } from '../../classic-md3/commandSuggest
 import { useClinicalCommandSubmit } from '../../clinical/useClinicalCommandSubmit.js';
 import { useCommandResolveContext } from '../../clinical/useCommandResolveContext.js';
 import { useActivePatient } from '../../clinical/ActivePatientContext.js';
+import { isDualChartModesEnabled } from '../../dev/dualChartModesEnv.js';
 import { EpisUniversalCommandBar } from '../command/EpisUniversalCommandBar.js';
 
 /** Command bar transversal en rutas /espacio/* — censo sin paciente o ficha con paciente (E5). */
@@ -20,6 +21,9 @@ export function ChartEspacioCommandDock() {
   });
 
   if (!isCensus && !patientId) return null;
+
+  // UX-B.2 legacy ficha monta PatientWorkspaceCommandPanel; evitar doble barra con dual off.
+  if (pathname.startsWith('/espacio/ficha') && !isDualChartModesEnabled()) return null;
 
   return (
     <EpisUniversalCommandBar
