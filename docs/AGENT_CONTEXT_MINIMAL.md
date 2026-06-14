@@ -1,8 +1,8 @@
 # EPIS2 — Contexto mínimo para agentes (Cursor)
 
-**Versión:** 4.0 · **Ola 14 ✓** · **STRENGTHEN** 23/23 ✓ · **FICHA-FIRST ✓** (wave 1–5)
+**Versión:** 4.2 · **Ola 14 ✓** · **STRENGTHEN** 23/23 ✓ · **FICHA-FIRST ✓** · **Consolidación** Fase 0–1 ✓
 
-> Canon completo solo si la tarea lo exige: `docs/PRODUCT_CANON.md`, `docs/product/PRODUCT_INVARIANTS.md`, `AGENTS.md`.
+> **Brújula de alcance:** [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) · inventario: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md)
 
 ---
 
@@ -58,6 +58,8 @@ Cerrado: MF-IM-01…09 · **MF-CU-01…04** · **MF-IC-01…04** · **MF-FF-01�
 
 Cierre FICHA-FIRST: [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-prog-ficha-first-close-2026.md). **PROG-MEDIA-FUTURE** diferido 2027+.
 
+**Siguiente fase recomendada:** **PROG-CONSOLIDATE** — ver [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) (congelar features; clasificar; meta-gates). **No** auto-iniciar sin petición explícita.
+
 ---
 
 ## Gates por tipo de cambio
@@ -67,7 +69,8 @@ Cierre FICHA-FIRST: [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-pr
 | Docs, reportes, scripts quality, UI menor | `npm run quality:fast` o `npm run dev:rapid` |
 | Estado ledgers (iteración) | `npm run quality:registry-status` |
 | API/web/packages clínicos, microfase | `npm run quality:clinical` |
-| Pre-PR, cierre tramo, signoff | `npm run quality:full` |
+| Pre-PR | `npm run quality:full` o **`quality:required`** |
+| CI extendido local | `npm run quality:nightly` |
 
 ### `quality:fast` incluye
 
@@ -117,6 +120,7 @@ Atajos: `quality:fast` · `dev:agent:audit-diff` · `dev:rapid -- --skip-audit`
 
 | Doc | Cuándo |
 |-----|--------|
-| [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md) | Siguiente MF/hilo |
+| [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) | **Brújula módulos y consolidación** |
+| [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md) | Histórico MF/hilo — alinear en consolidación |
 | [`EPIS2_DEV_VELOCITY.md`](dev/EPIS2_DEV_VELOCITY.md) | Gates por rol |
 | [`GOLDEN_CLINICAL_JOURNEY.md`](../quality/GOLDEN_CLINICAL_JOURNEY.md) | Solo UI/flujo clínico |
