@@ -5,11 +5,7 @@
 import { copy } from '@epis2/design-system';
 import { getDemoCaseByCode } from '@epis2/test-fixtures';
 import { test, expect } from '@playwright/test';
-import {
-  fillCommandPaletteQuery,
-  loginAsPhysician,
-  pinDemoCase,
-} from './helpers/demoPatient.js';
+import { fillCommandPaletteQuery, loginAsPhysician, pinDemoCase } from './helpers/demoPatient.js';
 
 const dm2Patient = getDemoCaseByCode('DEMO-002')!;
 
@@ -25,9 +21,7 @@ test.describe('MF-DI-10 — secretario clínico sin Ollama', () => {
 
   test('journey control crónico DM2 — capas DI, comando, microjourney, lab', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto(
-      `/espacio/ficha?patientId=${dm2Patient.patientId}&chartMode=traditional`,
-    );
+    await page.goto(`/espacio/ficha?patientId=${dm2Patient.patientId}&chartMode=traditional`);
     await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
     await expect(page.getByTestId('epis2-clinical-context-dense-strip')).toBeVisible();
     await expect(page.getByTestId('epis2-clinical-probable-actions')).toBeVisible();
@@ -46,9 +40,7 @@ test.describe('MF-DI-10 — secretario clínico sin Ollama', () => {
     });
     await expect(page.getByTestId('epis2-microjourney-linked-rx')).toBeVisible();
 
-    await page.goto(
-      `/espacio/ficha?patientId=${dm2Patient.patientId}&chartMode=traditional`,
-    );
+    await page.goto(`/espacio/ficha?patientId=${dm2Patient.patientId}&chartMode=traditional`);
     await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
     await page.keyboard.press('Control+k');
     await fillCommandPaletteQuery(page, 'lab');
@@ -62,9 +54,7 @@ test.describe('MF-DI-10 — secretario clínico sin Ollama', () => {
     await expect(page.getByTestId('epis2-form-lab_request')).toBeVisible({ timeout: 15_000 });
     await expect(page.getByTestId('epis2-command-prefill-badge')).toBeVisible();
 
-    await page.goto(
-      `/espacio/ficha?patientId=${dm2Patient.patientId}&chartMode=traditional`,
-    );
+    await page.goto(`/espacio/ficha?patientId=${dm2Patient.patientId}&chartMode=traditional`);
     await page.getByTestId('epis2-traditional-ehr-nav-navEvolution').click();
     await expect(page.getByTestId('epis2-clinical-filterable-timeline')).toBeVisible();
   });

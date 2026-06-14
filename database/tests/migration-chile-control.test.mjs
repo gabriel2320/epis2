@@ -33,7 +33,10 @@ describe('MF-SH-06 — control migraciones Chile 035–040', () => {
   });
 
   it('037 vista patient_clinical_summary', async () => {
-    const sql = await readFile(join(migrationsDir, '037_chile_patient_clinical_summary.sql'), 'utf8');
+    const sql = await readFile(
+      join(migrationsDir, '037_chile_patient_clinical_summary.sql'),
+      'utf8',
+    );
     expect(sql).toContain('patient_clinical_summary');
   });
 
