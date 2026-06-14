@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-06-14T22:00:00.000Z",
-  "version": "11.0",
+  "generatedAt": "2026-06-14T23:00:00.000Z",
+  "version": "12.0",
   "mode": "parallel-wave",
-  "wave": 11,
+  "wave": 12,
   "waveMode": "fast-dev",
   "activePhase": "A6",
   "masterPlan": "reports/epis2-plan-desarrollo-unificado-2026-06-14.md",
@@ -19,7 +19,7 @@
       "state": "ACTIVE",
       "progress": "20/23",
       "activeMicrophase": "MF-IC-02",
-      "activeMicrophaseState": "READY",
+      "activeMicrophaseState": "BLOCKED",
       "nextMicrophase": "MF-IC-03",
       "ledger": "docs/quality/strengthen-ledger.json"
     },
@@ -1039,6 +1039,111 @@
       }
     ]
   },
+  "wave12": {
+    "startedAt": null,
+    "state": "BLOCKED",
+    "tracks": 3,
+    "strengthenPre": "20/23",
+    "strengthenOnClosure": "21/23",
+    "outcome": null,
+    "parallelTracks": [
+      {
+        "id": "wave12-track-1-clinical",
+        "subagent": "ollama-clinical",
+        "microphase": "MF-IC-02",
+        "state": "BLOCKED",
+        "subprogram": "PROG-INTEROP-CHILE",
+        "dependsOn": ["MF-IC-01"],
+        "objective": "SNRE staging MedicationRequest — draft prescription → MedicationRequest JSON staging; test round-trip schema; sin envío SNRE real",
+        "allowedPaths": [
+          "packages/fhir-export/**",
+          "apps/api/src/routes/clinical/**",
+          "packages/clinical-forms/src/blueprints/prescription*"
+        ],
+        "forbiddenPaths": [
+          "apps/web/**",
+          "apps/api/src/routes/cds/**",
+          "packages/contracts/src/cds*.ts",
+          "services/local-ai/**",
+          "e2e/**",
+          "reports/**",
+          "docs/**",
+          "database/migrations/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run test packages/fhir-export",
+          "mfClose": "npm run db:validate"
+        },
+        "closureReport": "reports/epis2-mf-ic-02-snre-staging.md",
+        "prompt": "reports/dev-agent-prompt-ollama-clinical.md",
+        "unblocks": ["MF-IC-03"]
+      },
+      {
+        "id": "wave12-track-2-gates",
+        "subagent": "gate-runner",
+        "microphase": "FAST-GATES-WORKING-TREE",
+        "state": "BLOCKED",
+        "objective": "dev:rapid + fhir-export tests + db:validate — MF-IC-02 closure",
+        "allowedPaths": [
+          "reports/dev-agent-audit-diff-latest.json"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "validation": [
+            "npm run quality:fast",
+            "npm run quality:ficha-first-gate",
+            "npm run test packages/fhir-export",
+            "npm run db:validate"
+          ],
+          "prePr": [
+            "npm run check",
+            "npm run test",
+            "npm run db:validate"
+          ]
+        },
+        "startWhen": "parallel",
+        "prompt": "reports/dev-agent-prompt-gate-runner.md"
+      },
+      {
+        "id": "wave12-track-3-writer",
+        "subagent": "ollama-dev-writer",
+        "microphase": "MF-RAPID-03-L0",
+        "state": "DONE",
+        "objective": "Documentación Ola 12 — stub §22 + sync brief, plan JSON, AGENT_CONTEXT, TABLERO",
+        "allowedPaths": [
+          "reports/**",
+          "docs/AGENT_CONTEXT_MINIMAL.md",
+          "docs/product/EPIS2_TABLERO.md"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**",
+          "database/migrations/**"
+        ],
+        "deliverables": [
+          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/dev-agent-orchestration-plan.json",
+          "reports/dev-agent-brief.md",
+          "docs/AGENT_CONTEXT_MINIMAL.md",
+          "docs/product/EPIS2_TABLERO.md"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run dev:rapid -- --skip-audit"
+        },
+        "prompt": "reports/dev-agent-prompt-ollama-dev-writer.md"
+      }
+    ]
+  },
   "parallelTracks": [
     {
       "id": "track-1-clinical",
@@ -1172,7 +1277,7 @@
     "subprogram": "PROG-INTEROP-CHILE",
     "wave": 12,
     "dependsOn": ["MF-IC-01"],
-    "state": "READY",
+    "state": "BLOCKED",
     "subagent": "ollama-clinical",
     "gates": [
       "npm run test packages/fhir-export",
@@ -1180,8 +1285,8 @@
     ],
     "allowedPaths": [
       "packages/fhir-export/**",
-      "packages/clinical-domain/src/chile/**",
-      "docs/product/EPIS2_CHILE_CLINICAL_MODEL.md"
+      "apps/api/src/routes/clinical/**",
+      "packages/clinical-forms/src/blueprints/prescription*"
     ],
     "closureReport": "reports/epis2-mf-ic-02-snre-staging.md"
   },
@@ -1189,18 +1294,20 @@
     "microphase": "MF-IC-02",
     "name": "SNRE staging MedicationRequest",
     "dependsOn": ["MF-IC-01"],
-    "state": "READY",
+    "state": "BLOCKED",
     "subprogram": "PROG-INTEROP-CHILE",
+    "wave": 12,
     "gates": [
       "npm run test packages/fhir-export",
       "npm run db:validate"
     ],
     "allowedPaths": [
       "packages/fhir-export/**",
-      "packages/clinical-domain/src/chile/**",
-      "docs/product/EPIS2_CHILE_CLINICAL_MODEL.md"
+      "apps/api/src/routes/clinical/**",
+      "packages/clinical-forms/src/blueprints/prescription*"
     ],
-    "closureReport": "reports/epis2-mf-ic-02-snre-staging.md"
+    "closureReport": "reports/epis2-mf-ic-02-snre-staging.md",
+    "strengthenOnClosure": "21/23"
   },
   "startup": {
     "commands": [
@@ -1214,9 +1321,11 @@
   },
   "requiresHumanReview": false,
   "risks": [
+    "Ola 12 BLOCKED — activación humana MF-IC-02 requerida antes de implementación clínica",
     "Push remoto pendiente (12 commits ahead of origin/master)",
     "MF-IC-01 ledger pendiente actualización humana al merge código",
     "Mezcla IC-02 y MF-IC-03 en misma sesión clínica",
+    "Envío SNRE/MINSAL real prohibido — solo staging JSON local",
     "Import @mui/* directo en apps/web (usar @epis2/epis2-ui / ClinicalCdsCard)",
     "E2E dual-chart requiere VITE_ENABLE_DUAL_CHART_MODES=true"
   ]

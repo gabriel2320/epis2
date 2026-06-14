@@ -1,10 +1,10 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-14 · **STRENGTHEN** 20/23
+**Actualizado:** 2026-06-15 · **STRENGTHEN** 21/23
 
-Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan unificado:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) · **Orquestación:** [`epis2-orquestacion-paralela-2026-06-14.md`](../../reports/epis2-orquestacion-paralela-2026-06-14.md) §20–§21
+Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan unificado:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) · **Orquestación:** [`epis2-orquestacion-paralela-2026-06-14.md`](../../reports/epis2-orquestacion-paralela-2026-06-14.md) §21–§22
 
-> **PROG-STRENGTHEN** **20/23** · **MF-IC-01 ✓** · **siguiente MF-IC-02** SNRE staging (blocked)
+> **PROG-STRENGTHEN** **21/23** · **MF-IC-01…02 ✓** · **siguiente MF-IC-03** (blocked)
 
 ---
 
@@ -62,14 +62,14 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 
 ## En curso — PROG-STRENGTHEN-2026
 
-**Progreso:** **20/23** MF cerradas · Ola 11 ✓ (MF-IC-01 MINSAL export) · **PROG-CDS-UX ✓**
+**Progreso:** **21/23** MF cerradas · Ola 12 ✓ (MF-IC-02 SNRE staging)
 
 | Subprograma | Estado | Siguiente |
 |-------------|--------|-----------|
 | **PROG-CORE-HARDEN** | ✓ MF-SH-01…06 | — |
 | **PROG-IA-MODERNIZE** | ✓ MF-IM-01…09 | — |
 | **PROG-CDS-UX** | ✓ MF-CU-01…04 | — |
-| **PROG-INTEROP-CHILE** | fase 1 ✓ | **MF-IC-02** SNRE staging (blocked) |
+| **PROG-INTEROP-CHILE** | fases 1–2 ✓ | **MF-IC-03** Questionnaire (blocked) |
 
 `npm run quality:strengthen-next` · ledger [`strengthen-ledger.json`](../quality/strengthen-ledger.json)
 
@@ -114,6 +114,7 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 | **MF-CU-03** order-select CDS hook | alertas al prescribir · [`epis2-mf-cu-03-order-select.md`](../../reports/epis2-mf-cu-03-order-select.md) |
 | **MF-CU-04** API `/cds/cards` | prefetch paciente interno · [`epis2-mf-cu-04-cds-api.md`](../../reports/epis2-mf-cu-04-cds-api.md) |
 | **MF-IC-01** MINSAL export | Patient/Encounter/DocumentReference · [`epis2-mf-ic-01-minsal-export.md`](../../reports/epis2-mf-ic-01-minsal-export.md) |
+| **MF-IC-02** SNRE staging | MedicationRequest staging JSON · [`epis2-mf-ic-02-snre-staging.md`](../../reports/epis2-mf-ic-02-snre-staging.md) |
 | **MF-FF-01…06** ficha-first wave1 | censo home · dual default · `/comando` redirect · ClinicalShell · [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/epis2-prog-ficha-first-wave1-close-2026-06-14.md) |
 | **PROG-CONCILIACION tríada** | F0–F7 ✓ · [`epis2-prog-conciliacion-triada-close-2026.md`](../../reports/epis2-prog-conciliacion-triada-close-2026.md) |
 

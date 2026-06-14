@@ -1,6 +1,6 @@
 # EPIS2 — Contexto mínimo para agentes (Cursor)
 
-**Versión:** 3.3 · **Ola 11 ✓** · **PROG-INTEROP-CHILE** (MF-IC-01) · **STRENGTHEN** 20/23
+**Versión:** 3.4 · **Ola 12 ✓** · **STRENGTHEN** 21/23
 
 > Canon completo solo si la tarea lo exige: `docs/PRODUCT_CANON.md`, `docs/product/PRODUCT_INVARIANTS.md`, `AGENTS.md`.
 
@@ -41,16 +41,18 @@ Un objetivo · pocos archivos · diff mínimo.
 |----------|--------|----------------|
 | **PROG-RAPID** | ✓ cerrado | `npm run quality:rapid-gate` |
 | **PROG-FICHA-FIRST** | ✓ wave1 cerrado · wave2 MF-FF-00 READY | `quality:ficha-first-gate` |
-| **PROG-STRENGTHEN** | **20/23** · MF-IC-01 ✓ · **MF-IC-02** siguiente (blocked) | `npm run quality:strengthen-next` |
+| **PROG-STRENGTHEN** | **21/23** · MF-IC-01…02 ✓ · **MF-IC-03** siguiente (blocked) | `npm run quality:strengthen-next` |
 | **PROG-CDS-UX** | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
 
 Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.3 · orquestación: [`reports/epis2-orquestacion-paralela-2026-06-14.md`](../reports/epis2-orquestacion-paralela-2026-06-14.md) §20–§21
 
 **Ola 11:** ✓ MF-IC-01 Perfil export MINSAL · [`epis2-mf-ic-01-minsal-export.md`](../reports/epis2-mf-ic-01-minsal-export.md)
 
-Cerrado: MF-IM-01…09 · **MF-CU-01…04** · **MF-IC-01** · **MF-FF-01…06** (wave1) · PROG-RAPID · PROG-DI · tríada · PROG-IA-MODERNIZE · **PROG-CDS-UX**.
+**Ola 12:** ✓ MF-IC-02 SNRE staging · [`epis2-mf-ic-02-snre-staging.md`](../reports/epis2-mf-ic-02-snre-staging.md)
 
-Siguiente: **MF-IC-02** SNRE staging MedicationRequest (PROG-INTEROP-CHILE).
+Cerrado: MF-IM-01…09 · **MF-CU-01…04** · **MF-IC-01…02** · **MF-FF-01…06** (wave1) · PROG-RAPID · PROG-DI · tríada · PROG-IA-MODERNIZE · **PROG-CDS-UX**.
+
+Siguiente: **MF-IC-03** Questionnaire export piloto (blocked).
 
 ---
 

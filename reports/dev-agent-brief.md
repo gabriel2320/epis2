@@ -2,23 +2,23 @@
 
 > **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-layers-integrator.md` — declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-14T22:00:00.000Z · **Ola:** 11 ✓ · **STRENGTHEN** 20/23
+**Generado:** 2026-06-15T22:00:00.000Z · **Ola:** 12 ✓ · **STRENGTHEN** 21/23
 
 ## Orquestador (MF-RAPID + STRENGTHEN)
 
-- **PROG-STRENGTHEN** — **20/23** · **MF-IC-01 ✓** (cierre al merge código) · **PROG-INTEROP-CHILE** activo
-- Ola 11 ✓ cerrada — MF-IC-01 Perfil export MINSAL · `test packages/fhir-export` · `db:validate`
-- Plan: [`dev-agent-orchestration-plan.json`](./dev-agent-orchestration-plan.json) · §21 [`epis2-orquestacion-paralela-2026-06-14.md`](./epis2-orquestacion-paralela-2026-06-14.md)
+- **PROG-STRENGTHEN** — **21/23** · **MF-IC-01…02 ✓** · **PROG-INTEROP-CHILE** fases 1–2
+- Ola 12 ✓ cerrada — MF-IC-02 SNRE staging · `test packages/fhir-export`
+- Plan: [`dev-agent-orchestration-plan.json`](./dev-agent-orchestration-plan.json) · §22 [`epis2-orquestacion-paralela-2026-06-14.md`](./epis2-orquestacion-paralela-2026-06-14.md)
 
 ## Estado del tablero (fuente canónica)
 
-- **Cerrado:** **MF-IC-01** ✓ (código) · **MF-CU-01…04** ✓ · **PROG-CDS-UX** ✓ · **PROG-IA-MODERNIZE** ✓ · **PROG-FICHA-FIRST** wave1 ✓
-- **Siguiente:** **MF-IC-02** SNRE staging MedicationRequest
+- **Cerrado:** **MF-IC-01…02** ✓ · **MF-CU-01…04** ✓ · **PROG-CDS-UX** ✓ · **PROG-IA-MODERNIZE** ✓
+- **Siguiente (blocked):** **MF-IC-03** Questionnaire export piloto
 
 ## Objetivo sugerido
 
-- **MF sugerida:** `MF-IC-02` — SNRE staging MedicationRequest
-- **Gate:** tests `packages/fhir-export` + `db:validate`
+- **MF sugerida (blocked):** `MF-IC-03` — Questionnaire export piloto
+- **Gate:** tests `packages/fhir-export`
 
 ## Subagente primario
 

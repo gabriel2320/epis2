@@ -1348,3 +1348,132 @@ flowchart TB
 ```
 
 *Actualizado 2026-06-15 · Ola 11 ✓ cerrada · MF-IC-01 ✓ · STRENGTHEN 20/23 · siguiente MF-IC-02*
+
+---
+
+## 22. Ola 12 — MF-IC-02 SNRE staging MedicationRequest (operational stub)
+
+**Versión ola:** 12.0 · **Modo:** fast dev (`npm run dev:rapid`) · **Tracks:** 3 en paralelo · **Estado ola:** **BLOCKED** (stub operativo)  
+**Plan maestro:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](./epis2-plan-desarrollo-unificado-2026-06-14.md)
+
+> Tras cierre de Ola 11 (MF-IC-01 ✓ · **STRENGTHEN 20/23**), la Ola 12 implementará **MF-IC-02** (SNRE staging — draft `prescription` → `MedicationRequest` JSON staging). Sin envío SNRE/MINSAL real. Al cierre: **STRENGTHEN 21/23** · siguiente **MF-IC-03**.
+
+### Pendientes cerrados (Ola 1–11)
+
+| Item | Evidencia |
+|------|-----------|
+| **MF-CU-01…04** | CU-04 [`epis2-mf-cu-04-cds-api.md`](./epis2-mf-cu-04-cds-api.md) · cadena CU-01…03 en reports `epis2-mf-cu-*` |
+| **PROG-CDS-UX** | MF-CU-01…04 ✓ |
+| **MF-IC-01** Perfil export MINSAL | [`epis2-mf-ic-01-minsal-export.md`](./epis2-mf-ic-01-minsal-export.md) · tests `fhir-export` |
+| **PROG-IA-MODERNIZE** | MF-IM-01…09 ✓ · IM-06 [`epis2-mf-im-06-provenance-fhir.md`](./epis2-mf-im-06-provenance-fhir.md) |
+| **PROG-FICHA-FIRST wave1** | [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](./epis2-prog-ficha-first-wave1-close-2026-06-14.md) |
+
+### Pendientes abiertos (Ola 12 — BLOCKED)
+
+| Item | Estado | Notas |
+|------|--------|-------|
+| **MF-IC-02** SNRE staging MedicationRequest | **BLOCKED** | Track `ollama-clinical` · activación humana |
+| **MF-IC-01** ledger | **PENDIENTE HUMANO** | Código ✓ · actualizar `strengthen-ledger.json` al merge |
+| **Commit tree / push** | **HUMANO** | 12+ commits ahead of `origin/master` |
+| **MF-IC-03** Questionnaire export piloto | **BLOCKED** | Tras cierre IC-02 · sesión dedicada |
+
+**STRENGTHEN:** **20/23** (pre-Ola 12) → **21/23** al cierre MF-IC-02 · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
+
+```mermaid
+flowchart TB
+  subgraph ola12 [Ola 12 — BLOCKED stub 2026-06-14]
+    C12[ollama-clinical<br/>MF-IC-02 SNRE staging]
+    R12[gate-runner<br/>dev:rapid + fhir-export tests]
+    W12[ollama-dev-writer<br/>docs + plan JSON]
+  end
+  PLAN12[plan-desarrollo-unificado] --> ola12
+  C12 -->|cierra IC-02| IC03[MF-IC-03 Questionnaire]
+  R12 -->|validación| GATES12[test fhir-export · db:validate]
+  W12 -->|L0| DOCS12[brief + AGENT_CONTEXT + este doc §22]
+```
+
+---
+
+### Track 1 — `ollama-clinical` → MF-IC-02 SNRE staging MedicationRequest
+
+| Campo | Valor |
+|-------|-------|
+| **MF** | MF-IC-02 — SNRE staging MedicationRequest |
+| **Subprograma** | PROG-INTEROP-CHILE |
+| **Estado** | **BLOCKED** (deps ✓ · activación humana) |
+| **Objetivo** | Draft `prescription` → `MedicationRequest` JSON staging; test round-trip schema SNRE; extender `fhir-export` / MF-CHILE-RX-01 sin envío SNRE real |
+| **Allowlist** | `packages/fhir-export/**`, `apps/api/src/routes/clinical/**`, `packages/clinical-forms/src/blueprints/prescription*` |
+| **Gate cierre** | `npm run test packages/fhir-export` · `npm run db:validate` |
+| **Iteración** | `npm run dev:rapid` |
+| **Prompt** | [`dev-agent-prompt-ollama-clinical.md`](./dev-agent-prompt-ollama-clinical.md) |
+| **Reporte cierre** | `reports/epis2-mf-ic-02-snre-staging.md` |
+
+**Prerrequisitos:** MF-IC-01 ✓ · MF-CHILE-RX-01 (mapper base en `fhir-export`) · `npm run stack:dev`.
+
+**Evidencia requerida:** draft prescription demo → MedicationRequest staging JSON · test round-trip schema · sin envío SNRE/MINSAL real · alinear [`EPIS2_CHILE_CLINICAL_MODEL.md`](../docs/product/EPIS2_CHILE_CLINICAL_MODEL.md) § D6 / MF-CHILE-RX-01
+
+**Prohibido:** envío SNRE/MINSAL real, FHIR server externo, migraciones sin MF explícita, tocar CDS hooks (CU-02/CU-03) o API `/cds/cards`, mezclar MF-IC-03 en misma sesión.
+
+---
+
+### Track 2 — `gate-runner` → fast gates + fhir-export
+
+| Campo | Valor |
+|-------|-------|
+| **MF** | Validación transversal (no implementa features) |
+| **Estado** | **BLOCKED** |
+| **Objetivo** | `dev:rapid` + subset `fhir-export` + `db:validate` sobre working tree acumulado |
+| **Allowlist** | lectura global · escritura solo en `reports/dev-agent-audit-diff-latest.json` |
+| **Gates** | `npm run dev:rapid` · `npm run quality:ficha-first-gate` · `npm run quality:fast` · `npm run test packages/fhir-export` · `npm run db:validate` |
+| **Cierre sesión (si humano pide pre-PR)** | `npm run check` · `npm run test` · `npm run db:validate` |
+| **Iteración** | `npm run dev:rapid` |
+| **Prompt** | [`dev-agent-prompt-gate-runner.md`](./dev-agent-prompt-gate-runner.md) |
+
+**Rol:** validar FICHA-FIRST + arquitectura + tests SNRE staging mientras IC-02 toca `fhir-export`, `clinical-forms` y rutas clínicas API.
+
+---
+
+### Track 3 — `ollama-dev-writer` → documentación orquestación (este entregable)
+
+| Campo | Valor |
+|-------|-------|
+| **MF** | MF-RAPID-03 / L0 dev-write |
+| **Estado** | ✓ **DONE** (stub §22 + plan JSON wave12) |
+| **Objetivo** | Sync brief, plan JSON, AGENT_CONTEXT, TABLERO y sección Ola 12 |
+| **Allowlist** | `reports/**`, `docs/AGENT_CONTEXT_MINIMAL.md`, `docs/product/EPIS2_TABLERO.md` |
+| **Prohibido** | `apps/**`, `services/**`, `e2e/**`, `packages/**` clínicos (escritura) |
+| **Gate cierre** | `npm run dev:rapid -- --skip-audit` |
+| **Iteración** | `npm run dev:rapid` |
+| **Prompt** | [`dev-agent-prompt-ollama-dev-writer.md`](./dev-agent-prompt-ollama-dev-writer.md) |
+
+---
+
+### Matriz Ola 12 (3 tracks)
+
+| Zona | Track dueño | Prohibido para otros |
+|------|-------------|---------------------|
+| `packages/fhir-export/**` | ollama-clinical | dev-writer, gate-runner (escritura) |
+| `apps/api/src/routes/clinical/**` | ollama-clinical | dev-writer |
+| `packages/clinical-forms/src/blueprints/prescription*` | ollama-clinical | dev-writer |
+| `reports/**`, `docs/AGENT_CONTEXT_MINIMAL.md`, `docs/product/EPIS2_TABLERO.md` | ollama-dev-writer | ollama-clinical |
+| `packages/clinical-domain/src/chile/minsalProfiles.ts` | — | **todos** (alcance IC-01 cerrado; solo lectura) |
+| `apps/api/src/routes/cds/**` | — | **todos** (alcance CU-04 cerrado) |
+| `database/migrations/**` | — | **todos** |
+
+**Comando iteración unificado (todos los tracks):** `npm run dev:rapid`
+
+### Arranque Ola 12
+
+```text
+1. Humano: npm run stack:dev && npm run dev:velocity
+2. Humano: activar MF-IC-02 en ledger (BLOCKED → READY) si aplica
+3. Cursor: @reports/dev-agent-brief.md + dev-agent-prompt-ollama-clinical.md
+4. Paralelo (3 ventanas):
+   ├─ ollama-clinical    → MF-IC-02 SNRE staging MedicationRequest
+   ├─ gate-runner        → dev:rapid + test fhir-export + db:validate
+   └─ ollama-dev-writer  → docs Ola 12 (stub ✓)
+5. Humano reconcilia working tree antes de commit (solo si lo pide)
+6. Tras IC-02: MF-IC-03 Questionnaire export piloto (sesión dedicada · PROG-INTEROP-CHILE)
+```
+
+*Actualizado 2026-06-14 · Ola 12 BLOCKED stub · MF-IC-02 siguiente · STRENGTHEN 20/23 → 21/23 al cierre · requiresHumanReview: false (L0 docs)*
