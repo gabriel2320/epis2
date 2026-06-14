@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-06-15T16:00:00.000Z",
-  "version": "10.0",
+  "generatedAt": "2026-06-15T20:00:00.000Z",
+  "version": "10.1",
   "mode": "parallel-wave",
-  "wave": 10,
+  "wave": 11,
   "waveMode": "fast-dev",
-  "activePhase": "A5c",
+  "activePhase": "A6",
   "masterPlan": "reports/epis2-plan-desarrollo-unificado-2026-06-14.md",
   "orchestrationReport": "reports/epis2-orquestacion-paralela-2026-06-14.md",
   "iterationCommand": "npm run dev:rapid",
@@ -17,16 +17,18 @@
     },
     "PROG-STRENGTHEN": {
       "state": "ACTIVE",
-      "progress": "18/23",
-      "activeMicrophase": "MF-CU-04",
-      "nextMicrophase": "MF-IC-01",
+      "progress": "19/23",
+      "activeMicrophase": "MF-IC-01",
+      "activeMicrophaseState": "BLOCKED",
+      "nextMicrophase": "MF-IC-02",
       "ledger": "docs/quality/strengthen-ledger.json"
     },
     "PROG-CDS-UX": {
-      "state": "ACTIVE",
+      "state": "CLOSED",
       "wave": 10,
-      "activeMicrophase": "MF-CU-04",
-      "nextMicrophase": "MF-IC-01",
+      "completedAt": "2026-06-15",
+      "evidence": "reports/epis2-mf-cu-04-cds-api.md",
+      "gate": "quality:cds-hooks-gate",
       "subprogramOf": "PROG-STRENGTHEN",
       "ledger": "docs/quality/strengthen-ledger.json"
     }
@@ -45,10 +47,13 @@
     "E2E-FASE-B",
     "PROG-IA-MODERNIZE",
     "MF-CU-01",
-    "MF-CU-02"
+    "MF-CU-02",
+    "MF-CU-03",
+    "MF-CU-04",
+    "PROG-CDS-UX"
   ],
   "openPending": [
-    "MF-CU-03-order-select",
+    "MF-IC-01-minsal-export",
     "git-push"
   ],
   "workingTree": {
@@ -829,6 +834,105 @@
       }
     ]
   },
+  "wave10": {
+    "startedAt": "2026-06-15",
+    "completedAt": "2026-06-15",
+    "tracks": 3,
+    "outcome": "MF-CU-04 DONE · PROG-CDS-UX cerrado · docs Ola 10 sync · STRENGTHEN 19/23",
+    "parallelTracks": [
+      {
+        "id": "wave10-track-1-layers",
+        "subagent": "layers-integrator",
+        "microphase": "MF-CU-04",
+        "state": "DONE",
+        "subprogram": "PROG-CDS-UX",
+        "objective": "API /cds/cards interno — GET/POST prefetch paciente demo; contratos CdsCard* en packages/contracts; sin FHIR server externo",
+        "allowedPaths": [
+          "apps/api/src/routes/cds/**",
+          "packages/contracts/src/cds*.ts",
+          "scripts/quality/validate-cds-hooks-gate.mjs"
+        ],
+        "forbiddenPaths": [
+          "apps/web/**",
+          "services/local-ai/**",
+          "e2e/**",
+          "reports/**",
+          "docs/**",
+          "database/migrations/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run quality:cds-hooks-gate",
+          "mfClose": "npm run quality:clinical"
+        },
+        "closureReport": "reports/epis2-mf-cu-04-cds-api.md",
+        "prompt": "reports/dev-agent-prompt-layers-integrator.md",
+        "unblocks": ["MF-IC-01"]
+      },
+      {
+        "id": "wave10-track-2-gates",
+        "subagent": "gate-runner",
+        "microphase": "FAST-GATES-WORKING-TREE",
+        "state": "READY",
+        "objective": "dev:rapid + cds-hooks-gate — MF-CU-04 closure",
+        "allowedPaths": [
+          "reports/dev-agent-audit-diff-latest.json"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "validation": [
+            "npm run quality:fast",
+            "npm run quality:ficha-first-gate",
+            "npm run quality:cds-hooks-gate"
+          ],
+          "prePr": [
+            "npm run check",
+            "npm run test",
+            "npm run db:validate"
+          ]
+        },
+        "startWhen": "parallel",
+        "prompt": "reports/dev-agent-prompt-gate-runner.md"
+      },
+      {
+        "id": "wave10-track-3-writer",
+        "subagent": "ollama-dev-writer",
+        "microphase": "MF-RAPID-03-L0",
+        "state": "DONE",
+        "objective": "Documentación Ola 10 — sync brief, plan JSON, AGENT_CONTEXT, TABLERO",
+        "allowedPaths": [
+          "reports/**",
+          "docs/AGENT_CONTEXT_MINIMAL.md",
+          "docs/product/EPIS2_TABLERO.md"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**",
+          "database/migrations/**"
+        ],
+        "deliverables": [
+          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/dev-agent-orchestration-plan.json",
+          "reports/dev-agent-brief.md",
+          "docs/AGENT_CONTEXT_MINIMAL.md",
+          "docs/product/EPIS2_TABLERO.md"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run dev:rapid -- --skip-audit"
+        },
+        "prompt": "reports/dev-agent-prompt-ollama-dev-writer.md"
+      }
+    ]
+  },
   "parallelTracks": [
     {
       "id": "track-1-clinical",
@@ -957,44 +1061,41 @@
     "iterationCommand": "npm run dev:rapid"
   },
   "activeSession": {
-    "microphase": "MF-CU-03",
-    "name": "Hook order-select (prescripción)",
-    "subprogram": "PROG-CDS-UX",
-    "wave": 9,
-    "dependsOn": ["MF-CU-02"],
-    "state": "ACTIVE",
-    "subagent": "layers-integrator",
+    "microphase": "MF-IC-01",
+    "name": "Perfil export MINSAL (Patient/Encounter/DocumentReference)",
+    "subprogram": "PROG-INTEROP-CHILE",
+    "wave": 11,
+    "dependsOn": ["MF-IM-06", "MF-CU-04"],
+    "state": "BLOCKED",
+    "subagent": "ollama-clinical",
     "gates": [
-      "npm run quality:cds-hooks-gate"
+      "npm run test packages/fhir-export",
+      "npm run db:validate"
     ],
     "allowedPaths": [
-      "apps/api/src/routes/cds/**",
-      "apps/web/src/pages/**/prescription/**",
-      "packages/clinical-domain/**"
+      "packages/fhir-export/**",
+      "packages/clinical-domain/src/chile/**",
+      "docs/product/EPIS2_CHILE_CLINICAL_MODEL.md"
     ],
-    "forbiddenPaths": [
-      "database/migrations/**",
-      "services/asr-local/**",
-      "packages/contracts/src/cds*.ts"
-    ],
-    "closureReport": "reports/epis2-mf-cu-03-order-select.md",
-    "orchestrationReportSection": "reports/epis2-orquestacion-paralela-2026-06-14.md#19-ola-9--mf-cu-03-order-select-cds-hook"
+    "closureReport": "reports/epis2-mf-ic-01-minsal-export.md",
+    "orchestrationReportSection": "reports/epis2-orquestacion-paralela-2026-06-14.md#21-próxima-ola--mf-ic-01-minsal-export-blocked"
   },
   "nextSession": {
-    "microphase": "MF-CU-04",
-    "name": "API /cds/cards interno",
-    "dependsOn": ["MF-CU-03"],
+    "microphase": "MF-IC-01",
+    "name": "Perfil export MINSAL (Patient/Encounter/DocumentReference)",
+    "dependsOn": ["MF-CU-04"],
     "state": "BLOCKED",
-    "wave": 10,
+    "subprogram": "PROG-INTEROP-CHILE",
     "gates": [
-      "npm run quality:cds-hooks-gate"
+      "npm run test packages/fhir-export",
+      "npm run db:validate"
     ],
     "allowedPaths": [
-      "apps/api/src/routes/cds/**",
-      "packages/contracts/src/cds*.ts"
+      "packages/fhir-export/**",
+      "packages/clinical-domain/src/chile/**",
+      "docs/product/EPIS2_CHILE_CLINICAL_MODEL.md"
     ],
-    "closureReport": "reports/epis2-mf-cu-04-cds-api.md",
-    "orchestrationReportSection": "reports/epis2-orquestacion-paralela-2026-06-14.md#20-próxima-ola--mf-cu-04-api-cdscards-blocked"
+    "closureReport": "reports/epis2-mf-ic-01-minsal-export.md"
   },
   "startup": {
     "commands": [
@@ -1009,7 +1110,8 @@
   "requiresHumanReview": false,
   "risks": [
     "Push remoto pendiente (12 commits ahead of origin/master)",
-    "Mezcla CU-03 y CU-04 en misma sesión clínica",
+    "Mezcla CU-04 y MF-IC-01 en misma sesión clínica",
+    "Contratos cds*.ts deben alinearse con mappers CU-02/CU-03 existentes",
     "Import @mui/* directo en apps/web (usar @epis2/epis2-ui / ClinicalCdsCard)",
     "E2E dual-chart requiere VITE_ENABLE_DUAL_CHART_MODES=true"
   ]

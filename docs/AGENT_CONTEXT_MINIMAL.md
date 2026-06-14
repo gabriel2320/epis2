@@ -1,6 +1,6 @@
 # EPIS2 — Contexto mínimo para agentes (Cursor)
 
-**Versión:** 3.0 · **MF-CU-03** ✓ · **STRENGTHEN** 18/23
+**Versión:** 3.2 · **Ola 10 ✓** · **PROG-CDS-UX ✓** · **STRENGTHEN** 19/23
 
 > Canon completo solo si la tarea lo exige: `docs/PRODUCT_CANON.md`, `docs/product/PRODUCT_INVARIANTS.md`, `AGENTS.md`.
 
@@ -41,18 +41,16 @@ Un objetivo · pocos archivos · diff mínimo.
 |----------|--------|----------------|
 | **PROG-RAPID** | ✓ cerrado | `npm run quality:rapid-gate` |
 | **PROG-FICHA-FIRST** | ✓ wave1 cerrado · wave2 MF-FF-00 READY | `quality:ficha-first-gate` |
-| **PROG-STRENGTHEN** | **18/23** · MF-CU-01…03 ✓ | `npm run quality:strengthen-next` |
-| **PROG-CDS-UX** | MF-CU-03 ✓ · **MF-CU-04** siguiente | `quality:cds-hooks-gate` |
+| **PROG-STRENGTHEN** | **19/23** · MF-CU-01…04 ✓ · **MF-IC-01** siguiente (blocked) | `npm run quality:strengthen-next` |
+| **PROG-CDS-UX** | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
 
-Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.1 · orquestación: [`reports/epis2-orquestacion-paralela-2026-06-14.md`](../reports/epis2-orquestacion-paralela-2026-06-14.md) §18–§19
+Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.3 · orquestación: [`reports/epis2-orquestacion-paralela-2026-06-14.md`](../reports/epis2-orquestacion-paralela-2026-06-14.md) §20–§21
 
-**Ola 8:** ✓ MF-CU-02 patient-view CDS hook · `quality:cds-hooks-gate`.
+**Ola 10:** ✓ MF-CU-04 API `/cds/cards` · GET+POST · prefetch paciente interno · contratos `cdsCards.ts`.
 
-**Ola 9:** ✓ MF-CU-03 order-select CDS hook · API `/api/cds/order-select` · receta DEMO-005.
+Cerrado: MF-IM-01…09 · **MF-CU-01…04** · **MF-FF-01…06** (wave1) · PROG-RAPID · PROG-DI · tríada · PROG-IA-MODERNIZE · **PROG-CDS-UX**.
 
-Cerrado: MF-IM-01…09 · **MF-CU-01…03** · **MF-FF-01…06** (wave1) · PROG-RAPID · PROG-DI · tríada · PROG-IA-MODERNIZE.
-
-Siguiente (blocked): **MF-CU-04** API `/cds/cards` interno.
+Siguiente: **MF-IC-01** Perfil export MINSAL (PROG-INTEROP-CHILE · blocked).
 
 ---
 

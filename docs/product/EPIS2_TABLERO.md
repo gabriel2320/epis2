@@ -1,10 +1,10 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-15 · **STRENGTHEN** 18/23
+**Actualizado:** 2026-06-15 · **STRENGTHEN** 19/23
 
-Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan unificado:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) · **Orquestación:** [`epis2-orquestacion-paralela-2026-06-14.md`](../../reports/epis2-orquestacion-paralela-2026-06-14.md) §19–§20
+Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan unificado:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) · **Orquestación:** [`epis2-orquestacion-paralela-2026-06-14.md`](../../reports/epis2-orquestacion-paralela-2026-06-14.md) §20–§21
 
-> **PROG-STRENGTHEN** **18/23** · **MF-CU-01…03 ✓** · **siguiente MF-CU-04** (blocked)
+> **PROG-STRENGTHEN** **19/23** · **PROG-CDS-UX ✓** (MF-CU-01…04) · **siguiente MF-IC-01** (blocked)
 
 ---
 
@@ -62,13 +62,14 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 
 ## En curso — PROG-STRENGTHEN-2026
 
-**Progreso:** **18/23** MF cerradas · Ola 9 ✓ (MF-CU-03 order-select) · **PROG-CDS-UX** fases 1–3 ✓
+**Progreso:** **19/23** MF cerradas · Ola 10 ✓ (MF-CU-04 API `/cds/cards`) · **PROG-CDS-UX ✓**
 
 | Subprograma | Estado | Siguiente |
 |-------------|--------|-----------|
 | **PROG-CORE-HARDEN** | ✓ MF-SH-01…06 | — |
 | **PROG-IA-MODERNIZE** | ✓ MF-IM-01…09 | — |
-| **PROG-CDS-UX** | fases 1–3 ✓ | **MF-CU-04** API `/cds/cards` · `quality:cds-hooks-gate` (blocked) |
+| **PROG-CDS-UX** | ✓ MF-CU-01…04 | — |
+| **PROG-INTEROP-CHILE** | pendiente | **MF-IC-01** MINSAL export (blocked) |
 
 `npm run quality:strengthen-next` · ledger [`strengthen-ledger.json`](../quality/strengthen-ledger.json)
 
@@ -111,6 +112,7 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 | **MF-CU-01** ClinicalCdsCard | variantes info/suggestion/warning · [`epis2-mf-cu-01-cds-card.md`](../../reports/epis2-mf-cu-01-cds-card.md) |
 | **MF-CU-02** patient-view CDS hook | cards al abrir ficha · [`epis2-mf-cu-02-patient-view.md`](../../reports/epis2-mf-cu-02-patient-view.md) |
 | **MF-CU-03** order-select CDS hook | alertas al prescribir · [`epis2-mf-cu-03-order-select.md`](../../reports/epis2-mf-cu-03-order-select.md) |
+| **MF-CU-04** API `/cds/cards` | prefetch paciente interno · [`epis2-mf-cu-04-cds-api.md`](../../reports/epis2-mf-cu-04-cds-api.md) |
 | **MF-FF-01…06** ficha-first wave1 | censo home · dual default · `/comando` redirect · ClinicalShell · [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/epis2-prog-ficha-first-wave1-close-2026-06-14.md) |
 | **PROG-CONCILIACION tríada** | F0–F7 ✓ · [`epis2-prog-conciliacion-triada-close-2026.md`](../../reports/epis2-prog-conciliacion-triada-close-2026.md) |
 

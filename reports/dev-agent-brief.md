@@ -2,27 +2,27 @@
 
 > **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-layers-integrator.md` — declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-15T14:00:00.000Z · **Ola:** 9 ✓ · **STRENGTHEN** 18/23
+**Generado:** 2026-06-15T20:00:00.000Z · **Ola:** 10 ✓ · **STRENGTHEN** 19/23
 
 ## Orquestador (MF-RAPID + STRENGTHEN)
 
-- **PROG-STRENGTHEN** — **18/23** · MF-CU-01…03 ✓
-- Ola 9 ✓ cerrada — MF-CU-03 order-select · `quality:cds-hooks-gate`
-- Plan: [`dev-agent-orchestration-plan.json`](./dev-agent-orchestration-plan.json) · §20 [`epis2-orquestacion-paralela-2026-06-14.md`](./epis2-orquestacion-paralela-2026-06-14.md)
+- **PROG-STRENGTHEN** — **19/23** · **PROG-CDS-UX ✓** (MF-CU-01…04)
+- Ola 10 ✓ cerrada — MF-CU-04 API `/cds/cards` · `quality:cds-hooks-gate`
+- Plan: [`dev-agent-orchestration-plan.json`](./dev-agent-orchestration-plan.json) · §21 [`epis2-orquestacion-paralela-2026-06-14.md`](./epis2-orquestacion-paralela-2026-06-14.md)
 
 ## Estado del tablero (fuente canónica)
 
-- **Cerrado:** **MF-CU-01…03** ✓ · **PROG-IA-MODERNIZE** ✓ · **PROG-FICHA-FIRST** wave1 ✓
-- **Siguiente (blocked):** **MF-CU-04** API `/cds/cards` interno
+- **Cerrado:** **MF-CU-01…04** ✓ · **PROG-CDS-UX** ✓ · **PROG-IA-MODERNIZE** ✓ · **PROG-FICHA-FIRST** wave1 ✓
+- **Siguiente (blocked):** **MF-IC-01** MINSAL export
 
 ## Objetivo sugerido
 
-- **MF sugerida (blocked):** `MF-CU-04` — API `/cds/cards` interno
-- **Gate:** `quality:cds-hooks-gate`
+- **MF sugerida (blocked):** `MF-IC-01` — Perfil export MINSAL
+- **Gate:** tests `packages/fhir-export` + `db:validate`
 
 ## Subagente primario
 
-**[`layers-integrator`](./dev-agent-prompt-layers-integrator.md)** — Integrador capas L3+L4+L5 (UI CDS)
+**[`layers-integrator`](./dev-agent-prompt-layers-integrator.md)** — Integrador capas L3+L4+L5 (API CDS + contracts)
 
 ## Secuencia completa
 
