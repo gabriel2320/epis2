@@ -61,10 +61,7 @@ describe('assertDeploymentGuards', () => {
 
   it('rechaza staging con SESSION_SECRET default dev', () => {
     expect(() =>
-      assertDeploymentGuards(
-        { ...baseConfig(), NODE_ENV: 'staging', RLS_MODE: 'enforce' },
-        {},
-      ),
+      assertDeploymentGuards({ ...baseConfig(), NODE_ENV: 'staging', RLS_MODE: 'enforce' }, {}),
     ).toThrow(/SESSION_SECRET/);
   });
 
@@ -91,9 +88,9 @@ describe('isDemoAuthEnabled', () => {
   });
 
   it('bloquea demo en staging', () => {
-    expect(
-      isDemoAuthEnabled({ ...baseConfig(), NODE_ENV: 'staging', RLS_MODE: 'enforce' }),
-    ).toBe(false);
+    expect(isDemoAuthEnabled({ ...baseConfig(), NODE_ENV: 'staging', RLS_MODE: 'enforce' })).toBe(
+      false,
+    );
   });
 
   it('bloquea demo en production auth mode en dev node', () => {
