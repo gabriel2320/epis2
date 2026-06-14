@@ -123,7 +123,8 @@
       "subprogram": "PROG-CORE-HARDEN",
       "phase": 4,
       "dependsOn": ["MF-SH-03"],
-      "state": "READY",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
       "gate": "quality:registry-meta-gate",
       "evidenceRequired": [
         "registryMeta SNRE/RUT en blueprints allowlist CHILE",
@@ -143,7 +144,7 @@
       "subprogram": "PROG-CORE-HARDEN",
       "phase": 5,
       "dependsOn": ["MF-SH-04"],
-      "state": "BLOCKED",
+      "state": "READY",
       "gate": null,
       "evidenceRequired": [
         "docs/ops runbook RLS",

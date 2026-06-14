@@ -29,6 +29,17 @@ export {
 } from './draftStates.js';
 export { CHILE_RUT_IDENTIFIER_SYSTEM } from './chile/constants.js';
 export {
+  CHILE_REGISTRY_META_ALLOWLIST,
+  CHILE_RUT_REGISTRY_META_KEYS,
+  CHILE_SNRE_REGISTRY_META_KEYS,
+  CHILE_SUMMARY_REGISTRY_META_KEYS,
+  isChileRegistryMetaKey,
+  type ChileRegistryMetaKey,
+  type ChileRutRegistryMetaKey,
+  type ChileSnreRegistryMetaKey,
+  type ChileSummaryRegistryMetaKey,
+} from './chile/registry-meta-allowlist.js';
+export {
   CHILE_PATIENT_IDENTIFIER_TYPES,
   DEFAULT_RUN_IDENTIFIER_TYPE,
   isChilePatientIdentifierType,

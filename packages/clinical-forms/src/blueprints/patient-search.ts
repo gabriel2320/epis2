@@ -13,8 +13,15 @@ export const patientSearchBlueprint = defineBlueprint({
   approvalRequired: false,
   sections: [section('search', 'Criterios de búsqueda', ['patientName', 'identifier'])],
   fields: [
-    field('patientName', 'Nombre o apellido', 'text', { columnSpan: 8 }),
-    field('identifier', 'Identificador demo', 'text', { columnSpan: 4 }),
+    field('patientName', 'Nombre o apellido', 'text', { columnSpan: 8, searchable: true }),
+    field('identifier', 'RUT o identificador', 'text', {
+      columnSpan: 4,
+      variableKey: 'patient.rut',
+      fhirPath: 'Patient.identifier.value',
+      auditLevel: 'critical',
+      aiAllowed: false,
+      searchable: true,
+    }),
   ],
   validations: [],
 });
