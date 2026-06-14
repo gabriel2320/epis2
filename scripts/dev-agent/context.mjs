@@ -115,12 +115,17 @@ export function getTableroState(root) {
   const activeThreads = rowsUnder('En curso', (cells) =>
     cells[0] && !/^Hilo$/i.test(cells[0]) ? `${cells[0]}${cells[1] ? ` — ${cells[1]}` : ''}` : null,
   );
+  const strengthenThreads = rowsUnder('En curso — PROG-STRENGTHEN-2026', (cells) =>
+    cells[0] && !/^Subprograma$/i.test(cells[0])
+      ? `${cells[0]}: ${cells[1] ?? ''}${cells[2] ? ` (${cells[2]})` : ''}`
+      : null,
+  );
   const nextSteps = rowsUnder('Siguiente', (cells) =>
     cells[0] && !/^(?:Prioridad|Entrega)$/i.test(cells[0])
       ? `${cells[0]}: ${cells[1] ?? ''}`
       : null,
   );
-  return { activeThreads, nextSteps };
+  return { activeThreads: [...strengthenThreads, ...activeThreads], nextSteps };
 }
 
 /** @param {string[]} files @param {{ tramo?: string, phase?: string }} opts */

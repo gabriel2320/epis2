@@ -1,7 +1,11 @@
 # EPIS2 — Arranque de sesión
 
-Sigue la skill `epis2-session`:
+1. Leer `@docs/AGENT_CONTEXT_MINIMAL.md`
+2. `npm run dev:velocity` (banner STRENGTHEN + HEAD)
+3. Si brief stale: `npm run dev:session`
+4. `@reports/dev-agent-brief.md` + prompt subagente primario
+5. Declarar alcance SDEPIS2 antes de codear
 
-1. `npm run quality:microphase-next` y `npm run dev:session`
-2. Lee `@reports/dev-agent-brief.md` y `@docs/product/EPIS2_TABLERO.md`
-3. Declara alcance SDEPIS2 (Hilo / Tramo / MF-*) y archivos permitidos antes de editar código
+**No** auto-iniciar MF READY del ledger — solo si el usuario lo pide.
+
+Iteración: `npm run dev:rapid`

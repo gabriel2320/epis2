@@ -10,6 +10,8 @@ import {
   readOllamaPlan,
   suggestPrimarySubagent,
 } from './context.mjs';
+import { formatStrengthenLine, getStrengthenActive } from '../dev/strengthen-context.mjs';
+import { getHeadShort } from '../dev/velocity-lib.mjs';
 import { buildSessionIndex } from './prompt-builder.mjs';
 import { isEvolabPresent, resolveEvolabRoot } from './evolab-bridge.mjs';
 
@@ -48,9 +50,11 @@ export async function buildDevBrief(root, opts) {
   const resolvedPhase = phase ?? getActivePhaseHint(root);
   const git = getGitSummary(root);
   const mf = getNextMicrophase(root);
+  const strengthen = getStrengthenActive(root);
   const stack = await getStackHints(root);
   const ollamaPlan = readOllamaPlan(root);
   const tablero = getTableroState(root);
+  const head = getHeadShort(root);
   const primary =
     opts.primarySubagent ?? suggestPrimarySubagent(git.files, { tramo, phase: resolvedPhase });
 
@@ -58,11 +62,20 @@ export async function buildDevBrief(root, opts) {
   const lines = [
     '# EPIS2 — Dev Brief (IA asistida)',
     '',
-    '> **Inicio rápido:** abrir `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-' +
+    '> **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-' +
       primary +
-      '.md` en Cursor y declarar alcance en el primer mensaje.',
+      '.md` — declarar alcance en el primer mensaje.',
     '',
-    `**Generado:** ${new Date().toISOString()} · **Fase:** ${resolvedPhase}${tramo ? ` · Tramo ${tramo}` : ''}`,
+    `**Generado:** ${new Date().toISOString()} · **HEAD:** \`${head}\` · **Fase:** ${resolvedPhase}${tramo ? ` · Tramo ${tramo}` : ''}`,
+    '',
+    '## Orquestador (MF-RAPID + STRENGTHEN)',
+    '',
+    '- **PROG-RAPID** ✓ — iteración: `npm run dev:rapid` · cierre MF: `npm run quality:clinical`',
+    '- **No** iniciar la MF READY siguiente salvo petición explícita del usuario.',
+    ...(strengthen ? [formatStrengthenLine(strengthen)] : []),
+    strengthen?.active
+      ? `- Allowlist: ${strengthen.active.allowedPaths.slice(0, 4).join(', ')}${strengthen.active.allowedPaths.length > 4 ? '…' : ''}`
+      : '',
     '',
     '## Estado del tablero (fuente canónica)',
     '',
@@ -80,7 +93,14 @@ export async function buildDevBrief(root, opts) {
 
   lines.push('', '## Objetivo sugerido', '');
 
-  if (mf) {
+  if (strengthen?.active) {
+    lines.push(
+      `- **STRENGTHEN ${strengthen.active.state}:** \`${strengthen.active.id}\` — ${strengthen.active.name}`,
+    );
+    if (strengthen.active.gate) {
+      lines.push(`- **Gate:** \`${strengthen.active.gate}\``);
+    }
+  } else if (mf) {
     lines.push(`- **Ledger READY:** \`${mf.id}\` — ${mf.name}`);
   } else if (tablero.nextSteps.length > 0) {
     lines.push(`- ${tablero.nextSteps[0]}`);
@@ -148,12 +168,11 @@ export async function buildDevBrief(root, opts) {
     '',
     '```bash',
     'npm run stack:dev          # si falta Postgres/Ollama',
-    'npm run ollama:probe       # probe nativo (tags + modelo)',
-    'npm run dev:ai             # terminal 2 — assist clínico',
+    'npm run dev:velocity       # banner vivo (STRENGTHEN + HEAD)',
+    'npm run dev:rapid          # iteración MF-RAPID',
     'npm run dev:session        # regenerar este brief',
+    'npm run quality:strengthen-next',
     'npm run ollama:route        # modelos por función + tier estación',
-    'npm run dev:agent:ollama-auto   # probe → plan → documentación L0 (dry-run)',
-    'npm run dev:agent:ollama-write  # solo parches bajo riesgo (docs/reportes)',
     '```',
     '',
     '## Loop IA (mejores prácticas EPIS2)',
@@ -170,11 +189,11 @@ export async function buildDevBrief(root, opts) {
     '## Cierre sesión',
     '',
     '```bash',
-    'npm run check',
-    'npm run test',
+    'npm run dev:rapid',
+    'npm run quality:clinical   # cierre MF clínico',
+    'npm run quality:full       # pre-PR',
     'npm run db:validate',
-    'npm run quality:layers-integration-gate   # si tocaste UI',
-    'npm run dev:agent:close                     # checklist + plantilla reporte',
+    'npm run dev:agent:close    # checklist + plantilla reporte',
     '```',
     '',
     '---',

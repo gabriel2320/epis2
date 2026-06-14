@@ -1,35 +1,39 @@
 ---
 name: epis2-session
 description: >-
-  Arranque de sesión EPIS2 (SDEPIS2): dev:session, tablero, microfase READY,
-  declarar alcance antes de codear. Usar al empezar trabajo en el repo EPIS2.
+  Arranque de sesión EPIS2 (SDEPIS2): AGENT_CONTEXT_MINIMAL, dev:velocity,
+  STRENGTHEN ledger, MF-RAPID. Usar al empezar trabajo en el repo EPIS2.
 ---
 
 # EPIS2 — Arranque de sesión
 
-## Arranque obligatorio
+## Contexto mínimo (obligatorio)
 
-1. Ejecutar `npm run dev:velocity` (o `npm run quality:microphase-next` + `npm run dev:session`).
-2. Leer en contexto:
-   - `@reports/dev-agent-brief.md`
-   - `@docs/product/EPIS2_TABLERO.md`
-   - `@docs/product/PRODUCT_INVARIANTS.md` si tocas clínica o datos
-4. **Declarar alcance** en la respuesta:
-   - Nivel SDEPIS2 (Ola / Hilo / Tramo / Microfase MF-*)
-   - Archivos permitidos y prohibidos
-   - Gates de cierre previstos
+1. `@docs/AGENT_CONTEXT_MINIMAL.md` — reglas + gates por alcance
+2. `npm run dev:velocity` — banner vivo (HEAD, STRENGTHEN, subagente)
+3. Si el brief está stale: `npm run dev:session`
+4. `@reports/dev-agent-brief.md` + prompt del subagente primario
 
-## Invariantes rápidos
+## Declarar alcance
 
-- Home = **Centro de Comando** (nunca dashboard).
-- PostgreSQL = SoT; borradores ≠ aprobados; IA no firma.
-- Sin import desde `../Epis` sin `legacy-import-manifest.json`.
+- Nivel SDEPIS2 (Ola / Hilo / Tramo / Microfase MF-*)
+- Archivos permitidos y prohibidos
+- Gates de cierre previstos
 
-## Stack local (si aplica)
+**No** iniciar la MF READY de `quality:strengthen-next` salvo petición explícita.
+
+## Loop iteración (MF-RAPID)
 
 ```bash
-npm run stack:dev
-npm run dev:ai   # solo si la tarea toca assist clínico
+npm run dev:rapid              # post-cambio
+npm run quality:clinical       # cierre MF clínico
+npm run quality:full           # pre-PR
 ```
 
-Guía completa: `docs/product/EPIS2_AI_ASSISTED_DEV.md`
+## Estado programa
+
+```bash
+npm run quality:strengthen-next
+```
+
+Guía: `docs/dev/EPIS2_DEV_VELOCITY.md` · `docs/product/EPIS2_AI_ASSISTED_DEV.md`

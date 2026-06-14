@@ -27,6 +27,8 @@ Cierre de sesión / PR: `quality:clinical` o `quality:full` según riesgo.
 
 Tras cambios de código: `npm run dev:rapid` (recomendado) o `quality:fast` + `dev:agent:audit-diff` por separado.
 
+**No** auto-iniciar MF READY del ledger STRENGTHEN — esperar instrucción del usuario.
+
 ## Detenerse si
 
 - `architecture:validate` falla en `quality:fast`

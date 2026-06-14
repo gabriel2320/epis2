@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /**
- * Cursor sessionStart — recordatorio EPIS2 (brief + tablero).
- * Windows-safe: invoca node directamente.
+ * Cursor sessionStart — contexto vivo EPIS2 (velocity + STRENGTHEN + MF-RAPID).
  */
 import { createInterface } from 'node:readline';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { formatVelocityBanner, resolveVelocityContext } from '../../scripts/dev/velocity-lib.mjs';
+import { formatStrengthenLine } from '../../scripts/dev/strengthen-context.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -32,20 +32,28 @@ try {
 
 const ctx = resolveVelocityContext(root);
 const banner = formatVelocityBanner(ctx);
+const strengthenLine = ctx.strengthen ? formatStrengthenLine(ctx.strengthen) : '';
 
 const response = {
   env: {
+    EPIS2_AGENT_CONTEXT: 'docs/AGENT_CONTEXT_MINIMAL.md',
     EPIS2_DEV_BRIEF: 'reports/dev-agent-brief.md',
     EPIS2_VELOCITY_DOC: 'docs/dev/EPIS2_DEV_VELOCITY.md',
+    EPIS2_STRENGTHEN_MF: ctx.strengthen?.active?.id ?? '',
   },
   additional_context: [
-    'EPIS2 velocity (sessionStart hook)',
+    'EPIS2 agent loop (sessionStart)',
     banner,
     '',
-    'Iteración: npm run dev:rapid · Arranque: npm run dev:velocity · /epis2-session',
-    'Cierre: npm run dev:velocity:gates · quality:clinical · /epis2-close',
+    'Adjuntar en Cursor: @docs/AGENT_CONTEXT_MINIMAL.md @reports/dev-agent-brief.md',
+    ctx.brief.stale ? 'Brief stale → npm run dev:session' : '',
+    strengthenLine,
+    'Iteración: npm run dev:rapid · Cierre MF: npm run quality:clinical',
+    'No iniciar MF READY salvo petición explícita del usuario.',
     `session: ${sessionId}`,
-  ].join('\n'),
+  ]
+    .filter(Boolean)
+    .join('\n'),
 };
 
 process.stdout.write(`${JSON.stringify(response)}\n`);

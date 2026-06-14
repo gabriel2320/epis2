@@ -11,6 +11,7 @@ import {
   getNextMicrophase,
   suggestPrimarySubagent,
 } from '../dev-agent/context.mjs';
+import { formatStrengthenLine, getStrengthenActive } from './strengthen-context.mjs';
 
 /** @param {string} root */
 export function readTableroNext(root) {
@@ -45,8 +46,10 @@ export function resolveVelocityContext(root, opts = {}) {
   const subagent = opts.subagent ?? suggestPrimarySubagent(git.files, { tramo, phase });
   const agent = DEV_SUBAGENTS[subagent];
   const mf = getNextMicrophase(root);
+  const strengthen = getStrengthenActive(root);
   const tableroNext = readTableroNext(root);
   const brief = getBriefStatus(root);
+  const head = getHeadShort(root);
 
   return {
     git,
@@ -56,8 +59,10 @@ export function resolveVelocityContext(root, opts = {}) {
     agentTitle: agent?.title ?? subagent,
     gates: agent?.gates ?? DEV_SUBAGENTS['gate-runner'].gates,
     mf,
+    strengthen,
     tableroNext,
     brief,
+    head,
   };
 }
 
@@ -131,12 +136,14 @@ export function getHeadShort(root) {
 export function formatVelocityBanner(ctx) {
   const lines = [
     'EPIS2 dev velocity',
+    `- HEAD: ${ctx.head ?? 'unknown'}`,
     `- Subagente: ${ctx.subagent} (${ctx.agentTitle})`,
     `- Rama: ${ctx.git.branch} · cambios: ${ctx.git.dirtyCount}`,
   ];
   if (ctx.tramo) lines.push(`- Tramo: ${ctx.tramo}`);
+  if (ctx.strengthen) lines.push(formatStrengthenLine(ctx.strengthen));
   if (ctx.tableroNext?.length) lines.push(`- Tablero P1: ${ctx.tableroNext[0]}`);
-  if (ctx.mf) lines.push(`- MF READY: ${ctx.mf.id}`);
+  if (ctx.mf && !ctx.strengthen?.active) lines.push(`- MF ledger: ${ctx.mf.id}`);
   if (ctx.brief.exists) {
     lines.push(
       `- Brief: @${ctx.brief.path}${ctx.brief.stale ? ' (stale — npm run dev:session)' : ''}`,
@@ -144,7 +151,9 @@ export function formatVelocityBanner(ctx) {
   } else {
     lines.push('- Brief: missing — npm run dev:session');
   }
+  lines.push('- Contexto: @docs/AGENT_CONTEXT_MINIMAL.md');
   lines.push('- Iteración: npm run dev:rapid (quality:fast + audit-diff opcional)');
+  lines.push('- No iniciar MF siguiente salvo petición explícita del usuario');
   lines.push('- Cursor: /epis2-session · cierre: /epis2-close');
   lines.push('- Doc: docs/dev/EPIS2_DEV_VELOCITY.md');
   return lines.join('\n');

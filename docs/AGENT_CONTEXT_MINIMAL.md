@@ -1,6 +1,6 @@
 # EPIS2 — Contexto mínimo para agentes (Cursor)
 
-**Versión:** 1.1 · **MF-RAPID-01/03** · Lectura obligatoria antes de codear.
+**Versión:** 1.2 · **MF-RAPID** ✓ · **STRENGTHEN** MF-IM-01/02 ✓ · Lectura obligatoria antes de codear.
 
 > Canon completo solo si la tarea lo exige: `docs/PRODUCT_CANON.md`, `docs/product/PRODUCT_INVARIANTS.md`, `AGENTS.md`.
 
@@ -8,7 +8,7 @@
 
 ## Reglas canónicas (10 líneas)
 
-1. **Command-first** — Centro de Comando en `/comando`; nunca dashboard como home.
+1. **Ficha-first** — Home = censo `/espacio/buscar-paciente`; barra de comando transversal; `/comando` solo redirect compat.
 2. **PostgreSQL = SoT** — borrador ≠ dato clínico aprobado.
 3. **IA propone, humano aprueba** — sin auto-firma ni auto-aprobación.
 4. **Sin PHI real** — solo datos sintéticos/demo.
@@ -30,6 +30,19 @@ MF-* / objetivo · zona · archivos permitidos · prohibidos · gate · riesgo
 ```
 
 Un objetivo · pocos archivos · diff mínimo.
+
+**No** iniciar la MF READY del ledger (`npm run quality:strengthen-next`) salvo petición explícita del usuario.
+
+---
+
+## Programa activo (2026-06-14)
+
+| Programa | Estado | Comando estado |
+|----------|--------|----------------|
+| **PROG-RAPID** | ✓ cerrado | `npm run quality:rapid-gate` |
+| **PROG-STRENGTHEN** | MF-IM-03 READY (no auto-iniciar) | `npm run quality:strengthen-next` |
+
+Cerrado hoy: MF-IM-01 embeddings 384d · MF-IM-02 embed Ollama (`embedDocument`).
 
 ---
 

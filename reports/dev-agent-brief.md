@@ -1,25 +1,29 @@
 # EPIS2 — Dev Brief (IA asistida)
 
-> **Inicio rápido:** abrir `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-ollama-clinical.md` en Cursor y declarar alcance en el primer mensaje.
+> **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-golden-guardian.md` — declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-11T10:45:07.513Z · **Fase:** B
+**Generado:** 2026-06-14T17:26:58.931Z · **HEAD:** `710bd1a` · **Fase:** B
+
+## Orquestador (MF-RAPID + STRENGTHEN)
+
+- **PROG-RAPID** ✓ — iteración: `npm run dev:rapid` · cierre MF: `npm run quality:clinical`
+- **No** iniciar la MF READY siguiente salvo petición explícita del usuario.
+- STRENGTHEN READY: **MF-IM-03** — RAG incremental (retrieval secuencial) · gate `quality:rag-retrieval-gate`
+- Allowlist: services/local-ai/src/rag/**, scripts/quality/validate-rag-retrieval-gate.mjs, packages/test-fixtures/**
 
 ## Estado del tablero (fuente canónica)
 
-- **En curso:** **Hilo C** — Ola 3 longitudinal — **C-1** (humano opcional)
-- **Siguiente:** **C-1**: Revisión humana opcional post-captura M3 (hover/foco/rail/two-pane claro/oscuro) — evidencia en `reports/m3-visual-evidence/2026-06-10/`
-- **Siguiente:** **C-2**: **PROG-CALM-PREMIUM** — tramos `THEME-CALM-01` + `UX-AESTHETIC P3` (tokens petróleo, islas tonales)
-- **Siguiente:** **C-3**: **Entrega C-3a** ✓ scaffold · **C-3b** pendiente — MF-CLINICAL-SUMMARY-B + tramo `UX-CALM-PATIENT`
+- **En curso:** **PROG-CORE-HARDEN**: ✓ MF-SH-01…06 cerrado (—)
+- **En curso:** **PROG-IA-MODERNIZE**: **MF-IM-03** RAG incremental (`quality:rag-retrieval-gate`)
 
 ## Objetivo sugerido
 
-- **C-1**: Revisión humana opcional post-captura M3 (hover/foco/rail/two-pane claro/oscuro) — evidencia en `reports/m3-visual-evidence/2026-06-10/`
-- **Ollama (≤24 h):** Continuar con la consolidación visual y mejorar la experiencia de usuario para los formularios clínicos.
-- **MF propuesta:** MF-183→190
+- **STRENGTHEN READY:** `MF-IM-03` — RAG incremental (retrieval secuencial)
+- **Gate:** `quality:rag-retrieval-gate`
 
 ## Subagente primario
 
-**[`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md)** — IA clínica local (Ollama producto)
+**[`golden-guardian`](./dev-agent-prompt-golden-guardian.md)** — Guardián Golden Journey
 
 ## Secuencia completa
 
@@ -31,38 +35,34 @@
 
 ## Working tree
 
-- Rama: `master` · cambios: 32 (lista truncada)
+- Rama: `master` · cambios: 20
 
 ```
-M apps/web/src/pages/PatientWorkspacePage.test.tsx
-M docs/product/EPIS2_GLOBAL_DEV_PLAN.md
-M docs/product/EPIS2_TABLERO.md
-M reports/auto-dev-6h-log.jsonl
-M reports/auto-dev-continuous-log.jsonl
-M reports/auto-dev-orchestrator-log.jsonl
-M reports/auto-dev-parallel-log.jsonl
-M reports/dev-agent-brief.md
-M reports/dev-agent-ollama-automation.json
-M reports/dev-agent-ollama-plan.json
-M reports/dev-agent-ollama-write-plan.json
+M .cursor/commands/epis2-session.md
+M .cursor/hooks/session-start.mjs
+M .cursor/rules/50-fast-loop.mdc
+M .cursor/skills/epis2-session/SKILL.md
+M apps/web/src/dev/dualChartModesEnv.ts
+M apps/web/src/routes/home.ts
+M apps/web/src/routes/router.test.ts
+M apps/web/src/routes/router.tsx
+M docs/AGENT_CONTEXT_MINIMAL.md
+M e2e/helpers/demoPatient.ts
 M reports/dev-agent-prompt-gate-runner.md
-M reports/dev-agent-prompt-golden-guardian.md
-M reports/dev-agent-prompt-layers-integrator.md
-M reports/dev-agent-prompt-ollama-clinical.md
-M reports/dev-agent-prompt-ollama-dev-writer.md
-M reports/dev-agent-session.md
-M reports/epis2-auto-dev-6h-close-2026-06-10.md
-M reports/epis2-dev-cycle-log.jsonl
-M reports/epis2-dev-cycle-status.json
-M reports/evolab-complement-log.jsonl
-M reports/evolab-open-findings.json
-M reports/openclaw-auto-dev-index.json
-M reports/openclaw-latest-brief.md
+M scripts/architecture/command-center-home.mjs
+M scripts/dev-agent/brief.mjs
+M scripts/dev-agent/context.mjs
+M scripts/dev/velocity-lib.mjs
+M tests/golden-clinical-journey.spec.ts
+?? apps/web/src/dev/dualChartModesEnv.test.ts
+?? reports/dev-agent-audit-diff-latest.json
+?? reports/epis2-auditoria-ingeniero-externo-2026-06-14.md
+?? scripts/dev/strengthen-context.mjs
 ```
 
 ## Evolab (QA externo)
 
-- Evolab hallazgos abiertos: **24** (sync 2026-06-11T06:22:08.242Z)
+- Evolab hallazgos abiertos: **200** (sync 2026-06-14T15:49:41.450Z)
 - Root: `C:\Users\gdela\OneDrive\Documentos Importantes\epis2-evolab`
 
 ## OpenClaw (revisores read-only)
@@ -81,12 +81,11 @@ M reports/openclaw-latest-brief.md
 
 ```bash
 npm run stack:dev          # si falta Postgres/Ollama
-npm run ollama:probe       # probe nativo (tags + modelo)
-npm run dev:ai             # terminal 2 — assist clínico
+npm run dev:velocity       # banner vivo (STRENGTHEN + HEAD)
+npm run dev:rapid          # iteración MF-RAPID
 npm run dev:session        # regenerar este brief
+npm run quality:strengthen-next
 npm run ollama:route        # modelos por función + tier estación
-npm run dev:agent:ollama-auto   # probe → plan → documentación L0 (dry-run)
-npm run dev:agent:ollama-write  # solo parches bajo riesgo (docs/reportes)
 ```
 
 ## Loop IA (mejores prácticas EPIS2)
@@ -109,11 +108,11 @@ npm run dev:agent:ollama-write  # solo parches bajo riesgo (docs/reportes)
 ## Cierre sesión
 
 ```bash
-npm run check
-npm run test
+npm run dev:rapid
+npm run quality:clinical   # cierre MF clínico
+npm run quality:full       # pre-PR
 npm run db:validate
-npm run quality:layers-integration-gate   # si tocaste UI
-npm run dev:agent:close                     # checklist + plantilla reporte
+npm run dev:agent:close    # checklist + plantilla reporte
 ```
 
 ---
@@ -121,7 +120,7 @@ npm run dev:agent:close                     # checklist + plantilla reporte
 # EPIS2 — Sesión subagentes de desarrollo
 
 **Fase:** B
-**Generado:** 2026-06-11T10:45:07.514Z
+**Generado:** 2026-06-14T17:26:58.932Z
 
 ## Secuencia recomendada
 
