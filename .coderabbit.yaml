@@ -1,0 +1,31 @@
+# EPIS2 — CodeRabbit (MF-TOOL-04). Segunda opinión en PRs; no sustituye quality gates.
+language: es-CL
+reviews:
+  profile: assertive
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  path_instructions:
+    - path: 'apps/api/**'
+      instructions: >
+        API clínica Fastify. Verificar RLS, audit_events, correlationId en logs.
+        No aceptar PHI en respuestas de error. Borradores ≠ datos aprobados.
+    - path: 'apps/web/src/clinical/**'
+      instructions: >
+        UI clínica command-first. Respetar invariantes: IA no aprueba ni firma.
+        Preferir design-system y gates de densidad M3.
+    - path: 'packages/clinical-domain/**'
+      instructions: >
+        Reglas clínicas determinísticas. No relajar validaciones Zod ni safety rules.
+    - path: 'packages/contracts/**'
+      instructions: >
+        Contratos compartidos tríada. Cambios breaking requieren compatibilidad export JSON.
+    - path: 'database/migrations/**'
+      instructions: >
+        Migraciones incrementales. Revisar RLS, índices, rollback implícito y epis2_app grants.
+    - path: 'e2e/**'
+      instructions: >
+        Solo fixtures demo. Prohibido datos reales de pacientes.
+    - path: 'services/local-ai/**'
+      instructions: >
+        IA local Ollama. Verificar provenance, no auto-aprobación, citas RAG cuando aplique.

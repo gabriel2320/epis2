@@ -1,0 +1,16 @@
+# EPIS2 — collector local dev (MF-TOOL-05). Trazas OTLP/HTTP → stdout del contenedor.
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+
+exporters:
+  debug:
+    verbosity: detailed
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [debug]

@@ -29,6 +29,7 @@
     "@epis2/clinical-domain": "*",
     "@epis2/contracts": "*",
     "fastify": "^5.3.3",
+    "langfuse": "^3.37.0",
     "zod": "^3.25.42"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 import type { AiConfig } from '../config.js';
+import { recordInferenceTrace } from '../langfuseTrace.js';
 import { createOllamaProvider } from './ollamaProvider.js';
 import { createOpenAiProvider } from './openaiProvider.js';
 import {
@@ -38,24 +39,39 @@ export async function generateWithInferenceRouter(
 ): Promise<StructuredGenerateResult & { dataTier: ReturnType<typeof resolveRequestDataTier> }> {
   const policy = buildInferencePolicyConfig(config);
   const dataTier = resolveRequestDataTier(requestContext, policy.defaultDataTier);
+  const started = Date.now();
+
+  const finish = async (
+    result: StructuredGenerateResult & { dataTier: ReturnType<typeof resolveRequestDataTier> },
+  ) => {
+    await recordInferenceTrace({
+      config,
+      prompt,
+      requestContext,
+      dataTier: result.dataTier,
+      latencyMs: Date.now() - started,
+      result,
+    });
+    return result;
+  };
 
   if (!cloudAllowedForTier(dataTier, policy.cloudEnabled) && policy.mode === 'openai') {
-    return {
+    return finish({
       ok: false,
       reason: 'Inferencia cloud no permitida para este tier de dato',
       provider: 'openai',
       dataTier,
-    };
+    });
   }
 
   const chain = resolveProviderChain(policy, dataTier);
   if (chain.length === 0) {
-    return {
+    return finish({
       ok: false,
       reason: 'Inferencia cloud no configurada (AI_CLOUD_ENABLED + OPENAI_API_KEY)',
       provider: 'openai',
       dataTier,
-    };
+    });
   }
 
   const providers = createInferenceProviders(config);
@@ -82,10 +98,10 @@ export async function generateWithInferenceRouter(
     }
     const result = await provider.generateStructuredJson(prompt, timeoutMs);
     if (result.ok) {
-      return { ...result, dataTier };
+      return finish({ ...result, dataTier });
     }
     lastFailure = result;
   }
 
-  return { ...lastFailure, dataTier };
+  return finish({ ...lastFailure, dataTier });
 }

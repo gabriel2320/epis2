@@ -32,6 +32,20 @@ Validada con Zod en `apps/api/src/config.ts` (mismo patrón que `LOG_LEVEL`).
 
 ## Collector local (verificación manual)
 
+### Opción A — docker compose (MF-TOOL-05, recomendada)
+
+```bash
+npm run stack:observability
+# o: docker compose --profile observability up -d otel-collector
+OTEL_ENABLED=true npm run dev -w @epis2/api
+# curl http://127.0.0.1:3001/health/live → span GET en logs del collector
+docker logs -f epis2-otel-collector
+```
+
+Config: `infra/otel/collector-config.yaml` (OTLP/HTTP `:4318` → exporter `debug`).
+
+### Opción B — contenedor ad hoc
+
 ```bash
 docker run --rm -p 4318:4318 otel/opentelemetry-collector
 OTEL_ENABLED=true npm run dev -w @epis2/api

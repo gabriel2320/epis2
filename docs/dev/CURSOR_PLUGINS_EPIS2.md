@@ -1,6 +1,6 @@
 # EPIS2 — Cursor: plugins, MCP y flujo IA
 
-**Versión:** 1.0 · **Fecha:** 2026-06-04  
+**Versión:** 1.3 · **Fecha:** 2026-06-14 · **MF-TOOL-02…06**  
 **Relacionado:** `AGENTS.md` · `docs/product/EPIS2_AI_ASSISTED_DEV.md` · `cursor-plugin/epis2/README.md`
 
 ---
@@ -12,9 +12,10 @@
 | Reglas canon | `.cursor/rules/*.mdc` | Siempre aplicadas en este workspace |
 | Skills proyecto | `.cursor/skills/epis2-*` | El agente las descubre por descripción |
 | Comandos `/` | `.cursor/commands/epis2-*.md` | Menú `/` en chat → sesión o cierre |
-| MCP plantilla | `.cursor/mcp.json` | GitHub vía variable de entorno (ver abajo) |
+| MCP plantilla | `.cursor/mcp.json` | GitHub, Figma, Context7, Playwright, Postgres RO |
 | Plugin empaquetado | `cursor-plugin/epis2/` | Importar en Cursor o compartir con el equipo |
-| Verificación | `npm run cursor:verify` | Comprueba token GitHub y MCP local |
+| Verificación | `npm run cursor:verify` | Comprueba MCPs, PAT GitHub y URL Postgres RO |
+| Rol DB MCP | `database/migrations/045_epis2_mcp_ro.sql` | `epis2_mcp_ro` — solo SELECT (aplicar con `db:migrate`) |
 | Velocidad dev | `npm run dev:velocity` | Tablero + brief + subagente · ver [EPIS2_DEV_VELOCITY.md](./EPIS2_DEV_VELOCITY.md) |
 
 ---
@@ -29,15 +30,26 @@
 4. Comando **`/epis2-close`** al terminar (gates + reporte).
 5. Reglas `.cursor/rules/` (canon, legacy, gates, clínica).
 
-### P2 — Requiere un paso tuyo (5–10 min)
+### P0 — MCPs en `.cursor/mcp.json` (MF-TOOL-02)
+
+| Servidor | Para qué | Activación |
+|----------|----------|------------|
+| **github** | PRs, CI, issues (tríada repos) | [GitHub MCP](#github-mcp) |
+| **figma-desktop** | M3, pantallas clínicas, FigJam | [Figma MCP](#figma-mcp) |
+| **context7** | Docs actuales React/Fastify/Playwright | Reiniciar Cursor (npx automático) |
+| **playwright** | Debug E2E tramos/olas desde chat | `npm run test:e2e:install` + reiniciar Cursor |
+| **postgres-readonly** | Schema clínico, FKs, migraciones | [Postgres MCP](#postgres-mcp-read-only) |
+
+### P1 — Marketplace OAuth + GitHub App (5–15 min)
 
 | Integración | Para qué | Cómo activar |
 |-------------|----------|--------------|
-| **GitHub MCP** | PRs, checks CI, issues sin salir del IDE | Ver [GitHub MCP](#github-mcp) |
 | **Notion MCP** | Tablero, tareas, docs de producto | Ver [Notion MCP](#notion-mcp) |
-| **Figma MCP** | Tokens M3, pantallas clínicas | Ver [Figma MCP](#figma-mcp) |
+| **CodeRabbit** | Review automático en PRs GitHub | Ver [CodeRabbit](#coderabbit) |
+| **Cursor Bugbot** | Review local pre-commit | Ver [Bugbot](#cursor-bugbot) |
+| **OTel collector** | Trazas HTTP local (MF-TOOL-05) | Ver [Observabilidad](./EPIS2_OBSERVABILITY_OTEL.md) |
 
-### P3 — Opcional / no prioritario
+### P2 — Opcional / no prioritario
 
 | Integración | Notas |
 |-------------|-------|
@@ -92,6 +104,37 @@ Si prefieres contenedor, copia `.cursor/mcp.json.example` → `.cursor/mcp.local
 
 **Permisos:** conectar solo las páginas/bases que el agente deba leer (principio mínimo privilegio).
 
+**Checklist MF-TOOL-03:**
+
+1. Marketplace → Notion → Install → OAuth en Settings → MCP.
+2. Conectar base de tareas EPIS2 + página tablero (mínimo privilegio).
+3. Probar: *«Busca en Notion tareas PROG-DI pendientes»*.
+4. Al cerrar sesión: crear/actualizar fila con MF-* y gate ejecutado.
+
+---
+
+## CodeRabbit
+
+Review automático en PRs de `gabriel2320/epis2` (y luego evolab / medrepo).
+
+### Setup (MF-TOOL-04)
+
+1. [Instalar CodeRabbit](https://coderabbit.ai/) en GitHub → org `gabriel2320` → repo `epis2`.
+2. El repo incluye `.coderabbit.yaml` con instrucciones por path clínico.
+3. No activar auto-merge; el humano aprueba push.
+
+**Uso:** abrir PR → CodeRabbit comenta → corregir → gates EPIS2 (`npm run check`, E2E) siguen siendo obligatorios.
+
+---
+
+## Cursor Bugbot
+
+Review local antes de commit (complementa gates, no los reemplaza).
+
+1. Cursor → **Settings → Bugbot** → habilitar para workspace EPIS2.
+2. Antes de `/epis2-close`: pedir review con skill `review-bugbot` o comando Bugbot.
+3. Enfocar en: RLS, PHI en logs, borradores vs aprobados, regresiones E2E.
+
 ---
 
 ## Figma MCP
@@ -115,6 +158,84 @@ Para vincular `gabriel2320/epis2` con tu biblioteca Figma:
 4. Verificar: `npm run figma:verify` · publicar: `npm run figma:connect:publish`.
 
 Guía completa: [`EPIS2_FIGMA_CODE_CONNECT.md`](./EPIS2_FIGMA_CODE_CONNECT.md)
+
+---
+
+## Context7 MCP
+
+Incluido en `.cursor/mcp.json`. Arranca vía `npx @upstash/context7-mcp` al conectar Cursor.
+
+**Uso típico EPIS2:** pedir al agente documentación versionada de React 19, Fastify, Zod, Playwright o OpenTelemetry antes de tocar API/clinical-domain.
+
+**Verificación:** en chat — *«Usa Context7: API de @playwright/test fixtures»*.
+
+No requiere API key en la configuración por defecto del repo.
+
+---
+
+## Playwright MCP
+
+Incluido en `.cursor/mcp.json`. Complementa la suite `e2e/` (CI sigue siendo fuente de verdad).
+
+1. `npm run test:e2e:install` — browsers Chromium.
+2. Reiniciar Cursor.
+3. Uso típico: depurar `test:e2e:dual-chart`, capturas de three-modes, reproducir fallos CI.
+
+**No sustituye** `npm run test:e2e` en gates de cierre.
+
+---
+
+## Postgres MCP (read-only)
+
+Rol dedicado **`epis2_mcp_ro`** — solo `SELECT`. Nunca usar `DATABASE_URL` de la app (`epis2_app` escribe).
+
+### Setup
+
+```bash
+npm run stack:up
+npm run db:migrate    # aplica 045_epis2_mcp_ro.sql
+```
+
+En `.env` local (no commitear):
+
+```bash
+EPIS2_MCP_DATABASE_URL=postgresql://epis2_mcp_ro:epis2@127.0.0.1:5433/epis2
+```
+
+Reiniciar Cursor. Verificar: `npm run cursor:verify`.
+
+**Uso típico:** *«Describe la tabla approvals y sus FKs»*, *«¿Qué columnas tiene ai_runs?»*.
+
+**Seguridad:** no pegar PHI en prompts; el rol respeta RLS (`NOBYPASSRLS`). En staging/prod usar password distinto al dev.
+
+---
+
+## Langfuse (MF-TOOL-06)
+
+Trazas LLM opt-in para `services/local-ai`. **Off por defecto** — aislado del SoT clínico (Postgres EPIS2).
+
+### Setup
+
+```bash
+npm run stack:langfuse
+# UI: http://127.0.0.1:3100 · dev@epis2.local / epis2-dev-only
+```
+
+En `.env` local:
+
+```bash
+LANGFUSE_ENABLED=true
+LANGFUSE_BASE_URL=http://127.0.0.1:3100
+LANGFUSE_PUBLIC_KEY=lf_pk_epis2_dev_local
+LANGFUSE_SECRET_KEY=lf_sk_epis2_dev_local
+LANGFUSE_TRACE_INPUT=false   # true solo evals L0_synthetic
+```
+
+Reiniciar `npm run dev:ai`. Cada inferencia registra trace `ai.inference` → generation `structured-json`.
+
+**Política PHI:** con `LANGFUSE_TRACE_INPUT=false` (default), prompt/output se redactan por tamaño. Solo activar input completo en evals sintéticos (`L0_synthetic`).
+
+Detalle técnico: `services/local-ai/src/langfuseTrace.ts` · hook en `inference/router.ts`.
 
 ---
 
@@ -158,8 +279,10 @@ Las reglas canon siguen en `.cursor/rules/` del repo (no duplicadas en el plugin
 
 ```bash
 npm run stack:dev          # si hace falta Postgres/Ollama
+npm run db:migrate         # incluye rol epis2_mcp_ro (045)
+npm run stack:observability  # opcional — OTel collector :4318
 npm run dev:session        # genera brief + prompts
-npm run cursor:verify      # opcional: MCP GitHub OK
+npm run cursor:verify      # MCPs + PAT + EPIS2_MCP_DATABASE_URL
 ```
 
 En Cursor:
@@ -173,8 +296,9 @@ En Cursor:
 ## Seguridad
 
 - **Nunca** commitear PAT, tokens Notion/Figma ni `.env`.
-- `.cursor/mcp.json` usa `${env:GITHUB_PERSONAL_ACCESS_TOKEN}` — sin secretos en git.
-- MCP con acceso a GitHub/Notion = tratar prompts como operaciones sensibles; no pegar PHI real.
+- `.cursor/mcp.json` usa `${env:...}` — sin secretos en git.
+- Postgres MCP: rol **`epis2_mcp_ro`** (solo SELECT); migración `045_epis2_mcp_ro.sql`.
+- MCP con acceso a GitHub/Notion/Postgres = tratar prompts como operaciones sensibles; no pegar PHI real.
 
 ---
 
@@ -183,6 +307,10 @@ En Cursor:
 | Síntoma | Acción |
 |---------|--------|
 | GitHub MCP rojo | `npm run cursor:verify`; reiniciar Cursor; comprobar PAT y scopes |
+| Postgres MCP rojo | `db:migrate`; `EPIS2_MCP_DATABASE_URL` en `.env`; reiniciar Cursor |
+| Playwright MCP falla | `npm run test:e2e:install`; comprobar Node ≥20 |
+| OTel sin spans | `npm run stack:observability`; `OTEL_ENABLED=true`; `docker logs epis2-otel-collector` |
+| CodeRabbit silencioso | Verificar app instalada en GitHub; `.coderabbit.yaml` en rama del PR |
 | Notion/Figma «needs auth» | Settings → MCP → Connect; OAuth de nuevo |
 | Skills no aparecen | Importar plugin o usar `.cursor/skills/` del repo |
 | Agente ignora canon | `@AGENTS.md` + `@docs/product/PRODUCT_INVARIANTS.md` |
