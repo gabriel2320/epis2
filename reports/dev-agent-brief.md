@@ -8,7 +8,7 @@
 
 - **PROG-STRENGTHEN** — **21/23** · **MF-IC-01…02 ✓** · **PROG-INTEROP-CHILE** fases 1–2
 - Ola 12 ✓ cerrada — MF-IC-02 SNRE staging · `test packages/fhir-export`
-- Plan: [`dev-agent-orchestration-plan.json`](./dev-agent-orchestration-plan.json) · §22 [`epis2-orquestacion-paralela-2026-06-14.md`](./epis2-orquestacion-paralela-2026-06-14.md)
+- Plan: [`dev-agent-orchestration-plan.json`](./dev-agent-orchestration-plan.json) · §22–§23 [`epis2-orquestacion-paralela-2026-06-14.md`](./epis2-orquestacion-paralela-2026-06-14.md)
 
 ## Estado del tablero (fuente canónica)
 
@@ -34,8 +34,8 @@
 
 ## Working tree
 
-- Rama: `master` · **limpio** · ahead of `origin/master`: **12 commits**
-- Último commit: `e98af45`
+- Rama: `master` · **limpio** · ahead of `origin/master`: **~22 commits**
+- Último commit: `bb9a9e3`
 - Push: pendiente (humano)
 
 ## Evolab (QA externo)

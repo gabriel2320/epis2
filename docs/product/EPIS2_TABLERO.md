@@ -2,7 +2,7 @@
 
 **Actualizado:** 2026-06-15 · **STRENGTHEN** 21/23
 
-Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan unificado:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) · **Orquestación:** [`epis2-orquestacion-paralela-2026-06-14.md`](../../reports/epis2-orquestacion-paralela-2026-06-14.md) §21–§22
+Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan unificado:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.5 · **Orquestación:** [`epis2-orquestacion-paralela-2026-06-14.md`](../../reports/epis2-orquestacion-paralela-2026-06-14.md) §22–§23
 
 > **PROG-STRENGTHEN** **21/23** · **MF-IC-01…02 ✓** · **siguiente MF-IC-03** (blocked)
 
@@ -179,7 +179,7 @@ Hilos C / PAPER / comando absorbidos en tres frentes. C-3 ✓ · MF-PAPER-01…0
 
 `npm run quality:tres-frentes-next` · [`tres-frentes-ledger.json`](../quality/tres-frentes-ledger.json) · [`EPIS2_TRES_FRENTES_DEV_PLAN.md`](./EPIS2_TRES_FRENTES_DEV_PLAN.md)
 
-**Pausado:** multimedia · auto-dev — STRENGTHEN activo en PROG-INTEROP-CHILE (MF-IC-02).
+**Pausado:** multimedia · auto-dev — STRENGTHEN activo en PROG-INTEROP-CHILE (MF-IC-03 blocked).
 
 ---
 

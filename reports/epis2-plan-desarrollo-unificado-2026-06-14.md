@@ -1,6 +1,6 @@
 # EPIS2 — Plan de desarrollo unificado (modo rápido)
 
-**Versión:** 1.4 · **Fecha:** 2026-06-14  
+**Versión:** 1.5 · **Fecha:** 2026-06-15  
 **Supersede (parcial):** `epis2-plan-maestro-desarrollo-por-partes-2026-06-11.md` · `epis2-plan-fases-desarrollo-2026-06-13.md` · bloques A–C de `epis2-plan-correcciones-prioritarias-2026-06-14.md`
 
 > **Norte único:** un programa activo por sesión · gates por alcance · ledgers como verdad de microfases · tablero como índice humano.
@@ -15,7 +15,7 @@
 | **PROG-CONCILIACION-TRIADA** | ✓ CERRADO | F0–F7 · tríada Evolab/MedRepo |
 | **PROG-DI** (inteligencia determinística) | ✓ CERRADO | 10/10 MF · `di-ledger.json` |
 | **PROG-FICHA-FIRST** | ✓ wave1 CERRADO | MF-FF-01…06 · `quality:ficha-first-gate` · wave2 MF-FF-00 READY |
-| **PROG-STRENGTHEN** | ACTIVO **20/23** | MF-SH-01…06 ✓ · MF-IM-01…09 ✓ · MF-CU-01…04 ✓ · **MF-IC-01 ✓** (código) · **siguiente MF-IC-02** |
+| **PROG-STRENGTHEN** | ACTIVO **21/23** | MF-SH-01…06 ✓ · MF-IM-01…09 ✓ · MF-CU-01…04 ✓ · **MF-IC-01…02 ✓** · **siguiente MF-IC-03** (blocked) |
 | **PROG-COMPACTACION** (bloque D correcciones) | DIFERIDO | Tras STRENGTHEN CU-03…04 o cierre parcial CDS |
 
 **Home canónica (unificada):** `/espacio/buscar-paciente` · barra transversal · `/comando` = redirect compat.
@@ -66,8 +66,9 @@ Sesión
 | A5 | **MF-CU-01…02** | CDS UX patient-view hook | `quality:cds-hooks-gate` | ✓ |
 | A5b | **MF-CU-03** | order-select hook | `quality:cds-hooks-gate` | ✓ |
 | A5c | **MF-CU-04** | API `/cds/cards` | `quality:cds-hooks-gate` | ✓ |
-| A6 | **MF-IC-01** | Perfil export MINSAL | `db:validate` + tests export | ✓ (código · ledger al merge) |
-| A6b | **MF-IC-02…04** | Interop Chile (SNRE staging, FHIR) | `db:validate` + tests export | **siguiente** (MF-IC-02) |
+| A6 | **MF-IC-01** | Perfil export MINSAL | `db:validate` + tests export | ✓ |
+| A6b | **MF-IC-02** | SNRE staging MedicationRequest | `db:validate` + tests export | ✓ |
+| A6c | **MF-IC-03…04** | Interop Chile (Questionnaire export, FHIR) | `db:validate` + tests export | **siguiente** (MF-IC-03 blocked) |
 
 **Regla:** un MF-SH/IM/CU/IC por sesión · no auto-iniciar MF READY sin petición explícita.
 
@@ -103,12 +104,12 @@ flowchart LR
     DI[PROG-DI]
     FF[PROG-FICHA-FIRST]
   end
-  subgraph activo [Activo 20/23]
+  subgraph activo [Activo 21/23]
     SH[STRENGTHEN SH done]
     IM[STRENGTHEN IM 01-09 done]
     CU[MF-CU-01-04 done]
-    IC1[MF-IC-01 done]
-    IC2[MF-IC-02 next]
+    IC12[MF-IC-01-02 done]
+    IC3[MF-IC-03 next blocked]
   end
   subgraph diferido [Diferido]
     D[Compactacion D]
@@ -135,7 +136,7 @@ flowchart LR
 
 ```text
 Programa: PROG-STRENGTHEN · PROG-INTEROP-CHILE
-MF:       MF-IC-02 SNRE staging MedicationRequest
+MF:       MF-IC-03 Questionnaire export piloto (blocked)
 Allowlist: packages/fhir-export/**, packages/clinical-domain/src/chile/**
 Gate:     npm run test packages/fhir-export · db:validate
 Arranque: npm run dev:velocity

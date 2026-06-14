@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-06-14T23:00:00.000Z",
-  "version": "12.0",
+  "generatedAt": "2026-06-15T23:00:00.000Z",
+  "version": "13.0",
   "mode": "parallel-wave",
-  "wave": 12,
+  "wave": 13,
   "waveMode": "fast-dev",
   "activePhase": "A6",
   "masterPlan": "reports/epis2-plan-desarrollo-unificado-2026-06-14.md",
@@ -17,10 +17,10 @@
     },
     "PROG-STRENGTHEN": {
       "state": "ACTIVE",
-      "progress": "20/23",
-      "activeMicrophase": "MF-IC-02",
+      "progress": "21/23",
+      "activeMicrophase": "MF-IC-03",
       "activeMicrophaseState": "BLOCKED",
-      "nextMicrophase": "MF-IC-03",
+      "nextMicrophase": "MF-IC-04",
       "ledger": "docs/quality/strengthen-ledger.json"
     },
     "PROG-CDS-UX": {
@@ -51,18 +51,17 @@
     "MF-CU-03",
     "MF-CU-04",
     "PROG-CDS-UX",
-    "MF-IC-01"
+    "MF-IC-01",
+    "MF-IC-02"
   ],
   "openPending": [
-    "MF-IC-01-ledger-close",
-    "MF-IC-02-snre-staging",
     "git-push"
   ],
   "workingTree": {
     "branch": "master",
     "pendingChanges": 0,
-    "aheadOfOrigin": 12,
-    "lastCommit": "e98af45",
+    "aheadOfOrigin": 22,
+    "lastCommit": "bb9a9e3",
     "summary": {},
     "commitOwner": "human"
   },
@@ -1040,18 +1039,19 @@
     ]
   },
   "wave12": {
-    "startedAt": null,
-    "state": "BLOCKED",
+    "startedAt": "2026-06-14",
+    "completedAt": "2026-06-15",
+    "state": "DONE",
     "tracks": 3,
     "strengthenPre": "20/23",
     "strengthenOnClosure": "21/23",
-    "outcome": null,
+    "outcome": "MF-IC-02 DONE · PROG-INTEROP-CHILE fase 2 · docs Ola 12 sync · STRENGTHEN 21/23",
     "parallelTracks": [
       {
         "id": "wave12-track-1-clinical",
         "subagent": "ollama-clinical",
         "microphase": "MF-IC-02",
-        "state": "BLOCKED",
+        "state": "DONE",
         "subprogram": "PROG-INTEROP-CHILE",
         "dependsOn": ["MF-IC-01"],
         "objective": "SNRE staging MedicationRequest — draft prescription → MedicationRequest JSON staging; test round-trip schema; sin envío SNRE real",
@@ -1083,7 +1083,7 @@
         "id": "wave12-track-2-gates",
         "subagent": "gate-runner",
         "microphase": "FAST-GATES-WORKING-TREE",
-        "state": "BLOCKED",
+        "state": "DONE",
         "objective": "dev:rapid + fhir-export tests + db:validate — MF-IC-02 closure",
         "allowedPaths": [
           "reports/dev-agent-audit-diff-latest.json"
@@ -1272,11 +1272,11 @@
     "iterationCommand": "npm run dev:rapid"
   },
   "activeSession": {
-    "microphase": "MF-IC-02",
-    "name": "SNRE staging MedicationRequest",
+    "microphase": "MF-IC-03",
+    "name": "Questionnaire export piloto",
     "subprogram": "PROG-INTEROP-CHILE",
-    "wave": 12,
-    "dependsOn": ["MF-IC-01"],
+    "wave": 13,
+    "dependsOn": ["MF-IC-02"],
     "state": "BLOCKED",
     "subagent": "ollama-clinical",
     "gates": [
@@ -1285,29 +1285,27 @@
     ],
     "allowedPaths": [
       "packages/fhir-export/**",
-      "apps/api/src/routes/clinical/**",
-      "packages/clinical-forms/src/blueprints/prescription*"
+      "packages/clinical-domain/src/chile/**"
     ],
-    "closureReport": "reports/epis2-mf-ic-02-snre-staging.md"
+    "closureReport": "reports/epis2-mf-ic-03-questionnaire-export.md"
   },
   "nextSession": {
-    "microphase": "MF-IC-02",
-    "name": "SNRE staging MedicationRequest",
-    "dependsOn": ["MF-IC-01"],
+    "microphase": "MF-IC-03",
+    "name": "Questionnaire export piloto",
+    "dependsOn": ["MF-IC-02"],
     "state": "BLOCKED",
     "subprogram": "PROG-INTEROP-CHILE",
-    "wave": 12,
+    "wave": 13,
     "gates": [
       "npm run test packages/fhir-export",
       "npm run db:validate"
     ],
     "allowedPaths": [
       "packages/fhir-export/**",
-      "apps/api/src/routes/clinical/**",
-      "packages/clinical-forms/src/blueprints/prescription*"
+      "packages/clinical-domain/src/chile/**"
     ],
-    "closureReport": "reports/epis2-mf-ic-02-snre-staging.md",
-    "strengthenOnClosure": "21/23"
+    "closureReport": "reports/epis2-mf-ic-03-questionnaire-export.md",
+    "strengthenOnClosure": "22/23"
   },
   "startup": {
     "commands": [
@@ -1321,10 +1319,9 @@
   },
   "requiresHumanReview": false,
   "risks": [
-    "Ola 12 BLOCKED — activación humana MF-IC-02 requerida antes de implementación clínica",
-    "Push remoto pendiente (12 commits ahead of origin/master)",
-    "MF-IC-01 ledger pendiente actualización humana al merge código",
-    "Mezcla IC-02 y MF-IC-03 en misma sesión clínica",
+    "Ola 13 BLOCKED — activación humana MF-IC-03 requerida antes de implementación clínica",
+    "Push remoto pendiente (~22 commits ahead of origin/master)",
+    "Mezcla IC-03 y MF-IC-04 en misma sesión clínica",
     "Envío SNRE/MINSAL real prohibido — solo staging JSON local",
     "Import @mui/* directo en apps/web (usar @epis2/epis2-ui / ClinicalCdsCard)",
     "E2E dual-chart requiere VITE_ENABLE_DUAL_CHART_MODES=true"
