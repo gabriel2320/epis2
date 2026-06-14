@@ -10,14 +10,13 @@ import { EpisClinicalContextPane } from './EpisClinicalContextPane.js';
 
 const patientId = '00000000-0000-4000-8000-000000000099';
 
-const { fetchPatientLongitudinal, searchPatientDocuments, suggestPatientSummary, fetchAiStatus } = vi.hoisted(
-  () => ({
+const { fetchPatientLongitudinal, searchPatientDocuments, suggestPatientSummary, fetchAiStatus } =
+  vi.hoisted(() => ({
     fetchPatientLongitudinal: vi.fn(),
     searchPatientDocuments: vi.fn(),
     suggestPatientSummary: vi.fn(),
     fetchAiStatus: vi.fn(),
-  }),
-);
+  }));
 
 vi.mock('../api/clinicalApi.js', async (importOriginal) => {
   const actual = await importOriginal<typeof import('../api/clinicalApi.js')>();

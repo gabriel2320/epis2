@@ -36,8 +36,9 @@ const readyByFront = ledger.fronts.map((front) => {
 const done = ledger.phases.filter((p) => p.state === 'DONE').length;
 const total = ledger.phases.length;
 
-const signoffReady =
-  ledger.signoff.requires.every((id) => ledger.phases.find((p) => p.id === id)?.state === 'DONE');
+const signoffReady = ledger.signoff.requires.every(
+  (id) => ledger.phases.find((p) => p.id === id)?.state === 'DONE',
+);
 
 console.log(
   JSON.stringify(

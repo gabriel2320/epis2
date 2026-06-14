@@ -75,7 +75,11 @@ describe('context ranking (CE-1)', () => {
     const without = rankCommandDefinitions('conciliacion medicamentosa', { hasPatient: true });
     const withSection = rankCommandDefinitions('conciliacion medicamentosa', {
       hasPatient: true,
-      context: { workspace: 'patient_chart', chartMode: 'traditional', traditionalSection: 'navMeds' },
+      context: {
+        workspace: 'patient_chart',
+        chartMode: 'traditional',
+        traditionalSection: 'navMeds',
+      },
     });
     const reconcileWithout =
       without.find((r) => r.def.intent === 'reconcile_medications')?.score ?? 0;

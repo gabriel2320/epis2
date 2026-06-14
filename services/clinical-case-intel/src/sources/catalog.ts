@@ -62,9 +62,7 @@ export async function buildRecordsFromCatalog(
         );
       }
     } catch (err) {
-      failures.push(
-        `${entry.id}: ${err instanceof Error ? err.message : String(err)}`,
-      );
+      failures.push(`${entry.id}: ${err instanceof Error ? err.message : String(err)}`);
     }
   }
 

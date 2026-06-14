@@ -42,7 +42,11 @@ if (existsSync(paths.api)) {
 
 if (existsSync(paths.server)) {
   const src = readFileSync(paths.server, 'utf8');
-  for (const needle of ['approvePaperChartDraft', 'getPaperChartState', 'PaperChartSignBlockedError']) {
+  for (const needle of [
+    'approvePaperChartDraft',
+    'getPaperChartState',
+    'PaperChartSignBlockedError',
+  ]) {
     if (!src.includes(needle)) errors.push(`paperChart.ts falta ${needle}`);
   }
 }

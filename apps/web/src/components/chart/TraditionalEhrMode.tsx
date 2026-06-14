@@ -146,7 +146,9 @@ export function TraditionalEhrMode({
         onSectionChange={handleSectionChange}
         visibleSectionIds={visibleSectionIds}
       />
-      <Box sx={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
+      <Box
+        sx={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'row', overflow: 'hidden' }}
+      >
         <TraditionalSectionNav
           activeSection={activeSection}
           onSectionChange={handleSectionChange}

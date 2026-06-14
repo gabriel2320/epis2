@@ -29,15 +29,21 @@ describe('ClinicalFilterableTimeline (MF-DI-08)', () => {
   it('renderiza filtros y agrupación temporal', () => {
     render(<ClinicalFilterableTimeline timeline={timeline} />);
     expect(screen.getByTestId('epis2-clinical-filterable-timeline')).toBeInTheDocument();
-    expect(screen.getByTestId('epis2-clinical-filterable-timeline-filter-labs')).toBeInTheDocument();
-    expect(screen.getByTestId('epis2-clinical-filterable-timeline-period-today')).toBeInTheDocument();
+    expect(
+      screen.getByTestId('epis2-clinical-filterable-timeline-filter-labs'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId('epis2-clinical-filterable-timeline-period-today'),
+    ).toBeInTheDocument();
   });
 
   it('filtra laboratorio', async () => {
     const user = userEvent.setup();
     render(<ClinicalFilterableTimeline timeline={timeline} />);
     await user.click(screen.getByTestId('epis2-clinical-filterable-timeline-filter-labs'));
-    expect(screen.getByTestId('epis2-clinical-filterable-timeline-event-obs-1')).toBeInTheDocument();
+    expect(
+      screen.getByTestId('epis2-clinical-filterable-timeline-event-obs-1'),
+    ).toBeInTheDocument();
     expect(screen.queryByTestId('epis2-clinical-filterable-timeline-event-note-1')).toBeNull();
   });
 });

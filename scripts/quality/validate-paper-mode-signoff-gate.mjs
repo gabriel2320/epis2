@@ -46,7 +46,11 @@ if (existsSync(e2ePath)) {
 
 if (existsSync(plannerE2ePath)) {
   const src = readFileSync(plannerE2ePath, 'utf8');
-  for (const needle of ['epis2-paper-planner-day', 'epis2-paper-planner-view-week', 'epis2-paper-planner-view-month']) {
+  for (const needle of [
+    'epis2-paper-planner-day',
+    'epis2-paper-planner-view-week',
+    'epis2-paper-planner-view-month',
+  ]) {
     if (!src.includes(needle)) errors.push(`paper-planner-journey falta ${needle}`);
   }
 }

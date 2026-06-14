@@ -3,12 +3,7 @@ import type { PatientLongitudinalResponse } from '@epis2/contracts';
 export type TimelineEvent = PatientLongitudinalResponse['timeline'][number];
 
 /** MF-DI-08 — filtros clínicos de timeline (no confundir con kind crudo). */
-export type ClinicalTimelineFilter =
-  | 'all'
-  | 'labs'
-  | 'signed'
-  | 'hospitalizations'
-  | 'evolutions';
+export type ClinicalTimelineFilter = 'all' | 'labs' | 'signed' | 'hospitalizations' | 'evolutions';
 
 export const CLINICAL_TIMELINE_FILTERS = [
   'all',

@@ -1,9 +1,6 @@
 import { copy } from '@epis2/design-system';
 import { detectChronicFocus } from '@epis2/clinical-forms';
-import {
-  getProbablePatientActionChips,
-  inferPatientCareSetting,
-} from '@epis2/command-registry';
+import { getProbablePatientActionChips, inferPatientCareSetting } from '@epis2/command-registry';
 import { getDemoCaseByPatientId } from '@epis2/test-fixtures';
 import { Link, useSearch } from '@tanstack/react-router';
 import { classicModeToDualChartSearch, useClinicalNavigate } from '../routes/clinicalNavigate.js';
@@ -142,8 +139,7 @@ export function PatientWorkspacePage() {
   }, [summaryFields]);
   const probableActionChips = useMemo(() => {
     if (!session || !patientId) return [];
-    const chartMode =
-      search.chartMode === 'paper' ? 'paper' : ('traditional' as const);
+    const chartMode = search.chartMode === 'paper' ? 'paper' : ('traditional' as const);
     return getProbablePatientActionChips({
       role: session.user.role,
       permissions: session.permissions,

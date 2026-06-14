@@ -23,10 +23,7 @@ const NORM_REPORTS = [
   'reports/epis2-mf-norm-11-signoff.md',
 ];
 
-for (const rel of [
-  'docs/design/EPIS2_FICHA_NORM_SIGNOFF_CHECKLIST.md',
-  ...NORM_REPORTS,
-]) {
+for (const rel of ['docs/design/EPIS2_FICHA_NORM_SIGNOFF_CHECKLIST.md', ...NORM_REPORTS]) {
   if (!existsSync(join(root, rel))) errors.push(`falta: ${rel}`);
 }
 

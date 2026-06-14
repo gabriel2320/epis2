@@ -1,4 +1,8 @@
-import { rankCommandDefinitions, type CommandActiveContext, type CommandResolveInput } from '@epis2/command-registry';
+import {
+  rankCommandDefinitions,
+  type CommandActiveContext,
+  type CommandResolveInput,
+} from '@epis2/command-registry';
 import { buildCommandTelemetryEvent } from '@epis2/command-registry/telemetry';
 import {
   commandResolveRequestSchema,

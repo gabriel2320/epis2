@@ -50,7 +50,10 @@ export function validateClinicalCaseRecord(record: ClinicalCaseRecord): Validati
   }
 
   for (const problem of record.clinical.problems) {
-    if (!problem.toLowerCase().includes('sintético') && !problem.toLowerCase().includes('sintetico')) {
+    if (
+      !problem.toLowerCase().includes('sintético') &&
+      !problem.toLowerCase().includes('sintetico')
+    ) {
       issues.push({
         field: 'clinical.problems',
         message: `problema sin marca sintético: ${problem.slice(0, 40)}`,

@@ -16,7 +16,9 @@ describe('031_hl7_quarantine migration (MF-IC-04 hardening)', () => {
   it('define tabla con status acotado y sin writeback directo a clinical_notes', async () => {
     sql ??= await readFile(join(migrationsDir, '031_hl7_quarantine.sql'), 'utf8');
     expect(sql).toContain('quarantine');
-    expect(sql).toContain("CHECK (status IN ('quarantine', 'mapped', 'writeback_proposed', 'reverted', 'rejected'))");
+    expect(sql).toContain(
+      "CHECK (status IN ('quarantine', 'mapped', 'writeback_proposed', 'reverted', 'rejected'))",
+    );
     expect(sql).not.toMatch(/INSERT\s+INTO\s+clinical_notes/i);
     expect(sql).toContain('REFERENCES clinical_drafts(id)');
   });

@@ -98,8 +98,12 @@ describe('MINSAL export (MF-IC-01)', () => {
       expect(bundle.meta.profile).toContain(MINSAL_PROFILES.bundle);
 
       const resources = (bundle.entry ?? []).map((e) => e.resource);
-      const patient = resources.find((r) => (r as { resourceType?: string }).resourceType === 'Patient');
-      const encounter = resources.find((r) => (r as { resourceType?: string }).resourceType === 'Encounter');
+      const patient = resources.find(
+        (r) => (r as { resourceType?: string }).resourceType === 'Patient',
+      );
+      const encounter = resources.find(
+        (r) => (r as { resourceType?: string }).resourceType === 'Encounter',
+      );
       const document = resources.find(
         (r) => (r as { resourceType?: string }).resourceType === 'DocumentReference',
       );

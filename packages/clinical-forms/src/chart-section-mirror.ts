@@ -39,7 +39,11 @@ export const CHART_SECTION_MIRROR_BINDINGS: readonly ChartSectionMirrorBinding[]
   { traditionalSectionId: 'navAnamnesis', paperSectionId: 'anamnesis', fieldId: 'chart.anamnesis' },
   { traditionalSectionId: 'navAntecedents', paperSectionId: 'cover', fieldId: 'chart.antecedents' },
   { traditionalSectionId: 'navAllergies', paperSectionId: 'cover', fieldId: 'chart.allergies' },
-  { traditionalSectionId: 'navPhysicalExam', paperSectionId: 'physicalExam', fieldId: 'chart.physical_exam' },
+  {
+    traditionalSectionId: 'navPhysicalExam',
+    paperSectionId: 'physicalExam',
+    fieldId: 'chart.physical_exam',
+  },
   { traditionalSectionId: 'navDiagnoses', paperSectionId: 'soap', fieldId: 'chart.diagnoses' },
   { traditionalSectionId: 'navOrders', paperSectionId: 'orders', fieldId: 'chart.orders' },
   { traditionalSectionId: 'navMeds', paperSectionId: 'orders', fieldId: 'chart.medications' },
@@ -49,7 +53,11 @@ export const CHART_SECTION_MIRROR_BINDINGS: readonly ChartSectionMirrorBinding[]
   { traditionalSectionId: 'navConsults', paperSectionId: 'consults', fieldId: 'chart.consults' },
   { traditionalSectionId: 'navDocuments', paperSectionId: 'consent', fieldId: 'chart.documents' },
   { traditionalSectionId: 'navEpicrisis', paperSectionId: 'discharge', fieldId: 'chart.discharge' },
-  { traditionalSectionId: 'navProcedures', paperSectionId: 'procedures', fieldId: 'chart.procedures' },
+  {
+    traditionalSectionId: 'navProcedures',
+    paperSectionId: 'procedures',
+    fieldId: 'chart.procedures',
+  },
   { traditionalSectionId: 'navAudit', paperSectionId: null, fieldId: 'chart.audit' },
 ] as const;
 

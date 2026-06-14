@@ -27,7 +27,9 @@ export function ImagingRequestPrintPage() {
   return (
     <Stack spacing={2} data-testid="epis2-imaging-request-print-page">
       {paperSearch.returnChartMode === 'paper' ? (
-        <PaperBridgeBackButton onClick={() => navigateBackToPaperChart(navigate, patientId, 'a5')} />
+        <PaperBridgeBackButton
+          onClick={() => navigateBackToPaperChart(navigate, patientId, 'a5')}
+        />
       ) : null}
       <PrintPageToolbar printLabel={copy.print.printA5} />
       <PrintA5Document

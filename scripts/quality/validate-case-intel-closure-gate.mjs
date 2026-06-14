@@ -48,21 +48,21 @@ if (existsSync(goldenPath)) {
 
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 const scripts = pkg.scripts ?? {};
-for (const script of [
-  'case-intel:pipeline:catalog',
-  'case-intel:export-evolab',
-  'quality:case-intel-gate',
-  'quality:case-intel-assist-gate',
-  'ai:evals:sim',
-]) {
+const catalogPath = join(root, 'tools/gates/catalog-full.json');
+const catalog = existsSync(catalogPath) ? JSON.parse(readFileSync(catalogPath, 'utf8')) : null;
+
+for (const script of ['case-intel:pipeline:catalog', 'case-intel:export-evolab', 'ai:evals:sim']) {
   if (!scripts[script]) errors.push(`package.json sin script ${script}`);
 }
 
-const gate = spawnSync('npm', ['run', 'quality:case-intel-gate'], {
+for (const script of ['quality:case-intel-gate', 'quality:case-intel-assist-gate']) {
+  if (!catalog?.gates?.[script]) errors.push(`catalog-full.json sin ${script}`);
+}
+
+const gate = spawnSync('node', ['tools/gates/run-legacy.mjs', 'quality:case-intel-gate'], {
   cwd: root,
   stdio: 'pipe',
   encoding: 'utf8',
-  shell: true,
 });
 if (gate.status !== 0) {
   errors.push('quality:case-intel-gate falló (precondición cierre)');

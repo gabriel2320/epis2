@@ -57,6 +57,10 @@ EPIS2_LOCAL_CI_E2E=1 npm run quality:local-ci   # antes de PR grande
 | `npm run quality:ui` | Alias → `quality:ui-simplify-gate` (MF-FF-15) |
 | `npm run quality:ai` | Alias → degrade + ai-client + web-ai-boundary (MF-FF-15) |
 | `npm run quality:medrepo-consumption-gate` | Loader MedRepo read-only API (MF-FF-14) |
+| `npm run quality:required` | Gate PR — `tools/gates/required.json` (Fase 1 consolidación) |
+| `npm run quality:nightly` | Paridad CI extendida — `tools/gates/nightly.json` |
+| `npm run tool:gates:verify` | Infra Fase 0–1 consolidación scripts |
+| `npm run tool:scripts:classify` | CSV clasificación scripts root |
 
 Variables útiles:
 

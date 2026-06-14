@@ -40,7 +40,7 @@ if (!dock.includes("variant={isCensus ? 'census-search' : 'clinical-chart'}")) {
 }
 
 const layout = readFileSync(layoutPath, 'utf8');
-if (!layout.includes('borderRadius: \'16px\'')) {
+if (!layout.includes("borderRadius: '16px'")) {
   errors.push('layout barra debe usar radius Calm 16px');
 }
 

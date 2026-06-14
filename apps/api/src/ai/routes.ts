@@ -54,9 +54,7 @@ export async function registerAiRoutes(
 
   app.get('/api/ai/status', { preHandler: authenticate }, async () => {
     const localAiUp = await fetchLocalAiStatus(config.LOCAL_AI_BASE_URL);
-    const caps = localAiUp
-      ? await fetchLocalAiCapabilities(config.LOCAL_AI_BASE_URL)
-      : null;
+    const caps = localAiUp ? await fetchLocalAiCapabilities(config.LOCAL_AI_BASE_URL) : null;
     const ollamaUp = await pingOllama(config.OLLAMA_BASE_URL);
     const ollama: 'up' | 'down' | 'unknown' = ollamaUp ? 'up' : 'down';
 
@@ -79,9 +77,7 @@ export async function registerAiRoutes(
           : 'Asistencia IA local disponible (demo).'
         : 'IA no disponible — el flujo manual sigue operativo.',
       ...(caps?.inferenceMode !== undefined ? { inferenceMode: caps.inferenceMode } : {}),
-      ...(openaiState !== undefined
-        ? { cloud: { openai: openaiState } }
-        : {}),
+      ...(openaiState !== undefined ? { cloud: { openai: openaiState } } : {}),
       ...(activeProvider !== undefined ? { activeProvider } : {}),
     });
   });
@@ -102,13 +98,11 @@ export async function registerAiRoutes(
       const session = (request as AuthenticatedRequest).session;
       const { httpStatus, body } = await withAiRunSpan(
         parsed.data.blueprintId,
-        () =>
-          requestDraftAssist(config.LOCAL_AI_BASE_URL, parsed.data, config.LOCAL_AI_API_KEY),
+        () => requestDraftAssist(config.LOCAL_AI_BASE_URL, parsed.data, config.LOCAL_AI_API_KEY),
         (result) => ({
           model: result.body.model,
           latencyMs: result.body.latencyMs,
-          provider:
-            result.body.status === 'success' ? result.body.provider : undefined,
+          provider: result.body.status === 'success' ? result.body.provider : undefined,
         }),
       );
 
@@ -178,9 +172,7 @@ export async function registerAiRoutes(
           latencyMs: body.latencyMs,
           ...(body.provider !== undefined ? { provider: body.provider } : {}),
           ...(body.dataTier !== undefined ? { dataTier: body.dataTier } : {}),
-          ...(body.documentCitations?.length
-            ? { documentCitations: body.documentCitations }
-            : {}),
+          ...(body.documentCitations?.length ? { documentCitations: body.documentCitations } : {}),
         });
         return reply.send(response);
       }

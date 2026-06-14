@@ -1,7 +1,4 @@
-import {
-  validateAdminPrevision,
-  validateAdminRut,
-} from '@epis2/clinical-productivity';
+import { validateAdminPrevision, validateAdminRut } from '@epis2/clinical-productivity';
 
 export type GeneratedFormAdminError = {
   fieldId: string;

@@ -23,7 +23,12 @@ export function TraditionalEvolutionSection({
     <Stack spacing={1.5} data-testid={testId}>
       <ClinicalFilterableTimeline timeline={timeline} onOpenDraft={onOpenDraft} />
       {onOpenEvolution ? (
-        <EpisButton appearance="text" size="small" onClick={onOpenEvolution} sx={{ alignSelf: 'flex-start' }}>
+        <EpisButton
+          appearance="text"
+          size="small"
+          onClick={onOpenEvolution}
+          sx={{ alignSelf: 'flex-start' }}
+        >
           {copy.chartModes.actionEvolution}
         </EpisButton>
       ) : null}

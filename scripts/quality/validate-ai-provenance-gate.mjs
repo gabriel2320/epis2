@@ -55,11 +55,12 @@ function run(label, cmd, args, { inherit = false } = {}) {
 run('build contracts', 'npm', ['run', 'build', '-w', '@epis2/contracts']);
 run('build fhir-export', 'npm', ['run', 'build', '-w', '@epis2/fhir-export']);
 
-run('MF-IM-06/07 fhir-export provenance + model card', 'npx', [
-  'vitest',
-  'run',
-  'packages/fhir-export/src/mappers.test.ts',
-], { inherit: true });
+run(
+  'MF-IM-06/07 fhir-export provenance + model card',
+  'npx',
+  ['vitest', 'run', 'packages/fhir-export/src/mappers.test.ts'],
+  { inherit: true },
+);
 
 if (errors.length) {
   console.error('ai-provenance-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));

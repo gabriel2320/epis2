@@ -1,13 +1,17 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { navigateResolvedWithAssistDraft } from './useClinicalCommandSubmit.js';
 
-const { fetchAiStatus, requestDraftAssist, stashCommandAssistDraft, navigateClinicalCommandResult } =
-  vi.hoisted(() => ({
-    fetchAiStatus: vi.fn(),
-    requestDraftAssist: vi.fn(),
-    stashCommandAssistDraft: vi.fn(),
-    navigateClinicalCommandResult: vi.fn(),
-  }));
+const {
+  fetchAiStatus,
+  requestDraftAssist,
+  stashCommandAssistDraft,
+  navigateClinicalCommandResult,
+} = vi.hoisted(() => ({
+  fetchAiStatus: vi.fn(),
+  requestDraftAssist: vi.fn(),
+  stashCommandAssistDraft: vi.fn(),
+  navigateClinicalCommandResult: vi.fn(),
+}));
 
 vi.mock('../api/aiApi.js', () => ({
   fetchAiStatus,

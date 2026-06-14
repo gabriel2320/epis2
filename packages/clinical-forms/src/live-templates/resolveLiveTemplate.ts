@@ -15,7 +15,9 @@ export function canSuggestLiveTemplate(
   const template = getLiveTemplateById(templateId);
   if (!template) return false;
   const signals = detectClinicalComorbiditySignals(summaryFields);
-  return template.suggestWhen.every((condition) => evaluateLiveTemplateCondition(condition, signals));
+  return template.suggestWhen.every((condition) =>
+    evaluateLiveTemplateCondition(condition, signals),
+  );
 }
 
 function filterTemplateSections(
@@ -46,7 +48,10 @@ export function materializeLiveTemplateBlueprint(
 
   const signals = detectClinicalComorbiditySignals(summaryFields);
   const visibleFields = template.extraFields.filter((f) => isLiveTemplateFieldVisible(f, signals));
-  if (visibleFields.length === 0 && template.suggestWhen.every((c) => !evaluateLiveTemplateCondition(c, signals))) {
+  if (
+    visibleFields.length === 0 &&
+    template.suggestWhen.every((c) => !evaluateLiveTemplateCondition(c, signals))
+  ) {
     return null;
   }
 

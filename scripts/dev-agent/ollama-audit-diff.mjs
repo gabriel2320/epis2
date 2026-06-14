@@ -26,14 +26,20 @@ const MAX_DIFF_CHARS = Number(process.env.EPIS2_AUDIT_DIFF_MAX_CHARS ?? 80_000);
 function collectDiff() {
   const parts = [];
   if (stagedOnly) {
-    parts.push(execSync('git diff --cached', { cwd: root, encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 }));
+    parts.push(
+      execSync('git diff --cached', { cwd: root, encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 }),
+    );
   } else {
     try {
-      parts.push(execSync('git diff HEAD', { cwd: root, encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 }));
+      parts.push(
+        execSync('git diff HEAD', { cwd: root, encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 }),
+      );
     } catch {
       /* empty repo */
     }
-    parts.push(execSync('git diff --cached', { cwd: root, encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 }));
+    parts.push(
+      execSync('git diff --cached', { cwd: root, encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 }),
+    );
   }
   return parts.filter(Boolean).join('\n').trim();
 }
@@ -104,7 +110,12 @@ async function main() {
     process.exit(0);
   }
 
-  const result = await generateOllamaJson(route.baseUrl, route.model, buildPrompt(diffForPrompt), 90_000);
+  const result = await generateOllamaJson(
+    route.baseUrl,
+    route.model,
+    buildPrompt(diffForPrompt),
+    90_000,
+  );
   if (!result.ok) {
     console.error(`dev:agent:audit-diff FAILED: ${result.reason}`);
     process.exit(1);

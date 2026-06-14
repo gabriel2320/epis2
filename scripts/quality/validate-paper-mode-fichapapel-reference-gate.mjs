@@ -40,7 +40,12 @@ if (existsSync(paths.reference)) {
 
 if (existsSync(paths.template)) {
   const src = readFileSync(paths.template, 'utf8');
-  for (const needle of ['PaperInstitutionalHeader', 'PaperPatientStrip', 'PaperFooter', 'PaperSectionChrome']) {
+  for (const needle of [
+    'PaperInstitutionalHeader',
+    'PaperPatientStrip',
+    'PaperFooter',
+    'PaperSectionChrome',
+  ]) {
     if (!src.includes(needle)) errors.push(`PaperChartTemplate falta ${needle}`);
   }
 }

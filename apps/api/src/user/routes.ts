@@ -34,16 +34,9 @@ export async function registerUserRoutes(
     async (request, reply) => {
       if (!db) return sendApiError(reply, 503, 'Base de datos no disponible');
       const session = (request as AuthenticatedRequest).session;
-      const query = z
-        .object({ patientId: z.string().uuid().optional() })
-        .safeParse(request.query);
+      const query = z.object({ patientId: z.string().uuid().optional() }).safeParse(request.query);
       if (!query.success) return sendApiError(reply, 400, 'Parámetros inválidos');
-      const body = await getOperationalMemoryForUser(
-        db,
-        config,
-        session,
-        query.data.patientId,
-      );
+      const body = await getOperationalMemoryForUser(db, config, session, query.data.patientId);
       return operationalMemoryResponseSchema.parse(body);
     },
   );
@@ -54,9 +47,7 @@ export async function registerUserRoutes(
     async (request, reply) => {
       if (!db) return sendApiError(reply, 503, 'Base de datos no disponible');
       const session = (request as AuthenticatedRequest).session;
-      const query = z
-        .object({ patientId: z.string().uuid().optional() })
-        .safeParse(request.query);
+      const query = z.object({ patientId: z.string().uuid().optional() }).safeParse(request.query);
       if (!query.success) return sendApiError(reply, 400, 'Parámetros inválidos');
       const patch = patchOperationalMemoryRequestSchema.safeParse(request.body);
       if (!patch.success) return sendApiError(reply, 400, 'Payload inválido');

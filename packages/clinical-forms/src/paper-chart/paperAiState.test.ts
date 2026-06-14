@@ -1,14 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import {
-  confirmAiSuggestion,
-  insertAiSuggestion,
-  rejectAiSuggestion,
-} from './paperAiState.js';
-import {
-  canSignPaperChart,
-  emptyPaperChartDraft,
-  parsePaperChartBody,
-} from './schema.js';
+import { confirmAiSuggestion, insertAiSuggestion, rejectAiSuggestion } from './paperAiState.js';
+import { canSignPaperChart, emptyPaperChartDraft, parsePaperChartBody } from './schema.js';
 
 describe('paperAiState MF-PAPER-03', () => {
   it('inserta IA como ai_draft no confirmado', () => {
@@ -21,10 +13,7 @@ describe('paperAiState MF-PAPER-03', () => {
   });
 
   it('confirmación cambia a human/confirmed', () => {
-    const draft = insertAiSuggestion(
-      { value: '', source: 'human', confirmed: true },
-      'Texto IA',
-    );
+    const draft = insertAiSuggestion({ value: '', source: 'human', confirmed: true }, 'Texto IA');
     expect(confirmAiSuggestion(draft).confirmed).toBe(true);
   });
 
@@ -37,7 +26,10 @@ describe('paperAiState MF-PAPER-03', () => {
   });
 
   it('reject limpia valor', () => {
-    expect(rejectAiSuggestion(insertAiSuggestion({ value: '', source: 'human', confirmed: true }, 'IA')).value).toBe('');
+    expect(
+      rejectAiSuggestion(insertAiSuggestion({ value: '', source: 'human', confirmed: true }, 'IA'))
+        .value,
+    ).toBe('');
   });
 });
 

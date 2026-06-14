@@ -20,7 +20,9 @@ describe('chronic-control-prefill (MF-DI-04)', () => {
   });
 
   it('parsea primera medicación del resumen', () => {
-    expect(parseFirstActiveMedicationLine('Metformina 850 mg c/12 h · Atorvastatina (demo)')).toEqual({
+    expect(
+      parseFirstActiveMedicationLine('Metformina 850 mg c/12 h · Atorvastatina (demo)'),
+    ).toEqual({
       name: 'Metformina',
       dose: '850 mg',
       frequency: 'c/12 h',

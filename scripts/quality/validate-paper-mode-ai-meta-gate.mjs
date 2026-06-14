@@ -21,7 +21,11 @@ for (const [label, path] of [
 
 if (existsSync(schemaPath)) {
   const src = readFileSync(schemaPath, 'utf8');
-  for (const needle of ['paperFieldStateSchema', 'canSignPaperChart', 'applyPaperChartSectionPatch']) {
+  for (const needle of [
+    'paperFieldStateSchema',
+    'canSignPaperChart',
+    'applyPaperChartSectionPatch',
+  ]) {
     if (!src.includes(needle)) errors.push(`schema.ts falta ${needle}`);
   }
 }

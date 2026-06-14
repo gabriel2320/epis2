@@ -1,7 +1,4 @@
-import {
-  ClinicalDataGrid,
-  type ClinicalGridColDef,
-} from '@epis2/clinical-productivity';
+import { ClinicalDataGrid, type ClinicalGridColDef } from '@epis2/clinical-productivity';
 import type { ClinicalDenseTabularRow } from '@epis2/clinical-productivity';
 import { useMemo } from 'react';
 

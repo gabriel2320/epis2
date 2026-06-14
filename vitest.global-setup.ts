@@ -13,9 +13,7 @@ export default async function globalSetup() {
   }
 
   try {
-    const { refreshMarDemoWindows } = await import(
-      './apps/api/src/inpatient/integrationReset.js'
-    );
+    const { refreshMarDemoWindows } = await import('./apps/api/src/inpatient/integrationReset.js');
     await refreshMarDemoWindows(databaseUrl);
   } catch (err) {
     console.warn('[EPIS2] refreshMarDemoWindows omitido (¿Postgres arriba?):', err);

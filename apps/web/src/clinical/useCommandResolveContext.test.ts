@@ -1,8 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  buildCommandResolveContext,
-  parseEhrSectionSearch,
-} from './useCommandResolveContext.js';
+import { buildCommandResolveContext, parseEhrSectionSearch } from './useCommandResolveContext.js';
 
 describe('buildCommandResolveContext', () => {
   it('propaga chartMode=paper en patient_chart', () => {

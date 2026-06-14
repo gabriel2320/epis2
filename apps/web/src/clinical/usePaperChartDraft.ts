@@ -34,13 +34,15 @@ export function usePaperChartDraft(patientId: string | undefined) {
   const canSign = useMemo(() => canSignPaperChart(fields).ok && !readOnly, [fields, readOnly]);
   const signBlockMessage = useMemo(() => paperChartSignBlockMessage(fields), [fields]);
   const unconfirmedAiCount = useMemo(
-    () =>
-      Object.values(fields).filter((f) => f.source === 'ai_draft' && !f.confirmed).length,
+    () => Object.values(fields).filter((f) => f.source === 'ai_draft' && !f.confirmed).length,
     [fields],
   );
   const aiPendingSections = useMemo(() => {
     const flags: Partial<Record<PaperChartSectionId, boolean>> = {};
-    for (const [id, field] of Object.entries(fields) as [PaperChartSectionId, PaperChartFieldState][]) {
+    for (const [id, field] of Object.entries(fields) as [
+      PaperChartSectionId,
+      PaperChartFieldState,
+    ][]) {
       if (field.source === 'ai_draft' && !field.confirmed) flags[id] = true;
     }
     return flags;

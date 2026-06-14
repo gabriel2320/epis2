@@ -115,7 +115,10 @@ const CONTEXT_PRIORITY: Partial<
   ],
 };
 
-function dedupeSuggestions(items: ContextPanelSuggestion[], limit: number): ContextPanelSuggestion[] {
+function dedupeSuggestions(
+  items: ContextPanelSuggestion[],
+  limit: number,
+): ContextPanelSuggestion[] {
   const seen = new Set<string>();
   const out: ContextPanelSuggestion[] = [];
   for (const item of items) {

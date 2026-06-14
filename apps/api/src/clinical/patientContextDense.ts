@@ -1,4 +1,7 @@
-import { buildClinicalContextDense, type ClinicalContextDensePayload } from '@epis2/clinical-domain';
+import {
+  buildClinicalContextDense,
+  type ClinicalContextDensePayload,
+} from '@epis2/clinical-domain';
 import type { Database } from '../db/client.js';
 import { getPatientClinicalSummary } from './patientClinicalSummary.js';
 import { getPatientLongitudinal } from './longitudinal.js';

@@ -20,7 +20,8 @@ export const EVOLUTION_NOTE_QUESTIONNAIRE_FIELD_IDS = [
   'plan',
 ] as const;
 
-export type EvolutionNoteQuestionnaireFieldId = (typeof EVOLUTION_NOTE_QUESTIONNAIRE_FIELD_IDS)[number];
+export type EvolutionNoteQuestionnaireFieldId =
+  (typeof EVOLUTION_NOTE_QUESTIONNAIRE_FIELD_IDS)[number];
 
 export type QuestionnaireFieldSource = {
   id: string;
@@ -73,7 +74,10 @@ const questionnaireGroupItemSchema = z.object({
   item: z.array(questionnaireLeafItemSchema).min(1),
 });
 
-const questionnaireItemSchema = z.union([questionnaireGroupItemSchema, questionnaireLeafItemSchema]);
+const questionnaireItemSchema = z.union([
+  questionnaireGroupItemSchema,
+  questionnaireLeafItemSchema,
+]);
 
 const metaSchema = z.object({
   profile: z.array(z.string()).optional(),

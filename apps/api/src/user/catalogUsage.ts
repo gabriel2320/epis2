@@ -6,10 +6,7 @@ import { userOperationalMemory } from '../db/schema.js';
 import { runWithRlsContext } from '../db/rlsContext.js';
 import type { AppConfig } from '../config.js';
 import type { SessionClaims } from '../auth/sessionToken.js';
-import {
-  OPERATIONAL_MEMORY_GLOBAL_SCOPE,
-  parseGlobalPayload,
-} from './operationalMemory.logic.js';
+import { OPERATIONAL_MEMORY_GLOBAL_SCOPE, parseGlobalPayload } from './operationalMemory.logic.js';
 
 async function upsertGlobalPayload(db: Database, userId: string, payload: unknown) {
   const now = new Date();

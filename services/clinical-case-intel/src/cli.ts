@@ -4,18 +4,10 @@ import { fileURLToPath } from 'node:url';
 import { createHttpClient } from './http.js';
 import { loadRecords } from './load.js';
 import { generateOllamaJson, pingOllama } from './ollama.js';
-import {
-  latestSnapshotPath,
-  readSnapshot,
-  summarizeRecords,
-  writeSnapshot,
-} from './snapshot.js';
+import { latestSnapshotPath, readSnapshot, summarizeRecords, writeSnapshot } from './snapshot.js';
 import { buildRecordsFromCatalog } from './sources/catalog.js';
 import { buildRecordsFromTeachingCase } from './sources/meded.js';
-import {
-  buildRecordsFromRemoteSources,
-  resolveTeachingCaseJson,
-} from './sources/mededRemote.js';
+import { buildRecordsFromRemoteSources, resolveTeachingCaseJson } from './sources/mededRemote.js';
 import { buildRecordsFromBundle } from './sources/synthea.js';
 import { runPipelineCatalog } from './pipelineCatalog.js';
 import { countSimPatientsInDb } from './promoteBatch.js';
@@ -122,7 +114,9 @@ async function readRecordsFromSource(
   }
 
   if (source !== 'synthea') {
-    throw new Error(`Fuente no soportada: ${source} (synthea | catalog | meded | meded-remote | pmc)`);
+    throw new Error(
+      `Fuente no soportada: ${source} (synthea | catalog | meded | meded-remote | pmc)`,
+    );
   }
 
   let bundle: unknown;
@@ -184,9 +178,7 @@ async function commandScrape(args: string[]): Promise<void> {
 
   const { valid, invalid } = filterValidRecords(records);
   for (const item of invalid) {
-    failures.push(
-      `${item.record.caseCode}: ${item.issues.map((i) => i.message).join('; ')}`,
-    );
+    failures.push(`${item.record.caseCode}: ${item.issues.map((i) => i.message).join('; ')}`);
   }
 
   const path = await writeSnapshot(dataDir, {
@@ -235,7 +227,9 @@ function createOllamaSynthesizeClient(baseUrl: string, model: string): Synthesiz
 }
 
 async function commandSynthesize(args: string[]): Promise<void> {
-  const input = resolveInputPath(getArg(args, 'input')) ?? (await latestInputSnapshot(['validated', 'scraped']));
+  const input =
+    resolveInputPath(getArg(args, 'input')) ??
+    (await latestInputSnapshot(['validated', 'scraped']));
   if (!input) {
     throw new Error('No hay snapshot scraped/validated; ejecute primero case-intel:scrape');
   }
@@ -317,7 +311,9 @@ async function commandValidate(args: string[]): Promise<void> {
     ],
     failures: snapshot.failures,
   });
-  console.log(`clinical-case-intel validate — ${valid.length} válido(s), ${invalid.length} inválido(s)`);
+  console.log(
+    `clinical-case-intel validate — ${valid.length} válido(s), ${invalid.length} inválido(s)`,
+  );
   console.log(`Snapshot: ${path}`);
 }
 
@@ -365,7 +361,9 @@ async function commandExportFixtures(args: string[]): Promise<void> {
     console.log(`Fixtures: ${result.simCasesPath}`);
     console.log(`Migración: ${result.migrationPath}`);
   } else {
-    console.log('Dry-run — use --apply para escribir simCases.ts y 042_sim_clinical_cases_seed.sql');
+    console.log(
+      'Dry-run — use --apply para escribir simCases.ts y 042_sim_clinical_cases_seed.sql',
+    );
   }
 }
 
@@ -388,7 +386,9 @@ async function commandExportEvolab(args: string[]): Promise<void> {
   const result = await writeEvolabArtifacts(repoRoot, bundle, apply);
 
   console.log(`clinical-case-intel export-evolab — ${valid.length} escenario(s)`);
-  console.log(`Evolab root: ${evolabRoot} (${isEvolabPresent(evolabRoot) ? 'presente' : 'ausente'})`);
+  console.log(
+    `Evolab root: ${evolabRoot} (${isEvolabPresent(evolabRoot) ? 'presente' : 'ausente'})`,
+  );
   console.log(`Preview: ${result.previewPath}`);
   for (const scenario of bundle.scenarios) {
     console.log(`  ${scenario.id} ← ${scenario.caseCode}`);
@@ -445,7 +445,9 @@ async function commandPipelineCatalog(args: string[]): Promise<void> {
     );
   }
   if (result.promoted) {
-    console.log(`Promote: ${result.promoted.promoted} nuevo(s), ${result.promoted.skipped} omitido(s)`);
+    console.log(
+      `Promote: ${result.promoted.promoted} nuevo(s), ${result.promoted.skipped} omitido(s)`,
+    );
   }
   if (result.simPatientsInDb !== undefined) {
     console.log(`EPIS2-SIM en SoT: ${result.simPatientsInDb}`);
@@ -507,7 +509,9 @@ async function commandPromoteCatalog(args: string[]): Promise<void> {
     console.log(`Aprobados en staging: ${result.approved}`);
   }
   if (result.promote) {
-    console.log(`Promote: ${result.promote.promoted} nuevo(s), ${result.promote.skipped} omitido(s)`);
+    console.log(
+      `Promote: ${result.promote.promoted} nuevo(s), ${result.promote.skipped} omitido(s)`,
+    );
   }
   console.log(`EPIS2-SIM en SoT: ${result.simPatientsInDb}`);
   console.log('Reporte: reports/clinical-case-promote-catalog.json');

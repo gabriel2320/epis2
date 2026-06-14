@@ -7,15 +7,7 @@ export type ClinicalContextDenseStripProps = {
   testId?: string;
 };
 
-function DenseField({
-  label,
-  value,
-  testId,
-}: {
-  label: string;
-  value: string;
-  testId?: string;
-}) {
+function DenseField({ label, value, testId }: { label: string; value: string; testId?: string }) {
   return (
     <Stack spacing={0} sx={{ minWidth: 0, flex: '1 1 140px', maxWidth: 360 }} data-testid={testId}>
       <Typography variant="caption" color="text.secondary" lineHeight={1.2}>

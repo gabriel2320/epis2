@@ -53,6 +53,8 @@ test.describe('Ola 6A — impresión receta A5', () => {
 
     const orderSelectPanel = page.getByTestId('epis2-cds-order-select');
     await expect(orderSelectPanel).toBeVisible({ timeout: 15_000 });
-    await expect(page.locator('[data-testid^="epis2-cds-order-select-card-"]').first()).toBeVisible();
+    await expect(
+      page.locator('[data-testid^="epis2-cds-order-select-card-"]').first(),
+    ).toBeVisible();
   });
 });

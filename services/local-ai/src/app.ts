@@ -60,7 +60,7 @@ export async function buildAiApp(config: AiConfig) {
       timestamp: new Date().toISOString(),
       checks: {
         ollama: ollamaUp ? 'up' : 'down',
-        openai: openaiUp ? 'up' : (policy.cloudEnabled ? 'down' : 'skipped'),
+        openai: openaiUp ? 'up' : policy.cloudEnabled ? 'down' : 'skipped',
       },
     });
     if (!operational) {

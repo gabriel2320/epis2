@@ -10,10 +10,7 @@ export function fetchOperationalMemory(patientId?: string) {
   return apiFetch<OperationalMemoryResponse>(`/api/user/operational-memory${q}`);
 }
 
-export function patchOperationalMemory(
-  patch: PatchOperationalMemoryRequest,
-  patientId?: string,
-) {
+export function patchOperationalMemory(patch: PatchOperationalMemoryRequest, patientId?: string) {
   const q = patientId ? `?patientId=${encodeURIComponent(patientId)}` : '';
   return apiFetch<OperationalMemoryResponse>(`/api/user/operational-memory${q}`, {
     method: 'PATCH',

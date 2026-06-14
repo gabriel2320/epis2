@@ -121,32 +121,28 @@ export async function registerCdsRoutes(
     },
   );
 
-  app.post(
-    '/api/cds/cards',
-    { preHandler: requirePatientRead },
-    async (request, reply) => {
-      if (!db) {
-        return sendApiError(reply, 503, 'Base de datos no disponible');
-      }
+  app.post('/api/cds/cards', { preHandler: requirePatientRead }, async (request, reply) => {
+    if (!db) {
+      return sendApiError(reply, 503, 'Base de datos no disponible');
+    }
 
-      const parsed = cdsCardsRequestSchema.safeParse(request.body);
-      if (!parsed.success) {
-        return sendApiError(reply, 400, 'Cuerpo inválido');
-      }
+    const parsed = cdsCardsRequestSchema.safeParse(request.body);
+    if (!parsed.success) {
+      return sendApiError(reply, 400, 'Cuerpo inválido');
+    }
 
-      const { patientId, hook, blueprintId, fields } = parsed.data;
-      const evalOpts: { blueprintId?: string; fields?: Record<string, string> } = {};
-      if (blueprintId !== undefined) evalOpts.blueprintId = blueprintId;
-      const normalizedFields = normalizeFieldsRecord(fields);
-      if (normalizedFields) evalOpts.fields = normalizedFields;
+    const { patientId, hook, blueprintId, fields } = parsed.data;
+    const evalOpts: { blueprintId?: string; fields?: Record<string, string> } = {};
+    if (blueprintId !== undefined) evalOpts.blueprintId = blueprintId;
+    const normalizedFields = normalizeFieldsRecord(fields);
+    if (normalizedFields) evalOpts.fields = normalizedFields;
 
-      const result = await evaluateCdsCards(db, patientId, hook, evalOpts);
-      if (!result) {
-        return sendApiError(reply, 404, 'Paciente no encontrado');
-      }
-      return result;
-    },
-  );
+    const result = await evaluateCdsCards(db, patientId, hook, evalOpts);
+    if (!result) {
+      return sendApiError(reply, 404, 'Paciente no encontrado');
+    }
+    return result;
+  });
 
   app.get(
     '/api/cds/order-select/:patientId',

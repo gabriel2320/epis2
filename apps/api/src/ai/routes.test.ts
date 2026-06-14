@@ -168,9 +168,7 @@ describe('AI routes', () => {
       documentCitations?: { documentId: string; chunkIndex: number }[];
     };
     expect(body.status).toBe('success');
-    expect(body.documentCitations?.[0]?.documentId).toBe(
-      'e0000001-0000-4000-8000-000000000005',
-    );
+    expect(body.documentCitations?.[0]?.documentId).toBe('e0000001-0000-4000-8000-000000000005');
     await app.close();
   });
 
@@ -194,10 +192,7 @@ describe('AI routes', () => {
     const exporter = new InMemorySpanExporter();
     const processor = new SimpleSpanProcessor(exporter);
     const { startOtel } = await import('../otel.js');
-    otel = startOtel(
-      { ...testApiConfig, OTEL_ENABLED: true },
-      { spanProcessors: [processor] },
-    );
+    otel = startOtel({ ...testApiConfig, OTEL_ENABLED: true }, { spanProcessors: [processor] });
 
     const app = await buildApp(config);
     const login = await app.inject({

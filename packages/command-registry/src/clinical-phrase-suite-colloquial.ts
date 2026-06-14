@@ -1,4 +1,7 @@
-import type { ClinicalPhraseExpectation, ClinicalPhraseSuiteEntry } from './clinical-phrase-suite-50.js';
+import type {
+  ClinicalPhraseExpectation,
+  ClinicalPhraseSuiteEntry,
+} from './clinical-phrase-suite-50.js';
 
 /** Frases coloquiales ampliadas — complemento CE-0 (MF-CM-07). */
 export const CLINICAL_PHRASE_SUITE_COLLOQUIAL: readonly ClinicalPhraseSuiteEntry[] = [

@@ -9,7 +9,10 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
 const denseUtil = join(root, 'packages/clinical-productivity/src/tables/clinicalDenseTabular.ts');
-const denseGrid = join(root, 'apps/web/src/components/chart/sections/TraditionalDenseSectionGrid.tsx');
+const denseGrid = join(
+  root,
+  'apps/web/src/components/chart/sections/TraditionalDenseSectionGrid.tsx',
+);
 const orders = join(root, 'apps/web/src/components/chart/sections/TraditionalOrdersSection.tsx');
 const meds = join(root, 'apps/web/src/components/chart/sections/TraditionalMedsSection.tsx');
 const index = join(root, 'packages/clinical-productivity/src/index.ts');
@@ -25,7 +28,8 @@ for (const [label, path] of [
 
 const indexSrc = readFileSync(index, 'utf8');
 for (const needle of ['mapLabelValueRowsToDenseTabular', 'mapMarRowsToDenseTabular']) {
-  if (!indexSrc.includes(needle)) errors.push(`clinical-productivity index debe exportar ${needle}`);
+  if (!indexSrc.includes(needle))
+    errors.push(`clinical-productivity index debe exportar ${needle}`);
 }
 
 const gridSrc = readFileSync(denseGrid, 'utf8');
@@ -34,7 +38,11 @@ if (!gridSrc.includes('ClinicalDataGrid')) {
 }
 
 const ordersSrc = readFileSync(orders, 'utf8');
-for (const needle of ['TraditionalDenseSectionGrid', 'mapLabelValueRowsToDenseTabular', 'variant="orders"']) {
+for (const needle of [
+  'TraditionalDenseSectionGrid',
+  'mapLabelValueRowsToDenseTabular',
+  'variant="orders"',
+]) {
   if (!ordersSrc.includes(needle)) errors.push(`TraditionalOrdersSection falta ${needle}`);
 }
 

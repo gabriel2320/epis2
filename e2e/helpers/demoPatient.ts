@@ -97,7 +97,7 @@ export async function fillMinimalPrescriptionDraft(page: Page) {
   await page.getByTestId('epis2-field-quantity').locator('input').fill('30 comprimidos');
   await page.getByTestId('epis2-field-frequency').locator('input').fill('Cada 12 horas');
   await page.getByTestId('epis2-field-duration').locator('input').fill('30 días');
-  await page.getByRole('textbox', { name: /indicaciones al paciente/i }).fill(
-    'Tomar con las comidas (demo E2E)',
-  );
+  await page
+    .getByRole('textbox', { name: /indicaciones al paciente/i })
+    .fill('Tomar con las comidas (demo E2E)');
 }

@@ -38,7 +38,11 @@ const NOTE_TYPE_LABELS: Record<string, string> = {
   other: 'Documento clínico',
 };
 
-function minsalMeta(profile: string, isSynthetic?: boolean, extraTags?: Epis2PatientResource['meta']['tag']) {
+function minsalMeta(
+  profile: string,
+  isSynthetic?: boolean,
+  extraTags?: Epis2PatientResource['meta']['tag'],
+) {
   const meta: Epis2PatientResource['meta'] = { profile: [profile] };
   const tags = [];
   const synthetic = syntheticOriginTag(isSynthetic ?? false);
@@ -76,7 +80,10 @@ export function toMinsalFhirPatient(source: MinsalPatientSource): Epis2PatientRe
 
   if (source.rut) {
     identifiers.push(
-      mapPatientIdentifierToFhir(source.rut, identifierType) as Epis2PatientResource['identifier'][number],
+      mapPatientIdentifierToFhir(
+        source.rut,
+        identifierType,
+      ) as Epis2PatientResource['identifier'][number],
     );
   }
 
@@ -182,7 +189,10 @@ export function validateMinsalPatientResource(resource: unknown) {
   const parsed = epis2PatientResourceSchema.safeParse(resource);
   if (!parsed.success) return { ok: false as const, errors: parsed.error.flatten() };
   if (!parsed.data.meta.profile?.includes(MINSAL_PROFILES.patient)) {
-    return { ok: false as const, errors: { formErrors: ['meta.profile minsal-patient requerido'] } };
+    return {
+      ok: false as const,
+      errors: { formErrors: ['meta.profile minsal-patient requerido'] },
+    };
   }
   return { ok: true as const, resource: parsed.data };
 }
@@ -191,7 +201,10 @@ export function validateMinsalEncounterResource(resource: unknown) {
   const parsed = epis2EncounterResourceSchema.safeParse(resource);
   if (!parsed.success) return { ok: false as const, errors: parsed.error.flatten() };
   if (!parsed.data.meta.profile?.includes(MINSAL_PROFILES.encounter)) {
-    return { ok: false as const, errors: { formErrors: ['meta.profile minsal-encounter requerido'] } };
+    return {
+      ok: false as const,
+      errors: { formErrors: ['meta.profile minsal-encounter requerido'] },
+    };
   }
   return { ok: true as const, resource: parsed.data };
 }

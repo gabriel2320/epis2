@@ -1,4 +1,9 @@
-import type { AiAssistDraftRequest, AiTextboxAssistRequest, EmbedDocumentRequest, EmbedDocumentResponse } from '@epis2/contracts';
+import type {
+  AiAssistDraftRequest,
+  AiTextboxAssistRequest,
+  EmbedDocumentRequest,
+  EmbedDocumentResponse,
+} from '@epis2/contracts';
 import { embedDocumentResponseSchema } from '@epis2/contracts';
 import { buildLocalAiRequestHeaders } from './localAiHeaders.js';
 

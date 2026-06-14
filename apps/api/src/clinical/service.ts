@@ -125,7 +125,10 @@ export async function searchPatients(db: Database, query?: string) {
               eq(patientIdentifiers.rutDv, rutParts.rutDv),
             ),
           )
-        : or(eq(patientIdentifiers.value, rutNorm), eq(patientIdentifiers.valueNormalized, rutNorm));
+        : or(
+            eq(patientIdentifiers.value, rutNorm),
+            eq(patientIdentifiers.valueNormalized, rutNorm),
+          );
     const idRows = await db
       .select({ patientId: patientIdentifiers.patientId })
       .from(patientIdentifiers)

@@ -24,7 +24,11 @@ describe('PaperPlannerCommandHints MF-PA-07', () => {
 
   it('oculta hints cuando disabled', () => {
     render(
-      <PaperPlannerCommandHints phrases={['imprimir agenda']} onRunPhrase={vi.fn()} enabled={false} />,
+      <PaperPlannerCommandHints
+        phrases={['imprimir agenda']}
+        onRunPhrase={vi.fn()}
+        enabled={false}
+      />,
     );
     expect(screen.queryByTestId('epis2-paper-planner-command-hints')).toBeNull();
   });

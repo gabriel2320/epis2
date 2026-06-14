@@ -123,10 +123,8 @@ export function applySynthesizeOutput(
     ? `${alertsBase} — ${ensureSyntheticMarker(output.clinicalAlertsNote)}`
     : alertsBase;
 
-  const capabilities =
-    output.suggestedCapabilities?.filter((c) => ALLOWED_CAPABILITIES.has(c)) ??
-    record.evolabHints?.capabilities ??
-    ['evolution_note'];
+  const capabilities = output.suggestedCapabilities?.filter((c) => ALLOWED_CAPABILITIES.has(c)) ??
+    record.evolabHints?.capabilities ?? ['evolution_note'];
 
   const risk = output.risk ?? record.evolabHints?.risk ?? 'low';
 
@@ -168,10 +166,9 @@ export type SynthesizeResult =
   | { ok: false; record: ClinicalCaseRecord; reason: string };
 
 export type SynthesizeJsonClient = {
-  generate(prompt: string): Promise<
-    | { ok: true; json: unknown; model: string }
-    | { ok: false; reason: string }
-  >;
+  generate(
+    prompt: string,
+  ): Promise<{ ok: true; json: unknown; model: string } | { ok: false; reason: string }>;
 };
 
 export async function synthesizeRecord(

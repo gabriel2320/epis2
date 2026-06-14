@@ -45,9 +45,7 @@ export function rejectAiSuggestion(_field: PaperFieldState): PaperFieldState {
   };
 }
 
-export function canSignPaperChartFields(
-  fields: readonly PaperFieldState[],
-): {
+export function canSignPaperChartFields(fields: readonly PaperFieldState[]): {
   ok: boolean;
   errors: PaperSignValidationError[];
 } {

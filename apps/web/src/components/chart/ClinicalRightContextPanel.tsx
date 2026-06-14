@@ -1,5 +1,13 @@
 import { copy } from '@epis2/design-system';
-import { Box, Chip, EpisButton, EpisM3Text, Stack, Typography, epis2TraditionalChartTokens } from '@epis2/epis2-ui';
+import {
+  Box,
+  Chip,
+  EpisButton,
+  EpisM3Text,
+  Stack,
+  Typography,
+  epis2TraditionalChartTokens,
+} from '@epis2/epis2-ui';
 import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
 
 export type PaperAiDraftHint = {
@@ -135,14 +143,21 @@ export function ClinicalRightContextPanel({
           </Typography>
           <Stack component="ul" spacing={0.5} sx={{ m: 0, pl: 2 }}>
             {paperAiHints.map((hint) => (
-              <Typography key={hint.sectionId} component="li" variant="caption" color="text.secondary">
+              <Typography
+                key={hint.sectionId}
+                component="li"
+                variant="caption"
+                color="text.secondary"
+              >
                 {hint.sectionLabel}
               </Typography>
             ))}
           </Stack>
         </Box>
       ) : null}
-      <ClinicalContextPanelMetaContext.Provider value={meta}>{children}</ClinicalContextPanelMetaContext.Provider>
+      <ClinicalContextPanelMetaContext.Provider value={meta}>
+        {children}
+      </ClinicalContextPanelMetaContext.Provider>
     </Box>
   );
 }

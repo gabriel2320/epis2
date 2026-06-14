@@ -7,7 +7,13 @@ export const DEMO_WEEK_START = startOfWeek(DEMO_PLANNER_DATE);
 
 export const DEMO_WEEK_EVENTS: readonly PaperPlannerWeekEvent[] = [
   { id: 'w-mon-1', date: '2026-06-08', title: 'Ronda sala 3A', kind: 'encounter' },
-  { id: 'w-mon-2', date: '2026-06-08', title: 'Firma consentimientos', kind: 'admin', pending: true },
+  {
+    id: 'w-mon-2',
+    date: '2026-06-08',
+    title: 'Firma consentimientos',
+    kind: 'admin',
+    pending: true,
+  },
   { id: 'w-tue-1', date: '2026-06-09', title: 'Control HTA ambulatorio', kind: 'encounter' },
   { id: 'w-tue-2', date: '2026-06-09', title: 'Evolución SOAP', kind: 'evolution', pending: true },
   { id: 'w-tue-3', date: '2026-06-09', title: 'Lab perfil lipídico', kind: 'lab' },

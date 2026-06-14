@@ -77,9 +77,7 @@ export const epis2PaperChartTokens = {
 } as const;
 
 /** Variables CSS para hoja papel (inyectar en sx del documento). */
-export function epis2PaperChartCssVars(
-  format: 'letter' | 'a5' = 'letter',
-): Record<string, string> {
+export function epis2PaperChartCssVars(format: 'letter' | 'a5' = 'letter'): Record<string, string> {
   const t = epis2PaperChartTokens;
   const baseline = format === 'a5' ? `${t.baselineMmA5}mm` : `${t.baselineMmLetter}mm`;
   return {

@@ -14,10 +14,7 @@ for (const rel of [
   if (!existsSync(join(root, rel))) errors.push(`falta ${rel}`);
 }
 
-const demo = readFileSync(
-  join(root, 'packages/test-fixtures/src/demoChartSections.ts'),
-  'utf8',
-);
+const demo = readFileSync(join(root, 'packages/test-fixtures/src/demoChartSections.ts'), 'utf8');
 for (const section of ['navAdmin', 'navDocuments', 'navEpicrisis', 'navProcedures', 'navAudit']) {
   if (!demo.includes(section)) errors.push(`demoChartSections falta ${section}`);
 }

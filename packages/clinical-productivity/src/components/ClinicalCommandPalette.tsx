@@ -9,7 +9,13 @@ import {
   Stack,
   Typography,
 } from '@epis2/epis2-ui';
-import { useEffect, useMemo, useState, type ChangeEvent, type KeyboardEvent as ReactKeyboardEvent } from 'react';
+import {
+  useEffect,
+  useMemo,
+  useState,
+  type ChangeEvent,
+  type KeyboardEvent as ReactKeyboardEvent,
+} from 'react';
 import { filterClinicalCommandPaletteItems } from './filterClinicalCommandPaletteItems.js';
 
 export type ClinicalCommandPaletteItem = {

@@ -15,7 +15,8 @@ export function TraditionalDemoSection({
   testId,
 }: TraditionalDemoSectionProps) {
   const rows = getDemoChartDemoSectionRows(demoCaseCode, sectionId);
-  const resolvedTestId = testId ?? `epis2-traditional-section-${sectionId.replace('nav', '').toLowerCase()}`;
+  const resolvedTestId =
+    testId ?? `epis2-traditional-section-${sectionId.replace('nav', '').toLowerCase()}`;
 
   return (
     <Stack data-testid={resolvedTestId}>

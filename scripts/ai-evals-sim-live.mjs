@@ -110,9 +110,8 @@ async function evalSimEntry(entry, patientId, attempt = 1) {
 }
 
 async function main() {
-  const { SIM_ASSIST_EVAL_MATRIX, simAssistEvalPatientId } = await import(
-    '../packages/test-fixtures/dist/simAssistEvals.js'
-  );
+  const { SIM_ASSIST_EVAL_MATRIX, simAssistEvalPatientId } =
+    await import('../packages/test-fixtures/dist/simAssistEvals.js');
 
   console.log(
     `EPIS2 ai:evals:sim — ${SIM_ASSIST_EVAL_MATRIX.length} entrada(s) SIM · ${LOCAL_AI_URL}\n`,

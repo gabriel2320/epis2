@@ -43,9 +43,14 @@ run('MF-RAPID schemas suite', 'npx', ['vitest', 'run', 'scripts/dev-agent/schema
   inherit: true,
 });
 
-run('MF-RAPID audit-diff dry-run', 'node', ['scripts/dev-agent/ollama-audit-diff.mjs', '--dry-run'], {
-  inherit: true,
-});
+run(
+  'MF-RAPID audit-diff dry-run',
+  'node',
+  ['scripts/dev-agent/ollama-audit-diff.mjs', '--dry-run'],
+  {
+    inherit: true,
+  },
+);
 
 run('MF-RAPID dev:rapid (skip audit)', 'npm', ['run', 'dev:rapid', '--', '--skip-audit'], {
   inherit: true,

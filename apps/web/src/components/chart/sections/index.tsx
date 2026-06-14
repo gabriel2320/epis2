@@ -42,17 +42,13 @@ export function resolveTraditionalSectionContent({
       );
       break;
     case 'navMeds':
-      content = (
-        <TraditionalMedsSection demoCaseCode={demoCaseCode} longitudinal={longitudinal} />
-      );
+      content = <TraditionalMedsSection demoCaseCode={demoCaseCode} longitudinal={longitudinal} />;
       break;
     case 'navOrders':
       content = <TraditionalOrdersSection demoCaseCode={demoCaseCode} />;
       break;
     case 'navLabs':
-      content = (
-        <TraditionalLabsSection demoCaseCode={demoCaseCode} longitudinal={longitudinal} />
-      );
+      content = <TraditionalLabsSection demoCaseCode={demoCaseCode} longitudinal={longitudinal} />;
       break;
     case 'navEvolution':
       content = (

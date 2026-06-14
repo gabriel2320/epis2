@@ -21,6 +21,7 @@ import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 import { ApiError } from '../api/client.js';
 import { useAuth } from '../auth/AuthContext.js';
+import { EPIS2_CLINICAL_HOME } from '../routes/home.js';
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ export function LoginPage() {
     setLoading(true);
     try {
       await login(username, demoAuthKey);
-      void navigate({ to: '/comando' });
+      void navigate({ to: EPIS2_CLINICAL_HOME });
     } catch (e) {
       setError(e instanceof ApiError ? e.message : copy.errors.genericMessage);
     } finally {

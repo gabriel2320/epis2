@@ -393,11 +393,7 @@ export async function registerClinicalRoutes(
       }
       try {
         const result = await runWithRlsContext(db, config, session, (tx) =>
-          approvePaperChartDraft(
-            tx,
-            { id: session.sub, username: session.username },
-            patientId,
-          ),
+          approvePaperChartDraft(tx, { id: session.sub, username: session.username }, patientId),
         );
         return { patientId, ...result };
       } catch (err) {

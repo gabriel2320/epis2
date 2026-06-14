@@ -74,7 +74,10 @@ export function selectContextDenseLabHighlights(
     }));
 }
 
-function formatMedicationSummary(medications: readonly MedicationRow[], maxItems = 4): string | null {
+function formatMedicationSummary(
+  medications: readonly MedicationRow[],
+  maxItems = 4,
+): string | null {
   const active = medications.filter((m) => {
     const status = m.status.trim().toLowerCase();
     return (

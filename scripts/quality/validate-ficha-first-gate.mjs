@@ -72,7 +72,16 @@ const ff07 = ledger.phases?.find((p) => p.id === 'MF-FF-07');
 if (!ff07 || ff07.state !== 'DONE') {
   errors.push('ficha-first-ledger: MF-FF-07 debe estar DONE');
 }
-for (const id of ['MF-FF-08', 'MF-FF-09', 'MF-FF-10', 'MF-FF-11', 'MF-FF-12', 'MF-FF-13', 'MF-FF-14', 'MF-FF-15']) {
+for (const id of [
+  'MF-FF-08',
+  'MF-FF-09',
+  'MF-FF-10',
+  'MF-FF-11',
+  'MF-FF-12',
+  'MF-FF-13',
+  'MF-FF-14',
+  'MF-FF-15',
+]) {
   const phase = ledger.phases?.find((p) => p.id === id);
   if (!phase || phase.state !== 'DONE') {
     errors.push(`ficha-first-ledger: ${id} debe estar DONE`);
@@ -100,7 +109,10 @@ if (!pkgScripts['quality:ui'] || !pkgScripts['quality:ai']) {
   errors.push('package.json debe definir quality:ui y quality:ai (MF-FF-15)');
 }
 
-const formPage = readFileSync(join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'), 'utf8');
+const formPage = readFileSync(
+  join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'),
+  'utf8',
+);
 if (!formPage.includes('buildLiveTemplatePrefill')) {
   errors.push('GeneratedClinicalFormPage debe cablear live templates (MF-FF-08)');
 }
@@ -118,7 +130,10 @@ if (webPkg.dependencies?.['@epis2/local-ai']) {
   errors.push('apps/web no debe depender de @epis2/local-ai (MF-FF-12)');
 }
 
-const workspacePage = readFileSync(join(root, 'apps/web/src/pages/PatientWorkspacePage.tsx'), 'utf8');
+const workspacePage = readFileSync(
+  join(root, 'apps/web/src/pages/PatientWorkspacePage.tsx'),
+  'utf8',
+);
 if (!workspacePage.includes('getProbablePatientActionChips')) {
   errors.push('PatientWorkspacePage debe cablear acciones probables (MF-FF-07)');
 }
@@ -133,7 +148,7 @@ if (!router.includes("path: '/comando'")) {
 if (!router.includes('clinicalLayoutRoute')) {
   errors.push('router.tsx sin clinicalLayoutRoute (ClinicalShell)');
 }
-if (!router.includes("getParentRoute: () => clinicalLayoutRoute")) {
+if (!router.includes('getParentRoute: () => clinicalLayoutRoute')) {
   errors.push('formularios /espacio/* deben colgar de clinicalLayoutRoute');
 }
 

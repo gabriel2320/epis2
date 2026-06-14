@@ -81,9 +81,7 @@ export function DualChartPatientPage({
   const chartMode: ChartModeId = resolveChartMode(chartSearch);
   const demoCase = useMemo(() => getDemoCaseByPatientId(patientId), [patientId]);
   const [contextEventCount, setContextEventCount] = useState<number | undefined>();
-  const [focusTimelineSection, setFocusTimelineSection] = useState<
-    'navEvolution' | undefined
-  >();
+  const [focusTimelineSection, setFocusTimelineSection] = useState<'navEvolution' | undefined>();
 
   const handleViewFullTimeline = () => {
     setFocusTimelineSection('navEvolution');
@@ -156,7 +154,12 @@ export function DualChartPatientPage({
       openEncounterId: detail.clinicalContext.openEncounterId ?? null,
       careSettingLabel: demoCase?.scenario ?? copy.careSettings.ambulatory,
     });
-  }, [longitudinal, clinicalSummary?.ultimoEncuentroAt, detail.clinicalContext.openEncounterId, demoCase?.scenario]);
+  }, [
+    longitudinal,
+    clinicalSummary?.ultimoEncuentroAt,
+    detail.clinicalContext.openEncounterId,
+    demoCase?.scenario,
+  ]);
 
   return (
     <>

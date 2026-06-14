@@ -14,7 +14,9 @@ let EXPECTED;
 try {
   EXPECTED = readExpectedSimCatalogSize();
 } catch (err) {
-  console.error('case-intel-promote-gate FAILED:\n  - ' + (err instanceof Error ? err.message : err));
+  console.error(
+    'case-intel-promote-gate FAILED:\n  - ' + (err instanceof Error ? err.message : err),
+  );
   process.exit(1);
 }
 const errors = [];
@@ -30,12 +32,15 @@ function loadDatabaseUrl() {
   return process.env.DATABASE_URL;
 }
 
-const catalogGate = spawnSync('npm', ['run', 'quality:case-intel-catalog-gate'], {
-  cwd: root,
-  stdio: 'pipe',
-  encoding: 'utf8',
-  shell: true,
-});
+const catalogGate = spawnSync(
+  'node',
+  ['tools/gates/run-legacy.mjs', 'quality:case-intel-catalog-gate'],
+  {
+    cwd: root,
+    stdio: 'pipe',
+    encoding: 'utf8',
+  },
+);
 if (catalogGate.status !== 0) {
   errors.push('quality:case-intel-catalog-gate falló (precondición fixtures)');
 }

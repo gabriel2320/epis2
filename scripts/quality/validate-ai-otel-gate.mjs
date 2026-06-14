@@ -41,25 +41,20 @@ function run(label, cmd, args, { inherit = false } = {}) {
   }
 }
 
-run('MF-IM-09 ai tracing unit', 'npx', [
-  'vitest',
-  'run',
-  'apps/api/src/ai/tracing.test.ts',
-], { inherit: true });
+run('MF-IM-09 ai tracing unit', 'npx', ['vitest', 'run', 'apps/api/src/ai/tracing.test.ts'], {
+  inherit: true,
+});
 
-run('MF-IM-09 ai.run route smoke', 'npx', [
-  'vitest',
-  'run',
-  'apps/api/src/ai/routes.test.ts',
-  '-t',
-  'MF-IM-09',
-], { inherit: true });
+run(
+  'MF-IM-09 ai.run route smoke',
+  'npx',
+  ['vitest', 'run', 'apps/api/src/ai/routes.test.ts', '-t', 'MF-IM-09'],
+  { inherit: true },
+);
 
-run('MF-NORM-203 otel smoke', 'npx', [
-  'vitest',
-  'run',
-  'apps/api/src/otel.test.ts',
-], { inherit: true });
+run('MF-NORM-203 otel smoke', 'npx', ['vitest', 'run', 'apps/api/src/otel.test.ts'], {
+  inherit: true,
+});
 
 if (errors.length) {
   console.error('ai-otel-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));

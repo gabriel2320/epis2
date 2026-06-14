@@ -21,11 +21,7 @@ export {
   getDemoCaseByPatientId,
   type DemoClinicalCase,
 } from './demoCases.js';
-export {
-  SIM_CLINICAL_CASES,
-  getSimCaseByCode,
-  getSimCaseByPatientId,
-} from './simClinicalCases.js';
+export { SIM_CLINICAL_CASES, getSimCaseByCode, getSimCaseByPatientId } from './simClinicalCases.js';
 export {
   SIM_ASSIST_EVAL_MATRIX,
   assertSimAssistEvalMatrix,

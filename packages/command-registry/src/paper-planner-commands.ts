@@ -4,9 +4,7 @@ import { INTENT_SECURE_METADATA } from './intent-metadata.js';
 /** Intents agenda papel (MF-PAPER-PLANNER-04). */
 export type PaperPlannerIntent = Extract<
   ClinicalIntent,
-  | 'paper_planner_summarize_day'
-  | 'paper_planner_print_agenda'
-  | 'paper_planner_review_pending'
+  'paper_planner_summarize_day' | 'paper_planner_print_agenda' | 'paper_planner_review_pending'
 >;
 
 export const PAPER_PLANNER_INTENTS: readonly PaperPlannerIntent[] = [
@@ -78,9 +76,7 @@ export const PAPER_PLANNER_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
     requiredPermission: 'command.execute',
     requiresPatient: true,
     priority: 85,
-    match: (q) =>
-      /imprimir\s+agenda/.test(q) ||
-      (/agenda/.test(q) && /imprimir|print|pdf/.test(q)),
+    match: (q) => /imprimir\s+agenda/.test(q) || (/agenda/.test(q) && /imprimir|print|pdf/.test(q)),
   }),
   plannerCmd({
     intent: 'paper_planner_review_pending',
@@ -96,8 +92,7 @@ export const PAPER_PLANNER_COMMAND_DEFINITIONS: readonly CommandDefinition[] = [
     requiresPatient: true,
     priority: 89,
     match: (q) =>
-      /pendientes?\s+agenda/.test(q) ||
-      (/agenda/.test(q) && /pendiente|falta|revisar/.test(q)),
+      /pendientes?\s+agenda/.test(q) || (/agenda/.test(q) && /pendiente|falta|revisar/.test(q)),
   }),
 ];
 

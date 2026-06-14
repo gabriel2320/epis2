@@ -11,11 +11,7 @@ import { EPIS2_COMMAND_DEFINITIONS } from './definitions.js';
 describe('paper-commands MF-PAPER-08', () => {
   it('registra 6 comandos papel en catálogo global', () => {
     expect(PAPER_CHART_COMMAND_DEFINITIONS.length).toBe(6);
-    for (const intent of [
-      'paper_order_soap',
-      'paper_detect_pending',
-      'paper_prepare_print',
-    ]) {
+    for (const intent of ['paper_order_soap', 'paper_detect_pending', 'paper_prepare_print']) {
       expect(EPIS2_COMMAND_DEFINITIONS.some((d) => d.intent === intent)).toBe(true);
     }
   });

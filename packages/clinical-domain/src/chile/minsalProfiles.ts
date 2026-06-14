@@ -47,7 +47,9 @@ export type MinsalIdentifierCoding = {
 };
 
 /** Coding CSTipoIdentificador para un tipo EPIS2 (subset MINSAL NID). */
-export function buildMinsalIdentifierCoding(type: ChilePatientIdentifierType): MinsalIdentifierCoding {
+export function buildMinsalIdentifierCoding(
+  type: ChilePatientIdentifierType,
+): MinsalIdentifierCoding {
   const entry = IDENTIFIER_TYPE_CODING[type];
   return {
     system: MINSAL_IDENTIFIER_TYPE_SYSTEM,

@@ -16,15 +16,14 @@ let EXPECTED;
 try {
   EXPECTED = readExpectedSimCatalogSize();
 } catch (err) {
-  console.error('case-intel-catalog-gate FAILED:\n  - ' + (err instanceof Error ? err.message : err));
+  console.error(
+    'case-intel-catalog-gate FAILED:\n  - ' + (err instanceof Error ? err.message : err),
+  );
   process.exit(1);
 }
 
-const catalogPath = join(
-  root,
-  'services/clinical-case-intel/fixtures/catalog.json',
-);
-const simCasesPath = join(root, 'packages/test-fixtures/src/simCases.ts');
+const catalogPath = join(root, 'services/clinical-case-intel/fixtures/catalog.json');
+const simCasesPath = join(root, 'packages/test-fixtures/src/simClinicalCases.ts');
 const seedPath = join(root, 'database/migrations/042_sim_clinical_cases_seed.sql');
 
 if (!existsSync(catalogPath)) {
@@ -45,12 +44,12 @@ if (!existsSync(catalogPath)) {
 }
 
 if (!existsSync(simCasesPath)) {
-  errors.push('falta packages/test-fixtures/src/simCases.ts');
+  errors.push('falta packages/test-fixtures/src/simClinicalCases.ts');
 } else {
   const simTs = readFileSync(simCasesPath, 'utf8');
   const count = (simTs.match(/demoCaseCode: 'SIM-/g) ?? []).length;
   if (count !== EXPECTED) {
-    errors.push(`simCases.ts debe tener ${EXPECTED} casos (actual: ${count})`);
+    errors.push(`simClinicalCases.ts debe tener ${EXPECTED} casos (actual: ${count})`);
   }
 }
 

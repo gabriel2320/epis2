@@ -16,9 +16,7 @@ export function TraditionalSectionMirrorStrip({
   sectionId,
   testId = 'epis2-traditional-section-mirror',
 }: TraditionalSectionMirrorStripProps) {
-  const binding = getMirrorBindingForTraditionalSection(
-    sectionId as TraditionalSectionNavId,
-  );
+  const binding = getMirrorBindingForTraditionalSection(sectionId as TraditionalSectionNavId);
   if (!binding?.paperSectionId) return null;
 
   return (

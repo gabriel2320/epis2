@@ -24,10 +24,7 @@ export type InferenceTraceInput = {
 };
 
 type LangfuseClient = {
-  trace: (args: {
-    name: string;
-    metadata?: Record<string, string | boolean>;
-  }) => LangfuseTrace;
+  trace: (args: { name: string; metadata?: Record<string, string | boolean> }) => LangfuseTrace;
   flushAsync: () => Promise<void>;
   shutdownAsync: () => Promise<void>;
 };

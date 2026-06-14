@@ -35,15 +35,21 @@ run('MF-IM-02 contracts', 'npx', ['vitest', 'run', 'packages/contracts/src/rag.t
   inherit: true,
 });
 
-run('MF-IM-02 embedDocument', 'npx', ['vitest', 'run', 'services/local-ai/src/embedDocument.test.ts'], {
-  inherit: true,
-});
+run(
+  'MF-IM-02 embedDocument',
+  'npx',
+  ['vitest', 'run', 'services/local-ai/src/embedDocument.test.ts'],
+  {
+    inherit: true,
+  },
+);
 
-run('MF-IM-02 gateway capabilities', 'npx', [
-  'vitest',
-  'run',
-  'services/local-ai/src/gatewayCapabilities.test.ts',
-], { inherit: true });
+run(
+  'MF-IM-02 gateway capabilities',
+  'npx',
+  ['vitest', 'run', 'services/local-ai/src/gatewayCapabilities.test.ts'],
+  { inherit: true },
+);
 
 const smoke = spawnSync('npm', ['run', 'ai:embed-smoke'], {
   cwd: root,

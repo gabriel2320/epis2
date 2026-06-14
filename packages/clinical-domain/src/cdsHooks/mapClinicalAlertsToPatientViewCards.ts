@@ -36,12 +36,16 @@ function normalizeRuleId(ruleId: string): string {
 
 function isAllergyRule(ruleId: string): boolean {
   const base = normalizeRuleId(ruleId);
-  return ALLERGY_RULE_IDS.has(ruleId) || ALLERGY_RULE_IDS.has(base) || /allergy|beta-lactam/i.test(base);
+  return (
+    ALLERGY_RULE_IDS.has(ruleId) || ALLERGY_RULE_IDS.has(base) || /allergy|beta-lactam/i.test(base)
+  );
 }
 
 function isGapRule(ruleId: string): boolean {
   const base = normalizeRuleId(ruleId);
-  return GAP_RULE_IDS.has(ruleId) || GAP_RULE_IDS.has(base) || /gap|reconciliation|duplicate/i.test(base);
+  return (
+    GAP_RULE_IDS.has(ruleId) || GAP_RULE_IDS.has(base) || /gap|reconciliation|duplicate/i.test(base)
+  );
 }
 
 function mapSeverityToVariant(alert: ClinicalAlert): SilentSuggestionVariant {

@@ -31,7 +31,11 @@ if (existsSync(modePath)) {
 
 if (existsSync(dayPath)) {
   const src = readFileSync(dayPath, 'utf8');
-  for (const needle of ['epis2-paper-planner-day', 'epis2-paper-planner-timeline', 'DEMO_PLANNER']) {
+  for (const needle of [
+    'epis2-paper-planner-day',
+    'epis2-paper-planner-timeline',
+    'DEMO_PLANNER',
+  ]) {
     if (!src.includes(needle)) errors.push(`DailyClinicalPage falta ${needle}`);
   }
 }
@@ -46,9 +50,7 @@ if (vitest.status !== 0) {
 }
 
 if (errors.length) {
-  console.error(
-    'paper-planner-scaffold-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
-  );
+  console.error('paper-planner-scaffold-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 

@@ -131,18 +131,30 @@ export function PaperSectionChrome({
     case 'cover':
       return (
         <>
-          <PaperSubSection title={copy.chartModes.paperSubCoverId} testId="epis2-paper-sub-cover-id">
+          <PaperSubSection
+            title={copy.chartModes.paperSubCoverId}
+            testId="epis2-paper-sub-cover-id"
+          >
             <PaperFieldRow
               testId="epis2-paper-cover-identification"
               fields={[
                 { label: copy.chartModes.paperStripPatient, value: patientName, wide: true },
-                { label: copy.chartModes.identityRun, value: patientStrip?.nationalId ?? recordNumber },
-                { label: copy.chartModes.identityAge, value: patientStrip?.ageYears ? `${patientStrip.ageYears} años` : '—' },
+                {
+                  label: copy.chartModes.identityRun,
+                  value: patientStrip?.nationalId ?? recordNumber,
+                },
+                {
+                  label: copy.chartModes.identityAge,
+                  value: patientStrip?.ageYears ? `${patientStrip.ageYears} años` : '—',
+                },
                 { label: copy.chartModes.identitySex, value: patientStrip?.sexLabel ?? '—' },
               ]}
             />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubCoverAdmission} testId="epis2-paper-sub-cover-admission">
+          <PaperSubSection
+            title={copy.chartModes.paperSubCoverAdmission}
+            testId="epis2-paper-sub-cover-admission"
+          >
             <PaperFieldRow
               fields={[
                 {
@@ -150,7 +162,10 @@ export function PaperSectionChrome({
                   value: patientStrip?.serviceUnit ?? copy.chartModes['shellServiceDefault'],
                 },
                 { label: copy.chartModes.identityBed, value: patientStrip?.bedLabel ?? '—' },
-                { label: copy.chartModes.identityAdmission, value: patientStrip?.admissionDate ?? '—' },
+                {
+                  label: copy.chartModes.identityAdmission,
+                  value: patientStrip?.admissionDate ?? '—',
+                },
                 { label: copy.chartModes.paperFormLabel, value: recordNumber },
               ]}
             />
@@ -162,7 +177,10 @@ export function PaperSectionChrome({
       );
     case 'anamnesis':
       return (
-        <PaperSubSection title={copy.chartModes.paperSubAnamnesisIllness} testId="epis2-paper-sub-anamnesis">
+        <PaperSubSection
+          title={copy.chartModes.paperSubAnamnesisIllness}
+          testId="epis2-paper-sub-anamnesis"
+        >
           <PaperRuleBlock lines={1} />
         </PaperSubSection>
       );
@@ -174,7 +192,10 @@ export function PaperSectionChrome({
       );
     case 'orders':
       return (
-        <PaperSubSection title={copy.chartModes.paperSubOrdersActive} testId="epis2-paper-sub-orders">
+        <PaperSubSection
+          title={copy.chartModes.paperSubOrdersActive}
+          testId="epis2-paper-sub-orders"
+        >
           <PaperRuleBlock lines={2} />
         </PaperSubSection>
       );
@@ -197,7 +218,10 @@ export function PaperSectionChrome({
     case 'discharge':
       return (
         <>
-          <PaperSubSection title={copy.chartModes.paperSubDischargePlan} testId="epis2-paper-sub-discharge">
+          <PaperSubSection
+            title={copy.chartModes.paperSubDischargePlan}
+            testId="epis2-paper-sub-discharge"
+          >
             <PaperRuleBlock lines={2} label={copy.chartModes.paperSubDischargeInstructions} />
           </PaperSubSection>
           <PaperSignatureBlock
@@ -213,35 +237,50 @@ export function PaperSectionChrome({
     case 'nursing':
       return (
         <>
-          <PaperSubSection title={copy.chartModes.paperSubNursingNanda} testId="epis2-paper-sub-nursing-nanda">
+          <PaperSubSection
+            title={copy.chartModes.paperSubNursingNanda}
+            testId="epis2-paper-sub-nursing-nanda"
+          >
             <PaperTable
               testId="epis2-paper-nursing-nanda-table"
               columns={NURSING_NANDA_COLUMNS}
               rows={emptyRows(NURSING_NANDA_COLUMNS, 4)}
             />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubNursingBraden} testId="epis2-paper-sub-nursing-braden">
+          <PaperSubSection
+            title={copy.chartModes.paperSubNursingBraden}
+            testId="epis2-paper-sub-nursing-braden"
+          >
             <PaperTable
               testId="epis2-paper-nursing-braden-table"
               columns={NURSING_SCALE_COLUMNS}
               rows={emptyRows(NURSING_SCALE_COLUMNS, 4)}
             />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubNursingMorse} testId="epis2-paper-sub-nursing-morse">
+          <PaperSubSection
+            title={copy.chartModes.paperSubNursingMorse}
+            testId="epis2-paper-sub-nursing-morse"
+          >
             <PaperTable
               testId="epis2-paper-nursing-morse-table"
               columns={NURSING_SCALE_COLUMNS}
               rows={emptyRows(NURSING_SCALE_COLUMNS, 4)}
             />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubNursingActivities} testId="epis2-paper-sub-nursing-activities">
+          <PaperSubSection
+            title={copy.chartModes.paperSubNursingActivities}
+            testId="epis2-paper-sub-nursing-activities"
+          >
             <PaperTable
               testId="epis2-paper-nursing-activities-table"
               columns={NURSING_ACTIVITY_COLUMNS}
               rows={emptyRows(NURSING_ACTIVITY_COLUMNS, 4)}
             />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubNursingEducation} testId="epis2-paper-sub-nursing-education">
+          <PaperSubSection
+            title={copy.chartModes.paperSubNursingEducation}
+            testId="epis2-paper-sub-nursing-education"
+          >
             <PaperTable
               testId="epis2-paper-nursing-education-table"
               columns={NURSING_EDUCATION_COLUMNS}
@@ -253,21 +292,30 @@ export function PaperSectionChrome({
     case 'fluidBalance':
       return (
         <>
-          <PaperSubSection title={copy.chartModes.paperSubFluidIntake} testId="epis2-paper-sub-fluid-intake">
+          <PaperSubSection
+            title={copy.chartModes.paperSubFluidIntake}
+            testId="epis2-paper-sub-fluid-intake"
+          >
             <PaperTable
               testId="epis2-paper-fluid-intake-table"
               columns={FLUID_SHIFT_COLUMNS}
               rows={emptyRows(FLUID_SHIFT_COLUMNS, 4)}
             />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubFluidOutput} testId="epis2-paper-sub-fluid-output">
+          <PaperSubSection
+            title={copy.chartModes.paperSubFluidOutput}
+            testId="epis2-paper-sub-fluid-output"
+          >
             <PaperTable
               testId="epis2-paper-fluid-output-table"
               columns={FLUID_SHIFT_COLUMNS}
               rows={emptyRows(FLUID_SHIFT_COLUMNS, 4)}
             />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubFluidNotes} testId="epis2-paper-sub-fluid-notes">
+          <PaperSubSection
+            title={copy.chartModes.paperSubFluidNotes}
+            testId="epis2-paper-sub-fluid-notes"
+          >
             <PaperRuleBlock lines={3} />
           </PaperSubSection>
         </>
@@ -275,7 +323,10 @@ export function PaperSectionChrome({
     case 'consults':
       return (
         <>
-          <PaperSubSection title={copy.chartModes.paperSubConsultsActive} testId="epis2-paper-sub-consults">
+          <PaperSubSection
+            title={copy.chartModes.paperSubConsultsActive}
+            testId="epis2-paper-sub-consults"
+          >
             <PaperTable
               testId="epis2-paper-consults-table"
               columns={CONSULT_COLUMNS}
@@ -283,7 +334,10 @@ export function PaperSectionChrome({
             />
             <PaperRuleBlock lines={2} label="Respuesta / observaciones" />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubConsultsNew} testId="epis2-paper-sub-consults-new">
+          <PaperSubSection
+            title={copy.chartModes.paperSubConsultsNew}
+            testId="epis2-paper-sub-consults-new"
+          >
             <PaperFieldRow
               fields={[
                 { label: 'Servicio solicitado', value: '' },
@@ -298,14 +352,20 @@ export function PaperSectionChrome({
     case 'procedures':
       return (
         <>
-          <PaperSubSection title={copy.chartModes.paperSubProceduresMinor} testId="epis2-paper-sub-procedures-minor">
+          <PaperSubSection
+            title={copy.chartModes.paperSubProceduresMinor}
+            testId="epis2-paper-sub-procedures-minor"
+          >
             <PaperTable
               testId="epis2-paper-procedures-minor-table"
               columns={PROCEDURE_COLUMNS}
               rows={emptyRows(PROCEDURE_COLUMNS, 4)}
             />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubProceduresSurgical} testId="epis2-paper-sub-procedures-surgical">
+          <PaperSubSection
+            title={copy.chartModes.paperSubProceduresSurgical}
+            testId="epis2-paper-sub-procedures-surgical"
+          >
             <PaperFieldRow
               fields={[
                 { label: 'Tipo de intervención', value: '' },
@@ -316,7 +376,10 @@ export function PaperSectionChrome({
             />
             <PaperRuleBlock lines={4} label="Descripción de la técnica" />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubProceduresMonitor} testId="epis2-paper-sub-procedures-monitor">
+          <PaperSubSection
+            title={copy.chartModes.paperSubProceduresMonitor}
+            testId="epis2-paper-sub-procedures-monitor"
+          >
             <PaperTable
               testId="epis2-paper-procedures-monitor-table"
               columns={MONITOR_COLUMNS}
@@ -328,14 +391,20 @@ export function PaperSectionChrome({
     case 'imaging':
       return (
         <>
-          <PaperSubSection title={copy.chartModes.paperSubImagingRequests} testId="epis2-paper-sub-imaging-requests">
+          <PaperSubSection
+            title={copy.chartModes.paperSubImagingRequests}
+            testId="epis2-paper-sub-imaging-requests"
+          >
             <PaperTable
               testId="epis2-paper-imaging-requests-table"
               columns={IMAGING_REQUEST_COLUMNS}
               rows={emptyRows(IMAGING_REQUEST_COLUMNS, 4)}
             />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubImagingReport} testId="epis2-paper-sub-imaging-report">
+          <PaperSubSection
+            title={copy.chartModes.paperSubImagingReport}
+            testId="epis2-paper-sub-imaging-report"
+          >
             <PaperFieldRow
               fields={[
                 { label: 'Examen', value: '' },
@@ -351,10 +420,16 @@ export function PaperSectionChrome({
     case 'consent':
       return (
         <>
-          <PaperSubSection title={copy.chartModes.paperSubConsentAdmission} testId="epis2-paper-sub-consent-admission">
+          <PaperSubSection
+            title={copy.chartModes.paperSubConsentAdmission}
+            testId="epis2-paper-sub-consent-admission"
+          >
             <PaperRuleBlock lines={6} />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubConsentProcedures} testId="epis2-paper-sub-consent-procedures">
+          <PaperSubSection
+            title={copy.chartModes.paperSubConsentProcedures}
+            testId="epis2-paper-sub-consent-procedures"
+          >
             <PaperTable
               testId="epis2-paper-consent-procedures-table"
               columns={CONSENT_PROCEDURE_COLUMNS}
@@ -373,11 +448,17 @@ export function PaperSectionChrome({
     case 'socialWork':
       return (
         <>
-          <PaperSubSection title={copy.chartModes.paperSubSocialIdentity} testId="epis2-paper-sub-social-identity">
+          <PaperSubSection
+            title={copy.chartModes.paperSubSocialIdentity}
+            testId="epis2-paper-sub-social-identity"
+          >
             <PaperFieldRow
               fields={[
                 { label: copy.chartModes.paperStripPatient, value: patientName, wide: true },
-                { label: copy.chartModes.identityRun, value: patientStrip?.nationalId ?? recordNumber },
+                {
+                  label: copy.chartModes.identityRun,
+                  value: patientStrip?.nationalId ?? recordNumber,
+                },
                 { label: 'Estado civil', value: '' },
                 { label: 'Ocupación', value: '' },
                 { label: 'Dirección', value: '' },
@@ -385,14 +466,20 @@ export function PaperSectionChrome({
               ]}
             />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubSocialSupport} testId="epis2-paper-sub-social-support">
+          <PaperSubSection
+            title={copy.chartModes.paperSubSocialSupport}
+            testId="epis2-paper-sub-social-support"
+          >
             <PaperTable
               testId="epis2-paper-social-support-table"
               columns={SOCIAL_SUPPORT_COLUMNS}
               rows={emptyRows(SOCIAL_SUPPORT_COLUMNS, 3)}
             />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubSocialAssessment} testId="epis2-paper-sub-social-assessment">
+          <PaperSubSection
+            title={copy.chartModes.paperSubSocialAssessment}
+            testId="epis2-paper-sub-social-assessment"
+          >
             <PaperFieldRow
               fields={[
                 { label: 'Vivienda', value: '' },
@@ -402,10 +489,16 @@ export function PaperSectionChrome({
               ]}
             />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubSocialDiagnosis} testId="epis2-paper-sub-social-diagnosis">
+          <PaperSubSection
+            title={copy.chartModes.paperSubSocialDiagnosis}
+            testId="epis2-paper-sub-social-diagnosis"
+          >
             <PaperRuleBlock lines={4} />
           </PaperSubSection>
-          <PaperSubSection title={copy.chartModes.paperSubSocialPlan} testId="epis2-paper-sub-social-plan">
+          <PaperSubSection
+            title={copy.chartModes.paperSubSocialPlan}
+            testId="epis2-paper-sub-social-plan"
+          >
             <PaperTable
               testId="epis2-paper-social-plan-table"
               columns={SOCIAL_PLAN_COLUMNS}

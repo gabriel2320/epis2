@@ -22,10 +22,14 @@ const inProgress =
 const next =
   inProgress ??
   ready ??
-  ledger.phases.find((p) => p.state === 'BLOCKED' && p.dependsOn.every((dep) => {
-    const d = ledger.phases.find((x) => x.id === dep);
-    return d?.state === 'DONE';
-  })) ??
+  ledger.phases.find(
+    (p) =>
+      p.state === 'BLOCKED' &&
+      p.dependsOn.every((dep) => {
+        const d = ledger.phases.find((x) => x.id === dep);
+        return d?.state === 'DONE';
+      }),
+  ) ??
   ledger.plannerProgram?.phases.find(
     (p) =>
       p.state === 'BLOCKED' &&

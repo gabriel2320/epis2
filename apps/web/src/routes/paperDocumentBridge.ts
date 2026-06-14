@@ -16,12 +16,7 @@ export type PaperDocumentBridgeTarget = {
     | '/espacio/laboratorio/imprimir'
     | '/espacio/certificado/imprimir'
     | '/espacio/imagenologia/imprimir';
-  labelKey:
-    | 'actionPrescription'
-    | 'navEpicrisis'
-    | 'actionLab'
-    | 'navDocuments'
-    | 'navImaging';
+  labelKey: 'actionPrescription' | 'navEpicrisis' | 'actionLab' | 'navDocuments' | 'navImaging';
   testId: string;
 };
 

@@ -91,9 +91,9 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
     await expect(page.getByTestId('epis2-clinical-probable-actions')).toBeVisible({
       timeout: 15_000,
     });
-    await expect(
-      page.locator('[data-testid^="epis2-suggestion-card-"]').first(),
-    ).toBeVisible({ timeout: 15_000 });
+    await expect(page.locator('[data-testid^="epis2-suggestion-card-"]').first()).toBeVisible({
+      timeout: 15_000,
+    });
   });
 
   test('g4) chips silenciosos en panel contexto (MF-DI-06)', async ({ page }) => {
@@ -115,7 +115,8 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
       page
         .getByTestId('epis2-clinical-filterable-timeline-period-last3Months')
         .or(page.getByTestId('epis2-clinical-filterable-timeline-period-today'))
-        .or(page.getByTestId('epis2-clinical-filterable-timeline-empty-filter')),
+        .or(page.getByTestId('epis2-clinical-filterable-timeline-empty-filter'))
+        .first(),
     ).toBeVisible();
   });
 
@@ -135,7 +136,9 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
     await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
     const patientViewPanel = page.getByTestId('epis2-cds-patient-view');
     await expect(patientViewPanel).toBeVisible({ timeout: 15_000 });
-    await expect(page.locator('[data-testid^="epis2-cds-patient-view-card-"]').first()).toBeVisible();
+    await expect(
+      page.locator('[data-testid^="epis2-cds-patient-view-card-"]').first(),
+    ).toBeVisible();
   });
 
   test('h-alt) alterna a papel desde /espacio/ficha', async ({ page }) => {
@@ -166,7 +169,9 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
     await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
     await page.keyboard.press('Control+k');
     await fillCommandPaletteQuery(page, 'evol');
-    await expect(page.getByTestId('epis2-command-palette-item-create_evolution_draft')).toBeVisible();
+    await expect(
+      page.getByTestId('epis2-command-palette-item-create_evolution_draft'),
+    ).toBeVisible();
   });
 
   test('j) navega sección alergias con contenido (MF-TE-02)', async ({ page }) => {

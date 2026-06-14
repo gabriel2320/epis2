@@ -11,7 +11,11 @@ export type PaperSubSectionProps = {
 export function PaperSubSection({ title, children, testId }: PaperSubSectionProps) {
   return (
     <Box data-testid={testId} className="epis2-paper-subsection" sx={{ px: 2, py: 1 }}>
-      <Box component="h4" className="epis2-paper-subsection-title" sx={epis2PaperSubSectionTitleSx()}>
+      <Box
+        component="h4"
+        className="epis2-paper-subsection-title"
+        sx={epis2PaperSubSectionTitleSx()}
+      >
         {title}
       </Box>
       {children}

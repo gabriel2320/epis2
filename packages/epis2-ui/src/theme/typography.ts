@@ -109,8 +109,7 @@ export const epis2DisplayFontFamily =
   '"Google Sans Text", "Google Sans", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif';
 
 /** Cuerpo y metadata — Roboto con fallbacks Microsoft/sistema. */
-export const epis2BodyFontFamily =
-  '"Roboto", "Segoe UI", "Helvetica Neue", Arial, sans-serif';
+export const epis2BodyFontFamily = '"Roboto", "Segoe UI", "Helvetica Neue", Arial, sans-serif';
 
 export const epis2FontFamily = epis2BodyFontFamily;
 

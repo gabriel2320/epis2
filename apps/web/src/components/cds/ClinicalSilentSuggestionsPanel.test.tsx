@@ -26,17 +26,28 @@ describe('ClinicalSilentSuggestionsPanel (MF-DI-06)', () => {
       { id: 'a', variant: 'info' as const, labelEs: 'Uno', priority: 1 },
       { id: 'b', variant: 'info' as const, labelEs: 'Dos', priority: 2 },
       { id: 'c', variant: 'info' as const, labelEs: 'Tres', priority: 3 },
-      { id: 'd', variant: 'suggestion' as const, labelEs: 'Cuatro', commandSample: 'lab', priority: 4 },
+      {
+        id: 'd',
+        variant: 'suggestion' as const,
+        labelEs: 'Cuatro',
+        commandSample: 'lab',
+        priority: 4,
+      },
     ];
 
     render(
       <Epis2ThemeProvider>
-        <ClinicalSilentSuggestionsPanel suggestions={suggestions} onSelectCommand={onSelectCommand} />
+        <ClinicalSilentSuggestionsPanel
+          suggestions={suggestions}
+          onSelectCommand={onSelectCommand}
+        />
       </Epis2ThemeProvider>,
     );
 
     expect(screen.getByTestId('epis2-clinical-silent-suggestions-chip-a')).toBeInTheDocument();
-    expect(screen.queryByTestId('epis2-clinical-silent-suggestions-chip-d')).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId('epis2-clinical-silent-suggestions-chip-d'),
+    ).not.toBeInTheDocument();
 
     await user.click(screen.getByTestId('epis2-clinical-silent-suggestions-toggle'));
     expect(screen.getByTestId('epis2-clinical-silent-suggestions-chip-d')).toBeInTheDocument();

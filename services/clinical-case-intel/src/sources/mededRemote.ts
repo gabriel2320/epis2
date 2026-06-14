@@ -77,9 +77,7 @@ export async function buildRecordsFromRemoteSources(
   const manifest = await loadRemoteSourcesManifest(manifestPath);
   const failures: string[] = [];
   const records: ClinicalCaseRecord[] = [];
-  const entries = options.limit
-    ? manifest.entries.slice(0, options.limit)
-    : manifest.entries;
+  const entries = options.limit ? manifest.entries.slice(0, options.limit) : manifest.entries;
 
   for (const entry of entries) {
     try {
@@ -93,7 +91,10 @@ export async function buildRecordsFromRemoteSources(
       const withSource: TeachingCasePayload = {
         ...teaching,
         ...(entry.sourceName === 'pmc-teaching-case'
-          ? { sourceUrl: teaching.sourceUrl ?? 'https://pmc.ncbi.nlm.nih.gov/teaching-case-synthetic' }
+          ? {
+              sourceUrl:
+                teaching.sourceUrl ?? 'https://pmc.ncbi.nlm.nih.gov/teaching-case-synthetic',
+            }
           : {}),
       };
       const built = buildRecordsFromTeachingCase(withSource, {

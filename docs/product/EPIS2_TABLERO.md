@@ -1,10 +1,23 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-15 · **STRENGTHEN** 23/23 ✓ cerrado
+**Actualizado:** 2026-06-15 · **STRENGTHEN** 23/23 ✓ · **PROG-CONSOLIDATE** ✓ cerrado
 
-Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan unificado:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.5 · **Orquestación:** [`epis2-orquestacion-paralela-2026-06-14.md`](../../reports/epis2-orquestacion-paralela-2026-06-14.md) §22–§23
+Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Brújula:** [`EPIS2_CURRENT_STATE.md`](../EPIS2_CURRENT_STATE.md)
 
-> **PROG-STRENGTHEN** ✓ **23/23 cerrado** · **PROG-FICHA-FIRST** wave 3 · **MF-FF-08** READY
+> **PROG-STRENGTHEN** ✓ **23/23 cerrado** · **PROG-FICHA-FIRST** ✓ · **PROG-CONSOLIDATE** ✓ Fase 0–4 · PR [#6](https://github.com/gabriel2320/epis2/pull/6)
+
+---
+
+## Cerrado — PROG-CONSOLIDATE-2026
+
+| Fase | Entrega |
+|------|---------|
+| 0–1 | Gates `required`/`nightly`, catálogo, clasificador |
+| 2 | 245 `quality:*` podados → `quality:gate` |
+| 3 | `db:*` → api · E2E → web |
+| 4 | CI/catalog compat |
+
+Evidencia: [`epis2-prog-consolidate-close-2026.md`](../../reports/epis2-prog-consolidate-close-2026.md) · `npm run tool:consolidate:verify-phase4`
 
 ---
 

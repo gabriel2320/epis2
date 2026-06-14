@@ -122,15 +122,22 @@ export function mergePaperChartSection(
   return applyPaperChartSectionPatch(current, { sectionId, body });
 }
 
-export function paperChartFieldValues(body: PaperChartDraftBody): Record<PaperChartSectionId, string> {
-  return Object.fromEntries(
-    PAPER_CHART_SECTION_IDS.map((id) => [id, body[id].value]),
-  ) as Record<PaperChartSectionId, string>;
+export function paperChartFieldValues(
+  body: PaperChartDraftBody,
+): Record<PaperChartSectionId, string> {
+  return Object.fromEntries(PAPER_CHART_SECTION_IDS.map((id) => [id, body[id].value])) as Record<
+    PaperChartSectionId,
+    string
+  >;
 }
 
 export function canSignPaperChart(body: PaperChartDraftBody): {
   ok: boolean;
-  errors: Array<{ ruleId: 'requires_no_unconfirmed_ai'; message: string; sectionId?: PaperChartSectionId }>;
+  errors: Array<{
+    ruleId: 'requires_no_unconfirmed_ai';
+    message: string;
+    sectionId?: PaperChartSectionId;
+  }>;
 } {
   const errors: Array<{
     ruleId: 'requires_no_unconfirmed_ai';

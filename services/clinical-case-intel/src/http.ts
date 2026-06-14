@@ -2,8 +2,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-const USER_AGENT =
-  'EPIS2-clinical-case-intel/0.1 (pipeline casos sinteticos; uso no comercial)';
+const USER_AGENT = 'EPIS2-clinical-case-intel/0.1 (pipeline casos sinteticos; uso no comercial)';
 
 export interface HttpClientOptions {
   cacheDir: string;

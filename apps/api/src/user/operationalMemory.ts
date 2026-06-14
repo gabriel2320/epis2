@@ -62,7 +62,8 @@ export async function getOperationalMemoryForUser(
       userId: session.sub,
       global: parseGlobalPayload(globalRow?.payload),
       patient: patientRow ? parsePatientPayload(patientRow.payload) : null,
-      updatedAt: patientRow?.updatedAt?.toISOString() ?? globalRow?.updatedAt?.toISOString() ?? null,
+      updatedAt:
+        patientRow?.updatedAt?.toISOString() ?? globalRow?.updatedAt?.toISOString() ?? null,
     });
   });
 }

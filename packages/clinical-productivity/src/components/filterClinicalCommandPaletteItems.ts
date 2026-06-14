@@ -43,10 +43,7 @@ export function filterClinicalCommandPaletteItems(
   return items
     .map((item) => ({ item, score: scoreClinicalCommandPaletteMatch(q, item) }))
     .filter(({ score }) => score > 0)
-    .sort(
-      (a, b) =>
-        b.score - a.score || a.item.label.localeCompare(b.item.label, 'es'),
-    )
+    .sort((a, b) => b.score - a.score || a.item.label.localeCompare(b.item.label, 'es'))
     .slice(0, maxVisible)
     .map(({ item }) => item);
 }

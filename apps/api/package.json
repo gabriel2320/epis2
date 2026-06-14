@@ -7,7 +7,13 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "dev": "node ../../scripts/run-api-dev.mjs",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "db:migrate": "node ../../scripts/db-migrate.mjs",
+    "db:validate": "node ../../scripts/db-validate.mjs",
+    "db:reindex-chunks": "node ../../scripts/db/reindex-document-chunks.mjs",
+    "db:backup": "node ../../scripts/epis-db-backup.mjs",
+    "db:restore": "node ../../scripts/epis-db-restore.mjs",
+    "db:apply-latest": "node ../../scripts/quality/apply-latest-migration.mjs"
   },
   "dependencies": {
     "@epis2/clinical-domain": "*",
