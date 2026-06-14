@@ -33,6 +33,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build -w @epis2/contracts
+      - run: npm run build -w @epis2/test-fixtures
       - run: npm run db:migrate
       - run: npm run quality:case-intel-closure-gate
       - run: npm run check
@@ -81,6 +82,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build -w @epis2/contracts
+      - run: npm run build -w @epis2/test-fixtures
       - run: npm run db:migrate
       - run: npm run quality:dual-chart-gate
       - run: npx playwright install --with-deps chromium

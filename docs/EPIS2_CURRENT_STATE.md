@@ -12,7 +12,7 @@
 
 EPIS2 **compila y demuestra** un flujo clínico mínimo (censo → ficha dual → borrador → aprobación) con IA opcional. Los programas recientes **PROG-FICHA-FIRST**, **PROG-STRENGTHEN** y **PROG-CDS-UX** están cerrados.
 
-El problema operativo no es falta de código útil, sino **superficie excesiva**: ~419 scripts npm, ~275 `quality:*`, ~486 reportes de sesión. La fase recomendada siguiente es **consolidación** (clasificar, documentar, simplificar gates), no expansión de features.
+El problema operativo principal (**superficie npm/gates**) se abordó con **PROG-CONSOLIDATE ✓** (Fases 0–4). Siguiente fase: **producto estable** — sin features clínicas nuevas salvo MF autorizada.
 
 **Git:** una rama productiva (`master`). Las “ramas truncadas” son **módulos a medias en master**, no branches git olvidadas.
 
@@ -66,7 +66,7 @@ Regla: **core no depende de labs** (deuda: API aún puede tocar case-intel — m
 | PROG-CDS-UX | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
 | PROG-RAPID | ✓ cerrado | `quality:rapid-gate` |
 | PROG-DI / tríada F6 | ✓ contratos | ver `reports/conciliacion/` |
-| **PROG-CONSOLIDATE** (propuesto) | ✓ Fase 0–4 | `tool:consolidate:verify-phase4` |
+| **PROG-CONSOLIDATE** | ✓ **cerrado** Fase 0–4 | `tool:consolidate:verify-phase4` · [`epis2-prog-consolidate-close-2026.md`](../reports/epis2-prog-consolidate-close-2026.md) |
 
 Detalle inventario módulos: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md).
 

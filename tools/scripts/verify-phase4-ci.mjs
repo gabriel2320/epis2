@@ -37,6 +37,11 @@ for (const script of ['db:migrate', 'test:e2e', 'test:e2e:dual-chart']) {
   }
 }
 
+const ciYml = readFileSync(join(root, '.github/workflows/ci.yml'), 'utf8');
+if (!ciYml.includes('build -w @epis2/test-fixtures')) {
+  errors.push('ci.yml debe build @epis2/test-fixtures antes de case-intel-closure-gate');
+}
+
 const dry = spawnSync('node', ['tools/gates/run-gate.mjs', '--dry-run', 'required'], {
   cwd: root,
   encoding: 'utf8',
