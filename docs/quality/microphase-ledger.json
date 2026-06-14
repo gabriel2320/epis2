@@ -612,5 +612,12 @@
     "MF-180",
     "MF-181",
     "MF-182"
+  ],
+  "programsClosed": [
+    {
+      "id": "PROG-CONCILIACION-TRIADA-2026",
+      "closedAt": "2026-06-14",
+      "report": "reports/epis2-prog-conciliacion-triada-close-2026.md"
+    }
   ]
 }

@@ -77,7 +77,8 @@
       "subprogram": "PROG-CORE-HARDEN",
       "phase": 2,
       "dependsOn": ["MF-SH-01"],
-      "state": "READY",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
       "gate": "ai:evals:live",
       "evidenceRequired": [
         "Fixture eval por intent top-10 command-registry",
@@ -99,7 +100,7 @@
       "subprogram": "PROG-CORE-HARDEN",
       "phase": 3,
       "dependsOn": ["MF-SH-02"],
-      "state": "BLOCKED",
+      "state": "READY",
       "gate": null,
       "evidenceRequired": [
         "Test: Ollama unavailable → formulario manual operativo",

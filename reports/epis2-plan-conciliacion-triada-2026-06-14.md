@@ -457,9 +457,10 @@ npm run check && npm run medrepo:doctor
 - [ ] (Opcional) loader pack EPIS2
 
 ### F7 ☐
-- [ ] Reporte cierre
-- [ ] Tablero actualizado
-- [ ] MF-SH-02 declarado siguiente
+- [x] Reporte cierre
+- [x] Tablero actualizado
+- [x] `di-ledger.json` — git committed
+- [x] MF-SH-02 declarado DONE · MF-SH-03 READY
 
 ---
 

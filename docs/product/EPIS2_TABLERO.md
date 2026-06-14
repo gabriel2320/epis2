@@ -4,37 +4,42 @@
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:** [`epis2-plan-conciliacion-triada-2026-06-14.md`](../../reports/epis2-plan-conciliacion-triada-2026-06-14.md) · **Correcciones:** [`epis2-plan-correcciones-prioritarias-2026-06-14.md`](../../reports/epis2-plan-correcciones-prioritarias-2026-06-14.md) · **Tríada:** [`EPIS2_TRIADA_REPOS.md`](./EPIS2_TRIADA_REPOS.md)
 
-> **F3–F6 tríada** ✓ · exports MedRepo verify OK. **Siguiente:** F7 cierre · **MF-SH-02**.
+> **PROG-CONCILIACION-TRIADA** ✓ cerrado · **MF-SH-02** ✓ · **Siguiente:** **MF-SH-03** degradación IA.
 
 ---
 
-## En curso — PROG-CONCILIACION-TRIADA-2026
+## Cerrado — PROG-CONCILIACION-TRIADA-2026
 
-| Fase | Estado | Siguiente |
-|------|--------|-----------|
-| **S1 F0+F1** | ✓ inventario + docs | — |
-| **F2 PROG-DI** | ✓ commit + push | — |
-| **F3 Evolab** | ✓ push `246fc27` · smoke 14/14 | — |
-| **F4 MedRepo** | ✓ git baseline · check 75/75 | remote push opcional |
-| **A2–C1 correcciones** | ✓ S1 cerrado | — |
-| **F5 smoke tríada** | ✓ gates 7/8 · export SKIP F6 | [`epis2-f5-close-2026-06-14.md`](../../reports/conciliacion/epis2-f5-close-2026-06-14.md) |
-| **F6 integración** | ✓ backlog · pack EPIS2 verify · Evolab pack 0 items | [`epis2-f6-close-2026-06-14.md`](../../reports/conciliacion/epis2-f6-close-2026-06-14.md) |
+| Fase | Estado |
+|------|--------|
+| F0–F7 | ✓ [`epis2-prog-conciliacion-triada-close-2026.md`](../../reports/epis2-prog-conciliacion-triada-close-2026.md) |
 
-Inventario: [`reports/conciliacion/`](../conciliacion/)
+Inventario: [`reports/conciliacion/`](../../reports/conciliacion/)
 
 ---
 
-## Desbloqueado — PROG-STRENGTHEN-2026 (tras push A1)
+## En curso — PROG-STRENGTHEN-2026
 
 | Subprograma | MF activa | Gate |
 |-------------|-----------|------|
-| **PROG-CORE-HARDEN** | **MF-SH-02** evals intent top-10 | `ai:evals:live` |
+| **PROG-CORE-HARDEN** | **MF-SH-03** degradación IA (Ollama down) | `npm run test` |
 
 `npm run quality:strengthen-next` · ledger [`strengthen-ledger.json`](../quality/strengthen-ledger.json)
 
 **Regla sesión:** un MF-SH/IM/CU/IC · declarar alcance · cerrar con gate.
 
 ---
+
+## Histórico — PROG-CONCILIACION-TRIADA-2026 (detalle fases)
+
+| Fase | Estado | Evidencia |
+|------|--------|-----------|
+| **S1 F0+F1** | ✓ | inventario + docs |
+| **F2 PROG-DI** | ✓ commit + push | `f56b7d2` |
+| **F3 Evolab** | ✓ | push `e453774` · smoke 14/14 |
+| **F4 MedRepo** | ✓ | git `3e1181b` · check 75/75 |
+| **F5 smoke tríada** | ✓ | [`epis2-f5-close-2026-06-14.md`](../../reports/conciliacion/epis2-f5-close-2026-06-14.md) |
+| **F6 integración** | ✓ | [`epis2-f6-close-2026-06-14.md`](../../reports/conciliacion/epis2-f6-close-2026-06-14.md) |
 
 ## Hecho reciente
 
@@ -47,7 +52,8 @@ Inventario: [`reports/conciliacion/`](../conciliacion/)
 | **PROG-DI** | 10/10 DONE · commit `f56b7d2` · [`epis2-prog-di-close-2026.md`](../../reports/epis2-prog-di-close-2026.md) |
 | **F4 MedRepo** | git `3e1181b` · check 75/75 · [`epis2-f4-close-2026-06-14.md`](../../reports/conciliacion/epis2-f4-close-2026-06-14.md) |
 | **F5 smoke tríada** | gates 7/8 · smoke 14/14 · [`epis2-f5-close-2026-06-14.md`](../../reports/conciliacion/epis2-f5-close-2026-06-14.md) |
-| **F6 integración** | backlog top-15 · MedRepo export verify · case-intel 12 SIM · [`epis2-f6-close-2026-06-14.md`](../../reports/conciliacion/epis2-f6-close-2026-06-14.md) |
+| **MF-SH-02** intent evals | 93.3% top-10 · ai:evals:live 4/4 · [`epis2-mf-sh-02-intent-evals.md`](../../reports/epis2-mf-sh-02-intent-evals.md) |
+| **PROG-CONCILIACION tríada** | F0–F7 ✓ · [`epis2-prog-conciliacion-triada-close-2026.md`](../../reports/epis2-prog-conciliacion-triada-close-2026.md) |
 
 ---
 
@@ -122,9 +128,8 @@ Hilos C / PAPER / comando absorbidos en tres frentes. C-3 ✓ · MF-PAPER-01…0
 | MUI Select en E2E | `getByRole('combobox')` en formularios |
 | Dependabot zod 4.x | PR aparte |
 | **Storybook** (herramienta UI) | 12 stories; ampliar por IDC |
-| Evolab | [epis2-evolab](https://github.com/gabriel2320/epis2-evolab) · ahead 1 · findings sync 2026-06-11 (stale) |
-| MedRepo | Local sin git · check rojo · ver F4 plan conciliación |
-| PROG-DI gitPending | ~105 archivos WIP — no mezclar con MF-SH-02 hasta F2 push |
+| Evolab | pushed `e453774` · smoke 14/14 · backlog [`evolab-backlog-20260614.md`](../../reports/conciliacion/evolab-backlog-20260614.md) |
+| MedRepo | git `3e1181b` · check 75/75 · export verify OK · remote push opcional |
 | PROG-AUTO-DEV-6H | Pausado — no relanzar `dev:auto:cycle` sin decisión explícita |
 
 ---
