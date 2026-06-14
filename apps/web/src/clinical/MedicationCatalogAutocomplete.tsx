@@ -2,6 +2,7 @@ import type { ClinicalCatalogEntry } from '@epis2/contracts';
 import { EpisAutocomplete, EpisAutocompleteTextField } from '@epis2/epis2-ui';
 import { useEffect, useRef, useState, type SyntheticEvent } from 'react';
 import { searchMedicationCatalog } from '../api/clinicalApi.js';
+import { bumpCatalogUsage } from '../api/userOperationalMemoryApi.js';
 
 const DEBOUNCE_MS = 250;
 
@@ -14,10 +15,7 @@ export type MedicationCatalogAutocompleteProps = {
 };
 
 /**
- * MF-184 — autocomplete del campo medicamento alimentado por el catálogo
- * promovido (`GET /api/clinical/catalogs/medication`). `freeSolo`: el catálogo
- * sugiere, no restringe — el valor guardado sigue siendo texto y el borrador
- * mantiene revisión humana aguas abajo. Si la API falla, degrada a texto libre.
+ * MF-184 / MF-DI-03 — autocomplete medicamento con ranking institucional + personal.
  */
 export function MedicationCatalogAutocomplete({
   label,
@@ -34,12 +32,11 @@ export function MedicationCatalogAutocomplete({
     const seq = ++requestSeq.current;
     const timer = setTimeout(() => {
       setLoading(true);
-      searchMedicationCatalog(value)
+      searchMedicationCatalog(value, { frequent: !value.trim() })
         .then((response) => {
           if (requestSeq.current === seq) setOptions(response.entries);
         })
         .catch(() => {
-          // Catálogo no disponible → solo texto libre, sin romper el formulario.
           if (requestSeq.current === seq) setOptions([]);
         })
         .finally(() => {
@@ -55,7 +52,14 @@ export function MedicationCatalogAutocomplete({
   ) => {
     const single = Array.isArray(selected) ? selected[0] : selected;
     if (single === null || single === undefined) return;
-    onChange(typeof single === 'string' ? single : single.label);
+    if (typeof single === 'string') {
+      onChange(single);
+      return;
+    }
+    onChange(single.label);
+    void bumpCatalogUsage({ domain: 'medication', key: single.entryCode }).catch(() => {
+      /* best-effort personal rank */
+    });
   };
 
   return (
@@ -68,7 +72,11 @@ export function MedicationCatalogAutocomplete({
       onInputChange={(_event, nextValue) => onChange(nextValue)}
       onChange={handleSelect}
       getOptionLabel={(option) => (typeof option === 'string' ? option : option.label)}
-      isOptionEqualToValue={(a, b) => a.entryCode === b.entryCode}
+      isOptionEqualToValue={(a, b) =>
+        typeof a === 'string' || typeof b === 'string'
+          ? a === b
+          : a.entryCode === b.entryCode
+      }
       renderInput={(params) => (
         <EpisAutocompleteTextField
           id={params.id}

@@ -18,6 +18,7 @@ export type ResolveTraditionalSectionContentProps = {
   longitudinal?: PatientLongitudinalResponse | null | undefined;
   onRegisterAllergy?: (() => void) | undefined;
   onOpenEvolution?: (() => void) | undefined;
+  onOpenDraft?: ((draftId: string) => void) | undefined;
 };
 
 /** MF-TE-02 — contenido real/demo para secciones prioritarias. */
@@ -27,6 +28,7 @@ export function resolveTraditionalSectionContent({
   longitudinal,
   onRegisterAllergy,
   onOpenEvolution,
+  onOpenDraft,
 }: ResolveTraditionalSectionContentProps): ReactNode | undefined {
   let content: ReactNode | undefined;
   switch (sectionId) {
@@ -55,9 +57,9 @@ export function resolveTraditionalSectionContent({
     case 'navEvolution':
       content = (
         <TraditionalEvolutionSection
-          demoCaseCode={demoCaseCode}
           longitudinal={longitudinal}
           onOpenEvolution={onOpenEvolution}
+          onOpenDraft={onOpenDraft}
         />
       );
       break;

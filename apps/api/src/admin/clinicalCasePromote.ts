@@ -1,6 +1,6 @@
 import { and, eq } from 'drizzle-orm';
 import { clinicalCaseRecordSchema, type ClinicalCaseRecord } from '@epis2/contracts';
-import { stableSimCaseUuids } from '@epis2/test-fixtures';
+import { stableSimCaseUuids } from '@epis2/test-fixtures/node';
 import type { Database } from '../db/client.js';
 import {
   encounters,

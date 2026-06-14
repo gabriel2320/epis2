@@ -7,16 +7,16 @@ import {
   medicationCatalogSearchResponseSchema,
   patientClinicalAlertsResponseSchema,
   patientClinicalSummaryResponseSchema,
+  clinicalContextDenseResponseSchema,
   patientLongitudinalResponseSchema,
   patientResultsInboxResponseSchema,
 } from '@epis2/contracts';
 import { roleHasPermission } from '@epis2/clinical-domain';
-import { and, asc, eq, ilike } from 'drizzle-orm';
 import { z } from 'zod';
 import type { FastifyInstance } from 'fastify';
 import type { Database } from '../db/client.js';
-import { clinicalCatalogStaging } from '../db/schema.js';
 import { runWithRlsContext } from '../db/rlsContext.js';
+import { searchRankedMedicationCatalog } from '../catalog/medicationRank.js';
 import { createRequirePermission, type AuthenticatedRequest } from '../auth/authenticate.js';
 import {
   approveDraft,
@@ -39,6 +39,7 @@ import { intakePatientDocument } from './documentIntake.js';
 import { searchPatientDocuments } from './documents.js';
 import { getPatientLongitudinal } from './longitudinal.js';
 import { getPatientClinicalSummary } from './patientClinicalSummary.js';
+import { getPatientContextDense } from './patientContextDense.js';
 import { getPatientResultsInbox } from './resultsInbox.js';
 import { buildPatientSummaryExport } from './summaryExport.js';
 import { parseClinicalTextSpellcheckRequest, runClinicalTextSpellcheck } from './textSpellcheck.js';
@@ -118,29 +119,19 @@ export async function registerClinicalRoutes(
     '/api/clinical/catalogs/medication',
     { preHandler: requirePatientRead },
     async (request) => {
-      const query = request.query as { q?: string; limit?: string };
+      const session = (request as AuthenticatedRequest).session;
+      const query = request.query as { q?: string; limit?: string; frequent?: string };
       const q = query.q?.trim() ?? '';
       const limit = Math.min(Math.max(Number(query.limit) || 20, 1), 50);
-      const conditions = [
-        eq(clinicalCatalogStaging.catalogCode, 'medication'),
-        eq(clinicalCatalogStaging.status, 'active'),
-      ];
-      if (q) {
-        conditions.push(ilike(clinicalCatalogStaging.label, `%${q}%`));
-      }
-      const rows = await db
-        .select({
-          entryCode: clinicalCatalogStaging.entryCode,
-          label: clinicalCatalogStaging.label,
-        })
-        .from(clinicalCatalogStaging)
-        .where(and(...conditions))
-        .orderBy(asc(clinicalCatalogStaging.label))
-        .limit(limit);
+      const entries = await searchRankedMedicationCatalog(db, config, session, {
+        q,
+        limit,
+        frequentOnly: query.frequent === '1' || query.frequent === 'true',
+      });
       return medicationCatalogSearchResponseSchema.parse({
         readOnly: true as const,
         catalogCode: 'medication' as const,
-        entries: rows,
+        entries,
       });
     },
   );
@@ -342,6 +333,20 @@ export async function registerClinicalRoutes(
         return sendApiError(reply, 404, 'Paciente no encontrado');
       }
       return patientClinicalSummaryResponseSchema.parse(summary);
+    },
+  );
+
+  app.get(
+    '/api/patients/:patientId/context-dense',
+    { preHandler: requirePatientRead },
+    async (request, reply) => {
+      const { patientId } = request.params as { patientId: string };
+      const patient = await getPatientById(db, patientId);
+      if (!patient) {
+        return sendApiError(reply, 404, 'Paciente no encontrado');
+      }
+      const dense = await getPatientContextDense(db, patientId);
+      return clinicalContextDenseResponseSchema.parse(dense);
     },
   );
 

@@ -12,14 +12,14 @@ export function ChartEspacioCommandDock() {
   const { patient } = useActivePatient();
   const patientId = patient?.id;
 
-  if (!isCensus && !patientId) return null;
-
   const workspace = isCensus ? 'command_center' : 'patient_chart';
   const commandContext = useCommandResolveContext(workspace);
   const command = useClinicalCommandSubmit({
     ...(patientId ? { patientId } : {}),
     commandContext,
   });
+
+  if (!isCensus && !patientId) return null;
 
   return (
     <EpisUniversalCommandBar

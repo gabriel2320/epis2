@@ -140,7 +140,7 @@ const COMMAND_DEFINITIONS_CORE: readonly CommandDefCore[] = [
     requiresPatient: true,
     priority: 50,
     match: (q) =>
-      /evolucion|evoluciona|evolucionar|nota\s+de\s+evolucion|evolucion\s+diaria|nota\s+diaria|\bsoap\b/.test(
+      /evolucion|evoluciona|evolucionar|nota\s+de\s+evolucion|evolucion\s+diaria|nota\s+diaria|\bsoap\b|control\s+(?:de\s+)?(?:diabetes|dm2?|hta|hipertension)/.test(
         q,
       ),
   },
@@ -245,9 +245,11 @@ const COMMAND_DEFINITIONS_CORE: readonly CommandDefCore[] = [
     requiresPatient: true,
     priority: 75,
     match: (q) =>
-      /laboratorio|analitica|hemograma|bioquimica|bioquímica|ordena\s+lab|solicita\s+lab/.test(q) ||
+      /laboratorio|analitica|hemograma|bioquimica|bioquímica|ordena\s+lab|solicita\s+lab|hba1c|hemoglobina\s+glicosilada|panel\s+control\s+dm/.test(
+        q,
+      ) ||
       (/\b(pide|pedir|solicitar)\b/.test(q) &&
-        /hemograma|analitica|laboratorio|lab\b|hb\s+ht/.test(q)) ||
+        /hemograma|analitica|laboratorio|lab\b|hb\s+ht|hba1c/.test(q)) ||
       (/lab\b/.test(q) && !/laboral/.test(q)),
   },
   {

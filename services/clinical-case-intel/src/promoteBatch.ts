@@ -1,6 +1,6 @@
 import postgres from 'postgres';
 import { clinicalCaseRecordSchema, type ClinicalCaseRecord } from '@epis2/contracts';
-import { stableSimCaseUuids } from '@epis2/test-fixtures';
+import { stableSimCaseUuids } from '@epis2/test-fixtures/node';
 
 export const BATCH_PROMOTE_ACTOR = 'usr-admin-01';
 

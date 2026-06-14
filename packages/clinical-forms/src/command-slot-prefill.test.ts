@@ -61,6 +61,14 @@ describe('buildCommandSlotPrefill (CE-3b)', () => {
     ).toEqual({ subjective: 'paciente estable' });
   });
 
+  it('prefill evolución desde clinicalReasonHint con punto (CE-6)', () => {
+    expect(
+      buildCommandSlotPrefill('evolution_note', {
+        clinicalReasonHint: 'Control diabetes mellitus tipo 2',
+      }),
+    ).toEqual({ subjective: 'Control diabetes mellitus tipo 2.' });
+  });
+
   it('prefill búsqueda de paciente', () => {
     expect(buildCommandSlotPrefill('patient_search', { patientHint: 'juan perez' })).toEqual({
       patientName: 'juan perez',

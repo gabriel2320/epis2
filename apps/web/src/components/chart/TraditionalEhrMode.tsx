@@ -3,6 +3,7 @@ import type {
   PatientClinicalSummaryResponse,
   PatientLongitudinalResponse,
 } from '@epis2/contracts';
+import type { CommandChip } from '@epis2/command-registry';
 import { Box, epis2TraditionalChartTokens } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
 import { useEffect, useMemo, useState } from 'react';
@@ -26,6 +27,11 @@ export type TraditionalEhrModeProps = {
   onOpenDraft?: ((draftId: string) => void) | undefined;
   onViewFullTimeline?: (() => void) | undefined;
   onOpenEvolution?: (() => void) | undefined;
+  probableActionChips?: readonly CommandChip[] | undefined;
+  onProbableAction?: ((commandSample: string) => void) | undefined;
+  initialTraditionalSection?: TraditionalSectionId | undefined;
+  focusTraditionalSection?: TraditionalSectionId | undefined;
+  onTraditionalSectionPersist?: ((section: TraditionalSectionId) => void) | undefined;
   mainContent?: ReactNode | undefined;
   contextPane?: ReactNode | undefined;
   contextOpen?: boolean | undefined;
@@ -47,6 +53,11 @@ export function TraditionalEhrMode({
   onOpenDraft,
   onViewFullTimeline,
   onOpenEvolution,
+  probableActionChips,
+  onProbableAction,
+  initialTraditionalSection,
+  focusTraditionalSection,
+  onTraditionalSectionPersist,
   mainContent,
   contextPane,
   contextOpen,
@@ -59,6 +70,23 @@ export function TraditionalEhrMode({
     () => resolveVisibleTraditionalSections(demoCaseCode),
     [demoCaseCode],
   );
+
+  useEffect(() => {
+    if (!initialTraditionalSection) return;
+    if (!visibleSectionIds.includes(initialTraditionalSection)) return;
+    setActiveSection(initialTraditionalSection);
+  }, [initialTraditionalSection, visibleSectionIds]);
+
+  useEffect(() => {
+    if (!focusTraditionalSection) return;
+    if (!visibleSectionIds.includes(focusTraditionalSection)) return;
+    setActiveSection(focusTraditionalSection);
+  }, [focusTraditionalSection, visibleSectionIds]);
+
+  const handleSectionChange = (section: TraditionalSectionId) => {
+    setActiveSection(section);
+    onTraditionalSectionPersist?.(section);
+  };
 
   useEffect(() => {
     if (!visibleSectionIds.includes(activeSection)) {
@@ -84,6 +112,8 @@ export function TraditionalEhrMode({
         onOpenDraft={onOpenDraft}
         onViewFullTimeline={onViewFullTimeline}
         onOpenEvolution={onOpenEvolution}
+        probableActionChips={probableActionChips}
+        onProbableAction={onProbableAction}
       />
     ) : (
       resolveTraditionalSectionContent({
@@ -92,6 +122,7 @@ export function TraditionalEhrMode({
         longitudinal,
         onRegisterAllergy,
         onOpenEvolution,
+        onOpenDraft,
       })
     ));
 
@@ -110,13 +141,13 @@ export function TraditionalEhrMode({
     >
       <TraditionalSectionMobileNav
         activeSection={activeSection}
-        onSectionChange={setActiveSection}
+        onSectionChange={handleSectionChange}
         visibleSectionIds={visibleSectionIds}
       />
       <Box sx={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
         <TraditionalSectionNav
           activeSection={activeSection}
-          onSectionChange={setActiveSection}
+          onSectionChange={handleSectionChange}
           visibleSectionIds={visibleSectionIds}
           testId="epis2-traditional-ehr-nav"
         />

@@ -23,11 +23,9 @@ export {
 } from './demoCases.js';
 export {
   SIM_CLINICAL_CASES,
-  assertSimCasesInvariants,
   getSimCaseByCode,
   getSimCaseByPatientId,
-} from './simCases.js';
-export { stableSimCaseUuids } from './simCaseIds.js';
+} from './simClinicalCases.js';
 export {
   SIM_ASSIST_EVAL_MATRIX,
   assertSimAssistEvalMatrix,

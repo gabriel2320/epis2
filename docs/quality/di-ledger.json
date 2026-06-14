@@ -1,0 +1,283 @@
+{
+  "version": "1.0.1",
+  "program": "PROG-DETERMINISTIC-INTELLIGENCE-2026",
+  "strategy": "inteligencia determinística antes de IA local",
+  "executionStatus": "CLOSED",
+  "conciliacionPlan": "reports/epis2-plan-conciliacion-triada-2026-06-14.md",
+  "canonicalPlan": "docs/product/EPIS2_PROG_DETERMINISTIC_INTELLIGENCE.md",
+  "prerequisite": "quality:experiencia-core-signoff-gate",
+  "prerequisiteMet": "2026-06-13",
+  "parallelWith": "PROG-STRENGTHEN-2026",
+  "states": ["BLOCKED", "READY", "IN_PROGRESS", "DONE"],
+  "rules": {
+    "oneReadyAtMost": true,
+    "oneInProgressAtMost": true,
+    "noSecondCommandRegistry": true,
+    "noSecondFormRegistry": true,
+    "appMustWorkWithoutAi": true,
+    "interleaveWithStrengthen": true
+  },
+  "subprograms": [
+    { "id": "PROG-DI-CONTEXT", "name": "Contexto denso en ficha", "priority": 1 },
+    { "id": "PROG-DI-PREFILL", "name": "Prefill contextual extendido", "priority": 2 },
+    { "id": "PROG-DI-SUGGEST", "name": "Acciones probables y chips", "priority": 3 },
+    { "id": "PROG-DI-MEMORY", "name": "Memoria operacional", "priority": 4 },
+    { "id": "PROG-DI-TEMPLATES", "name": "Plantillas condicionales", "priority": 5 },
+    { "id": "PROG-DI-TIMELINE", "name": "Timeline filtrable", "priority": 6 },
+    { "id": "PROG-DI-JOURNEYS", "name": "Microjourneys", "priority": 7 },
+    { "id": "PROG-DI-CLOSE", "name": "Signoff capa determinística", "priority": 8 }
+  ],
+  "phases": [
+    {
+      "id": "MF-DI-01",
+      "name": "Contexto clínico denso en ficha",
+      "subprogram": "PROG-DI-CONTEXT",
+      "phase": 1,
+      "dependsOn": [],
+      "state": "DONE",
+      "completedAt": "2026-06-14",
+      "gate": "quality:di-context-gate",
+      "evidenceRequired": [
+        "Header paciente persistente: problemas, meds, alergias, episodio",
+        "Antigüedad labs/exámenes en copy clínico",
+        "E2E dual-chart contexto visible",
+        "npm run check"
+      ],
+      "allowedPaths": [
+        "apps/web/src/components/chart/**",
+        "apps/web/src/components/EpisClinicalContextPane.tsx",
+        "apps/api/src/clinical/**",
+        "packages/design-system/src/copy/es.ts"
+      ],
+      "closureReport": "reports/epis2-mf-di-01-context-dense.md",
+      "unblocks": ["MF-DI-04", "MF-DI-05", "MF-DI-08"]
+    },
+    {
+      "id": "MF-DI-04",
+      "name": "Prefill contextual extendido (CE-6)",
+      "subprogram": "PROG-DI-PREFILL",
+      "phase": 2,
+      "dependsOn": ["MF-DI-01"],
+      "state": "DONE",
+      "completedAt": "2026-06-14",
+      "gate": "quality:di-prefill-gate",
+      "evidenceRequired": [
+        "Prefill receta crónica y lab control por diagnóstico",
+        "Comando control diabetes → SOAP + badge prefill",
+        "E2E extiende UX-G02",
+        "npm run check"
+      ],
+      "allowedPaths": [
+        "apps/web/src/pages/GeneratedClinicalFormPage.tsx",
+        "apps/web/src/clinical/commandFormSearch.js",
+        "packages/command-registry/**",
+        "packages/clinical-forms/**"
+      ],
+      "closureReport": "reports/epis2-mf-di-04-prefill-extended.md",
+      "unblocks": ["MF-DI-07", "MF-DI-09"]
+    },
+    {
+      "id": "MF-DI-05",
+      "name": "Panel acciones probables",
+      "subprogram": "PROG-DI-SUGGEST",
+      "phase": 3,
+      "dependsOn": ["MF-DI-01"],
+      "state": "DONE",
+      "completedAt": "2026-06-11",
+      "gate": "quality:di-suggestions-gate",
+      "evidenceRequired": [
+        "3–5 acciones ranked al abrir ficha",
+        "Matriz ambulatorio/hospitalizado/urgencia",
+        "EpisCommandSuggestionCards integrado en ficha hub",
+        "scripts/quality/validate-di-suggestions-gate.mjs"
+      ],
+      "allowedPaths": [
+        "apps/web/src/components/command-center/**",
+        "packages/command-registry/src/rank.js",
+        "apps/web/src/components/chart/**"
+      ],
+      "closureReport": "reports/epis2-mf-di-05-probable-actions.md",
+      "unblocks": ["MF-DI-06", "MF-DI-09"]
+    },
+    {
+      "id": "MF-DI-02",
+      "name": "Memoria operacional por usuario",
+      "subprogram": "PROG-DI-MEMORY",
+      "phase": 4,
+      "dependsOn": ["MF-DI-01"],
+      "state": "DONE",
+      "completedAt": "2026-06-11",
+      "gate": "quality:di-memory-gate",
+      "evidenceRequired": [
+        "Prefs: última sección, favoritos, pacientes recientes",
+        "Migración + RLS por usuario",
+        "Restaurar contexto al reabrir paciente",
+        "npm run db:validate"
+      ],
+      "allowedPaths": [
+        "apps/api/src/db/migrations/**",
+        "apps/api/src/user/**",
+        "apps/web/src/clinical/**"
+      ],
+      "closureReport": "reports/epis2-mf-di-02-operational-memory.md",
+      "unblocks": ["MF-DI-03"]
+    },
+    {
+      "id": "MF-DI-03",
+      "name": "Autocompletado con ranking frecuencia",
+      "subprogram": "PROG-DI-MEMORY",
+      "phase": 5,
+      "dependsOn": ["MF-DI-02"],
+      "state": "DONE",
+      "completedAt": "2026-06-11",
+      "gate": "quality:di-autocomplete-gate",
+      "evidenceRequired": [
+        "Ranking meds/dx/orders: institucional + personal",
+        "Unit tests ranking",
+        "MedicationCatalogAutocomplete usa frecuencia"
+      ],
+      "allowedPaths": [
+        "apps/web/src/clinical/MedicationCatalogAutocomplete.tsx",
+        "apps/api/src/catalog/**",
+        "packages/command-registry/**"
+      ],
+      "closureReport": "reports/epis2-mf-di-03-autocomplete-rank.md",
+      "unblocks": []
+    },
+    {
+      "id": "MF-DI-06",
+      "name": "Sugerencias silenciosas (chips)",
+      "subprogram": "PROG-DI-SUGGEST",
+      "phase": 6,
+      "dependsOn": ["MF-DI-05"],
+      "recommendedAfter": ["MF-CU-01"],
+      "state": "DONE",
+      "completedAt": "2026-06-11",
+      "gate": "quality:di-suggestions-gate",
+      "evidenceRequired": [
+        "Chips: receta por vencer, examen pendiente, alergia, gaps control",
+        "Máximo N visibles; resto colapsable",
+        "Sin pop-ups modales invasivos",
+        "npm run check"
+      ],
+      "allowedPaths": [
+        "apps/web/src/components/cds/**",
+        "apps/web/src/clinical/usePatientClinicalAlerts.ts",
+        "apps/web/src/components/EpisClinicalContextPane.tsx"
+      ],
+      "closureReport": "reports/epis2-mf-di-06-silent-suggestions.md",
+      "unblocks": ["MF-DI-10"]
+    },
+    {
+      "id": "MF-DI-07",
+      "name": "Plantillas vivas condicionales",
+      "subprogram": "PROG-DI-TEMPLATES",
+      "phase": 7,
+      "dependsOn": ["MF-DI-04"],
+      "state": "DONE",
+      "completedAt": "2026-06-11",
+      "gate": "quality:di-templates-gate",
+      "evidenceRequired": [
+        "Reglas blueprint por comorbilidad (DM+ERC, insulina)",
+        "Plantilla no sugerida si diagnóstico ausente",
+        "Tests metadata blueprints"
+      ],
+      "allowedPaths": [
+        "packages/clinical-forms/**",
+        "packages/clinical-domain/**"
+      ],
+      "closureReport": "reports/epis2-mf-di-07-live-templates.md",
+      "unblocks": ["MF-DI-10"]
+    },
+    {
+      "id": "MF-DI-08",
+      "name": "Timeline clínico filtrable",
+      "subprogram": "PROG-DI-TIMELINE",
+      "phase": 8,
+      "dependsOn": ["MF-DI-01"],
+      "state": "DONE",
+      "completedAt": "2026-06-11",
+      "gate": "quality:di-timeline-gate",
+      "evidenceRequired": [
+        "Timeline agrupado temporalmente",
+        "Filtros: labs, firmados, hospitalizaciones, evoluciones",
+        "E2E dual-chart timeline smoke"
+      ],
+      "allowedPaths": [
+        "apps/web/src/components/chart/**",
+        "apps/api/src/clinical/**",
+        "apps/web/src/pages/**"
+      ],
+      "closureReport": "reports/epis2-mf-di-08-timeline.md",
+      "unblocks": ["MF-DI-10"]
+    },
+    {
+      "id": "MF-DI-09",
+      "name": "Microjourneys post-acción",
+      "subprogram": "PROG-DI-JOURNEYS",
+      "phase": 9,
+      "dependsOn": ["MF-DI-04", "MF-DI-05"],
+      "state": "DONE",
+      "completedAt": "2026-06-11",
+      "gate": "quality:di-journeys-gate",
+      "evidenceRequired": [
+        "Post-receta: imprimir / historial",
+        "Post-evolución: crear receta asociada",
+        "Post-lab: panel frecuente por diagnóstico",
+        "Validaciones admin RUT/previsión",
+        "E2E journey hooks"
+      ],
+      "allowedPaths": [
+        "apps/web/src/clinical/generated-form/**",
+        "apps/web/src/pages/**",
+        "packages/clinical-productivity/**"
+      ],
+      "closureReport": "reports/epis2-mf-di-09-microjourneys.md",
+      "unblocks": ["MF-DI-10"]
+    },
+    {
+      "id": "MF-DI-10",
+      "name": "Signoff inteligencia determinística",
+      "subprogram": "PROG-DI-CLOSE",
+      "phase": 10,
+      "dependsOn": [
+        "MF-DI-03",
+        "MF-DI-06",
+        "MF-DI-07",
+        "MF-DI-08",
+        "MF-DI-09"
+      ],
+      "recommendedAfter": ["MF-CU-02"],
+      "state": "DONE",
+      "completedAt": "2026-06-11",
+      "gate": "quality:di-signoff-gate",
+      "evidenceRequired": [
+        "Golden journey Juan Pérez sin Ollama",
+        "quality:di-signoff-gate verde",
+        "Piloto demo checklist ampliado",
+        "reports/epis2-prog-di-close-2026.md"
+      ],
+      "allowedPaths": [
+        "docs/quality/**",
+        "scripts/quality/**",
+        "tests/e2e/**",
+        "docs/product/EPIS2_PROG_DETERMINISTIC_INTELLIGENCE.md"
+      ],
+      "closureReport": "reports/epis2-prog-di-close-2026.md",
+      "unblocks": []
+    }
+  ],
+  "overlapWithStrengthen": {
+    "MF-CU-01": "ClinicalCdsCard — UI compartida con MF-DI-06",
+    "MF-CU-02": "Hook patient-view — complementa MF-DI-05/DI-06",
+    "MF-CU-03": "order-select — validaciones §7 prescripción",
+    "CE-0-CE-5": "Command Engine base — MF-DI-04 extiende CE-6"
+  },
+  "alreadyDone": [
+    "CE-0→CE-5 Command Engine",
+    "MF-CM-08 signoff barra",
+    "MF-PA-08 / MF-TE-08 signoff dual chart",
+    "getPatientClinicalContext + CDS/CDR alerts API",
+    "context-rank + EpisCommandSuggestionCards scaffold"
+  ]
+}

@@ -15,6 +15,7 @@ import { registerOpenApiRoutes } from './openapi/routes.js';
 import { registerInpatientRoutes } from './inpatient/routes.js';
 import { registerOpsRoutes } from './ops/routes.js';
 import { registerAdminRoutes } from './admin/routes.js';
+import { registerUserRoutes } from './user/routes.js';
 import type { AppConfig } from './config.js';
 import { getDatabase, pingDatabase } from './db/client.js';
 import { apiErrorHandler, apiNotFoundHandler } from './errors.js';
@@ -124,6 +125,7 @@ export async function buildApp(config: AppConfig) {
   await registerAuditRoutes(app, config, db);
   await registerOpsRoutes(app, config, db);
   await registerAdminRoutes(app, config, db);
+  await registerUserRoutes(app, config, db);
   await registerInteropRoutes(app, config, db);
   registerOpenApiRoutes(app);
 

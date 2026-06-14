@@ -118,7 +118,9 @@ export {
 } from './longitudinal.js';
 export {
   patientClinicalSummaryResponseSchema,
+  clinicalContextDenseResponseSchema,
   type PatientClinicalSummaryResponse,
+  type ClinicalContextDenseResponse,
 } from './clinicalSummary.js';
 export {
   patientResultsInboxResponseSchema,
@@ -236,4 +238,20 @@ export {
   type ClinicalCaseSourceType,
   type ClinicalCaseStagingRow,
 } from './clinicalCaseIntel.js';
+export {
+  operationalMemoryGlobalPayloadSchema,
+  operationalMemoryPatientPayloadSchema,
+  operationalMemoryResponseSchema,
+  operationalCatalogUsageSchema,
+  operationalRecentPatientSchema,
+  patchOperationalMemoryRequestSchema,
+  bumpCatalogUsageRequestSchema,
+  type OperationalMemoryGlobalPayload,
+  type OperationalMemoryPatientPayload,
+  type OperationalMemoryResponse,
+  type OperationalRecentPatient,
+  type PatchOperationalMemoryRequest,
+  type OperationalCatalogUsage,
+  type BumpCatalogUsageRequest,
+} from './operationalMemory.js';
 export { EPIS2_PRODUCT_NAME, EPIS2_PHASE } from './meta.js';

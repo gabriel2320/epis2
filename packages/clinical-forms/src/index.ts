@@ -3,8 +3,8 @@ export type {
   FormField,
   FormSection,
   FormValidationResult,
-} from './types.js';
-export {
+  LiveTemplateCondition,
+} from './types.js';export {
   EPIS2_FORM_BLUEPRINTS,
   getBlueprintById,
   getBlueprintByRoutePath,
@@ -82,7 +82,24 @@ export {
   buildContextClinicalPrefill,
   mergePrefillOnlyEmpty,
   supportsContextClinicalPrefill,
+  type ContextClinicalPrefillOptions,
 } from './context-clinical-prefill.js';
+export {
+  detectChronicFocus,
+  DM2_LAB_CONTROL_PANEL,
+  type ChronicFocus,
+} from './chronic-control-prefill.js';
+export {
+  buildLiveTemplatePrefill,
+  canSuggestLiveTemplate,
+  DM2_CONTROL_LIVE_TEMPLATE,
+  EPIS2_LIVE_TEMPLATES,
+  evaluateLiveTemplateCondition,
+  getLiveTemplateById,
+  isLiveTemplateFieldVisible,
+  materializeLiveTemplateBlueprint,
+  type LiveTemplateDefinition,
+} from './live-templates/resolveLiveTemplate.js';
 export {
   PAPER_CHART_DRAFT_TYPE,
   PAPER_CHART_SECTION_IDS,

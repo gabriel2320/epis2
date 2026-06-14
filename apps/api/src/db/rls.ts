@@ -22,4 +22,9 @@ export function buildRlsSetLocalStatements(ctx: RlsSessionContext): string[] {
   return statements;
 }
 
-export const RLS_PROTECTED_TABLES = ['clinical_drafts', 'clinical_notes', 'patients'] as const;
+export const RLS_PROTECTED_TABLES = [
+  'clinical_drafts',
+  'clinical_notes',
+  'patients',
+  'user_operational_memory',
+] as const;

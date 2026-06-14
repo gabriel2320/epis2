@@ -11,6 +11,10 @@ export const queryKeys = {
     clinicalAlerts: (patientId: string, blueprintId?: string, fieldsKey?: string) =>
       ['patients', 'clinical-alerts', patientId, blueprintId ?? '', fieldsKey ?? ''] as const,
   },
+  user: {
+    operationalMemory: (patientId?: string) =>
+      ['user', 'operational-memory', patientId ?? ''] as const,
+  },
   drafts: {
     all: () => ['drafts'] as const,
     list: (params?: { patientId?: string; status?: string }) =>

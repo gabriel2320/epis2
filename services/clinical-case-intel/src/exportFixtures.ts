@@ -2,7 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import type { ClinicalCaseRecord } from '@epis2/contracts';
 import type { DemoClinicalCase } from '@epis2/test-fixtures';
-import { stableSimCaseUuids } from '@epis2/test-fixtures';
+import { stableSimCaseUuids } from '@epis2/test-fixtures/node';
 
 const CREATED_BY = 'usr-physician-01';
 

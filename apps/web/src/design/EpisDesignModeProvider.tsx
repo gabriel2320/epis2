@@ -16,6 +16,7 @@ export function EpisDesignModeOverlay() {
   const { location } = useRouterState();
   const pathname = location.pathname;
   const search = location.searchStr ?? '';
+  const session = useEpisSession();
 
   useEffect(() => {
     if (!enabled) {
@@ -43,7 +44,6 @@ export function EpisDesignModeOverlay() {
     new URLSearchParams(search).get('mode') === 'dashboard';
   const isCommandCenter = pathname === '/comando' || pathname.startsWith('/comando');
   const agentsEnabled = areDesignAgentsEnabled();
-  const session = useEpisSession();
 
   return createPortal(
     <Stack

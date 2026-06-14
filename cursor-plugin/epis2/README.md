@@ -1,6 +1,6 @@
 # Plugin EPIS2 para Cursor
 
-Empaqueta skills y plantilla MCP GitHub. Las reglas canon viven en `.cursor/rules/` del repo raíz.
+Empaqueta skills y plantilla MCP (GitHub, Context7, Playwright, Postgres RO). Las reglas canon viven en `.cursor/rules/` del repo raíz.
 
 ## Instalar
 

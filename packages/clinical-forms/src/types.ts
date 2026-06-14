@@ -13,6 +13,9 @@ export type FormFieldPrintMapping = {
 
 export type FormOutputKind = 'SEARCH' | 'READ_ONLY_SUMMARY' | 'CLINICAL_NOTE_DRAFT' | 'ORDER_DRAFT';
 
+/** MF-DI-07 — condiciones para campos de plantilla viva. */
+export type LiveTemplateCondition = 'requires_dm2' | 'requires_ckd' | 'requires_insulin';
+
 export type FormSection = {
   id: string;
   label: string;
@@ -45,6 +48,8 @@ export type FormField = {
   aiAllowed?: boolean;
   printMapping?: FormFieldPrintMapping;
   searchable?: boolean;
+  /** MF-DI-07 — visible solo si todas las condiciones se cumplen. */
+  liveWhen?: readonly LiveTemplateCondition[];
 };
 
 export type FormValidationRule = {

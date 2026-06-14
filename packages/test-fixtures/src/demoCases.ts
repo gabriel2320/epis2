@@ -3,7 +3,7 @@
  * IDs alineados con `database/migrations/004_seed_synthetic.sql` y `006_demo_five_cases.sql`.
  */
 
-import { SIM_CLINICAL_CASES } from './simCases.js';
+import { SIM_CLINICAL_CASES } from './simClinicalCases.js';
 
 export const SYNTHETIC_LABEL = 'DEMO/SINTÉTICO' as const;
 export const DEMO_IDENTIFIER_SYSTEM = 'EPIS2-DEMO' as const;

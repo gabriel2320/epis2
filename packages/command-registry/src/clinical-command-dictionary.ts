@@ -1,3 +1,8 @@
+import {
+  INSTITUTIONAL_DIAGNOSIS_PHRASE_WEIGHTS,
+  INSTITUTIONAL_LAB_PHRASE_WEIGHTS,
+  rankAutocompletePhrases,
+} from '@epis2/clinical-domain';
 import { EPIS2_COMMAND_DEFINITIONS } from './definitions.js';
 import type { ClinicalIntent } from './types.js';
 
@@ -133,18 +138,20 @@ export function getDictionaryEntriesByCategory(
   return CLINICAL_COMMAND_DICTIONARY.filter((e) => e.category === category);
 }
 
-/** Autocompletar frases para barra de comandos (prefijo normalizado). */
+/** Autocompletar frases para barra de comandos (prefijo normalizado + ranking MF-DI-03). */
 export function filterClinicalCommandAutocomplete(
   query: string,
   options?: {
     requiresPatient?: boolean | undefined;
     limit?: number | undefined;
     categories?: readonly ClinicalCommandCategory[] | undefined;
+    personalLabUsage?: Readonly<Record<string, number>> | undefined;
+    personalDiagnosisUsage?: Readonly<Record<string, number>> | undefined;
   },
 ): string[] {
   const q = query.trim().toLowerCase();
   const limit = options?.limit ?? 8;
-  const out: string[] = [];
+  const candidates: string[] = [];
   const seen = new Set<string>();
 
   for (const entry of CLINICAL_COMMAND_DICTIONARY) {
@@ -155,10 +162,47 @@ export function filterClinicalCommandAutocomplete(
       if (seen.has(key)) continue;
       if (!q || key.includes(q) || key.startsWith(q)) {
         seen.add(key);
-        out.push(phrase);
-        if (out.length >= limit) return out;
+        candidates.push(phrase);
       }
     }
+  }
+
+  const labPhrases = candidates.filter((phrase) =>
+    CLINICAL_COMMAND_DICTIONARY.some(
+      (entry) => entry.category === 'laboratorio' && entry.synonyms.includes(phrase),
+    ),
+  );
+  const dxPhrases = candidates.filter((phrase) =>
+    CLINICAL_COMMAND_DICTIONARY.some(
+      (entry) => entry.category === 'diagnostico' && entry.synonyms.includes(phrase),
+    ),
+  );
+  const otherPhrases = candidates.filter(
+    (phrase) => !labPhrases.includes(phrase) && !dxPhrases.includes(phrase),
+  );
+
+  const ranked = [
+    ...rankAutocompletePhrases(labPhrases, query, {
+      personalUsage: options?.personalLabUsage,
+      institutionalWeights: INSTITUTIONAL_LAB_PHRASE_WEIGHTS,
+      limit,
+    }),
+    ...rankAutocompletePhrases(dxPhrases, query, {
+      personalUsage: options?.personalDiagnosisUsage,
+      institutionalWeights: INSTITUTIONAL_DIAGNOSIS_PHRASE_WEIGHTS,
+      limit,
+    }),
+    ...otherPhrases,
+  ];
+
+  const out: string[] = [];
+  const outSeen = new Set<string>();
+  for (const phrase of ranked) {
+    const key = phrase.toLowerCase();
+    if (outSeen.has(key)) continue;
+    outSeen.add(key);
+    out.push(phrase);
+    if (out.length >= limit) break;
   }
   return out;
 }

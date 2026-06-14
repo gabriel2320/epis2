@@ -43,6 +43,8 @@ export type ClinicalShellProps = {
   onPrint?: (() => void) | undefined;
   userDisplayName?: string | undefined;
   userRoleLabel?: string | undefined;
+  /** MF-DI-01 — contexto clínico denso persistente. */
+  contextDenseStrip?: ReactNode | undefined;
   testId?: string | undefined;
 };
 
@@ -78,6 +80,7 @@ export function ClinicalShell({
   onPrint,
   userDisplayName,
   userRoleLabel,
+  contextDenseStrip,
   testId = 'epis2-clinical-shell-v2',
 }: ClinicalShellProps) {
   const identityProps: PatientIdentityBandProps = {
@@ -121,6 +124,7 @@ export function ClinicalShell({
       >
         <ClinicalInstitutionalHeader serviceUnit={headerServiceUnit ?? serviceUnit} />
         <PatientIdentityBand {...identityProps} />
+        {contextDenseStrip}
         <ClinicalActionBar
           chartMode={chartMode}
           onChartModeChange={onChartModeChange}

@@ -39,6 +39,10 @@ export const ASSIST_ROUTE_PHRASE_SUITE: readonly AssistRoutePhraseEntry[] = [
   { phrase: 'aplicar medicamento', hintIntent: 'record_medication_administration' },
   { phrase: 'registrar la toma', hintIntent: 'record_medication_administration' },
   { phrase: 'certificado para el trabajo', hintIntent: 'create_medical_certificate' },
+  { phrase: 'control diabetes', hintIntent: 'create_evolution_draft' },
+  { phrase: 'control dm2', hintIntent: 'create_evolution_draft' },
+  { phrase: 'renovar receta cronica', hintIntent: 'prepare_prescription' },
+  { phrase: 'solicitar laboratorio control dm2', hintIntent: 'request_laboratory' },
   { phrase: 'que dice la ia', hintIntent: 'summarize_patient' },
   { phrase: 'impresion diagnostica', hintIntent: 'register_problem' },
 ];

@@ -18,4 +18,15 @@ describe('extractSlots (CE-4)', () => {
     expect(slots.medicationHint).toBe('amoxicilina');
     expect(slots.urgencyHint).toBe('urgent');
   });
+
+  it('extrae control diabetes como motivo clínico (CE-6)', () => {
+    const slots = extractSlots('control diabetes');
+    expect(slots.clinicalReasonHint).toBe('Control diabetes mellitus tipo 2');
+  });
+
+  it('extrae panel control dm2 para laboratorio', () => {
+    const slots = extractSlots('solicitar panel control dm2');
+    expect(slots.studyHint).toBe('panel control dm2');
+    expect(slots.clinicalReasonHint).toBe('Control diabetes mellitus tipo 2');
+  });
 });

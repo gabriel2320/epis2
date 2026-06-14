@@ -85,6 +85,12 @@ export {
 } from './intent-metadata.js';
 export { applyContextScoreBoost, contextFallbackIntents } from './context-rank.js';
 export {
+  getProbablePatientActionChips,
+  inferPatientCareSetting,
+  type PatientCareSetting,
+  type ProbablePatientActionInput,
+} from './probableActions.js';
+export {
   TRADITIONAL_SECTION_NAV_IDS,
   assistBlueprintIntentBoost,
   isTraditionalSectionNavId,

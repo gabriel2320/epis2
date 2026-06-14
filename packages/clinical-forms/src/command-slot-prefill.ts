@@ -89,9 +89,12 @@ export function buildCommandSlotPrefill(
       break;
     }
     case 'evolution_note':
-      if (slots.noteHint) prefill.subjective = slots.noteHint;
-      if (slots.clinicalReasonHint && !slots.noteHint) {
-        prefill.subjective = slots.clinicalReasonHint;
+      if (slots.noteHint) {
+        prefill.subjective = slots.noteHint;
+      } else if (slots.clinicalReasonHint) {
+        prefill.subjective = slots.clinicalReasonHint.endsWith('.')
+          ? slots.clinicalReasonHint
+          : `${slots.clinicalReasonHint}.`;
       }
       break;
     case 'discharge_summary':

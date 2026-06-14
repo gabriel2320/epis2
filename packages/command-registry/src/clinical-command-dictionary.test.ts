@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import {
   CLINICAL_COMMAND_DICTIONARY,
   filterClinicalCommandAutocomplete,
-  getClinicalCommandMenuGroups,
   getDictionaryEntriesByCategory,
 } from './clinical-command-dictionary.js';
 
@@ -22,8 +21,8 @@ describe('clinical-command-dictionary', () => {
     expect(labs.every((e) => e.category === 'laboratorio')).toBe(true);
   });
 
-  it('genera grupos de menú', () => {
-    const groups = getClinicalCommandMenuGroups();
-    expect(groups.some((g) => g.category === 'diagnostico')).toBe(true);
+  it('prioriza frases de laboratorio con peso institucional (MF-DI-03)', () => {
+    const hits = filterClinicalCommandAutocomplete('lab', { limit: 5 });
+    expect(hits.some((h) => /laboratorio|hemograma|panel/i.test(h))).toBe(true);
   });
 });

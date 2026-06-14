@@ -1,6 +1,8 @@
 import { EpisAlert } from '@epis2/epis2-ui';
+import type { PostSaveMicrojourneyAction } from '@epis2/clinical-productivity';
 import type { ComponentProps } from 'react';
 import { ClinicalAlertsPanel } from '../../components/ClinicalAlertsPanel.js';
+import { PostSaveMicrojourneyPanel } from './PostSaveMicrojourneyPanel.js';
 
 /** Alerta de estado del formulario generado (guardado / info). */
 export function GeneratedFormStatusAlert({ message }: { message: string | undefined }) {
@@ -31,4 +33,14 @@ export function GeneratedFormClinicalAlerts({
 }: GeneratedFormClinicalAlertsProps) {
   if (!enabled) return null;
   return <ClinicalAlertsPanel alerts={alerts} loading={loading} hintBlueprintLabel={label} />;
+}
+
+export function GeneratedFormPostSaveMicrojourneys({
+  actions,
+  onDismiss,
+}: {
+  actions: readonly PostSaveMicrojourneyAction[];
+  onDismiss?: (() => void) | undefined;
+}) {
+  return <PostSaveMicrojourneyPanel actions={actions} onDismiss={onDismiss} />;
 }

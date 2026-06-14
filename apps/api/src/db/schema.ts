@@ -1,4 +1,4 @@
-import { boolean, char, date, integer, jsonb, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { boolean, char, date, integer, jsonb, pgTable, primaryKey, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 
 export const appUsers = pgTable('app_users', {
   id: text('id').primaryKey(),
@@ -494,3 +494,16 @@ export const aiRuns = pgTable('ai_runs', {
   errorMessage: text('error_message'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
+
+export const userOperationalMemory = pgTable(
+  'user_operational_memory',
+  {
+    userId: text('user_id')
+      .notNull()
+      .references(() => appUsers.id, { onDelete: 'cascade' }),
+    scope: text('scope').notNull(),
+    payload: jsonb('payload').notNull().default({}),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [primaryKey({ columns: [table.userId, table.scope] })],
+);

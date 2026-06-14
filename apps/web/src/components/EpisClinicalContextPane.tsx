@@ -1,4 +1,4 @@
-import type { PatientLongitudinalResponse } from '@epis2/contracts';
+import type { ClinicalAlert, PatientLongitudinalResponse } from '@epis2/contracts';
 
 type TimelineEvent = PatientLongitudinalResponse['timeline'][number];
 import { buildContextPanelSuggestions } from '@epis2/local-ai/contextPanelSuggestions';
@@ -24,12 +24,14 @@ import { fetchPatientLongitudinal } from '../api/clinicalApi.js';
 import { useAuth } from '../auth/AuthContext.js';
 import { useClinicalCommandSubmit } from '../clinical/useClinicalCommandSubmit.js';
 import { useCommandResolveContext } from '../clinical/useCommandResolveContext.js';
+import { useSilentClinicalSuggestions } from '../clinical/useSilentClinicalSuggestions.js';
 import {
   CLINICAL_SUMMARY_TIMELINE_KINDS,
   filterTimelineByKind,
   type TimelineKindFilter,
 } from './clinical-summary/clinicalSummaryTimeline.js';
 import { useClinicalContextPanelMeta } from './chart/ClinicalRightContextPanel.js';
+import { ClinicalSilentSuggestionsPanel } from './cds/ClinicalSilentSuggestionsPanel.js';
 import { EpisClinicalContextDocuments } from './EpisClinicalContextDocuments.js';
 import { EpisClinicalPeriodSummary } from './EpisClinicalPeriodSummary.js';
 import { ErrorState } from './ErrorState.js';
@@ -47,6 +49,13 @@ export type EpisClinicalContextPaneProps = {
   onInsertFragment?: (payload: ClinicalContextInsertPayload) => void;
   /** MF-TE-06 — contador eventos para panel lateral denso. */
   onTimelineCountChange?: (count: number) => void;
+  /** MF-DI-06 — alertas CDS/CDR para chips silenciosos. */
+  clinicalAlerts?: readonly ClinicalAlert[] | undefined;
+  summaryFields?: Record<string, string> | undefined;
+  longitudinalSnapshot?: Pick<
+    PatientLongitudinalResponse,
+    'allergies' | 'observations'
+  > | null | undefined;
 };
 
 type ContextTab = 'timeline' | 'documents';
@@ -76,7 +85,20 @@ function matchesTimelineQuery(ev: TimelineEvent, query: string): boolean {
 }
 
 /** Resumen + acciones sugeridas en panel lateral (MF-CM-05). */
-function EpisClinicalContextAiSection({ patientId }: { patientId: string }) {
+function EpisClinicalContextAiSection({
+  patientId,
+  clinicalAlerts,
+  summaryFields,
+  longitudinalSnapshot,
+}: {
+  patientId: string;
+  clinicalAlerts?: readonly ClinicalAlert[] | undefined;
+  summaryFields?: Record<string, string> | undefined;
+  longitudinalSnapshot?: Pick<
+    PatientLongitudinalResponse,
+    'allergies' | 'observations'
+  > | null | undefined;
+}) {
   const panelMeta = useClinicalContextPanelMeta();
   const { session } = useAuth();
   const commandContext = useCommandResolveContext('patient_chart');
@@ -119,8 +141,31 @@ function EpisClinicalContextAiSection({ patientId }: { patientId: string }) {
     ],
   );
 
+  const { suggestions: silentSuggestions, maxVisible } = useSilentClinicalSuggestions({
+    alerts: clinicalAlerts,
+    summaryFields,
+    longitudinal: longitudinalSnapshot
+      ? {
+          patientId,
+          readOnly: true,
+          problems: [],
+          allergies: longitudinalSnapshot.allergies,
+          medications: [],
+          observations: longitudinalSnapshot.observations,
+          documents: [],
+          encounters: [],
+          timeline: [],
+        }
+      : null,
+  });
+
   return (
     <Stack spacing={1.25} data-testid="epis2-context-ai-panel" sx={{ mb: 0.5 }}>
+      <ClinicalSilentSuggestionsPanel
+        suggestions={silentSuggestions}
+        maxVisible={maxVisible}
+        onSelectCommand={(label) => void submit(label)}
+      />
       <Typography variant="subtitle2" component="h3">
         {copy.ai.panelTitle}
       </Typography>
@@ -159,10 +204,16 @@ export function EpisClinicalContextPane({
   defaultInsertFieldId = 'plan',
   onInsertFragment,
   onTimelineCountChange,
+  clinicalAlerts,
+  summaryFields,
+  longitudinalSnapshot,
 }: EpisClinicalContextPaneProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | undefined>();
   const [timeline, setTimeline] = useState<TimelineEvent[]>([]);
+  const [fetchedLongitudinal, setFetchedLongitudinal] = useState<
+    Pick<PatientLongitudinalResponse, 'allergies' | 'observations'>
+  >({ allergies: [], observations: [] });
   const [search, setSearch] = useState('');
   const [kindFilter, setKindFilter] = useState<TimelineKindFilter>('all');
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -178,12 +229,17 @@ export function EpisClinicalContextPane({
       .then((res) => {
         if (cancelled) return;
         setTimeline(res.timeline);
+        setFetchedLongitudinal({
+          allergies: res.allergies,
+          observations: res.observations,
+        });
         setSelectedId(null);
       })
       .catch(() => {
         if (cancelled) return;
         setError(copy.errors.genericMessage);
         setTimeline([]);
+        setFetchedLongitudinal({ allergies: [], observations: [] });
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -290,7 +346,12 @@ export function EpisClinicalContextPane({
       <Typography variant="subtitle2" component="h2">
         {copy.clinicalLayout.contextPaneTitle}
       </Typography>
-      <EpisClinicalContextAiSection patientId={patientId} />
+      <EpisClinicalContextAiSection
+        patientId={patientId}
+        clinicalAlerts={clinicalAlerts}
+        summaryFields={summaryFields}
+        longitudinalSnapshot={longitudinalSnapshot ?? fetchedLongitudinal}
+      />
       <Tabs
         value={activeTab}
         onChange={(_, value) => setActiveTab(value as ContextTab)}

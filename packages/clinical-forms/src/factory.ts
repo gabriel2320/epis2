@@ -26,6 +26,7 @@ export type FieldDefinition = {
   aiAllowed?: boolean;
   printMapping?: FormFieldPrintMapping;
   searchable?: boolean;
+  liveWhen?: FormField['liveWhen'];
 };
 
 export function defineBlueprint(input: BlueprintInput): ClinicalFormBlueprint {
@@ -65,6 +66,7 @@ export function field(
   let aiAllowed: boolean | undefined;
   let printMapping: FormFieldPrintMapping | undefined;
   let searchable: boolean | undefined;
+  let liveWhen: FormField['liveWhen'];
 
   if (typeof requiredOrDef === 'boolean') {
     required = requiredOrDef;
@@ -83,6 +85,7 @@ export function field(
     aiAllowed = requiredOrDef.aiAllowed;
     printMapping = requiredOrDef.printMapping;
     searchable = requiredOrDef.searchable;
+    liveWhen = requiredOrDef.liveWhen;
   }
 
   const base: FormField = { id, label, type, required };
@@ -101,5 +104,6 @@ export function field(
   if (aiAllowed !== undefined) out = { ...out, aiAllowed };
   if (printMapping !== undefined) out = { ...out, printMapping };
   if (searchable !== undefined) out = { ...out, searchable };
+  if (liveWhen !== undefined) out = { ...out, liveWhen };
   return out;
 }

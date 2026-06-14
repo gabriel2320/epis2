@@ -17,6 +17,10 @@ type Options = {
   validate: () => Promise<boolean>;
   collectBody: () => Record<string, unknown>;
   onStatus: (message?: string) => void;
+  /** MF-DI-09 — validaciones admin extra antes de persistir. */
+  validateBeforeSave?: () => Promise<boolean>;
+  /** MF-DI-09 — tras guardar borrador (no firma). */
+  onDraftSaved?: (payload: { draftId: string; intent: SaveDraftIntent }) => void;
   /** MF-NORM-404: mapea details del envelope a errores RHF; devuelve cuántos aplicó. */
   applyServerErrors?: (error: unknown) => number;
 };
@@ -30,6 +34,8 @@ export function useGeneratedFormDraftPersistence({
   validate,
   collectBody,
   onStatus,
+  validateBeforeSave,
+  onDraftSaved,
   applyServerErrors,
 }: Options) {
   const navigate = useClinicalNavigate();
@@ -42,6 +48,10 @@ export function useGeneratedFormDraftPersistence({
     if (!valid) {
       onStatus(copy.forms.validationRequired);
       return;
+    }
+    if (validateBeforeSave) {
+      const adminOk = await validateBeforeSave();
+      if (!adminOk) return;
     }
     const persistBody = collectBody();
     const draftType = BLUEPRINT_DRAFT_TYPES[blueprint.blueprintId];
@@ -56,6 +66,7 @@ export function useGeneratedFormDraftPersistence({
         return;
       }
       onStatus(copy.forms.draftSaved);
+      onDraftSaved?.({ draftId, intent });
     };
     const onError = (e: unknown) => {
       // MF-NORM-404: si el envelope trae errores por campo, marcarlos en el form.

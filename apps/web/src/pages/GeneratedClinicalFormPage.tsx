@@ -39,7 +39,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   commandSlotsFromFormSearch,
   hasCommandSlotSearchParams,
-  stripCommandSlotsFromFormSearch,
 } from '../clinical/commandFormSearch.js';
 import type { ClinicalFormSearch } from '../routes/clinicalNavigate.js';
 import { pickAssistContextFromSummary } from '../api/clinicalApi.js';
@@ -64,7 +63,7 @@ import {
 } from '../clinical/clinicalTextBoxField.js';
 import { MedicationCatalogAutocomplete } from '../clinical/MedicationCatalogAutocomplete.js';
 import { useClinicalTextBoxOrigins } from '../clinical/useClinicalTextBoxOrigins.js';
-import { mergeDraftFieldMetaFromBody, stripDraftMetaFromBody } from '@epis2/clinical-productivity';
+import { mergeDraftFieldMetaFromBody, resolvePostSaveMicrojourneys, stripDraftMetaFromBody, type PostSaveMicrojourneyAction } from '@epis2/clinical-productivity';
 import { usePatientClinicalAlerts } from '../clinical/usePatientClinicalAlerts.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import type { ClinicalFormRoutePath } from '../routes/clinicalNavigate.js';
@@ -74,10 +73,12 @@ import { registerUnsavedWorkProbe, useClassicMd3Mode } from '../modes/index.js';
 import { ClassicMd3ClinicalPageShell } from '../components/classic-md3/ClassicMd3ClinicalPageShell.js';
 import {
   GeneratedFormClinicalAlerts,
+  GeneratedFormPostSaveMicrojourneys,
   GeneratedFormStatusAlert,
 } from '../clinical/generated-form/GeneratedFormSections.js';
 import { useGeneratedFormAiAssist } from '../clinical/generated-form/useGeneratedFormAiAssist.js';
 import { useGeneratedFormDraftPersistence } from '../clinical/generated-form/useGeneratedFormDraftPersistence.js';
+import { validateGeneratedFormAdminFields } from '../clinical/generated-form/validateGeneratedFormAdmin.js';
 
 export type GeneratedClinicalFormPageProps = {
   blueprint: ClinicalFormBlueprint;
@@ -116,6 +117,34 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     search.noteHint,
   ]);
 
+  const commandSlots = useMemo(
+    () => commandSlotsFromFormSearch(search),
+    [
+      search.patientHint,
+      search.medicationHint,
+      search.studyHint,
+      search.specialtyHint,
+      search.bodySiteHint,
+      search.urgencyHint,
+      search.clinicalReasonHint,
+      search.noteHint,
+    ],
+  );
+
+  const commandSlotsInUrl = useMemo(
+    () => hasCommandSlotSearchParams(search),
+    [
+      search.patientHint,
+      search.medicationHint,
+      search.studyHint,
+      search.specialtyHint,
+      search.bodySiteHint,
+      search.urgencyHint,
+      search.clinicalReasonHint,
+      search.noteHint,
+    ],
+  );
+
   const form = useEpisClinicalBlueprintForm({
     blueprint,
     ...(seed !== undefined ? { seed } : {}),
@@ -130,7 +159,9 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const printable = PRINTABLE_BLUEPRINTS[blueprint.blueprintId];
 
   const [showCommandPrefillBadge] = useState(() => hasCommandSlotSearchParams(search));
+  const [showContextPrefillBadge, setShowContextPrefillBadge] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
+  const [postSaveActions, setPostSaveActions] = useState<PostSaveMicrojourneyAction[]>([]);
   const [loadError, setLoadError] = useState<string | undefined>();
   const [patientSearch, setPatientSearch] = useState<string | undefined>();
   const [patientLookupQuery, setPatientLookupQuery] = useState('');
@@ -150,6 +181,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const editingDraftQuery = useDraftDetailQuery(editingDraftId);
   const { recordFieldOrigin, attachToDraftBody, loadFieldMeta } = useClinicalTextBoxOrigins();
   const hydratedDraftIdRef = useRef<string | null>(null);
+  const patientContextHydratedRef = useRef<string | null>(null);
+  const commandSlotsStrippedRef = useRef(false);
 
   useEffect(() => {
     if (!editingDraftId) {
@@ -334,6 +367,10 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   useEffect(() => {
     const res = patientDetailQuery.data;
     if (!res) return;
+    const hydrateKey = `${res.patient.id}:${blueprint.blueprintId}:${editingDraftId ?? ''}`;
+    if (patientContextHydratedRef.current === hydrateKey) return;
+    patientContextHydratedRef.current = hydrateKey;
+
     pinPatient(res.patient);
     setAssistContext(pickAssistContextFromSummary(res.clinicalContext.summaryFields));
     if (blueprint.blueprintId === 'patient_summary') {
@@ -343,20 +380,36 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     const contextPrefill = buildContextClinicalPrefill(
       blueprint.blueprintId,
       res.clinicalContext.summaryFields,
+      { slots: commandSlots },
     );
     if (Object.keys(contextPrefill).length > 0) {
       reset(mergePrefillOnlyEmpty(getValues(), contextPrefill));
+      if (!editingDraftId) {
+        setShowContextPrefillBadge(true);
+      }
     }
-  }, [patientDetailQuery.data, blueprint.blueprintId, pinPatient, getValues, reset]);
+  }, [
+    patientDetailQuery.data,
+    blueprint.blueprintId,
+    pinPatient,
+    reset,
+    commandSlots,
+    editingDraftId,
+  ]);
 
   useEffect(() => {
-    if (!hasCommandSlotSearchParams(search)) return;
+    if (!commandSlotsInUrl) {
+      commandSlotsStrippedRef.current = false;
+      return;
+    }
+    if (commandSlotsStrippedRef.current) return;
+    commandSlotsStrippedRef.current = true;
     navigate({
       to: blueprint.routePath as ClinicalFormRoutePath,
-      search: stripCommandSlotsFromFormSearch(search),
+      search: urlPatientId ? { patientId: urlPatientId } : {},
       replace: true,
     });
-  }, [blueprint.routePath, navigate, search]);
+  }, [blueprint.routePath, navigate, commandSlotsInUrl, urlPatientId]);
 
   const selectPatient = (id: string) => {
     const row = patients.find((p) => p.id === id);
@@ -384,12 +437,38 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     onStatus: setStatusMessage,
   });
 
+  const summaryFieldsForJourneys = patientDetailQuery.data?.clinicalContext.summaryFields;
+
+  const validateBeforeSave = useCallback(async () => {
+    const adminErrors = validateGeneratedFormAdminFields(blueprint.blueprintId, getValues());
+    for (const err of adminErrors) {
+      setError(err.fieldId, { type: 'manual', message: err.message });
+    }
+    if (adminErrors.length > 0) {
+      setStatusMessage(copy.forms.validationRequired);
+      return false;
+    }
+    return true;
+  }, [blueprint.blueprintId, getValues, setError]);
+
+  const handleDraftSaved = useCallback(() => {
+    setPostSaveActions(
+      resolvePostSaveMicrojourneys({
+        blueprintId: blueprint.blueprintId,
+        patientId: effectivePatientId,
+        summaryFields: summaryFieldsForJourneys,
+      }),
+    );
+  }, [blueprint.blueprintId, effectivePatientId, summaryFieldsForJourneys]);
+
   const { saveDraft, isSaving } = useGeneratedFormDraftPersistence({
     blueprint,
     patientId: effectivePatientId,
     editingDraftId,
     hasEditingDraft: Boolean(editingDraftQuery.data?.draft),
     validate: trigger,
+    validateBeforeSave,
+    onDraftSaved: handleDraftSaved,
     collectBody: () => attachToDraftBody(getValues()),
     onStatus: setStatusMessage,
     applyServerErrors: (e) =>
@@ -468,7 +547,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const headerExtra = (
     <>
       <EpisDemoBadgeChip label={copy.demoBadge} />
-      {showCommandPrefillBadge ? (
+      {showCommandPrefillBadge || showContextPrefillBadge ? (
         <EpisChip
           label={copy.forms.commandPrefillBadge}
           size="small"
@@ -550,6 +629,10 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
           label={blueprint.label}
         />
         <GeneratedFormStatusAlert message={statusMessage} />
+        <GeneratedFormPostSaveMicrojourneys
+          actions={postSaveActions}
+          onDismiss={() => setPostSaveActions([])}
+        />
       </Stack>
     );
 
@@ -651,6 +734,10 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
                 label={blueprint.label}
               />
               <GeneratedFormStatusAlert message={statusMessage} />
+              <GeneratedFormPostSaveMicrojourneys
+                actions={postSaveActions}
+                onDismiss={() => setPostSaveActions([])}
+              />
             </>
           }
         />
@@ -710,6 +797,10 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
           label={blueprint.label}
         />
         <GeneratedFormStatusAlert message={statusMessage} />
+        <GeneratedFormPostSaveMicrojourneys
+          actions={postSaveActions}
+          onDismiss={() => setPostSaveActions([])}
+        />
 
         <ClinicalPageNav patientId={effectivePatientId} />
       </EpisClinicalFormPage>

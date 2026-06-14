@@ -3,6 +3,7 @@ import type {
   PatientClinicalSummaryResponse,
   PatientLongitudinalResponse,
 } from '@epis2/contracts';
+import type { CommandChip } from '@epis2/command-registry';
 import { isSurgicalHistoryDescription } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
 import { Box, EpisButton, EpisChip, EpisM3Text, Stack } from '@epis2/epis2-ui';
@@ -27,6 +28,7 @@ import {
   type ClinicalSummaryIconKey,
 } from './clinicalSummaryCardIcons.js';
 import { EpisClinicalSummaryCard, type ClinicalSummarySurface } from './EpisClinicalSummaryCard.js';
+import { ClinicalProbableActionsPanel } from '../chart/ClinicalProbableActionsPanel.js';
 
 export type PatientClinicalSummaryGridProps = {
   /** Perfil visual — traditional en ficha EMR dual; calm en modo clásico MD3. */
@@ -41,6 +43,8 @@ export type PatientClinicalSummaryGridProps = {
   onOpenDraft?: ((draftId: string) => void) | undefined;
   onViewFullTimeline?: (() => void) | undefined;
   onOpenEvolution?: (() => void) | undefined;
+  probableActionChips?: readonly CommandChip[] | undefined;
+  onProbableAction?: ((commandSample: string) => void) | undefined;
   testId?: string;
 };
 
@@ -86,6 +90,8 @@ export function PatientClinicalSummaryGrid({
   onOpenDraft,
   onViewFullTimeline,
   onOpenEvolution,
+  probableActionChips,
+  onProbableAction,
   testId = 'epis2-clinical-summary-grid',
   surfaceProfile = 'calm',
 }: PatientClinicalSummaryGridProps) {
@@ -174,6 +180,10 @@ export function PatientClinicalSummaryGrid({
         >
           {criticalAlerts.map((a) => a.message).join(' · ')}
         </EpisClinicalSummaryCard>
+      ) : null}
+
+      {probableActionChips && probableActionChips.length > 0 && onProbableAction ? (
+        <ClinicalProbableActionsPanel chips={probableActionChips} onSelect={onProbableAction} />
       ) : null}
 
       <Box>

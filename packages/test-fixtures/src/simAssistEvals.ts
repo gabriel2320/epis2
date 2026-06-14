@@ -3,7 +3,7 @@
  * Usada por golden journey API y `npm run ai:evals:sim` (live, requiere dev:ai).
  */
 
-import { getSimCaseByCode, SIM_CLINICAL_CASES } from './simCases.js';
+import { getSimCaseByCode, SIM_CLINICAL_CASES } from './simClinicalCases.js';
 
 export type SimAssistBlueprintId =
   | 'evolution_note'

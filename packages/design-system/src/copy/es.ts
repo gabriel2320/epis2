@@ -699,6 +699,15 @@ export const copy = {
     timelineKindObservation: 'Resultados',
     timelineKindDocument: 'Documentos',
     timelineKindDraft: 'Borradores',
+    silentSuggestionsTitle: 'Pistas clínicas',
+    silentSuggestionsShowMore: 'Ver {count} más',
+    silentSuggestionsShowLess: 'Ocultar',
+  },
+  contextDense: {
+    activeProblems: 'Problemas activos',
+    activeMedications: 'Medicamentos activos',
+    lastEncounter: 'Última consulta',
+    episodeOpen: 'Episodio abierto',
   },
   chartModes: {
     traditional: 'Ficha electrónica',

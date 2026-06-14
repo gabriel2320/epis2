@@ -3,7 +3,8 @@
  */
 import postgres from 'postgres';
 import { afterAll, beforeAll, expect, it } from 'vitest';
-import { SIM_CLINICAL_CASES, stableSimCaseUuids } from '@epis2/test-fixtures';
+import { SIM_CLINICAL_CASES } from '@epis2/test-fixtures';
+import { stableSimCaseUuids } from '@epis2/test-fixtures/node';
 import { describeIntegration } from '@epis2/test-fixtures/integration';
 import { clinicalCaseRecordSchema } from '@epis2/contracts';
 import { buildApp } from '../app.js';

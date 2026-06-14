@@ -1,14 +1,27 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-13 · **HEAD:** ver git log
+**Actualizado:** 2026-06-14 · **HEAD committed:** `5b92002` · **WIP:** PROG-DI ~105 archivos (gitPending)
 
-Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan activo:** [`PROG-STRENGTHEN-2026`](../quality/strengthen-ledger.json) · `npm run quality:strengthen-next`
+Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:** [`epis2-plan-conciliacion-triada-2026-06-14.md`](../../reports/epis2-plan-conciliacion-triada-2026-06-14.md) · **Tríada:** [`EPIS2_TRIADA_REPOS.md`](./EPIS2_TRIADA_REPOS.md)
 
-> **Signoff experiencia core (2026-06-13):** tres frentes A/B/C cerrados (36/36). **PROG-STRENGTHEN-2026** reanudado.
+> **Signoff experiencia core (2026-06-13):** tres frentes A/B/C cerrados (36/36). **PROG-DI** cerrado en ledger (10/10) — **commit pendiente F2**. **PROG-STRENGTHEN** retoma tras push DI.
 
 ---
 
-## En curso — PROG-STRENGTHEN-2026
+## En curso — PROG-CONCILIACION-TRIADA-2026
+
+| Fase | Estado | Siguiente |
+|------|--------|-----------|
+| **S1 F0+F1** | ✓ inventario + docs | S2 F2-A gates DI |
+| **PROG-DI git** | WIP sin commit | `quality:di-signoff-gate` → push |
+| **epis2-evolab** | ahead 1 (`6b9e40b`) | F3 push + sync findings |
+| **EPIS2-MedRepo** | sin git · check rojo | F4 |
+
+Inventario: [`reports/conciliacion/`](../conciliacion/)
+
+---
+
+## Bloqueado hasta F2 — PROG-STRENGTHEN-2026
 
 | Subprograma | MF activa | Gate |
 |-------------|-----------|------|
@@ -27,6 +40,8 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan activo:** [`PR
 | SIGNOFF-EXPERIENCIA-CORE | `quality:experiencia-core-signoff-gate` · tres frentes 36/36 |
 | P1 ai:evals:sim | 13/13 · `reports/ai-evals-sim-2026-06-13.json` |
 | **MF-SH-01** draft trace | `043_approvals_ai_run.sql` · `quality:draft-trace-gate` · [`epis2-mf-sh-01-draft-trace.md`](../../reports/epis2-mf-sh-01-draft-trace.md) |
+| **S1 conciliación tríada** | F0 manifest + MF-DI map · F1 tablero/triada · [`conciliacion/`](../conciliacion/) · 2026-06-14 |
+| **PROG-DI** (ledger) | 10/10 DONE · **gitPending** · [`epis2-prog-di-close-2026.md`](../../reports/epis2-prog-di-close-2026.md) · commit en F2 |
 
 ---
 
@@ -101,7 +116,9 @@ Hilos C / PAPER / comando absorbidos en tres frentes. C-3 ✓ · MF-PAPER-01…0
 | MUI Select en E2E | `getByRole('combobox')` en formularios |
 | Dependabot zod 4.x | PR aparte |
 | **Storybook** (herramienta UI) | 12 stories; ampliar por IDC |
-| Evolab | Repo externo [epis2-evolab](https://github.com/gabriel2320/epis2-evolab) · 24 hallazgos abiertos |
+| Evolab | [epis2-evolab](https://github.com/gabriel2320/epis2-evolab) · ahead 1 · findings sync 2026-06-11 (stale) |
+| MedRepo | Local sin git · check rojo · ver F4 plan conciliación |
+| PROG-DI gitPending | ~105 archivos WIP — no mezclar con MF-SH-02 hasta F2 push |
 | PROG-AUTO-DEV-6H | Pausado — no relanzar `dev:auto:cycle` sin decisión explícita |
 
 ---

@@ -32,8 +32,10 @@ export async function pinDemoCase(page: Page, demoCode: string) {
   if (!demo) {
     throw new Error(`demoCode desconocido: ${demoCode}`);
   }
-  await page.goto(`/espacio/ficha?patientId=${demo.patientId}`);
-  await expect(page.getByTestId('epis2-patient-workspace')).toBeVisible({ timeout: 15_000 });
+  await page.goto(`/espacio/ficha?patientId=${demo.patientId}&chartMode=traditional`);
+  await expect(
+    page.getByTestId('epis2-patient-workspace').or(page.getByTestId('epis2-dual-chart-ficha')),
+  ).toBeVisible({ timeout: 15_000 });
 }
 
 /** Flujo UI Buscar → grid demo (alternativa cuando hace falta recorrer la búsqueda). */
@@ -59,4 +61,26 @@ export async function openAmbulatoryFromCommand(page: Page) {
 
 export async function clickModeSwitcher(page: Page, mode: 'command' | 'classic' | 'dashboard') {
   await page.getByTestId(`epis2-mode-switcher-${mode}`).click();
+}
+
+/** MF-CM-02 / MF-DI-10 — input real dentro del wrapper MUI de la paleta. */
+export async function fillCommandPaletteQuery(page: Page, query: string) {
+  await page.getByTestId('epis2-command-palette-query').locator('input').fill(query);
+}
+
+/** MF-DI-09 — borrador receta válido para guardar (todos los required del blueprint). */
+export async function fillMinimalPrescriptionDraft(page: Page) {
+  await expect(page.getByTestId('epis2-active-patient')).toBeVisible({ timeout: 15_000 });
+  const medication = page.getByTestId('epis2-medication-catalog-autocomplete-input');
+  await expect(async () => {
+    await medication.fill('Metformina 850 mg');
+    await expect(medication).toHaveValue('Metformina 850 mg');
+  }).toPass({ timeout: 15_000 });
+  await page.getByTestId('epis2-field-dose').locator('input').fill('1 comprimido');
+  await page.getByTestId('epis2-field-quantity').locator('input').fill('30 comprimidos');
+  await page.getByTestId('epis2-field-frequency').locator('input').fill('Cada 12 horas');
+  await page.getByTestId('epis2-field-duration').locator('input').fill('30 días');
+  await page.getByRole('textbox', { name: /indicaciones al paciente/i }).fill(
+    'Tomar con las comidas (demo E2E)',
+  );
 }

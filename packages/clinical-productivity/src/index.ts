@@ -1,4 +1,16 @@
 export {
+  CHILE_PREVISION_TYPES,
+  validateAdminPrevision,
+  validateAdminRut,
+  type AdminFieldValidation,
+  type ChilePrevisionType,
+} from './admin/chileAdminValidators.js';
+export {
+  resolvePostSaveMicrojourneys,
+  type PostSaveMicrojourneyAction,
+  type PostSaveMicrojourneyInput,
+} from './microjourneys/postSaveMicrojourneys.js';
+export {
   mapLabelValueRowsToDenseTabular,
   mapMarRowsToDenseTabular,
   type ClinicalDenseTabularRow,

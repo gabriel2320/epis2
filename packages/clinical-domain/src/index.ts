@@ -78,3 +78,31 @@ export type {
   SafetyAllergy,
   SafetyLab,
 } from './clinicalSafety/types.js';
+export {
+  buildClinicalContextDense,
+  formatRelativeClinicalAgeEs,
+  selectContextDenseLabHighlights,
+  type ClinicalContextDenseLabHighlight,
+  type ClinicalContextDensePayload,
+} from './clinicalContextDense.js';
+export {
+  buildSilentClinicalSuggestions,
+  SILENT_SUGGESTIONS_MAX_VISIBLE,
+  type BuildSilentSuggestionsInput,
+  type SilentClinicalSuggestion,
+  type SilentSuggestionVariant,
+} from './silentSuggestions/buildSilentSuggestions.js';
+export {
+  bumpUsageCount,
+  INSTITUTIONAL_DIAGNOSIS_PHRASE_WEIGHTS,
+  INSTITUTIONAL_LAB_PHRASE_WEIGHTS,
+  INSTITUTIONAL_MEDICATION_WEIGHTS,
+  rankAutocompletePhrases,
+  rankCatalogEntries,
+  type CatalogUsageDomain,
+  type RankCatalogEntryInput,
+} from './catalogFrequencyRank.js';
+export {
+  detectClinicalComorbiditySignals,
+  type ClinicalComorbiditySignals,
+} from './comorbiditySignals.js';

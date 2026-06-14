@@ -1,4 +1,10 @@
 import { copy } from '@epis2/design-system';
+import { buildClinicalContextDense } from '@epis2/clinical-domain';
+import { detectChronicFocus } from '@epis2/clinical-forms';
+import {
+  getProbablePatientActionChips,
+  inferPatientCareSetting,
+} from '@epis2/command-registry';
 import { getDemoCaseByPatientId } from '@epis2/test-fixtures';
 import { useSearch } from '@tanstack/react-router';
 import { useEffect, useMemo, useState } from 'react';
@@ -11,11 +17,13 @@ import { useAuth } from '../auth/AuthContext.js';
 import { classicCommandSuggestionLabels } from '../classic-md3/commandSuggestions.js';
 import { useCommandDictionarySuggestions } from '../clinical/useCommandDictionarySuggestions.js';
 import { ClinicalShell } from '../components/chart/ClinicalShell.js';
+import { ClinicalContextDenseStrip } from '../components/chart/ClinicalContextDenseStrip.js';
 import { PaperChartMode } from '../components/chart/PaperChartMode.js';
 import { TraditionalEhrMode } from '../components/chart/TraditionalEhrMode.js';
 import { CommandConfirmationDialog } from '../components/CommandConfirmationDialog.js';
 import { EpisClinicalContextPane } from '../components/EpisClinicalContextPane.js';
 import { useClinicalCommandSubmit } from '../clinical/useClinicalCommandSubmit.js';
+import { useOperationalMemory } from '../clinical/useOperationalMemory.js';
 import { useCommandResolveContext } from '../clinical/useCommandResolveContext.js';
 import type { ChartModeId } from '../dev/dualChartModesEnv.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
@@ -73,6 +81,14 @@ export function DualChartPatientPage({
   const chartMode: ChartModeId = resolveChartMode(chartSearch);
   const demoCase = useMemo(() => getDemoCaseByPatientId(patientId), [patientId]);
   const [contextEventCount, setContextEventCount] = useState<number | undefined>();
+  const [focusTimelineSection, setFocusTimelineSection] = useState<
+    'navEvolution' | undefined
+  >();
+
+  const handleViewFullTimeline = () => {
+    setFocusTimelineSection('navEvolution');
+    onViewFullTimeline();
+  };
 
   useEffect(() => {
     if (rawSearch.chartMode === 'traditional' || rawSearch.chartMode === 'paper') return;
@@ -90,8 +106,13 @@ export function DualChartPatientPage({
     onResolved: () => {},
   });
 
+  const { savedTraditionalSection, saveTraditionalSection, catalogUsage } = useOperationalMemory({
+    patientId,
+  });
+
   const dictionarySuggestions = useCommandDictionarySuggestions(classicCommand.query, {
     patientId,
+    catalogUsage,
   });
   const clarificationSuggestions = classicCommandSuggestionLabels(classicCommand.lastResult);
   const commandSuggestions =
@@ -124,6 +145,55 @@ export function DualChartPatientPage({
   const roleKey = session?.user.role as keyof typeof copy.roles | undefined;
   const userRoleLabel = roleKey ? (copy.roles[roleKey] ?? roleKey) : undefined;
 
+  const contextDense = useMemo(() => {
+    if (!longitudinal) return null;
+    return buildClinicalContextDense({
+      problems: longitudinal.problems,
+      medications: longitudinal.medications,
+      observations: longitudinal.observations,
+      encounters: longitudinal.encounters,
+      ultimoEncuentroAt: clinicalSummary?.ultimoEncuentroAt ?? null,
+      openEncounterId: detail.clinicalContext.openEncounterId ?? null,
+      careSettingLabel: demoCase?.scenario ?? copy.careSettings.ambulatory,
+    });
+  }, [longitudinal, clinicalSummary?.ultimoEncuentroAt, detail.clinicalContext.openEncounterId, demoCase?.scenario]);
+
+  const pendingDraftCount = useMemo(
+    () => longitudinal?.timeline.filter((event) => event.kind === 'draft').length ?? 0,
+    [longitudinal?.timeline],
+  );
+
+  const chronicFocus = useMemo(() => {
+    if (!summaryFields || Object.keys(summaryFields).length === 0) return null;
+    return detectChronicFocus(summaryFields);
+  }, [summaryFields]);
+
+  const probableActionChips = useMemo(() => {
+    if (!session) return [];
+    return getProbablePatientActionChips({
+      role: session.user.role,
+      permissions: session.permissions,
+      careSetting: inferPatientCareSetting({
+        hospitalizado: clinicalSummary?.hospitalizado,
+        scenarioLabel: demoCase?.scenario,
+      }),
+      context: {
+        workspace: 'patient_chart',
+        chartMode: 'traditional',
+        pendingDraftCount,
+        activeAlertCount: clinicalAlerts.length,
+      },
+      chronicFocus,
+    });
+  }, [
+    session,
+    clinicalSummary?.hospitalizado,
+    demoCase?.scenario,
+    pendingDraftCount,
+    clinicalAlerts.length,
+    chronicFocus,
+  ]);
+
   return (
     <>
       <ClinicalShell
@@ -149,6 +219,7 @@ export function DualChartPatientPage({
         onCommandSubmit={() => void classicCommand.submit()}
         commandSuggestions={commandSuggestions}
         onCommandSuggestion={(label) => void classicCommand.submit(label)}
+        contextDenseStrip={<ClinicalContextDenseStrip dense={contextDense} />}
         testId="epis2-dual-chart-ficha"
       >
         {chartMode === 'paper' ? (
@@ -176,13 +247,28 @@ export function DualChartPatientPage({
             onRegisterProblem={onRegisterProblem}
             onOpenResults={onOpenResults}
             onOpenDraft={onOpenDraft}
-            onViewFullTimeline={onViewFullTimeline}
+            onViewFullTimeline={handleViewFullTimeline}
             onOpenEvolution={onOpenEvolution}
+            probableActionChips={probableActionChips}
+            onProbableAction={(label) => void classicCommand.submit(label)}
+            initialTraditionalSection={savedTraditionalSection}
+            focusTraditionalSection={focusTimelineSection}
+            onTraditionalSectionPersist={saveTraditionalSection}
             contextEventCount={contextEventCount}
             contextPane={
               <EpisClinicalContextPane
                 patientId={patientId}
                 onTimelineCountChange={setContextEventCount}
+                clinicalAlerts={clinicalAlerts}
+                summaryFields={summaryFields}
+                longitudinalSnapshot={
+                  longitudinal
+                    ? {
+                        allergies: longitudinal.allergies,
+                        observations: longitudinal.observations,
+                      }
+                    : undefined
+                }
               />
             }
           />

@@ -39,7 +39,7 @@ export function extractSlots(raw: string): CommandSlots {
   }
 
   const studyMatch = normalized.match(
-    /(?:hemograma|glucosa|creatinina|perfil\s+hepatico|analitica|bioquimica|tac|tomografia|resonancia|rmn|rx|radiografia|ecografia|placa)/,
+    /(?:hemograma|glucosa|creatinina|hba1c|hemoglobina\s+glicosilada|perfil\s+bioquimico|perfil\s+hepatico|analitica|bioquimica|tac|tomografia|resonancia|rmn|rx|radiografia|ecografia|placa)/,
   );
   if (studyMatch?.[0]) {
     slots.studyHint = studyMatch[0];
@@ -64,6 +64,21 @@ export function extractSlots(raw: string): CommandSlots {
   const noteMatch = raw.match(/(?:nota|evolucion)\s*:\s*(.+)/i);
   if (noteMatch?.[1]) {
     slots.noteHint = noteMatch[1].trim().slice(0, 500);
+  }
+
+  if (/control\s+diabetes|control\s+dm2?\b|control\s+dm\b/.test(normalized)) {
+    slots.clinicalReasonHint = 'Control diabetes mellitus tipo 2';
+  } else if (/control\s+hta|control\s+hipertension/.test(normalized)) {
+    slots.clinicalReasonHint = 'Control hipertensión arterial';
+  } else if (/renovar\s+receta|receta\s+cronica|renovacion\s+de\s+receta/.test(normalized)) {
+    slots.clinicalReasonHint = 'Renovación receta crónica';
+  }
+
+  if (/panel\s+control\s+dm2|laboratorio\s+control\s+diabetes|control\s+dm2\s+lab/.test(normalized)) {
+    slots.studyHint = slots.studyHint ?? 'panel control dm2';
+    if (!slots.clinicalReasonHint) {
+      slots.clinicalReasonHint = 'Control diabetes mellitus tipo 2';
+    }
   }
 
   return slots;
