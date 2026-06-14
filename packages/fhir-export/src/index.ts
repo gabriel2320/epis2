@@ -66,3 +66,13 @@ export {
   validateMinsalPatientResource,
   type MinsalPatientSource,
 } from './minsalExport.js';
+export {
+  SNRE_IG_BASE,
+  EPIS2_SNRE_FHIR_BASE,
+  SNRE_STAGING_PROFILES,
+  EPIS2_SNRE_STAGING_TAG_SYSTEM,
+  buildSnreStagingJson,
+  toSnreStagingMedicationRequest,
+  validateSnreStagingMedicationRequest,
+  type SnreStagingPayload,
+} from './snreStaging.js';

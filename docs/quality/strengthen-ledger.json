@@ -488,7 +488,8 @@
       "subprogram": "PROG-INTEROP-CHILE",
       "phase": 2,
       "dependsOn": ["MF-IC-01"],
-      "state": "BLOCKED",
+      "state": "DONE",
+      "completedAt": "2026-06-15",
       "gate": null,
       "evidenceRequired": [
         "Draft prescription → MedicationRequest JSON staging",
