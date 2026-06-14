@@ -1,6 +1,6 @@
 import { sanitizeAiSuggestedFields } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
-import { consumeCommandAssistDraft } from '@epis2/local-ai/commandAssistDraft';
+import { consumeCommandAssistDraft } from '@epis2/ai-client/commandAssistDraft';
 import { useSearch } from '@tanstack/react-router';
 import { useEffect, useRef, useState } from 'react';
 import { requestDraftAssist } from '../../api/aiApi.js';

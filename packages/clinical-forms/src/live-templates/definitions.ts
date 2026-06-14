@@ -12,6 +12,38 @@ export type LiveTemplateDefinition = {
   extraFields: readonly FormField[];
 };
 
+export const CKD_RENAL_LIVE_TEMPLATE: LiveTemplateDefinition = {
+  templateId: 'ckd_renal_review',
+  blueprintId: 'evolution_note',
+  label: 'Seguimiento función renal',
+  suggestWhen: ['requires_ckd'],
+  extraSections: [
+    section('ckd_review', 'Seguimiento renal', ['ckdFunctionReview'], 'visible'),
+  ],
+  extraFields: [
+    field('ckdFunctionReview', 'Función renal (ERC)', 'textarea', {
+      clinicalTextBox: true,
+      variableKey: 'evolution.ckd.renal_review',
+    }),
+  ],
+};
+
+export const INSULIN_HYPO_LIVE_TEMPLATE: LiveTemplateDefinition = {
+  templateId: 'insulin_hypo_review',
+  blueprintId: 'evolution_note',
+  label: 'Control insulina e hipoglucemias',
+  suggestWhen: ['requires_insulin'],
+  extraSections: [
+    section('insulin_review', 'Insulina e hipoglucemias', ['insulinHypoReview'], 'visible'),
+  ],
+  extraFields: [
+    field('insulinHypoReview', 'Revisión hipoglucemias', 'textarea', {
+      clinicalTextBox: true,
+      variableKey: 'evolution.insulin.hypo_review',
+    }),
+  ],
+};
+
 export const DM2_CONTROL_LIVE_TEMPLATE: LiveTemplateDefinition = {
   templateId: 'dm2_control',
   blueprintId: 'evolution_note',
@@ -39,7 +71,11 @@ export const DM2_CONTROL_LIVE_TEMPLATE: LiveTemplateDefinition = {
   ],
 };
 
-export const EPIS2_LIVE_TEMPLATES: readonly LiveTemplateDefinition[] = [DM2_CONTROL_LIVE_TEMPLATE];
+export const EPIS2_LIVE_TEMPLATES: readonly LiveTemplateDefinition[] = [
+  DM2_CONTROL_LIVE_TEMPLATE,
+  CKD_RENAL_LIVE_TEMPLATE,
+  INSULIN_HYPO_LIVE_TEMPLATE,
+];
 
 const byId = new Map(EPIS2_LIVE_TEMPLATES.map((t) => [t.templateId, t]));
 

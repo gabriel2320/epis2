@@ -24,8 +24,19 @@ const defs = readFileSync(
   join(root, 'packages/clinical-forms/src/live-templates/definitions.ts'),
   'utf8',
 );
-for (const token of ['requires_ckd', 'requires_insulin', 'renalFunctionReview', 'hypoglycemiaReview']) {
-  if (!defs.includes(token)) errors.push(`definitions.ts debe incluir ${token}`);
+if (!defs.includes('insulin_hypo_review')) {
+  errors.push('definitions.ts debe incluir plantilla insulin_hypo_review');
+}
+if ((defs.match(/templateId:/g) ?? []).length < 3) {
+  errors.push('EPIS2_LIVE_TEMPLATES debe tener al menos 3 plantillas (MF-FF-08)');
+}
+
+const formPage = readFileSync(
+  join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'),
+  'utf8',
+);
+if (!formPage.includes('materializeLiveTemplateBlueprint')) {
+  errors.push('GeneratedClinicalFormPage debe cablear materializeLiveTemplateBlueprint');
 }
 
 const types = readFileSync(join(root, 'packages/clinical-forms/src/types.ts'), 'utf8');

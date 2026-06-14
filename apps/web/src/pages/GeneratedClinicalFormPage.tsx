@@ -5,8 +5,12 @@ import {
   blueprintUsesScrollspyLayout,
   buildCommandSlotPrefill,
   buildContextClinicalPrefill,
+  buildLiveTemplatePrefill,
+  canSuggestLiveTemplate,
   defaultClinicalContextInsertField,
   defaultSummaryValues,
+  EPIS2_LIVE_TEMPLATES,
+  materializeLiveTemplateBlueprint,
   mergePrefillOnlyEmpty,
   scrollspySectionLabels,
   type ClinicalFormBlueprint,
@@ -79,6 +83,13 @@ import {
 import { useGeneratedFormAiAssist } from '../clinical/generated-form/useGeneratedFormAiAssist.js';
 import { useGeneratedFormDraftPersistence } from '../clinical/generated-form/useGeneratedFormDraftPersistence.js';
 import { validateGeneratedFormAdminFields } from '../clinical/generated-form/validateGeneratedFormAdmin.js';
+import { isDualChartModesEnabled } from '../dev/dualChartModesEnv.js';
+import { TraditionalEhrMode } from '../components/chart/TraditionalEhrMode.js';
+import { usePatientLongitudinalQuery } from '../query/hooks/usePatientLongitudinalQuery.js';
+import { usePatientClinicalSummaryQuery } from '../query/hooks/usePatientClinicalSummaryQuery.js';
+import {
+  navigateBackToPaperChartFromPrescriptionForm,
+} from './prescriptionTripleViewNav.js';
 
 export type GeneratedClinicalFormPageProps = {
   blueprint: ClinicalFormBlueprint;
@@ -145,8 +156,41 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     ],
   );
 
+  const patientDetailQuery = usePatientDetailQuery(effectivePatientId);
+  const summaryFieldsForLive = patientDetailQuery.data?.clinicalContext.summaryFields ?? {};
+  const activeLiveTemplateId = useMemo(() => {
+    if (blueprint.blueprintId !== 'evolution_note') return undefined;
+    return EPIS2_LIVE_TEMPLATES.find(
+      (template) =>
+        template.blueprintId === blueprint.blueprintId &&
+        canSuggestLiveTemplate(template.templateId, summaryFieldsForLive),
+    )?.templateId;
+  }, [blueprint.blueprintId, summaryFieldsForLive]);
+
+  const effectiveBlueprint = useMemo(() => {
+    if (!activeLiveTemplateId) return blueprint;
+    return (
+      materializeLiveTemplateBlueprint(activeLiveTemplateId, blueprint, summaryFieldsForLive) ??
+      blueprint
+    );
+  }, [blueprint, activeLiveTemplateId, summaryFieldsForLive]);
+
+  const useTraditionalEvolutionShell =
+    isDualChartModesEnabled() &&
+    effectiveBlueprint.blueprintId === 'evolution_note' &&
+    Boolean(effectivePatientId);
+
+  const longitudinalQuery = usePatientLongitudinalQuery(
+    effectivePatientId,
+    useTraditionalEvolutionShell,
+  );
+  const clinicalSummaryQuery = usePatientClinicalSummaryQuery(
+    effectivePatientId,
+    useTraditionalEvolutionShell,
+  );
+
   const form = useEpisClinicalBlueprintForm({
-    blueprint,
+    blueprint: effectiveBlueprint,
     ...(seed !== undefined ? { seed } : {}),
   });
   const { watch, setValue, getValues, trigger, reset, formState, setError } = form;
@@ -177,7 +221,6 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     search: patientSearch,
     enabled: patientsFetchEnabled,
   });
-  const patientDetailQuery = usePatientDetailQuery(effectivePatientId);
   const editingDraftQuery = useDraftDetailQuery(editingDraftId);
   const { recordFieldOrigin, attachToDraftBody, loadFieldMeta } = useClinicalTextBoxOrigins();
   const hydratedDraftIdRef = useRef<string | null>(null);
@@ -220,8 +263,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     : 'plan';
 
   const scrollspySections = useMemo(
-    () => scrollspySectionLabels(blueprint, blueprint.blueprintId),
-    [blueprint],
+    () => scrollspySectionLabels(effectiveBlueprint, blueprint.blueprintId),
+    [effectiveBlueprint, blueprint.blueprintId],
   );
 
   const textBoxPatientContext = useMemo(() => {
@@ -388,6 +431,12 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
         setShowContextPrefillBadge(true);
       }
     }
+    if (activeLiveTemplateId) {
+      const livePrefill = buildLiveTemplatePrefill(activeLiveTemplateId, res.clinicalContext.summaryFields);
+      if (Object.keys(livePrefill).length > 0) {
+        reset(mergePrefillOnlyEmpty(getValues(), livePrefill));
+      }
+    }
   }, [
     patientDetailQuery.data,
     blueprint.blueprintId,
@@ -395,6 +444,8 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     reset,
     commandSlots,
     editingDraftId,
+    activeLiveTemplateId,
+    getValues,
   ]);
 
   useEffect(() => {
@@ -547,6 +598,18 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const headerExtra = (
     <>
       <EpisDemoBadgeChip label={copy.demoBadge} />
+      {activeLiveTemplateId ? (
+        <EpisChip
+          label={
+            EPIS2_LIVE_TEMPLATES.find((t) => t.templateId === activeLiveTemplateId)?.label ??
+            activeLiveTemplateId
+          }
+          size="small"
+          color="primary"
+          variant="outlined"
+          data-testid={`epis2-live-template-${activeLiveTemplateId}`}
+        />
+      ) : null}
       {showCommandPrefillBadge || showContextPrefillBadge ? (
         <EpisChip
           label={copy.forms.commandPrefillBadge}
@@ -573,6 +636,20 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
             />
           ) : null}
         </>
+      ) : null}
+      {blueprint.blueprintId === 'prescription' &&
+      search.chartMode === 'paper' &&
+      effectivePatientId ? (
+        <EpisButton
+          appearance="outlined"
+          size="small"
+          data-testid="epis2-prescription-back-paper"
+          onClick={() =>
+            navigateBackToPaperChartFromPrescriptionForm(navigate, effectivePatientId)
+          }
+        >
+          {copy.chartModes.paper}
+        </EpisButton>
       ) : null}
       {printable && effectivePatientId ? (
         <EpisButton
@@ -603,7 +680,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
         }}
       >
         <EpisM3Text role="titleLarge" component="h1">
-          {blueprint.label}
+          {effectiveBlueprint.label}
         </EpisM3Text>
         {canUseAiAssist ? <EpisAiDisclosure /> : null}
         <EpisClinicalSoapHints
@@ -613,11 +690,11 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
         />
         <EpisClinicalScrollspyLayout sections={scrollspySections}>
           <EpisClinicalFormRhf
-            blueprint={blueprint}
+            blueprint={effectiveBlueprint}
             clinicalProse={clinicalProse}
             clinicalDropEnabled
             onClinicalDrop={onClinicalDrop}
-            collapseNonPrimarySections={blueprint.sections.length > 2}
+            collapseNonPrimarySections={effectiveBlueprint.sections.length > 2}
             renderClinicalTextBox={renderClinicalTextBox}
             renderCatalogField={renderCatalogField}
           />
@@ -665,46 +742,67 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       );
     }
 
-    return (
-      <FormProvider {...form}>
-        <Box data-testid="epis2-generated-clinical-page" sx={{ width: '100%' }}>
-          <EpisClinicalTwoPaneLayout
-            appBar={
-              <EpisClinicalFocusAppBar
-                {...(activePatient?.displayName !== undefined
-                  ? { patientName: activePatient.displayName }
-                  : {})}
-                patientMeta={headerExtra}
-                contextOpen={contextOpen}
-                onContextOpenChange={setContextOpen}
-                showContextToggle={supportsClinicalContext}
-                contextOpenLabel={copy.clinicalLayout.splitOpen}
-                contextCloseLabel={copy.clinicalLayout.splitClose}
-                contextOpenAria={copy.clinicalLayout.splitOpenAria}
-                contextCloseAria={copy.clinicalLayout.splitCloseAria}
-                trailing={
-                  <EpisChip
-                    label={copy.clinicalLayout.draftStatus}
-                    size="small"
-                    variant="outlined"
-                    data-testid="epis2-draft-status-chip"
-                  />
-                }
-              />
-            }
-            actionPane={scrollspyMain}
+    const twoPaneLayout = (
+      <Box data-testid="epis2-generated-clinical-page" sx={{ width: '100%' }}>
+        <EpisClinicalTwoPaneLayout
+          appBar={
+            <EpisClinicalFocusAppBar
+              {...(activePatient?.displayName !== undefined
+                ? { patientName: activePatient.displayName }
+                : {})}
+              patientMeta={headerExtra}
+              contextOpen={contextOpen}
+              onContextOpenChange={setContextOpen}
+              showContextToggle={supportsClinicalContext}
+              contextOpenLabel={copy.clinicalLayout.splitOpen}
+              contextCloseLabel={copy.clinicalLayout.splitClose}
+              contextOpenAria={copy.clinicalLayout.splitOpenAria}
+              contextCloseAria={copy.clinicalLayout.splitCloseAria}
+              trailing={
+                <EpisChip
+                  label={copy.clinicalLayout.draftStatus}
+                  size="small"
+                  variant="outlined"
+                  data-testid="epis2-draft-status-chip"
+                />
+              }
+            />
+          }
+          actionPane={scrollspyMain}
+          contextPane={scrollspyContext}
+          contextOpen={contextOpen}
+          onContextOpenChange={setContextOpen}
+          footer={
+            <EpisClinicalFormFooter
+              actions={formActionBar}
+              trailing={<ClinicalPageNav patientId={effectivePatientId} />}
+            />
+          }
+        />
+      </Box>
+    );
+
+    if (useTraditionalEvolutionShell) {
+      return (
+        <FormProvider {...form}>
+          <TraditionalEhrMode
+            demoCaseCode={patientDetailQuery.data?.patient.demoCaseCode}
+            summaryFields={summaryFieldsForLive}
+            clinicalSummary={clinicalSummaryQuery.data ?? null}
+            longitudinal={longitudinalQuery.data ?? null}
+            alerts={clinicalAlerts}
+            initialTraditionalSection="navEvolution"
+            focusTraditionalSection="navEvolution"
+            mainContent={twoPaneLayout}
             contextPane={scrollspyContext}
-            contextOpen={contextOpen}
-            onContextOpenChange={setContextOpen}
-            footer={
-              <EpisClinicalFormFooter
-                actions={formActionBar}
-                trailing={<ClinicalPageNav patientId={effectivePatientId} />}
-              />
-            }
+            testId="epis2-evolution-traditional-shell"
           />
-        </Box>
-      </FormProvider>
+        </FormProvider>
+      );
+    }
+
+    return (
+      <FormProvider {...form}>{twoPaneLayout}</FormProvider>
     );
   }
 
@@ -721,9 +819,9 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
               </EpisM3Text>
               {canUseAiAssist ? <EpisAiDisclosure /> : null}
               <EpisClinicalFormRhf
-                blueprint={blueprint}
+                blueprint={effectiveBlueprint}
                 clinicalProse={clinicalProse}
-                collapseNonPrimarySections={blueprint.sections.length > 2}
+                collapseNonPrimarySections={effectiveBlueprint.sections.length > 2}
                 renderClinicalTextBox={renderClinicalTextBox}
                 renderCatalogField={renderCatalogField}
               />
@@ -762,7 +860,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
               loading={patientsFetching}
             />
             <EpisClinicalFormRhf
-              blueprint={blueprint}
+              blueprint={effectiveBlueprint}
               clinicalProse={clinicalProse}
               collapseNonPrimarySections={blueprint.sections.length > 2}
               renderClinicalTextBox={renderClinicalTextBox}
@@ -782,7 +880,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
         ) : (
           <>
             <EpisClinicalFormRhf
-              blueprint={blueprint}
+              blueprint={effectiveBlueprint}
               clinicalProse={clinicalProse}
               collapseNonPrimarySections={blueprint.sections.length > 2}
               renderClinicalTextBox={renderClinicalTextBox}

@@ -64,21 +64,35 @@ export function buildLiveTemplatePrefill(
   templateId: string,
   summaryFields: Record<string, string>,
 ): Record<string, string> {
-  if (templateId !== DM2_CONTROL_LIVE_TEMPLATE.templateId) return {};
-
   const signals = detectClinicalComorbiditySignals(summaryFields);
   const prefill: Record<string, string> = {};
 
-  if (signals.hasCkd) {
-    const labs = summaryFields.relevantLabs?.trim();
-    prefill.renalFunctionReview = labs
-      ? `Revisar función renal con laboratorio reciente: ${labs}. Ajustar metformina/SGLT2 según filtrado.`
-      : 'Revisar creatinina y filtrado glomerular. Documentar estadio ERC y ajuste posológico.';
+  if (templateId === DM2_CONTROL_LIVE_TEMPLATE.templateId) {
+    if (signals.hasCkd) {
+      const labs = summaryFields.relevantLabs?.trim();
+      prefill.renalFunctionReview = labs
+        ? `Revisar función renal con laboratorio reciente: ${labs}. Ajustar metformina/SGLT2 según filtrado.`
+        : 'Revisar creatinina y filtrado glomerular. Documentar estadio ERC y ajuste posológico.';
+    }
+    if (signals.onInsulin) {
+      prefill.hypoglycemiaReview =
+        'Indagar episodios hipoglucémicos desde último control. Revisar dosis basal/bolus y educación sobre manejo.';
+    }
+    return prefill;
   }
 
-  if (signals.onInsulin) {
-    prefill.hypoglycemiaReview =
-      'Indagar episodios hipoglucémicos desde último control. Revisar dosis basal/bolus y educación sobre manejo.';
+  if (templateId === 'ckd_renal_review' && signals.hasCkd) {
+    const labs = summaryFields.relevantLabs?.trim();
+    prefill.ckdFunctionReview = labs
+      ? `Seguimiento ERC — labs recientes: ${labs}.`
+      : 'Documentar estadio ERC, filtrado y ajuste de nefrotóxicos.';
+    return prefill;
+  }
+
+  if (templateId === 'insulin_hypo_review' && signals.onInsulin) {
+    prefill.insulinHypoReview =
+      'Indagar hipoglucemias, revisar esquema basal/bolus y educación sobre manejo.';
+    return prefill;
   }
 
   return prefill;

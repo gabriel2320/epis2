@@ -8,6 +8,7 @@ import { validate as explicitPerms } from './explicit-permissions.mjs';
 import { validate as aiBoundary } from './ai-write-boundary.mjs';
 import { validate as humanApproval } from './human-approval-required.mjs';
 import { validate as fhirBoundary } from './fhir-export-boundary.mjs';
+import { validate as aiClientBoundary } from './ai-client-boundary.mjs';
 import { validate as invariants } from './main-product-invariants.mjs';
 import { validate as noDirectMui } from './no-direct-mui-imports.mjs';
 import { validate as singleEpis2Theme } from './single-epis2-theme.mjs';
@@ -35,6 +36,7 @@ const VALIDATORS = [
   ['spanish-visible-copy', spanishCopy],
   ['explicit-permissions', explicitPerms],
   ['ai-write-boundary', aiBoundary],
+  ['ai-client-boundary', aiClientBoundary],
   ['human-approval-required', humanApproval],
   ['fhir-export-boundary', fhirBoundary],
 ];

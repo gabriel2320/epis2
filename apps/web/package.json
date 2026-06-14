@@ -19,7 +19,7 @@
     "@epis2/design-system": "*",
     "@epis2/epis2-ui": "*",
     "@epis2/epis2-widgets": "*",
-    "@epis2/local-ai": "*",
+    "@epis2/ai-client": "*",
     "@tanstack/react-query": "^5.101.0",
     "@tanstack/react-router": "^1.120.5",
     "react": "^19.1.0",

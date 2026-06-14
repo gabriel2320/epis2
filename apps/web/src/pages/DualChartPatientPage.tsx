@@ -177,7 +177,15 @@ export function DualChartPatientPage({
         onNewEvolution={onOpenEvolution}
         onNewOrder={onRegisterProblem}
         onOpenLab={onOpenResults}
-        onOpenPrescription={() => void navigate({ to: '/espacio/receta', search: { patientId } })}
+        onOpenPrescription={() =>
+          void navigate({
+            to: '/espacio/receta',
+            search: {
+              patientId,
+              ...(chartMode === 'paper' ? { chartMode: 'paper' as const } : {}),
+            },
+          })
+        }
         commandQuery={classicCommand.query}
         onCommandQueryChange={classicCommand.setQuery}
         onCommandSubmit={() => void classicCommand.submit()}

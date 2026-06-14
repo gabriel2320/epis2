@@ -26,6 +26,7 @@
     "start": "node dist/server.js"
   },
   "dependencies": {
+    "@epis2/ai-client": "*",
     "@epis2/clinical-domain": "*",
     "@epis2/contracts": "*",
     "@epis2/test-fixtures": "*",

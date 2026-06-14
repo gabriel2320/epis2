@@ -1,7 +1,7 @@
 import type { ClinicalAlert, PatientLongitudinalResponse } from '@epis2/contracts';
 
 type TimelineEvent = PatientLongitudinalResponse['timeline'][number];
-import { buildContextPanelSuggestions } from '@epis2/local-ai/contextPanelSuggestions';
+import { buildContextPanelSuggestions } from '@epis2/ai-client/contextPanelSuggestions';
 import { copy } from '@epis2/design-system';
 import {
   CLINICAL_CONTEXT_DRAG_MIME,

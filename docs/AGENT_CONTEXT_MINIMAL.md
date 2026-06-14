@@ -1,6 +1,6 @@
 # EPIS2 — Contexto mínimo para agentes (Cursor)
 
-**Versión:** 3.8 · **Ola 14 ✓** · **STRENGTHEN** 23/23 ✓ · **FICHA-FIRST wave 2** ✓
+**Versión:** 3.9 · **Ola 14 ✓** · **STRENGTHEN** 23/23 ✓ · **FICHA-FIRST wave 4** ✓
 
 > Canon completo solo si la tarea lo exige: `docs/PRODUCT_CANON.md`, `docs/product/PRODUCT_INVARIANTS.md`, `AGENTS.md`.
 
@@ -40,7 +40,7 @@ Un objetivo · pocos archivos · diff mínimo.
 | Programa | Estado | Comando estado |
 |----------|--------|----------------|
 | **PROG-RAPID** | ✓ cerrado | `npm run quality:rapid-gate` |
-| **PROG-FICHA-FIRST** | ✓ wave1 · ✓ wave2 · wave3 **MF-FF-07 ✓** · **MF-FF-08** READY | `quality:ficha-first-gate` |
+| **PROG-FICHA-FIRST** | ✓ wave1–4 · wave5 **MF-FF-14** READY | `quality:ficha-first-gate` |
 | **PROG-STRENGTHEN** | ✓ **23/23 cerrado** · MF-IC-01…04 ✓ | `npm run quality:strengthen-close-gate` |
 | **PROG-CDS-UX** | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
 
@@ -54,9 +54,9 @@ Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../rep
 
 **Ola 14:** ✓ MF-IC-04 HL7 quarantine hardening · [`epis2-prog-strengthen-close-2026.md`](../reports/epis2-prog-strengthen-close-2026.md)
 
-Cerrado: MF-IM-01…09 · **MF-CU-01…04** · **MF-IC-01…04** · **MF-FF-01…06** (wave1) · **PROG-STRENGTHEN** · PROG-RAPID · PROG-DI · tríada · PROG-IA-MODERNIZE · **PROG-CDS-UX**.
+Cerrado: MF-IM-01…09 · **MF-CU-01…04** · **MF-IC-01…04** · **MF-FF-01…13** (wave1–4) · **PROG-STRENGTHEN** · PROG-RAPID · PROG-DI · tríada · PROG-IA-MODERNIZE · **PROG-CDS-UX**.
 
-Siguiente producto: **PROG-FICHA-FIRST** wave 3 — **MF-FF-08** READY (`quality:ficha-first-next`). Visión: [`VISION_EPIS2.md`](product/VISION_EPIS2.md). **PROG-MEDIA-FUTURE** diferido 2027+.
+Siguiente producto: **PROG-FICHA-FIRST** wave 5 — **MF-FF-14** READY (`quality:ficha-first-next`). Visión: [`VISION_EPIS2.md`](product/VISION_EPIS2.md). **PROG-MEDIA-FUTURE** diferido 2027+.
 
 ---
 

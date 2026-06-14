@@ -5,7 +5,7 @@ import {
   resolveAssistBlueprintForIntent,
   shouldInvokeCommandAssistDraft,
   stashCommandAssistDraft,
-} from '@epis2/local-ai/commandAssistDraft';
+} from '@epis2/ai-client/commandAssistDraft';
 import { useCallback, useState } from 'react';
 import { fetchAiStatus, requestDraftAssist } from '../api/aiApi.js';
 import { ApiError } from '../api/client.js';

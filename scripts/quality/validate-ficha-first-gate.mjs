@@ -21,6 +21,12 @@ const required = [
   ['closure ff-04', 'reports/epis2-mf-ff-04-dashboard-secondary.md'],
   ['closure ff-05', 'reports/epis2-mf-ff-05-vision-agent.md'],
   ['closure ff-07', 'reports/epis2-mf-ff-07-probable-actions.md'],
+  ['closure ff-08', 'reports/epis2-mf-ff-08-live-templates.md'],
+  ['closure ff-09', 'reports/epis2-mf-ff-09-evolution-layout.md'],
+  ['closure ff-10', 'reports/epis2-mf-ff-10-prescription-a5.md'],
+  ['closure ff-11', 'reports/epis2-mf-ff-11-ai-client.md'],
+  ['closure ff-12', 'reports/epis2-mf-ff-12-web-ai-boundary.md'],
+  ['closure ff-13', 'reports/epis2-mf-ff-13-ai-assist.md'],
   ['vision', 'docs/product/VISION_EPIS2.md'],
 ];
 
@@ -63,6 +69,38 @@ if (!wave2 || wave2.state !== 'DONE') {
 const ff07 = ledger.phases?.find((p) => p.id === 'MF-FF-07');
 if (!ff07 || ff07.state !== 'DONE') {
   errors.push('ficha-first-ledger: MF-FF-07 debe estar DONE');
+}
+for (const id of ['MF-FF-08', 'MF-FF-09', 'MF-FF-10', 'MF-FF-11', 'MF-FF-12', 'MF-FF-13']) {
+  const phase = ledger.phases?.find((p) => p.id === id);
+  if (!phase || phase.state !== 'DONE') {
+    errors.push(`ficha-first-ledger: ${id} debe estar DONE`);
+  }
+}
+const wave3 = ledger.waves?.find((w) => w.id === 'wave-3');
+if (!wave3 || wave3.state !== 'DONE') {
+  errors.push('ficha-first-ledger: wave-3 debe estar DONE');
+}
+const wave4 = ledger.waves?.find((w) => w.id === 'wave-4');
+if (!wave4 || wave4.state !== 'DONE') {
+  errors.push('ficha-first-ledger: wave-4 debe estar DONE');
+}
+
+const formPage = readFileSync(join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'), 'utf8');
+if (!formPage.includes('buildLiveTemplatePrefill')) {
+  errors.push('GeneratedClinicalFormPage debe cablear live templates (MF-FF-08)');
+}
+if (!formPage.includes('epis2-evolution-traditional-shell')) {
+  errors.push('GeneratedClinicalFormPage debe usar TraditionalEhrMode para evolution (MF-FF-09)');
+}
+if (!existsSync(join(root, 'apps/web/src/pages/prescriptionTripleViewNav.ts'))) {
+  errors.push('Falta prescriptionTripleViewNav.ts (MF-FF-10)');
+}
+if (!existsSync(join(root, 'packages/ai-client/package.json'))) {
+  errors.push('Falta packages/ai-client (MF-FF-11)');
+}
+const webPkg = JSON.parse(readFileSync(join(root, 'apps/web/package.json'), 'utf8'));
+if (webPkg.dependencies?.['@epis2/local-ai']) {
+  errors.push('apps/web no debe depender de @epis2/local-ai (MF-FF-12)');
 }
 
 const workspacePage = readFileSync(join(root, 'apps/web/src/pages/PatientWorkspacePage.tsx'), 'utf8');
@@ -119,4 +157,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('ficha-first-gate OK — MF-FF-00…07 · wave-2/3');
+console.log('ficha-first-gate OK — MF-FF-00…13 · wave-1…4');

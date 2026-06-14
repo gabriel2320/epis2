@@ -14,7 +14,7 @@ vi.mock('../api/aiApi.js', () => ({
   requestDraftAssist,
 }));
 
-vi.mock('@epis2/local-ai/commandAssistDraft', () => ({
+vi.mock('@epis2/ai-client/commandAssistDraft', () => ({
   resolveAssistBlueprintForIntent: (intent: string) =>
     intent === 'create_evolution_draft' ? 'evolution_note' : undefined,
   shouldInvokeCommandAssistDraft: (intent: string, aiAvailable: boolean) =>
