@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-06-15T02:00:00.000Z",
-  "version": "8.1",
+  "generatedAt": "2026-06-15T16:00:00.000Z",
+  "version": "10.0",
   "mode": "parallel-wave",
-  "wave": 8,
+  "wave": 10,
   "waveMode": "fast-dev",
-  "activePhase": "A5b",
+  "activePhase": "A5c",
   "masterPlan": "reports/epis2-plan-desarrollo-unificado-2026-06-14.md",
   "orchestrationReport": "reports/epis2-orquestacion-paralela-2026-06-14.md",
   "iterationCommand": "npm run dev:rapid",
@@ -17,16 +17,16 @@
     },
     "PROG-STRENGTHEN": {
       "state": "ACTIVE",
-      "progress": "17/23",
-      "activeMicrophase": "MF-CU-03",
-      "nextMicrophase": "MF-CU-04",
+      "progress": "18/23",
+      "activeMicrophase": "MF-CU-04",
+      "nextMicrophase": "MF-IC-01",
       "ledger": "docs/quality/strengthen-ledger.json"
     },
     "PROG-CDS-UX": {
       "state": "ACTIVE",
-      "wave": 8,
-      "activeMicrophase": "MF-CU-03",
-      "nextMicrophase": "MF-CU-04",
+      "wave": 10,
+      "activeMicrophase": "MF-CU-04",
+      "nextMicrophase": "MF-IC-01",
       "subprogramOf": "PROG-STRENGTHEN",
       "ledger": "docs/quality/strengthen-ledger.json"
     }
@@ -54,8 +54,8 @@
   "workingTree": {
     "branch": "master",
     "pendingChanges": 0,
-    "aheadOfOrigin": 11,
-    "lastCommit": "310c909",
+    "aheadOfOrigin": 12,
+    "lastCommit": "e98af45",
     "summary": {},
     "commitOwner": "human"
   },
@@ -729,6 +729,106 @@
       }
     ]
   },
+  "wave9": {
+    "startedAt": "2026-06-15",
+    "completedAt": "2026-06-15",
+    "tracks": 3,
+    "outcome": "MF-CU-03 DONE · PROG-CDS-UX fase 3 · docs Ola 9 sync · STRENGTHEN 18/23",
+    "parallelTracks": [
+      {
+        "id": "wave9-track-1-layers",
+        "subagent": "layers-integrator",
+        "microphase": "MF-CU-03",
+        "state": "DONE",
+        "subprogram": "PROG-CDS-UX",
+        "objective": "Hook order-select — ClinicalCdsCard con alertas interacción/duplicidad al prescribir; estilo CDS Hooks sin servidor externo",
+        "allowedPaths": [
+          "apps/api/src/routes/cds/**",
+          "apps/web/src/pages/**/prescription/**",
+          "packages/clinical-domain/**",
+          "scripts/quality/validate-cds-hooks-gate.mjs"
+        ],
+        "forbiddenPaths": [
+          "packages/contracts/src/cds*.ts",
+          "apps/web/src/components/chart/**",
+          "e2e/**",
+          "reports/**",
+          "docs/**",
+          "database/migrations/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run quality:cds-hooks-gate",
+          "mfClose": "npm run quality:clinical"
+        },
+        "closureReport": "reports/epis2-mf-cu-03-order-select.md",
+        "prompt": "reports/dev-agent-prompt-layers-integrator.md",
+        "unblocks": ["MF-CU-04"]
+      },
+      {
+        "id": "wave9-track-2-gates",
+        "subagent": "gate-runner",
+        "microphase": "FAST-GATES-WORKING-TREE",
+        "state": "READY",
+        "objective": "dev:rapid + cds-hooks-gate — MF-CU-03 closure",
+        "allowedPaths": [
+          "reports/dev-agent-audit-diff-latest.json"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "validation": [
+            "npm run quality:fast",
+            "npm run quality:ficha-first-gate",
+            "npm run quality:cds-hooks-gate"
+          ],
+          "prePr": [
+            "npm run check",
+            "npm run test",
+            "npm run db:validate"
+          ]
+        },
+        "startWhen": "parallel",
+        "prompt": "reports/dev-agent-prompt-gate-runner.md"
+      },
+      {
+        "id": "wave9-track-3-writer",
+        "subagent": "ollama-dev-writer",
+        "microphase": "MF-RAPID-03-L0",
+        "state": "DONE",
+        "objective": "Documentación Ola 9 — sync brief, plan JSON, AGENT_CONTEXT, TABLERO",
+        "allowedPaths": [
+          "reports/**",
+          "docs/AGENT_CONTEXT_MINIMAL.md",
+          "docs/product/EPIS2_TABLERO.md"
+        ],
+        "forbiddenPaths": [
+          "apps/**",
+          "services/**",
+          "e2e/**",
+          "packages/**",
+          "database/migrations/**"
+        ],
+        "deliverables": [
+          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/dev-agent-orchestration-plan.json",
+          "reports/dev-agent-brief.md",
+          "docs/AGENT_CONTEXT_MINIMAL.md",
+          "docs/product/EPIS2_TABLERO.md"
+        ],
+        "gates": {
+          "iteration": "npm run dev:rapid",
+          "closure": "npm run dev:rapid -- --skip-audit"
+        },
+        "prompt": "reports/dev-agent-prompt-ollama-dev-writer.md"
+      }
+    ]
+  },
   "parallelTracks": [
     {
       "id": "track-1-clinical",
@@ -860,9 +960,9 @@
     "microphase": "MF-CU-03",
     "name": "Hook order-select (prescripción)",
     "subprogram": "PROG-CDS-UX",
-    "wave": null,
+    "wave": 9,
     "dependsOn": ["MF-CU-02"],
-    "state": "BLOCKED",
+    "state": "ACTIVE",
     "subagent": "layers-integrator",
     "gates": [
       "npm run quality:cds-hooks-gate"
@@ -874,16 +974,18 @@
     ],
     "forbiddenPaths": [
       "database/migrations/**",
-      "services/asr-local/**"
+      "services/asr-local/**",
+      "packages/contracts/src/cds*.ts"
     ],
     "closureReport": "reports/epis2-mf-cu-03-order-select.md",
-    "orchestrationReportSection": "reports/epis2-orquestacion-paralela-2026-06-14.md#18-próxima-ola--mf-cu-03-order-select-blocked"
+    "orchestrationReportSection": "reports/epis2-orquestacion-paralela-2026-06-14.md#19-ola-9--mf-cu-03-order-select-cds-hook"
   },
   "nextSession": {
     "microphase": "MF-CU-04",
     "name": "API /cds/cards interno",
-    "dependsOn": ["MF-CU-02"],
+    "dependsOn": ["MF-CU-03"],
     "state": "BLOCKED",
+    "wave": 10,
     "gates": [
       "npm run quality:cds-hooks-gate"
     ],
@@ -891,7 +993,8 @@
       "apps/api/src/routes/cds/**",
       "packages/contracts/src/cds*.ts"
     ],
-    "closureReport": "reports/epis2-mf-cu-04-cds-api.md"
+    "closureReport": "reports/epis2-mf-cu-04-cds-api.md",
+    "orchestrationReportSection": "reports/epis2-orquestacion-paralela-2026-06-14.md#20-próxima-ola--mf-cu-04-api-cdscards-blocked"
   },
   "startup": {
     "commands": [
@@ -905,7 +1008,7 @@
   },
   "requiresHumanReview": false,
   "risks": [
-    "Push remoto pendiente (11 commits ahead of origin/master)",
+    "Push remoto pendiente (12 commits ahead of origin/master)",
     "Mezcla CU-03 y CU-04 en misma sesión clínica",
     "Import @mui/* directo en apps/web (usar @epis2/epis2-ui / ClinicalCdsCard)",
     "E2E dual-chart requiere VITE_ENABLE_DUAL_CHART_MODES=true"

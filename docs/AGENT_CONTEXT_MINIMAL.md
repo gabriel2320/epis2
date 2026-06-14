@@ -1,6 +1,6 @@
 # EPIS2 — Contexto mínimo para agentes (Cursor)
 
-**Versión:** 2.8 · **MF-CU-02** ✓ · **STRENGTHEN** 17/23
+**Versión:** 3.0 · **MF-CU-03** ✓ · **STRENGTHEN** 18/23
 
 > Canon completo solo si la tarea lo exige: `docs/PRODUCT_CANON.md`, `docs/product/PRODUCT_INVARIANTS.md`, `AGENTS.md`.
 
@@ -31,32 +31,28 @@ MF-* / objetivo · zona · archivos permitidos · prohibidos · gate · riesgo
 
 Un objetivo · pocos archivos · diff mínimo.
 
-**No** iniciar la MF READY del ledger (`npm run quality:strengthen-next`) salvo petición explícita del usuario.
+**No** auto-iniciar otra MF READY del ledger salvo petición explícita del usuario.
 
 ---
 
-## Programa activo (2026-06-14)
+## Programa activo (2026-06-15)
 
 | Programa | Estado | Comando estado |
 |----------|--------|----------------|
 | **PROG-RAPID** | ✓ cerrado | `npm run quality:rapid-gate` |
 | **PROG-FICHA-FIRST** | ✓ wave1 cerrado · wave2 MF-FF-00 READY | `quality:ficha-first-gate` |
-| **PROG-STRENGTHEN** | **17/23** · MF-CU-01…02 ✓ | `npm run quality:strengthen-next` |
-| **PROG-CDS-UX** | MF-CU-02 ✓ · **MF-CU-03** siguiente | `quality:cds-hooks-gate` |
+| **PROG-STRENGTHEN** | **18/23** · MF-CU-01…03 ✓ | `npm run quality:strengthen-next` |
+| **PROG-CDS-UX** | MF-CU-03 ✓ · **MF-CU-04** siguiente | `quality:cds-hooks-gate` |
 
-Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.1 · orquestación: [`reports/epis2-orquestacion-paralela-2026-06-14.md`](../reports/epis2-orquestacion-paralela-2026-06-14.md) §17–§18
-
-**Ola 6:** ✓ MF-IM-09 OTel spans pipeline IA · `quality:ai-otel-gate` · PROG-IA-MODERNIZE completo.
-
-**Ola 7:** ✓ MF-CU-01 ClinicalCdsCard · unit tests + Storybook · `npm run check`.
+Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.1 · orquestación: [`reports/epis2-orquestacion-paralela-2026-06-14.md`](../reports/epis2-orquestacion-paralela-2026-06-14.md) §18–§19
 
 **Ola 8:** ✓ MF-CU-02 patient-view CDS hook · `quality:cds-hooks-gate`.
 
-Cerrado: MF-IM-01…09 · **MF-CU-01…02** · **MF-FF-01…06** (wave1) · PROG-RAPID · PROG-DI · tríada · PROG-IA-MODERNIZE.
+**Ola 9:** ✓ MF-CU-03 order-select CDS hook · API `/api/cds/order-select` · receta DEMO-005.
 
-Siguiente (blocked): **MF-CU-03** Hook order-select · gate `quality:cds-hooks-gate`.
+Cerrado: MF-IM-01…09 · **MF-CU-01…03** · **MF-FF-01…06** (wave1) · PROG-RAPID · PROG-DI · tríada · PROG-IA-MODERNIZE.
 
-Git: working tree limpio · **11 commits** ahead of `origin/master` (push humano).
+Siguiente (blocked): **MF-CU-04** API `/cds/cards` interno.
 
 ---
 

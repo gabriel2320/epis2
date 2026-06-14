@@ -1,6 +1,6 @@
 # EPIS2 — Plan de desarrollo unificado (modo rápido)
 
-**Versión:** 1.1 · **Fecha:** 2026-06-15 · **HEAD:** `310c909`  
+**Versión:** 1.2 · **Fecha:** 2026-06-15  
 **Supersede (parcial):** `epis2-plan-maestro-desarrollo-por-partes-2026-06-11.md` · `epis2-plan-fases-desarrollo-2026-06-13.md` · bloques A–C de `epis2-plan-correcciones-prioritarias-2026-06-14.md`
 
 > **Norte único:** un programa activo por sesión · gates por alcance · ledgers como verdad de microfases · tablero como índice humano.
@@ -15,7 +15,7 @@
 | **PROG-CONCILIACION-TRIADA** | ✓ CERRADO | F0–F7 · tríada Evolab/MedRepo |
 | **PROG-DI** (inteligencia determinística) | ✓ CERRADO | 10/10 MF · `di-ledger.json` |
 | **PROG-FICHA-FIRST** | ✓ wave1 CERRADO | MF-FF-01…06 · `quality:ficha-first-gate` · wave2 MF-FF-00 READY |
-| **PROG-STRENGTHEN** | ACTIVO **17/23** | MF-SH-01…06 ✓ · MF-IM-01…09 ✓ · **MF-CU-01…02 ✓** · **siguiente MF-CU-03** |
+| **PROG-STRENGTHEN** | ACTIVO **18/23** | MF-SH-01…06 ✓ · MF-IM-01…09 ✓ · **MF-CU-01…03 ✓** · **siguiente MF-CU-04** |
 | **PROG-COMPACTACION** (bloque D correcciones) | DIFERIDO | Tras STRENGTHEN CU-03…04 o cierre parcial CDS |
 
 **Home canónica (unificada):** `/espacio/buscar-paciente` · barra transversal · `/comando` = redirect compat.
@@ -64,7 +64,8 @@ Sesión
 | A4 | **MF-IM-08** | Anti feedback-loop (policy assist) | `ai:evals:feedback-loop` | ✓ |
 | A4b | **MF-IM-09** | OTel spans pipeline IA | `quality:ai-otel-gate` | ✓ |
 | A5 | **MF-CU-01…02** | CDS UX patient-view hook | `quality:cds-hooks-gate` | ✓ |
-| A5b | **MF-CU-03…04** | order-select + API `/cds/cards` | `quality:cds-hooks-gate` | **siguiente** (BLOCKED) |
+| A5b | **MF-CU-03** | order-select hook | `quality:cds-hooks-gate` | ✓ |
+| A5c | **MF-CU-04** | API `/cds/cards` | `quality:cds-hooks-gate` | **siguiente** (BLOCKED) |
 | A6 | **MF-IC-01…04** | Interop Chile (FHIR, SNRE staging) | `db:validate` + tests export | BLOCKED |
 
 **Regla:** un MF-SH/IM/CU/IC por sesión · no auto-iniciar MF READY sin petición explícita.
@@ -101,11 +102,11 @@ flowchart LR
     DI[PROG-DI]
     FF[PROG-FICHA-FIRST]
   end
-  subgraph activo [Activo 17/23]
+  subgraph activo [Activo 18/23]
     SH[STRENGTHEN SH done]
     IM[STRENGTHEN IM 01-09 done]
-    CU[MF-CU-01-02 done]
-    CU3[MF-CU-03 next]
+    CU[MF-CU-01-03 done]
+    CU4[MF-CU-04 blocked]
     IC[STRENGTHEN Interop]
   end
   subgraph diferido [Diferido]
@@ -133,8 +134,8 @@ flowchart LR
 
 ```text
 Programa: PROG-STRENGTHEN · PROG-CDS-UX
-MF:       MF-CU-03 Hook order-select (prescripción)
-Allowlist: apps/api/src/routes/cds/**, apps/web/src/pages/**/prescription/**, packages/clinical-domain/**
+MF:       MF-CU-04 API /cds/cards interno
+Allowlist: apps/api/src/routes/cds/**, packages/contracts/src/cds*.ts
 Gate:     npm run quality:cds-hooks-gate
 Arranque: npm run dev:velocity
 Iteración: npm run dev:rapid

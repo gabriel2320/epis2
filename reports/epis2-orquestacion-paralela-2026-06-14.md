@@ -697,14 +697,14 @@ flowchart TB
 | **MF-IM-09** OTel spans pipeline IA | [`epis2-mf-im-09-otel.md`](./epis2-mf-im-09-otel.md) · gate `quality:ai-otel-gate` |
 | **PROG-IA-MODERNIZE** | MF-IM-01…09 ✓ |
 
-### Pendientes abiertos
+### Pendientes abiertos (Ola 6 — ✓ cerrada)
 
 | Item | Estado | Notas |
 |------|--------|-------|
-| **MF-CU-01** ClinicalCdsCard | **→ Ola 7 EN CURSO** | ver §16 · PROG-CDS-UX |
-| **Commit tree** | **HUMANO** | ~68 cambios acumulados; sin push automático |
+| **MF-CU-01** ClinicalCdsCard | ✓ **→ Ola 7 cerrada** | ver §16 · [`epis2-mf-cu-01-cds-card.md`](./epis2-mf-cu-01-cds-card.md) |
+| **Commit tree** | **HUMANO** | push pendiente; sin commit automático |
 
-**STRENGTHEN:** **15/23** MF cerradas · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
+**STRENGTHEN:** **15/23** MF cerradas (al cierre Ola 6) · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
 
 ```mermaid
 flowchart TB
@@ -741,14 +741,14 @@ flowchart TB
 | **PROG-FICHA-FIRST wave1** | [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](./epis2-prog-ficha-first-wave1-close-2026-06-14.md) |
 | **E2E Fase B** censo-first | 10 specs migrados · `getTransversalCommandBar` |
 
-### Pendientes abiertos
+### Pendientes abiertos (Ola 7 — ✓ cerrada)
 
 | Item | Estado | Notas |
 |------|--------|-------|
-| **MF-CU-02** Hook patient-view | **→ Ola 8 EN CURSO** | ver §17 · `quality:cds-hooks-gate` |
-| **Commit tree** | **HUMANO** | ~68 cambios acumulados; sin push automático |
+| **MF-CU-02** Hook patient-view | ✓ **→ Ola 8 cerrada** | ver §17 · [`epis2-mf-cu-02-patient-view.md`](./epis2-mf-cu-02-patient-view.md) |
+| **Commit tree** | **HUMANO** | push pendiente; sin commit automático |
 
-**STRENGTHEN:** **16/23** MF cerradas · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
+**STRENGTHEN:** **16/23** MF cerradas (al cierre Ola 7) · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
 
 ```mermaid
 flowchart TB
@@ -859,16 +859,16 @@ flowchart TB
 | **PROG-IA-MODERNIZE** | MF-IM-01…09 ✓ |
 | **PROG-FICHA-FIRST wave1** | [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](./epis2-prog-ficha-first-wave1-close-2026-06-14.md) |
 
-### Pendientes abiertos
+### Pendientes abiertos (Ola 8 — ✓ cerrada)
 
 | Item | Estado | Notas |
 |------|--------|-------|
-| **MF-CU-02** Hook patient-view | **✓ CERRADO** | [`epis2-mf-cu-02-patient-view.md`](./epis2-mf-cu-02-patient-view.md) · commits `654bf93` · `310c909` |
-| **MF-CU-03** Hook order-select | **BLOCKED** | Tras CU-02 ✓ |
-| **MF-CU-04** API `/cds/cards` | **BLOCKED** | Tras CU-02 ✓ |
-| **Push remoto** | **HUMANO** | 11 commits ahead of `origin/master` |
+| **MF-CU-02** Hook patient-view | ✓ **CERRADO** | [`epis2-mf-cu-02-patient-view.md`](./epis2-mf-cu-02-patient-view.md) · commits `654bf93` · `310c909` |
+| **MF-CU-03** Hook order-select | ✓ **CERRADO** | [`epis2-mf-cu-03-order-select.md`](./epis2-mf-cu-03-order-select.md) · ver §19 |
+| **MF-CU-04** API `/cds/cards` | **BLOCKED** | ver §20 · sesión dedicada |
+| **Push remoto** | **HUMANO** | 13+ commits ahead of `origin/master` |
 
-**STRENGTHEN:** **17/23** MF cerradas · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
+**STRENGTHEN:** **18/23** MF cerradas · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
 
 ```mermaid
 flowchart TB
@@ -963,14 +963,145 @@ flowchart TB
 5. Tras CU-02: MF-CU-03 order-select o MF-CU-04 API (sesión dedicada · no mezclar)
 ```
 
-*Actualizado 2026-06-15 · Ola 8 ✓ cerrada · MF-CU-02 ✓ · STRENGTHEN 17/23 · HEAD `310c909`*
+*Actualizado 2026-06-15 · Ola 8 ✓ cerrada · MF-CU-02 ✓ · STRENGTHEN 17/23 · HEAD `e98af45`*
 
 ---
 
-## 18. Próxima ola — MF-CU-03 order-select (blocked)
+## 18. Ola 9 — MF-CU-03 order-select (✓ cerrada)
 
-**MF:** MF-CU-03 — Hook order-select (prescripción) · **Gate:** `quality:cds-hooks-gate`  
-**Allowlist:** `apps/api/src/routes/cds/**`, `apps/web/src/pages/**/prescription/**`, `packages/clinical-domain/**`  
-**Subagente sugerido:** `layers-integrator` + `gate-runner` + `ollama-dev-writer` (patrón 3 tracks)
+**MF:** MF-CU-03 — Hook order-select (prescripción) · **Gate:** `quality:cds-hooks-gate` ✓  
+**Evidencia:** [`epis2-mf-cu-03-order-select.md`](./epis2-mf-cu-03-order-select.md) · detalle operativo §19
 
-No iniciar salvo petición explícita del usuario (`strengthen-ledger.json` · `AGENT_CONTEXT_MINIMAL.md`).
+**Siguiente:** MF-CU-04 API `/cds/cards` · §20
+
+---
+
+## 19. Ola 9 — MF-CU-03 order-select CDS hook
+
+**Versión ola:** 9.0 · **Modo:** fast dev (`npm run dev:rapid`) · **Tracks:** 3 en paralelo  
+**Plan maestro:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](./epis2-plan-desarrollo-unificado-2026-06-14.md)
+
+> Tras cierre de Ola 8 (MF-CU-02 patient-view ✓), la Ola 9 integra el **hook order-select**: alertas interacción/duplicidad al prescribir. Reutiliza `ClinicalCdsCard` y la infra CDS de CU-02; **no** expone API `/cds/cards` completa (CU-04).
+
+### Pendientes cerrados (Ola 1–9)
+
+| Item | Evidencia |
+|------|-----------|
+| **MF-CU-01** ClinicalCdsCard | [`epis2-mf-cu-01-cds-card.md`](./epis2-mf-cu-01-cds-card.md) |
+| **MF-CU-02** Hook patient-view | [`epis2-mf-cu-02-patient-view.md`](./epis2-mf-cu-02-patient-view.md) |
+| **MF-CU-03** Hook order-select | [`epis2-mf-cu-03-order-select.md`](./epis2-mf-cu-03-order-select.md) |
+| **PROG-IA-MODERNIZE** | MF-IM-01…09 ✓ |
+| **PROG-FICHA-FIRST wave1** | [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](./epis2-prog-ficha-first-wave1-close-2026-06-14.md) |
+
+### Pendientes abiertos
+
+| Item | Estado | Notas |
+|------|--------|-------|
+| **MF-CU-04** API `/cds/cards` | **BLOCKED** | Track `layers-integrator` · gate `quality:cds-hooks-gate` · ver §20 |
+| **Push remoto** | **HUMANO** | 13+ commits ahead of `origin/master` |
+
+**STRENGTHEN:** **18/23** MF cerradas · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
+
+```mermaid
+flowchart TB
+  subgraph ola9 [Ola 9 — fast dev 2026-06-15]
+    L9[layers-integrator<br/>MF-CU-03 order-select]
+    R9[gate-runner<br/>dev:rapid + cds-hooks-gate]
+    W9[ollama-dev-writer<br/>docs + plan JSON]
+  end
+  PLAN9[plan-desarrollo-unificado] --> ola9
+  L9 -->|cierra CU-03| CU04[MF-CU-04 API /cds/cards]
+  R9 -->|validación| GATES9[quality:cds-hooks-gate]
+  W9 -->|L0| DOCS9[brief + AGENT_CONTEXT + este doc]
+```
+
+---
+
+### Track 1 — `layers-integrator` → MF-CU-03 order-select hook
+
+| Campo | Valor |
+|-------|-------|
+| **MF** | MF-CU-03 — Hook order-select (prescripción) |
+| **Subprograma** | PROG-CDS-UX |
+| **Objetivo** | Al seleccionar/prescribir medicamento, mostrar `ClinicalCdsCard` con alertas interacción/duplicidad demo; hook order-select estilo CDS Hooks (sin servidor externo) |
+| **Allowlist** | `apps/api/src/routes/cds/**`, `apps/web/src/pages/**/prescription/**`, `packages/clinical-domain/**`, `scripts/quality/validate-cds-hooks-gate.mjs` |
+| **Gate cierre** | `npm run quality:cds-hooks-gate` |
+| **Iteración** | `npm run dev:rapid` |
+| **Prompt** | [`dev-agent-prompt-layers-integrator.md`](./dev-agent-prompt-layers-integrator.md) |
+| **Reporte cierre** | `reports/epis2-mf-cu-03-order-select.md` |
+
+**Prerrequisitos:** MF-CU-01 ✓ · MF-CU-02 ✓ · dual-chart ON (ficha-first) · reutilizar `ClinicalCdsCard` (no `@mui/*` directo en web).
+
+**Evidencia requerida:** alertas interacción/duplicidad al prescribir · test API + E2E receta demo · `scripts/quality/validate-cds-hooks-gate.mjs`
+
+**Prohibido:** API `/cds/cards` completa (CU-04), migraciones, FHIR server externo, tocar hook patient-view salvo contrato compartido mínimo.
+
+---
+
+### Track 2 — `gate-runner` → fast gates + cds-hooks
+
+| Campo | Valor |
+|-------|-------|
+| **MF** | Validación transversal (no implementa features) |
+| **Objetivo** | `dev:rapid` + `quality:cds-hooks-gate` sobre working tree acumulado |
+| **Allowlist** | lectura global · escritura solo en `reports/dev-agent-audit-diff-latest.json` |
+| **Gates** | `npm run dev:rapid` · `npm run quality:ficha-first-gate` · `npm run quality:cds-hooks-gate` |
+| **Cierre sesión (si humano pide pre-PR)** | `npm run check` · `npm run test` · `npm run db:validate` |
+| **Iteración** | `npm run dev:rapid` |
+| **Prompt** | [`dev-agent-prompt-gate-runner.md`](./dev-agent-prompt-gate-runner.md) |
+
+**Rol:** validar FICHA-FIRST + arquitectura + gate CDS mientras CU-03 toca `apps/web`, `apps/api` y prescripción.
+
+---
+
+### Track 3 — `ollama-dev-writer` → documentación orquestación (este entregable)
+
+| Campo | Valor |
+|-------|-------|
+| **MF** | MF-RAPID-03 / L0 dev-write |
+| **Objetivo** | Sync brief, plan JSON, AGENT_CONTEXT y sección Ola 9 |
+| **Allowlist** | `reports/**`, `docs/AGENT_CONTEXT_MINIMAL.md`, `docs/product/EPIS2_TABLERO.md` |
+| **Prohibido** | `apps/**`, `services/**`, `e2e/**`, `packages/**` clínicos |
+| **Gate cierre** | `npm run dev:rapid -- --skip-audit` |
+| **Iteración** | `npm run dev:rapid` |
+| **Prompt** | [`dev-agent-prompt-ollama-dev-writer.md`](./dev-agent-prompt-ollama-dev-writer.md) |
+
+---
+
+### Matriz Ola 9 (3 tracks)
+
+| Zona | Track dueño | Prohibido para otros |
+|------|-------------|---------------------|
+| `apps/web/src/pages/**/prescription/**` | layers-integrator | dev-writer, gate-runner (escritura) |
+| `apps/api/src/routes/cds/**` | layers-integrator | dev-writer |
+| `packages/clinical-domain/**` | layers-integrator | dev-writer |
+| `scripts/quality/validate-cds-hooks-gate.mjs` | layers-integrator | dev-writer |
+| `reports/**`, `docs/AGENT_CONTEXT_MINIMAL.md` | ollama-dev-writer | layers-integrator |
+| `packages/contracts/src/cds*.ts` | — | **todos** (alcance CU-04) |
+| `database/migrations/**` | — | **todos** |
+
+**Comando iteración unificado (todos los tracks):** `npm run dev:rapid`
+
+### Arranque Ola 9
+
+```text
+1. Humano: npm run stack:dev && npm run dev:velocity
+2. Cursor: @reports/dev-agent-brief.md + dev-agent-prompt-layers-integrator.md
+3. Paralelo (3 ventanas):
+   ├─ layers-integrator  → MF-CU-03 order-select hook
+   ├─ gate-runner        → dev:rapid + cds-hooks-gate
+   └─ ollama-dev-writer  → docs Ola 9
+4. Humano reconcilia working tree antes de commit (solo si lo pide)
+5. Tras CU-03: MF-CU-04 API /cds/cards (sesión dedicada · no mezclar)
+```
+
+*Actualizado 2026-06-15 · Ola 9 ✓ cerrada · MF-CU-03 ✓ · STRENGTHEN 18/23*
+
+---
+
+## 20. Próxima ola — MF-CU-04 API `/cds/cards` (blocked)
+
+**MF:** MF-CU-04 — API interna prefetch paciente · **Gate:** `quality:cds-hooks-gate`  
+**Allowlist:** `apps/api/src/routes/cds/**`, `packages/contracts/src/cds*.ts`
+
+No iniciar salvo petición explícita del usuario.

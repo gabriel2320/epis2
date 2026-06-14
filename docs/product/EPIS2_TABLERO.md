@@ -1,10 +1,10 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-15 · **HEAD local:** `310c909` · **STRENGTHEN** 17/23
+**Actualizado:** 2026-06-15 · **STRENGTHEN** 18/23
 
-Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan unificado:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) · **Orquestación:** [`epis2-orquestacion-paralela-2026-06-14.md`](../../reports/epis2-orquestacion-paralela-2026-06-14.md) §17
+Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan unificado:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) · **Orquestación:** [`epis2-orquestacion-paralela-2026-06-14.md`](../../reports/epis2-orquestacion-paralela-2026-06-14.md) §19–§20
 
-> **PROG-RAPID** ✓ · **PROG-FICHA-FIRST** wave1 ✓ · **PROG-IA-MODERNIZE** ✓ · **PROG-STRENGTHEN** **17/23** · **siguiente MF-CU-03** (blocked)
+> **PROG-STRENGTHEN** **18/23** · **MF-CU-01…03 ✓** · **siguiente MF-CU-04** (blocked)
 
 ---
 
@@ -62,13 +62,13 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 
 ## En curso — PROG-STRENGTHEN-2026
 
-**Progreso:** **17/23** MF cerradas · Ola 8 ✓ (MF-CU-02 patient-view) · **PROG-CDS-UX** fases 1–2 ✓
+**Progreso:** **18/23** MF cerradas · Ola 9 ✓ (MF-CU-03 order-select) · **PROG-CDS-UX** fases 1–3 ✓
 
 | Subprograma | Estado | Siguiente |
 |-------------|--------|-----------|
 | **PROG-CORE-HARDEN** | ✓ MF-SH-01…06 | — |
 | **PROG-IA-MODERNIZE** | ✓ MF-IM-01…09 | — |
-| **PROG-CDS-UX** | fases 1–2 ✓ | **MF-CU-03** Hook order-select · `quality:cds-hooks-gate` (blocked) |
+| **PROG-CDS-UX** | fases 1–3 ✓ | **MF-CU-04** API `/cds/cards` · `quality:cds-hooks-gate` (blocked) |
 
 `npm run quality:strengthen-next` · ledger [`strengthen-ledger.json`](../quality/strengthen-ledger.json)
 
@@ -110,6 +110,7 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 | **MF-IM-09** OTel spans IA | span `ai.run` · [`epis2-mf-im-09-otel.md`](../../reports/epis2-mf-im-09-otel.md) |
 | **MF-CU-01** ClinicalCdsCard | variantes info/suggestion/warning · [`epis2-mf-cu-01-cds-card.md`](../../reports/epis2-mf-cu-01-cds-card.md) |
 | **MF-CU-02** patient-view CDS hook | cards al abrir ficha · [`epis2-mf-cu-02-patient-view.md`](../../reports/epis2-mf-cu-02-patient-view.md) |
+| **MF-CU-03** order-select CDS hook | alertas al prescribir · [`epis2-mf-cu-03-order-select.md`](../../reports/epis2-mf-cu-03-order-select.md) |
 | **MF-FF-01…06** ficha-first wave1 | censo home · dual default · `/comando` redirect · ClinicalShell · [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/epis2-prog-ficha-first-wave1-close-2026-06-14.md) |
 | **PROG-CONCILIACION tríada** | F0–F7 ✓ · [`epis2-prog-conciliacion-triada-close-2026.md`](../../reports/epis2-prog-conciliacion-triada-close-2026.md) |
 

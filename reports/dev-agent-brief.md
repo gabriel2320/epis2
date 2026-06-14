@@ -2,24 +2,22 @@
 
 > **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-layers-integrator.md` — declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-15T02:00:00.000Z · **HEAD:** `310c909` · **Ola:** 8 ✓ · **Commits:** +11 vs `origin/master`
+**Generado:** 2026-06-15T14:00:00.000Z · **Ola:** 9 ✓ · **STRENGTHEN** 18/23
 
 ## Orquestador (MF-RAPID + STRENGTHEN)
 
-- **PROG-RAPID** ✓ · **PROG-FICHA-FIRST** wave1 ✓ · **PROG-IA-MODERNIZE** ✓
-- **PROG-STRENGTHEN** — **17/23** · MF-CU-01…02 ✓
-- Ola 8 ✓ cerrada — MF-CU-02 patient-view · gate `quality:cds-hooks-gate`
-- Plan: [`dev-agent-orchestration-plan.json`](./dev-agent-orchestration-plan.json) · §17–§18 [`epis2-orquestacion-paralela-2026-06-14.md`](./epis2-orquestacion-paralela-2026-06-14.md)
+- **PROG-STRENGTHEN** — **18/23** · MF-CU-01…03 ✓
+- Ola 9 ✓ cerrada — MF-CU-03 order-select · `quality:cds-hooks-gate`
+- Plan: [`dev-agent-orchestration-plan.json`](./dev-agent-orchestration-plan.json) · §20 [`epis2-orquestacion-paralela-2026-06-14.md`](./epis2-orquestacion-paralela-2026-06-14.md)
 
 ## Estado del tablero (fuente canónica)
 
-- **Cerrado:** **MF-CU-01…02** ✓ · **PROG-IA-MODERNIZE** ✓ · **PROG-FICHA-FIRST** wave1 ✓
-- **Siguiente (blocked):** **MF-CU-03** Hook order-select
-- **Git:** working tree limpio · push pendiente (humano)
+- **Cerrado:** **MF-CU-01…03** ✓ · **PROG-IA-MODERNIZE** ✓ · **PROG-FICHA-FIRST** wave1 ✓
+- **Siguiente (blocked):** **MF-CU-04** API `/cds/cards` interno
 
 ## Objetivo sugerido
 
-- **MF sugerida (blocked):** `MF-CU-03` — Hook order-select (prescripción)
+- **MF sugerida (blocked):** `MF-CU-04` — API `/cds/cards` interno
 - **Gate:** `quality:cds-hooks-gate`
 
 ## Subagente primario
@@ -36,8 +34,8 @@
 
 ## Working tree
 
-- Rama: `master` · **limpio** · ahead of `origin/master`: **11 commits**
-- Último commit: `310c909` — docs Ola 8 / MF-CU-02
+- Rama: `master` · **limpio** · ahead of `origin/master`: **12 commits**
+- Último commit: `e98af45`
 - Push: pendiente (humano)
 
 ## Evolab (QA externo)
