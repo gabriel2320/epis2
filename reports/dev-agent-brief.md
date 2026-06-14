@@ -2,22 +2,20 @@
 
 > **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-layers-integrator.md` — declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-15T00:15:00.000Z · **HEAD:** `0faad77` · **Fase:** A5 · **Ola:** 7 (fast dev)
+**Generado:** 2026-06-15T00:30:00.000Z · **HEAD:** `23e6cd9` · **Fase:** A5 · **Ola:** 7 ✓
 
 ## Orquestador (MF-RAPID + STRENGTHEN)
 
 - **PROG-RAPID** ✓ — iteración: `npm run dev:rapid` · cierre MF: `npm run quality:clinical`
 - **PROG-FICHA-FIRST** ✓ wave1 — MF-FF-01…06 · home censo · `/comando` redirect · wave2 MF-FF-00 READY
-- **PROG-STRENGTHEN** — **15/23** · MF-SH-01…06 ✓ · MF-IM-01…09 ✓ · **MF-CU-01 EN CURSO** (PROG-CDS-UX)
+- **PROG-STRENGTHEN** — **16/23** · MF-SH-01…06 ✓ · MF-IM-01…09 ✓ · **MF-CU-01** ✓
 - **No** iniciar MF-CU-02+ salvo petición explícita del usuario.
-- Ola 6 ✓ cerrada — MF-IM-09 OTel · **PROG-IA-MODERNIZE** completo
-- Ola 7 **EN CURSO** — MF-CU-01 ClinicalCdsCard · subprograma PROG-CDS-UX
+- Ola 7 ✓ cerrada — MF-CU-01 ClinicalCdsCard · PROG-CDS-UX iniciado
 - Plan: [`dev-agent-orchestration-plan.json`](./dev-agent-orchestration-plan.json) · reporte: [`epis2-orquestacion-paralela-2026-06-14.md`](./epis2-orquestacion-paralela-2026-06-14.md) §16
 
 ## Estado del tablero (fuente canónica)
 
-- **Cerrado:** **PROG-CORE-HARDEN** ✓ MF-SH-01…06 · **PROG-IA-MODERNIZE** MF-IM-01…09 ✓ · **PROG-FICHA-FIRST** wave1 ✓
-- **En curso:** **MF-CU-01** ClinicalCdsCard (PROG-CDS-UX)
+- **Cerrado:** **PROG-CORE-HARDEN** ✓ · **PROG-IA-MODERNIZE** ✓ · **MF-CU-01** ✓ · **PROG-FICHA-FIRST** wave1 ✓
 - **Siguiente (blocked):** **MF-CU-02** Hook patient-view · `quality:cds-hooks-gate`
 - **Abierto:** commit tree (humano)
 
