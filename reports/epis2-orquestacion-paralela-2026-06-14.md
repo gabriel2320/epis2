@@ -730,12 +730,13 @@ flowchart TB
 **Versión ola:** 7.0 · **Modo:** fast dev (`npm run dev:rapid`) · **Tracks:** 3 en paralelo  
 **Plan maestro:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](./epis2-plan-desarrollo-unificado-2026-06-14.md)
 
-> Tras cierre de Ola 6 (IM-09 OTel · **PROG-IA-MODERNIZE** completo), la Ola 7 abre **PROG-CDS-UX** con **MF-CU-01** (componente `ClinicalCdsCard` — variantes info / suggestion / warning). Es la primera MF de capa UI CDS; el gate `quality:cds-hooks-gate` aplica a CU-02+.
+> Tras cierre de Ola 6 (IM-09 OTel · **PROG-IA-MODERNIZE** completo), la Ola 7 abrió **PROG-CDS-UX** con **MF-CU-01** (componente `ClinicalCdsCard` — variantes info / suggestion / warning). Ola 7 ✓ cerrada; siguiente: **Ola 8** → MF-CU-02.
 
-### Pendientes cerrados (Ola 1–6)
+### Pendientes cerrados (Ola 7 — ✓ cerrada)
 
 | Item | Evidencia |
 |------|-----------|
+| **MF-CU-01** ClinicalCdsCard | [`epis2-mf-cu-01-cds-card.md`](./epis2-mf-cu-01-cds-card.md) · gate `npm run check` · unit + Storybook |
 | **PROG-IA-MODERNIZE** | MF-IM-01…09 ✓ · IM-09 [`epis2-mf-im-09-otel.md`](./epis2-mf-im-09-otel.md) |
 | **PROG-FICHA-FIRST wave1** | [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](./epis2-prog-ficha-first-wave1-close-2026-06-14.md) |
 | **E2E Fase B** censo-first | 10 specs migrados · `getTransversalCommandBar` |
@@ -744,16 +745,15 @@ flowchart TB
 
 | Item | Estado | Notas |
 |------|--------|-------|
-| **MF-CU-01** ClinicalCdsCard | **EN CURSO** | Track `layers-integrator` · gate cierre `npm run check` |
+| **MF-CU-02** Hook patient-view | **→ Ola 8 EN CURSO** | ver §17 · `quality:cds-hooks-gate` |
 | **Commit tree** | **HUMANO** | ~68 cambios acumulados; sin push automático |
-| **MF-CU-02** Hook patient-view | **BLOCKED** | Tras cierre CU-01 · `quality:cds-hooks-gate` |
 
-**STRENGTHEN:** **15/23** MF cerradas · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
+**STRENGTHEN:** **16/23** MF cerradas · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
 
 ```mermaid
 flowchart TB
-  subgraph ola7 [Ola 7 — fast dev 2026-06-14]
-    L7[layers-integrator<br/>MF-CU-01 CDS card]
+  subgraph ola7 [Ola 7 — cerrada 2026-06-14]
+    L7[layers-integrator<br/>MF-CU-01 ✓]
     R7[gate-runner<br/>dev:rapid + fast gates]
     W7[ollama-dev-writer<br/>docs + plan JSON]
   end
@@ -840,4 +840,127 @@ flowchart TB
 5. Tras CU-01: MF-CU-02 hook patient-view (sesión dedicada · cds-hooks-gate)
 ```
 
-*Actualizado por subagente `ollama-dev-writer` · Ola 7 EN CURSO · MF-CU-01 · STRENGTHEN 15/23 · requiresHumanReview: false (L0 docs)*
+*Actualizado por subagente `ollama-dev-writer` · Ola 7 ✓ cerrada · MF-CU-01 ✓ · STRENGTHEN 16/23 · requiresHumanReview: false (L0 docs)*
+
+---
+
+## 17. Ola 8 — MF-CU-02 patient-view CDS hook
+
+**Versión ola:** 8.0 · **Modo:** fast dev (`npm run dev:rapid`) · **Tracks:** 3 en paralelo  
+**Plan maestro:** [`epis2-plan-desarrollo-unificado-2026-06-14.md`](./epis2-plan-desarrollo-unificado-2026-06-14.md)
+
+> Tras cierre de Ola 7 (MF-CU-01 `ClinicalCdsCard` ✓), la Ola 8 integra el **hook patient-view**: cards CDS (alergias, gaps) al abrir ficha paciente. Primera MF con gate `quality:cds-hooks-gate`. Reutiliza `ClinicalCdsCard`; **no** expone API `/cds/cards` (CU-04) ni hook order-select (CU-03).
+
+### Pendientes cerrados (Ola 1–7)
+
+| Item | Evidencia |
+|------|-----------|
+| **MF-CU-01** ClinicalCdsCard | [`epis2-mf-cu-01-cds-card.md`](./epis2-mf-cu-01-cds-card.md) |
+| **PROG-IA-MODERNIZE** | MF-IM-01…09 ✓ |
+| **PROG-FICHA-FIRST wave1** | [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](./epis2-prog-ficha-first-wave1-close-2026-06-14.md) |
+
+### Pendientes abiertos
+
+| Item | Estado | Notas |
+|------|--------|-------|
+| **MF-CU-02** Hook patient-view | **EN CURSO** | Track `layers-integrator` · gate `quality:cds-hooks-gate` |
+| **Commit tree** | **HUMANO** | ~68 cambios acumulados; sin push automático |
+| **MF-CU-03** Hook order-select | **BLOCKED** | Tras cierre CU-02 |
+| **MF-CU-04** API `/cds/cards` | **BLOCKED** | Tras cierre CU-02 |
+
+**STRENGTHEN:** **16/23** MF cerradas · ledger: [`strengthen-ledger.json`](../docs/quality/strengthen-ledger.json)
+
+```mermaid
+flowchart TB
+  subgraph ola8 [Ola 8 — fast dev 2026-06-14]
+    L8[layers-integrator<br/>MF-CU-02 patient-view]
+    R8[gate-runner<br/>dev:rapid + cds-hooks-gate]
+    W8[ollama-dev-writer<br/>docs + plan JSON]
+  end
+  PLAN8[plan-desarrollo-unificado] --> ola8
+  L8 -->|cierra CU-02| CU03[MF-CU-03 order-select]
+  R8 -->|validación| GATES8[quality:cds-hooks-gate]
+  W8 -->|L0| DOCS8[brief + AGENT_CONTEXT + este doc]
+```
+
+---
+
+### Track 1 — `layers-integrator` → MF-CU-02 patient-view hook
+
+| Campo | Valor |
+|-------|-------|
+| **MF** | MF-CU-02 — Hook patient-view (cards al abrir ficha) |
+| **Subprograma** | PROG-CDS-UX |
+| **Objetivo** | Al abrir ficha (`/espacio/ficha`), mostrar `ClinicalCdsCard` con alergias/gaps demo; hook patient-view estilo CDS Hooks (sin servidor externo) |
+| **Allowlist** | `apps/web/src/components/cds/**`, `apps/web/src/components/chart/**`, `apps/api/src/routes/cds/**`, `packages/clinical-domain/**` |
+| **Gate cierre** | `npm run quality:cds-hooks-gate` |
+| **Iteración** | `npm run dev:rapid` |
+| **Prompt** | [`dev-agent-prompt-layers-integrator.md`](./dev-agent-prompt-layers-integrator.md) |
+| **Reporte cierre** | `reports/epis2-mf-cu-02-patient-view.md` |
+
+**Prerrequisitos:** MF-CU-01 ✓ · dual-chart ON (ficha-first) · reutilizar `ClinicalCdsCard` (no `@mui/*` directo en web).
+
+**Evidencia requerida:** cards alergias/gaps al abrir ficha · E2E dual-chart · `scripts/quality/validate-cds-hooks-gate.mjs`
+
+**Prohibido:** API `/cds/cards` completa (CU-04), hook order-select (CU-03), migraciones, FHIR server externo.
+
+---
+
+### Track 2 — `gate-runner` → fast gates + cds-hooks
+
+| Campo | Valor |
+|-------|-------|
+| **MF** | Validación transversal (no implementa features) |
+| **Objetivo** | `dev:rapid` + `quality:cds-hooks-gate` sobre working tree acumulado |
+| **Allowlist** | lectura global · escritura solo en `reports/dev-agent-audit-diff-latest.json` |
+| **Gates** | `npm run dev:rapid` · `npm run quality:ficha-first-gate` · `npm run quality:cds-hooks-gate` |
+| **Cierre sesión (si humano pide pre-PR)** | `npm run check` · `npm run test` · `npm run db:validate` |
+| **Iteración** | `npm run dev:rapid` |
+| **Prompt** | [`dev-agent-prompt-gate-runner.md`](./dev-agent-prompt-gate-runner.md) |
+
+**Rol:** validar FICHA-FIRST + arquitectura + gate CDS mientras CU-02 toca `apps/web` y `apps/api`.
+
+---
+
+### Track 3 — `ollama-dev-writer` → documentación orquestación (este entregable)
+
+| Campo | Valor |
+|-------|-------|
+| **MF** | MF-RAPID-03 / L0 dev-write |
+| **Objetivo** | Sync brief, plan JSON, AGENT_CONTEXT y sección Ola 8 |
+| **Allowlist** | `reports/**`, `docs/AGENT_CONTEXT_MINIMAL.md`, `docs/product/EPIS2_TABLERO.md` |
+| **Prohibido** | `apps/**`, `services/**`, `e2e/**`, `packages/**` clínicos |
+| **Gate cierre** | `npm run dev:rapid -- --skip-audit` |
+| **Iteración** | `npm run dev:rapid` |
+| **Prompt** | [`dev-agent-prompt-ollama-dev-writer.md`](./dev-agent-prompt-ollama-dev-writer.md) |
+
+---
+
+### Matriz Ola 8 (3 tracks)
+
+| Zona | Track dueño | Prohibido para otros |
+|------|-------------|---------------------|
+| `apps/web/src/components/cds/**` | layers-integrator | dev-writer, gate-runner (escritura) |
+| `apps/web/src/components/chart/**` | layers-integrator | dev-writer |
+| `apps/api/src/routes/cds/**` | layers-integrator | dev-writer |
+| `packages/clinical-domain/**` | layers-integrator | dev-writer |
+| `scripts/quality/validate-cds-hooks-gate.mjs` | layers-integrator | dev-writer |
+| `reports/**`, `docs/AGENT_CONTEXT_MINIMAL.md` | ollama-dev-writer | layers-integrator |
+| `database/migrations/**` | — | **todos** |
+
+**Comando iteración unificado (todos los tracks):** `npm run dev:rapid`
+
+### Arranque Ola 8
+
+```text
+1. Humano: npm run stack:dev && npm run dev:velocity
+2. Cursor: @reports/dev-agent-brief.md + dev-agent-prompt-layers-integrator.md
+3. Paralelo (3 ventanas):
+   ├─ layers-integrator  → MF-CU-02 patient-view hook
+   ├─ gate-runner        → dev:rapid + cds-hooks-gate
+   └─ ollama-dev-writer  → docs Ola 8
+4. Humano reconcilia working tree antes de commit (solo si lo pide)
+5. Tras CU-02: MF-CU-03 order-select o MF-CU-04 API (sesión dedicada · no mezclar)
+```
+
+*Actualizado por subagente `ollama-dev-writer` · Ola 8 EN CURSO · MF-CU-02 · STRENGTHEN 16/23 · requiresHumanReview: false (L0 docs)*
