@@ -39,6 +39,7 @@ const KEEP_ROOT = new Set([
   'tool:gates:sync-catalog',
   'tool:gates:verify',
   'tool:gates:apply-phase2',
+  'tool:workspaces:apply-phase3',
   'test:e2e',
 ]);
 

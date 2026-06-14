@@ -35,6 +35,8 @@ Los scripts restantes en root (Fase 2): **33** `quality:*` (7 meta + 25 wired sh
 ```bash
 npm run quality:gate -- quality:ficha-first-next   # gate no wired en CI
 node tools/gates/run-legacy.mjs quality:registry-status
+npm run test:e2e:tramo-j -w @epis2/web             # E2E fuera de shims root
+npm run db:reindex-chunks -w @epis2/api             # db avanzado en api workspace
 ```
 
 ---
@@ -122,7 +124,7 @@ npm run quality:fast
 | **0** | Backup + classify CSV + este doc | ✓ |
 | **1** | `tools/gates/*` + `quality:required/nightly` | ✓ |
 | **2** | Quitar ~245 `quality:*` del root; `quality:gate` + shims wired | ✓ |
-| **3** | `db:*` → api workspace; E2E → web | pendiente |
+| **3** | `db:*` → `@epis2/api`; `test:e2e*` → `@epis2/web` | ✓ |
 
 ---
 

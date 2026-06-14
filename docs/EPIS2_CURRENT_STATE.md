@@ -66,7 +66,7 @@ Regla: **core no depende de labs** (deuda: API aún puede tocar case-intel — m
 | PROG-CDS-UX | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
 | PROG-RAPID | ✓ cerrado | `quality:rapid-gate` |
 | PROG-DI / tríada F6 | ✓ contratos | ver `reports/conciliacion/` |
-| **PROG-CONSOLIDATE** (propuesto) | ◐ Fase 0–2 ✓ | ver §Consolidación · `tool:gates:verify` |
+| **PROG-CONSOLIDATE** (propuesto) | ◐ Fase 0–3 ✓ | ver §Consolidación · `tool:gates:verify` |
 
 Detalle inventario módulos: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md).
 
@@ -115,9 +115,9 @@ Detalle inventario módulos: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md).
 | IA frontera | `npm run quality:ai` | degrade + ai-client + web-ai-boundary |
 | Producto ficha | `npm run quality:ficha-first-gate` | PROG-FICHA-FIRST regresión |
 
-**Fase 0–2 ✓ (2026-06-15):** snapshot + clasificador; manifiestos `required`/`nightly`; catálogo `catalog-full.json` (273 gates); **245** `quality:*` eliminados del root → **33** restantes + `npm run quality:gate -- quality:<name>`. Ver [`MAINTENANCE_PACKAGE_SCRIPTS.md`](MAINTENANCE_PACKAGE_SCRIPTS.md).
+**Fase 0–3 ✓ (2026-06-15):** … **245** `quality:*` podados · **db:**6 en `@epis2/api` · **e2e:**28 en `@epis2/web` · root shims `db:migrate`/`db:validate`/`test:e2e`.
 
-Métrica de deuda: **~180** scripts npm totales · **273** gates en catálogo · **33** `quality:*` visibles en root.
+Métrica de deuda: **~150** scripts npm totales en root · **273** gates en catálogo · **33** `quality:*` visibles en root.
 
 ---
 
@@ -140,7 +140,7 @@ Prohibido en fase consolidación: nuevos registries, nuevo home, auto-aprobació
 | **0** Snapshot + clasificación | ✓ | `tools/legacy-scripts/`, `tool:scripts:classify` |
 | **1** Meta-gates + catálogo | ✓ | `tools/gates/`, `quality:required`, `quality:nightly` |
 | **2** Reducir root `package.json` | ✓ | `quality:gate`, shims wired, `catalog-full.json` |
-| **3+** Mover `db:*` / E2E a workspaces | pendiente | ver MAINTENANCE §Fase 3 |
+| **3** Mover `db:*` / E2E a workspaces | ✓ | `@epis2/api` db · `@epis2/web` e2e · root shims |
 
 **Duración sugerida:** 1–2 semanas · **Sin features clínicas nuevas**
 

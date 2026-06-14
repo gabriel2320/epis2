@@ -30,6 +30,7 @@ for (const script of [
   'tool:gates:sync-catalog',
   'tool:scripts:classify',
   'tool:gates:apply-phase2',
+  'tool:workspaces:apply-phase3',
 ]) {
   if (!pkg.scripts?.[script]) errors.push(`package.json sin ${script}`);
 }
@@ -49,4 +50,14 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`consolidation-infra OK — Fase 0–2 gates (${qualityCount} quality:* en root)`);
+const apiPkg = JSON.parse(readFileSync(join(root, 'apps/api/package.json'), 'utf8'));
+const webPkg = JSON.parse(readFileSync(join(root, 'apps/web/package.json'), 'utf8'));
+for (const script of ['db:migrate', 'db:validate']) {
+  if (!apiPkg.scripts?.[script]) errors.push(`@epis2/api sin ${script}`);
+}
+if (!webPkg.scripts?.['test:e2e']) errors.push('@epis2/web sin test:e2e');
+if (!existsSync(join(root, 'tools/scripts/run-e2e.mjs'))) {
+  errors.push('Falta tools/scripts/run-e2e.mjs');
+}
+
+console.log(`consolidation-infra OK — Fase 0–3 gates (${qualityCount} quality:* en root)`);
