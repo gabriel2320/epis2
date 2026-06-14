@@ -12,7 +12,7 @@
 
 EPIS2 **compila y demuestra** un flujo clínico mínimo (censo → ficha dual → borrador → aprobación) con IA opcional. Los programas recientes **PROG-FICHA-FIRST**, **PROG-STRENGTHEN** y **PROG-CDS-UX** están cerrados.
 
-El problema operativo principal (**superficie npm/gates**) se abordó con **PROG-CONSOLIDATE ✓** (Fases 0–4). Siguiente fase: **producto estable** — sin features clínicas nuevas salvo MF autorizada.
+El problema operativo principal (**superficie npm/gates**) se abordó con **PROG-CONSOLIDATE ola 1 ✓** (Fases 0–4). **Ola 2** = gobierno + hardening — ver [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md).
 
 **Git:** una rama productiva (`master`). Las “ramas truncadas” son **módulos a medias en master**, no branches git olvidadas.
 
@@ -66,7 +66,7 @@ Regla: **core no depende de labs** (deuda: API aún puede tocar case-intel — m
 | PROG-CDS-UX | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
 | PROG-RAPID | ✓ cerrado | `quality:rapid-gate` |
 | PROG-DI / tríada F6 | ✓ contratos | ver `reports/conciliacion/` |
-| **PROG-CONSOLIDATE** | ✓ **cerrado** Fase 0–4 | `tool:consolidate:verify-phase4` · [`epis2-prog-consolidate-close-2026.md`](../reports/epis2-prog-consolidate-close-2026.md) |
+| **PROG-CONSOLIDATE** | ✓ ola 1 (Fase 0–4) · **ola 2 activa** | [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) · `tool:consolidate:verify-phase4` |
 
 Detalle inventario módulos: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md).
 
@@ -141,9 +141,11 @@ Prohibido en fase consolidación: nuevos registries, nuevo home, auto-aprobació
 | **1** Meta-gates + catálogo | ✓ | `tools/gates/`, `quality:required`, `quality:nightly` |
 | **2** Reducir root `package.json` | ✓ | `quality:gate`, shims wired, `catalog-full.json` |
 | **3** Mover `db:*` / E2E a workspaces | ✓ | `@epis2/api` db · `@epis2/web` e2e |
-| **4** CI/catalog compat | ✓ | case-intel gates · `build:packages` + ai-client |
+| **4** CI/catalog compat | ✓ | case-intel gates · build chain CI |
 
-**Duración sugerida:** 1–2 semanas · **Sin features clínicas nuevas**
+## Ola 2 — Gobierno + hardening (activa)
+
+Congelamiento: [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md). PRs pequeños `MF-CON-*` — **no mega-cambio**.
 
 | Permitido | Prohibido |
 |-----------|-----------|

@@ -21,6 +21,13 @@ Evidencia: [`epis2-prog-consolidate-close-2026.md`](../../reports/epis2-prog-con
 
 ---
 
+## Activo — PROG-CONSOLIDATE ola 2 (MF-CON-*)
+
+**Congelamiento vigente:** [`CONSOLIDATION_FREEZE.md`](../CONSOLIDATION_FREEZE.md) — no expansión clínica salvo MF autorizada.
+
+Brújula: [`EPIS2_CURRENT_STATE.md`](../EPIS2_CURRENT_STATE.md) · Siguiente: MF-CON-04 config + MF-CON-05 auth killswitch.
+
+
 ## Cerrado — PROG-CONCILIACION-TRIADA-2026
 
 | Fase | Estado |
