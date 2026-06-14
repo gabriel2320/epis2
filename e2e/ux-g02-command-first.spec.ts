@@ -115,9 +115,13 @@ test.describe('UX-G02 — command-first con paciente fijado', () => {
   });
 
   test('Parte E: panel IA contextual en ficha tradicional (MF-CM-08)', async ({ page }) => {
+    test.skip(
+      process.env.VITE_ENABLE_DUAL_CHART_MODES !== 'true',
+      'Requiere dual ficha — cubierto en e2e/dual-chart-modes.spec.ts',
+    );
     await loginAsPhysician(page);
     await page.goto(`/espacio/ficha?patientId=${DEMO_001_PATIENT_ID}&chartMode=traditional`);
-    await expect(page.getByTestId('epis2-patient-workspace')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
     await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
     await expect(page.getByTestId('epis2-context-ai-panel')).toBeVisible();
     await expect(page.getByTestId('epis2-context-suggested-actions')).toBeVisible();

@@ -25,6 +25,8 @@ jobs:
           --health-retries 5
     env:
       DATABASE_URL: postgresql://epis2_app:epis2@localhost:5432/epis2
+      # Legacy golden/UX E2E esperan ficha UX-B.2; dual chart va en job e2e-dual-chart.
+      VITE_ENABLE_DUAL_CHART_MODES: 'false'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

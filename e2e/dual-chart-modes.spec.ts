@@ -197,4 +197,13 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
     await expect(page.getByTestId('epis2-traditional-ehr-nav')).toBeVisible({ timeout: 15_000 });
     await expect(page.getByTestId('epis2-traditional-ehr-nav-navAntecedents')).toHaveCount(0);
   });
+
+  test('o) panel IA contextual en ficha tradicional (MF-CM-08 / UX-G02 E)', async ({ page }) => {
+    const demo001 = getDemoCaseByCode('DEMO-001')!.patientId;
+    await page.goto(`/espacio/ficha?patientId=${demo001}&chartMode=traditional`);
+    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
+    await expect(page.getByTestId('epis2-context-ai-panel')).toBeVisible();
+    await expect(page.getByTestId('epis2-context-suggested-actions')).toBeVisible();
+  });
 });
