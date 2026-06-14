@@ -1,10 +1,10 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-14 · **HEAD committed:** `f56b7d2` · **ahead origin:** 2 commits
+**Actualizado:** 2026-06-14 · **HEAD committed:** `b46c6bc`
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:** [`epis2-plan-conciliacion-triada-2026-06-14.md`](../../reports/epis2-plan-conciliacion-triada-2026-06-14.md) · **Correcciones:** [`epis2-plan-correcciones-prioritarias-2026-06-14.md`](../../reports/epis2-plan-correcciones-prioritarias-2026-06-14.md) · **Tríada:** [`EPIS2_TRIADA_REPOS.md`](./EPIS2_TRIADA_REPOS.md)
 
-> **Signoff experiencia core (2026-06-13):** tres frentes A/B/C cerrados (36/36). **PROG-DI** CLOSED. **F3 Evolab** ✓. **Siguiente:** F4 MedRepo · **MF-SH-02**.
+> **F3 Evolab** ✓ · **F4 MedRepo** ✓ (check 75/75). **Siguiente:** F5 smoke tríada · **MF-SH-02**.
 
 ---
 
@@ -14,9 +14,10 @@ Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:
 |------|--------|-----------|
 | **S1 F0+F1** | ✓ inventario + docs | — |
 | **F2 PROG-DI** | ✓ commit + push | — |
-| **F3 Evolab** | ✓ push `246fc27` · smoke 14/14 | **F4 MedRepo** |
+| **F3 Evolab** | ✓ push `246fc27` · smoke 14/14 | — |
+| **F4 MedRepo** | ✓ git baseline · check 75/75 | remote push opcional |
 | **A2–C1 correcciones** | ✓ S1 cerrado | — |
-| **EPIS2-MedRepo** | sin git · check rojo | F4 |
+| **F5 smoke tríada** | ☐ | matriz gates |
 
 Inventario: [`reports/conciliacion/`](../conciliacion/)
 
@@ -43,7 +44,7 @@ Inventario: [`reports/conciliacion/`](../conciliacion/)
 | **MF-SH-01** draft trace | `043_approvals_ai_run.sql` · `quality:draft-trace-gate` · [`epis2-mf-sh-01-draft-trace.md`](../../reports/epis2-mf-sh-01-draft-trace.md) |
 | **S1 conciliación tríada** | F0 manifest + MF-DI map · F1 tablero/triada · [`conciliacion/`](../conciliacion/) · 2026-06-14 |
 | **PROG-DI** | 10/10 DONE · commit `f56b7d2` · [`epis2-prog-di-close-2026.md`](../../reports/epis2-prog-di-close-2026.md) |
-| **F3 Evolab** | push + smoke 14/14 · [`epis2-f3-close-2026-06-14.md`](../../reports/conciliacion/epis2-f3-close-2026-06-14.md) |
+| **F4 MedRepo** | git `3e1181b` · check 75/75 · [`epis2-f4-close-2026-06-14.md`](../../reports/conciliacion/epis2-f4-close-2026-06-14.md) |
 
 ---
 

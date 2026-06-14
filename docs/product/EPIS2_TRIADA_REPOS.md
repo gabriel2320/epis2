@@ -13,7 +13,7 @@
 |------|------------|--------|-----|
 | **EPIS2** | `…/EPIS2` | [gabriel2320/epis2](https://github.com/gabriel2320/epis2) | Producto clínico · SoT PostgreSQL |
 | **epis2-evolab** | `…/epis2-evolab` | [gabriel2320/epis2-evolab](https://github.com/gabriel2320/epis2-evolab) | Simulador · escenarios · findings |
-| **EPIS2-MedRepo** | `…/EPIS2-MedRepo` | (local; remote pendiente F4) | Biblioteca médica · RAG · Knowledge Packs |
+| **EPIS2-MedRepo** | `…/EPIS2-MedRepo` | local `3e1181b` · remote pendiente | Biblioteca médica · RAG · Knowledge Packs |
 
 **Legacy (solo lectura):** `…/Epis` — donante congelado; ver `legacy-import-manifest.json`.
 
