@@ -35,6 +35,7 @@ import { suggestPatientSummary24h } from './summary.js';
 import { listRecentAiRuns, recordAiRun, type AiRunRecord } from './store.js';
 import { createRateLimitPreHandler } from '../security/rateLimit.js';
 import { withAiRunSpan } from './tracing.js';
+import { getMedrepoAssistSafetyNotes, getMedrepoPackStatus } from './medrepoKnowledgePack.js';
 
 export async function registerAiRoutes(
   app: FastifyInstance,
@@ -85,6 +86,10 @@ export async function registerAiRoutes(
     });
   });
 
+  app.get('/api/ai/medrepo-pack/status', { preHandler: requireAiRead }, async () => {
+    return getMedrepoPackStatus();
+  });
+
   app.post(
     '/api/ai/assist/draft',
     { preHandler: [limitAi, requireDraftWrite] },
@@ -125,6 +130,10 @@ export async function registerAiRoutes(
 
       if (body.status === 'success') {
         let safetyNotes = [...body.safetyNotes];
+        const medrepoNotes = getMedrepoAssistSafetyNotes(
+          parsed.data.blueprintId,
+          parsed.data.currentFields,
+        );
         if (db && parsed.data.patientId) {
           const safetyOpts: Parameters<typeof getDemoSafetyNotesForPatient>[2] = {
             blueprintId: parsed.data.blueprintId,
@@ -137,7 +146,9 @@ export async function registerAiRoutes(
             parsed.data.patientId,
             safetyOpts,
           );
-          safetyNotes = [...new Set([...cdsNotes, ...safetyNotes])];
+          safetyNotes = [...new Set([...cdsNotes, ...medrepoNotes, ...safetyNotes])];
+        } else if (medrepoNotes.length) {
+          safetyNotes = [...new Set([...medrepoNotes, ...safetyNotes])];
         }
 
         const row = await recordAiRun(db, {

@@ -27,6 +27,8 @@ const required = [
   ['closure ff-11', 'reports/epis2-mf-ff-11-ai-client.md'],
   ['closure ff-12', 'reports/epis2-mf-ff-12-web-ai-boundary.md'],
   ['closure ff-13', 'reports/epis2-mf-ff-13-ai-assist.md'],
+  ['closure ff-14', 'reports/epis2-mf-ff-14-medrepo-loader.md'],
+  ['closure prog ficha-first', 'reports/epis2-prog-ficha-first-close-2026.md'],
   ['vision', 'docs/product/VISION_EPIS2.md'],
 ];
 
@@ -70,7 +72,7 @@ const ff07 = ledger.phases?.find((p) => p.id === 'MF-FF-07');
 if (!ff07 || ff07.state !== 'DONE') {
   errors.push('ficha-first-ledger: MF-FF-07 debe estar DONE');
 }
-for (const id of ['MF-FF-08', 'MF-FF-09', 'MF-FF-10', 'MF-FF-11', 'MF-FF-12', 'MF-FF-13']) {
+for (const id of ['MF-FF-08', 'MF-FF-09', 'MF-FF-10', 'MF-FF-11', 'MF-FF-12', 'MF-FF-13', 'MF-FF-14', 'MF-FF-15']) {
   const phase = ledger.phases?.find((p) => p.id === id);
   if (!phase || phase.state !== 'DONE') {
     errors.push(`ficha-first-ledger: ${id} debe estar DONE`);
@@ -83,6 +85,19 @@ if (!wave3 || wave3.state !== 'DONE') {
 const wave4 = ledger.waves?.find((w) => w.id === 'wave-4');
 if (!wave4 || wave4.state !== 'DONE') {
   errors.push('ficha-first-ledger: wave-4 debe estar DONE');
+}
+const wave5 = ledger.waves?.find((w) => w.id === 'wave-5');
+if (!wave5 || wave5.state !== 'DONE') {
+  errors.push('ficha-first-ledger: wave-5 debe estar DONE');
+}
+
+const medrepoLoader = join(root, 'apps/api/src/ai/medrepoKnowledgePack.ts');
+if (!existsSync(medrepoLoader)) {
+  errors.push('Falta medrepoKnowledgePack.ts (MF-FF-14)');
+}
+const pkgScripts = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')).scripts ?? {};
+if (!pkgScripts['quality:ui'] || !pkgScripts['quality:ai']) {
+  errors.push('package.json debe definir quality:ui y quality:ai (MF-FF-15)');
 }
 
 const formPage = readFileSync(join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'), 'utf8');
@@ -157,4 +172,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('ficha-first-gate OK — MF-FF-00…13 · wave-1…4');
+console.log('ficha-first-gate OK — MF-FF-00…15 · wave-1…5 · PROG-FICHA-FIRST cerrado');

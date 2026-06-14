@@ -18,7 +18,7 @@
     { "id": "wave-2", "name": "Canon y navegación", "state": "DONE", "closedAt": "2026-06-15", "mfs": ["MF-FF-00", "MF-FF-04", "MF-FF-05"] },
     { "id": "wave-3", "name": "Experiencia clínica determinística", "state": "DONE", "closedAt": "2026-06-15", "mfs": ["MF-FF-07", "MF-FF-08", "MF-FF-09", "MF-FF-10"] },
     { "id": "wave-4", "name": "Frontera IA", "state": "DONE", "closedAt": "2026-06-15", "mfs": ["MF-FF-11", "MF-FF-12", "MF-FF-13"] },
-    { "id": "wave-5", "name": "Integración y velocidad", "state": "ACTIVE", "mfs": ["MF-FF-14", "MF-FF-15"] }
+    { "id": "wave-5", "name": "Integración y velocidad", "state": "DONE", "closedAt": "2026-06-15", "mfs": ["MF-FF-14", "MF-FF-15"] }
   ],
   "phases": [
     {
@@ -224,7 +224,8 @@
       "id": "MF-FF-14",
       "wave": "wave-5",
       "name": "MedRepo knowledge-pack loader",
-      "state": "READY",
+      "state": "DONE",
+      "completedAt": "2026-06-15",
       "dependsOn": ["MF-FF-13"],
       "gate": "quality:fast",
       "allowedPaths": ["apps/api/src/ai/**"],
@@ -235,7 +236,8 @@
       "id": "MF-FF-15",
       "wave": "wave-5",
       "name": "Aliases quality:ui / quality:ai",
-      "state": "BLOCKED",
+      "state": "DONE",
+      "completedAt": "2026-06-15",
       "dependsOn": ["MF-FF-14"],
       "gate": "quality:fast",
       "allowedPaths": ["package.json", "scripts/quality/**", "docs/dev/EPIS2_DEV_VELOCITY.md"],

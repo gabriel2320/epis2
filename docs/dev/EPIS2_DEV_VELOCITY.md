@@ -54,6 +54,9 @@ EPIS2_LOCAL_CI_E2E=1 npm run quality:local-ci   # antes de PR grande
 | `npm run dev:install-hooks` | Pre-push local → `npm run check` |
 | `npm run dev:session` | Brief + prompts (detalle en AI_ASSISTED_DEV) |
 | `npm run quality:local-ci` | Paridad CI sin E2E (salvo env) |
+| `npm run quality:ui` | Alias → `quality:ui-simplify-gate` (MF-FF-15) |
+| `npm run quality:ai` | Alias → degrade + ai-client + web-ai-boundary (MF-FF-15) |
+| `npm run quality:medrepo-consumption-gate` | Loader MedRepo read-only API (MF-FF-14) |
 
 Variables útiles:
 

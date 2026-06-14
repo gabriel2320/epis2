@@ -1,0 +1,47 @@
+{
+  "packId": "epis2-synthetic-demo-v1",
+  "title": "Pack clínico sintético EPIS2 (demo)",
+  "version": "1.0.0",
+  "exportedAt": "2026-06-15T12:00:00.000Z",
+  "sources": ["synthetic://epis2/demo/clinical-guidelines"],
+  "topics": ["diabetes", "renal", "prescripcion"],
+  "facts": [],
+  "chunks": [
+    {
+      "chunkId": "00000000-0000-4000-8000-000000000101",
+      "fileId": "00000000-0000-4000-8000-000000000102",
+      "fileName": "guia-metformina-irc-demo.pdf",
+      "documentId": "00000000-0000-4000-8000-000000000103",
+      "documentTitle": "Metformina en enfermedad renal crónica",
+      "headingPath": "Ajuste de dosis",
+      "pageStart": 1,
+      "pageEnd": 1,
+      "text": "Ajustar o suspender metformina si TFG menor a 30 ml/min; vigilar acidosis láctica en IRC avanzada."
+    },
+    {
+      "chunkId": "00000000-0000-4000-8000-000000000104",
+      "fileId": "00000000-0000-4000-8000-000000000105",
+      "fileName": "guia-insulina-demo.pdf",
+      "documentId": "00000000-0000-4000-8000-000000000106",
+      "documentTitle": "Insulina basal en hospitalización",
+      "headingPath": "Hipoglucemia",
+      "pageStart": 2,
+      "pageEnd": 2,
+      "text": "Revisar dosis de insulina basal ante hipoglucemias recurrentes; considerar reducción del 20%."
+    }
+  ],
+  "summaries": [
+    {
+      "documentId": "00000000-0000-4000-8000-000000000103",
+      "fileId": "00000000-0000-4000-8000-000000000102",
+      "fileName": "guia-metformina-irc-demo.pdf",
+      "level": "document",
+      "headingPath": "Metformina en ERC",
+      "summaryText": "Guía sintética: precaución con metformina en TFG baja."
+    }
+  ],
+  "safety": {
+    "containsPatientData": false,
+    "humanReviewed": true
+  }
+}
