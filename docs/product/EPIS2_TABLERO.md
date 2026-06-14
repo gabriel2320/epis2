@@ -1,10 +1,10 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-14 · **HEAD committed:** `150cb56`
+**Actualizado:** 2026-06-14 · **HEAD committed:** `d84e1ef`
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Plan conciliación:** [`epis2-plan-conciliacion-triada-2026-06-14.md`](../../reports/epis2-plan-conciliacion-triada-2026-06-14.md) · **Correcciones:** [`epis2-plan-correcciones-prioritarias-2026-06-14.md`](../../reports/epis2-plan-correcciones-prioritarias-2026-06-14.md) · **Tríada:** [`EPIS2_TRIADA_REPOS.md`](./EPIS2_TRIADA_REPOS.md)
 
-> **PROG-CONCILIACION-TRIADA** ✓ cerrado · **MF-SH-05** ✓ · **MF-RAPID-03** ✓ · **Siguiente:** **MF-SH-06** migraciones Chile 035–040.
+> **PROG-CORE-HARDEN** MF-SH-01…06 ✓ · **Siguiente STRENGTHEN:** **MF-IM-01** embeddings pgvector (PROG-IA-MODERNIZE).
 
 ---
 
@@ -22,7 +22,8 @@ Inventario: [`reports/conciliacion/`](../../reports/conciliacion/)
 
 | Subprograma | MF activa | Gate |
 |-------------|-----------|------|
-| **PROG-CORE-HARDEN** | **MF-SH-06** control migraciones Chile 035–040 | `npm run db:validate` |
+| **PROG-CORE-HARDEN** | ✓ MF-SH-01…06 cerrado | — |
+| **PROG-IA-MODERNIZE** | **MF-IM-01** embeddings pgvector 384d | `npm run db:validate` |
 
 `npm run quality:strengthen-next` · ledger [`strengthen-ledger.json`](../quality/strengthen-ledger.json)
 

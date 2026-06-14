@@ -1,10 +1,10 @@
-import { createHash } from 'node:crypto';
 import { readdir, readFile } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import postgres from 'postgres';
 import { loadEnvFile } from './load-env.mjs';
 import { maskDatabaseUrl, resolveMigrateDatabaseUrl } from './db-url.mjs';
+import { migrationChecksum } from './db/migration-checksum.mjs';
 
 loadEnvFile();
 
@@ -13,8 +13,7 @@ const root = join(__dirname, '..');
 const migrationsDir = join(root, 'database', 'migrations');
 
 function checksum(content) {
-  // Normaliza CRLF para que el checksum sea estable entre Windows y CI.
-  return createHash('sha256').update(content.replace(/\r\n/g, '\n')).digest('hex');
+  return migrationChecksum(content);
 }
 
 async function main() {

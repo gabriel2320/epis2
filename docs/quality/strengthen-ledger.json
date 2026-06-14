@@ -167,7 +167,8 @@
       "subprogram": "PROG-CORE-HARDEN",
       "phase": 6,
       "dependsOn": ["MF-SH-05"],
-      "state": "READY",
+      "state": "DONE",
+      "completedAt": "2026-06-14",
       "gate": "db:validate",
       "evidenceRequired": [
         "db:validate incluye checksum migraciones 035–040",
@@ -192,7 +193,7 @@
       "subprogram": "PROG-IA-MODERNIZE",
       "phase": 1,
       "dependsOn": ["MF-SH-02"],
-      "state": "BLOCKED",
+      "state": "READY",
       "gate": "db:validate",
       "evidenceRequired": [
         "Migración 042_rag_embeddings_384.sql",

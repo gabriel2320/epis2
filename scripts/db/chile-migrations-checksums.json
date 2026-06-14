@@ -1,0 +1,43 @@
+{
+  "version": "1.0",
+  "program": "MF-SH-06",
+  "controlTable": "epis2_schema_migrations",
+  "migrations": [
+    {
+      "filename": "035_chile_patient_identifiers.sql",
+      "checksum": "96ad2786a503abcfac353a1303052afcb22dae2336725848b03d9e9fd19b12e5",
+      "schemaVersion": "epis2-chile-id-01",
+      "microphase": "MF-CHILE-ID-01"
+    },
+    {
+      "filename": "036_chile_patient_coverage.sql",
+      "checksum": "f9c641bb6ec8b34a9a4169145217d56d3fd381aa6e9f72f79c705bcc06a90265",
+      "schemaVersion": "epis2-chile-adm-01",
+      "microphase": "MF-CHILE-ADM-01"
+    },
+    {
+      "filename": "037_chile_patient_clinical_summary.sql",
+      "checksum": "8d64ca5e773125a6acf1a90e696466d7ce804e03a49e344c154d0d61787e47f4",
+      "schemaVersion": "epis2-chile-summary-01",
+      "microphase": "MF-SUMMARY-VIEW-01"
+    },
+    {
+      "filename": "038_chile_episodes_of_care.sql",
+      "checksum": "ddb90542c4528175abdab1e35bd8349cbe6375909f66b20740ab7045fa3cc12e",
+      "schemaVersion": "epis2-chile-episode-01",
+      "microphase": "MF-EPISODE-01"
+    },
+    {
+      "filename": "039_chile_professionals.sql",
+      "checksum": "296b979726632a1bcda63d370cfb58668a4b3a6ec9588adcf3afd320919aad60",
+      "schemaVersion": "epis2-chile-pro-01",
+      "microphase": "MF-CHILE-PRO-01"
+    },
+    {
+      "filename": "040_chile_audit_extend.sql",
+      "checksum": "14129ad752fca8f8d3bab70db0ab0f6f4ee6b54c07cc64511e3a198178f8af81",
+      "schemaVersion": "epis2-chile-audit-01",
+      "microphase": "MF-CHILE-AUDIT-01"
+    }
+  ]
+}
