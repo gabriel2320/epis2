@@ -25,7 +25,14 @@ Evidencia: [`epis2-prog-consolidate-close-2026.md`](../../reports/epis2-prog-con
 
 **Congelamiento vigente:** [`CONSOLIDATION_FREEZE.md`](../CONSOLIDATION_FREEZE.md) — no expansión clínica salvo MF autorizada.
 
-Brújula: [`EPIS2_CURRENT_STATE.md`](../EPIS2_CURRENT_STATE.md) · Siguiente: MF-CON-04 config + MF-CON-05 auth killswitch.
+| MF | Estado | Entrega |
+|----|--------|---------|
+| **MF-CON-02** | ✓ DONE | Freeze + gobierno · PR [#7](https://github.com/gabriel2320/epis2/pull/7) |
+| **MF-CON-04** | ✓ DONE | Config staging/production guards |
+| **MF-CON-05** | ✓ DONE | Demo auth killswitch · PR [#8](https://github.com/gabriel2320/epis2/pull/8) |
+| **MF-CON-06** | **READY** | Baseline HTTP (CSP, cookies, CORS) |
+
+**Siguiente:** MF-CON-06 → MF-CON-07 rate limit · plan [`EPIS2_CONSOLIDATION_PHASE2_PLAN.md`](./EPIS2_CONSOLIDATION_PHASE2_PLAN.md)
 
 
 ## Cerrado — PROG-CONCILIACION-TRIADA-2026

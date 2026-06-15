@@ -21,6 +21,7 @@ import type { AppConfig } from './config.js';
 import { getDatabase, pingDatabase } from './db/client.js';
 import { apiErrorHandler, apiNotFoundHandler } from './errors.js';
 import { registerSecurityHeaders } from './security/headers.js';
+import { buildCorsOptions } from './security/httpBaseline.js';
 
 const VERSION = '0.1.0';
 
@@ -48,7 +49,7 @@ export async function buildApp(config: AppConfig) {
   });
   const db = getDatabase(config.DATABASE_URL);
 
-  registerSecurityHeaders(app);
+  registerSecurityHeaders(app, config);
 
   app.addHook('onSend', async (request, reply) => {
     reply.header('x-correlation-id', request.id);
@@ -58,10 +59,7 @@ export async function buildApp(config: AppConfig) {
   app.setErrorHandler(apiErrorHandler);
   app.setNotFoundHandler(apiNotFoundHandler);
 
-  await app.register(cors, {
-    origin: config.WEB_ORIGIN,
-    credentials: true,
-  });
+  await app.register(cors, buildCorsOptions(config));
   await app.register(cookie);
 
   const livenessHandler = async () =>

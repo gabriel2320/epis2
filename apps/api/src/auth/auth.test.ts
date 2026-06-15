@@ -118,6 +118,20 @@ describe('auth routes', () => {
     await app.close();
   });
 
+  it('login exitoso incluye flags HttpOnly y SameSite (MF-CON-06)', async () => {
+    const app = await buildApp(config);
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      payload: { username: 'medico.demo', demoAuthKey: 'DEMO-CLAVE-MEDICO' },
+    });
+    expect(res.statusCode).toBe(200);
+    const setCookie = String(res.headers['set-cookie']);
+    expect(setCookie).toContain('HttpOnly');
+    expect(setCookie).toContain('SameSite=Lax');
+    await app.close();
+  });
+
   it('rechaza login demo en staging (MF-CON-05)', async () => {
     const stagingConfig = {
       ...config,
