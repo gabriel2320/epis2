@@ -22,6 +22,8 @@ import { getDatabase, pingDatabase } from './db/client.js';
 import { apiErrorHandler, apiNotFoundHandler } from './errors.js';
 import { registerSecurityHeaders } from './security/headers.js';
 import { buildCorsOptions } from './security/httpBaseline.js';
+import { createRateLimitStore } from './security/rateLimitStore.js';
+import { setRateLimitStore } from './security/rateLimit.js';
 
 const VERSION = '0.1.0';
 
@@ -48,6 +50,8 @@ export async function buildApp(config: AppConfig) {
     genReqId: () => randomUUID(),
   });
   const db = getDatabase(config.DATABASE_URL);
+
+  setRateLimitStore(await createRateLimitStore(config));
 
   registerSecurityHeaders(app, config);
 

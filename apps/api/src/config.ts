@@ -19,6 +19,8 @@ const envSchema = z.object({
   RLS_MODE: z.enum(['off', 'enforce']).default('off'),
   AUTH_MODE: z.enum(['demo', 'hybrid', 'production']).default('demo'),
   SERVICE_API_KEY: z.string().min(32).optional(),
+  /** Rate limit store — obligatorio en staging/production (MF-CON-07). */
+  REDIS_URL: z.string().url().optional(),
   LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace']).default('info'),
   // MF-NORM-203: OTel mínimo — off por defecto en dev; spans solo con flag explícito.
   OTEL_ENABLED: z
@@ -63,6 +65,10 @@ export function assertDeploymentGuards(
       throw new Error(
         'Fail-closed: staging/production requieren SESSION_SECRET explícito (no default dev).',
       );
+    }
+    const redisUrl = env.REDIS_URL?.trim();
+    if (!redisUrl) {
+      throw new Error('Fail-closed: staging/production requieren REDIS_URL (rate limit).');
     }
   }
 }

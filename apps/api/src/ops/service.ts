@@ -52,6 +52,8 @@ export async function getOpsStatus(
     hardening: {
       rlsMode: parseRlsMode(config?.RLS_MODE),
       rlsProtectedTables: [...RLS_PROTECTED_TABLES],
+      rateLimitBackend:
+        config?.NODE_ENV === 'staging' || config?.NODE_ENV === 'production' ? 'redis' : 'memory',
       rateLimitLogin: config?.NODE_ENV !== 'test',
       rateLimitAi: config?.NODE_ENV !== 'test',
       rateLimitCommands: config?.NODE_ENV !== 'test',

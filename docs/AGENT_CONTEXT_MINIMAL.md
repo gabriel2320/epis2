@@ -2,7 +2,7 @@
 
 **Versión:** 4.5 · **Ola 14 ✓** · **STRENGTHEN** 23/23 ✓ · **FICHA-FIRST ✓** · **Consolidación** Fase 0–4 ✓
 
-> **Brújula de alcance:** [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) · **Congelamiento:** [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) · inventario: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md)
+> **Brújula de alcance:** [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) · **Gobierno docs:** [`DOCUMENTATION_GOVERNANCE.md`](DOCUMENTATION_GOVERNANCE.md) · **Congelamiento:** [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) · inventario: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md)
 
 ---
 
