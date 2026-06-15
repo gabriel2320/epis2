@@ -1,8 +1,9 @@
 # EPIS2 — Estado actual del proyecto (brújula)
 
-**Versión:** 1.0 · **Fecha:** 2026-06-15  
+**Versión:** 1.1 · **Fecha:** 2026-06-15  
 **Audiencia:** equipos, agentes Cursor, planificación  
-**Supersedes parcialmente:** [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md) para decisiones de alcance (tablero histórico — actualizar en consolidación)
+**Gobierno documental:** [`DOCUMENTATION_GOVERNANCE.md`](DOCUMENTATION_GOVERNANCE.md) · **Entrada pública:** [`README.md`](../README.md)  
+**Supersedes parcialmente:** [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md) para decisiones de alcance (tablero = índice humano)
 
 > Visión north star: [`product/VISION_EPIS2.md`](product/VISION_EPIS2.md) v2 · Canon: [`PRODUCT_CANON.md`](PRODUCT_CANON.md)
 
@@ -50,7 +51,7 @@ Leyenda: ✓ · ◐ parcial · ✗ fuera de alcance actual.
 | **Labs in-repo** | Sintéticos, intel externa, no imprescindibles al arranque | `services/clinical-case-intel`, `services/drug-intel` |
 | **Runtime IA** | Assist opcional | `services/local-ai`, `packages/ai-client` |
 | **Tools / dev** | Gates, agentes, CI, auditorías | `scripts/`, `.github/`, `.cursor/` |
-| **Archive / histórico** | Legacy, candidatos, reportes viejos | `migration/`, `reports/` (mover subconjunto a `reports/archive/` en consolidación) |
+| **Archive / histórico** | Legacy, candidatos, reportes viejos | `migration/`, `docs/archive/`, `reports/archive/` · índice [`reports/README.md`](../reports/README.md) |
 | **Satélites externos** | Contrato JSON/HTTP, no import cruzado | `../epis2-evolab`, `../EPIS2-MedRepo` — [`EPIS2_TRIADA_REPOS.md`](product/EPIS2_TRIADA_REPOS.md) |
 
 Regla: **core no depende de labs** (deuda: API aún puede tocar case-intel — marcar needs-review).
@@ -177,6 +178,8 @@ Todo cambio debe mejorar claridad o mantenibilidad sin alterar flujo clínico m�
 
 | Doc | Uso |
 |-----|-----|
+| [`DOCUMENTATION_GOVERNANCE.md`](DOCUMENTATION_GOVERNANCE.md) | Jerarquía de verdad · conflictos README/ledger/reports |
+| [`archive/PHASE_HISTORY.md`](archive/PHASE_HISTORY.md) | Cronología EPIS2-00…12 (histórico) |
 | [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md) | Packages, services, scripts |
 | [`VISION_EPIS2.md`](product/VISION_EPIS2.md) | North star + matriz dominio |
 | [`AGENT_CONTEXT_MINIMAL.md`](AGENT_CONTEXT_MINIMAL.md) | Loop agente |
