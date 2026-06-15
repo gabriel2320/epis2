@@ -20,8 +20,7 @@ export function ChartEspacioCommandDock() {
     ...(patientId ? { patientId } : {}),
     commandContext,
   });
-  const { query, setQuery, submit, pendingConfirmation, confirmPending, cancelPending } =
-    command;
+  const { query, setQuery, submit, pendingConfirmation, confirmPending, cancelPending } = command;
 
   if (!isCensus && !patientId) return null;
 
