@@ -30,7 +30,7 @@ Evidencia: [`epis2-prog-consolidate-close-2026.md`](../../reports/epis2-prog-con
 | **MF-CON-02** | ✓ DONE | Freeze + gobierno · PR [#7](https://github.com/gabriel2320/epis2/pull/7) |
 | **MF-CON-04** | ✓ DONE | Config staging/production guards |
 | **MF-CON-05** | ✓ DONE | Demo auth killswitch · PR [#8](https://github.com/gabriel2320/epis2/pull/8) |
-| **MF-CON-06** | **READY** | Baseline HTTP (CSP, cookies, CORS) |
+| **MF-CON-06** | **PR [#9](https://github.com/gabriel2320/epis2/pull/9)** | Baseline HTTP (CSP, cookies, CORS) |
 
 **Siguiente:** MF-CON-06 → MF-CON-07 rate limit · plan [`EPIS2_CONSOLIDATION_PHASE2_PLAN.md`](./EPIS2_CONSOLIDATION_PHASE2_PLAN.md)
 
