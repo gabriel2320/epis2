@@ -1,33 +1,33 @@
 # EPIS2 — Dev Brief (IA asistida)
 
-> **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-layers-integrator.md` — declarar alcance en el primer mensaje.
+> **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-ledger-keeper.md` — declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-15T23:30:00.000Z · **Ola:** 14 ✓ · **STRENGTHEN** 23/23 ✓ cerrado
+**Generado:** 2026-06-15T12:16:00.866Z · **HEAD:** `5f6bca6` · **Fase:** B
 
 ## Orquestador (MF-RAPID + STRENGTHEN)
 
-- **PROG-STRENGTHEN** — ✓ **23/23 cerrado** · [`epis2-prog-strengthen-close-2026.md`](./epis2-prog-strengthen-close-2026.md)
-- Ola 14 ✓ cerrada — MF-IC-04 HL7 hardening · `quality:strengthen-close-gate`
-- Plan: [`dev-agent-orchestration-plan.json`](./dev-agent-orchestration-plan.json) · §22–§23 [`epis2-orquestacion-paralela-2026-06-14.md`](./epis2-orquestacion-paralela-2026-06-14.md)
+- **PROG-RAPID** ✓ — iteración: `npm run dev:rapid` · cierre MF: `npm run quality:clinical`
+- **PROG-FICHA-FIRST** — MF-FF-01…03 ✓ · home censo · `/comando` redirect
+- **No** iniciar la MF READY siguiente salvo petición explícita del usuario.
+- STRENGTHEN: PROG-STRENGTHEN-2026 · 23/23 DONE
+- FICHA-FIRST: PROG-FICHA-FIRST-2026 · 16/16 DONE (programa cerrado)
+
 
 ## Estado del tablero (fuente canónica)
 
-- **Cerrado:** **PROG-STRENGTHEN** ✓ 23/23 · **MF-IC-01…04** ✓
-- **Siguiente (READY):** **MF-FF-04** — Dashboard secundario en nav
-- **Gate:** `npm run quality:ui-simplify-gate`
+- Tablero no legible — revisar `docs/product/EPIS2_TABLERO.md` manualmente.
 
 ## Objetivo sugerido
 
-- **MF sugerida (READY):** `MF-FF-04` — Dashboard secundario en nav
-- **Gate:** `npm run quality:ui-simplify-gate`
+- Ver `docs/product/EPIS2_TABLERO.md` § Siguiente.
 
 ## Subagente primario
 
-**[`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md)** — IA clínica local (Ollama producto · PROG-INTEROP-CHILE)
+**[`ledger-keeper`](./dev-agent-prompt-ledger-keeper.md)** — Ledger microfases
 
 ## Secuencia completa
 
-1. `ollama-clinical` — IA clínica local (PROG-INTEROP-CHILE)
+1. `layers-integrator` — Integrador capas L3+L4+L5
 2. `ollama-dev-writer` — Escritor dev bajo riesgo (Ollama)
 3. `ollama-clinical` — IA clínica local (Ollama producto)
 4. `golden-guardian` — Guardián Golden Journey
@@ -35,9 +35,15 @@
 
 ## Working tree
 
-- Rama: `master` · **limpio** · ahead of `origin/master`: **~22 commits**
-- Último commit: `bb9a9e3`
-- Push: pendiente (humano)
+- Rama: `master` · cambios: 5
+
+```
+M docs/AGENT_CONTEXT_MINIMAL.md
+M docs/product/EPIS2_TABLERO.md
+M reports/dev-agent-audit-diff-latest.json
+M reports/dev-agent-brief.md
+?? reports/epis2-session-close-2026-06-15-consolidation-ola2.md
+```
 
 ## Evolab (QA externo)
 
@@ -62,7 +68,6 @@
 npm run stack:dev          # si falta Postgres/Ollama
 npm run dev:velocity       # banner vivo (STRENGTHEN + HEAD)
 npm run dev:rapid          # iteración MF-RAPID
-npm run quality:registry-status  # ledgers consolidados
 npm run dev:session        # regenerar este brief
 npm run quality:strengthen-next
 npm run ollama:route        # modelos por función + tier estación
@@ -89,7 +94,6 @@ npm run ollama:route        # modelos por función + tier estación
 
 ```bash
 npm run dev:rapid
-npm run quality:registry-status  # ledgers consolidados
 npm run quality:clinical   # cierre MF clínico
 npm run quality:full       # pre-PR
 npm run db:validate
@@ -101,13 +105,13 @@ npm run dev:agent:close    # checklist + plantilla reporte
 # EPIS2 — Sesión subagentes de desarrollo
 
 **Fase:** B
-**Generado:** 2026-06-14T18:10:03.314Z
+**Generado:** 2026-06-15T12:16:00.867Z
 
 ## Secuencia recomendada
 
-1. [`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md) — IA clínica local (PROG-INTEROP-CHILE)
+1. [`layers-integrator`](./dev-agent-prompt-layers-integrator.md) — Integrador capas L3+L4+L5
 2. [`ollama-dev-writer`](./dev-agent-prompt-ollama-dev-writer.md) — Escritor dev bajo riesgo (Ollama)
-3. [`layers-integrator`](./dev-agent-prompt-layers-integrator.md) — Integrador capas L3+L4+L5
+3. [`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md) — IA clínica local (Ollama producto)
 4. [`golden-guardian`](./dev-agent-prompt-golden-guardian.md) — Guardián Golden Journey
 5. [`gate-runner`](./dev-agent-prompt-gate-runner.md) — Ejecutor de gates
 
