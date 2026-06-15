@@ -26,7 +26,7 @@ export async function registerAuthRoutes(
   app.post('/api/auth/login', async (request, reply) => {
     if (config.NODE_ENV !== 'test' && config.NODE_ENV !== 'development') {
       const clientIp = request.ip || 'unknown';
-      const limit = checkRateLimit({
+      const limit = await checkRateLimit({
         key: `login:${clientIp}`,
         max: 20,
         windowMs: 15 * 60 * 1000,

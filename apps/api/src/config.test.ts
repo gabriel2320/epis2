@@ -75,10 +75,30 @@ describe('assertDeploymentGuards', () => {
           RLS_MODE: 'enforce',
           AUTH_MODE: 'hybrid',
           SESSION_SECRET: explicitSessionToken,
+          REDIS_URL: 'redis://127.0.0.1:6379',
+        },
+        {
+          SESSION_SECRET: explicitSessionToken,
+          REDIS_URL: 'redis://127.0.0.1:6379',
+        },
+      ),
+    ).not.toThrow();
+  });
+
+  it('rechaza staging sin REDIS_URL (MF-CON-07)', () => {
+    const explicitSessionToken = 'staging-session-value-min-32-chars';
+    expect(() =>
+      assertDeploymentGuards(
+        {
+          ...baseConfig(),
+          NODE_ENV: 'staging',
+          RLS_MODE: 'enforce',
+          AUTH_MODE: 'hybrid',
+          SESSION_SECRET: explicitSessionToken,
         },
         { SESSION_SECRET: explicitSessionToken },
       ),
-    ).not.toThrow();
+    ).toThrow(/REDIS_URL/);
   });
 });
 
