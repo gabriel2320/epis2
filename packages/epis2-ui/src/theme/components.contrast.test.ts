@@ -49,4 +49,19 @@ describe('buildEpis2Components contained contrast', () => {
     const primaryChip = styles['&.MuiChip-filledPrimary'] as Record<string, string>;
     expect(primaryChip.color).toBe(theme.palette.primary.contrastText);
   });
+
+  it('chips outlined info cumplen contraste (MF-NORM-401)', () => {
+    const theme = createEpis2Theme({ mode: 'light', accent: 'clinicalBlue' });
+    expect(contrastRatio(theme.palette.info.dark, theme.palette.info.light)).toBeGreaterThanOrEqual(
+      4.5,
+    );
+    const components = buildEpis2Components('standard');
+    const root = components.MuiChip?.styleOverrides?.root;
+    const styles = (root as (p: { theme: Theme }) => Record<string, unknown>)({ theme });
+    const infoOutlined = styles['&.MuiChip-outlined.MuiChip-colorInfo'] as
+      | Record<string, string>
+      | undefined;
+    expect(infoOutlined?.color).toBe(theme.palette.info.dark);
+    expect(infoOutlined?.backgroundColor ?? infoOutlined?.bgcolor).toBe(theme.palette.info.light);
+  });
 });

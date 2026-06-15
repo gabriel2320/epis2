@@ -330,6 +330,12 @@ export function buildEpis2Components(
             bgcolor: theme.palette.success.main,
             color: theme.palette.success.contrastText,
           },
+          // MF-NORM-401 — outlined info: info.main sobre paper falla axe; dark + light surface.
+          '&.MuiChip-outlined.MuiChip-colorInfo': {
+            borderColor: theme.palette.info.dark,
+            color: theme.palette.info.dark,
+            bgcolor: theme.palette.info.light,
+          },
         }),
       },
     },
