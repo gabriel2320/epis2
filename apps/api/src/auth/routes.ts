@@ -5,10 +5,7 @@ import type { Database } from '../db/client.js';
 import { appendAudit, listAuthAuditEvents } from '../audit/store.js';
 import { type AppConfig, isDemoAuthEnabled } from '../config.js';
 import { sendApiError } from '../errors.js';
-import {
-  clearSessionCookieOptions,
-  sessionCookieOptions,
-} from '../security/httpBaseline.js';
+import { clearSessionCookieOptions, sessionCookieOptions } from '../security/httpBaseline.js';
 import {
   createAuthenticate,
   createRequirePermission,
