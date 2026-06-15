@@ -31,7 +31,7 @@ Evidencia: [`epis2-prog-consolidate-close-2026.md`](../../reports/epis2-prog-con
 | **MF-CON-04** | ✓ DONE | Config staging/production guards |
 | **MF-CON-05** | ✓ DONE | Demo auth killswitch · PR [#8](https://github.com/gabriel2320/epis2/pull/8) |
 | **MF-CON-06** | ✓ DONE | Baseline HTTP (CSP, cookies, CORS) · PR [#9](https://github.com/gabriel2320/epis2/pull/9) |
-| **MF-CON-07** | **READY** | Rate limit Redis/Valkey · mem dev/test |
+| **MF-CON-07** | **PR [#10](https://github.com/gabriel2320/epis2/pull/10)** | Rate limit Redis/Valkey · mem dev/test |
 
 **Siguiente:** MF-CON-07 PR 007 → MF-CON-03 gobierno · plan [`EPIS2_CONSOLIDATION_PHASE2_PLAN.md`](./EPIS2_CONSOLIDATION_PHASE2_PLAN.md)
 
