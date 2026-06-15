@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-14T20:18:49.298Z",
+  "generatedAt": "2026-06-15T11:50:12.217Z",
   "model": "qwen2.5-coder:7b",
   "route": {
     "baseUrl": "http://127.0.0.1:11434",
@@ -33,20 +33,25 @@
     "ollamaUp": true
   },
   "stagedOnly": false,
-  "diffChars": 17048,
+  "diffChars": 14554,
   "truncated": false,
   "audit": {
     "verdict": "APROBAR",
-    "summary": "El diff no contiene riesgos significativos que requieran corrección inmediata.",
+    "summary": "El diff solo incluye mejoras en la seguridad HTTP y pruebas, sin riesgos significativos.",
     "findings": [
       {
         "severity": "P2",
-        "category": "other",
-        "detail": "Se ha eliminado el uso de 'getProbablePatientActionChips' en DualChartPatientPage y se ha añadido la lógica para calcular las acciones probables en PatientWorkspacePage. Esto es parte del MF-FF-07."
+        "category": "security",
+        "detail": "Se agregaron opciones de CORS basadas en la configuración del entorno."
+      },
+      {
+        "severity": "P2",
+        "category": "tests",
+        "detail": "Se añadieron pruebas para verificar las cookies de sesión y el CSP."
       }
     ],
     "suggestedTests": [
-      "npm run quality:clinical-productivity-gate"
+      "npm run test"
     ],
     "requiresHumanReview": true
   }

@@ -43,13 +43,13 @@ Detalle por fase: [`../ROADMAP.md`](../ROADMAP.md) · informes `reports/epis2-0*
 
 | Plan | Estado | Reporte |
 |------|--------|---------|
-| **Plan A** — UX + docs | ✓ | `reports/epis2-ux-stabilization.md` |
-| **Plan B** — WIDGET-01 | ✓ | `reports/epis2-widget-01-mount.md` |
-| **Plan C** — V1 completo | ✓ | `reports/epis2-v1-plan-c-complete.md` |
-| **Plan D** — V2 slice ingreso/alta | ✓ | `reports/epis2-v2-plan-d-slice.md` |
-| **Plan E** — V3 | ✓ | `reports/epis2-v3-plan-e-slice.md` |
-| **Plan F** — V4/V5 + hardening | ✓ | `reports/epis2-plan-f-complete.md` |
-| **Plan G** — CI calidad | ✓ | `reports/epis2-plan-g-complete.md` |
+| **Plan A** — UX + docs | ✓ | `reports/archive/2026-06/epis2-ux-stabilization.md` |
+| **Plan B** — WIDGET-01 | ✓ | `reports/archive/2026-06/epis2-widget-01-mount.md` |
+| **Plan C** — V1 completo | ✓ | `reports/archive/2026-06/epis2-v1-plan-c-complete.md` |
+| **Plan D** — V2 slice ingreso/alta | ✓ | `reports/archive/2026-06/epis2-v2-plan-d-slice.md` |
+| **Plan E** — V3 | ✓ | `reports/archive/2026-06/epis2-v3-plan-e-slice.md` |
+| **Plan F** — V4/V5 + hardening | ✓ | `reports/archive/2026-06/epis2-plan-f-complete.md` |
+| **Plan G** — CI calidad | ✓ | `reports/archive/2026-06/epis2-plan-g-complete.md` |
 
 ---
 

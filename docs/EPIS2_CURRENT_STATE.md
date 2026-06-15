@@ -100,7 +100,7 @@ Detalle inventario módulos: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md).
 | OpenMRS / Carbon / EPIS overlay | Fósil | No | **Archive** — solo `migration/` + audit scripts |
 | `scripts/dev-agent` OpenClaw | Dev tooling | No | **Tools** — no producto clínico |
 | ~240 gates `validate-*` | Histórico MF | No | **Consolidar** — meta-gates abajo |
-| ~486 `reports/*.md` | Histórico | No | **Archive** progresivo |
+| ~460 `reports/*.md` (raíz) | Histórico | No | **Archive** progresivo · lote 1 → `reports/archive/2026-06/` |
 
 ---
 
