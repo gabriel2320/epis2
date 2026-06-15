@@ -12,7 +12,11 @@ const REQUIRED_DOCS = [
   'reports/archive/2026-06/README.md',
 ];
 
-const WEB_FORBIDDEN_IMPORTS = ['@epis2/local-ai', 'services/local-ai', 'services/clinical-case-intel'];
+const WEB_FORBIDDEN_IMPORTS = [
+  '@epis2/local-ai',
+  'services/local-ai',
+  'services/clinical-case-intel',
+];
 
 export async function validate() {
   const errors = [];
