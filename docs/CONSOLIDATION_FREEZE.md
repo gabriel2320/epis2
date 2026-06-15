@@ -62,6 +62,7 @@ Production no arranca con auth demo ni RLS off
 
 ## Referencias
 
+- [`MONOREPO_GOVERNANCE.md`](MONOREPO_GOVERNANCE.md) · [`DOCUMENTATION_GOVERNANCE.md`](DOCUMENTATION_GOVERNANCE.md)
 - [`PRODUCT_INVARIANTS.md`](product/PRODUCT_INVARIANTS.md)
 - [`PRODUCT_CANON.md`](PRODUCT_CANON.md)
 - [`epis2-prog-consolidate-close-2026.md`](../reports/epis2-prog-consolidate-close-2026.md) — ola 1 (scripts)

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * PROG-CONSOLIDATE Fase 4 — documenta cierre y verifica gates post-prune compatibles con CI.
+ * PROG-CONSOLIDATE Fase 4 + MF-CON-11 — verifica manifiestos y workflows CI.
  *   npm run tool:consolidate:verify-phase4
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
@@ -33,6 +33,9 @@ if (!pkg.scripts?.['build:ci-fixtures-chain']) {
 if (!pkg.scripts?.['build:packages']?.includes('@epis2/ai-client')) {
   errors.push('build:packages debe incluir @epis2/ai-client antes de local-ai');
 }
+if (!pkg.scripts?.['quality:experimental']) {
+  errors.push('package.json sin quality:experimental (MF-CON-11)');
+}
 
 for (const script of ['db:migrate', 'test:e2e', 'test:e2e:dual-chart']) {
   if (!pkg.scripts?.[script]?.includes('@epis2/')) {
@@ -40,20 +43,34 @@ for (const script of ['db:migrate', 'test:e2e', 'test:e2e:dual-chart']) {
   }
 }
 
-const ciYml = readFileSync(join(root, '.github/workflows/ci.yml'), 'utf8');
-if (!ciYml.includes('build:ci-fixtures-chain')) {
-  errors.push('ci.yml debe usar build:ci-fixtures-chain antes de case-intel-closure-gate');
+const workflowChecks = [
+  ['.github/workflows/ci.yml', ['quality:required', 'e2e-dual-chart']],
+  ['.github/workflows/ci-nightly.yml', ['quality:nightly']],
+  ['.github/workflows/ci-experimental.yml', ['quality:experimental']],
+];
+
+for (const [rel, needles] of workflowChecks) {
+  if (!existsSync(join(root, rel))) {
+    errors.push(`Falta workflow ${rel}`);
+    continue;
+  }
+  const content = readFileSync(join(root, rel), 'utf8');
+  for (const needle of needles) {
+    if (!content.includes(needle)) errors.push(`${rel} debe incluir ${needle}`);
+  }
 }
 
-const dry = spawnSync('node', ['tools/gates/run-gate.mjs', '--dry-run', 'required'], {
-  cwd: root,
-  encoding: 'utf8',
-});
-if (dry.status !== 0) errors.push('quality:required dry-run falló');
+for (const manifest of ['required', 'nightly', 'experimental']) {
+  const dry = spawnSync('node', ['tools/gates/run-gate.mjs', '--dry-run', manifest], {
+    cwd: root,
+    encoding: 'utf8',
+  });
+  if (dry.status !== 0) errors.push(`gate ${manifest} dry-run falló`);
+}
 
 if (errors.length) {
   console.error('phase4-verify FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 
-console.log('phase4-verify OK — CI gates en catálogo, shims workspace, required dry-run');
+console.log('phase4-verify OK — CI tiers, manifiestos y shims workspace');

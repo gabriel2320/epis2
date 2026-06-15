@@ -1,6 +1,6 @@
 # EPIS2 — Gobierno del monorepo
 
-**Versión:** 1.0 · **Programa:** PROG-CONSOLIDATE-2 · **Estado:** zonas lógicas (sin mv físico masivo)
+**Versión:** 1.1 · **Programa:** PROG-CONSOLIDATE-2 · **Estado:** ✓ MF-CON-03 (validator + archive index)
 
 Plan: [`product/EPIS2_CONSOLIDATION_PHASE2_PLAN.md`](product/EPIS2_CONSOLIDATION_PHASE2_PLAN.md) · Freeze: [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md)
 

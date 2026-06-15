@@ -66,6 +66,7 @@
     "quality:full": "node scripts/quality/run-quality-full.mjs",
     "quality:required": "node tools/gates/run-gate.mjs required",
     "quality:nightly": "node tools/gates/run-gate.mjs nightly",
+    "quality:experimental": "node tools/gates/run-gate.mjs experimental",
     "tool:scripts:classify": "node tools/scripts/classify.mjs",
     "tool:gates:sync-catalog": "node tools/gates/sync-catalog.mjs",
     "tool:gates:verify": "node tools/gates/verify-infra.mjs",
