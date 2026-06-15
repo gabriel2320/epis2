@@ -3,8 +3,9 @@ import { loginRequestSchema, sessionResponseSchema } from '@epis2/contracts';
 import type { FastifyInstance } from 'fastify';
 import type { Database } from '../db/client.js';
 import { appendAudit, listAuthAuditEvents } from '../audit/store.js';
-import { type AppConfig, isDemoAuthEnabled, isDeployedEnv } from '../config.js';
+import { type AppConfig, isDemoAuthEnabled } from '../config.js';
 import { sendApiError } from '../errors.js';
+import { clearSessionCookieOptions, sessionCookieOptions } from '../security/httpBaseline.js';
 import {
   createAuthenticate,
   createRequirePermission,
@@ -74,10 +75,7 @@ export async function registerAuthRoutes(
     );
 
     reply.setCookie(config.SESSION_COOKIE_NAME, token, {
-      httpOnly: true,
-      sameSite: 'lax',
-      secure: isDeployedEnv(config.NODE_ENV),
-      path: '/',
+      ...sessionCookieOptions(config),
       maxAge: 60 * 60 * 8,
     });
 
@@ -106,7 +104,7 @@ export async function registerAuthRoutes(
       actorId: session.sub,
       username: session.username,
     });
-    reply.clearCookie(config.SESSION_COOKIE_NAME, { path: '/' });
+    reply.clearCookie(config.SESSION_COOKIE_NAME, clearSessionCookieOptions(config));
     return { ok: true };
   });
 
