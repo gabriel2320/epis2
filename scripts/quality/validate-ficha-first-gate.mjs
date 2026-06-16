@@ -110,7 +110,9 @@ const catalogGates = catalog.gates ?? {};
 const uiAlias = catalogGates['quality:ui'];
 const aiAlias = catalogGates['quality:ai'];
 if (pkgScripts['quality:ui'] || pkgScripts['quality:ai']) {
-  errors.push('package.json root no debe definir quality:ui/quality:ai (usar catalog-full.json, MF-FF-15)');
+  errors.push(
+    'package.json root no debe definir quality:ui/quality:ai (usar catalog-full.json, MF-FF-15)',
+  );
 }
 if (!uiAlias?.command?.includes('quality:ui-simplify-gate')) {
   errors.push('catalog-full.json debe definir quality:ui → quality:ui-simplify-gate (MF-FF-15)');

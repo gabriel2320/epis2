@@ -9,6 +9,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(
-  'core-no-labs-imports-gate OK — apps/web, apps/api y packages/* sin deps/imports labs',
-);
+console.log('core-no-labs-imports-gate OK — apps/web, apps/api y packages/* sin deps/imports labs');
