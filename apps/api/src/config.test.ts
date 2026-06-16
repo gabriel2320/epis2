@@ -61,7 +61,15 @@ describe('assertDeploymentGuards', () => {
 
   it('rechaza staging con SESSION_SECRET default dev', () => {
     expect(() =>
-      assertDeploymentGuards({ ...baseConfig(), NODE_ENV: 'staging', RLS_MODE: 'enforce' }, {}),
+      assertDeploymentGuards(
+        {
+          ...baseConfig(),
+          NODE_ENV: 'staging',
+          RLS_MODE: 'enforce',
+          AUTH_MODE: 'production',
+        },
+        {},
+      ),
     ).toThrow(/SESSION_SECRET/);
   });
 
@@ -76,10 +84,12 @@ describe('assertDeploymentGuards', () => {
           AUTH_MODE: 'hybrid',
           SESSION_SECRET: explicitSessionToken,
           REDIS_URL: 'redis://127.0.0.1:6379',
+          SERVICE_API_KEY: 'staging-service-api-key-min-32-chars-long',
         },
         {
           SESSION_SECRET: explicitSessionToken,
           REDIS_URL: 'redis://127.0.0.1:6379',
+          SERVICE_API_KEY: 'staging-service-api-key-min-32-chars-long',
         },
       ),
     ).not.toThrow();
@@ -93,12 +103,52 @@ describe('assertDeploymentGuards', () => {
           ...baseConfig(),
           NODE_ENV: 'staging',
           RLS_MODE: 'enforce',
-          AUTH_MODE: 'hybrid',
+          AUTH_MODE: 'production',
           SESSION_SECRET: explicitSessionToken,
         },
         { SESSION_SECRET: explicitSessionToken },
       ),
     ).toThrow(/REDIS_URL/);
+  });
+
+  it('rechaza staging con AUTH_MODE=demo (RH-07)', () => {
+    const explicitSessionToken = 'staging-session-value-min-32-chars';
+    expect(() =>
+      assertDeploymentGuards(
+        {
+          ...baseConfig(),
+          NODE_ENV: 'staging',
+          RLS_MODE: 'enforce',
+          AUTH_MODE: 'demo',
+          SESSION_SECRET: explicitSessionToken,
+          REDIS_URL: 'redis://127.0.0.1:6379',
+        },
+        {
+          SESSION_SECRET: explicitSessionToken,
+          REDIS_URL: 'redis://127.0.0.1:6379',
+        },
+      ),
+    ).toThrow(/AUTH_MODE=demo/);
+  });
+
+  it('rechaza staging hybrid sin SERVICE_API_KEY (RH-07)', () => {
+    const explicitSessionToken = 'staging-session-value-min-32-chars';
+    expect(() =>
+      assertDeploymentGuards(
+        {
+          ...baseConfig(),
+          NODE_ENV: 'staging',
+          RLS_MODE: 'enforce',
+          AUTH_MODE: 'hybrid',
+          SESSION_SECRET: explicitSessionToken,
+          REDIS_URL: 'redis://127.0.0.1:6379',
+        },
+        {
+          SESSION_SECRET: explicitSessionToken,
+          REDIS_URL: 'redis://127.0.0.1:6379',
+        },
+      ),
+    ).toThrow(/SERVICE_API_KEY/);
   });
 });
 

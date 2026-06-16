@@ -90,7 +90,7 @@ Detalle: [`docs/ARCHITECTURE_TARGET.md`](docs/ARCHITECTURE_TARGET.md) · [`docs/
 | DB | `npm run db:migrate` · `npm run db:validate` |
 | Sesión agente Cursor | `npm run dev:session` |
 
-Node: ver [`.nvmrc`](.nvmrc) (20). CI usa Node 20.
+Node: ver [`.nvmrc`](.nvmrc) (24). CI usa Node 24.
 
 ---
 

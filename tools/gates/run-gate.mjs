@@ -24,7 +24,7 @@ function loadCatalog() {
 
 function usage() {
   console.error(`Usage:
-  node tools/gates/run-gate.mjs <required|nightly|experimental>
+  node tools/gates/run-gate.mjs <required|nightly|experimental|release>
   node tools/gates/run-gate.mjs run <quality:*|npm-script>
   node tools/gates/run-gate.mjs --dry-run <manifest>`);
   process.exit(1);
@@ -91,7 +91,7 @@ if (args[0] === 'run') {
 }
 
 const manifestName = args[0];
-if (!manifestName || !['required', 'nightly', 'experimental'].includes(manifestName)) {
+if (!manifestName || !['required', 'nightly', 'experimental', 'release'].includes(manifestName)) {
   usage();
 }
 

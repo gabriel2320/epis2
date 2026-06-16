@@ -39,7 +39,21 @@ Evidencia: [`epis2-prog-consolidate-close-2026.md`](../../reports/epis2-prog-con
 
 Evidencia: [`epis2-prog-consolidate-ola2-close-2026.md`](../../reports/epis2-prog-consolidate-ola2-close-2026.md) · CI run [27585415223](https://github.com/gabriel2320/epis2/actions/runs/27585415223)
 
-**Siguiente:** revisión legal humana [`DISCLAIMER.md`](../DISCLAIMER.md) · congelamiento vigente · sin MF-CON pendientes en plan ola 2.
+---
+
+## Activo — PROG-RELEASE-HARDENING (RH-*)
+
+Plan: [`EPIS2_RELEASE_HARDENING_PLAN.md`](./EPIS2_RELEASE_HARDENING_PLAN.md) · base tag **`v0.1-demo-rc2`**
+
+| RH | Estado | Entrega |
+|----|--------|---------|
+| RH-01 | PR abierto | Node 24 + Actions v5 |
+| RH-02…05 | PR abierto | CodeQL, Gitleaks, deps, SBOM (report-only) |
+| RH-07 | PR abierto | Auth demo/hybrid fail-closed deployed |
+| RH-08 | PR abierto | `quality:release` manifest |
+| RH-06 | pendiente | Web fixtures bridge (PR #14) |
+
+**Siguiente:** revisión legal [`DISCLAIMER.md`](../DISCLAIMER.md) · merge PR hardening · RH-06
 
 
 ## Cerrado — PROG-CONCILIACION-TRIADA-2026

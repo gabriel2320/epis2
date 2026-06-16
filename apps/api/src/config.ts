@@ -60,6 +60,14 @@ export function assertDeploymentGuards(
     throw new Error('Fail-closed: NODE_ENV=production requiere AUTH_MODE=production.');
   }
   if (isDeployedEnv(config.NODE_ENV)) {
+    if (config.AUTH_MODE === 'demo') {
+      throw new Error('Fail-closed: staging/production prohíben AUTH_MODE=demo (RH-07).');
+    }
+    if (config.AUTH_MODE === 'hybrid' && !config.SERVICE_API_KEY?.trim()) {
+      throw new Error(
+        'Fail-closed: staging/production con AUTH_MODE=hybrid requieren SERVICE_API_KEY.',
+      );
+    }
     const explicitSecret = env.SESSION_SECRET?.trim();
     if (!explicitSecret || explicitSecret === DEV_SESSION_SECRET_DEFAULT) {
       throw new Error(

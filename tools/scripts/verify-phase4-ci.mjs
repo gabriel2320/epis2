@@ -36,6 +36,9 @@ if (!pkg.scripts?.['build:packages']?.includes('@epis2/ai-client')) {
 if (!pkg.scripts?.['quality:experimental']) {
   errors.push('package.json sin quality:experimental (MF-CON-11)');
 }
+if (!pkg.scripts?.['quality:release']) {
+  errors.push('package.json sin quality:release (PROG-RELEASE-HARDENING RH-08)');
+}
 
 for (const script of ['db:migrate', 'test:e2e', 'test:e2e:dual-chart']) {
   if (!pkg.scripts?.[script]?.includes('@epis2/')) {
@@ -60,7 +63,24 @@ for (const [rel, needles] of workflowChecks) {
   }
 }
 
-for (const manifest of ['required', 'nightly', 'experimental']) {
+const rhWorkflows = [
+  '.github/workflows/ci-rh02-codeql.yml',
+  '.github/workflows/ci-rh03-gitleaks.yml',
+  '.github/workflows/ci-rh04-deps.yml',
+  '.github/workflows/ci-rh05-sbom.yml',
+];
+for (const rel of rhWorkflows) {
+  if (!existsSync(join(root, rel))) {
+    errors.push(`Falta workflow ${rel} (PROG-RELEASE-HARDENING)`);
+    continue;
+  }
+  const content = readFileSync(join(root, rel), 'utf8');
+  if (!content.includes('continue-on-error: true')) {
+    errors.push(`${rel} debe ser report-only (continue-on-error)`);
+  }
+}
+
+for (const manifest of ['required', 'nightly', 'experimental', 'release']) {
   const dry = spawnSync('node', ['tools/gates/run-gate.mjs', '--dry-run', manifest], {
     cwd: root,
     encoding: 'utf8',
