@@ -8,7 +8,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const e2eDir = join(root, 'e2e');
 const errors = [];
 
-const FORBIDDEN = ['epis2-power-bar', 'epis2-floating-command-dock'];
+const FORBIDDEN = ['epis2-power-bar', 'epis2-floating-command-dock', 'epis2-patient-workspace'];
 
 function walkTsFiles(dir) {
   const out = [];
@@ -54,4 +54,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('e2e-transversal-bar-gate OK — PROG-E2E-HYGIENE sin dock/power-bar legacy');
+console.log('e2e-transversal-bar-gate OK — PROG-E2E-HYGIENE sin dock/power-bar/workspace legacy');

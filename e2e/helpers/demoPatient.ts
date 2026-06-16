@@ -14,6 +14,71 @@ export function getTransversalCommandBar(page: Page): Locator {
     .or(page.getByTestId('epis2-paper-command-bar'));
 }
 
+/** Ficha dual ADR-002 — shell + modo tradicional (default post PROG-FICHA-FIRST). */
+export async function expectDualChartFicha(page: Page) {
+  await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
+}
+
+export type ClassicChartTabId = 'summary' | 'evolutions' | 'orders' | 'exams' | 'documents' | 'more';
+
+export async function openClassicChartTab(page: Page, tab: ClassicChartTabId) {
+  const tabLocator = page.getByTestId(`classic-chart-tab-${tab}`);
+  await expect(tabLocator).toBeVisible({ timeout: 15_000 });
+  await tabLocator.click();
+}
+
+/** Resumen clínico cargado — fuerza tab Resumen (memoria operacional puede restaurar otra sección). */
+export async function expectFichaSummaryReady(page: Page) {
+  await expectDualChartFicha(page);
+  await page
+    .waitForResponse(
+      (resp) => resp.url().includes('/api/user/operational-memory') && resp.ok(),
+      { timeout: 15_000 },
+    )
+    .catch(() => undefined);
+  await expect(async () => {
+    await openClassicChartTab(page, 'summary');
+    await expect(page.getByTestId('epis2-clinical-summary-grid')).toBeVisible({ timeout: 2_000 });
+    await expect(
+      page.locator('[data-testid^="epis2-clinical-summary-grid-"]').first(),
+    ).toBeVisible({ timeout: 2_000 });
+  }).toPass({ timeout: 15_000 });
+}
+
+/** Tab Evoluciones — timeline filtrable (reemplaza split epis2-ficha-history). */
+export async function openFichaEvolutions(page: Page) {
+  await openClassicChartTab(page, 'evolutions');
+  await expect(page.getByTestId('epis2-clinical-filterable-timeline')).toBeVisible({
+    timeout: 15_000,
+  });
+}
+
+export async function openFichaExams(page: Page) {
+  await openClassicChartTab(page, 'exams');
+  await expect(page.getByTestId('epis2-traditional-section-labs')).toBeVisible({
+    timeout: 15_000,
+  });
+}
+
+export async function openFichaDocuments(page: Page) {
+  await openClassicChartTab(page, 'documents');
+  await expect(page.getByTestId('epis2-traditional-section-documents')).toBeVisible({
+    timeout: 15_000,
+  });
+}
+
+export async function loginAsPhysicianApiOnly(page: Page) {
+  const login = await page.request.post('/api/auth/login', {
+    data: { username: 'medico.demo', demoAuthKey: 'DEMO-CLAVE-MEDICO' },
+  });
+  if (!login.ok()) {
+    throw new Error(`login médico demo falló (HTTP ${login.status()})`);
+  }
+  const state = await page.request.storageState();
+  await page.context().addCookies(state.cookies);
+}
+
 export async function fillTransversalCommand(page: Page, query: string) {
   const bar = getTransversalCommandBar(page);
   await expect(bar).toBeVisible({ timeout: 15_000 });
@@ -47,12 +112,7 @@ export async function pinDemoCase(page: Page, demoCode: string) {
     throw new Error(`demoCode desconocido: ${demoCode}`);
   }
   await page.goto(`/espacio/ficha?patientId=${demo.patientId}&chartMode=traditional`);
-  await expect(
-    page
-      .getByTestId('epis2-dual-chart-ficha')
-      .or(page.getByTestId('epis2-clinical-shell-v2'))
-      .or(page.getByTestId('epis2-patient-workspace')),
-  ).toBeVisible({ timeout: 15_000 });
+  await expectDualChartFicha(page);
 }
 
 /** Flujo UI Buscar → grid demo (alternativa cuando hace falta recorrer la búsqueda). */
@@ -62,12 +122,7 @@ export async function selectDemoPatientViaSearch(page: Page, demoCode: string) {
   await page.getByRole('button', { name: copy.forms.searchPatients }).click();
   await page.getByRole('button', { name: demoCode }).click();
   await expect(page).toHaveURL(/\/espacio\/ficha/);
-  await expect(
-    page
-      .getByTestId('epis2-dual-chart-ficha')
-      .or(page.getByTestId('epis2-clinical-shell-v2'))
-      .or(page.getByTestId('epis2-patient-workspace')),
-  ).toBeVisible({ timeout: 15_000 });
+  await expectDualChartFicha(page);
 }
 
 export async function openAmbulatoryFromCommand(page: Page) {
