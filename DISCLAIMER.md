@@ -1,6 +1,6 @@
 # EPIS2 — Aviso legal y limitación de uso
 
-**Versión:** 1.0 · **Programa:** PROG-CONSOLIDATE ola 2 (MF-CON-10)
+**Versión:** 1.1 · **Programa:** PROG-POST-RC3 (MF-LEG-02) · **Revisión:** 2026-06-11
 
 Este repositorio contiene **software de demostración y desarrollo** para un producto clínico command-first. **No está certificado ni validado para uso clínico real.**
 
@@ -27,4 +27,8 @@ El software se proporciona «tal cual», sin garantías de ningún tipo. Véase 
 
 ## Revisión humana
 
-Este texto es plantilla de consolidación. **Revisión legal institucional recomendada** antes de cualquier uso público o comercial.
+Revisión legal de producto completada según [`docs/legal/EPIS2_LEGAL_REVIEW_CHECKLIST.md`](docs/legal/EPIS2_LEGAL_REVIEW_CHECKLIST.md) §5 (MF-LEG-02). Uso público o comercial ampliado sigue requiriendo asesoría legal institucional propia del despliegue.
+
+---
+
+_Revisor: operador producto EPIS2 · Fecha sign-off: 2026-06-11 · Evidencia: `reports/epis2-prog-legal-disclaimer-tramo3-close.md`_

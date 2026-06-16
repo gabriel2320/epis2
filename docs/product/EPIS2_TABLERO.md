@@ -123,11 +123,11 @@ Plan: [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-
 |-------|--------|---------|
 | **Tramo 1** | ✓ DONE | PROG-GOBIERNO-POST-RC3 · MF-GOV-01…04 |
 | **Tramo 2** | ✓ DONE | PROG-DEV-PARITY · MF-DEV-01…02 · `.gitattributes` + `quality:release` local |
-| **Tramo 3** | **en curso** | LEGAL · MF-LEG-01 ✓ checklist · **MF-LEG-02** pendiente sign-off humano |
-| Tramo 4 | pendiente | DEPS · triage Dependabot |
+| **Tramo 3** | ✓ DONE | LEGAL · MF-LEG-01 checklist · MF-LEG-02 DISCLAIMER v1.1 · [`epis2-prog-legal-disclaimer-tramo3-close.md`](../../reports/epis2-prog-legal-disclaimer-tramo3-close.md) |
+| **Tramo 4** | **siguiente** | DEPS · triage Dependabot |
 | Tramo 5 | pendiente | SECURITY-PROMOTE · Gitleaks/CodeQL blocking |
 
-**Siguiente:** completar sign-off §5 en [`docs/legal/EPIS2_LEGAL_REVIEW_CHECKLIST.md`](../legal/EPIS2_LEGAL_REVIEW_CHECKLIST.md) → MF-LEG-02 DISCLAIMER v1.1
+**Siguiente:** Tramo 4 DEPS-HYGIENE — triage Dependabot · plan [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-rc3-2026.md)
 
 ---
 

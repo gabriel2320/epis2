@@ -45,7 +45,7 @@ Un objetivo · pocos archivos · diff mínimo.
 | **PROG-CDS-UX** | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
 | **PROG-CONSOLIDATE** | ✓ ola 1 + ola 2 · tag `v0.1-demo-rc2` | [`epis2-prog-consolidate-ola2-close-2026.md`](../reports/epis2-prog-consolidate-ola2-close-2026.md) |
 | **PROG-RELEASE-HARDENING** | ✓ RH-01…08 · PR #15+#16 | [`epis2-session-close-2026-06-16-release-hardening.md`](../reports/epis2-session-close-2026-06-16-release-hardening.md) |
-| **PROG-POST-RC3** | **activo** Tramo 3 LEGAL | MF-LEG-01 ✓ · MF-LEG-02 pendiente · `quality:legal-disclaimer-gate` |
+| **PROG-POST-RC3** | **activo** Tramo 4 DEPS | Tramo 3 LEGAL ✓ · `quality:legal-disclaimer-gate` |
 
 Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.5 · orquestación: [`reports/epis2-orquestacion-paralela-2026-06-14.md`](../reports/epis2-orquestacion-paralela-2026-06-14.md) §22–§23
 
@@ -61,9 +61,9 @@ Cerrado: MF-IM-01…09 · **MF-CU-01…04** · **MF-IC-01…04** · **MF-FF-01�
 
 Cierre FICHA-FIRST: [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-prog-ficha-first-close-2026.md). **PROG-MEDIA-FUTURE** diferido 2027+.
 
-**Siguiente fase recomendada:** **PROG-POST-RC3** Tramo 3 — **MF-LEG-02** sign-off humano checklist [`docs/legal/EPIS2_LEGAL_REVIEW_CHECKLIST.md`](legal/EPIS2_LEGAL_REVIEW_CHECKLIST.md) → `DISCLAIMER.md` v1.1. MF-LEG-01 ✓. Tag demo: **`v0.1-demo-rc3`**.
+**Siguiente fase recomendada:** **PROG-POST-RC3** Tramo 4 — **PROG-DEPS-HYGIENE** (triage Dependabot). Tramo 3 LEGAL ✓ · `DISCLAIMER.md` v1.1. Tag demo: **`v0.1-demo-rc3`**.
 
-Evidencia: Tramo 1 [`epis2-prog-gobierno-post-rc3-tramo1-close.md`](../reports/epis2-prog-gobierno-post-rc3-tramo1-close.md) · Tramo 2 [`epis2-prog-dev-parity-tramo2-close.md`](../reports/epis2-prog-dev-parity-tramo2-close.md) · Tramo 3 MF-LEG-01 [`epis2-prog-legal-disclaimer-tramo3-mf-leg-01.md`](../reports/epis2-prog-legal-disclaimer-tramo3-mf-leg-01.md).
+Evidencia: Tramo 1 [`epis2-prog-gobierno-post-rc3-tramo1-close.md`](../reports/epis2-prog-gobierno-post-rc3-tramo1-close.md) · Tramo 2 [`epis2-prog-dev-parity-tramo2-close.md`](../reports/epis2-prog-dev-parity-tramo2-close.md) · Tramo 3 [`epis2-prog-legal-disclaimer-tramo3-close.md`](../reports/epis2-prog-legal-disclaimer-tramo3-close.md).
 
 ---
 

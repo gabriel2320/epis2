@@ -26,12 +26,9 @@ npm run quality:fast
 
 ---
 
-## Pendiente — MF-LEG-02
+## MF-LEG-02 — ✓ cerrado 2026-06-11
 
-1. Operador completa checklist §5 (sign-off humano).
-2. Actualizar `DISCLAIMER.md` → v1.1 con fecha y revisor.
-3. PR con comentario legal explícito · **no** auto-merge IA.
-4. Opcional: `EPIS2_LEGAL_V11_APPROVED=1` en gate CI tras merge.
+Sign-off humano operador producto · `DISCLAIMER.md` v1.1 · cierre: [`epis2-prog-legal-disclaimer-tramo3-close.md`](epis2-prog-legal-disclaimer-tramo3-close.md)
 
 ---
 
