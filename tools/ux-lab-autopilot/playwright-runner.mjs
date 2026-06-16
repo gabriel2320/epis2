@@ -6,17 +6,10 @@ import { repoRoot, walkthroughJsonPath } from './paths.mjs';
 export function runPlaywrightWalkthrough() {
   const env = applyModeAEnv();
   const r = spawnSync(
-    'npx',
-    [
-      'playwright',
-      'test',
-      '--config',
-      'playwright.config.ts',
-      'e2e/ux-lab-autopilot-mode-a.spec.ts',
-    ],
+    'node',
+    ['tools/scripts/run-e2e.mjs', 'e2e/ux-lab-autopilot-mode-a.spec.ts'],
     {
       cwd: repoRoot,
-      shell: true,
       stdio: 'inherit',
       env,
     },

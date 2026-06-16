@@ -1,6 +1,6 @@
 # PROG-UX-LAB — Cierre programa (MF-UXLAB-03)
 
-**Fecha:** 2026-06-16 · **HEAD:** `9da9e30` (post script diet `c8d0efc`) · **Plan:** [`EPIS2_UX_LAB_MODERN_PLAN.md`](../docs/quality/EPIS2_UX_LAB_MODERN_PLAN.md)
+**Fecha:** 2026-06-16 · **HEAD:** `6533680` (post #34 gate catalog) · **Plan:** [`EPIS2_UX_LAB_MODERN_PLAN.md`](../docs/quality/EPIS2_UX_LAB_MODERN_PLAN.md)
 
 ---
 
@@ -11,7 +11,7 @@
 | A | MF-UXLAB-00 | — | ✓ baseline [`epis2-ux-lab-baseline-2026-06-16.md`](./epis2-ux-lab-baseline-2026-06-16.md) |
 | B | MF-UXLAB-01 | #30 | ✓ censo narrativo + Shift Context Strip |
 | C | MF-UXLAB-02 | #31+#33 | ✓ watermark + chrome + slice 2 trust ladder |
-| D | MF-UXLAB-03 | #33 | ✓ reportes + gates compuestos · CI `required`+e2e ✓ |
+| D | MF-UXLAB-03 | #33+#34 | ✓ reportes + gates compuestos · CI `required`+e2e ✓ · catálogo close ✓ |
 
 ---
 
@@ -33,21 +33,19 @@
 | `quality:security-promote-gate` | ✓ local |
 | `quality:ux-pilot-gate` | ✓ local |
 | `quality:fast` | ✓ local + CI |
-| `required` + `e2e-dual-chart` | ✓ CI PR #33 |
-| `quality:golden-journey` | defer CI |
-| `quality:ux-pilot` | defer CI |
-| `quality:m3-human-pilot` | defer CI |
-| `quality:ux-lab-close` | defer (requiere stack + E2E) |
+| `required` + `e2e-dual-chart` | ✓ CI PR #33, #34 |
+| `quality:ux-lab-autopilot` | ✓ GO-CANDIDATE local 2026-06-16 |
+| `quality:ux-lab-close` | ◐ PR fix-only (E2E dual + m3 run-e2e) |
 
 ---
 
 ## Veredicto
 
-**PASS WITH FIXES** — flujo automatizado verde; **GO** final tras:
+**GO-CANDIDATE (automatizado)** — Autopilot Modo A ✓ · gates compuestos en PR fix-only:
 
-1. Walkthrough Modo A (1 operador, Ollama off)
-2. Revisión Nielsen 3–5 usuarios
-3. `npm run quality:gate -- quality:ux-lab-close` verde (stack + E2E)
+1. ~~Walkthrough Modo A humano~~ → **MF-UXLAB-04 Autopilot** ✓ [`run-2026-06-16`](./ux-lab-autopilot/run-2026-06-16.md)
+2. ~~Nielsen 3–5~~ — no requerido para GO-CANDIDATE bot
+3. `npm run quality:gate -- quality:ux-lab-close` — tras merge PR fix-only E2E/gates
 
 **Diferido 2027+:** MF-UXLAB-04 personas Evolab · atajos globales · telemetría clickstream.
 
