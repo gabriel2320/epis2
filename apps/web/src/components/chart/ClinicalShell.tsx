@@ -13,6 +13,8 @@ import {
   type PatientIdentityBandProps,
 } from './PatientIdentityBand.js';
 
+export type ClinicalShellComposition = 'full' | 'cica-minimal';
+
 export type ClinicalShellProps = {
   chartMode: ChartModeId;
   onChartModeChange: (mode: ChartModeId) => void;
@@ -44,14 +46,14 @@ export type ClinicalShellProps = {
   onPrint?: (() => void) | undefined;
   userDisplayName?: string | undefined;
   userRoleLabel?: string | undefined;
-  /** MF-DI-01 — contexto clínico denso persistente. */
   contextDenseStrip?: ReactNode | undefined;
-  /** MF-UXLAB-02 — badge DEMO en banda identidad. */
   showDemoBadge?: boolean | undefined;
+  /** cica-minimal — sin header institucional duplicado ni command bar visible. */
+  composition?: ClinicalShellComposition | undefined;
   testId?: string | undefined;
 };
 
-/** Shell clínico unificado — 4 capas fijas + command bar transversal (ADR-002 MF-04). */
+/** Shell clínico — ficha clásica CICA o full legacy. */
 export function ClinicalShell({
   chartMode,
   onChartModeChange,
@@ -85,8 +87,10 @@ export function ClinicalShell({
   userRoleLabel,
   contextDenseStrip,
   showDemoBadge = false,
+  composition = 'full',
   testId = 'epis2-clinical-shell-v2',
 }: ClinicalShellProps) {
+  const minimal = composition === 'cica-minimal';
   const { aiAvailable } = useAiStatusQuery();
   const identityProps: PatientIdentityBandProps = {
     displayName,
@@ -100,6 +104,7 @@ export function ClinicalShell({
     allergyLabels,
     documentStatus,
     showDemoBadge,
+    variant: minimal ? 'compact' : 'default',
   };
 
   const commandBar = (
@@ -115,27 +120,33 @@ export function ClinicalShell({
     />
   );
 
+  const statusChips = aiAvailable !== true ? <EpisAiDegradedChip /> : null;
+
   return (
     <>
       <Box
         data-testid={testId}
+        data-clinical-shell-composition={composition}
         sx={{
-          height: '100dvh',
-          maxHeight: '100dvh',
+          height: '100%',
+          maxHeight: '100%',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
           bgcolor: 'background.default',
         }}
       >
-        <ClinicalInstitutionalHeader serviceUnit={headerServiceUnit ?? serviceUnit} />
+        {!minimal ? (
+          <ClinicalInstitutionalHeader serviceUnit={headerServiceUnit ?? serviceUnit} />
+        ) : null}
         <PatientIdentityBand {...identityProps} />
         {contextDenseStrip}
         <ClinicalActionBar
           chartMode={chartMode}
           onChartModeChange={onChartModeChange}
           commandBar={commandBar}
-          statusChips={aiAvailable !== true ? <EpisAiDegradedChip /> : null}
+          statusChips={statusChips}
+          minimal={minimal}
           onNewEvolution={onNewEvolution}
           onNewOrder={onNewOrder}
           onOpenLab={onOpenLab}
@@ -155,15 +166,17 @@ export function ClinicalShell({
           }}
         >
           {children}
-        </Box>{' '}
-        <ClinicalFooterStatus
-          userDisplayName={userDisplayName}
-          userRoleLabel={userRoleLabel}
-          documentStatus={documentStatus}
-          lastSavedAt={lastSavedAt}
-          chartMode={chartMode}
-          paperPageLabel={paperPageLabel}
-        />
+        </Box>
+        {!minimal ? (
+          <ClinicalFooterStatus
+            userDisplayName={userDisplayName}
+            userRoleLabel={userRoleLabel}
+            documentStatus={documentStatus}
+            lastSavedAt={lastSavedAt}
+            chartMode={chartMode}
+            paperPageLabel={paperPageLabel}
+          />
+        ) : null}
       </Box>
       <CommandPaletteOverlay />
     </>

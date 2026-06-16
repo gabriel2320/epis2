@@ -4,8 +4,7 @@ import {
   EpisM3Text,
   Typography,
   epis2ChartContentTransitionSx,
-  epis2ChartMainScrollSx,
-  epis2TraditionalChartTokens,
+  epis2ClassicChartContentSx,
 } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
 import { TRADITIONAL_SECTION_IDS, type TraditionalSectionId } from './TraditionalSectionNav.js';
@@ -13,35 +12,35 @@ import { TRADITIONAL_SECTION_IDS, type TraditionalSectionId } from './Traditiona
 export type TraditionalClinicalPanelProps = {
   activeSection?: TraditionalSectionId | undefined;
   children?: ReactNode | undefined;
+  /** Oculta título duplicado cuando tabs clínicas ya indican sección. */
+  hideSectionTitle?: boolean | undefined;
   testId?: string | undefined;
 };
 
-/** Área central densa tabular — sección activa de la ficha electrónica. */
+/** Área central ficha clásica — scroll único, contenido tabular. */
 export function TraditionalClinicalPanel({
   activeSection = 'navSummary',
   children,
+  hideSectionTitle = false,
   testId = 'epis2-traditional-clinical-panel',
 }: TraditionalClinicalPanelProps) {
-  const t = epis2TraditionalChartTokens;
   const sectionLabel = copy.chartModes[activeSection];
 
   return (
     <Box
       data-testid={testId}
       data-epis2-chart-scroll="main"
-      sx={{
-        ...epis2ChartMainScrollSx(),
-        p: t.sectionGap,
-        bgcolor: t.surface,
-      }}
+      sx={epis2ClassicChartContentSx()}
     >
-      <EpisM3Text
-        role="titleMedium"
-        component="h2"
-        sx={{ mb: 1.5, pb: 1, borderBottom: t.borderSubtle, borderColor: t.borderColor }}
-      >
-        {sectionLabel}
-      </EpisM3Text>
+      {!hideSectionTitle ? (
+        <EpisM3Text
+          role="titleMedium"
+          component="h2"
+          sx={{ mb: 2, color: 'text.primary', fontWeight: 600 }}
+        >
+          {sectionLabel}
+        </EpisM3Text>
+      ) : null}
       <Box key={activeSection} sx={epis2ChartContentTransitionSx()}>
         {children ?? (
           <Typography variant="body2" color="text.secondary">

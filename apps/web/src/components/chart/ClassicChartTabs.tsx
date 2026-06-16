@@ -1,5 +1,9 @@
 import { copy } from '@epis2/design-system';
-import { Box, epis2PaperNavTabSx } from '@epis2/epis2-ui';
+import {
+  Box,
+  epis2ClassicChartTabSx,
+  epis2ClassicChartTabsNavSx,
+} from '@epis2/epis2-ui';
 import {
   CLASSIC_CHART_TAB_IDS,
   type ClassicChartTabId,
@@ -21,7 +25,7 @@ const TAB_COPY_KEY: Record<ClassicChartTabId, keyof typeof copy.chartModes.class
   more: 'more',
 };
 
-/** Navegación clínica tabulada — reemplaza rail de 17 ítems como entrada principal (MF-AEST-02). */
+/** Navegación clínica tabulada — ficha EMR clásica calm. */
 export function ClassicChartTabs({
   activeTab,
   onTabChange,
@@ -34,17 +38,7 @@ export function ClassicChartTabs({
       aria-label="Navegación clínica"
       data-testid={testId}
       className="epis2-classic-chart-tabs epis2-no-print"
-      sx={{
-        display: 'flex',
-        gap: 0.5,
-        px: 2,
-        py: 1,
-        borderBottom: '1px solid',
-        borderColor: 'divider',
-        flexShrink: 0,
-        overflowX: 'auto',
-        bgcolor: 'background.paper',
-      }}
+      sx={epis2ClassicChartTabsNavSx()}
     >
       {visibleTabs.map((tab) => {
         const active = tab === activeTab;
@@ -56,9 +50,8 @@ export function ClassicChartTabs({
             data-testid={`classic-chart-tab-${tab}`}
             onClick={() => onTabChange(tab)}
             sx={{
-              ...epis2PaperNavTabSx(active),
+              ...epis2ClassicChartTabSx(active),
               cursor: 'pointer',
-              border: 'none',
               font: 'inherit',
               flexShrink: 0,
             }}

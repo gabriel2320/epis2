@@ -4,12 +4,12 @@ import type {
   PatientLongitudinalResponse,
 } from '@epis2/contracts';
 import type { CommandChip } from '@epis2/command-registry';
-import { Box, ClinicalScreen, epis2TraditionalChartTokens } from '@epis2/epis2-ui';
-import type { ClinicalLayoutAction } from '@epis2/epis2-ui';
+import { Box, ClinicalScreen, type ClinicalLayoutAction } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import { ClinicalPatientViewCdsPanel } from '../cds/ClinicalPatientViewCdsPanel.js';
 import { PatientClinicalSummaryGrid } from '../clinical-summary/PatientClinicalSummaryGrid.js';
+import { ClassicChartSummaryPanel } from './ClassicChartSummaryPanel.js';
 import { ClassicChartSubNav } from './ClassicChartSubNav.js';
 import { ClassicChartTabs } from './ClassicChartTabs.js';
 import {
@@ -56,6 +56,8 @@ export type TraditionalEhrModeProps = {
   onContextToggle?: (() => void) | undefined;
   contextEventCount?: number | undefined;
   layoutActions?: readonly ClinicalLayoutAction[] | undefined;
+  /** FASE 3 — resumen 5 bloques + sin panel CDS duplicado. */
+  cicaLayout?: boolean | undefined;
   testId?: string | undefined;
 };
 
@@ -89,6 +91,7 @@ export function TraditionalEhrMode({
   onContextToggle,
   contextEventCount,
   layoutActions,
+  cicaLayout = false,
   testId = 'epis2-traditional-ehr-mode',
 }: TraditionalEhrModeProps) {
   const [activeSection, setActiveSection] = useState<TraditionalSectionId>('navSummary');
@@ -176,22 +179,32 @@ export function TraditionalEhrMode({
   const resolvedMain =
     mainContent ??
     (activeSection === 'navSummary' && summaryFields ? (
-      <PatientClinicalSummaryGrid
-        compositionMode="cica-classic"
-        surfaceProfile="calm"
-        summaryFields={summaryFields}
-        clinicalSummary={clinicalSummary}
-        longitudinal={longitudinal}
-        alerts={alerts}
-        onRegisterAllergy={onRegisterAllergy}
-        onRegisterProblem={onRegisterProblem}
-        onOpenResults={onOpenResults}
-        onOpenDraft={onOpenDraft}
-        onViewFullTimeline={onViewFullTimeline}
-        onOpenEvolution={onOpenEvolution}
-        probableActionChips={probableActionChips}
-        onProbableAction={onProbableAction}
-      />
+      cicaLayout ? (
+        <ClassicChartSummaryPanel
+          demoCaseCode={demoCaseCode}
+          summaryFields={summaryFields}
+          longitudinal={longitudinal}
+          onViewFullTimeline={onViewFullTimeline}
+          onOpenResults={onOpenResults}
+          onOpenDocuments={onOpenDocuments}
+        />
+      ) : (
+        <PatientClinicalSummaryGrid
+          surfaceProfile="calm"
+          summaryFields={summaryFields}
+          clinicalSummary={clinicalSummary}
+          longitudinal={longitudinal}
+          alerts={alerts}
+          onRegisterAllergy={onRegisterAllergy}
+          onRegisterProblem={onRegisterProblem}
+          onOpenResults={onOpenResults}
+          onOpenDraft={onOpenDraft}
+          onViewFullTimeline={onViewFullTimeline}
+          onOpenEvolution={onOpenEvolution}
+          probableActionChips={probableActionChips}
+          onProbableAction={onProbableAction}
+        />
+      )
     ) : (
       resolveTraditionalSectionContent({
         sectionId: activeSection,
@@ -228,10 +241,11 @@ export function TraditionalEhrMode({
           overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
-          bgcolor: epis2TraditionalChartTokens.shellBg,
         }}
       >
-        {alerts && alerts.length > 0 ? <ClinicalPatientViewCdsPanel alerts={alerts} /> : null}
+        {alerts && alerts.length > 0 && !cicaLayout ? (
+          <ClinicalPatientViewCdsPanel alerts={alerts} />
+        ) : null}
         <ClassicChartSubNav
           sections={tabSubsections}
           activeSection={activeSection}
@@ -240,7 +254,7 @@ export function TraditionalEhrMode({
         <Box
           sx={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'row', overflow: 'hidden' }}
         >
-          <TraditionalClinicalPanel activeSection={activeSection}>
+          <TraditionalClinicalPanel activeSection={activeSection} hideSectionTitle>
             {resolvedMain}
           </TraditionalClinicalPanel>
           {contextPane ? (

@@ -1,10 +1,21 @@
 import type { SxProps, Theme } from '@mui/material/styles';
+import {
+  cicaIsClinicalMaxWidthProfile,
+  cicaMaxContentWidth,
+  cicaShellPaddingXSx,
+} from '../../cica/cicaResponsive.js';
 import type { ClinicalLayoutProfile } from './clinicalLayoutEngine.js';
 import { resolveLayoutProfile } from './clinicalLayoutEngine.js';
 import { clinicalLayoutTokens } from './clinicalLayoutTokens.js';
 
+function clinicalProfileMaxWidth(profile: ClinicalLayoutProfile): number {
+  if (cicaIsClinicalMaxWidthProfile(profile)) {
+    return cicaMaxContentWidth[profile];
+  }
+  return resolveLayoutProfile(profile).maxWidth;
+}
+
 export function clinicalScreenSx(profile: ClinicalLayoutProfile): SxProps<Theme> {
-  const config = resolveLayoutProfile(profile);
   return {
     display: 'flex',
     flexDirection: 'column',
@@ -12,10 +23,11 @@ export function clinicalScreenSx(profile: ClinicalLayoutProfile): SxProps<Theme>
     minHeight: 0,
     minWidth: 0,
     overflow: 'hidden',
-    maxWidth: config.maxWidth,
+    overflowX: 'hidden',
+    maxWidth: clinicalProfileMaxWidth(profile),
     width: '100%',
     mx: 'auto',
-    px: { xs: clinicalLayoutTokens.spacing.sm, md: clinicalLayoutTokens.spacing.lg },
+    px: cicaShellPaddingXSx,
   };
 }
 
@@ -27,8 +39,8 @@ export function clinicalHeaderSx(): SxProps<Theme> {
 }
 
 export function clinicalContentSx(profile: ClinicalLayoutProfile): SxProps<Theme> {
-  const config = resolveLayoutProfile(profile);
   const density = clinicalLayoutTokens.density.calm;
+  const cicaBounded = cicaIsClinicalMaxWidthProfile(profile);
   return {
     flex: 1,
     minHeight: 0,
@@ -39,9 +51,11 @@ export function clinicalContentSx(profile: ClinicalLayoutProfile): SxProps<Theme
     flexDirection: 'column',
     gap: density.sectionGap,
     pb: clinicalLayoutTokens.spacing.lg,
-    maxWidth: profile === 'paper-mode' ? config.maxWidth : clinicalLayoutTokens.page.maxReadableWidth,
+    maxWidth: cicaBounded
+      ? cicaMaxContentWidth[profile]
+      : clinicalLayoutTokens.page.maxReadableWidth,
     width: '100%',
-    mx: profile === 'paper-mode' ? 'auto' : undefined,
+    mx: cicaBounded ? 'auto' : undefined,
   };
 }
 

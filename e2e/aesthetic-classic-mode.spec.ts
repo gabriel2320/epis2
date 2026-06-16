@@ -15,9 +15,18 @@ test.describe('Clinical Layout Engine — classic mode', () => {
     await expect(page.getByTestId('clinical-screen')).toBeVisible({ timeout: 15_000 });
     await expect(page.getByTestId('classic-chart-tabs')).toBeVisible();
     await expect(page.getByTestId('clinical-action-bar')).toBeVisible();
+    await expect(page.getByTestId('epis2-patient-identity-band')).toBeVisible();
+    await expect(page.getByTestId('epis2-classic-summary-panel')).toBeVisible();
+
+    const summaryBlocks = page.locator(
+      '[data-testid="epis2-classic-summary-panel-diagnoses"], [data-testid="epis2-classic-summary-panel-evolution"], [data-testid="epis2-classic-summary-panel-orders"], [data-testid="epis2-classic-summary-panel-exams"], [data-testid="epis2-classic-summary-panel-documents"]',
+    );
+    await expect(summaryBlocks).toHaveCount(5);
 
     const primaryButtons = await page.locator('[data-action-kind="primary"]').count();
     expect(primaryButtons).toBeLessThanOrEqual(1);
+
+    await expect(page.getByTestId('epis2-chart-layout-new-evolution')).toBeVisible();
 
     const horizontalOverflow = await page.evaluate(
       () => document.documentElement.scrollWidth > document.documentElement.clientWidth,

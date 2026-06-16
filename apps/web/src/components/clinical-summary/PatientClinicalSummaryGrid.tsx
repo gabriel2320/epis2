@@ -99,6 +99,7 @@ export function PatientClinicalSummaryGrid({
   compositionMode = 'default',
 }: PatientClinicalSummaryGridProps) {
   const cicaClassic = compositionMode === 'cica-classic';
+  const effectiveSurface: ClinicalSummarySurface = cicaClassic ? 'clinical-flat' : surfaceProfile;
   const nowKeys = cicaClassic
     ? (['pendingItems', 'clinicalAlerts'] as const)
     : NOW_KEYS;
@@ -138,7 +139,7 @@ export function PatientClinicalSummaryGrid({
         key={key}
         title={patientSummaryFieldLabel(key)}
         severity={severity}
-        surface={surfaceProfile}
+        surface={effectiveSurface}
         leadingIcon={calmLeadingIcon(surfaceProfile, FIELD_ICON_KEYS[key])}
         testId={`${testId}-${key}`}
       >
@@ -157,7 +158,7 @@ export function PatientClinicalSummaryGrid({
       <EpisClinicalSummaryCard
         key={zoneKey}
         title={title}
-        surface={surfaceProfile}
+        surface={effectiveSurface}
         leadingIcon={calmLeadingIcon(surfaceProfile, 'medications')}
         testId={`${testId}-meds-${zoneKey}`}
       >
@@ -177,13 +178,13 @@ export function PatientClinicalSummaryGrid({
         allergies={longitudinal?.allergies}
         previsionResumen={clinicalSummary?.previsionResumen}
         hospitalizado={clinicalSummary?.hospitalizado}
-        surface={surfaceProfile}
+        surface={effectiveSurface}
       />
       {criticalAlerts.length > 0 ? (
         <EpisClinicalSummaryCard
           title={copy.clinicalSummary.criticalAlerts}
           severity="critical"
-          surface={surfaceProfile}
+          surface={effectiveSurface}
           leadingIcon={calmLeadingIcon(surfaceProfile, 'alerts')}
           testId={`${testId}-live-alerts`}
           actionLabel={copy.clinicalSummary.viewAlerts}
@@ -204,8 +205,10 @@ export function PatientClinicalSummaryGrid({
         <Box
           sx={{
             display: 'grid',
-            gap: 2,
-            gridTemplateColumns: { xs: '1fr', md: 'repeat(2, minmax(0, 1fr))' },
+            gap: cicaClassic ? 0 : 2,
+            gridTemplateColumns: cicaClassic
+              ? '1fr'
+              : { xs: '1fr', md: 'repeat(2, minmax(0, 1fr))' },
           }}
         >
           {nowKeys.map((key) =>
@@ -215,7 +218,7 @@ export function PatientClinicalSummaryGrid({
             <EpisClinicalSummaryCard
               title={copy.longitudinal.allergies}
               severity="warning"
-              surface={surfaceProfile}
+              surface={effectiveSurface}
               leadingIcon={calmLeadingIcon(surfaceProfile, 'allergies')}
               testId={`${testId}-allergies`}
               actionLabel={copy.clinicalSummary.manageAllergies}
@@ -226,7 +229,7 @@ export function PatientClinicalSummaryGrid({
           ) : onRegisterAllergy ? (
             <EpisClinicalSummaryCard
               title={copy.longitudinal.allergies}
-              surface={surfaceProfile}
+              surface={effectiveSurface}
               testId={`${testId}-allergies-empty`}
               actionLabel={copy.longitudinal.registerAllergy}
               onAction={onRegisterAllergy}
@@ -237,7 +240,7 @@ export function PatientClinicalSummaryGrid({
           {draftEvents.length > 0 && onOpenDraft && firstDraftId ? (
             <EpisClinicalSummaryCard
               title={copy.clinicalSummary.pendingDrafts}
-              surface={surfaceProfile}
+              surface={effectiveSurface}
               testId={`${testId}-drafts`}
               actionLabel={copy.activePatient.openDraft}
               onAction={() => onOpenDraft(firstDraftId)}
@@ -257,8 +260,10 @@ export function PatientClinicalSummaryGrid({
         <Box
           sx={{
             display: 'grid',
-            gap: 2,
-            gridTemplateColumns: { xs: '1fr', md: 'repeat(2, minmax(0, 1fr))' },
+            gap: cicaClassic ? 0 : 2,
+            gridTemplateColumns: cicaClassic
+              ? '1fr'
+              : { xs: '1fr', md: 'repeat(2, minmax(0, 1fr))' },
           }}
         >
           {CONTEXT_KEYS.map((key) => renderFieldCard(key))}
@@ -297,7 +302,7 @@ export function PatientClinicalSummaryGrid({
                 >
                   <EpisClinicalSummaryCard
                     title={lab.label}
-                    surface={surfaceProfile}
+                    surface={effectiveSurface}
                     leadingIcon={calmLeadingIcon(surfaceProfile, 'labs')}
                     meta={copy.clinicalSummary.labsHighlight}
                     highlightValue={lab.valueText}
@@ -312,7 +317,7 @@ export function PatientClinicalSummaryGrid({
           {clinicalProblems.length > 0 ? (
             <EpisClinicalSummaryCard
               title={copy.activePatient.summaryActiveProblems}
-              surface={surfaceProfile}
+              surface={effectiveSurface}
               leadingIcon={calmLeadingIcon(surfaceProfile, 'problems')}
               testId={`${testId}-problems`}
               actionLabel={copy.clinicalSummary.manageProblems}
@@ -351,7 +356,7 @@ export function PatientClinicalSummaryGrid({
               ) : null}
               <EpisClinicalSummaryCard
                 title={copy.activePatient.recentActivityTitle}
-                surface={surfaceProfile}
+                surface={effectiveSurface}
                 leadingIcon={calmLeadingIcon(surfaceProfile, 'timeline')}
                 meta={copy.clinicalSummary.lastEvents}
                 testId={`${testId}-timeline`}

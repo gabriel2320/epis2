@@ -152,6 +152,10 @@
       "type": "file",
       "path": "scripts/quality/validate-cica-screen-governor-gate.mjs"
     },
+    "quality:patient-search-layout-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-patient-search-layout-gate.mjs"
+    },
     "quality:ux-lab-autopilot-gate": {
       "type": "file",
       "path": "scripts/quality/validate-ux-lab-autopilot-gate.mjs"
@@ -188,6 +192,38 @@
       "type": "file",
       "path": "scripts/quality/validate-cica-loop-close-gate.mjs"
     },
+    "quality:cica-no-legacy-shell-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-no-legacy-shell-gate.mjs"
+    },
+    "quality:cica-no-dashboard-mode-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-no-dashboard-mode-gate.mjs"
+    },
+    "quality:cica-screen-registry-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-screen-registry-gate.mjs"
+    },
+    "quality:cica-action-density-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-action-density-gate.mjs"
+    },
+    "quality:cica-paper-standalone-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-paper-standalone-gate.mjs"
+    },
+    "quality:cica-responsive-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-responsive-gate.mjs"
+    },
+    "quality:cica-theme-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-theme-gate.mjs"
+    },
+    "quality:cica-clean-room-close-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-clean-room-close-gate.mjs"
+    },
     "quality:cica-screen-admission-gate": {
       "type": "file",
       "path": "scripts/quality/validate-cica-screen-admission-gate.mjs"
@@ -199,6 +235,14 @@
     "quality:classic-chart-composition-gate": {
       "type": "file",
       "path": "scripts/quality/validate-classic-chart-composition-gate.mjs"
+    },
+    "quality:classic-shell-layout-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-classic-shell-layout-gate.mjs"
+    },
+    "quality:clinical-layout-engine-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-layout-engine-gate.mjs"
     },
     "quality:clinical-command-bar-transversal-gate": {
       "type": "file",

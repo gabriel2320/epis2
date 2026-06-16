@@ -11,6 +11,7 @@ import {
 } from '@epis2/epis2-ui';
 import type { ElementType } from 'react';
 import { useState } from 'react';
+import { isDualChartModesEnabled } from '../../dev/dualChartModesEnv.js';
 import { hasUnsavedClinicalWork } from '../../modes/modeTransitionSafety.js';
 import { EPIS_MODES, type EpisMode } from '../../modes/episModes.js';
 import { useEpisSession } from '../../session/EpisSessionContext.js';
@@ -27,15 +28,22 @@ const MODE_META: Record<
 export type EpisModeSwitcherProps = {
   compact?: boolean;
   testId?: string;
+  /** Solo shells legacy (dashboard MD3) — oculto en flujo dual ficha. */
+  forceVisible?: boolean;
 };
 
 /** Conmutador global de modos — máximo 3 opciones visibles. */
 export function EpisModeSwitcher({
   compact = false,
   testId = 'epis2-mode-switcher',
+  forceVisible = false,
 }: EpisModeSwitcherProps) {
   const session = useEpisSession();
   const [pendingMode, setPendingMode] = useState<EpisMode | null>(null);
+
+  if (isDualChartModesEnabled() && !forceVisible) {
+    return null;
+  }
 
   const disabledReason = (mode: EpisMode): string | undefined => {
     if (mode === 'classic' && !session.canOpenClassic) {

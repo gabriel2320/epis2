@@ -18,6 +18,10 @@ vi.mock('../../session/EpisSessionContext.js', () => ({
   useEpisSession: () => mockSession,
 }));
 
+vi.mock('../../dev/dualChartModesEnv.js', () => ({
+  isDualChartModesEnabled: () => false,
+}));
+
 describe('EpisModeSwitcher', () => {
   afterEach(() => {
     cleanup();

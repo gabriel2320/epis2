@@ -10,10 +10,10 @@ export const epis2TraditionalChartColors = {
 } as const;
 
 export const epis2ClinicalShellColors = {
-  institutionalNavy: '#0B2540',
+  institutionalNavy: '#0B5C66',
   onInstitutional: '#FFFFFF',
-  allergyChipBg: '#FFF3E0',
-  allergyChipBorder: '#ED6C02',
+  allergyChipBg: 'rgba(237, 108, 2, 0.08)',
+  allergyChipBorder: 'rgba(237, 108, 2, 0.45)',
 } as const;
 
 export const epis2PaperChartColors = {

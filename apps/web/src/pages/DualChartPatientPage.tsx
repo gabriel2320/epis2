@@ -167,23 +167,19 @@ export function DualChartPatientPage({
   const roleKey = session?.user.role as keyof typeof copy.roles | undefined;
   const userRoleLabel = roleKey ? (copy.roles[roleKey] ?? roleKey) : undefined;
 
-  const contextDense = useMemo(() => {
-    if (!longitudinal) return null;
-    return buildClinicalContextDense({
-      problems: longitudinal.problems,
-      medications: longitudinal.medications,
-      observations: longitudinal.observations,
-      encounters: longitudinal.encounters,
-      ultimoEncuentroAt: clinicalSummary?.ultimoEncuentroAt ?? null,
-      openEncounterId: detail.clinicalContext.openEncounterId ?? null,
-      careSettingLabel: demoCase?.scenario ?? copy.careSettings.ambulatory,
-    });
-  }, [
-    longitudinal,
-    clinicalSummary?.ultimoEncuentroAt,
-    detail.clinicalContext.openEncounterId,
-    demoCase?.scenario,
-  ]);
+  const contextDense = useMemo(
+    () =>
+      longitudinal
+        ? buildClinicalContextDense({
+            problems: longitudinal.problems,
+            medications: longitudinal.medications,
+            observations: longitudinal.observations,
+            openEncounterId: detail.clinicalContext.openEncounterId ?? null,
+            careSettingLabel: copy.careSettings.ambulatory,
+          })
+        : null,
+    [detail.clinicalContext.openEncounterId, longitudinal],
+  );
 
   const handlePaperMode = () => {
     void navigate({
@@ -220,6 +216,7 @@ export function DualChartPatientPage({
   return (
     <>
       <ClinicalShell
+        composition="cica-minimal"
         chartMode="traditional"
         onChartModeChange={setChartMode}
         displayName={detail.patient.displayName}
@@ -252,6 +249,7 @@ export function DualChartPatientPage({
         testId="epis2-dual-chart-ficha"
       >
         <TraditionalEhrMode
+          cicaLayout
           demoCaseCode={detail.patient.demoCaseCode ?? demoCase?.demoCaseCode}
           summaryFields={summaryFields}
           clinicalSummary={clinicalSummary}

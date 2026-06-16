@@ -17,7 +17,7 @@ async function loginViaUi(page: Page) {
   await page.getByLabel(copy.login.demoKeyLabel).fill('DEMO-CLAVE-MEDICO');
   await page.getByRole('button', { name: copy.login.submit }).click();
   await expect(page).toHaveURL(/\/espacio\/buscar-paciente/, { timeout: 15_000 });
-  await expect(page.getByTestId('epis2-census-command-bar')).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByTestId('epis2-patient-search-screen')).toBeVisible({ timeout: 15_000 });
 }
 
 async function openEvolutionForm(page: Page) {
@@ -75,7 +75,7 @@ test.describe('M3 visual signoff — V1–V6', () => {
     await page.goto('/preferencias-apariencia');
     await page.getByTestId('epis2-mode-dark').click();
     await goToCommandCenter(page);
-    await expect(page.getByTestId('epis2-census-command-bar')).toBeVisible();
+    await expect(page.getByTestId('epis2-patient-search-screen')).toBeVisible();
     await expect(page.getByTestId('epis2-generated-clinical-page')).toBeVisible();
 
     await openEvolutionForm(page);
@@ -89,7 +89,7 @@ test.describe('M3 visual signoff — V1–V6', () => {
     await page.goto('/preferencias-apariencia');
     await page.getByTestId('epis2-contrast-high').click();
     await goToCommandCenter(page);
-    await expect(page.getByTestId('epis2-census-command-bar')).toBeVisible();
+    await expect(page.getByTestId('epis2-patient-search-screen')).toBeVisible();
 
     await openEvolutionForm(page);
     await fillEvolutionDraft(page, 'Control alto contraste — texto legible.');
@@ -122,7 +122,7 @@ test.describe('M3 visual signoff — V1–V6', () => {
       copy.drafts.approvedSuccess,
     );
     await goToCommandCenter(page);
-    await expect(page.getByTestId('epis2-census-command-bar')).toBeVisible();
+    await expect(page.getByTestId('epis2-patient-search-screen')).toBeVisible();
   });
 
   test('V6 — banner offline y reduced motion', async ({ page }) => {

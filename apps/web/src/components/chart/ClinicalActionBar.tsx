@@ -16,10 +16,12 @@ export type ClinicalActionBarProps = {
   onSign?: (() => void) | undefined;
   onPrint?: (() => void) | undefined;
   statusChips?: ReactNode | undefined;
+  /** Oculta switch papel y command bar visible — flujo CICA minimal. */
+  minimal?: boolean | undefined;
   testId?: string | undefined;
 };
 
-/** Capa 3 — modo, comando y una acción primaria (MF-AEST-01). */
+/** Capa transversal — modo + estado IA; comando vía paleta en minimal. */
 export function ClinicalActionBar({
   chartMode,
   onChartModeChange,
@@ -28,8 +30,30 @@ export function ClinicalActionBar({
   onSaveDraft,
   onSign,
   onPrint,
+  minimal = false,
   testId = 'epis2-clinical-action-bar',
 }: ClinicalActionBarProps) {
+  if (minimal && !onSaveDraft) {
+    return statusChips ? (
+      <Stack
+        data-testid={testId}
+        direction="row"
+        justifyContent="flex-end"
+        sx={{
+          px: { xs: 2, md: 3 },
+          py: 0.5,
+          borderBottom: 1,
+          borderColor: 'divider',
+          bgcolor: 'background.paper',
+          flexShrink: 0,
+          minHeight: 32,
+        }}
+      >
+        {statusChips}
+      </Stack>
+    ) : null;
+  }
+
   const overflow = [
     ...(onSign
       ? [
@@ -58,13 +82,13 @@ export function ClinicalActionBar({
       data-testid={testId}
       spacing={0.5}
       sx={{
-        px: 2,
-        py: 1,
+        px: { xs: 2, md: 3 },
+        py: minimal ? 0.75 : 1,
         borderBottom: 1,
         borderColor: 'divider',
         bgcolor: 'background.paper',
         flexShrink: 0,
-        minHeight: epis2ClinicalShellTokens.actionBarMinHeight,
+        minHeight: minimal ? 40 : epis2ClinicalShellTokens.actionBarMinHeight,
       }}
     >
       <Stack
@@ -73,9 +97,11 @@ export function ClinicalActionBar({
         spacing={1}
         useFlexGap
       >
-        <ChartModeSwitch mode={chartMode} onChange={onChartModeChange} />
+        {!minimal ? (
+          <ChartModeSwitch mode={chartMode} onChange={onChartModeChange} />
+        ) : null}
         {statusChips}
-        <Box sx={{ flex: 1, minWidth: 0 }}>{commandBar}</Box>
+        {!minimal ? <Box sx={{ flex: 1, minWidth: 0 }}>{commandBar}</Box> : null}
       </Stack>
       {onSaveDraft ? (
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', pt: 0.5 }}>

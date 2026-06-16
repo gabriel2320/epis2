@@ -253,15 +253,6 @@ export function resolveCicaTabLayoutActions(
         });
       }
       pushPaper();
-      if (handlers.onOpenResults) {
-        actions.push({
-          id: 'results',
-          label: copy.chartModes.navLabs,
-          kind: 'quiet',
-          onClick: handlers.onOpenResults,
-          testId: 'epis2-chart-layout-results',
-        });
-      }
       break;
   }
 

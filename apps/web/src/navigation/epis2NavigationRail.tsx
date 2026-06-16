@@ -31,7 +31,6 @@ import {
   routeMatchesPath,
   type WorkspaceRouteTarget,
 } from './clinicalWorkspaceRegistry.js';
-import { WORKSPACE_CARE_SETTING } from './clinicalRoleCareMatrix.js';
 import { useClinicalWorkspace } from './useClinicalWorkspace.js';
 import { resolveWorkspaceCopyKey } from './workspaceCopy.js';
 
@@ -53,11 +52,6 @@ const WORKSPACE_ICONS: Record<EpisClinicalWorkspaceId, ReactNode> = {
   admin_system: <AdminPanelSettingsIcon />,
 };
 
-function careSettingLabel(workspaceId: EpisClinicalWorkspaceId): string | undefined {
-  const setting = WORKSPACE_CARE_SETTING[workspaceId];
-  if (setting === 'institutional' || workspaceId === 'command') return undefined;
-  return copy.careSettings[setting];
-}
 
 const CONTEXTUAL_ICONS: Record<string, ReactNode> = {
   'daily-agenda': <CalendarMonthIcon />,
@@ -121,11 +115,10 @@ export function useEpis2NavigationRailItems(): EpisNavigationRailItem[] {
         (workspaceId) => workspaceId !== 'command' && canRoleAccessWorkspace(role, workspaceId),
       ).map((workspaceId) => {
         const def = getClinicalWorkspaceDefinition(workspaceId);
-        const careLabel = careSettingLabel(workspaceId);
         const baseLabel = resolveWorkspaceCopyKey(def.labelKey);
         return {
           id: `workspace-${workspaceId}`,
-          label: careLabel ? `${baseLabel} · ${careLabel}` : baseLabel,
+          label: baseLabel,
           icon: WORKSPACE_ICONS[workspaceId],
           active: activeWorkspace === workspaceId,
           disabled: !canUseWorkspace(workspaceId),

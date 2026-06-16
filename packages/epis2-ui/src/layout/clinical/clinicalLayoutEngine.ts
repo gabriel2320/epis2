@@ -7,7 +7,8 @@ export type ClinicalLayoutProfile =
   | 'paper-mode'
   | 'orders'
   | 'results'
-  | 'admin-lite';
+  | 'admin-lite'
+  | 'patient-search';
 
 export type ClinicalLayoutProfileConfig = {
   maxWidth: number;
@@ -81,6 +82,15 @@ export const clinicalLayoutProfiles: Record<ClinicalLayoutProfile, ClinicalLayou
     fieldGap: 16,
     primaryActionPosition: 'bottom-right',
     maxVisibleActions: 3,
+    allowNestedCards: false,
+  },
+  'patient-search': {
+    maxWidth: 1120,
+    columns: 12,
+    sectionGap: 32,
+    fieldGap: 16,
+    primaryActionPosition: 'sticky-bottom',
+    maxVisibleActions: 1,
     allowNestedCards: false,
   },
 };

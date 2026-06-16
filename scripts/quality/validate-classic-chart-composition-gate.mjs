@@ -47,6 +47,32 @@ const config = readFileSync(
   join(root, 'apps/web/src/components/chart/classicChartTabConfig.ts'),
   'utf8',
 );
+if (!traditional.includes('ClassicChartSummaryPanel')) {
+  errors.push('TraditionalEhrMode debe usar ClassicChartSummaryPanel (FASE 3 resumen 5 bloques)');
+}
+
+const dualChart = readFileSync(
+  join(root, 'apps/web/src/pages/DualChartPatientPage.tsx'),
+  'utf8',
+);
+if (!dualChart.includes("composition=\"cica-minimal\"") && !dualChart.includes("composition='cica-minimal'")) {
+  errors.push('DualChartPatientPage debe usar ClinicalShell composition cica-minimal');
+}
+if (!dualChart.includes('cicaLayout')) {
+  errors.push('DualChartPatientPage debe activar cicaLayout en TraditionalEhrMode');
+}
+if (!dualChart.includes('PatientIdentityBand') && !dualChart.includes('ClinicalContextDenseStrip')) {
+  errors.push('DualChartPatientPage debe exponer contexto clínico denso bajo identidad');
+}
+
+const summaryPanel = readFileSync(
+  join(root, 'apps/web/src/components/chart/ClassicChartSummaryPanel.tsx'),
+  'utf8',
+);
+if (!summaryPanel.includes('data-cica-summary-blocks')) {
+  errors.push('ClassicChartSummaryPanel sin presupuesto 5 bloques CICA');
+}
+
 if (!config.includes("'more'")) {
   errors.push('classicChartTabConfig sin tab Más (MF-AEST-02b)');
 }
