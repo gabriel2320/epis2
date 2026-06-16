@@ -45,6 +45,6 @@ npm run quality:fast
 
 ---
 
-## Pendiente — RH-11
+## Cierre Tramo 5
 
-**RH-11:** dependency-review alinear o waiver documentado · plan [`epis2-audit-plan-post-rc3-2026.md`](epis2-audit-plan-post-rc3-2026.md)
+RH-11: [`epis2-prog-security-promote-tramo5-rh11.md`](epis2-prog-security-promote-tramo5-rh11.md) · programa: [`epis2-prog-post-rc3-close.md`](epis2-prog-post-rc3-close.md)

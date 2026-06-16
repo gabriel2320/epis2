@@ -63,10 +63,7 @@ for (const [rel, needles] of workflowChecks) {
   }
 }
 
-const rhReportOnlyWorkflows = [
-  '.github/workflows/ci-rh04-deps.yml',
-  '.github/workflows/ci-rh05-sbom.yml',
-];
+const rhReportOnlyWorkflows = ['.github/workflows/ci-rh05-sbom.yml'];
 for (const rel of rhReportOnlyWorkflows) {
   if (!existsSync(join(root, rel))) {
     errors.push(`Falta workflow ${rel} (PROG-RELEASE-HARDENING)`);
@@ -93,6 +90,22 @@ for (const [rel, rhId] of blockingRhWorkflows) {
   }
   if (!content.includes(rhId)) {
     errors.push(`${rel} debe referenciar ${rhId}`);
+  }
+}
+
+const depsWorkflow = '.github/workflows/ci-rh04-deps.yml';
+if (!existsSync(join(root, depsWorkflow))) {
+  errors.push(`Falta workflow ${depsWorkflow} (RH-11)`);
+} else {
+  const content = readFileSync(join(root, depsWorkflow), 'utf8');
+  if (!content.includes('RH-11')) errors.push(`${depsWorkflow} debe referenciar RH-11`);
+  const depSection = content.split('dependency-review:')[1]?.split('npm-audit-report:')[0] ?? '';
+  if (depSection.includes('continue-on-error: true')) {
+    errors.push(`${depsWorkflow} dependency-review debe ser blocking`);
+  }
+  const auditSection = content.split('npm-audit-report:')[1] ?? '';
+  if (!auditSection.includes('continue-on-error: true')) {
+    errors.push(`${depsWorkflow} npm-audit-report debe ser report-only`);
   }
 }
 

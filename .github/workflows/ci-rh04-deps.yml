@@ -1,6 +1,6 @@
-name: RH-04 Dependency review + audit (report-only)
+name: RH-11 Dependency review (blocking) + audit report
 
-# PROG-RELEASE-HARDENING — nightly sigue siendo enforcement de npm audit
+# PROG-SECURITY-PROMOTE — dependency-review blocking (critical). npm-audit report-only.
 
 on:
   pull_request:
@@ -15,9 +15,9 @@ permissions:
 
 jobs:
   dependency-review:
+    name: dependency-review (blocking)
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v5
       - uses: actions/dependency-review-action@v4
@@ -40,6 +40,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: rh04-npm-audit-${{ github.sha }}
+          name: rh11-npm-audit-${{ github.sha }}
           path: reports/ci/rh04-npm-audit.json
           retention-days: 30

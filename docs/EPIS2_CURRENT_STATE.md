@@ -83,15 +83,15 @@ Detalle inventario módulos: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md).
 
 Congelamiento vigente ([`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md)): **no features clínicas nuevas** salvo MF autorizada. Tag **`v0.1-demo-rc3`** publicado (release hardening + README alineado).
 
-Siguiente programa **PROG-POST-RC3** — tramos propuestos (un tramo por sesión):
+**PROG-POST-RC3** ✓ **cerrado** (2026-06-11) — tramos 1–5 · [`epis2-prog-post-rc3-close.md`](../reports/epis2-prog-post-rc3-close.md)
 
 | Tramo | Enfoque | Estado |
 |-------|---------|--------|
-| PROG-GOBIERNO-POST-RC3 | Docs · tablero · brújula | ✓ Tramo 1 · [`epis2-prog-gobierno-post-rc3-tramo1-close.md`](../reports/epis2-prog-gobierno-post-rc3-tramo1-close.md) |
-| **PROG-DEV-PARITY** | CRLF / `quality:release` local Windows | ✓ Tramo 2 · [`epis2-prog-dev-parity-tramo2-close.md`](../reports/epis2-prog-dev-parity-tramo2-close.md) |
-| PROG-LEGAL-DISCLAIMER | MF-LEG-01…02 · DISCLAIMER v1.1 | ✓ Tramo 3 · [`epis2-prog-legal-disclaimer-tramo3-close.md`](../reports/epis2-prog-legal-disclaimer-tramo3-close.md) |
-| PROG-DEPS-HYGIENE | MF-DEP-01 triage Dependabot | ✓ Tramo 4 · [`epis2-prog-deps-hygiene-tramo4-close.md`](../reports/epis2-prog-deps-hygiene-tramo4-close.md) |
-| **PROG-SECURITY-PROMOTE** | RH-09/10 blocking · RH-11 | en curso (Tramo 5) · [`epis2-prog-security-promote-tramo5-rh10.md`](../reports/epis2-prog-security-promote-tramo5-rh10.md) |
+| PROG-GOBIERNO-POST-RC3 | Docs · tablero · brújula | ✓ Tramo 1 |
+| PROG-DEV-PARITY | CRLF / `quality:release` local Windows | ✓ Tramo 2 |
+| PROG-LEGAL-DISCLAIMER | DISCLAIMER v1.1 | ✓ Tramo 3 |
+| PROG-DEPS-HYGIENE | Triage Dependabot | ✓ Tramo 4 |
+| PROG-SECURITY-PROMOTE | RH-09/10/11 blocking | ✓ Tramo 5 |
 
 **DEV-PARITY / D-01:** ✓ resuelto (2026-06-16) — `.gitattributes` + `.editorconfig`; `format:check` y `quality:release` verdes en Windows. Evidencia: [`epis2-prog-dev-parity-tramo2-close.md`](../reports/epis2-prog-dev-parity-tramo2-close.md).
 

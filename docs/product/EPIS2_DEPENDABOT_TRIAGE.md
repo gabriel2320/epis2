@@ -1,7 +1,7 @@
 # EPIS2 — Triage Dependabot (PROG-DEPS-HYGIENE)
 
 **Versión:** 1.0 · **Programa:** PROG-POST-RC3 Tramo 4 · **Tag base:** `v0.1-demo-rc3`  
-**Gate:** `quality:deps-hygiene-gate` · **dependency-review CI:** report-only (RH-04)
+**Gate:** `quality:deps-hygiene-gate` · **dependency-review CI:** blocking critical (RH-11) · waiver [`EPIS2_DEPENDENCY_REVIEW_WAIVER.md`](EPIS2_DEPENDENCY_REVIEW_WAIVER.md)
 
 > Decisiones de triage — no merge automático de majors sin sesión dedicada.
 
@@ -35,7 +35,7 @@
 | Programa | Alcance |
 |----------|---------|
 | **PROG-ZOD4-MIGRATION** | Migración Zod 3 → 4 en monorepo · **diferido** |
-| **PROG-SECURITY-PROMOTE** (Tramo 5) | RH-09 Gitleaks blocking · RH-11 dependency-review alinear |
+| **PROG-SECURITY-PROMOTE** (Tramo 5) | ✓ RH-09/10/11 blocking · waiver RH-11 |
 
 Referencias: [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-rc3-2026.md) · [`EPIS2_RELEASE_HARDENING_PLAN.md`](EPIS2_RELEASE_HARDENING_PLAN.md)
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** MF-SEC-01/02 — RH-09 Gitleaks + RH-10 CodeQL blocking (PROG-POST-RC3 Tramo 5). */
+/** MF-SEC-01/02/03 — RH-09/10/11 security promote (PROG-POST-RC3 Tramo 5). */
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -14,8 +14,8 @@ function assertBlockingWorkflow(rel, rhId, needles) {
     return;
   }
   const src = readFileSync(path, 'utf8');
-  if (src.includes('continue-on-error: true')) {
-    errors.push(`${rel} no debe tener continue-on-error (${rhId} blocking)`);
+  if (src.includes('continue-on-error: true') && rel !== '.github/workflows/ci-rh04-deps.yml') {
+    errors.push(`${rel} no debe tener continue-on-error a nivel archivo (${rhId} blocking)`);
   }
   for (const needle of needles) {
     if (!src.includes(needle)) errors.push(`${rel} falta ${needle}`);
@@ -33,6 +33,38 @@ assertBlockingWorkflow('.github/workflows/ci-rh02-codeql.yml', 'RH-10', [
   'github/codeql-action/analyze',
 ]);
 
+const depsWorkflow = join(root, '.github/workflows/ci-rh04-deps.yml');
+if (!existsSync(depsWorkflow)) {
+  errors.push('Falta ci-rh04-deps.yml');
+} else {
+  const src = readFileSync(depsWorkflow, 'utf8');
+  if (!src.includes('RH-11')) errors.push('ci-rh04-deps.yml debe referenciar RH-11');
+  if (!src.includes('dependency-review (blocking)')) {
+    errors.push('ci-rh04-deps.yml falta job dependency-review blocking');
+  }
+  const depSection = src.split('dependency-review:')[1]?.split('npm-audit-report:')[0] ?? '';
+  if (depSection.includes('continue-on-error: true')) {
+    errors.push('dependency-review no debe ser report-only (RH-11)');
+  }
+  const auditSection = src.split('npm-audit-report:')[1] ?? '';
+  if (!auditSection.includes('continue-on-error: true')) {
+    errors.push('npm-audit-report debe seguir report-only');
+  }
+  if (!src.includes('fail-on-severity: critical')) {
+    errors.push('dependency-review debe usar fail-on-severity: critical');
+  }
+}
+
+const waiverPath = join(root, 'docs/product/EPIS2_DEPENDENCY_REVIEW_WAIVER.md');
+if (!existsSync(waiverPath)) {
+  errors.push(`Falta waiver doc: ${waiverPath}`);
+} else {
+  const src = readFileSync(waiverPath, 'utf8');
+  if (!src.includes('RH-11') || !src.includes('report-only')) {
+    errors.push('waiver doc incompleto');
+  }
+}
+
 const gitleaksConfig = join(root, '.gitleaks.toml');
 if (!existsSync(gitleaksConfig)) {
   errors.push(`Falta ${gitleaksConfig}`);
@@ -41,13 +73,11 @@ if (!existsSync(gitleaksConfig)) {
 }
 
 const codeqlConfig = join(root, 'codeql/codeql-config.yml');
-if (!existsSync(codeqlConfig)) {
-  errors.push(`Falta ${codeqlConfig}`);
-}
+if (!existsSync(codeqlConfig)) errors.push(`Falta ${codeqlConfig}`);
 
 if (errors.length) {
   console.error('security-promote-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 
-console.log('security-promote-gate OK — RH-09 Gitleaks + RH-10 CodeQL blocking');
+console.log('security-promote-gate OK — RH-09/10/11 blocking + waiver doc');

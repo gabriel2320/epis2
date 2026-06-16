@@ -31,17 +31,17 @@ No agregar pantallas clínicas. No Zod 4 en master (programa aparte: `PROG-ZOD4-
 | **RH-07** | ✓ DONE | fail-closed AUTH demo/hybrid deployed |
 | **RH-08** | ✓ DONE | `quality:release` + `security:no-bidi` |
 
-Workflows RH-02, RH-04, RH-05: **`continue-on-error: true`** — report-only.
+Workflows RH-05 SBOM: **`continue-on-error: true`** — report-only.
 
-**Promoción post-rc3 (PROG-SECURITY-PROMOTE):**
+**Promoción post-rc3 (PROG-SECURITY-PROMOTE) — ✓ cerrado:**
 
 | ID | Estado | Entrega |
 |----|--------|---------|
-| **RH-09** | ✓ DONE | Gitleaks **blocking** · [`epis2-prog-security-promote-tramo5-rh09.md`](../reports/epis2-prog-security-promote-tramo5-rh09.md) |
-| **RH-10** | ✓ DONE | CodeQL **blocking** · [`epis2-prog-security-promote-tramo5-rh10.md`](../reports/epis2-prog-security-promote-tramo5-rh10.md) |
-| RH-11 | pendiente | dependency-review alinear |
+| **RH-09** | ✓ DONE | Gitleaks blocking |
+| **RH-10** | ✓ DONE | CodeQL blocking |
+| **RH-11** | ✓ DONE | dependency-review blocking + waiver · [`EPIS2_DEPENDENCY_REVIEW_WAIVER.md`](EPIS2_DEPENDENCY_REVIEW_WAIVER.md) |
 
----
+Cierre programa: [`epis2-prog-post-rc3-close.md`](../reports/epis2-prog-post-rc3-close.md)
 
 ## Orden de ejecución
 
@@ -49,7 +49,7 @@ Workflows RH-02, RH-04, RH-05: **`continue-on-error: true`** — report-only.
 PR #15  RH-01 + RH-02…05 + RH-07 + RH-08  ✓ merged
 PR #16  RH-06 web fixtures bridge  ✓ merged
 PR #14  Dependabot setup-node v6 — cerrado (superseded)
-Promoción post-rc3: RH-09 Gitleaks blocking ✓ · RH-10 CodeQL blocking ✓ · RH-11 dependency-review
+Promoción post-rc3: RH-09/10/11 ✓ · cierre [`epis2-prog-post-rc3-close.md`](../reports/epis2-prog-post-rc3-close.md)
 ```
 
 ---

@@ -45,7 +45,7 @@ Un objetivo · pocos archivos · diff mínimo.
 | **PROG-CDS-UX** | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
 | **PROG-CONSOLIDATE** | ✓ ola 1 + ola 2 · tag `v0.1-demo-rc2` | [`epis2-prog-consolidate-ola2-close-2026.md`](../reports/epis2-prog-consolidate-ola2-close-2026.md) |
 | **PROG-RELEASE-HARDENING** | ✓ RH-01…08 · PR #15+#16 | [`epis2-session-close-2026-06-16-release-hardening.md`](../reports/epis2-session-close-2026-06-16-release-hardening.md) |
-| **PROG-POST-RC3** | **activo** Tramo 5 SECURITY | RH-09/10 ✓ · `quality:security-promote-gate` |
+| **PROG-POST-RC3** | ✓ **cerrado** tramos 1–5 | [`epis2-prog-post-rc3-close.md`](../reports/epis2-prog-post-rc3-close.md) |
 
 Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.5 · orquestación: [`reports/epis2-orquestacion-paralela-2026-06-14.md`](../reports/epis2-orquestacion-paralela-2026-06-14.md) §22–§23
 
@@ -57,13 +57,13 @@ Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../rep
 
 **Ola 14:** ✓ MF-IC-04 HL7 quarantine hardening · [`epis2-prog-strengthen-close-2026.md`](../reports/epis2-prog-strengthen-close-2026.md)
 
-Cerrado: MF-IM-01…09 · **MF-CU-01…04** · **MF-IC-01…04** · **MF-FF-01…15** · **PROG-FICHA-FIRST** · **PROG-STRENGTHEN** · **PROG-CONSOLIDATE** · **PROG-RELEASE-HARDENING** · PROG-RAPID · PROG-DI · tríada · PROG-IA-MODERNIZE · **PROG-CDS-UX**.
+Cerrado: … · **PROG-POST-RC3** · **PROG-CDS-UX**.
 
 Cierre FICHA-FIRST: [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-prog-ficha-first-close-2026.md). **PROG-MEDIA-FUTURE** diferido 2027+.
 
-**Siguiente fase recomendada:** **PROG-POST-RC3** Tramo 5 — **RH-11** dependency-review. RH-09 Gitleaks ✓ · RH-10 CodeQL ✓. Tag demo: **`v0.1-demo-rc3`**.
+**Siguiente fase recomendada:** operador — branch protection checks RH-09/10/11 en `master` · programas diferidos (`PROG-ZOD4-MIGRATION`, batch devDeps). **Sin programa clínico activo** — congelamiento vigente. Tag demo: **`v0.1-demo-rc3`**.
 
-Evidencia: Tramo 1 [`epis2-prog-gobierno-post-rc3-tramo1-close.md`](../reports/epis2-prog-gobierno-post-rc3-tramo1-close.md) · Tramo 2 [`epis2-prog-dev-parity-tramo2-close.md`](../reports/epis2-prog-dev-parity-tramo2-close.md) · Tramo 3 [`epis2-prog-legal-disclaimer-tramo3-close.md`](../reports/epis2-prog-legal-disclaimer-tramo3-close.md) · Tramo 4 [`epis2-prog-deps-hygiene-tramo4-close.md`](../reports/epis2-prog-deps-hygiene-tramo4-close.md) · RH-09 [`epis2-prog-security-promote-tramo5-rh09.md`](../reports/epis2-prog-security-promote-tramo5-rh09.md) · RH-10 [`epis2-prog-security-promote-tramo5-rh10.md`](../reports/epis2-prog-security-promote-tramo5-rh10.md).
+Cierre POST-RC3: [`epis2-prog-post-rc3-close.md`](../reports/epis2-prog-post-rc3-close.md).
 
 ---
 

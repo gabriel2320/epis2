@@ -115,19 +115,19 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 
 ---
 
-## Activo — PROG-POST-RC3 (gobierno + higiene)
+## ✓ CERRADO — PROG-POST-RC3
 
-Plan: [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-rc3-2026.md) · Tramo 1: [`epis2-prog-gobierno-post-rc3-tramo1-close.md`](../../reports/epis2-prog-gobierno-post-rc3-tramo1-close.md) · Tramo 2: [`epis2-prog-dev-parity-tramo2-close.md`](../../reports/epis2-prog-dev-parity-tramo2-close.md) · Tramo 3 MF-LEG-01: [`epis2-prog-legal-disclaimer-tramo3-mf-leg-01.md`](../../reports/epis2-prog-legal-disclaimer-tramo3-mf-leg-01.md)
+Plan: [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-rc3-2026.md) · Cierre: [`epis2-prog-post-rc3-close.md`](../../reports/epis2-prog-post-rc3-close.md)
 
 | Tramo | Estado | Entrega |
 |-------|--------|---------|
-| **Tramo 1** | ✓ DONE | PROG-GOBIERNO-POST-RC3 · MF-GOV-01…04 |
-| **Tramo 2** | ✓ DONE | PROG-DEV-PARITY · MF-DEV-01…02 · `.gitattributes` + `quality:release` local |
-| **Tramo 3** | ✓ DONE | LEGAL · MF-LEG-01 checklist · MF-LEG-02 DISCLAIMER v1.1 · [`epis2-prog-legal-disclaimer-tramo3-close.md`](../../reports/epis2-prog-legal-disclaimer-tramo3-close.md) |
-| **Tramo 4** | ✓ DONE | DEPS · MF-DEP-01 triage · [`epis2-prog-deps-hygiene-tramo4-close.md`](../../reports/epis2-prog-deps-hygiene-tramo4-close.md) |
-| **Tramo 5** | **en curso** | SECURITY-PROMOTE · RH-09/10 ✓ · RH-11 pendiente · [`epis2-prog-security-promote-tramo5-rh10.md`](../../reports/epis2-prog-security-promote-tramo5-rh10.md) |
+| 1 GOBIERNO | ✓ | MF-GOV-01…04 |
+| 2 DEV-PARITY | ✓ | MF-DEV-01…02 |
+| 3 LEGAL | ✓ | MF-LEG-01…02 · DISCLAIMER v1.1 |
+| 4 DEPS | ✓ | MF-DEP-01 triage |
+| 5 SECURITY | ✓ | RH-09/10/11 blocking |
 
-**Siguiente:** RH-11 dependency-review · branch protection `CodeQL (javascript-typescript, blocking)` + `gitleaks (blocking)`
+**Siguiente:** branch protection master (checks RH-09/10/11) · programas diferidos (`PROG-ZOD4-MIGRATION`, batch devDeps)
 
 ---
 
