@@ -1,4 +1,4 @@
-title = "EPIS2 gitleaks (RH-03 report-only)"
+title = "EPIS2 gitleaks (RH-09 blocking)"
 
 [allowlist]
 description = "Demo sintetico, ejemplos env y fixtures — no PHI real"

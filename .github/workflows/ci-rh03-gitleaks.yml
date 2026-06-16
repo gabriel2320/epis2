@@ -1,6 +1,6 @@
-name: RH-03 Gitleaks (report-only)
+name: RH-09 Gitleaks (blocking)
 
-# PROG-RELEASE-HARDENING — no required PR check
+# PROG-SECURITY-PROMOTE — required PR check (RH-09). RH-02/04/05 siguen report-only.
 
 on:
   push:
@@ -16,8 +16,8 @@ permissions:
 
 jobs:
   gitleaks:
+    name: gitleaks (blocking)
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v5
         with:

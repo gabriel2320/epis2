@@ -70,6 +70,7 @@
     "quality:release": "node tools/gates/run-gate.mjs release",
     "quality:legal-disclaimer-gate": "node scripts/quality/validate-legal-disclaimer-gate.mjs",
     "quality:deps-hygiene-gate": "node scripts/quality/validate-deps-hygiene-gate.mjs",
+    "quality:security-promote-gate": "node scripts/quality/validate-security-promote-gate.mjs",
     "security:no-bidi": "node scripts/quality/security-no-bidi.mjs",
     "tool:scripts:classify": "node tools/scripts/classify.mjs",
     "tool:gates:sync-catalog": "node tools/gates/sync-catalog.mjs",

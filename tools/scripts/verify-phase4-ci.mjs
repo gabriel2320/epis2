@@ -63,13 +63,12 @@ for (const [rel, needles] of workflowChecks) {
   }
 }
 
-const rhWorkflows = [
+const rhReportOnlyWorkflows = [
   '.github/workflows/ci-rh02-codeql.yml',
-  '.github/workflows/ci-rh03-gitleaks.yml',
   '.github/workflows/ci-rh04-deps.yml',
   '.github/workflows/ci-rh05-sbom.yml',
 ];
-for (const rel of rhWorkflows) {
+for (const rel of rhReportOnlyWorkflows) {
   if (!existsSync(join(root, rel))) {
     errors.push(`Falta workflow ${rel} (PROG-RELEASE-HARDENING)`);
     continue;
@@ -77,6 +76,19 @@ for (const rel of rhWorkflows) {
   const content = readFileSync(join(root, rel), 'utf8');
   if (!content.includes('continue-on-error: true')) {
     errors.push(`${rel} debe ser report-only (continue-on-error)`);
+  }
+}
+
+const gitleaksWorkflow = '.github/workflows/ci-rh03-gitleaks.yml';
+if (!existsSync(join(root, gitleaksWorkflow))) {
+  errors.push(`Falta workflow ${gitleaksWorkflow} (RH-09)`);
+} else {
+  const content = readFileSync(join(root, gitleaksWorkflow), 'utf8');
+  if (content.includes('continue-on-error: true')) {
+    errors.push(`${gitleaksWorkflow} RH-09 debe ser blocking (sin continue-on-error)`);
+  }
+  if (!content.includes('RH-09')) {
+    errors.push(`${gitleaksWorkflow} debe referenciar RH-09`);
   }
 }
 

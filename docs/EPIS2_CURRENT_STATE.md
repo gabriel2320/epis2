@@ -91,7 +91,7 @@ Siguiente programa **PROG-POST-RC3** — tramos propuestos (un tramo por sesión
 | **PROG-DEV-PARITY** | CRLF / `quality:release` local Windows | ✓ Tramo 2 · [`epis2-prog-dev-parity-tramo2-close.md`](../reports/epis2-prog-dev-parity-tramo2-close.md) |
 | PROG-LEGAL-DISCLAIMER | MF-LEG-01…02 · DISCLAIMER v1.1 | ✓ Tramo 3 · [`epis2-prog-legal-disclaimer-tramo3-close.md`](../reports/epis2-prog-legal-disclaimer-tramo3-close.md) |
 | PROG-DEPS-HYGIENE | MF-DEP-01 triage Dependabot | ✓ Tramo 4 · [`epis2-prog-deps-hygiene-tramo4-close.md`](../reports/epis2-prog-deps-hygiene-tramo4-close.md) |
-| **PROG-SECURITY-PROMOTE** | RH-09+ blocking | **siguiente** (Tramo 5) |
+| **PROG-SECURITY-PROMOTE** | RH-09 Gitleaks blocking · RH-10/11 | en curso (Tramo 5) · [`epis2-prog-security-promote-tramo5-rh09.md`](../reports/epis2-prog-security-promote-tramo5-rh09.md) |
 
 **DEV-PARITY / D-01:** ✓ resuelto (2026-06-16) — `.gitattributes` + `.editorconfig`; `format:check` y `quality:release` verdes en Windows. Evidencia: [`epis2-prog-dev-parity-tramo2-close.md`](../reports/epis2-prog-dev-parity-tramo2-close.md).
 

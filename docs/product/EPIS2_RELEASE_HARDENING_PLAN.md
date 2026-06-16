@@ -31,7 +31,15 @@ No agregar pantallas clínicas. No Zod 4 en master (programa aparte: `PROG-ZOD4-
 | **RH-07** | ✓ DONE | fail-closed AUTH demo/hybrid deployed |
 | **RH-08** | ✓ DONE | `quality:release` + `security:no-bidi` |
 
-Workflows RH-02…05: **`continue-on-error: true`** — no required checks.
+Workflows RH-02, RH-04, RH-05: **`continue-on-error: true`** — report-only.
+
+**Promoción post-rc3 (PROG-SECURITY-PROMOTE):**
+
+| ID | Estado | Entrega |
+|----|--------|---------|
+| **RH-09** | ✓ DONE | Gitleaks **blocking** · [`epis2-prog-security-promote-tramo5-rh09.md`](../reports/epis2-prog-security-promote-tramo5-rh09.md) |
+| RH-10 | pendiente | CodeQL → required |
+| RH-11 | pendiente | dependency-review alinear |
 
 ---
 
@@ -41,7 +49,7 @@ Workflows RH-02…05: **`continue-on-error: true`** — no required checks.
 PR #15  RH-01 + RH-02…05 + RH-07 + RH-08  ✓ merged
 PR #16  RH-06 web fixtures bridge  ✓ merged
 PR #14  Dependabot setup-node v6 — cerrado (superseded)
-Promoción futura: Gitleaks → blocking · CodeQL → required · audit alinear nightly
+Promoción post-rc3: RH-09 Gitleaks blocking ✓ · RH-10 CodeQL · RH-11 dependency-review
 ```
 
 ---

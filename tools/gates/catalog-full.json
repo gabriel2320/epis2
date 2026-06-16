@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-06-16T13:17:59.811Z",
+  "generatedAt": "2026-06-16T13:25:34.322Z",
   "source": "package.json",
   "note": "Regenerar: npm run tool:gates:sync-catalog",
   "gates": {
@@ -1103,6 +1103,10 @@
     "quality:deps-hygiene-gate": {
       "type": "file",
       "path": "scripts/quality/validate-deps-hygiene-gate.mjs"
+    },
+    "quality:security-promote-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-security-promote-gate.mjs"
     }
   }
 }
