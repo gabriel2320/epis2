@@ -6,34 +6,19 @@
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadManifestWired } from './gate-classify.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const gatesDir = dirname(fileURLToPath(import.meta.url));
 const outPath = join(root, 'reports/gates-inventory-2026-06.md');
 
-const catalog = JSON.parse(readFileSync(join(gatesDir, 'catalog-full.json'), 'utf8')).gates ?? {};
-const catalogKeys = Object.keys(catalog).sort();
+const catalogDoc = JSON.parse(readFileSync(join(gatesDir, 'catalog-full.json'), 'utf8'));
+const activeGates = catalogDoc.gates ?? {};
+const archivedGates = catalogDoc.archived ?? {};
+const allGates = { ...archivedGates, ...activeGates };
+const catalogKeys = Object.keys(activeGates).sort();
 
-const manifestNames = ['required', 'release', 'nightly', 'experimental'];
-const wiredFromManifests = new Set();
-
-for (const name of manifestNames) {
-  const manifest = JSON.parse(readFileSync(join(gatesDir, `${name}.json`), 'utf8'));
-  for (const step of manifest.steps ?? []) {
-    const m = step.match(/quality:gate\s+--\s+(quality:[\w-]+)/);
-    if (m) wiredFromManifests.add(m[1]);
-    const inline = step.match(/^(quality:[\w-]+)/);
-    if (inline && catalog[inline[1]]) wiredFromManifests.add(inline[1]);
-  }
-}
-
-/** Gates encadenados por close-gates conocidos. */
-for (const rel of readdirSync(join(root, 'scripts/quality')).filter((f) => f.endsWith('.mjs'))) {
-  const text = readFileSync(join(root, 'scripts/quality', rel), 'utf8');
-  for (const m of text.matchAll(/quality:([\w-]+)/g)) {
-    wiredFromManifests.add(`quality:${m[1]}`);
-  }
-}
+const wiredFromManifests = loadManifestWired();
 
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 const rootScripts = Object.keys(pkg.scripts ?? {})
@@ -47,9 +32,9 @@ const diskScripts = readdirSync(join(root, 'scripts/quality'))
 
 const catalogOnly = catalogKeys.filter((k) => !wiredFromManifests.has(k));
 const wired = catalogKeys.filter((k) => wiredFromManifests.has(k));
-const diskNotCatalog = diskScripts.filter((k) => !catalog[k]);
+const diskNotCatalog = diskScripts.filter((k) => !allGates[k]);
 const catalogMissingDisk = catalogKeys.filter((k) => {
-  const entry = catalog[k];
+  const entry = activeGates[k];
   return entry?.type === 'file' && entry.path?.includes('validate-') && !diskScripts.includes(k);
 });
 
@@ -82,7 +67,8 @@ const lines = [
   '',
   '| Métrica | Valor |',
   '|---------|-------|',
-  `| Entradas catálogo | ${catalogKeys.length} |`,
+  `| Entradas catálogo activo | ${catalogKeys.length} |`,
+  `| Entradas archived | ${Object.keys(archivedGates).length} |`,
   `| Scripts validate-* en disco | ${diskScripts.length} |`,
   `| quality:* en package.json root | ${rootScripts.length} |`,
   `| Referenciados (manifiestos + close-gates) | ${wired.length} |`,
@@ -125,4 +111,6 @@ lines.push(
 
 writeFileSync(outPath, lines.join('\n'));
 console.log(`gates inventory written: ${outPath}`);
-console.log(`  catalog=${catalogKeys.length} wired=${wired.length} catalog-only=${catalogOnly.length}`);
+console.log(
+  `  active=${catalogKeys.length} archived=${Object.keys(archivedGates).length} wired=${wired.length} catalog-only=${catalogOnly.length}`,
+);

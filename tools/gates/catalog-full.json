@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-06-16T18:16:21.811Z",
-  "source": "package.json",
-  "note": "Regenerar: npm run tool:gates:sync-catalog",
+  "generatedAt": "2026-06-16T20:35:40.678Z",
+  "source": "catalog-full+prune-phase1",
+  "note": "Regenerar inventario: node tools/gates/inventory-orphans.mjs",
   "gates": {
     "quality:m3-signoff": {
       "type": "file",
@@ -116,22 +116,6 @@
       "type": "file",
       "path": "scripts/quality/validate-dev-agent-orchestration-gate.mjs"
     },
-    "quality:tramo-k-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-k-inventory-gate.mjs"
-    },
-    "quality:tramo-k-quality-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-k-quality-gate.mjs"
-    },
-    "quality:tramo-k-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-k-scaffold-gate.mjs"
-    },
-    "quality:tramo-k-audit-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-k-audit-gate.mjs"
-    },
     "quality:tramo-k-closure-gate": {
       "type": "file",
       "path": "scripts/quality/validate-tramo-k-closure-gate.mjs"
@@ -140,185 +124,29 @@
       "type": "file",
       "path": "scripts/quality/validate-week4-gate.mjs"
     },
-    "quality:ola2-m3-ui-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola2-m3-ui-gate.mjs"
-    },
-    "quality:ola2-physical-exam-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola2-physical-exam-gate.mjs"
-    },
-    "quality:ola1c-journey-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola1c-journey-gate.mjs"
-    },
-    "quality:ola3-ficha-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola3-ficha-gate.mjs"
-    },
-    "quality:ola3-alerts-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola3-alerts-gate.mjs"
-    },
-    "quality:ola6a-print-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola6a-print-gate.mjs"
-    },
     "quality:doc-screen-catalog-gate": {
       "type": "file",
       "path": "scripts/quality/validate-doc-screen-catalog-gate.mjs"
-    },
-    "quality:ola3-longitudinal-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola3-longitudinal-gate.mjs"
     },
     "quality:registry-meta-gate": {
       "type": "file",
       "path": "scripts/quality/validate-registry-meta-gate.mjs"
     },
-    "quality:ola3-ficha-depth-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola3-ficha-depth-gate.mjs"
-    },
-    "quality:ola3-ficha-hub-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola3-ficha-hub-gate.mjs"
-    },
-    "quality:ola3-surgical-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola3-surgical-gate.mjs"
-    },
-    "quality:ola3-timeline-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola3-timeline-gate.mjs"
-    },
-    "quality:ola1c-imaging-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola1c-imaging-gate.mjs"
-    },
-    "quality:tramo-b-reception-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-b-reception-gate.mjs"
-    },
     "quality:tramo-a-closure-gate": {
       "type": "file",
       "path": "scripts/quality/validate-tramo-a-closure-gate.mjs"
-    },
-    "quality:tramo-b-ui-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-b-ui-gate.mjs"
     },
     "quality:tramo-b-closure-gate": {
       "type": "file",
       "path": "scripts/quality/validate-tramo-b-closure-gate.mjs"
     },
-    "quality:tramo-c-emergency-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-c-emergency-gate.mjs"
-    },
-    "quality:tramo-c-admission-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-c-admission-gate.mjs"
-    },
-    "quality:tramo-c-orders-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-c-orders-gate.mjs"
-    },
-    "quality:tramo-c-trends-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-c-trends-gate.mjs"
-    },
-    "quality:tramo-c-epicrisis-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-c-epicrisis-gate.mjs"
-    },
-    "quality:tramo-c-census-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-c-census-gate.mjs"
-    },
-    "quality:tramo-c-mar-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-c-mar-gate.mjs"
-    },
     "quality:tramo-c-closure-gate": {
       "type": "file",
       "path": "scripts/quality/validate-tramo-c-closure-gate.mjs"
     },
-    "quality:tramo-d-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-inventory-gate.mjs"
-    },
-    "quality:tramo-d-icu-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-icu-gate.mjs"
-    },
-    "quality:tramo-d-flowsheet-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-flowsheet-gate.mjs"
-    },
-    "quality:tramo-d-hemodynamics-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-hemodynamics-gate.mjs"
-    },
-    "quality:tramo-d-fluid-balance-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-fluid-balance-gate.mjs"
-    },
-    "quality:tramo-d-ventilation-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-ventilation-gate.mjs"
-    },
-    "quality:tramo-d-invasive-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-invasive-gate.mjs"
-    },
-    "quality:tramo-d-icu-discharge-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-icu-discharge-gate.mjs"
-    },
-    "quality:tramo-d-neurological-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-neurological-gate.mjs"
-    },
-    "quality:tramo-d-severity-scales-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-severity-scales-gate.mjs"
-    },
-    "quality:tramo-d-vasoactive-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-vasoactive-gate.mjs"
-    },
-    "quality:tramo-d-sedoanalgesia-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-sedoanalgesia-gate.mjs"
-    },
     "quality:tramo-d-closure-gate": {
       "type": "file",
       "path": "scripts/quality/validate-tramo-d-closure-gate.mjs"
-    },
-    "quality:tramo-e-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-e-inventory-gate.mjs"
-    },
-    "quality:tramo-e-or-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-e-or-gate.mjs"
-    },
-    "quality:tramo-e-who-checklist-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-e-who-checklist-gate.mjs"
-    },
-    "quality:tramo-e-preanesthesia-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-e-preanesthesia-gate.mjs"
-    },
-    "quality:tramo-e-audit-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-e-audit-gate.mjs"
-    },
-    "quality:tramo-e-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-e-scaffold-gate.mjs"
     },
     "quality:tramo-e-closure-gate": {
       "type": "file",
@@ -328,101 +156,21 @@
       "type": "file",
       "path": "scripts/quality/validate-tramos-hygiene-gate.mjs"
     },
-    "quality:tramo-f-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-f-inventory-gate.mjs"
-    },
-    "quality:tramo-f-aps-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-f-aps-gate.mjs"
-    },
-    "quality:tramo-f-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-f-scaffold-gate.mjs"
-    },
-    "quality:tramo-f-audit-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-f-audit-gate.mjs"
-    },
     "quality:tramo-f-closure-gate": {
       "type": "file",
       "path": "scripts/quality/validate-tramo-f-closure-gate.mjs"
-    },
-    "quality:tramo-g-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-g-inventory-gate.mjs"
-    },
-    "quality:tramo-g-specialized-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-g-specialized-gate.mjs"
-    },
-    "quality:tramo-g-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-g-scaffold-gate.mjs"
-    },
-    "quality:tramo-g-audit-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-g-audit-gate.mjs"
     },
     "quality:tramo-g-closure-gate": {
       "type": "file",
       "path": "scripts/quality/validate-tramo-g-closure-gate.mjs"
     },
-    "quality:tramo-h-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-h-inventory-gate.mjs"
-    },
-    "quality:tramo-h-iaas-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-h-iaas-gate.mjs"
-    },
-    "quality:tramo-h-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-h-scaffold-gate.mjs"
-    },
-    "quality:tramo-h-audit-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-h-audit-gate.mjs"
-    },
     "quality:tramo-h-closure-gate": {
       "type": "file",
       "path": "scripts/quality/validate-tramo-h-closure-gate.mjs"
     },
-    "quality:tramo-i-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-i-inventory-gate.mjs"
-    },
-    "quality:tramo-i-specialty-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-i-specialty-gate.mjs"
-    },
-    "quality:tramo-i-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-i-scaffold-gate.mjs"
-    },
-    "quality:tramo-i-audit-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-i-audit-gate.mjs"
-    },
     "quality:tramo-i-closure-gate": {
       "type": "file",
       "path": "scripts/quality/validate-tramo-i-closure-gate.mjs"
-    },
-    "quality:tramo-j-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-j-inventory-gate.mjs"
-    },
-    "quality:tramo-j-pharmacy-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-j-pharmacy-gate.mjs"
-    },
-    "quality:tramo-j-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-j-scaffold-gate.mjs"
-    },
-    "quality:tramo-j-audit-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-j-audit-gate.mjs"
     },
     "quality:tramo-j-closure-gate": {
       "type": "file",
@@ -459,10 +207,6 @@
     "quality:ui": {
       "type": "command",
       "command": "npm run quality:ui-simplify-gate"
-    },
-    "quality:m3-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-m3-scaffold-gate.mjs"
     },
     "quality:duplicate-actions-gate": {
       "type": "file",
@@ -568,10 +312,6 @@
       "type": "file",
       "path": "scripts/quality/validate-design-mode-gate.mjs"
     },
-    "quality:classic-md3-mode-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-classic-md3-mode-gate.mjs"
-    },
     "quality:classic-fixed-panels-gate": {
       "type": "file",
       "path": "scripts/quality/validate-classic-fixed-panels-gate.mjs"
@@ -596,10 +336,6 @@
       "type": "file",
       "path": "scripts/quality/validate-command-center-googlebar-gate.mjs"
     },
-    "quality:classic-md3-ai-mode-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-classic-md3-ai-mode-gate.mjs"
-    },
     "quality:design-agents-gate": {
       "type": "file",
       "path": "scripts/quality/validate-design-agents-gate.mjs"
@@ -615,10 +351,6 @@
     "quality:classic-screenshot-advisory": {
       "type": "file",
       "path": "scripts/quality/validate-classic-screenshot-advisory.mjs"
-    },
-    "quality:dashboard-md3-mode-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dashboard-md3-mode-gate.mjs"
     },
     "quality:dashboard-kpi-actionability-gate": {
       "type": "file",
@@ -651,10 +383,6 @@
     "quality:dual-chart-ledger": {
       "type": "file",
       "path": "scripts/quality/validate-dual-chart-ledger.mjs"
-    },
-    "quality:dual-chart-next": {
-      "type": "file",
-      "path": "scripts/quality/dual-chart-next.mjs"
     },
     "quality:paper-mode-next": {
       "type": "file",
@@ -728,21 +456,9 @@
       "type": "file",
       "path": "scripts/quality/validate-draft-trace-gate.mjs"
     },
-    "quality:sh-02-intent-evals-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-sh-02-intent-evals-gate.mjs"
-    },
     "quality:sh-03-degrade-gate": {
       "type": "file",
       "path": "scripts/quality/validate-sh-03-degrade-gate.mjs"
-    },
-    "quality:sh-05-rls-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-sh-05-rls-gate.mjs"
-    },
-    "quality:sh-06-migration-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-sh-06-migration-gate.mjs"
     },
     "quality:im-02-embed-gate": {
       "type": "file",
@@ -792,89 +508,9 @@
       "type": "file",
       "path": "scripts/quality/tres-frentes-next.mjs"
     },
-    "quality:ficha-norm-benchmark-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ficha-norm-benchmark-gate.mjs"
-    },
-    "quality:ficha-norm-density-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ficha-norm-density-gate.mjs"
-    },
-    "quality:ficha-norm-typography-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ficha-norm-typography-gate.mjs"
-    },
-    "quality:ficha-norm-theme-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ficha-norm-theme-gate.mjs"
-    },
-    "quality:ficha-norm-motion-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ficha-norm-motion-gate.mjs"
-    },
-    "quality:te-02-sections-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-te-02-sections-gate.mjs"
-    },
-    "quality:te-04-sections-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-te-04-sections-gate.mjs"
-    },
-    "quality:ficha-norm-mirror-b1-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ficha-norm-mirror-b1-gate.mjs"
-    },
-    "quality:ficha-norm-mirror-b2-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ficha-norm-mirror-b2-gate.mjs"
-    },
     "quality:ficha-norm-signoff-gate": {
       "type": "file",
       "path": "scripts/quality/validate-ficha-norm-signoff-gate.mjs"
-    },
-    "quality:cm-01-barra-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-01-barra-gate.mjs"
-    },
-    "quality:cm-02-palette-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-02-palette-gate.mjs"
-    },
-    "quality:cm-03-assist-route-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-03-assist-route-gate.mjs"
-    },
-    "quality:te-06-supporting-pane-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-te-06-supporting-pane-gate.mjs"
-    },
-    "quality:te-07-tabular-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-te-07-tabular-gate.mjs"
-    },
-    "quality:te-08-signoff-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-te-08-signoff-gate.mjs"
-    },
-    "quality:cm-04-context-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-04-context-gate.mjs"
-    },
-    "quality:cm-05-panel-ia-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-05-panel-ia-gate.mjs"
-    },
-    "quality:cm-06-assist-draft-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-06-assist-draft-gate.mjs"
-    },
-    "quality:cm-07-evals-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-07-evals-gate.mjs"
-    },
-    "quality:cm-08-signoff-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-08-signoff-gate.mjs"
     },
     "quality:experiencia-core-signoff-gate": {
       "type": "file",
@@ -928,30 +564,6 @@
       "type": "file",
       "path": "scripts/quality/validate-paper-chart-section-tree-gate.mjs"
     },
-    "quality:paper-planner-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-planner-scaffold-gate.mjs"
-    },
-    "quality:paper-planner-week-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-planner-week-gate.mjs"
-    },
-    "quality:paper-planner-month-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-planner-month-gate.mjs"
-    },
-    "quality:paper-planner-print-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-planner-print-gate.mjs"
-    },
-    "quality:paper-planner-ai-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-planner-ai-gate.mjs"
-    },
-    "quality:paper-planner-gates": {
-      "type": "npm",
-      "command": "npm run quality:paper-planner-scaffold-gate && npm run quality:paper-planner-week-gate && npm run quality:paper-planner-month-gate && npm run quality:paper-planner-print-gate && npm run quality:paper-planner-ai-gate"
-    },
     "quality:dual-chart-scaffold-gate": {
       "type": "file",
       "path": "scripts/quality/validate-dual-chart-scaffold-gate.mjs"
@@ -1004,22 +616,6 @@
       "type": "file",
       "path": "scripts/quality/validate-openapi-gate.mjs"
     },
-    "quality:login-command-home-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-login-command-home-gate.mjs"
-    },
-    "quality:mode-switcher-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-mode-switcher-gate.mjs"
-    },
-    "quality:mode-guards-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-mode-guards-gate.mjs"
-    },
-    "quality:mode-transitions-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-mode-transitions-gate.mjs"
-    },
     "quality:command-center-hub-gate": {
       "type": "file",
       "path": "scripts/quality/validate-command-center-hub-gate.mjs"
@@ -1032,17 +628,9 @@
       "type": "file",
       "path": "scripts/quality/validate-dashboard-mode-isolation-gate.mjs"
     },
-    "quality:mode-safety-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-mode-safety-gate.mjs"
-    },
     "quality:pm01": {
       "type": "npm",
       "command": "npm run quality:three-modes-gate && npm run quality:classic-md3-mode-gate && npm run quality:dashboard-md3-mode-gate && npm run quality:mode-transitions-gate && npm run quality:mode-guards-gate && npm run quality:mode-safety-gate"
-    },
-    "quality:three-modes-design-agents-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-three-modes-design-agents-gate.mjs"
     },
     "quality:role-care-separation-gate": {
       "type": "file",
@@ -1147,6 +735,631 @@
     "quality:gates-inventory-gate": {
       "type": "file",
       "path": "scripts/quality/validate-gates-inventory-gate.mjs"
+    },
+    "quality:gates-prune-phase1-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-gates-prune-phase1-gate.mjs"
     }
-  }
+  },
+  "archived": {
+    "quality:tramo-k-quality-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-k-quality-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-k-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-k-scaffold-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-k-audit-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-k-audit-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola2-m3-ui-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola2-m3-ui-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola2-physical-exam-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola2-physical-exam-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola1c-journey-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola1c-journey-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola3-alerts-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola3-alerts-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola6a-print-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola6a-print-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola3-longitudinal-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola3-longitudinal-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola3-ficha-depth-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola3-ficha-depth-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola3-ficha-hub-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola3-ficha-hub-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola3-surgical-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola3-surgical-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola3-timeline-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola3-timeline-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola1c-imaging-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola1c-imaging-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-b-ui-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-b-ui-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-c-emergency-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-c-emergency-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-c-admission-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-c-admission-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-c-orders-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-c-orders-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-c-trends-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-c-trends-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-c-epicrisis-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-c-epicrisis-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-c-census-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-c-census-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-c-mar-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-c-mar-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-icu-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-icu-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-flowsheet-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-flowsheet-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-hemodynamics-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-hemodynamics-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-fluid-balance-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-fluid-balance-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-ventilation-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-ventilation-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-invasive-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-invasive-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-icu-discharge-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-icu-discharge-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-neurological-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-neurological-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-severity-scales-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-severity-scales-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-vasoactive-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-vasoactive-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-sedoanalgesia-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-sedoanalgesia-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-e-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-e-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-e-or-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-e-or-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-e-who-checklist-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-e-who-checklist-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-e-preanesthesia-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-e-preanesthesia-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-e-audit-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-e-audit-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-e-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-e-scaffold-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-f-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-f-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-f-aps-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-f-aps-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-f-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-f-scaffold-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-f-audit-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-f-audit-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-g-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-g-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-g-specialized-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-g-specialized-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-g-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-g-scaffold-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-g-audit-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-g-audit-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-h-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-h-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-h-iaas-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-h-iaas-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-h-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-h-scaffold-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-h-audit-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-h-audit-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-i-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-i-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-i-specialty-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-i-specialty-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-i-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-i-scaffold-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-i-audit-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-i-audit-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-j-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-j-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-j-pharmacy-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-j-pharmacy-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-j-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-j-scaffold-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-j-audit-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-j-audit-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:m3-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-m3-scaffold-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:classic-md3-mode-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-classic-md3-mode-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:classic-md3-ai-mode-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-classic-md3-ai-mode-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dashboard-md3-mode-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dashboard-md3-mode-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dual-chart-next": {
+      "type": "file",
+      "path": "scripts/quality/dual-chart-next.mjs",
+      "archivedProgram": "dual-chart-next",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:sh-02-intent-evals-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-sh-02-intent-evals-gate.mjs",
+      "archivedProgram": "PROG-STRENGTHEN",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:sh-05-rls-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-sh-05-rls-gate.mjs",
+      "archivedProgram": "PROG-STRENGTHEN",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:sh-06-migration-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-sh-06-migration-gate.mjs",
+      "archivedProgram": "PROG-STRENGTHEN",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ficha-norm-benchmark-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ficha-norm-benchmark-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ficha-norm-density-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ficha-norm-density-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ficha-norm-typography-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ficha-norm-typography-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ficha-norm-theme-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ficha-norm-theme-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ficha-norm-motion-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ficha-norm-motion-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:te-02-sections-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-te-02-sections-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:te-04-sections-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-te-04-sections-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ficha-norm-mirror-b1-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ficha-norm-mirror-b1-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ficha-norm-mirror-b2-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ficha-norm-mirror-b2-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-02-palette-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-02-palette-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-03-assist-route-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-03-assist-route-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:te-06-supporting-pane-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-te-06-supporting-pane-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:te-07-tabular-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-te-07-tabular-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:te-08-signoff-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-te-08-signoff-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-04-context-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-04-context-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-05-panel-ia-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-05-panel-ia-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-06-assist-draft-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-06-assist-draft-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-07-evals-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-07-evals-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-08-signoff-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-08-signoff-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-planner-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-planner-scaffold-gate.mjs",
+      "archivedProgram": "paper-planner",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-planner-week-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-planner-week-gate.mjs",
+      "archivedProgram": "paper-planner",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-planner-print-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-planner-print-gate.mjs",
+      "archivedProgram": "paper-planner",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-planner-ai-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-planner-ai-gate.mjs",
+      "archivedProgram": "paper-planner",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-planner-gates": {
+      "type": "npm",
+      "command": "npm run quality:paper-planner-scaffold-gate && npm run quality:paper-planner-week-gate && npm run quality:paper-planner-month-gate && npm run quality:paper-planner-print-gate && npm run quality:paper-planner-ai-gate",
+      "archivedProgram": "paper-planner",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:login-command-home-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-login-command-home-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:mode-switcher-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-mode-switcher-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:mode-guards-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-mode-guards-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:mode-transitions-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-mode-transitions-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:mode-safety-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-mode-safety-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:three-modes-design-agents-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-three-modes-design-agents-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-k-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-k-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola3-ficha-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola3-ficha-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-b-reception-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-b-reception-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-01-barra-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-01-barra-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-planner-month-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-planner-month-gate.mjs",
+      "archivedProgram": "paper-planner",
+      "archivedAt": "2026-06-16"
+    }
+  },
+  "prunePhase": "1"
 }

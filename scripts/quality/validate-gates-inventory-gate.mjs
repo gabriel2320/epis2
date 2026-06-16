@@ -17,8 +17,12 @@ if (!existsSync(report)) {
   errors.push('falta reports/gates-inventory-2026-06.md — ejecutar node tools/gates/inventory-orphans.mjs');
 } else {
   const text = readFileSync(report, 'utf8');
-  for (const token of ['Catálogo-only', 'Gates wired', 'catalog-only']) {
+  for (const token of ['Gates wired', 'catalog-only', 'Entradas catálogo activo']) {
     if (!text.includes(token)) errors.push(`inventario sin sección ${token}`);
+  }
+  const catalog = JSON.parse(readFileSync(join(root, 'tools/gates/catalog-full.json'), 'utf8'));
+  if (!catalog.archived || Object.keys(catalog.archived).length < 1) {
+    errors.push('catalog-full.json sin sección archived');
   }
 }
 
