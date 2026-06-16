@@ -96,3 +96,19 @@ npm run quality:fast
 ```
 
 Congelamiento vigente · siguiente: piloto sintético UX (sin expansión clínica masiva).
+
+---
+
+## RH-12 — auditoría reproducible
+
+Workflow manual: `.github/workflows/rh12-branch-protection-required-checks.yml`
+
+| Modo | Uso | Token |
+|------|-----|-------|
+| `audit` | Verificar lista canónica (default) | `GITHUB_TOKEN` |
+| `apply` | Restaurar protección tras deriva | Secret `EPIS2_REPO_ADMIN_TOKEN` (PAT Administration write) |
+
+```bash
+gh secret set EPIS2_REPO_ADMIN_TOKEN --repo gabriel2320/epis2   # solo si usarás apply
+# Actions → RH-12 Branch protection required checks → Run workflow
+```

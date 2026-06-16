@@ -1,0 +1,187 @@
+name: RH-12 Branch protection required checks
+
+# MF-LOCK-RC3-01 — auditoría reproducible de required checks en master.
+# manual workflow_dispatch · audit (default) · apply (recovery, requiere EPIS2_REPO_ADMIN_TOKEN)
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'audit = verifica; apply = restaura required checks (admin PAT)'
+        required: true
+        type: choice
+        options:
+          - audit
+          - apply
+        default: audit
+      branch:
+        description: 'Rama protegida objetivo'
+        required: true
+        type: string
+        default: master
+
+permissions:
+  contents: read
+  administration: read
+
+jobs:
+  branch-protection-required-checks:
+    name: RH-12 branch-protection-required-checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Audit/apply required status checks for protected branch
+        shell: bash
+        env:
+          MODE: ${{ inputs.mode }}
+          TARGET_BRANCH: ${{ inputs.branch }}
+          REPO: ${{ github.repository }}
+          FALLBACK_TOKEN: ${{ github.token }}
+          ADMIN_TOKEN: ${{ secrets.EPIS2_REPO_ADMIN_TOKEN }}
+          GH_API_VERSION: '2022-11-28'
+        run: |
+          set -euo pipefail
+
+          # Canon EPIS2 — debe coincidir con reports/epis2-branch-protection-verify-2026-06-16.md
+          REQUIRED_CHECKS=(
+            "required"
+            "e2e-dual-chart"
+            "gitleaks (blocking)"
+            "CodeQL (javascript-typescript, blocking) (javascript-typescript)"
+            "dependency-review (blocking)"
+          )
+
+          if [[ "${REPO}" != "gabriel2320/epis2" ]]; then
+            echo "::error::Repository guard failed. Expected gabriel2320/epis2, got ${REPO}."
+            exit 1
+          fi
+
+          if [[ "${TARGET_BRANCH}" != "master" ]]; then
+            echo "::error::Branch guard failed. Expected master, got ${TARGET_BRANCH}."
+            exit 1
+          fi
+
+          TOKEN="${FALLBACK_TOKEN}"
+
+          if [[ "${MODE}" == "apply" ]]; then
+            if [[ -z "${ADMIN_TOKEN}" ]]; then
+              echo "::error::Missing secret EPIS2_REPO_ADMIN_TOKEN. Apply mode needs a fine-grained PAT with Administration: read and write."
+              exit 1
+            fi
+            TOKEN="${ADMIN_TOKEN}"
+          fi
+
+          PROTECTION_API="https://api.github.com/repos/${REPO}/branches/${TARGET_BRANCH}/protection"
+          CHECKS_API="${PROTECTION_API}/required_status_checks"
+
+          auth_curl() {
+            curl -sS \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${TOKEN}" \
+              -H "X-GitHub-Api-Version: ${GH_API_VERSION}" \
+              "$@"
+          }
+
+          if [[ "${MODE}" == "apply" ]]; then
+            CHECKS_JSON="$(
+              printf '%s\n' "${REQUIRED_CHECKS[@]}" \
+                | jq -R . \
+                | jq -s 'map({context: .})'
+            )"
+
+            PAYLOAD="$(
+              jq -nc \
+                --argjson checks "${CHECKS_JSON}" \
+                '{
+                  required_status_checks: { strict: true, checks: $checks },
+                  enforce_admins: false,
+                  required_pull_request_reviews: {
+                    dismiss_stale_reviews: false,
+                    require_code_owner_reviews: false,
+                    required_approving_review_count: 0
+                  },
+                  restrictions: null,
+                  allow_force_pushes: false,
+                  allow_deletions: false
+                }'
+            )"
+
+            echo "Applying full branch protection (strict + PR flow + ${#REQUIRED_CHECKS[@]} checks):"
+            printf '%s\n' "${REQUIRED_CHECKS[@]}"
+
+            APPLY_STATUS="$(
+              auth_curl \
+                -X PUT \
+                -o /tmp/applied-protection.json \
+                -w "%{http_code}" \
+                "${PROTECTION_API}" \
+                -d "${PAYLOAD}"
+            )"
+
+            if [[ "${APPLY_STATUS}" != "200" ]]; then
+              echo "::error::Failed to apply branch protection. GitHub API status: ${APPLY_STATUS}"
+              cat /tmp/applied-protection.json || true
+              exit 1
+            fi
+
+            cp /tmp/applied-protection.json /tmp/current-protection.json
+          else
+            echo "Auditing branch protection for ${REPO}:${TARGET_BRANCH}"
+
+            HTTP_STATUS="$(
+              auth_curl \
+                -o /tmp/current-protection.json \
+                -w "%{http_code}" \
+                "${PROTECTION_API}"
+            )"
+
+            if [[ "${HTTP_STATUS}" == "404" ]]; then
+              echo "::error::Branch protection not configured. Run apply mode with EPIS2_REPO_ADMIN_TOKEN or see reports/epis2-branch-protection-verify-2026-06-16.md"
+              cat /tmp/current-protection.json || true
+              exit 1
+            fi
+
+            if [[ "${HTTP_STATUS}" != "200" ]]; then
+              echo "::error::Unexpected GitHub API status while reading protection: ${HTTP_STATUS}"
+              cat /tmp/current-protection.json || true
+              exit 1
+            fi
+          fi
+
+          echo "Current branch protection:"
+          jq '{ strict: .required_status_checks.strict, checks: (.required_status_checks.checks // [] | map(.context)), contexts: .required_status_checks.contexts, pr_reviews: .required_pull_request_reviews.required_approving_review_count }' /tmp/current-protection.json
+
+          STRICT="$(jq -r '.required_status_checks.strict // false' /tmp/current-protection.json)"
+
+          if [[ "${STRICT}" != "true" ]]; then
+            echo "::error::required_status_checks.strict must be true."
+            exit 1
+          fi
+
+          if ! jq -e '.required_pull_request_reviews' /tmp/current-protection.json >/dev/null; then
+            echo "::error::required_pull_request_reviews must be configured (PR flow, 0 approvals OK)."
+            exit 1
+          fi
+
+          mapfile -t CURRENT_CHECKS < <(
+            jq -r '([.required_status_checks.contexts[]?] + [.required_status_checks.checks[]?.context]) | unique | .[]' /tmp/current-protection.json
+          )
+
+          MISSING=0
+
+          for check in "${REQUIRED_CHECKS[@]}"; do
+            if printf '%s\n' "${CURRENT_CHECKS[@]}" | grep -Fxq "${check}"; then
+              echo "OK: required check present: ${check}"
+            else
+              echo "::error::Missing required check: ${check}"
+              MISSING=1
+            fi
+          done
+
+          if [[ "${MISSING}" != "0" ]]; then
+            echo "Required checks currently detected:"
+            printf '%s\n' "${CURRENT_CHECKS[@]}"
+            exit 1
+          fi
+
+          echo "RH-12 PASS: ${TARGET_BRANCH} requires CI + security blocking checks (canon EPIS2)."
