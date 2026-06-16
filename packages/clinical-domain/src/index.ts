@@ -23,7 +23,6 @@ export {
   SIM_IDENTIFIER_SYSTEM,
   SYNTHETIC_LABEL,
 } from './syntheticIdentifiers.js';
-export { stableSimCaseUuids } from './stableSimCaseUuids.js';
 export {
   DRAFT_STATUSES,
   DRAFT_PATCH_TRANSITIONS,

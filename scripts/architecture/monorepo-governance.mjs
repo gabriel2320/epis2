@@ -19,6 +19,8 @@ const WEB_FORBIDDEN_IMPORTS = [
   '@epis2/local-ai',
   'services/local-ai',
   'services/clinical-case-intel',
+  '@epis2/clinical-domain/node',
+  '@epis2/test-fixtures/node',
 ];
 
 export async function validate() {

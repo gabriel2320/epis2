@@ -1,1 +1,1 @@
-export { stableSimCaseUuids } from '@epis2/clinical-domain';
+export { stableSimCaseUuids } from '@epis2/clinical-domain/node';
