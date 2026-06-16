@@ -44,7 +44,7 @@ Un objetivo · pocos archivos · diff mínimo.
 | **PROG-STRENGTHEN** | ✓ **23/23 cerrado** · MF-IC-01…04 ✓ | `npm run quality:strengthen-close-gate` |
 | **PROG-CDS-UX** | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
 | **PROG-CONSOLIDATE** | ✓ ola 1 + ola 2 · tag `v0.1-demo-rc2` | [`epis2-prog-consolidate-ola2-close-2026.md`](../reports/epis2-prog-consolidate-ola2-close-2026.md) |
-| **PROG-RELEASE-HARDENING** | activo RH-01…08 | [`EPIS2_RELEASE_HARDENING_PLAN.md`](product/EPIS2_RELEASE_HARDENING_PLAN.md) |
+| **PROG-RELEASE-HARDENING** | ✓ RH-01…08 · PR #15+#16 | [`epis2-session-close-2026-06-16-release-hardening.md`](../reports/epis2-session-close-2026-06-16-release-hardening.md) |
 
 Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.5 · orquestación: [`reports/epis2-orquestacion-paralela-2026-06-14.md`](../reports/epis2-orquestacion-paralela-2026-06-14.md) §22–§23
 
@@ -56,11 +56,11 @@ Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../rep
 
 **Ola 14:** ✓ MF-IC-04 HL7 quarantine hardening · [`epis2-prog-strengthen-close-2026.md`](../reports/epis2-prog-strengthen-close-2026.md)
 
-Cerrado: MF-IM-01…09 · **MF-CU-01…04** · **MF-IC-01…04** · **MF-FF-01…15** · **PROG-FICHA-FIRST** · **PROG-STRENGTHEN** · **PROG-CONSOLIDATE** · PROG-RAPID · PROG-DI · tríada · PROG-IA-MODERNIZE · **PROG-CDS-UX**.
+Cerrado: MF-IM-01…09 · **MF-CU-01…04** · **MF-IC-01…04** · **MF-FF-01…15** · **PROG-FICHA-FIRST** · **PROG-STRENGTHEN** · **PROG-CONSOLIDATE** · **PROG-RELEASE-HARDENING** · PROG-RAPID · PROG-DI · tríada · PROG-IA-MODERNIZE · **PROG-CDS-UX**.
 
 Cierre FICHA-FIRST: [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-prog-ficha-first-close-2026.md). **PROG-MEDIA-FUTURE** diferido 2027+.
 
-**Siguiente fase recomendada:** **PROG-RELEASE-HARDENING** (RH-01 Node 24 · RH-02…05 report-only · RH-06 web pendiente). Congelamiento vigente — **no** features clínicas salvo MF autorizada.
+**Siguiente fase recomendada:** tag opcional **`v0.1-demo-rc3`** · revisión legal `DISCLAIMER.md` · promover security workflows a blocking (futuro). Congelamiento vigente — **no** features clínicas salvo MF autorizada.
 
 ---
 
