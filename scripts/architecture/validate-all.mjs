@@ -19,9 +19,11 @@ import { validate as storybookThemeGate } from './storybook-theme-gate.mjs';
 import { validate as layoutG12Gate } from './layout-g12-gate.mjs';
 import { validate as componentsRootFrozen } from './web-components-root-frozen.mjs';
 import { validate as monorepoGovernance } from './monorepo-governance.mjs';
+import { validate as noTestFixturesInProd } from './no-test-fixtures-in-prod.mjs';
 
 const VALIDATORS = [
   ['monorepo-governance', monorepoGovernance],
+  ['no-test-fixtures-in-prod', noTestFixturesInProd],
   ['main-product-invariants', invariants],
   ['no-direct-mui-imports', noDirectMui],
   ['dev-catalog-gates', devCatalogGates],

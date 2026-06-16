@@ -3,12 +3,14 @@
  * IDs alineados con `database/migrations/004_seed_synthetic.sql` y `006_demo_five_cases.sql`.
  */
 
+import {
+  DEMO_IDENTIFIER_SYSTEM,
+  SIM_IDENTIFIER_SYSTEM,
+  SYNTHETIC_LABEL,
+} from '@epis2/clinical-domain';
 import { SIM_CLINICAL_CASES } from './simClinicalCases.js';
 
-export const SYNTHETIC_LABEL = 'DEMO/SINTÉTICO' as const;
-export const DEMO_IDENTIFIER_SYSTEM = 'EPIS2-DEMO' as const;
-/** Casos promovidos desde clinical-case-intel (MF-CASE-03). */
-export const SIM_IDENTIFIER_SYSTEM = 'EPIS2-SIM' as const;
+export { DEMO_IDENTIFIER_SYSTEM, SIM_IDENTIFIER_SYSTEM, SYNTHETIC_LABEL };
 
 export type DemoClinicalCase = {
   patientId: string;
