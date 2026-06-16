@@ -60,7 +60,7 @@ Cerrado: MF-IM-01…09 · **MF-CU-01…04** · **MF-IC-01…04** · **MF-FF-01�
 
 Cierre FICHA-FIRST: [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-prog-ficha-first-close-2026.md). **PROG-MEDIA-FUTURE** diferido 2027+.
 
-**Siguiente fase recomendada:** revisión legal `DISCLAIMER.md` · promover security workflows a blocking (futuro). Congelamiento vigente — **no** features clínicas salvo MF autorizada. Tag demo actual: **`v0.1-demo-rc3`**.
+**Siguiente fase recomendada:** **PROG-POST-RC3** Tramo 2 (DEV-PARITY) · revisión legal `DISCLAIMER.md` · congelamiento vigente. Tag demo: **`v0.1-demo-rc3`**.
 
 ---
 

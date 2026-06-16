@@ -1,6 +1,6 @@
 # EPIS2 — Estado actual del proyecto (brújula)
 
-**Versión:** 1.2 · **Fecha:** 2026-06-16  
+**Versión:** 1.3 · **Fecha:** 2026-06-16  
 **Audiencia:** equipos, agentes Cursor, planificación  
 **Gobierno documental:** [`DOCUMENTATION_GOVERNANCE.md`](DOCUMENTATION_GOVERNANCE.md) · **Entrada pública:** [`README.md`](../README.md)  
 **Supersedes parcialmente:** [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md) para decisiones de alcance (tablero = índice humano)
@@ -13,7 +13,12 @@
 
 EPIS2 **compila y demuestra** un flujo clínico mínimo (censo → ficha dual → borrador → aprobación) con IA opcional. Los programas recientes **PROG-FICHA-FIRST**, **PROG-STRENGTHEN** y **PROG-CDS-UX** están cerrados.
 
-El problema operativo principal (**superficie npm/gates**) se abordó con **PROG-CONSOLIDATE ola 1 ✓** (Fases 0–4) y **ola 2 ✓** (MF-CON-02…11 + 09/10, PR [#12](https://github.com/gabriel2320/epis2/pull/12)). **PROG-RELEASE-HARDENING ✓** (RH-01…08, PR [#15](https://github.com/gabriel2320/epis2/pull/15)+[#16](https://github.com/gabriel2320/epis2/pull/16)): Node 24, workflows security report-only, auth fail-closed, `quality:release`, bridge fixtures web. Congelamiento vigente: [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md). Tags demo: **`v0.1-demo-rc`** · **`v0.1-demo-rc2`** · **`v0.1-demo-rc3`** (release hardening + README alineado).
+El problema operativo principal (**superficie npm/gates**) se abordó con:
+
+- **PROG-CONSOLIDATE ola 1 ✓** (Fases 0–4) y **ola 2 ✓** (MF-CON-02…11 + 09/10, PR [#12](https://github.com/gabriel2320/epis2/pull/12)).
+- **PROG-RELEASE-HARDENING ✓** (RH-01…08, PR [#15](https://github.com/gabriel2320/epis2/pull/15)+[#16](https://github.com/gabriel2320/epis2/pull/16)): Node 24, workflows security report-only, auth fail-closed, `quality:release`, bridge fixtures web.
+- Congelamiento vigente: [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md).
+- Tags demo: **`v0.1-demo-rc`** · **`v0.1-demo-rc2`** · **`v0.1-demo-rc3`** (release hardening + README alineado).
 
 **Git:** una rama productiva (`master`). Las “ramas truncadas” son **módulos a medias en master**, no branches git olvidadas.
 
@@ -74,6 +79,24 @@ Detalle inventario módulos: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md).
 
 ---
 
+## Post-rc3 — programa activo
+
+Congelamiento vigente ([`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md)): **no features clínicas nuevas** salvo MF autorizada. Tag **`v0.1-demo-rc3`** publicado (release hardening + README alineado).
+
+Siguiente programa **PROG-POST-RC3** — tramos propuestos (un tramo por sesión):
+
+| Tramo | Enfoque | Estado |
+|-------|---------|--------|
+| PROG-GOBIERNO-POST-RC3 | Docs · tablero · brújula | ✓ (este doc MF-GOV-03) |
+| PROG-DEV-PARITY | CRLF / `quality:release` local Windows | pendiente |
+| PROG-LEGAL-DISCLAIMER | Revisión humana DISCLAIMER | pendiente |
+| PROG-DEPS-HYGIENE | Triage Dependabot | pendiente |
+| PROG-SECURITY-PROMOTE | RH-09+ blocking opcional | pendiente |
+
+Plan detallado: [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-plan-post-rc3-2026.md). **Sin PHI real** — solo datos sintéticos DEMO/SIM.
+
+---
+
 ## Mapa módulo × acción
 
 | Módulo / área | Estado | ¿Core Base v0.1? | Acción |
@@ -111,6 +134,7 @@ Detalle inventario módulos: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md).
 |--------|---------|-----------|
 | Iteración / agente | `npm run quality:fast` | lint + tsc + vitest tocados + `architecture:validate` |
 | Cierre MF clínico | `npm run quality:clinical` | fast + db + gates rol |
+| Pre-tag release | `npm run quality:release` | check + format + security smoke + fixtures bridge |
 | Pre-PR | `npm run quality:full` o **`quality:required`** | check + test + db + ficha-first (manifest) |
 | CI extendido local | `npm run quality:nightly` | Paridad `.github/workflows/ci.yml` (manifest) |
 | UI bundle | `npm run quality:ui` | ui-simplify meta-gate |
@@ -186,3 +210,4 @@ Todo cambio debe mejorar claridad o mantenibilidad sin alterar flujo clínico m�
 | [`AGENT_CONTEXT_MINIMAL.md`](AGENT_CONTEXT_MINIMAL.md) | Loop agente |
 | [`SCOPE_V1.md`](SCOPE_V1.md) / [`NON_GOALS.md`](NON_GOALS.md) | Límites MVP |
 | [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-prog-ficha-first-close-2026.md) | Último cierre producto |
+| [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-plan-post-rc3-2026.md) | Auditoría post-rc3 · PROG-POST-RC3 tramos |

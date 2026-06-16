@@ -1,6 +1,7 @@
 # EPIS2 — PROG-RELEASE-HARDENING
 
-**Versión:** 1.0 · **Fecha:** 2026-06-16 · **Base:** `v0.1-demo-rc2`  
+**Versión:** 1.1 · **Estado:** ✓ **CERRADO** · **Fecha cierre:** 2026-06-16  
+**Base:** `v0.1-demo-rc2` · **Tag entrega:** [`v0.1-demo-rc3`](https://github.com/gabriel2320/epis2/releases/tag/v0.1-demo-rc3)  
 **Predecesor:** PROG-CONSOLIDATE ola 2 ✓ · [`epis2-prog-consolidate-ola2-close-2026.md`](../reports/epis2-prog-consolidate-ola2-close-2026.md)
 
 Congelamiento vigente: [`CONSOLIDATION_FREEZE.md`](../CONSOLIDATION_FREEZE.md) — hardening permitido; no features clínicas.
@@ -12,6 +13,8 @@ Congelamiento vigente: [`CONSOLIDATION_FREEZE.md`](../CONSOLIDATION_FREEZE.md) �
 Convertir **`v0.1-demo-rc2`** en base reproducible, auditable y segura antes de **v0.2**.
 
 No agregar pantallas clínicas. No Zod 4 en master (programa aparte: `PROG-ZOD4-MIGRATION`).
+
+**Resultado:** objetivo cumplido · tag **`v0.1-demo-rc3`** publicado.
 
 ---
 
@@ -47,4 +50,6 @@ Promoción futura: Gitleaks → blocking · CodeQL → required · audit alinear
 
 - CI tiers: MF-CON-11 · `tools/gates/required.json`
 - Node deprecation: GitHub Actions Node 24 (jun 2026)
-- Release tag: [`v0.1-demo-rc2`](https://github.com/gabriel2320/epis2/releases/tag/v0.1-demo-rc2)
+- Release tag: [`v0.1-demo-rc3`](https://github.com/gabriel2320/epis2/releases/tag/v0.1-demo-rc3)
+- Cierre: [`epis2-session-close-2026-06-16-release-hardening.md`](../reports/epis2-session-close-2026-06-16-release-hardening.md) · [`epis2-v0.1-demo-rc3-release.md`](../reports/epis2-v0.1-demo-rc3-release.md)
+- Siguiente programa: [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-plan-post-rc3-2026.md) (PROG-POST-RC3)

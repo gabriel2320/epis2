@@ -52,7 +52,7 @@ Plan: [`EPIS2_RELEASE_HARDENING_PLAN.md`](./EPIS2_RELEASE_HARDENING_PLAN.md) · 
 
 Evidencia: [`epis2-session-close-2026-06-16-release-hardening.md`](../../reports/epis2-session-close-2026-06-16-release-hardening.md) · [`epis2-v0.1-demo-rc3-release.md`](../../reports/epis2-v0.1-demo-rc3-release.md)
 
-**Siguiente:** revisión legal [`DISCLAIMER.md`](../DISCLAIMER.md) · promover Gitleaks/CodeQL a blocking (futuro) · congelamiento vigente
+**Siguiente:** Tramo 2 PROG-POST-RC3 (DEV-PARITY) · revisión legal [`DISCLAIMER.md`](../DISCLAIMER.md) · congelamiento vigente
 
 
 ## Cerrado — PROG-CONCILIACION-TRIADA-2026
@@ -80,9 +80,11 @@ Evidencia: [`epis2-mf-rapid-close-2026.md`](../../reports/epis2-mf-rapid-close-2
 
 ---
 
-## PROG-FICHA-FIRST-2026
+## Cerrado — PROG-FICHA-FIRST-2026
 
-**Plan:** [`EPIS2_FICHA_FIRST_DEV_PLAN.md`](./EPIS2_FICHA_FIRST_DEV_PLAN.md) · **Ledger:** [`ficha-first-ledger.json`](../quality/ficha-first-ledger.json) · `npm run quality:ficha-first-next`
+**Plan:** [`EPIS2_FICHA_FIRST_DEV_PLAN.md`](./EPIS2_FICHA_FIRST_DEV_PLAN.md) · **Ledger:** [`ficha-first-ledger.json`](../quality/ficha-first-ledger.json) · gate `quality:ficha-first-gate`
+
+Evidencia cierre: [`epis2-prog-ficha-first-close-2026.md`](../../reports/epis2-prog-ficha-first-close-2026.md)
 
 ### Ola 1 — Activación ✓
 
@@ -103,14 +105,29 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 | **MF-FF-04** | ✓ DONE | Dashboard secundario · [`epis2-mf-ff-04-dashboard-secondary.md`](../../reports/epis2-mf-ff-04-dashboard-secondary.md) |
 | **MF-FF-05** | ✓ DONE | [`VISION_EPIS2.md`](./VISION_EPIS2.md) · reglas agente |
 
-### Ola 3 — Experiencia clínica (activa)
+### Ola 3 — Experiencia clínica ✓
 
 | MF | Estado | Entrega |
 |----|--------|---------|
 | **MF-FF-07** | ✓ DONE | Acciones probables · [`epis2-mf-ff-07-probable-actions.md`](../../reports/epis2-mf-ff-07-probable-actions.md) |
-| **MF-FF-08** | **READY** | Live templates en web |
+| **MF-FF-08** | ✓ DONE | Live templates · [`epis2-mf-ff-08-live-templates.md`](../../reports/epis2-mf-ff-08-live-templates.md) |
+| **MF-FF-09…15** | ✓ DONE | wave 3–5 · ledger |
 
-**Siguiente:** `npm run quality:ficha-first-next`
+---
+
+## Activo — PROG-POST-RC3 (gobierno + higiene)
+
+Plan: [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-rc3-2026.md)
+
+| Tramo | Estado | Entrega |
+|-------|--------|---------|
+| **Tramo 1** | ✓ DONE | PROG-GOBIERNO-POST-RC3 · MF-GOV-01…04 |
+| Tramo 2 | pendiente | DEV-PARITY · CRLF / `quality:release` local |
+| Tramo 3 | pendiente | LEGAL · revisión `DISCLAIMER.md` |
+| Tramo 4 | pendiente | DEPS · triage Dependabot |
+| Tramo 5 | pendiente | SECURITY-PROMOTE · Gitleaks/CodeQL blocking |
+
+**Siguiente:** Tramo 2 DEV-PARITY · congelamiento vigente
 
 ---
 

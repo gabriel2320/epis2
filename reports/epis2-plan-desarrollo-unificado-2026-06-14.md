@@ -1,24 +1,30 @@
 # EPIS2 — Plan de desarrollo unificado (modo rápido)
 
-**Versión:** 1.5 · **Fecha:** 2026-06-15  
+**Versión:** 1.6 · **Fecha:** 2026-06-16  
 **Supersede (parcial):** `epis2-plan-maestro-desarrollo-por-partes-2026-06-11.md` · `epis2-plan-fases-desarrollo-2026-06-13.md` · bloques A–C de `epis2-plan-correcciones-prioritarias-2026-06-14.md`
 
 > **Norte único:** un programa activo por sesión · gates por alcance · ledgers como verdad de microfases · tablero como índice humano.
 
 ---
 
-## 1. Estado consolidado (2026-06-14)
+## 1. Estado consolidado (2026-06-16)
 
 | Programa | Estado | Evidencia / gate |
 |----------|--------|------------------|
 | **PROG-RAPID** | ✓ CERRADO | `quality:rapid-gate` · `dev:rapid` |
 | **PROG-CONCILIACION-TRIADA** | ✓ CERRADO | F0–F7 · tríada Evolab/MedRepo |
 | **PROG-DI** (inteligencia determinística) | ✓ CERRADO | 10/10 MF · `di-ledger.json` |
-| **PROG-FICHA-FIRST** | ✓ wave1 CERRADO | MF-FF-01…06 · `quality:ficha-first-gate` · wave2 MF-FF-00 READY |
+| **PROG-FICHA-FIRST** | ✓ **CERRADO** | MF-FF-01…15 · `quality:ficha-first-gate` · `ficha-first-ledger.json` |
 | **PROG-STRENGTHEN** | ✓ **23/23 cerrado** | MF-SH-01…06 ✓ · MF-IM-01…09 ✓ · MF-CU-01…04 ✓ · **MF-IC-01…04 ✓** · [`epis2-prog-strengthen-close-2026.md`](./epis2-prog-strengthen-close-2026.md) |
-| **PROG-COMPACTACION** (bloque D correcciones) | DIFERIDO | Tras STRENGTHEN CU-03…04 o cierre parcial CDS |
+| **PROG-CONSOLIDATE** | ✓ CERRADO | ola 1+2 · [`epis2-prog-consolidate-ola2-close-2026.md`](./epis2-prog-consolidate-ola2-close-2026.md) |
+| **PROG-RELEASE-HARDENING** | ✓ CERRADO | tag **v0.1-demo-rc3** · `quality:release` |
+| **PROG-COMPACTACION** (bloque D correcciones) | DIFERIDO | Tras cierre post-rc3 o pausa explícita |
 
 **Home canónica (unificada):** `/espacio/buscar-paciente` · barra transversal · `/comando` = redirect compat.
+
+### 1.5 Programa activo (post-rc3)
+
+**Freeze producto clínico** + **PROG-POST-RC3** (MF-GOV-02): gobierno docs, deps, security promote — no nuevas MF clínicas sin petición explícita.
 
 ---
 
@@ -46,7 +52,7 @@ Sesión
 | Ledger | Comando next |
 |--------|--------------|
 | STRENGTHEN | `npm run quality:strengthen-next` |
-| FICHA-FIRST | ✓ wave1 cerrado — wave2 MF-FF-00 READY — `ficha-first-ledger.json` |
+| FICHA-FIRST | ✓ **cerrado** MF-FF-01…15 — `ficha-first-ledger.json` |
 | DI | ✓ cerrado — `di-ledger.json` |
 | Microfases históricas | `npm run quality:microphase-next` |
 
@@ -68,7 +74,7 @@ Sesión
 | A5c | **MF-CU-04** | API `/cds/cards` | `quality:cds-hooks-gate` | ✓ |
 | A6 | **MF-IC-01** | Perfil export MINSAL | `db:validate` + tests export | ✓ |
 | A6b | **MF-IC-02** | SNRE staging MedicationRequest | `db:validate` + tests export | ✓ |
-| A6c | **MF-IC-03…04** | Interop Chile (Questionnaire export, FHIR) | `db:validate` + tests export | **siguiente** (MF-IC-03 blocked) |
+| A6c | **MF-IC-03…04** | Interop Chile (Questionnaire export, FHIR) | `db:validate` + tests export | ✓ |
 
 **Regla:** un MF-SH/IM/CU/IC por sesión · no auto-iniciar MF READY sin petición explícita.
 
@@ -103,13 +109,12 @@ flowchart LR
     T[PROG-TRIADA]
     DI[PROG-DI]
     FF[PROG-FICHA-FIRST]
+    SH[PROG-STRENGTHEN]
+    CON[PROG-CONSOLIDATE]
+    REL[PROG-RELEASE-HARDENING rc3]
   end
-  subgraph activo [Activo 21/23]
-    SH[STRENGTHEN SH done]
-    IM[STRENGTHEN IM 01-09 done]
-    CU[MF-CU-01-04 done]
-    IC12[MF-IC-01-02 done]
-    IC3[MF-IC-03 next blocked]
+  subgraph activo [Activo post-rc3]
+    GOV[PROG-POST-RC3 MF-GOV-02]
   end
   subgraph diferido [Diferido]
     D[Compactacion D]
@@ -135,15 +140,16 @@ flowchart LR
 ## 6. Próxima sesión recomendada
 
 ```text
-Programa: PROG-STRENGTHEN · PROG-INTEROP-CHILE
-MF:       MF-IC-03 Questionnaire export piloto (blocked)
-Allowlist: packages/fhir-export/**, packages/clinical-domain/src/chile/**
-Gate:     npm run test packages/fhir-export · db:validate
+Programa: PROG-POST-RC3 · MF-GOV-02
+Tramo 2:  DEV-PARITY CRLF (line endings, scripts, CI parity)
+Tramo 3:  LEGAL (licencias, atribuciones, compliance docs)
+Allowlist: scripts/**, .editorconfig, .gitattributes, docs/legal/**, reports/**
+Gate:     npm run quality:fast · quality:post-rc3-gate (según tramo)
 Arranque: npm run dev:velocity
 Iteración: npm run dev:rapid
 ```
 
-Alternativa: **FICHA-FIRST wave2** MF-FF-00 canon · **Fase B** E2E residual · **Fase C** compactación (bloque D).
+Alternativa: **Fase B** E2E residual · **Fase C** compactación (bloque D). **No** MF-IC-03 — STRENGTHEN cerrado.
 
 ---
 
@@ -159,8 +165,8 @@ Alternativa: **FICHA-FIRST wave2** MF-FF-00 canon · **Fase B** E2E residual · 
 
 ---
 
-## 8. Criterio de cierre PROG-STRENGTHEN (macro)
+## 8. Criterio de cierre PROG-STRENGTHEN (macro) — ✓ CERRADO
 
-- MF-IC-04 ✓ + gates closure en `strengthen-ledger.json`
+- MF-IC-03…04 ✓ + gates closure en `strengthen-ledger.json`
 - `npm run check` · `npm run test` · `db:validate` · `ai:evals:live`
-- Reporte `reports/epis2-prog-strengthen-close-2026.md`
+- Reporte [`epis2-prog-strengthen-close-2026.md`](./epis2-prog-strengthen-close-2026.md)
