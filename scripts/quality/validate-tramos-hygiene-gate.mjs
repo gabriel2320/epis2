@@ -116,14 +116,15 @@ for (const tramo of TRAMOS) {
   if (!existsSync(gatePath)) errors.push(`falta ${tramo.gateScript}`);
 }
 
-const pkg = readFileSync(join(root, 'package.json'), 'utf8');
+const catalog = JSON.parse(readFileSync(join(root, 'tools/gates/catalog-full.json'), 'utf8'));
+const catalogGates = { ...(catalog.gates ?? {}), ...(catalog.archived ?? {}) };
 for (const tramo of TRAMOS) {
-  if (!pkg.includes(`"${tramo.npmGate}"`)) {
-    errors.push(`package.json sin ${tramo.npmGate}`);
+  if (!catalogGates[tramo.npmGate]) {
+    errors.push(`catálogo sin ${tramo.npmGate} (activo o archived)`);
   }
 }
-if (!pkg.includes('"quality:tramos-hygiene-gate"')) {
-  errors.push('package.json sin quality:tramos-hygiene-gate');
+if (!catalog.gates?.['quality:tramos-hygiene-gate']) {
+  errors.push('catálogo activo sin quality:tramos-hygiene-gate');
 }
 
 for (const stale of [

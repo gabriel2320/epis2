@@ -101,11 +101,9 @@ if (catalogMissingDisk.length) {
 }
 
 lines.push(
-  '## Próximo paso (PR chore/gates-prune-phase1)',
+  '## Próximo paso',
   '',
-  '1. Mover gates `archive-candidate` a sección `archived` en catálogo (no borrar `.mjs`).',
-  '2. Mantener wired + gates de programas activos (AEST, ficha-first, paper standalone, e2e-transversal).',
-  '3. Regenerar con `node tools/gates/inventory-orphans.mjs` tras poda.',
+  'Catálogo podado phase 1+2. Regenerar inventario tras cambios: `node tools/gates/inventory-orphans.mjs`.',
   '',
 );
 

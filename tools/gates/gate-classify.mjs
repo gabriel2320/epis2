@@ -49,6 +49,7 @@ export const PROMOTE_TO_ACTIVE = [
   'quality:e2e-transversal-bar-gate',
   'quality:gates-inventory-gate',
   'quality:gates-prune-phase1-gate',
+  'quality:gates-prune-phase2-gate',
 ];
 
 const ARCHIVE_PROGRAMS = [
@@ -70,8 +71,8 @@ const ARCHIVE_PROGRAMS = [
   },
 ];
 
-/** Nunca archivar — post-rc3 / aesthetic / gobernanza activa. */
-const KEEP_ACTIVE = new Set([
+/** Nunca archivar — post-rc3 / gobernanza / wired-adjacent activa. */
+export const KEEP_ACTIVE = new Set([
   ...PROMOTE_TO_ACTIVE,
   'quality:ficha-first-gate',
   'quality:ficha-first-next',
@@ -94,6 +95,9 @@ const KEEP_ACTIVE = new Set([
   'quality:dual-chart-gate',
   'quality:dual-chart-traditional-layout-gate',
   'quality:dual-chart-paper-layout-gate',
+  'quality:registry-gate',
+  'quality:tramos-hygiene-gate',
+  'quality:ux-g02',
 ]);
 
 export function gateArchiveProgram(gate, wired) {
@@ -102,6 +106,12 @@ export function gateArchiveProgram(gate, wired) {
     if (re.test(gate)) return id;
   }
   return null;
+}
+
+/** Phase 2 — catalog-only no wired → archived (scripts en disco intactos). */
+export function gateArchivePhase2(gate, wired) {
+  if (wired.has(gate) || KEEP_ACTIVE.has(gate)) return null;
+  return 'catalog-only-phase2';
 }
 
 export function gateToFileEntry(gate) {
