@@ -80,7 +80,12 @@ if (!existsSync(rh12Workflow)) {
   errors.push(`Falta RH-12 workflow: ${rh12Workflow}`);
 } else {
   const src = readFileSync(rh12Workflow, 'utf8');
-  for (const needle of ['RH-12', 'workflow_dispatch', 'dependency-review (blocking)', 'e2e-dual-chart']) {
+  for (const needle of [
+    'RH-12',
+    'workflow_dispatch',
+    'dependency-review (blocking)',
+    'e2e-dual-chart',
+  ]) {
     if (!src.includes(needle)) errors.push(`RH-12 workflow falta ${needle}`);
   }
 }
