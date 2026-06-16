@@ -120,7 +120,7 @@ console.log(`  Subagente primario: ${primarySubagent}`);
 console.log(`  Secuencia: ${sequence.join(' → ')}`);
 console.log('');
 if (withOpenClaw) {
-  console.log('  Cursor: @reports/dev-agent-brief.md @reports/openclaw-latest-brief.md');
+  console.log('  Cursor: @reports/dev-agent-brief.md @reports/archive/2026-06/openclaw-latest-brief.md');
   console.log('           @reports/dev-agent-prompt-' + primarySubagent + '.md');
 } else {
   console.log(

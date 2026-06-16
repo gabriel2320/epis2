@@ -60,6 +60,20 @@ Auditorías y cierres 2026-06-09 + hitos bootstrap EPIS2-00…12 (superseded por
 
 **Total lote 4:** 36 archivos.
 
+## Lote 5 (2026-06-16, MF-CON-03)
+
+Sesiones jun-10…14 + briefs M3 superseded (plan unificado, NORM, dual-chart, paper, UX-LAB run/close).
+
+| Patrón | Cantidad | Motivo |
+|--------|----------|--------|
+| `epis2-*-2026-06-10.md` | 16 | NORM, dual-chart, M3 visual pass, auto-dev |
+| `epis2-*-2026-06-11.md` | 33 | Calm Premium, paper planner, OpenClaw, UX-LAB |
+| `epis2-*-2026-06-13.md` | 3 | MF-CASE, plan fases |
+| `epis2-*-2026-06-14.md` | 7 | Plan unificado, conciliación, ficha-first wave1 |
+| briefs M3 (sin fecha) | 20 | Superseded por piloto jun-09/16 y brújula post-rc3 |
+
+**Total lote 5:** 79 archivos.
+
 ## Próximo lote
 
-Briefs M3 duplicados, planes pre-unificado jun-10…14 — revisar manualmente.
+Planes jun-15+ y briefs activos jun-16 (UX-LAB, aesthetic reset) — revisar cuando dejen de ser decisión activa.

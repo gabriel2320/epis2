@@ -88,4 +88,4 @@ if (r.status !== 0) {
 
 console.log('\ndev:auto:cycle OK');
 console.log('  Estado: reports/epis2-dev-cycle-status.json');
-console.log('  OpenClaw: reports/openclaw-latest-handoff.md');
+console.log('  OpenClaw: reports/archive/2026-06/openclaw-latest-handoff.md');

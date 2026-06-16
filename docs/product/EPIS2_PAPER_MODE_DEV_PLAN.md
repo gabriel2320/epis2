@@ -491,7 +491,7 @@ PdfBridge sobre documentIntake (MF-MIRROR-PDF-01…)
 | [EPIS2_DUAL_CHART_DEV_PLAN.md](./EPIS2_DUAL_CHART_DEV_PLAN.md) | Scaffold cerrado MF-00…09 |
 | [EPIS2_DUAL_CHART_VISUAL_CANON.md](../design/EPIS2_DUAL_CHART_VISUAL_CANON.md) | Anatomía §5 modo papel |
 | [EPIS2_TABLERO.md](./EPIS2_TABLERO.md) | Hilo C activo |
-| [reports/epis2-plan-maestro-desarrollo-por-partes-2026-06-11.md](../../reports/epis2-plan-maestro-desarrollo-por-partes-2026-06-11.md) | Orquestación global |
+| [reports/archive/2026-06/epis2-plan-maestro-desarrollo-por-partes-2026-06-11.md](../../reports/archive/2026-06/epis2-plan-maestro-desarrollo-por-partes-2026-06-11.md) | Orquestación global |
 | [EPIS2_PAPER_MIRROR_RECONCILIATION.md](./EPIS2_PAPER_MIRROR_RECONCILIATION.md) | Conciliación motor espejo + PDF Bridge |
 | [reports/dev-agent-prompt-paper-mode.md](../../reports/dev-agent-prompt-paper-mode.md) | Prompt sesión Cursor (conciliado) |
 

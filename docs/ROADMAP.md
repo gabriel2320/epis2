@@ -158,9 +158,9 @@ Reportes: `reports/epis2-mf-three-modes-*.md` · auditorías `reports/epis2-thre
 |------|--------|
 | **PILOT-HUMAN** GO DEMO | ✓ `reports/epis2-pilot-human-2026-06-05.md` |
 | **UI plana + formularios** | ✓ `reports/epis2-chips-forms-completion.md` |
-| **Plan A** estabilización UX/docs | ✓ `reports/epis2-ux-stabilization.md` |
+| **Plan A** estabilización UX/docs | ✓ `reports/archive/2026-06/epis2-ux-stabilization.md` |
 | **WIDGET-00** fundación | ✓ `reports/epis2-widget-foundation.md` |
-| **Slices V1–V5** | ◐ demo; gates completos abiertos — `reports/epis2-audit-and-dev-plans-2026-06-05.md` |
+| **Slices V1–V5** | ◐ demo; gates completos abiertos — `reports/archive/2026-06/epis2-audit-and-dev-plans-2026-06-05.md` |
 | **EPIS2-PM-01 Tres modos MD3** | ✓ PROG-THREE-MODES MF-01…08 · CI E2E verde 2026-06-09 |
 | **CI master** | ✓ run [27181266125](https://github.com/gabriel2320/epis2/actions/runs/27181266125) — 10/10 E2E preview |
 

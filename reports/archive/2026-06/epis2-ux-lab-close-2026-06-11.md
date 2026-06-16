@@ -41,11 +41,11 @@
 
 ## Veredicto
 
-**GO-CANDIDATE (automatizado)** — Autopilot Modo A ✓ · gates compuestos en PR fix-only:
+**PASS WITH FIXES** — signoff humano **APROBADO** (funcional) · **rediseño estético pendiente**:
 
-1. ~~Walkthrough Modo A humano~~ → **MF-UXLAB-04 Autopilot** ✓ [`run-2026-06-16`](./ux-lab-autopilot/run-2026-06-16.md)
-2. ~~Nielsen 3–5~~ — no requerido para GO-CANDIDATE bot
-3. `npm run quality:gate -- quality:ux-lab-close` — tras merge PR fix-only E2E/gates
+1. ✓ Autopilot + corrida humana Modo A
+2. ◐ **MF-AEST** Clinical Calm Premium — [`epis2-ux-lab-human-signoff-2026-06-16.md`](./epis2-ux-lab-human-signoff-2026-06-16.md)
+3. `quality:ux-lab-close` — corrida completa
 
 **Diferido 2027+:** MF-UXLAB-04 personas Evolab · atajos globales · telemetría clickstream.
 

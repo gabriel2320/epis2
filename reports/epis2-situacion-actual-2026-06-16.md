@@ -1,8 +1,8 @@
 # EPIS2 — Informe de situación actual
 
-**Fecha:** 2026-06-16 · **HEAD `master`:** `6533680` · **Congelamiento:** vigente
+**Fecha:** 2026-06-16 · **HEAD `master`:** `9cf7d44` · **Congelamiento:** vigente (solo estética autorizada en tramo MF-AEST)
 
-**Reconciliación remoto (2026-06-16):** `git rev-parse HEAD` = `origin/master` = `6533680`. PRs [#32](https://github.com/gabriel2320/epis2/pull/32)–[#34](https://github.com/gabriel2320/epis2/pull/34) **MERGED** (`gh pr view`). Script diet activo: **18** root scripts.
+**Reconciliación remoto (2026-06-16):** PRs [#32](https://github.com/gabriel2320/epis2/pull/32)–[#35](https://github.com/gabriel2320/epis2/pull/35) **MERGED**. Script diet: **18** root scripts.
 
 Canon: [`docs/EPIS2_CURRENT_STATE.md`](../docs/EPIS2_CURRENT_STATE.md) · [`docs/product/EPIS2_TABLERO.md`](../docs/product/EPIS2_TABLERO.md) (índice humano, no planificar)
 
@@ -14,12 +14,12 @@ Dos programas convergieron en `master` el 2026-06-16:
 
 | Programa | PR | Estado |
 |----------|-----|--------|
-| **PROG-UX-LAB** (Tramos A–D) | #29–#31, #33, #34 | ✓ Código + gate close en catálogo · **PASS WITH FIXES** |
+| **PROG-UX-LAB** (Tramos A–D + Autopilot) | #29–#35 | ✓ Funcional · **PASS WITH FIXES** (estética pendiente) |
 | **PROG discipline post-RC3** (AT, CL, DS, SD) | #32 | ✓ Mergeado · script diet **170→18** |
 
 **CI:** `required` + `e2e-dual-chart` verdes en merges finales (#32–#34).
 
-**Veredicto global:** **GO-CANDIDATE (automatizado)** — MF-UXLAB-04 Autopilot Modo A ✓ · gates post script diet en PR fix-only · **rc4** diferido (tag explícito).
+**Veredicto global:** **PASS WITH FIXES** — signoff humano Modo A **APROBADO** funcional · **rediseño estético pendiente** ([`epis2-ux-lab-human-signoff-2026-06-16.md`](./epis2-ux-lab-human-signoff-2026-06-16.md)) · `rc4` diferido.
 
 **Tag demo vigente:** `v0.1-demo-rc3`
 
@@ -28,6 +28,7 @@ Dos programas convergieron en `master` el 2026-06-16:
 ## 2. Historial reciente en `master`
 
 ```text
+9cf7d44  chore(ux-lab): MF-UXLAB-04 autopilot + gate fixes (#35)
 6533680  chore(ux-lab): register close gate after script diet (#34)
 9da9e30  docs: informe situacion actual EPIS2 post UX-LAB y discipline
 c8d0efc  PROG discipline post-rc3 (#32)
@@ -70,9 +71,10 @@ Plan: [`EPIS2_UX_LAB_MODERN_PLAN.md`](../docs/quality/EPIS2_UX_LAB_MODERN_PLAN.m
 | Borrador/aprobado inequívoco | ✓ autopilot (watermark + draft) |
 | Ollama off no bloquea | ✓ |
 | Gates hard completos | ◐ PR fix-only (E2E dual + m3 run-e2e + theme copy) |
-| Walkthrough Modo A | ✓ **MF-UXLAB-04 Autopilot** [`run-2026-06-16`](./ux-lab-autopilot/run-2026-06-16.md) |
+| Walkthrough Modo A | ✓ Autopilot + **signoff humano APROBADO** |
+| Estética Clinical Calm Premium | ◐ **rediseño pendiente** (MF-AEST) |
 
-Reportes: [`epis2-ux-lab-close-2026-06-11.md`](./epis2-ux-lab-close-2026-06-11.md) · [`epis2-ux-lab-run-2026-06-11.md`](./epis2-ux-lab-run-2026-06-11.md)
+Reportes: [`epis2-ux-lab-close-2026-06-11.md`](./archive/2026-06/epis2-ux-lab-close-2026-06-11.md) · [`epis2-ux-lab-run-2026-06-11.md`](./archive/2026-06/epis2-ux-lab-run-2026-06-11.md)
 
 ---
 
@@ -150,7 +152,8 @@ npm run quality:gate -- quality:ux-lab-close
 
 | ID | Severidad | Descripción |
 |----|-----------|-------------|
-| R-01 | Media | Walkthrough Modo A no ejecutado |
+| R-01 | ~~Media~~ | ~~Walkthrough Modo A~~ ✓ signoff humano |
+| R-05 | **Alta** | Rediseño estético MF-AEST — ver [`epis2-ux-lab-human-signoff-2026-06-16.md`](./epis2-ux-lab-human-signoff-2026-06-16.md) |
 | R-02 | ~~Baja~~ | `quality:ux-lab-close` — mergeado #34 |
 | R-03 | Baja | Dependabot PRs #20–#25 sin revisar |
 | R-04 | Info | Tag `rc4` diferido hasta signoff |
@@ -159,13 +162,10 @@ npm run quality:gate -- quality:ux-lab-close
 
 ## 8. Próximos pasos
 
-1. ~~Walkthrough Modo A~~ ✓ Autopilot MF-UXLAB-04 (`quality:ux-lab-autopilot`)
-2. ~~Nielsen 3–5~~ diferido — sustituido por señales E2E + auditor visual bot
-3. ~~Añadir `quality:ux-lab-close` a catálogo~~ ✓ (#34)
-4. Merge PR fix-only gates post script diet → re-ejecutar `quality:ux-lab-close`
-5. Veredicto automatizado → **GO-CANDIDATE** (0 UX-BLOCKER bot)
-6. Tag `v0.1-demo-rc4` — opcional tras merge + `ux-lab-close` verde
-7. PROG-DISCIPLINE-CLOSE — brújula v1.4 + archivo reports
+1. ~~Walkthrough / signoff humano Modo A~~ ✓ APROBADO funcional
+2. **Tramo MF-AEST** — Clinical Calm Premium ([`EPIS2_CLINICAL_CALM_PREMIUM_PLAN.md`](../docs/design/EPIS2_CLINICAL_CALM_PREMIUM_PLAN.md))
+3. `npm run quality:gate -- quality:ux-lab-close` (corrida completa)
+4. Tag `v0.1-demo-rc4` tras estética tramo 1 + gates verdes
 
 ---
 

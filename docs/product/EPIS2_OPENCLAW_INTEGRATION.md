@@ -70,7 +70,7 @@ npm run openclaw:programming -- --tramo 2
 npm run openclaw:programming -- --mf H-AUTO-2 --json
 ```
 
-Incluido en `suggestAgents` y tramos H-AUTO-0…4 vía `AUTO_DEV_TRAMO_AGENTS`. Artefacto: `reports/openclaw-programming-latest.md`.
+Incluido en `suggestAgents` y tramos H-AUTO-0…4 vía `AUTO_DEV_TRAMO_AGENTS`. Artefacto: `reports/archive/2026-06/openclaw-programming-latest.md`.
 
 ---
 
@@ -88,7 +88,7 @@ npm run openclaw:handoff -- --mf MF-TRAMO-J --agents security,ux,golden
 
 # Sesión dev con brief OpenClaw incluido
 npm run dev:session -- --openclaw
-# Cursor: @reports/dev-agent-brief.md @reports/openclaw-latest-brief.md
+# Cursor: @reports/dev-agent-brief.md @reports/archive/2026-06/openclaw-latest-brief.md
 
 # Gate integración
 npm run quality:openclaw-gate
@@ -167,7 +167,7 @@ Con `EPIS2_AUTO_DEV_OPENCLAW=1`:
 | Post tramos 2, 4, 6 | `openclaw:tramo --phase handoff` + `openclaw:post-tramo` |
 | Cierre orquestador | `openclaw:handoff` + sync |
 | Tramo 0 runner | `dev:session --openclaw` |
-| Prompts Cursor Tier X | `@reports/openclaw-latest-brief.md` |
+| Prompts Cursor Tier X | `@reports/archive/2026-06/openclaw-latest-brief.md` |
 
 ```bash
 npm run openclaw:tramo -- --tramo 2 --phase brief
@@ -180,7 +180,7 @@ npm run dev:openclaw:sync
 .\scripts\dev-agent\start-auto-dev-integrated.ps1
 ```
 
-Artefactos: `reports/openclaw-latest-brief.md` · `reports/openclaw-latest-handoff.md` · `reports/openclaw-auto-dev-index.json`
+Artefactos: `reports/archive/2026-06/openclaw-latest-brief.md` · `reports/archive/2026-06/openclaw-latest-handoff.md` · `reports/openclaw-auto-dev-index.json`
 
 ---
 

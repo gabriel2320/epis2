@@ -13,7 +13,7 @@
 | `docs/design/EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md` | Puntero frontera pantalla vs impresión |
 | `docs/design/EPIS2_UI_ARCHITECTURE.md` | Principio 8 + primitivas `Print*` |
 | `docs/clinical/BLUEPRINT_CONTRACT.md` | Paso 8 — formato imprimible por blueprint |
-| `reports/epis2-master-plan-mf1-51-m3.md` | §11 frontera PRINT-00…09 |
+| `reports/archive/2026-06/epis2-master-plan-mf1-51-m3.md` | §11 frontera PRINT-00…09 |
 
 ---
 
@@ -32,7 +32,7 @@
 
 ## Plan PRINT (no en ledger MF)
 
-Secuencia propuesta PRINT-00…09 documentada en `reports/epis2-master-plan-mf1-51-m3.md` §11.
+Secuencia propuesta PRINT-00…09 documentada en `reports/archive/2026-06/epis2-master-plan-mf1-51-m3.md` §11.
 
 **PRINT-00 cerrado** (esta sesión). Implementación diferida; no bloquea MF-35 pantalla.
 

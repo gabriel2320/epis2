@@ -216,7 +216,7 @@ Leyenda de madurez:
 | EPIS2-00 … 12 | MVP command-first + Modo tablero (V0 ✓) |
 | WIDGET-00 | Fundación widgets contextuales |
 | Plan A | Estabilización UX + sync docs |
-| WIDGET-01 / V1+ | **Siguiente** — ver `reports/epis2-audit-and-dev-plans-2026-06-05.md` |
+| WIDGET-01 / V1+ | **Siguiente** — ver `reports/archive/2026-06/epis2-audit-and-dev-plans-2026-06-05.md` |
 
 ---
 

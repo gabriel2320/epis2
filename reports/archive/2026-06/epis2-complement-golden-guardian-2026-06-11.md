@@ -2,7 +2,7 @@
 
 **Rol:** `golden-guardian` (complementario, solo lectura)  
 **Alcance evaluado:** Hilo C · P1 revisión M3 · receta A5  
-**Fuentes:** `docs/quality/GOLDEN_CLINICAL_JOURNEY.md` · `reports/dev-agent-brief.md` · `docs/quality/GOLDEN_M3_MATRIX.md` · `reports/archive/2026-06/epis2-hilo-c-p1-print-prescription-2026-06-09.md` · `reports/epis2-m3-visual-pass-2026-06-10.md` · `reports/epis2-ux-audit-visual-2026-06-10.md`
+**Fuentes:** `docs/quality/GOLDEN_CLINICAL_JOURNEY.md` · `reports/dev-agent-brief.md` · `docs/quality/GOLDEN_M3_MATRIX.md` · `reports/archive/2026-06/epis2-hilo-c-p1-print-prescription-2026-06-09.md` · `reports/archive/2026-06/epis2-m3-visual-pass-2026-06-10.md` · `reports/archive/2026-06/epis2-ux-audit-visual-2026-06-10.md`
 
 ---
 
