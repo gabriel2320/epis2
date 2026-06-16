@@ -24,7 +24,7 @@ const requiredFiles = [
   'e2e/ux-g02-command-first.spec.ts',
   'e2e/login-gateway.spec.ts',
   'scripts/qa/run-ux-g02-validation.ts',
-  'reports/epis2-ux-command-first-consolidated-2026-06-07.md',
+  'reports/archive/2026-06/epis2-ux-command-first-consolidated-2026-06-07.md',
 ];
 
 for (const rel of requiredFiles) {

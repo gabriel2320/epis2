@@ -127,8 +127,8 @@ if (!pkg.includes('"quality:tramos-hygiene-gate"')) {
 }
 
 for (const stale of [
-  'reports/epis2-audit-2026-06-07.md',
-  'reports/epis2-audit-reconcile-2026-06-07.md',
+  'reports/archive/2026-06/epis2-audit-2026-06-07.md',
+  'reports/archive/2026-06/epis2-audit-reconcile-2026-06-07.md',
 ]) {
   const path = join(root, stale);
   if (existsSync(path)) {

@@ -1,6 +1,6 @@
 /**
  * UX-G02 — Validación E2E del flujo command-first (CE-0 → CE-5).
- * @see reports/epis2-ux-g02-command-first-checklist-2026-06-07.md
+ * @see reports/archive/2026-06/epis2-ux-g02-command-first-checklist-2026-06-07.md
  */
 import { copy } from '@epis2/design-system';
 import { test, expect } from '@playwright/test';

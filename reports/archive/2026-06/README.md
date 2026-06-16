@@ -39,6 +39,16 @@ Sesiones masivas 2026-06-04 — CE/UX/command-center, fases B/C, Ollama, three-m
 
 **Total lote 2:** 46 archivos.
 
+## Lote 3 (2026-06-16, MF-CON-03)
+
+Auditorías y sesiones 2026-06-07 — tramos A–K, RAD-M3, UX-G02, dev-automation weeks.
+
+| Patrón | Cantidad | Motivo |
+|--------|----------|--------|
+| `epis2-*-2026-06-07.md` | 42 | Sesiones jun-07 históricas; gates y docs actualizados |
+
+**Total lote 3:** 42 archivos.
+
 ## Próximo lote
 
-Auditorías 2026-06-07 masivas, briefs M3 duplicados, planes fase B/C restantes — revisar manualmente.
+Briefs M3 duplicados, planes EPIS2-00…12, auditorías jun-09 — revisar manualmente.
