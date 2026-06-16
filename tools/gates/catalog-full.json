@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-06-16T16:10:50.451Z",
+  "generatedAt": "2026-06-16T18:16:21.811Z",
   "source": "package.json",
   "note": "Regenerar: npm run tool:gates:sync-catalog",
   "gates": {
@@ -1127,6 +1127,18 @@
     "quality:root-script-surface-gate": {
       "type": "file",
       "path": "scripts/quality/validate-root-script-surface-gate.mjs"
+    },
+    "quality:ux-lab-autopilot": {
+      "type": "command",
+      "command": "node tools/ux-lab-autopilot/autopilot.mjs --mode audit-only"
+    },
+    "quality:ux-lab-autopilot-pr": {
+      "type": "command",
+      "command": "node tools/ux-lab-autopilot/autopilot.mjs --mode pr-candidate"
+    },
+    "quality:ux-lab-autopilot-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ux-lab-autopilot-gate.mjs"
     }
   }
 }
