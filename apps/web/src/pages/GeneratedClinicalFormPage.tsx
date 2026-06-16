@@ -57,6 +57,7 @@ import {
 import { EpisClinicalSoapHints } from '../components/EpisClinicalSoapHints.js';
 import { ClinicalPageNav } from '../components/ClinicalPageNav.js';
 import { PatientListGrid } from '../components/PatientListGrid.js';
+import { ShiftContextStrip } from '../components/census/ShiftContextStrip.js';
 import { PatientSearchAutocomplete } from '../components/PatientSearchAutocomplete.js';
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
@@ -854,6 +855,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
 
         {blueprint.blueprintId === 'patient_search' ? (
           <Stack spacing={2}>
+            <ShiftContextStrip />
             <PatientSearchAutocomplete
               patients={patients}
               query={patientLookupQuery}
@@ -876,6 +878,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
               rows={patients}
               emptyMessage={copy.longitudinal.emptySection}
               onSelectPatient={selectPatient}
+              censusNarrative
               data-testid="epis2-patient-search-grid"
             />
           </Stack>

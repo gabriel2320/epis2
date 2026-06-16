@@ -4,6 +4,7 @@ import type {
   DemoChartSectionRow,
   DemoClinicalCaseRef,
   DemoNarrativeEpisode,
+  DemoShiftCensusPresentation,
 } from './demoFixtureTypes.js';
 
 export type {
@@ -11,7 +12,11 @@ export type {
   DemoChartPrioritySectionId,
   DemoChartSectionRow,
   DemoClinicalCaseRef,
+  DemoCensusDraftState,
+  DemoCensusPrimaryAction,
+  DemoCensusVisualRisk,
   DemoNarrativeEpisode,
+  DemoShiftCensusPresentation,
 } from './demoFixtureTypes.js';
 
 type FixturesModule = typeof import('@epis2/test-fixtures');
@@ -107,4 +112,15 @@ export function getPrimaryNarrativeForDemoCode(
 ): DemoNarrativeEpisode | undefined {
   if (!demoCaseCode) return undefined;
   return fx()?.getPrimaryNarrativeForDemoCode(demoCaseCode);
+}
+
+export function getDemoShiftCensusPresentation(
+  demoCaseCode: string | undefined,
+): DemoShiftCensusPresentation | undefined {
+  if (!demoCaseCode) return undefined;
+  return fx()?.getDemoShiftCensusPresentation(demoCaseCode);
+}
+
+export function listDemoShiftCensusPresentations(): readonly DemoShiftCensusPresentation[] {
+  return fx()?.listDemoShiftCensusPresentations() ?? [];
 }

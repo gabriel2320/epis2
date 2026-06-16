@@ -12,6 +12,16 @@ export {
   type DemoNarrativeEpisode,
 } from './demoNarratives.js';
 export {
+  DEMO_SHIFT_CENSUS,
+  assertDemoShiftCensusInvariants,
+  getDemoShiftCensusPresentation,
+  listDemoShiftCensusPresentations,
+  type DemoCensusDraftState,
+  type DemoCensusPrimaryAction,
+  type DemoCensusVisualRisk,
+  type DemoShiftCensusPresentation,
+} from './demoShiftCensus.js';
+export {
   DEMO_CLINICAL_CASES,
   DEMO_IDENTIFIER_SYSTEM,
   SIM_IDENTIFIER_SYSTEM,
