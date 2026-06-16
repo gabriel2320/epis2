@@ -1,6 +1,6 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-15 · **STRENGTHEN** 23/23 ✓ · **PROG-CONSOLIDATE** ✓ cerrado
+**Actualizado:** 2026-06-16 · **STRENGTHEN** 23/23 ✓ · **PROG-CONSOLIDATE** ola 1+2 ✓
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Brújula:** [`EPIS2_CURRENT_STATE.md`](../EPIS2_CURRENT_STATE.md)
 
@@ -21,7 +21,7 @@ Evidencia: [`epis2-prog-consolidate-close-2026.md`](../../reports/epis2-prog-con
 
 ---
 
-## Activo — PROG-CONSOLIDATE ola 2 (MF-CON-*)
+## Cerrado — PROG-CONSOLIDATE ola 2 (MF-CON-*)
 
 **Congelamiento vigente:** [`CONSOLIDATION_FREEZE.md`](../CONSOLIDATION_FREEZE.md) — no expansión clínica salvo MF autorizada.
 
@@ -34,10 +34,12 @@ Evidencia: [`epis2-prog-consolidate-close-2026.md`](../../reports/epis2-prog-con
 | **MF-CON-07** | ✓ DONE | Rate limit Redis/Valkey · PR [#10](https://github.com/gabriel2320/epis2/pull/10) |
 | **MF-CON-03** | ✓ DONE | Gobierno monorepo · PR [#11](https://github.com/gabriel2320/epis2/pull/11) |
 | **MF-CON-11** | ✓ DONE | CI required / nightly / experimental · PR [#11](https://github.com/gabriel2320/epis2/pull/11) |
-| **MF-CON-09** | ✓ DONE | Fixtures fuera de prod deps · gate `no-test-fixtures-in-prod` |
-| **MF-CON-10** | ✓ DONE | LICENSE, SECURITY, DISCLAIMER, CONTRIBUTING · gate gobierno |
+| **MF-CON-09** | ✓ DONE | Fixtures fuera de prod deps · PR [#12](https://github.com/gabriel2320/epis2/pull/12) |
+| **MF-CON-10** | ✓ DONE | LICENSE, SECURITY, DISCLAIMER, CONTRIBUTING · PR [#12](https://github.com/gabriel2320/epis2/pull/12) |
 
-**Siguiente:** ola 2 MF-CON-* cerrados · revisión legal humana DISCLAIMER · plan [`EPIS2_CONSOLIDATION_PHASE2_PLAN.md`](./EPIS2_CONSOLIDATION_PHASE2_PLAN.md)
+Evidencia: [`epis2-prog-consolidate-ola2-close-2026.md`](../../reports/epis2-prog-consolidate-ola2-close-2026.md) · CI run [27585415223](https://github.com/gabriel2320/epis2/actions/runs/27585415223)
+
+**Siguiente:** revisión legal humana [`DISCLAIMER.md`](../DISCLAIMER.md) · congelamiento vigente · sin MF-CON pendientes en plan ola 2.
 
 
 ## Cerrado — PROG-CONCILIACION-TRIADA-2026
