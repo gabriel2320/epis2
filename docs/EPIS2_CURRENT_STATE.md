@@ -1,6 +1,6 @@
 # EPIS2 — Estado actual del proyecto (brújula)
 
-**Versión:** 1.1 · **Fecha:** 2026-06-15  
+**Versión:** 1.2 · **Fecha:** 2026-06-16  
 **Audiencia:** equipos, agentes Cursor, planificación  
 **Gobierno documental:** [`DOCUMENTATION_GOVERNANCE.md`](DOCUMENTATION_GOVERNANCE.md) · **Entrada pública:** [`README.md`](../README.md)  
 **Supersedes parcialmente:** [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md) para decisiones de alcance (tablero = índice humano)
@@ -13,7 +13,7 @@
 
 EPIS2 **compila y demuestra** un flujo clínico mínimo (censo → ficha dual → borrador → aprobación) con IA opcional. Los programas recientes **PROG-FICHA-FIRST**, **PROG-STRENGTHEN** y **PROG-CDS-UX** están cerrados.
 
-El problema operativo principal (**superficie npm/gates**) se abordó con **PROG-CONSOLIDATE ola 1 ✓** (Fases 0–4). **Ola 2** = gobierno + hardening — ver [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md). Tag **`v0.1-demo-rc`** (2026-06-15): demo consolidada, guards staging/prod, rate limit Redis, docs canon.
+El problema operativo principal (**superficie npm/gates**) se abordó con **PROG-CONSOLIDATE ola 1 ✓** (Fases 0–4) y **ola 2 ✓** (MF-CON-02…11 + 09/10, PR [#12](https://github.com/gabriel2320/epis2/pull/12)). Congelamiento vigente: [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md). Tags demo: **`v0.1-demo-rc`** (2026-06-15, pre-ola-2) · **`v0.1-demo-rc2`** (post-ola-2: fixtures prod, legal base, CI tiers, Dependabot ampliado).
 
 **Git:** una rama productiva (`master`). Las “ramas truncadas” son **módulos a medias en master**, no branches git olvidadas.
 
@@ -58,7 +58,7 @@ Regla: **core no depende de labs** (deuda: API aún puede tocar case-intel — m
 
 ---
 
-## Programas (estado 2026-06-15)
+## Programas (estado 2026-06-16)
 
 | Programa | Estado | Gate cierre |
 |----------|--------|-------------|
@@ -67,7 +67,7 @@ Regla: **core no depende de labs** (deuda: API aún puede tocar case-intel — m
 | PROG-CDS-UX | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
 | PROG-RAPID | ✓ cerrado | `quality:rapid-gate` |
 | PROG-DI / tríada F6 | ✓ contratos | ver `reports/conciliacion/` |
-| **PROG-CONSOLIDATE** | ✓ ola 1 (Fase 0–4) · **ola 2 activa** | [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) · `tool:consolidate:verify-phase4` |
+| **PROG-CONSOLIDATE** | ✓ ola 1 (Fase 0–4) · ✓ ola 2 (MF-CON-*) | [`epis2-prog-consolidate-ola2-close-2026.md`](../reports/epis2-prog-consolidate-ola2-close-2026.md) · [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) |
 
 Detalle inventario módulos: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md).
 
@@ -134,7 +134,7 @@ Prohibido en fase consolidación: nuevos registries, nuevo home, auto-aprobació
 
 ---
 
-## Fase PROG-CONSOLIDATE (propuesta)
+## PROG-CONSOLIDATE (cerrado)
 
 | Fase | Estado | Artefactos |
 |------|--------|------------|
@@ -144,9 +144,9 @@ Prohibido en fase consolidación: nuevos registries, nuevo home, auto-aprobació
 | **3** Mover `db:*` / E2E a workspaces | ✓ | `@epis2/api` db · `@epis2/web` e2e |
 | **4** CI/catalog compat | ✓ | case-intel gates · build chain CI |
 
-## Ola 2 — Gobierno + hardening (activa)
+## Ola 2 — Gobierno + hardening (cerrada 2026-06-16)
 
-Congelamiento: [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md). PRs pequeños `MF-CON-*` — **no mega-cambio**.
+Evidencia: [`epis2-prog-consolidate-ola2-close-2026.md`](../reports/epis2-prog-consolidate-ola2-close-2026.md). Congelamiento: [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) — **no mega-cambio** ni features clínicas nuevas salvo MF autorizada.
 
 | Permitido | Prohibido |
 |-----------|-----------|
