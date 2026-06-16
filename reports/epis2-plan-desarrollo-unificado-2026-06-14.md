@@ -22,9 +22,9 @@
 
 **Home canónica (unificada):** `/espacio/buscar-paciente` · barra transversal · `/comando` = redirect compat.
 
-### 1.5 Programa activo (post-rc3)
+### 1.5 Programa activo (post-RC3)
 
-**Freeze producto clínico** + **PROG-POST-RC3** (MF-GOV-02): gobierno docs, deps, security promote — no nuevas MF clínicas sin petición explícita.
+**Freeze producto clínico** vigente. **PROG-POST-RC3** ✓ cerrado. **Siguiente propuesto:** **PROG-UX-LAB** — [`EPIS2_UX_LAB_MODERN_PLAN.md`](../docs/quality/EPIS2_UX_LAB_MODERN_PLAN.md).
 
 ---
 
@@ -140,16 +140,17 @@ flowchart LR
 ## 6. Próxima sesión recomendada
 
 ```text
-Programa: PROG-POST-RC3 · MF-GOV-02
-Tramo 2:  DEV-PARITY CRLF (line endings, scripts, CI parity)
-Tramo 3:  LEGAL (licencias, atribuciones, compliance docs)
-Allowlist: scripts/**, .editorconfig, .gitattributes, docs/legal/**, reports/**
-Gate:     npm run quality:fast · quality:post-rc3-gate (según tramo)
+Programa: PROG-UX-LAB · Tramo A · MF-UXLAB-00
+Objetivo: baseline gates post-RC3 + delta vs GO DEMO 2026-06-04
+Plan:     docs/quality/EPIS2_UX_LAB_MODERN_PLAN.md
+Allowlist: docs/**, reports/epis2-ux-lab-*.md
+Gate:     npm run quality:golden-journey · quality:ux-pilot · quality:fast
 Arranque: npm run dev:velocity
-Iteración: npm run dev:rapid
 ```
 
-Alternativa: **Fase B** E2E residual · **Fase C** compactación (bloque D). **No** MF-IC-03 — STRENGTHEN cerrado.
+**Cerrado:** PROG-POST-RC3 tramos 1–5 · MF-LOCK · RH-12 · ver [`epis2-audit-estado-2026-06-16.md`](./epis2-audit-estado-2026-06-16.md).
+
+Alternativa paralela (baja prioridad): **Fase B** E2E higiene · **Fase C** compactación bloque D.
 
 ---
 
