@@ -50,7 +50,7 @@
 
 **Diferido 2027+:** MF-UXLAB-04 personas Evolab · atajos globales · telemetría clickstream.
 
-**Slice 2 Tramo C (opcional):** `PatientIdentityBand` chips · `EpisAiDisclosure` command bar · no bloquea cierre D.
+**Slice 2 Tramo C (opcional):** ~~`PatientIdentityBand` chips · `EpisAiDisclosure` command bar~~ ✓ PR #33 slice 2 — `EpisAiDegradedChip`, demo badge en identity band.
 
 ---
 

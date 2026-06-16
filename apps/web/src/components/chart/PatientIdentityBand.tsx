@@ -1,5 +1,14 @@
 import { copy } from '@epis2/design-system';
-import { Box, Chip, Stack, Typography, epis2ClinicalShellTokens } from '@epis2/epis2-ui';
+import {
+  Box,
+  Chip,
+  EpisDemoBadgeChip,
+  EpisDraftStatus,
+  ScienceIcon,
+  Stack,
+  Typography,
+  epis2ClinicalShellTokens,
+} from '@epis2/epis2-ui';
 
 export type PatientDocumentStatus = 'draft' | 'signed' | 'locked';
 
@@ -14,6 +23,8 @@ export type PatientIdentityBandProps = {
   allergyLabels?: readonly string[] | undefined;
   documentStatus?: PatientDocumentStatus | undefined;
   metaLine?: string | undefined;
+  /** MF-UXLAB-02 — badge DEMO/SIM en banda identidad (trust ladder). */
+  showDemoBadge?: boolean | undefined;
   testId?: string | undefined;
 };
 
@@ -22,6 +33,12 @@ function initials(name: string): string {
   if (parts.length === 0) return '?';
   if (parts.length === 1) return parts[0]!.slice(0, 2).toUpperCase();
   return `${parts[0]![0] ?? ''}${parts[parts.length - 1]![0] ?? ''}`.toUpperCase();
+}
+
+function documentStatusToDraft(status: PatientDocumentStatus): string | undefined {
+  if (status === 'signed') return 'approved';
+  if (status === 'draft') return 'draft';
+  return undefined;
 }
 
 function documentStatusLabel(status: PatientDocumentStatus): string {
@@ -55,9 +72,11 @@ export function PatientIdentityBand({
   allergyLabels = [],
   documentStatus = 'draft',
   metaLine,
+  showDemoBadge = false,
   testId = 'epis2-patient-identity-band',
 }: PatientIdentityBandProps) {
   const allergiesVisible = allergyLabels.length > 0;
+  const draftStatus = documentStatusToDraft(documentStatus);
 
   return (
     <Stack
@@ -101,12 +120,25 @@ export function PatientIdentityBand({
             </Typography>
           ) : null}
         </Stack>
-        <Chip
-          size="small"
-          variant="outlined"
-          label={documentStatusLabel(documentStatus)}
-          data-testid="epis2-patient-document-status"
-        />
+        <Stack direction="row" spacing={0.5} alignItems="center" flexShrink={0}>
+          {showDemoBadge ? (
+            <EpisDemoBadgeChip
+              icon={<ScienceIcon fontSize="small" />}
+              label={copy.demoBadge}
+              data-testid="epis2-patient-identity-demo-badge"
+            />
+          ) : null}
+          {draftStatus ? (
+            <EpisDraftStatus status={draftStatus} />
+          ) : (
+            <Chip
+              size="small"
+              variant="outlined"
+              label={documentStatusLabel(documentStatus)}
+              data-testid="epis2-patient-document-status"
+            />
+          )}
+        </Stack>
       </Stack>
 
       <Stack

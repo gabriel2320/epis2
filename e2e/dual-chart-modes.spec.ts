@@ -84,6 +84,16 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
     await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
   });
 
+  test('g2b) trust ladder — demo + borrador + IA degradada (MF-UXLAB-02)', async ({ page }) => {
+    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
+    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-patient-identity-demo-badge')).toBeVisible();
+    await expect(page.getByTestId('epis2-draft-status-draft')).toBeVisible();
+    await expect(async () => {
+      await expect(page.getByTestId('epis2-ai-degraded-chip')).toBeVisible();
+    }).toPass({ timeout: 15_000 });
+  });
+
   test('g2) contexto denso visible en ficha (MF-DI-01)', async ({ page }) => {
     await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
     await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });

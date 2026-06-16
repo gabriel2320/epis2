@@ -18,6 +18,7 @@ import {
 import { roleHasPermission, type ClinicalRole } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
 import {
+  EpisAiDegradedChip,
   EpisAiDisclosure,
   EpisAlert,
   EpisButton,
@@ -687,7 +688,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
         <EpisM3Text role="titleLarge" component="h1">
           {effectiveBlueprint.label}
         </EpisM3Text>
-        {canUseAiAssist ? <EpisAiDisclosure /> : null}
+        {canUseAiAssist ? (aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip />) : null}
         <EpisClinicalSoapHints
           blueprintId={blueprint.blueprintId}
           values={values}
@@ -820,7 +821,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
               <EpisM3Text role="titleLarge" component="h1">
                 {blueprint.label}
               </EpisM3Text>
-              {canUseAiAssist ? <EpisAiDisclosure /> : null}
+              {canUseAiAssist ? (aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip />) : null}
               <EpisClinicalFormRhf
                 blueprint={effectiveBlueprint}
                 clinicalProse={clinicalProse}
@@ -851,7 +852,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   return (
     <FormProvider {...form}>
       <EpisClinicalFormPage title={blueprint.label} headerExtra={headerExtra}>
-        {canUseAiAssist ? <EpisAiDisclosure /> : null}
+        {canUseAiAssist ? (aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip />) : null}
 
         {blueprint.blueprintId === 'patient_search' ? (
           <Stack spacing={2}>
