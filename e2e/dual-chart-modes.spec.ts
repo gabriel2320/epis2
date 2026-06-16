@@ -8,6 +8,7 @@ import {
   fillCommandPaletteQuery,
   fillMinimalPrescriptionDraft,
   loginAsPhysician,
+  pinDemoCase,
 } from './helpers/demoPatient.js';
 
 const demoPatientId = getDemoCaseByCode('DEMO-005')!.patientId;
@@ -126,8 +127,10 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
   });
 
   test('g6) microjourneys post-receta (MF-DI-09)', async ({ page }) => {
+    await pinDemoCase(page, 'DEMO-005');
     await page.goto(`/espacio/receta?patientId=${demoPatientId}`);
     await expect(page.getByTestId('epis2-form-prescription')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-active-patient')).toBeVisible({ timeout: 15_000 });
     await fillMinimalPrescriptionDraft(page);
     const saveButton = page.getByRole('button', { name: copy.forms.save });
     await expect(saveButton).toBeEnabled();
