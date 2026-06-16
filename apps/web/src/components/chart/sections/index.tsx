@@ -5,6 +5,8 @@ import type { ReactNode } from 'react';
 import type { TraditionalSectionId } from '../TraditionalSectionNav.js';
 import { TraditionalSectionMirrorStrip } from './TraditionalSectionMirrorStrip.js';
 import { TraditionalDemoSection } from './TraditionalDemoSection.js';
+import { TraditionalAuditSection } from './TraditionalAuditSection.js';
+import { TraditionalDocumentsSection } from './TraditionalDocumentsSection.js';
 import { TraditionalAllergiesSection } from './TraditionalAllergiesSection.js';
 import { TraditionalEvolutionSection } from './TraditionalEvolutionSection.js';
 import { TraditionalLabsSection } from './TraditionalLabsSection.js';
@@ -19,6 +21,7 @@ export type ResolveTraditionalSectionContentProps = {
   onRegisterAllergy?: (() => void) | undefined;
   onOpenEvolution?: (() => void) | undefined;
   onOpenDraft?: ((draftId: string) => void) | undefined;
+  compositionMode?: 'default' | 'cica-classic' | undefined;
 };
 
 /** MF-TE-02 — contenido real/demo para secciones prioritarias. */
@@ -29,6 +32,7 @@ export function resolveTraditionalSectionContent({
   onRegisterAllergy,
   onOpenEvolution,
   onOpenDraft,
+  compositionMode = 'default',
 }: ResolveTraditionalSectionContentProps): ReactNode | undefined {
   let content: ReactNode | undefined;
   switch (sectionId) {
@@ -42,13 +46,27 @@ export function resolveTraditionalSectionContent({
       );
       break;
     case 'navMeds':
-      content = <TraditionalMedsSection demoCaseCode={demoCaseCode} longitudinal={longitudinal} />;
+      content = (
+        <TraditionalMedsSection
+          demoCaseCode={demoCaseCode}
+          longitudinal={longitudinal}
+          compositionMode={compositionMode}
+        />
+      );
       break;
     case 'navOrders':
-      content = <TraditionalOrdersSection demoCaseCode={demoCaseCode} />;
+      content = (
+        <TraditionalOrdersSection demoCaseCode={demoCaseCode} compositionMode={compositionMode} />
+      );
       break;
     case 'navLabs':
-      content = <TraditionalLabsSection demoCaseCode={demoCaseCode} longitudinal={longitudinal} />;
+      content = (
+        <TraditionalLabsSection
+          demoCaseCode={demoCaseCode}
+          longitudinal={longitudinal}
+          compositionMode={compositionMode}
+        />
+      );
       break;
     case 'navEvolution':
       content = (
@@ -56,7 +74,18 @@ export function resolveTraditionalSectionContent({
           longitudinal={longitudinal}
           onOpenEvolution={onOpenEvolution}
           onOpenDraft={onOpenDraft}
+          compositionMode={compositionMode}
         />
+      );
+      break;
+    case 'navDocuments':
+      content = (
+        <TraditionalDocumentsSection demoCaseCode={demoCaseCode} compositionMode={compositionMode} />
+      );
+      break;
+    case 'navAudit':
+      content = (
+        <TraditionalAuditSection demoCaseCode={demoCaseCode} compositionMode={compositionMode} />
       );
       break;
     case 'navAnamnesis':
@@ -65,10 +94,8 @@ export function resolveTraditionalSectionContent({
     case 'navImaging':
     case 'navConsults':
     case 'navAdmin':
-    case 'navDocuments':
     case 'navEpicrisis':
     case 'navProcedures':
-    case 'navAudit':
       content = (
         <TraditionalDemoSection
           demoCaseCode={demoCaseCode}
@@ -81,7 +108,7 @@ export function resolveTraditionalSectionContent({
   }
 
   if (!content) return undefined;
-  if (!isChartMirrorBatchSection(sectionId)) return content;
+  if (compositionMode === 'cica-classic' || !isChartMirrorBatchSection(sectionId)) return content;
 
   return (
     <>
@@ -93,6 +120,7 @@ export function resolveTraditionalSectionContent({
 
 export {
   TraditionalAllergiesSection,
+  TraditionalAuditSection,
   TraditionalDemoSection,
   TraditionalEvolutionSection,
   TraditionalLabsSection,

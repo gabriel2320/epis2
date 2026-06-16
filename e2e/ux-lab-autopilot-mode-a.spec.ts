@@ -124,7 +124,8 @@ test.describe('EPIS2 UX-LAB Autopilot — Mode A', () => {
     await shot('02-ficha-dual.png');
 
     await page.getByTestId('epis2-chart-mode-paper').click();
-    await expect(page).toHaveURL(/chartMode=paper/);
+    await expect(page).toHaveURL(/chartMode=paper|\/espacio\/ficha\/papel/);
+    await expect(page.getByTestId('epis2-paper-standalone-page')).toBeVisible();
     await expect(page.getByTestId('epis2-paper-chart-mode')).toBeVisible();
     steps.paper = 'PASS';
 

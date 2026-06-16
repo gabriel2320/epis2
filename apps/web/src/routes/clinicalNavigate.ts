@@ -1,5 +1,6 @@
 import { useNavigate } from '@tanstack/react-router';
 import { parseChartModeSearch, type ChartModeSearch } from './chartModeSearch.js';
+import { PAPER_STANDALONE_ROUTE } from './paperStandaloneSearch.js';
 
 /** Rutas de formularios clínicos (shell `/espacio/*`). */
 export type ClinicalFormRoutePath =
@@ -35,10 +36,12 @@ export type ClinicalPatientSearch = ChartModeSearch & {
   returnTo?: 'dashboard' | undefined;
   /** MF-PAPER-07: retorno a ficha papel desde vista print. */
   returnChartMode?: 'paper' | undefined;
+  /** MF-AEST-03: fecha clínica en modo papel exclusivo (YYYY-MM-DD). */
+  paperDate?: string | undefined;
 };
 
 export function parseClinicalPatientSearch(search: Record<string, unknown>): ClinicalPatientSearch {
-  return {
+  const parsed: ClinicalPatientSearch = {
     ...parseChartModeSearch(search),
     ...(typeof search.patientId === 'string' && search.patientId
       ? { patientId: search.patientId }
@@ -47,6 +50,10 @@ export function parseClinicalPatientSearch(search: Record<string, unknown>): Cli
     ...(search.returnTo === 'dashboard' ? { returnTo: 'dashboard' as const } : {}),
     ...(search.returnChartMode === 'paper' ? { returnChartMode: 'paper' as const } : {}),
   };
+  if (typeof search.paperDate === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(search.paperDate)) {
+    parsed.paperDate = search.paperDate;
+  }
+  return parsed;
 }
 
 /**
@@ -216,6 +223,7 @@ export type AdminSearch = { tab?: AdminTab };
 export type ClinicalNavigateTarget =
   | ClinicalFormRoutePath
   | '/espacio/ficha'
+  | typeof PAPER_STANDALONE_ROUTE
   | '/espacio/ficha/imprimir'
   | '/espacio/ficha/agenda/imprimir'
   | '/espacio/resultados'

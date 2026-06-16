@@ -144,6 +144,26 @@
       "type": "file",
       "path": "scripts/quality/validate-root-script-surface-gate.mjs"
     },
+    "quality:aesthetic-reset-close": {
+      "type": "file",
+      "path": "scripts/quality/validate-aesthetic-reset-close-gate.mjs"
+    },
+    "quality:cica-loop-close": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-loop-close-gate.mjs"
+    },
+    "quality:pr-aest-07-close": {
+      "type": "file",
+      "path": "scripts/quality/validate-pr-aest-07-close-gate.mjs"
+    },
+    "quality:clinical-calm-default-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-calm-default-gate.mjs"
+    },
+    "quality:cica-screen-governor-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-screen-governor-gate.mjs"
+    },
     "quality:ux-lab-autopilot-gate": {
       "type": "file",
       "path": "scripts/quality/validate-ux-lab-autopilot-gate.mjs"

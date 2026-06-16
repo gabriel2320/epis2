@@ -55,6 +55,15 @@ export const EPIS_LOCAL_CARD_ACTIONS = [
   'copyText',
 ] as const;
 
+/** Máximo de acciones primarias visibles (PROG-AESTHETIC-RESET MF-AEST-01). */
+export const EPIS_MAX_VISIBLE_PRIMARY_ACTIONS = 1;
+
+/** Máximo de acciones secundarias visibles junto a la primaria. */
+export const EPIS_MAX_VISIBLE_SECONDARY_ACTIONS = 2;
+
+/** Máximo total visible (primaria + secundarias) antes del menú «Más». */
+export const EPIS_MAX_VISIBLE_TOTAL_ACTIONS = 3;
+
 /** Máximo de sugerencias visibles en command bar contextual (MF-NORM-03). */
 export const EPIS_COMMAND_BAR_MAX_SUGGESTIONS = 3;
 
@@ -121,6 +130,11 @@ export const EPIS_SCREEN_REGISTRY: Record<
   draftReview: {
     kind: 'document',
     route: '/espacio/borrador',
+    scaffold: 'EpisClinicalWorkspaceShell',
+  },
+  paperStandalone: {
+    kind: 'document',
+    route: '/espacio/ficha/papel',
     scaffold: 'EpisClinicalWorkspaceShell',
   },
 };

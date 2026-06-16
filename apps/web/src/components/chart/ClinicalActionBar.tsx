@@ -1,7 +1,6 @@
 import { copy } from '@epis2/design-system';
-import { Box, Collapse, EpisButton, Stack, epis2ClinicalShellTokens } from '@epis2/epis2-ui';
+import { Box, EpisPrimaryActionBar, Stack, epis2ClinicalShellTokens } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
-import { useState } from 'react';
 import type { ChartModeId } from '../../dev/dualChartModesEnv.js';
 import { ChartModeSwitch } from './ChartModeSwitch.js';
 
@@ -16,12 +15,11 @@ export type ClinicalActionBarProps = {
   onSaveDraft?: (() => void) | undefined;
   onSign?: (() => void) | undefined;
   onPrint?: (() => void) | undefined;
-  /** MF-UXLAB-02 — chips trust ladder junto al modo (IA off, etc.). */
   statusChips?: ReactNode | undefined;
   testId?: string | undefined;
 };
 
-/** Capa 3 — modos, comando NL y acciones globales colapsables (MF-NORM-03). */
+/** Capa 3 — modo, comando y una acción primaria (MF-AEST-01). */
 export function ClinicalActionBar({
   chartMode,
   onChartModeChange,
@@ -32,7 +30,28 @@ export function ClinicalActionBar({
   onPrint,
   testId = 'epis2-clinical-action-bar',
 }: ClinicalActionBarProps) {
-  const [moreOpen, setMoreOpen] = useState(false);
+  const overflow = [
+    ...(onSign
+      ? [
+          {
+            id: 'sign',
+            label: copy.chartModes.actionSign,
+            onClick: onSign,
+            testId: 'epis2-chart-action-sign',
+          },
+        ]
+      : []),
+    ...(onPrint
+      ? [
+          {
+            id: 'print',
+            label: copy.chartModes.actionPrint,
+            onClick: onPrint,
+            testId: 'epis2-chart-action-print',
+          },
+        ]
+      : []),
+  ];
 
   return (
     <Stack
@@ -57,85 +76,23 @@ export function ClinicalActionBar({
         <ChartModeSwitch mode={chartMode} onChange={onChartModeChange} />
         {statusChips}
         <Box sx={{ flex: 1, minWidth: 0 }}>{commandBar}</Box>
-        <EpisButton
-          size="small"
-          appearance="text"
-          onClick={() => setMoreOpen((open) => !open)}
-          aria-expanded={moreOpen}
-          data-testid="epis2-chart-action-more-toggle"
-          sx={{ display: { xs: 'none', lg: 'inline-flex' }, flexShrink: 0 }}
-        >
-          {moreOpen ? copy.chartModes.actionMoreClose : copy.chartModes.actionMoreOpen}
-        </EpisButton>
       </Stack>
-      <Collapse in={moreOpen} sx={{ display: { xs: 'none', lg: 'block' } }}>
-        <Stack
-          direction="row"
-          flexWrap="wrap"
-          useFlexGap
-          spacing={1}
-          alignItems="center"
-          sx={{ pt: 0.5 }}
-        >
-          <EpisButton
-            size="small"
-            appearance="tonal"
-            onClick={onSaveDraft}
-            data-testid="epis2-chart-action-save"
-          >
-            {copy.chartModes.actionSave}
-          </EpisButton>
-          <EpisButton
-            size="small"
-            appearance="outlined"
-            onClick={onSign}
-            data-testid="epis2-chart-action-sign"
-          >
-            {copy.chartModes.actionSign}
-          </EpisButton>
-          <EpisButton
-            size="small"
-            appearance="filled"
-            onClick={onPrint}
-            data-testid="epis2-chart-action-print"
-          >
-            {copy.chartModes.actionPrint}
-          </EpisButton>
-        </Stack>
-      </Collapse>
-      <Stack
-        direction="row"
-        flexWrap="wrap"
-        useFlexGap
-        spacing={1}
-        alignItems="center"
-        sx={{ display: { xs: 'flex', lg: 'none' }, pt: 0.5 }}
-      >
-        <EpisButton
-          size="small"
-          appearance="tonal"
-          onClick={onSaveDraft}
-          data-testid="epis2-chart-action-save-mobile"
-        >
-          {copy.chartModes.actionSave}
-        </EpisButton>
-        <EpisButton
-          size="small"
-          appearance="outlined"
-          onClick={onSign}
-          data-testid="epis2-chart-action-sign-mobile"
-        >
-          {copy.chartModes.actionSign}
-        </EpisButton>
-        <EpisButton
-          size="small"
-          appearance="filled"
-          onClick={onPrint}
-          data-testid="epis2-chart-action-print-mobile"
-        >
-          {copy.chartModes.actionPrint}
-        </EpisButton>
-      </Stack>
+      {onSaveDraft ? (
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', pt: 0.5 }}>
+          <EpisPrimaryActionBar
+            primary={{
+              id: 'save-draft',
+              label: copy.chartModes.actionSave,
+              onClick: onSaveDraft,
+              appearance: 'tonal',
+              testId: 'epis2-chart-action-save',
+            }}
+            overflow={overflow}
+            overflowLabel={copy.chartModes.actionMoreOpen}
+            testId="epis2-chart-primary-action-bar"
+          />
+        </Box>
+      ) : null}
     </Stack>
   );
 }

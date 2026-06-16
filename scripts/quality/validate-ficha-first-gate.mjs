@@ -135,8 +135,10 @@ const formPage = readFileSync(
 if (!formPage.includes('buildLiveTemplatePrefill')) {
   errors.push('GeneratedClinicalFormPage debe cablear live templates (MF-FF-08)');
 }
-if (!formPage.includes('epis2-evolution-traditional-shell')) {
-  errors.push('GeneratedClinicalFormPage debe usar TraditionalEhrMode para evolution (MF-FF-09)');
+if (!formPage.includes('epis2-cica-evolution-form')) {
+  errors.push(
+    'GeneratedClinicalFormPage debe usar shell CICA evolución (CICA-L-04 / MF-FF-09)',
+  );
 }
 if (!existsSync(join(root, 'apps/web/src/pages/prescriptionTripleViewNav.ts'))) {
   errors.push('Falta prescriptionTripleViewNav.ts (MF-FF-10)');

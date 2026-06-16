@@ -73,7 +73,7 @@ Paleta de referencia (light) y mapeo a implementación:
 | Primary | `#8BD4DD` |
 | Tertiary IA | `#D2C1FF` |
 
-> **Nota:** El tema default actual es `clinical-blue` (`#1E6FD6`). «Clinical Calm Premium» propone **accent petróleo** como default visual post-signoff — vía nuevo JSON MTB `clinical-calm.material-theme.json`, no hardcode en componentes.
+> **Nota:** El acento default de producto es **`clinical-calm`** (`#0B5C66`, canvas `#F7F9FC`) desde **MF-AEST-04** (2026-06-11). `clinical-blue` permanece disponible en preferencias.
 
 ---
 

@@ -11,7 +11,9 @@ const formPage = readFileSync(
   join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'),
   'utf8',
 );
-const actionBarCount = (formPage.match(/<EpisClinicalFormActionBar/g) ?? []).length;
+const actionBarCount =
+  (formPage.match(/<ClinicalLayoutActionBar/g) ?? []).length +
+  (formPage.match(/<EpisClinicalFormActionBar/g) ?? []).length;
 if (actionBarCount !== 1) {
   errors.push(`GeneratedClinicalFormPage: una ActionBar (encontradas ${actionBarCount})`);
 }

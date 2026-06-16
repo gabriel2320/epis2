@@ -4,7 +4,6 @@
 import { copy } from '@epis2/design-system';
 import { test, expect } from '@playwright/test';
 import {
-  expectDualChartFicha,
   expectFichaSummaryReady,
   loginAsPhysician,
   openFichaDocuments,

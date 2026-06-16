@@ -20,6 +20,7 @@ import { LabRequestPrintPage } from '../pages/LabRequestPrintPage.js';
 import { ImagingRequestPrintPage } from '../pages/ImagingRequestPrintPage.js';
 import { PrescriptionPrintPage } from '../pages/PrescriptionPrintPage.js';
 import { PaperChartPrintPage } from '../pages/PaperChartPrintPage.js';
+import { StandalonePaperChartPage } from '../pages/StandalonePaperChartPage.js';
 import { PaperPlannerPrintPage } from '../pages/PaperPlannerPrintPage.js';
 import { AdminConsolePage } from '../pages/AdminConsolePage.js';
 import { LoginPage } from '../pages/LoginPage.js';
@@ -37,6 +38,7 @@ import {
   parseCommandSearch,
   parseClinicalPatientSearch,
 } from './clinicalNavigate.js';
+import { parsePaperStandaloneSearch } from './paperStandaloneSearch.js';
 import { EpisAppProviders } from '../AppProviders.js';
 
 const LazyUiCatalogPage = lazy(() =>
@@ -169,6 +171,14 @@ const patientWorkspaceRoute = createRoute({
   path: '/espacio/ficha',
   validateSearch: (search: Record<string, unknown>) => parseClinicalPatientSearch(search),
   component: PatientWorkspacePage,
+});
+
+/** MF-AEST-03 — modo papel exclusivo (no embebido en ficha clásica). */
+const standalonePaperChartRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/ficha/papel',
+  validateSearch: (search: Record<string, unknown>) => parsePaperStandaloneSearch(search),
+  component: StandalonePaperChartPage,
 });
 
 const paperChartPrintRoute = createRoute({
@@ -476,6 +486,7 @@ export const routeTree = rootRoute.addChildren([
   dashboardModeRoute,
   clinicalLayoutRoute.addChildren([
     draftReviewRoute,
+    standalonePaperChartRoute,
     patientWorkspaceRoute,
     paperChartPrintRoute,
     paperPlannerPrintRoute,

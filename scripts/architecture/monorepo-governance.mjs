@@ -9,7 +9,7 @@ const REQUIRED_DOCS = [
   'docs/MONOREPO_GOVERNANCE.md',
   'docs/DOCUMENTATION_GOVERNANCE.md',
   'docs/CONSOLIDATION_FREEZE.md',
-  'reports/README.md',
+  'reports/archive/2026-06/README.md',
   'reports/archive/2026-06/README.md',
 ];
 

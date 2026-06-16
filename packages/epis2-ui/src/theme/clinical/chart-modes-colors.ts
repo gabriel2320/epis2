@@ -1,9 +1,11 @@
+import { epis2ClinicalCalmCanvasColors } from './clinical-calm-canvas.js';
+
 /**
  * Colores fijos modo dual-chart — allowlist `theme/clinical` (validate-no-hardcoded-colors).
- * ADR-002 · MF-DUAL-CHART-04.
+ * ADR-002 · MF-DUAL-CHART-04 · MF-AEST-04 shell alineado a canvas clinical-calm.
  */
 export const epis2TraditionalChartColors = {
-  shellBg: '#EEF3F7',
+  shellBg: epis2ClinicalCalmCanvasColors.light,
   surface: '#FFFFFF',
 } as const;
 

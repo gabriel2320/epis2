@@ -95,6 +95,13 @@ export const copy = {
     statusShowMore: 'Estado del sistema',
     statusShowLess: 'Ocultar estado',
   },
+  clinicalBreadcrumb: {
+    census: 'Censo',
+    patientFallback: 'Ficha',
+    ariaLabel: 'Ruta clínica',
+    backToCensus: 'Volver al censo',
+    backToFicha: 'Volver a la ficha',
+  },
   uiSimplify: {
     contextualCommandLabel: 'Acción clínica',
     splitOpen: 'Pantalla doble',
@@ -815,6 +822,22 @@ export const copy = {
     paperSignAttending: 'Médico tratante',
     paperSignResident: 'Becado / residente',
     paperSignNursing: 'Enfermera jefe',
+    paperStandalone: {
+      backToChart: 'Volver a ficha',
+      dayPrevious: '← Día anterior',
+      dayToday: 'Hoy',
+      dayNext: 'Día siguiente →',
+      pageTitle: 'Ficha clínica — modo papel',
+    },
+    classicTabs: {
+      summary: 'Resumen',
+      evolutions: 'Evoluciones',
+      orders: 'Indicaciones',
+      exams: 'Exámenes',
+      meds: 'Medicamentos',
+      documents: 'Documentos',
+      more: 'Más',
+    },
     paperPlanner: {
       surfaceDocument: 'Documento',
       surfaceAgenda: 'Agenda',

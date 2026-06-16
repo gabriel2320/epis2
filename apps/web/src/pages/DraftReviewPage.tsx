@@ -23,6 +23,7 @@ import { useEffect, useState } from 'react';
 import { DRAFT_TYPE_TO_BLUEPRINT } from '../api/clinicalApi.js';
 import { ClinicalAlertsPanel } from '../components/ClinicalAlertsPanel.js';
 import { ClinicalPageNav } from '../components/ClinicalPageNav.js';
+import { resolveDraftReviewIntent } from '../clinical/clinicalIntent.js';
 import { EpisRadDocumentSurface } from '../components/rad/EpisRadDocumentSurface.js';
 import { ErrorState } from '../components/ErrorState.js';
 import { useAuth } from '../auth/AuthContext.js';
@@ -280,7 +281,11 @@ export function DraftReviewPage() {
           </EpisAlert>
         ) : null}
 
-        <ClinicalPageNav patientId={draft.patientId} />
+        <ClinicalPageNav
+          patientId={draft.patientId}
+          patientDisplayName={patientDetailQuery.data?.patient.displayName}
+          sectionLabel={resolveDraftReviewIntent(draft.title).sectionLabel}
+        />
       </Stack>
     </EpisRadDocumentSurface>
   );

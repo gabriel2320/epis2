@@ -33,6 +33,8 @@ import { ClinicalProbableActionsPanel } from '../chart/ClinicalProbableActionsPa
 export type PatientClinicalSummaryGridProps = {
   /** Perfil visual — traditional en ficha EMR dual; calm en modo clásico MD3. */
   surfaceProfile?: ClinicalSummarySurface | undefined;
+  /** CICA-L-02 — presupuesto 5 bloques; oculta chips/quick actions/filtros densos. */
+  compositionMode?: 'default' | 'cica-classic' | undefined;
   summaryFields: Record<string, string>;
   clinicalSummary?: PatientClinicalSummaryResponse | null | undefined;
   longitudinal?: PatientLongitudinalResponse | null | undefined;
@@ -94,7 +96,12 @@ export function PatientClinicalSummaryGrid({
   onProbableAction,
   testId = 'epis2-clinical-summary-grid',
   surfaceProfile = 'calm',
+  compositionMode = 'default',
 }: PatientClinicalSummaryGridProps) {
+  const cicaClassic = compositionMode === 'cica-classic';
+  const nowKeys = cicaClassic
+    ? (['pendingItems', 'clinicalAlerts'] as const)
+    : NOW_KEYS;
   const [timelineFilter, setTimelineFilter] = useState<TimelineKindFilter>('all');
   const clinicalProblems = useMemo(
     () => longitudinal?.problems.filter((p) => !isSurgicalHistoryDescription(p.description)) ?? [],
@@ -160,7 +167,11 @@ export function PatientClinicalSummaryGrid({
   };
 
   return (
-    <Stack spacing={2.5} data-testid={testId}>
+    <Stack
+      spacing={2.5}
+      data-testid={testId}
+      {...(cicaClassic ? { 'data-cica-composition': 'classic' } : {})}
+    >
       <ClinicalSummaryStickyBanner
         alerts={alerts}
         allergies={longitudinal?.allergies}
@@ -182,7 +193,7 @@ export function PatientClinicalSummaryGrid({
         </EpisClinicalSummaryCard>
       ) : null}
 
-      {probableActionChips && probableActionChips.length > 0 && onProbableAction ? (
+      {probableActionChips && probableActionChips.length > 0 && onProbableAction && !cicaClassic ? (
         <ClinicalProbableActionsPanel chips={probableActionChips} onSelect={onProbableAction} />
       ) : null}
 
@@ -197,7 +208,7 @@ export function PatientClinicalSummaryGrid({
             gridTemplateColumns: { xs: '1fr', md: 'repeat(2, minmax(0, 1fr))' },
           }}
         >
-          {NOW_KEYS.map((key) =>
+          {nowKeys.map((key) =>
             renderFieldCard(key, key === 'clinicalAlerts' ? 'warning' : 'default'),
           )}
           {longitudinal && longitudinal.allergies.length > 0 ? (
@@ -258,18 +269,26 @@ export function PatientClinicalSummaryGrid({
                 copy.clinicalSummary.medsActiveZone,
                 medicationZones.active,
               )}
-              {renderMedicationZone('prn', copy.clinicalSummary.medsPrnZone, medicationZones.prn)}
-              {renderMedicationZone(
-                'suspended',
-                copy.clinicalSummary.medsSuspendedZone,
-                medicationZones.suspended,
-              )}
+              {!cicaClassic
+                ? renderMedicationZone(
+                    'prn',
+                    copy.clinicalSummary.medsPrnZone,
+                    medicationZones.prn,
+                  )
+                : null}
+              {!cicaClassic
+                ? renderMedicationZone(
+                    'suspended',
+                    copy.clinicalSummary.medsSuspendedZone,
+                    medicationZones.suspended,
+                  )
+                : null}
             </>
           ) : (
             renderFieldCard('activeMedications')
           )}
           {labHighlights.length > 0
-            ? labHighlights.map((lab, index) => (
+            ? (cicaClassic ? labHighlights.slice(0, 1) : labHighlights).map((lab, index) => (
                 <Box
                   key={lab.id}
                   {...(surfaceProfile === 'calm' && index === 0
@@ -307,27 +326,29 @@ export function PatientClinicalSummaryGrid({
           ) : null}
           {longitudinal && longitudinal.timeline.length > 0 ? (
             <Box {...(surfaceProfile === 'calm' ? { sx: { gridColumn: { md: 'span 2' } } } : {})}>
-              <Stack spacing={1} sx={{ mb: 1 }} direction="row" flexWrap="wrap" useFlexGap>
-                <EpisChip
-                  label={copy.clinicalSummary.timelineFilterAll}
-                  size="small"
-                  color={timelineFilter === 'all' ? 'primary' : 'default'}
-                  variant={timelineFilter === 'all' ? 'filled' : 'outlined'}
-                  onClick={() => setTimelineFilter('all')}
-                  data-testid={`${testId}-timeline-filter-all`}
-                />
-                {CLINICAL_SUMMARY_TIMELINE_KINDS.map((kind) => (
+              {!cicaClassic ? (
+                <Stack spacing={1} sx={{ mb: 1 }} direction="row" flexWrap="wrap" useFlexGap>
                   <EpisChip
-                    key={kind}
-                    label={TIMELINE_KIND_LABELS[kind]}
+                    label={copy.clinicalSummary.timelineFilterAll}
                     size="small"
-                    color={timelineFilter === kind ? 'primary' : 'default'}
-                    variant={timelineFilter === kind ? 'filled' : 'outlined'}
-                    onClick={() => setTimelineFilter(kind)}
-                    data-testid={`${testId}-timeline-filter-${kind}`}
+                    color={timelineFilter === 'all' ? 'primary' : 'default'}
+                    variant={timelineFilter === 'all' ? 'filled' : 'outlined'}
+                    onClick={() => setTimelineFilter('all')}
+                    data-testid={`${testId}-timeline-filter-all`}
                   />
-                ))}
-              </Stack>
+                  {CLINICAL_SUMMARY_TIMELINE_KINDS.map((kind) => (
+                    <EpisChip
+                      key={kind}
+                      label={TIMELINE_KIND_LABELS[kind]}
+                      size="small"
+                      color={timelineFilter === kind ? 'primary' : 'default'}
+                      variant={timelineFilter === kind ? 'filled' : 'outlined'}
+                      onClick={() => setTimelineFilter(kind)}
+                      data-testid={`${testId}-timeline-filter-${kind}`}
+                    />
+                  ))}
+                </Stack>
+              ) : null}
               <EpisClinicalSummaryCard
                 title={copy.activePatient.recentActivityTitle}
                 surface={surfaceProfile}
@@ -344,7 +365,7 @@ export function PatientClinicalSummaryGrid({
         </Box>
       </Box>
 
-      {(onOpenEvolution || onOpenResults || onRegisterProblem) && (
+      {!cicaClassic && (onOpenEvolution || onOpenResults || onRegisterProblem) && (
         <Stack direction="row" flexWrap="wrap" gap={1} alignItems="center">
           <EpisM3Text role="labelMedium" color="text.secondary">
             {copy.clinicalSummary.quickActions}:

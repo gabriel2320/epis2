@@ -11,3 +11,4 @@ export {
   type EpisDockReserveLayoutProps,
   type EpisWorkspaceSectionProps,
 } from './EpisWorkspaceSection.js';
+export * from './clinical/index.js';

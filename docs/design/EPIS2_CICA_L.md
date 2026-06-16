@@ -67,9 +67,10 @@ Una pantalla por iteración. Sin PR gigante.
 | CICA-L-08 | Documentos | `08-documentos.md` | **Hecho** |
 | CICA-L-09 | Alta / epicrisis | `09-alta.md` | **Hecho** |
 | CICA-L-10 | Modo papel | `10-modo-papel.md` | **Hecho** |
-| CICA-L-11 | Auditoría | `11-auditoria.md` | **Activo** |
+| CICA-L-11 | Auditoría | `11-auditoria.md` | **Hecho** |
 
-Pantalla activa del tramo: **`CICA-L-11`** (ver `reports/cica-l/cica-l-active.json`). Loop clásico **completo** tras signoff L-11.
+**Loop clásico L-02…L-11 cerrado** en **PR-AEST-07** (2026-06-11). CICA-L-01 Censo queda en PROG-UX-LAB.  
+Cierre: [`reports/epis2-pr-aest-07-cica-l-close.md`](../../reports/epis2-pr-aest-07-cica-l-close.md) · Gate: `quality:pr-aest-07-close`
 
 ---
 
@@ -143,8 +144,8 @@ PR-AEST-02  Censo + resumen            ← CICA-L-01/02
 PR-AEST-03  Evoluciones                CICA-L-03/04
 PR-AEST-04  Indicaciones + exámenes     CICA-L-05/06
 PR-AEST-05  Meds + documentos          CICA-L-07/08
-PR-AEST-06  Papel polish               CICA-L-10
-PR-AEST-07  Cierre + screenshots       cica-loop-close
+PR-AEST-06  Papel polish               CICA-L-10        ✓
+PR-AEST-07  Cierre + screenshots       cica-loop-close  ✓
 ```
 
 ---
