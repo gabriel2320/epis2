@@ -47,13 +47,11 @@ Plan: [`EPIS2_RELEASE_HARDENING_PLAN.md`](./EPIS2_RELEASE_HARDENING_PLAN.md) · 
 
 | RH | Estado | Entrega |
 |----|--------|---------|
-| RH-01 | PR abierto | Node 24 + Actions v5 |
-| RH-02…05 | PR abierto | CodeQL, Gitleaks, deps, SBOM (report-only) |
-| RH-07 | PR abierto | Auth demo/hybrid fail-closed deployed |
-| RH-08 | PR abierto | `quality:release` manifest |
-| RH-06 | pendiente | Web fixtures bridge (PR #14) |
+| RH-01…05, RH-07, RH-08 | ✓ DONE | PR [#15](https://github.com/gabriel2320/epis2/pull/15) merged · Node 24 · report-only security · auth fail-closed · `quality:release` · `security:no-bidi` |
+| RH-06 | PR abierto | Web fixtures bridge · PR [#16](https://github.com/gabriel2320/epis2/pull/16) |
+| Dependabot setup-node v6 | cerrado | PR [#14](https://github.com/gabriel2320/epis2/pull/14) superseded por #15 |
 
-**Siguiente:** revisión legal [`DISCLAIMER.md`](../DISCLAIMER.md) · merge PR hardening · RH-06
+**Siguiente:** merge PR #16 (RH-06) · revisión legal [`DISCLAIMER.md`](../DISCLAIMER.md) · tag opcional `v0.1-demo-rc3`
 
 
 ## Cerrado — PROG-CONCILIACION-TRIADA-2026

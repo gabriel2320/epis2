@@ -19,14 +19,14 @@ No agregar pantallas clínicas. No Zod 4 en master (programa aparte: `PROG-ZOD4-
 
 | ID | Estado | Entrega | Gate |
 |----|--------|---------|------|
-| **RH-01** | ✓ READY PR | Actions `@v5` + Node 24 en CI | CI required verde |
-| **RH-02** | ✓ READY PR | CodeQL report-only | workflow `ci-rh02-codeql.yml` |
-| **RH-03** | ✓ READY PR | Gitleaks report-only | workflow `ci-rh03-gitleaks.yml` |
-| **RH-04** | ✓ READY PR | dependency-review + audit JSON | workflow `ci-rh04-deps.yml` |
-| **RH-05** | ✓ READY PR | CycloneDX SBOM | workflow `ci-rh05-sbom.yml` |
-| **RH-06** | pendiente | `no-test-fixtures-in-prod-web` + bridge web | PR aparte (14 archivos) |
-| **RH-07** | ✓ READY PR | fail-closed AUTH demo/hybrid deployed | `config.test.ts` |
-| **RH-08** | ✓ READY PR | `quality:release` manifest | `tools/gates/release.json` |
+| **RH-01** | ✓ DONE | Actions `@v5` + Node 24 en CI · PR #15 |
+| **RH-02** | ✓ DONE | CodeQL report-only |
+| **RH-03** | ✓ DONE | Gitleaks report-only |
+| **RH-04** | ✓ DONE | dependency-review + audit JSON |
+| **RH-05** | ✓ DONE | CycloneDX SBOM |
+| **RH-06** | PR #16 | `no-test-fixtures-in-prod-web` + bridge web |
+| **RH-07** | ✓ DONE | fail-closed AUTH demo/hybrid deployed |
+| **RH-08** | ✓ DONE | `quality:release` + `security:no-bidi` |
 
 Workflows RH-02…05: **`continue-on-error: true`** — no required checks.
 
@@ -35,9 +35,9 @@ Workflows RH-02…05: **`continue-on-error: true`** — no required checks.
 ## Orden de ejecución
 
 ```text
-PR #13  RH-01 + RH-02…05 + RH-07 + RH-08  (este tramo)
-PR #14  RH-06 web fixtures bridge
-Promoción futura: Gitleaks → blocking · CodeQL → required · audit alinear nightly
+PR #15  RH-01 + RH-02…05 + RH-07 + RH-08  ✓ merged
+PR #16  RH-06 web fixtures bridge  (abierto)
+PR #14  Dependabot setup-node v6 — cerrado (superseded)
 ```
 
 ---
