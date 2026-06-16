@@ -1,6 +1,6 @@
 # PROG-UX-LAB — Cierre programa (MF-UXLAB-03)
 
-**Fecha:** 2026-06-11 · **HEAD:** `8a25569` · **Plan:** [`EPIS2_UX_LAB_MODERN_PLAN.md`](../docs/quality/EPIS2_UX_LAB_MODERN_PLAN.md)
+**Fecha:** 2026-06-11 · **HEAD:** `c2a328e` · **Plan:** [`EPIS2_UX_LAB_MODERN_PLAN.md`](../docs/quality/EPIS2_UX_LAB_MODERN_PLAN.md)
 
 ---
 
@@ -10,8 +10,8 @@
 |-------|-----|-----|--------|
 | A | MF-UXLAB-00 | — | ✓ baseline [`epis2-ux-lab-baseline-2026-06-16.md`](./epis2-ux-lab-baseline-2026-06-16.md) |
 | B | MF-UXLAB-01 | #30 | ✓ censo narrativo + Shift Context Strip |
-| C | MF-UXLAB-02 | #31 | ✓ watermark papel + `EpisDraftStatus` chrome (slice 2 chips defer) |
-| D | MF-UXLAB-03 | — | ◐ corrida humana + gates compuestos |
+| C | MF-UXLAB-02 | #31+#33 | ✓ watermark + chrome + slice 2 trust ladder |
+| D | MF-UXLAB-03 | #33 | ✓ reportes + gates compuestos · CI `required`+e2e ✓ |
 
 ---
 
@@ -22,7 +22,7 @@
 | Plantilla corrida | [`epis2-ux-lab-run-TEMPLATE.md`](./epis2-ux-lab-run-TEMPLATE.md) |
 | Corrida Modo A (auto) | [`epis2-ux-lab-run-2026-06-11.md`](./epis2-ux-lab-run-2026-06-11.md) |
 | Gate compuesto cierre | `npm run quality:ux-lab-close` en `package.json` |
-| Fix-only patch | ninguno (0 UX-BLOCKER automatizado) |
+| Fix-only patch | prettier `GeneratedClinicalFormPage` (CI format:check) |
 
 ---
 
@@ -32,7 +32,8 @@
 |------|-----------|
 | `quality:security-promote-gate` | ✓ local |
 | `quality:ux-pilot-gate` | ✓ local |
-| `quality:fast` | ✓ local |
+| `quality:fast` | ✓ local + CI |
+| `required` + `e2e-dual-chart` | ✓ CI PR #33 |
 | `quality:golden-journey` | defer CI |
 | `quality:ux-pilot` | defer CI |
 | `quality:m3-human-pilot` | defer CI |
