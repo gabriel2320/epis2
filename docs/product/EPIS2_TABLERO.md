@@ -124,10 +124,10 @@ Plan: [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-
 | **Tramo 1** | ✓ DONE | PROG-GOBIERNO-POST-RC3 · MF-GOV-01…04 |
 | **Tramo 2** | ✓ DONE | PROG-DEV-PARITY · MF-DEV-01…02 · `.gitattributes` + `quality:release` local |
 | **Tramo 3** | ✓ DONE | LEGAL · MF-LEG-01 checklist · MF-LEG-02 DISCLAIMER v1.1 · [`epis2-prog-legal-disclaimer-tramo3-close.md`](../../reports/epis2-prog-legal-disclaimer-tramo3-close.md) |
-| **Tramo 4** | **siguiente** | DEPS · triage Dependabot |
-| Tramo 5 | pendiente | SECURITY-PROMOTE · Gitleaks/CodeQL blocking |
+| **Tramo 4** | ✓ DONE | DEPS · MF-DEP-01 triage · [`epis2-prog-deps-hygiene-tramo4-close.md`](../../reports/epis2-prog-deps-hygiene-tramo4-close.md) |
+| **Tramo 5** | **siguiente** | SECURITY-PROMOTE · Gitleaks/CodeQL blocking |
 
-**Siguiente:** Tramo 4 DEPS-HYGIENE — triage Dependabot · plan [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-rc3-2026.md)
+**Siguiente:** Tramo 5 SECURITY-PROMOTE — RH-09 Gitleaks blocking · plan [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-rc3-2026.md)
 
 ---
 
