@@ -67,18 +67,10 @@ test.describe('UX-G02 — command-first con paciente fijado', () => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-001');
 
-    // 11: ficha tradicional (dual chart default) o legacy UX-B.2
-    const legacyWorkspace = page.getByTestId('epis2-patient-workspace');
-    await expect(page.getByTestId('epis2-dual-chart-ficha').or(legacyWorkspace)).toBeVisible({
-      timeout: 15_000,
-    });
-    if (await legacyWorkspace.isVisible()) {
-      await expect(page.getByTestId('epis2-floating-command-dock')).toBeVisible();
-      await expect(page.getByTestId('epis2-ficha-widget-panel')).toHaveCount(0);
-      await expect(page.getByTestId('epis2-ficha-history')).toBeVisible();
-    } else {
-      await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
-    }
+    // 11: ficha tradicional dual chart (default PROG-FICHA-FIRST)
+    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
+    await expect(page.getByTestId('epis2-chart-command-bar')).toBeVisible();
 
     // 12–13: evolución desde barra transversal de ficha
     const fichaBar = getTransversalCommandBar(page);
@@ -113,9 +105,7 @@ test.describe('UX-G02 — command-first con paciente fijado', () => {
   test('Parte D: Ctrl+K abre paleta en ficha en <1s (MF-CM-08)', async ({ page }) => {
     await loginAsPhysician(page);
     await page.goto(`/espacio/ficha?patientId=${DEMO_001_PATIENT_ID}&chartMode=traditional`);
-    await expect(
-      page.getByTestId('epis2-dual-chart-ficha').or(page.getByTestId('epis2-patient-workspace')),
-    ).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
 
     const start = Date.now();
     await page.keyboard.press('Control+k');

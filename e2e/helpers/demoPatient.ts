@@ -5,13 +5,13 @@ import { copy } from '@epis2/design-system';
 import { getDemoCaseByCode } from '@epis2/test-fixtures';
 import { expect, type Locator, type Page } from '@playwright/test';
 
-/** Barra transversal PROG-FICHA-FIRST — censo, formulario clínico, dual chart o dock legacy. */
+/** Barra transversal PROG-FICHA-FIRST — censo, formulario clínico o ficha dual (sin dock legacy). */
 export function getTransversalCommandBar(page: Page): Locator {
   return page
     .getByTestId('epis2-census-command-bar')
     .or(page.getByTestId('epis2-espacio-chart-command-bar'))
     .or(page.getByTestId('epis2-chart-command-bar'))
-    .or(page.getByTestId('epis2-floating-command-dock').getByTestId('epis2-power-bar'));
+    .or(page.getByTestId('epis2-paper-command-bar'));
 }
 
 export async function fillTransversalCommand(page: Page, query: string) {
