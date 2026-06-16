@@ -26,6 +26,22 @@ describe('PaperChartTemplate', () => {
     expect(onSectionChange).toHaveBeenCalledWith('anamnesis', 'Dolor torácico demo');
   });
 
+  it('muestra watermark de borrador por defecto', () => {
+    render(<PaperChartTemplate patientName="Ana Demo" recordNumber="123" />);
+    expect(screen.getByTestId('epis2-paper-document-watermark')).toHaveAttribute(
+      'data-watermark-status',
+      'draft',
+    );
+  });
+
+  it('muestra watermark aprobado cuando documentStatus es signed', () => {
+    render(<PaperChartTemplate documentStatus="signed" />);
+    expect(screen.getByTestId('epis2-paper-document-watermark')).toHaveAttribute(
+      'data-watermark-status',
+      'signed',
+    );
+  });
+
   it('muestra confirmación IA y subrayado', () => {
     const onConfirmSection = vi.fn();
     render(

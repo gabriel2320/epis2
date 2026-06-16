@@ -843,6 +843,7 @@ export const copy = {
     signInProgress: 'Firmando…',
     actionSaving: 'Guardando…',
     signedNotice: 'Documento firmado — solo lectura.',
+    paperWatermarkSigned: 'APROBADO — DOCUMENTO CLÍNICO REGISTRADO',
     printPreview: 'Imprimir',
     shellHeaderTitle: 'Ficha Clínica Electrónica',
     shellServiceDefault: 'Servicio clínico · demo',

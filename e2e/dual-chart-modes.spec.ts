@@ -8,6 +8,7 @@ import {
   fillCommandPaletteQuery,
   fillMinimalPrescriptionDraft,
   loginAsPhysician,
+  pinDemoCase,
 } from './helpers/demoPatient.js';
 
 const demoPatientId = getDemoCaseByCode('DEMO-005')!.patientId;
@@ -32,6 +33,11 @@ test.describe('Dual chart modes ADR-002', () => {
     await page.getByTestId('epis2-chart-mode-paper').click();
     await expect(page.getByTestId('epis2-paper-chart-mode')).toBeVisible();
     await expect(page.getByTestId('epis2-paper-chart-template')).toBeVisible();
+    await expect(
+      page
+        .getByTestId('epis2-paper-chart-template-page-1')
+        .getByTestId('epis2-paper-document-watermark'),
+    ).toHaveAttribute('data-watermark-status', 'draft');
   });
 
   test('c) edita sección anamnesis', async ({ page }) => {
@@ -121,10 +127,23 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
   });
 
   test('g6) microjourneys post-receta (MF-DI-09)', async ({ page }) => {
+    await pinDemoCase(page, 'DEMO-005');
     await page.goto(`/espacio/receta?patientId=${demoPatientId}`);
     await expect(page.getByTestId('epis2-form-prescription')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-active-patient')).toBeVisible({ timeout: 15_000 });
     await fillMinimalPrescriptionDraft(page);
-    await page.getByRole('button', { name: copy.forms.save }).click();
+    const saveButton = page.getByRole('button', { name: copy.forms.save });
+    await expect(saveButton).toBeEnabled();
+    await Promise.all([
+      page.waitForResponse(
+        (response) =>
+          response.url().includes('/drafts') &&
+          (response.request().method() === 'POST' || response.request().method() === 'PUT') &&
+          response.ok(),
+        { timeout: 20_000 },
+      ),
+      saveButton.click(),
+    ]);
     await expect(page.getByTestId('epis2-post-save-microjourneys')).toBeVisible({
       timeout: 15_000,
     });
@@ -146,6 +165,11 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
     await page.getByTestId('epis2-chart-mode-paper').click();
     await expect(page).toHaveURL(/chartMode=paper/);
     await expect(page.getByTestId('epis2-paper-chart-mode')).toBeVisible();
+    await expect(
+      page
+        .getByTestId('epis2-paper-chart-template-page-1')
+        .getByTestId('epis2-paper-document-watermark'),
+    ).toBeVisible();
   });
 
   test('i) paleta @epis2/clinical-productivity en ficha dual', async ({ page }) => {

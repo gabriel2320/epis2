@@ -15,6 +15,8 @@ import {
 } from './paperChartSections.js';
 import { PaperSection, PaperTextarea } from './fields/index.js';
 import { PaperFooter } from './PaperFooter.js';
+import { PaperDocumentWatermark } from './PaperDocumentWatermark.js';
+import type { PatientDocumentStatus } from '../PatientIdentityBand.js';
 import { PaperInstitutionalHeader } from './PaperInstitutionalHeader.js';
 import { PaperPatientStrip, type PaperPatientStripProps } from './PaperPatientStrip.js';
 import { PaperSectionChrome } from './paperSectionChrome.js';
@@ -35,6 +37,7 @@ export type PaperChartTemplateProps = {
   totalPages?: number | undefined;
   /** Layout paginado — una hoja por entrada (MF-PA-03). */
   pageLayouts?: readonly PaperPageLayout[] | undefined;
+  documentStatus?: PatientDocumentStatus | undefined;
   testId?: string | undefined;
 };
 
@@ -139,6 +142,7 @@ export function PaperChartTemplate({
   page = 1,
   totalPages = 1,
   pageLayouts,
+  documentStatus = 'draft',
   testId = 'epis2-paper-chart-template',
 }: PaperChartTemplateProps) {
   const merged = { ...EMPTY_PAPER_CHART_DRAFT, ...values };
@@ -160,9 +164,11 @@ export function PaperChartTemplate({
           className={`${printClass} epis2-paper-page`}
           sx={{
             ...epis2PaperDocumentSx(printFormat),
+            position: 'relative',
             ...(layout.pageNumber < layouts.length ? { mb: 2 } : undefined),
           }}
         >
+          <PaperDocumentWatermark status={documentStatus} />
           {layout.pageNumber === 1 ? (
             <>
               <PaperInstitutionalHeader
@@ -199,7 +205,9 @@ export function PaperChartTemplate({
                     color: t.paperInkMid,
                   }}
                 >
-                  {copy.chartModes.draftNotice}
+                  {documentStatus === 'draft'
+                    ? copy.chartModes.draftNotice
+                    : copy.chartModes.signedNotice}
                 </Typography>
               </Box>
             </>
