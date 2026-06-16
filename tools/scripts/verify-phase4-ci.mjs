@@ -61,7 +61,10 @@ for (const script of ['db:migrate', 'test:e2e']) {
 }
 
 const workflowChecks = [
-  ['.github/workflows/ci.yml', ['quality:required', 'e2e-dual-chart', 'quality:gate -- quality:dual-chart-gate']],
+  [
+    '.github/workflows/ci.yml',
+    ['quality:required', 'e2e-dual-chart', 'quality:gate -- quality:dual-chart-gate'],
+  ],
   ['.github/workflows/ci-nightly.yml', ['run-gate.mjs nightly']],
   ['.github/workflows/ci-experimental.yml', ['run-gate.mjs experimental']],
 ];

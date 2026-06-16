@@ -12,14 +12,9 @@ const REAL_EMAIL_DOMAINS =
   /@(gmail|hotmail|yahoo|outlook|live|icloud|protonmail|office365)\.[a-z]{2,}/i;
 
 /** Seeds SQL con RUT ficticios documentados — no PHI. */
-const RUT_ALLOWLIST_FILES = new Set([
-  'database/migrations/007_demo_rut_identifiers.sql',
-]);
+const RUT_ALLOWLIST_FILES = new Set(['database/migrations/007_demo_rut_identifiers.sql']);
 
-const FIXTURE_SCAN_ROOTS = [
-  'packages/test-fixtures/src',
-  'apps/web/src/fixtures',
-];
+const FIXTURE_SCAN_ROOTS = ['packages/test-fixtures/src', 'apps/web/src/fixtures'];
 
 const FIXTURE_SCAN_SQL = [
   'database/migrations/004_seed_synthetic.sql',
@@ -91,7 +86,7 @@ export function collectDemoSafetyDocErrors() {
     if (!config.includes('isDemoAuthEnabled')) {
       errors.push('config.ts falta isDemoAuthEnabled');
     }
-    if (!config.includes('AUTH_MODE === \'demo\'')) {
+    if (!config.includes("AUTH_MODE === 'demo'")) {
       errors.push('config.ts falta guard AUTH_MODE=demo en deployed');
     }
   }
@@ -111,7 +106,10 @@ export function collectDemoSafetyDocErrors() {
   if (!existsSync(printA5) || !readFileSync(printA5, 'utf8').includes('PrintDemoWatermark')) {
     errors.push('PrintA5Document debe incluir PrintDemoWatermark');
   }
-  if (!existsSync(printLetter) || !readFileSync(printLetter, 'utf8').includes('PrintDemoWatermark')) {
+  if (
+    !existsSync(printLetter) ||
+    !readFileSync(printLetter, 'utf8').includes('PrintDemoWatermark')
+  ) {
     errors.push('PrintLetterDocument debe incluir PrintDemoWatermark');
   }
 

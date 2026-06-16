@@ -55,7 +55,5 @@ writeFileSync(archivePath, JSON.stringify(archive, null, 2) + '\n');
 pkg.scripts = kept;
 writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
 
-console.log(
-  `prune-phase3 OK — kept ${Object.keys(kept).length} root scripts, archived ${removed}`,
-);
+console.log(`prune-phase3 OK — kept ${Object.keys(kept).length} root scripts, archived ${removed}`);
 console.log(`  archive: tools/legacy-scripts/root-script-archive.json`);

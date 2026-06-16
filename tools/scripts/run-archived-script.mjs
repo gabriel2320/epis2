@@ -39,6 +39,8 @@ if (!command) {
 let extra = rawArgs.slice(1);
 if (extra[0] === '--') extra = extra.slice(1);
 
-const fullCmd = extra.length ? `${command} ${extra.map((a) => JSON.stringify(a)).join(' ')}` : command;
+const fullCmd = extra.length
+  ? `${command} ${extra.map((a) => JSON.stringify(a)).join(' ')}`
+  : command;
 const result = spawnSync(fullCmd, { cwd: root, shell: true, stdio: 'inherit' });
 process.exit(result.status ?? 1);
