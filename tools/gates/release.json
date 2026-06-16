@@ -2,6 +2,7 @@
   "name": "release",
   "description": "PROG-RELEASE-HARDENING RH-08 — checklist pre-tag (post v0.1-demo-rc2).",
   "steps": [
+    "npm run security:no-bidi",
     "npm run quality:required",
     "npm run build -w @epis2/web",
     "npm run architecture:validate"
