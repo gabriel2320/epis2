@@ -63,6 +63,8 @@
     "quality:ux-g02": "node tools/gates/run-legacy.mjs quality:ux-g02",
     "quality:ux-pilot": "node tools/gates/run-legacy.mjs quality:ux-pilot",
     "quality:ux-pilot-gate": "node tools/gates/run-legacy.mjs quality:ux-pilot-gate",
+    "quality:m3-human-pilot": "node tools/gates/run-legacy.mjs quality:m3-human-pilot",
+    "quality:ux-lab-close": "npm run quality:security-promote-gate && npm run quality:golden-journey && npm run quality:ux-pilot && npm run quality:ux-pilot-gate && npm run quality:m3-human-pilot && npm run quality:fast",
     "test:e2e:ux-lab-census": "node tools/scripts/run-e2e.mjs e2e/ux-lab-census.spec.ts",
     "check": "npm run lint && npm run typecheck && npm run architecture:validate",
     "quality:fast": "node scripts/quality/run-quality-fast.mjs",
