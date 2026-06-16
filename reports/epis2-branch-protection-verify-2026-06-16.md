@@ -105,10 +105,10 @@ Workflow manual: `.github/workflows/rh12-branch-protection-required-checks.yml`
 
 | Modo | Uso | Token |
 |------|-----|-------|
-| `audit` | Verificar lista canónica (default) | `GITHUB_TOKEN` |
-| `apply` | Restaurar protección tras deriva | Secret `EPIS2_REPO_ADMIN_TOKEN` (PAT Administration write) |
+| `audit` | Verificar lista canónica (default) | Secret `EPIS2_REPO_ADMIN_TOKEN` (PAT Administration **read**) |
+| `apply` | Restaurar protección tras deriva | Secret `EPIS2_REPO_ADMIN_TOKEN` (PAT Administration **read+write**) |
 
 ```bash
-gh secret set EPIS2_REPO_ADMIN_TOKEN --repo gabriel2320/epis2   # solo si usarás apply
+gh secret set EPIS2_REPO_ADMIN_TOKEN --repo gabriel2320/epis2   # audit y apply
 # Actions → RH-12 Branch protection required checks → Run workflow
 ```
