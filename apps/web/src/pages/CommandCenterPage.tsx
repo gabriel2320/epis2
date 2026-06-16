@@ -51,7 +51,10 @@ import { DemoNarrativeWalkthroughPanel } from '../components/DemoNarrativeWalkth
 
 import { isDemoNarrativesEnabled } from '../dev/demoNarrativesEnv.js';
 
-import { getDemoCaseByCode, type DemoNarrativeEpisode } from '@epis2/test-fixtures';
+import {
+  getDemoCaseByCode,
+  type DemoNarrativeEpisode,
+} from '../fixtures/devFixturesBridge.js';
 
 /** Launcher delgado census-first — búsqueda paciente sin hero dashboard (MF-08/09). */
 function CommandLauncherSlim({

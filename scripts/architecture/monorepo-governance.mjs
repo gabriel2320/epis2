@@ -21,6 +21,7 @@ const WEB_FORBIDDEN_IMPORTS = [
   'services/clinical-case-intel',
   '@epis2/clinical-domain/node',
   '@epis2/test-fixtures/node',
+  '@epis2/test-fixtures',
 ];
 
 export async function validate() {
@@ -47,6 +48,14 @@ export async function validate() {
   }
 
   for await (const { rel, content } of walkSourceFiles({ roots: ['apps/web'] })) {
+    if (rel === 'apps/web/package.json') {
+      const pkg = JSON.parse(content);
+      if (pkg.dependencies?.['@epis2/test-fixtures']) {
+        errors.push(`${rel}: @epis2/test-fixtures debe estar en devDependencies`);
+      }
+      continue;
+    }
+    if (rel.includes('/fixtures/devFixturesBridge.')) continue;
     for (const bad of WEB_FORBIDDEN_IMPORTS) {
       if (content.includes(bad)) {
         errors.push(`${rel}: import/runtime prohibido (${bad})`);

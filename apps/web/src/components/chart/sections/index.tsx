@@ -1,6 +1,6 @@
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { isChartMirrorBatchSection } from '@epis2/clinical-forms';
-import type { DemoChartDemoSectionId } from '@epis2/test-fixtures';
+import type { DemoChartDemoSectionId } from '../../../fixtures/devFixturesBridge.js';
 import type { ReactNode } from 'react';
 import type { TraditionalSectionId } from '../TraditionalSectionNav.js';
 import { TraditionalSectionMirrorStrip } from './TraditionalSectionMirrorStrip.js';

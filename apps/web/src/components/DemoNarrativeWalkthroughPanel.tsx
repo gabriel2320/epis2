@@ -1,9 +1,9 @@
 import { copy } from '@epis2/design-system';
 import {
-  DEMO_NARRATIVE_EPISODES,
   getDemoCaseByCode,
+  listDemoNarrativeEpisodes,
   type DemoNarrativeEpisode,
-} from '@epis2/test-fixtures';
+} from '../fixtures/devFixturesBridge.js';
 import { EpisAssistChip, EpisM3Text, Stack } from '@epis2/epis2-ui';
 
 export type DemoNarrativeWalkthroughPanelProps = {
@@ -21,7 +21,7 @@ export function DemoNarrativeWalkthroughPanel({
         {copy.commandCenter.demoNarrativesHint}
       </EpisM3Text>
       <Stack spacing={1.5}>
-        {DEMO_NARRATIVE_EPISODES.map((episode) => {
+        {listDemoNarrativeEpisodes().map((episode) => {
           const demo = getDemoCaseByCode(episode.demoCaseCode);
           return (
             <Stack

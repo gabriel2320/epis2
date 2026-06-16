@@ -1,5 +1,5 @@
 import { Stack } from '@epis2/epis2-ui';
-import { getDemoChartDemoSectionRows, type DemoChartDemoSectionId } from '@epis2/test-fixtures';
+import { getDemoChartDemoSectionRows, type DemoChartDemoSectionId } from '../../../fixtures/devFixturesBridge.js';
 import { TraditionalSectionDataTable } from './TraditionalSectionDataTable.js';
 
 export type TraditionalDemoSectionProps = {
