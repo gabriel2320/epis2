@@ -1,6 +1,6 @@
 # PROG-UX-LAB — Signoff humano Modo A
 
-**Fecha:** 2026-06-16 · **HEAD:** `c809c1b` · **Modo:** A (sin IA)  
+**Fecha:** 2026-06-16 · **HEAD:** `ecdb8f3` · **Modo:** A (sin IA)  
 **Operador:** revisión humana · **Autopilot:** [`run-2026-06-16`](./ux-lab-autopilot/run-2026-06-16.md)  
 **Cierre rc4:** [`epis2-ux-lab-close-2026-06-16.md`](./epis2-ux-lab-close-2026-06-16.md)
 

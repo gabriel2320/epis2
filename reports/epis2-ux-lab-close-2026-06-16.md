@@ -1,7 +1,8 @@
 # PROG-UX-LAB — Cierre rc4 (corrida completa)
 
-**Fecha:** 2026-06-16 · **HEAD:** `c809c1b` (working tree)  
-**Plan:** [`EPIS2_UX_LAB_MODERN_PLAN.md`](../docs/quality/EPIS2_UX_LAB_MODERN_PLAN.md)  
+**Fecha:** 2026-06-16 · **HEAD:** `ecdb8f3` · **Tag:** `v0.1-demo-rc4`  
+**Rama:** `feat/prog-aesthetic-reset-close` · **PR:** #36  
+**Signoff:** [`epis2-ux-lab-human-signoff-2026-06-16.md`](./epis2-ux-lab-human-signoff-2026-06-16.md)  
 **Programa estético:** [`EPIS2_AESTHETIC_RESET_PROGRAM.md`](../docs/product/EPIS2_AESTHETIC_RESET_PROGRAM.md)
 
 ---
@@ -12,7 +13,14 @@
 npm run quality:gate -- quality:ux-lab-close
 ```
 
-**Resultado:** **GO** — corrida completa local 2026-06-16 (~3 min E2E + golden journey).
+**Resultado:** **GO** — corrida completa local 2026-06-16 (~5 min, exit 0).
+
+Stack (`catalog-full.json`):
+
+```text
+security-promote-gate → golden-journey → ux-pilot → ux-pilot-gate
+→ m3-human-pilot → aesthetic-reset-close-gate → pr-aest-07-close-gate → fast
+```
 
 ---
 
@@ -22,10 +30,14 @@ npm run quality:gate -- quality:ux-lab-close
 |------|-----------|
 | `quality:security-promote-gate` | ✓ |
 | `quality:golden-journey` | ✓ 19 tests |
-| `quality:ux-pilot` | ✓ UX-G02 9/9 + E2E ux-g02 + login-gateway |
+| `quality:ux-pilot` | ✓ UX-G02 + login-gateway E2E |
 | `quality:ux-pilot-gate` | ✓ |
-| `quality:m3-human-pilot` | ✓ V1–V6 E2E |
+| `quality:m3-human-pilot` | ✓ V1–V6 E2E (6/6) |
+| `quality:aesthetic-reset-close-gate` | ✓ |
+| `quality:pr-aest-07-close-gate` | ✓ |
 | `quality:fast` | ✓ |
+
+**UX-BLOCKER:** 0
 
 ---
 
@@ -33,8 +45,7 @@ npm run quality:gate -- quality:ux-lab-close
 
 | Fix | Motivo |
 |-----|--------|
-| `validate-ux-pilot-gate.mjs` | Catálogo archivado (`quality:ux-pilot`) + `ClinicalLayoutActionBar` |
-| `GeneratedClinicalFormPage.degrade.test.tsx` | IA suggest visible (sin overflow MF-AEST) |
+| `catalog-full.json` / `catalog.json` | Compuesto `ux-lab-close` incluye gates estéticos (invocación directa, no `quality:gate --`) |
 | `e2e/m3-visual-signoff.spec.ts` V1 | `clinicalCalm` default + `clickAccentChip` estable |
 | `cicaScreenGovernor.ts` | exactOptionalPropertyTypes en `screenDefinition` |
 
@@ -47,25 +58,16 @@ npm run quality:gate -- quality:ux-lab-close
 | MF-AEST-01…06 | ✓ |
 | MF-AEST-04 clinical-calm default | ✓ |
 | CICA-L loop | ✓ PR-AEST-07 |
-| CICA-SG scoring | ✓ |
+| Criterios rc4 | ✓ |
 
 ---
 
 ## Veredicto
 
-**GO** — `quality:ux-lab-close` verde · stack Postgres local · E2E Playwright (webServer auto).
+**GO — rc4** · `quality:ux-lab-close` verde · tag `v0.1-demo-rc4` en `ecdb8f3`.
 
-**Pendiente humano (no bloquea gate):**
-
-- Signoff visual M3 opcional — [`M3_VISUAL_SIGNOFF_STEPS.md`](../docs/quality/M3_VISUAL_SIGNOFF_STEPS.md)
-- Capturas CICA-L — [`reports/cica-l/SCREENSHOTS.md`](./cica-l/SCREENSHOTS.md)
-- Tag **rc4** solo tras walkthrough humano explícito
+**Opcional (no bloquea gate):** signoff visual M3 humano — [`M3_VISUAL_SIGNOFF_STEPS.md`](../docs/quality/M3_VISUAL_SIGNOFF_STEPS.md)
 
 ---
 
-## Próximo paso
-
-```text
-PR GitHub feat/prog-aesthetic-reset-close
-Walkthrough humano → tag rc4
-```
+*Los errores de EPIS no son recuerdos: son gates de EPIS2.*
