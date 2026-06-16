@@ -11,7 +11,7 @@
   "dependencies": {
     "@epis2/contracts": "*",
     "postgres": "^3.4.5",
-    "zod": "^3.25.42"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "tsx": "^4.19.4",
