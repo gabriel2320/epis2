@@ -87,8 +87,8 @@ export async function fillCommandPaletteQuery(page: Page, query: string) {
 
 /** MF-DI-09 — borrador receta válido para guardar (todos los required del blueprint). */
 export async function fillMinimalPrescriptionDraft(page: Page) {
-  await expect(page.getByTestId('epis2-active-patient')).toBeVisible({ timeout: 15_000 });
   const medication = page.getByTestId('epis2-medication-catalog-autocomplete-input');
+  await expect(medication).toBeVisible({ timeout: 15_000 });
   await expect(async () => {
     await medication.fill('Metformina 850 mg');
     await expect(medication).toHaveValue('Metformina 850 mg');

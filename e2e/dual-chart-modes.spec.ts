@@ -32,6 +32,10 @@ test.describe('Dual chart modes ADR-002', () => {
     await page.getByTestId('epis2-chart-mode-paper').click();
     await expect(page.getByTestId('epis2-paper-chart-mode')).toBeVisible();
     await expect(page.getByTestId('epis2-paper-chart-template')).toBeVisible();
+    await expect(page.getByTestId('epis2-paper-document-watermark')).toHaveAttribute(
+      'data-watermark-status',
+      'draft',
+    );
   });
 
   test('c) edita sección anamnesis', async ({ page }) => {
@@ -146,6 +150,7 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
     await page.getByTestId('epis2-chart-mode-paper').click();
     await expect(page).toHaveURL(/chartMode=paper/);
     await expect(page.getByTestId('epis2-paper-chart-mode')).toBeVisible();
+    await expect(page.getByTestId('epis2-paper-document-watermark')).toBeVisible();
   });
 
   test('i) paleta @epis2/clinical-productivity en ficha dual', async ({ page }) => {

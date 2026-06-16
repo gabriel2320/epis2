@@ -30,6 +30,8 @@ Capa 3 — confianza visual (slice 1):
 | `quality:fast` | ✓ OK |
 | `format:check` | ✓ (prettier local) |
 | `quality:m3-human-pilot` | defer slice 2 |
+| E2E watermark en dual-chart | ✓ assertions en `dual-chart-modes.spec.ts` (b, h-alt) |
+| Fix flaky g6 receta | ✓ `fillMinimalPrescriptionDraft` — gate en campo medicamento |
 
 ---
 
