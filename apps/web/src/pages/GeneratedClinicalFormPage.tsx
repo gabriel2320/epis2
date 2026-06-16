@@ -688,7 +688,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
         <EpisM3Text role="titleLarge" component="h1">
           {effectiveBlueprint.label}
         </EpisM3Text>
-        {canUseAiAssist ? (aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip />) : null}
+        {canUseAiAssist ? aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip /> : null}
         <EpisClinicalSoapHints
           blueprintId={blueprint.blueprintId}
           values={values}
@@ -821,7 +821,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
               <EpisM3Text role="titleLarge" component="h1">
                 {blueprint.label}
               </EpisM3Text>
-              {canUseAiAssist ? (aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip />) : null}
+              {canUseAiAssist ? aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip /> : null}
               <EpisClinicalFormRhf
                 blueprint={effectiveBlueprint}
                 clinicalProse={clinicalProse}
@@ -852,7 +852,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   return (
     <FormProvider {...form}>
       <EpisClinicalFormPage title={blueprint.label} headerExtra={headerExtra}>
-        {canUseAiAssist ? (aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip />) : null}
+        {canUseAiAssist ? aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip /> : null}
 
         {blueprint.blueprintId === 'patient_search' ? (
           <Stack spacing={2}>
