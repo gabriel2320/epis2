@@ -1,6 +1,13 @@
 import { copy } from '@epis2/design-system';
-import { EpisDemoBadgeChip, EpisPatientChartShell, ScienceIcon, Stack } from '@epis2/epis2-ui';
+import {
+  EpisDemoBadgeChip,
+  EpisDraftStatus,
+  EpisPatientChartShell,
+  ScienceIcon,
+  Stack,
+} from '@epis2/epis2-ui';
 import { useRouterState } from '@tanstack/react-router';
+import { useMemo } from 'react';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { getPrimaryNarrativeForDemoCode } from '../clinical/demoNarrativePresentation.js';
 import {
@@ -8,6 +15,7 @@ import {
   patientChartTabTarget,
   resolvePatientChartTabId,
 } from '../clinical/patientChartNavigation.js';
+import { useDraftsQuery } from '../query/hooks/useDraftsQuery.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 
 /** Cabecera N1–N2 cuando hay paciente activo en rutas clínicas. */
@@ -30,6 +38,14 @@ export function ClinicalPatientChartChrome() {
     patient.demoCaseCode ? patient.demoCaseCode : null,
   ].filter(Boolean);
   const metaLine = metaParts.join(' · ');
+  const draftsQuery = useDraftsQuery({ patientId: patient.id });
+  const openDraftStatus = useMemo(() => {
+    const drafts = draftsQuery.data ?? [];
+    const open = drafts.find(
+      (row) => row.status !== 'approved' && row.status !== 'cancelled' && row.status !== 'rejected',
+    );
+    return open?.status;
+  }, [draftsQuery.data]);
 
   return (
     <EpisPatientChartShell
@@ -45,6 +61,7 @@ export function ClinicalPatientChartChrome() {
       contextBarTrailing={
         <Stack direction="row" spacing={0.5} alignItems="center">
           <EpisDemoBadgeChip icon={<ScienceIcon />} label={copy.demoBadge} />
+          {openDraftStatus ? <EpisDraftStatus status={openDraftStatus} /> : null}
         </Stack>
       }
     />

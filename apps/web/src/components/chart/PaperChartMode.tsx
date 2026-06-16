@@ -249,6 +249,7 @@ export function PaperChartMode({
               patientStrip={patientStrip}
               pageLayouts={pages}
               totalPages={totalPages}
+              documentStatus={patientId && draft.readOnly ? 'signed' : 'draft'}
               onSectionChange={
                 patientId && !draft.readOnly ? draft.onSectionChange : onSectionChange
               }
