@@ -209,7 +209,7 @@ Un tramo por sesión agente. Diff mínimo. Sin mega-PR.
 
 ### Tramo A — Charter + auditoría baseline
 
-**MF-UXLAB-00**
+**MF-UXLAB-00** ✓ **PASS** 2026-06-16 · [`epis2-ux-lab-baseline-2026-06-16.md`](../../reports/epis2-ux-lab-baseline-2026-06-16.md)
 
 | Entregable | Descripción |
 |------------|-------------|

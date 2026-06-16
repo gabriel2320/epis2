@@ -15,8 +15,8 @@ Plan: [`EPIS2_UX_LAB_MODERN_PLAN.md`](../quality/EPIS2_UX_LAB_MODERN_PLAN.md) ·
 
 | Tramo | MF | Objetivo | Gate |
 |-------|-----|----------|------|
-| A | MF-UXLAB-00 | Charter + baseline gates | `quality:fast` |
-| B | MF-UXLAB-01 | Censo narrativo + Shift Context Strip | `quality:ux-pilot` |
+| A | MF-UXLAB-00 | Charter + baseline gates | ✓ PASS · [`baseline`](../../reports/epis2-ux-lab-baseline-2026-06-16.md) |
+| B | MF-UXLAB-01 | Censo narrativo + Shift Context Strip | `quality:ux-pilot` + `quality:fast` |
 | C | MF-UXLAB-02 | Papel + estados visuales unificados | `quality:m3-human-pilot` |
 | D | MF-UXLAB-03 | Telemetría piloto + cierre humano | gates cierre § plan |
 
