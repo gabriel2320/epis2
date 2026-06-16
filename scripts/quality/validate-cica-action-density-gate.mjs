@@ -23,7 +23,7 @@ function walk(dir) {
       const outlined = (src.match(/variant="outlined"/g) ?? []).length;
       const tonal = (src.match(/appearance="tonal"/g) ?? []).length;
       const textBtn = (src.match(/appearance="text"/g) ?? []).length;
-      const visibleActions = primary + outlined + Math.min(tonal, 2);
+      const visibleActions = primary + outlined + Math.min(tonal, 2) + textBtn;
       if (visibleActions > 4 && !p.includes('Paper')) {
         errors.push(`${p.replace(root + '/', '')} posible exceso de acciones visibles (${visibleActions})`);
       }
