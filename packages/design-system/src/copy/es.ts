@@ -861,6 +861,7 @@ export const copy = {
     documentStatusDraft: 'Borrador',
     documentStatusSigned: 'Firmado',
     documentStatusLocked: 'Bloqueado',
+    aiDegraded: 'IA local degradada',
     actionEvolution: 'Evolución',
     actionOrder: 'Indicación',
     actionLab: 'Laboratorio',

@@ -1,6 +1,7 @@
-import { Box, epis2ChartContentTransitionSx } from '@epis2/epis2-ui';
+import { Box, epis2ChartContentTransitionSx, EpisAiDegradedChip } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
 import type { ChartModeId } from '../../dev/dualChartModesEnv.js';
+import { useAiStatusQuery } from '../../query/hooks/useAiStatusQuery.js';
 import { EpisUniversalCommandBar } from '../command/EpisUniversalCommandBar.js';
 import { ClinicalActionBar } from './ClinicalActionBar.js';
 import { ClinicalFooterStatus } from './ClinicalFooterStatus.js';
@@ -45,6 +46,8 @@ export type ClinicalShellProps = {
   userRoleLabel?: string | undefined;
   /** MF-DI-01 — contexto clínico denso persistente. */
   contextDenseStrip?: ReactNode | undefined;
+  /** MF-UXLAB-02 — badge DEMO en banda identidad. */
+  showDemoBadge?: boolean | undefined;
   testId?: string | undefined;
 };
 
@@ -81,8 +84,10 @@ export function ClinicalShell({
   userDisplayName,
   userRoleLabel,
   contextDenseStrip,
+  showDemoBadge = false,
   testId = 'epis2-clinical-shell-v2',
 }: ClinicalShellProps) {
+  const { aiAvailable } = useAiStatusQuery();
   const identityProps: PatientIdentityBandProps = {
     displayName,
     metaLine,
@@ -94,6 +99,7 @@ export function ClinicalShell({
     admissionDate,
     allergyLabels,
     documentStatus,
+    showDemoBadge,
   };
 
   const commandBar = (
@@ -129,6 +135,7 @@ export function ClinicalShell({
           chartMode={chartMode}
           onChartModeChange={onChartModeChange}
           commandBar={commandBar}
+          statusChips={aiAvailable !== true ? <EpisAiDegradedChip /> : null}
           onNewEvolution={onNewEvolution}
           onNewOrder={onNewOrder}
           onOpenLab={onOpenLab}

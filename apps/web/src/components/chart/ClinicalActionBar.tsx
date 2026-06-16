@@ -16,6 +16,8 @@ export type ClinicalActionBarProps = {
   onSaveDraft?: (() => void) | undefined;
   onSign?: (() => void) | undefined;
   onPrint?: (() => void) | undefined;
+  /** MF-UXLAB-02 — chips trust ladder junto al modo (IA off, etc.). */
+  statusChips?: ReactNode | undefined;
   testId?: string | undefined;
 };
 
@@ -24,6 +26,7 @@ export function ClinicalActionBar({
   chartMode,
   onChartModeChange,
   commandBar,
+  statusChips,
   onSaveDraft,
   onSign,
   onPrint,
@@ -52,6 +55,7 @@ export function ClinicalActionBar({
         useFlexGap
       >
         <ChartModeSwitch mode={chartMode} onChange={onChartModeChange} />
+        {statusChips}
         <Box sx={{ flex: 1, minWidth: 0 }}>{commandBar}</Box>
         <EpisButton
           size="small"

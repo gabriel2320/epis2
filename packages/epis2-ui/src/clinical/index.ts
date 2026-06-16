@@ -6,6 +6,7 @@ export { EpisAuthScreen, type EpisAuthScreenProps } from './EpisAuthScreen.js';
 export { EpisDraftStatus, type EpisDraftStatusProps } from './EpisDraftStatus.js';
 export { EpisApprovalGate, type EpisApprovalGateProps } from './EpisApprovalGate.js';
 export { EpisAiDisclosure, type EpisAiDisclosureProps } from './EpisAiDisclosure.js';
+export { EpisAiDegradedChip } from './EpisAiDegradedChip.js';
 export {
   EpisNavigationRail,
   type EpisNavigationRailItem,

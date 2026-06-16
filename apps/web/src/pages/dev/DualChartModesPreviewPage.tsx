@@ -53,6 +53,7 @@ export function DualChartModesPreviewPage() {
         onCommandSubmit={() => void classicCommand.submit()}
         commandSuggestions={classicCommandSuggestionLabels(classicCommand.lastResult)}
         onCommandSuggestion={(label: string) => void classicCommand.submit(label)}
+        showDemoBadge
       >
         {chartMode === 'paper' ? (
           <PaperChartMode

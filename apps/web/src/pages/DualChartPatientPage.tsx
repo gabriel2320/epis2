@@ -195,6 +195,7 @@ export function DualChartPatientPage({
         commandSuggestions={commandSuggestions}
         onCommandSuggestion={(label) => void classicCommand.submit(label)}
         contextDenseStrip={<ClinicalContextDenseStrip dense={contextDense} />}
+        showDemoBadge={Boolean(detail.patient.demoCaseCode)}
         testId="epis2-dual-chart-ficha"
       >
         {chartMode === 'paper' ? (
