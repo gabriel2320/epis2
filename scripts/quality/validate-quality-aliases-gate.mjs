@@ -9,18 +9,26 @@ const errors = [];
 
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 const scripts = pkg.scripts ?? {};
+const catalog = JSON.parse(readFileSync(join(root, 'tools/gates/catalog-full.json'), 'utf8'));
+const catalogGates = catalog.gates ?? {};
 
-if (!scripts['quality:ui']?.includes('quality:ui-simplify-gate')) {
-  errors.push('quality:ui debe delegar en quality:ui-simplify-gate');
+if (scripts['quality:ui'] || scripts['quality:ai']) {
+  errors.push('package.json root no debe definir quality:ui/quality:ai (usar catalog-full.json)');
 }
-if (!scripts['quality:ai']?.includes('quality:sh-03-degrade-gate')) {
-  errors.push('quality:ai debe incluir quality:sh-03-degrade-gate');
+
+const uiCmd = catalogGates['quality:ui']?.command ?? '';
+if (!uiCmd.includes('quality:ui-simplify-gate')) {
+  errors.push('catalog quality:ui debe delegar en quality:ui-simplify-gate');
 }
-if (!scripts['quality:ai']?.includes('quality:ai-client-gate')) {
-  errors.push('quality:ai debe incluir quality:ai-client-gate');
+const aiCmd = catalogGates['quality:ai']?.command ?? '';
+if (!aiCmd.includes('quality:sh-03-degrade-gate')) {
+  errors.push('catalog quality:ai debe incluir quality:sh-03-degrade-gate');
 }
-if (!scripts['quality:ai']?.includes('quality:web-ai-boundary-gate')) {
-  errors.push('quality:ai debe incluir quality:web-ai-boundary-gate');
+if (!aiCmd.includes('quality:ai-client-gate')) {
+  errors.push('catalog quality:ai debe incluir quality:ai-client-gate');
+}
+if (!aiCmd.includes('quality:web-ai-boundary-gate')) {
+  errors.push('catalog quality:ai debe incluir quality:web-ai-boundary-gate');
 }
 
 const velocity = readFileSync(join(root, 'docs/dev/EPIS2_DEV_VELOCITY.md'), 'utf8');

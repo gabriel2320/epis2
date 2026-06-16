@@ -453,7 +453,7 @@
       "path": "scripts/quality/validate-ui-simplify-gate.mjs"
     },
     "quality:ui": {
-      "type": "npm",
+      "type": "command",
       "command": "npm run quality:ui-simplify-gate"
     },
     "quality:m3-scaffold-gate": {
