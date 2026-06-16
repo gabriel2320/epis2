@@ -10,10 +10,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const BIDI = /[\u202A-\u202E\u2066-\u2069]/;
-const TEXT =
-  /\.(ts|tsx|js|jsx|mjs|cjs|json|md|yml|yaml|toml|sql|css|scss|html|sh|txt)$/i;
-const SKIP =
-  /^(node_modules\/|reports\/|e2e\/.*-snapshots\/|.*\.png$|.*\.jpg$|.*\.webp$|.*\.gif$)/;
+const TEXT = /\.(ts|tsx|js|jsx|mjs|cjs|json|md|yml|yaml|toml|sql|css|scss|html|sh|txt)$/i;
+const SKIP = /^(node_modules\/|reports\/|e2e\/.*-snapshots\/|.*\.png$|.*\.jpg$|.*\.webp$|.*\.gif$)/;
 
 const files = execSync('git ls-files', { cwd: root, encoding: 'utf8' })
   .trim()
