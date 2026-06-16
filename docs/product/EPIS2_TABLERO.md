@@ -1,6 +1,6 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-16 · **STRENGTHEN** 23/23 ✓ · **PROG-CONSOLIDATE** ola 1+2 ✓
+**Actualizado:** 2026-06-16 · **STRENGTHEN** 23/23 ✓ · **PROG-CONSOLIDATE** ola 1+2 ✓ · **PROG-RELEASE-HARDENING** ✓ · tag **`v0.1-demo-rc3`**
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Brújula:** [`EPIS2_CURRENT_STATE.md`](../EPIS2_CURRENT_STATE.md)
 
@@ -41,16 +41,18 @@ Evidencia: [`epis2-prog-consolidate-ola2-close-2026.md`](../../reports/epis2-pro
 
 ---
 
-## Activo — PROG-RELEASE-HARDENING (RH-*)
+## Cerrado — PROG-RELEASE-HARDENING (RH-*)
 
-Plan: [`EPIS2_RELEASE_HARDENING_PLAN.md`](./EPIS2_RELEASE_HARDENING_PLAN.md) · base tag **`v0.1-demo-rc2`**
+Plan: [`EPIS2_RELEASE_HARDENING_PLAN.md`](./EPIS2_RELEASE_HARDENING_PLAN.md) · tag **`v0.1-demo-rc3`**
 
 | RH | Estado | Entrega |
 |----|--------|---------|
 | RH-01…08 | ✓ DONE | PR [#15](https://github.com/gabriel2320/epis2/pull/15) + PR [#16](https://github.com/gabriel2320/epis2/pull/16) merged · Node 24 · security report-only · auth fail-closed · web fixtures bridge · `quality:release` · `security:no-bidi` |
 | Dependabot setup-node v6 | cerrado | PR [#14](https://github.com/gabriel2320/epis2/pull/14) superseded por #15 |
 
-**Siguiente:** tag opcional `v0.1-demo-rc3` · revisión legal [`DISCLAIMER.md`](../DISCLAIMER.md) · promover Gitleaks/CodeQL a blocking (futuro)
+Evidencia: [`epis2-session-close-2026-06-16-release-hardening.md`](../../reports/epis2-session-close-2026-06-16-release-hardening.md) · [`epis2-v0.1-demo-rc3-release.md`](../../reports/epis2-v0.1-demo-rc3-release.md)
+
+**Siguiente:** revisión legal [`DISCLAIMER.md`](../DISCLAIMER.md) · promover Gitleaks/CodeQL a blocking (futuro) · congelamiento vigente
 
 
 ## Cerrado — PROG-CONCILIACION-TRIADA-2026

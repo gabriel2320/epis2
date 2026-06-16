@@ -14,16 +14,16 @@ Flujo mínimo: **censo → ficha dual → borrador → aprobación humana**. IA 
 
 ---
 
-## Estado real (2026-06-15)
+## Estado real (2026-06-16)
 
 | Aspecto | Estado |
 |---------|--------|
-| Base demo v0.1 | Compila, golden journey, ficha-first ✓ · tag **`v0.1-demo-rc`** |
-| Programa activo | **PROG-CONSOLIDATE ola 2** — hardening (auth, config, rate limit) |
+| Base demo v0.1 | Compila, golden journey, ficha-first ✓ · tag **`v0.1-demo-rc3`** |
+| Programas recientes | **PROG-CONSOLIDATE** ola 1+2 ✓ · **PROG-RELEASE-HARDENING** RH-01…08 ✓ |
 | Congelamiento | Sin features clínicas nuevas salvo MF autorizada |
 | Producción / PHI | **No listo** — ver seguridad abajo |
 
-**Brújula completa:** [`docs/EPIS2_CURRENT_STATE.md`](docs/EPIS2_CURRENT_STATE.md)
+**Fuente de verdad:** [`docs/EPIS2_CURRENT_STATE.md`](docs/EPIS2_CURRENT_STATE.md)
 
 **Tablero:** [`docs/product/EPIS2_TABLERO.md`](docs/product/EPIS2_TABLERO.md)
 
@@ -85,6 +85,7 @@ Detalle: [`docs/ARCHITECTURE_TARGET.md`](docs/ARCHITECTURE_TARGET.md) · [`docs/
 |--------|---------|
 | Verificación rápida | `npm run quality:fast` |
 | Pre-PR | `npm run quality:required` |
+| Pre-tag release | `npm run quality:release` |
 | Lint + types + arquitectura | `npm run check` |
 | Tests unitarios | `npm run test` |
 | DB | `npm run db:migrate` · `npm run db:validate` |
