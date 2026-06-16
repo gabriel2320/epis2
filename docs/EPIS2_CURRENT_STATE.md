@@ -59,7 +59,7 @@ Leyenda: ✓ · ◐ parcial · ✗ fuera de alcance actual.
 | **Archive / histórico** | Legacy, candidatos, reportes viejos | `migration/`, `docs/archive/`, `reports/archive/` · índice [`reports/README.md`](../reports/README.md) |
 | **Satélites externos** | Contrato JSON/HTTP, no import cruzado | `../epis2-evolab`, `../EPIS2-MedRepo` — [`EPIS2_TRIADA_REPOS.md`](product/EPIS2_TRIADA_REPOS.md) |
 
-Regla: **core no depende de labs** (deuda: API aún puede tocar case-intel — marcar needs-review).
+Regla: **core no depende de labs** — gate `quality:core-no-labs-imports-gate` · deuda conocida: tablas staging + rutas admin de promoción (sin import npm).
 
 ---
 

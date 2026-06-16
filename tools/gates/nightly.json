@@ -4,20 +4,20 @@
   "steps": [
     "npm run build:ci-fixtures-chain",
     "npm run db:migrate",
-    "npm run quality:case-intel-closure-gate",
+    "npm run quality:gate -- quality:case-intel-closure-gate",
     "npm run check",
-    "npm run format:check",
-    "npm run quality:openapi-gate",
-    "npm run quality:pm01",
-    "npm run quality:layers-integration-gate",
-    "npm run theme:validate",
+    "npx prettier --check .",
+    "npm run quality:gate -- quality:openapi-gate",
+    "npm run quality:gate -- quality:pm01",
+    "npm run quality:gate -- quality:layers-integration-gate",
+    "npm run tool:script -- theme:validate",
     "npm run test -- --reporter=default --reporter=json --outputFile=reports/.vitest-ci-parity-temp.json",
-    "npm run quality:ci-parity -- --from-report=reports/.vitest-ci-parity-temp.json",
+    "npm run quality:gate -- quality:ci-parity -- --from-report=reports/.vitest-ci-parity-temp.json",
     "npm run build -w @epis2/web",
     "npm run test:e2e",
     "npm run db:validate",
-    "npm run ai:evals",
-    "npm run quality:golden-journey",
-    "npm run qa:bundle-analyze"
+    "npm run tool:script -- ai:evals",
+    "npm run quality:gate -- quality:golden-journey",
+    "npm run tool:script -- qa:bundle-analyze"
   ]
 }

@@ -52,7 +52,9 @@ epis2/
 | `tools/*` | scripts/, lectura repo | — |
 | Labs | packages, API HTTP | ser importados por web |
 
-Validador: `npm run architecture:validate`
+Validadores: `npm run architecture:validate` · `npm run quality:core-no-labs-imports-gate`
+
+**Frontera labs (PROG-CORE-LABS-FW):** `apps/web`, `apps/api` y `packages/*` no declaran ni importan `@epis2/clinical-case-intel` ni `@epis2/drug-intel`. Labs operan vía CLI/HTTP; promoción a core usa tablas staging en API (`/api/admin/drug-intel`) — documentada, no import directo.
 
 ---
 
@@ -70,10 +72,10 @@ Validador: `npm run architecture:validate`
 
 | Zona | Dónde viven los comandos |
 |------|--------------------------|
-| Core diario | root: `check`, `test`, `db:migrate`, `quality:fast`, `quality:required` |
-| DB | `@epis2/api` + shims root |
-| E2E | `@epis2/web` + shims root (`test:e2e`) |
+| Core diario | root: ver [`dev/SCRIPT_INDEX.md`](dev/SCRIPT_INDEX.md) — máx 18 scripts |
+| DB | `@epis2/api` + shims root `db:*` |
+| E2E | `@epis2/web` + shim root `test:e2e` |
 | Gates MF históricos | `npm run quality:gate -- quality:*` |
-| Dev/agentes | root temporal → objetivo `tools/` (futuro) |
+| Scripts archivados | `npm run tool:script -- <name>` |
 
 Ver [`MAINTENANCE_PACKAGE_SCRIPTS.md`](MAINTENANCE_PACKAGE_SCRIPTS.md).

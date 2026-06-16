@@ -69,8 +69,8 @@ jobs:
       - run: npm ci
       - run: npm run build:ci-fixtures-chain
       - run: npm run db:migrate
-      - run: npm run quality:dual-chart-gate
+      - run: npm run quality:gate -- quality:dual-chart-gate
       - run: npx playwright install --with-deps chromium
-      - run: npm run build:packages
+      - run: npm run tool:script -- build:packages
       - run: npm run build -w @epis2/web
-      - run: npm run test:e2e:dual-chart
+      - run: npm run test:e2e:dual-chart -w @epis2/web

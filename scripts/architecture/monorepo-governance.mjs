@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { REPO_ROOT } from './lib/paths.mjs';
 import { walkSourceFiles } from './lib/scan-sources.mjs';
+import { validateCoreLabsBoundary } from './core-labs-boundary.mjs';
 
 /** MF-CON-03 — docs de gobierno + frontera web sin runtime local-ai directo. */
 const REQUIRED_DOCS = [
@@ -61,6 +62,11 @@ export async function validate() {
         errors.push(`${rel}: import/runtime prohibido (${bad})`);
       }
     }
+  }
+
+  const labsBoundary = await validateCoreLabsBoundary();
+  if (!labsBoundary.ok) {
+    errors.push(...labsBoundary.details);
   }
 
   return errors.length ? { ok: false, details: errors } : { ok: true };

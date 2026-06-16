@@ -35,4 +35,4 @@ jobs:
       - run: npm ci
       - run: npm run build:ci-fixtures-chain
       - run: npm run db:migrate
-      - run: npm run quality:experimental
+      - run: node tools/gates/run-gate.mjs experimental

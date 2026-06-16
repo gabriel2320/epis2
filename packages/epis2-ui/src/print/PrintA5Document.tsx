@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { PrintDemoWatermark } from './PrintDemoWatermark.js';
 
 export type PrintA5DocumentProps = {
   title: string;
@@ -22,6 +23,7 @@ export function PrintA5Document({
     <Box
       data-testid={testId}
       sx={{
+        position: 'relative',
         width: '148mm',
         minHeight: '210mm',
         mx: 'auto',
@@ -40,6 +42,7 @@ export function PrintA5Document({
         },
       }}
     >
+      <PrintDemoWatermark />
       <Typography
         component="h1"
         variant="h6"

@@ -1,77 +1,43 @@
-# EPIS2 — Guía para agentes (Cursor)
+# EPIS2 — Guía para agentes (Cursor) v2
 
 > Los errores de EPIS no son recuerdos: son gates de EPIS2.
 
-## Antes de modificar código
+**Fase:** consolidación post-rc3 — **no features clínicas nuevas** salvo MF autorizada.  
+**Brújula:** [`docs/EPIS2_CURRENT_STATE.md`](docs/EPIS2_CURRENT_STATE.md) · **Congelamiento:** [`docs/CONSOLIDATION_FREEZE.md`](docs/CONSOLIDATION_FREEZE.md)  
+**Contexto:** [`docs/AGENT_CONTEXT_MINIMAL.md`](docs/AGENT_CONTEXT_MINIMAL.md)
 
-0. **Contexto mínimo:** leer `docs/AGENT_CONTEXT_MINIMAL.md` · loop `npm run quality:fast` en iteración.
-1. **Arranque IA:** `npm run dev:session` → adjuntar `@reports/dev-agent-brief.md` + prompt del subagente primario.
-2. Leer `docs/PRODUCT_CANON.md` y `docs/product/PRODUCT_INVARIANTS.md`.
-3. Leer **`docs/product/EPIS2_DEV_SYSTEM.md`** — nomenclatura SDEPIS2 (ola · hilo · tramo · microfase · entrega).
-4. Leer `docs/product/EPIS2_TABLERO.md` — estado vivo y siguiente paso.
-5. Leer `docs/product/EPIS2_WAVE_EXECUTION_CANON.md` — olas, tramos, gates (no cola lineal automática).
-6. Ejecutar `npm run quality:microphase-next` — microfase READY o hilo activo del tablero.
-7. Leer `docs/quality/MICROPHASE_PROGRAM.md` y `docs/quality/microphase-ledger.json`.
-8. Leer `docs/legacy/EPIS_POSTMORTEM.md` si tocas integración o migración.
-9. **Declarar alcance** (nivel SDEPIS2 + ID MF-* / Hilo * + archivos permitidos).
-10. No importar desde `../Epis` sin entrada en `legacy-import-manifest.json`.
+## Antes de editar
 
-Guía IA: `docs/product/EPIS2_AI_ASSISTED_DEV.md` · cierre `npm run dev:agent:close`.  
-Velocidad dev: `docs/dev/EPIS2_DEV_VELOCITY.md` · `npm run dev:velocity` · gates `npm run dev:velocity:gates`.  
-Cursor plugins/MCP: `docs/dev/CURSOR_PLUGINS_EPIS2.md` · verificar `npm run cursor:verify`.
+1. Leer brújula + congelamiento + contexto mínimo.
+2. Declarar alcance MF-* (zona · archivos permitidos · gate · riesgo).
+3. Arranque sesión: `npm run dev:session` → `@reports/dev-agent-brief.md`
+4. Canon si aplica: `docs/PRODUCT_CANON.md`, `docs/product/PRODUCT_INVARIANTS.md`
+5. Legacy EPIS si aplica: `docs/legacy/EPIS_POSTMORTEM.md` + `legacy-import-manifest.json`
+6. **No** planificar desde `docs/product/EPIS2_TABLERO.md` — índice humano, no fuente de verdad.
 
-## Gates obligatorios al cerrar
+## Programa activo
 
-```bash
-npm run stack:dev   # Postgres + Ollama smoke (antes de sesión)
-npm run check
-npm run test
-npm run db:validate
-```
+**PROG-UX-LAB** — UX y confianza clínica visual, sin endpoints clínicos nuevos.  
+Plan: [`docs/quality/EPIS2_UX_LAB_MODERN_PLAN.md`](docs/quality/EPIS2_UX_LAB_MODERN_PLAN.md)
 
-Con `dev:ai` activo: `npm run ai:evals:live` (Ollama + blueprints assist).
+## Comandos
 
-Semana 1 dev local: `npm run stack:dev` · gates `quality:stack-dev-gate` · `quality:dev-env-gate` · `quality:local-ci`.
+| Iteración | Pre-PR | Pre-tag |
+|-----------|--------|---------|
+| `npm run quality:fast` | `npm run quality:required` | `npm run quality:release` |
 
-Semana 2 scaffold: `docs/product/EPIS2_TRAMO_SCAFFOLD_CANON.md` · `quality:week2-gate` · `test:e2e:tramo-j`.
-
-Semana 3 IA producto: `docs/product/EPIS2_AI_TRAMO_EVALS.md` · `quality:week3-gate` · `ai:evals:tramo-j` · `ai:catalog-assist-smoke` · `test:e2e:week3` (requiere `dev:ai` para evals live).
-
-Semana 4 orquestación: `docs/product/EPIS2_DEV_AGENT_ORCHESTRATION.md` · `docs/product/EPIS2_DEV_SUBAGENTS.md` · `quality:week4-gate` · `dev:agent:orchestrate` · `dev:agent:ollama` · `dev:agent:tramo-k` · `ai:evals:closure` · `quality:tramos-clinical-signoff-gate` · Tramo K inventario (`quality:tramo-k-inventory-gate`).
-
-Capas UI + IA asistida: **`npm run dev:session`** → `@reports/dev-agent-brief.md` · cierre **`npm run dev:agent:close`**.
-
-Signoff A–K: `docs/product/EPIS2_TRAMOS_CLINICAL_SIGNOFF_CHECKLIST.md` · `quality:tramos-signoff-prep-gate` · `quality:tramos-run-ak-closure-gates`.
-
-Tres modos MD3 (**EPIS2-PM-01** / PROG-THREE-MODES): [`EPIS2_THREE_MODES_DEV_PLAN.md`](docs/product/EPIS2_THREE_MODES_DEV_PLAN.md) · `quality:three-modes-gate` · importar modos desde `apps/web/src/modes/index.js`.
-
-Si la fase lo exige: `npm run quality:golden-journey`.
-
-Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.
+Cambios clínicos: `npm run quality:clinical` · Cierre sesión: `npm run dev:agent:close`  
+Gate histórico: `npm run quality:gate -- quality:<name>` · scripts archivados: `npm run tool:script -- <name>` · índice: `docs/dev/SCRIPT_INDEX.md`
 
 ## Detenerse si
 
 - `architecture:validate` falla.
-- La tarea contradice invariantes o allowlist.
-- Se pide segundo Command/Form Registry «temporal».
-- Aparece OpenMRS, Carbon o dashboard como home.
-
-## Fases
-
-```text
-EPIS2-00 ✓ … EPIS2-12 ✓ · MUI-01…10 ✓ · M3-00…09 ✓ · GO DEMO ✓ · Plan A–G ✓
-Planes F+G cerrados: reports/epis2-plan-f-complete.md · reports/epis2-plan-g-complete.md
-```
-
-## Memoria legacy
-
-| Documento | Uso |
-|-----------|-----|
-| `docs/legacy/EPIS_POSTMORTEM.md` | Errores → gates |
-| `docs/legacy/EPIS_REJECTED_PATTERNS.md` | Patrones prohibidos |
-| `docs/legacy/EPIS_DONOR_ALLOWLIST.md` | Qué puede portarse |
-| `docs/quality/GOLDEN_CLINICAL_JOURNEY.md` | Gate producto final |
+- Contradice invariantes o allowlist.
+- Segundo Command/Form Registry temporal.
+- OpenMRS, Carbon o dashboard como home.
 
 ## Prohibido
 
-OpenMRS, O3, Carbon, overlays EPIS, dashboard home, auto-aprobación, PHI real, carpetas completas desde EPIS.
+Reabrir week gates, three modes o tramos A–K como trabajo activo · auto-aprobación · PHI real · import masivo desde `../Epis`.
+
+**Campañas cerradas (histórico):** [`docs/archive/agent-playbooks/`](docs/archive/agent-playbooks/)

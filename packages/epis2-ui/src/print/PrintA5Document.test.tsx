@@ -13,6 +13,7 @@ describe('PrintA5Document', () => {
       </PrintA5Document>,
     );
     expect(screen.getByTestId('epis2-print-a5-document')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-print-demo-watermark')).toBeInTheDocument();
     expect(screen.getByText('Certificado médico')).toBeInTheDocument();
     expect(screen.getByText('Reposo por influenza')).toBeInTheDocument();
   });
