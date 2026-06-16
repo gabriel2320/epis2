@@ -52,7 +52,7 @@ Plan: [`EPIS2_RELEASE_HARDENING_PLAN.md`](./EPIS2_RELEASE_HARDENING_PLAN.md) · 
 
 Evidencia: [`epis2-session-close-2026-06-16-release-hardening.md`](../../reports/epis2-session-close-2026-06-16-release-hardening.md) · [`epis2-v0.1-demo-rc3-release.md`](../../reports/epis2-v0.1-demo-rc3-release.md)
 
-**Siguiente:** Tramo 2 PROG-POST-RC3 (DEV-PARITY) · revisión legal [`DISCLAIMER.md`](../DISCLAIMER.md) · congelamiento vigente
+**Siguiente:** Tramo 3 PROG-LEGAL-DISCLAIMER · revisión [`DISCLAIMER.md`](../DISCLAIMER.md) · congelamiento vigente
 
 
 ## Cerrado — PROG-CONCILIACION-TRIADA-2026
@@ -117,17 +117,17 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 
 ## Activo — PROG-POST-RC3 (gobierno + higiene)
 
-Plan: [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-rc3-2026.md)
+Plan: [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-rc3-2026.md) · Tramo 1: [`epis2-prog-gobierno-post-rc3-tramo1-close.md`](../../reports/epis2-prog-gobierno-post-rc3-tramo1-close.md) · Tramo 2: [`epis2-prog-dev-parity-tramo2-close.md`](../../reports/epis2-prog-dev-parity-tramo2-close.md)
 
 | Tramo | Estado | Entrega |
 |-------|--------|---------|
 | **Tramo 1** | ✓ DONE | PROG-GOBIERNO-POST-RC3 · MF-GOV-01…04 |
-| Tramo 2 | pendiente | DEV-PARITY · CRLF / `quality:release` local |
-| Tramo 3 | pendiente | LEGAL · revisión `DISCLAIMER.md` |
+| **Tramo 2** | ✓ DONE | PROG-DEV-PARITY · MF-DEV-01…02 · `.gitattributes` + `quality:release` local |
+| **Tramo 3** | **siguiente** | LEGAL · revisión `DISCLAIMER.md` |
 | Tramo 4 | pendiente | DEPS · triage Dependabot |
 | Tramo 5 | pendiente | SECURITY-PROMOTE · Gitleaks/CodeQL blocking |
 
-**Siguiente:** Tramo 2 DEV-PARITY · congelamiento vigente
+**Siguiente:** Tramo 3 LEGAL · congelamiento vigente
 
 ---
 

@@ -87,11 +87,13 @@ Siguiente programa **PROG-POST-RC3** — tramos propuestos (un tramo por sesión
 
 | Tramo | Enfoque | Estado |
 |-------|---------|--------|
-| PROG-GOBIERNO-POST-RC3 | Docs · tablero · brújula | ✓ (este doc MF-GOV-03) |
-| PROG-DEV-PARITY | CRLF / `quality:release` local Windows | pendiente |
-| PROG-LEGAL-DISCLAIMER | Revisión humana DISCLAIMER | pendiente |
-| PROG-DEPS-HYGIENE | Triage Dependabot | pendiente |
-| PROG-SECURITY-PROMOTE | RH-09+ blocking opcional | pendiente |
+| PROG-GOBIERNO-POST-RC3 | Docs · tablero · brújula | ✓ Tramo 1 · [`epis2-prog-gobierno-post-rc3-tramo1-close.md`](../reports/epis2-prog-gobierno-post-rc3-tramo1-close.md) |
+| **PROG-DEV-PARITY** | CRLF / `quality:release` local Windows | ✓ Tramo 2 · [`epis2-prog-dev-parity-tramo2-close.md`](../reports/epis2-prog-dev-parity-tramo2-close.md) |
+| PROG-LEGAL-DISCLAIMER | Revisión humana DISCLAIMER | pendiente (Tramo 3) |
+| PROG-DEPS-HYGIENE | Triage Dependabot | pendiente (Tramo 4) |
+| PROG-SECURITY-PROMOTE | RH-09+ blocking opcional | pendiente (Tramo 5) |
+
+**DEV-PARITY / D-01:** ✓ resuelto (2026-06-16) — `.gitattributes` + `.editorconfig`; `format:check` y `quality:release` verdes en Windows. Evidencia: [`epis2-prog-dev-parity-tramo2-close.md`](../reports/epis2-prog-dev-parity-tramo2-close.md).
 
 Plan detallado: [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-plan-post-rc3-2026.md). **Sin PHI real** — solo datos sintéticos DEMO/SIM.
 

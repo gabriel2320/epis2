@@ -40,7 +40,7 @@ EPIS2 está en **base demo consolidada y endurecida**: compila, CI `required` ve
 
 | ID | Severidad | Hallazgo | Impacto |
 |----|-----------|----------|---------|
-| **D-01** | Media | `format:check` falla en Windows (CRLF, ~277 archivos) | `quality:release` local no confiable; tag rc3 usó CI + `check` |
+| **D-01** | ~~Media~~ **✓ resuelto** | ~~`format:check` falla en Windows (CRLF, ~277 archivos)~~ | ✓ Tramo 2 MF-DEV-01 — `.gitattributes` + `.editorconfig`; [`epis2-prog-dev-parity-tramo2-close.md`](./epis2-prog-dev-parity-tramo2-close.md) |
 | **D-02** | Baja | `dependency-review` CI rojo | Report-only; deuda deps sin triage |
 | **D-03** | Baja | 6 PRs Dependabot abiertos (#1–5, #13, #17) | Zod 4 (#5) **fuera de alcance**; checkout v6 (#13) evaluar aparte |
 | **D-04** | Media | [`EPIS2_TABLERO.md`](../docs/product/EPIS2_TABLERO.md) muestra MF-FF-08 **READY** | Ledger [`ficha-first-ledger.json`](../docs/quality/ficha-first-ledger.json) dice **DONE** · confunde agentes |

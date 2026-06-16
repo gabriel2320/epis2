@@ -1,6 +1,6 @@
 # EPIS2 — Contexto mínimo para agentes (Cursor)
 
-**Versión:** 4.5 · **Ola 14 ✓** · **STRENGTHEN** 23/23 ✓ · **FICHA-FIRST ✓** · **Consolidación** Fase 0–4 ✓
+**Versión:** 4.6 · **Ola 14 ✓** · **STRENGTHEN** 23/23 ✓ · **FICHA-FIRST ✓** · **Consolidación** Fase 0–4 ✓
 
 > **Brújula de alcance:** [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) · **Gobierno docs:** [`DOCUMENTATION_GOVERNANCE.md`](DOCUMENTATION_GOVERNANCE.md) · **Congelamiento:** [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) · inventario: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md)
 
@@ -60,7 +60,9 @@ Cerrado: MF-IM-01…09 · **MF-CU-01…04** · **MF-IC-01…04** · **MF-FF-01�
 
 Cierre FICHA-FIRST: [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-prog-ficha-first-close-2026.md). **PROG-MEDIA-FUTURE** diferido 2027+.
 
-**Siguiente fase recomendada:** **PROG-POST-RC3** Tramo 2 (DEV-PARITY) · revisión legal `DISCLAIMER.md` · congelamiento vigente. Tag demo: **`v0.1-demo-rc3`**.
+**Siguiente fase recomendada:** **PROG-POST-RC3** Tramo 3 LEGAL — revisión humana `DISCLAIMER.md` · congelamiento vigente. Tag demo: **`v0.1-demo-rc3`**.
+
+Evidencia: Tramo 1 [`epis2-prog-gobierno-post-rc3-tramo1-close.md`](../reports/epis2-prog-gobierno-post-rc3-tramo1-close.md) · Tramo 2 [`epis2-prog-dev-parity-tramo2-close.md`](../reports/epis2-prog-dev-parity-tramo2-close.md).
 
 ---
 
