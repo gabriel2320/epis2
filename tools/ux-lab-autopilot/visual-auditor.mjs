@@ -17,7 +17,11 @@ export function auditScreenshots(walkthrough) {
   for (const name of shots) {
     const path = join(screenshotsDir, name);
     if (!existsSync(path)) {
-      findings.push({ severity: 'UX-MAJOR', id: `SHOT-MISSING-${name}`, message: `screenshot missing: ${name}` });
+      findings.push({
+        severity: 'UX-MAJOR',
+        id: `SHOT-MISSING-${name}`,
+        message: `screenshot missing: ${name}`,
+      });
       continue;
     }
     const size = statSync(path).size;

@@ -23,7 +23,7 @@ function checkUxLabCloseCatalog() {
 
 /** Tier light: script surface + catálogo ux-lab-close (sin quality:required). */
 export function runGates(policy, { tier = 'light' } = {}) {
-  const gateNames = tier === 'full' ? policy.fullGates ?? policy.lightGates : policy.lightGates;
+  const gateNames = tier === 'full' ? (policy.fullGates ?? policy.lightGates) : policy.lightGates;
   const results = [];
 
   for (const name of gateNames) {
@@ -42,7 +42,9 @@ export function runGates(policy, { tier = 'light' } = {}) {
       results.push({
         name,
         ok: run.ok,
-        detail: run.ok ? run.stdout.trim().split('\n').pop() : run.stderr.trim() || run.stdout.trim(),
+        detail: run.ok
+          ? run.stdout.trim().split('\n').pop()
+          : run.stderr.trim() || run.stdout.trim(),
       });
       continue;
     }

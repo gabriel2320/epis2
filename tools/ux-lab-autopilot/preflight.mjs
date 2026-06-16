@@ -26,9 +26,13 @@ export async function runPreflight(mode) {
   });
 
   if (dirtyOutsideReports.length > 0 && mode === 'pr-candidate') {
-    blockers.push(`working tree dirty (${dirtyOutsideReports.length} file(s) outside reports/ux-lab-autopilot)`);
+    blockers.push(
+      `working tree dirty (${dirtyOutsideReports.length} file(s) outside reports/ux-lab-autopilot)`,
+    );
   } else if (dirtyOutsideReports.length > 0) {
-    warnings.push(`working tree has ${dirtyOutsideReports.length} uncommitted change(s) outside bot reports`);
+    warnings.push(
+      `working tree has ${dirtyOutsideReports.length} uncommitted change(s) outside bot reports`,
+    );
   }
 
   let originMaster = '';
@@ -39,7 +43,9 @@ export async function runPreflight(mode) {
     if (headFull !== originFull && mode === 'pr-candidate') {
       blockers.push(`HEAD ${head} != origin/master ${originMaster}`);
     } else if (headFull !== originFull) {
-      warnings.push(`HEAD ${head} != origin/master ${originMaster} (audit-only permite non-master)`);
+      warnings.push(
+        `HEAD ${head} != origin/master ${originMaster} (audit-only permite non-master)`,
+      );
     }
   } catch {
     warnings.push('origin/master no resolvible — omitiendo sync remoto');

@@ -69,9 +69,9 @@ test.describe('UX-G02 — command-first con paciente fijado', () => {
 
     // 11: ficha tradicional (dual chart default) o legacy UX-B.2
     const legacyWorkspace = page.getByTestId('epis2-patient-workspace');
-    await expect(
-      page.getByTestId('epis2-dual-chart-ficha').or(legacyWorkspace),
-    ).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-dual-chart-ficha').or(legacyWorkspace)).toBeVisible({
+      timeout: 15_000,
+    });
     if (await legacyWorkspace.isVisible()) {
       await expect(page.getByTestId('epis2-floating-command-dock')).toBeVisible();
       await expect(page.getByTestId('epis2-ficha-widget-panel')).toHaveCount(0);

@@ -149,8 +149,12 @@ test.describe('EPIS2 UX-LAB Autopilot — Mode A', () => {
       steps.form = 'FAIL';
       recordSignal(signals, 'form-crash', false, 'form', 'react-error-boundary');
     } else {
-      await expect(page.getByTestId('epis2-generated-clinical-page')).toBeVisible({ timeout: 15_000 });
-      const formLocator = page.getByTestId('epis2-form-evolution_note').or(page.getByTestId('epis2-form-save'));
+      await expect(page.getByTestId('epis2-generated-clinical-page')).toBeVisible({
+        timeout: 15_000,
+      });
+      const formLocator = page
+        .getByTestId('epis2-form-evolution_note')
+        .or(page.getByTestId('epis2-form-save'));
       const formVisible = await formLocator.first().isVisible();
       steps.form = formVisible ? 'PASS' : 'FAIL';
       const aiOnForm = page.getByTestId('epis2-ai-degraded-chip');

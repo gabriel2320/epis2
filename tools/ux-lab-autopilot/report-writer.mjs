@@ -67,11 +67,10 @@ export function writeReport({ ctx, mode, gates, walkthrough, classified, date })
     .map(([k, v]) => `- ${k}: ${v}`)
     .join('\n');
 
-  const shotLines = (walkthrough?.screenshots ?? [])
-    .map((s) => `- screenshots/${s}`)
-    .join('\n');
+  const shotLines = (walkthrough?.screenshots ?? []).map((s) => `- screenshots/${s}`).join('\n');
 
-  const blockerLines = classified.blockers.map((b) => `- ${b.id}: ${b.message}`).join('\n') || '- none';
+  const blockerLines =
+    classified.blockers.map((b) => `- ${b.id}: ${b.message}`).join('\n') || '- none';
   const majorLines = classified.major.map((m) => `- ${m.id}: ${m.message}`).join('\n') || '- none';
   const minorLines = classified.minor.map((m) => `- ${m.id}: ${m.message}`).join('\n') || '- none';
 
