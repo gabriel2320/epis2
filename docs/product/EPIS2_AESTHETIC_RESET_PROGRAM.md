@@ -59,12 +59,12 @@ NO modo papel como card secundaria apretada
 ## Criterios rc4
 
 ```text
-[ ] MF-AEST-01 cerrado o signoff explícito
-[ ] MF-AEST-03 cerrado o signoff explícito
-[ ] Modo papel pantalla exclusiva + nav día anterior/siguiente
-[ ] 0 UX-BLOCKER · quality:ux-lab-close verde
-[ ] quality:aesthetic-reset-close verde
-[ ] Walkthrough humano aprobado
+[x] MF-AEST-01 cerrado
+[x] MF-AEST-03 cerrado
+[x] Modo papel pantalla exclusiva + nav día anterior/siguiente
+[x] 0 UX-BLOCKER · quality:ux-lab-close verde
+[x] quality:aesthetic-reset-close verde
+[x] Walkthrough humano aprobado
 ```
 
 **No taguear `v0.1-demo-rc4` si el modo papel sigue embebido en ficha clásica.**

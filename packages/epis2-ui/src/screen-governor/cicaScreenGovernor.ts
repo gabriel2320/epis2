@@ -190,6 +190,7 @@ export function proposeEpisScreen(proposal: ScreenNeedProposal): EpisScreenPropo
     };
   }
 
+  const screenDefinition = buildScreenDefinition(proposal, container);
   return {
     verdict: 'APPROVE',
     container,
@@ -197,6 +198,6 @@ export function proposeEpisScreen(proposal: ScreenNeedProposal): EpisScreenPropo
     reuseScreenId: null,
     requiresHumanReview: true,
     rejectReasons: [],
-    screenDefinition: buildScreenDefinition(proposal, container),
+    ...(screenDefinition ? { screenDefinition } : {}),
   };
 }

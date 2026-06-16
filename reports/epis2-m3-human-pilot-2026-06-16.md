@@ -1,6 +1,6 @@
 # EPIS2 — Piloto humano M3 (2026-06-16)
 
-**Commit:** `c15700a` · **Script:** `npm run quality:m3-human-pilot`
+**Commit:** `c809c1b` · **Script:** `npm run quality:m3-human-pilot`
 
 ---
 

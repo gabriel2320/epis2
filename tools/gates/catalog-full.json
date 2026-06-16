@@ -26,7 +26,7 @@
     },
     "quality:ux-lab-close": {
       "type": "command",
-      "command": "npm run quality:security-promote-gate && npm run quality:golden-journey && npm run quality:ux-pilot && npm run quality:ux-pilot-gate && npm run quality:m3-human-pilot && npm run quality:fast"
+      "command": "npm run quality:security-promote-gate && npm run quality:golden-journey && npm run quality:ux-pilot && npm run quality:ux-pilot-gate && npm run quality:m3-human-pilot && npm run quality:aesthetic-reset-close-gate && npm run quality:pr-aest-07-close-gate && npm run quality:fast"
     },
     "quality:layers-integration-gate": {
       "type": "file",

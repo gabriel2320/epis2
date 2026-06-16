@@ -36,6 +36,13 @@ async function fillEvolutionDraft(page: Page, subjective: string) {
   await page.getByLabel('Plan').fill('Plan demo M3 — seguimiento clínico.');
 }
 
+async function clickAccentChip(page: Page, testId: string) {
+  const chip = page.getByTestId(testId);
+  await chip.scrollIntoViewIfNeeded();
+  await expect(chip).toBeVisible();
+  await chip.click();
+}
+
 test.describe('M3 visual signoff — V1–V6', () => {
   test('V1 — preferencias MTB instantáneas sin botón Guardar', async ({ page }) => {
     await loginAsPhysician(page);
@@ -43,17 +50,17 @@ test.describe('M3 visual signoff — V1–V6', () => {
     await expect(page.getByTestId('epis2-appearance-preferences-page')).toBeVisible();
     await expect(page.getByRole('button', { name: /guardar/i })).toHaveCount(0);
 
-    await page.getByTestId('epis2-accent-tealBlue').click();
+    await clickAccentChip(page, 'epis2-accent-tealBlue');
     const tealStored = await page.evaluate(() =>
       JSON.parse(localStorage.getItem('epis2-theme-preferences-v2') ?? '{}'),
     );
     expect(tealStored.accent).toBe('tealBlue');
 
-    await page.getByTestId('epis2-accent-clinicalBlue').click();
-    const blueStored = await page.evaluate(() =>
+    await clickAccentChip(page, 'epis2-accent-clinicalCalm');
+    const calmStored = await page.evaluate(() =>
       JSON.parse(localStorage.getItem('epis2-theme-preferences-v2') ?? '{}'),
     );
-    expect(blueStored.accent).toBe('clinicalBlue');
+    expect(calmStored.accent).toBe('clinicalCalm');
 
     await goToCommandCenter(page);
     const canvasBg = await page.evaluate(() => {
