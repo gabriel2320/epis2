@@ -12,19 +12,24 @@ const catalog = JSON.parse(readFileSync(join(root, 'tools/gates/catalog-full.jso
 const active = catalog.gates ?? {};
 const archived = catalog.archived ?? {};
 
-if (catalog.prunePhase !== '2') {
-  errors.push('catalog-full.json prunePhase !== 2 — ejecutar apply-archive-prune-phase2.mjs');
+if (catalog.prunePhase !== '2' && catalog.prunePhase !== '3') {
+  errors.push(
+    'catalog-full.json prunePhase !== 2|3 — ejecutar apply-archive-prune-phase2.mjs o promote-aesthetic',
+  );
 }
 
 const activeCount = Object.keys(active).length;
 const archivedCount = Object.keys(archived).length;
 const wired = loadManifestWired();
 
-if (activeCount > 45) {
-  errors.push(`gates activos=${activeCount} (esperado <=45 post phase2)`);
+const activeMax = catalog.prunePhase === '3' ? 58 : 45;
+const activeMin = catalog.prunePhase === '3' ? 48 : 30;
+
+if (activeCount > activeMax) {
+  errors.push(`gates activos=${activeCount} (esperado <=${activeMax} post phase${catalog.prunePhase})`);
 }
-if (activeCount < 30) {
-  errors.push(`gates activos=${activeCount} (esperado >=30 post phase2)`);
+if (activeCount < activeMin) {
+  errors.push(`gates activos=${activeCount} (esperado >=${activeMin} post phase${catalog.prunePhase})`);
 }
 if (archivedCount < 230) {
   errors.push(`gates archived=${archivedCount} (esperado >=230 post phase2)`);

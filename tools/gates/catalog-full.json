@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-06-16T20:40:46.200Z",
-  "source": "catalog-full+prune-phase2",
+  "generatedAt": "2026-06-16T21:34:06.272Z",
+  "source": "catalog-full+aesthetic-promote",
   "note": "Regenerar inventario: node tools/gates/inventory-orphans.mjs",
   "gates": {
     "quality:ci-parity": {
@@ -144,18 +144,6 @@
       "type": "file",
       "path": "scripts/quality/validate-root-script-surface-gate.mjs"
     },
-    "quality:aesthetic-reset-close": {
-      "type": "file",
-      "path": "scripts/quality/validate-aesthetic-reset-close-gate.mjs"
-    },
-    "quality:cica-loop-close": {
-      "type": "file",
-      "path": "scripts/quality/validate-cica-loop-close-gate.mjs"
-    },
-    "quality:pr-aest-07-close": {
-      "type": "file",
-      "path": "scripts/quality/validate-pr-aest-07-close-gate.mjs"
-    },
     "quality:clinical-calm-default-gate": {
       "type": "file",
       "path": "scripts/quality/validate-clinical-calm-default-gate.mjs"
@@ -183,6 +171,58 @@
     "quality:gates-prune-phase2-gate": {
       "type": "file",
       "path": "scripts/quality/validate-gates-prune-phase2-gate.mjs"
+    },
+    "quality:aesthetic-action-density-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-aesthetic-action-density-gate.mjs"
+    },
+    "quality:aesthetic-layout-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-aesthetic-layout-gate.mjs"
+    },
+    "quality:aesthetic-reset-close-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-aesthetic-reset-close-gate.mjs"
+    },
+    "quality:cica-loop-close-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-loop-close-gate.mjs"
+    },
+    "quality:cica-screen-admission-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-screen-admission-gate.mjs"
+    },
+    "quality:cica-screen-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-screen-inventory-gate.mjs"
+    },
+    "quality:classic-chart-composition-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-classic-chart-composition-gate.mjs"
+    },
+    "quality:clinical-command-bar-transversal-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-command-bar-transversal-gate.mjs"
+    },
+    "quality:clinical-navigation-clarity-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-navigation-clarity-gate.mjs"
+    },
+    "quality:no-horizontal-overflow-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-no-horizontal-overflow-gate.mjs"
+    },
+    "quality:paper-mode-standalone-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-mode-standalone-gate.mjs"
+    },
+    "quality:pr-aest-07-close-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-pr-aest-07-close-gate.mjs"
+    },
+    "quality:gates-promote-aesthetic-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-gates-promote-aesthetic-gate.mjs"
     }
   },
   "archived": {
@@ -1675,5 +1715,6 @@
       "archivedAt": "2026-06-16"
     }
   },
-  "prunePhase": "2"
+  "prunePhase": "3",
+  "aestheticPromotedAt": "2026-06-16"
 }
