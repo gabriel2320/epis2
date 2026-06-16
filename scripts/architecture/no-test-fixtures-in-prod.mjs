@@ -14,9 +14,7 @@ export async function validate() {
   for (const pkgRel of ['apps/api/package.json', 'apps/web/package.json']) {
     const pkg = JSON.parse(readFileSync(join(REPO_ROOT, pkgRel), 'utf8'));
     if (pkg.dependencies?.['@epis2/test-fixtures']) {
-      errors.push(
-        `${pkgRel}: @epis2/test-fixtures debe estar en devDependencies, no dependencies`,
-      );
+      errors.push(`${pkgRel}: @epis2/test-fixtures debe estar en devDependencies, no dependencies`);
     }
   }
 

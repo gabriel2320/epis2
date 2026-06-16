@@ -10,7 +10,7 @@ import { Epis2QueryProvider } from './query/Epis2QueryProvider.js';
 import { initDevFixtures } from './fixtures/devFixturesBridge.js';
 
 async function bootstrap() {
-  if (import.meta.env.DEV) {
+  if (import.meta.env.DEV || import.meta.env.VITE_EPIS2_LOAD_DEV_FIXTURES === 'true') {
     await initDevFixtures();
   }
 
