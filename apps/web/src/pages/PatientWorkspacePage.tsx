@@ -1,7 +1,7 @@
 import { copy } from '@epis2/design-system';
 import { detectChronicFocus } from '@epis2/clinical-forms';
 import { getProbablePatientActionChips, inferPatientCareSetting } from '@epis2/command-registry';
-import { getDemoCaseByPatientId } from '@epis2/test-fixtures';
+import { getDemoCaseByPatientId } from '../fixtures/devFixturesBridge.js';
 import { Link, useSearch } from '@tanstack/react-router';
 import { classicModeToDualChartSearch, useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { isDualChartModesEnabled } from '../dev/dualChartModesEnv.js';

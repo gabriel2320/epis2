@@ -1,5 +1,5 @@
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
-import { getDemoChartSectionRows } from '@epis2/test-fixtures';
+import { getDemoChartSectionRows } from '../../../fixtures/devFixturesBridge.js';
 import { Stack } from '@epis2/epis2-ui';
 import {
   formatLabObservedAt,

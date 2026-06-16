@@ -1,5 +1,5 @@
 import { Box, EpisM3Text, Stack } from '@epis2/epis2-ui';
-import type { DemoChartSectionRow } from '@epis2/test-fixtures';
+import type { DemoChartSectionRow } from '../../../fixtures/devFixturesBridge.js';
 
 export type TraditionalSectionDataTableProps = {
   rows: readonly DemoChartSectionRow[];

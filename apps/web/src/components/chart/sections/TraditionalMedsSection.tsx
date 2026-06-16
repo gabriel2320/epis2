@@ -1,7 +1,7 @@
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { mapMarRowsToDenseTabular } from '@epis2/clinical-productivity';
 import { Stack } from '@epis2/epis2-ui';
-import { getDemoChartSectionRows } from '@epis2/test-fixtures';
+import { getDemoChartSectionRows } from '../../../fixtures/devFixturesBridge.js';
 import {
   formatMedicationLine,
   partitionMedicationZones,

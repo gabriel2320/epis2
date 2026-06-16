@@ -1,5 +1,6 @@
 export {
   getDemoNarrativeById,
   getPrimaryNarrativeForDemoCode,
+  listDemoNarrativeEpisodes,
   type DemoNarrativeEpisode,
-} from '@epis2/test-fixtures';
+} from '../fixtures/devFixturesBridge.js';

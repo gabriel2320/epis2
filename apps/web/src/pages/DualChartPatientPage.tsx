@@ -1,6 +1,6 @@
 import { copy } from '@epis2/design-system';
 import { buildClinicalContextDense } from '@epis2/clinical-domain';
-import { getDemoCaseByPatientId } from '@epis2/test-fixtures';
+import { getDemoCaseByPatientId } from '../fixtures/devFixturesBridge.js';
 import { useSearch } from '@tanstack/react-router';
 import { useEffect, useMemo, useState } from 'react';
 import type {

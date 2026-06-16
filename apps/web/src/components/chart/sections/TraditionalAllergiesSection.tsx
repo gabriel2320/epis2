@@ -1,7 +1,7 @@
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import { EpisButton, Stack } from '@epis2/epis2-ui';
-import { getDemoChartSectionRows } from '@epis2/test-fixtures';
+import { getDemoChartSectionRows } from '../../../fixtures/devFixturesBridge.js';
 import { formatAllergyLine } from '../../clinical-summary/clinicalSummaryData.js';
 import { TraditionalSectionDataTable } from './TraditionalSectionDataTable.js';
 

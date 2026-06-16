@@ -1,6 +1,6 @@
 import { mapLabelValueRowsToDenseTabular } from '@epis2/clinical-productivity';
 import { Stack } from '@epis2/epis2-ui';
-import { getDemoChartSectionRows } from '@epis2/test-fixtures';
+import { getDemoChartSectionRows } from '../../../fixtures/devFixturesBridge.js';
 import { TraditionalDenseSectionGrid } from './TraditionalDenseSectionGrid.js';
 
 export type TraditionalOrdersSectionProps = {

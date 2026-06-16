@@ -1,4 +1,4 @@
-import { hasDemoTraditionalSectionContent } from '@epis2/test-fixtures';
+import { hasDemoTraditionalSectionContent } from '../../fixtures/devFixturesBridge.js';
 import { TRADITIONAL_SECTION_IDS, type TraditionalSectionId } from './TraditionalSectionNav.js';
 
 /** IDs nav visibles — oculta secciones demo vacías (MF-NORM-10). */
