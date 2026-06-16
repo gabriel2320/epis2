@@ -24,7 +24,7 @@
 | Autocomplete paciente | ✓ | `PatientSearchAutocomplete` |
 | Journey golden V2 | ✓ | `e2e/golden-v2-admission-discharge.spec.ts` · CI 10/10 |
 | RAD evolution + draft-review | ✓ | registry `done` |
-| Blueprint `procedure_request` (IDC 57) | ✓ | [`epis2-fase-b-lote-4-2026-06-04.md`](./epis2-fase-b-lote-4-2026-06-04.md) |
+| Blueprint `procedure_request` (IDC 57) | ✓ | [`epis2-fase-b-lote-4-2026-06-04.md`](./archive/2026-06/epis2-fase-b-lote-4-2026-06-04.md) |
 | Cierre encuentro UI + API | ✓ | `outpatient_visit.closeEncounter` |
 | `dashboard-pharmacy` → done | ✓ | `quality:tramo-j-pharmacy-gate` |
 | Nota procedimiento clínica (≠ solicitud) | **Defer** | PEND-002 · IDC 58+ · Ola 2+/3 |

@@ -29,6 +29,16 @@ Planes superseded, auditorías duplicadas pre-consolidación, briefs OpenClaw/au
 
 **Total lote 1:** 30 archivos.
 
+## Lote 2 (2026-06-16, PROG-E2E-HYGIENE / MF-CON-03)
+
+Sesiones masivas 2026-06-04 — CE/UX/command-center, fases B/C, Ollama, three-modes. Superseded por brújula y cierres jun-09+.
+
+| Patrón | Cantidad | Motivo |
+|--------|----------|--------|
+| `epis2-*-2026-06-04.md` | 46 | Sesiones jun-04 históricas; punteros actualizados en docs canon |
+
+**Total lote 2:** 46 archivos.
+
 ## Próximo lote
 
-Briefs duplicados M3, sesiones jun-04 masivas, planes fase B/C — revisar manualmente.
+Auditorías 2026-06-07 masivas, briefs M3 duplicados, planes fase B/C restantes — revisar manualmente.

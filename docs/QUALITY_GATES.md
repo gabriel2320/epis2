@@ -144,7 +144,7 @@ Roadmap: [`ROADMAP.md`](ROADMAP.md) § EPIS2-PM-01 · Plan: [`EPIS2_THREE_MODES_
 
 Sub-gates: `quality:login-command-home-gate` · `quality:mode-switcher-gate` · `quality:command-center-hub-gate`.
 
-Cierre PROG-THREE-MODES (MF-01…08): `reports/epis2-prog-three-modes-closure-2026-06-04.md`.
+Cierre PROG-THREE-MODES (MF-01…08): `reports/archive/2026-06/epis2-prog-three-modes-closure-2026-06-04.md`.
 
 ---
 

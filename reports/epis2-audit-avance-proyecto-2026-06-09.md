@@ -132,9 +132,9 @@ Specs E2E en CI: `golden-command-evolution`, `golden-draft-approval`, `golden-v2
 | [epis2-ci-e2e-closure-2026-06-09.md](./epis2-ci-e2e-closure-2026-06-09.md) | Cierre CI E2E verde |
 | [epis2-e2e-failure-plan-2026-06-09.md](./epis2-e2e-failure-plan-2026-06-09.md) | Plan corrección E2E |
 | [epis2-dev-system-sdepsis2-2026-06-09.md](./epis2-dev-system-sdepsis2-2026-06-09.md) | Unificación nomenclatura |
-| [epis2-audit-ci-e2e-2026-06-04.md](./epis2-audit-ci-e2e-2026-06-04.md) | Auditoría infra CI |
-| [epis2-prog-three-modes-closure-2026-06-04.md](./epis2-prog-three-modes-closure-2026-06-04.md) | Cierre tres modos |
-| [epis2-general-audit-2026-06-04.md](./epis2-general-audit-2026-06-04.md) | Auditoría general jun-04 |
+| [epis2-audit-ci-e2e-2026-06-04.md](./archive/2026-06/epis2-audit-ci-e2e-2026-06-04.md) | Auditoría infra CI |
+| [epis2-prog-three-modes-closure-2026-06-04.md](./archive/2026-06/epis2-prog-three-modes-closure-2026-06-04.md) | Cierre tres modos |
+| [epis2-general-audit-2026-06-04.md](./archive/2026-06/epis2-general-audit-2026-06-04.md) | Auditoría general jun-04 |
 
 ---
 
