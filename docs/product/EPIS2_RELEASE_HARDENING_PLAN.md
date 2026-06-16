@@ -24,7 +24,7 @@ No agregar pantallas clínicas. No Zod 4 en master (programa aparte: `PROG-ZOD4-
 | **RH-03** | ✓ DONE | Gitleaks report-only |
 | **RH-04** | ✓ DONE | dependency-review + audit JSON |
 | **RH-05** | ✓ DONE | CycloneDX SBOM |
-| **RH-06** | PR #16 | `no-test-fixtures-in-prod-web` + bridge web |
+| **RH-06** | ✓ DONE | bridge web + gate prod · PR #16 |
 | **RH-07** | ✓ DONE | fail-closed AUTH demo/hybrid deployed |
 | **RH-08** | ✓ DONE | `quality:release` + `security:no-bidi` |
 
@@ -36,8 +36,9 @@ Workflows RH-02…05: **`continue-on-error: true`** — no required checks.
 
 ```text
 PR #15  RH-01 + RH-02…05 + RH-07 + RH-08  ✓ merged
-PR #16  RH-06 web fixtures bridge  (abierto)
+PR #16  RH-06 web fixtures bridge  ✓ merged
 PR #14  Dependabot setup-node v6 — cerrado (superseded)
+Promoción futura: Gitleaks → blocking · CodeQL → required · audit alinear nightly
 ```
 
 ---
