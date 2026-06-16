@@ -13,30 +13,60 @@ Blindar `master` con required checks reales y alinear README/operación con cier
 
 ---
 
-## Required checks configurados
+## Branch protection `master` — ✓ aplicada
 
-Configuración vía GitHub API (`branches/master/protection`) · operador ADMIN.
+API: `PUT repos/gabriel2320/epis2/branches/master/protection` · permiso **ADMIN**.
 
-| Context (check name) | Workflow | Modo |
-|----------------------|----------|------|
-| `required` | CI | blocking |
-| `e2e-dual-chart` | CI | blocking |
-| `gitleaks (blocking)` | RH-09 Gitleaks | blocking |
-| `CodeQL (javascript-typescript, blocking) (javascript-typescript)` | RH-10 CodeQL | blocking |
-| `dependency-review (blocking)` | RH-11 (solo PR) | blocking |
+| Setting | Valor |
+|---------|-------|
+| Strict status checks | `true` |
+| PR reviews requeridas | `0` aprobaciones (solo flujo PR) |
+| Force push | deshabilitado |
 
-**Strict:** `true` — HEAD del PR debe incluir checks del merge base actualizado.
+### Required checks (context exacto GitHub)
 
-**PR reviews:** 0 requeridas (repo demo; ajustar si equipo crece).
+| Context | Workflow |
+|---------|----------|
+| `required` | CI |
+| `e2e-dual-chart` | CI |
+| `gitleaks (blocking)` | RH-09 |
+| `CodeQL (javascript-typescript, blocking) (javascript-typescript)` | RH-10 |
+| `dependency-review (blocking)` | RH-11 |
+
+Verificación:
+
+```bash
+gh api repos/gabriel2320/epis2/branches/master/protection
+```
 
 ---
 
-## PR verificación
+## Prerrequisito dependency-review — ✓ resuelto
 
-| Campo | Valor |
-|-------|-------|
-| PR | _completar tras apertura MF-LOCK-RC3-01_ |
-| Checks verdes | _captura / enlace Actions_ |
+Primer run falló: *Dependency graph not enabled*.
+
+Acciones API:
+
+- `PUT repos/.../vulnerability-alerts` → 204
+- `PATCH security_and_analysis.dependabot_security_updates` → enabled
+- GraphQL: `dependencyGraphManifests.totalCount` = **25**
+
+Rerun workflow → `dependency-review (blocking)` **pass**.
+
+---
+
+## PR verificación — [#23](https://github.com/gabriel2320/epis2/pull/23)
+
+| Check | Resultado |
+|-------|-----------|
+| `required` | ✓ pass (~8m47s) |
+| `e2e-dual-chart` | ✓ pass |
+| `gitleaks (blocking)` | ✓ pass |
+| `CodeQL (javascript-typescript, blocking) (javascript-typescript)` | ✓ pass |
+| `dependency-review (blocking)` | ✓ pass (tras enable graph) |
+| `npm-audit-report` | ✓ pass (report-only, no required) |
+
+**No required:** Cursor Bugbot · CodeQL (duplicate advisory check) · npm-audit-report
 
 ---
 
@@ -44,11 +74,9 @@ Configuración vía GitHub API (`branches/master/protection`) · operador ADMIN.
 
 | Artefacto | Estado |
 |-----------|--------|
-| `origin/master` | POST-RC3 + RH-09/10/11 |
-| Release latest | `v0.1-demo-rc3` (notas pre-promoción security — ver abajo) |
+| `origin/master` | POST-RC3 + RH-09/10/11 · protegido tras merge #23 |
+| Release latest | `v0.1-demo-rc3` — nota POST-RC3 añadida en release body |
 | README | PROG-POST-RC3 ✓ |
-
-**Nota release:** body rc3 describe RH report-only (correcto al tag). POST-RC3 security promote vive en `master` posterior; no re-tag forzado.
 
 ---
 
