@@ -61,7 +61,7 @@ Cerrado: … · **PROG-POST-RC3** · **PROG-CDS-UX**.
 
 Cierre FICHA-FIRST: [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-prog-ficha-first-close-2026.md). **PROG-MEDIA-FUTURE** diferido 2027+.
 
-**Siguiente fase recomendada:** operador — branch protection checks RH-09/10/11 en `master` · programas diferidos (`PROG-ZOD4-MIGRATION`, batch devDeps). **Sin programa clínico activo** — congelamiento vigente. Tag demo: **`v0.1-demo-rc3`**.
+**Siguiente fase recomendada:** **PROG-UX-LAB** — piloto UX moderno post-RC3 · [`quality/EPIS2_UX_LAB_MODERN_PLAN.md`](quality/EPIS2_UX_LAB_MODERN_PLAN.md). Operador: branch protection RH-12 audit periódico · programas diferidos (`PROG-ZOD4-MIGRATION`, batch devDeps). **Sin features clínicas nuevas** — congelamiento vigente. Tag demo: **`v0.1-demo-rc3`**.
 
 Cierre POST-RC3: [`epis2-prog-post-rc3-close.md`](../reports/epis2-prog-post-rc3-close.md).
 

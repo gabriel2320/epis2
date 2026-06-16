@@ -1,10 +1,26 @@
 # EPIS2 — Tablero de desarrollo
 
-**Actualizado:** 2026-06-16 · **STRENGTHEN** 23/23 ✓ · **PROG-CONSOLIDATE** ola 1+2 ✓ · **PROG-RELEASE-HARDENING** ✓ · tag **`v0.1-demo-rc3`**
+**Actualizado:** 2026-06-16 · **PROG-POST-RC3** ✓ · **MF-LOCK** ✓ · **RH-12** ✓ · tag **`v0.1-demo-rc3`**
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Brújula:** [`EPIS2_CURRENT_STATE.md`](../EPIS2_CURRENT_STATE.md)
 
-> **PROG-STRENGTHEN** ✓ **23/23 cerrado** · **PROG-FICHA-FIRST** ✓ · **PROG-CONSOLIDATE** ✓ Fase 0–4 · PR [#6](https://github.com/gabriel2320/epis2/pull/6)
+> **Congelamiento vigente** — sin features clínicas nuevas salvo MF autorizada.  
+> **Siguiente:** **PROG-UX-LAB** · [`EPIS2_UX_LAB_MODERN_PLAN.md`](../quality/EPIS2_UX_LAB_MODERN_PLAN.md) · auditoría [`epis2-audit-estado-2026-06-16.md`](../../reports/epis2-audit-estado-2026-06-16.md)
+
+---
+
+## Propuesto — PROG-UX-LAB (Clinical Shift Lab)
+
+Plan: [`EPIS2_UX_LAB_MODERN_PLAN.md`](../quality/EPIS2_UX_LAB_MODERN_PLAN.md) · baseline GO DEMO 2026-06-04
+
+| Tramo | MF | Objetivo | Gate |
+|-------|-----|----------|------|
+| A | MF-UXLAB-00 | Charter + baseline gates | `quality:fast` |
+| B | MF-UXLAB-01 | Censo narrativo + Shift Context Strip | `quality:ux-pilot` |
+| C | MF-UXLAB-02 | Papel + estados visuales unificados | `quality:m3-human-pilot` |
+| D | MF-UXLAB-03 | Telemetría piloto + cierre humano | gates cierre § plan |
+
+**No-goals:** nuevo home · tokens `clinical.*` paralelos · features clínicas · personas Evolab acopladas al core.
 
 ---
 
@@ -52,7 +68,7 @@ Plan: [`EPIS2_RELEASE_HARDENING_PLAN.md`](./EPIS2_RELEASE_HARDENING_PLAN.md) · 
 
 Evidencia: [`epis2-session-close-2026-06-16-release-hardening.md`](../../reports/epis2-session-close-2026-06-16-release-hardening.md) · [`epis2-v0.1-demo-rc3-release.md`](../../reports/epis2-v0.1-demo-rc3-release.md)
 
-**Siguiente:** Tramo 3 PROG-LEGAL-DISCLAIMER · revisión [`DISCLAIMER.md`](../DISCLAIMER.md) · congelamiento vigente
+**Cierre:** PROG-POST-RC3 tramo 3 LEGAL ✓ · DISCLAIMER v1.1
 
 
 ## Cerrado — PROG-CONCILIACION-TRIADA-2026
@@ -127,11 +143,22 @@ Plan: [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-
 | 4 DEPS | ✓ | MF-DEP-01 triage |
 | 5 SECURITY | ✓ | RH-09/10/11 blocking |
 
-**Siguiente:** branch protection master (checks RH-09/10/11) · programas diferidos (`PROG-ZOD4-MIGRATION`, batch devDeps)
+**Post-cierre operador:** MF-LOCK-RC3-01 ✓ PR [#23](https://github.com/gabriel2320/epis2/pull/23) · RH-12 ✓ PR [#26](https://github.com/gabriel2320/epis2/pull/26)+[#27](https://github.com/gabriel2320/epis2/pull/27)
 
 ---
 
-## En curso — PROG-STRENGTHEN-2026 ✓ cerrado
+## Cerrado — MF-LOCK + RH-12 (2026-06-16)
+
+| Entrega | Evidencia |
+|---------|-----------|
+| Branch protection 5 checks | [`epis2-branch-protection-verify-2026-06-16.md`](../../reports/epis2-branch-protection-verify-2026-06-16.md) |
+| RH-12 audit/apply workflow | audit PASS · secret `EPIS2_REPO_ADMIN_TOKEN` |
+
+**Diferido:** `PROG-ZOD4-MIGRATION` · batch devDeps · `PROG-E2E-HYGIENE` · `PROG-COMPACTACION`
+
+---
+
+## Cerrado — PROG-STRENGTHEN-2026
 
 **Progreso:** **23/23** MF cerradas · Ola 14 ✓ (MF-IC-04 HL7 hardening) · [`epis2-prog-strengthen-close-2026.md`](../../reports/epis2-prog-strengthen-close-2026.md)
 

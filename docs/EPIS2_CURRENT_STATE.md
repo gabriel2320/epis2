@@ -97,6 +97,8 @@ Congelamiento vigente ([`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md)): **
 
 Plan detallado: [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-plan-post-rc3-2026.md). **Sin PHI real** — solo datos sintéticos DEMO/SIM.
 
+**Siguiente programa propuesto:** **PROG-UX-LAB** — [`quality/EPIS2_UX_LAB_MODERN_PLAN.md`](quality/EPIS2_UX_LAB_MODERN_PLAN.md) (Clinical Shift Lab · 4 tramos · congelamiento vigente).
+
 ---
 
 ## Mapa módulo × acción
