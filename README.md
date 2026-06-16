@@ -102,6 +102,8 @@ Node: ver [`.nvmrc`](.nvmrc) (20). CI usa Node 20.
 
 Runbook RLS: [`docs/ops/RLS_STAGING_RUNBOOK.md`](docs/ops/RLS_STAGING_RUNBOOK.md)
 
+Legal: [`DISCLAIMER.md`](DISCLAIMER.md) · [`SECURITY.md`](SECURITY.md) · [`CONTRIBUTING.md`](CONTRIBUTING.md) · [`LICENSE`](LICENSE)
+
 ---
 
 ## Documentación viva

@@ -12,6 +12,9 @@ const REQUIRED_DOCS = [
   'reports/archive/2026-06/README.md',
 ];
 
+/** MF-CON-10 — documentación legal mínima en raíz (revisión humana recomendada). */
+const REQUIRED_ROOT_LEGAL = ['LICENSE', 'SECURITY.md', 'DISCLAIMER.md', 'CONTRIBUTING.md'];
+
 const WEB_FORBIDDEN_IMPORTS = [
   '@epis2/local-ai',
   'services/local-ai',
@@ -24,6 +27,12 @@ export async function validate() {
   for (const doc of REQUIRED_DOCS) {
     if (!existsSync(join(REPO_ROOT, doc))) {
       errors.push(`Falta doc gobierno: ${doc}`);
+    }
+  }
+
+  for (const doc of REQUIRED_ROOT_LEGAL) {
+    if (!existsSync(join(REPO_ROOT, doc))) {
+      errors.push(`Falta doc legal raíz: ${doc}`);
     }
   }
 
