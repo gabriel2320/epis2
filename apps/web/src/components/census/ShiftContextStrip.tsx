@@ -7,10 +7,7 @@ export function ShiftContextStrip() {
   const pendientes = listDemoShiftCensusPresentations();
 
   return (
-    <EpisWorkspaceSection
-      title={copy.censusShift.stripTitle}
-      testId="epis2-shift-context-strip"
-    >
+    <EpisWorkspaceSection title={copy.censusShift.stripTitle} testId="epis2-shift-context-strip">
       <Stack spacing={1.5}>
         <EpisM3Text role="bodyMedium" color="text.secondary">
           {copy.censusShift.stripSubtitle}
