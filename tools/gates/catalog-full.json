@@ -1143,6 +1143,10 @@
     "quality:e2e-transversal-bar-gate": {
       "type": "file",
       "path": "scripts/quality/validate-e2e-transversal-bar-gate.mjs"
+    },
+    "quality:gates-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-gates-inventory-gate.mjs"
     }
   }
 }
