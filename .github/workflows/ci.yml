@@ -1,5 +1,7 @@
 name: CI
 
+# MF-CON-11 — tier required (PR). Paridad extendida: ci-nightly.yml · experimental: ci-experimental.yml
+
 on:
   push:
     branches: [main, master]
@@ -7,7 +9,7 @@ on:
     branches: [main, master]
 
 jobs:
-  check:
+  required:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -25,7 +27,6 @@ jobs:
           --health-retries 5
     env:
       DATABASE_URL: postgresql://epis2_app:epis2@localhost:5432/epis2
-      # Legacy golden/UX E2E esperan ficha UX-B.2; dual chart va en job e2e-dual-chart.
       VITE_ENABLE_DUAL_CHART_MODES: 'false'
     steps:
       - uses: actions/checkout@v4
@@ -36,25 +37,8 @@ jobs:
       - run: npm ci
       - run: npm run build:ci-fixtures-chain
       - run: npm run db:migrate
-      - run: npm run quality:case-intel-closure-gate
-      - run: npm run check
-      - run: npm run format:check
-      - run: npm run quality:openapi-gate
-      - run: npm run quality:pm01
-      - run: npm run quality:layers-integration-gate
-      - run: npm run theme:validate
-      - run: npm run test -- --reporter=default --reporter=json --outputFile=reports/.vitest-ci-parity-temp.json
-      - run: npm run quality:ci-parity -- --from-report=reports/.vitest-ci-parity-temp.json
-      - run: npx playwright install --with-deps chromium
-      - run: npm run build -w @epis2/web
-      - run: npm run test:e2e
-      - run: npm run db:validate
-      - run: npm run ai:evals
-      - run: npm run quality:golden-journey
-      - run: npm run qa:bundle-analyze
-      - run: npm audit --omit=dev --audit-level=high
+      - run: npm run quality:required
 
-  # Entrega C-4 — E2E dual ficha opt-in (flag off en job principal para legacy E2E).
   e2e-dual-chart:
     runs-on: ubuntu-latest
     services:

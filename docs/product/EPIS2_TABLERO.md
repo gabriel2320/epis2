@@ -32,8 +32,10 @@ Evidencia: [`epis2-prog-consolidate-close-2026.md`](../../reports/epis2-prog-con
 | **MF-CON-05** | ✓ DONE | Demo auth killswitch · PR [#8](https://github.com/gabriel2320/epis2/pull/8) |
 | **MF-CON-06** | ✓ DONE | Baseline HTTP (CSP, cookies, CORS) · PR [#9](https://github.com/gabriel2320/epis2/pull/9) |
 | **MF-CON-07** | ✓ DONE | Rate limit Redis/Valkey · PR [#10](https://github.com/gabriel2320/epis2/pull/10) |
+| **MF-CON-03** | **PR [#11](https://github.com/gabriel2320/epis2/pull/11)** | Gobierno monorepo + validator architecture |
+| **MF-CON-11** | **PR [#11](https://github.com/gabriel2320/epis2/pull/11)** | CI required / nightly / experimental |
 
-**Siguiente:** **MF-CON-03** gobierno monorepo · plan [`EPIS2_CONSOLIDATION_PHASE2_PLAN.md`](./EPIS2_CONSOLIDATION_PHASE2_PLAN.md)
+**Siguiente:** merge PR MF-CON-03+11 · MF-CON-09 fixtures · plan [`EPIS2_CONSOLIDATION_PHASE2_PLAN.md`](./EPIS2_CONSOLIDATION_PHASE2_PLAN.md)
 
 
 ## Cerrado — PROG-CONCILIACION-TRIADA-2026

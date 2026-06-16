@@ -18,7 +18,7 @@ Flujo mínimo: **censo → ficha dual → borrador → aprobación humana**. IA 
 
 | Aspecto | Estado |
 |---------|--------|
-| Base demo v0.1 | Compila, golden journey, ficha-first ✓ |
+| Base demo v0.1 | Compila, golden journey, ficha-first ✓ · tag **`v0.1-demo-rc`** |
 | Programa activo | **PROG-CONSOLIDATE ola 2** — hardening (auth, config, rate limit) |
 | Congelamiento | Sin features clínicas nuevas salvo MF autorizada |
 | Producción / PHI | **No listo** — ver seguridad abajo |

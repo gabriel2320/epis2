@@ -30,4 +30,10 @@ describe('architecture validators (smoke)', () => {
     const result = await devCatalogGates();
     expect(result.ok, result.details?.join('\n')).toBe(true);
   });
+
+  it('monorepo-governance (MF-CON-03) pasa en repo limpio', async () => {
+    const { validate: monorepoGovernance } = await import('./monorepo-governance.mjs');
+    const result = await monorepoGovernance();
+    expect(result.ok, result.details?.join('\n')).toBe(true);
+  });
 });

@@ -13,7 +13,7 @@
 
 EPIS2 **compila y demuestra** un flujo clínico mínimo (censo → ficha dual → borrador → aprobación) con IA opcional. Los programas recientes **PROG-FICHA-FIRST**, **PROG-STRENGTHEN** y **PROG-CDS-UX** están cerrados.
 
-El problema operativo principal (**superficie npm/gates**) se abordó con **PROG-CONSOLIDATE ola 1 ✓** (Fases 0–4). **Ola 2** = gobierno + hardening — ver [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md).
+El problema operativo principal (**superficie npm/gates**) se abordó con **PROG-CONSOLIDATE ola 1 ✓** (Fases 0–4). **Ola 2** = gobierno + hardening — ver [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md). Tag **`v0.1-demo-rc`** (2026-06-15): demo consolidada, guards staging/prod, rate limit Redis, docs canon.
 
 **Git:** una rama productiva (`master`). Las “ramas truncadas” son **módulos a medias en master**, no branches git olvidadas.
 

@@ -5,6 +5,7 @@
     "npm run check",
     "npm run test",
     "npm run db:validate",
-    "npm run quality:ficha-first-gate"
+    "npm run quality:ficha-first-gate",
+    "npm run format:check"
   ]
 }
