@@ -117,17 +117,17 @@ Evidencia: [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/ep
 
 ## Activo — PROG-POST-RC3 (gobierno + higiene)
 
-Plan: [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-rc3-2026.md) · Tramo 1: [`epis2-prog-gobierno-post-rc3-tramo1-close.md`](../../reports/epis2-prog-gobierno-post-rc3-tramo1-close.md) · Tramo 2: [`epis2-prog-dev-parity-tramo2-close.md`](../../reports/epis2-prog-dev-parity-tramo2-close.md)
+Plan: [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-rc3-2026.md) · Tramo 1: [`epis2-prog-gobierno-post-rc3-tramo1-close.md`](../../reports/epis2-prog-gobierno-post-rc3-tramo1-close.md) · Tramo 2: [`epis2-prog-dev-parity-tramo2-close.md`](../../reports/epis2-prog-dev-parity-tramo2-close.md) · Tramo 3 MF-LEG-01: [`epis2-prog-legal-disclaimer-tramo3-mf-leg-01.md`](../../reports/epis2-prog-legal-disclaimer-tramo3-mf-leg-01.md)
 
 | Tramo | Estado | Entrega |
 |-------|--------|---------|
 | **Tramo 1** | ✓ DONE | PROG-GOBIERNO-POST-RC3 · MF-GOV-01…04 |
 | **Tramo 2** | ✓ DONE | PROG-DEV-PARITY · MF-DEV-01…02 · `.gitattributes` + `quality:release` local |
-| **Tramo 3** | **siguiente** | LEGAL · revisión `DISCLAIMER.md` |
+| **Tramo 3** | **en curso** | LEGAL · MF-LEG-01 ✓ checklist · **MF-LEG-02** pendiente sign-off humano |
 | Tramo 4 | pendiente | DEPS · triage Dependabot |
 | Tramo 5 | pendiente | SECURITY-PROMOTE · Gitleaks/CodeQL blocking |
 
-**Siguiente:** Tramo 3 LEGAL · congelamiento vigente
+**Siguiente:** completar sign-off §5 en [`docs/legal/EPIS2_LEGAL_REVIEW_CHECKLIST.md`](../legal/EPIS2_LEGAL_REVIEW_CHECKLIST.md) → MF-LEG-02 DISCLAIMER v1.1
 
 ---
 
@@ -246,7 +246,7 @@ Hilos C / PAPER / comando absorbidos en tres frentes. C-3 ✓ · MF-PAPER-01…0
 
 | Frente | Ola 1 READY | Olas 2–6 |
 |--------|-------------|----------|
-| **A Papel** | MF-PA-01 planner mes | print · paginación · secciones VIII–XIV · mirror · signoff |
+| **A Papel** | ✓ MF-PA-01…08 DONE | mirror · signoff · ver `tres-frentes-ledger.json` |
 | **B Electrónica** | MF-TE-01 C-4 staging | **16 secciones vacías → contenido** · Calm · signoff |
 | **C Comando+IA** | MF-CM-01 barra unificada | palette=NL · assist · panel IA · signoff |
 

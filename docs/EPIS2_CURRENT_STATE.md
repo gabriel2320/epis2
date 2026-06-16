@@ -89,7 +89,7 @@ Siguiente programa **PROG-POST-RC3** — tramos propuestos (un tramo por sesión
 |-------|---------|--------|
 | PROG-GOBIERNO-POST-RC3 | Docs · tablero · brújula | ✓ Tramo 1 · [`epis2-prog-gobierno-post-rc3-tramo1-close.md`](../reports/epis2-prog-gobierno-post-rc3-tramo1-close.md) |
 | **PROG-DEV-PARITY** | CRLF / `quality:release` local Windows | ✓ Tramo 2 · [`epis2-prog-dev-parity-tramo2-close.md`](../reports/epis2-prog-dev-parity-tramo2-close.md) |
-| PROG-LEGAL-DISCLAIMER | Revisión humana DISCLAIMER | pendiente (Tramo 3) |
+| PROG-LEGAL-DISCLAIMER | MF-LEG-01 checklist · MF-LEG-02 sign-off | en curso (Tramo 3) · [`epis2-prog-legal-disclaimer-tramo3-mf-leg-01.md`](../reports/epis2-prog-legal-disclaimer-tramo3-mf-leg-01.md) |
 | PROG-DEPS-HYGIENE | Triage Dependabot | pendiente (Tramo 4) |
 | PROG-SECURITY-PROMOTE | RH-09+ blocking opcional | pendiente (Tramo 5) |
 
