@@ -24,7 +24,7 @@ else {
   }
 }
 
-const themeValidate = spawnSync('npm', ['run', 'theme:validate'], {
+const themeValidate = spawnSync('npm', ['run', 'tool:script', '--', 'theme:validate'], {
   cwd: root,
   shell: true,
   stdio: 'inherit',
