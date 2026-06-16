@@ -49,6 +49,17 @@ Auditorías y sesiones 2026-06-07 — tramos A–K, RAD-M3, UX-G02, dev-automati
 
 **Total lote 3:** 42 archivos.
 
+## Lote 4 (2026-06-16, MF-CON-03)
+
+Auditorías y cierres 2026-06-09 + hitos bootstrap EPIS2-00…12 (superseded por brújula post-rc3).
+
+| Patrón | Cantidad | Motivo |
+|--------|----------|--------|
+| `epis2-*-2026-06-09.md` | 23 | Sesiones jun-09 históricas; tablero/docs actualizados |
+| `epis2-0[0-9]-*.md`, `epis2-1[0-2]-*.md` | 13 | Hitos bootstrap EPIS2-00…12; ROADMAP apunta a archive |
+
+**Total lote 4:** 36 archivos.
+
 ## Próximo lote
 
-Briefs M3 duplicados, planes EPIS2-00…12, auditorías jun-09 — revisar manualmente.
+Briefs M3 duplicados, planes pre-unificado jun-10…14 — revisar manualmente.

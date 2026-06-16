@@ -128,7 +128,7 @@ Plan detallado: [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-pla
 | OpenMRS / Carbon / EPIS overlay | Fósil | No | **Archive** — solo `migration/` + audit scripts |
 | `scripts/dev-agent` OpenClaw | Dev tooling | No | **Tools** — no producto clínico |
 | ~240 gates `validate-*` | Histórico MF | No | **Consolidar** — meta-gates abajo |
-| ~460 `reports/*.md` (raíz) | Histórico | No | **Archive** progresivo · lote 1 → `reports/archive/2026-06/` |
+| ~379 `reports/*.md` (raíz) | Histórico | No | **Archive** progresivo · lotes 1–4 → `reports/archive/2026-06/` (154) |
 
 ---
 

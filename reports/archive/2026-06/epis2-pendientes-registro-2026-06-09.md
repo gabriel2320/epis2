@@ -7,7 +7,7 @@
 |----|-----------|-----------|--------------|
 | PEND-001 | ~~P1~~ **Cerrado 2026-06-09** | ~~Signoff Tramo J farmacia~~ → técnico + signoff · `fa38e4d` · [`epis2-tramo-j-signoff-2026-06-09.md`](./epis2-tramo-j-signoff-2026-06-09.md) | Hilo D |
 | PEND-002 | ~~P1~~ **Defer → backlog** | Nota procedimiento clínica (IDC 58+ ≠ `procedure_request`) · Ola 2+/3 · no bloquea Hilo B | Backlog |
-| PEND-003 | ~~P2~~ **Cerrado 2026-06-09** | ~~E2E `tramo-c-admission` + ficha-history~~ → `reports/epis2-tramo-c-admission-e2e-fix-2026-06-09.md` (3/3 E2E) | Calidad |
+| PEND-003 | ~~P2~~ **Cerrado 2026-06-09** | ~~E2E `tramo-c-admission` + ficha-history~~ → `reports/archive/2026-06/epis2-pendientes-registro-2026-06-09.md` (3/3 E2E) | Calidad |
 | PEND-004 | P2 | Patrón combobox MUI en E2E | Calidad |
 | PEND-005 | P2 | Hitos Ola 1C / 1D | Ola 1 |
 | PEND-006 | ~~P1~~ **Código cerrado 2026-06-09** | Impresión + piloto M3 | Ola 3 · receta A5 ✓ · cert A5 ✓ · epicrisis Carta ✓ · **lab/imagen A5 ✓** (registry `PRINTABLE_BLUEPRINTS` + 5 E2E en CI · [reporte](./epis2-f1-f2-limpieza-print-2026-06-09.md)) · m3-human-pilot automatizado cerrado ([reporte](./epis2-m3-human-pilot-2026-06-09.md)) · resta solo signoff humano opcional |

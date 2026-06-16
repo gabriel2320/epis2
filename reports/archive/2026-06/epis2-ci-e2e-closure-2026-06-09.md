@@ -15,7 +15,7 @@ Corrección de specs E2E que fallaban en CI con `vite preview` (4 → 0 fallos).
 - `e2e/clinical-textbox-evolution-draft.spec.ts`
 - `e2e/golden-v2-admission-discharge.spec.ts`
 - `e2e/ux-g02-command-first.spec.ts`
-- `reports/epis2-e2e-failure-plan-2026-06-09.md`
+- `reports/archive/2026-06/epis2-ci-e2e-closure-2026-06-09.md`
 
 ---
 

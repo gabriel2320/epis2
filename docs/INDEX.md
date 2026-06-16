@@ -1,6 +1,6 @@
 # EPIS2 — Índice documental maestro
 
-**Actualizado:** 2026-06-14 · Origen: [`epis2-auditoria-inventario-limpieza-2026-06-09.md`](../reports/epis2-auditoria-inventario-limpieza-2026-06-09.md) §2
+**Actualizado:** 2026-06-14 · Origen: [`epis2-auditoria-inventario-limpieza-2026-06-09.md`](../reports/archive/2026-06/epis2-auditoria-inventario-limpieza-2026-06-09.md) §2
 
 Regla de lectura: **un solo «siguiente paso»** — el del tablero (L1). Todo lo demás es canon, referencia o histórico.
 

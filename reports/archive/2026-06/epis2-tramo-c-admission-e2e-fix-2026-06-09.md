@@ -39,4 +39,4 @@ golden-v2 y ola3-ficha-journey; corrige aserción de órdenes activas.
 
 ## Cierre PEND-003
 
-**Sí, puede cerrarse** tras marcar fecha en `reports/epis2-pendientes-registro-2026-06-09.md` y actualizar `docs/product/EPIS2_TABLERO.md` (ítem “Deuda E2E tramo-c-admission”).
+**Sí, puede cerrarse** tras marcar fecha en `reports/archive/2026-06/epis2-tramo-c-admission-e2e-fix-2026-06-09.md` y actualizar `docs/product/EPIS2_TABLERO.md` (ítem “Deuda E2E tramo-c-admission”).
