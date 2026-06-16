@@ -1,6 +1,6 @@
 # PROG-UX-LAB — Cierre programa (MF-UXLAB-03)
 
-**Fecha:** 2026-06-11 · **HEAD:** `c2a328e` · **Plan:** [`EPIS2_UX_LAB_MODERN_PLAN.md`](../docs/quality/EPIS2_UX_LAB_MODERN_PLAN.md)
+**Fecha:** 2026-06-16 · **HEAD:** `9da9e30` (post script diet `c8d0efc`) · **Plan:** [`EPIS2_UX_LAB_MODERN_PLAN.md`](../docs/quality/EPIS2_UX_LAB_MODERN_PLAN.md)
 
 ---
 
@@ -21,7 +21,7 @@
 |------------|---------|
 | Plantilla corrida | [`epis2-ux-lab-run-TEMPLATE.md`](./epis2-ux-lab-run-TEMPLATE.md) |
 | Corrida Modo A (auto) | [`epis2-ux-lab-run-2026-06-11.md`](./epis2-ux-lab-run-2026-06-11.md) |
-| Gate compuesto cierre | `npm run quality:ux-lab-close` en `package.json` |
+| Gate compuesto cierre | `npm run quality:gate -- quality:ux-lab-close` (`catalog-full.json`) |
 | Fix-only patch | prettier `GeneratedClinicalFormPage` (CI format:check) |
 
 ---
@@ -47,7 +47,7 @@
 
 1. Walkthrough Modo A (1 operador, Ollama off)
 2. Revisión Nielsen 3–5 usuarios
-3. `npm run quality:ux-lab-close` verde en CI
+3. `npm run quality:gate -- quality:ux-lab-close` verde (stack + E2E)
 
 **Diferido 2027+:** MF-UXLAB-04 personas Evolab · atajos globales · telemetría clickstream.
 
