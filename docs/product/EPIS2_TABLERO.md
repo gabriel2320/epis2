@@ -125,9 +125,9 @@ Plan: [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-
 | **Tramo 2** | ✓ DONE | PROG-DEV-PARITY · MF-DEV-01…02 · `.gitattributes` + `quality:release` local |
 | **Tramo 3** | ✓ DONE | LEGAL · MF-LEG-01 checklist · MF-LEG-02 DISCLAIMER v1.1 · [`epis2-prog-legal-disclaimer-tramo3-close.md`](../../reports/epis2-prog-legal-disclaimer-tramo3-close.md) |
 | **Tramo 4** | ✓ DONE | DEPS · MF-DEP-01 triage · [`epis2-prog-deps-hygiene-tramo4-close.md`](../../reports/epis2-prog-deps-hygiene-tramo4-close.md) |
-| **Tramo 5** | **en curso** | SECURITY-PROMOTE · RH-09 ✓ Gitleaks blocking · RH-10/11 pendiente · [`epis2-prog-security-promote-tramo5-rh09.md`](../../reports/epis2-prog-security-promote-tramo5-rh09.md) |
+| **Tramo 5** | **en curso** | SECURITY-PROMOTE · RH-09/10 ✓ · RH-11 pendiente · [`epis2-prog-security-promote-tramo5-rh10.md`](../../reports/epis2-prog-security-promote-tramo5-rh10.md) |
 
-**Siguiente:** RH-10 CodeQL blocking · RH-11 dependency-review · branch protection `gitleaks (blocking)` en master
+**Siguiente:** RH-11 dependency-review · branch protection `CodeQL (javascript-typescript, blocking)` + `gitleaks (blocking)`
 
 ---
 

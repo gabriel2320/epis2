@@ -38,7 +38,7 @@ Workflows RH-02, RH-04, RH-05: **`continue-on-error: true`** — report-only.
 | ID | Estado | Entrega |
 |----|--------|---------|
 | **RH-09** | ✓ DONE | Gitleaks **blocking** · [`epis2-prog-security-promote-tramo5-rh09.md`](../reports/epis2-prog-security-promote-tramo5-rh09.md) |
-| RH-10 | pendiente | CodeQL → required |
+| **RH-10** | ✓ DONE | CodeQL **blocking** · [`epis2-prog-security-promote-tramo5-rh10.md`](../reports/epis2-prog-security-promote-tramo5-rh10.md) |
 | RH-11 | pendiente | dependency-review alinear |
 
 ---
@@ -49,7 +49,7 @@ Workflows RH-02, RH-04, RH-05: **`continue-on-error: true`** — report-only.
 PR #15  RH-01 + RH-02…05 + RH-07 + RH-08  ✓ merged
 PR #16  RH-06 web fixtures bridge  ✓ merged
 PR #14  Dependabot setup-node v6 — cerrado (superseded)
-Promoción post-rc3: RH-09 Gitleaks blocking ✓ · RH-10 CodeQL · RH-11 dependency-review
+Promoción post-rc3: RH-09 Gitleaks blocking ✓ · RH-10 CodeQL blocking ✓ · RH-11 dependency-review
 ```
 
 ---

@@ -1,6 +1,6 @@
-name: RH-02 CodeQL (report-only)
+name: RH-10 CodeQL (blocking)
 
-# PROG-RELEASE-HARDENING — no required PR check
+# PROG-SECURITY-PROMOTE — required PR check (RH-10). RH-04/05 siguen report-only.
 
 on:
   push:
@@ -18,9 +18,8 @@ permissions:
 
 jobs:
   analyze:
-    name: CodeQL (javascript-typescript)
+    name: CodeQL (javascript-typescript, blocking)
     runs-on: ubuntu-latest
-    continue-on-error: true
     strategy:
       fail-fast: false
       matrix:

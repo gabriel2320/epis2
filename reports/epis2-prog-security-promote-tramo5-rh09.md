@@ -15,7 +15,7 @@ Promover Gitleaks de report-only a **blocking** en CI.
 | Gate local | `quality:security-promote-gate` |
 | phase4 verify | `tools/scripts/verify-phase4-ci.mjs` actualizado |
 
-**Sin cambio:** RH-02 CodeQL · RH-04 deps · RH-05 SBOM siguen `continue-on-error: true`.
+**Sin cambio:** RH-04 deps · RH-05 SBOM siguen `continue-on-error: true`. RH-10 CodeQL promovido en [`epis2-prog-security-promote-tramo5-rh10.md`](epis2-prog-security-promote-tramo5-rh10.md).
 
 ---
 
@@ -47,11 +47,10 @@ npm run quality:fast
 
 ---
 
-## Pendiente — RH-10 / RH-11
+## Pendiente — RH-11
 
 | RH | Entrega |
 |----|---------|
-| **RH-10** | CodeQL → required (quitar continue-on-error) |
 | **RH-11** | dependency-review alinear o waiver documentado |
 
-Plan: [`epis2-audit-plan-post-rc3-2026.md`](epis2-audit-plan-post-rc3-2026.md)
+RH-10: [`epis2-prog-security-promote-tramo5-rh10.md`](epis2-prog-security-promote-tramo5-rh10.md)
