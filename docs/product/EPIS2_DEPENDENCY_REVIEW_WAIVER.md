@@ -13,7 +13,9 @@
 | **dependency-review** | Solo `pull_request` | `fail-on-severity: critical` |
 | Job name CI | `dependency-review (blocking)` | Falla PR si introduce vuln **critical** |
 
-**Branch protection (operador):** añadir `dependency-review (blocking)` junto a RH-09/RH-10.
+**Prerrequisito GitHub:** Dependency graph + vulnerability alerts habilitados (MF-LOCK-RC3-01 · API `vulnerability-alerts`).
+
+**Branch protection `master`:** required checks incluyen `dependency-review (blocking)` · ver [`epis2-branch-protection-verify-2026-06-16.md`](../../reports/epis2-branch-protection-verify-2026-06-16.md).
 
 ---
 
