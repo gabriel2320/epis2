@@ -16,6 +16,7 @@
     "test:e2e:dual-chart": "node ../../tools/scripts/run-e2e.mjs e2e/dual-chart-modes.spec.ts",
     "test:e2e:ux-g02": "node ../../tools/scripts/run-e2e.mjs e2e/ux-g02-command-first.spec.ts",
     "test:e2e:login-gateway": "node ../../tools/scripts/run-e2e.mjs e2e/login-gateway.spec.ts",
+    "test:e2e:ux-lab-census": "node ../../tools/scripts/run-e2e.mjs e2e/ux-lab-census.spec.ts",
     "test:e2e:clinical-textbox": "node ../../tools/scripts/run-e2e.mjs e2e/clinical-textbox-evolution-draft.spec.ts",
     "test:e2e:a11y": "node ../../tools/scripts/run-e2e.mjs e2e/a11y-smoke.spec.ts",
     "test:e2e:mobile": "node ../../tools/scripts/run-e2e.mjs e2e/mobile-drawer.spec.ts",
