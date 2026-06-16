@@ -18,10 +18,12 @@ Flujo mínimo: **censo → ficha dual → borrador → aprobación humana**. IA 
 
 | Aspecto | Estado |
 |---------|--------|
-| Base demo v0.1 | Compila, golden journey, ficha-first ✓ · tag **`v0.1-demo-rc3`** |
-| Programas recientes | **PROG-CONSOLIDATE** ola 1+2 ✓ · **PROG-RELEASE-HARDENING** RH-01…08 ✓ |
+| Base demo v0.1 | Compila, golden journey, ficha-first ✓ · tag **`v0.1-demo-rc3`** · `master` incluye POST-RC3 |
+| Programas recientes | **PROG-POST-RC3** ✓ tramos 1–5 · **PROG-RELEASE-HARDENING** RH-01…08 + RH-09/10/11 blocking |
 | Congelamiento | Sin features clínicas nuevas salvo MF autorizada |
 | Producción / PHI | **No listo** — ver seguridad abajo |
+
+**Cierre POST-RC3:** [`reports/epis2-prog-post-rc3-close.md`](reports/epis2-prog-post-rc3-close.md) · **Branch protection:** [`reports/epis2-branch-protection-verify-2026-06-16.md`](reports/epis2-branch-protection-verify-2026-06-16.md)
 
 **Fuente de verdad:** [`docs/EPIS2_CURRENT_STATE.md`](docs/EPIS2_CURRENT_STATE.md)
 
