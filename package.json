@@ -67,6 +67,8 @@
     "quality:required": "node tools/gates/run-gate.mjs required",
     "quality:nightly": "node tools/gates/run-gate.mjs nightly",
     "quality:experimental": "node tools/gates/run-gate.mjs experimental",
+    "quality:release": "node tools/gates/run-gate.mjs release",
+    "security:no-bidi": "node scripts/quality/security-no-bidi.mjs",
     "tool:scripts:classify": "node tools/scripts/classify.mjs",
     "tool:gates:sync-catalog": "node tools/gates/sync-catalog.mjs",
     "tool:gates:verify": "node tools/gates/verify-infra.mjs",

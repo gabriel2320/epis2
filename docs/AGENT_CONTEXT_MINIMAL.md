@@ -43,7 +43,8 @@ Un objetivo · pocos archivos · diff mínimo.
 | **PROG-FICHA-FIRST** | ✓ **cerrado** MF-FF-01…15 · wave 1–5 | `quality:ficha-first-gate` |
 | **PROG-STRENGTHEN** | ✓ **23/23 cerrado** · MF-IC-01…04 ✓ | `npm run quality:strengthen-close-gate` |
 | **PROG-CDS-UX** | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
-| **PROG-CONSOLIDATE** | ✓ ola 1 + **ola 2 cerrada** (MF-CON-02…11, 09, 10) | [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) · [`epis2-prog-consolidate-ola2-close-2026.md`](../reports/epis2-prog-consolidate-ola2-close-2026.md) |
+| **PROG-CONSOLIDATE** | ✓ ola 1 + ola 2 · tag `v0.1-demo-rc2` | [`epis2-prog-consolidate-ola2-close-2026.md`](../reports/epis2-prog-consolidate-ola2-close-2026.md) |
+| **PROG-RELEASE-HARDENING** | activo RH-01…08 | [`EPIS2_RELEASE_HARDENING_PLAN.md`](product/EPIS2_RELEASE_HARDENING_PLAN.md) |
 
 Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.5 · orquestación: [`reports/epis2-orquestacion-paralela-2026-06-14.md`](../reports/epis2-orquestacion-paralela-2026-06-14.md) §22–§23
 
@@ -59,7 +60,7 @@ Cerrado: MF-IM-01…09 · **MF-CU-01…04** · **MF-IC-01…04** · **MF-FF-01�
 
 Cierre FICHA-FIRST: [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-prog-ficha-first-close-2026.md). **PROG-MEDIA-FUTURE** diferido 2027+.
 
-**Siguiente fase recomendada:** revisión legal humana [`DISCLAIMER.md`](../DISCLAIMER.md). Congelamiento vigente — **no** features clínicas salvo MF autorizada explícita.
+**Siguiente fase recomendada:** **PROG-RELEASE-HARDENING** (RH-01 Node 24 · RH-02…05 report-only · RH-06 web pendiente). Congelamiento vigente — **no** features clínicas salvo MF autorizada.
 
 ---
 

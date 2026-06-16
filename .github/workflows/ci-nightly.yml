@@ -28,10 +28,10 @@ jobs:
       DATABASE_URL: postgresql://epis2_app:epis2@localhost:5432/epis2
       VITE_ENABLE_DUAL_CHART_MODES: 'false'
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '24'
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
