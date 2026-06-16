@@ -2,6 +2,8 @@
 export const copy = {
   appName: 'EPIS2',
   demoBadge: 'DEMO / SINTÉTICO',
+  demoEnvironmentBanner:
+    'EPIS2 DEMO — datos sintéticos · no uso clínico real · no diagnóstico ni tratamiento',
   login: {
     title: 'Iniciar sesión',
     tagline: 'Inteligencia clínica local',

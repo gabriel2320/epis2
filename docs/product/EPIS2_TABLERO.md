@@ -1,5 +1,8 @@
 # EPIS2 — Tablero de desarrollo
 
+> **NO USAR PARA PLANIFICAR** — fuente de verdad: [`EPIS2_CURRENT_STATE.md`](../EPIS2_CURRENT_STATE.md).  
+> Este tablero es **índice humano e histórico**; agentes Cursor deben leer [`AGENTS.md`](../../AGENTS.md) v2.
+
 **Actualizado:** 2026-06-16 · **PROG-POST-RC3** ✓ · **MF-LOCK** ✓ · **RH-12** ✓ · tag **`v0.1-demo-rc3`**
 
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Brújula:** [`EPIS2_CURRENT_STATE.md`](../EPIS2_CURRENT_STATE.md)

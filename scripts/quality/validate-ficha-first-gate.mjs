@@ -105,8 +105,27 @@ if (!existsSync(medrepoLoader)) {
   errors.push('Falta medrepoKnowledgePack.ts (MF-FF-14)');
 }
 const pkgScripts = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')).scripts ?? {};
-if (!pkgScripts['quality:ui'] || !pkgScripts['quality:ai']) {
-  errors.push('package.json debe definir quality:ui y quality:ai (MF-FF-15)');
+const catalog = JSON.parse(readFileSync(join(root, 'tools/gates/catalog-full.json'), 'utf8'));
+const catalogGates = catalog.gates ?? {};
+const uiAlias = catalogGates['quality:ui'];
+const aiAlias = catalogGates['quality:ai'];
+if (pkgScripts['quality:ui'] || pkgScripts['quality:ai']) {
+  errors.push(
+    'package.json root no debe definir quality:ui/quality:ai (usar catalog-full.json, MF-FF-15)',
+  );
+}
+if (!uiAlias?.command?.includes('quality:ui-simplify-gate')) {
+  errors.push('catalog-full.json debe definir quality:ui → quality:ui-simplify-gate (MF-FF-15)');
+}
+const aiCmd = aiAlias?.command ?? '';
+if (
+  !aiCmd.includes('quality:sh-03-degrade-gate') ||
+  !aiCmd.includes('quality:ai-client-gate') ||
+  !aiCmd.includes('quality:web-ai-boundary-gate')
+) {
+  errors.push(
+    'catalog-full.json debe definir quality:ai con sh-03, ai-client y web-ai-boundary (MF-FF-15)',
+  );
 }
 
 const formPage = readFileSync(

@@ -35,5 +35,5 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - run: npm run quality:nightly
+      - run: node tools/gates/run-gate.mjs nightly
       - run: npm audit --omit=dev --audit-level=high

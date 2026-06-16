@@ -12,7 +12,7 @@ import {
   inferVitestTargets,
   inferWorkspaces,
   printGitSummary,
-  runNpm,
+  runCmd,
   scanChangedForSensitive,
   typecheckWorkspaces,
   vitestTouched,
@@ -50,7 +50,9 @@ if (!docOnly && codePaths.length) {
   console.log('▶ eslint/typecheck/vitest … skip (solo docs/reportes)');
 }
 
-steps.push(() => runNpm(root, 'architecture:validate', 'architecture:validate'));
+steps.push(() =>
+  runCmd(root, 'architecture:validate', 'node', ['scripts/architecture/validate-all.mjs']),
+);
 
 let failed = false;
 for (const step of steps) {

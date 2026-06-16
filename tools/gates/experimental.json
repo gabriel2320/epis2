@@ -2,13 +2,13 @@
   "name": "experimental",
   "description": "Gates pesados u opcionales — MF históricos, evals live, OpenClaw. No bloquean PR diario.",
   "steps": [
-    "npm run quality:strengthen-close-gate",
-    "npm run quality:cds-hooks-gate",
-    "npm run quality:medrepo-consumption-gate",
-    "npm run quality:ai",
-    "npm run quality:ui",
-    "npm run quality:openclaw-gate",
-    "npm run quality:evolab-bridge-gate",
-    "npm run ai:evals:sim"
+    "npm run quality:gate -- quality:strengthen-close-gate",
+    "npm run quality:gate -- quality:cds-hooks-gate",
+    "npm run quality:gate -- quality:medrepo-consumption-gate",
+    "npm run tool:script -- quality:ai",
+    "npm run tool:script -- quality:ui",
+    "npm run quality:gate -- quality:openclaw-gate",
+    "npm run quality:gate -- quality:evolab-bridge-gate",
+    "npm run tool:script -- ai:evals:sim"
   ]
 }

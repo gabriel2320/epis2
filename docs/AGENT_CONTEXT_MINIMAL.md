@@ -1,6 +1,6 @@
 # EPIS2 — Contexto mínimo para agentes (Cursor)
 
-**Versión:** 4.6 · **Ola 14 ✓** · **STRENGTHEN** 23/23 ✓ · **FICHA-FIRST ✓** · **Consolidación** Fase 0–4 ✓
+**Versión:** 4.7 · **PROG-AGENT-TRUTH** ✓ · **Consolidación** post-rc3 · tag **`v0.1-demo-rc3`**
 
 > **Brújula de alcance:** [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) · **Gobierno docs:** [`DOCUMENTATION_GOVERNANCE.md`](DOCUMENTATION_GOVERNANCE.md) · **Congelamiento:** [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) · inventario: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md)
 
@@ -35,35 +35,18 @@ Un objetivo · pocos archivos · diff mínimo.
 
 ---
 
-## Programa activo (2026-06-15)
+## Programa activo (2026-06-16)
 
-| Programa | Estado | Comando estado |
-|----------|--------|----------------|
-| **PROG-RAPID** | ✓ cerrado | `npm run quality:rapid-gate` |
-| **PROG-FICHA-FIRST** | ✓ **cerrado** MF-FF-01…15 · wave 1–5 | `quality:ficha-first-gate` |
-| **PROG-STRENGTHEN** | ✓ **23/23 cerrado** · MF-IC-01…04 ✓ | `npm run quality:strengthen-close-gate` |
-| **PROG-CDS-UX** | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
-| **PROG-CONSOLIDATE** | ✓ ola 1 + ola 2 · tag `v0.1-demo-rc2` | [`epis2-prog-consolidate-ola2-close-2026.md`](../reports/epis2-prog-consolidate-ola2-close-2026.md) |
-| **PROG-RELEASE-HARDENING** | ✓ RH-01…08 · PR #15+#16 | [`epis2-session-close-2026-06-16-release-hardening.md`](../reports/epis2-session-close-2026-06-16-release-hardening.md) |
-| **PROG-POST-RC3** | ✓ **cerrado** tramos 1–5 | [`epis2-prog-post-rc3-close.md`](../reports/epis2-prog-post-rc3-close.md) |
+| Programa | Estado | Evidencia |
+|----------|--------|-----------|
+| **PROG-UX-LAB** | ◐ Tramo C/D | [`EPIS2_UX_LAB_MODERN_PLAN.md`](quality/EPIS2_UX_LAB_MODERN_PLAN.md) |
+| **PROG-AGENT-TRUTH** | ✓ AT-01…05 | `quality:agent-truth-gate` · [`AGENTS.md`](../AGENTS.md) v2 |
+| **PROG-POST-RC3** | ✓ tramos 1–5 | [`epis2-prog-post-rc3-close.md`](../reports/epis2-prog-post-rc3-close.md) |
+| **PROG-RELEASE-HARDENING** | ✓ RH-01…08 | tag `v0.1-demo-rc3` |
 
-Plan unificado: [`reports/epis2-plan-desarrollo-unificado-2026-06-14.md`](../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.5 · orquestación: [`reports/epis2-orquestacion-paralela-2026-06-14.md`](../reports/epis2-orquestacion-paralela-2026-06-14.md) §22–§23
+Programas cerrados (no reabrir): PROG-FICHA-FIRST · PROG-STRENGTHEN 23/23 · PROG-CONSOLIDATE ola 1+2 · PROG-CDS-UX · PROG-RAPID.
 
-**Ola 11:** ✓ MF-IC-01 Perfil export MINSAL · [`epis2-mf-ic-01-minsal-export.md`](../reports/epis2-mf-ic-01-minsal-export.md)
-
-**Ola 12:** ✓ MF-IC-02 SNRE staging · [`epis2-mf-ic-02-snre-staging.md`](../reports/epis2-mf-ic-02-snre-staging.md)
-
-**Ola 13:** ✓ MF-IC-03 Questionnaire export · [`epis2-mf-ic-03-questionnaire.md`](../reports/epis2-mf-ic-03-questionnaire.md)
-
-**Ola 14:** ✓ MF-IC-04 HL7 quarantine hardening · [`epis2-prog-strengthen-close-2026.md`](../reports/epis2-prog-strengthen-close-2026.md)
-
-Cerrado: … · **PROG-POST-RC3** · **PROG-CDS-UX**.
-
-Cierre FICHA-FIRST: [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-prog-ficha-first-close-2026.md). **PROG-MEDIA-FUTURE** diferido 2027+.
-
-**Siguiente fase recomendada:** **PROG-UX-LAB** — piloto UX moderno post-RC3 · [`quality/EPIS2_UX_LAB_MODERN_PLAN.md`](quality/EPIS2_UX_LAB_MODERN_PLAN.md). Operador: branch protection RH-12 audit periódico · programas diferidos (`PROG-ZOD4-MIGRATION`, batch devDeps). **Sin features clínicas nuevas** — congelamiento vigente. Tag demo: **`v0.1-demo-rc3`**.
-
-Cierre POST-RC3: [`epis2-prog-post-rc3-close.md`](../reports/epis2-prog-post-rc3-close.md).
+**Congelamiento vigente** — sin features clínicas nuevas salvo MF autorizada. Tag demo: **`v0.1-demo-rc3`**.
 
 ---
 
@@ -77,6 +60,7 @@ Cierre POST-RC3: [`epis2-prog-post-rc3-close.md`](../reports/epis2-prog-post-rc3
 | Pre-PR | `npm run quality:full` o **`quality:required`** |
 | CI extendido local | `npm run quality:nightly` |
 | Gate MF histórico | `npm run quality:gate -- quality:<name>` |
+| Scripts archivados | `npm run tool:script -- <name>` · índice [`dev/SCRIPT_INDEX.md`](dev/SCRIPT_INDEX.md) |
 
 ### `quality:fast` incluye
 
@@ -127,6 +111,6 @@ Atajos: `quality:fast` · `dev:agent:audit-diff` · `dev:rapid -- --skip-audit`
 | Doc | Cuándo |
 |-----|--------|
 | [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) | **Brújula módulos y consolidación** |
-| [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md) | Histórico MF/hilo — alinear en consolidación |
+| [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md) | **No planificar** — índice humano |
 | [`EPIS2_DEV_VELOCITY.md`](dev/EPIS2_DEV_VELOCITY.md) | Gates por rol |
 | [`GOLDEN_CLINICAL_JOURNEY.md`](../quality/GOLDEN_CLINICAL_JOURNEY.md) | Solo UI/flujo clínico |

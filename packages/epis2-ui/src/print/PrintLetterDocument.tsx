@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { PrintDemoWatermark } from './PrintDemoWatermark.js';
 
 export type PrintLetterDocumentProps = {
   title: string;
@@ -26,6 +27,7 @@ export function PrintLetterDocument({
     <Box
       data-testid={testId}
       sx={{
+        position: 'relative',
         width: '216mm',
         minHeight: '279mm',
         mx: 'auto',
@@ -45,6 +47,7 @@ export function PrintLetterDocument({
         },
       }}
     >
+      <PrintDemoWatermark />
       <Box
         sx={{
           display: 'flex',

@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 /**
- * PROG-CONSOLIDATE Fase 4 + MF-CON-11 — verifica manifiestos y workflows CI.
- *   npm run tool:consolidate:verify-phase4
+ * PROG-CONSOLIDATE Fase 4 + MF-CON-11 + SCRIPT-DIET-3 — verifica manifiestos y workflows CI.
+ *   npm run tool:script -- tool:consolidate:verify-phase4
  */
 import { readFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
+import { ROOT_SCRIPT_ALLOWLIST } from './root-script-allowlist.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
@@ -27,29 +28,45 @@ for (const gate of ciGates) {
 }
 
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+const rootScripts = Object.keys(pkg.scripts ?? {});
+
+if (rootScripts.length > ROOT_SCRIPT_ALLOWLIST.length) {
+  errors.push(`root scripts ${rootScripts.length} > ${ROOT_SCRIPT_ALLOWLIST.length}`);
+}
+
+for (const name of ROOT_SCRIPT_ALLOWLIST) {
+  if (!pkg.scripts?.[name]) errors.push(`package.json falta ${name}`);
+}
+
 if (!pkg.scripts?.['build:ci-fixtures-chain']) {
   errors.push('package.json sin build:ci-fixtures-chain');
 }
-if (!pkg.scripts?.['build:packages']?.includes('@epis2/ai-client')) {
-  errors.push('build:packages debe incluir @epis2/ai-client antes de local-ai');
-}
-if (!pkg.scripts?.['quality:experimental']) {
-  errors.push('package.json sin quality:experimental (MF-CON-11)');
-}
+
 if (!pkg.scripts?.['quality:release']) {
   errors.push('package.json sin quality:release (PROG-RELEASE-HARDENING RH-08)');
 }
 
-for (const script of ['db:migrate', 'test:e2e', 'test:e2e:dual-chart']) {
+if (!pkg.scripts?.['tool:script']) {
+  errors.push('package.json sin tool:script (SCRIPT-DIET-3)');
+}
+
+if (!existsSync(join(root, 'tools/legacy-scripts/root-script-archive.json'))) {
+  errors.push('falta tools/legacy-scripts/root-script-archive.json');
+}
+
+for (const script of ['db:migrate', 'test:e2e']) {
   if (!pkg.scripts?.[script]?.includes('@epis2/')) {
     errors.push(`root ${script} debe ser shim a workspace`);
   }
 }
 
 const workflowChecks = [
-  ['.github/workflows/ci.yml', ['quality:required', 'e2e-dual-chart']],
-  ['.github/workflows/ci-nightly.yml', ['quality:nightly']],
-  ['.github/workflows/ci-experimental.yml', ['quality:experimental']],
+  [
+    '.github/workflows/ci.yml',
+    ['quality:required', 'e2e-dual-chart', 'quality:gate -- quality:dual-chart-gate'],
+  ],
+  ['.github/workflows/ci-nightly.yml', ['run-gate.mjs nightly']],
+  ['.github/workflows/ci-experimental.yml', ['run-gate.mjs experimental']],
 ];
 
 for (const [rel, needles] of workflowChecks) {
@@ -122,4 +139,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('phase4-verify OK — CI tiers, manifiestos y shims workspace');
+console.log('phase4-verify OK — CI tiers, manifiestos y SCRIPT-DIET-3');

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-06-16T13:25:34.322Z",
+  "generatedAt": "2026-06-16T16:10:50.451Z",
   "source": "package.json",
   "note": "Regenerar: npm run tool:gates:sync-catalog",
   "gates": {
@@ -453,7 +453,7 @@
       "path": "scripts/quality/validate-ui-simplify-gate.mjs"
     },
     "quality:ui": {
-      "type": "npm",
+      "type": "command",
       "command": "npm run quality:ui-simplify-gate"
     },
     "quality:m3-scaffold-gate": {
@@ -769,7 +769,7 @@
       "path": "scripts/quality/validate-quality-aliases-gate.mjs"
     },
     "quality:ai": {
-      "type": "npm",
+      "type": "command",
       "command": "npm run quality:sh-03-degrade-gate && npm run quality:ai-client-gate && npm run quality:web-ai-boundary-gate"
     },
     "quality:ai-otel-gate": {
@@ -1107,6 +1107,22 @@
     "quality:security-promote-gate": {
       "type": "file",
       "path": "scripts/quality/validate-security-promote-gate.mjs"
+    },
+    "quality:agent-truth-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-agent-truth-gate.mjs"
+    },
+    "quality:core-no-labs-imports-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-core-no-labs-imports-gate.mjs"
+    },
+    "quality:demo-safety-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-demo-safety-gate.mjs"
+    },
+    "quality:root-script-surface-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-root-script-surface-gate.mjs"
     }
   }
 }
