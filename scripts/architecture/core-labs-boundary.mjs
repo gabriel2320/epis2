@@ -6,16 +6,11 @@ import { walkSourceFiles } from './lib/scan-sources.mjs';
 /** PROG-CORE-LABS-FW — labs in-repo no importables desde core producto. */
 export const CORE_LABS_FORBIDDEN_PACKAGES = ['@epis2/clinical-case-intel', '@epis2/drug-intel'];
 
-export const CORE_LABS_FORBIDDEN_PATHS = [
-  'services/clinical-case-intel',
-  'services/drug-intel',
-];
+export const CORE_LABS_FORBIDDEN_PATHS = ['services/clinical-case-intel', 'services/drug-intel'];
 
 const CORE_PACKAGE_JSON_ROOTS = ['apps/web', 'apps/api'];
 
-const SOURCE_SCAN_SKIP = [
-  '/fixtures/devFixturesBridge.',
-];
+const SOURCE_SCAN_SKIP = ['/fixtures/devFixturesBridge.'];
 
 function listPackageDirs() {
   const packagesDir = join(REPO_ROOT, 'packages');
