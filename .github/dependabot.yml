@@ -1,4 +1,4 @@
-# Plan G — actualizaciones de dependencias npm (raíz del monorepo)
+# Plan G — actualizaciones de dependencias (PROG-CONSOLIDATE / auditoría DevOps)
 version: 2
 updates:
   - package-ecosystem: npm
@@ -14,3 +14,17 @@ updates:
         update-types:
           - minor
           - patch
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 3
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 3

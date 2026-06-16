@@ -2,21 +2,19 @@ import {
   assertPatchDraftStatus,
   buildClinicalSafetyInputFromSummary,
   CHILE_RUT_IDENTIFIER_SYSTEM,
+  DEMO_IDENTIFIER_SYSTEM,
   evaluateDemoClinicalAlerts,
   normalizeRut,
   parseRutParts,
+  SIM_IDENTIFIER_SYSTEM,
+  SYNTHETIC_LABEL,
 } from '@epis2/clinical-domain';
 import {
   mergeAssistTraceIntoDraftBody,
   readAssistTraceFromDraftBody,
   stripAssistTraceFromDraftBody,
 } from '@epis2/contracts';
-import {
-  DEMO_IDENTIFIER_SYSTEM,
-  SIM_IDENTIFIER_SYSTEM,
-  SYNTHETIC_LABEL,
-  getDemoCaseByPatientId,
-} from '@epis2/test-fixtures';
+import { resolveDemoCaseByPatientId } from '../fixtures/devFixturesBridge.js';
 import { asc, desc, eq, ilike, and, inArray, or, isNull } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import {
@@ -66,7 +64,7 @@ export async function getPatientDemoCaseCode(db: Database, patientId: string) {
 }
 
 export async function getPatientClinicalContext(db: Database, patientId: string) {
-  const demoCase = getDemoCaseByPatientId(patientId);
+  const demoCase = await resolveDemoCaseByPatientId(patientId);
   const demoCaseCode = (await getPatientDemoCaseCode(db, patientId)) ?? demoCase?.demoCaseCode;
   const problemRows = await db
     .select({ description: problems.description })

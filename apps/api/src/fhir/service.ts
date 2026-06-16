@@ -8,7 +8,7 @@ import {
   toFhirPatient,
   toFhirServiceRequest,
 } from '@epis2/fhir-export';
-import { DEMO_IDENTIFIER_SYSTEM } from '@epis2/test-fixtures';
+import { DEMO_IDENTIFIER_SYSTEM } from '@epis2/clinical-domain';
 import { and, eq } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import {

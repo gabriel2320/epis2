@@ -19,6 +19,11 @@ export {
   type SyntheticUser,
 } from './demoUsers.js';
 export {
+  DEMO_IDENTIFIER_SYSTEM,
+  SIM_IDENTIFIER_SYSTEM,
+  SYNTHETIC_LABEL,
+} from './syntheticIdentifiers.js';
+export {
   DRAFT_STATUSES,
   DRAFT_PATCH_TRANSITIONS,
   assertPatchDraftStatus,

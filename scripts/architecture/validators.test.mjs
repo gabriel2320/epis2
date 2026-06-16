@@ -36,4 +36,10 @@ describe('architecture validators (smoke)', () => {
     const result = await monorepoGovernance();
     expect(result.ok, result.details?.join('\n')).toBe(true);
   });
+
+  it('no-test-fixtures-in-prod (MF-CON-09) pasa en repo limpio', async () => {
+    const { validate: noTestFixturesInProd } = await import('./no-test-fixtures-in-prod.mjs');
+    const result = await noTestFixturesInProd();
+    expect(result.ok, result.details?.join('\n')).toBe(true);
+  });
 });

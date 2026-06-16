@@ -23,6 +23,9 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
+  "dependencies": {
+    "@epis2/clinical-domain": "*"
+  },
   "devDependencies": {
     "@epis2/command-registry": "*",
     "@epis2/contracts": "*",

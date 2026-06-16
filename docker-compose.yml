@@ -57,7 +57,8 @@ services:
   ollama:
     profiles:
       - bundled-ollama
-    image: ollama/ollama:latest
+    # Pin explícito — evitar :latest en auditoría/reproducibilidad (MF-CON-DOCKER)
+    image: ollama/ollama:0.6.8
     container_name: epis2-ollama
     ports:
       - '11434:11434'
