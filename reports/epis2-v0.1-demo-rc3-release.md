@@ -31,7 +31,15 @@ PRs: [#15](https://github.com/gabriel2320/epis2/pull/15) · [#16](https://github
 npm run quality:release
 ```
 
-Evidencia: `reports/quality-release-rc3.log` · CI master [27613893124](https://github.com/gabriel2320/epis2/actions/runs/27613893124) ✓ · local `npm run check` + web build ✓ (format:check local Windows CRLF — no bloqueante)
+Evidencia: [`quality-release-rc3.log`](./quality-release-rc3.log)
+
+| Paso | Resultado local (2026-06-16) |
+|------|------------------------------|
+| `security:no-bidi` | ✓ 2199 archivos |
+| `quality:required` → check/test/db/ficha-first | ✓ 1146 tests · db:validate ✓ |
+| `quality:required` → `format:check` | ✗ Windows CRLF (277 archivos); **CI Linux master ✓** run [27613893124](https://github.com/gabriel2320/epis2/actions/runs/27613893124) |
+| `build -w @epis2/web` | ✓ |
+| `architecture:validate` | ✓ | · CI master [27613893124](https://github.com/gabriel2320/epis2/actions/runs/27613893124) ✓ · local `npm run check` + web build ✓ (format:check local Windows CRLF — no bloqueante)
 
 ---
 
