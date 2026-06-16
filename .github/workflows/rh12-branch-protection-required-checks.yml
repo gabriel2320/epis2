@@ -1,7 +1,8 @@
 name: RH-12 Branch protection required checks
 
 # MF-LOCK-RC3-01 — auditoría reproducible de required checks en master.
-# manual workflow_dispatch · audit (default) · apply (recovery, requiere EPIS2_REPO_ADMIN_TOKEN)
+# manual workflow_dispatch · audit (default) · apply (recovery)
+# Requiere secret EPIS2_REPO_ADMIN_TOKEN (PAT Administration read; read+write para apply)
 
 on:
   workflow_dispatch:
@@ -22,7 +23,6 @@ on:
 
 permissions:
   contents: read
-  administration: read
 
 jobs:
   branch-protection-required-checks:
@@ -36,7 +36,6 @@ jobs:
           MODE: ${{ inputs.mode }}
           TARGET_BRANCH: ${{ inputs.branch }}
           REPO: ${{ github.repository }}
-          FALLBACK_TOKEN: ${{ github.token }}
           ADMIN_TOKEN: ${{ secrets.EPIS2_REPO_ADMIN_TOKEN }}
           GH_API_VERSION: '2022-11-28'
         run: |
@@ -61,15 +60,11 @@ jobs:
             exit 1
           fi
 
-          TOKEN="${FALLBACK_TOKEN}"
-
-          if [[ "${MODE}" == "apply" ]]; then
-            if [[ -z "${ADMIN_TOKEN}" ]]; then
-              echo "::error::Missing secret EPIS2_REPO_ADMIN_TOKEN. Apply mode needs a fine-grained PAT with Administration: read and write."
-              exit 1
-            fi
-            TOKEN="${ADMIN_TOKEN}"
+          if [[ -z "${ADMIN_TOKEN}" ]]; then
+            echo "::error::Missing secret EPIS2_REPO_ADMIN_TOKEN (Administration read for audit; read+write for apply)."
+            exit 1
           fi
+          TOKEN="${ADMIN_TOKEN}"
 
           PROTECTION_API="https://api.github.com/repos/${REPO}/branches/${TARGET_BRANCH}/protection"
           CHECKS_API="${PROTECTION_API}/required_status_checks"
