@@ -32,10 +32,9 @@ test.describe('Dual chart modes ADR-002', () => {
     await page.getByTestId('epis2-chart-mode-paper').click();
     await expect(page.getByTestId('epis2-paper-chart-mode')).toBeVisible();
     await expect(page.getByTestId('epis2-paper-chart-template')).toBeVisible();
-    await expect(page.getByTestId('epis2-paper-document-watermark')).toHaveAttribute(
-      'data-watermark-status',
-      'draft',
-    );
+    await expect(
+      page.getByTestId('epis2-paper-chart-template-page-1').getByTestId('epis2-paper-document-watermark'),
+    ).toHaveAttribute('data-watermark-status', 'draft');
   });
 
   test('c) edita sección anamnesis', async ({ page }) => {
