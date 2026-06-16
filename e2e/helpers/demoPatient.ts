@@ -46,7 +46,7 @@ export async function expectFichaSummaryReady(page: Page) {
   }).toPass({ timeout: 15_000 });
 }
 
-/** Tab Evoluciones — timeline filtrable (reemplaza split epis2-ficha-history). */
+/** Tab Evoluciones — timeline filtrable (dual-chart; sin split legacy de historial). */
 export async function openFichaEvolutions(page: Page) {
   await openClassicChartTab(page, 'evolutions');
   await expect(page.getByTestId('epis2-clinical-filterable-timeline')).toBeVisible({

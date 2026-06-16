@@ -8,7 +8,13 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const e2eDir = join(root, 'e2e');
 const errors = [];
 
-const FORBIDDEN = ['epis2-power-bar', 'epis2-floating-command-dock', 'epis2-patient-workspace'];
+const FORBIDDEN = [
+  'epis2-power-bar',
+  'epis2-floating-command-dock',
+  'epis2-patient-workspace',
+  'epis2-ficha-history',
+  'openFichaHistory',
+];
 
 function walkTsFiles(dir) {
   const out = [];
