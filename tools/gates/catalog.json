@@ -433,12 +433,16 @@
       "command": "npm run build -w @epis2/contracts && npm run build -w @epis2/clinical-domain && npm run build -w @epis2/design-system && npm run build -w @epis2/command-registry && npm run build -w @epis2/clinical-forms && npm run build -w @epis2/test-fixtures && tsx scripts/qa/run-ux-g02-validation.ts"
     },
     "quality:ux-pilot": {
-      "type": "npm",
-      "command": "npm run quality:ux-g02 && npm run test:e2e:ux-g02 && npm run test:e2e:login-gateway"
+      "type": "command",
+      "command": "npm run quality:ux-g02 && npm run tool:script -- test:e2e:ux-g02 && npm run tool:script -- test:e2e:login-gateway"
     },
     "quality:ux-pilot-gate": {
       "type": "file",
       "path": "scripts/quality/validate-ux-pilot-gate.mjs"
+    },
+    "quality:ux-lab-close": {
+      "type": "command",
+      "command": "npm run quality:security-promote-gate && npm run quality:golden-journey && npm run quality:ux-pilot && npm run quality:ux-pilot-gate && npm run quality:m3-human-pilot && npm run quality:fast"
     },
     "quality:command-center-layout-gate": {
       "type": "file",

@@ -1,6 +1,8 @@
 # EPIS2 — Informe de situación actual
 
-**Fecha:** 2026-06-16 · **HEAD `master`:** `c8d0efc` · **Congelamiento:** vigente
+**Fecha:** 2026-06-16 · **HEAD `master`:** `9da9e30` · **Congelamiento:** vigente
+
+**Reconciliación remoto (2026-06-16):** `git rev-parse HEAD` = `origin/master` = `9da9e30`. PR [#32](https://github.com/gabriel2320/epis2/pull/32) y [#33](https://github.com/gabriel2320/epis2/pull/33) **MERGED** (`gh pr view`). Script diet activo: **18** root scripts. Si GitHub UI muestra PRs Open o `package.json` grande, refrescar — posible caché o vista previa a `c8d0efc`.
 
 Canon: [`docs/EPIS2_CURRENT_STATE.md`](../docs/EPIS2_CURRENT_STATE.md) · [`docs/product/EPIS2_TABLERO.md`](../docs/product/EPIS2_TABLERO.md) (índice humano, no planificar)
 
@@ -118,18 +120,13 @@ npm run quality:required
 npm run quality:gate -- quality:root-script-surface-gate
 ```
 
-### Brecha: `quality:ux-lab-close`
+### Brecha: `quality:ux-lab-close` — resuelta en catálogo
 
-Existía en root en PR #33; script diet (#32) lo eliminó. **No está en `catalog-full.json`.** Cierre UX-LAB vía cadena manual:
+Alias compuesto en `tools/gates/catalog-full.json` (no root):
 
 ```bash
-npm run quality:gate -- quality:security-promote-gate
-npm run quality:gate -- quality:golden-journey
-npm run quality:gate -- quality:ux-pilot
-npm run quality:gate -- quality:m3-human-pilot
+npm run quality:gate -- quality:ux-lab-close
 ```
-
-**Próximo fix recomendado:** alias `quality:ux-lab-close` en catálogo (no en root).
 
 ---
 
@@ -151,7 +148,7 @@ npm run quality:gate -- quality:m3-human-pilot
 | ID | Severidad | Descripción |
 |----|-----------|-------------|
 | R-01 | Media | Walkthrough Modo A no ejecutado |
-| R-02 | Baja | `quality:ux-lab-close` ausente del catálogo |
+| R-02 | ~~Baja~~ | `quality:ux-lab-close` — alias en catálogo (PR chore) |
 | R-03 | Baja | Dependabot PRs #20–#25 sin revisar |
 | R-04 | Info | Tag `rc4` diferido hasta signoff |
 
@@ -161,8 +158,8 @@ npm run quality:gate -- quality:m3-human-pilot
 
 1. Walkthrough Modo A — [`epis2-ux-lab-run-TEMPLATE.md`](./epis2-ux-lab-run-TEMPLATE.md)
 2. Nielsen 3–5 revisores
-3. Añadir `quality:ux-lab-close` a `catalog-full.json`
-4. Ejecutar gates cierre UX-LAB
+3. ~~Añadir `quality:ux-lab-close` a catálogo~~ ✓
+4. Ejecutar `npm run quality:gate -- quality:ux-lab-close` (stack + E2E)
 5. Actualizar veredicto → **GO** si 0 UX-BLOCKER
 6. Tag `v0.1-demo-rc4` tras signoff explícito
 7. PROG-DISCIPLINE-CLOSE — brújula v1.4 + archivo reports
