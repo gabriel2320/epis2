@@ -75,9 +75,19 @@ if (!existsSync(gitleaksConfig)) {
 const codeqlConfig = join(root, 'codeql/codeql-config.yml');
 if (!existsSync(codeqlConfig)) errors.push(`Falta ${codeqlConfig}`);
 
+const rh12Workflow = join(root, '.github/workflows/rh12-branch-protection-required-checks.yml');
+if (!existsSync(rh12Workflow)) {
+  errors.push(`Falta RH-12 workflow: ${rh12Workflow}`);
+} else {
+  const src = readFileSync(rh12Workflow, 'utf8');
+  for (const needle of ['RH-12', 'workflow_dispatch', 'dependency-review (blocking)', 'e2e-dual-chart']) {
+    if (!src.includes(needle)) errors.push(`RH-12 workflow falta ${needle}`);
+  }
+}
+
 if (errors.length) {
   console.error('security-promote-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 
-console.log('security-promote-gate OK — RH-09/10/11 blocking + waiver doc');
+console.log('security-promote-gate OK — RH-09/10/11 blocking + RH-12 auditor + waiver doc');

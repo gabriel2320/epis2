@@ -40,6 +40,7 @@ Workflows RH-05 SBOM: **`continue-on-error: true`** — report-only.
 | **RH-09** | ✓ DONE | Gitleaks blocking |
 | **RH-10** | ✓ DONE | CodeQL blocking |
 | **RH-11** | ✓ DONE | dependency-review blocking + waiver · [`EPIS2_DEPENDENCY_REVIEW_WAIVER.md`](EPIS2_DEPENDENCY_REVIEW_WAIVER.md) |
+| **RH-12** | ✓ DONE | Auditoría manual branch protection · `rh12-branch-protection-required-checks.yml` |
 
 Cierre programa: [`epis2-prog-post-rc3-close.md`](../reports/epis2-prog-post-rc3-close.md)
 
