@@ -52,6 +52,8 @@ export const cicaMaxContentWidth: Record<CicaLayoutProfile, number> = {
   census: 1280,
   'classic-chart': 1280,
   'clinical-form': 1080,
+  'letter-document': 920,
+  'book-reader': 920,
   results: 1280,
   'paper-mode': 1440,
   orders: 1080,

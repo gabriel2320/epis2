@@ -18,14 +18,28 @@ if (!registry.includes('EPIS_CICA_SCREEN_REGISTRY')) {
 const requiredRoutes = [
   '/app/buscar',
   '/app/censo',
+  '/app/recientes',
+  '/app/mi-trabajo',
+  '/app/agenda',
   '/app/pacientes/:patientId/resumen',
   '/app/pacientes/:patientId/evoluciones',
   '/app/pacientes/:patientId/evoluciones/nueva',
+  '/app/pacientes/:patientId/evoluciones/libro',
+  '/app/pacientes/:patientId/evoluciones/:evolutionId',
+  '/app/pacientes/:patientId/ingreso',
   '/app/pacientes/:patientId/indicaciones',
   '/app/pacientes/:patientId/indicaciones/nueva',
   '/app/pacientes/:patientId/examenes',
+  '/app/pacientes/:patientId/medicamentos',
+  '/app/pacientes/:patientId/interconsultas',
+  '/app/pacientes/:patientId/procedimientos',
+  '/app/pacientes/:patientId/alta',
+  '/app/pacientes/:patientId/timeline',
+  '/app/pacientes/:patientId/auditoria',
+  '/app/pacientes/:patientId/papel/libro',
   '/app/pacientes/:patientId/documentos',
   '/app/pacientes/:patientId/documentos/nuevo',
+  '/app/pacientes/:patientId/epicrisis/nueva',
   '/app/pacientes/:patientId/papel/dia/:date',
 ];
 
@@ -33,7 +47,10 @@ for (const route of requiredRoutes) {
   if (!registry.includes(route)) {
     errors.push(`registry falta ruta ${route}`);
   }
-  const routerPath = route.replace(/:patientId/g, '$patientId').replace(/:date/g, '$date');
+  const routerPath = route
+    .replace(/:patientId/g, '$patientId')
+    .replace(/:date/g, '$date')
+    .replace(/:evolutionId/g, '$evolutionId');
   if (!router.includes(routerPath)) {
     errors.push(`router falta ruta ${routerPath}`);
   }
@@ -42,6 +59,7 @@ for (const route of requiredRoutes) {
 const cicaIndex = readFileSync(join(root, 'packages/epis2-ui/src/cica/index.ts'), 'utf8');
 for (const token of [
   'CicaAppShell',
+  'CicaSidebar',
   'CicaScreenFrame',
   'CicaPatientScreenFrame',
   'buildCicaPath',

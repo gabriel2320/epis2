@@ -16,6 +16,20 @@ describe('cicaRoutes', () => {
     expect(buildCicaPath('new-epicrisis', { patientId: 'p1' })).toBe(
       '/app/pacientes/p1/epicrisis/nueva',
     );
+    expect(buildCicaPath('evolution-book', { patientId: 'p1' })).toBe(
+      '/app/pacientes/p1/evoluciones/libro',
+    );
+    expect(buildCicaPath('evolution-detail', { patientId: 'p1', evolutionId: 'ev-1' })).toBe(
+      '/app/pacientes/p1/evoluciones/ev-1',
+    );
+    expect(buildCicaPath('paper-book', { patientId: 'p1' })).toBe('/app/pacientes/p1/papel/libro');
+    expect(buildCicaPath('recent-patients')).toBe('/app/recientes');
+    expect(buildCicaPath('patient-admission', { patientId: 'p1' })).toBe(
+      '/app/pacientes/p1/ingreso',
+    );
+    expect(buildCicaPath('patient-timeline', { patientId: 'p1' })).toBe(
+      '/app/pacientes/p1/timeline',
+    );
   });
 
   it('parseCicaPatientId extrae id desde pathname', () => {

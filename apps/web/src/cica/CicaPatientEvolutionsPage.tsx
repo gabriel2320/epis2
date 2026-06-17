@@ -90,6 +90,12 @@ export function CicaPatientEvolutionsPage() {
       kind: 'primary',
       onClick: () => go('new-evolution', { patientId }),
     },
+    {
+      id: 'evolution-book',
+      label: 'Vista libro',
+      kind: 'secondary',
+      onClick: () => go('evolution-book', { patientId }),
+    },
   ];
 
   return (

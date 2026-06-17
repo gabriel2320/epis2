@@ -34,6 +34,8 @@ export type CicaLayoutProfile =
   | 'census'
   | 'classic-chart'
   | 'clinical-form'
+  | 'letter-document'
+  | 'book-reader'
   | 'results'
   | 'paper-mode'
   | 'orders'
