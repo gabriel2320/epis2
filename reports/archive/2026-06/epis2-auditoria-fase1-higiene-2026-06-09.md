@@ -8,7 +8,7 @@
 
 | # | Acción | Archivos |
 |---|--------|----------|
-| 1.1 | Sync documental piloto M3 verde + HEAD `2d77bfe` + nueva auditoría enlazada | `docs/product/EPIS2_TABLERO.md` · `docs/product/EPIS2_GLOBAL_DEV_PLAN.md` · `reports/epis2-pendientes-registro-2026-06-09.md` |
+| 1.1 | Sync documental piloto M3 verde + HEAD `2d77bfe` + nueva auditoría enlazada | `docs/product/EPIS2_TABLERO.md` · `docs/product/EPIS2_GLOBAL_DEV_PLAN.md` · `reports/archive/2026-06/epis2-auditoria-fase1-higiene-2026-06-09.md` |
 | 1.2 | Rail: etiquetas 11px → `labelMedium` 13px (se elimina override `fontSize: 0.6875rem`) | `packages/epis2-ui/src/clinical/EpisNavigationRail.tsx` |
 | 1.3 | Preview A5: `boxShadow: 1` → borde tonal (`border: 1, borderColor: 'divider'`) — THEME-06 | `packages/epis2-ui/src/print/PrintA5Document.tsx` |
 | 1.4 | Gate dev-catalog cubre `/dev/scheduler-spike` (`isSchedulerSpikeEnabled` + flag documentado) | `scripts/architecture/dev-catalog-gates.mjs` · `.env.example` |

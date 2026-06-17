@@ -2,7 +2,7 @@
 
 **Ticket:** EPIS2-14 (gate V3 demo cerrado)  
 **Commits:** `be5eb59`, `7fb6795` (Plan E API), signoff UI 2026-06-05  
-**Ver también:** `reports/epis2-v3-plan-e-slice.md`, `reports/epis2-v3-ui-signoff.md`
+**Ver también:** `reports/archive/2026-06/epis2-v3-plan-e-slice.md`, `reports/epis2-v3-ui-signoff.md`
 
 ## Entregables
 

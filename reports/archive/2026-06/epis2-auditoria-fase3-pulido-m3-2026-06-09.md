@@ -1,7 +1,7 @@
 # EPIS2 — Auditoría profunda: Fase 3 (pulido M3) — 2026-06-09
 
-> Continuación de `reports/epis2-auditoria-profunda-2026-06-09.md` (plan §Fase 3).
-> Fase 1: `reports/epis2-auditoria-fase1-higiene-2026-06-09.md` · Fase 2: `reports/epis2-auditoria-fase2-robustez-2026-06-09.md`.
+> Continuación de `reports/archive/2026-06/epis2-auditoria-fase3-pulido-m3-2026-06-09.md` (plan §Fase 3).
+> Fase 1: `reports/archive/2026-06/epis2-auditoria-fase3-pulido-m3-2026-06-09.md` · Fase 2: `reports/archive/2026-06/epis2-auditoria-fase3-pulido-m3-2026-06-09.md`.
 
 ## Alcance declarado
 

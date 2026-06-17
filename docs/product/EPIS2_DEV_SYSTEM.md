@@ -120,7 +120,7 @@ Tabla MF-1…51 ↔ legado: [`docs/quality/MF_UNIFIED_CANON.md`](../quality/MF_U
 | **Hilo D** / Tramo J | ✓ PEND-001 cerrado 2026-06-09 |
 | Ledger MF READY | 0 — usar hilo + tablero |
 
-Auditoría: [`reports/epis2-audit-avance-proyecto-2026-06-09.md`](../../reports/epis2-audit-avance-proyecto-2026-06-09.md) · Registro pendientes: [`reports/epis2-pendientes-registro-2026-06-09.md`](../../reports/epis2-pendientes-registro-2026-06-09.md)
+Auditoría: [`reports/archive/2026-06/epis2-audit-avance-proyecto-2026-06-09.md`](../../reports/archive/2026-06/epis2-audit-avance-proyecto-2026-06-09.md) · Registro pendientes: [`reports/archive/2026-06/epis2-pendientes-registro-2026-06-09.md`](../../reports/archive/2026-06/epis2-pendientes-registro-2026-06-09.md)
 
 ---
 

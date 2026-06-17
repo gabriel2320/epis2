@@ -1,0 +1,64 @@
+{
+  "botName": "EPIS2 UX-LAB Autopilot",
+  "allowedModes": ["audit-only", "self-heal-safe", "pr-candidate"],
+  "requiredBranchBase": "master",
+  "maxRootScripts": 18,
+  "clinicalFreeze": true,
+  "allowMerge": false,
+  "allowTag": false,
+  "allowClinicalLogicChanges": false,
+  "allowSchemaChanges": false,
+  "allowReportUpdates": true,
+  "allowPrettierFix": true,
+  "allowGateCatalogFix": true,
+  "allowTestIdOnlyChanges": true,
+  "requiredSignals": [
+    {
+      "id": "demo-environment-banner",
+      "testId": "epis2-demo-environment-banner",
+      "surface": "global"
+    },
+    {
+      "id": "shift-context-strip",
+      "testId": "epis2-shift-context-strip",
+      "surface": "census"
+    },
+    {
+      "id": "patient-identity-band",
+      "testId": "epis2-patient-identity-band",
+      "surface": "ficha"
+    },
+    {
+      "id": "demo-badge",
+      "match": "demoBadgeText",
+      "surface": "census"
+    },
+    {
+      "id": "draft-status",
+      "match": "paperWatermarkDraft",
+      "surface": "paper"
+    },
+    {
+      "id": "paper-watermark",
+      "testId": "epis2-paper-document-watermark",
+      "scopeTestId": "epis2-paper-chart-template-page-1",
+      "surface": "paper"
+    },
+    {
+      "id": "ai-degraded-chip",
+      "testId": "epis2-ai-degraded-chip",
+      "surface": "ficha"
+    }
+  ],
+  "lightGates": ["quality:root-script-surface-gate", "quality:ux-lab-close-catalog"],
+  "fullGates": ["quality:root-script-surface-gate", "quality:ux-lab-close-catalog"],
+  "finalVerdicts": ["GO-CANDIDATE", "NO-GO"],
+  "humanSignoffRequiredForRc4": true,
+  "consoleErrorAllowlist": [
+    "Ollama",
+    "ECONNREFUSED",
+    "AI unavailable",
+    "ai unavailable",
+    "fetch failed"
+  ]
+}

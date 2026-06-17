@@ -202,7 +202,7 @@ Entregables esperados:
 - Widgets borradores / pacientes recientes
 - Extensión journey dorado pasos 11–13
 - Contratos `packages/contracts` para agregados tablero
-- Tests + reporte `reports/epis2-12-dashboard-mode.md`
+- Tests + reporte `reports/archive/2026-06/epis2--.md`
 - Commit explícito (no automático)
 
 **No iniciar** V1 longitudinal masivo hasta cerrar gate V0.

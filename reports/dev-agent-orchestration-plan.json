@@ -5,14 +5,14 @@
   "wave": 13,
   "waveMode": "fast-dev",
   "activePhase": "A6",
-  "masterPlan": "reports/epis2-plan-desarrollo-unificado-2026-06-14.md",
-  "orchestrationReport": "reports/epis2-orquestacion-paralela-2026-06-14.md",
+  "masterPlan": "reports/archive/2026-06/epis2-plan-desarrollo-unificado-2026-06-14.md",
+  "orchestrationReport": "reports/archive/2026-06/epis2-orquestacion-paralela-2026-06-14.md",
   "iterationCommand": "npm run dev:rapid",
   "programs": {
     "PROG-FICHA-FIRST": {
       "state": "CLOSED",
       "wave": 1,
-      "evidence": "reports/epis2-prog-ficha-first-wave1-close-2026-06-14.md",
+      "evidence": "reports/archive/2026-06/epis2-prog-ficha-first-wave1-close-2026-06-14.md",
       "gate": "quality:ficha-first-gate"
     },
     "PROG-STRENGTHEN": {
@@ -150,7 +150,7 @@
           "database/migrations/**"
         ],
         "deliverables": [
-          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/archive/2026-06/epis2-orquestacion-paralela-2026-06-14.md",
           "reports/dev-agent-orchestration-plan.json",
           "reports/dev-agent-brief.md",
           "docs/AGENT_CONTEXT_MINIMAL.md"
@@ -244,7 +244,7 @@
           "database/migrations/**"
         ],
         "deliverables": [
-          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/archive/2026-06/epis2-orquestacion-paralela-2026-06-14.md",
           "reports/dev-agent-orchestration-plan.json",
           "reports/dev-agent-brief.md",
           "docs/AGENT_CONTEXT_MINIMAL.md"
@@ -337,7 +337,7 @@
           "database/migrations/**"
         ],
         "deliverables": [
-          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/archive/2026-06/epis2-orquestacion-paralela-2026-06-14.md",
           "reports/dev-agent-orchestration-plan.json",
           "reports/dev-agent-brief.md",
           "docs/AGENT_CONTEXT_MINIMAL.md"
@@ -430,7 +430,7 @@
           "database/migrations/**"
         ],
         "deliverables": [
-          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/archive/2026-06/epis2-orquestacion-paralela-2026-06-14.md",
           "reports/dev-agent-orchestration-plan.json",
           "reports/dev-agent-brief.md",
           "docs/AGENT_CONTEXT_MINIMAL.md"
@@ -524,7 +524,7 @@
           "database/migrations/**"
         ],
         "deliverables": [
-          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/archive/2026-06/epis2-orquestacion-paralela-2026-06-14.md",
           "reports/dev-agent-orchestration-plan.json",
           "reports/dev-agent-brief.md",
           "docs/AGENT_CONTEXT_MINIMAL.md"
@@ -621,7 +621,7 @@
           "database/migrations/**"
         ],
         "deliverables": [
-          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/archive/2026-06/epis2-orquestacion-paralela-2026-06-14.md",
           "reports/dev-agent-orchestration-plan.json",
           "reports/dev-agent-brief.md",
           "docs/AGENT_CONTEXT_MINIMAL.md"
@@ -721,7 +721,7 @@
           "database/migrations/**"
         ],
         "deliverables": [
-          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/archive/2026-06/epis2-orquestacion-paralela-2026-06-14.md",
           "reports/dev-agent-orchestration-plan.json",
           "reports/dev-agent-brief.md",
           "docs/AGENT_CONTEXT_MINIMAL.md",
@@ -821,7 +821,7 @@
           "database/migrations/**"
         ],
         "deliverables": [
-          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/archive/2026-06/epis2-orquestacion-paralela-2026-06-14.md",
           "reports/dev-agent-orchestration-plan.json",
           "reports/dev-agent-brief.md",
           "docs/AGENT_CONTEXT_MINIMAL.md",
@@ -920,7 +920,7 @@
           "database/migrations/**"
         ],
         "deliverables": [
-          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/archive/2026-06/epis2-orquestacion-paralela-2026-06-14.md",
           "reports/dev-agent-orchestration-plan.json",
           "reports/dev-agent-brief.md",
           "docs/AGENT_CONTEXT_MINIMAL.md",
@@ -1024,7 +1024,7 @@
           "database/migrations/**"
         ],
         "deliverables": [
-          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/archive/2026-06/epis2-orquestacion-paralela-2026-06-14.md",
           "reports/dev-agent-orchestration-plan.json",
           "reports/dev-agent-brief.md",
           "docs/AGENT_CONTEXT_MINIMAL.md",
@@ -1130,7 +1130,7 @@
           "database/migrations/**"
         ],
         "deliverables": [
-          "reports/epis2-orquestacion-paralela-2026-06-14.md",
+          "reports/archive/2026-06/epis2-orquestacion-paralela-2026-06-14.md",
           "reports/dev-agent-orchestration-plan.json",
           "reports/dev-agent-brief.md",
           "docs/AGENT_CONTEXT_MINIMAL.md",
@@ -1224,7 +1224,7 @@
         "database/migrations/**"
       ],
       "deliverables": [
-        "reports/epis2-orquestacion-paralela-2026-06-14.md",
+        "reports/archive/2026-06/epis2-orquestacion-paralela-2026-06-14.md",
         "reports/dev-agent-orchestration-plan.json",
         "reports/dev-agent-brief.md",
         "reports/dev-agent-session.md"

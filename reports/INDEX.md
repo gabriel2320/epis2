@@ -1,6 +1,6 @@
 # reports/ — Índice y política
 
-**Actualizado:** 2026-06-09 · Censo actual: ~305 `.md`
+**Actualizado:** 2026-06-16 · Censo actual: ~300 `.md` en raíz · 233 archivados en `archive/2026-06/`
 
 ## Convención
 
@@ -27,13 +27,13 @@
 
 Ver tabla «Hecho» del [tablero](../docs/product/EPIS2_TABLERO.md) — cada fila enlaza su reporte. Destacados recientes:
 
-- [`epis2-auditoria-profunda-2026-06-09.md`](./epis2-auditoria-profunda-2026-06-09.md) — plan 5 fases (1–4 ✓)
-- [`epis2-auditoria-inventario-limpieza-2026-06-09.md`](./epis2-auditoria-inventario-limpieza-2026-06-09.md) — inventario + plan F1–F5
-- [`epis2-f1-f2-limpieza-print-2026-06-09.md`](./epis2-f1-f2-limpieza-print-2026-06-09.md) — PEND-006 código cerrado
-- [`epis2-pendientes-registro-2026-06-09.md`](./epis2-pendientes-registro-2026-06-09.md) — registro PEND-001…012
-- [`epis2-norma-fullstack-compliance-2026-06-10.md`](./epis2-norma-fullstack-compliance-2026-06-10.md) — auditoría norma full stack (≈70%) → [plan Hilo NORM](../docs/product/EPIS2_NORMA_FULLSTACK_PLAN.md)
-- [`epis2-norm-n1-quick-wins-2026-06-10.md`](./epis2-norm-n1-quick-wins-2026-06-10.md) — Tramo N1 cerrado (MF-101…105 + avance 201/302/303/401/402; gates verdes)
-- [`epis2-norm-n4-ui-a11y-e2e-2026-06-10.md`](./epis2-norm-n4-ui-a11y-e2e-2026-06-10.md) — Tramo N4 cerrado (axe + role-first + drawer móvil + RHF server errors; re-auditoría §4/§5/§10, ≈85%)
-- [`epis2-norm-n3-api-contract-2026-06-10.md`](./epis2-norm-n3-api-contract-2026-06-10.md) — Tramo N3 cerrado (OpenAPI desde Zod + ADR/threat model previos)
-- [`epis2-norm-hilo-close-2026-06-10.md`](./epis2-norm-hilo-close-2026-06-10.md) — Hilo NORM cerrado (16/16 MF, ≈90%)
-- [`epis2-m3-visual-pass-2026-06-10.md`](./epis2-m3-visual-pass-2026-06-10.md) — Pasada visual M3 V1–V6 (capturas en `m3-visual-evidence/2026-06-10/`)
+- [`epis2-auditoria-profunda-2026-06-09.md`](./archive/2026-06/epis2-auditoria-profunda-2026-06-09.md) — plan 5 fases (1–4 ✓)
+- [`epis2-auditoria-inventario-limpieza-2026-06-09.md`](./archive/2026-06/epis2-auditoria-inventario-limpieza-2026-06-09.md) — inventario + plan F1–F5
+- [`epis2-f1-f2-limpieza-print-2026-06-09.md`](./archive/2026-06/epis2-f1-f2-limpieza-print-2026-06-09.md) — PEND-006 código cerrado
+- [`epis2-pendientes-registro-2026-06-09.md`](./archive/2026-06/epis2-pendientes-registro-2026-06-09.md) — registro PEND-001…012
+- [`epis2-norma-fullstack-compliance-2026-06-10.md`](./archive/2026-06/epis2-norma-fullstack-compliance-2026-06-10.md) — auditoría norma full stack (≈70%) → [plan Hilo NORM](../docs/product/EPIS2_NORMA_FULLSTACK_PLAN.md)
+- [`epis2-norm-n1-quick-wins-2026-06-10.md`](./archive/2026-06/epis2-norm-n1-quick-wins-2026-06-10.md) — Tramo N1 cerrado (MF-101…105 + avance 201/302/303/401/402; gates verdes)
+- [`epis2-norm-n4-ui-a11y-e2e-2026-06-10.md`](./archive/2026-06/epis2-norm-n4-ui-a11y-e2e-2026-06-10.md) — Tramo N4 cerrado (axe + role-first + drawer móvil + RHF server errors; re-auditoría §4/§5/§10, ≈85%)
+- [`epis2-norm-n3-api-contract-2026-06-10.md`](./archive/2026-06/epis2-norm-n3-api-contract-2026-06-10.md) — Tramo N3 cerrado (OpenAPI desde Zod + ADR/threat model previos)
+- [`epis2-norm-hilo-close-2026-06-10.md`](./archive/2026-06/epis2-norm-hilo-close-2026-06-10.md) — Hilo NORM cerrado (16/16 MF, ≈90%)
+- [`epis2-m3-visual-pass-2026-06-10.md`](./archive/2026-06/epis2-m3-visual-pass-2026-06-10.md) — Pasada visual M3 V1–V6 (capturas en `m3-visual-evidence/2026-06-10/`)

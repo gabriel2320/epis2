@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
-const report = join(root, 'reports/epis2-dev-automation-week2-2026-06-07.md');
+const report = join(root, 'reports/archive/2026-06/epis2-dev-automation-week2-2026-06-07.md');
 if (!existsSync(report)) errors.push('falta reporte week2');
 
 for (const gate of [

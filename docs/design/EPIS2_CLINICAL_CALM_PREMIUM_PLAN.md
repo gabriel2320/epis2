@@ -2,7 +2,7 @@
 
 **Versión:** 1.0 · **Fecha:** 2026-06-10  
 **Tipo:** Solo estética y composición — **sin cambio de lógica clínica**  
-**Estado signoff:** **GO** humano · 2026-06-11 (`reports/epis2-entrega-c2-calm-premium-2026-06-11.md`)
+**Estado signoff:** **GO** humano · 2026-06-11 (`reports/archive/2026-06/epis2-entrega-c2-calm-premium-2026-06-11.md`)
 
 **Canon relacionado:**
 

@@ -42,4 +42,4 @@ Slice 3: `reports/epis2-plan-f-slice-3.md` (RLS transacciones + auth híbrida).
 
 ## Cierre
 
-Plan F+G: `reports/epis2-plan-f-complete.md` · `reports/epis2-plan-g-complete.md`
+Plan F+G: `reports/archive/2026-06/epis2-plan-f-complete.md` · `reports/archive/2026-06/epis2-plan-g-complete.md`

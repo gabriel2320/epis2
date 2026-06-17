@@ -4,7 +4,7 @@
 
 **Credenciales:** `medico.demo` / `DEMO-CLAVE-MEDICO` — ver `docs/auth/DEMO_USERS.md`.
 
-**Resultado final:** **GO DEMO UX/CE** (2026-06-04) — ver `reports/epis2-ux-ce-signoff-closure-2026-06-04.md` · previo 2026-06-05 `reports/epis2-pilot-human-2026-06-05.md`
+**Resultado final:** **GO DEMO UX/CE** (2026-06-04) — ver `reports/archive/2026-06/epis2-ux-ce-signoff-closure-2026-06-04.md` · previo 2026-06-05 `reports/epis2-pilot-human-2026-06-05.md`
 
 ---
 

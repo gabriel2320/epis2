@@ -85,7 +85,7 @@ export const DEV_SUBAGENTS = {
     title: 'Paridad CI local',
     triggers: ['CI', 'integración Postgres', 'pre-PR'],
     gates: ['npm run quality:local-ci', 'npm run quality:ci-parity'],
-    canon: ['reports/epis2-dev-automation-week1-2026-06-07.md'],
+    canon: ['reports/archive/2026-06/epis2-dev-automation-week1-2026-06-07.md'],
   },
 };
 

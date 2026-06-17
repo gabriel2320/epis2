@@ -1,7 +1,7 @@
 # EPIS2 — Tríada de repositorios (producto · simulador · biblioteca)
 
 **Versión:** 1.0 · **Fecha:** 2026-06-14  
-**Programa:** PROG-CONCILIACION-TRIADA-2026 · Plan: [`reports/epis2-plan-conciliacion-triada-2026-06-14.md`](../../reports/epis2-plan-conciliacion-triada-2026-06-14.md)
+**Programa:** PROG-CONCILIACION-TRIADA-2026 · Plan: [`reports/archive/2026-06/epis2-plan-conciliacion-triada-2026-06-14.md`](../../reports/archive/2026-06/epis2-plan-conciliacion-triada-2026-06-14.md)
 
 > **Principio:** tres repos hermanos, tres roles. Integración solo por **contratos exportados** (JSON, YAML, HTTP). Nunca import cruzado de código clínico.
 

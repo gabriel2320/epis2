@@ -2,7 +2,7 @@
   "version": "1.1.0",
   "executionOrderNote": "Orden canónico post-MF-155: MF-183→184→185→186→187→156→188→157→158→159→160→161… Ver MICROPHASE_PROGRAM.md §Orden canónico",
   "program": "EPIS2 post-MVP microfases",
-  "auditBaseline": "reports/epis2-comprehensive-audit-2026-06-05.md",
+  "auditBaseline": "reports/archive/2026-06/epis2-comprehensive-audit-2026-06-05.md",
   "mvpBaseline": "V0-V5 demo cerrado; arquitectura sana",
   "states": ["BLOCKED", "READY", "IN_PROGRESS", "DONE"],
   "rules": {
@@ -113,9 +113,9 @@
       "evidenceRequired": [
         "docs/quality/GOLDEN_M3_MATRIX.md",
         "GOLDEN_CLINICAL_JOURNEY.md actualizado",
-        "reports/epis2-mf-184-golden-m3-matrix.md"
+        "reports/archive/2026-06/epis2-mf-184-golden-m3-matrix.md"
       ],
-      "closureReport": "reports/epis2-mf-184-golden-m3-matrix.md",
+      "closureReport": "reports/archive/2026-06/epis2-mf-184-golden-m3-matrix.md",
       "unblocks": ["MF-185"]
     },
     {
@@ -510,9 +510,9 @@
       "state": "DONE",
       "evidenceRequired": [
         "checklist M3 humano completado",
-        "reports/epis2-mf-178-m3-human-signoff.md"
+        "reports/archive/2026-06/epis2-mf-178-m3-human-signoff.md"
       ],
-      "closureReport": "reports/epis2-mf-178-m3-human-signoff.md",
+      "closureReport": "reports/archive/2026-06/epis2-mf-178-m3-human-signoff.md",
       "unblocks": ["MF-179"]
     },
     {

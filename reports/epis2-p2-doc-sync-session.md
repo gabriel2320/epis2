@@ -19,7 +19,7 @@ Sincronizar README, manifiesto legacy, plan M3, ROADMAP y AGENTS con estado real
 | `docs/design/M3_ADOPTION_PLAN.md` | Secuencia M3 completada; post-M3 nota |
 | `docs/ROADMAP.md` | EPIS2-12 + frontera PILOT-HUMAN |
 | `AGENTS.md` | Fases EPIS2-12, MUI, M3 |
-| `reports/epis2-project-audit-2026-06-05.md` | P2 doc marcado OK |
+| `reports/archive/2026-06/epis2-project-audit-2026-06-05.md` | P2 doc marcado OK |
 
 ---
 

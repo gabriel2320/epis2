@@ -2,7 +2,7 @@
 
 **Plan:** [`docs/product/EPIS2_PAPER_MODE_DEV_PLAN.md`](../docs/product/EPIS2_PAPER_MODE_DEV_PLAN.md)  
 **Conciliación mirror:** [`docs/product/EPIS2_PAPER_MIRROR_RECONCILIATION.md`](../docs/product/EPIS2_PAPER_MIRROR_RECONCILIATION.md)  
-**Auditoría:** [`reports/epis2-paper-mirror-audit-2026-06-11.md`](./epis2-paper-mirror-audit-2026-06-11.md)  
+**Auditoría:** [`reports/archive/2026-06/epis2-paper-mirror-audit-2026-06-11.md`](./archive/2026-06/epis2-paper-mirror-audit-2026-06-11.md)  
 **Ledger:** [`docs/quality/paper-mode-ledger.json`](../docs/quality/paper-mode-ledger.json)  
 **Subagente primario:** `layers-integrator` · assist → `ollama-clinical` · cierre → `gate-runner`
 
