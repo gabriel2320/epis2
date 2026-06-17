@@ -26,8 +26,9 @@
 | Buscar paciente | `/app/buscar` | ✓ |
 | Censo | `/app/censo` | ✓ |
 | Ficha resumen | `/app/pacientes/:id/resumen` | ✓ |
-| Sidebar dos niveles | layout global | ✓ |
+| Sidebar dos niveles epis2g | layout global | ✓ |
 | `CicaClinicalList` | buscar/censo | ✓ |
+| Capa visual epis2g | `cicaEpis2gVisual.ts` | ✓ rail + panel + cards |
 
 ## Etapa 2 ◐ (parcial)
 

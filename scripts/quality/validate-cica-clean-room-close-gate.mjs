@@ -12,6 +12,7 @@ const gates = [
   'validate-cica-no-legacy-shell-gate.mjs',
   'validate-cica-no-dashboard-mode-gate.mjs',
   'validate-cica-screen-registry-gate.mjs',
+  'validate-cica-epis2g-structure-gate.mjs',
   'validate-cica-action-density-gate.mjs',
   'validate-cica-paper-standalone-gate.mjs',
   'validate-cica-responsive-gate.mjs',
