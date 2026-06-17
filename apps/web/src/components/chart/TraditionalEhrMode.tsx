@@ -9,6 +9,7 @@ import type { ReactNode } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import { ClinicalPatientViewCdsPanel } from '../cds/ClinicalPatientViewCdsPanel.js';
 import { PatientClinicalSummaryGrid } from '../clinical-summary/PatientClinicalSummaryGrid.js';
+import { ClinicalProbableActionsPanel } from './ClinicalProbableActionsPanel.js';
 import { ClassicChartSummaryPanel } from './ClassicChartSummaryPanel.js';
 import { ClassicChartSubNav } from './ClassicChartSubNav.js';
 import { ClassicChartTabs } from './ClassicChartTabs.js';
@@ -180,14 +181,22 @@ export function TraditionalEhrMode({
     mainContent ??
     (activeSection === 'navSummary' && summaryFields ? (
       cicaLayout ? (
-        <ClassicChartSummaryPanel
-          demoCaseCode={demoCaseCode}
-          summaryFields={summaryFields}
-          longitudinal={longitudinal}
-          onViewFullTimeline={onViewFullTimeline}
-          onOpenResults={onOpenResults}
-          onOpenDocuments={onOpenDocuments}
-        />
+        <>
+          {probableActionChips && probableActionChips.length > 0 ? (
+            <ClinicalProbableActionsPanel
+              chips={probableActionChips}
+              onSelect={onProbableAction ?? (() => {})}
+            />
+          ) : null}
+          <ClassicChartSummaryPanel
+            demoCaseCode={demoCaseCode}
+            summaryFields={summaryFields}
+            longitudinal={longitudinal}
+            onViewFullTimeline={onViewFullTimeline}
+            onOpenResults={onOpenResults}
+            onOpenDocuments={onOpenDocuments}
+          />
+        </>
       ) : (
         <PatientClinicalSummaryGrid
           surfaceProfile="calm"
@@ -243,7 +252,7 @@ export function TraditionalEhrMode({
           flexDirection: 'column',
         }}
       >
-        {alerts && alerts.length > 0 && !cicaLayout ? (
+        {alerts && alerts.length > 0 ? (
           <ClinicalPatientViewCdsPanel alerts={alerts} />
         ) : null}
         <ClassicChartSubNav
