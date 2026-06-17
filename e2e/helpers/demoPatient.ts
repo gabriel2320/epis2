@@ -220,25 +220,39 @@ export async function expectCicaPatientSummaryReady(page: Page) {
 }
 
 export async function fillMinimalPrescriptionDraft(page: Page) {
-  await expect(page.getByTestId('epis2-form-prescription')).toBeVisible({ timeout: 15_000 });
-  await expect(page.getByTestId('epis2-form-field-cell-medication')).toBeVisible({
+  await expect(page).toHaveURL(/\/espacio\/receta/, { timeout: 15_000 });
+  const formRoot = page
+    .getByTestId('epis2-generated-clinical-page')
+    .or(page.getByTestId('epis2-clinical-action-pane'));
+  await expect(formRoot.first()).toBeVisible({ timeout: 15_000 });
+  const prescriptionForm = formRoot.first().getByTestId('epis2-form-prescription');
+  await expect(prescriptionForm).toBeVisible({ timeout: 15_000 });
+  await expect(prescriptionForm.getByTestId('epis2-form-field-cell-medication')).toBeVisible({
     timeout: 15_000,
   });
-  const medicationCatalog = page.getByTestId('epis2-medication-catalog-autocomplete-input');
+  const medicationCatalog = prescriptionForm.getByTestId(
+    'epis2-medication-catalog-autocomplete-input',
+  );
   const medication =
     (await medicationCatalog.count()) > 0
       ? medicationCatalog
-      : page.getByTestId('epis2-form-field-cell-medication').locator('input').first();
+      : prescriptionForm.getByTestId('epis2-form-field-cell-medication').locator('input').first();
   await expect(medication).toBeVisible({ timeout: 15_000 });
   await expect(async () => {
     await medication.fill('Metformina 850 mg');
     await expect(medication).toHaveValue('Metformina 850 mg');
   }).toPass({ timeout: 15_000 });
-  await page.getByTestId('epis2-field-dose').locator('input').fill('1 comprimido');
-  await page.getByTestId('epis2-field-quantity').locator('input').fill('30 comprimidos');
-  await page.getByTestId('epis2-field-frequency').locator('input').fill('Cada 12 horas');
-  await page.getByTestId('epis2-field-duration').locator('input').fill('30 días');
-  await page
+  await prescriptionForm.getByTestId('epis2-field-dose').locator('input').fill('1 comprimido');
+  await prescriptionForm
+    .getByTestId('epis2-field-quantity')
+    .locator('input')
+    .fill('30 comprimidos');
+  await prescriptionForm
+    .getByTestId('epis2-field-frequency')
+    .locator('input')
+    .fill('Cada 12 horas');
+  await prescriptionForm.getByTestId('epis2-field-duration').locator('input').fill('30 días');
+  await prescriptionForm
     .getByRole('textbox', { name: /indicaciones al paciente/i })
     .fill('Tomar con las comidas (demo E2E)');
 }

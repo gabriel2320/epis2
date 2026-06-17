@@ -2,7 +2,6 @@
  * ADR-002 — E2E dual chart modes (opt-in CI: VITE_ENABLE_DUAL_CHART_MODES=true).
  */
 import { test, expect } from '@playwright/test';
-import { getDemoCaseByCode } from '@epis2/test-fixtures';
 import {
   fillCommandPaletteQuery,
   fillMinimalPrescriptionDraft,
@@ -33,8 +32,6 @@ async function openPaperFromDualFicha(page: Page) {
   await expect(page).toHaveURL(/chartMode=paper/, { timeout: 15_000 });
   await expect(page.getByTestId('epis2-paper-chart-mode')).toBeVisible({ timeout: 15_000 });
 }
-
-const demoPatientId = getDemoCaseByCode('DEMO-005')!.patientId;
 
 test.describe('Dual chart modes ADR-002', () => {
   test.beforeEach(async ({ page }) => {
@@ -156,8 +153,9 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
   });
 
   test('g6) microjourneys post-receta (MF-DI-09)', async ({ page }) => {
-    await pinDemoCase(page, 'DEMO-005');
-    await page.goto(`/espacio/receta?patientId=${demoPatientId}`);
+    await openDemoFicha(page, 'DEMO-005');
+    await openClassicChartTab(page, 'more');
+    await page.getByTestId('epis2-chart-layout-prescription').click();
     await fillMinimalPrescriptionDraft(page);
     const saveButton = page.getByTestId('epis2-form-save');
     await expect(saveButton).toBeEnabled();
