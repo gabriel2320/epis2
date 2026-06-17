@@ -28,7 +28,7 @@ const required = [
   ['closure ff-12', 'reports/archive/2026-06/epis2-mf-ff-12-web-ai-boundary.md'],
   ['closure ff-13', 'reports/archive/2026-06/epis2-mf-ff-13-ai-assist.md'],
   ['closure ff-14', 'reports/archive/2026-06/epis2-mf-ff-14-medrepo-loader.md'],
-  ['closure prog ficha-first', 'reports/archive/2026-06/epis2-prog-ficha-first-close-2026.md'],
+  ['closure prog ficha-first', 'reports/epis2-prog-ficha-first-close-2026.md'],
   ['vision', 'docs/product/VISION_EPIS2.md'],
 ];
 
