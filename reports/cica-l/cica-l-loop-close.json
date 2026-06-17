@@ -1,0 +1,24 @@
+{
+  "program": "PROG-AESTHETIC-RESET",
+  "loop": "CICA-L",
+  "prId": "PR-AEST-07",
+  "loopStatus": "closed",
+  "screensCompleted": [
+    "CICA-L-02",
+    "CICA-L-03",
+    "CICA-L-04",
+    "CICA-L-05",
+    "CICA-L-06",
+    "CICA-L-07",
+    "CICA-L-08",
+    "CICA-L-09",
+    "CICA-L-10",
+    "CICA-L-11"
+  ],
+  "excluded": ["CICA-L-01"],
+  "excludedReason": "Censo — tramo PROG-UX-LAB / MF-UXLAB-01; fuera del loop ficha clásica",
+  "closedAt": "2026-06-11",
+  "closeReport": "reports/epis2-pr-aest-07-cica-l-close.md",
+  "screenshotManifest": "reports/cica-l/SCREENSHOTS.md",
+  "e2eSpec": "e2e/aesthetic-classic-mode.spec.ts"
+}

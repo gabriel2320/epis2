@@ -101,7 +101,7 @@ Humano: pendiente PR-AEST-07 signoff
 ## Próximo paso
 
 ```text
-Cierre loop CICA-L — quality:cica-loop-close · PR-AEST-07 screenshots
+Cierre loop CICA-L — PR-AEST-07 ✓ — reports/epis2-pr-aest-07-cica-l-close.md
 CICA-SG scoring en código (post-loop)
 MF-AEST-04 clinical-calm default
 ```

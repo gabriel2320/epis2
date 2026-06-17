@@ -45,8 +45,8 @@ if (!suggestions.includes('buildContextPanelSuggestions')) {
   errors.push('contextPanelSuggestions incompleto');
 }
 
-if (!existsSync(join(root, 'reports/epis2-mf-cm-05-panel-ia.md'))) {
-  errors.push('falta reports/epis2-mf-cm-05-panel-ia.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-cm-05-panel-ia.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-cm-05-panel-ia.md');
 }
 
 const vitest = spawnSync(

@@ -131,7 +131,7 @@ describe('GeneratedClinicalFormPage — Ola 2 M3-UI', () => {
     expect(screen.getByText(/Diagnóstico CIE-10/i)).toBeInTheDocument();
     expect(screen.getByTestId('epis2-draft-status-chip')).toBeInTheDocument();
     expect(screen.queryByTestId('epis2-clinical-context-toggle')).not.toBeInTheDocument();
-    expect(screen.getByTestId('epis2-clinical-form-action-bar')).toBeInTheDocument();
+    expect(screen.getByTestId('clinical-action-bar')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: copy.forms.save })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: copy.forms.sign })).toBeInTheDocument();
   });

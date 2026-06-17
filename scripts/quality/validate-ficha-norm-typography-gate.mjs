@@ -57,8 +57,9 @@ function scanDir(relDir) {
 scanDir('apps/web/src/components/chart');
 scanDir('apps/web/src/components/clinical-summary');
 
-const reportPath = join(root, 'reports/epis2-mf-norm-05-typography.md');
-if (!existsSync(reportPath)) errors.push('falta reports/epis2-mf-norm-05-typography.md');
+const reportPath = join(root, 'reports/archive/2026-06/epis2-mf-norm-05-typography.md');
+if (!existsSync(reportPath))
+  errors.push('falta reports/archive/2026-06/epis2-mf-norm-05-typography.md');
 
 if (errors.length) {
   console.error('ficha-norm-typography-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));

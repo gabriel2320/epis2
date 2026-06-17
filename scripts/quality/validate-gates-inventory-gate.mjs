@@ -14,7 +14,9 @@ if (!existsSync(inventoryScript)) {
   errors.push('falta tools/gates/inventory-orphans.mjs');
 }
 if (!existsSync(report)) {
-  errors.push('falta reports/gates-inventory-2026-06.md — ejecutar node tools/gates/inventory-orphans.mjs');
+  errors.push(
+    'falta reports/gates-inventory-2026-06.md — ejecutar node tools/gates/inventory-orphans.mjs',
+  );
 } else {
   const text = readFileSync(report, 'utf8');
   for (const token of ['Gates wired', 'catalog-only', 'Entradas catálogo activo']) {

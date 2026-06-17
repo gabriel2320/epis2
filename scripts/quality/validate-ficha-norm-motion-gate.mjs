@@ -20,8 +20,8 @@ for (const [rel, needle] of [
   if (!src.includes(needle)) errors.push(`${rel} debe usar ${needle}`);
 }
 
-if (!existsSync(join(root, 'reports/epis2-mf-norm-08-motion.md'))) {
-  errors.push('falta reports/epis2-mf-norm-08-motion.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-norm-08-motion.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-norm-08-motion.md');
 }
 
 if (errors.length) {

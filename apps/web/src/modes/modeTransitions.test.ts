@@ -43,7 +43,7 @@ describe('modeTransitions', () => {
     const navigate = vi.fn();
     transitionDashboardToCommand(navigate, 'icu');
     expect(navigate).toHaveBeenCalledWith({
-      to: '/espacio/buscar-paciente',
+      to: '/app/buscar',
       search: { context: 'dashboard', tab: 'icu' },
     });
   });

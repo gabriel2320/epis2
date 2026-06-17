@@ -9,9 +9,9 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
 const evidence = [
-  'reports/epis2-mf-ic-01-minsal-export.md',
-  'reports/epis2-mf-ic-02-snre-staging.md',
-  'reports/epis2-mf-ic-03-questionnaire.md',
+  'reports/archive/2026-06/epis2-mf-ic-01-minsal-export.md',
+  'reports/archive/2026-06/epis2-mf-ic-02-snre-staging.md',
+  'reports/archive/2026-06/epis2-mf-ic-03-questionnaire.md',
 ];
 
 const requiredSources = [

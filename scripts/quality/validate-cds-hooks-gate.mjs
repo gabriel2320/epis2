@@ -13,7 +13,7 @@ const requiredCu02 = [
   'packages/clinical-domain/src/cdsHooks/mapClinicalAlertsToPatientViewCards.test.ts',
   'apps/web/src/components/cds/ClinicalPatientViewCdsPanel.tsx',
   'apps/web/src/components/cds/ClinicalPatientViewCdsPanel.test.tsx',
-  'reports/epis2-mf-cu-02-patient-view.md',
+  'reports/archive/2026-06/epis2-mf-cu-02-patient-view.md',
 ];
 
 const requiredCu03 = [
@@ -23,13 +23,13 @@ const requiredCu03 = [
   'apps/web/src/pages/prescription/ClinicalOrderSelectCdsPanel.test.tsx',
   'apps/api/src/routes/cds/routes.ts',
   'apps/api/src/routes/cds/orderSelect.integration.test.ts',
-  'reports/epis2-mf-cu-03-order-select.md',
+  'reports/archive/2026-06/epis2-mf-cu-03-order-select.md',
 ];
 
 const requiredCu04 = [
   'packages/contracts/src/cdsCards.ts',
   'apps/api/src/routes/cds/cards.integration.test.ts',
-  'reports/epis2-mf-cu-04-cds-api.md',
+  'reports/archive/2026-06/epis2-mf-cu-04-cds-api.md',
 ];
 
 for (const rel of [...requiredCu02, ...requiredCu03, ...requiredCu04]) {

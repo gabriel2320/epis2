@@ -34,7 +34,7 @@ describe('EpisClinicalFormActionBar', () => {
     await user.click(screen.getByTestId('epis2-form-sign'));
     expect(onSign).toHaveBeenCalledTimes(1);
 
-    await user.click(screen.getByTestId('epis2-form-more-actions'));
+    await user.click(screen.getByTestId('epis2-primary-action-more'));
     await user.click(screen.getByText(copy.forms.suggestAi));
     expect(onOverflow).toHaveBeenCalledTimes(1);
   });

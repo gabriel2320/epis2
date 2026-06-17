@@ -23,8 +23,9 @@ export type PatientIdentityBandProps = {
   allergyLabels?: readonly string[] | undefined;
   documentStatus?: PatientDocumentStatus | undefined;
   metaLine?: string | undefined;
-  /** MF-UXLAB-02 — badge DEMO/SIM en banda identidad (trust ladder). */
   showDemoBadge?: boolean | undefined;
+  /** compact = ficha CICA dentro de ClinicalNavStrip (sin avatar grande). */
+  variant?: 'default' | 'compact' | undefined;
   testId?: string | undefined;
 };
 
@@ -50,17 +51,28 @@ function documentStatusLabel(status: PatientDocumentStatus): string {
 function IdentityField({ label, value }: { label: string; value: string }) {
   return (
     <Stack spacing={0} sx={{ minWidth: 0 }}>
-      <Typography variant="caption" color="text.secondary" lineHeight={1.2}>
+      <Typography
+        variant="caption"
+        color="text.secondary"
+        lineHeight={1.2}
+        sx={{ fontSize: '0.6875rem' }}
+      >
         {label}
       </Typography>
-      <Typography variant="body2" fontWeight={500} noWrap lineHeight={1.3}>
+      <Typography
+        variant="body2"
+        fontWeight={500}
+        noWrap
+        lineHeight={1.3}
+        sx={{ fontSize: '0.8125rem' }}
+      >
         {value}
       </Typography>
     </Stack>
   );
 }
 
-/** Capa 2 — identidad paciente + alergias siempre visibles (canon visual §2). */
+/** Banda identidad paciente — tabular, siempre visible en ficha clásica. */
 export function PatientIdentityBand({
   displayName,
   nationalId,
@@ -73,49 +85,64 @@ export function PatientIdentityBand({
   documentStatus = 'draft',
   metaLine,
   showDemoBadge = false,
+  variant = 'default',
   testId = 'epis2-patient-identity-band',
 }: PatientIdentityBandProps) {
+  const compact = variant === 'compact';
   const allergiesVisible = allergyLabels.length > 0;
   const draftStatus = documentStatusToDraft(documentStatus);
 
   return (
     <Stack
       data-testid={testId}
-      spacing={1}
+      spacing={compact ? 0.75 : 1}
       sx={{
-        minHeight: epis2ClinicalShellTokens.identityBandMinHeight,
-        px: 2,
-        py: 1.25,
+        minHeight: compact ? 56 : epis2ClinicalShellTokens.identityBandMinHeight,
+        px: { xs: 2, md: 3 },
+        py: compact ? 1 : 1.25,
         borderBottom: 1,
         borderColor: 'divider',
         bgcolor: 'background.paper',
         flexShrink: 0,
       }}
     >
-      <Stack direction="row" alignItems="center" spacing={2} sx={{ minWidth: 0 }}>
-        <Box
-          aria-hidden
-          sx={{
-            width: 44,
-            height: 44,
-            borderRadius: '50%',
-            bgcolor: epis2ClinicalShellTokens.institutionalNavy,
-            color: epis2ClinicalShellTokens.onInstitutional,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontWeight: 600,
-            flexShrink: 0,
-          }}
-        >
-          {initials(displayName)}
-        </Box>
-        <Stack spacing={0.25} sx={{ minWidth: 0, flex: 1 }}>
-          <Typography variant="h6" fontWeight={600} noWrap>
+      <Stack direction="row" alignItems="center" spacing={1.5} sx={{ minWidth: 0 }}>
+        {!compact ? (
+          <Box
+            aria-hidden
+            sx={{
+              width: 40,
+              height: 40,
+              borderRadius: '50%',
+              bgcolor: 'primary.main',
+              color: 'primary.contrastText',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 600,
+              fontSize: '0.875rem',
+              flexShrink: 0,
+            }}
+          >
+            {initials(displayName)}
+          </Box>
+        ) : null}
+        <Stack spacing={0.15} sx={{ minWidth: 0, flex: 1 }}>
+          <Typography
+            variant={compact ? 'subtitle1' : 'h6'}
+            fontWeight={600}
+            noWrap
+            sx={{ fontSize: compact ? '1rem' : undefined, lineHeight: 1.25 }}
+          >
             {displayName}
           </Typography>
           {metaLine ? (
-            <Typography variant="caption" color="text.secondary" noWrap>
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              noWrap
+              sx={{ fontSize: '0.75rem' }}
+            >
               {metaLine}
             </Typography>
           ) : null}
@@ -145,9 +172,20 @@ export function PatientIdentityBand({
         direction="row"
         flexWrap="wrap"
         useFlexGap
-        spacing={2}
+        spacing={compact ? 1.5 : 2}
         alignItems="center"
         data-testid="epis2-patient-identity-fields"
+        sx={{
+          ...(compact
+            ? {
+                '& > *:not(:last-child)': {
+                  pr: 1.5,
+                  borderRight: 1,
+                  borderColor: 'divider',
+                },
+              }
+            : {}),
+        }}
       >
         {nationalId ? (
           <IdentityField label={copy.chartModes.identityRun} value={nationalId} />
@@ -163,25 +201,34 @@ export function PatientIdentityBand({
         {admissionDate ? (
           <IdentityField label={copy.chartModes.identityAdmission} value={admissionDate} />
         ) : null}
-        <Stack direction="row" alignItems="center" spacing={0.75} sx={{ minWidth: 0 }}>
-          <Typography variant="caption" color="text.secondary">
+        <Stack
+          direction="row"
+          alignItems="center"
+          spacing={0.75}
+          sx={{ minWidth: 0, flexWrap: 'wrap' }}
+        >
+          <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.6875rem' }}>
             {copy.chartModes.identityAllergies}:
           </Typography>
           {allergiesVisible ? (
-            allergyLabels
-              .slice(0, 6)
-              .map((label) => (
-                <Chip
-                  key={label}
-                  size="small"
-                  color="warning"
-                  variant="outlined"
-                  label={label}
-                  data-testid="epis2-patient-allergy-chip"
-                />
-              ))
+            allergyLabels.slice(0, 4).map((label) => (
+              <Chip
+                key={label}
+                size="small"
+                color="warning"
+                variant="outlined"
+                label={label}
+                data-testid="epis2-patient-allergy-chip"
+                sx={{
+                  height: 22,
+                  fontSize: '0.6875rem',
+                  borderColor: epis2ClinicalShellTokens.allergyChipBorder,
+                  bgcolor: epis2ClinicalShellTokens.allergyChipBg,
+                }}
+              />
+            ))
           ) : (
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.8125rem' }}>
               {copy.chartModes.identityNoAllergies}
             </Typography>
           )}

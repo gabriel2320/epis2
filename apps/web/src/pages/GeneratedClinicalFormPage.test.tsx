@@ -198,7 +198,7 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
     expect(screen.getByText('Nota previa demo')).toBeInTheDocument();
   });
 
-  it('muestra chips SOAP cuando IA está disponible y faltan campos', async () => {
+  it('CICA-L-04 — oculta SoapHints en evolución (scrollspy es suficiente)', async () => {
     fetchAiStatus.mockResolvedValue({
       available: true,
       ollama: 'up',
@@ -208,9 +208,9 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
     renderForm();
 
     await waitFor(() => {
-      expect(screen.getByTestId('epis2-soap-gap-hints')).toBeInTheDocument();
+      expect(screen.getByTestId('epis2-cica-evolution-form')).toBeInTheDocument();
     });
-    expect(screen.getByTestId('epis2-soap-hint-subjective')).toBeInTheDocument();
+    expect(screen.queryByTestId('epis2-soap-gap-hints')).not.toBeInTheDocument();
   });
 });
 

@@ -3,7 +3,13 @@ import type { PatientLongitudinalResponse } from '@epis2/contracts';
 export type TimelineEvent = PatientLongitudinalResponse['timeline'][number];
 
 /** MF-DI-08 — filtros clínicos de timeline (no confundir con kind crudo). */
-export type ClinicalTimelineFilter = 'all' | 'labs' | 'signed' | 'hospitalizations' | 'evolutions';
+export type ClinicalTimelineFilter =
+  | 'all'
+  | 'labs'
+  | 'signed'
+  | 'hospitalizations'
+  | 'evolutions'
+  | 'documents';
 
 export const CLINICAL_TIMELINE_FILTERS = [
   'all',
@@ -11,6 +17,7 @@ export const CLINICAL_TIMELINE_FILTERS = [
   'signed',
   'hospitalizations',
   'evolutions',
+  'documents',
 ] as const satisfies readonly ClinicalTimelineFilter[];
 
 export const CLINICAL_TIMELINE_FILTER_LABELS_ES: Record<ClinicalTimelineFilter, string> = {
@@ -19,6 +26,7 @@ export const CLINICAL_TIMELINE_FILTER_LABELS_ES: Record<ClinicalTimelineFilter, 
   signed: 'Firmados',
   hospitalizations: 'Hospitalizaciones',
   evolutions: 'Evoluciones',
+  documents: 'Documentos',
 };
 
 export type TimelinePeriodBucket = 'today' | 'last3Months' | 'lastYear' | 'older';
@@ -53,6 +61,7 @@ export function matchesClinicalTimelineFilter(
   if (filter === 'signed') return event.kind === 'note';
   if (filter === 'hospitalizations') return event.kind === 'encounter';
   if (filter === 'evolutions') return isEvolutionEvent(event);
+  if (filter === 'documents') return event.kind === 'document';
   return false;
 }
 

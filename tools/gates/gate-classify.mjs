@@ -50,7 +50,33 @@ export const PROMOTE_TO_ACTIVE = [
   'quality:gates-inventory-gate',
   'quality:gates-prune-phase1-gate',
   'quality:gates-prune-phase2-gate',
+  'quality:gates-promote-aesthetic-gate',
 ];
+
+/** PROG-AESTHETIC-RESET — promovidos post PR-AEST-07 (antes DEFER_CATALOG). */
+export const PROMOTE_AESTHETIC_TO_ACTIVE = [
+  'quality:aesthetic-action-density-gate',
+  'quality:aesthetic-layout-gate',
+  'quality:aesthetic-reset-close-gate',
+  'quality:cica-loop-close-gate',
+  'quality:cica-screen-admission-gate',
+  'quality:cica-screen-inventory-gate',
+  'quality:cica-screen-governor-gate',
+  'quality:classic-chart-composition-gate',
+  'quality:clinical-command-bar-transversal-gate',
+  'quality:clinical-calm-default-gate',
+  'quality:clinical-navigation-clarity-gate',
+  'quality:no-horizontal-overflow-gate',
+  'quality:paper-mode-standalone-gate',
+  'quality:pr-aest-07-close-gate',
+];
+
+/** Alias legacy en catálogo (pre -gate suffix) — reemplazar al promover aesthetic. */
+export const AESTHETIC_CATALOG_LEGACY_ALIASES = {
+  'quality:aesthetic-reset-close': 'quality:aesthetic-reset-close-gate',
+  'quality:cica-loop-close': 'quality:cica-loop-close-gate',
+  'quality:pr-aest-07-close': 'quality:pr-aest-07-close-gate',
+};
 
 const ARCHIVE_PROGRAMS = [
   { id: 'PROG-STRENGTHEN', re: /^quality:sh-(02|05|06)-/ },
@@ -98,6 +124,7 @@ export const KEEP_ACTIVE = new Set([
   'quality:registry-gate',
   'quality:tramos-hygiene-gate',
   'quality:ux-g02',
+  ...PROMOTE_AESTHETIC_TO_ACTIVE,
 ]);
 
 export function gateArchiveProgram(gate, wired) {

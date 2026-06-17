@@ -43,6 +43,12 @@ export {
   epis2PaperTableHeaderCellSx,
   epis2PaperTableBodyCellSx,
   epis2PaperSignatureLineSx,
+  epis2ClassicChartTabSx,
+  epis2ClassicChartTabsNavSx,
+  epis2ClassicClinicalBlockSx,
+  epis2ClassicClinicalTableSx,
+  epis2ClassicSummaryBlockSx,
+  epis2ClassicChartContentSx,
 } from './theme/theme.js';
 export { useTheme } from '@mui/material/styles';
 export { useEpis2ExpandedUp } from './hooks/useEpis2ExpandedUp.js';
@@ -66,6 +72,7 @@ export {
 export * from './primitives/index.js';
 export * from './command/index.js';
 export * from './layout/index.js';
+export * from './cica/index.js';
 export * from './forms/index.js';
 export * from './clinical/index.js';
 export * from './data/index.js';

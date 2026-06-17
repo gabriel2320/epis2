@@ -11,6 +11,7 @@ export {
 export { ClinicalActionBar, type ClinicalActionBarProps } from './ClinicalActionBar.js';
 export { ClinicalFooterStatus, type ClinicalFooterStatusProps } from './ClinicalFooterStatus.js';
 export { ChartEspacioCommandDock } from './ChartEspacioCommandDock.js';
+export { ClinicalTransversalCommandDock } from './ClinicalTransversalCommandDock.js';
 export { PatientChartBanner, type PatientChartBannerProps } from './PatientChartBanner.js';
 export { ChartModeSwitch, type ChartModeSwitchProps } from './ChartModeSwitch.js';
 export { CommandPaletteOverlay } from './CommandPaletteOverlay.js';

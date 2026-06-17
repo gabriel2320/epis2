@@ -1,5 +1,6 @@
 import { useNavigate } from '@tanstack/react-router';
 import { parseChartModeSearch, type ChartModeSearch } from './chartModeSearch.js';
+import { PAPER_STANDALONE_ROUTE } from './paperStandaloneSearch.js';
 
 /** Rutas de formularios clínicos (shell `/espacio/*`). */
 export type ClinicalFormRoutePath =
@@ -35,10 +36,12 @@ export type ClinicalPatientSearch = ChartModeSearch & {
   returnTo?: 'dashboard' | undefined;
   /** MF-PAPER-07: retorno a ficha papel desde vista print. */
   returnChartMode?: 'paper' | undefined;
+  /** MF-AEST-03: fecha clínica en modo papel exclusivo (YYYY-MM-DD). */
+  paperDate?: string | undefined;
 };
 
 export function parseClinicalPatientSearch(search: Record<string, unknown>): ClinicalPatientSearch {
-  return {
+  const parsed: ClinicalPatientSearch = {
     ...parseChartModeSearch(search),
     ...(typeof search.patientId === 'string' && search.patientId
       ? { patientId: search.patientId }
@@ -47,6 +50,10 @@ export function parseClinicalPatientSearch(search: Record<string, unknown>): Cli
     ...(search.returnTo === 'dashboard' ? { returnTo: 'dashboard' as const } : {}),
     ...(search.returnChartMode === 'paper' ? { returnChartMode: 'paper' as const } : {}),
   };
+  if (typeof search.paperDate === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(search.paperDate)) {
+    parsed.paperDate = search.paperDate;
+  }
+  return parsed;
 }
 
 /**
@@ -213,9 +220,23 @@ export type AdminTab = 'users' | 'catalogs' | 'audit' | 'ops' | 'forms';
 
 export type AdminSearch = { tab?: AdminTab };
 
+export type CicaRoutePath =
+  | '/app/buscar'
+  | '/app/censo'
+  | '/app/pacientes/$patientId/resumen'
+  | '/app/pacientes/$patientId/evoluciones'
+  | '/app/pacientes/$patientId/evoluciones/nueva'
+  | '/app/pacientes/$patientId/indicaciones'
+  | '/app/pacientes/$patientId/examenes'
+  | '/app/pacientes/$patientId/documentos'
+  | '/app/pacientes/$patientId/documentos/nuevo'
+  | '/app/pacientes/$patientId/papel/dia/$date';
+
 export type ClinicalNavigateTarget =
   | ClinicalFormRoutePath
+  | CicaRoutePath
   | '/espacio/ficha'
+  | typeof PAPER_STANDALONE_ROUTE
   | '/espacio/ficha/imprimir'
   | '/espacio/ficha/agenda/imprimir'
   | '/espacio/resultados'
@@ -232,6 +253,20 @@ export type ClinicalNavigateOptions =
       to: '/espacio/borrador/$draftId';
       params: { draftId: string };
       search?: ClinicalPatientSearch;
+    }
+  | {
+      to:
+        | '/app/pacientes/$patientId/resumen'
+        | '/app/pacientes/$patientId/evoluciones'
+        | '/app/pacientes/$patientId/evoluciones/nueva'
+        | '/app/pacientes/$patientId/indicaciones'
+        | '/app/pacientes/$patientId/examenes'
+        | '/app/pacientes/$patientId/documentos'
+        | '/app/pacientes/$patientId/documentos/nuevo'
+        | '/app/pacientes/$patientId/papel/dia/$date';
+      params: { patientId: string; date?: string };
+      search?: never;
+      replace?: boolean;
     }
   | { to: '/epis2/dashboard'; search?: DashboardSearch; params?: never }
   | { to: '/espacio/admin'; search?: AdminSearch; params?: never }
@@ -250,6 +285,14 @@ export type ClinicalNavigateOptions =
         | '/espacio/admin'
         | '/sin-acceso'
         | '/comando'
+        | '/app/pacientes/$patientId/resumen'
+        | '/app/pacientes/$patientId/evoluciones'
+        | '/app/pacientes/$patientId/evoluciones/nueva'
+        | '/app/pacientes/$patientId/indicaciones'
+        | '/app/pacientes/$patientId/examenes'
+        | '/app/pacientes/$patientId/documentos'
+        | '/app/pacientes/$patientId/documentos/nuevo'
+        | '/app/pacientes/$patientId/papel/dia/$date'
       >;
       search?: ClinicalFormSearch;
       params?: never;

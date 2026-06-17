@@ -8,13 +8,27 @@
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Brújula:** [`EPIS2_CURRENT_STATE.md`](../EPIS2_CURRENT_STATE.md)
 
 > **Congelamiento vigente** — sin features clínicas nuevas salvo MF autorizada.  
-> **Siguiente:** **PROG-UX-LAB** · [`EPIS2_UX_LAB_MODERN_PLAN.md`](../quality/EPIS2_UX_LAB_MODERN_PLAN.md) · auditoría [`epis2-audit-estado-2026-06-16.md`](../../reports/epis2-audit-estado-2026-06-16.md)
+> **Siguiente:** **PROG-PURGE-CICA** + merge **CICA/aesthetic** · [`EPIS2_PURGE_ARCHIVE_PLAN.md`](./EPIS2_PURGE_ARCHIVE_PLAN.md) · brújula [`EPIS2_CURRENT_STATE.md`](../EPIS2_CURRENT_STATE.md)
 
 ---
 
-## Propuesto — PROG-UX-LAB (Clinical Shift Lab)
+## Propuesto — PROG-PURGE-CICA (archivo + perímetro agente)
 
-Plan: [`EPIS2_UX_LAB_MODERN_PLAN.md`](../quality/EPIS2_UX_LAB_MODERN_PLAN.md) · baseline GO DEMO 2026-06-04
+Plan: [`EPIS2_PURGE_ARCHIVE_PLAN.md`](./EPIS2_PURGE_ARCHIVE_PLAN.md) · exclusiones [`AGENT_SCOPE_EXCLUSIONS.md`](../archive/AGENT_SCOPE_EXCLUSIONS.md)
+
+| Tramo | MF | Objetivo | Estado |
+|-------|-----|----------|--------|
+| 0 | MF-PURGE-00…01 | Plan + lote 6 reportes | ✓ |
+| 2 | MF-PURGE-02…03 | Ramas + módulos truncados (referencia) | ✓ |
+| 4 | MF-PURGE-04…07 | Índices + agent scope + alinear tablero | ◐ |
+
+**Visual activa:** CICA `/app/*` · rama `feat/prog-aesthetic-reset-close` merge pendiente.
+
+---
+
+## Cerrado — PROG-UX-LAB (Clinical Shift Lab)
+
+Plan histórico: [`EPIS2_UX_LAB_MODERN_PLAN.md`](../quality/EPIS2_UX_LAB_MODERN_PLAN.md) · baseline GO DEMO 2026-06-04 · cierre [`epis2-ux-lab-close-2026-06-16.md`](../../reports/epis2-ux-lab-close-2026-06-16.md)
 
 | Tramo | MF | Objetivo | Gate |
 |-------|-----|----------|------|
