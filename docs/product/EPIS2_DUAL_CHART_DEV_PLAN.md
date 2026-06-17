@@ -72,7 +72,7 @@ Login → Búsqueda/Censo → Ficha → [Ficha Electrónica | Ficha Papel]
 | 8 | MF-DUAL-CHART-08 | **DONE** | **Census-first** — post-login búsqueda/censo (reemplaza comando hero) |
 | 9 | MF-DUAL-CHART-09 | **DONE** | Enmienda invariante #6 + signoff + ADR Aceptado |
 
-**Programa PROG-DUAL-CHART cerrado** — ledger 10/10 DONE · commit `eab749c` · auditoría [`reports/epis2-dual-chart-audit-2026-06-10.md`](../../reports/epis2-dual-chart-audit-2026-06-10.md).
+**Programa PROG-DUAL-CHART cerrado** — ledger 10/10 DONE · commit `eab749c` · auditoría [`reports/archive/2026-06/epis2-dual-chart-audit-2026-06-10.md`](../../reports/archive/2026-06/epis2-dual-chart-audit-2026-06-10.md).
 
 ---
 

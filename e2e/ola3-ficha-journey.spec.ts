@@ -1,21 +1,31 @@
 /**
- * MF-OLA3-002 — Journey ficha → antecedentes y bandeja.
+ * MF-OLA3-002 — Journey ficha → antecedentes y bandeja (dual chart PROG-FICHA-FIRST).
  */
 import { copy } from '@epis2/design-system';
 import { test, expect } from '@playwright/test';
-import { loginAsPhysician, pinDemoCase } from './helpers/demoPatient.js';
-
-async function openFichaHistory(page: import('@playwright/test').Page) {
-  await page.getByTestId('epis2-ficha-history').click();
-  await expect(page.getByTestId('epis2-longitudinal-panel')).toBeVisible({ timeout: 15_000 });
-}
+import {
+  expectDualChartFicha,
+  expectFichaSummaryReady,
+  loginAsPhysician,
+  openFichaDocuments,
+  openFichaEvolutions,
+  openFichaExams,
+  pinDemoCase,
+} from './helpers/demoPatient.js';
 
 test.describe('Ola 3 — ficha longitudinal CTAs', () => {
-  test('ficha compacta enlaza registro de alergia cuando vacío', async ({ page }) => {
+  test('ficha compacta enlaza registro o gestión de alergias desde resumen', async ({ page }) => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-001');
-    await expect(page.getByTestId('epis2-ficha-antecedents')).toBeVisible({ timeout: 15_000 });
-    await page.getByTestId('epis2-ficha-register-allergy').click();
+    await expectFichaSummaryReady(page);
+    const empty = page.getByTestId('epis2-clinical-summary-grid-allergies-empty');
+    const filled = page.getByTestId('epis2-clinical-summary-grid-allergies');
+    await expect(empty.or(filled)).toBeVisible({ timeout: 15_000 });
+    if (await empty.isVisible()) {
+      await page.getByRole('button', { name: copy.longitudinal.registerAllergy }).click();
+    } else {
+      await filled.getByRole('button', { name: copy.clinicalSummary.manageAllergies }).click();
+    }
     await expect(page).toHaveURL(/\/espacio\/alergia/);
     await expect(page.getByTestId('epis2-form-allergy_entry')).toBeVisible();
   });
@@ -23,17 +33,21 @@ test.describe('Ola 3 — ficha longitudinal CTAs', () => {
   test('ficha compacta lista problema activo DEMO-001', async ({ page }) => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-001');
-    await expect(page.getByTestId('epis2-ficha-antecedents')).toBeVisible({ timeout: 15_000 });
-    await expect(page.getByText('Hipertensión arterial esencial (sintético)')).toBeVisible();
-    await expect(page.getByTestId('epis2-ficha-register-problem')).toHaveCount(0);
+    await expectFichaSummaryReady(page);
+    const problems = page.getByTestId('epis2-clinical-summary-grid-problems');
+    await expect(problems).toBeVisible({ timeout: 15_000 });
+    await expect(problems).toContainText('Hipertensión arterial esencial (sintético)');
+    await expect(page.getByRole('button', { name: copy.longitudinal.registerProblem })).toHaveCount(0);
   });
 
-  test('ficha abre bandeja de resultados desde historial', async ({ page }) => {
+  test('ficha abre bandeja de resultados desde resumen', async ({ page }) => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-001');
-    await openFichaHistory(page);
-    await page.getByTestId('epis2-longitudinal-open-results').click();
-    await expect(page).toHaveURL(/\/espacio\/resultados/);
+    await expectFichaSummaryReady(page);
+    await expect(async () => {
+      await page.getByRole('button', { name: copy.clinicalSummary.openLabs }).click();
+      await expect(page).toHaveURL(/\/espacio\/resultados/);
+    }).toPass({ timeout: 15_000 });
     await expect(page.getByTestId('epis2-results-inbox')).toBeVisible({ timeout: 15_000 });
     await expect(page.getByText(copy.results.inboxTitle)).toBeVisible();
   });
@@ -41,39 +55,38 @@ test.describe('Ola 3 — ficha longitudinal CTAs', () => {
   test('ficha DEMO-005 muestra banner de alertas clínicas', async ({ page }) => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-005');
-    await expect(page.getByTestId('epis2-clinical-alerts')).toBeVisible({ timeout: 15_000 });
-    await expect(page.getByText(copy.commandCenter.clinicalAlertsTitle)).toBeVisible();
+    await expect(page.getByTestId('epis2-cds-patient-view')).toBeVisible({ timeout: 15_000 });
+    await expect(page.locator('[data-testid^="epis2-cds-patient-view-card-"]').first()).toBeVisible();
   });
 
-  test('ficha DEMO-001 muestra timeline y medicamentos activos en historial', async ({ page }) => {
+  test('ficha DEMO-001 muestra timeline y medicamentos activos en evoluciones', async ({ page }) => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-001');
-    await openFichaHistory(page);
-    await expect(page.getByTestId('epis2-longitudinal-timeline')).toBeVisible();
-    await expect(page.getByTestId('epis2-longitudinal-medications')).toBeVisible();
-    await expect(page.getByTestId('epis2-longitudinal-medications')).toContainText('Losartán');
-    await expect(page.getByTestId('epis2-longitudinal-observations')).toBeVisible();
-    await expect(page.getByTestId('epis2-lab-observations-grid')).toBeVisible();
+    await openFichaEvolutions(page);
+    await expect(page.getByTestId('epis2-clinical-filterable-timeline')).toBeVisible();
+    await openFichaExams(page);
+    await expect(page.getByTestId('epis2-traditional-section-labs-table')).toBeVisible();
+    await page.getByTestId('classic-chart-tab-more').click();
+    await expect(page.getByTestId('epis2-traditional-section-meds')).toBeVisible();
+    await expect(page.getByTestId('epis2-traditional-section-meds')).toContainText('Losartán');
   });
 
-  test('ficha DEMO-005 muestra curvas clínicas de signos vitales', async ({ page }) => {
+  test('ficha DEMO-005 muestra labs destacados en exámenes', async ({ page }) => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-005');
-    await openFichaHistory(page);
-    await expect(page.getByTestId('epis2-patient-clinical-charts')).toBeVisible({
+    await openFichaExams(page);
+    await expect(page.getByTestId('epis2-traditional-section-labs-table')).toBeVisible({
       timeout: 15_000,
     });
-    await expect(page.getByTestId('epis2-chart-inr-trend')).toBeVisible();
-    await expect(page.getByTestId('epis2-chart-vitals-trend')).toBeVisible();
+    await expect(page.getByTestId('epis2-traditional-section-labs')).toContainText(/INR/i);
   });
 
   test('ficha compacta muestra documentos indexados DEMO-001', async ({ page }) => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-001');
-    await expect(page.getByTestId('epis2-ficha-documents')).toBeVisible({ timeout: 15_000 });
-    await expect(page.getByText('Informe laboratorio control HTA (demo)')).toBeVisible();
-    await page.getByTestId('epis2-ficha-open-documents-index').click();
-    await expect(page.getByTestId('epis2-longitudinal-documents-tree')).toBeVisible({
+    await openFichaDocuments(page);
+    await expect(page.getByText('Consentimiento')).toBeVisible();
+    await expect(page.getByTestId('epis2-traditional-section-documents-table')).toBeVisible({
       timeout: 15_000,
     });
   });
@@ -81,27 +94,27 @@ test.describe('Ola 3 — ficha longitudinal CTAs', () => {
   test('ficha compacta abre línea de tiempo desde actividad reciente', async ({ page }) => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-001');
-    await expect(page.getByTestId('epis2-recent-activity')).toBeVisible({ timeout: 15_000 });
-    await page.getByTestId('epis2-ficha-open-timeline').click();
-    await expect(page.getByTestId('epis2-longitudinal-timeline')).toBeVisible({ timeout: 15_000 });
+    await expectFichaSummaryReady(page);
+    await expect(page.getByTestId('epis2-clinical-summary-grid-timeline')).toBeVisible({
+      timeout: 15_000,
+    });
+    await openFichaEvolutions(page);
   });
 
-  test('ficha hub M3 carga workspace compacto y historial bajo demanda', async ({ page }) => {
+  test('ficha hub M3 carga resumen compacto y evoluciones bajo demanda', async ({ page }) => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-001');
-    await expect(page.getByTestId('epis2-patient-workspace')).toBeVisible({ timeout: 15_000 });
-    await expect(page.getByTestId('epis2-ficha-antecedents')).toBeVisible();
-    await expect(page.getByTestId('epis2-ficha-documents')).toBeVisible();
-    await expect(page.getByTestId('epis2-ficha-history')).toBeVisible();
-    await expect(page.getByTestId('epis2-longitudinal-panel')).toHaveCount(0);
-    await openFichaHistory(page);
-    await expect(page.getByTestId('epis2-ficha-split')).toBeVisible();
+    await expectFichaSummaryReady(page);
+    await expect(page.getByTestId('classic-chart-tabs')).toBeVisible();
+    await expect(page.getByTestId('epis2-clinical-filterable-timeline')).toHaveCount(0);
+    await openFichaEvolutions(page);
+    await expect(page.getByTestId('epis2-traditional-section-evolution')).toBeVisible();
   });
 
-  test('ficha ofrece registrar antecedente quirúrgico en historial', async ({ page }) => {
+  test('ficha ofrece registrar antecedente quirúrgico en evoluciones', async ({ page }) => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-001');
-    await openFichaHistory(page);
+    await openFichaEvolutions(page);
     const register = page.getByTestId('epis2-longitudinal-register-surgical-history');
     if (await register.isVisible()) {
       await register.click();

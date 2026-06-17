@@ -132,8 +132,8 @@ No debe **pisar** texto ya escrito por el usuario.
 
 | Documento | Uso |
 |-----------|-----|
-| `reports/epis2-ce5-command-prefill-ux-2026-06-04.md` | Badge + URL limpia |
-| `reports/epis2-ce2-confirmation-slots-2026-06-04.md` | Diálogo confirmación |
+| `reports/archive/2026-06/epis2-ce5-command-prefill-ux-2026-06-04.md` | Badge + URL limpia |
+| `reports/archive/2026-06/epis2-ce2-confirmation-slots-2026-06-04.md` | Diálogo confirmación |
 | `docs/design/EPIS2_UX_B_INFORMATION_ARCHITECTURE.md` | UX-G02 ficha compacta (canon) |
 | `docs/quality/GOLDEN_CLINICAL_JOURNEY.md` | Journey producto (no sustituye este gate) |
 

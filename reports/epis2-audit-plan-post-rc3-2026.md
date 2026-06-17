@@ -44,7 +44,7 @@ EPIS2 está en **base demo consolidada y endurecida**: compila, CI `required` ve
 | **D-02** | Baja | `dependency-review` CI rojo | Report-only; deuda deps sin triage |
 | **D-03** | Baja | 6 PRs Dependabot abiertos (#1–5, #13, #17) | Zod 4 (#5) **fuera de alcance**; checkout v6 (#13) evaluar aparte |
 | **D-04** | Media | [`EPIS2_TABLERO.md`](../docs/product/EPIS2_TABLERO.md) muestra MF-FF-08 **READY** | Ledger [`ficha-first-ledger.json`](../docs/quality/ficha-first-ledger.json) dice **DONE** · confunde agentes |
-| **D-05** | Media | [`epis2-plan-desarrollo-unificado-2026-06-14.md`](./epis2-plan-desarrollo-unificado-2026-06-14.md) v1.5 pre-rc3 | MF-IC-03 “siguiente blocked” obsoleto (STRENGTHEN cerrado) |
+| **D-05** | Media | [`epis2-plan-desarrollo-unificado-2026-06-14.md`](./archive/2026-06/epis2-plan-desarrollo-unificado-2026-06-14.md) v1.5 pre-rc3 | MF-IC-03 “siguiente blocked” obsoleto (STRENGTHEN cerrado) |
 | **D-06** | Media | [`DISCLAIMER.md`](../DISCLAIMER.md) v1.0 plantilla | Revisión legal institucional pendiente (MF-CON-10) |
 | **D-07** | Baja | RH-02…05 report-only | Gitleaks/CodeQL no bloquean merge aún |
 | **D-08** | Baja | ~460 `reports/*.md` en raíz | Ruido navegación · archivar lote a `reports/archive/` |
@@ -160,7 +160,7 @@ Diferido PROG-MEDIA-FUTURE           (2027+ · ledger BLOCKED)
 ```text
 Alcance: MF-GOV-01…04 · PROG-GOBIERNO-POST-RC3
 Allowlist: docs/product/EPIS2_TABLERO.md, docs/EPIS2_CURRENT_STATE.md,
-           reports/epis2-plan-desarrollo-unificado-2026-06-14.md,
+           reports/archive/2026-06/epis2-plan-desarrollo-unificado-2026-06-14.md,
            docs/product/EPIS2_RELEASE_HARDENING_PLAN.md
 Prohibido: apps/, packages/, database/
 Gate: npm run quality:fast

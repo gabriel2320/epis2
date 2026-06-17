@@ -52,7 +52,7 @@ M reports/dev-agent-brief.md
 
 ## OpenClaw (revisores read-only)
 
-- Brief: `@reports/openclaw-latest-brief.md`
+- Brief: `@reports/archive/2026-06/openclaw-latest-brief.md`
 - Handoff cierre: `npm run openclaw:handoff -- --agents auto`
 - Docs: `docs/product/EPIS2_OPENCLAW_INTEGRATION.md`
 

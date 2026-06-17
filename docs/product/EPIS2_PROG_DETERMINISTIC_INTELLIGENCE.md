@@ -295,7 +295,7 @@ Gate final MF-DI-10 reproduce este journey en E2E + piloto checklist.
 | [`strengthen-ledger.json`](../quality/strengthen-ledger.json) | MF-CU, MF-SH, MF-IM |
 | [`EPIS2_IDC_GLOSSARY.md`](./EPIS2_IDC_GLOSSARY.md) | CE-0→CE-5 |
 | [`PRODUCT_INVARIANTS.md`](./PRODUCT_INVARIANTS.md) | #8, #9, #10, #15 |
-| [`epis2-plan-fases-desarrollo-2026-06-13.md`](../../reports/epis2-plan-fases-desarrollo-2026-06-13.md) | Fase 2 + capa DI |
+| [`epis2-plan-fases-desarrollo-2026-06-13.md`](../../reports/archive/2026-06/epis2-plan-fases-desarrollo-2026-06-13.md) | Fase 2 + capa DI |
 | [`GOLDEN_CLINICAL_JOURNEY.md`](../quality/GOLDEN_CLINICAL_JOURNEY.md) | Journey base |
 
 ---

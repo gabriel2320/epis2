@@ -449,8 +449,8 @@ npm run cursor:verify                # MCP dev tooling
 
 | Reporte | Tema |
 |---------|------|
-| [`epis2-auditoria-profunda-2026-06-09.md`](./epis2-auditoria-profunda-2026-06-09.md) | Auditoría profunda F1–F4 |
-| [`epis2-auditoria-inventario-limpieza-2026-06-09.md`](./epis2-auditoria-inventario-limpieza-2026-06-09.md) | Inventario + limpieza |
+| [`epis2-auditoria-profunda-2026-06-09.md`](./archive/2026-06/epis2-auditoria-profunda-2026-06-09.md) | Auditoría profunda F1–F4 |
+| [`epis2-auditoria-inventario-limpieza-2026-06-09.md`](./archive/2026-06/epis2-auditoria-inventario-limpieza-2026-06-09.md) | Inventario + limpieza |
 | [`conciliacion/mcp-safety-review-2026-06-14.md`](./conciliacion/mcp-safety-review-2026-06-14.md) | Seguridad MCP |
 | [`epis2-prog-di-close-2026.md`](./epis2-prog-di-close-2026.md) | Cierre PROG-DI |
 

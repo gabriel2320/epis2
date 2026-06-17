@@ -279,6 +279,6 @@ command-first. Sin implementación de dominios nuevos.
 
 ## Referencias
 
-- Auditoría previa: `reports/epis2-audit-and-dev-plans-2026-06-05.md`
-- Gap audit: `reports/epis2-complete-product-gap-audit.md`
+- Auditoría previa: `reports/archive/2026-06/epis2-audit-and-dev-plans-2026-06-05.md`
+- Gap audit: `reports/archive/2026-06/epis2-complete-product-gap-audit.md`
 - Journeys: `docs/quality/EPIS2_GOLDEN_JOURNEYS.md`

@@ -38,8 +38,8 @@ function readLatest(rel) {
 function main() {
   const runDir = join(root, '.agent-runs/openclaw');
   const artifacts = listArtifacts(runDir, '.agent-runs/openclaw');
-  const latestBrief = readLatest('reports/openclaw-latest-brief.md');
-  const latestHandoff = readLatest('reports/openclaw-latest-handoff.md');
+  const latestBrief = readLatest('reports/archive/2026-06/openclaw-latest-brief.md');
+  const latestHandoff = readLatest('reports/archive/2026-06/openclaw-latest-handoff.md');
 
   const payload = {
     syncedAt: new Date().toISOString(),

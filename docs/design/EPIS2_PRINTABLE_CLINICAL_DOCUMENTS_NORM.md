@@ -1414,4 +1414,4 @@ Para añadir un documento: 1 entrada en `PRINTABLE_BLUEPRINTS` + 1 página `*Pri
 - `docs/clinical/BLUEPRINT_CONTRACT.md` — blueprints clínicos
 - `docs/product/PRODUCT_INVARIANTS.md` — IA, borrador, aprobación
 - `docs/quality/M3_ANTI_DRIFT_GATES.md` — gates pantalla
-- `reports/epis2-master-plan-mf1-51-m3.md` — programa MF + frontera impresión
+- `reports/archive/2026-06/epis2-master-plan-mf1-51-m3.md` — programa MF + frontera impresión

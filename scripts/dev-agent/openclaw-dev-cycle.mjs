@@ -253,7 +253,7 @@ export function runCycleClose({ dryRun = false } = {}) {
 
 ## Artefactos
 - \`reports/epis2-dev-cycle-status.json\`
-- \`reports/openclaw-latest-handoff.md\`
+- \`reports/archive/2026-06/openclaw-latest-handoff.md\`
 - \`reports/evolab-open-findings.json\`
 - Log: \`reports/epis2-dev-cycle-log.jsonl\`
 `,

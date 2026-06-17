@@ -42,6 +42,10 @@ function parseQualitySteps(command) {
     .filter(Boolean);
 }
 
+function resolveGateEntry(catalog, gateName) {
+  return catalog.gates?.[gateName] ?? catalog.archived?.[gateName] ?? null;
+}
+
 function runCatalogGate(catalog, gateName, extraArgs, seen = new Set()) {
   if (seen.has(gateName)) {
     console.error(`Circular gate reference: ${gateName}`);
@@ -49,7 +53,7 @@ function runCatalogGate(catalog, gateName, extraArgs, seen = new Set()) {
   }
   seen.add(gateName);
 
-  const entry = catalog.gates?.[gateName];
+  const entry = resolveGateEntry(catalog, gateName);
   if (!entry) {
     console.error(`Unknown gate in catalog: ${gateName}`);
     return 1;

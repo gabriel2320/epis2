@@ -19,8 +19,8 @@ Plan F (V4 interop, V5 IA, hardening) y Plan G (CI bundle, golden journeys, Depe
 
 | Track | Reporte |
 |-------|---------|
-| Plan F | `reports/epis2-plan-f-complete.md` |
-| Plan G | `reports/epis2-plan-g-complete.md` |
+| Plan F | `reports/archive/2026-06/epis2-plan-f-complete.md` |
+| Plan G | `reports/archive/2026-06/epis2-plan-g-complete.md` |
 | V4 interop | `reports/epis2-v4-interop-ops.md` |
 | V5 IA | `reports/epis2-v5-ai-traceable.md` |
 

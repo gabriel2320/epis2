@@ -23,7 +23,7 @@ Un solo criterio para agentes, revisores y operadores: **qué documento manda** 
 | 5 | [`README.md`](../README.md) | **Entrada pública breve** — no historial de fases |
 | 6 | `docs/product/` · `docs/quality/` | Visión, planes vigentes, gates |
 | 7 | [`archive/PHASE_HISTORY.md`](archive/PHASE_HISTORY.md) | Cronología EPIS2-00…12, MUI/M3, planes A–G |
-| 8 | [`../reports/README.md`](../reports/README.md) | Índice de reportes de sesión |
+| 8 | [`../reports/archive/2026-06/README.md`](../reports/archive/2026-06/README.md) | Índice de reportes de sesión |
 | 9 | `reports/archive/` | Auditorías y cierres **históricos** |
 | — | `reports/*.md` en raíz de `reports/` | Evidencia de sesiones; **no** estado vigente por defecto |
 | — | [`product/EPIS2_COMPLETE_CAPABILITY_MAP.md`](product/EPIS2_COMPLETE_CAPABILITY_MAP.md) | **Histórico** — no usar para decisiones de alcance |
@@ -89,5 +89,5 @@ Un solo criterio para agentes, revisores y operadores: **qué documento manda** 
 | Doc | Uso |
 |-----|-----|
 | [`INDEX.md`](INDEX.md) | Índice L0…L5 |
-| [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../reports/epis2-plan-desarrollo-unificado-2026-06-14.md) | Plan unificado (histórico operativo) |
+| [`epis2-plan-desarrollo-unificado-2026-06-14.md`](../reports/archive/2026-06/epis2-plan-desarrollo-unificado-2026-06-14.md) | Plan unificado (histórico operativo) |
 | [`product/EPIS2_CONSOLIDATION_PHASE2_PLAN.md`](product/EPIS2_CONSOLIDATION_PHASE2_PLAN.md) | Ola 2 consolidación |

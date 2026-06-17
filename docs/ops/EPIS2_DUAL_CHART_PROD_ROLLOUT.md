@@ -11,7 +11,7 @@
 | Ledger dual chart | `npm run quality:dual-chart-gate` |
 | E2E dual | `VITE_ENABLE_DUAL_CHART_MODES=true npm run test:e2e:dual-chart` |
 | Check | `npm run check` |
-| Signoff Calm | `reports/epis2-entrega-c2-calm-premium-2026-06-11.md` |
+| Signoff Calm | `reports/archive/2026-06/epis2-entrega-c2-calm-premium-2026-06-11.md` |
 
 ---
 

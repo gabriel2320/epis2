@@ -959,7 +959,7 @@ export const copy = {
   },
   censusShift: {
     stripTitle: 'Turno clínico sintético',
-    stripSubtitle: 'Datos DEMO/SIM · sin PHI real · IA opcional (Modo A sin Ollama)',
+    stripSubtitle: 'Datos DEMO/SIM · sin PHI real · IA opcional (Modo A sin asistencia IA)',
     stripPendingHeading: 'Pendientes del turno',
     draftNone: 'Sin borrador',
     riskNormal: 'Estable',

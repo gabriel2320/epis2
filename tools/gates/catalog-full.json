@@ -1,660 +1,40 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-06-16T16:10:50.451Z",
-  "source": "package.json",
-  "note": "Regenerar: npm run tool:gates:sync-catalog",
+  "generatedAt": "2026-06-16T20:40:46.200Z",
+  "source": "catalog-full+prune-phase2",
+  "note": "Regenerar inventario: node tools/gates/inventory-orphans.mjs",
   "gates": {
-    "quality:m3-signoff": {
-      "type": "file",
-      "path": "scripts/quality/verify-m3-signoff.mjs"
-    },
-    "quality:m3-human-pilot": {
-      "type": "file",
-      "path": "scripts/quality/run-m3-human-pilot.mjs"
-    },
-    "quality:m3-visual-pass": {
-      "type": "file",
-      "path": "scripts/quality/capture-m3-visual-pass.mjs"
-    },
-    "quality:calm-premium-signoff": {
-      "type": "file",
-      "path": "scripts/quality/capture-calm-premium-signoff.mjs"
-    },
-    "quality:pilot-trial": {
-      "type": "file",
-      "path": "scripts/quality/run-pilot-trial.mjs"
-    },
-    "quality:microphases": {
-      "type": "file",
-      "path": "scripts/quality/validate-microphase-ledger.mjs"
-    },
-    "quality:microphase-next": {
-      "type": "file",
-      "path": "scripts/quality/microphase-next.mjs"
-    },
     "quality:ci-parity": {
       "type": "file",
       "path": "scripts/quality/validate-ci-test-parity.mjs"
-    },
-    "quality:local-ci": {
-      "type": "file",
-      "path": "scripts/quality/run-local-ci.mjs"
-    },
-    "quality:dev-env-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dev-env-gate.mjs"
-    },
-    "quality:case-intel-catalog-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-case-intel-catalog-gate.mjs"
-    },
-    "quality:case-intel-promote-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-case-intel-promote-gate.mjs"
-    },
-    "quality:case-intel-gate": {
-      "type": "npm",
-      "command": "npm run quality:case-intel-catalog-gate && npm run quality:case-intel-promote-gate && npm run quality:case-intel-assist-gate"
-    },
-    "quality:case-intel-assist-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-case-intel-assist-gate.mjs"
     },
     "quality:case-intel-closure-gate": {
       "type": "file",
       "path": "scripts/quality/validate-case-intel-closure-gate.mjs"
     },
-    "quality:stack-dev-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-stack-dev-gate.mjs"
-    },
-    "quality:tramo-scaffold-canon-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-scaffold-canon-gate.mjs"
-    },
-    "quality:tramo-e2e-registry-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-e2e-registry-gate.mjs"
-    },
-    "quality:week2-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-week2-gate.mjs"
-    },
-    "quality:ai-tramo-evals-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ai-tramo-evals-gate.mjs"
-    },
-    "quality:ai-catalog-smoke-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ai-catalog-smoke-gate.mjs"
-    },
-    "quality:week3-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-week3-gate.mjs"
-    },
-    "quality:tramos-clinical-signoff-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramos-clinical-signoff-gate.mjs"
-    },
-    "quality:tramos-ak-closure-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramos-ak-closure-gate.mjs"
-    },
-    "quality:tramos-signoff-prep-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramos-signoff-prep-gate.mjs"
-    },
-    "quality:tramos-clinical-signoff-session": {
-      "type": "file",
-      "path": "scripts/quality/run-tramos-clinical-signoff-session.mjs"
-    },
-    "quality:tramo-closure-evals-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-closure-evals-gate.mjs"
-    },
-    "quality:dev-agent-orchestration-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dev-agent-orchestration-gate.mjs"
-    },
-    "quality:tramo-k-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-k-inventory-gate.mjs"
-    },
-    "quality:tramo-k-quality-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-k-quality-gate.mjs"
-    },
-    "quality:tramo-k-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-k-scaffold-gate.mjs"
-    },
-    "quality:tramo-k-audit-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-k-audit-gate.mjs"
-    },
-    "quality:tramo-k-closure-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-k-closure-gate.mjs"
-    },
-    "quality:week4-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-week4-gate.mjs"
-    },
-    "quality:ola2-m3-ui-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola2-m3-ui-gate.mjs"
-    },
-    "quality:ola2-physical-exam-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola2-physical-exam-gate.mjs"
-    },
-    "quality:ola1c-journey-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola1c-journey-gate.mjs"
-    },
-    "quality:ola3-ficha-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola3-ficha-gate.mjs"
-    },
-    "quality:ola3-alerts-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola3-alerts-gate.mjs"
-    },
-    "quality:ola6a-print-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola6a-print-gate.mjs"
-    },
-    "quality:doc-screen-catalog-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-doc-screen-catalog-gate.mjs"
-    },
-    "quality:ola3-longitudinal-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola3-longitudinal-gate.mjs"
-    },
-    "quality:registry-meta-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-registry-meta-gate.mjs"
-    },
-    "quality:ola3-ficha-depth-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola3-ficha-depth-gate.mjs"
-    },
-    "quality:ola3-ficha-hub-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola3-ficha-hub-gate.mjs"
-    },
-    "quality:ola3-surgical-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola3-surgical-gate.mjs"
-    },
-    "quality:ola3-timeline-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola3-timeline-gate.mjs"
-    },
-    "quality:ola1c-imaging-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ola1c-imaging-gate.mjs"
-    },
-    "quality:tramo-b-reception-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-b-reception-gate.mjs"
-    },
-    "quality:tramo-a-closure-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-a-closure-gate.mjs"
-    },
-    "quality:tramo-b-ui-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-b-ui-gate.mjs"
-    },
-    "quality:tramo-b-closure-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-b-closure-gate.mjs"
-    },
-    "quality:tramo-c-emergency-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-c-emergency-gate.mjs"
-    },
-    "quality:tramo-c-admission-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-c-admission-gate.mjs"
-    },
-    "quality:tramo-c-orders-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-c-orders-gate.mjs"
-    },
-    "quality:tramo-c-trends-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-c-trends-gate.mjs"
-    },
-    "quality:tramo-c-epicrisis-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-c-epicrisis-gate.mjs"
-    },
-    "quality:tramo-c-census-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-c-census-gate.mjs"
-    },
-    "quality:tramo-c-mar-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-c-mar-gate.mjs"
-    },
-    "quality:tramo-c-closure-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-c-closure-gate.mjs"
-    },
-    "quality:tramo-d-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-inventory-gate.mjs"
-    },
-    "quality:tramo-d-icu-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-icu-gate.mjs"
-    },
-    "quality:tramo-d-flowsheet-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-flowsheet-gate.mjs"
-    },
-    "quality:tramo-d-hemodynamics-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-hemodynamics-gate.mjs"
-    },
-    "quality:tramo-d-fluid-balance-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-fluid-balance-gate.mjs"
-    },
-    "quality:tramo-d-ventilation-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-ventilation-gate.mjs"
-    },
-    "quality:tramo-d-invasive-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-invasive-gate.mjs"
-    },
-    "quality:tramo-d-icu-discharge-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-icu-discharge-gate.mjs"
-    },
-    "quality:tramo-d-neurological-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-neurological-gate.mjs"
-    },
-    "quality:tramo-d-severity-scales-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-severity-scales-gate.mjs"
-    },
-    "quality:tramo-d-vasoactive-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-vasoactive-gate.mjs"
-    },
-    "quality:tramo-d-sedoanalgesia-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-sedoanalgesia-gate.mjs"
-    },
-    "quality:tramo-d-closure-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-d-closure-gate.mjs"
-    },
-    "quality:tramo-e-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-e-inventory-gate.mjs"
-    },
-    "quality:tramo-e-or-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-e-or-gate.mjs"
-    },
-    "quality:tramo-e-who-checklist-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-e-who-checklist-gate.mjs"
-    },
-    "quality:tramo-e-preanesthesia-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-e-preanesthesia-gate.mjs"
-    },
-    "quality:tramo-e-audit-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-e-audit-gate.mjs"
-    },
-    "quality:tramo-e-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-e-scaffold-gate.mjs"
-    },
-    "quality:tramo-e-closure-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-e-closure-gate.mjs"
-    },
     "quality:tramos-hygiene-gate": {
       "type": "file",
       "path": "scripts/quality/validate-tramos-hygiene-gate.mjs"
-    },
-    "quality:tramo-f-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-f-inventory-gate.mjs"
-    },
-    "quality:tramo-f-aps-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-f-aps-gate.mjs"
-    },
-    "quality:tramo-f-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-f-scaffold-gate.mjs"
-    },
-    "quality:tramo-f-audit-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-f-audit-gate.mjs"
-    },
-    "quality:tramo-f-closure-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-f-closure-gate.mjs"
-    },
-    "quality:tramo-g-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-g-inventory-gate.mjs"
-    },
-    "quality:tramo-g-specialized-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-g-specialized-gate.mjs"
-    },
-    "quality:tramo-g-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-g-scaffold-gate.mjs"
-    },
-    "quality:tramo-g-audit-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-g-audit-gate.mjs"
-    },
-    "quality:tramo-g-closure-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-g-closure-gate.mjs"
-    },
-    "quality:tramo-h-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-h-inventory-gate.mjs"
-    },
-    "quality:tramo-h-iaas-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-h-iaas-gate.mjs"
-    },
-    "quality:tramo-h-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-h-scaffold-gate.mjs"
-    },
-    "quality:tramo-h-audit-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-h-audit-gate.mjs"
-    },
-    "quality:tramo-h-closure-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-h-closure-gate.mjs"
-    },
-    "quality:tramo-i-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-i-inventory-gate.mjs"
-    },
-    "quality:tramo-i-specialty-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-i-specialty-gate.mjs"
-    },
-    "quality:tramo-i-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-i-scaffold-gate.mjs"
-    },
-    "quality:tramo-i-audit-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-i-audit-gate.mjs"
-    },
-    "quality:tramo-i-closure-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-i-closure-gate.mjs"
-    },
-    "quality:tramo-j-inventory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-j-inventory-gate.mjs"
-    },
-    "quality:tramo-j-pharmacy-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-j-pharmacy-gate.mjs"
-    },
-    "quality:tramo-j-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-j-scaffold-gate.mjs"
-    },
-    "quality:tramo-j-audit-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-j-audit-gate.mjs"
-    },
-    "quality:tramo-j-closure-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-tramo-j-closure-gate.mjs"
     },
     "quality:ux-g02": {
       "type": "npm",
       "command": "npm run build -w @epis2/contracts && npm run build -w @epis2/clinical-domain && npm run build -w @epis2/design-system && npm run build -w @epis2/command-registry && npm run build -w @epis2/clinical-forms && npm run build -w @epis2/test-fixtures && tsx scripts/qa/run-ux-g02-validation.ts"
     },
-    "quality:ux-pilot": {
-      "type": "npm",
-      "command": "npm run quality:ux-g02 && npm run test:e2e:ux-g02 && npm run test:e2e:login-gateway"
-    },
     "quality:ux-pilot-gate": {
       "type": "file",
       "path": "scripts/quality/validate-ux-pilot-gate.mjs"
     },
-    "quality:command-center-layout-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-command-center-layout-gate.mjs"
-    },
-    "quality:ui-density-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ui-density-gate.mjs"
-    },
-    "quality:ui-simplify-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ui-simplify-gate.mjs"
-    },
-    "quality:ui": {
+    "quality:ux-lab-close": {
       "type": "command",
-      "command": "npm run quality:ui-simplify-gate"
-    },
-    "quality:m3-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-m3-scaffold-gate.mjs"
-    },
-    "quality:duplicate-actions-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-duplicate-actions-gate.mjs"
-    },
-    "quality:icon-budget-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-icon-budget-gate.mjs"
-    },
-    "quality:scroll-discipline-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-scroll-discipline-gate.mjs"
-    },
-    "quality:split-pane-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-split-pane-gate.mjs"
-    },
-    "quality:bulk-actions-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-bulk-actions-gate.mjs"
-    },
-    "quality:drag-drop-safety-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-drag-drop-safety-gate.mjs"
-    },
-    "quality:copy-paste-safety-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-copy-paste-safety-gate.mjs"
-    },
-    "quality:clinical-productivity-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-clinical-productivity-gate.mjs"
-    },
-    "quality:clinical-textbox-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-clinical-textbox-gate.mjs"
-    },
-    "quality:clinical-textbox-assist-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-clinical-textbox-assist-gate.mjs"
-    },
-    "quality:clinical-spellcheck-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-clinical-spellcheck-gate.mjs"
-    },
-    "quality:clinical-spellcheck-integration": {
-      "type": "file",
-      "path": "scripts/quality/validate-clinical-spellcheck-integration.mjs"
-    },
-    "quality:clinical-snippets-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-clinical-snippets-gate.mjs"
-    },
-    "quality:clinical-ai-text-safety-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-clinical-ai-text-safety-gate.mjs"
-    },
-    "quality:autocomplete-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-autocomplete-gate.mjs"
-    },
-    "quality:spellcheck-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-spellcheck-gate.mjs"
-    },
-    "quality:command-palette-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-command-palette-gate.mjs"
-    },
-    "quality:clinical-grid-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-clinical-grid-gate.mjs"
-    },
-    "quality:ollama-structured-output-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ollama-structured-output-gate.mjs"
-    },
-    "quality:grid-surface-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-grid-surface-gate.mjs"
-    },
-    "quality:form-collapse-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-form-collapse-gate.mjs"
-    },
-    "quality:clinical-form-rhf-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-clinical-form-rhf-gate.mjs"
-    },
-    "quality:form-screen-tree-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-form-screen-tree-gate.mjs"
+      "command": "npm run quality:security-promote-gate && npm run quality:golden-journey && npm run quality:ux-pilot && npm run quality:ux-pilot-gate && npm run quality:m3-human-pilot && npm run quality:fast"
     },
     "quality:layers-integration-gate": {
       "type": "file",
       "path": "scripts/quality/validate-layers-integration-gate.mjs"
     },
-    "quality:rad-m3-discipline-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-rad-m3-discipline-gate.mjs"
-    },
-    "quality:design-mode-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-design-mode-gate.mjs"
-    },
-    "quality:classic-md3-mode-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-classic-md3-mode-gate.mjs"
-    },
-    "quality:classic-fixed-panels-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-classic-fixed-panels-gate.mjs"
-    },
-    "quality:classic-supporting-pane-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-classic-supporting-pane-gate.mjs"
-    },
-    "quality:classic-commandbar-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-classic-commandbar-gate.mjs"
-    },
-    "quality:classic-actionrail-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-classic-actionrail-gate.mjs"
-    },
-    "quality:classic-statusbar-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-classic-statusbar-gate.mjs"
-    },
-    "quality:command-center-googlebar-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-command-center-googlebar-gate.mjs"
-    },
-    "quality:classic-md3-ai-mode-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-classic-md3-ai-mode-gate.mjs"
-    },
-    "quality:design-agents-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-design-agents-gate.mjs"
-    },
-    "quality:design-agent-schemas-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-design-agent-schemas-gate.mjs"
-    },
-    "quality:visual-density-agent-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-visual-density-agent-gate.mjs"
-    },
-    "quality:classic-screenshot-advisory": {
-      "type": "file",
-      "path": "scripts/quality/validate-classic-screenshot-advisory.mjs"
-    },
-    "quality:dashboard-md3-mode-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dashboard-md3-mode-gate.mjs"
-    },
-    "quality:dashboard-kpi-actionability-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dashboard-kpi-actionability-gate.mjs"
-    },
-    "quality:dashboard-grid-surface-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dashboard-grid-surface-gate.mjs"
-    },
-    "quality:dashboard-bulk-actions-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dashboard-bulk-actions-gate.mjs"
-    },
-    "quality:dashboard-data-quality-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dashboard-data-quality-gate.mjs"
-    },
-    "quality:dashboard-design-agents-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dashboard-design-agents-gate.mjs"
-    },
-    "quality:dashboard-screenshot-advisory": {
-      "type": "file",
-      "path": "scripts/quality/validate-dashboard-screenshot-advisory.mjs"
-    },
     "quality:three-modes-gate": {
       "type": "file",
       "path": "scripts/quality/validate-three-modes-gate.mjs"
-    },
-    "quality:dual-chart-ledger": {
-      "type": "file",
-      "path": "scripts/quality/validate-dual-chart-ledger.mjs"
-    },
-    "quality:dual-chart-next": {
-      "type": "file",
-      "path": "scripts/quality/dual-chart-next.mjs"
-    },
-    "quality:paper-mode-next": {
-      "type": "file",
-      "path": "scripts/quality/paper-mode-next.mjs"
     },
     "quality:strengthen-next": {
       "type": "file",
@@ -664,117 +44,21 @@
       "type": "file",
       "path": "scripts/quality/validate-strengthen-close-gate.mjs"
     },
-    "quality:registry-status": {
-      "type": "file",
-      "path": "scripts/quality/registry-status.mjs"
-    },
     "quality:registry-gate": {
       "type": "file",
       "path": "scripts/quality/validate-registry-gate.mjs"
-    },
-    "quality:di-next": {
-      "type": "file",
-      "path": "scripts/quality/di-next.mjs"
-    },
-    "quality:di-context-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-di-context-gate.mjs"
-    },
-    "quality:di-prefill-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-di-prefill-gate.mjs"
-    },
-    "quality:di-suggestions-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-di-suggestions-gate.mjs"
     },
     "quality:cds-hooks-gate": {
       "type": "file",
       "path": "scripts/quality/validate-cds-hooks-gate.mjs"
     },
-    "quality:interop-chile-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-interop-chile-gate.mjs"
-    },
-    "quality:di-memory-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-di-memory-gate.mjs"
-    },
-    "quality:di-autocomplete-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-di-autocomplete-gate.mjs"
-    },
-    "quality:di-templates-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-di-templates-gate.mjs"
-    },
-    "quality:di-timeline-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-di-timeline-gate.mjs"
-    },
-    "quality:di-journeys-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-di-journeys-gate.mjs"
-    },
-    "quality:di-signoff-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-di-signoff-gate.mjs"
-    },
-    "quality:draft-trace-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-draft-trace-gate.mjs"
-    },
-    "quality:sh-02-intent-evals-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-sh-02-intent-evals-gate.mjs"
-    },
     "quality:sh-03-degrade-gate": {
       "type": "file",
       "path": "scripts/quality/validate-sh-03-degrade-gate.mjs"
     },
-    "quality:sh-05-rls-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-sh-05-rls-gate.mjs"
-    },
-    "quality:sh-06-migration-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-sh-06-migration-gate.mjs"
-    },
-    "quality:im-02-embed-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-im-02-embed-gate.mjs"
-    },
-    "quality:rag-retrieval-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-rag-retrieval-gate.mjs"
-    },
-    "quality:ai-provenance-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ai-provenance-gate.mjs"
-    },
-    "quality:ai-client-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ai-client-gate.mjs"
-    },
-    "quality:web-ai-boundary-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-web-ai-boundary-gate.mjs"
-    },
     "quality:medrepo-consumption-gate": {
       "type": "file",
       "path": "scripts/quality/validate-medrepo-consumption-gate.mjs"
-    },
-    "quality:quality-aliases-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-quality-aliases-gate.mjs"
-    },
-    "quality:ai": {
-      "type": "command",
-      "command": "npm run quality:sh-03-degrade-gate && npm run quality:ai-client-gate && npm run quality:web-ai-boundary-gate"
-    },
-    "quality:ai-otel-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ai-otel-gate.mjs"
     },
     "quality:ficha-first-gate": {
       "type": "file",
@@ -784,189 +68,9 @@
       "type": "file",
       "path": "scripts/quality/ficha-first-next.mjs"
     },
-    "quality:tres-frentes-next": {
-      "type": "file",
-      "path": "scripts/quality/tres-frentes-next.mjs"
-    },
-    "quality:ficha-norm-benchmark-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ficha-norm-benchmark-gate.mjs"
-    },
-    "quality:ficha-norm-density-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ficha-norm-density-gate.mjs"
-    },
-    "quality:ficha-norm-typography-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ficha-norm-typography-gate.mjs"
-    },
-    "quality:ficha-norm-theme-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ficha-norm-theme-gate.mjs"
-    },
-    "quality:ficha-norm-motion-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ficha-norm-motion-gate.mjs"
-    },
-    "quality:te-02-sections-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-te-02-sections-gate.mjs"
-    },
-    "quality:te-04-sections-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-te-04-sections-gate.mjs"
-    },
-    "quality:ficha-norm-mirror-b1-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ficha-norm-mirror-b1-gate.mjs"
-    },
-    "quality:ficha-norm-mirror-b2-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ficha-norm-mirror-b2-gate.mjs"
-    },
     "quality:ficha-norm-signoff-gate": {
       "type": "file",
       "path": "scripts/quality/validate-ficha-norm-signoff-gate.mjs"
-    },
-    "quality:cm-01-barra-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-01-barra-gate.mjs"
-    },
-    "quality:cm-02-palette-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-02-palette-gate.mjs"
-    },
-    "quality:cm-03-assist-route-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-03-assist-route-gate.mjs"
-    },
-    "quality:te-06-supporting-pane-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-te-06-supporting-pane-gate.mjs"
-    },
-    "quality:te-07-tabular-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-te-07-tabular-gate.mjs"
-    },
-    "quality:te-08-signoff-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-te-08-signoff-gate.mjs"
-    },
-    "quality:cm-04-context-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-04-context-gate.mjs"
-    },
-    "quality:cm-05-panel-ia-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-05-panel-ia-gate.mjs"
-    },
-    "quality:cm-06-assist-draft-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-06-assist-draft-gate.mjs"
-    },
-    "quality:cm-07-evals-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-07-evals-gate.mjs"
-    },
-    "quality:cm-08-signoff-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-cm-08-signoff-gate.mjs"
-    },
-    "quality:experiencia-core-signoff-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-experiencia-core-signoff-gate.mjs"
-    },
-    "quality:ai-ext-inference-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-ai-ext-inference-gate.mjs"
-    },
-    "quality:paper-mode-tokens-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-mode-tokens-gate.mjs"
-    },
-    "quality:paper-mode-fields-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-mode-fields-gate.mjs"
-    },
-    "quality:paper-mode-ai-meta-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-mode-ai-meta-gate.mjs"
-    },
-    "quality:paper-mode-nav-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-mode-nav-gate.mjs"
-    },
-    "quality:paper-mode-toolbar-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-mode-toolbar-gate.mjs"
-    },
-    "quality:paper-mode-pagination-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-mode-pagination-gate.mjs"
-    },
-    "quality:paper-mode-ai-commands-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-mode-ai-commands-gate.mjs"
-    },
-    "quality:paper-mode-doc-bridge-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-mode-doc-bridge-gate.mjs"
-    },
-    "quality:paper-mode-signoff-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-mode-signoff-gate.mjs"
-    },
-    "quality:paper-mode-fichapapel-reference-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-mode-fichapapel-reference-gate.mjs"
-    },
-    "quality:paper-chart-section-tree-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-chart-section-tree-gate.mjs"
-    },
-    "quality:paper-planner-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-planner-scaffold-gate.mjs"
-    },
-    "quality:paper-planner-week-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-planner-week-gate.mjs"
-    },
-    "quality:paper-planner-month-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-planner-month-gate.mjs"
-    },
-    "quality:paper-planner-print-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-planner-print-gate.mjs"
-    },
-    "quality:paper-planner-ai-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-paper-planner-ai-gate.mjs"
-    },
-    "quality:paper-planner-gates": {
-      "type": "npm",
-      "command": "npm run quality:paper-planner-scaffold-gate && npm run quality:paper-planner-week-gate && npm run quality:paper-planner-month-gate && npm run quality:paper-planner-print-gate && npm run quality:paper-planner-ai-gate"
-    },
-    "quality:dual-chart-scaffold-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dual-chart-scaffold-gate.mjs"
-    },
-    "quality:dual-chart-traditional-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dual-chart-traditional-gate.mjs"
-    },
-    "quality:dual-chart-paper-sot-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dual-chart-paper-sot-gate.mjs"
-    },
-    "quality:dual-chart-router-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dual-chart-router-gate.mjs"
-    },
-    "quality:dual-chart-shell-anatomy-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dual-chart-shell-anatomy-gate.mjs"
     },
     "quality:dual-chart-traditional-layout-gate": {
       "type": "file",
@@ -976,73 +80,17 @@
       "type": "file",
       "path": "scripts/quality/validate-dual-chart-paper-layout-gate.mjs"
     },
-    "quality:dual-chart-census-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dual-chart-census-gate.mjs"
-    },
-    "quality:dual-chart-legacy-freeze-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dual-chart-legacy-freeze-gate.mjs"
-    },
-    "quality:dual-chart-launcher-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dual-chart-launcher-gate.mjs"
-    },
     "quality:dual-chart-gate": {
       "type": "file",
       "path": "scripts/quality/validate-dual-chart-gate.mjs"
-    },
-    "quality:dual-chart-plan": {
-      "type": "file",
-      "path": "scripts/quality/run-dual-chart-plan.mjs"
     },
     "quality:openapi-gate": {
       "type": "file",
       "path": "scripts/quality/validate-openapi-gate.mjs"
     },
-    "quality:login-command-home-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-login-command-home-gate.mjs"
-    },
-    "quality:mode-switcher-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-mode-switcher-gate.mjs"
-    },
-    "quality:mode-guards-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-mode-guards-gate.mjs"
-    },
-    "quality:mode-transitions-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-mode-transitions-gate.mjs"
-    },
-    "quality:command-center-hub-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-command-center-hub-gate.mjs"
-    },
-    "quality:classic-mode-isolation-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-classic-mode-isolation-gate.mjs"
-    },
-    "quality:dashboard-mode-isolation-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dashboard-mode-isolation-gate.mjs"
-    },
-    "quality:mode-safety-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-mode-safety-gate.mjs"
-    },
     "quality:pm01": {
       "type": "npm",
       "command": "npm run quality:three-modes-gate && npm run quality:classic-md3-mode-gate && npm run quality:dashboard-md3-mode-gate && npm run quality:mode-transitions-gate && npm run quality:mode-guards-gate && npm run quality:mode-safety-gate"
-    },
-    "quality:three-modes-design-agents-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-three-modes-design-agents-gate.mjs"
-    },
-    "quality:role-care-separation-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-role-care-separation-gate.mjs"
     },
     "quality:golden-journey": {
       "type": "npm",
@@ -1056,25 +104,9 @@
       "type": "file",
       "path": "scripts/quality/run-quality-clinical.mjs"
     },
-    "quality:full": {
-      "type": "file",
-      "path": "scripts/quality/run-quality-full.mjs"
-    },
     "quality:rapid-gate": {
       "type": "file",
       "path": "scripts/quality/validate-rapid-gate.mjs"
-    },
-    "quality:dev-agent-low-risk-write-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dev-agent-low-risk-write-gate.mjs"
-    },
-    "quality:dev-agent-ollama-automation-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dev-agent-ollama-automation-gate.mjs"
-    },
-    "quality:auto-dev-6h-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-auto-dev-6h-gate.mjs"
     },
     "quality:evolab-bridge-gate": {
       "type": "file",
@@ -1083,18 +115,6 @@
     "quality:openclaw-gate": {
       "type": "file",
       "path": "scripts/quality/validate-openclaw-gate.mjs"
-    },
-    "quality:openclaw-cycle-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-openclaw-cycle-gate.mjs"
-    },
-    "quality:pm03-orchestration-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-pm03-orchestration-gate.mjs"
-    },
-    "quality:dashboard-secondary-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-dashboard-secondary-gate.mjs"
     },
     "quality:legal-disclaimer-gate": {
       "type": "file",
@@ -1123,6 +143,1517 @@
     "quality:root-script-surface-gate": {
       "type": "file",
       "path": "scripts/quality/validate-root-script-surface-gate.mjs"
+    },
+    "quality:ux-lab-autopilot-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ux-lab-autopilot-gate.mjs"
+    },
+    "quality:e2e-transversal-bar-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-e2e-transversal-bar-gate.mjs"
+    },
+    "quality:gates-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-gates-inventory-gate.mjs"
+    },
+    "quality:gates-prune-phase1-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-gates-prune-phase1-gate.mjs"
+    },
+    "quality:gates-prune-phase2-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-gates-prune-phase2-gate.mjs"
     }
-  }
+  },
+  "archived": {
+    "quality:tramo-k-quality-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-k-quality-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-k-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-k-scaffold-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-k-audit-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-k-audit-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola2-m3-ui-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola2-m3-ui-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola2-physical-exam-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola2-physical-exam-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola1c-journey-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola1c-journey-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola3-alerts-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola3-alerts-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola6a-print-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola6a-print-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola3-longitudinal-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola3-longitudinal-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola3-ficha-depth-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola3-ficha-depth-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola3-ficha-hub-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola3-ficha-hub-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola3-surgical-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola3-surgical-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola3-timeline-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola3-timeline-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola1c-imaging-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola1c-imaging-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-b-ui-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-b-ui-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-c-emergency-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-c-emergency-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-c-admission-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-c-admission-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-c-orders-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-c-orders-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-c-trends-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-c-trends-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-c-epicrisis-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-c-epicrisis-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-c-census-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-c-census-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-c-mar-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-c-mar-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-icu-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-icu-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-flowsheet-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-flowsheet-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-hemodynamics-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-hemodynamics-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-fluid-balance-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-fluid-balance-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-ventilation-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-ventilation-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-invasive-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-invasive-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-icu-discharge-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-icu-discharge-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-neurological-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-neurological-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-severity-scales-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-severity-scales-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-vasoactive-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-vasoactive-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-sedoanalgesia-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-sedoanalgesia-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-e-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-e-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-e-or-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-e-or-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-e-who-checklist-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-e-who-checklist-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-e-preanesthesia-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-e-preanesthesia-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-e-audit-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-e-audit-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-e-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-e-scaffold-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-f-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-f-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-f-aps-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-f-aps-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-f-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-f-scaffold-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-f-audit-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-f-audit-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-g-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-g-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-g-specialized-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-g-specialized-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-g-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-g-scaffold-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-g-audit-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-g-audit-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-h-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-h-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-h-iaas-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-h-iaas-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-h-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-h-scaffold-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-h-audit-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-h-audit-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-i-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-i-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-i-specialty-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-i-specialty-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-i-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-i-scaffold-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-i-audit-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-i-audit-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-j-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-j-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-j-pharmacy-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-j-pharmacy-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-j-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-j-scaffold-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-j-audit-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-j-audit-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:m3-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-m3-scaffold-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:classic-md3-mode-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-classic-md3-mode-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:classic-md3-ai-mode-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-classic-md3-ai-mode-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dashboard-md3-mode-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dashboard-md3-mode-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dual-chart-next": {
+      "type": "file",
+      "path": "scripts/quality/dual-chart-next.mjs",
+      "archivedProgram": "dual-chart-next",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:sh-02-intent-evals-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-sh-02-intent-evals-gate.mjs",
+      "archivedProgram": "PROG-STRENGTHEN",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:sh-05-rls-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-sh-05-rls-gate.mjs",
+      "archivedProgram": "PROG-STRENGTHEN",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:sh-06-migration-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-sh-06-migration-gate.mjs",
+      "archivedProgram": "PROG-STRENGTHEN",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ficha-norm-benchmark-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ficha-norm-benchmark-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ficha-norm-density-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ficha-norm-density-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ficha-norm-typography-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ficha-norm-typography-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ficha-norm-theme-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ficha-norm-theme-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ficha-norm-motion-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ficha-norm-motion-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:te-02-sections-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-te-02-sections-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:te-04-sections-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-te-04-sections-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ficha-norm-mirror-b1-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ficha-norm-mirror-b1-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ficha-norm-mirror-b2-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ficha-norm-mirror-b2-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-02-palette-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-02-palette-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-03-assist-route-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-03-assist-route-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:te-06-supporting-pane-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-te-06-supporting-pane-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:te-07-tabular-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-te-07-tabular-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:te-08-signoff-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-te-08-signoff-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-04-context-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-04-context-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-05-panel-ia-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-05-panel-ia-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-06-assist-draft-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-06-assist-draft-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-07-evals-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-07-evals-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-08-signoff-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-08-signoff-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-planner-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-planner-scaffold-gate.mjs",
+      "archivedProgram": "paper-planner",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-planner-week-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-planner-week-gate.mjs",
+      "archivedProgram": "paper-planner",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-planner-print-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-planner-print-gate.mjs",
+      "archivedProgram": "paper-planner",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-planner-ai-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-planner-ai-gate.mjs",
+      "archivedProgram": "paper-planner",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-planner-gates": {
+      "type": "npm",
+      "command": "npm run quality:paper-planner-scaffold-gate && npm run quality:paper-planner-week-gate && npm run quality:paper-planner-month-gate && npm run quality:paper-planner-print-gate && npm run quality:paper-planner-ai-gate",
+      "archivedProgram": "paper-planner",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:login-command-home-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-login-command-home-gate.mjs",
+      "archivedProgram": "PROG-FICHA-FIRST-norm",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:mode-switcher-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-mode-switcher-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:mode-guards-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-mode-guards-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:mode-transitions-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-mode-transitions-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:mode-safety-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-mode-safety-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:three-modes-design-agents-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-three-modes-design-agents-gate.mjs",
+      "archivedProgram": "PROG-THREE-MODES",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-k-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-k-inventory-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ola3-ficha-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ola3-ficha-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-b-reception-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-b-reception-gate.mjs",
+      "archivedProgram": "Tramos-scaffold",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:cm-01-barra-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cm-01-barra-gate.mjs",
+      "archivedProgram": "Olas-TE-PA",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-planner-month-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-planner-month-gate.mjs",
+      "archivedProgram": "paper-planner",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:m3-signoff": {
+      "type": "file",
+      "path": "scripts/quality/verify-m3-signoff.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:m3-human-pilot": {
+      "type": "file",
+      "path": "scripts/quality/run-m3-human-pilot.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:m3-visual-pass": {
+      "type": "file",
+      "path": "scripts/quality/capture-m3-visual-pass.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:calm-premium-signoff": {
+      "type": "file",
+      "path": "scripts/quality/capture-calm-premium-signoff.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:pilot-trial": {
+      "type": "file",
+      "path": "scripts/quality/run-pilot-trial.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:microphases": {
+      "type": "file",
+      "path": "scripts/quality/validate-microphase-ledger.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:microphase-next": {
+      "type": "file",
+      "path": "scripts/quality/microphase-next.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:local-ci": {
+      "type": "file",
+      "path": "scripts/quality/run-local-ci.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dev-env-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dev-env-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:case-intel-catalog-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-case-intel-catalog-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:case-intel-promote-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-case-intel-promote-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:case-intel-gate": {
+      "type": "npm",
+      "command": "npm run quality:case-intel-catalog-gate && npm run quality:case-intel-promote-gate && npm run quality:case-intel-assist-gate",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:case-intel-assist-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-case-intel-assist-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:stack-dev-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-stack-dev-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-scaffold-canon-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-scaffold-canon-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-e2e-registry-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-e2e-registry-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:week2-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-week2-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ai-tramo-evals-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ai-tramo-evals-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ai-catalog-smoke-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ai-catalog-smoke-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:week3-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-week3-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramos-clinical-signoff-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramos-clinical-signoff-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramos-ak-closure-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramos-ak-closure-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramos-signoff-prep-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramos-signoff-prep-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramos-clinical-signoff-session": {
+      "type": "file",
+      "path": "scripts/quality/run-tramos-clinical-signoff-session.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-closure-evals-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-closure-evals-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dev-agent-orchestration-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dev-agent-orchestration-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-k-closure-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-k-closure-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:week4-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-week4-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:doc-screen-catalog-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-doc-screen-catalog-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:registry-meta-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-registry-meta-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-a-closure-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-a-closure-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-b-closure-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-b-closure-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-c-closure-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-c-closure-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-d-closure-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-d-closure-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-e-closure-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-e-closure-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-f-closure-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-f-closure-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-g-closure-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-g-closure-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-h-closure-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-h-closure-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-i-closure-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-i-closure-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tramo-j-closure-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-tramo-j-closure-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ux-pilot": {
+      "type": "command",
+      "command": "npm run quality:ux-g02 && npm run tool:script -- test:e2e:ux-g02 && npm run tool:script -- test:e2e:login-gateway",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:command-center-layout-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-command-center-layout-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ui-density-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ui-density-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ui-simplify-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ui-simplify-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ui": {
+      "type": "command",
+      "command": "npm run quality:ui-simplify-gate",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:duplicate-actions-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-duplicate-actions-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:icon-budget-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-icon-budget-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:scroll-discipline-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-scroll-discipline-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:split-pane-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-split-pane-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:bulk-actions-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-bulk-actions-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:drag-drop-safety-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-drag-drop-safety-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:copy-paste-safety-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-copy-paste-safety-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:clinical-productivity-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-productivity-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:clinical-textbox-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-textbox-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:clinical-textbox-assist-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-textbox-assist-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:clinical-spellcheck-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-spellcheck-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:clinical-spellcheck-integration": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-spellcheck-integration.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:clinical-snippets-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-snippets-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:clinical-ai-text-safety-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-ai-text-safety-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:autocomplete-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-autocomplete-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:spellcheck-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-spellcheck-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:command-palette-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-command-palette-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:clinical-grid-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-grid-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ollama-structured-output-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ollama-structured-output-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:grid-surface-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-grid-surface-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:form-collapse-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-form-collapse-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:clinical-form-rhf-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-form-rhf-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:form-screen-tree-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-form-screen-tree-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:rad-m3-discipline-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-rad-m3-discipline-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:design-mode-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-design-mode-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:classic-fixed-panels-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-classic-fixed-panels-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:classic-supporting-pane-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-classic-supporting-pane-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:classic-commandbar-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-classic-commandbar-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:classic-actionrail-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-classic-actionrail-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:classic-statusbar-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-classic-statusbar-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:command-center-googlebar-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-command-center-googlebar-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:design-agents-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-design-agents-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:design-agent-schemas-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-design-agent-schemas-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:visual-density-agent-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-visual-density-agent-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:classic-screenshot-advisory": {
+      "type": "file",
+      "path": "scripts/quality/validate-classic-screenshot-advisory.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dashboard-kpi-actionability-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dashboard-kpi-actionability-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dashboard-grid-surface-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dashboard-grid-surface-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dashboard-bulk-actions-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dashboard-bulk-actions-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dashboard-data-quality-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dashboard-data-quality-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dashboard-design-agents-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dashboard-design-agents-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dashboard-screenshot-advisory": {
+      "type": "file",
+      "path": "scripts/quality/validate-dashboard-screenshot-advisory.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dual-chart-ledger": {
+      "type": "file",
+      "path": "scripts/quality/validate-dual-chart-ledger.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-mode-next": {
+      "type": "file",
+      "path": "scripts/quality/paper-mode-next.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:registry-status": {
+      "type": "file",
+      "path": "scripts/quality/registry-status.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:di-next": {
+      "type": "file",
+      "path": "scripts/quality/di-next.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:di-context-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-di-context-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:di-prefill-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-di-prefill-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:di-suggestions-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-di-suggestions-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:interop-chile-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-interop-chile-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:di-memory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-di-memory-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:di-autocomplete-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-di-autocomplete-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:di-templates-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-di-templates-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:di-timeline-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-di-timeline-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:di-journeys-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-di-journeys-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:di-signoff-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-di-signoff-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:draft-trace-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-draft-trace-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:im-02-embed-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-im-02-embed-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:rag-retrieval-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-rag-retrieval-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ai-provenance-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ai-provenance-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ai-client-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ai-client-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:web-ai-boundary-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-web-ai-boundary-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:quality-aliases-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-quality-aliases-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ai": {
+      "type": "command",
+      "command": "npm run quality:sh-03-degrade-gate && npm run quality:ai-client-gate && npm run quality:web-ai-boundary-gate",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ai-otel-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ai-otel-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:tres-frentes-next": {
+      "type": "file",
+      "path": "scripts/quality/tres-frentes-next.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:experiencia-core-signoff-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-experiencia-core-signoff-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ai-ext-inference-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ai-ext-inference-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-mode-tokens-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-mode-tokens-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-mode-fields-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-mode-fields-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-mode-ai-meta-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-mode-ai-meta-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-mode-nav-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-mode-nav-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-mode-toolbar-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-mode-toolbar-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-mode-pagination-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-mode-pagination-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-mode-ai-commands-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-mode-ai-commands-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-mode-doc-bridge-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-mode-doc-bridge-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-mode-signoff-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-mode-signoff-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-mode-fichapapel-reference-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-mode-fichapapel-reference-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:paper-chart-section-tree-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-chart-section-tree-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dual-chart-scaffold-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dual-chart-scaffold-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dual-chart-traditional-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dual-chart-traditional-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dual-chart-paper-sot-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dual-chart-paper-sot-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dual-chart-router-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dual-chart-router-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dual-chart-shell-anatomy-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dual-chart-shell-anatomy-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dual-chart-census-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dual-chart-census-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dual-chart-legacy-freeze-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dual-chart-legacy-freeze-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dual-chart-launcher-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dual-chart-launcher-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dual-chart-plan": {
+      "type": "file",
+      "path": "scripts/quality/run-dual-chart-plan.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:command-center-hub-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-command-center-hub-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:classic-mode-isolation-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-classic-mode-isolation-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dashboard-mode-isolation-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dashboard-mode-isolation-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:role-care-separation-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-role-care-separation-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:full": {
+      "type": "file",
+      "path": "scripts/quality/run-quality-full.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dev-agent-low-risk-write-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dev-agent-low-risk-write-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dev-agent-ollama-automation-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dev-agent-ollama-automation-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:auto-dev-6h-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-auto-dev-6h-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:openclaw-cycle-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-openclaw-cycle-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:pm03-orchestration-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-pm03-orchestration-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:dashboard-secondary-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-dashboard-secondary-gate.mjs",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ux-lab-autopilot": {
+      "type": "command",
+      "command": "node tools/ux-lab-autopilot/autopilot.mjs --mode audit-only",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    },
+    "quality:ux-lab-autopilot-pr": {
+      "type": "command",
+      "command": "node tools/ux-lab-autopilot/autopilot.mjs --mode pr-candidate",
+      "archivedProgram": "catalog-only-phase2",
+      "archivedAt": "2026-06-16"
+    }
+  },
+  "prunePhase": "2"
 }

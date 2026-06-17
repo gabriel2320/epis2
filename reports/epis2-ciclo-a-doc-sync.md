@@ -47,4 +47,4 @@
 
 1. **Piloto humano:** ejecutar `docs/quality/M3_VISUAL_SIGNOFF_STEPS.md` (V1–V6) con checklist MF-178.  
 2. **Impresión clínica:** `docs/design/EPIS2_PRINTABLE_CLINICAL_DOCUMENTS_NORM.md`.  
-3. **Decisión programa v2:** revisar `reports/epis2-master-architect-program-v2.md` para MF-2xx.
+3. **Decisión programa v2:** revisar `reports/archive/2026-06/epis2-master-architect-program-v2.md` para MF-2xx.

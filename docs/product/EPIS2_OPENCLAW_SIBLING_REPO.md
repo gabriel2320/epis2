@@ -348,7 +348,7 @@ Evitar: OpenClaw decide + edita + ejecuta + commitea solo.
 
 ```bash
 npm run dev:session -- --openclaw
-# Cursor: @reports/dev-agent-brief.md @reports/openclaw-latest-brief.md
+# Cursor: @reports/dev-agent-brief.md @reports/archive/2026-06/openclaw-latest-brief.md
 ```
 
 ---

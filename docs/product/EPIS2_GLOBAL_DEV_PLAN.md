@@ -56,7 +56,7 @@ Command palette Ctrl+K → **Hilo B**.
 - [x] Blueprint `procedure_request` + comando `request_procedure` (IDC 57)
 - [x] Cierre encuentro UI + API (`outpatient_visit.closeEncounter`)
 - [x] `dashboard-pharmacy` → `done`
-- [x] Cierre técnico · [`epis2-hilo-b-closure-2026-06-09.md`](../../reports/epis2-hilo-b-closure-2026-06-09.md)
+- [x] Cierre técnico · [`epis2-hilo-b-closure-2026-06-09.md`](../../reports/archive/2026-06/epis2-hilo-b-closure-2026-06-09.md)
 - ~~Nota procedimiento clínica (≠ solicitud)~~ → **PEND-002 defer** Ola 2+/3 (no bloquea cierre)
 
 ### Hilo C — Ola 3 longitudinal (**activo**)
@@ -66,8 +66,8 @@ Infraestructura cerrada; trabajo pendiente por **entregas** (ver [`EPIS2_TABLERO
 | Entrega | Alcance | Estado |
 |---------|---------|--------|
 | — | Ficha hub split pane · documentos compactos · results-inbox | ✓ |
-| — | Impresión A5 receta + Carta | ✓ · [`epis2-hilo-c-p1-print-prescription-2026-06-09.md`](../../reports/epis2-hilo-c-p1-print-prescription-2026-06-09.md) |
-| — | Piloto M3 automatizado V1–V6 | ✓ · [`epis2-m3-human-pilot-2026-06-09.md`](../../reports/epis2-m3-human-pilot-2026-06-09.md) |
+| — | Impresión A5 receta + Carta | ✓ · [`epis2-hilo-c-p1-print-prescription-2026-06-09.md`](../../reports/archive/2026-06/epis2-hilo-c-p1-print-prescription-2026-06-09.md) |
+| — | Piloto M3 automatizado V1–V6 | ✓ · [`epis2-m3-human-pilot-2026-06-09.md`](../../reports/archive/2026-06/epis2-m3-human-pilot-2026-06-09.md) |
 | **C-1** | Signoff visual M3 (humano opcional) | Automatizado ✓ · humano pendiente |
 | **C-2** | PROG-CALM-PREMIUM · THEME-CALM-01 + UX-AESTHETIC P3 | Parcial (alto contraste) · signoff NO-GO |
 | **C-3** | MF-CLINICAL-SUMMARY-B + UX-CALM-PATIENT | C-3a scaffold ✓ · C-3b pendiente |
@@ -76,7 +76,7 @@ Infraestructura cerrada; trabajo pendiente por **entregas** (ver [`EPIS2_TABLERO
 ### Hilo D — Tramo J farmacia (**cerrado** 2026-06-09)
 
 - [x] Scaffold IDC 161–170 · `fa38e4d` · gates Tramo J 6/6 · E2E 2/2 · UX-G02 9/9
-- [x] PEND-001 signoff · [`epis2-tramo-j-signoff-2026-06-09.md`](../../reports/epis2-tramo-j-signoff-2026-06-09.md)
+- [x] PEND-001 signoff · [`epis2-tramo-j-signoff-2026-06-09.md`](../../reports/archive/2026-06/epis2-tramo-j-signoff-2026-06-09.md)
 
 ### Hilo UX-1 — PROG-THREE-MODES / **EPIS2-PM-01** (**cerrado** 2026-06-04)
 

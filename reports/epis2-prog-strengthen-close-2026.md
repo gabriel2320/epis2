@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-06-15 · **Gate:** `npm run quality:strengthen-close-gate` ✓  
 **Programa:** PROG-STRENGTHEN-2026 · **MF final:** MF-IC-04  
-**Plan:** [`epis2-propuesta-innovacion-ia-fullstack-2026-06-11.md`](./epis2-propuesta-innovacion-ia-fullstack-2026-06-11.md)
+**Plan:** [`epis2-propuesta-innovacion-ia-fullstack-2026-06-11.md`](./archive/2026-06/epis2-propuesta-innovacion-ia-fullstack-2026-06-11.md)
 
 ---
 

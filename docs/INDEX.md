@@ -1,6 +1,6 @@
 # EPIS2 — Índice documental maestro
 
-**Actualizado:** 2026-06-14 · Origen: [`epis2-auditoria-inventario-limpieza-2026-06-09.md`](../reports/epis2-auditoria-inventario-limpieza-2026-06-09.md) §2
+**Actualizado:** 2026-06-14 · Origen: [`epis2-auditoria-inventario-limpieza-2026-06-09.md`](../reports/archive/2026-06/epis2-auditoria-inventario-limpieza-2026-06-09.md) §2
 
 Regla de lectura: **un solo «siguiente paso»** — el del tablero (L1). Todo lo demás es canon, referencia o histórico.
 
@@ -20,8 +20,8 @@ Regla de lectura: **un solo «siguiente paso»** — el del tablero (L1). Todo l
 | [`product/EPIS2_TABLERO.md`](./product/EPIS2_TABLERO.md) | **Fuente única del siguiente paso** |
 | [`product/EPIS2_TRIADA_REPOS.md`](./product/EPIS2_TRIADA_REPOS.md) | Mapa EPIS2 · Evolab · MedRepo |
 | [`product/EPIS2_PROG_DETERMINISTIC_INTELLIGENCE.md`](./product/EPIS2_PROG_DETERMINISTIC_INTELLIGENCE.md) | PROG-DI (cerrado · commit `f56b7d2`) |
-| [`../reports/epis2-plan-correcciones-prioritarias-2026-06-14.md`](../reports/epis2-plan-correcciones-prioritarias-2026-06-14.md) | Plan correcciones A→E (activo) |
-| [`../reports/epis2-plan-conciliacion-triada-2026-06-14.md`](../reports/epis2-plan-conciliacion-triada-2026-06-14.md) | Plan conciliación tríada (activo) |
+| [`../reports/archive/2026-06/epis2-plan-correcciones-prioritarias-2026-06-14.md`](../reports/archive/2026-06/epis2-plan-correcciones-prioritarias-2026-06-14.md) | Plan correcciones A→E (activo) |
+| [`../reports/archive/2026-06/epis2-plan-conciliacion-triada-2026-06-14.md`](../reports/archive/2026-06/epis2-plan-conciliacion-triada-2026-06-14.md) | Plan conciliación tríada (activo) |
 | [`product/EPIS2_GLOBAL_DEV_PLAN.md`](./product/EPIS2_GLOBAL_DEV_PLAN.md) | Hilos activos/cerrados |
 | [`product/EPIS2_NORMA_FULLSTACK_PLAN.md`](./product/EPIS2_NORMA_FULLSTACK_PLAN.md) | Hilo NORM — plan de mejora norma full stack (PEND-012 cerrado 2026-06-10) |
 | [`security/EPIS2_THREAT_MODEL.md`](./security/EPIS2_THREAT_MODEL.md) | Threat model STRIDE (revisar al cerrar cada tramo NORM) |

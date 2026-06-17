@@ -83,7 +83,7 @@
 
 ## Conciliación con propuesta arquitecto v2 (MF-2xx)
 
-La propuesta `reports/epis2-master-architect-program-v2.md` (MF-200+) **no sustituye** este canon hasta decisión explícita. Equivalencias orientativas:
+La propuesta `reports/archive/2026-06/epis2-master-architect-program-v2.md` (MF-200+) **no sustituye** este canon hasta decisión explícita. Equivalencias orientativas:
 
 | MF unificado | MF legado | MF-2xx (propuesta) |
 |--------------|-----------|---------------------|
@@ -109,7 +109,7 @@ Ejecutados durante fundación / post-MVP; evidencia en `reports/` y `docs/design
 
 ## Próximo paso operativo
 
-Programa MF-1…51 **cerrado**. Siguiente trabajo fuera de este canon hasta decisión explícita sobre `reports/epis2-master-architect-program-v2.md` (MF-2xx).
+Programa MF-1…51 **cerrado**. Siguiente trabajo fuera de este canon hasta decisión explícita sobre `reports/archive/2026-06/epis2-master-architect-program-v2.md` (MF-2xx).
 
 | Prioridad | Entrega |
 |-----------|---------|

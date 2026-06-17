@@ -24,7 +24,7 @@ const requiredFiles = [
   'e2e/ux-g02-command-first.spec.ts',
   'e2e/login-gateway.spec.ts',
   'scripts/qa/run-ux-g02-validation.ts',
-  'reports/epis2-ux-command-first-consolidated-2026-06-07.md',
+  'reports/archive/2026-06/epis2-ux-command-first-consolidated-2026-06-07.md',
 ];
 
 for (const rel of requiredFiles) {
@@ -34,14 +34,32 @@ for (const rel of requiredFiles) {
 }
 
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+const catalog = JSON.parse(readFileSync(join(root, 'tools/gates/catalog-full.json'), 'utf8'));
+const gates = catalog.gates ?? {};
+
 for (const script of [
   'quality:ux-g02',
   'quality:ux-pilot',
   'test:e2e:ux-g02',
   'test:e2e:login-gateway',
 ]) {
-  if (!pkg.scripts?.[script]) {
-    errors.push(`package.json sin script ${script}`);
+  if (pkg.scripts?.[script]) {
+    errors.push(`package.json root no debe definir ${script} (catálogo o tool:script)`);
+  }
+}
+
+for (const gate of ['quality:ux-g02', 'quality:ux-pilot', 'quality:ux-lab-close']) {
+  if (!gates[gate]) {
+    errors.push(`catalog-full.json sin ${gate}`);
+  }
+}
+
+const archive = JSON.parse(
+  readFileSync(join(root, 'tools/legacy-scripts/root-script-archive.json'), 'utf8'),
+);
+for (const script of ['test:e2e:ux-g02', 'test:e2e:login-gateway']) {
+  if (!archive.scripts?.[script]) {
+    errors.push(`root-script-archive sin ${script}`);
   }
 }
 

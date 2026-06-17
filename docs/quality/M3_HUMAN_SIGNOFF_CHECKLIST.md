@@ -40,5 +40,5 @@ Referencias cruzadas: `EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md`, `EPIS2_TYPOGRAPH
 |-------|--------|
 | Fecha staging | 2026-06-06 |
 | Resultado | **GO DEMO M3** — E2E + pasada visual con capturas |
-| Reporte | `reports/epis2-m3-visual-pass-2026-06-06.md` |
+| Reporte | `reports/archive/2026-06/epis2-m3-visual-pass-2026-06-06.md` |
 | Capturas | `reports/m3-visual-evidence/2026-06-06/` (16 PNG) |
