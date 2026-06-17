@@ -43,11 +43,15 @@ vi.mock('../routes/clinicalNavigate.js', () => ({
   useClinicalNavigate: () => vi.fn(),
 }));
 
-vi.mock('../session/EpisSessionContext.js', () => ({
-  useEpisSession: () => ({
-    openDashboardMode: vi.fn(),
-  }),
-}));
+vi.mock('../session/EpisSessionContext.js', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../session/EpisSessionContext.js')>();
+  return {
+    ...actual,
+    useEpisSession: () => ({
+      openDashboardMode: vi.fn(),
+    }),
+  };
+});
 
 vi.mock('../navigation/useClinicalWorkspace.js', () => ({
   useClinicalWorkspace: () => ({
@@ -56,11 +60,15 @@ vi.mock('../navigation/useClinicalWorkspace.js', () => ({
   }),
 }));
 
-vi.mock('../clinical/ActivePatientContext.js', () => ({
-  useActivePatient: () => ({
-    patient: { id: '00000000-0000-4000-8000-000000000001' },
-  }),
-}));
+vi.mock('../clinical/ActivePatientContext.js', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../clinical/ActivePatientContext.js')>();
+  return {
+    ...actual,
+    useActivePatient: () => ({
+      patient: { id: '00000000-0000-4000-8000-000000000001' },
+    }),
+  };
+});
 
 afterEach(() => cleanup());
 
