@@ -84,7 +84,12 @@ export const EPIS2G_SCREEN_STRUCTURE: readonly CicaEpis2gScreenStructure[] = [
     workspaceSubtitle:
       'Visitas clínicas, pases de guardia y juntas médicas programadas para su turno.',
     blocks: [
-      { id: 'agenda-timeline', title: 'Actividades cronometradas de hoy', accent: 'emerald', span: 12 },
+      {
+        id: 'agenda-timeline',
+        title: 'Actividades cronometradas de hoy',
+        accent: 'emerald',
+        span: 12,
+      },
     ],
   },
   {
@@ -103,9 +108,7 @@ export const EPIS2G_SCREEN_STRUCTURE: readonly CicaEpis2gScreenStructure[] = [
     screenId: 'patient-evolutions',
     epis2gTab: 'evoluciones',
     shell: 'patient-list',
-    blocks: [
-      { id: 'evolution-list', title: 'Historia evolutiva', accent: 'indigo', span: 12 },
-    ],
+    blocks: [{ id: 'evolution-list', title: 'Historia evolutiva', accent: 'indigo', span: 12 }],
   },
   {
     screenId: 'evolution-book',
@@ -158,21 +161,23 @@ export const EPIS2G_SCREEN_STRUCTURE: readonly CicaEpis2gScreenStructure[] = [
     screenId: 'patient-procedures',
     epis2gTab: 'procedimientos',
     shell: 'patient-list',
-    blocks: [{ id: 'procedure-log', title: 'Procedimientos / pabellón', accent: 'slate', span: 12 }],
+    blocks: [
+      { id: 'procedure-log', title: 'Procedimientos / pabellón', accent: 'slate', span: 12 },
+    ],
   },
   {
     screenId: 'patient-documents',
     epis2gTab: 'documentos',
     shell: 'patient-panel',
-    blocks: [{ id: 'document-list', title: 'Documentos y certificados', accent: 'slate', span: 12 }],
+    blocks: [
+      { id: 'document-list', title: 'Documentos y certificados', accent: 'slate', span: 12 },
+    ],
   },
   {
     screenId: 'patient-discharge',
     epis2gTab: 'alta',
     shell: 'patient-letter',
-    blocks: [
-      { id: 'discharge-summary', title: 'Epicrisis de alta', accent: 'emerald', span: 12 },
-    ],
+    blocks: [{ id: 'discharge-summary', title: 'Epicrisis de alta', accent: 'emerald', span: 12 }],
   },
   {
     screenId: 'patient-timeline',

@@ -9,11 +9,7 @@ import {
   type CicaScreenId,
 } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
-import {
-  CICA_DEMO_AGENDA,
-  CICA_DEMO_RECENT,
-  CICA_DEMO_WORK_TASKS,
-} from './cicaEpis2gDemoData.js';
+import { CICA_DEMO_AGENDA, CICA_DEMO_RECENT, CICA_DEMO_WORK_TASKS } from './cicaEpis2gDemoData.js';
 
 export {
   CicaPatientAdmissionPage,

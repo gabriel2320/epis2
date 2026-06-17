@@ -58,10 +58,7 @@ export function CicaAppLayout() {
         demoLabel: copy.demoBadge,
       }}
       sidebar={
-        <CicaSidebar
-          sections={sidebarSections}
-          {...(patientContext ? { patientContext } : {})}
-        />
+        <CicaSidebar sections={sidebarSections} {...(patientContext ? { patientContext } : {})} />
       }
       hideSidebar={isCicaSidebarHiddenRoute(pathname)}
     >

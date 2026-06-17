@@ -75,16 +75,17 @@ export {
   type CicaEpis2gShell,
 } from './cicaEpis2gScreenStructure.js';
 export { CicaSectionBlock, type CicaSectionBlockProps } from './CicaSectionBlock.js';
-export {
-  CicaStructuredSection,
-  type CicaStructuredSectionProps,
-} from './CicaStructuredSection.js';
+export { CicaStructuredSection, type CicaStructuredSectionProps } from './CicaStructuredSection.js';
 export {
   CicaSystemWorkspaceHeader,
   type CicaSystemWorkspaceHeaderProps,
 } from './CicaSystemWorkspaceHeader.js';
 export { CicaSidebarThemePanel, type CicaSidebarThemePanelProps } from './CicaSidebarThemePanel.js';
-export { CicaSidebar, type CicaSidebarProps, type CicaSidebarPatientContext } from './CicaSidebar.js';
+export {
+  CicaSidebar,
+  type CicaSidebarProps,
+  type CicaSidebarPatientContext,
+} from './CicaSidebar.js';
 export {
   buildCicaSidebarSections,
   buildCicaSystemSidebarSections,

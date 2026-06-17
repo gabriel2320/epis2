@@ -93,7 +93,9 @@ export function CicaSidebarThemePanel({
                   color: active ? '#fff' : cicaEpis2gVisual.railTextMuted,
                   bgcolor: active ? cicaEpis2gVisual.railSelectedBg : 'transparent',
                   '&:hover': {
-                    bgcolor: active ? cicaEpis2gVisual.railSelectedBg : cicaEpis2gVisual.railHoverBg,
+                    bgcolor: active
+                      ? cicaEpis2gVisual.railSelectedBg
+                      : cicaEpis2gVisual.railHoverBg,
                     color: '#fff',
                   },
                 }}

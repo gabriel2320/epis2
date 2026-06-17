@@ -89,9 +89,7 @@ export function CicaStructuredSection({
 }: CicaStructuredSectionProps) {
   const structure = findEpis2gScreenStructure(screenId);
   const { isDark } = useCicaThemeTokens();
-  const canvas = isDark
-    ? cicaEpis2gVisual.contentCanvasDark
-    : cicaEpis2gVisual.contentCanvasLight;
+  const canvas = isDark ? cicaEpis2gVisual.contentCanvasDark : cicaEpis2gVisual.contentCanvasLight;
 
   if (!structure) {
     return (

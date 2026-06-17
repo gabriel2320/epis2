@@ -46,9 +46,7 @@ export function CicaCensusPage() {
         !needle ||
         item.primaryLabel.toLowerCase().includes(needle) ||
         (item.secondaryLabel ?? '').toLowerCase().includes(needle);
-      return (
-        matchesQuery && matchesCicaServiceFilter(item.secondaryLabel, serviceFilter)
-      );
+      return matchesQuery && matchesCicaServiceFilter(item.secondaryLabel, serviceFilter);
     });
   }, [patients, query, serviceFilter]);
 
