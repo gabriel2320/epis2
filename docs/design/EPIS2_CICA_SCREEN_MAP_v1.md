@@ -2,7 +2,9 @@
 
 > **CICA = sidebar útil + ficha tradicional + páginas carta + libro de evoluciones + modo papel protagonista.**
 
-**Raíz canónica:** `/app/*` (alias conceptual `/cica/*` en diseño).  
+**Árbol clásico completo (norma):** [`EPIS2_CICA_CLASSIC_MASTER_TREE.md`](EPIS2_CICA_CLASSIC_MASTER_TREE.md) · **Layout tradicional:** [`EPIS2_CICA_CLASSIC_LAYOUT_SPEC.md`](EPIS2_CICA_CLASSIC_LAYOUT_SPEC.md)
+
+**Raíz canónica:** `/app/*` (opt-in `VITE_ENABLE_CICA_UI=true` · producto NO-GO).  
 **Registry:** `packages/epis2-ui/src/cica/EPIS_CICA_SCREEN_REGISTRY.ts`  
 **Policy:** [`EPIS2_CICA_CLEAN_ROOM_POLICY.md`](EPIS2_CICA_CLEAN_ROOM_POLICY.md)
 
@@ -23,12 +25,12 @@
 
 | Pantalla | Ruta | Estado |
 |----------|------|--------|
-| Buscar paciente | `/app/buscar` | ✓ |
-| Censo | `/app/censo` | ✓ |
+| Buscar paciente | `/app/buscar` | ◐ reform P0 |
+| Censo | `/app/censo` | ◐ reform P0 |
 | Ficha resumen | `/app/pacientes/:id/resumen` | ✓ |
-| Sidebar dos niveles epis2g | layout global | ✓ |
+| Sidebar dual clásica | layout global | ◐ reform nav |
 | `CicaClinicalList` | buscar/censo | ✓ |
-| Capa visual epis2g | `cicaEpis2gVisual.ts` | ✓ rail + panel + cards |
+| Layout tradicional | header · pie · grilla 12 | ◐ ver CLASSIC_LAYOUT_SPEC |
 
 ## Etapa 2 ◐ (parcial)
 
@@ -48,9 +50,9 @@ Indicaciones, exámenes, medicamentos, documentos (lista + `/nueva` carta).
 
 Papel diario ✓ · Papel libro ◐ (`/papel/libro` índice) · semana/mes · animación paso página.
 
-## Etapa 5 — integrada (stubs epis2g)
+## Etapa 5 — stubs navegables (reformulación pendiente)
 
-Interconsultas, procedimientos, alta, auditoría, ingreso, medicamentos, timeline, recientes, mi trabajo, agenda — rutas + sidebar + placeholders demo.
+Interconsultas, procedimientos, alta, auditoría, ingreso, medicamentos, timeline, recientes, mi trabajo, agenda — rutas + sidebar + placeholders; **reformular** según árbol clásico P0–P1.
 
 ---
 

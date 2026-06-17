@@ -2,31 +2,31 @@ import { copy } from '@epis2/design-system';
 import {
   CicaBlueprintBody,
   CicaPatientScreenFrame,
-  findCicaScreenById,
   type ClinicalLayoutAction,
-  type CicaScreenId,
+  type CicaScreenBlueprint,
 } from '@epis2/epis2-ui';
-import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
+import type { ReactNode } from 'react';
 import { ErrorState } from '../components/ErrorState.js';
-import { stubPatientBlueprint } from './blueprints/systemScreens.blueprint.js';
+import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
 
-export type CicaPatientSectionPageProps = {
-  screenId: CicaScreenId;
-  placeholder?: string;
+export type CicaPatientBlueprintPageProps = {
+  blueprint: CicaScreenBlueprint;
+  slots: Partial<Record<string, ReactNode>>;
   actions?: readonly ClinicalLayoutAction[];
+  testId?: string;
 };
 
-/** Sección ficha — blueprint generado (layout automatizado). */
-export function CicaPatientSectionPage({
-  screenId,
-  placeholder = copy.forms.needsPatient,
+/** Ficha CICA — shell paciente + grilla blueprint (layout automatizado). */
+export function CicaPatientBlueprintPage({
+  blueprint,
+  slots,
   actions = [],
-}: CicaPatientSectionPageProps) {
+  testId,
+}: CicaPatientBlueprintPageProps) {
   const page = useCicaPatientPage();
   const { patientId, detailQuery, presentation, goPath } = page;
-  const screen = findCicaScreenById(screenId);
 
-  if (!patientId || !presentation || !screen) return null;
+  if (!patientId || !presentation) return null;
 
   if (detailQuery.isError) {
     return (
@@ -42,17 +42,17 @@ export function CicaPatientSectionPage({
 
   return (
     <CicaPatientScreenFrame
-      screenId={screenId}
+      screenId={blueprint.screenId}
       patientId={patientId}
       activeTabId={page.activeTabId}
       onNavigate={goPath}
       identity={presentation.identity}
       contextItems={presentation.contextItems}
       actions={actions}
-      hideActionBar={actions.length === 0}
-      testId={`cica-screen-${screenId}`}
+      hideActionBar={blueprint.hideActionBar ?? actions.length === 0}
+      testId={testId ?? `cica-screen-${blueprint.screenId}`}
     >
-      <CicaBlueprintBody blueprint={stubPatientBlueprint(screenId, placeholder)} />
+      <CicaBlueprintBody blueprint={blueprint} slots={slots} />
     </CicaPatientScreenFrame>
   );
 }

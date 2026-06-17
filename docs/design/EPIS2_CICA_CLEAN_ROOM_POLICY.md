@@ -13,8 +13,8 @@ El legacy **no** puede donar **layout, navegación, sidebar, dashboard, composic
 Rutas bajo `/app/*` — sala blanca. Rutas `/espacio/*` permanecen como legacy temporal hasta migración completa.
 
 ```
-VITE_ENABLE_CICA_UI=true  → UI CICA (default objetivo demo)
-VITE_ENABLE_CICA_UI=false → fallback legacy /espacio/*
+VITE_ENABLE_CICA_UI=true  → laboratorio CICA /app/* (opt-in; NO-GO producto)
+(default / false)         → runtime activo legacy /espacio/*
 ```
 
 ## Permitido importar en `/app`

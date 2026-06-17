@@ -66,6 +66,13 @@ export {
 } from './cicaRoutes.js';
 export { CicaAppShell, type CicaAppShellProps } from './CicaAppShell.js';
 export { cicaEpis2gVisual, resolveCicaEpis2gSurfaces } from './cicaEpis2gVisual.js';
+export {
+  type CicaBlueprintSection,
+  type CicaBlueprintSectionSpan,
+  type CicaGeneratedScreenProps,
+  type CicaScreenBlueprint,
+} from './cicaScreenBlueprint.js';
+export { CicaGeneratedScreen, CicaBlueprintBody } from './CicaGeneratedScreen.js';
 export { CicaSidebarThemePanel, type CicaSidebarThemePanelProps } from './CicaSidebarThemePanel.js';
 export {
   CicaSidebar,

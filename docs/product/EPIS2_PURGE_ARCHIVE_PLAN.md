@@ -129,7 +129,7 @@ Ver [`docs/archive/TRUNCATED_MODULES.md`](../archive/TRUNCATED_MODULES.md).
 |----------|-----------|--------|
 | Tokens + shell | `packages/epis2-ui/src/cica/` | **Activo** |
 | Rutas `/app/*` | `apps/web/src/cica/` | **Activo** |
-| Flag | `VITE_ENABLE_CICA_UI=true` (default ON) | **Activo** |
+| Flag | `VITE_ENABLE_CICA_UI=true` (opt-in lab) | **Legacy activo** por defecto |
 | Redirects legacy→CICA | `apps/web/src/cica/legacyRedirects.ts` | **Activo** |
 | Epicrisis, lab, UCI, farmacia | solo `/espacio/*` | **Legacy fallback** |
 

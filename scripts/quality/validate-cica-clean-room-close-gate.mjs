@@ -28,8 +28,11 @@ for (const script of gates) {
 }
 
 const env = readFileSync(join(root, 'apps/web/src/dev/cicaUiEnv.ts'), 'utf8');
-if (!env.includes('VITE_ENABLE_CICA_UI')) {
-  errors.push('Falta VITE_ENABLE_CICA_UI en cicaUiEnv.ts');
+if (!env.includes('CICA_UI_PRODUCT_STATUS')) {
+  errors.push('cicaUiEnv.ts debe declarar CICA_UI_PRODUCT_STATUS (no-go hasta reformulación)');
+}
+if (!env.includes("=== 'true'")) {
+  errors.push('cicaUiEnv.ts debe ser opt-in (VITE_ENABLE_CICA_UI===true)');
 }
 
 const home = readFileSync(join(root, 'apps/web/src/routes/home.ts'), 'utf8');

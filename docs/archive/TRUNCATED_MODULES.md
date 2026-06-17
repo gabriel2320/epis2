@@ -4,7 +4,7 @@
 
 > Funcionalidad **empezada en master** pero no continuada hasta nuevo aviso. **No borrar** sin MF explícita — archivar documentación y congelar expansión.
 
-**Experiencia activa:** CICA (`/app/*`, `VITE_ENABLE_CICA_UI=true`)  
+**Experiencia activa:** legacy `/espacio/*` · CICA `/app/*` opt-in (`VITE_ENABLE_CICA_UI=true`, NO-GO)  
 **Fallback:** legacy `/espacio/*`, classic MD3, three modes
 
 ---

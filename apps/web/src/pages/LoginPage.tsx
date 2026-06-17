@@ -1,8 +1,8 @@
 import { SYNTHETIC_USERS } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
 import {
-  Box,
   EpisAlert,
+  EpisAuthBrandTitle,
   EpisAuthScreen,
   EpisBrandMark,
   EpisButton,
@@ -45,33 +45,40 @@ export function LoginPage() {
   };
 
   return (
-    <EpisAuthScreen>
-      <Stack spacing={1.25} alignItems="center" textAlign="center" data-testid="epis2-login-header">
-        <EpisBrandMark size={56} />
-        <EpisM3Text role="displayMedium" color="primary.main" component="h1">
-          {copy.appName}
+    <EpisAuthScreen
+      brand={
+        <EpisAuthBrandTitle title={copy.appName} subtitle={copy.login.tagline} />
+      }
+      footer={
+        <EpisM3Text role="labelMedium" color="text.secondary" component="p">
+          {copy.demoBadge} · {copy.login.subtitle}
         </EpisM3Text>
-        <EpisM3Text role="titleMedium" color="text.secondary">
-          {copy.login.tagline}
+      }
+    >
+      <Stack spacing={1.25} alignItems="center" textAlign="center" data-testid="epis2-login-header">
+        <EpisBrandMark size={48} />
+        <EpisM3Text role="headlineMedium" color="primary.main" component="h1">
+          {copy.login.submit}
         </EpisM3Text>
         <EpisDemoBadgeChip icon={<ScienceIcon fontSize="small" />} label={copy.demoBadge} />
       </Stack>
 
-      <Box
+      <Stack
         component="form"
+        spacing={2}
         data-testid="epis2-login-form"
         onSubmit={(e) => {
           e.preventDefault();
           void handleSubmit();
         }}
       >
-        <Stack spacing={2.5}>
           <EpisTextField
             select
             label={copy.login.usernameLabel}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             fullWidth
+            size="medium"
             slotProps={{
               input: {
                 startAdornment: (
@@ -95,6 +102,7 @@ export function LoginPage() {
             onChange={(e) => setDemoAuthKey(e.target.value)}
             placeholder={copy.login.demoKeyPlaceholder}
             fullWidth
+            size="medium"
             type="password"
             autoComplete="off"
             slotProps={{
@@ -122,17 +130,10 @@ export function LoginPage() {
             {loading ? copy.login.submitting : copy.login.submit}
           </EpisButton>
 
-          <EpisM3Text
-            role="labelMedium"
-            color="text.secondary"
-            textAlign="center"
-            component="p"
-            sx={{ px: 0.5, lineHeight: 1.5 }}
-          >
-            {copy.login.subtitle}. {copy.login.hint}
+          <EpisM3Text role="labelMedium" color="text.secondary" textAlign="center" component="p">
+            {copy.login.hint}
           </EpisM3Text>
-        </Stack>
-      </Box>
+      </Stack>
     </EpisAuthScreen>
   );
 }

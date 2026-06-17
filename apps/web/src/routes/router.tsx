@@ -61,7 +61,7 @@ import {
   CicaPatientProceduresPage,
   CicaPatientTimelinePage,
   CicaRecentPatientsPage,
-} from '../cica/CicaEpis2gScreens.js';
+} from '../cica/CicaSystemScreens.js';
 import { EPIS2_LEGACY_CLINICAL_HOME } from './home.js';
 import {
   parseDashboardSearch,
@@ -98,7 +98,7 @@ async function requireSession() {
 }
 
 /**
- * PR6 — legacy `/espacio/*` → CICA `/app/*` cuando VITE_ENABLE_CICA_UI≠false.
+ * PR6 — legacy `/espacio/*` → CICA `/app/*` solo cuando `VITE_ENABLE_CICA_UI=true`.
  * Sin redirect si CICA desactivado. draftId se preserva en search cuando aplica.
  *
  * Mapa de redirects:

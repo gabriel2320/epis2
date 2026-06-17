@@ -1,11 +1,16 @@
 import { copy } from '@epis2/design-system';
 import {
   CicaPatientScreenFrame,
-  CicaScreenFrame,
   EpisM3Text,
   Stack,
   type ClinicalLayoutAction,
 } from '@epis2/epis2-ui';
+import { CicaBlueprintPage } from './CicaBlueprintPage.js';
+import {
+  AGENDA_BLUEPRINT,
+  MY_WORK_BLUEPRINT,
+  RECENT_PATIENTS_BLUEPRINT,
+} from './blueprints/systemScreens.blueprint.js';
 import { filterAndGroupClinicalTimeline } from '../components/chart/timeline/clinicalTimeline.js';
 import { useMemo } from 'react';
 import { CicaPatientSectionPage } from './CicaPatientSectionPages.js';
@@ -129,48 +134,33 @@ export function CicaPatientAuditPage() {
 
 export function CicaRecentPatientsPage() {
   return (
-    <CicaScreenFrame
-      screenId="recent-patients"
+    <CicaBlueprintPage
+      blueprint={RECENT_PATIENTS_BLUEPRINT}
       title="Recientes"
       subtitle="Pacientes abiertos recientemente en esta estación."
-      hideActionBar
       testId="cica-recent-patients-screen"
-    >
-      <EpisM3Text role="bodyMedium" color="text.secondary">
-        Lista de recientes — conectar con historial local en siguiente iteración.
-      </EpisM3Text>
-    </CicaScreenFrame>
+    />
   );
 }
 
 export function CicaMyWorkPage() {
   return (
-    <CicaScreenFrame
-      screenId="my-work"
+    <CicaBlueprintPage
+      blueprint={MY_WORK_BLUEPRINT}
       title="Mi trabajo"
       subtitle="Pendientes asignados al profesional en guardia."
-      hideActionBar
       testId="cica-my-work-screen"
-    >
-      <EpisM3Text role="bodyMedium" color="text.secondary">
-        Bandeja personal — borradores, firmas y tareas clínicas pendientes.
-      </EpisM3Text>
-    </CicaScreenFrame>
+    />
   );
 }
 
 export function CicaAgendaPage() {
   return (
-    <CicaScreenFrame
-      screenId="agenda"
+    <CicaBlueprintPage
+      blueprint={AGENDA_BLUEPRINT}
       title="Agenda guardia"
       subtitle="Turno actual y próximos eventos del servicio."
-      hideActionBar
       testId="cica-agenda-screen"
-    >
-      <EpisM3Text role="bodyMedium" color="text.secondary">
-        Vista agenda — calendario de guardia en demo próximo.
-      </EpisM3Text>
-    </CicaScreenFrame>
+    />
   );
 }
