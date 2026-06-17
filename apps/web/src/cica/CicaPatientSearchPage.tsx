@@ -1,5 +1,6 @@
 import { copy } from '@epis2/design-system';
 import {
+  CicaClinicalList,
   CicaResponsiveGrid,
   CicaScreenFrame,
   EpisButton,
@@ -7,10 +8,10 @@ import {
   EpisTextField,
   Stack,
 } from '@epis2/epis2-ui';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
-import { PatientSearchResults } from '../components/patient-search/PatientSearchResults.js';
 import { usePatientsQuery } from '../query/hooks/usePatientsQuery.js';
+import { mapPatientRowsToCicaListItems } from './cicaPatientListPresentation.js';
 import { useCicaNavigate } from './hooks/useCicaNavigate.js';
 
 /** CICA Clean Room — buscar paciente (sala blanca /app/buscar). */
@@ -53,6 +54,8 @@ export function CicaPatientSearchPage() {
       : searchTerm
         ? copy.patientSearch.resultsHeading
         : copy.forms.searchPatient;
+
+  const listItems = useMemo(() => mapPatientRowsToCicaListItems(patients), [patients]);
 
   return (
     <CicaScreenFrame
@@ -98,10 +101,12 @@ export function CicaPatientSearchPage() {
           <EpisM3Text role="titleMedium" component="h3">
             {copy.patientSearch.resultsHeading}
           </EpisM3Text>
-          <PatientSearchResults
-            rows={patients}
+          <CicaClinicalList
+            items={listItems}
             emptyMessage={emptyMessage}
-            onOpenChart={openChart}
+            actionLabel={copy.commandCenter.openPatientChart}
+            onOpenItem={openChart}
+            testId="cica-patient-search-results"
           />
         </Stack>
       </Stack>

@@ -2,17 +2,19 @@ import { copy } from '@epis2/design-system';
 import {
   CicaAppShell,
   CicaScreenTransition,
+  CicaSidebar,
   CicaThemeControls,
-  buildDefaultCicaNavItems,
+  buildCicaSidebarSections,
   cicaScreenTitle,
   findCicaScreenByRoutePrefix,
-  isCicaPaperRoute,
+  isCicaSidebarHiddenRoute,
   parseCicaPatientId,
 } from '@epis2/epis2-ui';
 import { Outlet, useLocation, useNavigate } from '@tanstack/react-router';
+import { useMemo } from 'react';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 
-/** Layout exclusivo `/app/*` — CICA Clean Room, sin legacy shell. */
+/** Layout exclusivo `/app/*` — CICA Clean Room, sidebar contextual. */
 export function CicaAppLayout() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -21,13 +23,17 @@ export function CicaAppLayout() {
   const patientId = parseCicaPatientId(pathname) ?? patient?.id;
   const screen = findCicaScreenByRoutePrefix(pathname);
 
-  const navItems = buildDefaultCicaNavItems({
-    pathname,
-    patientId,
-    onNavigate: (to) => {
-      void navigate({ to });
-    },
-  });
+  const sidebarSections = useMemo(
+    () =>
+      buildCicaSidebarSections({
+        pathname,
+        patientId,
+        onNavigate: (to) => {
+          void navigate({ to });
+        },
+      }),
+    [pathname, patientId, navigate],
+  );
 
   return (
     <CicaAppShell
@@ -36,24 +42,8 @@ export function CicaAppLayout() {
         demoLabel: copy.demoBadge,
         themeControls: <CicaThemeControls />,
       }}
-      nav={{
-        items: navItems,
-        moreItems: [
-          {
-            id: 'appearance',
-            label: 'Apariencia',
-            onClick: () => void navigate({ to: '/preferencias-apariencia' }),
-            testId: 'cica-nav-more-appearance',
-          },
-          {
-            id: 'legacy-search',
-            label: copy.clinicalNav.commandLegacy,
-            onClick: () => void navigate({ to: '/espacio/buscar-paciente' }),
-            testId: 'cica-nav-more-legacy',
-          },
-        ],
-      }}
-      hideNav={isCicaPaperRoute(pathname)}
+      sidebar={<CicaSidebar sections={sidebarSections} />}
+      hideSidebar={isCicaSidebarHiddenRoute(pathname)}
     >
       <CicaScreenTransition transitionKey={pathname}>
         <Outlet />

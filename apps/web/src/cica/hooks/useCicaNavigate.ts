@@ -4,13 +4,14 @@ import { useNavigate } from '@tanstack/react-router';
 
 type PatientParams = { patientId: string };
 type PaperParams = { patientId: string; date: string };
+type EvolutionDetailParams = { patientId: string; evolutionId: string };
 
 /** Navegación tipada CICA — usar en páginas /app en lugar de strings sueltos. */
 export function useCicaNavigate() {
   const navigate = useNavigate();
 
   const go = useCallback(
-    (screenId: CicaScreenId, params?: PatientParams | PaperParams) => {
+    (screenId: CicaScreenId, params?: PatientParams | PaperParams | EvolutionDetailParams) => {
       const screen = findCicaScreenById(screenId);
       if (!screen) return;
 
@@ -20,6 +21,16 @@ export function useCicaNavigate() {
         void navigate({
           to: '/app/pacientes/$patientId/papel/dia/$date',
           params: { patientId: p.patientId, date: p.date },
+        });
+        return;
+      }
+
+      if (screenId === 'evolution-detail') {
+        const p = params as EvolutionDetailParams | undefined;
+        if (!p?.patientId || !p?.evolutionId) return;
+        void navigate({
+          to: '/app/pacientes/$patientId/evoluciones/$evolutionId',
+          params: { patientId: p.patientId, evolutionId: p.evolutionId },
         });
         return;
       }

@@ -1,9 +1,9 @@
 import { copy } from '@epis2/design-system';
-import { CicaScreenFrame, EpisM3Text, Stack } from '@epis2/epis2-ui';
-import { useEffect } from 'react';
+import { CicaClinicalList, CicaScreenFrame, EpisM3Text, Stack } from '@epis2/epis2-ui';
+import { useEffect, useMemo } from 'react';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
-import { PatientSearchResults } from '../components/patient-search/PatientSearchResults.js';
 import { usePatientsQuery } from '../query/hooks/usePatientsQuery.js';
+import { mapPatientRowsToCicaListItems } from './cicaPatientListPresentation.js';
 import { useCicaNavigate } from './hooks/useCicaNavigate.js';
 
 /** CICA Clean Room — censo clínico simple (/app/censo). */
@@ -22,18 +22,22 @@ export function CicaCensusPage() {
     go('patient-summary', { patientId });
   };
 
+  const listItems = useMemo(() => mapPatientRowsToCicaListItems(patients), [patients]);
+
   return (
     <CicaScreenFrame screenId="census" title={copy.clinicalNav.census} hideActionBar>
       <Stack spacing={2}>
         <EpisM3Text role="bodyMedium" color="text.secondary">
           {copy.commandCenter.openPatientChart}
         </EpisM3Text>
-        <PatientSearchResults
-          rows={patients}
+        <CicaClinicalList
+          items={listItems}
           emptyMessage={
             patientsError != null ? copy.forms.loadPatientsError : copy.forms.searchPatient
           }
-          onOpenChart={openChart}
+          actionLabel={copy.commandCenter.openPatientChart}
+          onOpenItem={openChart}
+          testId="cica-census-list"
         />
       </Stack>
     </CicaScreenFrame>

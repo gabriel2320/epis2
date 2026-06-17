@@ -56,12 +56,26 @@ export {
   CICA_ROUTE_TEMPLATE,
   cicaScreenTitle,
   isCicaPaperRoute,
+  isCicaLetterRoute,
+  isCicaSidebarHiddenRoute,
   parseCicaPatientId,
+  parseCicaEvolutionId,
   todayIsoDate,
   type CicaScreenId,
   type CicaRouteParams,
 } from './cicaRoutes.js';
 export { CicaAppShell, type CicaAppShellProps } from './CicaAppShell.js';
+export { CicaSidebar, type CicaSidebarProps } from './CicaSidebar.js';
+export {
+  buildCicaSidebarSections,
+  buildCicaSystemSidebarSections,
+  buildCicaPatientSidebarSection,
+  type CicaSidebarItem,
+  type CicaSidebarSection,
+  type CicaSidebarNavContext,
+} from './cicaSidebarNav.js';
+export { CicaLetterPageShell, type CicaLetterPageShellProps } from './CicaLetterPageShell.js';
+export { CicaBookPager, type CicaBookPagerProps } from './CicaBookPager.js';
 export { CicaTopBar, type CicaTopBarProps } from './CicaTopBar.js';
 export { CicaThemeControls, type CicaThemeControlsProps } from './CicaThemeControls.js';
 export {
@@ -81,6 +95,11 @@ export {
   type CicaPatientIdentityBandProps,
 } from './CicaPatientIdentityBand.js';
 export { CicaContextStrip, type CicaContextStripProps } from './CicaContextStrip.js';
+export {
+  CicaClinicalList,
+  type CicaClinicalListItem,
+  type CicaClinicalListProps,
+} from './CicaClinicalList.js';
 export { ClinicalActionBar, type ClinicalActionBarProps } from './ClinicalActionBar.js';
 export { CicaScreenFrame, type CicaScreenFrameProps } from './CicaScreenFrame.js';
 export { CicaScreenTransition, type CicaScreenTransitionProps } from './CicaScreenTransition.js';

@@ -47,6 +47,21 @@ import { CicaNewEpicrisisPage } from '../cica/CicaNewEpicrisisPage.js';
 import { CicaNewPrescriptionPage } from '../cica/CicaNewPrescriptionPage.js';
 import { CicaNewDocumentPage } from '../cica/CicaNewDocumentPage.js';
 import { CicaPaperDayPage } from '../cica/CicaPaperDayPage.js';
+import { CicaEvolutionBookPage } from '../cica/CicaEvolutionBookPage.js';
+import { CicaEvolutionDetailPage } from '../cica/CicaEvolutionDetailPage.js';
+import { CicaPaperBookPage } from '../cica/CicaPaperBookPage.js';
+import {
+  CicaAgendaPage,
+  CicaMyWorkPage,
+  CicaPatientAdmissionPage,
+  CicaPatientAuditPage,
+  CicaPatientDischargePage,
+  CicaPatientInterconsultasPage,
+  CicaPatientMedicationsPage,
+  CicaPatientProceduresPage,
+  CicaPatientTimelinePage,
+  CicaRecentPatientsPage,
+} from '../cica/CicaEpis2gScreens.js';
 import { EPIS2_LEGACY_CLINICAL_HOME } from './home.js';
 import {
   parseDashboardSearch,
@@ -315,16 +330,28 @@ const cicaCensusRoute = createRoute({
   component: CicaCensusPage,
 });
 
+const cicaRecentPatientsRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/recientes',
+  component: CicaRecentPatientsPage,
+});
+
+const cicaMyWorkRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/mi-trabajo',
+  component: CicaMyWorkPage,
+});
+
+const cicaAgendaRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/agenda',
+  component: CicaAgendaPage,
+});
+
 const cicaPatientSummaryRoute = createRoute({
   getParentRoute: () => cicaLayoutRoute,
   path: '/app/pacientes/$patientId/resumen',
   component: CicaPatientSummaryPage,
-});
-
-const cicaPatientEvolutionsRoute = createRoute({
-  getParentRoute: () => cicaLayoutRoute,
-  path: '/app/pacientes/$patientId/evoluciones',
-  component: CicaPatientEvolutionsPage,
 });
 
 const cicaNewEvolutionRoute = createRoute({
@@ -338,6 +365,24 @@ const cicaNewEvolutionRoute = createRoute({
     return parsed;
   },
   component: CicaNewEvolutionPage,
+});
+
+const cicaEvolutionBookRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/evoluciones/libro',
+  component: CicaEvolutionBookPage,
+});
+
+const cicaEvolutionDetailRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/evoluciones/$evolutionId',
+  component: CicaEvolutionDetailPage,
+});
+
+const cicaPatientEvolutionsRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/evoluciones',
+  component: CicaPatientEvolutionsPage,
 });
 
 const cicaNewPrescriptionRoute = createRoute({
@@ -363,6 +408,48 @@ const cicaPatientExamsRoute = createRoute({
   getParentRoute: () => cicaLayoutRoute,
   path: '/app/pacientes/$patientId/examenes',
   component: CicaPatientExamsPage,
+});
+
+const cicaPatientAdmissionRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/ingreso',
+  component: CicaPatientAdmissionPage,
+});
+
+const cicaPatientMedicationsRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/medicamentos',
+  component: CicaPatientMedicationsPage,
+});
+
+const cicaPatientInterconsultasRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/interconsultas',
+  component: CicaPatientInterconsultasPage,
+});
+
+const cicaPatientProceduresRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/procedimientos',
+  component: CicaPatientProceduresPage,
+});
+
+const cicaPatientDischargeRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/alta',
+  component: CicaPatientDischargePage,
+});
+
+const cicaPatientTimelineRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/timeline',
+  component: CicaPatientTimelinePage,
+});
+
+const cicaPatientAuditRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/auditoria',
+  component: CicaPatientAuditPage,
 });
 
 const cicaPatientDocumentsRoute = createRoute({
@@ -401,6 +488,12 @@ const cicaPaperDayRoute = createRoute({
   getParentRoute: () => cicaLayoutRoute,
   path: '/app/pacientes/$patientId/papel/dia/$date',
   component: CicaPaperDayPage,
+});
+
+const cicaPaperBookRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/papel/libro',
+  component: CicaPaperBookPage,
 });
 
 const draftReviewRoute = createRoute({
@@ -797,15 +890,28 @@ export const routeTree = rootRoute.addChildren([
   cicaLayoutRoute.addChildren([
     cicaSearchRoute,
     cicaCensusRoute,
+    cicaRecentPatientsRoute,
+    cicaMyWorkRoute,
+    cicaAgendaRoute,
     cicaPatientSummaryRoute,
-    cicaPatientEvolutionsRoute,
     cicaNewEvolutionRoute,
+    cicaEvolutionBookRoute,
+    cicaEvolutionDetailRoute,
+    cicaPatientEvolutionsRoute,
+    cicaPatientAdmissionRoute,
     cicaPatientOrdersRoute,
     cicaNewPrescriptionRoute,
     cicaPatientExamsRoute,
+    cicaPatientMedicationsRoute,
+    cicaPatientInterconsultasRoute,
+    cicaPatientProceduresRoute,
+    cicaPatientDischargeRoute,
+    cicaPatientTimelineRoute,
+    cicaPatientAuditRoute,
     cicaPatientDocumentsRoute,
     cicaNewDocumentRoute,
     cicaNewEpicrisisRoute,
+    cicaPaperBookRoute,
     cicaPaperDayRoute,
   ]),
   clinicalLayoutRoute.addChildren([

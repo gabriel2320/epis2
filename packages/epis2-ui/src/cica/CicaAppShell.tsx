@@ -7,24 +7,33 @@ import { cicaTokens } from './cicaTokens.js';
 
 export type CicaAppShellProps = {
   topBar?: CicaTopBarProps;
+  /** Sidebar contextual (sistema + paciente). */
+  sidebar?: ReactNode;
+  /** Ocultar sidebar en papel / documento carta fullscreen. */
+  hideSidebar?: boolean;
+  /** Nav horizontal legacy — omitir cuando hay sidebar. */
   nav?: CicaClinicalNavProps;
-  /** Ocultar nav en modo papel fullscreen. */
   hideNav?: boolean;
   children: ReactNode;
   testId?: string;
 };
 
 /**
- * Shell CICA Clean Room — sin sidebar, sin dashboard, sin legacy.
+ * Shell CICA Clean Room — top bar + sidebar útil + contenido.
  * Única envoltura permitida para rutas /app/*.
  */
 export function CicaAppShell({
   topBar,
+  sidebar,
+  hideSidebar = false,
   nav,
   hideNav = false,
   children,
   testId = 'cica-app-shell',
 }: CicaAppShellProps) {
+  const showSidebar = Boolean(sidebar) && !hideSidebar;
+  const showTopNav = Boolean(nav) && !hideNav && !showSidebar;
+
   return (
     <Box
       data-testid={testId}
@@ -43,20 +52,32 @@ export function CicaAppShell({
       }}
     >
       <CicaTopBar {...(topBar ?? {})} />
-      {!hideNav && nav ? <CicaClinicalNav {...nav} /> : null}
       <Box
-        component="main"
         sx={{
           flex: 1,
           minHeight: 0,
           minWidth: 0,
-          overflow: 'hidden',
-          overflowX: 'hidden',
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'row',
+          overflow: 'hidden',
         }}
       >
-        {children}
+        {showSidebar ? sidebar : null}
+        <Box
+          component="main"
+          sx={{
+            flex: 1,
+            minHeight: 0,
+            minWidth: 0,
+            overflow: 'hidden',
+            overflowX: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          {showTopNav ? <CicaClinicalNav {...nav!} /> : null}
+          {children}
+        </Box>
       </Box>
     </Box>
   );
