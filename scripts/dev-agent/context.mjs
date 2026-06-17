@@ -86,16 +86,109 @@ export function readOllamaPlan(root) {
 }
 
 /**
- * Estado vivo del tablero — fuente canónica del «siguiente paso» (SDEPIS2).
+ * Parsea brújula (CURRENT_STATE) — fuente primaria para agentes.
  * @param {string} root
- * @returns {{ activeThreads: string[], nextSteps: string[] }}
+ */
+function getBrujulaProgram(root) {
+  const path = join(root, 'docs/EPIS2_CURRENT_STATE.md');
+  if (!existsSync(path)) return null;
+  const text = readFileSync(path, 'utf8');
+  const m = text.match(/\*\*Programa activo:\*\*\s*(.+)/);
+  if (!m) return null;
+  return m[1]
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Parsea tablero (índice humano) — Propuesto + Siguiente en header.
+ * @param {string} root
+ */
+function parseTableroIndex(root) {
+  const path = join(root, 'docs/product/EPIS2_TABLERO.md');
+  if (!existsSync(path)) {
+    return { propuestoPrograms: [], siguienteHeader: null, openTramos: [] };
+  }
+  const text = readFileSync(path, 'utf8');
+  const header = text.split(/^---$/m)[0] ?? '';
+
+  const siguienteHeader =
+    header
+      .match(/\*\*Siguiente:\*\*\s*(.+)/)?.[1]
+      ?.replace(/\*\*/g, '')
+      .trim() ?? null;
+
+  const propuestoPrograms = [];
+  const openTramos = [];
+
+  for (const match of text.matchAll(/^## Propuesto — (.+)$/gm)) {
+    const program = match[1].trim();
+    const sectionStart = match.index ?? 0;
+    const sectionEnd = text.indexOf('\n## ', sectionStart + 1);
+    const section = text.slice(sectionStart, sectionEnd === -1 ? undefined : sectionEnd);
+    propuestoPrograms.push(program);
+
+    for (const line of section.split('\n')) {
+      if (!line.startsWith('|') || line.includes('---')) continue;
+      const cells = line
+        .split('|')
+        .map((c) => c.trim())
+        .filter(Boolean);
+      if (cells.length < 3 || /^Tramo$/i.test(cells[0])) continue;
+      const row = cells.join(' ');
+      if (/◐|pendiente|en curso/i.test(row) && !/✓\s*DONE|✓\s*PR|✓\s*PASS/i.test(row)) {
+        openTramos.push(`${program}: ${cells[0]} — ${cells.slice(1, 3).join(' ')}`);
+      }
+    }
+  }
+
+  return { propuestoPrograms, siguienteHeader, openTramos };
+}
+
+/**
+ * Estado brújula + tablero para brief de sesión.
+ * Brújula (CURRENT_STATE) manda; tablero es índice humano.
+ * @param {string} root
  */
 export function getTableroState(root) {
-  const path = join(root, 'docs/product/EPIS2_TABLERO.md');
-  if (!existsSync(path)) return { activeThreads: [], nextSteps: [] };
-  const text = readFileSync(path, 'utf8');
+  const brujulaProgram = getBrujulaProgram(root);
+  const { propuestoPrograms, siguienteHeader, openTramos } = parseTableroIndex(root);
 
-  /** @param {string} heading @param {(cells: string[]) => string | null} pick */
+  const activeThreads = [];
+  if (brujulaProgram) {
+    activeThreads.push(`Brújula: ${brujulaProgram}`);
+  }
+  for (const p of propuestoPrograms) {
+    activeThreads.push(`Tablero propuesto: ${p}`);
+  }
+
+  const nextSteps = [...openTramos];
+  if (brujulaProgram?.includes('merge') || brujulaProgram?.includes('CICA')) {
+    nextSteps.push('Merge feat/prog-aesthetic-reset-close → master (CICA)');
+  }
+  if (brujulaProgram?.includes('PURGE')) {
+    nextSteps.push('PROG-PURGE-CICA: archivar · referenciar · perímetro agente');
+  }
+
+  let staleTableroHint = null;
+  if (
+    siguienteHeader &&
+    brujulaProgram &&
+    !brujulaProgram.includes(
+      siguienteHeader.replace(/PROG-/g, '').split(/[\s+]/)[0]?.slice(0, 6) ?? '',
+    )
+  ) {
+    const brujulaHasPurge = brujulaProgram.includes('PURGE');
+    const tableroHasUxLab = siguienteHeader.includes('UX-LAB');
+    if (brujulaHasPurge && tableroHasUxLab) {
+      staleTableroHint = `Tablero header dice "${siguienteHeader}" pero brújula dice PURGE-CICA — alinear tablero`;
+    }
+  }
+
+  /** @deprecated compat — secciones legacy */
+  const path = join(root, 'docs/product/EPIS2_TABLERO.md');
+  const text = existsSync(path) ? readFileSync(path, 'utf8') : '';
   const rowsUnder = (heading, pick) => {
     const section = text.split(new RegExp(`^## ${heading}$`, 'm'))[1]?.split(/^## /m)[0] ?? '';
     const out = [];
@@ -111,48 +204,39 @@ export function getTableroState(root) {
     }
     return out;
   };
-
-  const activeThreads = rowsUnder('En curso', (cells) =>
+  const legacyActive = rowsUnder('En curso', (cells) =>
     cells[0] && !/^Hilo$/i.test(cells[0]) ? `${cells[0]}${cells[1] ? ` — ${cells[1]}` : ''}` : null,
   );
-  const strengthenThreads = rowsUnder('En curso — PROG-STRENGTHEN-2026', (cells) =>
-    cells[0] && !/^Subprograma$/i.test(cells[0])
-      ? `${cells[0]}: ${cells[1] ?? ''}${cells[2] ? ` (${cells[2]})` : ''}`
-      : null,
-  );
-  const nextSteps = rowsUnder('Siguiente', (cells) =>
-    cells[0] && !/^(?:Prioridad|Entrega)$/i.test(cells[0])
-      ? `${cells[0]}: ${cells[1] ?? ''}`
-      : null,
-  );
-  return { activeThreads: [...strengthenThreads, ...activeThreads], nextSteps };
+  activeThreads.push(...legacyActive);
+
+  return {
+    brujulaProgram,
+    siguienteHeader,
+    propuestoPrograms,
+    openTramos,
+    staleTableroHint,
+    activeThreads,
+    nextSteps,
+  };
 }
 
 /** @param {string[]} files @param {{ tramo?: string, phase?: string }} opts */
-export function suggestPrimarySubagent(files, { tramo, phase = 'B' } = {}) {
-  if (tramo) return 'tramo-implementer';
+export function suggestPrimarySubagent(files, { tramo, phase: _phase = 'cica' } = {}) {
+  if (tramo && process.env.EPIS2_ALLOW_ARCHIVED_SCOPE === '1') return 'tramo-implementer';
   const text = files.join(' ').toLowerCase();
+  if (text.includes('cica/') || text.includes('src/cica')) return 'golden-guardian';
   if (text.includes('local-ai') || text.includes('assist') || text.includes('ollama')) {
     return 'ollama-clinical';
   }
   if (text.includes('e2e/') || text.includes('golden-clinical')) return 'golden-guardian';
-  if (
-    text.includes('apps/web') ||
-    text.includes('epis2-ui') ||
-    text.includes('clinical-productivity')
-  ) {
-    return phase === 'A' ? 'm3-guardian' : 'layers-integrator';
-  }
-  if (text.includes('microphase') || text.includes('reports/epis2')) return 'ledger-keeper';
-  if (text.includes('.github') || text.includes('scripts/quality')) return 'ci-parity';
-  return phase === 'B' ? 'layers-integrator' : 'gate-runner';
+  if (text.includes('reports/') || text.includes('docs/')) return 'ollama-dev-writer';
+  if (text.includes('apps/web') || text.includes('epis2-ui')) return 'golden-guardian';
+  if (text.includes('microphase') || text.includes('ledger')) return 'ledger-keeper';
+  if (text.includes('.github') || text.includes('scripts/quality')) return 'gate-runner';
+  return 'golden-guardian';
 }
 
 /** @param {string} root */
-export function getActivePhaseHint(root) {
-  const planPath = join(root, 'docs/product/EPIS2_GLOBAL_DEV_PLAN.md');
-  if (!existsSync(planPath)) return 'B';
-  const plan = readFileSync(planPath, 'utf8');
-  if (plan.includes('Command palette')) return 'B';
-  return process.env.EPIS2_DEV_AGENT_PHASE ?? 'B';
+export function getActivePhaseHint(_root) {
+  return process.env.EPIS2_DEV_AGENT_PHASE ?? 'cica';
 }

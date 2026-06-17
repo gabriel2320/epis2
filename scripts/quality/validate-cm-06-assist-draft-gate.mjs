@@ -46,8 +46,8 @@ if (!apiRoutes.includes('assistOrigin')) {
   errors.push('ai routes debe trazar assistOrigin command_bar en ai_runs');
 }
 
-if (!existsSync(join(root, 'reports/epis2-mf-cm-06-assist-draft.md'))) {
-  errors.push('falta reports/epis2-mf-cm-06-assist-draft.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-cm-06-assist-draft.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-cm-06-assist-draft.md');
 }
 
 const vitest = spawnSync(

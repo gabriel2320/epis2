@@ -3,7 +3,12 @@
  * @see docs/quality/EPIS2_GOLDEN_JOURNEYS.md §4
  */
 import { test, expect } from '@playwright/test';
-import { expectDualChartFicha, fillTransversalCommand, loginAsPhysician, pinDemoCase } from './helpers/demoPatient.js';
+import {
+  expectDualChartFicha,
+  fillTransversalCommand,
+  loginAsPhysician,
+  pinDemoCase,
+} from './helpers/demoPatient.js';
 
 const CRITICAL_DEMO_ID = 'f0000004-0000-4000-8000-000000000001';
 

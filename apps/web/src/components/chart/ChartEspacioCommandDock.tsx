@@ -1,49 +1,6 @@
-import { useRouterState } from '@tanstack/react-router';
-import { classicCommandSuggestionLabels } from '../../classic-md3/commandSuggestions.js';
-import { useClinicalCommandSubmit } from '../../clinical/useClinicalCommandSubmit.js';
-import { useCommandResolveContext } from '../../clinical/useCommandResolveContext.js';
-import { useActivePatient } from '../../clinical/ActivePatientContext.js';
-import { isDualChartModesEnabled } from '../../dev/dualChartModesEnv.js';
-import { CommandConfirmationDialog } from '../CommandConfirmationDialog.js';
-import { EpisUniversalCommandBar } from '../command/EpisUniversalCommandBar.js';
+import { ClinicalTransversalCommandDock } from './ClinicalTransversalCommandDock.js';
 
-/** Command bar transversal en rutas /espacio/* — censo sin paciente o ficha con paciente (E5). */
+/** Command bar transversal en rutas /espacio/* — delega en {@link ClinicalTransversalCommandDock}. */
 export function ChartEspacioCommandDock() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isCensus = pathname.startsWith('/espacio/buscar-paciente');
-  const { patient } = useActivePatient();
-  const patientId = patient?.id;
-
-  const workspace = isCensus ? 'command_center' : 'patient_chart';
-  const commandContext = useCommandResolveContext(workspace);
-  const command = useClinicalCommandSubmit({
-    ...(patientId ? { patientId } : {}),
-    commandContext,
-  });
-  const { query, setQuery, submit, pendingConfirmation, confirmPending, cancelPending } = command;
-
-  if (!isCensus && !patientId) return null;
-
-  // UX-B.2 legacy ficha monta PatientWorkspaceCommandPanel; evitar doble barra con dual off.
-  if (pathname.startsWith('/espacio/ficha') && !isDualChartModesEnabled()) return null;
-
-  return (
-    <>
-      <EpisUniversalCommandBar
-        variant={isCensus ? 'census-search' : 'clinical-chart'}
-        embedded
-        query={query}
-        onQueryChange={setQuery}
-        onSubmit={() => void submit()}
-        suggestions={classicCommandSuggestionLabels(command.lastResult)}
-        onSuggestionSelect={(label) => void submit(label)}
-        testId={isCensus ? 'epis2-census-command-bar' : 'epis2-espacio-chart-command-bar'}
-      />
-      <CommandConfirmationDialog
-        pending={pendingConfirmation}
-        onConfirm={() => void confirmPending()}
-        onCancel={cancelPending}
-      />
-    </>
-  );
+  return <ClinicalTransversalCommandDock />;
 }

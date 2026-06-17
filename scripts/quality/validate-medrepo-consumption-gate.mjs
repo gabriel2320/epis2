@@ -12,7 +12,7 @@ for (const rel of [
   'apps/api/src/ai/medrepoKnowledgePack.ts',
   'apps/api/src/ai/fixtures/medrepo-knowledge-pack-demo.json',
   'apps/api/src/ai/medrepoKnowledgePack.test.ts',
-  'reports/epis2-mf-ff-14-medrepo-loader.md',
+  'reports/archive/2026-06/epis2-mf-ff-14-medrepo-loader.md',
 ]) {
   if (!existsSync(join(root, rel))) errors.push(`Falta ${rel}`);
 }

@@ -74,7 +74,10 @@ export const ACCENT_TO_THEME_ID: Partial<Record<Epis2Accent, Epis2ApprovedThemeI
 
 export const MTB_ACCENT_IDS = Object.keys(ACCENT_TO_THEME_ID) as Epis2Accent[];
 
-export const DEFAULT_THEME_ID: Epis2ApprovedThemeId = 'clinical-blue';
+export const DEFAULT_THEME_ID: Epis2ApprovedThemeId = 'clinical-calm';
+
+/** Acento EPIS2 por defecto (MTB) — MF-AEST-04 Clinical Calm Premium. */
+export const DEFAULT_EPIS2_ACCENT: Epis2Accent = 'clinicalCalm';
 
 export function resolveMaterialThemeId(
   themeId?: Epis2ApprovedThemeId,

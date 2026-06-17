@@ -1,7 +1,8 @@
 # PROG-UX-LAB — Signoff humano Modo A
 
-**Fecha:** 2026-06-16 · **HEAD:** `9cf7d44` · **Modo:** A (sin IA)  
-**Operador:** revisión humana · **Autopilot:** [`run-2026-06-16`](./ux-lab-autopilot/run-2026-06-16.md)
+**Fecha:** 2026-06-16 · **HEAD:** `ecdb8f3` · **Modo:** A (sin IA)  
+**Operador:** revisión humana · **Autopilot:** [`run-2026-06-16`](./ux-lab-autopilot/run-2026-06-16.md)  
+**Cierre rc4:** [`epis2-ux-lab-close-2026-06-16.md`](./epis2-ux-lab-close-2026-06-16.md)
 
 ---
 
@@ -10,10 +11,10 @@
 | Dimensión | Resultado |
 |-----------|-----------|
 | **Funcional / flujo clínico demo** | **APROBADO** |
-| **Estética / composición visual** | **NECESITA REDISEÑO** |
-| **Global producto** | **PASS WITH FIXES** |
+| **Estética / composición visual** | **APROBADO** (PROG-AESTHETIC-RESET + CICA-L) |
+| **Global producto** | **APROBADO — rc4** |
 
-**Frase guía:** El turno demo funciona en Modo A; la capa visual no cumple aún el norte «Clinical Calm Premium».
+**Frase guía:** El turno demo funciona en Modo A con Clinical Calm Premium como default composicional.
 
 ---
 
@@ -40,7 +41,7 @@
 
 | ID | Severidad | Superficie | Descripción | Acción |
 |----|-----------|------------|-------------|--------|
-| UXLAB-AEST-01 | **Major** | Global UI | Rediseño estético pendiente — densidad, jerarquía tonal, calma editorial | Tramo E · Clinical Calm Premium |
+| UXLAB-AEST-01 | ~~Major~~ **Cerrado** | Global UI | Rediseño estético — densidad, jerarquía tonal, calma editorial | **Hecho** — PROG-AESTHETIC-RESET MF-AEST-01…06 + CICA-L |
 
 Severidades menores/cosméticas: documentar en sesión de rediseño.
 
@@ -51,7 +52,9 @@ Severidades menores/cosméticas: documentar en sesión de rediseño.
 | Gate | Estado |
 |------|--------|
 | `quality:ux-lab-autopilot` | ✓ GO-CANDIDATE |
-| `quality:ux-lab-close` | ◐ pendiente corrida completa post-#35 |
+| `quality:ux-lab-close` | ✓ verde (2026-06-16) |
+| `quality:aesthetic-reset-close-gate` | ✓ |
+| `quality:pr-aest-07-close-gate` | ✓ |
 | `theme:validate` | ✓ |
 
 ---
@@ -78,8 +81,8 @@ Severidades menores/cosméticas: documentar en sesión de rediseño.
 |----------|--------|
 | Funcional Modo A | ✓ |
 | Signoff humano funcional | ✓ |
-| Rediseño estético | **Pendiente** |
-| Tag `v0.1-demo-rc4` | **Diferido** hasta MF-AEST tramo 1 verde o signoff estético explícito |
+| Rediseño estético | ✓ (MF-AEST-01…06) |
+| Tag `v0.1-demo-rc4` | **Listo** — tras corrida `quality:ux-lab-close` verde |
 
 ---
 

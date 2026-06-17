@@ -34,6 +34,14 @@ export function useWidgetActions(patientId?: string) {
             | '/espacio/admin'
             | '/sin-acceso'
             | '/comando'
+            | '/app/pacientes/$patientId/resumen'
+            | '/app/pacientes/$patientId/evoluciones'
+            | '/app/pacientes/$patientId/evoluciones/nueva'
+            | '/app/pacientes/$patientId/indicaciones'
+            | '/app/pacientes/$patientId/examenes'
+            | '/app/pacientes/$patientId/documentos'
+            | '/app/pacientes/$patientId/documentos/nuevo'
+            | '/app/pacientes/$patientId/papel/dia/$date'
           >,
           ...(needsPatient && patientId ? { search: { patientId } } : {}),
         });

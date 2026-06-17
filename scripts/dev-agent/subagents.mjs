@@ -1,12 +1,22 @@
 /**
  * Catálogo de subagentes de desarrollo EPIS2.
- * Ver docs/product/EPIS2_DEV_SUBAGENTS.md
+ * Ver docs/product/EPIS2_DEV_SUBAGENTS.md · exclusiones: docs/archive/AGENT_SCOPE_EXCLUSIONS.md
  */
+
+/** Subagentes congelados — no regenerar prompt ni usar como primario salvo EPIS2_ALLOW_ARCHIVED_SCOPE=1 */
+export const ARCHIVED_SUBAGENT_IDS = new Set([
+  'tramo-implementer',
+  'm3-guardian',
+  'layers-integrator',
+  'ci-parity',
+]);
 
 export const DEV_SUBAGENTS = {
   'tramo-implementer': {
     id: 'tramo-implementer',
     title: 'Implementador de tramo',
+    archived: true,
+    archiveReason: 'Tramos A–K congelados — ver docs/archive/ARCHIVED_PROGRAMS_INDEX.md',
     triggers: ['MF-TRAMO-*', 'scaffold IDC', 'panel demo tramo'],
     gates: ['quality:tramos-hygiene-gate', 'npm run check'],
     canon: [
@@ -18,6 +28,8 @@ export const DEV_SUBAGENTS = {
   'layers-integrator': {
     id: 'layers-integrator',
     title: 'Integrador capas L3+L4+L5',
+    archived: true,
+    archiveReason: 'Ola RAD/M3 superseded por CICA clean room',
     triggers: [
       'MF-RAD-M3',
       'MF-CLINICAL-PRODUCTIVITY',
@@ -37,6 +49,8 @@ export const DEV_SUBAGENTS = {
   'm3-guardian': {
     id: 'm3-guardian',
     title: 'Guardián M3 / densidad UI',
+    archived: true,
+    archiveReason: 'Ola M3 superseded por CICA — no expandir densidad legacy',
     triggers: ['apps/web UI', 'MF-UI-SIMPLIFY', 'scaffold M3'],
     gates: ['quality:ui-simplify-gate', 'quality:rad-m3-discipline-gate'],
     canon: ['docs/design/M3_ADOPTION_PLAN.md', 'docs/quality/M3_ANTI_DRIFT_GATES.md'],
@@ -83,38 +97,37 @@ export const DEV_SUBAGENTS = {
   'ci-parity': {
     id: 'ci-parity',
     title: 'Paridad CI local',
+    archived: true,
+    archiveReason: 'Dev-automation weeks archivados — usar quality:required/nightly',
     triggers: ['CI', 'integración Postgres', 'pre-PR'],
     gates: ['npm run quality:local-ci', 'npm run quality:ci-parity'],
     canon: ['reports/archive/2026-06/epis2-dev-automation-week1-2026-06-07.md'],
   },
 };
 
-/** Secuencia recomendada según fase activa del plan global. */
+/** Secuencia recomendada — CICA / consolidación post-rc3. */
 export const PHASE_SUBAGENT_SEQUENCE = {
-  A: ['layers-integrator', 'm3-guardian', 'gate-runner'],
-  B: [
-    'layers-integrator',
-    'ollama-dev-writer',
-    'ollama-clinical',
-    'golden-guardian',
-    'gate-runner',
-  ],
-  tramo: [
-    'tramo-implementer',
-    'ollama-clinical',
-    'golden-guardian',
-    'gate-runner',
-    'ledger-keeper',
-  ],
-  default: ['gate-runner', 'ci-parity', 'ledger-keeper'],
+  cica: ['golden-guardian', 'ollama-dev-writer', 'gate-runner'],
+  default: ['golden-guardian', 'gate-runner', 'ollama-dev-writer'],
+  /** @deprecated — require EPIS2_ALLOW_ARCHIVED_SCOPE=1 */
+  A: ['m3-guardian', 'gate-runner'],
+  B: ['layers-integrator', 'golden-guardian', 'gate-runner'],
+  tramo: ['tramo-implementer', 'golden-guardian', 'gate-runner'],
 };
 
-export function listSubagentIds() {
-  return Object.keys(DEV_SUBAGENTS);
+export function listSubagentIds({ includeArchived = false } = {}) {
+  return Object.keys(DEV_SUBAGENTS).filter(
+    (id) => includeArchived || !ARCHIVED_SUBAGENT_IDS.has(id),
+  );
 }
 
 export function resolveSubagentSequence({ phase, tramo }) {
-  if (tramo) return PHASE_SUBAGENT_SEQUENCE.tramo;
-  if (phase && PHASE_SUBAGENT_SEQUENCE[phase]) return PHASE_SUBAGENT_SEQUENCE[phase];
+  if (tramo && process.env.EPIS2_ALLOW_ARCHIVED_SCOPE === '1') {
+    return PHASE_SUBAGENT_SEQUENCE.tramo;
+  }
+  if (phase === 'cica' || phase === 'CICA') return PHASE_SUBAGENT_SEQUENCE.cica;
+  if (phase && PHASE_SUBAGENT_SEQUENCE[phase] && process.env.EPIS2_ALLOW_ARCHIVED_SCOPE === '1') {
+    return PHASE_SUBAGENT_SEQUENCE[phase];
+  }
   return PHASE_SUBAGENT_SEQUENCE.default;
 }

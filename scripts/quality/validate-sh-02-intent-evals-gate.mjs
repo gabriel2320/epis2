@@ -11,7 +11,7 @@ const errors = [];
 const required = [
   ['intent top10 fixture', 'packages/command-registry/src/command-intent-top10.ts'],
   ['intent top10 runner', 'scripts/ai/evals/run-intent-top10-evals.mjs'],
-  ['closure report', 'reports/epis2-mf-sh-02-intent-evals.md'],
+  ['closure report', 'reports/archive/2026-06/epis2-mf-sh-02-intent-evals.md'],
 ];
 
 for (const [label, rel] of required) {

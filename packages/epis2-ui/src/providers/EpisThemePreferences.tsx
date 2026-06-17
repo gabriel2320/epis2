@@ -4,6 +4,7 @@ import {
   type CreateEpis2ThemeOptions,
   type Epis2Accent,
 } from '../theme/create-epis2-theme.js';
+import { DEFAULT_EPIS2_ACCENT } from '../theme/material-theme-registry.js';
 import { prefersReducedMotion, type Epis2MotionScheme } from '../theme/motion.js';
 import type { Epis2ThemeContrast, Epis2ThemeDensity } from '../theme/create-epis2-theme.js';
 import type { EpisClinicalWorkspaceId } from '../clinical/clinical-workspace.types.js';
@@ -31,7 +32,7 @@ export type Epis2ThemePreferences = {
 
 const defaultPreferences: Epis2ThemePreferences = {
   mode: 'light',
-  accent: 'clinicalBlue',
+  accent: DEFAULT_EPIS2_ACCENT,
   density: 'comfortable',
   contrast: 'standard',
   motion: 'standard',

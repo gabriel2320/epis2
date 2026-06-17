@@ -17,8 +17,16 @@
 
 ## Programa activo
 
-**PROG-UX-LAB** — UX y confianza clínica visual, sin endpoints clínicos nuevos.  
-Plan: [`docs/quality/EPIS2_UX_LAB_MODERN_PLAN.md`](docs/quality/EPIS2_UX_LAB_MODERN_PLAN.md)
+**PROG-PURGE-CICA** — archivar, referenciar, sacar del alcance de agentes.  
+Plan: [`docs/product/EPIS2_PURGE_ARCHIVE_PLAN.md`](docs/product/EPIS2_PURGE_ARCHIVE_PLAN.md) · Perímetro: [`docs/archive/AGENT_SCOPE_EXCLUSIONS.md`](docs/archive/AGENT_SCOPE_EXCLUSIONS.md)
+
+**Experiencia visual:** CICA (`/app/*`, `packages/epis2-ui/src/cica/`). Legacy `/espacio/*` = fallback only.
+
+## Alcance agente (obligatorio)
+
+1. Leer **solo** brújula + brief + un prompt activo — ver `AGENT_SCOPE_EXCLUSIONS.md`.
+2. **No** indexar ni planificar desde `reports/archive/`, tramos A–K, three modes, olas M3.
+3. **No** borrar evidencia — archivar y dejar puntero.
 
 ## Comandos
 
@@ -38,6 +46,6 @@ Gate histórico: `npm run quality:gate -- quality:<name>` · scripts archivados:
 
 ## Prohibido
 
-Reabrir week gates, three modes o tramos A–K como trabajo activo · auto-aprobación · PHI real · import masivo desde `../Epis`.
+Reabrir programas archivados (tramos A–K, three modes, olas M3, OpenClaw auto-dev) · planificar desde `reports/archive/` · auto-aprobación · PHI real · import masivo desde `../Epis` · **borrar** evidencia archivada.
 
-**Campañas cerradas (histórico):** [`docs/archive/agent-playbooks/`](docs/archive/agent-playbooks/)
+**Campañas cerradas:** [`docs/archive/ARCHIVED_PROGRAMS_INDEX.md`](docs/archive/ARCHIVED_PROGRAMS_INDEX.md) · playbooks: [`docs/archive/agent-playbooks/`](docs/archive/agent-playbooks/)
