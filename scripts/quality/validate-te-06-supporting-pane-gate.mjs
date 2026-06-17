@@ -33,8 +33,8 @@ if (!panel.includes('contextEventCount')) {
   errors.push('ClinicalRightContextPanel debe exponer contextEventCount');
 }
 
-if (!existsSync(join(root, 'reports/epis2-mf-te-06-supporting-pane.md'))) {
-  errors.push('falta reports/epis2-mf-te-06-supporting-pane.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-te-06-supporting-pane.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-te-06-supporting-pane.md');
 }
 
 const vitest = spawnSync(

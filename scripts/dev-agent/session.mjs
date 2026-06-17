@@ -16,7 +16,7 @@ import { loadEnvFile } from '../load-env.mjs';
 import { buildDevBrief } from './brief.mjs';
 import { buildSubagentPrompt, buildTramoImplementerPrompt } from './prompt-builder.mjs';
 import { getActivePhaseHint, getGitSummary, suggestPrimarySubagent } from './context.mjs';
-import { resolveSubagentSequence } from './subagents.mjs';
+import { resolveSubagentSequence, ARCHIVED_SUBAGENT_IDS } from './subagents.mjs';
 import { suggestAgents } from './openclaw-lib.mjs';
 
 loadEnvFile();
@@ -34,7 +34,15 @@ function argValue(flag) {
 }
 
 const tramo = (argValue('--tramo') ?? process.env.EPIS2_DEV_AGENT_TRAMO)?.toUpperCase();
-const phase = argValue('--phase') ?? process.env.EPIS2_DEV_AGENT_PHASE ?? getActivePhaseHint(root);
+if (tramo && process.env.EPIS2_ALLOW_ARCHIVED_SCOPE !== '1') {
+  console.warn(
+    `[dev:session] Tramo ${tramo} archivado — ignorado. Ver docs/archive/AGENT_SCOPE_EXCLUSIONS.md`,
+  );
+}
+const phase =
+  tramo && process.env.EPIS2_ALLOW_ARCHIVED_SCOPE === '1'
+    ? 'tramo'
+    : (argValue('--phase') ?? process.env.EPIS2_DEV_AGENT_PHASE ?? getActivePhaseHint(root));
 const withOllama = hasFlag('--ollama') || process.env.EPIS2_DEV_SESSION_OLLAMA === '1';
 const withOllamaAuto =
   hasFlag('--ollama-auto') || process.env.EPIS2_DEV_SESSION_OLLAMA_AUTO === '1';
@@ -43,19 +51,21 @@ const withOpenClaw = hasFlag('--openclaw') || process.env.EPIS2_OPENCLAW_SESSION
 
 mkdirSync(join(root, 'reports'), { recursive: true });
 
-const sequence = resolveSubagentSequence({ phase, tramo });
+const effectiveTramo = tramo && process.env.EPIS2_ALLOW_ARCHIVED_SCOPE === '1' ? tramo : undefined;
+const sequence = resolveSubagentSequence({ phase, tramo: effectiveTramo });
 const git = getGitSummary(root);
-const primarySubagent = suggestPrimarySubagent(git.files, { tramo, phase });
+const primarySubagent = suggestPrimarySubagent(git.files, { tramo: effectiveTramo, phase });
 
 for (const id of sequence) {
+  if (ARCHIVED_SUBAGENT_IDS.has(id)) continue;
   writeFileSync(
     join(root, `reports/dev-agent-prompt-${id}.md`),
-    buildSubagentPrompt(root, id, { tramo, phase }),
+    buildSubagentPrompt(root, id, { tramo: effectiveTramo, phase }),
     'utf8',
   );
 }
 
-if (tramo) {
+if (tramo && process.env.EPIS2_ALLOW_ARCHIVED_SCOPE === '1') {
   writeFileSync(
     join(root, `reports/dev-agent-prompt-tramo-${tramo}.md`),
     buildTramoImplementerPrompt(root, tramo, process.env.EPIS2_DEV_AGENT_MF),
@@ -111,7 +121,12 @@ if (withOpenClaw) {
   if (r.status !== 0 && (r.stderr || r.stdout)) process.stderr.write(r.stderr || r.stdout);
 }
 
-const brief = await buildDevBrief(root, { phase, tramo, sequence, primarySubagent });
+const brief = await buildDevBrief(root, {
+  phase,
+  tramo: effectiveTramo,
+  sequence,
+  primarySubagent,
+});
 const briefPath = join(root, 'reports/dev-agent-brief.md');
 writeFileSync(briefPath, brief, 'utf8');
 
@@ -120,10 +135,13 @@ console.log(`  Subagente primario: ${primarySubagent}`);
 console.log(`  Secuencia: ${sequence.join(' → ')}`);
 console.log('');
 if (withOpenClaw) {
-  console.log('  Cursor: @reports/dev-agent-brief.md @reports/archive/2026-06/openclaw-latest-brief.md');
+  console.log(
+    '  Cursor: @reports/dev-agent-brief.md @reports/archive/2026-06/openclaw-latest-brief.md',
+  );
   console.log('           @reports/dev-agent-prompt-' + primarySubagent + '.md');
 } else {
+  console.log('  Cursor: @docs/AGENT_CONTEXT_MINIMAL.md @docs/archive/AGENT_SCOPE_EXCLUSIONS.md');
   console.log(
-    '  Cursor: @reports/dev-agent-brief.md @reports/dev-agent-prompt-' + primarySubagent + '.md',
+    '           @reports/dev-agent-brief.md @reports/dev-agent-prompt-' + primarySubagent + '.md',
   );
 }

@@ -3,6 +3,7 @@ import { Box, Stack, epis2PaperStatusCaptionSx } from '@epis2/epis2-ui';
 import { useSearch } from '@tanstack/react-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useClinicalNavigate } from '../../routes/clinicalNavigate.js';
+import { PAPER_STANDALONE_ROUTE } from '../../routes/paperStandaloneSearch.js';
 import {
   parseChartModeSearch,
   resolvePaperSurface,
@@ -29,6 +30,8 @@ export type PaperChartModeProps = {
   patientStrip?: Omit<PaperPatientStripProps, 'patientName' | 'recordNumber'> | undefined;
   userDisplayName?: string | undefined;
   testId?: string | undefined;
+  /** MF-AEST-03 — ruta base de navegación (ficha embebida vs papel exclusivo). */
+  routeTo?: '/espacio/ficha' | typeof PAPER_STANDALONE_ROUTE;
 };
 
 /** Modo ficha papel editable — Carta/A5 + 14 secciones + SoT PostgreSQL. */
@@ -40,6 +43,7 @@ export function PaperChartMode({
   patientStrip,
   userDisplayName,
   testId = 'epis2-paper-chart-mode',
+  routeTo = '/espacio/ficha',
 }: PaperChartModeProps) {
   const navigate = useClinicalNavigate();
   const rawSearch = useSearch({ strict: false }) as Record<string, unknown>;
@@ -92,7 +96,7 @@ export function PaperChartMode({
     scrollToSection(sectionId);
     if (patientId) {
       void navigate({
-        to: '/espacio/ficha',
+        to: routeTo,
         search: {
           patientId,
           chartMode: 'paper',
@@ -107,7 +111,7 @@ export function PaperChartMode({
   const handleSurfaceChange = (surface: PaperPlannerSurface) => {
     if (!patientId) return;
     void navigate({
-      to: '/espacio/ficha',
+      to: routeTo,
       search: {
         patientId,
         chartMode: 'paper',
@@ -120,7 +124,7 @@ export function PaperChartMode({
   const handlePlannerViewChange = (view: PaperPlannerView) => {
     if (!patientId) return;
     void navigate({
-      to: '/espacio/ficha',
+      to: routeTo,
       search: { patientId, chartMode: 'paper', paperSurface: 'planner', plannerView: view },
     });
   };

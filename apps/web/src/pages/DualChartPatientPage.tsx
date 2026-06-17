@@ -14,8 +14,8 @@ import { classicCommandSuggestionLabels } from '../classic-md3/commandSuggestion
 import { useCommandDictionarySuggestions } from '../clinical/useCommandDictionarySuggestions.js';
 import { ClinicalShell } from '../components/chart/ClinicalShell.js';
 import { ClinicalContextDenseStrip } from '../components/chart/ClinicalContextDenseStrip.js';
-import { PaperChartMode } from '../components/chart/PaperChartMode.js';
 import { TraditionalEhrMode } from '../components/chart/TraditionalEhrMode.js';
+import type { TraditionalSectionId } from '../components/chart/TraditionalSectionNav.js';
 import { CommandConfirmationDialog } from '../components/CommandConfirmationDialog.js';
 import { EpisClinicalContextPane } from '../components/EpisClinicalContextPane.js';
 import { useClinicalCommandSubmit } from '../clinical/useClinicalCommandSubmit.js';
@@ -24,6 +24,7 @@ import { useCommandResolveContext } from '../clinical/useCommandResolveContext.j
 import type { ChartModeId } from '../dev/dualChartModesEnv.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { parseChartModeSearch, resolveChartMode } from '../routes/chartModeSearch.js';
+import { PAPER_STANDALONE_ROUTE } from '../routes/paperStandaloneSearch.js';
 import type { PatientDetailResponse } from '../api/clinicalApi.js';
 
 function ageFromBirthDate(birthDate: string): number {
@@ -57,7 +58,7 @@ export type DualChartPatientPageProps = {
   onProbableAction: (commandSample: string) => void;
 };
 
-/** Ficha dual ADR-002 — tradicional | papel bajo flag (MF-DUAL-CHART-03). */
+/** Ficha dual ADR-002 — tradicional en shell; papel en ruta exclusiva (MF-AEST-03). */
 export function DualChartPatientPage({
   patientId,
   detail,
@@ -82,6 +83,9 @@ export function DualChartPatientPage({
   const demoCase = useMemo(() => getDemoCaseByPatientId(patientId), [patientId]);
   const [contextEventCount, setContextEventCount] = useState<number | undefined>();
   const [focusTimelineSection, setFocusTimelineSection] = useState<'navEvolution' | undefined>();
+  const [focusTraditionalSection, setFocusTraditionalSection] = useState<
+    TraditionalSectionId | undefined
+  >();
 
   const handleViewFullTimeline = () => {
     setFocusTimelineSection('navEvolution');
@@ -89,13 +93,26 @@ export function DualChartPatientPage({
   };
 
   useEffect(() => {
-    if (rawSearch.chartMode === 'traditional' || rawSearch.chartMode === 'paper') return;
-    void navigate({
-      to: '/espacio/ficha',
-      search: { patientId, chartMode: 'traditional' },
-      replace: true,
-    });
-  }, [navigate, patientId, rawSearch.chartMode]);
+    if (chartMode === 'paper') {
+      void navigate({
+        to: PAPER_STANDALONE_ROUTE,
+        search: {
+          patientId,
+          chartMode: 'paper',
+          paperDate: new Date().toISOString().slice(0, 10),
+        },
+        replace: true,
+      });
+      return;
+    }
+    if (rawSearch.chartMode !== 'traditional' && rawSearch.chartMode !== undefined) {
+      void navigate({
+        to: '/espacio/ficha',
+        search: { patientId, chartMode: 'traditional' },
+        replace: true,
+      });
+    }
+  }, [chartMode, navigate, patientId, rawSearch.chartMode]);
 
   const commandContext = useCommandResolveContext('patient_chart');
   const classicCommand = useClinicalCommandSubmit({
@@ -121,6 +138,13 @@ export function DualChartPatientPage({
         : undefined;
 
   const setChartMode = (mode: ChartModeId) => {
+    if (mode === 'paper') {
+      void navigate({
+        to: PAPER_STANDALONE_ROUTE,
+        search: { patientId, chartMode: 'paper' },
+      });
+      return;
+    }
     void navigate({
       to: '/espacio/ficha',
       search: { patientId, chartMode: mode },
@@ -143,28 +167,57 @@ export function DualChartPatientPage({
   const roleKey = session?.user.role as keyof typeof copy.roles | undefined;
   const userRoleLabel = roleKey ? (copy.roles[roleKey] ?? roleKey) : undefined;
 
-  const contextDense = useMemo(() => {
-    if (!longitudinal) return null;
-    return buildClinicalContextDense({
-      problems: longitudinal.problems,
-      medications: longitudinal.medications,
-      observations: longitudinal.observations,
-      encounters: longitudinal.encounters,
-      ultimoEncuentroAt: clinicalSummary?.ultimoEncuentroAt ?? null,
-      openEncounterId: detail.clinicalContext.openEncounterId ?? null,
-      careSettingLabel: demoCase?.scenario ?? copy.careSettings.ambulatory,
+  const contextDense = useMemo(
+    () =>
+      longitudinal
+        ? buildClinicalContextDense({
+            problems: longitudinal.problems,
+            medications: longitudinal.medications,
+            observations: longitudinal.observations,
+            openEncounterId: detail.clinicalContext.openEncounterId ?? null,
+            careSettingLabel: copy.careSettings.ambulatory,
+          })
+        : null,
+    [detail.clinicalContext.openEncounterId, longitudinal],
+  );
+
+  const handlePaperMode = () => {
+    void navigate({
+      to: PAPER_STANDALONE_ROUTE,
+      search: { patientId, chartMode: 'paper' },
     });
-  }, [
-    longitudinal,
-    clinicalSummary?.ultimoEncuentroAt,
-    detail.clinicalContext.openEncounterId,
-    demoCase?.scenario,
-  ]);
+  };
+
+  const handleNewOrder = () => {
+    void navigate({ to: '/espacio/laboratorio', search: { patientId } });
+  };
+
+  const handleOpenPrescription = () => {
+    void navigate({ to: '/espacio/receta', search: { patientId } });
+  };
+
+  const handleOpenDocuments = () => {
+    void navigate({ to: '/espacio/epicrisis', search: { patientId } });
+  };
+
+  const handleOpenAuditSection = () => {
+    saveTraditionalSection('navAudit');
+    setFocusTraditionalSection('navAudit');
+  };
+
+  const handleOpenAuditConsole = () => {
+    void navigate({ to: '/espacio/admin', search: { tab: 'audit' } });
+  };
+
+  if (chartMode === 'paper') {
+    return null;
+  }
 
   return (
     <>
       <ClinicalShell
-        chartMode={chartMode}
+        composition="cica-minimal"
+        chartMode="traditional"
         onChartModeChange={setChartMode}
         displayName={detail.patient.displayName}
         metaLine={metaLine}
@@ -183,10 +236,7 @@ export function DualChartPatientPage({
         onOpenPrescription={() =>
           void navigate({
             to: '/espacio/receta',
-            search: {
-              patientId,
-              ...(chartMode === 'paper' ? { chartMode: 'paper' as const } : {}),
-            },
+            search: { patientId },
           })
         }
         commandQuery={classicCommand.query}
@@ -198,57 +248,48 @@ export function DualChartPatientPage({
         showDemoBadge={Boolean(detail.patient.demoCaseCode)}
         testId="epis2-dual-chart-ficha"
       >
-        {chartMode === 'paper' ? (
-          <PaperChartMode
-            patientId={patientId}
-            patientName={detail.patient.displayName}
-            recordNumber={detail.patient.demoCaseCode ?? detail.patient.id.slice(0, 8)}
-            userDisplayName={session?.user.displayName}
-            patientStrip={{
-              nationalId: demoNationalId(detail.patient.demoCaseCode),
-              ageYears: demoCase ? ageFromBirthDate(demoCase.birthDate) : undefined,
-              sexLabel,
-              serviceUnit: demoCase?.scenario ?? copy.chartModes.shellServiceDefault,
-              allergyLabels,
-            }}
-          />
-        ) : (
-          <TraditionalEhrMode
-            demoCaseCode={detail.patient.demoCaseCode ?? demoCase?.demoCaseCode}
-            summaryFields={summaryFields}
-            clinicalSummary={clinicalSummary}
-            longitudinal={longitudinal}
-            alerts={clinicalAlerts}
-            onRegisterAllergy={onRegisterAllergy}
-            onRegisterProblem={onRegisterProblem}
-            onOpenResults={onOpenResults}
-            onOpenDraft={onOpenDraft}
-            onViewFullTimeline={handleViewFullTimeline}
-            onOpenEvolution={onOpenEvolution}
-            probableActionChips={probableActionChips}
-            onProbableAction={onProbableAction}
-            initialTraditionalSection={savedTraditionalSection}
-            focusTraditionalSection={focusTimelineSection}
-            onTraditionalSectionPersist={saveTraditionalSection}
-            contextEventCount={contextEventCount}
-            contextPane={
-              <EpisClinicalContextPane
-                patientId={patientId}
-                onTimelineCountChange={setContextEventCount}
-                clinicalAlerts={clinicalAlerts}
-                summaryFields={summaryFields}
-                longitudinalSnapshot={
-                  longitudinal
-                    ? {
-                        allergies: longitudinal.allergies,
-                        observations: longitudinal.observations,
-                      }
-                    : undefined
-                }
-              />
-            }
-          />
-        )}
+        <TraditionalEhrMode
+          cicaLayout
+          demoCaseCode={detail.patient.demoCaseCode ?? demoCase?.demoCaseCode}
+          summaryFields={summaryFields}
+          clinicalSummary={clinicalSummary}
+          longitudinal={longitudinal}
+          alerts={clinicalAlerts}
+          onRegisterAllergy={onRegisterAllergy}
+          onRegisterProblem={onRegisterProblem}
+          onOpenResults={onOpenResults}
+          onOpenDraft={onOpenDraft}
+          onViewFullTimeline={handleViewFullTimeline}
+          onOpenEvolution={onOpenEvolution}
+          onNewOrder={handleNewOrder}
+          onPaperMode={handlePaperMode}
+          onOpenPrescription={handleOpenPrescription}
+          onOpenDocuments={handleOpenDocuments}
+          onOpenAuditSection={handleOpenAuditSection}
+          onOpenAuditConsole={handleOpenAuditConsole}
+          probableActionChips={probableActionChips}
+          onProbableAction={onProbableAction}
+          initialTraditionalSection={savedTraditionalSection}
+          focusTraditionalSection={focusTraditionalSection ?? focusTimelineSection}
+          onTraditionalSectionPersist={saveTraditionalSection}
+          contextEventCount={contextEventCount}
+          contextPane={
+            <EpisClinicalContextPane
+              patientId={patientId}
+              onTimelineCountChange={setContextEventCount}
+              clinicalAlerts={clinicalAlerts}
+              summaryFields={summaryFields}
+              longitudinalSnapshot={
+                longitudinal
+                  ? {
+                      allergies: longitudinal.allergies,
+                      observations: longitudinal.observations,
+                    }
+                  : undefined
+              }
+            />
+          }
+        />
       </ClinicalShell>
       <CommandConfirmationDialog
         pending={classicCommand.pendingConfirmation}

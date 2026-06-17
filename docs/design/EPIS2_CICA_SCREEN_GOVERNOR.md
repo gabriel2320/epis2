@@ -241,7 +241,7 @@ type EpisScreenDefinition = {
 };
 ```
 
-Implementación futura: `packages/epis2-ui/src/screen-governor/` (función pura + tests).
+Implementación: `packages/epis2-ui/src/screen-governor/` (`proposeEpisScreen()` + tests).
 
 ---
 
@@ -288,7 +288,7 @@ JSON agente (futuro):
 | Gate | Estado | Valida |
 |------|--------|--------|
 | `quality:cica-screen-admission-gate` | ✓ | Canon CICA + checklist |
-| `quality:cica-screen-governor-gate` | Pendiente | Canon SG + tests + ledger en rutas nuevas |
+| `quality:cica-screen-governor-gate` | ✓ | Canon SG + tests + proposeEpisScreen |
 | `quality:cica-screen-inventory-gate` | ✓ | CICA-L ledger activo |
 
 ---

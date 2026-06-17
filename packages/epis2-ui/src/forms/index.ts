@@ -20,6 +20,11 @@ export {
   type EpisClinicalFormActionBarOverflowItem,
   type EpisClinicalFormActionBarProps,
 } from './EpisClinicalFormActionBar.js';
+export {
+  EpisPrimaryActionBar,
+  type EpisPrimaryActionItem,
+  type EpisPrimaryActionBarProps,
+} from './EpisPrimaryActionBar.js';
 export { EpisClinicalFormPage, type EpisClinicalFormPageProps } from './EpisClinicalFormPage.js';
 export {
   EpisClinicalFocusAppBar,

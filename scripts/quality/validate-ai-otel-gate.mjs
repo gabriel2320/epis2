@@ -11,7 +11,7 @@ const errors = [];
 const required = [
   ['ai tracing helper', 'apps/api/src/ai/tracing.ts'],
   ['otel setup', 'apps/api/src/otel.ts'],
-  ['closure im-09', 'reports/epis2-mf-im-09-otel.md'],
+  ['closure im-09', 'reports/archive/2026-06/epis2-mf-im-09-otel.md'],
 ];
 
 for (const [label, rel] of required) {

@@ -38,20 +38,8 @@ let moved = 0;
 let promoted = 0;
 let deferred = 0;
 
-/** WIP en disco — no catalogar hasta commit dedicado (aesthetic/CICA-L). */
-const DEFER_CATALOG = [
-  'quality:aesthetic-action-density-gate',
-  'quality:aesthetic-layout-gate',
-  'quality:aesthetic-reset-close-gate',
-  'quality:cica-loop-close-gate',
-  'quality:cica-screen-admission-gate',
-  'quality:cica-screen-inventory-gate',
-  'quality:classic-chart-composition-gate',
-  'quality:clinical-command-bar-transversal-gate',
-  'quality:clinical-navigation-clarity-gate',
-  'quality:no-horizontal-overflow-gate',
-  'quality:paper-mode-standalone-gate',
-];
+/** Promovidos — apply-archive-promote-aesthetic.mjs (PROG-AESTHETIC-RESET). */
+const DEFER_CATALOG = [];
 
 for (const gate of DEFER_CATALOG) {
   if (active[gate]) {

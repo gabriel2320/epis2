@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-06-16T20:40:46.202Z",
+  "generatedAt": "2026-06-16T21:34:06.293Z",
   "source": "catalog-full+fs",
   "note": "Regenerar inventario: node tools/gates/inventory-orphans.mjs",
   "gates": {
@@ -26,7 +26,7 @@
     },
     "quality:ux-lab-close": {
       "type": "command",
-      "command": "npm run quality:security-promote-gate && npm run quality:golden-journey && npm run quality:ux-pilot && npm run quality:ux-pilot-gate && npm run quality:m3-human-pilot && npm run quality:fast"
+      "command": "npm run quality:security-promote-gate && npm run quality:golden-journey && npm run quality:ux-pilot && npm run quality:ux-pilot-gate && npm run quality:m3-human-pilot && npm run quality:aesthetic-reset-close-gate && npm run quality:pr-aest-07-close-gate && npm run quality:fast"
     },
     "quality:layers-integration-gate": {
       "type": "file",
@@ -144,6 +144,14 @@
       "type": "file",
       "path": "scripts/quality/validate-root-script-surface-gate.mjs"
     },
+    "quality:clinical-calm-default-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-calm-default-gate.mjs"
+    },
+    "quality:cica-screen-governor-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-screen-governor-gate.mjs"
+    },
     "quality:ux-lab-autopilot-gate": {
       "type": "file",
       "path": "scripts/quality/validate-ux-lab-autopilot-gate.mjs"
@@ -163,6 +171,58 @@
     "quality:gates-prune-phase2-gate": {
       "type": "file",
       "path": "scripts/quality/validate-gates-prune-phase2-gate.mjs"
+    },
+    "quality:aesthetic-action-density-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-aesthetic-action-density-gate.mjs"
+    },
+    "quality:aesthetic-layout-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-aesthetic-layout-gate.mjs"
+    },
+    "quality:aesthetic-reset-close-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-aesthetic-reset-close-gate.mjs"
+    },
+    "quality:cica-loop-close-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-loop-close-gate.mjs"
+    },
+    "quality:cica-screen-admission-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-screen-admission-gate.mjs"
+    },
+    "quality:cica-screen-inventory-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-screen-inventory-gate.mjs"
+    },
+    "quality:classic-chart-composition-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-classic-chart-composition-gate.mjs"
+    },
+    "quality:clinical-command-bar-transversal-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-command-bar-transversal-gate.mjs"
+    },
+    "quality:clinical-navigation-clarity-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-navigation-clarity-gate.mjs"
+    },
+    "quality:no-horizontal-overflow-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-no-horizontal-overflow-gate.mjs"
+    },
+    "quality:paper-mode-standalone-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-paper-mode-standalone-gate.mjs"
+    },
+    "quality:pr-aest-07-close-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-pr-aest-07-close-gate.mjs"
+    },
+    "quality:gates-promote-aesthetic-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-gates-promote-aesthetic-gate.mjs"
     }
   },
   "archived": {
@@ -1655,5 +1715,6 @@
       "archivedAt": "2026-06-16"
     }
   },
-  "prunePhase": "2"
+  "prunePhase": "3",
+  "aestheticPromotedAt": "2026-06-16"
 }

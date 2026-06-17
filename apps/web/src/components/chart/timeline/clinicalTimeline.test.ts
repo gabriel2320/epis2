@@ -16,11 +16,19 @@ describe('clinicalTimeline (MF-DI-08 web)', () => {
       title: 'Nota firmada',
       detail: 'evolution_note',
     },
+    {
+      id: '3',
+      kind: 'document' as const,
+      at: '2026-06-09T08:00:00.000Z',
+      title: 'Informe pie',
+      detail: 'other',
+    },
   ];
 
   it('expone filtros clínicos', () => {
     expect(filterClinicalTimeline(events, 'labs')).toHaveLength(1);
     expect(filterClinicalTimeline(events, 'evolutions')).toHaveLength(1);
+    expect(filterClinicalTimeline(events, 'documents')).toHaveLength(1);
   });
 
   it('agrupa por periodo', () => {

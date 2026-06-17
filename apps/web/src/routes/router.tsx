@@ -12,6 +12,7 @@ import { lazy } from 'react';
 import { EPIS2_CLINICAL_HOME } from './home.js';
 import { DraftReviewPage } from '../pages/DraftReviewPage.js';
 import { GeneratedClinicalFormPage } from '../pages/GeneratedClinicalFormPage.js';
+import { PatientSearchScreen } from '../pages/PatientSearchScreen.js';
 import { PatientWorkspacePage } from '../pages/PatientWorkspacePage.js';
 import { ResultsInboxPage } from '../pages/ResultsInboxPage.js';
 import { MedicalCertificatePrintPage } from '../pages/MedicalCertificatePrintPage.js';
@@ -20,6 +21,7 @@ import { LabRequestPrintPage } from '../pages/LabRequestPrintPage.js';
 import { ImagingRequestPrintPage } from '../pages/ImagingRequestPrintPage.js';
 import { PrescriptionPrintPage } from '../pages/PrescriptionPrintPage.js';
 import { PaperChartPrintPage } from '../pages/PaperChartPrintPage.js';
+import { StandalonePaperChartPage } from '../pages/StandalonePaperChartPage.js';
 import { PaperPlannerPrintPage } from '../pages/PaperPlannerPrintPage.js';
 import { AdminConsolePage } from '../pages/AdminConsolePage.js';
 import { LoginPage } from '../pages/LoginPage.js';
@@ -31,12 +33,28 @@ import { isUiCatalogEnabled } from '../dev/uiCatalogEnv.js';
 import { isVisualThemeCatalogEnabled } from '../dev/visualThemeCatalogEnv.js';
 import { isSchedulerSpikeEnabled } from '../dev/schedulerSpikeEnv.js';
 import { isDualChartModesEnabled } from '../dev/dualChartModesEnv.js';
+import { isCicaUiEnabled } from '../dev/cicaUiEnv.js';
+import { CicaAppLayout } from '../cica/CicaAppLayout.js';
+import { CicaPatientSearchPage } from '../cica/CicaPatientSearchPage.js';
+import { CicaCensusPage } from '../cica/CicaCensusPage.js';
+import { CicaPatientSummaryPage } from '../cica/CicaPatientSummaryPage.js';
+import { CicaPatientEvolutionsPage } from '../cica/CicaPatientEvolutionsPage.js';
+import { CicaPatientDocumentsPage } from '../cica/CicaPatientDocumentsPage.js';
+import { CicaPatientOrdersPage } from '../cica/CicaPatientOrdersPage.js';
+import { CicaPatientExamsPage } from '../cica/CicaPatientExamsPage.js';
+import { CicaNewEvolutionPage } from '../cica/CicaNewEvolutionPage.js';
+import { CicaNewEpicrisisPage } from '../cica/CicaNewEpicrisisPage.js';
+import { CicaNewPrescriptionPage } from '../cica/CicaNewPrescriptionPage.js';
+import { CicaNewDocumentPage } from '../cica/CicaNewDocumentPage.js';
+import { CicaPaperDayPage } from '../cica/CicaPaperDayPage.js';
+import { EPIS2_LEGACY_CLINICAL_HOME } from './home.js';
 import {
   parseDashboardSearch,
   parseClinicalFormSearch,
   parseCommandSearch,
   parseClinicalPatientSearch,
 } from './clinicalNavigate.js';
+import { parsePaperStandaloneSearch } from './paperStandaloneSearch.js';
 import { EpisAppProviders } from '../AppProviders.js';
 
 const LazyUiCatalogPage = lazy(() =>
@@ -62,6 +80,114 @@ async function requireSession() {
   if (!session) {
     throw redirect({ to: '/login' });
   }
+}
+
+/**
+ * PR6 — legacy `/espacio/*` → CICA `/app/*` cuando VITE_ENABLE_CICA_UI≠false.
+ * Sin redirect si CICA desactivado. draftId se preserva en search cuando aplica.
+ *
+ * Mapa de redirects:
+ * - /espacio/buscar-paciente → /app/buscar
+ * - /espacio/ficha?patientId= → /app/pacientes/$patientId/resumen
+ * - /espacio/resumen?patientId= → /app/pacientes/$patientId/resumen
+ * - /espacio/evolucion?patientId= → /app/pacientes/$patientId/evoluciones/nueva
+ * - /espacio/receta?patientId= → /app/pacientes/$patientId/indicaciones/nueva
+ * - /espacio/certificado?patientId= → /app/pacientes/$patientId/documentos/nuevo
+ * - /espacio/resultados?patientId= → /app/pacientes/$patientId/examenes
+ * - /espacio/laboratorio?patientId= → /app/pacientes/$patientId/examenes
+ * - /espacio/imagenologia?patientId= → /app/pacientes/$patientId/examenes
+ * - /espacio/interconsulta?patientId= → /app/pacientes/$patientId/documentos
+ * - /espacio/procedimiento?patientId= → /app/pacientes/$patientId/indicaciones
+ * - /espacio/enfermeria?patientId= → /app/pacientes/$patientId/indicaciones
+ * - /espacio/alergia?patientId= → /app/pacientes/$patientId/resumen
+ * - /espacio/problema?patientId= → /app/pacientes/$patientId/resumen
+ * - /espacio/ingreso?patientId= → /app/pacientes/$patientId/resumen
+ * - /espacio/ambulatorio?patientId= → /app/pacientes/$patientId/resumen
+ * - /espacio/farmacia?patientId= → /app/pacientes/$patientId/indicaciones
+ * - /espacio/mar?patientId= → /app/pacientes/$patientId/indicaciones
+ * - /espacio/conciliacion?patientId= → /app/pacientes/$patientId/indicaciones
+ * - /espacio/traslado?patientId= → /app/pacientes/$patientId/resumen
+ * - /espacio/informe-interconsulta?patientId= → /app/pacientes/$patientId/documentos
+ * - /espacio/epicrisis — sin redirect (pantalla CICA pendiente)
+ */
+function redirectLegacyPatientSearchToCicaIfEnabled() {
+  if (isCicaUiEnabled()) {
+    throw redirect({ to: '/app/buscar' });
+  }
+}
+
+function redirectLegacyFichaToCicaIfEnabled(search: Record<string, unknown>) {
+  if (!isCicaUiEnabled()) return;
+  const { patientId } = parseClinicalPatientSearch(search);
+  if (patientId) {
+    throw redirect({
+      to: '/app/pacientes/$patientId/resumen',
+      params: { patientId },
+    });
+  }
+  throw redirect({ to: '/app/buscar' });
+}
+
+function redirectLegacyEvolutionToCicaIfEnabled(search: Record<string, unknown>) {
+  redirectLegacyClinicalFormToCicaIfEnabled(search, '/app/pacientes/$patientId/evoluciones/nueva');
+}
+
+type CicaPatientRedirectTarget =
+  | '/app/pacientes/$patientId/resumen'
+  | '/app/pacientes/$patientId/indicaciones'
+  | '/app/pacientes/$patientId/documentos'
+  | '/app/pacientes/$patientId/examenes';
+
+type CicaClinicalFormRedirectTarget =
+  | '/app/pacientes/$patientId/evoluciones/nueva'
+  | '/app/pacientes/$patientId/indicaciones/nueva'
+  | '/app/pacientes/$patientId/documentos/nuevo'
+  | '/app/pacientes/$patientId/epicrisis/nueva';
+
+/** PR6 — formularios legacy con patientId (+ draftId opcional) → formulario CICA. */
+function redirectLegacyClinicalFormToCicaIfEnabled(
+  search: Record<string, unknown>,
+  to: CicaClinicalFormRedirectTarget,
+) {
+  if (!isCicaUiEnabled()) return;
+  const parsed = parseClinicalFormSearch(search);
+  if (parsed.patientId) {
+    throw redirect({
+      to,
+      params: { patientId: parsed.patientId },
+      ...(parsed.draftId ? { search: { draftId: parsed.draftId } } : {}),
+    });
+  }
+  throw redirect({ to: '/app/buscar' });
+}
+
+/** PR6 — formularios legacy con patientId (+ draftId opcional) → sección CICA equivalente (lista). */
+function redirectLegacyFormToCicaPatientIfEnabled(
+  search: Record<string, unknown>,
+  to: CicaPatientRedirectTarget,
+) {
+  if (!isCicaUiEnabled()) return;
+  const parsed = parseClinicalFormSearch(search);
+  if (parsed.patientId) {
+    throw redirect({
+      to,
+      params: { patientId: parsed.patientId },
+      ...(parsed.draftId ? { search: { draftId: parsed.draftId } } : {}),
+    });
+  }
+  throw redirect({ to: '/app/buscar' });
+}
+
+function redirectLegacyPrescriptionToCicaIfEnabled(search: Record<string, unknown>) {
+  redirectLegacyClinicalFormToCicaIfEnabled(search, '/app/pacientes/$patientId/indicaciones/nueva');
+}
+
+function redirectLegacyCertificateToCicaIfEnabled(search: Record<string, unknown>) {
+  redirectLegacyClinicalFormToCicaIfEnabled(search, '/app/pacientes/$patientId/documentos/nuevo');
+}
+
+function redirectLegacyEpicrisisToCicaIfEnabled(search: Record<string, unknown>) {
+  redirectLegacyClinicalFormToCicaIfEnabled(search, '/app/pacientes/$patientId/epicrisis/nueva');
 }
 
 const rootRoute = createRootRoute({
@@ -127,6 +253,12 @@ const commandCenterRoute = createRoute({
     await requireSession();
     const parsed = parseCommandSearch(search);
     if (parsed.intent === 'selectPatient' && parsed.patientId) {
+      if (isCicaUiEnabled()) {
+        throw redirect({
+          to: '/app/pacientes/$patientId/resumen',
+          params: { patientId: parsed.patientId },
+        });
+      }
       throw redirect({
         to: '/espacio/ficha',
         search: { patientId: parsed.patientId, chartMode: 'traditional' },
@@ -158,6 +290,119 @@ const clinicalLayoutRoute = createRoute({
   component: ClinicalShellLayout,
 });
 
+/** CICA Clean Room — raíz visual /app/* (sin legacy shell). */
+const cicaLayoutRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  id: 'cica-shell',
+  beforeLoad: async () => {
+    await requireSession();
+    if (!isCicaUiEnabled()) {
+      throw redirect({ to: EPIS2_LEGACY_CLINICAL_HOME });
+    }
+  },
+  component: CicaAppLayout,
+});
+
+const cicaSearchRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/buscar',
+  component: CicaPatientSearchPage,
+});
+
+const cicaCensusRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/censo',
+  component: CicaCensusPage,
+});
+
+const cicaPatientSummaryRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/resumen',
+  component: CicaPatientSummaryPage,
+});
+
+const cicaPatientEvolutionsRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/evoluciones',
+  component: CicaPatientEvolutionsPage,
+});
+
+const cicaNewEvolutionRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/evoluciones/nueva',
+  validateSearch: (search: Record<string, unknown>) => {
+    const parsed: { draftId?: string } = {};
+    if (typeof search.draftId === 'string' && search.draftId) {
+      parsed.draftId = search.draftId;
+    }
+    return parsed;
+  },
+  component: CicaNewEvolutionPage,
+});
+
+const cicaNewPrescriptionRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/indicaciones/nueva',
+  validateSearch: (search: Record<string, unknown>) => {
+    const parsed: { draftId?: string } = {};
+    if (typeof search.draftId === 'string' && search.draftId) {
+      parsed.draftId = search.draftId;
+    }
+    return parsed;
+  },
+  component: CicaNewPrescriptionPage,
+});
+
+const cicaPatientOrdersRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/indicaciones',
+  component: CicaPatientOrdersPage,
+});
+
+const cicaPatientExamsRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/examenes',
+  component: CicaPatientExamsPage,
+});
+
+const cicaPatientDocumentsRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/documentos',
+  component: CicaPatientDocumentsPage,
+});
+
+const cicaNewDocumentRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/documentos/nuevo',
+  validateSearch: (search: Record<string, unknown>) => {
+    const parsed: { draftId?: string } = {};
+    if (typeof search.draftId === 'string' && search.draftId) {
+      parsed.draftId = search.draftId;
+    }
+    return parsed;
+  },
+  component: CicaNewDocumentPage,
+});
+
+const cicaNewEpicrisisRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/epicrisis/nueva',
+  validateSearch: (search: Record<string, unknown>) => {
+    const parsed: { draftId?: string } = {};
+    if (typeof search.draftId === 'string' && search.draftId) {
+      parsed.draftId = search.draftId;
+    }
+    return parsed;
+  },
+  component: CicaNewEpicrisisPage,
+});
+
+const cicaPaperDayRoute = createRoute({
+  getParentRoute: () => cicaLayoutRoute,
+  path: '/app/pacientes/$patientId/papel/dia/$date',
+  component: CicaPaperDayPage,
+});
+
 const draftReviewRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/borrador/$draftId',
@@ -168,7 +413,18 @@ const patientWorkspaceRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/ficha',
   validateSearch: (search: Record<string, unknown>) => parseClinicalPatientSearch(search),
+  beforeLoad: ({ search }) => {
+    redirectLegacyFichaToCicaIfEnabled(search);
+  },
   component: PatientWorkspacePage,
+});
+
+/** MF-AEST-03 — modo papel exclusivo (no embebido en ficha clásica). */
+const standalonePaperChartRoute = createRoute({
+  getParentRoute: () => clinicalLayoutRoute,
+  path: '/espacio/ficha/papel',
+  validateSearch: (search: Record<string, unknown>) => parsePaperStandaloneSearch(search),
+  component: StandalonePaperChartPage,
 });
 
 const paperChartPrintRoute = createRoute({
@@ -196,13 +452,19 @@ const patientSearchFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/buscar-paciente',
   validateSearch: validatePatientSearch,
-  component: clinicalFormPage('/espacio/buscar-paciente'),
+  beforeLoad: () => {
+    redirectLegacyPatientSearchToCicaIfEnabled();
+  },
+  component: PatientSearchScreen,
 });
 
 const patientSummaryFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/resumen',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/resumen');
+  },
   component: clinicalFormPage('/espacio/resumen'),
 });
 
@@ -210,13 +472,20 @@ const evolutionFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/evolucion',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyEvolutionToCicaIfEnabled(search);
+  },
   component: clinicalFormPage('/espacio/evolucion'),
 });
 
+/** Legacy epicrisis → formulario CICA cuando VITE_ENABLE_CICA_UI. */
 const dischargeFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/epicrisis',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyEpicrisisToCicaIfEnabled(search);
+  },
   component: clinicalFormPage('/espacio/epicrisis'),
 });
 
@@ -231,6 +500,9 @@ const prescriptionFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/receta',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyPrescriptionToCicaIfEnabled(search);
+  },
   component: clinicalFormPage('/espacio/receta'),
 });
 
@@ -245,6 +517,9 @@ const labFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/laboratorio',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/examenes');
+  },
   component: clinicalFormPage('/espacio/laboratorio'),
 });
 
@@ -259,6 +534,9 @@ const referralFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/interconsulta',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/documentos');
+  },
   component: clinicalFormPage('/espacio/interconsulta'),
 });
 
@@ -266,6 +544,9 @@ const imagingFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/imagenologia',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/examenes');
+  },
   component: clinicalFormPage('/espacio/imagenologia'),
 });
 
@@ -280,6 +561,9 @@ const procedureFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/procedimiento',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/indicaciones');
+  },
   component: clinicalFormPage('/espacio/procedimiento'),
 });
 
@@ -287,6 +571,9 @@ const nursingFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/enfermeria',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/indicaciones');
+  },
   component: clinicalFormPage('/espacio/enfermeria'),
 });
 
@@ -294,6 +581,9 @@ const marFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/mar',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/indicaciones');
+  },
   component: clinicalFormPage('/espacio/mar'),
 });
 
@@ -301,6 +591,9 @@ const pharmacyFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/farmacia',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/indicaciones');
+  },
   component: clinicalFormPage('/espacio/farmacia'),
 });
 
@@ -308,6 +601,9 @@ const admissionFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/ingreso',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/resumen');
+  },
   component: clinicalFormPage('/espacio/ingreso'),
 });
 
@@ -315,6 +611,9 @@ const allergyFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/alergia',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/resumen');
+  },
   component: clinicalFormPage('/espacio/alergia'),
 });
 
@@ -322,6 +621,9 @@ const problemFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/problema',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/resumen');
+  },
   component: clinicalFormPage('/espacio/problema'),
 });
 
@@ -329,6 +631,9 @@ const reconciliationFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/conciliacion',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/indicaciones');
+  },
   component: clinicalFormPage('/espacio/conciliacion'),
 });
 
@@ -336,6 +641,9 @@ const transferFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/traslado',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/resumen');
+  },
   component: clinicalFormPage('/espacio/traslado'),
 });
 
@@ -343,6 +651,9 @@ const outpatientFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/ambulatorio',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/resumen');
+  },
   component: clinicalFormPage('/espacio/ambulatorio'),
 });
 
@@ -350,6 +661,9 @@ const medicalCertificateFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/certificado',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyCertificateToCicaIfEnabled(search);
+  },
   component: clinicalFormPage('/espacio/certificado'),
 });
 
@@ -364,6 +678,9 @@ const referralReportFormRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/informe-interconsulta',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/documentos');
+  },
   component: clinicalFormPage('/espacio/informe-interconsulta'),
 });
 
@@ -371,6 +688,9 @@ const resultsInboxRoute = createRoute({
   getParentRoute: () => clinicalLayoutRoute,
   path: '/espacio/resultados',
   validateSearch: validatePatientSearch,
+  beforeLoad: ({ search }) => {
+    redirectLegacyFormToCicaPatientIfEnabled(search, '/app/pacientes/$patientId/examenes');
+  },
   component: ResultsInboxPage,
 });
 
@@ -474,8 +794,23 @@ export const routeTree = rootRoute.addChildren([
   schedulerSpikeRoute,
   commandCenterRoute,
   dashboardModeRoute,
+  cicaLayoutRoute.addChildren([
+    cicaSearchRoute,
+    cicaCensusRoute,
+    cicaPatientSummaryRoute,
+    cicaPatientEvolutionsRoute,
+    cicaNewEvolutionRoute,
+    cicaPatientOrdersRoute,
+    cicaNewPrescriptionRoute,
+    cicaPatientExamsRoute,
+    cicaPatientDocumentsRoute,
+    cicaNewDocumentRoute,
+    cicaNewEpicrisisRoute,
+    cicaPaperDayRoute,
+  ]),
   clinicalLayoutRoute.addChildren([
     draftReviewRoute,
+    standalonePaperChartRoute,
     patientWorkspaceRoute,
     paperChartPrintRoute,
     paperPlannerPrintRoute,

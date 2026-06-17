@@ -1,4 +1,4 @@
-import { Box, EpisM3Text, Stack } from '@epis2/epis2-ui';
+import { Box, EpisM3Text, Stack, epis2ClassicClinicalTableSx } from '@epis2/epis2-ui';
 import type { DemoChartSectionRow } from '../../../fixtures/devFixturesBridge.js';
 
 export type TraditionalSectionDataTableProps = {
@@ -6,7 +6,7 @@ export type TraditionalSectionDataTableProps = {
   testId?: string | undefined;
 };
 
-/** Tabla densa institucional — ficha electrónica traditional (MF-TE-02). */
+/** Tabla clínica legible — filas label/valor sin aspecto administrativo. */
 export function TraditionalSectionDataTable({
   rows,
   testId = 'epis2-traditional-section-table',
@@ -14,22 +14,7 @@ export function TraditionalSectionDataTable({
   if (rows.length === 0) return null;
 
   return (
-    <Stack
-      component="table"
-      data-testid={testId}
-      sx={{
-        width: '100%',
-        borderCollapse: 'collapse',
-        '& td, & th': {
-          borderBottom: 1,
-          borderColor: 'divider',
-          py: 0.75,
-          px: 1,
-          verticalAlign: 'top',
-        },
-        '& th': { width: '32%', textAlign: 'left' },
-      }}
-    >
+    <Stack component="table" data-testid={testId} sx={epis2ClassicClinicalTableSx()}>
       <Box component="tbody">
         {rows.map((row) => (
           <Box component="tr" key={`${row.label}-${row.value}`}>

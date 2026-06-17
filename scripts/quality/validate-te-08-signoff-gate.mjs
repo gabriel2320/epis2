@@ -8,8 +8,8 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
-if (!existsSync(join(root, 'reports/epis2-mf-te-08-signoff.md'))) {
-  errors.push('falta reports/epis2-mf-te-08-signoff.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-te-08-signoff.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-te-08-signoff.md');
 }
 
 const navPath = join(root, 'apps/web/src/components/chart/TraditionalSectionNav.tsx');

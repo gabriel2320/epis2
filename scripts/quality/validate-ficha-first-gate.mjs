@@ -15,19 +15,19 @@ const required = [
   ['dual env', 'apps/web/src/dev/dualChartModesEnv.ts'],
   ['clinical shell layout', 'apps/web/src/layouts/ClinicalShellLayout.tsx'],
   ['command dock', 'apps/web/src/components/chart/ChartEspacioCommandDock.tsx'],
-  ['closure ff-01-03', 'reports/epis2-mf-ff-01-03-ficha-first.md'],
-  ['closure ff-06', 'reports/epis2-mf-ff-06-clinical-shell-forms.md'],
-  ['closure ff-00', 'reports/epis2-mf-ff-00-canon-censo-first.md'],
-  ['closure ff-04', 'reports/epis2-mf-ff-04-dashboard-secondary.md'],
-  ['closure ff-05', 'reports/epis2-mf-ff-05-vision-agent.md'],
-  ['closure ff-07', 'reports/epis2-mf-ff-07-probable-actions.md'],
-  ['closure ff-08', 'reports/epis2-mf-ff-08-live-templates.md'],
-  ['closure ff-09', 'reports/epis2-mf-ff-09-evolution-layout.md'],
-  ['closure ff-10', 'reports/epis2-mf-ff-10-prescription-a5.md'],
-  ['closure ff-11', 'reports/epis2-mf-ff-11-ai-client.md'],
-  ['closure ff-12', 'reports/epis2-mf-ff-12-web-ai-boundary.md'],
-  ['closure ff-13', 'reports/epis2-mf-ff-13-ai-assist.md'],
-  ['closure ff-14', 'reports/epis2-mf-ff-14-medrepo-loader.md'],
+  ['closure ff-01-03', 'reports/archive/2026-06/epis2-mf-ff-01-03-ficha-first.md'],
+  ['closure ff-06', 'reports/archive/2026-06/epis2-mf-ff-06-clinical-shell-forms.md'],
+  ['closure ff-00', 'reports/archive/2026-06/epis2-mf-ff-00-canon-censo-first.md'],
+  ['closure ff-04', 'reports/archive/2026-06/epis2-mf-ff-04-dashboard-secondary.md'],
+  ['closure ff-05', 'reports/archive/2026-06/epis2-mf-ff-05-vision-agent.md'],
+  ['closure ff-07', 'reports/archive/2026-06/epis2-mf-ff-07-probable-actions.md'],
+  ['closure ff-08', 'reports/archive/2026-06/epis2-mf-ff-08-live-templates.md'],
+  ['closure ff-09', 'reports/archive/2026-06/epis2-mf-ff-09-evolution-layout.md'],
+  ['closure ff-10', 'reports/archive/2026-06/epis2-mf-ff-10-prescription-a5.md'],
+  ['closure ff-11', 'reports/archive/2026-06/epis2-mf-ff-11-ai-client.md'],
+  ['closure ff-12', 'reports/archive/2026-06/epis2-mf-ff-12-web-ai-boundary.md'],
+  ['closure ff-13', 'reports/archive/2026-06/epis2-mf-ff-13-ai-assist.md'],
+  ['closure ff-14', 'reports/archive/2026-06/epis2-mf-ff-14-medrepo-loader.md'],
   ['closure prog ficha-first', 'reports/epis2-prog-ficha-first-close-2026.md'],
   ['vision', 'docs/product/VISION_EPIS2.md'],
 ];
@@ -135,8 +135,8 @@ const formPage = readFileSync(
 if (!formPage.includes('buildLiveTemplatePrefill')) {
   errors.push('GeneratedClinicalFormPage debe cablear live templates (MF-FF-08)');
 }
-if (!formPage.includes('epis2-evolution-traditional-shell')) {
-  errors.push('GeneratedClinicalFormPage debe usar TraditionalEhrMode para evolution (MF-FF-09)');
+if (!formPage.includes('epis2-cica-evolution-form')) {
+  errors.push('GeneratedClinicalFormPage debe usar shell CICA evolución (CICA-L-04 / MF-FF-09)');
 }
 if (!existsSync(join(root, 'apps/web/src/pages/prescriptionTripleViewNav.ts'))) {
   errors.push('Falta prescriptionTripleViewNav.ts (MF-FF-10)');

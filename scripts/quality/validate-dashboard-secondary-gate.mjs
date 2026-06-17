@@ -14,7 +14,7 @@ const densityPath = join(root, 'apps/web/src/quality/uiDensityRules.ts');
 for (const rel of [
   'apps/web/src/navigation/epis2NavigationTree.ts',
   'apps/web/src/quality/uiDensityRules.ts',
-  'reports/epis2-mf-ff-04-dashboard-secondary.md',
+  'reports/archive/2026-06/epis2-mf-ff-04-dashboard-secondary.md',
 ]) {
   if (!existsSync(join(root, rel))) errors.push(`Falta ${rel}`);
 }

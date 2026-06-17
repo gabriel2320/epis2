@@ -24,10 +24,10 @@ export const epis2TraditionalChartTokens = {
 export const epis2ClinicalShellTokens = {
   institutionalNavy: epis2ClinicalShellColors.institutionalNavy,
   onInstitutional: epis2ClinicalShellColors.onInstitutional,
-  institutionalHeaderHeight: 60,
-  identityBandMinHeight: 80,
-  actionBarMinHeight: 52,
-  footerHeight: 36,
+  institutionalHeaderHeight: 48,
+  identityBandMinHeight: 64,
+  actionBarMinHeight: 44,
+  footerHeight: 28,
   allergyChipBg: epis2ClinicalShellColors.allergyChipBg,
   allergyChipBorder: epis2ClinicalShellColors.allergyChipBorder,
 } as const;

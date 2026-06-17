@@ -33,7 +33,7 @@ for (const id of [
 
 const requiredDocs = [
   'docs/quality/DI_CLINICAL_SECRETARY_SIGNOFF_CHECKLIST.md',
-  'reports/epis2-prog-di-close-2026.md',
+  'reports/archive/2026-06/epis2-prog-di-close-2026.md',
   'e2e/di-clinical-secretary-journey.spec.ts',
 ];
 

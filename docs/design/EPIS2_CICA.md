@@ -166,7 +166,7 @@ Una pantalla nueva solo se admite si responde **sí** a todas:
 
 Si falla una → sección, modal, menú «Más» o acción secundaria. Evaluación formal: [`EPIS2_CICA_SCREEN_GOVERNOR.md`](./EPIS2_CICA_SCREEN_GOVERNOR.md) + ledger `reports/cica-sg/`.
 
-Gate: `quality:cica-screen-admission-gate` · (roadmap) `quality:cica-screen-governor-gate`
+Gate: `quality:cica-screen-admission-gate` · `quality:cica-screen-governor-gate`
 
 ---
 

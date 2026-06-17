@@ -25,13 +25,13 @@
 
 | MF | Objetivo | Gate | Estado |
 |----|----------|------|--------|
-| **MF-AEST-01** | Desaturación acciones · `EpisPrimaryActionBar` | `quality:aesthetic-action-density-gate` | **En curso** |
+| **MF-AEST-01** | Desaturación acciones · `EpisPrimaryActionBar` | `quality:aesthetic-action-density-gate` | **Hecho** |
 | **MF-AEST-02** | Composición ficha clásica (5 tabs + Más) | `quality:classic-chart-composition-gate` | **Hecho** |
 | **MF-AEST-02b** | Tab overflow «Más» (medicamentos) | `quality:classic-chart-composition-gate` | **Hecho** |
-| **MF-AEST-03** | Papel standalone + nav diaria | `quality:paper-mode-standalone-gate` | **En curso** |
-| **MF-AEST-04** | Default `clinical-calm` | `quality:clinical-calm-default-gate` | Pendiente |
+| **MF-AEST-03** | Papel standalone + nav diaria | `quality:paper-mode-standalone-gate` | **Hecho** |
+| **MF-AEST-04** | Default `clinical-calm` | `quality:clinical-calm-default-gate` | **Hecho** |
 | **MF-AEST-05** | Navegación / breadcrumb / volver | `quality:clinical-navigation-clarity-gate` | **Hecho** |
-| **MF-AEST-06** | CICA scoring + loop CICA-L | `quality:cica-loop-close-gate` | **Parcial** · CICA-L-08 Fase E ✓ |
+| **MF-AEST-06** | CICA scoring + loop CICA-L | `quality:cica-loop-close-gate` | **Hecho** · PR-AEST-07 |
 
 ---
 
@@ -59,12 +59,12 @@ NO modo papel como card secundaria apretada
 ## Criterios rc4
 
 ```text
-[ ] MF-AEST-01 cerrado o signoff explícito
-[ ] MF-AEST-03 cerrado o signoff explícito
-[ ] Modo papel pantalla exclusiva + nav día anterior/siguiente
-[ ] 0 UX-BLOCKER · quality:ux-lab-close verde
-[ ] quality:aesthetic-reset-close verde
-[ ] Walkthrough humano aprobado
+[x] MF-AEST-01 cerrado
+[x] MF-AEST-03 cerrado
+[x] Modo papel pantalla exclusiva + nav día anterior/siguiente
+[x] 0 UX-BLOCKER · quality:ux-lab-close verde
+[x] quality:aesthetic-reset-close verde
+[x] Walkthrough humano aprobado
 ```
 
 **No taguear `v0.1-demo-rc4` si el modo papel sigue embebido en ficha clásica.**
@@ -78,6 +78,9 @@ npm run quality:gate -- quality:aesthetic-layout-gate
 npm run quality:gate -- quality:aesthetic-action-density-gate
 npm run quality:gate -- quality:paper-mode-standalone-gate
 npm run quality:gate -- quality:aesthetic-reset-close
+npm run quality:gate -- quality:cica-loop-close
+npm run quality:gate -- quality:clinical-calm-default-gate
+npm run quality:gate -- quality:pr-aest-07-close
 npm run quality:gate -- quality:root-script-surface-gate
 ```
 
