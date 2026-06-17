@@ -160,7 +160,9 @@ function tabLabel(tabId: CicaChartTabId): string {
 }
 
 /** Nivel 2 — paciente (cuando hay patientId). */
-export function buildCicaPatientSidebarSection(ctx: CicaSidebarNavContext): CicaSidebarSection | null {
+export function buildCicaPatientSidebarSection(
+  ctx: CicaSidebarNavContext,
+): CicaSidebarSection | null {
   const { pathname, patientId, onNavigate } = ctx;
   if (!patientId) return null;
 

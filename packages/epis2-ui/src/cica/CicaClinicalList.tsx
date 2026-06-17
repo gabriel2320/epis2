@@ -28,11 +28,7 @@ export function CicaClinicalList({
 }: CicaClinicalListProps) {
   if (items.length === 0) {
     return (
-      <EpisM3Text
-        role="bodyMedium"
-        color="text.secondary"
-        data-testid={`${testId}-empty`}
-      >
+      <EpisM3Text role="bodyMedium" color="text.secondary" data-testid={`${testId}-empty`}>
         {emptyMessage}
       </EpisM3Text>
     );

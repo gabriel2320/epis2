@@ -56,12 +56,7 @@ export function CicaLetterPageShell({
           flexWrap: 'wrap',
         }}
       >
-        <EpisButton
-          appearance="text"
-          size="small"
-          onClick={onBack}
-          data-testid={`${testId}-back`}
-        >
+        <EpisButton appearance="text" size="small" onClick={onBack} data-testid={`${testId}-back`}>
           {backLabel}
         </EpisButton>
         <Stack spacing={0.25} sx={{ minWidth: 0, flex: 1 }}>

@@ -11,10 +11,7 @@ export function useCicaNavigate() {
   const navigate = useNavigate();
 
   const go = useCallback(
-    (
-      screenId: CicaScreenId,
-      params?: PatientParams | PaperParams | EvolutionDetailParams,
-    ) => {
+    (screenId: CicaScreenId, params?: PatientParams | PaperParams | EvolutionDetailParams) => {
       const screen = findCicaScreenById(screenId);
       if (!screen) return;
 

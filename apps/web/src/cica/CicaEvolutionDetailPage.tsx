@@ -63,12 +63,14 @@ export function CicaEvolutionDetailPage() {
         pageHint={`Página ${book.index + 1} de ${book.total}`}
         onPrevious={
           book.older
-            ? () => go('evolution-detail', { patientId: page.patientId!, evolutionId: book.older!.id })
+            ? () =>
+                go('evolution-detail', { patientId: page.patientId!, evolutionId: book.older!.id })
             : undefined
         }
         onNext={
           book.newer
-            ? () => go('evolution-detail', { patientId: page.patientId!, evolutionId: book.newer!.id })
+            ? () =>
+                go('evolution-detail', { patientId: page.patientId!, evolutionId: book.newer!.id })
             : undefined
         }
         previousLabel="← Evolución anterior"

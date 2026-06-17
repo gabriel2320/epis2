@@ -5,7 +5,9 @@ import {
 } from '../components/chart/timeline/clinicalTimeline.js';
 
 /** Evoluciones ordenadas: más reciente primero (índice 0 = hoy). */
-export function listEvolutionEvents(timeline: PatientLongitudinalResponse['timeline']): TimelineEvent[] {
+export function listEvolutionEvents(
+  timeline: PatientLongitudinalResponse['timeline'],
+): TimelineEvent[] {
   return filterClinicalTimeline(timeline, 'evolutions').sort(
     (a, b) => new Date(b.at).getTime() - new Date(a.at).getTime(),
   );
