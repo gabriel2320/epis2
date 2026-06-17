@@ -22,10 +22,7 @@ import {
   useEpisClinicalBlueprintForm,
   type ClinicalLayoutAction,
 } from '@epis2/epis2-ui';
-import {
-  mergeDraftFieldMetaFromBody,
-  stripDraftMetaFromBody,
-} from '@epis2/clinical-productivity';
+import { mergeDraftFieldMetaFromBody, stripDraftMetaFromBody } from '@epis2/clinical-productivity';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearch } from '@tanstack/react-router';
 import { useAuth } from '../auth/AuthContext.js';
@@ -292,7 +289,7 @@ export function CicaNewPrescriptionPage() {
           data-cica-composition="classic"
           sx={{ width: '100%' }}
         >
-          {canPersistDraft ? (aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip />) : null}
+          {canPersistDraft ? aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip /> : null}
           <CicaFormGrid prose={blueprintUsesClinicalProse(prescriptionBlueprint.blueprintId)}>
             <EpisClinicalScrollspyLayout sections={scrollspySections}>
               <EpisClinicalFormRhf

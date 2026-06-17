@@ -110,7 +110,10 @@ export function CicaNewDocumentPage() {
   }, [detailQuery.data, reset, getValues]);
 
   const validateBeforeSave = useCallback(async () => {
-    const adminErrors = validateGeneratedFormAdminFields(certificateBlueprint.blueprintId, getValues());
+    const adminErrors = validateGeneratedFormAdminFields(
+      certificateBlueprint.blueprintId,
+      getValues(),
+    );
     for (const err of adminErrors) {
       setError(err.fieldId, { type: 'manual', message: err.message });
     }

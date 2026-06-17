@@ -26,10 +26,7 @@ import {
   useEpisClinicalBlueprintForm,
   type ClinicalLayoutAction,
 } from '@epis2/epis2-ui';
-import {
-  mergeDraftFieldMetaFromBody,
-  stripDraftMetaFromBody,
-} from '@epis2/clinical-productivity';
+import { mergeDraftFieldMetaFromBody, stripDraftMetaFromBody } from '@epis2/clinical-productivity';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearch } from '@tanstack/react-router';
 import { useAuth } from '../auth/AuthContext.js';
@@ -147,7 +144,10 @@ export function CicaNewEvolutionPage() {
       reset(mergePrefillOnlyEmpty(getValues(), contextPrefill));
     }
     if (activeLiveTemplateId) {
-      const livePrefill = buildLiveTemplatePrefill(activeLiveTemplateId, res.clinicalContext.summaryFields);
+      const livePrefill = buildLiveTemplatePrefill(
+        activeLiveTemplateId,
+        res.clinicalContext.summaryFields,
+      );
       if (Object.keys(livePrefill).length > 0) {
         reset(mergePrefillOnlyEmpty(getValues(), livePrefill));
       }
@@ -204,7 +204,10 @@ export function CicaNewEvolutionPage() {
   );
 
   const validateBeforeSave = useCallback(async () => {
-    const adminErrors = validateGeneratedFormAdminFields(evolutionBlueprint.blueprintId, getValues());
+    const adminErrors = validateGeneratedFormAdminFields(
+      evolutionBlueprint.blueprintId,
+      getValues(),
+    );
     for (const err of adminErrors) {
       setError(err.fieldId, { type: 'manual', message: err.message });
     }
@@ -274,7 +277,9 @@ export function CicaNewEvolutionPage() {
 
   if (!detailQuery.data) return null;
 
-  const canPersistDraft = Boolean(BLUEPRINT_DRAFT_TYPES[evolutionBlueprint.blueprintId] && patientId);
+  const canPersistDraft = Boolean(
+    BLUEPRINT_DRAFT_TYPES[evolutionBlueprint.blueprintId] && patientId,
+  );
 
   return (
     <FormProvider {...form}>
@@ -293,7 +298,7 @@ export function CicaNewEvolutionPage() {
           data-cica-composition="classic"
           sx={{ width: '100%' }}
         >
-          {canPersistDraft ? (aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip />) : null}
+          {canPersistDraft ? aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip /> : null}
           <CicaFormGrid prose={blueprintUsesClinicalProse(evolutionBlueprint.blueprintId)}>
             <EpisClinicalScrollspyLayout sections={scrollspySections}>
               <EpisClinicalFormRhf

@@ -82,7 +82,13 @@ export function StandalonePaperChartPage() {
   }
 
   if (detailQuery.isError) {
-    return <ErrorState title={copy.errors.genericTitle} message={copy.errors.genericMessage} onRetry={() => detailQuery.refetch()} />;
+    return (
+      <ErrorState
+        title={copy.errors.genericTitle}
+        message={copy.errors.genericMessage}
+        onRetry={() => detailQuery.refetch()}
+      />
+    );
   }
 
   if (!detailQuery.data) {
@@ -120,44 +126,46 @@ export function StandalonePaperChartPage() {
         />
         <ClinicalTransversalCommandDock patientId={patientId} testId="epis2-paper-command-bar" />
       </Box>
-      <Box sx={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-      <ClinicalScreen
-        profile="paper-mode"
-        title={copy.chartModes.paperStandalone.pageTitle}
-        hideActionBar
-        toolbar={
-          <PaperDayNavBar
-            paperDate={paperDate}
-            onPreviousDay={() => goPaperDate(shiftPaperDate(paperDate, -1))}
-            onToday={() => goPaperDate(new Date().toISOString().slice(0, 10))}
-            onNextDay={() => goPaperDate(shiftPaperDate(paperDate, 1))}
-            trailing={
-              detail.patient.demoCaseCode ? (
-                <EpisDemoBadgeChip
-                  label={copy.demoBadge}
-                  data-testid="epis2-paper-standalone-demo-badge"
-                />
-              ) : null
-            }
-          />
-        }
-        testId="clinical-screen"
+      <Box
+        sx={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}
       >
-        <PaperChartMode
-          routeTo={PAPER_STANDALONE_ROUTE}
-          patientId={patientId}
-          patientName={detail.patient.displayName}
-          recordNumber={detail.patient.demoCaseCode ?? detail.patient.id.slice(0, 8)}
-          userDisplayName={session?.user.displayName}
-          patientStrip={{
-            nationalId: demoNationalId(detail.patient.demoCaseCode),
-            ageYears: demoCase ? ageFromBirthDate(demoCase.birthDate) : undefined,
-            sexLabel,
-            serviceUnit: demoCase?.scenario ?? copy.chartModes.shellServiceDefault,
-            allergyLabels,
-          }}
-        />
-      </ClinicalScreen>
+        <ClinicalScreen
+          profile="paper-mode"
+          title={copy.chartModes.paperStandalone.pageTitle}
+          hideActionBar
+          toolbar={
+            <PaperDayNavBar
+              paperDate={paperDate}
+              onPreviousDay={() => goPaperDate(shiftPaperDate(paperDate, -1))}
+              onToday={() => goPaperDate(new Date().toISOString().slice(0, 10))}
+              onNextDay={() => goPaperDate(shiftPaperDate(paperDate, 1))}
+              trailing={
+                detail.patient.demoCaseCode ? (
+                  <EpisDemoBadgeChip
+                    label={copy.demoBadge}
+                    data-testid="epis2-paper-standalone-demo-badge"
+                  />
+                ) : null
+              }
+            />
+          }
+          testId="clinical-screen"
+        >
+          <PaperChartMode
+            routeTo={PAPER_STANDALONE_ROUTE}
+            patientId={patientId}
+            patientName={detail.patient.displayName}
+            recordNumber={detail.patient.demoCaseCode ?? detail.patient.id.slice(0, 8)}
+            userDisplayName={session?.user.displayName}
+            patientStrip={{
+              nationalId: demoNationalId(detail.patient.demoCaseCode),
+              ageYears: demoCase ? ageFromBirthDate(demoCase.birthDate) : undefined,
+              sexLabel,
+              serviceUnit: demoCase?.scenario ?? copy.chartModes.shellServiceDefault,
+              allergyLabels,
+            }}
+          />
+        </ClinicalScreen>
       </Box>
     </Box>
   );

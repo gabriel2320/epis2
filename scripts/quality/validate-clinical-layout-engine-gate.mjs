@@ -44,10 +44,7 @@ for (const profile of [
   }
 }
 
-const index = readFileSync(
-  join(root, 'packages/epis2-ui/src/layout/clinical/index.ts'),
-  'utf8',
-);
+const index = readFileSync(join(root, 'packages/epis2-ui/src/layout/clinical/index.ts'), 'utf8');
 for (const exportName of [
   'ClinicalScreen',
   'ClinicalSection',
@@ -62,9 +59,7 @@ for (const exportName of [
 }
 
 if (errors.length) {
-  console.error(
-    'clinical-layout-engine-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
-  );
+  console.error('clinical-layout-engine-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 

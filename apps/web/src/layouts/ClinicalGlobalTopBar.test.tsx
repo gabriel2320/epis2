@@ -77,10 +77,18 @@ describe('ClinicalGlobalTopBar', () => {
     renderWithEpisApp(<ClinicalGlobalTopBar active="clinical" />);
 
     expect(screen.getByTestId('epis2-clinical-nav-strip')).toBeInTheDocument();
-    expect(screen.getByTestId('epis2-clinical-nav-census')).toHaveTextContent(copy.clinicalNav.census);
-    expect(screen.getByTestId('epis2-clinical-nav-search')).toHaveTextContent(copy.clinicalNav.search);
-    expect(screen.getByTestId('epis2-clinical-nav-ficha')).toHaveTextContent(copy.clinicalNav.ficha);
-    expect(screen.getByTestId('epis2-clinical-nav-paper')).toHaveTextContent(copy.clinicalNav.paper);
+    expect(screen.getByTestId('epis2-clinical-nav-census')).toHaveTextContent(
+      copy.clinicalNav.census,
+    );
+    expect(screen.getByTestId('epis2-clinical-nav-search')).toHaveTextContent(
+      copy.clinicalNav.search,
+    );
+    expect(screen.getByTestId('epis2-clinical-nav-ficha')).toHaveTextContent(
+      copy.clinicalNav.ficha,
+    );
+    expect(screen.getByTestId('epis2-clinical-nav-paper')).toHaveTextContent(
+      copy.clinicalNav.paper,
+    );
     expect(screen.getByTestId('epis2-clinical-nav-more')).toHaveTextContent(copy.clinicalNav.more);
 
     expect(screen.queryByTestId('epis2-global-top-bar')).not.toBeInTheDocument();

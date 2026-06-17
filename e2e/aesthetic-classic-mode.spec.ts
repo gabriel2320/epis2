@@ -49,9 +49,7 @@ test.describe('Clinical Layout Engine — classic mode', () => {
     await expect(
       page.getByTestId('epis2-clinical-filterable-timeline-filter-evolutions'),
     ).toBeVisible();
-    await expect(
-      page.getByTestId('epis2-clinical-filterable-timeline-filter-labs'),
-    ).toHaveCount(0);
+    await expect(page.getByTestId('epis2-clinical-filterable-timeline-filter-labs')).toHaveCount(0);
   });
 
   test('ficha clásica tab Indicaciones — primaria contextual CICA-L-05', async ({ page }) => {
@@ -138,9 +136,7 @@ test.describe('Clinical Layout Engine — classic mode', () => {
     const demo = getDemoCaseByCode('DEMO-001');
     if (!demo) throw new Error('DEMO-001 missing');
     await pinDemoCase(page, 'DEMO-001');
-    await page.goto(
-      `/espacio/ficha/papel?patientId=${demo.patientId}&chartMode=paper`,
-    );
+    await page.goto(`/espacio/ficha/papel?patientId=${demo.patientId}&chartMode=paper`);
     await expect(page).toHaveURL(/\/espacio\/ficha\/papel/, { timeout: 15_000 });
     await expect(page.getByTestId('epis2-paper-standalone-page')).toBeVisible({ timeout: 15_000 });
     await expect(page.locator('[data-cica-composition="classic"]')).toBeVisible();

@@ -6,9 +6,7 @@ import { EPIS_CICA_SCREEN_REGISTRY } from './EPIS_CICA_SCREEN_REGISTRY.js';
 describe('cicaRoutes', () => {
   it('buildCicaPath resuelve rutas con params', () => {
     expect(buildCicaPath('patient-search')).toBe('/app/buscar');
-    expect(buildCicaPath('patient-summary', { patientId: 'p1' })).toBe(
-      '/app/pacientes/p1/resumen',
-    );
+    expect(buildCicaPath('patient-summary', { patientId: 'p1' })).toBe('/app/pacientes/p1/resumen');
     expect(buildCicaPath('paper-day', { patientId: 'p1', date: '2026-06-11' })).toBe(
       '/app/pacientes/p1/papel/dia/2026-06-11',
     );

@@ -46,9 +46,7 @@ if (!paperComponent.includes('data-cica-paper-standalone')) {
 }
 
 if (errors.length) {
-  console.error(
-    'cica-paper-standalone-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
-  );
+  console.error('cica-paper-standalone-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 

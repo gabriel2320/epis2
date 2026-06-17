@@ -97,7 +97,7 @@ Congelamiento vigente ([`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md)): **
 
 Plan detallado: [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-plan-post-rc3-2026.md). **Sin PHI real** — solo datos sintéticos DEMO/SIM.
 
-**Siguiente programa propuesto:** **PROG-UX-LAB** — [`quality/EPIS2_UX_LAB_MODERN_PLAN.md`](quality/EPIS2_UX_LAB_MODERN_PLAN.md) (Clinical Shift Lab · 4 tramos · congelamiento vigente).
+**Programa activo:** **PROG-PURGE-CICA** + merge **CICA/aesthetic** — [`product/EPIS2_PURGE_ARCHIVE_PLAN.md`](product/EPIS2_PURGE_ARCHIVE_PLAN.md) · UX-LAB ✓ cerrado · visual activa: `/app/*` CICA.
 
 ---
 
@@ -128,7 +128,7 @@ Plan detallado: [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-pla
 | OpenMRS / Carbon / EPIS overlay | Fósil | No | **Archive** — solo `migration/` + audit scripts |
 | `scripts/dev-agent` OpenClaw | Dev tooling | No | **Tools** — no producto clínico |
 | ~240 gates `validate-*` | Histórico MF | No | **Consolidar** — meta-gates abajo |
-| ~300 `reports/*.md` (raíz) | Histórico | No | **Archive** progresivo · lotes 1–5 → `reports/archive/2026-06/` (233) |
+| ~66 `reports/*.md` (raíz) | Activo + histórico reciente | No | **Archive** ✓ lote 6 (248) · **481** total en `reports/archive/2026-06/` · plan [`EPIS2_PURGE_ARCHIVE_PLAN.md`](product/EPIS2_PURGE_ARCHIVE_PLAN.md) |
 
 ---
 

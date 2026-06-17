@@ -50,7 +50,11 @@ for (const file of CICA_L_LEDGERS) {
     continue;
   }
   const ledger = readFileSync(path, 'utf8');
-  for (const section of ['## Fase A — Inventario', '## Fase C — Wireframe', '## Fase F — CICA Screen Score']) {
+  for (const section of [
+    '## Fase A — Inventario',
+    '## Fase C — Wireframe',
+    '## Fase F — CICA Screen Score',
+  ]) {
     if (!ledger.includes(section)) {
       errors.push(`${file} sin ${section}`);
     }

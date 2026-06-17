@@ -26,10 +26,7 @@ type CicaEvolutionListProps = {
 
 /** Lista cronológica de evoluciones — agrupada por periodo, sin grid administrativo. */
 function CicaEvolutionList({ timeline, testId = 'cica-evolutions-list' }: CicaEvolutionListProps) {
-  const grouped = useMemo(
-    () => filterAndGroupClinicalTimeline(timeline, 'evolutions'),
-    [timeline],
-  );
+  const grouped = useMemo(() => filterAndGroupClinicalTimeline(timeline, 'evolutions'), [timeline]);
 
   if (grouped.length === 0) {
     return (

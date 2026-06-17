@@ -1,5 +1,8 @@
 import type { ReactNode } from 'react';
-import type { ClinicalLayoutAction, ClinicalLayoutProfile } from '../layout/clinical/clinicalLayoutEngine.js';
+import type {
+  ClinicalLayoutAction,
+  ClinicalLayoutProfile,
+} from '../layout/clinical/clinicalLayoutEngine.js';
 import { ClinicalScreen } from '../layout/clinical/ClinicalScreen.js';
 import { findCicaScreenById } from './EPIS_CICA_SCREEN_REGISTRY.js';
 import type { CicaScreenId } from './cicaRoutes.js';

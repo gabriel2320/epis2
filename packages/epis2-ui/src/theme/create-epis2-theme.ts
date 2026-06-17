@@ -6,7 +6,11 @@ import { buildM3PaletteOptions, darkSurfaces, lightSurfaces } from './color-role
 import { buildEpis2Components } from './components.js';
 import type { Epis2MotionScheme } from './motion.js';
 import type { Epis2MaterialColorScheme } from './contracts/material-color-scheme.js';
-import { getMaterialScheme, resolveMaterialThemeId, DEFAULT_EPIS2_ACCENT } from './material-theme-registry.js';
+import {
+  getMaterialScheme,
+  resolveMaterialThemeId,
+  DEFAULT_EPIS2_ACCENT,
+} from './material-theme-registry.js';
 import { paletteFromMaterialScheme, surfacesFromScheme } from './m3-palette-from-scheme.js';
 import { epis2Shape, epis2ShapeBorderRadius } from './shape.js';
 import { epis2StateLayerOpacity } from './motion.js';

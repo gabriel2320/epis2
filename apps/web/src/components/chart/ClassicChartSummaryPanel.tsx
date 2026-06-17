@@ -76,7 +76,12 @@ export function ClassicChartSummaryPanel({
       return zones.active.slice(0, 4).map(formatMedicationLine).join('\n');
     }
     return summaryFields.pendingItems ?? summaryFields.activeMedications;
-  }, [demoCaseCode, longitudinal?.medications, summaryFields.pendingItems, summaryFields.activeMedications]);
+  }, [
+    demoCaseCode,
+    longitudinal?.medications,
+    summaryFields.pendingItems,
+    summaryFields.activeMedications,
+  ]);
 
   const examsText = useMemo(() => {
     const labs = selectLabHighlights(longitudinal?.observations ?? []);
@@ -88,7 +93,8 @@ export function ClassicChartSummaryPanel({
   }, [longitudinal?.observations, summaryFields.relevantLabs]);
 
   const documentsText = useMemo(() => {
-    const docs = longitudinal?.timeline.filter((e) => e.kind === 'document' || e.kind === 'draft') ?? [];
+    const docs =
+      longitudinal?.timeline.filter((e) => e.kind === 'document' || e.kind === 'draft') ?? [];
     if (docs.length > 0) {
       return formatTimelinePreviewLines(docs, 3);
     }

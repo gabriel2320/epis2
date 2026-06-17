@@ -24,7 +24,13 @@ export async function expectDualChartFicha(page: Page) {
   await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
 }
 
-export type ClassicChartTabId = 'summary' | 'evolutions' | 'orders' | 'exams' | 'documents' | 'more';
+export type ClassicChartTabId =
+  | 'summary'
+  | 'evolutions'
+  | 'orders'
+  | 'exams'
+  | 'documents'
+  | 'more';
 
 export async function openClassicChartTab(page: Page, tab: ClassicChartTabId) {
   const tabLocator = page.getByTestId(`classic-chart-tab-${tab}`);
@@ -36,10 +42,9 @@ export async function openClassicChartTab(page: Page, tab: ClassicChartTabId) {
 export async function expectFichaSummaryReady(page: Page) {
   await expectDualChartFicha(page);
   await page
-    .waitForResponse(
-      (resp) => resp.url().includes('/api/user/operational-memory') && resp.ok(),
-      { timeout: 15_000 },
-    )
+    .waitForResponse((resp) => resp.url().includes('/api/user/operational-memory') && resp.ok(), {
+      timeout: 15_000,
+    })
     .catch(() => undefined);
   await expect(async () => {
     await openClassicChartTab(page, 'summary');

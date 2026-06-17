@@ -1,12 +1,15 @@
 ---
-description: Patrón scaffold tramos IDC — API, UI, gates, matriz, E2E
-globs: apps/web/src/components/*DashboardTab.tsx,apps/api/src/dashboard/*.ts,scripts/quality/validate-tramo-*-gate.mjs,docs/product/EPIS2_TRAMO_*.{md},e2e/tramo-*.spec.ts,scripts/product/generate-idc-matrix.mjs
+description: ARCHIVADO — scaffold tramos IDC congelado; no retomar salvo MF + EPIS2_ALLOW_ARCHIVED_SCOPE=1
+globs: scripts/quality/validate-tramo-*-gate.mjs
 alwaysApply: false
 ---
 
-# Tramo scaffold (IDC tableros)
+# ARCHIVADO — Tramo scaffold (IDC tableros)
 
-Patrón canónico Tramos F–J. Una sesión = un tramo o microfase MF-TRAMO-*.
+> **Congelado** bajo PROG-PURGE-CICA. Ver `docs/archive/AGENT_SCOPE_EXCLUSIONS.md`.  
+> Experiencia activa: **CICA** `/app/*`. No expandir tramos A–K ni paneles IDC.
+
+Patrón histórico Tramos F–J (solo referencia forense):
 
 ## Secuencia
 

@@ -22,10 +22,7 @@ export function TraditionalOrdersSection({
 
   if (denseRows.length === 0) {
     return (
-      <Stack
-        data-testid={testId}
-        {...(cicaClassic ? { 'data-cica-composition': 'classic' } : {})}
-      >
+      <Stack data-testid={testId} {...(cicaClassic ? { 'data-cica-composition': 'classic' } : {})}>
         <EpisM3Text role="bodyMedium" color="text.secondary">
           {copy.longitudinal.emptySection}
         </EpisM3Text>
@@ -34,10 +31,7 @@ export function TraditionalOrdersSection({
   }
 
   return (
-    <Stack
-      data-testid={testId}
-      {...(cicaClassic ? { 'data-cica-composition': 'classic' } : {})}
-    >
+    <Stack data-testid={testId} {...(cicaClassic ? { 'data-cica-composition': 'classic' } : {})}>
       <TraditionalDenseSectionGrid
         rows={denseRows}
         variant="orders"

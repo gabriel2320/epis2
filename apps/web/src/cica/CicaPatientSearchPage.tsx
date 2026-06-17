@@ -1,5 +1,12 @@
 import { copy } from '@epis2/design-system';
-import { CicaResponsiveGrid, CicaScreenFrame, EpisButton, EpisM3Text, EpisTextField, Stack } from '@epis2/epis2-ui';
+import {
+  CicaResponsiveGrid,
+  CicaScreenFrame,
+  EpisButton,
+  EpisM3Text,
+  EpisTextField,
+  Stack,
+} from '@epis2/epis2-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { PatientSearchResults } from '../components/patient-search/PatientSearchResults.js';
@@ -14,7 +21,12 @@ export function CicaPatientSearchPage() {
   const [query, setQuery] = useState('');
   const [searchTerm, setSearchTerm] = useState<string | undefined>(undefined);
 
-  const { patients, refetch, isFetching, error: patientsError } = usePatientsQuery({
+  const {
+    patients,
+    refetch,
+    isFetching,
+    error: patientsError,
+  } = usePatientsQuery({
     search: searchTerm,
     enabled: true,
   });

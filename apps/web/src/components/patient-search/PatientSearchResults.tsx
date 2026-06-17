@@ -12,12 +12,8 @@ export type PatientSearchResultsProps = {
 
 function resultMeta(row: PatientListRow): string {
   const parts: string[] = [];
-  const narrative = row.demoCaseCode
-    ? getPrimaryNarrativeForDemoCode(row.demoCaseCode)
-    : undefined;
-  const census = row.demoCaseCode
-    ? getDemoShiftCensusPresentation(row.demoCaseCode)
-    : undefined;
+  const narrative = row.demoCaseCode ? getPrimaryNarrativeForDemoCode(row.demoCaseCode) : undefined;
+  const census = row.demoCaseCode ? getDemoShiftCensusPresentation(row.demoCaseCode) : undefined;
 
   if (narrative?.settingEs) parts.push(narrative.settingEs);
   if (row.demoCaseCode) parts.push(row.demoCaseCode);
@@ -27,7 +23,11 @@ function resultMeta(row: PatientListRow): string {
 }
 
 /** Lista clínica de resultados — sin grid ni gráficos (PR-AEST-PATIENT-SEARCH-01). */
-export function PatientSearchResults({ rows, emptyMessage, onOpenChart }: PatientSearchResultsProps) {
+export function PatientSearchResults({
+  rows,
+  emptyMessage,
+  onOpenChart,
+}: PatientSearchResultsProps) {
   if (rows.length === 0) {
     return (
       <EpisM3Text role="bodyMedium" color="text.secondary" data-testid="epis2-patient-search-empty">

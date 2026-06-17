@@ -44,10 +44,7 @@ export function TraditionalMedsSection({
 
   if (denseRows.length === 0) {
     return (
-      <Stack
-        data-testid={testId}
-        {...(cicaClassic ? { 'data-cica-composition': 'classic' } : {})}
-      >
+      <Stack data-testid={testId} {...(cicaClassic ? { 'data-cica-composition': 'classic' } : {})}>
         <EpisM3Text role="bodyMedium" color="text.secondary">
           {copy.longitudinal.emptySection}
         </EpisM3Text>
@@ -56,15 +53,8 @@ export function TraditionalMedsSection({
   }
 
   return (
-    <Stack
-      data-testid={testId}
-      {...(cicaClassic ? { 'data-cica-composition': 'classic' } : {})}
-    >
-      <TraditionalDenseSectionGrid
-        rows={denseRows}
-        variant="mar"
-        testId={`${testId}-dense-grid`}
-      />
+    <Stack data-testid={testId} {...(cicaClassic ? { 'data-cica-composition': 'classic' } : {})}>
+      <TraditionalDenseSectionGrid rows={denseRows} variant="mar" testId={`${testId}-dense-grid`} />
     </Stack>
   );
 }

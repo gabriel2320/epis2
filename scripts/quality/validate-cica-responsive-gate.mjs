@@ -53,9 +53,7 @@ for (const exportToken of ['CicaResponsiveGrid', 'CicaFormGrid', 'cicaResponsive
 }
 
 if (errors.length) {
-  console.error(
-    'cica-responsive-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
-  );
+  console.error('cica-responsive-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 

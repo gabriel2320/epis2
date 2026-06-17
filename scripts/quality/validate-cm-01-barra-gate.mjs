@@ -44,8 +44,8 @@ if (!layout.includes("borderRadius: '16px'")) {
   errors.push('layout barra debe usar radius Calm 16px');
 }
 
-if (!existsSync(join(root, 'reports/epis2-mf-cm-01-barra-unificada.md'))) {
-  errors.push('falta reports/epis2-mf-cm-01-barra-unificada.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-cm-01-barra-unificada.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-cm-01-barra-unificada.md');
 }
 
 if (errors.length) {

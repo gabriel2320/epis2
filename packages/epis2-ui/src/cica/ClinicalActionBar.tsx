@@ -1,4 +1,7 @@
-import type { ClinicalLayoutAction, ClinicalLayoutProfile } from '../layout/clinical/clinicalLayoutEngine.js';
+import type {
+  ClinicalLayoutAction,
+  ClinicalLayoutProfile,
+} from '../layout/clinical/clinicalLayoutEngine.js';
 import {
   ClinicalLayoutActionBar,
   type ClinicalLayoutActionBarProps,

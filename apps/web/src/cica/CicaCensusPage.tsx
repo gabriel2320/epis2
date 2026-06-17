@@ -30,7 +30,9 @@ export function CicaCensusPage() {
         </EpisM3Text>
         <PatientSearchResults
           rows={patients}
-          emptyMessage={patientsError != null ? copy.forms.loadPatientsError : copy.forms.searchPatient}
+          emptyMessage={
+            patientsError != null ? copy.forms.loadPatientsError : copy.forms.searchPatient
+          }
           onOpenChart={openChart}
         />
       </Stack>

@@ -25,7 +25,9 @@ function walk(dir) {
       const textBtn = (src.match(/appearance="text"/g) ?? []).length;
       const visibleActions = primary + outlined + Math.min(tonal, 2) + textBtn;
       if (visibleActions > 4 && !p.includes('Paper')) {
-        errors.push(`${p.replace(root + '/', '')} posible exceso de acciones visibles (${visibleActions})`);
+        errors.push(
+          `${p.replace(root + '/', '')} posible exceso de acciones visibles (${visibleActions})`,
+        );
       }
     }
   }
@@ -42,9 +44,7 @@ if ((search.match(/variant="contained"/g) ?? []).length !== 1) {
 }
 
 if (errors.length) {
-  console.error(
-    'cica-action-density-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
-  );
+  console.error('cica-action-density-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 

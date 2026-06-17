@@ -55,9 +55,7 @@ if (!router.includes('CicaAppLayout')) {
 }
 
 if (errors.length) {
-  console.error(
-    'cica-no-legacy-shell-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
-  );
+  console.error('cica-no-legacy-shell-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 

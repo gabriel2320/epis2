@@ -50,4 +50,6 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('clinical-command-bar-transversal-gate OK — barra NL transversal en superficies clínicas');
+console.log(
+  'clinical-command-bar-transversal-gate OK — barra NL transversal en superficies clínicas',
+);

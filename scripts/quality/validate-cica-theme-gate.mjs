@@ -70,11 +70,7 @@ for (const token of ['CicaThemeControls', 'CicaScreenTransition']) {
 }
 
 const cicaIndex = readFileSync(join(root, 'packages/epis2-ui/src/cica/index.ts'), 'utf8');
-for (const exportToken of [
-  'CicaThemeControls',
-  'useCicaThemeTokens',
-  'CicaScreenTransition',
-]) {
+for (const exportToken of ['CicaThemeControls', 'useCicaThemeTokens', 'CicaScreenTransition']) {
   if (!cicaIndex.includes(exportToken)) {
     errors.push(`packages/epis2-ui/src/cica/index.ts sin export ${exportToken}`);
   }

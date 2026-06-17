@@ -82,9 +82,7 @@ if (testRun.status !== 0) {
 }
 
 if (errors.length) {
-  console.error(
-    'cica-screen-governor-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
-  );
+  console.error('cica-screen-governor-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 

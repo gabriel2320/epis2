@@ -39,8 +39,7 @@ export function ClinicalTransversalCommandDock({
   }
 
   const patientId = patientIdOverride ?? patient?.id ?? rawSearch.patientId;
-  const workspace =
-    workspaceOverride ?? (isCensus ? 'command_center' : 'patient_chart');
+  const workspace = workspaceOverride ?? (isCensus ? 'command_center' : 'patient_chart');
 
   if (!isCensus && !patientId) {
     return null;

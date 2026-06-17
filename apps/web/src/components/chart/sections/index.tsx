@@ -80,7 +80,10 @@ export function resolveTraditionalSectionContent({
       break;
     case 'navDocuments':
       content = (
-        <TraditionalDocumentsSection demoCaseCode={demoCaseCode} compositionMode={compositionMode} />
+        <TraditionalDocumentsSection
+          demoCaseCode={demoCaseCode}
+          compositionMode={compositionMode}
+        />
       );
       break;
     case 'navAudit':

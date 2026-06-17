@@ -69,11 +69,7 @@ export function decideContainerFromScore(
   if (score <= 29) return 'inline-section';
 
   if (score <= 44) {
-    if (
-      proposal.riskLevel &&
-      proposal.riskLevel !== 'low' &&
-      !proposal.needsSpace
-    ) {
+    if (proposal.riskLevel && proposal.riskLevel !== 'low' && !proposal.needsSpace) {
       return 'modal';
     }
     return 'drawer';

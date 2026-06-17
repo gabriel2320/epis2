@@ -10,7 +10,10 @@ const errors = [];
 const screen = readFileSync(join(root, 'apps/web/src/pages/PatientSearchScreen.tsx'), 'utf8');
 const shell = readFileSync(join(root, 'apps/web/src/layouts/ClinicalShellLayout.tsx'), 'utf8');
 const router = readFileSync(join(root, 'apps/web/src/routes/router.tsx'), 'utf8');
-const formPage = readFileSync(join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'), 'utf8');
+const formPage = readFileSync(
+  join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'),
+  'utf8',
+);
 const engine = readFileSync(
   join(root, 'packages/epis2-ui/src/layout/clinical/clinicalLayoutEngine.ts'),
   'utf8',
@@ -69,14 +72,16 @@ if (!engine.includes("'patient-search'")) {
   errors.push('clinicalLayoutEngine sin profile patient-search');
 }
 
-if (!readFileSync(join(root, 'packages/design-system/src/copy/es.ts'), 'utf8').includes('patientSearch:')) {
+if (
+  !readFileSync(join(root, 'packages/design-system/src/copy/es.ts'), 'utf8').includes(
+    'patientSearch:',
+  )
+) {
   errors.push('copy es.ts sin bloque patientSearch');
 }
 
 if (errors.length) {
-  console.error(
-    'patient-search-layout-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
-  );
+  console.error('patient-search-layout-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 

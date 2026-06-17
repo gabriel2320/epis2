@@ -45,8 +45,7 @@ export function ClinicalNavStrip({ testId = 'epis2-clinical-nav-strip' }: Clinic
   const isCensus = pathname === EPIS2_CLINICAL_HOME;
   const isFicha = pathname === CICA_RETURN_ROUTES.patientChart;
   const isPaper = pathname.startsWith(PAPER_STANDALONE_ROUTE);
-  const isClinicalForm =
-    pathname.startsWith('/espacio/') && !isCensus && !isFicha && !isPaper;
+  const isClinicalForm = pathname.startsWith('/espacio/') && !isCensus && !isFicha && !isPaper;
 
   const role = session?.user.role ?? 'physician';
   const roleLabel = isClinicalRole(role) ? copy.roles[role] : role;

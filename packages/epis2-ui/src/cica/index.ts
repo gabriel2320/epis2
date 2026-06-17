@@ -81,15 +81,9 @@ export {
   type CicaPatientIdentityBandProps,
 } from './CicaPatientIdentityBand.js';
 export { CicaContextStrip, type CicaContextStripProps } from './CicaContextStrip.js';
-export {
-  ClinicalActionBar,
-  type ClinicalActionBarProps,
-} from './ClinicalActionBar.js';
+export { ClinicalActionBar, type ClinicalActionBarProps } from './ClinicalActionBar.js';
 export { CicaScreenFrame, type CicaScreenFrameProps } from './CicaScreenFrame.js';
-export {
-  CicaScreenTransition,
-  type CicaScreenTransitionProps,
-} from './CicaScreenTransition.js';
+export { CicaScreenTransition, type CicaScreenTransitionProps } from './CicaScreenTransition.js';
 export {
   CicaPatientScreenFrame,
   type CicaPatientScreenFrameProps,

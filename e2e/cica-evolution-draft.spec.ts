@@ -39,7 +39,9 @@ test.describe('CICA Clean Room — borrador evolución', () => {
     await expect(page).toHaveURL(new RegExp(`/app/pacientes/${demo.patientId}/evoluciones`), {
       timeout: 15_000,
     });
-    await expect(page.getByTestId('cica-patient-evolutions-screen')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('cica-patient-evolutions-screen')).toBeVisible({
+      timeout: 15_000,
+    });
     await expect(page.getByTestId('cica-evolutions-list')).toBeVisible();
     await expect(page.getByTestId('cica-chart-tab-evoluciones')).toBeVisible();
   });
@@ -51,10 +53,9 @@ test.describe('CICA Clean Room — borrador evolución', () => {
     await pinCicaDemoCase(page, 'DEMO-001');
     await page.goto(`/app/pacientes/${demo.patientId}/evoluciones/nueva`);
 
-    await expect(page).toHaveURL(
-      new RegExp(`/app/pacientes/${demo.patientId}/evoluciones/nueva`),
-      { timeout: 15_000 },
-    );
+    await expect(page).toHaveURL(new RegExp(`/app/pacientes/${demo.patientId}/evoluciones/nueva`), {
+      timeout: 15_000,
+    });
     await expect(page.getByTestId('cica-screen-new-evolution')).toBeVisible({ timeout: 15_000 });
     await expect(page.getByTestId('epis2-cica-evolution-form')).toBeVisible();
     await expect(page.getByTestId('epis2-field-subjective-rich-input')).toBeVisible();

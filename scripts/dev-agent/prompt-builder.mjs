@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { DEV_SUBAGENTS } from './subagents.mjs';
+import { DEV_SUBAGENTS, ARCHIVED_SUBAGENT_IDS } from './subagents.mjs';
 
 function readExcerpt(root, rel, maxLines = 40) {
   const path = join(root, rel);
@@ -27,6 +27,16 @@ export function buildSubagentPrompt(root, subagentId, context = {}) {
   const agent = DEV_SUBAGENTS[subagentId];
   if (!agent) {
     throw new Error(`Subagente desconocido: ${subagentId}`);
+  }
+  if (ARCHIVED_SUBAGENT_IDS.has(subagentId)) {
+    return `# ARCHIVADO — subagente \`${subagentId}\`
+
+**No usar para planificar.** ${agent.archiveReason ?? 'Ver docs/archive/AGENT_SCOPE_EXCLUSIONS.md'}
+
+Canon activo: \`docs/EPIS2_CURRENT_STATE.md\` · CICA: \`apps/web/src/cica/\`
+
+Reabrir solo con MF autorizada + \`EPIS2_ALLOW_ARCHIVED_SCOPE=1\`.
+`;
   }
 
   const tramo = context.tramo?.toUpperCase();
@@ -66,9 +76,10 @@ ${tramoBlock}
 
 ## Reglas EPIS2 (no negociables)
 
-- Home = \`/comando\` — nunca dashboard como home
+- Home = censo \`/espacio/buscar-paciente\` · experiencia activa CICA \`/app/*\`
 - PostgreSQL = SoT; IA no firma ni aprueba
 - Sin import desde \`../Epis\` sin \`legacy-import-manifest.json\`
+- No planificar desde \`reports/archive/\` ni programas en \`docs/archive/ARCHIVED_PROGRAMS_INDEX.md\`
 - No commit ni push salvo orden explícita del humano
 - Cerrar sesión con reporte en \`reports/\`
 

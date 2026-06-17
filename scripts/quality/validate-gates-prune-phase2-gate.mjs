@@ -3,7 +3,11 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { KEEP_ACTIVE, PROMOTE_TO_ACTIVE, loadManifestWired } from '../../tools/gates/gate-classify.mjs';
+import {
+  KEEP_ACTIVE,
+  PROMOTE_TO_ACTIVE,
+  loadManifestWired,
+} from '../../tools/gates/gate-classify.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
@@ -26,10 +30,14 @@ const activeMax = catalog.prunePhase === '3' ? 58 : 45;
 const activeMin = catalog.prunePhase === '3' ? 48 : 30;
 
 if (activeCount > activeMax) {
-  errors.push(`gates activos=${activeCount} (esperado <=${activeMax} post phase${catalog.prunePhase})`);
+  errors.push(
+    `gates activos=${activeCount} (esperado <=${activeMax} post phase${catalog.prunePhase})`,
+  );
 }
 if (activeCount < activeMin) {
-  errors.push(`gates activos=${activeCount} (esperado >=${activeMin} post phase${catalog.prunePhase})`);
+  errors.push(
+    `gates activos=${activeCount} (esperado >=${activeMin} post phase${catalog.prunePhase})`,
+  );
 }
 if (archivedCount < 230) {
   errors.push(`gates archived=${archivedCount} (esperado >=230 post phase2)`);

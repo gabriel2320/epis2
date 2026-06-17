@@ -51,10 +51,21 @@ function documentStatusLabel(status: PatientDocumentStatus): string {
 function IdentityField({ label, value }: { label: string; value: string }) {
   return (
     <Stack spacing={0} sx={{ minWidth: 0 }}>
-      <Typography variant="caption" color="text.secondary" lineHeight={1.2} sx={{ fontSize: '0.6875rem' }}>
+      <Typography
+        variant="caption"
+        color="text.secondary"
+        lineHeight={1.2}
+        sx={{ fontSize: '0.6875rem' }}
+      >
         {label}
       </Typography>
-      <Typography variant="body2" fontWeight={500} noWrap lineHeight={1.3} sx={{ fontSize: '0.8125rem' }}>
+      <Typography
+        variant="body2"
+        fontWeight={500}
+        noWrap
+        lineHeight={1.3}
+        sx={{ fontSize: '0.8125rem' }}
+      >
         {value}
       </Typography>
     </Stack>
@@ -126,7 +137,12 @@ export function PatientIdentityBand({
             {displayName}
           </Typography>
           {metaLine ? (
-            <Typography variant="caption" color="text.secondary" noWrap sx={{ fontSize: '0.75rem' }}>
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              noWrap
+              sx={{ fontSize: '0.75rem' }}
+            >
               {metaLine}
             </Typography>
           ) : null}
@@ -185,7 +201,12 @@ export function PatientIdentityBand({
         {admissionDate ? (
           <IdentityField label={copy.chartModes.identityAdmission} value={admissionDate} />
         ) : null}
-        <Stack direction="row" alignItems="center" spacing={0.75} sx={{ minWidth: 0, flexWrap: 'wrap' }}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          spacing={0.75}
+          sx={{ minWidth: 0, flexWrap: 'wrap' }}
+        >
           <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.6875rem' }}>
             {copy.chartModes.identityAllergies}:
           </Typography>

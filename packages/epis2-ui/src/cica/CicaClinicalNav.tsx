@@ -43,10 +43,7 @@ export function CicaClinicalNav({
 }: CicaClinicalNavProps) {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
   const theme = useTheme();
-  const hideNavLabels = useMediaQuery(
-    `(max-width:${cicaNavLabelMinPx - 1}px)`,
-    { noSsr: true },
-  );
+  const hideNavLabels = useMediaQuery(`(max-width:${cicaNavLabelMinPx - 1}px)`, { noSsr: true });
   const stackNav = useMediaQuery(theme.breakpoints.down('sm'), { noSsr: true });
 
   return (
@@ -104,8 +101,7 @@ export function CicaClinicalNav({
 
 function NavButton({ item, hideLabel }: { item: CicaNavItem; hideLabel: boolean }) {
   const shortLabel = NAV_SHORT_LABELS[item.id];
-  const displayLabel =
-    hideLabel && shortLabel ? shortLabel : item.label;
+  const displayLabel = hideLabel && shortLabel ? shortLabel : item.label;
 
   return (
     <EpisButton

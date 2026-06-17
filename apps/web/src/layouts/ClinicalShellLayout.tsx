@@ -61,12 +61,22 @@ export function ClinicalShellLayout() {
               flexDirection: 'column',
             }}
             data-testid={
-              isPatientSearch ? 'epis2-clinical-shell-patient-search' : 'epis2-clinical-shell-minimal'
+              isPatientSearch
+                ? 'epis2-clinical-shell-patient-search'
+                : 'epis2-clinical-shell-minimal'
             }
           >
             <OfflineStatusBanner />
             <ClinicalNavStrip />
-            <Box sx={{ flex: 1, minHeight: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+            <Box
+              sx={{
+                flex: 1,
+                minHeight: 0,
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
               <Outlet />
             </Box>
           </Box>

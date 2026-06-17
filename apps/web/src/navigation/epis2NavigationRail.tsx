@@ -52,7 +52,6 @@ const WORKSPACE_ICONS: Record<EpisClinicalWorkspaceId, ReactNode> = {
   admin_system: <AdminPanelSettingsIcon />,
 };
 
-
 const CONTEXTUAL_ICONS: Record<string, ReactNode> = {
   'daily-agenda': <CalendarMonthIcon />,
   'waiting-room': <ForumIcon />,

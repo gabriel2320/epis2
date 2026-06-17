@@ -8,8 +8,16 @@ import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
 /** CICA Clean Room — ficha resumen (/app/pacientes/:patientId/resumen). */
 export function CicaPatientSummaryPage() {
   const page = useCicaPatientPage();
-  const { patientId, detailQuery, presentation, summaryFields, longitudinal, demoCase, go, goPath } =
-    page;
+  const {
+    patientId,
+    detailQuery,
+    presentation,
+    summaryFields,
+    longitudinal,
+    demoCase,
+    go,
+    goPath,
+  } = page;
 
   if (!patientId || !presentation) return null;
 

@@ -28,10 +28,7 @@ export function inferLayoutProfile(
 ): EpisLayoutProfile {
   if (container === 'dedicated-mode' && proposal.needsPrint) return 'paper-mode';
   if (proposal.needsLargeTextArea || proposal.documentLifecycle === 'draft') return 'clinical-form';
-  if (
-    proposal.dataComplexity === 'high' &&
-    (container === 'tab' || container === 'tab-composed')
-  ) {
+  if (proposal.dataComplexity === 'high' && (container === 'tab' || container === 'tab-composed')) {
     return 'classic-chart';
   }
   if (proposal.needsAuditTrail) return 'audit';

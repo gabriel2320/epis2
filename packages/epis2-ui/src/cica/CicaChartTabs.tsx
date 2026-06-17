@@ -1,10 +1,7 @@
 import { copy } from '@epis2/design-system';
 import Stack from '@mui/material/Stack';
 import type { CicaChartTabId } from './CICA_CHART_TAB_REGISTRY.js';
-import {
-  CICA_CHART_TAB_REGISTRY,
-  inferChartTabFromPathname,
-} from './CICA_CHART_TAB_REGISTRY.js';
+import { CICA_CHART_TAB_REGISTRY, inferChartTabFromPathname } from './CICA_CHART_TAB_REGISTRY.js';
 import { buildCicaPath, todayIsoDate } from './cicaRoutes.js';
 import { EpisButton } from '../primitives/EpisButton.js';
 import { useEpis2ThemePreferences } from '../providers/EpisThemePreferences.js';
@@ -13,10 +10,7 @@ import { cicaMotion, cicaTransition, shouldAnimate } from './cicaMotion.js';
 import { cicaHorizontalScrollSx, cicaShellPaddingXSx } from './cicaResponsive.js';
 import { cicaTokens } from './cicaTokens.js';
 
-const TAB_LABELS: Record<
-  (typeof CICA_CHART_TAB_REGISTRY)[number]['labelKey'],
-  string
-> = {
+const TAB_LABELS: Record<(typeof CICA_CHART_TAB_REGISTRY)[number]['labelKey'], string> = {
   summary: copy.chartModes.classicTabs.summary,
   evolutions: copy.chartModes.classicTabs.evolutions,
   orders: copy.chartModes.classicTabs.orders,
@@ -48,7 +42,11 @@ export function CicaChartTabs({
     animate,
     cicaMotion.duration.tab,
   );
-  const indicatorTransition = cicaTransition(['opacity', 'transform'], animate, cicaMotion.duration.tab);
+  const indicatorTransition = cicaTransition(
+    ['opacity', 'transform'],
+    animate,
+    cicaMotion.duration.tab,
+  );
 
   return (
     <Stack

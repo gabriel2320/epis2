@@ -129,30 +129,22 @@ export function getTableroState(root) {
 }
 
 /** @param {string[]} files @param {{ tramo?: string, phase?: string }} opts */
-export function suggestPrimarySubagent(files, { tramo, phase = 'B' } = {}) {
-  if (tramo) return 'tramo-implementer';
+export function suggestPrimarySubagent(files, { tramo, phase: _phase = 'cica' } = {}) {
+  if (tramo && process.env.EPIS2_ALLOW_ARCHIVED_SCOPE === '1') return 'tramo-implementer';
   const text = files.join(' ').toLowerCase();
+  if (text.includes('cica/') || text.includes('src/cica')) return 'golden-guardian';
   if (text.includes('local-ai') || text.includes('assist') || text.includes('ollama')) {
     return 'ollama-clinical';
   }
   if (text.includes('e2e/') || text.includes('golden-clinical')) return 'golden-guardian';
-  if (
-    text.includes('apps/web') ||
-    text.includes('epis2-ui') ||
-    text.includes('clinical-productivity')
-  ) {
-    return phase === 'A' ? 'm3-guardian' : 'layers-integrator';
-  }
-  if (text.includes('microphase') || text.includes('reports/epis2')) return 'ledger-keeper';
-  if (text.includes('.github') || text.includes('scripts/quality')) return 'ci-parity';
-  return phase === 'B' ? 'layers-integrator' : 'gate-runner';
+  if (text.includes('reports/') || text.includes('docs/')) return 'ollama-dev-writer';
+  if (text.includes('apps/web') || text.includes('epis2-ui')) return 'golden-guardian';
+  if (text.includes('microphase') || text.includes('ledger')) return 'ledger-keeper';
+  if (text.includes('.github') || text.includes('scripts/quality')) return 'gate-runner';
+  return 'golden-guardian';
 }
 
 /** @param {string} root */
-export function getActivePhaseHint(root) {
-  const planPath = join(root, 'docs/product/EPIS2_GLOBAL_DEV_PLAN.md');
-  if (!existsSync(planPath)) return 'B';
-  const plan = readFileSync(planPath, 'utf8');
-  if (plan.includes('Command palette')) return 'B';
-  return process.env.EPIS2_DEV_AGENT_PHASE ?? 'B';
+export function getActivePhaseHint(_root) {
+  return process.env.EPIS2_DEV_AGENT_PHASE ?? 'cica';
 }

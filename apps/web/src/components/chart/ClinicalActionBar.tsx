@@ -97,9 +97,7 @@ export function ClinicalActionBar({
         spacing={1}
         useFlexGap
       >
-        {!minimal ? (
-          <ChartModeSwitch mode={chartMode} onChange={onChartModeChange} />
-        ) : null}
+        {!minimal ? <ChartModeSwitch mode={chartMode} onChange={onChartModeChange} /> : null}
         {statusChips}
         {!minimal ? <Box sx={{ flex: 1, minWidth: 0 }}>{commandBar}</Box> : null}
       </Stack>

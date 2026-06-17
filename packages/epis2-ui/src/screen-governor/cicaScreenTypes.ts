@@ -79,7 +79,12 @@ export type EpisScreenDefinition = {
   primaryAction: { id: string; label: string; risk: RiskLevel };
   secondaryActions: Array<{ id: string; label: string; placement: 'visible' | 'overflow' }>;
   requiredSignals: Array<
-    'patient-identity' | 'demo-state' | 'draft-status' | 'ai-state' | 'back-to-chart' | 'audit-trail'
+    | 'patient-identity'
+    | 'demo-state'
+    | 'draft-status'
+    | 'ai-state'
+    | 'back-to-chart'
+    | 'audit-trail'
   >;
   gates: string[];
 };

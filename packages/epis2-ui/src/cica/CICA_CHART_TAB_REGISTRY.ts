@@ -12,13 +12,7 @@ export type CicaChartTabId =
 export type CicaChartTabDefinition = {
   id: CicaChartTabId;
   /** Clave en copy.chartModes.classicTabs */
-  labelKey:
-    | 'summary'
-    | 'evolutions'
-    | 'orders'
-    | 'exams'
-    | 'documents'
-    | 'paper';
+  labelKey: 'summary' | 'evolutions' | 'orders' | 'exams' | 'documents' | 'paper';
   screenId: CicaScreenId;
   /** Segmento bajo /app/pacientes/:patientId/ (papel usa :date) */
   pathKind: 'segment' | 'paper-day';

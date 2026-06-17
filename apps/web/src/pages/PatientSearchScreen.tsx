@@ -30,7 +30,12 @@ export function PatientSearchScreen() {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [loadError, setLoadError] = useState<string | undefined>();
 
-  const { patients, refetch, isFetching, error: patientsError } = usePatientsQuery({
+  const {
+    patients,
+    refetch,
+    isFetching,
+    error: patientsError,
+  } = usePatientsQuery({
     search: searchTerm,
     enabled: fetchEnabled,
   });
@@ -61,9 +66,7 @@ export function PatientSearchScreen() {
     if (row) pinPatient(row);
     void navigate({
       to: '/espacio/ficha',
-      search: isDualChartModesEnabled()
-        ? { patientId, chartMode: 'traditional' }
-        : { patientId },
+      search: isDualChartModesEnabled() ? { patientId, chartMode: 'traditional' } : { patientId },
     });
   };
 
@@ -85,82 +88,82 @@ export function PatientSearchScreen() {
         testId="epis2-generated-clinical-page"
         hideActionBar
       >
-          <Stack spacing={3} data-testid="epis2-patient-search-hero">
-            <EpisM3Text role="headlineLarge" component="h2">
-              {copy.patientSearch.heroQuestion}
-            </EpisM3Text>
+        <Stack spacing={3} data-testid="epis2-patient-search-hero">
+          <EpisM3Text role="headlineLarge" component="h2">
+            {copy.patientSearch.heroQuestion}
+          </EpisM3Text>
 
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems="stretch">
-              <EpisTextField
-                fullWidth
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder={copy.chartModes.censusCommandPlaceholder}
-                inputProps={{ 'data-testid': 'epis2-patient-search-hero-input' }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') runSearch();
-                }}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    minHeight: 52,
-                    borderRadius: 2,
-                  },
-                }}
-              />
-              <EpisButton
-                variant="contained"
-                size="large"
-                onClick={runSearch}
-                disabled={isFetching}
-                data-testid="epis2-patient-search-submit"
-                sx={{ minHeight: 52, px: 3, flexShrink: 0 }}
-              >
-                {copy.patientSearch.searchAction}
-              </EpisButton>
-            </Stack>
-
-            <Box>
-              <EpisButton
-                appearance="text"
-                size="small"
-                onClick={() => setShowAdvanced((v) => !v)}
-                data-testid="epis2-patient-search-more-filters"
-              >
-                {copy.patientSearch.moreFilters}
-              </EpisButton>
-              <Collapse in={showAdvanced}>
-                <Box sx={{ pt: 1.5, maxWidth: 420 }}>
-                  <EpisTextField
-                    fullWidth
-                    size="small"
-                    label={copy.patientSearch.identifierLabel}
-                    placeholder={copy.patientSearch.identifierPlaceholder}
-                    value={identifierFilter}
-                    onChange={(e) => setIdentifierFilter(e.target.value)}
-                    inputProps={{ 'data-testid': 'epis2-patient-search-identifier' }}
-                  />
-                </Box>
-              </Collapse>
-            </Box>
-          </Stack>
-
-          {loadError ? (
-            <EpisM3Text role="bodyMedium" color="error.main">
-              {loadError}
-            </EpisM3Text>
-          ) : null}
-
-          <Stack spacing={1.5} sx={{ pt: 1 }}>
-            <EpisM3Text role="titleMedium" component="h2">
-              {copy.patientSearch.resultsHeading}
-            </EpisM3Text>
-            <PatientSearchResults
-              rows={patients}
-              emptyMessage={copy.longitudinal.emptySection}
-              onOpenChart={openChart}
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems="stretch">
+            <EpisTextField
+              fullWidth
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={copy.chartModes.censusCommandPlaceholder}
+              inputProps={{ 'data-testid': 'epis2-patient-search-hero-input' }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') runSearch();
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  minHeight: 52,
+                  borderRadius: 2,
+                },
+              }}
             />
+            <EpisButton
+              variant="contained"
+              size="large"
+              onClick={runSearch}
+              disabled={isFetching}
+              data-testid="epis2-patient-search-submit"
+              sx={{ minHeight: 52, px: 3, flexShrink: 0 }}
+            >
+              {copy.patientSearch.searchAction}
+            </EpisButton>
           </Stack>
-        </ClinicalScreen>
+
+          <Box>
+            <EpisButton
+              appearance="text"
+              size="small"
+              onClick={() => setShowAdvanced((v) => !v)}
+              data-testid="epis2-patient-search-more-filters"
+            >
+              {copy.patientSearch.moreFilters}
+            </EpisButton>
+            <Collapse in={showAdvanced}>
+              <Box sx={{ pt: 1.5, maxWidth: 420 }}>
+                <EpisTextField
+                  fullWidth
+                  size="small"
+                  label={copy.patientSearch.identifierLabel}
+                  placeholder={copy.patientSearch.identifierPlaceholder}
+                  value={identifierFilter}
+                  onChange={(e) => setIdentifierFilter(e.target.value)}
+                  inputProps={{ 'data-testid': 'epis2-patient-search-identifier' }}
+                />
+              </Box>
+            </Collapse>
+          </Box>
+        </Stack>
+
+        {loadError ? (
+          <EpisM3Text role="bodyMedium" color="error.main">
+            {loadError}
+          </EpisM3Text>
+        ) : null}
+
+        <Stack spacing={1.5} sx={{ pt: 1 }}>
+          <EpisM3Text role="titleMedium" component="h2">
+            {copy.patientSearch.resultsHeading}
+          </EpisM3Text>
+          <PatientSearchResults
+            rows={patients}
+            emptyMessage={copy.longitudinal.emptySection}
+            onOpenChart={openChart}
+          />
+        </Stack>
+      </ClinicalScreen>
     </Box>
   );
 }

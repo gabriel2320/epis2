@@ -32,10 +32,7 @@ type CicaDocumentListProps = {
 
 /** Lista cronológica de documentos — agrupada por periodo, sin grid administrativo. */
 function CicaDocumentList({ timeline, testId = 'cica-documents-list' }: CicaDocumentListProps) {
-  const grouped = useMemo(
-    () => filterAndGroupClinicalTimeline(timeline, 'documents'),
-    [timeline],
-  );
+  const grouped = useMemo(() => filterAndGroupClinicalTimeline(timeline, 'documents'), [timeline]);
 
   if (grouped.length === 0) {
     return (

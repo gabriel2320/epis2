@@ -100,9 +100,7 @@ export function PatientClinicalSummaryGrid({
 }: PatientClinicalSummaryGridProps) {
   const cicaClassic = compositionMode === 'cica-classic';
   const effectiveSurface: ClinicalSummarySurface = cicaClassic ? 'clinical-flat' : surfaceProfile;
-  const nowKeys = cicaClassic
-    ? (['pendingItems', 'clinicalAlerts'] as const)
-    : NOW_KEYS;
+  const nowKeys = cicaClassic ? (['pendingItems', 'clinicalAlerts'] as const) : NOW_KEYS;
   const [timelineFilter, setTimelineFilter] = useState<TimelineKindFilter>('all');
   const clinicalProblems = useMemo(
     () => longitudinal?.problems.filter((p) => !isSurgicalHistoryDescription(p.description)) ?? [],
@@ -275,11 +273,7 @@ export function PatientClinicalSummaryGrid({
                 medicationZones.active,
               )}
               {!cicaClassic
-                ? renderMedicationZone(
-                    'prn',
-                    copy.clinicalSummary.medsPrnZone,
-                    medicationZones.prn,
-                  )
+                ? renderMedicationZone('prn', copy.clinicalSummary.medsPrnZone, medicationZones.prn)
                 : null}
               {!cicaClassic
                 ? renderMedicationZone(

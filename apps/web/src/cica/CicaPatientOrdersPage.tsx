@@ -35,8 +35,7 @@ function CicaOrdersList({
   testId = 'cica-orders-list',
 }: CicaOrdersListProps) {
   const zones = useMemo(() => partitionMedicationZones(medications), [medications]);
-  const hasMeds =
-    zones.active.length > 0 || zones.prn.length > 0 || zones.suspended.length > 0;
+  const hasMeds = zones.active.length > 0 || zones.prn.length > 0 || zones.suspended.length > 0;
 
   const demoRows = useMemo(
     () => (demoCaseCode ? getDemoChartSectionRows(demoCaseCode, 'navOrders') : []),

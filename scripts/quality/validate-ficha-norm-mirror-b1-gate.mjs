@@ -31,8 +31,8 @@ if (!resolver.includes('isChartMirrorBatch1Section')) {
   errors.push('resolveTraditionalSectionContent debe aplicar espejo batch1');
 }
 
-if (!existsSync(join(root, 'reports/epis2-mf-norm-09-sections-b1.md'))) {
-  errors.push('falta reports/epis2-mf-norm-09-sections-b1.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-norm-09-sections-b1.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-norm-09-sections-b1.md');
 }
 
 if (errors.length) {

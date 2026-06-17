@@ -67,9 +67,7 @@ if (!copy.includes('clinicalNav:')) {
 }
 
 if (errors.length) {
-  console.error(
-    'classic-shell-layout-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
-  );
+  console.error('classic-shell-layout-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 

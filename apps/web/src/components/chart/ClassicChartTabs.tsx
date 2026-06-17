@@ -1,13 +1,6 @@
 import { copy } from '@epis2/design-system';
-import {
-  Box,
-  epis2ClassicChartTabSx,
-  epis2ClassicChartTabsNavSx,
-} from '@epis2/epis2-ui';
-import {
-  CLASSIC_CHART_TAB_IDS,
-  type ClassicChartTabId,
-} from './classicChartTabConfig.js';
+import { Box, epis2ClassicChartTabSx, epis2ClassicChartTabsNavSx } from '@epis2/epis2-ui';
+import { CLASSIC_CHART_TAB_IDS, type ClassicChartTabId } from './classicChartTabConfig.js';
 
 export type ClassicChartTabsProps = {
   activeTab: ClassicChartTabId;

@@ -2,7 +2,10 @@ import { copy } from '@epis2/design-system';
 import type { ClinicalFormBlueprint } from '@epis2/clinical-forms';
 import { getFormScreenNode } from '@epis2/clinical-forms';
 import type { ClinicalLayoutAction } from '@epis2/epis2-ui';
-import { tabForSection, type ClassicChartTabId } from '../components/chart/classicChartTabConfig.js';
+import {
+  tabForSection,
+  type ClassicChartTabId,
+} from '../components/chart/classicChartTabConfig.js';
 import type { TraditionalSectionId } from '../components/chart/TraditionalSectionNav.js';
 import { EPIS2_CLINICAL_HOME } from '../routes/home.js';
 

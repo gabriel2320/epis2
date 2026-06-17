@@ -10,7 +10,7 @@ const errors = [];
 for (const rel of [
   'docs/design/EPIS2_FICHA_NORMALIZACION_PLAN.md',
   'docs/design/references/benchmark-board.md',
-  'reports/epis2-mf-norm-00-benchmark.md',
+  'reports/archive/2026-06/epis2-mf-norm-00-benchmark.md',
 ]) {
   if (!existsSync(join(root, rel))) errors.push(`falta: ${rel}`);
 }

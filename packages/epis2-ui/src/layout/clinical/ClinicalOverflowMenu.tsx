@@ -10,10 +10,7 @@ export type ClinicalOverflowMenuProps = {
 };
 
 /** Menú «Más» — acciones secundarias normalizadas por el layout engine. */
-export function ClinicalOverflowMenu({
-  actions,
-  label = 'Más',
-}: ClinicalOverflowMenuProps) {
+export function ClinicalOverflowMenu({ actions, label = 'Más' }: ClinicalOverflowMenuProps) {
   const menuId = useId();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);

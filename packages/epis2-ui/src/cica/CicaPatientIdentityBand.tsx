@@ -56,7 +56,11 @@ export function CicaPatientIdentityBand({
           <Typography
             variant="subtitle1"
             fontWeight={600}
-            sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: { xs: 'normal', md: 'nowrap' } }}
+            sx={{
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: { xs: 'normal', md: 'nowrap' },
+            }}
           >
             {displayName}
             {ageYears !== undefined ? ` · ${ageYears} años` : ''}
@@ -66,7 +70,11 @@ export function CicaPatientIdentityBand({
             <Typography
               variant="body2"
               color="text.secondary"
-              sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: { xs: 'normal', md: 'nowrap' } }}
+              sx={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: { xs: 'normal', md: 'nowrap' },
+              }}
             >
               {metaLine}
             </Typography>

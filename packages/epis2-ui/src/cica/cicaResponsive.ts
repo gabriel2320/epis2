@@ -109,9 +109,7 @@ export function cicaIsClinicalMaxWidthProfile(
   return (cicaClinicalMaxWidthProfiles as readonly string[]).includes(profile);
 }
 
-export function cicaResponsiveContainerSx(
-  profile?: CicaLayoutProfile,
-): SxProps<Theme> {
+export function cicaResponsiveContainerSx(profile?: CicaLayoutProfile): SxProps<Theme> {
   return {
     width: '100%',
     maxWidth: profile ? cicaMaxContentWidth[profile] : '100%',
@@ -213,9 +211,29 @@ export function cicaPaperModeToolbarSx(): SxProps<Theme> {
 }
 
 export const CICA_BREAKPOINT_TABLE = [
-  { key: 'xs', minPx: cicaBreakpoints.xs, maxPx: cicaBreakpoints.sm - 1, shellPadding: cicaShellPaddingX.xs },
-  { key: 'sm', minPx: cicaBreakpoints.sm, maxPx: cicaBreakpoints.md - 1, shellPadding: cicaShellPaddingX.sm },
-  { key: 'md', minPx: cicaBreakpoints.md, maxPx: cicaBreakpoints.lg - 1, shellPadding: cicaShellPaddingX.md },
-  { key: 'lg', minPx: cicaBreakpoints.lg, maxPx: cicaBreakpoints.xl - 1, shellPadding: cicaShellPaddingX.lg },
+  {
+    key: 'xs',
+    minPx: cicaBreakpoints.xs,
+    maxPx: cicaBreakpoints.sm - 1,
+    shellPadding: cicaShellPaddingX.xs,
+  },
+  {
+    key: 'sm',
+    minPx: cicaBreakpoints.sm,
+    maxPx: cicaBreakpoints.md - 1,
+    shellPadding: cicaShellPaddingX.sm,
+  },
+  {
+    key: 'md',
+    minPx: cicaBreakpoints.md,
+    maxPx: cicaBreakpoints.lg - 1,
+    shellPadding: cicaShellPaddingX.md,
+  },
+  {
+    key: 'lg',
+    minPx: cicaBreakpoints.lg,
+    maxPx: cicaBreakpoints.xl - 1,
+    shellPadding: cicaShellPaddingX.lg,
+  },
   { key: 'xl', minPx: cicaBreakpoints.xl, maxPx: null, shellPadding: cicaShellPaddingX.xl },
 ] as const;

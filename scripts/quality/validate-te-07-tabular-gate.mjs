@@ -51,8 +51,8 @@ for (const needle of ['TraditionalDenseSectionGrid', 'mapMarRowsToDenseTabular',
   if (!medsSrc.includes(needle)) errors.push(`TraditionalMedsSection falta ${needle}`);
 }
 
-if (!existsSync(join(root, 'reports/epis2-mf-te-07-tabular.md'))) {
-  errors.push('falta reports/epis2-mf-te-07-tabular.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-te-07-tabular.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-te-07-tabular.md');
 }
 
 const vitest = spawnSync(

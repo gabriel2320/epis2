@@ -41,9 +41,7 @@ if (!policy.includes('CICA Clean Room')) {
 }
 
 if (errors.length) {
-  console.error(
-    'cica-no-dashboard-mode-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
-  );
+  console.error('cica-no-dashboard-mode-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 

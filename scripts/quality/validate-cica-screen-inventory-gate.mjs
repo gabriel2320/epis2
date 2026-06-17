@@ -100,7 +100,9 @@ if (active?.activeScreenId === 'CICA-L-04') {
     errors.push('GeneratedClinicalFormPage sin testId epis2-cica-evolution-form');
   }
   if (formPage.includes('epis2-evolution-traditional-shell')) {
-    errors.push('GeneratedClinicalFormPage no debe usar TraditionalEhrMode en evolución (CICA-L-04)');
+    errors.push(
+      'GeneratedClinicalFormPage no debe usar TraditionalEhrMode en evolución (CICA-L-04)',
+    );
   }
   if (!intent.includes("blueprint.blueprintId === 'evolution_note'")) {
     errors.push('clinicalIntent.ts sin primaria Guardar para evolution_note');
@@ -192,10 +194,7 @@ if (active?.activeScreenId === 'CICA-L-09') {
 }
 
 if (active?.activeScreenId === 'CICA-L-10') {
-  const paper = readFileSync(
-    join(root, 'apps/web/src/pages/StandalonePaperChartPage.tsx'),
-    'utf8',
-  );
+  const paper = readFileSync(join(root, 'apps/web/src/pages/StandalonePaperChartPage.tsx'), 'utf8');
   if (!paper.includes('data-cica-composition="classic"')) {
     errors.push('StandalonePaperChartPage sin data-cica-composition=classic (CICA-L-10)');
   }
@@ -239,9 +238,7 @@ if (active?.activeScreenId === 'CICA-L-11') {
 }
 
 if (errors.length) {
-  console.error(
-    'cica-screen-inventory-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
-  );
+  console.error('cica-screen-inventory-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 

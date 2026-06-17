@@ -58,10 +58,7 @@ if (!traditional.includes('surfaceProfile="calm"')) {
   errors.push('TraditionalEhrMode debe pasar surfaceProfile="calm" en resumen CICA');
 }
 
-const paper = readFileSync(
-  join(root, 'apps/web/src/pages/StandalonePaperChartPage.tsx'),
-  'utf8',
-);
+const paper = readFileSync(join(root, 'apps/web/src/pages/StandalonePaperChartPage.tsx'), 'utf8');
 if (!paper.includes('epis2PaperCalmCanvasSx')) {
   errors.push('StandalonePaperChartPage debe usar epis2PaperCalmCanvasSx');
 }
@@ -77,9 +74,7 @@ try {
 }
 
 if (errors.length) {
-  console.error(
-    'clinical-calm-default-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
-  );
+  console.error('clinical-calm-default-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 

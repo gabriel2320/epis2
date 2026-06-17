@@ -1,8 +1,4 @@
-import {
-  buildCicaPath,
-  findCicaScreenById,
-  type CicaScreenId,
-} from '@epis2/epis2-ui';
+import { buildCicaPath, findCicaScreenById, type CicaScreenId } from '@epis2/epis2-ui';
 import { useCallback } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 

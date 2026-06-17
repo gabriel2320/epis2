@@ -48,13 +48,11 @@ export function CicaPatientScreenFrame({
       {...(title ? { title } : {})}
       {...(subtitle ? { subtitle } : {})}
       identityBand={<CicaPatientIdentityBand {...identity} />}
-      {...(contextItems.length > 0 ? { contextStrip: <CicaContextStrip items={contextItems} /> } : {})}
+      {...(contextItems.length > 0
+        ? { contextStrip: <CicaContextStrip items={contextItems} /> }
+        : {})}
       tabs={
-        <CicaChartTabs
-          patientId={patientId}
-          activeTabId={activeTabId}
-          onNavigate={onNavigate}
-        />
+        <CicaChartTabs patientId={patientId} activeTabId={activeTabId} onNavigate={onNavigate} />
       }
       actions={actions}
       hideActionBar={hideActionBar}

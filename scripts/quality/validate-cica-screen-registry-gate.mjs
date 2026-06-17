@@ -95,9 +95,7 @@ if (epicrisisIdx !== -1) {
 }
 
 if (errors.length) {
-  console.error(
-    'cica-screen-registry-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
-  );
+  console.error('cica-screen-registry-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 

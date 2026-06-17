@@ -41,7 +41,10 @@ export type PaperModeToolbarProps = {
   testId?: string;
 };
 
-export function PaperModeToolbar({ children, testId = 'cica-paper-toolbar' }: PaperModeToolbarProps) {
+export function PaperModeToolbar({
+  children,
+  testId = 'cica-paper-toolbar',
+}: PaperModeToolbarProps) {
   return (
     <Box data-testid={testId} sx={cicaPaperModeToolbarSx()}>
       {children}

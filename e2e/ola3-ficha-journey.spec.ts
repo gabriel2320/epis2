@@ -36,7 +36,9 @@ test.describe('Ola 3 — ficha longitudinal CTAs', () => {
     const problems = page.getByTestId('epis2-clinical-summary-grid-problems');
     await expect(problems).toBeVisible({ timeout: 15_000 });
     await expect(problems).toContainText('Hipertensión arterial esencial (sintético)');
-    await expect(page.getByRole('button', { name: copy.longitudinal.registerProblem })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: copy.longitudinal.registerProblem })).toHaveCount(
+      0,
+    );
   });
 
   test('ficha abre bandeja de resultados desde resumen', async ({ page }) => {
@@ -55,10 +57,14 @@ test.describe('Ola 3 — ficha longitudinal CTAs', () => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-005');
     await expect(page.getByTestId('epis2-cds-patient-view')).toBeVisible({ timeout: 15_000 });
-    await expect(page.locator('[data-testid^="epis2-cds-patient-view-card-"]').first()).toBeVisible();
+    await expect(
+      page.locator('[data-testid^="epis2-cds-patient-view-card-"]').first(),
+    ).toBeVisible();
   });
 
-  test('ficha DEMO-001 muestra timeline y medicamentos activos en evoluciones', async ({ page }) => {
+  test('ficha DEMO-001 muestra timeline y medicamentos activos en evoluciones', async ({
+    page,
+  }) => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-001');
     await openFichaEvolutions(page);

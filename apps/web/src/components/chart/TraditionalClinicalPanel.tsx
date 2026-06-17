@@ -27,11 +27,7 @@ export function TraditionalClinicalPanel({
   const sectionLabel = copy.chartModes[activeSection];
 
   return (
-    <Box
-      data-testid={testId}
-      data-epis2-chart-scroll="main"
-      sx={epis2ClassicChartContentSx()}
-    >
+    <Box data-testid={testId} data-epis2-chart-scroll="main" sx={epis2ClassicChartContentSx()}>
       {!hideSectionTitle ? (
         <EpisM3Text
           role="titleMedium"

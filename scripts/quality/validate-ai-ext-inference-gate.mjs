@@ -13,7 +13,7 @@ const required = [
   ['inference policy', 'services/local-ai/src/inference/policy.ts'],
   ['openai provider', 'services/local-ai/src/inference/openaiProvider.ts'],
   ['ADR-005', 'docs/adr/ADR-005-external-inference-provider.md'],
-  ['report', 'reports/epis2-ai-ext-inference.md'],
+  ['report', 'reports/archive/2026-06/epis2-ai-ext-inference.md'],
 ];
 
 for (const [label, rel] of required) {

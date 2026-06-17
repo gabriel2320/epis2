@@ -296,7 +296,10 @@ export function auditCicaScreen(input: CicaScreenAuditInput): {
   const maxCardDepth = clinicalLayoutTokens.maxCardNesting;
 
   if (!input.patientIdentityVisible) {
-    findings.push({ severity: 'UX-MAJOR', message: 'CICA Ley 1: identidad de paciente no visible' });
+    findings.push({
+      severity: 'UX-MAJOR',
+      message: 'CICA Ley 1: identidad de paciente no visible',
+    });
     score -= 15;
   }
   if (!input.hasReturnNavigation) {
