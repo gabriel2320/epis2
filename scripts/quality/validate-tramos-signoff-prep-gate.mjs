@@ -13,7 +13,7 @@ if (!existsSync(walkthrough)) errors.push('falta EPIS2_PILOT_INSTITUTIONAL_WALKT
 const session = join(root, 'scripts/quality/run-tramos-clinical-signoff-session.mjs');
 if (!existsSync(session)) errors.push('falta run-tramos-clinical-signoff-session.mjs');
 
-const report = join(root, 'reports/epis2-tramos-ak-signoff-prep-2026-06-07.md');
+const report = join(root, 'reports/archive/2026-06/epis2-tramos-ak-signoff-prep-2026-06-07.md');
 if (!existsSync(report)) errors.push('falta reporte signoff prep');
 
 for (const gate of [

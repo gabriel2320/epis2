@@ -7,7 +7,7 @@
   "gitHead": "f56b7d2",
   "conciliacionClosedAt": "2026-06-14",
   "conciliacionCloseReport": "reports/epis2-prog-conciliacion-triada-close-2026.md",
-  "conciliacionPlan": "reports/epis2-plan-conciliacion-triada-2026-06-14.md",
+  "conciliacionPlan": "reports/archive/2026-06/epis2-plan-conciliacion-triada-2026-06-14.md",
   "canonicalPlan": "docs/product/EPIS2_PROG_DETERMINISTIC_INTELLIGENCE.md",
   "prerequisite": "quality:experiencia-core-signoff-gate",
   "prerequisiteMet": "2026-06-13",

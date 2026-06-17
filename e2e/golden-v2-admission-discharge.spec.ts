@@ -3,7 +3,7 @@
  * @see docs/quality/EPIS2_GOLDEN_JOURNEYS.md §4
  */
 import { test, expect } from '@playwright/test';
-import { fillTransversalCommand, loginAsPhysician, pinDemoCase } from './helpers/demoPatient.js';
+import { expectDualChartFicha, fillTransversalCommand, loginAsPhysician, pinDemoCase } from './helpers/demoPatient.js';
 
 const CRITICAL_DEMO_ID = 'f0000004-0000-4000-8000-000000000001';
 
@@ -24,9 +24,12 @@ test.describe('Golden journey V2 UI — hospitalización', () => {
     }
 
     await pinDemoCase(page, 'DEMO-001');
-    await page.getByTestId('epis2-ficha-history').click();
-    await expect(page.getByTestId('epis2-longitudinal-admit-hospital')).toBeVisible();
-    await page.getByTestId('epis2-longitudinal-admit-hospital').click();
+    await expectDualChartFicha(page);
+    await fillTransversalCommand(page, 'ingreso hospitalario');
+    await expect(page.getByTestId('epis2-command-confirmation-dialog')).toBeVisible({
+      timeout: 15_000,
+    });
+    await page.getByTestId('epis2-command-confirm').click();
     await expect(page).toHaveURL(/\/espacio\/ingreso/);
     await expect(page.getByTestId('epis2-form-admission_note')).toBeVisible();
     await page.getByLabel(/Motivo de ingreso/i).fill('Ingreso demo golden V2');

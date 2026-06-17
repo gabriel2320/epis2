@@ -27,8 +27,8 @@
 | Documento | Cambio |
 |-----------|--------|
 | `docs/product/EPIS2_SCREEN_CONNECTION_MAP.md` §7 | C3, C5, C6 → RESUELTO; C4 → PARCIAL; C1/C2/C7 sin cambio |
-| `reports/epis2-complete-product-gap-audit.md` | Nota supersession WIDGET-01 / documentos UI |
-| `reports/epis2-project-audit-2026-06-05.md` | Nota piloto → GO DEMO |
+| `reports/archive/2026-06/epis2-complete-product-gap-audit.md` | Nota supersession WIDGET-01 / documentos UI |
+| `reports/archive/2026-06/epis2-project-audit-2026-06-05.md` | Nota piloto → GO DEMO |
 
 ---
 

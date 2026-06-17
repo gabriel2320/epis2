@@ -25,7 +25,7 @@ for (const token of [
 }
 
 const e2e = readFileSync(join(root, 'e2e/tramo-c-admission.spec.ts'), 'utf8');
-if (!e2e.includes('epis2-longitudinal-open-service-census')) {
+if (!e2e.includes('epis2-service-census')) {
   errors.push('e2e tramo-c-admission sin journey censo');
 }
 

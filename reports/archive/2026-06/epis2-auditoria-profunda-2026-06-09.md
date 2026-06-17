@@ -26,7 +26,7 @@
 npm run check          OK — lint + typecheck 13 workspaces + architecture:validate 17/17
 npm run test           OK — 226 archivos · 646/646 tests · 276s
 npm run db:validate    OK — 33 migraciones (001_extensions … 033_procedure_request_draft_type)
-quality:m3-human-pilot OK — V1–V6 6/6 E2E (reports/epis2-m3-human-pilot-2026-06-09.md)
+quality:m3-human-pilot OK — V1–V6 6/6 E2E (reports/archive/2026-06/epis2-m3-human-pilot-2026-06-09.md)
 ```
 
 Limitación: `npm audit` **no disponible** en este equipo — el mirror npmmirror no implementa
@@ -142,7 +142,7 @@ Veredicto: M3 **intencional y clínico** (denso, radios 2–8px, base 14px) — 
 |-----------|---------|------------|
 | `docs/product/EPIS2_TABLERO.md` | L31 «piloto M3 pendiente» · L39 P1 · L68 capa L5 | Piloto M3 automatizado **OK 2026-06-09**; promover P1 → P1b impresión restante |
 | `docs/product/EPIS2_GLOBAL_DEV_PLAN.md` | L68 `[ ] Piloto humano M3` | `[x]` automatizado · PEND-006 parcial (falta carta + checkbox humano opcional) |
-| `reports/epis2-pendientes-registro-2026-06-09.md` | PEND-006 | m3-human-pilot cerrado (automatizado); resta signoff humano opcional |
+| `reports/archive/2026-06/epis2-auditoria-profunda-2026-06-09.md` | PEND-006 | m3-human-pilot cerrado (automatizado); resta signoff humano opcional |
 | `docs/product/EPIS2_TABLERO.md` | Cabecera HEAD `88ec444` | HEAD real `2d77bfe` |
 
 ---

@@ -67,7 +67,7 @@ Reporte en `reports/` con decisiones, riesgos y próximo paso exacto.
 
 ```text
 EPIS2-00 ✓ … EPIS2-12 ✓ · MUI-01…10 ✓ · M3-00…09 ✓ · GO DEMO ✓ · Plan A–G ✓
-Planes F+G cerrados: reports/epis2-plan-f-complete.md · reports/epis2-plan-g-complete.md
+Planes F+G cerrados: reports/archive/2026-06/epis2-plan-f-complete.md · reports/archive/2026-06/epis2-plan-g-complete.md
 ```
 
 ## Memoria legacy

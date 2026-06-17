@@ -80,4 +80,4 @@ npm run quality:design-mode-gate
 - `apps/web/src/design/radScreenRegistry.ts` — inventario auditado
 - `apps/web/src/quality/uiDensityRules.ts` — presupuestos MF-UI
 - `docs/design/EPIS2_UI_ARCHITECTURE.md`
-- `reports/epis2-rad-m3-global-plan-2026-06-07.md`
+- `reports/archive/2026-06/epis2-rad-m3-global-plan-2026-06-07.md`

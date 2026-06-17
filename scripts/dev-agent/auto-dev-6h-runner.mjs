@@ -80,7 +80,7 @@ function archiveBranchesReport() {
     },
   );
   const lines = (r.stdout ?? '').split('\n').filter(Boolean);
-  const reportPath = join(root, 'reports/epis2-branch-archive-2026-06-10.md');
+  const reportPath = join(root, 'reports/archive/2026-06/epis2-branch-archive-2026-06-10.md');
   const body = [
     '# EPIS2 — Archivo ramas (auto-dev 6h)',
     '',
@@ -232,7 +232,7 @@ function main() {
     if (!runGit(['push', 'origin', 'master']).ok) process.exit(1);
   }
 
-  const closePath = join(root, 'reports/epis2-auto-dev-6h-close-2026-06-10.md');
+  const closePath = join(root, 'reports/archive/2026-06/epis2-auto-dev-6h-close-2026-06-10.md');
   if (!dryRun) {
     writeFileSync(
       closePath,

@@ -246,9 +246,9 @@ IA desconectada = producto usable; con IA = trazabilidad `ai_runs` + fuentes cit
 | **P1** | **Piloto humano** | `PILOT_DEMO_CHECKLIST.md` — journey V0–V5 con usuarios demo |
 | **P2** | **Post-MVP** | OIDC (ADR-006), RLS enforce, HL7 inbound productivo |
 | — | V1–V3 UI | ✓ signoffs v1/v2/v3 |
-| — | Plan F+G | ✓ `reports/epis2-plan-f-complete.md`, `epis2-plan-g-complete.md`, `epis2-plan-f-g-ui-signoff.md` |
+| — | Plan F+G | ✓ `reports/archive/2026-06/epis2-plan-f-complete.md`, `epis2-plan-g-complete.md`, `epis2-plan-f-g-ui-signoff.md` |
 
-V0 cerrado (GO DEMO + Modo tablero). Ver `reports/epis2-audit-and-dev-plans-2026-06-05.md`.
+V0 cerrado (GO DEMO + Modo tablero). Ver `reports/archive/2026-06/epis2-audit-and-dev-plans-2026-06-05.md`.
 
 ---
 
@@ -257,4 +257,4 @@ V0 cerrado (GO DEMO + Modo tablero). Ver `reports/epis2-audit-and-dev-plans-2026
 - [EPIS2_COMPLETE_CAPABILITY_MAP.md](./EPIS2_COMPLETE_CAPABILITY_MAP.md)
 - [EPIS2_DASHBOARD_MODE.md](./EPIS2_DASHBOARD_MODE.md)
 - [../ROADMAP.md](../ROADMAP.md) — fases técnicas EPIS2-NN
-- [../../reports/epis2-complete-emr-product-plan.md](../../reports/epis2-complete-emr-product-plan.md)
+- [../../reports/archive/2026-06/epis2-complete-emr-product-plan.md](../../reports/archive/2026-06/epis2-complete-emr-product-plan.md)

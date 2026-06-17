@@ -1,7 +1,7 @@
 # EPIS2 V1 — Ficha longitudinal (slice demo)
 
 **Estado:** gate V1 demo cerrado — API Plan C + UI export/OCR (2026-06-05)  
-**Ver también:** `reports/epis2-v1-plan-c-complete.md`, `reports/epis2-v1-ui-signoff.md`
+**Ver también:** `reports/archive/2026-06/epis2-v1-plan-c-complete.md`, `reports/epis2-v1-ui-signoff.md`
 
 ## Entregables
 

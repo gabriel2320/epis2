@@ -56,7 +56,7 @@ Leyenda: ✓ · ◐ parcial · ✗ fuera de alcance actual.
 | **Labs in-repo** | Sintéticos, intel externa, no imprescindibles al arranque | `services/clinical-case-intel`, `services/drug-intel` |
 | **Runtime IA** | Assist opcional | `services/local-ai`, `packages/ai-client` |
 | **Tools / dev** | Gates, agentes, CI, auditorías | `scripts/`, `.github/`, `.cursor/` |
-| **Archive / histórico** | Legacy, candidatos, reportes viejos | `migration/`, `docs/archive/`, `reports/archive/` · índice [`reports/README.md`](../reports/README.md) |
+| **Archive / histórico** | Legacy, candidatos, reportes viejos | `migration/`, `docs/archive/`, `reports/archive/` · índice [`reports/archive/2026-06/README.md`](../reports/archive/2026-06/README.md) |
 | **Satélites externos** | Contrato JSON/HTTP, no import cruzado | `../epis2-evolab`, `../EPIS2-MedRepo` — [`EPIS2_TRIADA_REPOS.md`](product/EPIS2_TRIADA_REPOS.md) |
 
 Regla: **core no depende de labs** — gate `quality:core-no-labs-imports-gate` · deuda conocida: tablas staging + rutas admin de promoción (sin import npm).
@@ -128,7 +128,7 @@ Plan detallado: [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-pla
 | OpenMRS / Carbon / EPIS overlay | Fósil | No | **Archive** — solo `migration/` + audit scripts |
 | `scripts/dev-agent` OpenClaw | Dev tooling | No | **Tools** — no producto clínico |
 | ~240 gates `validate-*` | Histórico MF | No | **Consolidar** — meta-gates abajo |
-| ~460 `reports/*.md` (raíz) | Histórico | No | **Archive** progresivo · lote 1 → `reports/archive/2026-06/` |
+| ~300 `reports/*.md` (raíz) | Histórico | No | **Archive** progresivo · lotes 1–5 → `reports/archive/2026-06/` (233) |
 
 ---
 

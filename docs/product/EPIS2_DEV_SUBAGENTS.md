@@ -2,7 +2,7 @@
 
 **Versión:** 1.0 · **Fecha:** 2026-06-04  
 **Orquestación:** `docs/product/EPIS2_DEV_AGENT_ORCHESTRATION.md`  
-**Origen:** `reports/epis2-master-architect-program-v2.md` §5 + Semana 4 dev automation
+**Origen:** `reports/archive/2026-06/epis2-master-architect-program-v2.md` §5 + Semana 4 dev automation
 
 ---
 

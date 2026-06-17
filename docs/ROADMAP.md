@@ -12,7 +12,7 @@ Cada hito termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 **Objetivo:** Canon, alcance, migración, reglas Cursor. Sin código productivo.
 
-**Entregables:** `docs/*`, `.cursor/rules/*`, `reports/epis2-00-*.md`
+**Entregables:** `docs/*`, `.cursor/rules/*`, `reports/archive/2026-06/epis2-00-*.md`
 
 **Gate:** Sin `package.json` productivo. Visión en una página. MVP ≤8 actividades.
 
@@ -22,7 +22,7 @@ Cada hito termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 **Entregables:** estructura `apps/`, `packages/`, `services/`, TS strict, lint, test, Docker Compose (Postgres + Ollama), CI, `.env.example`, health checks.
 
-**Gate:** `npm run check` · `npm run test` · `npm run db:validate` — ver `reports/epis2-01-monorepo-bootstrap.md`
+**Gate:** `npm run check` · `npm run test` · `npm run db:validate` — ver `reports/archive/2026-06/epis2-01-monorepo-bootstrap.md`
 
 ---
 
@@ -30,7 +30,7 @@ Cada hito termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 **Entregables:** tema MUI EPIS2, login, Command Center vacío, power bar, layout clínico, errores, microcopy ES.
 
-**Gate humano:** ¿Se entiende en 3 s? ¿Una acción principal? ¿No parece dashboard? — ver `reports/epis2-02-visual-shell.md`
+**Gate humano:** ¿Se entiende en 3 s? ¿Una acción principal? ¿No parece dashboard? — ver `reports/archive/2026-06/epis2-02-visual-shell.md`
 
 ---
 
@@ -38,7 +38,7 @@ Cada hito termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 **Entregables:** usuarios sintéticos, RBAC, sesión, rutas protegidas, audit login.
 
-**Gate:** Permiso por acción. Sin contraseñas reales en repo. — ver `reports/epis2-03-auth-security.md`
+**Gate:** Permiso por acción. Sin contraseñas reales en repo. — ver `reports/archive/2026-06/epis2-03-auth-security.md`
 
 ---
 
@@ -46,7 +46,7 @@ Cada hito termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 **Entregables:** pacientes, encuentros, problemas, observaciones, notas, borradores, versiones, aprobaciones, auditoría.
 
-**Gate:** Autor + timestamp en escrituras. Borradores ≠ notas finales. — `reports/epis2-04-postgres-core.md`
+**Gate:** Autor + timestamp en escrituras. Borradores ≠ notas finales. — `reports/archive/2026-06/epis2-04-postgres-core.md`
 
 ---
 
@@ -56,7 +56,7 @@ Cada hito termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 **Comandos:** buscar, resumir, evolucionar, epicrisis, receta, laboratorio.
 
-**Gate:** Suite ≥100 comandos; ambiguos bloqueados; no autorizados bloqueados. — `reports/epis2-05-command-registry.md`
+**Gate:** Suite ≥100 comandos; ambiguos bloqueados; no autorizados bloqueados. — `reports/archive/2026-06/epis2-05-command-registry.md`
 
 ---
 
@@ -64,7 +64,7 @@ Cada hito termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 **Entregables:** 6 páginas desde blueprints declarativos; registry unificado.
 
-**Gate:** Sin duplicados; cada formulario funciona sin IA. — `reports/epis2-06-generated-forms.md`
+**Gate:** Sin duplicados; cada formulario funciona sin IA. — `reports/archive/2026-06/epis2-06-generated-forms.md`
 
 ---
 
@@ -72,7 +72,7 @@ Cada hito termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 **Entregables:** `services/local-ai`, schemas, proxy en API, `ai_runs`.
 
-**Gate:** App funciona sin Ollama; salida siempre validada. — `reports/epis2-07-local-ai.md`
+**Gate:** App funciona sin Ollama; salida siempre validada. — `reports/archive/2026-06/epis2-07-local-ai.md`
 
 ---
 
@@ -80,7 +80,7 @@ Cada hito termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 **Entregables:** máquina de estados, versionado, `approvals`, UI revisión.
 
-**Gate:** Sin auto-aprobación; versiones previas conservadas. — `reports/epis2-08-drafts-approval.md`
+**Gate:** Sin auto-aprobación; versiones previas conservadas. — `reports/archive/2026-06/epis2-08-drafts-approval.md`
 
 ---
 
@@ -88,7 +88,7 @@ Cada hito termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 **Entregables:** 5 casos clínicos ficticios completos.
 
-**Gate:** UI muestra DEMO/SINTÉTICO; sin IDs reales. — `reports/epis2-09-demo-data.md`
+**Gate:** UI muestra DEMO/SINTÉTICO; sin IDs reales. — `reports/archive/2026-06/epis2-09-demo-data.md`
 
 ---
 
@@ -96,7 +96,7 @@ Cada hito termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 **Entregables:** export Patient, Encounter, DocumentReference, ServiceRequest.
 
-**Gate:** FHIR no es modelo de UI; import diferido. — `reports/epis2-10-fhir-export.md`
+**Gate:** FHIR no es modelo de UI; import diferido. — `reports/archive/2026-06/epis2-10-fhir-export.md`
 
 ---
 
@@ -104,7 +104,7 @@ Cada hito termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 **Flujo:** login → buscar → resumen → evolución → borrador → aprobar → comando.
 
-**Resultado:** GO DEMO | PASS WITH FIXES | BLOCKED | NO GO — `reports/epis2-11-pilot-demo.md`, `docs/quality/PILOT_DEMO_CHECKLIST.md`
+**Resultado:** GO DEMO | PASS WITH FIXES | BLOCKED | NO GO — `reports/archive/2026-06/epis2-11-pilot-demo.md`, `docs/quality/PILOT_DEMO_CHECKLIST.md`
 
 ---
 
@@ -112,7 +112,7 @@ Cada hito termina con **gate** documentado en `QUALITY_GATES.md` y reporte en `r
 
 **Entregables:** `/epis2/dashboard` (Mi trabajo / Paciente / Servicio / Calidad), lazy MUI X, «Volver al Centro de Comando».
 
-**Gate:** Tablero no es home; una vía de retorno al Comando. — `reports/epis2-12-dashboard-mode.md`
+**Gate:** Tablero no es home; una vía de retorno al Comando. — `reports/archive/2026-06/epis2-12-dashboard-mode.md`
 
 **Experiencia M3:** track M3-00…09 completado en paralelo — `docs/design/M3_ADOPTION_PLAN.md`
 
@@ -158,9 +158,9 @@ Reportes: `reports/epis2-mf-three-modes-*.md` · auditorías `reports/epis2-thre
 |------|--------|
 | **PILOT-HUMAN** GO DEMO | ✓ `reports/epis2-pilot-human-2026-06-05.md` |
 | **UI plana + formularios** | ✓ `reports/epis2-chips-forms-completion.md` |
-| **Plan A** estabilización UX/docs | ✓ `reports/epis2-ux-stabilization.md` |
+| **Plan A** estabilización UX/docs | ✓ `reports/archive/2026-06/epis2-ux-stabilization.md` |
 | **WIDGET-00** fundación | ✓ `reports/epis2-widget-foundation.md` |
-| **Slices V1–V5** | ◐ demo; gates completos abiertos — `reports/epis2-audit-and-dev-plans-2026-06-05.md` |
+| **Slices V1–V5** | ◐ demo; gates completos abiertos — `reports/archive/2026-06/epis2-audit-and-dev-plans-2026-06-05.md` |
 | **EPIS2-PM-01 Tres modos MD3** | ✓ PROG-THREE-MODES MF-01…08 · CI E2E verde 2026-06-09 |
 | **CI master** | ✓ run [27181266125](https://github.com/gabriel2320/epis2/actions/runs/27181266125) — 10/10 E2E preview |
 

@@ -1,6 +1,6 @@
 # EPIS2 — Plan de mejora: Norma full stack (Hilo NORM)
 
-> Derivado de la auditoría [`reports/epis2-norma-fullstack-compliance-2026-06-10.md`](../../reports/epis2-norma-fullstack-compliance-2026-06-10.md) (cumplimiento ≈70%, HEAD `648e88d`).
+> Derivado de la auditoría [`reports/archive/2026-06/epis2-norma-fullstack-compliance-2026-06-10.md`](../../reports/archive/2026-06/epis2-norma-fullstack-compliance-2026-06-10.md) (cumplimiento ≈70%, HEAD `648e88d`).
 > Nomenclatura SDEPIS2: **Hilo NORM** · tramos N1–N4 · microfases `MF-NORM-xxx`.
 
 ---
@@ -53,7 +53,7 @@ La sección peor evaluada (§11 🔴). Orden: 201 → 202 → 203.
 | **MF-NORM-302** ✓ | Threat model formal (STRIDE ligero): actores, superficies (auth, drafts, AI assist, import legacy), mitigaciones existentes (RBAC, RLS, audit), riesgos aceptados; gate doc en signoff | `docs/security/EPIS2_THREAT_MODEL.md`, checklist signoff (criterio 6) | `964d3a0` — revisión humana pendiente de signoff |
 | **MF-NORM-303** ✓ | Decisión versionado API: ADR corto (`/v1` vs header vs defer) — **decidir, no necesariamente implementar** antes del primer despliegue externo | `docs/adr/ADR-001-api-versioning.md` | `964d3a0` — defer aceptado; gate al primer consumidor externo |
 
-**Cierre N3:** ✓ [`reports/epis2-norm-n3-api-contract-2026-06-10.md`](../../reports/epis2-norm-n3-api-contract-2026-06-10.md) — OpenAPI desde Zod + ADR-001 + threat model.
+**Cierre N3:** ✓ [`reports/archive/2026-06/epis2-norm-n3-api-contract-2026-06-10.md`](../../reports/archive/2026-06/epis2-norm-n3-api-contract-2026-06-10.md) — OpenAPI desde Zod + ADR-001 + threat model.
 
 ---
 
@@ -67,7 +67,7 @@ La sección peor evaluada (§11 🔴). Orden: 201 → 202 → 203.
 | **MF-NORM-403** ✓ | Drawer móvil: bajo breakpoint medium (<768px) `EpisAppShellLayout` colapsa el rail a `EpisMobileNavDrawer` (Drawer modal MD3, mismos items/data-testid del rail, trigger «Abrir navegación» junto al app bar); sin tocar registries; story + unit jsdom (matchMedia stub) + e2e viewport 390px (`test:e2e:mobile`, incluido en `test:e2e`) | `packages/epis2-ui/src/clinical/**`, stories, `e2e/mobile-drawer.spec.ts`, `package.json` | e2e 390px 2/2 ✓ + `quality:three-modes-gate` ✓ + `npm run check` ✓ |
 | **MF-NORM-404** ✓ | Mapeo server→field errors en RHF: `applyServerFieldErrors` mapea `details` del envelope (paths Zod, p. ej. `body.<fieldId>`) a `setError(type: 'server')`; cableado en `useGeneratedFormDraftPersistence` (si aplica a campos, muestra «corrige los campos» en vez del error global); API emite `details` en 400 de create/update draft | `apps/web/src/clinical/applyServerFieldErrors.ts`, `generated-form/useGeneratedFormDraftPersistence.ts`, `GeneratedClinicalFormPage.tsx`, `apps/api/src/clinical/routes.ts` | 3 unit de mapeo ✓ + integración 400 con `details.path=patientId` ✓ |
 
-**Cierre N4:** ✓ [`reports/epis2-norm-n4-ui-a11y-e2e-2026-06-10.md`](../../reports/epis2-norm-n4-ui-a11y-e2e-2026-06-10.md) — re-auditoría §4 🟢 · §5 🟢 · §10 🟢/🟡; cumplimiento ≈85% (≥90% requiere 203 + 301, en pausa por trabajo paralelo).
+**Cierre N4:** ✓ [`reports/archive/2026-06/epis2-norm-n4-ui-a11y-e2e-2026-06-10.md`](../../reports/archive/2026-06/epis2-norm-n4-ui-a11y-e2e-2026-06-10.md) — re-auditoría §4 🟢 · §5 🟢 · §10 🟢/🟡; cumplimiento ≈85% (≥90% requiere 203 + 301, en pausa por trabajo paralelo).
 
 ---
 

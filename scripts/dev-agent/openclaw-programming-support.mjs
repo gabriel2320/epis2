@@ -61,7 +61,7 @@ const suggestedCommands = [
   'npm run dev:agent:ollama',
   ...(existsSync(cursorPrompt)
     ? [
-        `# Cursor: @reports/auto-dev-cursor-prompt-tramo-${order}.md @reports/openclaw-latest-brief.md`,
+        `# Cursor: @reports/auto-dev-cursor-prompt-tramo-${order}.md @reports/archive/2026-06/openclaw-latest-brief.md`,
       ]
     : [`npm run dev:auto:6h -- --tramo ${order}`]),
   `npm run dev:auto:6h -- --tramo ${order}`,
@@ -95,8 +95,8 @@ const report = {
   skill: programming.skill,
   suggestedCommands,
   artifacts: {
-    brief: 'reports/openclaw-latest-brief.md',
-    handoff: 'reports/openclaw-latest-handoff.md',
+    brief: 'reports/archive/2026-06/openclaw-latest-brief.md',
+    handoff: 'reports/archive/2026-06/openclaw-latest-handoff.md',
     cursorPrompt: existsSync(cursorPrompt)
       ? relative(root, cursorPrompt).replace(/\\/g, '/')
       : null,
@@ -155,13 +155,13 @@ const saved = writeArtifact(
   `programming-support-${mf}-${timestamp.replace(/[:.]/g, '-')}.md`,
   markdown,
 );
-const latestPath = join(root, 'reports/openclaw-programming-latest.md');
+const latestPath = join(root, 'reports/archive/2026-06/openclaw-programming-latest.md');
 writeFileSync(latestPath, markdown, 'utf8');
 
 if (jsonOut) {
   console.log(
     JSON.stringify(
-      { ...report, artifact: saved, latest: 'reports/openclaw-programming-latest.md' },
+      { ...report, artifact: saved, latest: 'reports/archive/2026-06/openclaw-programming-latest.md' },
       null,
       2,
     ),
@@ -171,7 +171,7 @@ if (jsonOut) {
   console.log(`  Skill: ${programming.skill}`);
   console.log(`  Agentes: ${agents.join(', ')}`);
   console.log(`  Lock paralelo: ${lockActive ? 'ACTIVO' : 'no'}`);
-  console.log(`  Latest: reports/openclaw-programming-latest.md`);
+  console.log(`  Latest: reports/archive/2026-06/openclaw-programming-latest.md`);
   console.log('\nComandos sugeridos:');
   for (const cmd of suggestedCommands) console.log(`  ${cmd}`);
 }

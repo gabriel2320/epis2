@@ -183,4 +183,4 @@ npm run quality:paper-mode-next       # alias MF-PA-* planner
 - [EPIS2_TRADITIONAL_M3_SHAPE_COLOR_PLAN.md](../design/EPIS2_TRADITIONAL_M3_SHAPE_COLOR_PLAN.md)
 - [EPIS2_CLINICAL_SUMMARY_MD3.md](../design/EPIS2_CLINICAL_SUMMARY_MD3.md)
 - [EPIS2_OLLAMA_CAPABILITY_PLAN.md](../intelligence/EPIS2_OLLAMA_CAPABILITY_PLAN.md)
-- [reports/epis2-plan-tres-frentes-2026-06-11.md](../../reports/epis2-plan-tres-frentes-2026-06-11.md)
+- [reports/archive/2026-06/epis2-plan-tres-frentes-2026-06-11.md](../../reports/archive/2026-06/epis2-plan-tres-frentes-2026-06-11.md)

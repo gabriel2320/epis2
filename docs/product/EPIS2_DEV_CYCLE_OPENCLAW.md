@@ -51,8 +51,8 @@ npm run dev:cycle:sync
 | Archivo | Contenido |
 |---------|-----------|
 | `reports/epis2-dev-cycle-status.json` | Estado unificado tres capas |
-| `reports/openclaw-latest-brief.md` | Brief OpenClaw activo |
-| `reports/openclaw-latest-handoff.md` | Handoff + hallazgos Evolab |
+| `reports/archive/2026-06/openclaw-latest-brief.md` | Brief OpenClaw activo |
+| `reports/archive/2026-06/openclaw-latest-handoff.md` | Handoff + hallazgos Evolab |
 | `reports/evolab-open-findings.json` | Hallazgos Evolab abiertos |
 | `reports/epis2-dev-cycle-log.jsonl` | Log del ciclo |
 | `reports/auto-dev-parallel.lock.json` | Candado single-instance `dev:auto:parallel` (pid, startedAt, cmd) |

@@ -54,7 +54,7 @@ Establecer canon, alcance MVP, arquitectura objetivo, mapa de migración desde E
 
 | Archivo |
 |---------|
-| `reports/epis2-00-foundation-and-migration-plan.md` (este) |
+| `reports/archive/2026-06/epis2--.md` (este) |
 
 ---
 

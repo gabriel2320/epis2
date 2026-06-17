@@ -56,9 +56,9 @@
 
 | Reporte | Alcance |
 |---------|---------|
-| `reports/epis2-tramo-i-closure-2026-06-07.md` | Cierre Tramo I especialidades |
-| `reports/epis2-tramo-j-closure-2026-06-07.md` | Cierre Tramo J farmacia clínica |
-| `reports/epis2-tramo-k-closure-2026-06-07.md` | Cierre Tramo K calidad/auditoría |
-| `reports/epis2-tramos-ak-signoff-prep-2026-06-07.md` | Preparación signoff A–K |
+| `reports/archive/2026-06/epis2-tramo-i-closure-2026-06-07.md` | Cierre Tramo I especialidades |
+| `reports/archive/2026-06/epis2-tramo-j-closure-2026-06-07.md` | Cierre Tramo J farmacia clínica |
+| `reports/archive/2026-06/epis2-tramo-k-closure-2026-06-07.md` | Cierre Tramo K calidad/auditoría |
+| `reports/archive/2026-06/epis2-tramos-ak-signoff-prep-2026-06-07.md` | Preparación signoff A–K |
 
 *Los errores de EPIS no son recuerdos: son gates de EPIS2.*

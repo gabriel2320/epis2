@@ -72,7 +72,7 @@ Supuestos: PostgreSQL local en 127.0.0.1; sin exposición a internet; datos 100%
 4. RLS parcial (3 tablas piloto).
 
 Cada uno se convierte en **bloqueador** en el checklist pre-producción
-(`reports/epis2-auditoria-profunda-2026-06-09.md` §7 / fase 5).
+(`reports/archive/2026-06/epis2-auditoria-profunda-2026-06-09.md` §7 / fase 5).
 
 ## 4. Mantenimiento
 

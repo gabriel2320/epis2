@@ -25,4 +25,4 @@ Vista lista de citas + `EpisDatePicker` (ver `MUI_LICENSING_DECISION_LOG.md`).
 
 ## Próximo paso
 
-**M3-00:** auditoría visual baseline — ver `reports/epis2-m3-plan-rebaseline.md` y `docs/design/M3_ADOPTION_PLAN.md`.
+**M3-00:** auditoría visual baseline — ver `reports/archive/2026-06/epis2-m3-plan-rebaseline.md` y `docs/design/M3_ADOPTION_PLAN.md`.

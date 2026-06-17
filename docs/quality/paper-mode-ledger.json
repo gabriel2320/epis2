@@ -23,7 +23,7 @@
       "dependsOn": [],
       "state": "DONE",
       "gate": null,
-      "closureReport": "reports/epis2-paper-mode-recon-2026-06-11.md",
+      "closureReport": "reports/archive/2026-06/epis2-paper-mode-recon-2026-06-11.md",
       "allowedPaths": ["reports/epis2-paper-mode-recon-*.md", "docs/product/EPIS2_PAPER_MODE_DEV_PLAN.md"],
       "unblocks": ["MF-PAPER-01"]
     },
@@ -175,7 +175,7 @@
         "docs/product/EPIS2_PAPER_MODE_CLINICAL_SIGNOFF.md",
         "packages/epis2-ui/src/stories/ChartModesPreview.stories.tsx"
       ],
-      "closureReport": "reports/epis2-prog-paper-mode-close-2026-06-11.md",
+      "closureReport": "reports/archive/2026-06/epis2-prog-paper-mode-close-2026-06-11.md",
       "unblocks": []
     }
   ],
@@ -248,7 +248,7 @@
           "packages/command-registry/src/paper-planner-commands.ts",
           "packages/command-registry/src/context-rank.ts"
         ],
-        "closureReport": "reports/epis2-prog-paper-planner-close-2026-06-11.md"
+        "closureReport": "reports/archive/2026-06/epis2-prog-paper-planner-close-2026-06-11.md"
       }
     ]
   }

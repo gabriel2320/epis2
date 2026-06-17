@@ -60,6 +60,7 @@ Programas cerrados (no reabrir): PROG-FICHA-FIRST · PROG-STRENGTHEN 23/23 · PR
 | Pre-PR | `npm run quality:full` o **`quality:required`** |
 | CI extendido local | `npm run quality:nightly` |
 | Gate MF histórico | `npm run quality:gate -- quality:<name>` |
+| UX-LAB Autopilot (Modo A) | `npm run quality:gate -- quality:ux-lab-autopilot` · [`tools/ux-lab-autopilot/README.md`](../../tools/ux-lab-autopilot/README.md) |
 | Scripts archivados | `npm run tool:script -- <name>` · índice [`dev/SCRIPT_INDEX.md`](dev/SCRIPT_INDEX.md) |
 
 ### `quality:fast` incluye

@@ -294,6 +294,6 @@ npm run quality:dual-chart-ledger
 
 ## 10. Enlaces rápidos
 
-- Plan maestro partes: [`reports/epis2-plan-maestro-desarrollo-por-partes-2026-06-11.md`](../../reports/epis2-plan-maestro-desarrollo-por-partes-2026-06-11.md)
+- Plan maestro partes: [`reports/archive/2026-06/epis2-plan-maestro-desarrollo-por-partes-2026-06-11.md`](../../reports/archive/2026-06/epis2-plan-maestro-desarrollo-por-partes-2026-06-11.md)
 - Shape código: [`packages/epis2-ui/src/theme/shape.ts`](../../packages/epis2-ui/src/theme/shape.ts)
 - Perfiles MTB: [`packages/epis2-ui/src/theme/source/`](../../packages/epis2-ui/src/theme/source/)

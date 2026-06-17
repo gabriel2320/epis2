@@ -392,4 +392,4 @@ M3 gobierna **pantalla**. Los documentos imprimibles y PDF siguen una norma apar
 - `docs/design/EPIS2_THEME_SPEC.md` — tokens actuales (evolución → M3)
 - `docs/quality/M3_ANTI_DRIFT_GATES.md` — gates permanentes
 - `docs/design/MUI_X_ADOPTION_PLAN.md` — capacidades MUI X (capa técnica)
-- `reports/epis2-m3-plan-rebaseline.md` — resumen del replan
+- `reports/archive/2026-06/epis2-m3-plan-rebaseline.md` — resumen del replan

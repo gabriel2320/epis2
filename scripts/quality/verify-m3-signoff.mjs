@@ -22,7 +22,7 @@ function run(label, cmd, args) {
   }
 }
 
-run('theme:validate (THEME-05/06/07)', 'npm', ['run', 'theme:validate']);
+run('theme:validate (THEME-05/06/07)', 'npm', ['run', 'tool:script', '--', 'theme:validate']);
 run('gates M3 tokens + journey + offline', 'npx', [
   'vitest',
   'run',

@@ -24,7 +24,7 @@ const brief = existsSync(briefPath)
   ? readFileSync(briefPath, 'utf8').slice(0, 4000)
   : '(ejecutar npm run dev:session)';
 
-const openclawBriefPath = join(root, 'reports/openclaw-latest-brief.md');
+const openclawBriefPath = join(root, 'reports/archive/2026-06/openclaw-latest-brief.md');
 const openclawBrief = existsSync(openclawBriefPath)
   ? readFileSync(openclawBriefPath, 'utf8').slice(0, 3000)
   : null;
@@ -62,7 +62,7 @@ ${canon.map((c) => `- @${c}`).join('\n')}
 
 ${brief}
 
-${openclawBrief ? `## OpenClaw brief (read-only — revisar antes de implementar)\n\n@reports/openclaw-latest-brief.md\n\n${openclawBrief}\n` : '## OpenClaw\n\n_(ejecutar `npm run openclaw:tramo -- --tramo ' + tramoIdx + ' --phase brief` si EPIS2_AUTO_DEV_OPENCLAW=1)_\n'}
+${openclawBrief ? `## OpenClaw brief (read-only — revisar antes de implementar)\n\n@reports/archive/2026-06/openclaw-latest-brief.md\n\n${openclawBrief}\n` : '## OpenClaw\n\n_(ejecutar `npm run openclaw:tramo -- --tramo ' + tramoIdx + ' --phase brief` si EPIS2_AUTO_DEV_OPENCLAW=1)_\n'}
 
 ## Reglas
 
