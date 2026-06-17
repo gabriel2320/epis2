@@ -267,6 +267,14 @@
     "quality:gates-promote-aesthetic-gate": {
       "type": "file",
       "path": "scripts/quality/validate-gates-promote-aesthetic-gate.mjs"
+    },
+    "quality:ui": {
+      "type": "command",
+      "command": "npm run quality:ui-simplify-gate"
+    },
+    "quality:ai": {
+      "type": "command",
+      "command": "npm run quality:sh-03-degrade-gate && npm run quality:ai-client-gate && npm run quality:web-ai-boundary-gate"
     }
   },
   "archived": {
