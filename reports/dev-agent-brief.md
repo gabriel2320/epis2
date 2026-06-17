@@ -1,48 +1,73 @@
 # EPIS2 — Dev Brief (IA asistida)
 
-> **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-ledger-keeper.md` — declarar alcance en el primer mensaje.
+> **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@docs/archive/AGENT_SCOPE_EXCLUSIONS.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-ollama-clinical.md` — declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-15T12:16:00.866Z · **HEAD:** `5f6bca6` · **Fase:** B
+**Generado:** 2026-06-17T00:41:41.198Z · **HEAD:** `1fc8d80` · **Fase:** cica
 
-## Orquestador (MF-RAPID + STRENGTHEN)
+## Orquestador (PROG-PURGE-CICA + CICA)
 
-- **PROG-RAPID** ✓ — iteración: `npm run dev:rapid` · cierre MF: `npm run quality:clinical`
-- **PROG-FICHA-FIRST** — MF-FF-01…03 ✓ · home censo · `/comando` redirect
-- **No** iniciar la MF READY siguiente salvo petición explícita del usuario.
-- STRENGTHEN: PROG-STRENGTHEN-2026 · 23/23 DONE
-- FICHA-FIRST: PROG-FICHA-FIRST-2026 · 16/16 DONE (programa cerrado)
+- **Alcance agente:** `docs/archive/AGENT_SCOPE_EXCLUSIONS.md` — no retomar tramos/olas archivados
+- **Iteración:** `npm run dev:rapid` · cierre MF: `npm run quality:clinical`
+- **Visual activa:** CICA `/app/*` · legacy `/espacio/*` = fallback only
+- **No** iniciar MF READY de programas cerrados salvo petición explícita + `EPIS2_ALLOW_ARCHIVED_SCOPE=1`
+- Programas cerrados: `docs/archive/ARCHIVED_PROGRAMS_INDEX.md`
 
 
-## Estado del tablero (fuente canónica)
+## Estado brújula + tablero
 
-- Tablero no legible — revisar `docs/product/EPIS2_TABLERO.md` manualmente.
+_Brújula (`EPIS2_CURRENT_STATE`) manda; tablero = índice humano._
+
+- Brújula: **PROG-PURGE-CICA** + merge **CICA/aesthetic** — `product/EPIS2_PURGE_ARCHIVE_PLAN.md` · UX-LAB ✓ cerrado · visual activa: `/app/*` CICA.
+- Tablero propuesto: PROG-PURGE-CICA (archivo + perímetro agente)
+
+**Pasos derivados:**
+- PROG-PURGE-CICA (archivo + perímetro agente): 4 — MF-PURGE-04…07 Índices + agent scope + alinear tablero
+- Merge feat/prog-aesthetic-reset-close → master (CICA)
+- PROG-PURGE-CICA: archivar · referenciar · perímetro agente
 
 ## Objetivo sugerido
 
-- Ver `docs/product/EPIS2_TABLERO.md` § Siguiente.
+- PROG-PURGE-CICA (archivo + perímetro agente): 4 — MF-PURGE-04…07 Índices + agent scope + alinear tablero
 
 ## Subagente primario
 
-**[`ledger-keeper`](./dev-agent-prompt-ledger-keeper.md)** — Ledger microfases
+**[`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md)** — IA clínica local (Ollama producto)
 
 ## Secuencia completa
 
-1. `layers-integrator` — Integrador capas L3+L4+L5
+1. `golden-guardian` — Guardián Golden Journey
 2. `ollama-dev-writer` — Escritor dev bajo riesgo (Ollama)
-3. `ollama-clinical` — IA clínica local (Ollama producto)
-4. `golden-guardian` — Guardián Golden Journey
-5. `gate-runner` — Ejecutor de gates
+3. `gate-runner` — Ejecutor de gates
 
 ## Working tree
 
-- Rama: `master` · cambios: 5
+- Rama: `feat/prog-aesthetic-reset-close` · cambios: 516 (lista truncada)
 
 ```
-M docs/AGENT_CONTEXT_MINIMAL.md
 M docs/product/EPIS2_TABLERO.md
-M reports/dev-agent-audit-diff-latest.json
 M reports/dev-agent-brief.md
-?? reports/epis2-session-close-2026-06-15-consolidation-ola2.md
+M reports/dev-agent-prompt-gate-runner.md
+M reports/dev-agent-prompt-golden-guardian.md
+M reports/dev-agent-prompt-layers-integrator.md
+M reports/dev-agent-prompt-ollama-dev-writer.md
+M reports/dev-agent-prompt-paper-mode.md
+D reports/dual-chart-session-brief.md
+D reports/epis2-ai-ext-inference.md
+D reports/epis2-architecture-inventory-001-100-review.md
+D reports/epis2-architecture-inventory-101-200-review.md
+D reports/epis2-audit-tramo-e-004-preanesthesia.md
+D reports/epis2-chips-forms-completion.md
+D reports/epis2-ciclo-a-doc-sync.md
+D reports/epis2-classic-md3-ai-design-agents-2026-06-08.md
+D reports/epis2-consolidation-2-ci-close-plan-2026-06-15.md
+D reports/epis2-dashboard-md3-ai-design-agents-2026-06-08.md
+D reports/epis2-dashboard-md3-inventory-2026-06-08.md
+D reports/epis2-global-screen-form-audit.md
+D reports/epis2-idc-execution-matrix.md
+D reports/epis2-layout-01-two-pane-design.md
+D reports/epis2-layout-02-context-pane.md
+D reports/epis2-layout-03-ia-assist.md
+D reports/epis2-layout-04-drag-drop.md
 ```
 
 ## Evolab (QA externo)
@@ -66,18 +91,21 @@ M reports/dev-agent-brief.md
 
 ```bash
 npm run stack:dev          # si falta Postgres/Ollama
-npm run dev:velocity       # banner vivo (STRENGTHEN + HEAD)
+npm run dev:velocity       # banner vivo
 npm run dev:rapid          # iteración MF-RAPID
 npm run dev:session        # regenerar este brief
-npm run quality:strengthen-next
-npm run ollama:route        # modelos por función + tier estación
 ```
+
+## Fuera de alcance (archivado)
+
+- `reports/archive/**` · tramos A–K · three modes · olas M3 · subagentes `tramo-implementer`, `layers-integrator`, `m3-guardian`
+- Índice programas cerrados: `docs/archive/ARCHIVED_PROGRAMS_INDEX.md`
 
 ## Loop IA (mejores prácticas EPIS2)
 
 - **1. Alcance** — Declarar MF, archivos permitidos y prohibidos antes de editar.
 - **2. Contexto mínimo** — Leer solo canon + prompt del subagente activo; no re-leer todo el repo.
-- **3. Diff mínimo** — Un problema, un PR lógico; reutilizar patrones existentes (`DashboardPanelGridSection`, RAD shell).
+- **3. Diff mínimo** — Un problema, un PR lógico; reutilizar patrones CICA (`CicaAppShell`, `CicaPatientScreenFrame`).
 - **4. Verificar tarde** — `npm run check` al cerrar, no tras cada línea (salvo typecheck puntual).
 - **5. Gates del rol** — Ejecutar solo los del subagente + cierre estándar.
 - **6. Reporte** — `reports/epis2-*.md` con alcance, gates, riesgos, próximo paso exacto.
@@ -89,6 +117,7 @@ npm run ollama:route        # modelos por función + tier estación
 - Import masivo EPIS sin manifest
 - Auto-aprobación clínica · IA escribiendo SoT
 - Segundo Command/Form Registry temporal
+- Planificar desde `reports/archive/` o reabrir tramos/olas sin MF + EPIS2_ALLOW_ARCHIVED_SCOPE=1
 
 ## Cierre sesión
 
@@ -104,16 +133,14 @@ npm run dev:agent:close    # checklist + plantilla reporte
 
 # EPIS2 — Sesión subagentes de desarrollo
 
-**Fase:** B
-**Generado:** 2026-06-15T12:16:00.867Z
+**Fase:** cica
+**Generado:** 2026-06-17T00:41:41.199Z
 
 ## Secuencia recomendada
 
-1. [`layers-integrator`](./dev-agent-prompt-layers-integrator.md) — Integrador capas L3+L4+L5
+1. [`golden-guardian`](./dev-agent-prompt-golden-guardian.md) — Guardián Golden Journey
 2. [`ollama-dev-writer`](./dev-agent-prompt-ollama-dev-writer.md) — Escritor dev bajo riesgo (Ollama)
-3. [`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md) — IA clínica local (Ollama producto)
-4. [`golden-guardian`](./dev-agent-prompt-golden-guardian.md) — Guardián Golden Journey
-5. [`gate-runner`](./dev-agent-prompt-gate-runner.md) — Ejecutor de gates
+3. [`gate-runner`](./dev-agent-prompt-gate-runner.md) — Ejecutor de gates
 
 ## Stack Ollama (desarrollo)
 
@@ -127,8 +154,7 @@ npm run ai:evals:live      # evals clínicos assist
 ## Cierre sesión
 
 ```bash
-npm run check
-npm run test
-npm run db:validate
-npm run quality:layers-integration-gate
+npm run dev:rapid
+npm run quality:clinical   # cierre MF clínico
+npm run quality:full       # pre-PR
 ```

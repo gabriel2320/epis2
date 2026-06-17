@@ -39,7 +39,8 @@ Un objetivo · pocos archivos · diff mínimo.
 
 | Programa | Estado | Evidencia |
 |----------|--------|-----------|
-| **PROG-UX-LAB** | ◐ Tramo C/D | [`EPIS2_UX_LAB_MODERN_PLAN.md`](quality/EPIS2_UX_LAB_MODERN_PLAN.md) |
+| **PROG-PURGE-CICA** | ◐ MF-PURGE-00…07 | [`EPIS2_PURGE_ARCHIVE_PLAN.md`](product/EPIS2_PURGE_ARCHIVE_PLAN.md) · [`AGENT_SCOPE_EXCLUSIONS.md`](archive/AGENT_SCOPE_EXCLUSIONS.md) |
+| **PROG-UX-LAB** | ✓ cerrado | [`EPIS2_UX_LAB_MODERN_PLAN.md`](quality/EPIS2_UX_LAB_MODERN_PLAN.md) |
 | **PROG-AGENT-TRUTH** | ✓ AT-01…05 | `quality:agent-truth-gate` · [`AGENTS.md`](../AGENTS.md) v2 |
 | **PROG-POST-RC3** | ✓ tramos 1–5 | [`epis2-prog-post-rc3-close.md`](../reports/epis2-prog-post-rc3-close.md) |
 | **PROG-RELEASE-HARDENING** | ✓ RH-01…08 | tag `v0.1-demo-rc3` |
@@ -74,10 +75,12 @@ Programas cerrados (no reabrir): PROG-FICHA-FIRST · PROG-STRENGTHEN 23/23 · PR
 
 = `quality:fast` + `dev:agent:audit-diff` (omitido si solo docs o `--skip-audit`).
 
-### No leer salvo petición explícita
+### No leer salvo petición explícita del operador
 
-- Auditorías históricas en `reports/epis2-auditoria-*`
-- Planes superseded
+- **`reports/archive/**`** — evidencia histórica (481+ archivos); puntero: [`archive/2026-06/README.md`](../reports/archive/2026-06/README.md)
+- **`docs/archive/AGENT_SCOPE_EXCLUSIONS.md`** — leer **sí** al inicio; define qué más no leer
+- Planes tramo/ola: `docs/product/EPIS2_TRAMO_*`, `EPIS2_GLOBAL_DEV_PLAN.md`
+- Subagentes archivados: `tramo-implementer`, `m3-guardian`, `layers-integrator`
 - Todo el monorepo “por explorar”
 
 ---

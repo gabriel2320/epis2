@@ -4,13 +4,14 @@ import {
   EpisM3Text,
   Stack,
   epis2CalmIslandSx,
+  epis2ClassicSummaryBlockSx,
   epis2IslandPaddingSx,
   epis2IslandSx,
   epis2ShapeProfiles,
 } from '@epis2/epis2-ui';
 import type { ReactElement, ReactNode } from 'react';
 
-export type ClinicalSummarySurface = 'calm' | 'traditional';
+export type ClinicalSummarySurface = 'calm' | 'traditional' | 'clinical-flat';
 
 export type EpisClinicalSummaryCardProps = {
   title: string;
@@ -44,6 +45,7 @@ export function EpisClinicalSummaryCard({
   testId,
 }: EpisClinicalSummaryCardProps) {
   const isCalm = surface === 'calm';
+  const isFlat = surface === 'clinical-flat';
   const profile = isCalm ? epis2ShapeProfiles.calm : epis2ShapeProfiles.traditional;
   const borderColor =
     severity === 'critical'
@@ -54,11 +56,13 @@ export function EpisClinicalSummaryCard({
           ? 'outlineVariant'
           : 'divider';
 
-  return (
-    <Stack
-      data-testid={testId}
-      spacing={1}
-      sx={{
+  const cardSx = isFlat
+    ? {
+        ...epis2ClassicSummaryBlockSx(),
+        bgcolor: severity === 'critical' ? 'errorContainer' : 'transparent',
+        boxShadow: 'none',
+      }
+    : {
         ...(isCalm ? epis2CalmIslandSx : epis2IslandSx),
         ...epis2IslandPaddingSx,
         p: 2,
@@ -68,8 +72,10 @@ export function EpisClinicalSummaryCard({
         borderColor,
         bgcolor: severity === 'critical' ? 'errorContainer' : 'background.paper',
         boxShadow: 'none',
-      }}
-    >
+      };
+
+  return (
+    <Stack data-testid={testId} spacing={1} sx={cardSx}>
       <Stack direction="row" justifyContent="space-between" alignItems="flex-start" gap={1}>
         <Stack direction="row" alignItems="center" gap={1} sx={{ minWidth: 0 }}>
           {isCalm && leadingIcon ? (

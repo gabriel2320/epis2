@@ -55,8 +55,8 @@ function walkChart(dir) {
 const chartDir = join(root, 'apps/web/src/components/chart');
 if (existsSync(chartDir)) walkChart(chartDir);
 
-const reportPath = join(root, 'reports/epis2-mf-norm-04-shape.md');
-if (!existsSync(reportPath)) errors.push('falta reports/epis2-mf-norm-04-shape.md');
+const reportPath = join(root, 'reports/archive/2026-06/epis2-mf-norm-04-shape.md');
+if (!existsSync(reportPath)) errors.push('falta reports/archive/2026-06/epis2-mf-norm-04-shape.md');
 
 if (errors.length) {
   console.error('ficha-norm-density-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));

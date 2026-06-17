@@ -13,7 +13,7 @@ const required = [
   ['phrase suite colloquial', 'packages/command-registry/src/clinical-phrase-suite-colloquial.ts'],
   ['command intent top10', 'packages/command-registry/src/command-intent-top10.ts'],
   ['command evals runner', 'scripts/ai/evals/run-command-phrase-evals.mjs'],
-  ['closure report', 'reports/epis2-mf-cm-07-evals.md'],
+  ['closure report', 'reports/archive/2026-06/epis2-mf-cm-07-evals.md'],
 ];
 
 for (const [label, rel] of required) {

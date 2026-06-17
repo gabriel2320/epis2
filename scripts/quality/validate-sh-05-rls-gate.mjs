@@ -13,7 +13,7 @@ for (const rel of [
   '.env.production.example',
   'database/migrations/022_epis2_rls_pilot.sql',
   'database/migrations/023_epis2_rls_force.sql',
-  'reports/epis2-mf-sh-05-rls-runbook.md',
+  'reports/archive/2026-06/epis2-mf-sh-05-rls-runbook.md',
 ]) {
   if (!existsSync(join(root, rel))) errors.push(`falta: ${rel}`);
 }

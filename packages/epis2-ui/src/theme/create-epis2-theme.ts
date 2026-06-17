@@ -6,7 +6,11 @@ import { buildM3PaletteOptions, darkSurfaces, lightSurfaces } from './color-role
 import { buildEpis2Components } from './components.js';
 import type { Epis2MotionScheme } from './motion.js';
 import type { Epis2MaterialColorScheme } from './contracts/material-color-scheme.js';
-import { getMaterialScheme, resolveMaterialThemeId } from './material-theme-registry.js';
+import {
+  getMaterialScheme,
+  resolveMaterialThemeId,
+  DEFAULT_EPIS2_ACCENT,
+} from './material-theme-registry.js';
 import { paletteFromMaterialScheme, surfacesFromScheme } from './m3-palette-from-scheme.js';
 import { epis2Shape, epis2ShapeBorderRadius } from './shape.js';
 import { epis2StateLayerOpacity } from './motion.js';
@@ -80,7 +84,7 @@ export function applyHighContrastRoles(surfaces: M3SurfaceRoles): M3SurfaceRoles
 /** Único generador de tema EPIS2 (M3-G01). */
 export function createEpis2Theme(options: CreateEpis2ThemeOptions = {}): Theme {
   const mode = options.mode ?? 'light';
-  const accent = options.accent ?? 'clinicalBlue';
+  const accent = options.accent ?? DEFAULT_EPIS2_ACCENT;
   const motion = options.motion ?? 'standard';
   const density = options.density ?? 'comfortable';
   const contrast = options.contrast ?? 'standard';

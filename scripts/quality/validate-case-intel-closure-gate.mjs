@@ -21,7 +21,7 @@ const requiredPaths = [
   'database/migrations/042_sim_clinical_cases_seed.sql',
   'apps/api/src/admin/clinicalCasePromote.ts',
   'scripts/ai-evals-sim-live.mjs',
-  'reports/epis2-mf-case-clinical-case-intel.md',
+  'reports/archive/2026-06/epis2-mf-case-clinical-case-intel.md',
 ];
 
 for (const rel of requiredPaths) {
@@ -30,7 +30,7 @@ for (const rel of requiredPaths) {
   }
 }
 
-const reportPath = join(root, 'reports/epis2-mf-case-clinical-case-intel.md');
+const reportPath = join(root, 'reports/archive/2026-06/epis2-mf-case-clinical-case-intel.md');
 if (existsSync(reportPath)) {
   const report = readFileSync(reportPath, 'utf8');
   for (const tag of ['MF-CASE-09', 'MF-CASE-10']) {

@@ -27,7 +27,7 @@ import {
   Box,
   EpisClinicalFocusAppBar,
   EpisClinicalFormRhf,
-  EpisClinicalFormActionBar,
+  ClinicalLayoutActionBar,
   EpisClinicalFormFooter,
   EpisClinicalFormPage,
   EpisClinicalScrollspyLayout,
@@ -39,6 +39,7 @@ import {
   useEpisClinicalBlueprintForm,
   useEpisClinicalContextPanel,
 } from '@epis2/epis2-ui';
+import type { ClinicalLayoutAction } from '@epis2/epis2-ui';
 import { Link, useSearch } from '@tanstack/react-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
@@ -50,16 +51,13 @@ import { pickAssistContextFromSummary } from '../api/clinicalApi.js';
 import { useAiStatusQuery } from '../query/hooks/useAiStatusQuery.js';
 import { useDraftDetailQuery } from '../query/hooks/useDraftDetailQuery.js';
 import { usePatientDetailQuery } from '../query/hooks/usePatientDetailQuery.js';
-import { usePatientsQuery } from '../query/hooks/usePatientsQuery.js';
 import {
   EpisClinicalContextPane,
   type ClinicalContextInsertPayload,
 } from '../components/EpisClinicalContextPane.js';
 import { EpisClinicalSoapHints } from '../components/EpisClinicalSoapHints.js';
 import { ClinicalPageNav } from '../components/ClinicalPageNav.js';
-import { PatientListGrid } from '../components/PatientListGrid.js';
-import { ShiftContextStrip } from '../components/census/ShiftContextStrip.js';
-import { PatientSearchAutocomplete } from '../components/PatientSearchAutocomplete.js';
+import { resolveIntentFromBlueprint } from '../clinical/clinicalIntent.js';
 import { useAuth } from '../auth/AuthContext.js';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { applyServerFieldErrors } from '../clinical/applyServerFieldErrors.js';
@@ -90,10 +88,6 @@ import {
 import { useGeneratedFormAiAssist } from '../clinical/generated-form/useGeneratedFormAiAssist.js';
 import { useGeneratedFormDraftPersistence } from '../clinical/generated-form/useGeneratedFormDraftPersistence.js';
 import { validateGeneratedFormAdminFields } from '../clinical/generated-form/validateGeneratedFormAdmin.js';
-import { isDualChartModesEnabled } from '../dev/dualChartModesEnv.js';
-import { TraditionalEhrMode } from '../components/chart/TraditionalEhrMode.js';
-import { usePatientLongitudinalQuery } from '../query/hooks/usePatientLongitudinalQuery.js';
-import { usePatientClinicalSummaryQuery } from '../query/hooks/usePatientClinicalSummaryQuery.js';
 import { navigateBackToPaperChartFromPrescriptionForm } from './prescriptionTripleViewNav.js';
 
 export type GeneratedClinicalFormPageProps = {
@@ -180,19 +174,22 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     );
   }, [blueprint, activeLiveTemplateId, summaryFieldsForLive]);
 
-  const useTraditionalEvolutionShell =
-    isDualChartModesEnabled() &&
-    effectiveBlueprint.blueprintId === 'evolution_note' &&
-    Boolean(effectivePatientId);
+  const clinicalIntent = useMemo(
+    () => resolveIntentFromBlueprint(effectiveBlueprint),
+    [effectiveBlueprint],
+  );
 
-  const longitudinalQuery = usePatientLongitudinalQuery(
-    effectivePatientId,
-    useTraditionalEvolutionShell,
-  );
-  const clinicalSummaryQuery = usePatientClinicalSummaryQuery(
-    effectivePatientId,
-    useTraditionalEvolutionShell,
-  );
+  /** CICA-L-04 / L-09 — formularios dedicados: una intención, sin ficha tabulada embebida. */
+  const isCicaEvolutionForm =
+    effectiveBlueprint.blueprintId === 'evolution_note' && Boolean(effectivePatientId);
+  const isCicaEpicrisisForm =
+    effectiveBlueprint.blueprintId === 'discharge_summary' && Boolean(effectivePatientId);
+  const isCicaDedicatedForm = isCicaEvolutionForm || isCicaEpicrisisForm;
+  const cicaDedicatedFormTestId = isCicaEvolutionForm
+    ? 'epis2-cica-evolution-form'
+    : isCicaEpicrisisForm
+      ? 'epis2-cica-epicrisis-form'
+      : undefined;
 
   const form = useEpisClinicalBlueprintForm({
     blueprint: effectiveBlueprint,
@@ -211,21 +208,9 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   const [showContextPrefillBadge, setShowContextPrefillBadge] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [postSaveActions, setPostSaveActions] = useState<PostSaveMicrojourneyAction[]>([]);
-  const [loadError, setLoadError] = useState<string | undefined>();
-  const [patientSearch, setPatientSearch] = useState<string | undefined>();
-  const [patientLookupQuery, setPatientLookupQuery] = useState('');
-  const [patientsFetchEnabled, setPatientsFetchEnabled] = useState(false);
   const [assistContext, setAssistContext] = useState<Record<string, string>>({});
 
   const { aiAvailable: aiStatusAvailable } = useAiStatusQuery();
-  const {
-    patients,
-    refetch: refetchPatients,
-    isFetching: patientsFetching,
-  } = usePatientsQuery({
-    search: patientSearch,
-    enabled: patientsFetchEnabled,
-  });
   const editingDraftQuery = useDraftDetailQuery(editingDraftId);
   const { recordFieldOrigin, attachToDraftBody, loadFieldMeta } = useClinicalTextBoxOrigins();
   const hydratedDraftIdRef = useRef<string | null>(null);
@@ -387,31 +372,6 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     [insertContextFragment],
   );
 
-  const loadPatients = useCallback(() => {
-    setLoadError(undefined);
-    const current = getValues();
-    const term = current.identifier?.trim() || current.patientName?.trim();
-    setPatientSearch(term || undefined);
-    setPatientsFetchEnabled(true);
-    void refetchPatients().catch(() => {
-      setLoadError(copy.forms.loadPatientsError);
-    });
-  }, [getValues, refetchPatients]);
-
-  useEffect(() => {
-    if (blueprint.blueprintId !== 'patient_search') return;
-    const trimmed = patientLookupQuery.trim();
-    if (trimmed.length < 2) {
-      setPatientsFetchEnabled(false);
-      return;
-    }
-    const timer = window.setTimeout(() => {
-      setPatientSearch(trimmed);
-      setPatientsFetchEnabled(true);
-    }, 300);
-    return () => window.clearTimeout(timer);
-  }, [blueprint.blueprintId, patientLookupQuery]);
-
   useEffect(() => {
     const res = patientDetailQuery.data;
     if (!res) return;
@@ -469,19 +429,6 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       replace: true,
     });
   }, [blueprint.routePath, navigate, commandSlotsInUrl, urlPatientId]);
-
-  const selectPatient = (id: string) => {
-    const row = patients.find((p) => p.id === id);
-    if (row) pinPatient(row);
-    if (blueprint.blueprintId === 'patient_search') {
-      navigate({ to: '/espacio/ficha', search: { patientId: id } });
-      return;
-    }
-    navigate({
-      to: blueprint.routePath as ClinicalFormRoutePath,
-      search: { patientId: id },
-    });
-  };
 
   const { isSuggesting, suggestWithAi } = useGeneratedFormAiAssist({
     blueprintId: blueprint.blueprintId,
@@ -556,16 +503,43 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       ]
     : [];
 
+  const formLayoutActions = useMemo((): ClinicalLayoutAction[] => {
+    if (!showDraftActions) return [];
+    const actions: ClinicalLayoutAction[] = [
+      {
+        id: 'save',
+        label: copy.forms.save,
+        kind: 'primary',
+        onClick: () => saveDraft('save'),
+        ...(isSaving ? { disabled: true } : {}),
+        testId: 'epis2-form-save',
+      },
+    ];
+    if (canPersistDraft) {
+      actions.push({
+        id: 'sign',
+        label: copy.forms.sign,
+        kind: 'secondary',
+        onClick: () => saveDraft('sign'),
+        ...(isSaving ? { disabled: true } : {}),
+        testId: 'epis2-form-sign',
+      });
+    }
+    for (const item of formActionOverflow) {
+      actions.push({
+        id: item.id,
+        label: item.label,
+        kind: 'quiet',
+        onClick: item.onClick,
+        ...(item.disabled ? { disabled: true } : {}),
+        ...(item.testId ? { testId: item.testId } : {}),
+      });
+    }
+    return actions;
+  }, [canPersistDraft, formActionOverflow, isSaving, saveDraft, showDraftActions]);
+
   const formActionBar = showDraftActions ? (
-    <EpisClinicalFormActionBar
-      saveLabel={copy.forms.save}
-      onSave={() => saveDraft('save')}
-      saveDisabled={isSaving}
-      {...(canPersistDraft ? { signLabel: copy.forms.sign, onSign: () => saveDraft('sign') } : {})}
-      signDisabled={isSaving}
-      overflow={formActionOverflow}
-      overflowAriaLabel={copy.forms.moreActions}
-    />
+    <ClinicalLayoutActionBar profile="clinical-form" actions={formLayoutActions} />
   ) : null;
 
   useEffect(() => {
@@ -598,7 +572,7 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
             </>
           }
         />
-        <ClinicalPageNav />
+        <ClinicalPageNav sectionLabel={clinicalIntent.sectionLabel} />
       </Stack>
     );
   }
@@ -677,6 +651,14 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
   );
 
   if (usesScrollspyShell) {
+    const cicaDedicatedNav = isCicaDedicatedForm ? (
+      <ClinicalPageNav
+        patientId={effectivePatientId}
+        patientDisplayName={activePatient?.displayName}
+        sectionLabel={clinicalIntent.sectionLabel}
+      />
+    ) : null;
+
     const scrollspyMain = (
       <Stack
         spacing={3}
@@ -689,11 +671,13 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
           {effectiveBlueprint.label}
         </EpisM3Text>
         {canUseAiAssist ? aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip /> : null}
-        <EpisClinicalSoapHints
-          blueprintId={blueprint.blueprintId}
-          values={values}
-          aiAvailable={aiAvailable}
-        />
+        {!isCicaDedicatedForm ? (
+          <EpisClinicalSoapHints
+            blueprintId={blueprint.blueprintId}
+            values={values}
+            aiAvailable={aiAvailable}
+          />
+        ) : null}
         <EpisClinicalScrollspyLayout sections={scrollspySections}>
           <EpisClinicalFormRhf
             blueprint={effectiveBlueprint}
@@ -721,10 +705,12 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     );
 
     const scrollspyMainClassic = (
-      <>
+      <Stack spacing={2}>
+        {cicaDedicatedNav}
+        {isCicaDedicatedForm && showDraftActions ? formActionBar : null}
         {scrollspyMain}
-        <EpisClinicalFormFooter actions={formActionBar} />
-      </>
+        {!isCicaDedicatedForm ? <EpisClinicalFormFooter actions={formActionBar} /> : null}
+      </Stack>
     );
 
     const scrollspyContext = effectivePatientId ? (
@@ -735,21 +721,11 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       />
     ) : null;
 
-    if (isClassicMode && effectivePatientId) {
-      return (
-        <FormProvider {...form}>
-          <ClassicMd3ClinicalPageShell
-            patientId={effectivePatientId}
-            draftStatusLabel={statusMessage ?? copy.clinicalLayout.draftStatus}
-            mainContent={scrollspyMainClassic}
-            supportingContent={supportsClinicalContext ? scrollspyContext : undefined}
-          />
-        </FormProvider>
-      );
-    }
-
     const twoPaneLayout = (
-      <Box data-testid="epis2-generated-clinical-page" sx={{ width: '100%' }}>
+      <Box
+        {...(!isCicaDedicatedForm ? { 'data-testid': 'epis2-generated-clinical-page' } : {})}
+        sx={{ width: '100%' }}
+      >
         <EpisClinicalTwoPaneLayout
           appBar={
             <EpisClinicalFocusAppBar
@@ -779,29 +755,50 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
           contextOpen={contextOpen}
           onContextOpenChange={setContextOpen}
           footer={
-            <EpisClinicalFormFooter
-              actions={formActionBar}
-              trailing={<ClinicalPageNav patientId={effectivePatientId} />}
-            />
+            isCicaDedicatedForm ? undefined : (
+              <EpisClinicalFormFooter
+                actions={formActionBar}
+                trailing={
+                  <ClinicalPageNav
+                    patientId={effectivePatientId}
+                    patientDisplayName={activePatient?.displayName}
+                    sectionLabel={clinicalIntent.sectionLabel}
+                  />
+                }
+              />
+            )
           }
         />
       </Box>
     );
 
-    if (useTraditionalEvolutionShell) {
+    if (isCicaDedicatedForm && cicaDedicatedFormTestId) {
       return (
         <FormProvider {...form}>
-          <TraditionalEhrMode
-            demoCaseCode={patientDetailQuery.data?.patient.demoCaseCode}
-            summaryFields={summaryFieldsForLive}
-            clinicalSummary={clinicalSummaryQuery.data ?? null}
-            longitudinal={longitudinalQuery.data ?? null}
-            alerts={clinicalAlerts}
-            initialTraditionalSection="navEvolution"
-            focusTraditionalSection="navEvolution"
-            mainContent={twoPaneLayout}
-            contextPane={scrollspyContext}
-            testId="epis2-evolution-traditional-shell"
+          <Box data-testid="epis2-generated-clinical-page" sx={{ width: '100%' }}>
+            <Stack
+              spacing={2}
+              data-testid={cicaDedicatedFormTestId}
+              data-cica-composition="classic"
+              sx={{ width: '100%' }}
+            >
+              {cicaDedicatedNav}
+              {showDraftActions ? formActionBar : null}
+              {twoPaneLayout}
+            </Stack>
+          </Box>
+        </FormProvider>
+      );
+    }
+
+    if (isClassicMode && effectivePatientId) {
+      return (
+        <FormProvider {...form}>
+          <ClassicMd3ClinicalPageShell
+            patientId={effectivePatientId}
+            draftStatusLabel={statusMessage ?? copy.clinicalLayout.draftStatus}
+            mainContent={scrollspyMainClassic}
+            supportingContent={supportsClinicalContext ? scrollspyContext : undefined}
           />
         </FormProvider>
       );
@@ -810,7 +807,12 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
     return <FormProvider {...form}>{twoPaneLayout}</FormProvider>;
   }
 
-  if (isClassicMode && effectivePatientId && blueprint.blueprintId !== 'patient_search') {
+  if (
+    isClassicMode &&
+    effectivePatientId &&
+    blueprint.blueprintId !== 'patient_search' &&
+    !isCicaDedicatedForm
+  ) {
     return (
       <FormProvider {...form}>
         <ClassicMd3ClinicalPageShell
@@ -854,47 +856,14 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
       <EpisClinicalFormPage title={blueprint.label} headerExtra={headerExtra}>
         {canUseAiAssist ? aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip /> : null}
 
-        {blueprint.blueprintId === 'patient_search' ? (
-          <Stack spacing={2}>
-            <ShiftContextStrip />
-            <PatientSearchAutocomplete
-              patients={patients}
-              query={patientLookupQuery}
-              onQueryChange={setPatientLookupQuery}
-              onSelectPatient={(row) => selectPatient(row.id)}
-              loading={patientsFetching}
-            />
-            <EpisClinicalFormRhf
-              blueprint={effectiveBlueprint}
-              clinicalProse={clinicalProse}
-              collapseNonPrimarySections={blueprint.sections.length > 2}
-              renderClinicalTextBox={renderClinicalTextBox}
-              renderCatalogField={renderCatalogField}
-            />
-            <EpisButton variant="outlined" onClick={() => void loadPatients()}>
-              {copy.forms.searchPatients}
-            </EpisButton>
-            {loadError ? <EpisAlert severity="warning">{loadError}</EpisAlert> : null}
-            <PatientListGrid
-              rows={patients}
-              emptyMessage={copy.longitudinal.emptySection}
-              onSelectPatient={selectPatient}
-              censusNarrative
-              data-testid="epis2-patient-search-grid"
-            />
-          </Stack>
-        ) : (
-          <>
-            <EpisClinicalFormRhf
-              blueprint={effectiveBlueprint}
-              clinicalProse={clinicalProse}
-              collapseNonPrimarySections={blueprint.sections.length > 2}
-              renderClinicalTextBox={renderClinicalTextBox}
-              renderCatalogField={renderCatalogField}
-            />
-            {showDraftActions ? <EpisClinicalFormFooter actions={formActionBar} /> : null}
-          </>
-        )}
+        <EpisClinicalFormRhf
+          blueprint={effectiveBlueprint}
+          clinicalProse={clinicalProse}
+          collapseNonPrimarySections={blueprint.sections.length > 2}
+          renderClinicalTextBox={renderClinicalTextBox}
+          renderCatalogField={renderCatalogField}
+        />
+        {showDraftActions ? <EpisClinicalFormFooter actions={formActionBar} /> : null}
 
         <GeneratedFormClinicalAlerts
           enabled={showClinicalAlerts}
@@ -909,7 +878,11 @@ export function GeneratedClinicalFormPage({ blueprint }: GeneratedClinicalFormPa
           onDismiss={() => setPostSaveActions([])}
         />
 
-        <ClinicalPageNav patientId={effectivePatientId} />
+        <ClinicalPageNav
+          patientId={effectivePatientId}
+          patientDisplayName={activePatient?.displayName}
+          sectionLabel={clinicalIntent.sectionLabel}
+        />
       </EpisClinicalFormPage>
     </FormProvider>
   );

@@ -35,8 +35,8 @@ if (!mobile.includes("display: { xs: 'block', md: 'none' }")) {
   errors.push('nav móvil debe mostrarse solo en xs/sm');
 }
 
-if (!existsSync(join(root, 'reports/epis2-mf-te-04-sections-p3-mobile.md'))) {
-  errors.push('falta reports/epis2-mf-te-04-sections-p3-mobile.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-te-04-sections-p3-mobile.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-te-04-sections-p3-mobile.md');
 }
 
 if (errors.length) {

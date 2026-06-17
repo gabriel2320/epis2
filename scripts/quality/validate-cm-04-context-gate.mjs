@@ -47,8 +47,8 @@ if (!rankSrc.includes('traditionalSectionIntentBoost')) {
   errors.push('context-rank debe aplicar traditionalSectionIntentBoost');
 }
 
-if (!existsSync(join(root, 'reports/epis2-mf-cm-04-context.md'))) {
-  errors.push('falta reports/epis2-mf-cm-04-context.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-cm-04-context.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-cm-04-context.md');
 }
 
 const vitest = spawnSync(

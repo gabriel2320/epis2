@@ -17,8 +17,8 @@ const required = [
   ['EPIS2_MODEL_CARD_SYSTEM', 'packages/fhir-export/src/constants.ts'],
   ['AiProvenanceRecord contract', 'packages/contracts/src/ai-provenance.ts'],
   ['model card canon', 'docs/product/EPIS2_AI_MODEL_CARD.md'],
-  ['closure im-06', 'reports/epis2-mf-im-06-provenance-fhir.md'],
-  ['closure im-07', 'reports/epis2-mf-im-07-model-card.md'],
+  ['closure im-06', 'reports/archive/2026-06/epis2-mf-im-06-provenance-fhir.md'],
+  ['closure im-07', 'reports/archive/2026-06/epis2-mf-im-07-model-card.md'],
 ];
 
 for (const [label, rel] of required) {

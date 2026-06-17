@@ -26,8 +26,8 @@ if (!ehr.includes('resolveTraditionalSectionContent')) {
   errors.push('TraditionalEhrMode debe resolver secciones TE-02');
 }
 
-if (!existsSync(join(root, 'reports/epis2-mf-te-02-sections-p1.md'))) {
-  errors.push('falta reports/epis2-mf-te-02-sections-p1.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-te-02-sections-p1.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-te-02-sections-p1.md');
 }
 
 if (errors.length) {

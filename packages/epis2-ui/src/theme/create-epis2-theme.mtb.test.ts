@@ -1,17 +1,24 @@
 import { describe, expect, it } from 'vitest';
+import { clinicalCalmLightScheme } from './generated/clinical-calm.js';
 import { clinicalBlueLightScheme } from './generated/clinical-blue.js';
 import { calmTealLightScheme } from './generated/calm-teal.js';
-import { clinicalCalmLightScheme } from './generated/clinical-calm.js';
 import { clinicalRoles } from './clinical-roles.js';
 import { createEpis2Theme } from './create-epis2-theme.js';
 
 describe('createEpis2Theme — Material Theme Builder', () => {
-  it('usa Clinical Blue MTB por defecto', () => {
+  it('usa Clinical Calm MTB por defecto (MF-AEST-04)', () => {
     const theme = createEpis2Theme();
+    expect(theme.epis2.themeId).toBe('clinical-calm');
+    expect(theme.palette.primary?.main).toBe(clinicalCalmLightScheme.primary);
+    expect(theme.palette.background?.default).toBe('#F7F9FC');
+    expect(theme.epis2.clinical).toEqual(clinicalRoles);
+  });
+
+  it('usa Clinical Blue MTB cuando acento explícito', () => {
+    const theme = createEpis2Theme({ accent: 'clinicalBlue' });
     expect(theme.epis2.themeId).toBe('clinical-blue');
     expect(theme.palette.primary?.main).toBe(clinicalBlueLightScheme.primary);
     expect(theme.palette.background?.default).toBe(clinicalBlueLightScheme.surfaceContainer);
-    expect(theme.epis2.clinical).toEqual(clinicalRoles);
   });
 
   it('resuelve tealBlue a Calm Teal MTB', () => {

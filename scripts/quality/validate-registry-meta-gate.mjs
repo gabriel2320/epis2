@@ -21,7 +21,7 @@ for (const rel of [
   'database/migrations/040_chile_audit_extend.sql',
   'apps/api/src/clinical/patientClinicalSummary.ts',
   'packages/contracts/src/clinicalSummary.ts',
-  'reports/epis2-mf-sh-04-registry-meta.md',
+  'reports/archive/2026-06/epis2-mf-sh-04-registry-meta.md',
 ]) {
   if (!existsSync(join(root, rel))) errors.push(`falta: ${rel}`);
 }

@@ -26,11 +26,16 @@ const formPage = readFileSync(
   join(root, 'apps/web/src/pages/GeneratedClinicalFormPage.tsx'),
   'utf8',
 );
-if (!formPage.includes('EpisClinicalFormActionBar')) {
-  errors.push('GeneratedClinicalFormPage sin EpisClinicalFormActionBar');
+if (
+  !formPage.includes('ClinicalLayoutActionBar') &&
+  !formPage.includes('EpisClinicalFormActionBar')
+) {
+  errors.push('GeneratedClinicalFormPage sin barra de acciones clínica gobernada');
 }
 
-const actionBarJsx = (formPage.match(/<EpisClinicalFormActionBar/g) ?? []).length;
+const actionBarJsx =
+  (formPage.match(/<ClinicalLayoutActionBar/g) ?? []).length +
+  (formPage.match(/<EpisClinicalFormActionBar/g) ?? []).length;
 if (actionBarJsx !== 1) {
   errors.push(
     `GeneratedClinicalFormPage debe renderizar una sola ActionBar (encontradas: ${actionBarJsx})`,

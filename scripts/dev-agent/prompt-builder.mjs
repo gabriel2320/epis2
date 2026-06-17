@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { DEV_SUBAGENTS } from './subagents.mjs';
+import { DEV_SUBAGENTS, ARCHIVED_SUBAGENT_IDS } from './subagents.mjs';
 
 function readExcerpt(root, rel, maxLines = 40) {
   const path = join(root, rel);
@@ -28,17 +28,27 @@ export function buildSubagentPrompt(root, subagentId, context = {}) {
   if (!agent) {
     throw new Error(`Subagente desconocido: ${subagentId}`);
   }
+  if (ARCHIVED_SUBAGENT_IDS.has(subagentId)) {
+    return `# ARCHIVADO — subagente \`${subagentId}\`
+
+**No usar para planificar.** ${agent.archiveReason ?? 'Ver docs/archive/AGENT_SCOPE_EXCLUSIONS.md'}
+
+Canon activo: \`docs/EPIS2_CURRENT_STATE.md\` · CICA: \`apps/web/src/cica/\`
+
+Reabrir solo con MF autorizada + \`EPIS2_ALLOW_ARCHIVED_SCOPE=1\`.
+`;
+  }
 
   const tramo = context.tramo?.toUpperCase();
-  const mf = context.mf ?? (tramo ? `MF-TRAMO-${tramo}-002` : 'MF-FASE-B-001');
-  const phase = context.phase ?? 'B';
+  const mf = context.mf ?? (tramo ? `MF-TRAMO-${tramo}-002` : 'MF-PURGE-CICA');
+  const phase = context.phase ?? 'cica';
 
   const tramoBlock =
     tramo && existsSync(tramoPlanPath(root, tramo))
       ? `\n## Plan tramo ${tramo}\n\n${readExcerpt(root, `docs/product/EPIS2_TRAMO_${tramo}_PLAN.md`, 45)}\n\nInventario: ${tramoInventoryNote(root, tramo) ?? '—'}`
       : '';
 
-  const globalPlan = readExcerpt(root, 'docs/product/EPIS2_GLOBAL_DEV_PLAN.md', 55);
+  const activePlan = readExcerpt(root, 'docs/EPIS2_CURRENT_STATE.md', 45);
 
   return `# EPIS2 — Subagente \`${agent.id}\`
 
@@ -59,16 +69,21 @@ ${agent.triggers.map((t) => `- ${t}`).join('\n')}
 ${agent.gates.join('\n')}
 \`\`\`
 
-## Plan global (extracto)
+## Brújula activa (extracto)
 
-${globalPlan}
+${activePlan}
+
+## Perímetro agente
+
+\`docs/archive/AGENT_SCOPE_EXCLUSIONS.md\` — no planificar desde \`reports/archive/\` ni programas cerrados.
 ${tramoBlock}
 
 ## Reglas EPIS2 (no negociables)
 
-- Home = \`/comando\` — nunca dashboard como home
+- Home = censo \`/espacio/buscar-paciente\` · experiencia activa CICA \`/app/*\`
 - PostgreSQL = SoT; IA no firma ni aprueba
 - Sin import desde \`../Epis\` sin \`legacy-import-manifest.json\`
+- No planificar desde \`reports/archive/\` ni programas en \`docs/archive/ARCHIVED_PROGRAMS_INDEX.md\`
 - No commit ni push salvo orden explícita del humano
 - Cerrar sesión con reporte en \`reports/\`
 
@@ -112,10 +127,9 @@ export function buildSessionIndex(root, { phase, tramo, sequence }) {
     '## Cierre sesión',
     '',
     '```bash',
-    'npm run check',
-    'npm run test',
-    'npm run db:validate',
-    'npm run quality:layers-integration-gate',
+    'npm run dev:rapid',
+    'npm run quality:clinical   # cierre MF clínico',
+    'npm run quality:full       # pre-PR',
     '```',
     '',
   ];

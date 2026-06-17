@@ -17,7 +17,7 @@ async function loginViaUi(page: Page) {
   await page.getByLabel(copy.login.demoKeyLabel).fill('DEMO-CLAVE-MEDICO');
   await page.getByRole('button', { name: copy.login.submit }).click();
   await expect(page).toHaveURL(/\/espacio\/buscar-paciente/, { timeout: 15_000 });
-  await expect(page.getByTestId('epis2-census-command-bar')).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByTestId('epis2-patient-search-screen')).toBeVisible({ timeout: 15_000 });
 }
 
 async function openEvolutionForm(page: Page) {
@@ -36,6 +36,13 @@ async function fillEvolutionDraft(page: Page, subjective: string) {
   await page.getByLabel('Plan').fill('Plan demo M3 — seguimiento clínico.');
 }
 
+async function clickAccentChip(page: Page, testId: string) {
+  const chip = page.getByTestId(testId);
+  await chip.scrollIntoViewIfNeeded();
+  await expect(chip).toBeVisible();
+  await chip.click();
+}
+
 test.describe('M3 visual signoff — V1–V6', () => {
   test('V1 — preferencias MTB instantáneas sin botón Guardar', async ({ page }) => {
     await loginAsPhysician(page);
@@ -43,17 +50,17 @@ test.describe('M3 visual signoff — V1–V6', () => {
     await expect(page.getByTestId('epis2-appearance-preferences-page')).toBeVisible();
     await expect(page.getByRole('button', { name: /guardar/i })).toHaveCount(0);
 
-    await page.getByTestId('epis2-accent-tealBlue').click();
+    await clickAccentChip(page, 'epis2-accent-tealBlue');
     const tealStored = await page.evaluate(() =>
       JSON.parse(localStorage.getItem('epis2-theme-preferences-v2') ?? '{}'),
     );
     expect(tealStored.accent).toBe('tealBlue');
 
-    await page.getByTestId('epis2-accent-clinicalBlue').click();
-    const blueStored = await page.evaluate(() =>
+    await clickAccentChip(page, 'epis2-accent-clinicalCalm');
+    const calmStored = await page.evaluate(() =>
       JSON.parse(localStorage.getItem('epis2-theme-preferences-v2') ?? '{}'),
     );
-    expect(blueStored.accent).toBe('clinicalBlue');
+    expect(calmStored.accent).toBe('clinicalCalm');
 
     await goToCommandCenter(page);
     const canvasBg = await page.evaluate(() => {
@@ -68,7 +75,7 @@ test.describe('M3 visual signoff — V1–V6', () => {
     await page.goto('/preferencias-apariencia');
     await page.getByTestId('epis2-mode-dark').click();
     await goToCommandCenter(page);
-    await expect(page.getByTestId('epis2-census-command-bar')).toBeVisible();
+    await expect(page.getByTestId('epis2-patient-search-screen')).toBeVisible();
     await expect(page.getByTestId('epis2-generated-clinical-page')).toBeVisible();
 
     await openEvolutionForm(page);
@@ -82,7 +89,7 @@ test.describe('M3 visual signoff — V1–V6', () => {
     await page.goto('/preferencias-apariencia');
     await page.getByTestId('epis2-contrast-high').click();
     await goToCommandCenter(page);
-    await expect(page.getByTestId('epis2-census-command-bar')).toBeVisible();
+    await expect(page.getByTestId('epis2-patient-search-screen')).toBeVisible();
 
     await openEvolutionForm(page);
     await fillEvolutionDraft(page, 'Control alto contraste — texto legible.');
@@ -115,7 +122,7 @@ test.describe('M3 visual signoff — V1–V6', () => {
       copy.drafts.approvedSuccess,
     );
     await goToCommandCenter(page);
-    await expect(page.getByTestId('epis2-census-command-bar')).toBeVisible();
+    await expect(page.getByTestId('epis2-patient-search-screen')).toBeVisible();
   });
 
   test('V6 — banner offline y reduced motion', async ({ page }) => {

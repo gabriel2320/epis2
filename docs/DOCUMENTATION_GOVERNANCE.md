@@ -36,7 +36,7 @@ Un solo criterio para agentes, revisores y operadores: **qué documento manda** 
 2. **Tablero vs ledger JSON** → manda el **ledger** del programa (`ficha-first-ledger.json`, `microphase-ledger.json`, etc.).
 3. **Reportes vs docs vigentes** → los **reportes son históricos** salvo que el cierre de programa diga explícitamente lo contrario.
 4. **Capability Map vs CURRENT_STATE** → manda **CURRENT_STATE**; el mapa completo es inventario histórico.
-5. **Agentes Cursor** → leer primero [`AGENT_CONTEXT_MINIMAL.md`](AGENT_CONTEXT_MINIMAL.md) + **CURRENT_STATE**; no usar auditorías antiguas salvo petición.
+5. **Agentes Cursor** → leer primero [`AGENT_CONTEXT_MINIMAL.md`](AGENT_CONTEXT_MINIMAL.md) + **CURRENT_STATE** + [`archive/AGENT_SCOPE_EXCLUSIONS.md`](archive/AGENT_SCOPE_EXCLUSIONS.md); no usar `reports/archive/` para decisiones.
 
 ---
 

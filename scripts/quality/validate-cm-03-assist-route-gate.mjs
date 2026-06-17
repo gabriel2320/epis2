@@ -38,8 +38,8 @@ if (!ficha.includes('getCommandBarAiHint') || !ficha.includes('epis2-ficha-comma
   errors.push('PatientWorkspaceCommandPanel debe exponer aiHint');
 }
 
-if (!existsSync(join(root, 'reports/epis2-mf-cm-03-assist-route.md'))) {
-  errors.push('falta reports/epis2-mf-cm-03-assist-route.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-cm-03-assist-route.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-cm-03-assist-route.md');
 }
 
 const vitest = spawnSync(

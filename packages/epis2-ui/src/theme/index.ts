@@ -45,3 +45,11 @@ export {
   epis2PaperNavTabSx,
   epis2PaperStatusCaptionSx,
 } from './paper-visual-reference.js';
+export {
+  epis2ClassicChartTabSx,
+  epis2ClassicChartTabsNavSx,
+  epis2ClassicClinicalBlockSx,
+  epis2ClassicClinicalTableSx,
+  epis2ClassicSummaryBlockSx,
+  epis2ClassicChartContentSx,
+} from './clinical/classic-clinical-visual.js';

@@ -2,16 +2,36 @@
  * ADR-002 — E2E dual chart modes (opt-in CI: VITE_ENABLE_DUAL_CHART_MODES=true).
  */
 import { test, expect } from '@playwright/test';
-import { copy } from '@epis2/design-system';
-import { getDemoCaseByCode } from '@epis2/test-fixtures';
 import {
   fillCommandPaletteQuery,
   fillMinimalPrescriptionDraft,
+  getCommandPaletteQueryInput,
   loginAsPhysician,
+  openClassicChartTab,
   pinDemoCase,
 } from './helpers/demoPatient.js';
+import type { Page } from '@playwright/test';
 
-const demoPatientId = getDemoCaseByCode('DEMO-005')!.patientId;
+async function openDemoFicha(page: Page, demoCode: string) {
+  await pinDemoCase(page, demoCode);
+  await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+}
+
+async function expandDualChartContextPanel(page: Page) {
+  const expand = page.getByTestId('epis2-clinical-right-context-panel-expand');
+  if (await expand.isVisible().catch(() => false)) {
+    await expand.click();
+  }
+  await expect(page.getByTestId('epis2-clinical-right-context-panel')).toBeVisible({
+    timeout: 15_000,
+  });
+}
+
+async function openPaperFromDualFicha(page: Page) {
+  await page.getByTestId('epis2-chart-layout-paper').click();
+  await expect(page).toHaveURL(/chartMode=paper/, { timeout: 15_000 });
+  await expect(page.getByTestId('epis2-paper-chart-mode')).toBeVisible({ timeout: 15_000 });
+}
 
 test.describe('Dual chart modes ADR-002', () => {
   test.beforeEach(async ({ page }) => {
@@ -26,7 +46,7 @@ test.describe('Dual chart modes ADR-002', () => {
 
   test('a) abre ficha electrónica tradicional', async ({ page }) => {
     await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
-    await expect(page.getByTestId('epis2-traditional-ehr-nav')).toBeVisible();
+    await expect(page.getByTestId('classic-chart-tabs')).toBeVisible();
   });
 
   test('b) alterna a ficha papel', async ({ page }) => {
@@ -78,15 +98,13 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
   });
 
   test('g) abre ficha tradicional en /espacio/ficha', async ({ page }) => {
-    await page.goto(`/espacio/ficha?patientId=${demoPatientId}`);
-    await expect(page).toHaveURL(/chartMode=traditional/);
-    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    await openDemoFicha(page, 'DEMO-005');
+    await expect(page).toHaveURL(/chartMode=traditional/, { timeout: 15_000 });
     await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
   });
 
   test('g2b) trust ladder — demo + borrador + IA degradada (MF-UXLAB-02)', async ({ page }) => {
-    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
-    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    await openDemoFicha(page, 'DEMO-005');
     await expect(page.getByTestId('epis2-patient-identity-demo-badge')).toBeVisible();
     await expect(page.getByTestId('epis2-draft-status-draft')).toBeVisible();
     await expect(async () => {
@@ -95,15 +113,13 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
   });
 
   test('g2) contexto denso visible en ficha (MF-DI-01)', async ({ page }) => {
-    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
-    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    await openDemoFicha(page, 'DEMO-005');
     await expect(page.getByTestId('epis2-clinical-context-dense-strip')).toBeVisible();
     await expect(page.getByTestId('epis2-clinical-context-dense-strip-care-setting')).toBeVisible();
   });
 
   test('g3) acciones probables en resumen ficha (MF-DI-05)', async ({ page }) => {
-    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
-    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    await openDemoFicha(page, 'DEMO-005');
     await expect(page.getByTestId('epis2-clinical-probable-actions')).toBeVisible({
       timeout: 15_000,
     });
@@ -114,19 +130,19 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
 
   test('g4) chips silenciosos en panel contexto (MF-DI-06)', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
-    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
-    await expect(page.getByTestId('epis2-clinical-right-context-panel')).toBeVisible();
+    await openDemoFicha(page, 'DEMO-001');
+    await expandDualChartContextPanel(page);
     await expect(page.getByTestId('epis2-clinical-silent-suggestions')).toBeVisible();
   });
 
   test('g5) timeline filtrable en evoluciones (MF-DI-08)', async ({ page }) => {
-    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
-    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
-    await page.getByTestId('epis2-traditional-ehr-nav-navEvolution').click();
+    await openDemoFicha(page, 'DEMO-005');
+    await openClassicChartTab(page, 'evolutions');
     await expect(page.getByTestId('epis2-clinical-filterable-timeline')).toBeVisible();
-    await expect(page.getByTestId('epis2-clinical-filterable-timeline-filter-labs')).toBeVisible();
-    await page.getByTestId('epis2-clinical-filterable-timeline-filter-labs').click();
+    await expect(
+      page.getByTestId('epis2-clinical-filterable-timeline-filter-evolutions'),
+    ).toBeVisible();
+    await page.getByTestId('epis2-clinical-filterable-timeline-filter-evolutions').click();
     await expect(
       page
         .getByTestId('epis2-clinical-filterable-timeline-period-last3Months')
@@ -137,12 +153,11 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
   });
 
   test('g6) microjourneys post-receta (MF-DI-09)', async ({ page }) => {
-    await pinDemoCase(page, 'DEMO-005');
-    await page.goto(`/espacio/receta?patientId=${demoPatientId}`);
-    await expect(page.getByTestId('epis2-form-prescription')).toBeVisible({ timeout: 15_000 });
-    await expect(page.getByTestId('epis2-active-patient')).toBeVisible({ timeout: 15_000 });
+    await openDemoFicha(page, 'DEMO-005');
+    await openClassicChartTab(page, 'more');
+    await page.getByTestId('epis2-chart-layout-prescription').click();
     await fillMinimalPrescriptionDraft(page);
-    const saveButton = page.getByRole('button', { name: copy.forms.save });
+    const saveButton = page.getByTestId('epis2-form-save');
     await expect(saveButton).toBeEnabled();
     await Promise.all([
       page.waitForResponse(
@@ -161,8 +176,7 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
   });
 
   test('h) patient-view muestra CDS card al abrir ficha DEMO-005', async ({ page }) => {
-    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
-    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    await openDemoFicha(page, 'DEMO-005');
     const patientViewPanel = page.getByTestId('epis2-cds-patient-view');
     await expect(patientViewPanel).toBeVisible({ timeout: 15_000 });
     await expect(
@@ -171,10 +185,8 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
   });
 
   test('h-alt) alterna a papel desde /espacio/ficha', async ({ page }) => {
-    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
-    await page.getByTestId('epis2-chart-mode-paper').click();
-    await expect(page).toHaveURL(/chartMode=paper/);
-    await expect(page.getByTestId('epis2-paper-chart-mode')).toBeVisible();
+    await openDemoFicha(page, 'DEMO-005');
+    await openPaperFromDualFicha(page);
     await expect(
       page
         .getByTestId('epis2-paper-chart-template-page-1')
@@ -183,24 +195,22 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
   });
 
   test('i) paleta @epis2/clinical-productivity en ficha dual', async ({ page }) => {
-    await page.goto(`/espacio/ficha?patientId=${demoPatientId}`);
-    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    await openDemoFicha(page, 'DEMO-005');
     await page.keyboard.press('Control+k');
-    await expect(page.getByRole('dialog')).toBeVisible();
-    await expect(page.getByTestId('epis2-command-palette-query')).toBeVisible();
+    await expect(page.getByTestId('epis2-clinical-command-palette').first()).toBeVisible();
+    await expect(getCommandPaletteQueryInput(page)).toBeVisible();
   });
 
   test('k) Ctrl+K en ficha papel (MF-CM-02)', async ({ page }) => {
-    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=paper`);
-    await expect(page.getByTestId('epis2-paper-chart-mode')).toBeVisible({ timeout: 15_000 });
+    await openDemoFicha(page, 'DEMO-005');
+    await openPaperFromDualFicha(page);
     await page.keyboard.press('Control+k');
     await expect(page.getByTestId('epis2-clinical-command-palette')).toBeVisible();
     await expect(page.getByTestId('epis2-command-palette-query')).toBeVisible();
   });
 
   test('l) paleta fuzzy filtra evolución (MF-CM-02)', async ({ page }) => {
-    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
-    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    await openDemoFicha(page, 'DEMO-005');
     await page.keyboard.press('Control+k');
     await fillCommandPaletteQuery(page, 'evol');
     await expect(
@@ -209,33 +219,29 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
   });
 
   test('j) navega sección alergias con contenido (MF-TE-02)', async ({ page }) => {
-    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
-    await page.getByTestId('epis2-traditional-ehr-nav-navAllergies').click();
-    await expect(page.getByTestId('epis2-traditional-section-allergies')).toBeVisible();
-    await expect(page.getByTestId('epis2-traditional-section-allergies-table')).toBeVisible();
+    await openDemoFicha(page, 'DEMO-005');
+    await expect(page.getByTestId('epis2-patient-allergy-chip').first()).toBeVisible({
+      timeout: 15_000,
+    });
   });
 
   test('m) switch modo preserva paciente (MF-NORM-11)', async ({ page }) => {
-    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
-    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
-    await page.getByTestId('epis2-chart-mode-paper').click();
-    await expect(page).toHaveURL(/chartMode=paper/);
-    await expect(page.getByTestId('epis2-paper-chart-mode')).toBeVisible();
-    await page.getByTestId('epis2-chart-mode-traditional').click();
-    await expect(page).toHaveURL(/chartMode=traditional/);
+    await openDemoFicha(page, 'DEMO-005');
+    await openPaperFromDualFicha(page);
+    await page.getByTestId('epis2-clinical-nav-ficha').click();
+    await expect(page).toHaveURL(/chartMode=traditional/, { timeout: 15_000 });
     await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
   });
 
   test('n) oculta nav demo vacías (MF-NORM-11)', async ({ page }) => {
-    await page.goto(`/espacio/ficha?patientId=${demoPatientId}&chartMode=traditional`);
-    await expect(page.getByTestId('epis2-traditional-ehr-nav')).toBeVisible({ timeout: 15_000 });
-    await expect(page.getByTestId('epis2-traditional-ehr-nav-navAntecedents')).toHaveCount(0);
+    await openDemoFicha(page, 'DEMO-005');
+    await openClassicChartTab(page, 'evolutions');
+    await expect(page.getByTestId('classic-chart-subnav-navAntecedents')).toHaveCount(0);
   });
 
   test('o) panel IA contextual en ficha tradicional (MF-CM-08 / UX-G02 E)', async ({ page }) => {
-    const demo001 = getDemoCaseByCode('DEMO-001')!.patientId;
-    await page.goto(`/espacio/ficha?patientId=${demo001}&chartMode=traditional`);
-    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    await openDemoFicha(page, 'DEMO-001');
+    await expandDualChartContextPanel(page);
     await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
     await expect(page.getByTestId('epis2-context-ai-panel')).toBeVisible();
     await expect(page.getByTestId('epis2-context-suggested-actions')).toBeVisible();

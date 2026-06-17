@@ -14,6 +14,7 @@ import { useEpisSideNavigation } from '../components/layout/EpisSideNavigation.j
 import { Epis2NavigationRailFooter } from '../navigation/epis2NavigationRail.js';
 import { EpisModeGuard } from '../modes/EpisModeGuard.js';
 import { ClinicalPatientChartChrome } from './ClinicalPatientChartChrome.js';
+import { ClinicalNavStrip } from './ClinicalNavStrip.js';
 
 export function ClinicalShellLayout() {
   const { session, logout } = useAuth();
@@ -21,7 +22,9 @@ export function ClinicalShellLayout() {
   const isClassicMode = useClassicMd3Mode();
   const dualChartEnabled = isDualChartModesEnabled();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isDualChartFicha = dualChartEnabled && !isClassicMode && pathname === '/espacio/ficha';
+  const isEspacioRoute = pathname.startsWith('/espacio/');
+  const isDualChartMinimalShell = dualChartEnabled && !isClassicMode && isEspacioRoute;
+  const isPatientSearch = pathname.startsWith('/espacio/buscar-paciente');
 
   useEffect(() => {
     if (!isClassicMode) {
@@ -44,6 +47,44 @@ export function ClinicalShellLayout() {
       ) : null}
     </Stack>
   );
+
+  if (isDualChartMinimalShell) {
+    return (
+      <>
+        <EpisModeGuard>
+          <Box
+            sx={{
+              height: '100dvh',
+              maxHeight: '100dvh',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+            data-testid={
+              isPatientSearch
+                ? 'epis2-clinical-shell-patient-search'
+                : 'epis2-clinical-shell-minimal'
+            }
+          >
+            <OfflineStatusBanner />
+            <ClinicalNavStrip />
+            <Box
+              sx={{
+                flex: 1,
+                minHeight: 0,
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <Outlet />
+            </Box>
+          </Box>
+        </EpisModeGuard>
+        <ClinicalShellCommandPalette />
+      </>
+    );
+  }
 
   if (isClassicMode) {
     return (
@@ -68,24 +109,6 @@ export function ClinicalShellLayout() {
     );
   }
 
-  if (isDualChartFicha) {
-    return (
-      <Box
-        sx={{
-          height: '100dvh',
-          maxHeight: '100dvh',
-          overflow: 'hidden',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-        data-testid="epis2-clinical-shell-dual-chart"
-      >
-        <OfflineStatusBanner />
-        <Outlet />
-      </Box>
-    );
-  }
-
   return (
     <>
       <EpisAppScaffold
@@ -93,13 +116,14 @@ export function ClinicalShellLayout() {
         topBar={<EpisTopAppBar active="clinical" />}
         sideNavItems={sideNavItems}
         sideNavFooter={railFooter}
+        railHidden={dualChartEnabled}
         patientChrome={
           <>
             <OfflineStatusBanner />
             <ClinicalPatientChartChrome />
           </>
         }
-        commandBar={<ChartEspacioCommandDock />}
+        commandBar={dualChartEnabled ? undefined : <ChartEspacioCommandDock />}
         testId="epis2-clinical-shell"
       >
         <Outlet />

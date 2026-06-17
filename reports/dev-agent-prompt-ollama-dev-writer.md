@@ -1,7 +1,7 @@
 # EPIS2 — Subagente `ollama-dev-writer`
 
 **Rol:** Escritor dev bajo riesgo (Ollama)  
-**Microfase / alcance:** MF-FASE-B-001 · Fase B
+**Microfase / alcance:** MF-PURGE-CICA · Fase cica
 
 ## Canon obligatorio
 
@@ -22,70 +22,65 @@ quality:dev-agent-low-risk-write-gate
 npm run dev:agent:ollama-write
 ```
 
-## Plan global (extracto)
+## Brújula activa (extracto)
 
-# EPIS2 — Plan de desarrollo global (consolidado)
+# EPIS2 — Estado actual del proyecto (brújula)
 
-**Versión:** 1.5 · **Fecha:** 2026-06-11  
-**Sistema:** [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) (SDEPIS2) · **Tablero:** [`EPIS2_TABLERO.md`](./EPIS2_TABLERO.md)  
-**Fuentes:** `ROADMAP.md` · `EPIS2_COMPLETION_ROADMAP.md` · MF-UI-SIMPLIFY · MF-RAD-M3 · tramos A–K
+**Versión:** 1.3 · **Fecha:** 2026-06-16  
+**Audiencia:** equipos, agentes Cursor, planificación  
+**Gobierno documental:** [`DOCUMENTATION_GOVERNANCE.md`](DOCUMENTATION_GOVERNANCE.md) · **Entrada pública:** [`README.md`](../README.md)  
+**Supersedes parcialmente:** [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md) para decisiones de alcance (tablero = índice humano)
 
-> Vocabulario: **Hilo** (secuencia activa) · **Ola** (capacidad) · **Tramo** (dominio clínico) · **Microfase** (sesión) · **Entrega** (PR acotado). «Fase A/B» = **Hilo A/B** (deprecado).
-
----
-
-## Norte único
-
-```text
-Login → Centro de Comando → paciente → intención → formulario mínimo → borrador → aprobación humana
-```
-
-Home = `/comando`. PostgreSQL = SoT. IA no firma. Sin OpenMRS/Carbon en UI.
+> Visión north star: [`product/VISION_EPIS2.md`](product/VISION_EPIS2.md) v2 · Canon: [`PRODUCT_CANON.md`](PRODUCT_CANON.md)
 
 ---
 
-## Capas de ejecución (orden de precedencia)
+## Resumen ejecutivo
 
-| Capa | Qué | Estado |
-|------|-----|--------|
-| **L0 Invariantes** | `PRODUCT_INVARIANTS.md`, architecture:validate | Permanente |
-| **L1 Producto** | Olas 0–3, golden journey | Ola 1 ✓ · Ola 2 Hilo B ✓ · Ola 3 activa |
-| **L2 Tramos clínicos** | A–K (urgencias, UCI, OR, farmacia…) | A–J ✓ scaffold · signoff clínico Tramo J cerrado |
-| **L3 UX densidad** | MF-UI-SIMPLIFY-M3 scaffold | ✓ base |
-| **L4 RAD productividad** | MF-RAD-M3 disciplina VB→MD3 | ✓ Hilo A |
-| **L5 clinical-productivity** | `@epis2/clinical-productivity` wrappers | ✓ base · puente vía `ClinicalDataGrid` |
-| **L6 Tramo J** | Farmacia 161–170 | Scaffold ✓ · signoff PEND-001 cerrado 2026-06-09 |
+EPIS2 **compila y demuestra** un flujo clínico mínimo (censo → ficha dual → borrador → aprobación) con IA opcional. Los programas recientes **PROG-FICHA-FIRST**, **PROG-STRENGTHEN** y **PROG-CDS-UX** están cerrados.
 
-Detalle L4→L5: `docs/product/EPIS2_UI_LAYERS.md`.
+El problema operativo principal (**superficie npm/gates**) se abordó con:
+
+- **PROG-CONSOLIDATE ola 1 ✓** (Fases 0–4) y **ola 2 ✓** (MF-CON-02…11 + 09/10, PR [#12](https://github.com/gabriel2320/epis2/pull/12)).
+- **PROG-RELEASE-HARDENING ✓** (RH-01…08, PR [#15](https://github.com/gabriel2320/epis2/pull/15)+[#16](https://github.com/gabriel2320/epis2/pull/16)): Node 24, workflows security report-only, auth fail-closed, `quality:release`, bridge fixtures web.
+- Congelamiento vigente: [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md).
+- Tags demo: **`v0.1-demo-rc`** · **`v0.1-demo-rc2`** · **`v0.1-demo-rc3`** (release hardening + README alineado).
+
+**Git:** una rama productiva (`master`). Las “ramas truncadas” son **módulos a medias en master**, no branches git olvidadas.
 
 ---
 
-## Hilos activos (Q2 2026)
+## EPIS2 Base v0.1 (definición de núcleo entregable)
 
-### Hilo A — Consolidación visual (**cerrado** 2026-06-04)
+Checklist para declarar “base consolidada”. No es HIS integral.
 
-- [x] MF-UI-SIMPLIFY: scaffold, scroll único, ActionBar única
-- [x] MF-RAD-M3: superficies, registry, modo diseño, gates
-- [x] MF-CLINICAL-PRODUCTIVITY: paquete, gates, piloto `PatientListGrid`
-- [x] Dashboard tabs densos → `EpisRadDashboardTabShell` + grids
-- [x] Acordeones formularios + monitoreo UCI + farmacia secundario
-- [x] Programa microfases MF-151→182 DONE (`quality:microphases`)
+| Criterio | Estado | Evidencia |
+|----------|--------|-----------|
+| Compila + typecheck | ✓ | `npm run check` |
+| Login demo | ✓ | auth demo |
+| Pacientes sintéticos | ✓ | fixtures DEMO/SIM |
+| Home = censo + barra transversal | ✓ | PROG-FICHA-FIRST |
+| Ficha dual MD3 \| papel | ✓ parcial | dual chart; no todos los docs sincronizados |
+| Command bar + registry | ✓ | `@epis2/command-registry` |
+| Formularios core (evolución, epicrisis, receta, lab) | ✓ | `@epis2/clinical-forms` |
+| Borrador → aprobación humana | ✓ | invariantes + API |
+| Auditoría básica | ✓ | audit store |
+| IA opcional (degrade) | ✓ | `quality:sh-03-degrade-gate` |
+| Golden journey | ✓ | `docs/quality/GOLDEN_CLINICAL_JOURNEY.md` |
+| Flujo ambulatorio completo | ◐ | roadmap |
+| Facturación / farmacia HIS | ✗ | [`NON_GOALS.md`](NON_GOALS.md) |
 
-Command palette Ctrl+K → **Hilo B**.
+## Perímetro agente
 
-### Hilo B — Completitud Ola 2 (**cerrado** 2026-06-09)
-
-- [x] `ClinicalCommandPalette` Ctrl+K (`ClinicalShellCommandPalette`)
-- [x] Autocomplete búsqueda paciente (`PatientSearchAutocomplete`)
-- [x] Journey `golden-v2-admission-discharge` — CI 10/10 E2E [27222014998](https://github.com/gabriel2320/epis2/actions/runs/27222014998)
-- [x] RAD `clinical-form-evolution` + `draft-review` → `done`
+`docs/archive/AGENT_SCOPE_EXCLUSIONS.md` — no planificar desde `reports/archive/` ni programas cerrados.
 
 
 ## Reglas EPIS2 (no negociables)
 
-- Home = `/comando` — nunca dashboard como home
+- Home = censo `/espacio/buscar-paciente` · experiencia activa CICA `/app/*`
 - PostgreSQL = SoT; IA no firma ni aprueba
 - Sin import desde `../Epis` sin `legacy-import-manifest.json`
+- No planificar desde `reports/archive/` ni programas en `docs/archive/ARCHIVED_PROGRAMS_INDEX.md`
 - No commit ni push salvo orden explícita del humano
 - Cerrar sesión con reporte en `reports/`
 

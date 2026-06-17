@@ -64,8 +64,8 @@ if (existsSync(hintsPath)) {
   }
 }
 
-if (!existsSync(join(root, 'reports/epis2-mf-pa-07-planner-ai.md'))) {
-  errors.push('falta reports/epis2-mf-pa-07-planner-ai.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-pa-07-planner-ai.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-pa-07-planner-ai.md');
 }
 
 const vitest = spawnSync(

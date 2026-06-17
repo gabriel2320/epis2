@@ -34,7 +34,7 @@ function getEvolabOpenFindingsHint(root) {
 const AI_DEV_LOOP = [
   '**1. Alcance** — Declarar MF, archivos permitidos y prohibidos antes de editar.',
   '**2. Contexto mínimo** — Leer solo canon + prompt del subagente activo; no re-leer todo el repo.',
-  '**3. Diff mínimo** — Un problema, un PR lógico; reutilizar patrones existentes (`DashboardPanelGridSection`, RAD shell).',
+  '**3. Diff mínimo** — Un problema, un PR lógico; reutilizar patrones CICA (`CicaAppShell`, `CicaPatientScreenFrame`).',
   '**4. Verificar tarde** — `npm run check` al cerrar, no tras cada línea (salvo typecheck puntual).',
   '**5. Gates del rol** — Ejecutar solo los del subagente + cierre estándar.',
   '**6. Reporte** — `reports/epis2-*.md` con alcance, gates, riesgos, próximo paso exacto.',
@@ -64,35 +64,45 @@ export async function buildDevBrief(root, opts) {
   const lines = [
     '# EPIS2 — Dev Brief (IA asistida)',
     '',
-    '> **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-' +
+    '> **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@docs/archive/AGENT_SCOPE_EXCLUSIONS.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-' +
       primary +
       '.md` — declarar alcance en el primer mensaje.',
     '',
     `**Generado:** ${new Date().toISOString()} · **HEAD:** \`${head}\` · **Fase:** ${resolvedPhase}${tramo ? ` · Tramo ${tramo}` : ''}`,
     '',
-    '## Orquestador (MF-RAPID + STRENGTHEN)',
+    '## Orquestador (PROG-PURGE-CICA + CICA)',
     '',
-    '- **PROG-RAPID** ✓ — iteración: `npm run dev:rapid` · cierre MF: `npm run quality:clinical`',
-    '- **PROG-FICHA-FIRST** — MF-FF-01…03 ✓ · home censo · `/comando` redirect',
-    '- **No** iniciar la MF READY siguiente salvo petición explícita del usuario.',
-    ...(strengthen ? [formatStrengthenLine(strengthen)] : []),
-    ...(fichaFirst ? [formatFichaFirstLine(fichaFirst)] : []),
+    '- **Alcance agente:** `docs/archive/AGENT_SCOPE_EXCLUSIONS.md` — no retomar tramos/olas archivados',
+    '- **Iteración:** `npm run dev:rapid` · cierre MF: `npm run quality:clinical`',
+    '- **Visual activa:** CICA `/app/*` · legacy `/espacio/*` = fallback only',
+    '- **No** iniciar MF READY de programas cerrados salvo petición explícita + `EPIS2_ALLOW_ARCHIVED_SCOPE=1`',
+    ...(strengthen?.active ? [formatStrengthenLine(strengthen)] : []),
+    ...(fichaFirst?.active ? [formatFichaFirstLine(fichaFirst)] : []),
+    ...(!strengthen?.active && !fichaFirst?.active
+      ? ['- Programas cerrados: `docs/archive/ARCHIVED_PROGRAMS_INDEX.md`']
+      : []),
     strengthen?.active
       ? `- Allowlist: ${strengthen.active.allowedPaths.slice(0, 4).join(', ')}${strengthen.active.allowedPaths.length > 4 ? '…' : ''}`
       : '',
     '',
-    '## Estado del tablero (fuente canónica)',
+    '## Estado brújula + tablero',
+    '',
+    '_Brújula (`EPIS2_CURRENT_STATE`) manda; tablero = índice humano._',
     '',
   ];
 
+  if (tablero.staleTableroHint) {
+    lines.push(`- **⚠ Tablero stale:** ${tablero.staleTableroHint}`);
+  }
   if (tablero.activeThreads.length > 0) {
-    lines.push(...tablero.activeThreads.map((t) => `- **En curso:** ${t}`));
+    lines.push(...tablero.activeThreads.map((t) => `- ${t}`));
   }
   if (tablero.nextSteps.length > 0) {
-    lines.push(...tablero.nextSteps.slice(0, 3).map((s) => `- **Siguiente:** ${s}`));
+    lines.push('', '**Pasos derivados:**');
+    lines.push(...tablero.nextSteps.slice(0, 4).map((s) => `- ${s}`));
   }
   if (tablero.activeThreads.length === 0 && tablero.nextSteps.length === 0) {
-    lines.push('- Tablero no legible — revisar `docs/product/EPIS2_TABLERO.md` manualmente.');
+    lines.push('- Sin parse — ver `docs/EPIS2_CURRENT_STATE.md`.');
   }
 
   lines.push('', '## Objetivo sugerido', '');
@@ -109,7 +119,9 @@ export async function buildDevBrief(root, opts) {
   } else if (tablero.nextSteps.length > 0) {
     lines.push(`- ${tablero.nextSteps[0]}`);
   } else {
-    lines.push('- Ver `docs/product/EPIS2_TABLERO.md` § Siguiente.');
+    lines.push(
+      '- **PROG-PURGE-CICA / CICA:** ver `docs/EPIS2_CURRENT_STATE.md` · merge `feat/prog-aesthetic-reset-close` pendiente',
+    );
   }
   if (ollamaPlan?.plan?.objective) {
     lines.push(`- **Ollama (≤24 h):** ${ollamaPlan.plan.objective}`);
@@ -172,12 +184,15 @@ export async function buildDevBrief(root, opts) {
     '',
     '```bash',
     'npm run stack:dev          # si falta Postgres/Ollama',
-    'npm run dev:velocity       # banner vivo (STRENGTHEN + HEAD)',
+    'npm run dev:velocity       # banner vivo',
     'npm run dev:rapid          # iteración MF-RAPID',
     'npm run dev:session        # regenerar este brief',
-    'npm run quality:strengthen-next',
-    'npm run ollama:route        # modelos por función + tier estación',
     '```',
+    '',
+    '## Fuera de alcance (archivado)',
+    '',
+    '- `reports/archive/**` · tramos A–K · three modes · olas M3 · subagentes `tramo-implementer`, `layers-integrator`, `m3-guardian`',
+    '- Índice programas cerrados: `docs/archive/ARCHIVED_PROGRAMS_INDEX.md`',
     '',
     '## Loop IA (mejores prácticas EPIS2)',
     '',
@@ -189,6 +204,7 @@ export async function buildDevBrief(root, opts) {
     '- Import masivo EPIS sin manifest',
     '- Auto-aprobación clínica · IA escribiendo SoT',
     '- Segundo Command/Form Registry temporal',
+    '- Planificar desde `reports/archive/` o reabrir tramos/olas sin MF + EPIS2_ALLOW_ARCHIVED_SCOPE=1',
     '',
     '## Cierre sesión',
     '',

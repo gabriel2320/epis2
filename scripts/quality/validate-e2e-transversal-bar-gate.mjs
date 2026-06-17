@@ -54,9 +54,7 @@ for (const file of walkTsFiles(e2eDir)) {
 }
 
 if (errors.length) {
-  console.error(
-    'e2e-transversal-bar-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
-  );
+  console.error('e2e-transversal-bar-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 
