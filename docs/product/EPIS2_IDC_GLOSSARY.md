@@ -76,4 +76,4 @@ No promover IDC **41** a `Done` hasta existir tablero UCI (Ola 13).
 
 - Árbol reconciliado: `docs/architecture/EPIS2_RECONCILED_NAVIGATION_TREE.md`
 - Gate M3-UI: `docs/design/EPIS2_CLINICAL_MATERIAL3_CONCILIATION.md` §11
-- Reporte MF: `reports/epis2-mf-ola2-001-m3-ui-gate.md`
+- Reporte MF: `reports/archive/2026-06/epis2-mf-ola2-001-m3-ui-gate.md`

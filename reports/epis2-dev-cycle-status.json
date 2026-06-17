@@ -10,8 +10,8 @@
     "mode": "read-only-reviewer",
     "maxPower": false,
     "artifactCount": 42,
-    "latestBrief": "reports/openclaw-latest-brief.md",
-    "latestHandoff": "reports/openclaw-latest-handoff.md"
+    "latestBrief": "reports/archive/2026-06/openclaw-latest-brief.md",
+    "latestHandoff": "reports/archive/2026-06/openclaw-latest-handoff.md"
   },
   "ollama": {
     "planObjective": "Continuar con la consolidación visual y mejorar la experiencia de usuario para los formularios clínicos.",

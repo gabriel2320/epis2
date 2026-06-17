@@ -102,8 +102,8 @@ Validar con piloto antes de fijar registry.
 
 ## Referencias
 
-- Acta UX-A: `reports/epis2-ux-ui-audit-2026-06-04.md`
-- Progreso: `reports/epis2-ux-a-progress-2026-06-04.md`
+- Acta UX-A: `reports/archive/2026-06/epis2-ux-ui-audit-2026-06-04.md`
+- Progreso: `reports/archive/2026-06/epis2-ux-a-progress-2026-06-04.md`
 - Demos narrativos: `packages/test-fixtures/src/demoNarratives.ts`
 - Golden journey: `docs/quality/GOLDEN_CLINICAL_JOURNEY.md`
 

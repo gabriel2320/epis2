@@ -9,7 +9,7 @@
   "pauseReason": null,
   "followInstead": [],
   "resumeWhen": "MF-PA-08 + MF-TE-08 + MF-CM-08 DONE → quality:experiencia-core-signoff-gate",
-  "canonicalPlan": "reports/epis2-propuesta-innovacion-ia-fullstack-2026-06-11.md",
+  "canonicalPlan": "reports/archive/2026-06/epis2-propuesta-innovacion-ia-fullstack-2026-06-11.md",
   "prerequisite": "Hilo C C-3/C-4 en curso; PROG-MEDIA-FUTURE no iniciar en 2026",
   "states": ["BLOCKED", "READY", "IN_PROGRESS", "DONE"],
   "rules": {

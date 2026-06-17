@@ -37,7 +37,7 @@ const markdown = buildBriefMarkdown(root, { mf: args.mf, agents: args.agents, ti
 const filename = `brief-${args.mf.replace(/[^a-zA-Z0-9-]+/g, '-')}-${timestamp.replace(/[:.]/g, '-')}.md`;
 const saved = writeArtifact(root, filename, markdown);
 
-const latestPath = join(root, 'reports/openclaw-latest-brief.md');
+const latestPath = join(root, 'reports/archive/2026-06/openclaw-latest-brief.md');
 writeFileSync(latestPath, markdown, 'utf8');
 
 const report = {
@@ -46,7 +46,7 @@ const report = {
   mode: 'read-only-reviewer',
   agents: args.agents,
   artifact: saved,
-  latest: 'reports/openclaw-latest-brief.md',
+  latest: 'reports/archive/2026-06/openclaw-latest-brief.md',
   timestamp,
 };
 
@@ -57,7 +57,7 @@ if (args.json) {
   console.log(`Microfase: ${args.mf}`);
   console.log(`Agentes: ${args.agents.join(', ')}`);
   console.log(`Artifact: ${saved}`);
-  console.log(`Latest: reports/openclaw-latest-brief.md\n`);
+  console.log(`Latest: reports/archive/2026-06/openclaw-latest-brief.md\n`);
   console.log(markdown);
 }
 

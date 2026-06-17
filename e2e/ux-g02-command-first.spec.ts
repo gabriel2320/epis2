@@ -1,6 +1,6 @@
 /**
  * UX-G02 — Validación E2E del flujo command-first (CE-0 → CE-5).
- * @see reports/epis2-ux-g02-command-first-checklist-2026-06-07.md
+ * @see reports/archive/2026-06/epis2-ux-g02-command-first-checklist-2026-06-07.md
  */
 import { copy } from '@epis2/design-system';
 import { test, expect } from '@playwright/test';
@@ -63,17 +63,16 @@ test.describe('UX-G02 — command-first con paciente fijado', () => {
     await expect(page.getByTestId('epis2-form-status')).toBeVisible();
   });
 
-  test('Parte B: ficha compacta → evolución con paciente activo', async ({ page }) => {
+  test('Parte B: ficha tradicional → evolución con paciente activo', async ({ page }) => {
     await loginAsPhysician(page);
     await pinDemoCase(page, 'DEMO-001');
 
-    // 11: ficha compacta UX-B.2
-    await expect(page.getByTestId('epis2-patient-workspace')).toBeVisible();
-    await expect(page.getByTestId('epis2-floating-command-dock')).toBeVisible();
-    await expect(page.getByTestId('epis2-ficha-widget-panel')).toHaveCount(0);
-    await expect(page.getByTestId('epis2-ficha-history')).toBeVisible();
+    // 11: ficha tradicional dual chart (default PROG-FICHA-FIRST)
+    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
+    await expect(page.getByTestId('epis2-chart-command-bar')).toBeVisible();
 
-    // 12–13: evolución desde Power Bar de ficha
+    // 12–13: evolución desde barra transversal de ficha
     const fichaBar = getTransversalCommandBar(page);
     await fichaBar.locator('input').first().fill('hacer evolución');
     await fichaBar.getByRole('button').first().click();
@@ -105,7 +104,8 @@ test.describe('UX-G02 — command-first con paciente fijado', () => {
 
   test('Parte D: Ctrl+K abre paleta en ficha en <1s (MF-CM-08)', async ({ page }) => {
     await loginAsPhysician(page);
-    await pinDemoCase(page, 'DEMO-001');
+    await page.goto(`/espacio/ficha?patientId=${DEMO_001_PATIENT_ID}&chartMode=traditional`);
+    await expect(page.getByTestId('epis2-dual-chart-ficha')).toBeVisible({ timeout: 15_000 });
 
     const start = Date.now();
     await page.keyboard.press('Control+k');

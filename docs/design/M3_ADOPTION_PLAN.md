@@ -20,7 +20,7 @@ M3-08      Personalización controlada                         ← completado
 M3-09      QA humano, accesibilidad y CI anti-deriva M3       ← completado
 ```
 
-Post-M3: lazy barrels MUI X, modo oscuro piloto, `qa:bundle-analyze` — ver `reports/epis2-m3-09-qa-signoff.md`.
+Post-M3: lazy barrels MUI X, modo oscuro piloto, `qa:bundle-analyze` — ver `reports/archive/2026-06/epis2-m3-09-qa-signoff.md`.
 
 **Siguiente frontera layout clínico:**
 
@@ -45,7 +45,7 @@ WIDGET-01  Montaje M3 widgets en Comando y ficha                 ← completado
 - Componentes sin patrón M3 (lista en catálogo vs. uso real).
 - Métrica cualitativa: comprensión del Centro de Comando en ≤3 s (protocolo M3-09).
 
-**Artefacto:** `reports/epis2-m3-00-baseline-audit.md`
+**Artefacto:** `reports/archive/2026-06/epis2-m3-00-baseline-audit.md`
 
 **Gates:** revisión manual; no cambios de tema en producto aún.
 
@@ -185,7 +185,7 @@ WIDGET-01  Montaje M3 widgets en Comando y ficha                 ← completado
 - Validador `no-mui-premium-without-license` (desde LIC log)
 - Gates M3 en `architecture:validate` (roadmap incremental)
 
-**Artefacto:** `reports/epis2-m3-09-qa-signoff.md`
+**Artefacto:** `reports/archive/2026-06/epis2-m3-09-qa-signoff.md`
 
 ---
 
@@ -214,4 +214,4 @@ MUI X (Data Grid, Charts, Date Pickers, Tree, Scheduler spike) **permanece** baj
 - `docs/design/EPIS2_MATERIAL3_CLINICAL_EXPERIENCE.md`
 - `docs/quality/M3_ANTI_DRIFT_GATES.md`
 - `docs/quality/MUI_ANTI_DRIFT_GATES.md`
-- `reports/epis2-m3-plan-rebaseline.md`
+- `reports/archive/2026-06/epis2-m3-plan-rebaseline.md`

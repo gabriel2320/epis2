@@ -1,6 +1,6 @@
 # EPIS2 — Auditoría profunda: Fase 4 (deuda estructural) — 2026-06-09
 
-> Continuación de `reports/epis2-auditoria-profunda-2026-06-09.md` (plan §Fase 4).
+> Continuación de `reports/archive/2026-06/epis2-auditoria-fase4-deuda-2026-06-09.md` (plan §Fase 4).
 > Fases previas: 1 higiene · 2 robustez · 3 pulido M3 (`epis2-auditoria-fase3-pulido-m3-2026-06-09.md`).
 
 ## Alcance declarado

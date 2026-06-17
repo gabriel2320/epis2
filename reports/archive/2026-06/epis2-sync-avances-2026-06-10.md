@@ -45,7 +45,7 @@ EPIS2_LOCAL_CI_E2E=1 npm run quality:local-ci
 ## Documentos actualizados
 
 - `docs/product/EPIS2_TABLERO.md` — HEAD `648e88d`, CI ❌ + P0 PEND-011
-- `reports/epis2-pendientes-registro-2026-06-09.md` — PEND-011 nuevo (P0)
+- `reports/archive/2026-06/epis2-pendientes-registro-2026-06-09.md` — PEND-011 nuevo (P0)
 
 ---
 

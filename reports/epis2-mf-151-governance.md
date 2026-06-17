@@ -11,7 +11,7 @@ Establecer una única fuente de verdad para el programa MF-151…MF-182: ledger 
 
 | Item | Resultado |
 |------|-----------|
-| Auditoría base | `reports/epis2-comprehensive-audit-2026-06-05.md` |
+| Auditoría base | `reports/archive/2026-06/epis2-comprehensive-audit-2026-06-05.md` |
 | `git status` | Limpio salvo auditoría sin track |
 | `npm run check` | OK (preflight) |
 | MVP V0–V5 | Cerrado según auditoría |

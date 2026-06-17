@@ -21,7 +21,7 @@ if (!service.includes('activeOrders')) {
 }
 
 const e2e = readFileSync(join(root, 'e2e/tramo-c-admission.spec.ts'), 'utf8');
-if (!e2e.includes('epis2-longitudinal-open-service-orders')) {
+if (!e2e.includes('epis2-service-orders-grid')) {
   errors.push('e2e tramo-c sin journey órdenes servicio');
 }
 

@@ -37,4 +37,4 @@ npm run check && npm run test && npm run db:validate && npm run ai:evals
 
 ## Cierre
 
-Plan F signoff: `reports/epis2-plan-f-complete.md`
+Plan F signoff: `reports/archive/2026-06/epis2-plan-f-complete.md`

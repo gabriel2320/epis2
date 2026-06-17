@@ -31,4 +31,4 @@ Sin GitHub MCP: pedir URL del run o usar `gh run view` si `gh` está autenticado
 - No reabrir fixes ya cerrados sin evidencia de regresión.
 - Tras fix: mismos gates + reporte en `reports/`.
 
-Referencia reciente: `reports/epis2-ci-e2e-closure-2026-06-09.md`
+Referencia reciente: `reports/archive/2026-06/epis2-ci-e2e-closure-2026-06-09.md`

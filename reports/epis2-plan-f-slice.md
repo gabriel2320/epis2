@@ -37,4 +37,4 @@ Slice 2: `reports/epis2-plan-f-slice-2.md` (RLS piloto, evals, rate limits ampli
 
 ## Cierre
 
-Plan F completo: `reports/epis2-plan-f-complete.md`
+Plan F completo: `reports/archive/2026-06/epis2-plan-f-complete.md`
