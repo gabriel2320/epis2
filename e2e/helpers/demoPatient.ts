@@ -148,8 +148,16 @@ export async function clickModeSwitcher(page: Page, mode: 'command' | 'classic' 
 }
 
 /** MF-CM-02 / MF-DI-10 — input real dentro del wrapper MUI de la paleta. */
+export function getCommandPaletteQueryInput(page: Page): Locator {
+  return page
+    .getByTestId('epis2-clinical-command-palette')
+    .first()
+    .getByTestId('epis2-command-palette-query')
+    .locator('input');
+}
+
 export async function fillCommandPaletteQuery(page: Page, query: string) {
-  await page.getByTestId('epis2-command-palette-query').locator('input').fill(query);
+  await getCommandPaletteQueryInput(page).fill(query);
 }
 
 /** MF-DI-09 — borrador receta válido para guardar (todos los required del blueprint). */
@@ -212,7 +220,15 @@ export async function expectCicaPatientSummaryReady(page: Page) {
 }
 
 export async function fillMinimalPrescriptionDraft(page: Page) {
-  const medication = page.getByTestId('epis2-medication-catalog-autocomplete-input');
+  await expect(page.getByTestId('epis2-form-prescription')).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByTestId('epis2-form-field-cell-medication')).toBeVisible({
+    timeout: 15_000,
+  });
+  const medicationCatalog = page.getByTestId('epis2-medication-catalog-autocomplete-input');
+  const medication =
+    (await medicationCatalog.count()) > 0
+      ? medicationCatalog
+      : page.getByTestId('epis2-form-field-cell-medication').locator('input').first();
   await expect(medication).toBeVisible({ timeout: 15_000 });
   await expect(async () => {
     await medication.fill('Metformina 850 mg');

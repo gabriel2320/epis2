@@ -252,9 +252,7 @@ export function TraditionalEhrMode({
           flexDirection: 'column',
         }}
       >
-        {alerts && alerts.length > 0 ? (
-          <ClinicalPatientViewCdsPanel alerts={alerts} />
-        ) : null}
+        {alerts && alerts.length > 0 ? <ClinicalPatientViewCdsPanel alerts={alerts} /> : null}
         <ClassicChartSubNav
           sections={tabSubsections}
           activeSection={activeSection}

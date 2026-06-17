@@ -178,7 +178,7 @@ export function ClinicalShell({
           />
         ) : null}
       </Box>
-      <CommandPaletteOverlay />
+      {!minimal ? <CommandPaletteOverlay /> : null}
     </>
   );
 }

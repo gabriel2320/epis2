@@ -2,11 +2,11 @@
  * ADR-002 — E2E dual chart modes (opt-in CI: VITE_ENABLE_DUAL_CHART_MODES=true).
  */
 import { test, expect } from '@playwright/test';
-import { copy } from '@epis2/design-system';
 import { getDemoCaseByCode } from '@epis2/test-fixtures';
 import {
   fillCommandPaletteQuery,
   fillMinimalPrescriptionDraft,
+  getCommandPaletteQueryInput,
   loginAsPhysician,
   openClassicChartTab,
   pinDemoCase,
@@ -156,11 +156,10 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
   });
 
   test('g6) microjourneys post-receta (MF-DI-09)', async ({ page }) => {
-    await openDemoFicha(page, 'DEMO-005');
+    await pinDemoCase(page, 'DEMO-005');
     await page.goto(`/espacio/receta?patientId=${demoPatientId}`);
-    await expect(page.getByTestId('epis2-form-prescription')).toBeVisible({ timeout: 15_000 });
     await fillMinimalPrescriptionDraft(page);
-    const saveButton = page.getByRole('button', { name: copy.forms.save });
+    const saveButton = page.getByTestId('epis2-form-save');
     await expect(saveButton).toBeEnabled();
     await Promise.all([
       page.waitForResponse(
@@ -200,8 +199,8 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
   test('i) paleta @epis2/clinical-productivity en ficha dual', async ({ page }) => {
     await openDemoFicha(page, 'DEMO-005');
     await page.keyboard.press('Control+k');
-    await expect(page.getByRole('dialog')).toBeVisible();
-    await expect(page.getByTestId('epis2-command-palette-query')).toBeVisible();
+    await expect(page.getByTestId('epis2-clinical-command-palette').first()).toBeVisible();
+    await expect(getCommandPaletteQueryInput(page)).toBeVisible();
   });
 
   test('k) Ctrl+K en ficha papel (MF-CM-02)', async ({ page }) => {
@@ -231,7 +230,7 @@ test.describe('Dual chart /espacio/ficha (MF-DUAL-CHART-03)', () => {
   test('m) switch modo preserva paciente (MF-NORM-11)', async ({ page }) => {
     await openDemoFicha(page, 'DEMO-005');
     await openPaperFromDualFicha(page);
-    await page.getByTestId('epis2-paper-back-to-chart').click();
+    await page.getByTestId('epis2-clinical-nav-ficha').click();
     await expect(page).toHaveURL(/chartMode=traditional/, { timeout: 15_000 });
     await expect(page.getByTestId('epis2-traditional-ehr-mode')).toBeVisible();
   });
