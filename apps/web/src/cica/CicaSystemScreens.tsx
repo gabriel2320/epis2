@@ -1,20 +1,14 @@
-import { copy } from '@epis2/design-system';
-import {
-  CicaPatientScreenFrame,
-  EpisM3Text,
-  Stack,
-  type ClinicalLayoutAction,
-} from '@epis2/epis2-ui';
+import { type ClinicalLayoutAction } from '@epis2/epis2-ui';
 import { CicaBlueprintPage } from './CicaBlueprintPage.js';
 import {
   AGENDA_BLUEPRINT,
   MY_WORK_BLUEPRINT,
   RECENT_PATIENTS_BLUEPRINT,
 } from './blueprints/systemScreens.blueprint.js';
-import { filterAndGroupClinicalTimeline } from '../components/chart/timeline/clinicalTimeline.js';
-import { useMemo } from 'react';
 import { CicaPatientSectionPage } from './CicaPatientSectionPages.js';
 import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
+
+export { CicaPatientTimelinePage } from './CicaPatientTimelinePage.js';
 
 export function CicaPatientAdmissionPage() {
   return (
@@ -72,54 +66,6 @@ export function CicaPatientDischargePage() {
       placeholder="Epicrisis y alta — resumen de cierre del episodio clínico."
       actions={actions}
     />
-  );
-}
-
-/** Línea de tiempo completa — agrupada por periodo (patrón epis2g timeline). */
-export function CicaPatientTimelinePage() {
-  const page = useCicaPatientPage();
-  const { patientId, presentation, longitudinal, goPath, activeTabId } = page;
-
-  const grouped = useMemo(
-    () => filterAndGroupClinicalTimeline(longitudinal?.timeline ?? [], 'all'),
-    [longitudinal?.timeline],
-  );
-
-  if (!patientId || !presentation) return null;
-
-  return (
-    <CicaPatientScreenFrame
-      screenId="patient-timeline"
-      patientId={patientId}
-      activeTabId={activeTabId}
-      onNavigate={goPath}
-      identity={presentation.identity}
-      contextItems={presentation.contextItems}
-      hideActionBar
-      testId="cica-patient-timeline-screen"
-    >
-      {grouped.length === 0 ? (
-        <EpisM3Text role="bodyMedium" color="text.secondary">
-          {copy.longitudinal.emptySection}
-        </EpisM3Text>
-      ) : (
-        <Stack spacing={2} data-testid="cica-patient-timeline-list">
-          {grouped.map((group) => (
-            <Stack key={group.bucket} spacing={0.5}>
-              <EpisM3Text role="labelMedium" component="h3" color="text.secondary">
-                {group.label}
-              </EpisM3Text>
-              {group.events.map((event) => (
-                <EpisM3Text key={event.id} role="bodyMedium" component="p">
-                  {event.title}
-                  {event.detail ? ` — ${event.detail}` : ''}
-                </EpisM3Text>
-              ))}
-            </Stack>
-          ))}
-        </Stack>
-      )}
-    </CicaPatientScreenFrame>
   );
 }
 

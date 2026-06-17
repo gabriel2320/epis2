@@ -1,7 +1,6 @@
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import {
-  CicaPatientScreenFrame,
   EpisM3Text,
   List,
   ListItem,
@@ -12,7 +11,8 @@ import {
 } from '@epis2/epis2-ui';
 import { useMemo } from 'react';
 import { filterAndGroupClinicalTimeline } from '../components/chart/timeline/clinicalTimeline.js';
-import { ErrorState } from '../components/ErrorState.js';
+import { CicaPatientBlueprintPage } from './CicaPatientBlueprintPage.js';
+import { PATIENT_EVOLUTIONS_BLUEPRINT } from './blueprints/patientScreens.blueprint.js';
 import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
 
 function formatEventAt(at: string): string {
@@ -67,21 +67,9 @@ function CicaEvolutionList({ timeline, testId = 'cica-evolutions-list' }: CicaEv
 /** CICA Clean Room — evoluciones (/app/pacientes/:patientId/evoluciones). */
 export function CicaPatientEvolutionsPage() {
   const page = useCicaPatientPage();
-  const { patientId, detailQuery, presentation, longitudinal, go, goPath } = page;
+  const { patientId, longitudinal, go } = page;
 
-  if (!patientId || !presentation) return null;
-
-  if (detailQuery.isError) {
-    return (
-      <ErrorState
-        title={copy.errors.genericTitle}
-        message={copy.errors.genericMessage}
-        onRetry={() => detailQuery.refetch()}
-      />
-    );
-  }
-
-  if (!detailQuery.data) return null;
+  if (!patientId) return null;
 
   const actions: ClinicalLayoutAction[] = [
     {
@@ -99,17 +87,13 @@ export function CicaPatientEvolutionsPage() {
   ];
 
   return (
-    <CicaPatientScreenFrame
-      screenId="patient-evolutions"
-      patientId={patientId}
-      activeTabId={page.activeTabId}
-      onNavigate={goPath}
-      identity={presentation.identity}
-      contextItems={presentation.contextItems}
+    <CicaPatientBlueprintPage
+      blueprint={PATIENT_EVOLUTIONS_BLUEPRINT}
       actions={actions}
       testId="cica-patient-evolutions-screen"
-    >
-      <CicaEvolutionList timeline={longitudinal?.timeline ?? []} />
-    </CicaPatientScreenFrame>
+      slots={{
+        evolutions: <CicaEvolutionList timeline={longitudinal?.timeline ?? []} />,
+      }}
+    />
   );
 }

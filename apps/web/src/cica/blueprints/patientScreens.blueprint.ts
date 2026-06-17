@@ -17,3 +17,21 @@ export const PATIENT_EXAMS_BLUEPRINT: CicaScreenBlueprint = {
   hideActionBar: false,
   sections: [{ id: 'exams', span: 12 }],
 };
+
+export const PATIENT_DOCUMENTS_BLUEPRINT: CicaScreenBlueprint = {
+  screenId: 'patient-documents',
+  hideActionBar: false,
+  sections: [{ id: 'documents', span: 12 }],
+};
+
+export const PATIENT_EVOLUTIONS_BLUEPRINT: CicaScreenBlueprint = {
+  screenId: 'patient-evolutions',
+  hideActionBar: false,
+  sections: [{ id: 'evolutions', span: 12 }],
+};
+
+export const PATIENT_TIMELINE_BLUEPRINT: CicaScreenBlueprint = {
+  screenId: 'patient-timeline',
+  hideActionBar: true,
+  sections: [{ id: 'timeline', span: 12 }],
+};
