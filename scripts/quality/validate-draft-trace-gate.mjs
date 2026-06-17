@@ -36,8 +36,8 @@ for (const needle of [
   if (!service.includes(needle)) errors.push(`service.ts falta ${needle}`);
 }
 
-if (!existsSync(join(root, 'reports/epis2-mf-sh-01-draft-trace.md'))) {
-  errors.push('falta reports/epis2-mf-sh-01-draft-trace.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-sh-01-draft-trace.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-sh-01-draft-trace.md');
 }
 
 const vitest = spawnSync(

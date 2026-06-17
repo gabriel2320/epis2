@@ -1,0 +1,29 @@
+---
+description: Perímetro archivo — agentes no retoman caminos legacy archivados
+alwaysApply: true
+---
+
+# Archive boundary (PROG-PURGE-CICA)
+
+Antes de planificar o editar, respetar **`docs/archive/AGENT_SCOPE_EXCLUSIONS.md`**.
+
+## No planificar desde
+
+- `reports/archive/**` · reportes `epis2-mf-*` de programas cerrados
+- `docs/product/EPIS2_TRAMO_*` · `EPIS2_GLOBAL_DEV_PLAN.md` · tablero como fuente de verdad
+- Subagentes archivados: `tramo-implementer`, `m3-guardian`, `layers-integrator`
+- Reabrir tramos A–K, three modes, olas M3, OpenClaw auto-dev, Command Center como home
+
+## Alcance activo
+
+- **CICA:** `apps/web/src/cica/`, `packages/epis2-ui/src/cica/`, `/app/*`
+- **Core:** contratos, registries, API, golden journey
+- **Legacy:** `/espacio/*` solo fallback/bugfix — no rediseño visual legacy
+
+## Excepción
+
+Solo con MF autorizada + `EPIS2_ALLOW_ARCHIVED_SCOPE=1` declarados por el operador.
+
+## Sesión agente
+
+Adjuntar **solo:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@reports/dev-agent-brief.md` + un prompt activo (`golden-guardian`, `gate-runner`, `ollama-dev-writer`).

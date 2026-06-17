@@ -55,8 +55,8 @@ for (const needle of [
   if (!e2e.includes(needle)) errors.push(`dual-chart-modes.spec.ts falta evidencia ${needle}`);
 }
 
-if (!existsSync(join(root, 'reports/epis2-mf-cm-02-palette-nl.md'))) {
-  errors.push('falta reports/epis2-mf-cm-02-palette-nl.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-cm-02-palette-nl.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-cm-02-palette-nl.md');
 }
 
 if (errors.length) {

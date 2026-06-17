@@ -58,7 +58,8 @@ export function resolveActiveMode(
   if (
     pathname === '/comando' ||
     pathname.startsWith('/comando') ||
-    pathname.startsWith('/espacio/buscar-paciente')
+    pathname.startsWith('/espacio/buscar-paciente') ||
+    pathname.startsWith('/app/buscar')
   ) {
     return 'command';
   }

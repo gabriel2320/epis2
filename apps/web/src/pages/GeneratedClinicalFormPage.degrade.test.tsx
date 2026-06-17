@@ -143,7 +143,6 @@ describe('MF-SH-03 — GeneratedClinicalFormPage con Ollama down', () => {
       </ActivePatientProvider>,
     );
 
-    await user.click(screen.getByTestId('epis2-form-more-actions'));
     await user.click(screen.getByTestId('epis2-ai-suggest'));
 
     await waitFor(() => {

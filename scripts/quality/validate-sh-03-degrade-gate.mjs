@@ -11,7 +11,7 @@ const errors = [];
 const required = [
   ['form degrade test', 'apps/web/src/pages/GeneratedClinicalFormPage.degrade.test.tsx'],
   ['command degrade contract', 'packages/test-fixtures/src/aiDegradeContract.test.ts'],
-  ['closure report', 'reports/epis2-mf-sh-03-degrade.md'],
+  ['closure report', 'reports/archive/2026-06/epis2-mf-sh-03-degrade.md'],
 ];
 
 for (const [label, rel] of required) {

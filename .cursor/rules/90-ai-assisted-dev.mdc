@@ -14,8 +14,12 @@ npm run dev:session    # genera brief + prompts subagentes
 
 En Cursor, adjuntar **solo**:
 
-1. `@reports/dev-agent-brief.md`
-2. `@reports/dev-agent-prompt-<subagente-primario>.md`
+1. `@docs/AGENT_CONTEXT_MINIMAL.md`
+2. `@docs/archive/AGENT_SCOPE_EXCLUSIONS.md`
+3. `@reports/dev-agent-brief.md`
+4. `@reports/dev-agent-prompt-<subagente-primario>.md` (activo: golden-guardian, gate-runner, ollama-dev-writer)
+
+**No** adjuntar `reports/archive/` ni prompts archivados (`tramo-*`, `layers-integrator`, `paper-mode`).
 
 Opcional plan Ollama: `npm run dev:session -- --ollama`
 

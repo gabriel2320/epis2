@@ -35,6 +35,6 @@ test.describe('Golden journey E2E — borrador a aprobación', () => {
     await goToCommandCenter(page);
     await expect(page.getByTestId('epis2-census-command-bar')).toBeVisible();
     await expect(page.getByTestId('epis2-active-patient')).toBeVisible();
-    await expect(page.getByText('DEMO-001')).toBeVisible();
+    await expect(page.getByTestId('epis2-active-patient')).toContainText('Carmen');
   });
 });

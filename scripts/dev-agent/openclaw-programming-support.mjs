@@ -161,7 +161,11 @@ writeFileSync(latestPath, markdown, 'utf8');
 if (jsonOut) {
   console.log(
     JSON.stringify(
-      { ...report, artifact: saved, latest: 'reports/archive/2026-06/openclaw-programming-latest.md' },
+      {
+        ...report,
+        artifact: saved,
+        latest: 'reports/archive/2026-06/openclaw-programming-latest.md',
+      },
       null,
       2,
     ),

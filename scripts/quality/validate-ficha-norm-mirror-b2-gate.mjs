@@ -47,8 +47,8 @@ if (!visibility.includes('hasDemoTraditionalSectionContent')) {
   errors.push('traditionalSectionVisibility debe usar hasDemoTraditionalSectionContent');
 }
 
-if (!existsSync(join(root, 'reports/epis2-mf-norm-10-sections-b2.md'))) {
-  errors.push('falta reports/epis2-mf-norm-10-sections-b2.md');
+if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-norm-10-sections-b2.md'))) {
+  errors.push('falta reports/archive/2026-06/epis2-mf-norm-10-sections-b2.md');
 }
 
 if (errors.length) {

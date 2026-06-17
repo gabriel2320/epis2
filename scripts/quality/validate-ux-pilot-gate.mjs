@@ -35,7 +35,10 @@ for (const rel of requiredFiles) {
 
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 const catalog = JSON.parse(readFileSync(join(root, 'tools/gates/catalog-full.json'), 'utf8'));
-const gates = catalog.gates ?? {};
+
+function resolveCatalogGate(name) {
+  return catalog.gates?.[name] ?? catalog.archived?.[name] ?? null;
+}
 
 for (const script of [
   'quality:ux-g02',
@@ -49,8 +52,8 @@ for (const script of [
 }
 
 for (const gate of ['quality:ux-g02', 'quality:ux-pilot', 'quality:ux-lab-close']) {
-  if (!gates[gate]) {
-    errors.push(`catalog-full.json sin ${gate}`);
+  if (!resolveCatalogGate(gate)) {
+    errors.push(`catalog-full.json sin ${gate} (gates o archived)`);
   }
 }
 
@@ -69,7 +72,7 @@ const flatChecks = [
   ['apps/web/src/pages/ResultsInboxPage.tsx', 'EpisWorkspaceSection'],
   ['apps/web/src/components/PatientLongitudinalPanel.tsx', 'EpisWorkspaceSection'],
   ['apps/web/src/pages/LoginPage.tsx', 'EpisAuthScreen'],
-  ['apps/web/src/pages/GeneratedClinicalFormPage.tsx', 'EpisClinicalFormActionBar'],
+  ['apps/web/src/pages/GeneratedClinicalFormPage.tsx', 'ClinicalLayoutActionBar'],
 ];
 
 for (const [rel, token] of flatChecks) {

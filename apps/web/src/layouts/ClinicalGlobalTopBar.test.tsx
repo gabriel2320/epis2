@@ -20,6 +20,10 @@ vi.mock('@tanstack/react-router', () => ({
   }) => select({ location: { pathname: '/espacio/ficha', searchStr: '' } }),
 }));
 
+vi.mock('../dev/dualChartModesEnv.js', () => ({
+  isDualChartModesEnabled: () => true,
+}));
+
 vi.mock('../auth/AuthContext.js', () => ({
   useAuth: () => ({
     session: {
@@ -39,25 +43,55 @@ vi.mock('../routes/clinicalNavigate.js', () => ({
   useClinicalNavigate: () => vi.fn(),
 }));
 
-vi.mock('../api/clinicalApi.js', () => ({
-  fetchPatientClinicalAlerts: vi.fn().mockResolvedValue({ alerts: [], readOnly: true }),
+vi.mock('../session/EpisSessionContext.js', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../session/EpisSessionContext.js')>();
+  return {
+    ...actual,
+    useEpisSession: () => ({
+      openDashboardMode: vi.fn(),
+    }),
+  };
+});
+
+vi.mock('../navigation/useClinicalWorkspace.js', () => ({
+  useClinicalWorkspace: () => ({
+    activeWorkspace: 'physician',
+    definition: { labelKey: 'physician' },
+  }),
 }));
+
+vi.mock('../clinical/ActivePatientContext.js', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../clinical/ActivePatientContext.js')>();
+  return {
+    ...actual,
+    useActivePatient: () => ({
+      patient: { id: '00000000-0000-4000-8000-000000000001' },
+    }),
+  };
+});
 
 afterEach(() => cleanup());
 
 describe('ClinicalGlobalTopBar', () => {
-  it('expone solo Buscar · Comando · Paciente · Alertas · Usuario', () => {
+  it('delega en ClinicalNavStrip cuando dual ficha está activa', () => {
     renderWithEpisApp(<ClinicalGlobalTopBar active="clinical" />);
 
-    expect(screen.getByTestId('epis2-global-top-bar')).toBeInTheDocument();
-    expect(screen.getByTestId('epis2-nav-buscar')).toHaveTextContent(copy.layout.navSearch);
-    expect(screen.getByTestId('epis2-nav-comando')).toHaveTextContent(copy.layout.commandShort);
-    expect(screen.getByTestId('epis2-nav-paciente')).toHaveTextContent(copy.layout.navPatient);
-    expect(screen.getByTestId('epis2-nav-alertas')).toHaveTextContent(copy.layout.navAlerts);
-    expect(screen.getByTestId('epis2-nav-usuario')).toHaveTextContent(copy.layout.navUser);
+    expect(screen.getByTestId('epis2-clinical-nav-strip')).toBeInTheDocument();
+    expect(screen.getByTestId('epis2-clinical-nav-census')).toHaveTextContent(
+      copy.clinicalNav.census,
+    );
+    expect(screen.getByTestId('epis2-clinical-nav-search')).toHaveTextContent(
+      copy.clinicalNav.search,
+    );
+    expect(screen.getByTestId('epis2-clinical-nav-ficha')).toHaveTextContent(
+      copy.clinicalNav.ficha,
+    );
+    expect(screen.getByTestId('epis2-clinical-nav-paper')).toHaveTextContent(
+      copy.clinicalNav.paper,
+    );
+    expect(screen.getByTestId('epis2-clinical-nav-more')).toHaveTextContent(copy.clinicalNav.more);
 
-    expect(screen.queryByTestId('epis2-nav-tablero')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('epis2-dashboard-theme-toggle')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('epis2-demo-badge-global')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('epis2-global-top-bar')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('epis2-mode-switcher')).not.toBeInTheDocument();
   });
 });

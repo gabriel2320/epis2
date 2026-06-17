@@ -12,8 +12,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
 const required = [
-  'reports/epis2-prog-strengthen-close-2026.md',
-  'reports/epis2-mf-ic-04-hl7-quarantine-hardening.md',
+  'reports/archive/2026-06/epis2-prog-strengthen-close-2026.md',
+  'reports/archive/2026-06/epis2-mf-ic-04-hl7-quarantine-hardening.md',
   'docs/ops/HL7_INTEROP_INGESTION_RUNBOOK.md',
   'database/tests/migration-hl7-quarantine.test.mjs',
   'apps/api/src/interop/hl7.integration.test.ts',

@@ -11,7 +11,7 @@ const errors = [];
 const required = [
   ['rag contract', 'packages/contracts/src/rag.ts'],
   ['embedDocument service', 'services/local-ai/src/embedDocument.ts'],
-  ['closure report', 'reports/epis2-mf-im-02-embed-api.md'],
+  ['closure report', 'reports/archive/2026-06/epis2-mf-im-02-embed-api.md'],
 ];
 
 for (const [label, rel] of required) {

@@ -88,7 +88,12 @@ const lines = [
 ];
 
 if (diskNotCatalog.length) {
-  lines.push('## Scripts en disco sin entrada catálogo', '', ...diskNotCatalog.map((g) => `- \`${g}\``), '');
+  lines.push(
+    '## Scripts en disco sin entrada catálogo',
+    '',
+    ...diskNotCatalog.map((g) => `- \`${g}\``),
+    '',
+  );
 }
 
 if (catalogMissingDisk.length) {

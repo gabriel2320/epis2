@@ -11,7 +11,7 @@ const errors = [];
 for (const rel of [
   'scripts/db/chile-migrations-checksums.json',
   'scripts/db/validate-chile-migrations.mjs',
-  'reports/epis2-mf-sh-06-migration-control.md',
+  'reports/archive/2026-06/epis2-mf-sh-06-migration-control.md',
 ]) {
   if (!existsSync(join(root, rel))) errors.push(`falta: ${rel}`);
 }

@@ -19,7 +19,7 @@ const required = [
   ['audit diff', 'scripts/dev-agent/ollama-audit-diff.mjs'],
   ['registry status', 'scripts/quality/registry-status.mjs'],
   ['registry gate', 'scripts/quality/validate-registry-gate.mjs'],
-  ['closure report', 'reports/epis2-mf-rapid-close-2026.md'],
+  ['closure report', 'reports/archive/2026-06/epis2-mf-rapid-close-2026.md'],
 ];
 
 for (const [label, rel] of required) {

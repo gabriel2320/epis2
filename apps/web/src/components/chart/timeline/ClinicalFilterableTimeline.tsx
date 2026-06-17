@@ -20,6 +20,8 @@ import {
 export type ClinicalFilterableTimelineProps = {
   timeline: PatientLongitudinalResponse['timeline'];
   onOpenDraft?: ((draftId: string) => void) | undefined;
+  /** CICA-L-03 — filtros reducidos (Todos + Evoluciones). */
+  compositionMode?: 'default' | 'cica-classic' | undefined;
   testId?: string;
 };
 
@@ -27,8 +29,13 @@ export type ClinicalFilterableTimelineProps = {
 export function ClinicalFilterableTimeline({
   timeline,
   onOpenDraft,
+  compositionMode = 'default',
   testId = 'epis2-clinical-filterable-timeline',
 }: ClinicalFilterableTimelineProps) {
+  const cicaClassic = compositionMode === 'cica-classic';
+  const filterOptions = cicaClassic
+    ? (['all', 'evolutions'] as const satisfies readonly ClinicalTimelineFilter[])
+    : CLINICAL_TIMELINE_FILTERS;
   const [filter, setFilter] = useState<ClinicalTimelineFilter>('all');
 
   const grouped = useMemo(
@@ -47,7 +54,7 @@ export function ClinicalFilterableTimeline({
   return (
     <Stack spacing={2} data-testid={testId}>
       <Stack direction="row" flexWrap="wrap" useFlexGap spacing={0.75}>
-        {CLINICAL_TIMELINE_FILTERS.map((value) => (
+        {filterOptions.map((value) => (
           <EpisChip
             key={value}
             size="small"

@@ -9,18 +9,18 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
 const NORM_REPORTS = [
-  'reports/epis2-mf-norm-00-benchmark.md',
-  'reports/epis2-mf-norm-01-contract.md',
-  'reports/epis2-mf-norm-02-viewport.md',
-  'reports/epis2-mf-norm-03-command-compact.md',
-  'reports/epis2-mf-norm-04-shape.md',
-  'reports/epis2-mf-norm-05-typography.md',
-  'reports/epis2-mf-norm-06-demo.md',
-  'reports/epis2-mf-norm-07-theme.md',
-  'reports/epis2-mf-norm-08-motion.md',
-  'reports/epis2-mf-norm-09-sections-b1.md',
-  'reports/epis2-mf-norm-10-sections-b2.md',
-  'reports/epis2-mf-norm-11-signoff.md',
+  'reports/archive/2026-06/epis2-mf-norm-00-benchmark.md',
+  'reports/archive/2026-06/epis2-mf-norm-01-contract.md',
+  'reports/archive/2026-06/epis2-mf-norm-02-viewport.md',
+  'reports/archive/2026-06/epis2-mf-norm-03-command-compact.md',
+  'reports/archive/2026-06/epis2-mf-norm-04-shape.md',
+  'reports/archive/2026-06/epis2-mf-norm-05-typography.md',
+  'reports/archive/2026-06/epis2-mf-norm-06-demo.md',
+  'reports/archive/2026-06/epis2-mf-norm-07-theme.md',
+  'reports/archive/2026-06/epis2-mf-norm-08-motion.md',
+  'reports/archive/2026-06/epis2-mf-norm-09-sections-b1.md',
+  'reports/archive/2026-06/epis2-mf-norm-10-sections-b2.md',
+  'reports/archive/2026-06/epis2-mf-norm-11-signoff.md',
 ];
 
 for (const rel of ['docs/design/EPIS2_FICHA_NORM_SIGNOFF_CHECKLIST.md', ...NORM_REPORTS]) {
