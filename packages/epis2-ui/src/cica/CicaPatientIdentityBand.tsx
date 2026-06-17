@@ -3,7 +3,9 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { EpisDraftStatus } from '../clinical/EpisDraftStatus.js';
+import { cicaEpis2gVisual } from './cicaEpis2gVisual.js';
 import { cicaTokens } from './cicaTokens.js';
+import { useCicaThemeTokens } from './useCicaThemeTokens.js';
 
 export type CicaPatientIdentityBandProps = {
   displayName: string;
@@ -29,12 +31,14 @@ export function CicaPatientIdentityBand({
   documentStatus = 'draft',
   testId = 'cica-patient-identity-band',
 }: CicaPatientIdentityBandProps) {
+  const { isDark } = useCicaThemeTokens();
   const demoDraft =
     documentStatus === 'signed' ? 'approved' : documentStatus === 'draft' ? 'draft' : undefined;
 
   return (
     <Box
       data-testid={testId}
+      data-cica-identity-band="epis2g"
       sx={{
         flexShrink: 0,
         px: cicaTokens.shellPaddingX,
@@ -44,8 +48,37 @@ export function CicaPatientIdentityBand({
         bgcolor: 'background.paper',
         minWidth: 0,
         overflowX: 'hidden',
+        boxShadow: 1,
       }}
     >
+      <Stack spacing={0.75} sx={{ mb: 1 }}>
+        <Stack direction="row" spacing={0.75} flexWrap="wrap" useFlexGap alignItems="center">
+          <Typography
+            variant="caption"
+            sx={{
+              fontFamily: cicaEpis2gVisual.fontMono,
+              fontWeight: 700,
+              letterSpacing: 1,
+              textTransform: 'uppercase',
+              color: 'text.secondary',
+            }}
+          >
+            Ficha clínica
+          </Typography>
+          <Chip
+            size="small"
+            label="EMR clásico"
+            sx={{
+              height: 18,
+              fontFamily: cicaEpis2gVisual.fontMono,
+              fontSize: 10,
+              fontWeight: 700,
+              bgcolor: isDark ? 'rgba(37, 99, 235, 0.2)' : '#dbeafe',
+              color: isDark ? cicaEpis2gVisual.accentLabelDark : cicaEpis2gVisual.accentLabel,
+            }}
+          />
+        </Stack>
+      </Stack>
       <Stack
         direction={{ xs: 'column', md: 'row' }}
         spacing={{ xs: 1, md: 1.5 }}

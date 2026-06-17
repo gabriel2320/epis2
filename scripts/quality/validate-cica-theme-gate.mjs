@@ -9,6 +9,8 @@ const errors = [];
 
 const requiredFiles = [
   'packages/epis2-ui/src/cica/CicaThemeControls.tsx',
+  'packages/epis2-ui/src/cica/CicaSidebarThemePanel.tsx',
+  'packages/epis2-ui/src/cica/cicaEpis2gVisual.ts',
   'packages/epis2-ui/src/cica/useCicaThemeTokens.ts',
   'packages/epis2-ui/src/cica/CicaScreenTransition.tsx',
   'packages/epis2-ui/src/cica/cicaMotion.ts',
@@ -58,19 +60,34 @@ if (!transition.includes('shouldAnimate')) {
 }
 
 const topBar = readFileSync(join(root, 'packages/epis2-ui/src/cica/CicaTopBar.tsx'), 'utf8');
-if (!topBar.includes('CicaThemeControls')) {
-  errors.push('CicaTopBar.tsx debe integrar CicaThemeControls por defecto');
+if (!topBar.includes('data-cica-top-bar')) {
+  errors.push('CicaTopBar.tsx debe exponer chrome epis2g (data-cica-top-bar)');
+}
+
+const sidebar = readFileSync(join(root, 'packages/epis2-ui/src/cica/CicaSidebar.tsx'), 'utf8');
+if (!sidebar.includes('CicaSidebarThemePanel')) {
+  errors.push('CicaSidebar.tsx debe integrar CicaSidebarThemePanel');
+}
+if (!sidebar.includes('cica-dual-sidebar-shell')) {
+  errors.push('CicaSidebar.tsx debe usar shell dual epis2g');
 }
 
 const appLayout = readFileSync(join(root, 'apps/web/src/cica/CicaAppLayout.tsx'), 'utf8');
-for (const token of ['CicaThemeControls', 'CicaScreenTransition']) {
-  if (!appLayout.includes(token)) {
-    errors.push(`CicaAppLayout.tsx sin ${token}`);
-  }
+if (!appLayout.includes('CicaScreenTransition')) {
+  errors.push('CicaAppLayout.tsx sin CicaScreenTransition');
+}
+if (!appLayout.includes('CicaSidebar')) {
+  errors.push('CicaAppLayout.tsx sin CicaSidebar dual');
 }
 
 const cicaIndex = readFileSync(join(root, 'packages/epis2-ui/src/cica/index.ts'), 'utf8');
-for (const exportToken of ['CicaThemeControls', 'useCicaThemeTokens', 'CicaScreenTransition']) {
+for (const exportToken of [
+  'CicaThemeControls',
+  'CicaSidebarThemePanel',
+  'cicaEpis2gVisual',
+  'useCicaThemeTokens',
+  'CicaScreenTransition',
+]) {
   if (!cicaIndex.includes(exportToken)) {
     errors.push(`packages/epis2-ui/src/cica/index.ts sin export ${exportToken}`);
   }

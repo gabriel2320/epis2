@@ -2,8 +2,9 @@ import Box from '@mui/material/Box';
 import type { ReactNode } from 'react';
 import { CicaClinicalNav, type CicaClinicalNavProps } from './CicaClinicalNav.js';
 import { CicaTopBar, type CicaTopBarProps } from './CicaTopBar.js';
+import { resolveCicaEpis2gSurfaces } from './cicaEpis2gVisual.js';
 import { cicaSafeAreaInsetsSx } from './cicaResponsive.js';
-import { cicaTokens } from './cicaTokens.js';
+import { useCicaThemeTokens } from './useCicaThemeTokens.js';
 
 export type CicaAppShellProps = {
   topBar?: CicaTopBarProps;
@@ -31,6 +32,8 @@ export function CicaAppShell({
   children,
   testId = 'cica-app-shell',
 }: CicaAppShellProps) {
+  const { isDark } = useCicaThemeTokens();
+  const surfaces = resolveCicaEpis2gSurfaces(isDark);
   const showSidebar = Boolean(sidebar) && !hideSidebar;
   const showTopNav = Boolean(nav) && !hideNav && !showSidebar;
 
@@ -38,6 +41,7 @@ export function CicaAppShell({
     <Box
       data-testid={testId}
       data-cica-clean-room="true"
+      data-cica-visual="epis2g"
       sx={{
         height: '100dvh',
         maxHeight: '100dvh',
@@ -47,7 +51,7 @@ export function CicaAppShell({
         flexDirection: 'column',
         overflow: 'hidden',
         overflowX: 'hidden',
-        bgcolor: 'background.default',
+        bgcolor: surfaces.contentCanvas,
         ...cicaSafeAreaInsetsSx,
       }}
     >
@@ -83,4 +87,4 @@ export function CicaAppShell({
   );
 }
 
-export { cicaTokens };
+export { cicaTokens } from './cicaTokens.js';
