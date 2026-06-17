@@ -34,4 +34,12 @@ describe('dev-agent context', () => {
     expect(git.branch).toBeTruthy();
     expect(Array.isArray(git.lines)).toBe(true);
   });
+
+  it('getTableroState lee brújula PROG-PURGE-CICA', async () => {
+    const { getTableroState } = await import('../../scripts/dev-agent/context.mjs');
+    const state = getTableroState(root);
+    expect(state.brujulaProgram).toMatch(/PROG-PURGE-CICA/);
+    expect(state.activeThreads.length).toBeGreaterThan(0);
+    expect(state.staleTableroHint).toBeNull();
+  });
 });

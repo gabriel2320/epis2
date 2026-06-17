@@ -34,7 +34,7 @@ function getEvolabOpenFindingsHint(root) {
 const AI_DEV_LOOP = [
   '**1. Alcance** — Declarar MF, archivos permitidos y prohibidos antes de editar.',
   '**2. Contexto mínimo** — Leer solo canon + prompt del subagente activo; no re-leer todo el repo.',
-  '**3. Diff mínimo** — Un problema, un PR lógico; reutilizar patrones existentes (`DashboardPanelGridSection`, RAD shell).',
+  '**3. Diff mínimo** — Un problema, un PR lógico; reutilizar patrones CICA (`CicaAppShell`, `CicaPatientScreenFrame`).',
   '**4. Verificar tarde** — `npm run check` al cerrar, no tras cada línea (salvo typecheck puntual).',
   '**5. Gates del rol** — Ejecutar solo los del subagente + cierre estándar.',
   '**6. Reporte** — `reports/epis2-*.md` con alcance, gates, riesgos, próximo paso exacto.',
@@ -76,24 +76,33 @@ export async function buildDevBrief(root, opts) {
     '- **Iteración:** `npm run dev:rapid` · cierre MF: `npm run quality:clinical`',
     '- **Visual activa:** CICA `/app/*` · legacy `/espacio/*` = fallback only',
     '- **No** iniciar MF READY de programas cerrados salvo petición explícita + `EPIS2_ALLOW_ARCHIVED_SCOPE=1`',
-    ...(strengthen ? [formatStrengthenLine(strengthen)] : []),
-    ...(fichaFirst ? [formatFichaFirstLine(fichaFirst)] : []),
+    ...(strengthen?.active ? [formatStrengthenLine(strengthen)] : []),
+    ...(fichaFirst?.active ? [formatFichaFirstLine(fichaFirst)] : []),
+    ...(!strengthen?.active && !fichaFirst?.active
+      ? ['- Programas cerrados: `docs/archive/ARCHIVED_PROGRAMS_INDEX.md`']
+      : []),
     strengthen?.active
       ? `- Allowlist: ${strengthen.active.allowedPaths.slice(0, 4).join(', ')}${strengthen.active.allowedPaths.length > 4 ? '…' : ''}`
       : '',
     '',
-    '## Estado del tablero (fuente canónica)',
+    '## Estado brújula + tablero',
+    '',
+    '_Brújula (`EPIS2_CURRENT_STATE`) manda; tablero = índice humano._',
     '',
   ];
 
+  if (tablero.staleTableroHint) {
+    lines.push(`- **⚠ Tablero stale:** ${tablero.staleTableroHint}`);
+  }
   if (tablero.activeThreads.length > 0) {
-    lines.push(...tablero.activeThreads.map((t) => `- **En curso:** ${t}`));
+    lines.push(...tablero.activeThreads.map((t) => `- ${t}`));
   }
   if (tablero.nextSteps.length > 0) {
-    lines.push(...tablero.nextSteps.slice(0, 3).map((s) => `- **Siguiente:** ${s}`));
+    lines.push('', '**Pasos derivados:**');
+    lines.push(...tablero.nextSteps.slice(0, 4).map((s) => `- ${s}`));
   }
   if (tablero.activeThreads.length === 0 && tablero.nextSteps.length === 0) {
-    lines.push('- Tablero no legible — revisar `docs/product/EPIS2_TABLERO.md` manualmente.');
+    lines.push('- Sin parse — ver `docs/EPIS2_CURRENT_STATE.md`.');
   }
 
   lines.push('', '## Objetivo sugerido', '');
@@ -110,7 +119,9 @@ export async function buildDevBrief(root, opts) {
   } else if (tablero.nextSteps.length > 0) {
     lines.push(`- ${tablero.nextSteps[0]}`);
   } else {
-    lines.push('- Ver `docs/product/EPIS2_TABLERO.md` § Siguiente.');
+    lines.push(
+      '- **PROG-PURGE-CICA / CICA:** ver `docs/EPIS2_CURRENT_STATE.md` · merge `feat/prog-aesthetic-reset-close` pendiente',
+    );
   }
   if (ollamaPlan?.plan?.objective) {
     lines.push(`- **Ollama (≤24 h):** ${ollamaPlan.plan.objective}`);

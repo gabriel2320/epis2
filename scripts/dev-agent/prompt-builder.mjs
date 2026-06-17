@@ -40,15 +40,15 @@ Reabrir solo con MF autorizada + \`EPIS2_ALLOW_ARCHIVED_SCOPE=1\`.
   }
 
   const tramo = context.tramo?.toUpperCase();
-  const mf = context.mf ?? (tramo ? `MF-TRAMO-${tramo}-002` : 'MF-FASE-B-001');
-  const phase = context.phase ?? 'B';
+  const mf = context.mf ?? (tramo ? `MF-TRAMO-${tramo}-002` : 'MF-PURGE-CICA');
+  const phase = context.phase ?? 'cica';
 
   const tramoBlock =
     tramo && existsSync(tramoPlanPath(root, tramo))
       ? `\n## Plan tramo ${tramo}\n\n${readExcerpt(root, `docs/product/EPIS2_TRAMO_${tramo}_PLAN.md`, 45)}\n\nInventario: ${tramoInventoryNote(root, tramo) ?? '—'}`
       : '';
 
-  const globalPlan = readExcerpt(root, 'docs/product/EPIS2_GLOBAL_DEV_PLAN.md', 55);
+  const activePlan = readExcerpt(root, 'docs/EPIS2_CURRENT_STATE.md', 45);
 
   return `# EPIS2 — Subagente \`${agent.id}\`
 
@@ -69,9 +69,13 @@ ${agent.triggers.map((t) => `- ${t}`).join('\n')}
 ${agent.gates.join('\n')}
 \`\`\`
 
-## Plan global (extracto)
+## Brújula activa (extracto)
 
-${globalPlan}
+${activePlan}
+
+## Perímetro agente
+
+\`docs/archive/AGENT_SCOPE_EXCLUSIONS.md\` — no planificar desde \`reports/archive/\` ni programas cerrados.
 ${tramoBlock}
 
 ## Reglas EPIS2 (no negociables)
@@ -123,10 +127,9 @@ export function buildSessionIndex(root, { phase, tramo, sequence }) {
     '## Cierre sesión',
     '',
     '```bash',
-    'npm run check',
-    'npm run test',
-    'npm run db:validate',
-    'npm run quality:layers-integration-gate',
+    'npm run dev:rapid',
+    'npm run quality:clinical   # cierre MF clínico',
+    'npm run quality:full       # pre-PR',
     '```',
     '',
   ];
