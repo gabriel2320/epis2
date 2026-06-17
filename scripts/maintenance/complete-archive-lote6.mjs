@@ -37,6 +37,4 @@ for (const file of manifest.moved) {
   removed++;
 }
 
-console.log(
-  `\n${dryRun ? 'Would remove' : 'Removed'} ${removed} duplicate(s), skipped ${skipped}`,
-);
+console.log(`\n${dryRun ? 'Would remove' : 'Removed'} ${removed} duplicate(s), skipped ${skipped}`);

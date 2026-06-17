@@ -114,7 +114,10 @@ function parseTableroIndex(root) {
   const header = text.split(/^---$/m)[0] ?? '';
 
   const siguienteHeader =
-    header.match(/\*\*Siguiente:\*\*\s*(.+)/)?.[1]?.replace(/\*\*/g, '').trim() ?? null;
+    header
+      .match(/\*\*Siguiente:\*\*\s*(.+)/)?.[1]
+      ?.replace(/\*\*/g, '')
+      .trim() ?? null;
 
   const propuestoPrograms = [];
   const openTramos = [];
@@ -172,7 +175,9 @@ export function getTableroState(root) {
   if (
     siguienteHeader &&
     brujulaProgram &&
-    !brujulaProgram.includes(siguienteHeader.replace(/PROG-/g, '').split(/[\s+]/)[0]?.slice(0, 6) ?? '')
+    !brujulaProgram.includes(
+      siguienteHeader.replace(/PROG-/g, '').split(/[\s+]/)[0]?.slice(0, 6) ?? '',
+    )
   ) {
     const brujulaHasPurge = brujulaProgram.includes('PURGE');
     const tableroHasUxLab = siguienteHeader.includes('UX-LAB');
