@@ -26,7 +26,7 @@ jobs:
       - run: npm ci
       - run: mkdir -p reports/ci
       - run: npx @cyclonedx/cyclonedx-npm --output-file reports/ci/rh05-sbom.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: rh05-sbom-${{ github.sha }}
