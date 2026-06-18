@@ -9,6 +9,7 @@ import {
   resolveModeRoute,
 } from './episModeGuards.js';
 import { resolveActiveMode, EPIS_MODES } from './episModes.js';
+import { EPIS2_CLINICAL_HOME } from '../routes/home.js';
 import {
   ThreeModesArchitectureResultSchema,
   ModeTransitionResultSchema,
@@ -29,7 +30,9 @@ describe('episModes', () => {
 
   it('login default siempre es comando (censo-first)', () => {
     expect(getDefaultModeAfterLogin({ role: 'physician', permissions: [] })).toBe('command');
-    expect(getDefaultRouteAfterLogin({ role: 'physician', permissions: [] })).toBe('/app/buscar');
+    expect(getDefaultRouteAfterLogin({ role: 'physician', permissions: [] })).toBe(
+      EPIS2_CLINICAL_HOME,
+    );
   });
 
   it('classic requiere paciente', () => {

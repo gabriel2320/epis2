@@ -1,3 +1,4 @@
+/** @legacy-runtime Shell clínico activo — `/espacio/*` hasta CICA-L GO. No expandir; ver PROG-PURGE-CICA. */
 import { copy } from '@epis2/design-system';
 import { EpisButton, Box, LogoutIcon, Stack } from '@epis2/epis2-ui';
 import { Outlet, useRouterState } from '@tanstack/react-router';

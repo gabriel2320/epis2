@@ -15,8 +15,9 @@ import { useMemo } from 'react';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { getDemoCaseByPatientId } from '../fixtures/devFixturesBridge.js';
 import { buildCicaPatientPresentation } from './cicaPatientPresentation.js';
+import { CicaExperimentalBanner } from './CicaExperimentalBanner.js';
 
-/** Layout exclusivo `/app/*` — CICA Clean Room, sidebar dual epis2g. Tema: CicaThemeControls + CicaSidebarThemePanel. */
+/** Layout exclusivo `/app/*` — laboratorio CICA (NO-GO). Tema: CicaThemeControls + CicaSidebarThemePanel. */
 export function CicaAppLayout() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -62,6 +63,7 @@ export function CicaAppLayout() {
       }
       hideSidebar={isCicaSidebarHiddenRoute(pathname)}
     >
+      <CicaExperimentalBanner />
       <CicaScreenTransition transitionKey={pathname}>
         <Outlet />
       </CicaScreenTransition>

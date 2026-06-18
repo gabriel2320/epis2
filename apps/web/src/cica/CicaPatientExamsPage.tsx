@@ -1,7 +1,6 @@
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import {
-  CicaPatientScreenFrame,
   EpisM3Text,
   List,
   ListItem,
@@ -15,9 +14,10 @@ import {
   formatLabObservedAt,
   selectLabHighlights,
 } from '../components/clinical-summary/clinicalSummaryData.js';
-import { ErrorState } from '../components/ErrorState.js';
 import { getDemoChartSectionRows } from '../fixtures/devFixturesBridge.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
+import { CicaPatientBlueprintPage } from './CicaPatientBlueprintPage.js';
+import { PATIENT_EXAMS_BLUEPRINT } from './blueprints/patientScreens.blueprint.js';
 import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
 
 const CICA_EXAMS_MAX_ROWS = 5;
@@ -101,21 +101,9 @@ function CicaExamsList({
 export function CicaPatientExamsPage() {
   const clinicalNavigate = useClinicalNavigate();
   const page = useCicaPatientPage();
-  const { patientId, detailQuery, presentation, longitudinal, demoCase, goPath } = page;
+  const { patientId, longitudinal, demoCase } = page;
 
-  if (!patientId || !presentation) return null;
-
-  if (detailQuery.isError) {
-    return (
-      <ErrorState
-        title={copy.errors.genericTitle}
-        message={copy.errors.genericMessage}
-        onRetry={() => detailQuery.refetch()}
-      />
-    );
-  }
-
-  if (!detailQuery.data) return null;
+  if (!patientId) return null;
 
   const actions: ClinicalLayoutAction[] = [
     {
@@ -127,20 +115,18 @@ export function CicaPatientExamsPage() {
   ];
 
   return (
-    <CicaPatientScreenFrame
-      screenId="patient-exams"
-      patientId={patientId}
-      activeTabId={page.activeTabId}
-      onNavigate={goPath}
-      identity={presentation.identity}
-      contextItems={presentation.contextItems}
+    <CicaPatientBlueprintPage
+      blueprint={PATIENT_EXAMS_BLUEPRINT}
       actions={actions}
       testId="cica-patient-exams-screen"
-    >
-      <CicaExamsList
-        observations={longitudinal?.observations ?? []}
-        demoCaseCode={demoCase?.demoCaseCode}
-      />
-    </CicaPatientScreenFrame>
+      slots={{
+        exams: (
+          <CicaExamsList
+            observations={longitudinal?.observations ?? []}
+            demoCaseCode={demoCase?.demoCaseCode}
+          />
+        ),
+      }}
+    />
   );
 }

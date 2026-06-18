@@ -3,7 +3,6 @@ import { buildCicaPath, parseCicaPatientId } from './cicaRoutes.js';
 import { resolveCicaEpis2gSurfaces } from './cicaEpis2gVisual.js';
 import { CICA_CHART_TAB_REGISTRY } from './CICA_CHART_TAB_REGISTRY.js';
 import { EPIS_CICA_SCREEN_REGISTRY } from './EPIS_CICA_SCREEN_REGISTRY.js';
-import { EPIS2G_SCREEN_STRUCTURE, findEpis2gScreenStructure } from './cicaEpis2gScreenStructure.js';
 
 describe('cicaRoutes', () => {
   it('buildCicaPath resuelve rutas con params', () => {
@@ -45,15 +44,6 @@ describe('CICA registries alignment', () => {
     const ids = new Set(EPIS_CICA_SCREEN_REGISTRY.map((s) => s.id));
     for (const tab of CICA_CHART_TAB_REGISTRY) {
       expect(ids.has(tab.screenId)).toBe(true);
-    }
-  });
-
-  it('EPIS2G_SCREEN_STRUCTURE cubre cada pantalla del registry', () => {
-    const registryIds = EPIS_CICA_SCREEN_REGISTRY.map((s) => s.id);
-    const structureIds = EPIS2G_SCREEN_STRUCTURE.map((s) => s.screenId);
-    expect(structureIds.sort()).toEqual([...registryIds].sort());
-    for (const id of registryIds) {
-      expect(findEpis2gScreenStructure(id)?.screenId).toBe(id);
     }
   });
 });

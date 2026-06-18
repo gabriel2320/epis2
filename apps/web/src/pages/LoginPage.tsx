@@ -1,8 +1,8 @@
 import { SYNTHETIC_USERS } from '@epis2/clinical-domain';
 import { copy } from '@epis2/design-system';
 import {
-  Box,
   EpisAlert,
+  EpisAuthBrandTitle,
   EpisAuthScreen,
   EpisBrandMark,
   EpisButton,
@@ -45,94 +45,93 @@ export function LoginPage() {
   };
 
   return (
-    <EpisAuthScreen>
-      <Stack spacing={1.25} alignItems="center" textAlign="center" data-testid="epis2-login-header">
-        <EpisBrandMark size={56} />
-        <EpisM3Text role="displayMedium" color="primary.main" component="h1">
-          {copy.appName}
+    <EpisAuthScreen
+      brand={<EpisAuthBrandTitle title={copy.appName} subtitle={copy.login.tagline} />}
+      footer={
+        <EpisM3Text role="labelMedium" color="text.secondary" component="p">
+          {copy.demoBadge} · {copy.login.subtitle}
         </EpisM3Text>
-        <EpisM3Text role="titleMedium" color="text.secondary">
-          {copy.login.tagline}
+      }
+    >
+      <Stack spacing={1.25} alignItems="center" textAlign="center" data-testid="epis2-login-header">
+        <EpisBrandMark size={48} />
+        <EpisM3Text role="headlineMedium" color="primary.main" component="h1">
+          {copy.login.submit}
         </EpisM3Text>
         <EpisDemoBadgeChip icon={<ScienceIcon fontSize="small" />} label={copy.demoBadge} />
       </Stack>
 
-      <Box
+      <Stack
         component="form"
+        spacing={2}
         data-testid="epis2-login-form"
         onSubmit={(e) => {
           e.preventDefault();
           void handleSubmit();
         }}
       >
-        <Stack spacing={2.5}>
-          <EpisTextField
-            select
-            label={copy.login.usernameLabel}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            fullWidth
-            slotProps={{
-              input: {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <PersonIcon color="primary" fontSize="small" />
-                  </InputAdornment>
-                ),
-              },
-            }}
-          >
-            {SYNTHETIC_USERS.map((u) => (
-              <MenuItem key={u.id} value={u.username}>
-                {u.displayName} ({copy.roles[u.role]})
-              </MenuItem>
-            ))}
-          </EpisTextField>
+        <EpisTextField
+          select
+          label={copy.login.usernameLabel}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          fullWidth
+          size="medium"
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PersonIcon color="primary" fontSize="small" />
+                </InputAdornment>
+              ),
+            },
+          }}
+        >
+          {SYNTHETIC_USERS.map((u) => (
+            <MenuItem key={u.id} value={u.username}>
+              {u.displayName} ({copy.roles[u.role]})
+            </MenuItem>
+          ))}
+        </EpisTextField>
 
-          <EpisTextField
-            label={copy.login.demoKeyLabel}
-            value={demoAuthKey}
-            onChange={(e) => setDemoAuthKey(e.target.value)}
-            placeholder={copy.login.demoKeyPlaceholder}
-            fullWidth
-            type="password"
-            autoComplete="off"
-            slotProps={{
-              input: {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <KeyIcon color="secondary" fontSize="small" />
-                  </InputAdornment>
-                ),
-              },
-            }}
-          />
+        <EpisTextField
+          label={copy.login.demoKeyLabel}
+          value={demoAuthKey}
+          onChange={(e) => setDemoAuthKey(e.target.value)}
+          placeholder={copy.login.demoKeyPlaceholder}
+          fullWidth
+          size="medium"
+          type="password"
+          autoComplete="off"
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <KeyIcon color="secondary" fontSize="small" />
+                </InputAdornment>
+              ),
+            },
+          }}
+        />
 
-          {error ? <EpisAlert severity="error">{error}</EpisAlert> : null}
+        {error ? <EpisAlert severity="error">{error}</EpisAlert> : null}
 
-          <EpisButton
-            type="submit"
-            appearance="filled"
-            size="large"
-            fullWidth
-            startIcon={<LoginIcon />}
-            disabled={loading}
-            data-testid="epis2-login-submit"
-          >
-            {loading ? copy.login.submitting : copy.login.submit}
-          </EpisButton>
+        <EpisButton
+          type="submit"
+          appearance="filled"
+          size="large"
+          fullWidth
+          startIcon={<LoginIcon />}
+          disabled={loading}
+          data-testid="epis2-login-submit"
+        >
+          {loading ? copy.login.submitting : copy.login.submit}
+        </EpisButton>
 
-          <EpisM3Text
-            role="labelMedium"
-            color="text.secondary"
-            textAlign="center"
-            component="p"
-            sx={{ px: 0.5, lineHeight: 1.5 }}
-          >
-            {copy.login.subtitle}. {copy.login.hint}
-          </EpisM3Text>
-        </Stack>
-      </Box>
+        <EpisM3Text role="labelMedium" color="text.secondary" textAlign="center" component="p">
+          {copy.login.hint}
+        </EpisM3Text>
+      </Stack>
     </EpisAuthScreen>
   );
 }

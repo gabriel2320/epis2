@@ -1,7 +1,6 @@
 import type { PatientLongitudinalResponse } from '@epis2/contracts';
 import { copy } from '@epis2/design-system';
 import {
-  CicaPatientScreenFrame,
   EpisM3Text,
   findCicaScreenById,
   List,
@@ -16,8 +15,9 @@ import {
   formatMedicationLine,
   partitionMedicationZones,
 } from '../components/clinical-summary/clinicalSummaryData.js';
-import { ErrorState } from '../components/ErrorState.js';
 import { getDemoChartSectionRows } from '../fixtures/devFixturesBridge.js';
+import { CicaPatientBlueprintPage } from './CicaPatientBlueprintPage.js';
+import { PATIENT_ORDERS_BLUEPRINT } from './blueprints/patientScreens.blueprint.js';
 import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
 
 type Medication = PatientLongitudinalResponse['medications'][number];
@@ -106,22 +106,10 @@ function CicaOrdersList({
 /** CICA Clean Room — indicaciones (/app/pacientes/:patientId/indicaciones). */
 export function CicaPatientOrdersPage() {
   const page = useCicaPatientPage();
-  const { patientId, detailQuery, presentation, longitudinal, demoCase, go, goPath } = page;
+  const { patientId, longitudinal, demoCase, go } = page;
   const screen = findCicaScreenById('patient-orders');
 
-  if (!patientId || !presentation) return null;
-
-  if (detailQuery.isError) {
-    return (
-      <ErrorState
-        title={copy.errors.genericTitle}
-        message={copy.errors.genericMessage}
-        onRetry={() => detailQuery.refetch()}
-      />
-    );
-  }
-
-  if (!detailQuery.data) return null;
+  if (!patientId) return null;
 
   const actions: ClinicalLayoutAction[] = [
     {
@@ -133,20 +121,18 @@ export function CicaPatientOrdersPage() {
   ];
 
   return (
-    <CicaPatientScreenFrame
-      screenId="patient-orders"
-      patientId={patientId}
-      activeTabId={page.activeTabId}
-      onNavigate={goPath}
-      identity={presentation.identity}
-      contextItems={presentation.contextItems}
+    <CicaPatientBlueprintPage
+      blueprint={PATIENT_ORDERS_BLUEPRINT}
       actions={actions}
       testId="cica-patient-orders-screen"
-    >
-      <CicaOrdersList
-        medications={longitudinal?.medications ?? []}
-        demoCaseCode={demoCase?.demoCaseCode}
-      />
-    </CicaPatientScreenFrame>
+      slots={{
+        orders: (
+          <CicaOrdersList
+            medications={longitudinal?.medications ?? []}
+            demoCaseCode={demoCase?.demoCaseCode}
+          />
+        ),
+      }}
+    />
   );
 }

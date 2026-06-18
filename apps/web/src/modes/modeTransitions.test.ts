@@ -5,6 +5,7 @@ import {
   transitionDashboardToClassic,
   transitionDashboardToCommand,
 } from './modeTransitions.js';
+import { EPIS2_CLINICAL_HOME } from '../routes/home.js';
 
 describe('modeTransitions', () => {
   it('transitionCommandToClassic incluye mode=classic', () => {
@@ -43,7 +44,7 @@ describe('modeTransitions', () => {
     const navigate = vi.fn();
     transitionDashboardToCommand(navigate, 'icu');
     expect(navigate).toHaveBeenCalledWith({
-      to: '/app/buscar',
+      to: EPIS2_CLINICAL_HOME,
       search: { context: 'dashboard', tab: 'icu' },
     });
   });
