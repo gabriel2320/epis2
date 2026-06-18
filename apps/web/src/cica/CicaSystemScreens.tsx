@@ -1,64 +1,11 @@
-import { type ClinicalLayoutAction } from '@epis2/epis2-ui';
 import { CicaBlueprintPage } from './CicaBlueprintPage.js';
 import {
   AGENDA_BLUEPRINT,
   MY_WORK_BLUEPRINT,
   RECENT_PATIENTS_BLUEPRINT,
 } from './blueprints/systemScreens.blueprint.js';
-import { CicaPatientSectionPage } from './CicaPatientSectionPages.js';
-import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
 
 export { CicaPatientTimelinePage } from './CicaPatientTimelinePage.js';
-
-export function CicaPatientAdmissionPage() {
-  return (
-    <CicaPatientSectionPage
-      screenId="patient-admission"
-      placeholder="Ingreso clínico — datos de admisión y motivo de hospitalización (demo próximo)."
-    />
-  );
-}
-
-export function CicaPatientInterconsultasPage() {
-  return (
-    <CicaPatientSectionPage
-      screenId="patient-interconsultas"
-      placeholder="Interconsultas solicitadas y respuestas pendientes de revisión."
-    />
-  );
-}
-
-export function CicaPatientProceduresPage() {
-  return (
-    <CicaPatientSectionPage
-      screenId="patient-procedures"
-      placeholder="Procedimientos y pabellón — registro operatorio del episodio."
-    />
-  );
-}
-
-export function CicaPatientDischargePage() {
-  const { patientId, go } = useCicaPatientPage();
-  const actions: ClinicalLayoutAction[] =
-    patientId != null
-      ? [
-          {
-            id: 'new-epicrisis',
-            label: 'Nueva epicrisis',
-            kind: 'primary',
-            onClick: () => go('new-epicrisis', { patientId }),
-          },
-        ]
-      : [];
-
-  return (
-    <CicaPatientSectionPage
-      screenId="patient-discharge"
-      placeholder="Epicrisis y alta — resumen de cierre del episodio clínico."
-      actions={actions}
-    />
-  );
-}
 
 export function CicaRecentPatientsPage() {
   return (
