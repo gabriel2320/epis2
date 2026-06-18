@@ -1,23 +1,17 @@
-import { copy } from '@epis2/design-system';
 import Stack from '@mui/material/Stack';
-import type { CicaChartTabId } from './CICA_CHART_TAB_REGISTRY.js';
-import { CICA_CHART_TAB_REGISTRY, inferChartTabFromPathname } from './CICA_CHART_TAB_REGISTRY.js';
-import { buildCicaPath, todayIsoDate } from './cicaRoutes.js';
+import {
+  CLINICAL_CHART_TAB_REGISTRY,
+  buildCicaChartTabPath,
+  chartTabLabelEs,
+  inferChartTabFromPathname,
+  type CicaChartTabId,
+} from './clinicalChartTabRegistry.js';
 import { EpisButton } from '../primitives/EpisButton.js';
 import { useEpis2ThemePreferences } from '../providers/EpisThemePreferences.js';
 import { prefersReducedMotion } from '../theme/motion.js';
 import { cicaMotion, cicaTransition, shouldAnimate } from './cicaMotion.js';
 import { cicaHorizontalScrollSx, cicaShellPaddingXSx } from './cicaResponsive.js';
 import { cicaTokens } from './cicaTokens.js';
-
-const TAB_LABELS: Record<(typeof CICA_CHART_TAB_REGISTRY)[number]['labelKey'], string> = {
-  summary: copy.chartModes.classicTabs.summary,
-  evolutions: copy.chartModes.classicTabs.evolutions,
-  orders: copy.chartModes.classicTabs.orders,
-  exams: copy.chartModes.classicTabs.exams,
-  documents: copy.chartModes.classicTabs.documents,
-  paper: copy.clinicalNav.paper,
-};
 
 export type CicaChartTabsProps = {
   patientId: string;
@@ -27,12 +21,12 @@ export type CicaChartTabsProps = {
   testId?: string;
 };
 
-/** Tabs ficha — driven por CICA_CHART_TAB_REGISTRY (modificar tabs ahí). */
+/** Tabs ficha — driven por CLINICAL_CHART_TAB_REGISTRY (modificar tabs ahí). */
 export function CicaChartTabs({
   patientId,
   activeTabId,
   onNavigate,
-  paperDate = todayIsoDate(),
+  paperDate,
   testId = 'cica-chart-tabs',
 }: CicaChartTabsProps) {
   const { preferences } = useEpis2ThemePreferences();
@@ -67,11 +61,12 @@ export function CicaChartTabs({
         '& > *': { flexShrink: { xs: 0, sm: 1 } },
       }}
     >
-      {CICA_CHART_TAB_REGISTRY.map((tab) => {
-        const path =
-          tab.pathKind === 'paper-day'
-            ? buildCicaPath('paper-day', { patientId, date: paperDate })
-            : buildCicaPath(tab.screenId, { patientId });
+      {CLINICAL_CHART_TAB_REGISTRY.map((tab) => {
+        const path = buildCicaChartTabPath(
+          tab.id,
+          patientId,
+          paperDate !== undefined ? { paperDate } : undefined,
+        );
         const isActive = activeTabId === tab.id;
         return (
           <EpisButton
@@ -102,7 +97,7 @@ export function CicaChartTabs({
               },
             }}
           >
-            {TAB_LABELS[tab.labelKey]}
+            {chartTabLabelEs(tab.id)}
           </EpisButton>
         );
       })}

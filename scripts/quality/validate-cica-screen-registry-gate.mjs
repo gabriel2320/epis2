@@ -22,12 +22,17 @@ for (const deferredId of ['recent-patients', 'my-work', 'agenda']) {
   }
 }
 
+const cicaIndex = readFileSync(join(root, 'packages/epis2-ui/src/cica/index.ts'), 'utf8');
+if (!cicaIndex.includes('CLINICAL_CHART_TAB_REGISTRY')) {
+  errors.push('cica/index.ts debe exportar CLINICAL_CHART_TAB_REGISTRY (MF-PONY-07)');
+}
 const sidebarNav = readFileSync(join(root, 'packages/epis2-ui/src/cica/cicaSidebarNav.ts'), 'utf8');
 if (!sidebarNav.includes('navVisible !== false')) {
   errors.push('cicaSidebarNav debe filtrar pantallas con navVisible: false');
 }
-
-const cicaIndex = readFileSync(join(root, 'packages/epis2-ui/src/cica/index.ts'), 'utf8');
+if (!sidebarNav.includes('CICA_PATIENT_PRIMARY_NAV')) {
+  errors.push('cicaSidebarNav debe consumir CICA_PATIENT_PRIMARY_NAV (MF-PONY-07)');
+}
 if (!cicaIndex.includes('resolveTrivialCicaBlueprintFromRegistry')) {
   errors.push('cica/index.ts debe exportar resolveTrivialCicaBlueprintFromRegistry');
 }
@@ -55,6 +60,20 @@ const patientBlueprints = readFileSync(
 );
 if (!patientBlueprints.includes('withRegistryLayout')) {
   errors.push('patientScreens.blueprint.ts debe usar withRegistryLayout');
+}
+
+const buildRoutes = readFileSync(join(root, 'apps/web/src/cica/buildCicaRoutesFromRegistry.ts'), 'utf8');
+if (!buildRoutes.includes('CICA_REGISTRY_ROUTE_WIRING')) {
+  errors.push('buildCicaRoutesFromRegistry debe declarar CICA_REGISTRY_ROUTE_WIRING');
+}
+if (!buildRoutes.includes('EPIS_CICA_SCREEN_REGISTRY')) {
+  errors.push('buildCicaRoutesFromRegistry debe referenciar EPIS_CICA_SCREEN_REGISTRY');
+}
+if (!router.includes('buildCicaRoutesFromRegistry')) {
+  errors.push('router.tsx debe generar rutas CICA desde registry (MF-PONY-06)');
+}
+if (!cicaIndex.includes('registryRouteToTanstackPath')) {
+  errors.push('cica/index.ts debe exportar registryRouteToTanstackPath');
 }
 
 const requiredRoutes = [
@@ -89,12 +108,12 @@ for (const route of requiredRoutes) {
   if (!registry.includes(route)) {
     errors.push(`registry falta ruta ${route}`);
   }
-  const routerPath = route
+  const tanstackPath = route
     .replace(/:patientId/g, '$patientId')
     .replace(/:date/g, '$date')
     .replace(/:evolutionId/g, '$evolutionId');
-  if (!router.includes(routerPath)) {
-    errors.push(`router falta ruta ${routerPath}`);
+  if (!buildRoutes.includes(tanstackPath)) {
+    errors.push(`buildCicaRoutesFromRegistry falta ruta ${tanstackPath}`);
   }
 }
 
@@ -105,6 +124,7 @@ for (const token of [
   'CicaPatientScreenFrame',
   'buildCicaPath',
   'EPIS_CICA_SCREEN_REGISTRY',
+  'CLINICAL_CHART_TAB_REGISTRY',
   'CICA_CHART_TAB_REGISTRY',
 ]) {
   if (!cicaIndex.includes(token)) {

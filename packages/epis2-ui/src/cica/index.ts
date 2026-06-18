@@ -45,12 +45,25 @@ export {
 } from './EPIS_CICA_SCREEN_REGISTRY.js';
 export {
   CICA_CHART_TAB_REGISTRY,
-  inferChartTabFromPathname,
+  CLINICAL_CHART_TAB_REGISTRY,
+  CICA_PATIENT_MORE_NAV,
+  CICA_PATIENT_PRIMARY_NAV,
+  LEGACY_PATIENT_CHART_TABS,
+  buildCicaChartTabPath,
+  chartTabLabelEs,
   chartTabScreenId,
   findChartTabById,
-  type CicaChartTabId,
+  findClinicalChartTabById,
+  inferChartTabFromPathname,
+  legacyPatientChartTabTarget,
+  resolveLegacyPatientChartTabId,
   type CicaChartTabDefinition,
-} from './CICA_CHART_TAB_REGISTRY.js';
+  type CicaChartTabId,
+  type CicaPatientNavEntry,
+  type ClinicalChartTabDefinition,
+  type LegacyClinicalNavigateTarget,
+  type LegacyPatientChartTabId,
+} from './clinicalChartTabRegistry.js';
 export {
   buildCicaPath,
   CICA_ROUTE_TEMPLATE,
@@ -64,6 +77,12 @@ export {
   type CicaScreenId,
   type CicaRouteParams,
 } from './cicaRoutes.js';
+export {
+  CICA_DRAFT_FORM_SCREEN_IDS,
+  parseCicaDraftRouteSearch,
+  registryRouteToTanstackPath,
+  type CicaDraftFormScreenId,
+} from './cicaRoutePaths.js';
 export { CicaAppShell, type CicaAppShellProps } from './CicaAppShell.js';
 export { cicaEpis2gVisual, resolveCicaEpis2gSurfaces } from './cicaEpis2gVisual.js';
 export {

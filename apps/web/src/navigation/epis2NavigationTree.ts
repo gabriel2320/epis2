@@ -1,6 +1,9 @@
 import { EPIS2_FORM_BLUEPRINTS } from '@epis2/clinical-forms';
 import type { EpisClinicalShellLevel, EpisClinicalWorkspaceId } from '@epis2/epis2-ui';
-import { PATIENT_CHART_TABS, type PatientChartTabId } from '../clinical/patientChartNavigation.js';
+import {
+  LEGACY_PATIENT_CHART_TABS as PATIENT_CHART_TABS,
+  type LegacyPatientChartTabId as PatientChartTabId,
+} from '@epis2/epis2-ui/clinical-chart-tabs';
 
 /** Estado de conciliación del árbol EPIS2. */
 export type EpisNavigationSurfaceStatus =

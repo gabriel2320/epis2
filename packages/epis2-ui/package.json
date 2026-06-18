@@ -23,6 +23,10 @@
       "types": "./dist/charts/public-core.d.ts",
       "import": "./dist/charts/public-core.js"
     },
+    "./clinical-chart-tabs": {
+      "types": "./dist/cica/clinicalChartTabRegistry.d.ts",
+      "import": "./dist/cica/clinicalChartTabRegistry.js"
+    },
     "./tree": {
       "types": "./dist/tree/public-core.d.ts",
       "import": "./dist/tree/public-core.js"

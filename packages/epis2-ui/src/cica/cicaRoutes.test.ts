@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { buildCicaPath, parseCicaPatientId } from './cicaRoutes.js';
 import { resolveCicaEpis2gSurfaces } from './cicaEpis2gVisual.js';
-import { CICA_CHART_TAB_REGISTRY } from './CICA_CHART_TAB_REGISTRY.js';
+import { CICA_CHART_TAB_REGISTRY } from './clinicalChartTabRegistry.js';
 import { EPIS_CICA_SCREEN_REGISTRY } from './EPIS_CICA_SCREEN_REGISTRY.js';
 
 describe('cicaRoutes', () => {

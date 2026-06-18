@@ -1,7 +1,14 @@
 import { copy } from '@epis2/design-system';
 import { findCicaScreenById } from './EPIS_CICA_SCREEN_REGISTRY.js';
-import { buildCicaPath, todayIsoDate, type CicaScreenId } from './cicaRoutes.js';
-import { CICA_CHART_TAB_REGISTRY, type CicaChartTabId } from './CICA_CHART_TAB_REGISTRY.js';
+import { buildCicaPath, type CicaScreenId } from './cicaRoutes.js';
+import {
+  CICA_PATIENT_MORE_NAV,
+  CICA_PATIENT_PRIMARY_NAV,
+  CLINICAL_CHART_TAB_REGISTRY,
+  buildCicaChartTabPath,
+  chartTabLabelEs,
+  type CicaPatientNavEntry,
+} from './clinicalChartTabRegistry.js';
 
 export type CicaSidebarItem = {
   id: string;
@@ -67,150 +74,23 @@ export function buildCicaSystemSidebarSections(ctx: CicaSidebarNavContext): Cica
   ];
 }
 
-type PatientNavEntry =
-  | { kind: 'tab'; tabId: CicaChartTabId }
-  | {
-      kind: 'screen';
-      id: string;
-      screenId: CicaScreenId;
-      label: string;
-      pathMatch: string;
-      planned?: boolean;
-    };
-
-/** L2 visible — master tree §3.2 (tabs + medicamentos + papel). */
-const PATIENT_PRIMARY_ORDER: readonly PatientNavEntry[] = [
-  { kind: 'tab', tabId: 'resumen' },
-  { kind: 'tab', tabId: 'evoluciones' },
-  { kind: 'tab', tabId: 'indicaciones' },
-  { kind: 'tab', tabId: 'examenes' },
-  {
-    kind: 'screen',
-    id: 'medicamentos',
-    screenId: 'patient-medications',
-    label: copy.chartModes.navMeds,
-    pathMatch: '/medicamentos',
-  },
-  { kind: 'tab', tabId: 'documentos' },
-  { kind: 'tab', tabId: 'papel' },
-];
-
-/** Overflow «Más» — master tree §3.2. */
-const PATIENT_MORE_ORDER: readonly PatientNavEntry[] = [
-  {
-    kind: 'screen',
-    id: 'ingreso',
-    screenId: 'patient-admission',
-    label: 'Ingreso clínico',
-    pathMatch: '/ingreso',
-  },
-  {
-    kind: 'screen',
-    id: 'enfermeria',
-    screenId: 'patient-admission',
-    label: 'Enfermería',
-    pathMatch: '/enfermeria',
-    planned: true,
-  },
-  {
-    kind: 'screen',
-    id: 'interconsultas',
-    screenId: 'patient-interconsultas',
-    label: 'Interconsultas',
-    pathMatch: '/interconsultas',
-  },
-  {
-    kind: 'screen',
-    id: 'procedimientos',
-    screenId: 'patient-procedures',
-    label: 'Procedimientos',
-    pathMatch: '/procedimientos',
-  },
-  {
-    kind: 'screen',
-    id: 'cirugia',
-    screenId: 'patient-procedures',
-    label: 'Cirugía',
-    pathMatch: '/cirugia',
-    planned: true,
-  },
-  {
-    kind: 'screen',
-    id: 'uci',
-    screenId: 'patient-admission',
-    label: 'UCI',
-    pathMatch: '/uci',
-    planned: true,
-  },
-  {
-    kind: 'screen',
-    id: 'alta',
-    screenId: 'patient-discharge',
-    label: 'Epicrisis / alta',
-    pathMatch: '/alta',
-  },
-  {
-    kind: 'screen',
-    id: 'timeline',
-    screenId: 'patient-timeline',
-    label: 'Línea de tiempo',
-    pathMatch: '/timeline',
-  },
-  {
-    kind: 'screen',
-    id: 'auditoria',
-    screenId: 'patient-audit',
-    label: copy.chartModes.navAudit,
-    pathMatch: '/auditoria',
-  },
-  {
-    kind: 'screen',
-    id: 'evolution-book',
-    screenId: 'evolution-book',
-    label: 'Libro evoluciones',
-    pathMatch: '/evoluciones/libro',
-  },
-  {
-    kind: 'screen',
-    id: 'paper-book',
-    screenId: 'paper-book',
-    label: 'Libro clínico',
-    pathMatch: '/papel/libro',
-  },
-];
-
-function tabLabel(tabId: CicaChartTabId): string {
-  const labels: Record<CicaChartTabId, string> = {
-    resumen: 'Resumen',
-    evoluciones: 'Evoluciones',
-    indicaciones: 'Indicaciones',
-    examenes: 'Exámenes',
-    documentos: 'Documentos',
-    papel: copy.clinicalNav.paper,
-  };
-  return labels[tabId];
-}
-
 function mapPatientNavEntries(
   ctx: CicaSidebarNavContext,
-  order: readonly PatientNavEntry[],
+  order: readonly CicaPatientNavEntry[],
 ): CicaSidebarItem[] {
   const { pathname, patientId, onNavigate } = ctx;
   if (!patientId) return [];
 
   return order.map((entry) => {
     if (entry.kind === 'tab') {
-      const tab = CICA_CHART_TAB_REGISTRY.find((t) => t.id === entry.tabId);
+      const tab = CLINICAL_CHART_TAB_REGISTRY.find((t) => t.id === entry.tabId);
       if (!tab) {
-        return { id: entry.tabId, label: tabLabel(entry.tabId), disabled: true };
+        return { id: entry.tabId, label: chartTabLabelEs(entry.tabId), disabled: true };
       }
-      const href =
-        tab.pathKind === 'paper-day'
-          ? buildCicaPath('paper-day', { patientId, date: todayIsoDate() })
-          : buildCicaPath(tab.screenId, { patientId });
+      const href = buildCicaChartTabPath(entry.tabId, patientId);
       return {
         id: tab.id,
-        label: tabLabel(tab.id),
+        label: tab.labelEs,
         href,
         active:
           tab.pathKind === 'paper-day'
@@ -226,17 +106,17 @@ function mapPatientNavEntries(
     if (entry.planned) {
       return {
         id: entry.id,
-        label: entry.label,
+        label: entry.labelEs,
         disabled: true,
         planned: true,
         testId: `cica-sidebar-patient-${entry.id}`,
       };
     }
 
-    const href = buildCicaPath(entry.screenId, { patientId });
+    const href = buildCicaPath(entry.screenId as CicaScreenId, { patientId });
     return {
       id: entry.id,
-      label: entry.label,
+      label: entry.labelEs,
       active: isActiveMatch(pathname, entry.pathMatch),
       onClick: () => onNavigate(href),
       testId: `cica-sidebar-patient-${entry.id}`,
@@ -253,7 +133,7 @@ export function buildCicaPatientSidebarSection(
   return {
     id: 'patient',
     title: 'Paciente actual',
-    items: mapPatientNavEntries(ctx, PATIENT_PRIMARY_ORDER),
+    items: mapPatientNavEntries(ctx, CICA_PATIENT_PRIMARY_NAV),
   };
 }
 
@@ -266,7 +146,7 @@ export function buildCicaPatientMoreSidebarSection(
   return {
     id: 'patient-more',
     title: 'Más',
-    items: mapPatientNavEntries(ctx, PATIENT_MORE_ORDER),
+    items: mapPatientNavEntries(ctx, CICA_PATIENT_MORE_NAV),
   };
 }
 

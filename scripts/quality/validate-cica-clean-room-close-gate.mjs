@@ -61,10 +61,17 @@ for (const file of requiredPages) {
 }
 
 const router = readFileSync(join(root, 'apps/web/src/routes/router.tsx'), 'utf8');
+const routeComponents = readFileSync(join(root, cicaWeb, 'cicaRouteComponents.ts'), 'utf8');
 for (const importToken of ['CicaNewPrescriptionPage', 'CicaNewDocumentPage']) {
-  if (!router.includes(importToken)) {
-    errors.push(`router.tsx sin import ${importToken}`);
+  if (!routeComponents.includes(importToken)) {
+    errors.push(`cicaRouteComponents.ts sin ${importToken}`);
   }
+}
+if (!router.includes('buildCicaRoutesFromRegistry')) {
+  errors.push('router.tsx debe usar buildCicaRoutesFromRegistry (MF-PONY-06)');
+}
+if (router.includes('cicaPatientSummaryRoute')) {
+  errors.push('router.tsx no debe declarar rutas CICA manuales post MF-PONY-06');
 }
 
 /** MF-PONY-03 — secciones demo colapsadas en mapa + ruta genérica. */
@@ -89,8 +96,8 @@ for (const legacyPage of [
     errors.push(`Eliminar page fina obsoleta: ${cicaWeb}/${legacyPage}`);
   }
 }
-if (!router.includes('CicaPatientDemoSectionRoutePage')) {
-  errors.push('router.tsx debe usar CicaPatientDemoSectionRoutePage para secciones demo');
+if (!routeComponents.includes('CicaPatientDemoSectionRoutePage')) {
+  errors.push('cicaRouteComponents.ts debe mapear CicaPatientDemoSectionRoutePage');
 }
 
 if (errors.length) {
