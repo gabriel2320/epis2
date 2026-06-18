@@ -16,7 +16,7 @@
 | [`LICENSE`](../../LICENSE) | MIT 2026 | Política institucional vs MIT |
 | [`CONTRIBUTING.md`](../../CONTRIBUTING.md) | — | Coherencia con DISCLAIMER |
 
-Referencias: [`reports/epis2-mf-con-10-legal.md`](../../reports/epis2-mf-con-10-legal.md) · [`CONSOLIDATION_FREEZE.md`](../CONSOLIDATION_FREEZE.md)
+Referencias: [`reports/archive/2026-06/epis2-mf-con-10-legal.md`](../../reports/archive/2026-06/epis2-mf-con-10-legal.md) · [`CONSOLIDATION_FREEZE.md`](../CONSOLIDATION_FREEZE.md)
 
 ---
 

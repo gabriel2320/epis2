@@ -28,7 +28,7 @@ Reportes históricos se mueven a **`reports/archive/YYYY-MM/`** sin borrar evide
 
 Reglas: [`docs/DOCUMENTATION_GOVERNANCE.md`](../docs/DOCUMENTATION_GOVERNANCE.md)
 
-Archivo inicial: [`archive/2026-06/README.md`](archive/2026-06/README.md) — lotes 1–7 (501+ archivos) en `archive/2026-06/`.
+Archivo inicial: [`archive/2026-06/README.md`](archive/2026-06/README.md) — lotes 1–10 (513+ archivos) en `archive/2026-06/`.
 
 ---
 
@@ -39,7 +39,7 @@ Archivo inicial: [`archive/2026-06/README.md`](archive/2026-06/README.md) — lo
 | Consolidación ola 1 | `epis2-prog-consolidate-close-2026.md` |
 | Ficha-first cierre | `epis2-prog-ficha-first-close-2026.md` |
 | Plan unificado | `archive/2026-06/epis2-plan-desarrollo-unificado-2026-06-14.md` |
-| Rate limit Redis | `epis2-mf-con-07-rate-limit.md` |
+| Rate limit Redis | `archive/2026-06/epis2-mf-con-07-rate-limit.md` |
 
 ---
 
