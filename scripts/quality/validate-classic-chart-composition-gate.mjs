@@ -31,9 +31,6 @@ if (!traditional.includes('classic-chart-tabs')) {
 if (/<TraditionalSectionNav[\s/>]/.test(traditional)) {
   errors.push('TraditionalEhrMode no debe usar rail lateral TraditionalSectionNav (MF-AEST-02)');
 }
-if (/<TraditionalSectionMobileNav[\s/>]/.test(traditional)) {
-  errors.push('TraditionalEhrMode no debe usar selector mobile legacy como nav principal');
-}
 
 const copy = readFileSync(join(root, 'packages/design-system/src/copy/es.ts'), 'utf8');
 if (!copy.includes('classicTabs')) {

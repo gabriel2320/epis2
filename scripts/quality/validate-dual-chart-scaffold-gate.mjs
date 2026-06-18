@@ -23,7 +23,7 @@ const requiredFiles = [
   'apps/web/src/components/chart/ClinicalShell.tsx',
   'apps/web/src/components/chart/TraditionalEhrMode.tsx',
   'apps/web/src/components/chart/PaperChartMode.tsx',
-  'apps/web/src/components/chart/PatientChartBanner.tsx',
+  'apps/web/src/components/chart/PatientIdentityBand.tsx',
   'apps/web/src/components/chart/ChartModeSwitch.tsx',
   'apps/web/src/components/chart/CommandPaletteOverlay.tsx',
   'apps/web/src/components/chart/paper/PaperChartTemplate.tsx',

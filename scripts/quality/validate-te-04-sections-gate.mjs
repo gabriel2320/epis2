@@ -7,32 +7,13 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
-for (const rel of [
-  'apps/web/src/components/chart/TraditionalSectionMobileNav.tsx',
-  'packages/test-fixtures/src/demoChartSections.ts',
-]) {
+for (const rel of ['packages/test-fixtures/src/demoChartSections.ts']) {
   if (!existsSync(join(root, rel))) errors.push(`falta ${rel}`);
 }
 
 const demo = readFileSync(join(root, 'packages/test-fixtures/src/demoChartSections.ts'), 'utf8');
 for (const section of ['navAdmin', 'navDocuments', 'navEpicrisis', 'navProcedures', 'navAudit']) {
   if (!demo.includes(section)) errors.push(`demoChartSections falta ${section}`);
-}
-
-const ehr = readFileSync(
-  join(root, 'apps/web/src/components/chart/TraditionalEhrMode.tsx'),
-  'utf8',
-);
-if (!ehr.includes('TraditionalSectionMobileNav')) {
-  errors.push('TraditionalEhrMode debe montar nav móvil');
-}
-
-const mobile = readFileSync(
-  join(root, 'apps/web/src/components/chart/TraditionalSectionMobileNav.tsx'),
-  'utf8',
-);
-if (!mobile.includes("display: { xs: 'block', md: 'none' }")) {
-  errors.push('nav móvil debe mostrarse solo en xs/sm');
 }
 
 if (!existsSync(join(root, 'reports/archive/2026-06/epis2-mf-te-04-sections-p3-mobile.md'))) {

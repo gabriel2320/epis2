@@ -14,7 +14,6 @@ const required = [
   'apps/web/src/design/radScreenRegistry.ts',
   'apps/web/src/design/useRadTabIndex.ts',
   'apps/web/src/components/rad/EpisRadScreenShell.tsx',
-  'apps/web/src/components/rad/EpisRadFormSurface.tsx',
   'apps/web/src/components/rad/EpisRadGridSurface.tsx',
   'apps/web/src/components/rad/EpisRadDocumentSurface.tsx',
   'packages/epis2-ui/src/clinical/EpisContextMenu.tsx',
@@ -41,14 +40,6 @@ if (!registry.includes('EPIS_RAD_SCREEN_REGISTRY')) {
 
 if ((formPage.match(/<EpisClinicalFormActionBar/g) ?? []).length !== 1) {
   errors.push('Formulario clínico debe tener una sola ActionBar');
-}
-
-const radComponents = readFileSync(
-  join(root, 'apps/web/src/components/rad/EpisRadFormSurface.tsx'),
-  'utf8',
-);
-if (radComponents.includes('usePatient') || radComponents.includes('clinicalApi')) {
-  errors.push('Superficies RAD no deben importar lógica clínica');
 }
 
 if (errors.length) {

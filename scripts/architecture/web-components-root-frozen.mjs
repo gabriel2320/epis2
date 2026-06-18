@@ -10,7 +10,6 @@ const COMPONENTS_ROOT = 'apps/web/src/components';
  * Al mover un archivo de esta lista a su dominio, retirarlo de aquí — la lista solo decrece.
  */
 const FROZEN_ALLOWLIST = new Set([
-  'ActivePatientBanner.tsx',
   'ApsDashboardTab.tsx',
   'ClinicalAlertsPanel.test.tsx',
   'ClinicalAlertsPanel.tsx',

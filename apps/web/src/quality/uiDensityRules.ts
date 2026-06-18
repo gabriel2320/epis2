@@ -147,7 +147,7 @@ export const EPIS_M3_SCAFFOLD_COMPONENTS = [
   'EpisCommandBar',
   'EpisMainContent',
   'EpisSupportingPane',
-  'EpisClinicalActionBar',
+  'EpisClinicalFormActionBar',
   'EpisClinicalWorkspaceShell',
   'EpisSplitWorkspace',
   'EpisClassicMd3Shell',
@@ -157,8 +157,8 @@ export const EPIS_M3_SCAFFOLD_COMPONENTS = [
 /** Patrones de interacción MF-UI-SIMPLIFY. */
 export const EPIS_INTERACTION_PATTERNS = [
   'EpisBulkActionMenu',
-  'EpisDraggableList',
-  'EpisCopyPasteTextTools',
+  'ClinicalDraggableList',
+  'ClinicalCopyPasteTools',
   'EpisProgressiveMenu',
 ] as const;
 
