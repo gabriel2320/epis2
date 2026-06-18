@@ -36,7 +36,7 @@ Veinte reglas que gobiernan legibilidad clínica y composición visual. La imple
 Google Sans Text y Roboto forman el **par sans UI** (misma línea Google Workspace). Roboto Mono es la **única** familia monoespaciada.
 
 ```ts
-import { epis2DisplayFontFamily, epis2BodyFontFamily, epis2MonoFontFamily } from '@epis2/epis2-ui/theme';
+import { epis2DisplayFontFamily, epis2BodyFontFamily, epis2MonoFontFamily } from '@epis2/epis2-ui';
 ```
 
 ---
@@ -57,7 +57,8 @@ import { epis2DisplayFontFamily, epis2BodyFontFamily, epis2MonoFontFamily } from
 Piso absoluto: **13px** — prohibido texto por debajo.
 
 ```ts
-import { epis2TypeScale } from '@epis2/epis2-ui/theme/foundations/typography';
+// packages/epis2-ui/src/theme/typography-rules.ts
+import { epis2TypeScale } from './typography-rules.js';
 ```
 
 ---
@@ -69,7 +70,8 @@ import { epis2TypeScale } from '@epis2/epis2-ui/theme/foundations/typography';
 **EPIS2:** `maxWidth: 65ch` en evoluciones, epicrisis, notas y documentación clínica.
 
 ```ts
-import { epis2ClinicalProseSx } from '@epis2/epis2-ui/theme/foundations/typography';
+// packages/epis2-ui/src/theme/typography-rules.ts
+import { epis2ClinicalProseSx } from './typography-rules.js';
 // <Box sx={epis2ClinicalProseSx}>…</Box>
 ```
 
@@ -96,7 +98,8 @@ import { epis2ClinicalProseSx } from '@epis2/epis2-ui/theme/foundations/typograp
 **EPIS2:**
 
 ```ts
-import { epis2TabularNumsSx, epis2NumericCellSx } from '@epis2/epis2-ui/theme/foundations/typography';
+// packages/epis2-ui/src/theme/typography-rules.ts
+import { epis2TabularNumsSx, epis2NumericCellSx } from './typography-rules.js';
 ```
 
 Aplicar en `EpisDataGrid`, KPIs, signos vitales y campos numéricos dinámicos. `MuiCssBaseline` aplica tabular-nums en `code`/`pre`.

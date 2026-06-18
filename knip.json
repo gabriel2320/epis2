@@ -8,7 +8,7 @@
     ".cursor/**",
     "database/schema-placeholder.ts"
   ],
-  "ignoreBinaries": ["pg_dump", "psql", "nvidia-smi"],
+  "ignoreBinaries": ["pg_dump", "psql", "nvidia-smi", "taskkill", "ollama", "vite"],
   "workspaces": {
     ".": {
       "entry": [
@@ -18,10 +18,12 @@
         "vitest.setup.ts",
         "scripts/**/*.{mjs,js,cjs,ts}",
         "tools/**/*.{mjs,js,cjs}",
-        "database/drizzle.config.ts"
+        "database/drizzle.config.ts",
+        "tests/**/*.ts"
       ],
-      "project": ["scripts/**", "tools/**", "database/**"],
+      "project": ["scripts/**", "tools/**", "database/**", "tests/**"],
       "ignoreDependencies": [
+        "@cursor/sdk",
         "@figma/code-connect",
         "@storybook/addon-essentials",
         "@storybook/react",

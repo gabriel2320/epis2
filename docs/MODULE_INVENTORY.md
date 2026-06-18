@@ -1,7 +1,7 @@
 # EPIS2 — Inventario de módulos
 
-**Versión:** 1.0 · **Fecha:** 2026-06-15  
-**Brújula:** [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md)
+**Versión:** 1.1 · **Fecha:** 2026-06-18  
+**Brújula:** [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) · **Knip baseline:** 0 unused files (MF-KNIP-02, 2026-06-18)
 
 Clasificación: **core** · **labs** · **tools** · **archive** · **external**
 
@@ -13,7 +13,7 @@ Acción: **keep** · **consolidate** · **needs-review** · **archive** · **del
 
 | Path | Paquete | Zona | Acción | Notas |
 |------|---------|------|--------|-------|
-| `apps/web` | `@epis2/web` | core | keep | UI clínica; `@epis2/ai-client` OK; no `@mui/*` directo |
+| `apps/web` | `@epis2/web` | core | keep | UI clínica; CICA `/app/*`; legacy `/espacio/*`; `design-agents/` lab (podado MF-KNIP-02-A) |
 | `apps/api` | `@epis2/api` | core | keep | SoT HTTP; AI routes, CDS, clinical, FHIR frontera |
 
 ---
@@ -28,11 +28,15 @@ Acción: **keep** · **consolidate** · **needs-review** · **archive** · **del
 | `packages/command-registry` | core | Sí | keep | **Único** Command Registry |
 | `packages/clinical-productivity` | core | Sí | keep | Grillas, acciones probables, textbox |
 | `packages/design-system` | core | Sí | keep | Tokens base |
-| `packages/epis2-ui` | core | Sí | keep | Componentes MD3, tema, print A5 |
+| `packages/epis2-ui` | core | Sí | keep | Componentes MD3, tema (`theme/theme.ts`, `typography-rules.ts`); CICA SoT `clinicalChartTabRegistry.ts` |
 | `packages/epis2-widgets` | core | Sí | keep | **Único** Widget Registry |
 | `packages/ai-client` | core | Frontera | keep | Cliente HTTP IA para web |
 | `packages/fhir-export` | core | Interop | keep | Solo frontera export |
 | `packages/test-fixtures` | tools | Tests | keep | DEMO/SIM; no UI clínica |
+| `packages/clinical-rules` | core | Reglas | keep | Demo rules; `@epis2/lab-dictionary` |
+| `packages/lab-dictionary` | core | Lexicon | keep | Catálogo labs ES-CL |
+| `packages/clinical-lexicon-es-cl` | core | Lexicon | keep | Cadena lexicon build |
+| `packages/drug-dictionary-cl` | labs | Lexicon | keep | No dep directa en clinical-rules (MF-KNIP-03) |
 
 ---
 
@@ -133,8 +137,23 @@ Funcionalidad empezada en master; no borrar sin inventario MF.
 
 ---
 
+## Ponytail trim (2026-06-18 — MF-KNIP-02/03)
+
+| Zona podada | Acción | Notas |
+|-------------|--------|-------|
+| `apps/web/design-agents/` (parcial) | delete-later | Agentes huérfanos; core tests + `schemas.ts` |
+| `apps/web` barrels `components/*/index.ts` | delete-later | Imports directos a subpaths |
+| `packages/epis2-ui/theme/foundations/**` | delete-later | Re-exports muertos; SoT en `theme/*.ts` |
+| `packages/epis2-ui/cica/CICA_CHART_TAB_REGISTRY.ts` | delete-later | SoT: `clinicalChartTabRegistry.ts` |
+| `apps/api/src/db.ts` | delete-later | Shim; usar `db/client.js` |
+
+Knip: **0** unused files · **0** unused deps · unlisted deps → MF-KNIP-04.
+
+---
+
 ## Próximo paso inventario
 
 1. Completar filas **tramo A–K** con estado demo/scaffold/dead (hoja aparte o ampliar esta tabla).
 2. Lista de gates huérfanos (en package.json pero programa cerrado) → candidatos a quitar de npm scripts.
 3. Tag git `epis2-base-v0.1` cuando checklist en CURRENT_STATE esté ✓ en CI.
+4. **MF-PONY-GATE-01** — archive gates tramo cerrado.

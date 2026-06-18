@@ -77,7 +77,7 @@ Registro: `packages/epis2-ui/src/cica/EPIS_CICA_SCREEN_REGISTRY.ts`
 
 ```text
 1. EPIS_CICA_SCREEN_REGISTRY.ts   → intent, profile, ruta
-2. CICA_CHART_TAB_REGISTRY.ts     → tabs ficha (si aplica)
+2. clinicalChartTabRegistry.ts  → tabs ficha (CLINICAL_CHART_TAB_REGISTRY)
 3. apps/web/src/cica/*Page.tsx    → solo contenido clínico (children)
 4. useCicaPatientPage + frames    → datos y shell reutilizados
 ```
@@ -85,7 +85,7 @@ Registro: `packages/epis2-ui/src/cica/EPIS_CICA_SCREEN_REGISTRY.ts`
 | Quiero… | Archivo |
 |---------|---------|
 | Nueva ruta `/app` | registry + router + `buildCicaPath(screenId)` |
-| Nuevo tab ficha | `CICA_CHART_TAB_REGISTRY` |
+| Nuevo tab ficha | `CLINICAL_CHART_TAB_REGISTRY` en `clinicalChartTabRegistry.ts` |
 | Cambiar nav global | `buildDefaultCicaNavItems` en `CicaClinicalNav.tsx` |
 | Cambiar identidad/contexto | `cicaPatientPresentation.ts` |
 | Nueva sección ficha | `<CicaPatientSectionPage screenId="…" />` |

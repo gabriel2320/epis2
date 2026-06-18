@@ -91,7 +91,7 @@ Paciente actual
 
 **Regla Ley 7 CICA:** máximo 7 ítems visibles sin overflow; resto en «Más».
 
-Implementación nav: `packages/epis2-ui/src/cica/cicaSidebarNav.ts` + `CICA_CHART_TAB_REGISTRY.ts`.
+Implementación nav: `packages/epis2-ui/src/cica/cicaSidebarNav.ts` + `clinicalChartTabRegistry.ts`.
 
 ---
 
