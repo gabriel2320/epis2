@@ -6,11 +6,7 @@ import {
 import { CLINICAL_LEXICON_ES_CL, type ClinicalLexiconEntry } from './buildLexicon.js';
 import { normalizeClinicalSpanish } from './normalize.js';
 
-export type LexiconResolveSource =
-  | 'exact'
-  | 'contains'
-  | 'colloquial'
-  | 'needs_clarification';
+export type LexiconResolveSource = 'exact' | 'contains' | 'colloquial' | 'needs_clarification';
 
 export type LexiconResolveResult = {
   intentId?: ClinicalIntent;
@@ -32,10 +28,7 @@ function findContainsMatch(normalized: string): ClinicalLexiconEntry | undefined
   let best: ClinicalLexiconEntry | undefined;
   for (const entry of CLINICAL_LEXICON_ES_CL) {
     if (entry.normalized.length < 4) continue;
-    if (
-      normalized.includes(entry.normalized) ||
-      entry.normalized.includes(normalized)
-    ) {
+    if (normalized.includes(entry.normalized) || entry.normalized.includes(normalized)) {
       if (!best || entry.confidence > best.confidence) {
         best = entry;
       }

@@ -1,8 +1,5 @@
 import { shouldInvokeAssistRoute } from './assist-route.js';
-import {
-  CLINICAL_ACTION_MANIFEST,
-  getClinicalActionByIntent,
-} from './clinical-action-manifest.js';
+import { CLINICAL_ACTION_MANIFEST, getClinicalActionByIntent } from './clinical-action-manifest.js';
 import type { ClinicalIntent, CommandResolveResult } from './types.js';
 
 /** MF-LX-06 — umbral lexicon IA-last (confidence < 0.5 → LLM). */
@@ -35,9 +32,7 @@ export function shouldEscalateLexiconConfidence(confidence: number): boolean {
   return confidence < AI_ESCALATION_LEXICON_CONFIDENCE;
 }
 
-export function shouldEscalateCommandResult(
-  result: Pick<CommandResolveResult, 'status'>,
-): boolean {
+export function shouldEscalateCommandResult(result: Pick<CommandResolveResult, 'status'>): boolean {
   if (result.status === 'empty') return true;
   if (result.status === 'needs_clarification') return true;
   return shouldInvokeAssistRoute(result as CommandResolveResult);
@@ -62,18 +57,14 @@ export function resolveAiEscalation(input: AiEscalationInput): AiEscalationDecis
       return {
         escalate: true,
         reason: 'command_needs_clarification',
-        ...(input.lexiconConfidence !== undefined
-          ? { confidence: input.lexiconConfidence }
-          : {}),
+        ...(input.lexiconConfidence !== undefined ? { confidence: input.lexiconConfidence } : {}),
       };
     }
     if (shouldInvokeAssistRoute(input.commandResult as CommandResolveResult)) {
       return {
         escalate: true,
         reason: 'assist_route_eligible',
-        ...(input.lexiconConfidence !== undefined
-          ? { confidence: input.lexiconConfidence }
-          : {}),
+        ...(input.lexiconConfidence !== undefined ? { confidence: input.lexiconConfidence } : {}),
       };
     }
   }

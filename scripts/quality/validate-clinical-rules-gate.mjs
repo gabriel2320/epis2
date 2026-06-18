@@ -27,7 +27,11 @@ for (const ruleId of [
 }
 
 const indexSrc = readFileSync(join(pkgDir, 'src/index.ts'), 'utf8');
-for (const token of ['evaluateClinicalRules', 'CLINICAL_RULES_DEMO', 'assertClinicalRulesInvariants']) {
+for (const token of [
+  'evaluateClinicalRules',
+  'CLINICAL_RULES_DEMO',
+  'assertClinicalRulesInvariants',
+]) {
   if (!indexSrc.includes(token)) {
     errors.push(`clinical-rules/index.ts falta ${token}`);
   }

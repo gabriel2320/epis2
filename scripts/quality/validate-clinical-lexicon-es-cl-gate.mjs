@@ -44,9 +44,7 @@ if (vitest.status !== 0) {
 }
 
 if (errors.length) {
-  console.error(
-    'clinical-lexicon-es-cl-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
-  );
+  console.error('clinical-lexicon-es-cl-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
 }
 

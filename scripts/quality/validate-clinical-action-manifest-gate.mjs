@@ -44,7 +44,9 @@ const mappedScreenIds = mapBlock
 
 for (const screenId of mappedScreenIds) {
   if (!screenIds.includes(screenId)) {
-    errors.push(`INTENT_CICA_SCREEN_IDS referencia ${screenId} ausente en EPIS_CICA_SCREEN_REGISTRY`);
+    errors.push(
+      `INTENT_CICA_SCREEN_IDS referencia ${screenId} ausente en EPIS_CICA_SCREEN_REGISTRY`,
+    );
   }
 }
 

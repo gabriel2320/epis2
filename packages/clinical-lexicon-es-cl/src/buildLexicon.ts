@@ -1,7 +1,4 @@
-import {
-  CLINICAL_ACTION_MANIFEST,
-  type ClinicalIntent,
-} from '@epis2/command-registry';
+import { CLINICAL_ACTION_MANIFEST, type ClinicalIntent } from '@epis2/command-registry';
 import { CLINICAL_ABBREVIATIONS_ES_CL } from './abbreviations.js';
 import { normalizeClinicalSpanish } from './normalize.js';
 
@@ -16,10 +13,7 @@ export type ClinicalLexiconEntry = {
   confidence: number;
 };
 
-function pushUnique(
-  bucket: Map<string, ClinicalLexiconEntry>,
-  entry: ClinicalLexiconEntry,
-): void {
+function pushUnique(bucket: Map<string, ClinicalLexiconEntry>, entry: ClinicalLexiconEntry): void {
   const existing = bucket.get(entry.normalized);
   if (!existing || entry.confidence > existing.confidence) {
     bucket.set(entry.normalized, entry);

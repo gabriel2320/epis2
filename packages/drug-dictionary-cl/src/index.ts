@@ -1,7 +1,4 @@
-export {
-  DRUG_DICTIONARY_CL_MIN_ENTRIES,
-  DRUG_DICTIONARY_CL_SEED,
-} from './drugSeedEsCl.js';
+export { DRUG_DICTIONARY_CL_MIN_ENTRIES, DRUG_DICTIONARY_CL_SEED } from './drugSeedEsCl.js';
 export {
   assertDrugDictionaryClInvariants,
   DRUG_DICTIONARY_CL,

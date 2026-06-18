@@ -335,7 +335,10 @@ export const DRUG_DICTIONARY_CL_SEED: readonly DrugDictionaryEntry[] = [
   seed({
     id: 'salbutamol',
     activeIngredient: 'salbutamol',
-    usualOrders: ['salbutamol 2.5 mg nebulizacion cada 6 h PRN', 'salbutamol 100 mcg INH cada 6 h PRN'],
+    usualOrders: [
+      'salbutamol 2.5 mg nebulizacion cada 6 h PRN',
+      'salbutamol 100 mcg INH cada 6 h PRN',
+    ],
     routes: ['INH'],
   }),
   seed({

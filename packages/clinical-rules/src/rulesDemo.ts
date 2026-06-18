@@ -41,7 +41,9 @@ export const CLINICAL_RULES_DEMO: readonly ClinicalRuleDefinition[] = [
     message: 'Toda prescripción requiere dosis antes de aprobación.',
     evaluate(ctx) {
       if (ctx.draftType !== 'prescription' && ctx.blueprintId !== 'prescription') return false;
-      const meds = ctx.medications?.length ? ctx.medications : [{ name: textOf(ctx.form?.medication), dose: textOf(ctx.form?.dose) }];
+      const meds = ctx.medications?.length
+        ? ctx.medications
+        : [{ name: textOf(ctx.form?.medication), dose: textOf(ctx.form?.dose) }];
       if (meds.length === 0) return true;
       return meds.some((m) => textOf(m.name) && !textOf(m.dose));
     },

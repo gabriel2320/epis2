@@ -1,7 +1,4 @@
-export {
-  LAB_DICTIONARY_MIN_ENTRIES,
-  LAB_DICTIONARY_SEED,
-} from './labSeedEsCl.js';
+export { LAB_DICTIONARY_MIN_ENTRIES, LAB_DICTIONARY_SEED } from './labSeedEsCl.js';
 export {
   assertLabDictionaryInvariants,
   assessLabValue,

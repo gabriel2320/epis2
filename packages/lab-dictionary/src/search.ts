@@ -11,12 +11,7 @@ export const LAB_DICTIONARY: readonly LabDictionaryEntry[] = LAB_DICTIONARY_SEED
 const byId = new Map(LAB_DICTIONARY.map((entry) => [entry.id, entry]));
 
 function normalizeQuery(raw: string): string {
-  return raw
-    .trim()
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/\p{M}/gu, '')
-    .replace(/\s+/g, ' ');
+  return raw.trim().toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').replace(/\s+/g, ' ');
 }
 
 export function getLabById(id: string): LabDictionaryEntry | undefined {
@@ -79,7 +74,9 @@ export function parseLabToken(token: string): { id?: string; value?: number } {
 
   for (const entry of LAB_DICTIONARY) {
     const tokens = [entry.id, ...entry.synonyms, entry.label].map(normalizeQuery);
-    if (tokens.some((t) => normalized.includes(t) || t.includes(normalized.replace(/\d/g, '').trim()))) {
+    if (
+      tokens.some((t) => normalized.includes(t) || t.includes(normalized.replace(/\d/g, '').trim()))
+    ) {
       return { id: entry.id, ...(value !== undefined && !Number.isNaN(value) ? { value } : {}) };
     }
   }

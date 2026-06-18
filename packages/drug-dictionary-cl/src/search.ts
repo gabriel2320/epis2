@@ -6,12 +6,7 @@ export const DRUG_DICTIONARY_CL: readonly DrugDictionaryEntry[] = DRUG_DICTIONAR
 const byId = new Map(DRUG_DICTIONARY_CL.map((entry) => [entry.id, entry]));
 
 function normalizeQuery(raw: string): string {
-  return raw
-    .trim()
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/\p{M}/gu, '')
-    .replace(/\s+/g, ' ');
+  return raw.trim().toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').replace(/\s+/g, ' ');
 }
 
 export function getDrugById(id: string): DrugDictionaryEntry | undefined {
@@ -48,7 +43,10 @@ export function searchDrugsEsCl(query: string, limit = 8): DrugSearchResult[] {
   }
 
   return results
-    .sort((a, b) => b.score - a.score || a.entry.activeIngredient.localeCompare(b.entry.activeIngredient))
+    .sort(
+      (a, b) =>
+        b.score - a.score || a.entry.activeIngredient.localeCompare(b.entry.activeIngredient),
+    )
     .slice(0, limit);
 }
 
