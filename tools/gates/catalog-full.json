@@ -212,6 +212,10 @@
       "type": "file",
       "path": "scripts/quality/validate-clinical-lexicon-es-cl-gate.mjs"
     },
+    "quality:drug-dictionary-cl-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-drug-dictionary-cl-gate.mjs"
+    },
     "quality:cica-action-density-gate": {
       "type": "file",
       "path": "scripts/quality/validate-cica-action-density-gate.mjs"
