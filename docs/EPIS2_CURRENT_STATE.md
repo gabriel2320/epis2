@@ -236,7 +236,7 @@ Todo cambio debe mejorar claridad o mantenibilidad sin alterar flujo clínico m�
 | [`VISION_EPIS2.md`](product/VISION_EPIS2.md) | North star + matriz dominio |
 | [`AGENT_CONTEXT_MINIMAL.md`](AGENT_CONTEXT_MINIMAL.md) | Loop agente |
 | [`product/EPIS2_ROUTE_MAP.md`](product/EPIS2_ROUTE_MAP.md) | Mapa rutas CICA (MF-CATALOG-00 ✓) |
-| [`product/EPIS2_PRODUCT_CATALOG.md`](product/EPIS2_PRODUCT_CATALOG.md) | Objetos clínicos (MF-CATALOG-01, pendiente) |
+| [`product/EPIS2_PRODUCT_CATALOG.md`](product/EPIS2_PRODUCT_CATALOG.md) | Catálogo objetos clínicos (MF-CATALOG-01 ✓) |
 | [`SCOPE_V1.md`](SCOPE_V1.md) / [`NON_GOALS.md`](NON_GOALS.md) | Límites MVP |
 | [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-prog-ficha-first-close-2026.md) | Último cierre producto |
 | [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-plan-post-rc3-2026.md) | Auditoría post-rc3 · PROG-POST-RC3 tramos |

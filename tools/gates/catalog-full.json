@@ -184,6 +184,10 @@
       "type": "file",
       "path": "scripts/quality/validate-route-map-gate.mjs"
     },
+    "quality:product-catalog-minimum-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-product-catalog-minimum-gate.mjs"
+    },
     "quality:aesthetic-action-density-gate": {
       "type": "file",
       "path": "scripts/quality/validate-aesthetic-action-density-gate.mjs"

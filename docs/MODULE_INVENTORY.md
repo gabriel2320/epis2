@@ -161,6 +161,6 @@ Evidencia: `reports/epis2-mf-pony-*-close.md`, `reports/epis2-mf-pony-knip-*-clo
 
 ## Próximo paso inventario
 
-1. **PROG-PRODUCT-MAP** — MF-CATALOG-01 product catalog · MF-CATALOG-GATE-01.
+1. **PROG-PRODUCT-MAP** — MF-CATALOG-GATE-01 (`quality:product-map-gate`).
 2. Completar filas **tramo A–K** con estado demo/scaffold/dead (hoja aparte o ampliar esta tabla).
 3. Tag git `epis2-base-v0.1` cuando checklist CURRENT_STATE ✓ + `quality:required` + `quality:product-map-gate` (MF-RELEASE-BASE-01).
