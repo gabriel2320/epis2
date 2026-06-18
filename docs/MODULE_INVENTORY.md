@@ -145,7 +145,7 @@ Funcionalidad empezada en master; no borrar sin inventario MF.
 | PONY-02…07 | CICA registry, stubs ocultos, rutas derivadas, tabs SoT |
 | PONY-GATE-01 | 8 gates → `PROG-PONYTAIL-TRIM` archived · merge `master` @ `b2d6a00` |
 
-Evidencia: `reports/epis2-mf-pony-*-close.md`, `reports/epis2-mf-pony-knip-*-close.md`, `reports/knip-audit-pony-2026-06-18.md`.
+Evidencia: `reports/epis2-mf-pony-gate-01-close.md`, `reports/archive/2026-06/epis2-mf-pony-*-close.md`, `reports/knip-audit-pony-2026-06-18.md`.
 
 | Zona podada | Acción | Notas |
 |-------------|--------|-------|
@@ -161,6 +161,6 @@ Evidencia: `reports/epis2-mf-pony-*-close.md`, `reports/epis2-mf-pony-knip-*-clo
 
 ## Próximo paso inventario
 
-1. **PROG-PURGE-CICA** — siguientes lotes archive (plan vigente).
+1. **PROG-PURGE-CICA** — MF-PURGE-DOC-09 ✓ lote 8 · MF-PURGE-DOC-10 o MF-PURGE-05.
 2. Completar filas **tramo A–K** con estado demo/scaffold/dead (hoja aparte o ampliar esta tabla).
 3. Tag **`epis2-base-v0.1`** ✓ (MF-RELEASE-BASE-01 · [`epis2-prog-product-map-close.md`](../reports/epis2-prog-product-map-close.md)).

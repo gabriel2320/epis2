@@ -1,0 +1,29 @@
+{
+  "lote": 8,
+  "date": "2026-06-18",
+  "program": "PROG-PURGE-CICA",
+  "mf": "MF-PURGE-DOC-09",
+  "dryRun": false,
+  "moved": [
+    "epis2-mf-pony-01-close.md",
+    "epis2-mf-pony-02-close.md",
+    "epis2-mf-pony-03-close.md",
+    "epis2-mf-pony-04-close.md",
+    "epis2-mf-pony-05-close.md",
+    "epis2-mf-pony-06-close.md",
+    "epis2-mf-pony-07-close.md",
+    "epis2-mf-pony-doc-01-close.md",
+    "epis2-mf-pony-knip-00-close.md",
+    "epis2-mf-pony-knip-01-close.md",
+    "epis2-mf-pony-knip-02-close.md",
+    "epis2-mf-pony-knip-02a-close.md",
+    "epis2-mf-pony-knip-02b-close.md",
+    "epis2-mf-pony-knip-02c-close.md",
+    "epis2-mf-pony-knip-02d-close.md",
+    "epis2-mf-pony-knip-03-close.md",
+    "epis2-mf-pony-knip-04-close.md",
+    "epis2-ponytail-correction-plan-2026-06-18.md"
+  ],
+  "missing": [],
+  "skippedAlreadyInArchive": []
+}
