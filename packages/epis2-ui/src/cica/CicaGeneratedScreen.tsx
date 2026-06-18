@@ -1,10 +1,6 @@
 import Box from '@mui/material/Box';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
-import {
-  ClinicalFieldCell,
-  ClinicalFieldGrid,
-  ClinicalSection,
-} from '../layout/clinical/index.js';
+import { ClinicalFieldCell, ClinicalFieldGrid, ClinicalSection } from '../layout/clinical/index.js';
 import { CicaScreenFrame } from './CicaScreenFrame.js';
 import type { CicaGeneratedScreenProps } from './cicaScreenBlueprint.js';
 
@@ -16,13 +12,13 @@ export function CicaBlueprintBody({
   return (
     <ClinicalFieldGrid columns={12} testId={`cica-blueprint-grid-${blueprint.screenId}`}>
       {blueprint.sections.map((section) => {
-        const content = slots[section.id] ?? (
-          section.placeholder ? (
+        const content =
+          slots[section.id] ??
+          (section.placeholder ? (
             <EpisM3Text role="bodyMedium" color="text.secondary">
               {section.placeholder}
             </EpisM3Text>
-          ) : null
-        );
+          ) : null);
 
         return (
           <ClinicalFieldCell

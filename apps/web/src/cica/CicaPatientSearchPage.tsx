@@ -21,7 +21,12 @@ export function CicaPatientSearchPage() {
   const { setPatient: pinPatient } = useActivePatient();
   const [query, setQuery] = useState('');
   const [searchTerm, setSearchTerm] = useState<string | undefined>(undefined);
-  const { patients, refetch, isFetching, error: patientsError } = usePatientsQuery({
+  const {
+    patients,
+    refetch,
+    isFetching,
+    error: patientsError,
+  } = usePatientsQuery({
     search: searchTerm,
     enabled: true,
   });

@@ -30,7 +30,10 @@ export function EpisAuthScreen({
       sx={{
         minHeight: '100dvh',
         display: 'grid',
-        gridTemplateColumns: { xs: '1fr', md: brand ? 'minmax(280px, 1fr) minmax(360px, 480px)' : '1fr' },
+        gridTemplateColumns: {
+          xs: '1fr',
+          md: brand ? 'minmax(280px, 1fr) minmax(360px, 480px)' : '1fr',
+        },
         bgcolor: 'background.default',
       }}
     >
@@ -97,7 +100,11 @@ export function EpisAuthBrandTitle({ title, subtitle }: { title: string; subtitl
       <EpisM3Text role="displayMedium" component="p" sx={{ color: 'inherit', fontWeight: 600 }}>
         {title}
       </EpisM3Text>
-      <EpisM3Text role="bodyLarge" component="p" sx={{ color: 'inherit', opacity: 0.92, maxWidth: 420 }}>
+      <EpisM3Text
+        role="bodyLarge"
+        component="p"
+        sx={{ color: 'inherit', opacity: 0.92, maxWidth: 420 }}
+      >
         {subtitle}
       </EpisM3Text>
     </Stack>

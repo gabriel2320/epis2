@@ -1,9 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  CICA_UI_PRODUCT_STATUS,
-  isCicaProductReady,
-  isCicaUiEnabled,
-} from './cicaUiEnv.js';
+import { CICA_UI_PRODUCT_STATUS, isCicaProductReady, isCicaUiEnabled } from './cicaUiEnv.js';
 
 describe('cicaUiEnv', () => {
   it('CICA desactivado salvo VITE_ENABLE_CICA_UI=true explícito', () => {

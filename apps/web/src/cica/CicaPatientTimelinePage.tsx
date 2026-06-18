@@ -13,7 +13,10 @@ type CicaTimelineListProps = {
 };
 
 /** Línea de tiempo completa — agrupada por periodo. */
-function CicaTimelineList({ timeline, testId = 'cica-patient-timeline-list' }: CicaTimelineListProps) {
+function CicaTimelineList({
+  timeline,
+  testId = 'cica-patient-timeline-list',
+}: CicaTimelineListProps) {
   const grouped = useMemo(() => filterAndGroupClinicalTimeline(timeline, 'all'), [timeline]);
 
   if (grouped.length === 0) {

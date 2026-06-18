@@ -126,9 +126,8 @@ describe('Golden Clinical Journey', () => {
     });
 
     it('9. home clínica es censo/búsqueda (barra transversal)', async () => {
-      const { EPIS2_CLINICAL_HOME, EPIS2_LEGACY_CLINICAL_HOME } = await import(
-        '../apps/web/src/routes/home.js'
-      );
+      const { EPIS2_CLINICAL_HOME, EPIS2_LEGACY_CLINICAL_HOME } =
+        await import('../apps/web/src/routes/home.js');
       expect(EPIS2_CLINICAL_HOME).toBe(EPIS2_LEGACY_CLINICAL_HOME);
       expect(JOURNEY_STEPS[8]).toBe('volver-command-center');
     });
