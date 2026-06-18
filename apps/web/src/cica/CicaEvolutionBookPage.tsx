@@ -1,8 +1,6 @@
 import { copy } from '@epis2/design-system';
 import {
   CicaBookPager,
-  CicaLetterPageShell,
-  CicaScreenFrame,
   EpisM3Text,
   Stack,
   Typography,
@@ -14,6 +12,12 @@ import {
   formatEvolutionPageDate,
   listEvolutionEvents,
 } from './cicaEvolutionBook.js';
+import { CicaActionFormBlueprintPage } from './CicaActionFormBlueprintPage.js';
+import { CicaLetterBlueprintPage } from './CicaLetterBlueprintPage.js';
+import {
+  EVOLUTION_BOOK_BLUEPRINT,
+  EVOLUTION_BOOK_EMPTY_BLUEPRINT,
+} from './blueprints/actionFormScreens.blueprint.js';
 import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
 import { useCicaNavigate } from './hooks/useCicaNavigate.js';
 
@@ -43,13 +47,18 @@ export function CicaEvolutionBookPage() {
 
   if (events.length === 0) {
     return (
-      <CicaScreenFrame screenId="evolution-book" title="Libro de evoluciones" hideActionBar>
-        <Stack spacing={2}>
-          <Typography variant="body2" color="text.secondary">
-            {copy.longitudinal.emptySection}
-          </Typography>
-        </Stack>
-      </CicaScreenFrame>
+      <CicaActionFormBlueprintPage
+        blueprint={EVOLUTION_BOOK_EMPTY_BLUEPRINT}
+        title="Libro de evoluciones"
+        slots={{
+          main: (
+            <Typography variant="body2" color="text.secondary">
+              {copy.longitudinal.emptySection}
+            </Typography>
+          ),
+        }}
+        testId="cica-evolution-book-empty"
+      />
     );
   }
 
@@ -84,23 +93,26 @@ export function CicaEvolutionBookPage() {
         previousLabel="← Evolución anterior"
         nextLabel="Evolución siguiente →"
       />
-      <CicaLetterPageShell
+      <CicaLetterBlueprintPage
+        blueprint={EVOLUTION_BOOK_BLUEPRINT}
         title={current.title}
         subtitle={patientLabel}
         statusLabel="Lectura clínica"
         onBack={() => go('patient-evolutions', { patientId: page.patientId! })}
         backLabel="Volver a lista"
-        hideActionBar
-      >
-        <Stack spacing={2}>
-          <EpisM3Text role="bodyMedium" color="text.secondary">
-            {formatEvolutionPageDate(current.at)}
-          </EpisM3Text>
-          <EpisM3Text role="bodyLarge" component="div">
-            {current.detail?.trim() || copy.longitudinal.emptySection}
-          </EpisM3Text>
-        </Stack>
-      </CicaLetterPageShell>
+        slots={{
+          meta: (
+            <EpisM3Text role="bodyMedium" color="text.secondary">
+              {formatEvolutionPageDate(current.at)}
+            </EpisM3Text>
+          ),
+          body: (
+            <EpisM3Text role="bodyLarge" component="div">
+              {current.detail?.trim() || copy.longitudinal.emptySection}
+            </EpisM3Text>
+          ),
+        }}
+      />
     </Stack>
   );
 }
