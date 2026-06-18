@@ -47,6 +47,12 @@ Poda delete-safe de agentes Ollama huérfanos (solo referenciados por `design-ag
 - Ninguno en CICA/golden journey — agentes estaban off por defecto y sin wiring productivo.
 - `schemas.ts` conserva tipos three-modes usados por `episModes.test.ts`.
 
+## Baseline Knip post-poda
+
+| Métrica | MF-KNIP-01 | MF-KNIP-02-A |
+|---------|------------|--------------|
+| Unused files | 38 | **29** (−9) |
+
 ## Próximo paso
 
 **MF-KNIP-02-B** — barrels legacy web (`command-center/index.ts`, `dashboard-md3/index.ts`, chart/cds/rad) + componentes Epis* huérfanos.
