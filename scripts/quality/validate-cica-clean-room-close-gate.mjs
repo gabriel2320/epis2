@@ -29,10 +29,13 @@ for (const script of gates) {
 
 const env = readFileSync(join(root, 'apps/web/src/dev/cicaUiEnv.ts'), 'utf8');
 if (!env.includes('CICA_UI_PRODUCT_STATUS')) {
-  errors.push('cicaUiEnv.ts debe declarar CICA_UI_PRODUCT_STATUS (no-go hasta reformulación)');
+  errors.push('cicaUiEnv.ts debe declarar CICA_UI_PRODUCT_STATUS');
 }
-if (!env.includes("=== 'true'")) {
-  errors.push('cicaUiEnv.ts debe ser opt-in (VITE_ENABLE_CICA_UI===true)');
+if (!env.includes("CICA_UI_PRODUCT_STATUS: CicaUiProductStatus = 'go'")) {
+  errors.push('cicaUiEnv.ts debe declarar CICA_UI_PRODUCT_STATUS = go');
+}
+if (!env.includes('VITE_DISABLE_CICA_UI')) {
+  errors.push('cicaUiEnv.ts debe permitir opt-out dev (VITE_DISABLE_CICA_UI)');
 }
 
 const home = readFileSync(join(root, 'apps/web/src/routes/home.ts'), 'utf8');

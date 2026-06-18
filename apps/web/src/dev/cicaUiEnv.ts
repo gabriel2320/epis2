@@ -1,12 +1,14 @@
-/** CICA Clean Room — laboratorio NO-GO; no activar en piloto sin reformulación CICA-L. */
+/** CICA — interfaz visual React + MD3 (ficha clásica + modo papel). */
 
-/** Veredicto producto — ver reports/epis2-frontend-purge-cica-reform-plan.md */
+/** Veredicto producto — ver reports/epis2-cica-classic-implementation-roadmap.md */
 export type CicaUiProductStatus = 'no-go' | 'go';
 
-export const CICA_UI_PRODUCT_STATUS: CicaUiProductStatus = 'no-go';
+export const CICA_UI_PRODUCT_STATUS: CicaUiProductStatus = 'go';
 
-/** Opt-in explícito: solo `VITE_ENABLE_CICA_UI=true` activa `/app/*`. Default = legacy `/espacio/*`. */
+/** Activo con producto GO; opt-out dev: `VITE_DISABLE_CICA_UI=true`. */
 export function isCicaUiEnabled(): boolean {
+  if (import.meta.env.VITE_DISABLE_CICA_UI === 'true') return false;
+  if (CICA_UI_PRODUCT_STATUS === 'go') return true;
   return import.meta.env.VITE_ENABLE_CICA_UI === 'true';
 }
 

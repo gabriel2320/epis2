@@ -17,7 +17,7 @@ import { getDemoCaseByPatientId } from '../fixtures/devFixturesBridge.js';
 import { buildCicaPatientPresentation } from './cicaPatientPresentation.js';
 import { CicaExperimentalBanner } from './CicaExperimentalBanner.js';
 
-/** Layout exclusivo `/app/*` — laboratorio CICA (NO-GO). Tema: CicaThemeControls + CicaSidebarThemePanel. */
+/** Layout exclusivo `/app/*` — CICA ficha clásica (MD3). Tema: CicaThemeControls + CicaSidebarThemePanel. */
 export function CicaAppLayout() {
   const navigate = useNavigate();
   const { pathname } = useLocation();

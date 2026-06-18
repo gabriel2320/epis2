@@ -6,7 +6,10 @@ import {
   type CicaScreenBlueprint,
 } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
+import { useMemo } from 'react';
 import { ErrorState } from '../components/ErrorState.js';
+import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
+import { buildCicaBlueprintActions } from './buildCicaBlueprintActions.js';
 import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
 
 export type CicaPatientBlueprintPageProps = {
@@ -24,7 +27,25 @@ export function CicaPatientBlueprintPage({
   testId,
 }: CicaPatientBlueprintPageProps) {
   const page = useCicaPatientPage();
-  const { patientId, detailQuery, presentation, goPath } = page;
+  const { patientId, detailQuery, presentation, goPath, go } = page;
+  const clinicalNavigate = useClinicalNavigate();
+
+  const resolvedActions = useMemo((): readonly ClinicalLayoutAction[] => {
+    if (actions.length > 0) return actions;
+    if (!patientId) return [];
+    return buildCicaBlueprintActions(blueprint, {
+      patientId,
+      go,
+      goLegacy: (path, search) => {
+        if (path === '/espacio/admin') {
+          clinicalNavigate({
+            to: '/espacio/admin',
+            search: search as { tab?: 'audit' },
+          });
+        }
+      },
+    });
+  }, [actions, blueprint, patientId, go, clinicalNavigate]);
 
   if (!patientId || !presentation) return null;
 
@@ -48,8 +69,8 @@ export function CicaPatientBlueprintPage({
       onNavigate={goPath}
       identity={presentation.identity}
       contextItems={presentation.contextItems}
-      actions={actions}
-      hideActionBar={blueprint.hideActionBar ?? actions.length === 0}
+      actions={resolvedActions}
+      hideActionBar={blueprint.hideActionBar ?? resolvedActions.length === 0}
       testId={testId ?? `cica-screen-${blueprint.screenId}`}
     >
       <CicaBlueprintBody blueprint={blueprint} slots={slots} />

@@ -13,6 +13,8 @@ const FORBIDDEN_HOME_PATTERNS = [
 const REQUIRED_HOME_MARKERS = [
   "'/espacio/buscar-paciente'",
   '"/espacio/buscar-paciente"',
+  "'/app/buscar'",
+  '"/app/buscar"',
   'EPIS2_CLINICAL_HOME',
   'epis2-census-command-bar',
 ];

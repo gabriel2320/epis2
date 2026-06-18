@@ -1,5 +1,7 @@
 import { copy } from '@epis2/design-system';
-import { CicaScreenFrame, EpisButton, EpisM3Text, Stack, todayIsoDate } from '@epis2/epis2-ui';
+import { EpisButton, EpisM3Text, Stack, todayIsoDate } from '@epis2/epis2-ui';
+import { CicaBlueprintPage } from './CicaBlueprintPage.js';
+import { PAPER_BOOK_BLUEPRINT } from './blueprints/paperScreens.blueprint.js';
 import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
 import { useCicaNavigate } from './hooks/useCicaNavigate.js';
 
@@ -11,41 +13,43 @@ export function CicaPaperBookPage() {
   if (!page.patientId || !page.presentation) return null;
 
   const today = todayIsoDate();
+  const patientId = page.patientId;
 
   return (
-    <CicaScreenFrame
-      screenId="paper-book"
+    <CicaBlueprintPage
+      blueprint={PAPER_BOOK_BLUEPRINT}
       title="Libro clínico"
       subtitle="Modo papel — navegación por días y evoluciones"
-      hideActionBar
       testId="cica-paper-book-screen"
-    >
-      <Stack spacing={2} sx={{ maxWidth: 560 }}>
-        <EpisM3Text role="bodyMedium" color="text.secondary">
-          El libro clínico agrupa hojas diarias y evoluciones como páginas. Empieza por la hoja de
-          hoy o abre el libro de evoluciones.
-        </EpisM3Text>
-        <EpisButton
-          variant="contained"
-          onClick={() => go('paper-day', { patientId: page.patientId!, date: today })}
-          data-testid="cica-paper-book-open-today"
-        >
-          Abrir hoja de hoy
-        </EpisButton>
-        <EpisButton
-          variant="outlined"
-          onClick={() => go('evolution-book', { patientId: page.patientId! })}
-          data-testid="cica-paper-book-open-evolutions"
-        >
-          Libro de evoluciones
-        </EpisButton>
-        <EpisButton
-          appearance="text"
-          onClick={() => go('patient-summary', { patientId: page.patientId! })}
-        >
-          {copy.clinicalBreadcrumb.backToFicha}
-        </EpisButton>
-      </Stack>
-    </CicaScreenFrame>
+      slots={{
+        intro: (
+          <EpisM3Text role="bodyMedium" color="text.secondary">
+            El libro clínico agrupa hojas diarias y evoluciones como páginas. Empieza por la hoja de
+            hoy o abre el libro de evoluciones.
+          </EpisM3Text>
+        ),
+        actions: (
+          <Stack spacing={2} sx={{ maxWidth: 560 }}>
+            <EpisButton
+              variant="contained"
+              onClick={() => go('paper-day', { patientId, date: today })}
+              data-testid="cica-paper-book-open-today"
+            >
+              Abrir hoja de hoy
+            </EpisButton>
+            <EpisButton
+              variant="outlined"
+              onClick={() => go('evolution-book', { patientId })}
+              data-testid="cica-paper-book-open-evolutions"
+            >
+              Libro de evoluciones
+            </EpisButton>
+            <EpisButton appearance="text" onClick={() => go('patient-summary', { patientId })}>
+              {copy.clinicalBreadcrumb.backToFicha}
+            </EpisButton>
+          </Stack>
+        ),
+      }}
+    />
   );
 }

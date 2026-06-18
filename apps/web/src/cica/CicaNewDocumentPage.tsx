@@ -12,11 +12,10 @@ import {
   CicaContextStrip,
   CicaFormGrid,
   CicaPatientIdentityBand,
-  CicaScreenFrame,
+  Box,
   EpisClinicalFormRhf,
   EpisClinicalScrollspyLayout,
   FormProvider,
-  Stack,
   useEpisClinicalBlueprintForm,
   type ClinicalLayoutAction,
 } from '@epis2/epis2-ui';
@@ -33,6 +32,8 @@ import { registerUnsavedWorkProbe } from '../modes/index.js';
 import { useDraftDetailQuery } from '../query/hooks/useDraftDetailQuery.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
+import { CicaActionFormBlueprintPage } from './CicaActionFormBlueprintPage.js';
+import { NEW_DOCUMENT_BLUEPRINT } from './blueprints/actionFormScreens.blueprint.js';
 
 function requireCertificateBlueprint() {
   const blueprint = getBlueprintById('medical_certificate');
@@ -185,33 +186,34 @@ export function CicaNewDocumentPage() {
 
   return (
     <FormProvider {...form}>
-      <CicaScreenFrame
-        screenId="new-document"
+      <CicaActionFormBlueprintPage
+        blueprint={NEW_DOCUMENT_BLUEPRINT}
         title={copy.print.medicalCertificateTitle}
         subtitle={statusMessage ?? copy.drafts.approvalDisclaimer}
         identityBand={<CicaPatientIdentityBand {...presentation.identity} />}
         contextStrip={<CicaContextStrip items={presentation.contextItems} />}
         actions={actions}
         testId="cica-screen-new-document"
-      >
-        <Stack
-          spacing={2}
-          data-testid="epis2-cica-certificate-form"
-          data-cica-composition="classic"
-          sx={{ width: '100%' }}
-        >
-          <CicaFormGrid prose={blueprintUsesClinicalProse(certificateBlueprint.blueprintId)}>
-            <EpisClinicalScrollspyLayout sections={scrollspySections}>
-              <EpisClinicalFormRhf
-                blueprint={certificateBlueprint}
-                clinicalProse={blueprintUsesClinicalProse(certificateBlueprint.blueprintId)}
-                collapseNonPrimarySections={certificateBlueprint.sections.length > 2}
-              />
-            </EpisClinicalScrollspyLayout>
-          </CicaFormGrid>
-          <GeneratedFormStatusAlert message={statusMessage} />
-        </Stack>
-      </CicaScreenFrame>
+        slots={{
+          form: (
+            <Box data-cica-composition="classic" sx={{ width: '100%' }}>
+              <CicaFormGrid
+                prose={blueprintUsesClinicalProse(certificateBlueprint.blueprintId)}
+                testId="epis2-cica-certificate-form"
+              >
+                <EpisClinicalScrollspyLayout sections={scrollspySections}>
+                  <EpisClinicalFormRhf
+                    blueprint={certificateBlueprint}
+                    clinicalProse={blueprintUsesClinicalProse(certificateBlueprint.blueprintId)}
+                    collapseNonPrimarySections={certificateBlueprint.sections.length > 2}
+                  />
+                </EpisClinicalScrollspyLayout>
+              </CicaFormGrid>
+            </Box>
+          ),
+          status: <GeneratedFormStatusAlert message={statusMessage} />,
+        }}
+      />
     </FormProvider>
   );
 }

@@ -16,13 +16,12 @@ import {
   CicaContextStrip,
   CicaFormGrid,
   CicaPatientIdentityBand,
-  CicaScreenFrame,
+  Box,
   EpisAiDegradedChip,
   EpisAiDisclosure,
   EpisClinicalFormRhf,
   EpisClinicalScrollspyLayout,
   FormProvider,
-  Stack,
   useEpisClinicalBlueprintForm,
   type ClinicalLayoutAction,
 } from '@epis2/epis2-ui';
@@ -45,6 +44,8 @@ import { useAiStatusQuery } from '../query/hooks/useAiStatusQuery.js';
 import { useDraftDetailQuery } from '../query/hooks/useDraftDetailQuery.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
+import { CicaActionFormBlueprintPage } from './CicaActionFormBlueprintPage.js';
+import { NEW_EVOLUTION_BLUEPRINT } from './blueprints/actionFormScreens.blueprint.js';
 
 function requireEvolutionBlueprint() {
   const blueprint = getBlueprintById('evolution_note');
@@ -283,36 +284,43 @@ export function CicaNewEvolutionPage() {
 
   return (
     <FormProvider {...form}>
-      <CicaScreenFrame
-        screenId="new-evolution"
+      <CicaActionFormBlueprintPage
+        blueprint={NEW_EVOLUTION_BLUEPRINT}
         title={copy.clinicalSummary.registerEvolution}
         subtitle={statusMessage ?? copy.drafts.approvalDisclaimer}
         identityBand={<CicaPatientIdentityBand {...presentation.identity} />}
         contextStrip={<CicaContextStrip items={presentation.contextItems} />}
         actions={actions}
         testId="cica-screen-new-evolution"
-      >
-        <Stack
-          spacing={2}
-          data-testid="epis2-cica-evolution-form"
-          data-cica-composition="classic"
-          sx={{ width: '100%' }}
-        >
-          {canPersistDraft ? aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip /> : null}
-          <CicaFormGrid prose={blueprintUsesClinicalProse(evolutionBlueprint.blueprintId)}>
-            <EpisClinicalScrollspyLayout sections={scrollspySections}>
-              <EpisClinicalFormRhf
-                blueprint={effectiveBlueprint}
-                clinicalProse={blueprintUsesClinicalProse(evolutionBlueprint.blueprintId)}
-                clinicalDropEnabled
-                collapseNonPrimarySections={effectiveBlueprint.sections.length > 2}
-                renderClinicalTextBox={renderClinicalTextBox}
-              />
-            </EpisClinicalScrollspyLayout>
-          </CicaFormGrid>
-          <GeneratedFormStatusAlert message={statusMessage} />
-        </Stack>
-      </CicaScreenFrame>
+        slots={{
+          assist: canPersistDraft ? (
+            aiAvailable ? (
+              <EpisAiDisclosure />
+            ) : (
+              <EpisAiDegradedChip />
+            )
+          ) : null,
+          form: (
+            <Box data-cica-composition="classic" sx={{ width: '100%' }}>
+              <CicaFormGrid
+                prose={blueprintUsesClinicalProse(evolutionBlueprint.blueprintId)}
+                testId="epis2-cica-evolution-form"
+              >
+                <EpisClinicalScrollspyLayout sections={scrollspySections}>
+                  <EpisClinicalFormRhf
+                    blueprint={effectiveBlueprint}
+                    clinicalProse={blueprintUsesClinicalProse(evolutionBlueprint.blueprintId)}
+                    clinicalDropEnabled
+                    collapseNonPrimarySections={effectiveBlueprint.sections.length > 2}
+                    renderClinicalTextBox={renderClinicalTextBox}
+                  />
+                </EpisClinicalScrollspyLayout>
+              </CicaFormGrid>
+            </Box>
+          ),
+          status: <GeneratedFormStatusAlert message={statusMessage} />,
+        }}
+      />
     </FormProvider>
   );
 }

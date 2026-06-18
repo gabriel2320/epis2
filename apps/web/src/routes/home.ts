@@ -8,7 +8,7 @@ export function resolveClinicalHome(): typeof EPIS2_LEGACY_CLINICAL_HOME | typeo
   return isCicaUiEnabled() ? EPIS2_CICA_HOME : EPIS2_LEGACY_CLINICAL_HOME;
 }
 
-/** Home clínica activa — legacy por defecto; CICA `/app` solo con `VITE_ENABLE_CICA_UI=true`. */
+/** Home clínica activa — CICA `/app/buscar` con producto GO; legacy si CICA desactivado. */
 export const EPIS2_CLINICAL_HOME = resolveClinicalHome();
 
 /** Compat bookmarks — `/comando` redirige a {@link EPIS2_CLINICAL_HOME}. */

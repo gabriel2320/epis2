@@ -34,16 +34,16 @@ function isActiveMatch(pathname: string, fragment: string): boolean {
   return pathname.includes(fragment);
 }
 
-/** Nivel 1 — sistema (siempre visible). Alineado con epis2g SidebarCICA. */
+/** Nivel 1 — sistema (siempre visible). Orden master tree §3.1. */
 export function buildCicaSystemSidebarSections(ctx: CicaSidebarNavContext): CicaSidebarSection[] {
   const { pathname, onNavigate } = ctx;
 
   const systemScreens: { id: string; screenId: CicaScreenId; label: string }[] = [
     { id: 'search', screenId: 'patient-search', label: copy.clinicalNav.search },
     { id: 'census', screenId: 'census', label: copy.clinicalNav.census },
-    { id: 'recent', screenId: 'recent-patients', label: 'Recientes' },
-    { id: 'my-work', screenId: 'my-work', label: 'Mi trabajo' },
     { id: 'agenda', screenId: 'agenda', label: 'Agenda guardia' },
+    { id: 'my-work', screenId: 'my-work', label: 'Mi trabajo' },
+    { id: 'recent', screenId: 'recent-patients', label: 'Recientes' },
   ];
 
   return [
@@ -72,19 +72,28 @@ type PatientNavEntry =
       screenId: CicaScreenId;
       label: string;
       pathMatch: string;
+      planned?: boolean;
     };
 
-/** Orden epis2g — tabs + secciones adicionales en sidebar paciente. */
-const PATIENT_NAV_ORDER: readonly PatientNavEntry[] = [
+/** L2 visible — master tree §3.2 (tabs + medicamentos + papel). */
+const PATIENT_PRIMARY_ORDER: readonly PatientNavEntry[] = [
   { kind: 'tab', tabId: 'resumen' },
   { kind: 'tab', tabId: 'evoluciones' },
+  { kind: 'tab', tabId: 'indicaciones' },
+  { kind: 'tab', tabId: 'examenes' },
   {
     kind: 'screen',
-    id: 'evolution-book',
-    screenId: 'evolution-book',
-    label: 'Libro evoluciones',
-    pathMatch: '/evoluciones/libro',
+    id: 'medicamentos',
+    screenId: 'patient-medications',
+    label: copy.chartModes.navMeds,
+    pathMatch: '/medicamentos',
   },
+  { kind: 'tab', tabId: 'documentos' },
+  { kind: 'tab', tabId: 'papel' },
+];
+
+/** Overflow «Más» — master tree §3.2. */
+const PATIENT_MORE_ORDER: readonly PatientNavEntry[] = [
   {
     kind: 'screen',
     id: 'ingreso',
@@ -92,14 +101,13 @@ const PATIENT_NAV_ORDER: readonly PatientNavEntry[] = [
     label: 'Ingreso clínico',
     pathMatch: '/ingreso',
   },
-  { kind: 'tab', tabId: 'indicaciones' },
-  { kind: 'tab', tabId: 'examenes' },
   {
     kind: 'screen',
-    id: 'medicamentos',
-    screenId: 'patient-medications',
-    label: 'Receta / fármacos',
-    pathMatch: '/medicamentos',
+    id: 'enfermeria',
+    screenId: 'patient-admission',
+    label: 'Enfermería',
+    pathMatch: '/enfermeria',
+    planned: true,
   },
   {
     kind: 'screen',
@@ -115,7 +123,22 @@ const PATIENT_NAV_ORDER: readonly PatientNavEntry[] = [
     label: 'Procedimientos',
     pathMatch: '/procedimientos',
   },
-  { kind: 'tab', tabId: 'documentos' },
+  {
+    kind: 'screen',
+    id: 'cirugia',
+    screenId: 'patient-procedures',
+    label: 'Cirugía',
+    pathMatch: '/cirugia',
+    planned: true,
+  },
+  {
+    kind: 'screen',
+    id: 'uci',
+    screenId: 'patient-admission',
+    label: 'UCI',
+    pathMatch: '/uci',
+    planned: true,
+  },
   {
     kind: 'screen',
     id: 'alta',
@@ -134,10 +157,16 @@ const PATIENT_NAV_ORDER: readonly PatientNavEntry[] = [
     kind: 'screen',
     id: 'auditoria',
     screenId: 'patient-audit',
-    label: 'Auditoría',
+    label: copy.chartModes.navAudit,
     pathMatch: '/auditoria',
   },
-  { kind: 'tab', tabId: 'papel' },
+  {
+    kind: 'screen',
+    id: 'evolution-book',
+    screenId: 'evolution-book',
+    label: 'Libro evoluciones',
+    pathMatch: '/evoluciones/libro',
+  },
   {
     kind: 'screen',
     id: 'paper-book',
@@ -159,14 +188,14 @@ function tabLabel(tabId: CicaChartTabId): string {
   return labels[tabId];
 }
 
-/** Nivel 2 — paciente (cuando hay patientId). */
-export function buildCicaPatientSidebarSection(
+function mapPatientNavEntries(
   ctx: CicaSidebarNavContext,
-): CicaSidebarSection | null {
+  order: readonly PatientNavEntry[],
+): CicaSidebarItem[] {
   const { pathname, patientId, onNavigate } = ctx;
-  if (!patientId) return null;
+  if (!patientId) return [];
 
-  const items: CicaSidebarItem[] = PATIENT_NAV_ORDER.map((entry) => {
+  return order.map((entry) => {
     if (entry.kind === 'tab') {
       const tab = CICA_CHART_TAB_REGISTRY.find((t) => t.id === entry.tabId);
       if (!tab) {
@@ -191,6 +220,16 @@ export function buildCicaPatientSidebarSection(
       };
     }
 
+    if (entry.planned) {
+      return {
+        id: entry.id,
+        label: entry.label,
+        disabled: true,
+        planned: true,
+        testId: `cica-sidebar-patient-${entry.id}`,
+      };
+    }
+
     const href = buildCicaPath(entry.screenId, { patientId });
     return {
       id: entry.id,
@@ -200,11 +239,31 @@ export function buildCicaPatientSidebarSection(
       testId: `cica-sidebar-patient-${entry.id}`,
     };
   });
+}
+
+/** Nivel 2 — paciente visible (cuando hay patientId). */
+export function buildCicaPatientSidebarSection(
+  ctx: CicaSidebarNavContext,
+): CicaSidebarSection | null {
+  if (!ctx.patientId) return null;
 
   return {
     id: 'patient',
     title: 'Paciente actual',
-    items,
+    items: mapPatientNavEntries(ctx, PATIENT_PRIMARY_ORDER),
+  };
+}
+
+/** Overflow «Más» — secciones secundarias de ficha. */
+export function buildCicaPatientMoreSidebarSection(
+  ctx: CicaSidebarNavContext,
+): CicaSidebarSection | null {
+  if (!ctx.patientId) return null;
+
+  return {
+    id: 'patient-more',
+    title: 'Más',
+    items: mapPatientNavEntries(ctx, PATIENT_MORE_ORDER),
   };
 }
 
@@ -227,7 +286,9 @@ export function buildCicaToolsSidebarSection(ctx: CicaSidebarNavContext): CicaSi
 export function buildCicaSidebarSections(ctx: CicaSidebarNavContext): CicaSidebarSection[] {
   const sections = [...buildCicaSystemSidebarSections(ctx)];
   const patient = buildCicaPatientSidebarSection(ctx);
+  const patientMore = buildCicaPatientMoreSidebarSection(ctx);
   if (patient) sections.push(patient);
+  if (patientMore) sections.push(patientMore);
   sections.push(buildCicaToolsSidebarSection(ctx));
   return sections;
 }

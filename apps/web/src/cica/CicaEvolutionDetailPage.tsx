@@ -1,5 +1,5 @@
 import { copy } from '@epis2/design-system';
-import { CicaBookPager, CicaLetterPageShell, EpisM3Text, Stack } from '@epis2/epis2-ui';
+import { CicaBookPager, EpisM3Text, Stack } from '@epis2/epis2-ui';
 import { useMemo } from 'react';
 import { useParams } from '@tanstack/react-router';
 import { ErrorState } from '../components/ErrorState.js';
@@ -9,6 +9,11 @@ import {
   findEvolutionIndex,
   listEvolutionEvents,
 } from './cicaEvolutionBook.js';
+import { CicaLetterBlueprintPage } from './CicaLetterBlueprintPage.js';
+import {
+  EVOLUTION_DETAIL_BLUEPRINT,
+  EVOLUTION_DETAIL_EMPTY_BLUEPRINT,
+} from './blueprints/actionFormScreens.blueprint.js';
 import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
 import { useCicaNavigate } from './hooks/useCicaNavigate.js';
 
@@ -44,15 +49,18 @@ export function CicaEvolutionDetailPage() {
   const current = book.current;
   if (!current) {
     return (
-      <CicaLetterPageShell
+      <CicaLetterBlueprintPage
+        blueprint={EVOLUTION_DETAIL_EMPTY_BLUEPRINT}
         title="Evolución no encontrada"
         onBack={() => go('patient-evolutions', { patientId: page.patientId! })}
-        hideActionBar
-      >
-        <EpisM3Text role="bodyMedium" color="text.secondary">
-          {copy.longitudinal.emptySection}
-        </EpisM3Text>
-      </CicaLetterPageShell>
+        slots={{
+          main: (
+            <EpisM3Text role="bodyMedium" color="text.secondary">
+              {copy.longitudinal.emptySection}
+            </EpisM3Text>
+          ),
+        }}
+      />
     );
   }
 
@@ -76,23 +84,26 @@ export function CicaEvolutionDetailPage() {
         previousLabel="← Evolución anterior"
         nextLabel="Evolución siguiente →"
       />
-      <CicaLetterPageShell
+      <CicaLetterBlueprintPage
+        blueprint={EVOLUTION_DETAIL_BLUEPRINT}
         title={current.title}
         subtitle={page.presentation.identity.displayName}
         statusLabel="Documento clínico"
         onBack={() => go('patient-evolutions', { patientId: page.patientId! })}
         backLabel="Volver a evoluciones"
-        hideActionBar
-      >
-        <Stack spacing={2}>
-          <EpisM3Text role="bodyMedium" color="text.secondary">
-            {formatEvolutionPageDate(current.at)}
-          </EpisM3Text>
-          <EpisM3Text role="bodyLarge" component="div">
-            {current.detail?.trim() || copy.longitudinal.emptySection}
-          </EpisM3Text>
-        </Stack>
-      </CicaLetterPageShell>
+        slots={{
+          meta: (
+            <EpisM3Text role="bodyMedium" color="text.secondary">
+              {formatEvolutionPageDate(current.at)}
+            </EpisM3Text>
+          ),
+          body: (
+            <EpisM3Text role="bodyLarge" component="div">
+              {current.detail?.trim() || copy.longitudinal.emptySection}
+            </EpisM3Text>
+          ),
+        }}
+      />
     </Stack>
   );
 }

@@ -67,6 +67,7 @@ export {
 export { CicaAppShell, type CicaAppShellProps } from './CicaAppShell.js';
 export { cicaEpis2gVisual, resolveCicaEpis2gSurfaces } from './cicaEpis2gVisual.js';
 export {
+  type CicaBlueprintAction,
   type CicaBlueprintSection,
   type CicaBlueprintSectionSpan,
   type CicaGeneratedScreenProps,
@@ -83,6 +84,7 @@ export {
   buildCicaSidebarSections,
   buildCicaSystemSidebarSections,
   buildCicaPatientSidebarSection,
+  buildCicaPatientMoreSidebarSection,
   type CicaSidebarItem,
   type CicaSidebarSection,
   type CicaSidebarNavContext,
