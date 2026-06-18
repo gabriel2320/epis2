@@ -125,6 +125,26 @@ export {
   assistClarifyFooterHint,
   type AssistRouteIntentCatalogEntry,
 } from './assist-route.js';
+export {
+  CLINICAL_ACTION_MANIFEST,
+  GOLDEN_CICA_INTENTS,
+  INTENT_CICA_SCREEN_IDS,
+  assertClinicalActionManifestInvariants,
+  buildClinicalActionContract,
+  getClinicalActionByIntent,
+  type ClinicalActionContract,
+} from './clinical-action-manifest.js';
+export {
+  AI_ESCALATION_LEXICON_CONFIDENCE,
+  AI_ESCALATION_MANIFEST_AI_REQUIRED_COUNT,
+  assertAiEscalationInvariants,
+  resolveAiEscalation,
+  shouldEscalateCommandResult,
+  shouldEscalateLexiconConfidence,
+  type AiEscalationDecision,
+  type AiEscalationInput,
+  type AiEscalationReason,
+} from './ai-escalation.js';
 export type {
   ClinicalIntent,
   CommandActiveContext,

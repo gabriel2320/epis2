@@ -204,6 +204,34 @@
       "type": "file",
       "path": "scripts/quality/validate-cica-screen-registry-gate.mjs"
     },
+    "quality:clinical-action-manifest-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-action-manifest-gate.mjs"
+    },
+    "quality:clinical-lexicon-es-cl-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-lexicon-es-cl-gate.mjs"
+    },
+    "quality:drug-dictionary-cl-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-drug-dictionary-cl-gate.mjs"
+    },
+    "quality:lab-dictionary-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-lab-dictionary-gate.mjs"
+    },
+    "quality:clinical-rules-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-rules-gate.mjs"
+    },
+    "quality:ai-escalation-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ai-escalation-gate.mjs"
+    },
+    "quality:lexicon-core-close-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-lexicon-core-close-gate.mjs"
+    },
     "quality:cica-action-density-gate": {
       "type": "file",
       "path": "scripts/quality/validate-cica-action-density-gate.mjs"
