@@ -1,0 +1,64 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "ignore": [
+    "migration/**",
+    "reports/**",
+    "docs/**",
+    "e2e/**",
+    ".cursor/**",
+    "database/schema-placeholder.ts"
+  ],
+  "ignoreBinaries": ["pg_dump", "psql", "nvidia-smi"],
+  "workspaces": {
+    ".": {
+      "entry": [
+        "eslint.config.js",
+        "vitest.config.ts",
+        "vitest.global-setup.ts",
+        "vitest.setup.ts",
+        "scripts/**/*.{mjs,js,cjs}",
+        "tools/**/*.{mjs,js,cjs}",
+        "database/drizzle.config.ts"
+      ],
+      "project": ["scripts/**", "tools/**", "database/**"],
+      "ignoreDependencies": [
+        "@figma/code-connect",
+        "@storybook/addon-essentials",
+        "@storybook/react",
+        "@storybook/react-vite",
+        "@testing-library/dom",
+        "@testing-library/jest-dom",
+        "prettier",
+        "react",
+        "react-dom",
+        "storybook",
+        "tsx"
+      ]
+    },
+    "apps/web": {
+      "entry": ["index.html", "src/main.tsx", "vite.config.ts"],
+      "project": ["src/**/*.{ts,tsx}"]
+    },
+    "apps/api": {
+      "entry": ["src/server.ts"],
+      "project": ["src/**/*.ts"]
+    },
+    "packages/epis2-ui": {
+      "entry": [
+        "src/index.ts",
+        ".storybook/main.ts",
+        ".storybook/preview.tsx",
+        "src/stories/**/*.stories.tsx"
+      ],
+      "project": ["src/**/*.{ts,tsx}", ".storybook/**/*.{ts,tsx}"]
+    },
+    "packages/*": {
+      "entry": ["src/index.ts"],
+      "project": ["src/**/*.{ts,tsx}"]
+    },
+    "services/*": {
+      "entry": ["src/index.ts", "src/server.ts"],
+      "project": ["src/**/*.ts"]
+    }
+  }
+}

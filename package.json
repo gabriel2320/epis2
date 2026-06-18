@@ -28,7 +28,8 @@
     "dev:rapid": "node scripts/dev/run-dev-rapid.mjs",
     "dev:agent:close": "node scripts/dev-agent/close.mjs",
     "quality:gate": "node tools/gates/run-legacy.mjs",
-    "tool:script": "node tools/scripts/run-archived-script.mjs"
+    "tool:script": "node tools/scripts/run-archived-script.mjs",
+    "knip:audit": "knip"
   },
   "overrides": {
     "react": "^19.1.0",
@@ -48,6 +49,7 @@
     "@types/node": "^22.15.21",
     "eslint": "^9.28.0",
     "globals": "^17.6.0",
+    "knip": "^6.17.1",
     "postgres": "^3.4.5",
     "prettier": "^3.8.4",
     "react": "^19.1.0",
