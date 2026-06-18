@@ -32,6 +32,13 @@ export const NEW_PRESCRIPTION_BLUEPRINT: CicaScreenBlueprint = {
   sections: actionFormWithAssist,
 };
 
+/** Nueva epicrisis — asistencia IA + formulario + estado. */
+export const NEW_EPICRISIS_BLUEPRINT: CicaScreenBlueprint = {
+  screenId: 'new-epicrisis',
+  hideActionBar: false,
+  sections: actionFormWithAssist,
+};
+
 /** Libro evoluciones — pager + cuerpo carta (lectura). */
 export const EVOLUTION_BOOK_BLUEPRINT: CicaScreenBlueprint = {
   screenId: 'evolution-book',
@@ -45,6 +52,23 @@ export const EVOLUTION_BOOK_BLUEPRINT: CicaScreenBlueprint = {
 /** Libro evoluciones vacío — mensaje único. */
 export const EVOLUTION_BOOK_EMPTY_BLUEPRINT: CicaScreenBlueprint = {
   screenId: 'evolution-book',
+  hideActionBar: true,
+  sections: [{ id: 'main', span: 12 }],
+};
+
+/** Detalle evolución — meta + cuerpo carta. */
+export const EVOLUTION_DETAIL_BLUEPRINT: CicaScreenBlueprint = {
+  screenId: 'evolution-detail',
+  hideActionBar: true,
+  sections: [
+    { id: 'meta', span: 12 },
+    { id: 'body', span: 12 },
+  ],
+};
+
+/** Detalle evolución no encontrada. */
+export const EVOLUTION_DETAIL_EMPTY_BLUEPRINT: CicaScreenBlueprint = {
+  screenId: 'evolution-detail',
   hideActionBar: true,
   sections: [{ id: 'main', span: 12 }],
 };

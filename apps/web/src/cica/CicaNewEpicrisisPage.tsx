@@ -12,13 +12,12 @@ import {
   CicaContextStrip,
   CicaFormGrid,
   CicaPatientIdentityBand,
-  CicaScreenFrame,
+  Box,
   EpisAiDegradedChip,
   EpisAiDisclosure,
   EpisClinicalFormRhf,
   EpisClinicalScrollspyLayout,
   FormProvider,
-  Stack,
   useEpisClinicalBlueprintForm,
   type ClinicalLayoutAction,
 } from '@epis2/epis2-ui';
@@ -41,6 +40,8 @@ import { useAiStatusQuery } from '../query/hooks/useAiStatusQuery.js';
 import { useDraftDetailQuery } from '../query/hooks/useDraftDetailQuery.js';
 import { useClinicalNavigate } from '../routes/clinicalNavigate.js';
 import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
+import { CicaActionFormBlueprintPage } from './CicaActionFormBlueprintPage.js';
+import { NEW_EPICRISIS_BLUEPRINT } from './blueprints/actionFormScreens.blueprint.js';
 
 function requireDischargeSummaryBlueprint() {
   const blueprint = getBlueprintById('discharge_summary');
@@ -252,36 +253,43 @@ export function CicaNewEpicrisisPage() {
 
   return (
     <FormProvider {...form}>
-      <CicaScreenFrame
-        screenId="new-epicrisis"
+      <CicaActionFormBlueprintPage
+        blueprint={NEW_EPICRISIS_BLUEPRINT}
         title={copy.print.dischargeSummaryTitle}
         subtitle={statusMessage ?? copy.drafts.approvalDisclaimer}
         identityBand={<CicaPatientIdentityBand {...presentation.identity} />}
         contextStrip={<CicaContextStrip items={presentation.contextItems} />}
         actions={actions}
         testId="cica-screen-new-epicrisis"
-      >
-        <Stack
-          spacing={2}
-          data-testid="epis2-cica-epicrisis-form"
-          data-cica-composition="classic"
-          sx={{ width: '100%' }}
-        >
-          {canPersistDraft ? aiAvailable ? <EpisAiDisclosure /> : <EpisAiDegradedChip /> : null}
-          <CicaFormGrid prose={blueprintUsesClinicalProse(dischargeSummaryBlueprint.blueprintId)}>
-            <EpisClinicalScrollspyLayout sections={scrollspySections}>
-              <EpisClinicalFormRhf
-                blueprint={dischargeSummaryBlueprint}
-                clinicalProse={blueprintUsesClinicalProse(dischargeSummaryBlueprint.blueprintId)}
-                clinicalDropEnabled
-                collapseNonPrimarySections={dischargeSummaryBlueprint.sections.length > 2}
-                renderClinicalTextBox={renderClinicalTextBox}
-              />
-            </EpisClinicalScrollspyLayout>
-          </CicaFormGrid>
-          <GeneratedFormStatusAlert message={statusMessage} />
-        </Stack>
-      </CicaScreenFrame>
+        slots={{
+          assist: canPersistDraft ? (
+            aiAvailable ? (
+              <EpisAiDisclosure />
+            ) : (
+              <EpisAiDegradedChip />
+            )
+          ) : null,
+          form: (
+            <Box data-cica-composition="classic" sx={{ width: '100%' }}>
+              <CicaFormGrid
+                prose={blueprintUsesClinicalProse(dischargeSummaryBlueprint.blueprintId)}
+                testId="epis2-cica-epicrisis-form"
+              >
+                <EpisClinicalScrollspyLayout sections={scrollspySections}>
+                  <EpisClinicalFormRhf
+                    blueprint={dischargeSummaryBlueprint}
+                    clinicalProse={blueprintUsesClinicalProse(dischargeSummaryBlueprint.blueprintId)}
+                    clinicalDropEnabled
+                    collapseNonPrimarySections={dischargeSummaryBlueprint.sections.length > 2}
+                    renderClinicalTextBox={renderClinicalTextBox}
+                  />
+                </EpisClinicalScrollspyLayout>
+              </CicaFormGrid>
+            </Box>
+          ),
+          status: <GeneratedFormStatusAlert message={statusMessage} />,
+        }}
+      />
     </FormProvider>
   );
 }
