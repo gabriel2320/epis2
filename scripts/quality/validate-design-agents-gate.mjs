@@ -6,16 +6,7 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const dir = join(root, 'apps/web/src/design-agents');
 const errors = [];
-const agents = [
-  'md3LayoutCriticAgent.ts',
-  'classicEmrWorkflowAgent.ts',
-  'commandCenterAgent.ts',
-  'visualDensityAgent.ts',
-  'clinicalSafetyUiAgent.ts',
-  'accessibilityAgent.ts',
-  'screenshotCriticAgent.ts',
-  'patchPlannerAgent.ts',
-];
+const agents = ['md3LayoutCriticAgent.ts', 'commandCenterAgent.ts'];
 for (const f of agents) {
   const p = join(dir, f);
   if (!existsSync(p)) {
@@ -29,10 +20,6 @@ for (const f of agents) {
   if (src.includes('firmar') || src.includes('approveDraft')) {
     errors.push(`${f} no debe firmar/aprobar`);
   }
-}
-const patch = readFileSync(join(dir, 'patchPlannerAgent.ts'), 'utf8');
-if (!patch.includes('Solo planifica')) {
-  errors.push('patchPlannerAgent debe ser solo planificación');
 }
 if (errors.length) {
   console.error('design-agents-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));

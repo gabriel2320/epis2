@@ -1392,12 +1392,6 @@
       "archivedProgram": "catalog-only-phase2",
       "archivedAt": "2026-06-16"
     },
-    "quality:visual-density-agent-gate": {
-      "type": "file",
-      "path": "scripts/quality/validate-visual-density-agent-gate.mjs",
-      "archivedProgram": "catalog-only-phase2",
-      "archivedAt": "2026-06-16"
-    },
     "quality:classic-screenshot-advisory": {
       "type": "file",
       "path": "scripts/quality/validate-classic-screenshot-advisory.mjs",

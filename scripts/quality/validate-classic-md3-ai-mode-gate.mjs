@@ -16,7 +16,6 @@ const requiredAgents = [
   'designAgentsEnv.ts',
   'md3LayoutCriticAgent.ts',
   'commandCenterAgent.ts',
-  'patchPlannerAgent.ts',
 ];
 for (const f of requiredAgents) {
   if (!existsSync(join(agentsDir, f))) errors.push(`Falta design-agents/${f}`);

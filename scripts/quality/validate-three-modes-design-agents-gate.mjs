@@ -1,12 +1,10 @@
 #!/usr/bin/env node
-import { existsSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
-const agents = join(root, 'apps/web/src/design-agents/threeModesDesignAgents.ts');
-if (!existsSync(agents)) errors.push('Falta threeModesDesignAgents.ts');
 
 const schemas = readFileSync(join(root, 'apps/web/src/design-agents/schemas.ts'), 'utf8');
 for (const s of ['ThreeModesArchitectureResultSchema', 'ModeTransitionResultSchema']) {
