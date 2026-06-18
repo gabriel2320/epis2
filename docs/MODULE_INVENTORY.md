@@ -1,7 +1,7 @@
 # EPIS2 — Inventario de módulos
 
-**Versión:** 1.1 · **Fecha:** 2026-06-18  
-**Brújula:** [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) · **Knip baseline:** 0 unused files (MF-KNIP-02, 2026-06-18)
+**Versión:** 1.2 · **Fecha:** 2026-06-18  
+**Brújula:** [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) · **Knip baseline (KNIP-04):** 0 unused files · 0 unused deps · 0 unlisted · 0 duplicate exports
 
 Clasificación: **core** · **labs** · **tools** · **archive** · **external**
 
@@ -137,7 +137,15 @@ Funcionalidad empezada en master; no borrar sin inventario MF.
 
 ---
 
-## Ponytail trim (2026-06-18 — MF-KNIP-02/03)
+## Ponytail trim (2026-06-18 — PROG-PONYTAIL-TRIM ✓ técnico)
+
+| MF | Resultado |
+|----|-----------|
+| KNIP-00…04 | Knip instalado; 0 files/deps/unlisted/duplicates |
+| PONY-02…07 | CICA registry, stubs ocultos, rutas derivadas, tabs SoT |
+| PONY-GATE-01 | 8 gates → `PROG-PONYTAIL-TRIM` archived · merge `master` @ `b2d6a00` |
+
+Evidencia: `reports/epis2-mf-pony-*-close.md`, `reports/epis2-mf-pony-knip-*-close.md`, `reports/knip-audit-pony-2026-06-18.md`.
 
 | Zona podada | Acción | Notas |
 |-------------|--------|-------|
@@ -147,13 +155,12 @@ Funcionalidad empezada en master; no borrar sin inventario MF.
 | `packages/epis2-ui/cica/CICA_CHART_TAB_REGISTRY.ts` | delete-later | SoT: `clinicalChartTabRegistry.ts` |
 | `apps/api/src/db.ts` | delete-later | Shim; usar `db/client.js` |
 
-Knip: **0** unused files · **0** unused deps · unlisted deps → MF-KNIP-04.
+**Knip siguiente etapa (PROG-PRODUCT-MAP):** exports triage audit-first — MF-KNIP-05; no poda masiva.
 
 ---
 
 ## Próximo paso inventario
 
-1. Completar filas **tramo A–K** con estado demo/scaffold/dead (hoja aparte o ampliar esta tabla).
-2. Lista de gates huérfanos (en package.json pero programa cerrado) → candidatos a quitar de npm scripts.
-3. Tag git `epis2-base-v0.1` cuando checklist en CURRENT_STATE esté ✓ en CI.
-4. **MF-PONY-GATE-01** — archive gates tramo cerrado.
+1. **PROG-PRODUCT-MAP** — MF-CATALOG-00 route map · MF-CATALOG-01 product catalog · MF-CATALOG-GATE-01.
+2. Completar filas **tramo A–K** con estado demo/scaffold/dead (hoja aparte o ampliar esta tabla).
+3. Tag git `epis2-base-v0.1` cuando checklist CURRENT_STATE ✓ + `quality:required` + `quality:product-map-gate` (MF-RELEASE-BASE-01).

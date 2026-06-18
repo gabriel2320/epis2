@@ -1,6 +1,6 @@
 # EPIS2 — Contexto mínimo para agentes (Cursor)
 
-**Versión:** 4.7 · **PROG-AGENT-TRUTH** ✓ · **Consolidación** post-rc3 · tag **`v0.1-demo-rc3`**
+**Versión:** 4.8 · **PROG-AGENT-TRUTH** ✓ · **PROG-PRODUCT-MAP** activo · tag **`v0.1-demo-rc3`**
 
 > **Brújula de alcance:** [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) · **Gobierno docs:** [`DOCUMENTATION_GOVERNANCE.md`](DOCUMENTATION_GOVERNANCE.md) · **Congelamiento:** [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) · inventario: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md)
 
@@ -8,7 +8,7 @@
 
 ## Reglas canónicas (10 líneas)
 
-1. **Ficha-first** — Home = censo `/espacio/buscar-paciente`; barra de comando transversal; `/comando` solo redirect compat.
+1. **Ficha-first + CICA activa** — Intención producto: censo → ficha → borrador → aprobación. **Entrada operativa:** `/app/buscar` (CICA). **Fallback legacy:** `/espacio/*` (`VITE_ENABLE_CICA_UI=false`). Barra de comando transversal; `/comando` solo redirect compat.
 2. **PostgreSQL = SoT** — borrador ≠ dato clínico aprobado.
 3. **IA propone, humano aprueba** — sin auto-firma ni auto-aprobación.
 4. **Sin PHI real** — solo datos sintéticos/demo.
@@ -35,19 +35,23 @@ Un objetivo · pocos archivos · diff mínimo.
 
 ---
 
-## Programa activo (2026-06-16)
+## Programa activo (2026-06-18)
 
 | Programa | Estado | Evidencia |
 |----------|--------|-----------|
+| **PROG-PRODUCT-MAP** | ◐ MF-BRÚJULA-00… | Mapa humano post-PONYTAIL · [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) |
 | **PROG-PURGE-CICA** | ◐ MF-PURGE-00…07 | [`EPIS2_PURGE_ARCHIVE_PLAN.md`](product/EPIS2_PURGE_ARCHIVE_PLAN.md) · [`AGENT_SCOPE_EXCLUSIONS.md`](archive/AGENT_SCOPE_EXCLUSIONS.md) |
 | **PROG-UX-LAB** | ✓ cerrado | [`EPIS2_UX_LAB_MODERN_PLAN.md`](quality/EPIS2_UX_LAB_MODERN_PLAN.md) |
 | **PROG-AGENT-TRUTH** | ✓ AT-01…05 | `quality:agent-truth-gate` · [`AGENTS.md`](../AGENTS.md) v2 |
 | **PROG-POST-RC3** | ✓ tramos 1–5 | [`epis2-prog-post-rc3-close.md`](../reports/epis2-prog-post-rc3-close.md) |
 | **PROG-RELEASE-HARDENING** | ✓ RH-01…08 | tag `v0.1-demo-rc3` |
+| **PROG-PONYTAIL-TRIM** | ✓ cierre técnico | KNIP-00…04 · MF-PONY-02…07 · MF-PONY-GATE-01 · merge `b2d6a00` |
 
 Programas cerrados (no reabrir): PROG-FICHA-FIRST · PROG-STRENGTHEN 23/23 · PROG-CONSOLIDATE ola 1+2 · PROG-CDS-UX · PROG-RAPID.
 
 **Congelamiento vigente** — sin features clínicas nuevas salvo MF autorizada. Tag demo: **`v0.1-demo-rc3`**.
+
+**Knip:** `npm run knip:audit` · baseline **0** unused files/deps/unlisted/duplicates (KNIP-04). Exports: triage conservador en MF-KNIP-05 (no poda a ciegas).
 
 ---
 
@@ -115,6 +119,8 @@ Atajos: `quality:fast` · `dev:agent:audit-diff` · `dev:rapid -- --skip-audit`
 | Doc | Cuándo |
 |-----|--------|
 | [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) | **Brújula módulos y consolidación** |
+| [`EPIS2_ROUTE_MAP.md`](product/EPIS2_ROUTE_MAP.md) | Rutas CICA — **pendiente MF-CATALOG-00** |
+| [`EPIS2_PRODUCT_CATALOG.md`](product/EPIS2_PRODUCT_CATALOG.md) | Objetos clínico — **pendiente MF-CATALOG-01** |
 | [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md) | **No planificar** — índice humano |
 | [`EPIS2_DEV_VELOCITY.md`](dev/EPIS2_DEV_VELOCITY.md) | Gates por rol |
 | [`GOLDEN_CLINICAL_JOURNEY.md`](../quality/GOLDEN_CLINICAL_JOURNEY.md) | Solo UI/flujo clínico |

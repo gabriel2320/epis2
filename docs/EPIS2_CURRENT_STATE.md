@@ -1,6 +1,6 @@
 # EPIS2 — Estado actual del proyecto (brújula)
 
-**Versión:** 1.3 · **Fecha:** 2026-06-16  
+**Versión:** 1.4 · **Fecha:** 2026-06-18  
 **Audiencia:** equipos, agentes Cursor, planificación  
 **Gobierno documental:** [`DOCUMENTATION_GOVERNANCE.md`](DOCUMENTATION_GOVERNANCE.md) · **Entrada pública:** [`README.md`](../README.md)  
 **Supersedes parcialmente:** [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md) para decisiones de alcance (tablero = índice humano)
@@ -20,7 +20,20 @@ El problema operativo principal (**superficie npm/gates**) se abordó con:
 - Congelamiento vigente: [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md).
 - Tags demo: **`v0.1-demo-rc`** · **`v0.1-demo-rc2`** · **`v0.1-demo-rc3`** (release hardening + README alineado).
 
-**Git:** una rama productiva (`master`). Las “ramas truncadas” son **módulos a medias en master**, no branches git olvidadas.
+**Git:** una rama productiva (`master` @ `b2d6a00` post-PONYTAIL merge). Las “ramas truncadas” son **módulos a medias en master**, no branches git olvidadas.
+
+---
+
+## Entrada operativa vs fallback (2026-06-18)
+
+| Rol | Ruta / modo | Notas |
+|-----|-------------|-------|
+| **Entrada operativa activa** | `/app/buscar` (CICA) | UI clínica por defecto; registry `EPIS_CICA_SCREEN_REGISTRY` |
+| **Intención ficha-first** | censo → ficha → borrador → aprobación | Invariante de producto; no implica ruta legacy como home |
+| **Fallback legacy** | `/espacio/*` | `VITE_ENABLE_CICA_UI=false`; no expandir como home |
+| **Prohibido** | dashboard / three modes como home | secundarios OK; gates `command-center-home`, CICA clean room |
+
+SoT técnico rutas CICA: `packages/epis2-ui/src/cica/EPIS_CICA_SCREEN_REGISTRY.ts` · mapa humano pendiente: `docs/product/EPIS2_ROUTE_MAP.md` (MF-CATALOG-00).
 
 ---
 
@@ -33,7 +46,7 @@ Checklist para declarar “base consolidada”. No es HIS integral.
 | Compila + typecheck | ✓ | `npm run check` |
 | Login demo | ✓ | auth demo |
 | Pacientes sintéticos | ✓ | fixtures DEMO/SIM |
-| Home = censo + barra transversal | ✓ | PROG-FICHA-FIRST |
+| Home = censo + barra transversal | ✓ | PROG-FICHA-FIRST · entrada operativa CICA `/app/buscar` |
 | Ficha dual MD3 \| papel | ✓ parcial | dual chart; no todos los docs sincronizados |
 | Command bar + registry | ✓ | `@epis2/command-registry` |
 | Formularios core (evolución, epicrisis, receta, lab) | ✓ | `@epis2/clinical-forms` |
@@ -63,17 +76,20 @@ Regla: **core no depende de labs** — gate `quality:core-no-labs-imports-gate` 
 
 ---
 
-## Programas (estado 2026-06-16)
+## Programas (estado 2026-06-18)
 
-| Programa | Estado | Gate cierre |
-|----------|--------|-------------|
+| Programa | Estado | Gate / evidencia |
+|----------|--------|------------------|
 | PROG-FICHA-FIRST | ✓ cerrado MF-FF-01…15 | `quality:ficha-first-gate` |
 | PROG-STRENGTHEN | ✓ 23/23 | `quality:strengthen-close-gate` |
 | PROG-CDS-UX | ✓ MF-CU-01…04 | `quality:cds-hooks-gate` |
 | PROG-RAPID | ✓ cerrado | `quality:rapid-gate` |
-| PROG-DI / tríada F6 | ✓ contratos | ver `reports/conciliacion/` |
-| **PROG-CONSOLIDATE** | ✓ ola 1 (Fase 0–4) · ✓ ola 2 (MF-CON-*) | [`epis2-prog-consolidate-ola2-close-2026.md`](../reports/epis2-prog-consolidate-ola2-close-2026.md) · [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) |
-| **PROG-RELEASE-HARDENING** | ✓ RH-01…08 · Node 24 · security report-only · web fixtures bridge | [`epis2-session-close-2026-06-16-release-hardening.md`](../reports/epis2-session-close-2026-06-16-release-hardening.md) |
+| PROG-DI / tríada F6 | ✓ contratos | `reports/conciliacion/` |
+| **PROG-CONSOLIDATE** | ✓ ola 1+2 | [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) |
+| **PROG-RELEASE-HARDENING** | ✓ RH-01…08 | tag `v0.1-demo-rc3` |
+| **PROG-PONYTAIL-TRIM** | ✓ cierre técnico | KNIP-00…04 + MF-PONY-02…07 + MF-PONY-GATE-01 · [`epis2-mf-pony-gate-01-close.md`](../reports/epis2-mf-pony-gate-01-close.md) |
+| **PROG-PRODUCT-MAP** | ◐ activo | MF-BRÚJULA-00 → mapa humano + gates anti-drift · pre `epis2-base-v0.1` |
+| **PROG-PURGE-CICA** | ◐ en paralelo | [`EPIS2_PURGE_ARCHIVE_PLAN.md`](product/EPIS2_PURGE_ARCHIVE_PLAN.md) |
 
 Detalle inventario módulos: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md).
 
@@ -97,7 +113,11 @@ Congelamiento vigente ([`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md)): **
 
 Plan detallado: [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-plan-post-rc3-2026.md). **Sin PHI real** — solo datos sintéticos DEMO/SIM.
 
-**Programa activo:** **PROG-PURGE-CICA** + merge **CICA/aesthetic** — [`product/EPIS2_PURGE_ARCHIVE_PLAN.md`](product/EPIS2_PURGE_ARCHIVE_PLAN.md) · UX-LAB ✓ cerrado · visual activa: `/app/*` CICA.
+**Programa activo (producto):** **PROG-PRODUCT-MAP** — mapa humano verificable post-PONYTAIL; sin pantallas nuevas.
+
+**En paralelo:** **PROG-PURGE-CICA** — archive docs/reportes · UX-LAB ✓ · visual activa `/app/*` CICA.
+
+**Knip (2026-06-18):** instalado (`knip ^6.17.1`, `npm run knip:audit`) · **0** unused files · **0** unused deps · **0** unlisted · **0** duplicate exports (KNIP-04) · siguiente etapa: exports triage conservador (MF-KNIP-05, PROG-PRODUCT-MAP).
 
 ---
 
@@ -127,7 +147,7 @@ Plan detallado: [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-pla
 | Olas M3 / papel planner | Parcial | Parcial | **Needs-review** — gates muchos |
 | OpenMRS / Carbon / EPIS overlay | Fósil | No | **Archive** — solo `migration/` + audit scripts |
 | `scripts/dev-agent` OpenClaw | Dev tooling | No | **Tools** — no producto clínico |
-| ~240 gates `validate-*` | Histórico MF | No | **Consolidar** — meta-gates abajo |
+| ~240 gates `validate-*` | Histórico MF | No | **Consolidar** — 76 activos · 247 archived · `PROG-PONYTAIL-TRIM` |
 | ~66 `reports/*.md` (raíz) | Activo + histórico reciente | No | **Archive** ✓ lote 6 (248) · **481** total en `reports/archive/2026-06/` · plan [`EPIS2_PURGE_ARCHIVE_PLAN.md`](product/EPIS2_PURGE_ARCHIVE_PLAN.md) |
 
 ---
@@ -154,9 +174,10 @@ Métrica de deuda: **~150** scripts npm totales en root · **273** gates en cat�
 ## Core intocable (no romper en consolidación)
 
 ```text
-login · pacientes demo · censo home · ficha dual · command bar
-formularios core · borradores · aprobación humana · auditoría
+login · pacientes demo · censo (intención ficha-first) · entrada CICA /app/buscar
+ficha dual · command bar · formularios core · borradores · aprobación humana · auditoría
 PostgreSQL · API · @epis2/contracts · golden journey · degrade IA
+fallback legacy /espacio/* (no home)
 ```
 
 Prohibido en fase consolidación: nuevos registries, nuevo home, auto-aprobación, imports `@epis2/local-ai` en web, copia EPIS sin manifest.
@@ -195,6 +216,8 @@ Commits pequeños en rama `chore/repo-consolidation-*` recomendado.
 ```text
 EPIS2 está en fase de consolidación, no de expansión.
 Leer docs/EPIS2_CURRENT_STATE.md y docs/MODULE_INVENTORY.md antes de editar.
+Entrada operativa: /app/buscar (CICA). Fallback: /espacio/*.
+Programa activo: PROG-PRODUCT-MAP (mapa humano; no pantallas nuevas).
 No agregues funcionalidades clínicas nuevas salvo MF autorizada explícitamente.
 Clasifica cambios: core | labs | tools | archive.
 Preservar golden journey y npm run quality:full verde.
@@ -212,6 +235,8 @@ Todo cambio debe mejorar claridad o mantenibilidad sin alterar flujo clínico m�
 | [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md) | Packages, services, scripts |
 | [`VISION_EPIS2.md`](product/VISION_EPIS2.md) | North star + matriz dominio |
 | [`AGENT_CONTEXT_MINIMAL.md`](AGENT_CONTEXT_MINIMAL.md) | Loop agente |
+| [`product/EPIS2_ROUTE_MAP.md`](product/EPIS2_ROUTE_MAP.md) | Mapa rutas CICA (MF-CATALOG-00, pendiente) |
+| [`product/EPIS2_PRODUCT_CATALOG.md`](product/EPIS2_PRODUCT_CATALOG.md) | Objetos clínicos (MF-CATALOG-01, pendiente) |
 | [`SCOPE_V1.md`](SCOPE_V1.md) / [`NON_GOALS.md`](NON_GOALS.md) | Límites MVP |
 | [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-prog-ficha-first-close-2026.md) | Último cierre producto |
 | [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-plan-post-rc3-2026.md) | Auditoría post-rc3 · PROG-POST-RC3 tramos |
