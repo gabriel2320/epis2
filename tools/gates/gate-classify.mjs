@@ -88,6 +88,10 @@ const ARCHIVE_PROGRAMS = [
     id: 'PROG-THREE-MODES',
     re: /^quality:(classic-md3-ai-mode|classic-md3-mode|dashboard-md3-mode|mode-guards|mode-safety|mode-switcher|mode-transitions|three-modes-design-agents)-gate$/,
   },
+  {
+    id: 'PROG-PONYTAIL-TRIM',
+    re: /^quality:(design-agents-gate|design-agent-schemas-gate|dashboard-design-agents-gate|three-modes-design-agents-gate|design-mode-gate|classic-screenshot-advisory|dashboard-screenshot-advisory|te-04-sections-gate)$/,
+  },
   { id: 'Olas-TE-PA', re: /^quality:(cm-\d+-|ola|te-|m3-scaffold)/ },
   { id: 'paper-planner', re: /^quality:paper-planner-/ },
   { id: 'dual-chart-next', re: /^quality:dual-chart-next$/ },

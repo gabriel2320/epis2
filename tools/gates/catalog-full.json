@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-06-16T21:34:06.272Z",
+  "generatedAt": "2026-06-18T22:28:36.307Z",
   "source": "catalog-full+aesthetic-promote",
   "note": "Regenerar inventario: node tools/gates/inventory-orphans.mjs",
   "gates": {
@@ -175,6 +175,10 @@
     "quality:gates-prune-phase2-gate": {
       "type": "file",
       "path": "scripts/quality/validate-gates-prune-phase2-gate.mjs"
+    },
+    "quality:ponytail-gate-archive-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ponytail-gate-archive-gate.mjs"
     },
     "quality:aesthetic-action-density-gate": {
       "type": "file",
@@ -753,8 +757,8 @@
     "quality:te-04-sections-gate": {
       "type": "file",
       "path": "scripts/quality/validate-te-04-sections-gate.mjs",
-      "archivedProgram": "Olas-TE-PA",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:ficha-norm-mirror-b1-gate": {
       "type": "file",
@@ -891,8 +895,8 @@
     "quality:three-modes-design-agents-gate": {
       "type": "file",
       "path": "scripts/quality/validate-three-modes-design-agents-gate.mjs",
-      "archivedProgram": "PROG-THREE-MODES",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:tramo-k-inventory-gate": {
       "type": "file",
@@ -1341,8 +1345,8 @@
     "quality:design-mode-gate": {
       "type": "file",
       "path": "scripts/quality/validate-design-mode-gate.mjs",
-      "archivedProgram": "catalog-only-phase2",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:classic-fixed-panels-gate": {
       "type": "file",
@@ -1383,20 +1387,20 @@
     "quality:design-agents-gate": {
       "type": "file",
       "path": "scripts/quality/validate-design-agents-gate.mjs",
-      "archivedProgram": "catalog-only-phase2",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:design-agent-schemas-gate": {
       "type": "file",
       "path": "scripts/quality/validate-design-agent-schemas-gate.mjs",
-      "archivedProgram": "catalog-only-phase2",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:classic-screenshot-advisory": {
       "type": "file",
       "path": "scripts/quality/validate-classic-screenshot-advisory.mjs",
-      "archivedProgram": "catalog-only-phase2",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:dashboard-kpi-actionability-gate": {
       "type": "file",
@@ -1425,14 +1429,14 @@
     "quality:dashboard-design-agents-gate": {
       "type": "file",
       "path": "scripts/quality/validate-dashboard-design-agents-gate.mjs",
-      "archivedProgram": "catalog-only-phase2",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:dashboard-screenshot-advisory": {
       "type": "file",
       "path": "scripts/quality/validate-dashboard-screenshot-advisory.mjs",
-      "archivedProgram": "catalog-only-phase2",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:dual-chart-ledger": {
       "type": "file",
@@ -1790,5 +1794,6 @@
     }
   },
   "prunePhase": "3",
-  "aestheticPromotedAt": "2026-06-16"
+  "aestheticPromotedAt": "2026-06-16",
+  "ponytailGateArchiveAt": "2026-06-18"
 }

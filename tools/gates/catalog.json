@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-06-16T21:34:06.293Z",
+  "generatedAt": "2026-06-18T22:28:36.310Z",
   "source": "catalog-full+fs",
   "note": "Regenerar inventario: node tools/gates/inventory-orphans.mjs",
   "gates": {
@@ -152,6 +152,10 @@
       "type": "file",
       "path": "scripts/quality/validate-cica-screen-governor-gate.mjs"
     },
+    "quality:patient-search-layout-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-patient-search-layout-gate.mjs"
+    },
     "quality:ux-lab-autopilot-gate": {
       "type": "file",
       "path": "scripts/quality/validate-ux-lab-autopilot-gate.mjs"
@@ -172,6 +176,10 @@
       "type": "file",
       "path": "scripts/quality/validate-gates-prune-phase2-gate.mjs"
     },
+    "quality:ponytail-gate-archive-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ponytail-gate-archive-gate.mjs"
+    },
     "quality:aesthetic-action-density-gate": {
       "type": "file",
       "path": "scripts/quality/validate-aesthetic-action-density-gate.mjs"
@@ -188,6 +196,66 @@
       "type": "file",
       "path": "scripts/quality/validate-cica-loop-close-gate.mjs"
     },
+    "quality:cica-no-legacy-shell-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-no-legacy-shell-gate.mjs"
+    },
+    "quality:cica-no-dashboard-mode-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-no-dashboard-mode-gate.mjs"
+    },
+    "quality:cica-screen-registry-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-screen-registry-gate.mjs"
+    },
+    "quality:clinical-action-manifest-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-action-manifest-gate.mjs"
+    },
+    "quality:clinical-lexicon-es-cl-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-lexicon-es-cl-gate.mjs"
+    },
+    "quality:drug-dictionary-cl-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-drug-dictionary-cl-gate.mjs"
+    },
+    "quality:lab-dictionary-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-lab-dictionary-gate.mjs"
+    },
+    "quality:clinical-rules-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-rules-gate.mjs"
+    },
+    "quality:ai-escalation-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ai-escalation-gate.mjs"
+    },
+    "quality:lexicon-core-close-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-lexicon-core-close-gate.mjs"
+    },
+    "quality:cica-action-density-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-action-density-gate.mjs"
+    },
+    "quality:cica-paper-standalone-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-paper-standalone-gate.mjs"
+    },
+    "quality:cica-responsive-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-responsive-gate.mjs"
+    },
+    "quality:cica-theme-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-theme-gate.mjs"
+    },
+    "quality:cica-clean-room-close-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-clean-room-close-gate.mjs"
+    },
     "quality:cica-screen-admission-gate": {
       "type": "file",
       "path": "scripts/quality/validate-cica-screen-admission-gate.mjs"
@@ -199,6 +267,14 @@
     "quality:classic-chart-composition-gate": {
       "type": "file",
       "path": "scripts/quality/validate-classic-chart-composition-gate.mjs"
+    },
+    "quality:classic-shell-layout-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-classic-shell-layout-gate.mjs"
+    },
+    "quality:clinical-layout-engine-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-layout-engine-gate.mjs"
     },
     "quality:clinical-command-bar-transversal-gate": {
       "type": "file",
@@ -223,6 +299,14 @@
     "quality:gates-promote-aesthetic-gate": {
       "type": "file",
       "path": "scripts/quality/validate-gates-promote-aesthetic-gate.mjs"
+    },
+    "quality:ui": {
+      "type": "command",
+      "command": "npm run quality:ui-simplify-gate"
+    },
+    "quality:ai": {
+      "type": "command",
+      "command": "npm run quality:sh-03-degrade-gate && npm run quality:ai-client-gate && npm run quality:web-ai-boundary-gate"
     }
   },
   "archived": {
@@ -673,8 +757,8 @@
     "quality:te-04-sections-gate": {
       "type": "file",
       "path": "scripts/quality/validate-te-04-sections-gate.mjs",
-      "archivedProgram": "Olas-TE-PA",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:ficha-norm-mirror-b1-gate": {
       "type": "file",
@@ -811,8 +895,8 @@
     "quality:three-modes-design-agents-gate": {
       "type": "file",
       "path": "scripts/quality/validate-three-modes-design-agents-gate.mjs",
-      "archivedProgram": "PROG-THREE-MODES",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:tramo-k-inventory-gate": {
       "type": "file",
@@ -1261,8 +1345,8 @@
     "quality:design-mode-gate": {
       "type": "file",
       "path": "scripts/quality/validate-design-mode-gate.mjs",
-      "archivedProgram": "catalog-only-phase2",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:classic-fixed-panels-gate": {
       "type": "file",
@@ -1303,20 +1387,20 @@
     "quality:design-agents-gate": {
       "type": "file",
       "path": "scripts/quality/validate-design-agents-gate.mjs",
-      "archivedProgram": "catalog-only-phase2",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:design-agent-schemas-gate": {
       "type": "file",
       "path": "scripts/quality/validate-design-agent-schemas-gate.mjs",
-      "archivedProgram": "catalog-only-phase2",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:classic-screenshot-advisory": {
       "type": "file",
       "path": "scripts/quality/validate-classic-screenshot-advisory.mjs",
-      "archivedProgram": "catalog-only-phase2",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:dashboard-kpi-actionability-gate": {
       "type": "file",
@@ -1345,14 +1429,14 @@
     "quality:dashboard-design-agents-gate": {
       "type": "file",
       "path": "scripts/quality/validate-dashboard-design-agents-gate.mjs",
-      "archivedProgram": "catalog-only-phase2",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:dashboard-screenshot-advisory": {
       "type": "file",
       "path": "scripts/quality/validate-dashboard-screenshot-advisory.mjs",
-      "archivedProgram": "catalog-only-phase2",
-      "archivedAt": "2026-06-16"
+      "archivedProgram": "PROG-PONYTAIL-TRIM",
+      "archivedAt": "2026-06-18"
     },
     "quality:dual-chart-ledger": {
       "type": "file",
@@ -1710,5 +1794,6 @@
     }
   },
   "prunePhase": "3",
-  "aestheticPromotedAt": "2026-06-16"
+  "aestheticPromotedAt": "2026-06-16",
+  "ponytailGateArchiveAt": "2026-06-18"
 }
