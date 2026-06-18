@@ -11,10 +11,6 @@ export type DesignScreenContext = {
   screenshotPath?: string;
 };
 
-export function countMatches(haystack: string, pattern: RegExp): number {
-  return (haystack.match(pattern) ?? []).length;
-}
-
 export function includesAny(haystack: string, tokens: readonly string[]): boolean {
   return tokens.some((t) => haystack.includes(t));
 }

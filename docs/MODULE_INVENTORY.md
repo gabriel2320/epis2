@@ -155,12 +155,12 @@ Evidencia: `reports/epis2-mf-pony-*-close.md`, `reports/epis2-mf-pony-knip-*-clo
 | `packages/epis2-ui/cica/CICA_CHART_TAB_REGISTRY.ts` | delete-later | SoT: `clinicalChartTabRegistry.ts` |
 | `apps/api/src/db.ts` | delete-later | Shim; usar `db/client.js` |
 
-**Knip siguiente etapa (PROG-PRODUCT-MAP):** MF-KNIP-05-A ✓ baseline exports · MF-KNIP-05-B lote ≤10 (`reports/knip-audit-product-map-baseline-2026-06-18.md`).
+**Knip siguiente etapa (PROG-PRODUCT-MAP):** MF-KNIP-05-A ✓ · MF-KNIP-05-B ✓ lote1 (−8 exports safe) · `reports/knip-audit-product-map-lote1-2026-06-18.md`.
 
 ---
 
 ## Próximo paso inventario
 
-1. **PROG-PRODUCT-MAP** — MF-KNIP-05-B (lote exports safe) · MF-RELEASE-BASE-01.
+1. **PROG-PRODUCT-MAP** — MF-RELEASE-BASE-01 (tag `epis2-base-v0.1`).
 2. Completar filas **tramo A–K** con estado demo/scaffold/dead (hoja aparte o ampliar esta tabla).
 3. Tag git `epis2-base-v0.1` cuando checklist CURRENT_STATE ✓ + `quality:required` + `quality:product-map-gate` (MF-RELEASE-BASE-01).
