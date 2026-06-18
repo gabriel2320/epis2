@@ -19,15 +19,6 @@ export function CicaPatientAdmissionPage() {
   );
 }
 
-export function CicaPatientMedicationsPage() {
-  return (
-    <CicaPatientSectionPage
-      screenId="patient-medications"
-      placeholder="Receta y fármacos activos — vista dedicada distinta del listado de indicaciones."
-    />
-  );
-}
-
 export function CicaPatientInterconsultasPage() {
   return (
     <CicaPatientSectionPage

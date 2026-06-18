@@ -35,3 +35,9 @@ export const PATIENT_TIMELINE_BLUEPRINT: CicaScreenBlueprint = {
   hideActionBar: true,
   sections: [{ id: 'timeline', span: 12 }],
 };
+
+export const PATIENT_MEDICATIONS_BLUEPRINT: CicaScreenBlueprint = {
+  screenId: 'patient-medications',
+  hideActionBar: false,
+  sections: [{ id: 'medications', span: 12 }],
+};
