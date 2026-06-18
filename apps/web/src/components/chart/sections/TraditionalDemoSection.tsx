@@ -31,7 +31,10 @@ export function TraditionalDemoSection({
 
   if (displayRows.length === 0) {
     return (
-      <Stack data-testid={resolvedTestId} {...(cicaClassic ? { 'data-cica-composition': 'classic' } : {})}>
+      <Stack
+        data-testid={resolvedTestId}
+        {...(cicaClassic ? { 'data-cica-composition': 'classic' } : {})}
+      >
         <EpisM3Text role="bodyMedium" color="text.secondary">
           {copy.longitudinal.emptySection}
         </EpisM3Text>
@@ -40,7 +43,10 @@ export function TraditionalDemoSection({
   }
 
   return (
-    <Stack data-testid={resolvedTestId} {...(cicaClassic ? { 'data-cica-composition': 'classic' } : {})}>
+    <Stack
+      data-testid={resolvedTestId}
+      {...(cicaClassic ? { 'data-cica-composition': 'classic' } : {})}
+    >
       <TraditionalSectionDataTable rows={displayRows} testId={`${resolvedTestId}-table`} />
     </Stack>
   );
