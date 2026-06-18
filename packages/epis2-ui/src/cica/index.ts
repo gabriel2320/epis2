@@ -83,6 +83,7 @@ export {
   buildCicaSidebarSections,
   buildCicaSystemSidebarSections,
   buildCicaPatientSidebarSection,
+  buildCicaPatientMoreSidebarSection,
   type CicaSidebarItem,
   type CicaSidebarSection,
   type CicaSidebarNavContext,
