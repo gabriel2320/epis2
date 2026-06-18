@@ -1,10 +1,5 @@
 import { copy } from '@epis2/design-system';
-import {
-  CicaBookPager,
-  EpisM3Text,
-  Stack,
-  Typography,
-} from '@epis2/epis2-ui';
+import { CicaBookPager, EpisM3Text, Stack, Typography } from '@epis2/epis2-ui';
 import { useMemo } from 'react';
 import { ErrorState } from '../components/ErrorState.js';
 import {

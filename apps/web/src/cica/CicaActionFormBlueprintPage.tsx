@@ -39,10 +39,7 @@ export function CicaActionFormBlueprintPage({
       hideActionBar={blueprint.hideActionBar ?? actions.length === 0}
       testId={testId ?? `cica-screen-${blueprint.screenId}`}
     >
-      <CicaBlueprintBody
-        blueprint={blueprint}
-        slots={slots}
-      />
+      <CicaBlueprintBody blueprint={blueprint} slots={slots} />
     </CicaScreenFrame>
   );
 }

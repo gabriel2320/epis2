@@ -278,7 +278,9 @@ export function CicaNewEpicrisisPage() {
                 <EpisClinicalScrollspyLayout sections={scrollspySections}>
                   <EpisClinicalFormRhf
                     blueprint={dischargeSummaryBlueprint}
-                    clinicalProse={blueprintUsesClinicalProse(dischargeSummaryBlueprint.blueprintId)}
+                    clinicalProse={blueprintUsesClinicalProse(
+                      dischargeSummaryBlueprint.blueprintId,
+                    )}
                     clinicalDropEnabled
                     collapseNonPrimarySections={dischargeSummaryBlueprint.sections.length > 2}
                     renderClinicalTextBox={renderClinicalTextBox}

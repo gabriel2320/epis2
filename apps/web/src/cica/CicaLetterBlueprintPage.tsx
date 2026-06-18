@@ -1,8 +1,4 @@
-import {
-  CicaBlueprintBody,
-  CicaLetterPageShell,
-  type CicaScreenBlueprint,
-} from '@epis2/epis2-ui';
+import { CicaBlueprintBody, CicaLetterPageShell, type CicaScreenBlueprint } from '@epis2/epis2-ui';
 import type { ReactNode } from 'react';
 
 type CicaLetterBlueprintPageProps = {
