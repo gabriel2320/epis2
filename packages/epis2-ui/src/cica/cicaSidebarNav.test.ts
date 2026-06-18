@@ -13,8 +13,10 @@ describe('cicaSidebarNav', () => {
   };
 
   it('ordena entrada clínica según master tree', () => {
-    const items = buildCicaSystemSidebarSections({ pathname: '/app/buscar', onNavigate: () => {} })[0]
-      ?.items;
+    const items = buildCicaSystemSidebarSections({
+      pathname: '/app/buscar',
+      onNavigate: () => {},
+    })[0]?.items;
     expect(items?.map((i) => i.id)).toEqual(['search', 'census', 'agenda', 'my-work', 'recent']);
   });
 
