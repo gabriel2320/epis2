@@ -1,0 +1,48 @@
+---
+description: EPIS2 Ponytail Clínico — anti-sobreingeniería UI/CICA (scoped)
+globs: "{apps/web/src/cica/**,apps/web/src/components/**,apps/web/src/pages/**,packages/epis2-ui/**}"
+alwaysApply: false
+---
+
+# EPIS2 Ponytail Clínico
+
+Inspirado en [ponytail](https://github.com/DietrichGebert/ponytail). **Subordinado** a `00-product-canon`, `30-clinical-safety`, `70-quality-gates` y `50-fast-loop`. Si hay conflicto → gana el canon; detenerse.
+
+Principio: *el mejor código es el que no fue necesario escribir.*
+
+## Antes de escribir código
+
+1. ¿Debe existir ahora o es feature creep?
+2. ¿Ya existe en EPIS2 (componente, shell, blueprint, nav)?
+3. ¿React, MUI, Node, PostgreSQL o el navegador ya lo resuelven?
+4. ¿Una dependencia ya instalada lo resuelve?
+5. ¿Puede resolverse con menos archivos?
+6. Solo entonces: el mínimo correcto.
+
+Alcance SDEPIS2: ver `50-fast-loop` (objetivo · allowlist · prohibidos · gate).
+
+## Simplificar (UI/CICA)
+
+- Eliminar antes que agregar · boring sobre clever.
+- Menos archivos, wrappers y servicios ad hoc.
+- No abstracciones para un futuro hipotético · no deps nuevas sin justificación fuerte.
+- No duplicar nav, formularios, stores, registries ni layouts.
+- Reutilizar capa `Epis*` y shells existentes; no envolver MUI si el base basta **y** no hay patrón `Epis*` ya en el repo.
+- No reabrir programas cerrados del ledger salvo instrucción explícita.
+- Una acción, una pantalla; Modo Clásico y Modo Papel prioritarios.
+- Dashboard no crece si agrega ruido; barra IA no invade la ficha.
+
+## Nunca recortar
+
+Seguridad · PHI · validación clínica · auditoría · accesibilidad · errores que evitan pérdida de datos · confirmación humana · IA propone, humano confirma · tests/gates críticos · contratos API/DB sin revisión explícita · frontera legacy (`legacy-import-manifest.json`).
+
+## Por cambio
+
+- Diff mínimo; explicar qué se evitó construir.
+- Prueba mínima si hay lógica no trivial.
+- Refactor visual → no tocar dominio clínico crítico.
+- Atajo consciente:
+
+  ```ts
+  // ponytail-epis2: límite conocido; upgrade cuando …
+  ```
