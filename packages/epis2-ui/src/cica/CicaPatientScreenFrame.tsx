@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import type { ClinicalLayoutAction } from '../layout/clinical/clinicalLayoutEngine.js';
-import type { CicaChartTabId } from './CICA_CHART_TAB_REGISTRY.js';
+import type { CicaChartTabId } from './clinicalChartTabRegistry.js';
 import { CicaChartTabs } from './CicaChartTabs.js';
 import { CicaScreenFrame } from './CicaScreenFrame.js';
 import type { CicaContextStripProps } from './CicaContextStrip.js';

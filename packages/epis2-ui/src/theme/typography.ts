@@ -111,8 +111,6 @@ export const epis2DisplayFontFamily =
 /** Cuerpo y metadata — Roboto con fallbacks Microsoft/sistema. */
 export const epis2BodyFontFamily = '"Roboto", "Segoe UI", "Helvetica Neue", Arial, sans-serif';
 
-export const epis2FontFamily = epis2BodyFontFamily;
-
 /** Regla 1 — monoespaciada para código, logs y datos técnicos. */
 export const epis2MonoFontFamily =
   '"Cascadia Mono", "Roboto Mono", "Consolas", ui-monospace, monospace';

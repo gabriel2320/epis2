@@ -70,8 +70,6 @@ export {
   type EpisModeUserPreferences,
   type ClassicPatientViewMode,
   type DashboardViewMode,
-  loadClassicUserPreferences,
-  saveClassicUserPreferences,
   type EpisClassicUserPreferences,
 } from './episModePreferences.js';
 

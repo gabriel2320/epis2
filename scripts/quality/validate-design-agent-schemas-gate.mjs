@@ -16,7 +16,7 @@ const required = [
   'PatchPlanSchema',
   'DashboardMd3CriticResultSchema',
   'DashboardWorkflowResultSchema',
-  'DashboardPatchPlanSchema',
+  'PatchPlanSchema',
 ];
 const errors = required.filter((s) => !src.includes(s)).map((s) => `Falta ${s}`);
 if (!src.includes("from 'zod'")) errors.push('schemas.ts debe usar Zod');

@@ -58,9 +58,3 @@ export function setDefaultDashboardView(mode: DashboardViewMode | undefined): vo
     ...(mode === 'dashboard' ? { defaultDashboardView: 'dashboard' } : {}),
   });
 }
-
-/** @deprecated Usar loadEpisModePreferences */
-export const loadClassicUserPreferences = loadEpisModePreferences;
-
-/** @deprecated Usar saveEpisModePreferences */
-export const saveClassicUserPreferences = saveEpisModePreferences;

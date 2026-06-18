@@ -44,7 +44,6 @@ export {
   type CicaScreenDefinition,
 } from './EPIS_CICA_SCREEN_REGISTRY.js';
 export {
-  CICA_CHART_TAB_REGISTRY,
   CLINICAL_CHART_TAB_REGISTRY,
   CICA_PATIENT_MORE_NAV,
   CICA_PATIENT_PRIMARY_NAV,
@@ -52,7 +51,6 @@ export {
   buildCicaChartTabPath,
   chartTabLabelEs,
   chartTabScreenId,
-  findChartTabById,
   findClinicalChartTabById,
   inferChartTabFromPathname,
   legacyPatientChartTabTarget,

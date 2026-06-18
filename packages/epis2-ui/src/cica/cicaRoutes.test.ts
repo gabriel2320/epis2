@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { buildCicaPath, parseCicaPatientId } from './cicaRoutes.js';
 import { resolveCicaEpis2gSurfaces } from './cicaEpis2gVisual.js';
-import { CICA_CHART_TAB_REGISTRY } from './clinicalChartTabRegistry.js';
+import { CLINICAL_CHART_TAB_REGISTRY } from './clinicalChartTabRegistry.js';
 import { EPIS_CICA_SCREEN_REGISTRY } from './EPIS_CICA_SCREEN_REGISTRY.js';
 
 describe('cicaRoutes', () => {
@@ -42,7 +42,7 @@ describe('cicaRoutes', () => {
 describe('CICA registries alignment', () => {
   it('cada tab apunta a screenId del registry', () => {
     const ids = new Set(EPIS_CICA_SCREEN_REGISTRY.map((s) => s.id));
-    for (const tab of CICA_CHART_TAB_REGISTRY) {
+    for (const tab of CLINICAL_CHART_TAB_REGISTRY) {
       expect(ids.has(tab.screenId)).toBe(true);
     }
   });

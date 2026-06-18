@@ -22,11 +22,8 @@ function runChecks() {
 
   const shellIsland = path.join(root, 'packages/epis2-ui/src/theme/island-layout.ts');
   const islandContent = fs.readFileSync(shellIsland, 'utf8');
-  if (
-    !islandContent.includes('epis2ShellContentIslandSx') ||
-    !islandContent.includes('epis2ShellContentSx')
-  ) {
-    errors.push('falta alias epis2ShellContentSx plano para shell clínico');
+  if (!islandContent.includes('epis2ShellContentIslandSx')) {
+    errors.push('falta epis2ShellContentIslandSx plano para shell clínico');
   }
 
   const dashboardShell = path.join(root, 'packages/epis2-ui/src/dashboard/EpisDashboardShell.tsx');

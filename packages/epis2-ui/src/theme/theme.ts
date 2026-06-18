@@ -24,7 +24,6 @@ export {
   epis2Typography,
   epis2TypographyRoles,
   epis2M3TypographyVariants,
-  epis2FontFamily,
   type Epis2M3TypographyRole,
 } from './typography.js';
 export {

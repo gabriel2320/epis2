@@ -14,7 +14,7 @@ const schemas = readFileSync(join(dir, 'schemas.ts'), 'utf8');
 for (const s of [
   'DashboardMd3CriticResultSchema',
   'DashboardWorkflowResultSchema',
-  'DashboardPatchPlanSchema',
+  'PatchPlanSchema',
 ]) {
   if (!schemas.includes(s)) errors.push(`Falta ${s}`);
 }

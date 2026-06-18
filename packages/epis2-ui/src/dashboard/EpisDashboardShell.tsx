@@ -7,7 +7,7 @@ import type { ReactNode } from 'react';
 import { EpisButton } from '../primitives/EpisButton.js';
 import { EpisDemoBadgeChip } from '../primitives/EpisDemoBadgeChip.js';
 import { EpisM3Text } from '../primitives/EpisM3Text.js';
-import { epis2ShellContentSx } from '../theme/island-layout.js';
+import { epis2ShellContentIslandSx } from '../theme/island-layout.js';
 
 export type EpisDashboardTab = {
   value: string;
@@ -49,7 +49,7 @@ export function EpisDashboardShell({
     <Stack
       spacing={3}
       sx={{
-        ...epis2ShellContentSx,
+        ...epis2ShellContentIslandSx,
         maxWidth,
       }}
       data-testid={testId}

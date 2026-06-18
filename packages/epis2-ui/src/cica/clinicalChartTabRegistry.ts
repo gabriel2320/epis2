@@ -96,9 +96,6 @@ export const CLINICAL_CHART_TAB_REGISTRY: readonly ClinicalChartTabDefinition[] 
   },
 ] as const;
 
-/** Alias histórico — preferir CLINICAL_CHART_TAB_REGISTRY. */
-export const CICA_CHART_TAB_REGISTRY = CLINICAL_CHART_TAB_REGISTRY;
-
 export type CicaChartTabDefinition = ClinicalChartTabDefinition;
 
 const LEGACY_TAB_ROUTE_PREFIXES: Record<LegacyPatientChartTabId, readonly string[]> = {
@@ -235,9 +232,6 @@ export const CICA_PATIENT_MORE_NAV: readonly CicaPatientNavEntry[] = [
 export function findClinicalChartTabById(id: CicaChartTabId): ClinicalChartTabDefinition | undefined {
   return CLINICAL_CHART_TAB_REGISTRY.find((t) => t.id === id);
 }
-
-/** @deprecated use findClinicalChartTabById */
-export const findChartTabById = findClinicalChartTabById;
 
 export function chartTabLabelEs(tabId: CicaChartTabId): string {
   return findClinicalChartTabById(tabId)?.labelEs ?? tabId;

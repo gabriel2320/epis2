@@ -113,20 +113,15 @@ export const DashboardDataQualityResultSchema = z.object({
   filtersUnambiguous: z.boolean(),
 });
 
-export const DashboardAccessibilityResultSchema = AccessibilityResultSchema;
-
-export const DashboardScreenshotCriticResultSchema = ScreenshotCriticResultSchema;
-
-export const DashboardPatchPlanSchema = PatchPlanSchema;
+export type DashboardAccessibilityResult = AccessibilityResult;
+export type DashboardScreenshotCriticResult = ScreenshotCriticResult;
+export type DashboardPatchPlan = PatchPlan;
 
 export type DashboardMd3CriticResult = z.infer<typeof DashboardMd3CriticResultSchema>;
 export type DashboardWorkflowResult = z.infer<typeof DashboardWorkflowResultSchema>;
 export type DashboardDensityResult = z.infer<typeof DashboardDensityResultSchema>;
 export type DashboardSafetyResult = z.infer<typeof DashboardSafetyResultSchema>;
 export type DashboardDataQualityResult = z.infer<typeof DashboardDataQualityResultSchema>;
-export type DashboardAccessibilityResult = z.infer<typeof DashboardAccessibilityResultSchema>;
-export type DashboardScreenshotCriticResult = z.infer<typeof DashboardScreenshotCriticResultSchema>;
-export type DashboardPatchPlan = z.infer<typeof DashboardPatchPlanSchema>;
 
 export const ThreeModesArchitectureResultSchema = z.object({
   score: z.number().min(0).max(100),

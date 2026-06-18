@@ -125,7 +125,7 @@ for (const token of [
   'buildCicaPath',
   'EPIS_CICA_SCREEN_REGISTRY',
   'CLINICAL_CHART_TAB_REGISTRY',
-  'CICA_CHART_TAB_REGISTRY',
+  'CLINICAL_CHART_TAB_REGISTRY',
 ]) {
   if (!cicaIndex.includes(token)) {
     errors.push(`cica/index.ts falta export ${token}`);

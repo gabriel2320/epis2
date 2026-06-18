@@ -6,9 +6,9 @@ import {
   DashboardDensityResultSchema,
   DashboardSafetyResultSchema,
   DashboardDataQualityResultSchema,
-  DashboardAccessibilityResultSchema,
-  DashboardScreenshotCriticResultSchema,
-  DashboardPatchPlanSchema,
+  AccessibilityResultSchema,
+  ScreenshotCriticResultSchema,
+  PatchPlanSchema,
   type DashboardMd3CriticResult,
   type DashboardWorkflowResult,
   type DashboardDensityResult,
@@ -172,7 +172,7 @@ export async function dashboardAccessibilityAgent(
 ): Promise<DesignAgentRunOutcome<DashboardAccessibilityResult>> {
   return runDesignAgent(
     'dashboardAccessibilityAgent',
-    DashboardAccessibilityResultSchema,
+    AccessibilityResultSchema,
     () => ({
       score: 85,
       violations: [],
@@ -189,7 +189,7 @@ export async function dashboardScreenshotCriticAgent(
 ): Promise<DesignAgentRunOutcome<DashboardScreenshotCriticResult>> {
   return runDesignAgent(
     'dashboardScreenshotCriticAgent',
-    DashboardScreenshotCriticResultSchema,
+    ScreenshotCriticResultSchema,
     () => ({
       score: ctx.screenshotPath ? 80 : 70,
       violations: ctx.screenshotPath ? [] : ['Sin screenshot advisory'],
@@ -208,7 +208,7 @@ export async function dashboardPatchPlannerAgent(
 ): Promise<DesignAgentRunOutcome<DashboardPatchPlan>> {
   return runDesignAgent(
     'dashboardPatchPlannerAgent',
-    DashboardPatchPlanSchema,
+    PatchPlanSchema,
     () => ({
       files: ['apps/web/src/components/dashboard-md3/EpisDashboardMd3Shell.tsx'],
       changes: violations.length

@@ -5,7 +5,7 @@ import { EpisM3Text } from '../primitives/EpisM3Text.js';
 import {
   epis2CalmIslandSx,
   epis2IslandPaddingSx,
-  epis2ShellContentSx,
+  epis2ShellContentIslandSx,
 } from '../theme/island-layout.js';
 
 export type EpisWorkspaceSectionProps = {
@@ -45,7 +45,7 @@ export function EpisDockReserveLayout({ children, maxWidth, testId }: EpisDockRe
     <Box
       data-testid={testId}
       sx={{
-        ...epis2ShellContentSx,
+        ...epis2ShellContentIslandSx,
         ...(maxWidth ? { maxWidth } : {}),
         width: '100%',
         flex: 1,

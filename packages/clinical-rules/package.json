@@ -17,7 +17,6 @@
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@epis2/drug-dictionary-cl": "*",
     "@epis2/lab-dictionary": "*"
   },
   "devDependencies": {
