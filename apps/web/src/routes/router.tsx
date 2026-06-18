@@ -40,6 +40,10 @@ import { CicaCensusPage } from '../cica/CicaCensusPage.js';
 import { CicaPatientSummaryPage } from '../cica/CicaPatientSummaryPage.js';
 import { CicaPatientMedicationsPage } from '../cica/CicaPatientMedicationsPage.js';
 import { CicaPatientAuditPage } from '../cica/CicaPatientAuditPage.js';
+import { CicaPatientAdmissionPage } from '../cica/CicaPatientAdmissionPage.js';
+import { CicaPatientDischargePage } from '../cica/CicaPatientDischargePage.js';
+import { CicaPatientInterconsultasPage } from '../cica/CicaPatientInterconsultasPage.js';
+import { CicaPatientProceduresPage } from '../cica/CicaPatientProceduresPage.js';
 import { CicaPatientEvolutionsPage } from '../cica/CicaPatientEvolutionsPage.js';
 import { CicaPatientDocumentsPage } from '../cica/CicaPatientDocumentsPage.js';
 import { CicaPatientOrdersPage } from '../cica/CicaPatientOrdersPage.js';
@@ -55,10 +59,6 @@ import { CicaPaperBookPage } from '../cica/CicaPaperBookPage.js';
 import {
   CicaAgendaPage,
   CicaMyWorkPage,
-  CicaPatientAdmissionPage,
-  CicaPatientDischargePage,
-  CicaPatientInterconsultasPage,
-  CicaPatientProceduresPage,
   CicaPatientTimelinePage,
   CicaRecentPatientsPage,
 } from '../cica/CicaSystemScreens.js';
