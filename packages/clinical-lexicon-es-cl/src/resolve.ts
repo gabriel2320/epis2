@@ -1,5 +1,6 @@
 import {
   matchColloquialRule,
+  shouldEscalateLexiconConfidence,
   type ClinicalIntent,
 } from '@epis2/command-registry';
 import { CLINICAL_LEXICON_ES_CL, type ClinicalLexiconEntry } from './buildLexicon.js';
@@ -108,6 +109,7 @@ export function resolveClinicalLexicon(raw: string): LexiconResolveResult {
   return { confidence: 0.2, source: 'needs_clarification' };
 }
 
+/** Delega umbral canónico MF-LX-06 en command-registry. */
 export function shouldEscalateToAi(result: LexiconResolveResult): boolean {
-  return result.confidence < 0.5;
+  return shouldEscalateLexiconConfidence(result.confidence);
 }

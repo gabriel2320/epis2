@@ -224,6 +224,14 @@
       "type": "file",
       "path": "scripts/quality/validate-clinical-rules-gate.mjs"
     },
+    "quality:ai-escalation-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-ai-escalation-gate.mjs"
+    },
+    "quality:lexicon-core-close-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-lexicon-core-close-gate.mjs"
+    },
     "quality:cica-action-density-gate": {
       "type": "file",
       "path": "scripts/quality/validate-cica-action-density-gate.mjs"
