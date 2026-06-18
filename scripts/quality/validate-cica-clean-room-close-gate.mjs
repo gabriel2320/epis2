@@ -67,6 +67,32 @@ for (const importToken of ['CicaNewPrescriptionPage', 'CicaNewDocumentPage']) {
   }
 }
 
+/** MF-PONY-03 — secciones demo colapsadas en mapa + ruta genérica. */
+const demoSectionsPath = join(root, cicaWeb, 'cicaPatientDemoSections.ts');
+for (const rel of [`${cicaWeb}/cicaPatientDemoSections.ts`, `${cicaWeb}/CicaPatientDemoSectionRoutePage.tsx`]) {
+  if (!existsSync(join(root, rel))) {
+    errors.push(`Falta ${rel}`);
+  }
+}
+const demoSections = readFileSync(demoSectionsPath, 'utf8');
+for (const screenId of ['patient-discharge', 'patient-interconsultas', 'patient-procedures']) {
+  if (!demoSections.includes(`'${screenId}'`)) {
+    errors.push(`cicaPatientDemoSections.ts falta ${screenId}`);
+  }
+}
+for (const legacyPage of [
+  'CicaPatientDischargePage.tsx',
+  'CicaPatientInterconsultasPage.tsx',
+  'CicaPatientProceduresPage.tsx',
+]) {
+  if (existsSync(join(root, cicaWeb, legacyPage))) {
+    errors.push(`Eliminar page fina obsoleta: ${cicaWeb}/${legacyPage}`);
+  }
+}
+if (!router.includes('CicaPatientDemoSectionRoutePage')) {
+  errors.push('router.tsx debe usar CicaPatientDemoSectionRoutePage para secciones demo');
+}
+
 if (errors.length) {
   console.error('cica-clean-room-close-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);

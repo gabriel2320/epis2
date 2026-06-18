@@ -1,4 +1,5 @@
 import { copy } from '@epis2/design-system';
+import { findCicaScreenById } from './EPIS_CICA_SCREEN_REGISTRY.js';
 import { buildCicaPath, todayIsoDate, type CicaScreenId } from './cicaRoutes.js';
 import { CICA_CHART_TAB_REGISTRY, type CicaChartTabId } from './CICA_CHART_TAB_REGISTRY.js';
 
@@ -38,13 +39,15 @@ function isActiveMatch(pathname: string, fragment: string): boolean {
 export function buildCicaSystemSidebarSections(ctx: CicaSidebarNavContext): CicaSidebarSection[] {
   const { pathname, onNavigate } = ctx;
 
-  const systemScreens: { id: string; screenId: CicaScreenId; label: string }[] = [
-    { id: 'search', screenId: 'patient-search', label: copy.clinicalNav.search },
-    { id: 'census', screenId: 'census', label: copy.clinicalNav.census },
-    { id: 'agenda', screenId: 'agenda', label: 'Agenda guardia' },
-    { id: 'my-work', screenId: 'my-work', label: 'Mi trabajo' },
-    { id: 'recent', screenId: 'recent-patients', label: 'Recientes' },
-  ];
+  const systemScreens = (
+    [
+      { id: 'search', screenId: 'patient-search', label: copy.clinicalNav.search },
+      { id: 'census', screenId: 'census', label: copy.clinicalNav.census },
+      { id: 'agenda', screenId: 'agenda', label: 'Agenda guardia' },
+      { id: 'my-work', screenId: 'my-work', label: 'Mi trabajo' },
+      { id: 'recent', screenId: 'recent-patients', label: 'Recientes' },
+    ] as const
+  ).filter((entry) => findCicaScreenById(entry.screenId)?.navVisible !== false);
 
   return [
     {

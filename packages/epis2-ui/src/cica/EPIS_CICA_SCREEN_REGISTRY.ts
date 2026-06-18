@@ -6,6 +6,8 @@ export type CicaScreenDefinition = {
   intent: string;
   primaryAction: string;
   layoutProfile: CicaLayoutProfile;
+  /** Sidebar L1/L2 — false = ruta viva, sin entrada nav (MF-PONY-02 defer). */
+  navVisible?: boolean;
   forbiddenLegacy?: boolean;
   requiredSignals?: readonly string[];
 };
@@ -34,6 +36,7 @@ export const EPIS_CICA_SCREEN_REGISTRY: readonly CicaScreenDefinition[] = [
     intent: 'Retomar pacientes abiertos recientemente',
     primaryAction: 'Abrir ficha',
     layoutProfile: 'census',
+    navVisible: false,
     forbiddenLegacy: true,
   },
   {
@@ -42,6 +45,7 @@ export const EPIS_CICA_SCREEN_REGISTRY: readonly CicaScreenDefinition[] = [
     intent: 'Revisar pendientes del profesional',
     primaryAction: 'Abrir tarea',
     layoutProfile: 'census',
+    navVisible: false,
     forbiddenLegacy: true,
   },
   {
@@ -50,6 +54,7 @@ export const EPIS_CICA_SCREEN_REGISTRY: readonly CicaScreenDefinition[] = [
     intent: 'Consultar agenda de guardia',
     primaryAction: 'Ver turno',
     layoutProfile: 'census',
+    navVisible: false,
     forbiddenLegacy: true,
   },
   {

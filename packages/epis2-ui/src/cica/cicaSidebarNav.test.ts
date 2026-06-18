@@ -12,12 +12,12 @@ describe('cicaSidebarNav', () => {
     onNavigate: () => {},
   };
 
-  it('ordena entrada clínica según master tree', () => {
+  it('ordena entrada clínica según master tree (sin stubs diferidos)', () => {
     const items = buildCicaSystemSidebarSections({
       pathname: '/app/buscar',
       onNavigate: () => {},
     })[0]?.items;
-    expect(items?.map((i) => i.id)).toEqual(['search', 'census', 'agenda', 'my-work', 'recent']);
+    expect(items?.map((i) => i.id)).toEqual(['search', 'census']);
   });
 
   it('expone L2 visible y sección Más por separado', () => {

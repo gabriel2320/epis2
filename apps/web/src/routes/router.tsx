@@ -41,9 +41,7 @@ import { CicaPatientSummaryPage } from '../cica/CicaPatientSummaryPage.js';
 import { CicaPatientMedicationsPage } from '../cica/CicaPatientMedicationsPage.js';
 import { CicaPatientAuditPage } from '../cica/CicaPatientAuditPage.js';
 import { CicaPatientAdmissionPage } from '../cica/CicaPatientAdmissionPage.js';
-import { CicaPatientDischargePage } from '../cica/CicaPatientDischargePage.js';
-import { CicaPatientInterconsultasPage } from '../cica/CicaPatientInterconsultasPage.js';
-import { CicaPatientProceduresPage } from '../cica/CicaPatientProceduresPage.js';
+import { CicaPatientDemoSectionRoutePage } from '../cica/CicaPatientDemoSectionRoutePage.js';
 import { CicaPatientEvolutionsPage } from '../cica/CicaPatientEvolutionsPage.js';
 import { CicaPatientDocumentsPage } from '../cica/CicaPatientDocumentsPage.js';
 import { CicaPatientOrdersPage } from '../cica/CicaPatientOrdersPage.js';
@@ -425,19 +423,19 @@ const cicaPatientMedicationsRoute = createRoute({
 const cicaPatientInterconsultasRoute = createRoute({
   getParentRoute: () => cicaLayoutRoute,
   path: '/app/pacientes/$patientId/interconsultas',
-  component: CicaPatientInterconsultasPage,
+  component: CicaPatientDemoSectionRoutePage,
 });
 
 const cicaPatientProceduresRoute = createRoute({
   getParentRoute: () => cicaLayoutRoute,
   path: '/app/pacientes/$patientId/procedimientos',
-  component: CicaPatientProceduresPage,
+  component: CicaPatientDemoSectionRoutePage,
 });
 
 const cicaPatientDischargeRoute = createRoute({
   getParentRoute: () => cicaLayoutRoute,
   path: '/app/pacientes/$patientId/alta',
-  component: CicaPatientDischargePage,
+  component: CicaPatientDemoSectionRoutePage,
 });
 
 const cicaPatientTimelineRoute = createRoute({

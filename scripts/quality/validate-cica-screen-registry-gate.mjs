@@ -15,6 +15,18 @@ if (!registry.includes('EPIS_CICA_SCREEN_REGISTRY')) {
   errors.push('registry sin EPIS_CICA_SCREEN_REGISTRY');
 }
 
+for (const deferredId of ['recent-patients', 'my-work', 'agenda']) {
+  const block = registry.split(`id: '${deferredId}'`)[1]?.slice(0, 280) ?? '';
+  if (!block.includes('navVisible: false')) {
+    errors.push(`registry ${deferredId} debe declarar navVisible: false (MF-PONY-02)`);
+  }
+}
+
+const sidebarNav = readFileSync(join(root, 'packages/epis2-ui/src/cica/cicaSidebarNav.ts'), 'utf8');
+if (!sidebarNav.includes('navVisible !== false')) {
+  errors.push('cicaSidebarNav debe filtrar pantallas con navVisible: false');
+}
+
 const requiredRoutes = [
   '/app/buscar',
   '/app/censo',
