@@ -11,13 +11,17 @@ const router = readFileSync(join(root, 'apps/web/src/routes/router.tsx'), 'utf8'
 const home = readFileSync(join(root, 'apps/web/src/routes/home.ts'), 'utf8');
 const guards = readFileSync(join(root, 'apps/web/src/modes/episModeGuards.ts'), 'utf8');
 
-const clinicalHome = '/espacio/buscar-paciente';
+const legacyHome = '/espacio/buscar-paciente';
+const cicaHome = '/app/buscar';
 
-if (!home.includes(`EPIS2_CLINICAL_HOME = '${clinicalHome}'`)) {
-  errors.push(`home.ts debe definir EPIS2_CLINICAL_HOME = ${clinicalHome}`);
+if (!home.includes('resolveClinicalHome') || !home.includes('EPIS2_CICA_HOME')) {
+  errors.push('home.ts debe resolver home clínico via resolveClinicalHome + EPIS2_CICA_HOME');
 }
-if (!loginPage.includes(clinicalHome) && !loginPage.includes('EPIS2_CLINICAL_HOME')) {
-  errors.push(`LoginPage debe redirigir a ${clinicalHome} (EPIS2_CLINICAL_HOME)`);
+if (!home.includes(legacyHome)) {
+  errors.push(`home.ts debe conservar EPIS2_LEGACY_CLINICAL_HOME (${legacyHome})`);
+}
+if (!loginPage.includes('EPIS2_CLINICAL_HOME')) {
+  errors.push(`LoginPage debe redirigir a EPIS2_CLINICAL_HOME (CICA ${cicaHome} con producto GO)`);
 }
 if (!router.includes('throw redirect({ to: EPIS2_CLINICAL_HOME })')) {
   errors.push('Router login autenticado → EPIS2_CLINICAL_HOME');
