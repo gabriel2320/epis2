@@ -74,6 +74,10 @@ export {
   type CicaScreenBlueprint,
 } from './cicaScreenBlueprint.js';
 export { CicaGeneratedScreen, CicaBlueprintBody } from './CicaGeneratedScreen.js';
+export {
+  createTrivialCicaBlueprint,
+  resolveTrivialCicaBlueprintFromRegistry,
+} from './resolveCicaBlueprint.js';
 export { CicaSidebarThemePanel, type CicaSidebarThemePanelProps } from './CicaSidebarThemePanel.js';
 export {
   CicaSidebar,

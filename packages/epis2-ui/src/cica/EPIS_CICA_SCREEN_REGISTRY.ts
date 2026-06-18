@@ -8,6 +8,9 @@ export type CicaScreenDefinition = {
   layoutProfile: CicaLayoutProfile;
   /** Sidebar L1/L2 — false = ruta viva, sin entrada nav (MF-PONY-02 defer). */
   navVisible?: boolean;
+  /** Sección única grilla 12 — layout trivial derivable (MF-PONY-04). */
+  blueprintSectionId?: string;
+  blueprintHideActionBar?: boolean;
   forbiddenLegacy?: boolean;
   requiredSignals?: readonly string[];
 };
@@ -90,6 +93,7 @@ export const EPIS_CICA_SCREEN_REGISTRY: readonly CicaScreenDefinition[] = [
     intent: 'Revisar historia evolutiva',
     primaryAction: 'Nueva evolución',
     layoutProfile: 'classic-chart',
+    blueprintSectionId: 'evolutions',
     requiredSignals: ['patient', 'demo'],
     forbiddenLegacy: true,
   },
@@ -135,6 +139,7 @@ export const EPIS_CICA_SCREEN_REGISTRY: readonly CicaScreenDefinition[] = [
     intent: 'Revisar receta y fármacos activos',
     primaryAction: 'Nueva prescripción',
     layoutProfile: 'classic-chart',
+    blueprintSectionId: 'medications',
     requiredSignals: ['patient', 'demo'],
     forbiddenLegacy: true,
   },
@@ -144,6 +149,7 @@ export const EPIS_CICA_SCREEN_REGISTRY: readonly CicaScreenDefinition[] = [
     intent: 'Gestionar interconsultas del episodio',
     primaryAction: 'Solicitar interconsulta',
     layoutProfile: 'classic-chart',
+    blueprintSectionId: 'interconsultas',
     requiredSignals: ['patient', 'demo'],
     forbiddenLegacy: true,
   },
@@ -153,6 +159,7 @@ export const EPIS_CICA_SCREEN_REGISTRY: readonly CicaScreenDefinition[] = [
     intent: 'Revisar procedimientos y pabellón',
     primaryAction: 'Registrar procedimiento',
     layoutProfile: 'classic-chart',
+    blueprintSectionId: 'procedures',
     requiredSignals: ['patient', 'demo'],
     forbiddenLegacy: true,
   },
@@ -162,6 +169,7 @@ export const EPIS_CICA_SCREEN_REGISTRY: readonly CicaScreenDefinition[] = [
     intent: 'Preparar epicrisis y alta',
     primaryAction: 'Nueva epicrisis',
     layoutProfile: 'classic-chart',
+    blueprintSectionId: 'discharge',
     requiredSignals: ['patient', 'demo'],
     forbiddenLegacy: true,
   },
@@ -171,6 +179,8 @@ export const EPIS_CICA_SCREEN_REGISTRY: readonly CicaScreenDefinition[] = [
     intent: 'Recorrer línea de tiempo clínica',
     primaryAction: 'Filtrar eventos',
     layoutProfile: 'classic-chart',
+    blueprintSectionId: 'timeline',
+    blueprintHideActionBar: true,
     requiredSignals: ['patient', 'demo'],
     forbiddenLegacy: true,
   },
@@ -180,6 +190,7 @@ export const EPIS_CICA_SCREEN_REGISTRY: readonly CicaScreenDefinition[] = [
     intent: 'Auditar trazas y accesos',
     primaryAction: 'Exportar trazas',
     layoutProfile: 'classic-chart',
+    blueprintSectionId: 'audit',
     requiredSignals: ['patient', 'demo'],
     forbiddenLegacy: true,
   },
@@ -207,6 +218,7 @@ export const EPIS_CICA_SCREEN_REGISTRY: readonly CicaScreenDefinition[] = [
     intent: 'Comprender situación clínica del paciente',
     primaryAction: 'Nueva evolución',
     layoutProfile: 'classic-chart',
+    blueprintSectionId: 'summary',
     requiredSignals: ['patient', 'demo', 'ai-state'],
     forbiddenLegacy: true,
   },
@@ -216,6 +228,7 @@ export const EPIS_CICA_SCREEN_REGISTRY: readonly CicaScreenDefinition[] = [
     intent: 'Revisar y agregar indicaciones',
     primaryAction: 'Agregar indicación',
     layoutProfile: 'classic-chart',
+    blueprintSectionId: 'orders',
     requiredSignals: ['patient', 'demo'],
     forbiddenLegacy: true,
   },
@@ -225,6 +238,7 @@ export const EPIS_CICA_SCREEN_REGISTRY: readonly CicaScreenDefinition[] = [
     intent: 'Revisar resultados y tendencias',
     primaryAction: 'Ver resultados',
     layoutProfile: 'results',
+    blueprintSectionId: 'exams',
     requiredSignals: ['patient', 'demo'],
     forbiddenLegacy: true,
   },
@@ -234,6 +248,7 @@ export const EPIS_CICA_SCREEN_REGISTRY: readonly CicaScreenDefinition[] = [
     intent: 'Revisar documentos clínicos',
     primaryAction: 'Nuevo documento',
     layoutProfile: 'classic-chart',
+    blueprintSectionId: 'documents',
     requiredSignals: ['patient', 'demo'],
     forbiddenLegacy: true,
   },

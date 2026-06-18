@@ -27,6 +27,36 @@ if (!sidebarNav.includes('navVisible !== false')) {
   errors.push('cicaSidebarNav debe filtrar pantallas con navVisible: false');
 }
 
+const cicaIndex = readFileSync(join(root, 'packages/epis2-ui/src/cica/index.ts'), 'utf8');
+if (!cicaIndex.includes('resolveTrivialCicaBlueprintFromRegistry')) {
+  errors.push('cica/index.ts debe exportar resolveTrivialCicaBlueprintFromRegistry');
+}
+for (const screenId of [
+  'patient-summary',
+  'patient-orders',
+  'patient-exams',
+  'patient-documents',
+  'patient-evolutions',
+  'patient-timeline',
+  'patient-medications',
+  'patient-audit',
+  'patient-discharge',
+  'patient-interconsultas',
+  'patient-procedures',
+]) {
+  const block = registry.split(`id: '${screenId}'`)[1]?.slice(0, 320) ?? '';
+  if (!block.includes('blueprintSectionId:')) {
+    errors.push(`registry ${screenId} debe declarar blueprintSectionId (MF-PONY-04)`);
+  }
+}
+const patientBlueprints = readFileSync(
+  join(root, 'apps/web/src/cica/blueprints/patientScreens.blueprint.ts'),
+  'utf8',
+);
+if (!patientBlueprints.includes('withRegistryLayout')) {
+  errors.push('patientScreens.blueprint.ts debe usar withRegistryLayout');
+}
+
 const requiredRoutes = [
   '/app/buscar',
   '/app/censo',
@@ -68,7 +98,6 @@ for (const route of requiredRoutes) {
   }
 }
 
-const cicaIndex = readFileSync(join(root, 'packages/epis2-ui/src/cica/index.ts'), 'utf8');
 for (const token of [
   'CicaAppShell',
   'CicaSidebar',

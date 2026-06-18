@@ -1,10 +1,22 @@
 import { copy } from '@epis2/design-system';
-import type { CicaScreenBlueprint } from '@epis2/epis2-ui';
+import {
+  resolveTrivialCicaBlueprintFromRegistry,
+  type CicaScreenBlueprint,
+  type CicaScreenId,
+} from '@epis2/epis2-ui';
 
-export const PATIENT_SUMMARY_BLUEPRINT: CicaScreenBlueprint = {
-  screenId: 'patient-summary',
-  hideActionBar: false,
-  sections: [{ id: 'summary', span: 12 }],
+function withRegistryLayout(
+  screenId: CicaScreenId,
+  overrides: Partial<CicaScreenBlueprint> = {},
+): CicaScreenBlueprint {
+  const base = resolveTrivialCicaBlueprintFromRegistry(screenId);
+  if (!base) {
+    throw new Error(`registry falta blueprintSectionId: ${screenId}`);
+  }
+  return { ...base, ...overrides };
+}
+
+export const PATIENT_SUMMARY_BLUEPRINT = withRegistryLayout('patient-summary', {
   actions: [
     {
       id: 'new-evolution',
@@ -20,42 +32,15 @@ export const PATIENT_SUMMARY_BLUEPRINT: CicaScreenBlueprint = {
       testId: 'cica-summary-prepare-epicrisis',
     },
   ],
-};
+});
 
-export const PATIENT_ORDERS_BLUEPRINT: CicaScreenBlueprint = {
-  screenId: 'patient-orders',
-  hideActionBar: false,
-  sections: [{ id: 'orders', span: 12 }],
-};
+export const PATIENT_ORDERS_BLUEPRINT = withRegistryLayout('patient-orders');
+export const PATIENT_EXAMS_BLUEPRINT = withRegistryLayout('patient-exams');
+export const PATIENT_DOCUMENTS_BLUEPRINT = withRegistryLayout('patient-documents');
+export const PATIENT_EVOLUTIONS_BLUEPRINT = withRegistryLayout('patient-evolutions');
+export const PATIENT_TIMELINE_BLUEPRINT = withRegistryLayout('patient-timeline');
 
-export const PATIENT_EXAMS_BLUEPRINT: CicaScreenBlueprint = {
-  screenId: 'patient-exams',
-  hideActionBar: false,
-  sections: [{ id: 'exams', span: 12 }],
-};
-
-export const PATIENT_DOCUMENTS_BLUEPRINT: CicaScreenBlueprint = {
-  screenId: 'patient-documents',
-  hideActionBar: false,
-  sections: [{ id: 'documents', span: 12 }],
-};
-
-export const PATIENT_EVOLUTIONS_BLUEPRINT: CicaScreenBlueprint = {
-  screenId: 'patient-evolutions',
-  hideActionBar: false,
-  sections: [{ id: 'evolutions', span: 12 }],
-};
-
-export const PATIENT_TIMELINE_BLUEPRINT: CicaScreenBlueprint = {
-  screenId: 'patient-timeline',
-  hideActionBar: true,
-  sections: [{ id: 'timeline', span: 12 }],
-};
-
-export const PATIENT_MEDICATIONS_BLUEPRINT: CicaScreenBlueprint = {
-  screenId: 'patient-medications',
-  hideActionBar: false,
-  sections: [{ id: 'medications', span: 12 }],
+export const PATIENT_MEDICATIONS_BLUEPRINT = withRegistryLayout('patient-medications', {
   actions: [
     {
       id: 'new-prescription',
@@ -72,12 +57,9 @@ export const PATIENT_MEDICATIONS_BLUEPRINT: CicaScreenBlueprint = {
       testId: 'cica-medications-open-paper',
     },
   ],
-};
+});
 
-export const PATIENT_AUDIT_BLUEPRINT: CicaScreenBlueprint = {
-  screenId: 'patient-audit',
-  hideActionBar: false,
-  sections: [{ id: 'audit', span: 12 }],
+export const PATIENT_AUDIT_BLUEPRINT = withRegistryLayout('patient-audit', {
   actions: [
     {
       id: 'audit-console',
@@ -95,12 +77,9 @@ export const PATIENT_AUDIT_BLUEPRINT: CicaScreenBlueprint = {
       testId: 'cica-audit-open-paper',
     },
   ],
-};
+});
 
-export const PATIENT_DISCHARGE_BLUEPRINT: CicaScreenBlueprint = {
-  screenId: 'patient-discharge',
-  hideActionBar: false,
-  sections: [{ id: 'discharge', span: 12 }],
+export const PATIENT_DISCHARGE_BLUEPRINT = withRegistryLayout('patient-discharge', {
   actions: [
     {
       id: 'new-epicrisis',
@@ -110,8 +89,9 @@ export const PATIENT_DISCHARGE_BLUEPRINT: CicaScreenBlueprint = {
       testId: 'cica-discharge-new-epicrisis',
     },
   ],
-};
+});
 
+/** Multi-sección — layout rico, no derivable del registry trivial. */
 export const PATIENT_ADMISSION_BLUEPRINT: CicaScreenBlueprint = {
   screenId: 'patient-admission',
   hideActionBar: false,
@@ -130,10 +110,7 @@ export const PATIENT_ADMISSION_BLUEPRINT: CicaScreenBlueprint = {
   ],
 };
 
-export const PATIENT_INTERCONSULTAS_BLUEPRINT: CicaScreenBlueprint = {
-  screenId: 'patient-interconsultas',
-  hideActionBar: false,
-  sections: [{ id: 'interconsultas', span: 12 }],
+export const PATIENT_INTERCONSULTAS_BLUEPRINT = withRegistryLayout('patient-interconsultas', {
   actions: [
     {
       id: 'request-consult',
@@ -143,12 +120,9 @@ export const PATIENT_INTERCONSULTAS_BLUEPRINT: CicaScreenBlueprint = {
       testId: 'cica-interconsultas-primary',
     },
   ],
-};
+});
 
-export const PATIENT_PROCEDURES_BLUEPRINT: CicaScreenBlueprint = {
-  screenId: 'patient-procedures',
-  hideActionBar: false,
-  sections: [{ id: 'procedures', span: 12 }],
+export const PATIENT_PROCEDURES_BLUEPRINT = withRegistryLayout('patient-procedures', {
   actions: [
     {
       id: 'register-procedure',
@@ -158,4 +132,4 @@ export const PATIENT_PROCEDURES_BLUEPRINT: CicaScreenBlueprint = {
       testId: 'cica-procedures-primary',
     },
   ],
-};
+});
