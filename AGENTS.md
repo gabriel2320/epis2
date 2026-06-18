@@ -17,6 +17,8 @@
 
 ## Programa activo
 
+**PROG-PRODUCT-MAP** — mapa humano verificable post-PONYTAIL (`EPIS2_ROUTE_MAP.md`, `EPIS2_PRODUCT_CATALOG.md`, `quality:product-map-gate`).
+
 **PROG-PURGE-CICA** — archivar, referenciar, sacar del alcance de agentes.  
 Plan: [`docs/product/EPIS2_PURGE_ARCHIVE_PLAN.md`](docs/product/EPIS2_PURGE_ARCHIVE_PLAN.md) · Perímetro: [`docs/archive/AGENT_SCOPE_EXCLUSIONS.md`](docs/archive/AGENT_SCOPE_EXCLUSIONS.md)
 

@@ -192,6 +192,10 @@
       "type": "file",
       "path": "scripts/quality/validate-product-map-gate.mjs"
     },
+    "quality:purge-doc-08-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-purge-doc-08-gate.mjs"
+    },
     "quality:aesthetic-action-density-gate": {
       "type": "file",
       "path": "scripts/quality/validate-aesthetic-action-density-gate.mjs"

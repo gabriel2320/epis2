@@ -32,7 +32,7 @@ Plan histórico: [`EPIS2_UX_LAB_MODERN_PLAN.md`](../quality/EPIS2_UX_LAB_MODERN_
 
 | Tramo | MF | Objetivo | Gate |
 |-------|-----|----------|------|
-| A | MF-UXLAB-00 | Charter + baseline gates | ✓ PASS · [`baseline`](../../reports/epis2-ux-lab-baseline-2026-06-16.md) |
+| A | MF-UXLAB-00 | Charter + baseline gates | ✓ PASS · [`baseline`](../../reports/archive/2026-06/epis2-ux-lab-baseline-2026-06-16.md) |
 | B | MF-UXLAB-01 | Censo narrativo + Shift Context Strip | ✓ PR #30 · [`tramo-b`](../../reports/epis2-ux-lab-tramo-b-close-2026-06-16.md) |
 | C | MF-UXLAB-02 | Papel + estados visuales unificados | ✓ PR #31 · [`tramo-c`](../../reports/epis2-ux-lab-tramo-c-close-2026-06-16.md) |
 | D | MF-UXLAB-03 | Telemetría piloto + cierre humano | ◐ [`run`](../../reports/archive/2026-06/epis2-ux-lab-run-2026-06-11.md) · [`close`](../../reports/archive/2026-06/epis2-ux-lab-close-2026-06-11.md) · `quality:ux-lab-close` |

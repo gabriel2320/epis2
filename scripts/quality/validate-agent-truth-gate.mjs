@@ -44,8 +44,8 @@ if (!existsSync(agentsPath)) {
   if (!agents.includes('docs/archive/agent-playbooks')) {
     errors.push('AGENTS.md debe referenciar docs/archive/agent-playbooks');
   }
-  if (!agents.includes('PROG-UX-LAB')) {
-    errors.push('AGENTS.md debe declarar programa activo PROG-UX-LAB');
+  if (!agents.includes('PROG-PURGE-CICA') && !agents.includes('PROG-PRODUCT-MAP')) {
+    errors.push('AGENTS.md debe declarar PROG-PURGE-CICA o PROG-PRODUCT-MAP');
   }
 }
 

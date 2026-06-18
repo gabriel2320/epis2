@@ -1,0 +1,31 @@
+{
+  "lote": 7,
+  "date": "2026-06-18",
+  "program": "PROG-PRODUCT-MAP",
+  "mf": "MF-PURGE-DOC-08",
+  "dryRun": false,
+  "moved": [
+    "epis2-ux-lab-baseline-2026-06-16.md",
+    "epis2-ux-lab-tramo-b-close-2026-06-16.md",
+    "epis2-ux-lab-tramo-c-close-2026-06-16.md",
+    "epis2-ux-lab-close-2026-06-16.md",
+    "epis2-uxlab-04-autopilot-close-2026-06-16.md",
+    "epis2-ux-lab-human-signoff-2026-06-16.md",
+    "epis2-m3-human-pilot-2026-06-16.md",
+    "epis2-aesthetic-reset-session-2026-06-16.md",
+    "epis2-aesthetic-architecture-audit-2026-06-16.md",
+    "epis2-aesthetic-reset-close-2026-06-11.md",
+    "epis2-pr-aest-07-cica-l-close.md",
+    "epis2-cica-clean-room-redesign-2026-06-11.md",
+    "epis2-cica-clean-room-redesign-2026-06-16.md",
+    "epis2-session-close-2026-06-11-cica-clean-room.md",
+    "epis2-audit-estado-2026-06-16.md",
+    "epis2-situacion-actual-2026-06-16.md",
+    "epis2-session-close-2026-06-15-consolidation-ola2.md",
+    "epis2-session-close-2026-06-15-consolidation-2.md",
+    "epis2-prog-gobierno-post-rc3-tramo1-close.md",
+    "epis2-prog-deps-hygiene-tramo4-close.md"
+  ],
+  "missing": [],
+  "skippedAlreadyInArchive": []
+}

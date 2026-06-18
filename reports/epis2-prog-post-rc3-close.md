@@ -8,10 +8,10 @@
 
 | Tramo | Programa | Evidencia |
 |-------|----------|-----------|
-| 1 | PROG-GOBIERNO | [`epis2-prog-gobierno-post-rc3-tramo1-close.md`](epis2-prog-gobierno-post-rc3-tramo1-close.md) |
+| 1 | PROG-GOBIERNO | [`epis2-prog-gobierno-post-rc3-tramo1-close.md`](archive/2026-06/epis2-prog-gobierno-post-rc3-tramo1-close.md) |
 | 2 | PROG-DEV-PARITY | [`epis2-prog-dev-parity-tramo2-close.md`](epis2-prog-dev-parity-tramo2-close.md) |
 | 3 | PROG-LEGAL-DISCLAIMER | [`epis2-prog-legal-disclaimer-tramo3-close.md`](epis2-prog-legal-disclaimer-tramo3-close.md) |
-| 4 | PROG-DEPS-HYGIENE | [`epis2-prog-deps-hygiene-tramo4-close.md`](epis2-prog-deps-hygiene-tramo4-close.md) |
+| 4 | PROG-DEPS-HYGIENE | [`epis2-prog-deps-hygiene-tramo4-close.md`](archive/2026-06/epis2-prog-deps-hygiene-tramo4-close.md) |
 | 5 | PROG-SECURITY-PROMOTE | RH-09 [`rh09`](epis2-prog-security-promote-tramo5-rh09.md) · RH-10 [`rh10`](epis2-prog-security-promote-tramo5-rh10.md) · RH-11 [`rh11`](epis2-prog-security-promote-tramo5-rh11.md) |
 
 ---

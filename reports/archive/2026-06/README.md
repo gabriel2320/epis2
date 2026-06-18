@@ -77,3 +77,10 @@ Sesiones jun-10…14 + briefs M3 superseded (plan unificado, NORM, dual-chart, p
 ## Próximo lote
 
 Planes jun-15+ y briefs activos jun-16 (UX-LAB, aesthetic reset) — revisar cuando dejen de ser decisión activa.
+
+## Lote 7 (2026-06-18, PROG-PRODUCT-MAP / MF-PURGE-DOC-08)
+
+UX-LAB cerrado, aesthetic reset, CICA redesign v1/v2, situacion/audit superseded por brújula v1.4.
+
+**Total lote 7:** 20 archivos. Manifiesto: `lote7-manifest.json`.
+

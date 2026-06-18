@@ -44,7 +44,7 @@ Registradas como histórico. **Referencia únicamente** — no retomar como lín
 
 ## Ramas Dependabot
 
-Mantener hasta merge o cierre PR — ver [`epis2-prog-deps-hygiene-tramo4-close.md`](../../reports/epis2-prog-deps-hygiene-tramo4-close.md).
+Mantener hasta merge o cierre PR — ver [`epis2-prog-deps-hygiene-tramo4-close.md`](../../reports/archive/2026-06/epis2-prog-deps-hygiene-tramo4-close.md).
 
 ---
 

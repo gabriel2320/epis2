@@ -2,7 +2,7 @@
 
 **Programa:** `PROG-AESTHETIC-RESET` · **Versión:** 1.0 · **Fecha:** 2026-06-16  
 **Estado:** En curso · **Congelamiento clínico:** vigente  
-**Baseline:** PASS WITH FIXES UX-LAB · informe [`reports/epis2-aesthetic-architecture-audit-2026-06-16.md`](../../reports/epis2-aesthetic-architecture-audit-2026-06-16.md)
+**Baseline:** PASS WITH FIXES UX-LAB · informe [`reports/archive/2026-06/epis2-aesthetic-architecture-audit-2026-06-16.md`](../../reports/archive/2026-06/epis2-aesthetic-architecture-audit-2026-06-16.md)
 
 > **Tesis:** EPIS2 no necesita más funciones; necesita **cirugía composicional**.  
 > **Regla:** Una pantalla = una intención clínica = una acción principal.

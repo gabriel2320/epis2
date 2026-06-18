@@ -209,7 +209,7 @@ Un tramo por sesión agente. Diff mínimo. Sin mega-PR.
 
 ### Tramo A — Charter + auditoría baseline
 
-**MF-UXLAB-00** ✓ **PASS** 2026-06-16 · [`epis2-ux-lab-baseline-2026-06-16.md`](../../reports/epis2-ux-lab-baseline-2026-06-16.md)
+**MF-UXLAB-00** ✓ **PASS** 2026-06-16 · [`epis2-ux-lab-baseline-2026-06-16.md`](../../reports/archive/2026-06/epis2-ux-lab-baseline-2026-06-16.md)
 
 | Entregable | Descripción |
 |------------|-------------|
@@ -217,7 +217,7 @@ Un tramo por sesión agente. Diff mínimo. Sin mega-PR.
 | Checklist corrida | Anexo A al final de este doc |
 | Baseline run | 1 corrida gates + nota delta vs GO 2026-06-04 |
 
-**Archivos:** `docs/quality/*`, `reports/epis2-ux-lab-baseline-*.md`  
+**Archivos:** `docs/quality/*`, `reports/archive/2026-06/epis2-ux-lab-baseline-*.md`  
 **Gate:** `npm run quality:fast`
 
 ---
