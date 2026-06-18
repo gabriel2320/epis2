@@ -1,0 +1,225 @@
+{
+  "version": "1.0.0",
+  "source": "packages/epis2-ui/src/cica/EPIS_CICA_SCREEN_REGISTRY.ts",
+  "generatedAt": "2026-06-18T22:49:49.920Z",
+  "screenCount": 25,
+  "screens": [
+    {
+      "screenId": "patient-search",
+      "route": "/app/buscar",
+      "intent": "Encontrar paciente y abrir ficha",
+      "layoutProfile": "patient-search",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL"
+    },
+    {
+      "screenId": "census",
+      "route": "/app/censo",
+      "intent": "Elegir paciente desde lista clínica",
+      "layoutProfile": "census",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL"
+    },
+    {
+      "screenId": "recent-patients",
+      "route": "/app/recientes",
+      "intent": "Retomar pacientes abiertos recientemente",
+      "layoutProfile": "census",
+      "navVisible": false,
+      "status": "HIDE_STUB"
+    },
+    {
+      "screenId": "my-work",
+      "route": "/app/mi-trabajo",
+      "intent": "Revisar pendientes del profesional",
+      "layoutProfile": "census",
+      "navVisible": false,
+      "status": "HIDE_STUB"
+    },
+    {
+      "screenId": "agenda",
+      "route": "/app/agenda",
+      "intent": "Consultar agenda de guardia",
+      "layoutProfile": "census",
+      "navVisible": false,
+      "status": "HIDE_STUB"
+    },
+    {
+      "screenId": "new-evolution",
+      "route": "/app/pacientes/:patientId/evoluciones/nueva",
+      "intent": "Escribir evolución clínica",
+      "layoutProfile": "letter-document",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL"
+    },
+    {
+      "screenId": "evolution-book",
+      "route": "/app/pacientes/:patientId/evoluciones/libro",
+      "intent": "Leer evoluciones como libro clínico",
+      "layoutProfile": "book-reader",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL"
+    },
+    {
+      "screenId": "evolution-detail",
+      "route": "/app/pacientes/:patientId/evoluciones/:evolutionId",
+      "intent": "Leer una evolución en página carta",
+      "layoutProfile": "letter-document",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL"
+    },
+    {
+      "screenId": "patient-evolutions",
+      "route": "/app/pacientes/:patientId/evoluciones",
+      "intent": "Revisar historia evolutiva",
+      "layoutProfile": "classic-chart",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL",
+      "blueprintSectionId": "evolutions"
+    },
+    {
+      "screenId": "new-prescription",
+      "route": "/app/pacientes/:patientId/indicaciones/nueva",
+      "intent": "Escribir prescripción médica",
+      "layoutProfile": "letter-document",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL"
+    },
+    {
+      "screenId": "new-document",
+      "route": "/app/pacientes/:patientId/documentos/nuevo",
+      "intent": "Emitir certificado médico",
+      "layoutProfile": "letter-document",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL"
+    },
+    {
+      "screenId": "new-epicrisis",
+      "route": "/app/pacientes/:patientId/epicrisis/nueva",
+      "intent": "Redactar epicrisis de alta",
+      "layoutProfile": "letter-document",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL"
+    },
+    {
+      "screenId": "patient-admission",
+      "route": "/app/pacientes/:patientId/ingreso",
+      "intent": "Revisar datos de ingreso clínico",
+      "layoutProfile": "classic-chart",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL"
+    },
+    {
+      "screenId": "patient-medications",
+      "route": "/app/pacientes/:patientId/medicamentos",
+      "intent": "Revisar receta y fármacos activos",
+      "layoutProfile": "classic-chart",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL",
+      "blueprintSectionId": "medications"
+    },
+    {
+      "screenId": "patient-interconsultas",
+      "route": "/app/pacientes/:patientId/interconsultas",
+      "intent": "Gestionar interconsultas del episodio",
+      "layoutProfile": "classic-chart",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL",
+      "blueprintSectionId": "interconsultas"
+    },
+    {
+      "screenId": "patient-procedures",
+      "route": "/app/pacientes/:patientId/procedimientos",
+      "intent": "Revisar procedimientos y pabellón",
+      "layoutProfile": "classic-chart",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL",
+      "blueprintSectionId": "procedures"
+    },
+    {
+      "screenId": "patient-discharge",
+      "route": "/app/pacientes/:patientId/alta",
+      "intent": "Preparar epicrisis y alta",
+      "layoutProfile": "classic-chart",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL",
+      "blueprintSectionId": "discharge"
+    },
+    {
+      "screenId": "patient-timeline",
+      "route": "/app/pacientes/:patientId/timeline",
+      "intent": "Recorrer línea de tiempo clínica",
+      "layoutProfile": "classic-chart",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL",
+      "blueprintSectionId": "timeline"
+    },
+    {
+      "screenId": "patient-audit",
+      "route": "/app/pacientes/:patientId/auditoria",
+      "intent": "Auditar trazas y accesos",
+      "layoutProfile": "classic-chart",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL",
+      "blueprintSectionId": "audit"
+    },
+    {
+      "screenId": "paper-day",
+      "route": "/app/pacientes/:patientId/papel/dia/:date",
+      "intent": "Leer hoja clínica diaria",
+      "layoutProfile": "paper-mode",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL"
+    },
+    {
+      "screenId": "paper-book",
+      "route": "/app/pacientes/:patientId/papel/libro",
+      "intent": "Recorrer libro clínico del episodio",
+      "layoutProfile": "paper-mode",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL"
+    },
+    {
+      "screenId": "patient-summary",
+      "route": "/app/pacientes/:patientId/resumen",
+      "intent": "Comprender situación clínica del paciente",
+      "layoutProfile": "classic-chart",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL",
+      "blueprintSectionId": "summary"
+    },
+    {
+      "screenId": "patient-orders",
+      "route": "/app/pacientes/:patientId/indicaciones",
+      "intent": "Revisar y agregar indicaciones",
+      "layoutProfile": "classic-chart",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL",
+      "blueprintSectionId": "orders"
+    },
+    {
+      "screenId": "patient-exams",
+      "route": "/app/pacientes/:patientId/examenes",
+      "intent": "Revisar resultados y tendencias",
+      "layoutProfile": "results",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL",
+      "blueprintSectionId": "exams"
+    },
+    {
+      "screenId": "patient-documents",
+      "route": "/app/pacientes/:patientId/documentos",
+      "intent": "Revisar documentos clínicos",
+      "layoutProfile": "classic-chart",
+      "navVisible": true,
+      "status": "KEEP_CANONICAL",
+      "blueprintSectionId": "documents"
+    }
+  ],
+  "fallback": {
+    "status": "KEEP_FALLBACK",
+    "prefix": "/espacio/*",
+    "note": "VITE_ENABLE_CICA_UI=false — no es home operativo"
+  },
+  "checksum": "e582d887b337"
+}

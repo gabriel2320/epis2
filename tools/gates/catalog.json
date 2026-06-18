@@ -180,6 +180,10 @@
       "type": "file",
       "path": "scripts/quality/validate-ponytail-gate-archive-gate.mjs"
     },
+    "quality:route-map-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-route-map-gate.mjs"
+    },
     "quality:aesthetic-action-density-gate": {
       "type": "file",
       "path": "scripts/quality/validate-aesthetic-action-density-gate.mjs"

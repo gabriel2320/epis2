@@ -93,10 +93,13 @@ function getBrujulaProgram(root) {
   const path = join(root, 'docs/EPIS2_CURRENT_STATE.md');
   if (!existsSync(path)) return null;
   const text = readFileSync(path, 'utf8');
+  const producto = text.match(/\*\*Programa activo \(producto\):\*\*\s*\*\*(PROG-[^*]+)\*\*/);
+  if (producto) return producto[1].trim();
   const m = text.match(/\*\*Programa activo:\*\*\s*(.+)/);
   if (!m) return null;
   return m[1]
     .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/\*\*/g, '')
     .replace(/\s+/g, ' ')
     .trim();
 }
@@ -166,6 +169,9 @@ export function getTableroState(root) {
   const nextSteps = [...openTramos];
   if (brujulaProgram?.includes('merge') || brujulaProgram?.includes('CICA')) {
     nextSteps.push('Merge feat/prog-aesthetic-reset-close → master (CICA)');
+  }
+  if (brujulaProgram?.includes('PRODUCT-MAP')) {
+    nextSteps.push('PROG-PRODUCT-MAP: route map · product catalog · gates anti-drift');
   }
   if (brujulaProgram?.includes('PURGE')) {
     nextSteps.push('PROG-PURGE-CICA: archivar · referenciar · perímetro agente');

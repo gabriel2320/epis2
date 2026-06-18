@@ -119,7 +119,7 @@ Atajos: `quality:fast` · `dev:agent:audit-diff` · `dev:rapid -- --skip-audit`
 | Doc | Cuándo |
 |-----|--------|
 | [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) | **Brújula módulos y consolidación** |
-| [`EPIS2_ROUTE_MAP.md`](product/EPIS2_ROUTE_MAP.md) | Rutas CICA — **pendiente MF-CATALOG-00** |
+| [`EPIS2_ROUTE_MAP.md`](product/EPIS2_ROUTE_MAP.md) | Rutas CICA — generado desde registry |
 | [`EPIS2_PRODUCT_CATALOG.md`](product/EPIS2_PRODUCT_CATALOG.md) | Objetos clínico — **pendiente MF-CATALOG-01** |
 | [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md) | **No planificar** — índice humano |
 | [`EPIS2_DEV_VELOCITY.md`](dev/EPIS2_DEV_VELOCITY.md) | Gates por rol |

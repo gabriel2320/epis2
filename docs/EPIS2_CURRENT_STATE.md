@@ -33,7 +33,7 @@ El problema operativo principal (**superficie npm/gates**) se abordó con:
 | **Fallback legacy** | `/espacio/*` | `VITE_ENABLE_CICA_UI=false`; no expandir como home |
 | **Prohibido** | dashboard / three modes como home | secundarios OK; gates `command-center-home`, CICA clean room |
 
-SoT técnico rutas CICA: `packages/epis2-ui/src/cica/EPIS_CICA_SCREEN_REGISTRY.ts` · mapa humano pendiente: `docs/product/EPIS2_ROUTE_MAP.md` (MF-CATALOG-00).
+SoT técnico rutas CICA: `packages/epis2-ui/src/cica/EPIS_CICA_SCREEN_REGISTRY.ts` · mapa humano: [`EPIS2_ROUTE_MAP.md`](product/EPIS2_ROUTE_MAP.md) · artefacto gate: `tools/catalog/route-map.generated.json`.
 
 ---
 
@@ -235,7 +235,7 @@ Todo cambio debe mejorar claridad o mantenibilidad sin alterar flujo clínico m�
 | [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md) | Packages, services, scripts |
 | [`VISION_EPIS2.md`](product/VISION_EPIS2.md) | North star + matriz dominio |
 | [`AGENT_CONTEXT_MINIMAL.md`](AGENT_CONTEXT_MINIMAL.md) | Loop agente |
-| [`product/EPIS2_ROUTE_MAP.md`](product/EPIS2_ROUTE_MAP.md) | Mapa rutas CICA (MF-CATALOG-00, pendiente) |
+| [`product/EPIS2_ROUTE_MAP.md`](product/EPIS2_ROUTE_MAP.md) | Mapa rutas CICA (MF-CATALOG-00 ✓) |
 | [`product/EPIS2_PRODUCT_CATALOG.md`](product/EPIS2_PRODUCT_CATALOG.md) | Objetos clínicos (MF-CATALOG-01, pendiente) |
 | [`SCOPE_V1.md`](SCOPE_V1.md) / [`NON_GOALS.md`](NON_GOALS.md) | Límites MVP |
 | [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-prog-ficha-first-close-2026.md) | Último cierre producto |
