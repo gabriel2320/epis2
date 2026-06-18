@@ -12,7 +12,7 @@ const required = [
   ['sequential retrieval', 'services/local-ai/src/rag/sequentialRetrieval.ts'],
   ['assist citations', 'services/local-ai/src/rag/assistCitations.ts'],
   ['no-hallucination guard', 'services/local-ai/src/rag/noHallucinationGuard.ts'],
-  ['rag index', 'services/local-ai/src/rag/index.ts'],
+  ['assemble context', 'services/local-ai/src/rag/assembleContext.ts'],
   ['demo-005 fixture', 'packages/test-fixtures/src/demoRagChunks.ts'],
   ['closure im-03', 'reports/archive/2026-06/epis2-mf-im-03-rag-incremental.md'],
   ['closure im-04', 'reports/archive/2026-06/epis2-mf-im-04-assist-citas.md'],

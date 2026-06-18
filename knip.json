@@ -16,7 +16,7 @@
         "vitest.config.ts",
         "vitest.global-setup.ts",
         "vitest.setup.ts",
-        "scripts/**/*.{mjs,js,cjs}",
+        "scripts/**/*.{mjs,js,cjs,ts}",
         "tools/**/*.{mjs,js,cjs}",
         "database/drizzle.config.ts"
       ],
