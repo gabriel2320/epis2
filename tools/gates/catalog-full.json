@@ -220,6 +220,10 @@
       "type": "file",
       "path": "scripts/quality/validate-lab-dictionary-gate.mjs"
     },
+    "quality:clinical-rules-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-rules-gate.mjs"
+    },
     "quality:cica-action-density-gate": {
       "type": "file",
       "path": "scripts/quality/validate-cica-action-density-gate.mjs"
