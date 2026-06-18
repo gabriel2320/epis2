@@ -1,6 +1,7 @@
 /** Home clínica — censo/búsqueda (PROG-FICHA-FIRST). */
 import { isCicaUiEnabled } from '../dev/cicaUiEnv.js';
 
+/** @legacy-runtime Home cuando CICA desactivado — `/espacio/buscar-paciente`. */
 export const EPIS2_LEGACY_CLINICAL_HOME = '/espacio/buscar-paciente' as const;
 export const EPIS2_CICA_HOME = '/app/buscar' as const;
 

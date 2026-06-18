@@ -121,7 +121,7 @@ IA degrade (Ollama off = UX completa)
 
 ## Próximo paso (cuando se autorice)
 
-1. MF-PURGE-05: comentarios `@legacy` en entrypoints `/espacio/*` sin redirect CICA.
+1. MF-PURGE-05 ✓ — `@legacy-runtime` en entrypoints `/espacio/*` + `cicaLegacyRedirects.ts`.
 2. Pantallas CICA pendientes: epicrisis, laboratorio, imagenología, UCI (priorizar según golden journey).
 3. Matriz tramo A–K fila a fila con estado `demo|scaffold|dead` (hoja ampliación).
 

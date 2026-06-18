@@ -38,6 +38,15 @@ import { CicaAppLayout } from '../cica/CicaAppLayout.js';
 import { buildCicaRoutesFromRegistry } from '../cica/buildCicaRoutesFromRegistry.js';
 import { EPIS2_LEGACY_CLINICAL_HOME } from './home.js';
 import {
+  redirectLegacyCertificateToCicaIfEnabled,
+  redirectLegacyEpicrisisToCicaIfEnabled,
+  redirectLegacyEvolutionToCicaIfEnabled,
+  redirectLegacyFichaToCicaIfEnabled,
+  redirectLegacyFormToCicaPatientIfEnabled,
+  redirectLegacyPatientSearchToCicaIfEnabled,
+  redirectLegacyPrescriptionToCicaIfEnabled,
+} from './cicaLegacyRedirects.js';
+import {
   parseDashboardSearch,
   parseClinicalFormSearch,
   parseCommandSearch,
@@ -69,114 +78,6 @@ async function requireSession() {
   if (!session) {
     throw redirect({ to: '/login' });
   }
-}
-
-/**
- * PR6 — legacy `/espacio/*` → CICA `/app/*` solo cuando `VITE_ENABLE_CICA_UI=true`.
- * Sin redirect si CICA desactivado. draftId se preserva en search cuando aplica.
- *
- * Mapa de redirects:
- * - /espacio/buscar-paciente → /app/buscar
- * - /espacio/ficha?patientId= → /app/pacientes/$patientId/resumen
- * - /espacio/resumen?patientId= → /app/pacientes/$patientId/resumen
- * - /espacio/evolucion?patientId= → /app/pacientes/$patientId/evoluciones/nueva
- * - /espacio/receta?patientId= → /app/pacientes/$patientId/indicaciones/nueva
- * - /espacio/certificado?patientId= → /app/pacientes/$patientId/documentos/nuevo
- * - /espacio/resultados?patientId= → /app/pacientes/$patientId/examenes
- * - /espacio/laboratorio?patientId= → /app/pacientes/$patientId/examenes
- * - /espacio/imagenologia?patientId= → /app/pacientes/$patientId/examenes
- * - /espacio/interconsulta?patientId= → /app/pacientes/$patientId/documentos
- * - /espacio/procedimiento?patientId= → /app/pacientes/$patientId/indicaciones
- * - /espacio/enfermeria?patientId= → /app/pacientes/$patientId/indicaciones
- * - /espacio/alergia?patientId= → /app/pacientes/$patientId/resumen
- * - /espacio/problema?patientId= → /app/pacientes/$patientId/resumen
- * - /espacio/ingreso?patientId= → /app/pacientes/$patientId/resumen
- * - /espacio/ambulatorio?patientId= → /app/pacientes/$patientId/resumen
- * - /espacio/farmacia?patientId= → /app/pacientes/$patientId/indicaciones
- * - /espacio/mar?patientId= → /app/pacientes/$patientId/indicaciones
- * - /espacio/conciliacion?patientId= → /app/pacientes/$patientId/indicaciones
- * - /espacio/traslado?patientId= → /app/pacientes/$patientId/resumen
- * - /espacio/informe-interconsulta?patientId= → /app/pacientes/$patientId/documentos
- * - /espacio/epicrisis — sin redirect (pantalla CICA pendiente)
- */
-function redirectLegacyPatientSearchToCicaIfEnabled() {
-  if (isCicaUiEnabled()) {
-    throw redirect({ to: '/app/buscar' });
-  }
-}
-
-function redirectLegacyFichaToCicaIfEnabled(search: Record<string, unknown>) {
-  if (!isCicaUiEnabled()) return;
-  const { patientId } = parseClinicalPatientSearch(search);
-  if (patientId) {
-    throw redirect({
-      to: '/app/pacientes/$patientId/resumen',
-      params: { patientId },
-    });
-  }
-  throw redirect({ to: '/app/buscar' });
-}
-
-function redirectLegacyEvolutionToCicaIfEnabled(search: Record<string, unknown>) {
-  redirectLegacyClinicalFormToCicaIfEnabled(search, '/app/pacientes/$patientId/evoluciones/nueva');
-}
-
-type CicaPatientRedirectTarget =
-  | '/app/pacientes/$patientId/resumen'
-  | '/app/pacientes/$patientId/indicaciones'
-  | '/app/pacientes/$patientId/documentos'
-  | '/app/pacientes/$patientId/examenes';
-
-type CicaClinicalFormRedirectTarget =
-  | '/app/pacientes/$patientId/evoluciones/nueva'
-  | '/app/pacientes/$patientId/indicaciones/nueva'
-  | '/app/pacientes/$patientId/documentos/nuevo'
-  | '/app/pacientes/$patientId/epicrisis/nueva';
-
-/** PR6 — formularios legacy con patientId (+ draftId opcional) → formulario CICA. */
-function redirectLegacyClinicalFormToCicaIfEnabled(
-  search: Record<string, unknown>,
-  to: CicaClinicalFormRedirectTarget,
-) {
-  if (!isCicaUiEnabled()) return;
-  const parsed = parseClinicalFormSearch(search);
-  if (parsed.patientId) {
-    throw redirect({
-      to,
-      params: { patientId: parsed.patientId },
-      ...(parsed.draftId ? { search: { draftId: parsed.draftId } } : {}),
-    });
-  }
-  throw redirect({ to: '/app/buscar' });
-}
-
-/** PR6 — formularios legacy con patientId (+ draftId opcional) → sección CICA equivalente (lista). */
-function redirectLegacyFormToCicaPatientIfEnabled(
-  search: Record<string, unknown>,
-  to: CicaPatientRedirectTarget,
-) {
-  if (!isCicaUiEnabled()) return;
-  const parsed = parseClinicalFormSearch(search);
-  if (parsed.patientId) {
-    throw redirect({
-      to,
-      params: { patientId: parsed.patientId },
-      ...(parsed.draftId ? { search: { draftId: parsed.draftId } } : {}),
-    });
-  }
-  throw redirect({ to: '/app/buscar' });
-}
-
-function redirectLegacyPrescriptionToCicaIfEnabled(search: Record<string, unknown>) {
-  redirectLegacyClinicalFormToCicaIfEnabled(search, '/app/pacientes/$patientId/indicaciones/nueva');
-}
-
-function redirectLegacyCertificateToCicaIfEnabled(search: Record<string, unknown>) {
-  redirectLegacyClinicalFormToCicaIfEnabled(search, '/app/pacientes/$patientId/documentos/nuevo');
-}
-
-function redirectLegacyEpicrisisToCicaIfEnabled(search: Record<string, unknown>) {
-  redirectLegacyClinicalFormToCicaIfEnabled(search, '/app/pacientes/$patientId/epicrisis/nueva');
 }
 
 const rootRoute = createRootRoute({
@@ -272,6 +173,7 @@ const dashboardModeRoute = createRoute({
   beforeLoad: requireSession,
 });
 
+/** @legacy-runtime Layout y rutas `/espacio/*` — fallback clínico hasta CICA-L GO (PROG-PURGE-CICA). */
 const clinicalLayoutRoute = createRoute({
   getParentRoute: () => rootRoute,
   id: 'clinical-shell',

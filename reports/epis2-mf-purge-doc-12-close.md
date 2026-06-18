@@ -29,4 +29,4 @@ Manifiesto: `reports/archive/2026-06/lote12-manifest.json`
 
 ## Próximo paso
 
-**MF-PURGE-05** — `@legacy-runtime` en `/espacio/*`.
+**MF-PURGE-09** — acotar imports `design-agents/` en shell clínico productivo.

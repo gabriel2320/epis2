@@ -1,3 +1,4 @@
+/** @legacy-runtime Ficha paciente — `/espacio/ficha` hasta CICA-L GO. No expandir; ver PROG-PURGE-CICA. */
 import { copy } from '@epis2/design-system';
 import { detectChronicFocus } from '@epis2/clinical-forms';
 import { getProbablePatientActionChips, inferPatientCareSetting } from '@epis2/command-registry';

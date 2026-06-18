@@ -224,6 +224,10 @@
       "type": "file",
       "path": "scripts/quality/validate-purge-doc-12-gate.mjs"
     },
+    "quality:purge-05-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-purge-05-gate.mjs"
+    },
     "quality:aesthetic-action-density-gate": {
       "type": "file",
       "path": "scripts/quality/validate-aesthetic-action-density-gate.mjs"
