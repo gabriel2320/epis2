@@ -8,9 +8,12 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
-const reportPath = join(root, 'reports/knip-audit-product-map-baseline-2026-06-18.md');
+const reportPath = join(
+  root,
+  'reports/archive/2026-06/knip-audit-product-map-baseline-2026-06-18.md',
+);
 if (!existsSync(reportPath)) {
-  errors.push('falta reports/knip-audit-product-map-baseline-2026-06-18.md');
+  errors.push('falta reports/archive/2026-06/knip-audit-product-map-baseline-2026-06-18.md');
 }
 
 const run = spawnSync('npm', ['run', 'knip:audit', '--', '--reporter', 'compact'], {

@@ -10,11 +10,14 @@ const errors = [];
 
 const baselineExports = 116;
 const loteMax = 10;
-const loteReport = join(root, 'reports/knip-audit-product-map-lote1-2026-06-18.md');
+const loteReport = join(
+  root,
+  'reports/archive/2026-06/knip-audit-product-map-lote1-2026-06-18.md',
+);
 const agentsFile = join(root, 'apps/web/src/design-agents/dashboardDesignAgents.ts');
 
 if (!existsSync(loteReport)) {
-  errors.push('falta reports/knip-audit-product-map-lote1-2026-06-18.md');
+  errors.push('falta reports/archive/2026-06/knip-audit-product-map-lote1-2026-06-18.md');
 }
 
 const run = spawnSync('npm', ['run', 'knip:audit', '--', '--reporter', 'compact'], {

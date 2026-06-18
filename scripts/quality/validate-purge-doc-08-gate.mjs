@@ -29,10 +29,7 @@ if (!existsSync(manifestPath)) {
 }
 
 const keepInRoot = [
-  'epis2-mf-brujula-00-close.md',
-  'epis2-mf-catalog-00-close.md',
-  'epis2-mf-catalog-01-close.md',
-  'epis2-mf-catalog-gate-01-close.md',
+  'epis2-prog-product-map-close.md',
   'epis2-mf-pony-gate-01-close.md',
   'knip-audit-pony-2026-06-18.md',
 ];

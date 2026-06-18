@@ -155,12 +155,12 @@ Evidencia: `reports/epis2-mf-pony-gate-01-close.md`, `reports/archive/2026-06/ep
 | `packages/epis2-ui/cica/CICA_CHART_TAB_REGISTRY.ts` | delete-later | SoT: `clinicalChartTabRegistry.ts` |
 | `apps/api/src/db.ts` | delete-later | Shim; usar `db/client.js` |
 
-**Knip (PROG-PRODUCT-MAP ✓):** KNIP-04 **0** · exports **114** tras MF-KNIP-05-A/B · `reports/knip-audit-product-map-lote1-2026-06-18.md`.
+**Knip (PROG-PRODUCT-MAP ✓):** KNIP-04 **0** · exports **114** · audits en `reports/archive/2026-06/knip-audit-product-map-*`.
 
 ---
 
 ## Próximo paso inventario
 
-1. **PROG-PURGE-CICA** — MF-PURGE-DOC-11 ✓ lote prog closes · MF-PURGE-05 o DOC-12.
+1. **PROG-PURGE-CICA** — MF-PURGE-DOC-12 ✓ hub product-map · **MF-PURGE-05**.
 2. Completar filas **tramo A–K** con estado demo/scaffold/dead (hoja aparte o ampliar esta tabla).
 3. Tag **`epis2-base-v0.1`** ✓ (MF-RELEASE-BASE-01 · [`epis2-prog-product-map-close.md`](../reports/epis2-prog-product-map-close.md)).

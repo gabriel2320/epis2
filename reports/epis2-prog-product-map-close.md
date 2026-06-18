@@ -14,14 +14,14 @@ El código ya tenía SoT técnico (`EPIS_CICA_SCREEN_REGISTRY`, `@epis2/clinical
 
 | MF | Evidencia | Entregable |
 |----|-----------|------------|
-| MF-BRÚJULA-00 | [`epis2-mf-brujula-00-close.md`](epis2-mf-brujula-00-close.md) | CURRENT_STATE v1.4+ · entrada CICA `/app/buscar` |
-| MF-CATALOG-00 | [`epis2-mf-catalog-00-close.md`](epis2-mf-catalog-00-close.md) | `EPIS2_ROUTE_MAP.md` · `route-map.generated.json` · `quality:route-map-gate` |
-| MF-CATALOG-01 | [`epis2-mf-catalog-01-close.md`](epis2-mf-catalog-01-close.md) | `EPIS2_PRODUCT_CATALOG.md` · `quality:product-catalog-minimum-gate` |
-| MF-CATALOG-GATE-01 | [`epis2-mf-catalog-gate-01-close.md`](epis2-mf-catalog-gate-01-close.md) | `quality:product-map-gate` |
-| MF-PURGE-DOC-08 | [`epis2-mf-purge-doc-08-close.md`](epis2-mf-purge-doc-08-close.md) | Archive lote 7 reportes · `quality:purge-doc-08-gate` |
-| MF-KNIP-05-A | [`epis2-mf-knip-05a-close.md`](epis2-mf-knip-05a-close.md) | Baseline exports triage · `quality:knip-05-a-gate` |
-| MF-KNIP-05-B | [`epis2-mf-knip-05b-close.md`](epis2-mf-knip-05b-close.md) | Lote 1 safe (−8 símbolos design-agents) · `quality:knip-05-b-gate` |
-| MF-RELEASE-BASE-01 | este doc | Tag `epis2-base-v0.1` · `quality:release-base-01-gate` |
+| MF-BRÚJULA-00 | [`archive/2026-06/epis2-mf-brujula-00-close.md`](archive/2026-06/epis2-mf-brujula-00-close.md) | CURRENT_STATE v1.4+ · entrada CICA `/app/buscar` |
+| MF-CATALOG-00 | [`archive/2026-06/epis2-mf-catalog-00-close.md`](archive/2026-06/epis2-mf-catalog-00-close.md) | `EPIS2_ROUTE_MAP.md` · `route-map.generated.json` · `quality:route-map-gate` |
+| MF-CATALOG-01 | [`archive/2026-06/epis2-mf-catalog-01-close.md`](archive/2026-06/epis2-mf-catalog-01-close.md) | `EPIS2_PRODUCT_CATALOG.md` · `quality:product-catalog-minimum-gate` |
+| MF-CATALOG-GATE-01 | [`archive/2026-06/epis2-mf-catalog-gate-01-close.md`](archive/2026-06/epis2-mf-catalog-gate-01-close.md) | `quality:product-map-gate` |
+| MF-PURGE-DOC-08 | [`archive/2026-06/epis2-mf-purge-doc-08-close.md`](archive/2026-06/epis2-mf-purge-doc-08-close.md) | Archive lote 7 reportes · `quality:purge-doc-08-gate` |
+| MF-KNIP-05-A | [`archive/2026-06/epis2-mf-knip-05a-close.md`](archive/2026-06/epis2-mf-knip-05a-close.md) | Baseline exports triage · `quality:knip-05-a-gate` |
+| MF-KNIP-05-B | [`archive/2026-06/epis2-mf-knip-05b-close.md`](archive/2026-06/epis2-mf-knip-05b-close.md) | Lote 1 safe (−8 símbolos design-agents) · `quality:knip-05-b-gate` |
+| MF-RELEASE-BASE-01 | [`archive/2026-06/epis2-mf-release-base-01-close.md`](archive/2026-06/epis2-mf-release-base-01-close.md) | Tag `epis2-base-v0.1` · `quality:release-base-01-gate` |
 
 ---
 
@@ -47,6 +47,8 @@ El código ya tenía SoT técnico (`EPIS_CICA_SCREEN_REGISTRY`, `@epis2/clinical
 | Unused files / deps / unlisted / duplicates | **0** (KNIP-04) |
 | Unused exports | **114** (triage conservador; no poda masiva) |
 | Unused exported types | **68** |
+
+Audits: [`archive/2026-06/knip-audit-product-map-baseline-2026-06-18.md`](archive/2026-06/knip-audit-product-map-baseline-2026-06-18.md) · [`archive/2026-06/knip-audit-product-map-lote1-2026-06-18.md`](archive/2026-06/knip-audit-product-map-lote1-2026-06-18.md)
 
 ---
 

@@ -146,7 +146,7 @@ Plan detallado: [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-pla
 | OpenMRS / Carbon / EPIS overlay | Fósil | No | **Archive** — solo `migration/` + audit scripts |
 | `scripts/dev-agent` OpenClaw | Dev tooling | No | **Tools** — no producto clínico |
 | ~240 gates `validate-*` | Histórico MF | No | **Consolidar** — 76 activos · 247 archived · `PROG-PONYTAIL-TRIM` |
-| ~39 `reports/*.md` (raíz) | Activo + histórico reciente | No | **Archive** ✓ lotes 6–11 · **537+** en `reports/archive/2026-06/` · meta <50 · plan [`EPIS2_PURGE_ARCHIVE_PLAN.md`](product/EPIS2_PURGE_ARCHIVE_PLAN.md) |
+| ~30 `reports/*.md` (raíz) | Activo + histórico reciente | No | **Archive** ✓ lotes 6–12 · hub `epis2-prog-product-map-close.md` · plan [`EPIS2_PURGE_ARCHIVE_PLAN.md`](product/EPIS2_PURGE_ARCHIVE_PLAN.md) |
 
 ---
 

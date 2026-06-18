@@ -28,7 +28,7 @@ Reportes históricos se mueven a **`reports/archive/YYYY-MM/`** sin borrar evide
 
 Reglas: [`docs/DOCUMENTATION_GOVERNANCE.md`](../docs/DOCUMENTATION_GOVERNANCE.md)
 
-Archivo inicial: [`archive/2026-06/README.md`](archive/2026-06/README.md) — lotes 1–11 (537+ archivos) en `archive/2026-06/`.
+Archivo inicial: [`archive/2026-06/README.md`](archive/2026-06/README.md) — lotes 1–12 (547+ archivos) en `archive/2026-06/`.
 
 ---
 

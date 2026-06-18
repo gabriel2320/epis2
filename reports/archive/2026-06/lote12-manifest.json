@@ -1,0 +1,21 @@
+{
+  "lote": 12,
+  "date": "2026-06-18",
+  "program": "PROG-PURGE-CICA",
+  "mf": "MF-PURGE-DOC-12",
+  "dryRun": false,
+  "moved": [
+    "epis2-mf-brujula-00-close.md",
+    "epis2-mf-catalog-00-close.md",
+    "epis2-mf-catalog-01-close.md",
+    "epis2-mf-catalog-gate-01-close.md",
+    "epis2-mf-knip-05a-close.md",
+    "epis2-mf-knip-05b-close.md",
+    "epis2-mf-release-base-01-close.md",
+    "epis2-mf-purge-doc-08-close.md",
+    "knip-audit-product-map-baseline-2026-06-18.md",
+    "knip-audit-product-map-lote1-2026-06-18.md"
+  ],
+  "missing": [],
+  "skippedAlreadyInArchive": []
+}
