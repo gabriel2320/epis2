@@ -58,7 +58,7 @@ jobs:
     env:
       DATABASE_URL: postgresql://epis2_app:epis2@localhost:5432/epis2
       VITE_ENABLE_DUAL_CHART_MODES: 'true'
-      VITE_ENABLE_CICA_UI: 'false'
+      VITE_DISABLE_CICA_UI: 'true'
       VITE_EPIS2_LOAD_DEV_FIXTURES: 'true'
       CI: 'true'
     steps:
