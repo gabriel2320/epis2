@@ -54,3 +54,9 @@ export type {
   EpisWorkspaceRailItemDef,
   EpisClinicalWorkspaceDefinition,
 } from './clinical-workspace.types.js';
+export {
+  EpisClinicalList,
+  type EpisClinicalListItem,
+  type EpisClinicalListProps,
+  type EpisClinicalListVisualProfile,
+} from './EpisClinicalList.js';

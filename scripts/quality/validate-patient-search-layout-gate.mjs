@@ -80,6 +80,24 @@ if (
   errors.push('copy es.ts sin bloque patientSearch');
 }
 
+const resultsComponent = readFileSync(
+  join(root, 'apps/web/src/components/patient-search/PatientSearchResults.tsx'),
+  'utf8',
+);
+if (!resultsComponent.includes('EpisClinicalList')) {
+  errors.push('PatientSearchResults debe usar EpisClinicalList (MF-PONY-05)');
+}
+if (resultsComponent.includes('function resultMeta')) {
+  errors.push('PatientSearchResults no debe duplicar patientListRowMeta');
+}
+const rowPresentation = readFileSync(
+  join(root, 'apps/web/src/clinical/patientListRowPresentation.ts'),
+  'utf8',
+);
+if (!rowPresentation.includes('export function patientListRowMeta')) {
+  errors.push('Falta patientListRowPresentation.ts con patientListRowMeta compartido');
+}
+
 if (errors.length) {
   console.error('patient-search-layout-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
