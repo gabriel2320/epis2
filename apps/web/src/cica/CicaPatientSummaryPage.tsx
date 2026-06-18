@@ -1,5 +1,3 @@
-import { copy } from '@epis2/design-system';
-import type { ClinicalLayoutAction } from '@epis2/epis2-ui';
 import { ClassicChartSummaryPanel } from '../components/chart/ClassicChartSummaryPanel.js';
 import { CicaPatientBlueprintPage } from './CicaPatientBlueprintPage.js';
 import { PATIENT_SUMMARY_BLUEPRINT } from './blueprints/patientScreens.blueprint.js';
@@ -13,26 +11,9 @@ export function CicaPatientSummaryPage() {
 
   if (!patientId) return null;
 
-  const actions: ClinicalLayoutAction[] = [
-    {
-      id: 'new-evolution',
-      label: copy.clinicalSummary.registerEvolution,
-      kind: 'primary',
-      onClick: () => go('new-evolution', { patientId }),
-    },
-    {
-      id: 'new-epicrisis',
-      label: copy.inpatient.prepareDischarge,
-      kind: 'secondary',
-      onClick: () => go('new-epicrisis', { patientId }),
-      testId: 'cica-summary-prepare-epicrisis',
-    },
-  ];
-
   return (
     <CicaPatientBlueprintPage
       blueprint={PATIENT_SUMMARY_BLUEPRINT}
-      actions={actions}
       testId="cica-patient-summary-screen"
       slots={{
         summary: (
