@@ -146,7 +146,7 @@ Plan detallado: [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-pla
 | OpenMRS / Carbon / EPIS overlay | Fósil | No | **Archive** — solo `migration/` + audit scripts |
 | `scripts/dev-agent` OpenClaw | Dev tooling | No | **Tools** — no producto clínico |
 | ~240 gates `validate-*` | Histórico MF | No | **Consolidar** — 76 activos · 247 archived · `PROG-PONYTAIL-TRIM` |
-| ~62 `reports/*.md` (raíz) | Activo + histórico reciente | No | **Archive** ✓ lotes 6–10 · **513+** en `reports/archive/2026-06/` · meta <70 · plan [`EPIS2_PURGE_ARCHIVE_PLAN.md`](product/EPIS2_PURGE_ARCHIVE_PLAN.md) |
+| ~39 `reports/*.md` (raíz) | Activo + histórico reciente | No | **Archive** ✓ lotes 6–11 · **537+** en `reports/archive/2026-06/` · meta <50 · plan [`EPIS2_PURGE_ARCHIVE_PLAN.md`](product/EPIS2_PURGE_ARCHIVE_PLAN.md) |
 
 ---
 
@@ -194,7 +194,7 @@ Prohibido en fase consolidación: nuevos registries, nuevo home, auto-aprobació
 
 ## Ola 2 — Gobierno + hardening (cerrada 2026-06-16)
 
-Evidencia: [`epis2-prog-consolidate-ola2-close-2026.md`](../reports/epis2-prog-consolidate-ola2-close-2026.md). Congelamiento: [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) — **no mega-cambio** ni features clínicas nuevas salvo MF autorizada.
+Evidencia: [`archive/2026-06/epis2-prog-consolidate-ola2-close-2026.md`](../reports/archive/2026-06/epis2-prog-consolidate-ola2-close-2026.md). Congelamiento: [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) — **no mega-cambio** ni features clínicas nuevas salvo MF autorizada.
 
 | Permitido | Prohibido |
 |-----------|-----------|
@@ -237,5 +237,4 @@ Todo cambio debe mejorar claridad o mantenibilidad sin alterar flujo clínico m�
 | [`product/EPIS2_PRODUCT_CATALOG.md`](product/EPIS2_PRODUCT_CATALOG.md) | Catálogo objetos clínicos (PROG-PRODUCT-MAP ✓) |
 | [`epis2-prog-product-map-close.md`](../reports/epis2-prog-product-map-close.md) | Cierre mapa producto · tag `epis2-base-v0.1` |
 | [`SCOPE_V1.md`](SCOPE_V1.md) / [`NON_GOALS.md`](NON_GOALS.md) | Límites MVP |
-| [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-prog-ficha-first-close-2026.md) | Último cierre producto |
 | [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-plan-post-rc3-2026.md) | Auditoría post-rc3 · PROG-POST-RC3 tramos |

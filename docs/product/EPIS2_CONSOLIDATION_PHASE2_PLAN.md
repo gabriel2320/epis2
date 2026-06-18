@@ -1,7 +1,7 @@
 # EPIS2 — Plan consolidación ola 2 (gobierno + hardening)
 
 **Versión:** 1.0 · **Fecha:** 2026-06-15 · **Programa:** PROG-CONSOLIDATE-2  
-**Predecesor:** ola 1 cerrada · [`epis2-prog-consolidate-close-2026.md`](../../reports/epis2-prog-consolidate-close-2026.md) · PR [#6](https://github.com/gabriel2320/epis2/pull/6)
+**Predecesor:** ola 1 cerrada · [`archive/2026-06/epis2-prog-consolidate-close-2026.md`](../../reports/archive/2026-06/epis2-prog-consolidate-close-2026.md) · PR [#6](https://github.com/gabriel2320/epis2/pull/6)
 
 Congelamiento: [`CONSOLIDATION_FREEZE.md`](../CONSOLIDATION_FREEZE.md)
 

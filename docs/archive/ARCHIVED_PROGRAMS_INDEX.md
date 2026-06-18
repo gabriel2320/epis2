@@ -10,13 +10,13 @@
 
 | Programa | Cierre / evidencia | Sustituido por |
 |----------|-------------------|----------------|
-| PROG-FICHA-FIRST | `epis2-prog-ficha-first-close-2026.md` | Censo home + CICA redirects |
-| PROG-STRENGTHEN | `epis2-prog-strengthen-close-2026.md` | Base v0.1 checklist |
+| PROG-FICHA-FIRST | `archive/2026-06/epis2-prog-ficha-first-close-2026.md` | Censo home + CICA redirects |
+| PROG-STRENGTHEN | `archive/2026-06/epis2-prog-strengthen-close-2026.md` | Base v0.1 checklist |
 | PROG-CDS-UX | gates `quality:cds-hooks-gate` | CDS demo en clinical-domain |
-| PROG-RAPID | `epis2-mf-rapid-close-2026.md` | `dev:rapid` |
-| PROG-DI | `epis2-prog-di-close-2026.md` | Command registry + productivity |
-| PROG-CONSOLIDATE ola 1+2 | `epis2-prog-consolidate-ola2-close-2026.md` | Meta-gates + freeze |
-| PROG-RELEASE-HARDENING | `epis2-session-close-2026-06-16-release-hardening.md` | tag `v0.1-demo-rc3` |
+| PROG-RAPID | `archive/2026-06/epis2-mf-rapid-close-2026.md` | `dev:rapid` |
+| PROG-DI | `archive/2026-06/epis2-prog-di-close-2026.md` | Command registry + productivity |
+| PROG-CONSOLIDATE ola 1+2 | `archive/2026-06/epis2-prog-consolidate-ola2-close-2026.md` | Meta-gates + freeze |
+| PROG-RELEASE-HARDENING | `archive/2026-06/epis2-session-close-2026-06-16-release-hardening.md` | tag `v0.1-demo-rc3` |
 | PROG-POST-RC3 | `epis2-prog-post-rc3-close.md` | Gobierno post-rc3 |
 | PROG-UX-LAB | `epis2-ux-lab-close-2026-06-16.md` | CICA aesthetic |
 | PROG-PONYTAIL-TRIM | `epis2-mf-pony-gate-01-close.md` | KNIP-04 + poda CICA |

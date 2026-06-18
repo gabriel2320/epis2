@@ -2,7 +2,7 @@
 
 **Versión:** 1.1 · **Estado:** ✓ **CERRADO** · **Fecha cierre:** 2026-06-16  
 **Base:** `v0.1-demo-rc2` · **Tag entrega:** [`v0.1-demo-rc3`](https://github.com/gabriel2320/epis2/releases/tag/v0.1-demo-rc3)  
-**Predecesor:** PROG-CONSOLIDATE ola 2 ✓ · [`epis2-prog-consolidate-ola2-close-2026.md`](../reports/epis2-prog-consolidate-ola2-close-2026.md)
+**Predecesor:** PROG-CONSOLIDATE ola 2 ✓ · [`archive/2026-06/epis2-prog-consolidate-ola2-close-2026.md`](../reports/archive/2026-06/epis2-prog-consolidate-ola2-close-2026.md)
 
 Congelamiento vigente: [`CONSOLIDATION_FREEZE.md`](../CONSOLIDATION_FREEZE.md) — hardening permitido; no features clínicas.
 

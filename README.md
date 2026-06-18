@@ -23,7 +23,7 @@ Flujo mínimo: **censo → ficha dual → borrador → aprobación humana**. IA 
 | Congelamiento | Sin features clínicas nuevas salvo MF autorizada |
 | Producción / PHI | **No listo** — ver seguridad abajo |
 
-**Cierre POST-RC3:** [`reports/epis2-prog-post-rc3-close.md`](reports/epis2-prog-post-rc3-close.md) · **Branch protection:** [`reports/epis2-branch-protection-verify-2026-06-16.md`](reports/epis2-branch-protection-verify-2026-06-16.md)
+**Cierre POST-RC3:** [`reports/epis2-prog-post-rc3-close.md`](reports/epis2-prog-post-rc3-close.md) · **Branch protection:** [`reports/archive/2026-06/epis2-branch-protection-verify-2026-06-16.md`](reports/archive/2026-06/epis2-branch-protection-verify-2026-06-16.md)
 
 **Fuente de verdad:** [`docs/EPIS2_CURRENT_STATE.md`](docs/EPIS2_CURRENT_STATE.md)
 

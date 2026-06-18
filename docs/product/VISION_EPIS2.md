@@ -203,7 +203,7 @@ No debe sentirse como: *un experimento de IA con formularios adjuntos*.
 
 | Programa | Estado |
 |----------|--------|
-| **PROG-FICHA-FIRST** | ✓ MF-FF-01…15 · waves 1–5 · [`epis2-prog-ficha-first-close-2026.md`](../../reports/epis2-prog-ficha-first-close-2026.md) |
+| **PROG-FICHA-FIRST** | ✓ MF-FF-01…15 · waves 1–5 · [`archive/2026-06/epis2-prog-ficha-first-close-2026.md`](../../reports/archive/2026-06/epis2-prog-ficha-first-close-2026.md) |
 | **PROG-STRENGTHEN** | ✓ 23/23 (interop FHIR, HL7, questionnaire export…) |
 | **PROG-CDS-UX** | ✓ MF-CU-01…04 |
 | **Tríada F6** | ✓ contratos MedRepo / Evolab / case-intel |

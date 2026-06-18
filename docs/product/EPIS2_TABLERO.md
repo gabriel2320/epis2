@@ -50,7 +50,7 @@ Plan histórico: [`EPIS2_UX_LAB_MODERN_PLAN.md`](../quality/EPIS2_UX_LAB_MODERN_
 | 3 | `db:*` → api · E2E → web |
 | 4 | CI/catalog compat |
 
-Evidencia: [`epis2-prog-consolidate-close-2026.md`](../../reports/epis2-prog-consolidate-close-2026.md) · `npm run tool:consolidate:verify-phase4`
+Evidencia: [`epis2-prog-consolidate-close-2026.md`](../../reports/archive/2026-06/epis2-prog-consolidate-close-2026.md) · `npm run tool:consolidate:verify-phase4`
 
 ---
 
@@ -70,7 +70,7 @@ Evidencia: [`epis2-prog-consolidate-close-2026.md`](../../reports/epis2-prog-con
 | **MF-CON-09** | ✓ DONE | Fixtures fuera de prod deps · PR [#12](https://github.com/gabriel2320/epis2/pull/12) |
 | **MF-CON-10** | ✓ DONE | LICENSE, SECURITY, DISCLAIMER, CONTRIBUTING · PR [#12](https://github.com/gabriel2320/epis2/pull/12) |
 
-Evidencia: [`epis2-prog-consolidate-ola2-close-2026.md`](../../reports/epis2-prog-consolidate-ola2-close-2026.md) · CI run [27585415223](https://github.com/gabriel2320/epis2/actions/runs/27585415223)
+Evidencia: [`epis2-prog-consolidate-ola2-close-2026.md`](../../reports/archive/2026-06/epis2-prog-consolidate-ola2-close-2026.md) · CI run [27585415223](https://github.com/gabriel2320/epis2/actions/runs/27585415223)
 
 ---
 
@@ -92,7 +92,7 @@ Evidencia: [`epis2-session-close-2026-06-16-release-hardening.md`](../../reports
 
 | Fase | Estado |
 |------|--------|
-| F0–F7 | ✓ [`epis2-prog-conciliacion-triada-close-2026.md`](../../reports/epis2-prog-conciliacion-triada-close-2026.md) |
+| F0–F7 | ✓ [`epis2-prog-conciliacion-triada-close-2026.md`](../../reports/archive/2026-06/epis2-prog-conciliacion-triada-close-2026.md) |
 
 Inventario: [`reports/conciliacion/`](../../reports/conciliacion/)
 
@@ -117,7 +117,7 @@ Evidencia: [`epis2-mf-rapid-close-2026.md`](../../reports/epis2-mf-rapid-close-2
 
 **Plan:** [`EPIS2_FICHA_FIRST_DEV_PLAN.md`](./EPIS2_FICHA_FIRST_DEV_PLAN.md) · **Ledger:** [`ficha-first-ledger.json`](../quality/ficha-first-ledger.json) · gate `quality:ficha-first-gate`
 
-Evidencia cierre: [`epis2-prog-ficha-first-close-2026.md`](../../reports/epis2-prog-ficha-first-close-2026.md)
+Evidencia cierre: [`epis2-prog-ficha-first-close-2026.md`](../../reports/archive/2026-06/epis2-prog-ficha-first-close-2026.md)
 
 ### Ola 1 — Activación ✓
 
@@ -177,7 +177,7 @@ Plan: [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-
 
 ## Cerrado — PROG-STRENGTHEN-2026
 
-**Progreso:** **23/23** MF cerradas · Ola 14 ✓ (MF-IC-04 HL7 hardening) · [`epis2-prog-strengthen-close-2026.md`](../../reports/epis2-prog-strengthen-close-2026.md)
+**Progreso:** **23/23** MF cerradas · Ola 14 ✓ (MF-IC-04 HL7 hardening) · [`epis2-prog-strengthen-close-2026.md`](../../reports/archive/2026-06/epis2-prog-strengthen-close-2026.md)
 
 | Subprograma | Estado | Siguiente |
 |-------------|--------|-----------|
@@ -211,7 +211,7 @@ Plan: [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-
 | P1 ai:evals:sim | 13/13 · `reports/ai-evals-sim-2026-06-13.json` |
 | **MF-SH-01** draft trace | `043_approvals_ai_run.sql` · `quality:draft-trace-gate` · [`epis2-mf-sh-01-draft-trace.md`](../../reports/epis2-mf-sh-01-draft-trace.md) |
 | **S1 conciliación tríada** | F0 manifest + MF-DI map · F1 tablero/triada · [`conciliacion/`](../conciliacion/) · 2026-06-14 |
-| **PROG-DI** | 10/10 DONE · commit `f56b7d2` · [`epis2-prog-di-close-2026.md`](../../reports/epis2-prog-di-close-2026.md) |
+| **PROG-DI** | 10/10 DONE · commit `f56b7d2` · [`epis2-prog-di-close-2026.md`](../../reports/archive/2026-06/epis2-prog-di-close-2026.md) |
 | **F4 MedRepo** | git `3e1181b` · check 75/75 · [`epis2-f4-close-2026-06-14.md`](../../reports/conciliacion/epis2-f4-close-2026-06-14.md) |
 | **F5 smoke tríada** | gates 7/8 · smoke 14/14 · [`epis2-f5-close-2026-06-14.md`](../../reports/conciliacion/epis2-f5-close-2026-06-14.md) |
 | **MF-SH-02** intent evals | 93.3% top-10 · ai:evals:live 4/4 · [`epis2-mf-sh-02-intent-evals.md`](../../reports/epis2-mf-sh-02-intent-evals.md) |
@@ -231,9 +231,9 @@ Plan: [`epis2-audit-plan-post-rc3-2026.md`](../../reports/epis2-audit-plan-post-
 | **MF-IC-01** MINSAL export | Patient/Encounter/DocumentReference · [`epis2-mf-ic-01-minsal-export.md`](../../reports/epis2-mf-ic-01-minsal-export.md) |
 | **MF-IC-02** SNRE staging | MedicationRequest staging JSON · [`epis2-mf-ic-02-snre-staging.md`](../../reports/epis2-mf-ic-02-snre-staging.md) |
 | **MF-IC-03** Questionnaire export piloto | FHIR Questionnaire evolution_note · [`epis2-mf-ic-03-questionnaire.md`](../../reports/epis2-mf-ic-03-questionnaire.md) |
-| **MF-IC-04** HL7 quarantine hardening | Runbook + tests migración · [`epis2-prog-strengthen-close-2026.md`](../../reports/epis2-prog-strengthen-close-2026.md) |
+| **MF-IC-04** HL7 quarantine hardening | Runbook + tests migración · [`epis2-prog-strengthen-close-2026.md`](../../reports/archive/2026-06/epis2-prog-strengthen-close-2026.md) |
 | **MF-FF-01…06** ficha-first wave1 | censo home · dual default · `/comando` redirect · ClinicalShell · [`epis2-prog-ficha-first-wave1-close-2026-06-14.md`](../../reports/archive/2026-06/epis2-prog-ficha-first-wave1-close-2026-06-14.md) |
-| **PROG-CONCILIACION tríada** | F0–F7 ✓ · [`epis2-prog-conciliacion-triada-close-2026.md`](../../reports/epis2-prog-conciliacion-triada-close-2026.md) |
+| **PROG-CONCILIACION tríada** | F0–F7 ✓ · [`epis2-prog-conciliacion-triada-close-2026.md`](../../reports/archive/2026-06/epis2-prog-conciliacion-triada-close-2026.md) |
 
 ---
 

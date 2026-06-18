@@ -161,6 +161,6 @@ Evidencia: `reports/epis2-mf-pony-gate-01-close.md`, `reports/archive/2026-06/ep
 
 ## Próximo paso inventario
 
-1. **PROG-PURGE-CICA** — MF-PURGE-DOC-10 ✓ lote CON/lx · MF-PURGE-DOC-11 o MF-PURGE-05.
+1. **PROG-PURGE-CICA** — MF-PURGE-DOC-11 ✓ lote prog closes · MF-PURGE-05 o DOC-12.
 2. Completar filas **tramo A–K** con estado demo/scaffold/dead (hoja aparte o ampliar esta tabla).
 3. Tag **`epis2-base-v0.1`** ✓ (MF-RELEASE-BASE-01 · [`epis2-prog-product-map-close.md`](../reports/epis2-prog-product-map-close.md)).

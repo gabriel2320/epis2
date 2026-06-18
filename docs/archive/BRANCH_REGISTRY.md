@@ -21,12 +21,12 @@ Registradas como histórico. **Referencia únicamente** — no retomar como lín
 
 | Rama | Programa | Estado | Evidencia cierre |
 |------|----------|--------|------------------|
-| `chore/epis2-consolidation-2` | PROG-CONSOLIDATE ola 2 | ✓ mergeada | [`epis2-prog-consolidate-ola2-close-2026.md`](../../reports/epis2-prog-consolidate-ola2-close-2026.md) |
+| `chore/epis2-consolidation-2` | PROG-CONSOLIDATE ola 2 | ✓ mergeada | [`archive/2026-06/epis2-prog-consolidate-ola2-close-2026.md`](../../reports/archive/2026-06/epis2-prog-consolidate-ola2-close-2026.md) |
 | `chore/epis2-consolidation-2-config-auth` | MF-CON-04/05 | ✓ mergeada | idem |
 | `chore/epis2-consolidation-2-governance-ci` | MF-CON-03/11 | ✓ mergeada | idem |
 | `chore/epis2-consolidation-2-http` | MF-CON-06 | ✓ mergeada | idem |
 | `chore/epis2-consolidation-2-mf-con-09` | MF-CON-09 | ✓ mergeada | idem |
-| `chore/repo-consolidation-phase-0-1` | PROG-CONSOLIDATE ola 1 | ✓ mergeada | [`epis2-prog-consolidate-close-2026.md`](../../reports/epis2-prog-consolidate-close-2026.md) |
+| `chore/repo-consolidation-phase-0-1` | PROG-CONSOLIDATE ola 1 | ✓ mergeada | [`archive/2026-06/epis2-prog-consolidate-close-2026.md`](../../reports/archive/2026-06/epis2-prog-consolidate-close-2026.md) |
 | `chore/prog-release-hardening-rh01-08` | PROG-RELEASE-HARDENING | ✓ mergeada (remote) | [`epis2-session-close-2026-06-16-release-hardening.md`](../../reports/epis2-session-close-2026-06-16-release-hardening.md) |
 | `chore/prog-release-hardening-rh06-web-fixtures` | RH-06 | ✓ mergeada (remote) | idem |
 | `pr-15` | PR histórico | ✓ obsoleto | referencia only |

@@ -57,9 +57,9 @@ Detalle por fase: [`../ROADMAP.md`](../ROADMAP.md) · informes `reports/epis2-0*
 
 | Programa | Cierre |
 |----------|--------|
-| PROG-FICHA-FIRST | `reports/epis2-prog-ficha-first-close-2026.md` |
-| PROG-STRENGTHEN | `reports/epis2-prog-strengthen-close-2026.md` |
-| PROG-CONSOLIDATE ola 1 | `reports/epis2-prog-consolidate-close-2026.md` |
+| PROG-FICHA-FIRST | `reports/archive/2026-06/epis2-prog-ficha-first-close-2026.md` |
+| PROG-STRENGTHEN | `reports/archive/2026-06/epis2-prog-strengthen-close-2026.md` |
+| PROG-CONSOLIDATE ola 1 | `reports/archive/2026-06/epis2-prog-consolidate-close-2026.md` |
 | PROG-RAPID | `reports/epis2-mf-rapid-close-2026.md` |
 
 ---
