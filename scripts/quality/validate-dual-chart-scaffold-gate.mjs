@@ -123,9 +123,9 @@ for (const token of ['epis2TraditionalChartTokens', 'epis2PaperChartTokens']) {
   if (!tokens.includes(token)) errors.push(`chart-modes-tokens.ts sin ${token}`);
 }
 
-const themeIndex = readFileSync(join(root, 'packages/epis2-ui/src/theme/index.ts'), 'utf8');
-if (!themeIndex.includes('chart-modes-tokens')) {
-  errors.push('epis2-ui theme/index.ts no exporta chart-modes-tokens');
+const themeBarrel = readFileSync(join(root, 'packages/epis2-ui/src/theme/theme.ts'), 'utf8');
+if (!themeBarrel.includes('chart-modes-tokens')) {
+  errors.push('epis2-ui theme/theme.ts no exporta chart-modes-tokens');
 }
 
 if (errors.length) {
