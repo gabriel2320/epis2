@@ -1,4 +1,4 @@
-import { CicaBlueprintPage } from './CicaBlueprintPage.js';
+import { CicaGeneratedScreen } from '@epis2/epis2-ui';
 import {
   AGENDA_BLUEPRINT,
   MY_WORK_BLUEPRINT,
@@ -9,7 +9,7 @@ export { CicaPatientTimelinePage } from './CicaPatientTimelinePage.js';
 
 export function CicaRecentPatientsPage() {
   return (
-    <CicaBlueprintPage
+    <CicaGeneratedScreen
       blueprint={RECENT_PATIENTS_BLUEPRINT}
       title="Recientes"
       subtitle="Pacientes abiertos recientemente en esta estación."
@@ -20,7 +20,7 @@ export function CicaRecentPatientsPage() {
 
 export function CicaMyWorkPage() {
   return (
-    <CicaBlueprintPage
+    <CicaGeneratedScreen
       blueprint={MY_WORK_BLUEPRINT}
       title="Mi trabajo"
       subtitle="Pendientes asignados al profesional en guardia."
@@ -31,7 +31,7 @@ export function CicaMyWorkPage() {
 
 export function CicaAgendaPage() {
   return (
-    <CicaBlueprintPage
+    <CicaGeneratedScreen
       blueprint={AGENDA_BLUEPRINT}
       title="Agenda guardia"
       subtitle="Turno actual y próximos eventos del servicio."

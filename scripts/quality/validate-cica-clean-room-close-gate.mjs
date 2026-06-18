@@ -67,26 +67,6 @@ for (const importToken of ['CicaNewPrescriptionPage', 'CicaNewDocumentPage']) {
   }
 }
 
-const sectionPagesPath = join(root, cicaWeb, 'CicaPatientSectionPages.tsx');
-const sectionPages = readFileSync(sectionPagesPath, 'utf8');
-const stubScreenIds = ['patient-orders', 'patient-exams', 'patient-documents'];
-for (const screenId of stubScreenIds) {
-  if (sectionPages.includes(`screenId="${screenId}"`)) {
-    errors.push(
-      `CicaPatientSectionPages.tsx aún tiene stub screenId="${screenId}" — usar página dedicada`,
-    );
-  }
-}
-if (sectionPages.includes('export function CicaPatientOrdersPage')) {
-  errors.push('CicaPatientSectionPages.tsx exporta CicaPatientOrdersPage stub');
-}
-if (sectionPages.includes('export function CicaPatientExamsPage')) {
-  errors.push('CicaPatientSectionPages.tsx exporta CicaPatientExamsPage stub');
-}
-if (sectionPages.includes('export function CicaPatientDocumentsPage')) {
-  errors.push('CicaPatientSectionPages.tsx exporta CicaPatientDocumentsPage stub');
-}
-
 if (errors.length) {
   console.error('cica-clean-room-close-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);

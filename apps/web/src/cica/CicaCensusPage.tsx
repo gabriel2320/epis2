@@ -1,9 +1,8 @@
 import { copy } from '@epis2/design-system';
-import { CicaClinicalList, EpisM3Text, EpisTextField } from '@epis2/epis2-ui';
+import { CicaClinicalList, CicaGeneratedScreen, EpisM3Text, EpisTextField } from '@epis2/epis2-ui';
 import { useEffect, useMemo, useState } from 'react';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { usePatientsQuery } from '../query/hooks/usePatientsQuery.js';
-import { CicaBlueprintPage } from './CicaBlueprintPage.js';
 import { CENSUS_BLUEPRINT } from './blueprints/systemScreens.blueprint.js';
 import { mapPatientRowsToCicaListItems } from './cicaPatientListPresentation.js';
 import { useCicaNavigate } from './hooks/useCicaNavigate.js';
@@ -37,7 +36,7 @@ export function CicaCensusPage() {
   };
 
   return (
-    <CicaBlueprintPage
+    <CicaGeneratedScreen
       blueprint={CENSUS_BLUEPRINT}
       title={copy.clinicalNav.census}
       subtitle={copy.commandCenter.openPatientChart}

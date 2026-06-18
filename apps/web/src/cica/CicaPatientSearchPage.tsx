@@ -1,6 +1,7 @@
 import { copy } from '@epis2/design-system';
 import {
   CicaClinicalList,
+  CicaGeneratedScreen,
   CicaResponsiveGrid,
   EpisButton,
   EpisM3Text,
@@ -10,7 +11,6 @@ import {
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useActivePatient } from '../clinical/ActivePatientContext.js';
 import { usePatientsQuery } from '../query/hooks/usePatientsQuery.js';
-import { CicaBlueprintPage } from './CicaBlueprintPage.js';
 import { PATIENT_SEARCH_BLUEPRINT } from './blueprints/systemScreens.blueprint.js';
 import { mapPatientRowsToCicaListItems } from './cicaPatientListPresentation.js';
 import { useCicaNavigate } from './hooks/useCicaNavigate.js';
@@ -55,7 +55,7 @@ export function CicaPatientSearchPage() {
         : copy.forms.searchPatient;
 
   return (
-    <CicaBlueprintPage
+    <CicaGeneratedScreen
       blueprint={PATIENT_SEARCH_BLUEPRINT}
       title={copy.patientSearch.title}
       subtitle={copy.patientSearch.subtitle}

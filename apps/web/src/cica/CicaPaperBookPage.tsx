@@ -1,6 +1,5 @@
 import { copy } from '@epis2/design-system';
-import { EpisButton, EpisM3Text, Stack, todayIsoDate } from '@epis2/epis2-ui';
-import { CicaBlueprintPage } from './CicaBlueprintPage.js';
+import { CicaGeneratedScreen, EpisButton, EpisM3Text, Stack, todayIsoDate } from '@epis2/epis2-ui';
 import { PAPER_BOOK_BLUEPRINT } from './blueprints/paperScreens.blueprint.js';
 import { useCicaPatientPage } from './hooks/useCicaPatientPage.js';
 import { useCicaNavigate } from './hooks/useCicaNavigate.js';
@@ -16,7 +15,7 @@ export function CicaPaperBookPage() {
   const patientId = page.patientId;
 
   return (
-    <CicaBlueprintPage
+    <CicaGeneratedScreen
       blueprint={PAPER_BOOK_BLUEPRINT}
       title="Libro clínico"
       subtitle="Modo papel — navegación por días y evoluciones"

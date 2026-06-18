@@ -20,17 +20,6 @@ export const CENSUS_BLUEPRINT: CicaScreenBlueprint = {
   ],
 };
 
-export function stubPatientBlueprint(
-  screenId: CicaScreenBlueprint['screenId'],
-  placeholder: string,
-): CicaScreenBlueprint {
-  return {
-    screenId,
-    hideActionBar: true,
-    sections: [{ id: 'main', span: 12, placeholder }],
-  };
-}
-
 export const RECENT_PATIENTS_BLUEPRINT: CicaScreenBlueprint = {
   screenId: 'recent-patients',
   hideActionBar: true,
