@@ -216,6 +216,10 @@
       "type": "file",
       "path": "scripts/quality/validate-drug-dictionary-cl-gate.mjs"
     },
+    "quality:lab-dictionary-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-lab-dictionary-gate.mjs"
+    },
     "quality:cica-action-density-gate": {
       "type": "file",
       "path": "scripts/quality/validate-cica-action-density-gate.mjs"
