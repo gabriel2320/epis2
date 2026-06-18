@@ -22,5 +22,5 @@ export function invalidateClinicalDraftQueries(
       queryKey: queryKeys.dashboard.patient(options.patientId),
     });
   }
-  void queryClient.invalidateQueries({ queryKey: queryKeys.dashboard.all()   });
+  void queryClient.invalidateQueries({ queryKey: queryKeys.dashboard.all() });
 }

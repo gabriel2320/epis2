@@ -54,7 +54,8 @@ export function EpisClinicalList({
   const { isDark } = useCicaThemeTokens();
   const listTestId = testId ?? (isCica ? 'cica-clinical-list' : 'epis2-patient-search-results');
   const emptyId = emptyTestId ?? (isCica ? `${listTestId}-empty` : 'epis2-patient-search-empty');
-  const resolveRowTestId = rowTestId ?? (isCica ? (id) => cicaRowTestId(listTestId, id) : defaultRowTestId);
+  const resolveRowTestId =
+    rowTestId ?? (isCica ? (id) => cicaRowTestId(listTestId, id) : defaultRowTestId);
   const resolveOpenTestId =
     openButtonTestId ?? (isCica ? (id) => `cica-patient-search-open-${id}` : defaultOpenTestId);
 

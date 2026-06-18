@@ -112,7 +112,10 @@ function run() {
   }
 
   const artifact = buildArtifact(screens);
-  const checksum = createHash('sha256').update(stableJson({ screens: artifact.screens })).digest('hex').slice(0, 12);
+  const checksum = createHash('sha256')
+    .update(stableJson({ screens: artifact.screens }))
+    .digest('hex')
+    .slice(0, 12);
   artifact.checksum = checksum;
 
   const jsonOut = stableJson(artifact);
@@ -120,7 +123,9 @@ function run() {
 
   if (checkMode) {
     if (!existsSync(jsonPath)) {
-      console.error('export-route-map --check: falta route-map.generated.json — ejecutar sin --check');
+      console.error(
+        'export-route-map --check: falta route-map.generated.json — ejecutar sin --check',
+      );
       process.exit(1);
     }
     const onDisk = JSON.parse(readFileSync(jsonPath, 'utf8'));

@@ -7,6 +7,8 @@ import {
 export { patientListRowMeta };
 
 /** @deprecated alias — usar mapPatientRowsToClinicalListItems */
-export function mapPatientRowsToCicaListItems(rows: Parameters<typeof mapPatientRowsToClinicalListItems>[0]): EpisClinicalListItem[] {
+export function mapPatientRowsToCicaListItems(
+  rows: Parameters<typeof mapPatientRowsToClinicalListItems>[0],
+): EpisClinicalListItem[] {
   return mapPatientRowsToClinicalListItems(rows);
 }

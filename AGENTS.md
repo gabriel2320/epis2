@@ -17,10 +17,10 @@
 
 ## Programa activo
 
-**PROG-PRODUCT-MAP** — mapa humano verificable post-PONYTAIL (`EPIS2_ROUTE_MAP.md`, `EPIS2_PRODUCT_CATALOG.md`, `quality:product-map-gate`).
-
 **PROG-PURGE-CICA** — archivar, referenciar, sacar del alcance de agentes.  
 Plan: [`docs/product/EPIS2_PURGE_ARCHIVE_PLAN.md`](docs/product/EPIS2_PURGE_ARCHIVE_PLAN.md) · Perímetro: [`docs/archive/AGENT_SCOPE_EXCLUSIONS.md`](docs/archive/AGENT_SCOPE_EXCLUSIONS.md)
+
+**Mapa producto (cerrado):** PROG-PRODUCT-MAP ✓ · tag **`epis2-base-v0.1`** · [`reports/epis2-prog-product-map-close.md`](reports/epis2-prog-product-map-close.md) · gate `quality:product-map-gate`.
 
 **Experiencia visual:** CICA (`/app/*`, `packages/epis2-ui/src/cica/`). Legacy `/espacio/*` = fallback only.
 

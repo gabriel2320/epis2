@@ -3,7 +3,10 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { PONYTAIL_ARCHIVED_GATES, PONYTAIL_REMOVED_GATES } from '../../tools/gates/ponytail-gate-list.mjs';
+import {
+  PONYTAIL_ARCHIVED_GATES,
+  PONYTAIL_REMOVED_GATES,
+} from '../../tools/gates/ponytail-gate-list.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
@@ -29,7 +32,9 @@ for (const gate of PONYTAIL_ARCHIVED_GATES) {
     continue;
   }
   if (entry.archivedProgram !== 'PROG-PONYTAIL-TRIM') {
-    errors.push(`${gate} archivedProgram=${entry.archivedProgram ?? '?'} (esperado PROG-PONYTAIL-TRIM)`);
+    errors.push(
+      `${gate} archivedProgram=${entry.archivedProgram ?? '?'} (esperado PROG-PONYTAIL-TRIM)`,
+    );
   }
   if (entry.path && !existsSync(join(root, entry.path))) {
     errors.push(`${gate} script ausente: ${entry.path}`);

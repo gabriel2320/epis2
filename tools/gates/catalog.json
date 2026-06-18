@@ -204,6 +204,10 @@
       "type": "file",
       "path": "scripts/quality/validate-knip-05-b-gate.mjs"
     },
+    "quality:release-base-01-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-release-base-01-gate.mjs"
+    },
     "quality:aesthetic-action-density-gate": {
       "type": "file",
       "path": "scripts/quality/validate-aesthetic-action-density-gate.mjs"

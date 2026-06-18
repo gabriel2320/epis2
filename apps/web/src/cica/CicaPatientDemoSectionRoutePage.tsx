@@ -9,9 +9,7 @@ export function CicaPatientDemoSectionRoutePage() {
   const { pathname } = useLocation();
   const { patientId } = useCicaPatientPage();
   const screen = findCicaScreenByRoutePrefix(pathname);
-  const config = screen
-    ? getCicaPatientDemoSectionConfig(screen.id as CicaScreenId)
-    : undefined;
+  const config = screen ? getCicaPatientDemoSectionConfig(screen.id as CicaScreenId) : undefined;
 
   if (!patientId || !config) return null;
 

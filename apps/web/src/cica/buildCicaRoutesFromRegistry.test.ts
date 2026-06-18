@@ -1,8 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  EPIS_CICA_SCREEN_REGISTRY,
-  registryRouteToTanstackPath,
-} from '@epis2/epis2-ui';
+import { EPIS_CICA_SCREEN_REGISTRY, registryRouteToTanstackPath } from '@epis2/epis2-ui';
 import { CICA_ROUTE_COMPONENTS } from './cicaRouteComponents.js';
 import {
   CICA_REGISTRY_ROUTE_WIRING,

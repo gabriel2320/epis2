@@ -40,8 +40,12 @@ for (const label of [
 
 const exportCount = count('Unused exports');
 const typeCount = count('Unused exported types');
+const baselineExports = 116;
 if (exportCount === 0 && typeCount === 0) {
   errors.push('sin hallazgos exports/types — revisar knip entry');
+}
+if (exportCount > baselineExports) {
+  errors.push(`exports subió respecto baseline (${exportCount} > ${baselineExports})`);
 }
 
 if (existsSync(reportPath)) {
@@ -49,8 +53,8 @@ if (existsSync(reportPath)) {
   if (!report.includes('DO_NOT_TOUCH') || !report.includes('needs-review')) {
     errors.push('reporte baseline sin triage DO_NOT_TOUCH / needs-review');
   }
-  if (exportCount > 0 && !report.includes(String(exportCount))) {
-    errors.push(`reporte debe documentar Unused exports (${exportCount})`);
+  if (exportCount > 0 && !report.includes(String(baselineExports))) {
+    errors.push(`reporte debe documentar baseline Unused exports (${baselineExports})`);
   }
 }
 
@@ -59,6 +63,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(
-  `knip-05-a-gate OK — exports=${exportCount} types=${typeCount} · KNIP-04 metrics=0`,
-);
+console.log(`knip-05-a-gate OK — exports=${exportCount} types=${typeCount} · KNIP-04 metrics=0`);

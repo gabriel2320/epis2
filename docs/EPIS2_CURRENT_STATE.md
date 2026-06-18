@@ -1,6 +1,6 @@
 # EPIS2 — Estado actual del proyecto (brújula)
 
-**Versión:** 1.4 · **Fecha:** 2026-06-18  
+**Versión:** 1.5 · **Fecha:** 2026-06-18  
 **Audiencia:** equipos, agentes Cursor, planificación  
 **Gobierno documental:** [`DOCUMENTATION_GOVERNANCE.md`](DOCUMENTATION_GOVERNANCE.md) · **Entrada pública:** [`README.md`](../README.md)  
 **Supersedes parcialmente:** [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md) para decisiones de alcance (tablero = índice humano)
@@ -20,7 +20,7 @@ El problema operativo principal (**superficie npm/gates**) se abordó con:
 - Congelamiento vigente: [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md).
 - Tags demo: **`v0.1-demo-rc`** · **`v0.1-demo-rc2`** · **`v0.1-demo-rc3`** (release hardening + README alineado).
 
-**Git:** una rama productiva (`master` @ `b2d6a00` post-PONYTAIL merge). Las “ramas truncadas” son **módulos a medias en master**, no branches git olvidadas.
+**Git:** una rama productiva (`master` post-PRODUCT-MAP). Tags: **`v0.1-demo-rc3`** (demo) · **`epis2-base-v0.1`** (base consolidada). Las “ramas truncadas” son **módulos a medias en master**, no branches git olvidadas.
 
 ---
 
@@ -88,7 +88,7 @@ Regla: **core no depende de labs** — gate `quality:core-no-labs-imports-gate` 
 | **PROG-CONSOLIDATE** | ✓ ola 1+2 | [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) |
 | **PROG-RELEASE-HARDENING** | ✓ RH-01…08 | tag `v0.1-demo-rc3` |
 | **PROG-PONYTAIL-TRIM** | ✓ cierre técnico | KNIP-00…04 + MF-PONY-02…07 + MF-PONY-GATE-01 · [`epis2-mf-pony-gate-01-close.md`](../reports/epis2-mf-pony-gate-01-close.md) |
-| **PROG-PRODUCT-MAP** | ◐ activo | MF-BRÚJULA-00 → mapa humano + gates anti-drift · pre `epis2-base-v0.1` |
+| **PROG-PRODUCT-MAP** | ✓ cerrado | MF-BRÚJULA-00…RELEASE-BASE-01 · tag **`epis2-base-v0.1`** · [`epis2-prog-product-map-close.md`](../reports/epis2-prog-product-map-close.md) |
 | **PROG-PURGE-CICA** | ◐ en paralelo | [`EPIS2_PURGE_ARCHIVE_PLAN.md`](product/EPIS2_PURGE_ARCHIVE_PLAN.md) |
 
 Detalle inventario módulos: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md).
@@ -113,11 +113,9 @@ Congelamiento vigente ([`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md)): **
 
 Plan detallado: [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-plan-post-rc3-2026.md). **Sin PHI real** — solo datos sintéticos DEMO/SIM.
 
-**Programa activo (producto):** **PROG-PRODUCT-MAP** — mapa humano verificable post-PONYTAIL; sin pantallas nuevas.
+**Programa activo (producto):** **PROG-PURGE-CICA** — archive docs/reportes · UX-LAB ✓ · visual activa `/app/*` CICA.
 
-**En paralelo:** **PROG-PURGE-CICA** — archive docs/reportes · UX-LAB ✓ · visual activa `/app/*` CICA.
-
-**Knip (2026-06-18):** instalado (`knip ^6.17.1`, `npm run knip:audit`) · **0** unused files · **0** unused deps · **0** unlisted · **0** duplicate exports (KNIP-04) · siguiente etapa: exports triage conservador (MF-KNIP-05, PROG-PRODUCT-MAP).
+**Knip (2026-06-18):** instalado (`knip ^6.17.1`, `npm run knip:audit`) · **0** unused files · **0** unused deps · **0** unlisted · **0** duplicate exports (KNIP-04) · exports **114** / types **68** tras MF-KNIP-05-A/B (triage conservador; no poda masiva).
 
 ---
 
@@ -217,7 +215,7 @@ Commits pequeños en rama `chore/repo-consolidation-*` recomendado.
 EPIS2 está en fase de consolidación, no de expansión.
 Leer docs/EPIS2_CURRENT_STATE.md y docs/MODULE_INVENTORY.md antes de editar.
 Entrada operativa: /app/buscar (CICA). Fallback: /espacio/*.
-Programa activo: PROG-PRODUCT-MAP (mapa humano; no pantallas nuevas).
+Programa activo: PROG-PURGE-CICA (archivo y perímetro agente; no pantallas nuevas).
 No agregues funcionalidades clínicas nuevas salvo MF autorizada explícitamente.
 Clasifica cambios: core | labs | tools | archive.
 Preservar golden journey y npm run quality:full verde.
@@ -236,7 +234,8 @@ Todo cambio debe mejorar claridad o mantenibilidad sin alterar flujo clínico m�
 | [`VISION_EPIS2.md`](product/VISION_EPIS2.md) | North star + matriz dominio |
 | [`AGENT_CONTEXT_MINIMAL.md`](AGENT_CONTEXT_MINIMAL.md) | Loop agente |
 | [`product/EPIS2_ROUTE_MAP.md`](product/EPIS2_ROUTE_MAP.md) | Mapa rutas CICA (MF-CATALOG-00 ✓) |
-| [`product/EPIS2_PRODUCT_CATALOG.md`](product/EPIS2_PRODUCT_CATALOG.md) | Catálogo objetos clínicos (MF-CATALOG-01 ✓) |
+| [`product/EPIS2_PRODUCT_CATALOG.md`](product/EPIS2_PRODUCT_CATALOG.md) | Catálogo objetos clínicos (PROG-PRODUCT-MAP ✓) |
+| [`epis2-prog-product-map-close.md`](../reports/epis2-prog-product-map-close.md) | Cierre mapa producto · tag `epis2-base-v0.1` |
 | [`SCOPE_V1.md`](SCOPE_V1.md) / [`NON_GOALS.md`](NON_GOALS.md) | Límites MVP |
 | [`epis2-prog-ficha-first-close-2026.md`](../reports/epis2-prog-ficha-first-close-2026.md) | Último cierre producto |
 | [`epis2-audit-plan-post-rc3-2026.md`](../reports/epis2-audit-plan-post-rc3-2026.md) | Auditoría post-rc3 · PROG-POST-RC3 tramos |

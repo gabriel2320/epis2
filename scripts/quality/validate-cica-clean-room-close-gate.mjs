@@ -76,7 +76,10 @@ if (router.includes('cicaPatientSummaryRoute')) {
 
 /** MF-PONY-03 — secciones demo colapsadas en mapa + ruta genérica. */
 const demoSectionsPath = join(root, cicaWeb, 'cicaPatientDemoSections.ts');
-for (const rel of [`${cicaWeb}/cicaPatientDemoSections.ts`, `${cicaWeb}/CicaPatientDemoSectionRoutePage.tsx`]) {
+for (const rel of [
+  `${cicaWeb}/cicaPatientDemoSections.ts`,
+  `${cicaWeb}/CicaPatientDemoSectionRoutePage.tsx`,
+]) {
   if (!existsSync(join(root, rel))) {
     errors.push(`Falta ${rel}`);
   }

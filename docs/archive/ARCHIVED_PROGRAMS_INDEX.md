@@ -19,6 +19,8 @@
 | PROG-RELEASE-HARDENING | `epis2-session-close-2026-06-16-release-hardening.md` | tag `v0.1-demo-rc3` |
 | PROG-POST-RC3 | `epis2-prog-post-rc3-close.md` | Gobierno post-rc3 |
 | PROG-UX-LAB | `epis2-ux-lab-close-2026-06-16.md` | CICA aesthetic |
+| PROG-PONYTAIL-TRIM | `epis2-mf-pony-gate-01-close.md` | KNIP-04 + poda CICA |
+| PROG-PRODUCT-MAP | `epis2-prog-product-map-close.md` | tag `epis2-base-v0.1` · mapa humano |
 
 ## Tracks UI/UX históricos
 

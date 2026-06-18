@@ -11,12 +11,7 @@ export type CicaChartTabId =
   | 'papel';
 
 /** Tab rail legacy `/espacio/*` (M3 — máx. 5). */
-export type LegacyPatientChartTabId =
-  | 'summary'
-  | 'history'
-  | 'encounter'
-  | 'results'
-  | 'orders';
+export type LegacyPatientChartTabId = 'summary' | 'history' | 'encounter' | 'results' | 'orders';
 
 export type ClinicalChartTabDefinition = {
   id: CicaChartTabId;
@@ -229,7 +224,9 @@ export const CICA_PATIENT_MORE_NAV: readonly CicaPatientNavEntry[] = [
   },
 ];
 
-export function findClinicalChartTabById(id: CicaChartTabId): ClinicalChartTabDefinition | undefined {
+export function findClinicalChartTabById(
+  id: CicaChartTabId,
+): ClinicalChartTabDefinition | undefined {
   return CLINICAL_CHART_TAB_REGISTRY.find((t) => t.id === id);
 }
 

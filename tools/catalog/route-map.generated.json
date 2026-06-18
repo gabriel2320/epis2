@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "source": "packages/epis2-ui/src/cica/EPIS_CICA_SCREEN_REGISTRY.ts",
-  "generatedAt": "2026-06-18T22:49:49.920Z",
+  "generatedAt": "2026-06-18T23:42:45.158Z",
   "screenCount": 25,
   "screens": [
     {

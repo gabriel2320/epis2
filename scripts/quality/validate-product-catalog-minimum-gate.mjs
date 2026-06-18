@@ -39,7 +39,9 @@ if (i0 < 0 || i1 < 0 || i1 <= i0) {
   if (!block.includes('draft-assist') || !block.includes('humanoAprueba')) {
     errors.push('bloque debe documentar IA draft-assist y humanoAprueba');
   }
-  const draftRows = block.split('\n').filter((l) => l.includes('draft-assist') && l.startsWith('|'));
+  const draftRows = block
+    .split('\n')
+    .filter((l) => l.includes('draft-assist') && l.startsWith('|'));
   for (const row of draftRows) {
     if (!/draft-assist[^|]*\|[^|]*s[ií]/i.test(row)) {
       errors.push(`fila con draft-assist debe declarar humanoAprueba=sí: ${row.slice(0, 80)}…`);
@@ -84,7 +86,9 @@ for (const bp of [
 }
 
 if (errors.length) {
-  console.error('product-catalog-minimum-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'));
+  console.error(
+    'product-catalog-minimum-gate FAILED:\n' + errors.map((e) => `  - ${e}`).join('\n'),
+  );
   process.exit(1);
 }
 

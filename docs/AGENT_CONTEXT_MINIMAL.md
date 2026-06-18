@@ -1,6 +1,6 @@
 # EPIS2 — Contexto mínimo para agentes (Cursor)
 
-**Versión:** 4.8 · **PROG-AGENT-TRUTH** ✓ · **PROG-PRODUCT-MAP** activo · tag **`v0.1-demo-rc3`**
+**Versión:** 4.9 · **PROG-AGENT-TRUTH** ✓ · **PROG-PRODUCT-MAP** ✓ · tags **`v0.1-demo-rc3`** · **`epis2-base-v0.1`**
 
 > **Brújula de alcance:** [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) · **Gobierno docs:** [`DOCUMENTATION_GOVERNANCE.md`](DOCUMENTATION_GOVERNANCE.md) · **Congelamiento:** [`CONSOLIDATION_FREEZE.md`](CONSOLIDATION_FREEZE.md) · inventario: [`MODULE_INVENTORY.md`](MODULE_INVENTORY.md)
 
@@ -39,8 +39,8 @@ Un objetivo · pocos archivos · diff mínimo.
 
 | Programa | Estado | Evidencia |
 |----------|--------|-----------|
-| **PROG-PRODUCT-MAP** | ◐ MF-BRÚJULA-00… | Mapa humano post-PONYTAIL · [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) |
-| **PROG-PURGE-CICA** | ◐ MF-PURGE-00…07 | [`EPIS2_PURGE_ARCHIVE_PLAN.md`](product/EPIS2_PURGE_ARCHIVE_PLAN.md) · [`AGENT_SCOPE_EXCLUSIONS.md`](archive/AGENT_SCOPE_EXCLUSIONS.md) |
+| **PROG-PURGE-CICA** | ◐ MF-PURGE-00…08 | [`EPIS2_PURGE_ARCHIVE_PLAN.md`](product/EPIS2_PURGE_ARCHIVE_PLAN.md) · [`AGENT_SCOPE_EXCLUSIONS.md`](archive/AGENT_SCOPE_EXCLUSIONS.md) |
+| **PROG-PRODUCT-MAP** | ✓ cerrado | Tag **`epis2-base-v0.1`** · [`epis2-prog-product-map-close.md`](../reports/epis2-prog-product-map-close.md) |
 | **PROG-UX-LAB** | ✓ cerrado | [`EPIS2_UX_LAB_MODERN_PLAN.md`](quality/EPIS2_UX_LAB_MODERN_PLAN.md) |
 | **PROG-AGENT-TRUTH** | ✓ AT-01…05 | `quality:agent-truth-gate` · [`AGENTS.md`](../AGENTS.md) v2 |
 | **PROG-POST-RC3** | ✓ tramos 1–5 | [`epis2-prog-post-rc3-close.md`](../reports/epis2-prog-post-rc3-close.md) |
@@ -51,7 +51,7 @@ Programas cerrados (no reabrir): PROG-FICHA-FIRST · PROG-STRENGTHEN 23/23 · PR
 
 **Congelamiento vigente** — sin features clínicas nuevas salvo MF autorizada. Tag demo: **`v0.1-demo-rc3`**.
 
-**Knip:** `npm run knip:audit` · baseline **0** unused files/deps/unlisted/duplicates (KNIP-04). Exports: triage conservador en MF-KNIP-05 (no poda a ciegas).
+**Knip:** `npm run knip:audit` · KNIP-04 **0** files/deps/unlisted/duplicates · exports **114** (MF-KNIP-05-A/B ✓; no poda masiva).
 
 ---
 
@@ -121,6 +121,7 @@ Atajos: `quality:fast` · `dev:agent:audit-diff` · `dev:rapid -- --skip-audit`
 | [`EPIS2_CURRENT_STATE.md`](EPIS2_CURRENT_STATE.md) | **Brújula módulos y consolidación** |
 | [`EPIS2_ROUTE_MAP.md`](product/EPIS2_ROUTE_MAP.md) | Rutas CICA — generado desde registry |
 | [`EPIS2_PRODUCT_CATALOG.md`](product/EPIS2_PRODUCT_CATALOG.md) | Objetos clínicos v0.1 |
+| [`epis2-prog-product-map-close.md`](../reports/epis2-prog-product-map-close.md) | Cierre PROG-PRODUCT-MAP · tag `epis2-base-v0.1` |
 | [`EPIS2_TABLERO.md`](product/EPIS2_TABLERO.md) | **No planificar** — índice humano |
 | [`EPIS2_DEV_VELOCITY.md`](dev/EPIS2_DEV_VELOCITY.md) | Gates por rol |
 | [`GOLDEN_CLINICAL_JOURNEY.md`](../quality/GOLDEN_CLINICAL_JOURNEY.md) | Solo UI/flujo clínico |

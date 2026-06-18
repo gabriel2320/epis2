@@ -13,9 +13,7 @@ function runGate(script) {
   const path = join(root, 'scripts/quality', script);
   const r = spawnSync(process.execPath, [path], { cwd: root, encoding: 'utf8' });
   if (r.status !== 0) {
-    errors.push(
-      `${script} falló:\n${(r.stdout ?? '').trim()}\n${(r.stderr ?? '').trim()}`.trim(),
-    );
+    errors.push(`${script} falló:\n${(r.stdout ?? '').trim()}\n${(r.stderr ?? '').trim()}`.trim());
   }
 }
 

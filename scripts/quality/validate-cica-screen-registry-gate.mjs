@@ -62,7 +62,10 @@ if (!patientBlueprints.includes('withRegistryLayout')) {
   errors.push('patientScreens.blueprint.ts debe usar withRegistryLayout');
 }
 
-const buildRoutes = readFileSync(join(root, 'apps/web/src/cica/buildCicaRoutesFromRegistry.ts'), 'utf8');
+const buildRoutes = readFileSync(
+  join(root, 'apps/web/src/cica/buildCicaRoutesFromRegistry.ts'),
+  'utf8',
+);
 if (!buildRoutes.includes('CICA_REGISTRY_ROUTE_WIRING')) {
   errors.push('buildCicaRoutesFromRegistry debe declarar CICA_REGISTRY_ROUTE_WIRING');
 }

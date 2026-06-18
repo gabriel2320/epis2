@@ -4,9 +4,7 @@ export function registryRouteToTanstackPath(registryRoute: string): string {
 }
 
 /** Valida search `draftId` en formularios CICA. */
-export function parseCicaDraftRouteSearch(
-  search: Record<string, unknown>,
-): { draftId?: string } {
+export function parseCicaDraftRouteSearch(search: Record<string, unknown>): { draftId?: string } {
   const parsed: { draftId?: string } = {};
   if (typeof search.draftId === 'string' && search.draftId) {
     parsed.draftId = search.draftId;

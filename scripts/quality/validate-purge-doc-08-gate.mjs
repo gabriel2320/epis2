@@ -10,7 +10,9 @@ const archiveDir = join(root, 'reports/archive/2026-06');
 const manifestPath = join(archiveDir, 'lote7-manifest.json');
 
 if (!existsSync(manifestPath)) {
-  errors.push('falta reports/archive/2026-06/lote7-manifest.json — ejecutar archive-reports-lote7.mjs');
+  errors.push(
+    'falta reports/archive/2026-06/lote7-manifest.json — ejecutar archive-reports-lote7.mjs',
+  );
 } else {
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
   if (manifest.moved.length < 10) {
