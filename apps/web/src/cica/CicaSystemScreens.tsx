@@ -60,15 +60,6 @@ export function CicaPatientDischargePage() {
   );
 }
 
-export function CicaPatientAuditPage() {
-  return (
-    <CicaPatientSectionPage
-      screenId="patient-audit"
-      placeholder="Auditoría y trazas — acceso, firmas y eventos de cumplimiento (demo)."
-    />
-  );
-}
-
 export function CicaRecentPatientsPage() {
   return (
     <CicaBlueprintPage

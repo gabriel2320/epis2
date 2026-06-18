@@ -41,3 +41,9 @@ export const PATIENT_MEDICATIONS_BLUEPRINT: CicaScreenBlueprint = {
   hideActionBar: false,
   sections: [{ id: 'medications', span: 12 }],
 };
+
+export const PATIENT_AUDIT_BLUEPRINT: CicaScreenBlueprint = {
+  screenId: 'patient-audit',
+  hideActionBar: false,
+  sections: [{ id: 'audit', span: 12 }],
+};
