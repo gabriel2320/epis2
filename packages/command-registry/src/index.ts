@@ -125,6 +125,15 @@ export {
   assistClarifyFooterHint,
   type AssistRouteIntentCatalogEntry,
 } from './assist-route.js';
+export {
+  CLINICAL_ACTION_MANIFEST,
+  GOLDEN_CICA_INTENTS,
+  INTENT_CICA_SCREEN_IDS,
+  assertClinicalActionManifestInvariants,
+  buildClinicalActionContract,
+  getClinicalActionByIntent,
+  type ClinicalActionContract,
+} from './clinical-action-manifest.js';
 export type {
   ClinicalIntent,
   CommandActiveContext,

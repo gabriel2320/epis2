@@ -204,6 +204,10 @@
       "type": "file",
       "path": "scripts/quality/validate-cica-screen-registry-gate.mjs"
     },
+    "quality:clinical-action-manifest-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-clinical-action-manifest-gate.mjs"
+    },
     "quality:cica-action-density-gate": {
       "type": "file",
       "path": "scripts/quality/validate-cica-action-density-gate.mjs"
