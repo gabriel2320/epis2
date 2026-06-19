@@ -4,7 +4,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const src = readFileSync(join(root, 'apps/web/src/design-agents/schemas.ts'), 'utf8');
+const src = readFileSync(join(root, 'apps/web/src/lab/design-agents/schemas.ts'), 'utf8');
 const required = [
   'Md3LayoutCriticResultSchema',
   'ClassicEmrWorkflowResultSchema',

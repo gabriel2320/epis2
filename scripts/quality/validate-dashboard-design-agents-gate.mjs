@@ -4,7 +4,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const dir = join(root, 'apps/web/src/design-agents');
+const dir = join(root, 'apps/web/src/lab/design-agents');
 const errors = [];
 const required = ['dashboardDesignAgents.ts', 'schemas.ts', 'designAgentsEnv.ts'];
 for (const f of required) {

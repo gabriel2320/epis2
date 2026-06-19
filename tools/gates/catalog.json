@@ -228,6 +228,14 @@
       "type": "file",
       "path": "scripts/quality/validate-purge-05-gate.mjs"
     },
+    "quality:purge-09-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-purge-09-gate.mjs"
+    },
+    "quality:web-no-design-agents-in-clinical-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-web-no-design-agents-in-clinical-gate.mjs"
+    },
     "quality:aesthetic-action-density-gate": {
       "type": "file",
       "path": "scripts/quality/validate-aesthetic-action-density-gate.mjs"

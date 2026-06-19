@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const errors = [];
 
-const schemas = readFileSync(join(root, 'apps/web/src/design-agents/schemas.ts'), 'utf8');
+const schemas = readFileSync(join(root, 'apps/web/src/lab/design-agents/schemas.ts'), 'utf8');
 for (const s of ['ThreeModesArchitectureResultSchema', 'ModeTransitionResultSchema']) {
   if (!schemas.includes(s)) errors.push(`Falta ${s}`);
 }

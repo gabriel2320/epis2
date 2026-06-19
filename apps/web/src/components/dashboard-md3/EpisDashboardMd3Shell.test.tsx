@@ -22,9 +22,9 @@ import { visibleDashboardNavDestinations } from '../../dashboard-md3/dashboardNa
 import {
   DashboardMd3CriticResultSchema,
   DashboardWorkflowResultSchema,
-} from '../../design-agents/schemas.js';
-import { areDesignAgentsEnabled } from '../../design-agents/designAgentsEnv.js';
-import { dashboardMd3CriticAgent } from '../../design-agents/dashboardDesignAgents.js';
+} from '../../lab/design-agents/schemas.js';
+import { areDesignAgentsEnabled } from '../../lab/design-agents/designAgentsEnv.js';
+import { dashboardMd3CriticAgent } from '../../lab/design-agents/dashboardDesignAgents.js';
 
 describe('EpisDashboardMd3Shell', () => {
   it('renderiza scaffold 100dvh', () => {

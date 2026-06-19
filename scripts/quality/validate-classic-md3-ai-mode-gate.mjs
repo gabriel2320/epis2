@@ -10,7 +10,7 @@ const errors = [];
 const modeGate = join(root, 'scripts/quality/validate-classic-md3-mode-gate.mjs');
 if (!existsSync(modeGate)) errors.push('Falta validate-classic-md3-mode-gate.mjs');
 
-const agentsDir = join(root, 'apps/web/src/design-agents');
+const agentsDir = join(root, 'apps/web/src/lab/design-agents');
 const requiredAgents = [
   'schemas.ts',
   'designAgentsEnv.ts',

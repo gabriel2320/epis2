@@ -13,7 +13,7 @@ import { EPIS2_CLINICAL_HOME } from '../routes/home.js';
 import {
   ThreeModesArchitectureResultSchema,
   ModeTransitionResultSchema,
-} from '../design-agents/schemas.js';
+} from '../lab/design-agents/schemas.js';
 
 describe('episModes', () => {
   it('define exactamente tres modos', () => {

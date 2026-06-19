@@ -28,4 +28,4 @@ Etiquetar entrypoints legacy clínico y extraer helpers PR6 sin borrar rutas `/e
 
 ## Próximo paso
 
-**MF-PURGE-09** — acotar imports `design-agents/` en shell clínico productivo.
+**CICA-L-01 Censo** — wireframe + reformulación `/app/censo`.

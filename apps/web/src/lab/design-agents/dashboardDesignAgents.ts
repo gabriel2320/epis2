@@ -5,7 +5,7 @@ import {
   type DashboardMd3CriticResult,
   type DesignAgentRunOutcome,
 } from './schemas.js';
-import { EPIS_DASHBOARD_NAV_MAX_VISIBLE } from '../dashboard-md3/dashboardNavDestinations.js';
+import { EPIS_DASHBOARD_NAV_MAX_VISIBLE } from '../../dashboard-md3/dashboardNavDestinations.js';
 
 function baseScore(violations: string[]) {
   return Math.max(0, 100 - violations.length * 15);

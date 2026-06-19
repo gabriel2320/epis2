@@ -3,7 +3,7 @@ import { EpisChip, Stack, Typography } from '@epis2/epis2-ui';
 import { useRouterState } from '@tanstack/react-router';
 import { useEffect, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { areDesignAgentsEnabled } from '../design-agents/designAgentsEnv.js';
+import { areDesignAgentsEnabled } from '../lab/design-agents/designAgentsEnv.js';
 import { useEpisSession } from '../session/EpisSessionContext.js';
 import { iconBudgetForScreen, screenKindForRoute } from '../quality/uiDensityRules.js';
 import { isDesignModeEnabled } from './designModeEnv.js';

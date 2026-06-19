@@ -13,7 +13,7 @@ Acción: **keep** · **consolidate** · **needs-review** · **archive** · **del
 
 | Path | Paquete | Zona | Acción | Notas |
 |------|---------|------|--------|-------|
-| `apps/web` | `@epis2/web` | core | keep | UI clínica; CICA `/app/*`; legacy `/espacio/*`; `design-agents/` lab (podado MF-KNIP-02-A) |
+| `apps/web` | `@epis2/web` | core | keep | UI clínica; CICA `/app/*`; legacy `/espacio/*`; `lab/design-agents/` (MF-PURGE-09) |
 | `apps/api` | `@epis2/api` | core | keep | SoT HTTP; AI routes, CDS, clinical, FHIR frontera |
 
 ---
@@ -149,7 +149,7 @@ Evidencia: `reports/epis2-mf-pony-gate-01-close.md`, `reports/archive/2026-06/ep
 
 | Zona podada | Acción | Notas |
 |-------------|--------|-------|
-| `apps/web/design-agents/` (parcial) | delete-later | Agentes huérfanos; core tests + `schemas.ts` |
+| `apps/web/lab/design-agents/` | lab | Ollama EpisDesignMode; off por defecto |
 | `apps/web` barrels `components/*/index.ts` | delete-later | Imports directos a subpaths |
 | `packages/epis2-ui/theme/foundations/**` | delete-later | Re-exports muertos; SoT en `theme/*.ts` |
 | `packages/epis2-ui/cica/CICA_CHART_TAB_REGISTRY.ts` | delete-later | SoT: `clinicalChartTabRegistry.ts` |
@@ -161,6 +161,6 @@ Evidencia: `reports/epis2-mf-pony-gate-01-close.md`, `reports/archive/2026-06/ep
 
 ## Próximo paso inventario
 
-1. **PROG-PURGE-CICA** — MF-PURGE-05 ✓ `@legacy-runtime` · **MF-PURGE-09** (design-agents).
+1. **PROG-PURGE-CICA** — MF-PURGE-09 ✓ design-agents → `lab/` · **CICA-L-01 Censo**.
 2. Completar filas **tramo A–K** con estado demo/scaffold/dead (hoja aparte o ampliar esta tabla).
 3. Tag **`epis2-base-v0.1`** ✓ (MF-RELEASE-BASE-01 · [`epis2-prog-product-map-close.md`](../reports/epis2-prog-product-map-close.md)).
