@@ -44,7 +44,8 @@ export function auditPaperVisualArtifacts(): PaperVisualAuditResult {
 
   const checks = {
     hasPaperPageClass: printCss.includes('.epis2-paper-page'),
-    hasLetterPageRule: printCss.includes('@page letter') && printCss.includes('size: letter portrait'),
+    hasLetterPageRule:
+      printCss.includes('@page letter') && printCss.includes('size: letter portrait'),
     hasLetterSizeTokens:
       readProjectFile('packages/epis2-ui/src/theme/chart-modes-tokens.ts').includes(
         'letterWidthMm: 215.9',

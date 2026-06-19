@@ -155,7 +155,10 @@ export function ScreenReviewPage() {
 
         <EpisCard sx={{ overflow: 'hidden', border: 1, borderColor: 'divider', boxShadow: 'none' }}>
           <Box sx={{ overflowX: 'auto' }}>
-            <Box component="table" sx={{ width: '100%', borderCollapse: 'collapse', minWidth: 980 }}>
+            <Box
+              component="table"
+              sx={{ width: '100%', borderCollapse: 'collapse', minWidth: 980 }}
+            >
               <Box component="thead" sx={{ bgcolor: 'background.default' }}>
                 <Box component="tr">
                   {['Pantalla', 'Clase', 'Modo', 'Señales', 'Estado', 'Acciones'].map((head) => (
@@ -213,7 +216,12 @@ export function ScreenReviewPage() {
                             </Typography>
                           ) : (
                             row.requiredSignals.map((signal) => (
-                              <EpisChip key={signal} label={signal} size="small" variant="outlined" />
+                              <EpisChip
+                                key={signal}
+                                label={signal}
+                                size="small"
+                                variant="outlined"
+                              />
                             ))
                           )}
                         </Stack>

@@ -69,11 +69,7 @@
       "screenMode": "letter",
       "productClass": "core-write",
       "primaryAction": "Guardar borrador",
-      "requiredSignals": [
-        "patient",
-        "demo",
-        "draft-status"
-      ]
+      "requiredSignals": ["patient", "demo", "draft-status"]
     },
     {
       "screenId": "evolution-book",
@@ -85,10 +81,7 @@
       "screenMode": "letter",
       "productClass": "core-read",
       "primaryAction": "Nueva evolución",
-      "requiredSignals": [
-        "patient",
-        "demo"
-      ]
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "evolution-detail",
@@ -100,10 +93,7 @@
       "screenMode": "letter",
       "productClass": "core-read",
       "primaryAction": "Editar borrador",
-      "requiredSignals": [
-        "patient",
-        "demo"
-      ]
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-evolutions",
@@ -116,10 +106,7 @@
       "productClass": "core-read",
       "primaryAction": "Nueva evolución",
       "blueprintSectionId": "evolutions",
-      "requiredSignals": [
-        "patient",
-        "demo"
-      ]
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "new-prescription",
@@ -131,11 +118,7 @@
       "screenMode": "letter",
       "productClass": "core-write",
       "primaryAction": "Guardar borrador",
-      "requiredSignals": [
-        "patient",
-        "demo",
-        "draft-status"
-      ]
+      "requiredSignals": ["patient", "demo", "draft-status"]
     },
     {
       "screenId": "new-document",
@@ -147,11 +130,7 @@
       "screenMode": "letter",
       "productClass": "core-write",
       "primaryAction": "Guardar borrador",
-      "requiredSignals": [
-        "patient",
-        "demo",
-        "draft-status"
-      ]
+      "requiredSignals": ["patient", "demo", "draft-status"]
     },
     {
       "screenId": "new-epicrisis",
@@ -163,11 +142,7 @@
       "screenMode": "letter",
       "productClass": "core-write",
       "primaryAction": "Guardar borrador",
-      "requiredSignals": [
-        "patient",
-        "demo",
-        "draft-status"
-      ]
+      "requiredSignals": ["patient", "demo", "draft-status"]
     },
     {
       "screenId": "patient-admission",
@@ -179,10 +154,7 @@
       "screenMode": "classic",
       "productClass": "core-read",
       "primaryAction": "Editar ingreso",
-      "requiredSignals": [
-        "patient",
-        "demo"
-      ]
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-medications",
@@ -195,10 +167,7 @@
       "productClass": "core-read",
       "primaryAction": "Nueva prescripción",
       "blueprintSectionId": "medications",
-      "requiredSignals": [
-        "patient",
-        "demo"
-      ]
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-interconsultas",
@@ -211,10 +180,7 @@
       "productClass": "core-read",
       "primaryAction": "Solicitar interconsulta",
       "blueprintSectionId": "interconsultas",
-      "requiredSignals": [
-        "patient",
-        "demo"
-      ]
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-procedures",
@@ -227,10 +193,7 @@
       "productClass": "core-read",
       "primaryAction": "Registrar procedimiento",
       "blueprintSectionId": "procedures",
-      "requiredSignals": [
-        "patient",
-        "demo"
-      ]
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-discharge",
@@ -243,10 +206,7 @@
       "productClass": "core-read",
       "primaryAction": "Nueva epicrisis",
       "blueprintSectionId": "discharge",
-      "requiredSignals": [
-        "patient",
-        "demo"
-      ]
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-timeline",
@@ -259,10 +219,7 @@
       "productClass": "core-read",
       "primaryAction": "Filtrar eventos",
       "blueprintSectionId": "timeline",
-      "requiredSignals": [
-        "patient",
-        "demo"
-      ]
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-audit",
@@ -275,10 +232,7 @@
       "productClass": "core-read",
       "primaryAction": "Exportar trazas",
       "blueprintSectionId": "audit",
-      "requiredSignals": [
-        "patient",
-        "demo"
-      ]
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "paper-day",
@@ -290,11 +244,7 @@
       "screenMode": "paper",
       "productClass": "paper",
       "primaryAction": "Imprimir",
-      "requiredSignals": [
-        "patient",
-        "demo",
-        "draft-status"
-      ]
+      "requiredSignals": ["patient", "demo", "draft-status"]
     },
     {
       "screenId": "paper-book",
@@ -306,10 +256,7 @@
       "screenMode": "paper",
       "productClass": "paper",
       "primaryAction": "Abrir hoy",
-      "requiredSignals": [
-        "patient",
-        "demo"
-      ]
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-summary",
@@ -322,11 +269,7 @@
       "productClass": "core-read",
       "primaryAction": "Nueva evolución",
       "blueprintSectionId": "summary",
-      "requiredSignals": [
-        "patient",
-        "demo",
-        "ai-state"
-      ]
+      "requiredSignals": ["patient", "demo", "ai-state"]
     },
     {
       "screenId": "patient-orders",
@@ -339,10 +282,7 @@
       "productClass": "core-read",
       "primaryAction": "Agregar indicación",
       "blueprintSectionId": "orders",
-      "requiredSignals": [
-        "patient",
-        "demo"
-      ]
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-exams",
@@ -355,10 +295,7 @@
       "productClass": "core-read",
       "primaryAction": "Ver resultados",
       "blueprintSectionId": "exams",
-      "requiredSignals": [
-        "patient",
-        "demo"
-      ]
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-documents",
@@ -371,10 +308,7 @@
       "productClass": "core-read",
       "primaryAction": "Nuevo documento",
       "blueprintSectionId": "documents",
-      "requiredSignals": [
-        "patient",
-        "demo"
-      ]
+      "requiredSignals": ["patient", "demo"]
     }
   ],
   "fallback": {

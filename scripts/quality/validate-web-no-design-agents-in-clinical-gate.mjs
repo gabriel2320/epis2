@@ -22,11 +22,14 @@ const clinicalRoots = [
   'apps/web/src/navigation',
 ];
 
-const allowlistRelPaths = new Set([
-  'apps/web/src/design/EpisDesignModeProvider.tsx',
-]);
+const allowlistRelPaths = new Set(['apps/web/src/design/EpisDesignModeProvider.tsx']);
 
-const forbiddenTokens = ['design-agents/', 'design-agents\\', '../design-agents', '../../design-agents'];
+const forbiddenTokens = [
+  'design-agents/',
+  'design-agents\\',
+  '../design-agents',
+  '../../design-agents',
+];
 
 function rel(p) {
   return relative(root, p).replace(/\\/g, '/');

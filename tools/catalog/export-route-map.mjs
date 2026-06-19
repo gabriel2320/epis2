@@ -93,10 +93,7 @@ function buildArtifact(screens) {
 
 /** @param {unknown} value */
 function markdownCell(value) {
-  return String(value)
-    .replace(/\\/g, '\\\\')
-    .replace(/\|/g, '\\|')
-    .replace(/\r?\n/g, ' ');
+  return String(value).replace(/\\/g, '\\\\').replace(/\|/g, '\\|').replace(/\r?\n/g, ' ');
 }
 
 /** @param {ReturnType<typeof buildArtifact>} artifact */
@@ -168,7 +165,9 @@ function run() {
 
   if (checkMode) {
     if (!existsSync(jsonPath)) {
-      console.error('export-route-map --check: falta route-map.generated.json; ejecutar sin --check');
+      console.error(
+        'export-route-map --check: falta route-map.generated.json; ejecutar sin --check',
+      );
       process.exit(1);
     }
     const onDisk = JSON.parse(readFileSync(jsonPath, 'utf8'));
