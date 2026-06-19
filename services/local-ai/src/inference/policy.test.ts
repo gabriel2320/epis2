@@ -8,6 +8,16 @@ describe('inference policy (ADR-005)', () => {
     );
   });
 
+  it('trata solicitudes sin clasificacion como L2_phi por default seguro', () => {
+    expect(resolveRequestDataTier(undefined, 'L2_phi')).toBe('L2_phi');
+  });
+
+  it('respeta data tier explicito sobre marcador heuristico', () => {
+    expect(resolveRequestDataTier({ source: 'demo' }, 'L2_phi', 'L1_deidentified')).toBe(
+      'L1_deidentified',
+    );
+  });
+
   it('bloquea cloud para L2_phi', () => {
     expect(cloudAllowedForTier('L2_phi', true)).toBe(false);
     expect(cloudAllowedForTier('L0_synthetic', true)).toBe(true);

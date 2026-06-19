@@ -15,7 +15,7 @@ const envSchema = z.object({
     .enum(['true', 'false', '1', '0'])
     .default('false')
     .transform((v) => v === 'true' || v === '1'),
-  AI_DEFAULT_DATA_TIER: dataTierSchema.default('L0_synthetic'),
+  AI_DEFAULT_DATA_TIER: dataTierSchema.default('L2_phi'),
   OPENAI_API_KEY: z.string().optional(),
   OPENAI_MODEL: z.string().default('gpt-4o-mini'),
   OPENAI_BASE_URL: z.string().url().default('https://api.openai.com/v1'),

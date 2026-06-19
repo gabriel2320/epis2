@@ -21,6 +21,13 @@ describe('PaperVisualAudit MF-PAPER-09', () => {
     expect(result.hasPlannerCommandHints).toBe(true);
   });
 
+  it('mantiene carta como formato default de modo papel', () => {
+    const result = auditPaperVisualArtifacts();
+    expect(result.hasLetterPageRule).toBe(true);
+    expect(result.hasLetterSizeTokens).toBe(true);
+    expect(result.usesLetterDefault).toBe(true);
+  });
+
   it('footer visible en impresión (no epis2-paper-chart-no-print)', () => {
     const result = auditPaperVisualArtifacts();
     expect(result.noPrintHideOnFooter).toBe(true);

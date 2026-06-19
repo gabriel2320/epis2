@@ -20,6 +20,7 @@ import type { Database } from '../db/client.js';
 import { createRequirePermission, type AuthenticatedRequest } from '../auth/authenticate.js';
 import { getPatientById } from '../clinical/service.js';
 import { getPatientDashboardSummary } from '../clinical/longitudinal.js';
+import { runWithRlsContext } from '../db/rlsContext.js';
 import { getServiceDashboardSummary } from '../inpatient/service.js';
 import { getQualityDashboardSummary } from './quality.js';
 import { getNursingDashboardSummary } from './nursing.js';
@@ -62,7 +63,9 @@ export async function registerDashboardRoutes(
       });
     }
 
-    const summary = await getDashboardWorkSummary(db, session.sub, session.role);
+    const summary = await runWithRlsContext(db, config, session, (tx) =>
+      getDashboardWorkSummary(tx, session.sub, session.role),
+    );
     return dashboardWorkResponseSchema.parse(summary);
   });
 
@@ -77,7 +80,9 @@ export async function registerDashboardRoutes(
       if (!db) {
         return sendApiError(reply, 503, 'Base de datos no disponible');
       }
-      const summary = await getNursingDashboardSummary(db, session.sub);
+      const summary = await runWithRlsContext(db, config, session, (tx) =>
+        getNursingDashboardSummary(tx, session.sub),
+      );
       return nursingDashboardResponseSchema.parse(summary);
     },
   );
@@ -97,7 +102,9 @@ export async function registerDashboardRoutes(
       if (!db) {
         return sendApiError(reply, 503, 'Base de datos no disponible');
       }
-      const summary = await getPharmacyDashboardSummary(db);
+      const summary = await runWithRlsContext(db, config, session, (tx) =>
+        getPharmacyDashboardSummary(tx),
+      );
       return pharmacyDashboardResponseSchema.parse(summary);
     },
   );
@@ -123,12 +130,14 @@ export async function registerDashboardRoutes(
         return sendApiError(reply, 503, 'Base de datos no disponible');
       }
 
-      const patient = await getPatientById(db, patientId);
-      if (!patient) {
+      const summary = await runWithRlsContext(db, config, session, async (tx) => {
+        const patient = await getPatientById(tx, patientId);
+        if (!patient) return null;
+        return getPatientDashboardSummary(tx, patientId, patient.displayName);
+      });
+      if (!summary) {
         return sendApiError(reply, 404, 'Paciente no encontrado');
       }
-
-      const summary = await getPatientDashboardSummary(db, patientId, patient.displayName);
       return patientDashboardResponseSchema.parse(summary);
     },
   );
@@ -154,7 +163,9 @@ export async function registerDashboardRoutes(
         return sendApiError(reply, 503, 'Base de datos no disponible');
       }
 
-      const summary = await getServiceDashboardSummary(db, unitCode);
+      const summary = await runWithRlsContext(db, config, session, (tx) =>
+        getServiceDashboardSummary(tx, unitCode),
+      );
       return serviceDashboardResponseSchema.parse(summary);
     },
   );
@@ -176,7 +187,9 @@ export async function registerDashboardRoutes(
       return sendApiError(reply, 503, 'Base de datos no disponible');
     }
 
-    const summary = await getQualityDashboardSummary(db);
+    const summary = await runWithRlsContext(db, config, session, (tx) =>
+      getQualityDashboardSummary(tx),
+    );
     return qualityDashboardResponseSchema.parse(summary);
   });
 
@@ -203,7 +216,9 @@ export async function registerDashboardRoutes(
         return sendApiError(reply, 503, 'Base de datos no disponible');
       }
 
-      const summary = await getReceptionDashboardSummary(db, session.role);
+      const summary = await runWithRlsContext(db, config, session, (tx) =>
+        getReceptionDashboardSummary(tx, session.role),
+      );
       return receptionDashboardResponseSchema.parse(summary);
     },
   );
@@ -231,7 +246,9 @@ export async function registerDashboardRoutes(
         return sendApiError(reply, 503, 'Base de datos no disponible');
       }
 
-      const summary = await getEmergencyDashboardSummary(db, session.role);
+      const summary = await runWithRlsContext(db, config, session, (tx) =>
+        getEmergencyDashboardSummary(tx, session.role),
+      );
       return emergencyDashboardResponseSchema.parse(summary);
     },
   );
@@ -256,7 +273,9 @@ export async function registerDashboardRoutes(
       return sendApiError(reply, 503, 'Base de datos no disponible');
     }
 
-    const summary = await getIcuDashboardSummary(db, session.role);
+    const summary = await runWithRlsContext(db, config, session, (tx) =>
+      getIcuDashboardSummary(tx, session.role),
+    );
     return icuDashboardResponseSchema.parse(summary);
   });
 
@@ -280,7 +299,9 @@ export async function registerDashboardRoutes(
       return sendApiError(reply, 503, 'Base de datos no disponible');
     }
 
-    const summary = await getOrDashboardSummary(db, session.role);
+    const summary = await runWithRlsContext(db, config, session, (tx) =>
+      getOrDashboardSummary(tx, session.role),
+    );
     return orDashboardResponseSchema.parse(summary);
   });
 
@@ -304,7 +325,9 @@ export async function registerDashboardRoutes(
       return sendApiError(reply, 503, 'Base de datos no disponible');
     }
 
-    const summary = await getApsDashboardSummary(db, session.role);
+    const summary = await runWithRlsContext(db, config, session, (tx) =>
+      getApsDashboardSummary(tx, session.role),
+    );
     return apsDashboardResponseSchema.parse(summary);
   });
 
@@ -331,7 +354,9 @@ export async function registerDashboardRoutes(
         return sendApiError(reply, 503, 'Base de datos no disponible');
       }
 
-      const summary = await getSpecialtyDashboardSummary(db, session.role);
+      const summary = await runWithRlsContext(db, config, session, (tx) =>
+        getSpecialtyDashboardSummary(tx, session.role),
+      );
       return specialtyDashboardResponseSchema.parse(summary);
     },
   );

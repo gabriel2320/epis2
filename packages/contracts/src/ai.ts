@@ -23,6 +23,7 @@ export const aiStatusResponseSchema = z.object({
 export const aiAssistDraftRequestSchema = z.object({
   blueprintId: z.string().min(1),
   patientId: z.string().uuid().optional(),
+  dataTier: inferenceDataTierSchema.optional(),
   context: z.record(z.string()).optional(),
   currentFields: z.record(z.string()).optional(),
 });

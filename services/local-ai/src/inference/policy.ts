@@ -13,7 +13,9 @@ const DEMO_MARKERS = [/demo/i, /sint[eé]tico/i, /DEMO-/];
 export function resolveRequestDataTier(
   context: Record<string, string> | undefined,
   defaultTier: InferenceDataTier,
+  explicitTier?: InferenceDataTier,
 ): InferenceDataTier {
+  if (explicitTier) return explicitTier;
   const blob = JSON.stringify(context ?? {});
   if (DEMO_MARKERS.some((re) => re.test(blob))) {
     return 'L0_synthetic';

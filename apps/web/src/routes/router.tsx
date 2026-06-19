@@ -33,6 +33,7 @@ import { isUiCatalogEnabled } from '../dev/uiCatalogEnv.js';
 import { isVisualThemeCatalogEnabled } from '../dev/visualThemeCatalogEnv.js';
 import { isSchedulerSpikeEnabled } from '../dev/schedulerSpikeEnv.js';
 import { isDualChartModesEnabled } from '../dev/dualChartModesEnv.js';
+import { isScreenReviewEnabled } from '../dev/screenReviewEnv.js';
 import { isCicaUiEnabled } from '../dev/cicaUiEnv.js';
 import { CicaAppLayout } from '../cica/CicaAppLayout.js';
 import { buildCicaRoutesFromRegistry } from '../cica/buildCicaRoutesFromRegistry.js';
@@ -63,6 +64,10 @@ const LazyVisualThemeCatalogPage = lazy(() =>
   import('../pages/dev/VisualThemeCatalogPage.js').then((m) => ({
     default: m.VisualThemeCatalogPage,
   })),
+);
+
+const LazyScreenReviewPage = lazy(() =>
+  import('../pages/dev/ScreenReviewPage.js').then((m) => ({ default: m.ScreenReviewPage })),
 );
 
 const DashboardModePage = lazy(() =>
@@ -540,6 +545,18 @@ const uiCatalogRoute = createRoute({
   },
 });
 
+const screenReviewRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/dev/screen-review',
+  component: LazyScreenReviewPage,
+  beforeLoad: async () => {
+    if (!isScreenReviewEnabled()) {
+      throw redirect({ to: EPIS2_CLINICAL_HOME });
+    }
+    await requireSession();
+  },
+});
+
 const LazyDualChartModesPreviewPage = lazy(() =>
   import('../pages/dev/DualChartModesPreviewPage.js').then((m) => ({
     default: m.DualChartModesPreviewPage,
@@ -583,6 +600,7 @@ export const routeTree = rootRoute.addChildren([
   appearancePreferencesRoute,
   visualThemeCatalogRoute,
   uiCatalogRoute,
+  screenReviewRoute,
   dualChartModesRoute,
   schedulerSpikeRoute,
   commandCenterRoute,

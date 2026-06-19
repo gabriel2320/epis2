@@ -1,10 +1,14 @@
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { loadAiConfig } from '../config.js';
 import * as ollamaProvider from './ollamaProvider.js';
 import * as openaiProvider from './openaiProvider.js';
 import { generateWithInferenceRouter } from './router.js';
 
 describe('generateWithInferenceRouter', () => {
+  beforeEach(() => {
+    vi.restoreAllMocks();
+  });
+
   it('devuelve unavailable si ningún proveedor responde', async () => {
     vi.spyOn(ollamaProvider, 'createOllamaProvider').mockReturnValue({
       id: 'ollama',
@@ -61,5 +65,35 @@ describe('generateWithInferenceRouter', () => {
       expect(result.provider).toBe('openai');
       expect(result.dataTier).toBe('L0_synthetic');
     }
+  });
+
+  it('no usa openai para solicitudes sin tier explicito', async () => {
+    vi.spyOn(ollamaProvider, 'createOllamaProvider').mockReturnValue({
+      id: 'ollama',
+      ping: vi.fn().mockResolvedValue(false),
+      generateStructuredJson: vi.fn(),
+    });
+    const openaiPing = vi.fn().mockResolvedValue(true);
+    const openaiGenerate = vi.fn();
+    vi.spyOn(openaiProvider, 'createOpenAiProvider').mockReturnValue({
+      id: 'openai',
+      ping: openaiPing,
+      generateStructuredJson: openaiGenerate,
+    });
+
+    const config = loadAiConfig({
+      AI_INFERENCE_MODE: 'router',
+      AI_CLOUD_ENABLED: 'true',
+      OPENAI_API_KEY: 'sk-test',
+      OLLAMA_BASE_URL: 'http://127.0.0.1:11434',
+      OLLAMA_MODEL: 'test',
+    });
+
+    const result = await generateWithInferenceRouter(config, 'prompt', undefined);
+    expect(result.ok).toBe(false);
+    expect(result.provider).toBe('ollama');
+    expect(result.dataTier).toBe('L2_phi');
+    expect(openaiPing).not.toHaveBeenCalled();
+    expect(openaiGenerate).not.toHaveBeenCalled();
   });
 });

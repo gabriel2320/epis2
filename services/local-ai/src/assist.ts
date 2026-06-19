@@ -67,7 +67,13 @@ export async function runDraftAssist(
   const promptHash = hashPrompt(prompt);
   const started = Date.now();
 
-  const generated = await generateWithInferenceRouter(config, prompt, request.context);
+  const generated = await generateWithInferenceRouter(
+    config,
+    prompt,
+    request.context,
+    45_000,
+    request.dataTier,
+  );
   const latencyMs = Date.now() - started;
 
   if (!generated.ok) {

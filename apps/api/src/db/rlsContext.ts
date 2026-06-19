@@ -11,14 +11,13 @@ export async function runWithRlsContext<T>(
   fn: (tx: Database) => Promise<T>,
 ): Promise<T> {
   const mode = parseRlsMode(config.RLS_MODE);
-  if (mode === 'off' || !session) {
-    return fn(db);
-  }
 
   return db.transaction(async (tx) => {
     await tx.execute(sql`SELECT set_config('epis2.rls_mode', ${mode}, true)`);
-    await tx.execute(sql`SELECT set_config('epis2.actor_id', ${session.sub}, true)`);
-    await tx.execute(sql`SELECT set_config('epis2.actor_role', ${session.role}, true)`);
+    if (session) {
+      await tx.execute(sql`SELECT set_config('epis2.actor_id', ${session.sub}, true)`);
+      await tx.execute(sql`SELECT set_config('epis2.actor_role', ${session.role}, true)`);
+    }
     return fn(tx as unknown as Database);
   });
 }

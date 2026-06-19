@@ -38,9 +38,10 @@ export async function generateWithInferenceRouter(
   prompt: string,
   requestContext: Record<string, string> | undefined,
   timeoutMs = 45_000,
+  explicitDataTier?: ReturnType<typeof resolveRequestDataTier>,
 ): Promise<StructuredGenerateResult & { dataTier: ReturnType<typeof resolveRequestDataTier> }> {
   const policy = buildInferencePolicyConfig(config);
-  const dataTier = resolveRequestDataTier(requestContext, policy.defaultDataTier);
+  const dataTier = resolveRequestDataTier(requestContext, policy.defaultDataTier, explicitDataTier);
   const started = Date.now();
 
   const finish = async (
