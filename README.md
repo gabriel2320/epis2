@@ -2,7 +2,9 @@
 
 Aplicación clínica **command-first**, independiente del legacy EPIS. Demo local con datos **sintéticos** — no PHI real.
 
-**Home clínica:** `/espacio/buscar-paciente` (censo + barra de comando). `/comando` solo compat.
+**Home clínica (operativa):** [`/app/buscar`](http://127.0.0.1:5173/app/buscar) — CICA Clean Room (censo + barra transversal).
+
+**Fallback legacy:** `/espacio/buscar-paciente` — solo si `VITE_DISABLE_CICA_UI=true`. `/comando` compat.
 
 ---
 
@@ -10,26 +12,23 @@ Aplicación clínica **command-first**, independiente del legacy EPIS. Demo loca
 
 Monorepo clínico modular: UI (`apps/web`), API + PostgreSQL (`apps/api`), contratos y registries (`packages/*`), IA local opcional (`services/local-ai`).
 
-Flujo mínimo: **censo → ficha dual → borrador → aprobación humana**. IA propone; el clínico aprueba.
+Flujo mínimo: **censo → ficha → borrador → aprobación humana**. IA propone; el clínico aprueba.
 
 ---
 
-## Estado real (2026-06-16)
+## Estado real (2026-06-19)
 
 | Aspecto | Estado |
 |---------|--------|
-| Base demo v0.1 | Compila, golden journey, ficha-first ✓ · tag **`v0.1-demo-rc3`** · `master` incluye POST-RC3 |
-| Programas recientes | **PROG-POST-RC3** ✓ tramos 1–5 · **PROG-RELEASE-HARDENING** RH-01…08 + RH-09/10/11 blocking |
-| Congelamiento | Sin features clínicas nuevas salvo MF autorizada |
+| Base consolidada | Tag **`epis2-base-v0.1`** · demo **`v0.1-demo-rc3`** |
+| UI clínica activa | **CICA** `/app/*` (GO) · legacy `/espacio/*` = fallback |
+| Golden journey | Legacy + **E2E CICA** (`test:e2e:golden-cica`, PR6 redirects) |
+| Programa en curso | **PROG-PURGE-CICA** — archive + perímetro agente |
 | Producción / PHI | **No listo** — ver seguridad abajo |
 
-**Cierre POST-RC3:** [`reports/epis2-prog-post-rc3-close.md`](reports/epis2-prog-post-rc3-close.md) · **Branch protection:** [`reports/archive/2026-06/epis2-branch-protection-verify-2026-06-16.md`](reports/archive/2026-06/epis2-branch-protection-verify-2026-06-16.md)
+**Brújula (manda):** [`docs/EPIS2_CURRENT_STATE.md`](docs/EPIS2_CURRENT_STATE.md) · **Tablero:** [`docs/product/EPIS2_TABLERO.md`](docs/product/EPIS2_TABLERO.md)
 
-**Fuente de verdad:** [`docs/EPIS2_CURRENT_STATE.md`](docs/EPIS2_CURRENT_STATE.md)
-
-**Tablero:** [`docs/product/EPIS2_TABLERO.md`](docs/product/EPIS2_TABLERO.md)
-
-Historial de fases EPIS2-00…12: [`docs/archive/PHASE_HISTORY.md`](docs/archive/PHASE_HISTORY.md)
+Historial de fases: [`docs/archive/PHASE_HISTORY.md`](docs/archive/PHASE_HISTORY.md)
 
 ---
 
@@ -49,19 +48,24 @@ Límites: [`docs/NON_GOALS.md`](docs/NON_GOALS.md) · [`docs/SCOPE_V1.md`](docs/
 ```bash
 npm install
 cp .env.example .env
-docker compose up -d          # Postgres
-npm run db:migrate
-npm run dev:api               # :3001
-npm run dev:web               # :5173
+npm run stack:dev             # Postgres + migrate + smoke (recomendado)
+npm run dev:api               # :3001  (otra terminal)
+npm run dev:web               # :5173  (otra terminal)
 ```
 
-Abrir `http://127.0.0.1:5173` — credenciales demo: [`docs/auth/DEMO_USERS.md`](docs/auth/DEMO_USERS.md)
+Abrir `http://127.0.0.1:5173/app/buscar` — credenciales demo: [`docs/auth/DEMO_USERS.md`](docs/auth/DEMO_USERS.md)
 
 IA opcional (Ollama en host):
 
 ```bash
-npm run stack:dev             # Postgres + smoke Ollama
 npm run dev:ai                # :3002
+```
+
+E2E CICA (requiere API + stack):
+
+```bash
+npm run test:e2e:golden-cica -w @epis2/web
+npm run test:e2e:cica-pr6-redirects -w @epis2/web
 ```
 
 ---
@@ -85,9 +89,10 @@ Detalle: [`docs/ARCHITECTURE_TARGET.md`](docs/ARCHITECTURE_TARGET.md) · [`docs/
 
 | Cuándo | Comando |
 |--------|---------|
+| Arranque día / post-reinicio | `npm run stack:dev` |
 | Verificación rápida | `npm run quality:fast` |
-| Pre-PR | `npm run quality:required` |
-| Pre-tag release | `npm run quality:release` |
+| Pre-PR clínico | `npm run quality:clinical` |
+| Pre-PR / release | `npm run quality:required` · `npm run quality:release` |
 | Lint + types + arquitectura | `npm run check` |
 | Tests unitarios | `npm run test` |
 | DB | `npm run db:migrate` · `npm run db:validate` |
