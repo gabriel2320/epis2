@@ -91,12 +91,20 @@ function buildArtifact(screens) {
   };
 }
 
+/** @param {unknown} value */
+function markdownCell(value) {
+  return String(value)
+    .replace(/\\/g, '\\\\')
+    .replace(/\|/g, '\\|')
+    .replace(/\r?\n/g, ' ');
+}
+
 /** @param {ReturnType<typeof buildArtifact>} artifact */
 function buildMarkdown(artifact) {
   const rows = artifact.screens
     .map(
       (s) =>
-        `| ${s.route} | ${s.screenId} | ${s.status} | ${s.productClass} | ${s.screenMode} | ${s.navVisible ? 'si' : 'no'} | ${s.layoutProfile} | ${s.intent.replace(/\|/g, '\\|')} |`,
+        `| ${markdownCell(s.route)} | ${markdownCell(s.screenId)} | ${markdownCell(s.status)} | ${markdownCell(s.productClass)} | ${markdownCell(s.screenMode)} | ${s.navVisible ? 'si' : 'no'} | ${markdownCell(s.layoutProfile)} | ${markdownCell(s.intent)} |`,
     )
     .join('\n');
 
