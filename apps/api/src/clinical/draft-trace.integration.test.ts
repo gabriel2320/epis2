@@ -3,6 +3,7 @@ import { eq } from 'drizzle-orm';
 import { expect, it } from 'vitest';
 import { buildApp } from '../app.js';
 import { getDatabase } from '../db/client.js';
+import { runWithRlsContext } from '../db/rlsContext.js';
 import { aiRuns, approvals, auditEvents, clinicalNotes } from '../db/schema.js';
 import { testApiConfig } from '../testConfig.js';
 
@@ -76,11 +77,9 @@ describeIntegration('draft assist trace (MF-SH-01)', () => {
       .limit(1);
     expect(approvalRow?.aiRunId).toBe(aiRun!.id);
 
-    const [noteRow] = await db
-      .select()
-      .from(clinicalNotes)
-      .where(eq(clinicalNotes.id, approved.note.id))
-      .limit(1);
+    const [noteRow] = await runWithRlsContext(db, config, undefined, (tx) =>
+      tx.select().from(clinicalNotes).where(eq(clinicalNotes.id, approved.note.id)).limit(1),
+    );
     expect((noteRow?.body as Record<string, unknown>)._epis2AssistTrace).toBeUndefined();
 
     const auditRows = await db

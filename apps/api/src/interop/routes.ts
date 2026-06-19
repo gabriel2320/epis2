@@ -12,6 +12,7 @@ import type { FastifyInstance } from 'fastify';
 import type { AppConfig } from '../config.js';
 import { sendApiError } from '../errors.js';
 import type { Database } from '../db/client.js';
+import { runWithRlsContext } from '../db/rlsContext.js';
 import { createRequirePermission, type AuthenticatedRequest } from '../auth/authenticate.js';
 import { validateHl7Message } from './hl7.js';
 import { listInteropStagingBatches } from './staging.js';
@@ -123,10 +124,12 @@ export async function registerInteropRoutes(
       const { quarantineId } = request.params as { quarantineId: string };
       const session = (request as AuthenticatedRequest).session;
       try {
-        const { draft, preview } = await proposeHl7Writeback(db, quarantineId, {
-          id: session.sub,
-          username: session.username,
-        });
+        const { draft, preview } = await runWithRlsContext(db, config, session, (tx) =>
+          proposeHl7Writeback(tx, quarantineId, {
+            id: session.sub,
+            username: session.username,
+          }),
+        );
         return hl7WritebackProposalResponseSchema.parse({
           readOnly: true as const,
           requiresHumanApproval: true as const,
@@ -159,10 +162,12 @@ export async function registerInteropRoutes(
       const { quarantineId } = request.params as { quarantineId: string };
       const session = (request as AuthenticatedRequest).session;
       try {
-        const result = await revertHl7Quarantine(db, quarantineId, {
-          id: session.sub,
-          username: session.username,
-        });
+        const result = await runWithRlsContext(db, config, session, (tx) =>
+          revertHl7Quarantine(tx, quarantineId, {
+            id: session.sub,
+            username: session.username,
+          }),
+        );
         return hl7RevertResponseSchema.parse({ readOnly: true as const, ...result });
       } catch (err) {
         return sendApiError(reply, 400, err instanceof Error ? err.message : 'No se pudo revertir');

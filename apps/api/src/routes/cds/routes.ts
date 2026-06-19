@@ -11,8 +11,10 @@ import {
 import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { createRequirePermission } from '../../auth/authenticate.js';
+import type { AuthenticatedRequest } from '../../auth/authenticate.js';
 import { getDemoClinicalAlertsForPatient } from '../../clinical/service.js';
 import type { Database } from '../../db/client.js';
+import { runWithRlsContext } from '../../db/rlsContext.js';
 import type { AppConfig } from '../../config.js';
 import { sendApiError } from '../../errors.js';
 
@@ -110,10 +112,13 @@ export async function registerCdsRoutes(
       }
 
       const parsedFields = parseFieldsQuery(query.fields);
-      const result = await evaluateCdsCards(db, patientId, hookParsed.data, {
-        ...(query.blueprintId !== undefined ? { blueprintId: query.blueprintId } : {}),
-        ...(parsedFields ? { fields: parsedFields } : {}),
-      });
+      const session = (request as AuthenticatedRequest).session;
+      const result = await runWithRlsContext(db, _config, session, (tx) =>
+        evaluateCdsCards(tx, patientId, hookParsed.data, {
+          ...(query.blueprintId !== undefined ? { blueprintId: query.blueprintId } : {}),
+          ...(parsedFields ? { fields: parsedFields } : {}),
+        }),
+      );
       if (!result) {
         return sendApiError(reply, 404, 'Paciente no encontrado');
       }
@@ -137,7 +142,10 @@ export async function registerCdsRoutes(
     const normalizedFields = normalizeFieldsRecord(fields);
     if (normalizedFields) evalOpts.fields = normalizedFields;
 
-    const result = await evaluateCdsCards(db, patientId, hook, evalOpts);
+    const session = (request as AuthenticatedRequest).session;
+    const result = await runWithRlsContext(db, _config, session, (tx) =>
+      evaluateCdsCards(tx, patientId, hook, evalOpts),
+    );
     if (!result) {
       return sendApiError(reply, 404, 'Paciente no encontrado');
     }
@@ -161,7 +169,10 @@ export async function registerCdsRoutes(
       const currentFields = parseFieldsQuery(query.fields);
       if (currentFields) alertOpts.currentFields = currentFields;
 
-      const evaluated = await getDemoClinicalAlertsForPatient(db, patientId, alertOpts);
+      const session = (request as AuthenticatedRequest).session;
+      const evaluated = await runWithRlsContext(db, _config, session, (tx) =>
+        getDemoClinicalAlertsForPatient(tx, patientId, alertOpts),
+      );
       if (!evaluated) {
         return sendApiError(reply, 404, 'Paciente no encontrado');
       }

@@ -10,6 +10,7 @@ import { appendAudit } from '../audit/store.js';
 import type { AppConfig } from '../config.js';
 import { sendApiError } from '../errors.js';
 import type { Database } from '../db/client.js';
+import { runWithRlsContext } from '../db/rlsContext.js';
 import { createRequirePermission, type AuthenticatedRequest } from '../auth/authenticate.js';
 import {
   createInpatientAdmission,
@@ -36,7 +37,9 @@ export async function registerInpatientRoutes(
       const { criticalId } = request.params as { criticalId: string };
       const session = (request as AuthenticatedRequest).session;
 
-      const updated = await acknowledgeCriticalResult(db, criticalId, session.sub);
+      const updated = await runWithRlsContext(db, config, session, (tx) =>
+        acknowledgeCriticalResult(tx, criticalId, session.sub),
+      );
       if (!updated) {
         return sendApiError(reply, 404, 'Resultado crítico no encontrado');
       }
@@ -69,13 +72,15 @@ export async function registerInpatientRoutes(
       }
       const session = (request as AuthenticatedRequest).session;
       try {
-        const result = await createInpatientAdmission(db, {
-          patientId: parsed.data.patientId,
-          bedId: parsed.data.bedId,
-          unitCode: parsed.data.unitCode,
-          actorId: session.sub,
-          username: session.username,
-        });
+        const result = await runWithRlsContext(db, config, session, (tx) =>
+          createInpatientAdmission(tx, {
+            patientId: parsed.data.patientId,
+            bedId: parsed.data.bedId,
+            unitCode: parsed.data.unitCode,
+            actorId: session.sub,
+            username: session.username,
+          }),
+        );
         return reply.status(201).send(inpatientAdmissionCreateResponseSchema.parse(result));
       } catch (e) {
         return sendApiError(reply, 409, e instanceof Error ? e.message : 'No se pudo admitir');
@@ -94,10 +99,12 @@ export async function registerInpatientRoutes(
       }
       const session = (request as AuthenticatedRequest).session;
       try {
-        const result = await transferInpatientAdmission(db, admissionId, parsed.data.targetBedId, {
-          id: session.sub,
-          username: session.username,
-        });
+        const result = await runWithRlsContext(db, config, session, (tx) =>
+          transferInpatientAdmission(tx, admissionId, parsed.data.targetBedId, {
+            id: session.sub,
+            username: session.username,
+          }),
+        );
         return inpatientTransferResponseSchema.parse(result);
       } catch (e) {
         return sendApiError(reply, 409, e instanceof Error ? e.message : 'No se pudo trasladar');
@@ -112,10 +119,12 @@ export async function registerInpatientRoutes(
       const { admissionId } = request.params as { admissionId: string };
       const session = (request as AuthenticatedRequest).session;
       try {
-        const result = await dischargeInpatientAdmission(db, admissionId, {
-          id: session.sub,
-          username: session.username,
-        });
+        const result = await runWithRlsContext(db, config, session, (tx) =>
+          dischargeInpatientAdmission(tx, admissionId, {
+            id: session.sub,
+            username: session.username,
+          }),
+        );
         return inpatientDischargeResponseSchema.parse(result);
       } catch (e) {
         return sendApiError(reply, 409, e instanceof Error ? e.message : 'No se pudo dar de alta');

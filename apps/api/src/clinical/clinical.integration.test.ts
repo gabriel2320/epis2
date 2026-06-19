@@ -2,6 +2,7 @@ import { describeIntegration } from '@epis2/test-fixtures/integration';
 import { expect, it } from 'vitest';
 import { buildApp } from '../app.js';
 import { getDatabase } from '../db/client.js';
+import { runWithRlsContext } from '../db/rlsContext.js';
 import { testApiConfig } from '../testConfig.js';
 import { listApprovedNotes } from './service.js';
 
@@ -126,7 +127,9 @@ describeIntegration('clinical API (integration)', () => {
     });
     expect(illegal.statusCode).toBe(400);
 
-    const notesBefore = await listApprovedNotes(db, patientId);
+    const notesBefore = await runWithRlsContext(db, config, undefined, (tx) =>
+      listApprovedNotes(tx, patientId),
+    );
     const beforeCount = notesBefore.length;
 
     const approved = await app.inject({
@@ -136,7 +139,9 @@ describeIntegration('clinical API (integration)', () => {
     });
     expect(approved.statusCode).toBe(200);
 
-    const notesAfter = await listApprovedNotes(db, patientId);
+    const notesAfter = await runWithRlsContext(db, config, undefined, (tx) =>
+      listApprovedNotes(tx, patientId),
+    );
     expect(notesAfter.length).toBe(beforeCount + 1);
     expect(notesAfter.some((n) => n.title === 'Evolución test')).toBe(true);
 

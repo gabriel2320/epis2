@@ -12,6 +12,7 @@ import {
 import type { AppConfig } from '../config.js';
 import { sendApiError } from '../errors.js';
 import type { Database } from '../db/client.js';
+import { runWithRlsContext } from '../db/rlsContext.js';
 import { createRequirePermission, type AuthenticatedRequest } from '../auth/authenticate.js';
 import {
   appUsers,
@@ -333,7 +334,9 @@ export async function registerAdminRoutes(
       let skipped = 0;
       for (const row of approved) {
         const record = clinicalCaseRecordSchema.parse(row.payload);
-        const outcome = await promoteClinicalCaseRecord(db, record, actor.sub);
+        const outcome = await runWithRlsContext(db, config, actor, (tx) =>
+          promoteClinicalCaseRecord(tx, record, actor.sub),
+        );
         if (outcome === 'promoted') promoted += 1;
         else skipped += 1;
       }

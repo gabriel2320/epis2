@@ -5,6 +5,7 @@ import { beforeEach, expect, it } from 'vitest';
 import { resolveCommand, resolveCommandWithAutoConfirm } from '@epis2/command-registry';
 import { buildApp } from '../app.js';
 import { getDatabase } from '../db/client.js';
+import { runWithRlsContext } from '../db/rlsContext.js';
 import {
   beds,
   clinicalNotes,
@@ -217,15 +218,17 @@ describeIntegration('cadena ingreso hospitalario (MF-158)', () => {
     });
     expect(approved.statusCode).toBe(200);
 
-    const notes = await db
-      .select()
-      .from(clinicalNotes)
-      .where(
-        and(
-          eq(clinicalNotes.patientId, demo005.patientId),
-          eq(clinicalNotes.noteType, 'medication_reconciliation'),
+    const notes = await runWithRlsContext(db, config, undefined, (tx) =>
+      tx
+        .select()
+        .from(clinicalNotes)
+        .where(
+          and(
+            eq(clinicalNotes.patientId, demo005.patientId),
+            eq(clinicalNotes.noteType, 'medication_reconciliation'),
+          ),
         ),
-      );
+    );
     expect(notes.length).toBeGreaterThan(0);
 
     await app.close();
