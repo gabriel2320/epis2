@@ -34,6 +34,7 @@ import {
 } from './service.js';
 import type { AppConfig } from '../config.js';
 import { sendApiError, zodIssuesToDetails } from '../errors.js';
+import { appendAudit } from '../audit/store.js';
 import { processDocumentOcr } from './documentOcr.js';
 import { intakePatientDocument } from './documentIntake.js';
 import { searchPatientDocuments } from './documents.js';
@@ -52,6 +53,7 @@ import {
   PaperChartSignBlockedError,
 } from './paperChart.js';
 import { parsePaperChartBody, parsePaperChartSectionPatch } from '@epis2/clinical-forms';
+import { DischargeApprovalBlockedError } from './discharge-approval-guards.js';
 
 const createDraftSchema = z.object({
   patientId: z.string().uuid(),
@@ -656,6 +658,16 @@ export async function registerClinicalRoutes(
         }
         return { draft: result.draft, note: result.note };
       } catch (e) {
+        if (e instanceof DischargeApprovalBlockedError) {
+          await appendAudit(db, {
+            eventType: 'clinical.draft.approve_blocked',
+            actorId: session.sub,
+            username: session.username,
+            entityType: 'clinical_draft',
+            entityId: draftId,
+            message: e.auditMessage,
+          });
+        }
         return sendApiError(reply, 409, e instanceof Error ? e.message : 'No se pudo aprobar');
       }
     },

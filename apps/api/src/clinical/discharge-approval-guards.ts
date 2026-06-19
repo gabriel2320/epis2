@@ -1,7 +1,6 @@
 import { and, eq, isNull } from 'drizzle-orm';
 import type { Database } from '../db/client.js';
 import { clinicalCriticalResults } from '../db/schema.js';
-import { appendAudit } from '../audit/store.js';
 import type { Actor } from './service.js';
 
 const GUARDED_DRAFT_TYPES = new Set(['discharge_summary', 'transfer_note']);
@@ -22,6 +21,22 @@ type PendingCritical = {
   label: string;
   severity: string;
 };
+
+export class DischargeApprovalBlockedError extends Error {
+  readonly pending: PendingCritical[];
+  readonly detail: string;
+
+  constructor(message: string, detail: string, pending: PendingCritical[]) {
+    super(message);
+    this.name = 'DischargeApprovalBlockedError';
+    this.detail = detail;
+    this.pending = pending;
+  }
+
+  get auditMessage() {
+    return `${this.detail} - pendientes: ${formatPendingList(this.pending)}`;
+  }
+}
 
 async function listUnacknowledgedCriticals(
   db: Database,
@@ -46,32 +61,15 @@ function formatPendingList(rows: PendingCritical[]): string {
   return rows.map((r) => `${r.label} (${r.severity})`).join('; ');
 }
 
-async function auditApproveBlocked(
-  db: Database,
-  actor: Actor,
-  draftId: string,
-  pending: PendingCritical[],
-  detail: string,
-) {
-  await appendAudit(db, {
-    eventType: 'clinical.draft.approve_blocked',
-    actorId: actor.id,
-    username: actor.username,
-    entityType: 'clinical_draft',
-    entityId: draftId,
-    message: `${detail} — pendientes: ${formatPendingList(pending)}`,
-  });
-}
-
 /**
  * Política mixta (triage 2026-06-10):
- * - severidad `critical` sin acuse → bloqueo duro;
- * - severidad `high` sin acuse → requiere `clinicalOverrideReason` documentado;
- * - otras severidades sin acuse → bloqueo hasta acuse o override explícito futuro.
+ * - severidad `critical` sin acuse -> bloqueo duro;
+ * - severidad `high` sin acuse -> requiere `clinicalOverrideReason` documentado;
+ * - otras severidades sin acuse -> bloqueo hasta acuse u override explícito futuro.
  */
 export async function assertDischargeApprovalAllowed(
   db: Database,
-  actor: Actor,
+  _actor: Actor,
   input: DischargeApprovalGuardInput,
 ): Promise<DischargeApprovalGuardResult> {
   if (!GUARDED_DRAFT_TYPES.has(input.draftType)) {
@@ -85,15 +83,11 @@ export async function assertDischargeApprovalAllowed(
 
   const critical = pending.filter((r) => r.severity === 'critical');
   if (critical.length > 0) {
-    await auditApproveBlocked(
-      db,
-      actor,
-      input.draftId,
-      critical,
-      'Aprobación bloqueada: resultados críticos sin acuse',
-    );
-    throw new Error(
+    const detail = 'Aprobación bloqueada: resultados críticos sin acuse';
+    throw new DischargeApprovalBlockedError(
       `No se puede aprobar la epicrisis: hay resultados críticos sin acuse (${formatPendingList(critical)}). Acuse los resultados antes de firmar el alta.`,
+      detail,
+      critical,
     );
   }
 
@@ -101,28 +95,21 @@ export async function assertDischargeApprovalAllowed(
   if (high.length > 0) {
     const reason = input.clinicalOverrideReason?.trim();
     if (!reason) {
-      await auditApproveBlocked(
-        db,
-        actor,
-        input.draftId,
-        high,
-        'Aprobación bloqueada: resultados de alta severidad sin acuse ni justificación',
-      );
-      throw new Error(
+      const detail =
+        'Aprobación bloqueada: resultados de alta severidad sin acuse ni justificación';
+      throw new DischargeApprovalBlockedError(
         `No se puede aprobar la epicrisis: hay resultados de alta severidad sin acuse (${formatPendingList(high)}). Proporcione clinicalOverrideReason con justificación clínica o acuse los resultados.`,
+        detail,
+        high,
       );
     }
     return { overrideApplied: true };
   }
 
-  await auditApproveBlocked(
-    db,
-    actor,
-    input.draftId,
-    pending,
-    'Aprobación bloqueada: resultados pendientes de acuse',
-  );
-  throw new Error(
+  const detail = 'Aprobación bloqueada: resultados pendientes de acuse';
+  throw new DischargeApprovalBlockedError(
     `No se puede aprobar la epicrisis: hay resultados pendientes de acuse (${formatPendingList(pending)}).`,
+    detail,
+    pending,
   );
 }
