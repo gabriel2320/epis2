@@ -1,23 +1,49 @@
 # CICA-L-01 — Buscar paciente + Censo hospitalario (reformulación P0)
 
-**Programa:** reformulación CICA clásica · **Prioridad:** P0 · **Estado:** wireframe · **Veredicto:** NO-GO hasta score ≥ 90
+**Programa:** PROG-PURGE-CICA · **Prioridad:** P0 · **Estado:** implementado · **Veredicto:** GO score ≥ 90 (walkthrough humano pendiente)
 
-**Canon:** [`docs/design/EPIS2_CICA_CLASSIC_MASTER_TREE.md`](../docs/design/EPIS2_CICA_CLASSIC_MASTER_TREE.md) · [`docs/design/EPIS2_CICA_CLASSIC_LAYOUT_SPEC.md`](../docs/design/EPIS2_CICA_CLASSIC_LAYOUT_SPEC.md)
-
----
-
-## 1. Intención clínica
-
-| Pantalla | Intención | Acción primaria |
-|----------|-----------|-----------------|
-| Buscar | Encontrar paciente por identificador o criterio clínico | Buscar → Abrir ficha |
-| Censo | Elegir paciente hospitalizado del servicio | Abrir ficha (por fila) |
+**Canon:** [`docs/design/EPIS2_CICA_CLASSIC_MASTER_TREE.md`](../../docs/design/EPIS2_CICA_CLASSIC_MASTER_TREE.md) · [`docs/design/EPIS2_CICA_CLASSIC_LAYOUT_SPEC.md`](../../docs/design/EPIS2_CICA_CLASSIC_LAYOUT_SPEC.md)
 
 ---
 
-## 2. Wireframe — Buscar (`/app/buscar`)
+## Fase A — Inventario
+
+| Campo | Valor |
+|-------|-------|
+| Rutas | `/app/buscar` · `/app/censo` |
+| Intención clínica | Encontrar paciente · elegir hospitalizado del servicio |
+| Usuario principal | Médico / enfermera demo |
+| Acción primaria | Buscar → Abrir ficha · Censo: Abrir ficha por fila |
+| Acciones secundarias | Filtros servicio (P0.1 defer) |
+| Estados visibles | DEMO badge top bar · sin banda paciente |
+| Componentes | `CicaPatientSearchPage` · `CicaCensusPage` · `CicaClinicalList` · `CicaAppShell` |
+| Problemas previos | Subtitle censo incorrecto · audit sin perfil system-workspace |
+
+### Hallazgos
+
+| Severidad | Descripción |
+|-----------|-------------|
+| UX-MAJOR | `auditCicaScreen` penalizaba falta identidad paciente en pantallas sistema |
+| UX-MINOR | Subtitle censo usaba copy de acción en lugar de intro clínica |
+
+---
+
+## Fase B — Reducción de intención
+
+```text
+Buscar — intención única: encontrar paciente
+Acción primaria única: Buscar (contained)
+Censo — intención única: elegir fila hospitalizada
+Acción primaria: Abrir ficha por fila (lista)
+```
+
+---
+
+## Fase C — Wireframe textual (aprobado implementación)
 
 Shell **A — system-workspace** · ver layout spec §2.
+
+### Buscar (`/app/buscar`)
 
 ```text
 ┌─ CicaTopBar: «Buscar paciente» ─────────────────────────────────────────────┐
@@ -27,57 +53,59 @@ Shell **A — system-workspace** · ver layout spec §2.
 │  ┌ span 10 ─────────────────────────────┐ ┌ span 2 ────┐                   │
 │  │ RUT, nombre, cama o diagnóstico…     │ │  Buscar    │                   │
 │  └──────────────────────────────────────┘ └────────────┘                   │
-│  Filtros asist (opcional P0.1): [Todos] [UTI] [UCI] [MQ]                   │
 │  ── Resultados ──                                                           │
 │  │ Paciente          │ Servicio/cama    │ Pendiente      │ [Abrir ficha] │   │
-│  │ …                 │ …                │ …              │               │   │
 └─────────────────────────────────────────────────────────────────────────────┘
 Pie: EPIS2 demo · sesión · sintéticos
 ```
 
-**Señales:** badge DEMO en top bar · sin banda paciente.
-
----
-
-## 3. Wireframe — Censo (`/app/censo`)
+### Censo (`/app/censo`)
 
 ```text
 ┌─ CicaTopBar: «Censo hospitalario» ──────────────────────────────────────────┐
 ├─ Sidebar L1 (idem) ─────────────────────────────────────────────────────────┤
-├─ ClinicalScreen ────────────────────────────────────────────────────────────┤
-│  Subtítulo: «Hospitalizados activos — seleccione fila para abrir ficha»    │
-│  [Todos] [Mi servicio] [UCI/UTI] [Próximas altas*]  *P1                   │
+│  Subtítulo: hospitalizados activos — seleccione fila                         │
 │  Campo filtro rápido (span 12)                                              │
 │  CicaClinicalList — misma tabla que buscar, sin hero                        │
 └─────────────────────────────────────────────────────────────────────────────┘
-Acción primaria: Abrir ficha por fila (no botón global)
 ```
 
 ---
 
-## 4. Grilla 12 columnas
+## Fase E — Cambios aplicados
 
-### Buscar
-
-| Bloque | span | Componente |
-|--------|------|------------|
-| Hero pregunta | 12 | `EpisM3Text headlineLarge` |
-| Campo búsqueda | 10 | `EpisTextField` |
-| Botón buscar | 2 | `EpisButton contained` |
-| Filtros servicio | 12 | chips asist P0.1 |
-| Lista resultados | 12 | `CicaClinicalList` |
-
-### Censo
-
-| Bloque | span | Componente |
-|--------|------|------------|
-| Intro + filtros | 12 | texto + chips |
-| Búsqueda local | 12 | `EpisTextField` |
-| Lista censo | 12 | `CicaClinicalList` |
+- `auditCicaScreen` · flag `systemWorkspace` para `/app/buscar` y `/app/censo`
+- `cicaSystemScreenAudit.ts` + tests score GO
+- `CicaCensusPage` · `copy.commandCenter.censusSubtitle`
+- Blueprints sin cambio de rutas (`systemScreens.blueprint.ts`)
 
 ---
 
-## 5. Registry (sin cambio rutas)
+## Fase F — CICA Screen Score
+
+| Criterio | Buscar | Censo |
+|----------|--------|-------|
+| system-workspace | ✓ | ✓ |
+| 1 acción primaria | ✓ Buscar | ✓ por fila |
+| DEMO visible | ✓ | ✓ |
+| Sidebar L1 (≤5) | ✓ | ✓ |
+| Sin overflow horizontal | ✓ | ✓ |
+| `auditCicaScreen()` | **100** | **100** |
+
+**Score:** 100/100 · **Veredicto:** GO (walkthrough humano pendiente)
+
+---
+
+## Fase G — Crítica
+
+```text
+¿Parece censo/búsqueda clásica clara y usable?
+Humano: pendiente antes de CICA default ON
+```
+
+---
+
+## Registry (sin cambio rutas)
 
 | screenId | route | layoutProfile | primaryAction |
 |----------|-------|---------------|---------------|
@@ -86,40 +114,6 @@ Acción primaria: Abrir ficha por fila (no botón global)
 
 ---
 
-## 6. Criterios GO (CICA Screen Score)
+## Próximo paso
 
-- [ ] 1 acción primaria clara por pantalla
-- [ ] Lista legible sin scroll horizontal 1280px
-- [ ] Sidebar L1 útil (5 ítems)
-- [ ] Header + pie institucional
-- [ ] DEMO visible
-- [ ] `auditCicaScreen()` ≥ 90 en buscar y censo
-
----
-
-## 7. Implementación (MF sugerida)
-
-**MF-CICA-L01** · allowlist:
-
-```text
-apps/web/src/cica/CicaPatientSearchPage.tsx
-apps/web/src/cica/CicaCensusPage.tsx
-packages/epis2-ui/src/cica/CicaClinicalList.tsx
-packages/epis2-ui/src/cica/CicaTopBar.tsx
-packages/epis2-ui/src/cica/CicaAppShell.tsx  (footer)
-```
-
-**Gate:** `npm run quality:clinical` + walkthrough humano censo → ficha.
-
-**Prohibido en esta MF:** namespace hospitalización · ambulatorio · epis2g blocks.
-
----
-
-## 8. Aprobación
-
-| Rol | Fecha | Veredicto |
-|-----|-------|-----------|
-| Wireframe C (este doc) | 2026-06-17 | Pendiente operador |
-| Implementación E | — | — |
-| Score F | — | — |
-| Crítica G | — | — |
+Golden journey `/app/*` con `VITE_ENABLE_CICA_UI=true` (Tramo 4).

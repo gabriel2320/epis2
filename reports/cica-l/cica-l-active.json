@@ -1,11 +1,9 @@
 {
-  "program": "PROG-AESTHETIC-RESET",
+  "program": "PROG-PURGE-CICA",
   "loop": "CICA-L",
-  "loopStatus": "closed",
-  "prId": "PR-AEST-07",
-  "activeScreenId": "CICA-L-11",
-  "activeLedgerFile": "reports/cica-l/11-auditoria.md",
-  "closeReport": "reports/epis2-pr-aest-07-cica-l-close.md",
-  "updatedAt": "2026-06-11",
-  "closedAt": "2026-06-11"
+  "loopStatus": "active",
+  "activeScreenId": "CICA-L-01",
+  "activeLedgerFile": "reports/cica-l/01-censo-reform.md",
+  "closeReport": "reports/epis2-mf-cica-l01-close.md",
+  "updatedAt": "2026-06-18"
 }

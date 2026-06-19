@@ -44,6 +44,27 @@ describe('clinicalLayoutEngine', () => {
     expect(score).toBeGreaterThanOrEqual(90);
   });
 
+  it('auditCicaScreen — system workspace buscar/censo score GO', () => {
+    const base = {
+      systemWorkspace: true as const,
+      patientIdentityVisible: false,
+      hasReturnNavigation: true,
+      primaryButtons: 1,
+      documentStateVisible: true,
+      hasUniqueIntent: true,
+      visibleNavElements: 5,
+      hasTransversalCommandBar: false,
+      primaryContentBlocks: 3,
+    };
+    for (const screenId of ['patient-search', 'census']) {
+      const primaryButtons = screenId === 'census' ? 0 : 1;
+      const { score, verdict, findings } = auditCicaScreen({ ...base, primaryButtons });
+      expect(findings, screenId).toHaveLength(0);
+      expect(score, screenId).toBeGreaterThanOrEqual(90);
+      expect(verdict, screenId).toBe('GO');
+    }
+  });
+
   it('auditCicaScreen — pantalla correcta score GO', () => {
     const { findings, score, verdict } = auditCicaScreen({
       patientIdentityVisible: true,

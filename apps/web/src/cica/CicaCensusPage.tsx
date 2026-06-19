@@ -39,11 +39,11 @@ export function CicaCensusPage() {
     <CicaGeneratedScreen
       blueprint={CENSUS_BLUEPRINT}
       title={copy.clinicalNav.census}
-      subtitle={copy.commandCenter.openPatientChart}
+      subtitle={copy.commandCenter.censusSubtitle}
       slots={{
         intro: (
           <EpisM3Text role="bodyMedium" color="text.secondary">
-            Seleccione un paciente hospitalizado para abrir la ficha clínica.
+            {copy.commandCenter.censusSubtitle}
           </EpisM3Text>
         ),
         filter: (

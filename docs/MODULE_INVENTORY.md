@@ -161,6 +161,6 @@ Evidencia: `reports/epis2-mf-pony-gate-01-close.md`, `reports/archive/2026-06/ep
 
 ## Próximo paso inventario
 
-1. **PROG-PURGE-CICA** — MF-PURGE-09 ✓ design-agents → `lab/` · **CICA-L-01 Censo**.
+1. **PROG-PURGE-CICA** — CICA-L-01 ✓ buscar/censo · golden journey `/app/*` flag ON.
 2. Completar filas **tramo A–K** con estado demo/scaffold/dead (hoja aparte o ampliar esta tabla).
 3. Tag **`epis2-base-v0.1`** ✓ (MF-RELEASE-BASE-01 · [`epis2-prog-product-map-close.md`](../reports/epis2-prog-product-map-close.md)).

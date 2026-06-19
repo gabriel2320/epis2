@@ -236,6 +236,10 @@
       "type": "file",
       "path": "scripts/quality/validate-web-no-design-agents-in-clinical-gate.mjs"
     },
+    "quality:cica-l01-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-l01-gate.mjs"
+    },
     "quality:aesthetic-action-density-gate": {
       "type": "file",
       "path": "scripts/quality/validate-aesthetic-action-density-gate.mjs"

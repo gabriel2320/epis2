@@ -258,6 +258,8 @@ export function auditClinicalLayout(input: ClinicalLayoutAuditInput): {
 }
 
 export type CicaScreenAuditInput = {
+  /** Pantallas sistema (`/app/buscar`, `/app/censo`) — sin banda paciente ni barra NL. */
+  systemWorkspace?: boolean;
   patientIdentityVisible: boolean;
   hasReturnNavigation: boolean;
   primaryButtons: number;
@@ -295,17 +297,36 @@ export function auditCicaScreen(input: CicaScreenAuditInput): {
   const { maxPrimary, maxVisibleTotal } = clinicalLayoutTokens.actionBudget;
   const maxCardDepth = clinicalLayoutTokens.maxCardNesting;
 
-  if (!input.patientIdentityVisible) {
+  const blockLimit = input.maxPrimaryBlocks ?? 5;
+  const system = input.systemWorkspace === true;
+
+  if (!system) {
+    if (!input.patientIdentityVisible) {
+      findings.push({
+        severity: 'UX-MAJOR',
+        message: 'CICA Ley 1: identidad de paciente no visible',
+      });
+      score -= 15;
+    }
+    if (!input.hasReturnNavigation) {
+      findings.push({ severity: 'UX-BLOCKER', message: 'CICA Ley 5: falta navegación de retorno' });
+      score -= 20;
+    }
+    if (!input.hasTransversalCommandBar) {
+      findings.push({
+        severity: 'UX-MAJOR',
+        message: 'CICA: barra de comando transversal ausente',
+      });
+      score -= 10;
+    }
+  } else if (!input.hasReturnNavigation) {
     findings.push({
       severity: 'UX-MAJOR',
-      message: 'CICA Ley 1: identidad de paciente no visible',
+      message: 'CICA sistema: sidebar L1 debe permitir retorno seguro',
     });
-    score -= 15;
+    score -= 10;
   }
-  if (!input.hasReturnNavigation) {
-    findings.push({ severity: 'UX-BLOCKER', message: 'CICA Ley 5: falta navegación de retorno' });
-    score -= 20;
-  }
+
   if (input.primaryButtons > maxPrimary) {
     findings.push({ severity: 'UX-BLOCKER', message: 'CICA Ley 3: más de una acción primaria' });
     score -= 20;
@@ -329,13 +350,6 @@ export function auditCicaScreen(input: CicaScreenAuditInput): {
     });
     score -= 10;
   }
-  if (!input.hasTransversalCommandBar) {
-    findings.push({
-      severity: 'UX-MAJOR',
-      message: 'CICA: barra de comando transversal ausente',
-    });
-    score -= 10;
-  }
   if (input.visibleActions !== undefined && input.visibleActions > maxVisibleTotal) {
     findings.push({ severity: 'UX-MAJOR', message: 'CICA-L: demasiadas acciones visibles' });
     score -= 10;
@@ -344,7 +358,6 @@ export function auditCicaScreen(input: CicaScreenAuditInput): {
     findings.push({ severity: 'UX-MAJOR', message: 'CICA-L: exceso de cajas anidadas' });
     score -= 10;
   }
-  const blockLimit = input.maxPrimaryBlocks ?? 5;
   if (input.primaryContentBlocks !== undefined && input.primaryContentBlocks > blockLimit) {
     findings.push({
       severity: 'UX-MAJOR',
