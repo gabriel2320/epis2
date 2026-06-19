@@ -110,6 +110,8 @@ export async function registerClinicalRoutes(
   const requirePatientRead = createRequirePermission(config, 'patient.read');
   const requireDraftWrite = createRequirePermission(config, 'draft.write');
   const requireDraftApprove = createRequirePermission(config, 'draft.approve');
+  const withRequestRls = <T>(request: AuthenticatedRequest, fn: (tx: Database) => Promise<T>) =>
+    runWithRlsContext(db, config, request.session, fn);
 
   app.get('/api/clinical/status', async () => ({ enabled: true }));
 
@@ -150,20 +152,21 @@ export async function registerClinicalRoutes(
   );
 
   app.get('/api/patients', { preHandler: requirePatientRead }, async (request) => {
-    const session = (request as AuthenticatedRequest).session;
     const q = (request.query as { q?: string }).q;
-    const rows = await runWithRlsContext(db, config, session, (tx) => searchPatients(tx, q));
-    const patients = await Promise.all(
-      rows.map(async (p) => {
-        const demoCaseCode = await getPatientDemoCaseCode(db, p.id);
-        return {
-          id: p.id,
-          displayName: p.displayName,
-          ...patientDemoPresentation(p),
-          demoCaseCode,
-        };
-      }),
-    );
+    const patients = await withRequestRls(request as AuthenticatedRequest, async (tx) => {
+      const rows = await searchPatients(tx, q);
+      return Promise.all(
+        rows.map(async (p) => {
+          const demoCaseCode = await getPatientDemoCaseCode(tx, p.id);
+          return {
+            id: p.id,
+            displayName: p.displayName,
+            ...patientDemoPresentation(p),
+            demoCaseCode,
+          };
+        }),
+      );
+    });
     return { patients };
   });
 
@@ -187,7 +190,9 @@ export async function registerClinicalRoutes(
           /* ignore malformed fields query */
         }
       }
-      const evaluated = await getDemoClinicalAlertsForPatient(db, patientId, alertOpts);
+      const evaluated = await withRequestRls(request as AuthenticatedRequest, (tx) =>
+        getDemoClinicalAlertsForPatient(tx, patientId, alertOpts),
+      );
       if (!evaluated) {
         return sendApiError(reply, 404, 'Paciente no encontrado');
       }
@@ -205,27 +210,33 @@ export async function registerClinicalRoutes(
     { preHandler: requirePatientRead },
     async (request, reply) => {
       const { patientId } = request.params as { patientId: string };
-      const session = (request as AuthenticatedRequest).session;
-      const patient = await runWithRlsContext(db, config, session, (tx) =>
-        getPatientById(tx, patientId),
-      );
-      if (!patient) {
+      const data = await withRequestRls(request as AuthenticatedRequest, async (tx) => {
+        const patient = await getPatientById(tx, patientId);
+        if (!patient) return null;
+        const [notes, clinicalContext, demoCaseCode] = await Promise.all([
+          listApprovedNotes(tx, patientId),
+          getPatientClinicalContext(tx, patientId),
+          getPatientDemoCaseCode(tx, patientId),
+        ]);
+        return {
+          patient,
+          notes,
+          clinicalContext,
+          demoCaseCode,
+        };
+      });
+      if (!data) {
         return sendApiError(reply, 404, 'Paciente no encontrado');
       }
-      const notes = await runWithRlsContext(db, config, session, (tx) =>
-        listApprovedNotes(tx, patientId),
-      );
-      const clinicalContext = await getPatientClinicalContext(db, patientId);
-      const demoCaseCode = await getPatientDemoCaseCode(db, patientId);
       return {
         patient: {
-          id: patient.id,
-          displayName: patient.displayName,
-          ...patientDemoPresentation(patient),
-          demoCaseCode,
+          id: data.patient.id,
+          displayName: data.patient.displayName,
+          ...patientDemoPresentation(data.patient),
+          demoCaseCode: data.demoCaseCode,
         },
-        clinicalContext,
-        notes: notes.map((n) => ({
+        clinicalContext: data.clinicalContext,
+        notes: data.notes.map((n) => ({
           id: n.id,
           noteType: n.noteType,
           title: n.title,
@@ -242,11 +253,14 @@ export async function registerClinicalRoutes(
     async (request, reply) => {
       const { patientId } = request.params as { patientId: string };
       const q = (request.query as { q?: string }).q ?? '';
-      const patient = await getPatientById(db, patientId);
-      if (!patient) {
+      const data = await withRequestRls(request as AuthenticatedRequest, async (tx) => {
+        const patient = await getPatientById(tx, patientId);
+        if (!patient) return null;
+        return searchPatientDocuments(tx, patientId, q);
+      });
+      if (!data) {
         return sendApiError(reply, 404, 'Paciente no encontrado');
       }
-      const data = await searchPatientDocuments(db, patientId, q);
       return documentSearchResponseSchema.parse({ readOnly: true as const, ...data });
     },
   );
@@ -260,18 +274,21 @@ export async function registerClinicalRoutes(
       if (!parsed.success) {
         return sendApiError(reply, 400, 'Intake de documento inválido');
       }
-      const patient = await getPatientById(db, patientId);
-      if (!patient) {
+      const session = (request as AuthenticatedRequest).session;
+      const result = await withRequestRls(request as AuthenticatedRequest, async (tx) => {
+        const patient = await getPatientById(tx, patientId);
+        if (!patient) return null;
+        return intakePatientDocument(
+          tx,
+          patientId,
+          session.sub,
+          parsed.data,
+          config.OLLAMA_BASE_URL,
+        );
+      });
+      if (!result) {
         return sendApiError(reply, 404, 'Paciente no encontrado');
       }
-      const session = (request as AuthenticatedRequest).session;
-      const result = await intakePatientDocument(
-        db,
-        patientId,
-        session.sub,
-        parsed.data,
-        config.OLLAMA_BASE_URL,
-      );
       return reply.status(201).send(documentIntakeResponseSchema.parse(result));
     },
   );
@@ -281,7 +298,9 @@ export async function registerClinicalRoutes(
     { preHandler: requireDraftWrite },
     async (request, reply) => {
       const { documentId } = request.params as { documentId: string };
-      const result = await processDocumentOcr(db, documentId, config.OLLAMA_BASE_URL);
+      const result = await withRequestRls(request as AuthenticatedRequest, (tx) =>
+        processDocumentOcr(tx, documentId, config.OLLAMA_BASE_URL),
+      );
       if (!result) {
         return sendApiError(reply, 404, 'Documento no encontrado');
       }
@@ -298,7 +317,9 @@ export async function registerClinicalRoutes(
     async (request, reply) => {
       const { patientId } = request.params as { patientId: string };
       const format = (request.query as { format?: string }).format === 'pdf' ? 'pdf' : 'txt';
-      const exported = await buildPatientSummaryExport(db, patientId, format);
+      const exported = await withRequestRls(request as AuthenticatedRequest, (tx) =>
+        buildPatientSummaryExport(tx, patientId, format),
+      );
       if (!exported) {
         return sendApiError(reply, 404, 'Paciente no encontrado');
       }
@@ -314,11 +335,14 @@ export async function registerClinicalRoutes(
     { preHandler: requirePatientRead },
     async (request, reply) => {
       const { patientId } = request.params as { patientId: string };
-      const patient = await getPatientById(db, patientId);
-      if (!patient) {
+      const data = await withRequestRls(request as AuthenticatedRequest, async (tx) => {
+        const patient = await getPatientById(tx, patientId);
+        if (!patient) return null;
+        return getPatientLongitudinal(tx, patientId);
+      });
+      if (!data) {
         return sendApiError(reply, 404, 'Paciente no encontrado');
       }
-      const data = await getPatientLongitudinal(db, patientId);
       return patientLongitudinalResponseSchema.parse(data);
     },
   );
@@ -328,7 +352,9 @@ export async function registerClinicalRoutes(
     { preHandler: requirePatientRead },
     async (request, reply) => {
       const { patientId } = request.params as { patientId: string };
-      const summary = await getPatientClinicalSummary(db, patientId);
+      const summary = await withRequestRls(request as AuthenticatedRequest, (tx) =>
+        getPatientClinicalSummary(tx, patientId),
+      );
       if (!summary) {
         return sendApiError(reply, 404, 'Paciente no encontrado');
       }
@@ -341,11 +367,14 @@ export async function registerClinicalRoutes(
     { preHandler: requirePatientRead },
     async (request, reply) => {
       const { patientId } = request.params as { patientId: string };
-      const patient = await getPatientById(db, patientId);
-      if (!patient) {
+      const dense = await withRequestRls(request as AuthenticatedRequest, async (tx) => {
+        const patient = await getPatientById(tx, patientId);
+        if (!patient) return null;
+        return getPatientContextDense(tx, patientId);
+      });
+      if (!dense) {
         return sendApiError(reply, 404, 'Paciente no encontrado');
       }
-      const dense = await getPatientContextDense(db, patientId);
       return clinicalContextDenseResponseSchema.parse(dense);
     },
   );
@@ -355,11 +384,14 @@ export async function registerClinicalRoutes(
     { preHandler: requirePatientRead },
     async (request, reply) => {
       const { patientId } = request.params as { patientId: string };
-      const patient = await getPatientById(db, patientId);
-      if (!patient) {
+      const data = await withRequestRls(request as AuthenticatedRequest, async (tx) => {
+        const patient = await getPatientById(tx, patientId);
+        if (!patient) return null;
+        return getPatientResultsInbox(tx, patientId);
+      });
+      if (!data) {
         return sendApiError(reply, 404, 'Paciente no encontrado');
       }
-      const data = await getPatientResultsInbox(db, patientId);
       return patientResultsInboxResponseSchema.parse(data);
     },
   );
@@ -369,14 +401,14 @@ export async function registerClinicalRoutes(
     { preHandler: requirePatientRead },
     async (request, reply) => {
       const { patientId } = request.params as { patientId: string };
-      const session = (request as AuthenticatedRequest).session;
-      const patient = await getPatientById(db, patientId);
-      if (!patient) {
+      const state = await withRequestRls(request as AuthenticatedRequest, async (tx) => {
+        const patient = await getPatientById(tx, patientId);
+        if (!patient) return null;
+        return getPaperChartState(tx, patientId);
+      });
+      if (!state) {
         return sendApiError(reply, 404, 'Paciente no encontrado');
       }
-      const state = await runWithRlsContext(db, config, session, (tx) =>
-        getPaperChartState(tx, patientId),
-      );
       return state;
     },
   );
@@ -387,14 +419,19 @@ export async function registerClinicalRoutes(
     async (request, reply) => {
       const { patientId } = request.params as { patientId: string };
       const session = (request as AuthenticatedRequest).session;
-      const patient = await getPatientById(db, patientId);
-      if (!patient) {
-        return sendApiError(reply, 404, 'Paciente no encontrado');
-      }
       try {
-        const result = await runWithRlsContext(db, config, session, (tx) =>
-          approvePaperChartDraft(tx, { id: session.sub, username: session.username }, patientId),
-        );
+        const result = await withRequestRls(request as AuthenticatedRequest, async (tx) => {
+          const patient = await getPatientById(tx, patientId);
+          if (!patient) return null;
+          return approvePaperChartDraft(
+            tx,
+            { id: session.sub, username: session.username },
+            patientId,
+          );
+        });
+        if (!result) {
+          return sendApiError(reply, 404, 'Paciente no encontrado');
+        }
         return { patientId, ...result };
       } catch (err) {
         if (err instanceof PaperChartSignBlockedError) {
@@ -416,24 +453,25 @@ export async function registerClinicalRoutes(
     async (request, reply) => {
       const { patientId } = request.params as { patientId: string };
       const session = (request as AuthenticatedRequest).session;
-      const patient = await getPatientById(db, patientId);
-      if (!patient) {
-        return sendApiError(reply, 404, 'Paciente no encontrado');
-      }
       let sections;
       try {
         sections = parsePaperChartBody(request.body);
       } catch {
         return sendApiError(reply, 400, 'Cuerpo paper-chart inválido');
       }
-      const draft = await runWithRlsContext(db, config, session, (tx) =>
-        upsertPaperChartDraft(
+      const draft = await withRequestRls(request as AuthenticatedRequest, async (tx) => {
+        const patient = await getPatientById(tx, patientId);
+        if (!patient) return null;
+        return upsertPaperChartDraft(
           tx,
           { id: session.sub, username: session.username },
           patientId,
           sections,
-        ),
-      );
+        );
+      });
+      if (!draft) {
+        return sendApiError(reply, 404, 'Paciente no encontrado');
+      }
       return { patientId, sections, draftId: draft.id };
     },
   );
@@ -450,18 +488,19 @@ export async function registerClinicalRoutes(
       } catch {
         return sendApiError(reply, 400, 'Sección paper-chart inválida');
       }
-      const patient = await getPatientById(db, patientId);
-      if (!patient) {
-        return sendApiError(reply, 404, 'Paciente no encontrado');
-      }
-      const result = await runWithRlsContext(db, config, session, (tx) =>
-        patchPaperChartSection(
+      const result = await withRequestRls(request as AuthenticatedRequest, async (tx) => {
+        const patient = await getPatientById(tx, patientId);
+        if (!patient) return null;
+        return patchPaperChartSection(
           tx,
           { id: session.sub, username: session.username },
           patientId,
           patch,
-        ),
-      );
+        );
+      });
+      if (!result) {
+        return sendApiError(reply, 404, 'Paciente no encontrado');
+      }
       return {
         patientId,
         draftId: result.draft.id,
