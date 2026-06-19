@@ -30,7 +30,7 @@ Golden journey clínico en rutas CICA con producto GO.
 - [x] Golden E2E `/app/*` (no solo redirects)
 - [x] `quality:golden-journey` vitest verde
 - [ ] Walkthrough institucional GO PILOT
-- [ ] PR6 redirects E2E dedicado (legacy spec existente)
+- [x] PR6 redirects E2E dedicado (legacy spec existente)
 
 ## Próximo paso
 
