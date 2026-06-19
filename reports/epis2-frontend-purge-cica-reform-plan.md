@@ -95,9 +95,9 @@ Inventario → 1 intención → wireframe ASCII → ClinicalScreen → score ≥
 
 Checklist antes de `VITE_ENABLE_CICA_UI` default ON:
 
-- [ ] CICA-L-01 Censo GO (score ≥ 90)
-- [ ] Golden journey completo en `/app/*` (no solo redirects)
-- [ ] `quality:golden-journey` verde con flag ON
+- [x] CICA-L-01 Censo GO (score ≥ 90)
+- [x] Golden journey completo en `/app/*` (no solo redirects)
+- [x] `quality:golden-journey` verde con flag ON
 - [ ] Walkthrough institucional GO PILOT
 - [ ] PR6 redirects validados E2E
 
