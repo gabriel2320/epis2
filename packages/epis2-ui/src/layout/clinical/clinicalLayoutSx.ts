@@ -1,15 +1,16 @@
 import type { SxProps, Theme } from '@mui/material/styles';
-import {
-  cicaIsClinicalMaxWidthProfile,
-  cicaMaxContentWidth,
-  cicaShellPaddingXSx,
-} from '../../cica/cicaResponsive.js';
+import { cicaMaxContentWidth, cicaShellPaddingXSx } from '../../cica/cicaResponsive.js';
+import type { CicaLayoutProfile } from '../../cica/cicaTokens.js';
 import type { ClinicalLayoutProfile } from './clinicalLayoutEngine.js';
 import { resolveLayoutProfile } from './clinicalLayoutEngine.js';
 import { clinicalLayoutTokens } from './clinicalLayoutTokens.js';
 
+function isCicaLayoutProfile(profile: string): profile is CicaLayoutProfile {
+  return profile in cicaMaxContentWidth;
+}
+
 function clinicalProfileMaxWidth(profile: ClinicalLayoutProfile): number {
-  if (cicaIsClinicalMaxWidthProfile(profile)) {
+  if (isCicaLayoutProfile(profile)) {
     return cicaMaxContentWidth[profile];
   }
   return resolveLayoutProfile(profile).maxWidth;
@@ -40,7 +41,7 @@ export function clinicalHeaderSx(): SxProps<Theme> {
 
 export function clinicalContentSx(profile: ClinicalLayoutProfile): SxProps<Theme> {
   const density = clinicalLayoutTokens.density.calm;
-  const cicaBounded = cicaIsClinicalMaxWidthProfile(profile);
+  const cicaBounded = isCicaLayoutProfile(profile);
   return {
     flex: 1,
     minHeight: 0,

@@ -240,6 +240,10 @@
       "type": "file",
       "path": "scripts/quality/validate-cica-l01-gate.mjs"
     },
+    "quality:cica-golden-journey-gate": {
+      "type": "file",
+      "path": "scripts/quality/validate-cica-golden-journey-gate.mjs"
+    },
     "quality:aesthetic-action-density-gate": {
       "type": "file",
       "path": "scripts/quality/validate-aesthetic-action-density-gate.mjs"

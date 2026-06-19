@@ -61,7 +61,11 @@ export function CicaPatientSearchPage() {
       subtitle={copy.patientSearch.subtitle}
       slots={{
         hero: (
-          <EpisM3Text role="headlineMedium" component="h2">
+          <EpisM3Text
+            role="headlineMedium"
+            component="h2"
+            data-testid="cica-patient-search-hero"
+          >
             {copy.patientSearch.heroQuestion}
           </EpisM3Text>
         ),

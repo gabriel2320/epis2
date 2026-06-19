@@ -3,14 +3,17 @@ import { loadEnvFile } from './scripts/load-env.mjs';
 
 loadEnvFile();
 
-const WEB_URL = process.env.PLAYWRIGHT_WEB_URL ?? 'http://127.0.0.1:5173';
+const WEB_PORT = process.env.PLAYWRIGHT_WEB_PORT ?? '5173';
+const WEB_URL = process.env.PLAYWRIGHT_WEB_URL ?? `http://127.0.0.1:${WEB_PORT}`;
 const API_HEALTH_URL = process.env.PLAYWRIGHT_API_HEALTH_URL ?? 'http://127.0.0.1:3001/health';
 const isCi = Boolean(process.env.CI);
+const reuseExistingServer =
+  !isCi && process.env.PLAYWRIGHT_REUSE_EXISTING_SERVER !== 'false';
 
 /** CI usa preview (bundle) — vite dev falla al resolver @mui/material/styles vía Node ESM en Linux. */
 const WEB_SERVER_COMMAND = isCi
-  ? 'npm run preview -w @epis2/web -- --host 127.0.0.1 --port 5173'
-  : 'npm run dev -w @epis2/web';
+  ? `npm run preview -w @epis2/web -- --host 127.0.0.1 --port ${WEB_PORT}`
+  : `npm run dev -w @epis2/web -- --host 127.0.0.1 --port ${WEB_PORT}`;
 
 export default defineConfig({
   testDir: 'e2e',
@@ -31,13 +34,13 @@ export default defineConfig({
     {
       command: 'npm run dev -w @epis2/api',
       url: API_HEALTH_URL,
-      reuseExistingServer: !isCi,
+      reuseExistingServer,
       timeout: 120_000,
     },
     {
       command: WEB_SERVER_COMMAND,
       url: WEB_URL,
-      reuseExistingServer: !isCi,
+      reuseExistingServer,
       timeout: 120_000,
     },
   ],

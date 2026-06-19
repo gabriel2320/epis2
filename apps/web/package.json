@@ -13,6 +13,7 @@
     "test:e2e": "node ../../tools/scripts/run-e2e.mjs e2e/golden-command-evolution.spec.ts e2e/golden-draft-approval.spec.ts e2e/golden-v2-admission-discharge.spec.ts e2e/clinical-textbox-evolution-draft.spec.ts e2e/login-gateway.spec.ts e2e/ux-g02-command-first.spec.ts e2e/three-modes-journey.spec.ts e2e/ola6a-print-certificate.spec.ts e2e/ola6a-print-prescription.spec.ts e2e/ola6a-print-discharge-summary.spec.ts e2e/ola6a-print-orders.spec.ts e2e/a11y-smoke.spec.ts e2e/mobile-drawer.spec.ts",
     "test:e2e:print": "node ../../tools/scripts/run-e2e.mjs e2e/ola6a-print-certificate.spec.ts e2e/ola6a-print-prescription.spec.ts e2e/ola6a-print-discharge-summary.spec.ts e2e/ola6a-print-orders.spec.ts",
     "test:e2e:golden-v2": "node ../../tools/scripts/run-e2e.mjs e2e/golden-v2-admission-discharge.spec.ts",
+    "test:e2e:golden-cica": "npm run build -w @epis2/epis2-ui && node ../../tools/scripts/run-e2e.mjs --fresh e2e/golden-cica-journey.spec.ts",
     "test:e2e:dual-chart": "node ../../tools/scripts/run-e2e.mjs e2e/dual-chart-modes.spec.ts",
     "test:e2e:ux-g02": "node ../../tools/scripts/run-e2e.mjs e2e/ux-g02-command-first.spec.ts",
     "test:e2e:login-gateway": "node ../../tools/scripts/run-e2e.mjs e2e/login-gateway.spec.ts",

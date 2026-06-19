@@ -241,6 +241,10 @@ export function CicaNewEvolutionPage() {
     [effectiveBlueprint],
   );
 
+  const canPersistDraft = Boolean(
+    BLUEPRINT_DRAFT_TYPES[evolutionBlueprint.blueprintId] && patientId,
+  );
+
   const actions = useMemo((): ClinicalLayoutAction[] => {
     if (!patientId) return [];
     return [
@@ -259,8 +263,20 @@ export function CicaNewEvolutionPage() {
         ...(isSaving ? { disabled: true } : {}),
         testId: 'epis2-form-save',
       },
+      ...(canPersistDraft
+        ? [
+            {
+              id: 'sign',
+              label: copy.forms.sign,
+              kind: 'secondary' as const,
+              onClick: () => void saveDraft('sign'),
+              ...(isSaving ? { disabled: true } : {}),
+              testId: 'epis2-form-sign',
+            },
+          ]
+        : []),
     ];
-  }, [go, isSaving, patientId, saveDraft]);
+  }, [canPersistDraft, go, isSaving, patientId, saveDraft]);
 
   if (!allowed) return null;
 
@@ -277,10 +293,6 @@ export function CicaNewEvolutionPage() {
   }
 
   if (!detailQuery.data) return null;
-
-  const canPersistDraft = Boolean(
-    BLUEPRINT_DRAFT_TYPES[evolutionBlueprint.blueprintId] && patientId,
-  );
 
   return (
     <FormProvider {...form}>

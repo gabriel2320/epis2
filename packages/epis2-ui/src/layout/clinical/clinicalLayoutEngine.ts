@@ -8,7 +8,9 @@ export type ClinicalLayoutProfile =
   | 'orders'
   | 'results'
   | 'admin-lite'
-  | 'patient-search';
+  | 'patient-search'
+  | 'letter-document'
+  | 'book-reader';
 
 export type ClinicalLayoutProfileConfig = {
   maxWidth: number;
@@ -91,6 +93,24 @@ export const clinicalLayoutProfiles: Record<ClinicalLayoutProfile, ClinicalLayou
     fieldGap: 16,
     primaryActionPosition: 'sticky-bottom',
     maxVisibleActions: 1,
+    allowNestedCards: false,
+  },
+  'letter-document': {
+    maxWidth: 920,
+    columns: 1,
+    sectionGap: 24,
+    fieldGap: 16,
+    primaryActionPosition: 'sticky-bottom',
+    maxVisibleActions: 3,
+    allowNestedCards: false,
+  },
+  'book-reader': {
+    maxWidth: 920,
+    columns: 1,
+    sectionGap: 24,
+    fieldGap: 16,
+    primaryActionPosition: 'bottom-right',
+    maxVisibleActions: 3,
     allowNestedCards: false,
   },
 };

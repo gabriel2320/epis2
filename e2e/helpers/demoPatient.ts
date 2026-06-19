@@ -177,7 +177,10 @@ export type CicaChartTabId =
 export async function loginAsPhysicianCica(page: Page) {
   await loginAsPhysicianApiOnly(page);
   await page.goto('/app/buscar');
-  await expect(page.getByTestId('cica-patient-search-hero')).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByTestId('cica-app-shell')).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByTestId('cica-generated-patient-search')).toBeVisible({
+    timeout: 15_000,
+  });
   await expect(getCicaPatientSearchInput(page)).toBeVisible();
 }
 
@@ -191,7 +194,9 @@ export async function selectCicaDemoPatientViaSearch(page: Page, demoCode: strin
   await expect(getCicaPatientSearchInput(page)).toBeVisible({ timeout: 15_000 });
   await getCicaPatientSearchInput(page).fill(demoCode);
   await page.getByTestId('cica-patient-search-submit').click();
-  await page.getByTestId(`epis2-patient-search-open-${demo.patientId}`).click();
+  const openPatient = page.getByTestId(`cica-patient-search-open-${demo.patientId}`);
+  await expect(openPatient).toBeVisible({ timeout: 15_000 });
+  await openPatient.click();
   await expect(page).toHaveURL(new RegExp(`/app/pacientes/${demo.patientId}/resumen`), {
     timeout: 15_000,
   });
@@ -387,6 +392,13 @@ export async function setEpis2ThemePreferences(
     },
     { key: EPIS2_THEME_PREFERENCES_KEY, next: prefs },
   );
+}
+
+/** Home clínico CICA — `/app/buscar`. */
+export async function goToCicaClinicalHome(page: Page) {
+  await page.goto('/app/buscar');
+  await expect(page.getByTestId('cica-app-shell')).toBeVisible({ timeout: 15_000 });
+  await expect(getCicaPatientSearchInput(page)).toBeVisible();
 }
 
 /** CICA top bar — controles de tema visibles (modo + acentos rápidos). */
