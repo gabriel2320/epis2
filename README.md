@@ -23,7 +23,8 @@ Flujo mínimo: **censo → ficha → borrador → aprobación humana**. IA propo
 | Base consolidada | Tag **`epis2-base-v0.1`** · demo **`v0.1-demo-rc3`** |
 | UI clínica activa | **CICA** `/app/*` (GO) · legacy `/espacio/*` = fallback |
 | Golden journey | Legacy + **E2E CICA** (`test:e2e:golden-cica`, PR6 redirects) |
-| Programa en curso | **PROG-PURGE-CICA** — archive + perímetro agente |
+| Programa en curso | **PROG-PURGE-CICA** Tramo 4 — pendiente walkthrough piloto |
+| Mapa producto | **PROG-PRODUCT-MAP** ✓ · tag **`epis2-base-v0.1`** (no re-tag) |
 | Producción / PHI | **No listo** — ver seguridad abajo |
 
 **Brújula (manda):** [`docs/EPIS2_CURRENT_STATE.md`](docs/EPIS2_CURRENT_STATE.md) · **Tablero:** [`docs/product/EPIS2_TABLERO.md`](docs/product/EPIS2_TABLERO.md)
@@ -116,12 +117,22 @@ Legal: [`DISCLAIMER.md`](DISCLAIMER.md) · [`SECURITY.md`](SECURITY.md) · [`CON
 
 ## Documentación viva
 
+Jerarquía en conflictos (humano → agente → producto):
+
+```text
+README (puerta pública) → EPIS2_CURRENT_STATE (brújula) → AGENT_CONTEXT_MINIMAL (agentes)
+→ EPIS2_ROUTE_MAP (rutas CICA) → EPIS2_PRODUCT_CATALOG (objetos clínico)
+```
+
 | Documento | Propósito |
 |-----------|-----------|
 | [`docs/EPIS2_CURRENT_STATE.md`](docs/EPIS2_CURRENT_STATE.md) | **Estado ejecutivo** (manda sobre este README) |
+| [`docs/AGENT_CONTEXT_MINIMAL.md`](docs/AGENT_CONTEXT_MINIMAL.md) | Loop agentes Cursor |
+| [`docs/product/EPIS2_ROUTE_MAP.md`](docs/product/EPIS2_ROUTE_MAP.md) | Mapa humano rutas `/app/*` (generado desde registry) |
+| [`docs/product/EPIS2_PRODUCT_CATALOG.md`](docs/product/EPIS2_PRODUCT_CATALOG.md) | Catálogo producto (vista humana, no registry paralelo) |
+| [`reports/epis2-prog-product-map-close.md`](reports/epis2-prog-product-map-close.md) | Cierre PROG-PRODUCT-MAP · tag `epis2-base-v0.1` |
 | [`docs/DOCUMENTATION_GOVERNANCE.md`](docs/DOCUMENTATION_GOVERNANCE.md) | Qué doc manda en conflictos |
 | [`docs/PRODUCT_CANON.md`](docs/PRODUCT_CANON.md) | Principios no negociables |
-| [`docs/AGENT_CONTEXT_MINIMAL.md`](docs/AGENT_CONTEXT_MINIMAL.md) | Loop agentes Cursor |
 | [`docs/INDEX.md`](docs/INDEX.md) | Índice L0…L5 |
 | [`reports/README.md`](reports/README.md) | Reportes de sesión (histórico) |
 
