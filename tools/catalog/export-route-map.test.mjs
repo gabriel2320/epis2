@@ -19,5 +19,9 @@ describe('parseCicaScreenRegistry', () => {
       expect(row?.navVisible).toBe(false);
     }
     expect(screens.find((s) => s.screenId === 'patient-search')?.status).toBe('KEEP_CANONICAL');
+    expect(screens.find((s) => s.screenId === 'patient-summary')?.productClass).toBe('core-read');
+    expect(screens.find((s) => s.screenId === 'new-evolution')?.productClass).toBe('core-write');
+    expect(screens.find((s) => s.screenId === 'paper-day')?.productClass).toBe('paper');
+    expect(screens.find((s) => s.screenId === 'paper-day')?.screenMode).toBe('paper');
   });
 });

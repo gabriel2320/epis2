@@ -2,7 +2,8 @@ import type { FastifyInstance } from 'fastify';
 import type { AppConfig } from '../config.js';
 import { sendApiError } from '../errors.js';
 import type { Database } from '../db/client.js';
-import { createRequirePermission } from '../auth/authenticate.js';
+import { createRequirePermission, type AuthenticatedRequest } from '../auth/authenticate.js';
+import { runWithRlsContext } from '../db/rlsContext.js';
 import {
   exportFhirDocumentReference,
   exportFhirEncounter,
@@ -63,8 +64,11 @@ export async function registerFhirRoutes(
     { preHandler: requireFhirExport },
     async (request, reply) => {
       const { patientId } = request.params as { patientId: string };
+      const session = (request as AuthenticatedRequest).session;
       try {
-        const resource = await exportFhirPatient(db, patientId);
+        const resource = await runWithRlsContext(db, config, session, (tx) =>
+          exportFhirPatient(tx, patientId),
+        );
         return sendFhir(reply, resource);
       } catch (e) {
         return mapExportError(reply, e);
@@ -77,8 +81,11 @@ export async function registerFhirRoutes(
     { preHandler: requireFhirExport },
     async (request, reply) => {
       const { encounterId } = request.params as { encounterId: string };
+      const session = (request as AuthenticatedRequest).session;
       try {
-        const resource = await exportFhirEncounter(db, encounterId);
+        const resource = await runWithRlsContext(db, config, session, (tx) =>
+          exportFhirEncounter(tx, encounterId),
+        );
         return sendFhir(reply, resource);
       } catch (e) {
         return mapExportError(reply, e);
@@ -91,8 +98,11 @@ export async function registerFhirRoutes(
     { preHandler: requireFhirExport },
     async (request, reply) => {
       const { noteId } = request.params as { noteId: string };
+      const session = (request as AuthenticatedRequest).session;
       try {
-        const resource = await exportFhirDocumentReference(db, noteId);
+        const resource = await runWithRlsContext(db, config, session, (tx) =>
+          exportFhirDocumentReference(tx, noteId),
+        );
         return sendFhir(reply, resource);
       } catch (e) {
         return mapExportError(reply, e);
@@ -105,8 +115,11 @@ export async function registerFhirRoutes(
     { preHandler: requireFhirExport },
     async (request, reply) => {
       const { draftId } = request.params as { draftId: string };
+      const session = (request as AuthenticatedRequest).session;
       try {
-        const resource = await exportFhirServiceRequest(db, draftId);
+        const resource = await runWithRlsContext(db, config, session, (tx) =>
+          exportFhirServiceRequest(tx, draftId),
+        );
         return sendFhir(reply, resource);
       } catch (e) {
         return mapExportError(reply, e);
@@ -119,8 +132,11 @@ export async function registerFhirRoutes(
     { preHandler: requireFhirExport },
     async (request, reply) => {
       const { patientId } = request.params as { patientId: string };
+      const session = (request as AuthenticatedRequest).session;
       try {
-        const bundle = await exportFhirPatientBundle(db, patientId);
+        const bundle = await runWithRlsContext(db, config, session, (tx) =>
+          exportFhirPatientBundle(tx, patientId),
+        );
         return sendFhir(reply, bundle);
       } catch (e) {
         return mapExportError(reply, e);

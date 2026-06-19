@@ -21,6 +21,7 @@ import {
 import type { AppConfig } from '../config.js';
 import { sendApiError } from '../errors.js';
 import type { Database } from '../db/client.js';
+import { runWithRlsContext } from '../db/rlsContext.js';
 import {
   fetchLocalAiStatus,
   fetchLocalAiCapabilities,
@@ -135,10 +136,8 @@ export async function registerAiRoutes(
           if (parsed.data.currentFields !== undefined) {
             safetyOpts.currentFields = parsed.data.currentFields;
           }
-          const cdsNotes = await getDemoSafetyNotesForPatient(
-            db,
-            parsed.data.patientId,
-            safetyOpts,
+          const cdsNotes = await runWithRlsContext(db, config, session, (tx) =>
+            getDemoSafetyNotesForPatient(tx, parsed.data.patientId!, safetyOpts),
           );
           safetyNotes = [...new Set([...cdsNotes, ...medrepoNotes, ...safetyNotes])];
         } else if (medrepoNotes.length) {
@@ -345,7 +344,9 @@ export async function registerAiRoutes(
         return sendApiError(reply, 503, 'Base de datos no disponible');
       }
       const session = (request as AuthenticatedRequest).session;
-      const result = await suggestPatientSummary24h(db, config, session.sub, parsed.data.patientId);
+      const result = await runWithRlsContext(db, config, session, (tx) =>
+        suggestPatientSummary24h(tx, config, session.sub, parsed.data.patientId),
+      );
       return aiSummarySuggestResponseSchema.parse(result);
     },
   );

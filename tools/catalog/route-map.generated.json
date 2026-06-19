@@ -1,7 +1,7 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "source": "packages/epis2-ui/src/cica/EPIS_CICA_SCREEN_REGISTRY.ts",
-  "generatedAt": "2026-06-18T23:54:06.208Z",
+  "generatedAt": "2026-06-19T13:43:27.921Z",
   "screenCount": 25,
   "screens": [
     {
@@ -10,7 +10,10 @@
       "intent": "Encontrar paciente y abrir ficha",
       "layoutProfile": "patient-search",
       "navVisible": true,
-      "status": "KEEP_CANONICAL"
+      "status": "KEEP_CANONICAL",
+      "screenMode": "classic",
+      "productClass": "core-read",
+      "primaryAction": "Buscar"
     },
     {
       "screenId": "census",
@@ -18,7 +21,10 @@
       "intent": "Elegir paciente desde lista clínica",
       "layoutProfile": "census",
       "navVisible": true,
-      "status": "KEEP_CANONICAL"
+      "status": "KEEP_CANONICAL",
+      "screenMode": "classic",
+      "productClass": "core-read",
+      "primaryAction": "Abrir ficha"
     },
     {
       "screenId": "recent-patients",
@@ -26,7 +32,10 @@
       "intent": "Retomar pacientes abiertos recientemente",
       "layoutProfile": "census",
       "navVisible": false,
-      "status": "HIDE_STUB"
+      "status": "HIDE_STUB",
+      "screenMode": "stub",
+      "productClass": "stub-review",
+      "primaryAction": "Abrir ficha"
     },
     {
       "screenId": "my-work",
@@ -34,7 +43,10 @@
       "intent": "Revisar pendientes del profesional",
       "layoutProfile": "census",
       "navVisible": false,
-      "status": "HIDE_STUB"
+      "status": "HIDE_STUB",
+      "screenMode": "stub",
+      "productClass": "stub-review",
+      "primaryAction": "Abrir tarea"
     },
     {
       "screenId": "agenda",
@@ -42,7 +54,10 @@
       "intent": "Consultar agenda de guardia",
       "layoutProfile": "census",
       "navVisible": false,
-      "status": "HIDE_STUB"
+      "status": "HIDE_STUB",
+      "screenMode": "stub",
+      "productClass": "stub-review",
+      "primaryAction": "Ver turno"
     },
     {
       "screenId": "new-evolution",
@@ -50,7 +65,11 @@
       "intent": "Escribir evolución clínica",
       "layoutProfile": "letter-document",
       "navVisible": true,
-      "status": "KEEP_CANONICAL"
+      "status": "KEEP_CANONICAL",
+      "screenMode": "letter",
+      "productClass": "core-write",
+      "primaryAction": "Guardar borrador",
+      "requiredSignals": ["patient", "demo", "draft-status"]
     },
     {
       "screenId": "evolution-book",
@@ -58,7 +77,11 @@
       "intent": "Leer evoluciones como libro clínico",
       "layoutProfile": "book-reader",
       "navVisible": true,
-      "status": "KEEP_CANONICAL"
+      "status": "KEEP_CANONICAL",
+      "screenMode": "letter",
+      "productClass": "core-read",
+      "primaryAction": "Nueva evolución",
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "evolution-detail",
@@ -66,7 +89,11 @@
       "intent": "Leer una evolución en página carta",
       "layoutProfile": "letter-document",
       "navVisible": true,
-      "status": "KEEP_CANONICAL"
+      "status": "KEEP_CANONICAL",
+      "screenMode": "letter",
+      "productClass": "core-read",
+      "primaryAction": "Editar borrador",
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-evolutions",
@@ -75,7 +102,11 @@
       "layoutProfile": "classic-chart",
       "navVisible": true,
       "status": "KEEP_CANONICAL",
-      "blueprintSectionId": "evolutions"
+      "screenMode": "classic",
+      "productClass": "core-read",
+      "primaryAction": "Nueva evolución",
+      "blueprintSectionId": "evolutions",
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "new-prescription",
@@ -83,7 +114,11 @@
       "intent": "Escribir prescripción médica",
       "layoutProfile": "letter-document",
       "navVisible": true,
-      "status": "KEEP_CANONICAL"
+      "status": "KEEP_CANONICAL",
+      "screenMode": "letter",
+      "productClass": "core-write",
+      "primaryAction": "Guardar borrador",
+      "requiredSignals": ["patient", "demo", "draft-status"]
     },
     {
       "screenId": "new-document",
@@ -91,7 +126,11 @@
       "intent": "Emitir certificado médico",
       "layoutProfile": "letter-document",
       "navVisible": true,
-      "status": "KEEP_CANONICAL"
+      "status": "KEEP_CANONICAL",
+      "screenMode": "letter",
+      "productClass": "core-write",
+      "primaryAction": "Guardar borrador",
+      "requiredSignals": ["patient", "demo", "draft-status"]
     },
     {
       "screenId": "new-epicrisis",
@@ -99,7 +138,11 @@
       "intent": "Redactar epicrisis de alta",
       "layoutProfile": "letter-document",
       "navVisible": true,
-      "status": "KEEP_CANONICAL"
+      "status": "KEEP_CANONICAL",
+      "screenMode": "letter",
+      "productClass": "core-write",
+      "primaryAction": "Guardar borrador",
+      "requiredSignals": ["patient", "demo", "draft-status"]
     },
     {
       "screenId": "patient-admission",
@@ -107,7 +150,11 @@
       "intent": "Revisar datos de ingreso clínico",
       "layoutProfile": "classic-chart",
       "navVisible": true,
-      "status": "KEEP_CANONICAL"
+      "status": "KEEP_CANONICAL",
+      "screenMode": "classic",
+      "productClass": "core-read",
+      "primaryAction": "Editar ingreso",
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-medications",
@@ -116,7 +163,11 @@
       "layoutProfile": "classic-chart",
       "navVisible": true,
       "status": "KEEP_CANONICAL",
-      "blueprintSectionId": "medications"
+      "screenMode": "classic",
+      "productClass": "core-read",
+      "primaryAction": "Nueva prescripción",
+      "blueprintSectionId": "medications",
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-interconsultas",
@@ -125,7 +176,11 @@
       "layoutProfile": "classic-chart",
       "navVisible": true,
       "status": "KEEP_CANONICAL",
-      "blueprintSectionId": "interconsultas"
+      "screenMode": "classic",
+      "productClass": "core-read",
+      "primaryAction": "Solicitar interconsulta",
+      "blueprintSectionId": "interconsultas",
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-procedures",
@@ -134,7 +189,11 @@
       "layoutProfile": "classic-chart",
       "navVisible": true,
       "status": "KEEP_CANONICAL",
-      "blueprintSectionId": "procedures"
+      "screenMode": "classic",
+      "productClass": "core-read",
+      "primaryAction": "Registrar procedimiento",
+      "blueprintSectionId": "procedures",
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-discharge",
@@ -143,7 +202,11 @@
       "layoutProfile": "classic-chart",
       "navVisible": true,
       "status": "KEEP_CANONICAL",
-      "blueprintSectionId": "discharge"
+      "screenMode": "classic",
+      "productClass": "core-read",
+      "primaryAction": "Nueva epicrisis",
+      "blueprintSectionId": "discharge",
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-timeline",
@@ -152,7 +215,11 @@
       "layoutProfile": "classic-chart",
       "navVisible": true,
       "status": "KEEP_CANONICAL",
-      "blueprintSectionId": "timeline"
+      "screenMode": "classic",
+      "productClass": "core-read",
+      "primaryAction": "Filtrar eventos",
+      "blueprintSectionId": "timeline",
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-audit",
@@ -161,7 +228,11 @@
       "layoutProfile": "classic-chart",
       "navVisible": true,
       "status": "KEEP_CANONICAL",
-      "blueprintSectionId": "audit"
+      "screenMode": "classic",
+      "productClass": "core-read",
+      "primaryAction": "Exportar trazas",
+      "blueprintSectionId": "audit",
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "paper-day",
@@ -169,7 +240,11 @@
       "intent": "Leer hoja clínica diaria",
       "layoutProfile": "paper-mode",
       "navVisible": true,
-      "status": "KEEP_CANONICAL"
+      "status": "KEEP_CANONICAL",
+      "screenMode": "paper",
+      "productClass": "paper",
+      "primaryAction": "Imprimir",
+      "requiredSignals": ["patient", "demo", "draft-status"]
     },
     {
       "screenId": "paper-book",
@@ -177,7 +252,11 @@
       "intent": "Recorrer libro clínico del episodio",
       "layoutProfile": "paper-mode",
       "navVisible": true,
-      "status": "KEEP_CANONICAL"
+      "status": "KEEP_CANONICAL",
+      "screenMode": "paper",
+      "productClass": "paper",
+      "primaryAction": "Abrir hoy",
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-summary",
@@ -186,7 +265,11 @@
       "layoutProfile": "classic-chart",
       "navVisible": true,
       "status": "KEEP_CANONICAL",
-      "blueprintSectionId": "summary"
+      "screenMode": "classic",
+      "productClass": "core-read",
+      "primaryAction": "Nueva evolución",
+      "blueprintSectionId": "summary",
+      "requiredSignals": ["patient", "demo", "ai-state"]
     },
     {
       "screenId": "patient-orders",
@@ -195,7 +278,11 @@
       "layoutProfile": "classic-chart",
       "navVisible": true,
       "status": "KEEP_CANONICAL",
-      "blueprintSectionId": "orders"
+      "screenMode": "classic",
+      "productClass": "core-read",
+      "primaryAction": "Agregar indicación",
+      "blueprintSectionId": "orders",
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-exams",
@@ -204,7 +291,11 @@
       "layoutProfile": "results",
       "navVisible": true,
       "status": "KEEP_CANONICAL",
-      "blueprintSectionId": "exams"
+      "screenMode": "classic",
+      "productClass": "core-read",
+      "primaryAction": "Ver resultados",
+      "blueprintSectionId": "exams",
+      "requiredSignals": ["patient", "demo"]
     },
     {
       "screenId": "patient-documents",
@@ -213,13 +304,17 @@
       "layoutProfile": "classic-chart",
       "navVisible": true,
       "status": "KEEP_CANONICAL",
-      "blueprintSectionId": "documents"
+      "screenMode": "classic",
+      "productClass": "core-read",
+      "primaryAction": "Nuevo documento",
+      "blueprintSectionId": "documents",
+      "requiredSignals": ["patient", "demo"]
     }
   ],
   "fallback": {
     "status": "KEEP_FALLBACK",
     "prefix": "/espacio/*",
-    "note": "VITE_ENABLE_CICA_UI=false — no es home operativo"
+    "note": "VITE_ENABLE_CICA_UI=false - no es home operativo"
   },
-  "checksum": "e582d887b337"
+  "checksum": "a242af0471d0"
 }

@@ -10,10 +10,7 @@ const errors = [];
 
 const baselineExports = 116;
 const loteMax = 10;
-const loteReport = join(
-  root,
-  'reports/archive/2026-06/knip-audit-product-map-lote1-2026-06-18.md',
-);
+const loteReport = join(root, 'reports/archive/2026-06/knip-audit-product-map-lote1-2026-06-18.md');
 const agentsFile = join(root, 'apps/web/src/lab/design-agents/dashboardDesignAgents.ts');
 
 if (!existsSync(loteReport)) {

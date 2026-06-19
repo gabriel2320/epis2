@@ -4,6 +4,9 @@ import { join } from 'node:path';
 /** Resultado auditoría visual modo papel (MF-PAPER-09 + FichaPapel). */
 export type PaperVisualAuditResult = {
   hasPaperPageClass: boolean;
+  hasLetterPageRule: boolean;
+  hasLetterSizeTokens: boolean;
+  usesLetterDefault: boolean;
   hasPrintMediaRules: boolean;
   hasBaselineGrid: boolean;
   printHidesToolbar: boolean;
@@ -41,6 +44,16 @@ export function auditPaperVisualArtifacts(): PaperVisualAuditResult {
 
   const checks = {
     hasPaperPageClass: printCss.includes('.epis2-paper-page'),
+    hasLetterPageRule:
+      printCss.includes('@page letter') && printCss.includes('size: letter portrait'),
+    hasLetterSizeTokens:
+      readProjectFile('packages/epis2-ui/src/theme/chart-modes-tokens.ts').includes(
+        'letterWidthMm: 215.9',
+      ) &&
+      readProjectFile('packages/epis2-ui/src/theme/chart-modes-tokens.ts').includes(
+        'letterHeightMm: 279.4',
+      ),
+    usesLetterDefault: template.includes("printFormat = 'letter'"),
     hasPrintMediaRules: printCss.includes('@media print'),
     hasBaselineGrid: printCss.includes('--epis2-paper-baseline'),
     printHidesToolbar: printCss.includes('epis2-paper-document-toolbar'),
