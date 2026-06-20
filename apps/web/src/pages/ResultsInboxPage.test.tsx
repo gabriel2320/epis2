@@ -56,7 +56,39 @@ vi.mock('../components/LabObservationsGrid.js', () => ({
   ),
 }));
 
-afterEach(() => cleanup());
+vi.mock('../components/grids/ResultsInboxCriticalGrid.js', () => ({
+  ResultsInboxCriticalGrid: ({
+    rows,
+    ackingId,
+    onAcknowledge,
+  }: {
+    rows: Array<{ id: string; acknowledged?: boolean }>;
+    ackingId: string | null;
+    onAcknowledge: (id: string) => void;
+  }) => (
+    <div data-testid="epis2-results-critical-grid">
+      {rows.map((row) =>
+        row.acknowledged ? null : (
+          <button
+            key={row.id}
+            type="button"
+            disabled={ackingId === row.id}
+            onClick={() => onAcknowledge(row.id)}
+            data-testid={`epis2-results-ack-${row.id}`}
+          >
+            Acusar
+          </button>
+        ),
+      )}
+    </div>
+  ),
+}));
+
+afterEach(() => {
+  cleanup();
+  fetchPatientResultsInbox.mockReset();
+  acknowledgeCriticalResult.mockReset();
+});
 
 describe('ResultsInboxPage', () => {
   it('muestra observaciones y críticos desde la API agregada', async () => {

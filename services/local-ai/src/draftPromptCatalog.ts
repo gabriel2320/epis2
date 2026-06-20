@@ -115,6 +115,14 @@ export const DRAFT_PROMPT_CATALOG: DraftPromptSpec[] = [
     taskDetail: 'Responde formalmente a una solicitud de interconsulta con recomendaciones.',
     fieldHints: 'No cierres el caso sin plan de seguimiento explícito si aplica.',
   },
+  {
+    blueprintId: 'medical_certificate',
+    taskTitle: 'Certificado medico',
+    taskDetail:
+      'Redacta un borrador breve de certificado segun el tipo solicitado, motivo clinico, vigencia e indicaciones.',
+    fieldHints:
+      'No firmes ni declares validez legal definitiva. Si faltan fechas, dias o diagnostico, deja constancia en instructions.',
+  },
 ];
 
 const catalogById = new Map(DRAFT_PROMPT_CATALOG.map((spec) => [spec.blueprintId, spec]));

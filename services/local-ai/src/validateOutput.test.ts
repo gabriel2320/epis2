@@ -25,6 +25,17 @@ describe('parseAndValidateAssistJson', () => {
     expect(parseAndValidateAssistJson('no-json').ok).toBe(false);
   });
 
+  it('rechaza salida sin revision humana obligatoria', () => {
+    const result = parseAndValidateAssistJson(
+      JSON.stringify({
+        suggestedFields: { subjective: 'Demo' },
+        safetyNotes: [],
+        requiresHumanReview: false,
+      }),
+    );
+    expect(result.ok).toBe(false);
+  });
+
   it('acepta JSON tras bloque think de Qwen', () => {
     const tag = 'think';
     const result = parseAndValidateAssistJson(

@@ -57,6 +57,15 @@ describe('local-ai auth (A1)', () => {
     expect(reply.status).not.toHaveBeenCalled();
   });
 
+  it('/ready y /capabilities siguen publicos con clave configurada', async () => {
+    const hook = createLocalAiAuthHook('epis2-local-ai-test-key-32');
+    for (const path of ['/ready', '/capabilities']) {
+      const reply = mockReply();
+      await hook(mockRequest(path), reply);
+      expect(reply.status).not.toHaveBeenCalled();
+    }
+  });
+
   it('con LOCAL_AI_API_KEY exige header en /embed/document', async () => {
     const hook = createLocalAiAuthHook('epis2-local-ai-test-key-32');
     const blocked = mockReply();

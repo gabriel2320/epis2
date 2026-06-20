@@ -1,4 +1,4 @@
-import { parseJsonFromOllamaText, stripOllamaResponseNoise } from './extractOllamaJson.js';
+import { stripOllamaResponseNoise } from './extractOllamaJson.js';
 
 export async function pingOllama(baseUrl: string): Promise<boolean> {
   try {
@@ -22,6 +22,10 @@ function normalizeOllamaText(raw: string | undefined): string {
   return stripOllamaResponseNoise(raw);
 }
 
+function emptyPublicContentReason(): string {
+  return 'Ollama devolvio respuesta vacia sin contenido publico (thinking ignorado)';
+}
+
 async function readOllamaFailure(res: Response): Promise<string> {
   try {
     const body = (await res.json()) as OllamaErrorBody;
@@ -29,7 +33,7 @@ async function readOllamaFailure(res: Response): Promise<string> {
   } catch {
     // ignore
   }
-  return `Ollama respondió ${res.status}`;
+  return `Ollama respondio ${res.status}`;
 }
 
 async function requestOllamaChat(
@@ -63,13 +67,12 @@ async function requestOllamaChat(
     model?: string;
     message?: { content?: string; thinking?: string };
   };
-  const text =
-    normalizeOllamaText(body.message?.content) || normalizeOllamaText(body.message?.thinking);
+  const text = normalizeOllamaText(body.message?.content);
 
   if (!text) {
     return {
       ok: false,
-      reason: 'Ollama devolvió respuesta vacía (revise modelo, num_predict o desactive think)',
+      reason: emptyPublicContentReason(),
     };
   }
 
@@ -108,10 +111,10 @@ async function requestOllamaGenerate(
     thinking?: string;
     model?: string;
   };
-  const text = normalizeOllamaText(body.response) || normalizeOllamaText(body.thinking);
+  const text = normalizeOllamaText(body.response);
 
   if (!text) {
-    return { ok: false, reason: 'Ollama devolvió respuesta vacía' };
+    return { ok: false, reason: emptyPublicContentReason() };
   }
 
   return { ok: true, text, model: body.model ?? model };
@@ -141,10 +144,7 @@ export async function generateOllamaJson(
         continue;
       }
 
-      const parsed = parseJsonFromOllamaText(result.text);
-      if (parsed.ok) return result;
-
-      lastFailure = { ok: false, reason: parsed.reason };
+      return result;
     }
 
     return lastFailure;
@@ -176,7 +176,7 @@ export async function fetchOllamaEmbedding(
     }
     const body = (await res.json()) as { embedding?: number[]; model?: string };
     if (!Array.isArray(body.embedding) || body.embedding.length === 0) {
-      return { ok: false, reason: 'Ollama devolvió embedding vacío' };
+      return { ok: false, reason: 'Ollama devolvio embedding vacio' };
     }
     return { ok: true, embedding: body.embedding, model: body.model ?? model };
   } catch {

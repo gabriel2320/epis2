@@ -31,6 +31,8 @@ export type OtelHandle = {
 type StartOtelOptions = {
   /** Override para tests: procesadores en memoria en lugar del exporter OTLP. */
   spanProcessors?: SpanProcessor[];
+  /** Cierre defensivo: OTel no debe bloquear shutdown ni gates si un exporter queda colgado. */
+  shutdownTimeoutMs?: number;
 };
 
 export function startOtel(config: OtelConfig, options: StartOtelOptions = {}): OtelHandle | null {
@@ -53,6 +55,20 @@ export function startOtel(config: OtelConfig, options: StartOtelOptions = {}): O
   sdk.start();
 
   return {
-    shutdown: () => sdk.shutdown(),
+    shutdown: async () => {
+      let timeoutId: ReturnType<typeof setTimeout> | undefined;
+      const timeout = new Promise<void>((resolve) => {
+        timeoutId = setTimeout(resolve, options.shutdownTimeoutMs ?? 2_000);
+        timeoutId.unref?.();
+      });
+
+      try {
+        await Promise.race([sdk.shutdown(), timeout]);
+      } finally {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+      }
+    },
   };
 }

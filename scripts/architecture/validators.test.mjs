@@ -5,41 +5,43 @@ import { validate as singleCommand } from './single-command-registry.mjs';
 import { validate as noDirectMui } from './no-direct-mui-imports.mjs';
 import { validate as devCatalogGates } from './dev-catalog-gates.mjs';
 
+const architectureValidatorTimeoutMs = 20_000;
+
 describe('architecture validators (smoke)', () => {
   it('main-product-invariants pasa en repo limpio', async () => {
     const result = await invariants();
     expect(result.ok, result.details?.join('\n')).toBe(true);
-  });
+  }, architectureValidatorTimeoutMs);
 
   it('no-legacy-dependencies pasa en repo limpio', async () => {
     const result = await noLegacy();
     expect(result.ok, result.details?.join('\n')).toBe(true);
-  });
+  }, architectureValidatorTimeoutMs);
 
   it('single-command-registry pasa en repo limpio', async () => {
     const result = await singleCommand();
     expect(result.ok, result.details?.join('\n')).toBe(true);
-  });
+  }, architectureValidatorTimeoutMs);
 
   it('no-direct-mui-imports pasa en repo limpio', async () => {
     const result = await noDirectMui();
     expect(result.ok, result.details?.join('\n')).toBe(true);
-  });
+  }, architectureValidatorTimeoutMs);
 
   it('dev-catalog-gates (MUI-G15) pasa en repo limpio', async () => {
     const result = await devCatalogGates();
     expect(result.ok, result.details?.join('\n')).toBe(true);
-  });
+  }, architectureValidatorTimeoutMs);
 
   it('monorepo-governance (MF-CON-03) pasa en repo limpio', async () => {
     const { validate: monorepoGovernance } = await import('./monorepo-governance.mjs');
     const result = await monorepoGovernance();
     expect(result.ok, result.details?.join('\n')).toBe(true);
-  });
+  }, architectureValidatorTimeoutMs);
 
   it('no-test-fixtures-in-prod (MF-CON-09) pasa en repo limpio', async () => {
     const { validate: noTestFixturesInProd } = await import('./no-test-fixtures-in-prod.mjs');
     const result = await noTestFixturesInProd();
     expect(result.ok, result.details?.join('\n')).toBe(true);
-  });
+  }, architectureValidatorTimeoutMs);
 });

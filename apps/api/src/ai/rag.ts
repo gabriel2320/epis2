@@ -1,8 +1,13 @@
+import { createHash } from 'node:crypto';
 import type { Database } from '../db/client.js';
 import { searchPatientDocuments } from '../clinical/documents.js';
 import { fetchLocalAiStatus, pingOllama } from './client.js';
 import { recordAiRun } from './store.js';
 import type { AppConfig } from '../config.js';
+
+function hashClinicalAiInput(value: string): string {
+  return createHash('sha256').update(value).digest('hex').slice(0, 16);
+}
 
 export async function queryPatientRag(
   db: Database,
@@ -41,11 +46,11 @@ export async function queryPatientRag(
     actorId,
     blueprintId: 'rag_query',
     patientId,
-    promptHash: `rag:${question.slice(0, 40)}`,
+    promptHash: `rag:${hashClinicalAiInput(question)}`,
     model: aiAvailable ? 'ollama-demo' : 'retrieval-only',
     latencyMs: 0,
     status: 'success',
-    inputPayload: { question },
+    inputPayload: { questionHash: hashClinicalAiInput(question), questionLength: question.length },
     outputPayload: { answer, citationCount: citations.length, mode, retrievalMode },
   });
 

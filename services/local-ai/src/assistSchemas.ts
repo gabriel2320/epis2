@@ -71,6 +71,14 @@ export const ASSIST_BLUEPRINT_FIELDS: Record<string, readonly string[]> = {
     'generalIndications',
   ],
   referral_report: ['referralContext', 'specialistAssessment', 'recommendations', 'followUpPlan'],
+  medical_certificate: [
+    'certificateType',
+    'diagnosisSummary',
+    'restDays',
+    'validFrom',
+    'validUntil',
+    'instructions',
+  ],
 };
 
 export type AssistBlueprintSpec = {

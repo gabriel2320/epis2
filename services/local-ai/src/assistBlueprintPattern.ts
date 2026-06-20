@@ -38,6 +38,7 @@ export const ASSIST_ENABLED_BLUEPRINT_IDS = [
   'transfer_note',
   'outpatient_visit',
   'referral_report',
+  'medical_certificate',
 ] as const;
 
 export function listAssistPatternGaps(): AssistPatternResult[] {

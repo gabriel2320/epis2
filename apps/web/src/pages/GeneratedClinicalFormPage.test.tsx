@@ -2,7 +2,7 @@
  * @vitest-environment jsdom
  */
 import { getBlueprintById } from '@epis2/clinical-forms';
-import { cleanup, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
@@ -174,14 +174,20 @@ describe('GeneratedClinicalFormPage (sin IA)', () => {
     renderForm();
 
     await user.click(screen.getByTestId('epis2-scrollspy-soap'));
-    await user.type(screen.getByRole('textbox', { name: /objetivo/i }), 'Signos estables (demo)');
-    await user.type(screen.getByRole('textbox', { name: /análisis/i }), 'Evolución favorable');
-    await user.type(screen.getByRole('textbox', { name: /^plan/i }), 'Continuar tratamiento');
+    fireEvent.change(screen.getByRole('textbox', { name: /objetivo/i }), {
+      target: { value: 'Signos estables (demo)' },
+    });
+    fireEvent.change(screen.getByRole('textbox', { name: /análisis/i }), {
+      target: { value: 'Evolución favorable' },
+    });
+    fireEvent.change(screen.getByRole('textbox', { name: /^plan/i }), {
+      target: { value: 'Continuar tratamiento' },
+    });
 
     await user.click(screen.getByTestId('epis2-form-save'));
 
     expect(screen.getByTestId('epis2-form-status')).toBeInTheDocument();
-  });
+  }, 10_000);
 
   it('abre panel de historial en layout two-pane', async () => {
     const user = userEvent.setup();

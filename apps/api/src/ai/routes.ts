@@ -38,6 +38,35 @@ import { createRateLimitPreHandler } from '../security/rateLimit.js';
 import { withAiRunSpan } from './tracing.js';
 import { getMedrepoAssistSafetyNotes, getMedrepoPackStatus } from './medrepoKnowledgePack.js';
 
+function redactAssistInputPayload(input: {
+  blueprintId: string;
+  dataTier?: string | undefined;
+  patientId?: string | undefined;
+  context?: Record<string, string> | undefined;
+  currentFields?: Record<string, string> | undefined;
+}): Record<string, unknown> {
+  return {
+    blueprintId: input.blueprintId,
+    dataTier: input.dataTier ?? 'L2_phi',
+    hasPatientId: input.patientId !== undefined,
+    contextKeys: Object.keys(input.context ?? {}).sort(),
+    currentFieldKeys: Object.keys(input.currentFields ?? {}).sort(),
+    ...(input.context?.source === 'command_bar' ? { assistOrigin: 'command_bar' as const } : {}),
+  };
+}
+
+function redactTextboxInputPayload(input: {
+  action: string;
+  text: string;
+  patientId?: string | undefined;
+}): Record<string, unknown> {
+  return {
+    action: input.action,
+    textLength: input.text.length,
+    hasPatientId: input.patientId !== undefined,
+  };
+}
+
 export async function registerAiRoutes(
   app: FastifyInstance,
   config: AppConfig,
@@ -112,12 +141,7 @@ export async function registerAiRoutes(
       } = {
         actorId: session.sub,
         blueprintId: parsed.data.blueprintId,
-        inputPayload: {
-          ...(parsed.data as Record<string, unknown>),
-          ...(parsed.data.context?.source === 'command_bar'
-            ? { assistOrigin: 'command_bar' as const }
-            : {}),
-        },
+        inputPayload: redactAssistInputPayload(parsed.data),
       };
       if (parsed.data.patientId !== undefined) {
         baseRun.patientId = parsed.data.patientId;
@@ -232,7 +256,7 @@ export async function registerAiRoutes(
       } = {
         actorId: session.sub,
         blueprintId: 'clinical_textbox',
-        inputPayload: parsed.data as Record<string, unknown>,
+        inputPayload: redactTextboxInputPayload(parsed.data),
       };
       if (parsed.data.patientId !== undefined) {
         baseRun.patientId = parsed.data.patientId;
@@ -283,10 +307,13 @@ export async function registerAiRoutes(
       return sendApiError(reply, 503, 'Base de datos no disponible');
     }
     const limit = q.limit ? Math.min(Number(q.limit), 100) : 30;
-    const runs = await listRecentAiRuns(db, {
-      ...(q.patientId !== undefined ? { patientId: q.patientId } : {}),
-      limit: Number.isFinite(limit) ? limit : 30,
-    });
+    const session = (request as AuthenticatedRequest).session;
+    const runs = await runWithRlsContext(db, config, session, (tx) =>
+      listRecentAiRuns(tx, {
+        ...(q.patientId !== undefined ? { patientId: q.patientId } : {}),
+        limit: Number.isFinite(limit) ? limit : 30,
+      }),
+    );
     return aiRunsListResponseSchema.parse({ readOnly: true, runs });
   });
 
@@ -321,12 +348,14 @@ export async function registerAiRoutes(
         return sendApiError(reply, 503, 'Base de datos no disponible');
       }
       const session = (request as AuthenticatedRequest).session;
-      const result = await queryPatientRag(
-        db,
-        config,
-        session.sub,
-        parsed.data.patientId,
-        parsed.data.question,
+      const result = await runWithRlsContext(db, config, session, (tx) =>
+        queryPatientRag(
+          tx,
+          config,
+          session.sub,
+          parsed.data.patientId,
+          parsed.data.question,
+        ),
       );
       return ragQueryResponseSchema.parse(result);
     },

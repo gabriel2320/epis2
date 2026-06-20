@@ -69,4 +69,28 @@ describe('runDraftAssist', () => {
       expect(result.dataTier).toBe('L0_synthetic');
     }
   });
+  it('rechaza JSON invalido generado por el proveedor', async () => {
+    vi.spyOn(router, 'generateWithInferenceRouter').mockResolvedValue({
+      ok: true,
+      text: 'esto no es json',
+      model: 'qwen3:8b',
+      provider: 'ollama',
+      dataTier: 'L2_phi',
+    });
+
+    const config = loadAiConfig({
+      AI_INFERENCE_MODE: 'ollama',
+      OLLAMA_BASE_URL: 'http://127.0.0.1:11434',
+      OLLAMA_MODEL: 'qwen3:8b',
+    });
+
+    const result = await runDraftAssist(config, { blueprintId: 'evolution_note' });
+
+    expect(result.status).toBe('rejected');
+    if (result.status === 'rejected') {
+      expect(result.message).toMatch(/JSON/);
+      expect(result.model).toBe('qwen3:8b');
+      expect(result.provider).toBe('ollama');
+    }
+  });
 });

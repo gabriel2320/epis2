@@ -4,7 +4,7 @@
  */
 import { getBlueprintById } from '@epis2/clinical-forms';
 import { copy } from '@epis2/design-system';
-import { cleanup, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ActivePatientProvider } from '../clinical/ActivePatientContext.js';
@@ -123,7 +123,9 @@ describe('MF-SH-03 — GeneratedClinicalFormPage con Ollama down', () => {
     expect(requestDraftAssist).not.toHaveBeenCalled();
 
     await user.click(screen.getByTestId('epis2-scrollspy-soap'));
-    await user.type(screen.getByRole('textbox', { name: /objetivo/i }), 'Signos estables');
+    fireEvent.change(screen.getByRole('textbox', { name: /objetivo/i }), {
+      target: { value: 'Signos estables' },
+    });
     await user.click(screen.getByTestId('epis2-form-save'));
 
     expect(screen.getByTestId('epis2-form-status')).toBeInTheDocument();
