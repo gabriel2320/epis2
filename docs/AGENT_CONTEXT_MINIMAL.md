@@ -8,7 +8,7 @@
 
 ## Reglas canónicas (10 líneas)
 
-1. **Ficha-first + CICA activa** — Intención producto: censo → ficha → borrador → aprobación. **Entrada operativa:** `/app/buscar` (CICA). **Fallback legacy:** `/espacio/*` (`VITE_ENABLE_CICA_UI=false`). Barra de comando transversal; `/comando` solo redirect compat.
+1. **Ficha-first + CICA GO** — Intención producto: censo → ficha → borrador → aprobación. **Entrada operativa:** `/app/buscar` (CICA). **Fallback legacy congelado:** `/espacio/*` solo por opt-out (`VITE_DISABLE_CICA_UI=true`). Barra de comando transversal; `/comando` solo redirect compat.
 2. **PostgreSQL = SoT** — borrador ≠ dato clínico aprobado.
 3. **IA propone, humano aprueba** — sin auto-firma ni auto-aprobación.
 4. **Sin PHI real** — solo datos sintéticos/demo.

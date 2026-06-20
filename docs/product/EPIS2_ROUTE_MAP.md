@@ -9,7 +9,7 @@
 | Rol | Ruta / prefijo |
 |-----|----------------|
 | Entrada activa CICA | `/app/buscar` |
-| Fallback legacy | `/espacio/*` (`VITE_ENABLE_CICA_UI=false`) |
+| Fallback legacy | `/espacio/*` solo con opt-out `VITE_DISABLE_CICA_UI=true` |
 
 ## Regla de visibilidad y clasificacion
 

@@ -12,7 +12,7 @@ EPIS2 es una **aplicación clínica command-first** construida como producto nue
 El profesional:
 
 1. Inicia sesión.
-2. Entra al **censo clínico** (`/espacio/buscar-paciente`) con barra de comando transversal.
+2. Entra al **censo clínico CICA** (`/app/buscar`) con barra de comando transversal.
 3. Busca o selecciona un paciente.
 4. Escribe una **instrucción clínica** en lenguaje natural (español).
 5. EPIS2 interpreta intención y datos faltantes.
@@ -31,7 +31,7 @@ Modos secundarios (Classic EMR, Dashboard MD3) amplían la experiencia sin cambi
 
 > **¿Qué necesitas hacer?**
 
-La home es el censo clínico con barra transversal (`/espacio/buscar-paciente`). `/comando` redirige por compatibilidad. No es un dashboard. No es una ficha hospitalaria completa en v1.
+La home operativa es el censo clínico CICA con barra transversal (`/app/buscar`). `/comando` redirige por compatibilidad. `/espacio/*` queda como fallback legacy congelado por opt-out (`VITE_DISABLE_CICA_UI=true`). No es un dashboard. No es una ficha hospitalaria completa en v1.
 
 ---
 
@@ -40,10 +40,11 @@ La home es el censo clínico con barra transversal (`/espacio/buscar-paciente`).
 Un solo concepto de home; tres capas de experiencia:
 
 ```text
-Home canónica = censo clínico (/espacio/buscar-paciente)
+Home canónica = censo clínico CICA (/app/buscar)
   Estado inicial     → búsqueda / censo de paciente + barra transversal
   Tras fijar paciente → workspace ficha dual (electrónica | papel)
   /comando           → redirect compat (bookmarks legacy)
+  /espacio/*         → fallback legacy congelado por opt-out
   Dashboard          → secundario; nunca home
 ```
 
@@ -56,7 +57,7 @@ Gate ejecutable: `command-center-home` (prohíbe dashboard como entrada).
 | # | Principio |
 |---|-----------|
 | 1 | EPIS2 First — experiencia y modelo propios |
-| 2 | Home = censo clínico (`/espacio/buscar-paciente`); `/comando` compat; tras paciente = workspace ficha dual | `command-center-home` + dual-chart census-gate |
+| 2 | Home = censo clínico CICA (`/app/buscar`); `/comando` compat; `/espacio/*` fallback congelado; tras paciente = workspace ficha dual | `command-center-home` + CICA route-map gates |
 | 3 | Command-first — texto → intent → formulario → borrador |
 | 4 | Información no solicitada permanece **oculta** |
 | 5 | IA local **asiste**; no decide, firma ni aprueba |

@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 import { Box, Stack, Typography } from '@epis2/epis2-ui';
-import { copy } from '@epis2/design-system';
 
 export type EpisDashboardMd3MainGridProps = {
   title?: string;
@@ -45,11 +44,3 @@ export type DashboardDetailSelection = {
   summary: string;
   patientId?: string;
 };
-
-export function EpisDashboardMd3MainGridEmpty({ message }: { message?: string }) {
-  return (
-    <Typography variant="body2" color="text.secondary">
-      {message ?? copy.dashboard.loading}
-    </Typography>
-  );
-}

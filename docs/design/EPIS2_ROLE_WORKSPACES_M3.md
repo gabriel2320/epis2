@@ -1,7 +1,7 @@
 # EPIS2 — Espacios de trabajo por rol (Material Design 3)
 
-**Versión:** 1.0 · **Fecha:** 2026-06-04  
-**Home canónica:** Centro de Comando (`/comando`) — **no** dashboard  
+**Versión:** 1.0 · **Fecha:** 2026-06-04
+**Home canónica:** CICA (`/app/buscar`) — **no** dashboard
 **Implementación:** `apps/web/src/navigation/clinicalWorkspaceRegistry.ts` · `useClinicalWorkspace` · `useEpis2NavigationRailItems`
 
 > Conciliar ~200 pantallas/formularios **sin menú único**. Cada contexto clínico carga un árbol de navegación distinto desde el Navigation Rail (Nivel 0).
@@ -97,7 +97,7 @@
 
 ## 5. Workspace: Centro de Comando (default)
 
-**Id:** `command` · **Home canónica — command-first**
+**Id:** `cica-search` · **Home canónica — CICA censo-first**
 
 | Nivel | Contenido |
 |-------|-----------|

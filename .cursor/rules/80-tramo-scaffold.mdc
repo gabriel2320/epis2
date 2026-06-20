@@ -26,7 +26,7 @@ Patrón histórico Tramos F–J (solo referencia forense):
 
 ## Reglas
 
-- Home = **censo clínico** (`/espacio/buscar-paciente`); tablero = nav secundaria (`/epis2/dashboard`).
+- Home = **censo clínico CICA** (`/app/buscar`); `/espacio/*` es fallback congelado; tablero = nav secundaria (`/epis2/dashboard`).
 - IDC **Done** previo (ej. 165): mantener Done + panel scaffold; closure gate acepta Done + MF tag.
 - No commit/push salvo orden explícita.
 - Cierre obligatorio:

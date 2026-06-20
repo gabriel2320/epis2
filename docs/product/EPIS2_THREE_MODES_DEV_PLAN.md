@@ -1,5 +1,7 @@
 # EPIS2 — Plan de desarrollo: tres modos MD3
 
+> **SUPERSEDED_DOC fence (2026-06-19):** plan three modes historico. No usar como estrategia principal. Canon vigente: CICA GO `/app/buscar`; three modes queda secundario/congelado.
+
 **Versión:** 1.1 · **Fecha:** 2026-06-04  
 **Precedencia:** post MF-151…182 · paralelo a Fase C longitudinal  
 **Canon:** [`PRODUCT_INVARIANTS.md`](PRODUCT_INVARIANTS.md) · [`EPIS2_GLOBAL_DEV_PLAN.md`](EPIS2_GLOBAL_DEV_PLAN.md)

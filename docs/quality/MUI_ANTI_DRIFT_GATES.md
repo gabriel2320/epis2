@@ -16,12 +16,12 @@ Estos gates son **permanentes** una vez activa la capa `epis2-ui` (desde MUI-01)
 | MUI-G04 | Sin MUI X sin caso | `package.json` incluye `@mui/x-*` sin fila en adoption plan | Revisión PR + doc |
 | MUI-G05 | Sin Pro/Premium sin licencia | Uso de APIs `GridPremium`, `licenseKey`, etc. | `MUI_LICENSING_DECISION_LOG` + grep |
 | MUI-G06 | Copy visible en español | Strings UI clínica en inglés | `spanish-visible-copy` (existente) |
-| MUI-G07 | Home = Centro de Comando | Dashboard o legacy home | `command-center-home` (existente) |
+| MUI-G07 | Home = CICA `/app/buscar` | Dashboard o legacy home | `command-center-home` (existente) |
 | MUI-G08 | No dashboard como home | Ruta `/` o default → tablero | Idem |
 | MUI-G09 | Estados loading/error/empty | Componente de lista/form sin los tres estados | Checklist PR + catálogo MUI-02 |
 | MUI-G10 | Responsive básico | Página nueva sin prueba 360px/1280px | Checklist piloto |
 | MUI-G11 | No info técnica en UI clínica | Stack traces, nombres de modelo IA, IDs internos visibles | Revisión UX |
-| MUI-G12 | Modo tablero opcional | Tablero sin enlace «Volver al Centro de Comando» | Test E2E / golden journey |
+| MUI-G12 | Modo tablero opcional | Tablero sin enlace de retorno a CICA `/app/buscar` | Test E2E / golden journey |
 | MUI-G13 | Bundle disciplinado | Import barrel `@mui/material` o iconos masivos | ESLint + MUI-11 analyze |
 | MUI-G14 | IA disclosure | Salida IA sin `EpisAiDisclosure` / borrador | Revisión componentes IA |
 | MUI-G15 | Catálogo no en producción | `/dev/ui-catalog` o `/desarrollo/catalogo-visual` en build piloto sin flag | `dev-catalog-gates.mjs` + router guard |

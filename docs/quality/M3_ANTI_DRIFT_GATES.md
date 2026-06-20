@@ -14,7 +14,7 @@ Los gates MUI (MUI-G01…G15) siguen vigentes para la capa técnica MUI/MUI X. L
 | M3-G02 | Roles clínicos inmutables | Personalización de acento altera draft/critical/approved/warning | Test tema (M3-08) |
 | M3-G03 | Sin decoración con semántica clínica | Colores críticos usados en chips decorativos o fondos neutros | Revisión PR |
 | M3-G04 | Información no solicitada | Pantalla muestra paneles/widgets sin acción del usuario | UX review + M3-06 |
-| M3-G05 | Home = Centro de Comando | Dashboard o legacy como home | `command-center-home` (existente) |
+| M3-G05 | Home = CICA `/app/buscar` | Dashboard o legacy como home | `command-center-home` (existente) |
 | M3-G06 | Expressive prohibido en crítico | Animación expressive en error, aprobación, alerta seguridad | Revisión motion tokens |
 | M3-G07 | Layout adaptativo | Ruta principal sin comportamiento documentado compacto/expandido | Checklist M3-06 |
 | M3-G08 | Estados multi-indicador | Estado crítico solo color (sin icono/texto/forma) | Revisión componentes |
@@ -24,7 +24,7 @@ Los gates MUI (MUI-G01…G15) siguen vigentes para la capa técnica MUI/MUI X. L
 | M3-G12 | Identidad EPIS2, no copia Google | Marca genérica «Material demo» sin contexto clínico | Revisión diseño |
 | M3-G13 | Una acción primaria | Más de una acción primaria filled compitiendo en mismo viewport | Revisión pantalla |
 | M3-G14 | Personalización no altera seguridad | Usuario oculta safety bar, warnings o permisos UI | Test preferencias |
-| M3-G15 | Modo tablero secundario | Tablero sin «Volver al Centro de Comando» | Test E2E (existente) |
+| M3-G15 | Modo tablero secundario | Tablero sin retorno a CICA `/app/buscar` | Test E2E (existente) |
 
 ---
 

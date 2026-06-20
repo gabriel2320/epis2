@@ -28,7 +28,7 @@
 | 6 | **Guardar borrador** — mensaje de éxito; navega a revisión de borrador | [x] | Journey API |
 | 7 | **Enviar a revisión** (si aplica) → **Aprobar (humano)** | [x] | Journey API |
 | 8 | **Auditoría** — borrador aprobado; nota en historial del paciente | [x] | Journey API + FHIR doc |
-| 9 | **Volver al Centro de Comando** — `/comando`; contexto coherente | [x] | `EPIS2_COMMAND_CENTER_HOME` |
+| 9 | **Volver a CICA** — `/app/buscar`; contexto coherente | [x] | `EPIS2_CICA_HOME` |
 
 ---
 

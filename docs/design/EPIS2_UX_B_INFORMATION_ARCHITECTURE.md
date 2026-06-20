@@ -82,7 +82,7 @@ Ver historial → longitudinal completo
 
 ```text
 UX-A.4 ✅ demos narrativos
-UX-B.1     home comando compacto
+UX-B.1     home CICA `/app/buscar` compacto
 UX-B.2     ficha resumen compacta
 UX-C       dashboards → métrica + tabla
 UX-D       formularios → Guardar · Firmar · ⋯

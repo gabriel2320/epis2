@@ -159,7 +159,6 @@ export const EPIS_INTERACTION_PATTERNS = [
   'EpisBulkActionMenu',
   'ClinicalDraggableList',
   'ClinicalCopyPasteTools',
-  'EpisProgressiveMenu',
 ] as const;
 
 export function iconBudgetForScreen(kind: EpisScreenKind): number {

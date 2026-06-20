@@ -4,8 +4,10 @@
 
 > Funcionalidad **empezada en master** pero no continuada hasta nuevo aviso. **No borrar** sin MF explícita — archivar documentación y congelar expansión.
 
-**Experiencia activa:** legacy `/espacio/*` · CICA `/app/*` opt-in (`VITE_ENABLE_CICA_UI=true`, NO-GO)  
-**Fallback:** legacy `/espacio/*`, classic MD3, three modes
+**Experiencia activa:** CICA GO `/app/*` con entrada `/app/buscar`.
+**Fallback congelado:** legacy `/espacio/*` solo por opt-out (`VITE_DISABLE_CICA_UI=true`), classic MD3 y three modes secundarios.
+
+> **DEAD_PROJECT_FENCE:** cualquier texto previo que declare CICA NO-GO, CICA opt-in, Command Center como home, dashboard como home, three modes como estrategia principal o tramos A-K como roadmap activo queda `SUPERSEDED_DOC`. No borrar evidencia; no reabrir sin MF explicita + `EPIS2_ALLOW_ARCHIVED_SCOPE=1`.
 
 ---
 
@@ -41,7 +43,7 @@
 
 | Módulo | Estado | Rutas / evidencia | Purga |
 |--------|--------|-------------------|-------|
-| Censo legacy | fallback | `/espacio/buscar-paciente` | Keep; redirect a CICA si flag ON |
+| Censo legacy | fallback | `/espacio/buscar-paciente` | Keep congelado; CICA es default y legacy solo opt-out |
 | Ficha dual MD3 | frozen | `/espacio/ficha`, classic chart | Keep secundario |
 | Three modes | frozen | `EpisModeSwitcher`, gates `three-modes` | No home; no expandir |
 | Command Center | fallback | `/comando` redirect | Compat only |

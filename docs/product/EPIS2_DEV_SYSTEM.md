@@ -57,7 +57,7 @@ Invariante
 | Lote 1 / Lote 2 | **Entrega** | p. ej. Entrega E2E-01 |
 | Milestone | **Hito** | 1A, 1B en Ola 1 |
 | MF-1…51 (oral) | **Microfase** + ID ledger | Ver conciliación §5 |
-| Dashboard (como home) | **Modo tablero** `/epis2/dashboard` | Home = Centro de Comando |
+| Dashboard (como home) | **Modo tablero** `/epis2/dashboard` | Home = CICA `/app/buscar` |
 
 ---
 

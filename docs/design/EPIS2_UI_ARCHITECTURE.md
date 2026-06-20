@@ -6,7 +6,7 @@
 
 ## Principios
 
-1. **Command-first:** home = Centro de Comando (`/comando`); modo tablero opcional.
+1. **Command-first:** home = CICA (`/app/buscar`); modo tablero opcional.
 2. **Un solo sistema visual:** Material UI (+ MUI X bajo demanda), interpretado como **Material 3 Clinical** vía `@epis2/epis2-ui`.
 3. **Un solo tema:** `createEpis2Theme` (objetivo M3-02); hoy `epis2Theme` con localización española.
 4. **M3 Standard vs Expressive:** formularios, aprobación y seguridad = Standard; Login, Comando y empty states = Expressive controlado.

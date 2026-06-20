@@ -1,7 +1,9 @@
 # EPIS2 — Capa de modos (conciliación arquitectónica)
 
+> **SUPERSEDED_DOC fence (2026-06-19):** conservar como referencia historica de modos. No usar para planificar home ni estrategia principal. Canon vigente: CICA GO `/app/buscar`; Classic MD3, dashboard y three modes son secundarios/fallback.
+
 **Versión:** 1.0 · **Fecha:** 2026-06-04  
-**Estado:** Canónico — complementa navegación MD3, no la reemplaza
+**Estado:** SUPERSEDED como canon operativo — complementa navegacion historica, no reemplaza CICA
 
 > Concilia **tres modos de experiencia** (Command · Classic · Dashboard) con **workspaces N0–N4**, **registries únicos** e **invariantes de producto**.
 
@@ -85,7 +87,7 @@ EPIS2 (navegación)
     └── ?mode=dashboard               → modo dashboard MD3
 ```
 
-**No contradice** invariante #6–7: dashboard sigue siendo secundario; **home = censo clínico** (`/espacio/buscar-paciente`).
+**No contradice** invariante #6-7: dashboard sigue siendo secundario; **home = censo clinico CICA** (`/app/buscar`).
 
 ---
 

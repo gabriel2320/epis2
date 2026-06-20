@@ -25,7 +25,7 @@ npm run db:validate
 | 3 | Guardar evolución | Panel microjourney «Crear receta asociada» |
 | 4 | Comando `solicitar panel control dm2` | Lab con panel HbA1c / DM2 prellenado |
 | 5 | Nav Evoluciones en ficha tradicional | Timeline filtrable (labs / evoluciones) |
-| 6 | Home = Centro de Comando | Sin dashboard como landing |
+| 6 | Home = CICA `/app/buscar` | Sin dashboard como landing |
 
 ---
 

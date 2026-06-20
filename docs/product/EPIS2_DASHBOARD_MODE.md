@@ -185,4 +185,4 @@ Se conserva solo el **concepto** de worklist y agregación contextual.
 
 - [EPIS2_RELEASE_ROADMAP.md](./EPIS2_RELEASE_ROADMAP.md) — V0 gate
 - [../quality/EPIS2_GOLDEN_JOURNEYS.md](../quality/EPIS2_GOLDEN_JOURNEYS.md) — paso tablero
-- [../PRODUCT_CANON.md](../PRODUCT_CANON.md) — home = Centro de Comando
+- [../PRODUCT_CANON.md](../PRODUCT_CANON.md) — home = CICA `/app/buscar`

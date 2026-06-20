@@ -6,6 +6,8 @@
 
 **Brújula activa:** [`EPIS2_CURRENT_STATE.md`](../EPIS2_CURRENT_STATE.md) · **Purga:** [`EPIS2_PURGE_ARCHIVE_PLAN.md`](../product/EPIS2_PURGE_ARCHIVE_PLAN.md)
 
+**Dead project fence (2026-06-19):** CICA = GO, entrada operativa = `/app/buscar`, legacy `/espacio/*` = fallback congelado por opt-out (`VITE_DISABLE_CICA_UI=true`). No usar `VITE_ENABLE_CICA_UI` como canon nuevo.
+
 ---
 
 ## Fuente de verdad (solo estos para decisiones)
@@ -78,7 +80,7 @@ No adjuntar prompts ni seguir canon de:
 | PROG-STRENGTHEN | Base v0.1 + gates meta |
 | PROG-FICHA-FIRST | Censo + CICA redirects |
 | Tramos A–K / IDC olas | CICA `/app/*` |
-| Three modes / Command Center home | CICA + censo |
+| Three modes / Command Center home | CICA GO `/app/buscar` + censo |
 | Ola M3 / NORM / paper planner extendido | CICA clean room |
 | OpenClaw auto-dev | `dev:session` + brief |
 | PROG-UX-LAB | ✓ cerrado — mantenimiento CICA |

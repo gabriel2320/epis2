@@ -1,5 +1,7 @@
 # EPIS2 — Plan de desarrollo global (consolidado)
 
+> **SUPERSEDED_DOC fence (2026-06-19):** plan global historico. No usar para planificar fases, tramos A-K, three modes ni dashboard home. Fuente vigente: `docs/EPIS2_CURRENT_STATE.md` + `docs/product/EPIS2_PURGE_ARCHIVE_PLAN.md`.
+
 **Versión:** 1.5 · **Fecha:** 2026-06-11  
 **Sistema:** [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) (SDEPIS2) · **Tablero:** [`EPIS2_TABLERO.md`](./EPIS2_TABLERO.md)  
 **Fuentes:** `ROADMAP.md` · `EPIS2_COMPLETION_ROADMAP.md` · MF-UI-SIMPLIFY · MF-RAD-M3 · tramos A–K

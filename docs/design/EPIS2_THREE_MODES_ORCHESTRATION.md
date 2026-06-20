@@ -1,8 +1,10 @@
 # EPIS2 — Orquestación de tres modos
 
+> **SUPERSEDED_DOC fence (2026-06-19):** three modes queda congelado como referencia secundaria. No usar como estrategia principal ni home. Canon vigente: CICA GO `/app/buscar`.
+
 **Programa:** PROG-THREE-MODES · **Microfase:** MF-THREE-MODES-01…02 (consolidado)  
 **Roadmap:** EPIS2-PM-01 · **Plan global:** Fase UX-1  
-**Canon:** Home = `/comando`. Dashboard ≠ home. IA no aprueba ni firma.
+**Canon vigente:** Home = `/app/buscar`. Dashboard ≠ home. IA no aprueba ni firma.
 
 ## Principio
 

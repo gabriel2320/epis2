@@ -1,16 +1,18 @@
 # EPIS2 — Modo Dashboard Material Design 3
 
-**Microfase:** MF-DASHBOARD-MD3 · **Estado:** Canónico como tercer modo (junto Command Center y Classic EMR)
+> **SUPERSEDED_DOC fence (2026-06-19):** conservar solo como referencia del modo tablero secundario. No usar como home ni linea principal. Canon vigente: CICA GO `/app/buscar`.
+
+**Microfase:** MF-DASHBOARD-MD3 · **Estado:** secundario/superseded como estrategia principal
 
 ## Los tres modos de EPIS2
 
 | Modo | Ruta | Función |
 |------|------|---------|
-| Command Center | `/comando` | Entrada principal — intención, búsqueda, barra Google clínica |
+| CICA | `/app/buscar` | Entrada operativa activa — búsqueda/censo clínico |
 | Classic EMR | `/espacio/ficha?mode=classic` | Ficha tradicional — paneles fijos, escritura clínica |
 | Dashboard | `/epis2/dashboard?mode=dashboard` | Sala de control operacional — colas, KPIs, grillas |
 
-**Dashboard no es home.** Home canónica = `/comando`.
+**Dashboard no es home.** Home canónica = `/app/buscar`.
 
 ## Qué responde el Dashboard
 

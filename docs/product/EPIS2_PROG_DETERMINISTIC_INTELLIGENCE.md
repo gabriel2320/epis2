@@ -269,7 +269,7 @@ Estimación: **~10 sesiones SDEPIS2** (1 MF/sesión) + solapamiento CU.
 3. **Gates mínimos al cierre:** `npm run check` · `npm run test` · `npm run db:validate`.
 4. **Reporte:** `reports/epis2-mf-di-*.md`.
 5. **App debe funcionar sin IA** al cerrar cada MF-DI (invariante #15).
-6. **Home = Centro de Comando** — timeline/sugerencias en ficha, no dashboard como home.
+6. **Home = CICA `/app/buscar`** — timeline/sugerencias en ficha, no dashboard como home.
 
 ---
 

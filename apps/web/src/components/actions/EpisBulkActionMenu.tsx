@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import {
   ClinicalBulkActionMenu,
   type ClinicalBulkActionItem,
@@ -10,8 +9,3 @@ export {
   type ClinicalBulkActionItem as EpisBulkActionMenuItem,
   type ClinicalBulkActionMenuProps as EpisBulkActionMenuProps,
 };
-
-/** @deprecated Usar ClinicalBulkActionMenu */
-export function EpisProgressiveMenu({ children }: { children: ReactNode }) {
-  return <div data-testid="epis2-progressive-menu">{children}</div>;
-}

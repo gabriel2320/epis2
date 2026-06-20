@@ -1,6 +1,6 @@
 # EPIS2 — Subagente `ollama-clinical`
 
-**Rol:** IA clínica local (Ollama producto)  
+**Rol:** IA clínica local (Ollama producto)
 **Microfase / alcance:** MF-FASE-B-001 · Fase B
 
 ## Canon obligatorio
@@ -26,8 +26,8 @@ npm run ai:evals:live
 
 # EPIS2 — Plan de desarrollo global (consolidado)
 
-**Versión:** 1.5 · **Fecha:** 2026-06-11  
-**Sistema:** [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) (SDEPIS2) · **Tablero:** [`EPIS2_TABLERO.md`](./EPIS2_TABLERO.md)  
+**Versión:** 1.5 · **Fecha:** 2026-06-11
+**Sistema:** [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) (SDEPIS2) · **Tablero:** [`EPIS2_TABLERO.md`](./EPIS2_TABLERO.md)
 **Fuentes:** `ROADMAP.md` · `EPIS2_COMPLETION_ROADMAP.md` · MF-UI-SIMPLIFY · MF-RAD-M3 · tramos A–K
 
 > Vocabulario: **Hilo** (secuencia activa) · **Ola** (capacidad) · **Tramo** (dominio clínico) · **Microfase** (sesión) · **Entrega** (PR acotado). «Fase A/B» = **Hilo A/B** (deprecado).

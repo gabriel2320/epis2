@@ -13,7 +13,7 @@ Acción: **keep** · **consolidate** · **needs-review** · **archive** · **del
 
 | Path | Paquete | Zona | Acción | Notas |
 |------|---------|------|--------|-------|
-| `apps/web` | `@epis2/web` | core | keep | UI clínica; CICA `/app/*`; legacy `/espacio/*`; `lab/design-agents/` (MF-PURGE-09) |
+| `apps/web` | `@epis2/web` | core | keep | UI clínica; CICA GO `/app/*`; home `/app/buscar`; legacy `/espacio/*` solo fallback congelado; `lab/design-agents/` (MF-PURGE-09) |
 | `apps/api` | `@epis2/api` | core | keep | SoT HTTP; AI routes, CDS, clinical, FHIR frontera |
 
 ---
@@ -113,7 +113,7 @@ Funcionalidad empezada en master; no borrar sin inventario MF.
 | Elemento | Ubicación | Acción |
 |----------|-----------|--------|
 | OpenMRS / O3 / Carbon | `migration/`, audit scripts | archive — gates `no-legacy-dependencies` |
-| Command Center como home | eliminado | ✓ censo-first |
+| Command Center como home | SUPERSEDED_DOC | CICA `/app/buscar` es entrada activa; `/comando` solo compat |
 | Dashboard como home | prohibido | secundario OK |
 | Copia masiva EPIS | prohibido | manifest + ledger |
 

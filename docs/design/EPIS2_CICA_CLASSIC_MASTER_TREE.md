@@ -1,8 +1,10 @@
 # EPIS2 CICA — Árbol maestro · Ficha clásica completa
 
-**Versión:** 1.0 · **Fecha:** 2026-06-17  
-**Estado:** Norma de diseño · **Producto CICA:** NO-GO hasta reformulación CICA-L  
-**Raíz runtime:** `/app/*` (opt-in `VITE_ENABLE_CICA_UI=true`) · **Runtime activo demo:** `/espacio/*`
+> **SUPERSEDED_DOC fence (2026-06-19):** conservar como evidencia de diseno CICA, no como estado operativo. Canon vigente: CICA = GO, home = `/app/buscar`, fallback legacy `/espacio/*` solo por opt-out `VITE_DISABLE_CICA_UI=true`. Declaraciones previas de CICA NO-GO / opt-in quedan superseded.
+
+**Versión:** 1.0 · **Fecha:** 2026-06-17
+**Estado:** Norma de diseño superseded como estado operativo · **Producto CICA:** GO
+**Raíz runtime:** `/app/*` · **Fallback legacy:** `/espacio/*` con `VITE_DISABLE_CICA_UI=true`
 
 **Documentos relacionados:**
 
@@ -172,7 +174,7 @@ Episodio común hospital + ambulatorio (datos que persisten entre atenciones).
 
 ### 3. Atención hospitalaria
 
-Namespace objetivo P1: `/app/pacientes/:id/hospitalizacion/*`  
+Namespace objetivo P1: `/app/pacientes/:id/hospitalizacion/*`
 **Hoy (v1):** rutas planas bajo `…/:id/` — migración documentada en §8.
 
 ```text

@@ -32,7 +32,7 @@ Referencia: [`GOLDEN_CLINICAL_JOURNEY.md`](../quality/GOLDEN_CLINICAL_JOURNEY.md
 
 | # | Paso | Verificar |
 |---|------|-----------|
-| 1 | Login → `/comando` | Home = Centro de Comando, no dashboard |
+| 1 | Login → `/app/buscar` | Home = CICA, no dashboard |
 | 2 | Fijar paciente DEMO-005 (Penicilina) | Badge demo visible |
 | 3 | Comando: «evolucionar nota de hoy» | Llega a `/espacio/evolucion` |
 | 4 | Guardar borrador | Estado `draft`; **no** nota aprobada |

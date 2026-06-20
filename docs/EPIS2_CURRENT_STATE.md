@@ -30,7 +30,7 @@ El problema operativo principal (**superficie npm/gates**) se abordó con:
 |-----|-------------|-------|
 | **Entrada operativa activa** | `/app/buscar` (CICA) | UI clínica por defecto; registry `EPIS_CICA_SCREEN_REGISTRY` |
 | **Intención ficha-first** | censo → ficha → borrador → aprobación | Invariante de producto; no implica ruta legacy como home |
-| **Fallback legacy** | `/espacio/*` | `VITE_ENABLE_CICA_UI=false`; no expandir como home |
+| **Fallback legacy** | `/espacio/*` | `VITE_DISABLE_CICA_UI=true` es opt-out legacy; no expandir como home |
 | **Prohibido** | dashboard / three modes como home | secundarios OK; gates `command-center-home`, CICA clean room |
 
 SoT técnico rutas CICA: `packages/epis2-ui/src/cica/EPIS_CICA_SCREEN_REGISTRY.ts` · mapa humano: [`EPIS2_ROUTE_MAP.md`](product/EPIS2_ROUTE_MAP.md) · artefacto gate: `tools/catalog/route-map.generated.json`.
@@ -214,7 +214,7 @@ Commits pequeños en rama `chore/repo-consolidation-*` recomendado.
 ```text
 EPIS2 está en fase de consolidación, no de expansión.
 Leer docs/EPIS2_CURRENT_STATE.md y docs/MODULE_INVENTORY.md antes de editar.
-Entrada operativa: /app/buscar (CICA). Fallback: /espacio/*.
+Entrada operativa: /app/buscar (CICA GO). Fallback congelado: /espacio/* solo con opt-out legacy (`VITE_DISABLE_CICA_UI=true`).
 Programa activo: PROG-PURGE-CICA (archivo y perímetro agente; no pantallas nuevas).
 No agregues funcionalidades clínicas nuevas salvo MF autorizada explícitamente.
 Clasifica cambios: core | labs | tools | archive.

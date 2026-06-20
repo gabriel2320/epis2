@@ -9,5 +9,5 @@ alwaysApply: false
 - Solo MUI en superficie clínica; **rechazar** Carbon / Soft Carbon aunque existan en EPIS.
 - Tema en `packages/design-system`.
 - Microcopy visible en **español** (`spanish-visible-copy` gate).
-- Home futura = Command Center; sin layout dashboard.
+- Home activa = CICA `/app/buscar`; sin layout dashboard como entrada.
 - Una acción principal por vista.

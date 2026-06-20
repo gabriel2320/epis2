@@ -1,8 +1,8 @@
 # EPIS2 — Dev Brief (IA asistida)
 
-> **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@docs/archive/AGENT_SCOPE_EXCLUSIONS.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-ollama-clinical.md` — declarar alcance en el primer mensaje.
+> **Inicio rápido:** `@docs/AGENT_CONTEXT_MINIMAL.md` + `@docs/archive/AGENT_SCOPE_EXCLUSIONS.md` + `@reports/dev-agent-brief.md` + `@reports/dev-agent-prompt-golden-guardian.md` — declarar alcance en el primer mensaje.
 
-**Generado:** 2026-06-17T00:41:41.198Z · **HEAD:** `1fc8d80` · **Fase:** cica
+**Generado:** 2026-06-20T00:00:44.598Z · **HEAD:** `9d86fae` · **Fase:** cica
 
 ## Orquestador (PROG-PURGE-CICA + CICA)
 
@@ -17,7 +17,7 @@
 
 _Brújula (`EPIS2_CURRENT_STATE`) manda; tablero = índice humano._
 
-- Brújula: **PROG-PURGE-CICA** + merge **CICA/aesthetic** — `product/EPIS2_PURGE_ARCHIVE_PLAN.md` · UX-LAB ✓ cerrado · visual activa: `/app/*` CICA.
+- Brújula: PROG-PURGE-CICA
 - Tablero propuesto: PROG-PURGE-CICA (archivo + perímetro agente)
 
 **Pasos derivados:**
@@ -31,7 +31,7 @@ _Brújula (`EPIS2_CURRENT_STATE`) manda; tablero = índice humano._
 
 ## Subagente primario
 
-**[`ollama-clinical`](./dev-agent-prompt-ollama-clinical.md)** — IA clínica local (Ollama producto)
+**[`golden-guardian`](./dev-agent-prompt-golden-guardian.md)** — Guardián Golden Journey
 
 ## Secuencia completa
 
@@ -41,39 +41,34 @@ _Brújula (`EPIS2_CURRENT_STATE`) manda; tablero = índice humano._
 
 ## Working tree
 
-- Rama: `feat/prog-aesthetic-reset-close` · cambios: 516 (lista truncada)
+- Rama: `chore/mf-knip-05-c-dead-code-purge` · cambios: 39 (lista truncada)
 
 ```
-M docs/product/EPIS2_TABLERO.md
-M reports/dev-agent-brief.md
-M reports/dev-agent-prompt-gate-runner.md
-M reports/dev-agent-prompt-golden-guardian.md
-M reports/dev-agent-prompt-layers-integrator.md
-M reports/dev-agent-prompt-ollama-dev-writer.md
-M reports/dev-agent-prompt-paper-mode.md
-D reports/dual-chart-session-brief.md
-D reports/epis2-ai-ext-inference.md
-D reports/epis2-architecture-inventory-001-100-review.md
-D reports/epis2-architecture-inventory-101-200-review.md
-D reports/epis2-audit-tramo-e-004-preanesthesia.md
-D reports/epis2-chips-forms-completion.md
-D reports/epis2-ciclo-a-doc-sync.md
-D reports/epis2-classic-md3-ai-design-agents-2026-06-08.md
-D reports/epis2-consolidation-2-ci-close-plan-2026-06-15.md
-D reports/epis2-dashboard-md3-ai-design-agents-2026-06-08.md
-D reports/epis2-dashboard-md3-inventory-2026-06-08.md
-D reports/epis2-global-screen-form-audit.md
-D reports/epis2-idc-execution-matrix.md
-D reports/epis2-layout-01-two-pane-design.md
-D reports/epis2-layout-02-context-pane.md
-D reports/epis2-layout-03-ia-assist.md
-D reports/epis2-layout-04-drag-drop.md
+M .cursor/rules/00-product-canon.mdc
+M .cursor/rules/05-agent-archive-boundary.mdc
+M .cursor/rules/50-material-ui.mdc
+M .cursor/rules/80-tramo-scaffold.mdc
+M apps/web/src/cica/CicaExperimentalBanner.tsx
+M apps/web/src/components/actions/EpisBulkActionMenu.tsx
+D apps/web/src/components/classic-md3/EpisClassicMd3SplitPane.tsx
+M apps/web/src/components/classic-md3/index.ts
+M apps/web/src/components/dashboard-md3/EpisDashboardMd3MainGrid.tsx
+M apps/web/src/components/grids/radBulkActions.ts
+M apps/web/src/quality/uiDensityRules.ts
+M apps/web/src/routes/cicaLegacyRedirects.ts
+M docs/AGENT_CONTEXT_MINIMAL.md
+M docs/EPIS2_CURRENT_STATE.md
+M docs/MODULE_INVENTORY.md
+M docs/PRODUCT_CANON.md
+M docs/adr/ADR-002-dual-chart-modes.md
+M docs/architecture/EPIS2_MODES_LAYER.md
+M docs/architecture/EPIS2_RECONCILED_NAVIGATION_TREE.md
+M docs/archive/AGENT_SCOPE_EXCLUSIONS.md
+M docs/archive/TRUNCATED_MODULES.md
+M docs/design/EPIS2_CICA_CLASSIC_MASTER_TREE.md
+M docs/design/EPIS2_CICA_CLEAN_ROOM_POLICY.md
+M docs/design/EPIS2_CICA_SCREEN_MAP_v1.md
 ```
-
-## Evolab (QA externo)
-
-- Evolab hallazgos abiertos: **200** (sync 2026-06-14T15:49:41.450Z)
-- Root: `C:\Users\gdela\OneDrive\Documentos Importantes\epis2-evolab`
 
 ## OpenClaw (revisores read-only)
 
@@ -87,7 +82,7 @@ D reports/epis2-layout-04-drag-drop.md
 - Ollama clínica: ✓ up → `qwen3:8b`
 - dev-plan: `qwen2.5-coder:7b` (auto) · dev-write: `deepseek-coder-v2:16b` (auto)
 - Enrutado: `npm run ollama:route` · pull coders: `npm run ai:pull-coder-models`
-- .env: ✓ · DATABASE_URL: ✓
+- .env: ✗ · DATABASE_URL: ✗
 
 ```bash
 npm run stack:dev          # si falta Postgres/Ollama
@@ -134,7 +129,7 @@ npm run dev:agent:close    # checklist + plantilla reporte
 # EPIS2 — Sesión subagentes de desarrollo
 
 **Fase:** cica
-**Generado:** 2026-06-17T00:41:41.199Z
+**Generado:** 2026-06-20T00:00:44.599Z
 
 ## Secuencia recomendada
 

@@ -1,7 +1,7 @@
 # EPIS2 — Navegación de ficha clínica Material Design 3
 
-**Versión:** 1.0 · **Fecha:** 2026-06-07  
-**Home canónica:** Centro de Comando (`/comando`) — **no** dashboard  
+**Versión:** 1.0 · **Fecha:** 2026-06-07
+**Home canónica:** CICA (`/app/buscar`) — **no** dashboard
 **Implementación:** `packages/epis2-ui/src/clinical/` · `apps/web/src/layouts/`
 
 > Eliminar fatiga de clics, preservar contexto del paciente y mantener flujo command-first sin convertir EPIS2 en expediente hospitalario completo.
@@ -57,7 +57,7 @@ EpisAppShellLayout                          [N0 — shell global]
 
 | Destino rail | Ruta EPIS2 | Notas |
 |--------------|------------|-------|
-| Comando | `/comando` | Home canónica — «¿Qué necesitas hacer?» |
+| CICA buscar | `/app/buscar` | Home canónica — censo clínico |
 | Agenda | `/epis2/dashboard?tab=work` | Modo tablero opcional (Mi trabajo) |
 | Pacientes | `/espacio/buscar-paciente` | Alta densidad — `PatientListGrid` |
 | Mensajes | — | Placeholder deshabilitado (v1) |

@@ -7,7 +7,7 @@ alwaysApply: true
 
 1. Leer `docs/PRODUCT_CANON.md`, `docs/product/PRODUCT_INVARIANTS.md` y **`docs/product/EPIS2_DEV_SYSTEM.md`** (SDEPIS2).
 2. Declarar alcance (nivel SDEPIS2: hilo / tramo / microfase + ID + archivos permitidos).
-3. Home = **censo clínico** (`/espacio/buscar-paciente`) — barra transversal; `/comando` solo compat; dashboard nunca home.
+3. Home = **censo clínico CICA** (`/app/buscar`) — barra transversal; `/comando` solo compat; `/espacio/*` fallback legacy congelado por opt-out (`VITE_DISABLE_CICA_UI=true`); dashboard nunca home.
 4. PostgreSQL = SoT; borradores ≠ datos aprobados; IA no aprueba ni firma.
 5. EPIS (`../Epis`) = donante; **prohibido** copiar carpetas o importar sin `legacy-import-manifest.json`.
 6. Al cerrar: `npm run check`, reporte en `reports/`, detenerse si hay contradicción con invariantes.

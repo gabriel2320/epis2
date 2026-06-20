@@ -9,7 +9,7 @@
 
 | # | Regla | Fuente |
 |---|-------|--------|
-| 1 | Home = Centro de Comando, nunca tablero | `PRODUCT_CANON.md` |
+| 1 | Home = CICA `/app/buscar`, nunca tablero | `PRODUCT_CANON.md` |
 | 2 | Máximo una acción primaria por pantalla | Invariante UX |
 | 3 | IA asiste; no aprueba ni firma | `PRODUCT_INVARIANTS.md` |
 | 4 | Borrador ≠ dato aprobado | Pipeline drafts |

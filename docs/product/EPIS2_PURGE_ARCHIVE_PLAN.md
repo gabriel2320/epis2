@@ -20,7 +20,7 @@ Reducir ruido operativo del monorepo sin romper:
 | Golden journey | `docs/quality/GOLDEN_CLINICAL_JOURNEY.md` |
 | PostgreSQL SoT + borrador→aprobación | invariantes |
 | Experiencia visual **CICA** | `packages/epis2-ui/src/cica/`, `apps/web/src/cica/` |
-| Legacy como fallback | `/espacio/*` con `VITE_ENABLE_CICA_UI=false` |
+| Legacy como fallback | `/espacio/*` solo con opt-out legacy `VITE_DISABLE_CICA_UI=true` |
 
 **No es objetivo:** borrar código referenciado, renombrar packages masivo, ni mega-PR mezclando auth + movimiento de carpetas.
 
@@ -129,7 +129,7 @@ Ver [`docs/archive/TRUNCATED_MODULES.md`](../archive/TRUNCATED_MODULES.md).
 |----------|-----------|--------|
 | Tokens + shell | `packages/epis2-ui/src/cica/` | **Activo** |
 | Rutas `/app/*` | `apps/web/src/cica/` | **Activo** |
-| Flag | `VITE_ENABLE_CICA_UI=true` (opt-in lab) | **Legacy activo** por defecto |
+| Flag | `VITE_DISABLE_CICA_UI=true` | Opt-out legacy; CICA GO es default canónico |
 | Redirects legacy→CICA | `apps/web/src/cica/legacyRedirects.ts` | **Activo** |
 | Epicrisis, lab, UCI, farmacia | solo `/espacio/*` | **Legacy fallback** |
 
@@ -169,13 +169,13 @@ Ningún paso de purga debe romper `npm run check`, golden journey ni `architectu
 ## 8. Prompt maestro (agentes)
 
 ```text
-PROG-PURGE-CICA — consolidación visual CICA, no expansión clínica.
+PROG-PURGE-CICA — consolidación visual CICA GO, no expansión clínica.
 
 Antes de editar:
 1. Leer EPIS2_PURGE_ARCHIVE_PLAN.md + TRUNCATED_MODULES.md
 2. Declarar MF-PURGE-* · allowlist · prohibidos
 3. Mover a archive/, nunca borrar evidencia
-4. Preservar CICA /app/*, contratos, golden journey
+4. Preservar CICA /app/*, home /app/buscar, contratos, golden journey
 5. No eliminar código /espacio/* sin MF-PURGE-05 explícita
 
 Éxito: reports/ raíz <80 archivos activos; brújula actualizada; CI verde.

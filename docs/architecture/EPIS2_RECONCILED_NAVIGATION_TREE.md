@@ -1,8 +1,10 @@
 # EPIS2 — Árbol de navegación reconciliado
 
+> **SUPERSEDED_DOC fence (2026-06-19):** mapa historico de navegacion MD3. No usar para planificar home. Canon vigente: CICA GO `/app/buscar`; `/comando` compat; `/espacio/*` fallback congelado.
+
 **Versión:** 1.0 · **Fecha:** 2026-06-04  
 **Fuente de verdad código:** `apps/web/src/navigation/epis2NavigationTree.ts`  
-**Canon producto:** Home = Centro de Comando · Command-first · Sin menú único de 200 ítems
+**Canon producto vigente:** Home = CICA `/app/buscar` · Command-first · Sin menú único de 200 ítems
 
 > Concilia **workspaces MD3 (N0–N4)**, **rutas implementadas**, **19 blueprints**, **inventario IDC 1–200** y **registries únicos**.
 

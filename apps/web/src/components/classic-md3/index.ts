@@ -42,10 +42,6 @@ export {
   type EpisClassicMd3StatusBarProps,
 } from './EpisClassicMd3StatusBar.js';
 export {
-  EpisClassicMd3SplitPane,
-  type EpisClassicMd3SplitPaneProps,
-} from './EpisClassicMd3SplitPane.js';
-export {
   ClassicMd3WorkspaceLayout,
   type ClassicMd3WorkspaceLayoutProps,
 } from './ClassicMd3WorkspaceLayout.js';

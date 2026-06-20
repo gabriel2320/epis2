@@ -1,5 +1,7 @@
 # ADR-002 — Dos modos de ficha clínica + Command Bar transversal
 
+> **SUPERSEDED_DOC fence (2026-06-19):** aceptado como ADR historico de dual chart, pero las referencias a "Command/three modes" como home quedan superseded. Canon vigente: CICA GO, home `/app/buscar`, dashboard/three modes secundarios, `/espacio/*` fallback congelado.
+
 **Estado:** Aceptado · **Fecha:** 2026-06-11  
 **Canon visual:** [`EPIS2_DUAL_CHART_VISUAL_CANON.md`](../design/EPIS2_DUAL_CHART_VISUAL_CANON.md)
 **Decisores:** producto + arquitectura EPIS2  

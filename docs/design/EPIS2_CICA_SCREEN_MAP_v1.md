@@ -1,11 +1,13 @@
 # EPIS2 — Mapa maestro CICA v1
 
+> **SUPERSEDED_DOC fence (2026-06-19):** conservar como inventario historico de pantalla, no como canon de activacion. Canon vigente: CICA = GO, home = `/app/buscar`, fallback legacy `/espacio/*` solo por opt-out `VITE_DISABLE_CICA_UI=true`.
+
 > **CICA = sidebar útil + ficha tradicional + páginas carta + libro de evoluciones + modo papel protagonista.**
 
 **Árbol clásico completo (norma):** [`EPIS2_CICA_CLASSIC_MASTER_TREE.md`](EPIS2_CICA_CLASSIC_MASTER_TREE.md) · **Layout tradicional:** [`EPIS2_CICA_CLASSIC_LAYOUT_SPEC.md`](EPIS2_CICA_CLASSIC_LAYOUT_SPEC.md)
 
-**Raíz canónica:** `/app/*` (opt-in `VITE_ENABLE_CICA_UI=true` · producto NO-GO).  
-**Registry:** `packages/epis2-ui/src/cica/EPIS_CICA_SCREEN_REGISTRY.ts`  
+**Raíz canónica:** `/app/*` (CICA GO; opt-out legacy con `VITE_DISABLE_CICA_UI=true`).
+**Registry:** `packages/epis2-ui/src/cica/EPIS_CICA_SCREEN_REGISTRY.ts`
 **Policy:** [`EPIS2_CICA_CLEAN_ROOM_POLICY.md`](EPIS2_CICA_CLEAN_ROOM_POLICY.md)
 
 ---

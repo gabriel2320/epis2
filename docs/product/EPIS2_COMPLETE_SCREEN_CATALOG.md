@@ -1,5 +1,7 @@
 # EPIS2 — Catálogo completo de pantallas
 
+> **SUPERSEDED_DOC fence (2026-06-19):** catalogo historico de brechas. No usar como mapa operativo ni home. Canon vigente: CICA GO `/app/buscar`; usar `EPIS2_ROUTE_MAP.md` y `EPIS_CICA_SCREEN_REGISTRY.ts`.
+
 **Versión:** 1.1 · **Fecha:** 2026-06-04  
 **Estado:** Auditoría de brechas (sin implementación masiva)  
 **Frase guía:** *EPIS2 debe mostrar únicamente la herramienta necesaria para completar la actividad clínica actual.*
@@ -16,7 +18,7 @@
 | Espacio clínico | `/trabajo/:activity` | `/espacio/*` | **PARTIAL** — 11 rutas blueprint; prefijo distinto |
 | Modo tablero | `/tablero` | `/epis2/dashboard` | **PARTIAL** — secundario correcto; ruta distinta |
 
-**Regla verificada:** home = Centro de Comando (`EPIS2_COMMAND_CENTER_HOME = '/comando'`). Modo tablero nunca es home.
+**Regla verificada:** home = CICA (`/app/buscar`). Modo tablero nunca es home.
 
 **Anatomía común clínica:** `ClinicalShellLayout` implementa encabezado mínimo (marca, paciente, usuario, volver a comando). Paneles contextuales (IA, alertas) son invocables, no dominantes.
 

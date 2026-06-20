@@ -16,9 +16,9 @@ Antes de planificar o editar, respetar **`docs/archive/AGENT_SCOPE_EXCLUSIONS.md
 
 ## Alcance activo
 
-- **CICA:** `apps/web/src/cica/`, `packages/epis2-ui/src/cica/`, `/app/*`
+- **CICA:** `apps/web/src/cica/`, `packages/epis2-ui/src/cica/`, `/app/*`, home `/app/buscar`
 - **Core:** contratos, registries, API, golden journey
-- **Legacy:** `/espacio/*` solo fallback/bugfix — no rediseño visual legacy
+- **Legacy:** `/espacio/*` solo fallback/bugfix por opt-out `VITE_DISABLE_CICA_UI=true` — no rediseño visual legacy
 
 ## Excepción
 

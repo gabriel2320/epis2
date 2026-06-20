@@ -13,7 +13,7 @@
 
 | Principio canon | Implicación en pantallas |
 |-----------------|--------------------------|
-| Home = Centro de Comando | Los formularios **no** son home; se abren tras comando o deep link `/espacio/*` |
+| Home = CICA `/app/buscar` | Los formularios **no** son home; se abren desde CICA, comando o deep link legacy `/espacio/*` |
 | Información no solicitada oculta | Layout `standard-form` por defecto; contexto/historial bajo demanda |
 | Un solo Form Registry (#10) | 19 blueprints → 19 rutas `/espacio/*` → un renderer (`GeneratedClinicalFormPage`) |
 | IA asiste, no aprueba (#5, #11) | Panel contexto + sugerencias opcionales; firma siempre humana |

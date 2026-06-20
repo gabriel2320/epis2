@@ -1,4 +1,4 @@
-/** @legacy-runtime PR6 — redirects `/espacio/*` → CICA `/app/*` cuando `VITE_ENABLE_CICA_UI=true`. */
+/** @legacy-runtime — redirects `/espacio/*` → CICA `/app/*`; legacy queda solo como opt-out (`VITE_DISABLE_CICA_UI=true`). */
 import { redirect } from '@tanstack/react-router';
 import { isCicaUiEnabled } from '../dev/cicaUiEnv.js';
 import { parseClinicalFormSearch, parseClinicalPatientSearch } from './clinicalNavigate.js';

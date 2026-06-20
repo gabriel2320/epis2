@@ -235,8 +235,9 @@ No reemplaza `encounters`; agrupa hospitalización / programa crónico.
 
 ```text
 /login
-/comando                              ← HOME (invariante)
-/espacio/buscar-paciente              ← búsqueda RUT / nombre
+/app/buscar                           ← HOME CICA (invariante)
+/comando                              ← redirect compat
+/espacio/buscar-paciente              ← fallback legacy búsqueda RUT / nombre
 /espacio/ficha?patientId=&chartMode=  ← dual traditional | paper
 /espacio/resumen
 /espacio/evolucion

@@ -1,5 +1,7 @@
 # EPIS2 — CICA Clean Room Policy
 
+> **SUPERSEDED_DOC fence (2026-06-19):** este documento conserva la politica clean-room, pero sus referencias a CICA opt-in / NO-GO estan superseded. Canon vigente: CICA = GO, home = `/app/buscar`, fallback legacy `/espacio/*` solo por opt-out `VITE_DISABLE_CICA_UI=true`.
+
 > **EPIS2 CICA UI no hereda pantallas. Hereda intención clínica.**
 
 ## Principio
@@ -12,9 +14,9 @@ El legacy **no** puede donar **layout, navegación, sidebar, dashboard, composic
 
 Rutas bajo `/app/*` — sala blanca. Rutas `/espacio/*` permanecen como legacy temporal hasta migración completa.
 
-```
-VITE_ENABLE_CICA_UI=true  → laboratorio CICA /app/* (opt-in; NO-GO producto)
-(default / false)         → runtime activo legacy /espacio/*
+```text
+CICA GO                  → runtime activo /app/*
+VITE_DISABLE_CICA_UI=true → fallback legacy /espacio/* (opt-out)
 ```
 
 ## Permitido importar en `/app`
