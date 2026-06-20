@@ -27,15 +27,26 @@ export function ClinicalSection({
       sx={clinicalSectionSx()}
       className="epis2-clinical-section"
     >
-      {title ? (
-        <EpisM3Text role="titleMedium" component="h2">
-          {title}
-        </EpisM3Text>
-      ) : null}
-      {subtitle ? (
-        <EpisM3Text role="bodyMedium" color="text.secondary">
-          {subtitle}
-        </EpisM3Text>
+      {title || subtitle ? (
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.25, minWidth: 0 }}>
+          {title ? (
+            <EpisM3Text
+              role="titleMedium"
+              component="h2"
+              sx={{
+                fontWeight: 650,
+                overflowWrap: 'anywhere',
+              }}
+            >
+              {title}
+            </EpisM3Text>
+          ) : null}
+          {subtitle ? (
+            <EpisM3Text role="bodyMedium" color="text.secondary" sx={{ maxWidth: 760 }}>
+              {subtitle}
+            </EpisM3Text>
+          ) : null}
+        </Box>
       ) : null}
       {children}
     </Box>

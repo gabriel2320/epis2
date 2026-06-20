@@ -34,8 +34,9 @@ export function clinicalScreenSx(profile: ClinicalLayoutProfile): SxProps<Theme>
 
 export function clinicalHeaderSx(): SxProps<Theme> {
   return {
-    py: clinicalLayoutTokens.spacing.md,
+    py: { xs: clinicalLayoutTokens.spacing.sm, md: clinicalLayoutTokens.spacing.md },
     flexShrink: 0,
+    minWidth: 0,
   };
 }
 
@@ -51,12 +52,14 @@ export function clinicalContentSx(profile: ClinicalLayoutProfile): SxProps<Theme
     display: 'flex',
     flexDirection: 'column',
     gap: density.sectionGap,
+    pt: { xs: clinicalLayoutTokens.spacing.sm, md: clinicalLayoutTokens.spacing.md },
     pb: clinicalLayoutTokens.spacing.lg,
     maxWidth: cicaBounded
       ? cicaMaxContentWidth[profile]
       : clinicalLayoutTokens.page.maxReadableWidth,
     width: '100%',
     mx: cicaBounded ? 'auto' : undefined,
+    scrollbarGutter: 'stable',
   };
 }
 
@@ -66,6 +69,12 @@ export function clinicalSectionSx(): SxProps<Theme> {
     flexDirection: 'column',
     gap: clinicalLayoutTokens.density.calm.fieldGap,
     minWidth: 0,
+    pt: clinicalLayoutTokens.spacing.sm,
+    borderTop: 1,
+    borderColor: 'divider',
+    '& > *': {
+      minWidth: 0,
+    },
   };
 }
 
@@ -78,13 +87,22 @@ export function clinicalActionBarSx(
     alignItems: 'center',
     flexWrap: 'wrap',
     gap: clinicalLayoutTokens.spacing.sm,
-    px: clinicalLayoutTokens.spacing.lg,
-    py: clinicalLayoutTokens.spacing.md,
+    px: { xs: clinicalLayoutTokens.spacing.md, md: clinicalLayoutTokens.spacing.lg },
+    py: { xs: clinicalLayoutTokens.spacing.sm, md: clinicalLayoutTokens.spacing.md },
     borderTop: position !== 'top-toolbar' ? 1 : 0,
     borderBottom: position === 'top-toolbar' ? 1 : 0,
     borderColor: 'divider',
     bgcolor: 'background.paper',
     flexShrink: 0,
+    minWidth: 0,
+    boxShadow: position !== 'top-toolbar' ? 1 : 0,
+    '& > *': {
+      minWidth: 0,
+    },
+    '& [data-action-kind="primary"]': {
+      minWidth: { xs: '100%', sm: 168 },
+      maxWidth: { xs: '100%', sm: 320 },
+    },
     ...(position === 'sticky-bottom'
       ? {
           position: 'sticky',

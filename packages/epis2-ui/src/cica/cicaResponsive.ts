@@ -158,6 +158,7 @@ export function cicaPaperModeContentSx(): SxProps<Theme> {
     mx: 'auto',
     px: cicaShellPaddingXSx,
     py: { xs: 2, sm: 2.5, md: 3 },
+    bgcolor: 'background.default',
     boxSizing: 'border-box',
   };
 }
@@ -176,10 +177,13 @@ export function cicaPaperCanvasSx(): SxProps<Theme> {
     bgcolor: 'background.paper',
     border: 1,
     borderColor: 'divider',
-    boxShadow: 1,
+    borderRadius: { xs: 0, sm: 1 },
+    boxShadow: { xs: 0, sm: 2 },
+    overflow: 'hidden',
     '@media print': {
       boxShadow: 'none',
       border: 'none',
+      borderRadius: 0,
       mx: 0,
       my: 0,
       maxWidth: '100%',
@@ -205,6 +209,8 @@ export function cicaPaperModeToolbarSx(): SxProps<Theme> {
     borderColor: 'divider',
     bgcolor: 'background.paper',
     minWidth: 0,
+    zIndex: 2,
+    boxShadow: 1,
     '& > *': { minWidth: 0 },
     '@media print': {
       display: 'none',

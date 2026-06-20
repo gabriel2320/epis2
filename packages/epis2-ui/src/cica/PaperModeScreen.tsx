@@ -65,6 +65,19 @@ export function PaperCanvas({
 }: PaperCanvasProps) {
   return (
     <Box data-testid={testId} sx={cicaPaperCanvasSx()}>
+      <Box
+        aria-hidden
+        sx={{
+          position: 'absolute',
+          insetInline: 0,
+          top: 0,
+          height: 6,
+          bgcolor: 'action.hover',
+          '@media print': {
+            display: 'none',
+          },
+        }}
+      />
       {watermark ? (
         <Box
           aria-hidden

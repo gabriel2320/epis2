@@ -19,7 +19,10 @@ const GRID_TEMPLATES = {
     sm: 'repeat(2, minmax(0, 1fr))',
     lg: 'repeat(4, minmax(0, 1fr))',
   },
-  12: 'repeat(12, minmax(0, 1fr))',
+  12: {
+    xs: '1fr',
+    md: 'repeat(12, minmax(0, 1fr))',
+  },
 } as const satisfies Record<ClinicalFieldGridColumns, string | object>;
 
 /** Grilla de campos clínicos — columnas simétricas por breakpoint. */

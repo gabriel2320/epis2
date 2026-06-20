@@ -17,6 +17,14 @@ function withRegistryLayout(
 }
 
 export const PATIENT_SUMMARY_BLUEPRINT = withRegistryLayout('patient-summary', {
+  sections: [
+    {
+      id: 'summary',
+      span: 12,
+      title: 'Situacion clinica',
+      subtitle: 'Resumen longitudinal, pendientes y accesos a evidencia del episodio.',
+    },
+  ],
   actions: [
     {
       id: 'new-evolution',
@@ -34,13 +42,57 @@ export const PATIENT_SUMMARY_BLUEPRINT = withRegistryLayout('patient-summary', {
   ],
 });
 
-export const PATIENT_ORDERS_BLUEPRINT = withRegistryLayout('patient-orders');
-export const PATIENT_EXAMS_BLUEPRINT = withRegistryLayout('patient-exams');
-export const PATIENT_DOCUMENTS_BLUEPRINT = withRegistryLayout('patient-documents');
-export const PATIENT_EVOLUTIONS_BLUEPRINT = withRegistryLayout('patient-evolutions');
+export const PATIENT_ORDERS_BLUEPRINT = withRegistryLayout('patient-orders', {
+  sections: [
+    {
+      id: 'orders',
+      span: 12,
+      title: 'Indicaciones activas',
+      subtitle: 'Tratamientos y ordenes relevantes para continuidad clinica.',
+    },
+  ],
+});
+export const PATIENT_EXAMS_BLUEPRINT = withRegistryLayout('patient-exams', {
+  sections: [
+    {
+      id: 'exams',
+      span: 12,
+      title: 'Examenes y tendencias',
+      subtitle: 'Resultados recientes con foco en cambios clinicamente significativos.',
+    },
+  ],
+});
+export const PATIENT_DOCUMENTS_BLUEPRINT = withRegistryLayout('patient-documents', {
+  sections: [
+    {
+      id: 'documents',
+      span: 12,
+      title: 'Documentos clinicos',
+      subtitle: 'Certificados, epicrisis y antecedentes emitidos durante el episodio.',
+    },
+  ],
+});
+export const PATIENT_EVOLUTIONS_BLUEPRINT = withRegistryLayout('patient-evolutions', {
+  sections: [
+    {
+      id: 'evolutions',
+      span: 12,
+      title: 'Historia evolutiva',
+      subtitle: 'Lectura cronologica de notas y eventos narrativos.',
+    },
+  ],
+});
 export const PATIENT_TIMELINE_BLUEPRINT = withRegistryLayout('patient-timeline');
 
 export const PATIENT_MEDICATIONS_BLUEPRINT = withRegistryLayout('patient-medications', {
+  sections: [
+    {
+      id: 'medications',
+      span: 12,
+      title: 'Medicamentos',
+      subtitle: 'Farmacos activos, PRN y suspendidos para revision segura.',
+    },
+  ],
   actions: [
     {
       id: 'new-prescription',
@@ -60,6 +112,14 @@ export const PATIENT_MEDICATIONS_BLUEPRINT = withRegistryLayout('patient-medicat
 });
 
 export const PATIENT_AUDIT_BLUEPRINT = withRegistryLayout('patient-audit', {
+  sections: [
+    {
+      id: 'audit',
+      span: 12,
+      title: 'Auditoria del episodio',
+      subtitle: 'Trazas de acceso, documentos y acciones relevantes.',
+    },
+  ],
   actions: [
     {
       id: 'audit-console',
@@ -80,6 +140,14 @@ export const PATIENT_AUDIT_BLUEPRINT = withRegistryLayout('patient-audit', {
 });
 
 export const PATIENT_DISCHARGE_BLUEPRINT = withRegistryLayout('patient-discharge', {
+  sections: [
+    {
+      id: 'discharge',
+      span: 12,
+      title: 'Alta y epicrisis',
+      subtitle: 'Vista demo promovida para preparar continuidad y cierre del episodio.',
+    },
+  ],
   actions: [
     {
       id: 'new-epicrisis',
@@ -96,8 +164,18 @@ export const PATIENT_ADMISSION_BLUEPRINT: CicaScreenBlueprint = {
   screenId: 'patient-admission',
   hideActionBar: false,
   sections: [
-    { id: 'anamnesis', span: 12, title: 'Motivo de ingreso' },
-    { id: 'admin', span: 12, title: 'Datos administrativos' },
+    {
+      id: 'anamnesis',
+      span: 12,
+      title: 'Motivo de ingreso',
+      subtitle: 'Narrativa inicial y antecedentes que orientan el episodio.',
+    },
+    {
+      id: 'admin',
+      span: 12,
+      title: 'Datos administrativos',
+      subtitle: 'Ubicacion, ingreso y datos de contexto operacional.',
+    },
   ],
   actions: [
     {
@@ -111,6 +189,14 @@ export const PATIENT_ADMISSION_BLUEPRINT: CicaScreenBlueprint = {
 };
 
 export const PATIENT_INTERCONSULTAS_BLUEPRINT = withRegistryLayout('patient-interconsultas', {
+  sections: [
+    {
+      id: 'interconsultas',
+      span: 12,
+      title: 'Interconsultas',
+      subtitle: 'Solicitudes y respuestas demo visibles sin crear un modulo nuevo.',
+    },
+  ],
   actions: [
     {
       id: 'request-consult',
@@ -123,6 +209,14 @@ export const PATIENT_INTERCONSULTAS_BLUEPRINT = withRegistryLayout('patient-inte
 });
 
 export const PATIENT_PROCEDURES_BLUEPRINT = withRegistryLayout('patient-procedures', {
+  sections: [
+    {
+      id: 'procedures',
+      span: 12,
+      title: 'Procedimientos',
+      subtitle: 'Procedimientos y pabellon demo ordenados como pantalla CICA.',
+    },
+  ],
   actions: [
     {
       id: 'register-procedure',
