@@ -1,6 +1,6 @@
 # EPIS2 — Visión de producto (agentes y equipos)
 
-**Versión:** 2.0 · **Fecha:** 2026-06-15  
+**Versión:** 2.1 · **Fecha:** 2026-06-20
 **Programa:** PROG-FICHA-FIRST ✓ (MF-FF-01…15) · **MF origen:** MF-FF-05  
 **Canon detallado:** [`PRODUCT_CANON.md`](../PRODUCT_CANON.md) · [`SCOPE_V1.md`](../SCOPE_V1.md) · [`NON_GOALS.md`](../NON_GOALS.md)
 
@@ -63,18 +63,20 @@ Satélites: ver [`EPIS2_TRIADA_REPOS.md`](./EPIS2_TRIADA_REPOS.md). Integración
 ## Anatomía de la experiencia
 
 ```text
-Home primaria     → Censo clínico (/espacio/buscar-paciente)
-Barra transversal → EpisUniversalCommandBar + palette (Ctrl+K)
-Workspace         → Ficha dual (traditional | paper)
-Dashboard         → Secundario (/epis2/dashboard) — nunca home
-/comando          → Redirect compat (bookmarks legacy)
+Home primaria     -> CICA buscar (/app/buscar)
+Barra transversal -> EpisUniversalCommandBar + palette (Ctrl+K)
+Workspace         -> Ficha dual (classic | paper)
+Fallback legacy   -> /espacio/* solo con opt-out VITE_DISABLE_CICA_UI=true
+Dashboard         -> Secundario (/epis2/dashboard) - nunca home
+/comando          -> Redirect compat (bookmarks legacy)
 ```
 
 | Tier nav | Ruta | Rol |
 |----------|------|-----|
-| **primary** | `/espacio/buscar-paciente` | Punto de entrada clínico |
-| **secondary** | `/epis2/dashboard/*` | Mi trabajo, KPIs, grillas |
-| **compat** | `/comando` | Compatibilidad; redirige al censo |
+| **primary** | `/app/buscar` | Punto de entrada clinico CICA |
+| **fallback** | `/espacio/*` | Legacy congelado solo con opt-out |
+| **secondary** | `/epis2/dashboard/*` | Mi trabajo, KPIs, grillas; nunca home |
+| **compat** | `/comando` | Compatibilidad; redirige al censo CICA |
 
 Flujo canónico: `Login → Censo → Ficha → documento → borrador → aprobar → imprimir` — [`GOLDEN_CLINICAL_JOURNEY.md`](../quality/GOLDEN_CLINICAL_JOURNEY.md).
 

@@ -1,5 +1,7 @@
 # EPIS2 — Catálogo completo de formularios
 
+> **SUPERSEDED_BY_CICA (2026-06-19):** catalogo historico. Usar `EPIS2_PRODUCT_CATALOG.md`, `EPIS2_ROUTE_MAP.md`, `@epis2/clinical-forms` y `EPIS_CICA_SCREEN_REGISTRY.ts`.
+
 **Versión:** 1.1 · **Fecha:** 2026-06-07  
 **Estado:** Sincronizado con registry (Ciclo A post MF-182)  
 **Registry único:** `packages/clinical-forms/src/registry.ts`  

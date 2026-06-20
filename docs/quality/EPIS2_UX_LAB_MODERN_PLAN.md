@@ -1,5 +1,7 @@
 # EPIS2 — Plan UX moderno (Clinical Shift Lab)
 
+> **SUPERSEDED_BY_CICA (2026-06-19):** PROG-UX-LAB esta cerrado. No usar como home ni plan visual activo; CICA GO `/app/buscar` manda.
+
 **Programa:** `PROG-UX-LAB` · **Versión:** 1.0 · **Fecha:** 2026-06-16  
 **Estado:** Propuesto · **Congelamiento:** vigente ([`CONSOLIDATION_FREEZE.md`](../CONSOLIDATION_FREEZE.md))  
 **Baseline:** GO DEMO UX/CE (2026-06-04) · tag `v0.1-demo-rc3` · PROG-POST-RC3 ✓

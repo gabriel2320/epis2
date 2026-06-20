@@ -1,5 +1,7 @@
 # EPIS2 — Mapa de rutas (modos dual ficha) v0.2
 
+> **SUPERSEDED_BY_CICA (2026-06-19):** conservar como referencia historica de dual chart. Canon operativo vigente: CICA GO `/app/buscar`; `/espacio/*` es fallback legacy congelado.
+
 **Versión:** 0.2 · **ADR:** [`ADR-002-dual-chart-modes.md`](../adr/ADR-002-dual-chart-modes.md)  
 **Canon visual:** [`EPIS2_DUAL_CHART_VISUAL_CANON.md`](../design/EPIS2_DUAL_CHART_VISUAL_CANON.md)
 

@@ -1,7 +1,7 @@
 # EPIS2 Clinical Layout Manifesto
 
 **Versión:** 1.0 · **Fecha:** 2026-06-16  
-**Estado:** Norma canon · **Adopción:** parcial (PROG-AESTHETIC-RESET en curso)
+**Estado:** Norma canon CICA · **Adopción:** activa en `/app/*`
 
 > Manifiesto de composición clínica para el Clinical Layout Engine.
 
@@ -66,8 +66,8 @@ Cada pantalla de EPIS2 debe tener una intención dominante:
 | Modo papel | Leer, navegar días e imprimir |
 | Command Center (compat) | Expresar intención o buscar acción |
 
-> **Canon producto:** home canónico = censo (`/espacio/buscar-paciente`). `/comando` es redirect de compatibilidad.  
-> **Barra de comando:** obligatoria en todo `/espacio/*` clínico — ver [`EPIS2_CLINICAL_SCREEN_MAP.md`](./EPIS2_CLINICAL_SCREEN_MAP.md) §0.
+> **Canon producto:** home canonico = CICA (`/app/buscar`). `/comando` es redirect de compatibilidad. `/espacio/*` queda como fallback legacy congelado por opt-out.
+> **Barra de comando:** obligatoria en la experiencia clinica activa `/app/*` - ver [`EPIS2_CICA.md`](./EPIS2_CICA.md).
 
 Toda pantalla que mezcla múltiples intenciones debe dividirse, simplificarse o reordenarse.
 
@@ -124,7 +124,7 @@ El modo clásico de EPIS2 debe recordar una ficha médica electrónica tradicion
 
 El modo papel **no** debe vivir apretado dentro de la ficha clásica.
 
-Debe tener pantalla exclusiva (`/espacio/ficha/papel`), amplia, limpia y navegable:
+Debe tener pantalla exclusiva CICA (`/app/pacientes/:patientId/papel/*`), amplia, limpia y navegable:
 
 - Volver a ficha
 - Día anterior · Hoy · Día siguiente
@@ -248,8 +248,8 @@ El **Clinical Layout Engine** decide grilla, separación, alineación, densidad,
 | PatientIdentityBand | `PatientIdentityBand` (apps/web) |
 | ClinicalContextStrip | `ClinicalContextDenseStrip` / `ShiftContextStrip` |
 | ClassicChartTabs | `ClassicChartTabs` (MF-AEST-02) |
-| PaperModeScreen | `StandalonePaperChartPage` + `ClinicalScreen` profile `paper-mode` |
-| PaperModeToolbar | `PaperDayNavBar` + toolbar documento |
+| PaperModeScreen | `PaperModeScreen` + `PaperCanvas` |
+| PaperModeToolbar | `PaperModeToolbar` + `PaperDayNavBar` |
 
 > **Nota:** `ClinicalActionBar` en `apps/web/components/chart/` es barra de comando/modo ficha; la barra gobernada de acciones clínicas es `ClinicalLayoutActionBar`.
 

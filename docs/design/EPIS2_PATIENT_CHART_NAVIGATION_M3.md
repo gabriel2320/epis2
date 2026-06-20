@@ -1,5 +1,7 @@
 # EPIS2 — Navegación de ficha clínica Material Design 3
 
+> **SUPERSEDED_BY_CICA (2026-06-19):** referencia historica M3. Navegacion activa de paciente: CICA `/app/pacientes/:patientId/*` via registry.
+
 **Versión:** 1.0 · **Fecha:** 2026-06-07
 **Home canónica:** CICA (`/app/buscar`) — **no** dashboard
 **Implementación:** `packages/epis2-ui/src/clinical/` · `apps/web/src/layouts/`

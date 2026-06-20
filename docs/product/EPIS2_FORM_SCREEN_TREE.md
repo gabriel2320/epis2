@@ -1,5 +1,7 @@
 # EPIS2 — Árbol formulario → pantalla (canon)
 
+> **SUPERSEDED_BY_CICA (2026-06-19):** arbol historico de formularios. Formularios activos se abren desde CICA y registros existentes; home activa `/app/buscar`.
+
 **Versión:** 1.0 · **Fecha:** 2026-06-04  
 **Canon:** [`docs/PRODUCT_CANON.md`](../PRODUCT_CANON.md) · [`PRODUCT_INVARIANTS.md`](./PRODUCT_INVARIANTS.md)  
 **Registry:** `packages/clinical-forms/src/registry.ts`  

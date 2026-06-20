@@ -2,7 +2,7 @@
 
 **Versión:** 1.0 · **Fecha:** 2026-06-17  
 **Audiencia:** Chief Clinical Architect, agentes Cursor, planificación SDEPIS2  
-**Estado:** **Propuesto** — requiere MF autorizada post-merge CICA (ver [`CONSOLIDATION_FREEZE.md`](../CONSOLIDATION_FREEZE.md))
+**Estado:** **SUPERSEDED_BY_CICA para estado operativo de UI**. Mantener solo como arquitectura conceptual IA-last; CICA ya es GO en `/app/*` y la home activa es `/app/buscar` (ver [`EPIS2_CURRENT_STATE.md`](../EPIS2_CURRENT_STATE.md)).
 
 **Canon relacionado:** [`VISION_EPIS2.md`](./VISION_EPIS2.md) · [`PRODUCT_INVARIANTS.md`](./PRODUCT_INVARIANTS.md) · [`EPIS2_CICA_CLEAN_ROOM_POLICY.md`](../design/EPIS2_CICA_CLEAN_ROOM_POLICY.md) · [`GOLDEN_CLINICAL_JOURNEY.md`](../quality/GOLDEN_CLINICAL_JOURNEY.md)
 
@@ -29,7 +29,7 @@ EPIS2 no es «una ficha con IA», ni un HIS completo, ni un dashboard clínico. 
 | Command bar + resolución determinista | ✓ | `@epis2/command-registry` (`rank.ts`, aliases, context boost) |
 | IA solo en ambigüedad (routing) | ✓ parcial | `shouldInvokeAssistRoute` → solo `needs_clarification` |
 | Blueprints declarativos | ✓ | `@epis2/clinical-forms` |
-| CICA = UI futura | ◐ merge pendiente | `/app/*`, `EPIS_CICA_SCREEN_REGISTRY` |
+| CICA = UI activa | ✓ GO | `/app/*`, `EPIS_CICA_SCREEN_REGISTRY` |
 | Prefill / plantillas sin IA | ◐ | `context-clinical-prefill`, `live-templates`, `command-slot-prefill` |
 | Trazabilidad IA | ◐ | `langfuseTrace`, `promptHash`, `syntheticEvals` en `services/local-ai` |
 | Seguridad base | ✓ | RH-01…12, rate limit, auth fail-closed |
@@ -46,7 +46,7 @@ EPIS2 no es «una ficha con IA», ni un HIS completo, ni un dashboard clínico. 
 | **Lexicon ES-CL no empaquetado** | Sinónimos repartidos en command-registry | P1 |
 | **Diccionarios medicamento/lab mínimos** | `drug-intel` es satélite, no core determinista | P1 |
 | **Context Pack tipado antes de IA** | RAG envía contexto amplio | P1 |
-| **Golden journey en rutas CICA** | E2E legacy ≠ home futuro | P1 |
+| **Golden journey en rutas CICA** | Home activa `/app/buscar`; mantener E2E alineado a CICA | P1 |
 | **Observabilidad clínica end-to-end** | Sin trace `action → draft → approve` | P2 |
 | **Integraciones externas** (Meilisearch, HAPI, MinIO…) | Prematuras para v0.1 | P3 |
 
@@ -57,7 +57,7 @@ EPIS2 no es «una ficha con IA», ni un HIS completo, ni un dashboard clínico. 
 | `clinicalActions.manifest.ts` **nuevo** | Invariante #9 — un solo Command Registry | **Extender** `@epis2/command-registry`; export `ClinicalActionManifest` derivado de `EPIS2_COMMAND_DEFINITIONS` + rutas CICA |
 | Segundo Form Registry | Invariante #10 | Mantener `@epis2/clinical-forms`; enriquecer blueprints |
 | Dashboard eliminado del core | Invariante #7 — no home dashboard | ✓ Coherente; dashboard queda `/epis2/dashboard` secundario |
-| Home `/app/buscar` | Invariante #6 cita `/espacio/buscar-paciente` | Actualizar ADR/brújula tras merge CICA; redirect legacy |
+| Home `/app/buscar` | Resuelto por invariante #6 actual | Preservar redirect legacy y no reactivar home `/espacio/*` |
 | `@epis2/clinical-actions` paquete nuevo | Riesgo duplicar registry | **Fase 1:** alias/export desde command-registry; paquete solo si el manifest crece >1 módulo |
 
 ---
@@ -202,9 +202,9 @@ Generación: script de build o módulo `manifest.ts` que **lee** los tres regist
 
 ## Programas SDEPIS2 propuestos
 
-### Pre-requisito: PROG-PURGE-CICA ✓◐
+### Pre-requisito: PROG-PURGE-CICA / CICA GO
 
-Merge `feat/prog-aesthetic-reset-close` → `master` · sunset plan `/espacio` · actualizar invariante #6 home.
+CICA ya es la experiencia activa en `/app/*`. Mantener sunset plan `/espacio/*` como fallback legacy; no crear home, router ni registry paralelo.
 
 ### PROG-EPIS2-LEXICON-CORE (Fase 1 — inteligencia sin IA)
 

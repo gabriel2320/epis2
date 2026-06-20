@@ -8,7 +8,7 @@
 Sistema: [`EPIS2_DEV_SYSTEM.md`](./EPIS2_DEV_SYSTEM.md) · **Brújula:** [`EPIS2_CURRENT_STATE.md`](../EPIS2_CURRENT_STATE.md)
 
 > **Congelamiento vigente** — sin features clínicas nuevas salvo MF autorizada.  
-> **Siguiente:** **PROG-PURGE-CICA** + merge **CICA/aesthetic** · [`EPIS2_PURGE_ARCHIVE_PLAN.md`](./EPIS2_PURGE_ARCHIVE_PLAN.md) · brújula [`EPIS2_CURRENT_STATE.md`](../EPIS2_CURRENT_STATE.md)
+> **Siguiente:** **PROG-PURGE-CICA** + consolidacion CICA GO · [`EPIS2_PURGE_ARCHIVE_PLAN.md`](./EPIS2_PURGE_ARCHIVE_PLAN.md) · brujula [`EPIS2_CURRENT_STATE.md`](../EPIS2_CURRENT_STATE.md)
 
 ---
 
@@ -22,7 +22,7 @@ Plan: [`EPIS2_PURGE_ARCHIVE_PLAN.md`](./EPIS2_PURGE_ARCHIVE_PLAN.md) · exclusio
 | 2 | MF-PURGE-02…03 | Ramas + módulos truncados (referencia) | ✓ |
 | 4 | MF-PURGE-04…07 | Índices + agent scope + alinear tablero | ◐ |
 
-**Visual activa:** CICA `/app/*` · rama `feat/prog-aesthetic-reset-close` merge pendiente.
+**Visual activa:** CICA `/app/*` · home `/app/buscar` · `/espacio/*` fallback legacy congelado.
 
 ---
 

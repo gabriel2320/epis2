@@ -1,5 +1,7 @@
 # EPIS2 — Runbook activación dual chart en producción (C-4)
 
+> **SUPERSEDED_BY_CICA (2026-06-19):** runbook historico. No usar para decidir home o activacion visual; CICA GO vive en `/app/*`, home `/app/buscar`, legacy `/espacio/*` solo fallback.
+
 **ADR:** ADR-002 · **Entrega:** C-4 · **Signoff previo:** C-2 GO · staging validado
 
 ---

@@ -1,5 +1,7 @@
 # EPIS2 — Mapa de pantallas clínicas
 
+> **SUPERSEDED_BY_CICA (2026-06-19):** mapa de norte estetico previo a CICA. Usar `docs/product/EPIS2_ROUTE_MAP.md` y `EPIS_CICA_SCREEN_REGISTRY.ts` como canon de pantallas activas.
+
 **Versión:** 1.0 · **Fecha:** 2026-06-16  
 **Programa:** PROG-AESTHETIC-RESET · **Estado:** Canon de producto (norte navegación)
 

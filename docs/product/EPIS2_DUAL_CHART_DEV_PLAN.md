@@ -1,5 +1,7 @@
 # EPIS2 — Plan de desarrollo automatizado: modos dual ficha (PROG-DUAL-CHART)
 
+> **SUPERSEDED_BY_CICA (2026-06-19):** plan historico de dual chart. Canon operativo: modo clasico + modo papel dentro de CICA `/app/*`; no reactivar three modes ni home legacy.
+
 **Versión:** 2.0 · **Fecha:** 2026-06-11  
 **ADR:** [`ADR-002-dual-chart-modes.md`](../adr/ADR-002-dual-chart-modes.md)  
 **Canon visual:** [`EPIS2_DUAL_CHART_VISUAL_CANON.md`](../design/EPIS2_DUAL_CHART_VISUAL_CANON.md)  

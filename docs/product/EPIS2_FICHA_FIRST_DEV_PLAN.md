@@ -1,5 +1,7 @@
 # EPIS2 — Plan PROG-FICHA-FIRST (MF-FF)
 
+> **SUPERSEDED_BY_CICA (2026-06-19):** PROG-FICHA-FIRST esta cerrado. Mantener como evidencia historica; experiencia activa CICA `/app/*`, home `/app/buscar`.
+
 **Versión:** 1.0 · **Fecha:** 2026-06-14  
 **Programa:** `PROG-FICHA-FIRST-2026`  
 **Ledger:** [`ficha-first-ledger.json`](../quality/ficha-first-ledger.json)  
