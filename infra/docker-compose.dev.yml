@@ -1,0 +1,23 @@
+name: epis2-mono
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: epis2-mono-postgres
+    environment:
+      POSTGRES_DB: epis2
+      POSTGRES_USER: epis2
+      POSTGRES_PASSWORD: epis2
+    ports:
+      - "5443:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U epis2 -d epis2"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres-data:
+    name: epis2-mono-postgres-data

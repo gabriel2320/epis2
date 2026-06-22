@@ -1,0 +1,14 @@
+from fastapi import APIRouter
+
+from epis2_api.api.v1.routes import (
+    ai,
+    auth,
+    health,
+    patients,
+)
+
+api_router = APIRouter()
+api_router.include_router(health.router)
+api_router.include_router(auth.router)
+api_router.include_router(patients.router)
+api_router.include_router(ai.router)

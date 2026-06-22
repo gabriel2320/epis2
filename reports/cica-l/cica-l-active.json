@@ -1,9 +1,0 @@
-{
-  "program": "PROG-PURGE-CICA",
-  "loop": "CICA-L",
-  "loopStatus": "active",
-  "activeScreenId": "CICA-L-01",
-  "activeLedgerFile": "reports/cica-l/01-censo-reform.md",
-  "closeReport": "reports/epis2-mf-cica-l01-close.md",
-  "updatedAt": "2026-06-18"
-}

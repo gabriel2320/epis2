@@ -1,53 +1,28 @@
-# EPIS2 — Guía para agentes (Cursor) v2
+# EPIS2 Agent Guide
 
-> Los errores de EPIS no son recuerdos: son gates de EPIS2.
+EPIS2 is now a compact full stack clinical cockpit. Keep it small.
 
-**Fase:** consolidación post-rc3 — **no features clínicas nuevas** salvo MF autorizada.  
-**Brújula:** [`docs/EPIS2_CURRENT_STATE.md`](docs/EPIS2_CURRENT_STATE.md) · **Congelamiento:** [`docs/CONSOLIDATION_FREEZE.md`](docs/CONSOLIDATION_FREEZE.md)  
-**Contexto:** [`docs/AGENT_CONTEXT_MINIMAL.md`](docs/AGENT_CONTEXT_MINIMAL.md)
+## Non-Negotiables
 
-## Antes de editar
+- PostgreSQL through the API is clinical source of truth.
+- The UI never signs, approves, or writes final clinical state without API audit.
+- AI is optional and cannot sign, approve, or write clinical facts directly.
+- No CICA compatibility layer, no legacy `/espacio`, no dashboard as product center.
+- Do not add packages, gates, services, registries, or docs unless they remove real complexity.
+- Only synthetic development data belongs in the repo.
 
-1. Leer brújula + congelamiento + contexto mínimo.
-2. Declarar alcance MF-* (zona · archivos permitidos · gate · riesgo).
-3. Arranque sesión: `npm run dev:session` → `@reports/dev-agent-brief.md`
-4. Canon si aplica: `docs/PRODUCT_CANON.md`, `docs/product/PRODUCT_INVARIANTS.md`
-5. Legacy EPIS si aplica: `docs/legacy/EPIS_POSTMORTEM.md` + `legacy-import-manifest.json`
-6. **No** planificar desde `docs/product/EPIS2_TABLERO.md` — índice humano, no fuente de verdad.
+## Active Surfaces
 
-## Programa activo
+- `apps/web`: Next.js clinical cockpit.
+- `apps/api`: FastAPI clinical API.
+- `packages/contracts`: OpenAPI contract exported from the API.
+- `infra`: local development infrastructure.
+- `docs`: current architecture, safety, and reset notes.
 
-**PROG-PURGE-CICA** — archivar, referenciar, sacar del alcance de agentes.  
-Plan: [`docs/product/EPIS2_PURGE_ARCHIVE_PLAN.md`](docs/product/EPIS2_PURGE_ARCHIVE_PLAN.md) · Perímetro: [`docs/archive/AGENT_SCOPE_EXCLUSIONS.md`](docs/archive/AGENT_SCOPE_EXCLUSIONS.md)
+## Gates
 
-**Mapa producto (cerrado):** PROG-PRODUCT-MAP ✓ · tag **`epis2-base-v0.1`** · [`reports/epis2-prog-product-map-close.md`](reports/epis2-prog-product-map-close.md) · gate `quality:product-map-gate`.
-
-**Experiencia visual:** CICA (`/app/*`, `packages/epis2-ui/src/cica/`). Legacy `/espacio/*` = fallback only.
-
-## Alcance agente (obligatorio)
-
-1. Leer **solo** brújula + brief + un prompt activo — ver `AGENT_SCOPE_EXCLUSIONS.md`.
-2. **No** indexar ni planificar desde `reports/archive/`, tramos A–K, three modes, olas M3.
-3. **No** borrar evidencia — archivar y dejar puntero.
-
-## Comandos
-
-| Iteración | Pre-PR | Pre-tag |
-|-----------|--------|---------|
-| `npm run quality:fast` | `npm run quality:required` | `npm run quality:release` |
-
-Cambios clínicos: `npm run quality:clinical` · Cierre sesión: `npm run dev:agent:close`  
-Gate histórico: `npm run quality:gate -- quality:<name>` · scripts archivados: `npm run tool:script -- <name>` · índice: `docs/dev/SCRIPT_INDEX.md`
-
-## Detenerse si
-
-- `architecture:validate` falla.
-- Contradice invariantes o allowlist.
-- Segundo Command/Form Registry temporal.
-- OpenMRS, Carbon o dashboard como home.
-
-## Prohibido
-
-Reabrir programas archivados (tramos A–K, three modes, olas M3, OpenClaw auto-dev) · planificar desde `reports/archive/` · auto-aprobación · PHI real · import masivo desde `../Epis` · **borrar** evidencia archivada.
-
-**Campañas cerradas:** [`docs/archive/ARCHIVED_PROGRAMS_INDEX.md`](docs/archive/ARCHIVED_PROGRAMS_INDEX.md) · playbooks: [`docs/archive/agent-playbooks/`](docs/archive/agent-playbooks/)
+- API: `npm run check:api`
+- Web: `npm run check:web`
+- Contract: `npm run check:contract`
+- E2E: `npm run check:e2e`
+- Full: `npm run check`
