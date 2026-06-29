@@ -30,7 +30,7 @@
     "@epis2/clinical-domain": "*",
     "@epis2/contracts": "*",
     "@epis2/test-fixtures": "*",
-    "fastify": "^5.3.3",
+    "fastify": "^5.9.0",
     "langfuse": "^3.37.0",
     "zod": "^3.25.42"
   },
