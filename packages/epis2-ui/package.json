@@ -51,9 +51,9 @@
     "@mui/x-date-pickers": "^7.29.4",
     "@mui/x-scheduler": "^9.0.0-alpha.4",
     "@mui/x-tree-view": "^7.29.10",
-    "@hookform/resolvers": "^5.0.1",
-    "dayjs": "^1.11.21",
-    "react-hook-form": "^7.56.4"
+    "@hookform/resolvers": "^5.9.1",
+    "dayjs": "^1.11.23",
+    "react-hook-form": "^7.86.0"
   },
   "peerDependencies": {
     "react": "^19.0.0",
@@ -63,8 +63,8 @@
     "@storybook/addon-essentials": "^8.6.18",
     "@storybook/react": "^8.6.18",
     "@storybook/react-vite": "^8.6.18",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^14.6.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.6",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
     "react": "^19.1.0",
