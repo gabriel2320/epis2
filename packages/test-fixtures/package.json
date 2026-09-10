@@ -30,6 +30,6 @@
     "@epis2/command-registry": "*",
     "@epis2/contracts": "*",
     "typescript": "^5.8.3",
-    "vitest": "^3.2.6"
+    "vitest": "^5.0.0"
   }
 }
